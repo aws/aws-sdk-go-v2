@@ -68,7 +68,7 @@ type UpdateDashboardInput struct {
 	//
 	//     * AvailabilityStatus for
 	// ExportToCSVOption - This status can be either ENABLED or DISABLED. The visual
-	// option to export data to .csv format isn't enabled when this is set to DISABLED.
+	// option to export data to .CSV format isn't enabled when this is set to DISABLED.
 	// This option is ENABLED by default.
 	//
 	//     * VisibilityState for

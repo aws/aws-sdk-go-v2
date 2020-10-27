@@ -6,6 +6,16 @@ import (
 	"time"
 )
 
+// Indicates whether the user requires a password to authenticate.
+type Authentication struct {
+
+	// The number of passwords belonging to the user. The maximum is two.
+	PasswordCount *int32
+
+	// Indicates whether the user requires a password to authenticate.
+	Type AuthenticationType
+}
+
 // Describes an Availability Zone in which the cluster is launched.
 type AvailabilityZone struct {
 
@@ -174,6 +184,9 @@ type CacheCluster struct {
 	// Example: sun:23:00-mon:01:30
 	PreferredMaintenanceWindow *string
 
+	// The outpost ARN in which the cache cluster is created.
+	PreferredOutpostArn *string
+
 	// The replication group to which this cluster belongs. If this field is empty, the
 	// cluster is not associated with any replication group.
 	ReplicationGroupId *string
@@ -292,6 +305,9 @@ type CacheNode struct {
 
 	// The Availability Zone where this node was created and now resides.
 	CustomerAvailabilityZone *string
+
+	// The customer outpost ARN of the cache node.
+	CustomerOutpostArn *string
 
 	// The hostname for connecting to this cache node.
 	Endpoint *Endpoint
@@ -427,7 +443,7 @@ type CacheParameterGroupStatus struct {
 // RevokeCacheSecurityGroupIngress
 type CacheSecurityGroup struct {
 
-	// The ARN (Amazon Resource Name) of the cache security group.
+	// The ARN of the cache security group,
 	ARN *string
 
 	// The name of the cache security group.
@@ -519,6 +535,9 @@ type ConfigureShard struct {
 	// omitted, ElastiCache for Redis selects the availability zone for each of the
 	// replicas.
 	PreferredAvailabilityZones []*string
+
+	// The outpost ARNs in which the cache cluster is created.
+	PreferredOutpostArns []*string
 }
 
 // The endpoint from which data should be migrated.
@@ -592,6 +611,20 @@ type Event struct {
 	// Specifies the origin of this event - a cluster, a parameter group, a security
 	// group, etc.
 	SourceType SourceType
+}
+
+// Used to streamline results of a search based on the property being filtered.
+type Filter struct {
+
+	// The property being filtered. For example, UserId.
+	//
+	// This member is required.
+	Name *string
+
+	// The property values to filter on. For example, "user-123".
+	//
+	// This member is required.
+	Values []*string
 }
 
 // Indicates the slot configuration and global identifier for a slice group.
@@ -738,6 +771,9 @@ type NodeGroupConfiguration struct {
 	// launched.
 	PrimaryAvailabilityZone *string
 
+	// The output ARN of the primary node.
+	PrimaryOutpostArn *string
+
 	// A list of Availability Zones to be used for the read replicas. The number of
 	// Availability Zones in this list must match the value of ReplicaCount or
 	// ReplicasPerNodeGroup if not specified.
@@ -745,6 +781,9 @@ type NodeGroupConfiguration struct {
 
 	// The number of read replica nodes in this node group (shard).
 	ReplicaCount *int32
+
+	// The outpost ARN of the node replicas.
+	ReplicaOutpostArns []*string
 
 	// A string that specifies the keyspace for a particular node group. Keyspaces
 	// range from 0 to 16,383. The string is in the format startkey-endkey. Example:
@@ -768,6 +807,9 @@ type NodeGroupMember struct {
 
 	// The name of the Availability Zone in which the node is located.
 	PreferredAvailabilityZone *string
+
+	// The outpost ARN of the node group member.
+	PreferredOutpostArn *string
 
 	// The information required for client programs to connect to a node for read
 	// operations. The read endpoint is only applicable on Redis (cluster mode
@@ -1021,6 +1063,9 @@ type ReplicationGroup struct {
 	// The names of all the cache clusters that are part of this replication group.
 	MemberClusters []*string
 
+	// The outpost ARNs of the replication group's member clusters.
+	MemberClustersOutpostArns []*string
+
 	// A flag indicating if you have Multi-AZ enabled to enhance fault tolerance. For
 	// more information, see Minimizing Downtime: Multi-AZ
 	// (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html)
@@ -1065,6 +1110,9 @@ type ReplicationGroup struct {
 	// when you create a cluster. Required: Only available when creating a replication
 	// group in an Amazon VPC using redis version 3.2.6, 4.x or later. Default: false
 	TransitEncryptionEnabled *bool
+
+	// The list of user group IDs that have access to the replication group.
+	UserGroupIds []*string
 }
 
 // The settings to be applied to the Redis replication group, either immediately or
@@ -1083,6 +1131,9 @@ type ReplicationGroupPendingModifiedValues struct {
 
 	// The status of an online resharding operation.
 	Resharding *ReshardingStatus
+
+	// The user groups being modified.
+	UserGroups *UserGroupsUpdateStatus
 }
 
 // Represents the output of a PurchaseReservedCacheNodesOffering operation.
@@ -1479,6 +1530,9 @@ type Snapshot struct {
 	// Example: sun:23:00-mon:01:30
 	PreferredMaintenanceWindow *string
 
+	// The ARN (Amazon Resource Name) of the preferred outpost.
+	PreferredOutpostArn *string
+
 	// A description of the source replication group.
 	ReplicationGroupDescription *string
 
@@ -1528,6 +1582,16 @@ type Subnet struct {
 
 	// The unique identifier for the subnet.
 	SubnetIdentifier *string
+
+	// The outpost ARN of the subnet.
+	SubnetOutpost *SubnetOutpost
+}
+
+// The ID of the outpost subnet.
+type SubnetOutpost struct {
+
+	// The outpost ARN of the subnet.
+	SubnetOutpostArn *string
 }
 
 // A cost allocation Tag that can be added to an ElastiCache cluster or replication
@@ -1631,4 +1695,76 @@ type UpdateAction struct {
 
 	// The date when the UpdateActionStatus was last modified
 	UpdateActionStatusModifiedDate *time.Time
+}
+
+type User struct {
+
+	// The Amazon Resource Name (ARN) of the user account.
+	ARN *string
+
+	// Access permissions string used for this user account.
+	AccessString *string
+
+	// Denotes whether the user requires a password to authenticate.
+	Authentication *Authentication
+
+	// Must be Redis.
+	Engine *string
+
+	// Indicates the user status. Can be "active", "modifying" or "deleting".
+	Status *string
+
+	// Returns a list of the user group IDs the user belongs to.
+	UserGroupIds []*string
+
+	// The ID of the user.
+	UserId *string
+
+	// The username of the user.
+	UserName *string
+}
+
+type UserGroup struct {
+
+	// The Amazon Resource Name (ARN) of the user group.
+	ARN *string
+
+	// Must be Redis.
+	Engine *string
+
+	// A list of updates being applied to the user groups.
+	PendingChanges *UserGroupPendingChanges
+
+	// A list of replication groups that the user group can access.
+	ReplicationGroups []*string
+
+	// Indicates user group status. Can be "creating", "active", "modifying",
+	// "deleting".
+	Status *string
+
+	// The ID of the user group.
+	UserGroupId *string
+
+	// The list of user IDs that belong to the user group.
+	UserIds []*string
+}
+
+// Returns the updates being applied to the user group.
+type UserGroupPendingChanges struct {
+
+	// The list of user IDs to add.
+	UserIdsToAdd []*string
+
+	// The list of user group IDs ro remove.
+	UserIdsToRemove []*string
+}
+
+// The status of the user group update.
+type UserGroupsUpdateStatus struct {
+
+	// The list of user group IDs to add.
+	UserGroupIdsToAdd []*string
+
+	// The list of user group IDs to remove.
+	UserGroupIdsToRemove []*string
 }

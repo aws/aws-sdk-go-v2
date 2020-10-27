@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Generates an Amazon CloudFormation template based on the current launch
+// Generates an AWS CloudFormation template based on the current launch
 // configuration and writes it to an Amazon S3 object in the customer’s Amazon S3
 // bucket.
 func (c *Client) GenerateTemplate(ctx context.Context, params *GenerateTemplateInput, optFns ...func(*Options)) (*GenerateTemplateOutput, error) {
@@ -31,16 +31,16 @@ func (c *Client) GenerateTemplate(ctx context.Context, params *GenerateTemplateI
 
 type GenerateTemplateInput struct {
 
-	// ID of the application associated with the Amazon CloudFormation template.
+	// The ID of the application associated with the AWS CloudFormation template.
 	AppId *string
 
-	// Format for generating the Amazon CloudFormation template.
+	// The format for generating the AWS CloudFormation template.
 	TemplateFormat types.OutputFormat
 }
 
 type GenerateTemplateOutput struct {
 
-	// Location of the Amazon S3 object.
+	// The location of the Amazon S3 object.
 	S3Location *types.S3Location
 
 	// Metadata pertaining to the operation's result.

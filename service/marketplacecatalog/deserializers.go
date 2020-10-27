@@ -378,6 +378,15 @@ func awsRestjson1_deserializeOpDocumentDescribeChangeSetOutput(v **DescribeChang
 				sv.EndTime = &jtv
 			}
 
+		case "FailureCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FailureCode to be of type string, got %T instead", value)
+				}
+				sv.FailureCode = types.FailureCode(jtv)
+			}
+
 		case "FailureDescription":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1580,6 +1589,15 @@ func awsRestjson1_deserializeDocumentChangeSetSummaryListItem(v **types.ChangeSe
 		case "EntityIdList":
 			if err := awsRestjson1_deserializeDocumentResourceIdList(&sv.EntityIdList, value); err != nil {
 				return err
+			}
+
+		case "FailureCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FailureCode to be of type string, got %T instead", value)
+				}
+				sv.FailureCode = types.FailureCode(jtv)
 			}
 
 		case "StartTime":

@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Describes the tags for the specified resources. You can describe the tags for
-// one or more Application Load Balancers, Network Load Balancers, and target
-// groups.
+// Describes the tags for the specified Elastic Load Balancing resources. You can
+// describe the tags for one or more Application Load Balancers, Network Load
+// Balancers, target groups, listeners, or rules.
 func (c *Client) DescribeTags(ctx context.Context, params *DescribeTagsInput, optFns ...func(*Options)) (*DescribeTagsOutput, error) {
 	if params == nil {
 		params = &DescribeTagsInput{}

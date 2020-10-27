@@ -33,7 +33,9 @@ func (c *Client) ListPrincipalPolicies(ctx context.Context, params *ListPrincipa
 // The input for the ListPrincipalPolicies operation.
 type ListPrincipalPoliciesInput struct {
 
-	// The principal.
+	// The principal. Valid principals are CertificateArn
+	// (arn:aws:iot:region:accountId:cert/certificateId), thingGroupArn
+	// (arn:aws:iot:region:accountId:thinggroup/groupName) and CognitoId (region:id).
 	//
 	// This member is required.
 	Principal *string

@@ -15,11 +15,11 @@ import (
 // prior release, see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 // Disassociates a Web ACL from a regional application resource. A regional
-// application can be an Application Load Balancer (ALB) or an API Gateway stage.
-// For AWS CloudFront, don't use this call. Instead, use your CloudFront
-// distribution configuration. To disassociate a Web ACL, provide an empty web ACL
-// ID in the CloudFront call UpdateDistribution. For information, see
-// UpdateDistribution
+// application can be an Application Load Balancer (ALB), an API Gateway REST API,
+// or an AppSync GraphQL API. For AWS CloudFront, don't use this call. Instead, use
+// your CloudFront distribution configuration. To disassociate a Web ACL, provide
+// an empty web ACL ID in the CloudFront call UpdateDistribution. For information,
+// see UpdateDistribution
 // (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html).
 func (c *Client) DisassociateWebACL(ctx context.Context, params *DisassociateWebACLInput, optFns ...func(*Options)) (*DisassociateWebACLOutput, error) {
 	if params == nil {
@@ -46,8 +46,11 @@ type DisassociateWebACLInput struct {
 	// arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
 	//
 	//
-	// * For an Amazon API Gateway stage:
+	// * For an API Gateway REST API:
 	// arn:aws:apigateway:region::/restapis/api-id/stages/stage-name
+	//
+	//     * For an
+	// AppSync GraphQL API: arn:aws:appsync:region:account-id:apis/GraphQLApiId
 	//
 	// This member is required.
 	ResourceArn *string

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Gets information about a specified resolver endpoint, such as whether it's an
-// inbound or an outbound resolver endpoint, and the current status of the
+// Gets information about a specified Resolver endpoint, such as whether it's an
+// inbound or an outbound Resolver endpoint, and the current status of the
 // endpoint.
 func (c *Client) GetResolverEndpoint(ctx context.Context, params *GetResolverEndpointInput, optFns ...func(*Options)) (*GetResolverEndpointOutput, error) {
 	if params == nil {
@@ -31,7 +31,7 @@ func (c *Client) GetResolverEndpoint(ctx context.Context, params *GetResolverEnd
 
 type GetResolverEndpointInput struct {
 
-	// The ID of the resolver endpoint that you want to get information about.
+	// The ID of the Resolver endpoint that you want to get information about.
 	//
 	// This member is required.
 	ResolverEndpointId *string
@@ -39,7 +39,7 @@ type GetResolverEndpointInput struct {
 
 type GetResolverEndpointOutput struct {
 
-	// Information about the resolver endpoint that you specified in a
+	// Information about the Resolver endpoint that you specified in a
 	// GetResolverEndpoint request.
 	ResolverEndpoint *types.ResolverEndpoint
 

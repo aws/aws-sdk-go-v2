@@ -67,7 +67,7 @@ type ResetDBParameterGroupInput struct {
 // ResetDBParameterGroup action.
 type ResetDBParameterGroupOutput struct {
 
-	// Provides the name of the DB parameter group.
+	// The name of the DB parameter group.
 	DBParameterGroupName *string
 
 	// Metadata pertaining to the operation's result.

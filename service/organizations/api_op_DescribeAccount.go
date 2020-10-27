@@ -12,8 +12,8 @@ import (
 )
 
 // Retrieves AWS Organizations-related information about the specified account.
-// This operation can be called only from the organization's master account or by a
-// member account that is a delegated administrator for an AWS service.
+// This operation can be called only from the organization's management account or
+// by a member account that is a delegated administrator for an AWS service.
 func (c *Client) DescribeAccount(ctx context.Context, params *DescribeAccountInput, optFns ...func(*Options)) (*DescribeAccountOutput, error) {
 	if params == nil {
 		params = &DescribeAccountInput{}

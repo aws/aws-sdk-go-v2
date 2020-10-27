@@ -161,6 +161,9 @@ type ModifyReplicationGroupInput struct {
 	// read replicas.
 	PrimaryClusterId *string
 
+	// Removes the user groups that can access this replication group.
+	RemoveUserGroups *bool
+
 	// A description for the replication group. Maximum length is 255 characters.
 	ReplicationGroupDescription *string
 
@@ -186,6 +189,13 @@ type ModifyReplicationGroupInput struct {
 	// group. This parameter cannot be set for Redis (cluster mode enabled) replication
 	// groups.
 	SnapshottingClusterId *string
+
+	// A list of user group IDs.
+	UserGroupIdsToAdd []*string
+
+	// A list of users groups to remove, meaning the users in the group no longer can
+	// access thereplication group.
+	UserGroupIdsToRemove []*string
 }
 
 type ModifyReplicationGroupOutput struct {

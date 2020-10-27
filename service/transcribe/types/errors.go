@@ -8,9 +8,9 @@ import (
 )
 
 // Your request didn't pass one or more validation tests. For example, if the
-// transcription you're trying to delete doesn't exist or if it is in a
-// non-terminal state (for example, it's "in progress"). See the exception Message
-// field for more information.
+// entity that you're trying to delete doesn't exist or if it is in a non-terminal
+// state (for example, it's "in progress"). See the exception Message field for
+// more information.
 type BadRequestException struct {
 	Message *string
 }
@@ -27,7 +27,7 @@ func (e *BadRequestException) ErrorMessage() string {
 func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The resource name already exists.
+// There is already a resource with that name.
 type ConflictException struct {
 	Message *string
 }

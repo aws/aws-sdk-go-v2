@@ -69,18 +69,17 @@ type AttemptDetail struct {
 	// Details about the container in this job attempt.
 	Container *AttemptContainerDetail
 
-	// The Unix timestamp (in seconds and milliseconds) for when the attempt was
-	// started (when the attempt transitioned from the STARTING state to the RUNNING
-	// state).
+	// The Unix timestamp (in milliseconds) for when the attempt was started (when the
+	// attempt transitioned from the STARTING state to the RUNNING state).
 	StartedAt *int64
 
 	// A short, human-readable string to provide additional details about the current
 	// status of the job attempt.
 	StatusReason *string
 
-	// The Unix timestamp (in seconds and milliseconds) for when the attempt was
-	// stopped (when the attempt transitioned from the RUNNING state to a terminal
-	// state, such as SUCCEEDED or FAILED).
+	// The Unix timestamp (in milliseconds) for when the attempt was stopped (when the
+	// attempt transitioned from the RUNNING state to a terminal state, such as
+	// SUCCEEDED or FAILED).
 	StoppedAt *int64
 }
 
@@ -127,6 +126,9 @@ type ComputeEnvironmentDetail struct {
 	// A short, human-readable string to provide additional details about the current
 	// status of the compute environment.
 	StatusReason *string
+
+	// The tags applied to the compute environment.
+	Tags map[string]*string
 
 	// The type of the compute environment.
 	Type CEType
@@ -271,7 +273,10 @@ type ComputeResource struct {
 	// Key-value pair tags to be applied to resources that are launched in the compute
 	// environment. For AWS Batch, these take the form of "String1": "String2", where
 	// String1 is the tag key and String2 is the tag value—for example, { "Name": "AWS
-	// Batch Instance - C4OnDemand" }.
+	// Batch Instance - C4OnDemand" }. These tags can not be updated or removed after
+	// the compute environment has been created; any changes require creating a new
+	// compute environment and removing the old compute environment. These tags are not
+	// seen when using the AWS Batch ListTagsForResource API operation.
 	Tags map[string]*string
 }
 
@@ -304,6 +309,11 @@ type ContainerDetail struct {
 	// set by the AWS Batch service.
 	Environment []*KeyValuePair
 
+	// The Amazon Resource Name (ARN) of the execution role that AWS Batch can assume.
+	// For more information, see AWS Batch execution IAM role
+	// (https://docs.aws.amazon.com/batch/latest/userguide/execution-IAM-role.html).
+	ExecutionRoleArn *string
+
 	// The exit code to return upon completion.
 	ExitCode *int32
 
@@ -321,12 +331,41 @@ type ContainerDetail struct {
 	// for device mappings.
 	LinuxParameters *LinuxParameters
 
+	// The log configuration specification for the container. This parameter maps to
+	// LogConfig in the Create a container
+	// (https://docs.docker.com/engine/api/v1.23/#create-a-container) section of the
+	// Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the
+	// --log-driver option to docker run
+	// (https://docs.docker.com/engine/reference/run/). By default, containers use the
+	// same logging driver that the Docker daemon uses. However the container may use a
+	// different logging driver than the Docker daemon by specifying a log driver with
+	// this parameter in the container definition. To use a different logging driver
+	// for a container, the log system must be configured properly on the container
+	// instance (or on a different log server for remote logging options). For more
+	// information on the options for different supported log drivers, see Configure
+	// logging drivers (https://docs.docker.com/engine/admin/logging/overview/) in the
+	// Docker documentation. AWS Batch currently supports a subset of the logging
+	// drivers available to the Docker daemon (shown in the LogConfiguration data
+	// type). Additional log drivers may be available in future releases of the Amazon
+	// ECS container agent. This parameter requires version 1.18 of the Docker Remote
+	// API or greater on your container instance. To check the Docker Remote API
+	// version on your container instance, log into your container instance and run the
+	// following command: sudo docker version | grep "Server API version" The Amazon
+	// ECS container agent running on a container instance must register the logging
+	// drivers available on that instance with the ECS_AVAILABLE_LOGGING_DRIVERS
+	// environment variable before containers placed on that instance can use these log
+	// configuration options. For more information, see Amazon ECS Container Agent
+	// Configuration
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html)
+	// in the Amazon Elastic Container Service Developer Guide.
+	LogConfiguration *LogConfiguration
+
 	// The name of the CloudWatch Logs log stream associated with the container. The
 	// log group for AWS Batch jobs is /aws/batch/job. Each container attempt receives
 	// a log stream name when they reach the RUNNING status.
 	LogStreamName *string
 
-	// The number of MiB of memory reserved for the job.
+	// The number of MiB of memory reserved for the job. This is a required parameter.
 	Memory *int32
 
 	// The mount points for data volumes in your container.
@@ -351,6 +390,12 @@ type ContainerDetail struct {
 	// supported resource is GPU.
 	ResourceRequirements []*ResourceRequirement
 
+	// The secrets to pass to the container. For more information, see Specifying
+	// Sensitive Data
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html)
+	// in the Amazon Elastic Container Service Developer Guide.
+	Secrets []*Secret
+
 	// The Amazon Resource Name (ARN) of the Amazon ECS task that is associated with
 	// the container job. Each container attempt receives a task ARN when they reach
 	// the STARTING status.
@@ -362,7 +407,7 @@ type ContainerDetail struct {
 	// The user name to use inside the container.
 	User *string
 
-	// The number of VCPUs allocated for the job.
+	// The number of VCPUs allocated for the job. This is a required parameter.
 	Vcpus *int32
 
 	// A list of volumes associated with the job.
@@ -425,6 +470,11 @@ type ContainerProperties struct {
 	// service.
 	Environment []*KeyValuePair
 
+	// The Amazon Resource Name (ARN) of the execution role that AWS Batch can assume.
+	// For more information, see AWS Batch execution IAM role
+	// (https://docs.aws.amazon.com/batch/latest/userguide/execution-IAM-role.html).
+	ExecutionRoleArn *string
+
 	// The image used to start a container. This string is passed directly to the
 	// Docker daemon. Images in the Docker Hub registry are available by default. Other
 	// repositories are specified with  repository-url/image:tag . Up to 255 letters
@@ -464,13 +514,43 @@ type ContainerProperties struct {
 	// for device mappings.
 	LinuxParameters *LinuxParameters
 
+	// The log configuration specification for the container. This parameter maps to
+	// LogConfig in the Create a container
+	// (https://docs.docker.com/engine/api/v1.23/#create-a-container) section of the
+	// Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the
+	// --log-driver option to docker run
+	// (https://docs.docker.com/engine/reference/run/). By default, containers use the
+	// same logging driver that the Docker daemon uses. However the container may use a
+	// different logging driver than the Docker daemon by specifying a log driver with
+	// this parameter in the container definition. To use a different logging driver
+	// for a container, the log system must be configured properly on the container
+	// instance (or on a different log server for remote logging options). For more
+	// information on the options for different supported log drivers, see Configure
+	// logging drivers (https://docs.docker.com/engine/admin/logging/overview/) in the
+	// Docker documentation. AWS Batch currently supports a subset of the logging
+	// drivers available to the Docker daemon (shown in the LogConfiguration data
+	// type). This parameter requires version 1.18 of the Docker Remote API or greater
+	// on your container instance. To check the Docker Remote API version on your
+	// container instance, log into your container instance and run the following
+	// command: sudo docker version | grep "Server API version" The Amazon ECS
+	// container agent running on a container instance must register the logging
+	// drivers available on that instance with the ECS_AVAILABLE_LOGGING_DRIVERS
+	// environment variable before containers placed on that instance can use these log
+	// configuration options. For more information, see Amazon ECS Container Agent
+	// Configuration
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html)
+	// in the Amazon Elastic Container Service Developer Guide.
+	LogConfiguration *LogConfiguration
+
 	// The hard limit (in MiB) of memory to present to the container. If your container
 	// attempts to exceed the memory specified here, the container is killed. This
 	// parameter maps to Memory in the Create a container
 	// (https://docs.docker.com/engine/api/v1.23/#create-a-container) section of the
 	// Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the --memory
 	// option to docker run (https://docs.docker.com/engine/reference/run/). You must
-	// specify at least 4 MiB of memory for a job. If you are trying to maximize your
+	// specify at least 4 MiB of memory for a job. This is required but can be
+	// specified in several places for multi-node parallel (MNP) jobs; it must be
+	// specified for each node at least once. If you are trying to maximize your
 	// resource utilization by providing your jobs as much memory as possible for a
 	// particular instance type, see Memory Management
 	// (https://docs.aws.amazon.com/batch/latest/userguide/memory-management.html) in
@@ -504,6 +584,12 @@ type ContainerProperties struct {
 	// supported resource is GPU.
 	ResourceRequirements []*ResourceRequirement
 
+	// The secrets for the container. For more information, see Specifying Sensitive
+	// Data
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html)
+	// in the Amazon Elastic Container Service Developer Guide.
+	Secrets []*Secret
+
 	// A list of ulimits to set in the container. This parameter maps to Ulimits in the
 	// Create a container
 	// (https://docs.docker.com/engine/api/v1.23/#create-a-container) section of the
@@ -524,7 +610,9 @@ type ContainerProperties struct {
 	// Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the
 	// --cpu-shares option to docker run
 	// (https://docs.docker.com/engine/reference/run/). Each vCPU is equivalent to
-	// 1,024 CPU shares. You must specify at least one vCPU.
+	// 1,024 CPU shares. You must specify at least one vCPU. This is required but can
+	// be specified in several places for multi-node parallel (MNP) jobs; it must be
+	// specified for each node at least once.
 	Vcpus *int32
 
 	// A list of data volumes used in a job.
@@ -557,6 +645,36 @@ type Device struct {
 	// The explicit permissions to provide to the container for the device. By default,
 	// the container has permissions for read, write, and mknod for the device.
 	Permissions []DeviceCgroupPermission
+}
+
+// Specifies a set of conditions to be met, and an action to take (RETRY or EXIT)
+// if all conditions are met.
+type EvaluateOnExit struct {
+
+	// Specifies the action to take if all of the specified conditions (onStatusReason,
+	// onReason, and onExitCode) are met.
+	//
+	// This member is required.
+	Action RetryAction
+
+	// Contains a glob pattern to match against the decimal representation of the
+	// ExitCode returned for a job. The patten can be up to 512 characters long, can
+	// contain only numbers, and can optionally end with an asterisk (*) so that only
+	// the start of the string needs to be an exact match.
+	OnExitCode *string
+
+	// Contains a glob pattern to match against the Reason returned for a job. The
+	// patten can be up to 512 characters long, can contain letters, numbers, periods
+	// (.), colons (:), and whitespace (spaces, tabs), and can optionally end with an
+	// asterisk (*) so that only the start of the string needs to be an exact match.
+	OnReason *string
+
+	// Contains a glob pattern to match against the StatusReason returned for a job.
+	// The patten can be up to 512 characters long, can contain letters, numbers,
+	// periods (.), colons (:), and whitespace (spaces, tabs). and can optionally end
+	// with an asterisk (*) so that only the start of the string needs to be an exact
+	// match.
+	OnStatusReason *string
 }
 
 // Determine whether your data volume persists on the host container instance and
@@ -620,6 +738,9 @@ type JobDefinition struct {
 	// The status of the job definition.
 	Status *string
 
+	// The tags applied to the job definition.
+	Tags map[string]*string
+
 	// The timeout configuration for jobs that are submitted with this job definition.
 	// You can specify a timeout duration after which AWS Batch terminates your jobs if
 	// they have not finished.
@@ -660,8 +781,9 @@ type JobDetail struct {
 	// This member is required.
 	JobQueue *string
 
-	// The Unix timestamp (in seconds and milliseconds) for when the job was started
-	// (when the job transitioned from the STARTING state to the RUNNING state).
+	// The Unix timestamp (in milliseconds) for when the job was started (when the job
+	// transitioned from the STARTING state to the RUNNING state). This parameter is
+	// not provided for child jobs of array jobs or multi-node parallel jobs.
 	//
 	// This member is required.
 	StartedAt *int64
@@ -684,14 +806,17 @@ type JobDetail struct {
 	// job.
 	Container *ContainerDetail
 
-	// The Unix timestamp (in seconds and milliseconds) for when the job was created.
-	// For non-array jobs and parent array jobs, this is when the job entered the
-	// SUBMITTED state (at the time SubmitJob was called). For array child jobs, this
-	// is when the child job was spawned by its parent and entered the PENDING state.
+	// The Unix timestamp (in milliseconds) for when the job was created. For non-array
+	// jobs and parent array jobs, this is when the job entered the SUBMITTED state (at
+	// the time SubmitJob was called). For array child jobs, this is when the child job
+	// was spawned by its parent and entered the PENDING state.
 	CreatedAt *int64
 
 	// A list of job IDs on which this job depends.
 	DependsOn []*JobDependency
+
+	// The Amazon Resource Name (ARN) of the job.
+	JobArn *string
 
 	// An object representing the details of a node that is associated with a
 	// multi-node parallel job.
@@ -712,10 +837,13 @@ type JobDetail struct {
 	// status of the job.
 	StatusReason *string
 
-	// The Unix timestamp (in seconds and milliseconds) for when the job was stopped
-	// (when the job transitioned from the RUNNING state to a terminal state, such as
-	// SUCCEEDED or FAILED).
+	// The Unix timestamp (in milliseconds) for when the job was stopped (when the job
+	// transitioned from the RUNNING state to a terminal state, such as SUCCEEDED or
+	// FAILED).
 	StoppedAt *int64
+
+	// The tags applied to the job.
+	Tags map[string]*string
 
 	// The timeout configuration for the job.
 	Timeout *JobTimeout
@@ -746,7 +874,9 @@ type JobQueueDetail struct {
 	// This member is required.
 	Priority *int32
 
-	// Describes the ability of the queue to accept new jobs.
+	// Describes the ability of the queue to accept new jobs. If the job queue state is
+	// ENABLED, it is able to accept jobs. If the job queue state is DISABLED, new jobs
+	// cannot be added to the queue, but jobs already in the queue can finish.
 	//
 	// This member is required.
 	State JQState
@@ -757,6 +887,9 @@ type JobQueueDetail struct {
 	// A short, human-readable string to provide additional details about the current
 	// status of the job queue.
 	StatusReason *string
+
+	// The tags applied to the job queue.
+	Tags map[string]*string
 }
 
 // An object representing summary details of a job.
@@ -784,6 +917,9 @@ type JobSummary struct {
 	// SubmitJob was called). For array child jobs, this is when the child job was
 	// spawned by its parent and entered the PENDING state.
 	CreatedAt *int64
+
+	// The Amazon Resource Name (ARN) of the job.
+	JobArn *string
 
 	// The node properties for a single node in a job summary list.
 	NodeProperties *NodePropertiesSummary
@@ -835,8 +971,9 @@ type LaunchTemplateSpecification struct {
 	// The name of the launch template.
 	LaunchTemplateName *string
 
-	// The version number of the launch template. Default: The default version of the
-	// launch template.
+	// The version number of the launch template, $Latest, or $Default. If the value is
+	// $Latest, the latest version of the launch template is used. If the value is
+	// $Default, the default version of the launch template is used. Default: $Default.
 	Version *string
 }
 
@@ -850,6 +987,107 @@ type LinuxParameters struct {
 	// Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the --device
 	// option to docker run (https://docs.docker.com/engine/reference/run/).
 	Devices []*Device
+
+	// If true, run an init process inside the container that forwards signals and
+	// reaps processes. This parameter maps to the --init option to docker run
+	// (https://docs.docker.com/engine/reference/run/). This parameter requires version
+	// 1.25 of the Docker Remote API or greater on your container instance. To check
+	// the Docker Remote API version on your container instance, log into your
+	// container instance and run the following command: sudo docker version | grep
+	// "Server API version"
+	InitProcessEnabled *bool
+
+	// The total amount of swap memory (in MiB) a container can use. This parameter
+	// will be translated to the --memory-swap option to docker run
+	// (https://docs.docker.com/engine/reference/run/) where the value would be the sum
+	// of the container memory plus the maxSwap value. For more information, see
+	// --memory-swap details
+	// (https://docs.docker.com/config/containers/resource_constraints/#--memory-swap-details)
+	// in the Docker documentation. If a maxSwap value of 0 is specified, the container
+	// will not use swap. Accepted values are 0 or any positive integer. If the maxSwap
+	// parameter is omitted, the container will use the swap configuration for the
+	// container instance it is running on. A maxSwap value must be set for the
+	// swappiness parameter to be used.
+	MaxSwap *int32
+
+	// The value for the size (in MiB) of the /dev/shm volume. This parameter maps to
+	// the --shm-size option to docker run
+	// (https://docs.docker.com/engine/reference/run/).
+	SharedMemorySize *int32
+
+	// This allows you to tune a container's memory swappiness behavior. A swappiness
+	// value of 0 will cause swapping to not happen unless absolutely necessary. A
+	// swappiness value of 100 will cause pages to be swapped very aggressively.
+	// Accepted values are whole numbers between 0 and 100. If the swappiness parameter
+	// is not specified, a default value of 60 is used. If a value is not specified for
+	// maxSwap then this parameter is ignored. This parameter maps to the
+	// --memory-swappiness option to docker run
+	// (https://docs.docker.com/engine/reference/run/).
+	Swappiness *int32
+
+	// The container path, mount options, and size (in MiB) of the tmpfs mount. This
+	// parameter maps to the --tmpfs option to docker run
+	// (https://docs.docker.com/engine/reference/run/).
+	Tmpfs []*Tmpfs
+}
+
+// Log configuration options to send to a custom log driver for the container.
+type LogConfiguration struct {
+
+	// The log driver to use for the container. The valid values listed for this
+	// parameter are log drivers that the Amazon ECS container agent can communicate
+	// with by default. The supported log drivers are awslogs, fluentd, gelf,
+	// json-file, journald, logentries, syslog, and splunk. awslogs Specifies the
+	// Amazon CloudWatch Logs logging driver. For more information, see Using the
+	// awslogs Log Driver
+	// (https://docs.aws.amazon.com/batch/latest/userguide/using_awslogs.html) in the
+	// AWS Batch User Guide and Amazon CloudWatch Logs logging driver
+	// (https://docs.docker.com/config/containers/logging/awslogs/) in the Docker
+	// documentation. fluentd Specifies the Fluentd logging driver. For more
+	// information, including usage and options, see Fluentd logging driver
+	// (https://docs.docker.com/config/containers/logging/fluentd/) in the Docker
+	// documentation. gelf Specifies the Graylog Extended Format (GELF) logging driver.
+	// For more information, including usage and options, see Graylog Extended Format
+	// logging driver (https://docs.docker.com/config/containers/logging/gelf/) in the
+	// Docker documentation. journald Specifies the journald logging driver. For more
+	// information, including usage and options, see Journald logging driver
+	// (https://docs.docker.com/config/containers/logging/journald/) in the Docker
+	// documentation. json-file Specifies the JSON file logging driver. For more
+	// information, including usage and options, see JSON File logging driver
+	// (https://docs.docker.com/config/containers/logging/json-file/) in the Docker
+	// documentation. splunk Specifies the Splunk logging driver. For more information,
+	// including usage and options, see Splunk logging driver
+	// (https://docs.docker.com/config/containers/logging/splunk/) in the Docker
+	// documentation. syslog Specifies the syslog logging driver. For more information,
+	// including usage and options, see Syslog logging driver
+	// (https://docs.docker.com/config/containers/logging/syslog/) in the Docker
+	// documentation. If you have a custom driver that is not listed earlier that you
+	// would like to work with the Amazon ECS container agent, you can fork the Amazon
+	// ECS container agent project that is available on GitHub
+	// (https://github.com/aws/amazon-ecs-agent) and customize it to work with that
+	// driver. We encourage you to submit pull requests for changes that you would like
+	// to have included. However, Amazon Web Services does not currently support
+	// running modified copies of this software. This parameter requires version 1.18
+	// of the Docker Remote API or greater on your container instance. To check the
+	// Docker Remote API version on your container instance, log into your container
+	// instance and run the following command: sudo docker version | grep "Server API
+	// version"
+	//
+	// This member is required.
+	LogDriver LogDriver
+
+	// The configuration options to send to the log driver. This parameter requires
+	// version 1.19 of the Docker Remote API or greater on your container instance. To
+	// check the Docker Remote API version on your container instance, log into your
+	// container instance and run the following command: sudo docker version | grep
+	// "Server API version"
+	Options map[string]*string
+
+	// The secrets to pass to the log configuration. For more information, see
+	// Specifying Sensitive Data
+	// (https://docs.aws.amazon.com/batch/latest/userguide/specifying-sensitive-data.html)
+	// in the AWS Batch User Guide.
+	SecretOptions []*Secret
 }
 
 // Details on a Docker volume mount point that is used in a job's container
@@ -1018,6 +1256,66 @@ type RetryStrategy struct {
 	// between 1 and 10 attempts. If the value of attempts is greater than one, the job
 	// is retried on failure the same number of attempts as the value.
 	Attempts *int32
+
+	// Array of up to 5 objects that specify conditions under which the job should be
+	// retried or failed. If this parameter is specified, then the attempts parameter
+	// must also be specified.
+	EvaluateOnExit []*EvaluateOnExit
+}
+
+// An object representing the secret to expose to your container. Secrets can be
+// exposed to a container in the following ways:
+//
+//     * To inject sensitive data
+// into your containers as environment variables, use the secrets container
+// definition parameter.
+//
+//     * To reference sensitive information in the log
+// configuration of a container, use the secretOptions container definition
+// parameter.
+//
+// For more information, see Specifying Sensitive Data
+// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html)
+// in the Amazon Elastic Container Service Developer Guide.
+type Secret struct {
+
+	// The name of the secret.
+	//
+	// This member is required.
+	Name *string
+
+	// The secret to expose to the container. The supported values are either the full
+	// ARN of the AWS Secrets Manager secret or the full ARN of the parameter in the
+	// AWS Systems Manager Parameter Store. If the AWS Systems Manager Parameter Store
+	// parameter exists in the same Region as the task you are launching, then you can
+	// use either the full ARN or name of the parameter. If the parameter exists in a
+	// different Region, then the full ARN must be specified.
+	//
+	// This member is required.
+	ValueFrom *string
+}
+
+// The container path, mount options, and size of the tmpfs mount.
+type Tmpfs struct {
+
+	// The absolute file path in the container where the tmpfs volume is to be mounted.
+	//
+	// This member is required.
+	ContainerPath *string
+
+	// The size (in MiB) of the tmpfs volume.
+	//
+	// This member is required.
+	Size *int32
+
+	// The list of tmpfs volume mount options. Valid values: "defaults" | "ro" | "rw" |
+	// "suid" | "nosuid" | "dev" | "nodev" | "exec" | "noexec" | "sync" | "async" |
+	// "dirsync" | "remount" | "mand" | "nomand" | "atime" | "noatime" | "diratime" |
+	// "nodiratime" | "bind" | "rbind" | "unbindable" | "runbindable" | "private" |
+	// "rprivate" | "shared" | "rshared" | "slave" | "rslave" | "relatime" |
+	// "norelatime" | "strictatime" | "nostrictatime" | "mode" | "uid" | "gid" |
+	// "nr_inodes" | "nr_blocks" | "mpol"
+	MountOptions []*string
 }
 
 // The ulimit settings to pass to the container.

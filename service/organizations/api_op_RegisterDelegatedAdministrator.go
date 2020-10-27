@@ -19,7 +19,7 @@ import (
 // can use with AWS Organizations
 // (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrated-services-list.html)
 // in the AWS Organizations User Guide. This operation can be called only from the
-// organization's master account.
+// organization's management account.
 func (c *Client) RegisterDelegatedAdministrator(ctx context.Context, params *RegisterDelegatedAdministratorInput, optFns ...func(*Options)) (*RegisterDelegatedAdministratorOutput, error) {
 	if params == nil {
 		params = &RegisterDelegatedAdministratorInput{}

@@ -109,8 +109,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 type ResourcePreconditionNotMetException struct {
 	Message *string
 
-	ResourceName *string
 	ResourceType *string
+	ResourceName *string
 }
 
 func (e *ResourcePreconditionNotMetException) Error() string {

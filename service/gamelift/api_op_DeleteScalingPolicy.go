@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes a fleet scaling policy. This action means that the policy is no longer
-// in force and removes all record of it. To delete a scaling policy, specify both
+// Deletes a fleet scaling policy. Once deleted, the policy is no longer in force
+// and GameLift removes all record of it. To delete a scaling policy, specify both
 // the scaling policy name and the fleet ID it is associated with. To temporarily
 // suspend scaling policies, call StopFleetActions. This operation suspends all
 // policies for the fleet.
@@ -55,7 +55,7 @@ func (c *Client) DeleteScalingPolicy(ctx context.Context, params *DeleteScalingP
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type DeleteScalingPolicyInput struct {
 
 	// A unique identifier for a fleet to be deleted. You can use either the fleet ID

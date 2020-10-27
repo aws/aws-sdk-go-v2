@@ -41,6 +41,47 @@ const (
 	ActivityTypeFolder_moved                               ActivityType = "FOLDER_MOVED"
 )
 
+// Values returns all known values for ActivityType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ActivityType) Values() []ActivityType {
+	return []ActivityType{
+		"DOCUMENT_CHECKED_IN",
+		"DOCUMENT_CHECKED_OUT",
+		"DOCUMENT_RENAMED",
+		"DOCUMENT_VERSION_UPLOADED",
+		"DOCUMENT_VERSION_DELETED",
+		"DOCUMENT_VERSION_VIEWED",
+		"DOCUMENT_VERSION_DOWNLOADED",
+		"DOCUMENT_RECYCLED",
+		"DOCUMENT_RESTORED",
+		"DOCUMENT_REVERTED",
+		"DOCUMENT_SHARED",
+		"DOCUMENT_UNSHARED",
+		"DOCUMENT_SHARE_PERMISSION_CHANGED",
+		"DOCUMENT_SHAREABLE_LINK_CREATED",
+		"DOCUMENT_SHAREABLE_LINK_REMOVED",
+		"DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED",
+		"DOCUMENT_MOVED",
+		"DOCUMENT_COMMENT_ADDED",
+		"DOCUMENT_COMMENT_DELETED",
+		"DOCUMENT_ANNOTATION_ADDED",
+		"DOCUMENT_ANNOTATION_DELETED",
+		"FOLDER_CREATED",
+		"FOLDER_DELETED",
+		"FOLDER_RENAMED",
+		"FOLDER_RECYCLED",
+		"FOLDER_RESTORED",
+		"FOLDER_SHARED",
+		"FOLDER_UNSHARED",
+		"FOLDER_SHARE_PERMISSION_CHANGED",
+		"FOLDER_SHAREABLE_LINK_CREATED",
+		"FOLDER_SHAREABLE_LINK_REMOVED",
+		"FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED",
+		"FOLDER_MOVED",
+	}
+}
+
 type BooleanEnumType string
 
 // Enum values for BooleanEnumType
@@ -48,6 +89,16 @@ const (
 	BooleanEnumTypeTrue  BooleanEnumType = "TRUE"
 	BooleanEnumTypeFalse BooleanEnumType = "FALSE"
 )
+
+// Values returns all known values for BooleanEnumType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BooleanEnumType) Values() []BooleanEnumType {
+	return []BooleanEnumType{
+		"TRUE",
+		"FALSE",
+	}
+}
 
 type CommentStatusType string
 
@@ -58,6 +109,17 @@ const (
 	CommentStatusTypeDeleted   CommentStatusType = "DELETED"
 )
 
+// Values returns all known values for CommentStatusType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CommentStatusType) Values() []CommentStatusType {
+	return []CommentStatusType{
+		"DRAFT",
+		"PUBLISHED",
+		"DELETED",
+	}
+}
+
 type CommentVisibilityType string
 
 // Enum values for CommentVisibilityType
@@ -65,6 +127,16 @@ const (
 	CommentVisibilityTypePublic  CommentVisibilityType = "PUBLIC"
 	CommentVisibilityTypePrivate CommentVisibilityType = "PRIVATE"
 )
+
+// Values returns all known values for CommentVisibilityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CommentVisibilityType) Values() []CommentVisibilityType {
+	return []CommentVisibilityType{
+		"PUBLIC",
+		"PRIVATE",
+	}
+}
 
 type DocumentSourceType string
 
@@ -74,6 +146,16 @@ const (
 	DocumentSourceTypeWith_comments DocumentSourceType = "WITH_COMMENTS"
 )
 
+// Values returns all known values for DocumentSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DocumentSourceType) Values() []DocumentSourceType {
+	return []DocumentSourceType{
+		"ORIGINAL",
+		"WITH_COMMENTS",
+	}
+}
+
 type DocumentStatusType string
 
 // Enum values for DocumentStatusType
@@ -81,6 +163,16 @@ const (
 	DocumentStatusTypeInitialized DocumentStatusType = "INITIALIZED"
 	DocumentStatusTypeActive      DocumentStatusType = "ACTIVE"
 )
+
+// Values returns all known values for DocumentStatusType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DocumentStatusType) Values() []DocumentStatusType {
+	return []DocumentStatusType{
+		"INITIALIZED",
+		"ACTIVE",
+	}
+}
 
 type DocumentThumbnailType string
 
@@ -91,12 +183,32 @@ const (
 	DocumentThumbnailTypeLarge    DocumentThumbnailType = "LARGE"
 )
 
+// Values returns all known values for DocumentThumbnailType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DocumentThumbnailType) Values() []DocumentThumbnailType {
+	return []DocumentThumbnailType{
+		"SMALL",
+		"SMALL_HQ",
+		"LARGE",
+	}
+}
+
 type DocumentVersionStatus string
 
 // Enum values for DocumentVersionStatus
 const (
 	DocumentVersionStatusActive DocumentVersionStatus = "ACTIVE"
 )
+
+// Values returns all known values for DocumentVersionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DocumentVersionStatus) Values() []DocumentVersionStatus {
+	return []DocumentVersionStatus{
+		"ACTIVE",
+	}
+}
 
 type FolderContentType string
 
@@ -106,6 +218,17 @@ const (
 	FolderContentTypeDocument FolderContentType = "DOCUMENT"
 	FolderContentTypeFolder   FolderContentType = "FOLDER"
 )
+
+// Values returns all known values for FolderContentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FolderContentType) Values() []FolderContentType {
+	return []FolderContentType{
+		"ALL",
+		"DOCUMENT",
+		"FOLDER",
+	}
+}
 
 type LocaleType string
 
@@ -124,6 +247,25 @@ const (
 	LocaleTypeDefault LocaleType = "default"
 )
 
+// Values returns all known values for LocaleType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (LocaleType) Values() []LocaleType {
+	return []LocaleType{
+		"en",
+		"fr",
+		"ko",
+		"de",
+		"es",
+		"ja",
+		"ru",
+		"zh_CN",
+		"zh_TW",
+		"pt_BR",
+		"default",
+	}
+}
+
 type OrderType string
 
 // Enum values for OrderType
@@ -131,6 +273,16 @@ const (
 	OrderTypeAscending  OrderType = "ASCENDING"
 	OrderTypeDescending OrderType = "DESCENDING"
 )
+
+// Values returns all known values for OrderType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (OrderType) Values() []OrderType {
+	return []OrderType{
+		"ASCENDING",
+		"DESCENDING",
+	}
+}
 
 type PrincipalType string
 
@@ -143,12 +295,34 @@ const (
 	PrincipalTypeOrganization PrincipalType = "ORGANIZATION"
 )
 
+// Values returns all known values for PrincipalType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PrincipalType) Values() []PrincipalType {
+	return []PrincipalType{
+		"USER",
+		"GROUP",
+		"INVITE",
+		"ANONYMOUS",
+		"ORGANIZATION",
+	}
+}
+
 type ResourceCollectionType string
 
 // Enum values for ResourceCollectionType
 const (
 	ResourceCollectionTypeShared_with_me ResourceCollectionType = "SHARED_WITH_ME"
 )
+
+// Values returns all known values for ResourceCollectionType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceCollectionType) Values() []ResourceCollectionType {
+	return []ResourceCollectionType{
+		"SHARED_WITH_ME",
+	}
+}
 
 type ResourceSortType string
 
@@ -157,6 +331,16 @@ const (
 	ResourceSortTypeDate ResourceSortType = "DATE"
 	ResourceSortTypeName ResourceSortType = "NAME"
 )
+
+// Values returns all known values for ResourceSortType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceSortType) Values() []ResourceSortType {
+	return []ResourceSortType{
+		"DATE",
+		"NAME",
+	}
+}
 
 type ResourceStateType string
 
@@ -168,6 +352,18 @@ const (
 	ResourceStateTypeRecycled  ResourceStateType = "RECYCLED"
 )
 
+// Values returns all known values for ResourceStateType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceStateType) Values() []ResourceStateType {
+	return []ResourceStateType{
+		"ACTIVE",
+		"RESTORING",
+		"RECYCLING",
+		"RECYCLED",
+	}
+}
+
 type ResourceType string
 
 // Enum values for ResourceType
@@ -176,6 +372,16 @@ const (
 	ResourceTypeDocument ResourceType = "DOCUMENT"
 )
 
+// Values returns all known values for ResourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ResourceType) Values() []ResourceType {
+	return []ResourceType{
+		"FOLDER",
+		"DOCUMENT",
+	}
+}
+
 type RolePermissionType string
 
 // Enum values for RolePermissionType
@@ -183,6 +389,16 @@ const (
 	RolePermissionTypeDirect    RolePermissionType = "DIRECT"
 	RolePermissionTypeInherited RolePermissionType = "INHERITED"
 )
+
+// Values returns all known values for RolePermissionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RolePermissionType) Values() []RolePermissionType {
+	return []RolePermissionType{
+		"DIRECT",
+		"INHERITED",
+	}
+}
 
 type RoleType string
 
@@ -194,6 +410,18 @@ const (
 	RoleTypeCoowner     RoleType = "COOWNER"
 )
 
+// Values returns all known values for RoleType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (RoleType) Values() []RoleType {
+	return []RoleType{
+		"VIEWER",
+		"CONTRIBUTOR",
+		"OWNER",
+		"COOWNER",
+	}
+}
+
 type ShareStatusType string
 
 // Enum values for ShareStatusType
@@ -201,6 +429,16 @@ const (
 	ShareStatusTypeSuccess ShareStatusType = "SUCCESS"
 	ShareStatusTypeFailure ShareStatusType = "FAILURE"
 )
+
+// Values returns all known values for ShareStatusType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ShareStatusType) Values() []ShareStatusType {
+	return []ShareStatusType{
+		"SUCCESS",
+		"FAILURE",
+	}
+}
 
 type StorageType string
 
@@ -210,12 +448,31 @@ const (
 	StorageTypeQuota     StorageType = "QUOTA"
 )
 
+// Values returns all known values for StorageType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (StorageType) Values() []StorageType {
+	return []StorageType{
+		"UNLIMITED",
+		"QUOTA",
+	}
+}
+
 type SubscriptionProtocolType string
 
 // Enum values for SubscriptionProtocolType
 const (
 	SubscriptionProtocolTypeHttps SubscriptionProtocolType = "HTTPS"
 )
+
+// Values returns all known values for SubscriptionProtocolType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SubscriptionProtocolType) Values() []SubscriptionProtocolType {
+	return []SubscriptionProtocolType{
+		"HTTPS",
+	}
+}
 
 type SubscriptionType string
 
@@ -224,6 +481,15 @@ const (
 	SubscriptionTypeAll SubscriptionType = "ALL"
 )
 
+// Values returns all known values for SubscriptionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SubscriptionType) Values() []SubscriptionType {
+	return []SubscriptionType{
+		"ALL",
+	}
+}
+
 type UserFilterType string
 
 // Enum values for UserFilterType
@@ -231,6 +497,16 @@ const (
 	UserFilterTypeAll            UserFilterType = "ALL"
 	UserFilterTypeActive_pending UserFilterType = "ACTIVE_PENDING"
 )
+
+// Values returns all known values for UserFilterType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UserFilterType) Values() []UserFilterType {
+	return []UserFilterType{
+		"ALL",
+		"ACTIVE_PENDING",
+	}
+}
 
 type UserSortType string
 
@@ -243,6 +519,19 @@ const (
 	UserSortTypeStorage_used  UserSortType = "STORAGE_USED"
 )
 
+// Values returns all known values for UserSortType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (UserSortType) Values() []UserSortType {
+	return []UserSortType{
+		"USER_NAME",
+		"FULL_NAME",
+		"STORAGE_LIMIT",
+		"USER_STATUS",
+		"STORAGE_USED",
+	}
+}
+
 type UserStatusType string
 
 // Enum values for UserStatusType
@@ -251,6 +540,17 @@ const (
 	UserStatusTypeInactive UserStatusType = "INACTIVE"
 	UserStatusTypePending  UserStatusType = "PENDING"
 )
+
+// Values returns all known values for UserStatusType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UserStatusType) Values() []UserStatusType {
+	return []UserStatusType{
+		"ACTIVE",
+		"INACTIVE",
+		"PENDING",
+	}
+}
 
 type UserType string
 
@@ -262,3 +562,16 @@ const (
 	UserTypeMinimaluser    UserType = "MINIMALUSER"
 	UserTypeWorkspacesuser UserType = "WORKSPACESUSER"
 )
+
+// Values returns all known values for UserType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (UserType) Values() []UserType {
+	return []UserType{
+		"USER",
+		"ADMIN",
+		"POWERUSER",
+		"MINIMALUSER",
+		"WORKSPACESUSER",
+	}
+}

@@ -85,7 +85,10 @@ type GetSegmentDetectionOutput struct {
 	// You can use this pagination token to retrieve the next set of text.
 	NextToken *string
 
-	// An array of segments detected in a video.
+	// An array of segments detected in a video. The array is sorted by the segment
+	// types (TECHNICAL_CUE or SHOT) specified in the SegmentTypes input parameter of
+	// StartSegmentDetection. Within each segment type the array is sorted by timestamp
+	// values.
 	Segments []*types.SegmentDetection
 
 	// An array containing the segment types requested in the call to

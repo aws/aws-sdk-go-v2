@@ -340,6 +340,9 @@ type CreateReplicationGroupInput struct {
 	// later. Default: false For HIPAA compliance, you must specify
 	// TransitEncryptionEnabled as true, an AuthToken, and a CacheSubnetGroup.
 	TransitEncryptionEnabled *bool
+
+	// The list of user groups to associate with the replication group.
+	UserGroupIds []*string
 }
 
 type CreateReplicationGroupOutput struct {

@@ -11,6 +11,7 @@ import (
 	"github.com/awslabs/smithy-go/httpbinding"
 	smithyjson "github.com/awslabs/smithy-go/json"
 	"github.com/awslabs/smithy-go/middleware"
+	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
@@ -89,6 +90,11 @@ func awsRestjson1_serializeOpDocumentCreateSavingsPlanInput(v *CreateSavingsPlan
 		ok.String(*v.Commitment)
 	}
 
+	if v.PurchaseTime != nil {
+		ok := object.Key("purchaseTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.PurchaseTime))
+	}
+
 	if v.SavingsPlanOfferingId != nil {
 		ok := object.Key("savingsPlanOfferingId")
 		ok.String(*v.SavingsPlanOfferingId)
@@ -104,6 +110,79 @@ func awsRestjson1_serializeOpDocumentCreateSavingsPlanInput(v *CreateSavingsPlan
 	if v.UpfrontPaymentAmount != nil {
 		ok := object.Key("upfrontPaymentAmount")
 		ok.String(*v.UpfrontPaymentAmount)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteQueuedSavingsPlan struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteQueuedSavingsPlan) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteQueuedSavingsPlan) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteQueuedSavingsPlanInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/DeleteQueuedSavingsPlan")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentDeleteQueuedSavingsPlanInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteQueuedSavingsPlanInput(v *DeleteQueuedSavingsPlanInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentDeleteQueuedSavingsPlanInput(v *DeleteQueuedSavingsPlanInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SavingsPlanId != nil {
+		ok := object.Key("savingsPlanId")
+		ok.String(*v.SavingsPlanId)
 	}
 
 	return nil

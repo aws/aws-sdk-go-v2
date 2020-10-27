@@ -67,6 +67,10 @@ type CreateCrawlerInput struct {
 	// A description of the new crawler.
 	Description *string
 
+	// A policy that specifies whether to crawl the entire dataset again, or to crawl
+	// only folders that were added since the last crawler run.
+	RecrawlPolicy *types.RecrawlPolicy
+
 	// A cron expression used to specify the schedule (see Time-Based Schedules for
 	// Jobs and Crawlers
 	// (https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html).

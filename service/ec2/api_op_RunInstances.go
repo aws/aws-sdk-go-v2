@@ -318,7 +318,9 @@ type RunInstancesInput struct {
 	UserData *string
 }
 
-// Describes a reservation.
+// Describes a launch request for one or more instances, and includes owner,
+// requester, and security group information that applies to all instances in the
+// launch request.
 type RunInstancesOutput struct {
 
 	// [EC2-Classic only] The security groups.

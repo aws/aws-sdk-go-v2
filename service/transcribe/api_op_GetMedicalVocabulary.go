@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Retrieve information about a medical vocabulary.
+// Retrieves information about a medical vocabulary.
 func (c *Client) GetMedicalVocabulary(ctx context.Context, params *GetMedicalVocabularyInput, optFns ...func(*Options)) (*GetMedicalVocabularyOutput, error) {
 	if params == nil {
 		params = &GetMedicalVocabularyInput{}
@@ -30,8 +30,8 @@ func (c *Client) GetMedicalVocabulary(ctx context.Context, params *GetMedicalVoc
 
 type GetMedicalVocabularyInput struct {
 
-	// The name of the vocabulary you are trying to get information about. The value
-	// you enter for this request is case-sensitive.
+	// The name of the vocabulary that you want information about. The value is case
+	// sensitive.
 	//
 	// This member is required.
 	VocabularyName *string
@@ -39,26 +39,27 @@ type GetMedicalVocabularyInput struct {
 
 type GetMedicalVocabularyOutput struct {
 
-	// The Amazon S3 location where the vocabulary is stored. Use this URI to get the
-	// contents of the vocabulary. You can download your vocabulary from the URI for a
-	// limited time.
+	// The location in Amazon S3 where the vocabulary is stored. Use this URI to get
+	// the contents of the vocabulary. You can download your vocabulary from the URI
+	// for a limited time.
 	DownloadUri *string
 
 	// If the VocabularyState is FAILED, this field contains information about why the
 	// job failed.
 	FailureReason *string
 
-	// The valid language code returned for your vocabulary entries.
+	// The valid language code for your vocabulary entries.
 	LanguageCode types.LanguageCode
 
-	// The date and time the vocabulary was last modified with a text file different
-	// from what was previously used.
+	// The date and time that the vocabulary was last modified with a text file
+	// different from the one that was previously used.
 	LastModifiedTime *time.Time
 
-	// The valid name that Amazon Transcribe Medical returns.
+	// The name of the vocabulary returned by Amazon Transcribe Medical.
 	VocabularyName *string
 
-	// The processing state of the vocabulary.
+	// The processing state of the vocabulary. If the VocabularyState is READY then you
+	// can use it in the StartMedicalTranscriptionJob operation.
 	VocabularyState types.VocabularyState
 
 	// Metadata pertaining to the operation's result.

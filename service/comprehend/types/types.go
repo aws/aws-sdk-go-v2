@@ -6,6 +6,29 @@ import (
 	"time"
 )
 
+// An augmented manifest file that provides training data for your custom model. An
+// augmented manifest file is a labeled dataset that is produced by Amazon
+// SageMaker Ground Truth.
+type AugmentedManifestsListItem struct {
+
+	// The JSON attribute that contains the annotations for your training documents.
+	// The number of attribute names that you specify depends on whether your augmented
+	// manifest file is the output of a single labeling job or a chained labeling job.
+	// If your file is the output of a single labeling job, specify the
+	// LabelAttributeName key that was used when the job was created in Ground Truth.
+	// If your file is the output of a chained labeling job, specify the
+	// LabelAttributeName key for one or more jobs in the chain. Each
+	// LabelAttributeName key provides the annotations from an individual job.
+	//
+	// This member is required.
+	AttributeNames []*string
+
+	// The Amazon S3 location of the augmented manifest file.
+	//
+	// This member is required.
+	S3Uri *string
+}
+
 // The result of calling the operation. The operation returns one object for each
 // document that is successfully processed by the operation.
 type BatchDetectDominantLanguageItemResult struct {
@@ -264,15 +287,28 @@ type DocumentClassifierFilter struct {
 // how the input file is formatted, see how-document-classification-training-data.
 type DocumentClassifierInputDataConfig struct {
 
-	// The Amazon S3 URI for the input data. The S3 bucket must be in the same region
-	// as the API endpoint that you are calling. The URI can point to a single input
-	// file or it can provide the prefix for a collection of input files. For example,
-	// if you use the URI S3://bucketName/prefix, if the prefix is a single file,
-	// Amazon Comprehend uses that file as input. If more than one file begins with the
-	// prefix, Amazon Comprehend uses all of them as input.
+	// A list of augmented manifest files that provide training data for your custom
+	// model. An augmented manifest file is a labeled dataset that is produced by
+	// Amazon SageMaker Ground Truth. This parameter is required if you set DataFormat
+	// to AUGMENTED_MANIFEST.
+	AugmentedManifests []*AugmentedManifestsListItem
+
+	// The format of your training data:
 	//
-	// This member is required.
-	S3Uri *string
+	//     * COMPREHEND_CSV: A two-column CSV file,
+	// where labels are provided in the first column, and documents are provided in the
+	// second. If you use this value, you must provide the S3Uri parameter in your
+	// request.
+	//
+	//     * AUGMENTED_MANIFEST: A labeled dataset that is produced by Amazon
+	// SageMaker Ground Truth. This file is in JSON lines format. Each line is a
+	// complete JSON object that contains a training document and its associated
+	// labels. If you use this value, you must provide the AugmentedManifests parameter
+	// in your request.
+	//
+	// If you don't specify a value, Amazon Comprehend uses
+	// COMPREHEND_CSV as the default.
+	DataFormat DocumentClassifierDataFormat
 
 	// Indicates the delimiter used to separate each label for training a multi-label
 	// classifier. The default delimiter between labels is a pipe (|). You can use a
@@ -281,6 +317,15 @@ type DocumentClassifierInputDataConfig struct {
 	// than the default or the delimiter you specify, the labels on that line will be
 	// combined to make a single unique label, such as LABELLABELLABEL.
 	LabelDelimiter *string
+
+	// The Amazon S3 URI for the input data. The S3 bucket must be in the same region
+	// as the API endpoint that you are calling. The URI can point to a single input
+	// file or it can provide the prefix for a collection of input files. For example,
+	// if you use the URI S3://bucketName/prefix, if the prefix is a single file,
+	// Amazon Comprehend uses that file as input. If more than one file begins with the
+	// prefix, Amazon Comprehend uses all of them as input. This parameter is required
+	// if you set DataFormat to COMPREHEND_CSV.
+	S3Uri *string
 }
 
 // Provides output results configuration parameters for custom classifier jobs.
@@ -720,21 +765,53 @@ type EntityRecognizerFilter struct {
 // Specifies the format and location of the input data.
 type EntityRecognizerInputDataConfig struct {
 
-	// S3 location of the documents folder for an entity recognizer
-	//
-	// This member is required.
-	Documents *EntityRecognizerDocuments
-
-	// The entity types in the input data for an entity recognizer. A maximum of 12
-	// entity types can be used at one time to train an entity recognizer.
+	// The entity types in the labeled training data that Amazon Comprehend uses to
+	// train the custom entity recognizer. Any entity types that you don't specify are
+	// ignored. A maximum of 25 entity types can be used at one time to train an entity
+	// recognizer. Entity types must not contain the following invalid characters: \n
+	// (line break), \\n (escaped line break), \r (carriage return), \\r (escaped
+	// carriage return), \t (tab), \\t (escaped tab), space, and , (comma).
 	//
 	// This member is required.
 	EntityTypes []*EntityTypesListItem
 
-	// S3 location of the annotations file for an entity recognizer.
+	// The S3 location of the CSV file that annotates your training documents.
 	Annotations *EntityRecognizerAnnotations
 
-	// S3 location of the entity list for an entity recognizer.
+	// A list of augmented manifest files that provide training data for your custom
+	// model. An augmented manifest file is a labeled dataset that is produced by
+	// Amazon SageMaker Ground Truth. This parameter is required if you set DataFormat
+	// to AUGMENTED_MANIFEST.
+	AugmentedManifests []*AugmentedManifestsListItem
+
+	// The format of your training data:
+	//
+	//     * COMPREHEND_CSV: A CSV file that
+	// supplements your training documents. The CSV file contains information about the
+	// custom entities that your trained model will detect. The required format of the
+	// file depends on whether you are providing annotations or an entity list. If you
+	// use this value, you must provide your CSV file by using either the Annotations
+	// or EntityList parameters. You must provide your training documents by using the
+	// Documents parameter.
+	//
+	//     * AUGMENTED_MANIFEST: A labeled dataset that is
+	// produced by Amazon SageMaker Ground Truth. This file is in JSON lines format.
+	// Each line is a complete JSON object that contains a training document and its
+	// labels. Each label annotates a named entity in the training document. If you use
+	// this value, you must provide the AugmentedManifests parameter in your
+	// request.
+	//
+	// If you don't specify a value, Amazon Comprehend uses COMPREHEND_CSV as
+	// the default.
+	DataFormat EntityRecognizerDataFormat
+
+	// The S3 location of the folder that contains the training documents for your
+	// custom entity recognizer. This parameter is required if you set DataFormat to
+	// COMPREHEND_CSV.
+	Documents *EntityRecognizerDocuments
+
+	// The S3 location of the CSV file that has the entity list for your custom entity
+	// recognizer.
 	EntityList *EntityRecognizerEntityList
 }
 
@@ -851,10 +928,15 @@ type EntityTypesEvaluationMetrics struct {
 	Recall *float64
 }
 
-// Information about an individual item on a list of entity types.
+// An entity type within a labeled training dataset that Amazon Comprehend uses to
+// train a custom entity recognizer.
 type EntityTypesListItem struct {
 
-	// Entity type of an item on an entity type list.
+	// An entity type within a labeled training dataset that Amazon Comprehend uses to
+	// train a custom entity recognizer. Entity types must not contain the following
+	// invalid characters: \n (line break), \\n (escaped line break, \r (carriage
+	// return), \\r (escaped carriage return), \t (tab), \\t (escaped tab), space, and
+	// , (comma).
 	//
 	// This member is required.
 	Type *string
@@ -1033,6 +1115,126 @@ type PartOfSpeechTag struct {
 
 	// Identifies the part of speech that the token represents.
 	Tag PartOfSpeechTagType
+}
+
+// Provides information for filtering a list of PII entity detection jobs.
+type PiiEntitiesDetectionJobFilter struct {
+
+	// Filters on the name of the job.
+	JobName *string
+
+	// Filters the list of jobs based on job status. Returns only jobs with the
+	// specified status.
+	JobStatus JobStatus
+
+	// Filters the list of jobs based on the time that the job was submitted for
+	// processing. Returns only jobs submitted after the specified time. Jobs are
+	// returned in descending order, newest to oldest.
+	SubmitTimeAfter *time.Time
+
+	// Filters the list of jobs based on the time that the job was submitted for
+	// processing. Returns only jobs submitted before the specified time. Jobs are
+	// returned in ascending order, oldest to newest.
+	SubmitTimeBefore *time.Time
+}
+
+// Provides information about a PII entities detection job.
+type PiiEntitiesDetectionJobProperties struct {
+
+	// The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your
+	// input data.
+	DataAccessRoleArn *string
+
+	// The time that the PII entities detection job completed.
+	EndTime *time.Time
+
+	// The input properties for a PII entities detection job.
+	InputDataConfig *InputDataConfig
+
+	// The identifier assigned to the PII entities detection job.
+	JobId *string
+
+	// The name that you assigned the PII entities detection job.
+	JobName *string
+
+	// The current status of the PII entities detection job. If the status is FAILED,
+	// the Message field shows the reason for the failure.
+	JobStatus JobStatus
+
+	// The language code of the input documents
+	LanguageCode LanguageCode
+
+	// A description of the status of a job.
+	Message *string
+
+	// Specifies whether the output provides the locations (offsets) of PII entities or
+	// a file in which PII entities are redacted.
+	Mode PiiEntitiesDetectionMode
+
+	// The output data configuration that you supplied when you created the PII
+	// entities detection job.
+	OutputDataConfig *PiiOutputDataConfig
+
+	// Provides configuration parameters for PII entity redaction. This parameter is
+	// required if you set the Mode parameter to ONLY_REDACTION. In that case, you must
+	// provide a RedactionConfig definition that includes the PiiEntityTypes parameter.
+	RedactionConfig *RedactionConfig
+
+	// The time that the PII entities detection job was submitted for processing.
+	SubmitTime *time.Time
+}
+
+// Provides information about a PII entity.
+type PiiEntity struct {
+
+	// A character offset in the input text that shows where the PII entity begins (the
+	// first character is at position 0). The offset returns the position of each UTF-8
+	// code point in the string. A code point is the abstract character from a
+	// particular graphical representation. For example, a multi-byte UTF-8 character
+	// maps to a single code point.
+	BeginOffset *int32
+
+	// A character offset in the input text that shows where the PII entity ends. The
+	// offset returns the position of each UTF-8 code point in the string. A code point
+	// is the abstract character from a particular graphical representation. For
+	// example, a multi-byte UTF-8 character maps to a single code point.
+	EndOffset *int32
+
+	// The level of confidence that Amazon Comprehend has in the accuracy of the
+	// detection.
+	Score *float32
+
+	// The entity's type.
+	Type PiiEntityType
+}
+
+// Provides configuration parameters for the output of PII entity detection jobs.
+type PiiOutputDataConfig struct {
+
+	// When you use the PiiOutputDataConfig object with asynchronous operations, you
+	// specify the Amazon S3 location where you want to write the output data.
+	//
+	// This member is required.
+	S3Uri *string
+
+	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
+	// encrypt the output results from an analysis job.
+	KmsKeyId *string
+}
+
+// Provides configuration parameters for PII entity redaction.
+type RedactionConfig struct {
+
+	// A character that replaces each character in the redacted PII entity.
+	MaskCharacter *string
+
+	// Specifies whether the PII entity is redacted with the mask character or the
+	// entity type.
+	MaskMode PiiEntitiesDetectionMaskMode
+
+	// An array of the types of PII entities that Amazon Comprehend detects in the
+	// input text for your request.
+	PiiEntityTypes []PiiEntityType
 }
 
 // Provides information for filtering a list of dominant language detection jobs.

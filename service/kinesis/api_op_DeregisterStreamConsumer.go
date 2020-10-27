@@ -17,7 +17,7 @@ import (
 // to deregister, you can use the ListStreamConsumers operation to get a list of
 // the descriptions of all the consumers that are currently registered with a given
 // data stream. The description of a consumer contains its name and ARN. This
-// operation has a limit of five transactions per second per account.
+// operation has a limit of five transactions per second per stream.
 func (c *Client) DeregisterStreamConsumer(ctx context.Context, params *DeregisterStreamConsumerInput, optFns ...func(*Options)) (*DeregisterStreamConsumerOutput, error) {
 	if params == nil {
 		params = &DeregisterStreamConsumerInput{}

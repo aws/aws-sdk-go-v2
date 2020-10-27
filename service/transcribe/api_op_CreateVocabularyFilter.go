@@ -39,8 +39,8 @@ type CreateVocabularyFilterInput struct {
 	LanguageCode types.LanguageCode
 
 	// The vocabulary filter name. The name must be unique within the account that
-	// contains it.If you try to create a vocabulary filter with the same name as a
-	// previous vocabulary filter you will receive a ConflictException error.
+	// contains it. If you try to create a vocabulary filter with the same name as
+	// another vocabulary filter, you get a ConflictException error.
 	//
 	// This member is required.
 	VocabularyFilterName *string

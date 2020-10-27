@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Retrieves information about the criteria and other settings for a findings
-// filter.
+// Retrieves the criteria and other settings for a findings filter.
 func (c *Client) GetFindingsFilter(ctx context.Context, params *GetFindingsFilterInput, optFns ...func(*Options)) (*GetFindingsFilterOutput, error) {
 	if params == nil {
 		params = &GetFindingsFilterInput{}

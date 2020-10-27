@@ -10,13 +10,8 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// DeleteReportGroup: Deletes a report group. Before you delete a report group, you
-// must delete its reports. Use ListReportsForReportGroup
-// (https://docs.aws.amazon.com/codebuild/latest/APIReference/API_ListReportsForReportGroup.html)
-// to get the reports in a report group. Use DeleteReport
-// (https://docs.aws.amazon.com/codebuild/latest/APIReference/API_DeleteReport.html)
-// to delete the reports. If you call DeleteReportGroup for a report group that
-// contains one or more reports, an exception is thrown.
+// Deletes a report group. Before you delete a report group, you must delete its
+// reports.
 func (c *Client) DeleteReportGroup(ctx context.Context, params *DeleteReportGroupInput, optFns ...func(*Options)) (*DeleteReportGroupOutput, error) {
 	if params == nil {
 		params = &DeleteReportGroupInput{}
@@ -38,6 +33,16 @@ type DeleteReportGroupInput struct {
 	//
 	// This member is required.
 	Arn *string
+
+	// If true, deletes any reports that belong to a report group before deleting the
+	// report group. If false, you must delete any reports in the report group. Use
+	// ListReportsForReportGroup
+	// (https://docs.aws.amazon.com/codebuild/latest/APIReference/API_ListReportsForReportGroup.html)
+	// to get the reports in a report group. Use DeleteReport
+	// (https://docs.aws.amazon.com/codebuild/latest/APIReference/API_DeleteReport.html)
+	// to delete the reports. If you call DeleteReportGroup for a report group that
+	// contains one or more reports, an exception is thrown.
+	DeleteReports *bool
 }
 
 type DeleteReportGroupOutput struct {

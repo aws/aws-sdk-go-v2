@@ -65,7 +65,7 @@ type UpdateFlowEntitlementInput struct {
 
 type UpdateFlowEntitlementOutput struct {
 
-	// The settings for a flow entitlement.
+	// The new configuration of the entitlement that you updated.
 	Entitlement *types.Entitlement
 
 	// The ARN of the flow that this entitlement was granted on.

@@ -10,12 +10,12 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Updates capacity settings for a fleet. Use this action to specify the number of
-// EC2 instances (hosts) that you want this fleet to contain. Before calling this
-// action, you may want to call DescribeEC2InstanceLimits to get the maximum
-// capacity based on the fleet's EC2 instance type. Specify minimum and maximum
-// number of instances. Amazon GameLift will not change fleet capacity to values
-// fall outside of this range. This is particularly important when using
+// Updates capacity settings for a fleet. Use this operation to specify the number
+// of EC2 instances (hosts) that you want this fleet to contain. Before calling
+// this operation, you may want to call DescribeEC2InstanceLimits to get the
+// maximum capacity based on the fleet's EC2 instance type. Specify minimum and
+// maximum number of instances. Amazon GameLift will not change fleet capacity to
+// values fall outside of this range. This is particularly important when using
 // auto-scaling (see PutScalingPolicy) to allow capacity to adjust based on player
 // demand while imposing limits on automatic adjustments. To update fleet capacity,
 // specify the fleet ID and the number of instances you want the fleet to host. If
@@ -65,7 +65,7 @@ func (c *Client) UpdateFleetCapacity(ctx context.Context, params *UpdateFleetCap
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type UpdateFleetCapacityInput struct {
 
 	// A unique identifier for a fleet to update capacity for. You can use either the
@@ -86,7 +86,7 @@ type UpdateFleetCapacityInput struct {
 	MinSize *int32
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type UpdateFleetCapacityOutput struct {
 
 	// A unique identifier for a fleet that was updated.

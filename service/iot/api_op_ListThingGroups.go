@@ -47,8 +47,8 @@ type ListThingGroupsInput struct {
 
 type ListThingGroupsOutput struct {
 
-	// The token used to get the next set of results, or null if there are no
-	// additional results.
+	// The token used to get the next set of results. Will not be returned if operation
+	// has returned all results.
 	NextToken *string
 
 	// The thing groups.

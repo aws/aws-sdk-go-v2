@@ -8,7 +8,7 @@ import (
 )
 
 // The requested bucket name is not available. The bucket namespace is shared by
-// all users of the system. Please select a different name and try again.
+// all users of the system. Select a different name and try again.
 type BucketAlreadyExists struct {
 	Message *string
 }

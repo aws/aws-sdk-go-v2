@@ -40,6 +40,11 @@ type CreateUserPoolClientInput struct {
 	// This member is required.
 	UserPoolId *string
 
+	// The time limit, between 5 minutes and 1 day, after which the access token is no
+	// longer valid and cannot be used. This value will be overridden if you have
+	// entered a value in TokenValidityUnits.
+	AccessTokenValidity *int32
+
 	// The allowed OAuth flows. Set to code to initiate a code grant flow, which
 	// provides an authorization code as the response. This code can be exchanged for
 	// access tokens with the token endpoint. Set to implicit to specify that the
@@ -60,9 +65,10 @@ type CreateUserPoolClientInput struct {
 	AllowedOAuthScopes []*string
 
 	// The Amazon Pinpoint analytics configuration for collecting metrics for this user
-	// pool. Cognito User Pools only supports sending events to Amazon Pinpoint
-	// projects in the US East (N. Virginia) us-east-1 Region, regardless of the region
-	// in which the user pool resides.
+	// pool. In regions where Pinpoint is not available, Cognito User Pools only
+	// supports sending events to Amazon Pinpoint projects in us-east-1. In regions
+	// where Pinpoint is available, Cognito User Pools will support sending events to
+	// Amazon Pinpoint projects within that same region.
 	AnalyticsConfiguration *types.AnalyticsConfigurationType
 
 	// A list of allowed redirect (callback) URLs for the identity providers. A
@@ -127,6 +133,11 @@ type CreateUserPoolClientInput struct {
 	// client being created.
 	GenerateSecret *bool
 
+	// The time limit, between 5 minutes and 1 day, after which the ID token is no
+	// longer valid and cannot be used. This value will be overridden if you have
+	// entered a value in TokenValidityUnits.
+	IdTokenValidity *int32
+
 	// A list of allowed logout URLs for the identity providers.
 	LogoutURLs []*string
 
@@ -143,33 +154,12 @@ type CreateUserPoolClientInput struct {
 	// prevents user existence-related errors.
 	//
 	//     * LEGACY - This represents the old
-	// behavior of Cognito where user existence related errors are not prevented.
+	// behavior of Cognito where user existence related errors are not
+	// prevented.
 	//
-	// This
-	// setting affects the behavior of following APIs:
-	//
-	//     * AdminInitiateAuth
-	//
-	//     *
-	// AdminRespondToAuthChallenge
-	//
-	//     * InitiateAuth
-	//
-	//     * RespondToAuthChallenge
-	//
-	//
-	// * ForgotPassword
-	//
-	//     * ConfirmForgotPassword
-	//
-	//     * ConfirmSignUp
-	//
-	//     *
-	// ResendConfirmationCode
-	//
-	// After February 15th 2020, the value of
-	// PreventUserExistenceErrors will default to ENABLED for newly created user pool
-	// clients if no value is provided.
+	// After February 15th 2020, the value of PreventUserExistenceErrors
+	// will default to ENABLED for newly created user pool clients if no value is
+	// provided.
 	PreventUserExistenceErrors types.PreventUserExistenceErrorTypes
 
 	// The read attributes.
@@ -183,6 +173,10 @@ type CreateUserPoolClientInput struct {
 	// client. The following are supported: COGNITO, Facebook, Google and
 	// LoginWithAmazon.
 	SupportedIdentityProviders []*string
+
+	// The units in which the validity times are represented in. Default for
+	// RefreshToken is days, and default for ID and access tokens are hours.
+	TokenValidityUnits *types.TokenValidityUnitsType
 
 	// The user pool attributes that the app client can write to. If your app client
 	// allows users to sign in through an identity provider, this array must include

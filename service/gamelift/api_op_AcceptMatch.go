@@ -59,7 +59,7 @@ func (c *Client) AcceptMatch(ctx context.Context, params *AcceptMatchInput, optF
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type AcceptMatchInput struct {
 
 	// Player response to the proposed match.

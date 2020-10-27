@@ -722,14 +722,14 @@ func validateOpCreateNamedQueryInput(v *CreateNamedQueryInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateNamedQueryInput"}
-	if v.QueryString == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("QueryString"))
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.Database == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Database"))
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if v.QueryString == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryString"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -743,13 +743,13 @@ func validateOpCreateWorkGroupInput(v *CreateWorkGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateWorkGroupInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.Configuration != nil {
 		if err := validateWorkGroupConfiguration(v.Configuration); err != nil {
 			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -808,11 +808,11 @@ func validateOpGetDatabaseInput(v *GetDatabaseInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetDatabaseInput"}
-	if v.DatabaseName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
-	}
 	if v.CatalogName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CatalogName"))
+	}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -886,14 +886,14 @@ func validateOpGetTableMetadataInput(v *GetTableMetadataInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetTableMetadataInput"}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
 	if v.CatalogName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CatalogName"))
 	}
 	if v.TableName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
-	}
-	if v.DatabaseName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -970,13 +970,13 @@ func validateOpStartQueryExecutionInput(v *StartQueryExecutionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartQueryExecutionInput"}
+	if v.QueryString == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryString"))
+	}
 	if v.ResultConfiguration != nil {
 		if err := validateResultConfiguration(v.ResultConfiguration); err != nil {
 			invalidParams.AddNested("ResultConfiguration", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.QueryString == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("QueryString"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1023,11 +1023,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1059,13 +1059,13 @@ func validateOpUpdateWorkGroupInput(v *UpdateWorkGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateWorkGroupInput"}
+	if v.WorkGroup == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkGroup"))
+	}
 	if v.ConfigurationUpdates != nil {
 		if err := validateWorkGroupConfigurationUpdates(v.ConfigurationUpdates); err != nil {
 			invalidParams.AddNested("ConfigurationUpdates", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.WorkGroup == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("WorkGroup"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

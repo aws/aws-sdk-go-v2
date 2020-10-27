@@ -11,6 +11,17 @@ const (
 	CanaryRunStateFailed  CanaryRunState = "FAILED"
 )
 
+// Values returns all known values for CanaryRunState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CanaryRunState) Values() []CanaryRunState {
+	return []CanaryRunState{
+		"RUNNING",
+		"PASSED",
+		"FAILED",
+	}
+}
+
 type CanaryRunStateReasonCode string
 
 // Enum values for CanaryRunStateReasonCode
@@ -18,6 +29,16 @@ const (
 	CanaryRunStateReasonCodeCanary_failure    CanaryRunStateReasonCode = "CANARY_FAILURE"
 	CanaryRunStateReasonCodeExecution_failure CanaryRunStateReasonCode = "EXECUTION_FAILURE"
 )
+
+// Values returns all known values for CanaryRunStateReasonCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CanaryRunStateReasonCode) Values() []CanaryRunStateReasonCode {
+	return []CanaryRunStateReasonCode{
+		"CANARY_FAILURE",
+		"EXECUTION_FAILURE",
+	}
+}
 
 type CanaryState string
 
@@ -34,9 +55,35 @@ const (
 	CanaryStateDeleting CanaryState = "DELETING"
 )
 
+// Values returns all known values for CanaryState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (CanaryState) Values() []CanaryState {
+	return []CanaryState{
+		"CREATING",
+		"READY",
+		"STARTING",
+		"RUNNING",
+		"UPDATING",
+		"STOPPING",
+		"STOPPED",
+		"ERROR",
+		"DELETING",
+	}
+}
+
 type CanaryStateReasonCode string
 
 // Enum values for CanaryStateReasonCode
 const (
 	CanaryStateReasonCodeInvalid_permissions CanaryStateReasonCode = "INVALID_PERMISSIONS"
 )
+
+// Values returns all known values for CanaryStateReasonCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CanaryStateReasonCode) Values() []CanaryStateReasonCode {
+	return []CanaryStateReasonCode{
+		"INVALID_PERMISSIONS",
+	}
+}

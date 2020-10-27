@@ -49,7 +49,7 @@ type ListAcceptedPortfolioSharesInput struct {
 	// The type of shared portfolios to list. The default is to list imported
 	// portfolios.
 	//
-	//     * AWS_ORGANIZATIONS - List portfolios shared by the master
+	//     * AWS_ORGANIZATIONS - List portfolios shared by the management
 	// account of your organization
 	//
 	//     * AWS_SERVICECATALOG - List default

@@ -15,11 +15,12 @@ import (
 // prior release, see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 // Associates a Web ACL with a regional application resource, to protect the
-// resource. A regional application can be an Application Load Balancer (ALB) or an
-// API Gateway stage. For AWS CloudFront, don't use this call. Instead, use your
-// CloudFront distribution configuration. To associate a Web ACL, in the CloudFront
-// call UpdateDistribution, set the web ACL ID to the Amazon Resource Name (ARN) of
-// the Web ACL. For information, see UpdateDistribution
+// resource. A regional application can be an Application Load Balancer (ALB), an
+// API Gateway REST API, or an AppSync GraphQL API. For AWS CloudFront, don't use
+// this call. Instead, use your CloudFront distribution configuration. To associate
+// a Web ACL, in the CloudFront call UpdateDistribution, set the web ACL ID to the
+// Amazon Resource Name (ARN) of the Web ACL. For information, see
+// UpdateDistribution
 // (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html).
 func (c *Client) AssociateWebACL(ctx context.Context, params *AssociateWebACLInput, optFns ...func(*Options)) (*AssociateWebACLOutput, error) {
 	if params == nil {
@@ -46,8 +47,11 @@ type AssociateWebACLInput struct {
 	// arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
 	//
 	//
-	// * For an Amazon API Gateway stage:
+	// * For an API Gateway REST API:
 	// arn:aws:apigateway:region::/restapis/api-id/stages/stage-name
+	//
+	//     * For an
+	// AppSync GraphQL API: arn:aws:appsync:region:account-id:apis/GraphQLApiId
 	//
 	// This member is required.
 	ResourceArn *string

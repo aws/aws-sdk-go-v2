@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Gets information about an association between a specified resolver rule and a
-// VPC. You associate a resolver rule and a VPC using AssociateResolverRule.
+// Gets information about an association between a specified Resolver rule and a
+// VPC. You associate a Resolver rule and a VPC using AssociateResolverRule
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_AssociateResolverRule.html).
 func (c *Client) GetResolverRuleAssociation(ctx context.Context, params *GetResolverRuleAssociationInput, optFns ...func(*Options)) (*GetResolverRuleAssociationOutput, error) {
 	if params == nil {
 		params = &GetResolverRuleAssociationInput{}
@@ -30,7 +31,7 @@ func (c *Client) GetResolverRuleAssociation(ctx context.Context, params *GetReso
 
 type GetResolverRuleAssociationInput struct {
 
-	// The ID of the resolver rule association that you want to get information about.
+	// The ID of the Resolver rule association that you want to get information about.
 	//
 	// This member is required.
 	ResolverRuleAssociationId *string
@@ -38,7 +39,7 @@ type GetResolverRuleAssociationInput struct {
 
 type GetResolverRuleAssociationOutput struct {
 
-	// Information about the resolver rule association that you specified in a
+	// Information about the Resolver rule association that you specified in a
 	// GetResolverRuleAssociation request.
 	ResolverRuleAssociation *types.ResolverRuleAssociation
 

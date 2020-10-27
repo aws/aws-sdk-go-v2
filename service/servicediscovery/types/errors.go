@@ -85,8 +85,8 @@ func (e *InvalidInput) ErrorFault() smithy.ErrorFault { return smithy.FaultClien
 type NamespaceAlreadyExists struct {
 	Message *string
 
-	NamespaceId      *string
 	CreatorRequestId *string
+	NamespaceId      *string
 }
 
 func (e *NamespaceAlreadyExists) Error() string {
@@ -135,8 +135,10 @@ func (e *OperationNotFound) ErrorMessage() string {
 func (e *OperationNotFound) ErrorCode() string             { return "OperationNotFound" }
 func (e *OperationNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The operation can't be completed because you've reached the limit on the number
-// of requests.
+// The operation can't be completed because you've reached the quota for the number
+// of requests. For more information, see AWS Cloud Map API request throttling
+// quota (https://docs.aws.amazon.com/cloud-map/latest/dg/throttling.html) in the
+// AWS Cloud Map Developer Guide.
 type RequestLimitExceeded struct {
 	Message *string
 }
@@ -171,7 +173,7 @@ func (e *ResourceInUse) ErrorMessage() string {
 func (e *ResourceInUse) ErrorCode() string             { return "ResourceInUse" }
 func (e *ResourceInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The resource can't be created because you've reached the limit on the number of
+// The resource can't be created because you've reached the quota on the number of
 // resources.
 type ResourceLimitExceeded struct {
 	Message *string
@@ -244,7 +246,7 @@ func (e *ServiceNotFound) ErrorMessage() string {
 func (e *ServiceNotFound) ErrorCode() string             { return "ServiceNotFound" }
 func (e *ServiceNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The list of tags on the resource is over the limit. The maximum number of tags
+// The list of tags on the resource is over the quota. The maximum number of tags
 // that can be applied to a resource is 50.
 type TooManyTagsException struct {
 	Message *string

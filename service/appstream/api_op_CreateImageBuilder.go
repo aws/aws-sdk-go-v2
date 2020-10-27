@@ -63,6 +63,21 @@ type CreateImageBuilderInput struct {
 	//     *
 	// stream.memory.8xlarge
 	//
+	//     * stream.memory.z1d.large
+	//
+	//     *
+	// stream.memory.z1d.xlarge
+	//
+	//     * stream.memory.z1d.2xlarge
+	//
+	//     *
+	// stream.memory.z1d.3xlarge
+	//
+	//     * stream.memory.z1d.6xlarge
+	//
+	//     *
+	// stream.memory.z1d.12xlarge
+	//
 	//     * stream.graphics-design.large
 	//
 	//     *
@@ -74,6 +89,21 @@ type CreateImageBuilderInput struct {
 	// stream.graphics-design.4xlarge
 	//
 	//     * stream.graphics-desktop.2xlarge
+	//
+	//     *
+	// stream.graphics.g4dn.xlarge
+	//
+	//     * stream.graphics.g4dn.2xlarge
+	//
+	//     *
+	// stream.graphics.g4dn.4xlarge
+	//
+	//     * stream.graphics.g4dn.8xlarge
+	//
+	//     *
+	// stream.graphics.g4dn.12xlarge
+	//
+	//     * stream.graphics.g4dn.16xlarge
 	//
 	//     *
 	// stream.graphics-pro.4xlarge
@@ -116,7 +146,7 @@ type CreateImageBuilderInput struct {
 	// assume a role, the image builder calls the AWS Security Token Service (STS)
 	// AssumeRole API operation and passes the ARN of the role to use. The operation
 	// creates a new session with temporary credentials. AppStream 2.0 retrieves the
-	// temporary credentials and creates the AppStream_Machine_Role credential profile
+	// temporary credentials and creates the appstream_machine_role credential profile
 	// on the instance. For more information, see Using an IAM Role to Grant
 	// Permissions to Applications and Scripts Running on AppStream 2.0 Streaming
 	// Instances

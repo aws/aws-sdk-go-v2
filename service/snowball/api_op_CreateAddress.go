@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Creates an address for a Snowball to be shipped to. In most regions, addresses
-// are validated at the time of creation. The address you provide must be located
-// within the serviceable area of your region. If the address is invalid or
+// Creates an address for a Snow device to be shipped to. In most regions,
+// addresses are validated at the time of creation. The address you provide must be
+// located within the serviceable area of your region. If the address is invalid or
 // unsupported, then an exception is thrown.
 func (c *Client) CreateAddress(ctx context.Context, params *CreateAddressInput, optFns ...func(*Options)) (*CreateAddressOutput, error) {
 	if params == nil {
@@ -32,7 +32,7 @@ func (c *Client) CreateAddress(ctx context.Context, params *CreateAddressInput, 
 
 type CreateAddressInput struct {
 
-	// The address that you want the Snowball shipped to.
+	// The address that you want the Snow device shipped to.
 	//
 	// This member is required.
 	Address *types.Address
@@ -41,7 +41,7 @@ type CreateAddressInput struct {
 type CreateAddressOutput struct {
 
 	// The automatically generated ID for a specific address. You'll use this ID when
-	// you create a job to specify which address you want the Snowball for that job
+	// you create a job to specify which address you want the Snow device for that job
 	// shipped to.
 	AddressId *string
 

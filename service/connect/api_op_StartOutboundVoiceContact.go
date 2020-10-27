@@ -17,7 +17,12 @@ import (
 // dialing the contact). If the contact flow places an outbound call to a contact,
 // and then puts the contact in queue, that's when the call is routed to the agent,
 // like any other inbound case. There is a 60 second dialing timeout for this
-// operation. If the call is not connected after 60 seconds, it fails.
+// operation. If the call is not connected after 60 seconds, it fails. UK numbers
+// with a 447 prefix are not allowed by default. Before you can dial these UK
+// mobile numbers, you must submit a service quota increase request. For more
+// information, see Amazon Connect Service Quotas
+// (https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html)
+// in the Amazon Connect Administrator Guide.
 func (c *Client) StartOutboundVoiceContact(ctx context.Context, params *StartOutboundVoiceContactInput, optFns ...func(*Options)) (*StartOutboundVoiceContactOutput, error) {
 	if params == nil {
 		params = &StartOutboundVoiceContactInput{}
@@ -35,7 +40,12 @@ func (c *Client) StartOutboundVoiceContact(ctx context.Context, params *StartOut
 
 type StartOutboundVoiceContactInput struct {
 
-	// The identifier of the contact flow for the outbound call.
+	// The identifier of the contact flow for the outbound call. To see the
+	// ContactFlowId in the Amazon Connect console user interface, on the navigation
+	// menu go to Routing, Contact Flows. Choose the contact flow. On the contact flow
+	// page, under the name of the contact flow, choose Show additional flow
+	// information. The ContactFlowId is the last part of the ARN, shown here in bold:
+	// arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/846ec553-a005-41c0-8341-xxxxxxxxxxxx
 	//
 	// This member is required.
 	ContactFlowId *string

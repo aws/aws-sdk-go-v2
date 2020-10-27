@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Removes the association between a specified resolver rule and a specified VPC.
-// If you disassociate a resolver rule from a VPC, Resolver stops forwarding DNS
-// queries for the domain name that you specified in the resolver rule.
+// Removes the association between a specified Resolver rule and a specified VPC.
+// If you disassociate a Resolver rule from a VPC, Resolver stops forwarding DNS
+// queries for the domain name that you specified in the Resolver rule.
 func (c *Client) DisassociateResolverRule(ctx context.Context, params *DisassociateResolverRuleInput, optFns ...func(*Options)) (*DisassociateResolverRuleOutput, error) {
 	if params == nil {
 		params = &DisassociateResolverRuleInput{}
@@ -31,13 +31,13 @@ func (c *Client) DisassociateResolverRule(ctx context.Context, params *Disassoci
 
 type DisassociateResolverRuleInput struct {
 
-	// The ID of the resolver rule that you want to disassociate from the specified
+	// The ID of the Resolver rule that you want to disassociate from the specified
 	// VPC.
 	//
 	// This member is required.
 	ResolverRuleId *string
 
-	// The ID of the VPC that you want to disassociate the resolver rule from.
+	// The ID of the VPC that you want to disassociate the Resolver rule from.
 	//
 	// This member is required.
 	VPCId *string

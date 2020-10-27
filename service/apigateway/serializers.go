@@ -903,6 +903,13 @@ func awsRestjson1_serializeOpDocumentCreateDomainNameInput(v *CreateDomainNameIn
 		}
 	}
 
+	if v.MutualTlsAuthentication != nil {
+		ok := object.Key("mutualTlsAuthentication")
+		if err := awsRestjson1_serializeDocumentMutualTlsAuthenticationInput(v.MutualTlsAuthentication, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -14877,6 +14884,23 @@ func awsRestjson1_serializeDocumentMapOfStringToString(v map[string]*string, val
 		}
 		om.String(*v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMutualTlsAuthenticationInput(v *types.MutualTlsAuthenticationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TruststoreUri != nil {
+		ok := object.Key("truststoreUri")
+		ok.String(*v.TruststoreUri)
+	}
+
+	if v.TruststoreVersion != nil {
+		ok := object.Key("truststoreVersion")
+		ok.String(*v.TruststoreVersion)
+	}
+
 	return nil
 }
 

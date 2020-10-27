@@ -114,11 +114,12 @@ type UpdateLagOutput struct {
 	// The location of the LAG.
 	Location *string
 
-	// The minimum number of physical connections that must be operational for the LAG
-	// itself to be operational.
+	// The minimum number of physical dedicated connections that must be operational
+	// for the LAG itself to be operational.
 	MinimumLinks *int32
 
-	// The number of physical connections bundled by the LAG, up to a maximum of 10.
+	// The number of physical dedicated connections bundled by the LAG, up to a maximum
+	// of 10.
 	NumberOfConnections *int32
 
 	// The ID of the AWS account that owns the LAG.

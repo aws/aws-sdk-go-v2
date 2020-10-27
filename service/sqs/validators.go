@@ -471,11 +471,11 @@ func validateChangeMessageVisibilityBatchRequestEntry(v *types.ChangeMessageVisi
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ChangeMessageVisibilityBatchRequestEntry"}
-	if v.ReceiptHandle == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ReceiptHandle"))
-	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.ReceiptHandle == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReceiptHandle"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -506,11 +506,11 @@ func validateDeleteMessageBatchRequestEntry(v *types.DeleteMessageBatchRequestEn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteMessageBatchRequestEntry"}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
 	if v.ReceiptHandle == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReceiptHandle"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -605,20 +605,20 @@ func validateSendMessageBatchRequestEntry(v *types.SendMessageBatchRequestEntry)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SendMessageBatchRequestEntry"}
-	if v.MessageBody == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MessageBody"))
-	}
-	if v.MessageAttributes != nil {
-		if err := validateMessageBodyAttributeMap(v.MessageAttributes); err != nil {
-			invalidParams.AddNested("MessageAttributes", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if v.MessageSystemAttributes != nil {
 		if err := validateMessageBodySystemAttributeMap(v.MessageSystemAttributes); err != nil {
 			invalidParams.AddNested("MessageSystemAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MessageBody == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageBody"))
+	}
+	if v.MessageAttributes != nil {
+		if err := validateMessageBodyAttributeMap(v.MessageAttributes); err != nil {
+			invalidParams.AddNested("MessageAttributes", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -650,17 +650,17 @@ func validateOpAddPermissionInput(v *AddPermissionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddPermissionInput"}
+	if v.Actions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Actions"))
+	}
 	if v.Label == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Label"))
-	}
-	if v.AWSAccountIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AWSAccountIds"))
 	}
 	if v.QueueUrl == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueueUrl"))
 	}
-	if v.Actions == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Actions"))
+	if v.AWSAccountIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AWSAccountIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -674,15 +674,15 @@ func validateOpChangeMessageVisibilityBatchInput(v *ChangeMessageVisibilityBatch
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ChangeMessageVisibilityBatchInput"}
+	if v.QueueUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueUrl"))
+	}
 	if v.Entries == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Entries"))
 	} else if v.Entries != nil {
 		if err := validateChangeMessageVisibilityBatchRequestEntryList(v.Entries); err != nil {
 			invalidParams.AddNested("Entries", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.QueueUrl == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("QueueUrl"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -696,14 +696,14 @@ func validateOpChangeMessageVisibilityInput(v *ChangeMessageVisibilityInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ChangeMessageVisibilityInput"}
-	if v.ReceiptHandle == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ReceiptHandle"))
+	if v.QueueUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueUrl"))
 	}
 	if v.VisibilityTimeout == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VisibilityTimeout"))
 	}
-	if v.QueueUrl == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("QueueUrl"))
+	if v.ReceiptHandle == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReceiptHandle"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -732,15 +732,15 @@ func validateOpDeleteMessageBatchInput(v *DeleteMessageBatchInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteMessageBatchInput"}
+	if v.QueueUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueUrl"))
+	}
 	if v.Entries == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Entries"))
 	} else if v.Entries != nil {
 		if err := validateDeleteMessageBatchRequestEntryList(v.Entries); err != nil {
 			invalidParams.AddNested("Entries", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.QueueUrl == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("QueueUrl"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -877,11 +877,11 @@ func validateOpRemovePermissionInput(v *RemovePermissionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RemovePermissionInput"}
-	if v.QueueUrl == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("QueueUrl"))
-	}
 	if v.Label == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Label"))
+	}
+	if v.QueueUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueUrl"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -917,21 +917,21 @@ func validateOpSendMessageInput(v *SendMessageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SendMessageInput"}
-	if v.MessageAttributes != nil {
-		if err := validateMessageBodyAttributeMap(v.MessageAttributes); err != nil {
-			invalidParams.AddNested("MessageAttributes", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.QueueUrl == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("QueueUrl"))
-	}
 	if v.MessageSystemAttributes != nil {
 		if err := validateMessageBodySystemAttributeMap(v.MessageSystemAttributes); err != nil {
 			invalidParams.AddNested("MessageSystemAttributes", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.QueueUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueUrl"))
+	}
 	if v.MessageBody == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MessageBody"))
+	}
+	if v.MessageAttributes != nil {
+		if err := validateMessageBodyAttributeMap(v.MessageAttributes); err != nil {
+			invalidParams.AddNested("MessageAttributes", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -981,11 +981,11 @@ func validateOpUntagQueueInput(v *UntagQueueInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagQueueInput"}
-	if v.QueueUrl == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("QueueUrl"))
-	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if v.QueueUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueUrl"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

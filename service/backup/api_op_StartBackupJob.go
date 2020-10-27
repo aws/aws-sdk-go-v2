@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Starts a job to create a one-time backup of the specified resource.
+// Starts an on-demand backup job for the specified resource.
 func (c *Client) StartBackupJob(ctx context.Context, params *StartBackupJobInput, optFns ...func(*Options)) (*StartBackupJobOutput, error) {
 	if params == nil {
 		params = &StartBackupJobInput{}
@@ -49,6 +49,13 @@ type StartBackupJobInput struct {
 	//
 	// This member is required.
 	ResourceArn *string
+
+	// Specifies the backup option for a selected resource. This option is only
+	// available for Windows VSS backup jobs. Valid values: Set to
+	// "WindowsVSS”:“enabled" to enable WindowsVSS backup option and create a VSS
+	// Windows backup. Set to “WindowsVSS”:”disabled” to create a regular backup. The
+	// WindowsVSS option is not enabled by default.
+	BackupOptions map[string]*string
 
 	// A value in minutes after a backup job is successfully started before it must be
 	// completed or it will be canceled by AWS Backup. This value is optional.

@@ -57,7 +57,7 @@ type AssociateVpcCidrBlockInput struct {
 	Ipv6CidrBlock *string
 
 	// The name of the location from which we advertise the IPV6 CIDR block. Use this
-	// parameter to limit the CiDR block to this location. You must set
+	// parameter to limit the CIDR block to this location. You must set
 	// AmazonProvidedIpv6CidrBlock to true to use this parameter. You can have one IPv6
 	// CIDR block association per network border group.
 	Ipv6CidrBlockNetworkBorderGroup *string

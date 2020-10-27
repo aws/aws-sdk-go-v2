@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes an existing application. Optionally deletes the launched stack
+// Deletes the specified application. Optionally deletes the launched stack
 // associated with the application and all AWS SMS replication jobs for servers in
 // the application.
 func (c *Client) DeleteApp(ctx context.Context, params *DeleteAppInput, optFns ...func(*Options)) (*DeleteAppOutput, error) {
@@ -30,15 +30,15 @@ func (c *Client) DeleteApp(ctx context.Context, params *DeleteAppInput, optFns .
 
 type DeleteAppInput struct {
 
-	// ID of the application to delete.
+	// The ID of the application.
 	AppId *string
 
-	// While deleting the application, stop all replication jobs corresponding to the
-	// servers in the application.
+	// Indicates whether to stop all replication jobs corresponding to the servers in
+	// the application while deleting the application.
 	ForceStopAppReplication *bool
 
-	// While deleting the application, terminate the stack corresponding to the
-	// application.
+	// Indicates whether to terminate the stack corresponding to the application while
+	// deleting the application.
 	ForceTerminateApp *bool
 }
 

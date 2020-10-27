@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Creates a launch configuration for an application.
+// Creates or updates the launch configuration for the specified application.
 func (c *Client) PutAppLaunchConfiguration(ctx context.Context, params *PutAppLaunchConfigurationInput, optFns ...func(*Options)) (*PutAppLaunchConfigurationOutput, error) {
 	if params == nil {
 		params = &PutAppLaunchConfigurationInput{}
@@ -29,14 +29,19 @@ func (c *Client) PutAppLaunchConfiguration(ctx context.Context, params *PutAppLa
 
 type PutAppLaunchConfigurationInput struct {
 
-	// ID of the application associated with the launch configuration.
+	// The ID of the application.
 	AppId *string
 
-	// Name of service role in the customer's account that Amazon CloudFormation uses
+	// Indicates whether the application is configured to launch automatically after
+	// replication is complete.
+	AutoLaunch *bool
+
+	// The name of service role in the customer's account that AWS CloudFormation uses
 	// to launch the application.
 	RoleName *string
 
-	// Launch configurations for server groups in the application.
+	// Information about the launch configurations for server groups in the
+	// application.
 	ServerGroupLaunchConfigurations []*types.ServerGroupLaunchConfiguration
 }
 

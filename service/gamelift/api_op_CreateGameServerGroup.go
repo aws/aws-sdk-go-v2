@@ -11,46 +11,42 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// This action is part of Amazon GameLift FleetIQ with game server groups, which is
-// in preview release and is subject to change. Creates a GameLift FleetIQ game
-// server group to manage a collection of EC2 instances for game hosting. In
-// addition to creating the game server group, this action also creates an Auto
-// Scaling group in your AWS account and establishes a link between the two groups.
-// You have full control over configuration of the Auto Scaling group, but GameLift
-// FleetIQ routinely certain Auto Scaling group properties in order to optimize the
-// group's instances for low-cost game hosting. You can view the status of your
-// game server groups in the GameLift Console. Game server group metrics and events
-// are emitted to Amazon CloudWatch. Prior creating a new game server group, you
-// must set up the following:
+// This operation is used with the Amazon GameLift FleetIQ solution and game server
+// groups. Creates a GameLift FleetIQ game server group for managing game hosting
+// on a collection of Amazon EC2 instances for game hosting. This operation creates
+// the game server group, creates an Auto Scaling group in your AWS account, and
+// establishes a link between the two groups. You can view the status of your game
+// server groups in the GameLift console. Game server group metrics and events are
+// emitted to Amazon CloudWatch. Before creating a new game server group, you must
+// have the following:
 //
-//     * An EC2 launch template. The template provides
-// configuration settings for a set of EC2 instances and includes the game server
-// build that you want to deploy and run on each instance. For more information on
-// creating a launch template, see  Launching an Instance from a Launch Template
+//     * An Amazon EC2 launch template that specifies how to
+// launch Amazon EC2 instances with your game server build. For more information,
+// see  Launching an Instance from a Launch Template
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html)
 // in the Amazon EC2 User Guide.
 //
-//     * An IAM role. The role sets up limited
-// access to your AWS account, allowing GameLift FleetIQ to create and manage the
-// EC2 Auto Scaling group, get instance data, and emit metrics and events to
-// CloudWatch. For more information on setting up an IAM permissions policy with
-// principal access for GameLift, see  Specifying a Principal in a Policy
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-bucket-user-policy-specifying-principal-intro.html)
-// in the Amazon S3 Developer Guide.
+//     * An IAM role that extends limited access to
+// your AWS account to allow GameLift FleetIQ to create and interact with the Auto
+// Scaling group. For more information, see Create IAM roles for cross-service
+// interaction
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-iam-permissions-roles.html)
+// in the GameLift FleetIQ Developer Guide.
 //
-// To create a new game server group, provide a
-// name and specify the IAM role and EC2 launch template. You also need to provide
-// a list of instance types to be used in the group and set initial maximum and
-// minimum limits on the group's instance count. You can optionally set an
-// autoscaling policy with target tracking based on a GameLift FleetIQ metric. Once
-// the game server group and corresponding Auto Scaling group are created, you have
-// full access to change the Auto Scaling group's configuration as needed. Keep in
-// mind, however, that some properties are periodically updated by GameLift FleetIQ
-// as it balances the group's instances based on availability and cost. Learn more
+// To create a new game server group,
+// specify a unique group name, IAM role and Amazon EC2 launch template, and
+// provide a list of instance types that can be used in the group. You must also
+// set initial maximum and minimum limits on the group's instance count. You can
+// optionally set an Auto Scaling policy with target tracking based on a GameLift
+// FleetIQ metric. Once the game server group and corresponding Auto Scaling group
+// are created, you have full access to change the Auto Scaling group's
+// configuration as needed. Several properties that are set when creating a game
+// server group, including maximum/minimum size and auto-scaling policy settings,
+// must be updated directly in the Auto Scaling group. Keep in mind that some Auto
+// Scaling group properties are periodically updated by GameLift FleetIQ as part of
+// its balancing activities to optimize for availability and cost. Learn more
 // GameLift FleetIQ Guide
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-intro.html)Updating
-// a GameLift FleetIQ-Linked Auto Scaling Group
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-asgroups.html)
+// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
 // Related operations
 //
 //     * CreateGameServerGroup
@@ -67,7 +63,10 @@ import (
 //
 //     * ResumeGameServerGroup
 //
-//     * SuspendGameServerGroup
+//     *
+// SuspendGameServerGroup
+//
+//     * DescribeGameServerInstances
 func (c *Client) CreateGameServerGroup(ctx context.Context, params *CreateGameServerGroupInput, optFns ...func(*Options)) (*CreateGameServerGroupOutput, error) {
 	if params == nil {
 		params = &CreateGameServerGroupInput{}
@@ -92,12 +91,17 @@ type CreateGameServerGroupInput struct {
 	// This member is required.
 	GameServerGroupName *string
 
-	// A set of EC2 instance types to use when creating instances in the group. The
-	// instance definitions must specify at least two different instance types that are
+	// The EC2 instance types and sizes to use in the Auto Scaling group. The instance
+	// definitions must specify at least two different instance types that are
 	// supported by GameLift FleetIQ. For more information on instance types, see EC2
 	// Instance Types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the
-	// Amazon EC2 User Guide.
+	// Amazon EC2 User Guide. You can optionally specify capacity weighting for each
+	// instance type. If no weight value is specified for an instance type, it is set
+	// to the default value "1". For more information about capacity weighting, see
+	// Instance Weighting for Amazon EC2 Auto Scaling
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-weighting.html)
+	// in the Amazon EC2 Auto Scaling User Guide.
 	//
 	// This member is required.
 	InstanceDefinitions []*types.InstanceDefinition
@@ -107,30 +111,33 @@ type CreateGameServerGroupInput struct {
 	// the template using either the template name or ID. For help with creating a
 	// launch template, see Creating a Launch Template for an Auto Scaling Group
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html)
-	// in the Amazon EC2 Auto Scaling User Guide.
+	// in the Amazon EC2 Auto Scaling User Guide. After the Auto Scaling group is
+	// created, update this value directly in the Auto Scaling group using the AWS
+	// console or APIs.
 	//
 	// This member is required.
 	LaunchTemplate *types.LaunchTemplateSpecification
 
 	// The maximum number of instances allowed in the EC2 Auto Scaling group. During
-	// autoscaling events, GameLift FleetIQ and EC2 do not scale up the group above
-	// this maximum.
+	// automatic scaling events, GameLift FleetIQ and EC2 do not scale up the group
+	// above this maximum. After the Auto Scaling group is created, update this value
+	// directly in the Auto Scaling group using the AWS console or APIs.
 	//
 	// This member is required.
 	MaxSize *int32
 
 	// The minimum number of instances allowed in the EC2 Auto Scaling group. During
-	// autoscaling events, GameLift FleetIQ and EC2 do not scale down the group below
-	// this minimum. In production, this value should be set to at least 1.
+	// automatic scaling events, GameLift FleetIQ and EC2 do not scale down the group
+	// below this minimum. In production, this value should be set to at least 1. After
+	// the Auto Scaling group is created, update this value directly in the Auto
+	// Scaling group using the AWS console or APIs.
 	//
 	// This member is required.
 	MinSize *int32
 
 	// The Amazon Resource Name (ARN
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) for an IAM
-	// role that allows Amazon GameLift to access your EC2 Auto Scaling groups. The
-	// submitted role is validated to ensure that it contains the necessary permissions
-	// for game server groups.
+	// role that allows Amazon GameLift to access your EC2 Auto Scaling groups.
 	//
 	// This member is required.
 	RoleArn *string
@@ -138,51 +145,60 @@ type CreateGameServerGroupInput struct {
 	// Configuration settings to define a scaling policy for the Auto Scaling group
 	// that is optimized for game hosting. The scaling policy uses the metric
 	// "PercentUtilizedGameServers" to maintain a buffer of idle game servers that can
-	// immediately accommodate new games and players. Once the game server and Auto
-	// Scaling groups are created, you can update the scaling policy settings directly
-	// in Auto Scaling Groups.
+	// immediately accommodate new games and players. After the Auto Scaling group is
+	// created, update this value directly in the Auto Scaling group using the AWS
+	// console or APIs.
 	AutoScalingPolicy *types.GameServerGroupAutoScalingPolicy
 
-	// The fallback balancing method to use for the game server group when Spot
-	// instances in a Region become unavailable or are not viable for game hosting.
-	// Once triggered, this method remains active until Spot instances can once again
-	// be used. Method options include:
+	// Indicates how GameLift FleetIQ balances the use of Spot Instances and On-Demand
+	// Instances in the game server group. Method options include the following:
 	//
-	//     * SPOT_ONLY -- If Spot instances are
-	// unavailable, the game server group provides no hosting capacity. No new
-	// instances are started, and the existing nonviable Spot instances are terminated
-	// (once current gameplay ends) and not replaced.
+	//     *
+	// SPOT_ONLY - Only Spot Instances are used in the game server group. If Spot
+	// Instances are unavailable or not viable for game hosting, the game server group
+	// provides no hosting capacity until Spot Instances can again be used. Until then,
+	// no new instances are started, and the existing nonviable Spot Instances are
+	// terminated (after current gameplay ends) and are not replaced.
 	//
-	//     * SPOT_PREFERRED -- If Spot
-	// instances are unavailable, the game server group continues to provide hosting
-	// capacity by using On-Demand instances. Existing nonviable Spot instances are
-	// terminated (once current gameplay ends) and replaced with new On-Demand
-	// instances.
+	//     *
+	// SPOT_PREFERRED - (default value) Spot Instances are used whenever available in
+	// the game server group. If Spot Instances are unavailable, the game server group
+	// continues to provide hosting capacity by falling back to On-Demand Instances.
+	// Existing nonviable Spot Instances are terminated (after current gameplay ends)
+	// and are replaced with new On-Demand Instances.
+	//
+	//     * ON_DEMAND_ONLY - Only
+	// On-Demand Instances are used in the game server group. No Spot Instances are
+	// used, even when available, while this balancing strategy is in force.
 	BalancingStrategy types.BalancingStrategy
 
 	// A flag that indicates whether instances in the game server group are protected
 	// from early termination. Unprotected instances that have active game servers
-	// running may by terminated during a scale-down event, causing players to be
+	// running might be terminated during a scale-down event, causing players to be
 	// dropped from the game. Protected instances cannot be terminated while there are
-	// active game servers running. An exception to this is Spot Instances, which may
-	// be terminated by AWS regardless of protection status. This property is set to
+	// active game servers running except in the event of a forced game server group
+	// deletion (see ). An exception to this is with Spot Instances, which can be
+	// terminated by AWS regardless of protection status. This property is set to
 	// NO_PROTECTION by default.
 	GameServerProtectionPolicy types.GameServerProtectionPolicy
 
 	// A list of labels to assign to the new game server group resource. Tags are
-	// developer-defined key-value pairs. Tagging AWS resources are useful for resource
+	// developer-defined key-value pairs. Tagging AWS resources is useful for resource
 	// management, access management, and cost allocation. For more information, see
 	// Tagging AWS Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the AWS
 	// General Reference. Once the resource is created, you can use TagResource,
-	// UntagResource, and ListTagsForResource to add, remove, and view tags. The
-	// maximum tag limit may be lower than stated. See the AWS General Reference for
-	// actual tagging limits.
+	// UntagResource, and ListTagsForResource to add, remove, and view tags,
+	// respectively. The maximum tag limit may be lower than stated. See the AWS
+	// General Reference for actual tagging limits.
 	Tags []*types.Tag
 
 	// A list of virtual private cloud (VPC) subnets to use with instances in the game
-	// server group. By default, all GameLift FleetIQ-supported availability zones are
-	// used; this parameter allows you to specify VPCs that you've set up.
+	// server group. By default, all GameLift FleetIQ-supported Availability Zones are
+	// used. You can use this parameter to specify VPCs that you've set up. This
+	// property cannot be updated after the game server group is created, and the
+	// corresponding Auto Scaling group will always use the property value that is set
+	// with this request, even if the Auto Scaling group is updated directly
 	VpcSubnets []*string
 }
 

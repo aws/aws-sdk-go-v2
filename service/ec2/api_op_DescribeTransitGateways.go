@@ -71,12 +71,11 @@ type DescribeTransitGatewaysInput struct {
 	//     * owner-id - The ID of the AWS account that owns the transit
 	// gateway.
 	//
-	//     * state - The state of the attachment (available | deleted |
-	// deleting | failed | modifying | pendingAcceptance | pending | rollingBack |
-	// rejected | rejecting).
+	//     * state - The state of the transit gateway (available | deleted |
+	// deleting | modifying | pending).
 	//
-	//     * transit-gateway-id - The ID of the transit
-	// gateway.
+	//     * transit-gateway-id - The ID of the
+	// transit gateway.
 	Filters []*types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the

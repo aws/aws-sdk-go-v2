@@ -700,6 +700,11 @@ func awsAwsjson11_serializeOpDocumentCreateEnvironmentEC2Input(v *CreateEnvironm
 		ok.String(*v.ClientRequestToken)
 	}
 
+	if len(v.ConnectionType) > 0 {
+		ok := object.Key("connectionType")
+		ok.String(string(v.ConnectionType))
+	}
+
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)

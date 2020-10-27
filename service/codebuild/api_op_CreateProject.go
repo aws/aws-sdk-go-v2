@@ -74,7 +74,7 @@ type CreateProjectInput struct {
 	// for encrypting the build output artifacts. You can use a cross-account KMS key
 	// to encrypt the build output artifacts if your service role has permission to
 	// that key. You can specify either the Amazon Resource Name (ARN) of the CMK or,
-	// if available, the CMK's alias (using the format alias/alias-name ).
+	// if available, the CMK's alias (using the format alias/).
 	EncryptionKey *string
 
 	// An array of ProjectFileSystemLocation objects for a CodeBuild build project. A

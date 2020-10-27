@@ -15,3 +15,19 @@ const (
 	JobExecutionStatusRemoved     JobExecutionStatus = "REMOVED"
 	JobExecutionStatusCanceled    JobExecutionStatus = "CANCELED"
 )
+
+// Values returns all known values for JobExecutionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (JobExecutionStatus) Values() []JobExecutionStatus {
+	return []JobExecutionStatus{
+		"QUEUED",
+		"IN_PROGRESS",
+		"SUCCEEDED",
+		"FAILED",
+		"TIMED_OUT",
+		"REJECTED",
+		"REMOVED",
+		"CANCELED",
+	}
+}

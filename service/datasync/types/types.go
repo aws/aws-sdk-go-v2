@@ -48,6 +48,30 @@ type FilterRule struct {
 	Value *string
 }
 
+// You can use API filters to narrow down the list of resources returned by
+// ListLocations. For example, to retrieve all your Amazon S3 locations, you can
+// use ListLocations with filter name LocationType S3 and Operator Equals.
+type LocationFilter struct {
+
+	// The name of the filter being used. Each API call supports a list of filters that
+	// are available for it (for example, LocationType for ListLocations).
+	//
+	// This member is required.
+	Name LocationFilterName
+
+	// The operator that is used to compare filter values (for example, Equals or
+	// Contains). For more about API filtering operators, see query-resources.
+	//
+	// This member is required.
+	Operator Operator
+
+	// The values that you want to filter for. For example, you might want to display
+	// only Amazon S3 locations.
+	//
+	// This member is required.
+	Values []*string
+}
+
 // Represents a single entry in a list of locations. LocationListEntry returns an
 // array that contains a list of locations when the ListLocations operation is
 // called.
@@ -101,7 +125,7 @@ type NfsMountOptions struct {
 // System (NFS) location.
 type OnPremConfig struct {
 
-	// ARNs)of the agents to use for an NFS location.
+	// ARNs of the agents to use for an NFS location.
 	//
 	// This member is required.
 	AgentArns []*string
@@ -191,10 +215,13 @@ type Options struct {
 	// series. For more information, see queue-task-execution.
 	TaskQueueing TaskQueueing
 
-	// TransferMode has two values: CHANGED and ALL. CHANGED performs an "incremental"
-	// or "delta sync", it compares file modification time between source and
-	// destination to determine which files need to be transferred. ALL skips
-	// destination inventory and transfers all files discovered on the source.
+	// A value that determines whether DataSync transfers only the data and metadata
+	// that differ between the source and the destination location, or whether DataSync
+	// transfers all the content from the source, without comparing to the destination
+	// location. CHANGED: DataSync copies only data or metadata that is new or
+	// different content from the source location to the destination location. ALL:
+	// DataSync copies all source location content to the destination, without
+	// comparing to existing content on the destination.
 	TransferMode TransferMode
 
 	// The user ID (UID) of the file's owner. Default value: INT_VALUE. This preserves
@@ -326,6 +353,31 @@ type TaskExecutionResultDetail struct {
 
 	// The status of the VERIFYING Phase.
 	VerifyStatus PhaseStatus
+}
+
+// You can use API filters to narrow down the list of resources returned by
+// ListTasks. For example, to retrieve all tasks on a source location, you can use
+// ListTasks with filter name LocationId and Operator Equals with the ARN for the
+// location.
+type TaskFilter struct {
+
+	// The name of the filter being used. Each API call supports a list of filters that
+	// are available for it. For example, LocationId for ListTasks.
+	//
+	// This member is required.
+	Name TaskFilterName
+
+	// The operator that is used to compare filter values (for example, Equals or
+	// Contains). For more about API filtering operators, see query-resources.
+	//
+	// This member is required.
+	Operator Operator
+
+	// The values that you want to filter for. For example, you might want to display
+	// only tasks for a specific destination location.
+	//
+	// This member is required.
+	Values []*string
 }
 
 // Represents a single entry in a list of tasks. TaskListEntry returns an array

@@ -37,7 +37,7 @@ type GetReplicationJobsInput struct {
 	// The token for the next set of results.
 	NextToken *string
 
-	// The identifier of the replication job.
+	// The ID of the replication job.
 	ReplicationJobId *string
 }
 

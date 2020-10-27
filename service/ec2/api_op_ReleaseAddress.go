@@ -48,9 +48,10 @@ type ReleaseAddressInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// The location that the IP address is released from. If you provide an incorrect
-	// network border group, you will receive an InvalidAddress.NotFound error. For
-	// more information, see Error Codes
+	// The set of Availability Zones, Local Zones, or Wavelength Zones from which AWS
+	// advertises IP addresses. If you provide an incorrect network border group, you
+	// will receive an InvalidAddress.NotFound error. For more information, see Error
+	// Codes
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html).
 	// You cannot use a network border group with EC2 Classic. If you attempt this
 	// operation on EC2 classic, you will receive an InvalidParameterCombination error.

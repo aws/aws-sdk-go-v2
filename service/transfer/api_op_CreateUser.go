@@ -39,30 +39,29 @@ type CreateUserInput struct {
 	// policies attached to this role will determine the level of access you want to
 	// provide your users when transferring files into and out of your Amazon S3 bucket
 	// or buckets. The IAM role should also contain a trust relationship that allows
-	// the file transfer protocol-enabled server to access your resources when
-	// servicing your users' transfer requests.
+	// the server to access your resources when servicing your users' transfer
+	// requests.
 	//
 	// This member is required.
 	Role *string
 
-	// A system-assigned unique identifier for a file transfer protocol-enabled server
-	// instance. This is the specific server that you added your user to.
+	// A system-assigned unique identifier for a server instance. This is the specific
+	// server that you added your user to.
 	//
 	// This member is required.
 	ServerId *string
 
-	// A unique string that identifies a user and is associated with a file transfer
-	// protocol-enabled server as specified by the ServerId. This user name must be a
-	// minimum of 3 and a maximum of 32 characters long. The following are valid
-	// characters: a-z, A-Z, 0-9, underscore, and hyphen. The user name can't start
-	// with a hyphen.
+	// A unique string that identifies a user and is associated with a as specified by
+	// the ServerId. This user name must be a minimum of 3 and a maximum of 100
+	// characters long. The following are valid characters: a-z, A-Z, 0-9, underscore
+	// '_', hyphen '-', period '.', and at sign '@'. The user name can't start with a
+	// hyphen, period, or at sign.
 	//
 	// This member is required.
 	UserName *string
 
-	// The landing directory (folder) for a user when they log in to the file transfer
-	// protocol-enabled server using the client. An example is
-	// your-Amazon-S3-bucket-name>/home/username .
+	// The landing directory (folder) for a user when they log in to the server using
+	// the client. An example is your-Amazon-S3-bucket-name>/home/username .
 	HomeDirectory *string
 
 	// Logical directory mappings that specify what Amazon S3 paths and keys should be
@@ -77,7 +76,7 @@ type CreateUserInput struct {
 	// the designated home directory ("chroot"). To do this, you can set Entry to '/'
 	// and set Target to the HomeDirectory parameter value. If the target of a logical
 	// directory entry does not exist in Amazon S3, the entry will be ignored. As a
-	// workaround, you can use the Amazon S3 api to create 0 byte objects as place
+	// workaround, you can use the Amazon S3 API to create 0 byte objects as place
 	// holders for your directory. If using the CLI, use the s3api call instead of s3
 	// so you can use the put-object operation. For example, you use the following: aws
 	// s3api put-object --bucket bucketname --key path/to/folder/. Make sure that the
@@ -85,11 +84,11 @@ type CreateUserInput struct {
 	HomeDirectoryMappings []*types.HomeDirectoryMapEntry
 
 	// The type of landing directory (folder) you want your users' home directory to be
-	// when they log into the file transfer protocol-enabled server. If you set it to
-	// PATH, the user will see the absolute Amazon S3 bucket paths as is in their file
-	// transfer protocol clients. If you set it LOGICAL, you will need to provide
-	// mappings in the HomeDirectoryMappings for how you want to make Amazon S3 paths
-	// visible to your users.
+	// when they log into the server. If you set it to PATH, the user will see the
+	// absolute Amazon S3 bucket paths as is in their file transfer protocol clients.
+	// If you set it LOGICAL, you will need to provide mappings in the
+	// HomeDirectoryMappings for how you want to make Amazon S3 paths visible to your
+	// users.
 	HomeDirectoryType types.HomeDirectoryType
 
 	// A scope-down policy for your user so you can use the same IAM role across
@@ -107,7 +106,7 @@ type CreateUserInput struct {
 	Policy *string
 
 	// The public portion of the Secure Shell (SSH) key used to authenticate the user
-	// to the file transfer protocol-enabled server.
+	// to the server.
 	SshPublicKeyBody *string
 
 	// Key-value pairs that can be used to group and search for users. Tags are
@@ -117,14 +116,12 @@ type CreateUserInput struct {
 
 type CreateUserOutput struct {
 
-	// The ID of the file transfer protocol-enabled server that the user is attached
-	// to.
+	// The ID of the server that the user is attached to.
 	//
 	// This member is required.
 	ServerId *string
 
-	// A unique string that identifies a user account associated with a file transfer
-	// protocol-enabled server.
+	// A unique string that identifies a user account associated with a server.
 	//
 	// This member is required.
 	UserName *string

@@ -255,8 +255,8 @@ func validateCustomizedMetricSpecification(v *types.CustomizedMetricSpecificatio
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CustomizedMetricSpecification"}
-	if len(v.Statistic) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Statistic"))
+	if v.Namespace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
 	}
 	if v.Dimensions != nil {
 		if err := validateMetricDimensions(v.Dimensions); err != nil {
@@ -266,8 +266,8 @@ func validateCustomizedMetricSpecification(v *types.CustomizedMetricSpecificatio
 	if v.MetricName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
 	}
-	if v.Namespace == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	if len(v.Statistic) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Statistic"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -281,11 +281,11 @@ func validateMetricDimension(v *types.MetricDimension) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MetricDimension"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -380,18 +380,18 @@ func validateTargetTrackingScalingPolicyConfiguration(v *types.TargetTrackingSca
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TargetTrackingScalingPolicyConfiguration"}
-	if v.CustomizedMetricSpecification != nil {
-		if err := validateCustomizedMetricSpecification(v.CustomizedMetricSpecification); err != nil {
-			invalidParams.AddNested("CustomizedMetricSpecification", err.(smithy.InvalidParamsError))
-		}
+	if v.TargetValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetValue"))
 	}
 	if v.PredefinedMetricSpecification != nil {
 		if err := validatePredefinedMetricSpecification(v.PredefinedMetricSpecification); err != nil {
 			invalidParams.AddNested("PredefinedMetricSpecification", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.TargetValue == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetValue"))
+	if v.CustomizedMetricSpecification != nil {
+		if err := validateCustomizedMetricSpecification(v.CustomizedMetricSpecification); err != nil {
+			invalidParams.AddNested("CustomizedMetricSpecification", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -405,17 +405,17 @@ func validateOpDeleteScalingPolicyInput(v *DeleteScalingPolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteScalingPolicyInput"}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
-	}
-	if len(v.ScalableDimension) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ScalableDimension"))
-	}
 	if len(v.ServiceNamespace) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceNamespace"))
 	}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
 	if v.PolicyName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
+	}
+	if len(v.ScalableDimension) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ScalableDimension"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -429,17 +429,17 @@ func validateOpDeleteScheduledActionInput(v *DeleteScheduledActionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteScheduledActionInput"}
-	if len(v.ScalableDimension) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ScalableDimension"))
+	if v.ScheduledActionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduledActionName"))
 	}
 	if len(v.ServiceNamespace) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceNamespace"))
 	}
+	if len(v.ScalableDimension) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ScalableDimension"))
+	}
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
-	}
-	if v.ScheduledActionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ScheduledActionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -453,14 +453,14 @@ func validateOpDeregisterScalableTargetInput(v *DeregisterScalableTargetInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeregisterScalableTargetInput"}
-	if len(v.ServiceNamespace) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ServiceNamespace"))
-	}
 	if len(v.ScalableDimension) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ScalableDimension"))
 	}
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if len(v.ServiceNamespace) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceNamespace"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -534,27 +534,27 @@ func validateOpPutScalingPolicyInput(v *PutScalingPolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutScalingPolicyInput"}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
-	}
-	if v.TargetTrackingScalingPolicyConfiguration != nil {
-		if err := validateTargetTrackingScalingPolicyConfiguration(v.TargetTrackingScalingPolicyConfiguration); err != nil {
-			invalidParams.AddNested("TargetTrackingScalingPolicyConfiguration", err.(smithy.InvalidParamsError))
-		}
-	}
 	if len(v.ScalableDimension) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ScalableDimension"))
 	}
-	if v.StepScalingPolicyConfiguration != nil {
-		if err := validateStepScalingPolicyConfiguration(v.StepScalingPolicyConfiguration); err != nil {
-			invalidParams.AddNested("StepScalingPolicyConfiguration", err.(smithy.InvalidParamsError))
-		}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if v.PolicyName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
 	}
 	if len(v.ServiceNamespace) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceNamespace"))
+	}
+	if v.StepScalingPolicyConfiguration != nil {
+		if err := validateStepScalingPolicyConfiguration(v.StepScalingPolicyConfiguration); err != nil {
+			invalidParams.AddNested("StepScalingPolicyConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TargetTrackingScalingPolicyConfiguration != nil {
+		if err := validateTargetTrackingScalingPolicyConfiguration(v.TargetTrackingScalingPolicyConfiguration); err != nil {
+			invalidParams.AddNested("TargetTrackingScalingPolicyConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -568,17 +568,17 @@ func validateOpPutScheduledActionInput(v *PutScheduledActionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutScheduledActionInput"}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
-	}
 	if len(v.ScalableDimension) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ScalableDimension"))
+	}
+	if v.ScheduledActionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduledActionName"))
 	}
 	if len(v.ServiceNamespace) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceNamespace"))
 	}
-	if v.ScheduledActionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ScheduledActionName"))
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -592,14 +592,14 @@ func validateOpRegisterScalableTargetInput(v *RegisterScalableTargetInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RegisterScalableTargetInput"}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
-	}
 	if len(v.ServiceNamespace) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceNamespace"))
 	}
 	if len(v.ScalableDimension) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ScalableDimension"))
+	}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -52,6 +52,9 @@ type CreateEnvironmentEC2Input struct {
 	// in the Amazon EC2 API Reference.
 	ClientRequestToken *string
 
+	// The connection type used for connecting to an Amazon EC2 environment.
+	ConnectionType types.ConnectionType
+
 	// The description of the environment to create.
 	Description *string
 

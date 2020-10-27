@@ -201,11 +201,11 @@ func validateInputDataConfig(v *types.InputDataConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InputDataConfig"}
-	if v.S3Uri == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
-	}
 	if v.ContentType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContentType"))
+	}
+	if v.S3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -282,11 +282,11 @@ func validateOpGetTerminologyInput(v *GetTerminologyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetTerminologyInput"}
-	if len(v.TerminologyDataFormat) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("TerminologyDataFormat"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.TerminologyDataFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TerminologyDataFormat"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -300,15 +300,15 @@ func validateOpImportTerminologyInput(v *ImportTerminologyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ImportTerminologyInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.TerminologyData == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TerminologyData"))
 	} else if v.TerminologyData != nil {
 		if err := validateTerminologyData(v.TerminologyData); err != nil {
 			invalidParams.AddNested("TerminologyData", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.EncryptionKey != nil {
 		if err := validateEncryptionKey(v.EncryptionKey); err != nil {
@@ -330,18 +330,8 @@ func validateOpStartTextTranslationJobInput(v *StartTextTranslationJobInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartTextTranslationJobInput"}
-	if v.ClientToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
-	}
 	if v.DataAccessRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataAccessRoleArn"))
-	}
-	if v.InputDataConfig == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InputDataConfig"))
-	} else if v.InputDataConfig != nil {
-		if err := validateInputDataConfig(v.InputDataConfig); err != nil {
-			invalidParams.AddNested("InputDataConfig", err.(smithy.InvalidParamsError))
-		}
 	}
 	if v.OutputDataConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutputDataConfig"))
@@ -350,11 +340,21 @@ func validateOpStartTextTranslationJobInput(v *StartTextTranslationJobInput) err
 			invalidParams.AddNested("OutputDataConfig", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.SourceLanguageCode == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceLanguageCode"))
+	if v.InputDataConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputDataConfig"))
+	} else if v.InputDataConfig != nil {
+		if err := validateInputDataConfig(v.InputDataConfig); err != nil {
+			invalidParams.AddNested("InputDataConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
 	}
 	if v.TargetLanguageCodes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetLanguageCodes"))
+	}
+	if v.SourceLanguageCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceLanguageCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -383,14 +383,14 @@ func validateOpTranslateTextInput(v *TranslateTextInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TranslateTextInput"}
-	if v.SourceLanguageCode == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceLanguageCode"))
-	}
 	if v.Text == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Text"))
 	}
 	if v.TargetLanguageCode == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetLanguageCode"))
+	}
+	if v.SourceLanguageCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceLanguageCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

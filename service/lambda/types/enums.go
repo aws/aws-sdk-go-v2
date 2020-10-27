@@ -11,12 +11,32 @@ const (
 	EventSourcePositionAt_timestamp EventSourcePosition = "AT_TIMESTAMP"
 )
 
+// Values returns all known values for EventSourcePosition. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EventSourcePosition) Values() []EventSourcePosition {
+	return []EventSourcePosition{
+		"TRIM_HORIZON",
+		"LATEST",
+		"AT_TIMESTAMP",
+	}
+}
+
 type FunctionVersion string
 
 // Enum values for FunctionVersion
 const (
 	FunctionVersionAll FunctionVersion = "ALL"
 )
+
+// Values returns all known values for FunctionVersion. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FunctionVersion) Values() []FunctionVersion {
+	return []FunctionVersion{
+		"ALL",
+	}
+}
 
 type InvocationType string
 
@@ -27,6 +47,17 @@ const (
 	InvocationTypeDryrun          InvocationType = "DryRun"
 )
 
+// Values returns all known values for InvocationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InvocationType) Values() []InvocationType {
+	return []InvocationType{
+		"Event",
+		"RequestResponse",
+		"DryRun",
+	}
+}
+
 type LastUpdateStatus string
 
 // Enum values for LastUpdateStatus
@@ -35,6 +66,17 @@ const (
 	LastUpdateStatusFailed     LastUpdateStatus = "Failed"
 	LastUpdateStatusInprogress LastUpdateStatus = "InProgress"
 )
+
+// Values returns all known values for LastUpdateStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LastUpdateStatus) Values() []LastUpdateStatus {
+	return []LastUpdateStatus{
+		"Successful",
+		"Failed",
+		"InProgress",
+	}
+}
 
 type LastUpdateStatusReasonCode string
 
@@ -49,6 +91,21 @@ const (
 	LastUpdateStatusReasonCodeInvalidsecuritygroup        LastUpdateStatusReasonCode = "InvalidSecurityGroup"
 )
 
+// Values returns all known values for LastUpdateStatusReasonCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LastUpdateStatusReasonCode) Values() []LastUpdateStatusReasonCode {
+	return []LastUpdateStatusReasonCode{
+		"EniLimitExceeded",
+		"InsufficientRolePermissions",
+		"InvalidConfiguration",
+		"InternalError",
+		"SubnetOutOfIPAddresses",
+		"InvalidSubnet",
+		"InvalidSecurityGroup",
+	}
+}
+
 type LogType string
 
 // Enum values for LogType
@@ -56,6 +113,16 @@ const (
 	LogTypeNone LogType = "None"
 	LogTypeTail LogType = "Tail"
 )
+
+// Values returns all known values for LogType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (LogType) Values() []LogType {
+	return []LogType{
+		"None",
+		"Tail",
+	}
+}
 
 type ProvisionedConcurrencyStatusEnum string
 
@@ -65,6 +132,18 @@ const (
 	ProvisionedConcurrencyStatusEnumReady       ProvisionedConcurrencyStatusEnum = "READY"
 	ProvisionedConcurrencyStatusEnumFailed      ProvisionedConcurrencyStatusEnum = "FAILED"
 )
+
+// Values returns all known values for ProvisionedConcurrencyStatusEnum. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ProvisionedConcurrencyStatusEnum) Values() []ProvisionedConcurrencyStatusEnum {
+	return []ProvisionedConcurrencyStatusEnum{
+		"IN_PROGRESS",
+		"READY",
+		"FAILED",
+	}
+}
 
 type Runtime string
 
@@ -77,6 +156,7 @@ const (
 	RuntimeNodejs10x    Runtime = "nodejs10.x"
 	RuntimeNodejs12x    Runtime = "nodejs12.x"
 	RuntimeJava8        Runtime = "java8"
+	RuntimeJava8al2     Runtime = "java8.al2"
 	RuntimeJava11       Runtime = "java11"
 	RuntimePython27     Runtime = "python2.7"
 	RuntimePython36     Runtime = "python3.6"
@@ -91,7 +171,39 @@ const (
 	RuntimeRuby25       Runtime = "ruby2.5"
 	RuntimeRuby27       Runtime = "ruby2.7"
 	RuntimeProvided     Runtime = "provided"
+	RuntimeProvidedal2  Runtime = "provided.al2"
 )
+
+// Values returns all known values for Runtime. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Runtime) Values() []Runtime {
+	return []Runtime{
+		"nodejs",
+		"nodejs4.3",
+		"nodejs6.10",
+		"nodejs8.10",
+		"nodejs10.x",
+		"nodejs12.x",
+		"java8",
+		"java8.al2",
+		"java11",
+		"python2.7",
+		"python3.6",
+		"python3.7",
+		"python3.8",
+		"dotnetcore1.0",
+		"dotnetcore2.0",
+		"dotnetcore2.1",
+		"dotnetcore3.1",
+		"nodejs4.3-edge",
+		"go1.x",
+		"ruby2.5",
+		"ruby2.7",
+		"provided",
+		"provided.al2",
+	}
+}
 
 type State string
 
@@ -102,6 +214,18 @@ const (
 	StateInactive State = "Inactive"
 	StateFailed   State = "Failed"
 )
+
+// Values returns all known values for State. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (State) Values() []State {
+	return []State{
+		"Pending",
+		"Active",
+		"Inactive",
+		"Failed",
+	}
+}
 
 type StateReasonCode string
 
@@ -119,6 +243,24 @@ const (
 	StateReasonCodeInvalidsecuritygroup        StateReasonCode = "InvalidSecurityGroup"
 )
 
+// Values returns all known values for StateReasonCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StateReasonCode) Values() []StateReasonCode {
+	return []StateReasonCode{
+		"Idle",
+		"Creating",
+		"Restoring",
+		"EniLimitExceeded",
+		"InsufficientRolePermissions",
+		"InvalidConfiguration",
+		"InternalError",
+		"SubnetOutOfIPAddresses",
+		"InvalidSubnet",
+		"InvalidSecurityGroup",
+	}
+}
+
 type ThrottleReason string
 
 // Enum values for ThrottleReason
@@ -130,6 +272,19 @@ const (
 	ThrottleReasonCallerratelimitexceeded                           ThrottleReason = "CallerRateLimitExceeded"
 )
 
+// Values returns all known values for ThrottleReason. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ThrottleReason) Values() []ThrottleReason {
+	return []ThrottleReason{
+		"ConcurrentInvocationLimitExceeded",
+		"FunctionInvocationRateLimitExceeded",
+		"ReservedFunctionConcurrentInvocationLimitExceeded",
+		"ReservedFunctionInvocationRateLimitExceeded",
+		"CallerRateLimitExceeded",
+	}
+}
+
 type TracingMode string
 
 // Enum values for TracingMode
@@ -137,3 +292,13 @@ const (
 	TracingModeActive      TracingMode = "Active"
 	TracingModePassthrough TracingMode = "PassThrough"
 )
+
+// Values returns all known values for TracingMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TracingMode) Values() []TracingMode {
+	return []TracingMode{
+		"Active",
+		"PassThrough",
+	}
+}

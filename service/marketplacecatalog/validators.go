@@ -234,11 +234,11 @@ func validateOpDescribeChangeSetInput(v *DescribeChangeSetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeChangeSetInput"}
-	if v.Catalog == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
-	}
 	if v.ChangeSetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChangeSetId"))
+	}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -285,11 +285,11 @@ func validateOpListEntitiesInput(v *ListEntitiesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListEntitiesInput"}
-	if v.EntityType == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EntityType"))
-	}
 	if v.Catalog == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.EntityType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

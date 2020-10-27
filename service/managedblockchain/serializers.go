@@ -1999,6 +1999,11 @@ func awsRestjson1_serializeDocumentNodeConfiguration(v *types.NodeConfiguration,
 		}
 	}
 
+	if len(v.StateDB) > 0 {
+		ok := object.Key("StateDB")
+		ok.String(string(v.StateDB))
+	}
+
 	return nil
 }
 

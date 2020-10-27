@@ -11,6 +11,17 @@ const (
 	AlgorithmSpecRsaes_oaep_sha_256 AlgorithmSpec = "RSAES_OAEP_SHA_256"
 )
 
+// Values returns all known values for AlgorithmSpec. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AlgorithmSpec) Values() []AlgorithmSpec {
+	return []AlgorithmSpec{
+		"RSAES_PKCS1_V1_5",
+		"RSAES_OAEP_SHA_1",
+		"RSAES_OAEP_SHA_256",
+	}
+}
+
 type ConnectionErrorCodeType string
 
 // Enum values for ConnectionErrorCodeType
@@ -26,6 +37,23 @@ const (
 	ConnectionErrorCodeTypeSubnet_not_found           ConnectionErrorCodeType = "SUBNET_NOT_FOUND"
 )
 
+// Values returns all known values for ConnectionErrorCodeType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionErrorCodeType) Values() []ConnectionErrorCodeType {
+	return []ConnectionErrorCodeType{
+		"INVALID_CREDENTIALS",
+		"CLUSTER_NOT_FOUND",
+		"NETWORK_ERRORS",
+		"INTERNAL_ERROR",
+		"INSUFFICIENT_CLOUDHSM_HSMS",
+		"USER_LOCKED_OUT",
+		"USER_NOT_FOUND",
+		"USER_LOGGED_IN",
+		"SUBNET_NOT_FOUND",
+	}
+}
+
 type ConnectionStateType string
 
 // Enum values for ConnectionStateType
@@ -36,6 +64,19 @@ const (
 	ConnectionStateTypeDisconnected  ConnectionStateType = "DISCONNECTED"
 	ConnectionStateTypeDisconnecting ConnectionStateType = "DISCONNECTING"
 )
+
+// Values returns all known values for ConnectionStateType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionStateType) Values() []ConnectionStateType {
+	return []ConnectionStateType{
+		"CONNECTED",
+		"CONNECTING",
+		"FAILED",
+		"DISCONNECTED",
+		"DISCONNECTING",
+	}
+}
 
 type CustomerMasterKeySpec string
 
@@ -51,6 +92,22 @@ const (
 	CustomerMasterKeySpecSymmetric_default CustomerMasterKeySpec = "SYMMETRIC_DEFAULT"
 )
 
+// Values returns all known values for CustomerMasterKeySpec. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CustomerMasterKeySpec) Values() []CustomerMasterKeySpec {
+	return []CustomerMasterKeySpec{
+		"RSA_2048",
+		"RSA_3072",
+		"RSA_4096",
+		"ECC_NIST_P256",
+		"ECC_NIST_P384",
+		"ECC_NIST_P521",
+		"ECC_SECG_P256K1",
+		"SYMMETRIC_DEFAULT",
+	}
+}
+
 type DataKeyPairSpec string
 
 // Enum values for DataKeyPairSpec
@@ -64,6 +121,21 @@ const (
 	DataKeyPairSpecEcc_secg_p256k1 DataKeyPairSpec = "ECC_SECG_P256K1"
 )
 
+// Values returns all known values for DataKeyPairSpec. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataKeyPairSpec) Values() []DataKeyPairSpec {
+	return []DataKeyPairSpec{
+		"RSA_2048",
+		"RSA_3072",
+		"RSA_4096",
+		"ECC_NIST_P256",
+		"ECC_NIST_P384",
+		"ECC_NIST_P521",
+		"ECC_SECG_P256K1",
+	}
+}
+
 type DataKeySpec string
 
 // Enum values for DataKeySpec
@@ -71,6 +143,16 @@ const (
 	DataKeySpecAes_256 DataKeySpec = "AES_256"
 	DataKeySpecAes_128 DataKeySpec = "AES_128"
 )
+
+// Values returns all known values for DataKeySpec. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DataKeySpec) Values() []DataKeySpec {
+	return []DataKeySpec{
+		"AES_256",
+		"AES_128",
+	}
+}
 
 type EncryptionAlgorithmSpec string
 
@@ -81,6 +163,17 @@ const (
 	EncryptionAlgorithmSpecRsaes_oaep_sha_256 EncryptionAlgorithmSpec = "RSAES_OAEP_SHA_256"
 )
 
+// Values returns all known values for EncryptionAlgorithmSpec. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionAlgorithmSpec) Values() []EncryptionAlgorithmSpec {
+	return []EncryptionAlgorithmSpec{
+		"SYMMETRIC_DEFAULT",
+		"RSAES_OAEP_SHA_1",
+		"RSAES_OAEP_SHA_256",
+	}
+}
+
 type ExpirationModelType string
 
 // Enum values for ExpirationModelType
@@ -88,6 +181,16 @@ const (
 	ExpirationModelTypeKey_material_expires         ExpirationModelType = "KEY_MATERIAL_EXPIRES"
 	ExpirationModelTypeKey_material_does_not_expire ExpirationModelType = "KEY_MATERIAL_DOES_NOT_EXPIRE"
 )
+
+// Values returns all known values for ExpirationModelType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExpirationModelType) Values() []ExpirationModelType {
+	return []ExpirationModelType{
+		"KEY_MATERIAL_EXPIRES",
+		"KEY_MATERIAL_DOES_NOT_EXPIRE",
+	}
+}
 
 type GrantOperation string
 
@@ -109,6 +212,28 @@ const (
 	GrantOperationGeneratedatakeypairwithoutplaintext GrantOperation = "GenerateDataKeyPairWithoutPlaintext"
 )
 
+// Values returns all known values for GrantOperation. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (GrantOperation) Values() []GrantOperation {
+	return []GrantOperation{
+		"Decrypt",
+		"Encrypt",
+		"GenerateDataKey",
+		"GenerateDataKeyWithoutPlaintext",
+		"ReEncryptFrom",
+		"ReEncryptTo",
+		"Sign",
+		"Verify",
+		"GetPublicKey",
+		"CreateGrant",
+		"RetireGrant",
+		"DescribeKey",
+		"GenerateDataKeyPair",
+		"GenerateDataKeyPairWithoutPlaintext",
+	}
+}
+
 type KeyManagerType string
 
 // Enum values for KeyManagerType
@@ -116,6 +241,16 @@ const (
 	KeyManagerTypeAws      KeyManagerType = "AWS"
 	KeyManagerTypeCustomer KeyManagerType = "CUSTOMER"
 )
+
+// Values returns all known values for KeyManagerType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (KeyManagerType) Values() []KeyManagerType {
+	return []KeyManagerType{
+		"AWS",
+		"CUSTOMER",
+	}
+}
 
 type KeyState string
 
@@ -128,6 +263,19 @@ const (
 	KeyStateUnavailable     KeyState = "Unavailable"
 )
 
+// Values returns all known values for KeyState. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (KeyState) Values() []KeyState {
+	return []KeyState{
+		"Enabled",
+		"Disabled",
+		"PendingDeletion",
+		"PendingImport",
+		"Unavailable",
+	}
+}
+
 type KeyUsageType string
 
 // Enum values for KeyUsageType
@@ -135,6 +283,16 @@ const (
 	KeyUsageTypeSign_verify     KeyUsageType = "SIGN_VERIFY"
 	KeyUsageTypeEncrypt_decrypt KeyUsageType = "ENCRYPT_DECRYPT"
 )
+
+// Values returns all known values for KeyUsageType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (KeyUsageType) Values() []KeyUsageType {
+	return []KeyUsageType{
+		"SIGN_VERIFY",
+		"ENCRYPT_DECRYPT",
+	}
+}
 
 type MessageType string
 
@@ -144,6 +302,16 @@ const (
 	MessageTypeDigest MessageType = "DIGEST"
 )
 
+// Values returns all known values for MessageType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MessageType) Values() []MessageType {
+	return []MessageType{
+		"RAW",
+		"DIGEST",
+	}
+}
+
 type OriginType string
 
 // Enum values for OriginType
@@ -152,6 +320,17 @@ const (
 	OriginTypeExternal     OriginType = "EXTERNAL"
 	OriginTypeAws_cloudhsm OriginType = "AWS_CLOUDHSM"
 )
+
+// Values returns all known values for OriginType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (OriginType) Values() []OriginType {
+	return []OriginType{
+		"AWS_KMS",
+		"EXTERNAL",
+		"AWS_CLOUDHSM",
+	}
+}
 
 type SigningAlgorithmSpec string
 
@@ -168,9 +347,35 @@ const (
 	SigningAlgorithmSpecEcdsa_sha_512             SigningAlgorithmSpec = "ECDSA_SHA_512"
 )
 
+// Values returns all known values for SigningAlgorithmSpec. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SigningAlgorithmSpec) Values() []SigningAlgorithmSpec {
+	return []SigningAlgorithmSpec{
+		"RSASSA_PSS_SHA_256",
+		"RSASSA_PSS_SHA_384",
+		"RSASSA_PSS_SHA_512",
+		"RSASSA_PKCS1_V1_5_SHA_256",
+		"RSASSA_PKCS1_V1_5_SHA_384",
+		"RSASSA_PKCS1_V1_5_SHA_512",
+		"ECDSA_SHA_256",
+		"ECDSA_SHA_384",
+		"ECDSA_SHA_512",
+	}
+}
+
 type WrappingKeySpec string
 
 // Enum values for WrappingKeySpec
 const (
 	WrappingKeySpecRsa_2048 WrappingKeySpec = "RSA_2048"
 )
+
+// Values returns all known values for WrappingKeySpec. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WrappingKeySpec) Values() []WrappingKeySpec {
+	return []WrappingKeySpec{
+		"RSA_2048",
+	}
+}

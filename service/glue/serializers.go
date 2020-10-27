@@ -567,6 +567,52 @@ func (m *awsAwsjson11_serializeOpBatchStopJobRun) HandleSerialize(ctx context.Co
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpBatchUpdatePartition struct {
+}
+
+func (*awsAwsjson11_serializeOpBatchUpdatePartition) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpBatchUpdatePartition) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchUpdatePartitionInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.BatchUpdatePartition")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentBatchUpdatePartitionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpCancelMLTaskRun struct {
 }
 
@@ -3266,6 +3312,52 @@ func (m *awsAwsjson11_serializeOpGetPartition) HandleSerialize(ctx context.Conte
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentGetPartitionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpGetPartitionIndexes struct {
+}
+
+func (*awsAwsjson11_serializeOpGetPartitionIndexes) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetPartitionIndexes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetPartitionIndexesInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetPartitionIndexes")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetPartitionIndexesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -6190,6 +6282,21 @@ func awsAwsjson11_serializeDocumentActionList(v []*types.Action, value smithyjso
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAdditionalPlanOptionsMap(v map[string]*string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			om.Null()
+			continue
+		}
+		om.String(*v[key])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentBatchDeletePartitionValueList(v []*types.PartitionValueList, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -6265,6 +6372,44 @@ func awsAwsjson11_serializeDocumentBatchStopJobRunJobRunIdList(v []*string, valu
 			continue
 		}
 		av.String(*v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentBatchUpdatePartitionRequestEntry(v *types.BatchUpdatePartitionRequestEntry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PartitionInput != nil {
+		ok := object.Key("PartitionInput")
+		if err := awsAwsjson11_serializeDocumentPartitionInput(v.PartitionInput, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PartitionValueList != nil {
+		ok := object.Key("PartitionValueList")
+		if err := awsAwsjson11_serializeDocumentBoundedPartitionValueList(v.PartitionValueList, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentBatchUpdatePartitionRequestEntryList(v []*types.BatchUpdatePartitionRequestEntry, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			av.Null()
+			continue
+		}
+		if err := awsAwsjson11_serializeDocumentBatchUpdatePartitionRequestEntry(v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -6860,6 +7005,13 @@ func awsAwsjson11_serializeDocumentCrawlerTargets(v *types.CrawlerTargets, value
 	if v.JdbcTargets != nil {
 		ok := object.Key("JdbcTargets")
 		if err := awsAwsjson11_serializeDocumentJdbcTargetList(v.JdbcTargets, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MongoDBTargets != nil {
+		ok := object.Key("MongoDBTargets")
+		if err := awsAwsjson11_serializeDocumentMongoDBTargetList(v.MongoDBTargets, ok); err != nil {
 			return err
 		}
 	}
@@ -7690,6 +7842,21 @@ func awsAwsjson11_serializeDocumentJobUpdate(v *types.JobUpdate, value smithyjso
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentKeyList(v []*string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			av.Null()
+			continue
+		}
+		av.String(*v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentLocation(v *types.Location, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7844,6 +8011,45 @@ func awsAwsjson11_serializeDocumentMatchCriteria(v []*string, value smithyjson.V
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentMongoDBTarget(v *types.MongoDBTarget, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConnectionName != nil {
+		ok := object.Key("ConnectionName")
+		ok.String(*v.ConnectionName)
+	}
+
+	if v.Path != nil {
+		ok := object.Key("Path")
+		ok.String(*v.Path)
+	}
+
+	if v.ScanAll != nil {
+		ok := object.Key("ScanAll")
+		ok.Boolean(*v.ScanAll)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentMongoDBTargetList(v []*types.MongoDBTarget, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			av.Null()
+			continue
+		}
+		if err := awsAwsjson11_serializeDocumentMongoDBTarget(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentNameStringList(v []*string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -7946,6 +8152,42 @@ func awsAwsjson11_serializeDocumentParametersMap(v map[string]*string, value smi
 			continue
 		}
 		om.String(*v[key])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPartitionIndex(v *types.PartitionIndex, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IndexName != nil {
+		ok := object.Key("IndexName")
+		ok.String(*v.IndexName)
+	}
+
+	if v.Keys != nil {
+		ok := object.Key("Keys")
+		if err := awsAwsjson11_serializeDocumentKeyList(v.Keys, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPartitionIndexList(v []*types.PartitionIndex, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			av.Null()
+			continue
+		}
+		if err := awsAwsjson11_serializeDocumentPartitionIndex(v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -8163,6 +8405,18 @@ func awsAwsjson11_serializeDocumentPublicKeysList(v []*string, value smithyjson.
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentRecrawlPolicy(v *types.RecrawlPolicy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.RecrawlBehavior) > 0 {
+		ok := object.Key("RecrawlBehavior")
+		ok.String(string(v.RecrawlBehavior))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentResourceUri(v *types.ResourceUri, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8234,6 +8488,11 @@ func awsAwsjson11_serializeDocumentS3EncryptionList(v []*types.S3Encryption, val
 func awsAwsjson11_serializeDocumentS3Target(v *types.S3Target, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ConnectionName != nil {
+		ok := object.Key("ConnectionName")
+		ok.String(*v.ConnectionName)
+	}
 
 	if v.Exclusions != nil {
 		ok := object.Key("Exclusions")
@@ -9350,6 +9609,35 @@ func awsAwsjson11_serializeOpDocumentBatchStopJobRunInput(v *BatchStopJobRunInpu
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentBatchUpdatePartitionInput(v *BatchUpdatePartitionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CatalogId != nil {
+		ok := object.Key("CatalogId")
+		ok.String(*v.CatalogId)
+	}
+
+	if v.DatabaseName != nil {
+		ok := object.Key("DatabaseName")
+		ok.String(*v.DatabaseName)
+	}
+
+	if v.Entries != nil {
+		ok := object.Key("Entries")
+		if err := awsAwsjson11_serializeDocumentBatchUpdatePartitionRequestEntryList(v.Entries, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TableName != nil {
+		ok := object.Key("TableName")
+		ok.String(*v.TableName)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentCancelMLTaskRunInput(v *CancelMLTaskRunInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -9455,6 +9743,13 @@ func awsAwsjson11_serializeOpDocumentCreateCrawlerInput(v *CreateCrawlerInput, v
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if v.RecrawlPolicy != nil {
+		ok := object.Key("RecrawlPolicy")
+		if err := awsAwsjson11_serializeDocumentRecrawlPolicy(v.RecrawlPolicy, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Role != nil {
@@ -9882,6 +10177,13 @@ func awsAwsjson11_serializeOpDocumentCreateTableInput(v *CreateTableInput, value
 		ok.String(*v.DatabaseName)
 	}
 
+	if v.PartitionIndexes != nil {
+		ok := object.Key("PartitionIndexes")
+		if err := awsAwsjson11_serializeDocumentPartitionIndexList(v.PartitionIndexes, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TableInput != nil {
 		ok := object.Key("TableInput")
 		if err := awsAwsjson11_serializeDocumentTableInput(v.TableInput, ok); err != nil {
@@ -9988,6 +10290,11 @@ func awsAwsjson11_serializeOpDocumentCreateWorkflowInput(v *CreateWorkflowInput,
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
+	}
+
+	if v.MaxConcurrentRuns != nil {
+		ok := object.Key("MaxConcurrentRuns")
+		ok.Integer(*v.MaxConcurrentRuns)
 	}
 
 	if v.Name != nil {
@@ -10839,6 +11146,33 @@ func awsAwsjson11_serializeOpDocumentGetMLTransformsInput(v *GetMLTransformsInpu
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentGetPartitionIndexesInput(v *GetPartitionIndexesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CatalogId != nil {
+		ok := object.Key("CatalogId")
+		ok.String(*v.CatalogId)
+	}
+
+	if v.DatabaseName != nil {
+		ok := object.Key("DatabaseName")
+		ok.String(*v.DatabaseName)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.TableName != nil {
+		ok := object.Key("TableName")
+		ok.String(*v.TableName)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentGetPartitionInput(v *GetPartitionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -10915,6 +11249,13 @@ func awsAwsjson11_serializeOpDocumentGetPartitionsInput(v *GetPartitionsInput, v
 func awsAwsjson11_serializeOpDocumentGetPlanInput(v *GetPlanInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AdditionalPlanOptionsMap != nil {
+		ok := object.Key("AdditionalPlanOptionsMap")
+		if err := awsAwsjson11_serializeDocumentAdditionalPlanOptionsMap(v.AdditionalPlanOptionsMap, ok); err != nil {
+			return err
+		}
+	}
 
 	if len(v.Language) > 0 {
 		ok := object.Key("Language")
@@ -12064,6 +12405,13 @@ func awsAwsjson11_serializeOpDocumentUpdateCrawlerInput(v *UpdateCrawlerInput, v
 		ok.String(*v.Name)
 	}
 
+	if v.RecrawlPolicy != nil {
+		ok := object.Key("RecrawlPolicy")
+		if err := awsAwsjson11_serializeDocumentRecrawlPolicy(v.RecrawlPolicy, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Role != nil {
 		ok := object.Key("Role")
 		ok.String(*v.Role)
@@ -12404,6 +12752,11 @@ func awsAwsjson11_serializeOpDocumentUpdateWorkflowInput(v *UpdateWorkflowInput,
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
+	}
+
+	if v.MaxConcurrentRuns != nil {
+		ok := object.Key("MaxConcurrentRuns")
+		ok.Integer(*v.MaxConcurrentRuns)
 	}
 
 	if v.Name != nil {

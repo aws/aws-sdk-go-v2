@@ -116,8 +116,12 @@ var defaultPartitions = endpoints.Partitions{
 		RegionRegex:    regexp.MustCompile("^us\\-gov\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
-			"us-gov-east-1": endpoints.Endpoint{},
-			"us-gov-west-1": endpoints.Endpoint{},
+			"us-gov-east-1": endpoints.Endpoint{
+				Protocols: []string{"http", "https"},
+			},
+			"us-gov-west-1": endpoints.Endpoint{
+				Protocols: []string{"http", "https"},
+			},
 		},
 	},
 }

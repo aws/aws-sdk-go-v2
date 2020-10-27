@@ -31,7 +31,7 @@ func (c *Client) ImportSshPublicKey(ctx context.Context, params *ImportSshPublic
 
 type ImportSshPublicKeyInput struct {
 
-	// A system-assigned unique identifier for a file transfer protocol-enabled server.
+	// A system-assigned unique identifier for a server.
 	//
 	// This member is required.
 	ServerId *string
@@ -41,19 +41,18 @@ type ImportSshPublicKeyInput struct {
 	// This member is required.
 	SshPublicKeyBody *string
 
-	// The name of the user account that is assigned to one or more file transfer
-	// protocol-enabled servers.
+	// The name of the user account that is assigned to one or more servers.
 	//
 	// This member is required.
 	UserName *string
 }
 
-// Identifies the user, the file transfer protocol-enabled server they belong to,
-// and the identifier of the SSH public key associated with that user. A user can
-// have more than one key on each server that they are associated with.
+// Identifies the user, the server they belong to, and the identifier of the SSH
+// public key associated with that user. A user can have more than one key on each
+// server that they are associated with.
 type ImportSshPublicKeyOutput struct {
 
-	// A system-assigned unique identifier for a file transfer protocol-enabled server.
+	// A system-assigned unique identifier for a server.
 	//
 	// This member is required.
 	ServerId *string

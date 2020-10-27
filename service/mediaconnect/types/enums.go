@@ -11,6 +11,33 @@ const (
 	AlgorithmAes256 Algorithm = "aes256"
 )
 
+// Values returns all known values for Algorithm. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Algorithm) Values() []Algorithm {
+	return []Algorithm{
+		"aes128",
+		"aes192",
+		"aes256",
+	}
+}
+
+type DurationUnits string
+
+// Enum values for DurationUnits
+const (
+	DurationUnitsMonths DurationUnits = "MONTHS"
+)
+
+// Values returns all known values for DurationUnits. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DurationUnits) Values() []DurationUnits {
+	return []DurationUnits{
+		"MONTHS",
+	}
+}
+
 type EntitlementStatus string
 
 // Enum values for EntitlementStatus
@@ -19,6 +46,16 @@ const (
 	EntitlementStatusDisabled EntitlementStatus = "DISABLED"
 )
 
+// Values returns all known values for EntitlementStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EntitlementStatus) Values() []EntitlementStatus {
+	return []EntitlementStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type KeyType string
 
 // Enum values for KeyType
@@ -26,6 +63,32 @@ const (
 	KeyTypeSpeke      KeyType = "speke"
 	KeyTypeStatic_key KeyType = "static-key"
 )
+
+// Values returns all known values for KeyType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (KeyType) Values() []KeyType {
+	return []KeyType{
+		"speke",
+		"static-key",
+	}
+}
+
+type PriceUnits string
+
+// Enum values for PriceUnits
+const (
+	PriceUnitsHourly PriceUnits = "HOURLY"
+)
+
+// Values returns all known values for PriceUnits. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PriceUnits) Values() []PriceUnits {
+	return []PriceUnits{
+		"HOURLY",
+	}
+}
 
 type Protocol string
 
@@ -38,6 +101,57 @@ const (
 	ProtocolRist      Protocol = "rist"
 )
 
+// Values returns all known values for Protocol. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Protocol) Values() []Protocol {
+	return []Protocol{
+		"zixi-push",
+		"rtp-fec",
+		"rtp",
+		"zixi-pull",
+		"rist",
+	}
+}
+
+type ReservationState string
+
+// Enum values for ReservationState
+const (
+	ReservationStateActive     ReservationState = "ACTIVE"
+	ReservationStateExpired    ReservationState = "EXPIRED"
+	ReservationStateProcessing ReservationState = "PROCESSING"
+	ReservationStateCanceled   ReservationState = "CANCELED"
+)
+
+// Values returns all known values for ReservationState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReservationState) Values() []ReservationState {
+	return []ReservationState{
+		"ACTIVE",
+		"EXPIRED",
+		"PROCESSING",
+		"CANCELED",
+	}
+}
+
+type ResourceType string
+
+// Enum values for ResourceType
+const (
+	ResourceTypeMbps_outbound_bandwidth ResourceType = "Mbps_Outbound_Bandwidth"
+)
+
+// Values returns all known values for ResourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ResourceType) Values() []ResourceType {
+	return []ResourceType{
+		"Mbps_Outbound_Bandwidth",
+	}
+}
+
 type SourceType string
 
 // Enum values for SourceType
@@ -46,6 +160,16 @@ const (
 	SourceTypeEntitled SourceType = "ENTITLED"
 )
 
+// Values returns all known values for SourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SourceType) Values() []SourceType {
+	return []SourceType{
+		"OWNED",
+		"ENTITLED",
+	}
+}
+
 type State string
 
 // Enum values for State
@@ -53,6 +177,16 @@ const (
 	StateEnabled  State = "ENABLED"
 	StateDisabled State = "DISABLED"
 )
+
+// Values returns all known values for State. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (State) Values() []State {
+	return []State{
+		"ENABLED",
+		"DISABLED",
+	}
+}
 
 type Status string
 
@@ -66,3 +200,18 @@ const (
 	StatusStopping Status = "STOPPING"
 	StatusError    Status = "ERROR"
 )
+
+// Values returns all known values for Status. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Status) Values() []Status {
+	return []Status{
+		"STANDBY",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
+		"STARTING",
+		"STOPPING",
+		"ERROR",
+	}
+}

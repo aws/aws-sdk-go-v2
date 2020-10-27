@@ -16,14 +16,14 @@ import (
 // a CMK is associated with a log group, all newly ingested data for the log group
 // is encrypted using the CMK. This association is stored as long as the data
 // encrypted with the CMK is still within Amazon CloudWatch Logs. This enables
-// Amazon CloudWatch Logs to decrypt this data whenever it is requested. Important:
-// CloudWatch Logs supports only symmetric CMKs. Do not use an associate an
-// asymmetric CMK with your log group. For more information, see Using Symmetric
-// and Asymmetric Keys
+// Amazon CloudWatch Logs to decrypt this data whenever it is requested. CloudWatch
+// Logs supports only symmetric CMKs. Do not use an associate an asymmetric CMK
+// with your log group. For more information, see Using Symmetric and Asymmetric
+// Keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html).
-// Note that it can take up to 5 minutes for this operation to take effect. If you
-// attempt to associate a CMK with a log group but the CMK does not exist or the
-// CMK is disabled, you will receive an InvalidParameterException error.
+// It can take up to 5 minutes for this operation to take effect. If you attempt to
+// associate a CMK with a log group but the CMK does not exist or the CMK is
+// disabled, you receive an InvalidParameterException error.
 func (c *Client) AssociateKmsKey(ctx context.Context, params *AssociateKmsKeyInput, optFns ...func(*Options)) (*AssociateKmsKeyOutput, error) {
 	if params == nil {
 		params = &AssociateKmsKeyInput{}

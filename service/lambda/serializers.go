@@ -488,6 +488,13 @@ func awsRestjson1_serializeOpDocumentCreateEventSourceMappingInput(v *CreateEven
 		ok.Double(smithytime.FormatEpochSeconds(*v.StartingPositionTimestamp))
 	}
 
+	if v.Topics != nil {
+		ok := object.Key("Topics")
+		if err := awsRestjson1_serializeDocumentTopics(v.Topics, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -4544,6 +4551,21 @@ func awsRestjson1_serializeDocumentTags(v map[string]*string, value smithyjson.V
 			continue
 		}
 		om.String(*v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTopics(v []*string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			av.Null()
+			continue
+		}
+		av.String(*v[i])
 	}
 	return nil
 }

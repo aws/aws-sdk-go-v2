@@ -512,11 +512,11 @@ func validateOpCreateStateMachineInput(v *CreateStateMachineInput) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
-	}
 	if v.Definition == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Definition"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -710,11 +710,11 @@ func validateOpSendTaskSuccessInput(v *SendTaskSuccessInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SendTaskSuccessInput"}
-	if v.TaskToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TaskToken"))
-	}
 	if v.Output == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Output"))
+	}
+	if v.TaskToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TaskToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

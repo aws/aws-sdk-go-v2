@@ -99,19 +99,20 @@ type PredefinedMetricSpecification struct {
 
 	// Identifies the resource associated with the metric type. You can't specify a
 	// resource label unless the metric type is ALBRequestCountPerTarget and there is a
-	// target group attached to the Spot Fleet request or ECS service. Elastic Load
-	// Balancing sends data about your load balancers to Amazon CloudWatch. CloudWatch
-	// collects the data and specifies the format to use to access the data. The format
-	// is app///targetgroup//, where:
+	// target group attached to the Spot Fleet request or ECS service. You create the
+	// resource label by appending the final portion of the load balancer ARN and the
+	// final portion of the target group ARN into a single value, separated by a
+	// forward slash (/). The format is app///targetgroup//, where:
 	//
-	//     * app// is the final portion of the load
-	// balancer ARN
+	//     * app// is the
+	// final portion of the load balancer ARN
 	//
-	//     * targetgroup// is the final portion of the target group
-	// ARN.
+	//     * targetgroup// is the final portion
+	// of the target group ARN.
 	//
-	// To find the ARN for an Application Load Balancer, use the
-	// DescribeLoadBalancers
+	// This is an example:
+	// app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d.
+	// To find the ARN for an Application Load Balancer, use the DescribeLoadBalancers
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html)
 	// API operation. To find the ARN for the target group, use the
 	// DescribeTargetGroups
@@ -187,6 +188,11 @@ type ScalableTarget struct {
 	// arn:aws:comprehend:us-west-2:123456789012:document-classifier-endpoint/EXAMPLE.
 	//
 	//
+	// * Amazon Comprehend entity recognizer endpoint - The resource type and unique
+	// identifier are specified using the endpoint ARN. Example:
+	// arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE.
+	//
+	//
 	// * Lambda provisioned concurrency - The resource type is function and the unique
 	// identifier is the function name with a function version or alias name suffix
 	// that is not $LATEST. Example: function:my-function:prod or
@@ -195,6 +201,10 @@ type ScalableTarget struct {
 	//     * Amazon Keyspaces table - The resource type is
 	// table and the unique identifier is the table name. Example:
 	// keyspace/mykeyspace/table/mytable.
+	//
+	//     * Amazon MSK cluster - The resource type
+	// and unique identifier are specified using the cluster ARN. Example:
+	// arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5.
 	//
 	// This member is required.
 	ResourceId *string
@@ -252,7 +262,11 @@ type ScalableTarget struct {
 	// inference units for an Amazon Comprehend document classification endpoint.
 	//
 	//
-	// * lambda:function:ProvisionedConcurrency - The provisioned concurrency for a
+	// * comprehend:entity-recognizer-endpoint:DesiredInferenceUnits - The number of
+	// inference units for an Amazon Comprehend entity recognizer endpoint.
+	//
+	//     *
+	// lambda:function:ProvisionedConcurrency - The provisioned concurrency for a
 	// Lambda function.
 	//
 	//     * cassandra:table:ReadCapacityUnits - The provisioned read
@@ -261,6 +275,9 @@ type ScalableTarget struct {
 	//     *
 	// cassandra:table:WriteCapacityUnits - The provisioned write capacity for an
 	// Amazon Keyspaces table.
+	//
+	//     * kafka:broker-storage:VolumeSize - The provisioned
+	// volume size (in GiB) for brokers in an Amazon MSK cluster.
 	//
 	// This member is required.
 	ScalableDimension ScalableDimension
@@ -279,11 +296,20 @@ type ScalableTarget struct {
 // Represents the minimum and maximum capacity for a scheduled action.
 type ScalableTargetAction struct {
 
-	// The maximum capacity.
+	// The maximum capacity. Although you can specify a large maximum capacity, note
+	// that service quotas may impose lower limits. Each service has its own default
+	// quotas for the maximum capacity of the resource. If you want to specify a higher
+	// limit, you can request an increase. For more information, consult the
+	// documentation for that service. For information about the default quotas for
+	// each service, see Service Endpoints and Quotas
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-service-information.html) in
+	// the Amazon Web Services General Reference.
 	MaxCapacity *int32
 
-	// The minimum capacity. For Lambda provisioned concurrency, the minimum value
-	// allowed is 0. For all other resources, the minimum value allowed is 1.
+	// The minimum capacity. For certain resources, the minimum value allowed is 0.
+	// This includes Lambda provisioned concurrency, Spot Fleet, ECS services, Aurora
+	// DB clusters, EMR clusters, and custom resources. For all other resources, the
+	// minimum value allowed is 1.
 	MinCapacity *int32
 }
 
@@ -354,6 +380,11 @@ type ScalingActivity struct {
 	// arn:aws:comprehend:us-west-2:123456789012:document-classifier-endpoint/EXAMPLE.
 	//
 	//
+	// * Amazon Comprehend entity recognizer endpoint - The resource type and unique
+	// identifier are specified using the endpoint ARN. Example:
+	// arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE.
+	//
+	//
 	// * Lambda provisioned concurrency - The resource type is function and the unique
 	// identifier is the function name with a function version or alias name suffix
 	// that is not $LATEST. Example: function:my-function:prod or
@@ -362,6 +393,10 @@ type ScalingActivity struct {
 	//     * Amazon Keyspaces table - The resource type is
 	// table and the unique identifier is the table name. Example:
 	// keyspace/mykeyspace/table/mytable.
+	//
+	//     * Amazon MSK cluster - The resource type
+	// and unique identifier are specified using the cluster ARN. Example:
+	// arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5.
 	//
 	// This member is required.
 	ResourceId *string
@@ -413,7 +448,11 @@ type ScalingActivity struct {
 	// inference units for an Amazon Comprehend document classification endpoint.
 	//
 	//
-	// * lambda:function:ProvisionedConcurrency - The provisioned concurrency for a
+	// * comprehend:entity-recognizer-endpoint:DesiredInferenceUnits - The number of
+	// inference units for an Amazon Comprehend entity recognizer endpoint.
+	//
+	//     *
+	// lambda:function:ProvisionedConcurrency - The provisioned concurrency for a
 	// Lambda function.
 	//
 	//     * cassandra:table:ReadCapacityUnits - The provisioned read
@@ -422,6 +461,9 @@ type ScalingActivity struct {
 	//     *
 	// cassandra:table:WriteCapacityUnits - The provisioned write capacity for an
 	// Amazon Keyspaces table.
+	//
+	//     * kafka:broker-storage:VolumeSize - The provisioned
+	// volume size (in GiB) for brokers in an Amazon MSK cluster.
 	//
 	// This member is required.
 	ScalableDimension ScalableDimension
@@ -452,7 +494,11 @@ type ScalingActivity struct {
 	StatusMessage *string
 }
 
-// Represents a scaling policy to use with Application Auto Scaling.
+// Represents a scaling policy to use with Application Auto Scaling. For more
+// information about configuring scaling policies for a specific service, see
+// Getting started with Application Auto Scaling
+// (https://docs.aws.amazon.com/autoscaling/application/userguide/getting-started.html)
+// in the Application Auto Scaling User Guide.
 type ScalingPolicy struct {
 
 	// The Unix timestamp for when the scaling policy was created.
@@ -524,6 +570,11 @@ type ScalingPolicy struct {
 	// arn:aws:comprehend:us-west-2:123456789012:document-classifier-endpoint/EXAMPLE.
 	//
 	//
+	// * Amazon Comprehend entity recognizer endpoint - The resource type and unique
+	// identifier are specified using the endpoint ARN. Example:
+	// arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE.
+	//
+	//
 	// * Lambda provisioned concurrency - The resource type is function and the unique
 	// identifier is the function name with a function version or alias name suffix
 	// that is not $LATEST. Example: function:my-function:prod or
@@ -532,6 +583,10 @@ type ScalingPolicy struct {
 	//     * Amazon Keyspaces table - The resource type is
 	// table and the unique identifier is the table name. Example:
 	// keyspace/mykeyspace/table/mytable.
+	//
+	//     * Amazon MSK cluster - The resource type
+	// and unique identifier are specified using the cluster ARN. Example:
+	// arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5.
 	//
 	// This member is required.
 	ResourceId *string
@@ -583,7 +638,11 @@ type ScalingPolicy struct {
 	// inference units for an Amazon Comprehend document classification endpoint.
 	//
 	//
-	// * lambda:function:ProvisionedConcurrency - The provisioned concurrency for a
+	// * comprehend:entity-recognizer-endpoint:DesiredInferenceUnits - The number of
+	// inference units for an Amazon Comprehend entity recognizer endpoint.
+	//
+	//     *
+	// lambda:function:ProvisionedConcurrency - The provisioned concurrency for a
 	// Lambda function.
 	//
 	//     * cassandra:table:ReadCapacityUnits - The provisioned read
@@ -592,6 +651,9 @@ type ScalingPolicy struct {
 	//     *
 	// cassandra:table:WriteCapacityUnits - The provisioned write capacity for an
 	// Amazon Keyspaces table.
+	//
+	//     * kafka:broker-storage:VolumeSize - The provisioned
+	// volume size (in GiB) for brokers in an Amazon MSK cluster.
 	//
 	// This member is required.
 	ScalableDimension ScalableDimension
@@ -669,6 +731,11 @@ type ScheduledAction struct {
 	// arn:aws:comprehend:us-west-2:123456789012:document-classifier-endpoint/EXAMPLE.
 	//
 	//
+	// * Amazon Comprehend entity recognizer endpoint - The resource type and unique
+	// identifier are specified using the endpoint ARN. Example:
+	// arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE.
+	//
+	//
 	// * Lambda provisioned concurrency - The resource type is function and the unique
 	// identifier is the function name with a function version or alias name suffix
 	// that is not $LATEST. Example: function:my-function:prod or
@@ -677,6 +744,10 @@ type ScheduledAction struct {
 	//     * Amazon Keyspaces table - The resource type is
 	// table and the unique identifier is the table name. Example:
 	// keyspace/mykeyspace/table/mytable.
+	//
+	//     * Amazon MSK cluster - The resource type
+	// and unique identifier are specified using the cluster ARN. Example:
+	// arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5.
 	//
 	// This member is required.
 	ResourceId *string
@@ -770,7 +841,11 @@ type ScheduledAction struct {
 	// inference units for an Amazon Comprehend document classification endpoint.
 	//
 	//
-	// * lambda:function:ProvisionedConcurrency - The provisioned concurrency for a
+	// * comprehend:entity-recognizer-endpoint:DesiredInferenceUnits - The number of
+	// inference units for an Amazon Comprehend entity recognizer endpoint.
+	//
+	//     *
+	// lambda:function:ProvisionedConcurrency - The provisioned concurrency for a
 	// Lambda function.
 	//
 	//     * cassandra:table:ReadCapacityUnits - The provisioned read
@@ -779,6 +854,9 @@ type ScheduledAction struct {
 	//     *
 	// cassandra:table:WriteCapacityUnits - The provisioned write capacity for an
 	// Amazon Keyspaces table.
+	//
+	//     * kafka:broker-storage:VolumeSize - The provisioned
+	// volume size (in GiB) for brokers in an Amazon MSK cluster.
 	ScalableDimension ScalableDimension
 
 	// The new minimum and maximum capacity. You can set both values or just one. At
@@ -827,7 +905,7 @@ type StepAdjustment struct {
 
 	// The amount by which to scale, based on the specified adjustment type. A positive
 	// value adds to the current capacity while a negative number removes from the
-	// current capacity.
+	// current capacity. For exact capacity, you must specify a positive value.
 	//
 	// This member is required.
 	ScalingAdjustment *int32
@@ -853,62 +931,68 @@ type StepAdjustment struct {
 // Scaling.
 type StepScalingPolicyConfiguration struct {
 
-	// Specifies whether the ScalingAdjustment value in a StepAdjustment
+	// Specifies how the ScalingAdjustment value in a StepAdjustment
 	// (https://docs.aws.amazon.com/autoscaling/application/APIReference/API_StepAdjustment.html)
-	// is an absolute number or a percentage of the current capacity. AdjustmentType is
-	// required if you are adding a new step scaling policy configuration.
+	// is interpreted (for example, an absolute number or a percentage). The valid
+	// values are ChangeInCapacity, ExactCapacity, and PercentChangeInCapacity.
+	// AdjustmentType is required if you are adding a new step scaling policy
+	// configuration.
 	AdjustmentType AdjustmentType
 
 	// The amount of time, in seconds, to wait for a previous scaling activity to take
 	// effect. With scale-out policies, the intention is to continuously (but not
 	// excessively) scale out. After Application Auto Scaling successfully scales out
-	// using a step scaling policy, it starts to calculate the cooldown time. While the
-	// cooldown period is in effect, capacity added by the initiating scale-out
-	// activity is calculated as part of the desired capacity for the next scale-out
-	// activity. For example, when an alarm triggers a step scaling policy to increase
-	// the capacity by 2, the scaling activity completes successfully, and a cooldown
-	// period starts. If the alarm triggers again during the cooldown period but at a
-	// more aggressive step adjustment of 3, the previous increase of 2 is considered
-	// part of the current capacity. Therefore, only 1 is added to the capacity. With
-	// scale-in policies, the intention is to scale in conservatively to protect your
-	// application’s availability, so scale-in activities are blocked until the
-	// cooldown period has expired. However, if another alarm triggers a scale-out
-	// activity during the cooldown period after a scale-in activity, Application Auto
-	// Scaling scales out the target immediately. In this case, the cooldown period for
-	// the scale-in activity stops and doesn't complete. Application Auto Scaling
-	// provides a default value of 300 for the following scalable targets:
+	// using a step scaling policy, it starts to calculate the cooldown time. The
+	// scaling policy won't increase the desired capacity again unless either a larger
+	// scale out is triggered or the cooldown period ends. While the cooldown period is
+	// in effect, capacity added by the initiating scale-out activity is calculated as
+	// part of the desired capacity for the next scale-out activity. For example, when
+	// an alarm triggers a step scaling policy to increase the capacity by 2, the
+	// scaling activity completes successfully, and a cooldown period starts. If the
+	// alarm triggers again during the cooldown period but at a more aggressive step
+	// adjustment of 3, the previous increase of 2 is considered part of the current
+	// capacity. Therefore, only 1 is added to the capacity. With scale-in policies,
+	// the intention is to scale in conservatively to protect your application’s
+	// availability, so scale-in activities are blocked until the cooldown period has
+	// expired. However, if another alarm triggers a scale-out activity during the
+	// cooldown period after a scale-in activity, Application Auto Scaling scales out
+	// the target immediately. In this case, the cooldown period for the scale-in
+	// activity stops and doesn't complete. Application Auto Scaling provides a default
+	// value of 300 for the following scalable targets:
 	//
-	//     * ECS
-	// services
+	//     * ECS services
 	//
-	//     * Spot Fleet requests
+	//     * Spot
+	// Fleet requests
 	//
 	//     * EMR clusters
 	//
-	//     * AppStream 2.0
-	// fleets
+	//     * AppStream 2.0 fleets
 	//
-	//     * Aurora DB clusters
+	//     * Aurora DB
+	// clusters
 	//
 	//     * Amazon SageMaker endpoint variants
 	//
+	//     * Custom resources
 	//
-	// * Custom resources
+	// For
+	// all other scalable targets, the default value is 0:
 	//
-	// For all other scalable targets, the default value is 0:
+	//     * DynamoDB tables
 	//
 	//
-	// * DynamoDB tables
+	// * DynamoDB global secondary indexes
 	//
-	//     * DynamoDB global secondary indexes
-	//
-	//     * Amazon
-	// Comprehend document classification endpoints
+	//     * Amazon Comprehend document
+	// classification and entity recognizer endpoints
 	//
 	//     * Lambda provisioned
 	// concurrency
 	//
 	//     * Amazon Keyspaces tables
+	//
+	//     * Amazon MSK cluster storage
 	Cooldown *int32
 
 	// The aggregation type for the CloudWatch metrics. Valid values are Minimum,
@@ -916,13 +1000,13 @@ type StepScalingPolicyConfiguration struct {
 	// Average.
 	MetricAggregationType MetricAggregationType
 
-	// The minimum value to scale by when scaling by percentages. For example, suppose
-	// that you create a step scaling policy to scale out an Amazon ECS service by 25
-	// percent and you specify a MinAdjustmentMagnitude of 2. If the service has 4
-	// tasks and the scaling policy is performed, 25 percent of 4 is 1. However,
-	// because you specified a MinAdjustmentMagnitude of 2, Application Auto Scaling
-	// scales out the service by 2 tasks. Valid only if the adjustment type is
-	// PercentChangeInCapacity.
+	// The minimum value to scale by when the adjustment type is
+	// PercentChangeInCapacity. For example, suppose that you create a step scaling
+	// policy to scale out an Amazon ECS service by 25 percent and you specify a
+	// MinAdjustmentMagnitude of 2. If the service has 4 tasks and the scaling policy
+	// is performed, 25 percent of 4 is 1. However, because you specified a
+	// MinAdjustmentMagnitude of 2, Application Auto Scaling scales out the service by
+	// 2 tasks.
 	MinAdjustmentMagnitude *int32
 
 	// A set of adjustments that enable you to scale based on the size of the alarm
@@ -1010,53 +1094,60 @@ type TargetTrackingScalingPolicyConfiguration struct {
 	//     * DynamoDB
 	// global secondary indexes
 	//
-	//     * Amazon Comprehend document classification
-	// endpoints
+	//     * Amazon Comprehend document classification and
+	// entity recognizer endpoints
 	//
 	//     * Lambda provisioned concurrency
 	//
-	//     * Amazon Keyspaces tables
+	//     * Amazon
+	// Keyspaces tables
+	//
+	//     * Amazon MSK cluster storage
 	ScaleInCooldown *int32
 
 	// The amount of time, in seconds, to wait for a previous scale-out activity to
 	// take effect. With the scale-out cooldown period, the intention is to
 	// continuously (but not excessively) scale out. After Application Auto Scaling
 	// successfully scales out using a target tracking scaling policy, it starts to
-	// calculate the cooldown time. While the scale-out cooldown period is in effect,
-	// the capacity added by the initiating scale-out activity is calculated as part of
-	// the desired capacity for the next scale-out activity. Application Auto Scaling
-	// provides a default value of 300 for the following scalable targets:
+	// calculate the cooldown time. The scaling policy won't increase the desired
+	// capacity again unless either a larger scale out is triggered or the cooldown
+	// period ends. While the cooldown period is in effect, the capacity added by the
+	// initiating scale-out activity is calculated as part of the desired capacity for
+	// the next scale-out activity. Application Auto Scaling provides a default value
+	// of 300 for the following scalable targets:
 	//
-	//     * ECS
-	// services
+	//     * ECS services
 	//
-	//     * Spot Fleet requests
+	//     * Spot Fleet
+	// requests
 	//
 	//     * EMR clusters
 	//
-	//     * AppStream 2.0
-	// fleets
+	//     * AppStream 2.0 fleets
 	//
-	//     * Aurora DB clusters
+	//     * Aurora DB
+	// clusters
 	//
 	//     * Amazon SageMaker endpoint variants
 	//
+	//     * Custom resources
 	//
-	// * Custom resources
+	// For
+	// all other scalable targets, the default value is 0:
 	//
-	// For all other scalable targets, the default value is 0:
+	//     * DynamoDB tables
 	//
 	//
-	// * DynamoDB tables
+	// * DynamoDB global secondary indexes
 	//
-	//     * DynamoDB global secondary indexes
-	//
-	//     * Amazon
-	// Comprehend document classification endpoints
+	//     * Amazon Comprehend document
+	// classification and entity recognizer endpoints
 	//
 	//     * Lambda provisioned
 	// concurrency
 	//
 	//     * Amazon Keyspaces tables
+	//
+	//     * Amazon MSK cluster storage
 	ScaleOutCooldown *int32
 }

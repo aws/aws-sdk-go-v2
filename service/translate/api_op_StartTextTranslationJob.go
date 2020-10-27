@@ -36,10 +36,8 @@ func (c *Client) StartTextTranslationJob(ctx context.Context, params *StartTextT
 
 type StartTextTranslationJobInput struct {
 
-	// The client token of the EC2 instance calling the request. This token is
-	// auto-generated when using the Amazon Translate SDK. Otherwise, use the
-	// DescribeInstances EC2 operation to retreive an instance's client token. For more
-	// information, see Client Tokens in the EC2 User Guide.
+	// A unique identifier for the request. This token is auto-generated when using the
+	// Amazon Translate SDK.
 	//
 	// This member is required.
 	ClientToken *string
@@ -99,11 +97,11 @@ type StartTextTranslationJobOutput struct {
 	//     * COMPLETED - The job was successfully
 	// completed and the output is available.
 	//
-	//     * COMPLETED_WITH_ERRORS - The job
-	// was completed with errors. The errors can be analyzed in the job's output.
+	//     * COMPLETED_WITH_ERROR - The job was
+	// completed with errors. The errors can be analyzed in the job's output.
 	//
-	//
-	// * FAILED - The job did not complete. To get details, use the
+	//     *
+	// FAILED - The job did not complete. To get details, use the
 	// DescribeTextTranslationJob operation.
 	//
 	//     * STOP_REQUESTED - The user who

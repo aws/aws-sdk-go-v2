@@ -158,7 +158,8 @@ type MemberConfiguration struct {
 	// An optional description of the member.
 	Description *string
 
-	//
+	// Configuration properties for logging events associated with a member of a
+	// Managed Blockchain network.
 	LogPublishingConfiguration *MemberLogPublishingConfiguration
 }
 
@@ -391,7 +392,8 @@ type Node struct {
 	// The instance type of the node.
 	InstanceType *string
 
-	//
+	// Configuration properties for logging events associated with a peer node owned by
+	// a member in a Managed Blockchain network.
 	LogPublishingConfiguration *NodeLogPublishingConfiguration
 
 	// The unique identifier of the member to which the node belongs.
@@ -399,6 +401,9 @@ type Node struct {
 
 	// The unique identifier of the network that the node is in.
 	NetworkId *string
+
+	// The state database that the node uses. Values are LevelDB or CouchDB.
+	StateDB StateDBType
 
 	// The status of the node.
 	Status NodeStatus
@@ -417,8 +422,14 @@ type NodeConfiguration struct {
 	// This member is required.
 	InstanceType *string
 
-	//
+	// Configuration properties for logging events associated with a peer node owned by
+	// a member in a Managed Blockchain network.
 	LogPublishingConfiguration *NodeLogPublishingConfiguration
+
+	// The state database that the node uses. Values are LevelDB or CouchDB. When using
+	// an Amazon Managed Blockchain network with Hyperledger Fabric version 1.4 or
+	// later, the default is CouchDB.
+	StateDB StateDBType
 }
 
 // Attributes of Hyperledger Fabric for a peer node on a Managed Blockchain network

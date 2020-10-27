@@ -3859,6 +3859,88 @@ func awsAwsjson11_deserializeErrorResourceNotFoundException(response *smithyhttp
 	return output
 }
 
+func awsAwsjson11_deserializeDocumentChildShard(v **types.ChildShard, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ChildShard
+	if *v == nil {
+		sv = &types.ChildShard{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "HashKeyRange":
+			if err := awsAwsjson11_deserializeDocumentHashKeyRange(&sv.HashKeyRange, value); err != nil {
+				return err
+			}
+
+		case "ParentShards":
+			if err := awsAwsjson11_deserializeDocumentShardIdList(&sv.ParentShards, value); err != nil {
+				return err
+			}
+
+		case "ShardId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ShardId to be of type string, got %T instead", value)
+				}
+				sv.ShardId = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentChildShardList(v *[]*types.ChildShard, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.ChildShard
+	if *v == nil {
+		cv = []*types.ChildShard{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.ChildShard
+		if err := awsAwsjson11_deserializeDocumentChildShard(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentConsumer(v **types.Consumer, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5087,6 +5169,42 @@ func awsAwsjson11_deserializeDocumentShard(v **types.Shard, value interface{}) e
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentShardIdList(v *[]*string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*string
+	if *v == nil {
+		cv = []*string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ShardId to be of type string, got %T instead", value)
+			}
+			col = &jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentShardList(v *[]*types.Shard, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5315,7 +5433,7 @@ func awsAwsjson11_deserializeDocumentStreamDescriptionSummary(v **types.StreamDe
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected PositiveIntegerObject to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected RetentionPeriodHours to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -5431,6 +5549,11 @@ func awsAwsjson11_deserializeDocumentSubscribeToShardEvent(v **types.SubscribeTo
 
 	for key, value := range shape {
 		switch key {
+		case "ChildShards":
+			if err := awsAwsjson11_deserializeDocumentChildShardList(&sv.ChildShards, value); err != nil {
+				return err
+			}
+
 		case "ContinuationSequenceNumber":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6099,6 +6222,11 @@ func awsAwsjson11_deserializeOpDocumentGetRecordsOutput(v **GetRecordsOutput, va
 
 	for key, value := range shape {
 		switch key {
+		case "ChildShards":
+			if err := awsAwsjson11_deserializeDocumentChildShardList(&sv.ChildShards, value); err != nil {
+				return err
+			}
+
 		case "MillisBehindLatest":
 			if value != nil {
 				jtv, ok := value.(json.Number)

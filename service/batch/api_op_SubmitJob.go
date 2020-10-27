@@ -89,6 +89,13 @@ type SubmitJobInput struct {
 	// job definition.
 	RetryStrategy *types.RetryStrategy
 
+	// The tags that you apply to the job request to help you categorize and organize
+	// your resources. Each tag consists of a key and an optional value. For more
+	// information, see Tagging AWS Resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in AWS General
+	// Reference.
+	Tags map[string]*string
+
 	// The timeout configuration for this SubmitJob operation. You can specify a
 	// timeout duration after which AWS Batch terminates your jobs if they have not
 	// finished. If a job is terminated due to a timeout, it is not retried. The
@@ -112,6 +119,9 @@ type SubmitJobOutput struct {
 	//
 	// This member is required.
 	JobName *string
+
+	// The Amazon Resource Name (ARN) for the job.
+	JobArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Returns the block indexes and block tokens for blocks that are different between
-// two Amazon Elastic Block Store snapshots of the same volume/snapshot lineage.
+// Returns information about the blocks that are different between two Amazon
+// Elastic Block Store snapshots of the same volume/snapshot lineage.
 func (c *Client) ListChangedBlocks(ctx context.Context, params *ListChangedBlocksInput, optFns ...func(*Options)) (*ListChangedBlocksOutput, error) {
 	if params == nil {
 		params = &ListChangedBlocksInput{}

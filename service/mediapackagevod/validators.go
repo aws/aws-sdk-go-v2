@@ -327,11 +327,11 @@ func validateAuthorization(v *types.Authorization) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Authorization"}
-	if v.SecretsRoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SecretsRoleArn"))
-	}
 	if v.CdnIdentifierSecret == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CdnIdentifierSecret"))
+	}
+	if v.SecretsRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretsRoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -364,13 +364,13 @@ func validateCmafPackage(v *types.CmafPackage) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CmafPackage"}
-	if v.HlsManifests == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("HlsManifests"))
-	}
 	if v.Encryption != nil {
 		if err := validateCmafEncryption(v.Encryption); err != nil {
 			invalidParams.AddNested("Encryption", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.HlsManifests == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HlsManifests"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -442,13 +442,13 @@ func validateHlsPackage(v *types.HlsPackage) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "HlsPackage"}
-	if v.HlsManifests == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("HlsManifests"))
-	}
 	if v.Encryption != nil {
 		if err := validateHlsEncryption(v.Encryption); err != nil {
 			invalidParams.AddNested("Encryption", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.HlsManifests == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HlsManifests"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -501,11 +501,11 @@ func validateSpekeKeyProvider(v *types.SpekeKeyProvider) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SpekeKeyProvider"}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
-	}
 	if v.Url == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Url"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
 	if v.SystemIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SystemIds"))
@@ -525,14 +525,14 @@ func validateOpCreateAssetInput(v *CreateAssetInput) error {
 	if v.SourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceArn"))
 	}
-	if v.PackagingGroupId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PackagingGroupId"))
-	}
 	if v.SourceRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceRoleArn"))
 	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.PackagingGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackagingGroupId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -546,19 +546,6 @@ func validateOpCreatePackagingConfigurationInput(v *CreatePackagingConfiguration
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreatePackagingConfigurationInput"}
-	if v.CmafPackage != nil {
-		if err := validateCmafPackage(v.CmafPackage); err != nil {
-			invalidParams.AddNested("CmafPackage", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
-	if v.DashPackage != nil {
-		if err := validateDashPackage(v.DashPackage); err != nil {
-			invalidParams.AddNested("DashPackage", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.PackagingGroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PackagingGroupId"))
 	}
@@ -570,6 +557,19 @@ func validateOpCreatePackagingConfigurationInput(v *CreatePackagingConfiguration
 	if v.MssPackage != nil {
 		if err := validateMssPackage(v.MssPackage); err != nil {
 			invalidParams.AddNested("MssPackage", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DashPackage != nil {
+		if err := validateDashPackage(v.DashPackage); err != nil {
+			invalidParams.AddNested("DashPackage", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.CmafPackage != nil {
+		if err := validateCmafPackage(v.CmafPackage); err != nil {
+			invalidParams.AddNested("CmafPackage", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -709,11 +709,11 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
-	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -727,11 +727,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -745,13 +745,13 @@ func validateOpUpdatePackagingGroupInput(v *UpdatePackagingGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdatePackagingGroupInput"}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
 	if v.Authorization != nil {
 		if err := validateAuthorization(v.Authorization); err != nil {
 			invalidParams.AddNested("Authorization", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

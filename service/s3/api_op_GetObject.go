@@ -31,10 +31,13 @@ import (
 // To distribute large files to many people, you can save bandwidth costs by using
 // BitTorrent. For more information, see Amazon S3 Torrent
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3Torrent.html). For more
-// information about returning the ACL of an object, see GetObjectAcl. If the
+// information about returning the ACL of an object, see GetObjectAcl
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAcl.html). If the
 // object you are retrieving is stored in the GLACIER or DEEP_ARCHIVE storage
 // classes, before you can retrieve the object you must first restore a copy using
-// . Otherwise, this operation returns an InvalidObjectStateError error. For
+// RestoreObject
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html).
+// Otherwise, this operation returns an InvalidObjectStateError error. For
 // information about restoring archived objects, see Restoring Archived Objects
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html).
 // Encryption request headers, like x-amz-server-side-encryption, should not be
@@ -60,9 +63,11 @@ import (
 // Assuming you have permission to read object tags (permission for the
 // s3:GetObjectVersionTagging action), the response also returns the
 // x-amz-tagging-count header that provides the count of number of tags associated
-// with the object. You can use GetObjectTagging to retrieve the tag set associated
-// with an object. Permissions You need the s3:GetObject permission for this
-// operation. For more information, see Specifying Permissions in a Policy
+// with the object. You can use GetObjectTagging
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectTagging.html) to
+// retrieve the tag set associated with an object. Permissions You need the
+// s3:GetObject permission for this operation. For more information, see Specifying
+// Permissions in a Policy
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html). If
 // the object you request does not exist, the error Amazon S3 returns depends on
 // whether you also have the s3:ListBucket permission.
@@ -79,50 +84,55 @@ import (
 // an object. To return a different version, use the versionId subresource. If the
 // current version of the object is a delete marker, Amazon S3 behaves as if the
 // object was deleted and includes x-amz-delete-marker: true in the response. For
-// more information about versioning, see PutBucketVersioning. Overriding Response
-// Header Values There are times when you want to override certain response header
-// values in a GET response. For example, you might override the
-// Content-Disposition response header value in your GET request. You can override
-// values for a set of response headers using the following query parameters. These
-// response header values are sent only on a successful request, that is, when
-// status code 200 OK is returned. The set of headers you can override using these
-// parameters is a subset of the headers that Amazon S3 accepts when you create an
-// object. The response headers that you can override for the GET response are
-// Content-Type, Content-Language, Expires, Cache-Control, Content-Disposition, and
-// Content-Encoding. To override these header values in the GET response, you use
-// the following request parameters. You must sign the request, either using an
-// Authorization header or a presigned URL, when using these parameters. They
-// cannot be used with an unsigned (anonymous) request.
+// more information about versioning, see PutBucketVersioning
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketVersioning.html).
+// Overriding Response Header Values There are times when you want to override
+// certain response header values in a GET response. For example, you might
+// override the Content-Disposition response header value in your GET request. You
+// can override values for a set of response headers using the following query
+// parameters. These response header values are sent only on a successful request,
+// that is, when status code 200 OK is returned. The set of headers you can
+// override using these parameters is a subset of the headers that Amazon S3
+// accepts when you create an object. The response headers that you can override
+// for the GET response are Content-Type, Content-Language, Expires, Cache-Control,
+// Content-Disposition, and Content-Encoding. To override these header values in
+// the GET response, you use the following request parameters. You must sign the
+// request, either using an Authorization header or a presigned URL, when using
+// these parameters. They cannot be used with an unsigned (anonymous) request.
 //
-//     *
-// response-content-type
+//
+// * response-content-type
 //
 //     * response-content-language
 //
-//     * response-expires
+//     *
+// response-expires
 //
-//
-// * response-cache-control
-//
-//     * response-content-disposition
+//     * response-cache-control
 //
 //     *
-// response-content-encoding
+// response-content-disposition
 //
-// Additional Considerations about Request Headers If
-// both of the If-Match and If-Unmodified-Since headers are present in the request
-// as follows: If-Match condition evaluates to true, and; If-Unmodified-Since
-// condition evaluates to false; then, S3 returns 200 OK and the data requested. If
-// both of the If-None-Match and If-Modified-Since headers are present in the
-// request as follows: If-None-Match condition evaluates to false, and;
-// If-Modified-Since condition evaluates to true; then, S3 returns 304 Not Modified
-// response code. For more information about conditional requests, see RFC 7232
+//     * response-content-encoding
+//
+// Additional
+// Considerations about Request Headers If both of the If-Match and
+// If-Unmodified-Since headers are present in the request as follows: If-Match
+// condition evaluates to true, and; If-Unmodified-Since condition evaluates to
+// false; then, S3 returns 200 OK and the data requested. If both of the
+// If-None-Match and If-Modified-Since headers are present in the request as
+// follows: If-None-Match condition evaluates to false, and; If-Modified-Since
+// condition evaluates to true; then, S3 returns 304 Not Modified response code.
+// For more information about conditional requests, see RFC 7232
 // (https://tools.ietf.org/html/rfc7232). The following operations are related to
 // GetObject:
 //
 //     * ListBuckets
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBuckets.html)
 //
-//     * GetObjectAcl
+//     *
+// GetObjectAcl
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAcl.html)
 func (c *Client) GetObject(ctx context.Context, params *GetObjectInput, optFns ...func(*Options)) (*GetObjectOutput, error) {
 	if params == nil {
 		params = &GetObjectInput{}
@@ -143,11 +153,19 @@ type GetObjectInput struct {
 	// The bucket name containing the object. When using this API with an access point,
 	// you must direct requests to the access point hostname. The access point hostname
 	// takes the form AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com.
-	// When using this operation using an access point through the AWS SDKs, you
-	// provide the access point ARN in place of the bucket name. For more information
-	// about access point ARNs, see Using Access Points
+	// When using this operation with an access point through the AWS SDKs, you provide
+	// the access point ARN in place of the bucket name. For more information about
+	// access point ARNs, see Using Access Points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
-	// the Amazon Simple Storage Service Developer Guide.
+	// the Amazon Simple Storage Service Developer Guide. When using this API with
+	// Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname.
+	// The S3 on Outposts hostname takes the form
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
+	// this operation using S3 on Outposts through the AWS SDKs, you provide the
+	// Outposts bucket ARN in place of the bucket name. For more information about S3
+	// on Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
+	// Amazon Simple Storage Service Developer Guide.
 	//
 	// This member is required.
 	Bucket *string
@@ -156,6 +174,10 @@ type GetObjectInput struct {
 	//
 	// This member is required.
 	Key *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 
 	// Return the object only if its entity tag (ETag) is the same as the one
 	// specified, otherwise return a 412 (precondition failed).

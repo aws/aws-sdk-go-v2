@@ -12,8 +12,7 @@ import (
 	"time"
 )
 
-// Returns the block indexes and block tokens for blocks in an Amazon Elastic Block
-// Store snapshot.
+// Returns information about the blocks in an Amazon Elastic Block Store snapshot.
 func (c *Client) ListSnapshotBlocks(ctx context.Context, params *ListSnapshotBlocksInput, optFns ...func(*Options)) (*ListSnapshotBlocksOutput, error) {
 	if params == nil {
 		params = &ListSnapshotBlocksInput{}

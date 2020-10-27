@@ -10419,6 +10419,25 @@ func awsRestjson1_serializeDocumentEventDimensions(v *types.EventDimensions, val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEventFilter(v *types.EventFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Dimensions != nil {
+		ok := object.Key("Dimensions")
+		if err := awsRestjson1_serializeDocumentEventDimensions(v.Dimensions, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.FilterType) > 0 {
+		ok := object.Key("FilterType")
+		ok.String(string(v.FilterType))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEventsBatch(v *types.EventsBatch, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -10449,6 +10468,25 @@ func awsRestjson1_serializeDocumentEventsRequest(v *types.EventsRequest, value s
 		if err := awsRestjson1_serializeDocumentMapOfEventsBatch(v.BatchItem, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEventStartCondition(v *types.EventStartCondition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EventFilter != nil {
+		ok := object.Key("EventFilter")
+		if err := awsRestjson1_serializeDocumentEventFilter(v.EventFilter, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SegmentId != nil {
+		ok := object.Key("SegmentId")
+		ok.String(*v.SegmentId)
 	}
 
 	return nil
@@ -12184,6 +12222,13 @@ func awsRestjson1_serializeDocumentStartCondition(v *types.StartCondition, value
 		ok.String(*v.Description)
 	}
 
+	if v.EventStartCondition != nil {
+		ok := object.Key("EventStartCondition")
+		if err := awsRestjson1_serializeDocumentEventStartCondition(v.EventStartCondition, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SegmentStartCondition != nil {
 		ok := object.Key("SegmentStartCondition")
 		if err := awsRestjson1_serializeDocumentSegmentCondition(v.SegmentStartCondition, ok); err != nil {
@@ -12475,6 +12520,11 @@ func awsRestjson1_serializeDocumentWriteApplicationSettingsRequest(v *types.Writ
 	if v.CloudWatchMetricsEnabled != nil {
 		ok := object.Key("CloudWatchMetricsEnabled")
 		ok.Boolean(*v.CloudWatchMetricsEnabled)
+	}
+
+	if v.EventTaggingEnabled != nil {
+		ok := object.Key("EventTaggingEnabled")
+		ok.Boolean(*v.EventTaggingEnabled)
 	}
 
 	if v.Limits != nil {

@@ -4732,6 +4732,11 @@ func awsAwsjson11_serializeDocumentAnalyticsConfigurationType(v *types.Analytics
 	object := value.Object()
 	defer object.Close()
 
+	if v.ApplicationArn != nil {
+		ok := object.Key("ApplicationArn")
+		ok.String(*v.ApplicationArn)
+	}
+
 	if v.ApplicationId != nil {
 		ok := object.Key("ApplicationId")
 		ok.String(*v.ApplicationId)
@@ -5768,6 +5773,28 @@ func awsAwsjson11_serializeDocumentSupportedIdentityProvidersListType(v []*strin
 		}
 		av.String(*v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTokenValidityUnitsType(v *types.TokenValidityUnitsType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AccessToken) > 0 {
+		ok := object.Key("AccessToken")
+		ok.String(string(v.AccessToken))
+	}
+
+	if len(v.IdToken) > 0 {
+		ok := object.Key("IdToken")
+		ok.String(string(v.IdToken))
+	}
+
+	if len(v.RefreshToken) > 0 {
+		ok := object.Key("RefreshToken")
+		ok.String(string(v.RefreshToken))
+	}
+
 	return nil
 }
 
@@ -6936,6 +6963,11 @@ func awsAwsjson11_serializeOpDocumentCreateUserPoolClientInput(v *CreateUserPool
 	object := value.Object()
 	defer object.Close()
 
+	if v.AccessTokenValidity != nil {
+		ok := object.Key("AccessTokenValidity")
+		ok.Integer(*v.AccessTokenValidity)
+	}
+
 	if v.AllowedOAuthFlows != nil {
 		ok := object.Key("AllowedOAuthFlows")
 		if err := awsAwsjson11_serializeDocumentOAuthFlowsType(v.AllowedOAuthFlows, ok); err != nil {
@@ -6991,6 +7023,11 @@ func awsAwsjson11_serializeOpDocumentCreateUserPoolClientInput(v *CreateUserPool
 		ok.Boolean(*v.GenerateSecret)
 	}
 
+	if v.IdTokenValidity != nil {
+		ok := object.Key("IdTokenValidity")
+		ok.Integer(*v.IdTokenValidity)
+	}
+
 	if v.LogoutURLs != nil {
 		ok := object.Key("LogoutURLs")
 		if err := awsAwsjson11_serializeDocumentLogoutURLsListType(v.LogoutURLs, ok); err != nil {
@@ -7018,6 +7055,13 @@ func awsAwsjson11_serializeOpDocumentCreateUserPoolClientInput(v *CreateUserPool
 	if v.SupportedIdentityProviders != nil {
 		ok := object.Key("SupportedIdentityProviders")
 		if err := awsAwsjson11_serializeDocumentSupportedIdentityProvidersListType(v.SupportedIdentityProviders, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TokenValidityUnits != nil {
+		ok := object.Key("TokenValidityUnits")
+		if err := awsAwsjson11_serializeDocumentTokenValidityUnitsType(v.TokenValidityUnits, ok); err != nil {
 			return err
 		}
 	}
@@ -8470,6 +8514,11 @@ func awsAwsjson11_serializeOpDocumentUpdateUserPoolClientInput(v *UpdateUserPool
 	object := value.Object()
 	defer object.Close()
 
+	if v.AccessTokenValidity != nil {
+		ok := object.Key("AccessTokenValidity")
+		ok.Integer(*v.AccessTokenValidity)
+	}
+
 	if v.AllowedOAuthFlows != nil {
 		ok := object.Key("AllowedOAuthFlows")
 		if err := awsAwsjson11_serializeDocumentOAuthFlowsType(v.AllowedOAuthFlows, ok); err != nil {
@@ -8525,6 +8574,11 @@ func awsAwsjson11_serializeOpDocumentUpdateUserPoolClientInput(v *UpdateUserPool
 		}
 	}
 
+	if v.IdTokenValidity != nil {
+		ok := object.Key("IdTokenValidity")
+		ok.Integer(*v.IdTokenValidity)
+	}
+
 	if v.LogoutURLs != nil {
 		ok := object.Key("LogoutURLs")
 		if err := awsAwsjson11_serializeDocumentLogoutURLsListType(v.LogoutURLs, ok); err != nil {
@@ -8552,6 +8606,13 @@ func awsAwsjson11_serializeOpDocumentUpdateUserPoolClientInput(v *UpdateUserPool
 	if v.SupportedIdentityProviders != nil {
 		ok := object.Key("SupportedIdentityProviders")
 		if err := awsAwsjson11_serializeDocumentSupportedIdentityProvidersListType(v.SupportedIdentityProviders, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TokenValidityUnits != nil {
+		ok := object.Key("TokenValidityUnits")
+		if err := awsAwsjson11_serializeDocumentTokenValidityUnitsType(v.TokenValidityUnits, ok); err != nil {
 			return err
 		}
 	}

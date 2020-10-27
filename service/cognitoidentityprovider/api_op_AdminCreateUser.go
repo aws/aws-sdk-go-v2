@@ -13,12 +13,13 @@ import (
 
 // Creates a new user in the specified user pool. If MessageAction is not set, the
 // default is to send a welcome message via email or phone (SMS). This message is
-// based on a template that you configured in your call to or . This template
-// includes your custom sign-up instructions and placeholders for user name and
-// temporary password. Alternatively, you can call AdminCreateUser with “SUPPRESS”
-// for the MessageAction parameter, and Amazon Cognito will not send any email. In
-// either case, the user will be in the FORCE_CHANGE_PASSWORD state until they sign
-// in and change their password. AdminCreateUser requires developer credentials.
+// based on a template that you configured in your call to create or update a user
+// pool. This template includes your custom sign-up instructions and placeholders
+// for user name and temporary password. Alternatively, you can call
+// AdminCreateUser with “SUPPRESS” for the MessageAction parameter, and Amazon
+// Cognito will not send any email. In either case, the user will be in the
+// FORCE_CHANGE_PASSWORD state until they sign in and change their password.
+// AdminCreateUser requires developer credentials.
 func (c *Client) AdminCreateUser(ctx context.Context, params *AdminCreateUserInput, optFns ...func(*Options)) (*AdminCreateUserOutput, error) {
 	if params == nil {
 		params = &AdminCreateUserInput{}
@@ -111,15 +112,17 @@ type AdminCreateUserInput struct {
 	// An array of name-value pairs that contain user attributes and attribute values
 	// to be set for the user to be created. You can create a user without specifying
 	// any attributes other than Username. However, any attributes that you specify as
-	// required (in or in the Attributes tab of the console) must be supplied either by
-	// you (in your call to AdminCreateUser) or by the user (when he or she signs up in
-	// response to your welcome message). For custom attributes, you must prepend the
-	// custom: prefix to the attribute name. To send a message inviting the user to
-	// sign up, you must specify the user's email address or phone number. This can be
-	// done in your call to AdminCreateUser or in the Users tab of the Amazon Cognito
-	// console for managing your user pools. In your call to AdminCreateUser, you can
-	// set the email_verified attribute to True, and you can set the
-	// phone_number_verified attribute to True. (You can also do this by calling .)
+	// required (when creating a user pool or in the Attributes tab of the console)
+	// must be supplied either by you (in your call to AdminCreateUser) or by the user
+	// (when he or she signs up in response to your welcome message). For custom
+	// attributes, you must prepend the custom: prefix to the attribute name. To send a
+	// message inviting the user to sign up, you must specify the user's email address
+	// or phone number. This can be done in your call to AdminCreateUser or in the
+	// Users tab of the Amazon Cognito console for managing your user pools. In your
+	// call to AdminCreateUser, you can set the email_verified attribute to True, and
+	// you can set the phone_number_verified attribute to True. (You can also do this
+	// by calling AdminUpdateUserAttributes
+	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminUpdateUserAttributes.html).)
 	//
 	//
 	// * email: The email address of the user to whom the message that contains the

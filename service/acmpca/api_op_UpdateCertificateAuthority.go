@@ -14,7 +14,11 @@ import (
 // Updates the status or configuration of a private certificate authority (CA).
 // Your private CA must be in the ACTIVE or DISABLED state before you can update
 // it. You can disable a private CA that is in the ACTIVE state or make a CA that
-// is in the DISABLED state active again.
+// is in the DISABLED state active again. Both PCA and the IAM principal must have
+// permission to write to the S3 bucket that you specify. If the IAM principal
+// making the call does not have permission to write to the bucket, then an
+// exception is thrown. For more information, see Configure Access to ACM Private
+// CA (https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaAuthAccess.html).
 func (c *Client) UpdateCertificateAuthority(ctx context.Context, params *UpdateCertificateAuthorityInput, optFns ...func(*Options)) (*UpdateCertificateAuthorityOutput, error) {
 	if params == nil {
 		params = &UpdateCertificateAuthorityInput{}

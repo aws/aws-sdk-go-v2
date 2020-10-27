@@ -17,9 +17,9 @@ import (
 // individual game session. This is for game sessions that are created with a
 // matchmaking configuration that has automatic backfill enabled. The ticket ID is
 // included in the MatchmakerData of an updated game session object, which is
-// provided to the game server. If the action is successful, the service sends back
-// an empty JSON struct with the HTTP 200 response (not an empty HTTP body). Learn
-// more  Add FlexMatch to a Game Client
+// provided to the game server. If the operation is successful, the service sends
+// back an empty JSON struct with the HTTP 200 response (not an empty HTTP body).
+// Learn more  Add FlexMatch to a Game Client
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-client.html)
 // Related operations
 //
@@ -48,7 +48,7 @@ func (c *Client) StopMatchmaking(ctx context.Context, params *StopMatchmakingInp
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type StopMatchmakingInput struct {
 
 	// A unique identifier for a matchmaking ticket.

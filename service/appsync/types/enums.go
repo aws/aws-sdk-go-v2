@@ -13,6 +13,19 @@ const (
 	ApiCacheStatusFailed    ApiCacheStatus = "FAILED"
 )
 
+// Values returns all known values for ApiCacheStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ApiCacheStatus) Values() []ApiCacheStatus {
+	return []ApiCacheStatus{
+		"AVAILABLE",
+		"CREATING",
+		"DELETING",
+		"MODIFYING",
+		"FAILED",
+	}
+}
+
 type ApiCacheType string
 
 // Enum values for ApiCacheType
@@ -34,6 +47,29 @@ const (
 	ApiCacheTypeLarge_12x  ApiCacheType = "LARGE_12X"
 )
 
+// Values returns all known values for ApiCacheType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ApiCacheType) Values() []ApiCacheType {
+	return []ApiCacheType{
+		"T2_SMALL",
+		"T2_MEDIUM",
+		"R4_LARGE",
+		"R4_XLARGE",
+		"R4_2XLARGE",
+		"R4_4XLARGE",
+		"R4_8XLARGE",
+		"SMALL",
+		"MEDIUM",
+		"LARGE",
+		"XLARGE",
+		"LARGE_2X",
+		"LARGE_4X",
+		"LARGE_8X",
+		"LARGE_12X",
+	}
+}
+
 type ApiCachingBehavior string
 
 // Enum values for ApiCachingBehavior
@@ -41,6 +77,16 @@ const (
 	ApiCachingBehaviorFull_request_caching ApiCachingBehavior = "FULL_REQUEST_CACHING"
 	ApiCachingBehaviorPer_resolver_caching ApiCachingBehavior = "PER_RESOLVER_CACHING"
 )
+
+// Values returns all known values for ApiCachingBehavior. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ApiCachingBehavior) Values() []ApiCachingBehavior {
+	return []ApiCachingBehavior{
+		"FULL_REQUEST_CACHING",
+		"PER_RESOLVER_CACHING",
+	}
+}
 
 type AuthenticationType string
 
@@ -52,12 +98,33 @@ const (
 	AuthenticationTypeOpenid_connect            AuthenticationType = "OPENID_CONNECT"
 )
 
+// Values returns all known values for AuthenticationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AuthenticationType) Values() []AuthenticationType {
+	return []AuthenticationType{
+		"API_KEY",
+		"AWS_IAM",
+		"AMAZON_COGNITO_USER_POOLS",
+		"OPENID_CONNECT",
+	}
+}
+
 type AuthorizationType string
 
 // Enum values for AuthorizationType
 const (
 	AuthorizationTypeAws_iam AuthorizationType = "AWS_IAM"
 )
+
+// Values returns all known values for AuthorizationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AuthorizationType) Values() []AuthorizationType {
+	return []AuthorizationType{
+		"AWS_IAM",
+	}
+}
 
 type ConflictDetectionType string
 
@@ -66,6 +133,16 @@ const (
 	ConflictDetectionTypeVersion ConflictDetectionType = "VERSION"
 	ConflictDetectionTypeNone    ConflictDetectionType = "NONE"
 )
+
+// Values returns all known values for ConflictDetectionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConflictDetectionType) Values() []ConflictDetectionType {
+	return []ConflictDetectionType{
+		"VERSION",
+		"NONE",
+	}
+}
 
 type ConflictHandlerType string
 
@@ -76,6 +153,18 @@ const (
 	ConflictHandlerTypeAutomerge              ConflictHandlerType = "AUTOMERGE"
 	ConflictHandlerTypeNone                   ConflictHandlerType = "NONE"
 )
+
+// Values returns all known values for ConflictHandlerType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConflictHandlerType) Values() []ConflictHandlerType {
+	return []ConflictHandlerType{
+		"OPTIMISTIC_CONCURRENCY",
+		"LAMBDA",
+		"AUTOMERGE",
+		"NONE",
+	}
+}
 
 type DataSourceType string
 
@@ -89,6 +178,20 @@ const (
 	DataSourceTypeRelational_database  DataSourceType = "RELATIONAL_DATABASE"
 )
 
+// Values returns all known values for DataSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataSourceType) Values() []DataSourceType {
+	return []DataSourceType{
+		"AWS_LAMBDA",
+		"AMAZON_DYNAMODB",
+		"AMAZON_ELASTICSEARCH",
+		"NONE",
+		"HTTP",
+		"RELATIONAL_DATABASE",
+	}
+}
+
 type DefaultAction string
 
 // Enum values for DefaultAction
@@ -96,6 +199,16 @@ const (
 	DefaultActionAllow DefaultAction = "ALLOW"
 	DefaultActionDeny  DefaultAction = "DENY"
 )
+
+// Values returns all known values for DefaultAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DefaultAction) Values() []DefaultAction {
+	return []DefaultAction{
+		"ALLOW",
+		"DENY",
+	}
+}
 
 type FieldLogLevel string
 
@@ -106,6 +219,17 @@ const (
 	FieldLogLevelAll   FieldLogLevel = "ALL"
 )
 
+// Values returns all known values for FieldLogLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FieldLogLevel) Values() []FieldLogLevel {
+	return []FieldLogLevel{
+		"NONE",
+		"ERROR",
+		"ALL",
+	}
+}
+
 type OutputType string
 
 // Enum values for OutputType
@@ -114,12 +238,31 @@ const (
 	OutputTypeJson OutputType = "JSON"
 )
 
+// Values returns all known values for OutputType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (OutputType) Values() []OutputType {
+	return []OutputType{
+		"SDL",
+		"JSON",
+	}
+}
+
 type RelationalDatabaseSourceType string
 
 // Enum values for RelationalDatabaseSourceType
 const (
 	RelationalDatabaseSourceTypeRds_http_endpoint RelationalDatabaseSourceType = "RDS_HTTP_ENDPOINT"
 )
+
+// Values returns all known values for RelationalDatabaseSourceType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RelationalDatabaseSourceType) Values() []RelationalDatabaseSourceType {
+	return []RelationalDatabaseSourceType{
+		"RDS_HTTP_ENDPOINT",
+	}
+}
 
 type ResolverKind string
 
@@ -128,6 +271,16 @@ const (
 	ResolverKindUnit     ResolverKind = "UNIT"
 	ResolverKindPipeline ResolverKind = "PIPELINE"
 )
+
+// Values returns all known values for ResolverKind. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ResolverKind) Values() []ResolverKind {
+	return []ResolverKind{
+		"UNIT",
+		"PIPELINE",
+	}
+}
 
 type SchemaStatus string
 
@@ -141,6 +294,20 @@ const (
 	SchemaStatusNotapplicable SchemaStatus = "NOT_APPLICABLE"
 )
 
+// Values returns all known values for SchemaStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SchemaStatus) Values() []SchemaStatus {
+	return []SchemaStatus{
+		"PROCESSING",
+		"ACTIVE",
+		"DELETING",
+		"FAILED",
+		"SUCCESS",
+		"NOT_APPLICABLE",
+	}
+}
+
 type TypeDefinitionFormat string
 
 // Enum values for TypeDefinitionFormat
@@ -148,3 +315,13 @@ const (
 	TypeDefinitionFormatSdl  TypeDefinitionFormat = "SDL"
 	TypeDefinitionFormatJson TypeDefinitionFormat = "JSON"
 )
+
+// Values returns all known values for TypeDefinitionFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TypeDefinitionFormat) Values() []TypeDefinitionFormat {
+	return []TypeDefinitionFormat{
+		"SDL",
+		"JSON",
+	}
+}

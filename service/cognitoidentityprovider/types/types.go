@@ -86,25 +86,26 @@ type AdminCreateUserConfigType struct {
 }
 
 // The Amazon Pinpoint analytics configuration for collecting metrics for a user
-// pool. Cognito User Pools only supports sending events to Amazon Pinpoint
-// projects in the US East (N. Virginia) us-east-1 Region, regardless of the region
-// in which the user pool resides.
+// pool. In regions where Pinpoint is not available, Cognito User Pools only
+// supports sending events to Amazon Pinpoint projects in us-east-1. In regions
+// where Pinpoint is available, Cognito User Pools will support sending events to
+// Amazon Pinpoint projects within that same region.
 type AnalyticsConfigurationType struct {
 
+	// The Amazon Resource Name (ARN) of an Amazon Pinpoint project. You can use the
+	// Amazon Pinpoint project for Pinpoint integration with the chosen User Pool
+	// Client. Amazon Cognito publishes events to the pinpoint project declared by the
+	// app ARN.
+	ApplicationArn *string
+
 	// The application ID for an Amazon Pinpoint application.
-	//
-	// This member is required.
 	ApplicationId *string
 
 	// The external ID.
-	//
-	// This member is required.
 	ExternalId *string
 
 	// The ARN of an IAM role that authorizes Amazon Cognito to publish events to
 	// Amazon Pinpoint analytics.
-	//
-	// This member is required.
 	RoleArn *string
 
 	// If UserDataShared is true, Amazon Cognito will include user data in the events
@@ -528,8 +529,17 @@ type IdentityProviderType struct {
 	// The identity provider details. The following list describes the provider detail
 	// keys for each identity provider type.
 	//
-	//     * For Google, Facebook and Login with
-	// Amazon:
+	//     * For Google and Login with Amazon:
+	//
+	//
+	// * client_id
+	//
+	//         * client_secret
+	//
+	//         * authorize_scopes
+	//
+	//     * For
+	// Facebook:
 	//
 	//         * client_id
 	//
@@ -538,52 +548,55 @@ type IdentityProviderType struct {
 	//         *
 	// authorize_scopes
 	//
+	//         * api_version
+	//
 	//     * For Sign in with Apple:
 	//
-	//         * client_id
 	//
-	//         *
-	// team_id
+	// * client_id
+	//
+	//         * team_id
 	//
 	//         * key_id
 	//
 	//         * private_key
 	//
-	//         * authorize_scopes
 	//
+	// * authorize_scopes
 	//
-	// * For OIDC providers:
+	//     * For OIDC providers:
 	//
 	//         * client_id
 	//
-	//         * client_secret
-	//
 	//         *
-	// attributes_request_method
+	// client_secret
+	//
+	//         * attributes_request_method
 	//
 	//         * oidc_issuer
 	//
-	//         * authorize_scopes
 	//
+	// * authorize_scopes
 	//
-	// * authorize_url if not available from discovery URL specified by oidc_issuer
-	// key
-	//
-	//         * token_url if not available from discovery URL specified by
-	// oidc_issuer key
-	//
-	//         * attributes_url if not available from discovery URL
+	//         * authorize_url if not available from discovery URL
 	// specified by oidc_issuer key
 	//
-	//         * jwks_uri if not available from discovery
-	// URL specified by oidc_issuer key
+	//         * token_url if not available from
+	// discovery URL specified by oidc_issuer key
 	//
-	//         * authorize_scopes
+	//         * attributes_url if not
+	// available from discovery URL specified by oidc_issuer key
 	//
-	//     * For SAML
-	// providers:
+	//         * jwks_uri if
+	// not available from discovery URL specified by oidc_issuer key
 	//
-	//         * MetadataFile OR MetadataURL
+	//         *
+	// authorize_scopes
+	//
+	//     * For SAML providers:
+	//
+	//         * MetadataFile OR
+	// MetadataURL
 	//
 	//         * IDPSignOut optional
 	ProviderDetails map[string]*string
@@ -646,11 +659,7 @@ type MessageTemplateType struct {
 }
 
 // This data type is no longer supported. You can use it only for SMS MFA
-// configurations. You can't use it for TOTP software token MFA configurations. To
-// set either type of MFA configuration, use the AdminSetUserMFAPreference or
-// SetUserMFAPreference actions. To look up information about either type of MFA
-// configuration, use the AdminGetUserResponse$UserMFASettingList or
-// GetUserResponse$UserMFASettingList responses.
+// configurations. You can't use it for TOTP software token MFA configurations.
 type MFAOptionType struct {
 
 	// The attribute name of the MFA option type. The only valid value is phone_number.
@@ -878,8 +887,8 @@ type SchemaAttributeType struct {
 	// cases instead of using DeveloperOnlyAttribute. Specifies whether the attribute
 	// type is developer only. This attribute can only be modified by an administrator.
 	// Users will not be able to modify this attribute using their access token. For
-	// example, DeveloperOnlyAttribute can be modified using the API but cannot be
-	// updated using the API.
+	// example, DeveloperOnlyAttribute can be modified using AdminUpdateUserAttributes
+	// but cannot be updated using UpdateUserAttributes.
 	DeveloperOnlyAttribute *bool
 
 	// Specifies whether the value of the attribute can be changed. For any user pool
@@ -978,6 +987,23 @@ type StringAttributeConstraintsType struct {
 
 	// The minimum length.
 	MinLength *string
+}
+
+// The data type for TokenValidityUnits that specifics the time measurements for
+// token validity.
+type TokenValidityUnitsType struct {
+
+	// A time unit in “seconds”, “minutes”, “hours” or “days” for the value in
+	// AccessTokenValidity, defaults to hours.
+	AccessToken TimeUnitsType
+
+	// A time unit in “seconds”, “minutes”, “hours” or “days” for the value in
+	// IdTokenValidity, defaults to hours.
+	IdToken TimeUnitsType
+
+	// A time unit in “seconds”, “minutes”, “hours” or “days” for the value in
+	// RefreshTokenValidity, defaults to days.
+	RefreshToken TimeUnitsType
 }
 
 // A container for the UI customization information for a user pool's built-in app
@@ -1134,6 +1160,10 @@ type UserPoolClientDescription struct {
 // Contains information about a user pool client.
 type UserPoolClientType struct {
 
+	// The time limit, specified by tokenValidityUnits, defaulting to hours, after
+	// which the access token is no longer valid and cannot be used.
+	AccessTokenValidity *int32
+
 	// The allowed OAuth flows. Set to code to initiate a code grant flow, which
 	// provides an authorization code as the response. This code can be exchanged for
 	// access tokens with the token endpoint. Set to implicit to specify that the
@@ -1229,6 +1259,10 @@ type UserPoolClientType struct {
 	// ALLOW_REFRESH_TOKEN_AUTH: Enable authflow to refresh tokens.
 	ExplicitAuthFlows []ExplicitAuthFlowsType
 
+	// The time limit, specified by tokenValidityUnits, defaulting to hours, after
+	// which the refresh token is no longer valid and cannot be used.
+	IdTokenValidity *int32
+
 	// The date the user pool client was last modified.
 	LastModifiedDate *time.Time
 
@@ -1248,33 +1282,12 @@ type UserPoolClientType struct {
 	// prevents user existence-related errors.
 	//
 	//     * LEGACY - This represents the old
-	// behavior of Cognito where user existence related errors are not prevented.
+	// behavior of Cognito where user existence related errors are not
+	// prevented.
 	//
-	// This
-	// setting affects the behavior of following APIs:
-	//
-	//     * AdminInitiateAuth
-	//
-	//     *
-	// AdminRespondToAuthChallenge
-	//
-	//     * InitiateAuth
-	//
-	//     * RespondToAuthChallenge
-	//
-	//
-	// * ForgotPassword
-	//
-	//     * ConfirmForgotPassword
-	//
-	//     * ConfirmSignUp
-	//
-	//     *
-	// ResendConfirmationCode
-	//
-	// After February 15th 2020, the value of
-	// PreventUserExistenceErrors will default to ENABLED for newly created user pool
-	// clients if no value is provided.
+	// After February 15th 2020, the value of PreventUserExistenceErrors
+	// will default to ENABLED for newly created user pool clients if no value is
+	// provided.
 	PreventUserExistenceErrors PreventUserExistenceErrorTypes
 
 	// The Read-only attributes.
@@ -1287,6 +1300,10 @@ type UserPoolClientType struct {
 	// A list of provider names for the identity providers that are supported on this
 	// client.
 	SupportedIdentityProviders []*string
+
+	// The time units used to specify the token validity times of their respective
+	// token.
+	TokenValidityUnits *TokenValidityUnitsType
 
 	// The user pool ID for the user pool client.
 	UserPoolId *string
@@ -1440,7 +1457,8 @@ type UserPoolType struct {
 	// You can choose to enable case sensitivity on the username input for the selected
 	// sign-in option. For example, when this is set to False, users will be able to
 	// sign in using either "username" or "Username". This configuration is immutable
-	// once it has been set. For more information, see .
+	// once it has been set. For more information, see UsernameConfigurationType
+	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UsernameConfigurationType.html).
 	UsernameConfiguration *UsernameConfigurationType
 
 	// The template for verification messages.

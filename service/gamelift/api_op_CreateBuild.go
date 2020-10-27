@@ -29,8 +29,8 @@ import (
 //
 //     * To directly upload your build files to a GameLift S3
 // location. To use this option, first call CreateBuild and specify a build name
-// and operating system. This action creates a new build resource and also returns
-// an S3 location with temporary access credentials. Use the credentials to
+// and operating system. This operation creates a new build resource and also
+// returns an S3 location with temporary access credentials. Use the credentials to
 // manually upload your build files to the specified S3 location. For more
 // information, see Uploading Objects
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/UploadingObjects.html) in the
@@ -71,7 +71,7 @@ func (c *Client) CreateBuild(ctx context.Context, params *CreateBuildInput, optF
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type CreateBuildInput struct {
 
 	// A descriptive label that is associated with a build. Build names do not need to
@@ -108,7 +108,7 @@ type CreateBuildInput struct {
 	Version *string
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type CreateBuildOutput struct {
 
 	// The newly created build resource, including a unique build IDs and status.

@@ -12,15 +12,19 @@ import (
 )
 
 // [VPC only] Removes the specified egress rules from a security group for EC2-VPC.
-// This action doesn't apply to security groups for use in EC2-Classic. To remove a
-// rule, the values that you specify (for example, ports) must match the existing
-// rule's values exactly. Each rule consists of the protocol and the IPv4 or IPv6
-// CIDR range or source security group. For the TCP and UDP protocols, you must
-// also specify the destination port or range of ports. For the ICMP protocol, you
-// must also specify the ICMP type and code. If the security group rule has a
-// description, you do not have to specify the description to revoke the rule. Rule
-// changes are propagated to instances within the security group as quickly as
-// possible. However, a small delay might occur.
+// This action does not apply to security groups for use in EC2-Classic. To remove
+// a rule, the values that you specify (for example, ports) must match the existing
+// rule's values exactly. [Default VPC] If the values you specify do not match the
+// existing rule's values, no error is returned, and the output describes the
+// security group rules that were not revoked. AWS recommends that you use
+// DescribeSecurityGroups to verify that the rule has been removed. Each rule
+// consists of the protocol and the IPv4 or IPv6 CIDR range or source security
+// group. For the TCP and UDP protocols, you must also specify the destination port
+// or range of ports. For the ICMP protocol, you must also specify the ICMP type
+// and code. If the security group rule has a description, you do not have to
+// specify the description to revoke the rule. Rule changes are propagated to
+// instances within the security group as quickly as possible. However, a small
+// delay might occur.
 func (c *Client) RevokeSecurityGroupEgress(ctx context.Context, params *RevokeSecurityGroupEgressInput, optFns ...func(*Options)) (*RevokeSecurityGroupEgressOutput, error) {
 	if params == nil {
 		params = &RevokeSecurityGroupEgressInput{}
@@ -76,6 +80,15 @@ type RevokeSecurityGroupEgressInput struct {
 }
 
 type RevokeSecurityGroupEgressOutput struct {
+
+	// Returns true if the request succeeds; otherwise, returns an error.
+	Return *bool
+
+	// The outbound rules that were unknown to the service. In some cases,
+	// unknownIpPermissionSet might be in a different format from the request
+	// parameter.
+	UnknownIpPermissions []*types.IpPermission
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 }

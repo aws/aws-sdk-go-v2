@@ -63,7 +63,7 @@ func (c *Client) StartMatchBackfill(ctx context.Context, params *StartMatchBackf
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type StartMatchBackfillInput struct {
 
 	// Name of the matchmaker to use for this request. You can use either the
@@ -106,7 +106,7 @@ type StartMatchBackfillInput struct {
 	TicketId *string
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type StartMatchBackfillOutput struct {
 
 	// Ticket representing the backfill matchmaking request. This object includes the

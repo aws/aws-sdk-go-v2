@@ -10,7 +10,9 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Restarts any completed nodes in a workflow run and resumes the run execution.
+// Restarts selected nodes of a previous partially completed workflow run and
+// resumes the workflow run. The selected nodes and all nodes that are downstream
+// from the selected nodes are run.
 func (c *Client) ResumeWorkflowRun(ctx context.Context, params *ResumeWorkflowRunInput, optFns ...func(*Options)) (*ResumeWorkflowRunOutput, error) {
 	if params == nil {
 		params = &ResumeWorkflowRunInput{}
@@ -34,7 +36,7 @@ type ResumeWorkflowRunInput struct {
 	Name *string
 
 	// A list of the node IDs for the nodes you want to restart. The nodes that are to
-	// be restarted must have an execution attempt in the original run.
+	// be restarted must have a run attempt in the original run.
 	//
 	// This member is required.
 	NodeIds []*string

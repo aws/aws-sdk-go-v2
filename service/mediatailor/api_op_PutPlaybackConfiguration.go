@@ -54,6 +54,10 @@ type PutPlaybackConfigurationInput struct {
 	// The configuration for pre-roll ad insertion.
 	LivePreRollConfiguration *types.LivePreRollConfiguration
 
+	// The configuration for manifest processing rules. Manifest processing rules
+	// enable customization of the personalized manifests created by MediaTailor.
+	ManifestProcessingRules *types.ManifestProcessingRules
+
 	// The identifier for the playback configuration.
 	Name *string
 
@@ -111,6 +115,10 @@ type PutPlaybackConfigurationOutput struct {
 
 	// The configuration for pre-roll ad insertion.
 	LivePreRollConfiguration *types.LivePreRollConfiguration
+
+	// The configuration for manifest processing rules. Manifest processing rules
+	// enable customization of the personalized manifests created by MediaTailor.
+	ManifestProcessingRules *types.ManifestProcessingRules
 
 	// The identifier for the playback configuration.
 	Name *string

@@ -234,8 +234,8 @@ func (e *EventDestinationAlreadyExistsException) ErrorFault() smithy.ErrorFault 
 type EventDestinationDoesNotExistException struct {
 	Message *string
 
-	EventDestinationName *string
 	ConfigurationSetName *string
+	EventDestinationName *string
 }
 
 func (e *EventDestinationDoesNotExistException) Error() string {
@@ -462,8 +462,8 @@ func (e *InvalidS3ConfigurationException) ErrorFault() smithy.ErrorFault { retur
 type InvalidSNSDestinationException struct {
 	Message *string
 
-	ConfigurationSetName *string
 	EventDestinationName *string
+	ConfigurationSetName *string
 }
 
 func (e *InvalidSNSDestinationException) Error() string {

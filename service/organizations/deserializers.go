@@ -3609,6 +3609,9 @@ func awsAwsjson11_deserializeOpErrorInviteAccountToOrganization(response *smithy
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
 
+	case strings.EqualFold("ConstraintViolationException", errorCode):
+		return awsAwsjson11_deserializeErrorConstraintViolationException(response, errorBody)
+
 	case strings.EqualFold("DuplicateHandshakeException", errorCode):
 		return awsAwsjson11_deserializeErrorDuplicateHandshakeException(response, errorBody)
 

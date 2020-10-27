@@ -90,6 +90,10 @@ type GetBotOutput struct {
 	// sentiment analysis.
 	DetectSentiment *bool
 
+	// Indicates whether the bot uses accuracy improvements. true indicates that the
+	// bot is using the improvements, otherwise, false.
+	EnableModelImprovements *bool
+
 	// If status is FAILED, Amazon Lex explains why it failed to build the bot.
 	FailureReason *string
 
@@ -109,6 +113,16 @@ type GetBotOutput struct {
 
 	// The name of the bot.
 	Name *string
+
+	// The score that determines where Amazon Lex inserts the AMAZON.FallbackIntent,
+	// AMAZON.KendraSearchIntent, or both when returning alternative intents in a
+	// PostContent
+	// (https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostContent.html) or
+	// PostText (https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html)
+	// response. AMAZON.FallbackIntent is inserted if the confidence score for all
+	// intents is below this value. AMAZON.KendraSearchIntent is only inserted if it is
+	// configured for the bot.
+	NluIntentConfidenceThreshold *float64
 
 	// The status of the bot. When the status is BUILDING Amazon Lex is building the
 	// bot for testing and use. If the status of the bot is READY_BASIC_TESTING, you

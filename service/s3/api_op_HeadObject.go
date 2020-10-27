@@ -85,6 +85,7 @@ import (
 // The following operation is related to HeadObject:
 //
 //     * GetObject
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
 func (c *Client) HeadObject(ctx context.Context, params *HeadObjectInput, optFns ...func(*Options)) (*HeadObjectOutput, error) {
 	if params == nil {
 		params = &HeadObjectInput{}
@@ -102,7 +103,23 @@ func (c *Client) HeadObject(ctx context.Context, params *HeadObjectInput, optFns
 
 type HeadObjectInput struct {
 
-	// The name of the bucket containing the object.
+	// The name of the bucket containing the object. When using this API with an access
+	// point, you must direct requests to the access point hostname. The access point
+	// hostname takes the form
+	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
+	// operation with an access point through the AWS SDKs, you provide the access
+	// point ARN in place of the bucket name. For more information about access point
+	// ARNs, see Using Access Points
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
+	// the Amazon Simple Storage Service Developer Guide. When using this API with
+	// Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname.
+	// The S3 on Outposts hostname takes the form
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
+	// this operation using S3 on Outposts through the AWS SDKs, you provide the
+	// Outposts bucket ARN in place of the bucket name. For more information about S3
+	// on Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
+	// Amazon Simple Storage Service Developer Guide.
 	//
 	// This member is required.
 	Bucket *string
@@ -111,6 +128,10 @@ type HeadObjectInput struct {
 	//
 	// This member is required.
 	Key *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 
 	// Return the object only if its entity tag (ETag) is the same as the one
 	// specified, otherwise return a 412 (precondition failed).
@@ -136,7 +157,8 @@ type HeadObjectInput struct {
 
 	// Downloads the specified range bytes of an object. For more information about the
 	// HTTP Range header, see
-	// http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35. Amazon S3
+	// http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35
+	// (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35). Amazon S3
 	// doesn't support retrieving multiple ranges of data per GET request.
 	Range *string
 
@@ -275,13 +297,14 @@ type HeadObjectOutput struct {
 
 	// If the object is an archived object (an object whose storage class is GLACIER),
 	// the response includes this header if either the archive restoration is in
-	// progress (see RestoreObject or an archive copy is already restored. If an
-	// archive copy is already restored, the header value indicates when Amazon S3 is
-	// scheduled to delete the object copy. For example: x-amz-restore:
-	// ongoing-request="false", expiry-date="Fri, 23 Dec 2012 00:00:00 GMT" If the
-	// object restoration is in progress, the header returns the value
-	// ongoing-request="true". For more information about archiving objects, see
-	// Transitioning Objects: General Considerations
+	// progress (see RestoreObject
+	// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html) or an
+	// archive copy is already restored. If an archive copy is already restored, the
+	// header value indicates when Amazon S3 is scheduled to delete the object copy.
+	// For example: x-amz-restore: ongoing-request="false", expiry-date="Fri, 23 Dec
+	// 2012 00:00:00 GMT" If the object restoration is in progress, the header returns
+	// the value ongoing-request="true". For more information about archiving objects,
+	// see Transitioning Objects: General Considerations
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html#lifecycle-transition-general-considerations).
 	Restore *string
 

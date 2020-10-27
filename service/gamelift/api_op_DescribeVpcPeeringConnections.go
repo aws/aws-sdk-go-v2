@@ -48,14 +48,14 @@ func (c *Client) DescribeVpcPeeringConnections(ctx context.Context, params *Desc
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type DescribeVpcPeeringConnectionsInput struct {
 
 	// A unique identifier for a fleet. You can use either the fleet ID or ARN value.
 	FleetId *string
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type DescribeVpcPeeringConnectionsOutput struct {
 
 	// A collection of VPC peering connection records that match the request.

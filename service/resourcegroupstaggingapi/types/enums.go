@@ -10,6 +10,16 @@ const (
 	ErrorCodeInvalid_parameter_exception ErrorCode = "InvalidParameterException"
 )
 
+// Values returns all known values for ErrorCode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (ErrorCode) Values() []ErrorCode {
+	return []ErrorCode{
+		"InternalServiceException",
+		"InvalidParameterException",
+	}
+}
+
 type GroupByAttribute string
 
 // Enum values for GroupByAttribute
@@ -19,6 +29,17 @@ const (
 	GroupByAttributeResource_type GroupByAttribute = "RESOURCE_TYPE"
 )
 
+// Values returns all known values for GroupByAttribute. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (GroupByAttribute) Values() []GroupByAttribute {
+	return []GroupByAttribute{
+		"TARGET_ID",
+		"REGION",
+		"RESOURCE_TYPE",
+	}
+}
+
 type TargetIdType string
 
 // Enum values for TargetIdType
@@ -27,3 +48,14 @@ const (
 	TargetIdTypeOu      TargetIdType = "OU"
 	TargetIdTypeRoot    TargetIdType = "ROOT"
 )
+
+// Values returns all known values for TargetIdType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TargetIdType) Values() []TargetIdType {
+	return []TargetIdType{
+		"ACCOUNT",
+		"OU",
+		"ROOT",
+	}
+}

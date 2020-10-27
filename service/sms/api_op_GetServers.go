@@ -39,7 +39,7 @@ type GetServersInput struct {
 	// The token for the next set of results.
 	NextToken *string
 
-	// List of VmServerAddress objects
+	// The server addresses.
 	VmServerAddressList []*types.VmServerAddress
 }
 

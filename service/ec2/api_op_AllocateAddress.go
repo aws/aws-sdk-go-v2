@@ -30,7 +30,10 @@ import (
 // 5 Elastic IP addresses for EC2-VPC per Region. For more information, see Elastic
 // IP Addresses
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// in the Amazon Elastic Compute Cloud User Guide. You can allocate a carrier IP
+// address which is a public IP address from a telecommunication carrier, to a
+// network interface which resides in a subnet in a Wavelength Zone (for example an
+// EC2 instance).
 func (c *Client) AllocateAddress(ctx context.Context, params *AllocateAddressInput, optFns ...func(*Options)) (*AllocateAddressOutput, error) {
 	if params == nil {
 		params = &AllocateAddressInput{}
@@ -68,11 +71,10 @@ type AllocateAddressInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// The location from which the IP address is advertised. Use this parameter to
-	// limit the address to this location. A network border group is a unique set of
-	// Availability Zones or Local Zones from where AWS advertises IP addresses and
-	// limits the addresses to the group. IP addresses cannot move between network
-	// border groups. Use DescribeAvailabilityZones
+	// A unique set of Availability Zones, Local Zones, or Wavelength Zones from which
+	// AWS advertises IP addresses. Use this parameter to limit the IP address to this
+	// location. IP addresses cannot move between network border groups. Use
+	// DescribeAvailabilityZones
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html)
 	// to view the network border groups. You cannot use a network border group with
 	// EC2 Classic. If you attempt this operation on EC2 classic, you will receive an
@@ -92,6 +94,10 @@ type AllocateAddressOutput struct {
 	// address for use with instances in a VPC.
 	AllocationId *string
 
+	// The carrier IP address. This option is only available for network interfaces
+	// which reside in a subnet in a Wavelength Zone (for example an EC2 instance).
+	CarrierIp *string
+
 	// The customer-owned IP address.
 	CustomerOwnedIp *string
 
@@ -102,7 +108,8 @@ type AllocateAddressOutput struct {
 	// (vpc) or instances in EC2-Classic (standard).
 	Domain types.DomainType
 
-	// The location from which the IP address is advertised.
+	// The set of Availability Zones, Local Zones, or Wavelength Zones from which AWS
+	// advertises IP addresses.
 	NetworkBorderGroup *string
 
 	// The Elastic IP address.

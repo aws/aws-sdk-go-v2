@@ -46,7 +46,7 @@ type DescribeDBClusterEndpointsInput struct {
 	// db-cluster-endpoint-type filter can be one or more of: reader, writer, custom.
 	// Values for the db-cluster-endpoint-custom-type filter can be one or more of:
 	// reader, any. Values for the db-cluster-endpoint-status filter can be one or more
-	// of: available, creating, deleting, modifying.
+	// of: available, creating, deleting, inactive, modifying.
 	Filters []*types.Filter
 
 	// An optional pagination token provided by a previous DescribeDBClusterEndpoints

@@ -836,18 +836,15 @@ func validateOpCreateBatchInferenceJobInput(v *CreateBatchInferenceJobInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateBatchInferenceJobInput"}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
 	if v.JobOutput == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobOutput"))
 	} else if v.JobOutput != nil {
 		if err := validateBatchInferenceJobOutput(v.JobOutput); err != nil {
 			invalidParams.AddNested("JobOutput", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
-	}
-	if v.JobName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobName"))
 	}
 	if v.JobInput == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobInput"))
@@ -858,6 +855,9 @@ func validateOpCreateBatchInferenceJobInput(v *CreateBatchInferenceJobInput) err
 	}
 	if v.SolutionVersionArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SolutionVersionArn"))
+	}
+	if v.JobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -907,17 +907,17 @@ func validateOpCreateDatasetImportJobInput(v *CreateDatasetImportJobInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDatasetImportJobInput"}
-	if v.DataSource == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DataSource"))
+	if v.DatasetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetArn"))
 	}
 	if v.JobName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobName"))
 	}
+	if v.DataSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSource"))
+	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
-	}
-	if v.DatasetArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatasetArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -931,17 +931,17 @@ func validateOpCreateDatasetInput(v *CreateDatasetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDatasetInput"}
-	if v.DatasetGroupArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatasetGroupArn"))
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.SchemaArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SchemaArn"))
 	}
+	if v.DatasetGroupArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetGroupArn"))
+	}
 	if v.DatasetType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatasetType"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -973,14 +973,14 @@ func validateOpCreateFilterInput(v *CreateFilterInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateFilterInput"}
-	if v.FilterExpression == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FilterExpression"))
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.DatasetGroupArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatasetGroupArn"))
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if v.FilterExpression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FilterExpression"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1012,11 +1012,11 @@ func validateOpCreateSolutionInput(v *CreateSolutionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateSolutionInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.DatasetGroupArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatasetGroupArn"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

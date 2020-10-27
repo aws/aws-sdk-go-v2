@@ -61,7 +61,7 @@ func (c *Client) CreateVpcPeeringConnection(ctx context.Context, params *CreateV
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type CreateVpcPeeringConnectionInput struct {
 
 	// A unique identifier for a fleet. You can use either the fleet ID or ARN value.

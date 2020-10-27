@@ -9,6 +9,15 @@ const (
 	AbortActionCancel AbortAction = "CANCEL"
 )
 
+// Values returns all known values for AbortAction. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AbortAction) Values() []AbortAction {
+	return []AbortAction{
+		"CANCEL",
+	}
+}
+
 type ActionType string
 
 // Enum values for ActionType
@@ -19,12 +28,33 @@ const (
 	ActionTypeConnect   ActionType = "CONNECT"
 )
 
+// Values returns all known values for ActionType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ActionType) Values() []ActionType {
+	return []ActionType{
+		"PUBLISH",
+		"SUBSCRIBE",
+		"RECEIVE",
+		"CONNECT",
+	}
+}
+
 type AlertTargetType string
 
 // Enum values for AlertTargetType
 const (
 	AlertTargetTypeSns AlertTargetType = "SNS"
 )
+
+// Values returns all known values for AlertTargetType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AlertTargetType) Values() []AlertTargetType {
+	return []AlertTargetType{
+		"SNS",
+	}
+}
 
 type AuditCheckRunStatus string
 
@@ -38,6 +68,20 @@ const (
 	AuditCheckRunStatusFailed                      AuditCheckRunStatus = "FAILED"
 )
 
+// Values returns all known values for AuditCheckRunStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AuditCheckRunStatus) Values() []AuditCheckRunStatus {
+	return []AuditCheckRunStatus{
+		"IN_PROGRESS",
+		"WAITING_FOR_DATA_COLLECTION",
+		"CANCELED",
+		"COMPLETED_COMPLIANT",
+		"COMPLETED_NON_COMPLIANT",
+		"FAILED",
+	}
+}
+
 type AuditFindingSeverity string
 
 // Enum values for AuditFindingSeverity
@@ -48,6 +92,18 @@ const (
 	AuditFindingSeverityLow      AuditFindingSeverity = "LOW"
 )
 
+// Values returns all known values for AuditFindingSeverity. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AuditFindingSeverity) Values() []AuditFindingSeverity {
+	return []AuditFindingSeverity{
+		"CRITICAL",
+		"HIGH",
+		"MEDIUM",
+		"LOW",
+	}
+}
+
 type AuditFrequency string
 
 // Enum values for AuditFrequency
@@ -57,6 +113,18 @@ const (
 	AuditFrequencyBiweekly AuditFrequency = "BIWEEKLY"
 	AuditFrequencyMonthly  AuditFrequency = "MONTHLY"
 )
+
+// Values returns all known values for AuditFrequency. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AuditFrequency) Values() []AuditFrequency {
+	return []AuditFrequency{
+		"DAILY",
+		"WEEKLY",
+		"BIWEEKLY",
+		"MONTHLY",
+	}
+}
 
 type AuditMitigationActionsExecutionStatus string
 
@@ -70,6 +138,21 @@ const (
 	AuditMitigationActionsExecutionStatusPending     AuditMitigationActionsExecutionStatus = "PENDING"
 )
 
+// Values returns all known values for AuditMitigationActionsExecutionStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AuditMitigationActionsExecutionStatus) Values() []AuditMitigationActionsExecutionStatus {
+	return []AuditMitigationActionsExecutionStatus{
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
+		"CANCELED",
+		"SKIPPED",
+		"PENDING",
+	}
+}
+
 type AuditMitigationActionsTaskStatus string
 
 // Enum values for AuditMitigationActionsTaskStatus
@@ -80,12 +163,34 @@ const (
 	AuditMitigationActionsTaskStatusCanceled    AuditMitigationActionsTaskStatus = "CANCELED"
 )
 
+// Values returns all known values for AuditMitigationActionsTaskStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AuditMitigationActionsTaskStatus) Values() []AuditMitigationActionsTaskStatus {
+	return []AuditMitigationActionsTaskStatus{
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
+		"CANCELED",
+	}
+}
+
 type AuditNotificationType string
 
 // Enum values for AuditNotificationType
 const (
 	AuditNotificationTypeSns AuditNotificationType = "SNS"
 )
+
+// Values returns all known values for AuditNotificationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AuditNotificationType) Values() []AuditNotificationType {
+	return []AuditNotificationType{
+		"SNS",
+	}
+}
 
 type AuditTaskStatus string
 
@@ -97,6 +202,18 @@ const (
 	AuditTaskStatusCanceled    AuditTaskStatus = "CANCELED"
 )
 
+// Values returns all known values for AuditTaskStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AuditTaskStatus) Values() []AuditTaskStatus {
+	return []AuditTaskStatus{
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
+		"CANCELED",
+	}
+}
+
 type AuditTaskType string
 
 // Enum values for AuditTaskType
@@ -104,6 +221,16 @@ const (
 	AuditTaskTypeOn_demand_audit_task AuditTaskType = "ON_DEMAND_AUDIT_TASK"
 	AuditTaskTypeScheduled_audit_task AuditTaskType = "SCHEDULED_AUDIT_TASK"
 )
+
+// Values returns all known values for AuditTaskType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AuditTaskType) Values() []AuditTaskType {
+	return []AuditTaskType{
+		"ON_DEMAND_AUDIT_TASK",
+		"SCHEDULED_AUDIT_TASK",
+	}
+}
 
 type AuthDecision string
 
@@ -114,6 +241,17 @@ const (
 	AuthDecisionImplicit_deny AuthDecision = "IMPLICIT_DENY"
 )
 
+// Values returns all known values for AuthDecision. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AuthDecision) Values() []AuthDecision {
+	return []AuthDecision{
+		"ALLOWED",
+		"EXPLICIT_DENY",
+		"IMPLICIT_DENY",
+	}
+}
+
 type AuthorizerStatus string
 
 // Enum values for AuthorizerStatus
@@ -121,6 +259,16 @@ const (
 	AuthorizerStatusActive   AuthorizerStatus = "ACTIVE"
 	AuthorizerStatusInactive AuthorizerStatus = "INACTIVE"
 )
+
+// Values returns all known values for AuthorizerStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AuthorizerStatus) Values() []AuthorizerStatus {
+	return []AuthorizerStatus{
+		"ACTIVE",
+		"INACTIVE",
+	}
+}
 
 type AutoRegistrationStatus string
 
@@ -130,12 +278,32 @@ const (
 	AutoRegistrationStatusDisable AutoRegistrationStatus = "DISABLE"
 )
 
+// Values returns all known values for AutoRegistrationStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AutoRegistrationStatus) Values() []AutoRegistrationStatus {
+	return []AutoRegistrationStatus{
+		"ENABLE",
+		"DISABLE",
+	}
+}
+
 type AwsJobAbortCriteriaAbortAction string
 
 // Enum values for AwsJobAbortCriteriaAbortAction
 const (
 	AwsJobAbortCriteriaAbortActionCancel AwsJobAbortCriteriaAbortAction = "CANCEL"
 )
+
+// Values returns all known values for AwsJobAbortCriteriaAbortAction. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AwsJobAbortCriteriaAbortAction) Values() []AwsJobAbortCriteriaAbortAction {
+	return []AwsJobAbortCriteriaAbortAction{
+		"CANCEL",
+	}
+}
 
 type AwsJobAbortCriteriaFailureType string
 
@@ -147,6 +315,19 @@ const (
 	AwsJobAbortCriteriaFailureTypeAll       AwsJobAbortCriteriaFailureType = "ALL"
 )
 
+// Values returns all known values for AwsJobAbortCriteriaFailureType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AwsJobAbortCriteriaFailureType) Values() []AwsJobAbortCriteriaFailureType {
+	return []AwsJobAbortCriteriaFailureType{
+		"FAILED",
+		"REJECTED",
+		"TIMED_OUT",
+		"ALL",
+	}
+}
+
 type CACertificateStatus string
 
 // Enum values for CACertificateStatus
@@ -155,12 +336,31 @@ const (
 	CACertificateStatusInactive CACertificateStatus = "INACTIVE"
 )
 
+// Values returns all known values for CACertificateStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CACertificateStatus) Values() []CACertificateStatus {
+	return []CACertificateStatus{
+		"ACTIVE",
+		"INACTIVE",
+	}
+}
+
 type CACertificateUpdateAction string
 
 // Enum values for CACertificateUpdateAction
 const (
 	CACertificateUpdateActionDeactivate CACertificateUpdateAction = "DEACTIVATE"
 )
+
+// Values returns all known values for CACertificateUpdateAction. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CACertificateUpdateAction) Values() []CACertificateUpdateAction {
+	return []CACertificateUpdateAction{
+		"DEACTIVATE",
+	}
+}
 
 type CannedAccessControlList string
 
@@ -176,6 +376,22 @@ const (
 	CannedAccessControlListLogdeliverywrite       CannedAccessControlList = "log-delivery-write"
 )
 
+// Values returns all known values for CannedAccessControlList. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CannedAccessControlList) Values() []CannedAccessControlList {
+	return []CannedAccessControlList{
+		"private",
+		"public-read",
+		"public-read-write",
+		"aws-exec-read",
+		"authenticated-read",
+		"bucket-owner-read",
+		"bucket-owner-full-control",
+		"log-delivery-write",
+	}
+}
+
 type CertificateMode string
 
 // Enum values for CertificateMode
@@ -183,6 +399,16 @@ const (
 	CertificateModeDefault  CertificateMode = "DEFAULT"
 	CertificateModeSni_only CertificateMode = "SNI_ONLY"
 )
+
+// Values returns all known values for CertificateMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CertificateMode) Values() []CertificateMode {
+	return []CertificateMode{
+		"DEFAULT",
+		"SNI_ONLY",
+	}
+}
 
 type CertificateStatus string
 
@@ -195,6 +421,20 @@ const (
 	CertificateStatusRegister_inactive  CertificateStatus = "REGISTER_INACTIVE"
 	CertificateStatusPending_activation CertificateStatus = "PENDING_ACTIVATION"
 )
+
+// Values returns all known values for CertificateStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CertificateStatus) Values() []CertificateStatus {
+	return []CertificateStatus{
+		"ACTIVE",
+		"INACTIVE",
+		"REVOKED",
+		"PENDING_TRANSFER",
+		"REGISTER_INACTIVE",
+		"PENDING_ACTIVATION",
+	}
+}
 
 type ComparisonOperator string
 
@@ -210,6 +450,22 @@ const (
 	ComparisonOperatorNot_in_port_set     ComparisonOperator = "not-in-port-set"
 )
 
+// Values returns all known values for ComparisonOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ComparisonOperator) Values() []ComparisonOperator {
+	return []ComparisonOperator{
+		"less-than",
+		"less-than-equals",
+		"greater-than",
+		"greater-than-equals",
+		"in-cidr-set",
+		"not-in-cidr-set",
+		"in-port-set",
+		"not-in-port-set",
+	}
+}
+
 type DayOfWeek string
 
 // Enum values for DayOfWeek
@@ -223,6 +479,21 @@ const (
 	DayOfWeekSat DayOfWeek = "SAT"
 )
 
+// Values returns all known values for DayOfWeek. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (DayOfWeek) Values() []DayOfWeek {
+	return []DayOfWeek{
+		"SUN",
+		"MON",
+		"TUE",
+		"WED",
+		"THU",
+		"FRI",
+		"SAT",
+	}
+}
+
 type DeviceCertificateUpdateAction string
 
 // Enum values for DeviceCertificateUpdateAction
@@ -230,12 +501,31 @@ const (
 	DeviceCertificateUpdateActionDeactivate DeviceCertificateUpdateAction = "DEACTIVATE"
 )
 
+// Values returns all known values for DeviceCertificateUpdateAction. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (DeviceCertificateUpdateAction) Values() []DeviceCertificateUpdateAction {
+	return []DeviceCertificateUpdateAction{
+		"DEACTIVATE",
+	}
+}
+
 type DimensionType string
 
 // Enum values for DimensionType
 const (
 	DimensionTypeTopic_filter DimensionType = "TOPIC_FILTER"
 )
+
+// Values returns all known values for DimensionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DimensionType) Values() []DimensionType {
+	return []DimensionType{
+		"TOPIC_FILTER",
+	}
+}
 
 type DimensionValueOperator string
 
@@ -245,6 +535,16 @@ const (
 	DimensionValueOperatorNot_in DimensionValueOperator = "NOT_IN"
 )
 
+// Values returns all known values for DimensionValueOperator. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DimensionValueOperator) Values() []DimensionValueOperator {
+	return []DimensionValueOperator{
+		"IN",
+		"NOT_IN",
+	}
+}
+
 type DomainConfigurationStatus string
 
 // Enum values for DomainConfigurationStatus
@@ -252,6 +552,16 @@ const (
 	DomainConfigurationStatusEnabled  DomainConfigurationStatus = "ENABLED"
 	DomainConfigurationStatusDisabled DomainConfigurationStatus = "DISABLED"
 )
+
+// Values returns all known values for DomainConfigurationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DomainConfigurationStatus) Values() []DomainConfigurationStatus {
+	return []DomainConfigurationStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
 
 type DomainType string
 
@@ -262,6 +572,17 @@ const (
 	DomainTypeCustomer_managed DomainType = "CUSTOMER_MANAGED"
 )
 
+// Values returns all known values for DomainType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DomainType) Values() []DomainType {
+	return []DomainType{
+		"ENDPOINT",
+		"AWS_MANAGED",
+		"CUSTOMER_MANAGED",
+	}
+}
+
 type DynamicGroupStatus string
 
 // Enum values for DynamicGroupStatus
@@ -271,6 +592,17 @@ const (
 	DynamicGroupStatusRebuilding DynamicGroupStatus = "REBUILDING"
 )
 
+// Values returns all known values for DynamicGroupStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DynamicGroupStatus) Values() []DynamicGroupStatus {
+	return []DynamicGroupStatus{
+		"ACTIVE",
+		"BUILDING",
+		"REBUILDING",
+	}
+}
+
 type DynamoKeyType string
 
 // Enum values for DynamoKeyType
@@ -278,6 +610,16 @@ const (
 	DynamoKeyTypeString DynamoKeyType = "STRING"
 	DynamoKeyTypeNumber DynamoKeyType = "NUMBER"
 )
+
+// Values returns all known values for DynamoKeyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DynamoKeyType) Values() []DynamoKeyType {
+	return []DynamoKeyType{
+		"STRING",
+		"NUMBER",
+	}
+}
 
 type EventType string
 
@@ -296,6 +638,25 @@ const (
 	EventTypeCa_certificate         EventType = "CA_CERTIFICATE"
 )
 
+// Values returns all known values for EventType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (EventType) Values() []EventType {
+	return []EventType{
+		"THING",
+		"THING_GROUP",
+		"THING_TYPE",
+		"THING_GROUP_MEMBERSHIP",
+		"THING_GROUP_HIERARCHY",
+		"THING_TYPE_ASSOCIATION",
+		"JOB",
+		"JOB_EXECUTION",
+		"POLICY",
+		"CERTIFICATE",
+		"CA_CERTIFICATE",
+	}
+}
+
 type FieldType string
 
 // Enum values for FieldType
@@ -304,6 +665,17 @@ const (
 	FieldTypeString  FieldType = "String"
 	FieldTypeBoolean FieldType = "Boolean"
 )
+
+// Values returns all known values for FieldType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (FieldType) Values() []FieldType {
+	return []FieldType{
+		"Number",
+		"String",
+		"Boolean",
+	}
+}
 
 type IndexStatus string
 
@@ -314,6 +686,17 @@ const (
 	IndexStatusRebuilding IndexStatus = "REBUILDING"
 )
 
+// Values returns all known values for IndexStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (IndexStatus) Values() []IndexStatus {
+	return []IndexStatus{
+		"ACTIVE",
+		"BUILDING",
+		"REBUILDING",
+	}
+}
+
 type JobExecutionFailureType string
 
 // Enum values for JobExecutionFailureType
@@ -323,6 +706,18 @@ const (
 	JobExecutionFailureTypeTimed_out JobExecutionFailureType = "TIMED_OUT"
 	JobExecutionFailureTypeAll       JobExecutionFailureType = "ALL"
 )
+
+// Values returns all known values for JobExecutionFailureType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (JobExecutionFailureType) Values() []JobExecutionFailureType {
+	return []JobExecutionFailureType{
+		"FAILED",
+		"REJECTED",
+		"TIMED_OUT",
+		"ALL",
+	}
+}
 
 type JobExecutionStatus string
 
@@ -338,6 +733,22 @@ const (
 	JobExecutionStatusCanceled    JobExecutionStatus = "CANCELED"
 )
 
+// Values returns all known values for JobExecutionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (JobExecutionStatus) Values() []JobExecutionStatus {
+	return []JobExecutionStatus{
+		"QUEUED",
+		"IN_PROGRESS",
+		"SUCCEEDED",
+		"FAILED",
+		"TIMED_OUT",
+		"REJECTED",
+		"REMOVED",
+		"CANCELED",
+	}
+}
+
 type JobStatus string
 
 // Enum values for JobStatus
@@ -347,6 +758,18 @@ const (
 	JobStatusCompleted            JobStatus = "COMPLETED"
 	JobStatusDeletion_in_progress JobStatus = "DELETION_IN_PROGRESS"
 )
+
+// Values returns all known values for JobStatus. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (JobStatus) Values() []JobStatus {
+	return []JobStatus{
+		"IN_PROGRESS",
+		"CANCELED",
+		"COMPLETED",
+		"DELETION_IN_PROGRESS",
+	}
+}
 
 type LogLevel string
 
@@ -359,6 +782,19 @@ const (
 	LogLevelDisabled LogLevel = "DISABLED"
 )
 
+// Values returns all known values for LogLevel. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (LogLevel) Values() []LogLevel {
+	return []LogLevel{
+		"DEBUG",
+		"INFO",
+		"ERROR",
+		"WARN",
+		"DISABLED",
+	}
+}
+
 type LogTargetType string
 
 // Enum values for LogTargetType
@@ -367,6 +803,16 @@ const (
 	LogTargetTypeThing_group LogTargetType = "THING_GROUP"
 )
 
+// Values returns all known values for LogTargetType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LogTargetType) Values() []LogTargetType {
+	return []LogTargetType{
+		"DEFAULT",
+		"THING_GROUP",
+	}
+}
+
 type MessageFormat string
 
 // Enum values for MessageFormat
@@ -374,6 +820,16 @@ const (
 	MessageFormatRaw  MessageFormat = "RAW"
 	MessageFormatJson MessageFormat = "JSON"
 )
+
+// Values returns all known values for MessageFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MessageFormat) Values() []MessageFormat {
+	return []MessageFormat{
+		"RAW",
+		"JSON",
+	}
+}
 
 type MitigationActionType string
 
@@ -387,6 +843,20 @@ const (
 	MitigationActionTypePublish_finding_to_sns         MitigationActionType = "PUBLISH_FINDING_TO_SNS"
 )
 
+// Values returns all known values for MitigationActionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MitigationActionType) Values() []MitigationActionType {
+	return []MitigationActionType{
+		"UPDATE_DEVICE_CERTIFICATE",
+		"UPDATE_CA_CERTIFICATE",
+		"ADD_THINGS_TO_THING_GROUP",
+		"REPLACE_DEFAULT_POLICY_VERSION",
+		"ENABLE_IOT_LOGGING",
+		"PUBLISH_FINDING_TO_SNS",
+	}
+}
+
 type OTAUpdateStatus string
 
 // Enum values for OTAUpdateStatus
@@ -397,12 +867,33 @@ const (
 	OTAUpdateStatusCreate_failed      OTAUpdateStatus = "CREATE_FAILED"
 )
 
+// Values returns all known values for OTAUpdateStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OTAUpdateStatus) Values() []OTAUpdateStatus {
+	return []OTAUpdateStatus{
+		"CREATE_PENDING",
+		"CREATE_IN_PROGRESS",
+		"CREATE_COMPLETE",
+		"CREATE_FAILED",
+	}
+}
+
 type PolicyTemplateName string
 
 // Enum values for PolicyTemplateName
 const (
 	PolicyTemplateNameBlank_policy PolicyTemplateName = "BLANK_POLICY"
 )
+
+// Values returns all known values for PolicyTemplateName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PolicyTemplateName) Values() []PolicyTemplateName {
+	return []PolicyTemplateName{
+		"BLANK_POLICY",
+	}
+}
 
 type Protocol string
 
@@ -412,6 +903,16 @@ const (
 	ProtocolHttp Protocol = "HTTP"
 )
 
+// Values returns all known values for Protocol. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Protocol) Values() []Protocol {
+	return []Protocol{
+		"MQTT",
+		"HTTP",
+	}
+}
+
 type ReportType string
 
 // Enum values for ReportType
@@ -419,6 +920,16 @@ const (
 	ReportTypeErrors  ReportType = "ERRORS"
 	ReportTypeResults ReportType = "RESULTS"
 )
+
+// Values returns all known values for ReportType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ReportType) Values() []ReportType {
+	return []ReportType{
+		"ERRORS",
+		"RESULTS",
+	}
+}
 
 type ResourceType string
 
@@ -434,6 +945,22 @@ const (
 	ResourceTypeIam_role              ResourceType = "IAM_ROLE"
 )
 
+// Values returns all known values for ResourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ResourceType) Values() []ResourceType {
+	return []ResourceType{
+		"DEVICE_CERTIFICATE",
+		"CA_CERTIFICATE",
+		"IOT_POLICY",
+		"COGNITO_IDENTITY_POOL",
+		"CLIENT_ID",
+		"ACCOUNT_SETTINGS",
+		"ROLE_ALIAS",
+		"IAM_ROLE",
+	}
+}
+
 type ServerCertificateStatus string
 
 // Enum values for ServerCertificateStatus
@@ -441,6 +968,16 @@ const (
 	ServerCertificateStatusInvalid ServerCertificateStatus = "INVALID"
 	ServerCertificateStatusValid   ServerCertificateStatus = "VALID"
 )
+
+// Values returns all known values for ServerCertificateStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ServerCertificateStatus) Values() []ServerCertificateStatus {
+	return []ServerCertificateStatus{
+		"INVALID",
+		"VALID",
+	}
+}
 
 type ServiceType string
 
@@ -450,6 +987,17 @@ const (
 	ServiceTypeCredential_provider ServiceType = "CREDENTIAL_PROVIDER"
 	ServiceTypeJobs                ServiceType = "JOBS"
 )
+
+// Values returns all known values for ServiceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ServiceType) Values() []ServiceType {
+	return []ServiceType{
+		"DATA",
+		"CREDENTIAL_PROVIDER",
+		"JOBS",
+	}
+}
 
 type Status string
 
@@ -462,6 +1010,19 @@ const (
 	StatusCancelling Status = "Cancelling"
 )
 
+// Values returns all known values for Status. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Status) Values() []Status {
+	return []Status{
+		"InProgress",
+		"Completed",
+		"Failed",
+		"Cancelled",
+		"Cancelling",
+	}
+}
+
 type TargetSelection string
 
 // Enum values for TargetSelection
@@ -469,6 +1030,16 @@ const (
 	TargetSelectionContinuous TargetSelection = "CONTINUOUS"
 	TargetSelectionSnapshot   TargetSelection = "SNAPSHOT"
 )
+
+// Values returns all known values for TargetSelection. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TargetSelection) Values() []TargetSelection {
+	return []TargetSelection{
+		"CONTINUOUS",
+		"SNAPSHOT",
+	}
+}
 
 type ThingConnectivityIndexingMode string
 
@@ -478,6 +1049,17 @@ const (
 	ThingConnectivityIndexingModeStatus ThingConnectivityIndexingMode = "STATUS"
 )
 
+// Values returns all known values for ThingConnectivityIndexingMode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ThingConnectivityIndexingMode) Values() []ThingConnectivityIndexingMode {
+	return []ThingConnectivityIndexingMode{
+		"OFF",
+		"STATUS",
+	}
+}
+
 type ThingGroupIndexingMode string
 
 // Enum values for ThingGroupIndexingMode
@@ -485,6 +1067,16 @@ const (
 	ThingGroupIndexingModeOff ThingGroupIndexingMode = "OFF"
 	ThingGroupIndexingModeOn  ThingGroupIndexingMode = "ON"
 )
+
+// Values returns all known values for ThingGroupIndexingMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ThingGroupIndexingMode) Values() []ThingGroupIndexingMode {
+	return []ThingGroupIndexingMode{
+		"OFF",
+		"ON",
+	}
+}
 
 type ThingIndexingMode string
 
@@ -494,6 +1086,17 @@ const (
 	ThingIndexingModeRegistry            ThingIndexingMode = "REGISTRY"
 	ThingIndexingModeRegistry_and_shadow ThingIndexingMode = "REGISTRY_AND_SHADOW"
 )
+
+// Values returns all known values for ThingIndexingMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ThingIndexingMode) Values() []ThingIndexingMode {
+	return []ThingIndexingMode{
+		"OFF",
+		"REGISTRY",
+		"REGISTRY_AND_SHADOW",
+	}
+}
 
 type TopicRuleDestinationStatus string
 
@@ -505,6 +1108,18 @@ const (
 	TopicRuleDestinationStatusError       TopicRuleDestinationStatus = "ERROR"
 )
 
+// Values returns all known values for TopicRuleDestinationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TopicRuleDestinationStatus) Values() []TopicRuleDestinationStatus {
+	return []TopicRuleDestinationStatus{
+		"ENABLED",
+		"IN_PROGRESS",
+		"DISABLED",
+		"ERROR",
+	}
+}
+
 type ViolationEventType string
 
 // Enum values for ViolationEventType
@@ -513,3 +1128,14 @@ const (
 	ViolationEventTypeAlarm_cleared     ViolationEventType = "alarm-cleared"
 	ViolationEventTypeAlarm_invalidated ViolationEventType = "alarm-invalidated"
 )
+
+// Values returns all known values for ViolationEventType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ViolationEventType) Values() []ViolationEventType {
+	return []ViolationEventType{
+		"in-alarm",
+		"alarm-cleared",
+		"alarm-invalidated",
+	}
+}

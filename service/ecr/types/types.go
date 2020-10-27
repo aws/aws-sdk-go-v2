@@ -93,7 +93,7 @@ type Image struct {
 	// The image manifest associated with the image.
 	ImageManifest *string
 
-	// The media type associated with the image manifest.
+	// The manifest media type of the image.
 	ImageManifestMediaType *string
 
 	// The AWS account ID associated with the registry containing the image.
@@ -106,8 +106,14 @@ type Image struct {
 // An object that describes an image returned by a DescribeImages operation.
 type ImageDetail struct {
 
+	// The artifact media type of the image.
+	ArtifactMediaType *string
+
 	// The sha256 digest of the image manifest.
 	ImageDigest *string
+
+	// The media type of the image manifest.
+	ImageManifestMediaType *string
 
 	// The date and time, expressed in standard JavaScript date format, at which the
 	// current image was pushed to the repository.

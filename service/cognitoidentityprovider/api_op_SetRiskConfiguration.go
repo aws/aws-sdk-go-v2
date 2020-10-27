@@ -14,7 +14,7 @@ import (
 // Configures actions on detected risks. To delete the risk configuration for
 // UserPoolId or ClientId, pass null values for all four configuration types. To
 // enable Amazon Cognito advanced security features, update the user pool to
-// include the UserPoolAddOns keyAdvancedSecurityMode. See .
+// include the UserPoolAddOns keyAdvancedSecurityMode.
 func (c *Client) SetRiskConfiguration(ctx context.Context, params *SetRiskConfigurationInput, optFns ...func(*Options)) (*SetRiskConfigurationOutput, error) {
 	if params == nil {
 		params = &SetRiskConfigurationInput{}

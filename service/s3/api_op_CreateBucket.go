@@ -11,18 +11,20 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Creates a new bucket. To create a bucket, you must register with Amazon S3 and
-// have a valid AWS Access Key ID to authenticate requests. Anonymous requests are
-// never allowed to create buckets. By creating the bucket, you become the bucket
-// owner. Not every string is an acceptable bucket name. For information on bucket
-// naming restrictions, see Working with Amazon S3 Buckets
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html). By default,
-// the bucket is created in the US East (N. Virginia) Region. You can optionally
-// specify a Region in the request body. You might choose a Region to optimize
-// latency, minimize costs, or address regulatory requirements. For example, if you
-// reside in Europe, you will probably find it advantageous to create buckets in
-// the Europe (Ireland) Region. For more information, see How to Select a Region
-// for Your Buckets
+// Creates a new S3 bucket. To create a bucket, you must register with Amazon S3
+// and have a valid AWS Access Key ID to authenticate requests. Anonymous requests
+// are never allowed to create buckets. By creating the bucket, you become the
+// bucket owner. Not every string is an acceptable bucket name. For information
+// about bucket naming restrictions, see Working with Amazon S3 buckets
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html). If you want
+// to create an Amazon S3 on Outposts bucket, see Create Bucket
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html).
+// By default, the bucket is created in the US East (N. Virginia) Region. You can
+// optionally specify a Region in the request body. You might choose a Region to
+// optimize latency, minimize costs, or address regulatory requirements. For
+// example, if you reside in Europe, you will probably find it advantageous to
+// create buckets in the Europe (Ireland) Region. For more information, see
+// Accessing a bucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro).
 // If you send your create bucket request to the s3.amazonaws.com endpoint, the
 // request goes to the us-east-1 Region. Accordingly, the signature calculations in
@@ -30,7 +32,7 @@ import (
 // constraint in the request specifies another Region where the bucket is to be
 // created. If you create a bucket in a Region other than US East (N. Virginia),
 // your application must be able to handle 307 redirect. For more information, see
-// Virtual Hosting of Buckets
+// Virtual hosting of buckets
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html). When
 // creating a bucket using this operation, you can optionally specify the accounts
 // or groups that should be granted specific permissions on the bucket. There are
@@ -46,8 +48,8 @@ import (
 // * Specify access permissions explicitly using the x-amz-grant-read,
 // x-amz-grant-write, x-amz-grant-read-acp, x-amz-grant-write-acp, and
 // x-amz-grant-full-control headers. These headers map to the set of permissions
-// Amazon S3 supports in an ACL. For more information, see Access Control List
-// (ACL) Overview
+// Amazon S3 supports in an ACL. For more information, see Access control list
+// (ACL) overview
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html). You specify
 // each grantee as a type=value pair, where the type is one of the following:
 //
@@ -97,8 +99,11 @@ import (
 // CreateBucket:
 //
 //     * PutObject
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
 //
-//     * DeleteBucket
+//     *
+// DeleteBucket
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html)
 func (c *Client) CreateBucket(ctx context.Context, params *CreateBucketInput, optFns ...func(*Options)) (*CreateBucketOutput, error) {
 	if params == nil {
 		params = &CreateBucketInput{}

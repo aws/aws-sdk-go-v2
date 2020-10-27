@@ -12,9 +12,8 @@ import (
 	"time"
 )
 
-// Replaces the body of a saved backup plan identified by its backupPlanId with the
-// input document in JSON format. The new version is uniquely identified by a
-// VersionId.
+// Updates an existing backup plan identified by its backupPlanId with the input
+// document in JSON format. The new version is uniquely identified by a VersionId.
 func (c *Client) UpdateBackupPlan(ctx context.Context, params *UpdateBackupPlanInput, optFns ...func(*Options)) (*UpdateBackupPlanOutput, error) {
 	if params == nil {
 		params = &UpdateBackupPlanInput{}
@@ -45,6 +44,9 @@ type UpdateBackupPlanInput struct {
 }
 
 type UpdateBackupPlanOutput struct {
+
+	// Contains a list of BackupOptions for each resource type.
+	AdvancedBackupSettings []*types.AdvancedBackupSetting
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a backup plan; for
 	// example,

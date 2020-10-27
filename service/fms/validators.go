@@ -533,16 +533,16 @@ func validateAppsListData(v *types.AppsListData) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AppsListData"}
-	if v.PreviousAppsList != nil {
-		if err := validatePreviousAppsList(v.PreviousAppsList); err != nil {
-			invalidParams.AddNested("PreviousAppsList", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.AppsList == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AppsList"))
 	} else if v.AppsList != nil {
 		if err := validateAppsList(v.AppsList); err != nil {
 			invalidParams.AddNested("AppsList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PreviousAppsList != nil {
+		if err := validatePreviousAppsList(v.PreviousAppsList); err != nil {
+			invalidParams.AddNested("PreviousAppsList", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.ListName == nil {
@@ -560,16 +560,6 @@ func validatePolicy(v *types.Policy) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Policy"}
-	if v.PolicyName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
-	}
-	if v.SecurityServicePolicyData == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SecurityServicePolicyData"))
-	} else if v.SecurityServicePolicyData != nil {
-		if err := validateSecurityServicePolicyData(v.SecurityServicePolicyData); err != nil {
-			invalidParams.AddNested("SecurityServicePolicyData", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.ExcludeResourceTags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExcludeResourceTags"))
 	}
@@ -580,6 +570,16 @@ func validatePolicy(v *types.Policy) error {
 	}
 	if v.ResourceType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if v.PolicyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
+	}
+	if v.SecurityServicePolicyData == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityServicePolicyData"))
+	} else if v.SecurityServicePolicyData != nil {
+		if err := validateSecurityServicePolicyData(v.SecurityServicePolicyData); err != nil {
+			invalidParams.AddNested("SecurityServicePolicyData", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.RemediationEnabled == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RemediationEnabled"))
@@ -851,11 +851,11 @@ func validateOpGetViolationDetailsInput(v *GetViolationDetailsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetViolationDetailsInput"}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
-	}
 	if v.PolicyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyId"))
+	}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if v.MemberAccount == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MemberAccount"))
@@ -935,16 +935,16 @@ func validateOpPutAppsListInput(v *PutAppsListInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutAppsListInput"}
+	if v.TagList != nil {
+		if err := validateTagList(v.TagList); err != nil {
+			invalidParams.AddNested("TagList", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.AppsList == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AppsList"))
 	} else if v.AppsList != nil {
 		if err := validateAppsListData(v.AppsList); err != nil {
 			invalidParams.AddNested("AppsList", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.TagList != nil {
-		if err := validateTagList(v.TagList); err != nil {
-			invalidParams.AddNested("TagList", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1047,11 +1047,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
-	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

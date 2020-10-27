@@ -95,6 +95,9 @@ type DescribeStateMachineOutput struct {
 	// The current status of the state machine.
 	Status types.StateMachineStatus
 
+	// Selects whether AWS X-Ray tracing is enabled.
+	TracingConfiguration *types.TracingConfiguration
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 }

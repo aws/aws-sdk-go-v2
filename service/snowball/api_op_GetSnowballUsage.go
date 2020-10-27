@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Returns information about the Snowball service limit for your account, and also
-// the number of Snowballs your account has in use. The default service limit for
-// the number of Snowballs that you can have at one time is 1. If you want to
-// increase your service limit, contact AWS Support.
+// Returns information about the Snow Family service limit for your account, and
+// also the number of Snow devices your account has in use. The default service
+// limit for the number of Snow devices that you can have at one time is 1. If you
+// want to increase your service limit, contact AWS Support.
 func (c *Client) GetSnowballUsage(ctx context.Context, params *GetSnowballUsageInput, optFns ...func(*Options)) (*GetSnowballUsageOutput, error) {
 	if params == nil {
 		params = &GetSnowballUsageInput{}
@@ -34,11 +34,11 @@ type GetSnowballUsageInput struct {
 
 type GetSnowballUsageOutput struct {
 
-	// The service limit for number of Snowballs this account can have at once. The
+	// The service limit for number of Snow devices this account can have at once. The
 	// default service limit is 1 (one).
 	SnowballLimit *int32
 
-	// The number of Snowballs that this account is currently using.
+	// The number of Snow devices that this account is currently using.
 	SnowballsInUse *int32
 
 	// Metadata pertaining to the operation's result.

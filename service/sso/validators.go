@@ -110,14 +110,14 @@ func validateOpGetRoleCredentialsInput(v *GetRoleCredentialsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetRoleCredentialsInput"}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	if v.RoleName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleName"))
 	}
 	if v.AccessToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccessToken"))
 	}
-	if v.RoleName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleName"))
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

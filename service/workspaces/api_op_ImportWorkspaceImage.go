@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Imports the specified Windows 7 or Windows 10 Bring Your Own License (BYOL)
-// image into Amazon WorkSpaces. The image must be an already licensed EC2 image
-// that is in your AWS account, and you must own the image.
+// Imports the specified Windows 10 Bring Your Own License (BYOL) image into Amazon
+// WorkSpaces. The image must be an already licensed Amazon EC2 image that is in
+// your AWS account, and you must own the image. For more information about
+// creating BYOL images, see  Bring Your Own Windows Desktop Licenses
+// (https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html).
 func (c *Client) ImportWorkspaceImage(ctx context.Context, params *ImportWorkspaceImageInput, optFns ...func(*Options)) (*ImportWorkspaceImageOutput, error) {
 	if params == nil {
 		params = &ImportWorkspaceImageInput{}
@@ -46,10 +48,18 @@ type ImportWorkspaceImageInput struct {
 	// This member is required.
 	ImageName *string
 
-	// The ingestion process to be used when importing the image.
+	// The ingestion process to be used when importing the image. For non-GPU-enabled
+	// bundles (bundles other than Graphics or GraphicsPro), specify BYOL_REGULAR.
 	//
 	// This member is required.
 	IngestionProcess types.WorkspaceImageIngestionProcess
+
+	// If specified, the version of Microsoft Office to subscribe to. Valid only for
+	// Windows 10 BYOL images. For more information about subscribing to Office for
+	// BYOL images, see  Bring Your Own Windows Desktop Licenses
+	// (https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html).
+	// Although this parameter is an array, only one item is allowed at this time.
+	Applications []types.Application
 
 	// The tags. Each WorkSpaces resource can have a maximum of 50 tags.
 	Tags []*types.Tag

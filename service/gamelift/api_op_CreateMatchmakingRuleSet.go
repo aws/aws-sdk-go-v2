@@ -69,7 +69,7 @@ func (c *Client) CreateMatchmakingRuleSet(ctx context.Context, params *CreateMat
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type CreateMatchmakingRuleSetInput struct {
 
 	// A unique identifier for a matchmaking rule set. A matchmaking configuration
@@ -97,7 +97,7 @@ type CreateMatchmakingRuleSetInput struct {
 	Tags []*types.Tag
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type CreateMatchmakingRuleSetOutput struct {
 
 	// The newly created matchmaking rule set.

@@ -12,6 +12,18 @@ const (
 	ActiveDirectoryErrorTypeInvalid_domain_stage     ActiveDirectoryErrorType = "INVALID_DOMAIN_STAGE"
 )
 
+// Values returns all known values for ActiveDirectoryErrorType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ActiveDirectoryErrorType) Values() []ActiveDirectoryErrorType {
+	return []ActiveDirectoryErrorType{
+		"DOMAIN_NOT_FOUND",
+		"INCOMPATIBLE_DOMAIN_MODE",
+		"WRONG_VPC",
+		"INVALID_DOMAIN_STAGE",
+	}
+}
+
 type AdministrativeActionType string
 
 // Enum values for AdministrativeActionType
@@ -19,6 +31,16 @@ const (
 	AdministrativeActionTypeFile_system_update   AdministrativeActionType = "FILE_SYSTEM_UPDATE"
 	AdministrativeActionTypeStorage_optimization AdministrativeActionType = "STORAGE_OPTIMIZATION"
 )
+
+// Values returns all known values for AdministrativeActionType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AdministrativeActionType) Values() []AdministrativeActionType {
+	return []AdministrativeActionType{
+		"FILE_SYSTEM_UPDATE",
+		"STORAGE_OPTIMIZATION",
+	}
+}
 
 type AutoImportPolicyType string
 
@@ -29,15 +51,40 @@ const (
 	AutoImportPolicyTypeNew_changed AutoImportPolicyType = "NEW_CHANGED"
 )
 
+// Values returns all known values for AutoImportPolicyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AutoImportPolicyType) Values() []AutoImportPolicyType {
+	return []AutoImportPolicyType{
+		"NONE",
+		"NEW",
+		"NEW_CHANGED",
+	}
+}
+
 type BackupLifecycle string
 
 // Enum values for BackupLifecycle
 const (
-	BackupLifecycleAvailable BackupLifecycle = "AVAILABLE"
-	BackupLifecycleCreating  BackupLifecycle = "CREATING"
-	BackupLifecycleDeleted   BackupLifecycle = "DELETED"
-	BackupLifecycleFailed    BackupLifecycle = "FAILED"
+	BackupLifecycleAvailable    BackupLifecycle = "AVAILABLE"
+	BackupLifecycleCreating     BackupLifecycle = "CREATING"
+	BackupLifecycleTransferring BackupLifecycle = "TRANSFERRING"
+	BackupLifecycleDeleted      BackupLifecycle = "DELETED"
+	BackupLifecycleFailed       BackupLifecycle = "FAILED"
 )
+
+// Values returns all known values for BackupLifecycle. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BackupLifecycle) Values() []BackupLifecycle {
+	return []BackupLifecycle{
+		"AVAILABLE",
+		"CREATING",
+		"TRANSFERRING",
+		"DELETED",
+		"FAILED",
+	}
+}
 
 type BackupType string
 
@@ -46,6 +93,16 @@ const (
 	BackupTypeAutomatic      BackupType = "AUTOMATIC"
 	BackupTypeUser_initiated BackupType = "USER_INITIATED"
 )
+
+// Values returns all known values for BackupType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (BackupType) Values() []BackupType {
+	return []BackupType{
+		"AUTOMATIC",
+		"USER_INITIATED",
+	}
+}
 
 type DataRepositoryLifecycle string
 
@@ -58,6 +115,19 @@ const (
 	DataRepositoryLifecycleDeleting      DataRepositoryLifecycle = "DELETING"
 )
 
+// Values returns all known values for DataRepositoryLifecycle. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataRepositoryLifecycle) Values() []DataRepositoryLifecycle {
+	return []DataRepositoryLifecycle{
+		"CREATING",
+		"AVAILABLE",
+		"MISCONFIGURED",
+		"UPDATING",
+		"DELETING",
+	}
+}
+
 type DataRepositoryTaskFilterName string
 
 // Enum values for DataRepositoryTaskFilterName
@@ -65,6 +135,16 @@ const (
 	DataRepositoryTaskFilterNameFile_system_id DataRepositoryTaskFilterName = "file-system-id"
 	DataRepositoryTaskFilterNameTask_lifecycle DataRepositoryTaskFilterName = "task-lifecycle"
 )
+
+// Values returns all known values for DataRepositoryTaskFilterName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataRepositoryTaskFilterName) Values() []DataRepositoryTaskFilterName {
+	return []DataRepositoryTaskFilterName{
+		"file-system-id",
+		"task-lifecycle",
+	}
+}
 
 type DataRepositoryTaskLifecycle string
 
@@ -78,12 +158,53 @@ const (
 	DataRepositoryTaskLifecycleCanceling DataRepositoryTaskLifecycle = "CANCELING"
 )
 
+// Values returns all known values for DataRepositoryTaskLifecycle. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataRepositoryTaskLifecycle) Values() []DataRepositoryTaskLifecycle {
+	return []DataRepositoryTaskLifecycle{
+		"PENDING",
+		"EXECUTING",
+		"FAILED",
+		"SUCCEEDED",
+		"CANCELED",
+		"CANCELING",
+	}
+}
+
 type DataRepositoryTaskType string
 
 // Enum values for DataRepositoryTaskType
 const (
 	DataRepositoryTaskTypeExport DataRepositoryTaskType = "EXPORT_TO_REPOSITORY"
 )
+
+// Values returns all known values for DataRepositoryTaskType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataRepositoryTaskType) Values() []DataRepositoryTaskType {
+	return []DataRepositoryTaskType{
+		"EXPORT_TO_REPOSITORY",
+	}
+}
+
+type DriveCacheType string
+
+// Enum values for DriveCacheType
+const (
+	DriveCacheTypeNone DriveCacheType = "NONE"
+	DriveCacheTypeRead DriveCacheType = "READ"
+)
+
+// Values returns all known values for DriveCacheType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DriveCacheType) Values() []DriveCacheType {
+	return []DriveCacheType{
+		"NONE",
+		"READ",
+	}
+}
 
 type FileSystemLifecycle string
 
@@ -97,6 +218,20 @@ const (
 	FileSystemLifecycleUpdating      FileSystemLifecycle = "UPDATING"
 )
 
+// Values returns all known values for FileSystemLifecycle. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FileSystemLifecycle) Values() []FileSystemLifecycle {
+	return []FileSystemLifecycle{
+		"AVAILABLE",
+		"CREATING",
+		"FAILED",
+		"DELETING",
+		"MISCONFIGURED",
+		"UPDATING",
+	}
+}
+
 type FileSystemMaintenanceOperation string
 
 // Enum values for FileSystemMaintenanceOperation
@@ -105,6 +240,17 @@ const (
 	FileSystemMaintenanceOperationBacking_up FileSystemMaintenanceOperation = "BACKING_UP"
 )
 
+// Values returns all known values for FileSystemMaintenanceOperation. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (FileSystemMaintenanceOperation) Values() []FileSystemMaintenanceOperation {
+	return []FileSystemMaintenanceOperation{
+		"PATCHING",
+		"BACKING_UP",
+	}
+}
+
 type FileSystemType string
 
 // Enum values for FileSystemType
@@ -112,6 +258,16 @@ const (
 	FileSystemTypeWindows FileSystemType = "WINDOWS"
 	FileSystemTypeLustre  FileSystemType = "LUSTRE"
 )
+
+// Values returns all known values for FileSystemType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FileSystemType) Values() []FileSystemType {
+	return []FileSystemType{
+		"WINDOWS",
+		"LUSTRE",
+	}
+}
 
 type FilterName string
 
@@ -122,6 +278,17 @@ const (
 	FilterNameFile_system_type FilterName = "file-system-type"
 )
 
+// Values returns all known values for FilterName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (FilterName) Values() []FilterName {
+	return []FilterName{
+		"file-system-id",
+		"backup-type",
+		"file-system-type",
+	}
+}
+
 type LustreDeploymentType string
 
 // Enum values for LustreDeploymentType
@@ -131,6 +298,17 @@ const (
 	LustreDeploymentTypePersistent_1 LustreDeploymentType = "PERSISTENT_1"
 )
 
+// Values returns all known values for LustreDeploymentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LustreDeploymentType) Values() []LustreDeploymentType {
+	return []LustreDeploymentType{
+		"SCRATCH_1",
+		"SCRATCH_2",
+		"PERSISTENT_1",
+	}
+}
+
 type ReportFormat string
 
 // Enum values for ReportFormat
@@ -138,12 +316,30 @@ const (
 	ReportFormatReport_csv_20191124 ReportFormat = "REPORT_CSV_20191124"
 )
 
+// Values returns all known values for ReportFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ReportFormat) Values() []ReportFormat {
+	return []ReportFormat{
+		"REPORT_CSV_20191124",
+	}
+}
+
 type ReportScope string
 
 // Enum values for ReportScope
 const (
 	ReportScopeFailed_files_only ReportScope = "FAILED_FILES_ONLY"
 )
+
+// Values returns all known values for ReportScope. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ReportScope) Values() []ReportScope {
+	return []ReportScope{
+		"FAILED_FILES_ONLY",
+	}
+}
 
 type ServiceLimit string
 
@@ -154,6 +350,18 @@ const (
 	ServiceLimitTotal_storage                ServiceLimit = "TOTAL_STORAGE"
 	ServiceLimitTotal_user_initiated_backups ServiceLimit = "TOTAL_USER_INITIATED_BACKUPS"
 )
+
+// Values returns all known values for ServiceLimit. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ServiceLimit) Values() []ServiceLimit {
+	return []ServiceLimit{
+		"FILE_SYSTEM_COUNT",
+		"TOTAL_THROUGHPUT_CAPACITY",
+		"TOTAL_STORAGE",
+		"TOTAL_USER_INITIATED_BACKUPS",
+	}
+}
 
 type Status string
 
@@ -166,6 +374,19 @@ const (
 	StatusUpdated_optimizing Status = "UPDATED_OPTIMIZING"
 )
 
+// Values returns all known values for Status. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Status) Values() []Status {
+	return []Status{
+		"FAILED",
+		"IN_PROGRESS",
+		"PENDING",
+		"COMPLETED",
+		"UPDATED_OPTIMIZING",
+	}
+}
+
 type StorageType string
 
 // Enum values for StorageType
@@ -173,6 +394,16 @@ const (
 	StorageTypeSsd StorageType = "SSD"
 	StorageTypeHdd StorageType = "HDD"
 )
+
+// Values returns all known values for StorageType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (StorageType) Values() []StorageType {
+	return []StorageType{
+		"SSD",
+		"HDD",
+	}
+}
 
 type WindowsDeploymentType string
 
@@ -182,3 +413,14 @@ const (
 	WindowsDeploymentTypeSingle_az_1 WindowsDeploymentType = "SINGLE_AZ_1"
 	WindowsDeploymentTypeSingle_az_2 WindowsDeploymentType = "SINGLE_AZ_2"
 )
+
+// Values returns all known values for WindowsDeploymentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WindowsDeploymentType) Values() []WindowsDeploymentType {
+	return []WindowsDeploymentType{
+		"MULTI_AZ_1",
+		"SINGLE_AZ_1",
+		"SINGLE_AZ_2",
+	}
+}

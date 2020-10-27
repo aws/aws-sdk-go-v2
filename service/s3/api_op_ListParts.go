@@ -14,14 +14,15 @@ import (
 
 // Lists the parts that have been uploaded for a specific multipart upload. This
 // operation must include the upload ID, which you obtain by sending the initiate
-// multipart upload request (see CreateMultipartUpload). This request returns a
-// maximum of 1,000 uploaded parts. The default number of parts returned is 1,000
-// parts. You can restrict the number of parts returned by specifying the max-parts
-// request parameter. If your multipart upload consists of more than 1,000 parts,
-// the response returns an IsTruncated field with the value of true, and a
-// NextPartNumberMarker element. In subsequent ListParts requests you can include
-// the part-number-marker query string parameter and set its value to the
-// NextPartNumberMarker field value from the previous response. For more
+// multipart upload request (see CreateMultipartUpload
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html)).
+// This request returns a maximum of 1,000 uploaded parts. The default number of
+// parts returned is 1,000 parts. You can restrict the number of parts returned by
+// specifying the max-parts request parameter. If your multipart upload consists of
+// more than 1,000 parts, the response returns an IsTruncated field with the value
+// of true, and a NextPartNumberMarker element. In subsequent ListParts requests
+// you can include the part-number-marker query string parameter and set its value
+// to the NextPartNumberMarker field value from the previous response. For more
 // information on multipart uploads, see Uploading Objects Using Multipart Upload
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html). For
 // information on permissions required to use the multipart upload API, see
@@ -30,16 +31,23 @@ import (
 // following operations are related to ListParts:
 //
 //     * CreateMultipartUpload
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html)
 //
 //
 // * UploadPart
-//
-//     * CompleteMultipartUpload
-//
-//     * AbortMultipartUpload
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)
 //
 //     *
-// ListMultipartUploads
+// CompleteMultipartUpload
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html)
+//
+//
+// * AbortMultipartUpload
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html)
+//
+//
+// * ListMultipartUploads
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html)
 func (c *Client) ListParts(ctx context.Context, params *ListPartsInput, optFns ...func(*Options)) (*ListPartsOutput, error) {
 	if params == nil {
 		params = &ListPartsInput{}
@@ -57,15 +65,23 @@ func (c *Client) ListParts(ctx context.Context, params *ListPartsInput, optFns .
 
 type ListPartsInput struct {
 
-	// Name of the bucket to which the parts are being uploaded. When using this API
-	// with an access point, you must direct requests to the access point hostname. The
-	// access point hostname takes the form
+	// The name of the bucket to which the parts are being uploaded. When using this
+	// API with an access point, you must direct requests to the access point hostname.
+	// The access point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// operation using an access point through the AWS SDKs, you provide the access
+	// operation with an access point through the AWS SDKs, you provide the access
 	// point ARN in place of the bucket name. For more information about access point
 	// ARNs, see Using Access Points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
-	// the Amazon Simple Storage Service Developer Guide.
+	// the Amazon Simple Storage Service Developer Guide. When using this API with
+	// Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname.
+	// The S3 on Outposts hostname takes the form
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
+	// this operation using S3 on Outposts through the AWS SDKs, you provide the
+	// Outposts bucket ARN in place of the bucket name. For more information about S3
+	// on Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
+	// Amazon Simple Storage Service Developer Guide.
 	//
 	// This member is required.
 	Bucket *string
@@ -79,6 +95,10 @@ type ListPartsInput struct {
 	//
 	// This member is required.
 	UploadId *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 
 	// Sets the maximum number of parts to return.
 	MaxParts *int32
@@ -114,7 +134,7 @@ type ListPartsOutput struct {
 	// incomplete multipart uploads.
 	AbortRuleId *string
 
-	// Name of the bucket to which the multipart upload was initiated.
+	// The name of the bucket to which the multipart upload was initiated.
 	Bucket *string
 
 	// Container element that identifies who initiated the multipart upload. If the

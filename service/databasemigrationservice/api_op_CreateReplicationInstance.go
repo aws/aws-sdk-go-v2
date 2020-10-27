@@ -15,10 +15,10 @@ import (
 // requires that your account have certain roles with appropriate permissions
 // before you can create a replication instance. For information on the required
 // roles, see Creating the IAM Roles to Use With the AWS CLI and AWS DMS API
-// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.APIRole.html).
+// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.APIRole).
 // For information on the required permissions, see IAM Permissions Needed to Use
 // AWS DMS
-// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.IAMPermissions.html).
+// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.IAMPermissions).
 func (c *Client) CreateReplicationInstance(ctx context.Context, params *CreateReplicationInstanceInput, optFns ...func(*Options)) (*CreateReplicationInstanceOutput, error) {
 	if params == nil {
 		params = &CreateReplicationInstanceInput{}
@@ -84,7 +84,9 @@ type CreateReplicationInstanceInput struct {
 	// servers. For example: "1.1.1.1,2.2.2.2,3.3.3.3,4.4.4.4"
 	DnsNameServers *string
 
-	// The engine version number of the replication instance.
+	// The engine version number of the replication instance. If an engine version
+	// number is not specified when a replication instance is created, the default is
+	// the latest engine version available.
 	EngineVersion *string
 
 	// An AWS KMS key identifier that is used to encrypt the data on the replication
@@ -112,6 +114,17 @@ type CreateReplicationInstanceInput struct {
 
 	// A subnet group to associate with the replication instance.
 	ReplicationSubnetGroupIdentifier *string
+
+	// A friendly name for the resource identifier at the end of the EndpointArn
+	// response parameter that is returned in the created Endpoint object. The value
+	// for this parameter can have up to 31 characters. It can contain only ASCII
+	// letters, digits, and hyphen ('-'). Also, it can't end with a hyphen or contain
+	// two consecutive hyphens, and can only begin with a letter, such as
+	// Example-App-ARN1. For example, this value might result in the EndpointArn value
+	// arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1. If you don't specify a
+	// ResourceIdentifier value, AWS DMS generates a default identifier value for the
+	// end of EndpointArn.
+	ResourceIdentifier *string
 
 	// One or more tags to be assigned to the replication instance.
 	Tags []*types.Tag

@@ -25,53 +25,39 @@ import (
 // matchmaking configuration. If successful, a matchmaking ticket is returned with
 // status set to QUEUED. Track the status of the ticket to respond as needed and
 // acquire game session connection information for successfully completed matches.
-// Tracking ticket status -- A couple of options are available for tracking the
-// status of matchmaking requests:
+// Ticket status updates are tracked using event notification through Amazon Simple
+// Notification Service (SNS), which is defined in the matchmaking configuration.
+// Processing a matchmaking request -- FlexMatch handles a matchmaking request as
+// follows:
 //
-//     * Polling -- Call DescribeMatchmaking. This
-// operation returns the full ticket object, including current status and (for
-// completed tickets) game session connection info. We recommend polling no more
-// than once every 10 seconds.
+//     * Your client code submits a StartMatchmaking request for one or
+// more players and tracks the status of the request ticket.
 //
-//     * Notifications -- Get event notifications for
-// changes in ticket status using Amazon Simple Notification Service (SNS).
-// Notifications are easy to set up (see CreateMatchmakingConfiguration) and
-// typically deliver match status changes faster and more efficiently than polling.
-// We recommend that you use polling to back up to notifications (since delivery is
-// not guaranteed) and call DescribeMatchmaking only when notifications are not
-// received within 30 seconds.
+//     * FlexMatch uses
+// this ticket and others in process to build an acceptable match. When a potential
+// match is identified, all tickets in the proposed match are advanced to the next
+// status.
 //
-// Processing a matchmaking request -- FlexMatch
-// handles a matchmaking request as follows:
+//     * If the match requires player acceptance (set in the matchmaking
+// configuration), the tickets move into status REQUIRES_ACCEPTANCE. This status
+// triggers your client code to solicit acceptance from all players in every ticket
+// involved in the match, and then call AcceptMatch for each player. If any player
+// rejects or fails to accept the match before a specified timeout, the proposed
+// match is dropped (see AcceptMatch for more details).
 //
-//     * Your client code submits a
-// StartMatchmaking request for one or more players and tracks the status of the
-// request ticket.
+//     * Once a match is
+// proposed and accepted, the matchmaking tickets move into status PLACING.
+// FlexMatch locates resources for a new game session using the game session queue
+// (set in the matchmaking configuration) and creates the game session based on the
+// match data.
 //
-//     * FlexMatch uses this ticket and others in process to build
-// an acceptable match. When a potential match is identified, all tickets in the
-// proposed match are advanced to the next status.
+//     * When the match is successfully placed, the matchmaking
+// tickets move into COMPLETED status. Connection information (including game
+// session endpoint and player session) is added to the matchmaking tickets.
+// Matched players can use the connection information to join the game.
 //
-//     * If the match requires
-// player acceptance (set in the matchmaking configuration), the tickets move into
-// status REQUIRES_ACCEPTANCE. This status triggers your client code to solicit
-// acceptance from all players in every ticket involved in the match, and then call
-// AcceptMatch for each player. If any player rejects or fails to accept the match
-// before a specified timeout, the proposed match is dropped (see AcceptMatch for
-// more details).
-//
-//     * Once a match is proposed and accepted, the matchmaking
-// tickets move into status PLACING. FlexMatch locates resources for a new game
-// session using the game session queue (set in the matchmaking configuration) and
-// creates the game session based on the match data.
-//
-//     * When the match is
-// successfully placed, the matchmaking tickets move into COMPLETED status.
-// Connection information (including game session endpoint and player session) is
-// added to the matchmaking tickets. Matched players can use the connection
-// information to join the game.
-//
-// Learn more  Add FlexMatch to a Game Client
+// Learn more
+// Add FlexMatch to a Game Client
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-client.html)
 // Set Up FlexMatch Event Notification
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-notification.html)
@@ -106,7 +92,7 @@ func (c *Client) StartMatchmaking(ctx context.Context, params *StartMatchmakingI
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type StartMatchmakingInput struct {
 
 	// Name of the matchmaking configuration to use for this request. Matchmaking
@@ -130,7 +116,7 @@ type StartMatchmakingInput struct {
 	TicketId *string
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type StartMatchmakingOutput struct {
 
 	// Ticket representing the matchmaking request. This object include the information

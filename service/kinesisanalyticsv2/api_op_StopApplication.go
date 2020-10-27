@@ -34,6 +34,13 @@ type StopApplicationInput struct {
 	//
 	// This member is required.
 	ApplicationName *string
+
+	// Set to true to force the application to stop. If you set Force to true, Kinesis
+	// Data Analytics stops the application without taking a snapshot. You can only
+	// force stop a Flink-based Kinesis Data Analytics application. You can't force
+	// stop a SQL-based Kinesis Data Analytics application. The application must be in
+	// the STARTING, UPDATING, STOPPING, AUTOSCALING, or RUNNING state.
+	Force *bool
 }
 
 type StopApplicationOutput struct {

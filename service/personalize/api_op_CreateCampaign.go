@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -79,6 +80,9 @@ type CreateCampaignInput struct {
 	//
 	// This member is required.
 	SolutionVersionArn *string
+
+	// The configuration details of a campaign.
+	CampaignConfig *types.CampaignConfig
 }
 
 type CreateCampaignOutput struct {

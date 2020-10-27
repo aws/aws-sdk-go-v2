@@ -53,6 +53,9 @@ type DescribeFaqOutput struct {
 	// the FAQ failed.
 	ErrorMessage *string
 
+	// The file format used by the input files for the FAQ.
+	FileFormat types.FaqFileFormat
+
 	// The identifier of the FAQ.
 	Id *string
 

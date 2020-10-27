@@ -42,6 +42,9 @@ type DescribeChannelOutput struct {
 	// The unique arn of the channel.
 	Arn *string
 
+	// Specification of CDI inputs for this channel
+	CdiInputSpecification *types.CdiInputSpecification
+
 	// The class for this channel. STANDARD for a channel with two pipelines or
 	// SINGLE_PIPELINE for a channel with one pipeline.
 	ChannelClass types.ChannelClass
@@ -63,7 +66,7 @@ type DescribeChannelOutput struct {
 	// List of input attachments for channel.
 	InputAttachments []*types.InputAttachment
 
-	// Placeholder documentation for InputSpecification
+	// Specification of network and file inputs for this channel
 	InputSpecification *types.InputSpecification
 
 	// The log level being written to CloudWatch Logs.

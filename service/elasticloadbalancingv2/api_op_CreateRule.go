@@ -12,10 +12,11 @@ import (
 )
 
 // Creates a rule for the specified listener. The listener must be associated with
-// an Application Load Balancer. Rules are evaluated in priority order, from the
-// lowest value to the highest value. When the conditions for a rule are met, its
-// actions are performed. If the conditions for no rules are met, the actions for
-// the default rule are performed. For more information, see Listener Rules
+// an Application Load Balancer. Each rule consists of a priority, one or more
+// actions, and one or more conditions. Rules are evaluated in priority order, from
+// the lowest value to the highest value. When the conditions for a rule are met,
+// its actions are performed. If the conditions for no rules are met, the actions
+// for the default rule are performed. For more information, see Listener Rules
 // (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#listener-rules)
 // in the Application Load Balancers Guide. To view your current rules, use
 // DescribeRules. To update a rule, use ModifyRule. To set the priorities of your
@@ -54,9 +55,10 @@ type CreateRuleInput struct {
 	// This member is required.
 	Actions []*types.Action
 
-	// The conditions. Each rule can include zero or one of the following conditions:
-	// http-request-method, host-header, path-pattern, and source-ip, and zero or more
-	// of the following conditions: http-header and query-string.
+	// The conditions. Each rule can optionally include up to one of each of the
+	// following conditions: http-request-method, host-header, path-pattern, and
+	// source-ip. Each rule can also optionally include one or more of each of the
+	// following conditions: http-header and query-string.
 	//
 	// This member is required.
 	Conditions []*types.RuleCondition
@@ -70,6 +72,9 @@ type CreateRuleInput struct {
 	//
 	// This member is required.
 	Priority *int32
+
+	// The tags to assign to the rule.
+	Tags []*types.Tag
 }
 
 type CreateRuleOutput struct {

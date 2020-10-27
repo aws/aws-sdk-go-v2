@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes a build. This action permanently deletes the build resource and any
+// Deletes a build. This operation permanently deletes the build resource and any
 // uploaded build files. Deleting a build does not affect the status of any active
 // fleets using the build, but you can no longer create new fleets with the deleted
 // build. To delete a build, specify the build ID. Learn more  Upload a Custom
@@ -43,7 +43,7 @@ func (c *Client) DeleteBuild(ctx context.Context, params *DeleteBuildInput, optF
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type DeleteBuildInput struct {
 
 	// A unique identifier for a build to delete. You can use either the build ID or

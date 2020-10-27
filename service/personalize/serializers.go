@@ -2025,6 +2025,20 @@ func awsAwsjson11_serializeDocumentAutoMLConfig(v *types.AutoMLConfig, value smi
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentBatchInferenceJobConfig(v *types.BatchInferenceJobConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ItemExplorationConfig != nil {
+		ok := object.Key("itemExplorationConfig")
+		if err := awsAwsjson11_serializeDocumentHyperParameters(v.ItemExplorationConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentBatchInferenceJobInput(v *types.BatchInferenceJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2046,6 +2060,20 @@ func awsAwsjson11_serializeDocumentBatchInferenceJobOutput(v *types.BatchInferen
 	if v.S3DataDestination != nil {
 		ok := object.Key("s3DataDestination")
 		if err := awsAwsjson11_serializeDocumentS3DataConfig(v.S3DataDestination, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCampaignConfig(v *types.CampaignConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ItemExplorationConfig != nil {
+		ok := object.Key("itemExplorationConfig")
+		if err := awsAwsjson11_serializeDocumentHyperParameters(v.ItemExplorationConfig, ok); err != nil {
 			return err
 		}
 	}
@@ -2380,6 +2408,13 @@ func awsAwsjson11_serializeOpDocumentCreateBatchInferenceJobInput(v *CreateBatch
 	object := value.Object()
 	defer object.Close()
 
+	if v.BatchInferenceJobConfig != nil {
+		ok := object.Key("batchInferenceJobConfig")
+		if err := awsAwsjson11_serializeDocumentBatchInferenceJobConfig(v.BatchInferenceJobConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.FilterArn != nil {
 		ok := object.Key("filterArn")
 		ok.String(*v.FilterArn)
@@ -2425,6 +2460,13 @@ func awsAwsjson11_serializeOpDocumentCreateBatchInferenceJobInput(v *CreateBatch
 func awsAwsjson11_serializeOpDocumentCreateCampaignInput(v *CreateCampaignInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CampaignConfig != nil {
+		ok := object.Key("campaignConfig")
+		if err := awsAwsjson11_serializeDocumentCampaignConfig(v.CampaignConfig, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.MinProvisionedTPS != nil {
 		ok := object.Key("minProvisionedTPS")
@@ -3130,6 +3172,13 @@ func awsAwsjson11_serializeOpDocumentUpdateCampaignInput(v *UpdateCampaignInput,
 	if v.CampaignArn != nil {
 		ok := object.Key("campaignArn")
 		ok.String(*v.CampaignArn)
+	}
+
+	if v.CampaignConfig != nil {
+		ok := object.Key("campaignConfig")
+		if err := awsAwsjson11_serializeDocumentCampaignConfig(v.CampaignConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.MinProvisionedTPS != nil {

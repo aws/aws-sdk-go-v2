@@ -323,8 +323,36 @@ type ProvisionedProductAttribute struct {
 	// repeated request.
 	IdempotencyToken *string
 
+	// The record identifier of the last request performed on this provisioned product
+	// of the following types:
+	//
+	//     * ProvisionedProduct
+	//
+	//     *
+	// UpdateProvisionedProduct
+	//
+	//     * ExecuteProvisionedProductPlan
+	//
+	//     *
+	// TerminateProvisionedProduct
+	LastProvisioningRecordId *string
+
 	// The record identifier of the last request performed on this provisioned product.
 	LastRecordId *string
+
+	// The record identifier of the last successful request performed on this
+	// provisioned product of the following types:
+	//
+	//     * ProvisionedProduct
+	//
+	//     *
+	// UpdateProvisionedProduct
+	//
+	//     * ExecuteProvisionedProductPlan
+	//
+	//     *
+	// TerminateProvisionedProduct
+	LastSuccessfulProvisioningRecordId *string
 
 	// The user-friendly name of the provisioned product.
 	Name *string
@@ -336,8 +364,14 @@ type ProvisionedProductAttribute struct {
 	// The product identifier.
 	ProductId *string
 
+	// The name of the product.
+	ProductName *string
+
 	// The identifier of the provisioning artifact.
 	ProvisioningArtifactId *string
+
+	// The name of the provisioning artifact.
+	ProvisioningArtifactName *string
 
 	// The current status of the provisioned product.
 	//
@@ -399,8 +433,39 @@ type ProvisionedProductDetail struct {
 	// repeated request.
 	IdempotencyToken *string
 
+	// The record identifier of the last request performed on this provisioned product
+	// of the following types:
+	//
+	//     * ProvisionedProduct
+	//
+	//     *
+	// UpdateProvisionedProduct
+	//
+	//     * ExecuteProvisionedProductPlan
+	//
+	//     *
+	// TerminateProvisionedProduct
+	LastProvisioningRecordId *string
+
 	// The record identifier of the last request performed on this provisioned product.
 	LastRecordId *string
+
+	// The record identifier of the last successful request performed on this
+	// provisioned product of the following types:
+	//
+	//     * ProvisionedProduct
+	//
+	//     *
+	// UpdateProvisionedProduct
+	//
+	//     * ExecuteProvisionedProductPlan
+	//
+	//     *
+	// TerminateProvisionedProduct
+	LastSuccessfulProvisioningRecordId *string
+
+	// The ARN of the launch role associated with the provisioned product.
+	LaunchRoleArn *string
 
 	// The user-friendly name of the provisioned product.
 	Name *string
@@ -777,6 +842,9 @@ type RecordDetail struct {
 
 	// The UTC time stamp of the creation time.
 	CreatedTime *time.Time
+
+	// The ARN of the launch role associated with the provisioned product.
+	LaunchRoleArn *string
 
 	// The path identifier.
 	PathId *string

@@ -33,11 +33,15 @@ import (
 //
 //     *
 // GetBucketInventoryConfiguration
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketInventoryConfiguration.html)
 //
-//     * DeleteBucketInventoryConfiguration
 //
-//     *
-// PutBucketInventoryConfiguration
+// * DeleteBucketInventoryConfiguration
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketInventoryConfiguration.html)
+//
+//
+// * PutBucketInventoryConfiguration
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketInventoryConfiguration.html)
 func (c *Client) ListBucketInventoryConfigurations(ctx context.Context, params *ListBucketInventoryConfigurationsInput, optFns ...func(*Options)) (*ListBucketInventoryConfigurationsOutput, error) {
 	if params == nil {
 		params = &ListBucketInventoryConfigurationsInput{}
@@ -65,6 +69,10 @@ type ListBucketInventoryConfigurationsInput struct {
 	// response to continue the listing. The continuation token is an opaque value that
 	// Amazon S3 understands.
 	ContinuationToken *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 }
 
 type ListBucketInventoryConfigurationsOutput struct {

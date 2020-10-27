@@ -10,12 +10,23 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Calling this operation disables Health from working with AWS Organizations. This
-// does not remove the Service Linked Role (SLR) from the the master account in
-// your organization. Use the IAM console, API, or AWS CLI to remove the SLR if
-// desired. To call this operation, you must sign in as an IAM user, assume an IAM
-// role, or sign in as the root user (not recommended) in the organization's master
-// account.
+// Disables AWS Health from working with AWS Organizations. To call this operation,
+// you must sign in as an AWS Identity and Access Management (IAM) user, assume an
+// IAM role, or sign in as the root user (not recommended) in the organization's
+// master AWS account. For more information, see Aggregating AWS Health events
+// (https://docs.aws.amazon.com/health/latest/ug/aggregate-events.html) in the AWS
+// Health User Guide. This operation doesn't remove the service-linked role (SLR)
+// from the AWS master account in your organization. You must use the IAM console,
+// API, or AWS Command Line Interface (AWS CLI) to remove the SLR. For more
+// information, see Deleting a Service-Linked Role
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html#delete-service-linked-role)
+// in the IAM User Guide. You can also disable the organizational feature by using
+// the Organizations DisableAWSServiceAccess
+// (https://docs.aws.amazon.com/organizations/latest/APIReference/API_DisableAWSServiceAccess.html)
+// API operation. After you call this operation, AWS Health stops aggregating
+// events for all other AWS accounts in your organization. If you call the AWS
+// Health API operations for organizational view, AWS Health returns an error. AWS
+// Health continues to aggregate health events for your AWS account.
 func (c *Client) DisableHealthServiceAccessForOrganization(ctx context.Context, params *DisableHealthServiceAccessForOrganizationInput, optFns ...func(*Options)) (*DisableHealthServiceAccessForOrganizationOutput, error) {
 	if params == nil {
 		params = &DisableHealthServiceAccessForOrganizationInput{}

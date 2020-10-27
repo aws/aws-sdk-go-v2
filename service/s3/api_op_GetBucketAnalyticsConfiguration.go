@@ -24,6 +24,18 @@ import (
 // analytics feature, see Amazon S3 Analytics – Storage Class Analysis
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/analytics-storage-class.html)
 // in the Amazon Simple Storage Service Developer Guide. Related Resources
+//
+//     *
+// DeleteBucketAnalyticsConfiguration
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketAnalyticsConfiguration.html)
+//
+//
+// * ListBucketAnalyticsConfigurations
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketAnalyticsConfigurations.html)
+//
+//
+// * PutBucketAnalyticsConfiguration
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketAnalyticsConfiguration.html)
 func (c *Client) GetBucketAnalyticsConfiguration(ctx context.Context, params *GetBucketAnalyticsConfigurationInput, optFns ...func(*Options)) (*GetBucketAnalyticsConfigurationOutput, error) {
 	if params == nil {
 		params = &GetBucketAnalyticsConfigurationInput{}
@@ -50,6 +62,10 @@ type GetBucketAnalyticsConfigurationInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 }
 
 type GetBucketAnalyticsConfigurationOutput struct {

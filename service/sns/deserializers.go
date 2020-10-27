@@ -7412,6 +7412,22 @@ func awsAwsquery_deserializeOpDocumentPublishOutput(v **PublishOutput, decoder s
 				sv.MessageId = &xtv
 			}
 
+		case strings.EqualFold("SequenceNumber", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.SequenceNumber = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.SequenceNumber = &xtv
+			}
+
 		default:
 			// Do nothing and ignore the unexpected tag element
 

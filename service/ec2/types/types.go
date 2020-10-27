@@ -53,7 +53,7 @@ type AddPrefixListEntry struct {
 	Description *string
 }
 
-// Describes an Elastic IP address.
+// Describes an Elastic IP address, or a carrier IP address.
 type Address struct {
 
 	// The ID representing the allocation of the address for use with EC2-VPC.
@@ -61,6 +61,11 @@ type Address struct {
 
 	// The ID representing the association of the address with an instance in a VPC.
 	AssociationId *string
+
+	// The carrier IP address associated. This option is only available for network
+	// interfaces which reside in a subnet in a Wavelength Zone (for example an EC2
+	// instance).
+	CarrierIp *string
 
 	// The customer-owned IP address.
 	CustomerOwnedIp *string
@@ -75,7 +80,8 @@ type Address struct {
 	// The ID of the instance that the address is associated with (if any).
 	InstanceId *string
 
-	// The name of the location from which the IP address is advertised.
+	// The name of the unique set of Availability Zones, Local Zones, or Wavelength
+	// Zones from which AWS advertises IP addresses.
 	NetworkBorderGroup *string
 
 	// The ID of the network interface.
@@ -174,52 +180,55 @@ type AuthorizationRule struct {
 	Status *ClientVpnAuthorizationRuleStatus
 }
 
-// Describes a Zone.
+// Describes Availability Zones, Local Zones, and Wavelength Zones.
 type AvailabilityZone struct {
 
 	// For Availability Zones, this parameter has the same value as the Region name.
 	// For Local Zones, the name of the associated group, for example us-west-2-lax-1.
+	// For Wavelength Zones, the name of the associated group, for example
+	// us-east-1-wl1-bos-wlz-1.
 	GroupName *string
 
-	// Any messages about the Zone.
+	// Any messages about the Availability Zone, Local Zone, or Wavelength Zone.
 	Messages []*AvailabilityZoneMessage
 
-	// The name of the location from which the address is advertised.
+	// The name of the network border group.
 	NetworkBorderGroup *string
 
 	// For Availability Zones, this parameter always has the value of
-	// opt-in-not-required. For Local Zones, this parameter is the opt in status. The
-	// possible values are opted-in, and not-opted-in.
+	// opt-in-not-required. For Local Zones and Wavelength Zones, this parameter is the
+	// opt-in status. The possible values are opted-in, and not-opted-in.
 	OptInStatus AvailabilityZoneOptInStatus
 
-	// The ID of the zone that handles some of the Local Zone control plane operations,
-	// such as API calls.
+	// The ID of the zone that handles some of the Local Zone or Wavelength Zone
+	// control plane operations, such as API calls.
 	ParentZoneId *string
 
-	// The name of the zone that handles some of the Local Zone control plane
-	// operations, such as API calls.
+	// The name of the zone that handles some of the Local Zone or Wavelength Zone
+	// control plane operations, such as API calls.
 	ParentZoneName *string
 
 	// The name of the Region.
 	RegionName *string
 
-	// The state of the Zone.
+	// The state of the Availability Zone, Local Zone, or Wavelength Zone.
 	State AvailabilityZoneState
 
-	// The ID of the Zone.
+	// The ID of the Availability Zone, Local Zone, or Wavelength Zone.
 	ZoneId *string
 
-	// The name of the Zone.
+	// The name of the Availability Zone, Local Zone, or Wavelength Zone.
 	ZoneName *string
 
-	// The type of zone. The valid values are availability-zone and local-zone.
+	// The type of zone. The valid values are availability-zone, local-zone, and
+	// wavelength-zone.
 	ZoneType *string
 }
 
-// Describes a message about a Zone.
+// Describes a message about an Availability Zone, Local Zone, or Wavelength Zone.
 type AvailabilityZoneMessage struct {
 
-	// The message about the Zone.
+	// The message about the Availability Zone, Local Zone, or Wavelength Zone.
 	Message *string
 }
 
@@ -608,6 +617,25 @@ type CapacityReservationTargetResponse struct {
 
 	// The ARN of the targeted Capacity Reservation group.
 	CapacityReservationResourceGroupArn *string
+}
+
+// Describes a carrier gateway.
+type CarrierGateway struct {
+
+	// The ID of the carrier gateway.
+	CarrierGatewayId *string
+
+	// The AWS account ID of the owner of the carrier gateway.
+	OwnerId *string
+
+	// The state of the carrier gateway.
+	State CarrierGatewayState
+
+	// The tags assigned to the carrier gateway.
+	Tags []*Tag
+
+	// The ID of the VPC associated with the carrier gateway.
+	VpcId *string
 }
 
 // Information about the client certificate used for authentication.
@@ -1648,21 +1676,21 @@ type EbsBlockDevice struct {
 	Encrypted *bool
 
 	// The number of I/O operations per second (IOPS) that the volume supports. For io1
-	// volumes, this represents the number of IOPS that are provisioned for the volume.
-	// For gp2 volumes, this represents the baseline performance of the volume and the
-	// rate at which the volume accumulates I/O credits for bursting. For more
+	// and io2 volumes, this represents the number of IOPS that are provisioned for the
+	// volume. For gp2 volumes, this represents the baseline performance of the volume
+	// and the rate at which the volume accumulates I/O credits for bursting. For more
 	// information, see Amazon EBS volume types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) in the
 	// Amazon Elastic Compute Cloud User Guide. Constraints: Range is 100-16,000 IOPS
-	// for gp2 volumes and 100 to 64,000IOPS for io1 volumes in most Regions. Maximum
-	// io1 IOPS of 64,000 is guaranteed only on Nitro-based instances
+	// for gp2 volumes and 100 to 64,000 IOPS for io1 and io2 volumes in most Regions.
+	// Maximum io1 and io2 IOPS of 64,000 is guaranteed only on Nitro-based instances
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances).
 	// Other instance families guarantee performance up to 32,000 IOPS. For more
 	// information, see Amazon EBS Volume Types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) in the
 	// Amazon Elastic Compute Cloud User Guide. Condition: This parameter is required
-	// for requests to create io1 volumes; it is not used in requests to create gp2,
-	// st1, sc1, or standard volumes.
+	// for requests to create io1 and io2 volumes; it is not used in requests to create
+	// gp2, st1, sc1, or standard volumes.
 	Iops *int32
 
 	// Identifier (key ID, key alias, ID ARN, or alias ARN) for a customer managed CMK
@@ -1681,14 +1709,14 @@ type EbsBlockDevice struct {
 	// The size of the volume, in GiB. Default: If you're creating the volume from a
 	// snapshot and don't specify a volume size, the default is the snapshot size.
 	// Constraints: 1-16384 for General Purpose SSD (gp2), 4-16384 for Provisioned IOPS
-	// SSD (io1), 500-16384 for Throughput Optimized HDD (st1), 500-16384 for Cold HDD
-	// (sc1), and 1-1024 for Magnetic (standard) volumes. If you specify a snapshot,
-	// the volume size must be equal to or larger than the snapshot size.
+	// SSD (io1 and io2), 500-16384 for Throughput Optimized HDD (st1), 500-16384 for
+	// Cold HDD (sc1), and 1-1024 for Magnetic (standard) volumes. If you specify a
+	// snapshot, the volume size must be equal to or larger than the snapshot size.
 	VolumeSize *int32
 
-	// The volume type. If you set the type to io1, you must also specify the Iops
-	// parameter. If you set the type to gp2, st1, sc1, or standard, you must omit the
-	// Iops parameter. Default: gp2
+	// The volume type. If you set the type to io1 or io2, you must also specify the
+	// Iops parameter. If you set the type to gp2, st1, sc1, or standard, you must omit
+	// the Iops parameter. Default: gp2
 	VolumeType VolumeType
 }
 
@@ -3424,7 +3452,9 @@ type Instance struct {
 	// only available if you've enabled DNS hostnames for your VPC.
 	PublicDnsName *string
 
-	// The public IPv4 address assigned to the instance, if applicable.
+	// The public IPv4 address, or the Carrier IP address assigned to the instance, if
+	// applicable. A Carrier IP address only applies to an instance launched in a
+	// subnet associated with a Wavelength Zone.
 	PublicIpAddress *string
 
 	// The RAM disk associated with this instance, if applicable.
@@ -3724,6 +3754,9 @@ type InstanceNetworkInterface struct {
 // Describes association information for an Elastic IP address (IPv4).
 type InstanceNetworkInterfaceAssociation struct {
 
+	// The carrier IP address associated with the network interface.
+	CarrierIp *string
+
 	// The ID of the owner of the Elastic IP address.
 	IpOwnerId *string
 
@@ -3756,6 +3789,12 @@ type InstanceNetworkInterfaceAttachment struct {
 
 // Describes a network interface.
 type InstanceNetworkInterfaceSpecification struct {
+
+	// Indicates whether to assign a carrier IP address to the network interface. You
+	// can only assign a carrier IP address to a network interface that is in a subnet
+	// in a Wavelength Zone. For more information about carrier IP addresses, see
+	// Carrier IP addresses in the AWS Wavelength Developer Guide.
+	AssociateCarrierIpAddress *bool
 
 	// Indicates whether to assign a public IPv4 address to an instance you launch in a
 	// VPC. The public IP address can only be assigned to a network interface for eth0,
@@ -3988,6 +4027,10 @@ type InstanceStorageInfo struct {
 
 	// Array describing the disks that are available for the instance type.
 	Disks []*DiskInfo
+
+	// Indicates whether non-volatile memory express (NVMe) is supported for instance
+	// store.
+	NvmeSupport EphemeralNvmeSupport
 
 	// The total size of the disks, in GB.
 	TotalSizeInGB *int64
@@ -4518,16 +4561,16 @@ type LaunchTemplateEbsBlockDeviceRequest struct {
 	// volume from a snapshot, you can't specify an encryption value.
 	Encrypted *bool
 
-	// The number of I/O operations per second (IOPS) that the volume supports. For
-	// io1, this represents the number of IOPS that are provisioned for the volume. For
-	// gp2, this represents the baseline performance of the volume and the rate at
-	// which the volume accumulates I/O credits for bursting. For more information
-	// about General Purpose SSD baseline performance, I/O credits, and bursting, see
-	// Amazon EBS Volume Types
+	// The number of I/O operations per second (IOPS) to provision for an io1 or io2
+	// volume, with a maximum ratio of 50 IOPS/GiB for io1, and 500 IOPS/GiB for io2.
+	// Range is 100 to 64,000 IOPS for volumes in most Regions. Maximum IOPS of 64,000
+	// is guaranteed only on Nitro-based instances
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances).
+	// Other instance families guarantee performance up to 32,000 IOPS. For more
+	// information, see Amazon EBS Volume Types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) in the
-	// Amazon Elastic Compute Cloud User Guide. Condition: This parameter is required
-	// for requests to create io1 volumes; it is not used in requests to create gp2,
-	// st1, sc1, or standard volumes.
+	// Amazon Elastic Compute Cloud User Guide. This parameter is valid only for
+	// Provisioned IOPS SSD (io1 and io2) volumes.
 	Iops *int32
 
 	// The ARN of the symmetric AWS Key Management Service (AWS KMS) CMK used for
@@ -4696,6 +4739,14 @@ type LaunchTemplateInstanceMetadataOptionsRequest struct {
 // Describes a network interface.
 type LaunchTemplateInstanceNetworkInterfaceSpecification struct {
 
+	// Indicates whether to associate a Carrier IP address with eth0 for a new network
+	// interface. Use this option when you launch an instance in a Wavelength Zone and
+	// want to associate a Carrier IP address with the network interface. For more
+	// information about Carrier IP addresses, see Carrier IP addresses
+	// (https://docs.aws.amazon.com/wavelength/latest/developerguide/how-wavelengths-work.html#provider-owned-ip)
+	// in the AWS Wavelength Developer Guide.
+	AssociateCarrierIpAddress *bool
+
 	// Indicates whether to associate a public IPv4 address with eth0 for a new network
 	// interface.
 	AssociatePublicIpAddress *bool
@@ -4740,6 +4791,14 @@ type LaunchTemplateInstanceNetworkInterfaceSpecification struct {
 
 // The parameters for a network interface.
 type LaunchTemplateInstanceNetworkInterfaceSpecificationRequest struct {
+
+	// Associates a Carrier IP address with eth0 for a new network interface. Use this
+	// option when you launch an instance in a Wavelength Zone and want to associate a
+	// Carrier IP address with the network interface. For more information about
+	// Carrier IP addresses, see Carrier IP addresses
+	// (https://docs.aws.amazon.com/wavelength/latest/developerguide/how-wavelengths-work.html#provider-owned-ip)
+	// in the AWS Wavelength Developer Guide.
+	AssociateCarrierIpAddress *bool
 
 	// Associates a public IPv4 address with eth0 for a new network interface.
 	AssociatePublicIpAddress *bool
@@ -5084,7 +5143,7 @@ type LocalGateway struct {
 	// The Amazon Resource Name (ARN) of the Outpost.
 	OutpostArn *string
 
-	// The ID of the AWS account ID that owns the local gateway.
+	// The AWS account ID that owns the local gateway.
 	OwnerId *string
 
 	// The state of the local gateway.
@@ -5100,11 +5159,17 @@ type LocalGatewayRoute struct {
 	// The CIDR block used for destination matches.
 	DestinationCidrBlock *string
 
+	// The Amazon Resource Name (ARN) of the local gateway route table.
+	LocalGatewayRouteTableArn *string
+
 	// The ID of the local gateway route table.
 	LocalGatewayRouteTableId *string
 
 	// The ID of the virtual interface group.
 	LocalGatewayVirtualInterfaceGroupId *string
+
+	// The AWS account ID that owns the local gateway route.
+	OwnerId *string
 
 	// The state of the route.
 	State LocalGatewayRouteState
@@ -5119,11 +5184,17 @@ type LocalGatewayRouteTable struct {
 	// The ID of the local gateway.
 	LocalGatewayId *string
 
+	// The Amazon Resource Name (ARN) of the local gateway route table.
+	LocalGatewayRouteTableArn *string
+
 	// The ID of the local gateway route table.
 	LocalGatewayRouteTableId *string
 
 	// The Amazon Resource Name (ARN) of the Outpost.
 	OutpostArn *string
+
+	// The AWS account ID that owns the local gateway route table.
+	OwnerId *string
 
 	// The state of the local gateway route table.
 	State *string
@@ -5139,6 +5210,10 @@ type LocalGatewayRouteTableVirtualInterfaceGroupAssociation struct {
 	// The ID of the local gateway.
 	LocalGatewayId *string
 
+	// The Amazon Resource Name (ARN) of the local gateway route table for the virtual
+	// interface group.
+	LocalGatewayRouteTableArn *string
+
 	// The ID of the local gateway route table.
 	LocalGatewayRouteTableId *string
 
@@ -5147,6 +5222,10 @@ type LocalGatewayRouteTableVirtualInterfaceGroupAssociation struct {
 
 	// The ID of the virtual interface group.
 	LocalGatewayVirtualInterfaceGroupId *string
+
+	// The AWS account ID that owns the local gateway virtual interface group
+	// association.
+	OwnerId *string
 
 	// The state of the association.
 	State *string
@@ -5161,11 +5240,18 @@ type LocalGatewayRouteTableVpcAssociation struct {
 	// The ID of the local gateway.
 	LocalGatewayId *string
 
+	// The Amazon Resource Name (ARN) of the local gateway route table for the
+	// association.
+	LocalGatewayRouteTableArn *string
+
 	// The ID of the local gateway route table.
 	LocalGatewayRouteTableId *string
 
 	// The ID of the association.
 	LocalGatewayRouteTableVpcAssociationId *string
+
+	// The AWS account ID that owns the local gateway route table for the association.
+	OwnerId *string
 
 	// The state of the association.
 	State *string
@@ -5193,6 +5279,9 @@ type LocalGatewayVirtualInterface struct {
 	// The ID of the virtual interface.
 	LocalGatewayVirtualInterfaceId *string
 
+	// The AWS account ID that owns the local gateway virtual interface.
+	OwnerId *string
+
 	// The peer address.
 	PeerAddress *string
 
@@ -5217,6 +5306,9 @@ type LocalGatewayVirtualInterfaceGroup struct {
 
 	// The IDs of the virtual interfaces.
 	LocalGatewayVirtualInterfaceIds []*string
+
+	// The AWS account ID that owns the local gateway virtual interface group.
+	OwnerId *string
 
 	// The tags assigned to the virtual interface group.
 	Tags []*Tag
@@ -5263,6 +5355,33 @@ type MemoryInfo struct {
 	SizeInMiB *int64
 }
 
+// The transit gateway options.
+type ModifyTransitGatewayOptions struct {
+
+	// The ID of the default association route table.
+	AssociationDefaultRouteTableId *string
+
+	// Enable or disable automatic acceptance of attachment requests.
+	AutoAcceptSharedAttachments AutoAcceptSharedAttachmentsValue
+
+	// Enable or disable automatic association with the default association route
+	// table.
+	DefaultRouteTableAssociation DefaultRouteTableAssociationValue
+
+	// Enable or disable automatic propagation of routes to the default propagation
+	// route table.
+	DefaultRouteTablePropagation DefaultRouteTablePropagationValue
+
+	// Enable or disable DNS support.
+	DnsSupport DnsSupportValue
+
+	// The ID of the default propagation route table.
+	PropagationDefaultRouteTableId *string
+
+	// Enable or disable Equal Cost Multipath Protocol support.
+	VpnEcmpSupport VpnEcmpSupportValue
+}
+
 // Describes the options for a VPC attachment.
 type ModifyTransitGatewayVpcAttachmentRequestOptions struct {
 
@@ -5276,6 +5395,11 @@ type ModifyTransitGatewayVpcAttachmentRequestOptions struct {
 // The AWS Site-to-Site VPN tunnel options to modify.
 type ModifyVpnTunnelOptionsSpecification struct {
 
+	// The action to take after DPD timeout occurs. Specify restart to restart the IKE
+	// initiation. Specify clear to end the IKE session. Valid Values: clear | none |
+	// restart Default: clear
+	DPDTimeoutAction *string
+
 	// The number of seconds after which a DPD timeout occurs. Constraints: A value
 	// between 0 and 30. Default: 30
 	DPDTimeoutSeconds *int32
@@ -5285,16 +5409,17 @@ type ModifyVpnTunnelOptionsSpecification struct {
 	IKEVersions []*IKEVersionsRequestListValue
 
 	// One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel
-	// for phase 1 IKE negotiations. Valid values: 2 | 14 | 15 | 16 | 17 | 18 | 22 | 23
-	// | 24
+	// for phase 1 IKE negotiations. Valid values: 2 | 14 | 15 | 16 | 17 | 18 | 19 | 20
+	// | 21 | 22 | 23 | 24
 	Phase1DHGroupNumbers []*Phase1DHGroupNumbersRequestListValue
 
 	// One or more encryption algorithms that are permitted for the VPN tunnel for
-	// phase 1 IKE negotiations. Valid values: AES128 | AES256
+	// phase 1 IKE negotiations. Valid values: AES128 | AES256 | AES128-GCM-16 |
+	// AES256-GCM-16
 	Phase1EncryptionAlgorithms []*Phase1EncryptionAlgorithmsRequestListValue
 
 	// One or more integrity algorithms that are permitted for the VPN tunnel for phase
-	// 1 IKE negotiations. Valid values: SHA1 | SHA2-256
+	// 1 IKE negotiations. Valid values: SHA1 | SHA2-256 | SHA2-384 | SHA2-512
 	Phase1IntegrityAlgorithms []*Phase1IntegrityAlgorithmsRequestListValue
 
 	// The lifetime for phase 1 of the IKE negotiation, in seconds. Constraints: A
@@ -5302,16 +5427,17 @@ type ModifyVpnTunnelOptionsSpecification struct {
 	Phase1LifetimeSeconds *int32
 
 	// One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel
-	// for phase 2 IKE negotiations. Valid values: 2 | 5 | 14 | 15 | 16 | 17 | 18 | 22
-	// | 23 | 24
+	// for phase 2 IKE negotiations. Valid values: 2 | 5 | 14 | 15 | 16 | 17 | 18 | 19
+	// | 20 | 21 | 22 | 23 | 24
 	Phase2DHGroupNumbers []*Phase2DHGroupNumbersRequestListValue
 
 	// One or more encryption algorithms that are permitted for the VPN tunnel for
-	// phase 2 IKE negotiations. Valid values: AES128 | AES256
+	// phase 2 IKE negotiations. Valid values: AES128 | AES256 | AES128-GCM-16 |
+	// AES256-GCM-16
 	Phase2EncryptionAlgorithms []*Phase2EncryptionAlgorithmsRequestListValue
 
 	// One or more integrity algorithms that are permitted for the VPN tunnel for phase
-	// 2 IKE negotiations. Valid values: SHA1 | SHA2-256
+	// 2 IKE negotiations. Valid values: SHA1 | SHA2-256 | SHA2-384 | SHA2-512
 	Phase2IntegrityAlgorithms []*Phase2IntegrityAlgorithmsRequestListValue
 
 	// The lifetime for phase 2 of the IKE negotiation, in seconds. Constraints: A
@@ -5340,15 +5466,21 @@ type ModifyVpnTunnelOptionsSpecification struct {
 	// and 2048. Default: 1024
 	ReplayWindowSize *int32
 
-	// The range of inside IP addresses for the tunnel. Any specified CIDR blocks must
-	// be unique across all VPN connections that use the same virtual private gateway.
-	// Constraints: A size /30 CIDR block from the 169.254.0.0/16 range. The following
-	// CIDR blocks are reserved and cannot be used:
+	// The action to take when the establishing the tunnel for the VPN connection. By
+	// default, your customer gateway device must initiate the IKE negotiation and
+	// bring up the tunnel. Specify start for AWS to initiate the IKE negotiation.
+	// Valid Values: add | start Default: add
+	StartupAction *string
+
+	// The range of inside IPv4 addresses for the tunnel. Any specified CIDR blocks
+	// must be unique across all VPN connections that use the same virtual private
+	// gateway. Constraints: A size /30 CIDR block from the 169.254.0.0/16 range. The
+	// following CIDR blocks are reserved and cannot be used:
 	//
 	//     * 169.254.0.0/30
 	//
-	//     *
-	// 169.254.1.0/30
+	//
+	// * 169.254.1.0/30
 	//
 	//     * 169.254.2.0/30
 	//
@@ -5361,6 +5493,11 @@ type ModifyVpnTunnelOptionsSpecification struct {
 	//
 	//     * 169.254.169.252/30
 	TunnelInsideCidr *string
+
+	// The range of inside IPv6 addresses for the tunnel. Any specified CIDR blocks
+	// must be unique across all VPN connections that use the same transit gateway.
+	// Constraints: A size /126 CIDR block from the local fd00::/8 range.
+	TunnelInsideIpv6Cidr *string
 }
 
 // Describes the monitoring of an instance.
@@ -5643,7 +5780,9 @@ type NetworkInterface struct {
 	VpcId *string
 }
 
-// Describes association information for an Elastic IP address (IPv4 only).
+// Describes association information for an Elastic IP address (IPv4 only), or a
+// Carrier IP address (for a network interface which resides in a subnet in a
+// Wavelength Zone).
 type NetworkInterfaceAssociation struct {
 
 	// The allocation ID.
@@ -5652,13 +5791,22 @@ type NetworkInterfaceAssociation struct {
 	// The association ID.
 	AssociationId *string
 
+	// The carrier IP address associated with the network interface. This option is
+	// only available when the network interface is in a subnet which is associated
+	// with a Wavelength Zone.
+	CarrierIp *string
+
+	// The customer-owned IP address associated with the network interface.
+	CustomerOwnedIp *string
+
 	// The ID of the Elastic IP address owner.
 	IpOwnerId *string
 
 	// The public DNS name.
 	PublicDnsName *string
 
-	// The address of the Elastic IP address bound to the network interface.
+	// The address of the Elastic IP address or Carrier IP address bound to the network
+	// interface.
 	PublicIp *string
 }
 
@@ -6626,7 +6774,9 @@ type RequestSpotLaunchSpecification struct {
 	UserData *string
 }
 
-// Describes a reservation.
+// Describes a launch request for one or more instances, and includes owner,
+// requester, and security group information that applies to all instances in the
+// launch request.
 type Reservation struct {
 
 	// [EC2-Classic only] The security groups.
@@ -7017,6 +7167,9 @@ type ResponseLaunchTemplateData struct {
 // Describes a route in a route table.
 type Route struct {
 
+	// The ID of the carrier gateway.
+	CarrierGatewayId *string
+
 	// The IPv4 CIDR block used for the destination match.
 	DestinationCidrBlock *string
 
@@ -7340,17 +7493,16 @@ type ScheduledInstancesEbs struct {
 	// only to instances that support them.
 	Encrypted *bool
 
-	// The number of I/O operations per second (IOPS) that the volume supports. For io1
-	// volumes, this represents the number of IOPS that are provisioned for the volume.
-	// For gp2 volumes, this represents the baseline performance of the volume and the
-	// rate at which the volume accumulates I/O credits for bursting. For more
-	// information about gp2 baseline performance, I/O credits, and bursting, see
-	// Amazon EBS Volume Types
+	// The number of I/O operations per second (IOPS) to provision for an io1 or io2
+	// volume, with a maximum ratio of 50 IOPS/GiB for io1, and 500 IOPS/GiB for io2.
+	// Range is 100 to 64,000 IOPS for volumes in most Regions. Maximum IOPS of 64,000
+	// is guaranteed only on Nitro-based instances
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances).
+	// Other instance families guarantee performance up to 32,000 IOPS. For more
+	// information, see Amazon EBS Volume Types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) in the
-	// Amazon Elastic Compute Cloud User Guide. Constraint: Range is 100-20000 IOPS for
-	// io1 volumes and 100-10000 IOPS for gp2 volumes. Condition: This parameter is
-	// required for requests to create io1volumes; it is not used in requests to create
-	// gp2, st1, sc1, or standard volumes.
+	// Amazon Elastic Compute Cloud User Guide. This parameter is valid only for
+	// Provisioned IOPS SSD (io1 and io2) volumes.
 	Iops *int32
 
 	// The ID of the snapshot.
@@ -7360,9 +7512,9 @@ type ScheduledInstancesEbs struct {
 	// snapshot and don't specify a volume size, the default is the snapshot size.
 	VolumeSize *int32
 
-	// The volume type. gp2 for General Purpose SSD, io1 for Provisioned IOPS SSD,
-	// Throughput Optimized HDD for st1, Cold HDD for sc1, or standard for Magnetic.
-	// Default: gp2
+	// The volume type. gp2 for General Purpose SSD, io1 or  io2 for Provisioned IOPS
+	// SSD, Throughput Optimized HDD for st1, Cold HDD for sc1, or standard for
+	// Magnetic. Default: gp2
 	VolumeType *string
 }
 
@@ -7871,7 +8023,7 @@ type SnapshotTaskDetail struct {
 // Describes the data feed for a Spot Instance.
 type SpotDatafeedSubscription struct {
 
-	// The Amazon S3 bucket where the Spot Instance data feed is located.
+	// The name of the Amazon S3 bucket where the Spot Instance data feed is located.
 	Bucket *string
 
 	// The fault codes for the Spot Instance request, if any.
@@ -7880,7 +8032,7 @@ type SpotDatafeedSubscription struct {
 	// The AWS account ID of the account.
 	OwnerId *string
 
-	// The prefix that is prepended to data feed files.
+	// The prefix for the data feed files.
 	Prefix *string
 
 	// The state of the Spot Instance data feed subscription.
@@ -7888,8 +8040,9 @@ type SpotDatafeedSubscription struct {
 }
 
 // Describes the launch specification for one or more Spot Instances. If you
-// include On-Demand capacity in your fleet request, you can't use
-// SpotFleetLaunchSpecification; you must use LaunchTemplateConfig
+// include On-Demand capacity in your fleet request or want to specify an EFA
+// network device, you can't use SpotFleetLaunchSpecification; you must use
+// LaunchTemplateConfig
 // (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_LaunchTemplateConfig.html).
 type SpotFleetLaunchSpecification struct {
 
@@ -7930,6 +8083,9 @@ type SpotFleetLaunchSpecification struct {
 
 	// One or more network interfaces. If you specify a network interface, you must
 	// specify subnet IDs and security group IDs using the network interface.
+	// SpotFleetLaunchSpecification currently does not support Elastic Fabric Adapter
+	// (EFA). To specify an EFA, you must use LaunchTemplateConfig
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_LaunchTemplateConfig.html).
 	NetworkInterfaces []*InstanceNetworkInterfaceSpecification
 
 	// The placement information.
@@ -8245,11 +8401,16 @@ type SpotInstanceRequest struct {
 	// YYYY-MM-DDTHH:MM:SSZ). The request becomes active at this date and time.
 	ValidFrom *time.Time
 
-	// The end date of the request, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
-	// If this is a one-time request, it remains active until all instances launch, the
-	// request is canceled, or this date is reached. If the request is persistent, it
-	// remains active until it is canceled or this date is reached. The default end
-	// date is 7 days from the current date.
+	// The end date of the request, in UTC format (YYYY-MM-DDTHH:MM:SSZ).
+	//
+	//     * For a
+	// persistent request, the request remains active until the validUntil date and
+	// time is reached. Otherwise, the request remains active until you cancel it.
+	//
+	//
+	// * For a one-time request, the request remains active until all instances launch,
+	// the request is canceled, or the validUntil date and time is reached. By default,
+	// the request is valid for 7 days from the date the request was created.
 	ValidUntil *time.Time
 }
 
@@ -8284,6 +8445,13 @@ type SpotMarketOptions struct {
 
 	// The required duration for the Spot Instances (also known as Spot blocks), in
 	// minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360).
+	// The duration period starts as soon as your Spot Instance receives its instance
+	// ID. At the end of the duration period, Amazon EC2 marks the Spot Instance for
+	// termination and provides a Spot Instance termination notice, which gives the
+	// instance a two-minute warning before it terminates. You can't specify an
+	// Availability Zone group or a launch group if you specify a duration. New
+	// accounts or accounts with no previous billing history with AWS are not eligible
+	// for Spot Instances with a defined duration (also known as Spot blocks).
 	BlockDurationMinutes *int32
 
 	// The behavior when a Spot Instance is interrupted. The default is terminate.
@@ -8299,10 +8467,16 @@ type SpotMarketOptions struct {
 	// InstanceInterruptionBehavior is set to either hibernate or stop.
 	SpotInstanceType SpotInstanceType
 
-	// The end date of the request. For a one-time request, the request remains active
-	// until all instances launch, the request is canceled, or this date is reached. If
-	// the request is persistent, it remains active until it is canceled or this date
-	// and time is reached. The default end date is 7 days from the current date.
+	// The end date of the request, in UTC format (YYYY-MM-DDTHH:MM:SSZ). Supported
+	// only for persistent requests.
+	//
+	//     * For a persistent request, the request
+	// remains active until the ValidUntil date and time is reached. Otherwise, the
+	// request remains active until you cancel it.
+	//
+	//     * For a one-time request,
+	// ValidUntil is not supported. The request remains active until all instances
+	// launch or you cancel the request.
 	ValidUntil *time.Time
 }
 
@@ -9032,7 +9206,7 @@ type TransitGatewayAssociation struct {
 	// The ID of the resource.
 	ResourceId *string
 
-	// The resource type.
+	// The resource type. Note that the tgw-peering resource type has been deprecated.
 	ResourceType TransitGatewayAttachmentResourceType
 
 	// The state of the association.
@@ -9060,10 +9234,10 @@ type TransitGatewayAttachment struct {
 	// The ID of the AWS account that owns the resource.
 	ResourceOwnerId *string
 
-	// The resource type.
+	// The resource type. Note that the tgw-peering resource type has been deprecated.
 	ResourceType TransitGatewayAttachmentResourceType
 
-	// The attachment state.
+	// The attachment state. Note that the initiating state has been deprecated.
 	State TransitGatewayAttachmentState
 
 	// The tags for the attachment.
@@ -9287,7 +9461,8 @@ type TransitGatewayPeeringAttachment struct {
 	// Information about the requester transit gateway.
 	RequesterTgwInfo *PeeringTgwInfo
 
-	// The state of the transit gateway peering attachment.
+	// The state of the transit gateway peering attachment. Note that the initiating
+	// state has been deprecated.
 	State TransitGatewayAttachmentState
 
 	// The status of the transit gateway peering attachment.
@@ -9300,13 +9475,48 @@ type TransitGatewayPeeringAttachment struct {
 	TransitGatewayAttachmentId *string
 }
 
+// Describes a transit gateway prefix list attachment.
+type TransitGatewayPrefixListAttachment struct {
+
+	// The ID of the resource.
+	ResourceId *string
+
+	// The resource type. Note that the tgw-peering resource type has been deprecated.
+	ResourceType TransitGatewayAttachmentResourceType
+
+	// The ID of the attachment.
+	TransitGatewayAttachmentId *string
+}
+
+// Describes a prefix list reference.
+type TransitGatewayPrefixListReference struct {
+
+	// Indicates whether traffic that matches this route is dropped.
+	Blackhole *bool
+
+	// The ID of the prefix list.
+	PrefixListId *string
+
+	// The ID of the prefix list owner.
+	PrefixListOwnerId *string
+
+	// The state of the prefix list reference.
+	State TransitGatewayPrefixListReferenceState
+
+	// Information about the transit gateway attachment.
+	TransitGatewayAttachment *TransitGatewayPrefixListAttachment
+
+	// The ID of the transit gateway route table.
+	TransitGatewayRouteTableId *string
+}
+
 // Describes route propagation.
 type TransitGatewayPropagation struct {
 
 	// The ID of the resource.
 	ResourceId *string
 
-	// The resource type.
+	// The resource type. Note that the tgw-peering resource type has been deprecated.
 	ResourceType TransitGatewayAttachmentResourceType
 
 	// The state.
@@ -9355,6 +9565,9 @@ type TransitGatewayRoute struct {
 	// The CIDR block used for destination matches.
 	DestinationCidrBlock *string
 
+	// The ID of the prefix list used for destination matches.
+	PrefixListId *string
+
 	// The state of the route.
 	State TransitGatewayRouteState
 
@@ -9371,7 +9584,7 @@ type TransitGatewayRouteAttachment struct {
 	// The ID of the resource.
 	ResourceId *string
 
-	// The resource type.
+	// The resource type. Note that the tgw-peering resource type has been deprecated.
 	ResourceType TransitGatewayAttachmentResourceType
 
 	// The ID of the attachment.
@@ -9411,7 +9624,7 @@ type TransitGatewayRouteTableAssociation struct {
 	// The ID of the resource.
 	ResourceId *string
 
-	// The resource type.
+	// The resource type. Note that the tgw-peering resource type has been deprecated.
 	ResourceType TransitGatewayAttachmentResourceType
 
 	// The state of the association.
@@ -9427,7 +9640,8 @@ type TransitGatewayRouteTablePropagation struct {
 	// The ID of the resource.
 	ResourceId *string
 
-	// The type of resource.
+	// The type of resource. Note that the tgw-peering resource type has been
+	// deprecated.
 	ResourceType TransitGatewayAttachmentResourceType
 
 	// The state of the resource.
@@ -9446,7 +9660,8 @@ type TransitGatewayVpcAttachment struct {
 	// The VPC attachment options.
 	Options *TransitGatewayVpcAttachmentOptions
 
-	// The state of the VPC attachment.
+	// The state of the VPC attachment. Note that the initiating state has been
+	// deprecated.
 	State TransitGatewayAttachmentState
 
 	// The IDs of the subnets.
@@ -9480,6 +9695,9 @@ type TransitGatewayVpcAttachmentOptions struct {
 
 // The VPN tunnel options.
 type TunnelOption struct {
+
+	// The action to take after a DPD timeout occurs.
+	DpdTimeoutAction *string
 
 	// The number of seconds after which a DPD timeout occurs.
 	DpdTimeoutSeconds *int32
@@ -9535,8 +9753,14 @@ type TunnelOption struct {
 	// The number of packets in an IKE replay window.
 	ReplayWindowSize *int32
 
-	// The range of inside IP addresses for the tunnel.
+	// The action to take when the establishing the VPN tunnels for a VPN connection.
+	StartupAction *string
+
+	// The range of inside IPv4 addresses for the tunnel.
 	TunnelInsideCidr *string
+
+	// The range of inside IPv6 addresses for the tunnel.
+	TunnelInsideIpv6Cidr *string
 }
 
 // Describes the burstable performance instance whose credit option for CPU usage
@@ -9737,15 +9961,16 @@ type Volume struct {
 	// Provisioned IOPS SSD volumes, this represents the number of IOPS that are
 	// provisioned for the volume. For General Purpose SSD volumes, this represents the
 	// baseline performance of the volume and the rate at which the volume accumulates
-	// I/O credits for bursting. For more information, see Amazon EBS Volume Types
+	// I/O credits for bursting. For more information, see Amazon EBS volume types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) in the
 	// Amazon Elastic Compute Cloud User Guide. Constraints: Range is 100-16,000 IOPS
-	// for gp2 volumes and 100 to 64,000IOPS for io1 volumes, in most Regions. The
-	// maximum IOPS for io1 of 64,000 is guaranteed only on Nitro-based instances
+	// for gp2 volumes and 100 to 64,000 IOPS for io1 and io2 volumes, in most Regions.
+	// The maximum IOPS for io1 and io2 of 64,000 is guaranteed only on Nitro-based
+	// instances
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances).
 	// Other instance families guarantee performance up to 32,000 IOPS. Condition: This
-	// parameter is required for requests to create io1 volumes; it is not used in
-	// requests to create gp2, st1, sc1, or standard volumes.
+	// parameter is required for requests to create io1 and io2 volumes; it is not used
+	// in requests to create gp2, st1, sc1, or standard volumes.
 	Iops *int32
 
 	// The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS)
@@ -9774,9 +9999,9 @@ type Volume struct {
 	// The ID of the volume.
 	VolumeId *string
 
-	// The volume type. This can be gp2 for General Purpose SSD, io1 for Provisioned
-	// IOPS SSD, st1 for Throughput Optimized HDD, sc1 for Cold HDD, or standard for
-	// Magnetic volumes.
+	// The volume type. This can be gp2 for General Purpose SSD, io1 or io2 for
+	// Provisioned IOPS SSD, st1 for Throughput Optimized HDD, sc1 for Cold HDD, or
+	// standard for Magnetic volumes.
 	VolumeType VolumeType
 }
 
@@ -9955,8 +10180,7 @@ type Vpc struct {
 	// Information about the IPv4 CIDR blocks associated with the VPC.
 	CidrBlockAssociationSet []*VpcCidrBlockAssociation
 
-	// The ID of the set of DHCP options you've associated with the VPC (or default if
-	// the default options are associated with the VPC).
+	// The ID of the set of DHCP options you've associated with the VPC.
 	DhcpOptionsId *string
 
 	// The allowed tenancy of instances launched into the VPC.
@@ -10124,7 +10348,9 @@ type VpcIpv6CidrBlockAssociation struct {
 	// The ID of the IPv6 address pool from which the IPv6 CIDR block is allocated.
 	Ipv6Pool *string
 
-	// The name of the location from which we advertise the IPV6 CIDR block.
+	// The name of the unique set of Availability Zones, Local Zones, or Wavelength
+	// Zones from which AWS advertises IP addresses, for example,
+	// us-east-1-wl1-bos-wlz-1.
 	NetworkBorderGroup *string
 }
 
@@ -10254,9 +10480,24 @@ type VpnConnectionOptions struct {
 	// Indicates whether acceleration is enabled for the VPN connection.
 	EnableAcceleration *bool
 
+	// The IPv4 CIDR on the customer gateway (on-premises) side of the VPN connection.
+	LocalIpv4NetworkCidr *string
+
+	// The IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection.
+	LocalIpv6NetworkCidr *string
+
+	// The IPv4 CIDR on the AWS side of the VPN connection.
+	RemoteIpv4NetworkCidr *string
+
+	// The IPv6 CIDR on the AWS side of the VPN connection.
+	RemoteIpv6NetworkCidr *string
+
 	// Indicates whether the VPN connection uses static routes only. Static routes must
 	// be used for devices that don't support BGP.
 	StaticRoutesOnly *bool
+
+	// Indicates whether the VPN tunnels process IPv4 or IPv6 traffic.
+	TunnelInsideIpVersion TunnelInsideIpVersion
 
 	// Indicates the VPN tunnel options.
 	TunnelOptions []*TunnelOption
@@ -10268,10 +10509,27 @@ type VpnConnectionOptionsSpecification struct {
 	// Indicate whether to enable acceleration for the VPN connection. Default: false
 	EnableAcceleration *bool
 
+	// The IPv4 CIDR on the customer gateway (on-premises) side of the VPN connection.
+	// Default: 0.0.0.0/0
+	LocalIpv4NetworkCidr *string
+
+	// The IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection.
+	// Default: ::/0
+	LocalIpv6NetworkCidr *string
+
+	// The IPv4 CIDR on the AWS side of the VPN connection. Default: 0.0.0.0/0
+	RemoteIpv4NetworkCidr *string
+
+	// The IPv6 CIDR on the AWS side of the VPN connection. Default: ::/0
+	RemoteIpv6NetworkCidr *string
+
 	// Indicate whether the VPN connection uses static routes only. If you are creating
 	// a VPN connection for a device that does not support BGP, you must specify true.
 	// Use CreateVpnConnectionRoute to create a static route. Default: false
 	StaticRoutesOnly *bool
+
+	// Indicate whether the VPN tunnels process IPv4 or IPv6 traffic. Default: ipv4
+	TunnelInsideIpVersion TunnelInsideIpVersion
 
 	// The tunnel options for the VPN connection.
 	TunnelOptions []*VpnTunnelOptionsSpecification
@@ -10319,6 +10577,11 @@ type VpnStaticRoute struct {
 // The tunnel options for a single VPN tunnel.
 type VpnTunnelOptionsSpecification struct {
 
+	// The action to take after DPD timeout occurs. Specify restart to restart the IKE
+	// initiation. Specify clear to end the IKE session. Valid Values: clear | none |
+	// restart Default: clear
+	DPDTimeoutAction *string
+
 	// The number of seconds after which a DPD timeout occurs. Constraints: A value
 	// between 0 and 30. Default: 30
 	DPDTimeoutSeconds *int32
@@ -10328,16 +10591,17 @@ type VpnTunnelOptionsSpecification struct {
 	IKEVersions []*IKEVersionsRequestListValue
 
 	// One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel
-	// for phase 1 IKE negotiations. Valid values: 2 | 14 | 15 | 16 | 17 | 18 | 22 | 23
-	// | 24
+	// for phase 1 IKE negotiations. Valid values: 2 | 14 | 15 | 16 | 17 | 18 | 19 | 20
+	// | 21 | 22 | 23 | 24
 	Phase1DHGroupNumbers []*Phase1DHGroupNumbersRequestListValue
 
 	// One or more encryption algorithms that are permitted for the VPN tunnel for
-	// phase 1 IKE negotiations. Valid values: AES128 | AES256
+	// phase 1 IKE negotiations. Valid values: AES128 | AES256 | AES128-GCM-16 |
+	// AES256-GCM-16
 	Phase1EncryptionAlgorithms []*Phase1EncryptionAlgorithmsRequestListValue
 
 	// One or more integrity algorithms that are permitted for the VPN tunnel for phase
-	// 1 IKE negotiations. Valid values: SHA1 | SHA2-256
+	// 1 IKE negotiations. Valid values: SHA1 | SHA2-256 | SHA2-384 | SHA2-512
 	Phase1IntegrityAlgorithms []*Phase1IntegrityAlgorithmsRequestListValue
 
 	// The lifetime for phase 1 of the IKE negotiation, in seconds. Constraints: A
@@ -10345,16 +10609,17 @@ type VpnTunnelOptionsSpecification struct {
 	Phase1LifetimeSeconds *int32
 
 	// One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel
-	// for phase 2 IKE negotiations. Valid values: 2 | 5 | 14 | 15 | 16 | 17 | 18 | 22
-	// | 23 | 24
+	// for phase 2 IKE negotiations. Valid values: 2 | 5 | 14 | 15 | 16 | 17 | 18 | 19
+	// | 20 | 21 | 22 | 23 | 24
 	Phase2DHGroupNumbers []*Phase2DHGroupNumbersRequestListValue
 
 	// One or more encryption algorithms that are permitted for the VPN tunnel for
-	// phase 2 IKE negotiations. Valid values: AES128 | AES256
+	// phase 2 IKE negotiations. Valid values: AES128 | AES256 | AES128-GCM-16 |
+	// AES256-GCM-16
 	Phase2EncryptionAlgorithms []*Phase2EncryptionAlgorithmsRequestListValue
 
 	// One or more integrity algorithms that are permitted for the VPN tunnel for phase
-	// 2 IKE negotiations. Valid values: SHA1 | SHA2-256
+	// 2 IKE negotiations. Valid values: SHA1 | SHA2-256 | SHA2-384 | SHA2-512
 	Phase2IntegrityAlgorithms []*Phase2IntegrityAlgorithmsRequestListValue
 
 	// The lifetime for phase 2 of the IKE negotiation, in seconds. Constraints: A
@@ -10383,15 +10648,21 @@ type VpnTunnelOptionsSpecification struct {
 	// and 2048. Default: 1024
 	ReplayWindowSize *int32
 
-	// The range of inside IP addresses for the tunnel. Any specified CIDR blocks must
-	// be unique across all VPN connections that use the same virtual private gateway.
-	// Constraints: A size /30 CIDR block from the 169.254.0.0/16 range. The following
-	// CIDR blocks are reserved and cannot be used:
+	// The action to take when the establishing the tunnel for the VPN connection. By
+	// default, your customer gateway device must initiate the IKE negotiation and
+	// bring up the tunnel. Specify start for AWS to initiate the IKE negotiation.
+	// Valid Values: add | start Default: add
+	StartupAction *string
+
+	// The range of inside IPv4 addresses for the tunnel. Any specified CIDR blocks
+	// must be unique across all VPN connections that use the same virtual private
+	// gateway. Constraints: A size /30 CIDR block from the 169.254.0.0/16 range. The
+	// following CIDR blocks are reserved and cannot be used:
 	//
 	//     * 169.254.0.0/30
 	//
-	//     *
-	// 169.254.1.0/30
+	//
+	// * 169.254.1.0/30
 	//
 	//     * 169.254.2.0/30
 	//
@@ -10404,4 +10675,9 @@ type VpnTunnelOptionsSpecification struct {
 	//
 	//     * 169.254.169.252/30
 	TunnelInsideCidr *string
+
+	// The range of inside IPv6 addresses for the tunnel. Any specified CIDR blocks
+	// must be unique across all VPN connections that use the same transit gateway.
+	// Constraints: A size /126 CIDR block from the local fd00::/8 range.
+	TunnelInsideIpv6Cidr *string
 }

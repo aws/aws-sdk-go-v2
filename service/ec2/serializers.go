@@ -2325,6 +2325,61 @@ func (m *awsEc2query_serializeOpCreateCapacityReservation) HandleSerialize(ctx c
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsEc2query_serializeOpCreateCarrierGateway struct {
+}
+
+func (*awsEc2query_serializeOpCreateCarrierGateway) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpCreateCarrierGateway) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateCarrierGatewayInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("CreateCarrierGateway")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentCreateCarrierGatewayInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsEc2query_serializeOpCreateClientVpnEndpoint struct {
 }
 
@@ -4580,6 +4635,61 @@ func (m *awsEc2query_serializeOpCreateTransitGatewayPeeringAttachment) HandleSer
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsEc2query_serializeOpCreateTransitGatewayPrefixListReference struct {
+}
+
+func (*awsEc2query_serializeOpCreateTransitGatewayPrefixListReference) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpCreateTransitGatewayPrefixListReference) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateTransitGatewayPrefixListReferenceInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("CreateTransitGatewayPrefixListReference")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentCreateTransitGatewayPrefixListReferenceInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsEc2query_serializeOpCreateTransitGatewayRoute struct {
 }
 
@@ -5220,6 +5330,61 @@ func (m *awsEc2query_serializeOpCreateVpnGateway) HandleSerialize(ctx context.Co
 	body.Key("Version").String("2016-11-15")
 
 	if err := awsEc2query_serializeOpDocumentCreateVpnGatewayInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsEc2query_serializeOpDeleteCarrierGateway struct {
+}
+
+func (*awsEc2query_serializeOpDeleteCarrierGateway) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpDeleteCarrierGateway) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteCarrierGatewayInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DeleteCarrierGateway")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentDeleteCarrierGatewayInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -7220,6 +7385,61 @@ func (m *awsEc2query_serializeOpDeleteTransitGatewayPeeringAttachment) HandleSer
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsEc2query_serializeOpDeleteTransitGatewayPrefixListReference struct {
+}
+
+func (*awsEc2query_serializeOpDeleteTransitGatewayPrefixListReference) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpDeleteTransitGatewayPrefixListReference) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteTransitGatewayPrefixListReferenceInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DeleteTransitGatewayPrefixListReference")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentDeleteTransitGatewayPrefixListReferenceInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsEc2query_serializeOpDeleteTransitGatewayRoute struct {
 }
 
@@ -8520,6 +8740,61 @@ func (m *awsEc2query_serializeOpDescribeCapacityReservations) HandleSerialize(ct
 	body.Key("Version").String("2016-11-15")
 
 	if err := awsEc2query_serializeOpDocumentDescribeCapacityReservationsInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsEc2query_serializeOpDescribeCarrierGateways struct {
+}
+
+func (*awsEc2query_serializeOpDescribeCarrierGateways) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpDescribeCarrierGateways) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeCarrierGatewaysInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DescribeCarrierGateways")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentDescribeCarrierGatewaysInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -17010,6 +17285,61 @@ func (m *awsEc2query_serializeOpGetTransitGatewayMulticastDomainAssociations) Ha
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsEc2query_serializeOpGetTransitGatewayPrefixListReferences struct {
+}
+
+func (*awsEc2query_serializeOpGetTransitGatewayPrefixListReferences) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpGetTransitGatewayPrefixListReferences) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetTransitGatewayPrefixListReferencesInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("GetTransitGatewayPrefixListReferences")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentGetTransitGatewayPrefixListReferencesInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsEc2query_serializeOpGetTransitGatewayRouteTableAssociations struct {
 }
 
@@ -18935,6 +19265,116 @@ func (m *awsEc2query_serializeOpModifyTrafficMirrorSession) HandleSerialize(ctx 
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsEc2query_serializeOpModifyTransitGateway struct {
+}
+
+func (*awsEc2query_serializeOpModifyTransitGateway) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpModifyTransitGateway) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ModifyTransitGatewayInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ModifyTransitGateway")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentModifyTransitGatewayInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsEc2query_serializeOpModifyTransitGatewayPrefixListReference struct {
+}
+
+func (*awsEc2query_serializeOpModifyTransitGatewayPrefixListReference) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpModifyTransitGatewayPrefixListReference) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ModifyTransitGatewayPrefixListReferenceInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ModifyTransitGatewayPrefixListReference")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentModifyTransitGatewayPrefixListReferenceInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsEc2query_serializeOpModifyTransitGatewayVpcAttachment struct {
 }
 
@@ -19520,6 +19960,61 @@ func (m *awsEc2query_serializeOpModifyVpnConnection) HandleSerialize(ctx context
 	body.Key("Version").String("2016-11-15")
 
 	if err := awsEc2query_serializeOpDocumentModifyVpnConnectionInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsEc2query_serializeOpModifyVpnConnectionOptions struct {
+}
+
+func (*awsEc2query_serializeOpModifyVpnConnectionOptions) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpModifyVpnConnectionOptions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ModifyVpnConnectionOptionsInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ModifyVpnConnectionOptions")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentModifyVpnConnectionOptionsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -22912,6 +23407,22 @@ func awsEc2query_serializeDocumentCapacityReservationTarget(v *types.CapacityRes
 	return nil
 }
 
+func awsEc2query_serializeDocumentCarrierGatewayIdSet(v []*string, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("Member")
+
+	for i := range v {
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		av := array.Value()
+		av.String(*v[i])
+	}
+	return nil
+}
+
 func awsEc2query_serializeDocumentCertificateAuthenticationRequest(v *types.CertificateAuthenticationRequest, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -24538,6 +25049,11 @@ func awsEc2query_serializeDocumentInstanceNetworkInterfaceSpecification(v *types
 	object := value.Object()
 	_ = object
 
+	if v.AssociateCarrierIpAddress != nil {
+		objectKey := object.Key("AssociateCarrierIpAddress")
+		objectKey.Boolean(*v.AssociateCarrierIpAddress)
+	}
+
 	if v.AssociatePublicIpAddress != nil {
 		objectKey := object.Key("AssociatePublicIpAddress")
 		objectKey.Boolean(*v.AssociatePublicIpAddress)
@@ -25257,6 +25773,11 @@ func awsEc2query_serializeDocumentLaunchTemplateInstanceNetworkInterfaceSpecific
 	object := value.Object()
 	_ = object
 
+	if v.AssociateCarrierIpAddress != nil {
+		objectKey := object.Key("AssociateCarrierIpAddress")
+		objectKey.Boolean(*v.AssociateCarrierIpAddress)
+	}
+
 	if v.AssociatePublicIpAddress != nil {
 		objectKey := object.Key("AssociatePublicIpAddress")
 		objectKey.Boolean(*v.AssociatePublicIpAddress)
@@ -25803,6 +26324,48 @@ func awsEc2query_serializeDocumentLocalGatewayVirtualInterfaceIdSet(v []*string,
 	return nil
 }
 
+func awsEc2query_serializeDocumentModifyTransitGatewayOptions(v *types.ModifyTransitGatewayOptions, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.AssociationDefaultRouteTableId != nil {
+		objectKey := object.Key("AssociationDefaultRouteTableId")
+		objectKey.String(*v.AssociationDefaultRouteTableId)
+	}
+
+	if len(v.AutoAcceptSharedAttachments) > 0 {
+		objectKey := object.Key("AutoAcceptSharedAttachments")
+		objectKey.String(string(v.AutoAcceptSharedAttachments))
+	}
+
+	if len(v.DefaultRouteTableAssociation) > 0 {
+		objectKey := object.Key("DefaultRouteTableAssociation")
+		objectKey.String(string(v.DefaultRouteTableAssociation))
+	}
+
+	if len(v.DefaultRouteTablePropagation) > 0 {
+		objectKey := object.Key("DefaultRouteTablePropagation")
+		objectKey.String(string(v.DefaultRouteTablePropagation))
+	}
+
+	if len(v.DnsSupport) > 0 {
+		objectKey := object.Key("DnsSupport")
+		objectKey.String(string(v.DnsSupport))
+	}
+
+	if v.PropagationDefaultRouteTableId != nil {
+		objectKey := object.Key("PropagationDefaultRouteTableId")
+		objectKey.String(*v.PropagationDefaultRouteTableId)
+	}
+
+	if len(v.VpnEcmpSupport) > 0 {
+		objectKey := object.Key("VpnEcmpSupport")
+		objectKey.String(string(v.VpnEcmpSupport))
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeDocumentModifyTransitGatewayVpcAttachmentRequestOptions(v *types.ModifyTransitGatewayVpcAttachmentRequestOptions, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -25823,6 +26386,11 @@ func awsEc2query_serializeDocumentModifyTransitGatewayVpcAttachmentRequestOption
 func awsEc2query_serializeDocumentModifyVpnTunnelOptionsSpecification(v *types.ModifyVpnTunnelOptionsSpecification, value query.Value) error {
 	object := value.Object()
 	_ = object
+
+	if v.DPDTimeoutAction != nil {
+		objectKey := object.Key("DPDTimeoutAction")
+		objectKey.String(*v.DPDTimeoutAction)
+	}
 
 	if v.DPDTimeoutSeconds != nil {
 		objectKey := object.Key("DPDTimeoutSeconds")
@@ -25908,9 +26476,19 @@ func awsEc2query_serializeDocumentModifyVpnTunnelOptionsSpecification(v *types.M
 		objectKey.Integer(*v.ReplayWindowSize)
 	}
 
+	if v.StartupAction != nil {
+		objectKey := object.Key("StartupAction")
+		objectKey.String(*v.StartupAction)
+	}
+
 	if v.TunnelInsideCidr != nil {
 		objectKey := object.Key("TunnelInsideCidr")
 		objectKey.String(*v.TunnelInsideCidr)
+	}
+
+	if v.TunnelInsideIpv6Cidr != nil {
+		objectKey := object.Key("TunnelInsideIpv6Cidr")
+		objectKey.String(*v.TunnelInsideIpv6Cidr)
 	}
 
 	return nil
@@ -29081,9 +29659,34 @@ func awsEc2query_serializeDocumentVpnConnectionOptionsSpecification(v *types.Vpn
 		objectKey.Boolean(*v.EnableAcceleration)
 	}
 
+	if v.LocalIpv4NetworkCidr != nil {
+		objectKey := object.Key("LocalIpv4NetworkCidr")
+		objectKey.String(*v.LocalIpv4NetworkCidr)
+	}
+
+	if v.LocalIpv6NetworkCidr != nil {
+		objectKey := object.Key("LocalIpv6NetworkCidr")
+		objectKey.String(*v.LocalIpv6NetworkCidr)
+	}
+
+	if v.RemoteIpv4NetworkCidr != nil {
+		objectKey := object.Key("RemoteIpv4NetworkCidr")
+		objectKey.String(*v.RemoteIpv4NetworkCidr)
+	}
+
+	if v.RemoteIpv6NetworkCidr != nil {
+		objectKey := object.Key("RemoteIpv6NetworkCidr")
+		objectKey.String(*v.RemoteIpv6NetworkCidr)
+	}
+
 	if v.StaticRoutesOnly != nil {
 		objectKey := object.Key("StaticRoutesOnly")
 		objectKey.Boolean(*v.StaticRoutesOnly)
+	}
+
+	if len(v.TunnelInsideIpVersion) > 0 {
+		objectKey := object.Key("TunnelInsideIpVersion")
+		objectKey.String(string(v.TunnelInsideIpVersion))
 	}
 
 	if v.TunnelOptions != nil {
@@ -29115,6 +29718,11 @@ func awsEc2query_serializeDocumentVpnGatewayIdStringList(v []*string, value quer
 func awsEc2query_serializeDocumentVpnTunnelOptionsSpecification(v *types.VpnTunnelOptionsSpecification, value query.Value) error {
 	object := value.Object()
 	_ = object
+
+	if v.DPDTimeoutAction != nil {
+		objectKey := object.Key("DPDTimeoutAction")
+		objectKey.String(*v.DPDTimeoutAction)
+	}
 
 	if v.DPDTimeoutSeconds != nil {
 		objectKey := object.Key("DPDTimeoutSeconds")
@@ -29200,9 +29808,19 @@ func awsEc2query_serializeDocumentVpnTunnelOptionsSpecification(v *types.VpnTunn
 		objectKey.Integer(*v.ReplayWindowSize)
 	}
 
+	if v.StartupAction != nil {
+		objectKey := object.Key("StartupAction")
+		objectKey.String(*v.StartupAction)
+	}
+
 	if v.TunnelInsideCidr != nil {
 		objectKey := object.Key("TunnelInsideCidr")
 		objectKey.String(*v.TunnelInsideCidr)
+	}
+
+	if v.TunnelInsideIpv6Cidr != nil {
+		objectKey := object.Key("TunnelInsideIpv6Cidr")
+		objectKey.String(*v.TunnelInsideIpv6Cidr)
 	}
 
 	return nil
@@ -30476,6 +31094,35 @@ func awsEc2query_serializeOpDocumentCreateCapacityReservationInput(v *CreateCapa
 	return nil
 }
 
+func awsEc2query_serializeOpDocumentCreateCarrierGatewayInput(v *CreateCarrierGatewayInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.ClientToken != nil {
+		objectKey := object.Key("ClientToken")
+		objectKey.String(*v.ClientToken)
+	}
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.TagSpecifications != nil {
+		objectKey := object.FlatKey("TagSpecification")
+		if err := awsEc2query_serializeDocumentTagSpecificationList(v.TagSpecifications, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.VpcId != nil {
+		objectKey := object.Key("VpcId")
+		objectKey.String(*v.VpcId)
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeOpDocumentCreateClientVpnEndpointInput(v *CreateClientVpnEndpointInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -31522,6 +32169,11 @@ func awsEc2query_serializeOpDocumentCreateRouteInput(v *CreateRouteInput, value 
 	object := value.Object()
 	_ = object
 
+	if v.CarrierGatewayId != nil {
+		objectKey := object.Key("CarrierGatewayId")
+		objectKey.String(*v.CarrierGatewayId)
+	}
+
 	if v.DestinationCidrBlock != nil {
 		objectKey := object.Key("DestinationCidrBlock")
 		objectKey.String(*v.DestinationCidrBlock)
@@ -32102,6 +32754,38 @@ func awsEc2query_serializeOpDocumentCreateTransitGatewayPeeringAttachmentInput(v
 	return nil
 }
 
+func awsEc2query_serializeOpDocumentCreateTransitGatewayPrefixListReferenceInput(v *CreateTransitGatewayPrefixListReferenceInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Blackhole != nil {
+		objectKey := object.Key("Blackhole")
+		objectKey.Boolean(*v.Blackhole)
+	}
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.PrefixListId != nil {
+		objectKey := object.Key("PrefixListId")
+		objectKey.String(*v.PrefixListId)
+	}
+
+	if v.TransitGatewayAttachmentId != nil {
+		objectKey := object.Key("TransitGatewayAttachmentId")
+		objectKey.String(*v.TransitGatewayAttachmentId)
+	}
+
+	if v.TransitGatewayRouteTableId != nil {
+		objectKey := object.Key("TransitGatewayRouteTableId")
+		objectKey.String(*v.TransitGatewayRouteTableId)
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeOpDocumentCreateTransitGatewayRouteInput(v *CreateTransitGatewayRouteInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -32595,6 +33279,23 @@ func awsEc2query_serializeOpDocumentCreateVpnGatewayInput(v *CreateVpnGatewayInp
 	if len(v.Type) > 0 {
 		objectKey := object.Key("Type")
 		objectKey.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeOpDocumentDeleteCarrierGatewayInput(v *DeleteCarrierGatewayInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.CarrierGatewayId != nil {
+		objectKey := object.Key("CarrierGatewayId")
+		objectKey.String(*v.CarrierGatewayId)
+	}
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
 	}
 
 	return nil
@@ -33299,6 +34000,28 @@ func awsEc2query_serializeOpDocumentDeleteTransitGatewayPeeringAttachmentInput(v
 	return nil
 }
 
+func awsEc2query_serializeOpDocumentDeleteTransitGatewayPrefixListReferenceInput(v *DeleteTransitGatewayPrefixListReferenceInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.PrefixListId != nil {
+		objectKey := object.Key("PrefixListId")
+		objectKey.String(*v.PrefixListId)
+	}
+
+	if v.TransitGatewayRouteTableId != nil {
+		objectKey := object.Key("TransitGatewayRouteTableId")
+		objectKey.String(*v.TransitGatewayRouteTableId)
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeOpDocumentDeleteTransitGatewayRouteInput(v *DeleteTransitGatewayRouteInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -33782,6 +34505,42 @@ func awsEc2query_serializeOpDocumentDescribeCapacityReservationsInput(v *Describ
 	if v.CapacityReservationIds != nil {
 		objectKey := object.FlatKey("CapacityReservationId")
 		if err := awsEc2query_serializeDocumentCapacityReservationIdSet(v.CapacityReservationIds, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.Filters != nil {
+		objectKey := object.FlatKey("Filter")
+		if err := awsEc2query_serializeDocumentFilterList(v.Filters, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		objectKey := object.Key("MaxResults")
+		objectKey.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		objectKey := object.Key("NextToken")
+		objectKey.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeOpDocumentDescribeCarrierGatewaysInput(v *DescribeCarrierGatewaysInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.CarrierGatewayIds != nil {
+		objectKey := object.FlatKey("CarrierGatewayId")
+		if err := awsEc2query_serializeDocumentCarrierGatewayIdSet(v.CarrierGatewayIds, objectKey); err != nil {
 			return err
 		}
 	}
@@ -38445,6 +39204,40 @@ func awsEc2query_serializeOpDocumentGetTransitGatewayMulticastDomainAssociations
 	return nil
 }
 
+func awsEc2query_serializeOpDocumentGetTransitGatewayPrefixListReferencesInput(v *GetTransitGatewayPrefixListReferencesInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.Filters != nil {
+		objectKey := object.FlatKey("Filter")
+		if err := awsEc2query_serializeDocumentFilterList(v.Filters, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		objectKey := object.Key("MaxResults")
+		objectKey.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		objectKey := object.Key("NextToken")
+		objectKey.String(*v.NextToken)
+	}
+
+	if v.TransitGatewayRouteTableId != nil {
+		objectKey := object.Key("TransitGatewayRouteTableId")
+		objectKey.String(*v.TransitGatewayRouteTableId)
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeOpDocumentGetTransitGatewayRouteTableAssociationsInput(v *GetTransitGatewayRouteTableAssociationsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -38952,6 +39745,13 @@ func awsEc2query_serializeOpDocumentModifyFleetInput(v *ModifyFleetInput, value 
 	if v.FleetId != nil {
 		objectKey := object.Key("FleetId")
 		objectKey.String(*v.FleetId)
+	}
+
+	if v.LaunchTemplateConfigs != nil {
+		objectKey := object.FlatKey("LaunchTemplateConfig")
+		if err := awsEc2query_serializeDocumentFleetLaunchTemplateConfigListRequest(v.LaunchTemplateConfigs, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.TargetCapacitySpecification != nil {
@@ -39630,6 +40430,13 @@ func awsEc2query_serializeOpDocumentModifySpotFleetRequestInput(v *ModifySpotFle
 		objectKey.String(string(v.ExcessCapacityTerminationPolicy))
 	}
 
+	if v.LaunchTemplateConfigs != nil {
+		objectKey := object.FlatKey("LaunchTemplateConfig")
+		if err := awsEc2query_serializeDocumentLaunchTemplateConfigList(v.LaunchTemplateConfigs, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.OnDemandTargetCapacity != nil {
 		objectKey := object.Key("OnDemandTargetCapacity")
 		objectKey.Integer(*v.OnDemandTargetCapacity)
@@ -39839,6 +40646,67 @@ func awsEc2query_serializeOpDocumentModifyTrafficMirrorSessionInput(v *ModifyTra
 	if v.VirtualNetworkId != nil {
 		objectKey := object.Key("VirtualNetworkId")
 		objectKey.Integer(*v.VirtualNetworkId)
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeOpDocumentModifyTransitGatewayInput(v *ModifyTransitGatewayInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Description != nil {
+		objectKey := object.Key("Description")
+		objectKey.String(*v.Description)
+	}
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.Options != nil {
+		objectKey := object.Key("Options")
+		if err := awsEc2query_serializeDocumentModifyTransitGatewayOptions(v.Options, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.TransitGatewayId != nil {
+		objectKey := object.Key("TransitGatewayId")
+		objectKey.String(*v.TransitGatewayId)
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeOpDocumentModifyTransitGatewayPrefixListReferenceInput(v *ModifyTransitGatewayPrefixListReferenceInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Blackhole != nil {
+		objectKey := object.Key("Blackhole")
+		objectKey.Boolean(*v.Blackhole)
+	}
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.PrefixListId != nil {
+		objectKey := object.Key("PrefixListId")
+		objectKey.String(*v.PrefixListId)
+	}
+
+	if v.TransitGatewayAttachmentId != nil {
+		objectKey := object.Key("TransitGatewayAttachmentId")
+		objectKey.String(*v.TransitGatewayAttachmentId)
+	}
+
+	if v.TransitGatewayRouteTableId != nil {
+		objectKey := object.Key("TransitGatewayRouteTableId")
+		objectKey.String(*v.TransitGatewayRouteTableId)
 	}
 
 	return nil
@@ -40224,6 +41092,43 @@ func awsEc2query_serializeOpDocumentModifyVpnConnectionInput(v *ModifyVpnConnect
 	if v.VpnGatewayId != nil {
 		objectKey := object.Key("VpnGatewayId")
 		objectKey.String(*v.VpnGatewayId)
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeOpDocumentModifyVpnConnectionOptionsInput(v *ModifyVpnConnectionOptionsInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.LocalIpv4NetworkCidr != nil {
+		objectKey := object.Key("LocalIpv4NetworkCidr")
+		objectKey.String(*v.LocalIpv4NetworkCidr)
+	}
+
+	if v.LocalIpv6NetworkCidr != nil {
+		objectKey := object.Key("LocalIpv6NetworkCidr")
+		objectKey.String(*v.LocalIpv6NetworkCidr)
+	}
+
+	if v.RemoteIpv4NetworkCidr != nil {
+		objectKey := object.Key("RemoteIpv4NetworkCidr")
+		objectKey.String(*v.RemoteIpv4NetworkCidr)
+	}
+
+	if v.RemoteIpv6NetworkCidr != nil {
+		objectKey := object.Key("RemoteIpv6NetworkCidr")
+		objectKey.String(*v.RemoteIpv6NetworkCidr)
+	}
+
+	if v.VpnConnectionId != nil {
+		objectKey := object.Key("VpnConnectionId")
+		objectKey.String(*v.VpnConnectionId)
 	}
 
 	return nil
@@ -40849,6 +41754,11 @@ func awsEc2query_serializeOpDocumentReplaceNetworkAclEntryInput(v *ReplaceNetwor
 func awsEc2query_serializeOpDocumentReplaceRouteInput(v *ReplaceRouteInput, value query.Value) error {
 	object := value.Object()
 	_ = object
+
+	if v.CarrierGatewayId != nil {
+		objectKey := object.Key("CarrierGatewayId")
+		objectKey.String(*v.CarrierGatewayId)
+	}
 
 	if v.DestinationCidrBlock != nil {
 		objectKey := object.Key("DestinationCidrBlock")

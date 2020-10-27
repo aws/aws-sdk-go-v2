@@ -61,7 +61,7 @@ type GetTraceSummariesInput struct {
 	// Set to true to get summaries for only a subset of available traces.
 	Sampling *bool
 
-	// A paramater to indicate whether to enable sampling on trace summaries. Input
+	// A parameter to indicate whether to enable sampling on trace summaries. Input
 	// parameters are Name and Value.
 	SamplingStrategy *types.SamplingStrategy
 
@@ -76,8 +76,8 @@ type GetTraceSummariesOutput struct {
 	ApproximateTime *time.Time
 
 	// If the requested time frame contained more than one page of results, you can use
-	// this token to retrieve the next page. The first page contains the most most
-	// recent results, closest to the end of the time frame.
+	// this token to retrieve the next page. The first page contains the most recent
+	// results, closest to the end of the time frame.
 	NextToken *string
 
 	// Trace IDs and annotations for traces that were found in the specified time

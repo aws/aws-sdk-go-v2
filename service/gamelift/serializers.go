@@ -1717,6 +1717,52 @@ func (m *awsAwsjson11_serializeOpDescribeGameServerGroup) HandleSerialize(ctx co
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpDescribeGameServerInstances struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribeGameServerInstances) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribeGameServerInstances) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeGameServerInstancesInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DescribeGameServerInstances")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeGameServerInstancesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpDescribeGameSessionDetails struct {
 }
 
@@ -4268,6 +4314,21 @@ func awsAwsjson11_serializeDocumentGameServerGroupAutoScalingPolicy(v *types.Gam
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentGameServerInstanceIds(v []*string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			av.Null()
+			continue
+		}
+		av.String(*v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentGameSessionQueueDestination(v *types.GameSessionQueueDestination, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5890,6 +5951,35 @@ func awsAwsjson11_serializeOpDocumentDescribeGameServerInput(v *DescribeGameServ
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDescribeGameServerInstancesInput(v *DescribeGameServerInstancesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GameServerGroupName != nil {
+		ok := object.Key("GameServerGroupName")
+		ok.String(*v.GameServerGroupName)
+	}
+
+	if v.InstanceIds != nil {
+		ok := object.Key("InstanceIds")
+		if err := awsAwsjson11_serializeDocumentGameServerInstanceIds(v.InstanceIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Limit != nil {
+		ok := object.Key("Limit")
+		ok.Integer(*v.Limit)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentDescribeGameSessionDetailsInput(v *DescribeGameSessionDetailsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6447,11 +6537,6 @@ func awsAwsjson11_serializeOpDocumentRegisterGameServerInput(v *RegisterGameServ
 		ok.String(*v.ConnectionInfo)
 	}
 
-	if v.CustomSortKey != nil {
-		ok := object.Key("CustomSortKey")
-		ok.String(*v.CustomSortKey)
-	}
-
 	if v.GameServerData != nil {
 		ok := object.Key("GameServerData")
 		ok.String(*v.GameServerData)
@@ -6470,13 +6555,6 @@ func awsAwsjson11_serializeOpDocumentRegisterGameServerInput(v *RegisterGameServ
 	if v.InstanceId != nil {
 		ok := object.Key("InstanceId")
 		ok.String(*v.InstanceId)
-	}
-
-	if v.Tags != nil {
-		ok := object.Key("Tags")
-		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
-			return err
-		}
 	}
 
 	return nil
@@ -6969,11 +7047,6 @@ func awsAwsjson11_serializeOpDocumentUpdateGameServerGroupInput(v *UpdateGameSer
 func awsAwsjson11_serializeOpDocumentUpdateGameServerInput(v *UpdateGameServerInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
-
-	if v.CustomSortKey != nil {
-		ok := object.Key("CustomSortKey")
-		ok.String(*v.CustomSortKey)
-	}
 
 	if v.GameServerData != nil {
 		ok := object.Key("GameServerData")

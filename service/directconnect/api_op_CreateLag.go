@@ -12,24 +12,24 @@ import (
 )
 
 // Creates a link aggregation group (LAG) with the specified number of bundled
-// physical connections between the customer network and a specific AWS Direct
-// Connect location. A LAG is a logical interface that uses the Link Aggregation
-// Control Protocol (LACP) to aggregate multiple interfaces, enabling you to treat
-// them as a single interface. All connections in a LAG must use the same bandwidth
-// and must terminate at the same AWS Direct Connect endpoint. You can have up to
-// 10 connections per LAG. Regardless of this limit, if you request more
-// connections for the LAG than AWS Direct Connect can allocate on a single
-// endpoint, no LAG is created. You can specify an existing physical connection or
-// interconnect to include in the LAG (which counts towards the total number of
-// connections). Doing so interrupts the current physical connection or hosted
-// connections, and re-establishes them as a member of the LAG. The LAG will be
-// created on the same AWS Direct Connect endpoint to which the connection
-// terminates. Any virtual interfaces associated with the connection are
-// automatically disassociated and re-associated with the LAG. The connection ID
-// does not change. If the AWS account used to create a LAG is a registered AWS
-// Direct Connect Partner, the LAG is automatically enabled to host
-// sub-connections. For a LAG owned by a partner, any associated virtual interfaces
-// cannot be directly configured.
+// physical dedicated connections between the customer network and a specific AWS
+// Direct Connect location. A LAG is a logical interface that uses the Link
+// Aggregation Control Protocol (LACP) to aggregate multiple interfaces, enabling
+// you to treat them as a single interface. All connections in a LAG must use the
+// same bandwidth (either 1Gbps or 10Gbps) and must terminate at the same AWS
+// Direct Connect endpoint. You can have up to 10 dedicated connections per LAG.
+// Regardless of this limit, if you request more connections for the LAG than AWS
+// Direct Connect can allocate on a single endpoint, no LAG is created. You can
+// specify an existing physical dedicated connection or interconnect to include in
+// the LAG (which counts towards the total number of connections). Doing so
+// interrupts the current physical dedicated connection, and re-establishes them as
+// a member of the LAG. The LAG will be created on the same AWS Direct Connect
+// endpoint to which the dedicated connection terminates. Any virtual interfaces
+// associated with the dedicated connection are automatically disassociated and
+// re-associated with the LAG. The connection ID does not change. If the AWS
+// account used to create a LAG is a registered AWS Direct Connect Partner, the LAG
+// is automatically enabled to host sub-connections. For a LAG owned by a partner,
+// any associated virtual interfaces cannot be directly configured.
 func (c *Client) CreateLag(ctx context.Context, params *CreateLagInput, optFns ...func(*Options)) (*CreateLagOutput, error) {
 	if params == nil {
 		params = &CreateLagInput{}
@@ -47,9 +47,8 @@ func (c *Client) CreateLag(ctx context.Context, params *CreateLagInput, optFns .
 
 type CreateLagInput struct {
 
-	// The bandwidth of the individual physical connections bundled by the LAG. The
-	// possible values are 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, 500Mbps, 1Gbps,
-	// 2Gbps, 5Gbps, and 10Gbps.
+	// The bandwidth of the individual physical dedicated connections bundled by the
+	// LAG. The possible values are 1Gbps and 10Gbps.
 	//
 	// This member is required.
 	ConnectionsBandwidth *string
@@ -64,7 +63,8 @@ type CreateLagInput struct {
 	// This member is required.
 	Location *string
 
-	// The number of physical connections initially provisioned and bundled by the LAG.
+	// The number of physical dedicated connections initially provisioned and bundled
+	// by the LAG.
 	//
 	// This member is required.
 	NumberOfConnections *int32
@@ -72,7 +72,7 @@ type CreateLagInput struct {
 	// The tags to associate with the automtically created LAGs.
 	ChildConnectionTags []*types.Tag
 
-	// The ID of an existing connection to migrate to the LAG.
+	// The ID of an existing dedicated connection to migrate to the LAG.
 	ConnectionId *string
 
 	// The name of the service provider associated with the LAG.
@@ -140,11 +140,12 @@ type CreateLagOutput struct {
 	// The location of the LAG.
 	Location *string
 
-	// The minimum number of physical connections that must be operational for the LAG
-	// itself to be operational.
+	// The minimum number of physical dedicated connections that must be operational
+	// for the LAG itself to be operational.
 	MinimumLinks *int32
 
-	// The number of physical connections bundled by the LAG, up to a maximum of 10.
+	// The number of physical dedicated connections bundled by the LAG, up to a maximum
+	// of 10.
 	NumberOfConnections *int32
 
 	// The ID of the AWS account that owns the LAG.

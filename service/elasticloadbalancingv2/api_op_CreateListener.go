@@ -133,6 +133,9 @@ type CreateListenerInput struct {
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies)
 	// in the Network Load Balancers Guide.
 	SslPolicy *string
+
+	// The tags to assign to the listener.
+	Tags []*types.Tag
 }
 
 type CreateListenerOutput struct {

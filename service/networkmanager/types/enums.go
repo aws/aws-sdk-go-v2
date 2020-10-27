@@ -12,6 +12,19 @@ const (
 	CustomerGatewayAssociationStateDeleted   CustomerGatewayAssociationState = "DELETED"
 )
 
+// Values returns all known values for CustomerGatewayAssociationState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CustomerGatewayAssociationState) Values() []CustomerGatewayAssociationState {
+	return []CustomerGatewayAssociationState{
+		"PENDING",
+		"AVAILABLE",
+		"DELETING",
+		"DELETED",
+	}
+}
+
 type DeviceState string
 
 // Enum values for DeviceState
@@ -21,6 +34,18 @@ const (
 	DeviceStateDeleting  DeviceState = "DELETING"
 	DeviceStateUpdating  DeviceState = "UPDATING"
 )
+
+// Values returns all known values for DeviceState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DeviceState) Values() []DeviceState {
+	return []DeviceState{
+		"PENDING",
+		"AVAILABLE",
+		"DELETING",
+		"UPDATING",
+	}
+}
 
 type GlobalNetworkState string
 
@@ -32,6 +57,18 @@ const (
 	GlobalNetworkStateUpdating  GlobalNetworkState = "UPDATING"
 )
 
+// Values returns all known values for GlobalNetworkState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (GlobalNetworkState) Values() []GlobalNetworkState {
+	return []GlobalNetworkState{
+		"PENDING",
+		"AVAILABLE",
+		"DELETING",
+		"UPDATING",
+	}
+}
+
 type LinkAssociationState string
 
 // Enum values for LinkAssociationState
@@ -41,6 +78,18 @@ const (
 	LinkAssociationStateDeleting  LinkAssociationState = "DELETING"
 	LinkAssociationStateDeleted   LinkAssociationState = "DELETED"
 )
+
+// Values returns all known values for LinkAssociationState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LinkAssociationState) Values() []LinkAssociationState {
+	return []LinkAssociationState{
+		"PENDING",
+		"AVAILABLE",
+		"DELETING",
+		"DELETED",
+	}
+}
 
 type LinkState string
 
@@ -52,6 +101,18 @@ const (
 	LinkStateUpdating  LinkState = "UPDATING"
 )
 
+// Values returns all known values for LinkState. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (LinkState) Values() []LinkState {
+	return []LinkState{
+		"PENDING",
+		"AVAILABLE",
+		"DELETING",
+		"UPDATING",
+	}
+}
+
 type SiteState string
 
 // Enum values for SiteState
@@ -61,6 +122,18 @@ const (
 	SiteStateDeleting  SiteState = "DELETING"
 	SiteStateUpdating  SiteState = "UPDATING"
 )
+
+// Values returns all known values for SiteState. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (SiteState) Values() []SiteState {
+	return []SiteState{
+		"PENDING",
+		"AVAILABLE",
+		"DELETING",
+		"UPDATING",
+	}
+}
 
 type TransitGatewayRegistrationState string
 
@@ -73,6 +146,20 @@ const (
 	TransitGatewayRegistrationStateFailed    TransitGatewayRegistrationState = "FAILED"
 )
 
+// Values returns all known values for TransitGatewayRegistrationState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (TransitGatewayRegistrationState) Values() []TransitGatewayRegistrationState {
+	return []TransitGatewayRegistrationState{
+		"PENDING",
+		"AVAILABLE",
+		"DELETING",
+		"DELETED",
+		"FAILED",
+	}
+}
+
 type ValidationExceptionReason string
 
 // Enum values for ValidationExceptionReason
@@ -82,3 +169,15 @@ const (
 	ValidationExceptionReasonField_validation_failed ValidationExceptionReason = "FieldValidationFailed"
 	ValidationExceptionReasonOther                   ValidationExceptionReason = "Other"
 )
+
+// Values returns all known values for ValidationExceptionReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ValidationExceptionReason) Values() []ValidationExceptionReason {
+	return []ValidationExceptionReason{
+		"UnknownOperation",
+		"CannotParse",
+		"FieldValidationFailed",
+		"Other",
+	}
+}

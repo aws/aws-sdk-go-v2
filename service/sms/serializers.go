@@ -245,6 +245,52 @@ func (m *awsAwsjson11_serializeOpDeleteAppReplicationConfiguration) HandleSerial
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpDeleteAppValidationConfiguration struct {
+}
+
+func (*awsAwsjson11_serializeOpDeleteAppValidationConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeleteAppValidationConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteAppValidationConfigurationInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSServerMigrationService_V2016_10_24.DeleteAppValidationConfiguration")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeleteAppValidationConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpDeleteReplicationJob struct {
 }
 
@@ -606,6 +652,98 @@ func (m *awsAwsjson11_serializeOpGetAppReplicationConfiguration) HandleSerialize
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpGetAppValidationConfiguration struct {
+}
+
+func (*awsAwsjson11_serializeOpGetAppValidationConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetAppValidationConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetAppValidationConfigurationInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSServerMigrationService_V2016_10_24.GetAppValidationConfiguration")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetAppValidationConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpGetAppValidationOutput struct {
+}
+
+func (*awsAwsjson11_serializeOpGetAppValidationOutput) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetAppValidationOutput) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetAppValidationOutputInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSServerMigrationService_V2016_10_24.GetAppValidationOutput")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetAppValidationOutputInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpGetConnectors struct {
 }
 
@@ -790,6 +928,52 @@ func (m *awsAwsjson11_serializeOpGetServers) HandleSerialize(ctx context.Context
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpImportAppCatalog struct {
+}
+
+func (*awsAwsjson11_serializeOpImportAppCatalog) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpImportAppCatalog) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ImportAppCatalogInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSServerMigrationService_V2016_10_24.ImportAppCatalog")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentImportAppCatalogInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpImportServerCatalog struct {
 }
 
@@ -921,6 +1105,52 @@ func (m *awsAwsjson11_serializeOpListApps) HandleSerialize(ctx context.Context, 
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpNotifyAppValidationOutput struct {
+}
+
+func (*awsAwsjson11_serializeOpNotifyAppValidationOutput) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpNotifyAppValidationOutput) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*NotifyAppValidationOutputInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSServerMigrationService_V2016_10_24.NotifyAppValidationOutput")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentNotifyAppValidationOutputInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpPutAppLaunchConfiguration struct {
 }
 
@@ -1013,6 +1243,52 @@ func (m *awsAwsjson11_serializeOpPutAppReplicationConfiguration) HandleSerialize
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpPutAppValidationConfiguration struct {
+}
+
+func (*awsAwsjson11_serializeOpPutAppValidationConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpPutAppValidationConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutAppValidationConfigurationInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSServerMigrationService_V2016_10_24.PutAppValidationConfiguration")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentPutAppValidationConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpStartAppReplication struct {
 }
 
@@ -1044,6 +1320,52 @@ func (m *awsAwsjson11_serializeOpStartAppReplication) HandleSerialize(ctx contex
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentStartAppReplicationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpStartOnDemandAppReplication struct {
+}
+
+func (*awsAwsjson11_serializeOpStartOnDemandAppReplication) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpStartOnDemandAppReplication) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartOnDemandAppReplicationInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSServerMigrationService_V2016_10_24.StartOnDemandAppReplication")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentStartOnDemandAppReplicationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1303,6 +1625,74 @@ func awsAwsjson11_serializeDocumentAppIds(v []*string, value smithyjson.Value) e
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAppValidationConfiguration(v *types.AppValidationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AppValidationStrategy) > 0 {
+		ok := object.Key("appValidationStrategy")
+		ok.String(string(v.AppValidationStrategy))
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.SsmValidationParameters != nil {
+		ok := object.Key("ssmValidationParameters")
+		if err := awsAwsjson11_serializeDocumentSSMValidationParameters(v.SsmValidationParameters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ValidationId != nil {
+		ok := object.Key("validationId")
+		ok.String(*v.ValidationId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAppValidationConfigurations(v []*types.AppValidationConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			av.Null()
+			continue
+		}
+		if err := awsAwsjson11_serializeDocumentAppValidationConfiguration(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentNotificationContext(v *types.NotificationContext, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Status) > 0 {
+		ok := object.Key("status")
+		ok.String(string(v.Status))
+	}
+
+	if v.StatusMessage != nil {
+		ok := object.Key("statusMessage")
+		ok.String(*v.StatusMessage)
+	}
+
+	if v.ValidationId != nil {
+		ok := object.Key("validationId")
+		ok.String(*v.ValidationId)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentS3Location(v *types.S3Location, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1472,6 +1862,42 @@ func awsAwsjson11_serializeDocumentServerGroups(v []*types.ServerGroup, value sm
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentServerGroupValidationConfiguration(v *types.ServerGroupValidationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ServerGroupId != nil {
+		ok := object.Key("serverGroupId")
+		ok.String(*v.ServerGroupId)
+	}
+
+	if v.ServerValidationConfigurations != nil {
+		ok := object.Key("serverValidationConfigurations")
+		if err := awsAwsjson11_serializeDocumentServerValidationConfigurations(v.ServerValidationConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentServerGroupValidationConfigurations(v []*types.ServerGroupValidationConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			av.Null()
+			continue
+		}
+		if err := awsAwsjson11_serializeDocumentServerGroupValidationConfiguration(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentServerLaunchConfiguration(v *types.ServerLaunchConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1481,9 +1907,26 @@ func awsAwsjson11_serializeDocumentServerLaunchConfiguration(v *types.ServerLaun
 		ok.Boolean(*v.AssociatePublicIpAddress)
 	}
 
+	if v.ConfigureScript != nil {
+		ok := object.Key("configureScript")
+		if err := awsAwsjson11_serializeDocumentS3Location(v.ConfigureScript, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ConfigureScriptType) > 0 {
+		ok := object.Key("configureScriptType")
+		ok.String(string(v.ConfigureScriptType))
+	}
+
 	if v.Ec2KeyName != nil {
 		ok := object.Key("ec2KeyName")
 		ok.String(*v.Ec2KeyName)
+	}
+
+	if v.IamInstanceProfileName != nil {
+		ok := object.Key("iamInstanceProfileName")
+		ok.String(*v.IamInstanceProfileName)
 	}
 
 	if v.InstanceType != nil {
@@ -1642,6 +2085,112 @@ func awsAwsjson11_serializeDocumentServerReplicationParameters(v *types.ServerRe
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentServerValidationConfiguration(v *types.ServerValidationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Server != nil {
+		ok := object.Key("server")
+		if err := awsAwsjson11_serializeDocumentServer(v.Server, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ServerValidationStrategy) > 0 {
+		ok := object.Key("serverValidationStrategy")
+		ok.String(string(v.ServerValidationStrategy))
+	}
+
+	if v.UserDataValidationParameters != nil {
+		ok := object.Key("userDataValidationParameters")
+		if err := awsAwsjson11_serializeDocumentUserDataValidationParameters(v.UserDataValidationParameters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ValidationId != nil {
+		ok := object.Key("validationId")
+		ok.String(*v.ValidationId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentServerValidationConfigurations(v []*types.ServerValidationConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			av.Null()
+			continue
+		}
+		if err := awsAwsjson11_serializeDocumentServerValidationConfiguration(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSource(v *types.Source, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3Location != nil {
+		ok := object.Key("s3Location")
+		if err := awsAwsjson11_serializeDocumentS3Location(v.S3Location, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSSMValidationParameters(v *types.SSMValidationParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Command != nil {
+		ok := object.Key("command")
+		ok.String(*v.Command)
+	}
+
+	if v.ExecutionTimeoutSeconds != nil {
+		ok := object.Key("executionTimeoutSeconds")
+		ok.Integer(*v.ExecutionTimeoutSeconds)
+	}
+
+	if v.InstanceId != nil {
+		ok := object.Key("instanceId")
+		ok.String(*v.InstanceId)
+	}
+
+	if v.OutputS3BucketName != nil {
+		ok := object.Key("outputS3BucketName")
+		ok.String(*v.OutputS3BucketName)
+	}
+
+	if len(v.ScriptType) > 0 {
+		ok := object.Key("scriptType")
+		ok.String(string(v.ScriptType))
+	}
+
+	if v.Source != nil {
+		ok := object.Key("source")
+		if err := awsAwsjson11_serializeDocumentSource(v.Source, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentTag(v *types.Tag, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1683,6 +2232,25 @@ func awsAwsjson11_serializeDocumentUserData(v *types.UserData, value smithyjson.
 	if v.S3Location != nil {
 		ok := object.Key("s3Location")
 		if err := awsAwsjson11_serializeDocumentS3Location(v.S3Location, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentUserDataValidationParameters(v *types.UserDataValidationParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ScriptType) > 0 {
+		ok := object.Key("scriptType")
+		ok.String(string(v.ScriptType))
+	}
+
+	if v.Source != nil {
+		ok := object.Key("source")
+		if err := awsAwsjson11_serializeDocumentSource(v.Source, ok); err != nil {
 			return err
 		}
 	}
@@ -1902,6 +2470,18 @@ func awsAwsjson11_serializeOpDocumentDeleteAppReplicationConfigurationInput(v *D
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDeleteAppValidationConfigurationInput(v *DeleteAppValidationConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AppId != nil {
+		ok := object.Key("appId")
+		ok.String(*v.AppId)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentDeleteReplicationJobInput(v *DeleteReplicationJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2003,6 +2583,30 @@ func awsAwsjson11_serializeOpDocumentGetAppReplicationConfigurationInput(v *GetA
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentGetAppValidationConfigurationInput(v *GetAppValidationConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AppId != nil {
+		ok := object.Key("appId")
+		ok.String(*v.AppId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentGetAppValidationOutputInput(v *GetAppValidationOutputInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AppId != nil {
+		ok := object.Key("appId")
+		ok.String(*v.AppId)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentGetConnectorsInput(v *GetConnectorsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2088,6 +2692,18 @@ func awsAwsjson11_serializeOpDocumentGetServersInput(v *GetServersInput, value s
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentImportAppCatalogInput(v *ImportAppCatalogInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RoleName != nil {
+		ok := object.Key("roleName")
+		ok.String(*v.RoleName)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentImportServerCatalogInput(v *ImportServerCatalogInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2131,6 +2747,25 @@ func awsAwsjson11_serializeOpDocumentListAppsInput(v *ListAppsInput, value smith
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentNotifyAppValidationOutputInput(v *NotifyAppValidationOutputInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AppId != nil {
+		ok := object.Key("appId")
+		ok.String(*v.AppId)
+	}
+
+	if v.NotificationContext != nil {
+		ok := object.Key("notificationContext")
+		if err := awsAwsjson11_serializeDocumentNotificationContext(v.NotificationContext, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentPutAppLaunchConfigurationInput(v *PutAppLaunchConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2138,6 +2773,11 @@ func awsAwsjson11_serializeOpDocumentPutAppLaunchConfigurationInput(v *PutAppLau
 	if v.AppId != nil {
 		ok := object.Key("appId")
 		ok.String(*v.AppId)
+	}
+
+	if v.AutoLaunch != nil {
+		ok := object.Key("autoLaunch")
+		ok.Boolean(*v.AutoLaunch)
 	}
 
 	if v.RoleName != nil {
@@ -2174,6 +2814,32 @@ func awsAwsjson11_serializeOpDocumentPutAppReplicationConfigurationInput(v *PutA
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentPutAppValidationConfigurationInput(v *PutAppValidationConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AppId != nil {
+		ok := object.Key("appId")
+		ok.String(*v.AppId)
+	}
+
+	if v.AppValidationConfigurations != nil {
+		ok := object.Key("appValidationConfigurations")
+		if err := awsAwsjson11_serializeDocumentAppValidationConfigurations(v.AppValidationConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ServerGroupValidationConfigurations != nil {
+		ok := object.Key("serverGroupValidationConfigurations")
+		if err := awsAwsjson11_serializeDocumentServerGroupValidationConfigurations(v.ServerGroupValidationConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentStartAppReplicationInput(v *StartAppReplicationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2181,6 +2847,23 @@ func awsAwsjson11_serializeOpDocumentStartAppReplicationInput(v *StartAppReplica
 	if v.AppId != nil {
 		ok := object.Key("appId")
 		ok.String(*v.AppId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentStartOnDemandAppReplicationInput(v *StartOnDemandAppReplicationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AppId != nil {
+		ok := object.Key("appId")
+		ok.String(*v.AppId)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
 	}
 
 	return nil

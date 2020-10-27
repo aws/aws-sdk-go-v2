@@ -32,15 +32,14 @@ func (c *Client) DescribeUser(ctx context.Context, params *DescribeUserInput, op
 
 type DescribeUserInput struct {
 
-	// A system-assigned unique identifier for a file transfer protocol-enabled server
-	// that has this user assigned.
+	// A system-assigned unique identifier for a server that has this user assigned.
 	//
 	// This member is required.
 	ServerId *string
 
-	// The name of the user assigned to one or more file transfer protocol-enabled
-	// servers. User names are part of the sign-in credentials to use the AWS Transfer
-	// Family service and perform file transfer tasks.
+	// The name of the user assigned to one or more servers. User names are part of the
+	// sign-in credentials to use the AWS Transfer Family service and perform file
+	// transfer tasks.
 	//
 	// This member is required.
 	UserName *string
@@ -48,8 +47,7 @@ type DescribeUserInput struct {
 
 type DescribeUserOutput struct {
 
-	// A system-assigned unique identifier for a file transfer protocol-enabled server
-	// that has this user assigned.
+	// A system-assigned unique identifier for a server that has this user assigned.
 	//
 	// This member is required.
 	ServerId *string

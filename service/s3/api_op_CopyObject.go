@@ -133,14 +133,19 @@ import (
 // on the target bucket, the version ID that Amazon S3 generates is always null. If
 // the source object's storage class is GLACIER, you must restore a copy of this
 // object before you can use it as a source object for the copy operation. For more
-// information, see . The following operations are related to CopyObject:
+// information, see RestoreObject
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html). The
+// following operations are related to CopyObject:
+//
+//     * PutObject
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
 //
 //     *
-// PutObject
+// GetObject
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
 //
-//     * GetObject
-//
-// For more information, see Copying Objects
+// For more
+// information, see Copying Objects
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/CopyingObjectsExamples.html).
 func (c *Client) CopyObject(ctx context.Context, params *CopyObjectInput, optFns ...func(*Options)) (*CopyObjectOutput, error) {
 	if params == nil {
@@ -159,13 +164,59 @@ func (c *Client) CopyObject(ctx context.Context, params *CopyObjectInput, optFns
 
 type CopyObjectInput struct {
 
-	// The name of the destination bucket.
+	// The name of the destination bucket. When using this API with an access point,
+	// you must direct requests to the access point hostname. The access point hostname
+	// takes the form AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com.
+	// When using this operation with an access point through the AWS SDKs, you provide
+	// the access point ARN in place of the bucket name. For more information about
+	// access point ARNs, see Using Access Points
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
+	// the Amazon Simple Storage Service Developer Guide. When using this API with
+	// Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname.
+	// The S3 on Outposts hostname takes the form
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
+	// this operation using S3 on Outposts through the AWS SDKs, you provide the
+	// Outposts bucket ARN in place of the bucket name. For more information about S3
+	// on Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
+	// Amazon Simple Storage Service Developer Guide.
 	//
 	// This member is required.
 	Bucket *string
 
-	// The name of the source bucket and key name of the source object, separated by a
-	// slash (/). Must be URL-encoded.
+	// Specifies the source object for the copy operation. You specify the value in one
+	// of two formats, depending on whether you want to access the source object
+	// through an access point
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html):
+	//
+	//     * For
+	// objects not accessed through an access point, specify the name of the source
+	// bucket and the key of the source object, separated by a slash (/). For example,
+	// to copy the object reports/january.pdf from the bucket awsexamplebucket, use
+	// awsexamplebucket/reports/january.pdf. The value must be URL encoded.
+	//
+	//     * For
+	// objects accessed through access points, specify the Amazon Resource Name (ARN)
+	// of the object as accessed through the access point, in the format
+	// arn:aws:s3:::accesspoint//object/. For example, to copy the object
+	// reports/january.pdf through access point my-access-point owned by account
+	// 123456789012 in Region us-west-2, use the URL encoding of
+	// arn:aws:s3:us-west-2:123456789012:accesspoint/my-access-point/object/reports/january.pdf.
+	// The value must be URL encoded. Amazon S3 supports copy operations using access
+	// points only when the source and destination buckets are in the same AWS Region.
+	// Alternatively, for objects accessed through Amazon S3 on Outposts, specify the
+	// ARN of the object as accessed in the format
+	// arn:aws:s3-outposts:::outpost//object/. For example, to copy the object
+	// reports/january.pdf through outpost my-outpost owned by account 123456789012 in
+	// Region us-west-2, use the URL encoding of
+	// arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/object/reports/january.pdf.
+	// The value must be URL encoded.
+	//
+	// To copy a specific version of an object, append
+	// ?versionId= to the value (for example,
+	// awsexamplebucket/reports/january.pdf?versionId=QUpfdndhfd8438MNFDN93jdnJFkdmqnh893).
+	// If you don't specify a version ID, Amazon S3 copies the latest version of the
+	// source object.
 	//
 	// This member is required.
 	CopySource *string
@@ -175,7 +226,8 @@ type CopyObjectInput struct {
 	// This member is required.
 	Key *string
 
-	// The canned ACL to apply to the object.
+	// The canned ACL to apply to the object. This action is not supported by Amazon S3
+	// on Outposts.
 	ACL types.ObjectCannedACL
 
 	// Specifies caching behavior along the request/reply chain.
@@ -221,19 +273,33 @@ type CopyObjectInput struct {
 	// encryption key was transmitted without error.
 	CopySourceSSECustomerKeyMD5 *string
 
+	// The account id of the expected destination bucket owner. If the destination
+	// bucket is owned by a different account, the request will fail with an HTTP 403
+	// (Access Denied) error.
+	ExpectedBucketOwner *string
+
+	// The account id of the expected source bucket owner. If the source bucket is
+	// owned by a different account, the request will fail with an HTTP 403 (Access
+	// Denied) error.
+	ExpectedSourceBucketOwner *string
+
 	// The date and time at which the object is no longer cacheable.
 	Expires *time.Time
 
-	// Gives the grantee READ, READ_ACP, and WRITE_ACP permissions on the object.
+	// Gives the grantee READ, READ_ACP, and WRITE_ACP permissions on the object. This
+	// action is not supported by Amazon S3 on Outposts.
 	GrantFullControl *string
 
-	// Allows grantee to read the object data and its metadata.
+	// Allows grantee to read the object data and its metadata. This action is not
+	// supported by Amazon S3 on Outposts.
 	GrantRead *string
 
-	// Allows grantee to read the object ACL.
+	// Allows grantee to read the object ACL. This action is not supported by Amazon S3
+	// on Outposts.
 	GrantReadACP *string
 
-	// Allows grantee to write the ACL for the applicable object.
+	// Allows grantee to write the ACL for the applicable object. This action is not
+	// supported by Amazon S3 on Outposts.
 	GrantWriteACP *string
 
 	// A map of metadata to store with the object in S3.
@@ -294,7 +360,13 @@ type CopyObjectInput struct {
 	// (for example, AES256, aws:kms).
 	ServerSideEncryption types.ServerSideEncryption
 
-	// The type of storage to use for the object. Defaults to 'STANDARD'.
+	// By default, Amazon S3 uses the STANDARD Storage Class to store newly created
+	// objects. The STANDARD storage class provides high durability and high
+	// availability. Depending on performance needs, you can specify a different
+	// Storage Class. Amazon S3 on Outposts only uses the OUTPOSTS Storage Class. For
+	// more information, see Storage Classes
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html) in
+	// the Amazon S3 Service Developer Guide.
 	StorageClass types.StorageClass
 
 	// The tag-set for the object destination object this value must be used in

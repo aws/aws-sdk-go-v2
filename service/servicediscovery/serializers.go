@@ -1628,6 +1628,13 @@ func awsAwsjson11_serializeOpDocumentDiscoverInstancesInput(v *DiscoverInstances
 		ok.String(*v.NamespaceName)
 	}
 
+	if v.OptionalParameters != nil {
+		ok := object.Key("OptionalParameters")
+		if err := awsAwsjson11_serializeDocumentAttributes(v.OptionalParameters, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.QueryParameters != nil {
 		ok := object.Key("QueryParameters")
 		if err := awsAwsjson11_serializeDocumentAttributes(v.QueryParameters, ok); err != nil {

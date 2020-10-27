@@ -350,6 +350,26 @@ func (m *validateOpDetectModerationLabels) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDetectProtectiveEquipment struct {
+}
+
+func (*validateOpDetectProtectiveEquipment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDetectProtectiveEquipment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DetectProtectiveEquipmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDetectProtectiveEquipmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDetectText struct {
 }
 
@@ -958,6 +978,10 @@ func addOpDetectModerationLabelsValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpDetectModerationLabels{}, middleware.After)
 }
 
+func addOpDetectProtectiveEquipmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDetectProtectiveEquipment{}, middleware.After)
+}
+
 func addOpDetectTextValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDetectText{}, middleware.After)
 }
@@ -1102,6 +1126,24 @@ func validateNotificationChannel(v *types.NotificationChannel) error {
 	}
 }
 
+func validateProtectiveEquipmentSummarizationAttributes(v *types.ProtectiveEquipmentSummarizationAttributes) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProtectiveEquipmentSummarizationAttributes"}
+	if v.MinConfidence == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MinConfidence"))
+	}
+	if v.RequiredEquipmentTypes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RequiredEquipmentTypes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCompareFacesInput(v *CompareFacesInput) error {
 	if v == nil {
 		return nil
@@ -1155,20 +1197,20 @@ func validateOpCreateProjectVersionInput(v *CreateProjectVersionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateProjectVersionInput"}
-	if v.OutputConfig == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OutputConfig"))
-	}
 	if v.VersionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VersionName"))
 	}
-	if v.ProjectArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProjectArn"))
+	if v.OutputConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputConfig"))
+	}
+	if v.TestingData == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TestingData"))
 	}
 	if v.TrainingData == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TrainingData"))
 	}
-	if v.TestingData == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TestingData"))
+	if v.ProjectArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1182,17 +1224,17 @@ func validateOpCreateStreamProcessorInput(v *CreateStreamProcessorInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateStreamProcessorInput"}
-	if v.Settings == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Settings"))
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.Output == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Output"))
 	}
 	if v.Input == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Input"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Settings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Settings"))
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
@@ -1332,11 +1374,11 @@ func validateOpDetectCustomLabelsInput(v *DetectCustomLabelsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DetectCustomLabelsInput"}
-	if v.Image == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Image"))
-	}
 	if v.ProjectVersionArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProjectVersionArn"))
+	}
+	if v.Image == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Image"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1387,6 +1429,26 @@ func validateOpDetectModerationLabelsInput(v *DetectModerationLabelsInput) error
 		if err := validateHumanLoopConfig(v.HumanLoopConfig); err != nil {
 			invalidParams.AddNested("HumanLoopConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDetectProtectiveEquipmentInput(v *DetectProtectiveEquipmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DetectProtectiveEquipmentInput"}
+	if v.SummarizationAttributes != nil {
+		if err := validateProtectiveEquipmentSummarizationAttributes(v.SummarizationAttributes); err != nil {
+			invalidParams.AddNested("SummarizationAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Image == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Image"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1550,11 +1612,11 @@ func validateOpIndexFacesInput(v *IndexFacesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "IndexFacesInput"}
-	if v.CollectionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CollectionId"))
-	}
 	if v.Image == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Image"))
+	}
+	if v.CollectionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollectionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1674,13 +1736,13 @@ func validateOpStartFaceDetectionInput(v *StartFaceDetectionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartFaceDetectionInput"}
+	if v.Video == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Video"))
+	}
 	if v.NotificationChannel != nil {
 		if err := validateNotificationChannel(v.NotificationChannel); err != nil {
 			invalidParams.AddNested("NotificationChannel", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Video == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Video"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1697,13 +1759,13 @@ func validateOpStartFaceSearchInput(v *StartFaceSearchInput) error {
 	if v.CollectionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CollectionId"))
 	}
-	if v.Video == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Video"))
-	}
 	if v.NotificationChannel != nil {
 		if err := validateNotificationChannel(v.NotificationChannel); err != nil {
 			invalidParams.AddNested("NotificationChannel", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Video == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Video"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1717,13 +1779,13 @@ func validateOpStartLabelDetectionInput(v *StartLabelDetectionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartLabelDetectionInput"}
+	if v.Video == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Video"))
+	}
 	if v.NotificationChannel != nil {
 		if err := validateNotificationChannel(v.NotificationChannel); err != nil {
 			invalidParams.AddNested("NotificationChannel", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Video == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Video"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1778,13 +1840,13 @@ func validateOpStartSegmentDetectionInput(v *StartSegmentDetectionInput) error {
 	if v.SegmentTypes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SegmentTypes"))
 	}
+	if v.Video == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Video"))
+	}
 	if v.NotificationChannel != nil {
 		if err := validateNotificationChannel(v.NotificationChannel); err != nil {
 			invalidParams.AddNested("NotificationChannel", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Video == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Video"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

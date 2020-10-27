@@ -279,11 +279,11 @@ func validateTag(v *types.Tag) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -314,16 +314,16 @@ func validateOpCreateEnvironmentEC2Input(v *CreateEnvironmentEC2Input) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateEnvironmentEC2Input"}
-	if v.Tags != nil {
-		if err := validateTagList(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
+	if v.InstanceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.InstanceType == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -458,11 +458,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.ResourceARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
-	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -491,14 +491,14 @@ func validateOpUpdateEnvironmentMembershipInput(v *UpdateEnvironmentMembershipIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateEnvironmentMembershipInput"}
-	if v.UserArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserArn"))
-	}
 	if len(v.Permissions) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Permissions"))
 	}
 	if v.EnvironmentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if v.UserArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

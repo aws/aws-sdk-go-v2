@@ -84,7 +84,12 @@ type AutoScalingGroupRecommendationOption struct {
 	PerformanceRisk *float64
 
 	// An array of objects that describe the projected utilization metrics of the Auto
-	// Scaling group recommendation option.
+	// Scaling group recommendation option. The Cpu and Memory metrics are the only
+	// projected utilization metrics returned. Additionally, the Memory metric is
+	// returned only for resources that have the unified CloudWatch agent installed on
+	// them. For more information, see Enabling Memory Utilization with the CloudWatch
+	// Agent
+	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent).
 	ProjectedUtilizationMetrics []*UtilizationMetric
 
 	// The rank of the Auto Scaling group recommendation option. The top recommendation
@@ -206,7 +211,12 @@ type InstanceRecommendationOption struct {
 	PerformanceRisk *float64
 
 	// An array of objects that describe the projected utilization metrics of the
-	// instance recommendation option.
+	// instance recommendation option. The Cpu and Memory metrics are the only
+	// projected utilization metrics returned. Additionally, the Memory metric is
+	// returned only for resources that have the unified CloudWatch agent installed on
+	// them. For more information, see Enabling Memory Utilization with the CloudWatch
+	// Agent
+	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent).
 	ProjectedUtilizationMetrics []*UtilizationMetric
 
 	// The rank of the instance recommendation option. The top recommendation option is
@@ -231,13 +241,16 @@ type JobFilter struct {
 }
 
 // Describes a projected utilization metric of a recommendation option, such as an
-// Amazon EC2 instance.
+// Amazon EC2 instance. The Cpu and Memory metrics are the only projected
+// utilization metrics returned when you run the
+// GetEC2RecommendationProjectedMetrics action. Additionally, the Memory metric is
+// returned only for resources that have the unified CloudWatch agent installed on
+// them. For more information, see Enabling Memory Utilization with the CloudWatch
+// Agent
+// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent).
 type ProjectedMetric struct {
 
-	// The name of the projected utilization metric. Memory metrics are only returned
-	// for resources that have the unified CloudWatch agent installed on them. For more
-	// information, see Enabling Memory Utilization with the CloudWatch Agent
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html).
+	// The name of the projected utilization metric.
 	Name MetricName
 
 	// The time stamps of the projected utilization metric.
@@ -299,7 +312,13 @@ type RecommendationSummary struct {
 	Summaries []*Summary
 }
 
-// Describes a projected utilization metric of a recommendation option.
+// Describes a projected utilization metric of a recommendation option. The Cpu and
+// Memory metrics are the only projected utilization metrics returned when you run
+// the GetEC2RecommendationProjectedMetrics action. Additionally, the Memory metric
+// is returned only for resources that have the unified CloudWatch agent installed
+// on them. For more information, see Enabling Memory Utilization with the
+// CloudWatch Agent
+// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent).
 type RecommendedOptionProjectedMetric struct {
 
 	// An array of objects that describe a projected utilization metric.
@@ -366,10 +385,10 @@ type Summary struct {
 // Describes a utilization metric of a resource, such as an Amazon EC2 instance.
 type UtilizationMetric struct {
 
-	// The name of the utilization metric. Memory metrics are only returned for
+	// The name of the utilization metric. The Memory metric is returned only for
 	// resources that have the unified CloudWatch agent installed on them. For more
 	// information, see Enabling Memory Utilization with the CloudWatch Agent
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html).
+	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent).
 	Name MetricName
 
 	// The statistic of the utilization metric.

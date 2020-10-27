@@ -15,6 +15,21 @@ const (
 	APINameGet_clip                       APIName = "GET_CLIP"
 )
 
+// Values returns all known values for APIName. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (APIName) Values() []APIName {
+	return []APIName{
+		"PUT_MEDIA",
+		"GET_MEDIA",
+		"LIST_FRAGMENTS",
+		"GET_MEDIA_FOR_FRAGMENT_LIST",
+		"GET_HLS_STREAMING_SESSION_URL",
+		"GET_DASH_STREAMING_SESSION_URL",
+		"GET_CLIP",
+	}
+}
+
 type ChannelProtocol string
 
 // Enum values for ChannelProtocol
@@ -22,6 +37,16 @@ const (
 	ChannelProtocolWss   ChannelProtocol = "WSS"
 	ChannelProtocolHttps ChannelProtocol = "HTTPS"
 )
+
+// Values returns all known values for ChannelProtocol. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ChannelProtocol) Values() []ChannelProtocol {
+	return []ChannelProtocol{
+		"WSS",
+		"HTTPS",
+	}
+}
 
 type ChannelRole string
 
@@ -31,6 +56,16 @@ const (
 	ChannelRoleViewer ChannelRole = "VIEWER"
 )
 
+// Values returns all known values for ChannelRole. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ChannelRole) Values() []ChannelRole {
+	return []ChannelRole{
+		"MASTER",
+		"VIEWER",
+	}
+}
+
 type ChannelType string
 
 // Enum values for ChannelType
@@ -38,12 +73,30 @@ const (
 	ChannelTypeSingle_master ChannelType = "SINGLE_MASTER"
 )
 
+// Values returns all known values for ChannelType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ChannelType) Values() []ChannelType {
+	return []ChannelType{
+		"SINGLE_MASTER",
+	}
+}
+
 type ComparisonOperator string
 
 // Enum values for ComparisonOperator
 const (
 	ComparisonOperatorBegins_with ComparisonOperator = "BEGINS_WITH"
 )
+
+// Values returns all known values for ComparisonOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ComparisonOperator) Values() []ComparisonOperator {
+	return []ComparisonOperator{
+		"BEGINS_WITH",
+	}
+}
 
 type Status string
 
@@ -55,6 +108,18 @@ const (
 	StatusDeleting Status = "DELETING"
 )
 
+// Values returns all known values for Status. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Status) Values() []Status {
+	return []Status{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
+	}
+}
+
 type UpdateDataRetentionOperation string
 
 // Enum values for UpdateDataRetentionOperation
@@ -62,3 +127,13 @@ const (
 	UpdateDataRetentionOperationIncrease_data_retention UpdateDataRetentionOperation = "INCREASE_DATA_RETENTION"
 	UpdateDataRetentionOperationDecrease_data_retention UpdateDataRetentionOperation = "DECREASE_DATA_RETENTION"
 )
+
+// Values returns all known values for UpdateDataRetentionOperation. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UpdateDataRetentionOperation) Values() []UpdateDataRetentionOperation {
+	return []UpdateDataRetentionOperation{
+		"INCREASE_DATA_RETENTION",
+		"DECREASE_DATA_RETENTION",
+	}
+}

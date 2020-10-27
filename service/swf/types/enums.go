@@ -12,6 +12,18 @@ const (
 	ActivityTaskTimeoutTypeHeartbeat         ActivityTaskTimeoutType = "HEARTBEAT"
 )
 
+// Values returns all known values for ActivityTaskTimeoutType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ActivityTaskTimeoutType) Values() []ActivityTaskTimeoutType {
+	return []ActivityTaskTimeoutType{
+		"START_TO_CLOSE",
+		"SCHEDULE_TO_START",
+		"SCHEDULE_TO_CLOSE",
+		"HEARTBEAT",
+	}
+}
+
 type CancelTimerFailedCause string
 
 // Enum values for CancelTimerFailedCause
@@ -19,6 +31,16 @@ const (
 	CancelTimerFailedCauseTimer_id_unknown        CancelTimerFailedCause = "TIMER_ID_UNKNOWN"
 	CancelTimerFailedCauseOperation_not_permitted CancelTimerFailedCause = "OPERATION_NOT_PERMITTED"
 )
+
+// Values returns all known values for CancelTimerFailedCause. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CancelTimerFailedCause) Values() []CancelTimerFailedCause {
+	return []CancelTimerFailedCause{
+		"TIMER_ID_UNKNOWN",
+		"OPERATION_NOT_PERMITTED",
+	}
+}
 
 type CancelWorkflowExecutionFailedCause string
 
@@ -28,6 +50,17 @@ const (
 	CancelWorkflowExecutionFailedCauseOperation_not_permitted CancelWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
 )
 
+// Values returns all known values for CancelWorkflowExecutionFailedCause. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CancelWorkflowExecutionFailedCause) Values() []CancelWorkflowExecutionFailedCause {
+	return []CancelWorkflowExecutionFailedCause{
+		"UNHANDLED_DECISION",
+		"OPERATION_NOT_PERMITTED",
+	}
+}
+
 type ChildPolicy string
 
 // Enum values for ChildPolicy
@@ -36,6 +69,17 @@ const (
 	ChildPolicyRequest_cancel ChildPolicy = "REQUEST_CANCEL"
 	ChildPolicyAbandon        ChildPolicy = "ABANDON"
 )
+
+// Values returns all known values for ChildPolicy. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ChildPolicy) Values() []ChildPolicy {
+	return []ChildPolicy{
+		"TERMINATE",
+		"REQUEST_CANCEL",
+		"ABANDON",
+	}
+}
 
 type CloseStatus string
 
@@ -49,6 +93,20 @@ const (
 	CloseStatusTimed_out        CloseStatus = "TIMED_OUT"
 )
 
+// Values returns all known values for CloseStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (CloseStatus) Values() []CloseStatus {
+	return []CloseStatus{
+		"COMPLETED",
+		"FAILED",
+		"CANCELED",
+		"TERMINATED",
+		"CONTINUED_AS_NEW",
+		"TIMED_OUT",
+	}
+}
+
 type CompleteWorkflowExecutionFailedCause string
 
 // Enum values for CompleteWorkflowExecutionFailedCause
@@ -56,6 +114,17 @@ const (
 	CompleteWorkflowExecutionFailedCauseUnhandled_decision      CompleteWorkflowExecutionFailedCause = "UNHANDLED_DECISION"
 	CompleteWorkflowExecutionFailedCauseOperation_not_permitted CompleteWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
 )
+
+// Values returns all known values for CompleteWorkflowExecutionFailedCause. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CompleteWorkflowExecutionFailedCause) Values() []CompleteWorkflowExecutionFailedCause {
+	return []CompleteWorkflowExecutionFailedCause{
+		"UNHANDLED_DECISION",
+		"OPERATION_NOT_PERMITTED",
+	}
+}
 
 type ContinueAsNewWorkflowExecutionFailedCause string
 
@@ -72,12 +141,39 @@ const (
 	ContinueAsNewWorkflowExecutionFailedCauseOperation_not_permitted                            ContinueAsNewWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
 )
 
+// Values returns all known values for ContinueAsNewWorkflowExecutionFailedCause.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ContinueAsNewWorkflowExecutionFailedCause) Values() []ContinueAsNewWorkflowExecutionFailedCause {
+	return []ContinueAsNewWorkflowExecutionFailedCause{
+		"UNHANDLED_DECISION",
+		"WORKFLOW_TYPE_DEPRECATED",
+		"WORKFLOW_TYPE_DOES_NOT_EXIST",
+		"DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED",
+		"DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED",
+		"DEFAULT_TASK_LIST_UNDEFINED",
+		"DEFAULT_CHILD_POLICY_UNDEFINED",
+		"CONTINUE_AS_NEW_WORKFLOW_EXECUTION_RATE_EXCEEDED",
+		"OPERATION_NOT_PERMITTED",
+	}
+}
+
 type DecisionTaskTimeoutType string
 
 // Enum values for DecisionTaskTimeoutType
 const (
 	DecisionTaskTimeoutTypeStart_to_close DecisionTaskTimeoutType = "START_TO_CLOSE"
 )
+
+// Values returns all known values for DecisionTaskTimeoutType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DecisionTaskTimeoutType) Values() []DecisionTaskTimeoutType {
+	return []DecisionTaskTimeoutType{
+		"START_TO_CLOSE",
+	}
+}
 
 type DecisionType string
 
@@ -97,6 +193,27 @@ const (
 	DecisionTypeStartchildworkflowexecution            DecisionType = "StartChildWorkflowExecution"
 	DecisionTypeSchedulelambdafunction                 DecisionType = "ScheduleLambdaFunction"
 )
+
+// Values returns all known values for DecisionType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DecisionType) Values() []DecisionType {
+	return []DecisionType{
+		"ScheduleActivityTask",
+		"RequestCancelActivityTask",
+		"CompleteWorkflowExecution",
+		"FailWorkflowExecution",
+		"CancelWorkflowExecution",
+		"ContinueAsNewWorkflowExecution",
+		"RecordMarker",
+		"StartTimer",
+		"CancelTimer",
+		"SignalExternalWorkflowExecution",
+		"RequestCancelExternalWorkflowExecution",
+		"StartChildWorkflowExecution",
+		"ScheduleLambdaFunction",
+	}
+}
 
 type EventType string
 
@@ -158,6 +275,68 @@ const (
 	EventTypeStartlambdafunctionfailed                       EventType = "StartLambdaFunctionFailed"
 )
 
+// Values returns all known values for EventType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (EventType) Values() []EventType {
+	return []EventType{
+		"WorkflowExecutionStarted",
+		"WorkflowExecutionCancelRequested",
+		"WorkflowExecutionCompleted",
+		"CompleteWorkflowExecutionFailed",
+		"WorkflowExecutionFailed",
+		"FailWorkflowExecutionFailed",
+		"WorkflowExecutionTimedOut",
+		"WorkflowExecutionCanceled",
+		"CancelWorkflowExecutionFailed",
+		"WorkflowExecutionContinuedAsNew",
+		"ContinueAsNewWorkflowExecutionFailed",
+		"WorkflowExecutionTerminated",
+		"DecisionTaskScheduled",
+		"DecisionTaskStarted",
+		"DecisionTaskCompleted",
+		"DecisionTaskTimedOut",
+		"ActivityTaskScheduled",
+		"ScheduleActivityTaskFailed",
+		"ActivityTaskStarted",
+		"ActivityTaskCompleted",
+		"ActivityTaskFailed",
+		"ActivityTaskTimedOut",
+		"ActivityTaskCanceled",
+		"ActivityTaskCancelRequested",
+		"RequestCancelActivityTaskFailed",
+		"WorkflowExecutionSignaled",
+		"MarkerRecorded",
+		"RecordMarkerFailed",
+		"TimerStarted",
+		"StartTimerFailed",
+		"TimerFired",
+		"TimerCanceled",
+		"CancelTimerFailed",
+		"StartChildWorkflowExecutionInitiated",
+		"StartChildWorkflowExecutionFailed",
+		"ChildWorkflowExecutionStarted",
+		"ChildWorkflowExecutionCompleted",
+		"ChildWorkflowExecutionFailed",
+		"ChildWorkflowExecutionTimedOut",
+		"ChildWorkflowExecutionCanceled",
+		"ChildWorkflowExecutionTerminated",
+		"SignalExternalWorkflowExecutionInitiated",
+		"SignalExternalWorkflowExecutionFailed",
+		"ExternalWorkflowExecutionSignaled",
+		"RequestCancelExternalWorkflowExecutionInitiated",
+		"RequestCancelExternalWorkflowExecutionFailed",
+		"ExternalWorkflowExecutionCancelRequested",
+		"LambdaFunctionScheduled",
+		"LambdaFunctionStarted",
+		"LambdaFunctionCompleted",
+		"LambdaFunctionFailed",
+		"LambdaFunctionTimedOut",
+		"ScheduleLambdaFunctionFailed",
+		"StartLambdaFunctionFailed",
+	}
+}
+
 type ExecutionStatus string
 
 // Enum values for ExecutionStatus
@@ -165,6 +344,16 @@ const (
 	ExecutionStatusOpen   ExecutionStatus = "OPEN"
 	ExecutionStatusClosed ExecutionStatus = "CLOSED"
 )
+
+// Values returns all known values for ExecutionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExecutionStatus) Values() []ExecutionStatus {
+	return []ExecutionStatus{
+		"OPEN",
+		"CLOSED",
+	}
+}
 
 type FailWorkflowExecutionFailedCause string
 
@@ -174,6 +363,17 @@ const (
 	FailWorkflowExecutionFailedCauseOperation_not_permitted FailWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
 )
 
+// Values returns all known values for FailWorkflowExecutionFailedCause. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (FailWorkflowExecutionFailedCause) Values() []FailWorkflowExecutionFailedCause {
+	return []FailWorkflowExecutionFailedCause{
+		"UNHANDLED_DECISION",
+		"OPERATION_NOT_PERMITTED",
+	}
+}
+
 type LambdaFunctionTimeoutType string
 
 // Enum values for LambdaFunctionTimeoutType
@@ -181,12 +381,30 @@ const (
 	LambdaFunctionTimeoutTypeStart_to_close LambdaFunctionTimeoutType = "START_TO_CLOSE"
 )
 
+// Values returns all known values for LambdaFunctionTimeoutType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LambdaFunctionTimeoutType) Values() []LambdaFunctionTimeoutType {
+	return []LambdaFunctionTimeoutType{
+		"START_TO_CLOSE",
+	}
+}
+
 type RecordMarkerFailedCause string
 
 // Enum values for RecordMarkerFailedCause
 const (
 	RecordMarkerFailedCauseOperation_not_permitted RecordMarkerFailedCause = "OPERATION_NOT_PERMITTED"
 )
+
+// Values returns all known values for RecordMarkerFailedCause. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RecordMarkerFailedCause) Values() []RecordMarkerFailedCause {
+	return []RecordMarkerFailedCause{
+		"OPERATION_NOT_PERMITTED",
+	}
+}
 
 type RegistrationStatus string
 
@@ -196,6 +414,16 @@ const (
 	RegistrationStatusDeprecated RegistrationStatus = "DEPRECATED"
 )
 
+// Values returns all known values for RegistrationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RegistrationStatus) Values() []RegistrationStatus {
+	return []RegistrationStatus{
+		"REGISTERED",
+		"DEPRECATED",
+	}
+}
+
 type RequestCancelActivityTaskFailedCause string
 
 // Enum values for RequestCancelActivityTaskFailedCause
@@ -203,6 +431,17 @@ const (
 	RequestCancelActivityTaskFailedCauseActivity_id_unknown     RequestCancelActivityTaskFailedCause = "ACTIVITY_ID_UNKNOWN"
 	RequestCancelActivityTaskFailedCauseOperation_not_permitted RequestCancelActivityTaskFailedCause = "OPERATION_NOT_PERMITTED"
 )
+
+// Values returns all known values for RequestCancelActivityTaskFailedCause. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (RequestCancelActivityTaskFailedCause) Values() []RequestCancelActivityTaskFailedCause {
+	return []RequestCancelActivityTaskFailedCause{
+		"ACTIVITY_ID_UNKNOWN",
+		"OPERATION_NOT_PERMITTED",
+	}
+}
 
 type RequestCancelExternalWorkflowExecutionFailedCause string
 
@@ -212,6 +451,18 @@ const (
 	RequestCancelExternalWorkflowExecutionFailedCauseRequest_cancel_external_workflow_execution_rate_exceeded RequestCancelExternalWorkflowExecutionFailedCause = "REQUEST_CANCEL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED"
 	RequestCancelExternalWorkflowExecutionFailedCauseOperation_not_permitted                                  RequestCancelExternalWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
 )
+
+// Values returns all known values for
+// RequestCancelExternalWorkflowExecutionFailedCause. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RequestCancelExternalWorkflowExecutionFailedCause) Values() []RequestCancelExternalWorkflowExecutionFailedCause {
+	return []RequestCancelExternalWorkflowExecutionFailedCause{
+		"UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION",
+		"REQUEST_CANCEL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED",
+		"OPERATION_NOT_PERMITTED",
+	}
+}
 
 type ScheduleActivityTaskFailedCause string
 
@@ -230,6 +481,26 @@ const (
 	ScheduleActivityTaskFailedCauseOperation_not_permitted                     ScheduleActivityTaskFailedCause = "OPERATION_NOT_PERMITTED"
 )
 
+// Values returns all known values for ScheduleActivityTaskFailedCause. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ScheduleActivityTaskFailedCause) Values() []ScheduleActivityTaskFailedCause {
+	return []ScheduleActivityTaskFailedCause{
+		"ACTIVITY_TYPE_DEPRECATED",
+		"ACTIVITY_TYPE_DOES_NOT_EXIST",
+		"ACTIVITY_ID_ALREADY_IN_USE",
+		"OPEN_ACTIVITIES_LIMIT_EXCEEDED",
+		"ACTIVITY_CREATION_RATE_EXCEEDED",
+		"DEFAULT_SCHEDULE_TO_CLOSE_TIMEOUT_UNDEFINED",
+		"DEFAULT_TASK_LIST_UNDEFINED",
+		"DEFAULT_SCHEDULE_TO_START_TIMEOUT_UNDEFINED",
+		"DEFAULT_START_TO_CLOSE_TIMEOUT_UNDEFINED",
+		"DEFAULT_HEARTBEAT_TIMEOUT_UNDEFINED",
+		"OPERATION_NOT_PERMITTED",
+	}
+}
+
 type ScheduleLambdaFunctionFailedCause string
 
 // Enum values for ScheduleLambdaFunctionFailedCause
@@ -240,6 +511,19 @@ const (
 	ScheduleLambdaFunctionFailedCauseLambda_service_not_available_in_region ScheduleLambdaFunctionFailedCause = "LAMBDA_SERVICE_NOT_AVAILABLE_IN_REGION"
 )
 
+// Values returns all known values for ScheduleLambdaFunctionFailedCause. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ScheduleLambdaFunctionFailedCause) Values() []ScheduleLambdaFunctionFailedCause {
+	return []ScheduleLambdaFunctionFailedCause{
+		"ID_ALREADY_IN_USE",
+		"OPEN_LAMBDA_FUNCTIONS_LIMIT_EXCEEDED",
+		"LAMBDA_FUNCTION_CREATION_RATE_EXCEEDED",
+		"LAMBDA_SERVICE_NOT_AVAILABLE_IN_REGION",
+	}
+}
+
 type SignalExternalWorkflowExecutionFailedCause string
 
 // Enum values for SignalExternalWorkflowExecutionFailedCause
@@ -248,6 +532,18 @@ const (
 	SignalExternalWorkflowExecutionFailedCauseSignal_external_workflow_execution_rate_exceeded SignalExternalWorkflowExecutionFailedCause = "SIGNAL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED"
 	SignalExternalWorkflowExecutionFailedCauseOperation_not_permitted                          SignalExternalWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
 )
+
+// Values returns all known values for SignalExternalWorkflowExecutionFailedCause.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (SignalExternalWorkflowExecutionFailedCause) Values() []SignalExternalWorkflowExecutionFailedCause {
+	return []SignalExternalWorkflowExecutionFailedCause{
+		"UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION",
+		"SIGNAL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED",
+		"OPERATION_NOT_PERMITTED",
+	}
+}
 
 type StartChildWorkflowExecutionFailedCause string
 
@@ -266,12 +562,42 @@ const (
 	StartChildWorkflowExecutionFailedCauseOperation_not_permitted                            StartChildWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
 )
 
+// Values returns all known values for StartChildWorkflowExecutionFailedCause. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (StartChildWorkflowExecutionFailedCause) Values() []StartChildWorkflowExecutionFailedCause {
+	return []StartChildWorkflowExecutionFailedCause{
+		"WORKFLOW_TYPE_DOES_NOT_EXIST",
+		"WORKFLOW_TYPE_DEPRECATED",
+		"OPEN_CHILDREN_LIMIT_EXCEEDED",
+		"OPEN_WORKFLOWS_LIMIT_EXCEEDED",
+		"CHILD_CREATION_RATE_EXCEEDED",
+		"WORKFLOW_ALREADY_RUNNING",
+		"DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED",
+		"DEFAULT_TASK_LIST_UNDEFINED",
+		"DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED",
+		"DEFAULT_CHILD_POLICY_UNDEFINED",
+		"OPERATION_NOT_PERMITTED",
+	}
+}
+
 type StartLambdaFunctionFailedCause string
 
 // Enum values for StartLambdaFunctionFailedCause
 const (
 	StartLambdaFunctionFailedCauseAssume_role_failed StartLambdaFunctionFailedCause = "ASSUME_ROLE_FAILED"
 )
+
+// Values returns all known values for StartLambdaFunctionFailedCause. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (StartLambdaFunctionFailedCause) Values() []StartLambdaFunctionFailedCause {
+	return []StartLambdaFunctionFailedCause{
+		"ASSUME_ROLE_FAILED",
+	}
+}
 
 type StartTimerFailedCause string
 
@@ -283,12 +609,34 @@ const (
 	StartTimerFailedCauseOperation_not_permitted      StartTimerFailedCause = "OPERATION_NOT_PERMITTED"
 )
 
+// Values returns all known values for StartTimerFailedCause. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StartTimerFailedCause) Values() []StartTimerFailedCause {
+	return []StartTimerFailedCause{
+		"TIMER_ID_ALREADY_IN_USE",
+		"OPEN_TIMERS_LIMIT_EXCEEDED",
+		"TIMER_CREATION_RATE_EXCEEDED",
+		"OPERATION_NOT_PERMITTED",
+	}
+}
+
 type WorkflowExecutionCancelRequestedCause string
 
 // Enum values for WorkflowExecutionCancelRequestedCause
 const (
 	WorkflowExecutionCancelRequestedCauseChild_policy_applied WorkflowExecutionCancelRequestedCause = "CHILD_POLICY_APPLIED"
 )
+
+// Values returns all known values for WorkflowExecutionCancelRequestedCause. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (WorkflowExecutionCancelRequestedCause) Values() []WorkflowExecutionCancelRequestedCause {
+	return []WorkflowExecutionCancelRequestedCause{
+		"CHILD_POLICY_APPLIED",
+	}
+}
 
 type WorkflowExecutionTerminatedCause string
 
@@ -299,9 +647,30 @@ const (
 	WorkflowExecutionTerminatedCauseOperator_initiated   WorkflowExecutionTerminatedCause = "OPERATOR_INITIATED"
 )
 
+// Values returns all known values for WorkflowExecutionTerminatedCause. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (WorkflowExecutionTerminatedCause) Values() []WorkflowExecutionTerminatedCause {
+	return []WorkflowExecutionTerminatedCause{
+		"CHILD_POLICY_APPLIED",
+		"EVENT_LIMIT_EXCEEDED",
+		"OPERATOR_INITIATED",
+	}
+}
+
 type WorkflowExecutionTimeoutType string
 
 // Enum values for WorkflowExecutionTimeoutType
 const (
 	WorkflowExecutionTimeoutTypeStart_to_close WorkflowExecutionTimeoutType = "START_TO_CLOSE"
 )
+
+// Values returns all known values for WorkflowExecutionTimeoutType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WorkflowExecutionTimeoutType) Values() []WorkflowExecutionTimeoutType {
+	return []WorkflowExecutionTimeoutType{
+		"START_TO_CLOSE",
+	}
+}

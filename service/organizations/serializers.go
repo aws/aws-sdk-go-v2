@@ -2490,6 +2490,13 @@ func awsAwsjson11_serializeOpDocumentCreateAccountInput(v *CreateAccountInput, v
 		ok.String(*v.RoleName)
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTags(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -2517,6 +2524,13 @@ func awsAwsjson11_serializeOpDocumentCreateGovCloudAccountInput(v *CreateGovClou
 		ok.String(*v.RoleName)
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTags(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -2532,6 +2546,13 @@ func awsAwsjson11_serializeOpDocumentCreateOrganizationalUnitInput(v *CreateOrga
 	if v.ParentId != nil {
 		ok := object.Key("ParentId")
 		ok.String(*v.ParentId)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTags(v.Tags, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -2566,6 +2587,13 @@ func awsAwsjson11_serializeOpDocumentCreatePolicyInput(v *CreatePolicyInput, val
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTags(v.Tags, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.Type) > 0 {
@@ -2809,6 +2837,13 @@ func awsAwsjson11_serializeOpDocumentInviteAccountToOrganizationInput(v *InviteA
 	if v.Notes != nil {
 		ok := object.Key("Notes")
 		ok.String(*v.Notes)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTags(v.Tags, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Target != nil {

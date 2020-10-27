@@ -105,6 +105,14 @@ type Condition struct {
 	Value *string
 }
 
+// A DeadLetterConfig object that contains information about a dead-letter queue
+// configuration.
+type DeadLetterConfig struct {
+
+	// The ARN of the SQS queue specified as the target for the dead-letter queue.
+	Arn *string
+}
+
 // The custom parameters to be used when the target is an Amazon ECS task.
 type EcsParameters struct {
 
@@ -405,6 +413,38 @@ type PutTargetsResultEntry struct {
 	TargetId *string
 }
 
+// These are custom parameters to be used when the target is a Redshift cluster to
+// invoke the Redshift Data API ExecuteStatement based on EventBridge events.
+type RedshiftDataParameters struct {
+
+	// The name of the database. Required when authenticating using temporary
+	// credentials.
+	//
+	// This member is required.
+	Database *string
+
+	// The SQL statement text to run.
+	//
+	// This member is required.
+	Sql *string
+
+	// The database user name. Required when authenticating using temporary
+	// credentials.
+	DbUser *string
+
+	// The name or ARN of the secret that enables access to the database. Required when
+	// authenticating using AWS Secrets Manager.
+	SecretManagerArn *string
+
+	// The name of the SQL statement. You can name the SQL statement when you create it
+	// to identify the query.
+	StatementName *string
+
+	// Indicates whether to send an event back to EventBridge after the SQL statement
+	// runs.
+	WithEvent *bool
+}
+
 // Represents a target that failed to be removed from a rule.
 type RemoveTargetsResultEntry struct {
 
@@ -417,6 +457,18 @@ type RemoveTargetsResultEntry struct {
 
 	// The ID of the target.
 	TargetId *string
+}
+
+// A RetryPolicy object that includes information about the retry policy settings.
+type RetryPolicy struct {
+
+	// The maximum amount of time, in seconds, to continue to make retry attempts.
+	MaximumEventAgeInSeconds *int32
+
+	// The maximum number of retry attempts to make before the request fails. Retry
+	// attempts continue until either the maximum number of attempts is made or until
+	// the duration of the MaximumEventAgeInSeconds is met.
+	MaximumRetryAttempts *int32
 }
 
 // Contains information about a rule in Amazon EventBridge.
@@ -533,6 +585,10 @@ type Target struct {
 	// User Guide.
 	BatchParameters *BatchParameters
 
+	// The DeadLetterConfig that defines the target queue to send dead-letter queue
+	// events to.
+	DeadLetterConfig *DeadLetterConfig
+
 	// Contains the Amazon ECS task definition and task count to be used, if the event
 	// target is an Amazon ECS task. For more information about Amazon ECS tasks, see
 	// Task Definitions
@@ -567,6 +623,16 @@ type Target struct {
 	// target is a Kinesis data stream. If you do not include this parameter, the
 	// default is to use the eventId as the partition key.
 	KinesisParameters *KinesisParameters
+
+	// Contains the Redshift Data API parameters to use when the target is a Redshift
+	// cluster. If you specify a Redshift Cluster as a Target, you can use this to
+	// specify parameters to invoke the Redshift Data API ExecuteStatement based on
+	// EventBridge events.
+	RedshiftDataParameters *RedshiftDataParameters
+
+	// The RetryPolicy object that contains the retry policy configuration to use for
+	// the dead-letter queue.
+	RetryPolicy *RetryPolicy
 
 	// The Amazon Resource Name (ARN) of the IAM role to be used for this target when
 	// the rule is triggered. If one rule triggers multiple targets, you can use a

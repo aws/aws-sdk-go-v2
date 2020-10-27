@@ -459,16 +459,16 @@ type AttachmentsSource struct {
 	//
 	//     *
 	// For the key SourceUrl, the value is an S3 bucket location. For example:
-	// "Values": [ "s3://my-bucket/my-folder" ]
+	// "Values": [ "s3://doc-example-bucket/my-folder" ]
 	//
-	//     * For the key S3FileUrl, the value
-	// is a file in an S3 bucket. For example: "Values": [
-	// "s3://my-bucket/my-folder/my-file.py" ]
+	//     * For the key S3FileUrl,
+	// the value is a file in an S3 bucket. For example: "Values": [
+	// "s3://doc-example-bucket/my-folder/my-file.py" ]
 	//
-	//     * For the key AttachmentReference,
-	// the value is constructed from the name of another SSM document in your account,
-	// a version number of that document, and a file attached to that document version
-	// that you want to reuse. For example: "Values": [
+	//     * For the key
+	// AttachmentReference, the value is constructed from the name of another SSM
+	// document in your account, a version number of that document, and a file attached
+	// to that document version that you want to reuse. For example: "Values": [
 	// "MyOtherDocument/3/my-other-file.py" ] However, if the SSM document is shared
 	// with you from another account, the full SSM document ARN must be specified
 	// instead of the document name only. For example: "Values": [
@@ -996,19 +996,21 @@ type CommandPlugin struct {
 	// The S3 bucket where the responses to the command executions should be stored.
 	// This was requested when issuing the command. For example, in the following
 	// response:
-	// test_folder/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-1234567876543/awsrunShellScript
-	// test_folder is the name of the S3 bucket;
+	// doc-example-bucket/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-02573cafcfEXAMPLE/awsrunShellScript
+	// doc-example-bucket is the name of the S3 bucket;
 	// ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3 prefix;
-	// i-1234567876543 is the instance ID; awsrunShellScript is the name of the plugin.
+	// i-02573cafcfEXAMPLE is the instance ID; awsrunShellScript is the name of the
+	// plugin.
 	OutputS3BucketName *string
 
 	// The S3 directory path inside the bucket where the responses to the command
 	// executions should be stored. This was requested when issuing the command. For
 	// example, in the following response:
-	// test_folder/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-1234567876543/awsrunShellScript
-	// test_folder is the name of the S3 bucket;
+	// doc-example-bucket/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-02573cafcfEXAMPLE/awsrunShellScript
+	// doc-example-bucket is the name of the S3 bucket;
 	// ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3 prefix;
-	// i-1234567876543 is the instance ID; awsrunShellScript is the name of the plugin.
+	// i-02573cafcfEXAMPLE is the instance ID; awsrunShellScript is the name of the
+	// plugin.
 	OutputS3KeyPrefix *string
 
 	// (Deprecated) You can no longer specify this parameter. The system ignores it.
@@ -1137,7 +1139,8 @@ type ComplianceItem struct {
 	// Critical, High, Medium, Low, Informational, Unspecified.
 	Severity ComplianceSeverity
 
-	// The status of the compliance item. An item is either COMPLIANT or NON_COMPLIANT.
+	// The status of the compliance item. An item is either COMPLIANT, NON_COMPLIANT,
+	// or an empty string (for Windows patches that aren't applicable).
 	Status ComplianceStatus
 
 	// A title for the compliance item. For example, if the compliance item is a
@@ -1465,18 +1468,66 @@ type DocumentIdentifier struct {
 
 // One or more filters. Use a filter to return a more specific list of documents.
 // For keys, you can specify one or more tags that have been applied to a document.
-// Other valid values include Owner, Name, PlatformTypes, DocumentType, and
-// TargetType. Note that only one Owner can be specified in a request. For example:
-// Key=Owner,Values=Self. If you use Name as a key, you can use a name prefix to
-// return a list of documents. For example, in the AWS CLI, to return a list of all
-// documents that begin with Te, run the following command: aws ssm list-documents
-// --filters Key=Name,Values=Te If you specify more than two keys, only documents
-// that are identified by all the tags are returned in the results. If you specify
-// more than two values for a key, documents that are identified by any of the
-// values are returned in the results. To specify a custom key and value pair, use
-// the format Key=tag:tagName,Values=valueName. For example, if you created a Key
-// called region and are using the AWS CLI to call the list-documents command: aws
-// ssm list-documents --filters Key=tag:region,Values=east,west
+// You can also use AWS-provided keys, some of which have specific allowed values.
+// These keys and their associated values are as follows: DocumentType
+//
+//     *
+// ApplicationConfiguration
+//
+//     * ApplicationConfigurationSchema
+//
+//     *
+// Automation
+//
+//     * ChangeCalendar
+//
+//     * Command
+//
+//     * DeploymentStrategy
+//
+//     *
+// Package
+//
+//     * Policy
+//
+//     * Session
+//
+// Owner Note that only one Owner can be
+// specified in a request. For example: Key=Owner,Values=Self.
+//
+//     * Amazon
+//
+//     *
+// Private
+//
+//     * Public
+//
+//     * Self
+//
+//     * ThirdParty
+//
+// PlatformTypes
+//
+//     *
+// Linux
+//
+//     * Windows
+//
+// Name is another AWS-provided key. If you use Name as a
+// key, you can use a name prefix to return a list of documents. For example, in
+// the AWS CLI, to return a list of all documents that begin with Te, run the
+// following command: aws ssm list-documents --filters Key=Name,Values=Te You can
+// also use the TargetType AWS-provided key. For a list of valid resource type
+// values that can be used with this key, see AWS resource and property types
+// reference
+// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
+// in the AWS CloudFormation User Guide. If you specify more than two keys, only
+// documents that are identified by all the tags are returned in the results. If
+// you specify more than two values for a key, documents that are identified by any
+// of the values are returned in the results. To specify a custom key and value
+// pair, use the format Key=tag:tagName,Values=valueName. For example, if you
+// created a key called region and are using the AWS CLI to call the list-documents
+// command: aws ssm list-documents --filters Key=tag:region,Values=east,west
 // Key=Owner,Values=Self
 type DocumentKeyValuesFilter struct {
 
@@ -1748,7 +1799,8 @@ type InstanceInformation struct {
 	// the AWS CLI Command Reference.
 	Name *string
 
-	// Connection status of SSM Agent.
+	// Connection status of SSM Agent. The status Inactive has been deprecated and is
+	// no longer in use.
 	PingStatus PingStatus
 
 	// The name of the operating system platform running on your instance.
@@ -1865,7 +1917,7 @@ type InstancePatchState struct {
 	// instance was rebooted.
 	InstalledPendingRebootCount *int32
 
-	// The number of instances with patches installed that are specified in a
+	// The number of patches installed on an instance that are specified in a
 	// RejectedPatches list. Patches with a status of InstalledRejected were typically
 	// installed before they were added to a RejectedPatches list. If
 	// ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction, the value
@@ -3026,19 +3078,19 @@ type ParametersFilter struct {
 	Values []*string
 }
 
-// One or more filters. Use a filter to return a more specific list of results. The
-// ParameterStringFilter object is used by the DescribeParameters and
-// GetParametersByPath API actions. However, not all of the pattern values listed
-// for Key can be used with both actions. For DescribeActions, all of the listed
-// patterns are valid, with the exception of Label. For GetParametersByPath, the
-// following patterns listed for Key are not valid: Name, Path, and Tier. For
-// examples of CLI commands demonstrating valid parameter filter constructions, see
-// Searching for Systems Manager parameters
-// (https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-search.html)
-// in the AWS Systems Manager User Guide.
+// One or more filters. Use a filter to return a more specific list of results.
 type ParameterStringFilter struct {
 
-	// The name of the filter.
+	// The name of the filter. The ParameterStringFilter object is used by the
+	// DescribeParameters and GetParametersByPath API actions. However, not all of the
+	// pattern values listed for Key can be used with both actions. For
+	// DescribeActions, all of the listed patterns are valid, with the exception of
+	// Label. For GetParametersByPath, the following patterns listed for Key are not
+	// valid: tag, Name, Path, and Tier. For examples of CLI commands demonstrating
+	// valid parameter filter constructions, see Searching for Systems Manager
+	// parameters
+	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-search.html)
+	// in the AWS Systems Manager User Guide.
 	//
 	// This member is required.
 	Key *string
@@ -3047,8 +3099,8 @@ type ParameterStringFilter struct {
 	// BeginsWith. The Name filter additionally supports the Contains option.
 	// (Exception: For filters using the key Path, valid options include Recursive and
 	// OneLevel.) For filters used with GetParametersByPath, valid options include
-	// Equals and BeginsWith. (Exception: For filters using the key Label, the only
-	// valid option is Equals.)
+	// Equals and BeginsWith. (Exception: For filters using Label as the Key name, the
+	// only valid option is Equals.)
 	Option *string
 
 	// The value you want to search for.
@@ -3058,8 +3110,25 @@ type ParameterStringFilter struct {
 // Represents metadata about a patch.
 type Patch struct {
 
-	// The classification of the patch (for example, SecurityUpdates, Updates,
-	// CriticalUpdates).
+	// The Advisory ID of the patch. For example, RHSA-2020:3779. Applies to
+	// Linux-based instances only.
+	AdvisoryIds []*string
+
+	// The architecture of the patch. For example, in
+	// example-pkg-0.710.10-2.7.abcd.x86_64, the architecture is indicated by x86_64.
+	// Applies to Linux-based instances only.
+	Arch *string
+
+	// The Bugzilla ID of the patch. For example, 1600646. Applies to Linux-based
+	// instances only.
+	BugzillaIds []*string
+
+	// The Common Vulnerabilities and Exposures (CVE) ID of the patch. For example,
+	// CVE-1999-0067. Applies to Linux-based instances only.
+	CVEIds []*string
+
+	// The classification of the patch. For example, SecurityUpdates, Updates, or
+	// CriticalUpdates.
 	Classification *string
 
 	// The URL where more information can be obtained about the patch.
@@ -3068,36 +3137,65 @@ type Patch struct {
 	// The description of the patch.
 	Description *string
 
-	// The ID of the patch (this is different than the Microsoft Knowledge Base ID).
+	// The epoch of the patch. For example in pkg-example-EE-20180914-2.2.amzn1.noarch,
+	// the epoch value is 20180914-2. Applies to Linux-based instances only.
+	Epoch *int32
+
+	// The ID of the patch. Applies to Windows patches only. This ID is not the same as
+	// the Microsoft Knowledge Base ID.
 	Id *string
 
-	// The Microsoft Knowledge Base ID of the patch.
+	// The Microsoft Knowledge Base ID of the patch. Applies to Windows patches only.
 	KbNumber *string
 
 	// The language of the patch if it's language-specific.
 	Language *string
 
-	// The ID of the MSRC bulletin the patch is related to.
+	// The ID of the Microsoft Security Response Center (MSRC) bulletin the patch is
+	// related to. For example, MS14-045. Applies to Windows patches only.
 	MsrcNumber *string
 
-	// The severity of the patch (for example Critical, Important, Moderate).
+	// The severity of the patch, such as Critical, Important, or Moderate. Applies to
+	// Windows patches only.
 	MsrcSeverity *string
 
-	// The specific product the patch is applicable for (for example,
-	// WindowsServer2016).
+	// The name of the patch. Applies to Linux-based instances only.
+	Name *string
+
+	// The specific product the patch is applicable for. For example, WindowsServer2016
+	// or AmazonLinux2018.03.
 	Product *string
 
-	// The product family the patch is applicable for (for example, Windows).
+	// The product family the patch is applicable for. For example, Windows or Amazon
+	// Linux 2.
 	ProductFamily *string
+
+	// The particular release of a patch. For example, in
+	// pkg-example-EE-20180914-2.2.amzn1.noarch, the release is 2.amaz1. Applies to
+	// Linux-based instances only.
+	Release *string
 
 	// The date the patch was released.
 	ReleaseDate *time.Time
+
+	// The source patch repository for the operating system and version, such as
+	// trusty-security for Ubuntu Server 14.04 LTE and focal-security for Ubuntu Server
+	// 20.04 LTE. Applies to Linux-based instances only.
+	Repository *string
+
+	// The severity level of the patch. For example, CRITICAL or MODERATE.
+	Severity *string
 
 	// The title of the patch.
 	Title *string
 
 	// The name of the vendor providing the patch.
 	Vendor *string
+
+	// The version number of the patch. For example, in
+	// example-pkg-1.710.10-2.7.abcd.x86_64, the version number is indicated by -1.
+	// Applies to Linux-based instances only.
+	Version *string
 }
 
 // Defines the basic information about a patch baseline.
@@ -3160,6 +3258,10 @@ type PatchComplianceData struct {
 	//
 	// This member is required.
 	Title *string
+
+	// The IDs of one or more Common Vulnerabilities and Exposure (CVE) issues that are
+	// resolved by the patch.
+	CVEIds *string
 }
 
 // Defines which patches should be included in a patch baseline. A patch filter

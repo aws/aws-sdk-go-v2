@@ -38,11 +38,11 @@ func validateOpQueryForecastInput(v *QueryForecastInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "QueryForecastInput"}
-	if v.Filters == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
-	}
 	if v.ForecastArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ForecastArn"))
+	}
+	if v.Filters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

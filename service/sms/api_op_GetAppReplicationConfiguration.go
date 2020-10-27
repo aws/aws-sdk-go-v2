@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Retrieves an application replication configuration associatd with an
-// application.
+// Retrieves the application replication configuration associated with the
+// specified application.
 func (c *Client) GetAppReplicationConfiguration(ctx context.Context, params *GetAppReplicationConfigurationInput, optFns ...func(*Options)) (*GetAppReplicationConfigurationOutput, error) {
 	if params == nil {
 		params = &GetAppReplicationConfigurationInput{}
@@ -30,13 +30,14 @@ func (c *Client) GetAppReplicationConfiguration(ctx context.Context, params *Get
 
 type GetAppReplicationConfigurationInput struct {
 
-	// ID of the application associated with the replication configuration.
+	// The ID of the application.
 	AppId *string
 }
 
 type GetAppReplicationConfigurationOutput struct {
 
-	// Replication configurations associated with server groups in this application.
+	// The replication configurations associated with server groups in this
+	// application.
 	ServerGroupReplicationConfigurations []*types.ServerGroupReplicationConfiguration
 
 	// Metadata pertaining to the operation's result.

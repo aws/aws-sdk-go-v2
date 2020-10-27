@@ -312,16 +312,15 @@ type HealthCheckConfig struct {
 // resource.
 type HealthCheckCustomConfig struct {
 
-	// The number of 30-second intervals that you want AWS Cloud Map to wait after
-	// receiving an UpdateInstanceCustomHealthStatus request before it changes the
-	// health status of a service instance. For example, suppose you specify a value of
-	// 2 for FailureTheshold, and then your application sends an
-	// UpdateInstanceCustomHealthStatus request. AWS Cloud Map waits for approximately
-	// 60 seconds (2 x 30) before changing the status of the service instance based on
-	// that request. Sending a second or subsequent UpdateInstanceCustomHealthStatus
-	// request with the same value before FailureThreshold x 30 seconds has passed
-	// doesn't accelerate the change. AWS Cloud Map still waits FailureThreshold x 30
-	// seconds after the first request to make the change.
+	// This parameter has been deprecated and is always set to 1. AWS Cloud Map waits
+	// for approximately 30 seconds after receiving an UpdateInstanceCustomHealthStatus
+	// request before changing the status of the service instance. The number of
+	// 30-second intervals that you want AWS Cloud Map to wait after receiving an
+	// UpdateInstanceCustomHealthStatus request before it changes the health status of
+	// a service instance. Sending a second or subsequent
+	// UpdateInstanceCustomHealthStatus request with the same value before 30 seconds
+	// has passed doesn't accelerate the change. AWS Cloud Map still waits 30 seconds
+	// after the first request to make the change.
 	FailureThreshold *int32
 }
 
@@ -420,9 +419,11 @@ type Instance struct {
 	// AWS_ALIAS_DNS_NAME, don't specify values for any of the AWS_INSTANCE
 	// attributes.
 	//
-	// AWS_INSTANCE_CNAME If the service configuration includes a CNAME
-	// record, the domain name that you want Route 53 to return in response to DNS
-	// queries, for example, example.com. This value is required if the service
+	// AWS_EC2_INSTANCE_ID HTTP namespaces only. The Amazon EC2 instance
+	// ID for the instance. The AWS_INSTANCE_IPV4 attribute contains the primary
+	// private IPv4 address. AWS_INSTANCE_CNAME If the service configuration includes a
+	// CNAME record, the domain name that you want Route 53 to return in response to
+	// DNS queries, for example, example.com. This value is required if the service
 	// specified by ServiceId includes settings for an CNAME record. AWS_INSTANCE_IPV4
 	// If the service configuration includes an A record, the IPv4 address that you
 	// want Route 53 to return in response to DNS queries, for example, 192.0.2.44.
@@ -470,11 +471,16 @@ type InstanceSummary struct {
 	// Balancing load balancer, the DNS name that is associated with the load
 	// balancer.
 	//
-	//     * AWS_INSTANCE_CNAME: For a CNAME record, the domain name that
-	// Route 53 returns in response to DNS queries, for example, example.com.
+	//     * AWS_EC2_INSTANCE_ID: (HTTP namespaces only) The Amazon EC2
+	// instance ID for the instance. When the AWS_EC2_INSTANCE_ID attribute is
+	// specified, then the AWS_INSTANCE_IPV4 attribute contains the primary private
+	// IPv4 address.
 	//
-	//     *
-	// AWS_INSTANCE_IPV4: For an A record, the IPv4 address that Route 53 returns in
+	//     * AWS_INSTANCE_CNAME: For a CNAME record, the domain name
+	// that Route 53 returns in response to DNS queries, for example, example.com.
+	//
+	//
+	// * AWS_INSTANCE_IPV4: For an A record, the IPv4 address that Route 53 returns in
 	// response to DNS queries, for example, 192.0.2.44.
 	//
 	//     * AWS_INSTANCE_IPV6: For
@@ -1041,8 +1047,8 @@ type Tag struct {
 	// This member is required.
 	Key *string
 
-	// The string value that's associated with the key of the tag. You can set the
-	// value of a tag to an empty string, but you can't set the value of a tag to null.
+	// The string value associated with the key of the tag. You can set the value of a
+	// tag to an empty string, but you can't set the value of a tag to null.
 	//
 	// This member is required.
 	Value *string

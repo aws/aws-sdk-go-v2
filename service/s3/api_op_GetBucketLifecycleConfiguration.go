@@ -15,11 +15,12 @@ import (
 // object key name prefix, one or more object tags, or a combination of both.
 // Accordingly, this section describes the latest API. The response describes the
 // new filter element that you can use to specify a filter to select a subset of
-// objects to which the rule applies. If you are still using previous version of
-// the lifecycle configuration, it works. For the earlier API description, see
-// GetBucketLifecycle. Returns the lifecycle configuration information set on the
-// bucket. For information about lifecycle configuration, see Object Lifecycle
-// Management
+// objects to which the rule applies. If you are using a previous version of the
+// lifecycle configuration, it still works. For the earlier API description, see
+// GetBucketLifecycle
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycle.html).
+// Returns the lifecycle configuration information set on the bucket. For
+// information about lifecycle configuration, see Object Lifecycle Management
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html). To
 // use this operation, you must have permission to perform the
 // s3:GetLifecycleConfiguration action. The bucket owner has this permission, by
@@ -46,11 +47,15 @@ import (
 // GetBucketLifecycleConfiguration:
 //
 //     * GetBucketLifecycle
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycle.html)
 //
-//     *
-// PutBucketLifecycle
 //
-//     * DeleteBucketLifecycle
+// * PutBucketLifecycle
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycle.html)
+//
+//
+// * DeleteBucketLifecycle
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketLifecycle.html)
 func (c *Client) GetBucketLifecycleConfiguration(ctx context.Context, params *GetBucketLifecycleConfigurationInput, optFns ...func(*Options)) (*GetBucketLifecycleConfigurationOutput, error) {
 	if params == nil {
 		params = &GetBucketLifecycleConfigurationInput{}
@@ -72,6 +77,10 @@ type GetBucketLifecycleConfigurationInput struct {
 	//
 	// This member is required.
 	Bucket *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 }
 
 type GetBucketLifecycleConfigurationOutput struct {

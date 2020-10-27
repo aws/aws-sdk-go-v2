@@ -453,11 +453,11 @@ func validateS3ExportConfiguration(v *types.S3ExportConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "S3ExportConfiguration"}
-	if v.Prefix == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Prefix"))
-	}
 	if v.Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.Prefix == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Prefix"))
 	}
 	if v.EncryptionConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EncryptionConfiguration"))
@@ -478,11 +478,11 @@ func validateOpCancelJournalKinesisStreamInput(v *CancelJournalKinesisStreamInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CancelJournalKinesisStreamInput"}
-	if v.StreamId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StreamId"))
-	}
 	if v.LedgerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LedgerName"))
+	}
+	if v.StreamId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -496,11 +496,11 @@ func validateOpCreateLedgerInput(v *CreateLedgerInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateLedgerInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if len(v.PermissionsMode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PermissionsMode"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -529,11 +529,11 @@ func validateOpDescribeJournalKinesisStreamInput(v *DescribeJournalKinesisStream
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeJournalKinesisStreamInput"}
-	if v.StreamId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StreamId"))
-	}
 	if v.LedgerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LedgerName"))
+	}
+	if v.StreamId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -580,8 +580,8 @@ func validateOpExportJournalToS3Input(v *ExportJournalToS3Input) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ExportJournalToS3Input"}
-	if v.InclusiveStartTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InclusiveStartTime"))
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.S3ExportConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3ExportConfiguration"))
@@ -593,8 +593,8 @@ func validateOpExportJournalToS3Input(v *ExportJournalToS3Input) error {
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if v.InclusiveStartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InclusiveStartTime"))
 	}
 	if v.ExclusiveEndTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExclusiveEndTime"))
@@ -644,11 +644,11 @@ func validateOpGetRevisionInput(v *GetRevisionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetRevisionInput"}
-	if v.DocumentId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DocumentId"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.DocumentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DocumentId"))
 	}
 	if v.BlockAddress == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BlockAddress"))
@@ -710,21 +710,21 @@ func validateOpStreamJournalToKinesisInput(v *StreamJournalToKinesisInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StreamJournalToKinesisInput"}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.LedgerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LedgerName"))
+	}
+	if v.StreamName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamName"))
+	}
 	if v.KinesisConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KinesisConfiguration"))
 	} else if v.KinesisConfiguration != nil {
 		if err := validateKinesisConfiguration(v.KinesisConfiguration); err != nil {
 			invalidParams.AddNested("KinesisConfiguration", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.LedgerName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LedgerName"))
-	}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
-	}
-	if v.StreamName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StreamName"))
 	}
 	if v.InclusiveStartTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InclusiveStartTime"))
@@ -759,11 +759,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
-	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

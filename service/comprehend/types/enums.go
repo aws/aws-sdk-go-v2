@@ -2,6 +2,24 @@
 
 package types
 
+type DocumentClassifierDataFormat string
+
+// Enum values for DocumentClassifierDataFormat
+const (
+	DocumentClassifierDataFormatComprehend_csv     DocumentClassifierDataFormat = "COMPREHEND_CSV"
+	DocumentClassifierDataFormatAugmented_manifest DocumentClassifierDataFormat = "AUGMENTED_MANIFEST"
+)
+
+// Values returns all known values for DocumentClassifierDataFormat. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DocumentClassifierDataFormat) Values() []DocumentClassifierDataFormat {
+	return []DocumentClassifierDataFormat{
+		"COMPREHEND_CSV",
+		"AUGMENTED_MANIFEST",
+	}
+}
+
 type DocumentClassifierMode string
 
 // Enum values for DocumentClassifierMode
@@ -9,6 +27,16 @@ const (
 	DocumentClassifierModeMulti_class DocumentClassifierMode = "MULTI_CLASS"
 	DocumentClassifierModeMulti_label DocumentClassifierMode = "MULTI_LABEL"
 )
+
+// Values returns all known values for DocumentClassifierMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DocumentClassifierMode) Values() []DocumentClassifierMode {
+	return []DocumentClassifierMode{
+		"MULTI_CLASS",
+		"MULTI_LABEL",
+	}
+}
 
 type EndpointStatus string
 
@@ -20,6 +48,37 @@ const (
 	EndpointStatusIn_service EndpointStatus = "IN_SERVICE"
 	EndpointStatusUpdating   EndpointStatus = "UPDATING"
 )
+
+// Values returns all known values for EndpointStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EndpointStatus) Values() []EndpointStatus {
+	return []EndpointStatus{
+		"CREATING",
+		"DELETING",
+		"FAILED",
+		"IN_SERVICE",
+		"UPDATING",
+	}
+}
+
+type EntityRecognizerDataFormat string
+
+// Enum values for EntityRecognizerDataFormat
+const (
+	EntityRecognizerDataFormatComprehend_csv     EntityRecognizerDataFormat = "COMPREHEND_CSV"
+	EntityRecognizerDataFormatAugmented_manifest EntityRecognizerDataFormat = "AUGMENTED_MANIFEST"
+)
+
+// Values returns all known values for EntityRecognizerDataFormat. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EntityRecognizerDataFormat) Values() []EntityRecognizerDataFormat {
+	return []EntityRecognizerDataFormat{
+		"COMPREHEND_CSV",
+		"AUGMENTED_MANIFEST",
+	}
+}
 
 type EntityType string
 
@@ -36,6 +95,23 @@ const (
 	EntityTypeOther           EntityType = "OTHER"
 )
 
+// Values returns all known values for EntityType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (EntityType) Values() []EntityType {
+	return []EntityType{
+		"PERSON",
+		"LOCATION",
+		"ORGANIZATION",
+		"COMMERCIAL_ITEM",
+		"EVENT",
+		"DATE",
+		"QUANTITY",
+		"TITLE",
+		"OTHER",
+	}
+}
+
 type InputFormat string
 
 // Enum values for InputFormat
@@ -43,6 +119,16 @@ const (
 	InputFormatOne_doc_per_file InputFormat = "ONE_DOC_PER_FILE"
 	InputFormatOne_doc_per_line InputFormat = "ONE_DOC_PER_LINE"
 )
+
+// Values returns all known values for InputFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (InputFormat) Values() []InputFormat {
+	return []InputFormat{
+		"ONE_DOC_PER_FILE",
+		"ONE_DOC_PER_LINE",
+	}
+}
 
 type JobStatus string
 
@@ -55,6 +141,20 @@ const (
 	JobStatusStop_requested JobStatus = "STOP_REQUESTED"
 	JobStatusStopped        JobStatus = "STOPPED"
 )
+
+// Values returns all known values for JobStatus. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (JobStatus) Values() []JobStatus {
+	return []JobStatus{
+		"SUBMITTED",
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
+		"STOP_REQUESTED",
+		"STOPPED",
+	}
+}
 
 type LanguageCode string
 
@@ -74,6 +174,26 @@ const (
 	LanguageCodeZh_tw LanguageCode = "zh-TW"
 )
 
+// Values returns all known values for LanguageCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (LanguageCode) Values() []LanguageCode {
+	return []LanguageCode{
+		"en",
+		"es",
+		"fr",
+		"de",
+		"it",
+		"pt",
+		"ar",
+		"hi",
+		"ja",
+		"ko",
+		"zh",
+		"zh-TW",
+	}
+}
+
 type ModelStatus string
 
 // Enum values for ModelStatus
@@ -86,6 +206,21 @@ const (
 	ModelStatusIn_error       ModelStatus = "IN_ERROR"
 	ModelStatusTrained        ModelStatus = "TRAINED"
 )
+
+// Values returns all known values for ModelStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ModelStatus) Values() []ModelStatus {
+	return []ModelStatus{
+		"SUBMITTED",
+		"TRAINING",
+		"DELETING",
+		"STOP_REQUESTED",
+		"STOPPED",
+		"IN_ERROR",
+		"TRAINED",
+	}
+}
 
 type PartOfSpeechTagType string
 
@@ -111,6 +246,128 @@ const (
 	PartOfSpeechTagTypeVerb  PartOfSpeechTagType = "VERB"
 )
 
+// Values returns all known values for PartOfSpeechTagType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PartOfSpeechTagType) Values() []PartOfSpeechTagType {
+	return []PartOfSpeechTagType{
+		"ADJ",
+		"ADP",
+		"ADV",
+		"AUX",
+		"CONJ",
+		"CCONJ",
+		"DET",
+		"INTJ",
+		"NOUN",
+		"NUM",
+		"O",
+		"PART",
+		"PRON",
+		"PROPN",
+		"PUNCT",
+		"SCONJ",
+		"SYM",
+		"VERB",
+	}
+}
+
+type PiiEntitiesDetectionMaskMode string
+
+// Enum values for PiiEntitiesDetectionMaskMode
+const (
+	PiiEntitiesDetectionMaskModeMask                         PiiEntitiesDetectionMaskMode = "MASK"
+	PiiEntitiesDetectionMaskModeReplace_with_pii_entity_type PiiEntitiesDetectionMaskMode = "REPLACE_WITH_PII_ENTITY_TYPE"
+)
+
+// Values returns all known values for PiiEntitiesDetectionMaskMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PiiEntitiesDetectionMaskMode) Values() []PiiEntitiesDetectionMaskMode {
+	return []PiiEntitiesDetectionMaskMode{
+		"MASK",
+		"REPLACE_WITH_PII_ENTITY_TYPE",
+	}
+}
+
+type PiiEntitiesDetectionMode string
+
+// Enum values for PiiEntitiesDetectionMode
+const (
+	PiiEntitiesDetectionModeOnly_redaction PiiEntitiesDetectionMode = "ONLY_REDACTION"
+	PiiEntitiesDetectionModeOnly_offsets   PiiEntitiesDetectionMode = "ONLY_OFFSETS"
+)
+
+// Values returns all known values for PiiEntitiesDetectionMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PiiEntitiesDetectionMode) Values() []PiiEntitiesDetectionMode {
+	return []PiiEntitiesDetectionMode{
+		"ONLY_REDACTION",
+		"ONLY_OFFSETS",
+	}
+}
+
+type PiiEntityType string
+
+// Enum values for PiiEntityType
+const (
+	PiiEntityTypeBank_account_number PiiEntityType = "BANK_ACCOUNT_NUMBER"
+	PiiEntityTypeBank_routing        PiiEntityType = "BANK_ROUTING"
+	PiiEntityTypeCredit_debit_number PiiEntityType = "CREDIT_DEBIT_NUMBER"
+	PiiEntityTypeCredit_debit_cvv    PiiEntityType = "CREDIT_DEBIT_CVV"
+	PiiEntityTypeCredit_debit_expiry PiiEntityType = "CREDIT_DEBIT_EXPIRY"
+	PiiEntityTypePin                 PiiEntityType = "PIN"
+	PiiEntityTypeEmail               PiiEntityType = "EMAIL"
+	PiiEntityTypeAddress             PiiEntityType = "ADDRESS"
+	PiiEntityTypeName                PiiEntityType = "NAME"
+	PiiEntityTypePhone               PiiEntityType = "PHONE"
+	PiiEntityTypeSsn                 PiiEntityType = "SSN"
+	PiiEntityTypeDate_time           PiiEntityType = "DATE_TIME"
+	PiiEntityTypePassport_number     PiiEntityType = "PASSPORT_NUMBER"
+	PiiEntityTypeDriver_id           PiiEntityType = "DRIVER_ID"
+	PiiEntityTypeUrl                 PiiEntityType = "URL"
+	PiiEntityTypeAge                 PiiEntityType = "AGE"
+	PiiEntityTypeUsername            PiiEntityType = "USERNAME"
+	PiiEntityTypePassword            PiiEntityType = "PASSWORD"
+	PiiEntityTypeAws_access_key      PiiEntityType = "AWS_ACCESS_KEY"
+	PiiEntityTypeAws_secret_key      PiiEntityType = "AWS_SECRET_KEY"
+	PiiEntityTypeIp_address          PiiEntityType = "IP_ADDRESS"
+	PiiEntityTypeMac_address         PiiEntityType = "MAC_ADDRESS"
+	PiiEntityTypeAll                 PiiEntityType = "ALL"
+)
+
+// Values returns all known values for PiiEntityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PiiEntityType) Values() []PiiEntityType {
+	return []PiiEntityType{
+		"BANK_ACCOUNT_NUMBER",
+		"BANK_ROUTING",
+		"CREDIT_DEBIT_NUMBER",
+		"CREDIT_DEBIT_CVV",
+		"CREDIT_DEBIT_EXPIRY",
+		"PIN",
+		"EMAIL",
+		"ADDRESS",
+		"NAME",
+		"PHONE",
+		"SSN",
+		"DATE_TIME",
+		"PASSPORT_NUMBER",
+		"DRIVER_ID",
+		"URL",
+		"AGE",
+		"USERNAME",
+		"PASSWORD",
+		"AWS_ACCESS_KEY",
+		"AWS_SECRET_KEY",
+		"IP_ADDRESS",
+		"MAC_ADDRESS",
+		"ALL",
+	}
+}
+
 type SentimentType string
 
 // Enum values for SentimentType
@@ -120,6 +377,18 @@ const (
 	SentimentTypeNeutral  SentimentType = "NEUTRAL"
 	SentimentTypeMixed    SentimentType = "MIXED"
 )
+
+// Values returns all known values for SentimentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SentimentType) Values() []SentimentType {
+	return []SentimentType{
+		"POSITIVE",
+		"NEGATIVE",
+		"NEUTRAL",
+		"MIXED",
+	}
+}
 
 type SyntaxLanguageCode string
 
@@ -132,3 +401,17 @@ const (
 	SyntaxLanguageCodeIt SyntaxLanguageCode = "it"
 	SyntaxLanguageCodePt SyntaxLanguageCode = "pt"
 )
+
+// Values returns all known values for SyntaxLanguageCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SyntaxLanguageCode) Values() []SyntaxLanguageCode {
+	return []SyntaxLanguageCode{
+		"en",
+		"es",
+		"fr",
+		"de",
+		"it",
+		"pt",
+	}
+}

@@ -2812,6 +2812,11 @@ func awsAwsquery_serializeOpDocumentCreateDBClusterInput(v *CreateDBClusterInput
 		objectKey.String(*v.PreferredMaintenanceWindow)
 	}
 
+	if v.PreSignedUrl != nil {
+		objectKey := object.Key("PreSignedUrl")
+		objectKey.String(*v.PreSignedUrl)
+	}
+
 	if v.StorageEncrypted != nil {
 		objectKey := object.Key("StorageEncrypted")
 		objectKey.Boolean(*v.StorageEncrypted)

@@ -12,6 +12,10 @@ const (
 	ExportableAutoScalingGroupFieldFinding                                                              ExportableAutoScalingGroupField = "Finding"
 	ExportableAutoScalingGroupFieldUtilization_metrics_cpu_maximum                                      ExportableAutoScalingGroupField = "UtilizationMetricsCpuMaximum"
 	ExportableAutoScalingGroupFieldUtilization_metrics_memory_maximum                                   ExportableAutoScalingGroupField = "UtilizationMetricsMemoryMaximum"
+	ExportableAutoScalingGroupFieldUtilization_metrics_ebs_read_ops_per_second_maximum                  ExportableAutoScalingGroupField = "UtilizationMetricsEbsReadOpsPerSecondMaximum"
+	ExportableAutoScalingGroupFieldUtilization_metrics_ebs_write_ops_per_second_maximum                 ExportableAutoScalingGroupField = "UtilizationMetricsEbsWriteOpsPerSecondMaximum"
+	ExportableAutoScalingGroupFieldUtilization_metrics_ebs_read_bytes_per_second_maximum                ExportableAutoScalingGroupField = "UtilizationMetricsEbsReadBytesPerSecondMaximum"
+	ExportableAutoScalingGroupFieldUtilization_metrics_ebs_write_bytes_per_second_maximum               ExportableAutoScalingGroupField = "UtilizationMetricsEbsWriteBytesPerSecondMaximum"
 	ExportableAutoScalingGroupFieldLookback_period_in_days                                              ExportableAutoScalingGroupField = "LookbackPeriodInDays"
 	ExportableAutoScalingGroupFieldCurrent_configuration_instance_type                                  ExportableAutoScalingGroupField = "CurrentConfigurationInstanceType"
 	ExportableAutoScalingGroupFieldCurrent_configuration_desired_capacity                               ExportableAutoScalingGroupField = "CurrentConfigurationDesiredCapacity"
@@ -41,6 +45,52 @@ const (
 	ExportableAutoScalingGroupFieldLast_refresh_timestamp                                               ExportableAutoScalingGroupField = "LastRefreshTimestamp"
 )
 
+// Values returns all known values for ExportableAutoScalingGroupField. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ExportableAutoScalingGroupField) Values() []ExportableAutoScalingGroupField {
+	return []ExportableAutoScalingGroupField{
+		"AccountId",
+		"AutoScalingGroupArn",
+		"AutoScalingGroupName",
+		"Finding",
+		"UtilizationMetricsCpuMaximum",
+		"UtilizationMetricsMemoryMaximum",
+		"UtilizationMetricsEbsReadOpsPerSecondMaximum",
+		"UtilizationMetricsEbsWriteOpsPerSecondMaximum",
+		"UtilizationMetricsEbsReadBytesPerSecondMaximum",
+		"UtilizationMetricsEbsWriteBytesPerSecondMaximum",
+		"LookbackPeriodInDays",
+		"CurrentConfigurationInstanceType",
+		"CurrentConfigurationDesiredCapacity",
+		"CurrentConfigurationMinSize",
+		"CurrentConfigurationMaxSize",
+		"CurrentOnDemandPrice",
+		"CurrentStandardOneYearNoUpfrontReservedPrice",
+		"CurrentStandardThreeYearNoUpfrontReservedPrice",
+		"CurrentVCpus",
+		"CurrentMemory",
+		"CurrentStorage",
+		"CurrentNetwork",
+		"RecommendationOptionsConfigurationInstanceType",
+		"RecommendationOptionsConfigurationDesiredCapacity",
+		"RecommendationOptionsConfigurationMinSize",
+		"RecommendationOptionsConfigurationMaxSize",
+		"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum",
+		"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum",
+		"RecommendationOptionsPerformanceRisk",
+		"RecommendationOptionsOnDemandPrice",
+		"RecommendationOptionsStandardOneYearNoUpfrontReservedPrice",
+		"RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice",
+		"RecommendationOptionsVcpus",
+		"RecommendationOptionsMemory",
+		"RecommendationOptionsStorage",
+		"RecommendationOptionsNetwork",
+		"LastRefreshTimestamp",
+	}
+}
+
 type ExportableInstanceField string
 
 // Enum values for ExportableInstanceField
@@ -53,6 +103,10 @@ const (
 	ExportableInstanceFieldCurrent_instance_type                                                ExportableInstanceField = "CurrentInstanceType"
 	ExportableInstanceFieldUtilization_metrics_cpu_maximum                                      ExportableInstanceField = "UtilizationMetricsCpuMaximum"
 	ExportableInstanceFieldUtilization_metrics_memory_maximum                                   ExportableInstanceField = "UtilizationMetricsMemoryMaximum"
+	ExportableInstanceFieldUtilization_metrics_ebs_read_ops_per_second_maximum                  ExportableInstanceField = "UtilizationMetricsEbsReadOpsPerSecondMaximum"
+	ExportableInstanceFieldUtilization_metrics_ebs_write_ops_per_second_maximum                 ExportableInstanceField = "UtilizationMetricsEbsWriteOpsPerSecondMaximum"
+	ExportableInstanceFieldUtilization_metrics_ebs_read_bytes_per_second_maximum                ExportableInstanceField = "UtilizationMetricsEbsReadBytesPerSecondMaximum"
+	ExportableInstanceFieldUtilization_metrics_ebs_write_bytes_per_second_maximum               ExportableInstanceField = "UtilizationMetricsEbsWriteBytesPerSecondMaximum"
 	ExportableInstanceFieldCurrent_on_demand_price                                              ExportableInstanceField = "CurrentOnDemandPrice"
 	ExportableInstanceFieldCurrent_standard_one_year_no_upfront_reserved_price                  ExportableInstanceField = "CurrentStandardOneYearNoUpfrontReservedPrice"
 	ExportableInstanceFieldCurrent_standard_three_year_no_upfront_reserved_price                ExportableInstanceField = "CurrentStandardThreeYearNoUpfrontReservedPrice"
@@ -76,12 +130,62 @@ const (
 	ExportableInstanceFieldLast_refresh_timestamp                                               ExportableInstanceField = "LastRefreshTimestamp"
 )
 
+// Values returns all known values for ExportableInstanceField. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExportableInstanceField) Values() []ExportableInstanceField {
+	return []ExportableInstanceField{
+		"AccountId",
+		"InstanceArn",
+		"InstanceName",
+		"Finding",
+		"LookbackPeriodInDays",
+		"CurrentInstanceType",
+		"UtilizationMetricsCpuMaximum",
+		"UtilizationMetricsMemoryMaximum",
+		"UtilizationMetricsEbsReadOpsPerSecondMaximum",
+		"UtilizationMetricsEbsWriteOpsPerSecondMaximum",
+		"UtilizationMetricsEbsReadBytesPerSecondMaximum",
+		"UtilizationMetricsEbsWriteBytesPerSecondMaximum",
+		"CurrentOnDemandPrice",
+		"CurrentStandardOneYearNoUpfrontReservedPrice",
+		"CurrentStandardThreeYearNoUpfrontReservedPrice",
+		"CurrentVCpus",
+		"CurrentMemory",
+		"CurrentStorage",
+		"CurrentNetwork",
+		"RecommendationOptionsInstanceType",
+		"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum",
+		"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum",
+		"RecommendationOptionsPerformanceRisk",
+		"RecommendationOptionsVcpus",
+		"RecommendationOptionsMemory",
+		"RecommendationOptionsStorage",
+		"RecommendationOptionsNetwork",
+		"RecommendationOptionsOnDemandPrice",
+		"RecommendationOptionsStandardOneYearNoUpfrontReservedPrice",
+		"RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice",
+		"RecommendationsSourcesRecommendationSourceArn",
+		"RecommendationsSourcesRecommendationSourceType",
+		"LastRefreshTimestamp",
+	}
+}
+
 type FileFormat string
 
 // Enum values for FileFormat
 const (
 	FileFormatCsv FileFormat = "Csv"
 )
+
+// Values returns all known values for FileFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (FileFormat) Values() []FileFormat {
+	return []FileFormat{
+		"Csv",
+	}
+}
 
 type FilterName string
 
@@ -90,6 +194,16 @@ const (
 	FilterNameFinding                    FilterName = "Finding"
 	FilterNameRecommendation_source_type FilterName = "RecommendationSourceType"
 )
+
+// Values returns all known values for FilterName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (FilterName) Values() []FilterName {
+	return []FilterName{
+		"Finding",
+		"RecommendationSourceType",
+	}
+}
 
 type Finding string
 
@@ -101,6 +215,18 @@ const (
 	FindingNot_optimized     Finding = "NotOptimized"
 )
 
+// Values returns all known values for Finding. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Finding) Values() []Finding {
+	return []Finding{
+		"Underprovisioned",
+		"Overprovisioned",
+		"Optimized",
+		"NotOptimized",
+	}
+}
+
 type JobFilterName string
 
 // Enum values for JobFilterName
@@ -108,6 +234,16 @@ const (
 	JobFilterNameResource_type JobFilterName = "ResourceType"
 	JobFilterNameJob_status    JobFilterName = "JobStatus"
 )
+
+// Values returns all known values for JobFilterName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (JobFilterName) Values() []JobFilterName {
+	return []JobFilterName{
+		"ResourceType",
+		"JobStatus",
+	}
+}
 
 type JobStatus string
 
@@ -119,13 +255,43 @@ const (
 	JobStatusFailed      JobStatus = "Failed"
 )
 
+// Values returns all known values for JobStatus. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (JobStatus) Values() []JobStatus {
+	return []JobStatus{
+		"Queued",
+		"InProgress",
+		"Complete",
+		"Failed",
+	}
+}
+
 type MetricName string
 
 // Enum values for MetricName
 const (
-	MetricNameCpu    MetricName = "Cpu"
-	MetricNameMemory MetricName = "Memory"
+	MetricNameCpu                        MetricName = "Cpu"
+	MetricNameMemory                     MetricName = "Memory"
+	MetricNameEbs_read_ops_per_second    MetricName = "EBS_READ_OPS_PER_SECOND"
+	MetricNameEbs_write_ops_per_second   MetricName = "EBS_WRITE_OPS_PER_SECOND"
+	MetricNameEbs_read_bytes_per_second  MetricName = "EBS_READ_BYTES_PER_SECOND"
+	MetricNameEbs_write_bytes_per_second MetricName = "EBS_WRITE_BYTES_PER_SECOND"
 )
+
+// Values returns all known values for MetricName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MetricName) Values() []MetricName {
+	return []MetricName{
+		"Cpu",
+		"Memory",
+		"EBS_READ_OPS_PER_SECOND",
+		"EBS_WRITE_OPS_PER_SECOND",
+		"EBS_READ_BYTES_PER_SECOND",
+		"EBS_WRITE_BYTES_PER_SECOND",
+	}
+}
 
 type MetricStatistic string
 
@@ -135,6 +301,16 @@ const (
 	MetricStatisticAverage MetricStatistic = "Average"
 )
 
+// Values returns all known values for MetricStatistic. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MetricStatistic) Values() []MetricStatistic {
+	return []MetricStatistic{
+		"Maximum",
+		"Average",
+	}
+}
+
 type RecommendationSourceType string
 
 // Enum values for RecommendationSourceType
@@ -143,6 +319,16 @@ const (
 	RecommendationSourceTypeAuto_scaling_group RecommendationSourceType = "AutoScalingGroup"
 )
 
+// Values returns all known values for RecommendationSourceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendationSourceType) Values() []RecommendationSourceType {
+	return []RecommendationSourceType{
+		"Ec2Instance",
+		"AutoScalingGroup",
+	}
+}
+
 type ResourceType string
 
 // Enum values for ResourceType
@@ -150,6 +336,16 @@ const (
 	ResourceTypeEc2_instance       ResourceType = "Ec2Instance"
 	ResourceTypeAuto_scaling_group ResourceType = "AutoScalingGroup"
 )
+
+// Values returns all known values for ResourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ResourceType) Values() []ResourceType {
+	return []ResourceType{
+		"Ec2Instance",
+		"AutoScalingGroup",
+	}
+}
 
 type Status string
 
@@ -160,3 +356,15 @@ const (
 	StatusPending  Status = "Pending"
 	StatusFailed   Status = "Failed"
 )
+
+// Values returns all known values for Status. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Status) Values() []Status {
+	return []Status{
+		"Active",
+		"Inactive",
+		"Pending",
+		"Failed",
+	}
+}

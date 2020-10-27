@@ -36,11 +36,15 @@ type AffectedEntity struct {
 	// are IMPAIRED, UNIMPAIRED, and UNKNOWN.
 	StatusCode EntityStatusCode
 
-	// A map of entity tags attached to the affected entity.
+	// A map of entity tags attached to the affected entity. Currently, the tags
+	// property isn't supported.
 	Tags map[string]*string
 }
 
-// A range of dates and times that is used by the EventFilter and EntityFilter
+// A range of dates and times that is used by the EventFilter
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_EventFilter.html)
+// and EntityFilter
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_EntityFilter.html)
 // objects. If from is set and to is set: match items where the timestamp
 // (startTime, endTime, or lastUpdatedTime) is between from and to inclusive. If
 // from is set and to is not set: match items where the timestamp value is equal to
@@ -56,10 +60,12 @@ type DateTimeRange struct {
 }
 
 // The number of entities that are affected by one or more events. Returned by the
-// DescribeEntityAggregates operation.
+// DescribeEntityAggregates
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEntityAggregates.html)
+// operation.
 type EntityAggregate struct {
 
-	// The number entities that match the criteria for the specified events.
+	// The number of entities that match the criteria for the specified events.
 	Count *int32
 
 	// The unique identifier for the event. Format:
@@ -69,7 +75,9 @@ type EntityAggregate struct {
 	EventArn *string
 }
 
-// The values to use to filter results from the DescribeAffectedEntities operation.
+// The values to use to filter results from the EntityFilter
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_EntityFilter.html)
+// operation.
 type EntityFilter struct {
 
 	// A list of event ARNs (unique identifiers). For example:
@@ -91,11 +99,29 @@ type EntityFilter struct {
 	// A list of entity status codes (IMPAIRED, UNIMPAIRED, or UNKNOWN).
 	StatusCodes []EntityStatusCode
 
-	// A map of entity tags attached to the affected entity.
+	// A map of entity tags attached to the affected entity. Currently, the tags
+	// property isn't supported.
 	Tags []map[string]*string
 }
 
-// Summary information about an AWS Health event.
+// Summary information about an AWS Health event. AWS Health events can be public
+// or account-specific:
+//
+//     * Public events might be service events that are not
+// specific to an AWS account. For example, if there is an issue with an AWS
+// Region, AWS Health provides information about the event, even if you don't use
+// services or resources in that Region.
+//
+//     * Account-specific events are
+// specific to either your AWS account or an account in your organization. For
+// example, if there's an issue with Amazon Elastic Compute Cloud in a Region that
+// you use, AWS Health provides information about the event and the affected
+// resources in the account.
+//
+// You can determine if an event is public or
+// account-specific by using the eventScopeCode parameter. For more information,
+// see eventScopeCode
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html#AWSHealth-Type-Event-eventScopeCode).
 type Event struct {
 
 	// The unique identifier for the event. Format:
@@ -110,6 +136,21 @@ type Event struct {
 	// The date and time that the event ended.
 	EndTime *time.Time
 
+	// This parameter specifies if the AWS Health event is a public AWS service event
+	// or an account-specific event.
+	//
+	//     * If the eventScopeCode value is PUBLIC, then
+	// the affectedAccounts value is always empty.
+	//
+	//     * If the eventScopeCode value
+	// is ACCOUNT_SPECIFIC, then the affectedAccounts value lists the affected AWS
+	// accounts in your organization. For example, if an event affects a service such
+	// as Amazon Elastic Compute Cloud and you have AWS accounts that use that service,
+	// those account IDs appear in the response.
+	//
+	//     * If the eventScopeCode value is
+	// NONE, then the eventArn that you specified in the request is invalid or doesn't
+	// exist.
 	EventScopeCode EventScopeCode
 
 	// The category of the event. Possible values are issue, scheduledChange, and
@@ -138,7 +179,10 @@ type Event struct {
 }
 
 // The values used to filter results from the DescribeEventDetailsForOrganization
-// and DescribeAffectedEntitiesForOrganization operations.
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html)
+// and DescribeAffectedEntitiesForOrganization
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html)
+// operations.
 type EventAccountFilter struct {
 
 	// The unique identifier for the event. Format:
@@ -154,6 +198,7 @@ type EventAccountFilter struct {
 }
 
 // The number of events of each issue type. Returned by the DescribeEventAggregates
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventAggregates.html)
 // operation.
 type EventAggregate struct {
 
@@ -165,16 +210,23 @@ type EventAggregate struct {
 }
 
 // The detailed description of the event. Included in the information returned by
-// the DescribeEventDetails operation.
+// the DescribeEventDetails
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html)
+// operation.
 type EventDescription struct {
 
 	// The most recent description of the event.
 	LatestDescription *string
 }
 
-// Detailed information about an event. A combination of an Event object, an
-// EventDescription object, and additional metadata about the event. Returned by
-// the DescribeEventDetails operation.
+// Detailed information about an event. A combination of an Event
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html) object,
+// an EventDescription
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_EventDescription.html)
+// object, and additional metadata about the event. Returned by the
+// DescribeEventDetails
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html)
+// operation.
 type EventDetails struct {
 
 	// Summary information about the event.
@@ -187,8 +239,9 @@ type EventDetails struct {
 	EventMetadata map[string]*string
 }
 
-// Error information returned when a DescribeEventDetails operation cannot find a
-// specified event.
+// Error information returned when a DescribeEventDetails
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html)
+// operation cannot find a specified event.
 type EventDetailsErrorItem struct {
 
 	// A message that describes the error.
@@ -204,8 +257,11 @@ type EventDetailsErrorItem struct {
 	EventArn *string
 }
 
-// The values to use to filter results from the DescribeEvents and
-// DescribeEventAggregates operations.
+// The values to use to filter results from the DescribeEvents
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEvents.html)
+// and DescribeEventAggregates
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventAggregates.html)
+// operations.
 type EventFilter struct {
 
 	// A list of AWS availability zones.
@@ -249,7 +305,8 @@ type EventFilter struct {
 	// A list of dates and times that the event began.
 	StartTimes []*DateTimeRange
 
-	// A map of entity tags attached to the affected entity.
+	// A map of entity tags attached to the affected entity. Currently, the tags
+	// property isn't supported.
 	Tags []map[string]*string
 }
 
@@ -270,7 +327,9 @@ type EventType struct {
 	Service *string
 }
 
-// The values to use to filter results from the DescribeEventTypes operation.
+// The values to use to filter results from the DescribeEventTypes
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventTypes.html)
+// operation.
 type EventTypeFilter struct {
 
 	// A list of event type category codes (issue, scheduledChange, or
@@ -285,6 +344,7 @@ type EventTypeFilter struct {
 }
 
 // Error information returned when a DescribeAffectedEntitiesForOrganization
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html)
 // operation cannot find or process a specific entity.
 type OrganizationAffectedEntitiesErrorItem struct {
 
@@ -306,7 +366,9 @@ type OrganizationAffectedEntitiesErrorItem struct {
 }
 
 // Summary information about an event, returned by the
-// DescribeEventsForOrganization operation.
+// DescribeEventsForOrganization
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventsForOrganization.html)
+// operation.
 type OrganizationEvent struct {
 
 	// The unique identifier for the event. Format:
@@ -318,6 +380,21 @@ type OrganizationEvent struct {
 	// The date and time that the event ended.
 	EndTime *time.Time
 
+	// This parameter specifies if the AWS Health event is a public AWS service event
+	// or an account-specific event.
+	//
+	//     * If the eventScopeCode value is PUBLIC, then
+	// the affectedAccounts value is always empty.
+	//
+	//     * If the eventScopeCode value
+	// is ACCOUNT_SPECIFIC, then the affectedAccounts value lists the affected AWS
+	// accounts in your organization. For example, if an event affects a service such
+	// as Amazon Elastic Compute Cloud and you have AWS accounts that use that service,
+	// those account IDs appear in the response.
+	//
+	//     * If the eventScopeCode value is
+	// NONE, then the eventArn that you specified in the request is invalid or doesn't
+	// exist.
 	EventScopeCode EventScopeCode
 
 	// The category of the event type.
@@ -344,31 +421,57 @@ type OrganizationEvent struct {
 	StatusCode EventStatusCode
 }
 
-// Detailed information about an event. A combination of an Event object, an
-// EventDescription object, and additional metadata about the event. Returned by
-// the DescribeEventDetailsForOrganization operation.
+// Detailed information about an event. A combination of an Event
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html) object,
+// an EventDescription
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_EventDescription.html)
+// object, and additional metadata about the event. Returned by the
+// DescribeEventDetailsForOrganization
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html)
+// operation.
 type OrganizationEventDetails struct {
 
 	// The 12-digit AWS account numbers that contains the affected entities.
 	AwsAccountId *string
 
-	// Summary information about an AWS Health event.
+	// Summary information about an AWS Health event. AWS Health events can be public
+	// or account-specific:
+	//
+	//     * Public events might be service events that are not
+	// specific to an AWS account. For example, if there is an issue with an AWS
+	// Region, AWS Health provides information about the event, even if you don't use
+	// services or resources in that Region.
+	//
+	//     * Account-specific events are
+	// specific to either your AWS account or an account in your organization. For
+	// example, if there's an issue with Amazon Elastic Compute Cloud in a Region that
+	// you use, AWS Health provides information about the event and the affected
+	// resources in the account.
+	//
+	// You can determine if an event is public or
+	// account-specific by using the eventScopeCode parameter. For more information,
+	// see eventScopeCode
+	// (https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html#AWSHealth-Type-Event-eventScopeCode).
 	Event *Event
 
 	// The detailed description of the event. Included in the information returned by
-	// the DescribeEventDetails operation.
+	// the DescribeEventDetails
+	// (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html)
+	// operation.
 	EventDescription *EventDescription
 
 	// Additional metadata about the event.
 	EventMetadata map[string]*string
 }
 
-// Error information returned when a DescribeEventDetailsForOrganization operation
-// cannot find a specified event.
+// Error information returned when a DescribeEventDetailsForOrganization
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html)
+// operation cannot find a specified event.
 type OrganizationEventDetailsErrorItem struct {
 
-	// Error information returned when a DescribeEventDetailsForOrganization operation
-	// cannot find a specified event.
+	// Error information returned when a DescribeEventDetailsForOrganization
+	// (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html)
+	// operation cannot find a specified event.
 	AwsAccountId *string
 
 	// A message that describes the error.
@@ -384,13 +487,18 @@ type OrganizationEventDetailsErrorItem struct {
 	EventArn *string
 }
 
-// The values to filter results from the DescribeEventsForOrganization operation.
+// The values to filter results from the DescribeEventsForOrganization
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventsForOrganization.html)
+// operation.
 type OrganizationEventFilter struct {
 
 	// A list of 12-digit AWS account numbers that contains the affected entities.
 	AwsAccountIds []*string
 
-	// A range of dates and times that is used by the EventFilter and EntityFilter
+	// A range of dates and times that is used by the EventFilter
+	// (https://docs.aws.amazon.com/health/latest/APIReference/API_EventFilter.html)
+	// and EntityFilter
+	// (https://docs.aws.amazon.com/health/latest/APIReference/API_EntityFilter.html)
 	// objects. If from is set and to is set: match items where the timestamp
 	// (startTime, endTime, or lastUpdatedTime) is between from and to inclusive. If
 	// from is set and to is not set: match items where the timestamp value is equal to
@@ -398,7 +506,7 @@ type OrganizationEventFilter struct {
 	// value is equal to or before to.
 	EndTime *DateTimeRange
 
-	// REPLACEME
+	// A list of entity ARNs (unique identifiers).
 	EntityArns []*string
 
 	// A list of entity identifiers, such as EC2 instance IDs (i-34ab692e) or EBS
@@ -408,14 +516,18 @@ type OrganizationEventFilter struct {
 	// A list of event status codes.
 	EventStatusCodes []EventStatusCode
 
-	// REPLACEME
+	// A list of event type category codes (issue, scheduledChange, or
+	// accountNotification).
 	EventTypeCategories []EventTypeCategory
 
 	// A list of unique identifiers for event types. For example,
 	// "AWS_EC2_SYSTEM_MAINTENANCE_EVENT","AWS_RDS_MAINTENANCE_SCHEDULED".
 	EventTypeCodes []*string
 
-	// A range of dates and times that is used by the EventFilter and EntityFilter
+	// A range of dates and times that is used by the EventFilter
+	// (https://docs.aws.amazon.com/health/latest/APIReference/API_EventFilter.html)
+	// and EntityFilter
+	// (https://docs.aws.amazon.com/health/latest/APIReference/API_EntityFilter.html)
 	// objects. If from is set and to is set: match items where the timestamp
 	// (startTime, endTime, or lastUpdatedTime) is between from and to inclusive. If
 	// from is set and to is not set: match items where the timestamp value is equal to
@@ -429,7 +541,10 @@ type OrganizationEventFilter struct {
 	// The AWS services associated with the event. For example, EC2, RDS.
 	Services []*string
 
-	// A range of dates and times that is used by the EventFilter and EntityFilter
+	// A range of dates and times that is used by the EventFilter
+	// (https://docs.aws.amazon.com/health/latest/APIReference/API_EventFilter.html)
+	// and EntityFilter
+	// (https://docs.aws.amazon.com/health/latest/APIReference/API_EntityFilter.html)
 	// objects. If from is set and to is set: match items where the timestamp
 	// (startTime, endTime, or lastUpdatedTime) is between from and to inclusive. If
 	// from is set and to is not set: match items where the timestamp value is equal to

@@ -638,14 +638,14 @@ func validateOpAssociateCustomerGatewayInput(v *AssociateCustomerGatewayInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociateCustomerGatewayInput"}
-	if v.CustomerGatewayArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CustomerGatewayArn"))
-	}
 	if v.GlobalNetworkId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
 	}
 	if v.DeviceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeviceId"))
+	}
+	if v.CustomerGatewayArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomerGatewayArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -800,11 +800,11 @@ func validateOpDeregisterTransitGatewayInput(v *DeregisterTransitGatewayInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeregisterTransitGatewayInput"}
-	if v.GlobalNetworkId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
-	}
 	if v.TransitGatewayArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TransitGatewayArn"))
+	}
+	if v.GlobalNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -836,14 +836,14 @@ func validateOpDisassociateLinkInput(v *DisassociateLinkInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateLinkInput"}
-	if v.DeviceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeviceId"))
-	}
 	if v.LinkId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LinkId"))
 	}
 	if v.GlobalNetworkId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
+	}
+	if v.DeviceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1067,11 +1067,11 @@ func validateOpUpdateSiteInput(v *UpdateSiteInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateSiteInput"}
-	if v.GlobalNetworkId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
-	}
 	if v.SiteId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SiteId"))
+	}
+	if v.GlobalNetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalNetworkId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

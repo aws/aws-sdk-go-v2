@@ -5529,6 +5529,46 @@ func awsRestjson1_deserializeDocumentAncillarySourceSettings(v **types.Ancillary
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAudioChannelTaggingSettings(v **types.AudioChannelTaggingSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AudioChannelTaggingSettings
+	if *v == nil {
+		sv = &types.AudioChannelTaggingSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "channelTag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AudioChannelTag to be of type string, got %T instead", value)
+				}
+				sv.ChannelTag = types.AudioChannelTag(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAudioCodecSettings(v **types.AudioCodecSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5641,6 +5681,11 @@ func awsRestjson1_deserializeDocumentAudioDescription(v **types.AudioDescription
 
 	for key, value := range shape {
 		switch key {
+		case "audioChannelTaggingSettings":
+			if err := awsRestjson1_deserializeDocumentAudioChannelTaggingSettings(&sv.AudioChannelTaggingSettings, value); err != nil {
+				return err
+			}
+
 		case "audioNormalizationSettings":
 			if err := awsRestjson1_deserializeDocumentAudioNormalizationSettings(&sv.AudioNormalizationSettings, value); err != nil {
 				return err
@@ -5869,7 +5914,7 @@ func awsRestjson1_deserializeDocumentAudioSelector(v **types.AudioSelector, valu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __stringPatternS3WWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE to be of type string, got %T instead", value)
 				}
 				sv.ExternalAudioFileInput = &jtv
 			}
@@ -6223,6 +6268,117 @@ func awsRestjson1_deserializeDocumentAvailBlanking(v **types.AvailBlanking, valu
 					return fmt.Errorf("expected __stringMin14PatternS3BmpBMPPngPNGHttpsBmpBMPPngPNG to be of type string, got %T instead", value)
 				}
 				sv.AvailBlankingImage = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAvcIntraSettings(v **types.AvcIntraSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AvcIntraSettings
+	if *v == nil {
+		sv = &types.AvcIntraSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "avcIntraClass":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AvcIntraClass to be of type string, got %T instead", value)
+				}
+				sv.AvcIntraClass = types.AvcIntraClass(jtv)
+			}
+
+		case "framerateControl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AvcIntraFramerateControl to be of type string, got %T instead", value)
+				}
+				sv.FramerateControl = types.AvcIntraFramerateControl(jtv)
+			}
+
+		case "framerateConversionAlgorithm":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AvcIntraFramerateConversionAlgorithm to be of type string, got %T instead", value)
+				}
+				sv.FramerateConversionAlgorithm = types.AvcIntraFramerateConversionAlgorithm(jtv)
+			}
+
+		case "framerateDenominator":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max1001 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FramerateDenominator = ptr.Int32(int32(i64))
+			}
+
+		case "framerateNumerator":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin24Max60000 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FramerateNumerator = ptr.Int32(int32(i64))
+			}
+
+		case "interlaceMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AvcIntraInterlaceMode to be of type string, got %T instead", value)
+				}
+				sv.InterlaceMode = types.AvcIntraInterlaceMode(jtv)
+			}
+
+		case "slowPal":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AvcIntraSlowPal to be of type string, got %T instead", value)
+				}
+				sv.SlowPal = types.AvcIntraSlowPal(jtv)
+			}
+
+		case "telecine":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AvcIntraTelecine to be of type string, got %T instead", value)
+				}
+				sv.Telecine = types.AvcIntraTelecine(jtv)
 			}
 
 		default:
@@ -10867,6 +11023,15 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				return err
 			}
 
+		case "audioOnlyHeader":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HlsAudioOnlyHeader to be of type string, got %T instead", value)
+				}
+				sv.AudioOnlyHeader = types.HlsAudioOnlyHeader(jtv)
+			}
+
 		case "baseUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11444,7 +11609,7 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL to be of type string, got %T instead", value)
 				}
 				sv.FileInput = &jtv
 			}
@@ -11479,6 +11644,15 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 		case "inputClippings":
 			if err := awsRestjson1_deserializeDocument__listOfInputClipping(&sv.InputClippings, value); err != nil {
 				return err
+			}
+
+		case "inputScanType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InputScanType to be of type string, got %T instead", value)
+				}
+				sv.InputScanType = types.InputScanType(jtv)
 			}
 
 		case "position":
@@ -11751,6 +11925,15 @@ func awsRestjson1_deserializeDocumentInputTemplate(v **types.InputTemplate, valu
 		case "inputClippings":
 			if err := awsRestjson1_deserializeDocument__listOfInputClipping(&sv.InputClippings, value); err != nil {
 				return err
+			}
+
+		case "inputScanType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InputScanType to be of type string, got %T instead", value)
+				}
+				sv.InputScanType = types.InputScanType(jtv)
 			}
 
 		case "position":
@@ -12363,6 +12546,11 @@ func awsRestjson1_deserializeDocumentJobSettings(v **types.JobSettings, value in
 				return err
 			}
 
+		case "nielsenNonLinearWatermark":
+			if err := awsRestjson1_deserializeDocumentNielsenNonLinearWatermarkSettings(&sv.NielsenNonLinearWatermark, value); err != nil {
+				return err
+			}
+
 		case "outputGroups":
 			if err := awsRestjson1_deserializeDocument__listOfOutputGroup(&sv.OutputGroups, value); err != nil {
 				return err
@@ -12592,6 +12780,11 @@ func awsRestjson1_deserializeDocumentJobTemplateSettings(v **types.JobTemplateSe
 
 		case "nielsenConfiguration":
 			if err := awsRestjson1_deserializeDocumentNielsenConfiguration(&sv.NielsenConfiguration, value); err != nil {
+				return err
+			}
+
+		case "nielsenNonLinearWatermark":
+			if err := awsRestjson1_deserializeDocumentNielsenNonLinearWatermarkSettings(&sv.NielsenNonLinearWatermark, value); err != nil {
 				return err
 			}
 
@@ -14408,6 +14601,15 @@ func awsRestjson1_deserializeDocumentMxfSettings(v **types.MxfSettings, value in
 				sv.AfdSignaling = types.MxfAfdSignaling(jtv)
 			}
 
+		case "profile":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MxfProfile to be of type string, got %T instead", value)
+				}
+				sv.Profile = types.MxfProfile(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -14530,6 +14732,140 @@ func awsRestjson1_deserializeDocumentNielsenConfiguration(v **types.NielsenConfi
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.DistributorId = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNielsenNonLinearWatermarkSettings(v **types.NielsenNonLinearWatermarkSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NielsenNonLinearWatermarkSettings
+	if *v == nil {
+		sv = &types.NielsenNonLinearWatermarkSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "activeWatermarkProcess":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NielsenActiveWatermarkProcessType to be of type string, got %T instead", value)
+				}
+				sv.ActiveWatermarkProcess = types.NielsenActiveWatermarkProcessType(jtv)
+			}
+
+		case "adiFilename":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringPatternS3 to be of type string, got %T instead", value)
+				}
+				sv.AdiFilename = &jtv
+			}
+
+		case "assetId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin1Max20 to be of type string, got %T instead", value)
+				}
+				sv.AssetId = &jtv
+			}
+
+		case "assetName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin1Max50 to be of type string, got %T instead", value)
+				}
+				sv.AssetName = &jtv
+			}
+
+		case "cbetSourceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringPattern0xAFaF0908190908 to be of type string, got %T instead", value)
+				}
+				sv.CbetSourceId = &jtv
+			}
+
+		case "episodeId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin1Max20 to be of type string, got %T instead", value)
+				}
+				sv.EpisodeId = &jtv
+			}
+
+		case "metadataDestination":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringPatternS3 to be of type string, got %T instead", value)
+				}
+				sv.MetadataDestination = &jtv
+			}
+
+		case "sourceId":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max65534 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SourceId = ptr.Int32(int32(i64))
+			}
+
+		case "sourceWatermarkStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NielsenSourceWatermarkStatusType to be of type string, got %T instead", value)
+				}
+				sv.SourceWatermarkStatus = types.NielsenSourceWatermarkStatusType(jtv)
+			}
+
+		case "ticServerUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringPatternHttps to be of type string, got %T instead", value)
+				}
+				sv.TicServerUrl = &jtv
+			}
+
+		case "uniqueTicPerAudioTrack":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NielsenUniqueTicPerAudioTrackType to be of type string, got %T instead", value)
+				}
+				sv.UniqueTicPerAudioTrack = types.NielsenUniqueTicPerAudioTrackType(jtv)
 			}
 
 		default:
@@ -16906,6 +17242,117 @@ func awsRestjson1_deserializeDocumentTtmlDestinationSettings(v **types.TtmlDesti
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentVc3Settings(v **types.Vc3Settings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Vc3Settings
+	if *v == nil {
+		sv = &types.Vc3Settings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "framerateControl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Vc3FramerateControl to be of type string, got %T instead", value)
+				}
+				sv.FramerateControl = types.Vc3FramerateControl(jtv)
+			}
+
+		case "framerateConversionAlgorithm":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Vc3FramerateConversionAlgorithm to be of type string, got %T instead", value)
+				}
+				sv.FramerateConversionAlgorithm = types.Vc3FramerateConversionAlgorithm(jtv)
+			}
+
+		case "framerateDenominator":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max1001 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FramerateDenominator = ptr.Int32(int32(i64))
+			}
+
+		case "framerateNumerator":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin24Max60000 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.FramerateNumerator = ptr.Int32(int32(i64))
+			}
+
+		case "interlaceMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Vc3InterlaceMode to be of type string, got %T instead", value)
+				}
+				sv.InterlaceMode = types.Vc3InterlaceMode(jtv)
+			}
+
+		case "slowPal":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Vc3SlowPal to be of type string, got %T instead", value)
+				}
+				sv.SlowPal = types.Vc3SlowPal(jtv)
+			}
+
+		case "telecine":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Vc3Telecine to be of type string, got %T instead", value)
+				}
+				sv.Telecine = types.Vc3Telecine(jtv)
+			}
+
+		case "vc3Class":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Vc3Class to be of type string, got %T instead", value)
+				}
+				sv.Vc3Class = types.Vc3Class(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentVideoCodecSettings(v **types.VideoCodecSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16930,6 +17377,11 @@ func awsRestjson1_deserializeDocumentVideoCodecSettings(v **types.VideoCodecSett
 		switch key {
 		case "av1Settings":
 			if err := awsRestjson1_deserializeDocumentAv1Settings(&sv.Av1Settings, value); err != nil {
+				return err
+			}
+
+		case "avcIntraSettings":
+			if err := awsRestjson1_deserializeDocumentAvcIntraSettings(&sv.AvcIntraSettings, value); err != nil {
 				return err
 			}
 
@@ -16964,6 +17416,11 @@ func awsRestjson1_deserializeDocumentVideoCodecSettings(v **types.VideoCodecSett
 
 		case "proresSettings":
 			if err := awsRestjson1_deserializeDocumentProresSettings(&sv.ProresSettings, value); err != nil {
+				return err
+			}
+
+		case "vc3Settings":
+			if err := awsRestjson1_deserializeDocumentVc3Settings(&sv.Vc3Settings, value); err != nil {
 				return err
 			}
 

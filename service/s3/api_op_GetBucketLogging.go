@@ -16,9 +16,11 @@ import (
 // operations are related to GetBucketLogging:
 //
 //     * CreateBucket
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
 //
 //     *
 // PutBucketLogging
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLogging.html)
 func (c *Client) GetBucketLogging(ctx context.Context, params *GetBucketLoggingInput, optFns ...func(*Options)) (*GetBucketLoggingOutput, error) {
 	if params == nil {
 		params = &GetBucketLoggingInput{}
@@ -40,6 +42,10 @@ type GetBucketLoggingInput struct {
 	//
 	// This member is required.
 	Bucket *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 }
 
 type GetBucketLoggingOutput struct {

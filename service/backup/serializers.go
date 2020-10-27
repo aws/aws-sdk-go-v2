@@ -2940,6 +2940,13 @@ func awsRestjson1_serializeOpDocumentStartBackupJobInput(v *StartBackupJobInput,
 	object := value.Object()
 	defer object.Close()
 
+	if v.BackupOptions != nil {
+		ok := object.Key("BackupOptions")
+		if err := awsRestjson1_serializeDocumentBackupOptions(v.BackupOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.BackupVaultName != nil {
 		ok := object.Key("BackupVaultName")
 		ok.String(*v.BackupVaultName)
@@ -3699,9 +3706,67 @@ func awsRestjson1_serializeOpDocumentUpdateRegionSettingsInput(v *UpdateRegionSe
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAdvancedBackupSetting(v *types.AdvancedBackupSetting, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BackupOptions != nil {
+		ok := object.Key("BackupOptions")
+		if err := awsRestjson1_serializeDocumentBackupOptions(v.BackupOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ResourceType != nil {
+		ok := object.Key("ResourceType")
+		ok.String(*v.ResourceType)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAdvancedBackupSettings(v []*types.AdvancedBackupSetting, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			av.Null()
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentAdvancedBackupSetting(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBackupOptions(v map[string]*string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			om.Null()
+			continue
+		}
+		om.String(*v[key])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentBackupPlanInput(v *types.BackupPlanInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AdvancedBackupSettings != nil {
+		ok := object.Key("AdvancedBackupSettings")
+		if err := awsRestjson1_serializeDocumentAdvancedBackupSettings(v.AdvancedBackupSettings, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.BackupPlanName != nil {
 		ok := object.Key("BackupPlanName")

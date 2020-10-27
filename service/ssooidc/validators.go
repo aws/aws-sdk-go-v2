@@ -86,14 +86,14 @@ func validateOpCreateTokenInput(v *CreateTokenInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateTokenInput"}
-	if v.ClientId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
-	}
 	if v.GrantType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GrantType"))
 	}
 	if v.DeviceCode == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeviceCode"))
+	}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
 	}
 	if v.ClientSecret == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientSecret"))
@@ -131,11 +131,11 @@ func validateOpStartDeviceAuthorizationInput(v *StartDeviceAuthorizationInput) e
 	if v.ClientSecret == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientSecret"))
 	}
-	if v.StartUrl == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StartUrl"))
-	}
 	if v.ClientId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if v.StartUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartUrl"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

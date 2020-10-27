@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Gets information about a specific traffic policy version.
+// Gets information about a specific traffic policy version. For information about
+// how of deleting a traffic policy affects the response from GetTrafficPolicy, see
+// DeleteTrafficPolicy
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_DeleteTrafficPolicy.html).
 func (c *Client) GetTrafficPolicy(ctx context.Context, params *GetTrafficPolicyInput, optFns ...func(*Options)) (*GetTrafficPolicyOutput, error) {
 	if params == nil {
 		params = &GetTrafficPolicyInput{}

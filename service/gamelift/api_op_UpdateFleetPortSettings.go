@@ -58,7 +58,7 @@ func (c *Client) UpdateFleetPortSettings(ctx context.Context, params *UpdateFlee
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type UpdateFleetPortSettingsInput struct {
 
 	// A unique identifier for a fleet to update port settings for. You can use either
@@ -74,7 +74,7 @@ type UpdateFleetPortSettingsInput struct {
 	InboundPermissionRevocations []*types.IpPermission
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type UpdateFleetPortSettingsOutput struct {
 
 	// A unique identifier for a fleet that was updated.

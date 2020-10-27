@@ -88,6 +88,13 @@ func awsRestjson1_serializeOpHttpBindingsInvokeEndpointInput(v *InvokeEndpointIn
 		}
 	}
 
+	if v.CustomAttributes != nil {
+		locationName := "X-Amzn-Sagemaker-Custom-Attributes"
+		if len(*v.CustomAttributes) > 0 {
+			encoder.SetHeader(locationName).String(*v.CustomAttributes)
+		}
+	}
+
 	if v.EndpointName == nil {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member EndpointName must not be empty")}
 	}
@@ -97,6 +104,20 @@ func awsRestjson1_serializeOpHttpBindingsInvokeEndpointInput(v *InvokeEndpointIn
 		}
 		if err := encoder.SetURI("EndpointName").String(*v.EndpointName); err != nil {
 			return err
+		}
+	}
+
+	if v.TargetModel != nil {
+		locationName := "X-Amzn-Sagemaker-Target-Model"
+		if len(*v.TargetModel) > 0 {
+			encoder.SetHeader(locationName).String(*v.TargetModel)
+		}
+	}
+
+	if v.TargetVariant != nil {
+		locationName := "X-Amzn-Sagemaker-Target-Variant"
+		if len(*v.TargetVariant) > 0 {
+			encoder.SetHeader(locationName).String(*v.TargetVariant)
 		}
 	}
 

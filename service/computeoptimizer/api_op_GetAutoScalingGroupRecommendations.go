@@ -11,15 +11,11 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Returns Auto Scaling group recommendations. AWS Compute Optimizer currently
-// generates recommendations for Auto Scaling groups that are configured to run
-// instances of the M, C, R, T, and X instance families. The service does not
-// generate recommendations for Auto Scaling groups that have a scaling policy
-// attached to them, or that do not have the same values for desired, minimum, and
-// maximum capacity. In order for Compute Optimizer to analyze your Auto Scaling
-// groups, they must be of a fixed size. For more information, see the AWS Compute
-// Optimizer User Guide
-// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/what-is.html).
+// Returns Auto Scaling group recommendations. AWS Compute Optimizer generates
+// recommendations for Amazon EC2 Auto Scaling groups that meet a specific set of
+// requirements. For more information, see the Supported resources and requirements
+// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html) in
+// the AWS Compute Optimizer User Guide.
 func (c *Client) GetAutoScalingGroupRecommendations(ctx context.Context, params *GetAutoScalingGroupRecommendationsInput, optFns ...func(*Options)) (*GetAutoScalingGroupRecommendationsOutput, error) {
 	if params == nil {
 		params = &GetAutoScalingGroupRecommendationsInput{}

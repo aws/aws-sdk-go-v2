@@ -53,7 +53,7 @@ func (c *Client) CreatePlayerSession(ctx context.Context, params *CreatePlayerSe
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type CreatePlayerSessionInput struct {
 
 	// A unique identifier for the game session to add a player to.
@@ -71,7 +71,7 @@ type CreatePlayerSessionInput struct {
 	PlayerData *string
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type CreatePlayerSessionOutput struct {
 
 	// Object that describes the newly created player session record.

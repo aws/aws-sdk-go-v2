@@ -11,8 +11,12 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Updates customizations associated with the QuickSight subscription on your AWS
-// account.
+// Updates Amazon QuickSight customizations the current AWS Region. Currently, the
+// only customization you can use is a theme. You can use customizations for your
+// AWS account or, if you specify a namespace, for a QuickSight namespace instead.
+// Customizations that apply to a namespace override customizations that apply to
+// an AWS account. To find out which customizations apply, use the
+// DescribeAccountCustomization API operation.
 func (c *Client) UpdateAccountCustomization(ctx context.Context, params *UpdateAccountCustomizationInput, optFns ...func(*Options)) (*UpdateAccountCustomizationOutput, error) {
 	if params == nil {
 		params = &UpdateAccountCustomizationInput{}
@@ -30,7 +34,7 @@ func (c *Client) UpdateAccountCustomization(ctx context.Context, params *UpdateA
 
 type UpdateAccountCustomizationInput struct {
 
-	// The customizations you want to update in QuickSight.
+	// The QuickSight customizations you're updating in the current AWS Region.
 	//
 	// This member is required.
 	AccountCustomization *types.AccountCustomization
@@ -41,14 +45,18 @@ type UpdateAccountCustomizationInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// The namespace associated with the customization that you're updating.
+	// The namespace that you want to update QuickSight customizations for.
 	Namespace *string
 }
 
 type UpdateAccountCustomizationOutput struct {
 
-	// The customizations associated with your QuickSight subscription.
+	// The QuickSight customizations you're updating in the current AWS Region.
 	AccountCustomization *types.AccountCustomization
+
+	// The Amazon Resource Name (ARN) for the updated customization for this AWS
+	// account.
+	Arn *string
 
 	// The ID for the AWS account that you want to update QuickSight customizations
 	// for.
@@ -59,6 +67,9 @@ type UpdateAccountCustomizationOutput struct {
 
 	// The AWS request ID for this operation.
 	RequestId *string
+
+	// The HTTP status of the request.
+	Status *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -170,6 +170,26 @@ func (m *validateOpGetTraceSummaries) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListTagsForResource struct {
+}
+
+func (*validateOpListTagsForResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTagsForResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutEncryptionConfig struct {
 }
 
@@ -230,6 +250,46 @@ func (m *validateOpPutTraceSegments) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpTagResource struct {
+}
+
+func (*validateOpTagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUntagResource struct {
+}
+
+func (*validateOpUntagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UntagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUntagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateSamplingRule struct {
 }
 
@@ -282,6 +342,10 @@ func addOpGetTraceSummariesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTraceSummaries{}, middleware.After)
 }
 
+func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
 func addOpPutEncryptionConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutEncryptionConfig{}, middleware.After)
 }
@@ -294,6 +358,14 @@ func addOpPutTraceSegmentsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutTraceSegments{}, middleware.After)
 }
 
+func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
+}
+
+func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
 func addOpUpdateSamplingRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateSamplingRule{}, middleware.After)
 }
@@ -303,35 +375,35 @@ func validateSamplingRule(v *types.SamplingRule) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SamplingRule"}
-	if v.FixedRate == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FixedRate"))
-	}
-	if v.ServiceType == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServiceType"))
-	}
-	if v.Version == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Version"))
-	}
-	if v.HTTPMethod == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("HTTPMethod"))
-	}
-	if v.ServiceName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
-	}
-	if v.ReservoirSize == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ReservoirSize"))
-	}
-	if v.Host == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Host"))
-	}
-	if v.ResourceARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
-	}
 	if v.Priority == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
 	}
 	if v.URLPath == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("URLPath"))
+	}
+	if v.Host == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Host"))
+	}
+	if v.ServiceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
+	}
+	if v.FixedRate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FixedRate"))
+	}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if v.Version == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Version"))
+	}
+	if v.ReservoirSize == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReservoirSize"))
+	}
+	if v.ServiceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceType"))
+	}
+	if v.HTTPMethod == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HTTPMethod"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -345,20 +417,20 @@ func validateSamplingStatisticsDocument(v *types.SamplingStatisticsDocument) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SamplingStatisticsDocument"}
-	if v.SampledCount == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SampledCount"))
-	}
 	if v.RequestCount == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RequestCount"))
 	}
-	if v.RuleName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RuleName"))
+	if v.ClientID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientID"))
+	}
+	if v.SampledCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SampledCount"))
 	}
 	if v.Timestamp == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Timestamp"))
 	}
-	if v.ClientID == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientID"))
+	if v.RuleName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -374,6 +446,41 @@ func validateSamplingStatisticsDocumentList(v []*types.SamplingStatisticsDocumen
 	invalidParams := smithy.InvalidParamsError{Context: "SamplingStatisticsDocumentList"}
 	for i := range v {
 		if err := validateSamplingStatisticsDocument(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTag(v *types.Tag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTagList(v []*types.Tag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
+	for i := range v {
+		if err := validateTag(v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -439,6 +546,11 @@ func validateOpCreateGroupInput(v *CreateGroupInput) error {
 	if v.GroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GroupName"))
 	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -456,6 +568,11 @@ func validateOpCreateSamplingRuleInput(v *CreateSamplingRuleInput) error {
 	} else if v.SamplingRule != nil {
 		if err := validateSamplingRule(v.SamplingRule); err != nil {
 			invalidParams.AddNested("SamplingRule", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -507,11 +624,11 @@ func validateOpGetTimeSeriesServiceStatisticsInput(v *GetTimeSeriesServiceStatis
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetTimeSeriesServiceStatisticsInput"}
-	if v.StartTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
-	}
 	if v.EndTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -545,6 +662,21 @@ func validateOpGetTraceSummariesInput(v *GetTraceSummariesInput) error {
 	}
 	if v.StartTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -594,6 +726,46 @@ func validateOpPutTraceSegmentsInput(v *PutTraceSegmentsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "PutTraceSegmentsInput"}
 	if v.TraceSegmentDocuments == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TraceSegmentDocuments"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTagResourceInput(v *TagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	} else if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUntagResourceInput(v *UntagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -30,7 +30,7 @@ import (
 // automatically encrypted. Volumes that are created from encrypted snapshots are
 // also automatically encrypted. Your encrypted volumes and any associated
 // snapshots always remain protected. You can tag your snapshots during creation.
-// For more information, see Tagging Your Amazon EC2 Resources
+// For more information, see Tagging your Amazon EC2 resources
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html) in the
 // Amazon Elastic Compute Cloud User Guide. For more information, see Amazon
 // Elastic Block Store

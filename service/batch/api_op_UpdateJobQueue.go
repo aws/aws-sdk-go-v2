@@ -46,7 +46,9 @@ type UpdateJobQueueInput struct {
 	// preference over a job queue with a priority value of 1.
 	Priority *int32
 
-	// Describes the queue's ability to accept new jobs.
+	// Describes the queue's ability to accept new jobs. If the job queue state is
+	// ENABLED, it is able to accept jobs. If the job queue state is DISABLED, new jobs
+	// cannot be added to the queue, but jobs already in the queue can finish.
 	State types.JQState
 }
 

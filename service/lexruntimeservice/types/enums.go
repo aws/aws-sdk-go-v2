@@ -11,12 +11,32 @@ const (
 	ConfirmationStatusDenied    ConfirmationStatus = "Denied"
 )
 
+// Values returns all known values for ConfirmationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConfirmationStatus) Values() []ConfirmationStatus {
+	return []ConfirmationStatus{
+		"None",
+		"Confirmed",
+		"Denied",
+	}
+}
+
 type ContentType string
 
 // Enum values for ContentType
 const (
 	ContentTypeGeneric ContentType = "application/vnd.amazonaws.card.generic"
 )
+
+// Values returns all known values for ContentType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ContentType) Values() []ContentType {
+	return []ContentType{
+		"application/vnd.amazonaws.card.generic",
+	}
+}
 
 type DialogActionType string
 
@@ -28,6 +48,19 @@ const (
 	DialogActionTypeClose          DialogActionType = "Close"
 	DialogActionTypeDelegate       DialogActionType = "Delegate"
 )
+
+// Values returns all known values for DialogActionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DialogActionType) Values() []DialogActionType {
+	return []DialogActionType{
+		"ElicitIntent",
+		"ConfirmIntent",
+		"ElicitSlot",
+		"Close",
+		"Delegate",
+	}
+}
 
 type DialogState string
 
@@ -41,6 +74,20 @@ const (
 	DialogStateFailed                DialogState = "Failed"
 )
 
+// Values returns all known values for DialogState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DialogState) Values() []DialogState {
+	return []DialogState{
+		"ElicitIntent",
+		"ConfirmIntent",
+		"ElicitSlot",
+		"Fulfilled",
+		"ReadyForFulfillment",
+		"Failed",
+	}
+}
+
 type FulfillmentState string
 
 // Enum values for FulfillmentState
@@ -49,6 +96,17 @@ const (
 	FulfillmentStateFailed                FulfillmentState = "Failed"
 	FulfillmentStateReady_for_fulfillment FulfillmentState = "ReadyForFulfillment"
 )
+
+// Values returns all known values for FulfillmentState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FulfillmentState) Values() []FulfillmentState {
+	return []FulfillmentState{
+		"Fulfilled",
+		"Failed",
+		"ReadyForFulfillment",
+	}
+}
 
 type MessageFormatType string
 
@@ -59,3 +117,15 @@ const (
 	MessageFormatTypeSsml           MessageFormatType = "SSML"
 	MessageFormatTypeComposite      MessageFormatType = "Composite"
 )
+
+// Values returns all known values for MessageFormatType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MessageFormatType) Values() []MessageFormatType {
+	return []MessageFormatType{
+		"PlainText",
+		"CustomPayload",
+		"SSML",
+		"Composite",
+	}
+}

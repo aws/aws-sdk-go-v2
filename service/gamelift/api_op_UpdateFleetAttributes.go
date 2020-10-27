@@ -56,7 +56,7 @@ func (c *Client) UpdateFleetAttributes(ctx context.Context, params *UpdateFleetA
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type UpdateFleetAttributesInput struct {
 
 	// A unique identifier for a fleet to update attribute metadata for. You can use
@@ -95,7 +95,7 @@ type UpdateFleetAttributesInput struct {
 	ResourceCreationLimitPolicy *types.ResourceCreationLimitPolicy
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type UpdateFleetAttributesOutput struct {
 
 	// A unique identifier for a fleet that was updated. Use either the fleet ID or ARN

@@ -12,8 +12,8 @@ import (
 )
 
 // Retrieves all tags that are assigned to a GameLift resource. Resource tags are
-// used to organize AWS resources for a range of purposes. This action handles the
-// permissions necessary to manage tags for the following GameLift resource
+// used to organize AWS resources for a range of purposes. This operation handles
+// the permissions necessary to manage tags for the following GameLift resource
 // types:
 //
 //     * Build
@@ -66,7 +66,7 @@ type ListTagsForResourceInput struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) that is
 	// assigned to and uniquely identifies the GameLift resource that you want to
 	// retrieve tags for. GameLift resource ARNs are included in the data object for
-	// the resource, which can be retrieved by calling a List or Describe action for
+	// the resource, which can be retrieved by calling a List or Describe operation for
 	// the resource type.
 	//
 	// This member is required.

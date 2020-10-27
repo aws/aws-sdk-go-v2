@@ -35,11 +35,15 @@ import (
 //
 //     *
 // PutBucketMetricsConfiguration
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketMetricsConfiguration.html)
 //
-//     * GetBucketMetricsConfiguration
 //
-//     *
-// DeleteBucketMetricsConfiguration
+// * GetBucketMetricsConfiguration
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetricsConfiguration.html)
+//
+//
+// * DeleteBucketMetricsConfiguration
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetricsConfiguration.html)
 func (c *Client) ListBucketMetricsConfigurations(ctx context.Context, params *ListBucketMetricsConfigurationsInput, optFns ...func(*Options)) (*ListBucketMetricsConfigurationsOutput, error) {
 	if params == nil {
 		params = &ListBucketMetricsConfigurationsInput{}
@@ -67,6 +71,10 @@ type ListBucketMetricsConfigurationsInput struct {
 	// response to continue the listing. The continuation token is an opaque value that
 	// Amazon S3 understands.
 	ContinuationToken *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 }
 
 type ListBucketMetricsConfigurationsOutput struct {

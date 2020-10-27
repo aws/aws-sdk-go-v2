@@ -5152,6 +5152,15 @@ func awsAwsjson11_deserializeDocumentFacetResult(v **types.FacetResult, value in
 				return err
 			}
 
+		case "DocumentAttributeValueType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DocumentAttributeValueType to be of type string, got %T instead", value)
+				}
+				sv.DocumentAttributeValueType = types.DocumentAttributeValueType(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -5270,6 +5279,15 @@ func awsAwsjson11_deserializeDocumentFaqSummary(v **types.FaqSummary, value inte
 					return err
 				}
 				sv.CreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
+		case "FileFormat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FaqFileFormat to be of type string, got %T instead", value)
+				}
+				sv.FileFormat = types.FaqFileFormat(jtv)
 			}
 
 		case "Id":
@@ -5872,6 +5890,11 @@ func awsAwsjson11_deserializeDocumentQueryResultItem(v **types.QueryResultItem, 
 				sv.Id = &jtv
 			}
 
+		case "ScoreAttributes":
+			if err := awsAwsjson11_deserializeDocumentScoreAttributes(&sv.ScoreAttributes, value); err != nil {
+				return err
+			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6201,6 +6224,11 @@ func awsAwsjson11_deserializeDocumentS3DataSourceConfiguration(v **types.S3DataS
 
 		case "ExclusionPatterns":
 			if err := awsAwsjson11_deserializeDocumentDataSourceInclusionsExclusionsStrings(&sv.ExclusionPatterns, value); err != nil {
+				return err
+			}
+
+		case "InclusionPatterns":
+			if err := awsAwsjson11_deserializeDocumentDataSourceInclusionsExclusionsStrings(&sv.InclusionPatterns, value); err != nil {
 				return err
 			}
 
@@ -6818,6 +6846,46 @@ func awsAwsjson11_deserializeDocumentSalesforceStandardObjectConfigurationList(v
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentScoreAttributes(v **types.ScoreAttributes, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ScoreAttributes
+	if *v == nil {
+		sv = &types.ScoreAttributes{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ScoreConfidence":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ScoreConfidence to be of type string, got %T instead", value)
+				}
+				sv.ScoreConfidence = types.ScoreConfidence(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -8213,6 +8281,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeFaqOutput(v **DescribeFaqOutput, 
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.ErrorMessage = &jtv
+			}
+
+		case "FileFormat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FaqFileFormat to be of type string, got %T instead", value)
+				}
+				sv.FileFormat = types.FaqFileFormat(jtv)
 			}
 
 		case "Id":

@@ -12,9 +12,9 @@ import (
 	"time"
 )
 
-// Gets historical metric data from the specified Amazon Connect instance. For more
-// information, see Historical Metrics Reports
-// (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics.html)
+// Gets historical metric data from the specified Amazon Connect instance. For a
+// description of each historical metric, see Historical Metrics Definitions
+// (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html)
 // in the Amazon Connect Administrator Guide.
 func (c *Client) GetMetricData(ctx context.Context, params *GetMetricDataInput, optFns ...func(*Options)) (*GetMetricDataOutput, error) {
 	if params == nil {
@@ -45,7 +45,7 @@ type GetMetricDataInput struct {
 	// The queues, up to 100, or channels, to use to filter the metrics returned.
 	// Metric data is retrieved only for the resources associated with the queues or
 	// channels included in the filter. You can include both queue IDs and queue ARNs
-	// in the same request. The only supported channel is VOICE.
+	// in the same request. Both VOICE and CHAT channels are supported.
 	//
 	// This member is required.
 	Filters *types.Filters

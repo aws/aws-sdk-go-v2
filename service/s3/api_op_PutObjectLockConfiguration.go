@@ -43,6 +43,10 @@ type PutObjectLockConfigurationInput struct {
 	// The MD5 hash for the request body.
 	ContentMD5 *string
 
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
+
 	// The Object Lock configuration that you want to apply to the specified bucket.
 	ObjectLockConfiguration *types.ObjectLockConfiguration
 

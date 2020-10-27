@@ -12,10 +12,9 @@ import (
 	"io"
 )
 
-// Writes a block of data to a block in the snapshot. If the specified block
-// contains data, the existing data is overwritten. The target snapshot must be in
-// the pending state. Data written to a snapshot must be aligned with 512-byte
-// sectors.
+// Writes a block of data to a snapshot. If the specified block contains data, the
+// existing data is overwritten. The target snapshot must be in the pending state.
+// Data written to a snapshot must be aligned with 512-byte sectors.
 func (c *Client) PutSnapshotBlock(ctx context.Context, params *PutSnapshotBlockInput, optFns ...func(*Options)) (*PutSnapshotBlockOutput, error) {
 	if params == nil {
 		params = &PutSnapshotBlockInput{}
@@ -48,10 +47,10 @@ type PutSnapshotBlockInput struct {
 	// This member is required.
 	BlockData io.Reader
 
-	// The block index of the block in which to write the data. A block index is the
-	// offset position of a block within a snapshot, and it is used to identify the
-	// block. To identify the logical offset of the data in the logical volume,
-	// multiply the block index with the block size (Block index * 512 bytes).
+	// The block index of the block in which to write the data. A block index is a
+	// logical index in units of 512 KiB blocks. To identify the block index, divide
+	// the logical offset of the data in the logical volume by the block size (logical
+	// offset of data/524288). The logical offset of the data must be 512 KiB aligned.
 	//
 	// This member is required.
 	BlockIndex *int32

@@ -226,6 +226,15 @@ func awsRestjson1_deserializeOpDocumentCreateBotVersionOutput(v **CreateBotVersi
 				sv.DetectSentiment = &jtv
 			}
 
+		case "enableModelImprovements":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnableModelImprovements = &jtv
+			}
+
 		case "failureReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1914,6 +1923,15 @@ func awsRestjson1_deserializeOpDocumentGetBotOutput(v **GetBotOutput, value inte
 				sv.DetectSentiment = &jtv
 			}
 
+		case "enableModelImprovements":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnableModelImprovements = &jtv
+			}
+
 		case "failureReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1970,6 +1988,19 @@ func awsRestjson1_deserializeOpDocumentGetBotOutput(v **GetBotOutput, value inte
 					return fmt.Errorf("expected BotName to be of type string, got %T instead", value)
 				}
 				sv.Name = &jtv
+			}
+
+		case "nluIntentConfidenceThreshold":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ConfidenceThreshold to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.NluIntentConfidenceThreshold = &f64
 			}
 
 		case "status":
@@ -5742,6 +5773,15 @@ func awsRestjson1_deserializeOpDocumentPutBotOutput(v **PutBotOutput, value inte
 				sv.DetectSentiment = &jtv
 			}
 
+		case "enableModelImprovements":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnableModelImprovements = &jtv
+			}
+
 		case "failureReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5798,6 +5838,19 @@ func awsRestjson1_deserializeOpDocumentPutBotOutput(v **PutBotOutput, value inte
 					return fmt.Errorf("expected BotName to be of type string, got %T instead", value)
 				}
 				sv.Name = &jtv
+			}
+
+		case "nluIntentConfidenceThreshold":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ConfidenceThreshold to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.NluIntentConfidenceThreshold = &f64
 			}
 
 		case "status":

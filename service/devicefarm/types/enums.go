@@ -11,6 +11,17 @@ const (
 	ArtifactCategoryLog        ArtifactCategory = "LOG"
 )
 
+// Values returns all known values for ArtifactCategory. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ArtifactCategory) Values() []ArtifactCategory {
+	return []ArtifactCategory{
+		"SCREENSHOT",
+		"FILE",
+		"LOG",
+	}
+}
+
 type ArtifactType string
 
 // Enum values for ArtifactType
@@ -45,6 +56,42 @@ const (
 	ArtifactTypeTestspec_output          ArtifactType = "TESTSPEC_OUTPUT"
 )
 
+// Values returns all known values for ArtifactType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ArtifactType) Values() []ArtifactType {
+	return []ArtifactType{
+		"UNKNOWN",
+		"SCREENSHOT",
+		"DEVICE_LOG",
+		"MESSAGE_LOG",
+		"VIDEO_LOG",
+		"RESULT_LOG",
+		"SERVICE_LOG",
+		"WEBKIT_LOG",
+		"INSTRUMENTATION_OUTPUT",
+		"EXERCISER_MONKEY_OUTPUT",
+		"CALABASH_JSON_OUTPUT",
+		"CALABASH_PRETTY_OUTPUT",
+		"CALABASH_STANDARD_OUTPUT",
+		"CALABASH_JAVA_XML_OUTPUT",
+		"AUTOMATION_OUTPUT",
+		"APPIUM_SERVER_OUTPUT",
+		"APPIUM_JAVA_OUTPUT",
+		"APPIUM_JAVA_XML_OUTPUT",
+		"APPIUM_PYTHON_OUTPUT",
+		"APPIUM_PYTHON_XML_OUTPUT",
+		"EXPLORER_EVENT_LOG",
+		"EXPLORER_SUMMARY_LOG",
+		"APPLICATION_CRASH_REPORT",
+		"XCTEST_LOG",
+		"VIDEO",
+		"CUSTOMER_ARTIFACT",
+		"CUSTOMER_ARTIFACT_LOG",
+		"TESTSPEC_OUTPUT",
+	}
+}
+
 type BillingMethod string
 
 // Enum values for BillingMethod
@@ -53,12 +100,31 @@ const (
 	BillingMethodUnmetered BillingMethod = "UNMETERED"
 )
 
+// Values returns all known values for BillingMethod. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BillingMethod) Values() []BillingMethod {
+	return []BillingMethod{
+		"METERED",
+		"UNMETERED",
+	}
+}
+
 type CurrencyCode string
 
 // Enum values for CurrencyCode
 const (
 	CurrencyCodeUsd CurrencyCode = "USD"
 )
+
+// Values returns all known values for CurrencyCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (CurrencyCode) Values() []CurrencyCode {
+	return []CurrencyCode{
+		"USD",
+	}
+}
 
 type DeviceAttribute string
 
@@ -79,6 +145,27 @@ const (
 	DeviceAttributeAvailability          DeviceAttribute = "AVAILABILITY"
 )
 
+// Values returns all known values for DeviceAttribute. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeviceAttribute) Values() []DeviceAttribute {
+	return []DeviceAttribute{
+		"ARN",
+		"PLATFORM",
+		"FORM_FACTOR",
+		"MANUFACTURER",
+		"REMOTE_ACCESS_ENABLED",
+		"REMOTE_DEBUG_ENABLED",
+		"APPIUM_VERSION",
+		"INSTANCE_ARN",
+		"INSTANCE_LABELS",
+		"FLEET_TYPE",
+		"OS_VERSION",
+		"MODEL",
+		"AVAILABILITY",
+	}
+}
+
 type DeviceAvailability string
 
 // Enum values for DeviceAvailability
@@ -88,6 +175,18 @@ const (
 	DeviceAvailabilityAvailable               DeviceAvailability = "AVAILABLE"
 	DeviceAvailabilityHighly_available        DeviceAvailability = "HIGHLY_AVAILABLE"
 )
+
+// Values returns all known values for DeviceAvailability. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeviceAvailability) Values() []DeviceAvailability {
+	return []DeviceAvailability{
+		"TEMPORARY_NOT_AVAILABLE",
+		"BUSY",
+		"AVAILABLE",
+		"HIGHLY_AVAILABLE",
+	}
+}
 
 type DeviceFilterAttribute string
 
@@ -107,6 +206,26 @@ const (
 	DeviceFilterAttributeFleet_type            DeviceFilterAttribute = "FLEET_TYPE"
 )
 
+// Values returns all known values for DeviceFilterAttribute. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeviceFilterAttribute) Values() []DeviceFilterAttribute {
+	return []DeviceFilterAttribute{
+		"ARN",
+		"PLATFORM",
+		"OS_VERSION",
+		"MODEL",
+		"AVAILABILITY",
+		"FORM_FACTOR",
+		"MANUFACTURER",
+		"REMOTE_ACCESS_ENABLED",
+		"REMOTE_DEBUG_ENABLED",
+		"INSTANCE_ARN",
+		"INSTANCE_LABELS",
+		"FLEET_TYPE",
+	}
+}
+
 type DeviceFormFactor string
 
 // Enum values for DeviceFormFactor
@@ -114,6 +233,16 @@ const (
 	DeviceFormFactorPhone  DeviceFormFactor = "PHONE"
 	DeviceFormFactorTablet DeviceFormFactor = "TABLET"
 )
+
+// Values returns all known values for DeviceFormFactor. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeviceFormFactor) Values() []DeviceFormFactor {
+	return []DeviceFormFactor{
+		"PHONE",
+		"TABLET",
+	}
+}
 
 type DevicePlatform string
 
@@ -123,6 +252,16 @@ const (
 	DevicePlatformIos     DevicePlatform = "IOS"
 )
 
+// Values returns all known values for DevicePlatform. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DevicePlatform) Values() []DevicePlatform {
+	return []DevicePlatform{
+		"ANDROID",
+		"IOS",
+	}
+}
+
 type DevicePoolType string
 
 // Enum values for DevicePoolType
@@ -130,6 +269,16 @@ const (
 	DevicePoolTypeCurated DevicePoolType = "CURATED"
 	DevicePoolTypePrivate DevicePoolType = "PRIVATE"
 )
+
+// Values returns all known values for DevicePoolType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DevicePoolType) Values() []DevicePoolType {
+	return []DevicePoolType{
+		"CURATED",
+		"PRIVATE",
+	}
+}
 
 type ExecutionResult string
 
@@ -144,6 +293,21 @@ const (
 	ExecutionResultStopped ExecutionResult = "STOPPED"
 )
 
+// Values returns all known values for ExecutionResult. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExecutionResult) Values() []ExecutionResult {
+	return []ExecutionResult{
+		"PENDING",
+		"PASSED",
+		"WARNED",
+		"FAILED",
+		"SKIPPED",
+		"ERRORED",
+		"STOPPED",
+	}
+}
+
 type ExecutionResultCode string
 
 // Enum values for ExecutionResultCode
@@ -151,6 +315,16 @@ const (
 	ExecutionResultCodeParsing_failed            ExecutionResultCode = "PARSING_FAILED"
 	ExecutionResultCodeVpc_endpoint_setup_failed ExecutionResultCode = "VPC_ENDPOINT_SETUP_FAILED"
 )
+
+// Values returns all known values for ExecutionResultCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExecutionResultCode) Values() []ExecutionResultCode {
+	return []ExecutionResultCode{
+		"PARSING_FAILED",
+		"VPC_ENDPOINT_SETUP_FAILED",
+	}
+}
 
 type ExecutionStatus string
 
@@ -167,6 +341,23 @@ const (
 	ExecutionStatusStopping            ExecutionStatus = "STOPPING"
 )
 
+// Values returns all known values for ExecutionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExecutionStatus) Values() []ExecutionStatus {
+	return []ExecutionStatus{
+		"PENDING",
+		"PENDING_CONCURRENCY",
+		"PENDING_DEVICE",
+		"PROCESSING",
+		"SCHEDULING",
+		"PREPARING",
+		"RUNNING",
+		"COMPLETED",
+		"STOPPING",
+	}
+}
+
 type InstanceStatus string
 
 // Enum values for InstanceStatus
@@ -177,6 +368,18 @@ const (
 	InstanceStatusNot_available InstanceStatus = "NOT_AVAILABLE"
 )
 
+// Values returns all known values for InstanceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceStatus) Values() []InstanceStatus {
+	return []InstanceStatus{
+		"IN_USE",
+		"PREPARING",
+		"AVAILABLE",
+		"NOT_AVAILABLE",
+	}
+}
+
 type InteractionMode string
 
 // Enum values for InteractionMode
@@ -186,6 +389,17 @@ const (
 	InteractionModeVideo_only  InteractionMode = "VIDEO_ONLY"
 )
 
+// Values returns all known values for InteractionMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InteractionMode) Values() []InteractionMode {
+	return []InteractionMode{
+		"INTERACTIVE",
+		"NO_VIDEO",
+		"VIDEO_ONLY",
+	}
+}
+
 type NetworkProfileType string
 
 // Enum values for NetworkProfileType
@@ -193,6 +407,16 @@ const (
 	NetworkProfileTypeCurated NetworkProfileType = "CURATED"
 	NetworkProfileTypePrivate NetworkProfileType = "PRIVATE"
 )
+
+// Values returns all known values for NetworkProfileType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NetworkProfileType) Values() []NetworkProfileType {
+	return []NetworkProfileType{
+		"CURATED",
+		"PRIVATE",
+	}
+}
 
 type OfferingTransactionType string
 
@@ -203,6 +427,17 @@ const (
 	OfferingTransactionTypeSystem   OfferingTransactionType = "SYSTEM"
 )
 
+// Values returns all known values for OfferingTransactionType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OfferingTransactionType) Values() []OfferingTransactionType {
+	return []OfferingTransactionType{
+		"PURCHASE",
+		"RENEW",
+		"SYSTEM",
+	}
+}
+
 type OfferingType string
 
 // Enum values for OfferingType
@@ -210,12 +445,30 @@ const (
 	OfferingTypeRecurring OfferingType = "RECURRING"
 )
 
+// Values returns all known values for OfferingType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (OfferingType) Values() []OfferingType {
+	return []OfferingType{
+		"RECURRING",
+	}
+}
+
 type RecurringChargeFrequency string
 
 // Enum values for RecurringChargeFrequency
 const (
 	RecurringChargeFrequencyMonthly RecurringChargeFrequency = "MONTHLY"
 )
+
+// Values returns all known values for RecurringChargeFrequency. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RecurringChargeFrequency) Values() []RecurringChargeFrequency {
+	return []RecurringChargeFrequency{
+		"MONTHLY",
+	}
+}
 
 type RuleOperator string
 
@@ -230,6 +483,22 @@ const (
 	RuleOperatorNot_in                 RuleOperator = "NOT_IN"
 	RuleOperatorContains               RuleOperator = "CONTAINS"
 )
+
+// Values returns all known values for RuleOperator. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (RuleOperator) Values() []RuleOperator {
+	return []RuleOperator{
+		"EQUALS",
+		"LESS_THAN",
+		"LESS_THAN_OR_EQUALS",
+		"GREATER_THAN",
+		"GREATER_THAN_OR_EQUALS",
+		"IN",
+		"NOT_IN",
+		"CONTAINS",
+	}
+}
 
 type SampleType string
 
@@ -254,6 +523,31 @@ const (
 	SampleTypeOpengl_max_drawtime SampleType = "OPENGL_MAX_DRAWTIME"
 )
 
+// Values returns all known values for SampleType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SampleType) Values() []SampleType {
+	return []SampleType{
+		"CPU",
+		"MEMORY",
+		"THREADS",
+		"RX_RATE",
+		"TX_RATE",
+		"RX",
+		"TX",
+		"NATIVE_FRAMES",
+		"NATIVE_FPS",
+		"NATIVE_MIN_DRAWTIME",
+		"NATIVE_AVG_DRAWTIME",
+		"NATIVE_MAX_DRAWTIME",
+		"OPENGL_FRAMES",
+		"OPENGL_FPS",
+		"OPENGL_MIN_DRAWTIME",
+		"OPENGL_AVG_DRAWTIME",
+		"OPENGL_MAX_DRAWTIME",
+	}
+}
+
 type TestGridSessionArtifactCategory string
 
 // Enum values for TestGridSessionArtifactCategory
@@ -261,6 +555,17 @@ const (
 	TestGridSessionArtifactCategoryVideo TestGridSessionArtifactCategory = "VIDEO"
 	TestGridSessionArtifactCategoryLog   TestGridSessionArtifactCategory = "LOG"
 )
+
+// Values returns all known values for TestGridSessionArtifactCategory. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (TestGridSessionArtifactCategory) Values() []TestGridSessionArtifactCategory {
+	return []TestGridSessionArtifactCategory{
+		"VIDEO",
+		"LOG",
+	}
+}
 
 type TestGridSessionArtifactType string
 
@@ -271,6 +576,17 @@ const (
 	TestGridSessionArtifactTypeSelenium_log TestGridSessionArtifactType = "SELENIUM_LOG"
 )
 
+// Values returns all known values for TestGridSessionArtifactType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TestGridSessionArtifactType) Values() []TestGridSessionArtifactType {
+	return []TestGridSessionArtifactType{
+		"UNKNOWN",
+		"VIDEO",
+		"SELENIUM_LOG",
+	}
+}
+
 type TestGridSessionStatus string
 
 // Enum values for TestGridSessionStatus
@@ -279,6 +595,17 @@ const (
 	TestGridSessionStatusClosed  TestGridSessionStatus = "CLOSED"
 	TestGridSessionStatusErrored TestGridSessionStatus = "ERRORED"
 )
+
+// Values returns all known values for TestGridSessionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TestGridSessionStatus) Values() []TestGridSessionStatus {
+	return []TestGridSessionStatus{
+		"ACTIVE",
+		"CLOSED",
+		"ERRORED",
+	}
+}
 
 type TestType string
 
@@ -307,6 +634,35 @@ const (
 	TestTypeRemote_access_replay    TestType = "REMOTE_ACCESS_REPLAY"
 )
 
+// Values returns all known values for TestType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (TestType) Values() []TestType {
+	return []TestType{
+		"BUILTIN_FUZZ",
+		"BUILTIN_EXPLORER",
+		"WEB_PERFORMANCE_PROFILE",
+		"APPIUM_JAVA_JUNIT",
+		"APPIUM_JAVA_TESTNG",
+		"APPIUM_PYTHON",
+		"APPIUM_NODE",
+		"APPIUM_RUBY",
+		"APPIUM_WEB_JAVA_JUNIT",
+		"APPIUM_WEB_JAVA_TESTNG",
+		"APPIUM_WEB_PYTHON",
+		"APPIUM_WEB_NODE",
+		"APPIUM_WEB_RUBY",
+		"CALABASH",
+		"INSTRUMENTATION",
+		"UIAUTOMATION",
+		"UIAUTOMATOR",
+		"XCTEST",
+		"XCTEST_UI",
+		"REMOTE_ACCESS_RECORD",
+		"REMOTE_ACCESS_REPLAY",
+	}
+}
+
 type UploadCategory string
 
 // Enum values for UploadCategory
@@ -314,6 +670,16 @@ const (
 	UploadCategoryCurated UploadCategory = "CURATED"
 	UploadCategoryPrivate UploadCategory = "PRIVATE"
 )
+
+// Values returns all known values for UploadCategory. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UploadCategory) Values() []UploadCategory {
+	return []UploadCategory{
+		"CURATED",
+		"PRIVATE",
+	}
+}
 
 type UploadStatus string
 
@@ -324,6 +690,18 @@ const (
 	UploadStatusSucceeded   UploadStatus = "SUCCEEDED"
 	UploadStatusFailed      UploadStatus = "FAILED"
 )
+
+// Values returns all known values for UploadStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (UploadStatus) Values() []UploadStatus {
+	return []UploadStatus{
+		"INITIALIZED",
+		"PROCESSING",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
 
 type UploadType string
 
@@ -362,3 +740,43 @@ const (
 	UploadTypeInstrumentation_test_spec           UploadType = "INSTRUMENTATION_TEST_SPEC"
 	UploadTypeXctest_ui_test_spec                 UploadType = "XCTEST_UI_TEST_SPEC"
 )
+
+// Values returns all known values for UploadType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (UploadType) Values() []UploadType {
+	return []UploadType{
+		"ANDROID_APP",
+		"IOS_APP",
+		"WEB_APP",
+		"EXTERNAL_DATA",
+		"APPIUM_JAVA_JUNIT_TEST_PACKAGE",
+		"APPIUM_JAVA_TESTNG_TEST_PACKAGE",
+		"APPIUM_PYTHON_TEST_PACKAGE",
+		"APPIUM_NODE_TEST_PACKAGE",
+		"APPIUM_RUBY_TEST_PACKAGE",
+		"APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE",
+		"APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE",
+		"APPIUM_WEB_PYTHON_TEST_PACKAGE",
+		"APPIUM_WEB_NODE_TEST_PACKAGE",
+		"APPIUM_WEB_RUBY_TEST_PACKAGE",
+		"CALABASH_TEST_PACKAGE",
+		"INSTRUMENTATION_TEST_PACKAGE",
+		"UIAUTOMATION_TEST_PACKAGE",
+		"UIAUTOMATOR_TEST_PACKAGE",
+		"XCTEST_TEST_PACKAGE",
+		"XCTEST_UI_TEST_PACKAGE",
+		"APPIUM_JAVA_JUNIT_TEST_SPEC",
+		"APPIUM_JAVA_TESTNG_TEST_SPEC",
+		"APPIUM_PYTHON_TEST_SPEC",
+		"APPIUM_NODE_TEST_SPEC",
+		"APPIUM_RUBY_TEST_SPEC",
+		"APPIUM_WEB_JAVA_JUNIT_TEST_SPEC",
+		"APPIUM_WEB_JAVA_TESTNG_TEST_SPEC",
+		"APPIUM_WEB_PYTHON_TEST_SPEC",
+		"APPIUM_WEB_NODE_TEST_SPEC",
+		"APPIUM_WEB_RUBY_TEST_SPEC",
+		"INSTRUMENTATION_TEST_SPEC",
+		"XCTEST_UI_TEST_SPEC",
+	}
+}

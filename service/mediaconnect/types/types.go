@@ -293,6 +293,55 @@ type Messages struct {
 	Errors []*string
 }
 
+// A savings plan that reserves a certain amount of outbound bandwidth usage at a
+// discounted rate each month over a period of time.
+type Offering struct {
+
+	// The type of currency that is used for billing. The currencyCode used for all
+	// reservations is US dollars.
+	//
+	// This member is required.
+	CurrencyCode *string
+
+	// The length of time that your reservation would be active.
+	//
+	// This member is required.
+	Duration *int32
+
+	// The unit of measurement for the duration of the offering.
+	//
+	// This member is required.
+	DurationUnits DurationUnits
+
+	// The Amazon Resource Name (ARN) that MediaConnect assigns to the offering.
+	//
+	// This member is required.
+	OfferingArn *string
+
+	// A description of the offering.
+	//
+	// This member is required.
+	OfferingDescription *string
+
+	// The cost of a single unit. This value, in combination with priceUnits, makes up
+	// the rate.
+	//
+	// This member is required.
+	PricePerUnit *string
+
+	// The unit of measurement that is used for billing. This value, in combination
+	// with pricePerUnit, makes up the rate.
+	//
+	// This member is required.
+	PriceUnits PriceUnits
+
+	// A definition of the amount of outbound bandwidth that you would be reserving if
+	// you purchase the offering.
+	//
+	// This member is required.
+	ResourceSpecification *ResourceSpecification
+}
+
 // The settings for an output.
 type Output struct {
 
@@ -335,6 +384,103 @@ type Output struct {
 
 	// The name of the VPC interface attachment to use for this output.
 	VpcInterfaceAttachment *VpcInterfaceAttachment
+}
+
+// A pricing agreement for a discounted rate for a specific outbound bandwidth that
+// your MediaConnect account will use each month over a specific time period. The
+// discounted rate in the reservation applies to outbound bandwidth for all flows
+// from your account until your account reaches the amount of bandwidth in your
+// reservation. If you use more outbound bandwidth than the agreed upon amount in a
+// single month, the overage is charged at the on-demand rate.
+type Reservation struct {
+
+	// The type of currency that is used for billing. The currencyCode used for your
+	// reservation is US dollars.
+	//
+	// This member is required.
+	CurrencyCode *string
+
+	// The length of time that this reservation is active. MediaConnect defines this
+	// value in the offering.
+	//
+	// This member is required.
+	Duration *int32
+
+	// The unit of measurement for the duration of the reservation. MediaConnect
+	// defines this value in the offering.
+	//
+	// This member is required.
+	DurationUnits DurationUnits
+
+	// The day and time that this reservation expires. This value is calculated based
+	// on the start date and time that you set and the offering's duration.
+	//
+	// This member is required.
+	End *string
+
+	// The Amazon Resource Name (ARN) that MediaConnect assigns to the offering.
+	//
+	// This member is required.
+	OfferingArn *string
+
+	// A description of the offering. MediaConnect defines this value in the offering.
+	//
+	// This member is required.
+	OfferingDescription *string
+
+	// The cost of a single unit. This value, in combination with priceUnits, makes up
+	// the rate. MediaConnect defines this value in the offering.
+	//
+	// This member is required.
+	PricePerUnit *string
+
+	// The unit of measurement that is used for billing. This value, in combination
+	// with pricePerUnit, makes up the rate. MediaConnect defines this value in the
+	// offering.
+	//
+	// This member is required.
+	PriceUnits PriceUnits
+
+	// The Amazon Resource Name (ARN) that MediaConnect assigns to the reservation when
+	// you purchase an offering.
+	//
+	// This member is required.
+	ReservationArn *string
+
+	// The name that you assigned to the reservation when you purchased the offering.
+	//
+	// This member is required.
+	ReservationName *string
+
+	// The status of your reservation.
+	//
+	// This member is required.
+	ReservationState ReservationState
+
+	// A definition of the amount of outbound bandwidth that you would be reserving if
+	// you purchase the offering. MediaConnect defines the values that make up the
+	// resourceSpecification in the offering.
+	//
+	// This member is required.
+	ResourceSpecification *ResourceSpecification
+
+	// The day and time that the reservation becomes active. You set this value when
+	// you purchase the offering.
+	//
+	// This member is required.
+	Start *string
+}
+
+// A definition of what is being billed for, including the type and amount.
+type ResourceSpecification struct {
+
+	// The type of resource and the unit that is being billed for.
+	//
+	// This member is required.
+	ResourceType ResourceType
+
+	// The amount of outbound bandwidth that is discounted in the offering.
+	ReservedBitrate *int32
 }
 
 // The settings for the source of the flow.

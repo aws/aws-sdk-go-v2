@@ -16,9 +16,11 @@ import (
 // operations are related to DeleteBucketTagging:
 //
 //     * GetBucketTagging
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketTagging.html)
 //
-//     *
-// PutBucketTagging
+//
+// * PutBucketTagging
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketTagging.html)
 func (c *Client) DeleteBucketTagging(ctx context.Context, params *DeleteBucketTaggingInput, optFns ...func(*Options)) (*DeleteBucketTaggingOutput, error) {
 	if params == nil {
 		params = &DeleteBucketTaggingInput{}
@@ -40,6 +42,10 @@ type DeleteBucketTaggingInput struct {
 	//
 	// This member is required.
 	Bucket *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 }
 
 type DeleteBucketTaggingOutput struct {

@@ -10,6 +10,46 @@ import (
 	"github.com/awslabs/smithy-go/middleware"
 )
 
+type validateOpBatchAssociateScramSecret struct {
+}
+
+func (*validateOpBatchAssociateScramSecret) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchAssociateScramSecret) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchAssociateScramSecretInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchAssociateScramSecretInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchDisassociateScramSecret struct {
+}
+
+func (*validateOpBatchDisassociateScramSecret) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchDisassociateScramSecret) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchDisassociateScramSecretInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchDisassociateScramSecretInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateCluster struct {
 }
 
@@ -65,6 +105,26 @@ func (m *validateOpDeleteCluster) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteClusterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteConfiguration struct {
+}
+
+func (*validateOpDeleteConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -230,6 +290,26 @@ func (m *validateOpListNodes) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListScramSecrets struct {
+}
+
+func (*validateOpListScramSecrets) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListScramSecrets) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListScramSecretsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListScramSecretsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -390,6 +470,26 @@ func (m *validateOpUpdateClusterKafkaVersion) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateConfiguration struct {
+}
+
+func (*validateOpUpdateConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateMonitoring struct {
 }
 
@@ -410,6 +510,14 @@ func (m *validateOpUpdateMonitoring) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpBatchAssociateScramSecretValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchAssociateScramSecret{}, middleware.After)
+}
+
+func addOpBatchDisassociateScramSecretValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchDisassociateScramSecret{}, middleware.After)
+}
+
 func addOpCreateClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCluster{}, middleware.After)
 }
@@ -420,6 +528,10 @@ func addOpCreateConfigurationValidationMiddleware(stack *middleware.Stack) error
 
 func addOpDeleteClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCluster{}, middleware.After)
+}
+
+func addOpDeleteConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteConfiguration{}, middleware.After)
 }
 
 func addOpDescribeClusterValidationMiddleware(stack *middleware.Stack) error {
@@ -454,6 +566,10 @@ func addOpListNodesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListNodes{}, middleware.After)
 }
 
+func addOpListScramSecretsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListScramSecrets{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
@@ -486,6 +602,10 @@ func addOpUpdateClusterKafkaVersionValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpUpdateClusterKafkaVersion{}, middleware.After)
 }
 
+func addOpUpdateConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateConfiguration{}, middleware.After)
+}
+
 func addOpUpdateMonitoringValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateMonitoring{}, middleware.After)
 }
@@ -512,11 +632,11 @@ func validateBrokerEBSVolumeInfo(v *types.BrokerEBSVolumeInfo) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BrokerEBSVolumeInfo"}
-	if v.KafkaBrokerNodeId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("KafkaBrokerNodeId"))
-	}
 	if v.VolumeSizeGB == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VolumeSizeGB"))
+	}
+	if v.KafkaBrokerNodeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KafkaBrokerNodeId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -530,6 +650,11 @@ func validateBrokerLogs(v *types.BrokerLogs) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BrokerLogs"}
+	if v.S3 != nil {
+		if err := validateS3(v.S3); err != nil {
+			invalidParams.AddNested("S3", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Firehose != nil {
 		if err := validateFirehose(v.Firehose); err != nil {
 			invalidParams.AddNested("Firehose", err.(smithy.InvalidParamsError))
@@ -538,11 +663,6 @@ func validateBrokerLogs(v *types.BrokerLogs) error {
 	if v.CloudWatchLogs != nil {
 		if err := validateCloudWatchLogs(v.CloudWatchLogs); err != nil {
 			invalidParams.AddNested("CloudWatchLogs", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.S3 != nil {
-		if err := validateS3(v.S3); err != nil {
-			invalidParams.AddNested("S3", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -590,11 +710,11 @@ func validateConfigurationInfo(v *types.ConfigurationInfo) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ConfigurationInfo"}
-	if v.Revision == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Revision"))
-	}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.Revision == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Revision"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -723,14 +843,14 @@ func validatePrometheusInfo(v *types.PrometheusInfo) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PrometheusInfo"}
-	if v.NodeExporter != nil {
-		if err := validateNodeExporterInfo(v.NodeExporter); err != nil {
-			invalidParams.AddNested("NodeExporter", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.JmxExporter != nil {
 		if err := validateJmxExporterInfo(v.JmxExporter); err != nil {
 			invalidParams.AddNested("JmxExporter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NodeExporter != nil {
+		if err := validateNodeExporterInfo(v.NodeExporter); err != nil {
+			invalidParams.AddNested("NodeExporter", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -755,6 +875,42 @@ func validateS3(v *types.S3) error {
 	}
 }
 
+func validateOpBatchAssociateScramSecretInput(v *BatchAssociateScramSecretInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchAssociateScramSecretInput"}
+	if v.SecretArnList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretArnList"))
+	}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchDisassociateScramSecretInput(v *BatchDisassociateScramSecretInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchDisassociateScramSecretInput"}
+	if v.SecretArnList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretArnList"))
+	}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateClusterInput(v *CreateClusterInput) error {
 	if v == nil {
 		return nil
@@ -763,12 +919,29 @@ func validateOpCreateClusterInput(v *CreateClusterInput) error {
 	if v.KafkaVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KafkaVersion"))
 	}
-	if v.ClusterName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	if v.BrokerNodeGroupInfo == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BrokerNodeGroupInfo"))
+	} else if v.BrokerNodeGroupInfo != nil {
+		if err := validateBrokerNodeGroupInfo(v.BrokerNodeGroupInfo); err != nil {
+			invalidParams.AddNested("BrokerNodeGroupInfo", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OpenMonitoring != nil {
+		if err := validateOpenMonitoringInfo(v.OpenMonitoring); err != nil {
+			invalidParams.AddNested("OpenMonitoring", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.ConfigurationInfo != nil {
 		if err := validateConfigurationInfo(v.ConfigurationInfo); err != nil {
 			invalidParams.AddNested("ConfigurationInfo", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.EncryptionInfo != nil {
+		if err := validateEncryptionInfo(v.EncryptionInfo); err != nil {
+			invalidParams.AddNested("EncryptionInfo", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.NumberOfBrokerNodes == nil {
@@ -777,23 +950,6 @@ func validateOpCreateClusterInput(v *CreateClusterInput) error {
 	if v.LoggingInfo != nil {
 		if err := validateLoggingInfo(v.LoggingInfo); err != nil {
 			invalidParams.AddNested("LoggingInfo", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.BrokerNodeGroupInfo == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BrokerNodeGroupInfo"))
-	} else if v.BrokerNodeGroupInfo != nil {
-		if err := validateBrokerNodeGroupInfo(v.BrokerNodeGroupInfo); err != nil {
-			invalidParams.AddNested("BrokerNodeGroupInfo", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.EncryptionInfo != nil {
-		if err := validateEncryptionInfo(v.EncryptionInfo); err != nil {
-			invalidParams.AddNested("EncryptionInfo", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.OpenMonitoring != nil {
-		if err := validateOpenMonitoringInfo(v.OpenMonitoring); err != nil {
-			invalidParams.AddNested("OpenMonitoring", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -828,6 +984,21 @@ func validateOpDeleteClusterInput(v *DeleteClusterInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteClusterInput"}
 	if v.ClusterArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteConfigurationInput(v *DeleteConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteConfigurationInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -886,11 +1057,11 @@ func validateOpDescribeConfigurationRevisionInput(v *DescribeConfigurationRevisi
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeConfigurationRevisionInput"}
-	if v.Arn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
-	}
 	if v.Revision == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Revision"))
+	}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -949,6 +1120,21 @@ func validateOpListNodesInput(v *ListNodesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListNodesInput"}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListScramSecretsInput(v *ListScramSecretsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListScramSecretsInput"}
 	if v.ClusterArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
 	}
@@ -1036,11 +1222,11 @@ func validateOpUpdateBrokerCountInput(v *UpdateBrokerCountInput) error {
 	if v.CurrentVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CurrentVersion"))
 	}
-	if v.TargetNumberOfBrokerNodes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetNumberOfBrokerNodes"))
-	}
 	if v.ClusterArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if v.TargetNumberOfBrokerNodes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetNumberOfBrokerNodes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1054,18 +1240,18 @@ func validateOpUpdateBrokerStorageInput(v *UpdateBrokerStorageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateBrokerStorageInput"}
+	if v.CurrentVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CurrentVersion"))
+	}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
 	if v.TargetBrokerEBSVolumeInfo == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetBrokerEBSVolumeInfo"))
 	} else if v.TargetBrokerEBSVolumeInfo != nil {
 		if err := validate__listOfBrokerEBSVolumeInfo(v.TargetBrokerEBSVolumeInfo); err != nil {
 			invalidParams.AddNested("TargetBrokerEBSVolumeInfo", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ClusterArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
-	}
-	if v.CurrentVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CurrentVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1079,18 +1265,18 @@ func validateOpUpdateClusterConfigurationInput(v *UpdateClusterConfigurationInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateClusterConfigurationInput"}
-	if v.ClusterArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
-	}
-	if v.CurrentVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CurrentVersion"))
-	}
 	if v.ConfigurationInfo == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationInfo"))
 	} else if v.ConfigurationInfo != nil {
 		if err := validateConfigurationInfo(v.ConfigurationInfo); err != nil {
 			invalidParams.AddNested("ConfigurationInfo", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.CurrentVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CurrentVersion"))
+	}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1107,16 +1293,34 @@ func validateOpUpdateClusterKafkaVersionInput(v *UpdateClusterKafkaVersionInput)
 	if v.ClusterArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
 	}
+	if v.ConfigurationInfo != nil {
+		if err := validateConfigurationInfo(v.ConfigurationInfo); err != nil {
+			invalidParams.AddNested("ConfigurationInfo", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.CurrentVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CurrentVersion"))
 	}
 	if v.TargetKafkaVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetKafkaVersion"))
 	}
-	if v.ConfigurationInfo != nil {
-		if err := validateConfigurationInfo(v.ConfigurationInfo); err != nil {
-			invalidParams.AddNested("ConfigurationInfo", err.(smithy.InvalidParamsError))
-		}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateConfigurationInput(v *UpdateConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateConfigurationInput"}
+	if v.ServerProperties == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerProperties"))
+	}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1130,21 +1334,21 @@ func validateOpUpdateMonitoringInput(v *UpdateMonitoringInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateMonitoringInput"}
-	if v.LoggingInfo != nil {
-		if err := validateLoggingInfo(v.LoggingInfo); err != nil {
-			invalidParams.AddNested("LoggingInfo", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.ClusterArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
-	}
 	if v.OpenMonitoring != nil {
 		if err := validateOpenMonitoringInfo(v.OpenMonitoring); err != nil {
 			invalidParams.AddNested("OpenMonitoring", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
 	if v.CurrentVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CurrentVersion"))
+	}
+	if v.LoggingInfo != nil {
+		if err := validateLoggingInfo(v.LoggingInfo); err != nil {
+			invalidParams.AddNested("LoggingInfo", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

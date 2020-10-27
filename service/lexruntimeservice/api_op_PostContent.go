@@ -215,6 +215,13 @@ type PostContentInput struct {
 
 type PostContentOutput struct {
 
+	// One to four alternative intents that may be applicable to the user's intent.
+	// Each alternative includes a score that indicates how confident Amazon Lex is
+	// that the intent matches the user's intent. The intents are sorted by the
+	// confidence score.
+	// This value conforms to the media type: application/json
+	AlternativeIntents *string
+
 	// The prompt (or statement) to convey to the user. This is based on the bot
 	// configuration and context. For example, if Amazon Lex did not understand the
 	// user intent, it sends the clarificationPrompt configured for the bot. If the
@@ -223,6 +230,16 @@ type PostContentOutput struct {
 	// successfully fulfilled the intent, and sent a message to convey to the user.
 	// Then Amazon Lex sends that message in the response.
 	AudioStream io.ReadCloser
+
+	// The version of the bot that responded to the conversation. You can use this
+	// information to help determine if one version of a bot is performing better than
+	// another version. If you have enabled the new natural language understanding
+	// (NLU) model, you can use this to determine if the improvement is due to changes
+	// to the bot or changes to the NLU. For more information about enabling the new
+	// NLU, see the enableModelImprovements
+	// (https://docs.aws.amazon.com/lex/latest/dg/API_PutBot.html#lex-PutBot-request-enableModelImprovements)
+	// parameter of the PutBot operation.
+	BotVersion *string
 
 	// Content type as specified in the Accept HTTP header in the request.
 	ContentType *string
@@ -306,7 +323,14 @@ type PostContentOutput struct {
 	// messages were assigned to when the intent was created.
 	MessageFormat types.MessageFormatType
 
-	// The sentiment expressed in and utterance. When the bot is configured to send
+	// Provides a score that indicates how confident Amazon Lex is that the returned
+	// intent is the one that matches the user's intent. The score is between 0.0 and
+	// 1.0. The score is a relative score, not an absolute score. The score may change
+	// based on improvements to the Amazon Lex NLU.
+	// This value conforms to the media type: application/json
+	NluIntentConfidence *string
+
+	// The sentiment expressed in an utterance. When the bot is configured to send
 	// utterances to Amazon Comprehend for sentiment analysis, this field contains the
 	// result of the analysis.
 	SentimentResponse *string

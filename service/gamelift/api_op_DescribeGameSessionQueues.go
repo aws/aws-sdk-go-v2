@@ -43,11 +43,11 @@ func (c *Client) DescribeGameSessionQueues(ctx context.Context, params *Describe
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type DescribeGameSessionQueuesInput struct {
 
 	// The maximum number of results to return. Use this parameter with NextToken to
-	// get results as a set of sequential pages.
+	// get results as a set of sequential pages. You can request up to 50 results.
 	Limit *int32
 
 	// A list of queue names to retrieve information for. You can use either the queue
@@ -55,19 +55,19 @@ type DescribeGameSessionQueuesInput struct {
 	Names []*string
 
 	// A token that indicates the start of the next sequential page of results. Use the
-	// token that is returned with a previous call to this action. To start at the
+	// token that is returned with a previous call to this operation. To start at the
 	// beginning of the result set, do not specify a value.
 	NextToken *string
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type DescribeGameSessionQueuesOutput struct {
 
 	// A collection of objects that describe the requested game session queues.
 	GameSessionQueues []*types.GameSessionQueue
 
 	// A token that indicates where to resume retrieving results on the next call to
-	// this action. If no token is returned, these results represent the end of the
+	// this operation. If no token is returned, these results represent the end of the
 	// list.
 	NextToken *string
 

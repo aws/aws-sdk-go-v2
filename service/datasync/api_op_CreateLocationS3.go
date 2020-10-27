@@ -11,13 +11,8 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Creates an endpoint for an Amazon S3 bucket. For AWS DataSync to access a
-// destination S3 bucket, it needs an AWS Identity and Access Management (IAM) role
-// that has the required permissions. You can set up the required permissions by
-// creating an IAM policy that grants the required permissions and attaching the
-// policy to the role. An example of such a policy is shown in the examples
-// section. For more information, see
-// https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html#create-s3-location
+// Creates an endpoint for an Amazon S3 bucket. For more information, see
+// https://docs.aws.amazon.com/datasync/latest/userguide/create-locations-cli.html#create-location-s3-cli
 // in the AWS DataSync User Guide.
 func (c *Client) CreateLocationS3(ctx context.Context, params *CreateLocationS3Input, optFns ...func(*Options)) (*CreateLocationS3Output, error) {
 	if params == nil {
@@ -37,7 +32,8 @@ func (c *Client) CreateLocationS3(ctx context.Context, params *CreateLocationS3I
 // CreateLocationS3Request
 type CreateLocationS3Input struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon S3 bucket.
+	// The Amazon Resource Name (ARN) of the Amazon S3 bucket. If the bucket is on an
+	// AWS Outpost, this must be an access point ARN.
 	//
 	// This member is required.
 	S3BucketArn *string
@@ -50,12 +46,19 @@ type CreateLocationS3Input struct {
 	// This member is required.
 	S3Config *types.S3Config
 
+	// If you are using DataSync on an AWS Outpost, specify the Amazon Resource Names
+	// (ARNs) of the DataSync agents deployed on your AWS Outpost. For more information
+	// about launching a DataSync agent on an Amazon Outpost, see outposts-agent.
+	AgentArns []*string
+
 	// The Amazon S3 storage class that you want to store your files in when this
-	// location is used as a task destination. For more information about S3 storage
-	// classes, see Amazon S3 Storage Classes
-	// (https://aws.amazon.com/s3/storage-classes/) in the Amazon Simple Storage
-	// Service Developer Guide. Some storage classes have behaviors that can affect
-	// your S3 storage cost. For detailed information, see using-storage-classes.
+	// location is used as a task destination. For buckets in AWS Regions, the storage
+	// class defaults to Standard. For buckets on AWS Outposts, the storage class
+	// defaults to AWS S3 Outposts. For more information about S3 storage classes, see
+	// Amazon S3 Storage Classes (https://aws.amazon.com/s3/storage-classes/) in the
+	// Amazon Simple Storage Service Developer Guide. Some storage classes have
+	// behaviors that can affect your S3 storage cost. For detailed information, see
+	// using-storage-classes.
 	S3StorageClass types.S3StorageClass
 
 	// A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3 is used

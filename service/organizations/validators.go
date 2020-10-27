@@ -969,11 +969,11 @@ func validateTag(v *types.Tag) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
-	if v.Key == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Key"))
-	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1055,6 +1055,11 @@ func validateOpCreateAccountInput(v *CreateAccountInput) error {
 	if v.Email == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Email"))
 	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.AccountName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountName"))
 	}
@@ -1070,11 +1075,16 @@ func validateOpCreateGovCloudAccountInput(v *CreateGovCloudAccountInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateGovCloudAccountInput"}
-	if v.Email == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Email"))
-	}
 	if v.AccountName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountName"))
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Email == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Email"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1094,6 +1104,11 @@ func validateOpCreateOrganizationalUnitInput(v *CreateOrganizationalUnitInput) e
 	if v.ParentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ParentId"))
 	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1106,17 +1121,22 @@ func validateOpCreatePolicyInput(v *CreatePolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreatePolicyInput"}
-	if len(v.Type) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Type"))
-	}
-	if v.Description == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Description"))
-	}
 	if v.Content == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Content"))
 	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1283,11 +1303,11 @@ func validateOpDetachPolicyInput(v *DetachPolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DetachPolicyInput"}
-	if v.PolicyId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PolicyId"))
-	}
 	if v.TargetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetId"))
+	}
+	if v.PolicyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1316,11 +1336,11 @@ func validateOpDisablePolicyTypeInput(v *DisablePolicyTypeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisablePolicyTypeInput"}
-	if v.RootId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RootId"))
-	}
 	if len(v.PolicyType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyType"))
+	}
+	if v.RootId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RootId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1349,11 +1369,11 @@ func validateOpEnablePolicyTypeInput(v *EnablePolicyTypeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EnablePolicyTypeInput"}
-	if len(v.PolicyType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("PolicyType"))
-	}
 	if v.RootId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RootId"))
+	}
+	if len(v.PolicyType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1367,6 +1387,11 @@ func validateOpInviteAccountToOrganizationInput(v *InviteAccountToOrganizationIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InviteAccountToOrganizationInput"}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Target == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Target"))
 	} else if v.Target != nil {
@@ -1401,11 +1426,11 @@ func validateOpListChildrenInput(v *ListChildrenInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListChildrenInput"}
-	if len(v.ChildType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ChildType"))
-	}
 	if v.ParentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ParentId"))
+	}
+	if len(v.ChildType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ChildType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1464,11 +1489,11 @@ func validateOpListPoliciesForTargetInput(v *ListPoliciesForTargetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListPoliciesForTargetInput"}
-	if v.TargetId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetId"))
-	}
 	if len(v.Filter) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Filter"))
+	}
+	if v.TargetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1527,11 +1552,11 @@ func validateOpMoveAccountInput(v *MoveAccountInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MoveAccountInput"}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
-	}
 	if v.DestinationParentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationParentId"))
+	}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if v.SourceParentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceParentId"))
@@ -1548,11 +1573,11 @@ func validateOpRegisterDelegatedAdministratorInput(v *RegisterDelegatedAdministr
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RegisterDelegatedAdministratorInput"}
-	if v.ServicePrincipal == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServicePrincipal"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.ServicePrincipal == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServicePrincipal"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1581,15 +1606,15 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -879,11 +879,11 @@ func validateCustomRule(v *types.CustomRule) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CustomRule"}
-	if v.Source == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Source"))
-	}
 	if v.Target == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Target"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -914,11 +914,11 @@ func validateSubDomainSetting(v *types.SubDomainSetting) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SubDomainSetting"}
-	if v.Prefix == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Prefix"))
-	}
 	if v.BranchName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BranchName"))
+	}
+	if v.Prefix == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Prefix"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -949,13 +949,13 @@ func validateOpCreateAppInput(v *CreateAppInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAppInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.CustomRules != nil {
 		if err := validateCustomRules(v.CustomRules); err != nil {
 			invalidParams.AddNested("CustomRules", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1023,9 +1023,6 @@ func validateOpCreateDomainAssociationInput(v *CreateDomainAssociationInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDomainAssociationInput"}
-	if v.AppId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
-	}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
@@ -1035,6 +1032,9 @@ func validateOpCreateDomainAssociationInput(v *CreateDomainAssociationInput) err
 		if err := validateSubDomainSettings(v.SubDomainSettings); err != nil {
 			invalidParams.AddNested("SubDomainSettings", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.AppId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1048,11 +1048,11 @@ func validateOpCreateWebhookInput(v *CreateWebhookInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateWebhookInput"}
-	if v.BranchName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BranchName"))
-	}
 	if v.AppId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
+	}
+	if v.BranchName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BranchName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1099,11 +1099,11 @@ func validateOpDeleteBranchInput(v *DeleteBranchInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteBranchInput"}
-	if v.AppId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
-	}
 	if v.BranchName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BranchName"))
+	}
+	if v.AppId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1135,14 +1135,14 @@ func validateOpDeleteJobInput(v *DeleteJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteJobInput"}
-	if v.JobId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
-	}
 	if v.BranchName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BranchName"))
 	}
 	if v.AppId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1219,11 +1219,11 @@ func validateOpGetBackendEnvironmentInput(v *GetBackendEnvironmentInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetBackendEnvironmentInput"}
-	if v.AppId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
-	}
 	if v.EnvironmentName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentName"))
+	}
+	if v.AppId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1237,11 +1237,11 @@ func validateOpGetBranchInput(v *GetBranchInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetBranchInput"}
-	if v.BranchName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BranchName"))
-	}
 	if v.AppId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
+	}
+	if v.BranchName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BranchName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1255,11 +1255,11 @@ func validateOpGetDomainAssociationInput(v *GetDomainAssociationInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetDomainAssociationInput"}
-	if v.DomainName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
-	}
 	if v.AppId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
+	}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1273,14 +1273,14 @@ func validateOpGetJobInput(v *GetJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetJobInput"}
+	if v.AppId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
+	}
 	if v.BranchName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BranchName"))
 	}
 	if v.JobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
-	}
-	if v.AppId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1312,11 +1312,11 @@ func validateOpListArtifactsInput(v *ListArtifactsInput) error {
 	if v.BranchName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BranchName"))
 	}
-	if v.AppId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
-	}
 	if v.JobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if v.AppId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1375,11 +1375,11 @@ func validateOpListJobsInput(v *ListJobsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListJobsInput"}
-	if v.BranchName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BranchName"))
-	}
 	if v.AppId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
+	}
+	if v.BranchName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BranchName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1423,11 +1423,11 @@ func validateOpStartDeploymentInput(v *StartDeploymentInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartDeploymentInput"}
-	if v.AppId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
-	}
 	if v.BranchName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BranchName"))
+	}
+	if v.AppId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1483,11 +1483,11 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
-	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1501,11 +1501,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

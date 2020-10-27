@@ -11,22 +11,21 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// This action is part of Amazon GameLift FleetIQ with game server groups, which is
-// in preview release and is subject to change. Creates a new game server resource
-// and notifies GameLift FleetIQ that the game server is ready to host gameplay and
-// players. This action is called by a game server process that is running on an
-// instance in a game server group. Registering game servers enables GameLift
-// FleetIQ to track available game servers and enables game clients and services to
-// claim a game server for a new game session. To register a game server, identify
-// the game server group and instance where the game server is running, and provide
-// a unique identifier for the game server. You can also include connection and
-// game server data; when a game client or service requests a game server by
-// calling ClaimGameServer, this information is returned in response. Once a game
-// server is successfully registered, it is put in status AVAILABLE. A request to
-// register a game server may fail if the instance it is in the process of shutting
-// down as part of instance rebalancing or scale-down activity. Learn more GameLift
-// FleetIQ Guide
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-intro.html)
+// This operation is used with the Amazon GameLift FleetIQ solution and game server
+// groups. Creates a new game server resource and notifies GameLift FleetIQ that
+// the game server is ready to host gameplay and players. This operation is called
+// by a game server process that is running on an instance in a game server group.
+// Registering game servers enables GameLift FleetIQ to track available game
+// servers and enables game clients and services to claim a game server for a new
+// game session. To register a game server, identify the game server group and
+// instance where the game server is running, and provide a unique identifier for
+// the game server. You can also include connection and game server data. When a
+// game client or service requests a game server by calling ClaimGameServer, this
+// information is returned in the response. Once a game server is successfully
+// registered, it is put in status AVAILABLE. A request to register a game server
+// may fail if the instance it is running on is in the process of shutting down as
+// part of instance balancing or scale-down activity. Learn more GameLift FleetIQ
+// Guide (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
 // Related operations
 //
 //     * RegisterGameServer
@@ -59,54 +58,40 @@ func (c *Client) RegisterGameServer(ctx context.Context, params *RegisterGameSer
 
 type RegisterGameServerInput struct {
 
-	// An identifier for the game server group where the game server is running. You
-	// can use either the GameServerGroup name or ARN value.
+	// A unique identifier for the game server group where the game server is running.
+	// Use either the GameServerGroup name or ARN value.
 	//
 	// This member is required.
 	GameServerGroupName *string
 
-	// A custom string that uniquely identifies the new game server. Game server IDs
-	// are developer-defined and must be unique across all game server groups in your
-	// AWS account.
+	// A custom string that uniquely identifies the game server to register. Game
+	// server IDs are developer-defined and must be unique across all game server
+	// groups in your AWS account.
 	//
 	// This member is required.
 	GameServerId *string
 
 	// The unique identifier for the instance where the game server is running. This ID
-	// is available in the instance metadata.
+	// is available in the instance metadata. EC2 instance IDs use a 17-character
+	// format, for example: i-1234567890abcdef0.
 	//
 	// This member is required.
 	InstanceId *string
 
-	// Information needed to make inbound client connections to the game server. This
-	// might include IP address and port, DNS name, etc.
+	// Information that is needed to make inbound client connections to the game
+	// server. This might include the IP address and port, DNS name, and other
+	// information.
 	ConnectionInfo *string
 
-	// A game server tag that can be used to request sorted lists of game servers using
-	// ListGameServers. Custom sort keys are developer-defined based on how you want to
-	// organize the retrieved game server information.
-	CustomSortKey *string
-
 	// A set of custom game server properties, formatted as a single string value. This
-	// data is passed to a game client or service when it requests information on a
-	// game servers using ListGameServers or ClaimGameServer.
+	// data is passed to a game client or service when it requests information on game
+	// servers using ListGameServers or ClaimGameServer.
 	GameServerData *string
-
-	// A list of labels to assign to the new game server resource. Tags are
-	// developer-defined key-value pairs. Tagging AWS resources are useful for resource
-	// management, access management, and cost allocation. For more information, see
-	// Tagging AWS Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the AWS
-	// General Reference. Once the resource is created, you can use TagResource,
-	// UntagResource, and ListTagsForResource to add, remove, and view tags. The
-	// maximum tag limit may be lower than stated. See the AWS General Reference for
-	// actual tagging limits.
-	Tags []*types.Tag
 }
 
 type RegisterGameServerOutput struct {
 
-	// Object that describes the newly created game server resource.
+	// Object that describes the newly registered game server.
 	GameServer *types.GameServer
 
 	// Metadata pertaining to the operation's result.

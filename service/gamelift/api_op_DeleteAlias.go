@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes an alias. This action removes all record of the alias. Game clients
+// Deletes an alias. This operation removes all record of the alias. Game clients
 // attempting to access a server process using the deleted alias receive an error.
 // To delete an alias, specify the alias ID to be deleted.
 //
@@ -42,7 +42,7 @@ func (c *Client) DeleteAlias(ctx context.Context, params *DeleteAliasInput, optF
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type DeleteAliasInput struct {
 
 	// A unique identifier of the alias that you want to delete. You can use either the

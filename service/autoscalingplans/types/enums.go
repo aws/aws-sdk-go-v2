@@ -12,6 +12,18 @@ const (
 	ForecastDataTypeScheduledactionmaxcapacity ForecastDataType = "ScheduledActionMaxCapacity"
 )
 
+// Values returns all known values for ForecastDataType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ForecastDataType) Values() []ForecastDataType {
+	return []ForecastDataType{
+		"CapacityForecast",
+		"LoadForecast",
+		"ScheduledActionMinCapacity",
+		"ScheduledActionMaxCapacity",
+	}
+}
+
 type LoadMetricType string
 
 // Enum values for LoadMetricType
@@ -21,6 +33,18 @@ const (
 	LoadMetricTypeAsgtotalnetworkout         LoadMetricType = "ASGTotalNetworkOut"
 	LoadMetricTypeAlbtargetgrouprequestcount LoadMetricType = "ALBTargetGroupRequestCount"
 )
+
+// Values returns all known values for LoadMetricType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LoadMetricType) Values() []LoadMetricType {
+	return []LoadMetricType{
+		"ASGTotalCPUUtilization",
+		"ASGTotalNetworkIn",
+		"ASGTotalNetworkOut",
+		"ALBTargetGroupRequestCount",
+	}
+}
 
 type MetricStatistic string
 
@@ -33,12 +57,34 @@ const (
 	MetricStatisticSum         MetricStatistic = "Sum"
 )
 
+// Values returns all known values for MetricStatistic. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MetricStatistic) Values() []MetricStatistic {
+	return []MetricStatistic{
+		"Average",
+		"Minimum",
+		"Maximum",
+		"SampleCount",
+		"Sum",
+	}
+}
+
 type PolicyType string
 
 // Enum values for PolicyType
 const (
 	PolicyTypeTargettrackingscaling PolicyType = "TargetTrackingScaling"
 )
+
+// Values returns all known values for PolicyType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PolicyType) Values() []PolicyType {
+	return []PolicyType{
+		"TargetTrackingScaling",
+	}
+}
 
 type PredictiveScalingMaxCapacityBehavior string
 
@@ -49,6 +95,18 @@ const (
 	PredictiveScalingMaxCapacityBehaviorSetmaxcapacityaboveforecastcapacity PredictiveScalingMaxCapacityBehavior = "SetMaxCapacityAboveForecastCapacity"
 )
 
+// Values returns all known values for PredictiveScalingMaxCapacityBehavior. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (PredictiveScalingMaxCapacityBehavior) Values() []PredictiveScalingMaxCapacityBehavior {
+	return []PredictiveScalingMaxCapacityBehavior{
+		"SetForecastCapacityToMaxCapacity",
+		"SetMaxCapacityToForecastCapacity",
+		"SetMaxCapacityAboveForecastCapacity",
+	}
+}
+
 type PredictiveScalingMode string
 
 // Enum values for PredictiveScalingMode
@@ -56,6 +114,16 @@ const (
 	PredictiveScalingModeForecastandscale PredictiveScalingMode = "ForecastAndScale"
 	PredictiveScalingModeForecastonly     PredictiveScalingMode = "ForecastOnly"
 )
+
+// Values returns all known values for PredictiveScalingMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PredictiveScalingMode) Values() []PredictiveScalingMode {
+	return []PredictiveScalingMode{
+		"ForecastAndScale",
+		"ForecastOnly",
+	}
+}
 
 type ScalableDimension string
 
@@ -70,6 +138,22 @@ const (
 	ScalableDimensionDynamodbindexreadcapacityunits    ScalableDimension = "dynamodb:index:ReadCapacityUnits"
 	ScalableDimensionDynamodbindexwritecapacityunits   ScalableDimension = "dynamodb:index:WriteCapacityUnits"
 )
+
+// Values returns all known values for ScalableDimension. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ScalableDimension) Values() []ScalableDimension {
+	return []ScalableDimension{
+		"autoscaling:autoScalingGroup:DesiredCapacity",
+		"ecs:service:DesiredCount",
+		"ec2:spot-fleet-request:TargetCapacity",
+		"rds:cluster:ReadReplicaCount",
+		"dynamodb:table:ReadCapacityUnits",
+		"dynamodb:table:WriteCapacityUnits",
+		"dynamodb:index:ReadCapacityUnits",
+		"dynamodb:index:WriteCapacityUnits",
+	}
+}
 
 type ScalingMetricType string
 
@@ -90,6 +174,27 @@ const (
 	ScalingMetricTypeEc2spotfleetrequestaveragenetworkout     ScalingMetricType = "EC2SpotFleetRequestAverageNetworkOut"
 )
 
+// Values returns all known values for ScalingMetricType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ScalingMetricType) Values() []ScalingMetricType {
+	return []ScalingMetricType{
+		"ASGAverageCPUUtilization",
+		"ASGAverageNetworkIn",
+		"ASGAverageNetworkOut",
+		"DynamoDBReadCapacityUtilization",
+		"DynamoDBWriteCapacityUtilization",
+		"ECSServiceAverageCPUUtilization",
+		"ECSServiceAverageMemoryUtilization",
+		"ALBRequestCountPerTarget",
+		"RDSReaderAverageCPUUtilization",
+		"RDSReaderAverageDatabaseConnections",
+		"EC2SpotFleetRequestAverageCPUUtilization",
+		"EC2SpotFleetRequestAverageNetworkIn",
+		"EC2SpotFleetRequestAverageNetworkOut",
+	}
+}
+
 type ScalingPlanStatusCode string
 
 // Enum values for ScalingPlanStatusCode
@@ -104,6 +209,22 @@ const (
 	ScalingPlanStatusCodeUpdatefailed       ScalingPlanStatusCode = "UpdateFailed"
 )
 
+// Values returns all known values for ScalingPlanStatusCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ScalingPlanStatusCode) Values() []ScalingPlanStatusCode {
+	return []ScalingPlanStatusCode{
+		"Active",
+		"ActiveWithProblems",
+		"CreationInProgress",
+		"CreationFailed",
+		"DeletionInProgress",
+		"DeletionFailed",
+		"UpdateInProgress",
+		"UpdateFailed",
+	}
+}
+
 type ScalingPolicyUpdateBehavior string
 
 // Enum values for ScalingPolicyUpdateBehavior
@@ -111,6 +232,16 @@ const (
 	ScalingPolicyUpdateBehaviorKeepexternalpolicies    ScalingPolicyUpdateBehavior = "KeepExternalPolicies"
 	ScalingPolicyUpdateBehaviorReplaceexternalpolicies ScalingPolicyUpdateBehavior = "ReplaceExternalPolicies"
 )
+
+// Values returns all known values for ScalingPolicyUpdateBehavior. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScalingPolicyUpdateBehavior) Values() []ScalingPolicyUpdateBehavior {
+	return []ScalingPolicyUpdateBehavior{
+		"KeepExternalPolicies",
+		"ReplaceExternalPolicies",
+	}
+}
 
 type ScalingStatusCode string
 
@@ -120,6 +251,17 @@ const (
 	ScalingStatusCodePartiallyactive ScalingStatusCode = "PartiallyActive"
 	ScalingStatusCodeActive          ScalingStatusCode = "Active"
 )
+
+// Values returns all known values for ScalingStatusCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ScalingStatusCode) Values() []ScalingStatusCode {
+	return []ScalingStatusCode{
+		"Inactive",
+		"PartiallyActive",
+		"Active",
+	}
+}
 
 type ServiceNamespace string
 
@@ -131,3 +273,16 @@ const (
 	ServiceNamespaceRds         ServiceNamespace = "rds"
 	ServiceNamespaceDynamodb    ServiceNamespace = "dynamodb"
 )
+
+// Values returns all known values for ServiceNamespace. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceNamespace) Values() []ServiceNamespace {
+	return []ServiceNamespace{
+		"autoscaling",
+		"ecs",
+		"ec2",
+		"rds",
+		"dynamodb",
+	}
+}

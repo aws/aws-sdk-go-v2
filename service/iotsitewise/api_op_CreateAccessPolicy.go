@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Creates an access policy that grants the specified AWS Single Sign-On user or
-// group access to the specified AWS IoT SiteWise Monitor portal or project
-// resource.
+// Creates an access policy that grants the specified identity (AWS SSO user, AWS
+// SSO group, or IAM user) access to the specified AWS IoT SiteWise Monitor portal
+// or project resource.
 func (c *Client) CreateAccessPolicy(ctx context.Context, params *CreateAccessPolicyInput, optFns ...func(*Options)) (*CreateAccessPolicyOutput, error) {
 	if params == nil {
 		params = &CreateAccessPolicyInput{}
@@ -32,8 +32,8 @@ func (c *Client) CreateAccessPolicy(ctx context.Context, params *CreateAccessPol
 
 type CreateAccessPolicyInput struct {
 
-	// The identity for this access policy. Choose either a user or a group but not
-	// both.
+	// The identity for this access policy. Choose an AWS SSO user, an AWS SSO group,
+	// or an IAM user.
 	//
 	// This member is required.
 	AccessPolicyIdentity *types.Identity
@@ -44,8 +44,8 @@ type CreateAccessPolicyInput struct {
 	// This member is required.
 	AccessPolicyPermission types.Permission
 
-	// The AWS IoT SiteWise Monitor resource for this access policy. Choose either
-	// portal or project but not both.
+	// The AWS IoT SiteWise Monitor resource for this access policy. Choose either a
+	// portal or a project.
 	//
 	// This member is required.
 	AccessPolicyResource *types.Resource

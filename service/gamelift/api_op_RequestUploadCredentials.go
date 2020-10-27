@@ -45,7 +45,7 @@ func (c *Client) RequestUploadCredentials(ctx context.Context, params *RequestUp
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type RequestUploadCredentialsInput struct {
 
 	// A unique identifier for a build to get credentials for. You can use either the
@@ -55,7 +55,7 @@ type RequestUploadCredentialsInput struct {
 	BuildId *string
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type RequestUploadCredentialsOutput struct {
 
 	// Amazon S3 path and key, identifying where the game build files are stored.

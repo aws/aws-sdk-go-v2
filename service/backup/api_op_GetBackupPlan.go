@@ -12,7 +12,8 @@ import (
 	"time"
 )
 
-// Returns the body of a backup plan in JSON format, in addition to plan metadata.
+// Returns BackupPlan details for the specified BackupPlanId. Returns the body of a
+// backup plan in JSON format, in addition to plan metadata.
 func (c *Client) GetBackupPlan(ctx context.Context, params *GetBackupPlanInput, optFns ...func(*Options)) (*GetBackupPlanOutput, error) {
 	if params == nil {
 		params = &GetBackupPlanInput{}
@@ -42,6 +43,10 @@ type GetBackupPlanInput struct {
 
 type GetBackupPlanOutput struct {
 
+	// Contains a list of BackupOptions for each resource type. The list is populated
+	// only if the advanced option is set for the backup plan.
+	AdvancedBackupSettings []*types.AdvancedBackupSetting
+
 	// Specifies the body of a backup plan. Includes a BackupPlanName and one or more
 	// sets of Rules.
 	BackupPlan *types.BackupPlan
@@ -61,7 +66,7 @@ type GetBackupPlanOutput struct {
 	CreationDate *time.Time
 
 	// A unique string that identifies the request and allows failed requests to be
-	// retried without the risk of executing the operation twice.
+	// retried without the risk of running the operation twice.
 	CreatorRequestId *string
 
 	// The date and time that a backup plan is deleted, in Unix format and Coordinated
@@ -70,8 +75,8 @@ type GetBackupPlanOutput struct {
 	// 12:11:30.087 AM.
 	DeletionDate *time.Time
 
-	// The last time a job to back up resources was executed with this backup plan. A
-	// date and time, in Unix format and Coordinated Universal Time (UTC). The value of
+	// The last time a job to back up resources was run with this backup plan. A date
+	// and time, in Unix format and Coordinated Universal Time (UTC). The value of
 	// LastExecutionDate is accurate to milliseconds. For example, the value
 	// 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
 	LastExecutionDate *time.Time

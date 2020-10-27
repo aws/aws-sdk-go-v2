@@ -29,8 +29,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 type ConflictException struct {
 	Message *string
 
-	ResourceId   *string
 	ResourceType ResourceType
+	ResourceId   *string
 }
 
 func (e *ConflictException) Error() string {
@@ -86,8 +86,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 type ServiceLimitExceededException struct {
 	Message *string
 
-	LimitName  LimitName
 	LimitValue *float64
+	LimitName  LimitName
 }
 
 func (e *ServiceLimitExceededException) Error() string {

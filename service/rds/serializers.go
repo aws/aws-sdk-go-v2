@@ -8648,6 +8648,11 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceInput(v *CreateDBInstanceInp
 		objectKey.Boolean(*v.MultiAZ)
 	}
 
+	if v.NcharCharacterSetName != nil {
+		objectKey := object.Key("NcharCharacterSetName")
+		objectKey.String(*v.NcharCharacterSetName)
+	}
+
 	if v.OptionGroupName != nil {
 		objectKey := object.Key("OptionGroupName")
 		objectKey.String(*v.OptionGroupName)
@@ -8873,6 +8878,11 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceReadReplicaInput(v *CreateDB
 	if v.PubliclyAccessible != nil {
 		objectKey := object.Key("PubliclyAccessible")
 		objectKey.Boolean(*v.PubliclyAccessible)
+	}
+
+	if len(v.ReplicaMode) > 0 {
+		objectKey := object.Key("ReplicaMode")
+		objectKey.String(string(v.ReplicaMode))
 	}
 
 	if v.SourceDBInstanceIdentifier != nil {
@@ -11310,6 +11320,11 @@ func awsAwsquery_serializeOpDocumentModifyDBInstanceInput(v *ModifyDBInstanceInp
 		objectKey.Boolean(*v.PubliclyAccessible)
 	}
 
+	if len(v.ReplicaMode) > 0 {
+		objectKey := object.Key("ReplicaMode")
+		objectKey.String(string(v.ReplicaMode))
+	}
+
 	if v.StorageType != nil {
 		objectKey := object.Key("StorageType")
 		objectKey.String(*v.StorageType)
@@ -12537,6 +12552,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceFromS3Input(v *RestoreDBIns
 		objectKey.String(*v.MasterUserPassword)
 	}
 
+	if v.MaxAllocatedStorage != nil {
+		objectKey := object.Key("MaxAllocatedStorage")
+		objectKey.Integer(*v.MaxAllocatedStorage)
+	}
+
 	if v.MonitoringInterval != nil {
 		objectKey := object.Key("MonitoringInterval")
 		objectKey.Integer(*v.MonitoringInterval)
@@ -12730,6 +12750,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceToPointInTimeInput(v *Resto
 	if v.LicenseModel != nil {
 		objectKey := object.Key("LicenseModel")
 		objectKey.String(*v.LicenseModel)
+	}
+
+	if v.MaxAllocatedStorage != nil {
+		objectKey := object.Key("MaxAllocatedStorage")
+		objectKey.Integer(*v.MaxAllocatedStorage)
 	}
 
 	if v.MultiAZ != nil {

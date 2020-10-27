@@ -11,6 +11,17 @@ const (
 	AccountGateStatusSkipped   AccountGateStatus = "SKIPPED"
 )
 
+// Values returns all known values for AccountGateStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AccountGateStatus) Values() []AccountGateStatus {
+	return []AccountGateStatus{
+		"SUCCEEDED",
+		"FAILED",
+		"SKIPPED",
+	}
+}
+
 type Capability string
 
 // Enum values for Capability
@@ -19,6 +30,17 @@ const (
 	CapabilityCapability_named_iam   Capability = "CAPABILITY_NAMED_IAM"
 	CapabilityCapability_auto_expand Capability = "CAPABILITY_AUTO_EXPAND"
 )
+
+// Values returns all known values for Capability. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Capability) Values() []Capability {
+	return []Capability{
+		"CAPABILITY_IAM",
+		"CAPABILITY_NAMED_IAM",
+		"CAPABILITY_AUTO_EXPAND",
+	}
+}
 
 type ChangeAction string
 
@@ -29,6 +51,18 @@ const (
 	ChangeActionRemove ChangeAction = "Remove"
 	ChangeActionImport ChangeAction = "Import"
 )
+
+// Values returns all known values for ChangeAction. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ChangeAction) Values() []ChangeAction {
+	return []ChangeAction{
+		"Add",
+		"Modify",
+		"Remove",
+		"Import",
+	}
+}
 
 type ChangeSetStatus string
 
@@ -41,6 +75,19 @@ const (
 	ChangeSetStatusFailed             ChangeSetStatus = "FAILED"
 )
 
+// Values returns all known values for ChangeSetStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ChangeSetStatus) Values() []ChangeSetStatus {
+	return []ChangeSetStatus{
+		"CREATE_PENDING",
+		"CREATE_IN_PROGRESS",
+		"CREATE_COMPLETE",
+		"DELETE_COMPLETE",
+		"FAILED",
+	}
+}
+
 type ChangeSetType string
 
 // Enum values for ChangeSetType
@@ -49,6 +96,17 @@ const (
 	ChangeSetTypeUpdate ChangeSetType = "UPDATE"
 	ChangeSetTypeImport ChangeSetType = "IMPORT"
 )
+
+// Values returns all known values for ChangeSetType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ChangeSetType) Values() []ChangeSetType {
+	return []ChangeSetType{
+		"CREATE",
+		"UPDATE",
+		"IMPORT",
+	}
+}
 
 type ChangeSource string
 
@@ -61,12 +119,34 @@ const (
 	ChangeSourceAutomatic          ChangeSource = "Automatic"
 )
 
+// Values returns all known values for ChangeSource. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ChangeSource) Values() []ChangeSource {
+	return []ChangeSource{
+		"ResourceReference",
+		"ParameterReference",
+		"ResourceAttribute",
+		"DirectModification",
+		"Automatic",
+	}
+}
+
 type ChangeType string
 
 // Enum values for ChangeType
 const (
 	ChangeTypeResource ChangeType = "Resource"
 )
+
+// Values returns all known values for ChangeType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ChangeType) Values() []ChangeType {
+	return []ChangeType{
+		"Resource",
+	}
+}
 
 type DeprecatedStatus string
 
@@ -75,6 +155,16 @@ const (
 	DeprecatedStatusLive       DeprecatedStatus = "LIVE"
 	DeprecatedStatusDeprecated DeprecatedStatus = "DEPRECATED"
 )
+
+// Values returns all known values for DeprecatedStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeprecatedStatus) Values() []DeprecatedStatus {
+	return []DeprecatedStatus{
+		"LIVE",
+		"DEPRECATED",
+	}
+}
 
 type DifferenceType string
 
@@ -85,6 +175,17 @@ const (
 	DifferenceTypeNot_equal DifferenceType = "NOT_EQUAL"
 )
 
+// Values returns all known values for DifferenceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DifferenceType) Values() []DifferenceType {
+	return []DifferenceType{
+		"ADD",
+		"REMOVE",
+		"NOT_EQUAL",
+	}
+}
+
 type EvaluationType string
 
 // Enum values for EvaluationType
@@ -92,6 +193,16 @@ const (
 	EvaluationTypeStatic  EvaluationType = "Static"
 	EvaluationTypeDynamic EvaluationType = "Dynamic"
 )
+
+// Values returns all known values for EvaluationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EvaluationType) Values() []EvaluationType {
+	return []EvaluationType{
+		"Static",
+		"Dynamic",
+	}
+}
 
 type ExecutionStatus string
 
@@ -104,6 +215,20 @@ const (
 	ExecutionStatusExecute_failed      ExecutionStatus = "EXECUTE_FAILED"
 	ExecutionStatusObsolete            ExecutionStatus = "OBSOLETE"
 )
+
+// Values returns all known values for ExecutionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExecutionStatus) Values() []ExecutionStatus {
+	return []ExecutionStatus{
+		"UNAVAILABLE",
+		"AVAILABLE",
+		"EXECUTE_IN_PROGRESS",
+		"EXECUTE_COMPLETE",
+		"EXECUTE_FAILED",
+		"OBSOLETE",
+	}
+}
 
 type HandlerErrorCode string
 
@@ -125,6 +250,28 @@ const (
 	HandlerErrorCodeInternalfailure         HandlerErrorCode = "InternalFailure"
 )
 
+// Values returns all known values for HandlerErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HandlerErrorCode) Values() []HandlerErrorCode {
+	return []HandlerErrorCode{
+		"NotUpdatable",
+		"InvalidRequest",
+		"AccessDenied",
+		"InvalidCredentials",
+		"AlreadyExists",
+		"NotFound",
+		"ResourceConflict",
+		"Throttling",
+		"ServiceLimitExceeded",
+		"NotStabilized",
+		"GeneralServiceException",
+		"ServiceInternalError",
+		"NetworkFailure",
+		"InternalFailure",
+	}
+}
+
 type OnFailure string
 
 // Enum values for OnFailure
@@ -133,6 +280,17 @@ const (
 	OnFailureRollback   OnFailure = "ROLLBACK"
 	OnFailureDelete     OnFailure = "DELETE"
 )
+
+// Values returns all known values for OnFailure. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (OnFailure) Values() []OnFailure {
+	return []OnFailure{
+		"DO_NOTHING",
+		"ROLLBACK",
+		"DELETE",
+	}
+}
 
 type OperationStatus string
 
@@ -144,6 +302,18 @@ const (
 	OperationStatusFailed      OperationStatus = "FAILED"
 )
 
+// Values returns all known values for OperationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OperationStatus) Values() []OperationStatus {
+	return []OperationStatus{
+		"PENDING",
+		"IN_PROGRESS",
+		"SUCCESS",
+		"FAILED",
+	}
+}
+
 type PermissionModels string
 
 // Enum values for PermissionModels
@@ -151,6 +321,16 @@ const (
 	PermissionModelsService_managed PermissionModels = "SERVICE_MANAGED"
 	PermissionModelsSelf_managed    PermissionModels = "SELF_MANAGED"
 )
+
+// Values returns all known values for PermissionModels. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PermissionModels) Values() []PermissionModels {
+	return []PermissionModels{
+		"SERVICE_MANAGED",
+		"SELF_MANAGED",
+	}
+}
 
 type ProvisioningType string
 
@@ -161,6 +341,17 @@ const (
 	ProvisioningTypeFully_mutable     ProvisioningType = "FULLY_MUTABLE"
 )
 
+// Values returns all known values for ProvisioningType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProvisioningType) Values() []ProvisioningType {
+	return []ProvisioningType{
+		"NON_PROVISIONABLE",
+		"IMMUTABLE",
+		"FULLY_MUTABLE",
+	}
+}
+
 type RegistrationStatus string
 
 // Enum values for RegistrationStatus
@@ -170,12 +361,32 @@ const (
 	RegistrationStatusFailed      RegistrationStatus = "FAILED"
 )
 
+// Values returns all known values for RegistrationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RegistrationStatus) Values() []RegistrationStatus {
+	return []RegistrationStatus{
+		"COMPLETE",
+		"IN_PROGRESS",
+		"FAILED",
+	}
+}
+
 type RegistryType string
 
 // Enum values for RegistryType
 const (
 	RegistryTypeResource RegistryType = "RESOURCE"
 )
+
+// Values returns all known values for RegistryType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (RegistryType) Values() []RegistryType {
+	return []RegistryType{
+		"RESOURCE",
+	}
+}
 
 type Replacement string
 
@@ -186,6 +397,17 @@ const (
 	ReplacementConditional Replacement = "Conditional"
 )
 
+// Values returns all known values for Replacement. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Replacement) Values() []Replacement {
+	return []Replacement{
+		"True",
+		"False",
+		"Conditional",
+	}
+}
+
 type RequiresRecreation string
 
 // Enum values for RequiresRecreation
@@ -194,6 +416,17 @@ const (
 	RequiresRecreationConditionally RequiresRecreation = "Conditionally"
 	RequiresRecreationAlways        RequiresRecreation = "Always"
 )
+
+// Values returns all known values for RequiresRecreation. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RequiresRecreation) Values() []RequiresRecreation {
+	return []RequiresRecreation{
+		"Never",
+		"Conditionally",
+		"Always",
+	}
+}
 
 type ResourceAttribute string
 
@@ -207,6 +440,20 @@ const (
 	ResourceAttributeTags           ResourceAttribute = "Tags"
 )
 
+// Values returns all known values for ResourceAttribute. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceAttribute) Values() []ResourceAttribute {
+	return []ResourceAttribute{
+		"Properties",
+		"Metadata",
+		"CreationPolicy",
+		"UpdatePolicy",
+		"DeletionPolicy",
+		"Tags",
+	}
+}
+
 type ResourceSignalStatus string
 
 // Enum values for ResourceSignalStatus
@@ -214,6 +461,16 @@ const (
 	ResourceSignalStatusSuccess ResourceSignalStatus = "SUCCESS"
 	ResourceSignalStatusFailure ResourceSignalStatus = "FAILURE"
 )
+
+// Values returns all known values for ResourceSignalStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceSignalStatus) Values() []ResourceSignalStatus {
+	return []ResourceSignalStatus{
+		"SUCCESS",
+		"FAILURE",
+	}
+}
 
 type ResourceStatus string
 
@@ -237,6 +494,30 @@ const (
 	ResourceStatusImport_rollback_complete    ResourceStatus = "IMPORT_ROLLBACK_COMPLETE"
 )
 
+// Values returns all known values for ResourceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceStatus) Values() []ResourceStatus {
+	return []ResourceStatus{
+		"CREATE_IN_PROGRESS",
+		"CREATE_FAILED",
+		"CREATE_COMPLETE",
+		"DELETE_IN_PROGRESS",
+		"DELETE_FAILED",
+		"DELETE_COMPLETE",
+		"DELETE_SKIPPED",
+		"UPDATE_IN_PROGRESS",
+		"UPDATE_FAILED",
+		"UPDATE_COMPLETE",
+		"IMPORT_FAILED",
+		"IMPORT_COMPLETE",
+		"IMPORT_IN_PROGRESS",
+		"IMPORT_ROLLBACK_IN_PROGRESS",
+		"IMPORT_ROLLBACK_FAILED",
+		"IMPORT_ROLLBACK_COMPLETE",
+	}
+}
+
 type StackDriftDetectionStatus string
 
 // Enum values for StackDriftDetectionStatus
@@ -245,6 +526,17 @@ const (
 	StackDriftDetectionStatusDetection_failed      StackDriftDetectionStatus = "DETECTION_FAILED"
 	StackDriftDetectionStatusDetection_complete    StackDriftDetectionStatus = "DETECTION_COMPLETE"
 )
+
+// Values returns all known values for StackDriftDetectionStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StackDriftDetectionStatus) Values() []StackDriftDetectionStatus {
+	return []StackDriftDetectionStatus{
+		"DETECTION_IN_PROGRESS",
+		"DETECTION_FAILED",
+		"DETECTION_COMPLETE",
+	}
+}
 
 type StackDriftStatus string
 
@@ -255,6 +547,18 @@ const (
 	StackDriftStatusUnknown     StackDriftStatus = "UNKNOWN"
 	StackDriftStatusNot_checked StackDriftStatus = "NOT_CHECKED"
 )
+
+// Values returns all known values for StackDriftStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StackDriftStatus) Values() []StackDriftStatus {
+	return []StackDriftStatus{
+		"DRIFTED",
+		"IN_SYNC",
+		"UNKNOWN",
+		"NOT_CHECKED",
+	}
+}
 
 type StackInstanceDetailedStatus string
 
@@ -268,12 +572,35 @@ const (
 	StackInstanceDetailedStatusInoperable StackInstanceDetailedStatus = "INOPERABLE"
 )
 
+// Values returns all known values for StackInstanceDetailedStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StackInstanceDetailedStatus) Values() []StackInstanceDetailedStatus {
+	return []StackInstanceDetailedStatus{
+		"PENDING",
+		"RUNNING",
+		"SUCCEEDED",
+		"FAILED",
+		"CANCELLED",
+		"INOPERABLE",
+	}
+}
+
 type StackInstanceFilterName string
 
 // Enum values for StackInstanceFilterName
 const (
 	StackInstanceFilterNameDetailed_status StackInstanceFilterName = "DETAILED_STATUS"
 )
+
+// Values returns all known values for StackInstanceFilterName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StackInstanceFilterName) Values() []StackInstanceFilterName {
+	return []StackInstanceFilterName{
+		"DETAILED_STATUS",
+	}
+}
 
 type StackInstanceStatus string
 
@@ -284,6 +611,17 @@ const (
 	StackInstanceStatusInoperable StackInstanceStatus = "INOPERABLE"
 )
 
+// Values returns all known values for StackInstanceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StackInstanceStatus) Values() []StackInstanceStatus {
+	return []StackInstanceStatus{
+		"CURRENT",
+		"OUTDATED",
+		"INOPERABLE",
+	}
+}
+
 type StackResourceDriftStatus string
 
 // Enum values for StackResourceDriftStatus
@@ -293,6 +631,18 @@ const (
 	StackResourceDriftStatusDeleted     StackResourceDriftStatus = "DELETED"
 	StackResourceDriftStatusNot_checked StackResourceDriftStatus = "NOT_CHECKED"
 )
+
+// Values returns all known values for StackResourceDriftStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StackResourceDriftStatus) Values() []StackResourceDriftStatus {
+	return []StackResourceDriftStatus{
+		"IN_SYNC",
+		"MODIFIED",
+		"DELETED",
+		"NOT_CHECKED",
+	}
+}
 
 type StackSetDriftDetectionStatus string
 
@@ -305,6 +655,19 @@ const (
 	StackSetDriftDetectionStatusStopped         StackSetDriftDetectionStatus = "STOPPED"
 )
 
+// Values returns all known values for StackSetDriftDetectionStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StackSetDriftDetectionStatus) Values() []StackSetDriftDetectionStatus {
+	return []StackSetDriftDetectionStatus{
+		"COMPLETED",
+		"FAILED",
+		"PARTIAL_SUCCESS",
+		"IN_PROGRESS",
+		"STOPPED",
+	}
+}
+
 type StackSetDriftStatus string
 
 // Enum values for StackSetDriftStatus
@@ -313,6 +676,17 @@ const (
 	StackSetDriftStatusIn_sync     StackSetDriftStatus = "IN_SYNC"
 	StackSetDriftStatusNot_checked StackSetDriftStatus = "NOT_CHECKED"
 )
+
+// Values returns all known values for StackSetDriftStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StackSetDriftStatus) Values() []StackSetDriftStatus {
+	return []StackSetDriftStatus{
+		"DRIFTED",
+		"IN_SYNC",
+		"NOT_CHECKED",
+	}
+}
 
 type StackSetOperationAction string
 
@@ -324,6 +698,18 @@ const (
 	StackSetOperationActionDetect_drift StackSetOperationAction = "DETECT_DRIFT"
 )
 
+// Values returns all known values for StackSetOperationAction. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StackSetOperationAction) Values() []StackSetOperationAction {
+	return []StackSetOperationAction{
+		"CREATE",
+		"UPDATE",
+		"DELETE",
+		"DETECT_DRIFT",
+	}
+}
+
 type StackSetOperationResultStatus string
 
 // Enum values for StackSetOperationResultStatus
@@ -334,6 +720,20 @@ const (
 	StackSetOperationResultStatusFailed    StackSetOperationResultStatus = "FAILED"
 	StackSetOperationResultStatusCancelled StackSetOperationResultStatus = "CANCELLED"
 )
+
+// Values returns all known values for StackSetOperationResultStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (StackSetOperationResultStatus) Values() []StackSetOperationResultStatus {
+	return []StackSetOperationResultStatus{
+		"PENDING",
+		"RUNNING",
+		"SUCCEEDED",
+		"FAILED",
+		"CANCELLED",
+	}
+}
 
 type StackSetOperationStatus string
 
@@ -347,6 +747,20 @@ const (
 	StackSetOperationStatusQueued    StackSetOperationStatus = "QUEUED"
 )
 
+// Values returns all known values for StackSetOperationStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StackSetOperationStatus) Values() []StackSetOperationStatus {
+	return []StackSetOperationStatus{
+		"RUNNING",
+		"SUCCEEDED",
+		"FAILED",
+		"STOPPING",
+		"STOPPED",
+		"QUEUED",
+	}
+}
+
 type StackSetStatus string
 
 // Enum values for StackSetStatus
@@ -354,6 +768,16 @@ const (
 	StackSetStatusActive  StackSetStatus = "ACTIVE"
 	StackSetStatusDeleted StackSetStatus = "DELETED"
 )
+
+// Values returns all known values for StackSetStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StackSetStatus) Values() []StackSetStatus {
+	return []StackSetStatus{
+		"ACTIVE",
+		"DELETED",
+	}
+}
 
 type StackStatus string
 
@@ -383,6 +807,36 @@ const (
 	StackStatusImport_rollback_complete                     StackStatus = "IMPORT_ROLLBACK_COMPLETE"
 )
 
+// Values returns all known values for StackStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (StackStatus) Values() []StackStatus {
+	return []StackStatus{
+		"CREATE_IN_PROGRESS",
+		"CREATE_FAILED",
+		"CREATE_COMPLETE",
+		"ROLLBACK_IN_PROGRESS",
+		"ROLLBACK_FAILED",
+		"ROLLBACK_COMPLETE",
+		"DELETE_IN_PROGRESS",
+		"DELETE_FAILED",
+		"DELETE_COMPLETE",
+		"UPDATE_IN_PROGRESS",
+		"UPDATE_COMPLETE_CLEANUP_IN_PROGRESS",
+		"UPDATE_COMPLETE",
+		"UPDATE_ROLLBACK_IN_PROGRESS",
+		"UPDATE_ROLLBACK_FAILED",
+		"UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS",
+		"UPDATE_ROLLBACK_COMPLETE",
+		"REVIEW_IN_PROGRESS",
+		"IMPORT_IN_PROGRESS",
+		"IMPORT_COMPLETE",
+		"IMPORT_ROLLBACK_IN_PROGRESS",
+		"IMPORT_ROLLBACK_FAILED",
+		"IMPORT_ROLLBACK_COMPLETE",
+	}
+}
+
 type TemplateStage string
 
 // Enum values for TemplateStage
@@ -391,6 +845,16 @@ const (
 	TemplateStageProcessed TemplateStage = "Processed"
 )
 
+// Values returns all known values for TemplateStage. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TemplateStage) Values() []TemplateStage {
+	return []TemplateStage{
+		"Original",
+		"Processed",
+	}
+}
+
 type Visibility string
 
 // Enum values for Visibility
@@ -398,3 +862,13 @@ const (
 	VisibilityPublic  Visibility = "PUBLIC"
 	VisibilityPrivate Visibility = "PRIVATE"
 )
+
+// Values returns all known values for Visibility. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Visibility) Values() []Visibility {
+	return []Visibility{
+		"PUBLIC",
+		"PRIVATE",
+	}
+}

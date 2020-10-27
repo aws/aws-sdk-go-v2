@@ -16,12 +16,38 @@ const (
 	MessageSystemAttributeNameAwstraceheader                   MessageSystemAttributeName = "AWSTraceHeader"
 )
 
+// Values returns all known values for MessageSystemAttributeName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MessageSystemAttributeName) Values() []MessageSystemAttributeName {
+	return []MessageSystemAttributeName{
+		"SenderId",
+		"SentTimestamp",
+		"ApproximateReceiveCount",
+		"ApproximateFirstReceiveTimestamp",
+		"SequenceNumber",
+		"MessageDeduplicationId",
+		"MessageGroupId",
+		"AWSTraceHeader",
+	}
+}
+
 type MessageSystemAttributeNameForSends string
 
 // Enum values for MessageSystemAttributeNameForSends
 const (
 	MessageSystemAttributeNameForSendsAwstraceheader MessageSystemAttributeNameForSends = "AWSTraceHeader"
 )
+
+// Values returns all known values for MessageSystemAttributeNameForSends. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (MessageSystemAttributeNameForSends) Values() []MessageSystemAttributeNameForSends {
+	return []MessageSystemAttributeNameForSends{
+		"AWSTraceHeader",
+	}
+}
 
 type QueueAttributeName string
 
@@ -46,3 +72,29 @@ const (
 	QueueAttributeNameKmsmasterkeyid                        QueueAttributeName = "KmsMasterKeyId"
 	QueueAttributeNameKmsdatakeyreuseperiodseconds          QueueAttributeName = "KmsDataKeyReusePeriodSeconds"
 )
+
+// Values returns all known values for QueueAttributeName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (QueueAttributeName) Values() []QueueAttributeName {
+	return []QueueAttributeName{
+		"All",
+		"Policy",
+		"VisibilityTimeout",
+		"MaximumMessageSize",
+		"MessageRetentionPeriod",
+		"ApproximateNumberOfMessages",
+		"ApproximateNumberOfMessagesNotVisible",
+		"CreatedTimestamp",
+		"LastModifiedTimestamp",
+		"QueueArn",
+		"ApproximateNumberOfMessagesDelayed",
+		"DelaySeconds",
+		"ReceiveMessageWaitTimeSeconds",
+		"RedrivePolicy",
+		"FifoQueue",
+		"ContentBasedDeduplication",
+		"KmsMasterKeyId",
+		"KmsDataKeyReusePeriodSeconds",
+	}
+}

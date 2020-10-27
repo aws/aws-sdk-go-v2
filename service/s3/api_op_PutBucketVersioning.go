@@ -17,26 +17,31 @@ import (
 // objects added to the bucket receive a unique version ID. Suspended—Disables
 // versioning for the objects in the bucket. All objects added to the bucket
 // receive the version ID null. If the versioning state has never been set on a
-// bucket, it has no versioning state; a GetBucketVersioning request does not
-// return a versioning state value. If the bucket owner enables MFA Delete in the
-// bucket versioning configuration, the bucket owner must include the x-amz-mfa
-// request header and the Status and the MfaDelete request elements in a request to
-// set the versioning state of the bucket. If you have an object expiration
-// lifecycle policy in your non-versioned bucket and you want to maintain the same
-// permanent delete behavior when you enable versioning, you must add a noncurrent
-// expiration policy. The noncurrent expiration lifecycle policy will manage the
-// deletes of the noncurrent object versions in the version-enabled bucket. (A
-// version-enabled bucket maintains one current and zero or more noncurrent object
-// versions.) For more information, see Lifecycle and Versioning
+// bucket, it has no versioning state; a GetBucketVersioning
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketVersioning.html)
+// request does not return a versioning state value. If the bucket owner enables
+// MFA Delete in the bucket versioning configuration, the bucket owner must include
+// the x-amz-mfa request header and the Status and the MfaDelete request elements
+// in a request to set the versioning state of the bucket. If you have an object
+// expiration lifecycle policy in your non-versioned bucket and you want to
+// maintain the same permanent delete behavior when you enable versioning, you must
+// add a noncurrent expiration policy. The noncurrent expiration lifecycle policy
+// will manage the deletes of the noncurrent object versions in the version-enabled
+// bucket. (A version-enabled bucket maintains one current and zero or more
+// noncurrent object versions.) For more information, see Lifecycle and Versioning
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html#lifecycle-and-other-bucket-config).
 // Related Resources
 //
 //     * CreateBucket
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
 //
-//     * DeleteBucket
+//     *
+// DeleteBucket
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html)
 //
 //     *
 // GetBucketVersioning
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketVersioning.html)
 func (c *Client) PutBucketVersioning(ctx context.Context, params *PutBucketVersioningInput, optFns ...func(*Options)) (*PutBucketVersioningOutput, error) {
 	if params == nil {
 		params = &PutBucketVersioningInput{}
@@ -69,6 +74,10 @@ type PutBucketVersioningInput struct {
 	// transit. For more information, see RFC 1864
 	// (http://www.ietf.org/rfc/rfc1864.txt).
 	ContentMD5 *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 
 	// The concatenation of the authentication device's serial number, a space, and the
 	// value that is displayed on your authentication device.

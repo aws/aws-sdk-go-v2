@@ -250,6 +250,26 @@ func (m *validateOpDeleteBucketMetricsConfiguration) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteBucketOwnershipControls struct {
+}
+
+func (*validateOpDeleteBucketOwnershipControls) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteBucketOwnershipControls) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteBucketOwnershipControlsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteBucketOwnershipControlsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteBucketPolicy struct {
 }
 
@@ -625,6 +645,26 @@ func (m *validateOpGetBucketNotificationConfiguration) HandleInitialize(ctx cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetBucketNotificationConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetBucketOwnershipControls struct {
+}
+
+func (*validateOpGetBucketOwnershipControls) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetBucketOwnershipControls) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetBucketOwnershipControlsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetBucketOwnershipControlsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1330,6 +1370,26 @@ func (m *validateOpPutBucketNotificationConfiguration) HandleInitialize(ctx cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutBucketOwnershipControls struct {
+}
+
+func (*validateOpPutBucketOwnershipControls) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutBucketOwnershipControls) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutBucketOwnershipControlsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutBucketOwnershipControlsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutBucketPolicy struct {
 }
 
@@ -1610,6 +1670,26 @@ func (m *validateOpRestoreObject) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSelectObjectContent struct {
+}
+
+func (*validateOpSelectObjectContent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSelectObjectContent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SelectObjectContentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSelectObjectContentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUploadPartCopy struct {
 }
 
@@ -1698,6 +1778,10 @@ func addOpDeleteBucketMetricsConfigurationValidationMiddleware(stack *middleware
 	return stack.Initialize.Add(&validateOpDeleteBucketMetricsConfiguration{}, middleware.After)
 }
 
+func addOpDeleteBucketOwnershipControlsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteBucketOwnershipControls{}, middleware.After)
+}
+
 func addOpDeleteBucketPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteBucketPolicy{}, middleware.After)
 }
@@ -1772,6 +1856,10 @@ func addOpGetBucketMetricsConfigurationValidationMiddleware(stack *middleware.St
 
 func addOpGetBucketNotificationConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetBucketNotificationConfiguration{}, middleware.After)
+}
+
+func addOpGetBucketOwnershipControlsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetBucketOwnershipControls{}, middleware.After)
 }
 
 func addOpGetBucketPolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -1914,6 +2002,10 @@ func addOpPutBucketNotificationConfigurationValidationMiddleware(stack *middlewa
 	return stack.Initialize.Add(&validateOpPutBucketNotificationConfiguration{}, middleware.After)
 }
 
+func addOpPutBucketOwnershipControlsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutBucketOwnershipControls{}, middleware.After)
+}
+
 func addOpPutBucketPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutBucketPolicy{}, middleware.After)
 }
@@ -1968,6 +2060,10 @@ func addOpPutPublicAccessBlockValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpRestoreObjectValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRestoreObject{}, middleware.After)
+}
+
+func addOpSelectObjectContentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSelectObjectContent{}, middleware.After)
 }
 
 func addOpUploadPartCopyValidationMiddleware(stack *middleware.Stack) error {
@@ -2078,14 +2174,14 @@ func validateAnalyticsFilter(v *types.AnalyticsFilter) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsFilter"}
-	if v.And != nil {
-		if err := validateAnalyticsAndOperator(v.And); err != nil {
-			invalidParams.AddNested("And", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Tag != nil {
 		if err := validateTag(v.Tag); err != nil {
 			invalidParams.AddNested("Tag", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.And != nil {
+		if err := validateAnalyticsAndOperator(v.And); err != nil {
+			invalidParams.AddNested("And", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2100,11 +2196,11 @@ func validateAnalyticsS3BucketDestination(v *types.AnalyticsS3BucketDestination)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsS3BucketDestination"}
-	if len(v.Format) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Format"))
-	}
 	if v.Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2227,22 +2323,22 @@ func validateDestination(v *types.Destination) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Destination"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
 	if v.Metrics != nil {
 		if err := validateMetrics(v.Metrics); err != nil {
 			invalidParams.AddNested("Metrics", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ReplicationTime != nil {
-		if err := validateReplicationTime(v.ReplicationTime); err != nil {
-			invalidParams.AddNested("ReplicationTime", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
-	}
 	if v.AccessControlTranslation != nil {
 		if err := validateAccessControlTranslation(v.AccessControlTranslation); err != nil {
 			invalidParams.AddNested("AccessControlTranslation", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ReplicationTime != nil {
+		if err := validateReplicationTime(v.ReplicationTime); err != nil {
+			invalidParams.AddNested("ReplicationTime", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2381,6 +2477,24 @@ func validateInventoryConfiguration(v *types.InventoryConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InventoryConfiguration"}
+	if len(v.IncludedObjectVersions) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("IncludedObjectVersions"))
+	}
+	if v.IsEnabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IsEnabled"))
+	}
+	if v.Schedule == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Schedule"))
+	} else if v.Schedule != nil {
+		if err := validateInventorySchedule(v.Schedule); err != nil {
+			invalidParams.AddNested("Schedule", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Filter != nil {
+		if err := validateInventoryFilter(v.Filter); err != nil {
+			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Destination == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
 	} else if v.Destination != nil {
@@ -2390,24 +2504,6 @@ func validateInventoryConfiguration(v *types.InventoryConfiguration) error {
 	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
-	if v.Filter != nil {
-		if err := validateInventoryFilter(v.Filter); err != nil {
-			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Schedule == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Schedule"))
-	} else if v.Schedule != nil {
-		if err := validateInventorySchedule(v.Schedule); err != nil {
-			invalidParams.AddNested("Schedule", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.IsEnabled == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IsEnabled"))
-	}
-	if len(v.IncludedObjectVersions) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("IncludedObjectVersions"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2472,16 +2568,16 @@ func validateInventoryS3BucketDestination(v *types.InventoryS3BucketDestination)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InventoryS3BucketDestination"}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
 	}
 	if v.Encryption != nil {
 		if err := validateInventoryEncryption(v.Encryption); err != nil {
 			invalidParams.AddNested("Encryption", err.(smithy.InvalidParamsError))
 		}
 	}
-	if len(v.Format) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2510,11 +2606,11 @@ func validateLambdaFunctionConfiguration(v *types.LambdaFunctionConfiguration) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LambdaFunctionConfiguration"}
-	if v.LambdaFunctionArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LambdaFunctionArn"))
-	}
 	if v.Events == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Events"))
+	}
+	if v.LambdaFunctionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LambdaFunctionArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2545,13 +2641,13 @@ func validateLifecycleRule(v *types.LifecycleRule) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LifecycleRule"}
-	if len(v.Status) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Status"))
-	}
 	if v.Filter != nil {
 		if err := validateLifecycleRuleFilter(v.Filter); err != nil {
 			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
 		}
+	}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2621,16 +2717,16 @@ func validateLoggingEnabled(v *types.LoggingEnabled) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LoggingEnabled"}
+	if v.TargetGrants != nil {
+		if err := validateTargetGrants(v.TargetGrants); err != nil {
+			invalidParams.AddNested("TargetGrants", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.TargetBucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetBucket"))
 	}
 	if v.TargetPrefix == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetPrefix"))
-	}
-	if v.TargetGrants != nil {
-		if err := validateTargetGrants(v.TargetGrants); err != nil {
-			invalidParams.AddNested("TargetGrants", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2644,11 +2740,11 @@ func validateMetrics(v *types.Metrics) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Metrics"}
-	if v.EventThreshold == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EventThreshold"))
-	}
 	if len(v.Status) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if v.EventThreshold == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventThreshold"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2679,13 +2775,13 @@ func validateMetricsConfiguration(v *types.MetricsConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MetricsConfiguration"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
 	if v.Filter != nil {
 		if err := validateMetricsFilter(v.Filter); err != nil {
 			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2721,9 +2817,9 @@ func validateNotificationConfiguration(v *types.NotificationConfiguration) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "NotificationConfiguration"}
-	if v.LambdaFunctionConfigurations != nil {
-		if err := validateLambdaFunctionConfigurationList(v.LambdaFunctionConfigurations); err != nil {
-			invalidParams.AddNested("LambdaFunctionConfigurations", err.(smithy.InvalidParamsError))
+	if v.TopicConfigurations != nil {
+		if err := validateTopicConfigurationList(v.TopicConfigurations); err != nil {
+			invalidParams.AddNested("TopicConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.QueueConfigurations != nil {
@@ -2731,9 +2827,9 @@ func validateNotificationConfiguration(v *types.NotificationConfiguration) error
 			invalidParams.AddNested("QueueConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.TopicConfigurations != nil {
-		if err := validateTopicConfigurationList(v.TopicConfigurations); err != nil {
-			invalidParams.AddNested("TopicConfigurations", err.(smithy.InvalidParamsError))
+	if v.LambdaFunctionConfigurations != nil {
+		if err := validateLambdaFunctionConfigurationList(v.LambdaFunctionConfigurations); err != nil {
+			invalidParams.AddNested("LambdaFunctionConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2783,6 +2879,57 @@ func validateOutputLocation(v *types.OutputLocation) error {
 	if v.S3 != nil {
 		if err := validateS3Location(v.S3); err != nil {
 			invalidParams.AddNested("S3", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOwnershipControls(v *types.OwnershipControls) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OwnershipControls"}
+	if v.Rules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Rules"))
+	} else if v.Rules != nil {
+		if err := validateOwnershipControlsRules(v.Rules); err != nil {
+			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOwnershipControlsRule(v *types.OwnershipControlsRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OwnershipControlsRule"}
+	if len(v.ObjectOwnership) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ObjectOwnership"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOwnershipControlsRules(v []*types.OwnershipControlsRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OwnershipControlsRules"}
+	for i := range v {
+		if err := validateOwnershipControlsRule(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2869,16 +3016,6 @@ func validateReplicationRule(v *types.ReplicationRule) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ReplicationRule"}
-	if len(v.Status) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Status"))
-	}
-	if v.Destination == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
-	} else if v.Destination != nil {
-		if err := validateDestination(v.Destination); err != nil {
-			invalidParams.AddNested("Destination", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.SourceSelectionCriteria != nil {
 		if err := validateSourceSelectionCriteria(v.SourceSelectionCriteria); err != nil {
 			invalidParams.AddNested("SourceSelectionCriteria", err.(smithy.InvalidParamsError))
@@ -2889,9 +3026,19 @@ func validateReplicationRule(v *types.ReplicationRule) error {
 			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
 		}
 	}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
 	if v.ExistingObjectReplication != nil {
 		if err := validateExistingObjectReplication(v.ExistingObjectReplication); err != nil {
 			invalidParams.AddNested("ExistingObjectReplication", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Destination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
+	} else if v.Destination != nil {
+		if err := validateDestination(v.Destination); err != nil {
+			invalidParams.AddNested("Destination", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2923,14 +3070,14 @@ func validateReplicationRuleFilter(v *types.ReplicationRuleFilter) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ReplicationRuleFilter"}
-	if v.And != nil {
-		if err := validateReplicationRuleAndOperator(v.And); err != nil {
-			invalidParams.AddNested("And", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Tag != nil {
 		if err := validateTag(v.Tag); err != nil {
 			invalidParams.AddNested("Tag", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.And != nil {
+		if err := validateReplicationRuleAndOperator(v.And); err != nil {
+			invalidParams.AddNested("And", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2962,11 +3109,11 @@ func validateReplicationTime(v *types.ReplicationTime) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ReplicationTime"}
-	if len(v.Status) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Status"))
-	}
 	if v.Time == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Time"))
+	}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3054,25 +3201,25 @@ func validateS3Location(v *types.S3Location) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "S3Location"}
+	if v.BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
+	}
+	if v.Prefix == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Prefix"))
+	}
+	if v.Tagging != nil {
+		if err := validateTagging(v.Tagging); err != nil {
+			invalidParams.AddNested("Tagging", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Encryption != nil {
 		if err := validateEncryption(v.Encryption); err != nil {
 			invalidParams.AddNested("Encryption", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Prefix == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Prefix"))
-	}
-	if v.BucketName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
-	}
 	if v.AccessControlList != nil {
 		if err := validateGrants(v.AccessControlList); err != nil {
 			invalidParams.AddNested("AccessControlList", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Tagging != nil {
-		if err := validateTagging(v.Tagging); err != nil {
-			invalidParams.AddNested("Tagging", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3087,17 +3234,17 @@ func validateSelectParameters(v *types.SelectParameters) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SelectParameters"}
-	if v.Expression == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Expression"))
-	}
-	if v.InputSerialization == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InputSerialization"))
-	}
 	if len(v.ExpressionType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ExpressionType"))
 	}
 	if v.OutputSerialization == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutputSerialization"))
+	}
+	if v.Expression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Expression"))
+	}
+	if v.InputSerialization == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputSerialization"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3243,15 +3390,15 @@ func validateStorageClassAnalysisDataExport(v *types.StorageClassAnalysisDataExp
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StorageClassAnalysisDataExport"}
+	if len(v.OutputSchemaVersion) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputSchemaVersion"))
+	}
 	if v.Destination == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
 	} else if v.Destination != nil {
 		if err := validateAnalyticsExportDestination(v.Destination); err != nil {
 			invalidParams.AddNested("Destination", err.(smithy.InvalidParamsError))
 		}
-	}
-	if len(v.OutputSchemaVersion) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("OutputSchemaVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3265,11 +3412,11 @@ func validateTag(v *types.Tag) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
-	if v.Key == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Key"))
-	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3353,11 +3500,11 @@ func validateTopicConfiguration(v *types.TopicConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TopicConfiguration"}
-	if v.TopicArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TopicArn"))
-	}
 	if v.Events == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Events"))
+	}
+	if v.TopicArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TopicArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3388,14 +3535,9 @@ func validateWebsiteConfiguration(v *types.WebsiteConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "WebsiteConfiguration"}
-	if v.RoutingRules != nil {
-		if err := validateRoutingRules(v.RoutingRules); err != nil {
-			invalidParams.AddNested("RoutingRules", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.IndexDocument != nil {
-		if err := validateIndexDocument(v.IndexDocument); err != nil {
-			invalidParams.AddNested("IndexDocument", err.(smithy.InvalidParamsError))
+	if v.ErrorDocument != nil {
+		if err := validateErrorDocument(v.ErrorDocument); err != nil {
+			invalidParams.AddNested("ErrorDocument", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.RedirectAllRequestsTo != nil {
@@ -3403,9 +3545,14 @@ func validateWebsiteConfiguration(v *types.WebsiteConfiguration) error {
 			invalidParams.AddNested("RedirectAllRequestsTo", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ErrorDocument != nil {
-		if err := validateErrorDocument(v.ErrorDocument); err != nil {
-			invalidParams.AddNested("ErrorDocument", err.(smithy.InvalidParamsError))
+	if v.IndexDocument != nil {
+		if err := validateIndexDocument(v.IndexDocument); err != nil {
+			invalidParams.AddNested("IndexDocument", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RoutingRules != nil {
+		if err := validateRoutingRules(v.RoutingRules); err != nil {
+			invalidParams.AddNested("RoutingRules", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3420,14 +3567,14 @@ func validateOpAbortMultipartUploadInput(v *AbortMultipartUploadInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AbortMultipartUploadInput"}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
-	}
 	if v.UploadId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UploadId"))
 	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3441,14 +3588,14 @@ func validateOpCompleteMultipartUploadInput(v *CompleteMultipartUploadInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CompleteMultipartUploadInput"}
-	if v.UploadId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UploadId"))
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
 	if v.Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
-	if v.Key == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	if v.UploadId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UploadId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3465,11 +3612,11 @@ func validateOpCopyObjectInput(v *CopyObjectInput) error {
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
-	}
 	if v.CopySource == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CopySource"))
+	}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3498,11 +3645,11 @@ func validateOpCreateMultipartUploadInput(v *CreateMultipartUploadInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateMultipartUploadInput"}
-	if v.Key == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Key"))
-	}
 	if v.Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3516,11 +3663,11 @@ func validateOpDeleteBucketAnalyticsConfigurationInput(v *DeleteBucketAnalyticsC
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteBucketAnalyticsConfigurationInput"}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
-	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3579,11 +3726,11 @@ func validateOpDeleteBucketInventoryConfigurationInput(v *DeleteBucketInventoryC
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteBucketInventoryConfigurationInput"}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
 	if v.Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3612,11 +3759,26 @@ func validateOpDeleteBucketMetricsConfigurationInput(v *DeleteBucketMetricsConfi
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteBucketMetricsConfigurationInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
 	if v.Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteBucketOwnershipControlsInput(v *DeleteBucketOwnershipControlsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteBucketOwnershipControlsInput"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3690,11 +3852,11 @@ func validateOpDeleteObjectInput(v *DeleteObjectInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteObjectInput"}
-	if v.Key == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Key"))
-	}
 	if v.Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3708,15 +3870,15 @@ func validateOpDeleteObjectsInput(v *DeleteObjectsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteObjectsInput"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
 	if v.Delete == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Delete"))
 	} else if v.Delete != nil {
 		if err := validateDelete(v.Delete); err != nil {
 			invalidParams.AddNested("Delete", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3730,11 +3892,11 @@ func validateOpDeleteObjectTaggingInput(v *DeleteObjectTaggingInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteObjectTaggingInput"}
-	if v.Key == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Key"))
-	}
 	if v.Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3841,11 +4003,11 @@ func validateOpGetBucketInventoryConfigurationInput(v *GetBucketInventoryConfigu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetBucketInventoryConfigurationInput"}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
 	if v.Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3922,6 +4084,21 @@ func validateOpGetBucketNotificationConfigurationInput(v *GetBucketNotificationC
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetBucketNotificationConfigurationInput"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetBucketOwnershipControlsInput(v *GetBucketOwnershipControlsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetBucketOwnershipControlsInput"}
 	if v.Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
@@ -4111,11 +4288,11 @@ func validateOpGetObjectRetentionInput(v *GetObjectRetentionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetObjectRetentionInput"}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
-	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4147,11 +4324,11 @@ func validateOpGetObjectTorrentInput(v *GetObjectTorrentInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetObjectTorrentInput"}
-	if v.Key == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Key"))
-	}
 	if v.Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4321,11 +4498,11 @@ func validateOpListPartsInput(v *ListPartsInput) error {
 	if v.UploadId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UploadId"))
 	}
-	if v.Key == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Key"))
-	}
 	if v.Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4357,13 +4534,13 @@ func validateOpPutBucketAclInput(v *PutBucketAclInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutBucketAclInput"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
 	if v.AccessControlPolicy != nil {
 		if err := validateAccessControlPolicy(v.AccessControlPolicy); err != nil {
 			invalidParams.AddNested("AccessControlPolicy", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4380,15 +4557,15 @@ func validateOpPutBucketAnalyticsConfigurationInput(v *PutBucketAnalyticsConfigu
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
 	if v.AnalyticsConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AnalyticsConfiguration"))
 	} else if v.AnalyticsConfiguration != nil {
 		if err := validateAnalyticsConfiguration(v.AnalyticsConfiguration); err != nil {
 			invalidParams.AddNested("AnalyticsConfiguration", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4402,15 +4579,15 @@ func validateOpPutBucketCorsInput(v *PutBucketCorsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutBucketCorsInput"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
 	if v.CORSConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CORSConfiguration"))
 	} else if v.CORSConfiguration != nil {
 		if err := validateCORSConfiguration(v.CORSConfiguration); err != nil {
 			invalidParams.AddNested("CORSConfiguration", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4424,15 +4601,15 @@ func validateOpPutBucketEncryptionInput(v *PutBucketEncryptionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutBucketEncryptionInput"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
 	if v.ServerSideEncryptionConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServerSideEncryptionConfiguration"))
 	} else if v.ServerSideEncryptionConfiguration != nil {
 		if err := validateServerSideEncryptionConfiguration(v.ServerSideEncryptionConfiguration); err != nil {
 			invalidParams.AddNested("ServerSideEncryptionConfiguration", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4446,18 +4623,18 @@ func validateOpPutBucketInventoryConfigurationInput(v *PutBucketInventoryConfigu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutBucketInventoryConfigurationInput"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
 	if v.InventoryConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InventoryConfiguration"))
 	} else if v.InventoryConfiguration != nil {
 		if err := validateInventoryConfiguration(v.InventoryConfiguration); err != nil {
 			invalidParams.AddNested("InventoryConfiguration", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
-	}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4471,13 +4648,13 @@ func validateOpPutBucketLifecycleConfigurationInput(v *PutBucketLifecycleConfigu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutBucketLifecycleConfigurationInput"}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
-	}
 	if v.LifecycleConfiguration != nil {
 		if err := validateBucketLifecycleConfiguration(v.LifecycleConfiguration); err != nil {
 			invalidParams.AddNested("LifecycleConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4491,15 +4668,15 @@ func validateOpPutBucketLoggingInput(v *PutBucketLoggingInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutBucketLoggingInput"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
 	if v.BucketLoggingStatus == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BucketLoggingStatus"))
 	} else if v.BucketLoggingStatus != nil {
 		if err := validateBucketLoggingStatus(v.BucketLoggingStatus); err != nil {
 			invalidParams.AddNested("BucketLoggingStatus", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4555,16 +4732,38 @@ func validateOpPutBucketNotificationConfigurationInput(v *PutBucketNotificationC
 	}
 }
 
+func validateOpPutBucketOwnershipControlsInput(v *PutBucketOwnershipControlsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutBucketOwnershipControlsInput"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.OwnershipControls == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OwnershipControls"))
+	} else if v.OwnershipControls != nil {
+		if err := validateOwnershipControls(v.OwnershipControls); err != nil {
+			invalidParams.AddNested("OwnershipControls", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutBucketPolicyInput(v *PutBucketPolicyInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutBucketPolicyInput"}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
-	}
 	if v.Policy == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
+	}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4578,15 +4777,15 @@ func validateOpPutBucketReplicationInput(v *PutBucketReplicationInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutBucketReplicationInput"}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
-	}
 	if v.ReplicationConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReplicationConfiguration"))
 	} else if v.ReplicationConfiguration != nil {
 		if err := validateReplicationConfiguration(v.ReplicationConfiguration); err != nil {
 			invalidParams.AddNested("ReplicationConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4600,15 +4799,15 @@ func validateOpPutBucketRequestPaymentInput(v *PutBucketRequestPaymentInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutBucketRequestPaymentInput"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
 	if v.RequestPaymentConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RequestPaymentConfiguration"))
 	} else if v.RequestPaymentConfiguration != nil {
 		if err := validateRequestPaymentConfiguration(v.RequestPaymentConfiguration); err != nil {
 			invalidParams.AddNested("RequestPaymentConfiguration", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4662,15 +4861,15 @@ func validateOpPutBucketWebsiteInput(v *PutBucketWebsiteInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutBucketWebsiteInput"}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
-	}
 	if v.WebsiteConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WebsiteConfiguration"))
 	} else if v.WebsiteConfiguration != nil {
 		if err := validateWebsiteConfiguration(v.WebsiteConfiguration); err != nil {
 			invalidParams.AddNested("WebsiteConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4684,13 +4883,13 @@ func validateOpPutObjectAclInput(v *PutObjectAclInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutObjectAclInput"}
-	if v.Key == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Key"))
-	}
 	if v.AccessControlPolicy != nil {
 		if err := validateAccessControlPolicy(v.AccessControlPolicy); err != nil {
 			invalidParams.AddNested("AccessControlPolicy", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
 	if v.Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
@@ -4725,11 +4924,11 @@ func validateOpPutObjectLegalHoldInput(v *PutObjectLegalHoldInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutObjectLegalHoldInput"}
-	if v.Key == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Key"))
-	}
 	if v.Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4758,11 +4957,11 @@ func validateOpPutObjectRetentionInput(v *PutObjectRetentionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutObjectRetentionInput"}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
-	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4779,15 +4978,15 @@ func validateOpPutObjectTaggingInput(v *PutObjectTaggingInput) error {
 	if v.Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
 	if v.Tagging == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tagging"))
 	} else if v.Tagging != nil {
 		if err := validateTagging(v.Tagging); err != nil {
 			invalidParams.AddNested("Tagging", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Key == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4801,11 +5000,11 @@ func validateOpPutPublicAccessBlockInput(v *PutPublicAccessBlockInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutPublicAccessBlockInput"}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
-	}
 	if v.PublicAccessBlockConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PublicAccessBlockConfiguration"))
+	}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4824,11 +5023,41 @@ func validateOpRestoreObjectInput(v *RestoreObjectInput) error {
 			invalidParams.AddNested("RestoreRequest", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
 	if v.Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSelectObjectContentInput(v *SelectObjectContentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SelectObjectContentInput"}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.OutputSerialization == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputSerialization"))
+	}
+	if len(v.ExpressionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ExpressionType"))
+	}
+	if v.InputSerialization == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputSerialization"))
+	}
+	if v.Expression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Expression"))
+	}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4848,11 +5077,11 @@ func validateOpUploadPartCopyInput(v *UploadPartCopyInput) error {
 	if v.Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
-	if v.PartNumber == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PartNumber"))
-	}
 	if v.CopySource == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CopySource"))
+	}
+	if v.PartNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PartNumber"))
 	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
@@ -4869,17 +5098,17 @@ func validateOpUploadPartInput(v *UploadPartInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UploadPartInput"}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
-	}
 	if v.PartNumber == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PartNumber"))
 	}
-	if v.UploadId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UploadId"))
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.UploadId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UploadId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

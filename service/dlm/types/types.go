@@ -165,7 +165,8 @@ type PolicyDetails struct {
 	// INSTANCE to create multi-volume snapshots from the volumes for an instance.
 	ResourceTypes []ResourceTypeValues
 
-	// The schedule of policy-defined actions.
+	// The schedules of policy-defined actions. A policy can have up to four schedules
+	// - one mandatory schedule and up to three optional schedules.
 	Schedules []*Schedule
 
 	// The single tag that identifies targeted resources for this policy.

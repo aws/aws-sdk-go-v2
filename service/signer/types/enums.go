@@ -9,6 +9,15 @@ const (
 	CategoryAwsiot Category = "AWSIoT"
 )
 
+// Values returns all known values for Category. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Category) Values() []Category {
+	return []Category{
+		"AWSIoT",
+	}
+}
+
 type EncryptionAlgorithm string
 
 // Enum values for EncryptionAlgorithm
@@ -17,6 +26,16 @@ const (
 	EncryptionAlgorithmEcdsa EncryptionAlgorithm = "ECDSA"
 )
 
+// Values returns all known values for EncryptionAlgorithm. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionAlgorithm) Values() []EncryptionAlgorithm {
+	return []EncryptionAlgorithm{
+		"RSA",
+		"ECDSA",
+	}
+}
+
 type HashAlgorithm string
 
 // Enum values for HashAlgorithm
@@ -24,6 +43,16 @@ const (
 	HashAlgorithmSha1   HashAlgorithm = "SHA1"
 	HashAlgorithmSha256 HashAlgorithm = "SHA256"
 )
+
+// Values returns all known values for HashAlgorithm. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HashAlgorithm) Values() []HashAlgorithm {
+	return []HashAlgorithm{
+		"SHA1",
+		"SHA256",
+	}
+}
 
 type ImageFormat string
 
@@ -34,6 +63,17 @@ const (
 	ImageFormatJsondetached ImageFormat = "JSONDetached"
 )
 
+// Values returns all known values for ImageFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ImageFormat) Values() []ImageFormat {
+	return []ImageFormat{
+		"JSON",
+		"JSONEmbedded",
+		"JSONDetached",
+	}
+}
+
 type SigningProfileStatus string
 
 // Enum values for SigningProfileStatus
@@ -41,6 +81,16 @@ const (
 	SigningProfileStatusActive   SigningProfileStatus = "Active"
 	SigningProfileStatusCanceled SigningProfileStatus = "Canceled"
 )
+
+// Values returns all known values for SigningProfileStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SigningProfileStatus) Values() []SigningProfileStatus {
+	return []SigningProfileStatus{
+		"Active",
+		"Canceled",
+	}
+}
 
 type SigningStatus string
 
@@ -50,3 +100,14 @@ const (
 	SigningStatusFailed     SigningStatus = "Failed"
 	SigningStatusSucceeded  SigningStatus = "Succeeded"
 )
+
+// Values returns all known values for SigningStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SigningStatus) Values() []SigningStatus {
+	return []SigningStatus{
+		"InProgress",
+		"Failed",
+		"Succeeded",
+	}
+}

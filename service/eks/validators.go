@@ -494,14 +494,14 @@ func validateOpCreateClusterInput(v *CreateClusterInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateClusterInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if v.ResourcesVpcConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourcesVpcConfig"))
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
-	if v.ResourcesVpcConfig == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourcesVpcConfig"))
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -515,14 +515,14 @@ func validateOpCreateFargateProfileInput(v *CreateFargateProfileInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateFargateProfileInput"}
-	if v.PodExecutionRoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PodExecutionRoleArn"))
-	}
 	if v.FargateProfileName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FargateProfileName"))
 	}
 	if v.ClusterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.PodExecutionRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PodExecutionRoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -536,14 +536,14 @@ func validateOpCreateNodegroupInput(v *CreateNodegroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateNodegroupInput"}
+	if v.NodeRole == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodeRole"))
+	}
 	if v.Subnets == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Subnets"))
 	}
 	if v.NodegroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NodegroupName"))
-	}
-	if v.NodeRole == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NodeRole"))
 	}
 	if v.ClusterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
@@ -575,11 +575,11 @@ func validateOpDeleteFargateProfileInput(v *DeleteFargateProfileInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteFargateProfileInput"}
-	if v.FargateProfileName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FargateProfileName"))
-	}
 	if v.ClusterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.FargateProfileName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FargateProfileName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -593,11 +593,11 @@ func validateOpDeleteNodegroupInput(v *DeleteNodegroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteNodegroupInput"}
-	if v.NodegroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NodegroupName"))
-	}
 	if v.ClusterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.NodegroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodegroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -644,11 +644,11 @@ func validateOpDescribeNodegroupInput(v *DescribeNodegroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeNodegroupInput"}
-	if v.NodegroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NodegroupName"))
-	}
 	if v.ClusterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.NodegroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodegroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -662,11 +662,11 @@ func validateOpDescribeUpdateInput(v *DescribeUpdateInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeUpdateInput"}
-	if v.UpdateId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UpdateId"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.UpdateId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UpdateId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -758,11 +758,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
-	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -791,11 +791,11 @@ func validateOpUpdateClusterVersionInput(v *UpdateClusterVersionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateClusterVersionInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.Version == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Version"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -827,11 +827,11 @@ func validateOpUpdateNodegroupVersionInput(v *UpdateNodegroupVersionInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateNodegroupVersionInput"}
-	if v.ClusterName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
-	}
 	if v.NodegroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NodegroupName"))
+	}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

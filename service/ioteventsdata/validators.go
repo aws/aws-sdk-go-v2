@@ -111,12 +111,8 @@ func validateDetectorStateDefinition(v *types.DetectorStateDefinition) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DetectorStateDefinition"}
-	if v.Variables == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Variables"))
-	} else if v.Variables != nil {
-		if err := validateVariableDefinitions(v.Variables); err != nil {
-			invalidParams.AddNested("Variables", err.(smithy.InvalidParamsError))
-		}
+	if v.StateName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StateName"))
 	}
 	if v.Timers == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Timers"))
@@ -125,8 +121,12 @@ func validateDetectorStateDefinition(v *types.DetectorStateDefinition) error {
 			invalidParams.AddNested("Timers", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.StateName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StateName"))
+	if v.Variables == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Variables"))
+	} else if v.Variables != nil {
+		if err := validateVariableDefinitions(v.Variables); err != nil {
+			invalidParams.AddNested("Variables", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -143,11 +143,11 @@ func validateMessage(v *types.Message) error {
 	if v.MessageId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MessageId"))
 	}
-	if v.Payload == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Payload"))
-	}
 	if v.InputName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InputName"))
+	}
+	if v.Payload == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Payload"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -213,15 +213,15 @@ func validateUpdateDetectorRequest(v *types.UpdateDetectorRequest) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDetectorRequest"}
-	if v.MessageId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MessageId"))
-	}
 	if v.State == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("State"))
 	} else if v.State != nil {
 		if err := validateDetectorStateDefinition(v.State); err != nil {
 			invalidParams.AddNested("State", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.MessageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MessageId"))
 	}
 	if v.DetectorModelName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorModelName"))
@@ -255,11 +255,11 @@ func validateVariableDefinition(v *types.VariableDefinition) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VariableDefinition"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

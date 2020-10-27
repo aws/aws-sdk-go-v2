@@ -16,7 +16,7 @@ import (
 // These operations can occasionally return an empty set of results even when there
 // are more results available. The NextToken response parameter value is null only
 // when there are no more results to display. This operation can be called only
-// from the organization's master account or by a member account that is a
+// from the organization's management account or by a member account that is a
 // delegated administrator for an AWS service. Policy types can be enabled and
 // disabled in roots. This is distinct from whether they're available in the
 // organization. When you enable all features, you make policy types available for

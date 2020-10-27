@@ -19,9 +19,11 @@ import (
 // operations are related to GetBucketCors:
 //
 //     * PutBucketCors
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketCors.html)
 //
 //     *
 // DeleteBucketCors
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketCors.html)
 func (c *Client) GetBucketCors(ctx context.Context, params *GetBucketCorsInput, optFns ...func(*Options)) (*GetBucketCorsOutput, error) {
 	if params == nil {
 		params = &GetBucketCorsInput{}
@@ -43,6 +45,10 @@ type GetBucketCorsInput struct {
 	//
 	// This member is required.
 	Bucket *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 }
 
 type GetBucketCorsOutput struct {

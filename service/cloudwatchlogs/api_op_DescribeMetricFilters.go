@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Lists the specified metric filters. You can list all the metric filters or
+// Lists the specified metric filters. You can list all of the metric filters or
 // filter the results by log name, prefix, metric name, or metric namespace. The
 // results are ASCII-sorted by filter name.
 func (c *Client) DescribeMetricFilters(ctx context.Context, params *DescribeMetricFiltersInput, optFns ...func(*Options)) (*DescribeMetricFiltersOutput, error) {
@@ -31,7 +31,8 @@ func (c *Client) DescribeMetricFilters(ctx context.Context, params *DescribeMetr
 
 type DescribeMetricFiltersInput struct {
 
-	// The prefix to match.
+	// The prefix to match. CloudWatch Logs uses the value you set here only if you
+	// also include the logGroupName parameter in your request.
 	FilterNamePrefix *string
 
 	// The maximum number of items returned. If you don't specify a value, the default

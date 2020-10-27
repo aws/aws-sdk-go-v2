@@ -20,7 +20,7 @@ import (
 // Enabling encryption by default has no effect on the encryption status of your
 // existing volumes. After you enable encryption by default, you can no longer
 // launch instances using instance types that do not support encryption. For more
-// information, see Supported Instance Types
+// information, see Supported instance types
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances).
 func (c *Client) EnableEbsEncryptionByDefault(ctx context.Context, params *EnableEbsEncryptionByDefaultInput, optFns ...func(*Options)) (*EnableEbsEncryptionByDefaultOutput, error) {
 	if params == nil {

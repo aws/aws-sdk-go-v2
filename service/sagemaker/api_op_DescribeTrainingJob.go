@@ -98,7 +98,7 @@ type DescribeTrainingJobOutput struct {
 	// job stopped because it exceeded the maximum allowed runtime.
 	//
 	//     *
-	// MaxWaitTmeExceeded - The job stopped because it exceeded the maximum allowed
+	// MaxWaitTimeExceeded - The job stopped because it exceeded the maximum allowed
 	// wait time.
 	//
 	//     * Stopped - The training job has stopped.

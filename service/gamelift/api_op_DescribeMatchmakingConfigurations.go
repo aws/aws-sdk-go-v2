@@ -11,14 +11,14 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Retrieves the details of FlexMatch matchmaking configurations. With this
-// operation, you have the following options: (1) retrieve all existing
-// configurations, (2) provide the names of one or more configurations to retrieve,
-// or (3) retrieve all configurations that use a specified rule set name. When
-// requesting multiple items, use the pagination parameters to retrieve results as
-// a set of sequential pages. If successful, a configuration is returned for each
-// requested name. When specifying a list of names, only configurations that
-// currently exist are returned. Learn more  Setting Up FlexMatch Matchmakers
+// Retrieves the details of FlexMatch matchmaking configurations. This operation
+// offers the following options: (1) retrieve all matchmaking configurations, (2)
+// retrieve configurations for a specified list, or (3) retrieve all configurations
+// that use a specified rule set name. When requesting multiple items, use the
+// pagination parameters to retrieve results as a set of sequential pages. If
+// successful, a configuration is returned for each requested name. When specifying
+// a list of names, only configurations that currently exist are returned. Learn
+// more  Setting Up FlexMatch Matchmakers
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/matchmaker-build.html)
 // Related operations
 //
@@ -56,7 +56,7 @@ func (c *Client) DescribeMatchmakingConfigurations(ctx context.Context, params *
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type DescribeMatchmakingConfigurationsInput struct {
 
 	// The maximum number of results to return. Use this parameter with NextToken to
@@ -69,7 +69,7 @@ type DescribeMatchmakingConfigurationsInput struct {
 	Names []*string
 
 	// A token that indicates the start of the next sequential page of results. Use the
-	// token that is returned with a previous call to this action. To start at the
+	// token that is returned with a previous call to this operation. To start at the
 	// beginning of the result set, do not specify a value.
 	NextToken *string
 
@@ -79,14 +79,14 @@ type DescribeMatchmakingConfigurationsInput struct {
 	RuleSetName *string
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type DescribeMatchmakingConfigurationsOutput struct {
 
 	// A collection of requested matchmaking configurations.
 	Configurations []*types.MatchmakingConfiguration
 
 	// A token that indicates where to resume retrieving results on the next call to
-	// this action. If no token is returned, these results represent the end of the
+	// this operation. If no token is returned, these results represent the end of the
 	// list.
 	NextToken *string
 

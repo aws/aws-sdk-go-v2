@@ -524,11 +524,11 @@ func validateOpAssociateResourceSharePermissionInput(v *AssociateResourceSharePe
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociateResourceSharePermissionInput"}
-	if v.PermissionArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PermissionArn"))
-	}
 	if v.ResourceShareArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceShareArn"))
+	}
+	if v.PermissionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PermissionArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -587,11 +587,11 @@ func validateOpDisassociateResourceSharePermissionInput(v *DisassociateResourceS
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateResourceSharePermissionInput"}
-	if v.PermissionArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PermissionArn"))
-	}
 	if v.ResourceShareArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceShareArn"))
+	}
+	if v.PermissionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PermissionArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -755,11 +755,11 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.ResourceShareArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceShareArn"))
-	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	}
+	if v.ResourceShareArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceShareArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -773,11 +773,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.ResourceShareArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceShareArn"))
-	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if v.ResourceShareArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceShareArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

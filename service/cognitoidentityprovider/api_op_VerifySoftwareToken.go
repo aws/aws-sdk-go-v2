@@ -32,6 +32,8 @@ func (c *Client) VerifySoftwareToken(ctx context.Context, params *VerifySoftware
 type VerifySoftwareTokenInput struct {
 
 	// The one time password computed using the secret code returned by
+	// AssociateSoftwareToken"
+	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AssociateSoftwareToken.html).
 	//
 	// This member is required.
 	UserCode *string

@@ -23,10 +23,10 @@ import (
 // also automatically encrypted. For more information, see Amazon EBS Encryption
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html) in the
 // Amazon Elastic Compute Cloud User Guide. You can tag your volumes during
-// creation. For more information, see Tagging Your Amazon EC2 Resources
+// creation. For more information, see Tagging your Amazon EC2 resources
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html) in the
 // Amazon Elastic Compute Cloud User Guide. For more information, see Creating an
-// Amazon EBS Volume
+// Amazon EBS volume
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-creating-volume.html)
 // in the Amazon Elastic Compute Cloud User Guide.
 func (c *Client) CreateVolume(ctx context.Context, params *CreateVolumeInput, optFns ...func(*Options)) (*CreateVolumeOutput, error) {
@@ -60,23 +60,24 @@ type CreateVolumeInput struct {
 	// Specifies whether the volume should be encrypted. The effect of setting the
 	// encryption state to true depends on the volume origin (new or from a snapshot),
 	// starting encryption state, ownership, and whether encryption by default is
-	// enabled. For more information, see Encryption by Default
+	// enabled. For more information, see Encryption by default
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default)
 	// in the Amazon Elastic Compute Cloud User Guide. Encrypted Amazon EBS volumes
 	// must be attached to instances that support Amazon EBS encryption. For more
-	// information, see Supported Instance Types
+	// information, see Supported instance types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances).
 	Encrypted *bool
 
-	// The number of I/O operations per second (IOPS) to provision for the volume, with
-	// a maximum ratio of 50 IOPS/GiB. Range is 100 to 64,000 IOPS for volumes in most
-	// Regions. Maximum IOPS of 64,000 is guaranteed only on Nitro-based instances
+	// The number of I/O operations per second (IOPS) to provision for an io1 or io2
+	// volume, with a maximum ratio of 50 IOPS/GiB for io1, and 500 IOPS/GiB for io2.
+	// Range is 100 to 64,000 IOPS for volumes in most Regions. Maximum IOPS of 64,000
+	// is guaranteed only on Nitro-based instances
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances).
 	// Other instance families guarantee performance up to 32,000 IOPS. For more
-	// information, see Amazon EBS Volume Types
+	// information, see Amazon EBS volume types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) in the
 	// Amazon Elastic Compute Cloud User Guide. This parameter is valid only for
-	// Provisioned IOPS SSD (io1) volumes.
+	// Provisioned IOPS SSD (io1 and io2) volumes.
 	Iops *int32
 
 	// The identifier of the AWS Key Management Service (AWS KMS) customer master key
@@ -115,11 +116,11 @@ type CreateVolumeInput struct {
 	OutpostArn *string
 
 	// The size of the volume, in GiBs. You must specify either a snapshot ID or a
-	// volume size. Constraints: 1-16,384 for gp2, 4-16,384 for io1, 500-16,384 for
-	// st1, 500-16,384 for sc1, and 1-1,024 for standard. If you specify a snapshot,
-	// the volume size must be equal to or larger than the snapshot size. Default: If
-	// you're creating the volume from a snapshot and don't specify a volume size, the
-	// default is the snapshot size.
+	// volume size. Constraints: 1-16,384 for gp2, 4-16,384 for io1 and io2, 500-16,384
+	// for st1, 500-16,384 for sc1, and 1-1,024 for standard. If you specify a
+	// snapshot, the volume size must be equal to or larger than the snapshot size.
+	// Default: If you're creating the volume from a snapshot and don't specify a
+	// volume size, the default is the snapshot size.
 	Size *int32
 
 	// The snapshot from which to create the volume. You must specify either a snapshot
@@ -129,9 +130,9 @@ type CreateVolumeInput struct {
 	// The tags to apply to the volume during creation.
 	TagSpecifications []*types.TagSpecification
 
-	// The volume type. This can be gp2 for General Purpose SSD, io1 for Provisioned
-	// IOPS SSD, st1 for Throughput Optimized HDD, sc1 for Cold HDD, or standard for
-	// Magnetic volumes. Default: gp2
+	// The volume type. This can be gp2 for General Purpose SSD, io1 or io2 for
+	// Provisioned IOPS SSD, st1 for Throughput Optimized HDD, sc1 for Cold HDD, or
+	// standard for Magnetic volumes. Default: gp2
 	VolumeType types.VolumeType
 }
 
@@ -157,15 +158,16 @@ type CreateVolumeOutput struct {
 	// Provisioned IOPS SSD volumes, this represents the number of IOPS that are
 	// provisioned for the volume. For General Purpose SSD volumes, this represents the
 	// baseline performance of the volume and the rate at which the volume accumulates
-	// I/O credits for bursting. For more information, see Amazon EBS Volume Types
+	// I/O credits for bursting. For more information, see Amazon EBS volume types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) in the
 	// Amazon Elastic Compute Cloud User Guide. Constraints: Range is 100-16,000 IOPS
-	// for gp2 volumes and 100 to 64,000IOPS for io1 volumes, in most Regions. The
-	// maximum IOPS for io1 of 64,000 is guaranteed only on Nitro-based instances
+	// for gp2 volumes and 100 to 64,000 IOPS for io1 and io2 volumes, in most Regions.
+	// The maximum IOPS for io1 and io2 of 64,000 is guaranteed only on Nitro-based
+	// instances
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances).
 	// Other instance families guarantee performance up to 32,000 IOPS. Condition: This
-	// parameter is required for requests to create io1 volumes; it is not used in
-	// requests to create gp2, st1, sc1, or standard volumes.
+	// parameter is required for requests to create io1 and io2 volumes; it is not used
+	// in requests to create gp2, st1, sc1, or standard volumes.
 	Iops *int32
 
 	// The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS)
@@ -194,9 +196,9 @@ type CreateVolumeOutput struct {
 	// The ID of the volume.
 	VolumeId *string
 
-	// The volume type. This can be gp2 for General Purpose SSD, io1 for Provisioned
-	// IOPS SSD, st1 for Throughput Optimized HDD, sc1 for Cold HDD, or standard for
-	// Magnetic volumes.
+	// The volume type. This can be gp2 for General Purpose SSD, io1 or io2 for
+	// Provisioned IOPS SSD, st1 for Throughput Optimized HDD, sc1 for Cold HDD, or
+	// standard for Magnetic volumes.
 	VolumeType types.VolumeType
 
 	// Metadata pertaining to the operation's result.

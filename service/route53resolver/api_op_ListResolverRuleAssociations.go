@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Lists the associations that were created between resolver rules and VPCs using
+// Lists the associations that were created between Resolver rules and VPCs using
 // the current AWS account.
 func (c *Client) ListResolverRuleAssociations(ctx context.Context, params *ListResolverRuleAssociationsInput, optFns ...func(*Options)) (*ListResolverRuleAssociationsOutput, error) {
 	if params == nil {
@@ -30,7 +30,7 @@ func (c *Client) ListResolverRuleAssociations(ctx context.Context, params *ListR
 
 type ListResolverRuleAssociationsInput struct {
 
-	// An optional specification to return a subset of resolver rules, such as resolver
+	// An optional specification to return a subset of Resolver rules, such as Resolver
 	// rules that are associated with the same VPC ID. If you submit a second or
 	// subsequent ListResolverRuleAssociations request and specify the NextToken
 	// parameter, you must use the same values for Filters, if any, as in the previous
@@ -60,7 +60,7 @@ type ListResolverRuleAssociationsOutput struct {
 	// response.
 	NextToken *string
 
-	// The associations that were created between resolver rules and VPCs using the
+	// The associations that were created between Resolver rules and VPCs using the
 	// current AWS account, and that match the specified filters, if any.
 	ResolverRuleAssociations []*types.ResolverRuleAssociation
 

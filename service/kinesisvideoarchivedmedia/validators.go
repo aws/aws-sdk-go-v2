@@ -109,11 +109,11 @@ func validateClipTimestampRange(v *types.ClipTimestampRange) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ClipTimestampRange"}
-	if v.StartTimestamp == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StartTimestamp"))
-	}
 	if v.EndTimestamp == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndTimestamp"))
+	}
+	if v.StartTimestamp == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTimestamp"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -149,11 +149,11 @@ func validateTimestampRange(v *types.TimestampRange) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TimestampRange"}
-	if v.StartTimestamp == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StartTimestamp"))
-	}
 	if v.EndTimestamp == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndTimestamp"))
+	}
+	if v.StartTimestamp == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTimestamp"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -186,11 +186,11 @@ func validateOpGetMediaForFragmentListInput(v *GetMediaForFragmentListInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetMediaForFragmentListInput"}
-	if v.StreamName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StreamName"))
-	}
 	if v.Fragments == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Fragments"))
+	}
+	if v.StreamName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -204,13 +204,13 @@ func validateOpListFragmentsInput(v *ListFragmentsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListFragmentsInput"}
-	if v.StreamName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StreamName"))
-	}
 	if v.FragmentSelector != nil {
 		if err := validateFragmentSelector(v.FragmentSelector); err != nil {
 			invalidParams.AddNested("FragmentSelector", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.StreamName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StreamName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

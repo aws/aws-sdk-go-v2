@@ -10027,6 +10027,19 @@ func awsAwsjson10_deserializeDocumentReplicaDescription(v **types.ReplicaDescrip
 				sv.RegionName = &jtv
 			}
 
+		case "ReplicaInaccessibleDateTime":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Date to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.ReplicaInaccessibleDateTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
 		case "ReplicaStatus":
 			if value != nil {
 				jtv, ok := value.(string)

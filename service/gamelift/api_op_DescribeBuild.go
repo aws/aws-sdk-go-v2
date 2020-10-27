@@ -42,7 +42,7 @@ func (c *Client) DescribeBuild(ctx context.Context, params *DescribeBuildInput, 
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type DescribeBuildInput struct {
 
 	// A unique identifier for a build to retrieve properties for. You can use either
@@ -52,7 +52,7 @@ type DescribeBuildInput struct {
 	BuildId *string
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type DescribeBuildOutput struct {
 
 	// Set of properties describing the requested build.

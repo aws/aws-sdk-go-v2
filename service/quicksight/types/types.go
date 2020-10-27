@@ -6,7 +6,8 @@ import (
 	"time"
 )
 
-// The customizations associated with your AWS account for QuickSight.
+// The Amazon QuickSight customizations associated with your AWS account or a
+// QuickSight namespace in a specific AWS Region.
 type AccountCustomization struct {
 
 	// The default theme for this QuickSight subscription.
@@ -16,13 +17,16 @@ type AccountCustomization struct {
 // The QuickSight settings associated with your AWS account.
 type AccountSettings struct {
 
-	// The name associated with the QuickSight subscription in your AWS account.
+	// The "account name" you provided for the QuickSight subscription in your AWS
+	// account. You create this name when you sign up for QuickSight. It is unique in
+	// all of AWS and it appears only in the console when users sign in.
 	AccountName *string
 
 	// The default QuickSight namespace for your AWS account.
 	DefaultNamespace *string
 
-	// The edition of QuickSight that you're currently subscribed to.
+	// The edition of QuickSight that you're currently subscribed to: Enterprise
+	// edition or Standard edition.
 	Edition Edition
 
 	// The main notification email for your QuickSight subscription.
@@ -53,6 +57,111 @@ type AmazonElasticsearchParameters struct {
 	//
 	// This member is required.
 	Domain *string
+}
+
+// Metadata structure for an analysis in Amazon QuickSight
+type Analysis struct {
+
+	// The ID of the analysis.
+	AnalysisId *string
+
+	// The Amazon Resource Name (ARN) of the analysis.
+	Arn *string
+
+	// The time that the analysis was created.
+	CreatedTime *time.Time
+
+	// The ARNs of the datasets of the analysis.
+	DataSetArns []*string
+
+	// Errors associated with the analysis.
+	Errors []*AnalysisError
+
+	// The time that the analysis was last updated.
+	LastUpdatedTime *time.Time
+
+	// The descriptive name of the analysis.
+	Name *string
+
+	// A list of the associated sheets with the unique identifier and name of each
+	// sheet.
+	Sheets []*Sheet
+
+	// Status associated with the analysis.
+	Status ResourceStatus
+
+	// The ARN of the theme of the analysis.
+	ThemeArn *string
+}
+
+// A metadata error structure for an analysis.
+type AnalysisError struct {
+
+	// The message associated with the analysis error.
+	Message *string
+
+	// The type of the analysis error.
+	Type AnalysisErrorType
+}
+
+// A filter that you apply when searching for one or more analyses.
+type AnalysisSearchFilter struct {
+
+	// The name of the value that you want to use as a filter, for example "Name":
+	// "QUICKSIGHT_USER".
+	Name AnalysisFilterAttribute
+
+	// The comparison operator that you want to use as a filter, for example
+	// "Operator": "StringEquals".
+	Operator FilterOperator
+
+	// The value of the named item, in this case QUICKSIGHT_USER, that you want to use
+	// as a filter, for example "Value". An example is
+	// "arn:aws:quicksight:us-east-1:1:user/default/UserName1".
+	Value *string
+}
+
+// The source entity of an analysis.
+type AnalysisSourceEntity struct {
+
+	// The source template for the source entity of the analysis.
+	SourceTemplate *AnalysisSourceTemplate
+}
+
+// The source template of an analysis.
+type AnalysisSourceTemplate struct {
+
+	// The Amazon Resource Name (ARN) of the source template of an analysis.
+	//
+	// This member is required.
+	Arn *string
+
+	// The dataset references of the source template of an analysis.
+	//
+	// This member is required.
+	DataSetReferences []*DataSetReference
+}
+
+// The summary metadata that describes an analysis.
+type AnalysisSummary struct {
+
+	// The ID of the analysis. This ID displays in the URL.
+	AnalysisId *string
+
+	// The Amazon Resource Name (ARN) for the analysis.
+	Arn *string
+
+	// The time that the analysis was created.
+	CreatedTime *time.Time
+
+	// The time that the analysis was last updated.
+	LastUpdatedTime *time.Time
+
+	// The name of the analysis. This name is displayed in the QuickSight console.
+	Name *string
+
+	// The last known status for the analysis.
+	Status ResourceStatus
 }
 
 // Amazon Athena parameters.
@@ -155,6 +264,13 @@ type CastColumnTypeOperation struct {
 	Format *string
 }
 
+// Metadata that contains a description for a column.
+type ColumnDescription struct {
+
+	// The text of a description for a column.
+	Text *string
+}
+
 // Groupings of columns that work together in certain Amazon QuickSight features.
 // This is a variant type structure. For this structure to be valid, only one of
 // the attributes can be non-null.
@@ -199,6 +315,9 @@ type ColumnSchema struct {
 // non-null.
 type ColumnTag struct {
 
+	// A description for a column.
+	ColumnDescription *ColumnDescription
+
 	// A geospatial role for a column.
 	ColumnGeographicRole GeoSpatialDataRole
 }
@@ -229,12 +348,12 @@ type CredentialPair struct {
 	// A set of alternate data source parameters that you want to share for these
 	// credentials. The credentials are applied in tandem with the data source
 	// parameters when you copy a data source by using a create or update request. The
-	// API compares the DataSourceParameters structure that's in the request with the
-	// structures in the AlternateDataSourceParameters allowlist. If the structures are
-	// an exact match, the request is allowed to use the new data source with the
-	// existing credentials. If the AlternateDataSourceParameters list is null, the
-	// DataSourceParameters originally used with these Credentials is automatically
-	// allowed.
+	// API operation compares the DataSourceParameters structure that's in the request
+	// with the structures in the AlternateDataSourceParameters allow list. If the
+	// structures are an exact match, the request is allowed to use the new data source
+	// with the existing credentials. If the AlternateDataSourceParameters list is
+	// null, the DataSourceParameters originally used with these Credentials is
+	// automatically allowed.
 	AlternateDataSourceParameters []*DataSourceParameters
 }
 
@@ -382,15 +501,19 @@ type DashboardVersion struct {
 	// The time that this dashboard version was created.
 	CreatedTime *time.Time
 
-	// The Amazon Resource Numbers (ARNs) for the datasets that are associated with a
-	// version of the dashboard.
+	// The Amazon Resource Numbers (ARNs) for the datasets that are associated with
+	// this version of the dashboard.
 	DataSetArns []*string
 
 	// Description.
 	Description *string
 
-	// Errors.
+	// Errors associated with this dashboard version.
 	Errors []*DashboardError
+
+	// A list of the associated sheets with the unique identifier and name of each
+	// sheet.
+	Sheets []*Sheet
 
 	// Source entity ARN.
 	SourceEntityArn *string
@@ -398,7 +521,10 @@ type DashboardVersion struct {
 	// The HTTP status of the request.
 	Status ResourceStatus
 
-	// Version number.
+	// The ARN of the theme associated with a version of the dashboard.
+	ThemeArn *string
+
+	// Version number for this version of the dashboard.
 	VersionNumber *int64
 }
 
@@ -425,7 +551,7 @@ type DashboardVersionSummary struct {
 }
 
 // The theme colors that are used for data colors in charts. The colors description
-// is a hexidecimal color code that consists of six alphanumerical characters,
+// is a hexadecimal color code that consists of six alphanumerical characters,
 // prefixed with #, for example #37BFF5.
 type DataColorPalette struct {
 
@@ -549,12 +675,12 @@ type DataSource struct {
 	// A set of alternate data source parameters that you want to share for the
 	// credentials stored with this data source. The credentials are applied in tandem
 	// with the data source parameters when you copy a data source by using a create or
-	// update request. The API compares the DataSourceParameters structure that's in
-	// the request with the structures in the AlternateDataSourceParameters allowlist.
-	// If the structures are an exact match, the request is allowed to use the
-	// credentials from this existing data source. If the AlternateDataSourceParameters
-	// list is null, the Credentials originally used with this DataSourceParameters are
-	// automatically allowed.
+	// update request. The API operation compares the DataSourceParameters structure
+	// that's in the request with the structures in the AlternateDataSourceParameters
+	// allow list. If the structures are an exact match, the request is allowed to use
+	// the credentials from this existing data source. If the
+	// AlternateDataSourceParameters list is null, the Credentials originally used with
+	// this DataSourceParameters are automatically allowed.
 	AlternateDataSourceParameters []*DataSourceParameters
 
 	// The Amazon Resource Name (ARN) of the data source.
@@ -685,29 +811,29 @@ type DataSourceParameters struct {
 	TwitterParameters *TwitterParameters
 }
 
-// Date time parameter.
+// A date-time parameter.
 type DateTimeParameter struct {
 
-	// A display name for the dataset.
+	// A display name for the date-time parameter.
 	//
 	// This member is required.
 	Name *string
 
-	// Values.
+	// The values for the date-time parameter.
 	//
 	// This member is required.
 	Values []*time.Time
 }
 
-// Decimal parameter.
+// A decimal parameter.
 type DecimalParameter struct {
 
-	// A display name for the dataset.
+	// A display name for the decimal parameter.
 	//
 	// This member is required.
 	Name *string
 
-	// Values.
+	// The values for the decimal parameter.
 	//
 	// This member is required.
 	Values []*float64
@@ -760,8 +886,7 @@ type GeoSpatialColumnGroup struct {
 }
 
 // A group in Amazon QuickSight consists of a set of users. You can use groups to
-// make it easier to manage access and security. Currently, an Amazon QuickSight
-// subscription can't contain more than 500 Amazon QuickSight groups.
+// make it easier to manage access and security.
 type Group struct {
 
 	// The Amazon Resource Name (ARN) for the group.
@@ -885,15 +1010,15 @@ type InputColumn struct {
 	Type InputColumnDataType
 }
 
-// Integer parameter.
+// An integer parameter.
 type IntegerParameter struct {
 
-	// A display name for the dataset.
+	// The name of the integer parameter.
 	//
 	// This member is required.
 	Name *string
 
-	// Values.
+	// The values for the integer parameter.
 	//
 	// This member is required.
 	Values []*int64
@@ -1051,12 +1176,15 @@ type NamespaceInfoV2 struct {
 	// The name of the error.
 	Name *string
 
-	// An error that occured when the namespace was created.
+	// An error that occurred when the namespace was created.
 	NamespaceError *NamespaceError
 }
 
 // Output column.
 type OutputColumn struct {
+
+	// A description for a column.
+	Description *string
 
 	// A display name for the dataset.
 	Name *string
@@ -1065,10 +1193,10 @@ type OutputColumn struct {
 	Type ColumnDataType
 }
 
-// Parameters.
+// A list of QuickSight parameters and the list's override values.
 type Parameters struct {
 
-	// DateTime parameters.
+	// Date-time parameters.
 	DateTimeParameters []*DateTimeParameter
 
 	// Decimal parameters.
@@ -1232,7 +1360,7 @@ type RenameColumnOperation struct {
 // Permission for the resource.
 type ResourcePermission struct {
 
-	// The action to grant or revoke permissions on, for example
+	// The IAM action to grant or revoke permissions on, for example
 	// "quicksight:DescribeDashboard".
 	//
 	// This member is required.
@@ -1241,12 +1369,16 @@ type ResourcePermission struct {
 	// The Amazon Resource Name (ARN) of the principal. This can be one of the
 	// following:
 	//
-	//     * The ARN of an Amazon QuickSight user, group, or namespace.
-	// (This is most common.)
+	//     * The ARN of an Amazon QuickSight user or group associated with
+	// a data source or dataset. (This is common.)
 	//
-	//     * The ARN of an AWS account root: This is an IAM ARN
-	// rather than a QuickSight ARN. Use this option only to share resources
-	// (templates) across AWS accounts. (This is less common.)
+	//     * The ARN of an Amazon
+	// QuickSight user, group, or namespace associated with an analysis, dashboard,
+	// template, or theme. (This is common.)
+	//
+	//     * The ARN of an AWS account root:
+	// This is an IAM ARN rather than a QuickSight ARN. Use this option only to share
+	// resources (templates) across AWS accounts. (This is less common.)
 	//
 	// This member is required.
 	Principal *string
@@ -1313,6 +1445,22 @@ type ServiceNowParameters struct {
 	//
 	// This member is required.
 	SiteBaseUrl *string
+}
+
+// A sheet, which is an object that contains a set of visuals that are viewed
+// together on one page in the Amazon QuickSight console. Every analysis and
+// dashboard contains at least one sheet. Each sheet contains at least one
+// visualization widget, for example a chart, pivot table, or narrative insight.
+// Sheets can be associated with other components, such as controls, filters, and
+// so on.
+type Sheet struct {
+
+	// The name of a sheet. This name is displayed on the sheet's tab in the QuickSight
+	// console.
+	Name *string
+
+	// The unique identifier associated with a sheet.
+	SheetId *string
 }
 
 // Sheet controls option.
@@ -1392,15 +1540,15 @@ type SslProperties struct {
 	DisableSsl *bool
 }
 
-// String parameter.
+// A string parameter.
 type StringParameter struct {
 
-	// A display name for the dataset.
+	// A display name for a string parameter.
 	//
 	// This member is required.
 	Name *string
 
-	// Values.
+	// The values of a string parameter.
 	//
 	// This member is required.
 	Values []*string
@@ -1439,11 +1587,11 @@ type TagColumnOperation struct {
 // A template object. A template is an entity in QuickSight that encapsulates the
 // metadata required to create an analysis and that you can use to create a
 // dashboard. A template adds a layer of abstraction by using placeholders to
-// replace the dataset associated with the analysis. You can use templates to
-// create dashboards by replacing dataset placeholders with datasets that follow
-// the same schema that was used to create the source analysis and template. You
-// can share templates across AWS accounts by allowing users in other AWS accounts
-// to create a template or a dashboard from an existing template.
+// replace the dataset associated with an analysis. You can use templates to create
+// dashboards by replacing dataset placeholders with datasets that follow the same
+// schema that was used to create the source analysis and template. You can share
+// templates across AWS accounts by allowing users in other AWS accounts to create
+// a template or a dashboard from an existing template.
 type Template struct {
 
 	// The Amazon Resource Name (ARN) of the template.
@@ -1550,25 +1698,32 @@ type TemplateVersion struct {
 	// The time that this template version was created.
 	CreatedTime *time.Time
 
-	// Schema of the dataset identified by the placeholder. The idea is that any
-	// dashboard created from the template should be bound to new datasets matching the
-	// same schema described through this API. .
+	// Schema of the dataset identified by the placeholder. Any dashboard created from
+	// this template should be bound to new datasets matching the same schema described
+	// through this API operation.
 	DataSetConfigurations []*DataSetConfiguration
 
 	// The description of the template.
 	Description *string
 
-	// Errors associated with the template.
+	// Errors associated with this template version.
 	Errors []*TemplateError
 
-	// The Amazon Resource Name (ARN) of the analysis or template which was used to
+	// A list of the associated sheets with the unique identifier and name of each
+	// sheet.
+	Sheets []*Sheet
+
+	// The Amazon Resource Name (ARN) of an analysis or template that was used to
 	// create this template.
 	SourceEntityArn *string
 
 	// The HTTP status of the request.
 	Status ResourceStatus
 
-	// The version number of the template.
+	// The ARN of the theme associated with this version of the template.
+	ThemeArn *string
+
+	// The version number of the template version.
 	VersionNumber *int64
 }
 
@@ -1610,7 +1765,7 @@ type TeradataParameters struct {
 	Port *int32
 }
 
-//
+// Summary information about a theme.
 type Theme struct {
 
 	// The Amazon Resource Name (ARN) of the theme.
@@ -1801,7 +1956,7 @@ type TwitterParameters struct {
 }
 
 // The theme colors that apply to UI and to charts, excluding data colors. The
-// colors description is a hexidecimal color code that consists of six
+// colors description is a hexadecimal color code that consists of six
 // alphanumerical characters, prefixed with #, for example #37BFF5. For more
 // information, see Using Themes in Amazon QuickSight
 // (https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html)
@@ -1886,8 +2041,7 @@ type UploadSettings struct {
 	TextQualifier TextQualifier
 }
 
-// A registered user of Amazon QuickSight. Currently, an Amazon QuickSight
-// subscription can't contain more than 20 million users.
+// A registered user of Amazon QuickSight.
 type User struct {
 
 	// The active status of user. When you create an Amazon QuickSight user that’s not

@@ -12,11 +12,11 @@ import (
 
 // Removes a member account from its parent organization. This version of the
 // operation is performed by the account that wants to leave. To remove a member
-// account as a user in the master account, use RemoveAccountFromOrganization
+// account as a user in the management account, use RemoveAccountFromOrganization
 // instead. This operation can be called only from a member account in the
 // organization.
 //
-//     * The master account in an organization with all features
+//     * The management account in an organization with all features
 // enabled can set service control policies (SCPs) that can restrict what
 // administrators of member accounts can do. This includes preventing them from
 // successfully calling LeaveOrganization and leaving the organization.
@@ -27,23 +27,21 @@ import (
 // create an account in an organization using the AWS Organizations console, API,
 // or CLI commands, the information required of standalone accounts is not
 // automatically collected. For each account that you want to make standalone, you
-// must do the following steps:
-//
-//         * Accept the end user license agreement
-// (EULA)
+// must perform the following steps. If any of the steps are already completed for
+// this account, that step doesn't appear.
 //
 //         * Choose a support plan
 //
-//         * Provide and verify the
-// required contact information
 //
-//         * Provide a current payment method
+// * Provide and verify the required contact information
 //
+//         * Provide a
+// current payment method
 //
-// AWS uses the payment method to charge for any billable (not free tier) AWS
-// activity that occurs while the account isn't attached to an organization. Follow
-// the steps at  To leave an organization when all required account information has
-// not yet been provided
+//     AWS uses the payment method to charge for any
+// billable (not free tier) AWS activity that occurs while the account isn't
+// attached to an organization. Follow the steps at  To leave an organization when
+// all required account information has not yet been provided
 // (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
 // in the AWS Organizations User Guide.
 //
@@ -52,6 +50,11 @@ import (
 // information, see Activating Access to the Billing and Cost Management Console
 // (http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate)
 // in the AWS Billing and Cost Management User Guide.
+//
+//     * After the account
+// leaves the organization, all tags that were attached to the account object in
+// the organization are deleted. AWS accounts outside of an organization do not
+// support tags.
 func (c *Client) LeaveOrganization(ctx context.Context, params *LeaveOrganizationInput, optFns ...func(*Options)) (*LeaveOrganizationOutput, error) {
 	if params == nil {
 		params = &LeaveOrganizationInput{}

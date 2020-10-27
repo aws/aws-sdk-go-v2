@@ -41,13 +41,11 @@ type PutConformancePackInput struct {
 	// This member is required.
 	ConformancePackName *string
 
-	// AWS Config stores intermediate files while processing conformance pack template.
-	//
-	// This member is required.
-	DeliveryS3Bucket *string
-
 	// A list of ConformancePackInputParameter objects.
 	ConformancePackInputParameters []*types.ConformancePackInputParameter
+
+	// AWS Config stores intermediate files while processing conformance pack template.
+	DeliveryS3Bucket *string
 
 	// The prefix for the Amazon S3 bucket.
 	DeliveryS3KeyPrefix *string

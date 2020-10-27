@@ -4,6 +4,7 @@ package kendra
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
@@ -12,12 +13,11 @@ import (
 )
 
 // Creates a data source that you use to with an Amazon Kendra index. You specify a
-// name, connector type and description for your data source. You can choose
-// between an S3 connector, a SharePoint Online connector, and a database
-// connector. You also specify configuration information such as document metadata
-// (author, source URI, and so on) and user context information. CreateDataSource
-// is a synchronous operation. The operation returns 200 if the data source was
-// successfully created. Otherwise, an exception is raised.
+// name, data source connector type and description for your data source. You also
+// specify configuration information such as document metadata (author, source URI,
+// and so on) and user context information. CreateDataSource is a synchronous
+// operation. The operation returns 200 if the data source was successfully
+// created. Otherwise, an exception is raised.
 func (c *Client) CreateDataSource(ctx context.Context, params *CreateDataSourceInput, optFns ...func(*Options)) (*CreateDataSourceOutput, error) {
 	if params == nil {
 		params = &CreateDataSourceInput{}
@@ -35,12 +35,6 @@ func (c *Client) CreateDataSource(ctx context.Context, params *CreateDataSourceI
 
 type CreateDataSourceInput struct {
 
-	// The connector configuration information that is required to access the
-	// repository.
-	//
-	// This member is required.
-	Configuration *types.DataSourceConfiguration
-
 	// The identifier of the index that should be associated with this data source.
 	//
 	// This member is required.
@@ -52,25 +46,39 @@ type CreateDataSourceInput struct {
 	// This member is required.
 	Name *string
 
-	// The Amazon Resource Name (ARN) of a role with permission to access the data
-	// source. For more information, see IAM Roles for Amazon Kendra
-	// (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html).
-	//
-	// This member is required.
-	RoleArn *string
-
 	// The type of repository that contains the data source.
 	//
 	// This member is required.
 	Type types.DataSourceType
 
+	// A token that you provide to identify the request to create a data source.
+	// Multiple calls to the CreateDataSource operation with the same client token will
+	// create only one data source.
+	ClientToken *string
+
+	// The connector configuration information that is required to access the
+	// repository. You can't specify the Configuration parameter when the Type
+	// parameter is set to CUSTOM. If you do, you receive a ValidationException
+	// exception. The Configuration parameter is required for all other data sources.
+	Configuration *types.DataSourceConfiguration
+
 	// A description for the data source.
 	Description *string
+
+	// The Amazon Resource Name (ARN) of a role with permission to access the data
+	// source. For more information, see IAM Roles for Amazon Kendra
+	// (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html). You can't specify
+	// the RoleArn parameter when the Type parameter is set to CUSTOM. If you do, you
+	// receive a ValidationException exception. The RoleArn parameter is required for
+	// all other data sources.
+	RoleArn *string
 
 	// Sets the frequency that Amazon Kendra will check the documents in your
 	// repository and update the index. If you don't set a schedule Amazon Kendra will
 	// not periodically update the index. You can call the StartDataSourceSyncJob
-	// operation to update the index.
+	// operation to update the index. You can't specify the Schedule parameter when the
+	// Type parameter is set to CUSTOM. If you do, you receive a ValidationException
+	// exception.
 	Schedule *string
 
 	// A list of key-value pairs that identify the data source. You can use the tags to
@@ -108,11 +116,45 @@ func addOperationCreateDataSourceMiddlewares(stack *middleware.Stack, options Op
 	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addIdempotencyToken_opCreateDataSourceMiddleware(stack, options)
 	addOpCreateDataSourceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataSource(options.Region), middleware.Before)
 	addRequestIDRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)
 	return nil
+}
+
+type idempotencyToken_initializeOpCreateDataSource struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpCreateDataSource) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpCreateDataSource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*CreateDataSourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *CreateDataSourceInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opCreateDataSourceMiddleware(stack *middleware.Stack, cfg Options) {
+	stack.Initialize.Add(&idempotencyToken_initializeOpCreateDataSource{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opCreateDataSource(region string) awsmiddleware.RegisterServiceMetadata {

@@ -29,6 +29,9 @@ func (c *Client) CreateChannel(ctx context.Context, params *CreateChannelInput, 
 
 type CreateChannelInput struct {
 
+	// Whether the channel is authorized. Default: false.
+	Authorized *bool
+
 	// Channel latency mode. Default: LOW.
 	LatencyMode types.ChannelLatencyMode
 

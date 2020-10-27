@@ -182,7 +182,8 @@ type CreateTableInput struct {
 	// The settings can be modified using the UpdateTable operation. If you set
 	// BillingMode as PROVISIONED, you must specify this property. If you set
 	// BillingMode as PAY_PER_REQUEST, you cannot specify this property. For current
-	// minimum and maximum provisioned throughput values, see Limits
+	// minimum and maximum provisioned throughput values, see Service, Account, and
+	// Table Quotas
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ProvisionedThroughput *types.ProvisionedThroughput

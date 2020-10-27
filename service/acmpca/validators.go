@@ -110,6 +110,26 @@ func (m *validateOpDeletePermission) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeletePolicy struct {
+}
+
+func (*validateOpDeletePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeCertificateAuthorityAuditReport struct {
 }
 
@@ -210,6 +230,26 @@ func (m *validateOpGetCertificate) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetPolicy struct {
+}
+
+func (*validateOpGetPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpImportCertificateAuthorityCertificate struct {
 }
 
@@ -285,6 +325,26 @@ func (m *validateOpListTags) HandleInitialize(ctx context.Context, in middleware
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutPolicy struct {
+}
+
+func (*validateOpPutPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutPolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -410,6 +470,10 @@ func addOpDeletePermissionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePermission{}, middleware.After)
 }
 
+func addOpDeletePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePolicy{}, middleware.After)
+}
+
 func addOpDescribeCertificateAuthorityAuditReportValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeCertificateAuthorityAuditReport{}, middleware.After)
 }
@@ -430,6 +494,10 @@ func addOpGetCertificateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetCertificate{}, middleware.After)
 }
 
+func addOpGetPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPolicy{}, middleware.After)
+}
+
 func addOpImportCertificateAuthorityCertificateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpImportCertificateAuthorityCertificate{}, middleware.After)
 }
@@ -444,6 +512,10 @@ func addOpListPermissionsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListTagsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTags{}, middleware.After)
+}
+
+func addOpPutPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutPolicy{}, middleware.After)
 }
 
 func addOpRestoreCertificateAuthorityValidationMiddleware(stack *middleware.Stack) error {
@@ -471,14 +543,14 @@ func validateCertificateAuthorityConfiguration(v *types.CertificateAuthorityConf
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CertificateAuthorityConfiguration"}
-	if len(v.KeyAlgorithm) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("KeyAlgorithm"))
-	}
 	if len(v.SigningAlgorithm) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SigningAlgorithm"))
 	}
 	if v.Subject == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Subject"))
+	}
+	if len(v.KeyAlgorithm) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyAlgorithm"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -556,11 +628,11 @@ func validateValidity(v *types.Validity) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Validity"}
-	if len(v.Type) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Type"))
-	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -574,14 +646,14 @@ func validateOpCreateCertificateAuthorityAuditReportInput(v *CreateCertificateAu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateCertificateAuthorityAuditReportInput"}
-	if v.CertificateAuthorityArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityArn"))
+	if v.S3BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3BucketName"))
 	}
 	if len(v.AuditReportResponseFormat) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("AuditReportResponseFormat"))
 	}
-	if v.S3BucketName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("S3BucketName"))
+	if v.CertificateAuthorityArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -595,13 +667,10 @@ func validateOpCreateCertificateAuthorityInput(v *CreateCertificateAuthorityInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateCertificateAuthorityInput"}
-	if v.RevocationConfiguration != nil {
-		if err := validateRevocationConfiguration(v.RevocationConfiguration); err != nil {
-			invalidParams.AddNested("RevocationConfiguration", err.(smithy.InvalidParamsError))
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if len(v.CertificateAuthorityType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityType"))
 	}
 	if v.CertificateAuthorityConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityConfiguration"))
@@ -610,9 +679,12 @@ func validateOpCreateCertificateAuthorityInput(v *CreateCertificateAuthorityInpu
 			invalidParams.AddNested("CertificateAuthorityConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Tags != nil {
-		if err := validateTagList(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+	if len(v.CertificateAuthorityType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityType"))
+	}
+	if v.RevocationConfiguration != nil {
+		if err := validateRevocationConfiguration(v.RevocationConfiguration); err != nil {
+			invalidParams.AddNested("RevocationConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -668,6 +740,21 @@ func validateOpDeletePermissionInput(v *DeletePermissionInput) error {
 	}
 	if v.Principal == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Principal"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeletePolicyInput(v *DeletePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePolicyInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -757,16 +844,31 @@ func validateOpGetCertificateInput(v *GetCertificateInput) error {
 	}
 }
 
+func validateOpGetPolicyInput(v *GetPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPolicyInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpImportCertificateAuthorityCertificateInput(v *ImportCertificateAuthorityCertificateInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ImportCertificateAuthorityCertificateInput"}
-	if v.CertificateAuthorityArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityArn"))
-	}
 	if v.Certificate == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Certificate"))
+	}
+	if v.CertificateAuthorityArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -780,11 +882,14 @@ func validateOpIssueCertificateInput(v *IssueCertificateInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "IssueCertificateInput"}
+	if v.Csr == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Csr"))
+	}
 	if v.CertificateAuthorityArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityArn"))
 	}
-	if v.Csr == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Csr"))
+	if len(v.SigningAlgorithm) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SigningAlgorithm"))
 	}
 	if v.Validity == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Validity"))
@@ -792,9 +897,6 @@ func validateOpIssueCertificateInput(v *IssueCertificateInput) error {
 		if err := validateValidity(v.Validity); err != nil {
 			invalidParams.AddNested("Validity", err.(smithy.InvalidParamsError))
 		}
-	}
-	if len(v.SigningAlgorithm) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("SigningAlgorithm"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -833,6 +935,24 @@ func validateOpListTagsInput(v *ListTagsInput) error {
 	}
 }
 
+func validateOpPutPolicyInput(v *PutPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutPolicyInput"}
+	if v.Policy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpRestoreCertificateAuthorityInput(v *RestoreCertificateAuthorityInput) error {
 	if v == nil {
 		return nil
@@ -853,14 +973,14 @@ func validateOpRevokeCertificateInput(v *RevokeCertificateInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RevokeCertificateInput"}
+	if v.CertificateSerial == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateSerial"))
+	}
 	if v.CertificateAuthorityArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityArn"))
 	}
 	if len(v.RevocationReason) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("RevocationReason"))
-	}
-	if v.CertificateSerial == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CertificateSerial"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -896,15 +1016,15 @@ func validateOpUntagCertificateAuthorityInput(v *UntagCertificateAuthorityInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagCertificateAuthorityInput"}
-	if v.CertificateAuthorityArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityArn"))
-	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.CertificateAuthorityArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

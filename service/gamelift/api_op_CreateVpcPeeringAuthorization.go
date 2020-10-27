@@ -64,7 +64,7 @@ func (c *Client) CreateVpcPeeringAuthorization(ctx context.Context, params *Crea
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type CreateVpcPeeringAuthorizationInput struct {
 
 	// A unique identifier for the AWS account that you use to manage your Amazon
@@ -85,7 +85,7 @@ type CreateVpcPeeringAuthorizationInput struct {
 	PeerVpcId *string
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type CreateVpcPeeringAuthorizationOutput struct {
 
 	// Details on the requested VPC peering authorization, including expiration.

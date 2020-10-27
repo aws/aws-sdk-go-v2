@@ -28,8 +28,8 @@ import (
 // automatically included in requests that CloudFront sends to the origin.
 // CloudFront sends a request when it can’t find an object in its cache that
 // matches the request’s cache key. If you want to send values to the origin but
-// not include them in the cache key, use CreateOriginRequestPolicy. For more
-// information about cache policies, see Controlling the cache key
+// not include them in the cache key, use OriginRequestPolicy. For more information
+// about cache policies, see Controlling the cache key
 // (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html)
 // in the Amazon CloudFront Developer Guide.
 func (c *Client) CreateCachePolicy(ctx context.Context, params *CreateCachePolicyInput, optFns ...func(*Options)) (*CreateCachePolicyOutput, error) {

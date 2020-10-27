@@ -13,7 +13,7 @@ import (
 )
 
 // Gets the history of an asset property's values. For more information, see
-// Querying Historical Property Values
+// Querying historical values
 // (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#historical-values)
 // in the AWS IoT SiteWise User Guide. To identify an asset property, you must
 // specify one of the following:
@@ -49,7 +49,7 @@ type GetAssetPropertyValueHistoryInput struct {
 	// seconds in Unix epoch time.
 	EndDate *time.Time
 
-	// The maximum number of results to be returned per paginated request.
+	// The maximum number of results to be returned per paginated request. Default: 100
 	MaxResults *int32
 
 	// The token to be used for the next set of paginated results.
@@ -57,7 +57,7 @@ type GetAssetPropertyValueHistoryInput struct {
 
 	// The property alias that identifies the property, such as an OPC-UA server data
 	// stream path (for example, /company/windfarm/3/turbine/7/temperature). For more
-	// information, see Mapping Industrial Data Streams to Asset Properties
+	// information, see Mapping industrial data streams to asset properties
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
 	// in the AWS IoT SiteWise User Guide.
 	PropertyAlias *string
@@ -72,7 +72,7 @@ type GetAssetPropertyValueHistoryInput struct {
 	// in seconds in Unix epoch time.
 	StartDate *time.Time
 
-	// The chronological sorting order of the requested information.
+	// The chronological sorting order of the requested information. Default: ASCENDING
 	TimeOrdering types.TimeOrdering
 }
 

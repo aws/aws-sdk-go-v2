@@ -20,7 +20,15 @@ import (
 // configuration specifies the CRL expiration period in days (the validity period
 // of the CRL), the Amazon S3 bucket that will contain the CRL, and a CNAME alias
 // for the S3 bucket that is included in certificates issued by the CA. If
-// successful, this action returns the Amazon Resource Name (ARN) of the CA.
+// successful, this action returns the Amazon Resource Name (ARN) of the CA. ACM
+// Private CAA assets that are stored in Amazon S3 can be protected with
+// encryption. For more information, see Encrypting Your CRLs
+// (https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#crl-encryption).
+// Both PCA and the IAM principal must have permission to write to the S3 bucket
+// that you specify. If the IAM principal making the call does not have permission
+// to write to the bucket, then an exception is thrown. For more information, see
+// Configure Access to ACM Private CA
+// (https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaAuthAccess.html).
 func (c *Client) CreateCertificateAuthority(ctx context.Context, params *CreateCertificateAuthorityInput, optFns ...func(*Options)) (*CreateCertificateAuthorityOutput, error) {
 	if params == nil {
 		params = &CreateCertificateAuthorityInput{}
@@ -50,19 +58,20 @@ type CreateCertificateAuthorityInput struct {
 	CertificateAuthorityType types.CertificateAuthorityType
 
 	// Alphanumeric string that can be used to distinguish between calls to
-	// CreateCertificateAuthority. Idempotency tokens time out after five minutes.
-	// Therefore, if you call CreateCertificateAuthority multiple times with the same
-	// idempotency token within a five minute period, ACM Private CA recognizes that
-	// you are requesting only one certificate. As a result, ACM Private CA issues only
-	// one. If you change the idempotency token for each call, however, ACM Private CA
-	// recognizes that you are requesting multiple certificates.
+	// CreateCertificateAuthority. For a given token, ACM Private CA creates exactly
+	// one CA. If you issue a subsequent call using the same token, ACM Private CA
+	// returns the ARN of the existing CA and takes no further action. If you change
+	// the idempotency token across multiple calls, ACM Private CA creates a unique CA
+	// for each unique token.
 	IdempotencyToken *string
 
 	// Contains a Boolean value that you can use to enable a certification revocation
 	// list (CRL) for the CA, the name of the S3 bucket to which ACM Private CA will
 	// write the CRL, and an optional CNAME alias that you can use to hide the name of
 	// your bucket in the CRL Distribution Points extension of your CA certificate. For
-	// more information, see the CrlConfiguration structure.
+	// more information, see the CrlConfiguration
+	// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CrlConfiguration.html)
+	// structure.
 	RevocationConfiguration *types.RevocationConfiguration
 
 	// Key-value pairs that will be attached to the new private CA. You can associate

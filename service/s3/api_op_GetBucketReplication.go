@@ -23,12 +23,17 @@ import (
 // you include the Filter element in a replication configuration, you must also
 // include the DeleteMarkerReplication and Priority elements. The response also
 // returns those elements. For information about GetBucketReplication errors, see
-// ReplicationErrorCodeList The following operations are related to
-// GetBucketReplication:
+// List of replication-related error codes
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ReplicationErrorCodeList)
+// The following operations are related to GetBucketReplication:
 //
-//     * PutBucketReplication
+//     *
+// PutBucketReplication
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketReplication.html)
 //
-//     * DeleteBucketReplication
+//
+// * DeleteBucketReplication
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketReplication.html)
 func (c *Client) GetBucketReplication(ctx context.Context, params *GetBucketReplicationInput, optFns ...func(*Options)) (*GetBucketReplicationOutput, error) {
 	if params == nil {
 		params = &GetBucketReplicationInput{}
@@ -50,6 +55,10 @@ type GetBucketReplicationInput struct {
 	//
 	// This member is required.
 	Bucket *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 }
 
 type GetBucketReplicationOutput struct {

@@ -12,7 +12,7 @@ import (
 
 // Enable portfolio sharing feature through AWS Organizations. This API will allow
 // Service Catalog to receive updates on your organization in order to sync your
-// shares with the current structure. This API can only be called by the master
+// shares with the current structure. This API can only be called by the management
 // account in the organization. By calling this API Service Catalog will make a
 // call to organizations:EnableAWSServiceAccess on your behalf so that your shares
 // can be in sync with any changes in your AWS Organizations structure. Note that a

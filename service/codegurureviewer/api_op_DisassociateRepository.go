@@ -31,7 +31,7 @@ type DisassociateRepositoryInput struct {
 
 	// The Amazon Resource Name (ARN) of the RepositoryAssociation
 	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html)
-	// object.
+	// object. You can retrieve this ARN by calling ListRepositories.
 	//
 	// This member is required.
 	AssociationArn *string

@@ -13,6 +13,19 @@ const (
 	ClusterStateCancelled       ClusterState = "Cancelled"
 )
 
+// Values returns all known values for ClusterState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ClusterState) Values() []ClusterState {
+	return []ClusterState{
+		"AwaitingQuorum",
+		"Pending",
+		"InUse",
+		"Complete",
+		"Cancelled",
+	}
+}
+
 type JobState string
 
 // Enum values for JobState
@@ -32,6 +45,27 @@ const (
 	JobStatePending                   JobState = "Pending"
 )
 
+// Values returns all known values for JobState. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (JobState) Values() []JobState {
+	return []JobState{
+		"New",
+		"PreparingAppliance",
+		"PreparingShipment",
+		"InTransitToCustomer",
+		"WithCustomer",
+		"InTransitToAWS",
+		"WithAWSSortingFacility",
+		"WithAWS",
+		"InProgress",
+		"Complete",
+		"Cancelled",
+		"Listing",
+		"Pending",
+	}
+}
+
 type JobType string
 
 // Enum values for JobType
@@ -40,6 +74,57 @@ const (
 	JobTypeExport    JobType = "EXPORT"
 	JobTypeLocal_use JobType = "LOCAL_USE"
 )
+
+// Values returns all known values for JobType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (JobType) Values() []JobType {
+	return []JobType{
+		"IMPORT",
+		"EXPORT",
+		"LOCAL_USE",
+	}
+}
+
+type ShipmentState string
+
+// Enum values for ShipmentState
+const (
+	ShipmentStateReceived ShipmentState = "RECEIVED"
+	ShipmentStateReturned ShipmentState = "RETURNED"
+)
+
+// Values returns all known values for ShipmentState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ShipmentState) Values() []ShipmentState {
+	return []ShipmentState{
+		"RECEIVED",
+		"RETURNED",
+	}
+}
+
+type ShippingLabelStatus string
+
+// Enum values for ShippingLabelStatus
+const (
+	ShippingLabelStatusIn_progress ShippingLabelStatus = "InProgress"
+	ShippingLabelStatusTimed_out   ShippingLabelStatus = "TimedOut"
+	ShippingLabelStatusSucceeded   ShippingLabelStatus = "Succeeded"
+	ShippingLabelStatusFailed      ShippingLabelStatus = "Failed"
+)
+
+// Values returns all known values for ShippingLabelStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ShippingLabelStatus) Values() []ShippingLabelStatus {
+	return []ShippingLabelStatus{
+		"InProgress",
+		"TimedOut",
+		"Succeeded",
+		"Failed",
+	}
+}
 
 type ShippingOption string
 
@@ -50,6 +135,18 @@ const (
 	ShippingOptionExpress    ShippingOption = "EXPRESS"
 	ShippingOptionStandard   ShippingOption = "STANDARD"
 )
+
+// Values returns all known values for ShippingOption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ShippingOption) Values() []ShippingOption {
+	return []ShippingOption{
+		"SECOND_DAY",
+		"NEXT_DAY",
+		"EXPRESS",
+		"STANDARD",
+	}
+}
 
 type SnowballCapacity string
 
@@ -64,6 +161,21 @@ const (
 	SnowballCapacityNo_preference SnowballCapacity = "NoPreference"
 )
 
+// Values returns all known values for SnowballCapacity. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SnowballCapacity) Values() []SnowballCapacity {
+	return []SnowballCapacity{
+		"T50",
+		"T80",
+		"T100",
+		"T42",
+		"T98",
+		"T8",
+		"NoPreference",
+	}
+}
+
 type SnowballType string
 
 // Enum values for SnowballType
@@ -75,3 +187,17 @@ const (
 	SnowballTypeEdge_s   SnowballType = "EDGE_S"
 	SnowballTypeSnc1_hdd SnowballType = "SNC1_HDD"
 )
+
+// Values returns all known values for SnowballType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SnowballType) Values() []SnowballType {
+	return []SnowballType{
+		"STANDARD",
+		"EDGE",
+		"EDGE_C",
+		"EDGE_CG",
+		"EDGE_S",
+		"SNC1_HDD",
+	}
+}

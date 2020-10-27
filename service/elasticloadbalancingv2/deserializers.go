@@ -354,6 +354,9 @@ func awsAwsquery_deserializeOpErrorCreateListener(response *smithyhttp.Response,
 	case strings.EqualFold("TooManyRegistrationsForTargetIdException", errorCode):
 		return awsAwsquery_deserializeErrorTooManyRegistrationsForTargetIdException(response, errorBody)
 
+	case strings.EqualFold("TooManyTagsException", errorCode):
+		return awsAwsquery_deserializeErrorTooManyTagsException(response, errorBody)
+
 	case strings.EqualFold("TooManyTargetsException", errorCode):
 		return awsAwsquery_deserializeErrorTooManyTargetsException(response, errorBody)
 
@@ -618,6 +621,9 @@ func awsAwsquery_deserializeOpErrorCreateRule(response *smithyhttp.Response, met
 	case strings.EqualFold("TooManyRulesException", errorCode):
 		return awsAwsquery_deserializeErrorTooManyRulesException(response, errorBody)
 
+	case strings.EqualFold("TooManyTagsException", errorCode):
+		return awsAwsquery_deserializeErrorTooManyTagsException(response, errorBody)
+
 	case strings.EqualFold("TooManyTargetGroupsException", errorCode):
 		return awsAwsquery_deserializeErrorTooManyTargetGroupsException(response, errorBody)
 
@@ -728,6 +734,9 @@ func awsAwsquery_deserializeOpErrorCreateTargetGroup(response *smithyhttp.Respon
 
 	case strings.EqualFold("InvalidConfigurationRequestException", errorCode):
 		return awsAwsquery_deserializeErrorInvalidConfigurationRequestException(response, errorBody)
+
+	case strings.EqualFold("TooManyTagsException", errorCode):
+		return awsAwsquery_deserializeErrorTooManyTagsException(response, errorBody)
 
 	case strings.EqualFold("TooManyTargetGroupsException", errorCode):
 		return awsAwsquery_deserializeErrorTooManyTargetGroupsException(response, errorBody)
@@ -5749,6 +5758,22 @@ func awsAwsquery_deserializeDocumentAvailabilityZone(v **types.AvailabilityZone,
 				return err
 			}
 
+		case strings.EqualFold("OutpostId", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.OutpostId = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.OutpostId = &xtv
+			}
+
 		case strings.EqualFold("SubnetId", t.Name.Local):
 			val, done, err := decoder.Value()
 			if err != nil {
@@ -7532,6 +7557,22 @@ func awsAwsquery_deserializeDocumentLoadBalancer(v **types.LoadBalancer, decoder
 					return err
 				}
 				sv.CreatedTime = &t
+			}
+
+		case strings.EqualFold("CustomerOwnedIpv4Pool", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.CustomerOwnedIpv4Pool = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.CustomerOwnedIpv4Pool = &xtv
 			}
 
 		case strings.EqualFold("DNSName", t.Name.Local):

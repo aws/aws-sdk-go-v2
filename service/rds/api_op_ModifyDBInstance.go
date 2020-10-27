@@ -197,18 +197,11 @@ type ModifyDBInstanceInput struct {
 
 	// The Active Directory directory ID to move the DB instance to. Specify none to
 	// remove the instance from its current domain. The domain must be created prior to
-	// this operation. Currently, only Microsoft SQL Server and Oracle DB instances can
-	// be created in an Active Directory Domain. For Microsoft SQL Server DB instances,
-	// Amazon RDS can use Windows Authentication to authenticate users that connect to
-	// the DB instance. For more information, see  Using Windows Authentication with an
-	// Amazon RDS DB Instance Running Microsoft SQL Server
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html)
-	// in the Amazon RDS User Guide. For Oracle DB instances, Amazon RDS can use
-	// Kerberos authentication to authenticate users that connect to the DB instance.
-	// For more information, see  Using Kerberos Authentication with Amazon RDS for
-	// Oracle
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html) in
-	// the Amazon RDS User Guide.
+	// this operation. Currently, only MySQL, Microsoft SQL Server, Oracle, and
+	// PostgreSQL DB instances can be created in an Active Directory Domain. For more
+	// information, see  Kerberos Authentication
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html)
+	// in the Amazon RDS User Guide.
 	Domain *string
 
 	// The name of the IAM role to use when making API calls to the Directory Service.
@@ -406,6 +399,18 @@ type ModifyDBInstanceInput struct {
 	// Changes to the PubliclyAccessible parameter are applied immediately regardless
 	// of the value of the ApplyImmediately parameter.
 	PubliclyAccessible *bool
+
+	// A value that sets the open mode of a replica database to either mounted or
+	// read-only. Currently, this parameter is only supported for Oracle DB instances.
+	// Mounted DB replicas are included in Oracle Enterprise Edition. The main use case
+	// for mounted replicas is cross-Region disaster recovery. The primary database
+	// doesn't use Active Data Guard to transmit information to the mounted replica.
+	// Because it doesn't accept user connections, a mounted replica can't serve a
+	// read-only workload. For more information, see Working with Oracle Read Replicas
+	// for Amazon RDS
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html)
+	// in the Amazon RDS User Guide.
+	ReplicaMode types.ReplicaMode
 
 	// Specifies the storage type to be associated with the DB instance. If you specify
 	// Provisioned IOPS (io1), you must also include a value for the Iops parameter. If

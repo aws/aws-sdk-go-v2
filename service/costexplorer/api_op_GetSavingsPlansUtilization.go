@@ -12,7 +12,7 @@ import (
 )
 
 // Retrieves the Savings Plans utilization for your account across date ranges with
-// daily or monthly granularity. Master accounts in an organization have access to
+// daily or monthly granularity. Master account in an organization have access to
 // member accounts. You can use GetDimensionValues in SAVINGS_PLANS to determine
 // the possible dimension values. You cannot group by any dimension values for
 // GetSavingsPlansUtilization.

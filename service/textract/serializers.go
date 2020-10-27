@@ -399,6 +399,23 @@ func awsAwsjson11_serializeDocumentNotificationChannel(v *types.NotificationChan
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentOutputConfig(v *types.OutputConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3Bucket != nil {
+		ok := object.Key("S3Bucket")
+		ok.String(*v.S3Bucket)
+	}
+
+	if v.S3Prefix != nil {
+		ok := object.Key("S3Prefix")
+		ok.String(*v.S3Prefix)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentS3Object(v *types.S3Object, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -542,6 +559,13 @@ func awsAwsjson11_serializeOpDocumentStartDocumentAnalysisInput(v *StartDocument
 		}
 	}
 
+	if v.OutputConfig != nil {
+		ok := object.Key("OutputConfig")
+		if err := awsAwsjson11_serializeDocumentOutputConfig(v.OutputConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -569,6 +593,13 @@ func awsAwsjson11_serializeOpDocumentStartDocumentTextDetectionInput(v *StartDoc
 	if v.NotificationChannel != nil {
 		ok := object.Key("NotificationChannel")
 		if err := awsAwsjson11_serializeDocumentNotificationChannel(v.NotificationChannel, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OutputConfig != nil {
+		ok := object.Key("OutputConfig")
+		if err := awsAwsjson11_serializeDocumentOutputConfig(v.OutputConfig, ok); err != nil {
 			return err
 		}
 	}

@@ -351,11 +351,11 @@ func validateTag(v *types.Tag) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -403,13 +403,13 @@ func validateOpCreateSignalingChannelInput(v *CreateSignalingChannelInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateSignalingChannelInput"}
-	if v.ChannelName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
-	}
 	if v.Tags != nil {
 		if err := validateTagOnCreateList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.ChannelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -550,11 +550,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeyList == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeyList"))
-	}
 	if v.ResourceARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if v.TagKeyList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeyList"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -583,14 +583,14 @@ func validateOpUpdateDataRetentionInput(v *UpdateDataRetentionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDataRetentionInput"}
+	if len(v.Operation) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operation"))
+	}
 	if v.CurrentVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CurrentVersion"))
 	}
 	if v.DataRetentionChangeInHours == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataRetentionChangeInHours"))
-	}
-	if len(v.Operation) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Operation"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -604,11 +604,11 @@ func validateOpUpdateSignalingChannelInput(v *UpdateSignalingChannelInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateSignalingChannelInput"}
-	if v.ChannelARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChannelARN"))
-	}
 	if v.CurrentVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CurrentVersion"))
+	}
+	if v.ChannelARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

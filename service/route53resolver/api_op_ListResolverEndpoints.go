@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Lists all the resolver endpoints that were created using the current AWS
+// Lists all the Resolver endpoints that were created using the current AWS
 // account.
 func (c *Client) ListResolverEndpoints(ctx context.Context, params *ListResolverEndpointsInput, optFns ...func(*Options)) (*ListResolverEndpointsOutput, error) {
 	if params == nil {
@@ -30,20 +30,20 @@ func (c *Client) ListResolverEndpoints(ctx context.Context, params *ListResolver
 
 type ListResolverEndpointsInput struct {
 
-	// An optional specification to return a subset of resolver endpoints, such as all
-	// inbound resolver endpoints. If you submit a second or subsequent
+	// An optional specification to return a subset of Resolver endpoints, such as all
+	// inbound Resolver endpoints. If you submit a second or subsequent
 	// ListResolverEndpoints request and specify the NextToken parameter, you must use
 	// the same values for Filters, if any, as in the previous request.
 	Filters []*types.Filter
 
-	// The maximum number of resolver endpoints that you want to return in the response
+	// The maximum number of Resolver endpoints that you want to return in the response
 	// to a ListResolverEndpoints request. If you don't specify a value for MaxResults,
-	// Resolver returns up to 100 resolver endpoints.
+	// Resolver returns up to 100 Resolver endpoints.
 	MaxResults *int32
 
 	// For the first ListResolverEndpoints request, omit this value. If you have more
-	// than MaxResults resolver endpoints, you can submit another ListResolverEndpoints
-	// request to get the next group of resolver endpoints. In the next request,
+	// than MaxResults Resolver endpoints, you can submit another ListResolverEndpoints
+	// request to get the next group of Resolver endpoints. In the next request,
 	// specify the value of NextToken from the previous response.
 	NextToken *string
 }
@@ -58,7 +58,7 @@ type ListResolverEndpointsOutput struct {
 	// the next request, specify the value of NextToken from the previous response.
 	NextToken *string
 
-	// The resolver endpoints that were created by using the current AWS account, and
+	// The Resolver endpoints that were created by using the current AWS account, and
 	// that match the specified filters, if any.
 	ResolverEndpoints []*types.ResolverEndpoint
 

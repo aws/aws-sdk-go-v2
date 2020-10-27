@@ -4956,6 +4956,15 @@ func awsAwsjson11_deserializeDocumentImageDetail(v **types.ImageDetail, value in
 
 	for key, value := range shape {
 		switch key {
+		case "artifactMediaType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MediaType to be of type string, got %T instead", value)
+				}
+				sv.ArtifactMediaType = &jtv
+			}
+
 		case "imageDigest":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4963,6 +4972,15 @@ func awsAwsjson11_deserializeDocumentImageDetail(v **types.ImageDetail, value in
 					return fmt.Errorf("expected ImageDigest to be of type string, got %T instead", value)
 				}
 				sv.ImageDigest = &jtv
+			}
+
+		case "imageManifestMediaType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MediaType to be of type string, got %T instead", value)
+				}
+				sv.ImageManifestMediaType = &jtv
 			}
 
 		case "imagePushedAt":

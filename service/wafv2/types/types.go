@@ -624,8 +624,14 @@ type LoggingConfiguration struct {
 	// This member is required.
 	ResourceArn *string
 
+	// Indicates whether the logging configuration was created by AWS Firewall Manager,
+	// as part of an AWS WAF policy configuration. If true, only Firewall Manager can
+	// modify or delete the configuration.
+	ManagedByFirewallManager *bool
+
 	// The parts of the request that you want to keep out of the logs. For example, if
-	// you redact the cookie field, the cookie field in the firehose will be xxx.
+	// you redact the HEADER field, the HEADER field in the firehose will be xxx. You
+	// must use one of the following values: URI, QUERY_STRING, HEADER, or METHOD.
 	RedactedFields []*FieldToMatch
 }
 
@@ -1203,7 +1209,7 @@ type SampledHTTPRequest struct {
 
 	// The name of the Rule that the request matched. For managed rule groups, the
 	// format for this name is ##. For your own rule groups, the format for this name
-	// is #. If the rule is not in a rule group, the format is .
+	// is #. If the rule is not in a rule group, this field is absent.
 	RuleNameWithinRuleGroup *string
 
 	// The time at which AWS WAF received the request from your AWS resource, in Unix
@@ -1638,8 +1644,7 @@ type VisibilityConfig struct {
 	// A name of the CloudWatch metric. The name can contain only the characters: A-Z,
 	// a-z, 0-9, - (hyphen), and _ (underscore). The name can be from one to 128
 	// characters long. It can't contain whitespace or metric names reserved for AWS
-	// WAF, for example "All" and "Default_Action." You can't change a MetricName after
-	// you create a VisibilityConfig.
+	// WAF, for example "All" and "Default_Action."
 	//
 	// This member is required.
 	MetricName *string
@@ -1662,8 +1667,8 @@ type VisibilityConfig struct {
 // (allow, block) for any request that does not match any of the rules. The rules
 // in a Web ACL can be a combination of the types Rule, RuleGroup, and managed rule
 // group. You can associate a Web ACL with one or more AWS resources to protect.
-// The resources can be Amazon CloudFront, an Amazon API Gateway API, or an
-// Application Load Balancer.
+// The resources can be Amazon CloudFront, an Amazon API Gateway REST API, an
+// Application Load Balancer, or an AWS AppSync GraphQL API.
 type WebACL struct {
 
 	// The Amazon Resource Name (ARN) of the Web ACL that you want to associate with

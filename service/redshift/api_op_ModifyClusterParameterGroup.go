@@ -30,7 +30,7 @@ func (c *Client) ModifyClusterParameterGroup(ctx context.Context, params *Modify
 	return out, nil
 }
 
-//
+// Describes a modify cluster parameter group operation.
 type ModifyClusterParameterGroupInput struct {
 
 	// The name of the parameter group to be modified.

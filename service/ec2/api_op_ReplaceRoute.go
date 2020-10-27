@@ -38,6 +38,9 @@ type ReplaceRouteInput struct {
 	// This member is required.
 	RouteTableId *string
 
+	// [IPv4 traffic only] The ID of a carrier gateway.
+	CarrierGatewayId *string
+
 	// The IPv4 CIDR address block used for the destination match. The value that you
 	// provide must match the CIDR of an existing route in the table.
 	DestinationCidrBlock *string

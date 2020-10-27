@@ -4563,6 +4563,15 @@ func awsAwsjson11_deserializeDocumentLustreFileSystemConfiguration(v **types.Lus
 				sv.DeploymentType = types.LustreDeploymentType(jtv)
 			}
 
+		case "DriveCacheType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DriveCacheType to be of type string, got %T instead", value)
+				}
+				sv.DriveCacheType = types.DriveCacheType(jtv)
+			}
+
 		case "MountName":
 			if value != nil {
 				jtv, ok := value.(string)

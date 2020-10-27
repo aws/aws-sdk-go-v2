@@ -43,9 +43,13 @@ type DescribeGatewayInformationInput struct {
 // A JSON object containing the following fields:
 type DescribeGatewayInformationOutput struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon CloudWatch Log Group that is used
+	// The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that is used
 	// to monitor events in the gateway.
 	CloudWatchLogGroupARN *string
+
+	// Date after which this gateway will not receive software updates for new features
+	// and bug fixes.
+	DeprecationDate *string
 
 	// The ID of the Amazon EC2 instance that was used to launch the gateway.
 	Ec2InstanceId *string
@@ -93,6 +97,10 @@ type DescribeGatewayInformationOutput struct {
 	// time zone of the gateway. If the gateway is not available for an update this
 	// field is not returned in the response.
 	NextUpdateAvailabilityDate *string
+
+	// Date after which this gateway will not receive software updates for new
+	// features.
+	SoftwareUpdatesEndDate *string
 
 	// A list of up to 50 tags assigned to the gateway, sorted alphabetically by key
 	// name. Each tag is a key-value pair. For a gateway with more than 10 tags

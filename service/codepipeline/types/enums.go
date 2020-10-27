@@ -14,6 +14,20 @@ const (
 	ActionCategoryApproval ActionCategory = "Approval"
 )
 
+// Values returns all known values for ActionCategory. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ActionCategory) Values() []ActionCategory {
+	return []ActionCategory{
+		"Source",
+		"Build",
+		"Deploy",
+		"Test",
+		"Invoke",
+		"Approval",
+	}
+}
+
 type ActionConfigurationPropertyType string
 
 // Enum values for ActionConfigurationPropertyType
@@ -22,6 +36,18 @@ const (
 	ActionConfigurationPropertyTypeNumber  ActionConfigurationPropertyType = "Number"
 	ActionConfigurationPropertyTypeBoolean ActionConfigurationPropertyType = "Boolean"
 )
+
+// Values returns all known values for ActionConfigurationPropertyType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ActionConfigurationPropertyType) Values() []ActionConfigurationPropertyType {
+	return []ActionConfigurationPropertyType{
+		"String",
+		"Number",
+		"Boolean",
+	}
+}
 
 type ActionExecutionStatus string
 
@@ -33,6 +59,18 @@ const (
 	ActionExecutionStatusFailed     ActionExecutionStatus = "Failed"
 )
 
+// Values returns all known values for ActionExecutionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ActionExecutionStatus) Values() []ActionExecutionStatus {
+	return []ActionExecutionStatus{
+		"InProgress",
+		"Abandoned",
+		"Succeeded",
+		"Failed",
+	}
+}
+
 type ActionOwner string
 
 // Enum values for ActionOwner
@@ -42,6 +80,17 @@ const (
 	ActionOwnerCustom     ActionOwner = "Custom"
 )
 
+// Values returns all known values for ActionOwner. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ActionOwner) Values() []ActionOwner {
+	return []ActionOwner{
+		"AWS",
+		"ThirdParty",
+		"Custom",
+	}
+}
+
 type ApprovalStatus string
 
 // Enum values for ApprovalStatus
@@ -50,12 +99,31 @@ const (
 	ApprovalStatusRejected ApprovalStatus = "Rejected"
 )
 
+// Values returns all known values for ApprovalStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ApprovalStatus) Values() []ApprovalStatus {
+	return []ApprovalStatus{
+		"Approved",
+		"Rejected",
+	}
+}
+
 type ArtifactLocationType string
 
 // Enum values for ArtifactLocationType
 const (
 	ArtifactLocationTypeS3 ArtifactLocationType = "S3"
 )
+
+// Values returns all known values for ArtifactLocationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ArtifactLocationType) Values() []ArtifactLocationType {
+	return []ArtifactLocationType{
+		"S3",
+	}
+}
 
 type ArtifactStoreType string
 
@@ -64,6 +132,15 @@ const (
 	ArtifactStoreTypeS3 ArtifactStoreType = "S3"
 )
 
+// Values returns all known values for ArtifactStoreType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ArtifactStoreType) Values() []ArtifactStoreType {
+	return []ArtifactStoreType{
+		"S3",
+	}
+}
+
 type BlockerType string
 
 // Enum values for BlockerType
@@ -71,12 +148,30 @@ const (
 	BlockerTypeSchedule BlockerType = "Schedule"
 )
 
+// Values returns all known values for BlockerType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (BlockerType) Values() []BlockerType {
+	return []BlockerType{
+		"Schedule",
+	}
+}
+
 type EncryptionKeyType string
 
 // Enum values for EncryptionKeyType
 const (
 	EncryptionKeyTypeKms EncryptionKeyType = "KMS"
 )
+
+// Values returns all known values for EncryptionKeyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionKeyType) Values() []EncryptionKeyType {
+	return []EncryptionKeyType{
+		"KMS",
+	}
+}
 
 type FailureType string
 
@@ -89,6 +184,20 @@ const (
 	FailureTypeRevisionunavailable FailureType = "RevisionUnavailable"
 	FailureTypeSystemunavailable   FailureType = "SystemUnavailable"
 )
+
+// Values returns all known values for FailureType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (FailureType) Values() []FailureType {
+	return []FailureType{
+		"JobFailed",
+		"ConfigurationError",
+		"PermissionError",
+		"RevisionOutOfSync",
+		"RevisionUnavailable",
+		"SystemUnavailable",
+	}
+}
 
 type JobStatus string
 
@@ -103,6 +212,21 @@ const (
 	JobStatusFailed     JobStatus = "Failed"
 )
 
+// Values returns all known values for JobStatus. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (JobStatus) Values() []JobStatus {
+	return []JobStatus{
+		"Created",
+		"Queued",
+		"Dispatched",
+		"InProgress",
+		"TimedOut",
+		"Succeeded",
+		"Failed",
+	}
+}
+
 type PipelineExecutionStatus string
 
 // Enum values for PipelineExecutionStatus
@@ -115,6 +239,20 @@ const (
 	PipelineExecutionStatusFailed     PipelineExecutionStatus = "Failed"
 )
 
+// Values returns all known values for PipelineExecutionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PipelineExecutionStatus) Values() []PipelineExecutionStatus {
+	return []PipelineExecutionStatus{
+		"InProgress",
+		"Stopped",
+		"Stopping",
+		"Succeeded",
+		"Superseded",
+		"Failed",
+	}
+}
+
 type StageExecutionStatus string
 
 // Enum values for StageExecutionStatus
@@ -126,12 +264,34 @@ const (
 	StageExecutionStatusSucceeded  StageExecutionStatus = "Succeeded"
 )
 
+// Values returns all known values for StageExecutionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StageExecutionStatus) Values() []StageExecutionStatus {
+	return []StageExecutionStatus{
+		"InProgress",
+		"Failed",
+		"Stopped",
+		"Stopping",
+		"Succeeded",
+	}
+}
+
 type StageRetryMode string
 
 // Enum values for StageRetryMode
 const (
 	StageRetryModeFailed_actions StageRetryMode = "FAILED_ACTIONS"
 )
+
+// Values returns all known values for StageRetryMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StageRetryMode) Values() []StageRetryMode {
+	return []StageRetryMode{
+		"FAILED_ACTIONS",
+	}
+}
 
 type StageTransitionType string
 
@@ -140,6 +300,16 @@ const (
 	StageTransitionTypeInbound  StageTransitionType = "Inbound"
 	StageTransitionTypeOutbound StageTransitionType = "Outbound"
 )
+
+// Values returns all known values for StageTransitionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StageTransitionType) Values() []StageTransitionType {
+	return []StageTransitionType{
+		"Inbound",
+		"Outbound",
+	}
+}
 
 type TriggerType string
 
@@ -153,6 +323,20 @@ const (
 	TriggerTypePutactionrevision      TriggerType = "PutActionRevision"
 )
 
+// Values returns all known values for TriggerType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TriggerType) Values() []TriggerType {
+	return []TriggerType{
+		"CreatePipeline",
+		"StartPipelineExecution",
+		"PollForSourceChanges",
+		"Webhook",
+		"CloudWatchEvent",
+		"PutActionRevision",
+	}
+}
+
 type WebhookAuthenticationType string
 
 // Enum values for WebhookAuthenticationType
@@ -161,3 +345,14 @@ const (
 	WebhookAuthenticationTypeIp              WebhookAuthenticationType = "IP"
 	WebhookAuthenticationTypeUnauthenticated WebhookAuthenticationType = "UNAUTHENTICATED"
 )
+
+// Values returns all known values for WebhookAuthenticationType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WebhookAuthenticationType) Values() []WebhookAuthenticationType {
+	return []WebhookAuthenticationType{
+		"GITHUB_HMAC",
+		"IP",
+		"UNAUTHENTICATED",
+	}
+}

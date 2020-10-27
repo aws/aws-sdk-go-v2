@@ -21,7 +21,7 @@ import (
 // instance is running. To detach the root volume, stop the instance first. When a
 // volume with an AWS Marketplace product code is detached from an instance, the
 // product code is no longer associated with the instance. For more information,
-// see Detaching an Amazon EBS Volume
+// see Detaching an Amazon EBS volume
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-detaching-volume.html)
 // in the Amazon Elastic Compute Cloud User Guide.
 func (c *Client) DetachVolume(ctx context.Context, params *DetachVolumeInput, optFns ...func(*Options)) (*DetachVolumeOutput, error) {

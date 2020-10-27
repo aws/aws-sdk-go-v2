@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes the specified rule.
+// Deletes the specified rule. You can't delete the default rule.
 func (c *Client) DeleteRule(ctx context.Context, params *DeleteRuleInput, optFns ...func(*Options)) (*DeleteRuleOutput, error) {
 	if params == nil {
 		params = &DeleteRuleInput{}

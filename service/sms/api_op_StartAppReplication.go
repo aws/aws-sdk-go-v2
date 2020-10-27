@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Starts replicating an application.
+// Starts replicating the specified application by creating replication jobs for
+// each server in the application.
 func (c *Client) StartAppReplication(ctx context.Context, params *StartAppReplicationInput, optFns ...func(*Options)) (*StartAppReplicationOutput, error) {
 	if params == nil {
 		params = &StartAppReplicationInput{}
@@ -28,7 +29,7 @@ func (c *Client) StartAppReplication(ctx context.Context, params *StartAppReplic
 
 type StartAppReplicationInput struct {
 
-	// ID of the application to replicate.
+	// The ID of the application.
 	AppId *string
 }
 

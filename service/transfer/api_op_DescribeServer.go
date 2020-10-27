@@ -32,7 +32,7 @@ func (c *Client) DescribeServer(ctx context.Context, params *DescribeServerInput
 
 type DescribeServerInput struct {
 
-	// A system-assigned unique identifier for a file transfer protocol-enabled server.
+	// A system-assigned unique identifier for a server.
 	//
 	// This member is required.
 	ServerId *string
@@ -40,8 +40,7 @@ type DescribeServerInput struct {
 
 type DescribeServerOutput struct {
 
-	// An array containing the properties of a file transfer protocol-enabled server
-	// with the ServerID you specified.
+	// An array containing the properties of a server with the ServerID you specified.
 	//
 	// This member is required.
 	Server *types.DescribedServer

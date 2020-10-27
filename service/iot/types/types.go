@@ -104,6 +104,12 @@ type Action struct {
 
 	// Starts execution of a Step Functions state machine.
 	StepFunctions *StepFunctionsAction
+
+	// The Timestream rule action writes attributes (measures) from an MQTT message
+	// into an Amazon Timestream table. For more information, see the Timestream
+	// (https://docs.aws.amazon.com/iot/latest/developerguide/timestream-rule-action.html)
+	// topic rule action documentation.
+	Timestream *TimestreamAction
 }
 
 // Information about an active Device Defender security profile behavior violation.
@@ -264,6 +270,10 @@ type AuditCheckDetails struct {
 	// The number of resources that were found noncompliant during the check.
 	NonCompliantResourcesCount *int64
 
+	// Describes how many of the non-compliant resources created during the evaluation
+	// of an audit check were marked as suppressed.
+	SuppressedNonCompliantResourcesCount *int64
+
 	// The number of resources on which the check was performed.
 	TotalResourcesCount *int64
 }
@@ -280,6 +290,9 @@ type AuditFinding struct {
 
 	// The time the result (finding) was discovered.
 	FindingTime *time.Time
+
+	// Indicates whether the audit finding was suppressed or not during reporting.
+	IsSuppressed *bool
 
 	// The resource that was found to be noncompliant with the audit check.
 	NonCompliantResource *NonCompliantResource
@@ -380,6 +393,33 @@ type AuditNotificationTarget struct {
 
 	// The ARN of the target (SNS topic) to which audit notifications are sent.
 	TargetArn *string
+}
+
+// Filters out specific findings of a Device Defender audit.
+type AuditSuppression struct {
+
+	// An audit check name. Checks must be enabled for your account. (Use
+	// DescribeAccountAuditConfiguration to see the list of all checks, including those
+	// that are enabled or use UpdateAccountAuditConfiguration to select which checks
+	// are enabled.)
+	//
+	// This member is required.
+	CheckName *string
+
+	// Information that identifies the noncompliant resource.
+	//
+	// This member is required.
+	ResourceIdentifier *ResourceIdentifier
+
+	// The description of the audit suppression.
+	Description *string
+
+	// The expiration date (epoch timestamp in seconds) that you want the suppression
+	// to adhere to.
+	ExpirationDate *time.Time
+
+	// Indicates whether a suppression should exist indefinitely or not.
+	SuppressIndefinitely *bool
 }
 
 // The audits that were performed.
@@ -1116,13 +1156,13 @@ type ExponentialRolloutRate struct {
 	// This member is required.
 	BaseRatePerMinute *int32
 
-	// The exponential factor to increase the rate of rollout for a job.
+	// The exponential factor to increase the rate of rollout for a job. AWS IoT
+	// supports up to one digit after the decimal (for example, 1.5, but not 1.55).
 	//
 	// This member is required.
 	IncrementFactor *float64
 
-	// The criteria to initiate the increase in rate of rollout for a job. AWS IoT
-	// supports up to one digit after the decimal (for example, 1.5, but not 1.55).
+	// The criteria to initiate the increase in rate of rollout for a job.
 	//
 	// This member is required.
 	RateIncreaseCriteria *RateIncreaseCriteria
@@ -2771,6 +2811,76 @@ type TimeoutConfig struct {
 	InProgressTimeoutInMinutes *int64
 }
 
+// The Timestream rule action writes attributes (measures) from an MQTT message
+// into an Amazon Timestream table. For more information, see the Timestream
+// (https://docs.aws.amazon.com/iot/latest/developerguide/timestream-rule-action.html)
+// topic rule action documentation.
+type TimestreamAction struct {
+
+	// The name of an Amazon Timestream database.
+	//
+	// This member is required.
+	DatabaseName *string
+
+	// Metadata attributes of the time series that are written in each measure record.
+	//
+	// This member is required.
+	Dimensions []*TimestreamDimension
+
+	// The ARN of the role that grants permission to write to the Amazon Timestream
+	// database table.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// The name of the database table into which to write the measure records.
+	//
+	// This member is required.
+	TableName *string
+
+	// Specifies an application-defined value to replace the default value assigned to
+	// the Timestream record's timestamp in the time column. You can use this property
+	// to specify the value and the precision of the Timestream record's timestamp. You
+	// can specify a value from the message payload or a value computed by a
+	// substitution template. If omitted, the topic rule action assigns the timestamp,
+	// in milliseconds, at the time it processed the rule.
+	Timestamp *TimestreamTimestamp
+}
+
+// Metadata attributes of the time series that are written in each measure record.
+type TimestreamDimension struct {
+
+	// The metadata dimension name. This is the name of the column in the Amazon
+	// Timestream database table record. Dimensions cannot be named: measure_name,
+	// measure_value, or time. These names are reserved. Dimension names cannot start
+	// with ts_ or measure_value and they cannot contain the colon (:) character.
+	//
+	// This member is required.
+	Name *string
+
+	// The value to write in this column of the database record.
+	//
+	// This member is required.
+	Value *string
+}
+
+// Describes how to interpret an application-defined timestamp value from an MQTT
+// message payload and the precision of that value.
+type TimestreamTimestamp struct {
+
+	// The precision of the timestamp value that results from the expression described
+	// in value. Valid values: SECONDS | MILLISECONDS | MICROSECONDS | NANOSECONDS. The
+	// default is MILLISECONDS.
+	//
+	// This member is required.
+	Unit *string
+
+	// An expression that returns a long epoch time value.
+	//
+	// This member is required.
+	Value *string
+}
+
 // Specifies the TLS context to use for the test authorizer request.
 type TlsContext struct {
 
@@ -2900,7 +3010,7 @@ type TopicRulePayload struct {
 
 	// The SQL statement used to query the topic. For more information, see AWS IoT SQL
 	// Reference
-	// (https://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html#aws-iot-sql-reference)
+	// (https://docs.aws.amazon.com/iot/latest/developerguide/iot-sql-reference.html)
 	// in the AWS IoT Developer Guide.
 	//
 	// This member is required.

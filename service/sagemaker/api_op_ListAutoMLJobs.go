@@ -48,8 +48,8 @@ type ListAutoMLJobsInput struct {
 	// Request a list of jobs, using a search filter for name.
 	NameContains *string
 
-	// If the previous response was truncated, you will receive this token. Use it in
-	// your next request to receive the next set of results.
+	// If the previous response was truncated, you receive this token. Use it in your
+	// next request to receive the next set of results.
 	NextToken *string
 
 	// The parameter by which to sort the results. The default is AutoMLJobName.
@@ -69,8 +69,8 @@ type ListAutoMLJobsOutput struct {
 	// This member is required.
 	AutoMLJobSummaries []*types.AutoMLJobSummary
 
-	// If the previous response was truncated, you will receive this token. Use it in
-	// your next request to receive the next set of results.
+	// If the previous response was truncated, you receive this token. Use it in your
+	// next request to receive the next set of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

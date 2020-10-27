@@ -12,7 +12,12 @@ import (
 )
 
 // Provides information about the contact flows for the specified Amazon Connect
-// instance.
+// instance. You can also create and update contact flows using the Amazon Connect
+// Flow language
+// (https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html). For
+// more information about contact flows, see Contact Flows
+// (https://docs.aws.amazon.com/connect/latest/adminguide/concepts-contact-flows.html)
+// in the Amazon Connect Administrator Guide.
 func (c *Client) ListContactFlows(ctx context.Context, params *ListContactFlowsInput, optFns ...func(*Options)) (*ListContactFlowsOutput, error) {
 	if params == nil {
 		params = &ListContactFlowsInput{}

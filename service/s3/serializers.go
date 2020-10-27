@@ -79,6 +79,13 @@ func awsRestxml_serializeOpHttpBindingsAbortMultipartUploadInput(v *AbortMultipa
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	if v.Key == nil {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
 	}
@@ -185,6 +192,13 @@ func awsRestxml_serializeOpHttpBindingsCompleteMultipartUploadInput(v *CompleteM
 		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 		}
 	}
 
@@ -364,6 +378,20 @@ func awsRestxml_serializeOpHttpBindingsCopyObjectInput(v *CopyObjectInput, encod
 		locationName := "X-Amz-Copy-Source-Server-Side-Encryption-Customer-Key-Md5"
 		if len(*v.CopySourceSSECustomerKeyMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.CopySourceSSECustomerKeyMD5)
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
+	if v.ExpectedSourceBucketOwner != nil {
+		locationName := "X-Amz-Source-Expected-Bucket-Owner"
+		if len(*v.ExpectedSourceBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedSourceBucketOwner)
 		}
 	}
 
@@ -749,6 +777,13 @@ func awsRestxml_serializeOpHttpBindingsCreateMultipartUploadInput(v *CreateMulti
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	if v.Expires != nil {
 		locationName := "Expires"
 		encoder.SetHeader(locationName).String(smithytime.FormatHTTPDate(*v.Expires))
@@ -948,6 +983,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketInput(v *DeleteBucketInput, e
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	return nil
 }
 
@@ -1011,6 +1053,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketAnalyticsConfigurationInput(v
 		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 		}
 	}
 
@@ -1084,6 +1133,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketCorsInput(v *DeleteBucketCors
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	return nil
 }
 
@@ -1150,6 +1206,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketEncryptionInput(v *DeleteBuck
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	return nil
 }
 
@@ -1213,6 +1276,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketInventoryConfigurationInput(v
 		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 		}
 	}
 
@@ -1286,6 +1356,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketLifecycleInput(v *DeleteBucke
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	return nil
 }
 
@@ -1352,8 +1429,88 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketMetricsConfigurationInput(v *
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	if v.Id != nil {
 		encoder.SetQuery("id").String(*v.Id)
+	}
+
+	return nil
+}
+
+type awsRestxml_serializeOpDeleteBucketOwnershipControls struct {
+}
+
+func (*awsRestxml_serializeOpDeleteBucketOwnershipControls) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpDeleteBucketOwnershipControls) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteBucketOwnershipControlsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/{Bucket}?ownershipControls")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestxml_serializeOpHttpBindingsDeleteBucketOwnershipControlsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsDeleteBucketOwnershipControlsInput(v *DeleteBucketOwnershipControlsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
+	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
+		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
+			return err
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
 	}
 
 	return nil
@@ -1419,6 +1576,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketPolicyInput(v *DeleteBucketPo
 		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 		}
 	}
 
@@ -1488,6 +1652,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketReplicationInput(v *DeleteBuc
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	return nil
 }
 
@@ -1554,6 +1725,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketTaggingInput(v *DeleteBucketT
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	return nil
 }
 
@@ -1617,6 +1795,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketWebsiteInput(v *DeleteBucketW
 		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 		}
 	}
 
@@ -1689,6 +1874,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteObjectInput(v *DeleteObjectInput, e
 	if v.BypassGovernanceRetention != nil {
 		locationName := "X-Amz-Bypass-Governance-Retention"
 		encoder.SetHeader(locationName).Boolean(*v.BypassGovernanceRetention)
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
 	}
 
 	if v.Key == nil {
@@ -1812,6 +2004,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteObjectsInput(v *DeleteObjectsInput,
 		encoder.SetHeader(locationName).Boolean(*v.BypassGovernanceRetention)
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	if v.MFA != nil {
 		locationName := "X-Amz-Mfa"
 		if len(*v.MFA) > 0 {
@@ -1887,6 +2086,13 @@ func awsRestxml_serializeOpHttpBindingsDeleteObjectTaggingInput(v *DeleteObjectT
 		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 		}
 	}
 
@@ -1972,6 +2178,13 @@ func awsRestxml_serializeOpHttpBindingsDeletePublicAccessBlockInput(v *DeletePub
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	return nil
 }
 
@@ -2035,6 +2248,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketAccelerateConfigurationInput(v *
 		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 		}
 	}
 
@@ -2104,6 +2324,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketAclInput(v *GetBucketAclInput, e
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	return nil
 }
 
@@ -2167,6 +2394,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketAnalyticsConfigurationInput(v *G
 		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 		}
 	}
 
@@ -2240,6 +2474,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketCorsInput(v *GetBucketCorsInput,
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	return nil
 }
 
@@ -2306,6 +2547,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketEncryptionInput(v *GetBucketEncr
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	return nil
 }
 
@@ -2369,6 +2617,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketInventoryConfigurationInput(v *G
 		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 		}
 	}
 
@@ -2442,6 +2697,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketLifecycleConfigurationInput(v *G
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	return nil
 }
 
@@ -2505,6 +2767,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketLocationInput(v *GetBucketLocati
 		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 		}
 	}
 
@@ -2574,6 +2843,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketLoggingInput(v *GetBucketLogging
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	return nil
 }
 
@@ -2637,6 +2913,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketMetricsConfigurationInput(v *Get
 		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 		}
 	}
 
@@ -2710,6 +2993,86 @@ func awsRestxml_serializeOpHttpBindingsGetBucketNotificationConfigurationInput(v
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
+	return nil
+}
+
+type awsRestxml_serializeOpGetBucketOwnershipControls struct {
+}
+
+func (*awsRestxml_serializeOpGetBucketOwnershipControls) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpGetBucketOwnershipControls) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetBucketOwnershipControlsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/{Bucket}?ownershipControls")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestxml_serializeOpHttpBindingsGetBucketOwnershipControlsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsGetBucketOwnershipControlsInput(v *GetBucketOwnershipControlsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
+	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
+		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
+			return err
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	return nil
 }
 
@@ -2773,6 +3136,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketPolicyInput(v *GetBucketPolicyIn
 		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 		}
 	}
 
@@ -2842,6 +3212,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketPolicyStatusInput(v *GetBucketPo
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	return nil
 }
 
@@ -2905,6 +3282,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketReplicationInput(v *GetBucketRep
 		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 		}
 	}
 
@@ -2974,6 +3358,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketRequestPaymentInput(v *GetBucket
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	return nil
 }
 
@@ -3037,6 +3428,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketTaggingInput(v *GetBucketTagging
 		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 		}
 	}
 
@@ -3106,6 +3504,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketVersioningInput(v *GetBucketVers
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	return nil
 }
 
@@ -3172,6 +3577,13 @@ func awsRestxml_serializeOpHttpBindingsGetBucketWebsiteInput(v *GetBucketWebsite
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	return nil
 }
 
@@ -3235,6 +3647,13 @@ func awsRestxml_serializeOpHttpBindingsGetObjectInput(v *GetObjectInput, encoder
 		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 		}
 	}
 
@@ -3405,6 +3824,13 @@ func awsRestxml_serializeOpHttpBindingsGetObjectAclInput(v *GetObjectAclInput, e
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	if v.Key == nil {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
 	}
@@ -3489,6 +3915,13 @@ func awsRestxml_serializeOpHttpBindingsGetObjectLegalHoldInput(v *GetObjectLegal
 		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 		}
 	}
 
@@ -3579,6 +4012,13 @@ func awsRestxml_serializeOpHttpBindingsGetObjectLockConfigurationInput(v *GetObj
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	return nil
 }
 
@@ -3642,6 +4082,13 @@ func awsRestxml_serializeOpHttpBindingsGetObjectRetentionInput(v *GetObjectReten
 		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 		}
 	}
 
@@ -3732,6 +4179,13 @@ func awsRestxml_serializeOpHttpBindingsGetObjectTaggingInput(v *GetObjectTagging
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	if v.Key == nil {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
 	}
@@ -3811,6 +4265,13 @@ func awsRestxml_serializeOpHttpBindingsGetObjectTorrentInput(v *GetObjectTorrent
 		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 		}
 	}
 
@@ -3897,6 +4358,13 @@ func awsRestxml_serializeOpHttpBindingsGetPublicAccessBlockInput(v *GetPublicAcc
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	return nil
 }
 
@@ -3963,6 +4431,13 @@ func awsRestxml_serializeOpHttpBindingsHeadBucketInput(v *HeadBucketInput, encod
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	return nil
 }
 
@@ -4026,6 +4501,13 @@ func awsRestxml_serializeOpHttpBindingsHeadObjectInput(v *HeadObjectInput, encod
 		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 		}
 	}
 
@@ -4176,6 +4658,13 @@ func awsRestxml_serializeOpHttpBindingsListBucketAnalyticsConfigurationsInput(v 
 		encoder.SetQuery("continuation-token").String(*v.ContinuationToken)
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	return nil
 }
 
@@ -4246,6 +4735,13 @@ func awsRestxml_serializeOpHttpBindingsListBucketInventoryConfigurationsInput(v 
 		encoder.SetQuery("continuation-token").String(*v.ContinuationToken)
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	return nil
 }
 
@@ -4314,6 +4810,13 @@ func awsRestxml_serializeOpHttpBindingsListBucketMetricsConfigurationsInput(v *L
 
 	if v.ContinuationToken != nil {
 		encoder.SetQuery("continuation-token").String(*v.ContinuationToken)
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
 	}
 
 	return nil
@@ -4440,6 +4943,13 @@ func awsRestxml_serializeOpHttpBindingsListMultipartUploadsInput(v *ListMultipar
 		encoder.SetQuery("encoding-type").String(string(v.EncodingType))
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	if v.KeyMarker != nil {
 		encoder.SetQuery("key-marker").String(*v.KeyMarker)
 	}
@@ -4528,6 +5038,13 @@ func awsRestxml_serializeOpHttpBindingsListObjectsInput(v *ListObjectsInput, enc
 
 	if len(v.EncodingType) > 0 {
 		encoder.SetQuery("encoding-type").String(string(v.EncodingType))
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
 	}
 
 	if v.Marker != nil {
@@ -4625,6 +5142,13 @@ func awsRestxml_serializeOpHttpBindingsListObjectsV2Input(v *ListObjectsV2Input,
 		encoder.SetQuery("encoding-type").String(string(v.EncodingType))
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	if v.FetchOwner != nil {
 		encoder.SetQuery("fetch-owner").Boolean(*v.FetchOwner)
 	}
@@ -4720,6 +5244,13 @@ func awsRestxml_serializeOpHttpBindingsListObjectVersionsInput(v *ListObjectVers
 		encoder.SetQuery("encoding-type").String(string(v.EncodingType))
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	if v.KeyMarker != nil {
 		encoder.SetQuery("key-marker").String(*v.KeyMarker)
 	}
@@ -4799,6 +5330,13 @@ func awsRestxml_serializeOpHttpBindingsListPartsInput(v *ListPartsInput, encoder
 		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 		}
 	}
 
@@ -4919,6 +5457,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketAccelerateConfigurationInput(v *
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	return nil
 }
 
@@ -5016,6 +5561,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketAclInput(v *PutBucketAclInput, e
 		locationName := "Content-Md5"
 		if len(*v.ContentMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.ContentMD5)
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 		}
 	}
 
@@ -5142,6 +5694,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketAnalyticsConfigurationInput(v *P
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	if v.Id != nil {
 		encoder.SetQuery("id").String(*v.Id)
 	}
@@ -5241,6 +5800,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketCorsInput(v *PutBucketCorsInput,
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	return nil
 }
 
@@ -5336,6 +5902,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketEncryptionInput(v *PutBucketEncr
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	return nil
 }
 
@@ -5421,6 +5994,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketInventoryConfigurationInput(v *P
 		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 		}
 	}
 
@@ -5513,6 +6093,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketLifecycleConfigurationInput(v *P
 		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 		}
 	}
 
@@ -5611,6 +6198,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketLoggingInput(v *PutBucketLogging
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	return nil
 }
 
@@ -5696,6 +6290,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketMetricsConfigurationInput(v *Put
 		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 		}
 	}
 
@@ -5791,6 +6392,115 @@ func awsRestxml_serializeOpHttpBindingsPutBucketNotificationConfigurationInput(v
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
+	return nil
+}
+
+type awsRestxml_serializeOpPutBucketOwnershipControls struct {
+}
+
+func (*awsRestxml_serializeOpPutBucketOwnershipControls) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpPutBucketOwnershipControls) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutBucketOwnershipControlsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/{Bucket}?ownershipControls")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestxml_serializeOpHttpBindingsPutBucketOwnershipControlsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if input.OwnershipControls != nil {
+		if !restEncoder.HasHeader("Content-Type") {
+			restEncoder.SetHeader("Content-Type").String("application/xml")
+		}
+
+		xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+		payloadRootAttr := []smithyxml.Attr{}
+		payloadRoot := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "OwnershipControls",
+			},
+			Attr: payloadRootAttr,
+		}
+		if err := awsRestxml_serializeDocumentOwnershipControls(input.OwnershipControls, xmlEncoder.RootElement(payloadRoot)); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+		payload := bytes.NewReader(xmlEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsPutBucketOwnershipControlsInput(v *PutBucketOwnershipControlsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
+	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
+		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
+			return err
+		}
+	}
+
+	if v.ContentMD5 != nil {
+		locationName := "Content-Md5"
+		if len(*v.ContentMD5) > 0 {
+			encoder.SetHeader(locationName).String(*v.ContentMD5)
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	return nil
 }
 
@@ -5883,6 +6593,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketPolicyInput(v *PutBucketPolicyIn
 		locationName := "Content-Md5"
 		if len(*v.ContentMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.ContentMD5)
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 		}
 	}
 
@@ -5997,6 +6714,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketReplicationInput(v *PutBucketRep
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	if v.Token != nil {
 		locationName := "X-Amz-Bucket-Object-Lock-Token"
 		if len(*v.Token) > 0 {
@@ -6099,6 +6823,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketRequestPaymentInput(v *PutBucket
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	return nil
 }
 
@@ -6194,6 +6925,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketTaggingInput(v *PutBucketTagging
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	return nil
 }
 
@@ -6286,6 +7024,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketVersioningInput(v *PutBucketVers
 		locationName := "Content-Md5"
 		if len(*v.ContentMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.ContentMD5)
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 		}
 	}
 
@@ -6388,6 +7133,13 @@ func awsRestxml_serializeOpHttpBindingsPutBucketWebsiteInput(v *PutBucketWebsite
 		locationName := "Content-Md5"
 		if len(*v.ContentMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.ContentMD5)
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 		}
 	}
 
@@ -6517,6 +7269,13 @@ func awsRestxml_serializeOpHttpBindingsPutObjectInput(v *PutObjectInput, encoder
 		locationName := "Content-Type"
 		if len(*v.ContentType) > 0 {
 			encoder.SetHeader(locationName).String(*v.ContentType)
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 		}
 	}
 
@@ -6753,6 +7512,13 @@ func awsRestxml_serializeOpHttpBindingsPutObjectAclInput(v *PutObjectAclInput, e
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	if v.GrantFullControl != nil {
 		locationName := "X-Amz-Grant-Full-Control"
 		if len(*v.GrantFullControl) > 0 {
@@ -6904,6 +7670,13 @@ func awsRestxml_serializeOpHttpBindingsPutObjectLegalHoldInput(v *PutObjectLegal
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	if v.Key == nil {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
 	}
@@ -7020,6 +7793,13 @@ func awsRestxml_serializeOpHttpBindingsPutObjectLockConfigurationInput(v *PutObj
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	if len(v.RequestPayer) > 0 {
 		locationName := "X-Amz-Request-Payer"
 		encoder.SetHeader(locationName).String(string(v.RequestPayer))
@@ -7129,6 +7909,13 @@ func awsRestxml_serializeOpHttpBindingsPutObjectRetentionInput(v *PutObjectReten
 		locationName := "Content-Md5"
 		if len(*v.ContentMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.ContentMD5)
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 		}
 	}
 
@@ -7248,6 +8035,13 @@ func awsRestxml_serializeOpHttpBindingsPutObjectTaggingInput(v *PutObjectTagging
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	if v.Key == nil {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
 	}
@@ -7359,6 +8153,13 @@ func awsRestxml_serializeOpHttpBindingsPutPublicAccessBlockInput(v *PutPublicAcc
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	return nil
 }
 
@@ -7447,6 +8248,13 @@ func awsRestxml_serializeOpHttpBindingsRestoreObjectInput(v *RestoreObjectInput,
 		}
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
 	if v.Key == nil {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
 	}
@@ -7468,6 +8276,208 @@ func awsRestxml_serializeOpHttpBindingsRestoreObjectInput(v *RestoreObjectInput,
 		encoder.SetQuery("versionId").String(*v.VersionId)
 	}
 
+	return nil
+}
+
+type awsRestxml_serializeOpSelectObjectContent struct {
+}
+
+func (*awsRestxml_serializeOpSelectObjectContent) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpSelectObjectContent) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SelectObjectContentInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/{Bucket}/{Key+}?select&select-type=2")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestxml_serializeOpHttpBindingsSelectObjectContentInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "SelectObjectContentRequest",
+		},
+		Attr: rootAttr,
+	}
+	if err := awsRestxml_serializeOpDocumentSelectObjectContentInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsSelectObjectContentInput(v *SelectObjectContentInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Bucket == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
+	if v.Bucket != nil {
+		if len(*v.Bucket) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+		}
+		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
+			return err
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
+	if v.Key == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+	}
+	if v.Key != nil {
+		if len(*v.Key) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member Key must not be empty")}
+		}
+		if err := encoder.SetURI("Key").String(*v.Key); err != nil {
+			return err
+		}
+	}
+
+	if v.SSECustomerAlgorithm != nil {
+		locationName := "X-Amz-Server-Side-Encryption-Customer-Algorithm"
+		if len(*v.SSECustomerAlgorithm) > 0 {
+			encoder.SetHeader(locationName).String(*v.SSECustomerAlgorithm)
+		}
+	}
+
+	if v.SSECustomerKey != nil {
+		locationName := "X-Amz-Server-Side-Encryption-Customer-Key"
+		if len(*v.SSECustomerKey) > 0 {
+			encoder.SetHeader(locationName).String(*v.SSECustomerKey)
+		}
+	}
+
+	if v.SSECustomerKeyMD5 != nil {
+		locationName := "X-Amz-Server-Side-Encryption-Customer-Key-Md5"
+		if len(*v.SSECustomerKeyMD5) > 0 {
+			encoder.SetHeader(locationName).String(*v.SSECustomerKeyMD5)
+		}
+	}
+
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentSelectObjectContentInput(v *SelectObjectContentInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Expression != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Expression",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Expression)
+	}
+	if len(v.ExpressionType) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ExpressionType",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.ExpressionType))
+	}
+	if v.InputSerialization != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "InputSerialization",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentInputSerialization(v.InputSerialization, el); err != nil {
+			return err
+		}
+	}
+	if v.OutputSerialization != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "OutputSerialization",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentOutputSerialization(v.OutputSerialization, el); err != nil {
+			return err
+		}
+	}
+	if v.RequestProgress != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "RequestProgress",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentRequestProgress(v.RequestProgress, el); err != nil {
+			return err
+		}
+	}
+	if v.ScanRange != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ScanRange",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentScanRange(v.ScanRange, el); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -7554,6 +8564,13 @@ func awsRestxml_serializeOpHttpBindingsUploadPartInput(v *UploadPartInput, encod
 		locationName := "Content-Md5"
 		if len(*v.ContentMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.ContentMD5)
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 		}
 	}
 
@@ -7725,6 +8742,20 @@ func awsRestxml_serializeOpHttpBindingsUploadPartCopyInput(v *UploadPartCopyInpu
 		locationName := "X-Amz-Copy-Source-Server-Side-Encryption-Customer-Key-Md5"
 		if len(*v.CopySourceSSECustomerKeyMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.CopySourceSSECustomerKeyMD5)
+		}
+	}
+
+	if v.ExpectedBucketOwner != nil {
+		locationName := "X-Amz-Expected-Bucket-Owner"
+		if len(*v.ExpectedBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
+		}
+	}
+
+	if v.ExpectedSourceBucketOwner != nil {
+		locationName := "X-Amz-Source-Expected-Bucket-Owner"
+		if len(*v.ExpectedSourceBucketOwner) > 0 {
+			encoder.SetHeader(locationName).String(*v.ExpectedSourceBucketOwner)
 		}
 	}
 
@@ -10148,6 +11179,60 @@ func awsRestxml_serializeDocumentOwner(v *types.Owner, value smithyxml.Value) er
 	return nil
 }
 
+func awsRestxml_serializeDocumentOwnershipControls(v *types.OwnershipControls, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Rules != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Rule",
+			},
+			Attr: rootAttr,
+		}
+		el := value.FlattenedElement(root)
+		if err := awsRestxml_serializeDocumentOwnershipControlsRules(v.Rules, el); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentOwnershipControlsRule(v *types.OwnershipControlsRule, value smithyxml.Value) error {
+	defer value.Close()
+	if len(v.ObjectOwnership) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ObjectOwnership",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.ObjectOwnership))
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentOwnershipControlsRules(v []*types.OwnershipControlsRule, value smithyxml.Value) error {
+	var array *smithyxml.Array
+	if !value.IsFlattened() {
+		defer value.Close()
+	}
+	array = value.Array()
+	for i := range v {
+		if vv := v[i]; vv == nil {
+			am := array.Member()
+			am.Close()
+			continue
+		}
+		am := array.Member()
+		if err := awsRestxml_serializeDocumentOwnershipControlsRule(v[i], am); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestxml_serializeDocumentParquetInput(v *types.ParquetInput, value smithyxml.Value) error {
 	defer value.Close()
 	return nil
@@ -10657,6 +11742,22 @@ func awsRestxml_serializeDocumentRequestPaymentConfiguration(v *types.RequestPay
 	return nil
 }
 
+func awsRestxml_serializeDocumentRequestProgress(v *types.RequestProgress, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Enabled != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Enabled",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Boolean(*v.Enabled)
+	}
+	return nil
+}
+
 func awsRestxml_serializeDocumentRestoreRequest(v *types.RestoreRequest, value smithyxml.Value) error {
 	defer value.Close()
 	if v.Days != nil {
@@ -10918,6 +12019,33 @@ func awsRestxml_serializeDocumentS3Location(v *types.S3Location, value smithyxml
 		if err := awsRestxml_serializeDocumentUserMetadata(v.UserMetadata, el); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentScanRange(v *types.ScanRange, value smithyxml.Value) error {
+	defer value.Close()
+	if v.End != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "End",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Long(*v.End)
+	}
+	if v.Start != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Start",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Long(*v.Start)
 	}
 	return nil
 }

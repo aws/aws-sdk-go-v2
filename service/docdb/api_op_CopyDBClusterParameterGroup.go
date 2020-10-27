@@ -43,7 +43,7 @@ type CopyDBClusterParameterGroupInput struct {
 	//     * If the source parameter group
 	// is in a different AWS Region than the copy, specify a valid cluster parameter
 	// group ARN; for example,
-	// arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1.
+	// arn:aws:rds:us-east-1:123456789012:sample-cluster:sample-parameter-group.
 	//
 	// This member is required.
 	SourceDBClusterParameterGroupIdentifier *string

@@ -11,7 +11,7 @@ import (
 )
 
 // Removes a tag that is assigned to a GameLift resource. Resource tags are used to
-// organize AWS resources for a range of purposes. This action handles the
+// organize AWS resources for a range of purposes. This operation handles the
 // permissions necessary to manage tags for the following GameLift resource
 // types:
 //
@@ -32,7 +32,7 @@ import (
 //
 // To
 // remove a tag from a resource, specify the unique ARN value for the resource and
-// provide a string list containing one or more tags to be removed. This action
+// provide a string list containing one or more tags to be removed. This operation
 // succeeds even if the list includes tags that are not currently assigned to the
 // specified resource. Learn more Tagging AWS Resources
 // (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the AWS
@@ -67,7 +67,7 @@ type UntagResourceInput struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) that is
 	// assigned to and uniquely identifies the GameLift resource that you want to
 	// remove tags from. GameLift resource ARNs are included in the data object for the
-	// resource, which can be retrieved by calling a List or Describe action for the
+	// resource, which can be retrieved by calling a List or Describe operation for the
 	// resource type.
 	//
 	// This member is required.

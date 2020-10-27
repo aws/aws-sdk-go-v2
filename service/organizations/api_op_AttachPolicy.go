@@ -16,22 +16,22 @@ import (
 //
 //     *
 // AISERVICES_OPT_OUT_POLICY
-// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html)
+// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html)
 //
 //
 // * BACKUP_POLICY
-// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html)
+// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html)
 //
 //
 // * SERVICE_CONTROL_POLICY
-// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html)
+// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html)
 //
 //
 // * TAG_POLICY
-// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
+// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
 //
 // This
-// operation can be called only from the organization's master account.
+// operation can be called only from the organization's management account.
 func (c *Client) AttachPolicy(ctx context.Context, params *AttachPolicyInput, optFns ...func(*Options)) (*AttachPolicyOutput, error) {
 	if params == nil {
 		params = &AttachPolicyInput{}

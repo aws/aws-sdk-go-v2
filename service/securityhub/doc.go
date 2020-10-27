@@ -23,13 +23,19 @@
 // invitation was sent from. The following throttling limits apply to using
 // Security Hub API operations.
 //
-//     * GetFindings - RateLimit of 3 requests per
-// second. BurstLimit of 6 requests per second.
+//     * BatchEnableStandards - RateLimit of 1
+// request per second, BurstLimit of 1 request per second.
 //
-//     * UpdateFindings - RateLimit
-// of 1 request per second. BurstLimit of 5 requests per second.
+//     * GetFindings -
+// RateLimit of 3 requests per second. BurstLimit of 6 requests per second.
 //
-//     * All other
-// operations - RateLimit of 10 requests per second. BurstLimit of 30 requests per
+//     *
+// UpdateFindings - RateLimit of 1 request per second. BurstLimit of 5 requests per
 // second.
+//
+//     * UpdateStandardsControl - RateLimit of 1 request per second,
+// BurstLimit of 5 requests per second.
+//
+//     * All other operations - RateLimit of
+// 10 requests per second. BurstLimit of 30 requests per second.
 package securityhub

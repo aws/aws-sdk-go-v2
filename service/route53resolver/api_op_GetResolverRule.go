@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Gets information about a specified resolver rule, such as the domain name that
-// the rule forwards DNS queries for and the ID of the outbound resolver endpoint
+// Gets information about a specified Resolver rule, such as the domain name that
+// the rule forwards DNS queries for and the ID of the outbound Resolver endpoint
 // that the rule is associated with.
 func (c *Client) GetResolverRule(ctx context.Context, params *GetResolverRuleInput, optFns ...func(*Options)) (*GetResolverRuleOutput, error) {
 	if params == nil {
@@ -31,7 +31,7 @@ func (c *Client) GetResolverRule(ctx context.Context, params *GetResolverRuleInp
 
 type GetResolverRuleInput struct {
 
-	// The ID of the resolver rule that you want to get information about.
+	// The ID of the Resolver rule that you want to get information about.
 	//
 	// This member is required.
 	ResolverRuleId *string
@@ -39,7 +39,7 @@ type GetResolverRuleInput struct {
 
 type GetResolverRuleOutput struct {
 
-	// Information about the resolver rule that you specified in a GetResolverRule
+	// Information about the Resolver rule that you specified in a GetResolverRule
 	// request.
 	ResolverRule *types.ResolverRule
 

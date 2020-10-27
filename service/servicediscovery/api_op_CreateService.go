@@ -35,7 +35,7 @@ import (
 // you create the service, you can submit a RegisterInstance
 // (https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html)
 // request, and AWS Cloud Map uses the values in the configuration to create the
-// specified entities. For the current limit on the number of instances that you
+// specified entities. For the current quota on the number of instances that you
 // can register using the same namespace and using the same service, see AWS Cloud
 // Map Limits
 // (https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html) in the

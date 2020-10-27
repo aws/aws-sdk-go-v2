@@ -1074,11 +1074,11 @@ func validateUserStackAssociation(v *types.UserStackAssociation) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UserStackAssociation"}
-	if v.StackName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
-	}
 	if len(v.AuthenticationType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationType"))
+	}
+	if v.StackName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
 	}
 	if v.UserName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
@@ -1168,14 +1168,14 @@ func validateOpCopyImageInput(v *CopyImageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CopyImageInput"}
-	if v.SourceImageName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceImageName"))
+	if v.DestinationRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationRegion"))
 	}
 	if v.DestinationImageName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationImageName"))
 	}
-	if v.DestinationRegion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DestinationRegion"))
+	if v.SourceImageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceImageName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1189,18 +1189,16 @@ func validateOpCreateDirectoryConfigInput(v *CreateDirectoryConfigInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDirectoryConfigInput"}
+	if v.ServiceAccountCredentials != nil {
+		if err := validateServiceAccountCredentials(v.ServiceAccountCredentials); err != nil {
+			invalidParams.AddNested("ServiceAccountCredentials", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.DirectoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryName"))
 	}
 	if v.OrganizationalUnitDistinguishedNames == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationalUnitDistinguishedNames"))
-	}
-	if v.ServiceAccountCredentials == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServiceAccountCredentials"))
-	} else if v.ServiceAccountCredentials != nil {
-		if err := validateServiceAccountCredentials(v.ServiceAccountCredentials); err != nil {
-			invalidParams.AddNested("ServiceAccountCredentials", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1214,15 +1212,15 @@ func validateOpCreateFleetInput(v *CreateFleetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateFleetInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.ComputeCapacity == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ComputeCapacity"))
 	} else if v.ComputeCapacity != nil {
 		if err := validateComputeCapacity(v.ComputeCapacity); err != nil {
 			invalidParams.AddNested("ComputeCapacity", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.InstanceType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
@@ -1239,13 +1237,13 @@ func validateOpCreateImageBuilderInput(v *CreateImageBuilderInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateImageBuilderInput"}
-	if v.InstanceType == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
-	}
 	if v.AccessEndpoints != nil {
 		if err := validateAccessEndpointList(v.AccessEndpoints); err != nil {
 			invalidParams.AddNested("AccessEndpoints", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.InstanceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
@@ -1277,19 +1275,6 @@ func validateOpCreateStackInput(v *CreateStackInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateStackInput"}
-	if v.UserSettings != nil {
-		if err := validateUserSettingList(v.UserSettings); err != nil {
-			invalidParams.AddNested("UserSettings", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.AccessEndpoints != nil {
-		if err := validateAccessEndpointList(v.AccessEndpoints); err != nil {
-			invalidParams.AddNested("AccessEndpoints", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.StorageConnectors != nil {
 		if err := validateStorageConnectorList(v.StorageConnectors); err != nil {
 			invalidParams.AddNested("StorageConnectors", err.(smithy.InvalidParamsError))
@@ -1298,6 +1283,19 @@ func validateOpCreateStackInput(v *CreateStackInput) error {
 	if v.ApplicationSettings != nil {
 		if err := validateApplicationSettings(v.ApplicationSettings); err != nil {
 			invalidParams.AddNested("ApplicationSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.AccessEndpoints != nil {
+		if err := validateAccessEndpointList(v.AccessEndpoints); err != nil {
+			invalidParams.AddNested("AccessEndpoints", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.UserSettings != nil {
+		if err := validateUserSettingList(v.UserSettings); err != nil {
+			invalidParams.AddNested("UserSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1312,14 +1310,14 @@ func validateOpCreateStreamingURLInput(v *CreateStreamingURLInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateStreamingURLInput"}
-	if v.FleetName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FleetName"))
+	if v.StackName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
 	}
 	if v.UserId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
 	}
-	if v.StackName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
+	if v.FleetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FleetName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1333,11 +1331,11 @@ func validateOpCreateUserInput(v *CreateUserInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateUserInput"}
-	if v.UserName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
-	}
 	if len(v.AuthenticationType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationType"))
+	}
+	if v.UserName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1411,11 +1409,11 @@ func validateOpDeleteImagePermissionsInput(v *DeleteImagePermissionsInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteImagePermissionsInput"}
-	if v.SharedAccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SharedAccountId"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.SharedAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SharedAccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1477,11 +1475,11 @@ func validateOpDescribeSessionsInput(v *DescribeSessionsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeSessionsInput"}
-	if v.FleetName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FleetName"))
-	}
 	if v.StackName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
+	}
+	if v.FleetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FleetName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1510,11 +1508,11 @@ func validateOpDisableUserInput(v *DisableUserInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisableUserInput"}
-	if len(v.AuthenticationType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationType"))
-	}
 	if v.UserName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
+	}
+	if len(v.AuthenticationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1528,11 +1526,11 @@ func validateOpDisassociateFleetInput(v *DisassociateFleetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateFleetInput"}
-	if v.FleetName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FleetName"))
-	}
 	if v.StackName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
+	}
+	if v.FleetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FleetName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1702,11 +1700,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
-	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1778,9 +1776,9 @@ func validateOpUpdateStackInput(v *UpdateStackInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateStackInput"}
-	if v.UserSettings != nil {
-		if err := validateUserSettingList(v.UserSettings); err != nil {
-			invalidParams.AddNested("UserSettings", err.(smithy.InvalidParamsError))
+	if v.AccessEndpoints != nil {
+		if err := validateAccessEndpointList(v.AccessEndpoints); err != nil {
+			invalidParams.AddNested("AccessEndpoints", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.ApplicationSettings != nil {
@@ -1788,18 +1786,18 @@ func validateOpUpdateStackInput(v *UpdateStackInput) error {
 			invalidParams.AddNested("ApplicationSettings", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.AccessEndpoints != nil {
-		if err := validateAccessEndpointList(v.AccessEndpoints); err != nil {
-			invalidParams.AddNested("AccessEndpoints", err.(smithy.InvalidParamsError))
-		}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.StorageConnectors != nil {
 		if err := validateStorageConnectorList(v.StorageConnectors); err != nil {
 			invalidParams.AddNested("StorageConnectors", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if v.UserSettings != nil {
+		if err := validateUserSettingList(v.UserSettings); err != nil {
+			invalidParams.AddNested("UserSettings", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

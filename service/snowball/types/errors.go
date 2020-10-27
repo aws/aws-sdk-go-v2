@@ -26,6 +26,26 @@ func (e *ClusterLimitExceededException) ErrorMessage() string {
 func (e *ClusterLimitExceededException) ErrorCode() string             { return "ClusterLimitExceededException" }
 func (e *ClusterLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// You get this exception when you call CreateReturnShippingLabel more than once
+// when other requests are not completed.
+type ConflictException struct {
+	Message *string
+
+	ConflictResource *string
+}
+
+func (e *ConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Your IAM user lacks the necessary Amazon EC2 permissions to perform the
 // attempted action.
 type Ec2RequestFailedException struct {
@@ -156,6 +176,29 @@ func (e *KMSRequestFailedException) ErrorMessage() string {
 }
 func (e *KMSRequestFailedException) ErrorCode() string             { return "KMSRequestFailedException" }
 func (e *KMSRequestFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// You get this exception if you call CreateReturnShippingLabel and a valid return
+// shipping label already exists. In this case, use DescribeReturnShippingLabel to
+// get the url.
+type ReturnShippingLabelAlreadyExistsException struct {
+	Message *string
+}
+
+func (e *ReturnShippingLabelAlreadyExistsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ReturnShippingLabelAlreadyExistsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ReturnShippingLabelAlreadyExistsException) ErrorCode() string {
+	return "ReturnShippingLabelAlreadyExistsException"
+}
+func (e *ReturnShippingLabelAlreadyExistsException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
 
 // The address is either outside the serviceable area for your region, or an error
 // occurred. Check the address with your region's carrier and try again. If the

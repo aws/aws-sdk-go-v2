@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Terminates the stack for an application.
+// Terminates the stack for the specified application.
 func (c *Client) TerminateApp(ctx context.Context, params *TerminateAppInput, optFns ...func(*Options)) (*TerminateAppOutput, error) {
 	if params == nil {
 		params = &TerminateAppInput{}
@@ -28,7 +28,7 @@ func (c *Client) TerminateApp(ctx context.Context, params *TerminateAppInput, op
 
 type TerminateAppInput struct {
 
-	// ID of the application to terminate.
+	// The ID of the application.
 	AppId *string
 }
 

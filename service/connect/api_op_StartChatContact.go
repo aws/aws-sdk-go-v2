@@ -21,7 +21,21 @@ import (
 // for the created chat within 5 minutes. This is achieved by invoking
 // CreateParticipantConnection
 // (https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html)
-// with WEBSOCKET and CONNECTION_CREDENTIALS.
+// with WEBSOCKET and CONNECTION_CREDENTIALS. A 429 error occurs in two
+// situations:
+//
+//     * API rate limit is exceeded. API TPS throttling returns a
+// TooManyRequests exception from the API Gateway.
+//
+//     * The quota for concurrent
+// active chats
+// (https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html)
+// is exceeded. Active chat throttling returns a LimitExceededException.
+//
+// For more
+// information about how chat works, see Chat
+// (https://docs.aws.amazon.com/connect/latest/adminguide/chat.html) in the Amazon
+// Connect Administrator Guide.
 func (c *Client) StartChatContact(ctx context.Context, params *StartChatContactInput, optFns ...func(*Options)) (*StartChatContactOutput, error) {
 	if params == nil {
 		params = &StartChatContactInput{}
@@ -39,7 +53,12 @@ func (c *Client) StartChatContact(ctx context.Context, params *StartChatContactI
 
 type StartChatContactInput struct {
 
-	// The identifier of the contact flow for the chat.
+	// The identifier of the contact flow for initiating the chat. To see the
+	// ContactFlowId in the Amazon Connect console user interface, on the navigation
+	// menu go to Routing, Contact Flows. Choose the contact flow. On the contact flow
+	// page, under the name of the contact flow, choose Show additional flow
+	// information. The ContactFlowId is the last part of the ARN, shown here in bold:
+	// arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/846ec553-a005-41c0-8341-xxxxxxxxxxxx
 	//
 	// This member is required.
 	ContactFlowId *string

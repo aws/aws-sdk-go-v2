@@ -3016,12 +3016,24 @@ func awsAwsquery_serializeOpDocumentCreateListenerInput(v *CreateListenerInput, 
 		objectKey.String(*v.SslPolicy)
 	}
 
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
 func awsAwsquery_serializeOpDocumentCreateLoadBalancerInput(v *CreateLoadBalancerInput, value query.Value) error {
 	object := value.Object()
 	_ = object
+
+	if v.CustomerOwnedIpv4Pool != nil {
+		objectKey := object.Key("CustomerOwnedIpv4Pool")
+		objectKey.String(*v.CustomerOwnedIpv4Pool)
+	}
 
 	if len(v.IpAddressType) > 0 {
 		objectKey := object.Key("IpAddressType")
@@ -3102,6 +3114,13 @@ func awsAwsquery_serializeOpDocumentCreateRuleInput(v *CreateRuleInput, value qu
 		objectKey.Integer(*v.Priority)
 	}
 
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3164,6 +3183,13 @@ func awsAwsquery_serializeOpDocumentCreateTargetGroupInput(v *CreateTargetGroupI
 	if len(v.Protocol) > 0 {
 		objectKey := object.Key("Protocol")
 		objectKey.String(string(v.Protocol))
+	}
+
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if len(v.TargetType) > 0 {

@@ -4,6 +4,7 @@ package kendra
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
@@ -51,8 +52,21 @@ type CreateFaqInput struct {
 	// This member is required.
 	S3Path *types.S3Path
 
+	// A token that you provide to identify the request to create a FAQ. Multiple calls
+	// to the CreateFaqRequest operation with the same client token will create only
+	// one FAQ.
+	ClientToken *string
+
 	// A description of the FAQ.
 	Description *string
+
+	// The format of the input file. You can choose between a basic CSV format, a CSV
+	// format that includes customs attributes in a header, and a JSON format that
+	// includes custom attributes. The format must match the format of the file stored
+	// in the S3 bucket identified in the S3Path parameter. For more information, see
+	// Adding questions and answers
+	// (https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html).
+	FileFormat types.FaqFileFormat
 
 	// A list of key-value pairs that identify the FAQ. You can use the tags to
 	// identify and organize your resources and to control access to resources.
@@ -87,11 +101,45 @@ func addOperationCreateFaqMiddlewares(stack *middleware.Stack, options Options) 
 	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	addIdempotencyToken_opCreateFaqMiddleware(stack, options)
 	addOpCreateFaqValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFaq(options.Region), middleware.Before)
 	addRequestIDRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)
 	return nil
+}
+
+type idempotencyToken_initializeOpCreateFaq struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpCreateFaq) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpCreateFaq) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*CreateFaqInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *CreateFaqInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opCreateFaqMiddleware(stack *middleware.Stack, cfg Options) {
+	stack.Initialize.Add(&idempotencyToken_initializeOpCreateFaq{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opCreateFaq(region string) awsmiddleware.RegisterServiceMetadata {

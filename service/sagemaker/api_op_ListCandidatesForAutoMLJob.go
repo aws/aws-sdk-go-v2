@@ -40,8 +40,8 @@ type ListCandidatesForAutoMLJobInput struct {
 	// List the job's Candidates up to a specified limit.
 	MaxResults *int32
 
-	// If the previous response was truncated, you will receive this token. Use it in
-	// your next request to receive the next set of results.
+	// If the previous response was truncated, you receive this token. Use it in your
+	// next request to receive the next set of results.
 	NextToken *string
 
 	// The parameter by which to sort the results. The default is Descending.
@@ -61,8 +61,8 @@ type ListCandidatesForAutoMLJobOutput struct {
 	// This member is required.
 	Candidates []*types.AutoMLCandidate
 
-	// If the previous response was truncated, you will receive this token. Use it in
-	// your next request to receive the next set of results.
+	// If the previous response was truncated, you receive this token. Use it in your
+	// next request to receive the next set of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

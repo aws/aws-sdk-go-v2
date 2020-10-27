@@ -11,16 +11,25 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Call this operation from your consumer after you call RegisterStreamConsumer to
-// register the consumer with Kinesis Data Streams. If the call succeeds, your
-// consumer starts receiving events of type SubscribeToShardEvent for up to 5
-// minutes, after which time you need to call SubscribeToShard again to renew the
-// subscription if you want to continue to receive records. You can make one call
-// to SubscribeToShard per second per ConsumerARN. If your call succeeds, and then
-// you call the operation again less than 5 seconds later, the second call
-// generates a ResourceInUseException. If you call the operation a second time more
-// than 5 seconds after the first call succeeds, the second call succeeds and the
-// first connection gets shut down.
+// This operation establishes an HTTP/2 connection between the consumer you specify
+// in the ConsumerARN parameter and the shard you specify in the ShardId parameter.
+// After the connection is successfully established, Kinesis Data Streams pushes
+// records from the shard to the consumer over this connection. Before you call
+// this operation, call RegisterStreamConsumer to register the consumer with
+// Kinesis Data Streams. When the SubscribeToShard call succeeds, your consumer
+// starts receiving events of type SubscribeToShardEvent over the HTTP/2 connection
+// for up to 5 minutes, after which time you need to call SubscribeToShard again to
+// renew the subscription if you want to continue to receive records. You can make
+// one call to SubscribeToShard per second per registered consumer per shard. For
+// example, if you have a 4000 shard stream and two registered stream consumers,
+// you can make one SubscribeToShard request per second for each combination of
+// shard and registered consumer, allowing you to subscribe both consumers to all
+// 4000 shards in one second. If you call SubscribeToShard again with the same
+// ConsumerARN and ShardId within 5 seconds of a successful call, you'll get a
+// ResourceInUseException. If you call SubscribeToShard 5 seconds or more after a
+// successful call, the first connection will expire and the second call will take
+// over the subscription. For an example of how to use this operations, see
+// Enhanced Fan-Out Using the Kinesis Data Streams API.
 func (c *Client) SubscribeToShard(ctx context.Context, params *SubscribeToShardInput, optFns ...func(*Options)) (*SubscribeToShardOutput, error) {
 	if params == nil {
 		params = &SubscribeToShardInput{}
@@ -50,6 +59,9 @@ type SubscribeToShardInput struct {
 	// This member is required.
 	ShardId *string
 
+	//
+	//
+	// This member is required.
 	StartingPosition *types.StartingPosition
 }
 

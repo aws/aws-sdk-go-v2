@@ -3542,21 +3542,13 @@ func awsRestjson1_serializeDocumentAmiDistributionConfiguration(v *types.AmiDist
 		ok.String(*v.Name)
 	}
 
-	return nil
-}
-
-func awsRestjson1_serializeDocumentArnList(v []*string, value smithyjson.Value) error {
-	array := value.Array()
-	defer array.Close()
-
-	for i := range v {
-		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
+	if v.TargetAccountIds != nil {
+		ok := object.Key("targetAccountIds")
+		if err := awsRestjson1_serializeDocumentAccountList(v.TargetAccountIds, ok); err != nil {
+			return err
 		}
-		av.String(*v[i])
 	}
+
 	return nil
 }
 
@@ -3602,7 +3594,7 @@ func awsRestjson1_serializeDocumentDistribution(v *types.Distribution, value smi
 
 	if v.LicenseConfigurationArns != nil {
 		ok := object.Key("licenseConfigurationArns")
-		if err := awsRestjson1_serializeDocumentArnList(v.LicenseConfigurationArns, ok); err != nil {
+		if err := awsRestjson1_serializeDocumentLicenseConfigurationArnList(v.LicenseConfigurationArns, ok); err != nil {
 			return err
 		}
 	}
@@ -3821,6 +3813,21 @@ func awsRestjson1_serializeDocumentLaunchPermissionConfiguration(v *types.Launch
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLicenseConfigurationArnList(v []*string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			av.Null()
+			continue
+		}
+		av.String(*v[i])
+	}
 	return nil
 }
 

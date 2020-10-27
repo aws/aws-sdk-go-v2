@@ -232,6 +232,24 @@ func (e *InvalidToken) ErrorMessage() string {
 func (e *InvalidToken) ErrorCode() string             { return "InvalidToken" }
 func (e *InvalidToken) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Your tracingConfiguration key does not match, or enabled has not been set to
+// true or false.
+type InvalidTracingConfiguration struct {
+	Message *string
+}
+
+func (e *InvalidTracingConfiguration) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidTracingConfiguration) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidTracingConfiguration) ErrorCode() string             { return "InvalidTracingConfiguration" }
+func (e *InvalidTracingConfiguration) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Request is missing a required parameter. This error occurs if both definition
 // and roleArn are not specified.
 type MissingRequiredParameter struct {

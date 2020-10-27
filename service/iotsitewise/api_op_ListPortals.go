@@ -29,7 +29,7 @@ func (c *Client) ListPortals(ctx context.Context, params *ListPortalsInput, optF
 
 type ListPortalsInput struct {
 
-	// The maximum number of results to be returned per paginated request.
+	// The maximum number of results to be returned per paginated request. Default: 50
 	MaxResults *int32
 
 	// The token to be used for the next set of paginated results.

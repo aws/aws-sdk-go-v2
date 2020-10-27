@@ -12,7 +12,7 @@ import (
 )
 
 // Get the Access Status for AWS Organization portfolio share feature. This API can
-// only be called by the master account in the organization or by a delegated
+// only be called by the management account in the organization or by a delegated
 // admin.
 func (c *Client) GetAWSOrganizationsAccessStatus(ctx context.Context, params *GetAWSOrganizationsAccessStatusInput, optFns ...func(*Options)) (*GetAWSOrganizationsAccessStatusOutput, error) {
 	if params == nil {

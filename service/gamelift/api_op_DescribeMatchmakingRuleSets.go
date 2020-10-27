@@ -57,7 +57,7 @@ func (c *Client) DescribeMatchmakingRuleSets(ctx context.Context, params *Descri
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type DescribeMatchmakingRuleSetsInput struct {
 
 	// The maximum number of results to return. Use this parameter with NextToken to
@@ -70,12 +70,12 @@ type DescribeMatchmakingRuleSetsInput struct {
 	Names []*string
 
 	// A token that indicates the start of the next sequential page of results. Use the
-	// token that is returned with a previous call to this action. To start at the
+	// token that is returned with a previous call to this operation. To start at the
 	// beginning of the result set, do not specify a value.
 	NextToken *string
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type DescribeMatchmakingRuleSetsOutput struct {
 
 	// A collection of requested matchmaking rule set objects.
@@ -84,7 +84,7 @@ type DescribeMatchmakingRuleSetsOutput struct {
 	RuleSets []*types.MatchmakingRuleSet
 
 	// A token that indicates where to resume retrieving results on the next call to
-	// this action. If no token is returned, these results represent the end of the
+	// this operation. If no token is returned, these results represent the end of the
 	// list.
 	NextToken *string
 

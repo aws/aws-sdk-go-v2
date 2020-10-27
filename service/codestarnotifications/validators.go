@@ -362,11 +362,11 @@ func validateListNotificationRulesFilter(v *types.ListNotificationRulesFilter) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListNotificationRulesFilter"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if len(v.Name) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -432,11 +432,8 @@ func validateOpCreateNotificationRuleInput(v *CreateNotificationRuleInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateNotificationRuleInput"}
-	if v.EventTypeIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EventTypeIds"))
-	}
-	if len(v.DetailType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("DetailType"))
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.Resource == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Resource"))
@@ -444,8 +441,11 @@ func validateOpCreateNotificationRuleInput(v *CreateNotificationRuleInput) error
 	if v.Targets == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Targets"))
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if len(v.DetailType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DetailType"))
+	}
+	if v.EventTypeIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventTypeIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -570,11 +570,11 @@ func validateOpSubscribeInput(v *SubscribeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SubscribeInput"}
-	if v.Target == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Target"))
-	}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.Target == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Target"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -588,11 +588,11 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.Tags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
-	}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -624,11 +624,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

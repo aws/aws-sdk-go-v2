@@ -44,10 +44,11 @@ type ListSimulationApplicationsInput struct {
 	// applicable.
 	MaxResults *int32
 
-	// The nextToken value returned from a previous paginated
-	// ListSimulationApplications request where maxResults was used and the results
-	// exceeded the value of that parameter. Pagination continues from the end of the
-	// previous results that returned the nextToken value.
+	// If the previous paginated request did not return all of the remaining results,
+	// the response object's nextToken parameter value is set to a token. To retrieve
+	// the next set of results, call ListSimulationApplications again and assign that
+	// token to the request object's nextToken parameter. If there are no remaining
+	// results, the previous response object's NextToken parameter is set to null.
 	NextToken *string
 
 	// The version qualifier of the simulation application.
@@ -56,10 +57,11 @@ type ListSimulationApplicationsInput struct {
 
 type ListSimulationApplicationsOutput struct {
 
-	// The nextToken value to include in a future ListSimulationApplications request.
-	// When the results of a ListRobot request exceed maxResults, this value can be
-	// used to retrieve the next page of results. This value is null when there are no
-	// more results to return.
+	// If the previous paginated request did not return all of the remaining results,
+	// the response object's nextToken parameter value is set to a token. To retrieve
+	// the next set of results, call ListSimulationApplications again and assign that
+	// token to the request object's nextToken parameter. If there are no remaining
+	// results, the previous response object's NextToken parameter is set to null.
 	NextToken *string
 
 	// A list of simulation application summaries that meet the criteria of the

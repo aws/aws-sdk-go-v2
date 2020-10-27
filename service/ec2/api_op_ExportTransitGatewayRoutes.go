@@ -74,15 +74,13 @@ type ExportTransitGatewayRoutesInput struct {
 	// route table and you specify supernet-of-match as 10.0.1.0/30, then the result
 	// returns 10.0.1.0/29.
 	//
-	//     * state - The state of the attachment (available |
-	// deleted | deleting | failed | modifying | pendingAcceptance | pending |
-	// rollingBack | rejected | rejecting).
+	//     * state - The state of the route (active |
+	// blackhole).
 	//
-	//     *
-	// transit-gateway-route-destination-cidr-block - The CIDR range.
+	//     * transit-gateway-route-destination-cidr-block - The CIDR
+	// range.
 	//
-	//     * type - The
-	// type of route (active | blackhole).
+	//     * type - The type of route (propagated | static).
 	Filters []*types.Filter
 }
 

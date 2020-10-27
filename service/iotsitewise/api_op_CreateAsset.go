@@ -13,7 +13,7 @@ import (
 )
 
 // Creates an asset from an existing asset model. For more information, see
-// Creating Assets
+// Creating assets
 // (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-assets.html)
 // in the AWS IoT SiteWise User Guide.
 func (c *Client) CreateAsset(ctx context.Context, params *CreateAssetInput, optFns ...func(*Options)) (*CreateAssetOutput, error) {

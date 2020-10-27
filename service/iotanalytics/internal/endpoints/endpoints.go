@@ -62,6 +62,9 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    regexp.MustCompile("^cn\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			"cn-north-1": endpoints.Endpoint{},
+		},
 	},
 	{
 		ID: "aws-iso",

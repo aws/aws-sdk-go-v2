@@ -2799,11 +2799,11 @@ func validateTag(v *types.Tag) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
-	if v.Key == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Key"))
-	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2834,11 +2834,11 @@ func validateOpAddClientIDToOpenIDConnectProviderInput(v *AddClientIDToOpenIDCon
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddClientIDToOpenIDConnectProviderInput"}
-	if v.ClientID == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientID"))
-	}
 	if v.OpenIDConnectProviderArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OpenIDConnectProviderArn"))
+	}
+	if v.ClientID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientID"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2852,11 +2852,11 @@ func validateOpAddRoleToInstanceProfileInput(v *AddRoleToInstanceProfileInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddRoleToInstanceProfileInput"}
-	if v.RoleName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleName"))
-	}
 	if v.InstanceProfileName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceProfileName"))
+	}
+	if v.RoleName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2870,11 +2870,11 @@ func validateOpAddUserToGroupInput(v *AddUserToGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddUserToGroupInput"}
-	if v.UserName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
-	}
 	if v.GroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GroupName"))
+	}
+	if v.UserName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2888,11 +2888,11 @@ func validateOpAttachGroupPolicyInput(v *AttachGroupPolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AttachGroupPolicyInput"}
-	if v.PolicyArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
-	}
 	if v.GroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GroupName"))
+	}
+	if v.PolicyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2942,11 +2942,11 @@ func validateOpChangePasswordInput(v *ChangePasswordInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ChangePasswordInput"}
-	if v.OldPassword == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OldPassword"))
-	}
 	if v.NewPassword == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NewPassword"))
+	}
+	if v.OldPassword == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OldPassword"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3005,11 +3005,11 @@ func validateOpCreateLoginProfileInput(v *CreateLoginProfileInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateLoginProfileInput"}
-	if v.UserName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
-	}
 	if v.Password == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Password"))
+	}
+	if v.UserName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3041,11 +3041,11 @@ func validateOpCreatePolicyInput(v *CreatePolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreatePolicyInput"}
-	if v.PolicyName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
-	}
 	if v.PolicyDocument == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyDocument"))
+	}
+	if v.PolicyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3082,11 +3082,11 @@ func validateOpCreateRoleInput(v *CreateRoleInput) error {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.RoleName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleName"))
-	}
 	if v.AssumeRolePolicyDocument == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssumeRolePolicyDocument"))
+	}
+	if v.RoleName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3133,11 +3133,11 @@ func validateOpCreateServiceSpecificCredentialInput(v *CreateServiceSpecificCred
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateServiceSpecificCredentialInput"}
-	if v.ServiceName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
-	}
 	if v.UserName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
+	}
+	if v.ServiceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3249,11 +3249,11 @@ func validateOpDeleteGroupPolicyInput(v *DeleteGroupPolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteGroupPolicyInput"}
-	if v.PolicyName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
-	}
 	if v.GroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GroupName"))
+	}
+	if v.PolicyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3375,11 +3375,11 @@ func validateOpDeleteRolePolicyInput(v *DeleteRolePolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteRolePolicyInput"}
-	if v.PolicyName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
-	}
 	if v.RoleName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleName"))
+	}
+	if v.PolicyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3468,11 +3468,11 @@ func validateOpDeleteSSHPublicKeyInput(v *DeleteSSHPublicKeyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteSSHPublicKeyInput"}
-	if v.SSHPublicKeyId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SSHPublicKeyId"))
-	}
 	if v.UserName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
+	}
+	if v.SSHPublicKeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SSHPublicKeyId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3567,11 +3567,11 @@ func validateOpDetachRolePolicyInput(v *DetachRolePolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DetachRolePolicyInput"}
-	if v.RoleName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleName"))
-	}
 	if v.PolicyArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
+	}
+	if v.RoleName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3603,17 +3603,17 @@ func validateOpEnableMFADeviceInput(v *EnableMFADeviceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EnableMFADeviceInput"}
+	if v.UserName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
+	}
 	if v.SerialNumber == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SerialNumber"))
-	}
-	if v.AuthenticationCode1 == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationCode1"))
 	}
 	if v.AuthenticationCode2 == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationCode2"))
 	}
-	if v.UserName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
+	if v.AuthenticationCode1 == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationCode1"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3717,11 +3717,11 @@ func validateOpGetGroupPolicyInput(v *GetGroupPolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetGroupPolicyInput"}
-	if v.PolicyName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
-	}
 	if v.GroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GroupName"))
+	}
+	if v.PolicyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3810,11 +3810,11 @@ func validateOpGetPolicyVersionInput(v *GetPolicyVersionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetPolicyVersionInput"}
-	if v.VersionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VersionId"))
-	}
 	if v.PolicyArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
+	}
+	if v.VersionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3843,11 +3843,11 @@ func validateOpGetRolePolicyInput(v *GetRolePolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetRolePolicyInput"}
-	if v.PolicyName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
-	}
 	if v.RoleName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleName"))
+	}
+	if v.PolicyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3906,11 +3906,11 @@ func validateOpGetServiceLastAccessedDetailsWithEntitiesInput(v *GetServiceLastA
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetServiceLastAccessedDetailsWithEntitiesInput"}
-	if v.JobId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
-	}
 	if v.ServiceNamespace == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceNamespace"))
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3939,11 +3939,11 @@ func validateOpGetSSHPublicKeyInput(v *GetSSHPublicKeyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetSSHPublicKeyInput"}
-	if v.UserName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
-	}
 	if v.SSHPublicKeyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SSHPublicKeyId"))
+	}
+	if v.UserName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
 	}
 	if len(v.Encoding) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Encoding"))
@@ -4083,11 +4083,11 @@ func validateOpListPoliciesGrantingServiceAccessInput(v *ListPoliciesGrantingSer
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListPoliciesGrantingServiceAccessInput"}
-	if v.Arn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
-	}
 	if v.ServiceNamespaces == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceNamespaces"))
+	}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4179,11 +4179,11 @@ func validateOpPutGroupPolicyInput(v *PutGroupPolicyInput) error {
 	if v.PolicyName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
 	}
-	if v.GroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GroupName"))
-	}
 	if v.PolicyDocument == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyDocument"))
+	}
+	if v.GroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4197,11 +4197,11 @@ func validateOpPutRolePermissionsBoundaryInput(v *PutRolePermissionsBoundaryInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutRolePermissionsBoundaryInput"}
-	if v.PermissionsBoundary == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PermissionsBoundary"))
-	}
 	if v.RoleName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleName"))
+	}
+	if v.PermissionsBoundary == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PermissionsBoundary"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4215,11 +4215,11 @@ func validateOpPutRolePolicyInput(v *PutRolePolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutRolePolicyInput"}
-	if v.PolicyName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
-	}
 	if v.RoleName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleName"))
+	}
+	if v.PolicyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
 	}
 	if v.PolicyDocument == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyDocument"))
@@ -4236,11 +4236,11 @@ func validateOpPutUserPermissionsBoundaryInput(v *PutUserPermissionsBoundaryInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutUserPermissionsBoundaryInput"}
-	if v.UserName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
-	}
 	if v.PermissionsBoundary == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PermissionsBoundary"))
+	}
+	if v.UserName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4257,11 +4257,11 @@ func validateOpPutUserPolicyInput(v *PutUserPolicyInput) error {
 	if v.UserName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
 	}
-	if v.PolicyName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
-	}
 	if v.PolicyDocument == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyDocument"))
+	}
+	if v.PolicyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4275,11 +4275,11 @@ func validateOpRemoveClientIDFromOpenIDConnectProviderInput(v *RemoveClientIDFro
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RemoveClientIDFromOpenIDConnectProviderInput"}
-	if v.ClientID == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientID"))
-	}
 	if v.OpenIDConnectProviderArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OpenIDConnectProviderArn"))
+	}
+	if v.ClientID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientID"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4311,11 +4311,11 @@ func validateOpRemoveUserFromGroupInput(v *RemoveUserFromGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RemoveUserFromGroupInput"}
-	if v.UserName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
-	}
 	if v.GroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GroupName"))
+	}
+	if v.UserName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4344,17 +4344,17 @@ func validateOpResyncMFADeviceInput(v *ResyncMFADeviceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResyncMFADeviceInput"}
+	if v.AuthenticationCode2 == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationCode2"))
+	}
+	if v.AuthenticationCode1 == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationCode1"))
+	}
 	if v.UserName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
 	}
 	if v.SerialNumber == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SerialNumber"))
-	}
-	if v.AuthenticationCode1 == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationCode1"))
-	}
-	if v.AuthenticationCode2 == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationCode2"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4368,11 +4368,11 @@ func validateOpSetDefaultPolicyVersionInput(v *SetDefaultPolicyVersionInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SetDefaultPolicyVersionInput"}
-	if v.PolicyArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
-	}
 	if v.VersionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VersionId"))
+	}
+	if v.PolicyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4419,11 +4419,11 @@ func validateOpSimulatePrincipalPolicyInput(v *SimulatePrincipalPolicyInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SimulatePrincipalPolicyInput"}
-	if v.PolicySourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PolicySourceArn"))
-	}
 	if v.ActionNames == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActionNames"))
+	}
+	if v.PolicySourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicySourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4481,11 +4481,11 @@ func validateOpUntagRoleInput(v *UntagRoleInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagRoleInput"}
-	if v.RoleName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleName"))
-	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if v.RoleName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4499,11 +4499,11 @@ func validateOpUntagUserInput(v *UntagUserInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagUserInput"}
-	if v.UserName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
-	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if v.UserName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4517,11 +4517,11 @@ func validateOpUpdateAccessKeyInput(v *UpdateAccessKeyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateAccessKeyInput"}
-	if len(v.Status) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Status"))
-	}
 	if v.AccessKeyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccessKeyId"))
+	}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4535,11 +4535,11 @@ func validateOpUpdateAssumeRolePolicyInput(v *UpdateAssumeRolePolicyInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateAssumeRolePolicyInput"}
-	if v.PolicyDocument == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PolicyDocument"))
-	}
 	if v.RoleName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleName"))
+	}
+	if v.PolicyDocument == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyDocument"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4583,11 +4583,11 @@ func validateOpUpdateOpenIDConnectProviderThumbprintInput(v *UpdateOpenIDConnect
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateOpenIDConnectProviderThumbprintInput"}
-	if v.OpenIDConnectProviderArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OpenIDConnectProviderArn"))
-	}
 	if v.ThumbprintList == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ThumbprintList"))
+	}
+	if v.OpenIDConnectProviderArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OpenIDConnectProviderArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4601,11 +4601,11 @@ func validateOpUpdateRoleDescriptionInput(v *UpdateRoleDescriptionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateRoleDescriptionInput"}
-	if v.RoleName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleName"))
-	}
 	if v.Description == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	}
+	if v.RoleName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4667,11 +4667,11 @@ func validateOpUpdateServiceSpecificCredentialInput(v *UpdateServiceSpecificCred
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateServiceSpecificCredentialInput"}
-	if len(v.Status) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Status"))
-	}
 	if v.ServiceSpecificCredentialId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceSpecificCredentialId"))
+	}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4685,11 +4685,11 @@ func validateOpUpdateSigningCertificateInput(v *UpdateSigningCertificateInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateSigningCertificateInput"}
-	if len(v.Status) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Status"))
-	}
 	if v.CertificateId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CertificateId"))
+	}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4703,14 +4703,14 @@ func validateOpUpdateSSHPublicKeyInput(v *UpdateSSHPublicKeyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateSSHPublicKeyInput"}
-	if len(v.Status) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	if v.SSHPublicKeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SSHPublicKeyId"))
 	}
 	if v.UserName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
 	}
-	if v.SSHPublicKeyId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SSHPublicKeyId"))
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4739,14 +4739,14 @@ func validateOpUploadServerCertificateInput(v *UploadServerCertificateInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UploadServerCertificateInput"}
-	if v.PrivateKey == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PrivateKey"))
+	if v.ServerCertificateName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerCertificateName"))
 	}
 	if v.CertificateBody == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CertificateBody"))
 	}
-	if v.ServerCertificateName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServerCertificateName"))
+	if v.PrivateKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrivateKey"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

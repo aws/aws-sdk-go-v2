@@ -80,7 +80,7 @@ func (c *Client) CreateFleet(ctx context.Context, params *CreateFleetInput, optF
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type CreateFleetInput struct {
 
 	// The name of an EC2 instance type that is supported in Amazon GameLift. A fleet
@@ -236,7 +236,7 @@ type CreateFleetInput struct {
 	Tags []*types.Tag
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type CreateFleetOutput struct {
 
 	// Properties for the newly created fleet.

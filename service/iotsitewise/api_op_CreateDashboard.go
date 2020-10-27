@@ -30,7 +30,7 @@ func (c *Client) CreateDashboard(ctx context.Context, params *CreateDashboardInp
 type CreateDashboardInput struct {
 
 	// The dashboard definition specified in a JSON literal. For detailed information,
-	// see Creating Dashboards (CLI)
+	// see Creating dashboards (CLI)
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-dashboards-using-aws-cli.html)
 	// in the AWS IoT SiteWise User Guide.
 	//

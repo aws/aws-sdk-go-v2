@@ -30,35 +30,35 @@ func (c *Client) CreateApp(ctx context.Context, params *CreateAppInput, optFns .
 
 type CreateAppInput struct {
 
-	// A unique, case-sensitive identifier you provide to ensure idempotency of
-	// application creation.
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of application creation.
 	ClientToken *string
 
-	// Description of the new application
+	// The description of the new application
 	Description *string
 
-	// Name of the new application.
+	// The name of the new application.
 	Name *string
 
-	// Name of service role in customer's account to be used by AWS SMS.
+	// The name of the service role in the customer's account to be used by AWS SMS.
 	RoleName *string
 
-	// List of server groups to include in the application.
+	// The server groups to include in the application.
 	ServerGroups []*types.ServerGroup
 
-	// List of tags to be associated with the application.
+	// The tags to be associated with the application.
 	Tags []*types.Tag
 }
 
 type CreateAppOutput struct {
 
-	// Summary description of the application.
+	// A summary description of the application.
 	AppSummary *types.AppSummary
 
-	// List of server groups included in the application.
+	// The server groups included in the application.
 	ServerGroups []*types.ServerGroup
 
-	// List of taags associated with the application.
+	// The tags associated with the application.
 	Tags []*types.Tag
 
 	// Metadata pertaining to the operation's result.

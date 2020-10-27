@@ -63,6 +63,30 @@ type BatchStopJobRunSuccessfulSubmission struct {
 	JobRunId *string
 }
 
+// Contains information about a batch update partition error.
+type BatchUpdatePartitionFailureEntry struct {
+
+	// The details about the batch update partition error.
+	ErrorDetail *ErrorDetail
+
+	// A list of values defining the partitions.
+	PartitionValueList []*string
+}
+
+// A structure that contains the values and structure used to update a partition.
+type BatchUpdatePartitionRequestEntry struct {
+
+	// The structure used to update a partition.
+	//
+	// This member is required.
+	PartitionInput *PartitionInput
+
+	// A list of values defining the partitions.
+	//
+	// This member is required.
+	PartitionValueList []*string
+}
+
 // Defines a binary column statistics data.
 type BinaryColumnStatisticsData struct {
 
@@ -339,8 +363,9 @@ type Condition struct {
 	// A logical operator.
 	LogicalOperator LogicalOperator
 
-	// The condition state. Currently, the values supported are SUCCEEDED, STOPPED,
-	// TIMEOUT, and FAILED.
+	// The condition state. Currently, the only job states that a trigger can listen
+	// for are SUCCEEDED, STOPPED, FAILED, and TIMEOUT. The only crawler states that a
+	// trigger can listen for are SUCCEEDED, FAILED, and CANCELLED.
 	State JobRunState
 }
 
@@ -501,7 +526,11 @@ type ConnectionInput struct {
 	//     * MONGODB - Designates a connection to a MongoDB document
 	// database.
 	//
-	// SFTP is not supported.
+	//     * NETWORK - Designates a network connection to a data source
+	// within an Amazon Virtual Private Cloud environment (Amazon VPC).
+	//
+	// SFTP is not
+	// supported.
 	//
 	// This member is required.
 	ConnectionType ConnectionType
@@ -619,6 +648,10 @@ type Crawler struct {
 	// The name of the crawler.
 	Name *string
 
+	// A policy that specifies whether to crawl the entire dataset again, or to crawl
+	// only folders that were added since the last crawler run.
+	RecrawlPolicy *RecrawlPolicy
+
 	// The Amazon Resource Name (ARN) of an IAM role that's used to access customer
 	// resources, such as Amazon Simple Storage Service (Amazon S3) data.
 	Role *string
@@ -689,6 +722,9 @@ type CrawlerTargets struct {
 
 	// Specifies JDBC targets.
 	JdbcTargets []*JdbcTarget
+
+	// Specifies Amazon DocumentDB or MongoDB targets.
+	MongoDBTargets []*MongoDBTarget
 
 	// Specifies Amazon Simple Storage Service (Amazon S3) targets.
 	S3Targets []*S3Target
@@ -1665,7 +1701,9 @@ type JobRun struct {
 	// The name of the job definition being used in this run.
 	JobName *string
 
-	// The current state of the job run.
+	// The current state of the job run. For more information about the statuses of
+	// jobs that have terminated abnormally, see AWS Glue Job Run Statuses
+	// (https://docs.aws.amazon.com/glue/latest/dg/job-run-statuses.html).
 	JobRunState JobRunState
 
 	// The last time that this job run was modified.
@@ -1875,6 +1913,20 @@ type JsonClassifier struct {
 
 	// The version of this classifier.
 	Version *int64
+}
+
+// A partition key pair consisting of a name and a type.
+type KeySchemaElement struct {
+
+	// The name of a partition key.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of a partition key.
+	//
+	// This member is required.
+	Type *string
 }
 
 // Specifies configuration properties for a labeling set generation task run.
@@ -2100,6 +2152,24 @@ type MLTransform struct {
 	WorkerType WorkerType
 }
 
+// Specifies an Amazon DocumentDB or MongoDB data store to crawl.
+type MongoDBTarget struct {
+
+	// The name of the connection to use to connect to the Amazon DocumentDB or MongoDB
+	// target.
+	ConnectionName *string
+
+	// The path of the Amazon DocumentDB or MongoDB target (database/collection).
+	Path *string
+
+	// Indicates whether to scan all the records, or to sample rows from the table.
+	// Scanning all the records can take a long time when the table is not a high
+	// throughput table. A value of true means to scan all records, while a value of
+	// false means to sample the records. If no value is specified, the value defaults
+	// to true.
+	ScanAll *bool
+}
+
 // A node represents an AWS Glue component such as a trigger, or job, etc., that is
 // part of a workflow.
 type Node struct {
@@ -2185,6 +2255,40 @@ type PartitionError struct {
 
 	// The values that define the partition.
 	PartitionValues []*string
+}
+
+// A structure for a partition index.
+type PartitionIndex struct {
+
+	// The name of the partition index.
+	//
+	// This member is required.
+	IndexName *string
+
+	// The keys for the partition index.
+	//
+	// This member is required.
+	Keys []*string
+}
+
+// A descriptor for a partition index in a table.
+type PartitionIndexDescriptor struct {
+
+	// The name of the partition index.
+	//
+	// This member is required.
+	IndexName *string
+
+	// The status of the partition index.
+	//
+	// This member is required.
+	IndexStatus PartitionIndexStatus
+
+	// A list of one or more keys, as KeySchemaElement structures, for the partition
+	// index.
+	//
+	// This member is required.
+	Keys []*KeySchemaElement
 }
 
 // The structure used to create and update a partition.
@@ -2279,6 +2383,21 @@ type PropertyPredicate struct {
 	Value *string
 }
 
+// When crawling an Amazon S3 data source after the first crawl is complete,
+// specifies whether to crawl the entire dataset again or to crawl only folders
+// that were added since the last crawler run. For more information, see
+// Incremental Crawls in AWS Glue
+// (https://docs.aws.amazon.com/glue/latest/dg/incremental-crawls.html) in the
+// developer guide.
+type RecrawlPolicy struct {
+
+	// Specifies whether to crawl the entire dataset again or to crawl only folders
+	// that were added since the last crawler run. A value of CRAWL_EVERYTHING
+	// specifies crawling the entire dataset again. A value of CRAWL_NEW_FOLDERS_ONLY
+	// specifies crawling only folders that were added since the last crawler run.
+	RecrawlBehavior RecrawlBehavior
+}
+
 // The URIs for function resources.
 type ResourceUri struct {
 
@@ -2302,6 +2421,10 @@ type S3Encryption struct {
 
 // Specifies a data store in Amazon Simple Storage Service (Amazon S3).
 type S3Target struct {
+
+	// The name of a connection which allows a job or crawler to access data in Amazon
+	// S3 within an Amazon Virtual Private Cloud environment (Amazon VPC).
+	ConnectionName *string
 
 	// A list of glob patterns used to exclude from the crawl. For more information,
 	// see Catalog Tables with a Crawler
@@ -3029,6 +3152,12 @@ type Workflow struct {
 	// The information about the last execution of the workflow.
 	LastRun *WorkflowRun
 
+	// You can use this parameter to prevent unwanted multiple updates to data, to
+	// control costs, or in some cases, to prevent exceeding the maximum number of
+	// concurrent runs of any of the component jobs. If you leave this parameter blank,
+	// there is no limit to the number of concurrent workflow runs.
+	MaxConcurrentRuns *int32
+
 	// The name of the workflow representing the flow.
 	Name *string
 }
@@ -3053,6 +3182,11 @@ type WorkflowRun struct {
 
 	// The date and time when the workflow run completed.
 	CompletedOn *time.Time
+
+	// This error message describes any error that may have occurred in starting the
+	// workflow run. Currently the only error message is "Concurrent runs exceeded for
+	// workflow: foo."
+	ErrorMessage *string
 
 	// The graph representing all the AWS Glue components that belong to the workflow
 	// as nodes and directed connections between them as edges.

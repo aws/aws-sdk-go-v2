@@ -10,14 +10,14 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// This action is part of Amazon GameLift FleetIQ with game server groups, which is
-// in preview release and is subject to change. Removes the game server resource
-// from the game server group. As a result of this action, the de-registered game
-// server can no longer be claimed and will not returned in a list of active game
-// servers. To de-register a game server, specify the game server group and game
-// server ID. If successful, this action emits a CloudWatch event with termination
-// time stamp and reason. Learn more GameLift FleetIQ Guide
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-intro.html)
+// This operation is used with the Amazon GameLift FleetIQ solution and game server
+// groups. Removes the game server from a game server group. As a result of this
+// operation, the deregistered game server can no longer be claimed and will not be
+// returned in a list of active game servers. To deregister a game server, specify
+// the game server group and game server ID. If successful, this operation emits a
+// CloudWatch event with termination timestamp and reason. Learn more GameLift
+// FleetIQ Guide
+// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
 // Related operations
 //
 //     * RegisterGameServer
@@ -50,13 +50,13 @@ func (c *Client) DeregisterGameServer(ctx context.Context, params *DeregisterGam
 
 type DeregisterGameServerInput struct {
 
-	// An identifier for the game server group where the game server to be
-	// de-registered is running. Use either the GameServerGroup name or ARN value.
+	// A unique identifier for the game server group where the game server is running.
+	// Use either the GameServerGroup name or ARN value.
 	//
 	// This member is required.
 	GameServerGroupName *string
 
-	// The identifier for the game server to be de-registered.
+	// A custom string that uniquely identifies the game server to deregister.
 	//
 	// This member is required.
 	GameServerId *string

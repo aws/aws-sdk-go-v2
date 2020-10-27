@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes a game session queue. This action means that any
-// StartGameSessionPlacement requests that reference this queue will fail. To
-// delete a queue, specify the queue name. Learn more  Using Multi-Region Queues
+// Deletes a game session queue. Once a queue is successfully deleted, unfulfilled
+// StartGameSessionPlacement requests that reference the queue will fail. To delete
+// a queue, specify the queue name. Learn more  Using Multi-Region Queues
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-intro.html)
 // Related operations
 //
@@ -40,7 +40,7 @@ func (c *Client) DeleteGameSessionQueue(ctx context.Context, params *DeleteGameS
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type DeleteGameSessionQueueInput struct {
 
 	// A descriptive label that is associated with game session queue. Queue names must

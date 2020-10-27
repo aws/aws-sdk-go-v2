@@ -29,8 +29,9 @@ func (c *Client) RespondToAuthChallenge(ctx context.Context, params *RespondToAu
 // The request to respond to an authentication challenge.
 type RespondToAuthChallengeInput struct {
 
-	// The challenge name. For more information, see . ADMIN_NO_SRP_AUTH is not a valid
-	// value.
+	// The challenge name. For more information, see InitiateAuth
+	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_InitiateAuth.html).
+	// ADMIN_NO_SRP_AUTH is not a valid value.
 	//
 	// This member is required.
 	ChallengeName types.ChallengeNameType
@@ -118,16 +119,18 @@ type RespondToAuthChallengeOutput struct {
 	// authentication challenge.
 	AuthenticationResult *types.AuthenticationResultType
 
-	// The challenge name. For more information, see .
+	// The challenge name. For more information, see InitiateAuth
+	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_InitiateAuth.html).
 	ChallengeName types.ChallengeNameType
 
-	// The challenge parameters. For more information, see .
+	// The challenge parameters. For more information, see InitiateAuth
+	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_InitiateAuth.html).
 	ChallengeParameters map[string]*string
 
 	// The session which should be passed both ways in challenge-response calls to the
-	// service. If the or API call determines that the caller needs to go through
-	// another challenge, they return a session with other challenge parameters. This
-	// session should be passed as it is to the next RespondToAuthChallenge API call.
+	// service. If the caller needs to go through another challenge, they return a
+	// session with other challenge parameters. This session should be passed as it is
+	// to the next RespondToAuthChallenge API call.
 	Session *string
 
 	// Metadata pertaining to the operation's result.

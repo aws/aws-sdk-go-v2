@@ -45,7 +45,7 @@ type CreateBackupVaultInput struct {
 	BackupVaultTags map[string]*string
 
 	// A unique string that identifies the request and allows failed requests to be
-	// retried without the risk of executing the operation twice.
+	// retried without the risk of running the operation twice.
 	CreatorRequestId *string
 
 	// The server-side encryption key that is used to protect your backups; for

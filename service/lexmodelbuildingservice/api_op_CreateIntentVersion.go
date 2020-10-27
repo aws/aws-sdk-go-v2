@@ -81,8 +81,8 @@ type CreateIntentVersionOutput struct {
 	// Describes how the intent is fulfilled.
 	FulfillmentActivity *types.FulfillmentActivity
 
-	// Configuration information, if any, for connectin an Amazon Kendra index with the
-	// AMAZON.KendraSearchIntent intent.
+	// Configuration information, if any, for connecting an Amazon Kendra index with
+	// the AMAZON.KendraSearchIntent intent.
 	KendraConfiguration *types.KendraConfiguration
 
 	// The date that the intent was updated.

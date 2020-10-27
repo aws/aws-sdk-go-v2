@@ -12,11 +12,17 @@ import (
 )
 
 // Registers a consumer with a Kinesis data stream. When you use this operation,
-// the consumer you register can read data from the stream at a rate of up to 2 MiB
-// per second. This rate is unaffected by the total number of consumers that read
-// from the same stream. You can register up to 5 consumers per stream. A given
-// consumer can only be registered with one stream. This operation has a limit of
-// five transactions per second per account.
+// the consumer you register can then call SubscribeToShard to receive data from
+// the stream using enhanced fan-out, at a rate of up to 2 MiB per second for every
+// shard you subscribe to. This rate is unaffected by the total number of consumers
+// that read from the same stream. You can register up to 20 consumers per stream.
+// A given consumer can only be registered with one stream at a time. For an
+// example of how to use this operations, see Enhanced Fan-Out Using the Kinesis
+// Data Streams API. The use of this operation has a limit of five transactions per
+// second per account. Also, only 5 consumers can be created simultaneously. In
+// other words, you cannot have more than 5 consumers in a CREATING status at the
+// same time. Registering a 6th consumer while there are 5 in a CREATING status
+// results in a LimitExceededException.
 func (c *Client) RegisterStreamConsumer(ctx context.Context, params *RegisterStreamConsumerInput, optFns ...func(*Options)) (*RegisterStreamConsumerOutput, error) {
 	if params == nil {
 		params = &RegisterStreamConsumerInput{}

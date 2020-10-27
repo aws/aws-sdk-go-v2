@@ -51,7 +51,7 @@ type DescribeDashboardOutput struct {
 	DashboardCreationDate *time.Time
 
 	// The dashboard's definition JSON literal. For detailed information, see Creating
-	// Dashboards (CLI)
+	// dashboards (CLI)
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-dashboards-using-aws-cli.html)
 	// in the AWS IoT SiteWise User Guide.
 	//

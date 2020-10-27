@@ -78,13 +78,13 @@ func validateMetricQuery(v *types.MetricQuery) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MetricQuery"}
+	if v.Metric == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Metric"))
+	}
 	if v.GroupBy != nil {
 		if err := validateDimensionGroup(v.GroupBy); err != nil {
 			invalidParams.AddNested("GroupBy", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Metric == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Metric"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -115,8 +115,22 @@ func validateOpDescribeDimensionKeysInput(v *DescribeDimensionKeysInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeDimensionKeysInput"}
-	if v.Identifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.PartitionBy != nil {
+		if err := validateDimensionGroup(v.PartitionBy); err != nil {
+			invalidParams.AddNested("PartitionBy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Metric == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Metric"))
+	}
+	if len(v.ServiceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceType"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
 	}
 	if v.GroupBy == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GroupBy"))
@@ -125,22 +139,8 @@ func validateOpDescribeDimensionKeysInput(v *DescribeDimensionKeysInput) error {
 			invalidParams.AddNested("GroupBy", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Metric == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Metric"))
-	}
-	if v.StartTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
-	}
-	if len(v.ServiceType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ServiceType"))
-	}
-	if v.PartitionBy != nil {
-		if err := validateDimensionGroup(v.PartitionBy); err != nil {
-			invalidParams.AddNested("PartitionBy", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.EndTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -154,18 +154,18 @@ func validateOpGetResourceMetricsInput(v *GetResourceMetricsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetResourceMetricsInput"}
-	if len(v.ServiceType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ServiceType"))
-	}
-	if v.StartTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
-	}
 	if v.MetricQueries == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MetricQueries"))
 	} else if v.MetricQueries != nil {
 		if err := validateMetricQueryList(v.MetricQueries); err != nil {
 			invalidParams.AddNested("MetricQueries", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if len(v.ServiceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceType"))
 	}
 	if v.EndTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))

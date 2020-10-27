@@ -67,7 +67,8 @@ type ModifyReplicationInstanceInput struct {
 	// automatic patching for the given engine version.
 	AutoMinorVersionUpgrade *bool
 
-	// The engine version number of the replication instance.
+	// The engine version number of the replication instance. When modifying a major
+	// engine version of an instance, also set AllowMajorVersionUpgrade to true.
 	EngineVersion *string
 
 	// Specifies whether the replication instance is a Multi-AZ deployment. You can't

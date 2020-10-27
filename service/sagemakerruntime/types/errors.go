@@ -7,7 +7,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 )
 
-// Internal failure occurred.
+// An internal failure occurred.
 type InternalFailure struct {
 	Message *string
 }
@@ -24,13 +24,13 @@ func (e *InternalFailure) ErrorMessage() string {
 func (e *InternalFailure) ErrorCode() string             { return "InternalFailure" }
 func (e *InternalFailure) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// Model (owned by the customer in the container) returned an error 500.
+// Model (owned by the customer in the container) returned 4xx or 5xx error code.
 type ModelError struct {
 	Message *string
 
 	LogStreamArn       *string
-	OriginalStatusCode *int32
 	OriginalMessage    *string
+	OriginalStatusCode *int32
 }
 
 func (e *ModelError) Error() string {
@@ -45,7 +45,7 @@ func (e *ModelError) ErrorMessage() string {
 func (e *ModelError) ErrorCode() string             { return "ModelError" }
 func (e *ModelError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Service is unavailable. Try your call again.
+// The service is unavailable. Try your call again.
 type ServiceUnavailable struct {
 	Message *string
 }

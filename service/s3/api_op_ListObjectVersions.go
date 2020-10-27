@@ -11,21 +11,27 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Returns metadata about all of the versions of objects in a bucket. You can also
-// use request parameters as selection criteria to return metadata about a subset
-// of all the object versions. A 200 OK response can contain valid or invalid XML.
+// Returns metadata about all versions of the objects in a bucket. You can also use
+// request parameters as selection criteria to return metadata about a subset of
+// all the object versions. A 200 OK response can contain valid or invalid XML.
 // Make sure to design your application to parse the contents of the response and
 // handle it appropriately. To use this operation, you must have READ access to the
-// bucket. The following operations are related to ListObjectVersions:
+// bucket. This action is not supported by Amazon S3 on Outposts. The following
+// operations are related to ListObjectVersions:
+//
+//     * ListObjectsV2
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html)
 //
 //     *
-// ListObjectsV2
+// GetObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
 //
-//     * GetObject
 //
-//     * PutObject
+// * PutObject
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
 //
-//     * DeleteObject
+//     *
+// DeleteObject
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html)
 func (c *Client) ListObjectVersions(ctx context.Context, params *ListObjectVersionsInput, optFns ...func(*Options)) (*ListObjectVersionsOutput, error) {
 	if params == nil {
 		params = &ListObjectVersionsInput{}
@@ -43,15 +49,7 @@ func (c *Client) ListObjectVersions(ctx context.Context, params *ListObjectVersi
 
 type ListObjectVersionsInput struct {
 
-	// The bucket name that contains the objects. When using this API with an access
-	// point, you must direct requests to the access point hostname. The access point
-	// hostname takes the form
-	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// operation using an access point through the AWS SDKs, you provide the access
-	// point ARN in place of the bucket name. For more information about access point
-	// ARNs, see Using Access Points
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
-	// the Amazon Simple Storage Service Developer Guide.
+	// The bucket name that contains the objects.
 	//
 	// This member is required.
 	Bucket *string
@@ -70,6 +68,10 @@ type ListObjectVersionsInput struct {
 	// can add this parameter to request that Amazon S3 encode the keys in the
 	// response.
 	EncodingType types.EncodingType
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 
 	// Specifies the key to start with when listing objects in a bucket.
 	KeyMarker *string
@@ -127,7 +129,7 @@ type ListObjectVersionsOutput struct {
 	// Specifies the maximum number of objects to return.
 	MaxKeys *int32
 
-	// Bucket name.
+	// The bucket name.
 	Name *string
 
 	// When the number of responses exceeds the value of MaxKeys, NextKeyMarker

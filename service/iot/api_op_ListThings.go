@@ -14,7 +14,10 @@ import (
 // Lists your things. Use the attributeName and attributeValue parameters to filter
 // your things. For example, calling ListThings with attributeName=Color and
 // attributeValue=Red retrieves all things in the registry that contain an
-// attribute Color with the value Red.
+// attribute Color with the value Red. You will not be charged for calling this API
+// if an Access denied error is returned. You will also not be charged if no
+// attributes or pagination token was provided in request and no pagination token
+// and no results were returned.
 func (c *Client) ListThings(ctx context.Context, params *ListThingsInput, optFns ...func(*Options)) (*ListThingsOutput, error) {
 	if params == nil {
 		params = &ListThingsInput{}
@@ -52,8 +55,8 @@ type ListThingsInput struct {
 // The output from the ListThings operation.
 type ListThingsOutput struct {
 
-	// The token used to get the next set of results, or null if there are no
-	// additional results.
+	// The token used to get the next set of results. Will not be returned if operation
+	// has returned all results.
 	NextToken *string
 
 	// The things.

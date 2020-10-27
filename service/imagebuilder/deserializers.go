@@ -8132,7 +8132,7 @@ func awsRestjson1_deserializeDocumentAccountList(v *[]*string, value interface{}
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
-				return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
 			}
 			col = &jtv
 		}
@@ -8165,6 +8165,15 @@ func awsRestjson1_deserializeDocumentAmi(v **types.Ami, value interface{}) error
 
 	for key, value := range shape {
 		switch key {
+		case "accountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.AccountId = &jtv
+			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8274,6 +8283,11 @@ func awsRestjson1_deserializeDocumentAmiDistributionConfiguration(v **types.AmiD
 				sv.Name = &jtv
 			}
 
+		case "targetAccountIds":
+			if err := awsRestjson1_deserializeDocumentAccountList(&sv.TargetAccountIds, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -8307,42 +8321,6 @@ func awsRestjson1_deserializeDocumentAmiList(v *[]*types.Ami, value interface{})
 		var col *types.Ami
 		if err := awsRestjson1_deserializeDocumentAmi(&col, value); err != nil {
 			return err
-		}
-		cv = append(cv, col)
-
-	}
-	*v = cv
-	return nil
-}
-
-func awsRestjson1_deserializeDocumentArnList(v *[]*string, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.([]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var cv []*string
-	if *v == nil {
-		cv = []*string{}
-	} else {
-		cv = *v
-	}
-
-	for _, value := range shape {
-		var col *string
-		if value != nil {
-			jtv, ok := value.(string)
-			if !ok {
-				return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
-			}
-			col = &jtv
 		}
 		cv = append(cv, col)
 
@@ -8974,7 +8952,7 @@ func awsRestjson1_deserializeDocumentDistribution(v **types.Distribution, value 
 			}
 
 		case "licenseConfigurationArns":
-			if err := awsRestjson1_deserializeDocumentArnList(&sv.LicenseConfigurationArns, value); err != nil {
+			if err := awsRestjson1_deserializeDocumentLicenseConfigurationArnList(&sv.LicenseConfigurationArns, value); err != nil {
 				return err
 			}
 
@@ -11055,6 +11033,42 @@ func awsRestjson1_deserializeDocumentLaunchPermissionConfiguration(v **types.Lau
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLicenseConfigurationArnList(v *[]*string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*string
+	if *v == nil {
+		cv = []*string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected LicenseConfigurationArn to be of type string, got %T instead", value)
+			}
+			col = &jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

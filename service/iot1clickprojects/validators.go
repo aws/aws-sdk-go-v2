@@ -374,17 +374,17 @@ func validateOpAssociateDeviceWithPlacementInput(v *AssociateDeviceWithPlacement
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociateDeviceWithPlacementInput"}
-	if v.ProjectName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
-	}
 	if v.PlacementName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PlacementName"))
 	}
-	if v.DeviceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeviceId"))
-	}
 	if v.DeviceTemplateName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeviceTemplateName"))
+	}
+	if v.ProjectName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
+	}
+	if v.DeviceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -431,11 +431,11 @@ func validateOpDeletePlacementInput(v *DeletePlacementInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeletePlacementInput"}
-	if v.PlacementName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PlacementName"))
-	}
 	if v.ProjectName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
+	}
+	if v.PlacementName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PlacementName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -464,11 +464,11 @@ func validateOpDescribePlacementInput(v *DescribePlacementInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribePlacementInput"}
-	if v.PlacementName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PlacementName"))
-	}
 	if v.ProjectName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
+	}
+	if v.PlacementName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PlacementName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -497,14 +497,14 @@ func validateOpDisassociateDeviceFromPlacementInput(v *DisassociateDeviceFromPla
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateDeviceFromPlacementInput"}
+	if v.PlacementName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PlacementName"))
+	}
 	if v.ProjectName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
 	}
 	if v.DeviceTemplateName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeviceTemplateName"))
-	}
-	if v.PlacementName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PlacementName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -518,11 +518,11 @@ func validateOpGetDevicesInPlacementInput(v *GetDevicesInPlacementInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetDevicesInPlacementInput"}
-	if v.ProjectName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
-	}
 	if v.PlacementName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PlacementName"))
+	}
+	if v.ProjectName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

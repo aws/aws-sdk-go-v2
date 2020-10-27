@@ -704,6 +704,52 @@ func (m *awsAwsjson11_serializeOpCreateStorediSCSIVolume) HandleSerialize(ctx co
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpCreateTapePool struct {
+}
+
+func (*awsAwsjson11_serializeOpCreateTapePool) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreateTapePool) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateTapePoolInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("StorageGateway_20130630.CreateTapePool")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateTapePoolInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpCreateTapes struct {
 }
 
@@ -1149,6 +1195,52 @@ func (m *awsAwsjson11_serializeOpDeleteTapeArchive) HandleSerialize(ctx context.
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentDeleteTapeArchiveInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDeleteTapePool struct {
+}
+
+func (*awsAwsjson11_serializeOpDeleteTapePool) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeleteTapePool) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteTapePoolInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("StorageGateway_20130630.DeleteTapePool")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeleteTapePoolInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2406,6 +2498,52 @@ func (m *awsAwsjson11_serializeOpListTagsForResource) HandleSerialize(ctx contex
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpListTapePools struct {
+}
+
+func (*awsAwsjson11_serializeOpListTapePools) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListTapePools) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListTapePoolsInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("StorageGateway_20130630.ListTapePools")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListTapePoolsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpListTapes struct {
 }
 
@@ -3625,6 +3763,11 @@ func awsAwsjson11_serializeDocumentAutomaticTapeCreationRule(v *types.AutomaticT
 		ok.Long(*v.TapeSizeInBytes)
 	}
 
+	if v.Worm != nil {
+		ok := object.Key("Worm")
+		ok.Boolean(*v.Worm)
+	}
+
 	return nil
 }
 
@@ -3771,6 +3914,21 @@ func awsAwsjson11_serializeDocumentNFSFileShareDefaults(v *types.NFSFileShareDef
 		ok.Long(*v.OwnerId)
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPoolARNs(v []*string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			av.Null()
+			continue
+		}
+		av.String(*v[i])
+	}
 	return nil
 }
 
@@ -3996,6 +4154,11 @@ func awsAwsjson11_serializeOpDocumentAddWorkingStorageInput(v *AddWorkingStorage
 func awsAwsjson11_serializeOpDocumentAssignTapePoolInput(v *AssignTapePoolInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.BypassGovernanceRetention != nil {
+		ok := object.Key("BypassGovernanceRetention")
+		ok.Boolean(*v.BypassGovernanceRetention)
+	}
 
 	if v.PoolId != nil {
 		ok := object.Key("PoolId")
@@ -4459,6 +4622,40 @@ func awsAwsjson11_serializeOpDocumentCreateStorediSCSIVolumeInput(v *CreateStore
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentCreateTapePoolInput(v *CreateTapePoolInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PoolName != nil {
+		ok := object.Key("PoolName")
+		ok.String(*v.PoolName)
+	}
+
+	if v.RetentionLockTimeInDays != nil {
+		ok := object.Key("RetentionLockTimeInDays")
+		ok.Integer(*v.RetentionLockTimeInDays)
+	}
+
+	if len(v.RetentionLockType) > 0 {
+		ok := object.Key("RetentionLockType")
+		ok.String(string(v.RetentionLockType))
+	}
+
+	if len(v.StorageClass) > 0 {
+		ok := object.Key("StorageClass")
+		ok.String(string(v.StorageClass))
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTags(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentCreateTapesInput(v *CreateTapesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4510,6 +4707,11 @@ func awsAwsjson11_serializeOpDocumentCreateTapesInput(v *CreateTapesInput, value
 		ok.Long(*v.TapeSizeInBytes)
 	}
 
+	if v.Worm != nil {
+		ok := object.Key("Worm")
+		ok.Boolean(*v.Worm)
+	}
+
 	return nil
 }
 
@@ -4552,6 +4754,11 @@ func awsAwsjson11_serializeOpDocumentCreateTapeWithBarcodeInput(v *CreateTapeWit
 	if v.TapeSizeInBytes != nil {
 		ok := object.Key("TapeSizeInBytes")
 		ok.Long(*v.TapeSizeInBytes)
+	}
+
+	if v.Worm != nil {
+		ok := object.Key("Worm")
+		ok.Boolean(*v.Worm)
 	}
 
 	return nil
@@ -4648,6 +4855,11 @@ func awsAwsjson11_serializeOpDocumentDeleteTapeArchiveInput(v *DeleteTapeArchive
 	object := value.Object()
 	defer object.Close()
 
+	if v.BypassGovernanceRetention != nil {
+		ok := object.Key("BypassGovernanceRetention")
+		ok.Boolean(*v.BypassGovernanceRetention)
+	}
+
 	if v.TapeARN != nil {
 		ok := object.Key("TapeARN")
 		ok.String(*v.TapeARN)
@@ -4660,6 +4872,11 @@ func awsAwsjson11_serializeOpDocumentDeleteTapeInput(v *DeleteTapeInput, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.BypassGovernanceRetention != nil {
+		ok := object.Key("BypassGovernanceRetention")
+		ok.Boolean(*v.BypassGovernanceRetention)
+	}
+
 	if v.GatewayARN != nil {
 		ok := object.Key("GatewayARN")
 		ok.String(*v.GatewayARN)
@@ -4668,6 +4885,18 @@ func awsAwsjson11_serializeOpDocumentDeleteTapeInput(v *DeleteTapeInput, value s
 	if v.TapeARN != nil {
 		ok := object.Key("TapeARN")
 		ok.String(*v.TapeARN)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDeleteTapePoolInput(v *DeleteTapePoolInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PoolARN != nil {
+		ok := object.Key("PoolARN")
+		ok.String(*v.PoolARN)
 	}
 
 	return nil
@@ -5118,6 +5347,30 @@ func awsAwsjson11_serializeOpDocumentListTagsForResourceInput(v *ListTagsForReso
 	if v.ResourceARN != nil {
 		ok := object.Key("ResourceARN")
 		ok.String(*v.ResourceARN)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListTapePoolsInput(v *ListTapePoolsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Limit != nil {
+		ok := object.Key("Limit")
+		ok.Integer(*v.Limit)
+	}
+
+	if v.Marker != nil {
+		ok := object.Key("Marker")
+		ok.String(*v.Marker)
+	}
+
+	if v.PoolARNs != nil {
+		ok := object.Key("PoolARNs")
+		if err := awsAwsjson11_serializeDocumentPoolARNs(v.PoolARNs, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

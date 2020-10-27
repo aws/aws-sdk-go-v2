@@ -11,36 +11,32 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// This action is part of Amazon GameLift FleetIQ with game server groups, which is
-// in preview release and is subject to change. Updates information about a
-// registered game server. This action is called by a game server process that is
-// running on an instance in a game server group. There are three reasons to update
-// game server information: (1) to change the utilization status of the game
-// server, (2) to report game server health status, and (3) to change game server
-// metadata. A registered game server should regularly report health and should
-// update utilization status when it is supporting gameplay so that GameLift
-// FleetIQ can accurately track game server availability. You can make all three
-// types of updates in the same request.
+// This operation is used with the Amazon GameLift FleetIQ solution and game server
+// groups. Updates information about a registered game server to help GameLift
+// FleetIQ to track game server availability. This operation is called by a game
+// server process that is running on an instance in a game server group. Use this
+// operation to update the following types of game server information. You can make
+// all three types of updates in the same request:
 //
-//     * To update the game server's
-// utilization status, identify the game server and game server group and specify
-// the current utilization status. Use this status to identify when game servers
-// are currently hosting games and when they are available to be claimed.
-//
-//     * To
-// report health status, identify the game server and game server group and set
-// health check to HEALTHY. If a game server does not report health status for a
-// certain length of time, the game server is no longer considered healthy and will
-// be eventually de-registered from the game server group to avoid affecting
-// utilization metrics. The best practice is to report health every 60 seconds.
+//     * To update the game
+// server's utilization status, identify the game server and game server group and
+// specify the current utilization status. Use this status to identify when game
+// servers are currently hosting games and when they are available to be claimed.
 //
 //
-// * To change game server metadata, provide updated game server data and custom
-// sort key values.
+// * To report health status, identify the game server and game server group and
+// set health check to HEALTHY. If a game server does not report health status for
+// a certain length of time, the game server is no longer considered healthy. As a
+// result, it will be eventually deregistered from the game server group to avoid
+// affecting utilization metrics. The best practice is to report health every 60
+// seconds.
 //
-// Once a game server is successfully updated, the relevant
-// statuses and timestamps are updated. Learn more GameLift FleetIQ Guide
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-intro.html)
+//     * To change game server metadata, provide updated game server
+// data.
+//
+// Once a game server is successfully updated, the relevant statuses and
+// timestamps are updated. Learn more GameLift FleetIQ Guide
+// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
 // Related operations
 //
 //     * RegisterGameServer
@@ -73,29 +69,24 @@ func (c *Client) UpdateGameServer(ctx context.Context, params *UpdateGameServerI
 
 type UpdateGameServerInput struct {
 
-	// An identifier for the game server group where the game server is running. Use
-	// either the GameServerGroup name or ARN value.
+	// A unique identifier for the game server group where the game server is running.
+	// Use either the GameServerGroup name or ARN value.
 	//
 	// This member is required.
 	GameServerGroupName *string
 
-	// The identifier for the game server to be updated.
+	// A custom string that uniquely identifies the game server to update.
 	//
 	// This member is required.
 	GameServerId *string
 
-	// A game server tag that can be used to request sorted lists of game servers using
-	// ListGameServers. Custom sort keys are developer-defined based on how you want to
-	// organize the retrieved game server information.
-	CustomSortKey *string
-
 	// A set of custom game server properties, formatted as a single string value. This
-	// data is passed to a game client or service when it requests information on a
-	// game servers using DescribeGameServer or ClaimGameServer.
+	// data is passed to a game client or service when it requests information on game
+	// servers using ListGameServers or ClaimGameServer.
 	GameServerData *string
 
-	// Indicates health status of the game server. An update that explicitly includes
-	// this parameter updates the game server's LastHealthCheckTime time stamp.
+	// Indicates health status of the game server. A request that includes this
+	// parameter updates the game server's LastHealthCheckTime timestamp.
 	HealthCheck types.GameServerHealthCheck
 
 	// Indicates whether the game server is available or is currently hosting gameplay.
@@ -104,7 +95,7 @@ type UpdateGameServerInput struct {
 
 type UpdateGameServerOutput struct {
 
-	// Object that describes the newly updated game server resource.
+	// Object that describes the newly updated game server.
 	GameServer *types.GameServer
 
 	// Metadata pertaining to the operation's result.

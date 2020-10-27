@@ -64,6 +64,13 @@ type RegisterJobDefinitionInput struct {
 	// timeout, it is not retried.
 	RetryStrategy *types.RetryStrategy
 
+	// The tags that you apply to the job definition to help you categorize and
+	// organize your resources. Each tag consists of a key and an optional value. For
+	// more information, see Tagging AWS Resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in AWS General
+	// Reference.
+	Tags map[string]*string
+
 	// The timeout configuration for jobs that are submitted with this job definition,
 	// after which AWS Batch terminates your jobs if they have not finished. If a job
 	// is terminated due to a timeout, it is not retried. The minimum value for the

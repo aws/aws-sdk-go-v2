@@ -267,6 +267,11 @@ func awsRestjson1_deserializeOpDocumentGetPlaybackConfigurationOutput(v **GetPla
 				return err
 			}
 
+		case "ManifestProcessingRules":
+			if err := awsRestjson1_deserializeDocumentManifestProcessingRules(&sv.ManifestProcessingRules, value); err != nil {
+				return err
+			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -826,6 +831,11 @@ func awsRestjson1_deserializeOpDocumentPutPlaybackConfigurationOutput(v **PutPla
 				return err
 			}
 
+		case "ManifestProcessingRules":
+			if err := awsRestjson1_deserializeDocumentManifestProcessingRules(&sv.ManifestProcessingRules, value); err != nil {
+				return err
+			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1186,6 +1196,46 @@ func awsRestjson1_deserializeDocument__mapOf__string(v *map[string]*string, valu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAdMarkerPassthrough(v **types.AdMarkerPassthrough, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AdMarkerPassthrough
+	if *v == nil {
+		sv = &types.AdMarkerPassthrough{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAvailSuppression(v **types.AvailSuppression, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -1524,6 +1574,42 @@ func awsRestjson1_deserializeDocumentLivePreRollConfiguration(v **types.LivePreR
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentManifestProcessingRules(v **types.ManifestProcessingRules, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ManifestProcessingRules
+	if *v == nil {
+		sv = &types.ManifestProcessingRules{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AdMarkerPassthrough":
+			if err := awsRestjson1_deserializeDocumentAdMarkerPassthrough(&sv.AdMarkerPassthrough, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentPlaybackConfiguration(v **types.PlaybackConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -1577,6 +1663,11 @@ func awsRestjson1_deserializeDocumentPlaybackConfiguration(v **types.PlaybackCon
 
 		case "HlsConfiguration":
 			if err := awsRestjson1_deserializeDocumentHlsConfiguration(&sv.HlsConfiguration, value); err != nil {
+				return err
+			}
+
+		case "ManifestProcessingRules":
+			if err := awsRestjson1_deserializeDocumentManifestProcessingRules(&sv.ManifestProcessingRules, value); err != nil {
 				return err
 			}
 

@@ -12,10 +12,15 @@ import (
 )
 
 // Returns a list of accounts in the organization from AWS Organizations that are
-// affected by the provided event. Before you can call this operation, you must
-// first enable AWS Health to work with AWS Organizations. To do this, call the
-// EnableHealthServiceAccessForOrganization operation from your organization's
-// master account.
+// affected by the provided event. For more information about the different types
+// of AWS Health events, see Event
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html). Before
+// you can call this operation, you must first enable AWS Health to work with AWS
+// Organizations. To do this, call the EnableHealthServiceAccessForOrganization
+// (https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html)
+// operation from your organization's master account. This API operation uses
+// pagination. Specify the nextToken parameter in the next request to return more
+// results.
 func (c *Client) DescribeAffectedAccountsForOrganization(ctx context.Context, params *DescribeAffectedAccountsForOrganizationInput, optFns ...func(*Options)) (*DescribeAffectedAccountsForOrganizationOutput, error) {
 	if params == nil {
 		params = &DescribeAffectedAccountsForOrganizationInput{}
@@ -58,6 +63,21 @@ type DescribeAffectedAccountsForOrganizationOutput struct {
 	// A JSON set of elements of the affected accounts.
 	AffectedAccounts []*string
 
+	// This parameter specifies if the AWS Health event is a public AWS service event
+	// or an account-specific event.
+	//
+	//     * If the eventScopeCode value is PUBLIC, then
+	// the affectedAccounts value is always empty.
+	//
+	//     * If the eventScopeCode value
+	// is ACCOUNT_SPECIFIC, then the affectedAccounts value lists the affected AWS
+	// accounts in your organization. For example, if an event affects a service such
+	// as Amazon Elastic Compute Cloud and you have AWS accounts that use that service,
+	// those account IDs appear in the response.
+	//
+	//     * If the eventScopeCode value is
+	// NONE, then the eventArn that you specified in the request is invalid or doesn't
+	// exist.
 	EventScopeCode types.EventScopeCode
 
 	// If the results of a search are large, only a portion of the results are

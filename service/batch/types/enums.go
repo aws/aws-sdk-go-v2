@@ -10,6 +10,16 @@ const (
 	ArrayJobDependencySequential ArrayJobDependency = "SEQUENTIAL"
 )
 
+// Values returns all known values for ArrayJobDependency. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ArrayJobDependency) Values() []ArrayJobDependency {
+	return []ArrayJobDependency{
+		"N_TO_N",
+		"SEQUENTIAL",
+	}
+}
+
 type CEState string
 
 // Enum values for CEState
@@ -17,6 +27,16 @@ const (
 	CEStateEnabled  CEState = "ENABLED"
 	CEStateDisabled CEState = "DISABLED"
 )
+
+// Values returns all known values for CEState. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (CEState) Values() []CEState {
+	return []CEState{
+		"ENABLED",
+		"DISABLED",
+	}
+}
 
 type CEStatus string
 
@@ -30,6 +50,20 @@ const (
 	CEStatusInvalid  CEStatus = "INVALID"
 )
 
+// Values returns all known values for CEStatus. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (CEStatus) Values() []CEStatus {
+	return []CEStatus{
+		"CREATING",
+		"UPDATING",
+		"DELETING",
+		"DELETED",
+		"VALID",
+		"INVALID",
+	}
+}
+
 type CEType string
 
 // Enum values for CEType
@@ -37,6 +71,16 @@ const (
 	CETypeManaged   CEType = "MANAGED"
 	CETypeUnmanaged CEType = "UNMANAGED"
 )
+
+// Values returns all known values for CEType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (CEType) Values() []CEType {
+	return []CEType{
+		"MANAGED",
+		"UNMANAGED",
+	}
+}
 
 type CRAllocationStrategy string
 
@@ -47,6 +91,17 @@ const (
 	CRAllocationStrategySpot_capacity_optimized CRAllocationStrategy = "SPOT_CAPACITY_OPTIMIZED"
 )
 
+// Values returns all known values for CRAllocationStrategy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CRAllocationStrategy) Values() []CRAllocationStrategy {
+	return []CRAllocationStrategy{
+		"BEST_FIT",
+		"BEST_FIT_PROGRESSIVE",
+		"SPOT_CAPACITY_OPTIMIZED",
+	}
+}
+
 type CRType string
 
 // Enum values for CRType
@@ -54,6 +109,16 @@ const (
 	CRTypeEc2  CRType = "EC2"
 	CRTypeSpot CRType = "SPOT"
 )
+
+// Values returns all known values for CRType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (CRType) Values() []CRType {
+	return []CRType{
+		"EC2",
+		"SPOT",
+	}
+}
 
 type DeviceCgroupPermission string
 
@@ -64,6 +129,17 @@ const (
 	DeviceCgroupPermissionMknod DeviceCgroupPermission = "MKNOD"
 )
 
+// Values returns all known values for DeviceCgroupPermission. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeviceCgroupPermission) Values() []DeviceCgroupPermission {
+	return []DeviceCgroupPermission{
+		"READ",
+		"WRITE",
+		"MKNOD",
+	}
+}
+
 type JobDefinitionType string
 
 // Enum values for JobDefinitionType
@@ -71,6 +147,16 @@ const (
 	JobDefinitionTypeContainer JobDefinitionType = "container"
 	JobDefinitionTypeMultinode JobDefinitionType = "multinode"
 )
+
+// Values returns all known values for JobDefinitionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (JobDefinitionType) Values() []JobDefinitionType {
+	return []JobDefinitionType{
+		"container",
+		"multinode",
+	}
+}
 
 type JobStatus string
 
@@ -85,6 +171,21 @@ const (
 	JobStatusFailed    JobStatus = "FAILED"
 )
 
+// Values returns all known values for JobStatus. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (JobStatus) Values() []JobStatus {
+	return []JobStatus{
+		"SUBMITTED",
+		"PENDING",
+		"RUNNABLE",
+		"STARTING",
+		"RUNNING",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
 type JQState string
 
 // Enum values for JQState
@@ -92,6 +193,16 @@ const (
 	JQStateEnabled  JQState = "ENABLED"
 	JQStateDisabled JQState = "DISABLED"
 )
+
+// Values returns all known values for JQState. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (JQState) Values() []JQState {
+	return []JQState{
+		"ENABLED",
+		"DISABLED",
+	}
+}
 
 type JQStatus string
 
@@ -105,9 +216,78 @@ const (
 	JQStatusInvalid  JQStatus = "INVALID"
 )
 
+// Values returns all known values for JQStatus. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (JQStatus) Values() []JQStatus {
+	return []JQStatus{
+		"CREATING",
+		"UPDATING",
+		"DELETING",
+		"DELETED",
+		"VALID",
+		"INVALID",
+	}
+}
+
+type LogDriver string
+
+// Enum values for LogDriver
+const (
+	LogDriverJson_file LogDriver = "json-file"
+	LogDriverSyslog    LogDriver = "syslog"
+	LogDriverJournald  LogDriver = "journald"
+	LogDriverGelf      LogDriver = "gelf"
+	LogDriverFluentd   LogDriver = "fluentd"
+	LogDriverAwslogs   LogDriver = "awslogs"
+	LogDriverSplunk    LogDriver = "splunk"
+)
+
+// Values returns all known values for LogDriver. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (LogDriver) Values() []LogDriver {
+	return []LogDriver{
+		"json-file",
+		"syslog",
+		"journald",
+		"gelf",
+		"fluentd",
+		"awslogs",
+		"splunk",
+	}
+}
+
 type ResourceType string
 
 // Enum values for ResourceType
 const (
 	ResourceTypeGpu ResourceType = "GPU"
 )
+
+// Values returns all known values for ResourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ResourceType) Values() []ResourceType {
+	return []ResourceType{
+		"GPU",
+	}
+}
+
+type RetryAction string
+
+// Enum values for RetryAction
+const (
+	RetryActionRetry RetryAction = "RETRY"
+	RetryActionExit  RetryAction = "EXIT"
+)
+
+// Values returns all known values for RetryAction. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (RetryAction) Values() []RetryAction {
+	return []RetryAction{
+		"RETRY",
+		"EXIT",
+	}
+}

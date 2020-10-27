@@ -110,6 +110,11 @@ type PutScalingPolicyInput struct {
 	// arn:aws:comprehend:us-west-2:123456789012:document-classifier-endpoint/EXAMPLE.
 	//
 	//
+	// * Amazon Comprehend entity recognizer endpoint - The resource type and unique
+	// identifier are specified using the endpoint ARN. Example:
+	// arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE.
+	//
+	//
 	// * Lambda provisioned concurrency - The resource type is function and the unique
 	// identifier is the function name with a function version or alias name suffix
 	// that is not $LATEST. Example: function:my-function:prod or
@@ -118,6 +123,10 @@ type PutScalingPolicyInput struct {
 	//     * Amazon Keyspaces table - The resource type is
 	// table and the unique identifier is the table name. Example:
 	// keyspace/mykeyspace/table/mytable.
+	//
+	//     * Amazon MSK cluster - The resource type
+	// and unique identifier are specified using the cluster ARN. Example:
+	// arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5.
 	//
 	// This member is required.
 	ResourceId *string
@@ -169,7 +178,11 @@ type PutScalingPolicyInput struct {
 	// inference units for an Amazon Comprehend document classification endpoint.
 	//
 	//
-	// * lambda:function:ProvisionedConcurrency - The provisioned concurrency for a
+	// * comprehend:entity-recognizer-endpoint:DesiredInferenceUnits - The number of
+	// inference units for an Amazon Comprehend entity recognizer endpoint.
+	//
+	//     *
+	// lambda:function:ProvisionedConcurrency - The provisioned concurrency for a
 	// Lambda function.
 	//
 	//     * cassandra:table:ReadCapacityUnits - The provisioned read
@@ -178,6 +191,9 @@ type PutScalingPolicyInput struct {
 	//     *
 	// cassandra:table:WriteCapacityUnits - The provisioned write capacity for an
 	// Amazon Keyspaces table.
+	//
+	//     * kafka:broker-storage:VolumeSize - The provisioned
+	// volume size (in GiB) for brokers in an Amazon MSK cluster.
 	//
 	// This member is required.
 	ScalableDimension types.ScalableDimension
@@ -191,8 +207,8 @@ type PutScalingPolicyInput struct {
 	// The policy type. This parameter is required if you are creating a scaling
 	// policy. The following policy types are supported: TargetTrackingScaling—Not
 	// supported for Amazon EMR StepScaling—Not supported for DynamoDB, Amazon
-	// Comprehend, Lambda, or Amazon Keyspaces (for Apache Cassandra). For more
-	// information, see Target Tracking Scaling Policies
+	// Comprehend, Lambda, Amazon Keyspaces (for Apache Cassandra), or Amazon MSK. For
+	// more information, see Target Tracking Scaling Policies
 	// (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html)
 	// and Step Scaling Policies
 	// (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html)

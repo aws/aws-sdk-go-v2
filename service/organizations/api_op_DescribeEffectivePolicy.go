@@ -19,7 +19,7 @@ import (
 // inheritance, see How Policy Inheritance Works
 // (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies-inheritance.html)
 // in the AWS Organizations User Guide. This operation can be called only from the
-// organization's master account or by a member account that is a delegated
+// organization's management account or by a member account that is a delegated
 // administrator for an AWS service.
 func (c *Client) DescribeEffectivePolicy(ctx context.Context, params *DescribeEffectivePolicyInput, optFns ...func(*Options)) (*DescribeEffectivePolicyOutput, error) {
 	if params == nil {
@@ -42,22 +42,22 @@ type DescribeEffectivePolicyInput struct {
 	// following values:
 	//
 	//     * AISERVICES_OPT_OUT_POLICY
-	// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html)
+	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html)
 	//
 	//
 	// * BACKUP_POLICY
-	// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html)
+	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html)
 	//
 	//
 	// * TAG_POLICY
-	// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
+	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
 	//
 	// This member is required.
 	PolicyType types.EffectivePolicyType
 
-	// When you're signed in as the master account, specify the ID of the account that
-	// you want details about. Specifying an organization root or organizational unit
-	// (OU) as the target is not supported.
+	// When you're signed in as the management account, specify the ID of the account
+	// that you want details about. Specifying an organization root or organizational
+	// unit (OU) as the target is not supported.
 	TargetId *string
 }
 

@@ -962,14 +962,14 @@ func validateResourceToImport(v *types.ResourceToImport) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResourceToImport"}
+	if v.ResourceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
 	if v.LogicalResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LogicalResourceId"))
 	}
 	if v.ResourceIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceIdentifier"))
-	}
-	if v.ResourceType == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1000,11 +1000,11 @@ func validateRollbackTrigger(v *types.RollbackTrigger) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RollbackTrigger"}
-	if v.Type == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Type"))
-	}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.Type == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1035,11 +1035,11 @@ func validateTag(v *types.Tag) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1100,26 +1100,26 @@ func validateOpCreateChangeSetInput(v *CreateChangeSetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateChangeSetInput"}
-	if v.ResourcesToImport != nil {
-		if err := validateResourcesToImport(v.ResourcesToImport); err != nil {
-			invalidParams.AddNested("ResourcesToImport", err.(smithy.InvalidParamsError))
-		}
+	if v.StackName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
+	}
+	if v.ChangeSetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChangeSetName"))
 	}
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ResourcesToImport != nil {
+		if err := validateResourcesToImport(v.ResourcesToImport); err != nil {
+			invalidParams.AddNested("ResourcesToImport", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.RollbackConfiguration != nil {
 		if err := validateRollbackConfiguration(v.RollbackConfiguration); err != nil {
 			invalidParams.AddNested("RollbackConfiguration", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ChangeSetName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChangeSetName"))
-	}
-	if v.StackName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1226,14 +1226,14 @@ func validateOpDeleteStackInstancesInput(v *DeleteStackInstancesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteStackInstancesInput"}
-	if v.StackSetName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StackSetName"))
+	if v.RetainStacks == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RetainStacks"))
 	}
 	if v.Regions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Regions"))
 	}
-	if v.RetainStacks == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RetainStacks"))
+	if v.StackSetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StackSetName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1295,11 +1295,11 @@ func validateOpDescribeStackInstanceInput(v *DescribeStackInstanceInput) error {
 	if v.StackSetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StackSetName"))
 	}
-	if v.StackInstanceAccount == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StackInstanceAccount"))
-	}
 	if v.StackInstanceRegion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StackInstanceRegion"))
+	}
+	if v.StackInstanceAccount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StackInstanceAccount"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1409,11 +1409,11 @@ func validateOpDetectStackResourceDriftInput(v *DetectStackResourceDriftInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DetectStackResourceDriftInput"}
-	if v.StackName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
-	}
 	if v.LogicalResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LogicalResourceId"))
+	}
+	if v.StackName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1565,11 +1565,11 @@ func validateOpRecordHandlerProgressInput(v *RecordHandlerProgressInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RecordHandlerProgressInput"}
-	if v.BearerToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BearerToken"))
-	}
 	if len(v.OperationStatus) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("OperationStatus"))
+	}
+	if v.BearerToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BearerToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1583,6 +1583,9 @@ func validateOpRegisterTypeInput(v *RegisterTypeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RegisterTypeInput"}
+	if v.SchemaHandlerPackage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaHandlerPackage"))
+	}
 	if v.TypeName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TypeName"))
 	}
@@ -1590,9 +1593,6 @@ func validateOpRegisterTypeInput(v *RegisterTypeInput) error {
 		if err := validateLoggingConfig(v.LoggingConfig); err != nil {
 			invalidParams.AddNested("LoggingConfig", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.SchemaHandlerPackage == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SchemaHandlerPackage"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1621,17 +1621,17 @@ func validateOpSignalResourceInput(v *SignalResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SignalResourceInput"}
-	if v.StackName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
-	}
-	if v.LogicalResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LogicalResourceId"))
+	if v.UniqueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UniqueId"))
 	}
 	if len(v.Status) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Status"))
 	}
-	if v.UniqueId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UniqueId"))
+	if v.LogicalResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogicalResourceId"))
+	}
+	if v.StackName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1666,14 +1666,14 @@ func validateOpUpdateStackInput(v *UpdateStackInput) error {
 	if v.StackName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
 	}
-	if v.RollbackConfiguration != nil {
-		if err := validateRollbackConfiguration(v.RollbackConfiguration); err != nil {
-			invalidParams.AddNested("RollbackConfiguration", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RollbackConfiguration != nil {
+		if err := validateRollbackConfiguration(v.RollbackConfiguration); err != nil {
+			invalidParams.AddNested("RollbackConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1688,11 +1688,11 @@ func validateOpUpdateStackInstancesInput(v *UpdateStackInstancesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateStackInstancesInput"}
-	if v.Regions == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Regions"))
-	}
 	if v.StackSetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StackSetName"))
+	}
+	if v.Regions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Regions"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1706,13 +1706,13 @@ func validateOpUpdateStackSetInput(v *UpdateStackSetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateStackSetInput"}
+	if v.StackSetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StackSetName"))
+	}
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.StackSetName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StackSetName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1726,11 +1726,11 @@ func validateOpUpdateTerminationProtectionInput(v *UpdateTerminationProtectionIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateTerminationProtectionInput"}
-	if v.EnableTerminationProtection == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EnableTerminationProtection"))
-	}
 	if v.StackName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
+	}
+	if v.EnableTerminationProtection == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnableTerminationProtection"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

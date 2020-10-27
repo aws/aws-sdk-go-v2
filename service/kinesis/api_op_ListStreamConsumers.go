@@ -14,7 +14,7 @@ import (
 
 // Lists the consumers registered to receive data from a stream using enhanced
 // fan-out, and provides information about each consumer. This operation has a
-// limit of 10 transactions per second per account.
+// limit of 5 transactions per second per stream.
 func (c *Client) ListStreamConsumers(ctx context.Context, params *ListStreamConsumersInput, optFns ...func(*Options)) (*ListStreamConsumersOutput, error) {
 	if params == nil {
 		params = &ListStreamConsumersInput{}

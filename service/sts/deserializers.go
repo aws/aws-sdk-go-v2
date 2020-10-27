@@ -105,6 +105,9 @@ func awsAwsquery_deserializeOpErrorAssumeRole(response *smithyhttp.Response, met
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
+	case strings.EqualFold("ExpiredTokenException", errorCode):
+		return awsAwsquery_deserializeErrorExpiredTokenException(response, errorBody)
+
 	case strings.EqualFold("MalformedPolicyDocumentException", errorCode):
 		return awsAwsquery_deserializeErrorMalformedPolicyDocumentException(response, errorBody)
 

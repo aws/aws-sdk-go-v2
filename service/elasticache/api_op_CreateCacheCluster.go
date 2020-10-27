@@ -176,6 +176,10 @@ type CreateCacheClusterInput struct {
 	// (http://aws.amazon.com/contact-us/elasticache-node-limit-request/).
 	NumCacheNodes *int32
 
+	// Specifies whether the nodes in the cluster are created in a single outpost or
+	// across multiple outposts.
+	OutpostMode types.OutpostMode
+
 	// The port number on which each of the cache nodes accepts connections.
 	Port *int32
 
@@ -220,6 +224,12 @@ type CreateCacheClusterInput struct {
 	//
 	// Example: sun:23:00-mon:01:30
 	PreferredMaintenanceWindow *string
+
+	// The outpost ARN in which the cache cluster is created.
+	PreferredOutpostArn *string
+
+	// The outpost ARNs in which the cache cluster is created.
+	PreferredOutpostArns []*string
 
 	// The ID of the replication group to which this cluster should belong. If this
 	// parameter is specified, the cluster is added to the specified replication group

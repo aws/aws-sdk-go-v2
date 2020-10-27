@@ -134,11 +134,11 @@ func validateOpCreateParticipantConnectionInput(v *CreateParticipantConnectionIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateParticipantConnectionInput"}
-	if v.ParticipantToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ParticipantToken"))
-	}
 	if v.Type == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.ParticipantToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParticipantToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -182,11 +182,11 @@ func validateOpSendEventInput(v *SendEventInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SendEventInput"}
-	if v.ConnectionToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ConnectionToken"))
-	}
 	if v.ContentType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContentType"))
+	}
+	if v.ConnectionToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -200,14 +200,14 @@ func validateOpSendMessageInput(v *SendMessageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SendMessageInput"}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
 	if v.ContentType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContentType"))
 	}
 	if v.ConnectionToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConnectionToken"))
-	}
-	if v.Content == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Content"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

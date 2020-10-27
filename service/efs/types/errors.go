@@ -113,8 +113,8 @@ func (e *DependencyTimeout) ErrorFault() smithy.ErrorFault { return smithy.Fault
 type FileSystemAlreadyExists struct {
 	Message *string
 
-	FileSystemId *string
 	ErrorCode_   *string
+	FileSystemId *string
 }
 
 func (e *FileSystemAlreadyExists) Error() string {

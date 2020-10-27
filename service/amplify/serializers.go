@@ -408,6 +408,11 @@ func awsRestjson1_serializeOpDocumentCreateBranchInput(v *CreateBranchInput, val
 		ok.Boolean(*v.EnableNotification)
 	}
 
+	if v.EnablePerformanceMode != nil {
+		ok := object.Key("enablePerformanceMode")
+		ok.Boolean(*v.EnablePerformanceMode)
+	}
+
 	if v.EnablePullRequestPreview != nil {
 		ok := object.Key("enablePullRequestPreview")
 		ok.Boolean(*v.EnablePullRequestPreview)
@@ -3247,6 +3252,11 @@ func awsRestjson1_serializeOpDocumentUpdateBranchInput(v *UpdateBranchInput, val
 		ok.Boolean(*v.EnableNotification)
 	}
 
+	if v.EnablePerformanceMode != nil {
+		ok := object.Key("enablePerformanceMode")
+		ok.Boolean(*v.EnablePerformanceMode)
+	}
+
 	if v.EnablePullRequestPreview != nil {
 		ok := object.Key("enablePullRequestPreview")
 		ok.Boolean(*v.EnablePullRequestPreview)
@@ -3518,6 +3528,11 @@ func awsRestjson1_serializeDocumentAutoBranchCreationConfig(v *types.AutoBranchC
 	if v.EnableBasicAuth != nil {
 		ok := object.Key("enableBasicAuth")
 		ok.Boolean(*v.EnableBasicAuth)
+	}
+
+	if v.EnablePerformanceMode != nil {
+		ok := object.Key("enablePerformanceMode")
+		ok.Boolean(*v.EnablePerformanceMode)
 	}
 
 	if v.EnablePullRequestPreview != nil {

@@ -10,6 +10,26 @@ import (
 	"github.com/awslabs/smithy-go/middleware"
 )
 
+type validateOpCreateLanguageModel struct {
+}
+
+func (*validateOpCreateLanguageModel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateLanguageModel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateLanguageModelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateLanguageModelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateMedicalVocabulary struct {
 }
 
@@ -65,6 +85,26 @@ func (m *validateOpCreateVocabulary) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateVocabularyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteLanguageModel struct {
+}
+
+func (*validateOpDeleteLanguageModel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteLanguageModel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteLanguageModelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteLanguageModelInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -165,6 +205,26 @@ func (m *validateOpDeleteVocabulary) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteVocabularyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeLanguageModel struct {
+}
+
+func (*validateOpDescribeLanguageModel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeLanguageModel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeLanguageModelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeLanguageModelInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -370,6 +430,10 @@ func (m *validateOpUpdateVocabulary) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpCreateLanguageModelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateLanguageModel{}, middleware.After)
+}
+
 func addOpCreateMedicalVocabularyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateMedicalVocabulary{}, middleware.After)
 }
@@ -380,6 +444,10 @@ func addOpCreateVocabularyFilterValidationMiddleware(stack *middleware.Stack) er
 
 func addOpCreateVocabularyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateVocabulary{}, middleware.After)
+}
+
+func addOpDeleteLanguageModelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteLanguageModel{}, middleware.After)
 }
 
 func addOpDeleteMedicalTranscriptionJobValidationMiddleware(stack *middleware.Stack) error {
@@ -400,6 +468,10 @@ func addOpDeleteVocabularyFilterValidationMiddleware(stack *middleware.Stack) er
 
 func addOpDeleteVocabularyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteVocabulary{}, middleware.After)
+}
+
+func addOpDescribeLanguageModelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeLanguageModel{}, middleware.After)
 }
 
 func addOpGetMedicalTranscriptionJobValidationMiddleware(stack *middleware.Stack) error {
@@ -447,11 +519,57 @@ func validateContentRedaction(v *types.ContentRedaction) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ContentRedaction"}
+	if len(v.RedactionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RedactionType"))
+	}
 	if len(v.RedactionOutput) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("RedactionOutput"))
 	}
-	if len(v.RedactionType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("RedactionType"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInputDataConfig(v *types.InputDataConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InputDataConfig"}
+	if v.DataAccessRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataAccessRoleArn"))
+	}
+	if v.S3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateLanguageModelInput(v *CreateLanguageModelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateLanguageModelInput"}
+	if v.ModelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelName"))
+	}
+	if len(v.LanguageCode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
+	}
+	if len(v.BaseModelName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("BaseModelName"))
+	}
+	if v.InputDataConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputDataConfig"))
+	} else if v.InputDataConfig != nil {
+		if err := validateInputDataConfig(v.InputDataConfig); err != nil {
+			invalidParams.AddNested("InputDataConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -465,14 +583,14 @@ func validateOpCreateMedicalVocabularyInput(v *CreateMedicalVocabularyInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateMedicalVocabularyInput"}
-	if v.VocabularyFileUri == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VocabularyFileUri"))
+	if v.VocabularyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VocabularyName"))
 	}
 	if len(v.LanguageCode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
 	}
-	if v.VocabularyName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VocabularyName"))
+	if v.VocabularyFileUri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VocabularyFileUri"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -486,11 +604,11 @@ func validateOpCreateVocabularyFilterInput(v *CreateVocabularyFilterInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateVocabularyFilterInput"}
-	if len(v.LanguageCode) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
-	}
 	if v.VocabularyFilterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VocabularyFilterName"))
+	}
+	if len(v.LanguageCode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -504,11 +622,26 @@ func validateOpCreateVocabularyInput(v *CreateVocabularyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateVocabularyInput"}
+	if len(v.LanguageCode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
+	}
 	if v.VocabularyName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VocabularyName"))
 	}
-	if len(v.LanguageCode) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteLanguageModelInput(v *DeleteLanguageModelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteLanguageModelInput"}
+	if v.ModelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -584,6 +717,21 @@ func validateOpDeleteVocabularyInput(v *DeleteVocabularyInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteVocabularyInput"}
 	if v.VocabularyName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VocabularyName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeLanguageModelInput(v *DescribeLanguageModelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeLanguageModelInput"}
+	if v.ModelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -672,17 +820,17 @@ func validateOpStartMedicalTranscriptionJobInput(v *StartMedicalTranscriptionJob
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartMedicalTranscriptionJobInput"}
-	if len(v.Specialty) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Specialty"))
-	}
-	if v.MedicalTranscriptionJobName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MedicalTranscriptionJobName"))
-	}
 	if v.OutputBucketName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutputBucketName"))
 	}
 	if len(v.LanguageCode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
+	}
+	if v.MedicalTranscriptionJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MedicalTranscriptionJobName"))
+	}
+	if len(v.Specialty) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Specialty"))
 	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
@@ -702,9 +850,6 @@ func validateOpStartTranscriptionJobInput(v *StartTranscriptionJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartTranscriptionJobInput"}
-	if len(v.LanguageCode) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
-	}
 	if v.ContentRedaction != nil {
 		if err := validateContentRedaction(v.ContentRedaction); err != nil {
 			invalidParams.AddNested("ContentRedaction", err.(smithy.InvalidParamsError))
@@ -761,11 +906,11 @@ func validateOpUpdateVocabularyInput(v *UpdateVocabularyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateVocabularyInput"}
-	if len(v.LanguageCode) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
-	}
 	if v.VocabularyName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VocabularyName"))
+	}
+	if len(v.LanguageCode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

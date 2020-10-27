@@ -65,6 +65,9 @@ type SchemaVersionSummary struct {
 
 	// The version number of the schema.
 	SchemaVersion *string
+
+	// The type of schema.
+	Type Type
 }
 
 type SearchSchemaSummary struct {
@@ -89,4 +92,7 @@ type SearchSchemaVersionSummary struct {
 
 	// The version number of the schema
 	SchemaVersion *string
+
+	// The type of schema.
+	Type Type
 }

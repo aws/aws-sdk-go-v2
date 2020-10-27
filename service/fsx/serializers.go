@@ -728,6 +728,11 @@ func awsAwsjson11_serializeDocumentCreateFileSystemLustreConfiguration(v *types.
 		ok.String(string(v.DeploymentType))
 	}
 
+	if len(v.DriveCacheType) > 0 {
+		ok := object.Key("DriveCacheType")
+		ok.String(string(v.DriveCacheType))
+	}
+
 	if v.ExportPath != nil {
 		ok := object.Key("ExportPath")
 		ok.String(*v.ExportPath)

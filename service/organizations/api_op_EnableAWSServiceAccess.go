@@ -26,7 +26,7 @@ import (
 // Integrating AWS Organizations with Other AWS Services
 // (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html)
 // in the AWS Organizations User Guide. This operation can be called only from the
-// organization's master account and only if the organization has enabled all
+// organization's management account and only if the organization has enabled all
 // features
 // (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html).
 func (c *Client) EnableAWSServiceAccess(ctx context.Context, params *EnableAWSServiceAccessInput, optFns ...func(*Options)) (*EnableAWSServiceAccessOutput, error) {

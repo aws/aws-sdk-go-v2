@@ -130,6 +130,46 @@ func (m *validateOpDescribeFlow) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeOffering struct {
+}
+
+func (*validateOpDescribeOffering) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeOffering) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeOfferingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeOfferingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeReservation struct {
+}
+
+func (*validateOpDescribeReservation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeReservation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeReservationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeReservationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGrantFlowEntitlements struct {
 }
 
@@ -165,6 +205,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPurchaseOffering struct {
+}
+
+func (*validateOpPurchaseOffering) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPurchaseOffering) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PurchaseOfferingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPurchaseOfferingInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -434,12 +494,24 @@ func addOpDescribeFlowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeFlow{}, middleware.After)
 }
 
+func addOpDescribeOfferingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeOffering{}, middleware.After)
+}
+
+func addOpDescribeReservationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeReservation{}, middleware.After)
+}
+
 func addOpGrantFlowEntitlementsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGrantFlowEntitlements{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpPurchaseOfferingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPurchaseOffering{}, middleware.After)
 }
 
 func addOpRemoveFlowOutputValidationMiddleware(stack *middleware.Stack) error {
@@ -563,13 +635,13 @@ func validateAddOutputRequest(v *types.AddOutputRequest) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddOutputRequest"}
+	if len(v.Protocol) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
+	}
 	if v.Encryption != nil {
 		if err := validateEncryption(v.Encryption); err != nil {
 			invalidParams.AddNested("Encryption", err.(smithy.InvalidParamsError))
 		}
-	}
-	if len(v.Protocol) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -638,17 +710,17 @@ func validateVpcInterfaceRequest(v *types.VpcInterfaceRequest) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VpcInterfaceRequest"}
-	if v.SubnetId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SubnetId"))
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
 	if v.SecurityGroupIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupIds"))
 	}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.SubnetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -728,19 +800,14 @@ func validateOpCreateFlowInput(v *CreateFlowInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateFlowInput"}
-	if v.VpcInterfaces != nil {
-		if err := validate__listOfVpcInterfaceRequest(v.VpcInterfaces); err != nil {
-			invalidParams.AddNested("VpcInterfaces", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Entitlements != nil {
-		if err := validate__listOfGrantEntitlementRequest(v.Entitlements); err != nil {
-			invalidParams.AddNested("Entitlements", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Sources != nil {
 		if err := validate__listOfSetSourceRequest(v.Sources); err != nil {
 			invalidParams.AddNested("Sources", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Source != nil {
+		if err := validateSetSourceRequest(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Outputs != nil {
@@ -751,9 +818,14 @@ func validateOpCreateFlowInput(v *CreateFlowInput) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.Source != nil {
-		if err := validateSetSourceRequest(v.Source); err != nil {
-			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+	if v.Entitlements != nil {
+		if err := validate__listOfGrantEntitlementRequest(v.Entitlements); err != nil {
+			invalidParams.AddNested("Entitlements", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VpcInterfaces != nil {
+		if err := validate__listOfVpcInterfaceRequest(v.VpcInterfaces); err != nil {
+			invalidParams.AddNested("VpcInterfaces", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -793,20 +865,50 @@ func validateOpDescribeFlowInput(v *DescribeFlowInput) error {
 	}
 }
 
+func validateOpDescribeOfferingInput(v *DescribeOfferingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeOfferingInput"}
+	if v.OfferingArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OfferingArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeReservationInput(v *DescribeReservationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeReservationInput"}
+	if v.ReservationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReservationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGrantFlowEntitlementsInput(v *GrantFlowEntitlementsInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GrantFlowEntitlementsInput"}
+	if v.FlowArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowArn"))
+	}
 	if v.Entitlements == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Entitlements"))
 	} else if v.Entitlements != nil {
 		if err := validate__listOfGrantEntitlementRequest(v.Entitlements); err != nil {
 			invalidParams.AddNested("Entitlements", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.FlowArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FlowArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -822,6 +924,27 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPurchaseOfferingInput(v *PurchaseOfferingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PurchaseOfferingInput"}
+	if v.OfferingArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OfferingArn"))
+	}
+	if v.Start == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Start"))
+	}
+	if v.ReservationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReservationName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -889,11 +1012,11 @@ func validateOpRevokeFlowEntitlementInput(v *RevokeFlowEntitlementInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RevokeFlowEntitlementInput"}
-	if v.EntitlementArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EntitlementArn"))
-	}
 	if v.FlowArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FlowArn"))
+	}
+	if v.EntitlementArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntitlementArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -937,11 +1060,11 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.Tags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -955,11 +1078,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
-	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -973,11 +1096,11 @@ func validateOpUpdateFlowEntitlementInput(v *UpdateFlowEntitlementInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateFlowEntitlementInput"}
-	if v.FlowArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FlowArn"))
-	}
 	if v.EntitlementArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EntitlementArn"))
+	}
+	if v.FlowArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

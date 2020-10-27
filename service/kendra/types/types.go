@@ -65,11 +65,11 @@ type AttributeFilter struct {
 	AndAllFilters []*AttributeFilter
 
 	// Returns true when a document contains all of the specified document attributes.
-	// This filter is only appicable to StringListValue metadata.
+	// This filter is only applicable to StringListValue metadata.
 	ContainsAll *DocumentAttribute
 
-	// Returns true when a document contains any of the specified document
-	// attributes.This filter is only appicable to StringListValue metadata.
+	// Returns true when a document contains any of the specified document attributes.
+	// This filter is only applicable to StringListValue metadata.
 	ContainsAny *DocumentAttribute
 
 	// Performs an equals operation on two document attributes.
@@ -255,14 +255,14 @@ type DatabaseConfiguration struct {
 // Configuration information for a Amazon Kendra data source.
 type DataSourceConfiguration struct {
 
-	// Provides information necessary to create a connector for a database.
+	// Provides information necessary to create a data source connector for a database.
 	DatabaseConfiguration *DatabaseConfiguration
 
 	// Provided configuration for data sources that connect to Microsoft OneDrive.
 	OneDriveConfiguration *OneDriveConfiguration
 
-	// Provides information to create a connector for a document repository in an
-	// Amazon S3 bucket.
+	// Provides information to create a data source connector for a document repository
+	// in an Amazon S3 bucket.
 	S3Configuration *S3DataSourceConfiguration
 
 	// Provides configuration information for data sources that connect to a Salesforce
@@ -272,8 +272,8 @@ type DataSourceConfiguration struct {
 	// Provides configuration for data sources that connect to ServiceNow instances.
 	ServiceNowConfiguration *ServiceNowConfiguration
 
-	// Provides information necessary to create a connector for a Microsoft SharePoint
-	// site.
+	// Provides information necessary to create a data source connector for a Microsoft
+	// SharePoint site.
 	SharePointConfiguration *SharePointConfiguration
 }
 
@@ -322,7 +322,8 @@ type DataSourceSyncJob struct {
 	ExecutionId *string
 
 	// Maps a batch delete document request to a specific data source sync job. This is
-	// optional and should only be supplied when documents are deleted by a connector.
+	// optional and should only be supplied when documents are deleted by a data source
+	// connector.
 	Metrics *DataSourceSyncJobMetrics
 
 	// The UNIX datetime that the synchronization job was started.
@@ -335,7 +336,8 @@ type DataSourceSyncJob struct {
 }
 
 // Maps a batch delete document request to a specific data source sync job. This is
-// optional and should only be supplied when documents are deleted by a connector.
+// optional and should only be supplied when documents are deleted by a data source
+// connector.
 type DataSourceSyncJobMetrics struct {
 
 	// The number of documents added from the data source up to now in the data source
@@ -533,6 +535,10 @@ type FacetResult struct {
 	// An array of key/value pairs, where the key is the value of the attribute and the
 	// count is the number of documents that share the key value.
 	DocumentAttributeValueCountPairs []*DocumentAttributeValueCountPair
+
+	// The data type of the facet value. This is the same as the type defined for the
+	// index field when it was created.
+	DocumentAttributeValueType DocumentAttributeValueType
 }
 
 // Provides statistical information about the FAQ questions and answers contained
@@ -551,6 +557,9 @@ type FaqSummary struct {
 
 	// The UNIX datetime that the FAQ was added to the index.
 	CreatedAt *time.Time
+
+	// The file type used to create the FAQ.
+	FileFormat FaqFileFormat
 
 	// The unique identifier of the FAQ.
 	Id *string
@@ -710,7 +719,7 @@ type Principal struct {
 // that satisfies the query.
 type QueryResultItem struct {
 
-	// One or more additional attribues associated with the query result.
+	// One or more additional attributes associated with the query result.
 	AdditionalAttributes []*AdditionalResultAttribute
 
 	// An array of document attributes for the document that the query result maps to.
@@ -734,6 +743,14 @@ type QueryResultItem struct {
 
 	// The unique identifier for the query result.
 	Id *string
+
+	// Indicates the confidence that Amazon Kendra has that a result matches the query
+	// that you provided. Each result is placed into a bin that indicates the
+	// confidence, VERY_HIGH, HIGH, MEDIUM and LOW. You can use the score to determine
+	// if a response meets the confidence needed for your application. The field is
+	// only set to LOW when the Type field is set to DOCUMENT and Amazon Kendra is not
+	// confident that the result matches the query.
+	ScoreAttributes *ScoreAttributes
 
 	// The type of document.
 	Type QueryResultType
@@ -817,10 +834,17 @@ type S3DataSourceConfiguration struct {
 	DocumentsMetadataConfiguration *DocumentsMetadataConfiguration
 
 	// A list of glob patterns for documents that should not be indexed. If a document
-	// that matches an inclusion prefix also matches an exclusion pattern, the document
-	// is not indexed. For more information about glob patterns, see glob (programming)
-	// (https://en.wikipedia.org/wiki/Glob_(programming)) in Wikipedia.
+	// that matches an inclusion prefix or inclusion pattern also matches an exclusion
+	// pattern, the document is not indexed. For more information about glob patterns,
+	// see glob (programming) (https://en.wikipedia.org/wiki/Glob_(programming)) in
+	// Wikipedia.
 	ExclusionPatterns []*string
+
+	// A list of glob patterns for documents that should be indexed. If a document that
+	// matches an inclusion pattern also matches an exclusion pattern, the document is
+	// not indexed. For more information about glob patterns, see glob (programming)
+	// (https://en.wikipedia.org/wiki/Glob_(programming)) in Wikipedia.
+	InclusionPatterns []*string
 
 	// A list of S3 prefixes for the documents that should be included in the index.
 	InclusionPrefixes []*string
@@ -1028,6 +1052,14 @@ type SalesforceStandardObjectConfiguration struct {
 	FieldMappings []*DataSourceToIndexFieldMapping
 }
 
+// Provides a relative ranking that indicates how confident Amazon Kendra is that
+// the response matches the query.
+type ScoreAttributes struct {
+
+	// A relative ranking for how well the response matches the query.
+	ScoreConfidence ScoreConfidence
+}
+
 // Provides information about how a custom index field is used during a search.
 type Search struct {
 
@@ -1220,7 +1252,20 @@ type SharePointConfiguration struct {
 
 // Specifies the document attribute to use to sort the response to a Amazon Kendra
 // query. You can specify a single attribute for sorting. The attribute must have
-// the Sortable flag set to true, otherwise Amazon Kendra returns an exception.
+// the Sortable flag set to true, otherwise Amazon Kendra returns an exception. You
+// can sort attributes of the following types.
+//
+//     * Date value
+//
+//     * Long
+// value
+//
+//     * String value
+//
+// You can't sort attributes of the following type.
+//
+//
+// * String list value
 type SortingConfiguration struct {
 
 	// The name of the document attribute used to sort the response. You can use any
@@ -1251,14 +1296,15 @@ type SortingConfiguration struct {
 // Provides information that configures Amazon Kendra to use a SQL database.
 type SqlConfiguration struct {
 
-	// Determines whether Amazon Kendra encloses SQL identifiers in double quotes (")
-	// when making a database query. By default, Amazon Kendra passes SQL identifiers
-	// the way that they are entered into the data source configuration. It does not
-	// change the case of identifiers or enclose them in quotes. PostgreSQL internally
-	// converts uppercase characters to lower case characters in identifiers unless
-	// they are quoted. Choosing this option encloses identifiers in quotes so that
-	// PostgreSQL does not convert the character's case. For MySQL databases, you must
-	// enable the ansi_quotes option when you choose this option.
+	// Determines whether Amazon Kendra encloses SQL identifiers for tables and column
+	// names in double quotes (") when making a database query. By default, Amazon
+	// Kendra passes SQL identifiers the way that they are entered into the data source
+	// configuration. It does not change the case of identifiers or enclose them in
+	// quotes. PostgreSQL internally converts uppercase characters to lower case
+	// characters in identifiers unless they are quoted. Choosing this option encloses
+	// identifiers in quotes so that PostgreSQL does not convert the character's case.
+	// For MySQL databases, you must enable the ansi_quotes option when you set this
+	// field to DOUBLE_QUOTES.
 	QueryIdentifiersEnclosingOption QueryIdentifiersEnclosingOption
 }
 

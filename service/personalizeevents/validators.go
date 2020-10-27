@@ -30,8 +30,56 @@ func (m *validateOpPutEvents) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutItems struct {
+}
+
+func (*validateOpPutItems) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutItems) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutItemsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutItemsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutUsers struct {
+}
+
+func (*validateOpPutUsers) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutUsers) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutUsersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutUsersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpPutEventsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutEvents{}, middleware.After)
+}
+
+func addOpPutItemsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutItems{}, middleware.After)
+}
+
+func addOpPutUsersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutUsers{}, middleware.After)
 }
 
 func validateEvent(v *types.Event) error {
@@ -41,9 +89,6 @@ func validateEvent(v *types.Event) error {
 	invalidParams := smithy.InvalidParamsError{Context: "Event"}
 	if v.EventType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EventType"))
-	}
-	if v.Properties == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Properties"))
 	}
 	if v.SentAt == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SentAt"))
@@ -72,6 +117,70 @@ func validateEventList(v []*types.Event) error {
 	}
 }
 
+func validateItem(v *types.Item) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Item"}
+	if v.ItemId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ItemId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateItemList(v []*types.Item) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ItemList"}
+	for i := range v {
+		if err := validateItem(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUser(v *types.User) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "User"}
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUserList(v []*types.User) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UserList"}
+	for i := range v {
+		if err := validateUser(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutEventsInput(v *PutEventsInput) error {
 	if v == nil {
 		return nil
@@ -84,11 +193,55 @@ func validateOpPutEventsInput(v *PutEventsInput) error {
 			invalidParams.AddNested("EventList", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
 	if v.TrackingId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TrackingId"))
 	}
-	if v.SessionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutItemsInput(v *PutItemsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutItemsInput"}
+	if v.DatasetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetArn"))
+	}
+	if v.Items == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Items"))
+	} else if v.Items != nil {
+		if err := validateItemList(v.Items); err != nil {
+			invalidParams.AddNested("Items", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutUsersInput(v *PutUsersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutUsersInput"}
+	if v.DatasetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetArn"))
+	}
+	if v.Users == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Users"))
+	} else if v.Users != nil {
+		if err := validateUserList(v.Users); err != nil {
+			invalidParams.AddNested("Users", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Creates or updates a replication configuration for an application.
+// Creates or updates the replication configuration for the specified application.
 func (c *Client) PutAppReplicationConfiguration(ctx context.Context, params *PutAppReplicationConfigurationInput, optFns ...func(*Options)) (*PutAppReplicationConfigurationOutput, error) {
 	if params == nil {
 		params = &PutAppReplicationConfigurationInput{}
@@ -29,10 +29,11 @@ func (c *Client) PutAppReplicationConfiguration(ctx context.Context, params *Put
 
 type PutAppReplicationConfigurationInput struct {
 
-	// ID of the application tassociated with the replication configuration.
+	// The ID of the application.
 	AppId *string
 
-	// Replication configurations for server groups in the application.
+	// Information about the replication configurations for server groups in the
+	// application.
 	ServerGroupReplicationConfigurations []*types.ServerGroupReplicationConfiguration
 }
 

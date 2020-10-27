@@ -430,6 +430,26 @@ func (m *validateOpDescribeTask) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListLocations struct {
+}
+
+func (*validateOpListLocations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListLocations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListLocationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListLocationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -445,6 +465,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListTasks struct {
+}
+
+func (*validateOpListTasks) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTasks) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTasksInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTasksInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -634,8 +674,16 @@ func addOpDescribeTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeTask{}, middleware.After)
 }
 
+func addOpListLocationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListLocations{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpListTasksValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTasks{}, middleware.After)
 }
 
 func addOpStartTaskExecutionValidationMiddleware(stack *middleware.Stack) error {
@@ -693,6 +741,44 @@ func validateInputTagList(v []*types.TagListEntry) error {
 	}
 }
 
+func validateLocationFilter(v *types.LocationFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LocationFilter"}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLocationFilters(v []*types.LocationFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LocationFilters"}
+	for i := range v {
+		if err := validateLocationFilter(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOnPremConfig(v *types.OnPremConfig) error {
 	if v == nil {
 		return nil
@@ -738,6 +824,44 @@ func validateTagListEntry(v *types.TagListEntry) error {
 	}
 }
 
+func validateTaskFilter(v *types.TaskFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TaskFilter"}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTaskFilters(v []*types.TaskFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TaskFilters"}
+	for i := range v {
+		if err := validateTaskFilter(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTaskSchedule(v *types.TaskSchedule) error {
 	if v == nil {
 		return nil
@@ -773,13 +897,13 @@ func validateOpCreateAgentInput(v *CreateAgentInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAgentInput"}
+	if v.ActivationKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActivationKey"))
+	}
 	if v.Tags != nil {
 		if err := validateInputTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ActivationKey == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ActivationKey"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -798,15 +922,15 @@ func validateOpCreateLocationEfsInput(v *CreateLocationEfsInput) error {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.EfsFilesystemArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EfsFilesystemArn"))
-	}
 	if v.Ec2Config == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Ec2Config"))
 	} else if v.Ec2Config != nil {
 		if err := validateEc2Config(v.Ec2Config); err != nil {
 			invalidParams.AddNested("Ec2Config", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.EfsFilesystemArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EfsFilesystemArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -823,9 +947,6 @@ func validateOpCreateLocationFsxWindowsInput(v *CreateLocationFsxWindowsInput) e
 	if v.SecurityGroupArns == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupArns"))
 	}
-	if v.FsxFilesystemArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FsxFilesystemArn"))
-	}
 	if v.Password == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Password"))
 	}
@@ -833,6 +954,9 @@ func validateOpCreateLocationFsxWindowsInput(v *CreateLocationFsxWindowsInput) e
 		if err := validateInputTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.FsxFilesystemArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FsxFilesystemArn"))
 	}
 	if v.User == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("User"))
@@ -849,23 +973,23 @@ func validateOpCreateLocationNfsInput(v *CreateLocationNfsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateLocationNfsInput"}
+	if v.Tags != nil {
+		if err := validateInputTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Subdirectory == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Subdirectory"))
+	}
+	if v.ServerHostname == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerHostname"))
+	}
 	if v.OnPremConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OnPremConfig"))
 	} else if v.OnPremConfig != nil {
 		if err := validateOnPremConfig(v.OnPremConfig); err != nil {
 			invalidParams.AddNested("OnPremConfig", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Tags != nil {
-		if err := validateInputTagList(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.ServerHostname == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServerHostname"))
-	}
-	if v.Subdirectory == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Subdirectory"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -879,19 +1003,19 @@ func validateOpCreateLocationObjectStorageInput(v *CreateLocationObjectStorageIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateLocationObjectStorageInput"}
-	if v.Tags != nil {
-		if err := validateInputTagList(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.AgentArns == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AgentArns"))
+	if v.ServerHostname == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerHostname"))
 	}
 	if v.BucketName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
 	}
-	if v.ServerHostname == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServerHostname"))
+	if v.AgentArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentArns"))
+	}
+	if v.Tags != nil {
+		if err := validateInputTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -905,20 +1029,20 @@ func validateOpCreateLocationS3Input(v *CreateLocationS3Input) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateLocationS3Input"}
-	if v.S3Config == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("S3Config"))
-	} else if v.S3Config != nil {
-		if err := validateS3Config(v.S3Config); err != nil {
-			invalidParams.AddNested("S3Config", err.(smithy.InvalidParamsError))
-		}
+	if v.S3BucketArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3BucketArn"))
 	}
 	if v.Tags != nil {
 		if err := validateInputTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.S3BucketArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("S3BucketArn"))
+	if v.S3Config == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Config"))
+	} else if v.S3Config != nil {
+		if err := validateS3Config(v.S3Config); err != nil {
+			invalidParams.AddNested("S3Config", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -932,25 +1056,25 @@ func validateOpCreateLocationSmbInput(v *CreateLocationSmbInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateLocationSmbInput"}
-	if v.AgentArns == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AgentArns"))
+	if v.Subdirectory == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Subdirectory"))
+	}
+	if v.User == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("User"))
 	}
 	if v.Password == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Password"))
 	}
-	if v.User == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("User"))
+	if v.ServerHostname == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerHostname"))
 	}
 	if v.Tags != nil {
 		if err := validateInputTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Subdirectory == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Subdirectory"))
-	}
-	if v.ServerHostname == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServerHostname"))
+	if v.AgentArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentArns"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -967,13 +1091,13 @@ func validateOpCreateTaskInput(v *CreateTaskInput) error {
 	if v.SourceLocationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceLocationArn"))
 	}
-	if v.DestinationLocationArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DestinationLocationArn"))
-	}
 	if v.Tags != nil {
 		if err := validateInputTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.DestinationLocationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationLocationArn"))
 	}
 	if v.Schedule != nil {
 		if err := validateTaskSchedule(v.Schedule); err != nil {
@@ -1167,6 +1291,23 @@ func validateOpDescribeTaskInput(v *DescribeTaskInput) error {
 	}
 }
 
+func validateOpListLocationsInput(v *ListLocationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListLocationsInput"}
+	if v.Filters != nil {
+		if err := validateLocationFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
@@ -1174,6 +1315,23 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListTasksInput(v *ListTasksInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTasksInput"}
+	if v.Filters != nil {
+		if err := validateTaskFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

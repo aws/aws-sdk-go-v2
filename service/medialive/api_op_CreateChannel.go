@@ -31,6 +31,9 @@ func (c *Client) CreateChannel(ctx context.Context, params *CreateChannelInput, 
 // A request to create a channel
 type CreateChannelInput struct {
 
+	// Specification of CDI inputs for this channel
+	CdiInputSpecification *types.CdiInputSpecification
+
 	// The class for this channel. STANDARD for a channel with two pipelines or
 	// SINGLE_PIPELINE for a channel with one pipeline.
 	ChannelClass types.ChannelClass
@@ -44,7 +47,7 @@ type CreateChannelInput struct {
 	// List of input attachments for channel.
 	InputAttachments []*types.InputAttachment
 
-	// Specification of input for this channel (max. bitrate, resolution, codec, etc.)
+	// Specification of network and file inputs for this channel
 	InputSpecification *types.InputSpecification
 
 	// The log level to write to CloudWatch Logs.

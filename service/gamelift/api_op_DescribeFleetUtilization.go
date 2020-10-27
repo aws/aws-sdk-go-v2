@@ -18,7 +18,7 @@ import (
 // fleet IDs. When requesting multiple fleets, use the pagination parameters to
 // retrieve results as a set of sequential pages. If successful, a FleetUtilization
 // object is returned for each requested fleet ID, unless the fleet identifier is
-// not found. Some API actions may limit the number of fleet IDs allowed in one
+// not found. Some API operations may limit the number of fleet IDs allowed in one
 // request. If a request exceeds this limit, the request fails and the error
 // message includes the maximum allowed. Learn more Setting up GameLift Fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)GameLift
@@ -71,7 +71,7 @@ func (c *Client) DescribeFleetUtilization(ctx context.Context, params *DescribeF
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type DescribeFleetUtilizationInput struct {
 
 	// A unique identifier for a fleet(s) to retrieve utilization data for. You can use
@@ -87,13 +87,13 @@ type DescribeFleetUtilizationInput struct {
 	Limit *int32
 
 	// Token that indicates the start of the next sequential page of results. Use the
-	// token that is returned with a previous call to this action. To start at the
+	// token that is returned with a previous call to this operation. To start at the
 	// beginning of the result set, do not specify a value. This parameter is ignored
 	// when the request specifies one or a list of fleet IDs.
 	NextToken *string
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type DescribeFleetUtilizationOutput struct {
 
 	// A collection of objects containing utilization information for each requested
@@ -101,7 +101,7 @@ type DescribeFleetUtilizationOutput struct {
 	FleetUtilization []*types.FleetUtilization
 
 	// Token that indicates where to resume retrieving results on the next call to this
-	// action. If no token is returned, these results represent the end of the list.
+	// operation. If no token is returned, these results represent the end of the list.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

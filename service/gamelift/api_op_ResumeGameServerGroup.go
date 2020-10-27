@@ -11,16 +11,18 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// This action is part of Amazon GameLift FleetIQ with game server groups, which is
-// in preview release and is subject to change. Reinstates activity on a game
-// server group after it has been suspended. A game server group may be suspended
-// by calling SuspendGameServerGroup, or it may have been involuntarily suspended
-// due to a configuration problem. You can manually resume activity on the group
-// once the configuration problem has been resolved. Refer to the game server group
-// status and status reason for more information on why group activity is
-// suspended. To resume activity, specify a game server group ARN and the type of
-// activity to be resumed. Learn more GameLift FleetIQ Guide
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-intro.html)
+// This operation is used with the Amazon GameLift FleetIQ solution and game server
+// groups. Reinstates activity on a game server group after it has been suspended.
+// A game server group might be suspended by theSuspendGameServerGroup operation,
+// or it might be suspended involuntarily due to a configuration problem. In the
+// second case, you can manually resume activity on the group once the
+// configuration problem has been resolved. Refer to the game server group status
+// and status reason for more information on why group activity is suspended. To
+// resume activity, specify a game server group ARN and the type of activity to be
+// resumed. If successful, a GameServerGroup object is returned showing that the
+// resumed activity is no longer listed in SuspendedActions. Learn more GameLift
+// FleetIQ Guide
+// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
 // Related operations
 //
 //     * CreateGameServerGroup
@@ -37,7 +39,10 @@ import (
 //
 //     * ResumeGameServerGroup
 //
-//     * SuspendGameServerGroup
+//     *
+// SuspendGameServerGroup
+//
+//     * DescribeGameServerInstances
 func (c *Client) ResumeGameServerGroup(ctx context.Context, params *ResumeGameServerGroupInput, optFns ...func(*Options)) (*ResumeGameServerGroupOutput, error) {
 	if params == nil {
 		params = &ResumeGameServerGroupInput{}
@@ -55,13 +60,13 @@ func (c *Client) ResumeGameServerGroup(ctx context.Context, params *ResumeGameSe
 
 type ResumeGameServerGroupInput struct {
 
-	// The unique identifier of the game server group to resume activity on. Use either
-	// the GameServerGroup name or ARN value.
+	// A unique identifier for the game server group. Use either the GameServerGroup
+	// name or ARN value.
 	//
 	// This member is required.
 	GameServerGroupName *string
 
-	// The action to resume for this game server group.
+	// The activity to resume for this game server group.
 	//
 	// This member is required.
 	ResumeActions []types.GameServerGroupAction

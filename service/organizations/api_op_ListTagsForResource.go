@@ -11,10 +11,21 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Lists tags for the specified resource. Currently, you can list tags on an
-// account in AWS Organizations. This operation can be called only from the
-// organization's master account or by a member account that is a delegated
-// administrator for an AWS service.
+// Lists tags that are attached to the specified resource. You can attach tags to
+// the following resources in AWS Organizations.
+//
+//     * AWS account
+//
+//     *
+// Organization root
+//
+//     * Organizational unit (OU)
+//
+//     * Policy (any type)
+//
+// This
+// operation can be called only from the organization's management account or by a
+// member account that is a delegated administrator for an AWS service.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -32,7 +43,20 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The ID of the resource that you want to retrieve tags for.
+	// The ID of the resource with the tags to list. You can specify any of the
+	// following taggable resources.
+	//
+	//     * AWS account – specify the account ID
+	// number.
+	//
+	//     * Organizational unit – specify the OU ID that begins with ou- and
+	// looks similar to: ou-1a2b-34uvwxyz
+	//
+	//     * Root – specify the root ID that begins
+	// with r- and looks similar to: r-1a2b
+	//
+	//     * Policy – specify the policy ID that
+	// begins with p- andlooks similar to: p-12abcdefg3
 	//
 	// This member is required.
 	ResourceId *string

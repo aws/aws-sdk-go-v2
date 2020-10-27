@@ -90,6 +90,11 @@ func awsRestjson1_serializeOpDocumentGetPersonalizedRankingInput(v *GetPersonali
 		}
 	}
 
+	if v.FilterArn != nil {
+		ok := object.Key("filterArn")
+		ok.String(*v.FilterArn)
+	}
+
 	if v.InputList != nil {
 		ok := object.Key("inputList")
 		if err := awsRestjson1_serializeDocumentInputList(v.InputList, ok); err != nil {

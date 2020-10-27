@@ -70,7 +70,7 @@ type Build struct {
 	// for encrypting the build output artifacts. You can use a cross-account KMS key
 	// to encrypt the build output artifacts if your service role has permission to
 	// that key. You can specify either the Amazon Resource Name (ARN) of the CMK or,
-	// if available, the CMK's alias (using the format alias/alias-name ).
+	// if available, the CMK's alias (using the format alias/).
 	EncryptionKey *string
 
 	// When the build process ended, expressed in Unix time format.
@@ -262,7 +262,7 @@ type BuildBatch struct {
 	// for encrypting the batch build output artifacts. You can use a cross-account KMS
 	// key to encrypt the build output artifacts if your service role has permission to
 	// that key. You can specify either the Amazon Resource Name (ARN) of the CMK or,
-	// if available, the CMK's alias (using the format alias/alias-name ).
+	// if available, the CMK's alias (using the format alias/).
 	EncryptionKey *string
 
 	// The date and time that the batch build ended.
@@ -711,18 +711,19 @@ type EnvironmentVariable struct {
 	//
 	//     * PARAMETER_STORE:
 	// An environment variable stored in Amazon EC2 Systems Manager Parameter Store. To
-	// learn how to specify a parameter store environment variable, see  parameter
-	// store reference-key in the buildspec file
-	// (https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#parameter-store-build-spec).
+	// learn how to specify a parameter store environment variable, see
+	// env/parameter-store
+	// (https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec.env.parameter-store)
+	// in the AWS CodeBuild User Guide.
 	//
+	//     * PLAINTEXT: An environment variable in
+	// plain text format. This is the default value.
 	//
-	// * PLAINTEXT: An environment variable in plain text format. This is the default
-	// value.
-	//
-	//     * SECRETS_MANAGER: An environment variable stored in AWS Secrets
-	// Manager. To learn how to specify a secrets manager environment variable, see
-	// secrets manager reference-key in the buildspec file
-	// (https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#secrets-manager-build-spec).
+	//     * SECRETS_MANAGER: An
+	// environment variable stored in AWS Secrets Manager. To learn how to specify a
+	// secrets manager environment variable, see env/secrets-manager
+	// (https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec.env.secrets-manager)
+	// in the AWS CodeBuild User Guide.
 	Type EnvironmentVariableType
 }
 
@@ -848,7 +849,7 @@ type Project struct {
 	// for encrypting the build output artifacts. You can use a cross-account KMS key
 	// to encrypt the build output artifacts if your service role has permission to
 	// that key. You can specify either the Amazon Resource Name (ARN) of the CMK or,
-	// if available, the CMK's alias (using the format alias/alias-name ).
+	// if available, the CMK's alias (using the format alias/).
 	EncryptionKey *string
 
 	// Information about the build environment for this build project.
@@ -999,15 +1000,14 @@ type ProjectArtifacts struct {
 	//     * If path is set to
 	// MyArtifacts, namespaceType is set to BUILD_ID, and name is set to
 	// MyArtifact.zip, then the output artifact is stored in
-	// MyArtifacts/build-ID/MyArtifact.zip.
+	// MyArtifacts//MyArtifact.zip.
 	//
-	//     * If path is empty, namespaceType is
-	// set to NONE, and name is set to "/", the output artifact is stored in the root
-	// of the output bucket.
+	//     * If path is empty, namespaceType is set to
+	// NONE, and name is set to "/", the output artifact is stored in the root of the
+	// output bucket.
 	//
-	//     * If path is set to MyArtifacts, namespaceType is set
-	// to BUILD_ID, and name is set to "/", the output artifact is stored in
-	// MyArtifacts/build-ID .
+	//     * If path is set to MyArtifacts, namespaceType is set to
+	// BUILD_ID, and name is set to "/", the output artifact is stored in MyArtifacts/.
 	Name *string
 
 	// Along with path and name, the pattern that AWS CodeBuild uses to determine the
@@ -1032,7 +1032,7 @@ type ProjectArtifacts struct {
 	//
 	// For example, if path is set to MyArtifacts, namespaceType is set to
 	// BUILD_ID, and name is set to MyArtifact.zip, the output artifact is stored in
-	// MyArtifacts/build-ID/MyArtifact.zip.
+	// MyArtifacts//MyArtifact.zip.
 	NamespaceType ArtifactNamespace
 
 	// If this flag is set, a name specified in the buildspec file overrides the
@@ -1225,14 +1225,15 @@ type ProjectEnvironment struct {
 	// The image tag or image digest that identifies the Docker image to use for this
 	// build project. Use the following formats:
 	//
-	//     * For an image tag:
-	// registry/repository:tag. For example, to specify an image with the tag "latest,"
-	// use registry/repository:latest.
+	//     * For an image tag: /:. For
+	// example, in the Docker repository that CodeBuild uses to manage its Docker
+	// images, this would be aws/codebuild/standard:4.0. To specify the latest version
+	// of this image, this would be aws/codebuild/standard:latest.
 	//
-	//     * For an image digest:
-	// registry/repository@digest. For example, to specify an image with the digest
+	//     * For an image
+	// digest: /@. For example, to specify an image with the digest
 	// "sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf," use
-	// registry/repository@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf.
+	// /@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf.
 	//
 	// This member is required.
 	Image *string
@@ -1413,41 +1414,39 @@ type ProjectSource struct {
 	//     * For
 	// source code in an AWS CodeCommit repository, the HTTPS clone URL to the
 	// repository that contains the source code and the buildspec file (for example,
-	// https://git-codecommit.region-ID.amazonaws.com/v1/repos/repo-name ).
+	// https://git-codecommit..amazonaws.com/v1/repos/).
 	//
-	//     * For
-	// source code in an Amazon Simple Storage Service (Amazon S3) input bucket, one of
-	// the following.
+	//     * For source code in an
+	// Amazon Simple Storage Service (Amazon S3) input bucket, one of the following.
 	//
-	//         * The path to the ZIP file that contains the source code
-	// (for example,  bucket-name/path/to/object-name.zip).
 	//
-	//         * The path to the
-	// folder that contains the source code (for example,
-	// bucket-name/path/to/source-code/folder/).
+	// * The path to the ZIP file that contains the source code (for example,
+	// //.zip).
 	//
-	//     * For source code in a GitHub
+	//         * The path to the folder that contains the source code (for
+	// example, ///).
+	//
+	//     * For source code in a GitHub repository, the HTTPS clone
+	// URL to the repository that contains the source and the buildspec file. You must
+	// connect your AWS account to your GitHub account. Use the AWS CodeBuild console
+	// to start creating a build project. When you use the console to connect (or
+	// reconnect) with GitHub, on the GitHub Authorize application page, for
+	// Organization access, choose Request access next to each repository you want to
+	// allow AWS CodeBuild to have access to, and then choose Authorize application.
+	// (After you have connected to your GitHub account, you do not need to finish
+	// creating the build project. You can leave the AWS CodeBuild console.) To
+	// instruct AWS CodeBuild to use this connection, in the source object, set the
+	// auth object's type value to OAUTH.
+	//
+	//     * For source code in a Bitbucket
 	// repository, the HTTPS clone URL to the repository that contains the source and
-	// the buildspec file. You must connect your AWS account to your GitHub account.
+	// the buildspec file. You must connect your AWS account to your Bitbucket account.
 	// Use the AWS CodeBuild console to start creating a build project. When you use
-	// the console to connect (or reconnect) with GitHub, on the GitHub Authorize
-	// application page, for Organization access, choose Request access next to each
-	// repository you want to allow AWS CodeBuild to have access to, and then choose
-	// Authorize application. (After you have connected to your GitHub account, you do
-	// not need to finish creating the build project. You can leave the AWS CodeBuild
-	// console.) To instruct AWS CodeBuild to use this connection, in the source
-	// object, set the auth object's type value to OAUTH.
-	//
-	//     * For source code in a
-	// Bitbucket repository, the HTTPS clone URL to the repository that contains the
-	// source and the buildspec file. You must connect your AWS account to your
-	// Bitbucket account. Use the AWS CodeBuild console to start creating a build
-	// project. When you use the console to connect (or reconnect) with Bitbucket, on
-	// the Bitbucket Confirm access to your account page, choose Grant access. (After
-	// you have connected to your Bitbucket account, you do not need to finish creating
-	// the build project. You can leave the AWS CodeBuild console.) To instruct AWS
-	// CodeBuild to use this connection, in the source object, set the auth object's
-	// type value to OAUTH.
+	// the console to connect (or reconnect) with Bitbucket, on the Bitbucket Confirm
+	// access to your account page, choose Grant access. (After you have connected to
+	// your Bitbucket account, you do not need to finish creating the build project.
+	// You can leave the AWS CodeBuild console.) To instruct AWS CodeBuild to use this
+	// connection, in the source object, set the auth object's type value to OAUTH.
 	Location *string
 
 	// Set to true to report the status of a build's start and finish to your source
@@ -1770,11 +1769,28 @@ type TestCase struct {
 	TestRawDataPath *string
 }
 
-// A filter used to return specific types of test cases.
+// A filter used to return specific types of test cases. In order to pass the
+// filter, the report must meet all of the filter properties.
 type TestCaseFilter struct {
 
-	// The status used to filter test cases. Valid statuses are SUCCEEDED, FAILED,
-	// ERROR, SKIPPED, and UNKNOWN. A TestCaseFilter can have one status.
+	// A keyword that is used to filter on the name or the prefix of the test cases.
+	// Only test cases where the keyword is a substring of the name or the prefix will
+	// be returned.
+	Keyword *string
+
+	// The status used to filter test cases. A TestCaseFilter can have one status.
+	// Valid values are:
+	//
+	//     * SUCCEEDED
+	//
+	//     * FAILED
+	//
+	//     * ERROR
+	//
+	//     * SKIPPED
+	//
+	//
+	// * UNKNOWN
 	Status *string
 }
 

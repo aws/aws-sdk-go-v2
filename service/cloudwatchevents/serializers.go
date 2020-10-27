@@ -1543,6 +1543,18 @@ func awsAwsjson11_serializeDocumentCondition(v *types.Condition, value smithyjso
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentDeadLetterConfig(v *types.DeadLetterConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arn != nil {
+		ok := object.Key("Arn")
+		ok.String(*v.Arn)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentEcsParameters(v *types.EcsParameters, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1822,6 +1834,60 @@ func awsAwsjson11_serializeDocumentQueryStringParametersMap(v map[string]*string
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentRedshiftDataParameters(v *types.RedshiftDataParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Database != nil {
+		ok := object.Key("Database")
+		ok.String(*v.Database)
+	}
+
+	if v.DbUser != nil {
+		ok := object.Key("DbUser")
+		ok.String(*v.DbUser)
+	}
+
+	if v.SecretManagerArn != nil {
+		ok := object.Key("SecretManagerArn")
+		ok.String(*v.SecretManagerArn)
+	}
+
+	if v.Sql != nil {
+		ok := object.Key("Sql")
+		ok.String(*v.Sql)
+	}
+
+	if v.StatementName != nil {
+		ok := object.Key("StatementName")
+		ok.String(*v.StatementName)
+	}
+
+	if v.WithEvent != nil {
+		ok := object.Key("WithEvent")
+		ok.Boolean(*v.WithEvent)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRetryPolicy(v *types.RetryPolicy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaximumEventAgeInSeconds != nil {
+		ok := object.Key("MaximumEventAgeInSeconds")
+		ok.Integer(*v.MaximumEventAgeInSeconds)
+	}
+
+	if v.MaximumRetryAttempts != nil {
+		ok := object.Key("MaximumRetryAttempts")
+		ok.Integer(*v.MaximumRetryAttempts)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentRunCommandParameters(v *types.RunCommandParameters, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1979,6 +2045,13 @@ func awsAwsjson11_serializeDocumentTarget(v *types.Target, value smithyjson.Valu
 		}
 	}
 
+	if v.DeadLetterConfig != nil {
+		ok := object.Key("DeadLetterConfig")
+		if err := awsAwsjson11_serializeDocumentDeadLetterConfig(v.DeadLetterConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.EcsParameters != nil {
 		ok := object.Key("EcsParameters")
 		if err := awsAwsjson11_serializeDocumentEcsParameters(v.EcsParameters, ok); err != nil {
@@ -2018,6 +2091,20 @@ func awsAwsjson11_serializeDocumentTarget(v *types.Target, value smithyjson.Valu
 	if v.KinesisParameters != nil {
 		ok := object.Key("KinesisParameters")
 		if err := awsAwsjson11_serializeDocumentKinesisParameters(v.KinesisParameters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RedshiftDataParameters != nil {
+		ok := object.Key("RedshiftDataParameters")
+		if err := awsAwsjson11_serializeDocumentRedshiftDataParameters(v.RedshiftDataParameters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RetryPolicy != nil {
+		ok := object.Key("RetryPolicy")
+		if err := awsAwsjson11_serializeDocumentRetryPolicy(v.RetryPolicy, ok); err != nil {
 			return err
 		}
 	}

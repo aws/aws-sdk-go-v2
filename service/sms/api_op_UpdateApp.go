@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Updates an application.
+// Updates the specified application.
 func (c *Client) UpdateApp(ctx context.Context, params *UpdateAppInput, optFns ...func(*Options)) (*UpdateAppOutput, error) {
 	if params == nil {
 		params = &UpdateAppInput{}
@@ -29,34 +29,34 @@ func (c *Client) UpdateApp(ctx context.Context, params *UpdateAppInput, optFns .
 
 type UpdateAppInput struct {
 
-	// ID of the application to update.
+	// The ID of the application.
 	AppId *string
 
-	// New description of the application.
+	// The new description of the application.
 	Description *string
 
-	// New name of the application.
+	// The new name of the application.
 	Name *string
 
-	// Name of the service role in the customer's account used by AWS SMS.
+	// The name of the service role in the customer's account used by AWS SMS.
 	RoleName *string
 
-	// List of server groups in the application to update.
+	// The server groups in the application to update.
 	ServerGroups []*types.ServerGroup
 
-	// List of tags to associate with the application.
+	// The tags to associate with the application.
 	Tags []*types.Tag
 }
 
 type UpdateAppOutput struct {
 
-	// Summary description of the application.
+	// A summary description of the application.
 	AppSummary *types.AppSummary
 
-	// List of updated server groups in the application.
+	// The updated server groups in the application.
 	ServerGroups []*types.ServerGroup
 
-	// List of tags associated with the application.
+	// The tags associated with the application.
 	Tags []*types.Tag
 
 	// Metadata pertaining to the operation's result.

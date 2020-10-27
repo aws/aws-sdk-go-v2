@@ -11,7 +11,11 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Creates a user account for the specified Amazon Connect instance.
+// Creates a user account for the specified Amazon Connect instance. For
+// information about how to create user accounts using the Amazon Connect console,
+// see Add Users
+// (https://docs.aws.amazon.com/connect/latest/adminguide/user-management.html) in
+// the Amazon Connect Administrator Guide.
 func (c *Client) CreateUser(ctx context.Context, params *CreateUserInput, optFns ...func(*Options)) (*CreateUserOutput, error) {
 	if params == nil {
 		params = &CreateUserInput{}

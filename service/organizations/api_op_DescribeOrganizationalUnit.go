@@ -12,8 +12,8 @@ import (
 )
 
 // Retrieves information about an organizational unit (OU). This operation can be
-// called only from the organization's master account or by a member account that
-// is a delegated administrator for an AWS service.
+// called only from the organization's management account or by a member account
+// that is a delegated administrator for an AWS service.
 func (c *Client) DescribeOrganizationalUnit(ctx context.Context, params *DescribeOrganizationalUnitInput, optFns ...func(*Options)) (*DescribeOrganizationalUnitOutput, error) {
 	if params == nil {
 		params = &DescribeOrganizationalUnitInput{}

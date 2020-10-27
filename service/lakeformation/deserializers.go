@@ -2293,6 +2293,42 @@ func awsAwsjson11_deserializeDocumentDataLocationResource(v **types.DataLocation
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentDetailsMap(v **types.DetailsMap, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DetailsMap
+	if *v == nil {
+		sv = &types.DetailsMap{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ResourceShare":
+			if err := awsAwsjson11_deserializeDocumentResourceShareList(&sv.ResourceShare, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentEntityNotFoundException(v **types.EntityNotFoundException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2633,6 +2669,11 @@ func awsAwsjson11_deserializeDocumentPrincipalResourcePermissions(v **types.Prin
 
 	for key, value := range shape {
 		switch key {
+		case "AdditionalDetails":
+			if err := awsAwsjson11_deserializeDocumentDetailsMap(&sv.AdditionalDetails, value); err != nil {
+				return err
+			}
+
 		case "Permissions":
 			if err := awsAwsjson11_deserializeDocumentPermissionList(&sv.Permissions, value); err != nil {
 				return err
@@ -2836,6 +2877,42 @@ func awsAwsjson11_deserializeDocumentResourceInfoList(v *[]*types.ResourceInfo, 
 		var col *types.ResourceInfo
 		if err := awsAwsjson11_deserializeDocumentResourceInfo(&col, value); err != nil {
 			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentResourceShareList(v *[]*string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*string
+	if *v == nil {
+		cv = []*string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected RAMResourceShareArn to be of type string, got %T instead", value)
+			}
+			col = &jtv
 		}
 		cv = append(cv, col)
 

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Enables or disables an Availability Zone group for your account. Use
-// DescribeAvailabilityZones
+// Changes the opt-in status of the Local Zone and Wavelength Zone group for your
+// account. Use  DescribeAvailabilityZones
 // (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html)
 // to view the value for GroupName.
 func (c *Client) ModifyAvailabilityZoneGroup(ctx context.Context, params *ModifyAvailabilityZoneGroupInput, optFns ...func(*Options)) (*ModifyAvailabilityZoneGroupOutput, error) {
@@ -32,15 +32,16 @@ func (c *Client) ModifyAvailabilityZoneGroup(ctx context.Context, params *Modify
 
 type ModifyAvailabilityZoneGroupInput struct {
 
-	// The name of the Availability Zone Group.
+	// The name of the Availability Zone group, Local Zone group, or Wavelength Zone
+	// group.
 	//
 	// This member is required.
 	GroupName *string
 
-	// Indicates whether to enable or disable membership. The valid values are
-	// opted-in. You must contact AWS Support
+	// Indicates whether you are opted in to the Local Zone group or Wavelength Zone
+	// group. The only valid value is opted-in. You must contact AWS Support
 	// (https://console.aws.amazon.com/support/home#/case/create%3FissueType=customer-service%26serviceCode=general-info%26getting-started%26categoryCode=using-aws%26services)
-	// to disable an Availability Zone group.
+	// to opt out of a Local Zone group, or Wavelength Zone group.
 	//
 	// This member is required.
 	OptInStatus types.ModifyAvailabilityZoneOptInStatus

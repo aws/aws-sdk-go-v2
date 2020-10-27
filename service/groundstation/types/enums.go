@@ -10,6 +10,16 @@ const (
 	AngleUnitsRadian       AngleUnits = "RADIAN"
 )
 
+// Values returns all known values for AngleUnits. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AngleUnits) Values() []AngleUnits {
+	return []AngleUnits{
+		"DEGREE_ANGLE",
+		"RADIAN",
+	}
+}
+
 type BandwidthUnits string
 
 // Enum values for BandwidthUnits
@@ -18,6 +28,17 @@ const (
 	BandwidthUnitsMhz BandwidthUnits = "MHz"
 	BandwidthUnitsKhz BandwidthUnits = "kHz"
 )
+
+// Values returns all known values for BandwidthUnits. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BandwidthUnits) Values() []BandwidthUnits {
+	return []BandwidthUnits{
+		"GHz",
+		"MHz",
+		"kHz",
+	}
+}
 
 type ConfigCapabilityType string
 
@@ -30,6 +51,20 @@ const (
 	ConfigCapabilityTypeAntenna_uplink                ConfigCapabilityType = "antenna-uplink"
 	ConfigCapabilityTypeUplink_echo                   ConfigCapabilityType = "uplink-echo"
 )
+
+// Values returns all known values for ConfigCapabilityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConfigCapabilityType) Values() []ConfigCapabilityType {
+	return []ConfigCapabilityType{
+		"antenna-downlink",
+		"antenna-downlink-demod-decode",
+		"tracking",
+		"dataflow-endpoint",
+		"antenna-uplink",
+		"uplink-echo",
+	}
+}
 
 type ContactStatus string
 
@@ -49,6 +84,26 @@ const (
 	ContactStatusCancelling         ContactStatus = "CANCELLING"
 )
 
+// Values returns all known values for ContactStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ContactStatus) Values() []ContactStatus {
+	return []ContactStatus{
+		"SCHEDULING",
+		"FAILED_TO_SCHEDULE",
+		"SCHEDULED",
+		"CANCELLED",
+		"AWS_CANCELLED",
+		"PREPASS",
+		"PASS",
+		"POSTPASS",
+		"COMPLETED",
+		"FAILED",
+		"AVAILABLE",
+		"CANCELLING",
+	}
+}
+
 type Criticality string
 
 // Enum values for Criticality
@@ -58,12 +113,32 @@ const (
 	CriticalityRemoved   Criticality = "REMOVED"
 )
 
+// Values returns all known values for Criticality. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Criticality) Values() []Criticality {
+	return []Criticality{
+		"REQUIRED",
+		"PREFERRED",
+		"REMOVED",
+	}
+}
+
 type EirpUnits string
 
 // Enum values for EirpUnits
 const (
 	EirpUnitsDbw EirpUnits = "dBW"
 )
+
+// Values returns all known values for EirpUnits. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (EirpUnits) Values() []EirpUnits {
+	return []EirpUnits{
+		"dBW",
+	}
+}
 
 type EndpointStatus string
 
@@ -76,6 +151,19 @@ const (
 	EndpointStatusFailed   EndpointStatus = "failed"
 )
 
+// Values returns all known values for EndpointStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EndpointStatus) Values() []EndpointStatus {
+	return []EndpointStatus{
+		"created",
+		"creating",
+		"deleted",
+		"deleting",
+		"failed",
+	}
+}
+
 type FrequencyUnits string
 
 // Enum values for FrequencyUnits
@@ -85,6 +173,17 @@ const (
 	FrequencyUnitsKhz FrequencyUnits = "kHz"
 )
 
+// Values returns all known values for FrequencyUnits. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FrequencyUnits) Values() []FrequencyUnits {
+	return []FrequencyUnits{
+		"GHz",
+		"MHz",
+		"kHz",
+	}
+}
+
 type Polarization string
 
 // Enum values for Polarization
@@ -93,3 +192,14 @@ const (
 	PolarizationLeft_hand  Polarization = "LEFT_HAND"
 	PolarizationNone       Polarization = "NONE"
 )
+
+// Values returns all known values for Polarization. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Polarization) Values() []Polarization {
+	return []Polarization{
+		"RIGHT_HAND",
+		"LEFT_HAND",
+		"NONE",
+	}
+}

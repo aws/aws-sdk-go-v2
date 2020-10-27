@@ -24,7 +24,7 @@ import (
 // few minutes, it means that your agent might be having trouble mounting the
 // source NFS file system. Check the task's ErrorCode and ErrorDetail. Mount issues
 // are often caused by either a misconfigured firewall or a mistyped NFS server
-// host name.
+// hostname.
 func (c *Client) CreateTask(ctx context.Context, params *CreateTaskInput, optFns ...func(*Options)) (*CreateTaskOutput, error) {
 	if params == nil {
 		params = &CreateTaskInput{}

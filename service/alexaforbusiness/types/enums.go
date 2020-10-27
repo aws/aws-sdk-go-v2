@@ -11,6 +11,17 @@ const (
 	BusinessReportFailureCodeInternal_failure BusinessReportFailureCode = "INTERNAL_FAILURE"
 )
 
+// Values returns all known values for BusinessReportFailureCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BusinessReportFailureCode) Values() []BusinessReportFailureCode {
+	return []BusinessReportFailureCode{
+		"ACCESS_DENIED",
+		"NO_SUCH_BUCKET",
+		"INTERNAL_FAILURE",
+	}
+}
+
 type BusinessReportFormat string
 
 // Enum values for BusinessReportFormat
@@ -18,6 +29,16 @@ const (
 	BusinessReportFormatCsv     BusinessReportFormat = "CSV"
 	BusinessReportFormatCsv_zip BusinessReportFormat = "CSV_ZIP"
 )
+
+// Values returns all known values for BusinessReportFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BusinessReportFormat) Values() []BusinessReportFormat {
+	return []BusinessReportFormat{
+		"CSV",
+		"CSV_ZIP",
+	}
+}
 
 type BusinessReportInterval string
 
@@ -28,6 +49,17 @@ const (
 	BusinessReportIntervalThirty_days BusinessReportInterval = "THIRTY_DAYS"
 )
 
+// Values returns all known values for BusinessReportInterval. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BusinessReportInterval) Values() []BusinessReportInterval {
+	return []BusinessReportInterval{
+		"ONE_DAY",
+		"ONE_WEEK",
+		"THIRTY_DAYS",
+	}
+}
+
 type BusinessReportStatus string
 
 // Enum values for BusinessReportStatus
@@ -37,6 +69,17 @@ const (
 	BusinessReportStatusFailed    BusinessReportStatus = "FAILED"
 )
 
+// Values returns all known values for BusinessReportStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BusinessReportStatus) Values() []BusinessReportStatus {
+	return []BusinessReportStatus{
+		"RUNNING",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
 type CommsProtocol string
 
 // Enum values for CommsProtocol
@@ -45,6 +88,17 @@ const (
 	CommsProtocolSips CommsProtocol = "SIPS"
 	CommsProtocolH323 CommsProtocol = "H323"
 )
+
+// Values returns all known values for CommsProtocol. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CommsProtocol) Values() []CommsProtocol {
+	return []CommsProtocol{
+		"SIP",
+		"SIPS",
+		"H323",
+	}
+}
 
 type ConferenceProviderType string
 
@@ -62,6 +116,24 @@ const (
 	ConferenceProviderTypeCustom             ConferenceProviderType = "CUSTOM"
 )
 
+// Values returns all known values for ConferenceProviderType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConferenceProviderType) Values() []ConferenceProviderType {
+	return []ConferenceProviderType{
+		"CHIME",
+		"BLUEJEANS",
+		"FUZE",
+		"GOOGLE_HANGOUTS",
+		"POLYCOM",
+		"RINGCENTRAL",
+		"SKYPE_FOR_BUSINESS",
+		"WEBEX",
+		"ZOOM",
+		"CUSTOM",
+	}
+}
+
 type ConnectionStatus string
 
 // Enum values for ConnectionStatus
@@ -70,6 +142,16 @@ const (
 	ConnectionStatusOffline ConnectionStatus = "OFFLINE"
 )
 
+// Values returns all known values for ConnectionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionStatus) Values() []ConnectionStatus {
+	return []ConnectionStatus{
+		"ONLINE",
+		"OFFLINE",
+	}
+}
+
 type DeviceEventType string
 
 // Enum values for DeviceEventType
@@ -77,6 +159,16 @@ const (
 	DeviceEventTypeConnection_status DeviceEventType = "CONNECTION_STATUS"
 	DeviceEventTypeDevice_status     DeviceEventType = "DEVICE_STATUS"
 )
+
+// Values returns all known values for DeviceEventType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeviceEventType) Values() []DeviceEventType {
+	return []DeviceEventType{
+		"CONNECTION_STATUS",
+		"DEVICE_STATUS",
+	}
+}
 
 type DeviceStatus string
 
@@ -88,6 +180,19 @@ const (
 	DeviceStatusDeregistered DeviceStatus = "DEREGISTERED"
 	DeviceStatusFailed       DeviceStatus = "FAILED"
 )
+
+// Values returns all known values for DeviceStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DeviceStatus) Values() []DeviceStatus {
+	return []DeviceStatus{
+		"READY",
+		"PENDING",
+		"WAS_OFFLINE",
+		"DEREGISTERED",
+		"FAILED",
+	}
+}
 
 type DeviceStatusDetailCode string
 
@@ -112,12 +217,46 @@ const (
 	DeviceStatusDetailCodeCertificate_authority_access_denied DeviceStatusDetailCode = "CERTIFICATE_AUTHORITY_ACCESS_DENIED"
 )
 
+// Values returns all known values for DeviceStatusDetailCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeviceStatusDetailCode) Values() []DeviceStatusDetailCode {
+	return []DeviceStatusDetailCode{
+		"DEVICE_SOFTWARE_UPDATE_NEEDED",
+		"DEVICE_WAS_OFFLINE",
+		"CREDENTIALS_ACCESS_FAILURE",
+		"TLS_VERSION_MISMATCH",
+		"ASSOCIATION_REJECTION",
+		"AUTHENTICATION_FAILURE",
+		"DHCP_FAILURE",
+		"INTERNET_UNAVAILABLE",
+		"DNS_FAILURE",
+		"UNKNOWN_FAILURE",
+		"CERTIFICATE_ISSUING_LIMIT_EXCEEDED",
+		"INVALID_CERTIFICATE_AUTHORITY",
+		"NETWORK_PROFILE_NOT_FOUND",
+		"INVALID_PASSWORD_STATE",
+		"PASSWORD_NOT_FOUND",
+		"PASSWORD_MANAGER_ACCESS_DENIED",
+		"CERTIFICATE_AUTHORITY_ACCESS_DENIED",
+	}
+}
+
 type DeviceUsageType string
 
 // Enum values for DeviceUsageType
 const (
 	DeviceUsageTypeVoice DeviceUsageType = "VOICE"
 )
+
+// Values returns all known values for DeviceUsageType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeviceUsageType) Values() []DeviceUsageType {
+	return []DeviceUsageType{
+		"VOICE",
+	}
+}
 
 type DistanceUnit string
 
@@ -127,6 +266,16 @@ const (
 	DistanceUnitImperial DistanceUnit = "IMPERIAL"
 )
 
+// Values returns all known values for DistanceUnit. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DistanceUnit) Values() []DistanceUnit {
+	return []DistanceUnit{
+		"METRIC",
+		"IMPERIAL",
+	}
+}
+
 type EnablementType string
 
 // Enum values for EnablementType
@@ -135,6 +284,16 @@ const (
 	EnablementTypePending EnablementType = "PENDING"
 )
 
+// Values returns all known values for EnablementType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EnablementType) Values() []EnablementType {
+	return []EnablementType{
+		"ENABLED",
+		"PENDING",
+	}
+}
+
 type EnablementTypeFilter string
 
 // Enum values for EnablementTypeFilter
@@ -142,6 +301,16 @@ const (
 	EnablementTypeFilterEnabled EnablementTypeFilter = "ENABLED"
 	EnablementTypeFilterPending EnablementTypeFilter = "PENDING"
 )
+
+// Values returns all known values for EnablementTypeFilter. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EnablementTypeFilter) Values() []EnablementTypeFilter {
+	return []EnablementTypeFilter{
+		"ENABLED",
+		"PENDING",
+	}
+}
 
 type EndOfMeetingReminderType string
 
@@ -153,6 +322,18 @@ const (
 	EndOfMeetingReminderTypeKnock                           EndOfMeetingReminderType = "KNOCK"
 )
 
+// Values returns all known values for EndOfMeetingReminderType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EndOfMeetingReminderType) Values() []EndOfMeetingReminderType {
+	return []EndOfMeetingReminderType{
+		"ANNOUNCEMENT_TIME_CHECK",
+		"ANNOUNCEMENT_VARIABLE_TIME_LEFT",
+		"CHIME",
+		"KNOCK",
+	}
+}
+
 type EnrollmentStatus string
 
 // Enum values for EnrollmentStatus
@@ -163,6 +344,19 @@ const (
 	EnrollmentStatusDisassociating EnrollmentStatus = "DISASSOCIATING"
 	EnrollmentStatusDeregistering  EnrollmentStatus = "DEREGISTERING"
 )
+
+// Values returns all known values for EnrollmentStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EnrollmentStatus) Values() []EnrollmentStatus {
+	return []EnrollmentStatus{
+		"INITIALIZED",
+		"PENDING",
+		"REGISTERED",
+		"DISASSOCIATING",
+		"DEREGISTERING",
+	}
+}
 
 type Feature string
 
@@ -178,6 +372,22 @@ const (
 	FeatureAll             Feature = "ALL"
 )
 
+// Values returns all known values for Feature. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Feature) Values() []Feature {
+	return []Feature{
+		"BLUETOOTH",
+		"VOLUME",
+		"NOTIFICATIONS",
+		"LISTS",
+		"SKILLS",
+		"NETWORK_PROFILE",
+		"SETTINGS",
+		"ALL",
+	}
+}
+
 type Locale string
 
 // Enum values for Locale
@@ -185,12 +395,30 @@ const (
 	LocaleEn_us Locale = "en-US"
 )
 
+// Values returns all known values for Locale. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Locale) Values() []Locale {
+	return []Locale{
+		"en-US",
+	}
+}
+
 type NetworkEapMethod string
 
 // Enum values for NetworkEapMethod
 const (
 	NetworkEapMethodEap_tls NetworkEapMethod = "EAP_TLS"
 )
+
+// Values returns all known values for NetworkEapMethod. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NetworkEapMethod) Values() []NetworkEapMethod {
+	return []NetworkEapMethod{
+		"EAP_TLS",
+	}
+}
 
 type NetworkSecurityType string
 
@@ -203,6 +431,19 @@ const (
 	NetworkSecurityTypeWpa2_enterprise NetworkSecurityType = "WPA2_ENTERPRISE"
 )
 
+// Values returns all known values for NetworkSecurityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NetworkSecurityType) Values() []NetworkSecurityType {
+	return []NetworkSecurityType{
+		"OPEN",
+		"WEP",
+		"WPA_PSK",
+		"WPA2_PSK",
+		"WPA2_ENTERPRISE",
+	}
+}
+
 type PhoneNumberType string
 
 // Enum values for PhoneNumberType
@@ -211,6 +452,17 @@ const (
 	PhoneNumberTypeWork   PhoneNumberType = "WORK"
 	PhoneNumberTypeHome   PhoneNumberType = "HOME"
 )
+
+// Values returns all known values for PhoneNumberType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PhoneNumberType) Values() []PhoneNumberType {
+	return []PhoneNumberType{
+		"MOBILE",
+		"WORK",
+		"HOME",
+	}
+}
 
 type RequirePin string
 
@@ -221,12 +473,32 @@ const (
 	RequirePinOptional RequirePin = "OPTIONAL"
 )
 
+// Values returns all known values for RequirePin. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (RequirePin) Values() []RequirePin {
+	return []RequirePin{
+		"YES",
+		"NO",
+		"OPTIONAL",
+	}
+}
+
 type SipType string
 
 // Enum values for SipType
 const (
 	SipTypeWork SipType = "WORK"
 )
+
+// Values returns all known values for SipType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (SipType) Values() []SipType {
+	return []SipType{
+		"WORK",
+	}
+}
 
 type SkillType string
 
@@ -235,6 +507,16 @@ const (
 	SkillTypePublic  SkillType = "PUBLIC"
 	SkillTypePrivate SkillType = "PRIVATE"
 )
+
+// Values returns all known values for SkillType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (SkillType) Values() []SkillType {
+	return []SkillType{
+		"PUBLIC",
+		"PRIVATE",
+	}
+}
 
 type SkillTypeFilter string
 
@@ -245,6 +527,17 @@ const (
 	SkillTypeFilterAll     SkillTypeFilter = "ALL"
 )
 
+// Values returns all known values for SkillTypeFilter. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SkillTypeFilter) Values() []SkillTypeFilter {
+	return []SkillTypeFilter{
+		"PUBLIC",
+		"PRIVATE",
+		"ALL",
+	}
+}
+
 type SortValue string
 
 // Enum values for SortValue
@@ -253,6 +546,16 @@ const (
 	SortValueDesc SortValue = "DESC"
 )
 
+// Values returns all known values for SortValue. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (SortValue) Values() []SortValue {
+	return []SortValue{
+		"ASC",
+		"DESC",
+	}
+}
+
 type TemperatureUnit string
 
 // Enum values for TemperatureUnit
@@ -260,6 +563,16 @@ const (
 	TemperatureUnitFahrenheit TemperatureUnit = "FAHRENHEIT"
 	TemperatureUnitCelsius    TemperatureUnit = "CELSIUS"
 )
+
+// Values returns all known values for TemperatureUnit. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TemperatureUnit) Values() []TemperatureUnit {
+	return []TemperatureUnit{
+		"FAHRENHEIT",
+		"CELSIUS",
+	}
+}
 
 type WakeWord string
 
@@ -270,3 +583,15 @@ const (
 	WakeWordEcho     WakeWord = "ECHO"
 	WakeWordComputer WakeWord = "COMPUTER"
 )
+
+// Values returns all known values for WakeWord. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (WakeWord) Values() []WakeWord {
+	return []WakeWord{
+		"ALEXA",
+		"AMAZON",
+		"ECHO",
+		"COMPUTER",
+	}
+}

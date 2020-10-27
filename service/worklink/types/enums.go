@@ -9,6 +9,15 @@ const (
 	AuthorizationProviderTypeSaml AuthorizationProviderType = "SAML"
 )
 
+// Values returns all known values for AuthorizationProviderType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AuthorizationProviderType) Values() []AuthorizationProviderType {
+	return []AuthorizationProviderType{
+		"SAML",
+	}
+}
+
 type DeviceStatus string
 
 // Enum values for DeviceStatus
@@ -16,6 +25,16 @@ const (
 	DeviceStatusActive     DeviceStatus = "ACTIVE"
 	DeviceStatusSigned_out DeviceStatus = "SIGNED_OUT"
 )
+
+// Values returns all known values for DeviceStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DeviceStatus) Values() []DeviceStatus {
+	return []DeviceStatus{
+		"ACTIVE",
+		"SIGNED_OUT",
+	}
+}
 
 type DomainStatus string
 
@@ -31,6 +50,22 @@ const (
 	DomainStatusFailed_to_disassociate DomainStatus = "FAILED_TO_DISASSOCIATE"
 )
 
+// Values returns all known values for DomainStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DomainStatus) Values() []DomainStatus {
+	return []DomainStatus{
+		"PENDING_VALIDATION",
+		"ASSOCIATING",
+		"ACTIVE",
+		"INACTIVE",
+		"DISASSOCIATING",
+		"DISASSOCIATED",
+		"FAILED_TO_ASSOCIATE",
+		"FAILED_TO_DISASSOCIATE",
+	}
+}
+
 type FleetStatus string
 
 // Enum values for FleetStatus
@@ -43,9 +78,32 @@ const (
 	FleetStatusFailed_to_delete FleetStatus = "FAILED_TO_DELETE"
 )
 
+// Values returns all known values for FleetStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (FleetStatus) Values() []FleetStatus {
+	return []FleetStatus{
+		"CREATING",
+		"ACTIVE",
+		"DELETING",
+		"DELETED",
+		"FAILED_TO_CREATE",
+		"FAILED_TO_DELETE",
+	}
+}
+
 type IdentityProviderType string
 
 // Enum values for IdentityProviderType
 const (
 	IdentityProviderTypeSaml IdentityProviderType = "SAML"
 )
+
+// Values returns all known values for IdentityProviderType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IdentityProviderType) Values() []IdentityProviderType {
+	return []IdentityProviderType{
+		"SAML",
+	}
+}

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes an Amazon CloudWatch log stream from an Amazon Kinesis Data Analytics
+// Deletes an Amazon CloudWatch log stream from an Kinesis Data Analytics
 // application.
 func (c *Client) DeleteApplicationCloudWatchLoggingOption(ctx context.Context, params *DeleteApplicationCloudWatchLoggingOptionInput, optFns ...func(*Options)) (*DeleteApplicationCloudWatchLoggingOptionOutput, error) {
 	if params == nil {

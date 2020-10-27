@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes the output destination configuration from your SQL-based Amazon Kinesis
-// Data Analytics application's configuration. Kinesis Data Analytics will no
-// longer write data from the corresponding in-application stream to the external
-// output destination.
+// Deletes the output destination configuration from your SQL-based Kinesis Data
+// Analytics application's configuration. Kinesis Data Analytics will no longer
+// write data from the corresponding in-application stream to the external output
+// destination.
 func (c *Client) DeleteApplicationOutput(ctx context.Context, params *DeleteApplicationOutputInput, optFns ...func(*Options)) (*DeleteApplicationOutputOutput, error) {
 	if params == nil {
 		params = &DeleteApplicationOutputInput{}

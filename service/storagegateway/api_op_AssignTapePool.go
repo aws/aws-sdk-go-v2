@@ -46,6 +46,14 @@ type AssignTapePoolInput struct {
 	//
 	// This member is required.
 	TapeARN *string
+
+	// Set permissions to bypass governance retention. If the lock type of the archived
+	// tape is Governance, the tape's archived age is not older than
+	// RetentionLockInDays, and the user does not already have
+	// BypassGovernanceRetention, setting this to TRUE enables the user to bypass the
+	// retention lock. This parameter is set to true by default for calls from the
+	// console. Valid values: TRUE | FALSE
+	BypassGovernanceRetention *bool
 }
 
 type AssignTapePoolOutput struct {

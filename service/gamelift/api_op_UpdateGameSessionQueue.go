@@ -42,7 +42,7 @@ func (c *Client) UpdateGameSessionQueue(ctx context.Context, params *UpdateGameS
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type UpdateGameSessionQueueInput struct {
 
 	// A descriptive label that is associated with game session queue. Queue names must
@@ -74,7 +74,7 @@ type UpdateGameSessionQueueInput struct {
 	TimeoutInSeconds *int32
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type UpdateGameSessionQueueOutput struct {
 
 	// An object that describes the newly updated game session queue.

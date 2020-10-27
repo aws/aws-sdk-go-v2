@@ -14,6 +14,52 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
+type awsAwsjson11_serializeOpCreateLanguageModel struct {
+}
+
+func (*awsAwsjson11_serializeOpCreateLanguageModel) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreateLanguageModel) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateLanguageModelInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Transcribe.CreateLanguageModel")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateLanguageModelInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpCreateMedicalVocabulary struct {
 }
 
@@ -137,6 +183,52 @@ func (m *awsAwsjson11_serializeOpCreateVocabularyFilter) HandleSerialize(ctx con
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentCreateVocabularyFilterInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDeleteLanguageModel struct {
+}
+
+func (*awsAwsjson11_serializeOpDeleteLanguageModel) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeleteLanguageModel) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteLanguageModelInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Transcribe.DeleteLanguageModel")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeleteLanguageModelInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -382,6 +474,52 @@ func (m *awsAwsjson11_serializeOpDeleteVocabularyFilter) HandleSerialize(ctx con
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpDescribeLanguageModel struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribeLanguageModel) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribeLanguageModel) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeLanguageModelInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Transcribe.DescribeLanguageModel")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeLanguageModelInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpGetMedicalTranscriptionJob struct {
 }
 
@@ -597,6 +735,52 @@ func (m *awsAwsjson11_serializeOpGetVocabularyFilter) HandleSerialize(ctx contex
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentGetVocabularyFilterInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpListLanguageModels struct {
+}
+
+func (*awsAwsjson11_serializeOpListLanguageModels) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListLanguageModels) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListLanguageModelsInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Transcribe.ListLanguageModels")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListLanguageModelsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1088,6 +1272,28 @@ func awsAwsjson11_serializeDocumentContentRedaction(v *types.ContentRedaction, v
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentInputDataConfig(v *types.InputDataConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DataAccessRoleArn != nil {
+		ok := object.Key("DataAccessRoleArn")
+		ok.String(*v.DataAccessRoleArn)
+	}
+
+	if v.S3Uri != nil {
+		ok := object.Key("S3Uri")
+		ok.String(*v.S3Uri)
+	}
+
+	if v.TuningDataS3Uri != nil {
+		ok := object.Key("TuningDataS3Uri")
+		ok.String(*v.TuningDataS3Uri)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentJobExecutionSettings(v *types.JobExecutionSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1102,6 +1308,17 @@ func awsAwsjson11_serializeDocumentJobExecutionSettings(v *types.JobExecutionSet
 		ok.String(*v.DataAccessRoleArn)
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentLanguageOptions(v []types.LanguageCode, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 
@@ -1149,6 +1366,18 @@ func awsAwsjson11_serializeDocumentMedicalTranscriptionSetting(v *types.MedicalT
 	if v.VocabularyName != nil {
 		ok := object.Key("VocabularyName")
 		ok.String(*v.VocabularyName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentModelSettings(v *types.ModelSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LanguageModelName != nil {
+		ok := object.Key("LanguageModelName")
+		ok.String(*v.LanguageModelName)
 	}
 
 	return nil
@@ -1228,6 +1457,35 @@ func awsAwsjson11_serializeDocumentWords(v []*string, value smithyjson.Value) er
 		}
 		av.String(*v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentCreateLanguageModelInput(v *CreateLanguageModelInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.BaseModelName) > 0 {
+		ok := object.Key("BaseModelName")
+		ok.String(string(v.BaseModelName))
+	}
+
+	if v.InputDataConfig != nil {
+		ok := object.Key("InputDataConfig")
+		if err := awsAwsjson11_serializeDocumentInputDataConfig(v.InputDataConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.LanguageCode) > 0 {
+		ok := object.Key("LanguageCode")
+		ok.String(string(v.LanguageCode))
+	}
+
+	if v.ModelName != nil {
+		ok := object.Key("ModelName")
+		ok.String(*v.ModelName)
+	}
+
 	return nil
 }
 
@@ -1311,6 +1569,18 @@ func awsAwsjson11_serializeOpDocumentCreateVocabularyInput(v *CreateVocabularyIn
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDeleteLanguageModelInput(v *DeleteLanguageModelInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ModelName != nil {
+		ok := object.Key("ModelName")
+		ok.String(*v.ModelName)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentDeleteMedicalTranscriptionJobInput(v *DeleteMedicalTranscriptionJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1371,6 +1641,18 @@ func awsAwsjson11_serializeOpDocumentDeleteVocabularyInput(v *DeleteVocabularyIn
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDescribeLanguageModelInput(v *DescribeLanguageModelInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ModelName != nil {
+		ok := object.Key("ModelName")
+		ok.String(*v.ModelName)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentGetMedicalTranscriptionJobInput(v *GetMedicalTranscriptionJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1426,6 +1708,33 @@ func awsAwsjson11_serializeOpDocumentGetVocabularyInput(v *GetVocabularyInput, v
 	if v.VocabularyName != nil {
 		ok := object.Key("VocabularyName")
 		ok.String(*v.VocabularyName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListLanguageModelsInput(v *ListLanguageModelsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NameContains != nil {
+		ok := object.Key("NameContains")
+		ok.String(*v.NameContains)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if len(v.StatusEquals) > 0 {
+		ok := object.Key("StatusEquals")
+		ok.String(string(v.StatusEquals))
 	}
 
 	return nil
@@ -1602,6 +1911,11 @@ func awsAwsjson11_serializeOpDocumentStartMedicalTranscriptionJobInput(v *StartM
 		ok.String(*v.OutputEncryptionKMSKeyId)
 	}
 
+	if v.OutputKey != nil {
+		ok := object.Key("OutputKey")
+		ok.String(*v.OutputKey)
+	}
+
 	if v.Settings != nil {
 		ok := object.Key("Settings")
 		if err := awsAwsjson11_serializeDocumentMedicalTranscriptionSetting(v.Settings, ok); err != nil {
@@ -1633,6 +1947,11 @@ func awsAwsjson11_serializeOpDocumentStartTranscriptionJobInput(v *StartTranscri
 		}
 	}
 
+	if v.IdentifyLanguage != nil {
+		ok := object.Key("IdentifyLanguage")
+		ok.Boolean(*v.IdentifyLanguage)
+	}
+
 	if v.JobExecutionSettings != nil {
 		ok := object.Key("JobExecutionSettings")
 		if err := awsAwsjson11_serializeDocumentJobExecutionSettings(v.JobExecutionSettings, ok); err != nil {
@@ -1643,6 +1962,13 @@ func awsAwsjson11_serializeOpDocumentStartTranscriptionJobInput(v *StartTranscri
 	if len(v.LanguageCode) > 0 {
 		ok := object.Key("LanguageCode")
 		ok.String(string(v.LanguageCode))
+	}
+
+	if v.LanguageOptions != nil {
+		ok := object.Key("LanguageOptions")
+		if err := awsAwsjson11_serializeDocumentLanguageOptions(v.LanguageOptions, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Media != nil {
@@ -1662,6 +1988,13 @@ func awsAwsjson11_serializeOpDocumentStartTranscriptionJobInput(v *StartTranscri
 		ok.Integer(*v.MediaSampleRateHertz)
 	}
 
+	if v.ModelSettings != nil {
+		ok := object.Key("ModelSettings")
+		if err := awsAwsjson11_serializeDocumentModelSettings(v.ModelSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.OutputBucketName != nil {
 		ok := object.Key("OutputBucketName")
 		ok.String(*v.OutputBucketName)
@@ -1670,6 +2003,11 @@ func awsAwsjson11_serializeOpDocumentStartTranscriptionJobInput(v *StartTranscri
 	if v.OutputEncryptionKMSKeyId != nil {
 		ok := object.Key("OutputEncryptionKMSKeyId")
 		ok.String(*v.OutputEncryptionKMSKeyId)
+	}
+
+	if v.OutputKey != nil {
+		ok := object.Key("OutputKey")
+		ok.String(*v.OutputKey)
 	}
 
 	if v.Settings != nil {

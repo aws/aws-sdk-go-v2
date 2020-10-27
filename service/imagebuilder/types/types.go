@@ -5,6 +5,9 @@ package types
 // Details of an EC2 AMI.
 type Ami struct {
 
+	// The account ID of the owner of the AMI.
+	AccountId *string
+
 	// The description of the EC2 AMI.
 	Description *string
 
@@ -39,6 +42,9 @@ type AmiDistributionConfiguration struct {
 
 	// The name of the distribution configuration.
 	Name *string
+
+	// The ID of an account to which you want to distribute an image.
+	TargetAccountIds []*string
 }
 
 // A detailed view of a component.
@@ -673,13 +679,20 @@ type Schedule struct {
 
 	// The condition configures when the pipeline should trigger a new image build.
 	// When the pipelineExecutionStartCondition is set to
-	// EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE, EC2 Image Builder will build
-	// a new image only when there are known changes pending. When it is set to
-	// EXPRESSION_MATCH_ONLY, it will build a new image every time the CRON expression
-	// matches the current time.
+	// EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE, and you use semantic version
+	// filters on the source image or components in your image recipe, EC2 Image
+	// Builder will build a new image only when there are new versions of the image or
+	// components in your recipe that match the semantic version filter. When it is set
+	// to EXPRESSION_MATCH_ONLY, it will build a new image every time the CRON
+	// expression matches the current time. For semantic version syntax, see
+	// CreateComponent
+	// (https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_CreateComponent.html)
+	// in the EC2 Image Builder API Reference.
 	PipelineExecutionStartCondition PipelineExecutionStartCondition
 
-	// The expression determines how often EC2 Image Builder evaluates your
-	// pipelineExecutionStartCondition.
+	// The cron expression determines how often EC2 Image Builder evaluates your
+	// pipelineExecutionStartCondition. For information on how to format a cron
+	// expression in Image Builder, see Use cron expressions in EC2 Image Builder
+	// (https://docs.aws.amazon.com/imagebuilder/latest/userguide/image-builder-cron.html).
 	ScheduleExpression *string
 }

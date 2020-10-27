@@ -62,8 +62,8 @@ type ImportInstallationMediaInput struct {
 	// versions, call DescribeDBEngineVersions. The following are the database engines
 	// and links to information about the major and minor versions. The list only
 	// includes DB engines that require an on-premises customer provided license.
-	// Microsoft SQL Server See Version and Feature Support on Amazon RDS
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.FeatureSupport)
+	// Microsoft SQL Server See  Microsoft SQL Server Versions on Amazon RDS
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport)
 	// in the Amazon RDS User Guide.
 	//
 	// This member is required.

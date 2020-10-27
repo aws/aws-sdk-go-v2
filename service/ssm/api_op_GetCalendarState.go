@@ -16,8 +16,11 @@ import (
 // calendar at a specific time, and returns the next time that the Change Calendar
 // state will transition. If you do not specify a time, GetCalendarState assumes
 // the current time. Change Calendar entries have two possible states: OPEN or
-// CLOSED. For more information about Systems Manager Change Calendar, see AWS
-// Systems Manager Change Calendar
+// CLOSED. If you specify more than one calendar in a request, the command returns
+// the status of OPEN only if all calendars in the request are open. If one or more
+// calendars in the request are closed, the status returned is CLOSED. For more
+// information about Systems Manager Change Calendar, see AWS Systems Manager
+// Change Calendar
 // (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar.html)
 // in the AWS Systems Manager User Guide.
 func (c *Client) GetCalendarState(ctx context.Context, params *GetCalendarStateInput, optFns ...func(*Options)) (*GetCalendarStateOutput, error) {

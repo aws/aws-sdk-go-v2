@@ -47,7 +47,7 @@ func (c *Client) DeleteVpcPeeringConnection(ctx context.Context, params *DeleteV
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type DeleteVpcPeeringConnectionInput struct {
 
 	// A unique identifier for a fleet. This fleet specified must match the fleet

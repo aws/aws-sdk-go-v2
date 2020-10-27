@@ -10,6 +10,16 @@ const (
 	ChannelLatencyModeLowlatency    ChannelLatencyMode = "LOW"
 )
 
+// Values returns all known values for ChannelLatencyMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ChannelLatencyMode) Values() []ChannelLatencyMode {
+	return []ChannelLatencyMode{
+		"NORMAL",
+		"LOW",
+	}
+}
+
 type ChannelType string
 
 // Enum values for ChannelType
@@ -17,6 +27,16 @@ const (
 	ChannelTypeBasicchanneltype    ChannelType = "BASIC"
 	ChannelTypeStandardchanneltype ChannelType = "STANDARD"
 )
+
+// Values returns all known values for ChannelType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ChannelType) Values() []ChannelType {
+	return []ChannelType{
+		"BASIC",
+		"STANDARD",
+	}
+}
 
 type StreamHealth string
 
@@ -27,6 +47,17 @@ const (
 	StreamHealthUnknown       StreamHealth = "UNKNOWN"
 )
 
+// Values returns all known values for StreamHealth. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (StreamHealth) Values() []StreamHealth {
+	return []StreamHealth{
+		"HEALTHY",
+		"STARVING",
+		"UNKNOWN",
+	}
+}
+
 type StreamState string
 
 // Enum values for StreamState
@@ -34,3 +65,13 @@ const (
 	StreamStateStreamlive    StreamState = "LIVE"
 	StreamStateStreamoffline StreamState = "OFFLINE"
 )
+
+// Values returns all known values for StreamState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (StreamState) Values() []StreamState {
+	return []StreamState{
+		"LIVE",
+		"OFFLINE",
+	}
+}

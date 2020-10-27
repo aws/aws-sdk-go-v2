@@ -12,7 +12,10 @@ import (
 )
 
 // Provides information about the hours of operation for the specified Amazon
-// Connect instance.
+// Connect instance. For more information about hours of operation, see Set the
+// Hours of Operation for a Queue
+// (https://docs.aws.amazon.com/connect/latest/adminguide/set-hours-operation.html)
+// in the Amazon Connect Administrator Guide.
 func (c *Client) ListHoursOfOperations(ctx context.Context, params *ListHoursOfOperationsInput, optFns ...func(*Options)) (*ListHoursOfOperationsOutput, error) {
 	if params == nil {
 		params = &ListHoursOfOperationsInput{}

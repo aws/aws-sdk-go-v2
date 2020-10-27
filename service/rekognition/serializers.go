@@ -842,6 +842,52 @@ func (m *awsAwsjson11_serializeOpDetectModerationLabels) HandleSerialize(ctx con
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpDetectProtectiveEquipment struct {
+}
+
+func (*awsAwsjson11_serializeOpDetectProtectiveEquipment) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDetectProtectiveEquipment) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DetectProtectiveEquipmentInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.DetectProtectiveEquipment")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDetectProtectiveEquipmentInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpDetectText struct {
 }
 
@@ -2459,6 +2505,36 @@ func awsAwsjson11_serializeDocumentOutputConfig(v *types.OutputConfig, value smi
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentProtectiveEquipmentSummarizationAttributes(v *types.ProtectiveEquipmentSummarizationAttributes, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MinConfidence != nil {
+		ok := object.Key("MinConfidence")
+		ok.Float(*v.MinConfidence)
+	}
+
+	if v.RequiredEquipmentTypes != nil {
+		ok := object.Key("RequiredEquipmentTypes")
+		if err := awsAwsjson11_serializeDocumentProtectiveEquipmentTypes(v.RequiredEquipmentTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentProtectiveEquipmentTypes(v []types.ProtectiveEquipmentType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentRegionOfInterest(v *types.RegionOfInterest, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3056,6 +3132,27 @@ func awsAwsjson11_serializeOpDocumentDetectModerationLabelsInput(v *DetectModera
 	if v.MinConfidence != nil {
 		ok := object.Key("MinConfidence")
 		ok.Float(*v.MinConfidence)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDetectProtectiveEquipmentInput(v *DetectProtectiveEquipmentInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Image != nil {
+		ok := object.Key("Image")
+		if err := awsAwsjson11_serializeDocumentImage(v.Image, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SummarizationAttributes != nil {
+		ok := object.Key("SummarizationAttributes")
+		if err := awsAwsjson11_serializeDocumentProtectiveEquipmentSummarizationAttributes(v.SummarizationAttributes, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

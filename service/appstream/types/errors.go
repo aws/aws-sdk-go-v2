@@ -133,6 +133,24 @@ func (e *OperationNotPermittedException) ErrorMessage() string {
 func (e *OperationNotPermittedException) ErrorCode() string             { return "OperationNotPermittedException" }
 func (e *OperationNotPermittedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// AppStream 2.0 can’t process the request right now because the Describe calls
+// from your AWS account are being throttled by Amazon EC2. Try again later.
+type RequestLimitExceededException struct {
+	Message *string
+}
+
+func (e *RequestLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *RequestLimitExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *RequestLimitExceededException) ErrorCode() string             { return "RequestLimitExceededException" }
+func (e *RequestLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The specified resource already exists.
 type ResourceAlreadyExistsException struct {
 	Message *string

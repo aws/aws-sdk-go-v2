@@ -18,3 +18,22 @@ const (
 	FormatContact    Format = "CONTACT"
 	FormatRowlink    Format = "ROWLINK"
 )
+
+// Values returns all known values for Format. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Format) Values() []Format {
+	return []Format{
+		"AUTO",
+		"NUMBER",
+		"CURRENCY",
+		"DATE",
+		"TIME",
+		"DATE_TIME",
+		"PERCENTAGE",
+		"TEXT",
+		"ACCOUNTING",
+		"CONTACT",
+		"ROWLINK",
+	}
+}

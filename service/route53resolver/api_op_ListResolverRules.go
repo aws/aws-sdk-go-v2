@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Lists the resolver rules that were created using the current AWS account.
+// Lists the Resolver rules that were created using the current AWS account.
 func (c *Client) ListResolverRules(ctx context.Context, params *ListResolverRulesInput, optFns ...func(*Options)) (*ListResolverRulesOutput, error) {
 	if params == nil {
 		params = &ListResolverRulesInput{}
@@ -29,21 +29,21 @@ func (c *Client) ListResolverRules(ctx context.Context, params *ListResolverRule
 
 type ListResolverRulesInput struct {
 
-	// An optional specification to return a subset of resolver rules, such as all
-	// resolver rules that are associated with the same resolver endpoint. If you
+	// An optional specification to return a subset of Resolver rules, such as all
+	// Resolver rules that are associated with the same Resolver endpoint. If you
 	// submit a second or subsequent ListResolverRules request and specify the
 	// NextToken parameter, you must use the same values for Filters, if any, as in the
 	// previous request.
 	Filters []*types.Filter
 
-	// The maximum number of resolver rules that you want to return in the response to
+	// The maximum number of Resolver rules that you want to return in the response to
 	// a ListResolverRules request. If you don't specify a value for MaxResults,
-	// Resolver returns up to 100 resolver rules.
+	// Resolver returns up to 100 Resolver rules.
 	MaxResults *int32
 
 	// For the first ListResolverRules request, omit this value. If you have more than
-	// MaxResults resolver rules, you can submit another ListResolverRules request to
-	// get the next group of resolver rules. In the next request, specify the value of
+	// MaxResults Resolver rules, you can submit another ListResolverRules request to
+	// get the next group of Resolver rules. In the next request, specify the value of
 	// NextToken from the previous response.
 	NextToken *string
 }
@@ -53,12 +53,12 @@ type ListResolverRulesOutput struct {
 	// The value that you specified for MaxResults in the request.
 	MaxResults *int32
 
-	// If more than MaxResults resolver rules match the specified criteria, you can
+	// If more than MaxResults Resolver rules match the specified criteria, you can
 	// submit another ListResolverRules request to get the next group of results. In
 	// the next request, specify the value of NextToken from the previous response.
 	NextToken *string
 
-	// The resolver rules that were created using the current AWS account and that
+	// The Resolver rules that were created using the current AWS account and that
 	// match the specified filters, if any.
 	ResolverRules []*types.ResolverRule
 

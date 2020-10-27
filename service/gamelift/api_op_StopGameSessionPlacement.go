@@ -53,7 +53,7 @@ func (c *Client) StopGameSessionPlacement(ctx context.Context, params *StopGameS
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type StopGameSessionPlacementInput struct {
 
 	// A unique identifier for a game session placement to cancel.
@@ -62,7 +62,7 @@ type StopGameSessionPlacementInput struct {
 	PlacementId *string
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type StopGameSessionPlacementOutput struct {
 
 	// Object that describes the canceled game session placement, with CANCELLED status

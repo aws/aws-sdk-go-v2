@@ -968,18 +968,23 @@ func validateDecision(v *types.Decision) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Decision"}
-	if len(v.DecisionType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("DecisionType"))
+	if v.RequestCancelExternalWorkflowExecutionDecisionAttributes != nil {
+		if err := validateRequestCancelExternalWorkflowExecutionDecisionAttributes(v.RequestCancelExternalWorkflowExecutionDecisionAttributes); err != nil {
+			invalidParams.AddNested("RequestCancelExternalWorkflowExecutionDecisionAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.StartTimerDecisionAttributes != nil {
+		if err := validateStartTimerDecisionAttributes(v.StartTimerDecisionAttributes); err != nil {
+			invalidParams.AddNested("StartTimerDecisionAttributes", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.SignalExternalWorkflowExecutionDecisionAttributes != nil {
 		if err := validateSignalExternalWorkflowExecutionDecisionAttributes(v.SignalExternalWorkflowExecutionDecisionAttributes); err != nil {
 			invalidParams.AddNested("SignalExternalWorkflowExecutionDecisionAttributes", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.StartChildWorkflowExecutionDecisionAttributes != nil {
-		if err := validateStartChildWorkflowExecutionDecisionAttributes(v.StartChildWorkflowExecutionDecisionAttributes); err != nil {
-			invalidParams.AddNested("StartChildWorkflowExecutionDecisionAttributes", err.(smithy.InvalidParamsError))
-		}
+	if len(v.DecisionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DecisionType"))
 	}
 	if v.CancelTimerDecisionAttributes != nil {
 		if err := validateCancelTimerDecisionAttributes(v.CancelTimerDecisionAttributes); err != nil {
@@ -991,9 +996,9 @@ func validateDecision(v *types.Decision) error {
 			invalidParams.AddNested("ScheduleLambdaFunctionDecisionAttributes", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ContinueAsNewWorkflowExecutionDecisionAttributes != nil {
-		if err := validateContinueAsNewWorkflowExecutionDecisionAttributes(v.ContinueAsNewWorkflowExecutionDecisionAttributes); err != nil {
-			invalidParams.AddNested("ContinueAsNewWorkflowExecutionDecisionAttributes", err.(smithy.InvalidParamsError))
+	if v.StartChildWorkflowExecutionDecisionAttributes != nil {
+		if err := validateStartChildWorkflowExecutionDecisionAttributes(v.StartChildWorkflowExecutionDecisionAttributes); err != nil {
+			invalidParams.AddNested("StartChildWorkflowExecutionDecisionAttributes", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.ScheduleActivityTaskDecisionAttributes != nil {
@@ -1006,19 +1011,14 @@ func validateDecision(v *types.Decision) error {
 			invalidParams.AddNested("RequestCancelActivityTaskDecisionAttributes", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.RequestCancelExternalWorkflowExecutionDecisionAttributes != nil {
-		if err := validateRequestCancelExternalWorkflowExecutionDecisionAttributes(v.RequestCancelExternalWorkflowExecutionDecisionAttributes); err != nil {
-			invalidParams.AddNested("RequestCancelExternalWorkflowExecutionDecisionAttributes", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.RecordMarkerDecisionAttributes != nil {
 		if err := validateRecordMarkerDecisionAttributes(v.RecordMarkerDecisionAttributes); err != nil {
 			invalidParams.AddNested("RecordMarkerDecisionAttributes", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.StartTimerDecisionAttributes != nil {
-		if err := validateStartTimerDecisionAttributes(v.StartTimerDecisionAttributes); err != nil {
-			invalidParams.AddNested("StartTimerDecisionAttributes", err.(smithy.InvalidParamsError))
+	if v.ContinueAsNewWorkflowExecutionDecisionAttributes != nil {
+		if err := validateContinueAsNewWorkflowExecutionDecisionAttributes(v.ContinueAsNewWorkflowExecutionDecisionAttributes); err != nil {
+			invalidParams.AddNested("ContinueAsNewWorkflowExecutionDecisionAttributes", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1149,13 +1149,13 @@ func validateScheduleActivityTaskDecisionAttributes(v *types.ScheduleActivityTas
 			invalidParams.AddNested("ActivityType", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ActivityId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActivityId"))
+	}
 	if v.TaskList != nil {
 		if err := validateTaskList(v.TaskList); err != nil {
 			invalidParams.AddNested("TaskList", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ActivityId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ActivityId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1169,11 +1169,11 @@ func validateScheduleLambdaFunctionDecisionAttributes(v *types.ScheduleLambdaFun
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ScheduleLambdaFunctionDecisionAttributes"}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1205,16 +1205,16 @@ func validateStartChildWorkflowExecutionDecisionAttributes(v *types.StartChildWo
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartChildWorkflowExecutionDecisionAttributes"}
+	if v.TaskList != nil {
+		if err := validateTaskList(v.TaskList); err != nil {
+			invalidParams.AddNested("TaskList", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.WorkflowType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkflowType"))
 	} else if v.WorkflowType != nil {
 		if err := validateWorkflowType(v.WorkflowType); err != nil {
 			invalidParams.AddNested("WorkflowType", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.TaskList != nil {
-		if err := validateTaskList(v.TaskList); err != nil {
-			invalidParams.AddNested("TaskList", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.WorkflowId == nil {
@@ -1313,11 +1313,11 @@ func validateWorkflowType(v *types.WorkflowType) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "WorkflowType"}
-	if v.Version == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Version"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Version == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Version"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1351,17 +1351,9 @@ func validateOpCountClosedWorkflowExecutionsInput(v *CountClosedWorkflowExecutio
 			invalidParams.AddNested("StartTimeFilter", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Domain == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
-	}
 	if v.ExecutionFilter != nil {
 		if err := validateWorkflowExecutionFilter(v.ExecutionFilter); err != nil {
 			invalidParams.AddNested("ExecutionFilter", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.TypeFilter != nil {
-		if err := validateWorkflowTypeFilter(v.TypeFilter); err != nil {
-			invalidParams.AddNested("TypeFilter", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.CloseTimeFilter != nil {
@@ -1369,14 +1361,22 @@ func validateOpCountClosedWorkflowExecutionsInput(v *CountClosedWorkflowExecutio
 			invalidParams.AddNested("CloseTimeFilter", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.CloseStatusFilter != nil {
+		if err := validateCloseStatusFilter(v.CloseStatusFilter); err != nil {
+			invalidParams.AddNested("CloseStatusFilter", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.TagFilter != nil {
 		if err := validateTagFilter(v.TagFilter); err != nil {
 			invalidParams.AddNested("TagFilter", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.CloseStatusFilter != nil {
-		if err := validateCloseStatusFilter(v.CloseStatusFilter); err != nil {
-			invalidParams.AddNested("CloseStatusFilter", err.(smithy.InvalidParamsError))
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if v.TypeFilter != nil {
+		if err := validateWorkflowTypeFilter(v.TypeFilter); err != nil {
+			invalidParams.AddNested("TypeFilter", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1391,6 +1391,11 @@ func validateOpCountOpenWorkflowExecutionsInput(v *CountOpenWorkflowExecutionsIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CountOpenWorkflowExecutionsInput"}
+	if v.TypeFilter != nil {
+		if err := validateWorkflowTypeFilter(v.TypeFilter); err != nil {
+			invalidParams.AddNested("TypeFilter", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.ExecutionFilter != nil {
 		if err := validateWorkflowExecutionFilter(v.ExecutionFilter); err != nil {
 			invalidParams.AddNested("ExecutionFilter", err.(smithy.InvalidParamsError))
@@ -1411,11 +1416,6 @@ func validateOpCountOpenWorkflowExecutionsInput(v *CountOpenWorkflowExecutionsIn
 			invalidParams.AddNested("TagFilter", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.TypeFilter != nil {
-		if err := validateWorkflowTypeFilter(v.TypeFilter); err != nil {
-			invalidParams.AddNested("TypeFilter", err.(smithy.InvalidParamsError))
-		}
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1428,15 +1428,15 @@ func validateOpCountPendingActivityTasksInput(v *CountPendingActivityTasksInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CountPendingActivityTasksInput"}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
 	if v.TaskList == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TaskList"))
 	} else if v.TaskList != nil {
 		if err := validateTaskList(v.TaskList); err != nil {
 			invalidParams.AddNested("TaskList", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Domain == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1472,15 +1472,15 @@ func validateOpDeprecateActivityTypeInput(v *DeprecateActivityTypeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeprecateActivityTypeInput"}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
 	if v.ActivityType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActivityType"))
 	} else if v.ActivityType != nil {
 		if err := validateActivityType(v.ActivityType); err != nil {
 			invalidParams.AddNested("ActivityType", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Domain == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1531,15 +1531,15 @@ func validateOpDescribeActivityTypeInput(v *DescribeActivityTypeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeActivityTypeInput"}
-	if v.Domain == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
-	}
 	if v.ActivityType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActivityType"))
 	} else if v.ActivityType != nil {
 		if err := validateActivityType(v.ActivityType); err != nil {
 			invalidParams.AddNested("ActivityType", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1590,15 +1590,15 @@ func validateOpDescribeWorkflowTypeInput(v *DescribeWorkflowTypeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeWorkflowTypeInput"}
-	if v.Domain == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
-	}
 	if v.WorkflowType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkflowType"))
 	} else if v.WorkflowType != nil {
 		if err := validateWorkflowType(v.WorkflowType); err != nil {
 			invalidParams.AddNested("WorkflowType", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1612,15 +1612,15 @@ func validateOpGetWorkflowExecutionHistoryInput(v *GetWorkflowExecutionHistoryIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetWorkflowExecutionHistoryInput"}
-	if v.Domain == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
-	}
 	if v.Execution == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Execution"))
 	} else if v.Execution != nil {
 		if err := validateWorkflowExecution(v.Execution); err != nil {
 			invalidParams.AddNested("Execution", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1634,11 +1634,11 @@ func validateOpListActivityTypesInput(v *ListActivityTypesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListActivityTypesInput"}
-	if len(v.RegistrationStatus) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("RegistrationStatus"))
-	}
 	if v.Domain == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if len(v.RegistrationStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistrationStatus"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1662,28 +1662,28 @@ func validateOpListClosedWorkflowExecutionsInput(v *ListClosedWorkflowExecutions
 			invalidParams.AddNested("CloseTimeFilter", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.TagFilter != nil {
-		if err := validateTagFilter(v.TagFilter); err != nil {
-			invalidParams.AddNested("TagFilter", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.CloseStatusFilter != nil {
 		if err := validateCloseStatusFilter(v.CloseStatusFilter); err != nil {
 			invalidParams.AddNested("CloseStatusFilter", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.StartTimeFilter != nil {
-		if err := validateExecutionTimeFilter(v.StartTimeFilter); err != nil {
-			invalidParams.AddNested("StartTimeFilter", err.(smithy.InvalidParamsError))
+	if v.TagFilter != nil {
+		if err := validateTagFilter(v.TagFilter); err != nil {
+			invalidParams.AddNested("TagFilter", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
 	}
 	if v.ExecutionFilter != nil {
 		if err := validateWorkflowExecutionFilter(v.ExecutionFilter); err != nil {
 			invalidParams.AddNested("ExecutionFilter", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Domain == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	if v.StartTimeFilter != nil {
+		if err := validateExecutionTimeFilter(v.StartTimeFilter); err != nil {
+			invalidParams.AddNested("StartTimeFilter", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1764,11 +1764,11 @@ func validateOpListWorkflowTypesInput(v *ListWorkflowTypesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListWorkflowTypesInput"}
-	if len(v.RegistrationStatus) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("RegistrationStatus"))
-	}
 	if v.Domain == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if len(v.RegistrationStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistrationStatus"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1804,15 +1804,15 @@ func validateOpPollForDecisionTaskInput(v *PollForDecisionTaskInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PollForDecisionTaskInput"}
-	if v.Domain == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
-	}
 	if v.TaskList == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TaskList"))
 	} else if v.TaskList != nil {
 		if err := validateTaskList(v.TaskList); err != nil {
 			invalidParams.AddNested("TaskList", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1841,6 +1841,12 @@ func validateOpRegisterActivityTypeInput(v *RegisterActivityTypeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RegisterActivityTypeInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Version == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Version"))
+	}
 	if v.DefaultTaskList != nil {
 		if err := validateTaskList(v.DefaultTaskList); err != nil {
 			invalidParams.AddNested("DefaultTaskList", err.(smithy.InvalidParamsError))
@@ -1848,12 +1854,6 @@ func validateOpRegisterActivityTypeInput(v *RegisterActivityTypeInput) error {
 	}
 	if v.Domain == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
-	}
-	if v.Version == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Version"))
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1867,9 +1867,6 @@ func validateOpRegisterDomainInput(v *RegisterDomainInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RegisterDomainInput"}
-	if v.WorkflowExecutionRetentionPeriodInDays == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("WorkflowExecutionRetentionPeriodInDays"))
-	}
 	if v.Tags != nil {
 		if err := validateResourceTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
@@ -1877,6 +1874,9 @@ func validateOpRegisterDomainInput(v *RegisterDomainInput) error {
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.WorkflowExecutionRetentionPeriodInDays == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkflowExecutionRetentionPeriodInDays"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1896,13 +1896,13 @@ func validateOpRegisterWorkflowTypeInput(v *RegisterWorkflowTypeInput) error {
 	if v.Version == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Version"))
 	}
-	if v.Domain == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
-	}
 	if v.DefaultTaskList != nil {
 		if err := validateTaskList(v.DefaultTaskList); err != nil {
 			invalidParams.AddNested("DefaultTaskList", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1916,11 +1916,11 @@ func validateOpRequestCancelWorkflowExecutionInput(v *RequestCancelWorkflowExecu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RequestCancelWorkflowExecutionInput"}
-	if v.Domain == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
-	}
 	if v.WorkflowId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkflowId"))
+	}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1999,14 +1999,14 @@ func validateOpSignalWorkflowExecutionInput(v *SignalWorkflowExecutionInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SignalWorkflowExecutionInput"}
-	if v.WorkflowId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("WorkflowId"))
-	}
 	if v.Domain == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
 	}
 	if v.SignalName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SignalName"))
+	}
+	if v.WorkflowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkflowId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2020,8 +2020,10 @@ func validateOpStartWorkflowExecutionInput(v *StartWorkflowExecutionInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartWorkflowExecutionInput"}
-	if v.Domain == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	if v.TaskList != nil {
+		if err := validateTaskList(v.TaskList); err != nil {
+			invalidParams.AddNested("TaskList", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.WorkflowId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkflowId"))
@@ -2033,10 +2035,8 @@ func validateOpStartWorkflowExecutionInput(v *StartWorkflowExecutionInput) error
 			invalidParams.AddNested("WorkflowType", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.TaskList != nil {
-		if err := validateTaskList(v.TaskList); err != nil {
-			invalidParams.AddNested("TaskList", err.(smithy.InvalidParamsError))
-		}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2050,15 +2050,15 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
-	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
 		if err := validateResourceTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2072,11 +2072,11 @@ func validateOpTerminateWorkflowExecutionInput(v *TerminateWorkflowExecutionInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TerminateWorkflowExecutionInput"}
-	if v.Domain == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
-	}
 	if v.WorkflowId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkflowId"))
+	}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2090,15 +2090,15 @@ func validateOpUndeprecateActivityTypeInput(v *UndeprecateActivityTypeInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UndeprecateActivityTypeInput"}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
 	if v.ActivityType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActivityType"))
 	} else if v.ActivityType != nil {
 		if err := validateActivityType(v.ActivityType); err != nil {
 			invalidParams.AddNested("ActivityType", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Domain == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2149,11 +2149,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
-	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -2777,6 +2777,11 @@ func awsAwsjson11_serializeDocumentTestCaseFilter(v *types.TestCaseFilter, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.Keyword != nil {
+		ok := object.Key("keyword")
+		ok.String(*v.Keyword)
+	}
+
 	if v.Status != nil {
 		ok := object.Key("status")
 		ok.String(*v.Status)
@@ -3139,6 +3144,11 @@ func awsAwsjson11_serializeOpDocumentDeleteReportGroupInput(v *DeleteReportGroup
 	if v.Arn != nil {
 		ok := object.Key("arn")
 		ok.String(*v.Arn)
+	}
+
+	if v.DeleteReports != nil {
+		ok := object.Key("deleteReports")
+		ok.Boolean(*v.DeleteReports)
 	}
 
 	return nil

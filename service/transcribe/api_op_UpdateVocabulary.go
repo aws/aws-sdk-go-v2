@@ -37,7 +37,7 @@ type UpdateVocabularyInput struct {
 	// This member is required.
 	LanguageCode types.LanguageCode
 
-	// The name of the vocabulary to update. The name is case-sensitive. If you try to
+	// The name of the vocabulary to update. The name is case sensitive. If you try to
 	// update a vocabulary with the same name as a previous vocabulary you will receive
 	// a ConflictException error.
 	//

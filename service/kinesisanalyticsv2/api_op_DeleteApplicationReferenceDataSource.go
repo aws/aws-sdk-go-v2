@@ -11,7 +11,7 @@ import (
 )
 
 // Deletes a reference data source configuration from the specified SQL-based
-// Amazon Kinesis Data Analytics application's configuration. If the application is
+// Kinesis Data Analytics application's configuration. If the application is
 // running, Kinesis Data Analytics immediately removes the in-application table
 // that you created using the AddApplicationReferenceDataSource operation.
 func (c *Client) DeleteApplicationReferenceDataSource(ctx context.Context, params *DeleteApplicationReferenceDataSourceInput, optFns ...func(*Options)) (*DeleteApplicationReferenceDataSourceOutput, error) {

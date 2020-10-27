@@ -2,28 +2,209 @@
 
 package types
 
-// For List operations, an optional specification to return a subset of objects,
-// such as resolver endpoints or resolver rules.
+// For Resolver list operations (ListResolverEndpoints
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverEndpoints.html),
+// ListResolverRules
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRules.html),
+// ListResolverRuleAssociations
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRuleAssociations.html),
+// ListResolverQueryLogConfigs
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverQueryLogConfigs.html),
+// and ListResolverQueryLogConfigAssociations
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverQueryLogConfigAssociations.html)),
+// an optional specification to return a subset of objects. To filter objects, such
+// as Resolver endpoints or Resolver rules, you specify Name and Values. For
+// example, to list only inbound Resolver endpoints, specify Direction for Name and
+// specify INBOUND for Values.
 type Filter struct {
 
-	// When you're using a List operation and you want the operation to return a subset
-	// of objects, such as resolver endpoints or resolver rules, the name of the
-	// parameter that you want to use to filter objects. For example, to list only
-	// inbound resolver endpoints, specify Direction for the value of Name.
+	// The name of the parameter that you want to use to filter objects. The valid
+	// values for Name depend on the action that you're including the filter in,
+	// ListResolverEndpoints
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverEndpoints.html),
+	// ListResolverRules
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRules.html),
+	// ListResolverRuleAssociations
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRuleAssociations.html),
+	// ListResolverQueryLogConfigs
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverQueryLogConfigs.html),
+	// or ListResolverQueryLogConfigAssociations
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverQueryLogConfigAssociations.html).
+	// In early versions of Resolver, values for Name were listed as uppercase, with
+	// underscore (_) delimiters. For example, CreatorRequestId was originally listed
+	// as CREATOR_REQUEST_ID. Uppercase values for Name are still supported.
+	// ListResolverEndpoints Valid values for Name include the following:
+	//
+	//     *
+	// CreatorRequestId: The value that you specified when you created the Resolver
+	// endpoint.
+	//
+	//     * Direction: Whether you want to return inbound or outbound
+	// Resolver endpoints. If you specify DIRECTION for Name, specify INBOUND or
+	// OUTBOUND for Values.
+	//
+	//     * HostVpcId: The ID of the VPC that inbound DNS
+	// queries pass through on the way from your network to your VPCs in a region, or
+	// the VPC that outbound queries pass through on the way from your VPCs to your
+	// network. In a CreateResolverEndpoint
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_CreateResolverEndpoint.html)
+	// request, SubnetId indirectly identifies the VPC. In a GetResolverEndpoint
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_GetResolverEndpoint.html)
+	// request, the VPC ID for a Resolver endpoint is returned in the HostVPCId
+	// element.
+	//
+	//     * IpAddressCount: The number of IP addresses that you have
+	// associated with the Resolver endpoint.
+	//
+	//     * Name: The name of the Resolver
+	// endpoint.
+	//
+	//     * SecurityGroupIds: The IDs of the VPC security groups that you
+	// specified when you created the Resolver endpoint.
+	//
+	//     * Status: The status of
+	// the Resolver endpoint. If you specify Status for Name, specify one of the
+	// following status codes for Values: CREATING, OPERATIONAL, UPDATING,
+	// AUTO_RECOVERING, ACTION_NEEDED, or DELETING. For more information, see Status in
+	// ResolverEndpoint
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ResolverEndpoint.html).
+	//
+	// ListResolverRules
+	// Valid values for Name include the following:
+	//
+	//     * CreatorRequestId: The value
+	// that you specified when you created the Resolver rule.
+	//
+	//     * DomainName: The
+	// domain name for which Resolver is forwarding DNS queries to your network. In the
+	// value that you specify for Values, include a trailing dot (.) after the domain
+	// name. For example, if the domain name is example.com, specify the following
+	// value. Note the "." after com: example.com.
+	//
+	//     * Name: The name of the
+	// Resolver rule.
+	//
+	//     * ResolverEndpointId: The ID of the Resolver endpoint that
+	// the Resolver rule is associated with. You can filter on the Resolver endpoint
+	// only for rules that have a value of FORWARD for RuleType.
+	//
+	//     * Status: The
+	// status of the Resolver rule. If you specify Status for Name, specify one of the
+	// following status codes for Values: COMPLETE, DELETING, UPDATING, or FAILED.
+	//
+	//
+	// * Type: The type of the Resolver rule. If you specify TYPE for Name, specify
+	// FORWARD or SYSTEM for Values.
+	//
+	// ListResolverRuleAssociations Valid values for
+	// Name include the following:
+	//
+	//     * Name: The name of the Resolver rule
+	// association.
+	//
+	//     * ResolverRuleId: The ID of the Resolver rule that is
+	// associated with one or more VPCs.
+	//
+	//     * Status: The status of the Resolver rule
+	// association. If you specify Status for Name, specify one of the following status
+	// codes for Values: CREATING, COMPLETE, DELETING, or FAILED.
+	//
+	//     * VPCId: The ID
+	// of the VPC that the Resolver rule is associated
+	// with.
+	//
+	// ListResolverQueryLogConfigs Valid values for Name include the
+	// following:
+	//
+	//     * Arn: The ARN for the query logging configuration.
+	//
+	//     *
+	// AssociationCount: The number of VPCs that are associated with the query logging
+	// configuration.
+	//
+	//     * CreationTime: The date and time that the query logging
+	// configuration was created, in Unix time format and Coordinated Universal Time
+	// (UTC).
+	//
+	//     * CreatorRequestId: A unique string that identifies the request that
+	// created the query logging configuration.
+	//
+	//     * Destination: The AWS service
+	// that you want to forward query logs to. Valid values include the following:
+	//
+	//
+	// * S3
+	//
+	//         * CloudWatchLogs
+	//
+	//         * KinesisFirehose
+	//
+	//     * DestinationArn:
+	// The ARN of the location that Resolver is sending query logs to. This value can
+	// be the ARN for an S3 bucket, a CloudWatch Logs log group, or a Kinesis Data
+	// Firehose delivery stream.
+	//
+	//     * Id: The ID of the query logging configuration
+	//
+	//
+	// * Name: The name of the query logging configuration
+	//
+	//     * OwnerId: The AWS
+	// account ID for the account that created the query logging configuration.
+	//
+	//     *
+	// ShareStatus: An indication of whether the query logging configuration is shared
+	// with other AWS accounts, or was shared with the current account by another AWS
+	// account. Valid values include: NOT_SHARED, SHARED_WITH_ME, or SHARED_BY_ME.
+	//
+	//
+	// * Status: The status of the query logging configuration. If you specify Status
+	// for Name, specify the applicable status code for Values: CREATING, CREATED,
+	// DELETING, or FAILED. For more information, see Status
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ResolverQueryLogConfig.html#Route53Resolver-Type-route53resolver_ResolverQueryLogConfig-Status).
+	//
+	// ListResolverQueryLogConfigAssociations
+	// Valid values for Name include the following:
+	//
+	//     * CreationTime: The date and
+	// time that the VPC was associated with the query logging configuration, in Unix
+	// time format and Coordinated Universal Time (UTC).
+	//
+	//     * Error: If the value of
+	// Status is FAILED, specify the cause: DESTINATION_NOT_FOUND or ACCESS_DENIED.
+	//
+	//
+	// * Id: The ID of the query logging association.
+	//
+	//     * ResolverQueryLogConfigId:
+	// The ID of the query logging configuration that a VPC is associated with.
+	//
+	//     *
+	// ResourceId: The ID of the Amazon VPC that is associated with the query logging
+	// configuration.
+	//
+	//     * Status: The status of the query logging association. If
+	// you specify Status for Name, specify the applicable status code for Values:
+	// CREATING, CREATED, DELETING, or FAILED. For more information, see Status
+	// (https://docs.aws.amazon.com/API_route53resolver_ResolverQueryLogConfigAssociation.html#Route53Resolver-Type-route53resolver_ResolverQueryLogConfigAssociation-Status).
 	Name *string
 
 	// When you're using a List operation and you want the operation to return a subset
-	// of objects, such as resolver endpoints or resolver rules, the value of the
+	// of objects, such as Resolver endpoints or Resolver rules, the value of the
 	// parameter that you want to use to filter objects. For example, to list only
-	// inbound resolver endpoints, specify INBOUND for the value of Values.
+	// inbound Resolver endpoints, specify Direction for Name and specify INBOUND for
+	// Values.
 	Values []*string
 }
 
-// In an CreateResolverEndpoint request, a subnet and IP address that you want to
-// use for DNS queries.
+// In a CreateResolverEndpoint
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_CreateResolverEndpoint.html)
+// request, the IP address that DNS queries originate from (for outbound endpoints)
+// or that you forward DNS queries to (for inbound endpoints). IpAddressRequest
+// also includes the ID of the subnet that contains the IP address.
 type IpAddressRequest struct {
 
-	// The subnet that contains the IP address.
+	// The ID of the subnet that contains the IP address.
 	//
 	// This member is required.
 	SubnetId *string
@@ -32,15 +213,17 @@ type IpAddressRequest struct {
 	Ip *string
 }
 
-// In the response to a GetResolverEndpoint request, information about the IP
-// addresses that the resolver endpoint uses for DNS queries.
+// In the response to a GetResolverEndpoint
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_GetResolverEndpoint.html)
+// request, information about the IP addresses that the Resolver endpoint uses for
+// DNS queries.
 type IpAddressResponse struct {
 
 	// The date and time that the IP address was created, in Unix time format and
 	// Coordinated Universal Time (UTC).
 	CreationTime *string
 
-	// One IP address that the resolver endpoint uses for DNS queries.
+	// One IP address that the Resolver endpoint uses for DNS queries.
 	Ip *string
 
 	// The ID of one IP address.
@@ -60,102 +243,303 @@ type IpAddressResponse struct {
 	SubnetId *string
 }
 
-// In an UpdateResolverEndpoint request, information about an IP address to update.
+// In an UpdateResolverEndpoint
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_UpdateResolverEndpoint.html)
+// request, information about an IP address to update.
 type IpAddressUpdate struct {
 
 	// The new IP address.
 	Ip *string
 
-	// Only when removing an IP address from a resolver endpoint: The ID of the IP
-	// address that you want to remove. To get this ID, use GetResolverEndpoint.
+	// Only when removing an IP address from a Resolver endpoint: The ID of the IP
+	// address that you want to remove. To get this ID, use GetResolverEndpoint
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_GetResolverEndpoint.html).
 	IpId *string
 
 	// The ID of the subnet that includes the IP address that you want to update. To
-	// get this ID, use GetResolverEndpoint.
+	// get this ID, use GetResolverEndpoint
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_GetResolverEndpoint.html).
 	SubnetId *string
 }
 
-// In the response to a CreateResolverEndpoint, DeleteResolverEndpoint,
-// GetResolverEndpoint, ListResolverEndpoints, or UpdateResolverEndpoint request, a
-// complex type that contains settings for an existing inbound or outbound resolver
-// endpoint.
+// In the response to a CreateResolverEndpoint
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_CreateResolverEndpoint.html),
+// DeleteResolverEndpoint
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_DeleteResolverEndpoint.html),
+// GetResolverEndpoint
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_GetResolverEndpoint.html),
+// ListResolverEndpoints
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverEndpoints.html),
+// or UpdateResolverEndpoint
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_UpdateResolverEndpoint.html)
+// request, a complex type that contains settings for an existing inbound or
+// outbound Resolver endpoint.
 type ResolverEndpoint struct {
 
-	// The ARN (Amazon Resource Name) for the resolver endpoint.
+	// The ARN (Amazon Resource Name) for the Resolver endpoint.
 	Arn *string
 
 	// The date and time that the endpoint was created, in Unix time format and
 	// Coordinated Universal Time (UTC).
 	CreationTime *string
 
-	// A unique string that identifies the request that created the resolver endpoint.
+	// A unique string that identifies the request that created the Resolver endpoint.
 	// The CreatorRequestId allows failed requests to be retried without the risk of
 	// executing the operation twice.
 	CreatorRequestId *string
 
-	// Indicates whether the resolver endpoint allows inbound or outbound DNS
+	// Indicates whether the Resolver endpoint allows inbound or outbound DNS
 	// queries:
 	//
-	//     * INBOUND: allows DNS queries to your VPC from your network or
-	// another VPC
+	//     * INBOUND: allows DNS queries to your VPC from your network
 	//
-	//     * OUTBOUND: allows DNS queries from your VPC to your network or
-	// another VPC
+	//     *
+	// OUTBOUND: allows DNS queries from your VPC to your network
 	Direction ResolverEndpointDirection
 
-	// The ID of the VPC that you want to create the resolver endpoint in.
+	// The ID of the VPC that you want to create the Resolver endpoint in.
 	HostVPCId *string
 
-	// The ID of the resolver endpoint.
+	// The ID of the Resolver endpoint.
 	Id *string
 
-	// The number of IP addresses that the resolver endpoint can use for DNS queries.
+	// The number of IP addresses that the Resolver endpoint can use for DNS queries.
 	IpAddressCount *int32
 
 	// The date and time that the endpoint was last modified, in Unix time format and
 	// Coordinated Universal Time (UTC).
 	ModificationTime *string
 
-	// The name that you assigned to the resolver endpoint when you submitted a
-	// CreateResolverEndpoint request.
+	// The name that you assigned to the Resolver endpoint when you submitted a
+	// CreateResolverEndpoint
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_CreateResolverEndpoint.html)
+	// request.
 	Name *string
 
 	// The ID of one or more security groups that control access to this VPC. The
-	// security group must include one or more inbound resolver rules.
+	// security group must include one or more inbound rules (for inbound endpoints) or
+	// outbound rules (for outbound endpoints). Inbound and outbound rules must allow
+	// TCP and UDP access. For inbound access, open port 53. For outbound access, open
+	// the port that you're using for DNS queries on your network.
 	SecurityGroupIds []*string
 
-	// A code that specifies the current status of the resolver endpoint.
+	// A code that specifies the current status of the Resolver endpoint. Valid values
+	// include the following:
+	//
+	//     * CREATING: Resolver is creating and configuring one
+	// or more Amazon VPC network interfaces for this endpoint.
+	//
+	//     * OPERATIONAL: The
+	// Amazon VPC network interfaces for this endpoint are correctly configured and
+	// able to pass inbound or outbound DNS queries between your network and
+	// Resolver.
+	//
+	//     * UPDATING: Resolver is associating or disassociating one or more
+	// network interfaces with this endpoint.
+	//
+	//     * AUTO_RECOVERING: Resolver is
+	// trying to recover one or more of the network interfaces that are associated with
+	// this endpoint. During the recovery process, the endpoint functions with limited
+	// capacity because of the limit on the number of DNS queries per IP address (per
+	// network interface). For the current limit, see Limits on Route 53 Resolver
+	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities-resolver).
+	//
+	//
+	// * ACTION_NEEDED: This endpoint is unhealthy, and Resolver can't automatically
+	// recover it. To resolve the problem, we recommend that you check each IP address
+	// that you associated with the endpoint. For each IP address that isn't available,
+	// add another IP address and then delete the IP address that isn't available. (An
+	// endpoint must always include at least two IP addresses.) A status of
+	// ACTION_NEEDED can have a variety of causes. Here are two common causes:
+	//
+	//
+	// * One or more of the network interfaces that are associated with the endpoint
+	// were deleted using Amazon VPC.
+	//
+	//         * The network interface couldn't be
+	// created for some reason that's outside the control of Resolver.
+	//
+	//     * DELETING:
+	// Resolver is deleting this endpoint and the associated network interfaces.
 	Status ResolverEndpointStatus
 
-	// A detailed description of the status of the resolver endpoint.
+	// A detailed description of the status of the Resolver endpoint.
 	StatusMessage *string
 }
 
-// For queries that originate in your VPC, detailed information about a resolver
-// rule, which specifies how to route DNS queries out of the VPC. The ResolverRule
-// parameter appears in the response to a CreateResolverRule, DeleteResolverRule,
-// GetResolverRule, ListResolverRules, or UpdateResolverRule request.
-type ResolverRule struct {
+// In the response to a CreateResolverQueryLogConfig
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_CreateResolverQueryLogConfig.html),
+// DeleteResolverQueryLogConfig
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_DeleteResolverQueryLogConfig.html),
+// GetResolverQueryLogConfig
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_GetResolverQueryLogConfig.html),
+// or ListResolverQueryLogConfigs
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverQueryLogConfigs.html)
+// request, a complex type that contains settings for one query logging
+// configuration.
+type ResolverQueryLogConfig struct {
 
-	// The ARN (Amazon Resource Name) for the resolver rule specified by Id.
+	// The ARN for the query logging configuration.
 	Arn *string
 
-	// A unique string that you specified when you created the resolver rule.
-	// CreatorRequestIdidentifies the request and allows failed requests to be retried
+	// The number of VPCs that are associated with the query logging configuration.
+	AssociationCount *int32
+
+	// The date and time that the query logging configuration was created, in Unix time
+	// format and Coordinated Universal Time (UTC).
+	CreationTime *string
+
+	// A unique string that identifies the request that created the query logging
+	// configuration. The CreatorRequestId allows failed requests to be retried without
+	// the risk of executing the operation twice.
+	CreatorRequestId *string
+
+	// The ARN of the resource that you want Resolver to send query logs: an Amazon S3
+	// bucket, a CloudWatch Logs log group, or a Kinesis Data Firehose delivery stream.
+	DestinationArn *string
+
+	// The ID for the query logging configuration.
+	Id *string
+
+	// The name of the query logging configuration.
+	Name *string
+
+	// The AWS account ID for the account that created the query logging configuration.
+	OwnerId *string
+
+	// An indication of whether the query logging configuration is shared with other
+	// AWS accounts, or was shared with the current account by another AWS account.
+	// Sharing is configured through AWS Resource Access Manager (AWS RAM).
+	ShareStatus ShareStatus
+
+	// The status of the specified query logging configuration. Valid values include
+	// the following:
+	//
+	//     * CREATING: Resolver is creating the query logging
+	// configuration.
+	//
+	//     * CREATED: The query logging configuration was successfully
+	// created. Resolver is logging queries that originate in the specified VPC.
+	//
+	//     *
+	// DELETING: Resolver is deleting this query logging configuration.
+	//
+	//     * FAILED:
+	// Resolver can't deliver logs to the location that is specified in the query
+	// logging configuration. Here are two common causes:
+	//
+	//         * The specified
+	// destination (for example, an Amazon S3 bucket) was deleted.
+	//
+	//         *
+	// Permissions don't allow sending logs to the destination.
+	Status ResolverQueryLogConfigStatus
+}
+
+// In the response to an AssociateResolverQueryLogConfig
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_AssociateResolverQueryLogConfig.html),
+// DisassociateResolverQueryLogConfig
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_DisassociateResolverQueryLogConfig.html),
+// GetResolverQueryLogConfigAssociation
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_GetResolverQueryLogConfigAssociation.html),
+// or ListResolverQueryLogConfigAssociations
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverQueryLogConfigAssociations.html),
+// request, a complex type that contains settings for a specified association
+// between an Amazon VPC and a query logging configuration.
+type ResolverQueryLogConfigAssociation struct {
+
+	// The date and time that the VPC was associated with the query logging
+	// configuration, in Unix time format and Coordinated Universal Time (UTC).
+	CreationTime *string
+
+	// If the value of Status is FAILED, the value of Error indicates the cause:
+	//
+	//     *
+	// DESTINATION_NOT_FOUND: The specified destination (for example, an Amazon S3
+	// bucket) was deleted.
+	//
+	//     * ACCESS_DENIED: Permissions don't allow sending logs
+	// to the destination.
+	//
+	// If the value of Status is a value other than FAILED, Error
+	// is null.
+	Error ResolverQueryLogConfigAssociationError
+
+	// Contains additional information about the error. If the value or Error is null,
+	// the value of ErrorMessage also is null.
+	ErrorMessage *string
+
+	// The ID of the query logging association.
+	Id *string
+
+	// The ID of the query logging configuration that a VPC is associated with.
+	ResolverQueryLogConfigId *string
+
+	// The ID of the Amazon VPC that is associated with the query logging
+	// configuration.
+	ResourceId *string
+
+	// The status of the specified query logging association. Valid values include the
+	// following:
+	//
+	//     * CREATING: Resolver is creating an association between an
+	// Amazon VPC and a query logging configuration.
+	//
+	//     * CREATED: The association
+	// between an Amazon VPC and a query logging configuration was successfully
+	// created. Resolver is logging queries that originate in the specified VPC.
+	//
+	//     *
+	// DELETING: Resolver is deleting this query logging association.
+	//
+	//     * FAILED:
+	// Resolver either couldn't create or couldn't delete the query logging
+	// association.
+	Status ResolverQueryLogConfigAssociationStatus
+}
+
+// For queries that originate in your VPC, detailed information about a Resolver
+// rule, which specifies how to route DNS queries out of the VPC. The ResolverRule
+// parameter appears in the response to a CreateResolverRule
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_CreateResolverRule.html),
+// DeleteResolverRule
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_DeleteResolverRule.html),
+// GetResolverRule
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_GetResolverRule.html),
+// ListResolverRules
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRules.html),
+// or UpdateResolverRule
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_UpdateResolverRule.html)
+// request.
+type ResolverRule struct {
+
+	// The ARN (Amazon Resource Name) for the Resolver rule specified by Id.
+	Arn *string
+
+	// The date and time that the Resolver rule was created, in Unix time format and
+	// Coordinated Universal Time (UTC).
+	CreationTime *string
+
+	// A unique string that you specified when you created the Resolver rule.
+	// CreatorRequestId identifies the request and allows failed requests to be retried
 	// without the risk of executing the operation twice.
 	CreatorRequestId *string
 
 	// DNS queries for this domain name are forwarded to the IP addresses that are
-	// specified in TargetIps. If a query matches multiple resolver rules (example.com
-	// and www.example.com), the query is routed using the resolver rule that contains
+	// specified in TargetIps. If a query matches multiple Resolver rules (example.com
+	// and www.example.com), the query is routed using the Resolver rule that contains
 	// the most specific domain name (www.example.com).
 	DomainName *string
 
-	// The ID that Resolver assigned to the resolver rule when you created it.
+	// The ID that Resolver assigned to the Resolver rule when you created it.
 	Id *string
 
-	// The name for the resolver rule, which you specified when you created the
-	// resolver rule.
+	// The date and time that the Resolver rule was last updated, in Unix time format
+	// and Coordinated Universal Time (UTC).
+	ModificationTime *string
+
+	// The name for the Resolver rule, which you specified when you created the
+	// Resolver rule.
 	Name *string
 
 	// When a rule is shared with another AWS account, the account ID of the account
@@ -165,7 +549,14 @@ type ResolverRule struct {
 	// The ID of the endpoint that the rule is associated with.
 	ResolverEndpointId *string
 
-	// This value is always FORWARD. Other resolver rule types aren't supported.
+	// When you want to forward DNS queries for specified domain name to resolvers on
+	// your network, specify FORWARD. When you have a forwarding rule to forward DNS
+	// queries for a domain to your network and you want Resolver to process queries
+	// for a subdomain of that domain, specify SYSTEM. For example, to forward DNS
+	// queries for example.com to resolvers on your network, you create a rule and
+	// specify FORWARD for RuleType. To then have Resolver process queries for
+	// apex.example.com, you create a rule and specify SYSTEM for RuleType. Currently,
+	// only Resolver can create rules that have a value of RECURSIVE for RuleType.
 	RuleType RuleTypeOption
 
 	// Whether the rules is shared and, if so, whether the current account is sharing
@@ -173,53 +564,64 @@ type ResolverRule struct {
 	// current account.
 	ShareStatus ShareStatus
 
-	// A code that specifies the current status of the resolver rule.
+	// A code that specifies the current status of the Resolver rule.
 	Status ResolverRuleStatus
 
-	// A detailed description of the status of a resolver rule.
+	// A detailed description of the status of a Resolver rule.
 	StatusMessage *string
 
-	// An array that contains the IP addresses and ports that you want to forward
+	// An array that contains the IP addresses and ports that an outbound endpoint
+	// forwards DNS queries to. Typically, these are the IP addresses of DNS resolvers
+	// on your network. Specify IPv4 addresses. IPv6 is not supported.
 	TargetIps []*TargetAddress
 }
 
-// In the response to an AssociateResolverRule, DisassociateResolverRule, or
-// ListResolverRuleAssociations request, information about an association between a
-// resolver rule and a VPC.
+// In the response to an AssociateResolverRule
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_AssociateResolverRule.html),
+// DisassociateResolverRule
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_DisassociateResolverRule.html),
+// or ListResolverRuleAssociations
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRuleAssociations.html)
+// request, provides information about an association between a Resolver rule and a
+// VPC. The association determines which DNS queries that originate in the VPC are
+// forwarded to your network.
 type ResolverRuleAssociation struct {
 
-	// The ID of the association between a resolver rule and a VPC. Resolver assigns
-	// this value when you submit an AssociateResolverRule request.
+	// The ID of the association between a Resolver rule and a VPC. Resolver assigns
+	// this value when you submit an AssociateResolverRule
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_AssociateResolverRule.html)
+	// request.
 	Id *string
 
-	// The name of an association between a resolver rule and a VPC.
+	// The name of an association between a Resolver rule and a VPC.
 	Name *string
 
-	// The ID of the resolver rule that you associated with the VPC that is specified
+	// The ID of the Resolver rule that you associated with the VPC that is specified
 	// by VPCId.
 	ResolverRuleId *string
 
-	// A code that specifies the current status of the association between a resolver
+	// A code that specifies the current status of the association between a Resolver
 	// rule and a VPC.
 	Status ResolverRuleAssociationStatus
 
-	// A detailed description of the status of the association between a resolver rule
+	// A detailed description of the status of the association between a Resolver rule
 	// and a VPC.
 	StatusMessage *string
 
-	// The ID of the VPC that you associated the resolver rule with.
+	// The ID of the VPC that you associated the Resolver rule with.
 	VPCId *string
 }
 
-// In an UpdateResolverRule request, information about the changes that you want to
-// make.
+// In an UpdateResolverRule
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_UpdateResolverRule.html)
+// request, information about the changes that you want to make.
 type ResolverRuleConfig struct {
 
-	// The new name for the resolver rule. The name that you specify appears in the
+	// The new name for the Resolver rule. The name that you specify appears in the
 	// Resolver dashboard in the Route 53 console.
 	Name *string
 
-	// The ID of the new outbound resolver endpoint that you want to use to route DNS
+	// The ID of the new outbound Resolver endpoint that you want to use to route DNS
 	// queries to the IP addresses that you specify in TargetIps.
 	ResolverEndpointId *string
 
@@ -235,15 +637,20 @@ type Tag struct {
 	// The name for the tag. For example, if you want to associate Resolver resources
 	// with the account IDs of your customers for billing purposes, the value of Key
 	// might be account-id.
+	//
+	// This member is required.
 	Key *string
 
 	// The value for the tag. For example, if Key is account-id, then Value might be
 	// the ID of the customer account that you're creating the resource for.
+	//
+	// This member is required.
 	Value *string
 }
 
-// In a CreateResolverRule request, an array of the IPs that you want to forward
-// DNS queries to.
+// In a CreateResolverRule
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_CreateResolverRule.html)
+// request, an array of the IPs that you want to forward DNS queries to.
 type TargetAddress struct {
 
 	// One IP address that you want to forward DNS queries to. You can specify only

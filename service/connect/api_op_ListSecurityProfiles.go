@@ -12,7 +12,10 @@ import (
 )
 
 // Provides summary information about the security profiles for the specified
-// Amazon Connect instance.
+// Amazon Connect instance. For more information about security profiles, see
+// Security Profiles
+// (https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html)
+// in the Amazon Connect Administrator Guide.
 func (c *Client) ListSecurityProfiles(ctx context.Context, params *ListSecurityProfilesInput, optFns ...func(*Options)) (*ListSecurityProfilesOutput, error) {
 	if params == nil {
 		params = &ListSecurityProfilesInput{}

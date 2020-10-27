@@ -506,13 +506,13 @@ func validateMetricPolicy(v *types.MetricPolicy) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MetricPolicy"}
+	if len(v.ContainerLevelMetrics) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ContainerLevelMetrics"))
+	}
 	if v.MetricPolicyRules != nil {
 		if err := validateMetricPolicyRules(v.MetricPolicyRules); err != nil {
 			invalidParams.AddNested("MetricPolicyRules", err.(smithy.InvalidParamsError))
 		}
-	}
-	if len(v.ContainerLevelMetrics) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ContainerLevelMetrics"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -526,11 +526,11 @@ func validateMetricPolicyRule(v *types.MetricPolicyRule) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MetricPolicyRule"}
-	if v.ObjectGroup == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ObjectGroup"))
-	}
 	if v.ObjectGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ObjectGroupName"))
+	}
+	if v.ObjectGroup == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObjectGroup"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -763,11 +763,11 @@ func validateOpPutContainerPolicyInput(v *PutContainerPolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutContainerPolicyInput"}
-	if v.Policy == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
-	}
 	if v.ContainerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContainerName"))
+	}
+	if v.Policy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -781,15 +781,15 @@ func validateOpPutCorsPolicyInput(v *PutCorsPolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutCorsPolicyInput"}
+	if v.ContainerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContainerName"))
+	}
 	if v.CorsPolicy == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CorsPolicy"))
 	} else if v.CorsPolicy != nil {
 		if err := validateCorsPolicy(v.CorsPolicy); err != nil {
 			invalidParams.AddNested("CorsPolicy", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ContainerName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ContainerName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -821,15 +821,15 @@ func validateOpPutMetricPolicyInput(v *PutMetricPolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutMetricPolicyInput"}
-	if v.ContainerName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ContainerName"))
-	}
 	if v.MetricPolicy == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MetricPolicy"))
 	} else if v.MetricPolicy != nil {
 		if err := validateMetricPolicy(v.MetricPolicy); err != nil {
 			invalidParams.AddNested("MetricPolicy", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.ContainerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContainerName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -895,11 +895,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.Resource == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Resource"))
-	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if v.Resource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Resource"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

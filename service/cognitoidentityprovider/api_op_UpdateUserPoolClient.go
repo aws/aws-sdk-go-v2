@@ -12,8 +12,11 @@ import (
 )
 
 // Updates the specified user pool app client with the specified attributes. You
-// can get a list of the current user pool app client settings with . If you don't
-// provide a value for an attribute, it will be set to the default value.
+// can get a list of the current user pool app client settings using
+// DescribeUserPoolClient
+// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_DescribeUserPoolClient.html).
+// If you don't provide a value for an attribute, it will be set to the default
+// value.
 func (c *Client) UpdateUserPoolClient(ctx context.Context, params *UpdateUserPoolClientInput, optFns ...func(*Options)) (*UpdateUserPoolClientOutput, error) {
 	if params == nil {
 		params = &UpdateUserPoolClientInput{}
@@ -43,6 +46,10 @@ type UpdateUserPoolClientInput struct {
 	// This member is required.
 	UserPoolId *string
 
+	// The time limit, after which the access token is no longer valid and cannot be
+	// used.
+	AccessTokenValidity *int32
+
 	// The allowed OAuth flows. Set to code to initiate a code grant flow, which
 	// provides an authorization code as the response. This code can be exchanged for
 	// access tokens with the token endpoint. Set to implicit to specify that the
@@ -63,9 +70,10 @@ type UpdateUserPoolClientInput struct {
 	AllowedOAuthScopes []*string
 
 	// The Amazon Pinpoint analytics configuration for collecting metrics for this user
-	// pool. Cognito User Pools only supports sending events to Amazon Pinpoint
-	// projects in the US East (N. Virginia) us-east-1 Region, regardless of the region
-	// in which the user pool resides.
+	// pool. In regions where Pinpoint is not available, Cognito User Pools only
+	// supports sending events to Amazon Pinpoint projects in us-east-1. In regions
+	// where Pinpoint is available, Cognito User Pools will support sending events to
+	// Amazon Pinpoint projects within that same region.
 	AnalyticsConfiguration *types.AnalyticsConfigurationType
 
 	// A list of allowed redirect (callback) URLs for the identity providers. A
@@ -129,6 +137,9 @@ type UpdateUserPoolClientInput struct {
 	// ALLOW_REFRESH_TOKEN_AUTH: Enable authflow to refresh tokens.
 	ExplicitAuthFlows []types.ExplicitAuthFlowsType
 
+	// The time limit, after which the ID token is no longer valid and cannot be used.
+	IdTokenValidity *int32
+
 	// A list of allowed logout URLs for the identity providers.
 	LogoutURLs []*string
 
@@ -145,33 +156,12 @@ type UpdateUserPoolClientInput struct {
 	// prevents user existence-related errors.
 	//
 	//     * LEGACY - This represents the old
-	// behavior of Cognito where user existence related errors are not prevented.
+	// behavior of Cognito where user existence related errors are not
+	// prevented.
 	//
-	// This
-	// setting affects the behavior of following APIs:
-	//
-	//     * AdminInitiateAuth
-	//
-	//     *
-	// AdminRespondToAuthChallenge
-	//
-	//     * InitiateAuth
-	//
-	//     * RespondToAuthChallenge
-	//
-	//
-	// * ForgotPassword
-	//
-	//     * ConfirmForgotPassword
-	//
-	//     * ConfirmSignUp
-	//
-	//     *
-	// ResendConfirmationCode
-	//
-	// After February 15th 2020, the value of
-	// PreventUserExistenceErrors will default to ENABLED for newly created user pool
-	// clients if no value is provided.
+	// After February 15th 2020, the value of PreventUserExistenceErrors
+	// will default to ENABLED for newly created user pool clients if no value is
+	// provided.
 	PreventUserExistenceErrors types.PreventUserExistenceErrorTypes
 
 	// The read-only attributes of the user pool.
@@ -184,6 +174,10 @@ type UpdateUserPoolClientInput struct {
 	// A list of provider names for the identity providers that are supported on this
 	// client.
 	SupportedIdentityProviders []*string
+
+	// The units in which the validity times are represented in. Default for
+	// RefreshToken is days, and default for ID and access tokens are hours.
+	TokenValidityUnits *types.TokenValidityUnitsType
 
 	// The writeable attributes of the user pool.
 	WriteAttributes []*string

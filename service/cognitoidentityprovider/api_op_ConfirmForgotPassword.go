@@ -35,7 +35,8 @@ type ConfirmForgotPasswordInput struct {
 	ClientId *string
 
 	// The confirmation code sent by a user's request to retrieve a forgotten password.
-	// For more information, see
+	// For more information, see ForgotPassword
+	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ForgotPassword.html).
 	//
 	// This member is required.
 	ConfirmationCode *string

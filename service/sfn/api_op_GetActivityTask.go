@@ -52,7 +52,8 @@ type GetActivityTaskInput struct {
 
 type GetActivityTaskOutput struct {
 
-	// The string that contains the JSON input data for the task.
+	// The string that contains the JSON input data for the task. Length constraints
+	// apply to the payload size, and are expressed as bytes in UTF-8 encoding.
 	Input *string
 
 	// A token that identifies the scheduled task. This token must be copied and

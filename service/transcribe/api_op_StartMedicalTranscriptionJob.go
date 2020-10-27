@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Start a batch job to transcribe medical speech to text.
+// Starts a batch job to transcribe medical speech to text.
 func (c *Client) StartMedicalTranscriptionJob(ctx context.Context, params *StartMedicalTranscriptionJobInput, optFns ...func(*Options)) (*StartMedicalTranscriptionJobOutput, error) {
 	if params == nil {
 		params = &StartMedicalTranscriptionJobInput{}
@@ -44,7 +44,7 @@ type StartMedicalTranscriptionJobInput struct {
 	// The name of the medical transcription job. You can't use the strings "." or ".."
 	// by themselves as the job name. The name must also be unique within an AWS
 	// account. If you try to create a medical transcription job with the same name as
-	// a previous medical transcription job you will receive a ConflictException error.
+	// a previous medical transcription job, you get a ConflictException error.
 	//
 	// This member is required.
 	MedicalTranscriptionJobName *string
@@ -116,6 +116,21 @@ type StartMedicalTranscriptionJobInput struct {
 	// to encrypt your output, you must also specify an output location in the
 	// OutputBucketName parameter.
 	OutputEncryptionKMSKeyId *string
+
+	// You can specify a location in an Amazon S3 bucket to store the output of your
+	// medical transcription job. If you don't specify an output key, Amazon Transcribe
+	// Medical stores the output of your transcription job in the Amazon S3 bucket you
+	// specified. By default, the object key is "your-transcription-job-name.json". You
+	// can use output keys to specify the Amazon S3 prefix and file name of the
+	// transcription output. For example, specifying the Amazon S3 prefix,
+	// "folder1/folder2/", as an output key would lead to the output being stored as
+	// "folder1/folder2/your-transcription-job-name.json". If you specify
+	// "my-other-job-name.json" as the output key, the object key is changed to
+	// "my-other-job-name.json". You can use an output key to change both the prefix
+	// and the file name, for example "folder/my-other-job-name.json". If you specify
+	// an output key, you must also specify an S3 bucket in the OutputBucketName
+	// parameter.
+	OutputKey *string
 
 	// Optional settings for the medical transcription job.
 	Settings *types.MedicalTranscriptionSetting

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes the data source permanently. This action breaks all the datasets that
+// Deletes the data source permanently. This operation breaks all the datasets that
 // reference the deleted data source.
 func (c *Client) DeleteDataSource(ctx context.Context, params *DeleteDataSourceInput, optFns ...func(*Options)) (*DeleteDataSourceOutput, error) {
 	if params == nil {
@@ -52,6 +52,9 @@ type DeleteDataSourceOutput struct {
 
 	// The AWS request ID for this operation.
 	RequestId *string
+
+	// The HTTP status of the request.
+	Status *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

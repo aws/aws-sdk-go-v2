@@ -11,13 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Modifies the attributes of an existing license configuration. A license
-// configuration is an abstraction of a customer license agreement that can be
-// consumed and enforced by License Manager. Components include specifications for
-// the license type (licensing by instance, socket, CPU, or vCPU), allowed tenancy
-// (shared tenancy, Dedicated Instance, Dedicated Host, or all of these), host
-// affinity (how long a VM must be associated with a host), and the number of
-// licenses purchased and used.
+// Modifies the attributes of an existing license configuration.
 func (c *Client) UpdateLicenseConfiguration(ctx context.Context, params *UpdateLicenseConfigurationInput, optFns ...func(*Options)) (*UpdateLicenseConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateLicenseConfigurationInput{}
@@ -52,7 +46,8 @@ type UpdateLicenseConfigurationInput struct {
 	// New hard limit of the number of available licenses.
 	LicenseCountHardLimit *bool
 
-	// New license rules.
+	// New license rule. The only rule that you can add after you create a license
+	// configuration is licenseAffinityToHost.
 	LicenseRules []*string
 
 	// New name of the license configuration.

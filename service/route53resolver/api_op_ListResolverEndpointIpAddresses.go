@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Gets the IP addresses for a specified resolver endpoint.
+// Gets the IP addresses for a specified Resolver endpoint.
 func (c *Client) ListResolverEndpointIpAddresses(ctx context.Context, params *ListResolverEndpointIpAddressesInput, optFns ...func(*Options)) (*ListResolverEndpointIpAddressesOutput, error) {
 	if params == nil {
 		params = &ListResolverEndpointIpAddressesInput{}
@@ -29,7 +29,7 @@ func (c *Client) ListResolverEndpointIpAddresses(ctx context.Context, params *Li
 
 type ListResolverEndpointIpAddressesInput struct {
 
-	// The ID of the resolver endpoint that you want to get IP addresses for.
+	// The ID of the Resolver endpoint that you want to get IP addresses for.
 	//
 	// This member is required.
 	ResolverEndpointId *string
@@ -40,7 +40,7 @@ type ListResolverEndpointIpAddressesInput struct {
 	MaxResults *int32
 
 	// For the first ListResolverEndpointIpAddresses request, omit this value. If the
-	// specified resolver endpoint has more than MaxResults IP addresses, you can
+	// specified Resolver endpoint has more than MaxResults IP addresses, you can
 	// submit another ListResolverEndpointIpAddresses request to get the next group of
 	// IP addresses. In the next request, specify the value of NextToken from the
 	// previous response.
@@ -49,8 +49,9 @@ type ListResolverEndpointIpAddressesInput struct {
 
 type ListResolverEndpointIpAddressesOutput struct {
 
-	// The IP addresses that DNS queries pass through on their way to your network
-	// (outbound endpoint) or on the way to Resolver (inbound endpoint).
+	// Information about the IP addresses in your VPC that DNS queries originate from
+	// (for outbound endpoints) or that you forward DNS queries to (for inbound
+	// endpoints).
 	IpAddresses []*types.IpAddressResponse
 
 	// The value that you specified for MaxResults in the request.

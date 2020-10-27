@@ -12,7 +12,10 @@ import (
 )
 
 // Provides summary information about the hierarchy groups for the specified Amazon
-// Connect instance.
+// Connect instance. For more information about agent hierarchies, see Set Up Agent
+// Hierarchies
+// (https://docs.aws.amazon.com/connect/latest/adminguide/agent-hierarchy.html) in
+// the Amazon Connect Administrator Guide.
 func (c *Client) ListUserHierarchyGroups(ctx context.Context, params *ListUserHierarchyGroupsInput, optFns ...func(*Options)) (*ListUserHierarchyGroupsOutput, error) {
 	if params == nil {
 		params = &ListUserHierarchyGroupsInput{}

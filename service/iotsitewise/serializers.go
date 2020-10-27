@@ -941,6 +941,11 @@ func awsRestjson1_serializeOpDocumentCreatePortalInput(v *CreatePortalInput, val
 		ok.String(*v.ClientToken)
 	}
 
+	if len(v.PortalAuthMode) > 0 {
+		ok := object.Key("portalAuthMode")
+		ok.String(string(v.PortalAuthMode))
+	}
+
 	if v.PortalContactEmail != nil {
 		ok := object.Key("portalContactEmail")
 		ok.String(*v.PortalContactEmail)
@@ -973,6 +978,77 @@ func awsRestjson1_serializeOpDocumentCreatePortalInput(v *CreatePortalInput, val
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpCreatePresignedPortalUrl struct {
+}
+
+func (*awsRestjson1_serializeOpCreatePresignedPortalUrl) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreatePresignedPortalUrl) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreatePresignedPortalUrlInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+	request.HostPrefix = "monitor."
+
+	opPath, opQuery := httpbinding.SplitURI("/portals/{portalId}/presigned-url")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCreatePresignedPortalUrlInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreatePresignedPortalUrlInput(v *CreatePresignedPortalUrlInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.PortalId == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member portalId must not be empty")}
+	}
+	if v.PortalId != nil {
+		if len(*v.PortalId) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member portalId must not be empty")}
+		}
+		if err := encoder.SetURI("portalId").String(*v.PortalId); err != nil {
+			return err
+		}
+	}
+
+	if v.SessionDurationSeconds != nil {
+		encoder.SetQuery("sessionDurationSeconds").Integer(*v.SessionDurationSeconds)
 	}
 
 	return nil
@@ -2660,6 +2736,10 @@ func awsRestjson1_serializeOpHttpBindingsListAccessPoliciesInput(v *ListAccessPo
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.IamArn != nil {
+		encoder.SetQuery("iamArn").String(*v.IamArn)
+	}
+
 	if v.IdentityId != nil {
 		encoder.SetQuery("identityId").String(*v.IdentityId)
 	}
@@ -2895,6 +2975,10 @@ func awsRestjson1_serializeOpHttpBindingsListAssociatedAssetsInput(v *ListAssoci
 
 	if v.NextToken != nil {
 		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	if len(v.TraversalDirection) > 0 {
+		encoder.SetQuery("traversalDirection").String(string(v.TraversalDirection))
 	}
 
 	return nil
@@ -4755,6 +4839,18 @@ func awsRestjson1_serializeDocumentGroupIdentity(v *types.GroupIdentity, value s
 	return nil
 }
 
+func awsRestjson1_serializeDocumentIAMUserIdentity(v *types.IAMUserIdentity, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arn != nil {
+		ok := object.Key("arn")
+		ok.String(*v.Arn)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentIdentity(v *types.Identity, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4762,6 +4858,13 @@ func awsRestjson1_serializeDocumentIdentity(v *types.Identity, value smithyjson.
 	if v.Group != nil {
 		ok := object.Key("group")
 		if err := awsRestjson1_serializeDocumentGroupIdentity(v.Group, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IamUser != nil {
+		ok := object.Key("iamUser")
+		if err := awsRestjson1_serializeDocumentIAMUserIdentity(v.IamUser, ok); err != nil {
 			return err
 		}
 	}

@@ -11,13 +11,17 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Uses the acl subresource to set the access control list (ACL) permissions for an
-// object that already exists in a bucket. You must have WRITE_ACP permission to
-// set the ACL of an object. Depending on your application needs, you can choose to
-// set the ACL on an object using either the request body or the headers. For
-// example, if you have an existing application that updates a bucket ACL using the
-// request body, you can continue to use that approach. For more information, see
-// Access Control List (ACL) Overview
+// Uses the acl subresource to set the access control list (ACL) permissions for a
+// new or existing object in an S3 bucket. You must have WRITE_ACP permission to
+// set the ACL of an object. For more information, see What permissions can I
+// grant?
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#permissions)
+// in the Amazon Simple Storage Service Developer Guide. This action is not
+// supported by Amazon S3 on Outposts. Depending on your application needs, you can
+// choose to set the ACL on an object using either the request body or the headers.
+// For example, if you have an existing application that updates a bucket ACL using
+// the request body, you can continue to use that approach. For more information,
+// see Access Control List (ACL) Overview
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html) in the
 // Amazon S3 Developer Guide. Access Permissions
 //
@@ -133,8 +137,10 @@ import (
 // Resources
 //
 //     * CopyObject
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html)
 //
-//     * GetObject
+//     *
+// GetObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
 func (c *Client) PutObjectAcl(ctx context.Context, params *PutObjectAclInput, optFns ...func(*Options)) (*PutObjectAclOutput, error) {
 	if params == nil {
 		params = &PutObjectAclInput{}
@@ -156,7 +162,7 @@ type PutObjectAclInput struct {
 	// When using this API with an access point, you must direct requests to the access
 	// point hostname. The access point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// operation using an access point through the AWS SDKs, you provide the access
+	// operation with an access point through the AWS SDKs, you provide the access
 	// point ARN in place of the bucket name. For more information about access point
 	// ARNs, see Using Access Points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
@@ -165,7 +171,23 @@ type PutObjectAclInput struct {
 	// This member is required.
 	Bucket *string
 
-	// Key for which the PUT operation was initiated.
+	// Key for which the PUT operation was initiated. When using this API with an
+	// access point, you must direct requests to the access point hostname. The access
+	// point hostname takes the form
+	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
+	// operation with an access point through the AWS SDKs, you provide the access
+	// point ARN in place of the bucket name. For more information about access point
+	// ARNs, see Using Access Points
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
+	// the Amazon Simple Storage Service Developer Guide. When using this API with
+	// Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname.
+	// The S3 on Outposts hostname takes the form
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
+	// this operation using S3 on Outposts through the AWS SDKs, you provide the
+	// Outposts bucket ARN in place of the bucket name. For more information about S3
+	// on Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
+	// Amazon Simple Storage Service Developer Guide.
 	//
 	// This member is required.
 	Key *string
@@ -183,20 +205,27 @@ type PutObjectAclInput struct {
 	// (http://www.ietf.org/rfc/rfc1864.txt)
 	ContentMD5 *string
 
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
+
 	// Allows grantee the read, write, read ACP, and write ACP permissions on the
-	// bucket.
+	// bucket. This action is not supported by Amazon S3 on Outposts.
 	GrantFullControl *string
 
-	// Allows grantee to list the objects in the bucket.
+	// Allows grantee to list the objects in the bucket. This action is not supported
+	// by Amazon S3 on Outposts.
 	GrantRead *string
 
-	// Allows grantee to read the bucket ACL.
+	// Allows grantee to read the bucket ACL. This action is not supported by Amazon S3
+	// on Outposts.
 	GrantReadACP *string
 
 	// Allows grantee to create, overwrite, and delete any object in the bucket.
 	GrantWrite *string
 
-	// Allows grantee to write the ACL for the applicable bucket.
+	// Allows grantee to write the ACL for the applicable bucket. This action is not
+	// supported by Amazon S3 on Outposts.
 	GrantWriteACP *string
 
 	// Confirms that the requester knows that they will be charged for the request.

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Updates the name of an inbound or an outbound resolver endpoint.
+// Updates the name of an inbound or an outbound Resolver endpoint.
 func (c *Client) UpdateResolverEndpoint(ctx context.Context, params *UpdateResolverEndpointInput, optFns ...func(*Options)) (*UpdateResolverEndpointOutput, error) {
 	if params == nil {
 		params = &UpdateResolverEndpointInput{}
@@ -29,12 +29,12 @@ func (c *Client) UpdateResolverEndpoint(ctx context.Context, params *UpdateResol
 
 type UpdateResolverEndpointInput struct {
 
-	// The ID of the resolver endpoint that you want to update.
+	// The ID of the Resolver endpoint that you want to update.
 	//
 	// This member is required.
 	ResolverEndpointId *string
 
-	// The name of the resolver endpoint that you want to update.
+	// The name of the Resolver endpoint that you want to update.
 	Name *string
 }
 

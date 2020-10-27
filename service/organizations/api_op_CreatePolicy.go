@@ -15,7 +15,9 @@ import (
 // organizational unit (OU), or an individual AWS account. For more information
 // about policies and their use, see Managing Organization Policies
 // (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies.html).
-// This operation can be called only from the organization's master account.
+// If the request includes tags, then the requester must have the
+// organizations:TagResource permission. This operation can be called only from the
+// organization's management account.
 func (c *Client) CreatePolicy(ctx context.Context, params *CreatePolicyInput, optFns ...func(*Options)) (*CreatePolicyOutput, error) {
 	if params == nil {
 		params = &CreatePolicyInput{}
@@ -55,22 +57,32 @@ type CreatePolicyInput struct {
 	//
 	//
 	// * AISERVICES_OPT_OUT_POLICY
-	// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html)
+	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html)
 	//
 	//
 	// * BACKUP_POLICY
-	// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html)
+	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html)
 	//
 	//
 	// * SERVICE_CONTROL_POLICY
-	// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html)
+	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html)
 	//
 	//
 	// * TAG_POLICY
-	// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
+	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
 	//
 	// This member is required.
 	Type types.PolicyType
+
+	// A list of tags that you want to attach to the newly created policy. For each tag
+	// in the list, you must specify both a tag key and a value. You can set the value
+	// to an empty string, but you can't set it to null. For more information about
+	// tagging, see Tagging AWS Organizations resources
+	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html)
+	// in the AWS Organizations User Guide. If any one of the tags is invalid or if you
+	// exceed the allowed number of tags for a policy, then the entire request fails
+	// and the policy is not created.
+	Tags []*types.Tag
 }
 
 type CreatePolicyOutput struct {

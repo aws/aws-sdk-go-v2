@@ -11,6 +11,17 @@ const (
 	AdjustmentTypeExactcapacity           AdjustmentType = "ExactCapacity"
 )
 
+// Values returns all known values for AdjustmentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AdjustmentType) Values() []AdjustmentType {
+	return []AdjustmentType{
+		"ChangeInCapacity",
+		"PercentChangeInCapacity",
+		"ExactCapacity",
+	}
+}
+
 type MetricAggregationType string
 
 // Enum values for MetricAggregationType
@@ -19,6 +30,17 @@ const (
 	MetricAggregationTypeMinimum MetricAggregationType = "Minimum"
 	MetricAggregationTypeMaximum MetricAggregationType = "Maximum"
 )
+
+// Values returns all known values for MetricAggregationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MetricAggregationType) Values() []MetricAggregationType {
+	return []MetricAggregationType{
+		"Average",
+		"Minimum",
+		"Maximum",
+	}
+}
 
 type MetricStatistic string
 
@@ -30,6 +52,19 @@ const (
 	MetricStatisticSamplecount MetricStatistic = "SampleCount"
 	MetricStatisticSum         MetricStatistic = "Sum"
 )
+
+// Values returns all known values for MetricStatistic. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MetricStatistic) Values() []MetricStatistic {
+	return []MetricStatistic{
+		"Average",
+		"Minimum",
+		"Maximum",
+		"SampleCount",
+		"Sum",
+	}
+}
 
 type MetricType string
 
@@ -51,7 +86,33 @@ const (
 	MetricTypeLambdaprovisionedconcurrencyutilization  MetricType = "LambdaProvisionedConcurrencyUtilization"
 	MetricTypeCassandrareadcapacityutilization         MetricType = "CassandraReadCapacityUtilization"
 	MetricTypeCassandrawritecapacityutilization        MetricType = "CassandraWriteCapacityUtilization"
+	MetricTypeKafkabrokerstorageutilization            MetricType = "KafkaBrokerStorageUtilization"
 )
+
+// Values returns all known values for MetricType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MetricType) Values() []MetricType {
+	return []MetricType{
+		"DynamoDBReadCapacityUtilization",
+		"DynamoDBWriteCapacityUtilization",
+		"ALBRequestCountPerTarget",
+		"RDSReaderAverageCPUUtilization",
+		"RDSReaderAverageDatabaseConnections",
+		"EC2SpotFleetRequestAverageCPUUtilization",
+		"EC2SpotFleetRequestAverageNetworkIn",
+		"EC2SpotFleetRequestAverageNetworkOut",
+		"SageMakerVariantInvocationsPerInstance",
+		"ECSServiceAverageCPUUtilization",
+		"ECSServiceAverageMemoryUtilization",
+		"AppStreamAverageCapacityUtilization",
+		"ComprehendInferenceUtilization",
+		"LambdaProvisionedConcurrencyUtilization",
+		"CassandraReadCapacityUtilization",
+		"CassandraWriteCapacityUtilization",
+		"KafkaBrokerStorageUtilization",
+	}
+}
 
 type PolicyType string
 
@@ -61,26 +122,63 @@ const (
 	PolicyTypeTargettrackingscaling PolicyType = "TargetTrackingScaling"
 )
 
+// Values returns all known values for PolicyType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PolicyType) Values() []PolicyType {
+	return []PolicyType{
+		"StepScaling",
+		"TargetTrackingScaling",
+	}
+}
+
 type ScalableDimension string
 
 // Enum values for ScalableDimension
 const (
-	ScalableDimensionEcsservicedesiredcount                        ScalableDimension = "ecs:service:DesiredCount"
-	ScalableDimensionEc2spotfleetrequesttargetcapacity             ScalableDimension = "ec2:spot-fleet-request:TargetCapacity"
-	ScalableDimensionEmrinstancegroupinstancecount                 ScalableDimension = "elasticmapreduce:instancegroup:InstanceCount"
-	ScalableDimensionAppstreamfleetdesiredcapacity                 ScalableDimension = "appstream:fleet:DesiredCapacity"
-	ScalableDimensionDynamodbtablereadcapacityunits                ScalableDimension = "dynamodb:table:ReadCapacityUnits"
-	ScalableDimensionDynamodbtablewritecapacityunits               ScalableDimension = "dynamodb:table:WriteCapacityUnits"
-	ScalableDimensionDynamodbindexreadcapacityunits                ScalableDimension = "dynamodb:index:ReadCapacityUnits"
-	ScalableDimensionDynamodbindexwritecapacityunits               ScalableDimension = "dynamodb:index:WriteCapacityUnits"
-	ScalableDimensionRdsclusterreadreplicacount                    ScalableDimension = "rds:cluster:ReadReplicaCount"
-	ScalableDimensionSagemakervariantdesiredinstancecount          ScalableDimension = "sagemaker:variant:DesiredInstanceCount"
-	ScalableDimensionCustomresourcescalabledimension               ScalableDimension = "custom-resource:ResourceType:Property"
-	ScalableDimensionComprehenddocclassifierendpointinferenceunits ScalableDimension = "comprehend:document-classifier-endpoint:DesiredInferenceUnits"
-	ScalableDimensionLambdafunctionprovisionedconcurrency          ScalableDimension = "lambda:function:ProvisionedConcurrency"
-	ScalableDimensionCassandratablereadcapacityunits               ScalableDimension = "cassandra:table:ReadCapacityUnits"
-	ScalableDimensionCassandratablewritecapacityunits              ScalableDimension = "cassandra:table:WriteCapacityUnits"
+	ScalableDimensionEcsservicedesiredcount                           ScalableDimension = "ecs:service:DesiredCount"
+	ScalableDimensionEc2spotfleetrequesttargetcapacity                ScalableDimension = "ec2:spot-fleet-request:TargetCapacity"
+	ScalableDimensionEmrinstancegroupinstancecount                    ScalableDimension = "elasticmapreduce:instancegroup:InstanceCount"
+	ScalableDimensionAppstreamfleetdesiredcapacity                    ScalableDimension = "appstream:fleet:DesiredCapacity"
+	ScalableDimensionDynamodbtablereadcapacityunits                   ScalableDimension = "dynamodb:table:ReadCapacityUnits"
+	ScalableDimensionDynamodbtablewritecapacityunits                  ScalableDimension = "dynamodb:table:WriteCapacityUnits"
+	ScalableDimensionDynamodbindexreadcapacityunits                   ScalableDimension = "dynamodb:index:ReadCapacityUnits"
+	ScalableDimensionDynamodbindexwritecapacityunits                  ScalableDimension = "dynamodb:index:WriteCapacityUnits"
+	ScalableDimensionRdsclusterreadreplicacount                       ScalableDimension = "rds:cluster:ReadReplicaCount"
+	ScalableDimensionSagemakervariantdesiredinstancecount             ScalableDimension = "sagemaker:variant:DesiredInstanceCount"
+	ScalableDimensionCustomresourcescalabledimension                  ScalableDimension = "custom-resource:ResourceType:Property"
+	ScalableDimensionComprehenddocclassifierendpointinferenceunits    ScalableDimension = "comprehend:document-classifier-endpoint:DesiredInferenceUnits"
+	ScalableDimensionComprehendentityrecognizerendpointinferenceunits ScalableDimension = "comprehend:entity-recognizer-endpoint:DesiredInferenceUnits"
+	ScalableDimensionLambdafunctionprovisionedconcurrency             ScalableDimension = "lambda:function:ProvisionedConcurrency"
+	ScalableDimensionCassandratablereadcapacityunits                  ScalableDimension = "cassandra:table:ReadCapacityUnits"
+	ScalableDimensionCassandratablewritecapacityunits                 ScalableDimension = "cassandra:table:WriteCapacityUnits"
+	ScalableDimensionKafkabrokerstoragevolumesize                     ScalableDimension = "kafka:broker-storage:VolumeSize"
 )
+
+// Values returns all known values for ScalableDimension. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ScalableDimension) Values() []ScalableDimension {
+	return []ScalableDimension{
+		"ecs:service:DesiredCount",
+		"ec2:spot-fleet-request:TargetCapacity",
+		"elasticmapreduce:instancegroup:InstanceCount",
+		"appstream:fleet:DesiredCapacity",
+		"dynamodb:table:ReadCapacityUnits",
+		"dynamodb:table:WriteCapacityUnits",
+		"dynamodb:index:ReadCapacityUnits",
+		"dynamodb:index:WriteCapacityUnits",
+		"rds:cluster:ReadReplicaCount",
+		"sagemaker:variant:DesiredInstanceCount",
+		"custom-resource:ResourceType:Property",
+		"comprehend:document-classifier-endpoint:DesiredInferenceUnits",
+		"comprehend:entity-recognizer-endpoint:DesiredInferenceUnits",
+		"lambda:function:ProvisionedConcurrency",
+		"cassandra:table:ReadCapacityUnits",
+		"cassandra:table:WriteCapacityUnits",
+		"kafka:broker-storage:VolumeSize",
+	}
+}
 
 type ScalingActivityStatusCode string
 
@@ -93,6 +191,20 @@ const (
 	ScalingActivityStatusCodeUnfulfilled ScalingActivityStatusCode = "Unfulfilled"
 	ScalingActivityStatusCodeFailed      ScalingActivityStatusCode = "Failed"
 )
+
+// Values returns all known values for ScalingActivityStatusCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScalingActivityStatusCode) Values() []ScalingActivityStatusCode {
+	return []ScalingActivityStatusCode{
+		"Pending",
+		"InProgress",
+		"Successful",
+		"Overridden",
+		"Unfulfilled",
+		"Failed",
+	}
+}
 
 type ServiceNamespace string
 
@@ -109,4 +221,25 @@ const (
 	ServiceNamespaceComprehend      ServiceNamespace = "comprehend"
 	ServiceNamespaceLambda          ServiceNamespace = "lambda"
 	ServiceNamespaceCassandra       ServiceNamespace = "cassandra"
+	ServiceNamespaceKafka           ServiceNamespace = "kafka"
 )
+
+// Values returns all known values for ServiceNamespace. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceNamespace) Values() []ServiceNamespace {
+	return []ServiceNamespace{
+		"ecs",
+		"elasticmapreduce",
+		"ec2",
+		"appstream",
+		"dynamodb",
+		"rds",
+		"sagemaker",
+		"custom-resource",
+		"comprehend",
+		"lambda",
+		"cassandra",
+		"kafka",
+	}
+}

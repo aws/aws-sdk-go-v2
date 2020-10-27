@@ -68,7 +68,7 @@ type CreateNamespaceOutput struct {
 	// The status of the creation of the namespace. This is an asynchronous process. A
 	// status of CREATED means that your namespace is ready to use. If an error occurs,
 	// it indicates if the process is retryable or non-retryable. In the case of a
-	// non-retryable error, refer to the error message for follow-up actions.
+	// non-retryable error, refer to the error message for follow-up tasks.
 	CreationStatus types.NamespaceStatus
 
 	// Specifies the type of your user identity directory. Currently, this supports
@@ -80,6 +80,9 @@ type CreateNamespaceOutput struct {
 
 	// The AWS request ID for this operation.
 	RequestId *string
+
+	// The HTTP status of the request.
+	Status *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

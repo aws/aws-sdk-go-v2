@@ -59,6 +59,9 @@ type CreateBatchInferenceJobInput struct {
 	// This member is required.
 	SolutionVersionArn *string
 
+	// The configuration details of a batch inference job.
+	BatchInferenceJobConfig *types.BatchInferenceJobConfig
+
 	// The ARN of the filter to apply to the batch inference job. For more information
 	// on using filters, see Using Filters with Amazon Personalize.
 	FilterArn *string

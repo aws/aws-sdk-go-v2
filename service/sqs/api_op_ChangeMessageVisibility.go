@@ -84,8 +84,8 @@ type ChangeMessageVisibilityInput struct {
 	// This member is required.
 	ReceiptHandle *string
 
-	// The new value for the message's visibility timeout (in seconds). Values values:
-	// 0 to 43200. Maximum: 12 hours.
+	// The new value for the message's visibility timeout (in seconds). Values range: 0
+	// to 43200. Maximum: 12 hours.
 	//
 	// This member is required.
 	VisibilityTimeout *int32

@@ -13,10 +13,10 @@ import (
 
 // Returns an array of celebrities recognized in the input image. For more
 // information, see Recognizing Celebrities in the Amazon Rekognition Developer
-// Guide. RecognizeCelebrities returns the 100 largest faces in the image. It lists
+// Guide. RecognizeCelebrities returns the 64 largest faces in the image. It lists
 // recognized celebrities in the CelebrityFaces array and unrecognized faces in the
 // UnrecognizedFaces array. RecognizeCelebrities doesn't return celebrities whose
-// faces aren't among the largest 100 faces in the image. For each celebrity
+// faces aren't among the largest 64 faces in the image. For each celebrity
 // recognized, RecognizeCelebrities returns a Celebrity object. The Celebrity
 // object contains the celebrity name, ID, URL links to additional information,
 // match confidence, and a ComparedFace object that you can use to locate the
@@ -62,7 +62,7 @@ type RecognizeCelebritiesInput struct {
 type RecognizeCelebritiesOutput struct {
 
 	// Details about each celebrity found in the image. Amazon Rekognition can detect a
-	// maximum of 15 celebrities in an image.
+	// maximum of 64 celebrities in an image.
 	CelebrityFaces []*types.Celebrity
 
 	// The orientation of the input image (counterclockwise direction). If your

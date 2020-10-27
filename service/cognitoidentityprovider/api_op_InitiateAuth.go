@@ -84,15 +84,16 @@ type InitiateAuthInput struct {
 	//
 	//
 	// * For USER_SRP_AUTH: USERNAME (required), SRP_A (required), SECRET_HASH
-	// (required if the app client is configured with a client secret), DEVICE_KEY
+	// (required if the app client is configured with a client secret), DEVICE_KEY.
 	//
 	//
 	// * For REFRESH_TOKEN_AUTH/REFRESH_TOKEN: REFRESH_TOKEN (required), SECRET_HASH
-	// (required if the app client is configured with a client secret), DEVICE_KEY
+	// (required if the app client is configured with a client secret), DEVICE_KEY.
 	//
 	//
 	// * For CUSTOM_AUTH: USERNAME (required), SECRET_HASH (if app client is configured
-	// with client secret), DEVICE_KEY
+	// with client secret), DEVICE_KEY. To start the authentication flow with password
+	// verification, include ChallengeName: SRP_A and SRP_A: (The SRP_A Value).
 	AuthParameters map[string]*string
 
 	// A map of custom key-value pairs that you can provide as input for certain custom
@@ -203,9 +204,9 @@ type InitiateAuthOutput struct {
 	ChallengeParameters map[string]*string
 
 	// The session which should be passed both ways in challenge-response calls to the
-	// service. If the or API call determines that the caller needs to go through
-	// another challenge, they return a session with other challenge parameters. This
-	// session should be passed as it is to the next RespondToAuthChallenge API call.
+	// service. If the caller needs to go through another challenge, they return a
+	// session with other challenge parameters. This session should be passed as it is
+	// to the next RespondToAuthChallenge API call.
 	Session *string
 
 	// Metadata pertaining to the operation's result.

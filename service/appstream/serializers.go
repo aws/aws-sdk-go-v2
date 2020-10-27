@@ -2778,6 +2778,11 @@ func awsAwsjson11_serializeOpDocumentCreateFleetInput(v *CreateFleetInput, value
 		ok.String(*v.Name)
 	}
 
+	if len(v.StreamView) > 0 {
+		ok := object.Key("StreamView")
+		ok.String(string(v.StreamView))
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsAwsjson11_serializeDocumentTags(v.Tags, ok); err != nil {
@@ -3711,6 +3716,11 @@ func awsAwsjson11_serializeOpDocumentUpdateFleetInput(v *UpdateFleetInput, value
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if len(v.StreamView) > 0 {
+		ok := object.Key("StreamView")
+		ok.String(string(v.StreamView))
 	}
 
 	if v.VpcConfig != nil {

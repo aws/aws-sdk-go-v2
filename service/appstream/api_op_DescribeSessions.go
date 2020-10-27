@@ -55,7 +55,8 @@ type DescribeSessionsInput struct {
 	// operation. If this value is null, it retrieves the first page.
 	NextToken *string
 
-	// The user identifier.
+	// The user identifier (ID). If you specify a user ID, you must also specify the
+	// authentication type.
 	UserId *string
 }
 

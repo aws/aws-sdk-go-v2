@@ -14,6 +14,98 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
+type awsAwsjson11_serializeOpCreateAnomalyMonitor struct {
+}
+
+func (*awsAwsjson11_serializeOpCreateAnomalyMonitor) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreateAnomalyMonitor) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateAnomalyMonitorInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.CreateAnomalyMonitor")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateAnomalyMonitorInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpCreateAnomalySubscription struct {
+}
+
+func (*awsAwsjson11_serializeOpCreateAnomalySubscription) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreateAnomalySubscription) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateAnomalySubscriptionInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.CreateAnomalySubscription")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateAnomalySubscriptionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpCreateCostCategoryDefinition struct {
 }
 
@@ -45,6 +137,98 @@ func (m *awsAwsjson11_serializeOpCreateCostCategoryDefinition) HandleSerialize(c
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentCreateCostCategoryDefinitionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDeleteAnomalyMonitor struct {
+}
+
+func (*awsAwsjson11_serializeOpDeleteAnomalyMonitor) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeleteAnomalyMonitor) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteAnomalyMonitorInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.DeleteAnomalyMonitor")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeleteAnomalyMonitorInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDeleteAnomalySubscription struct {
+}
+
+func (*awsAwsjson11_serializeOpDeleteAnomalySubscription) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeleteAnomalySubscription) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteAnomalySubscriptionInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.DeleteAnomalySubscription")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeleteAnomalySubscriptionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -137,6 +321,144 @@ func (m *awsAwsjson11_serializeOpDescribeCostCategoryDefinition) HandleSerialize
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentDescribeCostCategoryDefinitionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpGetAnomalies struct {
+}
+
+func (*awsAwsjson11_serializeOpGetAnomalies) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetAnomalies) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetAnomaliesInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.GetAnomalies")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetAnomaliesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpGetAnomalyMonitors struct {
+}
+
+func (*awsAwsjson11_serializeOpGetAnomalyMonitors) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetAnomalyMonitors) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetAnomalyMonitorsInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.GetAnomalyMonitors")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetAnomalyMonitorsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpGetAnomalySubscriptions struct {
+}
+
+func (*awsAwsjson11_serializeOpGetAnomalySubscriptions) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetAnomalySubscriptions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetAnomalySubscriptionsInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.GetAnomalySubscriptions")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetAnomalySubscriptionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -842,6 +1164,144 @@ func (m *awsAwsjson11_serializeOpListCostCategoryDefinitions) HandleSerialize(ct
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpProvideAnomalyFeedback struct {
+}
+
+func (*awsAwsjson11_serializeOpProvideAnomalyFeedback) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpProvideAnomalyFeedback) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ProvideAnomalyFeedbackInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.ProvideAnomalyFeedback")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentProvideAnomalyFeedbackInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpUpdateAnomalyMonitor struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateAnomalyMonitor) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateAnomalyMonitor) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateAnomalyMonitorInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.UpdateAnomalyMonitor")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateAnomalyMonitorInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpUpdateAnomalySubscription struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateAnomalySubscription) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateAnomalySubscription) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateAnomalySubscriptionInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.UpdateAnomalySubscription")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateAnomalySubscriptionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpUpdateCostCategoryDefinition struct {
 }
 
@@ -887,6 +1347,123 @@ func (m *awsAwsjson11_serializeOpUpdateCostCategoryDefinition) HandleSerialize(c
 
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson11_serializeDocumentAnomalyDateInterval(v *types.AnomalyDateInterval, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EndDate != nil {
+		ok := object.Key("EndDate")
+		ok.String(*v.EndDate)
+	}
+
+	if v.StartDate != nil {
+		ok := object.Key("StartDate")
+		ok.String(*v.StartDate)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAnomalyMonitor(v *types.AnomalyMonitor, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CreationDate != nil {
+		ok := object.Key("CreationDate")
+		ok.String(*v.CreationDate)
+	}
+
+	if v.DimensionalValueCount != nil {
+		ok := object.Key("DimensionalValueCount")
+		ok.Integer(*v.DimensionalValueCount)
+	}
+
+	if v.LastEvaluatedDate != nil {
+		ok := object.Key("LastEvaluatedDate")
+		ok.String(*v.LastEvaluatedDate)
+	}
+
+	if v.LastUpdatedDate != nil {
+		ok := object.Key("LastUpdatedDate")
+		ok.String(*v.LastUpdatedDate)
+	}
+
+	if v.MonitorArn != nil {
+		ok := object.Key("MonitorArn")
+		ok.String(*v.MonitorArn)
+	}
+
+	if len(v.MonitorDimension) > 0 {
+		ok := object.Key("MonitorDimension")
+		ok.String(string(v.MonitorDimension))
+	}
+
+	if v.MonitorName != nil {
+		ok := object.Key("MonitorName")
+		ok.String(*v.MonitorName)
+	}
+
+	if v.MonitorSpecification != nil {
+		ok := object.Key("MonitorSpecification")
+		if err := awsAwsjson11_serializeDocumentExpression(v.MonitorSpecification, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.MonitorType) > 0 {
+		ok := object.Key("MonitorType")
+		ok.String(string(v.MonitorType))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAnomalySubscription(v *types.AnomalySubscription, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccountId != nil {
+		ok := object.Key("AccountId")
+		ok.String(*v.AccountId)
+	}
+
+	if len(v.Frequency) > 0 {
+		ok := object.Key("Frequency")
+		ok.String(string(v.Frequency))
+	}
+
+	if v.MonitorArnList != nil {
+		ok := object.Key("MonitorArnList")
+		if err := awsAwsjson11_serializeDocumentValues(v.MonitorArnList, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Subscribers != nil {
+		ok := object.Key("Subscribers")
+		if err := awsAwsjson11_serializeDocumentSubscribers(v.Subscribers, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SubscriptionArn != nil {
+		ok := object.Key("SubscriptionArn")
+		ok.String(*v.SubscriptionArn)
+	}
+
+	if v.SubscriptionName != nil {
+		ok := object.Key("SubscriptionName")
+		ok.String(*v.SubscriptionName)
+	}
+
+	if v.Threshold != nil {
+		ok := object.Key("Threshold")
+		ok.Double(*v.Threshold)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentCostCategoryRule(v *types.CostCategoryRule, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -930,6 +1507,13 @@ func awsAwsjson11_serializeDocumentCostCategoryValues(v *types.CostCategoryValue
 	if v.Key != nil {
 		ok := object.Key("Key")
 		ok.String(*v.Key)
+	}
+
+	if v.MatchOptions != nil {
+		ok := object.Key("MatchOptions")
+		if err := awsAwsjson11_serializeDocumentMatchOptions(v.MatchOptions, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Values != nil {
@@ -1154,6 +1738,45 @@ func awsAwsjson11_serializeDocumentServiceSpecification(v *types.ServiceSpecific
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentSubscriber(v *types.Subscriber, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Address != nil {
+		ok := object.Key("Address")
+		ok.String(*v.Address)
+	}
+
+	if len(v.Status) > 0 {
+		ok := object.Key("Status")
+		ok.String(string(v.Status))
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSubscribers(v []*types.Subscriber, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			av.Null()
+			continue
+		}
+		if err := awsAwsjson11_serializeDocumentSubscriber(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentTagValues(v *types.TagValues, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1180,6 +1803,28 @@ func awsAwsjson11_serializeDocumentTagValues(v *types.TagValues, value smithyjso
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentTotalImpactFilter(v *types.TotalImpactFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EndValue != nil {
+		ok := object.Key("EndValue")
+		ok.Double(*v.EndValue)
+	}
+
+	if len(v.NumericOperator) > 0 {
+		ok := object.Key("NumericOperator")
+		ok.String(string(v.NumericOperator))
+	}
+
+	if v.StartValue != nil {
+		ok := object.Key("StartValue")
+		ok.Double(*v.StartValue)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentValues(v []*string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -1192,6 +1837,34 @@ func awsAwsjson11_serializeDocumentValues(v []*string, value smithyjson.Value) e
 		}
 		av.String(*v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentCreateAnomalyMonitorInput(v *CreateAnomalyMonitorInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AnomalyMonitor != nil {
+		ok := object.Key("AnomalyMonitor")
+		if err := awsAwsjson11_serializeDocumentAnomalyMonitor(v.AnomalyMonitor, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentCreateAnomalySubscriptionInput(v *CreateAnomalySubscriptionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AnomalySubscription != nil {
+		ok := object.Key("AnomalySubscription")
+		if err := awsAwsjson11_serializeDocumentAnomalySubscription(v.AnomalySubscription, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -1214,6 +1887,30 @@ func awsAwsjson11_serializeOpDocumentCreateCostCategoryDefinitionInput(v *Create
 	if len(v.RuleVersion) > 0 {
 		ok := object.Key("RuleVersion")
 		ok.String(string(v.RuleVersion))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDeleteAnomalyMonitorInput(v *DeleteAnomalyMonitorInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MonitorArn != nil {
+		ok := object.Key("MonitorArn")
+		ok.String(*v.MonitorArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDeleteAnomalySubscriptionInput(v *DeleteAnomalySubscriptionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SubscriptionArn != nil {
+		ok := object.Key("SubscriptionArn")
+		ok.String(*v.SubscriptionArn)
 	}
 
 	return nil
@@ -1243,6 +1940,100 @@ func awsAwsjson11_serializeOpDocumentDescribeCostCategoryDefinitionInput(v *Desc
 	if v.EffectiveOn != nil {
 		ok := object.Key("EffectiveOn")
 		ok.String(*v.EffectiveOn)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentGetAnomaliesInput(v *GetAnomaliesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DateInterval != nil {
+		ok := object.Key("DateInterval")
+		if err := awsAwsjson11_serializeDocumentAnomalyDateInterval(v.DateInterval, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Feedback) > 0 {
+		ok := object.Key("Feedback")
+		ok.String(string(v.Feedback))
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.MonitorArn != nil {
+		ok := object.Key("MonitorArn")
+		ok.String(*v.MonitorArn)
+	}
+
+	if v.NextPageToken != nil {
+		ok := object.Key("NextPageToken")
+		ok.String(*v.NextPageToken)
+	}
+
+	if v.TotalImpact != nil {
+		ok := object.Key("TotalImpact")
+		if err := awsAwsjson11_serializeDocumentTotalImpactFilter(v.TotalImpact, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentGetAnomalyMonitorsInput(v *GetAnomalyMonitorsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.MonitorArnList != nil {
+		ok := object.Key("MonitorArnList")
+		if err := awsAwsjson11_serializeDocumentValues(v.MonitorArnList, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NextPageToken != nil {
+		ok := object.Key("NextPageToken")
+		ok.String(*v.NextPageToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentGetAnomalySubscriptionsInput(v *GetAnomalySubscriptionsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.MonitorArn != nil {
+		ok := object.Key("MonitorArn")
+		ok.String(*v.MonitorArn)
+	}
+
+	if v.NextPageToken != nil {
+		ok := object.Key("NextPageToken")
+		ok.String(*v.NextPageToken)
+	}
+
+	if v.SubscriptionArnList != nil {
+		ok := object.Key("SubscriptionArnList")
+		if err := awsAwsjson11_serializeDocumentValues(v.SubscriptionArnList, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -1819,6 +2610,81 @@ func awsAwsjson11_serializeOpDocumentListCostCategoryDefinitionsInput(v *ListCos
 	if v.NextToken != nil {
 		ok := object.Key("NextToken")
 		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentProvideAnomalyFeedbackInput(v *ProvideAnomalyFeedbackInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AnomalyId != nil {
+		ok := object.Key("AnomalyId")
+		ok.String(*v.AnomalyId)
+	}
+
+	if len(v.Feedback) > 0 {
+		ok := object.Key("Feedback")
+		ok.String(string(v.Feedback))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateAnomalyMonitorInput(v *UpdateAnomalyMonitorInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MonitorArn != nil {
+		ok := object.Key("MonitorArn")
+		ok.String(*v.MonitorArn)
+	}
+
+	if v.MonitorName != nil {
+		ok := object.Key("MonitorName")
+		ok.String(*v.MonitorName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateAnomalySubscriptionInput(v *UpdateAnomalySubscriptionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Frequency) > 0 {
+		ok := object.Key("Frequency")
+		ok.String(string(v.Frequency))
+	}
+
+	if v.MonitorArnList != nil {
+		ok := object.Key("MonitorArnList")
+		if err := awsAwsjson11_serializeDocumentValues(v.MonitorArnList, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Subscribers != nil {
+		ok := object.Key("Subscribers")
+		if err := awsAwsjson11_serializeDocumentSubscribers(v.Subscribers, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SubscriptionArn != nil {
+		ok := object.Key("SubscriptionArn")
+		ok.String(*v.SubscriptionArn)
+	}
+
+	if v.SubscriptionName != nil {
+		ok := object.Key("SubscriptionName")
+		ok.String(*v.SubscriptionName)
+	}
+
+	if v.Threshold != nil {
+		ok := object.Key("Threshold")
+		ok.Double(*v.Threshold)
 	}
 
 	return nil

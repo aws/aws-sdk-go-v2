@@ -14,7 +14,8 @@ import (
 // Provides a summarized description of the specified Kinesis data stream without
 // the shard list. The information returned includes the stream name, Amazon
 // Resource Name (ARN), status, record retention period, approximate creation time,
-// monitoring, encryption details, and open shard count.
+// monitoring, encryption details, and open shard count. DescribeStreamSummary has
+// a limit of 20 transactions per second per account.
 func (c *Client) DescribeStreamSummary(ctx context.Context, params *DescribeStreamSummaryInput, optFns ...func(*Options)) (*DescribeStreamSummaryOutput, error) {
 	if params == nil {
 		params = &DescribeStreamSummaryInput{}

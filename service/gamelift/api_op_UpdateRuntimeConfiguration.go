@@ -64,7 +64,7 @@ func (c *Client) UpdateRuntimeConfiguration(ctx context.Context, params *UpdateR
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type UpdateRuntimeConfigurationInput struct {
 
 	// A unique identifier for a fleet to update runtime configuration for. You can use
@@ -85,7 +85,7 @@ type UpdateRuntimeConfigurationInput struct {
 	RuntimeConfiguration *types.RuntimeConfiguration
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type UpdateRuntimeConfigurationOutput struct {
 
 	// The runtime configuration currently in force. If the update was successful, this

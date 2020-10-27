@@ -30,8 +30,10 @@ func (c *Client) GetFindings(ctx context.Context, params *GetFindingsInput, optF
 type GetFindingsInput struct {
 
 	// The finding attributes used to define a condition to filter the returned
-	// findings. Note that in the available filter fields, WorkflowState is deprecated.
-	// To search for a finding based on its workflow status, use WorkflowStatus.
+	// findings. You can filter by up to 10 finding attributes. For each attribute, you
+	// can provide up to 20 filter values. Note that in the available filter fields,
+	// WorkflowState is deprecated. To search for a finding based on its workflow
+	// status, use WorkflowStatus.
 	Filters *types.AwsSecurityFindingFilters
 
 	// The maximum number of findings to return.

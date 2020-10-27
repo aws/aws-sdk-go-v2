@@ -10,7 +10,12 @@
 // customer issues more efficiently by putting customers in touch with the right
 // agents. There are limits to the number of Amazon Connect resources that you can
 // create and limits to the number of requests that you can make per second. For
-// more information, see Amazon Connect Service Limits
+// more information, see Amazon Connect Service Quotas
 // (https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html)
-// in the Amazon Connect Administrator Guide.
+// in the Amazon Connect Administrator Guide. To connect programmatically to an AWS
+// service, you use an endpoint. For a list of Amazon Connect endpoints, see Amazon
+// Connect Endpoints
+// (https://docs.aws.amazon.com/general/latest/gr/connect_region.html). Working
+// with contact flows? Check out the Amazon Connect Flow language
+// (https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html).
 package connect

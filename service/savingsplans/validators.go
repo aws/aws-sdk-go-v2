@@ -29,6 +29,26 @@ func (m *validateOpCreateSavingsPlan) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteQueuedSavingsPlan struct {
+}
+
+func (*validateOpDeleteQueuedSavingsPlan) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteQueuedSavingsPlan) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteQueuedSavingsPlanInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteQueuedSavingsPlanInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeSavingsPlanRates struct {
 }
 
@@ -113,6 +133,10 @@ func addOpCreateSavingsPlanValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateSavingsPlan{}, middleware.After)
 }
 
+func addOpDeleteQueuedSavingsPlanValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteQueuedSavingsPlan{}, middleware.After)
+}
+
 func addOpDescribeSavingsPlanRatesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeSavingsPlanRates{}, middleware.After)
 }
@@ -139,6 +163,21 @@ func validateOpCreateSavingsPlanInput(v *CreateSavingsPlanInput) error {
 	}
 	if v.Commitment == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Commitment"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteQueuedSavingsPlanInput(v *DeleteQueuedSavingsPlanInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteQueuedSavingsPlanInput"}
+	if v.SavingsPlanId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SavingsPlanId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -200,11 +239,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

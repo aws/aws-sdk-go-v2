@@ -4419,6 +4419,15 @@ func awsRestjson1_deserializeDocumentNode(v **types.Node, value interface{}) err
 				sv.NetworkId = &jtv
 			}
 
+		case "StateDB":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StateDBType to be of type string, got %T instead", value)
+				}
+				sv.StateDB = types.StateDBType(jtv)
+			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)

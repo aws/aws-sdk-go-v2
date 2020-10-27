@@ -6,16 +6,42 @@ import (
 	"time"
 )
 
+// Describes the properties of a security policy that was specified. For more
+// information about security policies, see Working with security policies
+// (https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html).
+type DescribedSecurityPolicy struct {
+
+	// Specifies the name of the security policy that is attached to the server.
+	//
+	// This member is required.
+	SecurityPolicyName *string
+
+	// Specifies whether this policy enables Federal Information Processing Standards
+	// (FIPS).
+	Fips *bool
+
+	// Specifies the enabled Secure Shell (SSH) cipher encryption algorithms in the
+	// security policy that is attached to the server.
+	SshCiphers []*string
+
+	// Specifies the enabled SSH key exchange (KEX) encryption algorithms in the
+	// security policy that is attached to the server.
+	SshKexs []*string
+
+	// Specifies the enabled SSH message authentication code (MAC) encryption
+	// algorithms in the security policy that is attached to the server.
+	SshMacs []*string
+
+	// Specifies the enabled Transport Layer Security (TLS) cipher encryption
+	// algorithms in the security policy that is attached to the server.
+	TlsCiphers []*string
+}
+
 // Describes the properties of a file transfer protocol-enabled server that was
-// specified. Information returned includes the following: the server Amazon
-// Resource Name (ARN), the certificate ARN (if the FTPS protocol was selected),
-// the endpoint type and details, the authentication configuration and type, the
-// logging role, the file transfer protocol or protocols, the server ID and state,
-// and assigned tags or metadata.
+// specified.
 type DescribedServer struct {
 
-	// Specifies the unique Amazon Resource Name (ARN) for a file transfer
-	// protocol-enabled server to be described.
+	// Specifies the unique Amazon Resource Name (ARN) of the server.
 	//
 	// This member is required.
 	Arn *string
@@ -25,12 +51,12 @@ type DescribedServer struct {
 	Certificate *string
 
 	// Specifies the virtual private cloud (VPC) endpoint settings that you configured
-	// for your file transfer protocol-enabled server.
+	// for your server.
 	EndpointDetails *EndpointDetails
 
-	// Defines the type of endpoint that your file transfer protocol-enabled server is
-	// connected to. If your server is connected to a VPC endpoint, your server isn't
-	// accessible over the public internet.
+	// Defines the type of endpoint that your server is connected to. If your server is
+	// connected to a VPC endpoint, your server isn't accessible over the public
+	// internet.
 	EndpointType EndpointType
 
 	// Specifies the Base64-encoded SHA256 fingerprint of the server's host key. This
@@ -39,20 +65,19 @@ type DescribedServer struct {
 	HostKeyFingerprint *string
 
 	// Specifies information to call a customer-supplied authentication API. This field
-	// is not populated when the IdentityProviderType of a file transfer
-	// protocol-enabled server is SERVICE_MANAGED.
+	// is not populated when the IdentityProviderType of a server is SERVICE_MANAGED.
 	IdentityProviderDetails *IdentityProviderDetails
 
 	// Specifies the mode of authentication method enabled for this service. A value of
-	// SERVICE_MANAGED means that you are using this file transfer protocol-enabled
-	// server to store and access user credentials within the service. A value of
-	// API_GATEWAY indicates that you have integrated an API Gateway endpoint that will
-	// be invoked for authenticating your user into the service.
+	// SERVICE_MANAGED means that you are using this server to store and access user
+	// credentials within the service. A value of API_GATEWAY indicates that you have
+	// integrated an API Gateway endpoint that will be invoked for authenticating your
+	// user into the service.
 	IdentityProviderType IdentityProviderType
 
-	// Specifies the AWS Identity and Access Management (IAM) role that allows a file
-	// transfer protocol-enabled server to turn on Amazon CloudWatch logging for Amazon
-	// S3 events. When set, user activity can be viewed in your CloudWatch logs.
+	// Specifies the AWS Identity and Access Management (IAM) role that allows a server
+	// to turn on Amazon CloudWatch logging for Amazon S3 events. When set, user
+	// activity can be viewed in your CloudWatch logs.
 	LoggingRole *string
 
 	// Specifies the file transfer protocol or protocols over which your file transfer
@@ -68,30 +93,31 @@ type DescribedServer struct {
 	//     * FTP (File Transfer Protocol): Unencrypted file transfer
 	Protocols []Protocol
 
-	// Specifies the unique system-assigned identifier for a file transfer
-	// protocol-enabled server that you instantiate.
+	// Specifies the name of the security policy that is attached to the server.
+	SecurityPolicyName *string
+
+	// Specifies the unique system-assigned identifier for a server that you
+	// instantiate.
 	ServerId *string
 
-	// Specifies the condition of a file transfer protocol-enabled server for the
-	// server that was described. A value of ONLINE indicates that the server can
-	// accept jobs and transfer files. A State value of OFFLINE means that the server
-	// cannot perform file transfer operations. The states of STARTING and STOPPING
-	// indicate that the server is in an intermediate state, either not fully able to
-	// respond, or not fully offline. The values of START_FAILED or STOP_FAILED can
-	// indicate an error condition.
+	// Specifies the condition of a server for the server that was described. A value
+	// of ONLINE indicates that the server can accept jobs and transfer files. A State
+	// value of OFFLINE means that the server cannot perform file transfer operations.
+	// The states of STARTING and STOPPING indicate that the server is in an
+	// intermediate state, either not fully able to respond, or not fully offline. The
+	// values of START_FAILED or STOP_FAILED can indicate an error condition.
 	State State
 
-	// Specifies the key-value pairs that you can use to search for and group file
-	// transfer protocol-enabled servers that were assigned to the server that was
-	// described.
+	// Specifies the key-value pairs that you can use to search for and group servers
+	// that were assigned to the server that was described.
 	Tags []*Tag
 
-	// Specifies the number of users that are assigned to a file transfer
-	// protocol-enabled server you specified with the ServerId.
+	// Specifies the number of users that are assigned to a server you specified with
+	// the ServerId.
 	UserCount *int32
 }
 
-// Returns properties of the user that you want to describe.
+// Describes the properties of a user that was specified.
 type DescribedUser struct {
 
 	// Specifies the unique Amazon Resource Name (ARN) for the user that was requested
@@ -132,8 +158,8 @@ type DescribedUser struct {
 	// bucket. The policies attached to this role will determine the level of access
 	// you want to provide your users when transferring files into and out of your
 	// Amazon S3 bucket or buckets. The IAM role should also contain a trust
-	// relationship that allows a file transfer protocol-enabled server to access your
-	// resources when servicing your users' transfer requests.
+	// relationship that allows a server to access your resources when servicing your
+	// users' transfer requests.
 	Role *string
 
 	// Specifies the public key portion of the Secure Shell (SSH) keys stored for the
@@ -146,7 +172,7 @@ type DescribedUser struct {
 
 	// Specifies the name of the user that was requested to be described. User names
 	// are used for authentication purposes. This is the string that will be used by
-	// your user when they log in to your file transfer protocol-enabled server.
+	// your user when they log in to your server.
 	UserName *string
 }
 
@@ -158,27 +184,30 @@ type DescribedUser struct {
 type EndpointDetails struct {
 
 	// A list of address allocation IDs that are required to attach an Elastic IP
-	// address to your file transfer protocol-enabled server's endpoint. This is only
-	// valid in the UpdateServer API. This property can only be use when EndpointType
-	// is set to VPC.
+	// address to your server's endpoint. This property can only be set when
+	// EndpointType is set to VPC and it is only valid in the UpdateServer API.
 	AddressAllocationIds []*string
 
-	// A list of subnet IDs that are required to host your file transfer
-	// protocol-enabled server endpoint in your VPC. This property can only be used
-	// when EndpointType is set to VPC.
+	// A list of security groups IDs that are available to attach to your server's
+	// endpoint. This property can only be set when EndpointType is set to VPC. You can
+	// only edit the SecurityGroupIds property in the UpdateServer API and only if you
+	// are changing the EndpointType from PUBLIC or VPC_ENDPOINT to VPC.
+	SecurityGroupIds []*string
+
+	// A list of subnet IDs that are required to host your server endpoint in your VPC.
+	// This property can only be set when EndpointType is set to VPC.
 	SubnetIds []*string
 
-	// The ID of the VPC endpoint. This property can only be used when EndpointType is
+	// The ID of the VPC endpoint. This property can only be set when EndpointType is
 	// set to VPC_ENDPOINT.
 	VpcEndpointId *string
 
-	// The VPC ID of the VPC in which a file transfer protocol-enabled server's
-	// endpoint will be hosted. This property can only be used when EndpointType is set
-	// to VPC.
+	// The VPC ID of the VPC in which a server's endpoint will be hosted. This property
+	// can only be set when EndpointType is set to VPC.
 	VpcId *string
 }
 
-// Represents an object that contains entries and a targets for
+// Represents an object that contains entries and targets for
 // HomeDirectoryMappings.
 type HomeDirectoryMapEntry struct {
 
@@ -209,42 +238,40 @@ type IdentityProviderDetails struct {
 // specified.
 type ListedServer struct {
 
-	// Specifies the unique Amazon Resource Name (ARN) for a file transfer
-	// protocol-enabled server to be listed.
+	// Specifies the unique Amazon Resource Name (ARN) for a server to be listed.
 	//
 	// This member is required.
 	Arn *string
 
-	// Specifies the type of VPC endpoint that your file transfer protocol-enabled
-	// server is connected to. If your server is connected to a VPC endpoint, your
-	// server isn't accessible over the public internet.
+	// Specifies the type of VPC endpoint that your server is connected to. If your
+	// server is connected to a VPC endpoint, your server isn't accessible over the
+	// public internet.
 	EndpointType EndpointType
 
-	// Specifies the authentication method used to validate a user for a file transfer
-	// protocol-enabled server that was specified. This can include Secure Shell (SSH),
-	// user name and password combinations, or your own custom authentication method.
-	// Valid values include SERVICE_MANAGED or API_GATEWAY.
+	// Specifies the authentication method used to validate a user for a server that
+	// was specified. This can include Secure Shell (SSH), user name and password
+	// combinations, or your own custom authentication method. Valid values include
+	// SERVICE_MANAGED or API_GATEWAY.
 	IdentityProviderType IdentityProviderType
 
-	// Specifies the AWS Identity and Access Management (IAM) role that allows a file
-	// transfer protocol-enabled server to turn on Amazon CloudWatch logging.
+	// Specifies the AWS Identity and Access Management (IAM) role that allows a server
+	// to turn on Amazon CloudWatch logging.
 	LoggingRole *string
 
-	// Specifies the unique system assigned identifier for a file transfer
-	// protocol-enabled servers that were listed.
+	// Specifies the unique system assigned identifier for the servers that were
+	// listed.
 	ServerId *string
 
-	// Specifies the condition of a file transfer protocol-enabled server for the
-	// server that was described. A value of ONLINE indicates that the server can
-	// accept jobs and transfer files. A State value of OFFLINE means that the server
-	// cannot perform file transfer operations. The states of STARTING and STOPPING
-	// indicate that the server is in an intermediate state, either not fully able to
-	// respond, or not fully offline. The values of START_FAILED or STOP_FAILED can
-	// indicate an error condition.
+	// Specifies the condition of a server for the server that was described. A value
+	// of ONLINE indicates that the server can accept jobs and transfer files. A State
+	// value of OFFLINE means that the server cannot perform file transfer operations.
+	// The states of STARTING and STOPPING indicate that the server is in an
+	// intermediate state, either not fully able to respond, or not fully offline. The
+	// values of START_FAILED or STOP_FAILED can indicate an error condition.
 	State State
 
-	// Specifies the number of users that are assigned to a file transfer
-	// protocol-enabled server you specified with the ServerId.
+	// Specifies the number of users that are assigned to a server you specified with
+	// the ServerId.
 	UserCount *int32
 }
 

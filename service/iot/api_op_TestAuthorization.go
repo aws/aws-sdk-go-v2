@@ -51,7 +51,9 @@ type TestAuthorizationInput struct {
 	// they are not attached to the principal being authorized.
 	PolicyNamesToSkip []*string
 
-	// The principal.
+	// The principal. Valid principals are CertificateArn
+	// (arn:aws:iot:region:accountId:cert/certificateId), thingGroupArn
+	// (arn:aws:iot:region:accountId:thinggroup/groupName) and CognitoId (region:id).
 	Principal *string
 }
 

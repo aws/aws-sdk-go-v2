@@ -10,6 +10,16 @@ const (
 	ArtifactNamespaceBuild_id ArtifactNamespace = "BUILD_ID"
 )
 
+// Values returns all known values for ArtifactNamespace. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ArtifactNamespace) Values() []ArtifactNamespace {
+	return []ArtifactNamespace{
+		"NONE",
+		"BUILD_ID",
+	}
+}
+
 type ArtifactPackaging string
 
 // Enum values for ArtifactPackaging
@@ -17,6 +27,16 @@ const (
 	ArtifactPackagingNone ArtifactPackaging = "NONE"
 	ArtifactPackagingZip  ArtifactPackaging = "ZIP"
 )
+
+// Values returns all known values for ArtifactPackaging. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ArtifactPackaging) Values() []ArtifactPackaging {
+	return []ArtifactPackaging{
+		"NONE",
+		"ZIP",
+	}
+}
 
 type ArtifactsType string
 
@@ -27,6 +47,17 @@ const (
 	ArtifactsTypeNo_artifacts ArtifactsType = "NO_ARTIFACTS"
 )
 
+// Values returns all known values for ArtifactsType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ArtifactsType) Values() []ArtifactsType {
+	return []ArtifactsType{
+		"CODEPIPELINE",
+		"S3",
+		"NO_ARTIFACTS",
+	}
+}
+
 type AuthType string
 
 // Enum values for AuthType
@@ -35,6 +66,17 @@ const (
 	AuthTypeBasic_auth            AuthType = "BASIC_AUTH"
 	AuthTypePersonal_access_token AuthType = "PERSONAL_ACCESS_TOKEN"
 )
+
+// Values returns all known values for AuthType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (AuthType) Values() []AuthType {
+	return []AuthType{
+		"OAUTH",
+		"BASIC_AUTH",
+		"PERSONAL_ACCESS_TOKEN",
+	}
+}
 
 type BuildBatchPhaseType string
 
@@ -48,6 +90,21 @@ const (
 	BuildBatchPhaseTypeFailed             BuildBatchPhaseType = "FAILED"
 	BuildBatchPhaseTypeStopped            BuildBatchPhaseType = "STOPPED"
 )
+
+// Values returns all known values for BuildBatchPhaseType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BuildBatchPhaseType) Values() []BuildBatchPhaseType {
+	return []BuildBatchPhaseType{
+		"SUBMITTED",
+		"DOWNLOAD_BATCHSPEC",
+		"IN_PROGRESS",
+		"COMBINE_ARTIFACTS",
+		"SUCCEEDED",
+		"FAILED",
+		"STOPPED",
+	}
+}
 
 type BuildPhaseType string
 
@@ -66,6 +123,25 @@ const (
 	BuildPhaseTypeCompleted        BuildPhaseType = "COMPLETED"
 )
 
+// Values returns all known values for BuildPhaseType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BuildPhaseType) Values() []BuildPhaseType {
+	return []BuildPhaseType{
+		"SUBMITTED",
+		"QUEUED",
+		"PROVISIONING",
+		"DOWNLOAD_SOURCE",
+		"INSTALL",
+		"PRE_BUILD",
+		"BUILD",
+		"POST_BUILD",
+		"UPLOAD_ARTIFACTS",
+		"FINALIZING",
+		"COMPLETED",
+	}
+}
+
 type CacheMode string
 
 // Enum values for CacheMode
@@ -75,6 +151,17 @@ const (
 	CacheModeLocal_custom_cache       CacheMode = "LOCAL_CUSTOM_CACHE"
 )
 
+// Values returns all known values for CacheMode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (CacheMode) Values() []CacheMode {
+	return []CacheMode{
+		"LOCAL_DOCKER_LAYER_CACHE",
+		"LOCAL_SOURCE_CACHE",
+		"LOCAL_CUSTOM_CACHE",
+	}
+}
+
 type CacheType string
 
 // Enum values for CacheType
@@ -83,6 +170,17 @@ const (
 	CacheTypeS3       CacheType = "S3"
 	CacheTypeLocal    CacheType = "LOCAL"
 )
+
+// Values returns all known values for CacheType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (CacheType) Values() []CacheType {
+	return []CacheType{
+		"NO_CACHE",
+		"S3",
+		"LOCAL",
+	}
+}
 
 type ComputeType string
 
@@ -94,12 +192,33 @@ const (
 	ComputeTypeBuild_general1_2xlarge ComputeType = "BUILD_GENERAL1_2XLARGE"
 )
 
+// Values returns all known values for ComputeType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ComputeType) Values() []ComputeType {
+	return []ComputeType{
+		"BUILD_GENERAL1_SMALL",
+		"BUILD_GENERAL1_MEDIUM",
+		"BUILD_GENERAL1_LARGE",
+		"BUILD_GENERAL1_2XLARGE",
+	}
+}
+
 type CredentialProviderType string
 
 // Enum values for CredentialProviderType
 const (
 	CredentialProviderTypeSecrets_manager CredentialProviderType = "SECRETS_MANAGER"
 )
+
+// Values returns all known values for CredentialProviderType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CredentialProviderType) Values() []CredentialProviderType {
+	return []CredentialProviderType{
+		"SECRETS_MANAGER",
+	}
+}
 
 type EnvironmentType string
 
@@ -112,6 +231,19 @@ const (
 	EnvironmentTypeWindows_server_2019_container EnvironmentType = "WINDOWS_SERVER_2019_CONTAINER"
 )
 
+// Values returns all known values for EnvironmentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EnvironmentType) Values() []EnvironmentType {
+	return []EnvironmentType{
+		"WINDOWS_CONTAINER",
+		"LINUX_CONTAINER",
+		"LINUX_GPU_CONTAINER",
+		"ARM_CONTAINER",
+		"WINDOWS_SERVER_2019_CONTAINER",
+	}
+}
+
 type EnvironmentVariableType string
 
 // Enum values for EnvironmentVariableType
@@ -121,12 +253,32 @@ const (
 	EnvironmentVariableTypeSecrets_manager EnvironmentVariableType = "SECRETS_MANAGER"
 )
 
+// Values returns all known values for EnvironmentVariableType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EnvironmentVariableType) Values() []EnvironmentVariableType {
+	return []EnvironmentVariableType{
+		"PLAINTEXT",
+		"PARAMETER_STORE",
+		"SECRETS_MANAGER",
+	}
+}
+
 type FileSystemType string
 
 // Enum values for FileSystemType
 const (
 	FileSystemTypeEfs FileSystemType = "EFS"
 )
+
+// Values returns all known values for FileSystemType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FileSystemType) Values() []FileSystemType {
+	return []FileSystemType{
+		"EFS",
+	}
+}
 
 type ImagePullCredentialsType string
 
@@ -135,6 +287,16 @@ const (
 	ImagePullCredentialsTypeCodebuild    ImagePullCredentialsType = "CODEBUILD"
 	ImagePullCredentialsTypeService_role ImagePullCredentialsType = "SERVICE_ROLE"
 )
+
+// Values returns all known values for ImagePullCredentialsType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ImagePullCredentialsType) Values() []ImagePullCredentialsType {
+	return []ImagePullCredentialsType{
+		"CODEBUILD",
+		"SERVICE_ROLE",
+	}
+}
 
 type LanguageType string
 
@@ -152,6 +314,24 @@ const (
 	LanguageTypePhp     LanguageType = "PHP"
 )
 
+// Values returns all known values for LanguageType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (LanguageType) Values() []LanguageType {
+	return []LanguageType{
+		"JAVA",
+		"PYTHON",
+		"NODE_JS",
+		"RUBY",
+		"GOLANG",
+		"DOCKER",
+		"ANDROID",
+		"DOTNET",
+		"BASE",
+		"PHP",
+	}
+}
+
 type LogsConfigStatusType string
 
 // Enum values for LogsConfigStatusType
@@ -159,6 +339,16 @@ const (
 	LogsConfigStatusTypeEnabled  LogsConfigStatusType = "ENABLED"
 	LogsConfigStatusTypeDisabled LogsConfigStatusType = "DISABLED"
 )
+
+// Values returns all known values for LogsConfigStatusType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LogsConfigStatusType) Values() []LogsConfigStatusType {
+	return []LogsConfigStatusType{
+		"ENABLED",
+		"DISABLED",
+	}
+}
 
 type PlatformType string
 
@@ -170,6 +360,18 @@ const (
 	PlatformTypeWindows_server PlatformType = "WINDOWS_SERVER"
 )
 
+// Values returns all known values for PlatformType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PlatformType) Values() []PlatformType {
+	return []PlatformType{
+		"DEBIAN",
+		"AMAZON_LINUX",
+		"UBUNTU",
+		"WINDOWS_SERVER",
+	}
+}
+
 type ProjectSortByType string
 
 // Enum values for ProjectSortByType
@@ -179,6 +381,17 @@ const (
 	ProjectSortByTypeLast_modified_time ProjectSortByType = "LAST_MODIFIED_TIME"
 )
 
+// Values returns all known values for ProjectSortByType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProjectSortByType) Values() []ProjectSortByType {
+	return []ProjectSortByType{
+		"NAME",
+		"CREATED_TIME",
+		"LAST_MODIFIED_TIME",
+	}
+}
+
 type ReportCodeCoverageSortByType string
 
 // Enum values for ReportCodeCoverageSortByType
@@ -187,6 +400,16 @@ const (
 	ReportCodeCoverageSortByTypeFile_path                ReportCodeCoverageSortByType = "FILE_PATH"
 )
 
+// Values returns all known values for ReportCodeCoverageSortByType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReportCodeCoverageSortByType) Values() []ReportCodeCoverageSortByType {
+	return []ReportCodeCoverageSortByType{
+		"LINE_COVERAGE_PERCENTAGE",
+		"FILE_PATH",
+	}
+}
+
 type ReportExportConfigType string
 
 // Enum values for ReportExportConfigType
@@ -194,6 +417,16 @@ const (
 	ReportExportConfigTypeS3        ReportExportConfigType = "S3"
 	ReportExportConfigTypeNo_export ReportExportConfigType = "NO_EXPORT"
 )
+
+// Values returns all known values for ReportExportConfigType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReportExportConfigType) Values() []ReportExportConfigType {
+	return []ReportExportConfigType{
+		"S3",
+		"NO_EXPORT",
+	}
+}
 
 type ReportGroupSortByType string
 
@@ -204,6 +437,17 @@ const (
 	ReportGroupSortByTypeLast_modified_time ReportGroupSortByType = "LAST_MODIFIED_TIME"
 )
 
+// Values returns all known values for ReportGroupSortByType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReportGroupSortByType) Values() []ReportGroupSortByType {
+	return []ReportGroupSortByType{
+		"NAME",
+		"CREATED_TIME",
+		"LAST_MODIFIED_TIME",
+	}
+}
+
 type ReportPackagingType string
 
 // Enum values for ReportPackagingType
@@ -211,6 +455,16 @@ const (
 	ReportPackagingTypeZip  ReportPackagingType = "ZIP"
 	ReportPackagingTypeNone ReportPackagingType = "NONE"
 )
+
+// Values returns all known values for ReportPackagingType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReportPackagingType) Values() []ReportPackagingType {
+	return []ReportPackagingType{
+		"ZIP",
+		"NONE",
+	}
+}
 
 type ReportStatusType string
 
@@ -223,6 +477,19 @@ const (
 	ReportStatusTypeDeleting   ReportStatusType = "DELETING"
 )
 
+// Values returns all known values for ReportStatusType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReportStatusType) Values() []ReportStatusType {
+	return []ReportStatusType{
+		"GENERATING",
+		"SUCCEEDED",
+		"FAILED",
+		"INCOMPLETE",
+		"DELETING",
+	}
+}
+
 type ReportType string
 
 // Enum values for ReportType
@@ -231,6 +498,16 @@ const (
 	ReportTypeCode_coverage ReportType = "CODE_COVERAGE"
 )
 
+// Values returns all known values for ReportType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ReportType) Values() []ReportType {
+	return []ReportType{
+		"TEST",
+		"CODE_COVERAGE",
+	}
+}
+
 type RetryBuildBatchType string
 
 // Enum values for RetryBuildBatchType
@@ -238,6 +515,16 @@ const (
 	RetryBuildBatchTypeRetry_all_builds    RetryBuildBatchType = "RETRY_ALL_BUILDS"
 	RetryBuildBatchTypeRetry_failed_builds RetryBuildBatchType = "RETRY_FAILED_BUILDS"
 )
+
+// Values returns all known values for RetryBuildBatchType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RetryBuildBatchType) Values() []RetryBuildBatchType {
+	return []RetryBuildBatchType{
+		"RETRY_ALL_BUILDS",
+		"RETRY_FAILED_BUILDS",
+	}
+}
 
 type ServerType string
 
@@ -248,6 +535,17 @@ const (
 	ServerTypeGithub_enterprise ServerType = "GITHUB_ENTERPRISE"
 )
 
+// Values returns all known values for ServerType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ServerType) Values() []ServerType {
+	return []ServerType{
+		"GITHUB",
+		"BITBUCKET",
+		"GITHUB_ENTERPRISE",
+	}
+}
+
 type SharedResourceSortByType string
 
 // Enum values for SharedResourceSortByType
@@ -255,6 +553,16 @@ const (
 	SharedResourceSortByTypeArn           SharedResourceSortByType = "ARN"
 	SharedResourceSortByTypeModified_time SharedResourceSortByType = "MODIFIED_TIME"
 )
+
+// Values returns all known values for SharedResourceSortByType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SharedResourceSortByType) Values() []SharedResourceSortByType {
+	return []SharedResourceSortByType{
+		"ARN",
+		"MODIFIED_TIME",
+	}
+}
 
 type SortOrderType string
 
@@ -264,12 +572,31 @@ const (
 	SortOrderTypeDescending SortOrderType = "DESCENDING"
 )
 
+// Values returns all known values for SortOrderType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SortOrderType) Values() []SortOrderType {
+	return []SortOrderType{
+		"ASCENDING",
+		"DESCENDING",
+	}
+}
+
 type SourceAuthType string
 
 // Enum values for SourceAuthType
 const (
 	SourceAuthTypeOauth SourceAuthType = "OAUTH"
 )
+
+// Values returns all known values for SourceAuthType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SourceAuthType) Values() []SourceAuthType {
+	return []SourceAuthType{
+		"OAUTH",
+	}
+}
 
 type SourceType string
 
@@ -284,6 +611,21 @@ const (
 	SourceTypeNo_source         SourceType = "NO_SOURCE"
 )
 
+// Values returns all known values for SourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SourceType) Values() []SourceType {
+	return []SourceType{
+		"CODECOMMIT",
+		"CODEPIPELINE",
+		"GITHUB",
+		"S3",
+		"BITBUCKET",
+		"GITHUB_ENTERPRISE",
+		"NO_SOURCE",
+	}
+}
+
 type StatusType string
 
 // Enum values for StatusType
@@ -296,6 +638,20 @@ const (
 	StatusTypeStopped     StatusType = "STOPPED"
 )
 
+// Values returns all known values for StatusType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (StatusType) Values() []StatusType {
+	return []StatusType{
+		"SUCCEEDED",
+		"FAILED",
+		"FAULT",
+		"TIMED_OUT",
+		"IN_PROGRESS",
+		"STOPPED",
+	}
+}
+
 type WebhookBuildType string
 
 // Enum values for WebhookBuildType
@@ -303,6 +659,16 @@ const (
 	WebhookBuildTypeBuild       WebhookBuildType = "BUILD"
 	WebhookBuildTypeBuild_batch WebhookBuildType = "BUILD_BATCH"
 )
+
+// Values returns all known values for WebhookBuildType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WebhookBuildType) Values() []WebhookBuildType {
+	return []WebhookBuildType{
+		"BUILD",
+		"BUILD_BATCH",
+	}
+}
 
 type WebhookFilterType string
 
@@ -315,3 +681,17 @@ const (
 	WebhookFilterTypeFile_path        WebhookFilterType = "FILE_PATH"
 	WebhookFilterTypeCommit_message   WebhookFilterType = "COMMIT_MESSAGE"
 )
+
+// Values returns all known values for WebhookFilterType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WebhookFilterType) Values() []WebhookFilterType {
+	return []WebhookFilterType{
+		"EVENT",
+		"BASE_REF",
+		"HEAD_REF",
+		"ACTOR_ACCOUNT_ID",
+		"FILE_PATH",
+		"COMMIT_MESSAGE",
+	}
+}

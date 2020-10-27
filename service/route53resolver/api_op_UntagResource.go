@@ -33,18 +33,27 @@ type UntagResourceInput struct {
 	//
 	//
 	// * GetResolverEndpoint
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_GetResolverEndpoint.html)
 	//
-	//     * GetResolverRule
 	//
-	//     * GetResolverRuleAssociation
+	// * GetResolverRule
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_GetResolverRule.html)
+	//
+	//
+	// * GetResolverRuleAssociation
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_GetResolverRuleAssociation.html)
 	//
 	//
 	// * ListResolverEndpoints
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverEndpoints.html)
 	//
-	//     * ListResolverRuleAssociations
 	//
-	//     *
-	// ListResolverRules
+	// * ListResolverRuleAssociations
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRuleAssociations.html)
+	//
+	//
+	// * ListResolverRules
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRules.html)
 	//
 	// This member is required.
 	ResourceArn *string

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Retrieves information about one or more findings.
+// Retrieves the details of one or more findings.
 func (c *Client) GetFindings(ctx context.Context, params *GetFindingsInput, optFns ...func(*Options)) (*GetFindingsOutput, error) {
 	if params == nil {
 		params = &GetFindingsInput{}
@@ -30,7 +30,7 @@ func (c *Client) GetFindings(ctx context.Context, params *GetFindingsInput, optF
 type GetFindingsInput struct {
 
 	// An array of strings that lists the unique identifiers for the findings to
-	// retrieve information about.
+	// retrieve.
 	//
 	// This member is required.
 	FindingIds []*string

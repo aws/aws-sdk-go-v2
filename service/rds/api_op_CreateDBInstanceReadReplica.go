@@ -163,16 +163,11 @@ type CreateDBInstanceReadReplicaInput struct {
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html).
 	DeletionProtection *bool
 
-	// The Active Directory directory ID to create the DB instance in. For Oracle DB
-	// instances, Amazon RDS can use Kerberos authentication to authenticate users that
-	// connect to the DB instance. For more information, see  Using Kerberos
-	// Authentication with Amazon RDS for Oracle
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html) in
-	// the Amazon RDS User Guide. For Microsoft SQL Server DB instances, Amazon RDS can
-	// use Windows Authentication to authenticate users that connect to the DB
-	// instance. For more information, see  Using Windows Authentication with an Amazon
-	// RDS DB Instance Running Microsoft SQL Server
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html)
+	// The Active Directory directory ID to create the DB instance in. Currently, only
+	// MySQL, Microsoft SQL Server, Oracle, and PostgreSQL DB instances can be created
+	// in an Active Directory Domain. For more information, see  Kerberos
+	// Authentication
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html)
 	// in the Amazon RDS User Guide.
 	Domain *string
 
@@ -324,6 +319,19 @@ type CreateDBInstanceReadReplicaInput struct {
 	// with a DNS name that resolves to a private IP address. For more information, see
 	// CreateDBInstance.
 	PubliclyAccessible *bool
+
+	// The open mode of the replica database: mounted or read-only. This parameter is
+	// only supported for Oracle DB instances. Mounted DB replicas are included in
+	// Oracle Enterprise Edition. The main use case for mounted replicas is
+	// cross-Region disaster recovery. The primary database doesn't use Active Data
+	// Guard to transmit information to the mounted replica. Because it doesn't accept
+	// user connections, a mounted replica can't serve a read-only workload. You can
+	// create a combination of mounted and read-only DB replicas for the same primary
+	// DB instance. For more information, see Working with Oracle Read Replicas for
+	// Amazon RDS
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html)
+	// in the Amazon RDS User Guide.
+	ReplicaMode types.ReplicaMode
 
 	// The AWS region the resource is in. The presigned URL will be created with this
 	// region, if the PresignURL member is empty set.

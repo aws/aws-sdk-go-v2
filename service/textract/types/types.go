@@ -277,6 +277,20 @@ type NotificationChannel struct {
 	SNSTopicArn *string
 }
 
+// Sets whether or not your output will go to a user created bucket. Used to set
+// the name of the bucket, and the prefix on the output file.
+type OutputConfig struct {
+
+	// The name of the bucket your output will go to.
+	//
+	// This member is required.
+	S3Bucket *string
+
+	// The prefix of the object key that the output will be saved to. When not enabled,
+	// the prefix will be “textract_output".
+	S3Prefix *string
+}
+
 // The X and Y coordinates of a point on a document page. The X and Y values that
 // are returned are ratios of the overall document page size. For example, if the
 // input document is 700 x 200 and the operation returns X=0.5 and Y=0.25, then the
@@ -307,7 +321,8 @@ type Relationship struct {
 	// block. The relationship can be VALUE or CHILD. A relationship of type VALUE is a
 	// list that contains the ID of the VALUE block that's associated with the KEY of a
 	// key-value pair. A relationship of type CHILD is a list of IDs that identify WORD
-	// blocks.
+	// blocks in the case of lines Cell blocks in the case of Tables, and WORD blocks
+	// in the case of Selection Elements.
 	Type RelationshipType
 }
 

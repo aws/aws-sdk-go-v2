@@ -9,6 +9,16 @@ const (
 	AdditionalResultAttributeValueTypeText_with_highlights_value AdditionalResultAttributeValueType = "TEXT_WITH_HIGHLIGHTS_VALUE"
 )
 
+// Values returns all known values for AdditionalResultAttributeValueType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AdditionalResultAttributeValueType) Values() []AdditionalResultAttributeValueType {
+	return []AdditionalResultAttributeValueType{
+		"TEXT_WITH_HIGHLIGHTS_VALUE",
+	}
+}
+
 type ContentType string
 
 // Enum values for ContentType
@@ -20,6 +30,19 @@ const (
 	ContentTypePpt        ContentType = "PPT"
 )
 
+// Values returns all known values for ContentType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ContentType) Values() []ContentType {
+	return []ContentType{
+		"PDF",
+		"HTML",
+		"MS_WORD",
+		"PLAIN_TEXT",
+		"PPT",
+	}
+}
+
 type DatabaseEngineType string
 
 // Enum values for DatabaseEngineType
@@ -29,6 +52,18 @@ const (
 	DatabaseEngineTypeRds_mysql             DatabaseEngineType = "RDS_MYSQL"
 	DatabaseEngineTypeRds_postgresql        DatabaseEngineType = "RDS_POSTGRESQL"
 )
+
+// Values returns all known values for DatabaseEngineType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DatabaseEngineType) Values() []DatabaseEngineType {
+	return []DatabaseEngineType{
+		"RDS_AURORA_MYSQL",
+		"RDS_AURORA_POSTGRESQL",
+		"RDS_MYSQL",
+		"RDS_POSTGRESQL",
+	}
+}
 
 type DataSourceStatus string
 
@@ -40,6 +75,19 @@ const (
 	DataSourceStatusUpdating DataSourceStatus = "UPDATING"
 	DataSourceStatusActive   DataSourceStatus = "ACTIVE"
 )
+
+// Values returns all known values for DataSourceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataSourceStatus) Values() []DataSourceStatus {
+	return []DataSourceStatus{
+		"CREATING",
+		"DELETING",
+		"FAILED",
+		"UPDATING",
+		"ACTIVE",
+	}
+}
 
 type DataSourceSyncJobStatus string
 
@@ -54,6 +102,21 @@ const (
 	DataSourceSyncJobStatusSyncing_indexing DataSourceSyncJobStatus = "SYNCING_INDEXING"
 )
 
+// Values returns all known values for DataSourceSyncJobStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataSourceSyncJobStatus) Values() []DataSourceSyncJobStatus {
+	return []DataSourceSyncJobStatus{
+		"FAILED",
+		"SUCCEEDED",
+		"SYNCING",
+		"INCOMPLETE",
+		"STOPPING",
+		"ABORTED",
+		"SYNCING_INDEXING",
+	}
+}
+
 type DataSourceType string
 
 // Enum values for DataSourceType
@@ -64,7 +127,23 @@ const (
 	DataSourceTypeSalesforce DataSourceType = "SALESFORCE"
 	DataSourceTypeOnedrive   DataSourceType = "ONEDRIVE"
 	DataSourceTypeServicenow DataSourceType = "SERVICENOW"
+	DataSourceTypeCustom     DataSourceType = "CUSTOM"
 )
+
+// Values returns all known values for DataSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataSourceType) Values() []DataSourceType {
+	return []DataSourceType{
+		"S3",
+		"SHAREPOINT",
+		"DATABASE",
+		"SALESFORCE",
+		"ONEDRIVE",
+		"SERVICENOW",
+		"CUSTOM",
+	}
+}
 
 type DocumentAttributeValueType string
 
@@ -76,6 +155,18 @@ const (
 	DocumentAttributeValueTypeDate_value        DocumentAttributeValueType = "DATE_VALUE"
 )
 
+// Values returns all known values for DocumentAttributeValueType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DocumentAttributeValueType) Values() []DocumentAttributeValueType {
+	return []DocumentAttributeValueType{
+		"STRING_VALUE",
+		"STRING_LIST_VALUE",
+		"LONG_VALUE",
+		"DATE_VALUE",
+	}
+}
+
 type ErrorCode string
 
 // Enum values for ErrorCode
@@ -83,6 +174,36 @@ const (
 	ErrorCodeInternal_error  ErrorCode = "InternalError"
 	ErrorCodeInvalid_request ErrorCode = "InvalidRequest"
 )
+
+// Values returns all known values for ErrorCode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (ErrorCode) Values() []ErrorCode {
+	return []ErrorCode{
+		"InternalError",
+		"InvalidRequest",
+	}
+}
+
+type FaqFileFormat string
+
+// Enum values for FaqFileFormat
+const (
+	FaqFileFormatCsv             FaqFileFormat = "CSV"
+	FaqFileFormatCsv_with_header FaqFileFormat = "CSV_WITH_HEADER"
+	FaqFileFormatJson            FaqFileFormat = "JSON"
+)
+
+// Values returns all known values for FaqFileFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FaqFileFormat) Values() []FaqFileFormat {
+	return []FaqFileFormat{
+		"CSV",
+		"CSV_WITH_HEADER",
+		"JSON",
+	}
+}
 
 type FaqStatus string
 
@@ -95,6 +216,19 @@ const (
 	FaqStatusFailed   FaqStatus = "FAILED"
 )
 
+// Values returns all known values for FaqStatus. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (FaqStatus) Values() []FaqStatus {
+	return []FaqStatus{
+		"CREATING",
+		"UPDATING",
+		"ACTIVE",
+		"DELETING",
+		"FAILED",
+	}
+}
+
 type IndexEdition string
 
 // Enum values for IndexEdition
@@ -102,6 +236,16 @@ const (
 	IndexEditionDeveloper_edition  IndexEdition = "DEVELOPER_EDITION"
 	IndexEditionEnterprise_edition IndexEdition = "ENTERPRISE_EDITION"
 )
+
+// Values returns all known values for IndexEdition. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (IndexEdition) Values() []IndexEdition {
+	return []IndexEdition{
+		"DEVELOPER_EDITION",
+		"ENTERPRISE_EDITION",
+	}
+}
 
 type IndexStatus string
 
@@ -115,6 +259,20 @@ const (
 	IndexStatusSystem_updating IndexStatus = "SYSTEM_UPDATING"
 )
 
+// Values returns all known values for IndexStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (IndexStatus) Values() []IndexStatus {
+	return []IndexStatus{
+		"CREATING",
+		"ACTIVE",
+		"DELETING",
+		"FAILED",
+		"UPDATING",
+		"SYSTEM_UPDATING",
+	}
+}
+
 type Order string
 
 // Enum values for Order
@@ -122,6 +280,16 @@ const (
 	OrderAscending  Order = "ASCENDING"
 	OrderDescending Order = "DESCENDING"
 )
+
+// Values returns all known values for Order. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Order) Values() []Order {
+	return []Order{
+		"ASCENDING",
+		"DESCENDING",
+	}
+}
 
 type PrincipalType string
 
@@ -131,6 +299,16 @@ const (
 	PrincipalTypeGroup PrincipalType = "GROUP"
 )
 
+// Values returns all known values for PrincipalType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PrincipalType) Values() []PrincipalType {
+	return []PrincipalType{
+		"USER",
+		"GROUP",
+	}
+}
+
 type QueryIdentifiersEnclosingOption string
 
 // Enum values for QueryIdentifiersEnclosingOption
@@ -138,6 +316,17 @@ const (
 	QueryIdentifiersEnclosingOptionDouble_quotes QueryIdentifiersEnclosingOption = "DOUBLE_QUOTES"
 	QueryIdentifiersEnclosingOptionNone          QueryIdentifiersEnclosingOption = "NONE"
 )
+
+// Values returns all known values for QueryIdentifiersEnclosingOption. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (QueryIdentifiersEnclosingOption) Values() []QueryIdentifiersEnclosingOption {
+	return []QueryIdentifiersEnclosingOption{
+		"DOUBLE_QUOTES",
+		"NONE",
+	}
+}
 
 type QueryResultType string
 
@@ -148,6 +337,17 @@ const (
 	QueryResultTypeAnswer          QueryResultType = "ANSWER"
 )
 
+// Values returns all known values for QueryResultType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (QueryResultType) Values() []QueryResultType {
+	return []QueryResultType{
+		"DOCUMENT",
+		"QUESTION_ANSWER",
+		"ANSWER",
+	}
+}
+
 type ReadAccessType string
 
 // Enum values for ReadAccessType
@@ -155,6 +355,16 @@ const (
 	ReadAccessTypeAllow ReadAccessType = "ALLOW"
 	ReadAccessTypeDeny  ReadAccessType = "DENY"
 )
+
+// Values returns all known values for ReadAccessType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReadAccessType) Values() []ReadAccessType {
+	return []ReadAccessType{
+		"ALLOW",
+		"DENY",
+	}
+}
 
 type RelevanceType string
 
@@ -164,6 +374,16 @@ const (
 	RelevanceTypeNot_relevant RelevanceType = "NOT_RELEVANT"
 )
 
+// Values returns all known values for RelevanceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RelevanceType) Values() []RelevanceType {
+	return []RelevanceType{
+		"RELEVANT",
+		"NOT_RELEVANT",
+	}
+}
+
 type SalesforceChatterFeedIncludeFilterType string
 
 // Enum values for SalesforceChatterFeedIncludeFilterType
@@ -171,6 +391,17 @@ const (
 	SalesforceChatterFeedIncludeFilterTypeActive_user   SalesforceChatterFeedIncludeFilterType = "ACTIVE_USER"
 	SalesforceChatterFeedIncludeFilterTypeStandard_user SalesforceChatterFeedIncludeFilterType = "STANDARD_USER"
 )
+
+// Values returns all known values for SalesforceChatterFeedIncludeFilterType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (SalesforceChatterFeedIncludeFilterType) Values() []SalesforceChatterFeedIncludeFilterType {
+	return []SalesforceChatterFeedIncludeFilterType{
+		"ACTIVE_USER",
+		"STANDARD_USER",
+	}
+}
 
 type SalesforceKnowledgeArticleState string
 
@@ -180,6 +411,18 @@ const (
 	SalesforceKnowledgeArticleStatePublished SalesforceKnowledgeArticleState = "PUBLISHED"
 	SalesforceKnowledgeArticleStateArchived  SalesforceKnowledgeArticleState = "ARCHIVED"
 )
+
+// Values returns all known values for SalesforceKnowledgeArticleState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (SalesforceKnowledgeArticleState) Values() []SalesforceKnowledgeArticleState {
+	return []SalesforceKnowledgeArticleState{
+		"DRAFT",
+		"PUBLISHED",
+		"ARCHIVED",
+	}
+}
 
 type SalesforceStandardObjectName string
 
@@ -204,6 +447,53 @@ const (
 	SalesforceStandardObjectNameUser        SalesforceStandardObjectName = "USER"
 )
 
+// Values returns all known values for SalesforceStandardObjectName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SalesforceStandardObjectName) Values() []SalesforceStandardObjectName {
+	return []SalesforceStandardObjectName{
+		"ACCOUNT",
+		"CAMPAIGN",
+		"CASE",
+		"CONTACT",
+		"CONTRACT",
+		"DOCUMENT",
+		"GROUP",
+		"IDEA",
+		"LEAD",
+		"OPPORTUNITY",
+		"PARTNER",
+		"PRICEBOOK",
+		"PRODUCT",
+		"PROFILE",
+		"SOLUTION",
+		"TASK",
+		"USER",
+	}
+}
+
+type ScoreConfidence string
+
+// Enum values for ScoreConfidence
+const (
+	ScoreConfidenceVery_high ScoreConfidence = "VERY_HIGH"
+	ScoreConfidenceHigh      ScoreConfidence = "HIGH"
+	ScoreConfidenceMedium    ScoreConfidence = "MEDIUM"
+	ScoreConfidenceLow       ScoreConfidence = "LOW"
+)
+
+// Values returns all known values for ScoreConfidence. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ScoreConfidence) Values() []ScoreConfidence {
+	return []ScoreConfidence{
+		"VERY_HIGH",
+		"HIGH",
+		"MEDIUM",
+		"LOW",
+	}
+}
+
 type ServiceNowBuildVersionType string
 
 // Enum values for ServiceNowBuildVersionType
@@ -212,12 +502,31 @@ const (
 	ServiceNowBuildVersionTypeOthers ServiceNowBuildVersionType = "OTHERS"
 )
 
+// Values returns all known values for ServiceNowBuildVersionType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceNowBuildVersionType) Values() []ServiceNowBuildVersionType {
+	return []ServiceNowBuildVersionType{
+		"LONDON",
+		"OTHERS",
+	}
+}
+
 type SharePointVersion string
 
 // Enum values for SharePointVersion
 const (
 	SharePointVersionSharepoint_online SharePointVersion = "SHAREPOINT_ONLINE"
 )
+
+// Values returns all known values for SharePointVersion. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SharePointVersion) Values() []SharePointVersion {
+	return []SharePointVersion{
+		"SHAREPOINT_ONLINE",
+	}
+}
 
 type SortOrder string
 
@@ -226,3 +535,13 @@ const (
 	SortOrderDesc SortOrder = "DESC"
 	SortOrderAsc  SortOrder = "ASC"
 )
+
+// Values returns all known values for SortOrder. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (SortOrder) Values() []SortOrder {
+	return []SortOrder{
+		"DESC",
+		"ASC",
+	}
+}

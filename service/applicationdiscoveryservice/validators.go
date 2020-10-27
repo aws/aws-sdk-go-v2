@@ -512,11 +512,11 @@ func validateFilter(v *types.Filter) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.Condition == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Condition"))
-	}
 	if v.Values == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if v.Condition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Condition"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -597,11 +597,11 @@ func validateTagFilter(v *types.TagFilter) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagFilter"}
-	if v.Values == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Values"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -910,11 +910,11 @@ func validateOpStartImportTaskInput(v *StartImportTaskInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartImportTaskInput"}
-	if v.ImportUrl == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ImportUrl"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ImportUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImportUrl"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

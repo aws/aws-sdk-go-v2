@@ -12,8 +12,8 @@ import (
 )
 
 // Shares the specified portfolio with the specified account or organization node.
-// Shares to an organization node can only be created by the master account of an
-// organization or by a delegated administrator. You can share portfolios to an
+// Shares to an organization node can only be created by the management account of
+// an organization or by a delegated administrator. You can share portfolios to an
 // organization, an organizational unit, or a specific account. Note that if a
 // delegated admin is de-registered, they can no longer create portfolio shares.
 // AWSOrganizationsAccess must be enabled in order to create a portfolio share to
@@ -55,16 +55,17 @@ type CreatePortfolioShareInput struct {
 	AccountId *string
 
 	// The organization node to whom you are going to share. If OrganizationNode is
-	// passed in, PortfolioShare will be created for the node and its children (when
-	// applies), and a PortfolioShareToken will be returned in the output in order for
-	// the administrator to monitor the status of the PortfolioShare creation process.
+	// passed in, PortfolioShare will be created for the node an
+	// ListOrganizationPortfolioAccessd its children (when applies), and a
+	// PortfolioShareToken will be returned in the output in order for the
+	// administrator to monitor the status of the PortfolioShare creation process.
 	OrganizationNode *types.OrganizationNode
 }
 
 type CreatePortfolioShareOutput struct {
 
-	// The portfolio share unique identifier. This will only be returned if portfolio
-	// is shared to an organization node.
+	// The portfolio shares a unique identifier that only returns if the portfolio is
+	// shared to an organization node.
 	PortfolioShareToken *string
 
 	// Metadata pertaining to the operation's result.

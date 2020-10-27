@@ -743,11 +743,11 @@ func validateOpAssociateExternalConnectionInput(v *AssociateExternalConnectionIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociateExternalConnectionInput"}
-	if v.Domain == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
-	}
 	if v.Repository == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Repository"))
+	}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
 	}
 	if v.ExternalConnection == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExternalConnection"))
@@ -764,8 +764,8 @@ func validateOpCopyPackageVersionsInput(v *CopyPackageVersionsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CopyPackageVersionsInput"}
-	if v.Domain == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
 	}
 	if v.SourceRepository == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceRepository"))
@@ -773,11 +773,11 @@ func validateOpCopyPackageVersionsInput(v *CopyPackageVersionsInput) error {
 	if v.Package == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Package"))
 	}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
 	if v.DestinationRepository == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationRepository"))
-	}
-	if len(v.Format) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Format"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -806,11 +806,11 @@ func validateOpCreateRepositoryInput(v *CreateRepositoryInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateRepositoryInput"}
-	if v.Repository == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Repository"))
-	}
 	if v.Domain == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if v.Repository == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Repository"))
 	}
 	if v.Upstreams != nil {
 		if err := validateUpstreamRepositoryList(v.Upstreams); err != nil {
@@ -859,20 +859,20 @@ func validateOpDeletePackageVersionsInput(v *DeletePackageVersionsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeletePackageVersionsInput"}
-	if v.Domain == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
 	}
 	if v.Repository == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Repository"))
 	}
-	if len(v.Format) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Format"))
-	}
-	if v.Versions == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Versions"))
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
 	}
 	if v.Package == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Package"))
+	}
+	if v.Versions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Versions"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -886,11 +886,11 @@ func validateOpDeleteRepositoryInput(v *DeleteRepositoryInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteRepositoryInput"}
-	if v.Repository == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Repository"))
-	}
 	if v.Domain == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if v.Repository == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Repository"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -937,20 +937,20 @@ func validateOpDescribePackageVersionInput(v *DescribePackageVersionInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribePackageVersionInput"}
-	if v.Domain == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	if v.PackageVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageVersion"))
 	}
 	if v.Package == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Package"))
+	}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
 	}
 	if v.Repository == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Repository"))
 	}
 	if len(v.Format) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Format"))
-	}
-	if v.PackageVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PackageVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -982,11 +982,11 @@ func validateOpDisassociateExternalConnectionInput(v *DisassociateExternalConnec
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateExternalConnectionInput"}
-	if v.Repository == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Repository"))
-	}
 	if v.ExternalConnection == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExternalConnection"))
+	}
+	if v.Repository == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Repository"))
 	}
 	if v.Domain == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
@@ -1003,20 +1003,20 @@ func validateOpDisposePackageVersionsInput(v *DisposePackageVersionsInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisposePackageVersionsInput"}
-	if len(v.Format) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
 	}
 	if v.Repository == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Repository"))
 	}
-	if v.Domain == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
-	}
-	if v.Versions == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Versions"))
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
 	}
 	if v.Package == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Package"))
+	}
+	if v.Versions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Versions"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1060,6 +1060,9 @@ func validateOpGetPackageVersionAssetInput(v *GetPackageVersionAssetInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetPackageVersionAssetInput"}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
 	if v.PackageVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PackageVersion"))
 	}
@@ -1068,9 +1071,6 @@ func validateOpGetPackageVersionAssetInput(v *GetPackageVersionAssetInput) error
 	}
 	if v.Package == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Package"))
-	}
-	if len(v.Format) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Format"))
 	}
 	if v.Asset == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Asset"))
@@ -1090,14 +1090,14 @@ func validateOpGetPackageVersionReadmeInput(v *GetPackageVersionReadmeInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetPackageVersionReadmeInput"}
-	if v.Package == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Package"))
+	if v.PackageVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageVersion"))
 	}
 	if v.Repository == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Repository"))
 	}
-	if v.PackageVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PackageVersion"))
+	if v.Package == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Package"))
 	}
 	if len(v.Format) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Format"))
@@ -1117,14 +1117,14 @@ func validateOpGetRepositoryEndpointInput(v *GetRepositoryEndpointInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetRepositoryEndpointInput"}
+	if v.Repository == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Repository"))
+	}
 	if v.Domain == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
 	}
 	if len(v.Format) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Format"))
-	}
-	if v.Repository == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Repository"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1138,11 +1138,11 @@ func validateOpGetRepositoryPermissionsPolicyInput(v *GetRepositoryPermissionsPo
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetRepositoryPermissionsPolicyInput"}
-	if v.Domain == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
-	}
 	if v.Repository == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Repository"))
+	}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1174,20 +1174,20 @@ func validateOpListPackageVersionAssetsInput(v *ListPackageVersionAssetsInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListPackageVersionAssetsInput"}
-	if v.PackageVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PackageVersion"))
-	}
 	if v.Domain == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if v.Repository == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Repository"))
 	}
 	if len(v.Format) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Format"))
 	}
+	if v.PackageVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageVersion"))
+	}
 	if v.Package == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Package"))
-	}
-	if v.Repository == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Repository"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1201,17 +1201,17 @@ func validateOpListPackageVersionDependenciesInput(v *ListPackageVersionDependen
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListPackageVersionDependenciesInput"}
-	if v.Domain == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
-	}
-	if v.Package == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Package"))
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
 	}
 	if v.PackageVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PackageVersion"))
 	}
-	if len(v.Format) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	if v.Package == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Package"))
+	}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
 	}
 	if v.Repository == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Repository"))
@@ -1228,17 +1228,17 @@ func validateOpListPackageVersionsInput(v *ListPackageVersionsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListPackageVersionsInput"}
-	if v.Repository == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Repository"))
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
 	}
 	if v.Domain == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
 	}
+	if v.Repository == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Repository"))
+	}
 	if v.Package == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Package"))
-	}
-	if len(v.Format) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Format"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1288,11 +1288,11 @@ func validateOpPutRepositoryPermissionsPolicyInput(v *PutRepositoryPermissionsPo
 	if v.Domain == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
 	}
-	if v.PolicyDocument == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PolicyDocument"))
-	}
 	if v.Repository == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Repository"))
+	}
+	if v.PolicyDocument == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyDocument"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1306,23 +1306,23 @@ func validateOpUpdatePackageVersionsStatusInput(v *UpdatePackageVersionsStatusIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdatePackageVersionsStatusInput"}
-	if v.Domain == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
-	}
 	if v.Versions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Versions"))
-	}
-	if v.Package == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Package"))
 	}
 	if len(v.Format) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Format"))
 	}
-	if v.Repository == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Repository"))
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if v.Package == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Package"))
 	}
 	if len(v.TargetStatus) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetStatus"))
+	}
+	if v.Repository == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Repository"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1336,16 +1336,16 @@ func validateOpUpdateRepositoryInput(v *UpdateRepositoryInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateRepositoryInput"}
+	if v.Upstreams != nil {
+		if err := validateUpstreamRepositoryList(v.Upstreams); err != nil {
+			invalidParams.AddNested("Upstreams", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Domain == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
 	}
 	if v.Repository == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Repository"))
-	}
-	if v.Upstreams != nil {
-		if err := validateUpstreamRepositoryList(v.Upstreams); err != nil {
-			invalidParams.AddNested("Upstreams", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

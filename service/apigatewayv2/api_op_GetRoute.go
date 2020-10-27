@@ -62,8 +62,9 @@ type GetRouteOutput struct {
 
 	// The authorization type for the route. For WebSocket APIs, valid values are NONE
 	// for open access, AWS_IAM for using AWS IAM permissions, and CUSTOM for using a
-	// Lambda authorizer For HTTP APIs, valid values are NONE for open access, or JWT
-	// for using JSON Web Tokens.
+	// Lambda authorizer For HTTP APIs, valid values are NONE for open access, JWT for
+	// using JSON Web Tokens, AWS_IAM for using AWS IAM permissions, and CUSTOM for
+	// using a Lambda authorizer.
 	AuthorizationType types.AuthorizationType
 
 	// The identifier of the Authorizer resource to be associated with this route. The

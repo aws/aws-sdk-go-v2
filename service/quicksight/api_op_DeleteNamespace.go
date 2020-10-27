@@ -13,7 +13,7 @@ import (
 // Deletes a namespace and the users and groups that are associated with the
 // namespace. This is an asynchronous process. Assets including dashboards,
 // analyses, datasets and data sources are not deleted. To delete these assets, you
-// use the APIs for the relevant asset.
+// use the API operations for the relevant asset.
 func (c *Client) DeleteNamespace(ctx context.Context, params *DeleteNamespaceInput, optFns ...func(*Options)) (*DeleteNamespaceOutput, error) {
 	if params == nil {
 		params = &DeleteNamespaceInput{}
@@ -47,6 +47,9 @@ type DeleteNamespaceOutput struct {
 
 	// The AWS request ID for this operation.
 	RequestId *string
+
+	// The HTTP status of the request.
+	Status *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -10,6 +10,26 @@ import (
 	"github.com/awslabs/smithy-go/middleware"
 )
 
+type validateOpBatchDeleteWorlds struct {
+}
+
+func (*validateOpBatchDeleteWorlds) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchDeleteWorlds) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchDeleteWorldsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchDeleteWorldsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchDescribeSimulationJob struct {
 }
 
@@ -85,6 +105,46 @@ func (m *validateOpCancelSimulationJob) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCancelSimulationJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCancelWorldExportJob struct {
+}
+
+func (*validateOpCancelWorldExportJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelWorldExportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelWorldExportJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelWorldExportJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCancelWorldGenerationJob struct {
+}
+
+func (*validateOpCancelWorldGenerationJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelWorldGenerationJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelWorldGenerationJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelWorldGenerationJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -250,6 +310,66 @@ func (m *validateOpCreateSimulationJob) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateWorldExportJob struct {
+}
+
+func (*validateOpCreateWorldExportJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateWorldExportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateWorldExportJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateWorldExportJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateWorldGenerationJob struct {
+}
+
+func (*validateOpCreateWorldGenerationJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateWorldGenerationJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateWorldGenerationJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateWorldGenerationJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateWorldTemplate struct {
+}
+
+func (*validateOpCreateWorldTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateWorldTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateWorldTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateWorldTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteFleet struct {
 }
 
@@ -325,6 +445,26 @@ func (m *validateOpDeleteSimulationApplication) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteSimulationApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteWorldTemplate struct {
+}
+
+func (*validateOpDeleteWorldTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteWorldTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteWorldTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteWorldTemplateInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -485,6 +625,86 @@ func (m *validateOpDescribeSimulationJob) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeSimulationJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeWorldExportJob struct {
+}
+
+func (*validateOpDescribeWorldExportJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeWorldExportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeWorldExportJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeWorldExportJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeWorldGenerationJob struct {
+}
+
+func (*validateOpDescribeWorldGenerationJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeWorldGenerationJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeWorldGenerationJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeWorldGenerationJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeWorld struct {
+}
+
+func (*validateOpDescribeWorld) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeWorld) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeWorldInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeWorldInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeWorldTemplate struct {
+}
+
+func (*validateOpDescribeWorldTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeWorldTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeWorldTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeWorldTemplateInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -670,6 +890,30 @@ func (m *validateOpUpdateSimulationApplication) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateWorldTemplate struct {
+}
+
+func (*validateOpUpdateWorldTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateWorldTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateWorldTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateWorldTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+func addOpBatchDeleteWorldsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchDeleteWorlds{}, middleware.After)
+}
+
 func addOpBatchDescribeSimulationJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchDescribeSimulationJob{}, middleware.After)
 }
@@ -684,6 +928,14 @@ func addOpCancelSimulationJobBatchValidationMiddleware(stack *middleware.Stack) 
 
 func addOpCancelSimulationJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelSimulationJob{}, middleware.After)
+}
+
+func addOpCancelWorldExportJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelWorldExportJob{}, middleware.After)
+}
+
+func addOpCancelWorldGenerationJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelWorldGenerationJob{}, middleware.After)
 }
 
 func addOpCreateDeploymentJobValidationMiddleware(stack *middleware.Stack) error {
@@ -718,6 +970,18 @@ func addOpCreateSimulationJobValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpCreateSimulationJob{}, middleware.After)
 }
 
+func addOpCreateWorldExportJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateWorldExportJob{}, middleware.After)
+}
+
+func addOpCreateWorldGenerationJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateWorldGenerationJob{}, middleware.After)
+}
+
+func addOpCreateWorldTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateWorldTemplate{}, middleware.After)
+}
+
 func addOpDeleteFleetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteFleet{}, middleware.After)
 }
@@ -732,6 +996,10 @@ func addOpDeleteRobotValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteSimulationApplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteSimulationApplication{}, middleware.After)
+}
+
+func addOpDeleteWorldTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteWorldTemplate{}, middleware.After)
 }
 
 func addOpDeregisterRobotValidationMiddleware(stack *middleware.Stack) error {
@@ -764,6 +1032,22 @@ func addOpDescribeSimulationJobBatchValidationMiddleware(stack *middleware.Stack
 
 func addOpDescribeSimulationJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeSimulationJob{}, middleware.After)
+}
+
+func addOpDescribeWorldExportJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeWorldExportJob{}, middleware.After)
+}
+
+func addOpDescribeWorldGenerationJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeWorldGenerationJob{}, middleware.After)
+}
+
+func addOpDescribeWorldValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeWorld{}, middleware.After)
+}
+
+func addOpDescribeWorldTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeWorldTemplate{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -802,6 +1086,10 @@ func addOpUpdateSimulationApplicationValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpUpdateSimulationApplication{}, middleware.After)
 }
 
+func addOpUpdateWorldTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateWorldTemplate{}, middleware.After)
+}
+
 func validateCreateSimulationJobRequests(v []*types.SimulationJobRequest) error {
 	if v == nil {
 		return nil
@@ -824,14 +1112,14 @@ func validateDataSourceConfig(v *types.DataSourceConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DataSourceConfig"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if v.S3Keys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Keys"))
 	}
 	if v.S3Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3Bucket"))
 	}
-	if v.S3Keys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("S3Keys"))
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -862,6 +1150,9 @@ func validateDeploymentApplicationConfig(v *types.DeploymentApplicationConfig) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeploymentApplicationConfig"}
+	if v.ApplicationVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationVersion"))
+	}
 	if v.Application == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Application"))
 	}
@@ -871,9 +1162,6 @@ func validateDeploymentApplicationConfig(v *types.DeploymentApplicationConfig) e
 		if err := validateDeploymentLaunchConfig(v.LaunchConfig); err != nil {
 			invalidParams.AddNested("LaunchConfig", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ApplicationVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplicationVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -942,13 +1230,13 @@ func validateLaunchConfig(v *types.LaunchConfig) error {
 	if v.PackageName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PackageName"))
 	}
-	if v.LaunchFile == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LaunchFile"))
-	}
 	if v.PortForwardingConfig != nil {
 		if err := validatePortForwardingConfig(v.PortForwardingConfig); err != nil {
 			invalidParams.AddNested("PortForwardingConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.LaunchFile == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LaunchFile"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -994,11 +1282,11 @@ func validatePortMapping(v *types.PortMapping) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PortMapping"}
-	if v.JobPort == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobPort"))
-	}
 	if v.ApplicationPort == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationPort"))
+	}
+	if v.JobPort == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobPort"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1029,15 +1317,15 @@ func validateRobotApplicationConfig(v *types.RobotApplicationConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RobotApplicationConfig"}
+	if v.Application == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Application"))
+	}
 	if v.LaunchConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LaunchConfig"))
 	} else if v.LaunchConfig != nil {
 		if err := validateLaunchConfig(v.LaunchConfig); err != nil {
 			invalidParams.AddNested("LaunchConfig", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Application == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Application"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1068,11 +1356,11 @@ func validateS3Object(v *types.S3Object) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "S3Object"}
-	if v.Key == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Key"))
-	}
 	if v.Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1133,14 +1421,14 @@ func validateSimulationJobRequest(v *types.SimulationJobRequest) error {
 			invalidParams.AddNested("LoggingConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.VpcConfig != nil {
+		if err := validateVPCConfig(v.VpcConfig); err != nil {
+			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.DataSources != nil {
 		if err := validateDataSourceConfigs(v.DataSources); err != nil {
 			invalidParams.AddNested("DataSources", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.RobotApplications != nil {
-		if err := validateRobotApplicationConfigs(v.RobotApplications); err != nil {
-			invalidParams.AddNested("RobotApplications", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.SimulationApplications != nil {
@@ -1148,10 +1436,28 @@ func validateSimulationJobRequest(v *types.SimulationJobRequest) error {
 			invalidParams.AddNested("SimulationApplications", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.VpcConfig != nil {
-		if err := validateVPCConfig(v.VpcConfig); err != nil {
-			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
+	if v.RobotApplications != nil {
+		if err := validateRobotApplicationConfigs(v.RobotApplications); err != nil {
+			invalidParams.AddNested("RobotApplications", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTemplateLocation(v *types.TemplateLocation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TemplateLocation"}
+	if v.S3Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Bucket"))
+	}
+	if v.S3Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Key"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1167,6 +1473,21 @@ func validateVPCConfig(v *types.VPCConfig) error {
 	invalidParams := smithy.InvalidParamsError{Context: "VPCConfig"}
 	if v.Subnets == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Subnets"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchDeleteWorldsInput(v *BatchDeleteWorldsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchDeleteWorldsInput"}
+	if v.Worlds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Worlds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1235,6 +1556,36 @@ func validateOpCancelSimulationJobInput(v *CancelSimulationJobInput) error {
 	}
 }
 
+func validateOpCancelWorldExportJobInput(v *CancelWorldExportJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelWorldExportJobInput"}
+	if v.Job == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Job"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCancelWorldGenerationJobInput(v *CancelWorldGenerationJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelWorldGenerationJobInput"}
+	if v.Job == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Job"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDeploymentJobInput(v *CreateDeploymentJobInput) error {
 	if v == nil {
 		return nil
@@ -1248,15 +1599,15 @@ func validateOpCreateDeploymentJobInput(v *CreateDeploymentJobInput) error {
 	if v.Fleet == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Fleet"))
 	}
+	if v.ClientRequestToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
 	if v.DeploymentApplicationConfigs == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeploymentApplicationConfigs"))
 	} else if v.DeploymentApplicationConfigs != nil {
 		if err := validateDeploymentApplicationConfigs(v.DeploymentApplicationConfigs); err != nil {
 			invalidParams.AddNested("DeploymentApplicationConfigs", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ClientRequestToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1288,11 +1639,11 @@ func validateOpCreateRobotApplicationInput(v *CreateRobotApplicationInput) error
 	if v.RobotSoftwareSuite == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RobotSoftwareSuite"))
 	}
-	if v.Sources == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Sources"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Sources == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Sources"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1321,14 +1672,14 @@ func validateOpCreateRobotInput(v *CreateRobotInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateRobotInput"}
-	if v.GreengrassGroupId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GreengrassGroupId"))
+	if len(v.Architecture) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Architecture"))
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if len(v.Architecture) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Architecture"))
+	if v.GreengrassGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GreengrassGroupId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1342,17 +1693,17 @@ func validateOpCreateSimulationApplicationInput(v *CreateSimulationApplicationIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateSimulationApplicationInput"}
-	if v.SimulationSoftwareSuite == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SimulationSoftwareSuite"))
-	}
-	if v.Sources == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Sources"))
-	}
 	if v.RobotSoftwareSuite == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RobotSoftwareSuite"))
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.SimulationSoftwareSuite == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SimulationSoftwareSuite"))
+	}
+	if v.Sources == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Sources"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1381,9 +1732,24 @@ func validateOpCreateSimulationJobInput(v *CreateSimulationJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateSimulationJobInput"}
+	if v.RobotApplications != nil {
+		if err := validateRobotApplicationConfigs(v.RobotApplications); err != nil {
+			invalidParams.AddNested("RobotApplications", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.DataSources != nil {
 		if err := validateDataSourceConfigs(v.DataSources); err != nil {
 			invalidParams.AddNested("DataSources", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SimulationApplications != nil {
+		if err := validateSimulationApplicationConfigs(v.SimulationApplications); err != nil {
+			invalidParams.AddNested("SimulationApplications", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LoggingConfig != nil {
+		if err := validateLoggingConfig(v.LoggingConfig); err != nil {
+			invalidParams.AddNested("LoggingConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.MaxJobDurationInSeconds == nil {
@@ -1392,24 +1758,65 @@ func validateOpCreateSimulationJobInput(v *CreateSimulationJobInput) error {
 	if v.IamRole == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IamRole"))
 	}
-	if v.LoggingConfig != nil {
-		if err := validateLoggingConfig(v.LoggingConfig); err != nil {
-			invalidParams.AddNested("LoggingConfig", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.VpcConfig != nil {
 		if err := validateVPCConfig(v.VpcConfig); err != nil {
 			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.RobotApplications != nil {
-		if err := validateRobotApplicationConfigs(v.RobotApplications); err != nil {
-			invalidParams.AddNested("RobotApplications", err.(smithy.InvalidParamsError))
-		}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
 	}
-	if v.SimulationApplications != nil {
-		if err := validateSimulationApplicationConfigs(v.SimulationApplications); err != nil {
-			invalidParams.AddNested("SimulationApplications", err.(smithy.InvalidParamsError))
+}
+
+func validateOpCreateWorldExportJobInput(v *CreateWorldExportJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateWorldExportJobInput"}
+	if v.OutputLocation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputLocation"))
+	}
+	if v.Worlds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Worlds"))
+	}
+	if v.IamRole == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IamRole"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateWorldGenerationJobInput(v *CreateWorldGenerationJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateWorldGenerationJobInput"}
+	if v.Template == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Template"))
+	}
+	if v.WorldCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorldCount"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateWorldTemplateInput(v *CreateWorldTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateWorldTemplateInput"}
+	if v.TemplateLocation != nil {
+		if err := validateTemplateLocation(v.TemplateLocation); err != nil {
+			invalidParams.AddNested("TemplateLocation", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1479,16 +1886,31 @@ func validateOpDeleteSimulationApplicationInput(v *DeleteSimulationApplicationIn
 	}
 }
 
+func validateOpDeleteWorldTemplateInput(v *DeleteWorldTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteWorldTemplateInput"}
+	if v.Template == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Template"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeregisterRobotInput(v *DeregisterRobotInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeregisterRobotInput"}
-	if v.Fleet == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Fleet"))
-	}
 	if v.Robot == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Robot"))
+	}
+	if v.Fleet == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Fleet"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1602,6 +2024,66 @@ func validateOpDescribeSimulationJobInput(v *DescribeSimulationJobInput) error {
 	}
 }
 
+func validateOpDescribeWorldExportJobInput(v *DescribeWorldExportJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeWorldExportJobInput"}
+	if v.Job == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Job"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeWorldGenerationJobInput(v *DescribeWorldGenerationJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeWorldGenerationJobInput"}
+	if v.Job == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Job"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeWorldInput(v *DescribeWorldInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeWorldInput"}
+	if v.World == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("World"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeWorldTemplateInput(v *DescribeWorldTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeWorldTemplateInput"}
+	if v.Template == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Template"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
@@ -1674,11 +2156,11 @@ func validateOpSyncDeploymentJobInput(v *SyncDeploymentJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SyncDeploymentJobInput"}
-	if v.ClientRequestToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
-	}
 	if v.Fleet == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Fleet"))
+	}
+	if v.ClientRequestToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1692,11 +2174,11 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.Tags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1710,11 +2192,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
-	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1728,14 +2210,14 @@ func validateOpUpdateRobotApplicationInput(v *UpdateRobotApplicationInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateRobotApplicationInput"}
-	if v.Sources == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Sources"))
-	}
 	if v.Application == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Application"))
 	}
 	if v.RobotSoftwareSuite == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RobotSoftwareSuite"))
+	}
+	if v.Sources == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Sources"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1755,11 +2237,31 @@ func validateOpUpdateSimulationApplicationInput(v *UpdateSimulationApplicationIn
 	if v.RobotSoftwareSuite == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RobotSoftwareSuite"))
 	}
+	if v.Application == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Application"))
+	}
 	if v.Sources == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Sources"))
 	}
-	if v.Application == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Application"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateWorldTemplateInput(v *UpdateWorldTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateWorldTemplateInput"}
+	if v.Template == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Template"))
+	}
+	if v.TemplateLocation != nil {
+		if err := validateTemplateLocation(v.TemplateLocation); err != nil {
+			invalidParams.AddNested("TemplateLocation", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

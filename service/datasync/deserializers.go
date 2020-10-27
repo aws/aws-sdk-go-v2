@@ -5907,6 +5907,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationS3Output(v **DescribeLoca
 
 	for key, value := range shape {
 		switch key {
+		case "AgentArns":
+			if err := awsAwsjson11_deserializeDocumentAgentArnList(&sv.AgentArns, value); err != nil {
+				return err
+			}
+
 		case "CreationTime":
 			if value != nil {
 				jtv, ok := value.(json.Number)

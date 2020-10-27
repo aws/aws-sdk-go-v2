@@ -10,27 +10,35 @@
 // (https://docs.aws.amazon.com/global-accelerator/latest/dg/Welcome.html). AWS
 // Global Accelerator is a service in which you create accelerators to improve
 // availability and performance of your applications for local and global users.
-// You must specify the US West (Oregon) Region to create or update accelerators.
-// By default, Global Accelerator provides you with static IP addresses that you
-// associate with your accelerator. (Instead of using the IP addresses that Global
-// Accelerator provides, you can configure these entry points to be IPv4 addresses
-// from your own IP address ranges that you bring to Global Accelerator.) The
-// static IP addresses are anycast from the AWS edge network and distribute
-// incoming application traffic across multiple endpoint resources in multiple AWS
-// Regions, which increases the availability of your applications. Endpoints can be
-// Network Load Balancers, Application Load Balancers, EC2 instances, or Elastic IP
-// addresses that are located in one AWS Region or multiple Regions. Global
-// Accelerator uses the AWS global network to route traffic to the optimal regional
-// endpoint based on health, client location, and policies that you configure. The
-// service reacts instantly to changes in health or configuration to ensure that
-// internet traffic from clients is directed to only healthy endpoints. Global
-// Accelerator includes components that work together to help you improve
-// performance and availability for your applications: Static IP address By
-// default, AWS Global Accelerator provides you with a set of static IP addresses
-// that are anycast from the AWS edge network and serve as the single fixed entry
-// points for your clients. Or you can configure these entry points to be IPv4
-// addresses from your own IP address ranges that you bring to Global Accelerator
-// (BYOIP). For more information, see Bring Your Own IP Addresses (BYOIP)
+// Global Accelerator directs traffic to optimal endpoints over the AWS global
+// network. This improves the availability and performance of your internet
+// applications that are used by a global audience. Global Accelerator is a global
+// service that supports endpoints in multiple AWS Regions, which are listed in the
+// AWS Region Table
+// (https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/).
+// Global Accelerator is a global service that supports endpoints in multiple AWS
+// Regions but you must specify the US West (Oregon) Region to create or update
+// accelerators. By default, Global Accelerator provides you with static IP
+// addresses that you associate with your accelerator. (Instead of using the IP
+// addresses that Global Accelerator provides, you can configure these entry points
+// to be IPv4 addresses from your own IP address ranges that you bring to Global
+// Accelerator.) The static IP addresses are anycast from the AWS edge network and
+// distribute incoming application traffic across multiple endpoint resources in
+// multiple AWS Regions, which increases the availability of your applications.
+// Endpoints can be Network Load Balancers, Application Load Balancers, EC2
+// instances, or Elastic IP addresses that are located in one AWS Region or
+// multiple Regions. Global Accelerator uses the AWS global network to route
+// traffic to the optimal regional endpoint based on health, client location, and
+// policies that you configure. The service reacts instantly to changes in health
+// or configuration to ensure that internet traffic from clients is directed to
+// only healthy endpoints. Global Accelerator includes components that work
+// together to help you improve performance and availability for your applications:
+// Static IP address By default, AWS Global Accelerator provides you with a set of
+// static IP addresses that are anycast from the AWS edge network and serve as the
+// single fixed entry points for your clients. Or you can configure these entry
+// points to be IPv4 addresses from your own IP address ranges that you bring to
+// Global Accelerator (BYOIP). For more information, see Bring Your Own IP
+// Addresses (BYOIP)
 // (https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html) in
 // the AWS Global Accelerator Developer Guide. If you already have load balancers,
 // EC2 instances, or Elastic IP addresses set up for your applications, you can

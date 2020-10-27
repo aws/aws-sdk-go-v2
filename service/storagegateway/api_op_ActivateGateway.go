@@ -101,7 +101,8 @@ type ActivateGatewayInput struct {
 	GatewayType *string
 
 	// The value that indicates the type of medium changer to use for tape gateway.
-	// This field is optional. Valid Values: STK-L700 | AWS-Gateway-VTL
+	// This field is optional. Valid Values: STK-L700 | AWS-Gateway-VTL |
+	// IBM-03584L32-0402
 	MediumChangerType *string
 
 	// A list of up to 50 tags that you can assign to the gateway. Each tag is a

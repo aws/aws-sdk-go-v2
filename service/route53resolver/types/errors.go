@@ -7,6 +7,24 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 )
 
+// The current account doesn't have the IAM permissions required to perform the
+// specified Resolver operation.
+type AccessDeniedException struct {
+	Message *string
+}
+
+func (e *AccessDeniedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *AccessDeniedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // We encountered an unknown error. Try again in a few minutes.
 type InternalServiceErrorException struct {
 	Message *string
@@ -60,7 +78,7 @@ func (e *InvalidParameterException) ErrorMessage() string {
 func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified resolver rule policy is invalid.
+// The specified Resolver rule policy is invalid.
 type InvalidPolicyDocument struct {
 	Message *string
 }

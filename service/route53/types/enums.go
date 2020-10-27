@@ -13,6 +13,19 @@ const (
 	AccountLimitTypeMax_traffic_policies_by_owner         AccountLimitType = "MAX_TRAFFIC_POLICIES_BY_OWNER"
 )
 
+// Values returns all known values for AccountLimitType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AccountLimitType) Values() []AccountLimitType {
+	return []AccountLimitType{
+		"MAX_HEALTH_CHECKS_BY_OWNER",
+		"MAX_HOSTED_ZONES_BY_OWNER",
+		"MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER",
+		"MAX_REUSABLE_DELEGATION_SETS_BY_OWNER",
+		"MAX_TRAFFIC_POLICIES_BY_OWNER",
+	}
+}
+
 type ChangeAction string
 
 // Enum values for ChangeAction
@@ -22,6 +35,17 @@ const (
 	ChangeActionUpsert ChangeAction = "UPSERT"
 )
 
+// Values returns all known values for ChangeAction. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ChangeAction) Values() []ChangeAction {
+	return []ChangeAction{
+		"CREATE",
+		"DELETE",
+		"UPSERT",
+	}
+}
+
 type ChangeStatus string
 
 // Enum values for ChangeStatus
@@ -29,6 +53,16 @@ const (
 	ChangeStatusPending ChangeStatus = "PENDING"
 	ChangeStatusInsync  ChangeStatus = "INSYNC"
 )
+
+// Values returns all known values for ChangeStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ChangeStatus) Values() []ChangeStatus {
+	return []ChangeStatus{
+		"PENDING",
+		"INSYNC",
+	}
+}
 
 type CloudWatchRegion string
 
@@ -63,6 +97,41 @@ const (
 	CloudWatchRegionUsIsobEast1  CloudWatchRegion = "us-isob-east-1"
 )
 
+// Values returns all known values for CloudWatchRegion. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CloudWatchRegion) Values() []CloudWatchRegion {
+	return []CloudWatchRegion{
+		"us-east-1",
+		"us-east-2",
+		"us-west-1",
+		"us-west-2",
+		"ca-central-1",
+		"eu-central-1",
+		"eu-west-1",
+		"eu-west-2",
+		"eu-west-3",
+		"ap-east-1",
+		"me-south-1",
+		"ap-south-1",
+		"ap-southeast-1",
+		"ap-southeast-2",
+		"ap-northeast-1",
+		"ap-northeast-2",
+		"ap-northeast-3",
+		"eu-north-1",
+		"sa-east-1",
+		"cn-northwest-1",
+		"cn-north-1",
+		"af-south-1",
+		"eu-south-1",
+		"us-gov-west-1",
+		"us-gov-east-1",
+		"us-iso-east-1",
+		"us-isob-east-1",
+	}
+}
+
 type ComparisonOperator string
 
 // Enum values for ComparisonOperator
@@ -72,6 +141,18 @@ const (
 	ComparisonOperatorLessthanthreshold             ComparisonOperator = "LessThanThreshold"
 	ComparisonOperatorLessthanorequaltothreshold    ComparisonOperator = "LessThanOrEqualToThreshold"
 )
+
+// Values returns all known values for ComparisonOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ComparisonOperator) Values() []ComparisonOperator {
+	return []ComparisonOperator{
+		"GreaterThanOrEqualToThreshold",
+		"GreaterThanThreshold",
+		"LessThanThreshold",
+		"LessThanOrEqualToThreshold",
+	}
+}
 
 type HealthCheckRegion string
 
@@ -87,6 +168,22 @@ const (
 	HealthCheckRegionSaEast1      HealthCheckRegion = "sa-east-1"
 )
 
+// Values returns all known values for HealthCheckRegion. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HealthCheckRegion) Values() []HealthCheckRegion {
+	return []HealthCheckRegion{
+		"us-east-1",
+		"us-west-1",
+		"us-west-2",
+		"eu-west-1",
+		"ap-southeast-1",
+		"ap-southeast-2",
+		"ap-northeast-1",
+		"sa-east-1",
+	}
+}
+
 type HealthCheckType string
 
 // Enum values for HealthCheckType
@@ -100,6 +197,21 @@ const (
 	HealthCheckTypeCloudwatch_metric HealthCheckType = "CLOUDWATCH_METRIC"
 )
 
+// Values returns all known values for HealthCheckType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HealthCheckType) Values() []HealthCheckType {
+	return []HealthCheckType{
+		"HTTP",
+		"HTTPS",
+		"HTTP_STR_MATCH",
+		"HTTPS_STR_MATCH",
+		"TCP",
+		"CALCULATED",
+		"CLOUDWATCH_METRIC",
+	}
+}
+
 type HostedZoneLimitType string
 
 // Enum values for HostedZoneLimitType
@@ -107,6 +219,16 @@ const (
 	HostedZoneLimitTypeMax_rrsets_by_zone          HostedZoneLimitType = "MAX_RRSETS_BY_ZONE"
 	HostedZoneLimitTypeMax_vpcs_associated_by_zone HostedZoneLimitType = "MAX_VPCS_ASSOCIATED_BY_ZONE"
 )
+
+// Values returns all known values for HostedZoneLimitType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HostedZoneLimitType) Values() []HostedZoneLimitType {
+	return []HostedZoneLimitType{
+		"MAX_RRSETS_BY_ZONE",
+		"MAX_VPCS_ASSOCIATED_BY_ZONE",
+	}
+}
 
 type InsufficientDataHealthStatus string
 
@@ -116,6 +238,17 @@ const (
 	InsufficientDataHealthStatusUnhealthy       InsufficientDataHealthStatus = "Unhealthy"
 	InsufficientDataHealthStatusLastknownstatus InsufficientDataHealthStatus = "LastKnownStatus"
 )
+
+// Values returns all known values for InsufficientDataHealthStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InsufficientDataHealthStatus) Values() []InsufficientDataHealthStatus {
+	return []InsufficientDataHealthStatus{
+		"Healthy",
+		"Unhealthy",
+		"LastKnownStatus",
+	}
+}
 
 type ResettableElementName string
 
@@ -127,6 +260,18 @@ const (
 	ResettableElementNameChildhealthchecks        ResettableElementName = "ChildHealthChecks"
 )
 
+// Values returns all known values for ResettableElementName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResettableElementName) Values() []ResettableElementName {
+	return []ResettableElementName{
+		"FullyQualifiedDomainName",
+		"Regions",
+		"ResourcePath",
+		"ChildHealthChecks",
+	}
+}
+
 type ResourceRecordSetFailover string
 
 // Enum values for ResourceRecordSetFailover
@@ -134,6 +279,16 @@ const (
 	ResourceRecordSetFailoverPrimary   ResourceRecordSetFailover = "PRIMARY"
 	ResourceRecordSetFailoverSecondary ResourceRecordSetFailover = "SECONDARY"
 )
+
+// Values returns all known values for ResourceRecordSetFailover. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceRecordSetFailover) Values() []ResourceRecordSetFailover {
+	return []ResourceRecordSetFailover{
+		"PRIMARY",
+		"SECONDARY",
+	}
+}
 
 type ResourceRecordSetRegion string
 
@@ -164,12 +319,53 @@ const (
 	ResourceRecordSetRegionEuSouth1     ResourceRecordSetRegion = "eu-south-1"
 )
 
+// Values returns all known values for ResourceRecordSetRegion. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceRecordSetRegion) Values() []ResourceRecordSetRegion {
+	return []ResourceRecordSetRegion{
+		"us-east-1",
+		"us-east-2",
+		"us-west-1",
+		"us-west-2",
+		"ca-central-1",
+		"eu-west-1",
+		"eu-west-2",
+		"eu-west-3",
+		"eu-central-1",
+		"ap-southeast-1",
+		"ap-southeast-2",
+		"ap-northeast-1",
+		"ap-northeast-2",
+		"ap-northeast-3",
+		"eu-north-1",
+		"sa-east-1",
+		"cn-north-1",
+		"cn-northwest-1",
+		"ap-east-1",
+		"me-south-1",
+		"ap-south-1",
+		"af-south-1",
+		"eu-south-1",
+	}
+}
+
 type ReusableDelegationSetLimitType string
 
 // Enum values for ReusableDelegationSetLimitType
 const (
 	ReusableDelegationSetLimitTypeMax_zones_by_reusable_delegation_set ReusableDelegationSetLimitType = "MAX_ZONES_BY_REUSABLE_DELEGATION_SET"
 )
+
+// Values returns all known values for ReusableDelegationSetLimitType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ReusableDelegationSetLimitType) Values() []ReusableDelegationSetLimitType {
+	return []ReusableDelegationSetLimitType{
+		"MAX_ZONES_BY_REUSABLE_DELEGATION_SET",
+	}
+}
 
 type RRType string
 
@@ -189,6 +385,26 @@ const (
 	RRTypeCaa   RRType = "CAA"
 )
 
+// Values returns all known values for RRType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (RRType) Values() []RRType {
+	return []RRType{
+		"SOA",
+		"A",
+		"TXT",
+		"NS",
+		"CNAME",
+		"MX",
+		"NAPTR",
+		"PTR",
+		"SRV",
+		"SPF",
+		"AAAA",
+		"CAA",
+	}
+}
+
 type Statistic string
 
 // Enum values for Statistic
@@ -200,6 +416,19 @@ const (
 	StatisticMinimum     Statistic = "Minimum"
 )
 
+// Values returns all known values for Statistic. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Statistic) Values() []Statistic {
+	return []Statistic{
+		"Average",
+		"Sum",
+		"SampleCount",
+		"Maximum",
+		"Minimum",
+	}
+}
+
 type TagResourceType string
 
 // Enum values for TagResourceType
@@ -207,6 +436,16 @@ const (
 	TagResourceTypeHealthcheck TagResourceType = "healthcheck"
 	TagResourceTypeHostedzone  TagResourceType = "hostedzone"
 )
+
+// Values returns all known values for TagResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TagResourceType) Values() []TagResourceType {
+	return []TagResourceType{
+		"healthcheck",
+		"hostedzone",
+	}
+}
 
 type VPCRegion string
 
@@ -239,3 +478,37 @@ const (
 	VPCRegionAfSouth1     VPCRegion = "af-south-1"
 	VPCRegionEuSouth1     VPCRegion = "eu-south-1"
 )
+
+// Values returns all known values for VPCRegion. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (VPCRegion) Values() []VPCRegion {
+	return []VPCRegion{
+		"us-east-1",
+		"us-east-2",
+		"us-west-1",
+		"us-west-2",
+		"eu-west-1",
+		"eu-west-2",
+		"eu-west-3",
+		"eu-central-1",
+		"ap-east-1",
+		"me-south-1",
+		"us-gov-west-1",
+		"us-gov-east-1",
+		"us-iso-east-1",
+		"us-isob-east-1",
+		"ap-southeast-1",
+		"ap-southeast-2",
+		"ap-south-1",
+		"ap-northeast-1",
+		"ap-northeast-2",
+		"ap-northeast-3",
+		"eu-north-1",
+		"sa-east-1",
+		"ca-central-1",
+		"cn-north-1",
+		"af-south-1",
+		"eu-south-1",
+	}
+}

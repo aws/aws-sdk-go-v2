@@ -47,12 +47,12 @@ type Child struct {
 	// (http://wikipedia.org/wiki/regex) for a child ID string requires one of the
 	// following:
 	//
-	//     * Account: A string that consists of exactly 12 digits.
+	//     * Account - A string that consists of exactly 12 digits.
 	//
 	//     *
-	// Organizational unit (OU): A string that begins with "ou-" followed by from 4 to
-	// 32 lower-case letters or digits (the ID of the root that contains the OU). This
-	// string is followed by a second "-" dash and from 8 to 32 additional lower-case
+	// Organizational unit (OU) - A string that begins with "ou-" followed by from 4 to
+	// 32 lowercase letters or digits (the ID of the root that contains the OU). This
+	// string is followed by a second "-" dash and from 8 to 32 additional lowercase
 	// letters or digits.
 	Id *string
 
@@ -82,8 +82,11 @@ type CreateAccountStatus struct {
 	// reached the limit on the number of accounts in your organization.
 	//
 	//     *
-	// EMAIL_ALREADY_EXISTS: The account could not be created because another AWS
-	// account with that email address already exists.
+	// CONCURRENT_ACCOUNT_MODIFICATION: You already submitted a request with the same
+	// information.
+	//
+	//     * EMAIL_ALREADY_EXISTS: The account could not be created
+	// because another AWS account with that email address already exists.
 	//
 	//     *
 	// GOVCLOUD_ACCOUNT_ALREADY_EXISTS: The account in the AWS GovCloud (US) Region
@@ -99,6 +102,14 @@ type CreateAccountStatus struct {
 	//     *
 	// INTERNAL_FAILURE: The account could not be created because of an internal
 	// failure. Try again later. If the problem persists, contact Customer Support.
+	//
+	//
+	// * MISSING_BUSINESS_VALIDATION: The AWS account that owns your organization has
+	// not received Business Validation.
+	//
+	//     * MISSING_PAYMENT_INSTRUMENT: You must
+	// configure the management account with a valid payment method, such as a credit
+	// card.
 	FailureReason CreateAccountFailureReason
 
 	// If the account was created successfully, the unique identifier (ID) of the new
@@ -108,7 +119,7 @@ type CreateAccountStatus struct {
 	// The unique identifier (ID) that references this request. You get this value from
 	// the response of the initial CreateAccount request to create the account. The
 	// regex pattern (http://wikipedia.org/wiki/regex) for a create account request ID
-	// string requires "car-" followed by from 8 to 32 lower-case letters or digits.
+	// string requires "car-" followed by from 8 to 32 lowercase letters or digits.
 	Id *string
 
 	// The date and time that the request was made for the account creation.
@@ -193,12 +204,12 @@ type EnabledServicePrincipal struct {
 }
 
 // Contains information that must be exchanged to securely establish a relationship
-// between two accounts (an originator and a recipient). For example, when a master
-// account (the originator) invites another account (the recipient) to join its
-// organization, the two accounts exchange information as a series of handshake
-// requests and responses. Note: Handshakes that are CANCELED, ACCEPTED, or
-// DECLINED show up in lists for only 30 days after entering that state After that
-// they are deleted.
+// between two accounts (an originator and a recipient). For example, when a
+// management account (the originator) invites another account (the recipient) to
+// join its organization, the two accounts exchange information as a series of
+// handshake requests and responses. Note: Handshakes that are CANCELED, ACCEPTED,
+// or DECLINED show up in lists for only 30 days after entering that state After
+// that they are deleted.
 type Handshake struct {
 
 	// The type of handshake, indicating what action occurs when the recipient accepts
@@ -206,18 +217,18 @@ type Handshake struct {
 	//
 	//     * INVITE: This
 	// type of handshake represents a request to join an organization. It is always
-	// sent from the master account to only non-member accounts.
+	// sent from the management account to only non-member accounts.
 	//
 	//     *
 	// ENABLE_ALL_FEATURES: This type of handshake represents a request to enable all
-	// features in an organization. It is always sent from the master account to only
-	// invited member accounts. Created accounts do not receive this because those
-	// accounts were created by the organization's master account and approval is
+	// features in an organization. It is always sent from the management account to
+	// only invited member accounts. Created accounts do not receive this because those
+	// accounts were created by the organization's management account and approval is
 	// inferred.
 	//
 	//     * APPROVE_ALL_FEATURES: This type of handshake is sent from the
 	// Organizations service when all member accounts have approved the
-	// ENABLE_ALL_FEATURES invitation. It is sent only to the master account and
+	// ENABLE_ALL_FEATURES invitation. It is sent only to the management account and
 	// signals the master that it can finalize the process to enable all features.
 	Action ActionType
 
@@ -235,7 +246,7 @@ type Handshake struct {
 	// The unique identifier (ID) of a handshake. The originating account creates the
 	// ID when it initiates the handshake. The regex pattern
 	// (http://wikipedia.org/wiki/regex) for handshake ID string requires "h-" followed
-	// by from 8 to 32 lower-case letters or digits.
+	// by from 8 to 32 lowercase letters or digits.
 	Id *string
 
 	// Information about the two accounts that are participating in the handshake.
@@ -286,7 +297,7 @@ type HandshakeFilter struct {
 	// Specifies the parent handshake. Only used for handshake types that are a child
 	// of another type. If you specify ParentHandshakeId, you cannot also specify
 	// ActionType. The regex pattern (http://wikipedia.org/wiki/regex) for handshake ID
-	// string requires "h-" followed by from 8 to 32 lower-case letters or digits.
+	// string requires "h-" followed by from 8 to 32 lowercase letters or digits.
 	ParentHandshakeId *string
 }
 
@@ -295,7 +306,7 @@ type HandshakeParty struct {
 
 	// The unique identifier (ID) for the party. The regex pattern
 	// (http://wikipedia.org/wiki/regex) for handshake ID string requires "h-" followed
-	// by from 8 to 32 lower-case letters or digits.
+	// by from 8 to 32 lowercase letters or digits.
 	//
 	// This member is required.
 	Id *string
@@ -325,11 +336,11 @@ type HandshakeResource struct {
 	// the handshake.
 	//
 	//     * OWNER_EMAIL - Specifies the email address associated with
-	// the master account. Included as information about an organization.
+	// the management account. Included as information about an organization.
 	//
 	//     *
-	// OWNER_NAME - Specifies the name associated with the master account. Included as
-	// information about an organization.
+	// OWNER_NAME - Specifies the name associated with the management account. Included
+	// as information about an organization.
 	//
 	//     * NOTES - Additional text provided by
 	// the handshake initiator and intended for the recipient to read.
@@ -369,23 +380,23 @@ type Organization struct {
 
 	// The unique identifier (ID) of an organization. The regex pattern
 	// (http://wikipedia.org/wiki/regex) for an organization ID string requires "o-"
-	// followed by from 10 to 32 lower-case letters or digits.
+	// followed by from 10 to 32 lowercase letters or digits.
 	Id *string
 
-	// The Amazon Resource Name (ARN) of the account that is designated as the master
-	// account for the organization. For more information about ARNs in Organizations,
-	// see ARN Formats Supported by Organizations
+	// The Amazon Resource Name (ARN) of the account that is designated as the
+	// management account for the organization. For more information about ARNs in
+	// Organizations, see ARN Formats Supported by Organizations
 	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
 	// in the AWS Organizations User Guide.
 	MasterAccountArn *string
 
 	// The email address that is associated with the AWS account that is designated as
-	// the master account for the organization.
+	// the management account for the organization.
 	MasterAccountEmail *string
 
-	// The unique identifier (ID) of the master account of an organization. The regex
-	// pattern (http://wikipedia.org/wiki/regex) for an account ID string requires
-	// exactly 12 digits.
+	// The unique identifier (ID) of the management account of an organization. The
+	// regex pattern (http://wikipedia.org/wiki/regex) for an account ID string
+	// requires exactly 12 digits.
 	MasterAccountId *string
 }
 
@@ -402,9 +413,9 @@ type OrganizationalUnit struct {
 
 	// The unique identifier (ID) associated with this OU. The regex pattern
 	// (http://wikipedia.org/wiki/regex) for an organizational unit ID string requires
-	// "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root
+	// "ou-" followed by from 4 to 32 lowercase letters or digits (the ID of the root
 	// that contains the OU). This string is followed by a second "-" dash and from 8
-	// to 32 additional lower-case letters or digits.
+	// to 32 additional lowercase letters or digits.
 	Id *string
 
 	// The friendly name of this OU. The regex pattern
@@ -421,13 +432,13 @@ type Parent struct {
 	// (http://wikipedia.org/wiki/regex) for a parent ID string requires one of the
 	// following:
 	//
-	//     * Root: A string that begins with "r-" followed by from 4 to 32
-	// lower-case letters or digits.
+	//     * Root - A string that begins with "r-" followed by from 4 to 32
+	// lowercase letters or digits.
 	//
-	//     * Organizational unit (OU): A string that
-	// begins with "ou-" followed by from 4 to 32 lower-case letters or digits (the ID
+	//     * Organizational unit (OU) - A string that
+	// begins with "ou-" followed by from 4 to 32 lowercase letters or digits (the ID
 	// of the root that the OU is in). This string is followed by a second "-" dash and
-	// from 8 to 32 additional lower-case letters or digits.
+	// from 8 to 32 additional lowercase letters or digits.
 	Id *string
 
 	// The type of the parent entity.
@@ -466,7 +477,8 @@ type PolicySummary struct {
 
 	// The unique identifier (ID) of the policy. The regex pattern
 	// (http://wikipedia.org/wiki/regex) for a policy ID string requires "p-" followed
-	// by from 8 to 128 lower-case letters or digits.
+	// by from 8 to 128 lowercase or uppercase letters, digits, or the underscore
+	// character (_).
 	Id *string
 
 	// The friendly name of the policy. The regex pattern
@@ -496,16 +508,16 @@ type PolicyTargetSummary struct {
 	// (http://wikipedia.org/wiki/regex) for a target ID string requires one of the
 	// following:
 	//
-	//     * Root: A string that begins with "r-" followed by from 4 to 32
-	// lower-case letters or digits.
+	//     * Root - A string that begins with "r-" followed by from 4 to 32
+	// lowercase letters or digits.
 	//
-	//     * Account: A string that consists of exactly
+	//     * Account - A string that consists of exactly
 	// 12 digits.
 	//
-	//     * Organizational unit (OU): A string that begins with "ou-"
-	// followed by from 4 to 32 lower-case letters or digits (the ID of the root that
+	//     * Organizational unit (OU) - A string that begins with "ou-"
+	// followed by from 4 to 32 lowercase letters or digits (the ID of the root that
 	// the OU is in). This string is followed by a second "-" dash and from 8 to 32
-	// additional lower-case letters or digits.
+	// additional lowercase letters or digits.
 	TargetId *string
 
 	// The type of the policy target.
@@ -526,9 +538,7 @@ type PolicyTypeSummary struct {
 
 // Contains details about a root. A root is a top-level parent node in the
 // hierarchy of an organization that can contain organizational units (OUs) and
-// accounts. Every root contains every AWS account in the organization. Each root
-// enables the accounts to be organized in a different way and to have different
-// policy types enabled for use in that root.
+// accounts. The root contains every AWS account in the organization.
 type Root struct {
 
 	// The Amazon Resource Name (ARN) of the root. For more information about ARNs in
@@ -539,7 +549,7 @@ type Root struct {
 
 	// The unique identifier (ID) for the root. The regex pattern
 	// (http://wikipedia.org/wiki/regex) for a root ID string requires "r-" followed by
-	// from 4 to 32 lower-case letters or digits.
+	// from 4 to 32 lowercase letters or digits.
 	Id *string
 
 	// The friendly name of the root. The regex pattern
@@ -556,8 +566,17 @@ type Root struct {
 	PolicyTypes []*PolicyTypeSummary
 }
 
-// A custom key-value pair associated with a resource such as an account within
-// your organization.
+// A custom key-value pair associated with a resource within your organization. You
+// can attach tags to any of the following organization resources.
+//
+//     * AWS
+// account
+//
+//     * Organizational unit (OU)
+//
+//     * Organization root
+//
+//     * Policy
 type Tag struct {
 
 	// The key identifier, or name, of the tag.

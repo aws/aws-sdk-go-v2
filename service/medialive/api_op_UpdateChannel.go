@@ -35,6 +35,9 @@ type UpdateChannelInput struct {
 	// This member is required.
 	ChannelId *string
 
+	// Specification of CDI inputs for this channel
+	CdiInputSpecification *types.CdiInputSpecification
+
 	// A list of output destinations for this channel.
 	Destinations []*types.OutputDestination
 
@@ -44,7 +47,7 @@ type UpdateChannelInput struct {
 	// Placeholder documentation for __listOfInputAttachment
 	InputAttachments []*types.InputAttachment
 
-	// Specification of input for this channel (max. bitrate, resolution, codec, etc.)
+	// Specification of network and file inputs for this channel
 	InputSpecification *types.InputSpecification
 
 	// The log level to write to CloudWatch Logs.

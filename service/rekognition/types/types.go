@@ -21,10 +21,12 @@ type AgeRange struct {
 }
 
 // Assets are the images that you use to train and evaluate a model version. Assets
-// are referenced by Sagemaker GroundTruth manifest files.
+// can also contain validation information that you use to debug a failed model
+// training.
 type Asset struct {
 
-	// The S3 bucket that contains the Ground Truth manifest file.
+	// The S3 bucket that contains an Amazon Sagemaker Ground Truth format manifest
+	// file.
 	GroundTruthManifest *GroundTruthManifest
 }
 
@@ -39,7 +41,7 @@ type AudioMetadata struct {
 	// The duration of the audio stream in milliseconds.
 	DurationMillis *int64
 
-	// The number of audio channels in the segement.
+	// The number of audio channels in the segment.
 	NumberOfChannels *int64
 
 	// The sample rate for the audio stream.
@@ -57,21 +59,21 @@ type Beard struct {
 	Value *bool
 }
 
-// Identifies the bounding box around the label, face, or text. The left
-// (x-coordinate) and top (y-coordinate) are coordinates representing the top and
-// left sides of the bounding box. Note that the upper-left corner of the image is
-// the origin (0,0). The top and left values returned are ratios of the overall
-// image size. For example, if the input image is 700x200 pixels, and the top-left
-// coordinate of the bounding box is 350x50 pixels, the API returns a left value of
-// 0.5 (350/700) and a top value of 0.25 (50/200). The width and height values
-// represent the dimensions of the bounding box as a ratio of the overall image
-// dimension. For example, if the input image is 700x200 pixels, and the bounding
-// box width is 70 pixels, the width returned is 0.1. The bounding box coordinates
-// can have negative values. For example, if Amazon Rekognition is able to detect a
-// face that is at the image edge and is only partially visible, the service can
-// return coordinates that are outside the image bounds and, depending on the image
-// edge, you might get negative values or values greater than 1 for the left or top
-// values.
+// Identifies the bounding box around the label, face, text or personal protective
+// equipment. The left (x-coordinate) and top (y-coordinate) are coordinates
+// representing the top and left sides of the bounding box. Note that the
+// upper-left corner of the image is the origin (0,0). The top and left values
+// returned are ratios of the overall image size. For example, if the input image
+// is 700x200 pixels, and the top-left coordinate of the bounding box is 350x50
+// pixels, the API returns a left value of 0.5 (350/700) and a top value of 0.25
+// (50/200). The width and height values represent the dimensions of the bounding
+// box as a ratio of the overall image dimension. For example, if the input image
+// is 700x200 pixels, and the bounding box width is 70 pixels, the width returned
+// is 0.1. The bounding box coordinates can have negative values. For example, if
+// Amazon Rekognition is able to detect a face that is at the image edge and is
+// only partially visible, the service can return coordinates that are outside the
+// image bounds and, depending on the image edge, you might get negative values or
+// values greater than 1 for the left or top values.
 type BoundingBox struct {
 
 	// Height of the bounding box as a ratio of the overall image height.
@@ -204,6 +206,17 @@ type ContentModerationDetection struct {
 	Timestamp *int64
 }
 
+// Information about an item of Personal Protective Equipment covering a
+// corresponding body part. For more information, see DetectProtectiveEquipment.
+type CoversBodyPart struct {
+
+	// The confidence that Amazon Rekognition has in the value of Value.
+	Confidence *float32
+
+	// True if the PPE covers the corresponding body part, otherwise false.
+	Value *bool
+}
+
 // A custom label detected in an image by a call to DetectCustomLabels.
 type CustomLabel struct {
 
@@ -267,6 +280,24 @@ type Emotion struct {
 
 	// Type of emotion detected.
 	Type EmotionName
+}
+
+// Information about an item of Personal Protective Equipment (PPE) detected by
+// DetectProtectiveEquipment. For more information, see DetectProtectiveEquipment.
+type EquipmentDetection struct {
+
+	// A bounding box surrounding the item of detected PPE.
+	BoundingBox *BoundingBox
+
+	// The confidence that Amazon Rekognition has that the bounding box (BoundingBox)
+	// contains an item of PPE.
+	Confidence *float32
+
+	// Information about the body part covered by the detected PPE.
+	CoversBodyPart *CoversBodyPart
+
+	// The type of detected PPE.
+	Type ProtectiveEquipmentType
 }
 
 // The evaluation results for the training of a model.
@@ -489,7 +520,8 @@ type Geometry struct {
 	Polygon []*Point
 }
 
-// The S3 bucket that contains the Ground Truth manifest file.
+// The S3 bucket that contains an Amazon Sagemaker Ground Truth format manifest
+// file.
 type GroundTruthManifest struct {
 
 	// Provides the S3 bucket name and object name. The region for the S3 bucket
@@ -649,14 +681,16 @@ type Landmark struct {
 	// Type of landmark.
 	Type LandmarkType
 
-	// The x-coordinate from the top left of the landmark expressed as the ratio of the
-	// width of the image. For example, if the image is 700 x 200 and the x-coordinate
-	// of the landmark is at 350 pixels, this value is 0.5.
+	// The x-coordinate of the landmark expressed as a ratio of the width of the image.
+	// The x-coordinate is measured from the left-side of the image. For example, if
+	// the image is 700 pixels wide and the x-coordinate of the landmark is at 350
+	// pixels, this value is 0.5.
 	X *float32
 
-	// The y-coordinate from the top left of the landmark expressed as the ratio of the
-	// height of the image. For example, if the image is 700 x 200 and the y-coordinate
-	// of the landmark is at 100 pixels, this value is 0.5.
+	// The y-coordinate of the landmark expressed as a ratio of the height of the
+	// image. The y-coordinate is measured from the top of the image. For example, if
+	// the image height is 200 pixels and the y-coordinate of the landmark is at 50
+	// pixels, this value is 0.25.
 	Y *float32
 }
 
@@ -841,6 +875,10 @@ type ProjectVersionDescription struct {
 	// successful.
 	EvaluationResult *EvaluationResult
 
+	// The location of the summary manifest. The summary manifest provides aggregate
+	// data validation results for the training and test datasets.
+	ManifestSummary *GroundTruthManifest
+
 	// The minimum number of inference units used by the model. For more information,
 	// see StartProjectVersion.
 	MinInferenceUnits *int32
@@ -857,14 +895,114 @@ type ProjectVersionDescription struct {
 	// A descriptive message for an error or warning that occurred.
 	StatusMessage *string
 
-	// The manifest file that represents the testing results.
+	// Contains information about the testing results.
 	TestingDataResult *TestingDataResult
 
-	// The manifest file that represents the training results.
+	// Contains information about the training results.
 	TrainingDataResult *TrainingDataResult
 
 	// The Unix date and time that training of the model ended.
 	TrainingEndTimestamp *time.Time
+}
+
+// Information about a body part detected by DetectProtectiveEquipment that
+// contains PPE. An array of ProtectiveEquipmentBodyPart objects is returned for
+// each person detected by DetectProtectiveEquipment.
+type ProtectiveEquipmentBodyPart struct {
+
+	// The confidence that Amazon Rekognition has in the detection accuracy of the
+	// detected body part.
+	Confidence *float32
+
+	// An array of Personal Protective Equipment items detected around a body part.
+	EquipmentDetections []*EquipmentDetection
+
+	// The detected body part.
+	Name BodyPart
+}
+
+// A person detected by a call to DetectProtectiveEquipment. The API returns all
+// persons detected in the input image in an array of ProtectiveEquipmentPerson
+// objects.
+type ProtectiveEquipmentPerson struct {
+
+	// An array of body parts detected on a person's body (including body parts without
+	// PPE).
+	BodyParts []*ProtectiveEquipmentBodyPart
+
+	// A bounding box around the detected person.
+	BoundingBox *BoundingBox
+
+	// The confidence that Amazon Rekognition has that the bounding box contains a
+	// person.
+	Confidence *float32
+
+	// The identifier for the detected person. The identifier is only unique for a
+	// single call to DetectProtectiveEquipment.
+	Id *int32
+}
+
+// Specifies summary attributes to return from a call to DetectProtectiveEquipment.
+// You can specify which types of PPE to summarize. You can also specify a minimum
+// confidence value for detections. Summary information is returned in the Summary
+// (ProtectiveEquipmentSummary) field of the response from
+// DetectProtectiveEquipment. The summary includes which persons in an image were
+// detected wearing the requested types of person protective equipment (PPE), which
+// persons were detected as not wearing PPE, and the persons in which a
+// determination could not be made. For more information, see
+// ProtectiveEquipmentSummary.
+type ProtectiveEquipmentSummarizationAttributes struct {
+
+	// The minimum confidence level for which you want summary information. The
+	// confidence level applies to person detection, body part detection, equipment
+	// detection, and body part coverage. Amazon Rekognition doesn't return summary
+	// information with a confidence than this specified value. There isn't a default
+	// value. Specify a MinConfidence value that is between 50-100% as
+	// DetectProtectiveEquipment returns predictions only where the detection
+	// confidence is between 50% - 100%. If you specify a value that is less than 50%,
+	// the results are the same specifying a value of 50%.
+	//
+	// This member is required.
+	MinConfidence *float32
+
+	// An array of personal protective equipment types for which you want summary
+	// information. If a person is detected wearing a required requipment type, the
+	// person's ID is added to the PersonsWithRequiredEquipment array field returned in
+	// ProtectiveEquipmentSummary by DetectProtectiveEquipment.
+	//
+	// This member is required.
+	RequiredEquipmentTypes []ProtectiveEquipmentType
+}
+
+// Summary information for required items of personal protective equipment (PPE)
+// detected on persons by a call to DetectProtectiveEquipment. You specify the
+// required type of PPE in the SummarizationAttributes
+// (ProtectiveEquipmentSummarizationAttributes) input parameter. The summary
+// includes which persons were detected wearing the required personal protective
+// equipment (PersonsWithRequiredEquipment), which persons were detected as not
+// wearing the required PPE (PersonsWithoutRequiredEquipment), and the persons in
+// which a determination could not be made (PersonsIndeterminate). To get a total
+// for each category, use the size of the field array. For example, to find out how
+// many people were detected as wearing the specified PPE, use the size of the
+// PersonsWithRequiredEquipment array. If you want to find out more about a person,
+// such as the location (BoundingBox) of the person on the image, use the person ID
+// in each array element. Each person ID matches the ID field of a
+// ProtectiveEquipmentPerson object returned in the Persons array by
+// DetectProtectiveEquipment.
+type ProtectiveEquipmentSummary struct {
+
+	// An array of IDs for persons where it was not possible to determine if they are
+	// wearing personal protective equipment.
+	PersonsIndeterminate []*int32
+
+	// An array of IDs for persons who are wearing detected personal protective
+	// equipment.
+	PersonsWithRequiredEquipment []*int32
+
+	// An array of IDs for persons who are not wearing all of the types of PPE
+	// specified in the RequiredEquipmentTypes field of the detected personal
+	// protective equipment.
+	PersonsWithoutRequiredEquipment []*int32
 }
 
 // Specifies a location within the frame that Rekognition checks for text. Uses a
@@ -912,7 +1050,7 @@ type SegmentDetection struct {
 	EndTimecodeSMPTE *string
 
 	// The end time of the detected segment, in milliseconds, from the start of the
-	// video.
+	// video. This value is rounded down.
 	EndTimestampMillis *int64
 
 	// If the segment is a shot detection, contains information about the shot
@@ -925,7 +1063,8 @@ type SegmentDetection struct {
 	StartTimecodeSMPTE *string
 
 	// The start time of the detected segment in milliseconds from the start of the
-	// video.
+	// video. This value is rounded down. For example, if the actual timestamp is
+	// 100.6667 milliseconds, Amazon Rekognition Video returns a value of 100 millis.
 	StartTimestampMillis *int64
 
 	// If the segment is a technical cue, contains information about the technical cue.
@@ -955,7 +1094,7 @@ type ShotSegment struct {
 	// segment.
 	Confidence *float32
 
-	// An Identifier for a shot detection segment detected in a video
+	// An Identifier for a shot detection segment detected in a video.
 	Index *int64
 }
 
@@ -1113,8 +1252,8 @@ type TestingData struct {
 	AutoCreate *bool
 }
 
-// A Sagemaker Groundtruth format manifest file representing the dataset used for
-// testing.
+// Sagemaker Groundtruth format manifest files for the input, output and validation
+// datasets that are used and created during testing.
 type TestingDataResult struct {
 
 	// The testing dataset that was supplied for training.
@@ -1123,6 +1262,10 @@ type TestingDataResult struct {
 	// The subset of the dataset that was actually tested. Some images (assets) might
 	// not be tested due to file formatting and other issues.
 	Output *TestingData
+
+	// The location of the data validation manifest. The data validation manifest is
+	// created for the test dataset during model training.
+	Validation *ValidationData
 }
 
 // Information about a word or line of text detected by DetectText. The
@@ -1179,8 +1322,8 @@ type TrainingData struct {
 	Assets []*Asset
 }
 
-// A Sagemaker Groundtruth format manifest file that represents the dataset used
-// for training.
+// Sagemaker Groundtruth format manifest files for the input, output and validation
+// datasets that are used and created during testing.
 type TrainingDataResult struct {
 
 	// The training assets that you supplied for training.
@@ -1189,6 +1332,10 @@ type TrainingDataResult struct {
 	// The images (assets) that were actually trained by Amazon Rekognition Custom
 	// Labels.
 	Output *TrainingData
+
+	// The location of the data validation manifest. The data validation manifest is
+	// created for the training dataset during model training.
+	Validation *ValidationData
 }
 
 // A face that IndexFaces detected, but didn't index. Use the Reasons response
@@ -1220,6 +1367,22 @@ type UnindexedFace struct {
 	//     * SMALL_BOUNDING_BOX - The bounding box
 	// around the face is too small.
 	Reasons []Reason
+}
+
+// Contains the Amazon S3 bucket location of the validation data for a model
+// training job. The validation data includes error information for individual JSON
+// lines in the dataset.
+//
+// For more information, see Debugging a Failed Model
+// Training in the Amazon Rekognition Custom Labels Developer Guide. You get the
+// ValidationData object for the training dataset (TrainingDataResult) and the test
+// dataset (TestingDataResult) by calling DescribeProjectVersions. The assets array
+// contains a single Asset object. The GroundTruthManifest field of the Asset
+// object contains the S3 bucket location of the validation data.
+type ValidationData struct {
+
+	// The assets that comprise the validation data.
+	Assets []*Asset
 }
 
 // Video file stored in an Amazon S3 bucket. Amazon Rekognition video start

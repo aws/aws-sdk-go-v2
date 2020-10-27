@@ -99,7 +99,7 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 
 // The query string is not valid. Details about this error are displayed in a
 // QueryCompileError object. For more information, see QueryCompileError
-// (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_QueryCompileError.html)"/>.
+// (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_QueryCompileError.html).
 // For more information about valid query syntax, see CloudWatch Logs Insights
 // Query Syntax
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html).

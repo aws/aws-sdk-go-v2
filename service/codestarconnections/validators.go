@@ -266,14 +266,14 @@ func validateVpcConfiguration(v *types.VpcConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VpcConfiguration"}
+	if v.SubnetIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
+	}
 	if v.SecurityGroupIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupIds"))
 	}
 	if v.VpcId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VpcId"))
-	}
-	if v.SubnetIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -287,13 +287,13 @@ func validateOpCreateConnectionInput(v *CreateConnectionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateConnectionInput"}
-	if v.ConnectionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ConnectionName"))
-	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.ConnectionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -310,6 +310,9 @@ func validateOpCreateHostInput(v *CreateHostInput) error {
 	if len(v.ProviderType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ProviderType"))
 	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.VpcConfiguration != nil {
 		if err := validateVpcConfiguration(v.VpcConfiguration); err != nil {
 			invalidParams.AddNested("VpcConfiguration", err.(smithy.InvalidParamsError))
@@ -317,9 +320,6 @@ func validateOpCreateHostInput(v *CreateHostInput) error {
 	}
 	if v.ProviderEndpoint == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProviderEndpoint"))
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -430,11 +430,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

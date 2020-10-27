@@ -43,7 +43,7 @@ func (c *Client) DescribeAlias(ctx context.Context, params *DescribeAliasInput, 
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type DescribeAliasInput struct {
 
 	// The unique identifier for the fleet alias that you want to retrieve. You can use
@@ -53,7 +53,7 @@ type DescribeAliasInput struct {
 	AliasId *string
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type DescribeAliasOutput struct {
 
 	// The requested alias resource.

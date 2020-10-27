@@ -14,10 +14,10 @@ import (
 // Writes multiple data records into a Kinesis data stream in a single call (also
 // referred to as a PutRecords request). Use this operation to send data into the
 // stream for data ingestion and processing. Each PutRecords request can support up
-// to 500 records. Each record in the request can be as large as 1 MB, up to a
-// limit of 5 MB for the entire request, including partition keys. Each shard can
+// to 500 records. Each record in the request can be as large as 1 MiB, up to a
+// limit of 5 MiB for the entire request, including partition keys. Each shard can
 // support writes up to 1,000 records per second, up to a maximum data write total
-// of 1 MB per second. You must specify the name of the stream that captures,
+// of 1 MiB per second. You must specify the name of the stream that captures,
 // stores, and transports the data; and an array of request Records, with each
 // record in the array requiring a partition key and data blob. The record size
 // limit applies to the total size of the partition key and data blob. The data
@@ -44,22 +44,26 @@ import (
 // response Records array includes both successfully and unsuccessfully processed
 // records. Kinesis Data Streams attempts to process all records in each PutRecords
 // request. A single record failure does not stop the processing of subsequent
-// records. A successfully processed record includes ShardId and SequenceNumber
-// values. The ShardId parameter identifies the shard in the stream where the
-// record is stored. The SequenceNumber parameter is an identifier assigned to the
-// put record, unique to all records in the stream. An unsuccessfully processed
-// record includes ErrorCode and ErrorMessage values. ErrorCode reflects the type
-// of error and can be one of the following values:
-// ProvisionedThroughputExceededException or InternalFailure. ErrorMessage provides
-// more detailed information about the ProvisionedThroughputExceededException
-// exception including the account ID, stream name, and shard ID of the record that
-// was throttled. For more information about partially successful responses, see
-// Adding Multiple Records with PutRecords
+// records. As a result, PutRecords doesn't guarantee the ordering of records. If
+// you need to read records in the same order they are written to the stream, use
+// PutRecord instead of PutRecords, and write to the same shard. A successfully
+// processed record includes ShardId and SequenceNumber values. The ShardId
+// parameter identifies the shard in the stream where the record is stored. The
+// SequenceNumber parameter is an identifier assigned to the put record, unique to
+// all records in the stream. An unsuccessfully processed record includes ErrorCode
+// and ErrorMessage values. ErrorCode reflects the type of error and can be one of
+// the following values: ProvisionedThroughputExceededException or InternalFailure.
+// ErrorMessage provides more detailed information about the
+// ProvisionedThroughputExceededException exception including the account ID,
+// stream name, and shard ID of the record that was throttled. For more information
+// about partially successful responses, see Adding Multiple Records with
+// PutRecords
 // (https://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-add-data-to-stream.html#kinesis-using-sdk-java-putrecords)
-// in the Amazon Kinesis Data Streams Developer Guide. By default, data records are
-// accessible for 24 hours from the time that they are added to a stream. You can
-// use IncreaseStreamRetentionPeriod or DecreaseStreamRetentionPeriod to modify
-// this retention period.
+// in the Amazon Kinesis Data Streams Developer Guide. After you write a record to
+// a stream, you cannot modify that record or its order within the stream. By
+// default, data records are accessible for 24 hours from the time that they are
+// added to a stream. You can use IncreaseStreamRetentionPeriod or
+// DecreaseStreamRetentionPeriod to modify this retention period.
 func (c *Client) PutRecords(ctx context.Context, params *PutRecordsInput, optFns ...func(*Options)) (*PutRecordsOutput, error) {
 	if params == nil {
 		params = &PutRecordsInput{}

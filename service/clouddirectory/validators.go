@@ -1503,14 +1503,14 @@ func validateAttributeKey(v *types.AttributeKey) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AttributeKey"}
-	if v.FacetName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FacetName"))
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.SchemaArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SchemaArn"))
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if v.FacetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FacetName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1524,15 +1524,15 @@ func validateAttributeKeyAndValue(v *types.AttributeKeyAndValue) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AttributeKeyAndValue"}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	} else if v.Key != nil {
 		if err := validateAttributeKey(v.Key); err != nil {
 			invalidParams.AddNested("Key", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1580,11 +1580,11 @@ func validateAttributeNameAndValue(v *types.AttributeNameAndValue) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AttributeNameAndValue"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.AttributeName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AttributeName"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1615,18 +1615,18 @@ func validateBatchAddFacetToObject(v *types.BatchAddFacetToObject) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchAddFacetToObject"}
+	if v.SchemaFacet == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaFacet"))
+	}
+	if v.ObjectReference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObjectReference"))
+	}
 	if v.ObjectAttributeList == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ObjectAttributeList"))
 	} else if v.ObjectAttributeList != nil {
 		if err := validateAttributeKeyAndValueList(v.ObjectAttributeList); err != nil {
 			invalidParams.AddNested("ObjectAttributeList", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ObjectReference == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ObjectReference"))
-	}
-	if v.SchemaFacet == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SchemaFacet"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1640,14 +1640,14 @@ func validateBatchAttachObject(v *types.BatchAttachObject) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchAttachObject"}
+	if v.ChildReference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChildReference"))
+	}
 	if v.LinkName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LinkName"))
 	}
 	if v.ParentReference == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ParentReference"))
-	}
-	if v.ChildReference == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ChildReference"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1661,11 +1661,11 @@ func validateBatchAttachPolicy(v *types.BatchAttachPolicy) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchAttachPolicy"}
-	if v.ObjectReference == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ObjectReference"))
-	}
 	if v.PolicyReference == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyReference"))
+	}
+	if v.ObjectReference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObjectReference"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1697,24 +1697,24 @@ func validateBatchAttachTypedLink(v *types.BatchAttachTypedLink) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchAttachTypedLink"}
-	if v.SourceObjectReference == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceObjectReference"))
+	if v.Attributes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Attributes"))
+	} else if v.Attributes != nil {
+		if err := validateAttributeNameAndValueList(v.Attributes); err != nil {
+			invalidParams.AddNested("Attributes", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.TargetObjectReference == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetObjectReference"))
+	}
+	if v.SourceObjectReference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceObjectReference"))
 	}
 	if v.TypedLinkFacet == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TypedLinkFacet"))
 	} else if v.TypedLinkFacet != nil {
 		if err := validateTypedLinkSchemaAndFacetName(v.TypedLinkFacet); err != nil {
 			invalidParams.AddNested("TypedLinkFacet", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Attributes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Attributes"))
-	} else if v.Attributes != nil {
-		if err := validateAttributeNameAndValueList(v.Attributes); err != nil {
-			invalidParams.AddNested("Attributes", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1751,15 +1751,15 @@ func validateBatchCreateObject(v *types.BatchCreateObject) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchCreateObject"}
-	if v.SchemaFacet == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SchemaFacet"))
-	}
 	if v.ObjectAttributeList == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ObjectAttributeList"))
 	} else if v.ObjectAttributeList != nil {
 		if err := validateAttributeKeyAndValueList(v.ObjectAttributeList); err != nil {
 			invalidParams.AddNested("ObjectAttributeList", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.SchemaFacet == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaFacet"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1806,11 +1806,11 @@ func validateBatchDetachObject(v *types.BatchDetachObject) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchDetachObject"}
-	if v.LinkName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LinkName"))
-	}
 	if v.ParentReference == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ParentReference"))
+	}
+	if v.LinkName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LinkName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1824,11 +1824,11 @@ func validateBatchDetachPolicy(v *types.BatchDetachPolicy) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchDetachPolicy"}
-	if v.ObjectReference == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ObjectReference"))
-	}
 	if v.PolicyReference == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyReference"))
+	}
+	if v.ObjectReference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObjectReference"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1861,15 +1861,15 @@ func validateBatchGetLinkAttributes(v *types.BatchGetLinkAttributes) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchGetLinkAttributes"}
-	if v.AttributeNames == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AttributeNames"))
-	}
 	if v.TypedLinkSpecifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TypedLinkSpecifier"))
 	} else if v.TypedLinkSpecifier != nil {
 		if err := validateTypedLinkSpecifier(v.TypedLinkSpecifier); err != nil {
 			invalidParams.AddNested("TypedLinkSpecifier", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.AttributeNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttributeNames"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1886,11 +1886,11 @@ func validateBatchGetObjectAttributes(v *types.BatchGetObjectAttributes) error {
 	if v.SchemaFacet == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SchemaFacet"))
 	}
-	if v.AttributeNames == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AttributeNames"))
-	}
 	if v.ObjectReference == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ObjectReference"))
+	}
+	if v.AttributeNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttributeNames"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1934,11 +1934,6 @@ func validateBatchListIncomingTypedLinks(v *types.BatchListIncomingTypedLinks) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchListIncomingTypedLinks"}
-	if v.FilterAttributeRanges != nil {
-		if err := validateTypedLinkAttributeRangeList(v.FilterAttributeRanges); err != nil {
-			invalidParams.AddNested("FilterAttributeRanges", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.FilterTypedLink != nil {
 		if err := validateTypedLinkSchemaAndFacetName(v.FilterTypedLink); err != nil {
 			invalidParams.AddNested("FilterTypedLink", err.(smithy.InvalidParamsError))
@@ -1946,6 +1941,11 @@ func validateBatchListIncomingTypedLinks(v *types.BatchListIncomingTypedLinks) e
 	}
 	if v.ObjectReference == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ObjectReference"))
+	}
+	if v.FilterAttributeRanges != nil {
+		if err := validateTypedLinkAttributeRangeList(v.FilterAttributeRanges); err != nil {
+			invalidParams.AddNested("FilterAttributeRanges", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1959,13 +1959,13 @@ func validateBatchListIndex(v *types.BatchListIndex) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchListIndex"}
-	if v.IndexReference == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IndexReference"))
-	}
 	if v.RangesOnIndexedValues != nil {
 		if err := validateObjectAttributeRangeList(v.RangesOnIndexedValues); err != nil {
 			invalidParams.AddNested("RangesOnIndexedValues", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.IndexReference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexReference"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2054,17 +2054,17 @@ func validateBatchListOutgoingTypedLinks(v *types.BatchListOutgoingTypedLinks) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchListOutgoingTypedLinks"}
-	if v.FilterTypedLink != nil {
-		if err := validateTypedLinkSchemaAndFacetName(v.FilterTypedLink); err != nil {
-			invalidParams.AddNested("FilterTypedLink", err.(smithy.InvalidParamsError))
+	if v.FilterAttributeRanges != nil {
+		if err := validateTypedLinkAttributeRangeList(v.FilterAttributeRanges); err != nil {
+			invalidParams.AddNested("FilterAttributeRanges", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.ObjectReference == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ObjectReference"))
 	}
-	if v.FilterAttributeRanges != nil {
-		if err := validateTypedLinkAttributeRangeList(v.FilterAttributeRanges); err != nil {
-			invalidParams.AddNested("FilterAttributeRanges", err.(smithy.InvalidParamsError))
+	if v.FilterTypedLink != nil {
+		if err := validateTypedLinkSchemaAndFacetName(v.FilterTypedLink); err != nil {
+			invalidParams.AddNested("FilterTypedLink", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2109,44 +2109,9 @@ func validateBatchReadOperation(v *types.BatchReadOperation) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchReadOperation"}
-	if v.ListOutgoingTypedLinks != nil {
-		if err := validateBatchListOutgoingTypedLinks(v.ListOutgoingTypedLinks); err != nil {
-			invalidParams.AddNested("ListOutgoingTypedLinks", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.ListObjectParents != nil {
-		if err := validateBatchListObjectParents(v.ListObjectParents); err != nil {
-			invalidParams.AddNested("ListObjectParents", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.ListIndex != nil {
-		if err := validateBatchListIndex(v.ListIndex); err != nil {
-			invalidParams.AddNested("ListIndex", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.ListIncomingTypedLinks != nil {
-		if err := validateBatchListIncomingTypedLinks(v.ListIncomingTypedLinks); err != nil {
-			invalidParams.AddNested("ListIncomingTypedLinks", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.ListObjectPolicies != nil {
-		if err := validateBatchListObjectPolicies(v.ListObjectPolicies); err != nil {
-			invalidParams.AddNested("ListObjectPolicies", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.ListObjectAttributes != nil {
-		if err := validateBatchListObjectAttributes(v.ListObjectAttributes); err != nil {
-			invalidParams.AddNested("ListObjectAttributes", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.GetLinkAttributes != nil {
-		if err := validateBatchGetLinkAttributes(v.GetLinkAttributes); err != nil {
-			invalidParams.AddNested("GetLinkAttributes", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.LookupPolicy != nil {
-		if err := validateBatchLookupPolicy(v.LookupPolicy); err != nil {
-			invalidParams.AddNested("LookupPolicy", err.(smithy.InvalidParamsError))
+	if v.ListObjectParentPaths != nil {
+		if err := validateBatchListObjectParentPaths(v.ListObjectParentPaths); err != nil {
+			invalidParams.AddNested("ListObjectParentPaths", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.ListObjectChildren != nil {
@@ -2154,19 +2119,14 @@ func validateBatchReadOperation(v *types.BatchReadOperation) error {
 			invalidParams.AddNested("ListObjectChildren", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.GetObjectInformation != nil {
-		if err := validateBatchGetObjectInformation(v.GetObjectInformation); err != nil {
-			invalidParams.AddNested("GetObjectInformation", err.(smithy.InvalidParamsError))
+	if v.LookupPolicy != nil {
+		if err := validateBatchLookupPolicy(v.LookupPolicy); err != nil {
+			invalidParams.AddNested("LookupPolicy", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ListAttachedIndices != nil {
-		if err := validateBatchListAttachedIndices(v.ListAttachedIndices); err != nil {
-			invalidParams.AddNested("ListAttachedIndices", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.ListPolicyAttachments != nil {
-		if err := validateBatchListPolicyAttachments(v.ListPolicyAttachments); err != nil {
-			invalidParams.AddNested("ListPolicyAttachments", err.(smithy.InvalidParamsError))
+	if v.ListObjectPolicies != nil {
+		if err := validateBatchListObjectPolicies(v.ListObjectPolicies); err != nil {
+			invalidParams.AddNested("ListObjectPolicies", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.GetObjectAttributes != nil {
@@ -2174,9 +2134,49 @@ func validateBatchReadOperation(v *types.BatchReadOperation) error {
 			invalidParams.AddNested("GetObjectAttributes", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ListObjectParentPaths != nil {
-		if err := validateBatchListObjectParentPaths(v.ListObjectParentPaths); err != nil {
-			invalidParams.AddNested("ListObjectParentPaths", err.(smithy.InvalidParamsError))
+	if v.GetObjectInformation != nil {
+		if err := validateBatchGetObjectInformation(v.GetObjectInformation); err != nil {
+			invalidParams.AddNested("GetObjectInformation", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ListIndex != nil {
+		if err := validateBatchListIndex(v.ListIndex); err != nil {
+			invalidParams.AddNested("ListIndex", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ListObjectParents != nil {
+		if err := validateBatchListObjectParents(v.ListObjectParents); err != nil {
+			invalidParams.AddNested("ListObjectParents", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GetLinkAttributes != nil {
+		if err := validateBatchGetLinkAttributes(v.GetLinkAttributes); err != nil {
+			invalidParams.AddNested("GetLinkAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ListPolicyAttachments != nil {
+		if err := validateBatchListPolicyAttachments(v.ListPolicyAttachments); err != nil {
+			invalidParams.AddNested("ListPolicyAttachments", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ListObjectAttributes != nil {
+		if err := validateBatchListObjectAttributes(v.ListObjectAttributes); err != nil {
+			invalidParams.AddNested("ListObjectAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ListOutgoingTypedLinks != nil {
+		if err := validateBatchListOutgoingTypedLinks(v.ListOutgoingTypedLinks); err != nil {
+			invalidParams.AddNested("ListOutgoingTypedLinks", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ListAttachedIndices != nil {
+		if err := validateBatchListAttachedIndices(v.ListAttachedIndices); err != nil {
+			invalidParams.AddNested("ListAttachedIndices", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ListIncomingTypedLinks != nil {
+		if err := validateBatchListIncomingTypedLinks(v.ListIncomingTypedLinks); err != nil {
+			invalidParams.AddNested("ListIncomingTypedLinks", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2208,11 +2208,11 @@ func validateBatchRemoveFacetFromObject(v *types.BatchRemoveFacetFromObject) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchRemoveFacetFromObject"}
-	if v.ObjectReference == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ObjectReference"))
-	}
 	if v.SchemaFacet == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SchemaFacet"))
+	}
+	if v.ObjectReference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObjectReference"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2226,18 +2226,18 @@ func validateBatchUpdateLinkAttributes(v *types.BatchUpdateLinkAttributes) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchUpdateLinkAttributes"}
-	if v.AttributeUpdates == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AttributeUpdates"))
-	} else if v.AttributeUpdates != nil {
-		if err := validateLinkAttributeUpdateList(v.AttributeUpdates); err != nil {
-			invalidParams.AddNested("AttributeUpdates", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.TypedLinkSpecifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TypedLinkSpecifier"))
 	} else if v.TypedLinkSpecifier != nil {
 		if err := validateTypedLinkSpecifier(v.TypedLinkSpecifier); err != nil {
 			invalidParams.AddNested("TypedLinkSpecifier", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AttributeUpdates == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttributeUpdates"))
+	} else if v.AttributeUpdates != nil {
+		if err := validateLinkAttributeUpdateList(v.AttributeUpdates); err != nil {
+			invalidParams.AddNested("AttributeUpdates", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2252,15 +2252,15 @@ func validateBatchUpdateObjectAttributes(v *types.BatchUpdateObjectAttributes) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchUpdateObjectAttributes"}
-	if v.ObjectReference == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ObjectReference"))
-	}
 	if v.AttributeUpdates == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AttributeUpdates"))
 	} else if v.AttributeUpdates != nil {
 		if err := validateObjectAttributeUpdateList(v.AttributeUpdates); err != nil {
 			invalidParams.AddNested("AttributeUpdates", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.ObjectReference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObjectReference"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2274,64 +2274,9 @@ func validateBatchWriteOperation(v *types.BatchWriteOperation) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchWriteOperation"}
-	if v.UpdateLinkAttributes != nil {
-		if err := validateBatchUpdateLinkAttributes(v.UpdateLinkAttributes); err != nil {
-			invalidParams.AddNested("UpdateLinkAttributes", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.AttachObject != nil {
-		if err := validateBatchAttachObject(v.AttachObject); err != nil {
-			invalidParams.AddNested("AttachObject", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.CreateIndex != nil {
-		if err := validateBatchCreateIndex(v.CreateIndex); err != nil {
-			invalidParams.AddNested("CreateIndex", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.DetachFromIndex != nil {
-		if err := validateBatchDetachFromIndex(v.DetachFromIndex); err != nil {
-			invalidParams.AddNested("DetachFromIndex", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.DetachTypedLink != nil {
-		if err := validateBatchDetachTypedLink(v.DetachTypedLink); err != nil {
-			invalidParams.AddNested("DetachTypedLink", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.AttachTypedLink != nil {
-		if err := validateBatchAttachTypedLink(v.AttachTypedLink); err != nil {
-			invalidParams.AddNested("AttachTypedLink", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.RemoveFacetFromObject != nil {
-		if err := validateBatchRemoveFacetFromObject(v.RemoveFacetFromObject); err != nil {
-			invalidParams.AddNested("RemoveFacetFromObject", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.AddFacetToObject != nil {
 		if err := validateBatchAddFacetToObject(v.AddFacetToObject); err != nil {
 			invalidParams.AddNested("AddFacetToObject", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.AttachToIndex != nil {
-		if err := validateBatchAttachToIndex(v.AttachToIndex); err != nil {
-			invalidParams.AddNested("AttachToIndex", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.CreateObject != nil {
-		if err := validateBatchCreateObject(v.CreateObject); err != nil {
-			invalidParams.AddNested("CreateObject", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.AttachPolicy != nil {
-		if err := validateBatchAttachPolicy(v.AttachPolicy); err != nil {
-			invalidParams.AddNested("AttachPolicy", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.DetachPolicy != nil {
-		if err := validateBatchDetachPolicy(v.DetachPolicy); err != nil {
-			invalidParams.AddNested("DetachPolicy", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.DeleteObject != nil {
@@ -2344,9 +2289,64 @@ func validateBatchWriteOperation(v *types.BatchWriteOperation) error {
 			invalidParams.AddNested("UpdateObjectAttributes", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.CreateObject != nil {
+		if err := validateBatchCreateObject(v.CreateObject); err != nil {
+			invalidParams.AddNested("CreateObject", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CreateIndex != nil {
+		if err := validateBatchCreateIndex(v.CreateIndex); err != nil {
+			invalidParams.AddNested("CreateIndex", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AttachPolicy != nil {
+		if err := validateBatchAttachPolicy(v.AttachPolicy); err != nil {
+			invalidParams.AddNested("AttachPolicy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AttachObject != nil {
+		if err := validateBatchAttachObject(v.AttachObject); err != nil {
+			invalidParams.AddNested("AttachObject", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DetachFromIndex != nil {
+		if err := validateBatchDetachFromIndex(v.DetachFromIndex); err != nil {
+			invalidParams.AddNested("DetachFromIndex", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.UpdateLinkAttributes != nil {
+		if err := validateBatchUpdateLinkAttributes(v.UpdateLinkAttributes); err != nil {
+			invalidParams.AddNested("UpdateLinkAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DetachPolicy != nil {
+		if err := validateBatchDetachPolicy(v.DetachPolicy); err != nil {
+			invalidParams.AddNested("DetachPolicy", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.DetachObject != nil {
 		if err := validateBatchDetachObject(v.DetachObject); err != nil {
 			invalidParams.AddNested("DetachObject", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RemoveFacetFromObject != nil {
+		if err := validateBatchRemoveFacetFromObject(v.RemoveFacetFromObject); err != nil {
+			invalidParams.AddNested("RemoveFacetFromObject", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AttachTypedLink != nil {
+		if err := validateBatchAttachTypedLink(v.AttachTypedLink); err != nil {
+			invalidParams.AddNested("AttachTypedLink", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DetachTypedLink != nil {
+		if err := validateBatchDetachTypedLink(v.DetachTypedLink); err != nil {
+			invalidParams.AddNested("DetachTypedLink", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AttachToIndex != nil {
+		if err := validateBatchAttachToIndex(v.AttachToIndex); err != nil {
+			invalidParams.AddNested("AttachToIndex", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2378,18 +2378,18 @@ func validateFacetAttribute(v *types.FacetAttribute) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FacetAttribute"}
-	if v.AttributeDefinition != nil {
-		if err := validateFacetAttributeDefinition(v.AttributeDefinition); err != nil {
-			invalidParams.AddNested("AttributeDefinition", err.(smithy.InvalidParamsError))
-		}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if v.AttributeReference != nil {
 		if err := validateFacetAttributeReference(v.AttributeReference); err != nil {
 			invalidParams.AddNested("AttributeReference", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if v.AttributeDefinition != nil {
+		if err := validateFacetAttributeDefinition(v.AttributeDefinition); err != nil {
+			invalidParams.AddNested("AttributeDefinition", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2435,11 +2435,11 @@ func validateFacetAttributeReference(v *types.FacetAttributeReference) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FacetAttributeReference"}
-	if v.TargetAttributeName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetAttributeName"))
-	}
 	if v.TargetFacetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetFacetName"))
+	}
+	if v.TargetAttributeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetAttributeName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2521,14 +2521,14 @@ func validateObjectAttributeRange(v *types.ObjectAttributeRange) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ObjectAttributeRange"}
-	if v.AttributeKey != nil {
-		if err := validateAttributeKey(v.AttributeKey); err != nil {
-			invalidParams.AddNested("AttributeKey", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Range != nil {
 		if err := validateTypedAttributeValueRange(v.Range); err != nil {
 			invalidParams.AddNested("Range", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AttributeKey != nil {
+		if err := validateAttributeKey(v.AttributeKey); err != nil {
+			invalidParams.AddNested("AttributeKey", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2612,14 +2612,14 @@ func validateTypedLinkAttributeDefinition(v *types.TypedLinkAttributeDefinition)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TypedLinkAttributeDefinition"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if len(v.RequiredBehavior) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("RequiredBehavior"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2686,18 +2686,18 @@ func validateTypedLinkFacet(v *types.TypedLinkFacet) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TypedLinkFacet"}
+	if v.IdentityAttributeOrder == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityAttributeOrder"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.Attributes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Attributes"))
 	} else if v.Attributes != nil {
 		if err := validateTypedLinkAttributeDefinitionList(v.Attributes); err != nil {
 			invalidParams.AddNested("Attributes", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.IdentityAttributeOrder == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IdentityAttributeOrder"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2750,11 +2750,11 @@ func validateTypedLinkSchemaAndFacetName(v *types.TypedLinkSchemaAndFacetName) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TypedLinkSchemaAndFacetName"}
-	if v.SchemaArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SchemaArn"))
-	}
 	if v.TypedLinkName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TypedLinkName"))
+	}
+	if v.SchemaArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2768,12 +2768,8 @@ func validateTypedLinkSpecifier(v *types.TypedLinkSpecifier) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TypedLinkSpecifier"}
-	if v.TypedLinkFacet == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TypedLinkFacet"))
-	} else if v.TypedLinkFacet != nil {
-		if err := validateTypedLinkSchemaAndFacetName(v.TypedLinkFacet); err != nil {
-			invalidParams.AddNested("TypedLinkFacet", err.(smithy.InvalidParamsError))
-		}
+	if v.SourceObjectReference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceObjectReference"))
 	}
 	if v.TargetObjectReference == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetObjectReference"))
@@ -2785,8 +2781,12 @@ func validateTypedLinkSpecifier(v *types.TypedLinkSpecifier) error {
 			invalidParams.AddNested("IdentityAttributeValues", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.SourceObjectReference == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceObjectReference"))
+	if v.TypedLinkFacet == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TypedLinkFacet"))
+	} else if v.TypedLinkFacet != nil {
+		if err := validateTypedLinkSchemaAndFacetName(v.TypedLinkFacet); err != nil {
+			invalidParams.AddNested("TypedLinkFacet", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2800,19 +2800,19 @@ func validateOpAddFacetToObjectInput(v *AddFacetToObjectInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddFacetToObjectInput"}
+	if v.ObjectReference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObjectReference"))
+	}
 	if v.SchemaFacet == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SchemaFacet"))
 	}
-	if v.ObjectReference == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ObjectReference"))
+	if v.DirectoryArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
 	}
 	if v.ObjectAttributeList != nil {
 		if err := validateAttributeKeyAndValueList(v.ObjectAttributeList); err != nil {
 			invalidParams.AddNested("ObjectAttributeList", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.DirectoryArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2826,11 +2826,11 @@ func validateOpApplySchemaInput(v *ApplySchemaInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ApplySchemaInput"}
-	if v.PublishedSchemaArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PublishedSchemaArn"))
-	}
 	if v.DirectoryArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
+	}
+	if v.PublishedSchemaArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PublishedSchemaArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2844,17 +2844,17 @@ func validateOpAttachObjectInput(v *AttachObjectInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AttachObjectInput"}
-	if v.DirectoryArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
+	if v.ParentReference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParentReference"))
 	}
 	if v.LinkName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LinkName"))
 	}
+	if v.DirectoryArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
+	}
 	if v.ChildReference == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChildReference"))
-	}
-	if v.ParentReference == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ParentReference"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2868,14 +2868,14 @@ func validateOpAttachPolicyInput(v *AttachPolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AttachPolicyInput"}
-	if v.DirectoryArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
-	}
 	if v.PolicyReference == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyReference"))
 	}
 	if v.ObjectReference == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ObjectReference"))
+	}
+	if v.DirectoryArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2892,11 +2892,11 @@ func validateOpAttachToIndexInput(v *AttachToIndexInput) error {
 	if v.DirectoryArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
 	}
-	if v.TargetReference == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetReference"))
-	}
 	if v.IndexReference == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IndexReference"))
+	}
+	if v.TargetReference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetReference"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2910,6 +2910,16 @@ func validateOpAttachTypedLinkInput(v *AttachTypedLinkInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AttachTypedLinkInput"}
+	if v.Attributes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Attributes"))
+	} else if v.Attributes != nil {
+		if err := validateAttributeNameAndValueList(v.Attributes); err != nil {
+			invalidParams.AddNested("Attributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SourceObjectReference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceObjectReference"))
+	}
 	if v.TypedLinkFacet == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TypedLinkFacet"))
 	} else if v.TypedLinkFacet != nil {
@@ -2917,18 +2927,8 @@ func validateOpAttachTypedLinkInput(v *AttachTypedLinkInput) error {
 			invalidParams.AddNested("TypedLinkFacet", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.SourceObjectReference == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceObjectReference"))
-	}
 	if v.DirectoryArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
-	}
-	if v.Attributes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Attributes"))
-	} else if v.Attributes != nil {
-		if err := validateAttributeNameAndValueList(v.Attributes); err != nil {
-			invalidParams.AddNested("Attributes", err.(smithy.InvalidParamsError))
-		}
 	}
 	if v.TargetObjectReference == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetObjectReference"))
@@ -3007,11 +3007,11 @@ func validateOpCreateFacetInput(v *CreateFacetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateFacetInput"}
-	if v.SchemaArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SchemaArn"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.SchemaArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaArn"))
 	}
 	if v.Attributes != nil {
 		if err := validateFacetAttributeList(v.Attributes); err != nil {
@@ -3030,18 +3030,18 @@ func validateOpCreateIndexInput(v *CreateIndexInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateIndexInput"}
+	if v.IsUnique == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IsUnique"))
+	}
+	if v.DirectoryArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
+	}
 	if v.OrderedIndexedAttributeList == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrderedIndexedAttributeList"))
 	} else if v.OrderedIndexedAttributeList != nil {
 		if err := validateAttributeKeyList(v.OrderedIndexedAttributeList); err != nil {
 			invalidParams.AddNested("OrderedIndexedAttributeList", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.DirectoryArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
-	}
-	if v.IsUnique == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IsUnique"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3055,16 +3055,16 @@ func validateOpCreateObjectInput(v *CreateObjectInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateObjectInput"}
+	if v.ObjectAttributeList != nil {
+		if err := validateAttributeKeyAndValueList(v.ObjectAttributeList); err != nil {
+			invalidParams.AddNested("ObjectAttributeList", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.DirectoryArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
 	}
 	if v.SchemaFacets == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SchemaFacets"))
-	}
-	if v.ObjectAttributeList != nil {
-		if err := validateAttributeKeyAndValueList(v.ObjectAttributeList); err != nil {
-			invalidParams.AddNested("ObjectAttributeList", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3093,15 +3093,15 @@ func validateOpCreateTypedLinkFacetInput(v *CreateTypedLinkFacetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateTypedLinkFacetInput"}
+	if v.SchemaArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaArn"))
+	}
 	if v.Facet == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Facet"))
 	} else if v.Facet != nil {
 		if err := validateTypedLinkFacet(v.Facet); err != nil {
 			invalidParams.AddNested("Facet", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.SchemaArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SchemaArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3148,11 +3148,11 @@ func validateOpDeleteObjectInput(v *DeleteObjectInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteObjectInput"}
-	if v.DirectoryArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
-	}
 	if v.ObjectReference == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ObjectReference"))
+	}
+	if v.DirectoryArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3181,11 +3181,11 @@ func validateOpDeleteTypedLinkFacetInput(v *DeleteTypedLinkFacetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteTypedLinkFacetInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.SchemaArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SchemaArn"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3220,14 +3220,14 @@ func validateOpDetachObjectInput(v *DetachObjectInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DetachObjectInput"}
-	if v.LinkName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LinkName"))
+	if v.ParentReference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParentReference"))
 	}
 	if v.DirectoryArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
 	}
-	if v.ParentReference == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ParentReference"))
+	if v.LinkName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LinkName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3241,14 +3241,14 @@ func validateOpDetachPolicyInput(v *DetachPolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DetachPolicyInput"}
-	if v.ObjectReference == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ObjectReference"))
-	}
 	if v.PolicyReference == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyReference"))
 	}
 	if v.DirectoryArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
+	}
+	if v.ObjectReference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObjectReference"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3362,11 +3362,11 @@ func validateOpGetLinkAttributesInput(v *GetLinkAttributesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetLinkAttributesInput"}
-	if v.AttributeNames == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AttributeNames"))
-	}
 	if v.DirectoryArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
+	}
+	if v.AttributeNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttributeNames"))
 	}
 	if v.TypedLinkSpecifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TypedLinkSpecifier"))
@@ -3387,14 +3387,14 @@ func validateOpGetObjectAttributesInput(v *GetObjectAttributesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetObjectAttributesInput"}
-	if v.AttributeNames == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AttributeNames"))
-	}
 	if v.DirectoryArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
 	}
 	if v.ObjectReference == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ObjectReference"))
+	}
+	if v.AttributeNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttributeNames"))
 	}
 	if v.SchemaFacet == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SchemaFacet"))
@@ -3411,11 +3411,11 @@ func validateOpGetObjectInformationInput(v *GetObjectInformationInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetObjectInformationInput"}
-	if v.ObjectReference == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ObjectReference"))
-	}
 	if v.DirectoryArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
+	}
+	if v.ObjectReference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObjectReference"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3444,11 +3444,11 @@ func validateOpGetTypedLinkFacetInformationInput(v *GetTypedLinkFacetInformation
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetTypedLinkFacetInformationInput"}
-	if v.SchemaArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SchemaArn"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.SchemaArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3495,11 +3495,11 @@ func validateOpListFacetAttributesInput(v *ListFacetAttributesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListFacetAttributesInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.SchemaArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SchemaArn"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3528,11 +3528,6 @@ func validateOpListIncomingTypedLinksInput(v *ListIncomingTypedLinksInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListIncomingTypedLinksInput"}
-	if v.FilterAttributeRanges != nil {
-		if err := validateTypedLinkAttributeRangeList(v.FilterAttributeRanges); err != nil {
-			invalidParams.AddNested("FilterAttributeRanges", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.ObjectReference == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ObjectReference"))
 	}
@@ -3543,6 +3538,11 @@ func validateOpListIncomingTypedLinksInput(v *ListIncomingTypedLinksInput) error
 	}
 	if v.DirectoryArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
+	}
+	if v.FilterAttributeRanges != nil {
+		if err := validateTypedLinkAttributeRangeList(v.FilterAttributeRanges); err != nil {
+			invalidParams.AddNested("FilterAttributeRanges", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3556,6 +3556,9 @@ func validateOpListIndexInput(v *ListIndexInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListIndexInput"}
+	if v.IndexReference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexReference"))
+	}
 	if v.RangesOnIndexedValues != nil {
 		if err := validateObjectAttributeRangeList(v.RangesOnIndexedValues); err != nil {
 			invalidParams.AddNested("RangesOnIndexedValues", err.(smithy.InvalidParamsError))
@@ -3563,9 +3566,6 @@ func validateOpListIndexInput(v *ListIndexInput) error {
 	}
 	if v.DirectoryArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
-	}
-	if v.IndexReference == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IndexReference"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3579,11 +3579,11 @@ func validateOpListObjectAttributesInput(v *ListObjectAttributesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListObjectAttributesInput"}
-	if v.DirectoryArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
-	}
 	if v.ObjectReference == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ObjectReference"))
+	}
+	if v.DirectoryArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3597,11 +3597,11 @@ func validateOpListObjectChildrenInput(v *ListObjectChildrenInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListObjectChildrenInput"}
-	if v.ObjectReference == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ObjectReference"))
-	}
 	if v.DirectoryArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
+	}
+	if v.ObjectReference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObjectReference"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3615,11 +3615,11 @@ func validateOpListObjectParentPathsInput(v *ListObjectParentPathsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListObjectParentPathsInput"}
-	if v.DirectoryArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
-	}
 	if v.ObjectReference == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ObjectReference"))
+	}
+	if v.DirectoryArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3633,11 +3633,11 @@ func validateOpListObjectParentsInput(v *ListObjectParentsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListObjectParentsInput"}
-	if v.ObjectReference == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ObjectReference"))
-	}
 	if v.DirectoryArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
+	}
+	if v.ObjectReference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObjectReference"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3669,21 +3669,21 @@ func validateOpListOutgoingTypedLinksInput(v *ListOutgoingTypedLinksInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListOutgoingTypedLinksInput"}
-	if v.DirectoryArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
-	}
 	if v.ObjectReference == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ObjectReference"))
+	}
+	if v.FilterAttributeRanges != nil {
+		if err := validateTypedLinkAttributeRangeList(v.FilterAttributeRanges); err != nil {
+			invalidParams.AddNested("FilterAttributeRanges", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.FilterTypedLink != nil {
 		if err := validateTypedLinkSchemaAndFacetName(v.FilterTypedLink); err != nil {
 			invalidParams.AddNested("FilterTypedLink", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.FilterAttributeRanges != nil {
-		if err := validateTypedLinkAttributeRangeList(v.FilterAttributeRanges); err != nil {
-			invalidParams.AddNested("FilterAttributeRanges", err.(smithy.InvalidParamsError))
-		}
+	if v.DirectoryArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3697,11 +3697,11 @@ func validateOpListPolicyAttachmentsInput(v *ListPolicyAttachmentsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListPolicyAttachmentsInput"}
-	if v.PolicyReference == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PolicyReference"))
-	}
 	if v.DirectoryArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
+	}
+	if v.PolicyReference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyReference"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3730,11 +3730,11 @@ func validateOpListTypedLinkFacetAttributesInput(v *ListTypedLinkFacetAttributes
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListTypedLinkFacetAttributesInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.SchemaArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SchemaArn"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3781,11 +3781,11 @@ func validateOpPublishSchemaInput(v *PublishSchemaInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PublishSchemaInput"}
-	if v.DevelopmentSchemaArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DevelopmentSchemaArn"))
-	}
 	if v.Version == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Version"))
+	}
+	if v.DevelopmentSchemaArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DevelopmentSchemaArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3820,11 +3820,11 @@ func validateOpRemoveFacetFromObjectInput(v *RemoveFacetFromObjectInput) error {
 	if v.ObjectReference == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ObjectReference"))
 	}
-	if v.DirectoryArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
-	}
 	if v.SchemaFacet == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SchemaFacet"))
+	}
+	if v.DirectoryArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3856,11 +3856,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
-	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3874,6 +3874,9 @@ func validateOpUpdateFacetInput(v *UpdateFacetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateFacetInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.SchemaArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SchemaArn"))
 	}
@@ -3881,9 +3884,6 @@ func validateOpUpdateFacetInput(v *UpdateFacetInput) error {
 		if err := validateFacetAttributeUpdateList(v.AttributeUpdates); err != nil {
 			invalidParams.AddNested("AttributeUpdates", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3897,12 +3897,8 @@ func validateOpUpdateLinkAttributesInput(v *UpdateLinkAttributesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateLinkAttributesInput"}
-	if v.AttributeUpdates == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AttributeUpdates"))
-	} else if v.AttributeUpdates != nil {
-		if err := validateLinkAttributeUpdateList(v.AttributeUpdates); err != nil {
-			invalidParams.AddNested("AttributeUpdates", err.(smithy.InvalidParamsError))
-		}
+	if v.DirectoryArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
 	}
 	if v.TypedLinkSpecifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TypedLinkSpecifier"))
@@ -3911,8 +3907,12 @@ func validateOpUpdateLinkAttributesInput(v *UpdateLinkAttributesInput) error {
 			invalidParams.AddNested("TypedLinkSpecifier", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.DirectoryArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
+	if v.AttributeUpdates == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttributeUpdates"))
+	} else if v.AttributeUpdates != nil {
+		if err := validateLinkAttributeUpdateList(v.AttributeUpdates); err != nil {
+			invalidParams.AddNested("AttributeUpdates", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3926,9 +3926,6 @@ func validateOpUpdateObjectAttributesInput(v *UpdateObjectAttributesInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateObjectAttributesInput"}
-	if v.ObjectReference == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ObjectReference"))
-	}
 	if v.AttributeUpdates == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AttributeUpdates"))
 	} else if v.AttributeUpdates != nil {
@@ -3938,6 +3935,9 @@ func validateOpUpdateObjectAttributesInput(v *UpdateObjectAttributesInput) error
 	}
 	if v.DirectoryArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
+	}
+	if v.ObjectReference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObjectReference"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3951,11 +3951,11 @@ func validateOpUpdateSchemaInput(v *UpdateSchemaInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateSchemaInput"}
-	if v.SchemaArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SchemaArn"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.SchemaArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3969,8 +3969,8 @@ func validateOpUpdateTypedLinkFacetInput(v *UpdateTypedLinkFacetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateTypedLinkFacetInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if v.SchemaArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaArn"))
 	}
 	if v.AttributeUpdates == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AttributeUpdates"))
@@ -3979,11 +3979,11 @@ func validateOpUpdateTypedLinkFacetInput(v *UpdateTypedLinkFacetInput) error {
 			invalidParams.AddNested("AttributeUpdates", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.IdentityAttributeOrder == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityAttributeOrder"))
-	}
-	if v.SchemaArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SchemaArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3997,11 +3997,11 @@ func validateOpUpgradeAppliedSchemaInput(v *UpgradeAppliedSchemaInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpgradeAppliedSchemaInput"}
-	if v.DirectoryArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
-	}
 	if v.PublishedSchemaArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PublishedSchemaArn"))
+	}
+	if v.DirectoryArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4015,14 +4015,14 @@ func validateOpUpgradePublishedSchemaInput(v *UpgradePublishedSchemaInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpgradePublishedSchemaInput"}
-	if v.MinorVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MinorVersion"))
-	}
 	if v.PublishedSchemaArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PublishedSchemaArn"))
 	}
 	if v.DevelopmentSchemaArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DevelopmentSchemaArn"))
+	}
+	if v.MinorVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MinorVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

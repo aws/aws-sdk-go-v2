@@ -4254,6 +4254,46 @@ func awsAwsjson11_deserializeDocumentConcurrentModificationException(v **types.C
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentDeadLetterConfig(v **types.DeadLetterConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DeadLetterConfig
+	if *v == nil {
+		sv = &types.DeadLetterConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceArn to be of type string, got %T instead", value)
+				}
+				sv.Arn = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentEcsParameters(v **types.EcsParameters, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5567,6 +5607,91 @@ func awsAwsjson11_deserializeDocumentQueryStringParametersMap(v *map[string]*str
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentRedshiftDataParameters(v **types.RedshiftDataParameters, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RedshiftDataParameters
+	if *v == nil {
+		sv = &types.RedshiftDataParameters{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Database":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Database to be of type string, got %T instead", value)
+				}
+				sv.Database = &jtv
+			}
+
+		case "DbUser":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DbUser to be of type string, got %T instead", value)
+				}
+				sv.DbUser = &jtv
+			}
+
+		case "SecretManagerArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RedshiftSecretManagerArn to be of type string, got %T instead", value)
+				}
+				sv.SecretManagerArn = &jtv
+			}
+
+		case "Sql":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Sql to be of type string, got %T instead", value)
+				}
+				sv.Sql = &jtv
+			}
+
+		case "StatementName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StatementName to be of type string, got %T instead", value)
+				}
+				sv.StatementName = &jtv
+			}
+
+		case "WithEvent":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.WithEvent = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentRemoveTargetsResultEntry(v **types.RemoveTargetsResultEntry, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5726,6 +5851,63 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRetryPolicy(v **types.RetryPolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RetryPolicy
+	if *v == nil {
+		sv = &types.RetryPolicy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MaximumEventAgeInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaximumEventAgeInSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaximumEventAgeInSeconds = ptr.Int32(int32(i64))
+			}
+
+		case "MaximumRetryAttempts":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaximumRetryAttempts to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaximumRetryAttempts = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -6259,6 +6441,11 @@ func awsAwsjson11_deserializeDocumentTarget(v **types.Target, value interface{})
 				return err
 			}
 
+		case "DeadLetterConfig":
+			if err := awsAwsjson11_deserializeDocumentDeadLetterConfig(&sv.DeadLetterConfig, value); err != nil {
+				return err
+			}
+
 		case "EcsParameters":
 			if err := awsAwsjson11_deserializeDocumentEcsParameters(&sv.EcsParameters, value); err != nil {
 				return err
@@ -6303,6 +6490,16 @@ func awsAwsjson11_deserializeDocumentTarget(v **types.Target, value interface{})
 
 		case "KinesisParameters":
 			if err := awsAwsjson11_deserializeDocumentKinesisParameters(&sv.KinesisParameters, value); err != nil {
+				return err
+			}
+
+		case "RedshiftDataParameters":
+			if err := awsAwsjson11_deserializeDocumentRedshiftDataParameters(&sv.RedshiftDataParameters, value); err != nil {
+				return err
+			}
+
+		case "RetryPolicy":
+			if err := awsAwsjson11_deserializeDocumentRetryPolicy(&sv.RetryPolicy, value); err != nil {
 				return err
 			}
 

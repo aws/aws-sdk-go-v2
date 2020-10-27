@@ -38,7 +38,7 @@ func (c *Client) DeleteBandwidthRateLimit(ctx context.Context, params *DeleteBan
 type DeleteBandwidthRateLimitInput struct {
 
 	// One of the BandwidthType values that indicates the gateway bandwidth rate limit
-	// to delete. Valid Values: Upload | Download | All
+	// to delete. Valid Values: UPLOAD | DOWNLOAD | ALL
 	//
 	// This member is required.
 	BandwidthType *string

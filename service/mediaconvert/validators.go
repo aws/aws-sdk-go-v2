@@ -510,14 +510,14 @@ func validateReservationPlanSettings(v *types.ReservationPlanSettings) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ReservationPlanSettings"}
-	if len(v.RenewalType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("RenewalType"))
+	if v.ReservedSlots == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReservedSlots"))
 	}
 	if len(v.Commitment) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Commitment"))
 	}
-	if v.ReservedSlots == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ReservedSlots"))
+	if len(v.RenewalType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RenewalType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -561,16 +561,16 @@ func validateOpCreateJobInput(v *CreateJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateJobInput"}
-	if v.AccelerationSettings != nil {
-		if err := validateAccelerationSettings(v.AccelerationSettings); err != nil {
-			invalidParams.AddNested("AccelerationSettings", err.(smithy.InvalidParamsError))
-		}
+	if v.Role == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Role"))
 	}
 	if v.Settings == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Settings"))
 	}
-	if v.Role == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Role"))
+	if v.AccelerationSettings != nil {
+		if err := validateAccelerationSettings(v.AccelerationSettings); err != nil {
+			invalidParams.AddNested("AccelerationSettings", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -584,9 +584,6 @@ func validateOpCreateJobTemplateInput(v *CreateJobTemplateInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateJobTemplateInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.AccelerationSettings != nil {
 		if err := validateAccelerationSettings(v.AccelerationSettings); err != nil {
 			invalidParams.AddNested("AccelerationSettings", err.(smithy.InvalidParamsError))
@@ -594,6 +591,9 @@ func validateOpCreateJobTemplateInput(v *CreateJobTemplateInput) error {
 	}
 	if v.Settings == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Settings"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -813,13 +813,13 @@ func validateOpUpdateJobTemplateInput(v *UpdateJobTemplateInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateJobTemplateInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.AccelerationSettings != nil {
 		if err := validateAccelerationSettings(v.AccelerationSettings); err != nil {
 			invalidParams.AddNested("AccelerationSettings", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

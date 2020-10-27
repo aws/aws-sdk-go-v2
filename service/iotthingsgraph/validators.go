@@ -687,11 +687,11 @@ func validateDefinitionDocument(v *types.DefinitionDocument) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DefinitionDocument"}
-	if len(v.Language) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Language"))
-	}
 	if v.Text == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
+	if len(v.Language) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Language"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -705,11 +705,11 @@ func validateFlowTemplateFilter(v *types.FlowTemplateFilter) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FlowTemplateFilter"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if len(v.Name) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -775,11 +775,11 @@ func validateTag(v *types.Tag) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1225,15 +1225,15 @@ func validateOpUpdateFlowTemplateInput(v *UpdateFlowTemplateInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateFlowTemplateInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
 	if v.Definition == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Definition"))
 	} else if v.Definition != nil {
 		if err := validateDefinitionDocument(v.Definition); err != nil {
 			invalidParams.AddNested("Definition", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

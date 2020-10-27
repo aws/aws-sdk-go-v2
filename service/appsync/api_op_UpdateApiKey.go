@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Updates an API key.
+// Updates an API key. The key can be updated while it is not deleted.
 func (c *Client) UpdateApiKey(ctx context.Context, params *UpdateApiKeyInput, optFns ...func(*Options)) (*UpdateApiKeyOutput, error) {
 	if params == nil {
 		params = &UpdateApiKeyInput{}

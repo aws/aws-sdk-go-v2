@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Updates an existing access policy that specifies an AWS SSO user or group's
-// access to an AWS IoT SiteWise Monitor portal or project resource.
+// Updates an existing access policy that specifies an identity's access to an AWS
+// IoT SiteWise Monitor portal or project resource.
 func (c *Client) UpdateAccessPolicy(ctx context.Context, params *UpdateAccessPolicyInput, optFns ...func(*Options)) (*UpdateAccessPolicyOutput, error) {
 	if params == nil {
 		params = &UpdateAccessPolicyInput{}
@@ -36,8 +36,8 @@ type UpdateAccessPolicyInput struct {
 	// This member is required.
 	AccessPolicyId *string
 
-	// The identity for this access policy. Choose either a user or a group but not
-	// both.
+	// The identity for this access policy. Choose an AWS SSO user, an AWS SSO group,
+	// or an IAM user.
 	//
 	// This member is required.
 	AccessPolicyIdentity *types.Identity
@@ -48,8 +48,8 @@ type UpdateAccessPolicyInput struct {
 	// This member is required.
 	AccessPolicyPermission types.Permission
 
-	// The AWS IoT SiteWise Monitor resource for this access policy. Choose either
-	// portal or project but not both.
+	// The AWS IoT SiteWise Monitor resource for this access policy. Choose either a
+	// portal or a project.
 	//
 	// This member is required.
 	AccessPolicyResource *types.Resource

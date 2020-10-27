@@ -48,6 +48,9 @@ type Cluster struct {
 	// The identity provider information for the cluster.
 	Identity *Identity
 
+	// Network configuration settings for your cluster.
+	KubernetesNetworkConfig *KubernetesNetworkConfigResponse
+
 	// The logging configuration for your cluster.
 	Logging *Logging
 
@@ -218,6 +221,15 @@ type Issue struct {
 	// version that Amazon EKS created. You may be able to revert to the version that
 	// Amazon EKS created to recover.
 	//
+	//     * Ec2SubnetInvalidConfiguration: One or more
+	// Amazon EC2 subnets specified for a node group do not automatically assign public
+	// IP addresses to instances launched into it. If you want your instances to be
+	// assigned a public IP address, then you need to enable the auto-assign public IP
+	// address setting for the subnet. See Modifying the public IPv4 addressing
+	// attribute for your subnet
+	// (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip)
+	// in the Amazon VPC User Guide.
+	//
 	//     * IamInstanceProfileNotFound: We couldn't
 	// find the IAM instance profile for your managed node group. You may be able to
 	// recreate an instance profile with the same settings to recover.
@@ -260,6 +272,71 @@ type Issue struct {
 	ResourceIds []*string
 }
 
+// The Kubernetes network configuration for the cluster.
+type KubernetesNetworkConfigRequest struct {
+
+	// The CIDR block to assign Kubernetes service IP addresses from. If you don't
+	// specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or
+	// 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not
+	// overlap with resources in other networks that are peered or connected to your
+	// VPC. The block must meet the following requirements:
+	//
+	//     * Within one of the
+	// following private IP address blocks: 10.0.0.0/8, 172.16.0.0.0/12, or
+	// 192.168.0.0/16.
+	//
+	//     * Doesn't overlap with any CIDR block assigned to the VPC
+	// that you selected for VPC.
+	//
+	//     * Between /24 and /12.
+	//
+	// You can only specify a
+	// custom CIDR block when you create a cluster and can't change this value once the
+	// cluster is created.
+	ServiceIpv4Cidr *string
+}
+
+// The Kubernetes network configuration for the cluster.
+type KubernetesNetworkConfigResponse struct {
+
+	// The CIDR block that Kubernetes service IP addresses are assigned from. If you
+	// didn't specify a CIDR block, then Kubernetes assigns addresses from either the
+	// 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. If this was specified, then it was
+	// specified when the cluster was created and it cannot be changed.
+	ServiceIpv4Cidr *string
+}
+
+// An object representing a node group launch template specification. The launch
+// template cannot include SubnetId
+// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html),
+// IamInstanceProfile
+// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html),
+// RequestSpotInstances
+// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html),
+// HibernationOptions
+// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_HibernationOptionsRequest.html),
+// or TerminateInstances
+// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TerminateInstances.html),
+// or the node group deployment or update will fail. For more information about
+// launch templates, see CreateLaunchTemplate
+// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateLaunchTemplate.html)
+// in the Amazon EC2 API Reference. For more information about using launch
+// templates with Amazon EKS, see Launch template support
+// (https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html) in the
+// Amazon EKS User Guide. Specify either name or id, but not both.
+type LaunchTemplateSpecification struct {
+
+	// The ID of the launch template.
+	Id *string
+
+	// The name of the launch template.
+	Name *string
+
+	// The version of the launch template to use. If no version is specified, then the
+	// template's default version is used.
+	Version *string
+}
+
 // An object representing the logging configuration for resources in your cluster.
 type Logging struct {
 
@@ -284,10 +361,9 @@ type LogSetup struct {
 // An object representing an Amazon EKS managed node group.
 type Nodegroup struct {
 
-	// The AMI type associated with your node group. GPU instance types should use the
-	// AL2_x86_64_GPU AMI type, which uses the Amazon EKS-optimized Linux AMI with GPU
-	// support. Non-GPU instances should use the AL2_x86_64 AMI type, which uses the
-	// Amazon EKS-optimized Linux AMI.
+	// If the node group was deployed using a launch template with a custom AMI, then
+	// this is CUSTOM. For node groups that weren't deployed using a launch template,
+	// this is the AMI type that was specified in the node group configuration.
 	AmiType AMITypes
 
 	// The name of the cluster that the managed node group resides in.
@@ -296,21 +372,28 @@ type Nodegroup struct {
 	// The Unix epoch timestamp in seconds for when the managed node group was created.
 	CreatedAt *time.Time
 
-	// The root device disk size (in GiB) for your node group instances. The default
-	// disk size is 20 GiB.
+	// If the node group wasn't deployed with a launch template, then this is the disk
+	// size in the node group configuration. If the node group was deployed with a
+	// launch template, then this is null.
 	DiskSize *int32
 
 	// The health status of the node group. If there are issues with your node group's
 	// health, they are listed here.
 	Health *NodegroupHealth
 
-	// The instance types associated with your node group.
+	// If the node group wasn't deployed with a launch template, then this is the
+	// instance type that is associated with the node group. If the node group was
+	// deployed with a launch template, then this is null.
 	InstanceTypes []*string
 
 	// The Kubernetes labels applied to the nodes in the node group. Only labels that
 	// are applied with the Amazon EKS API are shown here. There may be other
 	// Kubernetes labels applied to the nodes in this group.
 	Labels map[string]*string
+
+	// If a launch template was used to create the node group, then this is the launch
+	// template that was used.
+	LaunchTemplate *LaunchTemplateSpecification
 
 	// The Unix epoch timestamp in seconds for when the managed node group was last
 	// modified.
@@ -319,11 +402,6 @@ type Nodegroup struct {
 	// The IAM role associated with your node group. The Amazon EKS worker node kubelet
 	// daemon makes calls to AWS APIs on your behalf. Worker nodes receive permissions
 	// for these API calls through an IAM instance profile and associated policies.
-	// Before you can launch worker nodes and register them into a cluster, you must
-	// create an IAM role for those worker nodes to use when they are launched. For
-	// more information, see Amazon EKS Worker Node IAM Role
-	// (https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html) in
-	// the Amazon EKS User Guide .
 	NodeRole *string
 
 	// The Amazon Resource Name (ARN) associated with the managed node group.
@@ -332,13 +410,15 @@ type Nodegroup struct {
 	// The name associated with an Amazon EKS managed node group.
 	NodegroupName *string
 
-	// The AMI version of the managed node group. For more information, see Amazon
-	// EKS-Optimized Linux AMI Versions
-	// (https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html)
-	// in the Amazon EKS User Guide.
+	// If the node group was deployed using a launch template with a custom AMI, then
+	// this is the AMI ID that was specified in the launch template. For node groups
+	// that weren't deployed using a launch template, this is the version of the Amazon
+	// EKS-optimized AMI that the node group was deployed with.
 	ReleaseVersion *string
 
-	// The remote access (SSH) configuration that is associated with the node group.
+	// If the node group wasn't deployed with a launch template, then this is the
+	// remote access configuration that is associated with the node group. If the node
+	// group was deployed with a launch template, then this is null.
 	RemoteAccess *RemoteAccessConfig
 
 	// The resources associated with the node group, such as Auto Scaling groups and
@@ -352,10 +432,8 @@ type Nodegroup struct {
 	// The current status of the managed node group.
 	Status NodegroupStatus
 
-	// The subnets allowed for the Auto Scaling group that is associated with your node
-	// group. These subnets must have the following tag:
-	// kubernetes.io/cluster/CLUSTER_NAME, where CLUSTER_NAME is replaced with the name
-	// of your cluster.
+	// The subnets that were specified for the Auto Scaling group that is associated
+	// with your node group.
 	Subnets []*string
 
 	// The metadata applied to the node group to assist with categorization and
@@ -388,7 +466,8 @@ type NodegroupResources struct {
 }
 
 // An object representing the scaling configuration details for the Auto Scaling
-// group that is associated with your node group.
+// group that is associated with your node group. If you specify a value for any
+// property, then you must specify values for all of the properties.
 type NodegroupScalingConfig struct {
 
 	// The current number of worker nodes that the managed node group should maintain.

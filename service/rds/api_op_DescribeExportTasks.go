@@ -34,20 +34,21 @@ type DescribeExportTasksInput struct {
 	ExportTaskIdentifier *string
 
 	// Filters specify one or more snapshot exports to describe. The filters are
-	// specified as name-value pairs that define what to include in the output.
-	// Supported filters include the following:
+	// specified as name-value pairs that define what to include in the output. Filter
+	// names and values are case-sensitive. Supported filters include the following:
 	//
-	//     * export-task-identifier - An
-	// identifier for the snapshot export task.
 	//
-	//     * s3-bucket - The Amazon S3 bucket
-	// the snapshot is exported to.
+	// * export-task-identifier - An identifier for the snapshot export task.
 	//
-	//     * source-arn - The Amazon Resource Name (ARN)
-	// of the snapshot exported to Amazon S3
+	//     *
+	// s3-bucket - The Amazon S3 bucket the snapshot is exported to.
 	//
-	//     * status - The status of the export
-	// task.
+	//     * source-arn
+	// - The Amazon Resource Name (ARN) of the snapshot exported to Amazon S3
+	//
+	//     *
+	// status - The status of the export task. Must be lowercase, for example,
+	// complete.
 	Filters []*types.Filter
 
 	// An optional pagination token provided by a previous DescribeExportTasks request.

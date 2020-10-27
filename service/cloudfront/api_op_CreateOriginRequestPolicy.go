@@ -32,8 +32,8 @@ import (
 // CloudFront sends a request when
 // it can’t find a valid object in its cache that matches the request. If you want
 // to send values to the origin and also include them in the cache key, use
-// CreateCachePolicy. For more information about origin request policies, see
-// Controlling origin requests
+// CachePolicy. For more information about origin request policies, see Controlling
+// origin requests
 // (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html)
 // in the Amazon CloudFront Developer Guide.
 func (c *Client) CreateOriginRequestPolicy(ctx context.Context, params *CreateOriginRequestPolicyInput, optFns ...func(*Options)) (*CreateOriginRequestPolicyOutput, error) {

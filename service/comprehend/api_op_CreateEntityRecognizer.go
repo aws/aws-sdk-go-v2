@@ -45,8 +45,9 @@ type CreateEntityRecognizerInput struct {
 	// This member is required.
 	InputDataConfig *types.EntityRecognizerInputDataConfig
 
-	// The language of the input documents. All documents must be in the same language.
-	// Only English ("en") is currently supported.
+	// You can specify any of the following languages supported by Amazon Comprehend:
+	// English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), German ("de"), or
+	// Portuguese ("pt"). All documents must be in the same language.
 	//
 	// This member is required.
 	LanguageCode types.LanguageCode

@@ -84,7 +84,7 @@ type UpdateFlowOutputOutput struct {
 	// The ARN of the flow that is associated with the updated output.
 	FlowArn *string
 
-	// The settings for an output.
+	// The new settings of the output that you updated.
 	Output *types.Output
 
 	// Metadata pertaining to the operation's result.

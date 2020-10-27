@@ -13,6 +13,19 @@ const (
 	AccountRoleStatusDeleted         AccountRoleStatus = "DELETED"
 )
 
+// Values returns all known values for AccountRoleStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AccountRoleStatus) Values() []AccountRoleStatus {
+	return []AccountRoleStatus{
+		"READY",
+		"CREATING",
+		"PENDING_DELETION",
+		"DELETING",
+		"DELETED",
+	}
+}
+
 type CustomerPolicyScopeIdType string
 
 // Enum values for CustomerPolicyScopeIdType
@@ -20,6 +33,16 @@ const (
 	CustomerPolicyScopeIdTypeAccount  CustomerPolicyScopeIdType = "ACCOUNT"
 	CustomerPolicyScopeIdTypeOrg_unit CustomerPolicyScopeIdType = "ORG_UNIT"
 )
+
+// Values returns all known values for CustomerPolicyScopeIdType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CustomerPolicyScopeIdType) Values() []CustomerPolicyScopeIdType {
+	return []CustomerPolicyScopeIdType{
+		"ACCOUNT",
+		"ORG_UNIT",
+	}
+}
 
 type DependentServiceName string
 
@@ -31,6 +54,18 @@ const (
 	DependentServiceNameAwsvirtualprivatecloud DependentServiceName = "AWSVPC"
 )
 
+// Values returns all known values for DependentServiceName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DependentServiceName) Values() []DependentServiceName {
+	return []DependentServiceName{
+		"AWSCONFIG",
+		"AWSWAF",
+		"AWSSHIELD_ADVANCED",
+		"AWSVPC",
+	}
+}
+
 type PolicyComplianceStatusType string
 
 // Enum values for PolicyComplianceStatusType
@@ -39,6 +74,16 @@ const (
 	PolicyComplianceStatusTypeNoncompliant PolicyComplianceStatusType = "NON_COMPLIANT"
 )
 
+// Values returns all known values for PolicyComplianceStatusType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PolicyComplianceStatusType) Values() []PolicyComplianceStatusType {
+	return []PolicyComplianceStatusType{
+		"COMPLIANT",
+		"NON_COMPLIANT",
+	}
+}
+
 type RemediationActionType string
 
 // Enum values for RemediationActionType
@@ -46,6 +91,16 @@ const (
 	RemediationActionTypeRemove RemediationActionType = "REMOVE"
 	RemediationActionTypeModify RemediationActionType = "MODIFY"
 )
+
+// Values returns all known values for RemediationActionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RemediationActionType) Values() []RemediationActionType {
+	return []RemediationActionType{
+		"REMOVE",
+		"MODIFY",
+	}
+}
 
 type SecurityServiceType string
 
@@ -58,6 +113,20 @@ const (
 	SecurityServiceTypeSecurity_groups_content_audit SecurityServiceType = "SECURITY_GROUPS_CONTENT_AUDIT"
 	SecurityServiceTypeSecurity_groups_usage_audit   SecurityServiceType = "SECURITY_GROUPS_USAGE_AUDIT"
 )
+
+// Values returns all known values for SecurityServiceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SecurityServiceType) Values() []SecurityServiceType {
+	return []SecurityServiceType{
+		"WAF",
+		"WAFV2",
+		"SHIELD_ADVANCED",
+		"SECURITY_GROUPS_COMMON",
+		"SECURITY_GROUPS_CONTENT_AUDIT",
+		"SECURITY_GROUPS_USAGE_AUDIT",
+	}
+}
 
 type ViolationReason string
 
@@ -73,3 +142,20 @@ const (
 	ViolationReasonSecuritygroupunused                     ViolationReason = "SECURITY_GROUP_UNUSED"
 	ViolationReasonSecuritygroupredundant                  ViolationReason = "SECURITY_GROUP_REDUNDANT"
 )
+
+// Values returns all known values for ViolationReason. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ViolationReason) Values() []ViolationReason {
+	return []ViolationReason{
+		"WEB_ACL_MISSING_RULE_GROUP",
+		"RESOURCE_MISSING_WEB_ACL",
+		"RESOURCE_INCORRECT_WEB_ACL",
+		"RESOURCE_MISSING_SHIELD_PROTECTION",
+		"RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION",
+		"RESOURCE_MISSING_SECURITY_GROUP",
+		"RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP",
+		"SECURITY_GROUP_UNUSED",
+		"SECURITY_GROUP_REDUNDANT",
+	}
+}

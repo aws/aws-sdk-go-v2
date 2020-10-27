@@ -131,6 +131,11 @@ func awsRestjson1_deserializeOpHttpBindingsInvokeEndpointOutput(v *InvokeEndpoin
 		v.ContentType = ptr.String(headerValues[0])
 	}
 
+	if headerValues := response.Header.Values("X-Amzn-SageMaker-Custom-Attributes"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.CustomAttributes = ptr.String(headerValues[0])
+	}
+
 	if headerValues := response.Header.Values("x-Amzn-Invoked-Production-Variant"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
 		v.InvokedProductionVariant = ptr.String(headerValues[0])

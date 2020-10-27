@@ -12,6 +12,9 @@ type Environment struct {
 	// The Amazon Resource Name (ARN) of the environment.
 	Arn *string
 
+	// The connection type used for connecting to an Amazon EC2 environment.
+	ConnectionType ConnectionType
+
 	// The description for the environment.
 	Description *string
 

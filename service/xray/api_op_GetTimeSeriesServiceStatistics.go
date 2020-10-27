@@ -45,7 +45,7 @@ type GetTimeSeriesServiceStatisticsInput struct {
 	// specified, edge statistics are returned.
 	EntitySelectorExpression *string
 
-	// The ARN of the group for which to pull statistics from.
+	// The Amazon Resource Name (ARN) of the group for which to pull statistics from.
 	GroupARN *string
 
 	// The case-sensitive name of the group for which to pull statistics from.
@@ -61,7 +61,7 @@ type GetTimeSeriesServiceStatisticsInput struct {
 type GetTimeSeriesServiceStatisticsOutput struct {
 
 	// A flag indicating whether or not a group's filter expression has been
-	// consistent, or if a returned aggregation may show statistics from an older
+	// consistent, or if a returned aggregation might show statistics from an older
 	// version of the group's filter expression.
 	ContainsOldGroupVersions *bool
 

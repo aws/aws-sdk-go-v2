@@ -1234,6 +1234,40 @@ func awsAwsjson11_serializeDocumentIpAddresses(v []*string, value smithyjson.Val
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentPortOverride(v *types.PortOverride, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EndpointPort != nil {
+		ok := object.Key("EndpointPort")
+		ok.Integer(*v.EndpointPort)
+	}
+
+	if v.ListenerPort != nil {
+		ok := object.Key("ListenerPort")
+		ok.Integer(*v.ListenerPort)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPortOverrides(v []*types.PortOverride, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			av.Null()
+			continue
+		}
+		if err := awsAwsjson11_serializeDocumentPortOverride(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentPortRange(v *types.PortRange, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1414,6 +1448,13 @@ func awsAwsjson11_serializeOpDocumentCreateEndpointGroupInput(v *CreateEndpointG
 	if v.ListenerArn != nil {
 		ok := object.Key("ListenerArn")
 		ok.String(*v.ListenerArn)
+	}
+
+	if v.PortOverrides != nil {
+		ok := object.Key("PortOverrides")
+		if err := awsAwsjson11_serializeDocumentPortOverrides(v.PortOverrides, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ThresholdCount != nil {
@@ -1794,6 +1835,13 @@ func awsAwsjson11_serializeOpDocumentUpdateEndpointGroupInput(v *UpdateEndpointG
 	if len(v.HealthCheckProtocol) > 0 {
 		ok := object.Key("HealthCheckProtocol")
 		ok.String(string(v.HealthCheckProtocol))
+	}
+
+	if v.PortOverrides != nil {
+		ok := object.Key("PortOverrides")
+		if err := awsAwsjson11_serializeDocumentPortOverrides(v.PortOverrides, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ThresholdCount != nil {

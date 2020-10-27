@@ -18126,6 +18126,11 @@ func awsAwsjson11_deserializeDocumentContainerDefinition(v **types.ContainerDefi
 				sv.Image = &jtv
 			}
 
+		case "ImageConfig":
+			if err := awsAwsjson11_deserializeDocumentImageConfig(&sv.ImageConfig, value); err != nil {
+				return err
+			}
+
 		case "Mode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21842,6 +21847,46 @@ func awsAwsjson11_deserializeDocumentHyperParameterTuningJobWarmStartConfig(v **
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentImageConfig(v **types.ImageConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ImageConfig
+	if *v == nil {
+		sv = &types.ImageConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RepositoryAccessMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RepositoryAccessMode to be of type string, got %T instead", value)
+				}
+				sv.RepositoryAccessMode = types.RepositoryAccessMode(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentInferenceSpecification(v **types.InferenceSpecification, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -22563,6 +22608,11 @@ func awsAwsjson11_deserializeDocumentLabelingJobDataSource(v **types.LabelingJob
 				return err
 			}
 
+		case "SnsDataSource":
+			if err := awsAwsjson11_deserializeDocumentLabelingJobSnsDataSource(&sv.SnsDataSource, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -22823,6 +22873,15 @@ func awsAwsjson11_deserializeDocumentLabelingJobOutputConfig(v **types.LabelingJ
 				sv.S3OutputPath = &jtv
 			}
 
+		case "SnsTopicArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SnsTopicArn to be of type string, got %T instead", value)
+				}
+				sv.SnsTopicArn = &jtv
+			}
+
 		default:
 			_, _ = key, value
 
@@ -22901,6 +22960,46 @@ func awsAwsjson11_deserializeDocumentLabelingJobS3DataSource(v **types.LabelingJ
 					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
 				}
 				sv.ManifestS3Uri = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentLabelingJobSnsDataSource(v **types.LabelingJobSnsDataSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LabelingJobSnsDataSource
+	if *v == nil {
+		sv = &types.LabelingJobSnsDataSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SnsTopicArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SnsTopicArn to be of type string, got %T instead", value)
+				}
+				sv.SnsTopicArn = &jtv
 			}
 
 		default:
@@ -35062,6 +35161,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeDomainOutput(v **DescribeDomainOu
 
 	for key, value := range shape {
 		switch key {
+		case "AppNetworkAccessType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AppNetworkAccessType to be of type string, got %T instead", value)
+				}
+				sv.AppNetworkAccessType = types.AppNetworkAccessType(jtv)
+			}
+
 		case "AuthMode":
 			if value != nil {
 				jtv, ok := value.(string)

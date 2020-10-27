@@ -16,10 +16,10 @@ import (
 // such as to retrieve only active scaling policies. Use the pagination parameters
 // to retrieve results as a set of sequential pages. If successful, set of
 // ScalingPolicy objects is returned for the fleet. A fleet may have all of its
-// scaling policies suspended (StopFleetActions). This action does not affect the
-// status of the scaling policies, which remains ACTIVE. To see whether a fleet's
-// scaling policies are in force or suspended, call DescribeFleetAttributes and
-// check the stopped actions.
+// scaling policies suspended (StopFleetActions). This operation does not affect
+// the status of the scaling policies, which remains ACTIVE. To see whether a
+// fleet's scaling policies are in force or suspended, call DescribeFleetAttributes
+// and check the stopped actions.
 //
 //     * DescribeFleetCapacity
 //
@@ -60,7 +60,7 @@ func (c *Client) DescribeScalingPolicies(ctx context.Context, params *DescribeSc
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type DescribeScalingPoliciesInput struct {
 
 	// A unique identifier for a fleet to retrieve scaling policies for. You can use
@@ -74,7 +74,7 @@ type DescribeScalingPoliciesInput struct {
 	Limit *int32
 
 	// Token that indicates the start of the next sequential page of results. Use the
-	// token that is returned with a previous call to this action. To start at the
+	// token that is returned with a previous call to this operation. To start at the
 	// beginning of the result set, do not specify a value.
 	NextToken *string
 
@@ -103,11 +103,11 @@ type DescribeScalingPoliciesInput struct {
 	StatusFilter types.ScalingStatusType
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type DescribeScalingPoliciesOutput struct {
 
 	// Token that indicates where to resume retrieving results on the next call to this
-	// action. If no token is returned, these results represent the end of the list.
+	// operation. If no token is returned, these results represent the end of the list.
 	NextToken *string
 
 	// A collection of objects containing the scaling policies matching the request.

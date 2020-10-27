@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Creates a multiplayer game session for players. This action creates a game
+// Creates a multiplayer game session for players. This operation creates a game
 // session record and assigns an available server process in the specified fleet to
 // host the game session. A fleet must have an ACTIVE status before a game session
 // can be created in it. To create a game session, specify either fleet ID or alias
@@ -72,7 +72,7 @@ func (c *Client) CreateGameSession(ctx context.Context, params *CreateGameSessio
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type CreateGameSessionInput struct {
 
 	// The maximum number of players that can be connected simultaneously to the game
@@ -128,7 +128,7 @@ type CreateGameSessionInput struct {
 	Name *string
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type CreateGameSessionOutput struct {
 
 	// Object that describes the newly created game session record.

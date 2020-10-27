@@ -9,6 +9,15 @@ const (
 	BytesMeasureKilobytes BytesMeasure = "KILOBYTES"
 )
 
+// Values returns all known values for BytesMeasure. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (BytesMeasure) Values() []BytesMeasure {
+	return []BytesMeasure{
+		"KILOBYTES",
+	}
+}
+
 type DeploymentEventType string
 
 // Enum values for DeploymentEventType
@@ -20,6 +29,20 @@ const (
 	DeploymentEventTypeDeployment_started   DeploymentEventType = "DEPLOYMENT_STARTED"
 	DeploymentEventTypeDeployment_completed DeploymentEventType = "DEPLOYMENT_COMPLETED"
 )
+
+// Values returns all known values for DeploymentEventType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeploymentEventType) Values() []DeploymentEventType {
+	return []DeploymentEventType{
+		"PERCENTAGE_UPDATED",
+		"ROLLBACK_STARTED",
+		"ROLLBACK_COMPLETED",
+		"BAKE_TIME_STARTED",
+		"DEPLOYMENT_STARTED",
+		"DEPLOYMENT_COMPLETED",
+	}
+}
 
 type DeploymentState string
 
@@ -33,6 +56,20 @@ const (
 	DeploymentStateRolled_back  DeploymentState = "ROLLED_BACK"
 )
 
+// Values returns all known values for DeploymentState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeploymentState) Values() []DeploymentState {
+	return []DeploymentState{
+		"BAKING",
+		"VALIDATING",
+		"DEPLOYING",
+		"COMPLETE",
+		"ROLLING_BACK",
+		"ROLLED_BACK",
+	}
+}
+
 type EnvironmentState string
 
 // Enum values for EnvironmentState
@@ -43,6 +80,18 @@ const (
 	EnvironmentStateRolled_back          EnvironmentState = "ROLLED_BACK"
 )
 
+// Values returns all known values for EnvironmentState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EnvironmentState) Values() []EnvironmentState {
+	return []EnvironmentState{
+		"READY_FOR_DEPLOYMENT",
+		"DEPLOYING",
+		"ROLLING_BACK",
+		"ROLLED_BACK",
+	}
+}
+
 type GrowthType string
 
 // Enum values for GrowthType
@@ -51,6 +100,16 @@ const (
 	GrowthTypeExponential GrowthType = "EXPONENTIAL"
 )
 
+// Values returns all known values for GrowthType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (GrowthType) Values() []GrowthType {
+	return []GrowthType{
+		"LINEAR",
+		"EXPONENTIAL",
+	}
+}
+
 type ReplicateTo string
 
 // Enum values for ReplicateTo
@@ -58,6 +117,16 @@ const (
 	ReplicateToNone         ReplicateTo = "NONE"
 	ReplicateToSsm_document ReplicateTo = "SSM_DOCUMENT"
 )
+
+// Values returns all known values for ReplicateTo. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ReplicateTo) Values() []ReplicateTo {
+	return []ReplicateTo{
+		"NONE",
+		"SSM_DOCUMENT",
+	}
+}
 
 type TriggeredBy string
 
@@ -69,6 +138,18 @@ const (
 	TriggeredByInternal_error   TriggeredBy = "INTERNAL_ERROR"
 )
 
+// Values returns all known values for TriggeredBy. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TriggeredBy) Values() []TriggeredBy {
+	return []TriggeredBy{
+		"USER",
+		"APPCONFIG",
+		"CLOUDWATCH_ALARM",
+		"INTERNAL_ERROR",
+	}
+}
+
 type ValidatorType string
 
 // Enum values for ValidatorType
@@ -76,3 +157,13 @@ const (
 	ValidatorTypeJson_schema ValidatorType = "JSON_SCHEMA"
 	ValidatorTypeLambda      ValidatorType = "LAMBDA"
 )
+
+// Values returns all known values for ValidatorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ValidatorType) Values() []ValidatorType {
+	return []ValidatorType{
+		"JSON_SCHEMA",
+		"LAMBDA",
+	}
+}

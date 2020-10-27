@@ -29,7 +29,8 @@ func (c *Client) RebootBroker(ctx context.Context, params *RebootBrokerInput, op
 // Reboots a node.
 type RebootBrokerInput struct {
 
-	// The list of broker IDs to be rebooted.
+	// The list of broker IDs to be rebooted. The reboot-broker operation supports
+	// rebooting one broker at a time.
 	//
 	// This member is required.
 	BrokerIds []*string

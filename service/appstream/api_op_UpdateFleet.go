@@ -66,7 +66,7 @@ type UpdateFleetInput struct {
 	// a role, a fleet instance calls the AWS Security Token Service (STS) AssumeRole
 	// API operation and passes the ARN of the role to use. The operation creates a new
 	// session with temporary credentials. AppStream 2.0 retrieves the temporary
-	// credentials and creates the AppStream_Machine_Role credential profile on the
+	// credentials and creates the appstream_machine_role credential profile on the
 	// instance. For more information, see Using an IAM Role to Grant Permissions to
 	// Applications and Scripts Running on AppStream 2.0 Streaming Instances
 	// (https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html)
@@ -132,6 +132,21 @@ type UpdateFleetInput struct {
 	//     *
 	// stream.memory.8xlarge
 	//
+	//     * stream.memory.z1d.large
+	//
+	//     *
+	// stream.memory.z1d.xlarge
+	//
+	//     * stream.memory.z1d.2xlarge
+	//
+	//     *
+	// stream.memory.z1d.3xlarge
+	//
+	//     * stream.memory.z1d.6xlarge
+	//
+	//     *
+	// stream.memory.z1d.12xlarge
+	//
 	//     * stream.graphics-design.large
 	//
 	//     *
@@ -143,6 +158,21 @@ type UpdateFleetInput struct {
 	// stream.graphics-design.4xlarge
 	//
 	//     * stream.graphics-desktop.2xlarge
+	//
+	//     *
+	// stream.graphics.g4dn.xlarge
+	//
+	//     * stream.graphics.g4dn.2xlarge
+	//
+	//     *
+	// stream.graphics.g4dn.4xlarge
+	//
+	//     * stream.graphics.g4dn.8xlarge
+	//
+	//     *
+	// stream.graphics.g4dn.12xlarge
+	//
+	//     * stream.graphics.g4dn.16xlarge
 	//
 	//     *
 	// stream.graphics-pro.4xlarge
@@ -162,6 +192,12 @@ type UpdateFleetInput struct {
 
 	// A unique name for the fleet.
 	Name *string
+
+	// The AppStream 2.0 view that is displayed to your users when they stream from the
+	// fleet. When APP is specified, only the windows of applications opened by users
+	// display. When DESKTOP is specified, the standard desktop that is provided by the
+	// operating system displays. The default value is APP.
+	StreamView types.StreamView
 
 	// The VPC configuration for the fleet.
 	VpcConfig *types.VpcConfig

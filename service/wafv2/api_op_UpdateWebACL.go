@@ -22,7 +22,8 @@ import (
 // match any of the rules. The rules in a Web ACL can be a combination of the types
 // Rule, RuleGroup, and managed rule group. You can associate a Web ACL with one or
 // more AWS resources to protect. The resources can be Amazon CloudFront, an Amazon
-// API Gateway API, or an Application Load Balancer.
+// API Gateway REST API, an Application Load Balancer, or an AWS AppSync GraphQL
+// API.
 func (c *Client) UpdateWebACL(ctx context.Context, params *UpdateWebACLInput, optFns ...func(*Options)) (*UpdateWebACLOutput, error) {
 	if params == nil {
 		params = &UpdateWebACLInput{}
@@ -69,15 +70,16 @@ type UpdateWebACLInput struct {
 	Name *string
 
 	// Specifies whether this is for an AWS CloudFront distribution or for a regional
-	// application. A regional application can be an Application Load Balancer (ALB) or
-	// an API Gateway stage. To work with CloudFront, you must also specify the Region
-	// US East (N. Virginia) as follows:
+	// application. A regional application can be an Application Load Balancer (ALB),
+	// an API Gateway REST API, or an AppSync GraphQL API. To work with CloudFront, you
+	// must also specify the Region US East (N. Virginia) as follows:
 	//
-	//     * CLI - Specify the Region when you use
-	// the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.
+	//     * CLI -
+	// Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT
+	// --region=us-east-1.
 	//
-	//     * API and SDKs
-	// - For all calls, use the Region endpoint us-east-1.
+	//     * API and SDKs - For all calls, use the Region endpoint
+	// us-east-1.
 	//
 	// This member is required.
 	Scope types.Scope

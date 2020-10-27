@@ -63,9 +63,9 @@ func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy
 type PayloadTooLargeException struct {
 	Message *string
 
-	Limit   *float32
 	Size    *float32
 	Measure BytesMeasure
+	Limit   *float32
 }
 
 func (e *PayloadTooLargeException) Error() string {

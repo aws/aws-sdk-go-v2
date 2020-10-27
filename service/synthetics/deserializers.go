@@ -1905,7 +1905,7 @@ func awsRestjson1_deserializeDocumentCanary(v **types.Canary, value interface{})
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected FunctionArn to be of type string, got %T instead", value)
 				}
 				sv.EngineArn = &jtv
 			}
@@ -1914,7 +1914,7 @@ func awsRestjson1_deserializeDocumentCanary(v **types.Canary, value interface{})
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
 				}
 				sv.ExecutionRoleArn = &jtv
 			}
@@ -2136,6 +2136,15 @@ func awsRestjson1_deserializeDocumentCanaryRun(v **types.CanaryRun, value interf
 				sv.ArtifactS3Location = &jtv
 			}
 
+		case "Id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UUID to be of type string, got %T instead", value)
+				}
+				sv.Id = &jtv
+			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2186,6 +2195,15 @@ func awsRestjson1_deserializeDocumentCanaryRunConfigOutput(v **types.CanaryRunCo
 
 	for key, value := range shape {
 		switch key {
+		case "ActiveTracing":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.ActiveTracing = &jtv
+			}
+
 		case "MemoryInMB":
 			if value != nil {
 				jtv, ok := value.(json.Number)

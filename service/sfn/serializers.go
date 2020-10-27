@@ -1141,6 +1141,18 @@ func awsAwsjson10_serializeDocumentTagList(v []*types.Tag, value smithyjson.Valu
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentTracingConfiguration(v *types.TracingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled != nil {
+		ok := object.Key("enabled")
+		ok.Boolean(*v.Enabled)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentCreateActivityInput(v *CreateActivityInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1189,6 +1201,13 @@ func awsAwsjson10_serializeOpDocumentCreateStateMachineInput(v *CreateStateMachi
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsAwsjson10_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TracingConfiguration != nil {
+		ok := object.Key("tracingConfiguration")
+		if err := awsAwsjson10_serializeDocumentTracingConfiguration(v.TracingConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -1297,6 +1316,11 @@ func awsAwsjson10_serializeOpDocumentGetExecutionHistoryInput(v *GetExecutionHis
 	if v.ExecutionArn != nil {
 		ok := object.Key("executionArn")
 		ok.String(*v.ExecutionArn)
+	}
+
+	if v.IncludeExecutionData != nil {
+		ok := object.Key("includeExecutionData")
+		ok.Boolean(*v.IncludeExecutionData)
 	}
 
 	if v.MaxResults != nil {
@@ -1460,6 +1484,11 @@ func awsAwsjson10_serializeOpDocumentStartExecutionInput(v *StartExecutionInput,
 		ok.String(*v.StateMachineArn)
 	}
 
+	if v.TraceHeader != nil {
+		ok := object.Key("traceHeader")
+		ok.String(*v.TraceHeader)
+	}
+
 	return nil
 }
 
@@ -1547,6 +1576,13 @@ func awsAwsjson10_serializeOpDocumentUpdateStateMachineInput(v *UpdateStateMachi
 	if v.StateMachineArn != nil {
 		ok := object.Key("stateMachineArn")
 		ok.String(*v.StateMachineArn)
+	}
+
+	if v.TracingConfiguration != nil {
+		ok := object.Key("tracingConfiguration")
+		if err := awsAwsjson10_serializeDocumentTracingConfiguration(v.TracingConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

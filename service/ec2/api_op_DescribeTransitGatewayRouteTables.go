@@ -47,8 +47,7 @@ type DescribeTransitGatewayRouteTablesInput struct {
 	// propagation route table for the transit gateway (true | false).
 	//
 	//     * state -
-	// The state of the attachment (available | deleted | deleting | failed | modifying
-	// | pendingAcceptance | pending | rollingBack | rejected | rejecting).
+	// The state of the route table (available | deleting | deleted | pending).
 	//
 	//     *
 	// transit-gateway-id - The ID of the transit gateway.

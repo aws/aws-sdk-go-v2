@@ -1294,11 +1294,11 @@ func validateTableToReload(v *types.TableToReload) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TableToReload"}
-	if v.SchemaName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SchemaName"))
-	}
 	if v.TableName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if v.SchemaName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1312,11 +1312,11 @@ func validateOpAddTagsToResourceInput(v *AddTagsToResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddTagsToResourceInput"}
-	if v.Tags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1330,11 +1330,11 @@ func validateOpApplyPendingMaintenanceActionInput(v *ApplyPendingMaintenanceActi
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ApplyPendingMaintenanceActionInput"}
-	if v.ApplyAction == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplyAction"))
-	}
 	if v.ReplicationInstanceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReplicationInstanceArn"))
+	}
+	if v.ApplyAction == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplyAction"))
 	}
 	if v.OptInType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OptInType"))
@@ -1366,6 +1366,12 @@ func validateOpCreateEndpointInput(v *CreateEndpointInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateEndpointInput"}
+	if v.EndpointIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointIdentifier"))
+	}
+	if len(v.EndpointType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointType"))
+	}
 	if v.EngineName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EngineName"))
 	}
@@ -1374,20 +1380,14 @@ func validateOpCreateEndpointInput(v *CreateEndpointInput) error {
 			invalidParams.AddNested("ElasticsearchSettings", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.DynamoDbSettings != nil {
-		if err := validateDynamoDbSettings(v.DynamoDbSettings); err != nil {
-			invalidParams.AddNested("DynamoDbSettings", err.(smithy.InvalidParamsError))
-		}
-	}
-	if len(v.EndpointType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("EndpointType"))
-	}
-	if v.EndpointIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EndpointIdentifier"))
-	}
 	if v.NeptuneSettings != nil {
 		if err := validateNeptuneSettings(v.NeptuneSettings); err != nil {
 			invalidParams.AddNested("NeptuneSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DynamoDbSettings != nil {
+		if err := validateDynamoDbSettings(v.DynamoDbSettings); err != nil {
+			invalidParams.AddNested("DynamoDbSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1402,11 +1402,11 @@ func validateOpCreateEventSubscriptionInput(v *CreateEventSubscriptionInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateEventSubscriptionInput"}
-	if v.SubscriptionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionName"))
-	}
 	if v.SnsTopicArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SnsTopicArn"))
+	}
+	if v.SubscriptionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1420,11 +1420,11 @@ func validateOpCreateReplicationInstanceInput(v *CreateReplicationInstanceInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateReplicationInstanceInput"}
-	if v.ReplicationInstanceClass == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ReplicationInstanceClass"))
-	}
 	if v.ReplicationInstanceIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReplicationInstanceIdentifier"))
+	}
+	if v.ReplicationInstanceClass == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicationInstanceClass"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1438,14 +1438,14 @@ func validateOpCreateReplicationSubnetGroupInput(v *CreateReplicationSubnetGroup
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateReplicationSubnetGroupInput"}
-	if v.ReplicationSubnetGroupDescription == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ReplicationSubnetGroupDescription"))
+	if v.SubnetIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
 	}
 	if v.ReplicationSubnetGroupIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReplicationSubnetGroupIdentifier"))
 	}
-	if v.SubnetIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
+	if v.ReplicationSubnetGroupDescription == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicationSubnetGroupDescription"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1459,8 +1459,8 @@ func validateOpCreateReplicationTaskInput(v *CreateReplicationTaskInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateReplicationTaskInput"}
-	if v.ReplicationInstanceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ReplicationInstanceArn"))
+	if v.SourceEndpointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceEndpointArn"))
 	}
 	if v.TableMappings == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableMappings"))
@@ -1471,8 +1471,8 @@ func validateOpCreateReplicationTaskInput(v *CreateReplicationTaskInput) error {
 	if v.ReplicationTaskIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReplicationTaskIdentifier"))
 	}
-	if v.SourceEndpointArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceEndpointArn"))
+	if v.ReplicationInstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicationInstanceArn"))
 	}
 	if len(v.MigrationType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("MigrationType"))
@@ -1878,13 +1878,13 @@ func validateOpDescribeTableStatisticsInput(v *DescribeTableStatisticsInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeTableStatisticsInput"}
-	if v.ReplicationTaskArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ReplicationTaskArn"))
-	}
 	if v.Filters != nil {
 		if err := validateFilterList(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.ReplicationTaskArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicationTaskArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1928,22 +1928,22 @@ func validateOpModifyEndpointInput(v *ModifyEndpointInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyEndpointInput"}
+	if v.EndpointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointArn"))
+	}
 	if v.DynamoDbSettings != nil {
 		if err := validateDynamoDbSettings(v.DynamoDbSettings); err != nil {
 			invalidParams.AddNested("DynamoDbSettings", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ElasticsearchSettings != nil {
-		if err := validateElasticsearchSettings(v.ElasticsearchSettings); err != nil {
-			invalidParams.AddNested("ElasticsearchSettings", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.EndpointArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EndpointArn"))
-	}
 	if v.NeptuneSettings != nil {
 		if err := validateNeptuneSettings(v.NeptuneSettings); err != nil {
 			invalidParams.AddNested("NeptuneSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ElasticsearchSettings != nil {
+		if err := validateElasticsearchSettings(v.ElasticsearchSettings); err != nil {
+			invalidParams.AddNested("ElasticsearchSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2036,11 +2036,11 @@ func validateOpRefreshSchemasInput(v *RefreshSchemasInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RefreshSchemasInput"}
-	if v.ReplicationInstanceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ReplicationInstanceArn"))
-	}
 	if v.EndpointArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndpointArn"))
+	}
+	if v.ReplicationInstanceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicationInstanceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2054,15 +2054,15 @@ func validateOpReloadTablesInput(v *ReloadTablesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ReloadTablesInput"}
-	if v.ReplicationTaskArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ReplicationTaskArn"))
-	}
 	if v.TablesToReload == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TablesToReload"))
 	} else if v.TablesToReload != nil {
 		if err := validateTableListToReload(v.TablesToReload); err != nil {
 			invalidParams.AddNested("TablesToReload", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.ReplicationTaskArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicationTaskArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2109,9 +2109,6 @@ func validateOpStartReplicationTaskAssessmentRunInput(v *StartReplicationTaskAss
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartReplicationTaskAssessmentRunInput"}
-	if v.ServiceAccessRoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServiceAccessRoleArn"))
-	}
 	if v.AssessmentRunName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssessmentRunName"))
 	}
@@ -2120,6 +2117,9 @@ func validateOpStartReplicationTaskAssessmentRunInput(v *StartReplicationTaskAss
 	}
 	if v.ReplicationTaskArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReplicationTaskArn"))
+	}
+	if v.ServiceAccessRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceAccessRoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2133,11 +2133,11 @@ func validateOpStartReplicationTaskInput(v *StartReplicationTaskInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartReplicationTaskInput"}
-	if v.ReplicationTaskArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ReplicationTaskArn"))
-	}
 	if len(v.StartReplicationTaskType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("StartReplicationTaskType"))
+	}
+	if v.ReplicationTaskArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicationTaskArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

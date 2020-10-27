@@ -117,10 +117,10 @@ import (
 //
 //
 // * Web Identity Federation Playground
-// (https://web-identity-federation-playground.s3.amazonaws.com/index.html). Walk
-// through the process of authenticating through Login with Amazon, Facebook, or
-// Google, getting temporary security credentials, and then using those credentials
-// to make a request to AWS.
+// (https://aws.amazon.com/blogs/aws/the-aws-web-identity-federation-playground/).
+// Walk through the process of authenticating through Login with Amazon, Facebook,
+// or Google, getting temporary security credentials, and then using those
+// credentials to make a request to AWS.
 //
 //     * AWS SDK for iOS Developer Guide
 // (http://aws.amazon.com/sdkforios/) and AWS SDK for Android Developer Guide

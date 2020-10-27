@@ -108,6 +108,17 @@ type DataLocationResource struct {
 	CatalogId *string
 }
 
+// A structure containing the additional details to be returned in the
+// AdditionalDetails attribute of PrincipalResourcePermissions. If a catalog
+// resource is shared through AWS Resource Access Manager (AWS RAM), then there
+// will exist a corresponding RAM share resource ARN.
+type DetailsMap struct {
+
+	// A share resource ARN for a catalog resource shared through AWS Resource Access
+	// Manager (AWS RAM).
+	ResourceShare []*string
+}
+
 // Contains details about an error.
 type ErrorDetail struct {
 
@@ -144,6 +155,11 @@ type PrincipalPermissions struct {
 
 // The permissions granted or revoked on a resource.
 type PrincipalResourcePermissions struct {
+
+	// This attribute can be used to return any additional details of
+	// PrincipalResourcePermissions. Currently returns only as a RAM share resource
+	// ARN.
+	AdditionalDetails *DetailsMap
 
 	// The permissions to be granted or revoked on the resource.
 	Permissions []Permission

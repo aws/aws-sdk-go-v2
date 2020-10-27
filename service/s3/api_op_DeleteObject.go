@@ -25,13 +25,15 @@ import (
 // sample requests that use versioning, see Sample Request
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETE.html#ExampleVersionObjectDelete).
 // You can delete objects by explicitly calling the DELETE Object API or configure
-// its lifecycle (PutBucketLifecycle) to enable Amazon S3 to remove them for you.
-// If you want to block users or accounts from removing or deleting objects from
-// your bucket, you must deny them the s3:DeleteObject, s3:DeleteObjectVersion, and
-// s3:PutLifeCycleConfiguration actions. The following operation is related to
-// DeleteObject:
+// its lifecycle (PutBucketLifecycle
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycle.html))
+// to enable Amazon S3 to remove them for you. If you want to block users or
+// accounts from removing or deleting objects from your bucket, you must deny them
+// the s3:DeleteObject, s3:DeleteObjectVersion, and s3:PutLifeCycleConfiguration
+// actions. The following operation is related to DeleteObject:
 //
 //     * PutObject
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
 func (c *Client) DeleteObject(ctx context.Context, params *DeleteObjectInput, optFns ...func(*Options)) (*DeleteObjectOutput, error) {
 	if params == nil {
 		params = &DeleteObjectInput{}
@@ -53,11 +55,19 @@ type DeleteObjectInput struct {
 	// access point, you must direct requests to the access point hostname. The access
 	// point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// operation using an access point through the AWS SDKs, you provide the access
+	// operation with an access point through the AWS SDKs, you provide the access
 	// point ARN in place of the bucket name. For more information about access point
 	// ARNs, see Using Access Points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
-	// the Amazon Simple Storage Service Developer Guide.
+	// the Amazon Simple Storage Service Developer Guide. When using this API with
+	// Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname.
+	// The S3 on Outposts hostname takes the form
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
+	// this operation using S3 on Outposts through the AWS SDKs, you provide the
+	// Outposts bucket ARN in place of the bucket name. For more information about S3
+	// on Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
+	// Amazon Simple Storage Service Developer Guide.
 	//
 	// This member is required.
 	Bucket *string
@@ -70,6 +80,10 @@ type DeleteObjectInput struct {
 	// Indicates whether S3 Object Lock should bypass Governance-mode restrictions to
 	// process this operation.
 	BypassGovernanceRetention *bool
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 
 	// The concatenation of the authentication device's serial number, a space, and the
 	// value that is displayed on your authentication device. Required to permanently

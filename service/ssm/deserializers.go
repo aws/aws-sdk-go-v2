@@ -26751,7 +26751,7 @@ func awsAwsjson11_deserializeDocumentInventoryDeletionStatusItem(v **types.Inven
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected InventoryDeletionId to be of type string, got %T instead", value)
+					return fmt.Errorf("expected UUID to be of type string, got %T instead", value)
 				}
 				sv.DeletionId = &jtv
 			}
@@ -31361,6 +31361,25 @@ func awsAwsjson11_deserializeDocumentPatch(v **types.Patch, value interface{}) e
 
 	for key, value := range shape {
 		switch key {
+		case "AdvisoryIds":
+			if err := awsAwsjson11_deserializeDocumentPatchAdvisoryIdList(&sv.AdvisoryIds, value); err != nil {
+				return err
+			}
+
+		case "Arch":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PatchArch to be of type string, got %T instead", value)
+				}
+				sv.Arch = &jtv
+			}
+
+		case "BugzillaIds":
+			if err := awsAwsjson11_deserializeDocumentPatchBugzillaIdList(&sv.BugzillaIds, value); err != nil {
+				return err
+			}
+
 		case "Classification":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -31379,6 +31398,11 @@ func awsAwsjson11_deserializeDocumentPatch(v **types.Patch, value interface{}) e
 				sv.ContentUrl = &jtv
 			}
 
+		case "CVEIds":
+			if err := awsAwsjson11_deserializeDocumentPatchCVEIdList(&sv.CVEIds, value); err != nil {
+				return err
+			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -31386,6 +31410,19 @@ func awsAwsjson11_deserializeDocumentPatch(v **types.Patch, value interface{}) e
 					return fmt.Errorf("expected PatchDescription to be of type string, got %T instead", value)
 				}
 				sv.Description = &jtv
+			}
+
+		case "Epoch":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PatchEpoch to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Epoch = ptr.Int32(int32(i64))
 			}
 
 		case "Id":
@@ -31433,6 +31470,15 @@ func awsAwsjson11_deserializeDocumentPatch(v **types.Patch, value interface{}) e
 				sv.MsrcSeverity = &jtv
 			}
 
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PatchName to be of type string, got %T instead", value)
+				}
+				sv.Name = &jtv
+			}
+
 		case "Product":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -31451,6 +31497,15 @@ func awsAwsjson11_deserializeDocumentPatch(v **types.Patch, value interface{}) e
 				sv.ProductFamily = &jtv
 			}
 
+		case "Release":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PatchRelease to be of type string, got %T instead", value)
+				}
+				sv.Release = &jtv
+			}
+
 		case "ReleaseDate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -31462,6 +31517,24 @@ func awsAwsjson11_deserializeDocumentPatch(v **types.Patch, value interface{}) e
 					return err
 				}
 				sv.ReleaseDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
+		case "Repository":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PatchRepository to be of type string, got %T instead", value)
+				}
+				sv.Repository = &jtv
+			}
+
+		case "Severity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PatchSeverity to be of type string, got %T instead", value)
+				}
+				sv.Severity = &jtv
 			}
 
 		case "Title":
@@ -31482,12 +31555,57 @@ func awsAwsjson11_deserializeDocumentPatch(v **types.Patch, value interface{}) e
 				sv.Vendor = &jtv
 			}
 
+		case "Version":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PatchVersion to be of type string, got %T instead", value)
+				}
+				sv.Version = &jtv
+			}
+
 		default:
 			_, _ = key, value
 
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPatchAdvisoryIdList(v *[]*string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*string
+	if *v == nil {
+		cv = []*string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected PatchAdvisoryId to be of type string, got %T instead", value)
+			}
+			col = &jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -31599,6 +31717,42 @@ func awsAwsjson11_deserializeDocumentPatchBaselineIdentityList(v *[]*types.Patch
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentPatchBugzillaIdList(v *[]*string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*string
+	if *v == nil {
+		cv = []*string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected PatchBugzillaId to be of type string, got %T instead", value)
+			}
+			col = &jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentPatchComplianceData(v **types.PatchComplianceData, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -31628,6 +31782,15 @@ func awsAwsjson11_deserializeDocumentPatchComplianceData(v **types.PatchComplian
 					return fmt.Errorf("expected PatchClassification to be of type string, got %T instead", value)
 				}
 				sv.Classification = &jtv
+			}
+
+		case "CVEIds":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PatchCVEIds to be of type string, got %T instead", value)
+				}
+				sv.CVEIds = &jtv
 			}
 
 		case "InstalledTime":
@@ -31712,6 +31875,42 @@ func awsAwsjson11_deserializeDocumentPatchComplianceDataList(v *[]*types.PatchCo
 		var col *types.PatchComplianceData
 		if err := awsAwsjson11_deserializeDocumentPatchComplianceData(&col, value); err != nil {
 			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPatchCVEIdList(v *[]*string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*string
+	if *v == nil {
+		cv = []*string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected PatchCVEId to be of type string, got %T instead", value)
+			}
+			col = &jtv
 		}
 		cv = append(cv, col)
 
@@ -36118,7 +36317,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteInventoryOutput(v **DeleteInventory
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected InventoryDeletionId to be of type string, got %T instead", value)
+					return fmt.Errorf("expected UUID to be of type string, got %T instead", value)
 				}
 				sv.DeletionId = &jtv
 			}

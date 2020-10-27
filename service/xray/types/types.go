@@ -19,7 +19,7 @@ type Alias struct {
 	Type *string
 }
 
-// Value of a segment annotation. Has one of three value types: Number, Boolean or
+// Value of a segment annotation. Has one of three value types: Number, Boolean, or
 // String.
 type AnnotationValue struct {
 
@@ -33,10 +33,10 @@ type AnnotationValue struct {
 	StringValue *string
 }
 
-// A list of availability zones corresponding to the segments in a trace.
+// A list of Availability Zones corresponding to the segments in a trace.
 type AvailabilityZoneDetail struct {
 
-	// The name of a corresponding availability zone.
+	// The name of a corresponding Availability Zone.
 	Name *string
 }
 
@@ -241,11 +241,22 @@ type Group struct {
 	// The filter expression defining the parameters to include traces.
 	FilterExpression *string
 
-	// The ARN of the group generated based on the GroupName.
+	// The Amazon Resource Name (ARN) of the group generated based on the GroupName.
 	GroupARN *string
 
 	// The unique case-sensitive name of the group.
 	GroupName *string
+
+	// The structure containing configurations related to insights.
+	//
+	//     * The
+	// InsightsEnabled boolean can be set to true to enable insights for the group or
+	// false to disable insights for the group.
+	//
+	//     * The NotifcationsEnabled boolean
+	// can be set to true to enable insights notifications through Amazon EventBridge
+	// for the group.
+	InsightsConfiguration *InsightsConfiguration
 }
 
 // Details for a group without metadata.
@@ -259,6 +270,17 @@ type GroupSummary struct {
 
 	// The unique case-sensitive name of the group.
 	GroupName *string
+
+	// The structure containing configurations related to insights.
+	//
+	//     * The
+	// InsightsEnabled boolean can be set to true to enable insights for the group or
+	// false to disable insights for the group.
+	//
+	//     * The NotificationsEnabled boolean
+	// can be set to true to enable insights notifications. Notifications can only be
+	// enabled on a group with InsightsEnabled set to true.
+	InsightsConfiguration *InsightsConfiguration
 }
 
 // An entry in a histogram for a statistic. A histogram maps the range of observed
@@ -291,6 +313,18 @@ type Http struct {
 	UserAgent *string
 }
 
+// The structure containing configurations related to insights.
+type InsightsConfiguration struct {
+
+	// Set the InsightsEnabled value to true to enable insights or false to disable
+	// insights.
+	InsightsEnabled *bool
+
+	// Set the NotificationsEnabled value to true to enable insights notifications.
+	// Notifications can only be enabled on a group with InsightsEnabled set to true.
+	NotificationsEnabled *bool
+}
+
 // A list of EC2 instance IDs corresponding to the segments in a trace.
 type InstanceIdDetail struct {
 
@@ -320,7 +354,7 @@ type ResponseTimeRootCause struct {
 // time warning.
 type ResponseTimeRootCauseEntity struct {
 
-	// The types and messages of the exceptions.
+	// The type and messages of the exceptions.
 	Coverage *float64
 
 	// The name of the entity.
@@ -525,7 +559,7 @@ type SamplingStatisticsDocument struct {
 }
 
 // Aggregated request sampling data for a sampling rule across all services for a
-// 10 second window.
+// 10-second window.
 type SamplingStatisticSummary struct {
 
 	// The number of requests recorded with borrowed reservoir quota.
@@ -567,7 +601,7 @@ type SamplingTargetDocument struct {
 	// again.
 	Interval *int32
 
-	// The number of requests per second that X-Ray allocated this service.
+	// The number of requests per second that X-Ray allocated for this service.
 	ReservoirQuota *int32
 
 	// When the reservoir quota expires.
@@ -594,8 +628,8 @@ type Segment struct {
 }
 
 // Information about an application that processed requests, users that made
-// requests, or downstream services, resources and applications that an application
-// used.
+// requests, or downstream services, resources, and applications that an
+// application used.
 type Service struct {
 
 	// Identifier of the AWS account in which the service runs.
@@ -637,7 +671,7 @@ type Service struct {
 	// The type of service.
 	//
 	//     * AWS Resource - The type of an AWS resource. For
-	// example, AWS::EC2::Instance for a application running on Amazon EC2 or
+	// example, AWS::EC2::Instance for an application running on Amazon EC2 or
 	// AWS::DynamoDB::Table for an Amazon DynamoDB table that the application used.
 	//
 	//
@@ -685,6 +719,36 @@ type ServiceStatistics struct {
 
 	// The aggregate response time of completed requests.
 	TotalResponseTime *float64
+}
+
+// A map that contains tag keys and tag values to attach to an AWS X-Ray group or
+// sampling rule. For more information about ways to use tags, see Tagging AWS
+// resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in
+// the AWS General Reference. The following restrictions apply to tags:
+//
+//     *
+// Maximum number of user-applied tags per resource: 50
+//
+//     * Tag keys and values
+// are case sensitive.
+//
+//     * Don't use aws: as a prefix for keys; it's reserved
+// for AWS use. You cannot edit or delete system tags.
+type Tag struct {
+
+	// A tag key, such as Stage or Name. A tag key cannot be empty. The key can be a
+	// maximum of 128 characters, and can contain only Unicode letters, numbers, or
+	// separators, or the following special characters: + - = . _ : /
+	//
+	// This member is required.
+	Key *string
+
+	// An optional tag value, such as Production or test-only. The value can be a
+	// maximum of 255 characters, and contain only Unicode letters, numbers, or
+	// separators, or the following special characters: + - = . _ : /
+	//
+	// This member is required.
+	Value *string
 }
 
 //
@@ -738,6 +802,11 @@ type Trace struct {
 	// subsegments.
 	Id *string
 
+	// LimitExceeded is set to true when the trace has exceeded one of the defined
+	// quotas. For more information about quotas, see AWS X-Ray endpoints and quotas
+	// (https://docs.aws.amazon.com/general/latest/gr/xray.html).
+	LimitExceeded *bool
+
 	// Segment documents for the segments and subsegments that comprise the trace.
 	Segments []*Segment
 }
@@ -748,7 +817,7 @@ type TraceSummary struct {
 	// Annotations from the trace's segment documents.
 	Annotations map[string][]*ValueWithServiceIds
 
-	// A list of availability zones for any zone corresponding to the trace segments.
+	// A list of Availability Zones for any zone corresponding to the trace segments.
 	AvailabilityZones []*AvailabilityZoneDetail
 
 	// The length of time in seconds between the start time of the root segment and the
@@ -761,8 +830,7 @@ type TraceSummary struct {
 	// A collection of ErrorRootCause structures corresponding to the trace segments.
 	ErrorRootCauses []*ErrorRootCause
 
-	// A collection of FaultRootCause structures corresponding to the the trace
-	// segments.
+	// A collection of FaultRootCause structures corresponding to the trace segments.
 	FaultRootCauses []*FaultRootCause
 
 	// The root segment document has a 400 series error.

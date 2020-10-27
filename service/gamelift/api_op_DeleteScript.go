@@ -10,13 +10,13 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Deletes a Realtime script. This action permanently deletes the script record. If
-// script files were uploaded, they are also deleted (files stored in an S3 bucket
-// are not deleted). To delete a script, specify the script ID. Before deleting a
-// script, be sure to terminate all fleets that are deployed with the script being
-// deleted. Fleet instances periodically check for script updates, and if the
-// script record no longer exists, the instance will go into an error state and be
-// unable to host game sessions. Learn more Amazon GameLift Realtime Servers
+// Deletes a Realtime script. This operation permanently deletes the script record.
+// If script files were uploaded, they are also deleted (files stored in an S3
+// bucket are not deleted). To delete a script, specify the script ID. Before
+// deleting a script, be sure to terminate all fleets that are deployed with the
+// script being deleted. Fleet instances periodically check for script updates, and
+// if the script record no longer exists, the instance will go into an error state
+// and be unable to host game sessions. Learn more Amazon GameLift Realtime Servers
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html)
 // Related operations
 //

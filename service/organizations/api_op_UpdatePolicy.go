@@ -13,8 +13,8 @@ import (
 
 // Updates an existing policy with a new name, description, or content. If you
 // don't supply any parameter, that value remains unchanged. You can't change a
-// policy's type. This operation can be called only from the organization's master
-// account.
+// policy's type. This operation can be called only from the organization's
+// management account.
 func (c *Client) UpdatePolicy(ctx context.Context, params *UpdatePolicyInput, optFns ...func(*Options)) (*UpdatePolicyOutput, error) {
 	if params == nil {
 		params = &UpdatePolicyInput{}

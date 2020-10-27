@@ -11,9 +11,9 @@ import (
 )
 
 // Retrieves the certificate and certificate chain for your private certificate
-// authority (CA). Both the certificate and the chain are base64 PEM-encoded. The
-// chain does not include the CA certificate. Each certificate in the chain signs
-// the one before it.
+// authority (CA) or one that has been shared with you. Both the certificate and
+// the chain are base64 PEM-encoded. The chain does not include the CA certificate.
+// Each certificate in the chain signs the one before it.
 func (c *Client) GetCertificateAuthorityCertificate(ctx context.Context, params *GetCertificateAuthorityCertificateInput, optFns ...func(*Options)) (*GetCertificateAuthorityCertificateOutput, error) {
 	if params == nil {
 		params = &GetCertificateAuthorityCertificateInput{}

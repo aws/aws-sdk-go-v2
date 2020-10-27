@@ -11,8 +11,8 @@ import (
 )
 
 // Deletes the organization. You can delete an organization only by using
-// credentials from the master account. The organization must be empty of member
-// accounts.
+// credentials from the management account. The organization must be empty of
+// member accounts.
 func (c *Client) DeleteOrganization(ctx context.Context, params *DeleteOrganizationInput, optFns ...func(*Options)) (*DeleteOrganizationOutput, error) {
 	if params == nil {
 		params = &DeleteOrganizationInput{}

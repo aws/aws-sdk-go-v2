@@ -12,7 +12,7 @@ import (
 )
 
 // Gets the status of the specified portfolio share operation. This API can only be
-// called by the master account in the organization or by a delegated admin.
+// called by the management account in the organization or by a delegated admin.
 func (c *Client) DescribePortfolioShareStatus(ctx context.Context, params *DescribePortfolioShareStatusInput, optFns ...func(*Options)) (*DescribePortfolioShareStatusOutput, error) {
 	if params == nil {
 		params = &DescribePortfolioShareStatusInput{}

@@ -10,6 +10,58 @@ const (
 	AccessPropertyValueDeny  AccessPropertyValue = "DENY"
 )
 
+// Values returns all known values for AccessPropertyValue. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AccessPropertyValue) Values() []AccessPropertyValue {
+	return []AccessPropertyValue{
+		"ALLOW",
+		"DENY",
+	}
+}
+
+type Application string
+
+// Enum values for Application
+const (
+	ApplicationMicrosoft_office_2016 Application = "Microsoft_Office_2016"
+	ApplicationMicrosoft_office_2019 Application = "Microsoft_Office_2019"
+)
+
+// Values returns all known values for Application. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Application) Values() []Application {
+	return []Application{
+		"Microsoft_Office_2016",
+		"Microsoft_Office_2019",
+	}
+}
+
+type AssociationStatus string
+
+// Enum values for AssociationStatus
+const (
+	AssociationStatusNot_associated                 AssociationStatus = "NOT_ASSOCIATED"
+	AssociationStatusAssociated_with_owner_account  AssociationStatus = "ASSOCIATED_WITH_OWNER_ACCOUNT"
+	AssociationStatusAssociated_with_shared_account AssociationStatus = "ASSOCIATED_WITH_SHARED_ACCOUNT"
+	AssociationStatusPending_association            AssociationStatus = "PENDING_ASSOCIATION"
+	AssociationStatusPending_disassociation         AssociationStatus = "PENDING_DISASSOCIATION"
+)
+
+// Values returns all known values for AssociationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AssociationStatus) Values() []AssociationStatus {
+	return []AssociationStatus{
+		"NOT_ASSOCIATED",
+		"ASSOCIATED_WITH_OWNER_ACCOUNT",
+		"ASSOCIATED_WITH_SHARED_ACCOUNT",
+		"PENDING_ASSOCIATION",
+		"PENDING_DISASSOCIATION",
+	}
+}
+
 type Compute string
 
 // Enum values for Compute
@@ -23,6 +75,41 @@ const (
 	ComputeGraphicspro Compute = "GRAPHICSPRO"
 )
 
+// Values returns all known values for Compute. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Compute) Values() []Compute {
+	return []Compute{
+		"VALUE",
+		"STANDARD",
+		"PERFORMANCE",
+		"POWER",
+		"GRAPHICS",
+		"POWERPRO",
+		"GRAPHICSPRO",
+	}
+}
+
+type ConnectionAliasState string
+
+// Enum values for ConnectionAliasState
+const (
+	ConnectionAliasStateCreating ConnectionAliasState = "CREATING"
+	ConnectionAliasStateCreated  ConnectionAliasState = "CREATED"
+	ConnectionAliasStateDeleting ConnectionAliasState = "DELETING"
+)
+
+// Values returns all known values for ConnectionAliasState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionAliasState) Values() []ConnectionAliasState {
+	return []ConnectionAliasState{
+		"CREATING",
+		"CREATED",
+		"DELETING",
+	}
+}
+
 type ConnectionState string
 
 // Enum values for ConnectionState
@@ -31,6 +118,17 @@ const (
 	ConnectionStateDisconnected ConnectionState = "DISCONNECTED"
 	ConnectionStateUnknown      ConnectionState = "UNKNOWN"
 )
+
+// Values returns all known values for ConnectionState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionState) Values() []ConnectionState {
+	return []ConnectionState{
+		"CONNECTED",
+		"DISCONNECTED",
+		"UNKNOWN",
+	}
+}
 
 type DedicatedTenancyModificationStateEnum string
 
@@ -41,12 +139,33 @@ const (
 	DedicatedTenancyModificationStateEnumFailed    DedicatedTenancyModificationStateEnum = "FAILED"
 )
 
+// Values returns all known values for DedicatedTenancyModificationStateEnum. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (DedicatedTenancyModificationStateEnum) Values() []DedicatedTenancyModificationStateEnum {
+	return []DedicatedTenancyModificationStateEnum{
+		"PENDING",
+		"COMPLETED",
+		"FAILED",
+	}
+}
+
 type DedicatedTenancySupportEnum string
 
 // Enum values for DedicatedTenancySupportEnum
 const (
 	DedicatedTenancySupportEnumEnabled DedicatedTenancySupportEnum = "ENABLED"
 )
+
+// Values returns all known values for DedicatedTenancySupportEnum. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DedicatedTenancySupportEnum) Values() []DedicatedTenancySupportEnum {
+	return []DedicatedTenancySupportEnum{
+		"ENABLED",
+	}
+}
 
 type DedicatedTenancySupportResultEnum string
 
@@ -56,6 +175,17 @@ const (
 	DedicatedTenancySupportResultEnumDisabled DedicatedTenancySupportResultEnum = "DISABLED"
 )
 
+// Values returns all known values for DedicatedTenancySupportResultEnum. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (DedicatedTenancySupportResultEnum) Values() []DedicatedTenancySupportResultEnum {
+	return []DedicatedTenancySupportResultEnum{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type ImageType string
 
 // Enum values for ImageType
@@ -63,6 +193,16 @@ const (
 	ImageTypeOwned  ImageType = "OWNED"
 	ImageTypeShared ImageType = "SHARED"
 )
+
+// Values returns all known values for ImageType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (ImageType) Values() []ImageType {
+	return []ImageType{
+		"OWNED",
+		"SHARED",
+	}
+}
 
 type ModificationResourceEnum string
 
@@ -73,6 +213,17 @@ const (
 	ModificationResourceEnumCompute_type ModificationResourceEnum = "COMPUTE_TYPE"
 )
 
+// Values returns all known values for ModificationResourceEnum. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ModificationResourceEnum) Values() []ModificationResourceEnum {
+	return []ModificationResourceEnum{
+		"ROOT_VOLUME",
+		"USER_VOLUME",
+		"COMPUTE_TYPE",
+	}
+}
+
 type ModificationStateEnum string
 
 // Enum values for ModificationStateEnum
@@ -80,6 +231,16 @@ const (
 	ModificationStateEnumUpdate_initiated   ModificationStateEnum = "UPDATE_INITIATED"
 	ModificationStateEnumUpdate_in_progress ModificationStateEnum = "UPDATE_IN_PROGRESS"
 )
+
+// Values returns all known values for ModificationStateEnum. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ModificationStateEnum) Values() []ModificationStateEnum {
+	return []ModificationStateEnum{
+		"UPDATE_INITIATED",
+		"UPDATE_IN_PROGRESS",
+	}
+}
 
 type OperatingSystemType string
 
@@ -89,6 +250,16 @@ const (
 	OperatingSystemTypeLinux   OperatingSystemType = "LINUX"
 )
 
+// Values returns all known values for OperatingSystemType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OperatingSystemType) Values() []OperatingSystemType {
+	return []OperatingSystemType{
+		"WINDOWS",
+		"LINUX",
+	}
+}
+
 type ReconnectEnum string
 
 // Enum values for ReconnectEnum
@@ -96,6 +267,16 @@ const (
 	ReconnectEnumEnabled  ReconnectEnum = "ENABLED"
 	ReconnectEnumDisabled ReconnectEnum = "DISABLED"
 )
+
+// Values returns all known values for ReconnectEnum. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReconnectEnum) Values() []ReconnectEnum {
+	return []ReconnectEnum{
+		"ENABLED",
+		"DISABLED",
+	}
+}
 
 type RunningMode string
 
@@ -105,6 +286,16 @@ const (
 	RunningModeAlways_on RunningMode = "ALWAYS_ON"
 )
 
+// Values returns all known values for RunningMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (RunningMode) Values() []RunningMode {
+	return []RunningMode{
+		"AUTO_STOP",
+		"ALWAYS_ON",
+	}
+}
+
 type TargetWorkspaceState string
 
 // Enum values for TargetWorkspaceState
@@ -113,6 +304,16 @@ const (
 	TargetWorkspaceStateAdmin_maintenance TargetWorkspaceState = "ADMIN_MAINTENANCE"
 )
 
+// Values returns all known values for TargetWorkspaceState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TargetWorkspaceState) Values() []TargetWorkspaceState {
+	return []TargetWorkspaceState{
+		"AVAILABLE",
+		"ADMIN_MAINTENANCE",
+	}
+}
+
 type Tenancy string
 
 // Enum values for Tenancy
@@ -120,6 +321,16 @@ const (
 	TenancyDedicated Tenancy = "DEDICATED"
 	TenancyShared    Tenancy = "SHARED"
 )
+
+// Values returns all known values for Tenancy. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Tenancy) Values() []Tenancy {
+	return []Tenancy{
+		"DEDICATED",
+		"SHARED",
+	}
+}
 
 type WorkspaceDirectoryState string
 
@@ -132,6 +343,19 @@ const (
 	WorkspaceDirectoryStateError         WorkspaceDirectoryState = "ERROR"
 )
 
+// Values returns all known values for WorkspaceDirectoryState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WorkspaceDirectoryState) Values() []WorkspaceDirectoryState {
+	return []WorkspaceDirectoryState{
+		"REGISTERING",
+		"REGISTERED",
+		"DEREGISTERING",
+		"DEREGISTERED",
+		"ERROR",
+	}
+}
+
 type WorkspaceDirectoryType string
 
 // Enum values for WorkspaceDirectoryType
@@ -139,6 +363,16 @@ const (
 	WorkspaceDirectoryTypeSimple_ad    WorkspaceDirectoryType = "SIMPLE_AD"
 	WorkspaceDirectoryTypeAd_connector WorkspaceDirectoryType = "AD_CONNECTOR"
 )
+
+// Values returns all known values for WorkspaceDirectoryType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WorkspaceDirectoryType) Values() []WorkspaceDirectoryType {
+	return []WorkspaceDirectoryType{
+		"SIMPLE_AD",
+		"AD_CONNECTOR",
+	}
+}
 
 type WorkspaceImageIngestionProcess string
 
@@ -149,6 +383,18 @@ const (
 	WorkspaceImageIngestionProcessByol_graphicspro WorkspaceImageIngestionProcess = "BYOL_GRAPHICSPRO"
 )
 
+// Values returns all known values for WorkspaceImageIngestionProcess. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (WorkspaceImageIngestionProcess) Values() []WorkspaceImageIngestionProcess {
+	return []WorkspaceImageIngestionProcess{
+		"BYOL_REGULAR",
+		"BYOL_GRAPHICS",
+		"BYOL_GRAPHICSPRO",
+	}
+}
+
 type WorkspaceImageRequiredTenancy string
 
 // Enum values for WorkspaceImageRequiredTenancy
@@ -156,6 +402,17 @@ const (
 	WorkspaceImageRequiredTenancyDefault   WorkspaceImageRequiredTenancy = "DEFAULT"
 	WorkspaceImageRequiredTenancyDedicated WorkspaceImageRequiredTenancy = "DEDICATED"
 )
+
+// Values returns all known values for WorkspaceImageRequiredTenancy. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (WorkspaceImageRequiredTenancy) Values() []WorkspaceImageRequiredTenancy {
+	return []WorkspaceImageRequiredTenancy{
+		"DEFAULT",
+		"DEDICATED",
+	}
+}
 
 type WorkspaceImageState string
 
@@ -165,6 +422,17 @@ const (
 	WorkspaceImageStatePending   WorkspaceImageState = "PENDING"
 	WorkspaceImageStateError     WorkspaceImageState = "ERROR"
 )
+
+// Values returns all known values for WorkspaceImageState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WorkspaceImageState) Values() []WorkspaceImageState {
+	return []WorkspaceImageState{
+		"AVAILABLE",
+		"PENDING",
+		"ERROR",
+	}
+}
 
 type WorkspaceState string
 
@@ -188,3 +456,28 @@ const (
 	WorkspaceStateStopped           WorkspaceState = "STOPPED"
 	WorkspaceStateError             WorkspaceState = "ERROR"
 )
+
+// Values returns all known values for WorkspaceState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WorkspaceState) Values() []WorkspaceState {
+	return []WorkspaceState{
+		"PENDING",
+		"AVAILABLE",
+		"IMPAIRED",
+		"UNHEALTHY",
+		"REBOOTING",
+		"STARTING",
+		"REBUILDING",
+		"RESTORING",
+		"MAINTENANCE",
+		"ADMIN_MAINTENANCE",
+		"TERMINATING",
+		"TERMINATED",
+		"SUSPENDED",
+		"UPDATING",
+		"STOPPING",
+		"STOPPED",
+		"ERROR",
+	}
+}

@@ -55,6 +55,10 @@ type UpdateCrawlerInput struct {
 	// A description of the new crawler.
 	Description *string
 
+	// A policy that specifies whether to crawl the entire dataset again, or to crawl
+	// only folders that were added since the last crawler run.
+	RecrawlPolicy *types.RecrawlPolicy
+
 	// The IAM role or Amazon Resource Name (ARN) of an IAM role that is used by the
 	// new crawler to access customer resources.
 	Role *string

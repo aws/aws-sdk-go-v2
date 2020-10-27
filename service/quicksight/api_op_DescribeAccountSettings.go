@@ -12,7 +12,7 @@ import (
 )
 
 // Describes the settings that were used when your QuickSight subscription was
-// first created in this AWS Account.
+// first created in this AWS account.
 func (c *Client) DescribeAccountSettings(ctx context.Context, params *DescribeAccountSettingsInput, optFns ...func(*Options)) (*DescribeAccountSettingsOutput, error) {
 	if params == nil {
 		params = &DescribeAccountSettingsInput{}
@@ -30,8 +30,7 @@ func (c *Client) DescribeAccountSettings(ctx context.Context, params *DescribeAc
 
 type DescribeAccountSettingsInput struct {
 
-	// The ID for the AWS account that contains the QuickSight namespaces that you want
-	// to list.
+	// The ID for the AWS account that contains the settings that you want to list.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -39,16 +38,20 @@ type DescribeAccountSettingsInput struct {
 
 type DescribeAccountSettingsOutput struct {
 
-	// The settings associated with the QuickSight subscription associated with this
-	// AWS account. This information includes the edition of Amazon QuickSight that you
-	// subscribed to (Standard or Enterprise) and the notification email for the
-	// QuickSight subscription. The QuickSight console, the QuickSight subscription is
-	// sometimes referred to as a QuickSight "account" even though it is technically
-	// not an account, but a subscription in your AWS account.
+	// The QuickSight settings for this AWS account. This information includes the
+	// edition of Amazon QuickSight that you subscribed to (Standard or Enterprise) and
+	// the notification email for the QuickSight subscription. In the QuickSight
+	// console, the QuickSight subscription is sometimes referred to as a QuickSight
+	// "account" even though it's technically not an account by itself. Instead, it's a
+	// subscription to the QuickSight service for your AWS account. The edition that
+	// you subscribe to applies to QuickSight in every AWS Region where you use it.
 	AccountSettings *types.AccountSettings
 
 	// The AWS request ID for this operation.
 	RequestId *string
+
+	// The HTTP status of the request.
+	Status *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

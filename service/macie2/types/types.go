@@ -42,8 +42,8 @@ type AccountLevelPermissions struct {
 	BlockPublicAccess *BlockPublicAccess
 }
 
-// Provides information about an account that's designated as a delegated
-// administrator of Amazon Macie for an AWS organization.
+// Provides information about the delegated Amazon Macie administrator account for
+// an AWS organization.
 type AdminAccount struct {
 
 	// The AWS account ID for the account.
@@ -181,6 +181,11 @@ type BucketCountByEffectivePermission struct {
 	// The total number of buckets that allow the general public to have write access
 	// to the bucket.
 	PubliclyWritable *int64
+
+	// The total number of buckets that Amazon Macie wasn't able to evaluate
+	// permissions settings for. Macie can't determine whether these buckets are
+	// publicly accessible.
+	Unknown *int64
 }
 
 // Provides information about the number of S3 buckets that use certain types of
@@ -214,8 +219,13 @@ type BucketCountBySharedAccessType struct {
 	// the same Amazon Macie organization.
 	Internal *int64
 
-	// The total number of buckets that aren't shared with any other AWS accounts.
+	// The total number of buckets that aren't shared with other AWS accounts.
 	NotShared *int64
+
+	// The total number of buckets that Amazon Macie wasn't able to evaluate shared
+	// access settings for. Macie can't determine whether these buckets are shared with
+	// other AWS accounts.
+	Unknown *int64
 }
 
 // Specifies the operator to use in an attribute-based condition that filters the
@@ -246,7 +256,8 @@ type BucketCriteriaAdditionalProperties struct {
 	Prefix *string
 }
 
-// Provides information about bucket-level permissions settings for an S3 bucket.
+// Provides information about the bucket-level permissions settings for an S3
+// bucket.
 type BucketLevelPermissions struct {
 
 	// The permissions settings of the access control list (ACL) for the bucket. This
@@ -264,7 +275,7 @@ type BucketLevelPermissions struct {
 // Provides information about an S3 bucket that Amazon Macie monitors and analyzes.
 type BucketMetadata struct {
 
-	// The unique identifier for the AWS account that's associated with the bucket.
+	// The unique identifier for the AWS account that owns the bucket.
 	AccountId *string
 
 	// The Amazon Resource Name (ARN) of the bucket.
@@ -278,12 +289,17 @@ type BucketMetadata struct {
 	BucketName *string
 
 	// The total number of objects that Amazon Macie can analyze in the bucket. These
-	// objects use a file format, file extension, or content type that Amazon Macie
-	// supports.
+	// objects use a supported storage class and have a file name extension for a
+	// supported file or storage format.
 	ClassifiableObjectCount *int64
 
-	// The date and time, in UTC and extended ISO 8601 format, when Amazon Macie last
-	// analyzed the bucket.
+	// The total storage size, in bytes, of the objects that Amazon Macie can analyze
+	// in the bucket. These objects use a supported storage class and have a file name
+	// extension for a supported file or storage format.
+	ClassifiableSizeInBytes *int64
+
+	// The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most
+	// recently retrieved data about the bucket from Amazon S3.
 	LastUpdated *time.Time
 
 	// The total number of objects in the bucket.
@@ -306,10 +322,10 @@ type BucketMetadata struct {
 	// buckets for other AWS accounts and, if so, which accounts.
 	ReplicationDetails *ReplicationDetails
 
-	// Specifies whether the bucket is shared with another AWS account. Valid values
+	// Specifies whether the bucket is shared with another AWS account. Possible values
 	// are:
 	//
-	//     * EXTERNAL - The bucket is shared with an AWS account that isn’t part
+	//     * EXTERNAL - The bucket is shared with an AWS account that isn't part
 	// of the same Amazon Macie organization.
 	//
 	//     * INTERNAL - The bucket is shared
@@ -317,6 +333,9 @@ type BucketMetadata struct {
 	//
 	//     *
 	// NOT_SHARED - The bucket isn't shared with other AWS accounts.
+	//
+	//     * UNKNOWN -
+	// Amazon Macie wasn't able to evaluate the shared access settings for the bucket.
 	SharedAccess SharedAccess
 
 	// The total storage size, in bytes, of the bucket.
@@ -329,11 +348,22 @@ type BucketMetadata struct {
 	// bucket.
 	Tags []*KeyValuePair
 
+	// The total number of objects that Amazon Macie can't analyze in the bucket. These
+	// objects don't use a supported storage class or don't have a file name extension
+	// for a supported file or storage format.
+	UnclassifiableObjectCount *ObjectLevelStatistics
+
+	// The total storage size, in bytes, of the objects that Amazon Macie can't analyze
+	// in the bucket. These objects don't use a supported storage class or don't have a
+	// file name extension for a supported file or storage format.
+	UnclassifiableObjectSizeInBytes *ObjectLevelStatistics
+
 	// Specifies whether versioning is enabled for the bucket.
 	Versioning *bool
 }
 
-// The account-level and bucket-level permissions settings for an S3 bucket.
+// Provides information about the account-level and bucket-level permissions
+// settings for an S3 bucket.
 type BucketPermissionConfiguration struct {
 
 	// The account-level permissions settings that apply to the bucket.
@@ -356,14 +386,21 @@ type BucketPolicy struct {
 	AllowsPublicWriteAccess *bool
 }
 
-// Provides information about permissions settings that determine whether an S3
+// Provides information about the permissions settings that determine whether an S3
 // bucket is publicly accessible.
 type BucketPublicAccess struct {
 
 	// Specifies whether the bucket is publicly accessible due to the combination of
-	// permissions settings that apply to the bucket. Possible values are: PUBLIC, the
-	// bucket is publicly accessible; and, NOT_PUBLIC, the bucket isn't publicly
-	// accessible.
+	// permissions settings that apply to the bucket. Possible values are:
+	//
+	//     *
+	// NOT_PUBLIC - The bucket isn't publicly accessible.
+	//
+	//     * PUBLIC - The bucket is
+	// publicly accessible.
+	//
+	//     * UNKNOWN - Amazon Macie can't determine whether the
+	// bucket is publicly accessible.
 	EffectivePermission EffectivePermission
 
 	// The account-level and bucket-level permissions for the bucket.
@@ -375,8 +412,8 @@ type BucketPublicAccess struct {
 type BucketSortCriteria struct {
 
 	// The name of the attribute to sort the results by. This value can be the name of
-	// any property that Amazon Macie defines as bucket metadata, such as bucketName,
-	// accountId, or lastUpdated.
+	// any property that Amazon Macie defines as bucket metadata, such as bucketName or
+	// accountId.
 	AttributeName *string
 
 	// The sort order to apply to the results, based on the value for the property
@@ -385,12 +422,35 @@ type BucketSortCriteria struct {
 	OrderBy OrderBy
 }
 
+// Specifies the location of an occurrence of sensitive data in a Microsoft Excel
+// workbook, CSV file, or TSV file.
+type Cell struct {
+
+	// The location of the cell, as an absolute cell reference, that contains the data.
+	// For example, Sheet2!C5 for cell C5 on Sheet2 in a Microsoft Excel workbook. This
+	// value is null for CSV and TSV files.
+	CellReference *string
+
+	// The column number of the column that contains the data. For a Microsoft Excel
+	// workbook, this value correlates to the alphabetical character(s) for a column
+	// identifier. For example, 1 for column A, 2 for column B, and so on.
+	Column *int64
+
+	// The name of the column that contains the data, if available.
+	ColumnName *string
+
+	// The row number of the row that contains the data.
+	Row *int64
+}
+
 // Provides information about a sensitive data finding, including the
 // classification job that produced the finding.
 type ClassificationDetails struct {
 
-	// The Amazon Resource Name (ARN) of the file that contains the detailed record,
-	// including offsets, for the finding.
+	// The path to the folder or file (in Amazon S3) that contains the corresponding
+	// sensitive data discovery result for the finding. If a finding applies to a large
+	// archive or compressed file, this value is the path to a folder. Otherwise, this
+	// value is the path to a file.
 	DetailedResultsLocation *string
 
 	// The Amazon Resource Name (ARN) of the classification job that produced the
@@ -400,7 +460,7 @@ type ClassificationDetails struct {
 	// The unique identifier for the classification job that produced the finding.
 	JobId *string
 
-	// The status and detailed results of the finding.
+	// The status and other details for the finding.
 	Result *ClassificationResult
 }
 
@@ -414,21 +474,29 @@ type ClassificationExportConfiguration struct {
 	S3Destination *S3Destination
 }
 
-// Provides detailed information about a sensitive data finding, including the
-// types and number of occurrences of the sensitive data that was found.
+// Provides the details of a sensitive data finding, including the types, number of
+// occurrences, and locations of the sensitive data that was detected.
 type ClassificationResult struct {
 
-	// The number of occurrences of the data that produced the finding, and the custom
-	// data identifiers that detected the data.
+	// Specifies whether Amazon Macie detected additional occurrences of sensitive data
+	// in the S3 object. A finding includes location data for a maximum of 15
+	// occurrences of sensitive data. This value can help you to determine whether to
+	// investigate additional occurrences of sensitive data in an object. You can do
+	// this by referring to the corresponding sensitive data discovery result for the
+	// finding (ClassificationDetails.detailedResultsLocation).
+	AdditionalOccurrences *bool
+
+	// The custom data identifiers that detected the sensitive data and the number of
+	// occurrences of the data that they detected.
 	CustomDataIdentifiers *CustomDataIdentifiers
 
-	// The type of content, expressed as a MIME type, that the finding applies to. For
-	// example, application/gzip, for a GNU Gzip compressed archive file, or
-	// application/pdf, for an Adobe PDF file.
+	// The type of content, as a MIME type, that the finding applies to. For example,
+	// application/gzip, for a GNU Gzip compressed archive file, or application/pdf,
+	// for an Adobe Portable Document Format file.
 	MimeType *string
 
-	// The category and number of occurrences of the sensitive data that produced the
-	// finding.
+	// The category, types, and number of occurrences of the sensitive data that
+	// produced the finding.
 	SensitiveData []*SensitiveDataItem
 
 	// The total size, in bytes, of the data that the finding applies to.
@@ -441,7 +509,19 @@ type ClassificationResult struct {
 // Provides information about the status of a sensitive data finding.
 type ClassificationResultStatus struct {
 
-	// The status of the finding, such as COMPLETE.
+	// The status of the finding. Possible values are:
+	//
+	//     * COMPLETE - Amazon Macie
+	// successfully completed its analysis of the object that the finding applies to.
+	//
+	//
+	// * PARTIAL - Macie was able to analyze only a subset of the data in the object
+	// that the finding applies to. For example, the object is a compressed or archive
+	// file that contains files in an unsupported format.
+	//
+	//     * SKIPPED - Macie wasn't
+	// able to analyze the object that the finding applies to. For example, the object
+	// is a malformed file or a file that uses an unsupported format.
 	Code *string
 
 	// A brief description of the status of the finding. Amazon Macie uses this value
@@ -475,9 +555,9 @@ type CriterionAdditionalProperties struct {
 	Neq []*string
 }
 
-// Provides information about the number of occurrences of the data that produced a
-// sensitive data finding, and the custom data identifiers that detected the data
-// for the finding.
+// Provides information about custom data identifiers that produced a sensitive
+// data finding, and the number of occurrences of the data that they detected for
+// the finding.
 type CustomDataIdentifiers struct {
 
 	// The custom data identifiers that detected the data, and the number of
@@ -510,19 +590,23 @@ type CustomDataIdentifierSummary struct {
 }
 
 // Provides information about a custom data identifier that produced a sensitive
-// data finding, and the number of occurrences of the data that it detected for the
-// finding.
+// data finding, and the sensitive data that it detected for the finding.
 type CustomDetection struct {
 
 	// The Amazon Resource Name (ARN) of the custom data identifier.
 	Arn *string
 
-	// The total number of occurrences of the data that the custom data identifier
-	// detected for the finding.
+	// The total number of occurrences of the sensitive data that the custom data
+	// identifier detected.
 	Count *int64
 
 	// The name of the custom data identifier.
 	Name *string
+
+	// The location of 1-15 occurrences of the sensitive data that the custom data
+	// identifier detected. A finding includes location data for a maximum of 15
+	// occurrences of sensitive data.
+	Occurrences *Occurrences
 }
 
 // Specifies that a classification job runs once a day, every day. This is an empty
@@ -530,15 +614,20 @@ type CustomDetection struct {
 type DailySchedule struct {
 }
 
-// Provides information about sensitive data that was detected by managed data
-// identifiers and produced a sensitive data finding.
+// Provides information about a type of sensitive data that was detected by managed
+// data identifiers and produced a sensitive data finding.
 type DefaultDetection struct {
 
-	// The total number of occurrences of the type of data that was detected.
+	// The total number of occurrences of the type of sensitive data that was detected.
 	Count *int64
 
-	// The type of data that was detected. For example, AWS_CREDENTIALS, PHONE_NUMBER,
-	// or ADDRESS.
+	// The location of 1-15 occurrences of the sensitive data that was detected. A
+	// finding includes location data for a maximum of 15 occurrences of sensitive
+	// data.
+	Occurrences *Occurrences
+
+	// The type of sensitive data that was detected. For example, AWS_CREDENTIALS,
+	// PHONE_NUMBER, or ADDRESS.
 	Type *string
 }
 
@@ -575,7 +664,7 @@ type FederatedUser struct {
 	SessionContext *SessionContext
 }
 
-// Provides information about a finding.
+// Provides the details of a finding.
 type Finding struct {
 
 	// The unique identifier for the AWS account that the finding applies to. This is
@@ -593,7 +682,7 @@ type Finding struct {
 	// finding.
 	ClassificationDetails *ClassificationDetails
 
-	// The total number of occurrences of this finding.
+	// The total number of occurrences of the finding.
 	Count *int64
 
 	// The date and time, in UTC and extended ISO 8601 format, when the finding was
@@ -628,7 +717,7 @@ type Finding struct {
 	// finding.
 	SchemaVersion *string
 
-	// The severity of the finding.
+	// The severity level and score for the finding.
 	Severity *Severity
 
 	// The brief description of the finding.
@@ -639,7 +728,8 @@ type Finding struct {
 
 	// The date and time, in UTC and extended ISO 8601 format, when the finding was
 	// last updated. For sensitive data findings, this value is the same as the value
-	// for the createdAt property. Sensitive data findings aren't updated.
+	// for the createdAt property. All sensitive data findings are considered new
+	// (unique) because they derive from individual classification jobs.
 	UpdatedAt *time.Time
 }
 
@@ -861,13 +951,15 @@ type JobScopeTerm struct {
 	// values for including or excluding an object from the job.
 	SimpleScopeTerm *SimpleScopeTerm
 
-	// A tag-based condition that defines the operator and a tag key or tag keys and
-	// values for including or excluding an object from the job.
+	// A tag-based condition that defines the operator and tag keys or tag key and
+	// value pairs for including or excluding an object from the job.
 	TagScopeTerm *TagScopeTerm
 }
 
 // Specifies one or more property- and tag-based conditions that define criteria
-// for including or excluding objects from a classification job.
+// for including or excluding objects from a classification job. If you specify
+// more than one condition, Amazon Macie uses an AND operator to join the
+// conditions.
 type JobScopingBlock struct {
 
 	// An array of conditions, one for each condition that determines which objects to
@@ -891,37 +983,46 @@ type JobSummary struct {
 
 	// The current status of the job. Possible values are:
 	//
-	//     * CANCELLED - The job
-	// was cancelled by you or a user of the master account for your organization. A
-	// job might also be cancelled if ownership of an S3 bucket changed while the job
-	// was running, and that change affected the job's access to the bucket.
+	//     * CANCELLED - You
+	// cancelled the job, or you paused the job and didn't resume it within 30 days of
+	// pausing it.
+	//
+	//     * COMPLETE - For a one-time job, Amazon Macie finished
+	// processing all the data specified for the job. This value doesn't apply to
+	// recurring jobs.
+	//
+	//     * IDLE - For a recurring job, the previous scheduled run is
+	// complete and the next scheduled run is pending. This value doesn't apply to
+	// one-time jobs.
+	//
+	//     * PAUSED - Amazon Macie started running the job but
+	// completion of the job would exceed one or more quotas for your account.
 	//
 	//     *
-	// COMPLETE - Amazon Macie finished processing all the data specified for the
-	// job.
+	// RUNNING - For a one-time job, the job is in progress. For a recurring job, a
+	// scheduled run is in progress.
 	//
-	//     * IDLE - For a recurring job, the previous scheduled run is complete
-	// and the next scheduled run is pending. This value doesn't apply to jobs that
-	// occur only once.
-	//
-	//     * PAUSED - Amazon Macie started the job, but completion of
-	// the job would exceed one or more quotas for your account.
-	//
-	//     * RUNNING - The
-	// job is in progress.
+	//     * USER_PAUSED - You paused the job. If you
+	// don't resume the job within 30 days of pausing it, the job will expire and be
+	// cancelled.
 	JobStatus JobStatus
 
 	// The schedule for running the job. Possible values are:
 	//
 	//     * ONE_TIME - The job
-	// ran or will run only once.
+	// runs only once.
 	//
-	//     * SCHEDULED - The job runs on a daily, weekly,
-	// or monthly basis.
+	//     * SCHEDULED - The job runs on a daily, weekly, or monthly
+	// basis.
 	JobType JobType
 
 	// The custom name of the job.
 	Name *string
+
+	// If the current status of the job is USER_PAUSED, specifies when the job was
+	// paused and when the job will expire and be cancelled if it isn't resumed. This
+	// value is present only if the value for jobStatus is USER_PAUSED.
+	UserPausedDetails *UserPausedDetails
 }
 
 // Provides information about the tags that are associated with an S3 bucket or
@@ -1017,7 +1118,10 @@ type Member struct {
 type MonthlySchedule struct {
 
 	// The numeric day of the month when Amazon Macie runs the job. This value can be
-	// an integer from 1 through 30.
+	// an integer from 1 through 31. If this value exceeds the number of days in a
+	// certain month, Macie runs the job on the last day of that month. For example, if
+	// this value is 31 and a month has only 30 days, Macie runs the job on day 30 of
+	// that month.
 	DayOfMonth *int32
 }
 
@@ -1043,6 +1147,81 @@ type ObjectCountByEncryptionType struct {
 	Unencrypted *int64
 }
 
+// Provides information about the total storage size (in bytes) or number of
+// objects that Amazon Macie can't analyze in one or more S3 buckets. In a
+// BucketMetadata object, this data is for a specific bucket. In a
+// GetBucketStatisticsResponse object, this data is aggregated for all the buckets
+// in the query results.
+type ObjectLevelStatistics struct {
+
+	// The total storage size (in bytes) or number of objects that Amazon Macie can't
+	// analyze because the objects don't have a file name extension for a supported
+	// file or storage format.
+	FileType *int64
+
+	// The total storage size (in bytes) or number of objects that Amazon Macie can't
+	// analyze because the objects use an unsupported storage class.
+	StorageClass *int64
+
+	// The total storage size (in bytes) or number of objects that Amazon Macie can't
+	// analyze because the objects use an unsupported storage class or don't have a
+	// file name extension for a supported file or storage format.
+	Total *int64
+}
+
+// Provides the location of 1-15 occurrences of sensitive data that was detected by
+// managed data identifiers or a custom data identifier and produced a sensitive
+// data finding.
+type Occurrences struct {
+
+	// An array of objects, one for each occurrence of sensitive data in a Microsoft
+	// Excel workbook, CSV file, or TSV file. Each object specifies the cell that
+	// contains the data. This value is null for all other types of files.
+	Cells []*Cell
+
+	// An array of objects, one for each occurrence of sensitive data in an Apache Avro
+	// object container, Microsoft Word document, or non-binary text file, such as an
+	// HTML, JSON, TXT, or XML file. Each object specifies the line that contains the
+	// data, and the position of the data on that line. This value is often null for
+	// file types that are supported by Cell, Page, or Record objects. Exceptions are
+	// the locations of: full names and addresses in a Microsoft Excel workbook, CSV
+	// file, or TSV file; data in unstructured sections of an otherwise structured
+	// file, such as a comment in a file; and, data in a malformed file that Amazon
+	// Macie analyzes as plain text.
+	LineRanges []*Range
+
+	// An array of objects, one for each occurrence of sensitive data in a binary text
+	// file. Each object specifies the position of the data relative to the beginning
+	// of the file. This value is typically null. For binary text files, Macie adds
+	// location data to a lineRanges.Range or Page object, depending on the file type.
+	OffsetRanges []*Range
+
+	// An array of objects, one for each occurrence of sensitive data in an Adobe
+	// Portable Document Format file. Each object specifies the page that contains the
+	// data, and the position of the data on that page. This value is null for all
+	// other types of files.
+	Pages []*Page
+
+	// An array of objects, one for each occurrence of sensitive data in an Apache
+	// Parquet file. Each object specifies the row that contains the data. This value
+	// is null for all other types of files.
+	Records []*Record
+}
+
+// Specifies the location of an occurrence of sensitive data in an Adobe Portable
+// Document Format file.
+type Page struct {
+
+	// The line that contains the data, and the position of the data on that line.
+	LineRange *Range
+
+	// The position of the data on the page, relative to the beginning of the page.
+	OffsetRange *Range
+
+	// The page number of the page that contains the data.
+	PageNumber *int64
+}
+
 // Provides the details of a policy finding.
 type PolicyDetails struct {
 
@@ -1051,6 +1230,52 @@ type PolicyDetails struct {
 
 	// The entity that performed the action that produced the finding.
 	Actor *FindingActor
+}
+
+// Provides details about the location of an occurrence of sensitive data in an
+// Adobe Portable Document Format file, Apache Avro object container, Microsoft
+// Word document, or non-binary text file.
+type Range struct {
+
+	// Possible values are:
+	//
+	//     * In an Occurrences.lineRanges array, the number of
+	// lines from the beginning of the file to the end of the sensitive data.
+	//
+	//     * In
+	// an Occurrences.offsetRanges array, the number of characters from the beginning
+	// of the file to the end of the sensitive data.
+	//
+	//     * In a Page object, the
+	// number of lines (lineRange) or characters (offsetRange) from the beginning of
+	// the page to the end of the sensitive data.
+	End *int64
+
+	// Possible values are:
+	//
+	//     * In an Occurrences.lineRanges array, the number of
+	// lines from the beginning of the file to the beginning of the sensitive data.
+	//
+	//
+	// * In an Occurrences.offsetRanges array, the number of characters from the
+	// beginning of the file to the beginning of the sensitive data.
+	//
+	//     * In a Page
+	// object, the number of lines (lineRange) or characters (offsetRange) from the
+	// beginning of the page to the beginning of the sensitive data.
+	Start *int64
+
+	// The column number for the column that contains the data, if the file contains
+	// structured data.
+	StartColumn *int64
+}
+
+// Specifies the location of an occurrence of sensitive data in an Apache Parquet
+// file.
+type Record struct {
+
+	// The row index, starting from 0, for the row that contains the data.
+	RecordIndex *int64
 }
 
 // Provides information about settings that define whether one or more objects in
@@ -1063,7 +1288,7 @@ type ReplicationDetails struct {
 	Replicated *bool
 
 	// Specifies whether the bucket is configured to replicate one or more objects to
-	// an AWS account that isn't part of the Amazon Macie organization.
+	// an AWS account that isn't part of the same Amazon Macie organization.
 	ReplicatedExternally *bool
 
 	// An array of AWS account IDs, one for each AWS account that the bucket is
@@ -1093,7 +1318,8 @@ type S3Bucket struct {
 	// created.
 	CreatedAt *time.Time
 
-	// The server-side encryption settings for the bucket.
+	// The type of server-side encryption that's used by default to encrypt objects in
+	// the bucket.
 	DefaultServerSideEncryption *ServerSideEncryption
 
 	// The name of the bucket.
@@ -1177,8 +1403,8 @@ type S3Object struct {
 	// value might be different from the current ETag for the object.
 	ETag *string
 
-	// The file extension of the object. If the object doesn't have a file extension,
-	// this value is "".
+	// The file name extension of the object. If the object doesn't have a file name
+	// extension, this value is "".
 	Extension *string
 
 	// The full key (name) that's assigned to the object.
@@ -1195,7 +1421,7 @@ type S3Object struct {
 	// permissions settings that apply to the object.
 	PublicAccess *bool
 
-	// The server-side encryption settings for the object.
+	// The type of server-side encryption that's used for the object.
 	ServerSideEncryption *ServerSideEncryption
 
 	// The total storage size, in bytes, of the object.
@@ -1213,7 +1439,8 @@ type S3Object struct {
 
 // Specifies one or more property- and tag-based conditions that refine the scope
 // of a classification job. These conditions define criteria that determine which
-// objects a job analyzes.
+// objects a job analyzes. Exclude conditions take precedence over include
+// conditions.
 type Scoping struct {
 
 	// The property- or tag-based conditions that determine which objects to exclude
@@ -1225,20 +1452,20 @@ type Scoping struct {
 	Includes *JobScopingBlock
 }
 
-// Provides information about the category, type, and number of occurrences of
-// sensitive data that produced a finding.
+// Provides information about the category, types, and occurrences of sensitive
+// data that produced a sensitive data finding.
 type SensitiveDataItem struct {
 
 	// The category of sensitive data that was detected. For example:
 	// FINANCIAL_INFORMATION, for financial information such as credit card numbers;
-	// PERSONAL_INFORMATION, for personally identifiable information such as full names
-	// and mailing addresses; or, CUSTOM_IDENTIFIER, for data that was detected by a
-	// custom data identifier.
+	// PERSONAL_INFORMATION, for personally identifiable information, such as full
+	// names and mailing addresses, or personal health information; or,
+	// CUSTOM_IDENTIFIER, for data that was detected by a custom data identifier.
 	Category SensitiveDataItemCategory
 
 	// An array of objects, one for each type of sensitive data that was detected. Each
 	// object reports the number of occurrences of a specific type of sensitive data
-	// that was detected.
+	// that was detected, and the location of up to 15 of those occurrences.
 	Detections []*DefaultDetection
 
 	// The total number of occurrences of the sensitive data that was detected.
@@ -1246,7 +1473,7 @@ type SensitiveDataItem struct {
 }
 
 // Provides information about the server-side encryption settings for an S3 bucket
-// or object.
+// or S3 object.
 type ServerSideEncryption struct {
 
 	// The server-side encryption algorithm that's used when storing data in the bucket
@@ -1254,9 +1481,9 @@ type ServerSideEncryption struct {
 	// NONE.
 	EncryptionType EncryptionType
 
-	// The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS)
-	// master key that's used to encrypt the bucket or object. This value is null if
-	// KMS isn't used to encrypt the bucket or object.
+	// The unique identifier for the AWS Key Management Service (AWS KMS) master key
+	// that's used to encrypt the bucket or object. This value is null if AWS KMS isn't
+	// used to encrypt the bucket or object.
 	KmsMasterKeyId *string
 }
 
@@ -1324,14 +1551,15 @@ type SessionIssuer struct {
 	UserName *string
 }
 
-// Provides the numeric score and textual representation of a severity value.
+// Provides the numerical and qualitative representations of a finding's severity.
 type Severity struct {
 
-	// The textual representation of the severity value, such as Low or High.
+	// The qualitative representation of the finding's severity, ranging from Low
+	// (least severe) to High (most severe).
 	Description SeverityDescription
 
-	// The numeric score for the severity value, ranging from 0 (least severe) to 4
-	// (most severe).
+	// The numerical representation of the finding's severity, ranging from 1 (least
+	// severe) to 3 (most severe).
 	Score *int64
 }
 
@@ -1339,18 +1567,47 @@ type Severity struct {
 // included or excluded from a classification job.
 type SimpleScopeTerm struct {
 
-	// The operator to use in the condition.
+	// The operator to use in the condition. Valid operators for each supported
+	// property (key) are:
+	//
+	//     * OBJECT_EXTENSION - EQ (equals) or NE (not equals)
+	//
+	//
+	// * OBJECT_LAST_MODIFIED_DATE - Any operator except CONTAINS
+	//
+	//     * OBJECT_SIZE -
+	// Any operator except CONTAINS
+	//
+	//     * TAG - EQ (equals) or NE (not equals)
 	Comparator JobComparator
 
-	// The property to use in the condition.
+	// The object property to use in the condition.
 	Key ScopeFilterKey
 
-	// An array that lists one or more values to use in the condition.
+	// An array that lists the values to use in the condition. If the value for the key
+	// property is OBJECT_EXTENSION, this array can specify multiple values and Amazon
+	// Macie uses an OR operator to join the values. Otherwise, this array can specify
+	// only one value. Valid values for each supported property (key) are:
+	//
+	//     *
+	// OBJECT_EXTENSION - A string that represents the file name extension of an
+	// object. For example: doc, docx, pdf
+	//
+	//     * OBJECT_LAST_MODIFIED_DATE - The date
+	// and time (in UTC and extended ISO 8601 format) when an object was created or
+	// last changed, whichever is latest. For example: 2020-09-28T14:31:13Z
+	//
+	//     *
+	// OBJECT_SIZE - An integer that represents the storage size (in bytes) of an
+	// object.
+	//
+	//     * TAG - A string that represents a tag key for an object. For
+	// advanced options, use a TagScopeTerm object, instead of a SimpleScopeTerm
+	// object, to define a tag-based condition for the job.
 	Values []*string
 }
 
-// Specifies criteria for sorting the results of a request for information about
-// findings.
+// Specifies criteria for sorting the results of a request for findings.
 type SortCriteria struct {
 
 	// The name of the property to sort the results by. This value can be the name of
@@ -1378,27 +1635,30 @@ type Statistics struct {
 // excluded from a classification job.
 type TagScopeTerm struct {
 
-	// The operator to use in the condition.
+	// The operator to use in the condition. Valid operators are EQ (equals) or NE (not
+	// equals).
 	Comparator JobComparator
 
 	// The tag key to use in the condition.
 	Key *string
 
-	// The tag key and value pairs to use in the condition.
+	// The tag keys or tag key and value pairs to use in the condition.
 	TagValues []*TagValuePair
 
 	// The type of object to apply the condition to.
 	Target TagTarget
 }
 
-// Specifies a tag key and value, as a pair, to use in a tag-based condition for a
-// classification job.
+// Specifies a tag key or tag key and value pair to use in a tag-based condition
+// for a classification job.
 type TagValuePair struct {
 
 	// The value for the tag key to use in the condition.
 	Key *string
 
-	// The tag value, associated with the specified tag key, to use in the condition.
+	// The tag value, associated with the specified tag key (key), to use in the
+	// condition. To specify only a tag key for a condition, specify the tag key for
+	// the key property and set this value to an empty string.
 	Value *string
 }
 
@@ -1568,6 +1828,25 @@ type UserIdentityRoot struct {
 
 	// The unique identifier for the entity that performed the action.
 	PrincipalId *string
+}
+
+// Provides information about when a classification job was paused and when it will
+// expire and be cancelled if it isn't resumed. This object is present only if a
+// job's current status (jobStatus) is USER_PAUSED.
+type UserPausedDetails struct {
+
+	// The date and time, in UTC and extended ISO 8601 format, when the job will expire
+	// and be cancelled if you don't resume it first. If you don't resume a job within
+	// 30 days of pausing it, the job expires and Amazon Macie cancels it.
+	JobExpiresAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the AWS Health event that Amazon Macie sent to
+	// notify you of the job's pending expiration and cancellation. This value is null
+	// if a job has been paused for less than 23 days.
+	JobImminentExpirationHealthEventArn *string
+
+	// The date and time, in UTC and extended ISO 8601 format, when you paused the job.
+	JobPausedAt *time.Time
 }
 
 // Specifies a weekly recurrence pattern for running a classification job.

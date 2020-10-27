@@ -14,7 +14,10 @@ import (
 // browser, the user will be automatically signed in to Amazon SageMaker Studio,
 // and granted access to all of the Apps and files associated with the Domain's
 // Amazon Elastic File System (EFS) volume. This operation can only be called when
-// the authentication mode equals IAM.
+// the authentication mode equals IAM. The URL that you get from a call to
+// CreatePresignedDomainUrl is valid only for 5 minutes. If you try to use the URL
+// after the 5-minute limit expires, you are directed to the AWS console sign-in
+// page.
 func (c *Client) CreatePresignedDomainUrl(ctx context.Context, params *CreatePresignedDomainUrlInput, optFns ...func(*Options)) (*CreatePresignedDomainUrlOutput, error) {
 	if params == nil {
 		params = &CreatePresignedDomainUrlInput{}

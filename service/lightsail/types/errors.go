@@ -12,9 +12,9 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
-	Tip  *string
 	Code *string
 	Docs *string
+	Tip  *string
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -34,9 +34,9 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 type AccountSetupInProgressException struct {
 	Message *string
 
-	Docs *string
-	Code *string
 	Tip  *string
+	Code *string
+	Docs *string
 }
 
 func (e *AccountSetupInProgressException) Error() string {
@@ -60,9 +60,9 @@ func (e *AccountSetupInProgressException) ErrorFault() smithy.ErrorFault { retur
 type InvalidInputException struct {
 	Message *string
 
-	Tip  *string
-	Code *string
 	Docs *string
+	Code *string
+	Tip  *string
 }
 
 func (e *InvalidInputException) Error() string {
@@ -81,9 +81,9 @@ func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.F
 type NotFoundException struct {
 	Message *string
 
-	Tip  *string
-	Docs *string
 	Code *string
+	Docs *string
+	Tip  *string
 }
 
 func (e *NotFoundException) Error() string {
@@ -102,9 +102,9 @@ func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 type OperationFailureException struct {
 	Message *string
 
-	Code *string
-	Tip  *string
 	Docs *string
+	Tip  *string
+	Code *string
 }
 
 func (e *OperationFailureException) Error() string {
@@ -123,9 +123,9 @@ func (e *OperationFailureException) ErrorFault() smithy.ErrorFault { return smit
 type ServiceException struct {
 	Message *string
 
-	Docs *string
 	Tip  *string
 	Code *string
+	Docs *string
 }
 
 func (e *ServiceException) Error() string {
@@ -144,9 +144,9 @@ func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultS
 type UnauthenticatedException struct {
 	Message *string
 
+	Docs *string
 	Tip  *string
 	Code *string
-	Docs *string
 }
 
 func (e *UnauthenticatedException) Error() string {

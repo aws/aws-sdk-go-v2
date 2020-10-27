@@ -2586,9 +2586,19 @@ func awsAwsjson11_serializeDocumentIBMDb2Settings(v *types.IBMDb2Settings, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.CurrentLsn != nil {
+		ok := object.Key("CurrentLsn")
+		ok.String(*v.CurrentLsn)
+	}
+
 	if v.DatabaseName != nil {
 		ok := object.Key("DatabaseName")
 		ok.String(*v.DatabaseName)
+	}
+
+	if v.MaxKBytesPerRead != nil {
+		ok := object.Key("MaxKBytesPerRead")
+		ok.Integer(*v.MaxKBytesPerRead)
 	}
 
 	if v.Password != nil {
@@ -2604,6 +2614,11 @@ func awsAwsjson11_serializeDocumentIBMDb2Settings(v *types.IBMDb2Settings, value
 	if v.ServerName != nil {
 		ok := object.Key("ServerName")
 		ok.String(*v.ServerName)
+	}
+
+	if v.SetDataCaptureChanges != nil {
+		ok := object.Key("SetDataCaptureChanges")
+		ok.Boolean(*v.SetDataCaptureChanges)
 	}
 
 	if v.Username != nil {
@@ -2643,6 +2658,11 @@ func awsAwsjson11_serializeDocumentKafkaSettings(v *types.KafkaSettings, value s
 		ok.Boolean(*v.IncludeControlDetails)
 	}
 
+	if v.IncludeNullAndEmpty != nil {
+		ok := object.Key("IncludeNullAndEmpty")
+		ok.Boolean(*v.IncludeNullAndEmpty)
+	}
+
 	if v.IncludePartitionValue != nil {
 		ok := object.Key("IncludePartitionValue")
 		ok.Boolean(*v.IncludePartitionValue)
@@ -2661,6 +2681,11 @@ func awsAwsjson11_serializeDocumentKafkaSettings(v *types.KafkaSettings, value s
 	if len(v.MessageFormat) > 0 {
 		ok := object.Key("MessageFormat")
 		ok.String(string(v.MessageFormat))
+	}
+
+	if v.MessageMaxBytes != nil {
+		ok := object.Key("MessageMaxBytes")
+		ok.Integer(*v.MessageMaxBytes)
 	}
 
 	if v.PartitionIncludeSchemaTable != nil {
@@ -2698,6 +2723,11 @@ func awsAwsjson11_serializeDocumentKinesisSettings(v *types.KinesisSettings, val
 	if v.IncludeControlDetails != nil {
 		ok := object.Key("IncludeControlDetails")
 		ok.Boolean(*v.IncludeControlDetails)
+	}
+
+	if v.IncludeNullAndEmpty != nil {
+		ok := object.Key("IncludeNullAndEmpty")
+		ok.Boolean(*v.IncludeNullAndEmpty)
 	}
 
 	if v.IncludePartitionValue != nil {
@@ -2742,6 +2772,16 @@ func awsAwsjson11_serializeDocumentMicrosoftSQLServerSettings(v *types.Microsoft
 	object := value.Object()
 	defer object.Close()
 
+	if v.BcpPacketSize != nil {
+		ok := object.Key("BcpPacketSize")
+		ok.Integer(*v.BcpPacketSize)
+	}
+
+	if v.ControlTablesFileGroup != nil {
+		ok := object.Key("ControlTablesFileGroup")
+		ok.String(*v.ControlTablesFileGroup)
+	}
+
 	if v.DatabaseName != nil {
 		ok := object.Key("DatabaseName")
 		ok.String(*v.DatabaseName)
@@ -2757,9 +2797,24 @@ func awsAwsjson11_serializeDocumentMicrosoftSQLServerSettings(v *types.Microsoft
 		ok.Integer(*v.Port)
 	}
 
+	if v.ReadBackupOnly != nil {
+		ok := object.Key("ReadBackupOnly")
+		ok.Boolean(*v.ReadBackupOnly)
+	}
+
+	if len(v.SafeguardPolicy) > 0 {
+		ok := object.Key("SafeguardPolicy")
+		ok.String(string(v.SafeguardPolicy))
+	}
+
 	if v.ServerName != nil {
 		ok := object.Key("ServerName")
 		ok.String(*v.ServerName)
+	}
+
+	if v.UseBcpFullLoad != nil {
+		ok := object.Key("UseBcpFullLoad")
+		ok.Boolean(*v.UseBcpFullLoad)
 	}
 
 	if v.Username != nil {
@@ -2841,9 +2896,29 @@ func awsAwsjson11_serializeDocumentMySQLSettings(v *types.MySQLSettings, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.AfterConnectScript != nil {
+		ok := object.Key("AfterConnectScript")
+		ok.String(*v.AfterConnectScript)
+	}
+
 	if v.DatabaseName != nil {
 		ok := object.Key("DatabaseName")
 		ok.String(*v.DatabaseName)
+	}
+
+	if v.EventsPollInterval != nil {
+		ok := object.Key("EventsPollInterval")
+		ok.Integer(*v.EventsPollInterval)
+	}
+
+	if v.MaxFileSize != nil {
+		ok := object.Key("MaxFileSize")
+		ok.Integer(*v.MaxFileSize)
+	}
+
+	if v.ParallelLoadThreads != nil {
+		ok := object.Key("ParallelLoadThreads")
+		ok.Integer(*v.ParallelLoadThreads)
 	}
 
 	if v.Password != nil {
@@ -2859,6 +2934,16 @@ func awsAwsjson11_serializeDocumentMySQLSettings(v *types.MySQLSettings, value s
 	if v.ServerName != nil {
 		ok := object.Key("ServerName")
 		ok.String(*v.ServerName)
+	}
+
+	if v.ServerTimezone != nil {
+		ok := object.Key("ServerTimezone")
+		ok.String(*v.ServerTimezone)
+	}
+
+	if len(v.TargetDbType) > 0 {
+		ok := object.Key("TargetDbType")
+		ok.String(string(v.TargetDbType))
 	}
 
 	if v.Username != nil {
@@ -2915,6 +3000,36 @@ func awsAwsjson11_serializeDocumentOracleSettings(v *types.OracleSettings, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.AccessAlternateDirectly != nil {
+		ok := object.Key("AccessAlternateDirectly")
+		ok.Boolean(*v.AccessAlternateDirectly)
+	}
+
+	if v.AdditionalArchivedLogDestId != nil {
+		ok := object.Key("AdditionalArchivedLogDestId")
+		ok.Integer(*v.AdditionalArchivedLogDestId)
+	}
+
+	if v.AddSupplementalLogging != nil {
+		ok := object.Key("AddSupplementalLogging")
+		ok.Boolean(*v.AddSupplementalLogging)
+	}
+
+	if v.AllowSelectNestedTables != nil {
+		ok := object.Key("AllowSelectNestedTables")
+		ok.Boolean(*v.AllowSelectNestedTables)
+	}
+
+	if v.ArchivedLogDestId != nil {
+		ok := object.Key("ArchivedLogDestId")
+		ok.Integer(*v.ArchivedLogDestId)
+	}
+
+	if v.ArchivedLogsOnly != nil {
+		ok := object.Key("ArchivedLogsOnly")
+		ok.Boolean(*v.ArchivedLogsOnly)
+	}
+
 	if v.AsmPassword != nil {
 		ok := object.Key("AsmPassword")
 		ok.String(*v.AsmPassword)
@@ -2930,9 +3045,49 @@ func awsAwsjson11_serializeDocumentOracleSettings(v *types.OracleSettings, value
 		ok.String(*v.AsmUser)
 	}
 
+	if len(v.CharLengthSemantics) > 0 {
+		ok := object.Key("CharLengthSemantics")
+		ok.String(string(v.CharLengthSemantics))
+	}
+
 	if v.DatabaseName != nil {
 		ok := object.Key("DatabaseName")
 		ok.String(*v.DatabaseName)
+	}
+
+	if v.DirectPathNoLog != nil {
+		ok := object.Key("DirectPathNoLog")
+		ok.Boolean(*v.DirectPathNoLog)
+	}
+
+	if v.DirectPathParallelLoad != nil {
+		ok := object.Key("DirectPathParallelLoad")
+		ok.Boolean(*v.DirectPathParallelLoad)
+	}
+
+	if v.EnableHomogenousTablespace != nil {
+		ok := object.Key("EnableHomogenousTablespace")
+		ok.Boolean(*v.EnableHomogenousTablespace)
+	}
+
+	if v.FailTasksOnLobTruncation != nil {
+		ok := object.Key("FailTasksOnLobTruncation")
+		ok.Boolean(*v.FailTasksOnLobTruncation)
+	}
+
+	if v.NumberDatatypeScale != nil {
+		ok := object.Key("NumberDatatypeScale")
+		ok.Integer(*v.NumberDatatypeScale)
+	}
+
+	if v.OraclePathPrefix != nil {
+		ok := object.Key("OraclePathPrefix")
+		ok.String(*v.OraclePathPrefix)
+	}
+
+	if v.ParallelAsmReadThreads != nil {
+		ok := object.Key("ParallelAsmReadThreads")
+		ok.Integer(*v.ParallelAsmReadThreads)
 	}
 
 	if v.Password != nil {
@@ -2943,6 +3098,26 @@ func awsAwsjson11_serializeDocumentOracleSettings(v *types.OracleSettings, value
 	if v.Port != nil {
 		ok := object.Key("Port")
 		ok.Integer(*v.Port)
+	}
+
+	if v.ReadAheadBlocks != nil {
+		ok := object.Key("ReadAheadBlocks")
+		ok.Integer(*v.ReadAheadBlocks)
+	}
+
+	if v.ReadTableSpaceName != nil {
+		ok := object.Key("ReadTableSpaceName")
+		ok.Boolean(*v.ReadTableSpaceName)
+	}
+
+	if v.ReplacePathPrefix != nil {
+		ok := object.Key("ReplacePathPrefix")
+		ok.Boolean(*v.ReplacePathPrefix)
+	}
+
+	if v.RetryInterval != nil {
+		ok := object.Key("RetryInterval")
+		ok.Integer(*v.RetryInterval)
 	}
 
 	if v.SecurityDbEncryption != nil {
@@ -2960,6 +3135,16 @@ func awsAwsjson11_serializeDocumentOracleSettings(v *types.OracleSettings, value
 		ok.String(*v.ServerName)
 	}
 
+	if v.UseAlternateFolderForOnline != nil {
+		ok := object.Key("UseAlternateFolderForOnline")
+		ok.Boolean(*v.UseAlternateFolderForOnline)
+	}
+
+	if v.UsePathPrefix != nil {
+		ok := object.Key("UsePathPrefix")
+		ok.String(*v.UsePathPrefix)
+	}
+
 	if v.Username != nil {
 		ok := object.Key("Username")
 		ok.String(*v.Username)
@@ -2972,9 +3157,39 @@ func awsAwsjson11_serializeDocumentPostgreSQLSettings(v *types.PostgreSQLSetting
 	object := value.Object()
 	defer object.Close()
 
+	if v.AfterConnectScript != nil {
+		ok := object.Key("AfterConnectScript")
+		ok.String(*v.AfterConnectScript)
+	}
+
+	if v.CaptureDdls != nil {
+		ok := object.Key("CaptureDdls")
+		ok.Boolean(*v.CaptureDdls)
+	}
+
 	if v.DatabaseName != nil {
 		ok := object.Key("DatabaseName")
 		ok.String(*v.DatabaseName)
+	}
+
+	if v.DdlArtifactsSchema != nil {
+		ok := object.Key("DdlArtifactsSchema")
+		ok.String(*v.DdlArtifactsSchema)
+	}
+
+	if v.ExecuteTimeout != nil {
+		ok := object.Key("ExecuteTimeout")
+		ok.Integer(*v.ExecuteTimeout)
+	}
+
+	if v.FailTasksOnLobTruncation != nil {
+		ok := object.Key("FailTasksOnLobTruncation")
+		ok.Boolean(*v.FailTasksOnLobTruncation)
+	}
+
+	if v.MaxFileSize != nil {
+		ok := object.Key("MaxFileSize")
+		ok.Integer(*v.MaxFileSize)
 	}
 
 	if v.Password != nil {
@@ -2990,6 +3205,11 @@ func awsAwsjson11_serializeDocumentPostgreSQLSettings(v *types.PostgreSQLSetting
 	if v.ServerName != nil {
 		ok := object.Key("ServerName")
 		ok.String(*v.ServerName)
+	}
+
+	if v.SlotName != nil {
+		ok := object.Key("SlotName")
+		ok.String(*v.SlotName)
 	}
 
 	if v.Username != nil {
@@ -3024,6 +3244,16 @@ func awsAwsjson11_serializeDocumentRedshiftSettings(v *types.RedshiftSettings, v
 		ok.String(*v.BucketName)
 	}
 
+	if v.CaseSensitiveNames != nil {
+		ok := object.Key("CaseSensitiveNames")
+		ok.Boolean(*v.CaseSensitiveNames)
+	}
+
+	if v.CompUpdate != nil {
+		ok := object.Key("CompUpdate")
+		ok.Boolean(*v.CompUpdate)
+	}
+
 	if v.ConnectionTimeout != nil {
 		ok := object.Key("ConnectionTimeout")
 		ok.Integer(*v.ConnectionTimeout)
@@ -3047,6 +3277,11 @@ func awsAwsjson11_serializeDocumentRedshiftSettings(v *types.RedshiftSettings, v
 	if len(v.EncryptionMode) > 0 {
 		ok := object.Key("EncryptionMode")
 		ok.String(string(v.EncryptionMode))
+	}
+
+	if v.ExplicitIds != nil {
+		ok := object.Key("ExplicitIds")
+		ok.Boolean(*v.ExplicitIds)
 	}
 
 	if v.FileTransferUploadStreams != nil {
@@ -3179,6 +3414,21 @@ func awsAwsjson11_serializeDocumentS3Settings(v *types.S3Settings, value smithyj
 	if v.DataPageSize != nil {
 		ok := object.Key("DataPageSize")
 		ok.Integer(*v.DataPageSize)
+	}
+
+	if len(v.DatePartitionDelimiter) > 0 {
+		ok := object.Key("DatePartitionDelimiter")
+		ok.String(string(v.DatePartitionDelimiter))
+	}
+
+	if v.DatePartitionEnabled != nil {
+		ok := object.Key("DatePartitionEnabled")
+		ok.Boolean(*v.DatePartitionEnabled)
+	}
+
+	if len(v.DatePartitionSequence) > 0 {
+		ok := object.Key("DatePartitionSequence")
+		ok.String(string(v.DatePartitionSequence))
 	}
 
 	if v.DictPageSizeLimit != nil {
@@ -3587,6 +3837,11 @@ func awsAwsjson11_serializeOpDocumentCreateEndpointInput(v *CreateEndpointInput,
 		}
 	}
 
+	if v.ResourceIdentifier != nil {
+		ok := object.Key("ResourceIdentifier")
+		ok.String(*v.ResourceIdentifier)
+	}
+
 	if v.S3Settings != nil {
 		ok := object.Key("S3Settings")
 		if err := awsAwsjson11_serializeDocumentS3Settings(v.S3Settings, ok); err != nil {
@@ -3743,6 +3998,11 @@ func awsAwsjson11_serializeOpDocumentCreateReplicationInstanceInput(v *CreateRep
 		ok.String(*v.ReplicationSubnetGroupIdentifier)
 	}
 
+	if v.ResourceIdentifier != nil {
+		ok := object.Key("ResourceIdentifier")
+		ok.String(*v.ResourceIdentifier)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
@@ -3828,6 +4088,11 @@ func awsAwsjson11_serializeOpDocumentCreateReplicationTaskInput(v *CreateReplica
 	if v.ReplicationTaskSettings != nil {
 		ok := object.Key("ReplicationTaskSettings")
 		ok.String(*v.ReplicationTaskSettings)
+	}
+
+	if v.ResourceIdentifier != nil {
+		ok := object.Key("ResourceIdentifier")
+		ok.String(*v.ResourceIdentifier)
 	}
 
 	if v.SourceEndpointArn != nil {

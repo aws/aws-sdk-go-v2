@@ -10,6 +10,16 @@ const (
 	BehaviorOnMXFailureRejectmessage   BehaviorOnMXFailure = "RejectMessage"
 )
 
+// Values returns all known values for BehaviorOnMXFailure. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BehaviorOnMXFailure) Values() []BehaviorOnMXFailure {
+	return []BehaviorOnMXFailure{
+		"UseDefaultValue",
+		"RejectMessage",
+	}
+}
+
 type BounceType string
 
 // Enum values for BounceType
@@ -21,6 +31,20 @@ const (
 	BounceTypeUndefined        BounceType = "Undefined"
 	BounceTypeTemporaryfailure BounceType = "TemporaryFailure"
 )
+
+// Values returns all known values for BounceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (BounceType) Values() []BounceType {
+	return []BounceType{
+		"DoesNotExist",
+		"MessageTooLarge",
+		"ExceededQuota",
+		"ContentRejected",
+		"Undefined",
+		"TemporaryFailure",
+	}
+}
 
 type BulkEmailStatus string
 
@@ -42,6 +66,28 @@ const (
 	BulkEmailStatusFailed                        BulkEmailStatus = "Failed"
 )
 
+// Values returns all known values for BulkEmailStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BulkEmailStatus) Values() []BulkEmailStatus {
+	return []BulkEmailStatus{
+		"Success",
+		"MessageRejected",
+		"MailFromDomainNotVerified",
+		"ConfigurationSetDoesNotExist",
+		"TemplateDoesNotExist",
+		"AccountSuspended",
+		"AccountThrottled",
+		"AccountDailyQuotaExceeded",
+		"InvalidSendingPoolName",
+		"AccountSendingPaused",
+		"ConfigurationSetSendingPaused",
+		"InvalidParameterValue",
+		"TransientFailure",
+		"Failed",
+	}
+}
+
 type ConfigurationSetAttribute string
 
 // Enum values for ConfigurationSetAttribute
@@ -51,6 +97,18 @@ const (
 	ConfigurationSetAttributeDelivery_options   ConfigurationSetAttribute = "deliveryOptions"
 	ConfigurationSetAttributeReputation_options ConfigurationSetAttribute = "reputationOptions"
 )
+
+// Values returns all known values for ConfigurationSetAttribute. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConfigurationSetAttribute) Values() []ConfigurationSetAttribute {
+	return []ConfigurationSetAttribute{
+		"eventDestinations",
+		"trackingOptions",
+		"deliveryOptions",
+		"reputationOptions",
+	}
+}
 
 type CustomMailFromStatus string
 
@@ -62,6 +120,18 @@ const (
 	CustomMailFromStatusTemporaryfailure CustomMailFromStatus = "TemporaryFailure"
 )
 
+// Values returns all known values for CustomMailFromStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CustomMailFromStatus) Values() []CustomMailFromStatus {
+	return []CustomMailFromStatus{
+		"Pending",
+		"Success",
+		"Failed",
+		"TemporaryFailure",
+	}
+}
+
 type DimensionValueSource string
 
 // Enum values for DimensionValueSource
@@ -70,6 +140,17 @@ const (
 	DimensionValueSourceEmail_header DimensionValueSource = "emailHeader"
 	DimensionValueSourceLink_tag     DimensionValueSource = "linkTag"
 )
+
+// Values returns all known values for DimensionValueSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DimensionValueSource) Values() []DimensionValueSource {
+	return []DimensionValueSource{
+		"messageTag",
+		"emailHeader",
+		"linkTag",
+	}
+}
 
 type DsnAction string
 
@@ -81,6 +162,19 @@ const (
 	DsnActionRelayed   DsnAction = "relayed"
 	DsnActionExpanded  DsnAction = "expanded"
 )
+
+// Values returns all known values for DsnAction. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (DsnAction) Values() []DsnAction {
+	return []DsnAction{
+		"failed",
+		"delayed",
+		"delivered",
+		"relayed",
+		"expanded",
+	}
+}
 
 type EventType string
 
@@ -96,6 +190,22 @@ const (
 	EventTypeRendering_failure EventType = "renderingFailure"
 )
 
+// Values returns all known values for EventType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (EventType) Values() []EventType {
+	return []EventType{
+		"send",
+		"reject",
+		"bounce",
+		"complaint",
+		"delivery",
+		"open",
+		"click",
+		"renderingFailure",
+	}
+}
+
 type IdentityType string
 
 // Enum values for IdentityType
@@ -104,6 +214,16 @@ const (
 	IdentityTypeDomain       IdentityType = "Domain"
 )
 
+// Values returns all known values for IdentityType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (IdentityType) Values() []IdentityType {
+	return []IdentityType{
+		"EmailAddress",
+		"Domain",
+	}
+}
+
 type InvocationType string
 
 // Enum values for InvocationType
@@ -111,6 +231,16 @@ const (
 	InvocationTypeEvent           InvocationType = "Event"
 	InvocationTypeRequestresponse InvocationType = "RequestResponse"
 )
+
+// Values returns all known values for InvocationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InvocationType) Values() []InvocationType {
+	return []InvocationType{
+		"Event",
+		"RequestResponse",
+	}
+}
 
 type NotificationType string
 
@@ -121,6 +251,17 @@ const (
 	NotificationTypeDelivery  NotificationType = "Delivery"
 )
 
+// Values returns all known values for NotificationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NotificationType) Values() []NotificationType {
+	return []NotificationType{
+		"Bounce",
+		"Complaint",
+		"Delivery",
+	}
+}
+
 type ReceiptFilterPolicy string
 
 // Enum values for ReceiptFilterPolicy
@@ -128,6 +269,16 @@ const (
 	ReceiptFilterPolicyBlock ReceiptFilterPolicy = "Block"
 	ReceiptFilterPolicyAllow ReceiptFilterPolicy = "Allow"
 )
+
+// Values returns all known values for ReceiptFilterPolicy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReceiptFilterPolicy) Values() []ReceiptFilterPolicy {
+	return []ReceiptFilterPolicy{
+		"Block",
+		"Allow",
+	}
+}
 
 type SNSActionEncoding string
 
@@ -137,12 +288,31 @@ const (
 	SNSActionEncodingBase64 SNSActionEncoding = "Base64"
 )
 
+// Values returns all known values for SNSActionEncoding. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SNSActionEncoding) Values() []SNSActionEncoding {
+	return []SNSActionEncoding{
+		"UTF-8",
+		"Base64",
+	}
+}
+
 type StopScope string
 
 // Enum values for StopScope
 const (
 	StopScopeRule_set StopScope = "RuleSet"
 )
+
+// Values returns all known values for StopScope. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (StopScope) Values() []StopScope {
+	return []StopScope{
+		"RuleSet",
+	}
+}
 
 type TlsPolicy string
 
@@ -151,6 +321,16 @@ const (
 	TlsPolicyRequire  TlsPolicy = "Require"
 	TlsPolicyOptional TlsPolicy = "Optional"
 )
+
+// Values returns all known values for TlsPolicy. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (TlsPolicy) Values() []TlsPolicy {
+	return []TlsPolicy{
+		"Require",
+		"Optional",
+	}
+}
 
 type VerificationStatus string
 
@@ -162,3 +342,16 @@ const (
 	VerificationStatusTemporaryfailure VerificationStatus = "TemporaryFailure"
 	VerificationStatusNotstarted       VerificationStatus = "NotStarted"
 )
+
+// Values returns all known values for VerificationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VerificationStatus) Values() []VerificationStatus {
+	return []VerificationStatus{
+		"Pending",
+		"Success",
+		"Failed",
+		"TemporaryFailure",
+		"NotStarted",
+	}
+}

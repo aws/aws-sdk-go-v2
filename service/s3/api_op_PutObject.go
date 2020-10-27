@@ -46,10 +46,11 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html) and Managing
 // ACLs Using the REST API
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-using-rest-api.html).
-// Storage Class Options By default, Amazon S3 uses the STANDARD storage class to
+// Storage Class Options By default, Amazon S3 uses the STANDARD Storage Class to
 // store newly created objects. The STANDARD storage class provides high durability
 // and high availability. Depending on performance needs, you can specify a
-// different storage class. For more information, see Storage Classes
+// different Storage Class. Amazon S3 on Outposts only uses the OUTPOSTS Storage
+// Class. For more information, see Storage Classes
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html) in
 // the Amazon S3 Service Developer Guide. Versioning If you enable versioning for a
 // bucket, Amazon S3 automatically generates a unique version ID for the object
@@ -59,11 +60,16 @@ import (
 // about versioning, see Adding Objects to Versioning Enabled Buckets
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/AddingObjectstoVersioningEnabledBuckets.html).
 // For information about returning the versioning state of a bucket, see
-// GetBucketVersioning. Related Resources
+// GetBucketVersioning
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketVersioning.html).
+// Related Resources
 //
 //     * CopyObject
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html)
 //
-//     * DeleteObject
+//     *
+// DeleteObject
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html)
 func (c *Client) PutObject(ctx context.Context, params *PutObjectInput, optFns ...func(*Options)) (*PutObjectOutput, error) {
 	if params == nil {
 		params = &PutObjectInput{}
@@ -81,15 +87,23 @@ func (c *Client) PutObject(ctx context.Context, params *PutObjectInput, optFns .
 
 type PutObjectInput struct {
 
-	// Bucket name to which the PUT operation was initiated. When using this API with
-	// an access point, you must direct requests to the access point hostname. The
+	// The bucket name to which the PUT operation was initiated. When using this API
+	// with an access point, you must direct requests to the access point hostname. The
 	// access point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// operation using an access point through the AWS SDKs, you provide the access
+	// operation with an access point through the AWS SDKs, you provide the access
 	// point ARN in place of the bucket name. For more information about access point
 	// ARNs, see Using Access Points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
-	// the Amazon Simple Storage Service Developer Guide.
+	// the Amazon Simple Storage Service Developer Guide. When using this API with
+	// Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname.
+	// The S3 on Outposts hostname takes the form
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
+	// this operation using S3 on Outposts through the AWS SDKs, you provide the
+	// Outposts bucket ARN in place of the bucket name. For more information about S3
+	// on Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
+	// Amazon Simple Storage Service Developer Guide.
 	//
 	// This member is required.
 	Bucket *string
@@ -101,6 +115,7 @@ type PutObjectInput struct {
 
 	// The canned ACL to apply to the object. For more information, see Canned ACL
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL).
+	// This action is not supported by Amazon S3 on Outposts.
 	ACL types.ObjectCannedACL
 
 	// Object data.
@@ -146,21 +161,29 @@ type PutObjectInput struct {
 	// (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17).
 	ContentType *string
 
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
+
 	// The date and time at which the object is no longer cacheable. For more
 	// information, see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21
 	// (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21).
 	Expires *time.Time
 
-	// Gives the grantee READ, READ_ACP, and WRITE_ACP permissions on the object.
+	// Gives the grantee READ, READ_ACP, and WRITE_ACP permissions on the object. This
+	// action is not supported by Amazon S3 on Outposts.
 	GrantFullControl *string
 
-	// Allows grantee to read the object data and its metadata.
+	// Allows grantee to read the object data and its metadata. This action is not
+	// supported by Amazon S3 on Outposts.
 	GrantRead *string
 
-	// Allows grantee to read the object ACL.
+	// Allows grantee to read the object ACL. This action is not supported by Amazon S3
+	// on Outposts.
 	GrantReadACP *string
 
-	// Allows grantee to write the ACL for the applicable object.
+	// Allows grantee to write the ACL for the applicable object. This action is not
+	// supported by Amazon S3 on Outposts.
 	GrantWriteACP *string
 
 	// A map of metadata to store with the object in S3.
@@ -220,8 +243,13 @@ type PutObjectInput struct {
 	// (for example, AES256, aws:kms).
 	ServerSideEncryption types.ServerSideEncryption
 
-	// If you don't specify, S3 Standard is the default storage class. Amazon S3
-	// supports other storage classes.
+	// By default, Amazon S3 uses the STANDARD Storage Class to store newly created
+	// objects. The STANDARD storage class provides high durability and high
+	// availability. Depending on performance needs, you can specify a different
+	// Storage Class. Amazon S3 on Outposts only uses the OUTPOSTS Storage Class. For
+	// more information, see Storage Classes
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html) in
+	// the Amazon S3 Service Developer Guide.
 	StorageClass types.StorageClass
 
 	// The tag-set for the object. The tag-set must be encoded as URL Query parameters.
@@ -251,9 +279,11 @@ type PutObjectOutput struct {
 	ETag *string
 
 	// If the expiration is configured for the object (see
-	// PutBucketLifecycleConfiguration), the response includes this header. It includes
-	// the expiry-date and rule-id key-value pairs that provide information about
-	// object expiration. The value of the rule-id is URL encoded.
+	// PutBucketLifecycleConfiguration
+	// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html)),
+	// the response includes this header. It includes the expiry-date and rule-id
+	// key-value pairs that provide information about object expiration. The value of
+	// the rule-id is URL encoded.
 	Expiration *string
 
 	// If present, indicates that the requester was successfully charged for the

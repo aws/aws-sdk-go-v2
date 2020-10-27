@@ -17,7 +17,7 @@ import (
 // value when calling a List* operation. These operations can occasionally return
 // an empty set of results even when there are more results available. The
 // NextToken response parameter value is null only when there are no more results
-// to display. This operation can be called only from the organization's master
+// to display. This operation can be called only from the organization's management
 // account or by a member account that is a delegated administrator for an AWS
 // service.
 func (c *Client) ListAccounts(ctx context.Context, params *ListAccountsInput, optFns ...func(*Options)) (*ListAccountsOutput, error) {

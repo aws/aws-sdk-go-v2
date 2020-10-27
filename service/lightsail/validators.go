@@ -2327,6 +2327,9 @@ func validateInstanceEntry(v *types.InstanceEntry) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InstanceEntry"}
+	if v.AvailabilityZone == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZone"))
+	}
 	if v.SourceName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceName"))
 	}
@@ -2335,9 +2338,6 @@ func validateInstanceEntry(v *types.InstanceEntry) error {
 	}
 	if len(v.PortInfoSource) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PortInfoSource"))
-	}
-	if v.AvailabilityZone == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZone"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2401,14 +2401,14 @@ func validateOpAttachDiskInput(v *AttachDiskInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AttachDiskInput"}
-	if v.DiskPath == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DiskPath"))
-	}
 	if v.InstanceName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceName"))
 	}
 	if v.DiskName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DiskName"))
+	}
+	if v.DiskPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DiskPath"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2422,11 +2422,11 @@ func validateOpAttachInstancesToLoadBalancerInput(v *AttachInstancesToLoadBalanc
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AttachInstancesToLoadBalancerInput"}
-	if v.InstanceNames == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceNames"))
-	}
 	if v.LoadBalancerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerName"))
+	}
+	if v.InstanceNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceNames"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2458,11 +2458,11 @@ func validateOpAttachStaticIpInput(v *AttachStaticIpInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AttachStaticIpInput"}
-	if v.StaticIpName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StaticIpName"))
-	}
 	if v.InstanceName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceName"))
+	}
+	if v.StaticIpName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StaticIpName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2512,11 +2512,11 @@ func validateOpCreateCertificateInput(v *CreateCertificateInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateCertificateInput"}
-	if v.CertificateName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CertificateName"))
-	}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.CertificateName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2567,19 +2567,19 @@ func validateOpCreateDiskFromSnapshotInput(v *CreateDiskFromSnapshotInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDiskFromSnapshotInput"}
+	if v.SizeInGb == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SizeInGb"))
+	}
 	if v.DiskName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DiskName"))
 	}
-	if v.SizeInGb == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SizeInGb"))
+	if v.AvailabilityZone == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZone"))
 	}
 	if v.AddOns != nil {
 		if err := validateAddOnRequestList(v.AddOns); err != nil {
 			invalidParams.AddNested("AddOns", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.AvailabilityZone == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZone"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2593,19 +2593,19 @@ func validateOpCreateDiskInput(v *CreateDiskInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDiskInput"}
-	if v.SizeInGb == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SizeInGb"))
+	if v.DiskName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DiskName"))
 	}
 	if v.AddOns != nil {
 		if err := validateAddOnRequestList(v.AddOns); err != nil {
 			invalidParams.AddNested("AddOns", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.DiskName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DiskName"))
-	}
 	if v.AvailabilityZone == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZone"))
+	}
+	if v.SizeInGb == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SizeInGb"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2634,17 +2634,17 @@ func validateOpCreateDistributionInput(v *CreateDistributionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDistributionInput"}
-	if v.DistributionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DistributionName"))
+	if v.BundleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BundleId"))
 	}
 	if v.DefaultCacheBehavior == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DefaultCacheBehavior"))
 	}
+	if v.DistributionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DistributionName"))
+	}
 	if v.Origin == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Origin"))
-	}
-	if v.BundleId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BundleId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2658,11 +2658,11 @@ func validateOpCreateDomainEntryInput(v *CreateDomainEntryInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDomainEntryInput"}
-	if v.DomainEntry == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DomainEntry"))
-	}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.DomainEntry == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainEntry"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2691,14 +2691,14 @@ func validateOpCreateInstancesFromSnapshotInput(v *CreateInstancesFromSnapshotIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateInstancesFromSnapshotInput"}
-	if v.BundleId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BundleId"))
+	if v.InstanceNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceNames"))
 	}
 	if v.AvailabilityZone == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZone"))
 	}
-	if v.InstanceNames == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceNames"))
+	if v.BundleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BundleId"))
 	}
 	if v.AddOns != nil {
 		if err := validateAddOnRequestList(v.AddOns); err != nil {
@@ -2717,8 +2717,8 @@ func validateOpCreateInstancesInput(v *CreateInstancesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateInstancesInput"}
-	if v.BlueprintId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BlueprintId"))
+	if v.InstanceNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceNames"))
 	}
 	if v.BundleId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BundleId"))
@@ -2726,8 +2726,8 @@ func validateOpCreateInstancesInput(v *CreateInstancesInput) error {
 	if v.AvailabilityZone == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZone"))
 	}
-	if v.InstanceNames == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceNames"))
+	if v.BlueprintId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BlueprintId"))
 	}
 	if v.AddOns != nil {
 		if err := validateAddOnRequestList(v.AddOns); err != nil {
@@ -2746,11 +2746,11 @@ func validateOpCreateInstanceSnapshotInput(v *CreateInstanceSnapshotInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateInstanceSnapshotInput"}
-	if v.InstanceSnapshotName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceSnapshotName"))
-	}
 	if v.InstanceName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceName"))
+	}
+	if v.InstanceSnapshotName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceSnapshotName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2779,11 +2779,11 @@ func validateOpCreateLoadBalancerInput(v *CreateLoadBalancerInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateLoadBalancerInput"}
-	if v.InstancePort == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstancePort"))
-	}
 	if v.LoadBalancerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerName"))
+	}
+	if v.InstancePort == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstancePort"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2797,11 +2797,11 @@ func validateOpCreateLoadBalancerTlsCertificateInput(v *CreateLoadBalancerTlsCer
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateLoadBalancerTlsCertificateInput"}
-	if v.CertificateDomainName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CertificateDomainName"))
-	}
 	if v.LoadBalancerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerName"))
+	}
+	if v.CertificateDomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateDomainName"))
 	}
 	if v.CertificateName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CertificateName"))
@@ -2833,20 +2833,20 @@ func validateOpCreateRelationalDatabaseInput(v *CreateRelationalDatabaseInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateRelationalDatabaseInput"}
-	if v.RelationalDatabaseName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RelationalDatabaseName"))
+	if v.MasterUsername == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MasterUsername"))
 	}
 	if v.MasterDatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MasterDatabaseName"))
 	}
+	if v.RelationalDatabaseBlueprintId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RelationalDatabaseBlueprintId"))
+	}
 	if v.RelationalDatabaseBundleId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RelationalDatabaseBundleId"))
 	}
-	if v.MasterUsername == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MasterUsername"))
-	}
-	if v.RelationalDatabaseBlueprintId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RelationalDatabaseBlueprintId"))
+	if v.RelationalDatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RelationalDatabaseName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2893,11 +2893,11 @@ func validateOpDeleteAutoSnapshotInput(v *DeleteAutoSnapshotInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteAutoSnapshotInput"}
-	if v.ResourceName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
-	}
 	if v.Date == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Date"))
+	}
+	if v.ResourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3208,15 +3208,15 @@ func validateOpEnableAddOnInput(v *EnableAddOnInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EnableAddOnInput"}
+	if v.ResourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
+	}
 	if v.AddOnRequest == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AddOnRequest"))
 	} else if v.AddOnRequest != nil {
 		if err := validateAddOnRequest(v.AddOnRequest); err != nil {
 			invalidParams.AddNested("AddOnRequest", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ResourceName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3290,26 +3290,26 @@ func validateOpGetDistributionMetricDataInput(v *GetDistributionMetricDataInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetDistributionMetricDataInput"}
-	if len(v.MetricName) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	if v.Statistics == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Statistics"))
 	}
 	if v.EndTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
 	}
-	if v.Statistics == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Statistics"))
-	}
-	if v.StartTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
-	}
 	if len(v.Unit) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Unit"))
+	}
+	if len(v.MetricName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	}
+	if v.DistributionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DistributionName"))
 	}
 	if v.Period == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Period"))
 	}
-	if v.DistributionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DistributionName"))
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3368,26 +3368,26 @@ func validateOpGetInstanceMetricDataInput(v *GetInstanceMetricDataInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetInstanceMetricDataInput"}
-	if v.StartTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
-	}
-	if v.Statistics == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Statistics"))
-	}
 	if v.EndTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if len(v.MetricName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
 	}
 	if len(v.Unit) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Unit"))
 	}
-	if v.InstanceName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceName"))
-	}
 	if v.Period == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Period"))
 	}
-	if len(v.MetricName) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.InstanceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceName"))
+	}
+	if v.Statistics == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Statistics"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3476,26 +3476,26 @@ func validateOpGetLoadBalancerMetricDataInput(v *GetLoadBalancerMetricDataInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetLoadBalancerMetricDataInput"}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if v.Statistics == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Statistics"))
+	}
+	if len(v.Unit) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Unit"))
+	}
 	if v.Period == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Period"))
 	}
 	if len(v.MetricName) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
 	}
-	if v.StartTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
-	}
-	if v.Statistics == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Statistics"))
-	}
 	if v.LoadBalancerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerName"))
-	}
-	if v.EndTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
-	}
-	if len(v.Unit) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Unit"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3584,11 +3584,11 @@ func validateOpGetRelationalDatabaseLogEventsInput(v *GetRelationalDatabaseLogEv
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetRelationalDatabaseLogEventsInput"}
-	if v.RelationalDatabaseName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RelationalDatabaseName"))
-	}
 	if v.LogStreamName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LogStreamName"))
+	}
+	if v.RelationalDatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RelationalDatabaseName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3632,26 +3632,26 @@ func validateOpGetRelationalDatabaseMetricDataInput(v *GetRelationalDatabaseMetr
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetRelationalDatabaseMetricDataInput"}
-	if len(v.MetricName) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
-	}
-	if v.EndTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
-	}
-	if len(v.Unit) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Unit"))
+	if v.Period == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Period"))
 	}
 	if v.StartTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
 	}
-	if v.Statistics == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Statistics"))
+	if len(v.Unit) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Unit"))
 	}
 	if v.RelationalDatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RelationalDatabaseName"))
 	}
-	if v.Period == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Period"))
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if len(v.MetricName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	}
+	if v.Statistics == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Statistics"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3710,11 +3710,11 @@ func validateOpImportKeyPairInput(v *ImportKeyPairInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ImportKeyPairInput"}
-	if v.PublicKeyBase64 == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PublicKeyBase64"))
-	}
 	if v.KeyPairName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KeyPairName"))
+	}
+	if v.PublicKeyBase64 == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PublicKeyBase64"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3746,23 +3746,23 @@ func validateOpPutAlarmInput(v *PutAlarmInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutAlarmInput"}
-	if v.MonitoredResourceName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MonitoredResourceName"))
-	}
 	if v.Threshold == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Threshold"))
 	}
+	if v.MonitoredResourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MonitoredResourceName"))
+	}
 	if v.EvaluationPeriods == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EvaluationPeriods"))
+	}
+	if len(v.ComparisonOperator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ComparisonOperator"))
 	}
 	if v.AlarmName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AlarmName"))
 	}
 	if len(v.MetricName) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
-	}
-	if len(v.ComparisonOperator) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ComparisonOperator"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3932,11 +3932,11 @@ func validateOpTestAlarmInput(v *TestAlarmInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TestAlarmInput"}
-	if len(v.State) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("State"))
-	}
 	if v.AlarmName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AlarmName"))
+	}
+	if len(v.State) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3950,11 +3950,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.ResourceName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
-	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if v.ResourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3983,11 +3983,11 @@ func validateOpUpdateDomainEntryInput(v *UpdateDomainEntryInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDomainEntryInput"}
-	if v.DomainEntry == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DomainEntry"))
-	}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.DomainEntry == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainEntry"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

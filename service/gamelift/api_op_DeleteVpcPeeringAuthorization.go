@@ -42,7 +42,7 @@ func (c *Client) DeleteVpcPeeringAuthorization(ctx context.Context, params *Dele
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type DeleteVpcPeeringAuthorizationInput struct {
 
 	// A unique identifier for the AWS account that you use to manage your Amazon

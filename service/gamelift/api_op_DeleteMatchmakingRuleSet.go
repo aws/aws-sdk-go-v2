@@ -54,7 +54,7 @@ func (c *Client) DeleteMatchmakingRuleSet(ctx context.Context, params *DeleteMat
 	return out, nil
 }
 
-// Represents the input for a request action.
+// Represents the input for a request operation.
 type DeleteMatchmakingRuleSetInput struct {
 
 	// A unique identifier for a matchmaking rule set to be deleted. (Note: The rule
@@ -65,7 +65,7 @@ type DeleteMatchmakingRuleSetInput struct {
 	Name *string
 }
 
-// Represents the returned data in response to a request action.
+// Represents the returned data in response to a request operation.
 type DeleteMatchmakingRuleSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

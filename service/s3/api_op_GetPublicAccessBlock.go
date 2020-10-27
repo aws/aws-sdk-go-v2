@@ -32,11 +32,15 @@ import (
 //
 //
 // * PutPublicAccessBlock
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutPublicAccessBlock.html)
 //
-//     * GetPublicAccessBlock
 //
-//     *
-// DeletePublicAccessBlock
+// * GetPublicAccessBlock
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetPublicAccessBlock.html)
+//
+//
+// * DeletePublicAccessBlock
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeletePublicAccessBlock.html)
 func (c *Client) GetPublicAccessBlock(ctx context.Context, params *GetPublicAccessBlockInput, optFns ...func(*Options)) (*GetPublicAccessBlockOutput, error) {
 	if params == nil {
 		params = &GetPublicAccessBlockInput{}
@@ -59,6 +63,10 @@ type GetPublicAccessBlockInput struct {
 	//
 	// This member is required.
 	Bucket *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 }
 
 type GetPublicAccessBlockOutput struct {

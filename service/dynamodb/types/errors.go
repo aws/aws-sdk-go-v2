@@ -237,7 +237,7 @@ func (e *ItemCollectionSizeLimitExceededException) ErrorFault() smithy.ErrorFaul
 // when you are creating a table with one or more secondary indexes. You can have
 // up to 25 such requests running at a time; however, if the table or index
 // specifications are complex, DynamoDB might temporarily reduce the number of
-// concurrent operations. There is a soft account limit of 256 tables.
+// concurrent operations. There is a soft account quota of 256 tables.
 type LimitExceededException struct {
 	Message *string
 }
@@ -336,8 +336,8 @@ func (e *ReplicaNotFoundException) ErrorMessage() string {
 func (e *ReplicaNotFoundException) ErrorCode() string             { return "ReplicaNotFoundException" }
 func (e *ReplicaNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Throughput exceeds the current throughput limit for your account. Please contact
-// AWS Support at AWS Support (https://aws.amazon.com/support) to request a limit
+// Throughput exceeds the current throughput quota for your account. Please contact
+// AWS Support at AWS Support (https://aws.amazon.com/support) to request a quota
 // increase.
 type RequestLimitExceeded struct {
 	Message *string

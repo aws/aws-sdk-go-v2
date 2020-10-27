@@ -10,6 +10,16 @@ const (
 	EncryptionStatusActive   EncryptionStatus = "ACTIVE"
 )
 
+// Values returns all known values for EncryptionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionStatus) Values() []EncryptionStatus {
+	return []EncryptionStatus{
+		"UPDATING",
+		"ACTIVE",
+	}
+}
+
 type EncryptionType string
 
 // Enum values for EncryptionType
@@ -17,6 +27,16 @@ const (
 	EncryptionTypeNone EncryptionType = "NONE"
 	EncryptionTypeKms  EncryptionType = "KMS"
 )
+
+// Values returns all known values for EncryptionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionType) Values() []EncryptionType {
+	return []EncryptionType{
+		"NONE",
+		"KMS",
+	}
+}
 
 type SamplingStrategyName string
 
@@ -26,6 +46,16 @@ const (
 	SamplingStrategyNameFixedrate   SamplingStrategyName = "FixedRate"
 )
 
+// Values returns all known values for SamplingStrategyName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SamplingStrategyName) Values() []SamplingStrategyName {
+	return []SamplingStrategyName{
+		"PartialScan",
+		"FixedRate",
+	}
+}
+
 type TimeRangeType string
 
 // Enum values for TimeRangeType
@@ -33,3 +63,13 @@ const (
 	TimeRangeTypeTraceid TimeRangeType = "TraceId"
 	TimeRangeTypeEvent   TimeRangeType = "Event"
 )
+
+// Values returns all known values for TimeRangeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TimeRangeType) Values() []TimeRangeType {
+	return []TimeRangeType{
+		"TraceId",
+		"Event",
+	}
+}

@@ -29,20 +29,15 @@ func (c *Client) StartTranscriptionJob(ctx context.Context, params *StartTranscr
 
 type StartTranscriptionJobInput struct {
 
-	// The language code for the language used in the input media file.
-	//
-	// This member is required.
-	LanguageCode types.LanguageCode
-
 	// An object that describes the input media for a transcription job.
 	//
 	// This member is required.
 	Media *types.Media
 
-	// The name of the job. Note that you can't use the strings "." or ".." by
-	// themselves as the job name. The name must also be unique within an AWS account.
-	// If you try to create a transcription job with the same name as a previous
-	// transcription job you will receive a ConflictException error.
+	// The name of the job. You can't use the strings "." or ".." by themselves as the
+	// job name. The name must also be unique within an AWS account. If you try to
+	// create a transcription job with the same name as a previous transcription job,
+	// you get a ConflictException error.
 	//
 	// This member is required.
 	TranscriptionJobName *string
@@ -50,10 +45,23 @@ type StartTranscriptionJobInput struct {
 	// An object that contains the request parameters for content redaction.
 	ContentRedaction *types.ContentRedaction
 
+	// Set this field to true to enable automatic language identification. Automatic
+	// language identification is disabled by default. You receive a
+	// BadRequestException error if you enter a value for a LanguageCode.
+	IdentifyLanguage *bool
+
 	// Provides information about how a transcription job is executed. Use this field
 	// to indicate that the job can be queued for deferred execution if the concurrency
 	// limit is reached and there are no slots available to immediately run the job.
 	JobExecutionSettings *types.JobExecutionSettings
+
+	// The language code for the language used in the input media file.
+	LanguageCode types.LanguageCode
+
+	// An object containing a list of languages that might be present in your
+	// collection of audio files. Automatic language identification chooses a language
+	// that best matches the source audio from that list.
+	LanguageOptions []types.LanguageCode
 
 	// The format of the input media file.
 	MediaFormat types.MediaFormat
@@ -64,6 +72,10 @@ type StartTranscriptionJobInput struct {
 	// Transcribe. In most cases, you should leave the MediaSampleRateHertz field blank
 	// and let Amazon Transcribe determine the sample rate.
 	MediaSampleRateHertz *int32
+
+	// Choose the custom language model you use for your transcription job in this
+	// parameter.
+	ModelSettings *types.ModelSettings
 
 	// The location where the transcription is stored. If you set the OutputBucketName,
 	// Amazon Transcribe puts the transcript in the specified S3 bucket. When you call
@@ -110,6 +122,21 @@ type StartTranscriptionJobInput struct {
 	// default Amazon S3 key (SSE-S3). If you specify a KMS key to encrypt your output,
 	// you must also specify an output location in the OutputBucketName parameter.
 	OutputEncryptionKMSKeyId *string
+
+	// You can specify a location in an Amazon S3 bucket to store the output of your
+	// transcription job. If you don't specify an output key, Amazon Transcribe stores
+	// the output of your transcription job in the Amazon S3 bucket you specified. By
+	// default, the object key is "your-transcription-job-name.json". You can use
+	// output keys to specify the Amazon S3 prefix and file name of the transcription
+	// output. For example, specifying the Amazon S3 prefix, "folder1/folder2/", as an
+	// output key would lead to the output being stored as
+	// "folder1/folder2/your-transcription-job-name.json". If you specify
+	// "my-other-job-name.json" as the output key, the object key is changed to
+	// "my-other-job-name.json". You can use an output key to change both the prefix
+	// and the file name, for example "folder/my-other-job-name.json". If you specify
+	// an output key, you must also specify an S3 bucket in the OutputBucketName
+	// parameter.
+	OutputKey *string
 
 	// A Settings object that provides optional settings for a transcription job.
 	Settings *types.Settings

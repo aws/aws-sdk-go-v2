@@ -2171,6 +2171,11 @@ func awsAwsjson11_serializeDocumentLoggingConfiguration(v *types.LoggingConfigur
 		}
 	}
 
+	if v.ManagedByFirewallManager != nil {
+		ok := object.Key("ManagedByFirewallManager")
+		ok.Boolean(*v.ManagedByFirewallManager)
+	}
+
 	if v.RedactedFields != nil {
 		ok := object.Key("RedactedFields")
 		if err := awsAwsjson11_serializeDocumentRedactedFields(v.RedactedFields, ok); err != nil {

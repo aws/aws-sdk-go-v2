@@ -30,6 +30,26 @@ func (m *validateOpAssociateResolverEndpointIpAddress) HandleInitialize(ctx cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateResolverQueryLogConfig struct {
+}
+
+func (*validateOpAssociateResolverQueryLogConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateResolverQueryLogConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateResolverQueryLogConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateResolverQueryLogConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateResolverRule struct {
 }
 
@@ -65,6 +85,26 @@ func (m *validateOpCreateResolverEndpoint) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateResolverEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateResolverQueryLogConfig struct {
+}
+
+func (*validateOpCreateResolverQueryLogConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateResolverQueryLogConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateResolverQueryLogConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateResolverQueryLogConfigInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -110,6 +150,26 @@ func (m *validateOpDeleteResolverEndpoint) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteResolverQueryLogConfig struct {
+}
+
+func (*validateOpDeleteResolverQueryLogConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteResolverQueryLogConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteResolverQueryLogConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteResolverQueryLogConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteResolverRule struct {
 }
 
@@ -150,6 +210,26 @@ func (m *validateOpDisassociateResolverEndpointIpAddress) HandleInitialize(ctx c
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateResolverQueryLogConfig struct {
+}
+
+func (*validateOpDisassociateResolverQueryLogConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateResolverQueryLogConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateResolverQueryLogConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateResolverQueryLogConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisassociateResolverRule struct {
 }
 
@@ -185,6 +265,66 @@ func (m *validateOpGetResolverEndpoint) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetResolverEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetResolverQueryLogConfigAssociation struct {
+}
+
+func (*validateOpGetResolverQueryLogConfigAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetResolverQueryLogConfigAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetResolverQueryLogConfigAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetResolverQueryLogConfigAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetResolverQueryLogConfig struct {
+}
+
+func (*validateOpGetResolverQueryLogConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetResolverQueryLogConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetResolverQueryLogConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetResolverQueryLogConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetResolverQueryLogConfigPolicy struct {
+}
+
+func (*validateOpGetResolverQueryLogConfigPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetResolverQueryLogConfigPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetResolverQueryLogConfigPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetResolverQueryLogConfigPolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -285,6 +425,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutResolverQueryLogConfigPolicy struct {
+}
+
+func (*validateOpPutResolverQueryLogConfigPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutResolverQueryLogConfigPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutResolverQueryLogConfigPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutResolverQueryLogConfigPolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -394,12 +554,20 @@ func addOpAssociateResolverEndpointIpAddressValidationMiddleware(stack *middlewa
 	return stack.Initialize.Add(&validateOpAssociateResolverEndpointIpAddress{}, middleware.After)
 }
 
+func addOpAssociateResolverQueryLogConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateResolverQueryLogConfig{}, middleware.After)
+}
+
 func addOpAssociateResolverRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateResolverRule{}, middleware.After)
 }
 
 func addOpCreateResolverEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateResolverEndpoint{}, middleware.After)
+}
+
+func addOpCreateResolverQueryLogConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateResolverQueryLogConfig{}, middleware.After)
 }
 
 func addOpCreateResolverRuleValidationMiddleware(stack *middleware.Stack) error {
@@ -410,6 +578,10 @@ func addOpDeleteResolverEndpointValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpDeleteResolverEndpoint{}, middleware.After)
 }
 
+func addOpDeleteResolverQueryLogConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteResolverQueryLogConfig{}, middleware.After)
+}
+
 func addOpDeleteResolverRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteResolverRule{}, middleware.After)
 }
@@ -418,12 +590,28 @@ func addOpDisassociateResolverEndpointIpAddressValidationMiddleware(stack *middl
 	return stack.Initialize.Add(&validateOpDisassociateResolverEndpointIpAddress{}, middleware.After)
 }
 
+func addOpDisassociateResolverQueryLogConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateResolverQueryLogConfig{}, middleware.After)
+}
+
 func addOpDisassociateResolverRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateResolverRule{}, middleware.After)
 }
 
 func addOpGetResolverEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetResolverEndpoint{}, middleware.After)
+}
+
+func addOpGetResolverQueryLogConfigAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetResolverQueryLogConfigAssociation{}, middleware.After)
+}
+
+func addOpGetResolverQueryLogConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetResolverQueryLogConfig{}, middleware.After)
+}
+
+func addOpGetResolverQueryLogConfigPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetResolverQueryLogConfigPolicy{}, middleware.After)
 }
 
 func addOpGetResolverRuleAssociationValidationMiddleware(stack *middleware.Stack) error {
@@ -444,6 +632,10 @@ func addOpListResolverEndpointIpAddressesValidationMiddleware(stack *middleware.
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpPutResolverQueryLogConfigPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutResolverQueryLogConfigPolicy{}, middleware.After)
 }
 
 func addOpPutResolverRulePolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -515,6 +707,41 @@ func validateResolverRuleConfig(v *types.ResolverRuleConfig) error {
 	}
 }
 
+func validateTag(v *types.Tag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTagList(v []*types.Tag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
+	for i := range v {
+		if err := validateTag(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTargetAddress(v *types.TargetAddress) error {
 	if v == nil {
 		return nil
@@ -552,11 +779,29 @@ func validateOpAssociateResolverEndpointIpAddressInput(v *AssociateResolverEndpo
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociateResolverEndpointIpAddressInput"}
+	if v.ResolverEndpointId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResolverEndpointId"))
+	}
 	if v.IpAddress == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IpAddress"))
 	}
-	if v.ResolverEndpointId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResolverEndpointId"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateResolverQueryLogConfigInput(v *AssociateResolverQueryLogConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateResolverQueryLogConfigInput"}
+	if v.ResolverQueryLogConfigId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResolverQueryLogConfigId"))
+	}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -570,11 +815,11 @@ func validateOpAssociateResolverRuleInput(v *AssociateResolverRuleInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociateResolverRuleInput"}
-	if v.ResolverRuleId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResolverRuleId"))
-	}
 	if v.VPCId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VPCId"))
+	}
+	if v.ResolverRuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResolverRuleId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -588,8 +833,8 @@ func validateOpCreateResolverEndpointInput(v *CreateResolverEndpointInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateResolverEndpointInput"}
-	if v.SecurityGroupIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupIds"))
+	if v.CreatorRequestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CreatorRequestId"))
 	}
 	if v.IpAddresses == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IpAddresses"))
@@ -598,11 +843,42 @@ func validateOpCreateResolverEndpointInput(v *CreateResolverEndpointInput) error
 			invalidParams.AddNested("IpAddresses", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.CreatorRequestId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CreatorRequestId"))
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if len(v.Direction) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Direction"))
+	}
+	if v.SecurityGroupIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateResolverQueryLogConfigInput(v *CreateResolverQueryLogConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateResolverQueryLogConfigInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DestinationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationArn"))
+	}
+	if v.CreatorRequestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CreatorRequestId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -616,15 +892,20 @@ func validateOpCreateResolverRuleInput(v *CreateResolverRuleInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateResolverRuleInput"}
-	if v.CreatorRequestId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CreatorRequestId"))
-	}
 	if len(v.RuleType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("RuleType"))
+	}
+	if v.CreatorRequestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CreatorRequestId"))
 	}
 	if v.TargetIps != nil {
 		if err := validateTargetList(v.TargetIps); err != nil {
 			invalidParams.AddNested("TargetIps", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.DomainName == nil {
@@ -644,6 +925,21 @@ func validateOpDeleteResolverEndpointInput(v *DeleteResolverEndpointInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteResolverEndpointInput"}
 	if v.ResolverEndpointId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResolverEndpointId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteResolverQueryLogConfigInput(v *DeleteResolverQueryLogConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteResolverQueryLogConfigInput"}
+	if v.ResolverQueryLogConfigId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResolverQueryLogConfigId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -672,11 +968,29 @@ func validateOpDisassociateResolverEndpointIpAddressInput(v *DisassociateResolve
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateResolverEndpointIpAddressInput"}
+	if v.IpAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpAddress"))
+	}
 	if v.ResolverEndpointId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResolverEndpointId"))
 	}
-	if v.IpAddress == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IpAddress"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateResolverQueryLogConfigInput(v *DisassociateResolverQueryLogConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateResolverQueryLogConfigInput"}
+	if v.ResolverQueryLogConfigId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResolverQueryLogConfigId"))
+	}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -690,11 +1004,11 @@ func validateOpDisassociateResolverRuleInput(v *DisassociateResolverRuleInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateResolverRuleInput"}
-	if v.ResolverRuleId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResolverRuleId"))
-	}
 	if v.VPCId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VPCId"))
+	}
+	if v.ResolverRuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResolverRuleId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -710,6 +1024,51 @@ func validateOpGetResolverEndpointInput(v *GetResolverEndpointInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetResolverEndpointInput"}
 	if v.ResolverEndpointId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResolverEndpointId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetResolverQueryLogConfigAssociationInput(v *GetResolverQueryLogConfigAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetResolverQueryLogConfigAssociationInput"}
+	if v.ResolverQueryLogConfigAssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResolverQueryLogConfigAssociationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetResolverQueryLogConfigInput(v *GetResolverQueryLogConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetResolverQueryLogConfigInput"}
+	if v.ResolverQueryLogConfigId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResolverQueryLogConfigId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetResolverQueryLogConfigPolicyInput(v *GetResolverQueryLogConfigPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetResolverQueryLogConfigPolicyInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -793,16 +1152,34 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	}
 }
 
+func validateOpPutResolverQueryLogConfigPolicyInput(v *PutResolverQueryLogConfigPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutResolverQueryLogConfigPolicyInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.ResolverQueryLogConfigPolicy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResolverQueryLogConfigPolicy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutResolverRulePolicyInput(v *PutResolverRulePolicyInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutResolverRulePolicyInput"}
-	if v.Arn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
-	}
 	if v.ResolverRulePolicy == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResolverRulePolicy"))
+	}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -816,11 +1193,15 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.Tags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	} else if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -867,15 +1248,15 @@ func validateOpUpdateResolverRuleInput(v *UpdateResolverRuleInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateResolverRuleInput"}
+	if v.ResolverRuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResolverRuleId"))
+	}
 	if v.Config == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Config"))
 	} else if v.Config != nil {
 		if err := validateResolverRuleConfig(v.Config); err != nil {
 			invalidParams.AddNested("Config", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ResolverRuleId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResolverRuleId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

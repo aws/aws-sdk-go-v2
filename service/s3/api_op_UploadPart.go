@@ -15,28 +15,34 @@ import (
 // Uploads a part in a multipart upload. In this operation, you provide part data
 // in your request. However, you have an option to specify your existing Amazon S3
 // object as a data source for the part you are uploading. To upload a part from an
-// existing object, you use the UploadPartCopy operation. You must initiate a
-// multipart upload (see CreateMultipartUpload) before you can upload any part. In
-// response to your initiate request, Amazon S3 returns an upload ID, a unique
-// identifier, that you must include in your upload part request. Part numbers can
-// be any number from 1 to 10,000, inclusive. A part number uniquely identifies a
-// part and also defines its position within the object being created. If you
-// upload a new part using the same part number that was used with a previous part,
-// the previously uploaded part is overwritten. Each part must be at least 5 MB in
-// size, except the last part. There is no size limit on the last part of your
-// multipart upload. To ensure that data is not corrupted when traversing the
-// network, specify the Content-MD5 header in the upload part request. Amazon S3
-// checks the part data against the provided MD5 value. If they do not match,
-// Amazon S3 returns an error. Note: After you initiate multipart upload and upload
-// one or more parts, you must either complete or abort multipart upload in order
-// to stop getting charged for storage of the uploaded parts. Only after you either
-// complete or abort multipart upload, Amazon S3 frees up the parts storage and
-// stops charging you for the parts storage. For more information on multipart
-// uploads, go to Multipart Upload Overview
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html) in the Amazon
-// Simple Storage Service Developer Guide . For information on the permissions
-// required to use the multipart upload API, go to Multipart Upload API and
-// Permissions
+// existing object, you use the UploadPartCopy
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html)
+// operation. You must initiate a multipart upload (see CreateMultipartUpload
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html))
+// before you can upload any part. In response to your initiate request, Amazon S3
+// returns an upload ID, a unique identifier, that you must include in your upload
+// part request. Part numbers can be any number from 1 to 10,000, inclusive. A part
+// number uniquely identifies a part and also defines its position within the
+// object being created. If you upload a new part using the same part number that
+// was used with a previous part, the previously uploaded part is overwritten. Each
+// part must be at least 5 MB in size, except the last part. There is no size limit
+// on the last part of your multipart upload. To ensure that data is not corrupted
+// when traversing the network, specify the Content-MD5 header in the upload part
+// request. Amazon S3 checks the part data against the provided MD5 value. If they
+// do not match, Amazon S3 returns an error. If the upload request is signed with
+// Signature Version 4, then AWS S3 uses the x-amz-content-sha256 header as a
+// checksum instead of Content-MD5. For more information see Authenticating
+// Requests: Using the Authorization Header (AWS Signature Version 4)
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-auth-using-authorization-header.html).
+// Note: After you initiate multipart upload and upload one or more parts, you must
+// either complete or abort multipart upload in order to stop getting charged for
+// storage of the uploaded parts. Only after you either complete or abort multipart
+// upload, Amazon S3 frees up the parts storage and stops charging you for the
+// parts storage. For more information on multipart uploads, go to Multipart Upload
+// Overview (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html) in
+// the Amazon Simple Storage Service Developer Guide . For information on the
+// permissions required to use the multipart upload API, go to Multipart Upload API
+// and Permissions
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html) in the
 // Amazon Simple Storage Service Developer Guide. You can optionally request
 // server-side encryption where Amazon S3 encrypts your data as it writes it to
@@ -44,18 +50,20 @@ import (
 // the option of providing your own encryption key, or you can use the AWS managed
 // encryption keys. If you choose to provide your own encryption key, the request
 // headers you provide in the request must match the headers you used in the
-// request to initiate the upload by using CreateMultipartUpload. For more
-// information, go to Using Server-Side Encryption
+// request to initiate the upload by using CreateMultipartUpload
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html).
+// For more information, go to Using Server-Side Encryption
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)
 // in the Amazon Simple Storage Service Developer Guide. Server-side encryption is
 // supported by the S3 Multipart Upload actions. Unless you are using a
 // customer-provided encryption key, you don't need to specify the encryption
 // parameters in each UploadPart request. Instead, you only need to specify the
 // server-side encryption parameters in the initial Initiate Multipart request. For
-// more information, see CreateMultipartUpload. If you requested server-side
-// encryption using a customer-provided encryption key in your initiate multipart
-// upload request, you must provide identical encryption information in each part
-// upload using the following headers.
+// more information, see CreateMultipartUpload
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html).
+// If you requested server-side encryption using a customer-provided encryption key
+// in your initiate multipart upload request, you must provide identical encryption
+// information in each part upload using the following headers.
 //
 //     *
 // x-amz-server-side-encryption-customer-algorithm
@@ -83,16 +91,23 @@ import (
 // Related Resources
 //
 //     * CreateMultipartUpload
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html)
 //
-//     *
-// CompleteMultipartUpload
 //
-//     * AbortMultipartUpload
+// * CompleteMultipartUpload
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html)
 //
-//     * ListParts
+//
+// * AbortMultipartUpload
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html)
+//
+//
+// * ListParts
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html)
 //
 //     *
 // ListMultipartUploads
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html)
 func (c *Client) UploadPart(ctx context.Context, params *UploadPartInput, optFns ...func(*Options)) (*UploadPartOutput, error) {
 	if params == nil {
 		params = &UploadPartInput{}
@@ -110,7 +125,23 @@ func (c *Client) UploadPart(ctx context.Context, params *UploadPartInput, optFns
 
 type UploadPartInput struct {
 
-	// Name of the bucket to which the multipart upload was initiated.
+	// The name of the bucket to which the multipart upload was initiated. When using
+	// this API with an access point, you must direct requests to the access point
+	// hostname. The access point hostname takes the form
+	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
+	// operation with an access point through the AWS SDKs, you provide the access
+	// point ARN in place of the bucket name. For more information about access point
+	// ARNs, see Using Access Points
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
+	// the Amazon Simple Storage Service Developer Guide. When using this API with
+	// Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname.
+	// The S3 on Outposts hostname takes the form
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
+	// this operation using S3 on Outposts through the AWS SDKs, you provide the
+	// Outposts bucket ARN in place of the bucket name. For more information about S3
+	// on Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3onOutposts.html) in the
+	// Amazon Simple Storage Service Developer Guide.
 	//
 	// This member is required.
 	Bucket *string
@@ -142,6 +173,10 @@ type UploadPartInput struct {
 	// auto-populated when using the command from the CLI. This parameter is required
 	// if object lock parameters are specified.
 	ContentMD5 *string
+
+	// The account id of the expected bucket owner. If the bucket is owned by a
+	// different account, the request will fail with an HTTP 403 (Access Denied) error.
+	ExpectedBucketOwner *string
 
 	// Confirms that the requester knows that they will be charged for the request.
 	// Bucket owners need not specify this parameter in their requests. For information

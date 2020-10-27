@@ -12,8 +12,10 @@ import (
 )
 
 // Updates the specified user pool with the specified attributes. You can get a
-// list of the current user pool settings with . If you don't provide a value for
-// an attribute, it will be set to the default value.
+// list of the current user pool settings using DescribeUserPool
+// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_DescribeUserPool.html).
+// If you don't provide a value for an attribute, it will be set to the default
+// value.
 func (c *Client) UpdateUserPool(ctx context.Context, params *UpdateUserPoolInput, optFns ...func(*Options)) (*UpdateUserPoolOutput, error) {
 	if params == nil {
 		params = &UpdateUserPoolInput{}

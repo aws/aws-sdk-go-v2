@@ -105,6 +105,17 @@ type CreateComputeEnvironmentInput struct {
 	// environment accepts jobs from a queue and can scale out automatically based on
 	// queues.
 	State types.CEState
+
+	// The tags that you apply to the compute environment to help you categorize and
+	// organize your resources. Each tag consists of a key and an optional value. For
+	// more information, see Tagging AWS Resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in AWS General
+	// Reference. These tags can be updated or removed using the TagResource
+	// (https://docs.aws.amazon.com/batch/latest/APIReference/API_TagResource.html) and
+	// UntagResource
+	// (https://docs.aws.amazon.com/batch/latest/APIReference/API_UntagResource.html)
+	// API operations. These tags do not propagate to the underlying compute resources.
+	Tags map[string]*string
 }
 
 type CreateComputeEnvironmentOutput struct {

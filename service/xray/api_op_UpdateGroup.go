@@ -37,13 +37,24 @@ type UpdateGroupInput struct {
 
 	// The case-sensitive name of the group.
 	GroupName *string
+
+	// The structure containing configurations related to insights.
+	//
+	//     * The
+	// InsightsEnabled boolean can be set to true to enable insights for the group or
+	// false to disable insights for the group.
+	//
+	//     * The NotifcationsEnabled boolean
+	// can be set to true to enable insights notifications for the group. Notifications
+	// can only be enabled on a group with InsightsEnabled set to true.
+	InsightsConfiguration *types.InsightsConfiguration
 }
 
 type UpdateGroupOutput struct {
 
 	// The group that was updated. Contains the name of the group that was updated, the
-	// ARN of the group that was updated, and the updated filter expression assigned to
-	// the group.
+	// ARN of the group that was updated, the updated filter expression, and the
+	// updated insight configuration assigned to the group.
 	Group *types.Group
 
 	// Metadata pertaining to the operation's result.

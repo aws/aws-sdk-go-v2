@@ -11,7 +11,8 @@ import (
 )
 
 // Creates a recommendation filter. For more information, see Using Filters with
-// Amazon Personalize.
+// Amazon Personalize
+// (https://docs.aws.amazon.com/personalize/latest/dg/filters.html).
 func (c *Client) CreateFilter(ctx context.Context, params *CreateFilterInput, optFns ...func(*Options)) (*CreateFilterOutput, error) {
 	if params == nil {
 		params = &CreateFilterInput{}
@@ -39,7 +40,7 @@ type CreateFilterInput struct {
 	// WHERE INTERACTIONS.event_type in ("EVENT_TYPE") Where "EVENT_TYPE" is the type
 	// of event to filter out. To filter out all items with any interactions history,
 	// set "*" as the EVENT_TYPE. For more information, see Using Filters with Amazon
-	// Personalize.
+	// Personalize (https://docs.aws.amazon.com/personalize/latest/dg/filters.html).
 	//
 	// This member is required.
 	FilterExpression *string

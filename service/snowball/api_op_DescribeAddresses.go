@@ -42,7 +42,7 @@ type DescribeAddressesInput struct {
 
 type DescribeAddressesOutput struct {
 
-	// The Snowball shipping addresses that were created for this account.
+	// The Snow device shipping addresses that were created for this account.
 	Addresses []*types.Address
 
 	// HTTP requests are stateless. If you use the automatically generated NextToken

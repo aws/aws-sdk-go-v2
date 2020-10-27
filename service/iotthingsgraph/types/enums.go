@@ -9,6 +9,15 @@ const (
 	DefinitionLanguageGraphql DefinitionLanguage = "GRAPHQL"
 )
 
+// Values returns all known values for DefinitionLanguage. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DefinitionLanguage) Values() []DefinitionLanguage {
+	return []DefinitionLanguage{
+		"GRAPHQL",
+	}
+}
+
 type DeploymentTarget string
 
 // Enum values for DeploymentTarget
@@ -16,6 +25,16 @@ const (
 	DeploymentTargetGreengrass DeploymentTarget = "GREENGRASS"
 	DeploymentTargetCloud      DeploymentTarget = "CLOUD"
 )
+
+// Values returns all known values for DeploymentTarget. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeploymentTarget) Values() []DeploymentTarget {
+	return []DeploymentTarget{
+		"GREENGRASS",
+		"CLOUD",
+	}
+}
 
 type EntityFilterName string
 
@@ -26,6 +45,18 @@ const (
 	EntityFilterNameSemantic_type_path   EntityFilterName = "SEMANTIC_TYPE_PATH"
 	EntityFilterNameReferenced_entity_id EntityFilterName = "REFERENCED_ENTITY_ID"
 )
+
+// Values returns all known values for EntityFilterName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EntityFilterName) Values() []EntityFilterName {
+	return []EntityFilterName{
+		"NAME",
+		"NAMESPACE",
+		"SEMANTIC_TYPE_PATH",
+		"REFERENCED_ENTITY_ID",
+	}
+}
 
 type EntityType string
 
@@ -42,6 +73,24 @@ const (
 	EntityTypeMapping      EntityType = "MAPPING"
 	EntityTypeEnum         EntityType = "ENUM"
 )
+
+// Values returns all known values for EntityType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (EntityType) Values() []EntityType {
+	return []EntityType{
+		"DEVICE",
+		"SERVICE",
+		"DEVICE_MODEL",
+		"CAPABILITY",
+		"STATE",
+		"ACTION",
+		"EVENT",
+		"PROPERTY",
+		"MAPPING",
+		"ENUM",
+	}
+}
 
 type FlowExecutionEventType string
 
@@ -66,6 +115,31 @@ const (
 	FlowExecutionEventTypeAcknowledge_task_message       FlowExecutionEventType = "ACKNOWLEDGE_TASK_MESSAGE"
 )
 
+// Values returns all known values for FlowExecutionEventType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FlowExecutionEventType) Values() []FlowExecutionEventType {
+	return []FlowExecutionEventType{
+		"EXECUTION_STARTED",
+		"EXECUTION_FAILED",
+		"EXECUTION_ABORTED",
+		"EXECUTION_SUCCEEDED",
+		"STEP_STARTED",
+		"STEP_FAILED",
+		"STEP_SUCCEEDED",
+		"ACTIVITY_SCHEDULED",
+		"ACTIVITY_STARTED",
+		"ACTIVITY_FAILED",
+		"ACTIVITY_SUCCEEDED",
+		"START_FLOW_EXECUTION_TASK",
+		"SCHEDULE_NEXT_READY_STEPS_TASK",
+		"THING_ACTION_TASK",
+		"THING_ACTION_TASK_FAILED",
+		"THING_ACTION_TASK_SUCCEEDED",
+		"ACKNOWLEDGE_TASK_MESSAGE",
+	}
+}
+
 type FlowExecutionStatus string
 
 // Enum values for FlowExecutionStatus
@@ -76,12 +150,33 @@ const (
 	FlowExecutionStatusFailed    FlowExecutionStatus = "FAILED"
 )
 
+// Values returns all known values for FlowExecutionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FlowExecutionStatus) Values() []FlowExecutionStatus {
+	return []FlowExecutionStatus{
+		"RUNNING",
+		"ABORTED",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
 type FlowTemplateFilterName string
 
 // Enum values for FlowTemplateFilterName
 const (
 	FlowTemplateFilterNameDevice_model_id FlowTemplateFilterName = "DEVICE_MODEL_ID"
 )
+
+// Values returns all known values for FlowTemplateFilterName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FlowTemplateFilterName) Values() []FlowTemplateFilterName {
+	return []FlowTemplateFilterName{
+		"DEVICE_MODEL_ID",
+	}
+}
 
 type NamespaceDeletionStatus string
 
@@ -92,12 +187,33 @@ const (
 	NamespaceDeletionStatusFailed      NamespaceDeletionStatus = "FAILED"
 )
 
+// Values returns all known values for NamespaceDeletionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NamespaceDeletionStatus) Values() []NamespaceDeletionStatus {
+	return []NamespaceDeletionStatus{
+		"IN_PROGRESS",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
 type NamespaceDeletionStatusErrorCodes string
 
 // Enum values for NamespaceDeletionStatusErrorCodes
 const (
 	NamespaceDeletionStatusErrorCodesValidation_failed NamespaceDeletionStatusErrorCodes = "VALIDATION_FAILED"
 )
+
+// Values returns all known values for NamespaceDeletionStatusErrorCodes. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (NamespaceDeletionStatusErrorCodes) Values() []NamespaceDeletionStatusErrorCodes {
+	return []NamespaceDeletionStatusErrorCodes{
+		"VALIDATION_FAILED",
+	}
+}
 
 type SystemInstanceDeploymentStatus string
 
@@ -113,6 +229,23 @@ const (
 	SystemInstanceDeploymentStatusDeleted_in_target    SystemInstanceDeploymentStatus = "DELETED_IN_TARGET"
 )
 
+// Values returns all known values for SystemInstanceDeploymentStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (SystemInstanceDeploymentStatus) Values() []SystemInstanceDeploymentStatus {
+	return []SystemInstanceDeploymentStatus{
+		"NOT_DEPLOYED",
+		"BOOTSTRAP",
+		"DEPLOY_IN_PROGRESS",
+		"DEPLOYED_IN_TARGET",
+		"UNDEPLOY_IN_PROGRESS",
+		"FAILED",
+		"PENDING_DELETE",
+		"DELETED_IN_TARGET",
+	}
+}
+
 type SystemInstanceFilterName string
 
 // Enum values for SystemInstanceFilterName
@@ -122,12 +255,32 @@ const (
 	SystemInstanceFilterNameGreengrass_group_name SystemInstanceFilterName = "GREENGRASS_GROUP_NAME"
 )
 
+// Values returns all known values for SystemInstanceFilterName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SystemInstanceFilterName) Values() []SystemInstanceFilterName {
+	return []SystemInstanceFilterName{
+		"SYSTEM_TEMPLATE_ID",
+		"STATUS",
+		"GREENGRASS_GROUP_NAME",
+	}
+}
+
 type SystemTemplateFilterName string
 
 // Enum values for SystemTemplateFilterName
 const (
 	SystemTemplateFilterNameFlow_template_id SystemTemplateFilterName = "FLOW_TEMPLATE_ID"
 )
+
+// Values returns all known values for SystemTemplateFilterName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SystemTemplateFilterName) Values() []SystemTemplateFilterName {
+	return []SystemTemplateFilterName{
+		"FLOW_TEMPLATE_ID",
+	}
+}
 
 type UploadStatus string
 
@@ -137,3 +290,14 @@ const (
 	UploadStatusSucceeded   UploadStatus = "SUCCEEDED"
 	UploadStatusFailed      UploadStatus = "FAILED"
 )
+
+// Values returns all known values for UploadStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (UploadStatus) Values() []UploadStatus {
+	return []UploadStatus{
+		"IN_PROGRESS",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}

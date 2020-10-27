@@ -10,6 +10,38 @@ const (
 	AttributeAll     Attribute = "ALL"
 )
 
+// Values returns all known values for Attribute. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Attribute) Values() []Attribute {
+	return []Attribute{
+		"DEFAULT",
+		"ALL",
+	}
+}
+
+type BodyPart string
+
+// Enum values for BodyPart
+const (
+	BodyPartFace       BodyPart = "FACE"
+	BodyPartHead       BodyPart = "HEAD"
+	BodyPartLeft_hand  BodyPart = "LEFT_HAND"
+	BodyPartRight_hand BodyPart = "RIGHT_HAND"
+)
+
+// Values returns all known values for BodyPart. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (BodyPart) Values() []BodyPart {
+	return []BodyPart{
+		"FACE",
+		"HEAD",
+		"LEFT_HAND",
+		"RIGHT_HAND",
+	}
+}
+
 type CelebrityRecognitionSortBy string
 
 // Enum values for CelebrityRecognitionSortBy
@@ -17,6 +49,16 @@ const (
 	CelebrityRecognitionSortById        CelebrityRecognitionSortBy = "ID"
 	CelebrityRecognitionSortByTimestamp CelebrityRecognitionSortBy = "TIMESTAMP"
 )
+
+// Values returns all known values for CelebrityRecognitionSortBy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CelebrityRecognitionSortBy) Values() []CelebrityRecognitionSortBy {
+	return []CelebrityRecognitionSortBy{
+		"ID",
+		"TIMESTAMP",
+	}
+}
 
 type ContentClassifier string
 
@@ -26,6 +68,16 @@ const (
 	ContentClassifierFree_of_adult_content                       ContentClassifier = "FreeOfAdultContent"
 )
 
+// Values returns all known values for ContentClassifier. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ContentClassifier) Values() []ContentClassifier {
+	return []ContentClassifier{
+		"FreeOfPersonallyIdentifiableInformation",
+		"FreeOfAdultContent",
+	}
+}
+
 type ContentModerationSortBy string
 
 // Enum values for ContentModerationSortBy
@@ -33,6 +85,16 @@ const (
 	ContentModerationSortByName      ContentModerationSortBy = "NAME"
 	ContentModerationSortByTimestamp ContentModerationSortBy = "TIMESTAMP"
 )
+
+// Values returns all known values for ContentModerationSortBy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ContentModerationSortBy) Values() []ContentModerationSortBy {
+	return []ContentModerationSortBy{
+		"NAME",
+		"TIMESTAMP",
+	}
+}
 
 type EmotionName string
 
@@ -49,6 +111,23 @@ const (
 	EmotionNameFear      EmotionName = "FEAR"
 )
 
+// Values returns all known values for EmotionName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (EmotionName) Values() []EmotionName {
+	return []EmotionName{
+		"HAPPY",
+		"SAD",
+		"ANGRY",
+		"CONFUSED",
+		"DISGUSTED",
+		"SURPRISED",
+		"CALM",
+		"UNKNOWN",
+		"FEAR",
+	}
+}
+
 type FaceAttributes string
 
 // Enum values for FaceAttributes
@@ -56,6 +135,16 @@ const (
 	FaceAttributesDefault FaceAttributes = "DEFAULT"
 	FaceAttributesAll     FaceAttributes = "ALL"
 )
+
+// Values returns all known values for FaceAttributes. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FaceAttributes) Values() []FaceAttributes {
+	return []FaceAttributes{
+		"DEFAULT",
+		"ALL",
+	}
+}
 
 type FaceSearchSortBy string
 
@@ -65,6 +154,16 @@ const (
 	FaceSearchSortByTimestamp FaceSearchSortBy = "TIMESTAMP"
 )
 
+// Values returns all known values for FaceSearchSortBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FaceSearchSortBy) Values() []FaceSearchSortBy {
+	return []FaceSearchSortBy{
+		"INDEX",
+		"TIMESTAMP",
+	}
+}
+
 type GenderType string
 
 // Enum values for GenderType
@@ -73,6 +172,16 @@ const (
 	GenderTypeFemale GenderType = "Female"
 )
 
+// Values returns all known values for GenderType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (GenderType) Values() []GenderType {
+	return []GenderType{
+		"Male",
+		"Female",
+	}
+}
+
 type LabelDetectionSortBy string
 
 // Enum values for LabelDetectionSortBy
@@ -80,6 +189,16 @@ const (
 	LabelDetectionSortByName      LabelDetectionSortBy = "NAME"
 	LabelDetectionSortByTimestamp LabelDetectionSortBy = "TIMESTAMP"
 )
+
+// Values returns all known values for LabelDetectionSortBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LabelDetectionSortBy) Values() []LabelDetectionSortBy {
+	return []LabelDetectionSortBy{
+		"NAME",
+		"TIMESTAMP",
+	}
+}
 
 type LandmarkType string
 
@@ -117,6 +236,44 @@ const (
 	LandmarkTypeUpperjawlineright LandmarkType = "upperJawlineRight"
 )
 
+// Values returns all known values for LandmarkType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (LandmarkType) Values() []LandmarkType {
+	return []LandmarkType{
+		"eyeLeft",
+		"eyeRight",
+		"nose",
+		"mouthLeft",
+		"mouthRight",
+		"leftEyeBrowLeft",
+		"leftEyeBrowRight",
+		"leftEyeBrowUp",
+		"rightEyeBrowLeft",
+		"rightEyeBrowRight",
+		"rightEyeBrowUp",
+		"leftEyeLeft",
+		"leftEyeRight",
+		"leftEyeUp",
+		"leftEyeDown",
+		"rightEyeLeft",
+		"rightEyeRight",
+		"rightEyeUp",
+		"rightEyeDown",
+		"noseLeft",
+		"noseRight",
+		"mouthUp",
+		"mouthDown",
+		"leftPupil",
+		"rightPupil",
+		"upperJawlineLeft",
+		"midJawlineLeft",
+		"chinBottom",
+		"midJawlineRight",
+		"upperJawlineRight",
+	}
+}
+
 type OrientationCorrection string
 
 // Enum values for OrientationCorrection
@@ -127,6 +284,18 @@ const (
 	OrientationCorrectionRotate_270 OrientationCorrection = "ROTATE_270"
 )
 
+// Values returns all known values for OrientationCorrection. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OrientationCorrection) Values() []OrientationCorrection {
+	return []OrientationCorrection{
+		"ROTATE_0",
+		"ROTATE_90",
+		"ROTATE_180",
+		"ROTATE_270",
+	}
+}
+
 type PersonTrackingSortBy string
 
 // Enum values for PersonTrackingSortBy
@@ -134,6 +303,16 @@ const (
 	PersonTrackingSortByIndex     PersonTrackingSortBy = "INDEX"
 	PersonTrackingSortByTimestamp PersonTrackingSortBy = "TIMESTAMP"
 )
+
+// Values returns all known values for PersonTrackingSortBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PersonTrackingSortBy) Values() []PersonTrackingSortBy {
+	return []PersonTrackingSortBy{
+		"INDEX",
+		"TIMESTAMP",
+	}
+}
 
 type ProjectStatus string
 
@@ -143,6 +322,17 @@ const (
 	ProjectStatusCreated  ProjectStatus = "CREATED"
 	ProjectStatusDeleting ProjectStatus = "DELETING"
 )
+
+// Values returns all known values for ProjectStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProjectStatus) Values() []ProjectStatus {
+	return []ProjectStatus{
+		"CREATING",
+		"CREATED",
+		"DELETING",
+	}
+}
 
 type ProjectVersionStatus string
 
@@ -159,6 +349,43 @@ const (
 	ProjectVersionStatusDeleting             ProjectVersionStatus = "DELETING"
 )
 
+// Values returns all known values for ProjectVersionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProjectVersionStatus) Values() []ProjectVersionStatus {
+	return []ProjectVersionStatus{
+		"TRAINING_IN_PROGRESS",
+		"TRAINING_COMPLETED",
+		"TRAINING_FAILED",
+		"STARTING",
+		"RUNNING",
+		"FAILED",
+		"STOPPING",
+		"STOPPED",
+		"DELETING",
+	}
+}
+
+type ProtectiveEquipmentType string
+
+// Enum values for ProtectiveEquipmentType
+const (
+	ProtectiveEquipmentTypeFace_cover ProtectiveEquipmentType = "FACE_COVER"
+	ProtectiveEquipmentTypeHand_cover ProtectiveEquipmentType = "HAND_COVER"
+	ProtectiveEquipmentTypeHead_cover ProtectiveEquipmentType = "HEAD_COVER"
+)
+
+// Values returns all known values for ProtectiveEquipmentType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProtectiveEquipmentType) Values() []ProtectiveEquipmentType {
+	return []ProtectiveEquipmentType{
+		"FACE_COVER",
+		"HAND_COVER",
+		"HEAD_COVER",
+	}
+}
+
 type QualityFilter string
 
 // Enum values for QualityFilter
@@ -169,6 +396,19 @@ const (
 	QualityFilterMedium QualityFilter = "MEDIUM"
 	QualityFilterHigh   QualityFilter = "HIGH"
 )
+
+// Values returns all known values for QualityFilter. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (QualityFilter) Values() []QualityFilter {
+	return []QualityFilter{
+		"NONE",
+		"AUTO",
+		"LOW",
+		"MEDIUM",
+		"HIGH",
+	}
+}
 
 type Reason string
 
@@ -183,6 +423,21 @@ const (
 	ReasonLow_face_quality   Reason = "LOW_FACE_QUALITY"
 )
 
+// Values returns all known values for Reason. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Reason) Values() []Reason {
+	return []Reason{
+		"EXCEEDS_MAX_FACES",
+		"EXTREME_POSE",
+		"LOW_BRIGHTNESS",
+		"LOW_SHARPNESS",
+		"LOW_CONFIDENCE",
+		"SMALL_BOUNDING_BOX",
+		"LOW_FACE_QUALITY",
+	}
+}
+
 type SegmentType string
 
 // Enum values for SegmentType
@@ -190,6 +445,16 @@ const (
 	SegmentTypeTechnical_cue SegmentType = "TECHNICAL_CUE"
 	SegmentTypeShot          SegmentType = "SHOT"
 )
+
+// Values returns all known values for SegmentType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SegmentType) Values() []SegmentType {
+	return []SegmentType{
+		"TECHNICAL_CUE",
+		"SHOT",
+	}
+}
 
 type StreamProcessorStatus string
 
@@ -202,6 +467,19 @@ const (
 	StreamProcessorStatusStopping StreamProcessorStatus = "STOPPING"
 )
 
+// Values returns all known values for StreamProcessorStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StreamProcessorStatus) Values() []StreamProcessorStatus {
+	return []StreamProcessorStatus{
+		"STOPPED",
+		"STARTING",
+		"RUNNING",
+		"FAILED",
+		"STOPPING",
+	}
+}
+
 type TechnicalCueType string
 
 // Enum values for TechnicalCueType
@@ -211,6 +489,17 @@ const (
 	TechnicalCueTypeBlack_frames TechnicalCueType = "BlackFrames"
 )
 
+// Values returns all known values for TechnicalCueType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TechnicalCueType) Values() []TechnicalCueType {
+	return []TechnicalCueType{
+		"ColorBars",
+		"EndCredits",
+		"BlackFrames",
+	}
+}
+
 type TextTypes string
 
 // Enum values for TextTypes
@@ -218,6 +507,16 @@ const (
 	TextTypesLine TextTypes = "LINE"
 	TextTypesWord TextTypes = "WORD"
 )
+
+// Values returns all known values for TextTypes. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (TextTypes) Values() []TextTypes {
+	return []TextTypes{
+		"LINE",
+		"WORD",
+	}
+}
 
 type VideoJobStatus string
 
@@ -227,3 +526,14 @@ const (
 	VideoJobStatusSucceeded   VideoJobStatus = "SUCCEEDED"
 	VideoJobStatusFailed      VideoJobStatus = "FAILED"
 )
+
+// Values returns all known values for VideoJobStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VideoJobStatus) Values() []VideoJobStatus {
+	return []VideoJobStatus{
+		"IN_PROGRESS",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}

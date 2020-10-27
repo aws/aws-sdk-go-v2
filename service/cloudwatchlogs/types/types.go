@@ -22,22 +22,22 @@ type Destination struct {
 	// A role for impersonation, used when delivering log events to the target.
 	RoleArn *string
 
-	// The Amazon Resource Name (ARN) of the physical target to where the log events
-	// are delivered (for example, a Kinesis stream).
+	// The Amazon Resource Name (ARN) of the physical target where the log events are
+	// delivered (for example, a Kinesis stream).
 	TargetArn *string
 }
 
 // Represents an export task.
 type ExportTask struct {
 
-	// The name of Amazon S3 bucket to which the log data was exported.
+	// The name of the S3 bucket to which the log data was exported.
 	Destination *string
 
 	// The prefix that was used as the start of Amazon S3 key for every object
 	// exported.
 	DestinationPrefix *string
 
-	// Execution info about the export task.
+	// Execution information about the export task.
 	ExecutionInfo *ExportTaskExecutionInfo
 
 	// The start time, expressed as the number of milliseconds after Jan 1, 1970
@@ -141,7 +141,8 @@ type LogGroup struct {
 
 	// The number of days to retain the log events in the specified log group. Possible
 	// values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827,
-	// and 3653.
+	// and 3653. If you omit retentionInDays in a PutRetentionPolicy operation, the
+	// events in the log group are always retained and never expire.
 	RetentionInDays *int32
 
 	// The number of bytes stored.
@@ -177,8 +178,8 @@ type LogStream struct {
 	// The time of the most recent log event in the log stream in CloudWatch Logs. This
 	// number is expressed as the number of milliseconds after Jan 1, 1970 00:00:00
 	// UTC. The lastEventTime value updates on an eventual consistency basis. It
-	// typically updates in less than an hour from ingestion, but may take longer in
-	// some rare situations.
+	// typically updates in less than an hour from ingestion, but in rare situations
+	// might take longer.
 	LastEventTimestamp *int64
 
 	// The ingestion time, expressed as the number of milliseconds after Jan 1, 1970
@@ -188,7 +189,7 @@ type LogStream struct {
 	// The name of the log stream.
 	LogStreamName *string
 
-	// The number of bytes stored. IMPORTANT:On June 17, 2019, this parameter was
+	// The number of bytes stored. Important: On June 17, 2019, this parameter was
 	// deprecated for log streams, and is always reported as zero. This change applies
 	// only to log streams. The storedBytes parameter for log groups is not affected.
 	StoredBytes *int64
@@ -210,7 +211,7 @@ type MetricFilter struct {
 	FilterName *string
 
 	// A symbolic description of how CloudWatch Logs should interpret the data in each
-	// log event. For example, a log event may contain timestamps, IP addresses,
+	// log event. For example, a log event can contain timestamps, IP addresses,
 	// strings, and so on. You use the filter pattern to specify what to look for in
 	// the log event message.
 	FilterPattern *string
@@ -297,15 +298,26 @@ type QueryCompileErrorLocation struct {
 	StartCharOffset *int32
 }
 
+// This structure contains details about a saved CloudWatch Logs Insights query
+// definition.
 type QueryDefinition struct {
+
+	// The date that the query definition was most recently modified.
 	LastModified *int64
 
+	// If this query definition contains a list of log groups that it is limited to,
+	// that list appears here.
 	LogGroupNames []*string
 
+	// The name of the query definition.
 	Name *string
 
+	// The unique ID of the query definition.
 	QueryDefinitionId *string
 
+	// The query string to use for this definition. For more information, see
+	// CloudWatch Logs Insights Query Syntax
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html).
 	QueryString *string
 }
 
@@ -414,7 +426,7 @@ type SubscriptionFilter struct {
 	FilterName *string
 
 	// A symbolic description of how CloudWatch Logs should interpret the data in each
-	// log event. For example, a log event may contain timestamps, IP addresses,
+	// log event. For example, a log event can contain timestamps, IP addresses,
 	// strings, and so on. You use the filter pattern to specify what to look for in
 	// the log event message.
 	FilterPattern *string
