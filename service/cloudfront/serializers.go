@@ -62,6 +62,7 @@ func (m *awsRestxml_serializeOpCreateCachePolicy) HandleSerialize(ctx context.Co
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://cloudfront.amazonaws.com/doc/2020-05-31/"))
 		if err := awsRestxml_serializeDocumentCachePolicyConfig(input.CachePolicyConfig, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -134,6 +135,7 @@ func (m *awsRestxml_serializeOpCreateCloudFrontOriginAccessIdentity) HandleSeria
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://cloudfront.amazonaws.com/doc/2020-05-31/"))
 		if err := awsRestxml_serializeDocumentCloudFrontOriginAccessIdentityConfig(input.CloudFrontOriginAccessIdentityConfig, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -206,6 +208,7 @@ func (m *awsRestxml_serializeOpCreateDistribution) HandleSerialize(ctx context.C
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://cloudfront.amazonaws.com/doc/2020-05-31/"))
 		if err := awsRestxml_serializeDocumentDistributionConfig(input.DistributionConfig, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -278,6 +281,7 @@ func (m *awsRestxml_serializeOpCreateDistributionWithTags) HandleSerialize(ctx c
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://cloudfront.amazonaws.com/doc/2020-05-31/"))
 		if err := awsRestxml_serializeDocumentDistributionConfigWithTags(input.DistributionConfigWithTags, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -350,6 +354,7 @@ func (m *awsRestxml_serializeOpCreateFieldLevelEncryptionConfig) HandleSerialize
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://cloudfront.amazonaws.com/doc/2020-05-31/"))
 		if err := awsRestxml_serializeDocumentFieldLevelEncryptionConfig(input.FieldLevelEncryptionConfig, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -422,6 +427,7 @@ func (m *awsRestxml_serializeOpCreateFieldLevelEncryptionProfile) HandleSerializ
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://cloudfront.amazonaws.com/doc/2020-05-31/"))
 		if err := awsRestxml_serializeDocumentFieldLevelEncryptionProfileConfig(input.FieldLevelEncryptionProfileConfig, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -498,6 +504,7 @@ func (m *awsRestxml_serializeOpCreateInvalidation) HandleSerialize(ctx context.C
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://cloudfront.amazonaws.com/doc/2020-05-31/"))
 		if err := awsRestxml_serializeDocumentInvalidationBatch(input.InvalidationBatch, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -582,6 +589,7 @@ func (m *awsRestxml_serializeOpCreateKeyGroup) HandleSerialize(ctx context.Conte
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://cloudfront.amazonaws.com/doc/2020-05-31/"))
 		if err := awsRestxml_serializeDocumentKeyGroupConfig(input.KeyGroupConfig, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -658,6 +666,7 @@ func (m *awsRestxml_serializeOpCreateMonitoringSubscription) HandleSerialize(ctx
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://cloudfront.amazonaws.com/doc/2020-05-31/"))
 		if err := awsRestxml_serializeDocumentMonitoringSubscription(input.MonitoringSubscription, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -742,6 +751,7 @@ func (m *awsRestxml_serializeOpCreateOriginRequestPolicy) HandleSerialize(ctx co
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://cloudfront.amazonaws.com/doc/2020-05-31/"))
 		if err := awsRestxml_serializeDocumentOriginRequestPolicyConfig(input.OriginRequestPolicyConfig, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -814,6 +824,7 @@ func (m *awsRestxml_serializeOpCreatePublicKey) HandleSerialize(ctx context.Cont
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://cloudfront.amazonaws.com/doc/2020-05-31/"))
 		if err := awsRestxml_serializeDocumentPublicKeyConfig(input.PublicKeyConfig, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -883,6 +894,7 @@ func (m *awsRestxml_serializeOpCreateRealtimeLogConfig) HandleSerialize(ctx cont
 		},
 		Attr: rootAttr,
 	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://cloudfront.amazonaws.com/doc/2020-05-31/"))
 	if err := awsRestxml_serializeOpDocumentCreateRealtimeLogConfigInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -1006,6 +1018,7 @@ func (m *awsRestxml_serializeOpCreateStreamingDistribution) HandleSerialize(ctx 
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://cloudfront.amazonaws.com/doc/2020-05-31/"))
 		if err := awsRestxml_serializeDocumentStreamingDistributionConfig(input.StreamingDistributionConfig, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -1078,6 +1091,7 @@ func (m *awsRestxml_serializeOpCreateStreamingDistributionWithTags) HandleSerial
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://cloudfront.amazonaws.com/doc/2020-05-31/"))
 		if err := awsRestxml_serializeDocumentStreamingDistributionConfigWithTags(input.StreamingDistributionConfigWithTags, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -1797,6 +1811,7 @@ func (m *awsRestxml_serializeOpDeleteRealtimeLogConfig) HandleSerialize(ctx cont
 		},
 		Attr: rootAttr,
 	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://cloudfront.amazonaws.com/doc/2020-05-31/"))
 	if err := awsRestxml_serializeOpDocumentDeleteRealtimeLogConfigInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -3164,6 +3179,7 @@ func (m *awsRestxml_serializeOpGetRealtimeLogConfig) HandleSerialize(ctx context
 		},
 		Attr: rootAttr,
 	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://cloudfront.amazonaws.com/doc/2020-05-31/"))
 	if err := awsRestxml_serializeOpDocumentGetRealtimeLogConfigInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -3802,6 +3818,7 @@ func (m *awsRestxml_serializeOpListDistributionsByRealtimeLogConfig) HandleSeria
 		},
 		Attr: rootAttr,
 	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://cloudfront.amazonaws.com/doc/2020-05-31/"))
 	if err := awsRestxml_serializeOpDocumentListDistributionsByRealtimeLogConfigInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -4569,6 +4586,7 @@ func (m *awsRestxml_serializeOpTagResource) HandleSerialize(ctx context.Context,
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://cloudfront.amazonaws.com/doc/2020-05-31/"))
 		if err := awsRestxml_serializeDocumentTags(input.Tags, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -4649,6 +4667,7 @@ func (m *awsRestxml_serializeOpUntagResource) HandleSerialize(ctx context.Contex
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://cloudfront.amazonaws.com/doc/2020-05-31/"))
 		if err := awsRestxml_serializeDocumentTagKeys(input.TagKeys, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -4729,6 +4748,7 @@ func (m *awsRestxml_serializeOpUpdateCachePolicy) HandleSerialize(ctx context.Co
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://cloudfront.amazonaws.com/doc/2020-05-31/"))
 		if err := awsRestxml_serializeDocumentCachePolicyConfig(input.CachePolicyConfig, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -4824,6 +4844,7 @@ func (m *awsRestxml_serializeOpUpdateCloudFrontOriginAccessIdentity) HandleSeria
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://cloudfront.amazonaws.com/doc/2020-05-31/"))
 		if err := awsRestxml_serializeDocumentCloudFrontOriginAccessIdentityConfig(input.CloudFrontOriginAccessIdentityConfig, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -4919,6 +4940,7 @@ func (m *awsRestxml_serializeOpUpdateDistribution) HandleSerialize(ctx context.C
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://cloudfront.amazonaws.com/doc/2020-05-31/"))
 		if err := awsRestxml_serializeDocumentDistributionConfig(input.DistributionConfig, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -5014,6 +5036,7 @@ func (m *awsRestxml_serializeOpUpdateFieldLevelEncryptionConfig) HandleSerialize
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://cloudfront.amazonaws.com/doc/2020-05-31/"))
 		if err := awsRestxml_serializeDocumentFieldLevelEncryptionConfig(input.FieldLevelEncryptionConfig, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -5109,6 +5132,7 @@ func (m *awsRestxml_serializeOpUpdateFieldLevelEncryptionProfile) HandleSerializ
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://cloudfront.amazonaws.com/doc/2020-05-31/"))
 		if err := awsRestxml_serializeDocumentFieldLevelEncryptionProfileConfig(input.FieldLevelEncryptionProfileConfig, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -5204,6 +5228,7 @@ func (m *awsRestxml_serializeOpUpdateKeyGroup) HandleSerialize(ctx context.Conte
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://cloudfront.amazonaws.com/doc/2020-05-31/"))
 		if err := awsRestxml_serializeDocumentKeyGroupConfig(input.KeyGroupConfig, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -5299,6 +5324,7 @@ func (m *awsRestxml_serializeOpUpdateOriginRequestPolicy) HandleSerialize(ctx co
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://cloudfront.amazonaws.com/doc/2020-05-31/"))
 		if err := awsRestxml_serializeDocumentOriginRequestPolicyConfig(input.OriginRequestPolicyConfig, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -5394,6 +5420,7 @@ func (m *awsRestxml_serializeOpUpdatePublicKey) HandleSerialize(ctx context.Cont
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://cloudfront.amazonaws.com/doc/2020-05-31/"))
 		if err := awsRestxml_serializeDocumentPublicKeyConfig(input.PublicKeyConfig, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -5482,6 +5509,7 @@ func (m *awsRestxml_serializeOpUpdateRealtimeLogConfig) HandleSerialize(ctx cont
 		},
 		Attr: rootAttr,
 	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://cloudfront.amazonaws.com/doc/2020-05-31/"))
 	if err := awsRestxml_serializeOpDocumentUpdateRealtimeLogConfigInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -5620,6 +5648,7 @@ func (m *awsRestxml_serializeOpUpdateStreamingDistribution) HandleSerialize(ctx 
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://cloudfront.amazonaws.com/doc/2020-05-31/"))
 		if err := awsRestxml_serializeDocumentStreamingDistributionConfig(input.StreamingDistributionConfig, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}

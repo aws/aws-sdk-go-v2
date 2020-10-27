@@ -63,6 +63,7 @@ func (m *awsRestxml_serializeOpAssociateVPCWithHostedZone) HandleSerialize(ctx c
 		},
 		Attr: rootAttr,
 	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "https://route53.amazonaws.com/doc/2013-04-01/"))
 	if err := awsRestxml_serializeOpDocumentAssociateVPCWithHostedZoneInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -175,6 +176,7 @@ func (m *awsRestxml_serializeOpChangeResourceRecordSets) HandleSerialize(ctx con
 		},
 		Attr: rootAttr,
 	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "https://route53.amazonaws.com/doc/2013-04-01/"))
 	if err := awsRestxml_serializeOpDocumentChangeResourceRecordSetsInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -276,6 +278,7 @@ func (m *awsRestxml_serializeOpChangeTagsForResource) HandleSerialize(ctx contex
 		},
 		Attr: rootAttr,
 	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "https://route53.amazonaws.com/doc/2013-04-01/"))
 	if err := awsRestxml_serializeOpDocumentChangeTagsForResourceInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -398,6 +401,7 @@ func (m *awsRestxml_serializeOpCreateHealthCheck) HandleSerialize(ctx context.Co
 		},
 		Attr: rootAttr,
 	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "https://route53.amazonaws.com/doc/2013-04-01/"))
 	if err := awsRestxml_serializeOpDocumentCreateHealthCheckInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -494,6 +498,7 @@ func (m *awsRestxml_serializeOpCreateHostedZone) HandleSerialize(ctx context.Con
 		},
 		Attr: rootAttr,
 	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "https://route53.amazonaws.com/doc/2013-04-01/"))
 	if err := awsRestxml_serializeOpDocumentCreateHostedZoneInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -625,6 +630,7 @@ func (m *awsRestxml_serializeOpCreateQueryLoggingConfig) HandleSerialize(ctx con
 		},
 		Attr: rootAttr,
 	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "https://route53.amazonaws.com/doc/2013-04-01/"))
 	if err := awsRestxml_serializeOpDocumentCreateQueryLoggingConfigInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -719,6 +725,7 @@ func (m *awsRestxml_serializeOpCreateReusableDelegationSet) HandleSerialize(ctx 
 		},
 		Attr: rootAttr,
 	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "https://route53.amazonaws.com/doc/2013-04-01/"))
 	if err := awsRestxml_serializeOpDocumentCreateReusableDelegationSetInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -813,6 +820,7 @@ func (m *awsRestxml_serializeOpCreateTrafficPolicy) HandleSerialize(ctx context.
 		},
 		Attr: rootAttr,
 	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "https://route53.amazonaws.com/doc/2013-04-01/"))
 	if err := awsRestxml_serializeOpDocumentCreateTrafficPolicyInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -918,6 +926,7 @@ func (m *awsRestxml_serializeOpCreateTrafficPolicyInstance) HandleSerialize(ctx 
 		},
 		Attr: rootAttr,
 	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "https://route53.amazonaws.com/doc/2013-04-01/"))
 	if err := awsRestxml_serializeOpDocumentCreateTrafficPolicyInstanceInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -1049,6 +1058,7 @@ func (m *awsRestxml_serializeOpCreateTrafficPolicyVersion) HandleSerialize(ctx c
 		},
 		Attr: rootAttr,
 	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "https://route53.amazonaws.com/doc/2013-04-01/"))
 	if err := awsRestxml_serializeOpDocumentCreateTrafficPolicyVersionInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -1159,6 +1169,7 @@ func (m *awsRestxml_serializeOpCreateVPCAssociationAuthorization) HandleSerializ
 		},
 		Attr: rootAttr,
 	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "https://route53.amazonaws.com/doc/2013-04-01/"))
 	if err := awsRestxml_serializeOpDocumentCreateVPCAssociationAuthorizationInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -1665,6 +1676,7 @@ func (m *awsRestxml_serializeOpDeleteVPCAssociationAuthorization) HandleSerializ
 		},
 		Attr: rootAttr,
 	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "https://route53.amazonaws.com/doc/2013-04-01/"))
 	if err := awsRestxml_serializeOpDocumentDeleteVPCAssociationAuthorizationInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -1766,6 +1778,7 @@ func (m *awsRestxml_serializeOpDisassociateVPCFromHostedZone) HandleSerialize(ct
 		},
 		Attr: rootAttr,
 	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "https://route53.amazonaws.com/doc/2013-04-01/"))
 	if err := awsRestxml_serializeOpDocumentDisassociateVPCFromHostedZoneInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -3591,6 +3604,7 @@ func (m *awsRestxml_serializeOpListTagsForResources) HandleSerialize(ctx context
 		},
 		Attr: rootAttr,
 	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "https://route53.amazonaws.com/doc/2013-04-01/"))
 	if err := awsRestxml_serializeOpDocumentListTagsForResourcesInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -4198,6 +4212,7 @@ func (m *awsRestxml_serializeOpUpdateHealthCheck) HandleSerialize(ctx context.Co
 		},
 		Attr: rootAttr,
 	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "https://route53.amazonaws.com/doc/2013-04-01/"))
 	if err := awsRestxml_serializeOpDocumentUpdateHealthCheckInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -4470,6 +4485,7 @@ func (m *awsRestxml_serializeOpUpdateHostedZoneComment) HandleSerialize(ctx cont
 		},
 		Attr: rootAttr,
 	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "https://route53.amazonaws.com/doc/2013-04-01/"))
 	if err := awsRestxml_serializeOpDocumentUpdateHostedZoneCommentInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -4569,6 +4585,7 @@ func (m *awsRestxml_serializeOpUpdateTrafficPolicyComment) HandleSerialize(ctx c
 		},
 		Attr: rootAttr,
 	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "https://route53.amazonaws.com/doc/2013-04-01/"))
 	if err := awsRestxml_serializeOpDocumentUpdateTrafficPolicyCommentInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -4677,6 +4694,7 @@ func (m *awsRestxml_serializeOpUpdateTrafficPolicyInstance) HandleSerialize(ctx 
 		},
 		Attr: rootAttr,
 	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "https://route53.amazonaws.com/doc/2013-04-01/"))
 	if err := awsRestxml_serializeOpDocumentUpdateTrafficPolicyInstanceInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
