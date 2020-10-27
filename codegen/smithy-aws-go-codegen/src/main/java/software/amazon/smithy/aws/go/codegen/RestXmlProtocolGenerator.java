@@ -27,13 +27,17 @@ import software.amazon.smithy.model.knowledge.HttpBinding;
 import software.amazon.smithy.model.knowledge.HttpBindingIndex;
 import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.OperationShape;
+import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.model.shapes.Shape;
+import software.amazon.smithy.model.shapes.ShapeId;
 import software.amazon.smithy.model.shapes.StructureShape;
 import software.amazon.smithy.model.traits.MediaTypeTrait;
 import software.amazon.smithy.model.traits.EnumTrait;
+import software.amazon.smithy.model.traits.OptionalAuthTrait;
 import software.amazon.smithy.model.traits.StreamingTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait;
 import software.amazon.smithy.model.traits.XmlAttributeTrait;
+import software.amazon.smithy.model.traits.XmlNamespaceTrait;
 
 abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
     /**
@@ -94,6 +98,16 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
         writer.write("xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))");
 
         generateXMLStartElement(context, inputShape, "root", "input");
+
+        // check if service shape is bound by xmlNameSpace Trait
+        Optional<XmlNamespaceTrait> xmlNamespaceTrait = context.getService().getTrait(XmlNamespaceTrait.class);
+        if (xmlNamespaceTrait.isPresent()) {
+            XmlNamespaceTrait namespace = xmlNamespaceTrait.get();
+            writer.write("root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute($S, $S))",
+                    namespace.getPrefix().isPresent() ? namespace.getPrefix().get() : "", namespace.getUri()
+            );
+        }
+
         writer.openBlock("if err := $L(input, xmlEncoder.RootElement(root)); err != nil {", "}",
                 functionName, () -> {
             writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
@@ -123,6 +137,16 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
         writer.write("xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))");
 
         generateXMLStartElement(context, payloadShape, "payloadRoot", operand);
+
+        // check if service shape is bound by xmlNameSpace Trait
+        Optional<XmlNamespaceTrait> xmlNamespaceTrait = context.getService().getTrait(XmlNamespaceTrait.class);
+        if (xmlNamespaceTrait.isPresent()) {
+            XmlNamespaceTrait namespace = xmlNamespaceTrait.get();
+            writer.write("payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute($S, $S))",
+                    namespace.getPrefix().isPresent() ? namespace.getPrefix().get() : "", namespace.getUri()
+            );
+        }
+
         writer.openBlock("if err := $L($L, xmlEncoder.RootElement(payloadRoot)); err != nil {", "}", functionName,
                 operand, () -> {
             writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
