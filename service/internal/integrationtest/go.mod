@@ -66,7 +66,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53 v0.28.0
 	github.com/aws/aws-sdk-go-v2/service/route53domains v0.28.0
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v0.28.0
-	github.com/aws/aws-sdk-go-v2/service/s3 v0.28.0
+	github.com/aws/aws-sdk-go-v2/service/s3 v0.28.1-0.20201027190912-8f6733991e52
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v0.28.0
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v0.28.0
 	github.com/aws/aws-sdk-go-v2/service/ses v0.28.0
