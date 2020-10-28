@@ -242,6 +242,11 @@ vet-modules-%:
 		&& go run . -p $(subst _,/,$(subst vet-modules-,,$@)) ${EACHMODULE_FLAGS} \
 		"go vet ${BUILD_TAGS} --all ./..."
 
+api-check-modules-%:
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst api-check-modules-,,$@)) ${EACHMODULE_FLAGS} \
+		"gorelease -check-internal -fail-preview"
+
 sdkv1check:
 	@echo "Checking for usage of AWS SDK for Go v1"
 	@sdkv1usage=`go list -test -f '''{{ if not .Standard }}{{ range $$_, $$name := .Imports }} * {{ $$.ImportPath }} -> {{ $$name }}{{ print "\n" }}{{ end }}{{ range $$_, $$name := .TestImports }} *: {{ $$.ImportPath }} -> {{ $$name }}{{ print "\n" }}{{ end }}{{ end}}''' ./... | sort -u | grep '''/aws-sdk-go/'''`; \
