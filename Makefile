@@ -245,7 +245,7 @@ vet-modules-%:
 api-check-modules-%:
 	cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst api-check-modules-,,$@)) ${EACHMODULE_FLAGS} \
-		"gorelease -check-internal -fail-preview"
+		"gorelease -fail-preview"
 
 sdkv1check:
 	@echo "Checking for usage of AWS SDK for Go v1"

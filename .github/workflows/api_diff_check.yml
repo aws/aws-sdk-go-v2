@@ -27,5 +27,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Check API Diff
-      run: EACHMODULE_FAILFAST=false make api-check-modules-.
+      run: |
+        echo "run EACHMODULE_FAILFAST=false make api-check-modules-. to see all errors"
+        make api-check-modules-.
 
