@@ -173,12 +173,12 @@ func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
 	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
-func addClientUserAgent(stack *middleware.Stack) {
-	awsmiddleware.AddUserAgentKey("dynamodb")(stack)
+func addClientUserAgent(stack *middleware.Stack) error {
+	return awsmiddleware.AddUserAgentKey("dynamodb")(stack)
 }
 
-func addHTTPSignerV4Middleware(stack *middleware.Stack, o Options) {
-	stack.Finalize.Add(v4.NewSignHTTPRequestMiddleware(o.Credentials, o.HTTPSignerV4), middleware.After)
+func addHTTPSignerV4Middleware(stack *middleware.Stack, o Options) error {
+	return stack.Finalize.Add(v4.NewSignHTTPRequestMiddleware(o.Credentials, o.HTTPSignerV4), middleware.After)
 }
 
 type HTTPSignerV4 interface {
@@ -216,18 +216,18 @@ type IdempotencyTokenProvider interface {
 	GetIdempotencyToken() (string, error)
 }
 
-func addRequestIDRetrieverMiddleware(stack *middleware.Stack) {
-	awsmiddleware.AddRequestIDRetrieverMiddleware(stack)
+func addRequestIDRetrieverMiddleware(stack *middleware.Stack) error {
+	return awsmiddleware.AddRequestIDRetrieverMiddleware(stack)
 }
 
-func addResponseErrorMiddleware(stack *middleware.Stack) {
-	awshttp.AddResponseErrorMiddleware(stack)
+func addResponseErrorMiddleware(stack *middleware.Stack) error {
+	return awshttp.AddResponseErrorMiddleware(stack)
 }
 
-func addValidateResponseChecksum(stack *middleware.Stack, options Options) {
-	ddbcust.AddValidateResponseChecksum(stack, ddbcust.AddValidateResponseChecksumOptions{Disable: options.DisableValidateResponseChecksum})
+func addValidateResponseChecksum(stack *middleware.Stack, options Options) error {
+	return ddbcust.AddValidateResponseChecksum(stack, ddbcust.AddValidateResponseChecksumOptions{Disable: options.DisableValidateResponseChecksum})
 }
 
-func addAcceptEncodingGzip(stack *middleware.Stack, options Options) {
-	acceptencodingcust.AddAcceptEncodingGzip(stack, acceptencodingcust.AddAcceptEncodingGzipOptions{Enable: options.EnableAcceptEncodingGzip})
+func addAcceptEncodingGzip(stack *middleware.Stack, options Options) error {
+	return acceptencodingcust.AddAcceptEncodingGzip(stack, acceptencodingcust.AddAcceptEncodingGzipOptions{Enable: options.EnableAcceptEncodingGzip})
 }

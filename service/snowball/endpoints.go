@@ -98,7 +98,8 @@ func addResolveEndpointMiddleware(stack *middleware.Stack, o Options) error {
 }
 
 func removeResolveEndpointMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Remove((&ResolveEndpoint{}).ID())
+	_, err := stack.Serialize.Remove((&ResolveEndpoint{}).ID())
+	return err
 }
 
 type wrappedEndpointResolver struct {
