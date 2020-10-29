@@ -54,21 +54,21 @@ type UpdateHealthCheckInput struct {
 	// Stops Route 53 from performing health checks. When you disable a health check,
 	// here's what happens:
 	//
-	//     * Health checks that check the health of endpoints:
-	// Route 53 stops submitting requests to your application, server, or other
-	// resource.
+	// * Health checks that check the health of endpoints: Route
+	// 53 stops submitting requests to your application, server, or other resource.
 	//
-	//     * Calculated health checks: Route 53 stops aggregating the status
-	// of the referenced health checks.
+	// *
+	// Calculated health checks: Route 53 stops aggregating the status of the
+	// referenced health checks.
 	//
-	//     * Health checks that monitor CloudWatch
-	// alarms: Route 53 stops monitoring the corresponding CloudWatch metrics.
+	// * Health checks that monitor CloudWatch alarms: Route
+	// 53 stops monitoring the corresponding CloudWatch metrics.
 	//
-	// After
-	// you disable a health check, Route 53 considers the status of the health check to
-	// always be healthy. If you configured DNS failover, Route 53 continues to route
-	// traffic to the corresponding resources. If you want to stop routing traffic to a
-	// resource, change the value of Inverted
+	// After you disable a
+	// health check, Route 53 considers the status of the health check to always be
+	// healthy. If you configured DNS failover, Route 53 continues to route traffic to
+	// the corresponding resources. If you want to stop routing traffic to a resource,
+	// change the value of Inverted
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_UpdateHealthCheck.html#Route53-UpdateHealthCheck-request-Inverted).
 	// Charges for a health check still apply when the health check is disabled. For
 	// more information, see Amazon Route 53 Pricing
@@ -113,18 +113,18 @@ type UpdateHealthCheckInput struct {
 	// which you want Route 53 to perform health checks. When Route 53 checks the
 	// health of an endpoint, here is how it constructs the Host header:
 	//
-	//     * If you
+	// * If you
 	// specify a value of 80 for Port and HTTP or HTTP_STR_MATCH for Type, Route 53
 	// passes the value of FullyQualifiedDomainName to the endpoint in the Host
 	// header.
 	//
-	//     * If you specify a value of 443 for Port and HTTPS or
-	// HTTPS_STR_MATCH for Type, Route 53 passes the value of FullyQualifiedDomainName
-	// to the endpoint in the Host header.
+	// * If you specify a value of 443 for Port and HTTPS or HTTPS_STR_MATCH
+	// for Type, Route 53 passes the value of FullyQualifiedDomainName to the endpoint
+	// in the Host header.
 	//
-	//     * If you specify another value for Port
-	// and any value except TCP for Type, Route 53 passes FullyQualifiedDomainName:Port
-	// to the endpoint in the Host header.
+	// * If you specify another value for Port and any value
+	// except TCP for Type, Route 53 passes FullyQualifiedDomainName:Port to the
+	// endpoint in the Host header.
 	//
 	// If you don't specify a value for
 	// FullyQualifiedDomainName, Route 53 substitutes the value of IPAddress in the
@@ -159,12 +159,12 @@ type UpdateHealthCheckInput struct {
 	// that you include that value in your UpdateHealthCheck request. This prevents
 	// Route 53 from overwriting an intervening update:
 	//
-	//     * If the value in the
+	// * If the value in the
 	// UpdateHealthCheck request matches the value of HealthCheckVersion in the health
 	// check, Route 53 updates the health check with the new settings.
 	//
-	//     * If the
-	// value of HealthCheckVersion in the health check is greater, the health check was
+	// * If the value
+	// of HealthCheckVersion in the health check is greater, the health check was
 	// changed after you got the version number. Route 53 does not update the health
 	// check, and it returns a HealthCheckVersionMismatch error.
 	HealthCheckVersion *int64
@@ -175,11 +175,11 @@ type UpdateHealthCheckInput struct {
 	// associate with a CALCULATED health check, use the ChildHealthChecks and
 	// ChildHealthCheck elements. Note the following:
 	//
-	//     * If you specify a number
+	// * If you specify a number
 	// greater than the number of child health checks, Route 53 always considers this
 	// health check to be unhealthy.
 	//
-	//     * If you specify 0, Route 53 always considers
+	// * If you specify 0, Route 53 always considers
 	// this health check to be healthy.
 	HealthThreshold *int32
 
@@ -190,27 +190,26 @@ type UpdateHealthCheckInput struct {
 	// Using an IP address that is returned by DNS, Route 53 then checks the health of
 	// the endpoint. Use one of the following formats for the value of IPAddress:
 	//
-	//
-	// * IPv4 address: four values between 0 and 255, separated by periods (.), for
+	// *
+	// IPv4 address: four values between 0 and 255, separated by periods (.), for
 	// example, 192.0.2.44.
 	//
-	//     * IPv6 address: eight groups of four hexadecimal
-	// values, separated by colons (:), for example,
-	// 2001:0db8:85a3:0000:0000:abcd:0001:2345. You can also shorten IPv6 addresses as
-	// described in RFC 5952, for example, 2001:db8:85a3::abcd:1:2345.
+	// * IPv6 address: eight groups of four hexadecimal values,
+	// separated by colons (:), for example, 2001:0db8:85a3:0000:0000:abcd:0001:2345.
+	// You can also shorten IPv6 addresses as described in RFC 5952, for example,
+	// 2001:db8:85a3::abcd:1:2345.
 	//
-	// If the endpoint
-	// is an EC2 instance, we recommend that you create an Elastic IP address,
-	// associate it with your EC2 instance, and specify the Elastic IP address for
-	// IPAddress. This ensures that the IP address of your instance never changes. For
-	// more information, see the applicable documentation:
+	// If the endpoint is an EC2 instance, we recommend
+	// that you create an Elastic IP address, associate it with your EC2 instance, and
+	// specify the Elastic IP address for IPAddress. This ensures that the IP address
+	// of your instance never changes. For more information, see the applicable
+	// documentation:
 	//
-	//     * Linux: Elastic IP
-	// Addresses (EIP)
+	// * Linux: Elastic IP Addresses (EIP)
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
 	// in the Amazon EC2 User Guide for Linux Instances
 	//
-	//     * Windows: Elastic IP
+	// * Windows: Elastic IP
 	// Addresses (EIP)
 	// (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-ip-addresses-eip.html)
 	// in the Amazon EC2 User Guide for Windows Instances
@@ -225,29 +224,30 @@ type UpdateHealthCheckInput struct {
 	// information about IP addresses for which you can't create health checks, see the
 	// following documents:
 	//
-	//     * RFC 5735, Special Use IPv4 Addresses
+	// * RFC 5735, Special Use IPv4 Addresses
 	// (https://tools.ietf.org/html/rfc5735)
 	//
-	//     * RFC 6598, IANA-Reserved IPv4 Prefix
-	// for Shared Address Space (https://tools.ietf.org/html/rfc6598)
+	// * RFC 6598, IANA-Reserved IPv4 Prefix for
+	// Shared Address Space (https://tools.ietf.org/html/rfc6598)
 	//
-	//     * RFC 5156,
+	// * RFC 5156,
 	// Special-Use IPv6 Addresses (https://tools.ietf.org/html/rfc5156)
 	IPAddress *string
 
 	// When CloudWatch has insufficient data about the metric to determine the alarm
-	// state, the status that you want Amazon Route 53 to assign to the health check:
-	//
+	// state, the status that you want Amazon Route 53 to assign to the health
+	// check:
 	//
 	// * Healthy: Route 53 considers the health check to be healthy.
 	//
-	//     * Unhealthy:
-	// Route 53 considers the health check to be unhealthy.
+	// *
+	// Unhealthy: Route 53 considers the health check to be unhealthy.
 	//
-	//     * LastKnownStatus:
-	// Route 53 uses the status of the health check from the last time CloudWatch had
-	// sufficient data to determine the alarm state. For new health checks that have no
-	// last known status, the default status for the health check is healthy.
+	// *
+	// LastKnownStatus: Route 53 uses the status of the health check from the last time
+	// CloudWatch had sufficient data to determine the alarm state. For new health
+	// checks that have no last known status, the default status for the health check
+	// is healthy.
 	InsufficientDataHealthStatus types.InsufficientDataHealthStatus
 
 	// Specify whether you want Amazon Route 53 to invert the status of a health check,
@@ -268,21 +268,20 @@ type UpdateHealthCheckInput struct {
 	// that you want to reset to the default value. Valid values for
 	// ResettableElementName include the following:
 	//
-	//     * ChildHealthChecks: Amazon
-	// Route 53 resets ChildHealthChecks
+	// * ChildHealthChecks: Amazon Route
+	// 53 resets ChildHealthChecks
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-ChildHealthChecks)
 	// to null.
 	//
-	//     * FullyQualifiedDomainName: Route 53 resets
-	// FullyQualifiedDomainName
+	// * FullyQualifiedDomainName: Route 53 resets FullyQualifiedDomainName
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_UpdateHealthCheck.html#Route53-UpdateHealthCheck-request-FullyQualifiedDomainName).
 	// to null.
 	//
-	//     * Regions: Route 53 resets the Regions
+	// * Regions: Route 53 resets the Regions
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-Regions)
 	// list to the default set of regions.
 	//
-	//     * ResourcePath: Route 53 resets
+	// * ResourcePath: Route 53 resets
 	// ResourcePath
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-ResourcePath)
 	// to null.

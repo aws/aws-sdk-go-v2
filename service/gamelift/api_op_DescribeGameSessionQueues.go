@@ -19,15 +19,14 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-console.html)
 // Related operations
 //
-//     * CreateGameSessionQueue
+// * CreateGameSessionQueue
 //
-//     *
-// DescribeGameSessionQueues
+// * DescribeGameSessionQueues
 //
-//     * UpdateGameSessionQueue
+// *
+// UpdateGameSessionQueue
 //
-//     *
-// DeleteGameSessionQueue
+// * DeleteGameSessionQueue
 func (c *Client) DescribeGameSessionQueues(ctx context.Context, params *DescribeGameSessionQueuesInput, optFns ...func(*Options)) (*DescribeGameSessionQueuesOutput, error) {
 	if params == nil {
 		params = &DescribeGameSessionQueuesInput{}

@@ -25,29 +25,29 @@ import (
 // request must match all the predicates and exceed the RateLimit to be counted or
 // blocked. For example, suppose you add the following to a RateBasedRule:
 //
-//     *
-// An IPSet that matches the IP address 192.0.2.44/32
+// * An
+// IPSet that matches the IP address 192.0.2.44/32
 //
-//     * A ByteMatchSet that
-// matches BadBot in the User-Agent header
+// * A ByteMatchSet that matches
+// BadBot in the User-Agent header
 //
-// Further, you specify a RateLimit of
-// 1,000. You then add the RateBasedRule to a WebACL and specify that you want to
-// block requests that satisfy the rule. For a request to be blocked, it must come
-// from the IP address 192.0.2.44 and the User-Agent header in the request must
-// contain the value BadBot. Further, requests that match these two conditions much
-// be received at a rate of more than 1,000 every five minutes. If the rate drops
+// Further, you specify a RateLimit of 1,000. You
+// then add the RateBasedRule to a WebACL and specify that you want to block
+// requests that satisfy the rule. For a request to be blocked, it must come from
+// the IP address 192.0.2.44 and the User-Agent header in the request must contain
+// the value BadBot. Further, requests that match these two conditions much be
+// received at a rate of more than 1,000 every five minutes. If the rate drops
 // below this limit, AWS WAF no longer blocks the requests. As a second example,
 // suppose you want to limit requests to a particular page on your site. To do
 // this, you could add the following to a RateBasedRule:
 //
-//     * A ByteMatchSet with
+// * A ByteMatchSet with
 // FieldToMatch of URI
 //
-//     * A PositionalConstraint of STARTS_WITH
+// * A PositionalConstraint of STARTS_WITH
 //
-//     * A
-// TargetString of login
+// * A TargetString
+// of login
 //
 // Further, you specify a RateLimit of 1,000. By adding this
 // RateBasedRule to a WebACL, you could limit requests to your login page without

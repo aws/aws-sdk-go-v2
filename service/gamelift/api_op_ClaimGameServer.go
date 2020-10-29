@@ -31,10 +31,10 @@ import (
 // value and is not configurable. If you try to claim a specific game server, this
 // request will fail in the following cases:
 //
-//     * If the game server utilization
+// * If the game server utilization
 // status is UTILIZED.
 //
-//     * If the game server claim status is CLAIMED.
+// * If the game server claim status is CLAIMED.
 //
 // When
 // claiming a specific game server, this request will succeed even if the game
@@ -44,18 +44,18 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
 // Related operations
 //
-//     * RegisterGameServer
+// * RegisterGameServer
 //
-//     * ListGameServers
+// * ListGameServers
 //
-//     *
+// *
 // ClaimGameServer
 //
-//     * DescribeGameServer
+// * DescribeGameServer
 //
-//     * UpdateGameServer
+// * UpdateGameServer
 //
-//     *
+// *
 // DeregisterGameServer
 func (c *Client) ClaimGameServer(ctx context.Context, params *ClaimGameServerInput, optFns ...func(*Options)) (*ClaimGameServerOutput, error) {
 	if params == nil {

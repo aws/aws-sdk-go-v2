@@ -45,19 +45,19 @@ type ListSharedReportGroupsInput struct {
 	// The criterion to be used to list report groups shared with the current AWS
 	// account or user. Valid values include:
 	//
-	//     * ARN: List based on the ARN.
+	// * ARN: List based on the ARN.
 	//
-	//     *
+	// *
 	// MODIFIED_TIME: List based on when information about the shared report group was
 	// last changed.
 	SortBy types.SharedResourceSortByType
 
 	// The order in which to list shared report groups. Valid values include:
 	//
-	//     *
+	// *
 	// ASCENDING: List in ascending order.
 	//
-	//     * DESCENDING: List in descending order.
+	// * DESCENDING: List in descending order.
 	SortOrder types.SortOrderType
 }
 

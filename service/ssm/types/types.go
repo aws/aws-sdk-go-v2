@@ -457,15 +457,15 @@ type AttachmentsSource struct {
 	// The value of a key-value pair that identifies the location of an attachment to a
 	// document. The format for Value depends on the type of key you specify.
 	//
-	//     *
-	// For the key SourceUrl, the value is an S3 bucket location. For example:
-	// "Values": [ "s3://doc-example-bucket/my-folder" ]
+	// * For
+	// the key SourceUrl, the value is an S3 bucket location. For example: "Values": [
+	// "s3://doc-example-bucket/my-folder" ]
 	//
-	//     * For the key S3FileUrl,
-	// the value is a file in an S3 bucket. For example: "Values": [
+	// * For the key S3FileUrl, the value is a
+	// file in an S3 bucket. For example: "Values": [
 	// "s3://doc-example-bucket/my-folder/my-file.py" ]
 	//
-	//     * For the key
+	// * For the key
 	// AttachmentReference, the value is constructed from the name of another SSM
 	// document in your account, a version number of that document, and a file attached
 	// to that document version that you want to reuse. For example: "Values": [
@@ -765,38 +765,38 @@ type Command struct {
 	// in the AWS Systems Manager User Guide. StatusDetails can be one of the following
 	// values:
 	//
-	//     * Pending: The command has not been sent to any instances.
+	// * Pending: The command has not been sent to any instances.
 	//
-	//     *
-	// In Progress: The command has been sent to at least one instance but has not
-	// reached a final state on all instances.
+	// * In
+	// Progress: The command has been sent to at least one instance but has not reached
+	// a final state on all instances.
 	//
-	//     * Success: The command successfully
-	// ran on all invocations. This is a terminal state.
+	// * Success: The command successfully ran on all
+	// invocations. This is a terminal state.
 	//
-	//     * Delivery Timed Out: The
-	// value of MaxErrors or more command invocations shows a status of Delivery Timed
-	// Out. This is a terminal state.
+	// * Delivery Timed Out: The value of
+	// MaxErrors or more command invocations shows a status of Delivery Timed Out. This
+	// is a terminal state.
 	//
-	//     * Execution Timed Out: The value of
-	// MaxErrors or more command invocations shows a status of Execution Timed Out.
+	// * Execution Timed Out: The value of MaxErrors or more
+	// command invocations shows a status of Execution Timed Out. This is a terminal
+	// state.
+	//
+	// * Failed: The value of MaxErrors or more command invocations shows a
+	// status of Failed. This is a terminal state.
+	//
+	// * Incomplete: The command was
+	// attempted on all instances and one or more invocations does not have a value of
+	// Success but not enough invocations failed for the status to be Failed. This is a
+	// terminal state.
+	//
+	// * Canceled: The command was terminated before it was completed.
 	// This is a terminal state.
 	//
-	//     * Failed: The value of MaxErrors or more command
-	// invocations shows a status of Failed. This is a terminal state.
-	//
-	//     *
-	// Incomplete: The command was attempted on all instances and one or more
-	// invocations does not have a value of Success but not enough invocations failed
-	// for the status to be Failed. This is a terminal state.
-	//
-	//     * Canceled: The
-	// command was terminated before it was completed. This is a terminal state.
-	//
-	//     *
-	// Rate Exceeded: The number of instances targeted by the command exceeded the
-	// account limit for pending invocations. The system has canceled the command
-	// before running it on any instance. This is a terminal state.
+	// * Rate Exceeded: The number of instances targeted by
+	// the command exceeded the account limit for pending invocations. The system has
+	// canceled the command before running it on any instance. This is a terminal
+	// state.
 	StatusDetails *string
 
 	// The number of targets for the command.
@@ -822,48 +822,47 @@ type CommandFilter struct {
 
 	// The filter value. Valid values for each filter key are as follows:
 	//
-	//     *
+	// *
 	// InvokedAfter: Specify a timestamp to limit your results. For example, specify
 	// 2018-07-07T00:00:00Z to see a list of command executions occurring July 7, 2018,
 	// and later.
 	//
-	//     * InvokedBefore: Specify a timestamp to limit your results. For
+	// * InvokedBefore: Specify a timestamp to limit your results. For
 	// example, specify 2018-07-07T00:00:00Z to see a list of command executions from
 	// before July 7, 2018.
 	//
-	//     * Status: Specify a valid command status to see a list
-	// of all command executions with that status. Status values you can specify
+	// * Status: Specify a valid command status to see a list of
+	// all command executions with that status. Status values you can specify
 	// include:
 	//
-	//         * Pending
+	// * Pending
 	//
-	//         * InProgress
+	// * InProgress
 	//
-	//         * Success
+	// * Success
 	//
-	//         *
-	// Cancelled
+	// * Cancelled
 	//
-	//         * Failed
+	// * Failed
 	//
-	//         * TimedOut
+	// *
+	// TimedOut
 	//
-	//         * Cancelling
+	// * Cancelling
 	//
-	//     *
-	// DocumentName: Specify name of the SSM document for which you want to see command
-	// execution results. For example, specify AWS-RunPatchBaseline to see command
-	// executions that used this SSM document to perform security patching operations
-	// on instances.
+	// * DocumentName: Specify name of the SSM document for
+	// which you want to see command execution results. For example, specify
+	// AWS-RunPatchBaseline to see command executions that used this SSM document to
+	// perform security patching operations on instances.
 	//
-	//     * ExecutionStage: Specify one of the following values:
+	// * ExecutionStage: Specify
+	// one of the following values:
 	//
+	// * Executing: Returns a list of command executions
+	// that are currently still running.
 	//
-	// * Executing: Returns a list of command executions that are currently still
-	// running.
-	//
-	//         * Complete: Returns a list of command executions that have
-	// already completed.
+	// * Complete: Returns a list of command
+	// executions that have already completed.
 	//
 	// This member is required.
 	Value *string
@@ -937,43 +936,43 @@ type CommandInvocation struct {
 	// in the AWS Systems Manager User Guide. StatusDetails can be one of the following
 	// values:
 	//
-	//     * Pending: The command has not been sent to the instance.
+	// * Pending: The command has not been sent to the instance.
 	//
-	//     * In
+	// * In
 	// Progress: The command has been sent to the instance but has not reached a
 	// terminal state.
 	//
-	//     * Success: The execution of the command or plugin was
+	// * Success: The execution of the command or plugin was
 	// successfully completed. This is a terminal state.
 	//
-	//     * Delivery Timed Out: The
+	// * Delivery Timed Out: The
 	// command was not delivered to the instance before the delivery timeout expired.
 	// Delivery timeouts do not count against the parent command's MaxErrors limit, but
 	// they do contribute to whether the parent command status is Success or
 	// Incomplete. This is a terminal state.
 	//
-	//     * Execution Timed Out: Command
-	// execution started on the instance, but the execution was not complete before the
-	// execution timeout expired. Execution timeouts count against the MaxErrors limit
-	// of the parent command. This is a terminal state.
+	// * Execution Timed Out: Command execution
+	// started on the instance, but the execution was not complete before the execution
+	// timeout expired. Execution timeouts count against the MaxErrors limit of the
+	// parent command. This is a terminal state.
 	//
-	//     * Failed: The command was
-	// not successful on the instance. For a plugin, this indicates that the result
-	// code was not zero. For a command invocation, this indicates that the result code
-	// for one or more plugins was not zero. Invocation failures count against the
+	// * Failed: The command was not
+	// successful on the instance. For a plugin, this indicates that the result code
+	// was not zero. For a command invocation, this indicates that the result code for
+	// one or more plugins was not zero. Invocation failures count against the
 	// MaxErrors limit of the parent command. This is a terminal state.
 	//
-	//     *
-	// Canceled: The command was terminated before it was completed. This is a terminal
-	// state.
+	// * Canceled:
+	// The command was terminated before it was completed. This is a terminal state.
 	//
-	//     * Undeliverable: The command can't be delivered to the instance. The
-	// instance might not exist or might not be responding. Undeliverable invocations
-	// don't count against the parent command's MaxErrors limit and don't contribute to
+	// *
+	// Undeliverable: The command can't be delivered to the instance. The instance
+	// might not exist or might not be responding. Undeliverable invocations don't
+	// count against the parent command's MaxErrors limit and don't contribute to
 	// whether the parent command status is Success or Incomplete. This is a terminal
 	// state.
 	//
-	//     * Terminated: The parent command exceeded its MaxErrors limit and
+	// * Terminated: The parent command exceeded its MaxErrors limit and
 	// subsequent command invocations were canceled by the system. This is a terminal
 	// state.
 	StatusDetails *string
@@ -1047,45 +1046,45 @@ type CommandPlugin struct {
 	// in the AWS Systems Manager User Guide. StatusDetails can be one of the following
 	// values:
 	//
-	//     * Pending: The command has not been sent to the instance.
+	// * Pending: The command has not been sent to the instance.
 	//
-	//     * In
+	// * In
 	// Progress: The command has been sent to the instance but has not reached a
 	// terminal state.
 	//
-	//     * Success: The execution of the command or plugin was
+	// * Success: The execution of the command or plugin was
 	// successfully completed. This is a terminal state.
 	//
-	//     * Delivery Timed Out: The
+	// * Delivery Timed Out: The
 	// command was not delivered to the instance before the delivery timeout expired.
 	// Delivery timeouts do not count against the parent command's MaxErrors limit, but
 	// they do contribute to whether the parent command status is Success or
 	// Incomplete. This is a terminal state.
 	//
-	//     * Execution Timed Out: Command
-	// execution started on the instance, but the execution was not complete before the
-	// execution timeout expired. Execution timeouts count against the MaxErrors limit
-	// of the parent command. This is a terminal state.
+	// * Execution Timed Out: Command execution
+	// started on the instance, but the execution was not complete before the execution
+	// timeout expired. Execution timeouts count against the MaxErrors limit of the
+	// parent command. This is a terminal state.
 	//
-	//     * Failed: The command was
-	// not successful on the instance. For a plugin, this indicates that the result
-	// code was not zero. For a command invocation, this indicates that the result code
-	// for one or more plugins was not zero. Invocation failures count against the
+	// * Failed: The command was not
+	// successful on the instance. For a plugin, this indicates that the result code
+	// was not zero. For a command invocation, this indicates that the result code for
+	// one or more plugins was not zero. Invocation failures count against the
 	// MaxErrors limit of the parent command. This is a terminal state.
 	//
-	//     *
-	// Canceled: The command was terminated before it was completed. This is a terminal
+	// * Canceled:
+	// The command was terminated before it was completed. This is a terminal state.
+	//
+	// *
+	// Undeliverable: The command can't be delivered to the instance. The instance
+	// might not exist, or it might not be responding. Undeliverable invocations don't
+	// count against the parent command's MaxErrors limit, and they don't contribute to
+	// whether the parent command status is Success or Incomplete. This is a terminal
 	// state.
 	//
-	//     * Undeliverable: The command can't be delivered to the instance. The
-	// instance might not exist, or it might not be responding. Undeliverable
-	// invocations don't count against the parent command's MaxErrors limit, and they
-	// don't contribute to whether the parent command status is Success or Incomplete.
-	// This is a terminal state.
-	//
-	//     * Terminated: The parent command exceeded its
-	// MaxErrors limit and subsequent command invocations were canceled by the system.
-	// This is a terminal state.
+	// * Terminated: The parent command exceeded its MaxErrors limit and
+	// subsequent command invocations were canceled by the system. This is a terminal
+	// state.
 	StatusDetails *string
 }
 
@@ -1471,55 +1470,54 @@ type DocumentIdentifier struct {
 // You can also use AWS-provided keys, some of which have specific allowed values.
 // These keys and their associated values are as follows: DocumentType
 //
-//     *
+// *
 // ApplicationConfiguration
 //
-//     * ApplicationConfigurationSchema
+// * ApplicationConfigurationSchema
 //
-//     *
-// Automation
+// * Automation
 //
-//     * ChangeCalendar
+// *
+// ChangeCalendar
 //
-//     * Command
+// * Command
 //
-//     * DeploymentStrategy
+// * DeploymentStrategy
 //
-//     *
-// Package
+// * Package
 //
-//     * Policy
+// * Policy
 //
-//     * Session
+// *
+// Session
 //
-// Owner Note that only one Owner can be
-// specified in a request. For example: Key=Owner,Values=Self.
+// Owner Note that only one Owner can be specified in a request. For
+// example: Key=Owner,Values=Self.
 //
-//     * Amazon
+// * Amazon
 //
-//     *
-// Private
+// * Private
 //
-//     * Public
+// * Public
 //
-//     * Self
+// * Self
 //
-//     * ThirdParty
+// *
+// ThirdParty
 //
 // PlatformTypes
 //
-//     *
-// Linux
+// * Linux
 //
-//     * Windows
+// * Windows
 //
-// Name is another AWS-provided key. If you use Name as a
-// key, you can use a name prefix to return a list of documents. For example, in
-// the AWS CLI, to return a list of all documents that begin with Te, run the
-// following command: aws ssm list-documents --filters Key=Name,Values=Te You can
-// also use the TargetType AWS-provided key. For a list of valid resource type
-// values that can be used with this key, see AWS resource and property types
-// reference
+// Name is another AWS-provided key.
+// If you use Name as a key, you can use a name prefix to return a list of
+// documents. For example, in the AWS CLI, to return a list of all documents that
+// begin with Te, run the following command: aws ssm list-documents --filters
+// Key=Name,Values=Te You can also use the TargetType AWS-provided key. For a list
+// of valid resource type values that can be used with this key, see AWS resource
+// and property types reference
 // (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
 // in the AWS CloudFormation User Guide. If you specify more than two keys, only
 // documents that are identified by all the tags are returned in the results. If
@@ -1946,14 +1944,14 @@ type InstancePatchState struct {
 	// apply to Install operations only. Reboots are not attempted for Patch Manager
 	// Scan operations.
 	//
-	//     * RebootIfNeeded: Patch Manager tries to reboot the
-	// instance if it installed any patches, or if any patches are detected with a
-	// status of InstalledPendingReboot.
+	// * RebootIfNeeded: Patch Manager tries to reboot the instance
+	// if it installed any patches, or if any patches are detected with a status of
+	// InstalledPendingReboot.
 	//
-	//     * NoReboot: Patch Manager attempts to
-	// install missing packages without trying to reboot the system. Patches installed
-	// with this option are assigned a status of InstalledPendingReboot. These patches
-	// might not be in effect until a reboot is performed.
+	// * NoReboot: Patch Manager attempts to install missing
+	// packages without trying to reboot the system. Patches installed with this option
+	// are assigned a status of InstalledPendingReboot. These patches might not be in
+	// effect until a reboot is performed.
 	RebootOption RebootOption
 
 	// The ID of the patch baseline snapshot used during the patching operation when
@@ -3717,15 +3715,14 @@ type ServiceSetting struct {
 	// The status of the service setting. The value can be Default, Customized or
 	// PendingUpdate.
 	//
-	//     * Default: The current setting uses a default value
-	// provisioned by the AWS service team.
+	// * Default: The current setting uses a default value provisioned
+	// by the AWS service team.
 	//
-	//     * Customized: The current setting use
-	// a custom value specified by the customer.
+	// * Customized: The current setting use a custom value
+	// specified by the customer.
 	//
-	//     * PendingUpdate: The current
-	// setting uses a default or custom value, but a setting change request is pending
-	// approval.
+	// * PendingUpdate: The current setting uses a default
+	// or custom value, but a setting change request is pending approval.
 	Status *string
 }
 
@@ -3771,37 +3768,36 @@ type SessionFilter struct {
 
 	// The filter value. Valid values for each filter key are as follows:
 	//
-	//     *
+	// *
 	// InvokedAfter: Specify a timestamp to limit your results. For example, specify
 	// 2018-08-29T00:00:00Z to see sessions that started August 29, 2018, and later.
 	//
-	//
-	// * InvokedBefore: Specify a timestamp to limit your results. For example, specify
+	// *
+	// InvokedBefore: Specify a timestamp to limit your results. For example, specify
 	// 2018-08-29T00:00:00Z to see sessions that started before August 29, 2018.
 	//
-	//     *
+	// *
 	// Target: Specify an instance to which session connections have been made.
 	//
-	//     *
+	// *
 	// Owner: Specify an AWS user account to see a list of sessions started by that
 	// user.
 	//
-	//     * Status: Specify a valid session status to see a list of all
-	// sessions with that status. Status values you can specify include:
+	// * Status: Specify a valid session status to see a list of all sessions
+	// with that status. Status values you can specify include:
 	//
-	//         *
-	// Connected
+	// * Connected
 	//
-	//         * Connecting
+	// *
+	// Connecting
 	//
-	//         * Disconnected
+	// * Disconnected
 	//
-	//         * Terminated
-	//
+	// * Terminated
 	//
 	// * Terminating
 	//
-	//         * Failed
+	// * Failed
 	//
 	// This member is required.
 	Value *string
@@ -3967,59 +3963,58 @@ type Tag struct {
 // An array of search criteria that targets instances using a Key,Value combination
 // that you specify. Supported formats include the following.
 //
-//     *
+// *
 // Key=InstanceIds,Values=instance-id-1,instance-id-2,instance-id-3
 //
-//     *
+// *
 // Key=tag:my-tag-key,Values=my-tag-value-1,my-tag-value-2
 //
-//     *
+// *
 // Key=tag-key,Values=my-tag-key-1,my-tag-key-2
 //
-//     * Run Command and Maintenance
+// * Run Command and Maintenance
 // window targets only: Key=resource-groups:Name,Values=resource-group-name
 //
-//     *
+// *
 // Maintenance window targets only:
 // Key=resource-groups:ResourceTypeFilters,Values=resource-type-1,resource-type-2
 //
-//
-// * Automation targets only: Key=ResourceGroup;Values=resource-group-name
+// *
+// Automation targets only: Key=ResourceGroup;Values=resource-group-name
 //
 // For
 // example:
 //
-//     *
+// *
 // Key=InstanceIds,Values=i-02573cafcfEXAMPLE,i-0471e04240EXAMPLE,i-07782c72faEXAMPLE
 //
+// *
+// Key=tag:CostCenter,Values=CostCenter1,CostCenter2,CostCenter3
 //
-// * Key=tag:CostCenter,Values=CostCenter1,CostCenter2,CostCenter3
-//
-//     *
+// *
 // Key=tag-key,Values=Name,Instance-Type,CostCenter
 //
-//     * Run Command and
-// Maintenance window targets only:
-// Key=resource-groups:Name,Values=ProductionResourceGroup This example
-// demonstrates how to target all resources in the resource group
+// * Run Command and Maintenance
+// window targets only: Key=resource-groups:Name,Values=ProductionResourceGroup
+// This example demonstrates how to target all resources in the resource group
 // ProductionResourceGroup in your maintenance window.
 //
-//     * Maintenance window
+// * Maintenance window
 // targets only:
 // Key=resource-groups:ResourceTypeFilters,Values=AWS::EC2::INSTANCE,AWS::EC2::VPC
 // This example demonstrates how to target only EC2 instances and VPCs in your
 // maintenance window.
 //
-//     * Automation targets only:
+// * Automation targets only:
 // Key=ResourceGroup,Values=MyResourceGroup
 //
-//     * State Manager association
-// targets only: Key=InstanceIds,Values=*  This example demonstrates how to target
-// all managed instances in the AWS Region where the association was created.
+// * State Manager association targets
+// only: Key=InstanceIds,Values=*  This example demonstrates how to target all
+// managed instances in the AWS Region where the association was created.
 //
-// For
-// more information about how to send commands that target instances using
-// Key,Value parameters, see Targeting multiple instances
+// For more
+// information about how to send commands that target instances using Key,Value
+// parameters, see Targeting multiple instances
 // (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting)
 // in the AWS Systems Manager User Guide.
 type Target struct {

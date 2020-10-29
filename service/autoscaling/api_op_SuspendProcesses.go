@@ -41,28 +41,28 @@ type SuspendProcessesInput struct {
 
 	// One or more of the following processes:
 	//
-	//     * Launch
+	// * Launch
 	//
-	//     * Terminate
+	// * Terminate
 	//
-	//     *
+	// *
 	// AddToLoadBalancer
 	//
-	//     * AlarmNotification
+	// * AlarmNotification
 	//
-	//     * AZRebalance
+	// * AZRebalance
 	//
-	//     *
-	// HealthCheck
+	// * HealthCheck
 	//
-	//     * InstanceRefresh
+	// *
+	// InstanceRefresh
 	//
-	//     * ReplaceUnhealthy
+	// * ReplaceUnhealthy
 	//
-	//     *
-	// ScheduledActions
+	// * ScheduledActions
 	//
-	// If you omit this parameter, all processes are specified.
+	// If you omit this
+	// parameter, all processes are specified.
 	ScalingProcesses []*string
 }
 

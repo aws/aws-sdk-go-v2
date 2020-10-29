@@ -54,16 +54,16 @@ type DescribeScheduledInstanceAvailabilityInput struct {
 
 	// The filters.
 	//
-	//     * availability-zone - The Availability Zone (for example,
+	// * availability-zone - The Availability Zone (for example,
 	// us-west-2a).
 	//
-	//     * instance-type - The instance type (for example, c4.large).
+	// * instance-type - The instance type (for example, c4.large).
 	//
+	// *
+	// network-platform - The network platform (EC2-Classic or EC2-VPC).
 	//
-	// * network-platform - The network platform (EC2-Classic or EC2-VPC).
-	//
-	//     *
-	// platform - The platform (Linux/UNIX or Windows).
+	// * platform -
+	// The platform (Linux/UNIX or Windows).
 	Filters []*types.Filter
 
 	// The maximum number of results to return in a single call. This value can be

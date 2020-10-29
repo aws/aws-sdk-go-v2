@@ -27,22 +27,22 @@ import (
 // is reported as healthy by the load balancer. There are two service scheduler
 // strategies available:
 //
-//     * REPLICA - The replica scheduling strategy places
-// and maintains the desired number of tasks across your cluster. By default, the
+// * REPLICA - The replica scheduling strategy places and
+// maintains the desired number of tasks across your cluster. By default, the
 // service scheduler spreads tasks across Availability Zones. You can use task
 // placement strategies and constraints to customize task placement decisions. For
 // more information, see Service Scheduler Concepts
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html)
 // in the Amazon Elastic Container Service Developer Guide.
 //
-//     * DAEMON - The
-// daemon scheduling strategy deploys exactly one task on each active container
-// instance that meets all of the task placement constraints that you specify in
-// your cluster. The service scheduler also evaluates the task placement
-// constraints for running tasks and will stop tasks that do not meet the placement
-// constraints. When using this strategy, you don't need to specify a desired
-// number of tasks, a task placement strategy, or use Service Auto Scaling
-// policies. For more information, see Service Scheduler Concepts
+// * DAEMON - The daemon
+// scheduling strategy deploys exactly one task on each active container instance
+// that meets all of the task placement constraints that you specify in your
+// cluster. The service scheduler also evaluates the task placement constraints for
+// running tasks and will stop tasks that do not meet the placement constraints.
+// When using this strategy, you don't need to specify a desired number of tasks, a
+// task placement strategy, or use Service Auto Scaling policies. For more
+// information, see Service Scheduler Concepts
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html)
 // in the Amazon Elastic Container Service Developer Guide.
 //
@@ -91,25 +91,25 @@ import (
 // scheduler launches new tasks, it determines task placement in your cluster using
 // the following logic:
 //
-//     * Determine which of the container instances in your
+// * Determine which of the container instances in your
 // cluster can support your service's task definition (for example, they have the
 // required CPU, memory, ports, and container instance attributes).
 //
-//     * By
-// default, the service scheduler attempts to balance tasks across Availability
-// Zones in this manner (although you can choose a different placement strategy)
-// with the placementStrategy parameter):
+// * By default,
+// the service scheduler attempts to balance tasks across Availability Zones in
+// this manner (although you can choose a different placement strategy) with the
+// placementStrategy parameter):
 //
-//         * Sort the valid container
-// instances, giving priority to instances that have the fewest number of running
-// tasks for this service in their respective Availability Zone. For example, if
-// zone A has one running service task and zones B and C each have zero, valid
-// container instances in either zone B or C are considered optimal for
-// placement.
+// * Sort the valid container instances, giving
+// priority to instances that have the fewest number of running tasks for this
+// service in their respective Availability Zone. For example, if zone A has one
+// running service task and zones B and C each have zero, valid container instances
+// in either zone B or C are considered optimal for placement.
 //
-//         * Place the new service task on a valid container instance
-// in an optimal Availability Zone (based on the previous steps), favoring
-// container instances with the fewest number of running tasks for this service.
+// * Place the new
+// service task on a valid container instance in an optimal Availability Zone
+// (based on the previous steps), favoring container instances with the fewest
+// number of running tasks for this service.
 func (c *Client) CreateService(ctx context.Context, params *CreateServiceInput, optFns ...func(*Options)) (*CreateServiceOutput, error) {
 	if params == nil {
 		params = &CreateServiceInput{}
@@ -301,22 +301,22 @@ type CreateServiceInput struct {
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html).
 	// There are two service scheduler strategies available:
 	//
-	//     * REPLICA-The replica
+	// * REPLICA-The replica
 	// scheduling strategy places and maintains the desired number of tasks across your
 	// cluster. By default, the service scheduler spreads tasks across Availability
 	// Zones. You can use task placement strategies and constraints to customize task
 	// placement decisions. This scheduler strategy is required if the service is using
 	// the CODE_DEPLOY or EXTERNAL deployment controller types.
 	//
-	//     * DAEMON-The
-	// daemon scheduling strategy deploys exactly one task on each active container
-	// instance that meets all of the task placement constraints that you specify in
-	// your cluster. The service scheduler also evaluates the task placement
-	// constraints for running tasks and will stop tasks that do not meet the placement
-	// constraints. When you're using this strategy, you don't need to specify a
-	// desired number of tasks, a task placement strategy, or use Service Auto Scaling
-	// policies. Tasks using the Fargate launch type or the CODE_DEPLOY or EXTERNAL
-	// deployment controller types don't support the DAEMON scheduling strategy.
+	// * DAEMON-The daemon
+	// scheduling strategy deploys exactly one task on each active container instance
+	// that meets all of the task placement constraints that you specify in your
+	// cluster. The service scheduler also evaluates the task placement constraints for
+	// running tasks and will stop tasks that do not meet the placement constraints.
+	// When you're using this strategy, you don't need to specify a desired number of
+	// tasks, a task placement strategy, or use Service Auto Scaling policies. Tasks
+	// using the Fargate launch type or the CODE_DEPLOY or EXTERNAL deployment
+	// controller types don't support the DAEMON scheduling strategy.
 	SchedulingStrategy types.SchedulingStrategy
 
 	// The details of the service discovery registries to assign to this service. For
@@ -332,30 +332,30 @@ type CreateServiceInput struct {
 	// define. When a service is deleted, the tags are deleted as well. The following
 	// basic restrictions apply to tags:
 	//
-	//     * Maximum number of tags per resource -
-	// 50
+	// * Maximum number of tags per resource - 50
 	//
-	//     * For each resource, each tag key must be unique, and each tag key can
-	// have only one value.
+	// *
+	// For each resource, each tag key must be unique, and each tag key can have only
+	// one value.
 	//
-	//     * Maximum key length - 128 Unicode characters in
-	// UTF-8
+	// * Maximum key length - 128 Unicode characters in UTF-8
 	//
-	//     * Maximum value length - 256 Unicode characters in UTF-8
+	// * Maximum
+	// value length - 256 Unicode characters in UTF-8
 	//
-	//     * If
-	// your tagging schema is used across multiple services and resources, remember
-	// that other services may have restrictions on allowed characters. Generally
-	// allowed characters are: letters, numbers, and spaces representable in UTF-8, and
-	// the following characters: + - = . _ : / @.
+	// * If your tagging schema is used
+	// across multiple services and resources, remember that other services may have
+	// restrictions on allowed characters. Generally allowed characters are: letters,
+	// numbers, and spaces representable in UTF-8, and the following characters: + - =
+	// . _ : / @.
 	//
-	//     * Tag keys and values are
-	// case-sensitive.
+	// * Tag keys and values are case-sensitive.
 	//
-	//     * Do not use aws:, AWS:, or any upper or lowercase
-	// combination of such as a prefix for either keys or values as it is reserved for
-	// AWS use. You cannot edit or delete tag keys or values with this prefix. Tags
-	// with this prefix do not count against your tags per resource limit.
+	// * Do not use aws:, AWS:,
+	// or any upper or lowercase combination of such as a prefix for either keys or
+	// values as it is reserved for AWS use. You cannot edit or delete tag keys or
+	// values with this prefix. Tags with this prefix do not count against your tags
+	// per resource limit.
 	Tags []*types.Tag
 
 	// The family and revision (family:revision) or full ARN of the task definition to

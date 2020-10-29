@@ -14,10 +14,10 @@ import (
 // Updates the status of a model version. You can perform the following status
 // updates:
 //
-//     * Change the TRAINING_COMPLETE status to ACTIVE.
+// * Change the TRAINING_COMPLETE status to ACTIVE.
 //
-//     * Change
-// ACTIVEto INACTIVE.
+// * Change ACTIVEto
+// INACTIVE.
 func (c *Client) UpdateModelVersionStatus(ctx context.Context, params *UpdateModelVersionStatusInput, optFns ...func(*Options)) (*UpdateModelVersionStatusOutput, error) {
 	if params == nil {
 		params = &UpdateModelVersionStatusInput{}

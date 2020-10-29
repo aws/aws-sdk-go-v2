@@ -32,7 +32,7 @@ type DownloadDBLogFilePortionInput struct {
 	// The customer-assigned name of the DB instance that contains the log files you
 	// want to list. Constraints:
 	//
-	//     * Must match the identifier of an existing
+	// * Must match the identifier of an existing
 	// DBInstance.
 	//
 	// This member is required.
@@ -54,19 +54,19 @@ type DownloadDBLogFilePortionInput struct {
 	// from the beginning or the end of the log file, depending on the value of the
 	// Marker parameter.
 	//
-	//     * If neither Marker or NumberOfLines are specified, the
+	// * If neither Marker or NumberOfLines are specified, the
 	// entire log file is returned up to a maximum of 10000 lines, starting with the
 	// most recent log entries first.
 	//
-	//     * If NumberOfLines is specified and Marker
-	// isn't specified, then the most recent lines from the end of the log file are
+	// * If NumberOfLines is specified and Marker isn't
+	// specified, then the most recent lines from the end of the log file are
 	// returned.
 	//
-	//     * If Marker is specified as "0", then the specified number of
-	// lines from the beginning of the log file are returned.
+	// * If Marker is specified as "0", then the specified number of lines
+	// from the beginning of the log file are returned.
 	//
-	//     * You can download
-	// the log file in blocks of lines by specifying the size of the block using the
+	// * You can download the log
+	// file in blocks of lines by specifying the size of the block using the
 	// NumberOfLines parameter, and by specifying a value of "0" for the Marker
 	// parameter in your first request. Include the Marker value returned in the
 	// response as the Marker value for the next request, continuing until the

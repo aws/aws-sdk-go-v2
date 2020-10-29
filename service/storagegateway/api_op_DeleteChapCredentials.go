@@ -30,11 +30,10 @@ func (c *Client) DeleteChapCredentials(ctx context.Context, params *DeleteChapCr
 
 // A JSON object containing one or more of the following fields:
 //
-//     *
+// *
 // DeleteChapCredentialsInput$InitiatorName
 //
-//     *
-// DeleteChapCredentialsInput$TargetARN
+// * DeleteChapCredentialsInput$TargetARN
 type DeleteChapCredentialsInput struct {
 
 	// The iSCSI initiator that connects to the target.

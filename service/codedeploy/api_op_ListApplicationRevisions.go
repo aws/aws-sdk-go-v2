@@ -39,13 +39,13 @@ type ListApplicationRevisionsInput struct {
 	// Whether to list revisions based on whether the revision is the target revision
 	// of a deployment group:
 	//
-	//     * include: List revisions that are target revisions
-	// of a deployment group.
+	// * include: List revisions that are target revisions of a
+	// deployment group.
 	//
-	//     * exclude: Do not list revisions that are target
-	// revisions of a deployment group.
+	// * exclude: Do not list revisions that are target revisions of
+	// a deployment group.
 	//
-	//     * ignore: List all revisions.
+	// * ignore: List all revisions.
 	Deployed types.ListStateFilterAction
 
 	// An identifier returned from the previous ListApplicationRevisions call. It can
@@ -61,30 +61,28 @@ type ListApplicationRevisionsInput struct {
 
 	// The column name to use to sort the list results:
 	//
-	//     * registerTime: Sort by
-	// the time the revisions were registered with AWS CodeDeploy.
+	// * registerTime: Sort by the
+	// time the revisions were registered with AWS CodeDeploy.
 	//
-	//     *
-	// firstUsedTime: Sort by the time the revisions were first used in a deployment.
+	// * firstUsedTime: Sort
+	// by the time the revisions were first used in a deployment.
 	//
+	// * lastUsedTime: Sort
+	// by the time the revisions were last used in a deployment.
 	//
-	// * lastUsedTime: Sort by the time the revisions were last used in a
-	// deployment.
-	//
-	// If not specified or set to null, the results are returned in an
-	// arbitrary order.
+	// If not specified or
+	// set to null, the results are returned in an arbitrary order.
 	SortBy types.ApplicationRevisionSortBy
 
 	// The order in which to sort the list results:
 	//
-	//     * ascending: ascending
-	// order.
+	// * ascending: ascending order.
 	//
-	//     * descending: descending order.
+	// *
+	// descending: descending order.
 	//
-	// If not specified, the results are
-	// sorted in ascending order. If set to null, the results are sorted in an
-	// arbitrary order.
+	// If not specified, the results are sorted in
+	// ascending order. If set to null, the results are sorted in an arbitrary order.
 	SortOrder types.SortOrder
 }
 

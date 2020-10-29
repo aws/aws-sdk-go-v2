@@ -47,12 +47,11 @@ type ExecuteProvisionedProductServiceActionInput struct {
 
 	// The language code.
 	//
-	//     * en - English (default)
+	// * en - English (default)
 	//
-	//     * jp - Japanese
+	// * jp - Japanese
 	//
-	//     * zh
-	// - Chinese
+	// * zh - Chinese
 	AcceptLanguage *string
 
 	// A map of all self-service action parameters and their values. If a provided

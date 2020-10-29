@@ -6,9 +6,9 @@ type ChannelStatus string
 
 // Enum values for ChannelStatus
 const (
-	ChannelStatusIn_progress ChannelStatus = "IN_PROGRESS"
-	ChannelStatusCreated     ChannelStatus = "CREATED"
-	ChannelStatusFailed      ChannelStatus = "FAILED"
+	ChannelStatusInProgress ChannelStatus = "IN_PROGRESS"
+	ChannelStatusCreated    ChannelStatus = "CREATED"
+	ChannelStatusFailed     ChannelStatus = "FAILED"
 )
 
 // Values returns all known values for ChannelStatus. Note that this can be
@@ -26,10 +26,10 @@ type ChannelType string
 
 // Enum values for ChannelType
 const (
-	ChannelTypeFacebook   ChannelType = "Facebook"
-	ChannelTypeSlack      ChannelType = "Slack"
-	ChannelTypeTwilio_sms ChannelType = "Twilio-Sms"
-	ChannelTypeKik        ChannelType = "Kik"
+	ChannelTypeFacebook  ChannelType = "Facebook"
+	ChannelTypeSlack     ChannelType = "Slack"
+	ChannelTypeTwilioSms ChannelType = "Twilio-Sms"
+	ChannelTypeKik       ChannelType = "Kik"
 )
 
 // Values returns all known values for ChannelType. Note that this can be expanded
@@ -48,9 +48,9 @@ type ContentType string
 
 // Enum values for ContentType
 const (
-	ContentTypePlain_text     ContentType = "PlainText"
-	ContentTypeSsml           ContentType = "SSML"
-	ContentTypeCustom_payload ContentType = "CustomPayload"
+	ContentTypePlainText     ContentType = "PlainText"
+	ContentTypeSsml          ContentType = "SSML"
+	ContentTypeCustomPayload ContentType = "CustomPayload"
 )
 
 // Values returns all known values for ContentType. Note that this can be expanded
@@ -68,8 +68,8 @@ type Destination string
 
 // Enum values for Destination
 const (
-	DestinationCloudwatch_logs Destination = "CLOUDWATCH_LOGS"
-	DestinationS3              Destination = "S3"
+	DestinationCloudwatchLogs Destination = "CLOUDWATCH_LOGS"
+	DestinationS3             Destination = "S3"
 )
 
 // Values returns all known values for Destination. Note that this can be expanded
@@ -86,9 +86,9 @@ type ExportStatus string
 
 // Enum values for ExportStatus
 const (
-	ExportStatusIn_progress ExportStatus = "IN_PROGRESS"
-	ExportStatusReady       ExportStatus = "READY"
-	ExportStatusFailed      ExportStatus = "FAILED"
+	ExportStatusInProgress ExportStatus = "IN_PROGRESS"
+	ExportStatusReady      ExportStatus = "READY"
+	ExportStatusFailed     ExportStatus = "FAILED"
 )
 
 // Values returns all known values for ExportStatus. Note that this can be expanded
@@ -106,8 +106,8 @@ type ExportType string
 
 // Enum values for ExportType
 const (
-	ExportTypeAlexa_skills_kit ExportType = "ALEXA_SKILLS_KIT"
-	ExportTypeLex              ExportType = "LEX"
+	ExportTypeAlexaSkillsKit ExportType = "ALEXA_SKILLS_KIT"
+	ExportTypeLex            ExportType = "LEX"
 )
 
 // Values returns all known values for ExportType. Note that this can be expanded
@@ -124,8 +124,8 @@ type FulfillmentActivityType string
 
 // Enum values for FulfillmentActivityType
 const (
-	FulfillmentActivityTypeReturn_intent FulfillmentActivityType = "ReturnIntent"
-	FulfillmentActivityTypeCode_hook     FulfillmentActivityType = "CodeHook"
+	FulfillmentActivityTypeReturnIntent FulfillmentActivityType = "ReturnIntent"
+	FulfillmentActivityTypeCodeHook     FulfillmentActivityType = "CodeHook"
 )
 
 // Values returns all known values for FulfillmentActivityType. Note that this can
@@ -142,9 +142,9 @@ type ImportStatus string
 
 // Enum values for ImportStatus
 const (
-	ImportStatusIn_progress ImportStatus = "IN_PROGRESS"
-	ImportStatusComplete    ImportStatus = "COMPLETE"
-	ImportStatusFailed      ImportStatus = "FAILED"
+	ImportStatusInProgress ImportStatus = "IN_PROGRESS"
+	ImportStatusComplete   ImportStatus = "COMPLETE"
+	ImportStatusFailed     ImportStatus = "FAILED"
 )
 
 // Values returns all known values for ImportStatus. Note that this can be expanded
@@ -162,11 +162,11 @@ type Locale string
 
 // Enum values for Locale
 const (
-	LocaleDe_de Locale = "de-DE"
-	LocaleEn_au Locale = "en-AU"
-	LocaleEn_gb Locale = "en-GB"
-	LocaleEn_us Locale = "en-US"
-	LocaleEs_us Locale = "es-US"
+	LocaleDeDe Locale = "de-DE"
+	LocaleEnAu Locale = "en-AU"
+	LocaleEnGb Locale = "en-GB"
+	LocaleEnUs Locale = "en-US"
+	LocaleEsUs Locale = "es-US"
 )
 
 // Values returns all known values for Locale. Note that this can be expanded in
@@ -204,8 +204,8 @@ type MergeStrategy string
 
 // Enum values for MergeStrategy
 const (
-	MergeStrategyOverwrite_latest MergeStrategy = "OVERWRITE_LATEST"
-	MergeStrategyFail_on_conflict MergeStrategy = "FAIL_ON_CONFLICT"
+	MergeStrategyOverwriteLatest MergeStrategy = "OVERWRITE_LATEST"
+	MergeStrategyFailOnConflict  MergeStrategy = "FAIL_ON_CONFLICT"
 )
 
 // Values returns all known values for MergeStrategy. Note that this can be
@@ -222,8 +222,8 @@ type ObfuscationSetting string
 
 // Enum values for ObfuscationSetting
 const (
-	ObfuscationSettingNone                ObfuscationSetting = "NONE"
-	ObfuscationSettingDefault_obfuscation ObfuscationSetting = "DEFAULT_OBFUSCATION"
+	ObfuscationSettingNone               ObfuscationSetting = "NONE"
+	ObfuscationSettingDefaultObfuscation ObfuscationSetting = "DEFAULT_OBFUSCATION"
 )
 
 // Values returns all known values for ObfuscationSetting. Note that this can be
@@ -280,9 +280,9 @@ type ResourceType string
 
 // Enum values for ResourceType
 const (
-	ResourceTypeBot       ResourceType = "BOT"
-	ResourceTypeIntent    ResourceType = "INTENT"
-	ResourceTypeSlot_type ResourceType = "SLOT_TYPE"
+	ResourceTypeBot      ResourceType = "BOT"
+	ResourceTypeIntent   ResourceType = "INTENT"
+	ResourceTypeSlotType ResourceType = "SLOT_TYPE"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -318,8 +318,8 @@ type SlotValueSelectionStrategy string
 
 // Enum values for SlotValueSelectionStrategy
 const (
-	SlotValueSelectionStrategyOriginal_value SlotValueSelectionStrategy = "ORIGINAL_VALUE"
-	SlotValueSelectionStrategyTop_resolution SlotValueSelectionStrategy = "TOP_RESOLUTION"
+	SlotValueSelectionStrategyOriginalValue SlotValueSelectionStrategy = "ORIGINAL_VALUE"
+	SlotValueSelectionStrategyTopResolution SlotValueSelectionStrategy = "TOP_RESOLUTION"
 )
 
 // Values returns all known values for SlotValueSelectionStrategy. Note that this
@@ -336,11 +336,11 @@ type Status string
 
 // Enum values for Status
 const (
-	StatusBuilding            Status = "BUILDING"
-	StatusReady               Status = "READY"
-	StatusReady_basic_testing Status = "READY_BASIC_TESTING"
-	StatusFailed              Status = "FAILED"
-	StatusNot_built           Status = "NOT_BUILT"
+	StatusBuilding          Status = "BUILDING"
+	StatusReady             Status = "READY"
+	StatusReadyBasicTesting Status = "READY_BASIC_TESTING"
+	StatusFailed            Status = "FAILED"
+	StatusNotBuilt          Status = "NOT_BUILT"
 )
 
 // Values returns all known values for Status. Note that this can be expanded in

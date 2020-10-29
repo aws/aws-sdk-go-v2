@@ -14,7 +14,7 @@ import (
 // Applies a Legal Hold configuration to the specified object. This action is not
 // supported by Amazon S3 on Outposts. Related Resources
 //
-//     * Locking Objects
+// * Locking Objects
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html)
 func (c *Client) PutObjectLegalHold(ctx context.Context, params *PutObjectLegalHoldInput, optFns ...func(*Options)) (*PutObjectLegalHoldOutput, error) {
 	if params == nil {

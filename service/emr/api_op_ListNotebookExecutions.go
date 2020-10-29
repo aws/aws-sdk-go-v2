@@ -46,37 +46,36 @@ type ListNotebookExecutionsInput struct {
 
 	// The status filter for listing notebook executions.
 	//
-	//     * START_PENDING
-	// indicates that the cluster has received the execution request but execution has
-	// not begun.
+	// * START_PENDING indicates
+	// that the cluster has received the execution request but execution has not
+	// begun.
 	//
-	//     * STARTING indicates that the execution is starting on the
-	// cluster.
+	// * STARTING indicates that the execution is starting on the cluster.
 	//
-	//     * RUNNING indicates that the execution is being processed by the
-	// cluster.
+	// *
+	// RUNNING indicates that the execution is being processed by the cluster.
 	//
-	//     * FINISHING indicates that execution processing is in the final
-	// stages.
+	// *
+	// FINISHING indicates that execution processing is in the final stages.
 	//
-	//     * FINISHED indicates that the execution has completed without
-	// error.
+	// *
+	// FINISHED indicates that the execution has completed without error.
 	//
-	//     * FAILING indicates that the execution is failing and will not
-	// finish successfully.
+	// * FAILING
+	// indicates that the execution is failing and will not finish successfully.
 	//
-	//     * FAILED indicates that the execution failed.
+	// *
+	// FAILED indicates that the execution failed.
 	//
-	//     *
-	// STOP_PENDING indicates that the cluster has received a StopNotebookExecution
-	// request and the stop is pending.
+	// * STOP_PENDING indicates that the
+	// cluster has received a StopNotebookExecution request and the stop is pending.
 	//
-	//     * STOPPING indicates that the cluster is
-	// in the process of stopping the execution as a result of a StopNotebookExecution
-	// request.
+	// *
+	// STOPPING indicates that the cluster is in the process of stopping the execution
+	// as a result of a StopNotebookExecution request.
 	//
-	//     * STOPPED indicates that the execution stopped because of a
-	// StopNotebookExecution request.
+	// * STOPPED indicates that the
+	// execution stopped because of a StopNotebookExecution request.
 	Status types.NotebookExecutionStatus
 
 	// The end of time range filter for listing notebook executions. The default is the

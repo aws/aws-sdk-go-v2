@@ -258,14 +258,14 @@ type BlockDeviceMapping struct {
 // policy to use with Amazon EC2 Auto Scaling. To create your customized metric
 // specification:
 //
-//     * Add values for each required parameter from CloudWatch.
-// You can use an existing metric, or a new metric that you create. To use your own
+// * Add values for each required parameter from CloudWatch. You
+// can use an existing metric, or a new metric that you create. To use your own
 // metric, you must first publish the metric to CloudWatch. For more information,
 // see Publish Custom Metrics
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html)
 // in the Amazon CloudWatch User Guide.
 //
-//     * Choose a metric that changes
+// * Choose a metric that changes
 // proportionally with capacity. The value of the metric should increase or
 // decrease in inverse proportion to the number of capacity units. That is, the
 // value of the metric should decrease when capacity increases.
@@ -369,36 +369,35 @@ type EnabledMetric struct {
 
 	// One of the following metrics:
 	//
-	//     * GroupMinSize
+	// * GroupMinSize
 	//
-	//     * GroupMaxSize
+	// * GroupMaxSize
 	//
-	//     *
+	// *
 	// GroupDesiredCapacity
 	//
-	//     * GroupInServiceInstances
+	// * GroupInServiceInstances
 	//
-	//     *
-	// GroupPendingInstances
+	// * GroupPendingInstances
 	//
-	//     * GroupStandbyInstances
+	// *
+	// GroupStandbyInstances
 	//
-	//     *
-	// GroupTerminatingInstances
+	// * GroupTerminatingInstances
 	//
-	//     * GroupTotalInstances
+	// * GroupTotalInstances
 	//
-	//     *
+	// *
 	// GroupInServiceCapacity
 	//
-	//     * GroupPendingCapacity
+	// * GroupPendingCapacity
 	//
-	//     * GroupStandbyCapacity
+	// * GroupStandbyCapacity
 	//
+	// *
+	// GroupTerminatingCapacity
 	//
-	// * GroupTerminatingCapacity
-	//
-	//     * GroupTotalCapacity
+	// * GroupTotalCapacity
 	Metric *string
 }
 
@@ -542,24 +541,24 @@ type InstanceRefresh struct {
 
 	// The current status for the instance refresh operation:
 	//
-	//     * Pending - The
-	// request was created, but the operation has not started.
+	// * Pending - The request
+	// was created, but the operation has not started.
 	//
-	//     * InProgress - The
-	// operation is in progress.
+	// * InProgress - The operation is
+	// in progress.
 	//
-	//     * Successful - The operation completed
-	// successfully.
+	// * Successful - The operation completed successfully.
 	//
-	//     * Failed - The operation failed to complete. You can
-	// troubleshoot using the status reason and the scaling activities.
+	// * Failed -
+	// The operation failed to complete. You can troubleshoot using the status reason
+	// and the scaling activities.
 	//
-	//     *
-	// Cancelling - An ongoing operation is being cancelled. Cancellation does not roll
-	// back any replacements that have already been completed, but it prevents new
-	// replacements from being started.
+	// * Cancelling - An ongoing operation is being
+	// cancelled. Cancellation does not roll back any replacements that have already
+	// been completed, but it prevents new replacements from being started.
 	//
-	//     * Cancelled - The operation is cancelled.
+	// *
+	// Cancelled - The operation is cancelled.
 	Status InstanceRefreshStatus
 
 	// Provides more details about the current status of the instance refresh.
@@ -878,9 +877,9 @@ type LifecycleHook struct {
 	// The state of the EC2 instance to which to attach the lifecycle hook. The
 	// following are possible values:
 	//
-	//     * autoscaling:EC2_INSTANCE_LAUNCHING
+	// * autoscaling:EC2_INSTANCE_LAUNCHING
 	//
-	//     *
+	// *
 	// autoscaling:EC2_INSTANCE_TERMINATING
 	LifecycleTransition *string
 
@@ -904,27 +903,27 @@ type LifecycleHook struct {
 // instance terminates (before it is fully terminated). This step is a part of the
 // procedure for creating a lifecycle hook for an Auto Scaling group:
 //
-//     *
-// (Optional) Create a Lambda function and a rule that allows CloudWatch Events to
-// invoke your Lambda function when Amazon EC2 Auto Scaling launches or terminates
+// * (Optional)
+// Create a Lambda function and a rule that allows CloudWatch Events to invoke your
+// Lambda function when Amazon EC2 Auto Scaling launches or terminates
 // instances.
 //
-//     * (Optional) Create a notification target and an IAM role. The
+// * (Optional) Create a notification target and an IAM role. The
 // target can be either an Amazon SQS queue or an Amazon SNS topic. The role allows
 // Amazon EC2 Auto Scaling to publish lifecycle notifications to the target.
 //
-//     *
+// *
 // Create the lifecycle hook. Specify whether the hook is used when the instances
 // launch or terminate.
 //
-//     * If you need more time, record the lifecycle action
+// * If you need more time, record the lifecycle action
 // heartbeat to keep the instance in a pending state.
 //
-//     * If you finish before
-// the timeout period ends, complete the lifecycle action.
+// * If you finish before the
+// timeout period ends, complete the lifecycle action.
 //
-// For more information,
-// see Amazon EC2 Auto Scaling Lifecycle Hooks
+// For more information, see
+// Amazon EC2 Auto Scaling Lifecycle Hooks
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html) in
 // the Amazon EC2 Auto Scaling User Guide.
 type LifecycleHookSpecification struct {
@@ -937,9 +936,9 @@ type LifecycleHookSpecification struct {
 	// The state of the EC2 instance to which you want to attach the lifecycle hook.
 	// The valid values are:
 	//
-	//     * autoscaling:EC2_INSTANCE_LAUNCHING
+	// * autoscaling:EC2_INSTANCE_LAUNCHING
 	//
-	//     *
+	// *
 	// autoscaling:EC2_INSTANCE_TERMINATING
 	//
 	// This member is required.
@@ -987,22 +986,22 @@ type LoadBalancerState struct {
 
 	// One of the following load balancer states:
 	//
-	//     * Adding - The instances in the
+	// * Adding - The instances in the
 	// group are being registered with the load balancer.
 	//
-	//     * Added - All instances
-	// in the group are registered with the load balancer.
+	// * Added - All instances in
+	// the group are registered with the load balancer.
 	//
-	//     * InService - At least
-	// one instance in the group passed an ELB health check.
+	// * InService - At least one
+	// instance in the group passed an ELB health check.
 	//
-	//     * Removing - The
-	// instances in the group are being deregistered from the load balancer. If
-	// connection draining is enabled, Elastic Load Balancing waits for in-flight
-	// requests to complete before deregistering the instances.
+	// * Removing - The instances in
+	// the group are being deregistered from the load balancer. If connection draining
+	// is enabled, Elastic Load Balancing waits for in-flight requests to complete
+	// before deregistering the instances.
 	//
-	//     * Removed - All
-	// instances in the group are deregistered from the load balancer.
+	// * Removed - All instances in the group are
+	// deregistered from the load balancer.
 	State *string
 }
 
@@ -1020,22 +1019,22 @@ type LoadBalancerTargetGroupState struct {
 
 	// The state of the target group.
 	//
-	//     * Adding - The Auto Scaling instances are
-	// being registered with the target group.
+	// * Adding - The Auto Scaling instances are being
+	// registered with the target group.
 	//
-	//     * Added - All Auto Scaling
-	// instances are registered with the target group.
+	// * Added - All Auto Scaling instances are
+	// registered with the target group.
 	//
-	//     * InService - At least one
-	// Auto Scaling instance passed an ELB health check.
+	// * InService - At least one Auto Scaling
+	// instance passed an ELB health check.
 	//
-	//     * Removing - The Auto
-	// Scaling instances are being deregistered from the target group. If connection
-	// draining is enabled, Elastic Load Balancing waits for in-flight requests to
-	// complete before deregistering the instances.
+	// * Removing - The Auto Scaling instances
+	// are being deregistered from the target group. If connection draining is enabled,
+	// Elastic Load Balancing waits for in-flight requests to complete before
+	// deregistering the instances.
 	//
-	//     * Removed - All Auto Scaling
-	// instances are deregistered from the target group.
+	// * Removed - All Auto Scaling instances are
+	// deregistered from the target group.
 	State *string
 }
 
@@ -1044,36 +1043,35 @@ type MetricCollectionType struct {
 
 	// One of the following metrics:
 	//
-	//     * GroupMinSize
+	// * GroupMinSize
 	//
-	//     * GroupMaxSize
+	// * GroupMaxSize
 	//
-	//     *
+	// *
 	// GroupDesiredCapacity
 	//
-	//     * GroupInServiceInstances
+	// * GroupInServiceInstances
 	//
-	//     *
-	// GroupPendingInstances
+	// * GroupPendingInstances
 	//
-	//     * GroupStandbyInstances
+	// *
+	// GroupStandbyInstances
 	//
-	//     *
-	// GroupTerminatingInstances
+	// * GroupTerminatingInstances
 	//
-	//     * GroupTotalInstances
+	// * GroupTotalInstances
 	//
-	//     *
+	// *
 	// GroupInServiceCapacity
 	//
-	//     * GroupPendingCapacity
+	// * GroupPendingCapacity
 	//
-	//     * GroupStandbyCapacity
+	// * GroupStandbyCapacity
 	//
+	// *
+	// GroupTerminatingCapacity
 	//
-	// * GroupTerminatingCapacity
-	//
-	//     * GroupTotalCapacity
+	// * GroupTotalCapacity
 	Metric *string
 }
 
@@ -1128,18 +1126,18 @@ type NotificationConfiguration struct {
 
 	// One of the following event notification types:
 	//
-	//     *
+	// *
 	// autoscaling:EC2_INSTANCE_LAUNCH
 	//
-	//     * autoscaling:EC2_INSTANCE_LAUNCH_ERROR
+	// * autoscaling:EC2_INSTANCE_LAUNCH_ERROR
 	//
+	// *
+	// autoscaling:EC2_INSTANCE_TERMINATE
 	//
-	// * autoscaling:EC2_INSTANCE_TERMINATE
-	//
-	//     *
+	// *
 	// autoscaling:EC2_INSTANCE_TERMINATE_ERROR
 	//
-	//     * autoscaling:TEST_NOTIFICATION
+	// * autoscaling:TEST_NOTIFICATION
 	NotificationType *string
 
 	// The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (Amazon
@@ -1153,18 +1151,18 @@ type PredefinedMetricSpecification struct {
 
 	// The metric type. The following predefined metrics are available:
 	//
-	//     *
+	// *
 	// ASGAverageCPUUtilization - Average CPU utilization of the Auto Scaling group.
 	//
+	// *
+	// ASGAverageNetworkIn - Average number of bytes received on all network interfaces
+	// by the Auto Scaling group.
 	//
-	// * ASGAverageNetworkIn - Average number of bytes received on all network
-	// interfaces by the Auto Scaling group.
+	// * ASGAverageNetworkOut - Average number of bytes
+	// sent out on all network interfaces by the Auto Scaling group.
 	//
-	//     * ASGAverageNetworkOut - Average
-	// number of bytes sent out on all network interfaces by the Auto Scaling group.
-	//
-	//
-	// * ALBRequestCountPerTarget - Number of requests completed per target in an
+	// *
+	// ALBRequestCountPerTarget - Number of requests completed per target in an
 	// Application Load Balancer target group.
 	//
 	// This member is required.
@@ -1178,14 +1176,14 @@ type PredefinedMetricSpecification struct {
 	// app/load-balancer-name/load-balancer-id/targetgroup/target-group-name/target-group-id
 	// , where
 	//
-	//     * app/load-balancer-name/load-balancer-id  is the final portion of
-	// the load balancer ARN, and
+	// * app/load-balancer-name/load-balancer-id  is the final portion of the
+	// load balancer ARN, and
 	//
-	//     * targetgroup/target-group-name/target-group-id
-	// is the final portion of the target group ARN.
+	// * targetgroup/target-group-name/target-group-id  is the
+	// final portion of the target group ARN.
 	//
-	// To find the ARN for an
-	// Application Load Balancer, use the DescribeLoadBalancers
+	// To find the ARN for an Application Load
+	// Balancer, use the DescribeLoadBalancers
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html)
 	// API operation. To find the ARN for the target group, use the
 	// DescribeTargetGroups
@@ -1201,26 +1199,25 @@ type ProcessType struct {
 
 	// One of the following processes:
 	//
-	//     * Launch
+	// * Launch
 	//
-	//     * Terminate
+	// * Terminate
 	//
-	//     *
-	// AddToLoadBalancer
+	// * AddToLoadBalancer
 	//
-	//     * AlarmNotification
+	// *
+	// AlarmNotification
 	//
-	//     * AZRebalance
+	// * AZRebalance
 	//
-	//     *
-	// HealthCheck
+	// * HealthCheck
 	//
-	//     * InstanceRefresh
+	// * InstanceRefresh
 	//
-	//     * ReplaceUnhealthy
+	// *
+	// ReplaceUnhealthy
 	//
-	//     *
-	// ScheduledActions
+	// * ScheduledActions
 	//
 	// This member is required.
 	ProcessName *string
@@ -1285,15 +1282,15 @@ type ScalingPolicy struct {
 
 	// One of the following policy types:
 	//
-	//     * TargetTrackingScaling
+	// * TargetTrackingScaling
 	//
-	//     *
-	// StepScaling
+	// * StepScaling
 	//
-	//     * SimpleScaling (default)
+	// *
+	// SimpleScaling (default)
 	//
-	// For more information, see Target
-	// Tracking Scaling Policies
+	// For more information, see Target Tracking Scaling
+	// Policies
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html)
 	// and Step and Simple Scaling Policies
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html)
@@ -1397,30 +1394,30 @@ type ScheduledUpdateGroupActionRequest struct {
 // policy. For the following examples, suppose that you have an alarm with a breach
 // threshold of 50:
 //
-//     * To trigger the adjustment when the metric is greater
-// than or equal to 50 and less than 60, specify a lower bound of 0 and an upper
-// bound of 10.
+// * To trigger the adjustment when the metric is greater than or
+// equal to 50 and less than 60, specify a lower bound of 0 and an upper bound of
+// 10.
 //
-//     * To trigger the adjustment when the metric is greater than 40
-// and less than or equal to 50, specify a lower bound of -10 and an upper bound of
+// * To trigger the adjustment when the metric is greater than 40 and less
+// than or equal to 50, specify a lower bound of -10 and an upper bound of
 // 0.
 //
 // There are a few rules for the step adjustments for your step policy:
 //
-//     *
-// The ranges of your step adjustments can't overlap or have a gap.
+// * The
+// ranges of your step adjustments can't overlap or have a gap.
 //
-//     * At most,
-// one step adjustment can have a null lower bound. If one step adjustment has a
+// * At most, one
+// step adjustment can have a null lower bound. If one step adjustment has a
 // negative lower bound, then there must be a step adjustment with a null lower
 // bound.
 //
-//     * At most, one step adjustment can have a null upper bound. If one
-// step adjustment has a positive upper bound, then there must be a step adjustment
-// with a null upper bound.
+// * At most, one step adjustment can have a null upper bound. If one step
+// adjustment has a positive upper bound, then there must be a step adjustment with
+// a null upper bound.
 //
-//     * The upper and lower bound can't be null in the
-// same step adjustment.
+// * The upper and lower bound can't be null in the same step
+// adjustment.
 //
 // For more information, see Step Adjustments
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html#as-scaling-steps)

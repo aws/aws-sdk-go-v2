@@ -28,9 +28,9 @@ type DatasetType string
 
 // Enum values for DatasetType
 const (
-	DatasetTypeTarget_time_series  DatasetType = "TARGET_TIME_SERIES"
-	DatasetTypeRelated_time_series DatasetType = "RELATED_TIME_SERIES"
-	DatasetTypeItem_metadata       DatasetType = "ITEM_METADATA"
+	DatasetTypeTargetTimeSeries  DatasetType = "TARGET_TIME_SERIES"
+	DatasetTypeRelatedTimeSeries DatasetType = "RELATED_TIME_SERIES"
+	DatasetTypeItemMetadata      DatasetType = "ITEM_METADATA"
 )
 
 // Values returns all known values for DatasetType. Note that this can be expanded
@@ -48,13 +48,13 @@ type Domain string
 
 // Enum values for Domain
 const (
-	DomainRetail             Domain = "RETAIL"
-	DomainCustom             Domain = "CUSTOM"
-	DomainInventory_planning Domain = "INVENTORY_PLANNING"
-	DomainEc2_capacity       Domain = "EC2_CAPACITY"
-	DomainWork_force         Domain = "WORK_FORCE"
-	DomainWeb_traffic        Domain = "WEB_TRAFFIC"
-	DomainMetrics            Domain = "METRICS"
+	DomainRetail            Domain = "RETAIL"
+	DomainCustom            Domain = "CUSTOM"
+	DomainInventoryPlanning Domain = "INVENTORY_PLANNING"
+	DomainEc2Capacity       Domain = "EC2_CAPACITY"
+	DomainWorkForce         Domain = "WORK_FORCE"
+	DomainWebTraffic        Domain = "WEB_TRAFFIC"
+	DomainMetrics           Domain = "METRICS"
 )
 
 // Values returns all known values for Domain. Note that this can be expanded in
@@ -110,8 +110,8 @@ type FilterConditionString string
 
 // Enum values for FilterConditionString
 const (
-	FilterConditionStringIs     FilterConditionString = "IS"
-	FilterConditionStringIs_not FilterConditionString = "IS_NOT"
+	FilterConditionStringIs    FilterConditionString = "IS"
+	FilterConditionStringIsNot FilterConditionString = "IS_NOT"
 )
 
 // Values returns all known values for FilterConditionString. Note that this can be

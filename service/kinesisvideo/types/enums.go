@@ -6,13 +6,13 @@ type APIName string
 
 // Enum values for APIName
 const (
-	APINamePut_media                      APIName = "PUT_MEDIA"
-	APINameGet_media                      APIName = "GET_MEDIA"
-	APINameList_fragments                 APIName = "LIST_FRAGMENTS"
-	APINameGet_media_for_fragment_list    APIName = "GET_MEDIA_FOR_FRAGMENT_LIST"
-	APINameGet_hls_streaming_session_url  APIName = "GET_HLS_STREAMING_SESSION_URL"
-	APINameGet_dash_streaming_session_url APIName = "GET_DASH_STREAMING_SESSION_URL"
-	APINameGet_clip                       APIName = "GET_CLIP"
+	APINamePutMedia                   APIName = "PUT_MEDIA"
+	APINameGetMedia                   APIName = "GET_MEDIA"
+	APINameListFragments              APIName = "LIST_FRAGMENTS"
+	APINameGetMediaForFragmentList    APIName = "GET_MEDIA_FOR_FRAGMENT_LIST"
+	APINameGetHlsStreamingSessionUrl  APIName = "GET_HLS_STREAMING_SESSION_URL"
+	APINameGetDashStreamingSessionUrl APIName = "GET_DASH_STREAMING_SESSION_URL"
+	APINameGetClip                    APIName = "GET_CLIP"
 )
 
 // Values returns all known values for APIName. Note that this can be expanded in
@@ -70,7 +70,7 @@ type ChannelType string
 
 // Enum values for ChannelType
 const (
-	ChannelTypeSingle_master ChannelType = "SINGLE_MASTER"
+	ChannelTypeSingleMaster ChannelType = "SINGLE_MASTER"
 )
 
 // Values returns all known values for ChannelType. Note that this can be expanded
@@ -86,7 +86,7 @@ type ComparisonOperator string
 
 // Enum values for ComparisonOperator
 const (
-	ComparisonOperatorBegins_with ComparisonOperator = "BEGINS_WITH"
+	ComparisonOperatorBeginsWith ComparisonOperator = "BEGINS_WITH"
 )
 
 // Values returns all known values for ComparisonOperator. Note that this can be
@@ -124,8 +124,8 @@ type UpdateDataRetentionOperation string
 
 // Enum values for UpdateDataRetentionOperation
 const (
-	UpdateDataRetentionOperationIncrease_data_retention UpdateDataRetentionOperation = "INCREASE_DATA_RETENTION"
-	UpdateDataRetentionOperationDecrease_data_retention UpdateDataRetentionOperation = "DECREASE_DATA_RETENTION"
+	UpdateDataRetentionOperationIncreaseDataRetention UpdateDataRetentionOperation = "INCREASE_DATA_RETENTION"
+	UpdateDataRetentionOperationDecreaseDataRetention UpdateDataRetentionOperation = "DECREASE_DATA_RETENTION"
 )
 
 // Values returns all known values for UpdateDataRetentionOperation. Note that this

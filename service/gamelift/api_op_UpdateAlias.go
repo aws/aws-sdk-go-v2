@@ -16,18 +16,18 @@ import (
 // another fleet, provide an updated routing strategy. If successful, the updated
 // alias record is returned.
 //
-//     * CreateAlias
+// * CreateAlias
 //
-//     * ListAliases
+// * ListAliases
 //
-//     *
-// DescribeAlias
+// * DescribeAlias
 //
-//     * UpdateAlias
+// *
+// UpdateAlias
 //
-//     * DeleteAlias
+// * DeleteAlias
 //
-//     * ResolveAlias
+// * ResolveAlias
 func (c *Client) UpdateAlias(ctx context.Context, params *UpdateAliasInput, optFns ...func(*Options)) (*UpdateAliasOutput, error) {
 	if params == nil {
 		params = &UpdateAliasInput{}

@@ -74,13 +74,13 @@ type CreateActivationInput struct {
 	// virtual machines (VMs) in your on-premises environment you intend to activate.
 	// In this case, you could specify the following key name/value pairs:
 	//
-	//     *
+	// *
 	// Key=OS,Value=Windows
 	//
-	//     * Key=Environment,Value=Production
+	// * Key=Environment,Value=Production
 	//
-	// When you install
-	// SSM Agent on your on-premises servers and VMs, you specify an activation ID and
+	// When you install SSM
+	// Agent on your on-premises servers and VMs, you specify an activation ID and
 	// code. When you specify the activation ID and code, tags assigned to the
 	// activation are automatically applied to the on-premises servers or VMs. You
 	// can't add tags to or delete tags from an existing activation. You can tag your

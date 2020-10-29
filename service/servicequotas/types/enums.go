@@ -6,10 +6,10 @@ type ErrorCode string
 
 // Enum values for ErrorCode
 const (
-	ErrorCodeDependency_access_denied_error    ErrorCode = "DEPENDENCY_ACCESS_DENIED_ERROR"
-	ErrorCodeDependency_throttling_error       ErrorCode = "DEPENDENCY_THROTTLING_ERROR"
-	ErrorCodeDependency_service_error          ErrorCode = "DEPENDENCY_SERVICE_ERROR"
-	ErrorCodeService_quota_not_available_error ErrorCode = "SERVICE_QUOTA_NOT_AVAILABLE_ERROR"
+	ErrorCodeDependencyAccessDeniedError   ErrorCode = "DEPENDENCY_ACCESS_DENIED_ERROR"
+	ErrorCodeDependencyThrottlingError     ErrorCode = "DEPENDENCY_THROTTLING_ERROR"
+	ErrorCodeDependencyServiceError        ErrorCode = "DEPENDENCY_SERVICE_ERROR"
+	ErrorCodeServiceQuotaNotAvailableError ErrorCode = "SERVICE_QUOTA_NOT_AVAILABLE_ERROR"
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded in
@@ -56,11 +56,11 @@ type RequestStatus string
 
 // Enum values for RequestStatus
 const (
-	RequestStatusPending     RequestStatus = "PENDING"
-	RequestStatusCase_opened RequestStatus = "CASE_OPENED"
-	RequestStatusApproved    RequestStatus = "APPROVED"
-	RequestStatusDenied      RequestStatus = "DENIED"
-	RequestStatusCase_closed RequestStatus = "CASE_CLOSED"
+	RequestStatusPending    RequestStatus = "PENDING"
+	RequestStatusCaseOpened RequestStatus = "CASE_OPENED"
+	RequestStatusApproved   RequestStatus = "APPROVED"
+	RequestStatusDenied     RequestStatus = "DENIED"
+	RequestStatusCaseClosed RequestStatus = "CASE_CLOSED"
 )
 
 // Values returns all known values for RequestStatus. Note that this can be

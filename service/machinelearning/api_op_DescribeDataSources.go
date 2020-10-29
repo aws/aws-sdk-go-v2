@@ -35,22 +35,22 @@ type DescribeDataSourcesInput struct {
 
 	// Use one of the following variables to filter a list of DataSource:
 	//
-	//     *
-	// CreatedAt - Sets the search criteria to DataSource creation dates.
+	// * CreatedAt
+	// - Sets the search criteria to DataSource creation dates.
 	//
-	//     * Status
-	// - Sets the search criteria to DataSource statuses.
+	// * Status - Sets the
+	// search criteria to DataSource statuses.
 	//
-	//     * Name - Sets the search
-	// criteria to the contents of DataSourceName.
+	// * Name - Sets the search criteria to
+	// the contents of DataSourceName.
 	//
-	//     * DataUri - Sets the search
-	// criteria to the URI of data files used to create the DataSource. The URI can
-	// identify either a file or an Amazon Simple Storage Service (Amazon S3) bucket or
-	// directory.
+	// * DataUri - Sets the search criteria to the URI
+	// of data files used to create the DataSource. The URI can identify either a file
+	// or an Amazon Simple Storage Service (Amazon S3) bucket or directory.
 	//
-	//     * IAMUser - Sets the search criteria to the user account that
-	// invoked the DataSource creation.
+	// * IAMUser
+	// - Sets the search criteria to the user account that invoked the DataSource
+	// creation.
 	FilterVariable types.DataSourceFilterVariable
 
 	// The greater than or equal to operator. The DataSource results will have
@@ -86,21 +86,20 @@ type DescribeDataSourcesInput struct {
 	// for this DataSource, select Name for the FilterVariable and any of the following
 	// strings for the Prefix:
 	//
-	//     * 2014-09
+	// * 2014-09
 	//
-	//     * 2014-09-09
+	// * 2014-09-09
 	//
-	//     *
-	// 2014-09-09-Holiday
+	// * 2014-09-09-Holiday
 	Prefix *string
 
 	// A two-value parameter that determines the sequence of the resulting list of
 	// DataSource.
 	//
-	//     * asc - Arranges the list in ascending order (A-Z, 0-9).
+	// * asc - Arranges the list in ascending order (A-Z, 0-9).
 	//
-	//     *
-	// dsc - Arranges the list in descending order (Z-A, 9-0).
+	// * dsc -
+	// Arranges the list in descending order (Z-A, 9-0).
 	//
 	// Results are sorted by
 	// FilterVariable.

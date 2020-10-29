@@ -25,13 +25,13 @@ import (
 // parameter set to the value of the last NextToken value until a response has no
 // NextToken. When using this action, keep the following in mind:
 //
-//     * The
+// * The
 // implementation might return fewer than MaxResults file system descriptions while
 // still including a NextToken value.
 //
-//     * The order of file systems returned in
-// the response of one DescribeFileSystems call and the order of file systems
-// returned across the responses of a multicall iteration is unspecified.
+// * The order of file systems returned in the
+// response of one DescribeFileSystems call and the order of file systems returned
+// across the responses of a multicall iteration is unspecified.
 func (c *Client) DescribeFileSystems(ctx context.Context, params *DescribeFileSystemsInput, optFns ...func(*Options)) (*DescribeFileSystemsOutput, error) {
 	if params == nil {
 		params = &DescribeFileSystemsInput{}

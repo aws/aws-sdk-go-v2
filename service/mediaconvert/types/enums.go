@@ -6,8 +6,8 @@ type AacAudioDescriptionBroadcasterMix string
 
 // Enum values for AacAudioDescriptionBroadcasterMix
 const (
-	AacAudioDescriptionBroadcasterMixBroadcaster_mixed_ad AacAudioDescriptionBroadcasterMix = "BROADCASTER_MIXED_AD"
-	AacAudioDescriptionBroadcasterMixNormal               AacAudioDescriptionBroadcasterMix = "NORMAL"
+	AacAudioDescriptionBroadcasterMixBroadcasterMixedAd AacAudioDescriptionBroadcasterMix = "BROADCASTER_MIXED_AD"
+	AacAudioDescriptionBroadcasterMixNormal             AacAudioDescriptionBroadcasterMix = "NORMAL"
 )
 
 // Values returns all known values for AacAudioDescriptionBroadcasterMix. Note that
@@ -45,11 +45,11 @@ type AacCodingMode string
 
 // Enum values for AacCodingMode
 const (
-	AacCodingModeAd_receiver_mix AacCodingMode = "AD_RECEIVER_MIX"
-	AacCodingModeCoding_mode_1_0 AacCodingMode = "CODING_MODE_1_0"
-	AacCodingModeCoding_mode_1_1 AacCodingMode = "CODING_MODE_1_1"
-	AacCodingModeCoding_mode_2_0 AacCodingMode = "CODING_MODE_2_0"
-	AacCodingModeCoding_mode_5_1 AacCodingMode = "CODING_MODE_5_1"
+	AacCodingModeAdReceiverMix AacCodingMode = "AD_RECEIVER_MIX"
+	AacCodingModeCodingMode10  AacCodingMode = "CODING_MODE_1_0"
+	AacCodingModeCodingMode11  AacCodingMode = "CODING_MODE_1_1"
+	AacCodingModeCodingMode20  AacCodingMode = "CODING_MODE_2_0"
+	AacCodingModeCodingMode51  AacCodingMode = "CODING_MODE_5_1"
 )
 
 // Values returns all known values for AacCodingMode. Note that this can be
@@ -87,8 +87,8 @@ type AacRawFormat string
 
 // Enum values for AacRawFormat
 const (
-	AacRawFormatLatm_loas AacRawFormat = "LATM_LOAS"
-	AacRawFormatNone      AacRawFormat = "NONE"
+	AacRawFormatLatmLoas AacRawFormat = "LATM_LOAS"
+	AacRawFormatNone     AacRawFormat = "NONE"
 )
 
 // Values returns all known values for AacRawFormat. Note that this can be expanded
@@ -123,10 +123,10 @@ type AacVbrQuality string
 
 // Enum values for AacVbrQuality
 const (
-	AacVbrQualityLow         AacVbrQuality = "LOW"
-	AacVbrQualityMedium_low  AacVbrQuality = "MEDIUM_LOW"
-	AacVbrQualityMedium_high AacVbrQuality = "MEDIUM_HIGH"
-	AacVbrQualityHigh        AacVbrQuality = "HIGH"
+	AacVbrQualityLow        AacVbrQuality = "LOW"
+	AacVbrQualityMediumLow  AacVbrQuality = "MEDIUM_LOW"
+	AacVbrQualityMediumHigh AacVbrQuality = "MEDIUM_HIGH"
+	AacVbrQualityHigh       AacVbrQuality = "HIGH"
 )
 
 // Values returns all known values for AacVbrQuality. Note that this can be
@@ -145,14 +145,14 @@ type Ac3BitstreamMode string
 
 // Enum values for Ac3BitstreamMode
 const (
-	Ac3BitstreamModeComplete_main     Ac3BitstreamMode = "COMPLETE_MAIN"
-	Ac3BitstreamModeCommentary        Ac3BitstreamMode = "COMMENTARY"
-	Ac3BitstreamModeDialogue          Ac3BitstreamMode = "DIALOGUE"
-	Ac3BitstreamModeEmergency         Ac3BitstreamMode = "EMERGENCY"
-	Ac3BitstreamModeHearing_impaired  Ac3BitstreamMode = "HEARING_IMPAIRED"
-	Ac3BitstreamModeMusic_and_effects Ac3BitstreamMode = "MUSIC_AND_EFFECTS"
-	Ac3BitstreamModeVisually_impaired Ac3BitstreamMode = "VISUALLY_IMPAIRED"
-	Ac3BitstreamModeVoice_over        Ac3BitstreamMode = "VOICE_OVER"
+	Ac3BitstreamModeCompleteMain     Ac3BitstreamMode = "COMPLETE_MAIN"
+	Ac3BitstreamModeCommentary       Ac3BitstreamMode = "COMMENTARY"
+	Ac3BitstreamModeDialogue         Ac3BitstreamMode = "DIALOGUE"
+	Ac3BitstreamModeEmergency        Ac3BitstreamMode = "EMERGENCY"
+	Ac3BitstreamModeHearingImpaired  Ac3BitstreamMode = "HEARING_IMPAIRED"
+	Ac3BitstreamModeMusicAndEffects  Ac3BitstreamMode = "MUSIC_AND_EFFECTS"
+	Ac3BitstreamModeVisuallyImpaired Ac3BitstreamMode = "VISUALLY_IMPAIRED"
+	Ac3BitstreamModeVoiceOver        Ac3BitstreamMode = "VOICE_OVER"
 )
 
 // Values returns all known values for Ac3BitstreamMode. Note that this can be
@@ -175,10 +175,10 @@ type Ac3CodingMode string
 
 // Enum values for Ac3CodingMode
 const (
-	Ac3CodingModeCoding_mode_1_0     Ac3CodingMode = "CODING_MODE_1_0"
-	Ac3CodingModeCoding_mode_1_1     Ac3CodingMode = "CODING_MODE_1_1"
-	Ac3CodingModeCoding_mode_2_0     Ac3CodingMode = "CODING_MODE_2_0"
-	Ac3CodingModeCoding_mode_3_2_lfe Ac3CodingMode = "CODING_MODE_3_2_LFE"
+	Ac3CodingModeCodingMode10    Ac3CodingMode = "CODING_MODE_1_0"
+	Ac3CodingModeCodingMode11    Ac3CodingMode = "CODING_MODE_1_1"
+	Ac3CodingModeCodingMode20    Ac3CodingMode = "CODING_MODE_2_0"
+	Ac3CodingModeCodingMode32Lfe Ac3CodingMode = "CODING_MODE_3_2_LFE"
 )
 
 // Values returns all known values for Ac3CodingMode. Note that this can be
@@ -197,8 +197,8 @@ type Ac3DynamicRangeCompressionProfile string
 
 // Enum values for Ac3DynamicRangeCompressionProfile
 const (
-	Ac3DynamicRangeCompressionProfileFilm_standard Ac3DynamicRangeCompressionProfile = "FILM_STANDARD"
-	Ac3DynamicRangeCompressionProfileNone          Ac3DynamicRangeCompressionProfile = "NONE"
+	Ac3DynamicRangeCompressionProfileFilmStandard Ac3DynamicRangeCompressionProfile = "FILM_STANDARD"
+	Ac3DynamicRangeCompressionProfileNone         Ac3DynamicRangeCompressionProfile = "NONE"
 )
 
 // Values returns all known values for Ac3DynamicRangeCompressionProfile. Note that
@@ -234,8 +234,8 @@ type Ac3MetadataControl string
 
 // Enum values for Ac3MetadataControl
 const (
-	Ac3MetadataControlFollow_input   Ac3MetadataControl = "FOLLOW_INPUT"
-	Ac3MetadataControlUse_configured Ac3MetadataControl = "USE_CONFIGURED"
+	Ac3MetadataControlFollowInput   Ac3MetadataControl = "FOLLOW_INPUT"
+	Ac3MetadataControlUseConfigured Ac3MetadataControl = "USE_CONFIGURED"
 )
 
 // Values returns all known values for Ac3MetadataControl. Note that this can be
@@ -272,10 +272,10 @@ type AccelerationStatus string
 
 // Enum values for AccelerationStatus
 const (
-	AccelerationStatusNot_applicable  AccelerationStatus = "NOT_APPLICABLE"
-	AccelerationStatusIn_progress     AccelerationStatus = "IN_PROGRESS"
-	AccelerationStatusAccelerated     AccelerationStatus = "ACCELERATED"
-	AccelerationStatusNot_accelerated AccelerationStatus = "NOT_ACCELERATED"
+	AccelerationStatusNotApplicable  AccelerationStatus = "NOT_APPLICABLE"
+	AccelerationStatusInProgress     AccelerationStatus = "IN_PROGRESS"
+	AccelerationStatusAccelerated    AccelerationStatus = "ACCELERATED"
+	AccelerationStatusNotAccelerated AccelerationStatus = "NOT_ACCELERATED"
 )
 
 // Values returns all known values for AccelerationStatus. Note that this can be
@@ -314,8 +314,8 @@ type AlphaBehavior string
 
 // Enum values for AlphaBehavior
 const (
-	AlphaBehaviorDiscard       AlphaBehavior = "DISCARD"
-	AlphaBehaviorRemap_to_luma AlphaBehavior = "REMAP_TO_LUMA"
+	AlphaBehaviorDiscard     AlphaBehavior = "DISCARD"
+	AlphaBehaviorRemapToLuma AlphaBehavior = "REMAP_TO_LUMA"
 )
 
 // Values returns all known values for AlphaBehavior. Note that this can be
@@ -350,8 +350,8 @@ type AncillaryTerminateCaptions string
 
 // Enum values for AncillaryTerminateCaptions
 const (
-	AncillaryTerminateCaptionsEnd_of_input AncillaryTerminateCaptions = "END_OF_INPUT"
-	AncillaryTerminateCaptionsDisabled     AncillaryTerminateCaptions = "DISABLED"
+	AncillaryTerminateCaptionsEndOfInput AncillaryTerminateCaptions = "END_OF_INPUT"
+	AncillaryTerminateCaptionsDisabled   AncillaryTerminateCaptions = "DISABLED"
 )
 
 // Values returns all known values for AncillaryTerminateCaptions. Note that this
@@ -437,7 +437,7 @@ const (
 	AudioCodecAiff        AudioCodec = "AIFF"
 	AudioCodecAc3         AudioCodec = "AC3"
 	AudioCodecEac3        AudioCodec = "EAC3"
-	AudioCodecEac3_atmos  AudioCodec = "EAC3_ATMOS"
+	AudioCodecEac3Atmos   AudioCodec = "EAC3_ATMOS"
 	AudioCodecVorbis      AudioCodec = "VORBIS"
 	AudioCodecOpus        AudioCodec = "OPUS"
 	AudioCodecPassthrough AudioCodec = "PASSTHROUGH"
@@ -466,8 +466,8 @@ type AudioDefaultSelection string
 
 // Enum values for AudioDefaultSelection
 const (
-	AudioDefaultSelectionDefault     AudioDefaultSelection = "DEFAULT"
-	AudioDefaultSelectionNot_default AudioDefaultSelection = "NOT_DEFAULT"
+	AudioDefaultSelectionDefault    AudioDefaultSelection = "DEFAULT"
+	AudioDefaultSelectionNotDefault AudioDefaultSelection = "NOT_DEFAULT"
 )
 
 // Values returns all known values for AudioDefaultSelection. Note that this can be
@@ -484,8 +484,8 @@ type AudioLanguageCodeControl string
 
 // Enum values for AudioLanguageCodeControl
 const (
-	AudioLanguageCodeControlFollow_input   AudioLanguageCodeControl = "FOLLOW_INPUT"
-	AudioLanguageCodeControlUse_configured AudioLanguageCodeControl = "USE_CONFIGURED"
+	AudioLanguageCodeControlFollowInput   AudioLanguageCodeControl = "FOLLOW_INPUT"
+	AudioLanguageCodeControlUseConfigured AudioLanguageCodeControl = "USE_CONFIGURED"
 )
 
 // Values returns all known values for AudioLanguageCodeControl. Note that this can
@@ -502,10 +502,10 @@ type AudioNormalizationAlgorithm string
 
 // Enum values for AudioNormalizationAlgorithm
 const (
-	AudioNormalizationAlgorithmItu_bs_1770_1 AudioNormalizationAlgorithm = "ITU_BS_1770_1"
-	AudioNormalizationAlgorithmItu_bs_1770_2 AudioNormalizationAlgorithm = "ITU_BS_1770_2"
-	AudioNormalizationAlgorithmItu_bs_1770_3 AudioNormalizationAlgorithm = "ITU_BS_1770_3"
-	AudioNormalizationAlgorithmItu_bs_1770_4 AudioNormalizationAlgorithm = "ITU_BS_1770_4"
+	AudioNormalizationAlgorithmItuBs17701 AudioNormalizationAlgorithm = "ITU_BS_1770_1"
+	AudioNormalizationAlgorithmItuBs17702 AudioNormalizationAlgorithm = "ITU_BS_1770_2"
+	AudioNormalizationAlgorithmItuBs17703 AudioNormalizationAlgorithm = "ITU_BS_1770_3"
+	AudioNormalizationAlgorithmItuBs17704 AudioNormalizationAlgorithm = "ITU_BS_1770_4"
 )
 
 // Values returns all known values for AudioNormalizationAlgorithm. Note that this
@@ -524,8 +524,8 @@ type AudioNormalizationAlgorithmControl string
 
 // Enum values for AudioNormalizationAlgorithmControl
 const (
-	AudioNormalizationAlgorithmControlCorrect_audio AudioNormalizationAlgorithmControl = "CORRECT_AUDIO"
-	AudioNormalizationAlgorithmControlMeasure_only  AudioNormalizationAlgorithmControl = "MEASURE_ONLY"
+	AudioNormalizationAlgorithmControlCorrectAudio AudioNormalizationAlgorithmControl = "CORRECT_AUDIO"
+	AudioNormalizationAlgorithmControlMeasureOnly  AudioNormalizationAlgorithmControl = "MEASURE_ONLY"
 )
 
 // Values returns all known values for AudioNormalizationAlgorithmControl. Note
@@ -543,8 +543,8 @@ type AudioNormalizationLoudnessLogging string
 
 // Enum values for AudioNormalizationLoudnessLogging
 const (
-	AudioNormalizationLoudnessLoggingLog      AudioNormalizationLoudnessLogging = "LOG"
-	AudioNormalizationLoudnessLoggingDont_log AudioNormalizationLoudnessLogging = "DONT_LOG"
+	AudioNormalizationLoudnessLoggingLog     AudioNormalizationLoudnessLogging = "LOG"
+	AudioNormalizationLoudnessLoggingDontLog AudioNormalizationLoudnessLogging = "DONT_LOG"
 )
 
 // Values returns all known values for AudioNormalizationLoudnessLogging. Note that
@@ -562,8 +562,8 @@ type AudioNormalizationPeakCalculation string
 
 // Enum values for AudioNormalizationPeakCalculation
 const (
-	AudioNormalizationPeakCalculationTrue_peak AudioNormalizationPeakCalculation = "TRUE_PEAK"
-	AudioNormalizationPeakCalculationNone      AudioNormalizationPeakCalculation = "NONE"
+	AudioNormalizationPeakCalculationTruePeak AudioNormalizationPeakCalculation = "TRUE_PEAK"
+	AudioNormalizationPeakCalculationNone     AudioNormalizationPeakCalculation = "NONE"
 )
 
 // Values returns all known values for AudioNormalizationPeakCalculation. Note that
@@ -581,9 +581,9 @@ type AudioSelectorType string
 
 // Enum values for AudioSelectorType
 const (
-	AudioSelectorTypePid           AudioSelectorType = "PID"
-	AudioSelectorTypeTrack         AudioSelectorType = "TRACK"
-	AudioSelectorTypeLanguage_code AudioSelectorType = "LANGUAGE_CODE"
+	AudioSelectorTypePid          AudioSelectorType = "PID"
+	AudioSelectorTypeTrack        AudioSelectorType = "TRACK"
+	AudioSelectorTypeLanguageCode AudioSelectorType = "LANGUAGE_CODE"
 )
 
 // Values returns all known values for AudioSelectorType. Note that this can be
@@ -601,8 +601,8 @@ type AudioTypeControl string
 
 // Enum values for AudioTypeControl
 const (
-	AudioTypeControlFollow_input   AudioTypeControl = "FOLLOW_INPUT"
-	AudioTypeControlUse_configured AudioTypeControl = "USE_CONFIGURED"
+	AudioTypeControlFollowInput   AudioTypeControl = "FOLLOW_INPUT"
+	AudioTypeControlUseConfigured AudioTypeControl = "USE_CONFIGURED"
 )
 
 // Values returns all known values for AudioTypeControl. Note that this can be
@@ -645,8 +645,8 @@ type Av1FramerateControl string
 
 // Enum values for Av1FramerateControl
 const (
-	Av1FramerateControlInitialize_from_source Av1FramerateControl = "INITIALIZE_FROM_SOURCE"
-	Av1FramerateControlSpecified              Av1FramerateControl = "SPECIFIED"
+	Av1FramerateControlInitializeFromSource Av1FramerateControl = "INITIALIZE_FROM_SOURCE"
+	Av1FramerateControlSpecified            Av1FramerateControl = "SPECIFIED"
 )
 
 // Values returns all known values for Av1FramerateControl. Note that this can be
@@ -663,9 +663,9 @@ type Av1FramerateConversionAlgorithm string
 
 // Enum values for Av1FramerateConversionAlgorithm
 const (
-	Av1FramerateConversionAlgorithmDuplicate_drop Av1FramerateConversionAlgorithm = "DUPLICATE_DROP"
-	Av1FramerateConversionAlgorithmInterpolate    Av1FramerateConversionAlgorithm = "INTERPOLATE"
-	Av1FramerateConversionAlgorithmFrameformer    Av1FramerateConversionAlgorithm = "FRAMEFORMER"
+	Av1FramerateConversionAlgorithmDuplicateDrop Av1FramerateConversionAlgorithm = "DUPLICATE_DROP"
+	Av1FramerateConversionAlgorithmInterpolate   Av1FramerateConversionAlgorithm = "INTERPOLATE"
+	Av1FramerateConversionAlgorithmFrameformer   Av1FramerateConversionAlgorithm = "FRAMEFORMER"
 )
 
 // Values returns all known values for Av1FramerateConversionAlgorithm. Note that
@@ -719,9 +719,9 @@ type AvcIntraClass string
 
 // Enum values for AvcIntraClass
 const (
-	AvcIntraClassClass_50  AvcIntraClass = "CLASS_50"
-	AvcIntraClassClass_100 AvcIntraClass = "CLASS_100"
-	AvcIntraClassClass_200 AvcIntraClass = "CLASS_200"
+	AvcIntraClassClass50  AvcIntraClass = "CLASS_50"
+	AvcIntraClassClass100 AvcIntraClass = "CLASS_100"
+	AvcIntraClassClass200 AvcIntraClass = "CLASS_200"
 )
 
 // Values returns all known values for AvcIntraClass. Note that this can be
@@ -739,8 +739,8 @@ type AvcIntraFramerateControl string
 
 // Enum values for AvcIntraFramerateControl
 const (
-	AvcIntraFramerateControlInitialize_from_source AvcIntraFramerateControl = "INITIALIZE_FROM_SOURCE"
-	AvcIntraFramerateControlSpecified              AvcIntraFramerateControl = "SPECIFIED"
+	AvcIntraFramerateControlInitializeFromSource AvcIntraFramerateControl = "INITIALIZE_FROM_SOURCE"
+	AvcIntraFramerateControlSpecified            AvcIntraFramerateControl = "SPECIFIED"
 )
 
 // Values returns all known values for AvcIntraFramerateControl. Note that this can
@@ -757,9 +757,9 @@ type AvcIntraFramerateConversionAlgorithm string
 
 // Enum values for AvcIntraFramerateConversionAlgorithm
 const (
-	AvcIntraFramerateConversionAlgorithmDuplicate_drop AvcIntraFramerateConversionAlgorithm = "DUPLICATE_DROP"
-	AvcIntraFramerateConversionAlgorithmInterpolate    AvcIntraFramerateConversionAlgorithm = "INTERPOLATE"
-	AvcIntraFramerateConversionAlgorithmFrameformer    AvcIntraFramerateConversionAlgorithm = "FRAMEFORMER"
+	AvcIntraFramerateConversionAlgorithmDuplicateDrop AvcIntraFramerateConversionAlgorithm = "DUPLICATE_DROP"
+	AvcIntraFramerateConversionAlgorithmInterpolate   AvcIntraFramerateConversionAlgorithm = "INTERPOLATE"
+	AvcIntraFramerateConversionAlgorithmFrameformer   AvcIntraFramerateConversionAlgorithm = "FRAMEFORMER"
 )
 
 // Values returns all known values for AvcIntraFramerateConversionAlgorithm. Note
@@ -778,11 +778,11 @@ type AvcIntraInterlaceMode string
 
 // Enum values for AvcIntraInterlaceMode
 const (
-	AvcIntraInterlaceModeProgressive         AvcIntraInterlaceMode = "PROGRESSIVE"
-	AvcIntraInterlaceModeTop_field           AvcIntraInterlaceMode = "TOP_FIELD"
-	AvcIntraInterlaceModeBottom_field        AvcIntraInterlaceMode = "BOTTOM_FIELD"
-	AvcIntraInterlaceModeFollow_top_field    AvcIntraInterlaceMode = "FOLLOW_TOP_FIELD"
-	AvcIntraInterlaceModeFollow_bottom_field AvcIntraInterlaceMode = "FOLLOW_BOTTOM_FIELD"
+	AvcIntraInterlaceModeProgressive       AvcIntraInterlaceMode = "PROGRESSIVE"
+	AvcIntraInterlaceModeTopField          AvcIntraInterlaceMode = "TOP_FIELD"
+	AvcIntraInterlaceModeBottomField       AvcIntraInterlaceMode = "BOTTOM_FIELD"
+	AvcIntraInterlaceModeFollowTopField    AvcIntraInterlaceMode = "FOLLOW_TOP_FIELD"
+	AvcIntraInterlaceModeFollowBottomField AvcIntraInterlaceMode = "FOLLOW_BOTTOM_FIELD"
 )
 
 // Values returns all known values for AvcIntraInterlaceMode. Note that this can be
@@ -838,10 +838,10 @@ type BillingTagsSource string
 
 // Enum values for BillingTagsSource
 const (
-	BillingTagsSourceQueue        BillingTagsSource = "QUEUE"
-	BillingTagsSourcePreset       BillingTagsSource = "PRESET"
-	BillingTagsSourceJob_template BillingTagsSource = "JOB_TEMPLATE"
-	BillingTagsSourceJob          BillingTagsSource = "JOB"
+	BillingTagsSourceQueue       BillingTagsSource = "QUEUE"
+	BillingTagsSourcePreset      BillingTagsSource = "PRESET"
+	BillingTagsSourceJobTemplate BillingTagsSource = "JOB_TEMPLATE"
+	BillingTagsSourceJob         BillingTagsSource = "JOB"
 )
 
 // Values returns all known values for BillingTagsSource. Note that this can be
@@ -971,7 +971,7 @@ type BurninSubtitleTeletextSpacing string
 
 // Enum values for BurninSubtitleTeletextSpacing
 const (
-	BurninSubtitleTeletextSpacingFixed_grid   BurninSubtitleTeletextSpacing = "FIXED_GRID"
+	BurninSubtitleTeletextSpacingFixedGrid    BurninSubtitleTeletextSpacing = "FIXED_GRID"
 	BurninSubtitleTeletextSpacingProportional BurninSubtitleTeletextSpacing = "PROPORTIONAL"
 )
 
@@ -990,18 +990,18 @@ type CaptionDestinationType string
 
 // Enum values for CaptionDestinationType
 const (
-	CaptionDestinationTypeBurn_in              CaptionDestinationType = "BURN_IN"
-	CaptionDestinationTypeDvb_sub              CaptionDestinationType = "DVB_SUB"
-	CaptionDestinationTypeEmbedded             CaptionDestinationType = "EMBEDDED"
-	CaptionDestinationTypeEmbedded_plus_scte20 CaptionDestinationType = "EMBEDDED_PLUS_SCTE20"
-	CaptionDestinationTypeImsc                 CaptionDestinationType = "IMSC"
-	CaptionDestinationTypeScte20_plus_embedded CaptionDestinationType = "SCTE20_PLUS_EMBEDDED"
-	CaptionDestinationTypeScc                  CaptionDestinationType = "SCC"
-	CaptionDestinationTypeSrt                  CaptionDestinationType = "SRT"
-	CaptionDestinationTypeSmi                  CaptionDestinationType = "SMI"
-	CaptionDestinationTypeTeletext             CaptionDestinationType = "TELETEXT"
-	CaptionDestinationTypeTtml                 CaptionDestinationType = "TTML"
-	CaptionDestinationTypeWebvtt               CaptionDestinationType = "WEBVTT"
+	CaptionDestinationTypeBurnIn             CaptionDestinationType = "BURN_IN"
+	CaptionDestinationTypeDvbSub             CaptionDestinationType = "DVB_SUB"
+	CaptionDestinationTypeEmbedded           CaptionDestinationType = "EMBEDDED"
+	CaptionDestinationTypeEmbeddedPlusScte20 CaptionDestinationType = "EMBEDDED_PLUS_SCTE20"
+	CaptionDestinationTypeImsc               CaptionDestinationType = "IMSC"
+	CaptionDestinationTypeScte20PlusEmbedded CaptionDestinationType = "SCTE20_PLUS_EMBEDDED"
+	CaptionDestinationTypeScc                CaptionDestinationType = "SCC"
+	CaptionDestinationTypeSrt                CaptionDestinationType = "SRT"
+	CaptionDestinationTypeSmi                CaptionDestinationType = "SMI"
+	CaptionDestinationTypeTeletext           CaptionDestinationType = "TELETEXT"
+	CaptionDestinationTypeTtml               CaptionDestinationType = "TTML"
+	CaptionDestinationTypeWebvtt             CaptionDestinationType = "WEBVTT"
 )
 
 // Values returns all known values for CaptionDestinationType. Note that this can
@@ -1028,18 +1028,18 @@ type CaptionSourceType string
 
 // Enum values for CaptionSourceType
 const (
-	CaptionSourceTypeAncillary   CaptionSourceType = "ANCILLARY"
-	CaptionSourceTypeDvb_sub     CaptionSourceType = "DVB_SUB"
-	CaptionSourceTypeEmbedded    CaptionSourceType = "EMBEDDED"
-	CaptionSourceTypeScte20      CaptionSourceType = "SCTE20"
-	CaptionSourceTypeScc         CaptionSourceType = "SCC"
-	CaptionSourceTypeTtml        CaptionSourceType = "TTML"
-	CaptionSourceTypeStl         CaptionSourceType = "STL"
-	CaptionSourceTypeSrt         CaptionSourceType = "SRT"
-	CaptionSourceTypeSmi         CaptionSourceType = "SMI"
-	CaptionSourceTypeTeletext    CaptionSourceType = "TELETEXT"
-	CaptionSourceTypeNull_source CaptionSourceType = "NULL_SOURCE"
-	CaptionSourceTypeImsc        CaptionSourceType = "IMSC"
+	CaptionSourceTypeAncillary  CaptionSourceType = "ANCILLARY"
+	CaptionSourceTypeDvbSub     CaptionSourceType = "DVB_SUB"
+	CaptionSourceTypeEmbedded   CaptionSourceType = "EMBEDDED"
+	CaptionSourceTypeScte20     CaptionSourceType = "SCTE20"
+	CaptionSourceTypeScc        CaptionSourceType = "SCC"
+	CaptionSourceTypeTtml       CaptionSourceType = "TTML"
+	CaptionSourceTypeStl        CaptionSourceType = "STL"
+	CaptionSourceTypeSrt        CaptionSourceType = "SRT"
+	CaptionSourceTypeSmi        CaptionSourceType = "SMI"
+	CaptionSourceTypeTeletext   CaptionSourceType = "TELETEXT"
+	CaptionSourceTypeNullSource CaptionSourceType = "NULL_SOURCE"
+	CaptionSourceTypeImsc       CaptionSourceType = "IMSC"
 )
 
 // Values returns all known values for CaptionSourceType. Note that this can be
@@ -1084,8 +1084,8 @@ type CmafCodecSpecification string
 
 // Enum values for CmafCodecSpecification
 const (
-	CmafCodecSpecificationRfc_6381 CmafCodecSpecification = "RFC_6381"
-	CmafCodecSpecificationRfc_4281 CmafCodecSpecification = "RFC_4281"
+	CmafCodecSpecificationRfc6381 CmafCodecSpecification = "RFC_6381"
+	CmafCodecSpecificationRfc4281 CmafCodecSpecification = "RFC_4281"
 )
 
 // Values returns all known values for CmafCodecSpecification. Note that this can
@@ -1102,8 +1102,8 @@ type CmafEncryptionType string
 
 // Enum values for CmafEncryptionType
 const (
-	CmafEncryptionTypeSample_aes CmafEncryptionType = "SAMPLE_AES"
-	CmafEncryptionTypeAes_ctr    CmafEncryptionType = "AES_CTR"
+	CmafEncryptionTypeSampleAes CmafEncryptionType = "SAMPLE_AES"
+	CmafEncryptionTypeAesCtr    CmafEncryptionType = "AES_CTR"
 )
 
 // Values returns all known values for CmafEncryptionType. Note that this can be
@@ -1139,8 +1139,8 @@ type CmafKeyProviderType string
 
 // Enum values for CmafKeyProviderType
 const (
-	CmafKeyProviderTypeSpeke      CmafKeyProviderType = "SPEKE"
-	CmafKeyProviderTypeStatic_key CmafKeyProviderType = "STATIC_KEY"
+	CmafKeyProviderTypeSpeke     CmafKeyProviderType = "SPEKE"
+	CmafKeyProviderTypeStaticKey CmafKeyProviderType = "STATIC_KEY"
 )
 
 // Values returns all known values for CmafKeyProviderType. Note that this can be
@@ -1175,8 +1175,8 @@ type CmafManifestDurationFormat string
 
 // Enum values for CmafManifestDurationFormat
 const (
-	CmafManifestDurationFormatFloating_point CmafManifestDurationFormat = "FLOATING_POINT"
-	CmafManifestDurationFormatInteger        CmafManifestDurationFormat = "INTEGER"
+	CmafManifestDurationFormatFloatingPoint CmafManifestDurationFormat = "FLOATING_POINT"
+	CmafManifestDurationFormatInteger       CmafManifestDurationFormat = "INTEGER"
 )
 
 // Values returns all known values for CmafManifestDurationFormat. Note that this
@@ -1193,8 +1193,8 @@ type CmafMpdProfile string
 
 // Enum values for CmafMpdProfile
 const (
-	CmafMpdProfileMain_profile      CmafMpdProfile = "MAIN_PROFILE"
-	CmafMpdProfileOn_demand_profile CmafMpdProfile = "ON_DEMAND_PROFILE"
+	CmafMpdProfileMainProfile     CmafMpdProfile = "MAIN_PROFILE"
+	CmafMpdProfileOnDemandProfile CmafMpdProfile = "ON_DEMAND_PROFILE"
 )
 
 // Values returns all known values for CmafMpdProfile. Note that this can be
@@ -1211,8 +1211,8 @@ type CmafSegmentControl string
 
 // Enum values for CmafSegmentControl
 const (
-	CmafSegmentControlSingle_file     CmafSegmentControl = "SINGLE_FILE"
-	CmafSegmentControlSegmented_files CmafSegmentControl = "SEGMENTED_FILES"
+	CmafSegmentControlSingleFile     CmafSegmentControl = "SINGLE_FILE"
+	CmafSegmentControlSegmentedFiles CmafSegmentControl = "SEGMENTED_FILES"
 )
 
 // Values returns all known values for CmafSegmentControl. Note that this can be
@@ -1356,11 +1356,11 @@ type ColorSpace string
 
 // Enum values for ColorSpace
 const (
-	ColorSpaceFollow   ColorSpace = "FOLLOW"
-	ColorSpaceRec_601  ColorSpace = "REC_601"
-	ColorSpaceRec_709  ColorSpace = "REC_709"
-	ColorSpaceHdr10    ColorSpace = "HDR10"
-	ColorSpaceHlg_2020 ColorSpace = "HLG_2020"
+	ColorSpaceFollow  ColorSpace = "FOLLOW"
+	ColorSpaceRec601  ColorSpace = "REC_601"
+	ColorSpaceRec709  ColorSpace = "REC_709"
+	ColorSpaceHdr10   ColorSpace = "HDR10"
+	ColorSpaceHlg2020 ColorSpace = "HLG_2020"
 )
 
 // Values returns all known values for ColorSpace. Note that this can be expanded
@@ -1380,11 +1380,11 @@ type ColorSpaceConversion string
 
 // Enum values for ColorSpaceConversion
 const (
-	ColorSpaceConversionNone           ColorSpaceConversion = "NONE"
-	ColorSpaceConversionForce_601      ColorSpaceConversion = "FORCE_601"
-	ColorSpaceConversionForce_709      ColorSpaceConversion = "FORCE_709"
-	ColorSpaceConversionForce_hdr10    ColorSpaceConversion = "FORCE_HDR10"
-	ColorSpaceConversionForce_hlg_2020 ColorSpaceConversion = "FORCE_HLG_2020"
+	ColorSpaceConversionNone         ColorSpaceConversion = "NONE"
+	ColorSpaceConversionForce601     ColorSpaceConversion = "FORCE_601"
+	ColorSpaceConversionForce709     ColorSpaceConversion = "FORCE_709"
+	ColorSpaceConversionForceHdr10   ColorSpaceConversion = "FORCE_HDR10"
+	ColorSpaceConversionForceHlg2020 ColorSpaceConversion = "FORCE_HLG_2020"
 )
 
 // Values returns all known values for ColorSpaceConversion. Note that this can be
@@ -1422,7 +1422,7 @@ type Commitment string
 
 // Enum values for Commitment
 const (
-	CommitmentOne_year Commitment = "ONE_YEAR"
+	CommitmentOneYear Commitment = "ONE_YEAR"
 )
 
 // Values returns all known values for Commitment. Note that this can be expanded
@@ -1474,8 +1474,8 @@ type DashIsoHbbtvCompliance string
 
 // Enum values for DashIsoHbbtvCompliance
 const (
-	DashIsoHbbtvComplianceHbbtv_1_5 DashIsoHbbtvCompliance = "HBBTV_1_5"
-	DashIsoHbbtvComplianceNone      DashIsoHbbtvCompliance = "NONE"
+	DashIsoHbbtvComplianceHbbtv15 DashIsoHbbtvCompliance = "HBBTV_1_5"
+	DashIsoHbbtvComplianceNone    DashIsoHbbtvCompliance = "NONE"
 )
 
 // Values returns all known values for DashIsoHbbtvCompliance. Note that this can
@@ -1492,8 +1492,8 @@ type DashIsoMpdProfile string
 
 // Enum values for DashIsoMpdProfile
 const (
-	DashIsoMpdProfileMain_profile      DashIsoMpdProfile = "MAIN_PROFILE"
-	DashIsoMpdProfileOn_demand_profile DashIsoMpdProfile = "ON_DEMAND_PROFILE"
+	DashIsoMpdProfileMainProfile     DashIsoMpdProfile = "MAIN_PROFILE"
+	DashIsoMpdProfileOnDemandProfile DashIsoMpdProfile = "ON_DEMAND_PROFILE"
 )
 
 // Values returns all known values for DashIsoMpdProfile. Note that this can be
@@ -1510,8 +1510,8 @@ type DashIsoPlaybackDeviceCompatibility string
 
 // Enum values for DashIsoPlaybackDeviceCompatibility
 const (
-	DashIsoPlaybackDeviceCompatibilityCenc_v1         DashIsoPlaybackDeviceCompatibility = "CENC_V1"
-	DashIsoPlaybackDeviceCompatibilityUnencrypted_sei DashIsoPlaybackDeviceCompatibility = "UNENCRYPTED_SEI"
+	DashIsoPlaybackDeviceCompatibilityCencV1         DashIsoPlaybackDeviceCompatibility = "CENC_V1"
+	DashIsoPlaybackDeviceCompatibilityUnencryptedSei DashIsoPlaybackDeviceCompatibility = "UNENCRYPTED_SEI"
 )
 
 // Values returns all known values for DashIsoPlaybackDeviceCompatibility. Note
@@ -1529,8 +1529,8 @@ type DashIsoSegmentControl string
 
 // Enum values for DashIsoSegmentControl
 const (
-	DashIsoSegmentControlSingle_file     DashIsoSegmentControl = "SINGLE_FILE"
-	DashIsoSegmentControlSegmented_files DashIsoSegmentControl = "SEGMENTED_FILES"
+	DashIsoSegmentControlSingleFile     DashIsoSegmentControl = "SINGLE_FILE"
+	DashIsoSegmentControlSegmentedFiles DashIsoSegmentControl = "SEGMENTED_FILES"
 )
 
 // Values returns all known values for DashIsoSegmentControl. Note that this can be
@@ -1566,9 +1566,9 @@ type DecryptionMode string
 
 // Enum values for DecryptionMode
 const (
-	DecryptionModeAes_ctr DecryptionMode = "AES_CTR"
-	DecryptionModeAes_cbc DecryptionMode = "AES_CBC"
-	DecryptionModeAes_gcm DecryptionMode = "AES_GCM"
+	DecryptionModeAesCtr DecryptionMode = "AES_CTR"
+	DecryptionModeAesCbc DecryptionMode = "AES_CBC"
+	DecryptionModeAesGcm DecryptionMode = "AES_GCM"
 )
 
 // Values returns all known values for DecryptionMode. Note that this can be
@@ -1586,10 +1586,10 @@ type DeinterlaceAlgorithm string
 
 // Enum values for DeinterlaceAlgorithm
 const (
-	DeinterlaceAlgorithmInterpolate        DeinterlaceAlgorithm = "INTERPOLATE"
-	DeinterlaceAlgorithmInterpolate_ticker DeinterlaceAlgorithm = "INTERPOLATE_TICKER"
-	DeinterlaceAlgorithmBlend              DeinterlaceAlgorithm = "BLEND"
-	DeinterlaceAlgorithmBlend_ticker       DeinterlaceAlgorithm = "BLEND_TICKER"
+	DeinterlaceAlgorithmInterpolate       DeinterlaceAlgorithm = "INTERPOLATE"
+	DeinterlaceAlgorithmInterpolateTicker DeinterlaceAlgorithm = "INTERPOLATE_TICKER"
+	DeinterlaceAlgorithmBlend             DeinterlaceAlgorithm = "BLEND"
+	DeinterlaceAlgorithmBlendTicker       DeinterlaceAlgorithm = "BLEND_TICKER"
 )
 
 // Values returns all known values for DeinterlaceAlgorithm. Note that this can be
@@ -1608,8 +1608,8 @@ type DeinterlacerControl string
 
 // Enum values for DeinterlacerControl
 const (
-	DeinterlacerControlForce_all_frames DeinterlacerControl = "FORCE_ALL_FRAMES"
-	DeinterlacerControlNormal           DeinterlacerControl = "NORMAL"
+	DeinterlacerControlForceAllFrames DeinterlacerControl = "FORCE_ALL_FRAMES"
+	DeinterlacerControlNormal         DeinterlacerControl = "NORMAL"
 )
 
 // Values returns all known values for DeinterlacerControl. Note that this can be
@@ -1626,9 +1626,9 @@ type DeinterlacerMode string
 
 // Enum values for DeinterlacerMode
 const (
-	DeinterlacerModeDeinterlace      DeinterlacerMode = "DEINTERLACE"
-	DeinterlacerModeInverse_telecine DeinterlacerMode = "INVERSE_TELECINE"
-	DeinterlacerModeAdaptive         DeinterlacerMode = "ADAPTIVE"
+	DeinterlacerModeDeinterlace     DeinterlacerMode = "DEINTERLACE"
+	DeinterlacerModeInverseTelecine DeinterlacerMode = "INVERSE_TELECINE"
+	DeinterlacerModeAdaptive        DeinterlacerMode = "ADAPTIVE"
 )
 
 // Values returns all known values for DeinterlacerMode. Note that this can be
@@ -1646,8 +1646,8 @@ type DescribeEndpointsMode string
 
 // Enum values for DescribeEndpointsMode
 const (
-	DescribeEndpointsModeDefault  DescribeEndpointsMode = "DEFAULT"
-	DescribeEndpointsModeGet_only DescribeEndpointsMode = "GET_ONLY"
+	DescribeEndpointsModeDefault DescribeEndpointsMode = "DEFAULT"
+	DescribeEndpointsModeGetOnly DescribeEndpointsMode = "GET_ONLY"
 )
 
 // Values returns all known values for DescribeEndpointsMode. Note that this can be
@@ -1684,7 +1684,7 @@ type DolbyVisionProfile string
 
 // Enum values for DolbyVisionProfile
 const (
-	DolbyVisionProfileProfile_5 DolbyVisionProfile = "PROFILE_5"
+	DolbyVisionProfileProfile5 DolbyVisionProfile = "PROFILE_5"
 )
 
 // Values returns all known values for DolbyVisionProfile. Note that this can be
@@ -1828,7 +1828,7 @@ type DvbSubtitleTeletextSpacing string
 
 // Enum values for DvbSubtitleTeletextSpacing
 const (
-	DvbSubtitleTeletextSpacingFixed_grid   DvbSubtitleTeletextSpacing = "FIXED_GRID"
+	DvbSubtitleTeletextSpacingFixedGrid    DvbSubtitleTeletextSpacing = "FIXED_GRID"
 	DvbSubtitleTeletextSpacingProportional DvbSubtitleTeletextSpacing = "PROPORTIONAL"
 )
 
@@ -1846,8 +1846,8 @@ type DvbSubtitlingType string
 
 // Enum values for DvbSubtitlingType
 const (
-	DvbSubtitlingTypeHearing_impaired DvbSubtitlingType = "HEARING_IMPAIRED"
-	DvbSubtitlingTypeStandard         DvbSubtitlingType = "STANDARD"
+	DvbSubtitlingTypeHearingImpaired DvbSubtitlingType = "HEARING_IMPAIRED"
+	DvbSubtitlingTypeStandard        DvbSubtitlingType = "STANDARD"
 )
 
 // Values returns all known values for DvbSubtitlingType. Note that this can be
@@ -1864,7 +1864,7 @@ type Eac3AtmosBitstreamMode string
 
 // Enum values for Eac3AtmosBitstreamMode
 const (
-	Eac3AtmosBitstreamModeComplete_main Eac3AtmosBitstreamMode = "COMPLETE_MAIN"
+	Eac3AtmosBitstreamModeCompleteMain Eac3AtmosBitstreamMode = "COMPLETE_MAIN"
 )
 
 // Values returns all known values for Eac3AtmosBitstreamMode. Note that this can
@@ -1880,7 +1880,7 @@ type Eac3AtmosCodingMode string
 
 // Enum values for Eac3AtmosCodingMode
 const (
-	Eac3AtmosCodingModeCoding_mode_9_1_6 Eac3AtmosCodingMode = "CODING_MODE_9_1_6"
+	Eac3AtmosCodingModeCodingMode916 Eac3AtmosCodingMode = "CODING_MODE_9_1_6"
 )
 
 // Values returns all known values for Eac3AtmosCodingMode. Note that this can be
@@ -1915,12 +1915,12 @@ type Eac3AtmosDynamicRangeCompressionLine string
 
 // Enum values for Eac3AtmosDynamicRangeCompressionLine
 const (
-	Eac3AtmosDynamicRangeCompressionLineNone           Eac3AtmosDynamicRangeCompressionLine = "NONE"
-	Eac3AtmosDynamicRangeCompressionLineFilm_standard  Eac3AtmosDynamicRangeCompressionLine = "FILM_STANDARD"
-	Eac3AtmosDynamicRangeCompressionLineFilm_light     Eac3AtmosDynamicRangeCompressionLine = "FILM_LIGHT"
-	Eac3AtmosDynamicRangeCompressionLineMusic_standard Eac3AtmosDynamicRangeCompressionLine = "MUSIC_STANDARD"
-	Eac3AtmosDynamicRangeCompressionLineMusic_light    Eac3AtmosDynamicRangeCompressionLine = "MUSIC_LIGHT"
-	Eac3AtmosDynamicRangeCompressionLineSpeech         Eac3AtmosDynamicRangeCompressionLine = "SPEECH"
+	Eac3AtmosDynamicRangeCompressionLineNone          Eac3AtmosDynamicRangeCompressionLine = "NONE"
+	Eac3AtmosDynamicRangeCompressionLineFilmStandard  Eac3AtmosDynamicRangeCompressionLine = "FILM_STANDARD"
+	Eac3AtmosDynamicRangeCompressionLineFilmLight     Eac3AtmosDynamicRangeCompressionLine = "FILM_LIGHT"
+	Eac3AtmosDynamicRangeCompressionLineMusicStandard Eac3AtmosDynamicRangeCompressionLine = "MUSIC_STANDARD"
+	Eac3AtmosDynamicRangeCompressionLineMusicLight    Eac3AtmosDynamicRangeCompressionLine = "MUSIC_LIGHT"
+	Eac3AtmosDynamicRangeCompressionLineSpeech        Eac3AtmosDynamicRangeCompressionLine = "SPEECH"
 )
 
 // Values returns all known values for Eac3AtmosDynamicRangeCompressionLine. Note
@@ -1942,12 +1942,12 @@ type Eac3AtmosDynamicRangeCompressionRf string
 
 // Enum values for Eac3AtmosDynamicRangeCompressionRf
 const (
-	Eac3AtmosDynamicRangeCompressionRfNone           Eac3AtmosDynamicRangeCompressionRf = "NONE"
-	Eac3AtmosDynamicRangeCompressionRfFilm_standard  Eac3AtmosDynamicRangeCompressionRf = "FILM_STANDARD"
-	Eac3AtmosDynamicRangeCompressionRfFilm_light     Eac3AtmosDynamicRangeCompressionRf = "FILM_LIGHT"
-	Eac3AtmosDynamicRangeCompressionRfMusic_standard Eac3AtmosDynamicRangeCompressionRf = "MUSIC_STANDARD"
-	Eac3AtmosDynamicRangeCompressionRfMusic_light    Eac3AtmosDynamicRangeCompressionRf = "MUSIC_LIGHT"
-	Eac3AtmosDynamicRangeCompressionRfSpeech         Eac3AtmosDynamicRangeCompressionRf = "SPEECH"
+	Eac3AtmosDynamicRangeCompressionRfNone          Eac3AtmosDynamicRangeCompressionRf = "NONE"
+	Eac3AtmosDynamicRangeCompressionRfFilmStandard  Eac3AtmosDynamicRangeCompressionRf = "FILM_STANDARD"
+	Eac3AtmosDynamicRangeCompressionRfFilmLight     Eac3AtmosDynamicRangeCompressionRf = "FILM_LIGHT"
+	Eac3AtmosDynamicRangeCompressionRfMusicStandard Eac3AtmosDynamicRangeCompressionRf = "MUSIC_STANDARD"
+	Eac3AtmosDynamicRangeCompressionRfMusicLight    Eac3AtmosDynamicRangeCompressionRf = "MUSIC_LIGHT"
+	Eac3AtmosDynamicRangeCompressionRfSpeech        Eac3AtmosDynamicRangeCompressionRf = "SPEECH"
 )
 
 // Values returns all known values for Eac3AtmosDynamicRangeCompressionRf. Note
@@ -1969,11 +1969,11 @@ type Eac3AtmosMeteringMode string
 
 // Enum values for Eac3AtmosMeteringMode
 const (
-	Eac3AtmosMeteringModeLeq_a         Eac3AtmosMeteringMode = "LEQ_A"
-	Eac3AtmosMeteringModeItu_bs_1770_1 Eac3AtmosMeteringMode = "ITU_BS_1770_1"
-	Eac3AtmosMeteringModeItu_bs_1770_2 Eac3AtmosMeteringMode = "ITU_BS_1770_2"
-	Eac3AtmosMeteringModeItu_bs_1770_3 Eac3AtmosMeteringMode = "ITU_BS_1770_3"
-	Eac3AtmosMeteringModeItu_bs_1770_4 Eac3AtmosMeteringMode = "ITU_BS_1770_4"
+	Eac3AtmosMeteringModeLeqA       Eac3AtmosMeteringMode = "LEQ_A"
+	Eac3AtmosMeteringModeItuBs17701 Eac3AtmosMeteringMode = "ITU_BS_1770_1"
+	Eac3AtmosMeteringModeItuBs17702 Eac3AtmosMeteringMode = "ITU_BS_1770_2"
+	Eac3AtmosMeteringModeItuBs17703 Eac3AtmosMeteringMode = "ITU_BS_1770_3"
+	Eac3AtmosMeteringModeItuBs17704 Eac3AtmosMeteringMode = "ITU_BS_1770_4"
 )
 
 // Values returns all known values for Eac3AtmosMeteringMode. Note that this can be
@@ -1993,10 +1993,10 @@ type Eac3AtmosStereoDownmix string
 
 // Enum values for Eac3AtmosStereoDownmix
 const (
-	Eac3AtmosStereoDownmixNot_indicated Eac3AtmosStereoDownmix = "NOT_INDICATED"
-	Eac3AtmosStereoDownmixStereo        Eac3AtmosStereoDownmix = "STEREO"
-	Eac3AtmosStereoDownmixSurround      Eac3AtmosStereoDownmix = "SURROUND"
-	Eac3AtmosStereoDownmixDpl2          Eac3AtmosStereoDownmix = "DPL2"
+	Eac3AtmosStereoDownmixNotIndicated Eac3AtmosStereoDownmix = "NOT_INDICATED"
+	Eac3AtmosStereoDownmixStereo       Eac3AtmosStereoDownmix = "STEREO"
+	Eac3AtmosStereoDownmixSurround     Eac3AtmosStereoDownmix = "SURROUND"
+	Eac3AtmosStereoDownmixDpl2         Eac3AtmosStereoDownmix = "DPL2"
 )
 
 // Values returns all known values for Eac3AtmosStereoDownmix. Note that this can
@@ -2015,9 +2015,9 @@ type Eac3AtmosSurroundExMode string
 
 // Enum values for Eac3AtmosSurroundExMode
 const (
-	Eac3AtmosSurroundExModeNot_indicated Eac3AtmosSurroundExMode = "NOT_INDICATED"
-	Eac3AtmosSurroundExModeEnabled       Eac3AtmosSurroundExMode = "ENABLED"
-	Eac3AtmosSurroundExModeDisabled      Eac3AtmosSurroundExMode = "DISABLED"
+	Eac3AtmosSurroundExModeNotIndicated Eac3AtmosSurroundExMode = "NOT_INDICATED"
+	Eac3AtmosSurroundExModeEnabled      Eac3AtmosSurroundExMode = "ENABLED"
+	Eac3AtmosSurroundExModeDisabled     Eac3AtmosSurroundExMode = "DISABLED"
 )
 
 // Values returns all known values for Eac3AtmosSurroundExMode. Note that this can
@@ -2035,8 +2035,8 @@ type Eac3AttenuationControl string
 
 // Enum values for Eac3AttenuationControl
 const (
-	Eac3AttenuationControlAttenuate_3_db Eac3AttenuationControl = "ATTENUATE_3_DB"
-	Eac3AttenuationControlNone           Eac3AttenuationControl = "NONE"
+	Eac3AttenuationControlAttenuate3Db Eac3AttenuationControl = "ATTENUATE_3_DB"
+	Eac3AttenuationControlNone         Eac3AttenuationControl = "NONE"
 )
 
 // Values returns all known values for Eac3AttenuationControl. Note that this can
@@ -2053,11 +2053,11 @@ type Eac3BitstreamMode string
 
 // Enum values for Eac3BitstreamMode
 const (
-	Eac3BitstreamModeComplete_main     Eac3BitstreamMode = "COMPLETE_MAIN"
-	Eac3BitstreamModeCommentary        Eac3BitstreamMode = "COMMENTARY"
-	Eac3BitstreamModeEmergency         Eac3BitstreamMode = "EMERGENCY"
-	Eac3BitstreamModeHearing_impaired  Eac3BitstreamMode = "HEARING_IMPAIRED"
-	Eac3BitstreamModeVisually_impaired Eac3BitstreamMode = "VISUALLY_IMPAIRED"
+	Eac3BitstreamModeCompleteMain     Eac3BitstreamMode = "COMPLETE_MAIN"
+	Eac3BitstreamModeCommentary       Eac3BitstreamMode = "COMMENTARY"
+	Eac3BitstreamModeEmergency        Eac3BitstreamMode = "EMERGENCY"
+	Eac3BitstreamModeHearingImpaired  Eac3BitstreamMode = "HEARING_IMPAIRED"
+	Eac3BitstreamModeVisuallyImpaired Eac3BitstreamMode = "VISUALLY_IMPAIRED"
 )
 
 // Values returns all known values for Eac3BitstreamMode. Note that this can be
@@ -2077,9 +2077,9 @@ type Eac3CodingMode string
 
 // Enum values for Eac3CodingMode
 const (
-	Eac3CodingModeCoding_mode_1_0 Eac3CodingMode = "CODING_MODE_1_0"
-	Eac3CodingModeCoding_mode_2_0 Eac3CodingMode = "CODING_MODE_2_0"
-	Eac3CodingModeCoding_mode_3_2 Eac3CodingMode = "CODING_MODE_3_2"
+	Eac3CodingModeCodingMode10 Eac3CodingMode = "CODING_MODE_1_0"
+	Eac3CodingModeCodingMode20 Eac3CodingMode = "CODING_MODE_2_0"
+	Eac3CodingModeCodingMode32 Eac3CodingMode = "CODING_MODE_3_2"
 )
 
 // Values returns all known values for Eac3CodingMode. Note that this can be
@@ -2115,12 +2115,12 @@ type Eac3DynamicRangeCompressionLine string
 
 // Enum values for Eac3DynamicRangeCompressionLine
 const (
-	Eac3DynamicRangeCompressionLineNone           Eac3DynamicRangeCompressionLine = "NONE"
-	Eac3DynamicRangeCompressionLineFilm_standard  Eac3DynamicRangeCompressionLine = "FILM_STANDARD"
-	Eac3DynamicRangeCompressionLineFilm_light     Eac3DynamicRangeCompressionLine = "FILM_LIGHT"
-	Eac3DynamicRangeCompressionLineMusic_standard Eac3DynamicRangeCompressionLine = "MUSIC_STANDARD"
-	Eac3DynamicRangeCompressionLineMusic_light    Eac3DynamicRangeCompressionLine = "MUSIC_LIGHT"
-	Eac3DynamicRangeCompressionLineSpeech         Eac3DynamicRangeCompressionLine = "SPEECH"
+	Eac3DynamicRangeCompressionLineNone          Eac3DynamicRangeCompressionLine = "NONE"
+	Eac3DynamicRangeCompressionLineFilmStandard  Eac3DynamicRangeCompressionLine = "FILM_STANDARD"
+	Eac3DynamicRangeCompressionLineFilmLight     Eac3DynamicRangeCompressionLine = "FILM_LIGHT"
+	Eac3DynamicRangeCompressionLineMusicStandard Eac3DynamicRangeCompressionLine = "MUSIC_STANDARD"
+	Eac3DynamicRangeCompressionLineMusicLight    Eac3DynamicRangeCompressionLine = "MUSIC_LIGHT"
+	Eac3DynamicRangeCompressionLineSpeech        Eac3DynamicRangeCompressionLine = "SPEECH"
 )
 
 // Values returns all known values for Eac3DynamicRangeCompressionLine. Note that
@@ -2142,12 +2142,12 @@ type Eac3DynamicRangeCompressionRf string
 
 // Enum values for Eac3DynamicRangeCompressionRf
 const (
-	Eac3DynamicRangeCompressionRfNone           Eac3DynamicRangeCompressionRf = "NONE"
-	Eac3DynamicRangeCompressionRfFilm_standard  Eac3DynamicRangeCompressionRf = "FILM_STANDARD"
-	Eac3DynamicRangeCompressionRfFilm_light     Eac3DynamicRangeCompressionRf = "FILM_LIGHT"
-	Eac3DynamicRangeCompressionRfMusic_standard Eac3DynamicRangeCompressionRf = "MUSIC_STANDARD"
-	Eac3DynamicRangeCompressionRfMusic_light    Eac3DynamicRangeCompressionRf = "MUSIC_LIGHT"
-	Eac3DynamicRangeCompressionRfSpeech         Eac3DynamicRangeCompressionRf = "SPEECH"
+	Eac3DynamicRangeCompressionRfNone          Eac3DynamicRangeCompressionRf = "NONE"
+	Eac3DynamicRangeCompressionRfFilmStandard  Eac3DynamicRangeCompressionRf = "FILM_STANDARD"
+	Eac3DynamicRangeCompressionRfFilmLight     Eac3DynamicRangeCompressionRf = "FILM_LIGHT"
+	Eac3DynamicRangeCompressionRfMusicStandard Eac3DynamicRangeCompressionRf = "MUSIC_STANDARD"
+	Eac3DynamicRangeCompressionRfMusicLight    Eac3DynamicRangeCompressionRf = "MUSIC_LIGHT"
+	Eac3DynamicRangeCompressionRfSpeech        Eac3DynamicRangeCompressionRf = "SPEECH"
 )
 
 // Values returns all known values for Eac3DynamicRangeCompressionRf. Note that
@@ -2169,8 +2169,8 @@ type Eac3LfeControl string
 
 // Enum values for Eac3LfeControl
 const (
-	Eac3LfeControlLfe    Eac3LfeControl = "LFE"
-	Eac3LfeControlNo_lfe Eac3LfeControl = "NO_LFE"
+	Eac3LfeControlLfe   Eac3LfeControl = "LFE"
+	Eac3LfeControlNoLfe Eac3LfeControl = "NO_LFE"
 )
 
 // Values returns all known values for Eac3LfeControl. Note that this can be
@@ -2205,8 +2205,8 @@ type Eac3MetadataControl string
 
 // Enum values for Eac3MetadataControl
 const (
-	Eac3MetadataControlFollow_input   Eac3MetadataControl = "FOLLOW_INPUT"
-	Eac3MetadataControlUse_configured Eac3MetadataControl = "USE_CONFIGURED"
+	Eac3MetadataControlFollowInput   Eac3MetadataControl = "FOLLOW_INPUT"
+	Eac3MetadataControlUseConfigured Eac3MetadataControl = "USE_CONFIGURED"
 )
 
 // Values returns all known values for Eac3MetadataControl. Note that this can be
@@ -2223,8 +2223,8 @@ type Eac3PassthroughControl string
 
 // Enum values for Eac3PassthroughControl
 const (
-	Eac3PassthroughControlWhen_possible  Eac3PassthroughControl = "WHEN_POSSIBLE"
-	Eac3PassthroughControlNo_passthrough Eac3PassthroughControl = "NO_PASSTHROUGH"
+	Eac3PassthroughControlWhenPossible  Eac3PassthroughControl = "WHEN_POSSIBLE"
+	Eac3PassthroughControlNoPassthrough Eac3PassthroughControl = "NO_PASSTHROUGH"
 )
 
 // Values returns all known values for Eac3PassthroughControl. Note that this can
@@ -2241,8 +2241,8 @@ type Eac3PhaseControl string
 
 // Enum values for Eac3PhaseControl
 const (
-	Eac3PhaseControlShift_90_degrees Eac3PhaseControl = "SHIFT_90_DEGREES"
-	Eac3PhaseControlNo_shift         Eac3PhaseControl = "NO_SHIFT"
+	Eac3PhaseControlShift90Degrees Eac3PhaseControl = "SHIFT_90_DEGREES"
+	Eac3PhaseControlNoShift        Eac3PhaseControl = "NO_SHIFT"
 )
 
 // Values returns all known values for Eac3PhaseControl. Note that this can be
@@ -2259,10 +2259,10 @@ type Eac3StereoDownmix string
 
 // Enum values for Eac3StereoDownmix
 const (
-	Eac3StereoDownmixNot_indicated Eac3StereoDownmix = "NOT_INDICATED"
-	Eac3StereoDownmixLo_ro         Eac3StereoDownmix = "LO_RO"
-	Eac3StereoDownmixLt_rt         Eac3StereoDownmix = "LT_RT"
-	Eac3StereoDownmixDpl2          Eac3StereoDownmix = "DPL2"
+	Eac3StereoDownmixNotIndicated Eac3StereoDownmix = "NOT_INDICATED"
+	Eac3StereoDownmixLoRo         Eac3StereoDownmix = "LO_RO"
+	Eac3StereoDownmixLtRt         Eac3StereoDownmix = "LT_RT"
+	Eac3StereoDownmixDpl2         Eac3StereoDownmix = "DPL2"
 )
 
 // Values returns all known values for Eac3StereoDownmix. Note that this can be
@@ -2281,9 +2281,9 @@ type Eac3SurroundExMode string
 
 // Enum values for Eac3SurroundExMode
 const (
-	Eac3SurroundExModeNot_indicated Eac3SurroundExMode = "NOT_INDICATED"
-	Eac3SurroundExModeEnabled       Eac3SurroundExMode = "ENABLED"
-	Eac3SurroundExModeDisabled      Eac3SurroundExMode = "DISABLED"
+	Eac3SurroundExModeNotIndicated Eac3SurroundExMode = "NOT_INDICATED"
+	Eac3SurroundExModeEnabled      Eac3SurroundExMode = "ENABLED"
+	Eac3SurroundExModeDisabled     Eac3SurroundExMode = "DISABLED"
 )
 
 // Values returns all known values for Eac3SurroundExMode. Note that this can be
@@ -2301,9 +2301,9 @@ type Eac3SurroundMode string
 
 // Enum values for Eac3SurroundMode
 const (
-	Eac3SurroundModeNot_indicated Eac3SurroundMode = "NOT_INDICATED"
-	Eac3SurroundModeEnabled       Eac3SurroundMode = "ENABLED"
-	Eac3SurroundModeDisabled      Eac3SurroundMode = "DISABLED"
+	Eac3SurroundModeNotIndicated Eac3SurroundMode = "NOT_INDICATED"
+	Eac3SurroundModeEnabled      Eac3SurroundMode = "ENABLED"
+	Eac3SurroundModeDisabled     Eac3SurroundMode = "DISABLED"
 )
 
 // Values returns all known values for Eac3SurroundMode. Note that this can be
@@ -2339,8 +2339,8 @@ type EmbeddedTerminateCaptions string
 
 // Enum values for EmbeddedTerminateCaptions
 const (
-	EmbeddedTerminateCaptionsEnd_of_input EmbeddedTerminateCaptions = "END_OF_INPUT"
-	EmbeddedTerminateCaptionsDisabled     EmbeddedTerminateCaptions = "DISABLED"
+	EmbeddedTerminateCaptionsEndOfInput EmbeddedTerminateCaptions = "END_OF_INPUT"
+	EmbeddedTerminateCaptionsDisabled   EmbeddedTerminateCaptions = "DISABLED"
 )
 
 // Values returns all known values for EmbeddedTerminateCaptions. Note that this
@@ -2357,8 +2357,8 @@ type F4vMoovPlacement string
 
 // Enum values for F4vMoovPlacement
 const (
-	F4vMoovPlacementProgressive_download F4vMoovPlacement = "PROGRESSIVE_DOWNLOAD"
-	F4vMoovPlacementNormal               F4vMoovPlacement = "NORMAL"
+	F4vMoovPlacementProgressiveDownload F4vMoovPlacement = "PROGRESSIVE_DOWNLOAD"
+	F4vMoovPlacementNormal              F4vMoovPlacement = "NORMAL"
 )
 
 // Values returns all known values for F4vMoovPlacement. Note that this can be
@@ -2439,23 +2439,23 @@ type H264CodecLevel string
 
 // Enum values for H264CodecLevel
 const (
-	H264CodecLevelAuto      H264CodecLevel = "AUTO"
-	H264CodecLevelLevel_1   H264CodecLevel = "LEVEL_1"
-	H264CodecLevelLevel_1_1 H264CodecLevel = "LEVEL_1_1"
-	H264CodecLevelLevel_1_2 H264CodecLevel = "LEVEL_1_2"
-	H264CodecLevelLevel_1_3 H264CodecLevel = "LEVEL_1_3"
-	H264CodecLevelLevel_2   H264CodecLevel = "LEVEL_2"
-	H264CodecLevelLevel_2_1 H264CodecLevel = "LEVEL_2_1"
-	H264CodecLevelLevel_2_2 H264CodecLevel = "LEVEL_2_2"
-	H264CodecLevelLevel_3   H264CodecLevel = "LEVEL_3"
-	H264CodecLevelLevel_3_1 H264CodecLevel = "LEVEL_3_1"
-	H264CodecLevelLevel_3_2 H264CodecLevel = "LEVEL_3_2"
-	H264CodecLevelLevel_4   H264CodecLevel = "LEVEL_4"
-	H264CodecLevelLevel_4_1 H264CodecLevel = "LEVEL_4_1"
-	H264CodecLevelLevel_4_2 H264CodecLevel = "LEVEL_4_2"
-	H264CodecLevelLevel_5   H264CodecLevel = "LEVEL_5"
-	H264CodecLevelLevel_5_1 H264CodecLevel = "LEVEL_5_1"
-	H264CodecLevelLevel_5_2 H264CodecLevel = "LEVEL_5_2"
+	H264CodecLevelAuto    H264CodecLevel = "AUTO"
+	H264CodecLevelLevel1  H264CodecLevel = "LEVEL_1"
+	H264CodecLevelLevel11 H264CodecLevel = "LEVEL_1_1"
+	H264CodecLevelLevel12 H264CodecLevel = "LEVEL_1_2"
+	H264CodecLevelLevel13 H264CodecLevel = "LEVEL_1_3"
+	H264CodecLevelLevel2  H264CodecLevel = "LEVEL_2"
+	H264CodecLevelLevel21 H264CodecLevel = "LEVEL_2_1"
+	H264CodecLevelLevel22 H264CodecLevel = "LEVEL_2_2"
+	H264CodecLevelLevel3  H264CodecLevel = "LEVEL_3"
+	H264CodecLevelLevel31 H264CodecLevel = "LEVEL_3_1"
+	H264CodecLevelLevel32 H264CodecLevel = "LEVEL_3_2"
+	H264CodecLevelLevel4  H264CodecLevel = "LEVEL_4"
+	H264CodecLevelLevel41 H264CodecLevel = "LEVEL_4_1"
+	H264CodecLevelLevel42 H264CodecLevel = "LEVEL_4_2"
+	H264CodecLevelLevel5  H264CodecLevel = "LEVEL_5"
+	H264CodecLevelLevel51 H264CodecLevel = "LEVEL_5_1"
+	H264CodecLevelLevel52 H264CodecLevel = "LEVEL_5_2"
 )
 
 // Values returns all known values for H264CodecLevel. Note that this can be
@@ -2487,12 +2487,12 @@ type H264CodecProfile string
 
 // Enum values for H264CodecProfile
 const (
-	H264CodecProfileBaseline       H264CodecProfile = "BASELINE"
-	H264CodecProfileHigh           H264CodecProfile = "HIGH"
-	H264CodecProfileHigh_10bit     H264CodecProfile = "HIGH_10BIT"
-	H264CodecProfileHigh_422       H264CodecProfile = "HIGH_422"
-	H264CodecProfileHigh_422_10bit H264CodecProfile = "HIGH_422_10BIT"
-	H264CodecProfileMain           H264CodecProfile = "MAIN"
+	H264CodecProfileBaseline     H264CodecProfile = "BASELINE"
+	H264CodecProfileHigh         H264CodecProfile = "HIGH"
+	H264CodecProfileHigh10bit    H264CodecProfile = "HIGH_10BIT"
+	H264CodecProfileHigh422      H264CodecProfile = "HIGH_422"
+	H264CodecProfileHigh42210bit H264CodecProfile = "HIGH_422_10BIT"
+	H264CodecProfileMain         H264CodecProfile = "MAIN"
 )
 
 // Values returns all known values for H264CodecProfile. Note that this can be
@@ -2549,8 +2549,8 @@ type H264FieldEncoding string
 
 // Enum values for H264FieldEncoding
 const (
-	H264FieldEncodingPaff        H264FieldEncoding = "PAFF"
-	H264FieldEncodingForce_field H264FieldEncoding = "FORCE_FIELD"
+	H264FieldEncodingPaff       H264FieldEncoding = "PAFF"
+	H264FieldEncodingForceField H264FieldEncoding = "FORCE_FIELD"
 )
 
 // Values returns all known values for H264FieldEncoding. Note that this can be
@@ -2586,8 +2586,8 @@ type H264FramerateControl string
 
 // Enum values for H264FramerateControl
 const (
-	H264FramerateControlInitialize_from_source H264FramerateControl = "INITIALIZE_FROM_SOURCE"
-	H264FramerateControlSpecified              H264FramerateControl = "SPECIFIED"
+	H264FramerateControlInitializeFromSource H264FramerateControl = "INITIALIZE_FROM_SOURCE"
+	H264FramerateControlSpecified            H264FramerateControl = "SPECIFIED"
 )
 
 // Values returns all known values for H264FramerateControl. Note that this can be
@@ -2604,9 +2604,9 @@ type H264FramerateConversionAlgorithm string
 
 // Enum values for H264FramerateConversionAlgorithm
 const (
-	H264FramerateConversionAlgorithmDuplicate_drop H264FramerateConversionAlgorithm = "DUPLICATE_DROP"
-	H264FramerateConversionAlgorithmInterpolate    H264FramerateConversionAlgorithm = "INTERPOLATE"
-	H264FramerateConversionAlgorithmFrameformer    H264FramerateConversionAlgorithm = "FRAMEFORMER"
+	H264FramerateConversionAlgorithmDuplicateDrop H264FramerateConversionAlgorithm = "DUPLICATE_DROP"
+	H264FramerateConversionAlgorithmInterpolate   H264FramerateConversionAlgorithm = "INTERPOLATE"
+	H264FramerateConversionAlgorithmFrameformer   H264FramerateConversionAlgorithm = "FRAMEFORMER"
 )
 
 // Values returns all known values for H264FramerateConversionAlgorithm. Note that
@@ -2661,11 +2661,11 @@ type H264InterlaceMode string
 
 // Enum values for H264InterlaceMode
 const (
-	H264InterlaceModeProgressive         H264InterlaceMode = "PROGRESSIVE"
-	H264InterlaceModeTop_field           H264InterlaceMode = "TOP_FIELD"
-	H264InterlaceModeBottom_field        H264InterlaceMode = "BOTTOM_FIELD"
-	H264InterlaceModeFollow_top_field    H264InterlaceMode = "FOLLOW_TOP_FIELD"
-	H264InterlaceModeFollow_bottom_field H264InterlaceMode = "FOLLOW_BOTTOM_FIELD"
+	H264InterlaceModeProgressive       H264InterlaceMode = "PROGRESSIVE"
+	H264InterlaceModeTopField          H264InterlaceMode = "TOP_FIELD"
+	H264InterlaceModeBottomField       H264InterlaceMode = "BOTTOM_FIELD"
+	H264InterlaceModeFollowTopField    H264InterlaceMode = "FOLLOW_TOP_FIELD"
+	H264InterlaceModeFollowBottomField H264InterlaceMode = "FOLLOW_BOTTOM_FIELD"
 )
 
 // Values returns all known values for H264InterlaceMode. Note that this can be
@@ -2685,8 +2685,8 @@ type H264ParControl string
 
 // Enum values for H264ParControl
 const (
-	H264ParControlInitialize_from_source H264ParControl = "INITIALIZE_FROM_SOURCE"
-	H264ParControlSpecified              H264ParControl = "SPECIFIED"
+	H264ParControlInitializeFromSource H264ParControl = "INITIALIZE_FROM_SOURCE"
+	H264ParControlSpecified            H264ParControl = "SPECIFIED"
 )
 
 // Values returns all known values for H264ParControl. Note that this can be
@@ -2703,9 +2703,9 @@ type H264QualityTuningLevel string
 
 // Enum values for H264QualityTuningLevel
 const (
-	H264QualityTuningLevelSingle_pass    H264QualityTuningLevel = "SINGLE_PASS"
-	H264QualityTuningLevelSingle_pass_hq H264QualityTuningLevel = "SINGLE_PASS_HQ"
-	H264QualityTuningLevelMulti_pass_hq  H264QualityTuningLevel = "MULTI_PASS_HQ"
+	H264QualityTuningLevelSinglePass   H264QualityTuningLevel = "SINGLE_PASS"
+	H264QualityTuningLevelSinglePassHq H264QualityTuningLevel = "SINGLE_PASS_HQ"
+	H264QualityTuningLevelMultiPassHq  H264QualityTuningLevel = "MULTI_PASS_HQ"
 )
 
 // Values returns all known values for H264QualityTuningLevel. Note that this can
@@ -2761,9 +2761,9 @@ type H264SceneChangeDetect string
 
 // Enum values for H264SceneChangeDetect
 const (
-	H264SceneChangeDetectDisabled             H264SceneChangeDetect = "DISABLED"
-	H264SceneChangeDetectEnabled              H264SceneChangeDetect = "ENABLED"
-	H264SceneChangeDetectTransition_detection H264SceneChangeDetect = "TRANSITION_DETECTION"
+	H264SceneChangeDetectDisabled            H264SceneChangeDetect = "DISABLED"
+	H264SceneChangeDetectEnabled             H264SceneChangeDetect = "ENABLED"
+	H264SceneChangeDetectTransitionDetection H264SceneChangeDetect = "TRANSITION_DETECTION"
 )
 
 // Values returns all known values for H264SceneChangeDetect. Note that this can be
@@ -2938,20 +2938,20 @@ type H265CodecLevel string
 
 // Enum values for H265CodecLevel
 const (
-	H265CodecLevelAuto      H265CodecLevel = "AUTO"
-	H265CodecLevelLevel_1   H265CodecLevel = "LEVEL_1"
-	H265CodecLevelLevel_2   H265CodecLevel = "LEVEL_2"
-	H265CodecLevelLevel_2_1 H265CodecLevel = "LEVEL_2_1"
-	H265CodecLevelLevel_3   H265CodecLevel = "LEVEL_3"
-	H265CodecLevelLevel_3_1 H265CodecLevel = "LEVEL_3_1"
-	H265CodecLevelLevel_4   H265CodecLevel = "LEVEL_4"
-	H265CodecLevelLevel_4_1 H265CodecLevel = "LEVEL_4_1"
-	H265CodecLevelLevel_5   H265CodecLevel = "LEVEL_5"
-	H265CodecLevelLevel_5_1 H265CodecLevel = "LEVEL_5_1"
-	H265CodecLevelLevel_5_2 H265CodecLevel = "LEVEL_5_2"
-	H265CodecLevelLevel_6   H265CodecLevel = "LEVEL_6"
-	H265CodecLevelLevel_6_1 H265CodecLevel = "LEVEL_6_1"
-	H265CodecLevelLevel_6_2 H265CodecLevel = "LEVEL_6_2"
+	H265CodecLevelAuto    H265CodecLevel = "AUTO"
+	H265CodecLevelLevel1  H265CodecLevel = "LEVEL_1"
+	H265CodecLevelLevel2  H265CodecLevel = "LEVEL_2"
+	H265CodecLevelLevel21 H265CodecLevel = "LEVEL_2_1"
+	H265CodecLevelLevel3  H265CodecLevel = "LEVEL_3"
+	H265CodecLevelLevel31 H265CodecLevel = "LEVEL_3_1"
+	H265CodecLevelLevel4  H265CodecLevel = "LEVEL_4"
+	H265CodecLevelLevel41 H265CodecLevel = "LEVEL_4_1"
+	H265CodecLevelLevel5  H265CodecLevel = "LEVEL_5"
+	H265CodecLevelLevel51 H265CodecLevel = "LEVEL_5_1"
+	H265CodecLevelLevel52 H265CodecLevel = "LEVEL_5_2"
+	H265CodecLevelLevel6  H265CodecLevel = "LEVEL_6"
+	H265CodecLevelLevel61 H265CodecLevel = "LEVEL_6_1"
+	H265CodecLevelLevel62 H265CodecLevel = "LEVEL_6_2"
 )
 
 // Values returns all known values for H265CodecLevel. Note that this can be
@@ -2980,14 +2980,14 @@ type H265CodecProfile string
 
 // Enum values for H265CodecProfile
 const (
-	H265CodecProfileMain_main           H265CodecProfile = "MAIN_MAIN"
-	H265CodecProfileMain_high           H265CodecProfile = "MAIN_HIGH"
-	H265CodecProfileMain10_main         H265CodecProfile = "MAIN10_MAIN"
-	H265CodecProfileMain10_high         H265CodecProfile = "MAIN10_HIGH"
-	H265CodecProfileMain_422_8bit_main  H265CodecProfile = "MAIN_422_8BIT_MAIN"
-	H265CodecProfileMain_422_8bit_high  H265CodecProfile = "MAIN_422_8BIT_HIGH"
-	H265CodecProfileMain_422_10bit_main H265CodecProfile = "MAIN_422_10BIT_MAIN"
-	H265CodecProfileMain_422_10bit_high H265CodecProfile = "MAIN_422_10BIT_HIGH"
+	H265CodecProfileMainMain         H265CodecProfile = "MAIN_MAIN"
+	H265CodecProfileMainHigh         H265CodecProfile = "MAIN_HIGH"
+	H265CodecProfileMain10Main       H265CodecProfile = "MAIN10_MAIN"
+	H265CodecProfileMain10High       H265CodecProfile = "MAIN10_HIGH"
+	H265CodecProfileMain4228bitMain  H265CodecProfile = "MAIN_422_8BIT_MAIN"
+	H265CodecProfileMain4228bitHigh  H265CodecProfile = "MAIN_422_8BIT_HIGH"
+	H265CodecProfileMain42210bitMain H265CodecProfile = "MAIN_422_10BIT_MAIN"
+	H265CodecProfileMain42210bitHigh H265CodecProfile = "MAIN_422_10BIT_HIGH"
 )
 
 // Values returns all known values for H265CodecProfile. Note that this can be
@@ -3047,8 +3047,8 @@ type H265FramerateControl string
 
 // Enum values for H265FramerateControl
 const (
-	H265FramerateControlInitialize_from_source H265FramerateControl = "INITIALIZE_FROM_SOURCE"
-	H265FramerateControlSpecified              H265FramerateControl = "SPECIFIED"
+	H265FramerateControlInitializeFromSource H265FramerateControl = "INITIALIZE_FROM_SOURCE"
+	H265FramerateControlSpecified            H265FramerateControl = "SPECIFIED"
 )
 
 // Values returns all known values for H265FramerateControl. Note that this can be
@@ -3065,9 +3065,9 @@ type H265FramerateConversionAlgorithm string
 
 // Enum values for H265FramerateConversionAlgorithm
 const (
-	H265FramerateConversionAlgorithmDuplicate_drop H265FramerateConversionAlgorithm = "DUPLICATE_DROP"
-	H265FramerateConversionAlgorithmInterpolate    H265FramerateConversionAlgorithm = "INTERPOLATE"
-	H265FramerateConversionAlgorithmFrameformer    H265FramerateConversionAlgorithm = "FRAMEFORMER"
+	H265FramerateConversionAlgorithmDuplicateDrop H265FramerateConversionAlgorithm = "DUPLICATE_DROP"
+	H265FramerateConversionAlgorithmInterpolate   H265FramerateConversionAlgorithm = "INTERPOLATE"
+	H265FramerateConversionAlgorithmFrameformer   H265FramerateConversionAlgorithm = "FRAMEFORMER"
 )
 
 // Values returns all known values for H265FramerateConversionAlgorithm. Note that
@@ -3122,11 +3122,11 @@ type H265InterlaceMode string
 
 // Enum values for H265InterlaceMode
 const (
-	H265InterlaceModeProgressive         H265InterlaceMode = "PROGRESSIVE"
-	H265InterlaceModeTop_field           H265InterlaceMode = "TOP_FIELD"
-	H265InterlaceModeBottom_field        H265InterlaceMode = "BOTTOM_FIELD"
-	H265InterlaceModeFollow_top_field    H265InterlaceMode = "FOLLOW_TOP_FIELD"
-	H265InterlaceModeFollow_bottom_field H265InterlaceMode = "FOLLOW_BOTTOM_FIELD"
+	H265InterlaceModeProgressive       H265InterlaceMode = "PROGRESSIVE"
+	H265InterlaceModeTopField          H265InterlaceMode = "TOP_FIELD"
+	H265InterlaceModeBottomField       H265InterlaceMode = "BOTTOM_FIELD"
+	H265InterlaceModeFollowTopField    H265InterlaceMode = "FOLLOW_TOP_FIELD"
+	H265InterlaceModeFollowBottomField H265InterlaceMode = "FOLLOW_BOTTOM_FIELD"
 )
 
 // Values returns all known values for H265InterlaceMode. Note that this can be
@@ -3146,8 +3146,8 @@ type H265ParControl string
 
 // Enum values for H265ParControl
 const (
-	H265ParControlInitialize_from_source H265ParControl = "INITIALIZE_FROM_SOURCE"
-	H265ParControlSpecified              H265ParControl = "SPECIFIED"
+	H265ParControlInitializeFromSource H265ParControl = "INITIALIZE_FROM_SOURCE"
+	H265ParControlSpecified            H265ParControl = "SPECIFIED"
 )
 
 // Values returns all known values for H265ParControl. Note that this can be
@@ -3164,9 +3164,9 @@ type H265QualityTuningLevel string
 
 // Enum values for H265QualityTuningLevel
 const (
-	H265QualityTuningLevelSingle_pass    H265QualityTuningLevel = "SINGLE_PASS"
-	H265QualityTuningLevelSingle_pass_hq H265QualityTuningLevel = "SINGLE_PASS_HQ"
-	H265QualityTuningLevelMulti_pass_hq  H265QualityTuningLevel = "MULTI_PASS_HQ"
+	H265QualityTuningLevelSinglePass   H265QualityTuningLevel = "SINGLE_PASS"
+	H265QualityTuningLevelSinglePassHq H265QualityTuningLevel = "SINGLE_PASS_HQ"
+	H265QualityTuningLevelMultiPassHq  H265QualityTuningLevel = "MULTI_PASS_HQ"
 )
 
 // Values returns all known values for H265QualityTuningLevel. Note that this can
@@ -3225,9 +3225,9 @@ type H265SceneChangeDetect string
 
 // Enum values for H265SceneChangeDetect
 const (
-	H265SceneChangeDetectDisabled             H265SceneChangeDetect = "DISABLED"
-	H265SceneChangeDetectEnabled              H265SceneChangeDetect = "ENABLED"
-	H265SceneChangeDetectTransition_detection H265SceneChangeDetect = "TRANSITION_DETECTION"
+	H265SceneChangeDetectDisabled            H265SceneChangeDetect = "DISABLED"
+	H265SceneChangeDetectEnabled             H265SceneChangeDetect = "ENABLED"
+	H265SceneChangeDetectTransitionDetection H265SceneChangeDetect = "TRANSITION_DETECTION"
 )
 
 // Values returns all known values for H265SceneChangeDetect. Note that this can be
@@ -3393,8 +3393,8 @@ type HlsAdMarkers string
 
 // Enum values for HlsAdMarkers
 const (
-	HlsAdMarkersElemental        HlsAdMarkers = "ELEMENTAL"
-	HlsAdMarkersElemental_scte35 HlsAdMarkers = "ELEMENTAL_SCTE35"
+	HlsAdMarkersElemental       HlsAdMarkers = "ELEMENTAL"
+	HlsAdMarkersElementalScte35 HlsAdMarkers = "ELEMENTAL_SCTE35"
 )
 
 // Values returns all known values for HlsAdMarkers. Note that this can be expanded
@@ -3447,10 +3447,10 @@ type HlsAudioTrackType string
 
 // Enum values for HlsAudioTrackType
 const (
-	HlsAudioTrackTypeAlternate_audio_auto_select_default HlsAudioTrackType = "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT"
-	HlsAudioTrackTypeAlternate_audio_auto_select         HlsAudioTrackType = "ALTERNATE_AUDIO_AUTO_SELECT"
-	HlsAudioTrackTypeAlternate_audio_not_auto_select     HlsAudioTrackType = "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
-	HlsAudioTrackTypeAudio_only_variant_stream           HlsAudioTrackType = "AUDIO_ONLY_VARIANT_STREAM"
+	HlsAudioTrackTypeAlternateAudioAutoSelectDefault HlsAudioTrackType = "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT"
+	HlsAudioTrackTypeAlternateAudioAutoSelect        HlsAudioTrackType = "ALTERNATE_AUDIO_AUTO_SELECT"
+	HlsAudioTrackTypeAlternateAudioNotAutoSelect     HlsAudioTrackType = "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
+	HlsAudioTrackTypeAudioOnlyVariantStream          HlsAudioTrackType = "AUDIO_ONLY_VARIANT_STREAM"
 )
 
 // Values returns all known values for HlsAudioTrackType. Note that this can be
@@ -3507,8 +3507,8 @@ type HlsCodecSpecification string
 
 // Enum values for HlsCodecSpecification
 const (
-	HlsCodecSpecificationRfc_6381 HlsCodecSpecification = "RFC_6381"
-	HlsCodecSpecificationRfc_4281 HlsCodecSpecification = "RFC_4281"
+	HlsCodecSpecificationRfc6381 HlsCodecSpecification = "RFC_6381"
+	HlsCodecSpecificationRfc4281 HlsCodecSpecification = "RFC_4281"
 )
 
 // Values returns all known values for HlsCodecSpecification. Note that this can be
@@ -3525,8 +3525,8 @@ type HlsDirectoryStructure string
 
 // Enum values for HlsDirectoryStructure
 const (
-	HlsDirectoryStructureSingle_directory        HlsDirectoryStructure = "SINGLE_DIRECTORY"
-	HlsDirectoryStructureSubdirectory_per_stream HlsDirectoryStructure = "SUBDIRECTORY_PER_STREAM"
+	HlsDirectoryStructureSingleDirectory       HlsDirectoryStructure = "SINGLE_DIRECTORY"
+	HlsDirectoryStructureSubdirectoryPerStream HlsDirectoryStructure = "SUBDIRECTORY_PER_STREAM"
 )
 
 // Values returns all known values for HlsDirectoryStructure. Note that this can be
@@ -3543,8 +3543,8 @@ type HlsEncryptionType string
 
 // Enum values for HlsEncryptionType
 const (
-	HlsEncryptionTypeAes128     HlsEncryptionType = "AES128"
-	HlsEncryptionTypeSample_aes HlsEncryptionType = "SAMPLE_AES"
+	HlsEncryptionTypeAes128    HlsEncryptionType = "AES128"
+	HlsEncryptionTypeSampleAes HlsEncryptionType = "SAMPLE_AES"
 )
 
 // Values returns all known values for HlsEncryptionType. Note that this can be
@@ -3598,8 +3598,8 @@ type HlsKeyProviderType string
 
 // Enum values for HlsKeyProviderType
 const (
-	HlsKeyProviderTypeSpeke      HlsKeyProviderType = "SPEKE"
-	HlsKeyProviderTypeStatic_key HlsKeyProviderType = "STATIC_KEY"
+	HlsKeyProviderTypeSpeke     HlsKeyProviderType = "SPEKE"
+	HlsKeyProviderTypeStaticKey HlsKeyProviderType = "STATIC_KEY"
 )
 
 // Values returns all known values for HlsKeyProviderType. Note that this can be
@@ -3634,8 +3634,8 @@ type HlsManifestDurationFormat string
 
 // Enum values for HlsManifestDurationFormat
 const (
-	HlsManifestDurationFormatFloating_point HlsManifestDurationFormat = "FLOATING_POINT"
-	HlsManifestDurationFormatInteger        HlsManifestDurationFormat = "INTEGER"
+	HlsManifestDurationFormatFloatingPoint HlsManifestDurationFormat = "FLOATING_POINT"
+	HlsManifestDurationFormatInteger       HlsManifestDurationFormat = "INTEGER"
 )
 
 // Values returns all known values for HlsManifestDurationFormat. Note that this
@@ -3670,8 +3670,8 @@ type HlsOutputSelection string
 
 // Enum values for HlsOutputSelection
 const (
-	HlsOutputSelectionManifests_and_segments HlsOutputSelection = "MANIFESTS_AND_SEGMENTS"
-	HlsOutputSelectionSegments_only          HlsOutputSelection = "SEGMENTS_ONLY"
+	HlsOutputSelectionManifestsAndSegments HlsOutputSelection = "MANIFESTS_AND_SEGMENTS"
+	HlsOutputSelectionSegmentsOnly         HlsOutputSelection = "SEGMENTS_ONLY"
 )
 
 // Values returns all known values for HlsOutputSelection. Note that this can be
@@ -3706,8 +3706,8 @@ type HlsSegmentControl string
 
 // Enum values for HlsSegmentControl
 const (
-	HlsSegmentControlSingle_file     HlsSegmentControl = "SINGLE_FILE"
-	HlsSegmentControlSegmented_files HlsSegmentControl = "SEGMENTED_FILES"
+	HlsSegmentControlSingleFile     HlsSegmentControl = "SINGLE_FILE"
+	HlsSegmentControlSegmentedFiles HlsSegmentControl = "SEGMENTED_FILES"
 )
 
 // Values returns all known values for HlsSegmentControl. Note that this can be
@@ -3836,8 +3836,8 @@ type InputPsiControl string
 
 // Enum values for InputPsiControl
 const (
-	InputPsiControlIgnore_psi InputPsiControl = "IGNORE_PSI"
-	InputPsiControlUse_psi    InputPsiControl = "USE_PSI"
+	InputPsiControlIgnorePsi InputPsiControl = "IGNORE_PSI"
+	InputPsiControlUsePsi    InputPsiControl = "USE_PSI"
 )
 
 // Values returns all known values for InputPsiControl. Note that this can be
@@ -3854,11 +3854,11 @@ type InputRotate string
 
 // Enum values for InputRotate
 const (
-	InputRotateDegree_0    InputRotate = "DEGREE_0"
-	InputRotateDegrees_90  InputRotate = "DEGREES_90"
-	InputRotateDegrees_180 InputRotate = "DEGREES_180"
-	InputRotateDegrees_270 InputRotate = "DEGREES_270"
-	InputRotateAuto        InputRotate = "AUTO"
+	InputRotateDegree0    InputRotate = "DEGREE_0"
+	InputRotateDegrees90  InputRotate = "DEGREES_90"
+	InputRotateDegrees180 InputRotate = "DEGREES_180"
+	InputRotateDegrees270 InputRotate = "DEGREES_270"
+	InputRotateAuto       InputRotate = "AUTO"
 )
 
 // Values returns all known values for InputRotate. Note that this can be expanded
@@ -3960,9 +3960,9 @@ type JobTemplateListBy string
 
 // Enum values for JobTemplateListBy
 const (
-	JobTemplateListByName          JobTemplateListBy = "NAME"
-	JobTemplateListByCreation_date JobTemplateListBy = "CREATION_DATE"
-	JobTemplateListBySystem        JobTemplateListBy = "SYSTEM"
+	JobTemplateListByName         JobTemplateListBy = "NAME"
+	JobTemplateListByCreationDate JobTemplateListBy = "CREATION_DATE"
+	JobTemplateListBySystem       JobTemplateListBy = "SYSTEM"
 )
 
 // Values returns all known values for JobTemplateListBy. Note that this can be
@@ -4412,8 +4412,8 @@ type M2tsEbpAudioInterval string
 
 // Enum values for M2tsEbpAudioInterval
 const (
-	M2tsEbpAudioIntervalVideo_and_fixed_intervals M2tsEbpAudioInterval = "VIDEO_AND_FIXED_INTERVALS"
-	M2tsEbpAudioIntervalVideo_interval            M2tsEbpAudioInterval = "VIDEO_INTERVAL"
+	M2tsEbpAudioIntervalVideoAndFixedIntervals M2tsEbpAudioInterval = "VIDEO_AND_FIXED_INTERVALS"
+	M2tsEbpAudioIntervalVideoInterval          M2tsEbpAudioInterval = "VIDEO_INTERVAL"
 )
 
 // Values returns all known values for M2tsEbpAudioInterval. Note that this can be
@@ -4430,8 +4430,8 @@ type M2tsEbpPlacement string
 
 // Enum values for M2tsEbpPlacement
 const (
-	M2tsEbpPlacementVideo_and_audio_pids M2tsEbpPlacement = "VIDEO_AND_AUDIO_PIDS"
-	M2tsEbpPlacementVideo_pid            M2tsEbpPlacement = "VIDEO_PID"
+	M2tsEbpPlacementVideoAndAudioPids M2tsEbpPlacement = "VIDEO_AND_AUDIO_PIDS"
+	M2tsEbpPlacementVideoPid          M2tsEbpPlacement = "VIDEO_PID"
 )
 
 // Values returns all known values for M2tsEbpPlacement. Note that this can be
@@ -4502,8 +4502,8 @@ type M2tsPcrControl string
 
 // Enum values for M2tsPcrControl
 const (
-	M2tsPcrControlPcr_every_pes_packet  M2tsPcrControl = "PCR_EVERY_PES_PACKET"
-	M2tsPcrControlConfigured_pcr_period M2tsPcrControl = "CONFIGURED_PCR_PERIOD"
+	M2tsPcrControlPcrEveryPesPacket   M2tsPcrControl = "PCR_EVERY_PES_PACKET"
+	M2tsPcrControlConfiguredPcrPeriod M2tsPcrControl = "CONFIGURED_PCR_PERIOD"
 )
 
 // Values returns all known values for M2tsPcrControl. Note that this can be
@@ -4556,12 +4556,12 @@ type M2tsSegmentationMarkers string
 
 // Enum values for M2tsSegmentationMarkers
 const (
-	M2tsSegmentationMarkersNone         M2tsSegmentationMarkers = "NONE"
-	M2tsSegmentationMarkersRai_segstart M2tsSegmentationMarkers = "RAI_SEGSTART"
-	M2tsSegmentationMarkersRai_adapt    M2tsSegmentationMarkers = "RAI_ADAPT"
-	M2tsSegmentationMarkersPsi_segstart M2tsSegmentationMarkers = "PSI_SEGSTART"
-	M2tsSegmentationMarkersEbp          M2tsSegmentationMarkers = "EBP"
-	M2tsSegmentationMarkersEbp_legacy   M2tsSegmentationMarkers = "EBP_LEGACY"
+	M2tsSegmentationMarkersNone        M2tsSegmentationMarkers = "NONE"
+	M2tsSegmentationMarkersRaiSegstart M2tsSegmentationMarkers = "RAI_SEGSTART"
+	M2tsSegmentationMarkersRaiAdapt    M2tsSegmentationMarkers = "RAI_ADAPT"
+	M2tsSegmentationMarkersPsiSegstart M2tsSegmentationMarkers = "PSI_SEGSTART"
+	M2tsSegmentationMarkersEbp         M2tsSegmentationMarkers = "EBP"
+	M2tsSegmentationMarkersEbpLegacy   M2tsSegmentationMarkers = "EBP_LEGACY"
 )
 
 // Values returns all known values for M2tsSegmentationMarkers. Note that this can
@@ -4582,8 +4582,8 @@ type M2tsSegmentationStyle string
 
 // Enum values for M2tsSegmentationStyle
 const (
-	M2tsSegmentationStyleMaintain_cadence M2tsSegmentationStyle = "MAINTAIN_CADENCE"
-	M2tsSegmentationStyleReset_cadence    M2tsSegmentationStyle = "RESET_CADENCE"
+	M2tsSegmentationStyleMaintainCadence M2tsSegmentationStyle = "MAINTAIN_CADENCE"
+	M2tsSegmentationStyleResetCadence    M2tsSegmentationStyle = "RESET_CADENCE"
 )
 
 // Values returns all known values for M2tsSegmentationStyle. Note that this can be
@@ -4618,8 +4618,8 @@ type M3u8PcrControl string
 
 // Enum values for M3u8PcrControl
 const (
-	M3u8PcrControlPcr_every_pes_packet  M3u8PcrControl = "PCR_EVERY_PES_PACKET"
-	M3u8PcrControlConfigured_pcr_period M3u8PcrControl = "CONFIGURED_PCR_PERIOD"
+	M3u8PcrControlPcrEveryPesPacket   M3u8PcrControl = "PCR_EVERY_PES_PACKET"
+	M3u8PcrControlConfiguredPcrPeriod M3u8PcrControl = "CONFIGURED_PCR_PERIOD"
 )
 
 // Values returns all known values for M3u8PcrControl. Note that this can be
@@ -4762,8 +4762,8 @@ type MovReference string
 
 // Enum values for MovReference
 const (
-	MovReferenceSelf_contained MovReference = "SELF_CONTAINED"
-	MovReferenceExternal       MovReference = "EXTERNAL"
+	MovReferenceSelfContained MovReference = "SELF_CONTAINED"
+	MovReferenceExternal      MovReference = "EXTERNAL"
 )
 
 // Values returns all known values for MovReference. Note that this can be expanded
@@ -4834,8 +4834,8 @@ type Mp4MoovPlacement string
 
 // Enum values for Mp4MoovPlacement
 const (
-	Mp4MoovPlacementProgressive_download Mp4MoovPlacement = "PROGRESSIVE_DOWNLOAD"
-	Mp4MoovPlacementNormal               Mp4MoovPlacement = "NORMAL"
+	Mp4MoovPlacementProgressiveDownload Mp4MoovPlacement = "PROGRESSIVE_DOWNLOAD"
+	Mp4MoovPlacementNormal              Mp4MoovPlacement = "NORMAL"
 )
 
 // Values returns all known values for Mp4MoovPlacement. Note that this can be
@@ -4852,8 +4852,8 @@ type MpdCaptionContainerType string
 
 // Enum values for MpdCaptionContainerType
 const (
-	MpdCaptionContainerTypeRaw            MpdCaptionContainerType = "RAW"
-	MpdCaptionContainerTypeFragmented_mp4 MpdCaptionContainerType = "FRAGMENTED_MP4"
+	MpdCaptionContainerTypeRaw           MpdCaptionContainerType = "RAW"
+	MpdCaptionContainerTypeFragmentedMp4 MpdCaptionContainerType = "FRAGMENTED_MP4"
 )
 
 // Values returns all known values for MpdCaptionContainerType. Note that this can
@@ -4952,8 +4952,8 @@ type Mpeg2CodecProfile string
 
 // Enum values for Mpeg2CodecProfile
 const (
-	Mpeg2CodecProfileMain        Mpeg2CodecProfile = "MAIN"
-	Mpeg2CodecProfileProfile_422 Mpeg2CodecProfile = "PROFILE_422"
+	Mpeg2CodecProfileMain       Mpeg2CodecProfile = "MAIN"
+	Mpeg2CodecProfileProfile422 Mpeg2CodecProfile = "PROFILE_422"
 )
 
 // Values returns all known values for Mpeg2CodecProfile. Note that this can be
@@ -4988,8 +4988,8 @@ type Mpeg2FramerateControl string
 
 // Enum values for Mpeg2FramerateControl
 const (
-	Mpeg2FramerateControlInitialize_from_source Mpeg2FramerateControl = "INITIALIZE_FROM_SOURCE"
-	Mpeg2FramerateControlSpecified              Mpeg2FramerateControl = "SPECIFIED"
+	Mpeg2FramerateControlInitializeFromSource Mpeg2FramerateControl = "INITIALIZE_FROM_SOURCE"
+	Mpeg2FramerateControlSpecified            Mpeg2FramerateControl = "SPECIFIED"
 )
 
 // Values returns all known values for Mpeg2FramerateControl. Note that this can be
@@ -5006,9 +5006,9 @@ type Mpeg2FramerateConversionAlgorithm string
 
 // Enum values for Mpeg2FramerateConversionAlgorithm
 const (
-	Mpeg2FramerateConversionAlgorithmDuplicate_drop Mpeg2FramerateConversionAlgorithm = "DUPLICATE_DROP"
-	Mpeg2FramerateConversionAlgorithmInterpolate    Mpeg2FramerateConversionAlgorithm = "INTERPOLATE"
-	Mpeg2FramerateConversionAlgorithmFrameformer    Mpeg2FramerateConversionAlgorithm = "FRAMEFORMER"
+	Mpeg2FramerateConversionAlgorithmDuplicateDrop Mpeg2FramerateConversionAlgorithm = "DUPLICATE_DROP"
+	Mpeg2FramerateConversionAlgorithmInterpolate   Mpeg2FramerateConversionAlgorithm = "INTERPOLATE"
+	Mpeg2FramerateConversionAlgorithmFrameformer   Mpeg2FramerateConversionAlgorithm = "FRAMEFORMER"
 )
 
 // Values returns all known values for Mpeg2FramerateConversionAlgorithm. Note that
@@ -5045,11 +5045,11 @@ type Mpeg2InterlaceMode string
 
 // Enum values for Mpeg2InterlaceMode
 const (
-	Mpeg2InterlaceModeProgressive         Mpeg2InterlaceMode = "PROGRESSIVE"
-	Mpeg2InterlaceModeTop_field           Mpeg2InterlaceMode = "TOP_FIELD"
-	Mpeg2InterlaceModeBottom_field        Mpeg2InterlaceMode = "BOTTOM_FIELD"
-	Mpeg2InterlaceModeFollow_top_field    Mpeg2InterlaceMode = "FOLLOW_TOP_FIELD"
-	Mpeg2InterlaceModeFollow_bottom_field Mpeg2InterlaceMode = "FOLLOW_BOTTOM_FIELD"
+	Mpeg2InterlaceModeProgressive       Mpeg2InterlaceMode = "PROGRESSIVE"
+	Mpeg2InterlaceModeTopField          Mpeg2InterlaceMode = "TOP_FIELD"
+	Mpeg2InterlaceModeBottomField       Mpeg2InterlaceMode = "BOTTOM_FIELD"
+	Mpeg2InterlaceModeFollowTopField    Mpeg2InterlaceMode = "FOLLOW_TOP_FIELD"
+	Mpeg2InterlaceModeFollowBottomField Mpeg2InterlaceMode = "FOLLOW_BOTTOM_FIELD"
 )
 
 // Values returns all known values for Mpeg2InterlaceMode. Note that this can be
@@ -5069,11 +5069,11 @@ type Mpeg2IntraDcPrecision string
 
 // Enum values for Mpeg2IntraDcPrecision
 const (
-	Mpeg2IntraDcPrecisionAuto                  Mpeg2IntraDcPrecision = "AUTO"
-	Mpeg2IntraDcPrecisionIntra_dc_precision_8  Mpeg2IntraDcPrecision = "INTRA_DC_PRECISION_8"
-	Mpeg2IntraDcPrecisionIntra_dc_precision_9  Mpeg2IntraDcPrecision = "INTRA_DC_PRECISION_9"
-	Mpeg2IntraDcPrecisionIntra_dc_precision_10 Mpeg2IntraDcPrecision = "INTRA_DC_PRECISION_10"
-	Mpeg2IntraDcPrecisionIntra_dc_precision_11 Mpeg2IntraDcPrecision = "INTRA_DC_PRECISION_11"
+	Mpeg2IntraDcPrecisionAuto               Mpeg2IntraDcPrecision = "AUTO"
+	Mpeg2IntraDcPrecisionIntraDcPrecision8  Mpeg2IntraDcPrecision = "INTRA_DC_PRECISION_8"
+	Mpeg2IntraDcPrecisionIntraDcPrecision9  Mpeg2IntraDcPrecision = "INTRA_DC_PRECISION_9"
+	Mpeg2IntraDcPrecisionIntraDcPrecision10 Mpeg2IntraDcPrecision = "INTRA_DC_PRECISION_10"
+	Mpeg2IntraDcPrecisionIntraDcPrecision11 Mpeg2IntraDcPrecision = "INTRA_DC_PRECISION_11"
 )
 
 // Values returns all known values for Mpeg2IntraDcPrecision. Note that this can be
@@ -5093,8 +5093,8 @@ type Mpeg2ParControl string
 
 // Enum values for Mpeg2ParControl
 const (
-	Mpeg2ParControlInitialize_from_source Mpeg2ParControl = "INITIALIZE_FROM_SOURCE"
-	Mpeg2ParControlSpecified              Mpeg2ParControl = "SPECIFIED"
+	Mpeg2ParControlInitializeFromSource Mpeg2ParControl = "INITIALIZE_FROM_SOURCE"
+	Mpeg2ParControlSpecified            Mpeg2ParControl = "SPECIFIED"
 )
 
 // Values returns all known values for Mpeg2ParControl. Note that this can be
@@ -5111,8 +5111,8 @@ type Mpeg2QualityTuningLevel string
 
 // Enum values for Mpeg2QualityTuningLevel
 const (
-	Mpeg2QualityTuningLevelSingle_pass Mpeg2QualityTuningLevel = "SINGLE_PASS"
-	Mpeg2QualityTuningLevelMulti_pass  Mpeg2QualityTuningLevel = "MULTI_PASS"
+	Mpeg2QualityTuningLevelSinglePass Mpeg2QualityTuningLevel = "SINGLE_PASS"
+	Mpeg2QualityTuningLevelMultiPass  Mpeg2QualityTuningLevel = "MULTI_PASS"
 )
 
 // Values returns all known values for Mpeg2QualityTuningLevel. Note that this can
@@ -5203,7 +5203,7 @@ type Mpeg2Syntax string
 // Enum values for Mpeg2Syntax
 const (
 	Mpeg2SyntaxDefault Mpeg2Syntax = "DEFAULT"
-	Mpeg2SyntaxD_10    Mpeg2Syntax = "D_10"
+	Mpeg2SyntaxD10     Mpeg2Syntax = "D_10"
 )
 
 // Values returns all known values for Mpeg2Syntax. Note that this can be expanded
@@ -5259,8 +5259,8 @@ type MsSmoothAudioDeduplication string
 
 // Enum values for MsSmoothAudioDeduplication
 const (
-	MsSmoothAudioDeduplicationCombine_duplicate_streams MsSmoothAudioDeduplication = "COMBINE_DUPLICATE_STREAMS"
-	MsSmoothAudioDeduplicationNone                      MsSmoothAudioDeduplication = "NONE"
+	MsSmoothAudioDeduplicationCombineDuplicateStreams MsSmoothAudioDeduplication = "COMBINE_DUPLICATE_STREAMS"
+	MsSmoothAudioDeduplicationNone                    MsSmoothAudioDeduplication = "NONE"
 )
 
 // Values returns all known values for MsSmoothAudioDeduplication. Note that this
@@ -5295,8 +5295,8 @@ type MxfAfdSignaling string
 
 // Enum values for MxfAfdSignaling
 const (
-	MxfAfdSignalingNo_copy         MxfAfdSignaling = "NO_COPY"
-	MxfAfdSignalingCopy_from_video MxfAfdSignaling = "COPY_FROM_VIDEO"
+	MxfAfdSignalingNoCopy        MxfAfdSignaling = "NO_COPY"
+	MxfAfdSignalingCopyFromVideo MxfAfdSignaling = "COPY_FROM_VIDEO"
 )
 
 // Values returns all known values for MxfAfdSignaling. Note that this can be
@@ -5313,7 +5313,7 @@ type MxfProfile string
 
 // Enum values for MxfProfile
 const (
-	MxfProfileD_10  MxfProfile = "D_10"
+	MxfProfileD10   MxfProfile = "D_10"
 	MxfProfileXdcam MxfProfile = "XDCAM"
 	MxfProfileOp1a  MxfProfile = "OP1A"
 )
@@ -5333,9 +5333,9 @@ type NielsenActiveWatermarkProcessType string
 
 // Enum values for NielsenActiveWatermarkProcessType
 const (
-	NielsenActiveWatermarkProcessTypeNaes2_and_nw          NielsenActiveWatermarkProcessType = "NAES2_AND_NW"
-	NielsenActiveWatermarkProcessTypeCbet                  NielsenActiveWatermarkProcessType = "CBET"
-	NielsenActiveWatermarkProcessTypeNaes2_and_nw_and_cbet NielsenActiveWatermarkProcessType = "NAES2_AND_NW_AND_CBET"
+	NielsenActiveWatermarkProcessTypeNaes2AndNw        NielsenActiveWatermarkProcessType = "NAES2_AND_NW"
+	NielsenActiveWatermarkProcessTypeCbet              NielsenActiveWatermarkProcessType = "CBET"
+	NielsenActiveWatermarkProcessTypeNaes2AndNwAndCbet NielsenActiveWatermarkProcessType = "NAES2_AND_NW_AND_CBET"
 )
 
 // Values returns all known values for NielsenActiveWatermarkProcessType. Note that
@@ -5373,8 +5373,8 @@ type NielsenUniqueTicPerAudioTrackType string
 
 // Enum values for NielsenUniqueTicPerAudioTrackType
 const (
-	NielsenUniqueTicPerAudioTrackTypeReserve_unique_tics_per_track NielsenUniqueTicPerAudioTrackType = "RESERVE_UNIQUE_TICS_PER_TRACK"
-	NielsenUniqueTicPerAudioTrackTypeSame_tics_per_track           NielsenUniqueTicPerAudioTrackType = "SAME_TICS_PER_TRACK"
+	NielsenUniqueTicPerAudioTrackTypeReserveUniqueTicsPerTrack NielsenUniqueTicPerAudioTrackType = "RESERVE_UNIQUE_TICS_PER_TRACK"
+	NielsenUniqueTicPerAudioTrackTypeSameTicsPerTrack          NielsenUniqueTicPerAudioTrackType = "SAME_TICS_PER_TRACK"
 )
 
 // Values returns all known values for NielsenUniqueTicPerAudioTrackType. Note that
@@ -5461,11 +5461,11 @@ type OutputGroupType string
 
 // Enum values for OutputGroupType
 const (
-	OutputGroupTypeHls_group_settings       OutputGroupType = "HLS_GROUP_SETTINGS"
-	OutputGroupTypeDash_iso_group_settings  OutputGroupType = "DASH_ISO_GROUP_SETTINGS"
-	OutputGroupTypeFile_group_settings      OutputGroupType = "FILE_GROUP_SETTINGS"
-	OutputGroupTypeMs_smooth_group_settings OutputGroupType = "MS_SMOOTH_GROUP_SETTINGS"
-	OutputGroupTypeCmaf_group_settings      OutputGroupType = "CMAF_GROUP_SETTINGS"
+	OutputGroupTypeHlsGroupSettings      OutputGroupType = "HLS_GROUP_SETTINGS"
+	OutputGroupTypeDashIsoGroupSettings  OutputGroupType = "DASH_ISO_GROUP_SETTINGS"
+	OutputGroupTypeFileGroupSettings     OutputGroupType = "FILE_GROUP_SETTINGS"
+	OutputGroupTypeMsSmoothGroupSettings OutputGroupType = "MS_SMOOTH_GROUP_SETTINGS"
+	OutputGroupTypeCmafGroupSettings     OutputGroupType = "CMAF_GROUP_SETTINGS"
 )
 
 // Values returns all known values for OutputGroupType. Note that this can be
@@ -5485,10 +5485,10 @@ type OutputSdt string
 
 // Enum values for OutputSdt
 const (
-	OutputSdtSdt_follow            OutputSdt = "SDT_FOLLOW"
-	OutputSdtSdt_follow_if_present OutputSdt = "SDT_FOLLOW_IF_PRESENT"
-	OutputSdtSdt_manual            OutputSdt = "SDT_MANUAL"
-	OutputSdtSdt_none              OutputSdt = "SDT_NONE"
+	OutputSdtSdtFollow          OutputSdt = "SDT_FOLLOW"
+	OutputSdtSdtFollowIfPresent OutputSdt = "SDT_FOLLOW_IF_PRESENT"
+	OutputSdtSdtManual          OutputSdt = "SDT_MANUAL"
+	OutputSdtSdtNone            OutputSdt = "SDT_NONE"
 )
 
 // Values returns all known values for OutputSdt. Note that this can be expanded in
@@ -5507,9 +5507,9 @@ type PresetListBy string
 
 // Enum values for PresetListBy
 const (
-	PresetListByName          PresetListBy = "NAME"
-	PresetListByCreation_date PresetListBy = "CREATION_DATE"
-	PresetListBySystem        PresetListBy = "SYSTEM"
+	PresetListByName         PresetListBy = "NAME"
+	PresetListByCreationDate PresetListBy = "CREATION_DATE"
+	PresetListBySystem       PresetListBy = "SYSTEM"
 )
 
 // Values returns all known values for PresetListBy. Note that this can be expanded
@@ -5527,8 +5527,8 @@ type PricingPlan string
 
 // Enum values for PricingPlan
 const (
-	PricingPlanOn_demand PricingPlan = "ON_DEMAND"
-	PricingPlanReserved  PricingPlan = "RESERVED"
+	PricingPlanOnDemand PricingPlan = "ON_DEMAND"
+	PricingPlanReserved PricingPlan = "RESERVED"
 )
 
 // Values returns all known values for PricingPlan. Note that this can be expanded
@@ -5545,10 +5545,10 @@ type ProresCodecProfile string
 
 // Enum values for ProresCodecProfile
 const (
-	ProresCodecProfileApple_prores_422       ProresCodecProfile = "APPLE_PRORES_422"
-	ProresCodecProfileApple_prores_422_hq    ProresCodecProfile = "APPLE_PRORES_422_HQ"
-	ProresCodecProfileApple_prores_422_lt    ProresCodecProfile = "APPLE_PRORES_422_LT"
-	ProresCodecProfileApple_prores_422_proxy ProresCodecProfile = "APPLE_PRORES_422_PROXY"
+	ProresCodecProfileAppleProres422      ProresCodecProfile = "APPLE_PRORES_422"
+	ProresCodecProfileAppleProres422Hq    ProresCodecProfile = "APPLE_PRORES_422_HQ"
+	ProresCodecProfileAppleProres422Lt    ProresCodecProfile = "APPLE_PRORES_422_LT"
+	ProresCodecProfileAppleProres422Proxy ProresCodecProfile = "APPLE_PRORES_422_PROXY"
 )
 
 // Values returns all known values for ProresCodecProfile. Note that this can be
@@ -5567,8 +5567,8 @@ type ProresFramerateControl string
 
 // Enum values for ProresFramerateControl
 const (
-	ProresFramerateControlInitialize_from_source ProresFramerateControl = "INITIALIZE_FROM_SOURCE"
-	ProresFramerateControlSpecified              ProresFramerateControl = "SPECIFIED"
+	ProresFramerateControlInitializeFromSource ProresFramerateControl = "INITIALIZE_FROM_SOURCE"
+	ProresFramerateControlSpecified            ProresFramerateControl = "SPECIFIED"
 )
 
 // Values returns all known values for ProresFramerateControl. Note that this can
@@ -5585,9 +5585,9 @@ type ProresFramerateConversionAlgorithm string
 
 // Enum values for ProresFramerateConversionAlgorithm
 const (
-	ProresFramerateConversionAlgorithmDuplicate_drop ProresFramerateConversionAlgorithm = "DUPLICATE_DROP"
-	ProresFramerateConversionAlgorithmInterpolate    ProresFramerateConversionAlgorithm = "INTERPOLATE"
-	ProresFramerateConversionAlgorithmFrameformer    ProresFramerateConversionAlgorithm = "FRAMEFORMER"
+	ProresFramerateConversionAlgorithmDuplicateDrop ProresFramerateConversionAlgorithm = "DUPLICATE_DROP"
+	ProresFramerateConversionAlgorithmInterpolate   ProresFramerateConversionAlgorithm = "INTERPOLATE"
+	ProresFramerateConversionAlgorithmFrameformer   ProresFramerateConversionAlgorithm = "FRAMEFORMER"
 )
 
 // Values returns all known values for ProresFramerateConversionAlgorithm. Note
@@ -5606,11 +5606,11 @@ type ProresInterlaceMode string
 
 // Enum values for ProresInterlaceMode
 const (
-	ProresInterlaceModeProgressive         ProresInterlaceMode = "PROGRESSIVE"
-	ProresInterlaceModeTop_field           ProresInterlaceMode = "TOP_FIELD"
-	ProresInterlaceModeBottom_field        ProresInterlaceMode = "BOTTOM_FIELD"
-	ProresInterlaceModeFollow_top_field    ProresInterlaceMode = "FOLLOW_TOP_FIELD"
-	ProresInterlaceModeFollow_bottom_field ProresInterlaceMode = "FOLLOW_BOTTOM_FIELD"
+	ProresInterlaceModeProgressive       ProresInterlaceMode = "PROGRESSIVE"
+	ProresInterlaceModeTopField          ProresInterlaceMode = "TOP_FIELD"
+	ProresInterlaceModeBottomField       ProresInterlaceMode = "BOTTOM_FIELD"
+	ProresInterlaceModeFollowTopField    ProresInterlaceMode = "FOLLOW_TOP_FIELD"
+	ProresInterlaceModeFollowBottomField ProresInterlaceMode = "FOLLOW_BOTTOM_FIELD"
 )
 
 // Values returns all known values for ProresInterlaceMode. Note that this can be
@@ -5630,8 +5630,8 @@ type ProresParControl string
 
 // Enum values for ProresParControl
 const (
-	ProresParControlInitialize_from_source ProresParControl = "INITIALIZE_FROM_SOURCE"
-	ProresParControlSpecified              ProresParControl = "SPECIFIED"
+	ProresParControlInitializeFromSource ProresParControl = "INITIALIZE_FROM_SOURCE"
+	ProresParControlSpecified            ProresParControl = "SPECIFIED"
 )
 
 // Values returns all known values for ProresParControl. Note that this can be
@@ -5684,8 +5684,8 @@ type QueueListBy string
 
 // Enum values for QueueListBy
 const (
-	QueueListByName          QueueListBy = "NAME"
-	QueueListByCreation_date QueueListBy = "CREATION_DATE"
+	QueueListByName         QueueListBy = "NAME"
+	QueueListByCreationDate QueueListBy = "CREATION_DATE"
 )
 
 // Values returns all known values for QueueListBy. Note that this can be expanded
@@ -5720,8 +5720,8 @@ type RenewalType string
 
 // Enum values for RenewalType
 const (
-	RenewalTypeAuto_renew RenewalType = "AUTO_RENEW"
-	RenewalTypeExpire     RenewalType = "EXPIRE"
+	RenewalTypeAutoRenew RenewalType = "AUTO_RENEW"
+	RenewalTypeExpire    RenewalType = "EXPIRE"
 )
 
 // Values returns all known values for RenewalType. Note that this can be expanded
@@ -5776,10 +5776,10 @@ type S3ObjectCannedAcl string
 
 // Enum values for S3ObjectCannedAcl
 const (
-	S3ObjectCannedAclPublic_read               S3ObjectCannedAcl = "PUBLIC_READ"
-	S3ObjectCannedAclAuthenticated_read        S3ObjectCannedAcl = "AUTHENTICATED_READ"
-	S3ObjectCannedAclBucket_owner_read         S3ObjectCannedAcl = "BUCKET_OWNER_READ"
-	S3ObjectCannedAclBucket_owner_full_control S3ObjectCannedAcl = "BUCKET_OWNER_FULL_CONTROL"
+	S3ObjectCannedAclPublicRead             S3ObjectCannedAcl = "PUBLIC_READ"
+	S3ObjectCannedAclAuthenticatedRead      S3ObjectCannedAcl = "AUTHENTICATED_READ"
+	S3ObjectCannedAclBucketOwnerRead        S3ObjectCannedAcl = "BUCKET_OWNER_READ"
+	S3ObjectCannedAclBucketOwnerFullControl S3ObjectCannedAcl = "BUCKET_OWNER_FULL_CONTROL"
 )
 
 // Values returns all known values for S3ObjectCannedAcl. Note that this can be
@@ -5798,8 +5798,8 @@ type S3ServerSideEncryptionType string
 
 // Enum values for S3ServerSideEncryptionType
 const (
-	S3ServerSideEncryptionTypeServer_side_encryption_s3  S3ServerSideEncryptionType = "SERVER_SIDE_ENCRYPTION_S3"
-	S3ServerSideEncryptionTypeServer_side_encryption_kms S3ServerSideEncryptionType = "SERVER_SIDE_ENCRYPTION_KMS"
+	S3ServerSideEncryptionTypeServerSideEncryptionS3  S3ServerSideEncryptionType = "SERVER_SIDE_ENCRYPTION_S3"
+	S3ServerSideEncryptionTypeServerSideEncryptionKms S3ServerSideEncryptionType = "SERVER_SIDE_ENCRYPTION_KMS"
 )
 
 // Values returns all known values for S3ServerSideEncryptionType. Note that this
@@ -5816,8 +5816,8 @@ type ScalingBehavior string
 
 // Enum values for ScalingBehavior
 const (
-	ScalingBehaviorDefault           ScalingBehavior = "DEFAULT"
-	ScalingBehaviorStretch_to_output ScalingBehavior = "STRETCH_TO_OUTPUT"
+	ScalingBehaviorDefault         ScalingBehavior = "DEFAULT"
+	ScalingBehaviorStretchToOutput ScalingBehavior = "STRETCH_TO_OUTPUT"
 )
 
 // Values returns all known values for ScalingBehavior. Note that this can be
@@ -5834,11 +5834,11 @@ type SccDestinationFramerate string
 
 // Enum values for SccDestinationFramerate
 const (
-	SccDestinationFramerateFramerate_23_97               SccDestinationFramerate = "FRAMERATE_23_97"
-	SccDestinationFramerateFramerate_24                  SccDestinationFramerate = "FRAMERATE_24"
-	SccDestinationFramerateFramerate_25                  SccDestinationFramerate = "FRAMERATE_25"
-	SccDestinationFramerateFramerate_29_97_dropframe     SccDestinationFramerate = "FRAMERATE_29_97_DROPFRAME"
-	SccDestinationFramerateFramerate_29_97_non_dropframe SccDestinationFramerate = "FRAMERATE_29_97_NON_DROPFRAME"
+	SccDestinationFramerateFramerate2397             SccDestinationFramerate = "FRAMERATE_23_97"
+	SccDestinationFramerateFramerate24               SccDestinationFramerate = "FRAMERATE_24"
+	SccDestinationFramerateFramerate25               SccDestinationFramerate = "FRAMERATE_25"
+	SccDestinationFramerateFramerate2997Dropframe    SccDestinationFramerate = "FRAMERATE_29_97_DROPFRAME"
+	SccDestinationFramerateFramerate2997NonDropframe SccDestinationFramerate = "FRAMERATE_29_97_NON_DROPFRAME"
 )
 
 // Values returns all known values for SccDestinationFramerate. Note that this can
@@ -5876,21 +5876,21 @@ type StatusUpdateInterval string
 
 // Enum values for StatusUpdateInterval
 const (
-	StatusUpdateIntervalSeconds_10  StatusUpdateInterval = "SECONDS_10"
-	StatusUpdateIntervalSeconds_12  StatusUpdateInterval = "SECONDS_12"
-	StatusUpdateIntervalSeconds_15  StatusUpdateInterval = "SECONDS_15"
-	StatusUpdateIntervalSeconds_20  StatusUpdateInterval = "SECONDS_20"
-	StatusUpdateIntervalSeconds_30  StatusUpdateInterval = "SECONDS_30"
-	StatusUpdateIntervalSeconds_60  StatusUpdateInterval = "SECONDS_60"
-	StatusUpdateIntervalSeconds_120 StatusUpdateInterval = "SECONDS_120"
-	StatusUpdateIntervalSeconds_180 StatusUpdateInterval = "SECONDS_180"
-	StatusUpdateIntervalSeconds_240 StatusUpdateInterval = "SECONDS_240"
-	StatusUpdateIntervalSeconds_300 StatusUpdateInterval = "SECONDS_300"
-	StatusUpdateIntervalSeconds_360 StatusUpdateInterval = "SECONDS_360"
-	StatusUpdateIntervalSeconds_420 StatusUpdateInterval = "SECONDS_420"
-	StatusUpdateIntervalSeconds_480 StatusUpdateInterval = "SECONDS_480"
-	StatusUpdateIntervalSeconds_540 StatusUpdateInterval = "SECONDS_540"
-	StatusUpdateIntervalSeconds_600 StatusUpdateInterval = "SECONDS_600"
+	StatusUpdateIntervalSeconds10  StatusUpdateInterval = "SECONDS_10"
+	StatusUpdateIntervalSeconds12  StatusUpdateInterval = "SECONDS_12"
+	StatusUpdateIntervalSeconds15  StatusUpdateInterval = "SECONDS_15"
+	StatusUpdateIntervalSeconds20  StatusUpdateInterval = "SECONDS_20"
+	StatusUpdateIntervalSeconds30  StatusUpdateInterval = "SECONDS_30"
+	StatusUpdateIntervalSeconds60  StatusUpdateInterval = "SECONDS_60"
+	StatusUpdateIntervalSeconds120 StatusUpdateInterval = "SECONDS_120"
+	StatusUpdateIntervalSeconds180 StatusUpdateInterval = "SECONDS_180"
+	StatusUpdateIntervalSeconds240 StatusUpdateInterval = "SECONDS_240"
+	StatusUpdateIntervalSeconds300 StatusUpdateInterval = "SECONDS_300"
+	StatusUpdateIntervalSeconds360 StatusUpdateInterval = "SECONDS_360"
+	StatusUpdateIntervalSeconds420 StatusUpdateInterval = "SECONDS_420"
+	StatusUpdateIntervalSeconds480 StatusUpdateInterval = "SECONDS_480"
+	StatusUpdateIntervalSeconds540 StatusUpdateInterval = "SECONDS_540"
+	StatusUpdateIntervalSeconds600 StatusUpdateInterval = "SECONDS_600"
 )
 
 // Values returns all known values for StatusUpdateInterval. Note that this can be
@@ -5920,11 +5920,11 @@ type TeletextPageType string
 
 // Enum values for TeletextPageType
 const (
-	TeletextPageTypePage_type_initial                   TeletextPageType = "PAGE_TYPE_INITIAL"
-	TeletextPageTypePage_type_subtitle                  TeletextPageType = "PAGE_TYPE_SUBTITLE"
-	TeletextPageTypePage_type_addl_info                 TeletextPageType = "PAGE_TYPE_ADDL_INFO"
-	TeletextPageTypePage_type_program_schedule          TeletextPageType = "PAGE_TYPE_PROGRAM_SCHEDULE"
-	TeletextPageTypePage_type_hearing_impaired_subtitle TeletextPageType = "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
+	TeletextPageTypePageTypeInitial                 TeletextPageType = "PAGE_TYPE_INITIAL"
+	TeletextPageTypePageTypeSubtitle                TeletextPageType = "PAGE_TYPE_SUBTITLE"
+	TeletextPageTypePageTypeAddlInfo                TeletextPageType = "PAGE_TYPE_ADDL_INFO"
+	TeletextPageTypePageTypeProgramSchedule         TeletextPageType = "PAGE_TYPE_PROGRAM_SCHEDULE"
+	TeletextPageTypePageTypeHearingImpairedSubtitle TeletextPageType = "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
 )
 
 // Values returns all known values for TeletextPageType. Note that this can be
@@ -5944,15 +5944,15 @@ type TimecodeBurninPosition string
 
 // Enum values for TimecodeBurninPosition
 const (
-	TimecodeBurninPositionTop_center    TimecodeBurninPosition = "TOP_CENTER"
-	TimecodeBurninPositionTop_left      TimecodeBurninPosition = "TOP_LEFT"
-	TimecodeBurninPositionTop_right     TimecodeBurninPosition = "TOP_RIGHT"
-	TimecodeBurninPositionMiddle_left   TimecodeBurninPosition = "MIDDLE_LEFT"
-	TimecodeBurninPositionMiddle_center TimecodeBurninPosition = "MIDDLE_CENTER"
-	TimecodeBurninPositionMiddle_right  TimecodeBurninPosition = "MIDDLE_RIGHT"
-	TimecodeBurninPositionBottom_left   TimecodeBurninPosition = "BOTTOM_LEFT"
-	TimecodeBurninPositionBottom_center TimecodeBurninPosition = "BOTTOM_CENTER"
-	TimecodeBurninPositionBottom_right  TimecodeBurninPosition = "BOTTOM_RIGHT"
+	TimecodeBurninPositionTopCenter    TimecodeBurninPosition = "TOP_CENTER"
+	TimecodeBurninPositionTopLeft      TimecodeBurninPosition = "TOP_LEFT"
+	TimecodeBurninPositionTopRight     TimecodeBurninPosition = "TOP_RIGHT"
+	TimecodeBurninPositionMiddleLeft   TimecodeBurninPosition = "MIDDLE_LEFT"
+	TimecodeBurninPositionMiddleCenter TimecodeBurninPosition = "MIDDLE_CENTER"
+	TimecodeBurninPositionMiddleRight  TimecodeBurninPosition = "MIDDLE_RIGHT"
+	TimecodeBurninPositionBottomLeft   TimecodeBurninPosition = "BOTTOM_LEFT"
+	TimecodeBurninPositionBottomCenter TimecodeBurninPosition = "BOTTOM_CENTER"
+	TimecodeBurninPositionBottomRight  TimecodeBurninPosition = "BOTTOM_RIGHT"
 )
 
 // Values returns all known values for TimecodeBurninPosition. Note that this can
@@ -6050,9 +6050,9 @@ type Vc3Class string
 
 // Enum values for Vc3Class
 const (
-	Vc3ClassClass_145_8bit  Vc3Class = "CLASS_145_8BIT"
-	Vc3ClassClass_220_8bit  Vc3Class = "CLASS_220_8BIT"
-	Vc3ClassClass_220_10bit Vc3Class = "CLASS_220_10BIT"
+	Vc3ClassClass1458bit  Vc3Class = "CLASS_145_8BIT"
+	Vc3ClassClass2208bit  Vc3Class = "CLASS_220_8BIT"
+	Vc3ClassClass22010bit Vc3Class = "CLASS_220_10BIT"
 )
 
 // Values returns all known values for Vc3Class. Note that this can be expanded in
@@ -6070,8 +6070,8 @@ type Vc3FramerateControl string
 
 // Enum values for Vc3FramerateControl
 const (
-	Vc3FramerateControlInitialize_from_source Vc3FramerateControl = "INITIALIZE_FROM_SOURCE"
-	Vc3FramerateControlSpecified              Vc3FramerateControl = "SPECIFIED"
+	Vc3FramerateControlInitializeFromSource Vc3FramerateControl = "INITIALIZE_FROM_SOURCE"
+	Vc3FramerateControlSpecified            Vc3FramerateControl = "SPECIFIED"
 )
 
 // Values returns all known values for Vc3FramerateControl. Note that this can be
@@ -6088,9 +6088,9 @@ type Vc3FramerateConversionAlgorithm string
 
 // Enum values for Vc3FramerateConversionAlgorithm
 const (
-	Vc3FramerateConversionAlgorithmDuplicate_drop Vc3FramerateConversionAlgorithm = "DUPLICATE_DROP"
-	Vc3FramerateConversionAlgorithmInterpolate    Vc3FramerateConversionAlgorithm = "INTERPOLATE"
-	Vc3FramerateConversionAlgorithmFrameformer    Vc3FramerateConversionAlgorithm = "FRAMEFORMER"
+	Vc3FramerateConversionAlgorithmDuplicateDrop Vc3FramerateConversionAlgorithm = "DUPLICATE_DROP"
+	Vc3FramerateConversionAlgorithmInterpolate   Vc3FramerateConversionAlgorithm = "INTERPOLATE"
+	Vc3FramerateConversionAlgorithmFrameformer   Vc3FramerateConversionAlgorithm = "FRAMEFORMER"
 )
 
 // Values returns all known values for Vc3FramerateConversionAlgorithm. Note that
@@ -6163,16 +6163,16 @@ type VideoCodec string
 
 // Enum values for VideoCodec
 const (
-	VideoCodecAv1           VideoCodec = "AV1"
-	VideoCodecAvc_intra     VideoCodec = "AVC_INTRA"
-	VideoCodecFrame_capture VideoCodec = "FRAME_CAPTURE"
-	VideoCodecH_264         VideoCodec = "H_264"
-	VideoCodecH_265         VideoCodec = "H_265"
-	VideoCodecMpeg2         VideoCodec = "MPEG2"
-	VideoCodecProres        VideoCodec = "PRORES"
-	VideoCodecVc3           VideoCodec = "VC3"
-	VideoCodecVp8           VideoCodec = "VP8"
-	VideoCodecVp9           VideoCodec = "VP9"
+	VideoCodecAv1          VideoCodec = "AV1"
+	VideoCodecAvcIntra     VideoCodec = "AVC_INTRA"
+	VideoCodecFrameCapture VideoCodec = "FRAME_CAPTURE"
+	VideoCodecH264         VideoCodec = "H_264"
+	VideoCodecH265         VideoCodec = "H_265"
+	VideoCodecMpeg2        VideoCodec = "MPEG2"
+	VideoCodecProres       VideoCodec = "PRORES"
+	VideoCodecVc3          VideoCodec = "VC3"
+	VideoCodecVp8          VideoCodec = "VP8"
+	VideoCodecVp9          VideoCodec = "VP9"
 )
 
 // Values returns all known values for VideoCodec. Note that this can be expanded
@@ -6197,8 +6197,8 @@ type VideoTimecodeInsertion string
 
 // Enum values for VideoTimecodeInsertion
 const (
-	VideoTimecodeInsertionDisabled       VideoTimecodeInsertion = "DISABLED"
-	VideoTimecodeInsertionPic_timing_sei VideoTimecodeInsertion = "PIC_TIMING_SEI"
+	VideoTimecodeInsertionDisabled     VideoTimecodeInsertion = "DISABLED"
+	VideoTimecodeInsertionPicTimingSei VideoTimecodeInsertion = "PIC_TIMING_SEI"
 )
 
 // Values returns all known values for VideoTimecodeInsertion. Note that this can
@@ -6215,8 +6215,8 @@ type Vp8FramerateControl string
 
 // Enum values for Vp8FramerateControl
 const (
-	Vp8FramerateControlInitialize_from_source Vp8FramerateControl = "INITIALIZE_FROM_SOURCE"
-	Vp8FramerateControlSpecified              Vp8FramerateControl = "SPECIFIED"
+	Vp8FramerateControlInitializeFromSource Vp8FramerateControl = "INITIALIZE_FROM_SOURCE"
+	Vp8FramerateControlSpecified            Vp8FramerateControl = "SPECIFIED"
 )
 
 // Values returns all known values for Vp8FramerateControl. Note that this can be
@@ -6233,9 +6233,9 @@ type Vp8FramerateConversionAlgorithm string
 
 // Enum values for Vp8FramerateConversionAlgorithm
 const (
-	Vp8FramerateConversionAlgorithmDuplicate_drop Vp8FramerateConversionAlgorithm = "DUPLICATE_DROP"
-	Vp8FramerateConversionAlgorithmInterpolate    Vp8FramerateConversionAlgorithm = "INTERPOLATE"
-	Vp8FramerateConversionAlgorithmFrameformer    Vp8FramerateConversionAlgorithm = "FRAMEFORMER"
+	Vp8FramerateConversionAlgorithmDuplicateDrop Vp8FramerateConversionAlgorithm = "DUPLICATE_DROP"
+	Vp8FramerateConversionAlgorithmInterpolate   Vp8FramerateConversionAlgorithm = "INTERPOLATE"
+	Vp8FramerateConversionAlgorithmFrameformer   Vp8FramerateConversionAlgorithm = "FRAMEFORMER"
 )
 
 // Values returns all known values for Vp8FramerateConversionAlgorithm. Note that
@@ -6254,8 +6254,8 @@ type Vp8ParControl string
 
 // Enum values for Vp8ParControl
 const (
-	Vp8ParControlInitialize_from_source Vp8ParControl = "INITIALIZE_FROM_SOURCE"
-	Vp8ParControlSpecified              Vp8ParControl = "SPECIFIED"
+	Vp8ParControlInitializeFromSource Vp8ParControl = "INITIALIZE_FROM_SOURCE"
+	Vp8ParControlSpecified            Vp8ParControl = "SPECIFIED"
 )
 
 // Values returns all known values for Vp8ParControl. Note that this can be
@@ -6272,8 +6272,8 @@ type Vp8QualityTuningLevel string
 
 // Enum values for Vp8QualityTuningLevel
 const (
-	Vp8QualityTuningLevelMulti_pass    Vp8QualityTuningLevel = "MULTI_PASS"
-	Vp8QualityTuningLevelMulti_pass_hq Vp8QualityTuningLevel = "MULTI_PASS_HQ"
+	Vp8QualityTuningLevelMultiPass   Vp8QualityTuningLevel = "MULTI_PASS"
+	Vp8QualityTuningLevelMultiPassHq Vp8QualityTuningLevel = "MULTI_PASS_HQ"
 )
 
 // Values returns all known values for Vp8QualityTuningLevel. Note that this can be
@@ -6306,8 +6306,8 @@ type Vp9FramerateControl string
 
 // Enum values for Vp9FramerateControl
 const (
-	Vp9FramerateControlInitialize_from_source Vp9FramerateControl = "INITIALIZE_FROM_SOURCE"
-	Vp9FramerateControlSpecified              Vp9FramerateControl = "SPECIFIED"
+	Vp9FramerateControlInitializeFromSource Vp9FramerateControl = "INITIALIZE_FROM_SOURCE"
+	Vp9FramerateControlSpecified            Vp9FramerateControl = "SPECIFIED"
 )
 
 // Values returns all known values for Vp9FramerateControl. Note that this can be
@@ -6324,9 +6324,9 @@ type Vp9FramerateConversionAlgorithm string
 
 // Enum values for Vp9FramerateConversionAlgorithm
 const (
-	Vp9FramerateConversionAlgorithmDuplicate_drop Vp9FramerateConversionAlgorithm = "DUPLICATE_DROP"
-	Vp9FramerateConversionAlgorithmInterpolate    Vp9FramerateConversionAlgorithm = "INTERPOLATE"
-	Vp9FramerateConversionAlgorithmFrameformer    Vp9FramerateConversionAlgorithm = "FRAMEFORMER"
+	Vp9FramerateConversionAlgorithmDuplicateDrop Vp9FramerateConversionAlgorithm = "DUPLICATE_DROP"
+	Vp9FramerateConversionAlgorithmInterpolate   Vp9FramerateConversionAlgorithm = "INTERPOLATE"
+	Vp9FramerateConversionAlgorithmFrameformer   Vp9FramerateConversionAlgorithm = "FRAMEFORMER"
 )
 
 // Values returns all known values for Vp9FramerateConversionAlgorithm. Note that
@@ -6345,8 +6345,8 @@ type Vp9ParControl string
 
 // Enum values for Vp9ParControl
 const (
-	Vp9ParControlInitialize_from_source Vp9ParControl = "INITIALIZE_FROM_SOURCE"
-	Vp9ParControlSpecified              Vp9ParControl = "SPECIFIED"
+	Vp9ParControlInitializeFromSource Vp9ParControl = "INITIALIZE_FROM_SOURCE"
+	Vp9ParControlSpecified            Vp9ParControl = "SPECIFIED"
 )
 
 // Values returns all known values for Vp9ParControl. Note that this can be
@@ -6363,8 +6363,8 @@ type Vp9QualityTuningLevel string
 
 // Enum values for Vp9QualityTuningLevel
 const (
-	Vp9QualityTuningLevelMulti_pass    Vp9QualityTuningLevel = "MULTI_PASS"
-	Vp9QualityTuningLevelMulti_pass_hq Vp9QualityTuningLevel = "MULTI_PASS_HQ"
+	Vp9QualityTuningLevelMultiPass   Vp9QualityTuningLevel = "MULTI_PASS"
+	Vp9QualityTuningLevelMultiPassHq Vp9QualityTuningLevel = "MULTI_PASS_HQ"
 )
 
 // Values returns all known values for Vp9QualityTuningLevel. Note that this can be

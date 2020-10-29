@@ -35,27 +35,27 @@ type CreateRelationalDatabaseInput struct {
 	// The name of the master database created when the Lightsail database resource is
 	// created. Constraints:
 	//
-	//     * Must contain from 1 to 64 alphanumeric
-	// characters.
+	// * Must contain from 1 to 64 alphanumeric characters.
 	//
-	//     * Cannot be a word reserved by the specified database engine
+	// *
+	// Cannot be a word reserved by the specified database engine
 	//
 	// This member is required.
 	MasterDatabaseName *string
 
 	// The master user name for your new database. Constraints:
 	//
-	//     * Master user name
-	// is required.
+	// * Master user name is
+	// required.
 	//
-	//     * Must contain from 1 to 16 alphanumeric characters.
+	// * Must contain from 1 to 16 alphanumeric characters.
 	//
-	//     *
-	// The first character must be a letter.
+	// * The first
+	// character must be a letter.
 	//
-	//     * Cannot be a reserved word for the
-	// database engine you choose. For more information about reserved words in MySQL
-	// 5.6 or 5.7, see the Keywords and Reserved Words articles for MySQL 5.6
+	// * Cannot be a reserved word for the database engine
+	// you choose. For more information about reserved words in MySQL 5.6 or 5.7, see
+	// the Keywords and Reserved Words articles for MySQL 5.6
 	// (https://dev.mysql.com/doc/refman/5.6/en/keywords.html) or MySQL 5.7
 	// (https://dev.mysql.com/doc/refman/5.7/en/keywords.html) respectively.
 	//
@@ -78,11 +78,11 @@ type CreateRelationalDatabaseInput struct {
 
 	// The name to use for your new database. Constraints:
 	//
-	//     * Must contain from 2
-	// to 255 alphanumeric characters, or hyphens.
+	// * Must contain from 2 to
+	// 255 alphanumeric characters, or hyphens.
 	//
-	//     * The first and last character
-	// must be a letter or number.
+	// * The first and last character must be
+	// a letter or number.
 	//
 	// This member is required.
 	RelationalDatabaseName *string
@@ -107,16 +107,15 @@ type CreateRelationalDatabaseInput struct {
 	// guide in the Amazon Relational Database Service (Amazon RDS) documentation.
 	// Constraints:
 	//
-	//     * Must be in the hh24:mi-hh24:mi format. Example:
-	// 16:00-16:30
+	// * Must be in the hh24:mi-hh24:mi format. Example: 16:00-16:30
 	//
-	//     * Specified in Coordinated Universal Time (UTC).
+	// *
+	// Specified in Coordinated Universal Time (UTC).
 	//
-	//     * Must
-	// not conflict with the preferred maintenance window.
+	// * Must not conflict with the
+	// preferred maintenance window.
 	//
-	//     * Must be at least 30
-	// minutes.
+	// * Must be at least 30 minutes.
 	PreferredBackupWindow *string
 
 	// The weekly time range during which system maintenance can occur on your new
@@ -124,18 +123,17 @@ type CreateRelationalDatabaseInput struct {
 	// block of time for each AWS Region, occurring on a random day of the week.
 	// Constraints:
 	//
-	//     * Must be in the ddd:hh24:mi-ddd:hh24:mi format.
+	// * Must be in the ddd:hh24:mi-ddd:hh24:mi format.
 	//
-	//     * Valid
-	// days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
+	// * Valid days:
+	// Mon, Tue, Wed, Thu, Fri, Sat, Sun.
 	//
-	//     * Must be at least 30 minutes.
+	// * Must be at least 30 minutes.
 	//
+	// * Specified
+	// in Coordinated Universal Time (UTC).
 	//
-	// * Specified in Coordinated Universal Time (UTC).
-	//
-	//     * Example:
-	// Tue:17:00-Tue:17:30
+	// * Example: Tue:17:00-Tue:17:30
 	PreferredMaintenanceWindow *string
 
 	// Specifies the accessibility options for your new database. A value of true

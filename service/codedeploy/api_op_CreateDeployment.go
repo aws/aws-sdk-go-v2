@@ -57,15 +57,15 @@ type CreateDeploymentInput struct {
 	// deployment. The fileExistsBehavior parameter takes any of the following
 	// values:
 	//
-	//     * DISALLOW: The deployment fails. This is also the default behavior
-	// if no option is specified.
+	// * DISALLOW: The deployment fails. This is also the default behavior if
+	// no option is specified.
 	//
-	//     * OVERWRITE: The version of the file from the
+	// * OVERWRITE: The version of the file from the
 	// application revision currently being deployed replaces the version already on
 	// the instance.
 	//
-	//     * RETAIN: The version of the file already on the instance is
-	// kept and used as part of the new deployment.
+	// * RETAIN: The version of the file already on the instance is kept
+	// and used as part of the new deployment.
 	FileExistsBehavior types.FileExistsBehavior
 
 	// If true, then if an ApplicationStop, BeforeBlockTraffic, or AfterBlockTraffic

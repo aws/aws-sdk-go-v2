@@ -21,14 +21,14 @@ import (
 // want to remove an IPSet from a Rule, use UpdateRule. To permanently delete an
 // IPSet from AWS WAF, perform the following steps:
 //
-//     * Update the IPSet to
-// remove IP address ranges, if any. For more information, see UpdateIPSet.
+// * Update the IPSet to remove
+// IP address ranges, if any. For more information, see UpdateIPSet.
 //
-//     *
-// Use GetChangeToken to get the change token that you provide in the ChangeToken
+// * Use
+// GetChangeToken to get the change token that you provide in the ChangeToken
 // parameter of a DeleteIPSet request.
 //
-//     * Submit a DeleteIPSet request.
+// * Submit a DeleteIPSet request.
 func (c *Client) DeleteIPSet(ctx context.Context, params *DeleteIPSetInput, optFns ...func(*Options)) (*DeleteIPSetOutput, error) {
 	if params == nil {
 		params = &DeleteIPSetInput{}

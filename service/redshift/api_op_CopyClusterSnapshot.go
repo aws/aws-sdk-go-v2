@@ -41,27 +41,27 @@ type CopyClusterSnapshotInput struct {
 
 	// The identifier for the source snapshot. Constraints:
 	//
-	//     * Must be the
-	// identifier for a valid automated snapshot whose state is available.
+	// * Must be the identifier
+	// for a valid automated snapshot whose state is available.
 	//
 	// This member is required.
 	SourceSnapshotIdentifier *string
 
 	// The identifier given to the new manual snapshot. Constraints:
 	//
-	//     * Cannot be
-	// null, empty, or blank.
+	// * Cannot be null,
+	// empty, or blank.
 	//
-	//     * Must contain from 1 to 255 alphanumeric characters
-	// or hyphens.
+	// * Must contain from 1 to 255 alphanumeric characters or
+	// hyphens.
 	//
-	//     * First character must be a letter.
+	// * First character must be a letter.
 	//
-	//     * Cannot end with a
-	// hyphen or contain two consecutive hyphens.
+	// * Cannot end with a hyphen or
+	// contain two consecutive hyphens.
 	//
-	//     * Must be unique for the AWS
-	// account that is making the request.
+	// * Must be unique for the AWS account that is
+	// making the request.
 	//
 	// This member is required.
 	TargetSnapshotIdentifier *string
@@ -76,7 +76,7 @@ type CopyClusterSnapshotInput struct {
 	// resource element that specifies anything other than * for the cluster name.
 	// Constraints:
 	//
-	//     * Must be the identifier for a valid cluster.
+	// * Must be the identifier for a valid cluster.
 	SourceSnapshotClusterIdentifier *string
 }
 

@@ -47,15 +47,15 @@ type UpdateIAMPolicyAssignmentInput struct {
 
 	// The status of the assignment. Possible values are as follows:
 	//
-	//     * ENABLED -
+	// * ENABLED -
 	// Anything specified in this assignment is used when creating the data source.
 	//
+	// *
+	// DISABLED - This assignment isn't used when creating the data source.
 	//
-	// * DISABLED - This assignment isn't used when creating the data source.
-	//
-	//     *
-	// DRAFT - This assignment is an unfinished draft and isn't used when creating the
-	// data source.
+	// * DRAFT -
+	// This assignment is an unfinished draft and isn't used when creating the data
+	// source.
 	AssignmentStatus types.AssignmentStatus
 
 	// The QuickSight users, groups, or both that you want to assign the policy to.
@@ -76,15 +76,15 @@ type UpdateIAMPolicyAssignmentOutput struct {
 
 	// The status of the assignment. Possible values are as follows:
 	//
-	//     * ENABLED -
+	// * ENABLED -
 	// Anything specified in this assignment is used when creating the data source.
 	//
+	// *
+	// DISABLED - This assignment isn't used when creating the data source.
 	//
-	// * DISABLED - This assignment isn't used when creating the data source.
-	//
-	//     *
-	// DRAFT - This assignment is an unfinished draft and isn't used when creating the
-	// data source.
+	// * DRAFT -
+	// This assignment is an unfinished draft and isn't used when creating the data
+	// source.
 	AssignmentStatus types.AssignmentStatus
 
 	// The QuickSight users, groups, or both that the IAM policy is assigned to.

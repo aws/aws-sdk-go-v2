@@ -27,28 +27,28 @@ import (
 // your data and select the optimum USER_PERSONALIZATION recipe for you. Status A
 // solution can be in one of the following states:
 //
-//     * CREATE PENDING > CREATE
+// * CREATE PENDING > CREATE
 // IN_PROGRESS > ACTIVE -or- CREATE FAILED
 //
-//     * DELETE PENDING > DELETE
+// * DELETE PENDING > DELETE
 // IN_PROGRESS
 //
 // To get the status of the solution, call DescribeSolution. Wait
 // until the status shows as ACTIVE before calling CreateSolutionVersion. Related
 // APIs
 //
-//     * ListSolutions
+// * ListSolutions
 //
-//     * CreateSolutionVersion
+// * CreateSolutionVersion
 //
-//     * DescribeSolution
+// * DescribeSolution
 //
+// *
+// DeleteSolution
 //
-// * DeleteSolution
+// * ListSolutionVersions
 //
-//     * ListSolutionVersions
-//
-//     * DescribeSolutionVersion
+// * DescribeSolutionVersion
 func (c *Client) CreateSolution(ctx context.Context, params *CreateSolutionInput, optFns ...func(*Options)) (*CreateSolutionOutput, error) {
 	if params == nil {
 		params = &CreateSolutionInput{}

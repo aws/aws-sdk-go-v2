@@ -47,25 +47,25 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html)
 // to do these tasks for you. To encrypt data outside of AWS KMS:
 //
-//     * Use the
+// * Use the
 // GenerateDataKey operation to get a data key.
 //
-//     * Use the plaintext data key
-// (in the Plaintext field of the response) to encrypt your data outside of AWS
-// KMS. Then erase the plaintext data key from memory.
+// * Use the plaintext data key (in
+// the Plaintext field of the response) to encrypt your data outside of AWS KMS.
+// Then erase the plaintext data key from memory.
 //
-//     * Store the encrypted
-// data key (in the CiphertextBlob field of the response) with the encrypted
-// data.
+// * Store the encrypted data key
+// (in the CiphertextBlob field of the response) with the encrypted data.
 //
-// To decrypt data outside of AWS KMS:
+// To
+// decrypt data outside of AWS KMS:
 //
-//     * Use the Decrypt operation to
-// decrypt the encrypted data key. The operation returns a plaintext copy of the
-// data key.
+// * Use the Decrypt operation to decrypt the
+// encrypted data key. The operation returns a plaintext copy of the data key.
 //
-//     * Use the plaintext data key to decrypt data outside of AWS KMS,
-// then erase the plaintext data key from memory.
+// *
+// Use the plaintext data key to decrypt data outside of AWS KMS, then erase the
+// plaintext data key from memory.
 func (c *Client) GenerateDataKey(ctx context.Context, params *GenerateDataKeyInput, optFns ...func(*Options)) (*GenerateDataKeyOutput, error) {
 	if params == nil {
 		params = &GenerateDataKeyInput{}
@@ -88,16 +88,16 @@ type GenerateDataKeyInput struct {
 	// alias name, prefix it with "alias/". To specify a CMK in a different AWS
 	// account, you must use the key ARN or alias ARN. For example:
 	//
-	//     * Key ID:
+	// * Key ID:
 	// 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
-	//     * Key ARN:
+	// * Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
+	// *
+	// Alias name: alias/ExampleAlias
 	//
-	// * Alias name: alias/ExampleAlias
-	//
-	//     * Alias ARN:
+	// * Alias ARN:
 	// arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
 	//
 	// To get the key ID and key

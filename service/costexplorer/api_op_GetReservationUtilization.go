@@ -43,32 +43,31 @@ type GetReservationUtilizationInput struct {
 	// Filters utilization data by dimensions. You can filter by the following
 	// dimensions:
 	//
-	//     * AZ
+	// * AZ
 	//
-	//     * CACHE_ENGINE
+	// * CACHE_ENGINE
 	//
-	//     * DEPLOYMENT_OPTION
+	// * DEPLOYMENT_OPTION
 	//
-	//     *
-	// INSTANCE_TYPE
+	// * INSTANCE_TYPE
 	//
-	//     * LINKED_ACCOUNT
+	// *
+	// LINKED_ACCOUNT
 	//
-	//     * OPERATING_SYSTEM
+	// * OPERATING_SYSTEM
 	//
-	//     * PLATFORM
-	//
+	// * PLATFORM
 	//
 	// * REGION
 	//
-	//     * SERVICE
+	// * SERVICE
 	//
-	//     * SCOPE
+	// * SCOPE
 	//
-	//     * TENANCY
+	// *
+	// TENANCY
 	//
-	// GetReservationUtilization
-	// uses the same Expression
+	// GetReservationUtilization uses the same Expression
 	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
 	// object as the other operations, but only AND is supported among each dimension,
 	// and nesting is supported up to only one level deep. If there are multiple values

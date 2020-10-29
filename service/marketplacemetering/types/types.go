@@ -46,17 +46,17 @@ type UsageRecordResult struct {
 	// The UsageRecordResult Status indicates the status of an individual UsageRecord
 	// processed by BatchMeterUsage.
 	//
-	//     * Success- The UsageRecord was accepted and
+	// * Success- The UsageRecord was accepted and
 	// honored by BatchMeterUsage.
 	//
-	//     * CustomerNotSubscribed- The CustomerIdentifier
+	// * CustomerNotSubscribed- The CustomerIdentifier
 	// specified is not subscribed to your product. The UsageRecord was not honored.
 	// Future UsageRecords for this customer will fail until the customer subscribes to
 	// your product.
 	//
-	//     * DuplicateRecord- Indicates that the UsageRecord was invalid
-	// and not honored. A previously metered UsageRecord had the same customer,
-	// dimension, and time, but a different quantity.
+	// * DuplicateRecord- Indicates that the UsageRecord was invalid and
+	// not honored. A previously metered UsageRecord had the same customer, dimension,
+	// and time, but a different quantity.
 	Status UsageRecordResultStatus
 
 	// The UsageRecord that was part of the BatchMeterUsage request.

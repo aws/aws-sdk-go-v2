@@ -20,19 +20,19 @@ import (
 // file directory to a GameLift Amazon S3 location, and (2) it creates a new build
 // resource. The CreateBuild operation can used in the following scenarios:
 //
-//     *
-// To create a new game build with build files that are in an S3 location under an
-// AWS account that you control. To use this option, you must first give Amazon
+// * To
+// create a new game build with build files that are in an S3 location under an AWS
+// account that you control. To use this option, you must first give Amazon
 // GameLift access to the S3 bucket. With permissions in place, call CreateBuild
 // and specify a build name, operating system, and the S3 storage location of your
 // game build.
 //
-//     * To directly upload your build files to a GameLift S3
-// location. To use this option, first call CreateBuild and specify a build name
-// and operating system. This operation creates a new build resource and also
-// returns an S3 location with temporary access credentials. Use the credentials to
-// manually upload your build files to the specified S3 location. For more
-// information, see Uploading Objects
+// * To directly upload your build files to a GameLift S3 location. To
+// use this option, first call CreateBuild and specify a build name and operating
+// system. This operation creates a new build resource and also returns an S3
+// location with temporary access credentials. Use the credentials to manually
+// upload your build files to the specified S3 location. For more information, see
+// Uploading Objects
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/UploadingObjects.html) in the
 // Amazon S3 Developer Guide. Build files can be uploaded to the GameLift S3
 // location once only; that can't be updated.
@@ -46,16 +46,16 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-cli-uploading.html#gamelift-build-cli-uploading-create-build)
 // Related operations
 //
-//     * CreateBuild
+// * CreateBuild
 //
-//     * ListBuilds
+// * ListBuilds
 //
-//     * DescribeBuild
+// * DescribeBuild
 //
+// *
+// UpdateBuild
 //
-// * UpdateBuild
-//
-//     * DeleteBuild
+// * DeleteBuild
 func (c *Client) CreateBuild(ctx context.Context, params *CreateBuildInput, optFns ...func(*Options)) (*CreateBuildOutput, error) {
 	if params == nil {
 		params = &CreateBuildInput{}

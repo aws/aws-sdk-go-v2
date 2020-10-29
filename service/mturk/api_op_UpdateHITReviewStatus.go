@@ -37,11 +37,11 @@ type UpdateHITReviewStatusInput struct {
 
 	// Specifies how to update the HIT status. Default is False.
 	//
-	//     * Setting this to
+	// * Setting this to
 	// false will only transition a HIT from Reviewable to Reviewing
 	//
-	//     * Setting
-	// this to true will only transition a HIT from Reviewing to Reviewable
+	// * Setting this to
+	// true will only transition a HIT from Reviewing to Reviewable
 	Revert *bool
 }
 

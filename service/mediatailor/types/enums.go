@@ -6,8 +6,8 @@ type Mode string
 
 // Enum values for Mode
 const (
-	ModeOff              Mode = "OFF"
-	ModeBehind_live_edge Mode = "BEHIND_LIVE_EDGE"
+	ModeOff            Mode = "OFF"
+	ModeBehindLiveEdge Mode = "BEHIND_LIVE_EDGE"
 )
 
 // Values returns all known values for Mode. Note that this can be expanded in the
@@ -24,8 +24,8 @@ type OriginManifestType string
 
 // Enum values for OriginManifestType
 const (
-	OriginManifestTypeSingle_period OriginManifestType = "SINGLE_PERIOD"
-	OriginManifestTypeMulti_period  OriginManifestType = "MULTI_PERIOD"
+	OriginManifestTypeSinglePeriod OriginManifestType = "SINGLE_PERIOD"
+	OriginManifestTypeMultiPeriod  OriginManifestType = "MULTI_PERIOD"
 )
 
 // Values returns all known values for OriginManifestType. Note that this can be

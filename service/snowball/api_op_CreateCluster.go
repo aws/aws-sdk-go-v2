@@ -61,35 +61,34 @@ type CreateClusterInput struct {
 	// device moves to its destination while in transit. Regional shipping speeds are
 	// as follows:
 	//
-	//     * In Australia, you have access to express shipping. Typically,
+	// * In Australia, you have access to express shipping. Typically,
 	// Snow devices shipped express are delivered in about a day.
 	//
-	//     * In the
-	// European Union (EU), you have access to express shipping. Typically, Snow
-	// devices shipped express are delivered in about a day. In addition, most
-	// countries in the EU have access to standard shipping, which typically takes less
-	// than a week, one way.
+	// * In the European
+	// Union (EU), you have access to express shipping. Typically, Snow devices shipped
+	// express are delivered in about a day. In addition, most countries in the EU have
+	// access to standard shipping, which typically takes less than a week, one way.
 	//
-	//     * In India, Snow device are delivered in one to seven
-	// days.
+	// *
+	// In India, Snow device are delivered in one to seven days.
 	//
-	//     * In the United States of America (US), you have access to one-day
-	// shipping and two-day shipping.
-	//
-	//     * In Australia, you have access to express
-	// shipping. Typically, devices shipped express are delivered in about a day.
-	//
-	//
-	// * In the European Union (EU), you have access to express shipping. Typically,
-	// Snow devices shipped express are delivered in about a day. In addition, most
-	// countries in the EU have access to standard shipping, which typically takes less
-	// than a week, one way.
-	//
-	//     * In India, Snow device are delivered in one to seven
-	// days.
-	//
-	//     * In the US, you have access to one-day shipping and two-day
+	// * In the United
+	// States of America (US), you have access to one-day shipping and two-day
 	// shipping.
+	//
+	// * In Australia, you have access to express shipping. Typically,
+	// devices shipped express are delivered in about a day.
+	//
+	// * In the European Union
+	// (EU), you have access to express shipping. Typically, Snow devices shipped
+	// express are delivered in about a day. In addition, most countries in the EU have
+	// access to standard shipping, which typically takes less than a week, one way.
+	//
+	// *
+	// In India, Snow device are delivered in one to seven days.
+	//
+	// * In the US, you have
+	// access to one-day shipping and two-day shipping.
 	//
 	// This member is required.
 	ShippingOption types.ShippingOption

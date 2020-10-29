@@ -44,15 +44,15 @@ type UpdateLoginProfileInput struct {
 	// (http://wikipedia.org/wiki/regex) used to validate this parameter is a string of
 	// characters consisting of the following:
 	//
-	//     * Any printable ASCII character
-	// ranging from the space character (\u0020) through the end of the ASCII character
+	// * Any printable ASCII character ranging
+	// from the space character (\u0020) through the end of the ASCII character
 	// range
 	//
-	//     * The printable characters in the Basic Latin and Latin-1 Supplement
+	// * The printable characters in the Basic Latin and Latin-1 Supplement
 	// character set (through \u00FF)
 	//
-	//     * The special characters tab (\u0009), line
-	// feed (\u000A), and carriage return (\u000D)
+	// * The special characters tab (\u0009), line feed
+	// (\u000A), and carriage return (\u000D)
 	//
 	// However, the format can be further
 	// restricted by the account administrator by setting a password policy on the AWS

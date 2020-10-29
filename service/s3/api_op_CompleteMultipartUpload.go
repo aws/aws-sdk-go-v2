@@ -39,61 +39,60 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html).
 // CompleteMultipartUpload has the following special errors:
 //
-//     * Error code:
+// * Error code:
 // EntityTooSmall
 //
-//         * Description: Your proposed upload is smaller than the
-// minimum allowed object size. Each part must be at least 5 MB in size, except the
-// last part.
+// * Description: Your proposed upload is smaller than the minimum
+// allowed object size. Each part must be at least 5 MB in size, except the last
+// part.
 //
-//         * 400 Bad Request
+// * 400 Bad Request
 //
-//     * Error code: InvalidPart
+// * Error code: InvalidPart
 //
-//         *
-// Description: One or more of the specified parts could not be found. The part
-// might not have been uploaded, or the specified entity tag might not have matched
-// the part's entity tag.
+// * Description: One or more
+// of the specified parts could not be found. The part might not have been
+// uploaded, or the specified entity tag might not have matched the part's entity
+// tag.
 //
-//         * 400 Bad Request
+// * 400 Bad Request
 //
-//     * Error code:
-// InvalidPartOrder
+// * Error code: InvalidPartOrder
 //
-//         * Description: The list of parts was not in ascending
-// order. The parts list must be specified in order by part number.
+// * Description: The list
+// of parts was not in ascending order. The parts list must be specified in order
+// by part number.
 //
-//         * 400
-// Bad Request
+// * 400 Bad Request
 //
-//     * Error code: NoSuchUpload
+// * Error code: NoSuchUpload
 //
-//         * Description: The
-// specified multipart upload does not exist. The upload ID might be invalid, or
-// the multipart upload might have been aborted or completed.
+// * Description:
+// The specified multipart upload does not exist. The upload ID might be invalid,
+// or the multipart upload might have been aborted or completed.
 //
-//         * 404 Not
+// * 404 Not
 // Found
 //
 // The following operations are related to CompleteMultipartUpload:
 //
-//     *
+// *
 // CreateMultipartUpload
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html)
 //
-//
-// * UploadPart
+// *
+// UploadPart
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)
 //
-//     *
+// *
 // AbortMultipartUpload
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html)
 //
-//
-// * ListParts
+// *
+// ListParts
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html)
 //
-//     *
+// *
 // ListMultipartUploads
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html)
 func (c *Client) CompleteMultipartUpload(ctx context.Context, params *CompleteMultipartUploadInput, optFns ...func(*Options)) (*CompleteMultipartUploadOutput, error) {

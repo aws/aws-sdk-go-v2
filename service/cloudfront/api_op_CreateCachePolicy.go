@@ -15,12 +15,12 @@ import (
 // one or more cache behaviors. When it’s attached to a cache behavior, the cache
 // policy determines the following:
 //
-//     * The values that CloudFront includes in
-// the cache key. These values can include HTTP headers, cookies, and URL query
+// * The values that CloudFront includes in the
+// cache key. These values can include HTTP headers, cookies, and URL query
 // strings. CloudFront uses the cache key to find an object in its cache that it
 // can return to the viewer.
 //
-//     * The default, minimum, and maximum time to live
+// * The default, minimum, and maximum time to live
 // (TTL) values that you want objects to stay in the CloudFront cache.
 //
 // The

@@ -47,13 +47,13 @@ type TestIdentityProviderInput struct {
 
 	// The type of file transfer protocol to be tested. The available protocols are:
 	//
+	// *
+	// Secure Shell (SSH) File Transfer Protocol (SFTP)
 	//
-	// * Secure Shell (SSH) File Transfer Protocol (SFTP)
-	//
-	//     * File Transfer Protocol
+	// * File Transfer Protocol
 	// Secure (FTPS)
 	//
-	//     * File Transfer Protocol (FTP)
+	// * File Transfer Protocol (FTP)
 	ServerProtocol types.Protocol
 
 	// The source IP address of the user account to be tested.

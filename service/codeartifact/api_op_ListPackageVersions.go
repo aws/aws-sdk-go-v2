@@ -39,13 +39,13 @@ type ListPackageVersionsInput struct {
 
 	// The format of the returned packages. The valid package types are:
 	//
-	//     * npm: A
-	// Node Package Manager (npm) package.
+	// * npm: A Node
+	// Package Manager (npm) package.
 	//
-	//     * pypi: A Python Package Index (PyPI)
+	// * pypi: A Python Package Index (PyPI)
 	// package.
 	//
-	//     * maven: A Maven package that contains compiled code in a
+	// * maven: A Maven package that contains compiled code in a
 	// distributable format, such as a JAR file.
 	//
 	// This member is required.
@@ -71,14 +71,14 @@ type ListPackageVersionsInput struct {
 	// The namespace of the package. The package component that specifies its namespace
 	// depends on its type. For example:
 	//
-	//     * The namespace of a Maven package is its
+	// * The namespace of a Maven package is its
 	// groupId.
 	//
-	//     * The namespace of an npm package is its scope.
+	// * The namespace of an npm package is its scope.
 	//
-	//     * A Python
-	// package does not contain a corresponding component, so Python packages do not
-	// have a namespace.
+	// * A Python package
+	// does not contain a corresponding component, so Python packages do not have a
+	// namespace.
 	Namespace *string
 
 	// The token for the next set of results. Use the value returned in the previous
@@ -91,16 +91,16 @@ type ListPackageVersionsInput struct {
 	// A string that specifies the status of the package versions to include in the
 	// returned list. It can be one of the following:
 	//
-	//     * Published
+	// * Published
 	//
-	//     *
-	// Unfinished
+	// * Unfinished
 	//
-	//     * Unlisted
+	// *
+	// Unlisted
 	//
-	//     * Archived
+	// * Archived
 	//
-	//     * Disposed
+	// * Disposed
 	Status types.PackageVersionStatus
 }
 
@@ -108,35 +108,35 @@ type ListPackageVersionsOutput struct {
 
 	// The default package version to display. This depends on the package format:
 	//
-	//
-	// * For Maven and PyPI packages, it's the most recently published package
+	// *
+	// For Maven and PyPI packages, it's the most recently published package
 	// version.
 	//
-	//     * For npm packages, it's the version referenced by the latest tag.
-	// If the latest tag is not set, it's the most recently published package version.
+	// * For npm packages, it's the version referenced by the latest tag. If
+	// the latest tag is not set, it's the most recently published package version.
 	DefaultDisplayVersion *string
 
 	// A format of the package. Valid package format values are:
 	//
-	//     * npm
+	// * npm
 	//
-	//     *
-	// pypi
+	// * pypi
 	//
-	//     * maven
+	// *
+	// maven
 	Format types.PackageFormat
 
 	// The namespace of the package. The package component that specifies its namespace
 	// depends on its type. For example:
 	//
-	//     * The namespace of a Maven package is its
+	// * The namespace of a Maven package is its
 	// groupId.
 	//
-	//     * The namespace of an npm package is its scope.
+	// * The namespace of an npm package is its scope.
 	//
-	//     * A Python
-	// package does not contain a corresponding component, so Python packages do not
-	// have a namespace.
+	// * A Python package
+	// does not contain a corresponding component, so Python packages do not have a
+	// namespace.
 	Namespace *string
 
 	// If there are additional results, this is the token for the next set of results.

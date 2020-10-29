@@ -36,15 +36,15 @@ type ListTypeVersionsInput struct {
 	// The deprecation status of the type versions that you want to get summary
 	// information about. Valid values include:
 	//
-	//     * LIVE: The type version is
-	// registered and can be used in CloudFormation operations, dependent on its
-	// provisioning behavior and visibility scope.
+	// * LIVE: The type version is registered
+	// and can be used in CloudFormation operations, dependent on its provisioning
+	// behavior and visibility scope.
 	//
-	//     * DEPRECATED: The type version
-	// has been deregistered and can no longer be used in CloudFormation
-	// operations.
+	// * DEPRECATED: The type version has been
+	// deregistered and can no longer be used in CloudFormation operations.
 	//
-	// The default is LIVE.
+	// The
+	// default is LIVE.
 	DeprecatedStatus types.DeprecatedStatus
 
 	// The maximum number of results to be returned with a single call. If the number

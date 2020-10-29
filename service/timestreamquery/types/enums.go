@@ -6,17 +6,17 @@ type ScalarType string
 
 // Enum values for ScalarType
 const (
-	ScalarTypeVarchar                ScalarType = "VARCHAR"
-	ScalarTypeBoolean                ScalarType = "BOOLEAN"
-	ScalarTypeBigint                 ScalarType = "BIGINT"
-	ScalarTypeDouble                 ScalarType = "DOUBLE"
-	ScalarTypeTimestamp              ScalarType = "TIMESTAMP"
-	ScalarTypeDate                   ScalarType = "DATE"
-	ScalarTypeTime                   ScalarType = "TIME"
-	ScalarTypeInterval_day_to_second ScalarType = "INTERVAL_DAY_TO_SECOND"
-	ScalarTypeInterval_year_to_month ScalarType = "INTERVAL_YEAR_TO_MONTH"
-	ScalarTypeUnknown                ScalarType = "UNKNOWN"
-	ScalarTypeInteger                ScalarType = "INTEGER"
+	ScalarTypeVarchar             ScalarType = "VARCHAR"
+	ScalarTypeBoolean             ScalarType = "BOOLEAN"
+	ScalarTypeBigint              ScalarType = "BIGINT"
+	ScalarTypeDouble              ScalarType = "DOUBLE"
+	ScalarTypeTimestamp           ScalarType = "TIMESTAMP"
+	ScalarTypeDate                ScalarType = "DATE"
+	ScalarTypeTime                ScalarType = "TIME"
+	ScalarTypeIntervalDayToSecond ScalarType = "INTERVAL_DAY_TO_SECOND"
+	ScalarTypeIntervalYearToMonth ScalarType = "INTERVAL_YEAR_TO_MONTH"
+	ScalarTypeUnknown             ScalarType = "UNKNOWN"
+	ScalarTypeInteger             ScalarType = "INTEGER"
 )
 
 // Values returns all known values for ScalarType. Note that this can be expanded

@@ -193,11 +193,11 @@ type DomainValidation struct {
 	// The validation status of the domain name. This can be one of the following
 	// values:
 	//
-	//     * PENDING_VALIDATION
+	// * PENDING_VALIDATION
 	//
-	//     * SUCCESS
+	// * SUCCESS
 	//
-	//     * FAILED
+	// * FAILED
 	ValidationStatus DomainStatus
 }
 
@@ -217,17 +217,17 @@ type DomainValidationOption struct {
 	// can specify example.com for this value. In that case, ACM sends domain
 	// validation emails to the following five addresses:
 	//
-	//     * admin@example.com
+	// * admin@example.com
 	//
+	// *
+	// administrator@example.com
 	//
-	// * administrator@example.com
+	// * hostmaster@example.com
 	//
-	//     * hostmaster@example.com
+	// * postmaster@example.com
 	//
-	//     *
-	// postmaster@example.com
-	//
-	//     * webmaster@example.com
+	// *
+	// webmaster@example.com
 	//
 	// This member is required.
 	ValidationDomain *string
@@ -242,30 +242,30 @@ type ExtendedKeyUsage struct {
 	Name ExtendedKeyUsageName
 
 	// An object identifier (OID) for the extension value. OIDs are strings of numbers
-	// separated by periods. The following OIDs are defined in RFC 3280 and RFC 5280.
-	//
+	// separated by periods. The following OIDs are defined in RFC 3280 and RFC
+	// 5280.
 	//
 	// * 1.3.6.1.5.5.7.3.1 (TLS_WEB_SERVER_AUTHENTICATION)
 	//
-	//     * 1.3.6.1.5.5.7.3.2
+	// * 1.3.6.1.5.5.7.3.2
 	// (TLS_WEB_CLIENT_AUTHENTICATION)
 	//
-	//     * 1.3.6.1.5.5.7.3.3 (CODE_SIGNING)
+	// * 1.3.6.1.5.5.7.3.3 (CODE_SIGNING)
 	//
-	//     *
+	// *
 	// 1.3.6.1.5.5.7.3.4 (EMAIL_PROTECTION)
 	//
-	//     * 1.3.6.1.5.5.7.3.8 (TIME_STAMPING)
+	// * 1.3.6.1.5.5.7.3.8 (TIME_STAMPING)
 	//
+	// *
+	// 1.3.6.1.5.5.7.3.9 (OCSP_SIGNING)
 	//
-	// * 1.3.6.1.5.5.7.3.9 (OCSP_SIGNING)
+	// * 1.3.6.1.5.5.7.3.5 (IPSEC_END_SYSTEM)
 	//
-	//     * 1.3.6.1.5.5.7.3.5 (IPSEC_END_SYSTEM)
+	// *
+	// 1.3.6.1.5.5.7.3.6 (IPSEC_TUNNEL)
 	//
-	//
-	// * 1.3.6.1.5.5.7.3.6 (IPSEC_TUNNEL)
-	//
-	//     * 1.3.6.1.5.5.7.3.7 (IPSEC_USER)
+	// * 1.3.6.1.5.5.7.3.7 (IPSEC_USER)
 	OID *string
 }
 

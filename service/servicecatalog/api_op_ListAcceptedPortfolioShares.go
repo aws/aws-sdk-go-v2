@@ -31,12 +31,11 @@ type ListAcceptedPortfolioSharesInput struct {
 
 	// The language code.
 	//
-	//     * en - English (default)
+	// * en - English (default)
 	//
-	//     * jp - Japanese
+	// * jp - Japanese
 	//
-	//     * zh
-	// - Chinese
+	// * zh - Chinese
 	AcceptLanguage *string
 
 	// The maximum number of items to return with this call.
@@ -49,13 +48,13 @@ type ListAcceptedPortfolioSharesInput struct {
 	// The type of shared portfolios to list. The default is to list imported
 	// portfolios.
 	//
-	//     * AWS_ORGANIZATIONS - List portfolios shared by the management
+	// * AWS_ORGANIZATIONS - List portfolios shared by the management
 	// account of your organization
 	//
-	//     * AWS_SERVICECATALOG - List default
-	// portfolios
+	// * AWS_SERVICECATALOG - List default portfolios
 	//
-	//     * IMPORTED - List imported portfolios
+	// *
+	// IMPORTED - List imported portfolios
 	PortfolioShareType types.PortfolioShareType
 }
 

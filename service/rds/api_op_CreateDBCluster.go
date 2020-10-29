@@ -46,13 +46,13 @@ type CreateDBClusterInput struct {
 	// The DB cluster identifier. This parameter is stored as a lowercase string.
 	// Constraints:
 	//
-	//     * Must contain from 1 to 63 letters, numbers, or hyphens.
+	// * Must contain from 1 to 63 letters, numbers, or hyphens.
 	//
+	// * First
+	// character must be a letter.
 	//
-	// * First character must be a letter.
-	//
-	//     * Can't end with a hyphen or contain
-	// two consecutive hyphens.
+	// * Can't end with a hyphen or contain two
+	// consecutive hyphens.
 	//
 	// Example: my-cluster1
 	//
@@ -77,14 +77,14 @@ type CreateDBClusterInput struct {
 	// to 0. Currently, Backtrack is only supported for Aurora MySQL DB clusters.
 	// Default: 0 Constraints:
 	//
-	//     * If specified, this value must be set to a number
-	// from 0 to 259,200 (72 hours).
+	// * If specified, this value must be set to a number from
+	// 0 to 259,200 (72 hours).
 	BacktrackWindow *int64
 
 	// The number of days for which automated backups are retained. Default: 1
 	// Constraints:
 	//
-	//     * Must be a value from 1 to 35
+	// * Must be a value from 1 to 35
 	BackupRetentionPeriod *int32
 
 	// A value that indicates that the DB cluster should be associated with the
@@ -99,8 +99,8 @@ type CreateDBClusterInput struct {
 	// you do not specify a value, then the default DB cluster parameter group for the
 	// specified DB engine and version is used. Constraints:
 	//
-	//     * If supplied, must
-	// match the name of an existing DB cluster parameter group.
+	// * If supplied, must match
+	// the name of an existing DB cluster parameter group.
 	DBClusterParameterGroupName *string
 
 	// A DB subnet group to associate with this DB cluster. Constraints: Must match the
@@ -174,19 +174,19 @@ type CreateDBClusterInput struct {
 	// some DB engine modes. For more information, see the following sections in the
 	// Amazon Aurora User Guide:
 	//
-	//     * Limitations of Aurora Serverless
+	// * Limitations of Aurora Serverless
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations)
 	//
-	//
-	// * Limitations of Parallel Query
+	// *
+	// Limitations of Parallel Query
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-mysql-parallel-query.html#aurora-mysql-parallel-query-limitations)
 	//
-	//
-	// * Limitations of Aurora Global Databases
+	// *
+	// Limitations of Aurora Global Databases
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html#aurora-global-database.limitations)
 	//
-	//
-	// * Limitations of Multi-Master Clusters
+	// *
+	// Limitations of Multi-Master Clusters
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-multi-master.html#aurora-multi-master-limitations)
 	EngineMode *string
 
@@ -215,20 +215,20 @@ type CreateDBClusterInput struct {
 	// of the ARN for the KMS encryption key. If an encryption key isn't specified in
 	// KmsKeyId:
 	//
-	//     * If ReplicationSourceIdentifier identifies an encrypted source,
-	// then Amazon RDS will use the encryption key used to encrypt the source.
-	// Otherwise, Amazon RDS will use your default encryption key.
+	// * If ReplicationSourceIdentifier identifies an encrypted source, then
+	// Amazon RDS will use the encryption key used to encrypt the source. Otherwise,
+	// Amazon RDS will use your default encryption key.
 	//
-	//     * If the
-	// StorageEncrypted parameter is enabled and ReplicationSourceIdentifier isn't
-	// specified, then Amazon RDS will use your default encryption key.
+	// * If the StorageEncrypted
+	// parameter is enabled and ReplicationSourceIdentifier isn't specified, then
+	// Amazon RDS will use your default encryption key.
 	//
-	// AWS KMS
-	// creates the default encryption key for your AWS account. Your AWS account has a
-	// different default encryption key for each AWS Region. If you create a read
-	// replica of an encrypted DB cluster in another AWS Region, you must set KmsKeyId
-	// to a KMS key ID that is valid in the destination AWS Region. This key is used to
-	// encrypt the read replica in that AWS Region.
+	// AWS KMS creates the default
+	// encryption key for your AWS account. Your AWS account has a different default
+	// encryption key for each AWS Region. If you create a read replica of an encrypted
+	// DB cluster in another AWS Region, you must set KmsKeyId to a KMS key ID that is
+	// valid in the destination AWS Region. This key is used to encrypt the read
+	// replica in that AWS Region.
 	KmsKeyId *string
 
 	// The password for the master database user. This password can contain any
@@ -238,13 +238,13 @@ type CreateDBClusterInput struct {
 
 	// The name of the master user for the DB cluster. Constraints:
 	//
-	//     * Must be 1 to
-	// 16 letters or numbers.
+	// * Must be 1 to 16
+	// letters or numbers.
 	//
-	//     * First character must be a letter.
+	// * First character must be a letter.
 	//
-	//     * Can't be
-	// a reserved word for the chosen database engine.
+	// * Can't be a reserved
+	// word for the chosen database engine.
 	MasterUsername *string
 
 	// A value that indicates that the DB cluster should be associated with the
@@ -265,16 +265,16 @@ type CreateDBClusterInput struct {
 	// AWS Region that contains the encrypted DB cluster to be copied. The pre-signed
 	// URL request must contain the following parameter values:
 	//
-	//     * KmsKeyId - The
-	// AWS KMS key identifier for the key to use to encrypt the copy of the DB cluster
-	// in the destination AWS Region. This should refer to the same KMS key for both
-	// the CreateDBCluster action that is called in the destination AWS Region, and the
+	// * KmsKeyId - The AWS
+	// KMS key identifier for the key to use to encrypt the copy of the DB cluster in
+	// the destination AWS Region. This should refer to the same KMS key for both the
+	// CreateDBCluster action that is called in the destination AWS Region, and the
 	// action contained in the pre-signed URL.
 	//
-	//     * DestinationRegion - The name of
-	// the AWS Region that Aurora read replica will be created in.
+	// * DestinationRegion - The name of the
+	// AWS Region that Aurora read replica will be created in.
 	//
-	//     *
+	// *
 	// ReplicationSourceIdentifier - The DB cluster identifier for the encrypted DB
 	// cluster to be copied. This identifier must be in the Amazon Resource Name (ARN)
 	// format for the source AWS Region. For example, if you are copying an encrypted
@@ -302,16 +302,15 @@ type CreateDBClusterInput struct {
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora)
 	// in the Amazon Aurora User Guide. Constraints:
 	//
-	//     * Must be in the format
+	// * Must be in the format
 	// hh24:mi-hh24:mi.
 	//
-	//     * Must be in Universal Coordinated Time (UTC).
+	// * Must be in Universal Coordinated Time (UTC).
 	//
-	//     * Must
-	// not conflict with the preferred maintenance window.
+	// * Must not
+	// conflict with the preferred maintenance window.
 	//
-	//     * Must be at least 30
-	// minutes.
+	// * Must be at least 30 minutes.
 	PreferredBackupWindow *string
 
 	// The weekly time range during which system maintenance can occur, in Universal

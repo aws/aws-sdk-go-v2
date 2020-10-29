@@ -41,21 +41,21 @@ type ModifyGlobalClusterInput struct {
 	// The DB cluster identifier for the global cluster being modified. This parameter
 	// isn't case-sensitive. Constraints:
 	//
-	//     * Must match the identifier of an
-	// existing global database cluster.
+	// * Must match the identifier of an existing
+	// global database cluster.
 	GlobalClusterIdentifier *string
 
 	// The new cluster identifier for the global database cluster when modifying a
 	// global database cluster. This value is stored as a lowercase string.
 	// Constraints:
 	//
-	//     * Must contain from 1 to 63 letters, numbers, or hyphens
+	// * Must contain from 1 to 63 letters, numbers, or hyphens
 	//
+	// * The
+	// first character must be a letter
 	//
-	// * The first character must be a letter
-	//
-	//     * Can't end with a hyphen or contain
-	// two consecutive hyphens
+	// * Can't end with a hyphen or contain two
+	// consecutive hyphens
 	//
 	// Example: my-cluster2
 	NewGlobalClusterIdentifier *string

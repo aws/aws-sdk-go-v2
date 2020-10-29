@@ -26,7 +26,7 @@ import (
 // Secrets Manager also creates an initial secret version and automatically
 // attaches the staging label AWSCURRENT to the new version.
 //
-//     * If you call an
+// * If you call an
 // operation to encrypt or decrypt the SecretString or SecretBinary for a secret in
 // the same account as the calling user and that secret doesn't specify a AWS KMS
 // encryption key, Secrets Manager uses the account's default AWS managed customer
@@ -37,13 +37,13 @@ import (
 // the account's AWS-managed CMK, it can result in a one-time significant delay in
 // returning the result.
 //
-//     * If the secret resides in a different AWS account
-// from the credentials calling an API that requires encryption or decryption of
-// the secret value then you must create and use a custom AWS KMS CMK because you
-// can't access the default CMK for the account using credentials from a different
-// AWS account. Store the ARN of the CMK in the secret when you create the secret
-// or when you update it by including it in the KMSKeyId. If you call an API that
-// must encrypt or decrypt SecretString or SecretBinary using credentials from a
+// * If the secret resides in a different AWS account from
+// the credentials calling an API that requires encryption or decryption of the
+// secret value then you must create and use a custom AWS KMS CMK because you can't
+// access the default CMK for the account using credentials from a different AWS
+// account. Store the ARN of the CMK in the secret when you create the secret or
+// when you update it by including it in the KMSKeyId. If you call an API that must
+// encrypt or decrypt SecretString or SecretBinary using credentials from a
 // different account then the AWS KMS key policy must grant cross-account access to
 // that other account's user or role for both the kms:GenerateDataKey and
 // kms:Decrypt operations.
@@ -51,40 +51,40 @@ import (
 // Minimum permissions To run this command, you must have
 // the following permissions:
 //
-//     * secretsmanager:CreateSecret
+// * secretsmanager:CreateSecret
 //
-//     *
-// kms:GenerateDataKey - needed only if you use a customer-managed AWS KMS key to
-// encrypt the secret. You do not need this permission to use the account default
-// AWS managed CMK for Secrets Manager.
+// * kms:GenerateDataKey
+// - needed only if you use a customer-managed AWS KMS key to encrypt the secret.
+// You do not need this permission to use the account default AWS managed CMK for
+// Secrets Manager.
 //
-//     * kms:Decrypt - needed only if you use
-// a customer-managed AWS KMS key to encrypt the secret. You do not need this
-// permission to use the account default AWS managed CMK for Secrets Manager.
+// * kms:Decrypt - needed only if you use a customer-managed AWS
+// KMS key to encrypt the secret. You do not need this permission to use the
+// account default AWS managed CMK for Secrets Manager.
 //
-//
-// * secretsmanager:TagResource - needed only if you include the Tags
+// *
+// secretsmanager:TagResource - needed only if you include the Tags
 // parameter.
 //
 // Related operations
 //
-//     * To delete a secret, use DeleteSecret.
+// * To delete a secret, use DeleteSecret.
 //
+// * To
+// modify an existing secret, use UpdateSecret.
 //
-// * To modify an existing secret, use UpdateSecret.
+// * To create a new version of a
+// secret, use PutSecretValue.
 //
-//     * To create a new version
-// of a secret, use PutSecretValue.
+// * To retrieve the encrypted secure string and
+// secure binary values, use GetSecretValue.
 //
-//     * To retrieve the encrypted secure string
-// and secure binary values, use GetSecretValue.
+// * To retrieve all other details for a
+// secret, use DescribeSecret. This does not include the encrypted secure string
+// and secure binary values.
 //
-//     * To retrieve all other
-// details for a secret, use DescribeSecret. This does not include the encrypted
-// secure string and secure binary values.
-//
-//     * To retrieve the list of secret
-// versions associated with the current secret, use DescribeSecret and examine the
+// * To retrieve the list of secret versions associated
+// with the current secret, use DescribeSecret and examine the
 // SecretVersionsToStages response value.
 func (c *Client) CreateSecret(ctx context.Context, params *CreateSecretInput, optFns ...func(*Options)) (*CreateSecretOutput, error) {
 	if params == nil {
@@ -127,19 +127,19 @@ type CreateSecretInput struct {
 	// (https://wikipedia.org/wiki/Universally_unique_identifier) value to ensure
 	// uniqueness of your versions within the specified secret.
 	//
-	//     * If the
+	// * If the
 	// ClientRequestToken value isn't already associated with a version of the secret
 	// then a new version of the secret is created.
 	//
-	//     * If a version with this value
+	// * If a version with this value
 	// already exists and the version SecretString and SecretBinary values are the same
 	// as those in the request, then the request is ignored.
 	//
-	//     * If a version with
-	// this value already exists and that version's SecretString and SecretBinary
-	// values are different from those in the request then the request fails because
-	// you cannot modify an existing version. Instead, use PutSecretValue to create a
-	// new version.
+	// * If a version with this
+	// value already exists and that version's SecretString and SecretBinary values are
+	// different from those in the request then the request fails because you cannot
+	// modify an existing version. Instead, use PutSecretValue to create a new
+	// version.
 	//
 	// This value becomes the VersionId of the new version.
 	ClientRequestToken *string
@@ -193,19 +193,19 @@ type CreateSecretInput struct {
 	// appends tags to the existing list of tags. To remove tags, you must use
 	// UntagResource.
 	//
-	//     * Secrets Manager tag key names are case sensitive. A tag
-	// with the key "ABC" is a different tag from one with key "abc".
+	// * Secrets Manager tag key names are case sensitive. A tag with
+	// the key "ABC" is a different tag from one with key "abc".
 	//
-	//     * If you
-	// check tags in IAM policy Condition elements as part of your security strategy,
-	// then adding or removing a tag can change permissions. If the successful
-	// completion of this operation would result in you losing your permissions for
-	// this secret, then this operation is blocked and returns an Access Denied
-	// error.
+	// * If you check tags
+	// in IAM policy Condition elements as part of your security strategy, then adding
+	// or removing a tag can change permissions. If the successful completion of this
+	// operation would result in you losing your permissions for this secret, then this
+	// operation is blocked and returns an Access Denied error.
 	//
-	// This parameter requires a JSON text string argument. For information on
-	// how to format a JSON parameter for the various command line tool environments,
-	// see Using JSON for Parameters
+	// This parameter
+	// requires a JSON text string argument. For information on how to format a JSON
+	// parameter for the various command line tool environments, see Using JSON for
+	// Parameters
 	// (https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json)
 	// in the AWS CLI User Guide. For example:
 	// [{"Key":"CostCenter","Value":"12345"},{"Key":"environment","Value":"production"}]
@@ -213,27 +213,26 @@ type CreateSecretInput struct {
 	// you should use single quotes to avoid confusion with the double quotes required
 	// in the JSON text. The following basic restrictions apply to tags:
 	//
-	//     * Maximum
+	// * Maximum
 	// number of tags per secret—50
 	//
-	//     * Maximum key length—127 Unicode characters in
+	// * Maximum key length—127 Unicode characters in
 	// UTF-8
 	//
-	//     * Maximum value length—255 Unicode characters in UTF-8
+	// * Maximum value length—255 Unicode characters in UTF-8
 	//
-	//     * Tag
-	// keys and values are case sensitive.
+	// * Tag keys and
+	// values are case sensitive.
 	//
-	//     * Do not use the aws: prefix in your
-	// tag names or values because AWS reserves it for AWS use. You can't edit or
-	// delete tag names or values with this prefix. Tags with this prefix do not count
-	// against your tags per secret limit.
+	// * Do not use the aws: prefix in your tag names or
+	// values because AWS reserves it for AWS use. You can't edit or delete tag names
+	// or values with this prefix. Tags with this prefix do not count against your tags
+	// per secret limit.
 	//
-	//     * If you use your tagging schema across
-	// multiple services and resources, remember other services might have restrictions
-	// on allowed characters. Generally allowed characters: letters, spaces, and
-	// numbers representable in UTF-8, plus the following special characters: + - = . _
-	// : / @.
+	// * If you use your tagging schema across multiple services and
+	// resources, remember other services might have restrictions on allowed
+	// characters. Generally allowed characters: letters, spaces, and numbers
+	// representable in UTF-8, plus the following special characters: + - = . _ : / @.
 	Tags []*types.Tag
 }
 

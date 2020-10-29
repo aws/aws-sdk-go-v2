@@ -14,18 +14,18 @@ import (
 // Updates the attributes of the specified link aggregation group (LAG). You can
 // update the following attributes:
 //
-//     * The name of the LAG.
+// * The name of the LAG.
 //
-//     * The value
-// for the minimum number of connections that must be operational for the LAG
-// itself to be operational.
+// * The value for the
+// minimum number of connections that must be operational for the LAG itself to be
+// operational.
 //
-// When you create a LAG, the default value for the
-// minimum number of operational connections is zero (0). If you update this value
-// and the number of operational connections falls below the specified value, the
-// LAG automatically goes down to avoid over-utilization of the remaining
-// connections. Adjust this value with care, as it could force the LAG down if it
-// is set higher than the current number of operational connections.
+// When you create a LAG, the default value for the minimum number of
+// operational connections is zero (0). If you update this value and the number of
+// operational connections falls below the specified value, the LAG automatically
+// goes down to avoid over-utilization of the remaining connections. Adjust this
+// value with care, as it could force the LAG down if it is set higher than the
+// current number of operational connections.
 func (c *Client) UpdateLag(ctx context.Context, params *UpdateLagInput, optFns ...func(*Options)) (*UpdateLagOutput, error) {
 	if params == nil {
 		params = &UpdateLagInput{}
@@ -90,25 +90,25 @@ type UpdateLagOutput struct {
 
 	// The state of the LAG. The following are the possible values:
 	//
-	//     * requested:
-	// The initial state of a LAG. The LAG stays in the requested state until the
-	// Letter of Authorization (LOA) is available.
+	// * requested: The
+	// initial state of a LAG. The LAG stays in the requested state until the Letter of
+	// Authorization (LOA) is available.
 	//
-	//     * pending: The LAG has been
-	// approved and is being initialized.
+	// * pending: The LAG has been approved and is
+	// being initialized.
 	//
-	//     * available: The network link is
-	// established and the LAG is ready for use.
+	// * available: The network link is established and the LAG is
+	// ready for use.
 	//
-	//     * down: The network link is
-	// down.
+	// * down: The network link is down.
 	//
-	//     * deleting: The LAG is being deleted.
-	//
-	//     * deleted: The LAG is
+	// * deleting: The LAG is being
 	// deleted.
 	//
-	//     * unknown: The state of the LAG is not available.
+	// * deleted: The LAG is deleted.
+	//
+	// * unknown: The state of the LAG is not
+	// available.
 	LagState types.LagState
 
 	// The location of the LAG.

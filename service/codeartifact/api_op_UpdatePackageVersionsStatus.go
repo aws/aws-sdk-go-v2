@@ -38,11 +38,11 @@ type UpdatePackageVersionsStatusInput struct {
 	// A format that specifies the type of the package with the statuses to update. The
 	// valid values are:
 	//
-	//     * npm
+	// * npm
 	//
-	//     * pypi
+	// * pypi
 	//
-	//     * maven
+	// * maven
 	//
 	// This member is required.
 	Format types.PackageFormat
@@ -81,14 +81,14 @@ type UpdatePackageVersionsStatusInput struct {
 	// The namespace of the package. The package component that specifies its namespace
 	// depends on its type. For example:
 	//
-	//     * The namespace of a Maven package is its
+	// * The namespace of a Maven package is its
 	// groupId.
 	//
-	//     * The namespace of an npm package is its scope.
+	// * The namespace of an npm package is its scope.
 	//
-	//     * A Python
-	// package does not contain a corresponding component, so Python packages do not
-	// have a namespace.
+	// * A Python package
+	// does not contain a corresponding component, so Python packages do not have a
+	// namespace.
 	Namespace *string
 
 	// A map of package versions and package version revisions. The map key is the

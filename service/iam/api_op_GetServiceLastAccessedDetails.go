@@ -34,22 +34,22 @@ import (
 // the date and time of the last attempt. It also returns the ARN of the following
 // entity, depending on the resource ARN that you used to generate the report:
 //
+// *
+// User – Returns the user ARN that you used to generate the report
 //
-// * User – Returns the user ARN that you used to generate the report
-//
-//     * Group
-// – Returns the ARN of the group member (user) that last attempted to access the
+// * Group –
+// Returns the ARN of the group member (user) that last attempted to access the
 // service
 //
-//     * Role – Returns the role ARN that you used to generate the
-// report
+// * Role – Returns the role ARN that you used to generate the report
 //
-//     * Policy – Returns the ARN of the user or role that last used the
-// policy to attempt to access the service
+// *
+// Policy – Returns the ARN of the user or role that last used the policy to
+// attempt to access the service
 //
-// By default, the list is sorted by
-// service namespace. If you specified ACTION_LEVEL granularity when you generated
-// the report, this operation returns service and action last accessed data. This
+// By default, the list is sorted by service
+// namespace. If you specified ACTION_LEVEL granularity when you generated the
+// report, this operation returns service and action last accessed data. This
 // includes the most recent access attempt for each tracked action within a
 // service. Otherwise, this operation returns only service data. For more
 // information about service and action last accessed data, see Reducing

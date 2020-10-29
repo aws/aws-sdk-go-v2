@@ -17,14 +17,14 @@ import (
 // see  Share or Unshare a Custom WorkSpaces Image
 // (https://docs.aws.amazon.com/workspaces/latest/adminguide/share-custom-image.html).
 //
-//
-// * To delete an image that has been shared, you must unshare the image before you
+// *
+// To delete an image that has been shared, you must unshare the image before you
 // delete it.
 //
-//     * Sharing Bring Your Own License (BYOL) images across AWS
-// accounts isn't supported at this time in the AWS GovCloud (US-West) Region. To
-// share BYOL images across accounts in the AWS GovCloud (US-West) Region, contact
-// AWS Support.
+// * Sharing Bring Your Own License (BYOL) images across AWS accounts
+// isn't supported at this time in the AWS GovCloud (US-West) Region. To share BYOL
+// images across accounts in the AWS GovCloud (US-West) Region, contact AWS
+// Support.
 func (c *Client) UpdateWorkspaceImagePermission(ctx context.Context, params *UpdateWorkspaceImagePermissionInput, optFns ...func(*Options)) (*UpdateWorkspaceImagePermissionOutput, error) {
 	if params == nil {
 		params = &UpdateWorkspaceImagePermissionInput{}

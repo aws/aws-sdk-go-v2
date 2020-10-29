@@ -16,13 +16,13 @@ import (
 // Store parameters, and Amazon S3 objects. A configuration profile includes the
 // following information.
 //
-//     * The Uri location of the configuration data.
+// * The Uri location of the configuration data.
 //
-//     *
-// The AWS Identity and Access Management (IAM) role that provides access to the
+// * The AWS
+// Identity and Access Management (IAM) role that provides access to the
 // configuration data.
 //
-//     * A validator for the configuration data. Available
+// * A validator for the configuration data. Available
 // validators include either a JSON Schema or an AWS Lambda function.
 //
 // For more

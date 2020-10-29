@@ -16,28 +16,26 @@ import (
 // suspend scaling policies, call StopFleetActions. This operation suspends all
 // policies for the fleet.
 //
-//     * DescribeFleetCapacity
+// * DescribeFleetCapacity
 //
-//     *
-// UpdateFleetCapacity
+// * UpdateFleetCapacity
 //
-//     * DescribeEC2InstanceLimits
+// *
+// DescribeEC2InstanceLimits
 //
-//     * Manage scaling
-// policies:
+// * Manage scaling policies:
 //
-//         * PutScalingPolicy (auto-scaling)
-//
-//         *
-// DescribeScalingPolicies (auto-scaling)
-//
-//         * DeleteScalingPolicy
+// * PutScalingPolicy
 // (auto-scaling)
 //
-//     * Manage fleet actions:
+// * DescribeScalingPolicies (auto-scaling)
 //
-//         * StartFleetActions
+// * DeleteScalingPolicy
+// (auto-scaling)
 //
+// * Manage fleet actions:
+//
+// * StartFleetActions
 //
 // * StopFleetActions
 func (c *Client) DeleteScalingPolicy(ctx context.Context, params *DeleteScalingPolicyInput, optFns ...func(*Options)) (*DeleteScalingPolicyOutput, error) {

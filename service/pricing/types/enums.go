@@ -6,7 +6,7 @@ type FilterType string
 
 // Enum values for FilterType
 const (
-	FilterTypeTerm_match FilterType = "TERM_MATCH"
+	FilterTypeTermMatch FilterType = "TERM_MATCH"
 )
 
 // Values returns all known values for FilterType. Note that this can be expanded

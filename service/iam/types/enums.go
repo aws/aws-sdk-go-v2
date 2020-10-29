@@ -6,8 +6,8 @@ type AccessAdvisorUsageGranularityType string
 
 // Enum values for AccessAdvisorUsageGranularityType
 const (
-	AccessAdvisorUsageGranularityTypeService_level AccessAdvisorUsageGranularityType = "SERVICE_LEVEL"
-	AccessAdvisorUsageGranularityTypeAction_level  AccessAdvisorUsageGranularityType = "ACTION_LEVEL"
+	AccessAdvisorUsageGranularityTypeServiceLevel AccessAdvisorUsageGranularityType = "SERVICE_LEVEL"
+	AccessAdvisorUsageGranularityTypeActionLevel  AccessAdvisorUsageGranularityType = "ACTION_LEVEL"
 )
 
 // Values returns all known values for AccessAdvisorUsageGranularityType. Note that
@@ -45,18 +45,18 @@ type ContextKeyTypeEnum string
 
 // Enum values for ContextKeyTypeEnum
 const (
-	ContextKeyTypeEnumString       ContextKeyTypeEnum = "string"
-	ContextKeyTypeEnumString_list  ContextKeyTypeEnum = "stringList"
-	ContextKeyTypeEnumNumeric      ContextKeyTypeEnum = "numeric"
-	ContextKeyTypeEnumNumeric_list ContextKeyTypeEnum = "numericList"
-	ContextKeyTypeEnumBoolean      ContextKeyTypeEnum = "boolean"
-	ContextKeyTypeEnumBoolean_list ContextKeyTypeEnum = "booleanList"
-	ContextKeyTypeEnumIp           ContextKeyTypeEnum = "ip"
-	ContextKeyTypeEnumIp_list      ContextKeyTypeEnum = "ipList"
-	ContextKeyTypeEnumBinary       ContextKeyTypeEnum = "binary"
-	ContextKeyTypeEnumBinary_list  ContextKeyTypeEnum = "binaryList"
-	ContextKeyTypeEnumDate         ContextKeyTypeEnum = "date"
-	ContextKeyTypeEnumDate_list    ContextKeyTypeEnum = "dateList"
+	ContextKeyTypeEnumString      ContextKeyTypeEnum = "string"
+	ContextKeyTypeEnumStringList  ContextKeyTypeEnum = "stringList"
+	ContextKeyTypeEnumNumeric     ContextKeyTypeEnum = "numeric"
+	ContextKeyTypeEnumNumericList ContextKeyTypeEnum = "numericList"
+	ContextKeyTypeEnumBoolean     ContextKeyTypeEnum = "boolean"
+	ContextKeyTypeEnumBooleanList ContextKeyTypeEnum = "booleanList"
+	ContextKeyTypeEnumIp          ContextKeyTypeEnum = "ip"
+	ContextKeyTypeEnumIpList      ContextKeyTypeEnum = "ipList"
+	ContextKeyTypeEnumBinary      ContextKeyTypeEnum = "binary"
+	ContextKeyTypeEnumBinaryList  ContextKeyTypeEnum = "binaryList"
+	ContextKeyTypeEnumDate        ContextKeyTypeEnum = "date"
+	ContextKeyTypeEnumDateList    ContextKeyTypeEnum = "dateList"
 )
 
 // Values returns all known values for ContextKeyTypeEnum. Note that this can be
@@ -83,10 +83,10 @@ type DeletionTaskStatusType string
 
 // Enum values for DeletionTaskStatusType
 const (
-	DeletionTaskStatusTypeSucceeded   DeletionTaskStatusType = "SUCCEEDED"
-	DeletionTaskStatusTypeIn_progress DeletionTaskStatusType = "IN_PROGRESS"
-	DeletionTaskStatusTypeFailed      DeletionTaskStatusType = "FAILED"
-	DeletionTaskStatusTypeNot_started DeletionTaskStatusType = "NOT_STARTED"
+	DeletionTaskStatusTypeSucceeded  DeletionTaskStatusType = "SUCCEEDED"
+	DeletionTaskStatusTypeInProgress DeletionTaskStatusType = "IN_PROGRESS"
+	DeletionTaskStatusTypeFailed     DeletionTaskStatusType = "FAILED"
+	DeletionTaskStatusTypeNotStarted DeletionTaskStatusType = "NOT_STARTED"
 )
 
 // Values returns all known values for DeletionTaskStatusType. Note that this can
@@ -165,9 +165,9 @@ type JobStatusType string
 
 // Enum values for JobStatusType
 const (
-	JobStatusTypeIn_progress JobStatusType = "IN_PROGRESS"
-	JobStatusTypeCompleted   JobStatusType = "COMPLETED"
-	JobStatusTypeFailed      JobStatusType = "FAILED"
+	JobStatusTypeInProgress JobStatusType = "IN_PROGRESS"
+	JobStatusTypeCompleted  JobStatusType = "COMPLETED"
+	JobStatusTypeFailed     JobStatusType = "FAILED"
 )
 
 // Values returns all known values for JobStatusType. Note that this can be
@@ -202,9 +202,9 @@ type PolicyEvaluationDecisionType string
 
 // Enum values for PolicyEvaluationDecisionType
 const (
-	PolicyEvaluationDecisionTypeAllowed       PolicyEvaluationDecisionType = "allowed"
-	PolicyEvaluationDecisionTypeExplicit_deny PolicyEvaluationDecisionType = "explicitDeny"
-	PolicyEvaluationDecisionTypeImplicit_deny PolicyEvaluationDecisionType = "implicitDeny"
+	PolicyEvaluationDecisionTypeAllowed      PolicyEvaluationDecisionType = "allowed"
+	PolicyEvaluationDecisionTypeExplicitDeny PolicyEvaluationDecisionType = "explicitDeny"
+	PolicyEvaluationDecisionTypeImplicitDeny PolicyEvaluationDecisionType = "implicitDeny"
 )
 
 // Values returns all known values for PolicyEvaluationDecisionType. Note that this
@@ -262,13 +262,13 @@ type PolicySourceType string
 
 // Enum values for PolicySourceType
 const (
-	PolicySourceTypeUser         PolicySourceType = "user"
-	PolicySourceTypeGroup        PolicySourceType = "group"
-	PolicySourceTypeRole         PolicySourceType = "role"
-	PolicySourceTypeAws_managed  PolicySourceType = "aws-managed"
-	PolicySourceTypeUser_managed PolicySourceType = "user-managed"
-	PolicySourceTypeResource     PolicySourceType = "resource"
-	PolicySourceTypeNone         PolicySourceType = "none"
+	PolicySourceTypeUser        PolicySourceType = "user"
+	PolicySourceTypeGroup       PolicySourceType = "group"
+	PolicySourceTypeRole        PolicySourceType = "role"
+	PolicySourceTypeAwsManaged  PolicySourceType = "aws-managed"
+	PolicySourceTypeUserManaged PolicySourceType = "user-managed"
+	PolicySourceTypeResource    PolicySourceType = "resource"
+	PolicySourceTypeNone        PolicySourceType = "none"
 )
 
 // Values returns all known values for PolicySourceType. Note that this can be
@@ -362,10 +362,10 @@ type SortKeyType string
 
 // Enum values for SortKeyType
 const (
-	SortKeyTypeService_namespace_ascending        SortKeyType = "SERVICE_NAMESPACE_ASCENDING"
-	SortKeyTypeService_namespace_descending       SortKeyType = "SERVICE_NAMESPACE_DESCENDING"
-	SortKeyTypeLast_authenticated_time_ascending  SortKeyType = "LAST_AUTHENTICATED_TIME_ASCENDING"
-	SortKeyTypeLast_authenticated_time_descending SortKeyType = "LAST_AUTHENTICATED_TIME_DESCENDING"
+	SortKeyTypeServiceNamespaceAscending       SortKeyType = "SERVICE_NAMESPACE_ASCENDING"
+	SortKeyTypeServiceNamespaceDescending      SortKeyType = "SERVICE_NAMESPACE_DESCENDING"
+	SortKeyTypeLastAuthenticatedTimeAscending  SortKeyType = "LAST_AUTHENTICATED_TIME_ASCENDING"
+	SortKeyTypeLastAuthenticatedTimeDescending SortKeyType = "LAST_AUTHENTICATED_TIME_DESCENDING"
 )
 
 // Values returns all known values for SortKeyType. Note that this can be expanded

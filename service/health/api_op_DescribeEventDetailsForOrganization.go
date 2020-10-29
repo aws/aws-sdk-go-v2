@@ -28,16 +28,16 @@ import (
 // organizationEventDetailFilters object in the request. Depending on the AWS
 // Health event type, note the following differences:
 //
-//     * If the event is
-// public, the awsAccountId parameter must be empty. If you specify an account ID
-// for a public event, then an error message is returned. That's because the event
-// might apply to all AWS accounts and isn't specific to an account in your
+// * If the event is public,
+// the awsAccountId parameter must be empty. If you specify an account ID for a
+// public event, then an error message is returned. That's because the event might
+// apply to all AWS accounts and isn't specific to an account in your
 // organization.
 //
-//     * If the event is specific to an account, then you must
-// specify the awsAccountId parameter in the request. If you don't specify an
-// account ID, an error message returns because the event is specific to an AWS
-// account in your organization.
+// * If the event is specific to an account, then you must specify
+// the awsAccountId parameter in the request. If you don't specify an account ID,
+// an error message returns because the event is specific to an AWS account in your
+// organization.
 //
 // For more information, see Event
 // (https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html).

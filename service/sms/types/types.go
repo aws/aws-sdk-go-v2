@@ -165,18 +165,18 @@ type ReplicationJob struct {
 	// The ID of the KMS key for replication jobs that produce encrypted AMIs. This
 	// value can be any of the following:
 	//
-	//     * KMS key ID
+	// * KMS key ID
 	//
-	//     * KMS key alias
+	// * KMS key alias
 	//
-	//     *
-	// ARN referring to the KMS key ID
+	// * ARN
+	// referring to the KMS key ID
 	//
-	//     * ARN referring to the KMS key alias
+	// * ARN referring to the KMS key alias
 	//
-	// If
-	// encrypted is enabled but a KMS key ID is not specified, the customer's default
-	// KMS key for Amazon EBS is used.
+	// If encrypted
+	// is enabled but a KMS key ID is not specified, the customer's default KMS key for
+	// Amazon EBS is used.
 	KmsKeyId *string
 
 	// The ID of the latest Amazon Machine Image (AMI).
@@ -241,18 +241,18 @@ type ReplicationRun struct {
 	// The ID of the KMS key for replication jobs that produce encrypted AMIs. This
 	// value can be any of the following:
 	//
-	//     * KMS key ID
+	// * KMS key ID
 	//
-	//     * KMS key alias
+	// * KMS key alias
 	//
-	//     *
-	// ARN referring to the KMS key ID
+	// * ARN
+	// referring to the KMS key ID
 	//
-	//     * ARN referring to the KMS key alias
+	// * ARN referring to the KMS key alias
 	//
-	// If
-	// encrypted is true but a KMS key ID is not specified, the customer's default KMS
-	// key for Amazon EBS is used.
+	// If encrypted
+	// is true but a KMS key ID is not specified, the customer's default KMS key for
+	// Amazon EBS is used.
 	KmsKeyId *string
 
 	// The ID of the replication run.
@@ -424,18 +424,18 @@ type ServerReplicationParameters struct {
 	// The ID of the KMS key for replication jobs that produce encrypted AMIs. This
 	// value can be any of the following:
 	//
-	//     * KMS key ID
+	// * KMS key ID
 	//
-	//     * KMS key alias
+	// * KMS key alias
 	//
-	//     *
-	// ARN referring to the KMS key ID
+	// * ARN
+	// referring to the KMS key ID
 	//
-	//     * ARN referring to the KMS key alias
+	// * ARN referring to the KMS key alias
 	//
-	// If
-	// encrypted is enabled but a KMS key ID is not specified, the customer's default
-	// KMS key for Amazon EBS is used.
+	// If encrypted
+	// is enabled but a KMS key ID is not specified, the customer's default KMS key for
+	// Amazon EBS is used.
 	KmsKeyId *string
 
 	// The license type for creating a replication job for the server.

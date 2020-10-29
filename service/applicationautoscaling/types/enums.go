@@ -210,18 +210,18 @@ type ServiceNamespace string
 
 // Enum values for ServiceNamespace
 const (
-	ServiceNamespaceEcs             ServiceNamespace = "ecs"
-	ServiceNamespaceEmr             ServiceNamespace = "elasticmapreduce"
-	ServiceNamespaceEc2             ServiceNamespace = "ec2"
-	ServiceNamespaceAppstream       ServiceNamespace = "appstream"
-	ServiceNamespaceDynamodb        ServiceNamespace = "dynamodb"
-	ServiceNamespaceRds             ServiceNamespace = "rds"
-	ServiceNamespaceSagemaker       ServiceNamespace = "sagemaker"
-	ServiceNamespaceCustom_resource ServiceNamespace = "custom-resource"
-	ServiceNamespaceComprehend      ServiceNamespace = "comprehend"
-	ServiceNamespaceLambda          ServiceNamespace = "lambda"
-	ServiceNamespaceCassandra       ServiceNamespace = "cassandra"
-	ServiceNamespaceKafka           ServiceNamespace = "kafka"
+	ServiceNamespaceEcs            ServiceNamespace = "ecs"
+	ServiceNamespaceEmr            ServiceNamespace = "elasticmapreduce"
+	ServiceNamespaceEc2            ServiceNamespace = "ec2"
+	ServiceNamespaceAppstream      ServiceNamespace = "appstream"
+	ServiceNamespaceDynamodb       ServiceNamespace = "dynamodb"
+	ServiceNamespaceRds            ServiceNamespace = "rds"
+	ServiceNamespaceSagemaker      ServiceNamespace = "sagemaker"
+	ServiceNamespaceCustomResource ServiceNamespace = "custom-resource"
+	ServiceNamespaceComprehend     ServiceNamespace = "comprehend"
+	ServiceNamespaceLambda         ServiceNamespace = "lambda"
+	ServiceNamespaceCassandra      ServiceNamespace = "cassandra"
+	ServiceNamespaceKafka          ServiceNamespace = "kafka"
 )
 
 // Values returns all known values for ServiceNamespace. Note that this can be

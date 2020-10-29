@@ -103,12 +103,12 @@ type CreateMaintenanceWindowInput struct {
 	// tasks it will run, the types of targets, and the environment it will run in. In
 	// this case, you could specify the following key name/value pairs:
 	//
-	//     *
+	// *
 	// Key=TaskType,Value=AgentUpdate
 	//
-	//     * Key=OS,Value=Windows
+	// * Key=OS,Value=Windows
 	//
-	//     *
+	// *
 	// Key=Environment,Value=Production
 	//
 	// To add tags to an existing maintenance window,

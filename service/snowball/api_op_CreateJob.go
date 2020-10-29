@@ -84,20 +84,20 @@ type CreateJobInput struct {
 	// the Snow device, rather it represents how quickly the Snow device moves to its
 	// destination while in transit. Regional shipping speeds are as follows:
 	//
-	//     * In
+	// * In
 	// Australia, you have access to express shipping. Typically, Snow devices shipped
 	// express are delivered in about a day.
 	//
-	//     * In the European Union (EU), you
-	// have access to express shipping. Typically, Snow devices shipped express are
+	// * In the European Union (EU), you have
+	// access to express shipping. Typically, Snow devices shipped express are
 	// delivered in about a day. In addition, most countries in the EU have access to
 	// standard shipping, which typically takes less than a week, one way.
 	//
-	//     * In
-	// India, Snow devices are delivered in one to seven days.
+	// * In India,
+	// Snow devices are delivered in one to seven days.
 	//
-	//     * In the US, you
-	// have access to one-day shipping and two-day shipping.
+	// * In the US, you have access
+	// to one-day shipping and two-day shipping.
 	ShippingOption types.ShippingOption
 
 	// If your job is being created in one of the US regions, you have the option of

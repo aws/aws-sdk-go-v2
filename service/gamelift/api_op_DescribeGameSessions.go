@@ -21,29 +21,28 @@ import (
 // sequential pages. If successful, a GameSession object is returned for each game
 // session matching the request. Available in Amazon GameLift Local.
 //
-//     *
+// *
 // CreateGameSession
 //
-//     * DescribeGameSessions
+// * DescribeGameSessions
 //
-//     *
-// DescribeGameSessionDetails
+// * DescribeGameSessionDetails
 //
-//     * SearchGameSessions
+// *
+// SearchGameSessions
 //
-//     * UpdateGameSession
-//
+// * UpdateGameSession
 //
 // * GetGameSessionLogUrl
 //
-//     * Game session placements
+// * Game session
+// placements
 //
-//         *
-// StartGameSessionPlacement
+// * StartGameSessionPlacement
 //
-//         * DescribeGameSessionPlacement
+// * DescribeGameSessionPlacement
 //
-//         *
+// *
 // StopGameSessionPlacement
 func (c *Client) DescribeGameSessions(ctx context.Context, params *DescribeGameSessionsInput, optFns ...func(*Options)) (*DescribeGameSessionsOutput, error) {
 	if params == nil {

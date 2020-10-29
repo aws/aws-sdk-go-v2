@@ -16,16 +16,16 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html)
 // Related operations
 //
-//     * CreateScript
+// * CreateScript
 //
-//     * ListScripts
+// * ListScripts
 //
-//     *
-// DescribeScript
+// * DescribeScript
 //
-//     * UpdateScript
+// *
+// UpdateScript
 //
-//     * DeleteScript
+// * DeleteScript
 func (c *Client) ListScripts(ctx context.Context, params *ListScriptsInput, optFns ...func(*Options)) (*ListScriptsOutput, error) {
 	if params == nil {
 		params = &ListScriptsInput{}

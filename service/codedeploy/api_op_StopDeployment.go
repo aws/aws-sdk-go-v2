@@ -46,10 +46,10 @@ type StopDeploymentOutput struct {
 
 	// The status of the stop deployment operation:
 	//
-	//     * Pending: The stop operation
-	// is pending.
+	// * Pending: The stop operation is
+	// pending.
 	//
-	//     * Succeeded: The stop operation was successful.
+	// * Succeeded: The stop operation was successful.
 	Status types.StopStatus
 
 	// An accompanying status message.

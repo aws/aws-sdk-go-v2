@@ -14,33 +14,33 @@ import (
 // Modifies a task assigned to a maintenance window. You can't change the task
 // type, but you can change the following values:
 //
-//     * TaskARN. For example, you
-// can change a RUN_COMMAND task from AWS-RunPowerShellScript to
-// AWS-RunShellScript.
+// * TaskARN. For example, you can
+// change a RUN_COMMAND task from AWS-RunPowerShellScript to AWS-RunShellScript.
 //
-//     * ServiceRoleArn
+// *
+// ServiceRoleArn
 //
-//     * TaskInvocationParameters
+// * TaskInvocationParameters
 //
-//     *
-// Priority
+// * Priority
 //
-//     * MaxConcurrency
+// * MaxConcurrency
 //
-//     * MaxErrors
+// *
+// MaxErrors
 //
-// If the value for a parameter in
-// UpdateMaintenanceWindowTask is null, then the corresponding field is not
-// modified. If you set Replace to true, then all fields required by the
-// RegisterTaskWithMaintenanceWindow action are required for this request. Optional
-// fields that aren't specified are set to null. When you update a maintenance
-// window task that has options specified in TaskInvocationParameters, you must
-// provide again all the TaskInvocationParameters values that you want to retain.
-// The values you do not specify again are removed. For example, suppose that when
-// you registered a Run Command task, you specified TaskInvocationParameters values
-// for Comment, NotificationConfig, and OutputS3BucketName. If you update the
-// maintenance window task and specify only a different OutputS3BucketName value,
-// the values for Comment and NotificationConfig are removed.
+// If the value for a parameter in UpdateMaintenanceWindowTask is null,
+// then the corresponding field is not modified. If you set Replace to true, then
+// all fields required by the RegisterTaskWithMaintenanceWindow action are required
+// for this request. Optional fields that aren't specified are set to null. When
+// you update a maintenance window task that has options specified in
+// TaskInvocationParameters, you must provide again all the
+// TaskInvocationParameters values that you want to retain. The values you do not
+// specify again are removed. For example, suppose that when you registered a Run
+// Command task, you specified TaskInvocationParameters values for Comment,
+// NotificationConfig, and OutputS3BucketName. If you update the maintenance window
+// task and specify only a different OutputS3BucketName value, the values for
+// Comment and NotificationConfig are removed.
 func (c *Client) UpdateMaintenanceWindowTask(ctx context.Context, params *UpdateMaintenanceWindowTaskInput, optFns ...func(*Options)) (*UpdateMaintenanceWindowTaskOutput, error) {
 	if params == nil {
 		params = &UpdateMaintenanceWindowTaskInput{}
@@ -106,12 +106,12 @@ type UpdateMaintenanceWindowTaskInput struct {
 	// RegisterTaskWithMaintenanceWindow. For more information, see the following
 	// topics in the in the AWS Systems Manager User Guide:
 	//
-	//     * Using service-linked
+	// * Using service-linked
 	// roles for Systems Manager
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions)
 	//
-	//
-	// * Should I use a service-linked role or a custom service role to run maintenance
+	// *
+	// Should I use a service-linked role or a custom service role to run maintenance
 	// window tasks?
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role)
 	ServiceRoleArn *string

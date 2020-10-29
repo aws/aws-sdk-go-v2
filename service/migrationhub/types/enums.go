@@ -6,9 +6,9 @@ type ApplicationStatus string
 
 // Enum values for ApplicationStatus
 const (
-	ApplicationStatusNot_started ApplicationStatus = "NOT_STARTED"
-	ApplicationStatusIn_progress ApplicationStatus = "IN_PROGRESS"
-	ApplicationStatusCompleted   ApplicationStatus = "COMPLETED"
+	ApplicationStatusNotStarted ApplicationStatus = "NOT_STARTED"
+	ApplicationStatusInProgress ApplicationStatus = "IN_PROGRESS"
+	ApplicationStatusCompleted  ApplicationStatus = "COMPLETED"
 )
 
 // Values returns all known values for ApplicationStatus. Note that this can be
@@ -26,16 +26,16 @@ type ResourceAttributeType string
 
 // Enum values for ResourceAttributeType
 const (
-	ResourceAttributeTypeIpv4_address                ResourceAttributeType = "IPV4_ADDRESS"
-	ResourceAttributeTypeIpv6_address                ResourceAttributeType = "IPV6_ADDRESS"
-	ResourceAttributeTypeMac_address                 ResourceAttributeType = "MAC_ADDRESS"
-	ResourceAttributeTypeFqdn                        ResourceAttributeType = "FQDN"
-	ResourceAttributeTypeVm_manager_id               ResourceAttributeType = "VM_MANAGER_ID"
-	ResourceAttributeTypeVm_managed_object_reference ResourceAttributeType = "VM_MANAGED_OBJECT_REFERENCE"
-	ResourceAttributeTypeVm_name                     ResourceAttributeType = "VM_NAME"
-	ResourceAttributeTypeVm_path                     ResourceAttributeType = "VM_PATH"
-	ResourceAttributeTypeBios_id                     ResourceAttributeType = "BIOS_ID"
-	ResourceAttributeTypeMotherboard_serial_number   ResourceAttributeType = "MOTHERBOARD_SERIAL_NUMBER"
+	ResourceAttributeTypeIpv4Address              ResourceAttributeType = "IPV4_ADDRESS"
+	ResourceAttributeTypeIpv6Address              ResourceAttributeType = "IPV6_ADDRESS"
+	ResourceAttributeTypeMacAddress               ResourceAttributeType = "MAC_ADDRESS"
+	ResourceAttributeTypeFqdn                     ResourceAttributeType = "FQDN"
+	ResourceAttributeTypeVmManagerId              ResourceAttributeType = "VM_MANAGER_ID"
+	ResourceAttributeTypeVmManagedObjectReference ResourceAttributeType = "VM_MANAGED_OBJECT_REFERENCE"
+	ResourceAttributeTypeVmName                   ResourceAttributeType = "VM_NAME"
+	ResourceAttributeTypeVmPath                   ResourceAttributeType = "VM_PATH"
+	ResourceAttributeTypeBiosId                   ResourceAttributeType = "BIOS_ID"
+	ResourceAttributeTypeMotherboardSerialNumber  ResourceAttributeType = "MOTHERBOARD_SERIAL_NUMBER"
 )
 
 // Values returns all known values for ResourceAttributeType. Note that this can be
@@ -60,10 +60,10 @@ type Status string
 
 // Enum values for Status
 const (
-	StatusNot_started Status = "NOT_STARTED"
-	StatusIn_progress Status = "IN_PROGRESS"
-	StatusFailed      Status = "FAILED"
-	StatusCompleted   Status = "COMPLETED"
+	StatusNotStarted Status = "NOT_STARTED"
+	StatusInProgress Status = "IN_PROGRESS"
+	StatusFailed     Status = "FAILED"
+	StatusCompleted  Status = "COMPLETED"
 )
 
 // Values returns all known values for Status. Note that this can be expanded in

@@ -16,23 +16,22 @@ import (
 // as clusters, snapshots, and so on. The following are limitations for
 // DescribeTags:
 //
-//     * You cannot specify an ARN and a resource-type value
-// together in the same request.
+// * You cannot specify an ARN and a resource-type value together in
+// the same request.
 //
-//     * You cannot use the MaxRecords and Marker
-// parameters together with the ARN parameter.
+// * You cannot use the MaxRecords and Marker parameters
+// together with the ARN parameter.
 //
-//     * The MaxRecords parameter can
-// be a range from 10 to 50 results to return in a request.
+// * The MaxRecords parameter can be a range from
+// 10 to 50 results to return in a request.
 //
-// If you specify both
-// tag keys and tag values in the same request, Amazon Redshift returns all
-// resources that match any combination of the specified keys and values. For
-// example, if you have owner and environment for tag keys, and admin and test for
-// tag values, all resources that have any combination of those values are
-// returned. If both tag keys and values are omitted from the request, resources
-// are returned regardless of whether they have tag keys or values associated with
-// them.
+// If you specify both tag keys and tag
+// values in the same request, Amazon Redshift returns all resources that match any
+// combination of the specified keys and values. For example, if you have owner and
+// environment for tag keys, and admin and test for tag values, all resources that
+// have any combination of those values are returned. If both tag keys and values
+// are omitted from the request, resources are returned regardless of whether they
+// have tag keys or values associated with them.
 func (c *Client) DescribeTags(ctx context.Context, params *DescribeTagsInput, optFns ...func(*Options)) (*DescribeTagsOutput, error) {
 	if params == nil {
 		params = &DescribeTagsInput{}
@@ -71,31 +70,31 @@ type DescribeTagsInput struct {
 	// The type of resource with which you want to view tags. Valid resource types
 	// are:
 	//
-	//     * Cluster
+	// * Cluster
 	//
-	//     * CIDR/IP
+	// * CIDR/IP
 	//
-	//     * EC2 security group
+	// * EC2 security group
 	//
-	//     * Snapshot
+	// * Snapshot
 	//
+	// * Cluster security
+	// group
 	//
-	// * Cluster security group
+	// * Subnet group
 	//
-	//     * Subnet group
+	// * HSM connection
 	//
-	//     * HSM connection
+	// * HSM certificate
 	//
-	//     * HSM
-	// certificate
+	// * Parameter group
 	//
-	//     * Parameter group
+	// *
+	// Snapshot copy grant
 	//
-	//     * Snapshot copy grant
-	//
-	// For more
-	// information about Amazon Redshift resource types and constructing ARNs, go to
-	// Specifying Policy Elements: Actions, Effects, Resources, and Principals
+	// For more information about Amazon Redshift resource types
+	// and constructing ARNs, go to Specifying Policy Elements: Actions, Effects,
+	// Resources, and Principals
 	// (https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-overview.html#redshift-iam-access-control-specify-actions)
 	// in the Amazon Redshift Cluster Management Guide.
 	ResourceType *string

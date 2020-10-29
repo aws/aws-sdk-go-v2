@@ -20,14 +20,14 @@ import (
 // emitted to Amazon CloudWatch. Before creating a new game server group, you must
 // have the following:
 //
-//     * An Amazon EC2 launch template that specifies how to
+// * An Amazon EC2 launch template that specifies how to
 // launch Amazon EC2 instances with your game server build. For more information,
 // see  Launching an Instance from a Launch Template
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html)
 // in the Amazon EC2 User Guide.
 //
-//     * An IAM role that extends limited access to
-// your AWS account to allow GameLift FleetIQ to create and interact with the Auto
+// * An IAM role that extends limited access to your
+// AWS account to allow GameLift FleetIQ to create and interact with the Auto
 // Scaling group. For more information, see Create IAM roles for cross-service
 // interaction
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/gsg-iam-permissions-roles.html)
@@ -49,24 +49,23 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
 // Related operations
 //
-//     * CreateGameServerGroup
+// * CreateGameServerGroup
 //
-//     * ListGameServerGroups
+// * ListGameServerGroups
 //
+// *
+// DescribeGameServerGroup
 //
-// * DescribeGameServerGroup
+// * UpdateGameServerGroup
 //
-//     * UpdateGameServerGroup
+// * DeleteGameServerGroup
 //
-//     *
-// DeleteGameServerGroup
+// *
+// ResumeGameServerGroup
 //
-//     * ResumeGameServerGroup
+// * SuspendGameServerGroup
 //
-//     *
-// SuspendGameServerGroup
-//
-//     * DescribeGameServerInstances
+// * DescribeGameServerInstances
 func (c *Client) CreateGameServerGroup(ctx context.Context, params *CreateGameServerGroupInput, optFns ...func(*Options)) (*CreateGameServerGroupOutput, error) {
 	if params == nil {
 		params = &CreateGameServerGroupInput{}
@@ -153,23 +152,23 @@ type CreateGameServerGroupInput struct {
 	// Indicates how GameLift FleetIQ balances the use of Spot Instances and On-Demand
 	// Instances in the game server group. Method options include the following:
 	//
-	//     *
+	// *
 	// SPOT_ONLY - Only Spot Instances are used in the game server group. If Spot
 	// Instances are unavailable or not viable for game hosting, the game server group
 	// provides no hosting capacity until Spot Instances can again be used. Until then,
 	// no new instances are started, and the existing nonviable Spot Instances are
 	// terminated (after current gameplay ends) and are not replaced.
 	//
-	//     *
-	// SPOT_PREFERRED - (default value) Spot Instances are used whenever available in
-	// the game server group. If Spot Instances are unavailable, the game server group
-	// continues to provide hosting capacity by falling back to On-Demand Instances.
-	// Existing nonviable Spot Instances are terminated (after current gameplay ends)
-	// and are replaced with new On-Demand Instances.
+	// * SPOT_PREFERRED
+	// - (default value) Spot Instances are used whenever available in the game server
+	// group. If Spot Instances are unavailable, the game server group continues to
+	// provide hosting capacity by falling back to On-Demand Instances. Existing
+	// nonviable Spot Instances are terminated (after current gameplay ends) and are
+	// replaced with new On-Demand Instances.
 	//
-	//     * ON_DEMAND_ONLY - Only
-	// On-Demand Instances are used in the game server group. No Spot Instances are
-	// used, even when available, while this balancing strategy is in force.
+	// * ON_DEMAND_ONLY - Only On-Demand
+	// Instances are used in the game server group. No Spot Instances are used, even
+	// when available, while this balancing strategy is in force.
 	BalancingStrategy types.BalancingStrategy
 
 	// A flag that indicates whether instances in the game server group are protected

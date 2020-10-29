@@ -93,14 +93,14 @@ type Connection struct {
 
 	// The connection status. This parameter can return one of the following values:
 	//
+	// *
+	// "successful"
 	//
-	// * "successful"
+	// * "testing"
 	//
-	//     * "testing"
+	// * "failed"
 	//
-	//     * "failed"
-	//
-	//     * "deleting"
+	// * "deleting"
 	Status *string
 }
 
@@ -153,14 +153,14 @@ type ElasticsearchSettings struct {
 // Describes an endpoint of a database instance in response to operations such as
 // the following:
 //
-//     * CreateEndpoint
+// * CreateEndpoint
 //
-//     * DescribeEndpoint
+// * DescribeEndpoint
 //
-//     *
-// DescribeEndpointTypes
+// * DescribeEndpointTypes
 //
-//     * ModifyEndpoint
+// *
+// ModifyEndpoint
 type Endpoint struct {
 
 	// The Amazon Resource Name (ARN) used for SSL connection to the endpoint.
@@ -172,18 +172,18 @@ type Endpoint struct {
 	// The settings in JSON format for the DMS transfer type of source endpoint.
 	// Possible settings include the following:
 	//
-	//     * ServiceAccessRoleArn - The IAM
-	// role that has permission to access the Amazon S3 bucket.
+	// * ServiceAccessRoleArn - The IAM role
+	// that has permission to access the Amazon S3 bucket.
 	//
-	//     * BucketName - The
-	// name of the S3 bucket to use.
+	// * BucketName - The name of
+	// the S3 bucket to use.
 	//
-	//     * CompressionType - An optional parameter to
-	// use GZIP to compress the target files. To use GZIP, set this value to NONE (the
-	// default). To keep the files uncompressed, don't use this value.
+	// * CompressionType - An optional parameter to use GZIP to
+	// compress the target files. To use GZIP, set this value to NONE (the default). To
+	// keep the files uncompressed, don't use this value.
 	//
-	// Shorthand
-	// syntax for these settings is as follows:
+	// Shorthand syntax for these
+	// settings is as follows:
 	// ServiceAccessRoleArn=string,BucketName=string,CompressionType=string JSON syntax
 	// for these settings is as follows: { "ServiceAccessRoleArn": "string",
 	// "BucketName": "string", "CompressionType": "none"|"gzip" }
@@ -1275,13 +1275,13 @@ type ReplicationInstance struct {
 	// The replication instance identifier is a required parameter. This parameter is
 	// stored as a lowercase string. Constraints:
 	//
-	//     * Must contain 1-63 alphanumeric
+	// * Must contain 1-63 alphanumeric
 	// characters or hyphens.
 	//
-	//     * First character must be a letter.
+	// * First character must be a letter.
 	//
-	//     * Cannot
-	// end with a hyphen or contain two consecutive hyphens.
+	// * Cannot end with a
+	// hyphen or contain two consecutive hyphens.
 	//
 	// Example: myrepinstance
 	ReplicationInstanceIdentifier *string
@@ -1300,35 +1300,35 @@ type ReplicationInstance struct {
 
 	// The status of the replication instance. The possible return values include:
 	//
+	// *
+	// "available"
 	//
-	// * "available"
+	// * "creating"
 	//
-	//     * "creating"
+	// * "deleted"
 	//
-	//     * "deleted"
+	// * "deleting"
 	//
-	//     * "deleting"
+	// * "failed"
 	//
-	//     *
-	// "failed"
+	// *
+	// "modifying"
 	//
-	//     * "modifying"
+	// * "upgrading"
 	//
-	//     * "upgrading"
+	// * "rebooting"
 	//
-	//     * "rebooting"
+	// * "resetting-master-credentials"
 	//
-	//     *
-	// "resetting-master-credentials"
+	// *
+	// "storage-full"
 	//
-	//     * "storage-full"
+	// * "incompatible-credentials"
 	//
-	//     *
-	// "incompatible-credentials"
+	// * "incompatible-network"
 	//
-	//     * "incompatible-network"
-	//
-	//     * "maintenance"
+	// *
+	// "maintenance"
 	ReplicationInstanceStatus *string
 
 	// The subnet group for the replication instance.
@@ -1441,13 +1441,13 @@ type ReplicationTask struct {
 
 	// The user-assigned replication task identifier or name. Constraints:
 	//
-	//     * Must
+	// * Must
 	// contain 1-255 alphanumeric characters or hyphens.
 	//
-	//     * First character must be
-	// a letter.
+	// * First character must be a
+	// letter.
 	//
-	//     * Cannot end with a hyphen or contain two consecutive hyphens.
+	// * Cannot end with a hyphen or contain two consecutive hyphens.
 	ReplicationTaskIdentifier *string
 
 	// The settings for the replication task.
@@ -1469,18 +1469,18 @@ type ReplicationTask struct {
 	// The reason the replication task was stopped. This response parameter can return
 	// one of the following values:
 	//
-	//     * "STOP_REASON_FULL_LOAD_COMPLETED" –
-	// Full-load migration completed.
+	// * "STOP_REASON_FULL_LOAD_COMPLETED" – Full-load
+	// migration completed.
 	//
-	//     * "STOP_REASON_CACHED_CHANGES_APPLIED" –
-	// Change data capture (CDC) load completed.
+	// * "STOP_REASON_CACHED_CHANGES_APPLIED" – Change data
+	// capture (CDC) load completed.
 	//
-	//     *
-	// "STOP_REASON_CACHED_CHANGES_NOT_APPLIED" – In a full-load and CDC migration, the
-	// full-load stopped as specified before starting the CDC migration.
+	// * "STOP_REASON_CACHED_CHANGES_NOT_APPLIED" – In a
+	// full-load and CDC migration, the full-load stopped as specified before starting
+	// the CDC migration.
 	//
-	//     *
-	// "STOP_REASON_SERVER_TIME" – The migration stopped at the specified server time.
+	// * "STOP_REASON_SERVER_TIME" – The migration stopped at the
+	// specified server time.
 	StopReason *string
 
 	// Table mappings specified in the task.
@@ -1568,38 +1568,38 @@ type ReplicationTaskAssessmentRun struct {
 
 	// Assessment run status. This status can have one of the following values:
 	//
-	//     *
+	// *
 	// "cancelling" – The assessment run was canceled by the
 	// CancelReplicationTaskAssessmentRun operation.
 	//
-	//     * "deleting" – The assessment
-	// run was deleted by the DeleteReplicationTaskAssessmentRun operation.
+	// * "deleting" – The assessment run
+	// was deleted by the DeleteReplicationTaskAssessmentRun operation.
 	//
-	//     *
-	// "failed" – At least one individual assessment completed with a failed status.
+	// * "failed" –
+	// At least one individual assessment completed with a failed status.
 	//
-	//
-	// * "error-provisioning" – An internal error occurred while resources were
+	// *
+	// "error-provisioning" – An internal error occurred while resources were
 	// provisioned (during provisioning status).
 	//
-	//     * "error-executing" – An internal
+	// * "error-executing" – An internal
 	// error occurred while individual assessments ran (during running status).
 	//
-	//     *
+	// *
 	// "invalid state" – The assessment run is in an unknown state.
 	//
-	//     * "passed" –
-	// All individual assessments have completed, and none has a failed status.
+	// * "passed" – All
+	// individual assessments have completed, and none has a failed status.
 	//
-	//     *
+	// *
 	// "provisioning" – Resources required to run individual assessments are being
 	// provisioned.
 	//
-	//     * "running" – Individual assessments are being run.
+	// * "running" – Individual assessments are being run.
 	//
-	//     *
-	// "starting" – The assessment run is starting, but resources are not yet being
-	// provisioned for individual assessments.
+	// * "starting"
+	// – The assessment run is starting, but resources are not yet being provisioned
+	// for individual assessments.
 	Status *string
 }
 
@@ -1634,18 +1634,18 @@ type ReplicationTaskIndividualAssessment struct {
 	// Individual assessment status. This status can have one of the following
 	// values:
 	//
-	//     * "cancelled"
+	// * "cancelled"
 	//
-	//     * "error"
+	// * "error"
 	//
-	//     * "failed"
+	// * "failed"
 	//
-	//     * "passed"
+	// * "passed"
 	//
-	//     *
-	// "pending"
+	// * "pending"
 	//
-	//     * "running"
+	// *
+	// "running"
 	Status *string
 }
 
@@ -1774,12 +1774,11 @@ type S3Settings struct {
 	// The format of the data that you want to use for output. You can choose one of
 	// the following:
 	//
-	//     * csv : This is a row-based file format with comma-separated
+	// * csv : This is a row-based file format with comma-separated
 	// values (.csv).
 	//
-	//     * parquet : Apache Parquet (.parquet) is a columnar storage
-	// file format that features efficient compression and provides faster query
-	// response.
+	// * parquet : Apache Parquet (.parquet) is a columnar storage file
+	// format that features efficient compression and provides faster query response.
 	DataFormat DataFormatValue
 
 	// The size of one data page in bytes. This parameter defaults to 1024 * 1024 bytes
@@ -1817,16 +1816,16 @@ type S3Settings struct {
 
 	// The type of encoding you are using:
 	//
-	//     * RLE_DICTIONARY uses a combination of
+	// * RLE_DICTIONARY uses a combination of
 	// bit-packing and run-length encoding to store repeated values more efficiently.
 	// This is the default.
 	//
-	//     * PLAIN doesn't use encoding at all. Values are stored
-	// as they are.
+	// * PLAIN doesn't use encoding at all. Values are stored as
+	// they are.
 	//
-	//     * PLAIN_DICTIONARY builds a dictionary of the values
-	// encountered in a given column. The dictionary is stored in a dictionary page for
-	// each column chunk.
+	// * PLAIN_DICTIONARY builds a dictionary of the values encountered in a
+	// given column. The dictionary is stored in a dictionary page for each column
+	// chunk.
 	EncodingType EncodingTypeValue
 
 	// The type of server-side encryption that you want to use for your data. This
@@ -1838,30 +1837,30 @@ type S3Settings struct {
 	// and Access Management (IAM) role with permission to allow "arn:aws:s3:::dms-*"
 	// to use the following actions:
 	//
-	//     * s3:CreateBucket
+	// * s3:CreateBucket
 	//
-	//     * s3:ListBucket
+	// * s3:ListBucket
 	//
-	//     *
+	// *
 	// s3:DeleteBucket
 	//
-	//     * s3:GetBucketLocation
+	// * s3:GetBucketLocation
 	//
-	//     * s3:GetObject
+	// * s3:GetObject
 	//
-	//     *
-	// s3:PutObject
+	// * s3:PutObject
 	//
-	//     * s3:DeleteObject
+	// *
+	// s3:DeleteObject
 	//
-	//     * s3:GetObjectVersion
+	// * s3:GetObjectVersion
 	//
-	//     *
-	// s3:GetBucketPolicy
+	// * s3:GetBucketPolicy
 	//
-	//     * s3:PutBucketPolicy
+	// *
+	// s3:PutBucketPolicy
 	//
-	//     * s3:DeleteBucketPolicy
+	// * s3:DeleteBucketPolicy
 	EncryptionMode EncryptionModeValue
 
 	// Specifies how tables are defined in the S3 source files only.
@@ -2062,39 +2061,39 @@ type TableStatistics struct {
 	// The validation state of the table. This parameter can have the following
 	// values:
 	//
-	//     * Not enabled – Validation isn't enabled for the table in the
-	// migration task.
+	// * Not enabled – Validation isn't enabled for the table in the migration
+	// task.
 	//
-	//     * Pending records – Some records in the table are waiting
-	// for validation.
-	//
-	//     * Mismatched records – Some records in the table don't
-	// match between the source and target.
-	//
-	//     * Suspended records – Some records in
-	// the table couldn't be validated.
-	//
-	//     * No primary key –The table couldn't be
-	// validated because it has no primary key.
-	//
-	//     * Table error – The table wasn't
-	// validated because it's in an error state and some data wasn't migrated.
-	//
-	//     *
-	// Validated – All rows in the table are validated. If the table is updated, the
-	// status can change from Validated.
-	//
-	//     * Error – The table couldn't be validated
-	// because of an unexpected error.
-	//
-	//     * Pending validation – The table is waiting
+	// * Pending records – Some records in the table are waiting for
 	// validation.
 	//
-	//     * Preparing table – Preparing the table enabled in the
-	// migration task for validation.
+	// * Mismatched records – Some records in the table don't match
+	// between the source and target.
 	//
-	//     * Pending revalidation – All rows in the
-	// table are pending validation after the table was updated.
+	// * Suspended records – Some records in the table
+	// couldn't be validated.
+	//
+	// * No primary key –The table couldn't be validated
+	// because it has no primary key.
+	//
+	// * Table error – The table wasn't validated
+	// because it's in an error state and some data wasn't migrated.
+	//
+	// * Validated – All
+	// rows in the table are validated. If the table is updated, the status can change
+	// from Validated.
+	//
+	// * Error – The table couldn't be validated because of an
+	// unexpected error.
+	//
+	// * Pending validation – The table is waiting validation.
+	//
+	// *
+	// Preparing table – Preparing the table enabled in the migration task for
+	// validation.
+	//
+	// * Pending revalidation – All rows in the table are pending
+	// validation after the table was updated.
 	ValidationState *string
 
 	// Additional details about the state of validation.
@@ -2121,12 +2120,12 @@ type TableToReload struct {
 // A user-defined key-value pair that describes metadata added to an AWS DMS
 // resource and that is used by operations such as the following:
 //
-//     *
+// *
 // AddTagsToResource
 //
-//     * ListTagsForResource
+// * ListTagsForResource
 //
-//     * RemoveTagsFromResource
+// * RemoveTagsFromResource
 type Tag struct {
 
 	// A key is the required name of the tag. The string value can be 1-128 Unicode

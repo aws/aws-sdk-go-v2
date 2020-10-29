@@ -444,17 +444,17 @@ type PublicAccessBlockConfiguration struct {
 	// buckets in this account. Setting this element to TRUE causes the following
 	// behavior:
 	//
-	//     * PUT Bucket acl and PUT Object acl calls fail if the specified
-	// ACL is public.
+	// * PUT Bucket acl and PUT Object acl calls fail if the specified ACL
+	// is public.
 	//
-	//     * PUT Object calls fail if the request includes a public
-	// ACL.
+	// * PUT Object calls fail if the request includes a public ACL.
 	//
-	//     * PUT Bucket calls fail if the request includes a public
-	// ACL.
+	// * PUT
+	// Bucket calls fail if the request includes a public ACL.
 	//
-	// Enabling this setting doesn't affect existing policies or ACLs. This is
-	// not supported for Amazon S3 on Outposts.
+	// Enabling this setting
+	// doesn't affect existing policies or ACLs. This is not supported for Amazon S3 on
+	// Outposts.
 	BlockPublicAcls *bool
 
 	// Specifies whether Amazon S3 should block public bucket policies for buckets in

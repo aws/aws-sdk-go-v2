@@ -41,11 +41,11 @@ type DescribeDomainOutput struct {
 	// Specifies the VPC used for non-EFS traffic. The default value is
 	// PublicInternetOnly.
 	//
-	//     * PublicInternetOnly - Non-EFS traffic is through a VPC
+	// * PublicInternetOnly - Non-EFS traffic is through a VPC
 	// managed by Amazon SageMaker, which allows direct internet access
 	//
-	//     * VpcOnly
-	// - All Studio traffic is through the specified VPC and subnets
+	// * VpcOnly -
+	// All Studio traffic is through the specified VPC and subnets
 	AppNetworkAccessType types.AppNetworkAccessType
 
 	// The domain's authentication mode.

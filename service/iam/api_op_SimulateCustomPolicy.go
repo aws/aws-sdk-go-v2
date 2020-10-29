@@ -62,15 +62,15 @@ type SimulateCustomPolicyInput struct {
 	// (http://wikipedia.org/wiki/regex) used to validate this parameter is a string of
 	// characters consisting of the following:
 	//
-	//     * Any printable ASCII character
-	// ranging from the space character (\u0020) through the end of the ASCII character
+	// * Any printable ASCII character ranging
+	// from the space character (\u0020) through the end of the ASCII character
 	// range
 	//
-	//     * The printable characters in the Basic Latin and Latin-1 Supplement
+	// * The printable characters in the Basic Latin and Latin-1 Supplement
 	// character set (through \u00FF)
 	//
-	//     * The special characters tab (\u0009), line
-	// feed (\u000A), and carriage return (\u000D)
+	// * The special characters tab (\u0009), line feed
+	// (\u000A), and carriage return (\u000D)
 	//
 	// This member is required.
 	PolicyInputList []*string
@@ -113,14 +113,14 @@ type SimulateCustomPolicyInput struct {
 	// pattern (http://wikipedia.org/wiki/regex) used to validate this parameter is a
 	// string of characters consisting of the following:
 	//
-	//     * Any printable ASCII
+	// * Any printable ASCII
 	// character ranging from the space character (\u0020) through the end of the ASCII
 	// character range
 	//
-	//     * The printable characters in the Basic Latin and Latin-1
+	// * The printable characters in the Basic Latin and Latin-1
 	// Supplement character set (through \u00FF)
 	//
-	//     * The special characters tab
+	// * The special characters tab
 	// (\u0009), line feed (\u000A), and carriage return (\u000D)
 	PermissionsBoundaryPolicyInputList []*string
 
@@ -155,23 +155,23 @@ type SimulateCustomPolicyInput struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html)
 	// in the Amazon EC2 User Guide.
 	//
-	//     * EC2-Classic-InstanceStore instance, image,
+	// * EC2-Classic-InstanceStore instance, image,
 	// security-group
 	//
-	//     * EC2-Classic-EBS instance, image, security-group, volume
+	// * EC2-Classic-EBS instance, image, security-group, volume
 	//
+	// *
+	// EC2-VPC-InstanceStore instance, image, security-group, network-interface
 	//
-	// * EC2-VPC-InstanceStore instance, image, security-group, network-interface
+	// *
+	// EC2-VPC-InstanceStore-Subnet instance, image, security-group, network-interface,
+	// subnet
 	//
+	// * EC2-VPC-EBS instance, image, security-group, network-interface,
+	// volume
 	//
-	// * EC2-VPC-InstanceStore-Subnet instance, image, security-group,
-	// network-interface, subnet
-	//
-	//     * EC2-VPC-EBS instance, image, security-group,
-	// network-interface, volume
-	//
-	//     * EC2-VPC-EBS-Subnet instance, image,
-	// security-group, network-interface, subnet, volume
+	// * EC2-VPC-EBS-Subnet instance, image, security-group, network-interface,
+	// subnet, volume
 	ResourceHandlingOption *string
 
 	// An ARN representing the AWS account ID that specifies the owner of any simulated
@@ -194,15 +194,15 @@ type SimulateCustomPolicyInput struct {
 	// (http://wikipedia.org/wiki/regex) used to validate this parameter is a string of
 	// characters consisting of the following:
 	//
-	//     * Any printable ASCII character
-	// ranging from the space character (\u0020) through the end of the ASCII character
+	// * Any printable ASCII character ranging
+	// from the space character (\u0020) through the end of the ASCII character
 	// range
 	//
-	//     * The printable characters in the Basic Latin and Latin-1 Supplement
+	// * The printable characters in the Basic Latin and Latin-1 Supplement
 	// character set (through \u00FF)
 	//
-	//     * The special characters tab (\u0009), line
-	// feed (\u000A), and carriage return (\u000D)
+	// * The special characters tab (\u0009), line feed
+	// (\u000A), and carriage return (\u000D)
 	ResourcePolicy *string
 }
 

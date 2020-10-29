@@ -6,7 +6,7 @@ type AdditionalResultAttributeValueType string
 
 // Enum values for AdditionalResultAttributeValueType
 const (
-	AdditionalResultAttributeValueTypeText_with_highlights_value AdditionalResultAttributeValueType = "TEXT_WITH_HIGHLIGHTS_VALUE"
+	AdditionalResultAttributeValueTypeTextWithHighlightsValue AdditionalResultAttributeValueType = "TEXT_WITH_HIGHLIGHTS_VALUE"
 )
 
 // Values returns all known values for AdditionalResultAttributeValueType. Note
@@ -23,11 +23,11 @@ type ContentType string
 
 // Enum values for ContentType
 const (
-	ContentTypePdf        ContentType = "PDF"
-	ContentTypeHtml       ContentType = "HTML"
-	ContentTypeMs_word    ContentType = "MS_WORD"
-	ContentTypePlain_text ContentType = "PLAIN_TEXT"
-	ContentTypePpt        ContentType = "PPT"
+	ContentTypePdf       ContentType = "PDF"
+	ContentTypeHtml      ContentType = "HTML"
+	ContentTypeMsWord    ContentType = "MS_WORD"
+	ContentTypePlainText ContentType = "PLAIN_TEXT"
+	ContentTypePpt       ContentType = "PPT"
 )
 
 // Values returns all known values for ContentType. Note that this can be expanded
@@ -47,10 +47,10 @@ type DatabaseEngineType string
 
 // Enum values for DatabaseEngineType
 const (
-	DatabaseEngineTypeRds_aurora_mysql      DatabaseEngineType = "RDS_AURORA_MYSQL"
-	DatabaseEngineTypeRds_aurora_postgresql DatabaseEngineType = "RDS_AURORA_POSTGRESQL"
-	DatabaseEngineTypeRds_mysql             DatabaseEngineType = "RDS_MYSQL"
-	DatabaseEngineTypeRds_postgresql        DatabaseEngineType = "RDS_POSTGRESQL"
+	DatabaseEngineTypeRdsAuroraMysql      DatabaseEngineType = "RDS_AURORA_MYSQL"
+	DatabaseEngineTypeRdsAuroraPostgresql DatabaseEngineType = "RDS_AURORA_POSTGRESQL"
+	DatabaseEngineTypeRdsMysql            DatabaseEngineType = "RDS_MYSQL"
+	DatabaseEngineTypeRdsPostgresql       DatabaseEngineType = "RDS_POSTGRESQL"
 )
 
 // Values returns all known values for DatabaseEngineType. Note that this can be
@@ -93,13 +93,13 @@ type DataSourceSyncJobStatus string
 
 // Enum values for DataSourceSyncJobStatus
 const (
-	DataSourceSyncJobStatusFailed           DataSourceSyncJobStatus = "FAILED"
-	DataSourceSyncJobStatusSucceeded        DataSourceSyncJobStatus = "SUCCEEDED"
-	DataSourceSyncJobStatusSyncing          DataSourceSyncJobStatus = "SYNCING"
-	DataSourceSyncJobStatusIncomplete       DataSourceSyncJobStatus = "INCOMPLETE"
-	DataSourceSyncJobStatusStopping         DataSourceSyncJobStatus = "STOPPING"
-	DataSourceSyncJobStatusAborted          DataSourceSyncJobStatus = "ABORTED"
-	DataSourceSyncJobStatusSyncing_indexing DataSourceSyncJobStatus = "SYNCING_INDEXING"
+	DataSourceSyncJobStatusFailed          DataSourceSyncJobStatus = "FAILED"
+	DataSourceSyncJobStatusSucceeded       DataSourceSyncJobStatus = "SUCCEEDED"
+	DataSourceSyncJobStatusSyncing         DataSourceSyncJobStatus = "SYNCING"
+	DataSourceSyncJobStatusIncomplete      DataSourceSyncJobStatus = "INCOMPLETE"
+	DataSourceSyncJobStatusStopping        DataSourceSyncJobStatus = "STOPPING"
+	DataSourceSyncJobStatusAborted         DataSourceSyncJobStatus = "ABORTED"
+	DataSourceSyncJobStatusSyncingIndexing DataSourceSyncJobStatus = "SYNCING_INDEXING"
 )
 
 // Values returns all known values for DataSourceSyncJobStatus. Note that this can
@@ -149,10 +149,10 @@ type DocumentAttributeValueType string
 
 // Enum values for DocumentAttributeValueType
 const (
-	DocumentAttributeValueTypeString_value      DocumentAttributeValueType = "STRING_VALUE"
-	DocumentAttributeValueTypeString_list_value DocumentAttributeValueType = "STRING_LIST_VALUE"
-	DocumentAttributeValueTypeLong_value        DocumentAttributeValueType = "LONG_VALUE"
-	DocumentAttributeValueTypeDate_value        DocumentAttributeValueType = "DATE_VALUE"
+	DocumentAttributeValueTypeStringValue     DocumentAttributeValueType = "STRING_VALUE"
+	DocumentAttributeValueTypeStringListValue DocumentAttributeValueType = "STRING_LIST_VALUE"
+	DocumentAttributeValueTypeLongValue       DocumentAttributeValueType = "LONG_VALUE"
+	DocumentAttributeValueTypeDateValue       DocumentAttributeValueType = "DATE_VALUE"
 )
 
 // Values returns all known values for DocumentAttributeValueType. Note that this
@@ -171,8 +171,8 @@ type ErrorCode string
 
 // Enum values for ErrorCode
 const (
-	ErrorCodeInternal_error  ErrorCode = "InternalError"
-	ErrorCodeInvalid_request ErrorCode = "InvalidRequest"
+	ErrorCodeInternalError  ErrorCode = "InternalError"
+	ErrorCodeInvalidRequest ErrorCode = "InvalidRequest"
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded in
@@ -189,9 +189,9 @@ type FaqFileFormat string
 
 // Enum values for FaqFileFormat
 const (
-	FaqFileFormatCsv             FaqFileFormat = "CSV"
-	FaqFileFormatCsv_with_header FaqFileFormat = "CSV_WITH_HEADER"
-	FaqFileFormatJson            FaqFileFormat = "JSON"
+	FaqFileFormatCsv           FaqFileFormat = "CSV"
+	FaqFileFormatCsvWithHeader FaqFileFormat = "CSV_WITH_HEADER"
+	FaqFileFormatJson          FaqFileFormat = "JSON"
 )
 
 // Values returns all known values for FaqFileFormat. Note that this can be
@@ -233,8 +233,8 @@ type IndexEdition string
 
 // Enum values for IndexEdition
 const (
-	IndexEditionDeveloper_edition  IndexEdition = "DEVELOPER_EDITION"
-	IndexEditionEnterprise_edition IndexEdition = "ENTERPRISE_EDITION"
+	IndexEditionDeveloperEdition  IndexEdition = "DEVELOPER_EDITION"
+	IndexEditionEnterpriseEdition IndexEdition = "ENTERPRISE_EDITION"
 )
 
 // Values returns all known values for IndexEdition. Note that this can be expanded
@@ -251,12 +251,12 @@ type IndexStatus string
 
 // Enum values for IndexStatus
 const (
-	IndexStatusCreating        IndexStatus = "CREATING"
-	IndexStatusActive          IndexStatus = "ACTIVE"
-	IndexStatusDeleting        IndexStatus = "DELETING"
-	IndexStatusFailed          IndexStatus = "FAILED"
-	IndexStatusUpdating        IndexStatus = "UPDATING"
-	IndexStatusSystem_updating IndexStatus = "SYSTEM_UPDATING"
+	IndexStatusCreating       IndexStatus = "CREATING"
+	IndexStatusActive         IndexStatus = "ACTIVE"
+	IndexStatusDeleting       IndexStatus = "DELETING"
+	IndexStatusFailed         IndexStatus = "FAILED"
+	IndexStatusUpdating       IndexStatus = "UPDATING"
+	IndexStatusSystemUpdating IndexStatus = "SYSTEM_UPDATING"
 )
 
 // Values returns all known values for IndexStatus. Note that this can be expanded
@@ -313,8 +313,8 @@ type QueryIdentifiersEnclosingOption string
 
 // Enum values for QueryIdentifiersEnclosingOption
 const (
-	QueryIdentifiersEnclosingOptionDouble_quotes QueryIdentifiersEnclosingOption = "DOUBLE_QUOTES"
-	QueryIdentifiersEnclosingOptionNone          QueryIdentifiersEnclosingOption = "NONE"
+	QueryIdentifiersEnclosingOptionDoubleQuotes QueryIdentifiersEnclosingOption = "DOUBLE_QUOTES"
+	QueryIdentifiersEnclosingOptionNone         QueryIdentifiersEnclosingOption = "NONE"
 )
 
 // Values returns all known values for QueryIdentifiersEnclosingOption. Note that
@@ -332,9 +332,9 @@ type QueryResultType string
 
 // Enum values for QueryResultType
 const (
-	QueryResultTypeDocument        QueryResultType = "DOCUMENT"
-	QueryResultTypeQuestion_answer QueryResultType = "QUESTION_ANSWER"
-	QueryResultTypeAnswer          QueryResultType = "ANSWER"
+	QueryResultTypeDocument       QueryResultType = "DOCUMENT"
+	QueryResultTypeQuestionAnswer QueryResultType = "QUESTION_ANSWER"
+	QueryResultTypeAnswer         QueryResultType = "ANSWER"
 )
 
 // Values returns all known values for QueryResultType. Note that this can be
@@ -370,8 +370,8 @@ type RelevanceType string
 
 // Enum values for RelevanceType
 const (
-	RelevanceTypeRelevant     RelevanceType = "RELEVANT"
-	RelevanceTypeNot_relevant RelevanceType = "NOT_RELEVANT"
+	RelevanceTypeRelevant    RelevanceType = "RELEVANT"
+	RelevanceTypeNotRelevant RelevanceType = "NOT_RELEVANT"
 )
 
 // Values returns all known values for RelevanceType. Note that this can be
@@ -388,8 +388,8 @@ type SalesforceChatterFeedIncludeFilterType string
 
 // Enum values for SalesforceChatterFeedIncludeFilterType
 const (
-	SalesforceChatterFeedIncludeFilterTypeActive_user   SalesforceChatterFeedIncludeFilterType = "ACTIVE_USER"
-	SalesforceChatterFeedIncludeFilterTypeStandard_user SalesforceChatterFeedIncludeFilterType = "STANDARD_USER"
+	SalesforceChatterFeedIncludeFilterTypeActiveUser   SalesforceChatterFeedIncludeFilterType = "ACTIVE_USER"
+	SalesforceChatterFeedIncludeFilterTypeStandardUser SalesforceChatterFeedIncludeFilterType = "STANDARD_USER"
 )
 
 // Values returns all known values for SalesforceChatterFeedIncludeFilterType. Note
@@ -476,10 +476,10 @@ type ScoreConfidence string
 
 // Enum values for ScoreConfidence
 const (
-	ScoreConfidenceVery_high ScoreConfidence = "VERY_HIGH"
-	ScoreConfidenceHigh      ScoreConfidence = "HIGH"
-	ScoreConfidenceMedium    ScoreConfidence = "MEDIUM"
-	ScoreConfidenceLow       ScoreConfidence = "LOW"
+	ScoreConfidenceVeryHigh ScoreConfidence = "VERY_HIGH"
+	ScoreConfidenceHigh     ScoreConfidence = "HIGH"
+	ScoreConfidenceMedium   ScoreConfidence = "MEDIUM"
+	ScoreConfidenceLow      ScoreConfidence = "LOW"
 )
 
 // Values returns all known values for ScoreConfidence. Note that this can be
@@ -516,7 +516,7 @@ type SharePointVersion string
 
 // Enum values for SharePointVersion
 const (
-	SharePointVersionSharepoint_online SharePointVersion = "SHAREPOINT_ONLINE"
+	SharePointVersionSharepointOnline SharePointVersion = "SHAREPOINT_ONLINE"
 )
 
 // Values returns all known values for SharePointVersion. Note that this can be

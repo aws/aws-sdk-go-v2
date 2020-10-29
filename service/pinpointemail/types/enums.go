@@ -6,8 +6,8 @@ type BehaviorOnMxFailure string
 
 // Enum values for BehaviorOnMxFailure
 const (
-	BehaviorOnMxFailureUse_default_value BehaviorOnMxFailure = "USE_DEFAULT_VALUE"
-	BehaviorOnMxFailureReject_message    BehaviorOnMxFailure = "REJECT_MESSAGE"
+	BehaviorOnMxFailureUseDefaultValue BehaviorOnMxFailure = "USE_DEFAULT_VALUE"
+	BehaviorOnMxFailureRejectMessage   BehaviorOnMxFailure = "REJECT_MESSAGE"
 )
 
 // Values returns all known values for BehaviorOnMxFailure. Note that this can be
@@ -24,9 +24,9 @@ type DeliverabilityDashboardAccountStatus string
 
 // Enum values for DeliverabilityDashboardAccountStatus
 const (
-	DeliverabilityDashboardAccountStatusActive             DeliverabilityDashboardAccountStatus = "ACTIVE"
-	DeliverabilityDashboardAccountStatusPending_expiration DeliverabilityDashboardAccountStatus = "PENDING_EXPIRATION"
-	DeliverabilityDashboardAccountStatusDisabled           DeliverabilityDashboardAccountStatus = "DISABLED"
+	DeliverabilityDashboardAccountStatusActive            DeliverabilityDashboardAccountStatus = "ACTIVE"
+	DeliverabilityDashboardAccountStatusPendingExpiration DeliverabilityDashboardAccountStatus = "PENDING_EXPIRATION"
+	DeliverabilityDashboardAccountStatusDisabled          DeliverabilityDashboardAccountStatus = "DISABLED"
 )
 
 // Values returns all known values for DeliverabilityDashboardAccountStatus. Note
@@ -45,8 +45,8 @@ type DeliverabilityTestStatus string
 
 // Enum values for DeliverabilityTestStatus
 const (
-	DeliverabilityTestStatusIn_progress DeliverabilityTestStatus = "IN_PROGRESS"
-	DeliverabilityTestStatusCompleted   DeliverabilityTestStatus = "COMPLETED"
+	DeliverabilityTestStatusInProgress DeliverabilityTestStatus = "IN_PROGRESS"
+	DeliverabilityTestStatusCompleted  DeliverabilityTestStatus = "COMPLETED"
 )
 
 // Values returns all known values for DeliverabilityTestStatus. Note that this can
@@ -63,9 +63,9 @@ type DimensionValueSource string
 
 // Enum values for DimensionValueSource
 const (
-	DimensionValueSourceMessage_tag  DimensionValueSource = "MESSAGE_TAG"
-	DimensionValueSourceEmail_header DimensionValueSource = "EMAIL_HEADER"
-	DimensionValueSourceLink_tag     DimensionValueSource = "LINK_TAG"
+	DimensionValueSourceMessageTag  DimensionValueSource = "MESSAGE_TAG"
+	DimensionValueSourceEmailHeader DimensionValueSource = "EMAIL_HEADER"
+	DimensionValueSourceLinkTag     DimensionValueSource = "LINK_TAG"
 )
 
 // Values returns all known values for DimensionValueSource. Note that this can be
@@ -83,11 +83,11 @@ type DkimStatus string
 
 // Enum values for DkimStatus
 const (
-	DkimStatusPending           DkimStatus = "PENDING"
-	DkimStatusSuccess           DkimStatus = "SUCCESS"
-	DkimStatusFailed            DkimStatus = "FAILED"
-	DkimStatusTemporary_failure DkimStatus = "TEMPORARY_FAILURE"
-	DkimStatusNot_started       DkimStatus = "NOT_STARTED"
+	DkimStatusPending          DkimStatus = "PENDING"
+	DkimStatusSuccess          DkimStatus = "SUCCESS"
+	DkimStatusFailed           DkimStatus = "FAILED"
+	DkimStatusTemporaryFailure DkimStatus = "TEMPORARY_FAILURE"
+	DkimStatusNotStarted       DkimStatus = "NOT_STARTED"
 )
 
 // Values returns all known values for DkimStatus. Note that this can be expanded
@@ -107,14 +107,14 @@ type EventType string
 
 // Enum values for EventType
 const (
-	EventTypeSend              EventType = "SEND"
-	EventTypeReject            EventType = "REJECT"
-	EventTypeBounce            EventType = "BOUNCE"
-	EventTypeComplaint         EventType = "COMPLAINT"
-	EventTypeDelivery          EventType = "DELIVERY"
-	EventTypeOpen              EventType = "OPEN"
-	EventTypeClick             EventType = "CLICK"
-	EventTypeRendering_failure EventType = "RENDERING_FAILURE"
+	EventTypeSend             EventType = "SEND"
+	EventTypeReject           EventType = "REJECT"
+	EventTypeBounce           EventType = "BOUNCE"
+	EventTypeComplaint        EventType = "COMPLAINT"
+	EventTypeDelivery         EventType = "DELIVERY"
+	EventTypeOpen             EventType = "OPEN"
+	EventTypeClick            EventType = "CLICK"
+	EventTypeRenderingFailure EventType = "RENDERING_FAILURE"
 )
 
 // Values returns all known values for EventType. Note that this can be expanded in
@@ -137,9 +137,9 @@ type IdentityType string
 
 // Enum values for IdentityType
 const (
-	IdentityTypeEmail_address  IdentityType = "EMAIL_ADDRESS"
-	IdentityTypeDomain         IdentityType = "DOMAIN"
-	IdentityTypeManaged_domain IdentityType = "MANAGED_DOMAIN"
+	IdentityTypeEmailAddress  IdentityType = "EMAIL_ADDRESS"
+	IdentityTypeDomain        IdentityType = "DOMAIN"
+	IdentityTypeManagedDomain IdentityType = "MANAGED_DOMAIN"
 )
 
 // Values returns all known values for IdentityType. Note that this can be expanded
@@ -157,10 +157,10 @@ type MailFromDomainStatus string
 
 // Enum values for MailFromDomainStatus
 const (
-	MailFromDomainStatusPending           MailFromDomainStatus = "PENDING"
-	MailFromDomainStatusSuccess           MailFromDomainStatus = "SUCCESS"
-	MailFromDomainStatusFailed            MailFromDomainStatus = "FAILED"
-	MailFromDomainStatusTemporary_failure MailFromDomainStatus = "TEMPORARY_FAILURE"
+	MailFromDomainStatusPending          MailFromDomainStatus = "PENDING"
+	MailFromDomainStatusSuccess          MailFromDomainStatus = "SUCCESS"
+	MailFromDomainStatusFailed           MailFromDomainStatus = "FAILED"
+	MailFromDomainStatusTemporaryFailure MailFromDomainStatus = "TEMPORARY_FAILURE"
 )
 
 // Values returns all known values for MailFromDomainStatus. Note that this can be
@@ -197,8 +197,8 @@ type WarmupStatus string
 
 // Enum values for WarmupStatus
 const (
-	WarmupStatusIn_progress WarmupStatus = "IN_PROGRESS"
-	WarmupStatusDone        WarmupStatus = "DONE"
+	WarmupStatusInProgress WarmupStatus = "IN_PROGRESS"
+	WarmupStatusDone       WarmupStatus = "DONE"
 )
 
 // Values returns all known values for WarmupStatus. Note that this can be expanded

@@ -12,5 +12,5 @@
 // Usage API. Service Endpoint The AWS Cost and Usage Report API provides the
 // following endpoint:
 //
-//     * cur.us-east-1.amazonaws.com
+// * cur.us-east-1.amazonaws.com
 package costandusagereportservice

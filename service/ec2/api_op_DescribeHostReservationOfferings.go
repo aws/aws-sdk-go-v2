@@ -39,11 +39,11 @@ type DescribeHostReservationOfferingsInput struct {
 
 	// The filters.
 	//
-	//     * instance-family - The instance family of the offering (for
+	// * instance-family - The instance family of the offering (for
 	// example, m4).
 	//
-	//     * payment-option - The payment option (NoUpfront |
-	// PartialUpfront | AllUpfront).
+	// * payment-option - The payment option (NoUpfront | PartialUpfront
+	// | AllUpfront).
 	Filter []*types.Filter
 
 	// This is the maximum duration of the reservation to purchase, specified in

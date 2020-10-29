@@ -32,9 +32,9 @@ type InputStartingPosition string
 
 // Enum values for InputStartingPosition
 const (
-	InputStartingPositionNow                InputStartingPosition = "NOW"
-	InputStartingPositionTrim_horizon       InputStartingPosition = "TRIM_HORIZON"
-	InputStartingPositionLast_stopped_point InputStartingPosition = "LAST_STOPPED_POINT"
+	InputStartingPositionNow              InputStartingPosition = "NOW"
+	InputStartingPositionTrimHorizon      InputStartingPosition = "TRIM_HORIZON"
+	InputStartingPositionLastStoppedPoint InputStartingPosition = "LAST_STOPPED_POINT"
 )
 
 // Values returns all known values for InputStartingPosition. Note that this can be

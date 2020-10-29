@@ -18,29 +18,28 @@ import (
 // update a game session, specify the game session ID and the values you want to
 // change. If successful, an updated GameSession object is returned.
 //
-//     *
+// *
 // CreateGameSession
 //
-//     * DescribeGameSessions
+// * DescribeGameSessions
 //
-//     *
-// DescribeGameSessionDetails
+// * DescribeGameSessionDetails
 //
-//     * SearchGameSessions
+// *
+// SearchGameSessions
 //
-//     * UpdateGameSession
-//
+// * UpdateGameSession
 //
 // * GetGameSessionLogUrl
 //
-//     * Game session placements
+// * Game session
+// placements
 //
-//         *
-// StartGameSessionPlacement
+// * StartGameSessionPlacement
 //
-//         * DescribeGameSessionPlacement
+// * DescribeGameSessionPlacement
 //
-//         *
+// *
 // StopGameSessionPlacement
 func (c *Client) UpdateGameSession(ctx context.Context, params *UpdateGameSessionInput, optFns ...func(*Options)) (*UpdateGameSessionOutput, error) {
 	if params == nil {
@@ -78,11 +77,11 @@ type UpdateGameSessionInput struct {
 
 	// Game session protection policy to apply to this game session only.
 	//
-	//     *
+	// *
 	// NoProtection -- The game session can be terminated during a scale-down event.
 	//
-	//
-	// * FullProtection -- If the game session is in an ACTIVE status, it cannot be
+	// *
+	// FullProtection -- If the game session is in an ACTIVE status, it cannot be
 	// terminated during a scale-down event.
 	ProtectionPolicy types.ProtectionPolicy
 }

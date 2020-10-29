@@ -21,48 +21,48 @@ import (
 // SizeConstraintSet. For each SizeConstraint object, you specify the following
 // values:
 //
-//     * Whether to insert or delete the object from the array. If you
-// want to change a SizeConstraintSetUpdate object, you delete the existing object
-// and add a new one.
+// * Whether to insert or delete the object from the array. If you want to
+// change a SizeConstraintSetUpdate object, you delete the existing object and add
+// a new one.
 //
-//     * The part of a web request that you want AWS WAF to
-// evaluate, such as the length of a query string or the length of the User-Agent
-// header.
+// * The part of a web request that you want AWS WAF to evaluate, such
+// as the length of a query string or the length of the User-Agent header.
 //
-//     * Whether to perform any transformations on the request, such as
-// converting it to lowercase, before checking its length. Note that
-// transformations of the request body are not supported because the AWS resource
-// forwards only the first 8192 bytes of your request to AWS WAF. You can only
-// specify a single type of TextTransformation.
+// *
+// Whether to perform any transformations on the request, such as converting it to
+// lowercase, before checking its length. Note that transformations of the request
+// body are not supported because the AWS resource forwards only the first 8192
+// bytes of your request to AWS WAF. You can only specify a single type of
+// TextTransformation.
 //
-//     * A ComparisonOperator used
-// for evaluating the selected part of the request against the specified Size, such
-// as equals, greater than, less than, and so on.
+// * A ComparisonOperator used for evaluating the selected
+// part of the request against the specified Size, such as equals, greater than,
+// less than, and so on.
 //
-//     * The length, in bytes, that
-// you want AWS WAF to watch for in selected part of the request. The length is
-// computed after applying the transformation.
+// * The length, in bytes, that you want AWS WAF to watch
+// for in selected part of the request. The length is computed after applying the
+// transformation.
 //
-// For example, you can add a
-// SizeConstraintSetUpdate object that matches web requests in which the length of
-// the User-Agent header is greater than 100 bytes. You can then configure AWS WAF
-// to block those requests. To create and configure a SizeConstraintSet, perform
-// the following steps:
+// For example, you can add a SizeConstraintSetUpdate object that
+// matches web requests in which the length of the User-Agent header is greater
+// than 100 bytes. You can then configure AWS WAF to block those requests. To
+// create and configure a SizeConstraintSet, perform the following steps:
 //
-//     * Create a SizeConstraintSet. For more information,
-// see CreateSizeConstraintSet.
+// * Create
+// a SizeConstraintSet. For more information, see CreateSizeConstraintSet.
 //
-//     * Use GetChangeToken to get the change token
-// that you provide in the ChangeToken parameter of an UpdateSizeConstraintSet
-// request.
+// * Use
+// GetChangeToken to get the change token that you provide in the ChangeToken
+// parameter of an UpdateSizeConstraintSet request.
 //
-//     * Submit an UpdateSizeConstraintSet request to specify the part of
-// the request that you want AWS WAF to inspect (for example, the header or the
-// URI) and the value that you want AWS WAF to watch for.
+// * Submit an
+// UpdateSizeConstraintSet request to specify the part of the request that you want
+// AWS WAF to inspect (for example, the header or the URI) and the value that you
+// want AWS WAF to watch for.
 //
-// For more information
-// about how to use the AWS WAF API to allow or block HTTP requests, see the AWS
-// WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/).
+// For more information about how to use the AWS WAF
+// API to allow or block HTTP requests, see the AWS WAF Developer Guide
+// (https://docs.aws.amazon.com/waf/latest/developerguide/).
 func (c *Client) UpdateSizeConstraintSet(ctx context.Context, params *UpdateSizeConstraintSetInput, optFns ...func(*Options)) (*UpdateSizeConstraintSetOutput, error) {
 	if params == nil {
 		params = &UpdateSizeConstraintSetInput{}
@@ -96,13 +96,13 @@ type UpdateSizeConstraintSetInput struct {
 	// delete from a SizeConstraintSet. For more information, see the applicable data
 	// types:
 	//
-	//     * SizeConstraintSetUpdate: Contains Action and SizeConstraint
+	// * SizeConstraintSetUpdate: Contains Action and SizeConstraint
 	//
-	//     *
+	// *
 	// SizeConstraint: Contains FieldToMatch, TextTransformation, ComparisonOperator,
 	// and Size
 	//
-	//     * FieldToMatch: Contains Data and Type
+	// * FieldToMatch: Contains Data and Type
 	//
 	// This member is required.
 	Updates []*types.SizeConstraintSetUpdate

@@ -6,9 +6,9 @@ type ChatItemType string
 
 // Enum values for ChatItemType
 const (
-	ChatItemTypeMessage        ChatItemType = "MESSAGE"
-	ChatItemTypeEvent          ChatItemType = "EVENT"
-	ChatItemTypeConnection_ack ChatItemType = "CONNECTION_ACK"
+	ChatItemTypeMessage       ChatItemType = "MESSAGE"
+	ChatItemTypeEvent         ChatItemType = "EVENT"
+	ChatItemTypeConnectionAck ChatItemType = "CONNECTION_ACK"
 )
 
 // Values returns all known values for ChatItemType. Note that this can be expanded
@@ -26,8 +26,8 @@ type ConnectionType string
 
 // Enum values for ConnectionType
 const (
-	ConnectionTypeWebsocket              ConnectionType = "WEBSOCKET"
-	ConnectionTypeConnection_credentials ConnectionType = "CONNECTION_CREDENTIALS"
+	ConnectionTypeWebsocket             ConnectionType = "WEBSOCKET"
+	ConnectionTypeConnectionCredentials ConnectionType = "CONNECTION_CREDENTIALS"
 )
 
 // Values returns all known values for ConnectionType. Note that this can be

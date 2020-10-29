@@ -41,22 +41,22 @@ type DescribeLocalGatewaysInput struct {
 
 	// One or more filters.
 	//
-	//     * local-gateway-id - The ID of a local gateway.
+	// * local-gateway-id - The ID of a local gateway.
 	//
-	//     *
+	// *
 	// local-gateway-route-table-id - The ID of the local gateway route table.
 	//
-	//     *
+	// *
 	// local-gateway-route-table-virtual-interface-group-association-id - The ID of the
 	// association.
 	//
-	//     * local-gateway-route-table-virtual-interface-group-id - The
-	// ID of the virtual interface group.
+	// * local-gateway-route-table-virtual-interface-group-id - The ID of
+	// the virtual interface group.
 	//
-	//     * outpost-arn - The Amazon Resource Name
-	// (ARN) of the Outpost.
+	// * outpost-arn - The Amazon Resource Name (ARN) of
+	// the Outpost.
 	//
-	//     * state - The state of the association.
+	// * state - The state of the association.
 	LocalGatewayIds []*string
 
 	// The maximum number of results to return with a single call. To retrieve the

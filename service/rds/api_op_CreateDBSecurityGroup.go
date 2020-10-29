@@ -40,15 +40,15 @@ type CreateDBSecurityGroupInput struct {
 	// The name for the DB security group. This value is stored as a lowercase string.
 	// Constraints:
 	//
-	//     * Must be 1 to 255 letters, numbers, or hyphens.
+	// * Must be 1 to 255 letters, numbers, or hyphens.
 	//
-	//     * First
+	// * First
 	// character must be a letter
 	//
-	//     * Can't end with a hyphen or contain two
-	// consecutive hyphens
+	// * Can't end with a hyphen or contain two consecutive
+	// hyphens
 	//
-	//     * Must not be "Default"
+	// * Must not be "Default"
 	//
 	// Example: mysecuritygroup
 	//

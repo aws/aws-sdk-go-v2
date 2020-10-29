@@ -36,16 +36,16 @@ type UpdateClassificationJobInput struct {
 
 	// The new status for the job. Valid values are:
 	//
-	//     * CANCELLED - Stops the job
+	// * CANCELLED - Stops the job
 	// permanently and cancels it. You can't resume a job after you cancel it. This
 	// value is valid only if the job's current status is IDLE, PAUSED, RUNNING, or
 	// USER_PAUSED.
 	//
-	//     * RUNNING - Resumes the job. This value is valid only if the
-	// job's current status is USER_PAUSED. If you specify this value, Amazon Macie
+	// * RUNNING - Resumes the job. This value is valid only if the job's
+	// current status is USER_PAUSED. If you specify this value, Amazon Macie
 	// immediately resumes the job.
 	//
-	//     * USER_PAUSED - Pauses the job. This value is
+	// * USER_PAUSED - Pauses the job. This value is
 	// valid only if the job's current status is IDLE or RUNNING. If you specify this
 	// value and the job is currently running, Macie immediately stops running the job.
 	// To resume a job after you pause it, change the job's status to RUNNING. If you

@@ -26,29 +26,29 @@ type AWSRegion string
 
 // Enum values for AWSRegion
 const (
-	AWSRegionCape_town           AWSRegion = "af-south-1"
-	AWSRegionHong_kong           AWSRegion = "ap-east-1"
-	AWSRegionMumbai              AWSRegion = "ap-south-1"
-	AWSRegionSingapore           AWSRegion = "ap-southeast-1"
-	AWSRegionSydney              AWSRegion = "ap-southeast-2"
-	AWSRegionTokyo               AWSRegion = "ap-northeast-1"
-	AWSRegionSeoul               AWSRegion = "ap-northeast-2"
-	AWSRegionOsaka               AWSRegion = "ap-northeast-3"
-	AWSRegionCanada_central      AWSRegion = "ca-central-1"
-	AWSRegionFrankfurt           AWSRegion = "eu-central-1"
-	AWSRegionIreland             AWSRegion = "eu-west-1"
-	AWSRegionLondon              AWSRegion = "eu-west-2"
-	AWSRegionParis               AWSRegion = "eu-west-3"
-	AWSRegionStockholm           AWSRegion = "eu-north-1"
-	AWSRegionMilano              AWSRegion = "eu-south-1"
-	AWSRegionBahrain             AWSRegion = "me-south-1"
-	AWSRegionSao_paulo           AWSRegion = "sa-east-1"
-	AWSRegionUs_standard         AWSRegion = "us-east-1"
-	AWSRegionOhio                AWSRegion = "us-east-2"
-	AWSRegionNorthern_california AWSRegion = "us-west-1"
-	AWSRegionOregon              AWSRegion = "us-west-2"
-	AWSRegionBeijing             AWSRegion = "cn-north-1"
-	AWSRegionNingxia             AWSRegion = "cn-northwest-1"
+	AWSRegionCapeTown           AWSRegion = "af-south-1"
+	AWSRegionHongKong           AWSRegion = "ap-east-1"
+	AWSRegionMumbai             AWSRegion = "ap-south-1"
+	AWSRegionSingapore          AWSRegion = "ap-southeast-1"
+	AWSRegionSydney             AWSRegion = "ap-southeast-2"
+	AWSRegionTokyo              AWSRegion = "ap-northeast-1"
+	AWSRegionSeoul              AWSRegion = "ap-northeast-2"
+	AWSRegionOsaka              AWSRegion = "ap-northeast-3"
+	AWSRegionCanadaCentral      AWSRegion = "ca-central-1"
+	AWSRegionFrankfurt          AWSRegion = "eu-central-1"
+	AWSRegionIreland            AWSRegion = "eu-west-1"
+	AWSRegionLondon             AWSRegion = "eu-west-2"
+	AWSRegionParis              AWSRegion = "eu-west-3"
+	AWSRegionStockholm          AWSRegion = "eu-north-1"
+	AWSRegionMilano             AWSRegion = "eu-south-1"
+	AWSRegionBahrain            AWSRegion = "me-south-1"
+	AWSRegionSaoPaulo           AWSRegion = "sa-east-1"
+	AWSRegionUsStandard         AWSRegion = "us-east-1"
+	AWSRegionOhio               AWSRegion = "us-east-2"
+	AWSRegionNorthernCalifornia AWSRegion = "us-west-1"
+	AWSRegionOregon             AWSRegion = "us-west-2"
+	AWSRegionBeijing            AWSRegion = "cn-north-1"
+	AWSRegionNingxia            AWSRegion = "cn-northwest-1"
 )
 
 // Values returns all known values for AWSRegion. Note that this can be expanded in
@@ -124,8 +124,8 @@ type ReportVersioning string
 
 // Enum values for ReportVersioning
 const (
-	ReportVersioningCreate_new_report ReportVersioning = "CREATE_NEW_REPORT"
-	ReportVersioningOverwrite_report  ReportVersioning = "OVERWRITE_REPORT"
+	ReportVersioningCreateNewReport ReportVersioning = "CREATE_NEW_REPORT"
+	ReportVersioningOverwriteReport ReportVersioning = "OVERWRITE_REPORT"
 )
 
 // Values returns all known values for ReportVersioning. Note that this can be

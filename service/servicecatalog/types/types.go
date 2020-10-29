@@ -11,13 +11,13 @@ type AccessLevelFilter struct {
 
 	// The access level.
 	//
-	//     * Account - Filter results based on the account.
+	// * Account - Filter results based on the account.
 	//
-	//     *
-	// Role - Filter results based on the federated role of the specified user.
+	// * Role -
+	// Filter results based on the federated role of the specified user.
 	//
-	//     *
-	// User - Filter results based on the specified user.
+	// * User -
+	// Filter results based on the specified user.
 	Key AccessLevelFilterKey
 
 	// The user to which the access level applies. The only supported value is Self.
@@ -60,14 +60,13 @@ type ConstraintDetail struct {
 
 	// The type of constraint.
 	//
-	//     * LAUNCH
+	// * LAUNCH
 	//
-	//     * NOTIFICATION
+	// * NOTIFICATION
 	//
-	//     * STACKSET
+	// * STACKSET
 	//
-	//     *
-	// TEMPLATE
+	// * TEMPLATE
 	Type *string
 }
 
@@ -79,14 +78,13 @@ type ConstraintSummary struct {
 
 	// The type of constraint.
 	//
-	//     * LAUNCH
+	// * LAUNCH
 	//
-	//     * NOTIFICATION
+	// * NOTIFICATION
 	//
-	//     * STACKSET
+	// * STACKSET
 	//
-	//     *
-	// TEMPLATE
+	// * TEMPLATE
 	Type *string
 }
 
@@ -155,10 +153,10 @@ type ListRecordHistorySearchFilter struct {
 
 	// The filter key.
 	//
-	//     * product - Filter results based on the specified product
+	// * product - Filter results based on the specified product
 	// identifier.
 	//
-	//     * provisionedproduct - Filter results based on the provisioned
+	// * provisionedproduct - Filter results based on the provisioned
 	// product identifier.
 	Key *string
 
@@ -253,13 +251,13 @@ type ProductViewDetail struct {
 
 	// The status of the product.
 	//
-	//     * AVAILABLE - The product is ready for use.
+	// * AVAILABLE - The product is ready for use.
 	//
+	// *
+	// CREATING - Product creation has started; the product is not ready for use.
 	//
-	// * CREATING - Product creation has started; the product is not ready for use.
-	//
-	//
-	// * FAILED - An action failed.
+	// *
+	// FAILED - An action failed.
 	Status Status
 }
 
@@ -326,15 +324,14 @@ type ProvisionedProductAttribute struct {
 	// The record identifier of the last request performed on this provisioned product
 	// of the following types:
 	//
-	//     * ProvisionedProduct
+	// * ProvisionedProduct
 	//
-	//     *
-	// UpdateProvisionedProduct
+	// * UpdateProvisionedProduct
 	//
-	//     * ExecuteProvisionedProductPlan
+	// *
+	// ExecuteProvisionedProductPlan
 	//
-	//     *
-	// TerminateProvisionedProduct
+	// * TerminateProvisionedProduct
 	LastProvisioningRecordId *string
 
 	// The record identifier of the last request performed on this provisioned product.
@@ -343,14 +340,14 @@ type ProvisionedProductAttribute struct {
 	// The record identifier of the last successful request performed on this
 	// provisioned product of the following types:
 	//
-	//     * ProvisionedProduct
+	// * ProvisionedProduct
 	//
-	//     *
+	// *
 	// UpdateProvisionedProduct
 	//
-	//     * ExecuteProvisionedProductPlan
+	// * ExecuteProvisionedProductPlan
 	//
-	//     *
+	// *
 	// TerminateProvisionedProduct
 	LastSuccessfulProvisioningRecordId *string
 
@@ -375,28 +372,28 @@ type ProvisionedProductAttribute struct {
 
 	// The current status of the provisioned product.
 	//
-	//     * AVAILABLE - Stable state,
+	// * AVAILABLE - Stable state,
 	// ready to perform any operation. The most recent operation succeeded and
 	// completed.
 	//
-	//     * UNDER_CHANGE - Transitive state. Operations performed might
-	// not have valid results. Wait for an AVAILABLE status before performing
+	// * UNDER_CHANGE - Transitive state. Operations performed might not
+	// have valid results. Wait for an AVAILABLE status before performing
 	// operations.
 	//
-	//     * TAINTED - Stable state, ready to perform any operation. The
-	// stack has completed the requested operation but is not exactly what was
-	// requested. For example, a request to update to a new version failed and the
-	// stack rolled back to the current version.
+	// * TAINTED - Stable state, ready to perform any operation. The stack
+	// has completed the requested operation but is not exactly what was requested. For
+	// example, a request to update to a new version failed and the stack rolled back
+	// to the current version.
 	//
-	//     * ERROR - An unexpected error
-	// occurred. The provisioned product exists but the stack is not running. For
-	// example, CloudFormation received a parameter value that was not valid and could
-	// not launch the stack.
+	// * ERROR - An unexpected error occurred. The provisioned
+	// product exists but the stack is not running. For example, CloudFormation
+	// received a parameter value that was not valid and could not launch the stack.
 	//
-	//     * PLAN_IN_PROGRESS - Transitive state. The plan
-	// operations were performed to provision a new product, but resources have not yet
-	// been created. After reviewing the list of resources to be created, execute the
-	// plan. Wait for an AVAILABLE status before performing operations.
+	// *
+	// PLAN_IN_PROGRESS - Transitive state. The plan operations were performed to
+	// provision a new product, but resources have not yet been created. After
+	// reviewing the list of resources to be created, execute the plan. Wait for an
+	// AVAILABLE status before performing operations.
 	Status ProvisionedProductStatus
 
 	// The current status message of the provisioned product.
@@ -436,15 +433,14 @@ type ProvisionedProductDetail struct {
 	// The record identifier of the last request performed on this provisioned product
 	// of the following types:
 	//
-	//     * ProvisionedProduct
+	// * ProvisionedProduct
 	//
-	//     *
-	// UpdateProvisionedProduct
+	// * UpdateProvisionedProduct
 	//
-	//     * ExecuteProvisionedProductPlan
+	// *
+	// ExecuteProvisionedProductPlan
 	//
-	//     *
-	// TerminateProvisionedProduct
+	// * TerminateProvisionedProduct
 	LastProvisioningRecordId *string
 
 	// The record identifier of the last request performed on this provisioned product.
@@ -453,14 +449,14 @@ type ProvisionedProductDetail struct {
 	// The record identifier of the last successful request performed on this
 	// provisioned product of the following types:
 	//
-	//     * ProvisionedProduct
+	// * ProvisionedProduct
 	//
-	//     *
+	// *
 	// UpdateProvisionedProduct
 	//
-	//     * ExecuteProvisionedProductPlan
+	// * ExecuteProvisionedProductPlan
 	//
-	//     *
+	// *
 	// TerminateProvisionedProduct
 	LastSuccessfulProvisioningRecordId *string
 
@@ -478,28 +474,28 @@ type ProvisionedProductDetail struct {
 
 	// The current status of the provisioned product.
 	//
-	//     * AVAILABLE - Stable state,
+	// * AVAILABLE - Stable state,
 	// ready to perform any operation. The most recent operation succeeded and
 	// completed.
 	//
-	//     * UNDER_CHANGE - Transitive state. Operations performed might
-	// not have valid results. Wait for an AVAILABLE status before performing
+	// * UNDER_CHANGE - Transitive state. Operations performed might not
+	// have valid results. Wait for an AVAILABLE status before performing
 	// operations.
 	//
-	//     * TAINTED - Stable state, ready to perform any operation. The
-	// stack has completed the requested operation but is not exactly what was
-	// requested. For example, a request to update to a new version failed and the
-	// stack rolled back to the current version.
+	// * TAINTED - Stable state, ready to perform any operation. The stack
+	// has completed the requested operation but is not exactly what was requested. For
+	// example, a request to update to a new version failed and the stack rolled back
+	// to the current version.
 	//
-	//     * ERROR - An unexpected error
-	// occurred. The provisioned product exists but the stack is not running. For
-	// example, CloudFormation received a parameter value that was not valid and could
-	// not launch the stack.
+	// * ERROR - An unexpected error occurred. The provisioned
+	// product exists but the stack is not running. For example, CloudFormation
+	// received a parameter value that was not valid and could not launch the stack.
 	//
-	//     * PLAN_IN_PROGRESS - Transitive state. The plan
-	// operations were performed to provision a new product, but resources have not yet
-	// been created. After reviewing the list of resources to be created, execute the
-	// plan. Wait for an AVAILABLE status before performing operations.
+	// *
+	// PLAN_IN_PROGRESS - Transitive state. The plan operations were performed to
+	// provision a new product, but resources have not yet been created. After
+	// reviewing the list of resources to be created, execute the plan. Wait for an
+	// AVAILABLE status before performing operations.
 	Status ProvisionedProductStatus
 
 	// The current status message of the provisioned product.
@@ -631,12 +627,12 @@ type ProvisioningArtifactDetail struct {
 
 	// The type of provisioning artifact.
 	//
-	//     * CLOUD_FORMATION_TEMPLATE - AWS
+	// * CLOUD_FORMATION_TEMPLATE - AWS
 	// CloudFormation template
 	//
-	//     * MARKETPLACE_AMI - AWS Marketplace AMI
+	// * MARKETPLACE_AMI - AWS Marketplace AMI
 	//
-	//     *
+	// *
 	// MARKETPLACE_CAR - AWS Marketplace Clusters and AWS Resources
 	Type ProvisioningArtifactType
 }
@@ -721,12 +717,12 @@ type ProvisioningArtifactProperties struct {
 
 	// The type of provisioning artifact.
 	//
-	//     * CLOUD_FORMATION_TEMPLATE - AWS
+	// * CLOUD_FORMATION_TEMPLATE - AWS
 	// CloudFormation template
 	//
-	//     * MARKETPLACE_AMI - AWS Marketplace AMI
+	// * MARKETPLACE_AMI - AWS Marketplace AMI
 	//
-	//     *
+	// *
 	// MARKETPLACE_CAR - AWS Marketplace Clusters and AWS Resources
 	Type ProvisioningArtifactType
 }
@@ -876,31 +872,31 @@ type RecordDetail struct {
 
 	// The record type.
 	//
-	//     * PROVISION_PRODUCT
+	// * PROVISION_PRODUCT
 	//
-	//     * UPDATE_PROVISIONED_PRODUCT
+	// * UPDATE_PROVISIONED_PRODUCT
 	//
-	//
-	// * TERMINATE_PROVISIONED_PRODUCT
+	// *
+	// TERMINATE_PROVISIONED_PRODUCT
 	RecordType *string
 
 	// The status of the provisioned product.
 	//
-	//     * CREATED - The request was created
-	// but the operation has not started.
+	// * CREATED - The request was created but
+	// the operation has not started.
 	//
-	//     * IN_PROGRESS - The requested operation
-	// is in progress.
+	// * IN_PROGRESS - The requested operation is in
+	// progress.
 	//
-	//     * IN_PROGRESS_IN_ERROR - The provisioned product is under
-	// change but the requested operation failed and some remediation is occurring. For
-	// example, a rollback.
+	// * IN_PROGRESS_IN_ERROR - The provisioned product is under change but
+	// the requested operation failed and some remediation is occurring. For example, a
+	// rollback.
 	//
-	//     * SUCCEEDED - The requested operation has successfully
-	// completed.
+	// * SUCCEEDED - The requested operation has successfully completed.
 	//
-	//     * FAILED - The requested operation has unsuccessfully completed.
-	// Investigate using the error messages returned.
+	// *
+	// FAILED - The requested operation has unsuccessfully completed. Investigate using
+	// the error messages returned.
 	Status RecordStatus
 
 	// The time when the record was last updated.
@@ -1104,20 +1100,20 @@ type StackInstance struct {
 	// The status of the stack instance, in terms of its synchronization with its
 	// associated stack set.
 	//
-	//     * INOPERABLE: A DeleteStackInstances operation has
-	// failed and left the stack in an unstable state. Stacks in this state are
-	// excluded from further UpdateStackSet operations. You might need to perform a
+	// * INOPERABLE: A DeleteStackInstances operation has failed
+	// and left the stack in an unstable state. Stacks in this state are excluded from
+	// further UpdateStackSet operations. You might need to perform a
 	// DeleteStackInstances operation, with RetainStacks set to true, to delete the
 	// stack instance, and then delete the stack manually.
 	//
-	//     * OUTDATED: The stack
-	// isn't currently up to date with the stack set because either the associated
-	// stack failed during a CreateStackSet or UpdateStackSet operation, or the stack
-	// was part of a CreateStackSet or UpdateStackSet operation that failed or was
-	// stopped before the stack was created or updated.
+	// * OUTDATED: The stack isn't
+	// currently up to date with the stack set because either the associated stack
+	// failed during a CreateStackSet or UpdateStackSet operation, or the stack was
+	// part of a CreateStackSet or UpdateStackSet operation that failed or was stopped
+	// before the stack was created or updated.
 	//
-	//     * CURRENT: The stack is
-	// currently up to date with the stack set.
+	// * CURRENT: The stack is currently up
+	// to date with the stack set.
 	StackInstanceStatus StackInstanceStatus
 }
 

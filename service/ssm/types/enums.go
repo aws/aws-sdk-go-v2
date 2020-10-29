@@ -198,15 +198,15 @@ type AutomationExecutionFilterKey string
 
 // Enum values for AutomationExecutionFilterKey
 const (
-	AutomationExecutionFilterKeyDocument_name_prefix AutomationExecutionFilterKey = "DocumentNamePrefix"
-	AutomationExecutionFilterKeyExecution_status     AutomationExecutionFilterKey = "ExecutionStatus"
-	AutomationExecutionFilterKeyExecution_id         AutomationExecutionFilterKey = "ExecutionId"
-	AutomationExecutionFilterKeyParent_execution_id  AutomationExecutionFilterKey = "ParentExecutionId"
-	AutomationExecutionFilterKeyCurrent_action       AutomationExecutionFilterKey = "CurrentAction"
-	AutomationExecutionFilterKeyStart_time_before    AutomationExecutionFilterKey = "StartTimeBefore"
-	AutomationExecutionFilterKeyStart_time_after     AutomationExecutionFilterKey = "StartTimeAfter"
-	AutomationExecutionFilterKeyAutomation_type      AutomationExecutionFilterKey = "AutomationType"
-	AutomationExecutionFilterKeyTag_key              AutomationExecutionFilterKey = "TagKey"
+	AutomationExecutionFilterKeyDocumentNamePrefix AutomationExecutionFilterKey = "DocumentNamePrefix"
+	AutomationExecutionFilterKeyExecutionStatus    AutomationExecutionFilterKey = "ExecutionStatus"
+	AutomationExecutionFilterKeyExecutionId        AutomationExecutionFilterKey = "ExecutionId"
+	AutomationExecutionFilterKeyParentExecutionId  AutomationExecutionFilterKey = "ParentExecutionId"
+	AutomationExecutionFilterKeyCurrentAction      AutomationExecutionFilterKey = "CurrentAction"
+	AutomationExecutionFilterKeyStartTimeBefore    AutomationExecutionFilterKey = "StartTimeBefore"
+	AutomationExecutionFilterKeyStartTimeAfter     AutomationExecutionFilterKey = "StartTimeAfter"
+	AutomationExecutionFilterKeyAutomationType     AutomationExecutionFilterKey = "AutomationType"
+	AutomationExecutionFilterKeyTagKey             AutomationExecutionFilterKey = "TagKey"
 )
 
 // Values returns all known values for AutomationExecutionFilterKey. Note that this
@@ -296,11 +296,11 @@ type CommandFilterKey string
 
 // Enum values for CommandFilterKey
 const (
-	CommandFilterKeyInvoked_after   CommandFilterKey = "InvokedAfter"
-	CommandFilterKeyInvoked_before  CommandFilterKey = "InvokedBefore"
-	CommandFilterKeyStatus          CommandFilterKey = "Status"
-	CommandFilterKeyExecution_stage CommandFilterKey = "ExecutionStage"
-	CommandFilterKeyDocument_name   CommandFilterKey = "DocumentName"
+	CommandFilterKeyInvokedAfter   CommandFilterKey = "InvokedAfter"
+	CommandFilterKeyInvokedBefore  CommandFilterKey = "InvokedBefore"
+	CommandFilterKeyStatus         CommandFilterKey = "Status"
+	CommandFilterKeyExecutionStage CommandFilterKey = "ExecutionStage"
+	CommandFilterKeyDocumentName   CommandFilterKey = "DocumentName"
 )
 
 // Values returns all known values for CommandFilterKey. Note that this can be
@@ -320,14 +320,14 @@ type CommandInvocationStatus string
 
 // Enum values for CommandInvocationStatus
 const (
-	CommandInvocationStatusPending     CommandInvocationStatus = "Pending"
-	CommandInvocationStatusIn_progress CommandInvocationStatus = "InProgress"
-	CommandInvocationStatusDelayed     CommandInvocationStatus = "Delayed"
-	CommandInvocationStatusSuccess     CommandInvocationStatus = "Success"
-	CommandInvocationStatusCancelled   CommandInvocationStatus = "Cancelled"
-	CommandInvocationStatusTimed_out   CommandInvocationStatus = "TimedOut"
-	CommandInvocationStatusFailed      CommandInvocationStatus = "Failed"
-	CommandInvocationStatusCancelling  CommandInvocationStatus = "Cancelling"
+	CommandInvocationStatusPending    CommandInvocationStatus = "Pending"
+	CommandInvocationStatusInProgress CommandInvocationStatus = "InProgress"
+	CommandInvocationStatusDelayed    CommandInvocationStatus = "Delayed"
+	CommandInvocationStatusSuccess    CommandInvocationStatus = "Success"
+	CommandInvocationStatusCancelled  CommandInvocationStatus = "Cancelled"
+	CommandInvocationStatusTimedOut   CommandInvocationStatus = "TimedOut"
+	CommandInvocationStatusFailed     CommandInvocationStatus = "Failed"
+	CommandInvocationStatusCancelling CommandInvocationStatus = "Cancelling"
 )
 
 // Values returns all known values for CommandInvocationStatus. Note that this can
@@ -350,12 +350,12 @@ type CommandPluginStatus string
 
 // Enum values for CommandPluginStatus
 const (
-	CommandPluginStatusPending     CommandPluginStatus = "Pending"
-	CommandPluginStatusIn_progress CommandPluginStatus = "InProgress"
-	CommandPluginStatusSuccess     CommandPluginStatus = "Success"
-	CommandPluginStatusTimed_out   CommandPluginStatus = "TimedOut"
-	CommandPluginStatusCancelled   CommandPluginStatus = "Cancelled"
-	CommandPluginStatusFailed      CommandPluginStatus = "Failed"
+	CommandPluginStatusPending    CommandPluginStatus = "Pending"
+	CommandPluginStatusInProgress CommandPluginStatus = "InProgress"
+	CommandPluginStatusSuccess    CommandPluginStatus = "Success"
+	CommandPluginStatusTimedOut   CommandPluginStatus = "TimedOut"
+	CommandPluginStatusCancelled  CommandPluginStatus = "Cancelled"
+	CommandPluginStatusFailed     CommandPluginStatus = "Failed"
 )
 
 // Values returns all known values for CommandPluginStatus. Note that this can be
@@ -376,13 +376,13 @@ type CommandStatus string
 
 // Enum values for CommandStatus
 const (
-	CommandStatusPending     CommandStatus = "Pending"
-	CommandStatusIn_progress CommandStatus = "InProgress"
-	CommandStatusSuccess     CommandStatus = "Success"
-	CommandStatusCancelled   CommandStatus = "Cancelled"
-	CommandStatusFailed      CommandStatus = "Failed"
-	CommandStatusTimed_out   CommandStatus = "TimedOut"
-	CommandStatusCancelling  CommandStatus = "Cancelling"
+	CommandStatusPending    CommandStatus = "Pending"
+	CommandStatusInProgress CommandStatus = "InProgress"
+	CommandStatusSuccess    CommandStatus = "Success"
+	CommandStatusCancelled  CommandStatus = "Cancelled"
+	CommandStatusFailed     CommandStatus = "Failed"
+	CommandStatusTimedOut   CommandStatus = "TimedOut"
+	CommandStatusCancelling CommandStatus = "Cancelling"
 )
 
 // Values returns all known values for CommandStatus. Note that this can be
@@ -490,8 +490,8 @@ type ConnectionStatus string
 
 // Enum values for ConnectionStatus
 const (
-	ConnectionStatusConnected     ConnectionStatus = "Connected"
-	ConnectionStatusNot_connected ConnectionStatus = "NotConnected"
+	ConnectionStatusConnected    ConnectionStatus = "Connected"
+	ConnectionStatusNotConnected ConnectionStatus = "NotConnected"
 )
 
 // Values returns all known values for ConnectionStatus. Note that this can be
@@ -508,9 +508,9 @@ type DescribeActivationsFilterKeys string
 
 // Enum values for DescribeActivationsFilterKeys
 const (
-	DescribeActivationsFilterKeysActivation_ids        DescribeActivationsFilterKeys = "ActivationIds"
-	DescribeActivationsFilterKeysDefault_instance_name DescribeActivationsFilterKeys = "DefaultInstanceName"
-	DescribeActivationsFilterKeysIam_role              DescribeActivationsFilterKeys = "IamRole"
+	DescribeActivationsFilterKeysActivationIds       DescribeActivationsFilterKeys = "ActivationIds"
+	DescribeActivationsFilterKeysDefaultInstanceName DescribeActivationsFilterKeys = "DefaultInstanceName"
+	DescribeActivationsFilterKeysIamRole             DescribeActivationsFilterKeys = "IamRole"
 )
 
 // Values returns all known values for DescribeActivationsFilterKeys. Note that
@@ -717,14 +717,14 @@ type InstanceInformationFilterKey string
 
 // Enum values for InstanceInformationFilterKey
 const (
-	InstanceInformationFilterKeyInstance_ids       InstanceInformationFilterKey = "InstanceIds"
-	InstanceInformationFilterKeyAgent_version      InstanceInformationFilterKey = "AgentVersion"
-	InstanceInformationFilterKeyPing_status        InstanceInformationFilterKey = "PingStatus"
-	InstanceInformationFilterKeyPlatform_types     InstanceInformationFilterKey = "PlatformTypes"
-	InstanceInformationFilterKeyActivation_ids     InstanceInformationFilterKey = "ActivationIds"
-	InstanceInformationFilterKeyIam_role           InstanceInformationFilterKey = "IamRole"
-	InstanceInformationFilterKeyResource_type      InstanceInformationFilterKey = "ResourceType"
-	InstanceInformationFilterKeyAssociation_status InstanceInformationFilterKey = "AssociationStatus"
+	InstanceInformationFilterKeyInstanceIds       InstanceInformationFilterKey = "InstanceIds"
+	InstanceInformationFilterKeyAgentVersion      InstanceInformationFilterKey = "AgentVersion"
+	InstanceInformationFilterKeyPingStatus        InstanceInformationFilterKey = "PingStatus"
+	InstanceInformationFilterKeyPlatformTypes     InstanceInformationFilterKey = "PlatformTypes"
+	InstanceInformationFilterKeyActivationIds     InstanceInformationFilterKey = "ActivationIds"
+	InstanceInformationFilterKeyIamRole           InstanceInformationFilterKey = "IamRole"
+	InstanceInformationFilterKeyResourceType      InstanceInformationFilterKey = "ResourceType"
+	InstanceInformationFilterKeyAssociationStatus InstanceInformationFilterKey = "AssociationStatus"
 )
 
 // Values returns all known values for InstanceInformationFilterKey. Note that this
@@ -747,10 +747,10 @@ type InstancePatchStateOperatorType string
 
 // Enum values for InstancePatchStateOperatorType
 const (
-	InstancePatchStateOperatorTypeEqual        InstancePatchStateOperatorType = "Equal"
-	InstancePatchStateOperatorTypeNot_equal    InstancePatchStateOperatorType = "NotEqual"
-	InstancePatchStateOperatorTypeLess_than    InstancePatchStateOperatorType = "LessThan"
-	InstancePatchStateOperatorTypeGreater_than InstancePatchStateOperatorType = "GreaterThan"
+	InstancePatchStateOperatorTypeEqual       InstancePatchStateOperatorType = "Equal"
+	InstancePatchStateOperatorTypeNotEqual    InstancePatchStateOperatorType = "NotEqual"
+	InstancePatchStateOperatorTypeLessThan    InstancePatchStateOperatorType = "LessThan"
+	InstancePatchStateOperatorTypeGreaterThan InstancePatchStateOperatorType = "GreaterThan"
 )
 
 // Values returns all known values for InstancePatchStateOperatorType. Note that
@@ -788,8 +788,8 @@ type InventoryDeletionStatus string
 
 // Enum values for InventoryDeletionStatus
 const (
-	InventoryDeletionStatusIn_progress InventoryDeletionStatus = "InProgress"
-	InventoryDeletionStatusComplete    InventoryDeletionStatus = "Complete"
+	InventoryDeletionStatusInProgress InventoryDeletionStatus = "InProgress"
+	InventoryDeletionStatusComplete   InventoryDeletionStatus = "Complete"
 )
 
 // Values returns all known values for InventoryDeletionStatus. Note that this can
@@ -806,12 +806,12 @@ type InventoryQueryOperatorType string
 
 // Enum values for InventoryQueryOperatorType
 const (
-	InventoryQueryOperatorTypeEqual        InventoryQueryOperatorType = "Equal"
-	InventoryQueryOperatorTypeNot_equal    InventoryQueryOperatorType = "NotEqual"
-	InventoryQueryOperatorTypeBegin_with   InventoryQueryOperatorType = "BeginWith"
-	InventoryQueryOperatorTypeLess_than    InventoryQueryOperatorType = "LessThan"
-	InventoryQueryOperatorTypeGreater_than InventoryQueryOperatorType = "GreaterThan"
-	InventoryQueryOperatorTypeExists       InventoryQueryOperatorType = "Exists"
+	InventoryQueryOperatorTypeEqual       InventoryQueryOperatorType = "Equal"
+	InventoryQueryOperatorTypeNotEqual    InventoryQueryOperatorType = "NotEqual"
+	InventoryQueryOperatorTypeBeginWith   InventoryQueryOperatorType = "BeginWith"
+	InventoryQueryOperatorTypeLessThan    InventoryQueryOperatorType = "LessThan"
+	InventoryQueryOperatorTypeGreaterThan InventoryQueryOperatorType = "GreaterThan"
+	InventoryQueryOperatorTypeExists      InventoryQueryOperatorType = "Exists"
 )
 
 // Values returns all known values for InventoryQueryOperatorType. Note that this
@@ -832,8 +832,8 @@ type InventorySchemaDeleteOption string
 
 // Enum values for InventorySchemaDeleteOption
 const (
-	InventorySchemaDeleteOptionDisable_schema InventorySchemaDeleteOption = "DisableSchema"
-	InventorySchemaDeleteOptionDelete_schema  InventorySchemaDeleteOption = "DeleteSchema"
+	InventorySchemaDeleteOptionDisableSchema InventorySchemaDeleteOption = "DisableSchema"
+	InventorySchemaDeleteOptionDeleteSchema  InventorySchemaDeleteOption = "DeleteSchema"
 )
 
 // Values returns all known values for InventorySchemaDeleteOption. Note that this
@@ -942,12 +942,12 @@ type NotificationEvent string
 
 // Enum values for NotificationEvent
 const (
-	NotificationEventAll         NotificationEvent = "All"
-	NotificationEventIn_progress NotificationEvent = "InProgress"
-	NotificationEventSuccess     NotificationEvent = "Success"
-	NotificationEventTimed_out   NotificationEvent = "TimedOut"
-	NotificationEventCancelled   NotificationEvent = "Cancelled"
-	NotificationEventFailed      NotificationEvent = "Failed"
+	NotificationEventAll        NotificationEvent = "All"
+	NotificationEventInProgress NotificationEvent = "InProgress"
+	NotificationEventSuccess    NotificationEvent = "Success"
+	NotificationEventTimedOut   NotificationEvent = "TimedOut"
+	NotificationEventCancelled  NotificationEvent = "Cancelled"
+	NotificationEventFailed     NotificationEvent = "Failed"
 )
 
 // Values returns all known values for NotificationEvent. Note that this can be
@@ -1018,12 +1018,12 @@ type OpsFilterOperatorType string
 
 // Enum values for OpsFilterOperatorType
 const (
-	OpsFilterOperatorTypeEqual        OpsFilterOperatorType = "Equal"
-	OpsFilterOperatorTypeNot_equal    OpsFilterOperatorType = "NotEqual"
-	OpsFilterOperatorTypeBegin_with   OpsFilterOperatorType = "BeginWith"
-	OpsFilterOperatorTypeLess_than    OpsFilterOperatorType = "LessThan"
-	OpsFilterOperatorTypeGreater_than OpsFilterOperatorType = "GreaterThan"
-	OpsFilterOperatorTypeExists       OpsFilterOperatorType = "Exists"
+	OpsFilterOperatorTypeEqual       OpsFilterOperatorType = "Equal"
+	OpsFilterOperatorTypeNotEqual    OpsFilterOperatorType = "NotEqual"
+	OpsFilterOperatorTypeBeginWith   OpsFilterOperatorType = "BeginWith"
+	OpsFilterOperatorTypeLessThan    OpsFilterOperatorType = "LessThan"
+	OpsFilterOperatorTypeGreaterThan OpsFilterOperatorType = "GreaterThan"
+	OpsFilterOperatorTypeExists      OpsFilterOperatorType = "Exists"
 )
 
 // Values returns all known values for OpsFilterOperatorType. Note that this can be
@@ -1044,8 +1044,8 @@ type OpsItemDataType string
 
 // Enum values for OpsItemDataType
 const (
-	OpsItemDataTypeSearchable_string OpsItemDataType = "SearchableString"
-	OpsItemDataTypeString            OpsItemDataType = "String"
+	OpsItemDataTypeSearchableString OpsItemDataType = "SearchableString"
+	OpsItemDataTypeString           OpsItemDataType = "String"
 )
 
 // Values returns all known values for OpsItemDataType. Note that this can be
@@ -1062,21 +1062,21 @@ type OpsItemFilterKey string
 
 // Enum values for OpsItemFilterKey
 const (
-	OpsItemFilterKeyStatus                 OpsItemFilterKey = "Status"
-	OpsItemFilterKeyCreated_by             OpsItemFilterKey = "CreatedBy"
-	OpsItemFilterKeySource                 OpsItemFilterKey = "Source"
-	OpsItemFilterKeyPriority               OpsItemFilterKey = "Priority"
-	OpsItemFilterKeyTitle                  OpsItemFilterKey = "Title"
-	OpsItemFilterKeyOpsitem_id             OpsItemFilterKey = "OpsItemId"
-	OpsItemFilterKeyCreated_time           OpsItemFilterKey = "CreatedTime"
-	OpsItemFilterKeyLast_modified_time     OpsItemFilterKey = "LastModifiedTime"
-	OpsItemFilterKeyOperational_data       OpsItemFilterKey = "OperationalData"
-	OpsItemFilterKeyOperational_data_key   OpsItemFilterKey = "OperationalDataKey"
-	OpsItemFilterKeyOperational_data_value OpsItemFilterKey = "OperationalDataValue"
-	OpsItemFilterKeyResource_id            OpsItemFilterKey = "ResourceId"
-	OpsItemFilterKeyAutomation_id          OpsItemFilterKey = "AutomationId"
-	OpsItemFilterKeyCategory               OpsItemFilterKey = "Category"
-	OpsItemFilterKeySeverity               OpsItemFilterKey = "Severity"
+	OpsItemFilterKeyStatus               OpsItemFilterKey = "Status"
+	OpsItemFilterKeyCreatedBy            OpsItemFilterKey = "CreatedBy"
+	OpsItemFilterKeySource               OpsItemFilterKey = "Source"
+	OpsItemFilterKeyPriority             OpsItemFilterKey = "Priority"
+	OpsItemFilterKeyTitle                OpsItemFilterKey = "Title"
+	OpsItemFilterKeyOpsitemId            OpsItemFilterKey = "OpsItemId"
+	OpsItemFilterKeyCreatedTime          OpsItemFilterKey = "CreatedTime"
+	OpsItemFilterKeyLastModifiedTime     OpsItemFilterKey = "LastModifiedTime"
+	OpsItemFilterKeyOperationalData      OpsItemFilterKey = "OperationalData"
+	OpsItemFilterKeyOperationalDataKey   OpsItemFilterKey = "OperationalDataKey"
+	OpsItemFilterKeyOperationalDataValue OpsItemFilterKey = "OperationalDataValue"
+	OpsItemFilterKeyResourceId           OpsItemFilterKey = "ResourceId"
+	OpsItemFilterKeyAutomationId         OpsItemFilterKey = "AutomationId"
+	OpsItemFilterKeyCategory             OpsItemFilterKey = "Category"
+	OpsItemFilterKeySeverity             OpsItemFilterKey = "Severity"
 )
 
 // Values returns all known values for OpsItemFilterKey. Note that this can be
@@ -1106,10 +1106,10 @@ type OpsItemFilterOperator string
 
 // Enum values for OpsItemFilterOperator
 const (
-	OpsItemFilterOperatorEqual        OpsItemFilterOperator = "Equal"
-	OpsItemFilterOperatorContains     OpsItemFilterOperator = "Contains"
-	OpsItemFilterOperatorGreater_than OpsItemFilterOperator = "GreaterThan"
-	OpsItemFilterOperatorLess_than    OpsItemFilterOperator = "LessThan"
+	OpsItemFilterOperatorEqual       OpsItemFilterOperator = "Equal"
+	OpsItemFilterOperatorContains    OpsItemFilterOperator = "Contains"
+	OpsItemFilterOperatorGreaterThan OpsItemFilterOperator = "GreaterThan"
+	OpsItemFilterOperatorLessThan    OpsItemFilterOperator = "LessThan"
 )
 
 // Values returns all known values for OpsItemFilterOperator. Note that this can be
@@ -1128,9 +1128,9 @@ type OpsItemStatus string
 
 // Enum values for OpsItemStatus
 const (
-	OpsItemStatusOpen        OpsItemStatus = "Open"
-	OpsItemStatusIn_progress OpsItemStatus = "InProgress"
-	OpsItemStatusResolved    OpsItemStatus = "Resolved"
+	OpsItemStatusOpen       OpsItemStatus = "Open"
+	OpsItemStatusInProgress OpsItemStatus = "InProgress"
+	OpsItemStatusResolved   OpsItemStatus = "Resolved"
 )
 
 // Values returns all known values for OpsItemStatus. Note that this can be
@@ -1148,9 +1148,9 @@ type ParametersFilterKey string
 
 // Enum values for ParametersFilterKey
 const (
-	ParametersFilterKeyName   ParametersFilterKey = "Name"
-	ParametersFilterKeyType   ParametersFilterKey = "Type"
-	ParametersFilterKeyKey_id ParametersFilterKey = "KeyId"
+	ParametersFilterKeyName  ParametersFilterKey = "Name"
+	ParametersFilterKeyType  ParametersFilterKey = "Type"
+	ParametersFilterKeyKeyId ParametersFilterKey = "KeyId"
 )
 
 // Values returns all known values for ParametersFilterKey. Note that this can be
@@ -1168,9 +1168,9 @@ type ParameterTier string
 
 // Enum values for ParameterTier
 const (
-	ParameterTierStandard            ParameterTier = "Standard"
-	ParameterTierAdvanced            ParameterTier = "Advanced"
-	ParameterTierIntelligent_tiering ParameterTier = "Intelligent-Tiering"
+	ParameterTierStandard           ParameterTier = "Standard"
+	ParameterTierAdvanced           ParameterTier = "Advanced"
+	ParameterTierIntelligentTiering ParameterTier = "Intelligent-Tiering"
 )
 
 // Values returns all known values for ParameterTier. Note that this can be
@@ -1188,9 +1188,9 @@ type ParameterType string
 
 // Enum values for ParameterType
 const (
-	ParameterTypeString        ParameterType = "String"
-	ParameterTypeString_list   ParameterType = "StringList"
-	ParameterTypeSecure_string ParameterType = "SecureString"
+	ParameterTypeString       ParameterType = "String"
+	ParameterTypeStringList   ParameterType = "StringList"
+	ParameterTypeSecureString ParameterType = "SecureString"
 )
 
 // Values returns all known values for ParameterType. Note that this can be
@@ -1416,9 +1416,9 @@ type PingStatus string
 
 // Enum values for PingStatus
 const (
-	PingStatusOnline          PingStatus = "Online"
-	PingStatusConnection_lost PingStatus = "ConnectionLost"
-	PingStatusInactive        PingStatus = "Inactive"
+	PingStatusOnline         PingStatus = "Online"
+	PingStatusConnectionLost PingStatus = "ConnectionLost"
+	PingStatusInactive       PingStatus = "Inactive"
 )
 
 // Values returns all known values for PingStatus. Note that this can be expanded
@@ -1454,8 +1454,8 @@ type RebootOption string
 
 // Enum values for RebootOption
 const (
-	RebootOptionReboot_if_needed RebootOption = "RebootIfNeeded"
-	RebootOptionNo_reboot        RebootOption = "NoReboot"
+	RebootOptionRebootIfNeeded RebootOption = "RebootIfNeeded"
+	RebootOptionNoReboot       RebootOption = "NoReboot"
 )
 
 // Values returns all known values for RebootOption. Note that this can be expanded
@@ -1472,7 +1472,7 @@ type ResourceDataSyncS3Format string
 
 // Enum values for ResourceDataSyncS3Format
 const (
-	ResourceDataSyncS3FormatJson_serde ResourceDataSyncS3Format = "JsonSerDe"
+	ResourceDataSyncS3FormatJsonSerde ResourceDataSyncS3Format = "JsonSerDe"
 )
 
 // Values returns all known values for ResourceDataSyncS3Format. Note that this can
@@ -1488,9 +1488,9 @@ type ResourceType string
 
 // Enum values for ResourceType
 const (
-	ResourceTypeManaged_instance ResourceType = "ManagedInstance"
-	ResourceTypeDocument         ResourceType = "Document"
-	ResourceTypeEc2_instance     ResourceType = "EC2Instance"
+	ResourceTypeManagedInstance ResourceType = "ManagedInstance"
+	ResourceTypeDocument        ResourceType = "Document"
+	ResourceTypeEc2Instance     ResourceType = "EC2Instance"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -1508,12 +1508,12 @@ type ResourceTypeForTagging string
 
 // Enum values for ResourceTypeForTagging
 const (
-	ResourceTypeForTaggingDocument           ResourceTypeForTagging = "Document"
-	ResourceTypeForTaggingManaged_instance   ResourceTypeForTagging = "ManagedInstance"
-	ResourceTypeForTaggingMaintenance_window ResourceTypeForTagging = "MaintenanceWindow"
-	ResourceTypeForTaggingParameter          ResourceTypeForTagging = "Parameter"
-	ResourceTypeForTaggingPatch_baseline     ResourceTypeForTagging = "PatchBaseline"
-	ResourceTypeForTaggingOps_item           ResourceTypeForTagging = "OpsItem"
+	ResourceTypeForTaggingDocument          ResourceTypeForTagging = "Document"
+	ResourceTypeForTaggingManagedInstance   ResourceTypeForTagging = "ManagedInstance"
+	ResourceTypeForTaggingMaintenanceWindow ResourceTypeForTagging = "MaintenanceWindow"
+	ResourceTypeForTaggingParameter         ResourceTypeForTagging = "Parameter"
+	ResourceTypeForTaggingPatchBaseline     ResourceTypeForTagging = "PatchBaseline"
+	ResourceTypeForTaggingOpsItem           ResourceTypeForTagging = "OpsItem"
 )
 
 // Values returns all known values for ResourceTypeForTagging. Note that this can
@@ -1534,11 +1534,11 @@ type SessionFilterKey string
 
 // Enum values for SessionFilterKey
 const (
-	SessionFilterKeyInvoked_after  SessionFilterKey = "InvokedAfter"
-	SessionFilterKeyInvoked_before SessionFilterKey = "InvokedBefore"
-	SessionFilterKeyTarget_id      SessionFilterKey = "Target"
-	SessionFilterKeyOwner          SessionFilterKey = "Owner"
-	SessionFilterKeyStatus         SessionFilterKey = "Status"
+	SessionFilterKeyInvokedAfter  SessionFilterKey = "InvokedAfter"
+	SessionFilterKeyInvokedBefore SessionFilterKey = "InvokedBefore"
+	SessionFilterKeyTargetId      SessionFilterKey = "Target"
+	SessionFilterKeyOwner         SessionFilterKey = "Owner"
+	SessionFilterKeyStatus        SessionFilterKey = "Status"
 )
 
 // Values returns all known values for SessionFilterKey. Note that this can be
@@ -1602,11 +1602,11 @@ type SignalType string
 
 // Enum values for SignalType
 const (
-	SignalTypeApprove    SignalType = "Approve"
-	SignalTypeReject     SignalType = "Reject"
-	SignalTypeStart_step SignalType = "StartStep"
-	SignalTypeStop_step  SignalType = "StopStep"
-	SignalTypeResume     SignalType = "Resume"
+	SignalTypeApprove   SignalType = "Approve"
+	SignalTypeReject    SignalType = "Reject"
+	SignalTypeStartStep SignalType = "StartStep"
+	SignalTypeStopStep  SignalType = "StopStep"
+	SignalTypeResume    SignalType = "Resume"
 )
 
 // Values returns all known values for SignalType. Note that this can be expanded
@@ -1626,12 +1626,12 @@ type StepExecutionFilterKey string
 
 // Enum values for StepExecutionFilterKey
 const (
-	StepExecutionFilterKeyStart_time_before     StepExecutionFilterKey = "StartTimeBefore"
-	StepExecutionFilterKeyStart_time_after      StepExecutionFilterKey = "StartTimeAfter"
-	StepExecutionFilterKeyStep_execution_status StepExecutionFilterKey = "StepExecutionStatus"
-	StepExecutionFilterKeyStep_execution_id     StepExecutionFilterKey = "StepExecutionId"
-	StepExecutionFilterKeyStep_name             StepExecutionFilterKey = "StepName"
-	StepExecutionFilterKeyAction                StepExecutionFilterKey = "Action"
+	StepExecutionFilterKeyStartTimeBefore     StepExecutionFilterKey = "StartTimeBefore"
+	StepExecutionFilterKeyStartTimeAfter      StepExecutionFilterKey = "StartTimeAfter"
+	StepExecutionFilterKeyStepExecutionStatus StepExecutionFilterKey = "StepExecutionStatus"
+	StepExecutionFilterKeyStepExecutionId     StepExecutionFilterKey = "StepExecutionId"
+	StepExecutionFilterKeyStepName            StepExecutionFilterKey = "StepName"
+	StepExecutionFilterKeyAction              StepExecutionFilterKey = "Action"
 )
 
 // Values returns all known values for StepExecutionFilterKey. Note that this can

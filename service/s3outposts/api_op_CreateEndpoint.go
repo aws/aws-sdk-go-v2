@@ -16,11 +16,11 @@ import (
 // cloud (VPC). This action creates an endpoint and associates it with the
 // specified Outpost. Related actions include:
 //
-//     * DeleteEndpoint
+// * DeleteEndpoint
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_DeleteEndpoint.html)
 //
-//
-// * ListEndpoints
+// *
+// ListEndpoints
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_ListEndpoints.html)
 func (c *Client) CreateEndpoint(ctx context.Context, params *CreateEndpointInput, optFns ...func(*Options)) (*CreateEndpointOutput, error) {
 	if params == nil {

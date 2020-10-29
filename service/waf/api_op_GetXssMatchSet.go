@@ -49,14 +49,14 @@ type GetXssMatchSetOutput struct {
 	// Information about the XssMatchSet that you specified in the GetXssMatchSet
 	// request. For more information, see the following topics:
 	//
-	//     * XssMatchSet:
+	// * XssMatchSet:
 	// Contains Name, XssMatchSetId, and an array of XssMatchTuple objects
 	//
-	//     *
+	// *
 	// XssMatchTuple: Each XssMatchTuple object contains FieldToMatch and
 	// TextTransformation
 	//
-	//     * FieldToMatch: Contains Data and Type
+	// * FieldToMatch: Contains Data and Type
 	XssMatchSet *types.XssMatchSet
 
 	// Metadata pertaining to the operation's result.

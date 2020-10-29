@@ -79,14 +79,14 @@ func (e *InvalidEndpointException) ErrorFault() smithy.ErrorFault { return smith
 
 // WriteRecords would throw this exception in the following cases:
 //
-//     * Records
-// with duplicate data where there are multiple records with the same dimensions,
+// * Records with
+// duplicate data where there are multiple records with the same dimensions,
 // timestamps, and measure names but different measure values.
 //
-//     * Records with
+// * Records with
 // timestamps that lie outside the retention duration of the memory store
 //
-//     *
+// *
 // Records with dimensions or measures that exceed the Timestream defined
 // limits.
 //

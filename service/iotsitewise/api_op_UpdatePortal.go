@@ -66,11 +66,11 @@ type UpdatePortalInput struct {
 
 	// Contains an image that is one of the following:
 	//
-	//     * An image file. Choose
-	// this option to upload a new image.
+	// * An image file. Choose this
+	// option to upload a new image.
 	//
-	//     * The ID of an existing image. Choose
-	// this option to keep an existing image.
+	// * The ID of an existing image. Choose this option
+	// to keep an existing image.
 	PortalLogoImage *types.Image
 }
 

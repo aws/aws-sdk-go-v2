@@ -20,11 +20,11 @@ type AccountDetails struct {
 	// The type of email your account is sending. The mail type can be one of the
 	// following:
 	//
-	//     * MARKETING – Most of your sending traffic is to keep your
-	// customers informed of your latest offering.
+	// * MARKETING – Most of your sending traffic is to keep your customers
+	// informed of your latest offering.
 	//
-	//     * TRANSACTIONAL – Most of your
-	// sending traffic is to communicate during a transaction with a customer.
+	// * TRANSACTIONAL – Most of your sending
+	// traffic is to communicate during a transaction with a customer.
 	MailType MailType
 
 	// Information about the review of the latest details you submitted.
@@ -114,57 +114,56 @@ type BulkEmailEntryResult struct {
 	// The status of a message sent using the SendBulkTemplatedEmail operation.
 	// Possible values for this parameter include:
 	//
-	//     * SUCCESS: Amazon SES accepted
-	// the message, and will attempt to deliver it to the recipients.
+	// * SUCCESS: Amazon SES accepted the
+	// message, and will attempt to deliver it to the recipients.
 	//
-	//     *
-	// MESSAGE_REJECTED: The message was rejected because it contained a virus.
+	// * MESSAGE_REJECTED:
+	// The message was rejected because it contained a virus.
 	//
-	//     *
+	// *
 	// MAIL_FROM_DOMAIN_NOT_VERIFIED: The sender's email address or domain was not
 	// verified.
 	//
-	//     * CONFIGURATION_SET_DOES_NOT_EXIST: The configuration set you
+	// * CONFIGURATION_SET_DOES_NOT_EXIST: The configuration set you
 	// specified does not exist.
 	//
-	//     * TEMPLATE_DOES_NOT_EXIST: The template you
-	// specified does not exist.
+	// * TEMPLATE_DOES_NOT_EXIST: The template you specified
+	// does not exist.
 	//
-	//     * ACCOUNT_SUSPENDED: Your account has been shut
-	// down because of issues related to your email sending practices.
+	// * ACCOUNT_SUSPENDED: Your account has been shut down because of
+	// issues related to your email sending practices.
 	//
-	//     *
-	// ACCOUNT_THROTTLED: The number of emails you can send has been reduced because
-	// your account has exceeded its allocated sending limit.
+	// * ACCOUNT_THROTTLED: The number
+	// of emails you can send has been reduced because your account has exceeded its
+	// allocated sending limit.
 	//
-	//     *
-	// ACCOUNT_DAILY_QUOTA_EXCEEDED: You have reached or exceeded the maximum number of
-	// emails you can send from your account in a 24-hour period.
+	// * ACCOUNT_DAILY_QUOTA_EXCEEDED: You have reached or
+	// exceeded the maximum number of emails you can send from your account in a
+	// 24-hour period.
 	//
-	//     *
-	// INVALID_SENDING_POOL_NAME: The configuration set you specified refers to an IP
-	// pool that does not exist.
+	// * INVALID_SENDING_POOL_NAME: The configuration set you
+	// specified refers to an IP pool that does not exist.
 	//
-	//     * ACCOUNT_SENDING_PAUSED: Email sending for the
-	// Amazon SES account was disabled using the UpdateAccountSendingEnabled
+	// * ACCOUNT_SENDING_PAUSED:
+	// Email sending for the Amazon SES account was disabled using the
+	// UpdateAccountSendingEnabled
 	// (https://docs.aws.amazon.com/ses/latest/APIReference/API_UpdateAccountSendingEnabled.html)
 	// operation.
 	//
-	//     * CONFIGURATION_SET_SENDING_PAUSED: Email sending for this
+	// * CONFIGURATION_SET_SENDING_PAUSED: Email sending for this
 	// configuration set was disabled using the UpdateConfigurationSetSendingEnabled
 	// (https://docs.aws.amazon.com/ses/latest/APIReference/API_UpdateConfigurationSetSendingEnabled.html)
 	// operation.
 	//
-	//     * INVALID_PARAMETER_VALUE: One or more of the parameters you
+	// * INVALID_PARAMETER_VALUE: One or more of the parameters you
 	// specified when calling this operation was invalid. See the error message for
 	// additional information.
 	//
-	//     * TRANSIENT_FAILURE: Amazon SES was unable to
-	// process your request because of a temporary issue.
+	// * TRANSIENT_FAILURE: Amazon SES was unable to process
+	// your request because of a temporary issue.
 	//
-	//     * FAILED: Amazon SES was
-	// unable to process your request. See the error message for additional
-	// information.
+	// * FAILED: Amazon SES was unable to
+	// process your request. See the error message for additional information.
 	Status BulkEmailStatus
 }
 
@@ -188,11 +187,11 @@ type CloudWatchDimensionConfiguration struct {
 	// don't provide the value of the dimension when you send an email. This value has
 	// to meet the following criteria:
 	//
-	//     * It can only contain ASCII letters (a–z,
-	// A–Z), numbers (0–9), underscores (_), or dashes (-).
+	// * It can only contain ASCII letters (a–z, A–Z),
+	// numbers (0–9), underscores (_), or dashes (-).
 	//
-	//     * It can contain no
-	// more than 256 characters.
+	// * It can contain no more than
+	// 256 characters.
 	//
 	// This member is required.
 	DefaultDimensionValue *string
@@ -200,11 +199,11 @@ type CloudWatchDimensionConfiguration struct {
 	// The name of an Amazon CloudWatch dimension associated with an email sending
 	// metric. The name has to meet the following criteria:
 	//
-	//     * It can only contain
+	// * It can only contain
 	// ASCII letters (a–z, A–Z), numbers (0–9), underscores (_), or dashes (-).
 	//
-	//     *
-	// It can contain no more than 256 characters.
+	// * It
+	// can contain no more than 256 characters.
 	//
 	// This member is required.
 	DimensionName *string
@@ -293,11 +292,11 @@ type DedicatedIp struct {
 	// The warm-up status of a dedicated IP address. The status can have one of the
 	// following values:
 	//
-	//     * IN_PROGRESS – The IP address isn't ready to use because
-	// the dedicated IP warm-up process is ongoing.
+	// * IN_PROGRESS – The IP address isn't ready to use because the
+	// dedicated IP warm-up process is ongoing.
 	//
-	//     * DONE – The dedicated IP
-	// warm-up process is complete, and the IP address is ready to use.
+	// * DONE – The dedicated IP warm-up
+	// process is complete, and the IP address is ready to use.
 	//
 	// This member is required.
 	WarmupStatus WarmupStatus
@@ -379,11 +378,11 @@ type DkimAttributes struct {
 	// A string that indicates how DKIM was configured for the identity. There are two
 	// possible values:
 	//
-	//     * AWS_SES – Indicates that DKIM was configured for the
+	// * AWS_SES – Indicates that DKIM was configured for the
 	// identity by using Easy DKIM
 	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html).
 	//
-	//     *
+	// *
 	// EXTERNAL – Indicates that DKIM was configured for the identity by using Bring
 	// Your Own DKIM (BYODKIM).
 	SigningAttributesOrigin DkimSigningAttributesOrigin
@@ -396,23 +395,23 @@ type DkimAttributes struct {
 	// Describes whether or not Amazon SES has successfully located the DKIM records in
 	// the DNS records for the domain. The status can be one of the following:
 	//
-	//     *
+	// *
 	// PENDING – The verification process was initiated, but Amazon SES hasn't yet
 	// detected the DKIM records in the DNS configuration for the domain.
 	//
-	//     *
-	// SUCCESS – The verification process completed successfully.
+	// * SUCCESS –
+	// The verification process completed successfully.
 	//
-	//     * FAILED – The
-	// verification process failed. This typically occurs when Amazon SES fails to find
-	// the DKIM records in the DNS configuration of the domain.
+	// * FAILED – The verification
+	// process failed. This typically occurs when Amazon SES fails to find the DKIM
+	// records in the DNS configuration of the domain.
 	//
-	//     *
-	// TEMPORARY_FAILURE – A temporary issue is preventing Amazon SES from determining
-	// the DKIM authentication status of the domain.
+	// * TEMPORARY_FAILURE – A
+	// temporary issue is preventing Amazon SES from determining the DKIM
+	// authentication status of the domain.
 	//
-	//     * NOT_STARTED – The DKIM
-	// verification process hasn't been initiated for the domain.
+	// * NOT_STARTED – The DKIM verification
+	// process hasn't been initiated for the domain.
 	Status DkimStatus
 
 	// If you used Easy DKIM
@@ -560,29 +559,29 @@ type EmailContent struct {
 
 	// The raw email message. The message has to meet the following criteria:
 	//
-	//     *
-	// The message has to contain a header and a body, separated by one blank line.
+	// * The
+	// message has to contain a header and a body, separated by one blank line.
 	//
+	// * All
+	// of the required header fields must be present in the message.
 	//
-	// * All of the required header fields must be present in the message.
+	// * Each part of a
+	// multipart MIME message must be formatted properly.
 	//
-	//     * Each
-	// part of a multipart MIME message must be formatted properly.
-	//
-	//     * If you
-	// include attachments, they must be in a file format that the Amazon SES API v2
+	// * If you include
+	// attachments, they must be in a file format that the Amazon SES API v2
 	// supports.
 	//
-	//     * The entire message must be Base64 encoded.
+	// * The entire message must be Base64 encoded.
 	//
-	//     * If any of the
-	// MIME parts in your message contain content that is outside of the 7-bit ASCII
+	// * If any of the MIME
+	// parts in your message contain content that is outside of the 7-bit ASCII
 	// character range, you should encode that content to ensure that recipients' email
 	// clients render the message properly.
 	//
-	//     * The length of any single line of
-	// text in the message can't exceed 1,000 characters. This restriction is defined
-	// in RFC 5321 (https://tools.ietf.org/html/rfc5321).
+	// * The length of any single line of text in
+	// the message can't exceed 1,000 characters. This restriction is defined in RFC
+	// 5321 (https://tools.ietf.org/html/rfc5321).
 	Raw *RawMessage
 
 	// The simple email message. The message consists of a subject and a message body.
@@ -724,14 +723,13 @@ type IdentityInfo struct {
 
 	// The email identity type. The identity type can be one of the following:
 	//
-	//     *
+	// *
 	// EMAIL_ADDRESS – The identity is an email address.
 	//
-	//     * DOMAIN – The identity
-	// is a domain.
+	// * DOMAIN – The identity is a
+	// domain.
 	//
-	//     * MANAGED_DOMAIN – The identity is a domain that is managed by
-	// AWS.
+	// * MANAGED_DOMAIN – The identity is a domain that is managed by AWS.
 	IdentityType IdentityType
 
 	// Indicates whether or not you can send email from the identity. An identity is an
@@ -841,20 +839,20 @@ type MailFromAttributes struct {
 	// This member is required.
 	MailFromDomain *string
 
-	// The status of the MAIL FROM domain. This status can have the following values:
+	// The status of the MAIL FROM domain. This status can have the following
+	// values:
 	//
+	// * PENDING – Amazon SES hasn't started searching for the MX record
+	// yet.
 	//
-	// * PENDING – Amazon SES hasn't started searching for the MX record yet.
+	// * SUCCESS – Amazon SES detected the required MX record for the MAIL FROM
+	// domain.
 	//
-	//     *
-	// SUCCESS – Amazon SES detected the required MX record for the MAIL FROM domain.
+	// * FAILED – Amazon SES can't find the required MX record, or the record
+	// no longer exists.
 	//
-	//
-	// * FAILED – Amazon SES can't find the required MX record, or the record no longer
-	// exists.
-	//
-	//     * TEMPORARY_FAILURE – A temporary issue occurred, which prevented
-	// Amazon SES from determining the status of the MAIL FROM domain.
+	// * TEMPORARY_FAILURE – A temporary issue occurred, which
+	// prevented Amazon SES from determining the status of the MAIL FROM domain.
 	//
 	// This member is required.
 	MailFromDomainStatus MailFromDomainStatus
@@ -886,11 +884,10 @@ type MessageTag struct {
 	// The name of the message tag. The message tag name has to meet the following
 	// criteria:
 	//
-	//     * It can only contain ASCII letters (a–z, A–Z), numbers (0–9),
+	// * It can only contain ASCII letters (a–z, A–Z), numbers (0–9),
 	// underscores (_), or dashes (-).
 	//
-	//     * It can contain no more than 256
-	// characters.
+	// * It can contain no more than 256 characters.
 	//
 	// This member is required.
 	Name *string
@@ -898,11 +895,10 @@ type MessageTag struct {
 	// The value of the message tag. The message tag value has to meet the following
 	// criteria:
 	//
-	//     * It can only contain ASCII letters (a–z, A–Z), numbers (0–9),
+	// * It can only contain ASCII letters (a–z, A–Z), numbers (0–9),
 	// underscores (_), or dashes (-).
 	//
-	//     * It can contain no more than 256
-	// characters.
+	// * It can contain no more than 256 characters.
 	//
 	// This member is required.
 	Value *string
@@ -967,29 +963,28 @@ type RawMessage struct {
 
 	// The raw email message. The message has to meet the following criteria:
 	//
-	//     *
-	// The message has to contain a header and a body, separated by one blank line.
+	// * The
+	// message has to contain a header and a body, separated by one blank line.
 	//
+	// * All
+	// of the required header fields must be present in the message.
 	//
-	// * All of the required header fields must be present in the message.
+	// * Each part of a
+	// multipart MIME message must be formatted properly.
 	//
-	//     * Each
-	// part of a multipart MIME message must be formatted properly.
+	// * Attachments must be in a
+	// file format that the Amazon SES supports.
 	//
-	//     * Attachments
-	// must be in a file format that the Amazon SES supports.
+	// * The entire message must be Base64
+	// encoded.
 	//
-	//     * The entire message
-	// must be Base64 encoded.
+	// * If any of the MIME parts in your message contain content that is
+	// outside of the 7-bit ASCII character range, you should encode that content to
+	// ensure that recipients' email clients render the message properly.
 	//
-	//     * If any of the MIME parts in your message contain
-	// content that is outside of the 7-bit ASCII character range, you should encode
-	// that content to ensure that recipients' email clients render the message
-	// properly.
-	//
-	//     * The length of any single line of text in the message can't
-	// exceed 1,000 characters. This restriction is defined in RFC 5321
-	// (https://tools.ietf.org/html/rfc5321).
+	// * The length
+	// of any single line of text in the message can't exceed 1,000 characters. This
+	// restriction is defined in RFC 5321 (https://tools.ietf.org/html/rfc5321).
 	//
 	// This member is required.
 	Data []byte
@@ -1036,18 +1031,17 @@ type ReviewDetails struct {
 	// The status of the latest review of your account. The status can be one of the
 	// following:
 	//
-	//     * PENDING – We have received your appeal and are in the process
-	// of reviewing it.
+	// * PENDING – We have received your appeal and are in the process of
+	// reviewing it.
 	//
-	//     * GRANTED – Your appeal has been reviewed and your
-	// production access has been granted.
+	// * GRANTED – Your appeal has been reviewed and your production
+	// access has been granted.
 	//
-	//     * DENIED – Your appeal has been
-	// reviewed and your production access has been denied.
+	// * DENIED – Your appeal has been reviewed and your
+	// production access has been denied.
 	//
-	//     * FAILED – An internal
-	// error occurred and we didn't receive your appeal. You can submit your appeal
-	// again.
+	// * FAILED – An internal error occurred and we
+	// didn't receive your appeal. You can submit your appeal again.
 	Status ReviewStatus
 }
 
@@ -1157,11 +1151,11 @@ type SuppressionAttributes struct {
 	// added to the suppression list for your account. This list can contain any or all
 	// of the following:
 	//
-	//     * COMPLAINT – Amazon SES adds an email address to the
+	// * COMPLAINT – Amazon SES adds an email address to the
 	// suppression list for your account when a message sent to that address results in
 	// a complaint.
 	//
-	//     * BOUNCE – Amazon SES adds an email address to the suppression
+	// * BOUNCE – Amazon SES adds an email address to the suppression
 	// list for your account when a message sent to that address results in a hard
 	// bounce.
 	SuppressedReasons []SuppressionListReason
@@ -1170,14 +1164,14 @@ type SuppressionAttributes struct {
 // An object that contains details about the action of suppression list.
 type SuppressionListDestination struct {
 
-	// The type of action that you want to perform on the address. Acceptable values:
+	// The type of action that you want to perform on the address. Acceptable
+	// values:
 	//
+	// * PUT: add the addresses to the suppression list. If the record already
+	// exists, it will override it with the new value.
 	//
-	// * PUT: add the addresses to the suppression list. If the record already exists,
-	// it will override it with the new value.
-	//
-	//     * DELETE: remove the addresses from
-	// the suppression list.
+	// * DELETE: remove the addresses
+	// from the suppression list.
 	//
 	// This member is required.
 	SuppressionListImportAction SuppressionListImportAction
@@ -1191,13 +1185,12 @@ type SuppressionOptions struct {
 	// the suppression list for your account. This list can contain any or all of the
 	// following:
 	//
-	//     * COMPLAINT – Amazon SES adds an email address to the
-	// suppression list for your account when a message sent to that address results in
-	// a complaint.
+	// * COMPLAINT – Amazon SES adds an email address to the suppression
+	// list for your account when a message sent to that address results in a
+	// complaint.
 	//
-	//     * BOUNCE – Amazon SES adds an email address to the suppression
-	// list for your account when a message sent to that address results in a hard
-	// bounce.
+	// * BOUNCE – Amazon SES adds an email address to the suppression list
+	// for your account when a message sent to that address results in a hard bounce.
 	SuppressedReasons []SuppressionListReason
 }
 
@@ -1213,22 +1206,22 @@ type SuppressionOptions struct {
 // or one of the following symbols: _ . : / = + -. The following additional
 // restrictions apply to tags:
 //
-//     * Tag keys and values are case sensitive.
+// * Tag keys and values are case sensitive.
 //
+// * For
+// each associated resource, each tag key must be unique and it can have only one
+// value.
 //
-// * For each associated resource, each tag key must be unique and it can have only
-// one value.
-//
-//     * The aws: prefix is reserved for use by AWS; you can’t use it
-// in any tag keys or values that you define. In addition, you can't edit or remove
-// tag keys or values that use this prefix. Tags that use this prefix don’t count
+// * The aws: prefix is reserved for use by AWS; you can’t use it in any
+// tag keys or values that you define. In addition, you can't edit or remove tag
+// keys or values that use this prefix. Tags that use this prefix don’t count
 // against the limit of 50 tags per resource.
 //
-//     * You can associate tags with
-// public or shared resources, but the tags are available only for your AWS
-// account, not any other accounts that share the resource. In addition, the tags
-// are available only for resources that are located in the specified AWS Region
-// for your AWS account.
+// * You can associate tags with public
+// or shared resources, but the tags are available only for your AWS account, not
+// any other accounts that share the resource. In addition, the tags are available
+// only for resources that are located in the specified AWS Region for your AWS
+// account.
 type Tag struct {
 
 	// One part of a key-value pair that defines a tag. The maximum length of a tag key

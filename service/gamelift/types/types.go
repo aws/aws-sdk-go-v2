@@ -8,19 +8,18 @@ import (
 
 // Properties that describe an alias resource.
 //
-//     * CreateAlias
+// * CreateAlias
 //
-//     *
-// ListAliases
+// * ListAliases
 //
-//     * DescribeAlias
+// *
+// DescribeAlias
 //
-//     * UpdateAlias
+// * UpdateAlias
 //
-//     * DeleteAlias
+// * DeleteAlias
 //
-//     *
-// ResolveAlias
+// * ResolveAlias
 type Alias struct {
 
 	// Amazon Resource Name (ARN
@@ -93,17 +92,16 @@ type AwsCredentials struct {
 
 // Properties describing a custom game build. Related operations
 //
-//     *
-// CreateBuild
+// * CreateBuild
 //
-//     * ListBuilds
+// *
+// ListBuilds
 //
-//     * DescribeBuild
+// * DescribeBuild
 //
-//     * UpdateBuild
+// * UpdateBuild
 //
-//     *
-// DeleteBuild
+// * DeleteBuild
 type Build struct {
 
 	// Amazon Resource Name (ARN
@@ -134,16 +132,16 @@ type Build struct {
 
 	// Current status of the build. Possible build statuses include the following:
 	//
-	//
-	// * INITIALIZED -- A new build has been defined, but no files have been uploaded.
+	// *
+	// INITIALIZED -- A new build has been defined, but no files have been uploaded.
 	// You cannot create fleets for builds that are in this status. When a build is
 	// successfully created, the build status is set to this value.
 	//
-	//     * READY -- The
+	// * READY -- The
 	// game build has been successfully uploaded. You can now create new fleets for
 	// this build.
 	//
-	//     * FAILED -- The game build upload failed. You cannot create new
+	// * FAILED -- The game build upload failed. You cannot create new
 	// fleets for this build.
 	Status BuildStatus
 
@@ -186,18 +184,18 @@ type DesiredPlayerSession struct {
 // UpdateFleetCapacity request, or if access to resources is temporarily
 // affected.
 //
-//     * CreateFleet
+// * CreateFleet
 //
-//     * ListFleets
+// * ListFleets
 //
-//     * DeleteFleet
+// * DeleteFleet
 //
-//     *
+// *
 // DescribeFleetAttributes
 //
-//     * UpdateFleetAttributes
+// * UpdateFleetAttributes
 //
-//     * StartFleetActions or
+// * StartFleetActions or
 // StopFleetActions
 type EC2InstanceCounts struct {
 
@@ -253,80 +251,79 @@ type Event struct {
 	// The type of event being logged. Fleet creation events (ordered by fleet creation
 	// activity):
 	//
-	//     * FLEET_CREATED -- A fleet resource was successfully created
-	// with a status of NEW. Event messaging includes the fleet ID.
+	// * FLEET_CREATED -- A fleet resource was successfully created with a
+	// status of NEW. Event messaging includes the fleet ID.
 	//
-	//     *
-	// FLEET_STATE_DOWNLOADING -- Fleet status changed from NEW to DOWNLOADING. The
-	// compressed build has started downloading to a fleet instance for installation.
+	// * FLEET_STATE_DOWNLOADING
+	// -- Fleet status changed from NEW to DOWNLOADING. The compressed build has
+	// started downloading to a fleet instance for installation.
 	//
-	//
-	// * FLEET_BINARY_DOWNLOAD_FAILED -- The build failed to download to the fleet
+	// *
+	// FLEET_BINARY_DOWNLOAD_FAILED -- The build failed to download to the fleet
 	// instance.
 	//
-	//     * FLEET_CREATION_EXTRACTING_BUILD – The game server build was
+	// * FLEET_CREATION_EXTRACTING_BUILD – The game server build was
 	// successfully downloaded to an instance, and the build files are now being
 	// extracted from the uploaded build and saved to an instance. Failure at this
 	// stage prevents a fleet from moving to ACTIVE status. Logs for this stage display
 	// a list of the files that are extracted and saved on the instance. Access the
 	// logs by using the URL in PreSignedLogUrl.
 	//
-	//     *
-	// FLEET_CREATION_RUNNING_INSTALLER – The game server build files were successfully
-	// extracted, and the Amazon GameLift is now running the build's install script (if
-	// one is included). Failure in this stage prevents a fleet from moving to ACTIVE
-	// status. Logs for this stage list the installation steps and whether or not the
-	// install completed successfully. Access the logs by using the URL in
-	// PreSignedLogUrl.
-	//
-	//     * FLEET_CREATION_VALIDATING_RUNTIME_CONFIG -- The build
-	// process was successful, and the Amazon GameLift is now verifying that the game
-	// server launch paths, which are specified in the fleet's runtime configuration,
-	// exist. If any listed launch path exists, Amazon GameLift tries to launch a game
-	// server process and waits for the process to report ready. Failures in this stage
-	// prevent a fleet from moving to ACTIVE status. Logs for this stage list the
-	// launch paths in the runtime configuration and indicate whether each is found.
+	// * FLEET_CREATION_RUNNING_INSTALLER –
+	// The game server build files were successfully extracted, and the Amazon GameLift
+	// is now running the build's install script (if one is included). Failure in this
+	// stage prevents a fleet from moving to ACTIVE status. Logs for this stage list
+	// the installation steps and whether or not the install completed successfully.
 	// Access the logs by using the URL in PreSignedLogUrl.
 	//
-	//     *
-	// FLEET_STATE_VALIDATING -- Fleet status changed from DOWNLOADING to VALIDATING.
+	// *
+	// FLEET_CREATION_VALIDATING_RUNTIME_CONFIG -- The build process was successful,
+	// and the Amazon GameLift is now verifying that the game server launch paths,
+	// which are specified in the fleet's runtime configuration, exist. If any listed
+	// launch path exists, Amazon GameLift tries to launch a game server process and
+	// waits for the process to report ready. Failures in this stage prevent a fleet
+	// from moving to ACTIVE status. Logs for this stage list the launch paths in the
+	// runtime configuration and indicate whether each is found. Access the logs by
+	// using the URL in PreSignedLogUrl.
 	//
+	// * FLEET_STATE_VALIDATING -- Fleet status
+	// changed from DOWNLOADING to VALIDATING.
 	//
-	// * FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND -- Validation of the runtime
+	// *
+	// FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND -- Validation of the runtime
 	// configuration failed because the executable specified in a launch path does not
 	// exist on the instance.
 	//
-	//     * FLEET_STATE_BUILDING -- Fleet status changed from
+	// * FLEET_STATE_BUILDING -- Fleet status changed from
 	// VALIDATING to BUILDING.
 	//
-	//     * FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE --
+	// * FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE --
 	// Validation of the runtime configuration failed because the executable specified
 	// in a launch path failed to run on the fleet instance.
 	//
-	//     *
-	// FLEET_STATE_ACTIVATING -- Fleet status changed from BUILDING to ACTIVATING.
+	// * FLEET_STATE_ACTIVATING
+	// -- Fleet status changed from BUILDING to ACTIVATING.
 	//
-	//
-	// * FLEET_ACTIVATION_FAILED - The fleet failed to successfully complete one of the
-	// steps in the fleet activation process. This event code indicates that the game
-	// build was successfully downloaded to a fleet instance, built, and validated, but
-	// was not able to start a server process. Learn more at  Debug Fleet Creation
-	// Issues
+	// * FLEET_ACTIVATION_FAILED
+	// - The fleet failed to successfully complete one of the steps in the fleet
+	// activation process. This event code indicates that the game build was
+	// successfully downloaded to a fleet instance, built, and validated, but was not
+	// able to start a server process. Learn more at  Debug Fleet Creation Issues
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html#fleets-creating-debug-creation)
 	//
-	//
-	// * FLEET_STATE_ACTIVE -- The fleet's status changed from ACTIVATING to ACTIVE.
-	// The fleet is now ready to host game sessions.
+	// *
+	// FLEET_STATE_ACTIVE -- The fleet's status changed from ACTIVATING to ACTIVE. The
+	// fleet is now ready to host game sessions.
 	//
 	// VPC peering events:
 	//
-	//     *
+	// *
 	// FLEET_VPC_PEERING_SUCCEEDED -- A VPC peering connection has been established
 	// between the VPC for an Amazon GameLift fleet and a VPC in your AWS account.
 	//
-	//
-	// * FLEET_VPC_PEERING_FAILED -- A requested VPC peering connection has failed.
-	// Event details and status information (see DescribeVpcPeeringConnections) provide
+	// *
+	// FLEET_VPC_PEERING_FAILED -- A requested VPC peering connection has failed. Event
+	// details and status information (see DescribeVpcPeeringConnections) provide
 	// additional detail. A common reason for peering failure is that the two VPCs have
 	// overlapping CIDR blocks of IPv4 addresses. To resolve this, change the CIDR
 	// block for the VPC in your AWS account. For more information on VPC peering
@@ -334,31 +331,31 @@ type Event struct {
 	// https://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/invalid-peering-configurations.html
 	// (https://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/invalid-peering-configurations.html)
 	//
-	//
-	// * FLEET_VPC_PEERING_DELETED -- A VPC peering connection has been successfully
+	// *
+	// FLEET_VPC_PEERING_DELETED -- A VPC peering connection has been successfully
 	// deleted.
 	//
 	// Spot instance events:
 	//
-	//     * INSTANCE_INTERRUPTED -- A spot instance
-	// was interrupted by EC2 with a two-minute notification.
+	// * INSTANCE_INTERRUPTED -- A spot instance was
+	// interrupted by EC2 with a two-minute notification.
 	//
 	// Other fleet events:
 	//
-	//
-	// * FLEET_SCALING_EVENT -- A change was made to the fleet's capacity settings
+	// *
+	// FLEET_SCALING_EVENT -- A change was made to the fleet's capacity settings
 	// (desired instances, minimum/maximum scaling limits). Event messaging includes
 	// the new capacity settings.
 	//
-	//     *
-	// FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED -- A change was made to the
-	// fleet's game session protection policy setting. Event messaging includes both
-	// the old and new policy setting.
+	// * FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED
+	// -- A change was made to the fleet's game session protection policy setting.
+	// Event messaging includes both the old and new policy setting.
 	//
-	//     * FLEET_DELETED -- A request to delete a
-	// fleet was initiated.
+	// * FLEET_DELETED
+	// -- A request to delete a fleet was initiated.
 	//
-	//     * GENERIC_EVENT -- An unspecified event has occurred.
+	// * GENERIC_EVENT -- An unspecified
+	// event has occurred.
 	EventCode EventCode
 
 	// A unique identifier for a fleet event.
@@ -382,18 +379,18 @@ type Event struct {
 
 // General properties describing a fleet.
 //
-//     * CreateFleet
+// * CreateFleet
 //
-//     * ListFleets
+// * ListFleets
 //
+// *
+// DeleteFleet
 //
-// * DeleteFleet
+// * DescribeFleetAttributes
 //
-//     * DescribeFleetAttributes
+// * UpdateFleetAttributes
 //
-//     * UpdateFleetAttributes
-//
-//     *
+// *
 // StartFleetActions or StopFleetActions
 type FleetAttributes struct {
 
@@ -470,11 +467,11 @@ type FleetAttributes struct {
 	// The type of game session protection to set for all new instances started in the
 	// fleet.
 	//
-	//     * NoProtection -- The game session can be terminated during a
-	// scale-down event.
+	// * NoProtection -- The game session can be terminated during a scale-down
+	// event.
 	//
-	//     * FullProtection -- If the game session is in an ACTIVE
-	// status, it cannot be terminated during a scale-down event.
+	// * FullProtection -- If the game session is in an ACTIVE status, it
+	// cannot be terminated during a scale-down event.
 	NewGameSessionProtectionPolicy ProtectionPolicy
 
 	// Operating system of the fleet's computing resources. A fleet's operating system
@@ -508,24 +505,24 @@ type FleetAttributes struct {
 
 	// Current status of the fleet. Possible fleet statuses include the following:
 	//
+	// *
+	// NEW -- A new fleet has been defined and desired instances is set to 1.
 	//
-	// * NEW -- A new fleet has been defined and desired instances is set to 1.
-	//
-	//     *
+	// *
 	// DOWNLOADING/VALIDATING/BUILDING/ACTIVATING -- Amazon GameLift is setting up the
 	// new fleet, creating new instances with the game build or Realtime script and
 	// starting server processes.
 	//
-	//     * ACTIVE -- Hosts can now accept game
-	// sessions.
+	// * ACTIVE -- Hosts can now accept game sessions.
 	//
-	//     * ERROR -- An error occurred when downloading, validating,
-	// building, or activating the fleet.
+	// *
+	// ERROR -- An error occurred when downloading, validating, building, or activating
+	// the fleet.
 	//
-	//     * DELETING -- Hosts are responding to a
-	// delete fleet request.
+	// * DELETING -- Hosts are responding to a delete fleet request.
 	//
-	//     * TERMINATED -- The fleet no longer exists.
+	// *
+	// TERMINATED -- The fleet no longer exists.
 	Status FleetStatus
 
 	// List of fleet activity that have been suspended using StopFleetActions. This
@@ -542,19 +539,19 @@ type FleetAttributes struct {
 // updated as needed. The maximum number of instances for a fleet is determined by
 // the fleet's instance type.
 //
-//     * CreateFleet
+// * CreateFleet
 //
-//     * ListFleets
+// * ListFleets
 //
-//     *
-// DeleteFleet
+// * DeleteFleet
 //
-//     * DescribeFleetAttributes
+// *
+// DescribeFleetAttributes
 //
-//     * UpdateFleetAttributes
+// * UpdateFleetAttributes
 //
-//     *
-// StartFleetActions or StopFleetActions
+// * StartFleetActions or
+// StopFleetActions
 type FleetCapacity struct {
 
 	// A unique identifier for a fleet.
@@ -574,19 +571,19 @@ type FleetCapacity struct {
 // Current status of fleet utilization, including the number of game and player
 // sessions being hosted.
 //
-//     * CreateFleet
+// * CreateFleet
 //
-//     * ListFleets
+// * ListFleets
 //
-//     * DeleteFleet
+// * DeleteFleet
 //
+// *
+// DescribeFleetAttributes
 //
-// * DescribeFleetAttributes
+// * UpdateFleetAttributes
 //
-//     * UpdateFleetAttributes
-//
-//     * StartFleetActions
-// or StopFleetActions
+// * StartFleetActions or
+// StopFleetActions
 type FleetUtilization struct {
 
 	// Number of active game sessions currently being hosted on all instances in the
@@ -635,19 +632,19 @@ type GameProperty struct {
 // RegisterGameServer and deleted by calling DeregisterGameServer. A game server is
 // claimed to host a game session by calling ClaimGameServer.
 //
-//     *
+// *
 // RegisterGameServer
 //
-//     * ListGameServers
+// * ListGameServers
 //
-//     * ClaimGameServer
+// * ClaimGameServer
 //
-//     *
+// *
 // DescribeGameServer
 //
-//     * UpdateGameServer
+// * UpdateGameServer
 //
-//     * DeregisterGameServer
+// * DeregisterGameServer
 type GameServer struct {
 
 	// Indicates when an available game server has been reserved for gameplay but has
@@ -705,11 +702,11 @@ type GameServer struct {
 	// Indicates whether the game server is currently available for new games or is
 	// busy. Possible statuses include:
 	//
-	//     * AVAILABLE - The game server is available
-	// to be claimed. A game server that has been claimed remains in this status until
-	// it reports game hosting activity.
+	// * AVAILABLE - The game server is available to
+	// be claimed. A game server that has been claimed remains in this status until it
+	// reports game hosting activity.
 	//
-	//     * UTILIZED - The game server is currently
+	// * UTILIZED - The game server is currently
 	// hosting a game session with players.
 	UtilizationStatus GameServerUtilizationStatus
 }
@@ -722,24 +719,23 @@ type GameServer struct {
 // temporarily suspended and resumed by calling SuspendGameServerGroup and
 // ResumeGameServerGroup, respectively.
 //
-//     * CreateGameServerGroup
+// * CreateGameServerGroup
 //
-//     *
+// *
 // ListGameServerGroups
 //
-//     * DescribeGameServerGroup
+// * DescribeGameServerGroup
 //
-//     *
-// UpdateGameServerGroup
+// * UpdateGameServerGroup
 //
-//     * DeleteGameServerGroup
+// *
+// DeleteGameServerGroup
 //
-//     *
-// ResumeGameServerGroup
+// * ResumeGameServerGroup
 //
-//     * SuspendGameServerGroup
+// * SuspendGameServerGroup
 //
-//     *
+// *
 // DescribeGameServerInstances
 type GameServerGroup struct {
 
@@ -750,23 +746,23 @@ type GameServerGroup struct {
 	// Indicates how GameLift FleetIQ balances the use of Spot Instances and On-Demand
 	// Instances in the game server group. Method options include the following:
 	//
-	//     *
+	// *
 	// SPOT_ONLY - Only Spot Instances are used in the game server group. If Spot
 	// Instances are unavailable or not viable for game hosting, the game server group
 	// provides no hosting capacity until Spot Instances can again be used. Until then,
 	// no new instances are started, and the existing nonviable Spot Instances are
 	// terminated (after current gameplay ends) and are not replaced.
 	//
-	//     *
-	// SPOT_PREFERRED - (default value) Spot Instances are used whenever available in
-	// the game server group. If Spot Instances are unavailable, the game server group
-	// continues to provide hosting capacity by falling back to On-Demand Instances.
-	// Existing nonviable Spot Instances are terminated (after current gameplay ends)
-	// and are replaced with new On-Demand Instances.
+	// * SPOT_PREFERRED
+	// - (default value) Spot Instances are used whenever available in the game server
+	// group. If Spot Instances are unavailable, the game server group continues to
+	// provide hosting capacity by falling back to On-Demand Instances. Existing
+	// nonviable Spot Instances are terminated (after current gameplay ends) and are
+	// replaced with new On-Demand Instances.
 	//
-	//     * ON_DEMAND_ONLY - Only
-	// On-Demand Instances are used in the game server group. No Spot Instances are
-	// used, even when available, while this balancing strategy is in force.
+	// * ON_DEMAND_ONLY - Only On-Demand
+	// Instances are used in the game server group. No Spot Instances are used, even
+	// when available, while this balancing strategy is in force.
 	BalancingStrategy BalancingStrategy
 
 	// A timestamp that indicates when this data object was created. Format is a number
@@ -803,30 +799,29 @@ type GameServerGroup struct {
 
 	// The current status of the game server group. Possible statuses include:
 	//
-	//     *
-	// NEW - GameLift FleetIQ has validated the CreateGameServerGroup() request.
+	// * NEW -
+	// GameLift FleetIQ has validated the CreateGameServerGroup() request.
 	//
-	//     *
+	// *
 	// ACTIVATING - GameLift FleetIQ is setting up a game server group, which includes
 	// creating an Auto Scaling group in your AWS account.
 	//
-	//     * ACTIVE - The game
-	// server group has been successfully created.
+	// * ACTIVE - The game server
+	// group has been successfully created.
 	//
-	//     * DELETE_SCHEDULED - A request
-	// to delete the game server group has been received.
+	// * DELETE_SCHEDULED - A request to delete
+	// the game server group has been received.
 	//
-	//     * DELETING - GameLift
-	// FleetIQ has received a valid DeleteGameServerGroup() request and is processing
-	// it. GameLift FleetIQ must first complete and release hosts before it deletes the
-	// Auto Scaling group and the game server group.
+	// * DELETING - GameLift FleetIQ has
+	// received a valid DeleteGameServerGroup() request and is processing it. GameLift
+	// FleetIQ must first complete and release hosts before it deletes the Auto Scaling
+	// group and the game server group.
 	//
-	//     * DELETED - The game server
-	// group has been successfully deleted.
+	// * DELETED - The game server group has been
+	// successfully deleted.
 	//
-	//     * ERROR - The asynchronous processes
-	// of activating or deleting a game server group has failed, resulting in an error
-	// state.
+	// * ERROR - The asynchronous processes of activating or
+	// deleting a game server group has failed, resulting in an error state.
 	Status GameServerGroupStatus
 
 	// Additional information about the current game server group status. This
@@ -870,24 +865,23 @@ type GameServerGroupAutoScalingPolicy struct {
 // creating the game server group. Retrieve game server instances for a game server
 // group by calling DescribeGameServerInstances.
 //
-//     * CreateGameServerGroup
+// * CreateGameServerGroup
 //
+// *
+// ListGameServerGroups
 //
-// * ListGameServerGroups
+// * DescribeGameServerGroup
 //
-//     * DescribeGameServerGroup
+// * UpdateGameServerGroup
 //
-//     *
-// UpdateGameServerGroup
+// *
+// DeleteGameServerGroup
 //
-//     * DeleteGameServerGroup
+// * ResumeGameServerGroup
 //
-//     *
-// ResumeGameServerGroup
+// * SuspendGameServerGroup
 //
-//     * SuspendGameServerGroup
-//
-//     *
+// *
 // DescribeGameServerInstances
 type GameServerInstance struct {
 
@@ -906,19 +900,19 @@ type GameServerInstance struct {
 
 	// Current status of the game server instance.
 	//
-	//     * ACTIVE -- The instance is
-	// viable for hosting game servers.
+	// * ACTIVE -- The instance is viable
+	// for hosting game servers.
 	//
-	//     * DRAINING -- The instance is not viable
-	// for hosting game servers. Existing game servers are in the process of ending,
-	// and new game servers are not started on this instance unless no other resources
-	// are available. When the instance is put in DRAINING, a new instance is started
-	// up to replace it. Once the instance has no UTILIZED game servers, it will be
+	// * DRAINING -- The instance is not viable for hosting
+	// game servers. Existing game servers are in the process of ending, and new game
+	// servers are not started on this instance unless no other resources are
+	// available. When the instance is put in DRAINING, a new instance is started up to
+	// replace it. Once the instance has no UTILIZED game servers, it will be
 	// terminated in favor of the new instance.
 	//
-	//     * SPOT_TERMINATING -- The instance
-	// is in the process of shutting down due to a Spot instance interruption. No new
-	// game servers are started on this instance.
+	// * SPOT_TERMINATING -- The instance is
+	// in the process of shutting down due to a Spot instance interruption. No new game
+	// servers are started on this instance.
 	InstanceStatus GameServerInstanceStatus
 }
 
@@ -928,29 +922,28 @@ type GameServerInstance struct {
 // can reuse idempotency token values after this time. Game session logs are
 // retained for 14 days.
 //
-//     * CreateGameSession
+// * CreateGameSession
 //
-//     * DescribeGameSessions
+// * DescribeGameSessions
 //
+// *
+// DescribeGameSessionDetails
 //
-// * DescribeGameSessionDetails
+// * SearchGameSessions
 //
-//     * SearchGameSessions
+// * UpdateGameSession
 //
-//     *
-// UpdateGameSession
+// *
+// GetGameSessionLogUrl
 //
-//     * GetGameSessionLogUrl
-//
-//     * Game session placements
-//
+// * Game session placements
 //
 // * StartGameSessionPlacement
 //
-//         * DescribeGameSessionPlacement
+// *
+// DescribeGameSessionPlacement
 //
-//         *
-// StopGameSessionPlacement
+// * StopGameSessionPlacement
 type GameSession struct {
 
 	// Time stamp indicating when this data object was created. Format is a number
@@ -968,11 +961,11 @@ type GameSession struct {
 	// DNS identifier assigned to the instance that is running the game session. Values
 	// have the following format:
 	//
-	//     * TLS-enabled fleets: ..amazongamelift.com.
+	// * TLS-enabled fleets: ..amazongamelift.com.
 	//
-	//
-	// * Non-TLS-enabled fleets: ec2-.compute.amazonaws.com. (See Amazon EC2 Instance
-	// IP Addressing
+	// *
+	// Non-TLS-enabled fleets: ec2-.compute.amazonaws.com. (See Amazon EC2 Instance IP
+	// Addressing
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html#concepts-public-addresses).)
 	//
 	// When
@@ -1062,11 +1055,11 @@ type GameSessionConnectionInfo struct {
 	// DNS identifier assigned to the instance that is running the game session. Values
 	// have the following format:
 	//
-	//     * TLS-enabled fleets: ..amazongamelift.com.
+	// * TLS-enabled fleets: ..amazongamelift.com.
 	//
-	//
-	// * Non-TLS-enabled fleets: ec2-.compute.amazonaws.com. (See Amazon EC2 Instance
-	// IP Addressing
+	// *
+	// Non-TLS-enabled fleets: ec2-.compute.amazonaws.com. (See Amazon EC2 Instance IP
+	// Addressing
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html#concepts-public-addresses).)
 	//
 	// When
@@ -1101,12 +1094,12 @@ type GameSessionDetail struct {
 
 	// Current status of protection for the game session.
 	//
-	//     * NoProtection -- The
-	// game session can be terminated during a scale-down event.
+	// * NoProtection -- The game
+	// session can be terminated during a scale-down event.
 	//
-	//     * FullProtection
-	// -- If the game session is in an ACTIVE status, it cannot be terminated during a
-	// scale-down event.
+	// * FullProtection -- If the
+	// game session is in an ACTIVE status, it cannot be terminated during a scale-down
+	// event.
 	ProtectionPolicy ProtectionPolicy
 }
 
@@ -1114,23 +1107,23 @@ type GameSessionDetail struct {
 // the full details of the original request plus the current status and start/end
 // time stamps. Game session placement-related operations include:
 //
-//     *
+// *
 // StartGameSessionPlacement
 //
-//     * DescribeGameSessionPlacement
+// * DescribeGameSessionPlacement
 //
-//     *
+// *
 // StopGameSessionPlacement
 type GameSessionPlacement struct {
 
 	// DNS identifier assigned to the instance that is running the game session. Values
 	// have the following format:
 	//
-	//     * TLS-enabled fleets: ..amazongamelift.com.
+	// * TLS-enabled fleets: ..amazongamelift.com.
 	//
-	//
-	// * Non-TLS-enabled fleets: ec2-.compute.amazonaws.com. (See Amazon EC2 Instance
-	// IP Addressing
+	// *
+	// Non-TLS-enabled fleets: ec2-.compute.amazonaws.com. (See Amazon EC2 Instance IP
+	// Addressing
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html#concepts-public-addresses).)
 	//
 	// When
@@ -1220,23 +1213,23 @@ type GameSessionPlacement struct {
 
 	// Current status of the game session placement request.
 	//
-	//     * PENDING -- The
+	// * PENDING -- The
 	// placement request is currently in the queue waiting to be processed.
 	//
-	//     *
+	// *
 	// FULFILLED -- A new game session and player sessions (if requested) have been
 	// successfully created. Values for GameSessionArn and GameSessionRegion are
 	// available.
 	//
-	//     * CANCELLED -- The placement request was canceled with a call to
+	// * CANCELLED -- The placement request was canceled with a call to
 	// StopGameSessionPlacement.
 	//
-	//     * TIMED_OUT -- A new game session was not
+	// * TIMED_OUT -- A new game session was not
 	// successfully created before the time limit expired. You can resubmit the
 	// placement request as needed.
 	//
-	//     * FAILED -- GameLift is not able to complete
-	// the process of placing the game session. Common reasons are the game session
+	// * FAILED -- GameLift is not able to complete the
+	// process of placing the game session. Common reasons are the game session
 	// terminated before the placement process was completed, or an unexpected internal
 	// error.
 	Status GameSessionPlacementState
@@ -1245,30 +1238,29 @@ type GameSessionPlacement struct {
 // Configuration of a queue that is used to process game session placement
 // requests. The queue configuration identifies several game features:
 //
-//     * The
+// * The
 // destinations where a new game session can potentially be hosted. Amazon GameLift
 // tries these destinations in an order based on either the queue's default order
 // or player latency information, if provided in a placement request. With latency
 // information, Amazon GameLift can place game sessions where the majority of
 // players are reporting the lowest possible latency.
 //
-//     * The length of time
-// that placement requests can wait in the queue before timing out.
+// * The length of time that
+// placement requests can wait in the queue before timing out.
 //
-//     * A set of
-// optional latency policies that protect individual players from high latencies,
-// preventing game sessions from being placed where any individual player is
-// reporting latency higher than a policy's maximum.
+// * A set of optional
+// latency policies that protect individual players from high latencies, preventing
+// game sessions from being placed where any individual player is reporting latency
+// higher than a policy's maximum.
 //
-//     *
-// CreateGameSessionQueue
+// * CreateGameSessionQueue
 //
-//     * DescribeGameSessionQueues
+// *
+// DescribeGameSessionQueues
 //
-//     *
-// UpdateGameSessionQueue
+// * UpdateGameSessionQueue
 //
-//     * DeleteGameSessionQueue
+// * DeleteGameSessionQueue
 type GameSessionQueue struct {
 
 	// A list of fleets that can be used to fulfill game session placement requests in
@@ -1307,15 +1299,14 @@ type GameSessionQueue struct {
 // queue are fulfilled by starting a new game session on any destination that is
 // configured for a queue.
 //
-//     * CreateGameSessionQueue
+// * CreateGameSessionQueue
 //
-//     *
+// *
 // DescribeGameSessionQueues
 //
-//     * UpdateGameSessionQueue
+// * UpdateGameSessionQueue
 //
-//     *
-// DeleteGameSessionQueue
+// * DeleteGameSessionQueue
 type GameSessionQueueDestination struct {
 
 	// The Amazon Resource Name (ARN) that is assigned to fleet or fleet alias. ARNs,
@@ -1335,11 +1326,11 @@ type Instance struct {
 	// DNS identifier assigned to the instance that is running the game session. Values
 	// have the following format:
 	//
-	//     * TLS-enabled fleets: ..amazongamelift.com.
+	// * TLS-enabled fleets: ..amazongamelift.com.
 	//
-	//
-	// * Non-TLS-enabled fleets: ec2-.compute.amazonaws.com. (See Amazon EC2 Instance
-	// IP Addressing
+	// *
+	// Non-TLS-enabled fleets: ec2-.compute.amazonaws.com. (See Amazon EC2 Instance IP
+	// Addressing
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html#concepts-public-addresses).)
 	//
 	// When
@@ -1361,17 +1352,17 @@ type Instance struct {
 
 	// Current status of the instance. Possible statuses include the following:
 	//
-	//     *
+	// *
 	// PENDING -- The instance is in the process of being created and launching server
 	// processes as defined in the fleet's run-time configuration.
 	//
-	//     * ACTIVE -- The
+	// * ACTIVE -- The
 	// instance has been successfully created and at least one server process has
 	// successfully launched and reported back to Amazon GameLift that it is ready to
 	// host a game session. The instance is now considered ready to host game
 	// sessions.
 	//
-	//     * TERMINATING -- The instance is in the process of shutting down.
+	// * TERMINATING -- The instance is in the process of shutting down.
 	// This may happen to reduce capacity during a scaling down event or to recycle
 	// resources in the event of a problem.
 	Status InstanceStatus
@@ -1603,32 +1594,32 @@ type MatchmakingConfiguration struct {
 // rule set, see Build a FlexMatch Rule Set
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-rulesets.html).
 //
-//
-// * Teams -- Required. A rule set must define one or multiple teams for the match
+// *
+// Teams -- Required. A rule set must define one or multiple teams for the match
 // and set minimum and maximum team sizes. For example, a rule set might describe a
 // 4x4 match that requires all eight slots to be filled.
 //
-//     * Player attributes
-// -- Optional. These attributes specify a set of player characteristics to
-// evaluate when looking for a match. Matchmaking requests that use a rule set with
-// player attributes must provide the corresponding attribute values. For example,
-// an attribute might specify a player's skill or level.
+// * Player attributes --
+// Optional. These attributes specify a set of player characteristics to evaluate
+// when looking for a match. Matchmaking requests that use a rule set with player
+// attributes must provide the corresponding attribute values. For example, an
+// attribute might specify a player's skill or level.
 //
-//     * Rules -- Optional.
-// Rules define how to evaluate potential players for a match based on player
-// attributes. A rule might specify minimum requirements for individual players,
-// teams, or entire matches. For example, a rule might require each player to meet
-// a certain skill level, each team to have at least one player in a certain role,
-// or the match to have a minimum average skill level. or may describe an entire
+// * Rules -- Optional. Rules
+// define how to evaluate potential players for a match based on player attributes.
+// A rule might specify minimum requirements for individual players, teams, or
+// entire matches. For example, a rule might require each player to meet a certain
+// skill level, each team to have at least one player in a certain role, or the
+// match to have a minimum average skill level. or may describe an entire
 // group--such as all teams must be evenly matched or have at least one player in a
 // certain role.
 //
-//     * Expansions -- Optional. Expansions allow you to relax the
-// rules after a period of time when no acceptable matches are found. This feature
-// lets you balance getting players into games in a reasonable amount of time
-// instead of making them wait indefinitely for the best possible match. For
-// example, you might use an expansion to increase the maximum skill variance
-// between players after 30 seconds.
+// * Expansions -- Optional. Expansions allow you to relax the rules
+// after a period of time when no acceptable matches are found. This feature lets
+// you balance getting players into games in a reasonable amount of time instead of
+// making them wait indefinitely for the best possible match. For example, you
+// might use an expansion to increase the maximum skill variance between players
+// after 30 seconds.
 type MatchmakingRuleSet struct {
 
 	// A collection of matchmaking rules, formatted as a JSON string. Comments are not
@@ -1695,39 +1686,38 @@ type MatchmakingTicket struct {
 
 	// Current status of the matchmaking request.
 	//
-	//     * QUEUED -- The matchmaking
-	// request has been received and is currently waiting to be processed.
+	// * QUEUED -- The matchmaking request
+	// has been received and is currently waiting to be processed.
 	//
-	//     *
-	// SEARCHING -- The matchmaking request is currently being processed.
+	// * SEARCHING -- The
+	// matchmaking request is currently being processed.
 	//
-	//     *
-	// REQUIRES_ACCEPTANCE -- A match has been proposed and the players must accept the
-	// match (see AcceptMatch). This status is used only with requests that use a
-	// matchmaking configuration with a player acceptance requirement.
+	// * REQUIRES_ACCEPTANCE -- A
+	// match has been proposed and the players must accept the match (see AcceptMatch).
+	// This status is used only with requests that use a matchmaking configuration with
+	// a player acceptance requirement.
 	//
-	//     * PLACING
-	// -- The FlexMatch engine has matched players and is in the process of placing a
-	// new game session for the match.
+	// * PLACING -- The FlexMatch engine has matched
+	// players and is in the process of placing a new game session for the match.
 	//
-	//     * COMPLETED -- Players have been matched
-	// and a game session is ready to host the players. A ticket in this state contains
-	// the necessary connection information for players.
+	// *
+	// COMPLETED -- Players have been matched and a game session is ready to host the
+	// players. A ticket in this state contains the necessary connection information
+	// for players.
 	//
-	//     * FAILED -- The
-	// matchmaking request was not completed.
+	// * FAILED -- The matchmaking request was not completed.
 	//
-	//     * CANCELLED -- The matchmaking
-	// request was canceled. This may be the result of a call to StopMatchmaking or a
-	// proposed match that one or more players failed to accept.
+	// *
+	// CANCELLED -- The matchmaking request was canceled. This may be the result of a
+	// call to StopMatchmaking or a proposed match that one or more players failed to
+	// accept.
 	//
-	//     * TIMED_OUT --
-	// The matchmaking request was not successful within the duration specified in the
-	// matchmaking configuration.
+	// * TIMED_OUT -- The matchmaking request was not successful within the
+	// duration specified in the matchmaking configuration.
 	//
-	// Matchmaking requests that fail to successfully
-	// complete (statuses FAILED, CANCELLED, TIMED_OUT) can be resubmitted as new
-	// requests with new ticket IDs.
+	// Matchmaking requests that
+	// fail to successfully complete (statuses FAILED, CANCELLED, TIMED_OUT) can be
+	// resubmitted as new requests with new ticket IDs.
 	Status MatchmakingConfigurationStatus
 
 	// Additional information about the current status.
@@ -1747,22 +1737,22 @@ type MatchmakingTicket struct {
 // player session ID. To retrieve full details on a player session, call
 // DescribePlayerSessions with the player session ID.
 //
-//     * CreatePlayerSession
+// * CreatePlayerSession
 //
+// *
+// CreatePlayerSessions
 //
-// * CreatePlayerSessions
+// * DescribePlayerSessions
 //
-//     * DescribePlayerSessions
+// * Game session placements
 //
-//     * Game session
-// placements
+// *
+// StartGameSessionPlacement
 //
-//         * StartGameSessionPlacement
+// * DescribeGameSessionPlacement
 //
-//         *
-// DescribeGameSessionPlacement
-//
-//         * StopGameSessionPlacement
+// *
+// StopGameSessionPlacement
 type PlacedPlayerSession struct {
 
 	// A unique identifier for a player that is associated with this player session.
@@ -1825,15 +1815,14 @@ type PlayerLatency struct {
 // higher than the cap. Latency policies are only enforced when the placement
 // request contains player latency information.
 //
-//     * CreateGameSessionQueue
+// * CreateGameSessionQueue
 //
+// *
+// DescribeGameSessionQueues
 //
-// * DescribeGameSessionQueues
+// * UpdateGameSessionQueue
 //
-//     * UpdateGameSessionQueue
-//
-//     *
-// DeleteGameSessionQueue
+// * DeleteGameSessionQueue
 type PlayerLatencyPolicy struct {
 
 	// The maximum latency value that is allowed for any player, in milliseconds. All
@@ -1856,22 +1845,22 @@ type PlayerLatencyPolicy struct {
 // changes to COMPLETED. Once the session ends, the player session object is
 // retained for 30 days and then removed.
 //
-//     * CreatePlayerSession
+// * CreatePlayerSession
 //
-//     *
+// *
 // CreatePlayerSessions
 //
-//     * DescribePlayerSessions
+// * DescribePlayerSessions
 //
-//     * Game session
-// placements
+// * Game session placements
 //
-//         * StartGameSessionPlacement
+// *
+// StartGameSessionPlacement
 //
-//         *
-// DescribeGameSessionPlacement
+// * DescribeGameSessionPlacement
 //
-//         * StopGameSessionPlacement
+// *
+// StopGameSessionPlacement
 type PlayerSession struct {
 
 	// Time stamp indicating when this data object was created. Format is a number
@@ -1881,11 +1870,11 @@ type PlayerSession struct {
 	// DNS identifier assigned to the instance that is running the game session. Values
 	// have the following format:
 	//
-	//     * TLS-enabled fleets: ..amazongamelift.com.
+	// * TLS-enabled fleets: ..amazongamelift.com.
 	//
-	//
-	// * Non-TLS-enabled fleets: ec2-.compute.amazonaws.com. (See Amazon EC2 Instance
-	// IP Addressing
+	// *
+	// Non-TLS-enabled fleets: ec2-.compute.amazonaws.com. (See Amazon EC2 Instance IP
+	// Addressing
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html#concepts-public-addresses).)
 	//
 	// When
@@ -1927,19 +1916,18 @@ type PlayerSession struct {
 	// Current status of the player session. Possible player session statuses include
 	// the following:
 	//
-	//     * RESERVED -- The player session request has been received,
-	// but the player has not yet connected to the server process and/or been
-	// validated.
+	// * RESERVED -- The player session request has been received, but
+	// the player has not yet connected to the server process and/or been validated.
 	//
-	//     * ACTIVE -- The player has been validated by the server process
-	// and is currently connected.
+	// *
+	// ACTIVE -- The player has been validated by the server process and is currently
+	// connected.
 	//
-	//     * COMPLETED -- The player connection has been
-	// dropped.
+	// * COMPLETED -- The player connection has been dropped.
 	//
-	//     * TIMEDOUT -- A player session request was received, but the
-	// player did not connect and/or was not validated within the timeout limit (60
-	// seconds).
+	// * TIMEDOUT
+	// -- A player session request was received, but the player did not connect and/or
+	// was not validated within the timeout limit (60 seconds).
 	Status PlayerSessionStatus
 
 	// Time stamp indicating when this data object was terminated. Format is a number
@@ -1968,19 +1956,18 @@ type ResourceCreationLimitPolicy struct {
 
 // The routing configuration for a fleet alias.
 //
-//     * CreateAlias
+// * CreateAlias
 //
-//     *
-// ListAliases
+// * ListAliases
 //
-//     * DescribeAlias
+// *
+// DescribeAlias
 //
-//     * UpdateAlias
+// * UpdateAlias
 //
-//     * DeleteAlias
+// * DeleteAlias
 //
-//     *
-// ResolveAlias
+// * ResolveAlias
 type RoutingStrategy struct {
 
 	// The unique identifier for a fleet that the alias points to. This value is the
@@ -1993,12 +1980,12 @@ type RoutingStrategy struct {
 	// The type of routing strategy for the alias. Possible routing types include the
 	// following:
 	//
-	//     * SIMPLE - The alias resolves to one specific fleet. Use this
-	// type when routing to active fleets.
+	// * SIMPLE - The alias resolves to one specific fleet. Use this type
+	// when routing to active fleets.
 	//
-	//     * TERMINAL - The alias does not resolve
-	// to a fleet but instead can be used to display a message to the user. A terminal
-	// alias throws a TerminalRoutingStrategyException with the RoutingStrategy message
+	// * TERMINAL - The alias does not resolve to a
+	// fleet but instead can be used to display a message to the user. A terminal alias
+	// throws a TerminalRoutingStrategyException with the RoutingStrategy message
 	// embedded.
 	Type RoutingStrategyType
 }
@@ -2016,20 +2003,19 @@ type RoutingStrategy struct {
 // calculate the total number of processes in a runtime configuration, add the
 // values of the ConcurrentExecutions parameter for each ServerProcess object.
 //
+// *
+// CreateFleet
 //
-// * CreateFleet
+// * ListFleets
 //
-//     * ListFleets
+// * DeleteFleet
 //
-//     * DeleteFleet
+// * DescribeFleetAttributes
 //
-//     *
-// DescribeFleetAttributes
+// *
+// UpdateFleetAttributes
 //
-//     * UpdateFleetAttributes
-//
-//     * StartFleetActions or
-// StopFleetActions
+// * StartFleetActions or StopFleetActions
 type RuntimeConfiguration struct {
 
 	// The maximum amount of time (in seconds) that a game session can remain in status
@@ -2074,30 +2060,29 @@ type S3Location struct {
 // Rule that controls how a fleet is scaled. Scaling policies are uniquely
 // identified by the combination of name and fleet ID.
 //
-//     *
-// DescribeFleetCapacity
+// * DescribeFleetCapacity
 //
-//     * UpdateFleetCapacity
+// *
+// UpdateFleetCapacity
 //
-//     *
-// DescribeEC2InstanceLimits
+// * DescribeEC2InstanceLimits
 //
-//     * Manage scaling policies:
+// * Manage scaling policies:
 //
-//         *
+// *
 // PutScalingPolicy (auto-scaling)
 //
-//         * DescribeScalingPolicies
-// (auto-scaling)
+// * DescribeScalingPolicies (auto-scaling)
 //
-//         * DeleteScalingPolicy (auto-scaling)
+// *
+// DeleteScalingPolicy (auto-scaling)
 //
-//     * Manage fleet
-// actions:
+// * Manage fleet actions:
 //
-//         * StartFleetActions
+// *
+// StartFleetActions
 //
-//         * StopFleetActions
+// * StopFleetActions
 type ScalingPolicy struct {
 
 	// Comparison operator to use when measuring a metric against the threshold value.
@@ -2115,46 +2100,45 @@ type ScalingPolicy struct {
 	// GameLift with Amazon CloudWatch
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html).
 	//
+	// *
+	// ActivatingGameSessions -- Game sessions in the process of being created.
 	//
-	// * ActivatingGameSessions -- Game sessions in the process of being created.
+	// *
+	// ActiveGameSessions -- Game sessions that are currently running.
 	//
-	//
-	// * ActiveGameSessions -- Game sessions that are currently running.
-	//
-	//     *
+	// *
 	// ActiveInstances -- Fleet instances that are currently running at least one game
 	// session.
 	//
-	//     * AvailableGameSessions -- Additional game sessions that fleet
-	// could host simultaneously, given current capacity.
+	// * AvailableGameSessions -- Additional game sessions that fleet could
+	// host simultaneously, given current capacity.
 	//
-	//     *
-	// AvailablePlayerSessions -- Empty player slots in currently active game sessions.
-	// This includes game sessions that are not currently accepting players. Reserved
-	// player slots are not included.
+	// * AvailablePlayerSessions -- Empty
+	// player slots in currently active game sessions. This includes game sessions that
+	// are not currently accepting players. Reserved player slots are not included.
 	//
-	//     * CurrentPlayerSessions -- Player slots in
-	// active game sessions that are being used by a player or are reserved for a
-	// player.
+	// *
+	// CurrentPlayerSessions -- Player slots in active game sessions that are being
+	// used by a player or are reserved for a player.
 	//
-	//     * IdleInstances -- Active instances that are currently hosting zero
-	// game sessions.
+	// * IdleInstances -- Active
+	// instances that are currently hosting zero game sessions.
 	//
-	//     * PercentAvailableGameSessions -- Unused percentage of the
-	// total number of game sessions that a fleet could host simultaneously, given
-	// current capacity. Use this metric for a target-based scaling policy.
+	// *
+	// PercentAvailableGameSessions -- Unused percentage of the total number of game
+	// sessions that a fleet could host simultaneously, given current capacity. Use
+	// this metric for a target-based scaling policy.
 	//
-	//     *
-	// PercentIdleInstances -- Percentage of the total number of active instances that
-	// are hosting zero game sessions.
+	// * PercentIdleInstances --
+	// Percentage of the total number of active instances that are hosting zero game
+	// sessions.
 	//
-	//     * QueueDepth -- Pending game session
-	// placement requests, in any queue, where the current fleet is the top-priority
-	// destination.
+	// * QueueDepth -- Pending game session placement requests, in any
+	// queue, where the current fleet is the top-priority destination.
 	//
-	//     * WaitTime -- Current wait time for pending game session
-	// placement requests, in any queue, where the current fleet is the top-priority
-	// destination.
+	// * WaitTime --
+	// Current wait time for pending game session placement requests, in any queue,
+	// where the current fleet is the top-priority destination.
 	MetricName MetricName
 
 	// A descriptive label that is associated with a scaling policy. Policy names do
@@ -2174,16 +2158,16 @@ type ScalingPolicy struct {
 	// The type of adjustment to make to a fleet's instance count (see
 	// FleetCapacity):
 	//
-	//     * ChangeInCapacity -- add (or subtract) the scaling
-	// adjustment value from the current instance count. Positive values scale up while
-	// negative values scale down.
+	// * ChangeInCapacity -- add (or subtract) the scaling adjustment
+	// value from the current instance count. Positive values scale up while negative
+	// values scale down.
 	//
-	//     * ExactCapacity -- set the instance count to
-	// the scaling adjustment value.
+	// * ExactCapacity -- set the instance count to the scaling
+	// adjustment value.
 	//
-	//     * PercentChangeInCapacity -- increase or
-	// reduce the current instance count by the scaling adjustment, read as a
-	// percentage. Positive values scale up while negative values scale down.
+	// * PercentChangeInCapacity -- increase or reduce the current
+	// instance count by the scaling adjustment, read as a percentage. Positive values
+	// scale up while negative values scale down.
 	ScalingAdjustmentType ScalingAdjustmentType
 
 	// Current status of the scaling policy. The scaling policy can be in force only
@@ -2191,26 +2175,26 @@ type ScalingPolicy struct {
 	// fleets (see StopFleetActions; if suspended for a fleet, the policy status does
 	// not change. View a fleet's stopped actions by calling DescribeFleetCapacity.
 	//
+	// *
+	// ACTIVE -- The scaling policy can be used for auto-scaling a fleet.
 	//
-	// * ACTIVE -- The scaling policy can be used for auto-scaling a fleet.
-	//
-	//     *
+	// *
 	// UPDATE_REQUESTED -- A request to update the scaling policy has been received.
 	//
+	// *
+	// UPDATING -- A change is being made to the scaling policy.
 	//
-	// * UPDATING -- A change is being made to the scaling policy.
+	// * DELETE_REQUESTED --
+	// A request to delete the scaling policy has been received.
 	//
-	//     *
-	// DELETE_REQUESTED -- A request to delete the scaling policy has been received.
+	// * DELETING -- The
+	// scaling policy is being deleted.
 	//
+	// * DELETED -- The scaling policy has been
+	// deleted.
 	//
-	// * DELETING -- The scaling policy is being deleted.
-	//
-	//     * DELETED -- The scaling
-	// policy has been deleted.
-	//
-	//     * ERROR -- An error occurred in creating the
-	// policy. It should be removed and recreated.
+	// * ERROR -- An error occurred in creating the policy. It should be
+	// removed and recreated.
 	Status ScalingStatusType
 
 	// The settings for a target-based scaling policy.
@@ -2222,17 +2206,16 @@ type ScalingPolicy struct {
 
 // Properties describing a Realtime script. Related operations
 //
-//     *
-// CreateScript
+// * CreateScript
 //
-//     * ListScripts
+// *
+// ListScripts
 //
-//     * DescribeScript
+// * DescribeScript
 //
-//     * UpdateScript
+// * UpdateScript
 //
-//     *
-// DeleteScript
+// * DeleteScript
 type Script struct {
 
 	// A time stamp indicating when this data object was created. The format is a
@@ -2286,10 +2269,10 @@ type ServerProcess struct {
 	// Realtime script file that contains the Init() function. Game builds and Realtime
 	// scripts are installed on instances at the root:
 	//
-	//     * Windows (for custom game
+	// * Windows (for custom game
 	// builds only): C:\game. Example: "C:\game\MyGame\server.exe"
 	//
-	//     * Linux:
+	// * Linux:
 	// /local/game. Examples: "/local/game/MyGame/server.exe" or
 	// "/local/game/MyRealtimeScript.js"
 	//
@@ -2307,12 +2290,11 @@ type ServerProcess struct {
 // (http://aws.amazon.com/answers/account-management/aws-tagging-strategies/)
 // Related operations
 //
-//     * TagResource
+// * TagResource
 //
-//     * UntagResource
+// * UntagResource
 //
-//     *
-// ListTagsForResource
+// * ListTagsForResource
 type Tag struct {
 
 	// The key for a developer-defined key:value pair for tagging an AWS resource.
@@ -2333,29 +2315,28 @@ type Tag struct {
 // specifies settings as needed for the target based policy, including the target
 // value.
 //
-//     * DescribeFleetCapacity
+// * DescribeFleetCapacity
 //
-//     * UpdateFleetCapacity
+// * UpdateFleetCapacity
 //
-//     *
+// *
 // DescribeEC2InstanceLimits
 //
-//     * Manage scaling policies:
+// * Manage scaling policies:
 //
-//         *
-// PutScalingPolicy (auto-scaling)
-//
-//         * DescribeScalingPolicies
+// * PutScalingPolicy
 // (auto-scaling)
 //
-//         * DeleteScalingPolicy (auto-scaling)
+// * DescribeScalingPolicies (auto-scaling)
 //
-//     * Manage fleet
-// actions:
+// * DeleteScalingPolicy
+// (auto-scaling)
 //
-//         * StartFleetActions
+// * Manage fleet actions:
 //
-//         * StopFleetActions
+// * StartFleetActions
+//
+// * StopFleetActions
 type TargetConfiguration struct {
 
 	// Desired value to use with a target-based scaling policy. The value must be
@@ -2388,20 +2369,20 @@ type TargetTrackingConfiguration struct {
 // authorization must exist and be valid for the peering connection to be
 // established. Authorizations are valid for 24 hours after they are issued.
 //
-//     *
+// *
 // CreateVpcPeeringAuthorization
 //
-//     * DescribeVpcPeeringAuthorizations
+// * DescribeVpcPeeringAuthorizations
 //
-//     *
+// *
 // DeleteVpcPeeringAuthorization
 //
-//     * CreateVpcPeeringConnection
+// * CreateVpcPeeringConnection
 //
-//     *
+// *
 // DescribeVpcPeeringConnections
 //
-//     * DeleteVpcPeeringConnection
+// * DeleteVpcPeeringConnection
 type VpcPeeringAuthorization struct {
 
 	// Time stamp indicating when this authorization was issued. Format is a number
@@ -2434,20 +2415,20 @@ type VpcPeeringAuthorization struct {
 // the VPC for your Amazon GameLift fleets. This record may be for an active
 // peering connection or a pending connection that has not yet been established.
 //
+// *
+// CreateVpcPeeringAuthorization
 //
-// * CreateVpcPeeringAuthorization
+// * DescribeVpcPeeringAuthorizations
 //
-//     * DescribeVpcPeeringAuthorizations
-//
-//     *
+// *
 // DeleteVpcPeeringAuthorization
 //
-//     * CreateVpcPeeringConnection
+// * CreateVpcPeeringConnection
 //
-//     *
+// *
 // DescribeVpcPeeringConnections
 //
-//     * DeleteVpcPeeringConnection
+// * DeleteVpcPeeringConnection
 type VpcPeeringConnection struct {
 
 	// The Amazon Resource Name (ARN

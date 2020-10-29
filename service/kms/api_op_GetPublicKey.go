@@ -30,17 +30,17 @@ import (
 // To help you use the public key safely outside of AWS KMS, GetPublicKey returns
 // important information about the public key in the response, including:
 //
-//     *
+// *
 // CustomerMasterKeySpec
 // (https://docs.aws.amazon.com/kms/latest/APIReference/API_GetPublicKey.html#KMS-GetPublicKey-response-CustomerMasterKeySpec):
-// The type of key material in the public key, such as RSA_4096 or ECC_NIST_P521.
-//
+// The type of key material in the public key, such as RSA_4096 or
+// ECC_NIST_P521.
 //
 // * KeyUsage
 // (https://docs.aws.amazon.com/kms/latest/APIReference/API_GetPublicKey.html#KMS-GetPublicKey-response-KeyUsage):
 // Whether the key is used for encryption or signing.
 //
-//     * EncryptionAlgorithms
+// * EncryptionAlgorithms
 // (https://docs.aws.amazon.com/kms/latest/APIReference/API_GetPublicKey.html#KMS-GetPublicKey-response-EncryptionAlgorithms)
 // or SigningAlgorithms
 // (https://docs.aws.amazon.com/kms/latest/APIReference/API_GetPublicKey.html#KMS-GetPublicKey-response-SigningAlgorithms):
@@ -79,16 +79,16 @@ type GetPublicKeyInput struct {
 	// an alias name, prefix it with "alias/". To specify a CMK in a different AWS
 	// account, you must use the key ARN or alias ARN. For example:
 	//
-	//     * Key ID:
+	// * Key ID:
 	// 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
-	//     * Key ARN:
+	// * Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
+	// *
+	// Alias name: alias/ExampleAlias
 	//
-	// * Alias name: alias/ExampleAlias
-	//
-	//     * Alias ARN:
+	// * Alias ARN:
 	// arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
 	//
 	// To get the key ID and key

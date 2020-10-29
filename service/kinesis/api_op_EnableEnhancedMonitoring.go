@@ -33,27 +33,27 @@ type EnableEnhancedMonitoringInput struct {
 	// List of shard-level metrics to enable. The following are the valid shard-level
 	// metrics. The value "ALL" enables every metric.
 	//
-	//     * IncomingBytes
+	// * IncomingBytes
 	//
-	//     *
+	// *
 	// IncomingRecords
 	//
-	//     * OutgoingBytes
+	// * OutgoingBytes
 	//
-	//     * OutgoingRecords
+	// * OutgoingRecords
 	//
-	//     *
+	// *
 	// WriteProvisionedThroughputExceeded
 	//
-	//     * ReadProvisionedThroughputExceeded
+	// * ReadProvisionedThroughputExceeded
 	//
+	// *
+	// IteratorAgeMilliseconds
 	//
-	// * IteratorAgeMilliseconds
+	// * ALL
 	//
-	//     * ALL
-	//
-	// For more information, see Monitoring the
-	// Amazon Kinesis Data Streams Service with Amazon CloudWatch
+	// For more information, see Monitoring the Amazon
+	// Kinesis Data Streams Service with Amazon CloudWatch
 	// (https://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html)
 	// in the Amazon Kinesis Data Streams Developer Guide.
 	//

@@ -17,30 +17,30 @@ import (
 // results as a set of sequential pages. If successful, a rule set is returned for
 // each requested name. Learn more
 //
-//     * Build a Rule Set
+// * Build a Rule Set
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-rulesets.html)
 //
 // Related
 // operations
 //
-//     * CreateMatchmakingConfiguration
+// * CreateMatchmakingConfiguration
 //
-//     *
+// *
 // DescribeMatchmakingConfigurations
 //
-//     * UpdateMatchmakingConfiguration
+// * UpdateMatchmakingConfiguration
 //
-//     *
+// *
 // DeleteMatchmakingConfiguration
 //
-//     * CreateMatchmakingRuleSet
+// * CreateMatchmakingRuleSet
 //
-//     *
+// *
 // DescribeMatchmakingRuleSets
 //
-//     * ValidateMatchmakingRuleSet
+// * ValidateMatchmakingRuleSet
 //
-//     *
+// *
 // DeleteMatchmakingRuleSet
 func (c *Client) DescribeMatchmakingRuleSets(ctx context.Context, params *DescribeMatchmakingRuleSetsInput, optFns ...func(*Options)) (*DescribeMatchmakingRuleSetsOutput, error) {
 	if params == nil {

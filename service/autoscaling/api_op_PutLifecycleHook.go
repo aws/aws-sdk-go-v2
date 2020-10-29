@@ -16,24 +16,24 @@ import (
 // terminates (before it is fully terminated). This step is a part of the procedure
 // for adding a lifecycle hook to an Auto Scaling group:
 //
-//     * (Optional) Create a
+// * (Optional) Create a
 // Lambda function and a rule that allows CloudWatch Events to invoke your Lambda
 // function when Amazon EC2 Auto Scaling launches or terminates instances.
 //
-//     *
+// *
 // (Optional) Create a notification target and an IAM role. The target can be
 // either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2
 // Auto Scaling to publish lifecycle notifications to the target.
 //
-//     * Create the
+// * Create the
 // lifecycle hook. Specify whether the hook is used when the instances launch or
 // terminate.
 //
-//     * If you need more time, record the lifecycle action heartbeat
-// to keep the instance in a pending state using the RecordLifecycleActionHeartbeat
+// * If you need more time, record the lifecycle action heartbeat to
+// keep the instance in a pending state using the RecordLifecycleActionHeartbeat
 // API call.
 //
-//     * If you finish before the timeout period ends, complete the
+// * If you finish before the timeout period ends, complete the
 // lifecycle action using the CompleteLifecycleAction API call.
 //
 // For more
@@ -87,9 +87,9 @@ type PutLifecycleHookInput struct {
 	// The instance state to which you want to attach the lifecycle hook. The valid
 	// values are:
 	//
-	//     * autoscaling:EC2_INSTANCE_LAUNCHING
+	// * autoscaling:EC2_INSTANCE_LAUNCHING
 	//
-	//     *
+	// *
 	// autoscaling:EC2_INSTANCE_TERMINATING
 	//
 	// Required for new lifecycle hooks, but

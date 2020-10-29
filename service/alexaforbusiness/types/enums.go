@@ -6,9 +6,9 @@ type BusinessReportFailureCode string
 
 // Enum values for BusinessReportFailureCode
 const (
-	BusinessReportFailureCodeAccess_denied    BusinessReportFailureCode = "ACCESS_DENIED"
-	BusinessReportFailureCodeNo_such_bucket   BusinessReportFailureCode = "NO_SUCH_BUCKET"
-	BusinessReportFailureCodeInternal_failure BusinessReportFailureCode = "INTERNAL_FAILURE"
+	BusinessReportFailureCodeAccessDenied    BusinessReportFailureCode = "ACCESS_DENIED"
+	BusinessReportFailureCodeNoSuchBucket    BusinessReportFailureCode = "NO_SUCH_BUCKET"
+	BusinessReportFailureCodeInternalFailure BusinessReportFailureCode = "INTERNAL_FAILURE"
 )
 
 // Values returns all known values for BusinessReportFailureCode. Note that this
@@ -26,8 +26,8 @@ type BusinessReportFormat string
 
 // Enum values for BusinessReportFormat
 const (
-	BusinessReportFormatCsv     BusinessReportFormat = "CSV"
-	BusinessReportFormatCsv_zip BusinessReportFormat = "CSV_ZIP"
+	BusinessReportFormatCsv    BusinessReportFormat = "CSV"
+	BusinessReportFormatCsvZip BusinessReportFormat = "CSV_ZIP"
 )
 
 // Values returns all known values for BusinessReportFormat. Note that this can be
@@ -44,9 +44,9 @@ type BusinessReportInterval string
 
 // Enum values for BusinessReportInterval
 const (
-	BusinessReportIntervalOne_day     BusinessReportInterval = "ONE_DAY"
-	BusinessReportIntervalOne_week    BusinessReportInterval = "ONE_WEEK"
-	BusinessReportIntervalThirty_days BusinessReportInterval = "THIRTY_DAYS"
+	BusinessReportIntervalOneDay     BusinessReportInterval = "ONE_DAY"
+	BusinessReportIntervalOneWeek    BusinessReportInterval = "ONE_WEEK"
+	BusinessReportIntervalThirtyDays BusinessReportInterval = "THIRTY_DAYS"
 )
 
 // Values returns all known values for BusinessReportInterval. Note that this can
@@ -104,16 +104,16 @@ type ConferenceProviderType string
 
 // Enum values for ConferenceProviderType
 const (
-	ConferenceProviderTypeChime              ConferenceProviderType = "CHIME"
-	ConferenceProviderTypeBluejeans          ConferenceProviderType = "BLUEJEANS"
-	ConferenceProviderTypeFuze               ConferenceProviderType = "FUZE"
-	ConferenceProviderTypeGoogle_hangouts    ConferenceProviderType = "GOOGLE_HANGOUTS"
-	ConferenceProviderTypePolycom            ConferenceProviderType = "POLYCOM"
-	ConferenceProviderTypeRingcentral        ConferenceProviderType = "RINGCENTRAL"
-	ConferenceProviderTypeSkype_for_business ConferenceProviderType = "SKYPE_FOR_BUSINESS"
-	ConferenceProviderTypeWebex              ConferenceProviderType = "WEBEX"
-	ConferenceProviderTypeZoom               ConferenceProviderType = "ZOOM"
-	ConferenceProviderTypeCustom             ConferenceProviderType = "CUSTOM"
+	ConferenceProviderTypeChime            ConferenceProviderType = "CHIME"
+	ConferenceProviderTypeBluejeans        ConferenceProviderType = "BLUEJEANS"
+	ConferenceProviderTypeFuze             ConferenceProviderType = "FUZE"
+	ConferenceProviderTypeGoogleHangouts   ConferenceProviderType = "GOOGLE_HANGOUTS"
+	ConferenceProviderTypePolycom          ConferenceProviderType = "POLYCOM"
+	ConferenceProviderTypeRingcentral      ConferenceProviderType = "RINGCENTRAL"
+	ConferenceProviderTypeSkypeForBusiness ConferenceProviderType = "SKYPE_FOR_BUSINESS"
+	ConferenceProviderTypeWebex            ConferenceProviderType = "WEBEX"
+	ConferenceProviderTypeZoom             ConferenceProviderType = "ZOOM"
+	ConferenceProviderTypeCustom           ConferenceProviderType = "CUSTOM"
 )
 
 // Values returns all known values for ConferenceProviderType. Note that this can
@@ -156,8 +156,8 @@ type DeviceEventType string
 
 // Enum values for DeviceEventType
 const (
-	DeviceEventTypeConnection_status DeviceEventType = "CONNECTION_STATUS"
-	DeviceEventTypeDevice_status     DeviceEventType = "DEVICE_STATUS"
+	DeviceEventTypeConnectionStatus DeviceEventType = "CONNECTION_STATUS"
+	DeviceEventTypeDeviceStatus     DeviceEventType = "DEVICE_STATUS"
 )
 
 // Values returns all known values for DeviceEventType. Note that this can be
@@ -176,7 +176,7 @@ type DeviceStatus string
 const (
 	DeviceStatusReady        DeviceStatus = "READY"
 	DeviceStatusPending      DeviceStatus = "PENDING"
-	DeviceStatusWas_offline  DeviceStatus = "WAS_OFFLINE"
+	DeviceStatusWasOffline   DeviceStatus = "WAS_OFFLINE"
 	DeviceStatusDeregistered DeviceStatus = "DEREGISTERED"
 	DeviceStatusFailed       DeviceStatus = "FAILED"
 )
@@ -198,23 +198,23 @@ type DeviceStatusDetailCode string
 
 // Enum values for DeviceStatusDetailCode
 const (
-	DeviceStatusDetailCodeDevice_software_update_needed       DeviceStatusDetailCode = "DEVICE_SOFTWARE_UPDATE_NEEDED"
-	DeviceStatusDetailCodeDevice_was_offline                  DeviceStatusDetailCode = "DEVICE_WAS_OFFLINE"
-	DeviceStatusDetailCodeCredentials_access_failure          DeviceStatusDetailCode = "CREDENTIALS_ACCESS_FAILURE"
-	DeviceStatusDetailCodeTls_version_mismatch                DeviceStatusDetailCode = "TLS_VERSION_MISMATCH"
-	DeviceStatusDetailCodeAssociation_rejection               DeviceStatusDetailCode = "ASSOCIATION_REJECTION"
-	DeviceStatusDetailCodeAuthentication_failure              DeviceStatusDetailCode = "AUTHENTICATION_FAILURE"
-	DeviceStatusDetailCodeDhcp_failure                        DeviceStatusDetailCode = "DHCP_FAILURE"
-	DeviceStatusDetailCodeInternet_unavailable                DeviceStatusDetailCode = "INTERNET_UNAVAILABLE"
-	DeviceStatusDetailCodeDns_failure                         DeviceStatusDetailCode = "DNS_FAILURE"
-	DeviceStatusDetailCodeUnknown_failure                     DeviceStatusDetailCode = "UNKNOWN_FAILURE"
-	DeviceStatusDetailCodeCertificate_issuing_limit_exceeded  DeviceStatusDetailCode = "CERTIFICATE_ISSUING_LIMIT_EXCEEDED"
-	DeviceStatusDetailCodeInvalid_certificate_authority       DeviceStatusDetailCode = "INVALID_CERTIFICATE_AUTHORITY"
-	DeviceStatusDetailCodeNetwork_profile_not_found           DeviceStatusDetailCode = "NETWORK_PROFILE_NOT_FOUND"
-	DeviceStatusDetailCodeInvalid_password_state              DeviceStatusDetailCode = "INVALID_PASSWORD_STATE"
-	DeviceStatusDetailCodePassword_not_found                  DeviceStatusDetailCode = "PASSWORD_NOT_FOUND"
-	DeviceStatusDetailCodePassword_manager_access_denied      DeviceStatusDetailCode = "PASSWORD_MANAGER_ACCESS_DENIED"
-	DeviceStatusDetailCodeCertificate_authority_access_denied DeviceStatusDetailCode = "CERTIFICATE_AUTHORITY_ACCESS_DENIED"
+	DeviceStatusDetailCodeDeviceSoftwareUpdateNeeded       DeviceStatusDetailCode = "DEVICE_SOFTWARE_UPDATE_NEEDED"
+	DeviceStatusDetailCodeDeviceWasOffline                 DeviceStatusDetailCode = "DEVICE_WAS_OFFLINE"
+	DeviceStatusDetailCodeCredentialsAccessFailure         DeviceStatusDetailCode = "CREDENTIALS_ACCESS_FAILURE"
+	DeviceStatusDetailCodeTlsVersionMismatch               DeviceStatusDetailCode = "TLS_VERSION_MISMATCH"
+	DeviceStatusDetailCodeAssociationRejection             DeviceStatusDetailCode = "ASSOCIATION_REJECTION"
+	DeviceStatusDetailCodeAuthenticationFailure            DeviceStatusDetailCode = "AUTHENTICATION_FAILURE"
+	DeviceStatusDetailCodeDhcpFailure                      DeviceStatusDetailCode = "DHCP_FAILURE"
+	DeviceStatusDetailCodeInternetUnavailable              DeviceStatusDetailCode = "INTERNET_UNAVAILABLE"
+	DeviceStatusDetailCodeDnsFailure                       DeviceStatusDetailCode = "DNS_FAILURE"
+	DeviceStatusDetailCodeUnknownFailure                   DeviceStatusDetailCode = "UNKNOWN_FAILURE"
+	DeviceStatusDetailCodeCertificateIssuingLimitExceeded  DeviceStatusDetailCode = "CERTIFICATE_ISSUING_LIMIT_EXCEEDED"
+	DeviceStatusDetailCodeInvalidCertificateAuthority      DeviceStatusDetailCode = "INVALID_CERTIFICATE_AUTHORITY"
+	DeviceStatusDetailCodeNetworkProfileNotFound           DeviceStatusDetailCode = "NETWORK_PROFILE_NOT_FOUND"
+	DeviceStatusDetailCodeInvalidPasswordState             DeviceStatusDetailCode = "INVALID_PASSWORD_STATE"
+	DeviceStatusDetailCodePasswordNotFound                 DeviceStatusDetailCode = "PASSWORD_NOT_FOUND"
+	DeviceStatusDetailCodePasswordManagerAccessDenied      DeviceStatusDetailCode = "PASSWORD_MANAGER_ACCESS_DENIED"
+	DeviceStatusDetailCodeCertificateAuthorityAccessDenied DeviceStatusDetailCode = "CERTIFICATE_AUTHORITY_ACCESS_DENIED"
 )
 
 // Values returns all known values for DeviceStatusDetailCode. Note that this can
@@ -316,10 +316,10 @@ type EndOfMeetingReminderType string
 
 // Enum values for EndOfMeetingReminderType
 const (
-	EndOfMeetingReminderTypeAnnouncement_time_check         EndOfMeetingReminderType = "ANNOUNCEMENT_TIME_CHECK"
-	EndOfMeetingReminderTypeAnnouncement_variable_time_left EndOfMeetingReminderType = "ANNOUNCEMENT_VARIABLE_TIME_LEFT"
-	EndOfMeetingReminderTypeChime                           EndOfMeetingReminderType = "CHIME"
-	EndOfMeetingReminderTypeKnock                           EndOfMeetingReminderType = "KNOCK"
+	EndOfMeetingReminderTypeAnnouncementTimeCheck        EndOfMeetingReminderType = "ANNOUNCEMENT_TIME_CHECK"
+	EndOfMeetingReminderTypeAnnouncementVariableTimeLeft EndOfMeetingReminderType = "ANNOUNCEMENT_VARIABLE_TIME_LEFT"
+	EndOfMeetingReminderTypeChime                        EndOfMeetingReminderType = "CHIME"
+	EndOfMeetingReminderTypeKnock                        EndOfMeetingReminderType = "KNOCK"
 )
 
 // Values returns all known values for EndOfMeetingReminderType. Note that this can
@@ -362,14 +362,14 @@ type Feature string
 
 // Enum values for Feature
 const (
-	FeatureBluetooth       Feature = "BLUETOOTH"
-	FeatureVolume          Feature = "VOLUME"
-	FeatureNotifications   Feature = "NOTIFICATIONS"
-	FeatureLists           Feature = "LISTS"
-	FeatureSkills          Feature = "SKILLS"
-	FeatureNetwork_profile Feature = "NETWORK_PROFILE"
-	FeatureSettings        Feature = "SETTINGS"
-	FeatureAll             Feature = "ALL"
+	FeatureBluetooth      Feature = "BLUETOOTH"
+	FeatureVolume         Feature = "VOLUME"
+	FeatureNotifications  Feature = "NOTIFICATIONS"
+	FeatureLists          Feature = "LISTS"
+	FeatureSkills         Feature = "SKILLS"
+	FeatureNetworkProfile Feature = "NETWORK_PROFILE"
+	FeatureSettings       Feature = "SETTINGS"
+	FeatureAll            Feature = "ALL"
 )
 
 // Values returns all known values for Feature. Note that this can be expanded in
@@ -392,7 +392,7 @@ type Locale string
 
 // Enum values for Locale
 const (
-	LocaleEn_us Locale = "en-US"
+	LocaleEnUs Locale = "en-US"
 )
 
 // Values returns all known values for Locale. Note that this can be expanded in
@@ -408,7 +408,7 @@ type NetworkEapMethod string
 
 // Enum values for NetworkEapMethod
 const (
-	NetworkEapMethodEap_tls NetworkEapMethod = "EAP_TLS"
+	NetworkEapMethodEapTls NetworkEapMethod = "EAP_TLS"
 )
 
 // Values returns all known values for NetworkEapMethod. Note that this can be
@@ -424,11 +424,11 @@ type NetworkSecurityType string
 
 // Enum values for NetworkSecurityType
 const (
-	NetworkSecurityTypeOpen            NetworkSecurityType = "OPEN"
-	NetworkSecurityTypeWep             NetworkSecurityType = "WEP"
-	NetworkSecurityTypeWpa_psk         NetworkSecurityType = "WPA_PSK"
-	NetworkSecurityTypeWpa2_psk        NetworkSecurityType = "WPA2_PSK"
-	NetworkSecurityTypeWpa2_enterprise NetworkSecurityType = "WPA2_ENTERPRISE"
+	NetworkSecurityTypeOpen           NetworkSecurityType = "OPEN"
+	NetworkSecurityTypeWep            NetworkSecurityType = "WEP"
+	NetworkSecurityTypeWpaPsk         NetworkSecurityType = "WPA_PSK"
+	NetworkSecurityTypeWpa2Psk        NetworkSecurityType = "WPA2_PSK"
+	NetworkSecurityTypeWpa2Enterprise NetworkSecurityType = "WPA2_ENTERPRISE"
 )
 
 // Values returns all known values for NetworkSecurityType. Note that this can be

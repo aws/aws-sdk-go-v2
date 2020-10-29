@@ -27,13 +27,13 @@ import (
 // Secrets Manager. Minimum permissions To run this command, you must have the
 // following permissions:
 //
-//     * secretsmanager:UpdateSecretVersionStage
+// * secretsmanager:UpdateSecretVersionStage
 //
 // Related
 // operations
 //
-//     * To get the list of staging labels that are currently
-// associated with a version of a secret, use DescribeSecret and examine the
+// * To get the list of staging labels that are currently associated
+// with a version of a secret, use DescribeSecret and examine the
 // SecretVersionsToStages response value.
 func (c *Client) UpdateSecretVersionStage(ctx context.Context, params *UpdateSecretVersionStageInput, optFns ...func(*Options)) (*UpdateSecretVersionStageOutput, error) {
 	if params == nil {

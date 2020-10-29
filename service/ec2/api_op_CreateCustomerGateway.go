@@ -23,15 +23,15 @@ import (
 // 4-byte ASN numbers in the range of 1 - 2147483647, with the exception of the
 // following:
 //
-//     * 7224 - reserved in the us-east-1 Region
+// * 7224 - reserved in the us-east-1 Region
 //
-//     * 9059 - reserved
-// in the eu-west-1 Region
+// * 9059 - reserved in the
+// eu-west-1 Region
 //
-//     * 17943 - reserved in the ap-southeast-1 Region
+// * 17943 - reserved in the ap-southeast-1 Region
 //
-//
-// * 10124 - reserved in the ap-northeast-1 Region
+// * 10124 -
+// reserved in the ap-northeast-1 Region
 //
 // For more information, see AWS
 // Site-to-Site VPN (https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html) in

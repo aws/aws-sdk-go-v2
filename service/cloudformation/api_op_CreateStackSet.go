@@ -56,7 +56,7 @@ type CreateStackSetInput struct {
 	// contains certain capabilities in order for AWS CloudFormation to create the
 	// stack set and related stack instances.
 	//
-	//     * CAPABILITY_IAM and
+	// * CAPABILITY_IAM and
 	// CAPABILITY_NAMED_IAM Some stack templates might include resources that can
 	// affect permissions in your AWS account; for example, by creating new AWS
 	// Identity and Access Management (IAM) users. For those stack sets, you must
@@ -64,54 +64,54 @@ type CreateStackSetInput struct {
 	// following IAM resources require you to specify either the CAPABILITY_IAM or
 	// CAPABILITY_NAMED_IAM capability.
 	//
-	//         * If you have IAM resources, you can
-	// specify either capability.
+	// * If you have IAM resources, you can specify
+	// either capability.
 	//
-	//         * If you have IAM resources with custom
-	// names, you must specify CAPABILITY_NAMED_IAM.
+	// * If you have IAM resources with custom names, you must
+	// specify CAPABILITY_NAMED_IAM.
 	//
-	//         * If you don't specify
-	// either of these capabilities, AWS CloudFormation returns an
-	// InsufficientCapabilities error.
+	// * If you don't specify either of these
+	// capabilities, AWS CloudFormation returns an InsufficientCapabilities error.
 	//
-	//     If your stack template contains these
-	// resources, we recommend that you review all permissions associated with them and
-	// edit their permissions if necessary.
+	// If
+	// your stack template contains these resources, we recommend that you review all
+	// permissions associated with them and edit their permissions if necessary.
 	//
-	//         * AWS::IAM::AccessKey
+	// *
+	// AWS::IAM::AccessKey
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html)
 	//
-	//
-	// * AWS::IAM::Group
+	// *
+	// AWS::IAM::Group
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html)
 	//
-	//
-	// * AWS::IAM::InstanceProfile
+	// *
+	// AWS::IAM::InstanceProfile
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html)
 	//
-	//
-	// * AWS::IAM::Policy
+	// *
+	// AWS::IAM::Policy
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html)
 	//
-	//
-	// * AWS::IAM::Role
+	// *
+	// AWS::IAM::Role
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html)
 	//
-	//
-	// * AWS::IAM::User
+	// *
+	// AWS::IAM::User
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html)
 	//
-	//
-	// * AWS::IAM::UserToGroupAddition
+	// *
+	// AWS::IAM::UserToGroupAddition
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html)
 	//
-	//
-	// For more information, see Acknowledging IAM Resources in AWS CloudFormation
+	// For
+	// more information, see Acknowledging IAM Resources in AWS CloudFormation
 	// Templates
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities).
 	//
-	//
-	// * CAPABILITY_AUTO_EXPAND Some templates contain macros. If your stack template
+	// *
+	// CAPABILITY_AUTO_EXPAND Some templates contain macros. If your stack template
 	// contains one or more macros, and you choose to create a stack directly from the
 	// processed template, without first reviewing the resulting changes in a change
 	// set, you must acknowledge this capability. For more information, see Using AWS
@@ -151,14 +151,14 @@ type CreateStackSetInput struct {
 	// Describes how the IAM roles required for stack set operations are created. By
 	// default, SELF-MANAGED is specified.
 	//
-	//     * With self-managed permissions, you
-	// must create the administrator and execution roles required to deploy to target
+	// * With self-managed permissions, you must
+	// create the administrator and execution roles required to deploy to target
 	// accounts. For more information, see Grant Self-Managed Stack Set Permissions
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html).
 	//
-	//
-	// * With service-managed permissions, StackSets automatically creates the IAM
-	// roles required to deploy to accounts managed by AWS Organizations. For more
+	// *
+	// With service-managed permissions, StackSets automatically creates the IAM roles
+	// required to deploy to accounts managed by AWS Organizations. For more
 	// information, see Grant Service-Managed Stack Set Permissions
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-service-managed.html).
 	PermissionModel types.PermissionModels

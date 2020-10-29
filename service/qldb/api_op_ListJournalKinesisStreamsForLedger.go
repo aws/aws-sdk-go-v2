@@ -55,9 +55,9 @@ type ListJournalKinesisStreamsForLedgerOutput struct {
 	// * If NextToken is empty, the last page of results has been processed and there
 	// are no more results to be retrieved.
 	//
-	//     * If NextToken is not empty, more
-	// results are available. To retrieve the next page of results, use the value of
-	// NextToken in a subsequent ListJournalKinesisStreamsForLedger call.
+	// * If NextToken is not empty, more results
+	// are available. To retrieve the next page of results, use the value of NextToken
+	// in a subsequent ListJournalKinesisStreamsForLedger call.
 	NextToken *string
 
 	// The array of QLDB journal stream descriptors that are associated with the given

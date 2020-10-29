@@ -26,9 +26,9 @@ type ProviderType string
 
 // Enum values for ProviderType
 const (
-	ProviderTypeBitbucket                ProviderType = "Bitbucket"
-	ProviderTypeGithub                   ProviderType = "GitHub"
-	ProviderTypeGithub_enterprise_server ProviderType = "GitHubEnterpriseServer"
+	ProviderTypeBitbucket              ProviderType = "Bitbucket"
+	ProviderTypeGithub                 ProviderType = "GitHub"
+	ProviderTypeGithubEnterpriseServer ProviderType = "GitHubEnterpriseServer"
 )
 
 // Values returns all known values for ProviderType. Note that this can be expanded

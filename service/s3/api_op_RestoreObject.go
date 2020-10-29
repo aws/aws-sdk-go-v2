@@ -15,14 +15,14 @@ import (
 // supported by Amazon S3 on Outposts. This action performs the following types of
 // requests:
 //
-//     * select - Perform a select query on an archived object
+// * select - Perform a select query on an archived object
 //
-//     *
-// restore an archive - Restore an archived object
+// * restore an
+// archive - Restore an archived object
 //
-// To use this operation, you must
-// have permissions to perform the s3:RestoreObject action. The bucket owner has
-// this permission by default and can grant this permission to others. For more
+// To use this operation, you must have
+// permissions to perform the s3:RestoreObject action. The bucket owner has this
+// permission by default and can grant this permission to others. For more
 // information about permissions, see Permissions Related to Bucket Subresource
 // Operations
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
@@ -39,75 +39,75 @@ import (
 // in the Amazon Simple Storage Service Developer Guide. When making a select
 // request, do the following:
 //
-//     * Define an output location for the select
-// query's output. This must be an Amazon S3 bucket in the same AWS Region as the
-// bucket that contains the archive object that is being queried. The AWS account
-// that initiates the job must have permissions to write to the S3 bucket. You can
+// * Define an output location for the select query's
+// output. This must be an Amazon S3 bucket in the same AWS Region as the bucket
+// that contains the archive object that is being queried. The AWS account that
+// initiates the job must have permissions to write to the S3 bucket. You can
 // specify the storage class and encryption for the output objects stored in the
 // bucket. For more information about output, see Querying Archived Objects
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/querying-glacier-archives.html)
 // in the Amazon Simple Storage Service Developer Guide. For more information about
 // the S3 structure in the request body, see the following:
 //
-//         * PutObject
+// * PutObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
 //
-//         *
-// Managing Access with ACLs
+// * Managing
+// Access with ACLs
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3_ACLs_UsingACLs.html) in the
 // Amazon Simple Storage Service Developer Guide
 //
-//         * Protecting Data Using
+// * Protecting Data Using
 // Server-Side Encryption
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html) in
 // the Amazon Simple Storage Service Developer Guide
 //
-//     * Define the SQL
-// expression for the SELECT type of restoration for your query in the request
-// body's SelectParameters structure. You can use expressions like the following
+// * Define the SQL expression
+// for the SELECT type of restoration for your query in the request body's
+// SelectParameters structure. You can use expressions like the following
 // examples.
 //
-//         * The following expression returns all records from the
-// specified object. SELECT * FROM Object
+// * The following expression returns all records from the specified
+// object. SELECT * FROM Object
 //
-//         * Assuming that you are not
-// using any headers for data stored in the object, you can specify columns with
-// positional headers. SELECT s._1, s._2 FROM Object s WHERE s._3 > 100
+// * Assuming that you are not using any headers for
+// data stored in the object, you can specify columns with positional headers.
+// SELECT s._1, s._2 FROM Object s WHERE s._3 > 100
 //
-//         *
-// If you have headers and you set the fileHeaderInfo in the CSV structure in the
-// request body to USE, you can specify headers in the query. (If you set the
-// fileHeaderInfo field to IGNORE, the first row is skipped for the query.) You
-// cannot mix ordinal positions with header column names. SELECT s.Id, s.FirstName,
-// s.SSN FROM S3Object s
+// * If you have headers and you
+// set the fileHeaderInfo in the CSV structure in the request body to USE, you can
+// specify headers in the query. (If you set the fileHeaderInfo field to IGNORE,
+// the first row is skipped for the query.) You cannot mix ordinal positions with
+// header column names. SELECT s.Id, s.FirstName, s.SSN FROM S3Object s
 //
-// For more information about using SQL with S3 Glacier
-// Select restore, see SQL Reference for Amazon S3 Select and S3 Glacier Select
+// For more
+// information about using SQL with S3 Glacier Select restore, see SQL Reference
+// for Amazon S3 Select and S3 Glacier Select
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-glacier-select-sql-reference.html)
 // in the Amazon Simple Storage Service Developer Guide. When making a select
 // request, you can also do the following:
 //
-//     * To expedite your queries, specify
-// the Expedited tier. For more information about tiers, see "Restoring Archives,"
+// * To expedite your queries, specify the
+// Expedited tier. For more information about tiers, see "Restoring Archives,"
 // later in this topic.
 //
-//     * Specify details about the data serialization format
-// of both the input object that is being queried and the serialization of the
+// * Specify details about the data serialization format of
+// both the input object that is being queried and the serialization of the
 // CSV-encoded query results.
 //
 // The following are additional important facts about
 // the select feature:
 //
-//     * The output results are new Amazon S3 objects. Unlike
+// * The output results are new Amazon S3 objects. Unlike
 // archive retrievals, they are stored until explicitly deleted-manually or through
 // a lifecycle policy.
 //
-//     * You can issue more than one select request on the
-// same Amazon S3 object. Amazon S3 doesn't deduplicate requests, so avoid issuing
+// * You can issue more than one select request on the same
+// Amazon S3 object. Amazon S3 doesn't deduplicate requests, so avoid issuing
 // duplicate requests.
 //
-//     * Amazon S3 accepts a select request even if the object
-// has already been restored. A select request doesn’t return error response
+// * Amazon S3 accepts a select request even if the object has
+// already been restored. A select request doesn’t return error response
 // 409.
 //
 // Restoring Archives Objects in the GLACIER and DEEP_ARCHIVE storage classes
@@ -124,31 +124,30 @@ import (
 // the following data access tier options in the Tier element of the request
 // body:
 //
-//     * Expedited - Expedited retrievals allow you to quickly access your
-// data stored in the GLACIER storage class when occasional urgent requests for a
-// subset of archives are required. For all but the largest archived objects (250
-// MB+), data accessed using Expedited retrievals are typically made available
-// within 1–5 minutes. Provisioned capacity ensures that retrieval capacity for
-// Expedited retrievals is available when you need it. Expedited retrievals and
-// provisioned capacity are not available for the DEEP_ARCHIVE storage class.
+// * Expedited - Expedited retrievals allow you to quickly access your data
+// stored in the GLACIER storage class when occasional urgent requests for a subset
+// of archives are required. For all but the largest archived objects (250 MB+),
+// data accessed using Expedited retrievals are typically made available within 1–5
+// minutes. Provisioned capacity ensures that retrieval capacity for Expedited
+// retrievals is available when you need it. Expedited retrievals and provisioned
+// capacity are not available for the DEEP_ARCHIVE storage class.
 //
+// * Standard - S3
+// Standard retrievals allow you to access any of your archived objects within
+// several hours. This is the default option for the GLACIER and DEEP_ARCHIVE
+// retrieval requests that do not specify the retrieval option. S3 Standard
+// retrievals typically complete within 3-5 hours from the GLACIER storage class
+// and typically complete within 12 hours from the DEEP_ARCHIVE storage class.
 //
-// * Standard - S3 Standard retrievals allow you to access any of your archived
-// objects within several hours. This is the default option for the GLACIER and
-// DEEP_ARCHIVE retrieval requests that do not specify the retrieval option. S3
-// Standard retrievals typically complete within 3-5 hours from the GLACIER storage
-// class and typically complete within 12 hours from the DEEP_ARCHIVE storage
-// class.
+// *
+// Bulk - Bulk retrievals are Amazon S3 Glacier’s lowest-cost retrieval option,
+// enabling you to retrieve large amounts, even petabytes, of data inexpensively in
+// a day. Bulk retrievals typically complete within 5-12 hours from the GLACIER
+// storage class and typically complete within 48 hours from the DEEP_ARCHIVE
+// storage class.
 //
-//     * Bulk - Bulk retrievals are Amazon S3 Glacier’s lowest-cost
-// retrieval option, enabling you to retrieve large amounts, even petabytes, of
-// data inexpensively in a day. Bulk retrievals typically complete within 5-12
-// hours from the GLACIER storage class and typically complete within 48 hours from
-// the DEEP_ARCHIVE storage class.
-//
-// For more information about archive retrieval
-// options and provisioned capacity for Expedited data access, see Restoring
-// Archived Objects
+// For more information about archive retrieval options and
+// provisioned capacity for Expedited data access, see Restoring Archived Objects
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html) in the
 // Amazon Simple Storage Service Developer Guide. You can use Amazon S3 restore
 // speed upgrade to change the restore speed to a faster speed while it is in
@@ -183,51 +182,50 @@ import (
 // Amazon Simple Storage Service Developer Guide. Responses A successful operation
 // returns either the 200 OK or 202 Accepted status code.
 //
-//     * If the object copy
-// is not previously restored, then Amazon S3 returns 202 Accepted in the
-// response.
+// * If the object copy is
+// not previously restored, then Amazon S3 returns 202 Accepted in the response.
 //
-//     * If the object copy is previously restored, Amazon S3 returns
-// 200 OK in the response.
+// *
+// If the object copy is previously restored, Amazon S3 returns 200 OK in the
+// response.
 //
 // Special Errors
 //
-//         * Code:
-// RestoreAlreadyInProgress
+// * Code: RestoreAlreadyInProgress
 //
-//         * Cause: Object restore is already in
-// progress. (This error does not apply to SELECT type requests.)
+// * Cause: Object
+// restore is already in progress. (This error does not apply to SELECT type
+// requests.)
 //
-//         * HTTP
-// Status Code: 409 Conflict
+// * HTTP Status Code: 409 Conflict
 //
-//         * SOAP Fault Code Prefix: Client
+// * SOAP Fault Code Prefix:
+// Client
 //
-//         *
-// Code: GlacierExpeditedRetrievalNotAvailable
+// * Code: GlacierExpeditedRetrievalNotAvailable
 //
-//         * Cause: S3 Glacier
+// * Cause: S3 Glacier
 // expedited retrievals are currently not available. Try again later. (Returned if
 // there is insufficient capacity to process the Expedited request. This error
 // applies only to Expedited retrievals and not to S3 Standard or Bulk
 // retrievals.)
 //
-//         * HTTP Status Code: 503
+// * HTTP Status Code: 503
 //
-//         * SOAP Fault Code Prefix:
-// N/A
+// * SOAP Fault Code Prefix: N/A
 //
-// Related Resources
+// Related
+// Resources
 //
-//     * PutBucketLifecycleConfiguration
+// * PutBucketLifecycleConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html)
 //
-//
-// * GetBucketNotificationConfiguration
+// *
+// GetBucketNotificationConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketNotificationConfiguration.html)
 //
-//
-// * SQL Reference for Amazon S3 Select and S3 Glacier Select
+// *
+// SQL Reference for Amazon S3 Select and S3 Glacier Select
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-glacier-select-sql-reference.html)
 // in the Amazon Simple Storage Service Developer Guide
 func (c *Client) RestoreObject(ctx context.Context, params *RestoreObjectInput, optFns ...func(*Options)) (*RestoreObjectOutput, error) {

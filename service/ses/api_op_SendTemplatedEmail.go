@@ -15,30 +15,30 @@ import (
 // sending. In order to send email using the SendTemplatedEmail operation, your
 // call to the API must meet the following requirements:
 //
-//     * The call must refer
-// to an existing email template. You can create email templates using the
+// * The call must refer to
+// an existing email template. You can create email templates using the
 // CreateTemplate operation.
 //
-//     * The message must be sent from a verified email
+// * The message must be sent from a verified email
 // address or domain.
 //
-//     * If your account is still in the Amazon SES sandbox,
-// you may only send to verified addresses or domains, or to email addresses
-// associated with the Amazon SES Mailbox Simulator. For more information, see
-// Verifying Email Addresses and Domains
+// * If your account is still in the Amazon SES sandbox, you
+// may only send to verified addresses or domains, or to email addresses associated
+// with the Amazon SES Mailbox Simulator. For more information, see Verifying Email
+// Addresses and Domains
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html)
 // in the Amazon SES Developer Guide.
 //
-//     * The maximum message size is 10 MB.
+// * The maximum message size is 10 MB.
 //
-//
-// * Calls to the SendTemplatedEmail operation may only include one Destination
+// *
+// Calls to the SendTemplatedEmail operation may only include one Destination
 // parameter. A destination is a set of recipients who will receive the same
 // version of the email. The Destination parameter can include up to 50 recipients,
 // across the To:, CC: and BCC: fields.
 //
-//     * The Destination parameter must
-// include at least one recipient email address. The recipient address can be a To:
+// * The Destination parameter must include
+// at least one recipient email address. The recipient address can be a To:
 // address, a CC: address, or a BCC: address. If a recipient email address is
 // invalid (that is, it is not in the format
 // UserName@[SubDomain.]Domain.TopLevelDomain), the entire message will be

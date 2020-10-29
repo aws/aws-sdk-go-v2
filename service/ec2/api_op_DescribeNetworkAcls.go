@@ -39,62 +39,62 @@ type DescribeNetworkAclsInput struct {
 
 	// One or more filters.
 	//
-	//     * association.association-id - The ID of an
-	// association ID for the ACL.
+	// * association.association-id - The ID of an association ID
+	// for the ACL.
 	//
-	//     * association.network-acl-id - The ID of the
-	// network ACL involved in the association.
+	// * association.network-acl-id - The ID of the network ACL involved
+	// in the association.
 	//
-	//     * association.subnet-id - The ID
-	// of the subnet involved in the association.
+	// * association.subnet-id - The ID of the subnet involved in
+	// the association.
 	//
-	//     * default - Indicates whether
-	// the ACL is the default network ACL for the VPC.
+	// * default - Indicates whether the ACL is the default network
+	// ACL for the VPC.
 	//
-	//     * entry.cidr - The IPv4
-	// CIDR range specified in the entry.
+	// * entry.cidr - The IPv4 CIDR range specified in the entry.
 	//
-	//     * entry.icmp.code - The ICMP code
-	// specified in the entry, if any.
+	// *
+	// entry.icmp.code - The ICMP code specified in the entry, if any.
 	//
-	//     * entry.icmp.type - The ICMP type specified
-	// in the entry, if any.
+	// *
+	// entry.icmp.type - The ICMP type specified in the entry, if any.
 	//
-	//     * entry.ipv6-cidr - The IPv6 CIDR range specified in
-	// the entry.
+	// *
+	// entry.ipv6-cidr - The IPv6 CIDR range specified in the entry.
 	//
-	//     * entry.port-range.from - The start of the port range specified
-	// in the entry.
+	// *
+	// entry.port-range.from - The start of the port range specified in the entry.
 	//
-	//     * entry.port-range.to - The end of the port range specified
-	// in the entry.
+	// *
+	// entry.port-range.to - The end of the port range specified in the entry.
 	//
-	//     * entry.protocol - The protocol specified in the entry (tcp |
-	// udp | icmp or a protocol number).
+	// *
+	// entry.protocol - The protocol specified in the entry (tcp | udp | icmp or a
+	// protocol number).
 	//
-	//     * entry.rule-action - Allows or denies
-	// the matching traffic (allow | deny).
+	// * entry.rule-action - Allows or denies the matching traffic
+	// (allow | deny).
 	//
-	//     * entry.rule-number - The number of an
-	// entry (in other words, rule) in the set of ACL entries.
+	// * entry.rule-number - The number of an entry (in other words,
+	// rule) in the set of ACL entries.
 	//
-	//     * network-acl-id -
-	// The ID of the network ACL.
+	// * network-acl-id - The ID of the network
+	// ACL.
 	//
-	//     * owner-id - The ID of the AWS account that owns
-	// the network ACL.
+	// * owner-id - The ID of the AWS account that owns the network ACL.
 	//
-	//     * tag: - The key/value combination of a tag assigned to
-	// the resource. Use the tag key in the filter name and the tag value as the filter
-	// value. For example, to find all resources that have a tag with the key Owner and
-	// the value TeamA, specify tag:Owner for the filter name and TeamA for the filter
-	// value.
+	// * tag:
+	// - The key/value combination of a tag assigned to the resource. Use the tag key
+	// in the filter name and the tag value as the filter value. For example, to find
+	// all resources that have a tag with the key Owner and the value TeamA, specify
+	// tag:Owner for the filter name and TeamA for the filter value.
 	//
-	//     * tag-key - The key of a tag assigned to the resource. Use this
-	// filter to find all resources assigned a tag with a specific key, regardless of
-	// the tag value.
+	// * tag-key - The
+	// key of a tag assigned to the resource. Use this filter to find all resources
+	// assigned a tag with a specific key, regardless of the tag value.
 	//
-	//     * vpc-id - The ID of the VPC for the network ACL.
+	// * vpc-id - The
+	// ID of the VPC for the network ACL.
 	Filters []*types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the

@@ -17,37 +17,36 @@ import (
 // breakdowns, etc. This operation handles the permissions necessary to manage tags
 // for the following GameLift resource types:
 //
-//     * Build
+// * Build
 //
-//     * Script
+// * Script
 //
-//     *
-// Fleet
+// * Fleet
 //
-//     * Alias
+// *
+// Alias
 //
-//     * GameSessionQueue
+// * GameSessionQueue
 //
-//     * MatchmakingConfiguration
-//
+// * MatchmakingConfiguration
 //
 // * MatchmakingRuleSet
 //
-// To add a tag to a resource, specify the unique ARN value
-// for the resource and provide a tag list containing one or more tags. The
-// operation succeeds even if the list includes tags that are already assigned to
-// the specified resource. Learn more Tagging AWS Resources
+// To
+// add a tag to a resource, specify the unique ARN value for the resource and
+// provide a tag list containing one or more tags. The operation succeeds even if
+// the list includes tags that are already assigned to the specified resource.
+// Learn more Tagging AWS Resources
 // (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the AWS
 // General Reference  AWS Tagging Strategies
 // (http://aws.amazon.com/answers/account-management/aws-tagging-strategies/)
 // Related operations
 //
-//     * TagResource
+// * TagResource
 //
-//     * UntagResource
+// * UntagResource
 //
-//     *
-// ListTagsForResource
+// * ListTagsForResource
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

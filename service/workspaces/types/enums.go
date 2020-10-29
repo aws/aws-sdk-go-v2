@@ -24,8 +24,8 @@ type Application string
 
 // Enum values for Application
 const (
-	ApplicationMicrosoft_office_2016 Application = "Microsoft_Office_2016"
-	ApplicationMicrosoft_office_2019 Application = "Microsoft_Office_2019"
+	ApplicationMicrosoftOffice2016 Application = "Microsoft_Office_2016"
+	ApplicationMicrosoftOffice2019 Application = "Microsoft_Office_2019"
 )
 
 // Values returns all known values for Application. Note that this can be expanded
@@ -42,11 +42,11 @@ type AssociationStatus string
 
 // Enum values for AssociationStatus
 const (
-	AssociationStatusNot_associated                 AssociationStatus = "NOT_ASSOCIATED"
-	AssociationStatusAssociated_with_owner_account  AssociationStatus = "ASSOCIATED_WITH_OWNER_ACCOUNT"
-	AssociationStatusAssociated_with_shared_account AssociationStatus = "ASSOCIATED_WITH_SHARED_ACCOUNT"
-	AssociationStatusPending_association            AssociationStatus = "PENDING_ASSOCIATION"
-	AssociationStatusPending_disassociation         AssociationStatus = "PENDING_DISASSOCIATION"
+	AssociationStatusNotAssociated               AssociationStatus = "NOT_ASSOCIATED"
+	AssociationStatusAssociatedWithOwnerAccount  AssociationStatus = "ASSOCIATED_WITH_OWNER_ACCOUNT"
+	AssociationStatusAssociatedWithSharedAccount AssociationStatus = "ASSOCIATED_WITH_SHARED_ACCOUNT"
+	AssociationStatusPendingAssociation          AssociationStatus = "PENDING_ASSOCIATION"
+	AssociationStatusPendingDisassociation       AssociationStatus = "PENDING_DISASSOCIATION"
 )
 
 // Values returns all known values for AssociationStatus. Note that this can be
@@ -208,9 +208,9 @@ type ModificationResourceEnum string
 
 // Enum values for ModificationResourceEnum
 const (
-	ModificationResourceEnumRoot_volume  ModificationResourceEnum = "ROOT_VOLUME"
-	ModificationResourceEnumUser_volume  ModificationResourceEnum = "USER_VOLUME"
-	ModificationResourceEnumCompute_type ModificationResourceEnum = "COMPUTE_TYPE"
+	ModificationResourceEnumRootVolume  ModificationResourceEnum = "ROOT_VOLUME"
+	ModificationResourceEnumUserVolume  ModificationResourceEnum = "USER_VOLUME"
+	ModificationResourceEnumComputeType ModificationResourceEnum = "COMPUTE_TYPE"
 )
 
 // Values returns all known values for ModificationResourceEnum. Note that this can
@@ -228,8 +228,8 @@ type ModificationStateEnum string
 
 // Enum values for ModificationStateEnum
 const (
-	ModificationStateEnumUpdate_initiated   ModificationStateEnum = "UPDATE_INITIATED"
-	ModificationStateEnumUpdate_in_progress ModificationStateEnum = "UPDATE_IN_PROGRESS"
+	ModificationStateEnumUpdateInitiated  ModificationStateEnum = "UPDATE_INITIATED"
+	ModificationStateEnumUpdateInProgress ModificationStateEnum = "UPDATE_IN_PROGRESS"
 )
 
 // Values returns all known values for ModificationStateEnum. Note that this can be
@@ -282,8 +282,8 @@ type RunningMode string
 
 // Enum values for RunningMode
 const (
-	RunningModeAuto_stop RunningMode = "AUTO_STOP"
-	RunningModeAlways_on RunningMode = "ALWAYS_ON"
+	RunningModeAutoStop RunningMode = "AUTO_STOP"
+	RunningModeAlwaysOn RunningMode = "ALWAYS_ON"
 )
 
 // Values returns all known values for RunningMode. Note that this can be expanded
@@ -300,8 +300,8 @@ type TargetWorkspaceState string
 
 // Enum values for TargetWorkspaceState
 const (
-	TargetWorkspaceStateAvailable         TargetWorkspaceState = "AVAILABLE"
-	TargetWorkspaceStateAdmin_maintenance TargetWorkspaceState = "ADMIN_MAINTENANCE"
+	TargetWorkspaceStateAvailable        TargetWorkspaceState = "AVAILABLE"
+	TargetWorkspaceStateAdminMaintenance TargetWorkspaceState = "ADMIN_MAINTENANCE"
 )
 
 // Values returns all known values for TargetWorkspaceState. Note that this can be
@@ -360,8 +360,8 @@ type WorkspaceDirectoryType string
 
 // Enum values for WorkspaceDirectoryType
 const (
-	WorkspaceDirectoryTypeSimple_ad    WorkspaceDirectoryType = "SIMPLE_AD"
-	WorkspaceDirectoryTypeAd_connector WorkspaceDirectoryType = "AD_CONNECTOR"
+	WorkspaceDirectoryTypeSimpleAd    WorkspaceDirectoryType = "SIMPLE_AD"
+	WorkspaceDirectoryTypeAdConnector WorkspaceDirectoryType = "AD_CONNECTOR"
 )
 
 // Values returns all known values for WorkspaceDirectoryType. Note that this can
@@ -378,9 +378,9 @@ type WorkspaceImageIngestionProcess string
 
 // Enum values for WorkspaceImageIngestionProcess
 const (
-	WorkspaceImageIngestionProcessByol_regular     WorkspaceImageIngestionProcess = "BYOL_REGULAR"
-	WorkspaceImageIngestionProcessByol_graphics    WorkspaceImageIngestionProcess = "BYOL_GRAPHICS"
-	WorkspaceImageIngestionProcessByol_graphicspro WorkspaceImageIngestionProcess = "BYOL_GRAPHICSPRO"
+	WorkspaceImageIngestionProcessByolRegular     WorkspaceImageIngestionProcess = "BYOL_REGULAR"
+	WorkspaceImageIngestionProcessByolGraphics    WorkspaceImageIngestionProcess = "BYOL_GRAPHICS"
+	WorkspaceImageIngestionProcessByolGraphicspro WorkspaceImageIngestionProcess = "BYOL_GRAPHICSPRO"
 )
 
 // Values returns all known values for WorkspaceImageIngestionProcess. Note that
@@ -438,23 +438,23 @@ type WorkspaceState string
 
 // Enum values for WorkspaceState
 const (
-	WorkspaceStatePending           WorkspaceState = "PENDING"
-	WorkspaceStateAvailable         WorkspaceState = "AVAILABLE"
-	WorkspaceStateImpaired          WorkspaceState = "IMPAIRED"
-	WorkspaceStateUnhealthy         WorkspaceState = "UNHEALTHY"
-	WorkspaceStateRebooting         WorkspaceState = "REBOOTING"
-	WorkspaceStateStarting          WorkspaceState = "STARTING"
-	WorkspaceStateRebuilding        WorkspaceState = "REBUILDING"
-	WorkspaceStateRestoring         WorkspaceState = "RESTORING"
-	WorkspaceStateMaintenance       WorkspaceState = "MAINTENANCE"
-	WorkspaceStateAdmin_maintenance WorkspaceState = "ADMIN_MAINTENANCE"
-	WorkspaceStateTerminating       WorkspaceState = "TERMINATING"
-	WorkspaceStateTerminated        WorkspaceState = "TERMINATED"
-	WorkspaceStateSuspended         WorkspaceState = "SUSPENDED"
-	WorkspaceStateUpdating          WorkspaceState = "UPDATING"
-	WorkspaceStateStopping          WorkspaceState = "STOPPING"
-	WorkspaceStateStopped           WorkspaceState = "STOPPED"
-	WorkspaceStateError             WorkspaceState = "ERROR"
+	WorkspaceStatePending          WorkspaceState = "PENDING"
+	WorkspaceStateAvailable        WorkspaceState = "AVAILABLE"
+	WorkspaceStateImpaired         WorkspaceState = "IMPAIRED"
+	WorkspaceStateUnhealthy        WorkspaceState = "UNHEALTHY"
+	WorkspaceStateRebooting        WorkspaceState = "REBOOTING"
+	WorkspaceStateStarting         WorkspaceState = "STARTING"
+	WorkspaceStateRebuilding       WorkspaceState = "REBUILDING"
+	WorkspaceStateRestoring        WorkspaceState = "RESTORING"
+	WorkspaceStateMaintenance      WorkspaceState = "MAINTENANCE"
+	WorkspaceStateAdminMaintenance WorkspaceState = "ADMIN_MAINTENANCE"
+	WorkspaceStateTerminating      WorkspaceState = "TERMINATING"
+	WorkspaceStateTerminated       WorkspaceState = "TERMINATED"
+	WorkspaceStateSuspended        WorkspaceState = "SUSPENDED"
+	WorkspaceStateUpdating         WorkspaceState = "UPDATING"
+	WorkspaceStateStopping         WorkspaceState = "STOPPING"
+	WorkspaceStateStopped          WorkspaceState = "STOPPED"
+	WorkspaceStateError            WorkspaceState = "ERROR"
 )
 
 // Values returns all known values for WorkspaceState. Note that this can be

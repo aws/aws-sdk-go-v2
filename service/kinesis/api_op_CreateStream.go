@@ -29,14 +29,14 @@ import (
 // operations only on an ACTIVE stream. You receive a LimitExceededException when
 // making a CreateStream request when you try to do one of the following:
 //
-//     *
-// Have more than five streams in the CREATING state at any point in time.
+// * Have
+// more than five streams in the CREATING state at any point in time.
 //
-//     *
-// Create more shards than are authorized for your account.
+// * Create
+// more shards than are authorized for your account.
 //
-// For the default shard
-// limit for an AWS account, see Amazon Kinesis Data Streams Limits
+// For the default shard limit
+// for an AWS account, see Amazon Kinesis Data Streams Limits
 // (https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html)
 // in the Amazon Kinesis Data Streams Developer Guide. To increase this limit,
 // contact AWS Support

@@ -32,20 +32,20 @@ type DescribeNetworkInterfacePermissionsInput struct {
 
 	// One or more filters.
 	//
-	//     *
+	// *
 	// network-interface-permission.network-interface-permission-id - The ID of the
 	// permission.
 	//
-	//     * network-interface-permission.network-interface-id - The ID of
-	// the network interface.
+	// * network-interface-permission.network-interface-id - The ID of the
+	// network interface.
 	//
-	//     * network-interface-permission.aws-account-id - The
-	// AWS account ID.
+	// * network-interface-permission.aws-account-id - The AWS
+	// account ID.
 	//
-	//     * network-interface-permission.aws-service - The AWS
-	// service.
+	// * network-interface-permission.aws-service - The AWS service.
 	//
-	//     * network-interface-permission.permission - The type of permission
+	// *
+	// network-interface-permission.permission - The type of permission
 	// (INSTANCE-ATTACH | EIP-ASSOCIATE).
 	Filters []*types.Filter
 

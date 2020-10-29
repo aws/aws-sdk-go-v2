@@ -44,13 +44,13 @@ type UpdateServiceSettingInput struct {
 	// arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled.
 	// The setting ID can be one of the following.
 	//
-	//     *
+	// *
 	// /ssm/parameter-store/default-parameter-tier
 	//
-	//     *
+	// *
 	// /ssm/parameter-store/high-throughput-enabled
 	//
-	//     *
+	// *
 	// /ssm/managed-instance/activation-tier
 	//
 	// This member is required.
@@ -60,14 +60,14 @@ type UpdateServiceSettingInput struct {
 	// /ssm/parameter-store/default-parameter-tier setting ID, the setting value can be
 	// one of the following.
 	//
-	//     * Standard
+	// * Standard
 	//
-	//     * Advanced
+	// * Advanced
 	//
-	//     *
-	// Intelligent-Tiering
+	// * Intelligent-Tiering
 	//
-	// For the /ssm/parameter-store/high-throughput-enabled, and
+	// For the
+	// /ssm/parameter-store/high-throughput-enabled, and
 	// /ssm/managed-instance/activation-tier setting IDs, the setting value can be true
 	// or false.
 	//

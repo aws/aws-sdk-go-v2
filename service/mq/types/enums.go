@@ -24,11 +24,11 @@ type BrokerState string
 
 // Enum values for BrokerState
 const (
-	BrokerStateCreation_in_progress BrokerState = "CREATION_IN_PROGRESS"
-	BrokerStateCreation_failed      BrokerState = "CREATION_FAILED"
-	BrokerStateDeletion_in_progress BrokerState = "DELETION_IN_PROGRESS"
-	BrokerStateRunning              BrokerState = "RUNNING"
-	BrokerStateReboot_in_progress   BrokerState = "REBOOT_IN_PROGRESS"
+	BrokerStateCreationInProgress BrokerState = "CREATION_IN_PROGRESS"
+	BrokerStateCreationFailed     BrokerState = "CREATION_FAILED"
+	BrokerStateDeletionInProgress BrokerState = "DELETION_IN_PROGRESS"
+	BrokerStateRunning            BrokerState = "RUNNING"
+	BrokerStateRebootInProgress   BrokerState = "REBOOT_IN_PROGRESS"
 )
 
 // Values returns all known values for BrokerState. Note that this can be expanded
@@ -114,8 +114,8 @@ type DeploymentMode string
 
 // Enum values for DeploymentMode
 const (
-	DeploymentModeSingle_instance         DeploymentMode = "SINGLE_INSTANCE"
-	DeploymentModeActive_standby_multi_az DeploymentMode = "ACTIVE_STANDBY_MULTI_AZ"
+	DeploymentModeSingleInstance       DeploymentMode = "SINGLE_INSTANCE"
+	DeploymentModeActiveStandbyMultiAz DeploymentMode = "ACTIVE_STANDBY_MULTI_AZ"
 )
 
 // Values returns all known values for DeploymentMode. Note that this can be
@@ -148,9 +148,9 @@ type SanitizationWarningReason string
 
 // Enum values for SanitizationWarningReason
 const (
-	SanitizationWarningReasonDisallowed_element_removed      SanitizationWarningReason = "DISALLOWED_ELEMENT_REMOVED"
-	SanitizationWarningReasonDisallowed_attribute_removed    SanitizationWarningReason = "DISALLOWED_ATTRIBUTE_REMOVED"
-	SanitizationWarningReasonInvalid_attribute_value_removed SanitizationWarningReason = "INVALID_ATTRIBUTE_VALUE_REMOVED"
+	SanitizationWarningReasonDisallowedElementRemoved     SanitizationWarningReason = "DISALLOWED_ELEMENT_REMOVED"
+	SanitizationWarningReasonDisallowedAttributeRemoved   SanitizationWarningReason = "DISALLOWED_ATTRIBUTE_REMOVED"
+	SanitizationWarningReasonInvalidAttributeValueRemoved SanitizationWarningReason = "INVALID_ATTRIBUTE_VALUE_REMOVED"
 )
 
 // Values returns all known values for SanitizationWarningReason. Note that this

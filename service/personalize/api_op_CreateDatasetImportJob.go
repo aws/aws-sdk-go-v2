@@ -19,7 +19,7 @@ import (
 // dataset import job replaces any previous data in the dataset. Status A dataset
 // import job can be in one of the following states:
 //
-//     * CREATE PENDING > CREATE
+// * CREATE PENDING > CREATE
 // IN_PROGRESS > ACTIVE -or- CREATE FAILED
 //
 // To get the status of the import job,
@@ -30,10 +30,9 @@ import (
 // must wait until the status shows as ACTIVE before training a model using the
 // dataset. Related APIs
 //
-//     * ListDatasetImportJobs
+// * ListDatasetImportJobs
 //
-//     *
-// DescribeDatasetImportJob
+// * DescribeDatasetImportJob
 func (c *Client) CreateDatasetImportJob(ctx context.Context, params *CreateDatasetImportJobInput, optFns ...func(*Options)) (*CreateDatasetImportJobOutput, error) {
 	if params == nil {
 		params = &CreateDatasetImportJobInput{}

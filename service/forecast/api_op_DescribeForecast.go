@@ -15,17 +15,17 @@ import (
 // listing the properties provided in the CreateForecast request, this operation
 // lists the following properties:
 //
-//     * DatasetGroupArn - The dataset group that
+// * DatasetGroupArn - The dataset group that
 // provided the training data.
 //
-//     * CreationTime
+// * CreationTime
 //
-//     * LastModificationTime
-//
+// * LastModificationTime
 //
 // * Status
 //
-//     * Message - If an error occurred, information about the error.
+// *
+// Message - If an error occurred, information about the error.
 func (c *Client) DescribeForecast(ctx context.Context, params *DescribeForecastInput, optFns ...func(*Options)) (*DescribeForecastOutput, error) {
 	if params == nil {
 		params = &DescribeForecastInput{}
@@ -80,12 +80,12 @@ type DescribeForecastOutput struct {
 
 	// The status of the forecast. States include:
 	//
-	//     * ACTIVE
+	// * ACTIVE
 	//
-	//     * CREATE_PENDING,
+	// * CREATE_PENDING,
 	// CREATE_IN_PROGRESS, CREATE_FAILED
 	//
-	//     * DELETE_PENDING, DELETE_IN_PROGRESS,
+	// * DELETE_PENDING, DELETE_IN_PROGRESS,
 	// DELETE_FAILED
 	//
 	// The Status of the forecast must be ACTIVE before you can query or

@@ -46,9 +46,9 @@ type BackupType string
 
 // Enum values for BackupType
 const (
-	BackupTypeUser       BackupType = "USER"
-	BackupTypeSystem     BackupType = "SYSTEM"
-	BackupTypeAws_backup BackupType = "AWS_BACKUP"
+	BackupTypeUser      BackupType = "USER"
+	BackupTypeSystem    BackupType = "SYSTEM"
+	BackupTypeAwsBackup BackupType = "AWS_BACKUP"
 )
 
 // Values returns all known values for BackupType. Note that this can be expanded
@@ -66,10 +66,10 @@ type BackupTypeFilter string
 
 // Enum values for BackupTypeFilter
 const (
-	BackupTypeFilterUser       BackupTypeFilter = "USER"
-	BackupTypeFilterSystem     BackupTypeFilter = "SYSTEM"
-	BackupTypeFilterAws_backup BackupTypeFilter = "AWS_BACKUP"
-	BackupTypeFilterAll        BackupTypeFilter = "ALL"
+	BackupTypeFilterUser      BackupTypeFilter = "USER"
+	BackupTypeFilterSystem    BackupTypeFilter = "SYSTEM"
+	BackupTypeFilterAwsBackup BackupTypeFilter = "AWS_BACKUP"
+	BackupTypeFilterAll       BackupTypeFilter = "ALL"
 )
 
 // Values returns all known values for BackupTypeFilter. Note that this can be
@@ -88,8 +88,8 @@ type BillingMode string
 
 // Enum values for BillingMode
 const (
-	BillingModeProvisioned     BillingMode = "PROVISIONED"
-	BillingModePay_per_request BillingMode = "PAY_PER_REQUEST"
+	BillingModeProvisioned   BillingMode = "PROVISIONED"
+	BillingModePayPerRequest BillingMode = "PAY_PER_REQUEST"
 )
 
 // Values returns all known values for BillingMode. Note that this can be expanded
@@ -106,19 +106,19 @@ type ComparisonOperator string
 
 // Enum values for ComparisonOperator
 const (
-	ComparisonOperatorEq           ComparisonOperator = "EQ"
-	ComparisonOperatorNe           ComparisonOperator = "NE"
-	ComparisonOperatorIn           ComparisonOperator = "IN"
-	ComparisonOperatorLe           ComparisonOperator = "LE"
-	ComparisonOperatorLt           ComparisonOperator = "LT"
-	ComparisonOperatorGe           ComparisonOperator = "GE"
-	ComparisonOperatorGt           ComparisonOperator = "GT"
-	ComparisonOperatorBetween      ComparisonOperator = "BETWEEN"
-	ComparisonOperatorNot_null     ComparisonOperator = "NOT_NULL"
-	ComparisonOperatorNull         ComparisonOperator = "NULL"
-	ComparisonOperatorContains     ComparisonOperator = "CONTAINS"
-	ComparisonOperatorNot_contains ComparisonOperator = "NOT_CONTAINS"
-	ComparisonOperatorBegins_with  ComparisonOperator = "BEGINS_WITH"
+	ComparisonOperatorEq          ComparisonOperator = "EQ"
+	ComparisonOperatorNe          ComparisonOperator = "NE"
+	ComparisonOperatorIn          ComparisonOperator = "IN"
+	ComparisonOperatorLe          ComparisonOperator = "LE"
+	ComparisonOperatorLt          ComparisonOperator = "LT"
+	ComparisonOperatorGe          ComparisonOperator = "GE"
+	ComparisonOperatorGt          ComparisonOperator = "GT"
+	ComparisonOperatorBetween     ComparisonOperator = "BETWEEN"
+	ComparisonOperatorNotNull     ComparisonOperator = "NOT_NULL"
+	ComparisonOperatorNull        ComparisonOperator = "NULL"
+	ComparisonOperatorContains    ComparisonOperator = "CONTAINS"
+	ComparisonOperatorNotContains ComparisonOperator = "NOT_CONTAINS"
+	ComparisonOperatorBeginsWith  ComparisonOperator = "BEGINS_WITH"
 )
 
 // Values returns all known values for ComparisonOperator. Note that this can be
@@ -304,9 +304,9 @@ type ProjectionType string
 
 // Enum values for ProjectionType
 const (
-	ProjectionTypeAll       ProjectionType = "ALL"
-	ProjectionTypeKeys_only ProjectionType = "KEYS_ONLY"
-	ProjectionTypeInclude   ProjectionType = "INCLUDE"
+	ProjectionTypeAll      ProjectionType = "ALL"
+	ProjectionTypeKeysOnly ProjectionType = "KEYS_ONLY"
+	ProjectionTypeInclude  ProjectionType = "INCLUDE"
 )
 
 // Values returns all known values for ProjectionType. Note that this can be
@@ -324,12 +324,12 @@ type ReplicaStatus string
 
 // Enum values for ReplicaStatus
 const (
-	ReplicaStatusCreating        ReplicaStatus = "CREATING"
-	ReplicaStatusCreation_failed ReplicaStatus = "CREATION_FAILED"
-	ReplicaStatusUpdating        ReplicaStatus = "UPDATING"
-	ReplicaStatusDeleting        ReplicaStatus = "DELETING"
-	ReplicaStatusActive          ReplicaStatus = "ACTIVE"
-	ReplicaStatusRegion_disabled ReplicaStatus = "REGION_DISABLED"
+	ReplicaStatusCreating       ReplicaStatus = "CREATING"
+	ReplicaStatusCreationFailed ReplicaStatus = "CREATION_FAILED"
+	ReplicaStatusUpdating       ReplicaStatus = "UPDATING"
+	ReplicaStatusDeleting       ReplicaStatus = "DELETING"
+	ReplicaStatusActive         ReplicaStatus = "ACTIVE"
+	ReplicaStatusRegionDisabled ReplicaStatus = "REGION_DISABLED"
 )
 
 // Values returns all known values for ReplicaStatus. Note that this can be
@@ -388,11 +388,11 @@ type ReturnValue string
 
 // Enum values for ReturnValue
 const (
-	ReturnValueNone        ReturnValue = "NONE"
-	ReturnValueAll_old     ReturnValue = "ALL_OLD"
-	ReturnValueUpdated_old ReturnValue = "UPDATED_OLD"
-	ReturnValueAll_new     ReturnValue = "ALL_NEW"
-	ReturnValueUpdated_new ReturnValue = "UPDATED_NEW"
+	ReturnValueNone       ReturnValue = "NONE"
+	ReturnValueAllOld     ReturnValue = "ALL_OLD"
+	ReturnValueUpdatedOld ReturnValue = "UPDATED_OLD"
+	ReturnValueAllNew     ReturnValue = "ALL_NEW"
+	ReturnValueUpdatedNew ReturnValue = "UPDATED_NEW"
 )
 
 // Values returns all known values for ReturnValue. Note that this can be expanded
@@ -412,8 +412,8 @@ type ReturnValuesOnConditionCheckFailure string
 
 // Enum values for ReturnValuesOnConditionCheckFailure
 const (
-	ReturnValuesOnConditionCheckFailureAll_old ReturnValuesOnConditionCheckFailure = "ALL_OLD"
-	ReturnValuesOnConditionCheckFailureNone    ReturnValuesOnConditionCheckFailure = "NONE"
+	ReturnValuesOnConditionCheckFailureAllOld ReturnValuesOnConditionCheckFailure = "ALL_OLD"
+	ReturnValuesOnConditionCheckFailureNone   ReturnValuesOnConditionCheckFailure = "NONE"
 )
 
 // Values returns all known values for ReturnValuesOnConditionCheckFailure. Note
@@ -451,10 +451,10 @@ type Select string
 
 // Enum values for Select
 const (
-	SelectAll_attributes           Select = "ALL_ATTRIBUTES"
-	SelectAll_projected_attributes Select = "ALL_PROJECTED_ATTRIBUTES"
-	SelectSpecific_attributes      Select = "SPECIFIC_ATTRIBUTES"
-	SelectCount                    Select = "COUNT"
+	SelectAllAttributes          Select = "ALL_ATTRIBUTES"
+	SelectAllProjectedAttributes Select = "ALL_PROJECTED_ATTRIBUTES"
+	SelectSpecificAttributes     Select = "SPECIFIC_ATTRIBUTES"
+	SelectCount                  Select = "COUNT"
 )
 
 // Values returns all known values for Select. Note that this can be expanded in
@@ -515,10 +515,10 @@ type StreamViewType string
 
 // Enum values for StreamViewType
 const (
-	StreamViewTypeNew_image          StreamViewType = "NEW_IMAGE"
-	StreamViewTypeOld_image          StreamViewType = "OLD_IMAGE"
-	StreamViewTypeNew_and_old_images StreamViewType = "NEW_AND_OLD_IMAGES"
-	StreamViewTypeKeys_only          StreamViewType = "KEYS_ONLY"
+	StreamViewTypeNewImage        StreamViewType = "NEW_IMAGE"
+	StreamViewTypeOldImage        StreamViewType = "OLD_IMAGE"
+	StreamViewTypeNewAndOldImages StreamViewType = "NEW_AND_OLD_IMAGES"
+	StreamViewTypeKeysOnly        StreamViewType = "KEYS_ONLY"
 )
 
 // Values returns all known values for StreamViewType. Note that this can be
@@ -537,13 +537,13 @@ type TableStatus string
 
 // Enum values for TableStatus
 const (
-	TableStatusCreating                            TableStatus = "CREATING"
-	TableStatusUpdating                            TableStatus = "UPDATING"
-	TableStatusDeleting                            TableStatus = "DELETING"
-	TableStatusActive                              TableStatus = "ACTIVE"
-	TableStatusInaccessible_encryption_credentials TableStatus = "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
-	TableStatusArchiving                           TableStatus = "ARCHIVING"
-	TableStatusArchived                            TableStatus = "ARCHIVED"
+	TableStatusCreating                          TableStatus = "CREATING"
+	TableStatusUpdating                          TableStatus = "UPDATING"
+	TableStatusDeleting                          TableStatus = "DELETING"
+	TableStatusActive                            TableStatus = "ACTIVE"
+	TableStatusInaccessibleEncryptionCredentials TableStatus = "INACCESSIBLE_ENCRYPTION_CREDENTIALS"
+	TableStatusArchiving                         TableStatus = "ARCHIVING"
+	TableStatusArchived                          TableStatus = "ARCHIVED"
 )
 
 // Values returns all known values for TableStatus. Note that this can be expanded

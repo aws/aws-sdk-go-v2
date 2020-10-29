@@ -22,14 +22,14 @@ import (
 // To permanently delete an XssMatchSet from AWS WAF, perform the following
 // steps:
 //
-//     * Update the XssMatchSet to remove filters, if any. For more
+// * Update the XssMatchSet to remove filters, if any. For more
 // information, see UpdateXssMatchSet.
 //
-//     * Use GetChangeToken to get the change
+// * Use GetChangeToken to get the change
 // token that you provide in the ChangeToken parameter of a DeleteXssMatchSet
 // request.
 //
-//     * Submit a DeleteXssMatchSet request.
+// * Submit a DeleteXssMatchSet request.
 func (c *Client) DeleteXssMatchSet(ctx context.Context, params *DeleteXssMatchSetInput, optFns ...func(*Options)) (*DeleteXssMatchSetOutput, error) {
 	if params == nil {
 		params = &DeleteXssMatchSetInput{}

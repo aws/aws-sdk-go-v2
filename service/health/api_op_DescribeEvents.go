@@ -21,8 +21,8 @@ import (
 // operations. If no filter criteria are specified, all events are returned.
 // Results are sorted by lastModifiedTime, starting with the most recent event.
 //
-//
-// * When you call the DescribeEvents operation and specify an entity for the
+// *
+// When you call the DescribeEvents operation and specify an entity for the
 // entityValues parameter, AWS Health might return public events that aren't
 // specific to that resource. For example, if you call DescribeEvents and specify
 // an ID for an Amazon Elastic Compute Cloud (Amazon EC2) instance, AWS Health
@@ -31,8 +31,8 @@ import (
 // object. For more information, see Event
 // (https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html).
 //
-//     *
-// This API operation uses pagination. Specify the nextToken parameter in the next
+// * This
+// API operation uses pagination. Specify the nextToken parameter in the next
 // request to return more results.
 func (c *Client) DescribeEvents(ctx context.Context, params *DescribeEventsInput, optFns ...func(*Options)) (*DescribeEventsOutput, error) {
 	if params == nil {

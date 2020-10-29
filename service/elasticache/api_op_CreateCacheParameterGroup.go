@@ -19,11 +19,11 @@ import (
 // the newly created CacheParameterGroup you can change the values of specific
 // parameters. For more information, see:
 //
-//     * ModifyCacheParameterGroup
+// * ModifyCacheParameterGroup
 // (https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyCacheParameterGroup.html)
 // in the ElastiCache API Reference.
 //
-//     * Parameters and Parameter Groups
+// * Parameters and Parameter Groups
 // (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.html)
 // in the ElastiCache User Guide.
 func (c *Client) CreateCacheParameterGroup(ctx context.Context, params *CreateCacheParameterGroupInput, optFns ...func(*Options)) (*CreateCacheParameterGroupOutput, error) {

@@ -47,9 +47,9 @@ type Child struct {
 	// (http://wikipedia.org/wiki/regex) for a child ID string requires one of the
 	// following:
 	//
-	//     * Account - A string that consists of exactly 12 digits.
+	// * Account - A string that consists of exactly 12 digits.
 	//
-	//     *
+	// *
 	// Organizational unit (OU) - A string that begins with "ou-" followed by from 4 to
 	// 32 lowercase letters or digits (the ID of the root that contains the OU). This
 	// string is followed by a second "-" dash and from 8 to 32 additional lowercase
@@ -77,39 +77,38 @@ type CreateAccountStatus struct {
 
 	// If the request failed, a description of the reason for the failure.
 	//
-	//     *
+	// *
 	// ACCOUNT_LIMIT_EXCEEDED: The account could not be created because you have
 	// reached the limit on the number of accounts in your organization.
 	//
-	//     *
+	// *
 	// CONCURRENT_ACCOUNT_MODIFICATION: You already submitted a request with the same
 	// information.
 	//
-	//     * EMAIL_ALREADY_EXISTS: The account could not be created
-	// because another AWS account with that email address already exists.
+	// * EMAIL_ALREADY_EXISTS: The account could not be created because
+	// another AWS account with that email address already exists.
 	//
-	//     *
+	// *
 	// GOVCLOUD_ACCOUNT_ALREADY_EXISTS: The account in the AWS GovCloud (US) Region
 	// could not be created because this Region already includes an account with that
 	// email address.
 	//
-	//     * INVALID_ADDRESS: The account could not be created because
-	// the address you provided is not valid.
+	// * INVALID_ADDRESS: The account could not be created because the
+	// address you provided is not valid.
 	//
-	//     * INVALID_EMAIL: The account could
-	// not be created because the email address you provided is not valid.
+	// * INVALID_EMAIL: The account could not be
+	// created because the email address you provided is not valid.
 	//
-	//     *
+	// *
 	// INTERNAL_FAILURE: The account could not be created because of an internal
 	// failure. Try again later. If the problem persists, contact Customer Support.
 	//
+	// *
+	// MISSING_BUSINESS_VALIDATION: The AWS account that owns your organization has not
+	// received Business Validation.
 	//
-	// * MISSING_BUSINESS_VALIDATION: The AWS account that owns your organization has
-	// not received Business Validation.
-	//
-	//     * MISSING_PAYMENT_INSTRUMENT: You must
-	// configure the management account with a valid payment method, such as a credit
-	// card.
+	// * MISSING_PAYMENT_INSTRUMENT: You must configure
+	// the management account with a valid payment method, such as a credit card.
 	FailureReason CreateAccountFailureReason
 
 	// If the account was created successfully, the unique identifier (ID) of the new
@@ -215,18 +214,18 @@ type Handshake struct {
 	// The type of handshake, indicating what action occurs when the recipient accepts
 	// the handshake. The following handshake types are supported:
 	//
-	//     * INVITE: This
-	// type of handshake represents a request to join an organization. It is always
-	// sent from the management account to only non-member accounts.
+	// * INVITE: This type
+	// of handshake represents a request to join an organization. It is always sent
+	// from the management account to only non-member accounts.
 	//
-	//     *
-	// ENABLE_ALL_FEATURES: This type of handshake represents a request to enable all
-	// features in an organization. It is always sent from the management account to
-	// only invited member accounts. Created accounts do not receive this because those
-	// accounts were created by the organization's management account and approval is
+	// * ENABLE_ALL_FEATURES:
+	// This type of handshake represents a request to enable all features in an
+	// organization. It is always sent from the management account to only invited
+	// member accounts. Created accounts do not receive this because those accounts
+	// were created by the organization's management account and approval is
 	// inferred.
 	//
-	//     * APPROVE_ALL_FEATURES: This type of handshake is sent from the
+	// * APPROVE_ALL_FEATURES: This type of handshake is sent from the
 	// Organizations service when all member accounts have approved the
 	// ENABLE_ALL_FEATURES invitation. It is sent only to the management account and
 	// signals the master that it can finalize the process to enable all features.
@@ -262,28 +261,28 @@ type Handshake struct {
 	// handshake through the process from its creation to its acceptance. The meaning
 	// of each of the valid values is as follows:
 	//
-	//     * REQUESTED: This handshake was
-	// sent to multiple recipients (applicable to only some handshake types) and not
-	// all recipients have responded yet. The request stays in this state until all
+	// * REQUESTED: This handshake was sent
+	// to multiple recipients (applicable to only some handshake types) and not all
+	// recipients have responded yet. The request stays in this state until all
 	// recipients respond.
 	//
-	//     * OPEN: This handshake was sent to multiple recipients
+	// * OPEN: This handshake was sent to multiple recipients
 	// (applicable to only some policy types) and all recipients have responded,
 	// allowing the originator to complete the handshake action.
 	//
-	//     * CANCELED: This
+	// * CANCELED: This
 	// handshake is no longer active because it was canceled by the originating
 	// account.
 	//
-	//     * ACCEPTED: This handshake is complete because it has been
-	// accepted by the recipient.
+	// * ACCEPTED: This handshake is complete because it has been accepted by
+	// the recipient.
 	//
-	//     * DECLINED: This handshake is no longer active
-	// because it was declined by the recipient account.
+	// * DECLINED: This handshake is no longer active because it was
+	// declined by the recipient account.
 	//
-	//     * EXPIRED: This handshake
-	// is no longer active because the originator did not receive a response of any
-	// kind from the recipient before the expiration time (15 days).
+	// * EXPIRED: This handshake is no longer
+	// active because the originator did not receive a response of any kind from the
+	// recipient before the expiration time (15 days).
 	State HandshakeState
 }
 
@@ -326,24 +325,24 @@ type HandshakeResource struct {
 	// The type of information being passed, specifying how the value is to be
 	// interpreted by the other party:
 	//
-	//     * ACCOUNT - Specifies an AWS account ID
+	// * ACCOUNT - Specifies an AWS account ID
 	// number.
 	//
-	//     * ORGANIZATION - Specifies an organization ID number.
+	// * ORGANIZATION - Specifies an organization ID number.
 	//
-	//     * EMAIL
-	// - Specifies the email address that is associated with the account that receives
+	// * EMAIL -
+	// Specifies the email address that is associated with the account that receives
 	// the handshake.
 	//
-	//     * OWNER_EMAIL - Specifies the email address associated with
-	// the management account. Included as information about an organization.
+	// * OWNER_EMAIL - Specifies the email address associated with the
+	// management account. Included as information about an organization.
 	//
-	//     *
-	// OWNER_NAME - Specifies the name associated with the management account. Included
-	// as information about an organization.
+	// * OWNER_NAME
+	// - Specifies the name associated with the management account. Included as
+	// information about an organization.
 	//
-	//     * NOTES - Additional text provided by
-	// the handshake initiator and intended for the recipient to read.
+	// * NOTES - Additional text provided by the
+	// handshake initiator and intended for the recipient to read.
 	Type HandshakeResourceType
 
 	// The information that is passed to the other party in the handshake. The format
@@ -432,13 +431,13 @@ type Parent struct {
 	// (http://wikipedia.org/wiki/regex) for a parent ID string requires one of the
 	// following:
 	//
-	//     * Root - A string that begins with "r-" followed by from 4 to 32
+	// * Root - A string that begins with "r-" followed by from 4 to 32
 	// lowercase letters or digits.
 	//
-	//     * Organizational unit (OU) - A string that
-	// begins with "ou-" followed by from 4 to 32 lowercase letters or digits (the ID
-	// of the root that the OU is in). This string is followed by a second "-" dash and
-	// from 8 to 32 additional lowercase letters or digits.
+	// * Organizational unit (OU) - A string that begins
+	// with "ou-" followed by from 4 to 32 lowercase letters or digits (the ID of the
+	// root that the OU is in). This string is followed by a second "-" dash and from 8
+	// to 32 additional lowercase letters or digits.
 	Id *string
 
 	// The type of the parent entity.
@@ -508,16 +507,16 @@ type PolicyTargetSummary struct {
 	// (http://wikipedia.org/wiki/regex) for a target ID string requires one of the
 	// following:
 	//
-	//     * Root - A string that begins with "r-" followed by from 4 to 32
+	// * Root - A string that begins with "r-" followed by from 4 to 32
 	// lowercase letters or digits.
 	//
-	//     * Account - A string that consists of exactly
-	// 12 digits.
+	// * Account - A string that consists of exactly 12
+	// digits.
 	//
-	//     * Organizational unit (OU) - A string that begins with "ou-"
-	// followed by from 4 to 32 lowercase letters or digits (the ID of the root that
-	// the OU is in). This string is followed by a second "-" dash and from 8 to 32
-	// additional lowercase letters or digits.
+	// * Organizational unit (OU) - A string that begins with "ou-" followed
+	// by from 4 to 32 lowercase letters or digits (the ID of the root that the OU is
+	// in). This string is followed by a second "-" dash and from 8 to 32 additional
+	// lowercase letters or digits.
 	TargetId *string
 
 	// The type of the policy target.
@@ -569,14 +568,14 @@ type Root struct {
 // A custom key-value pair associated with a resource within your organization. You
 // can attach tags to any of the following organization resources.
 //
-//     * AWS
+// * AWS
 // account
 //
-//     * Organizational unit (OU)
+// * Organizational unit (OU)
 //
-//     * Organization root
+// * Organization root
 //
-//     * Policy
+// * Policy
 type Tag struct {
 
 	// The key identifier, or name, of the tag.

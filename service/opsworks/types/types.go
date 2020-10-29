@@ -252,43 +252,42 @@ type Command struct {
 
 	// The command status:
 	//
-	//     * failed
+	// * failed
 	//
-	//     * successful
+	// * successful
 	//
-	//     * skipped
+	// * skipped
 	//
-	//     *
-	// pending
+	// * pending
 	Status *string
 
 	// The command type:
 	//
-	//     * configure
+	// * configure
 	//
-	//     * deploy
+	// * deploy
 	//
-	//     * execute_recipes
+	// * execute_recipes
 	//
-	//     *
+	// *
 	// install_dependencies
 	//
-	//     * restart
+	// * restart
 	//
-	//     * rollback
+	// * rollback
 	//
-	//     * setup
+	// * setup
 	//
-	//     * start
-	//
+	// * start
 	//
 	// * stop
 	//
-	//     * undeploy
+	// *
+	// undeploy
 	//
-	//     * update_custom_cookbooks
+	// * update_custom_cookbooks
 	//
-	//     * update_dependencies
+	// * update_dependencies
 	Type *string
 }
 
@@ -349,11 +348,11 @@ type Deployment struct {
 
 	// The deployment status:
 	//
-	//     * running
+	// * running
 	//
-	//     * successful
+	// * successful
 	//
-	//     * failed
+	// * failed
 	Status *string
 }
 
@@ -363,44 +362,43 @@ type DeploymentCommand struct {
 	// Specifies the operation. You can specify only one command. For stacks, the
 	// following commands are available:
 	//
-	//     * execute_recipes: Execute one or more
+	// * execute_recipes: Execute one or more
 	// recipes. To specify the recipes, set an Args parameter named recipes to the list
 	// of recipes to be executed. For example, to execute phpapp::appsetup, set Args to
 	// {"recipes":["phpapp::appsetup"]}.
 	//
-	//     * install_dependencies: Install the
-	// stack's dependencies.
+	// * install_dependencies: Install the stack's
+	// dependencies.
 	//
-	//     * update_custom_cookbooks: Update the stack's custom
+	// * update_custom_cookbooks: Update the stack's custom
 	// cookbooks.
 	//
-	//     * update_dependencies: Update the stack's dependencies.
+	// * update_dependencies: Update the stack's dependencies.
 	//
 	// The
 	// update_dependencies and install_dependencies commands are supported only for
 	// Linux instances. You can run the commands successfully on Windows instances, but
 	// they do nothing. For apps, the following commands are available:
 	//
-	//     * deploy:
+	// * deploy:
 	// Deploy an app. Ruby on Rails apps have an optional Args parameter named migrate.
 	// Set Args to {"migrate":["true"]} to migrate the database. The default setting is
 	// {"migrate":["false"]}.
 	//
-	//     * rollback Roll the app back to the previous
-	// version. When you update an app, AWS OpsWorks Stacks stores the previous
-	// version, up to a maximum of five versions. You can use this command to roll an
-	// app back as many as four versions.
+	// * rollback Roll the app back to the previous version.
+	// When you update an app, AWS OpsWorks Stacks stores the previous version, up to a
+	// maximum of five versions. You can use this command to roll an app back as many
+	// as four versions.
 	//
-	//     * start: Start the app's web or
+	// * start: Start the app's web or application server.
+	//
+	// * stop:
+	// Stop the app's web or application server.
+	//
+	// * restart: Restart the app's web or
 	// application server.
 	//
-	//     * stop: Stop the app's web or application server.
-	//
-	//
-	// * restart: Restart the app's web or application server.
-	//
-	//     * undeploy:
-	// Undeploy the app.
+	// * undeploy: Undeploy the app.
 	//
 	// This member is required.
 	Name DeploymentCommandName
@@ -410,18 +408,18 @@ type DeploymentCommand struct {
 	// "arg_name2" : ["value1", "value2", ...], ...} The update_dependencies command
 	// takes two arguments:
 	//
-	//     * upgrade_os_to - Specifies the desired Amazon Linux
+	// * upgrade_os_to - Specifies the desired Amazon Linux
 	// version for instances whose OS you want to upgrade, such as Amazon Linux
 	// 2016.09. You must also set the allow_reboot argument to true.
 	//
-	//     *
-	// allow_reboot - Specifies whether to allow AWS OpsWorks Stacks to reboot the
-	// instances if necessary, after installing the updates. This argument can be set
-	// to either true or false. The default value is false.
+	// * allow_reboot -
+	// Specifies whether to allow AWS OpsWorks Stacks to reboot the instances if
+	// necessary, after installing the updates. This argument can be set to either true
+	// or false. The default value is false.
 	//
-	// For example, to upgrade an
-	// instance to Amazon Linux 2016.09, set Args to the following.  {
-	// "upgrade_os_to":["Amazon Linux 2016.09"], "allow_reboot":["true"] }
+	// For example, to upgrade an instance to
+	// Amazon Linux 2016.09, set Args to the following.  { "upgrade_os_to":["Amazon
+	// Linux 2016.09"], "allow_reboot":["true"] }
 	Args map[string][]*string
 }
 
@@ -681,38 +679,37 @@ type Instance struct {
 
 	// The instance status:
 	//
-	//     * booting
+	// * booting
 	//
-	//     * connection_lost
+	// * connection_lost
 	//
-	//     * online
+	// * online
 	//
-	//     *
-	// pending
+	// * pending
 	//
-	//     * rebooting
+	// *
+	// rebooting
 	//
-	//     * requested
+	// * requested
 	//
-	//     * running_setup
+	// * running_setup
 	//
-	//     *
-	// setup_failed
+	// * setup_failed
 	//
-	//     * shutting_down
+	// * shutting_down
 	//
-	//     * start_failed
+	// *
+	// start_failed
 	//
-	//     * stop_failed
+	// * stop_failed
 	//
-	//     *
-	// stopped
+	// * stopped
 	//
-	//     * stopping
+	// * stopping
 	//
-	//     * terminated
+	// * terminated
 	//
-	//     * terminating
+	// * terminating
 	Status *string
 
 	// The instance's subnet ID; applicable only if the stack is running in a VPC.
@@ -984,19 +981,19 @@ type Permission struct {
 
 	// The user's permission level, which must be the following:
 	//
-	//     * deny
+	// * deny
 	//
-	//     *
-	// show
+	// * show
 	//
-	//     * deploy
+	// *
+	// deploy
 	//
-	//     * manage
+	// * manage
 	//
-	//     * iam_only
+	// * iam_only
 	//
-	// For more information on the
-	// permissions associated with these levels, see Managing User Permissions
+	// For more information on the permissions associated
+	// with these levels, see Managing User Permissions
 	// (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
 	Level *string
 
@@ -1183,14 +1180,14 @@ type Source struct {
 
 	// When included in a request, the parameter depends on the repository type.
 	//
-	//     *
-	// For Amazon S3 bundles, set Password to the appropriate IAM secret access key.
+	// * For
+	// Amazon S3 bundles, set Password to the appropriate IAM secret access key.
 	//
+	// * For
+	// HTTP bundles and Subversion repositories, set Password to the password.
 	//
-	// * For HTTP bundles and Subversion repositories, set Password to the
-	// password.
-	//
-	// For more information on how to safely handle IAM credentials, see
+	// For
+	// more information on how to safely handle IAM credentials, see
 	// https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html).
 	// In responses, AWS OpsWorks Stacks returns *****FILTERED***** instead of the
@@ -1216,10 +1213,10 @@ type Source struct {
 
 	// This parameter depends on the repository type.
 	//
-	//     * For Amazon S3 bundles, set
+	// * For Amazon S3 bundles, set
 	// Username to the appropriate IAM access key ID.
 	//
-	//     * For HTTP bundles, Git
+	// * For HTTP bundles, Git
 	// repositories, and Subversion repositories, set Username to the user name.
 	Username *string
 }
@@ -1470,23 +1467,23 @@ type Volume struct {
 	// The volume type. For more information, see  Amazon EBS Volume Types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html).
 	//
-	//
-	// * standard - Magnetic. Magnetic volumes must have a minimum size of 1 GiB and a
+	// *
+	// standard - Magnetic. Magnetic volumes must have a minimum size of 1 GiB and a
 	// maximum size of 1024 GiB.
 	//
-	//     * io1 - Provisioned IOPS (SSD). PIOPS volumes
-	// must have a minimum size of 4 GiB and a maximum size of 16384 GiB.
+	// * io1 - Provisioned IOPS (SSD). PIOPS volumes must
+	// have a minimum size of 4 GiB and a maximum size of 16384 GiB.
 	//
-	//     * gp2 -
-	// General Purpose (SSD). General purpose volumes must have a minimum size of 1 GiB
-	// and a maximum size of 16384 GiB.
+	// * gp2 - General
+	// Purpose (SSD). General purpose volumes must have a minimum size of 1 GiB and a
+	// maximum size of 16384 GiB.
 	//
-	//     * st1 - Throughput Optimized hard disk
-	// drive (HDD). Throughput optimized HDD volumes must have a minimum size of 500
-	// GiB and a maximum size of 16384 GiB.
+	// * st1 - Throughput Optimized hard disk drive (HDD).
+	// Throughput optimized HDD volumes must have a minimum size of 500 GiB and a
+	// maximum size of 16384 GiB.
 	//
-	//     * sc1 - Cold HDD. Cold HDD volumes
-	// must have a minimum size of 500 GiB and a maximum size of 16384 GiB.
+	// * sc1 - Cold HDD. Cold HDD volumes must have a
+	// minimum size of 500 GiB and a maximum size of 16384 GiB.
 	VolumeType *string
 }
 
@@ -1522,34 +1519,34 @@ type VolumeConfiguration struct {
 	// The volume type. For more information, see  Amazon EBS Volume Types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html).
 	//
-	//
-	// * standard - Magnetic. Magnetic volumes must have a minimum size of 1 GiB and a
+	// *
+	// standard - Magnetic. Magnetic volumes must have a minimum size of 1 GiB and a
 	// maximum size of 1024 GiB.
 	//
-	//     * io1 - Provisioned IOPS (SSD). PIOPS volumes
-	// must have a minimum size of 4 GiB and a maximum size of 16384 GiB.
+	// * io1 - Provisioned IOPS (SSD). PIOPS volumes must
+	// have a minimum size of 4 GiB and a maximum size of 16384 GiB.
 	//
-	//     * gp2 -
-	// General Purpose (SSD). General purpose volumes must have a minimum size of 1 GiB
-	// and a maximum size of 16384 GiB.
+	// * gp2 - General
+	// Purpose (SSD). General purpose volumes must have a minimum size of 1 GiB and a
+	// maximum size of 16384 GiB.
 	//
-	//     * st1 - Throughput Optimized hard disk
-	// drive (HDD). Throughput optimized HDD volumes must have a minimum size of 500
-	// GiB and a maximum size of 16384 GiB.
+	// * st1 - Throughput Optimized hard disk drive (HDD).
+	// Throughput optimized HDD volumes must have a minimum size of 500 GiB and a
+	// maximum size of 16384 GiB.
 	//
-	//     * sc1 - Cold HDD. Cold HDD volumes
-	// must have a minimum size of 500 GiB and a maximum size of 16384 GiB.
+	// * sc1 - Cold HDD. Cold HDD volumes must have a
+	// minimum size of 500 GiB and a maximum size of 16384 GiB.
 	VolumeType *string
 }
 
 // Describes a time-based instance's auto scaling schedule. The schedule consists
 // of a set of key-value pairs.
 //
-//     * The key is the time period (a UTC hour) and
-// must be an integer from 0 - 23.
+// * The key is the time period (a UTC hour) and must
+// be an integer from 0 - 23.
 //
-//     * The value indicates whether the instance
-// should be online or offline for the specified period, and must be set to "on" or
+// * The value indicates whether the instance should be
+// online or offline for the specified period, and must be set to "on" or
 // "off"
 //
 // The default setting for all time periods is off, so you use the following

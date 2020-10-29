@@ -12,27 +12,27 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Creates a service, which defines the configuration for the following entities:
+// Creates a service, which defines the configuration for the following
+// entities:
 //
+// * For public and private DNS namespaces, one of the following
+// combinations of DNS records in Amazon Route 53:
 //
-// * For public and private DNS namespaces, one of the following combinations of
-// DNS records in Amazon Route 53:
+// * A
 //
-//         * A
+// * AAAA
 //
-//         * AAAA
+// * A and AAAA
 //
-//         * A and
-// AAAA
+// *
+// SRV
 //
-//         * SRV
+// * CNAME
 //
-//         * CNAME
+// * Optionally, a health check
 //
-//     * Optionally, a health check
-//
-// After
-// you create the service, you can submit a RegisterInstance
+// After you create the service, you
+// can submit a RegisterInstance
 // (https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html)
 // request, and AWS Cloud Map uses the values in the configuration to create the
 // specified entities. For the current quota on the number of instances that you
@@ -62,14 +62,14 @@ type CreateServiceInput struct {
 	// that requires a specific SRV format, such as HAProxy (http://www.haproxy.org/),
 	// specify the following for Name:
 	//
-	//     * Start the name with an underscore (_),
-	// such as _exampleservice
+	// * Start the name with an underscore (_), such
+	// as _exampleservice
 	//
-	//     * End the name with ._protocol, such as ._tcp
+	// * End the name with ._protocol, such as ._tcp
 	//
-	// When
-	// you register an instance, AWS Cloud Map creates an SRV record and assigns a name
-	// to the record by concatenating the service name and the namespace name, for
+	// When you
+	// register an instance, AWS Cloud Map creates an SRV record and assigns a name to
+	// the record by concatenating the service name and the namespace name, for
 	// example: _exampleservice._tcp.example.com
 	//
 	// This member is required.

@@ -17,14 +17,14 @@ import (
 // CreateForecastExportJob request, this operation lists the following
 // properties:
 //
-//     * CreationTime
+// * CreationTime
 //
-//     * LastModificationTime
+// * LastModificationTime
 //
-//     * Status
+// * Status
 //
-//     *
-// Message - If an error occurred, information about the error.
+// * Message - If an
+// error occurred, information about the error.
 func (c *Client) DescribeForecastExportJob(ctx context.Context, params *DescribeForecastExportJobInput, optFns ...func(*Options)) (*DescribeForecastExportJobOutput, error) {
 	if params == nil {
 		params = &DescribeForecastExportJobInput{}
@@ -74,12 +74,12 @@ type DescribeForecastExportJobOutput struct {
 
 	// The status of the forecast export job. States include:
 	//
-	//     * ACTIVE
+	// * ACTIVE
 	//
-	//     *
+	// *
 	// CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED
 	//
-	//     * DELETE_PENDING,
+	// * DELETE_PENDING,
 	// DELETE_IN_PROGRESS, DELETE_FAILED
 	//
 	// The Status of the forecast export job must be

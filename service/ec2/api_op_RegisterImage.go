@@ -31,18 +31,18 @@ import (
 // registering the AMI, do the following to preserve the billing product code
 // association:
 //
-//     * Launch an instance from an existing AMI with that billing
+// * Launch an instance from an existing AMI with that billing
 // product code.
 //
-//     * Customize the instance.
+// * Customize the instance.
 //
-//     * Create an AMI from the
-// instance using CreateImage.
+// * Create an AMI from the instance
+// using CreateImage.
 //
-// If you purchase a Reserved Instance to apply to an
-// On-Demand Instance that was launched from an AMI with a billing product code,
-// make sure that the Reserved Instance has the matching billing product code. If
-// you purchase a Reserved Instance without the matching billing product code, the
+// If you purchase a Reserved Instance to apply to an On-Demand
+// Instance that was launched from an AMI with a billing product code, make sure
+// that the Reserved Instance has the matching billing product code. If you
+// purchase a Reserved Instance without the matching billing product code, the
 // Reserved Instance will not be applied to the On-Demand Instance. For information
 // about how to obtain the platform details and billing information of an AMI, see
 // Obtaining billing information

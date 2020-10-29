@@ -6,9 +6,9 @@ type ActionType string
 
 // Enum values for ActionType
 const (
-	ActionTypeRestore_cluster       ActionType = "restore-cluster"
-	ActionTypeRecommend_node_config ActionType = "recommend-node-config"
-	ActionTypeResize_cluster        ActionType = "resize-cluster"
+	ActionTypeRestoreCluster      ActionType = "restore-cluster"
+	ActionTypeRecommendNodeConfig ActionType = "recommend-node-config"
+	ActionTypeResizeCluster       ActionType = "resize-cluster"
 )
 
 // Values returns all known values for ActionType. Note that this can be expanded
@@ -26,8 +26,8 @@ type Mode string
 
 // Enum values for Mode
 const (
-	ModeStandard         Mode = "standard"
-	ModeHigh_performance Mode = "high-performance"
+	ModeStandard        Mode = "standard"
+	ModeHighPerformance Mode = "high-performance"
 )
 
 // Values returns all known values for Mode. Note that this can be expanded in the
@@ -44,10 +44,10 @@ type NodeConfigurationOptionsFilterName string
 
 // Enum values for NodeConfigurationOptionsFilterName
 const (
-	NodeConfigurationOptionsFilterNameNode_type                          NodeConfigurationOptionsFilterName = "NodeType"
-	NodeConfigurationOptionsFilterNameNum_nodes                          NodeConfigurationOptionsFilterName = "NumberOfNodes"
-	NodeConfigurationOptionsFilterNameEstimated_disk_utilization_percent NodeConfigurationOptionsFilterName = "EstimatedDiskUtilizationPercent"
-	NodeConfigurationOptionsFilterNameMode                               NodeConfigurationOptionsFilterName = "Mode"
+	NodeConfigurationOptionsFilterNameNodeType                        NodeConfigurationOptionsFilterName = "NodeType"
+	NodeConfigurationOptionsFilterNameNumNodes                        NodeConfigurationOptionsFilterName = "NumberOfNodes"
+	NodeConfigurationOptionsFilterNameEstimatedDiskUtilizationPercent NodeConfigurationOptionsFilterName = "EstimatedDiskUtilizationPercent"
+	NodeConfigurationOptionsFilterNameMode                            NodeConfigurationOptionsFilterName = "Mode"
 )
 
 // Values returns all known values for NodeConfigurationOptionsFilterName. Note
@@ -131,8 +131,8 @@ type ScheduledActionFilterName string
 
 // Enum values for ScheduledActionFilterName
 const (
-	ScheduledActionFilterNameCluster_identifier ScheduledActionFilterName = "cluster-identifier"
-	ScheduledActionFilterNameIam_role           ScheduledActionFilterName = "iam-role"
+	ScheduledActionFilterNameClusterIdentifier ScheduledActionFilterName = "cluster-identifier"
+	ScheduledActionFilterNameIamRole           ScheduledActionFilterName = "iam-role"
 )
 
 // Values returns all known values for ScheduledActionFilterName. Note that this
@@ -167,9 +167,9 @@ type ScheduledActionTypeValues string
 
 // Enum values for ScheduledActionTypeValues
 const (
-	ScheduledActionTypeValuesResize_cluster ScheduledActionTypeValues = "ResizeCluster"
-	ScheduledActionTypeValuesPause_cluster  ScheduledActionTypeValues = "PauseCluster"
-	ScheduledActionTypeValuesResume_cluster ScheduledActionTypeValues = "ResumeCluster"
+	ScheduledActionTypeValuesResizeCluster ScheduledActionTypeValues = "ResizeCluster"
+	ScheduledActionTypeValuesPauseCluster  ScheduledActionTypeValues = "PauseCluster"
+	ScheduledActionTypeValuesResumeCluster ScheduledActionTypeValues = "ResumeCluster"
 )
 
 // Values returns all known values for ScheduledActionTypeValues. Note that this
@@ -207,9 +207,9 @@ type SnapshotAttributeToSortBy string
 
 // Enum values for SnapshotAttributeToSortBy
 const (
-	SnapshotAttributeToSortBySource_type SnapshotAttributeToSortBy = "SOURCE_TYPE"
-	SnapshotAttributeToSortByTotal_size  SnapshotAttributeToSortBy = "TOTAL_SIZE"
-	SnapshotAttributeToSortByCreate_time SnapshotAttributeToSortBy = "CREATE_TIME"
+	SnapshotAttributeToSortBySourceType SnapshotAttributeToSortBy = "SOURCE_TYPE"
+	SnapshotAttributeToSortByTotalSize  SnapshotAttributeToSortBy = "TOTAL_SIZE"
+	SnapshotAttributeToSortByCreateTime SnapshotAttributeToSortBy = "CREATE_TIME"
 )
 
 // Values returns all known values for SnapshotAttributeToSortBy. Note that this
@@ -269,11 +269,11 @@ type TableRestoreStatusType string
 
 // Enum values for TableRestoreStatusType
 const (
-	TableRestoreStatusTypePending     TableRestoreStatusType = "PENDING"
-	TableRestoreStatusTypeIn_progress TableRestoreStatusType = "IN_PROGRESS"
-	TableRestoreStatusTypeSucceeded   TableRestoreStatusType = "SUCCEEDED"
-	TableRestoreStatusTypeFailed      TableRestoreStatusType = "FAILED"
-	TableRestoreStatusTypeCanceled    TableRestoreStatusType = "CANCELED"
+	TableRestoreStatusTypePending    TableRestoreStatusType = "PENDING"
+	TableRestoreStatusTypeInProgress TableRestoreStatusType = "IN_PROGRESS"
+	TableRestoreStatusTypeSucceeded  TableRestoreStatusType = "SUCCEEDED"
+	TableRestoreStatusTypeFailed     TableRestoreStatusType = "FAILED"
+	TableRestoreStatusTypeCanceled   TableRestoreStatusType = "CANCELED"
 )
 
 // Values returns all known values for TableRestoreStatusType. Note that this can
@@ -293,9 +293,9 @@ type UsageLimitBreachAction string
 
 // Enum values for UsageLimitBreachAction
 const (
-	UsageLimitBreachActionLog         UsageLimitBreachAction = "log"
-	UsageLimitBreachActionEmit_metric UsageLimitBreachAction = "emit-metric"
-	UsageLimitBreachActionDisable     UsageLimitBreachAction = "disable"
+	UsageLimitBreachActionLog        UsageLimitBreachAction = "log"
+	UsageLimitBreachActionEmitMetric UsageLimitBreachAction = "emit-metric"
+	UsageLimitBreachActionDisable    UsageLimitBreachAction = "disable"
 )
 
 // Values returns all known values for UsageLimitBreachAction. Note that this can
@@ -313,8 +313,8 @@ type UsageLimitFeatureType string
 
 // Enum values for UsageLimitFeatureType
 const (
-	UsageLimitFeatureTypeSpectrum            UsageLimitFeatureType = "spectrum"
-	UsageLimitFeatureTypeConcurrency_scaling UsageLimitFeatureType = "concurrency-scaling"
+	UsageLimitFeatureTypeSpectrum           UsageLimitFeatureType = "spectrum"
+	UsageLimitFeatureTypeConcurrencyScaling UsageLimitFeatureType = "concurrency-scaling"
 )
 
 // Values returns all known values for UsageLimitFeatureType. Note that this can be
@@ -331,8 +331,8 @@ type UsageLimitLimitType string
 
 // Enum values for UsageLimitLimitType
 const (
-	UsageLimitLimitTypeTime         UsageLimitLimitType = "time"
-	UsageLimitLimitTypeData_scanned UsageLimitLimitType = "data-scanned"
+	UsageLimitLimitTypeTime        UsageLimitLimitType = "time"
+	UsageLimitLimitTypeDataScanned UsageLimitLimitType = "data-scanned"
 )
 
 // Values returns all known values for UsageLimitLimitType. Note that this can be

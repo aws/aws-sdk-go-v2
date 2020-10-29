@@ -44,18 +44,18 @@ type RestoreFromClusterSnapshotInput struct {
 	// The identifier of the cluster that will be created from restoring the snapshot.
 	// Constraints:
 	//
-	//     * Must contain from 1 to 63 alphanumeric characters or
-	// hyphens.
+	// * Must contain from 1 to 63 alphanumeric characters or hyphens.
 	//
-	//     * Alphabetic characters must be lowercase.
+	// *
+	// Alphabetic characters must be lowercase.
 	//
-	//     * First character
-	// must be a letter.
+	// * First character must be a letter.
 	//
-	//     * Cannot end with a hyphen or contain two consecutive
-	// hyphens.
+	// *
+	// Cannot end with a hyphen or contain two consecutive hyphens.
 	//
-	//     * Must be unique for all clusters within an AWS account.
+	// * Must be unique
+	// for all clusters within an AWS account.
 	//
 	// This member is required.
 	ClusterIdentifier *string
@@ -90,12 +90,12 @@ type RestoreFromClusterSnapshotInput struct {
 	// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html).
 	// Constraints:
 	//
-	//     * Must be 1 to 255 alphanumeric characters or hyphens.
+	// * Must be 1 to 255 alphanumeric characters or hyphens.
 	//
-	//     *
-	// First character must be a letter.
+	// * First
+	// character must be a letter.
 	//
-	//     * Cannot end with a hyphen or contain two
+	// * Cannot end with a hyphen or contain two
 	// consecutive hyphens.
 	ClusterParameterGroupName *string
 

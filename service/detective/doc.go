@@ -16,32 +16,31 @@
 // endpoint. A Detective master account can use the Detective API to do the
 // following:
 //
-//     * Enable and disable Detective. Enabling Detective creates a new
+// * Enable and disable Detective. Enabling Detective creates a new
 // behavior graph.
 //
-//     * View the list of member accounts in a behavior graph.
+// * View the list of member accounts in a behavior graph.
 //
+// * Add
+// member accounts to a behavior graph.
 //
-// * Add member accounts to a behavior graph.
+// * Remove member accounts from a behavior
+// graph.
 //
-//     * Remove member accounts from a
+// A member account can use the Detective API to do the following:
+//
+// * View
+// the list of behavior graphs that they are invited to.
+//
+// * Accept an invitation to
+// contribute to a behavior graph.
+//
+// * Decline an invitation to contribute to a
 // behavior graph.
 //
-// A member account can use the Detective API to do the
-// following:
+// * Remove their account from a behavior graph.
 //
-//     * View the list of behavior graphs that they are invited to.
-//
-//
-// * Accept an invitation to contribute to a behavior graph.
-//
-//     * Decline an
-// invitation to contribute to a behavior graph.
-//
-//     * Remove their account from a
-// behavior graph.
-//
-// All API actions are logged as CloudTrail events. See Logging
-// Detective API Calls with CloudTrail
+// All API actions
+// are logged as CloudTrail events. See Logging Detective API Calls with CloudTrail
 // (https://docs.aws.amazon.com/detective/latest/adminguide/logging-using-cloudtrail.html).
 package detective

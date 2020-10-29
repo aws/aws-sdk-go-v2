@@ -48,10 +48,10 @@ type ModifyCacheSubnetGroupOutput struct {
 
 	// Represents the output of one of the following operations:
 	//
-	//     *
+	// *
 	// CreateCacheSubnetGroup
 	//
-	//     * ModifyCacheSubnetGroup
+	// * ModifyCacheSubnetGroup
 	CacheSubnetGroup *types.CacheSubnetGroup
 
 	// Metadata pertaining to the operation's result.

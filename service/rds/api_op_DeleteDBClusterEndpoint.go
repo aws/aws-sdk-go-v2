@@ -40,17 +40,17 @@ type DeleteDBClusterEndpointInput struct {
 // Aurora DB cluster. This data type is used as a response element in the following
 // actions:
 //
-//     * CreateDBClusterEndpoint
+// * CreateDBClusterEndpoint
 //
-//     * DescribeDBClusterEndpoints
+// * DescribeDBClusterEndpoints
 //
-//     *
+// *
 // ModifyDBClusterEndpoint
 //
-//     * DeleteDBClusterEndpoint
+// * DeleteDBClusterEndpoint
 //
-// For the data structure
-// that represents Amazon RDS DB instance endpoints, see Endpoint.
+// For the data structure that
+// represents Amazon RDS DB instance endpoints, see Endpoint.
 type DeleteDBClusterEndpointOutput struct {
 
 	// The type associated with a custom endpoint. One of: READER, WRITER, ANY.

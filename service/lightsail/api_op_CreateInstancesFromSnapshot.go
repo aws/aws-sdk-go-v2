@@ -64,7 +64,7 @@ type CreateInstancesFromSnapshotInput struct {
 	// Use the get instance snapshots operation to return information about your
 	// existing snapshots. Constraint:
 	//
-	//     * This parameter cannot be defined together
+	// * This parameter cannot be defined together
 	// with the source instance name parameter. The instance snapshot name and source
 	// instance name parameters are mutually exclusive.
 	InstanceSnapshotName *string
@@ -76,27 +76,26 @@ type CreateInstancesFromSnapshotInput struct {
 	// snapshots operation to identify the dates of the available automatic snapshots.
 	// Constraints:
 	//
-	//     * Must be specified in YYYY-MM-DD format.
+	// * Must be specified in YYYY-MM-DD format.
 	//
-	//     * This
-	// parameter cannot be defined together with the use latest restorable auto
-	// snapshot parameter. The restore date and use latest restorable auto snapshot
-	// parameters are mutually exclusive.
+	// * This parameter cannot
+	// be defined together with the use latest restorable auto snapshot parameter. The
+	// restore date and use latest restorable auto snapshot parameters are mutually
+	// exclusive.
 	//
-	//     * Define this parameter only when
-	// creating a new instance from an automatic snapshot. For more information, see
-	// the Lightsail Dev Guide
+	// * Define this parameter only when creating a new instance from an
+	// automatic snapshot. For more information, see the Lightsail Dev Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
 	RestoreDate *string
 
 	// The name of the source instance from which the source automatic snapshot was
 	// created. Constraints:
 	//
-	//     * This parameter cannot be defined together with the
+	// * This parameter cannot be defined together with the
 	// instance snapshot name parameter. The source instance name and instance snapshot
 	// name parameters are mutually exclusive.
 	//
-	//     * Define this parameter only when
+	// * Define this parameter only when
 	// creating a new instance from an automatic snapshot. For more information, see
 	// the Lightsail Dev Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
@@ -109,13 +108,13 @@ type CreateInstancesFromSnapshotInput struct {
 	// A Boolean value to indicate whether to use the latest available automatic
 	// snapshot. Constraints:
 	//
-	//     * This parameter cannot be defined together with the
+	// * This parameter cannot be defined together with the
 	// restore date parameter. The use latest restorable auto snapshot and restore date
 	// parameters are mutually exclusive.
 	//
-	//     * Define this parameter only when
-	// creating a new instance from an automatic snapshot. For more information, see
-	// the Lightsail Dev Guide
+	// * Define this parameter only when creating a
+	// new instance from an automatic snapshot. For more information, see the Lightsail
+	// Dev Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
 	UseLatestRestorableAutoSnapshot *bool
 

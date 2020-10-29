@@ -48,11 +48,11 @@ type GetRuleOutput struct {
 	// Information about the Rule that you specified in the GetRule request. For more
 	// information, see the following topics:
 	//
-	//     * Rule: Contains MetricName, Name,
-	// an array of Predicate objects, and RuleId
+	// * Rule: Contains MetricName, Name, an
+	// array of Predicate objects, and RuleId
 	//
-	//     * Predicate: Each Predicate
-	// object contains DataId, Negated, and Type
+	// * Predicate: Each Predicate object
+	// contains DataId, Negated, and Type
 	Rule *types.Rule
 
 	// Metadata pertaining to the operation's result.

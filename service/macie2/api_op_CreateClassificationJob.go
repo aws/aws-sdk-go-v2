@@ -38,13 +38,13 @@ type CreateClassificationJobInput struct {
 
 	// The schedule for running the job. Valid values are:
 	//
-	//     * ONE_TIME - Run the
-	// job only once. If you specify this value, don't specify a value for the
+	// * ONE_TIME - Run the job
+	// only once. If you specify this value, don't specify a value for the
 	// scheduleFrequency property.
 	//
-	//     * SCHEDULED - Run the job on a daily, weekly,
-	// or monthly basis. If you specify this value, use the scheduleFrequency property
-	// to define the recurrence pattern for the job.
+	// * SCHEDULED - Run the job on a daily, weekly, or
+	// monthly basis. If you specify this value, use the scheduleFrequency property to
+	// define the recurrence pattern for the job.
 	//
 	// This member is required.
 	JobType types.JobType

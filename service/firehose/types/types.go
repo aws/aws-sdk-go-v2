@@ -124,10 +124,10 @@ type DeliveryStreamDescription struct {
 
 	// The delivery stream type. This can be one of the following values:
 	//
-	//     *
-	// DirectPut: Provider applications access the delivery stream directly.
+	// * DirectPut:
+	// Provider applications access the delivery stream directly.
 	//
-	//     *
+	// *
 	// KinesisStreamAsSource: The delivery stream uses a Kinesis data stream as a
 	// source.
 	//
@@ -1722,29 +1722,29 @@ type VpcConfiguration struct {
 	// that the role trusts the Kinesis Data Firehose service principal and that it
 	// grants the following permissions:
 	//
-	//     * ec2:DescribeVpcs
+	// * ec2:DescribeVpcs
 	//
-	//     *
+	// *
 	// ec2:DescribeVpcAttribute
 	//
-	//     * ec2:DescribeSubnets
+	// * ec2:DescribeSubnets
 	//
-	//     *
-	// ec2:DescribeSecurityGroups
+	// * ec2:DescribeSecurityGroups
 	//
-	//     * ec2:DescribeNetworkInterfaces
+	// *
+	// ec2:DescribeNetworkInterfaces
 	//
-	//     *
-	// ec2:CreateNetworkInterface
+	// * ec2:CreateNetworkInterface
 	//
-	//     * ec2:CreateNetworkInterfacePermission
+	// *
+	// ec2:CreateNetworkInterfacePermission
 	//
-	//     *
-	// ec2:DeleteNetworkInterface
+	// * ec2:DeleteNetworkInterface
 	//
-	// If you revoke these permissions after you create the
-	// delivery stream, Kinesis Data Firehose can't scale out by creating more ENIs
-	// when necessary. You might therefore see a degradation in performance.
+	// If you
+	// revoke these permissions after you create the delivery stream, Kinesis Data
+	// Firehose can't scale out by creating more ENIs when necessary. You might
+	// therefore see a degradation in performance.
 	//
 	// This member is required.
 	RoleARN *string
@@ -1792,24 +1792,24 @@ type VpcConfigurationDescription struct {
 	// the Kinesis Data Firehose service principal and that it grants the following
 	// permissions:
 	//
-	//     * ec2:DescribeVpcs
+	// * ec2:DescribeVpcs
 	//
-	//     * ec2:DescribeVpcAttribute
+	// * ec2:DescribeVpcAttribute
 	//
-	//     *
+	// *
 	// ec2:DescribeSubnets
 	//
-	//     * ec2:DescribeSecurityGroups
+	// * ec2:DescribeSecurityGroups
 	//
-	//     *
+	// *
 	// ec2:DescribeNetworkInterfaces
 	//
-	//     * ec2:CreateNetworkInterface
+	// * ec2:CreateNetworkInterface
 	//
-	//     *
+	// *
 	// ec2:CreateNetworkInterfacePermission
 	//
-	//     * ec2:DeleteNetworkInterface
+	// * ec2:DeleteNetworkInterface
 	//
 	// If you
 	// revoke these permissions after you create the delivery stream, Kinesis Data

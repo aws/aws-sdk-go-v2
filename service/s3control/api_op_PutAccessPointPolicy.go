@@ -24,12 +24,12 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_PutAccessPointPolicy.html#API_control_PutAccessPointPolicy_Examples)
 // section below. The following actions are related to PutAccessPointPolicy:
 //
-//     *
+// *
 // GetAccessPointPolicy
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointPolicy.html)
 //
-//
-// * DeleteAccessPointPolicy
+// *
+// DeleteAccessPointPolicy
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicy.html)
 func (c *Client) PutAccessPointPolicy(ctx context.Context, params *PutAccessPointPolicyInput, optFns ...func(*Options)) (*PutAccessPointPolicyOutput, error) {
 	if params == nil {

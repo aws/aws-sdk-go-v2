@@ -44,7 +44,7 @@ import (
 // the test notification sent to the topic. The following operation is related to
 // PutBucketNotificationConfiguration:
 //
-//     * GetBucketNotificationConfiguration
+// * GetBucketNotificationConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketNotificationConfiguration.html)
 func (c *Client) PutBucketNotificationConfiguration(ctx context.Context, params *PutBucketNotificationConfigurationInput, optFns ...func(*Options)) (*PutBucketNotificationConfigurationOutput, error) {
 	if params == nil {

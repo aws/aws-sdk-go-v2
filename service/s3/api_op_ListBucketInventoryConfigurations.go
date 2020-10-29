@@ -31,16 +31,16 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-inventory.html) The
 // following operations are related to ListBucketInventoryConfigurations:
 //
-//     *
+// *
 // GetBucketInventoryConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketInventoryConfiguration.html)
 //
-//
-// * DeleteBucketInventoryConfiguration
+// *
+// DeleteBucketInventoryConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketInventoryConfiguration.html)
 //
-//
-// * PutBucketInventoryConfiguration
+// *
+// PutBucketInventoryConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketInventoryConfiguration.html)
 func (c *Client) ListBucketInventoryConfigurations(ctx context.Context, params *ListBucketInventoryConfigurationsInput, optFns ...func(*Options)) (*ListBucketInventoryConfigurationsOutput, error) {
 	if params == nil {

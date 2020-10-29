@@ -92,9 +92,9 @@ type ComputeType string
 
 // Enum values for ComputeType
 const (
-	ComputeTypeBuild_general1_small  ComputeType = "BUILD_GENERAL1_SMALL"
-	ComputeTypeBuild_general1_medium ComputeType = "BUILD_GENERAL1_MEDIUM"
-	ComputeTypeBuild_general1_large  ComputeType = "BUILD_GENERAL1_LARGE"
+	ComputeTypeBuildGeneral1Small  ComputeType = "BUILD_GENERAL1_SMALL"
+	ComputeTypeBuildGeneral1Medium ComputeType = "BUILD_GENERAL1_MEDIUM"
+	ComputeTypeBuildGeneral1Large  ComputeType = "BUILD_GENERAL1_LARGE"
 )
 
 // Values returns all known values for ComputeType. Note that this can be expanded

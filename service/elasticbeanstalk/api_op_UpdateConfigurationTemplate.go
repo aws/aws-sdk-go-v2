@@ -17,7 +17,7 @@ import (
 // provided, its value remains unchanged. To clear such properties, specify an
 // empty string. Related Topics
 //
-//     * DescribeConfigurationOptions
+// * DescribeConfigurationOptions
 func (c *Client) UpdateConfigurationTemplate(ctx context.Context, params *UpdateConfigurationTemplateInput, optFns ...func(*Options)) (*UpdateConfigurationTemplateOutput, error) {
 	if params == nil {
 		params = &UpdateConfigurationTemplateInput{}
@@ -78,17 +78,17 @@ type UpdateConfigurationTemplateOutput struct {
 	// DeploymentStatus parameter indicates the deployment status of this configuration
 	// set:
 	//
-	//     * null: This configuration is not associated with a running
+	// * null: This configuration is not associated with a running
 	// environment.
 	//
-	//     * pending: This is a draft configuration that is not deployed
-	// to the associated environment but is in the process of deploying.
+	// * pending: This is a draft configuration that is not deployed to
+	// the associated environment but is in the process of deploying.
 	//
-	//     *
-	// deployed: This is the configuration that is currently deployed to the associated
-	// running environment.
+	// * deployed: This
+	// is the configuration that is currently deployed to the associated running
+	// environment.
 	//
-	//     * failed: This is a draft configuration that failed to
+	// * failed: This is a draft configuration that failed to
 	// successfully deploy.
 	DeploymentStatus types.ConfigurationDeploymentStatus
 

@@ -52,11 +52,11 @@ func (e *CloudHsmClusterInUseException) ErrorFault() smithy.ErrorFault { return 
 // The request was rejected because the associated AWS CloudHSM cluster did not
 // meet the configuration requirements for a custom key store.
 //
-//     * The cluster
-// must be configured with private subnets in at least two different Availability
-// Zones in the Region.
+// * The cluster must
+// be configured with private subnets in at least two different Availability Zones
+// in the Region.
 //
-//     * The security group for the cluster
+// * The security group for the cluster
 // (https://docs.aws.amazon.com/cloudhsm/latest/userguide/configure-sg.html)
 // (cloudhsm-cluster--sg) must include inbound rules and outbound rules that allow
 // TCP traffic on ports 2223-2225. The Source in the inbound rules and the
@@ -67,8 +67,8 @@ func (e *CloudHsmClusterInUseException) ErrorFault() smithy.ErrorFault { return 
 // (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html)
 // operation.
 //
-//     * The cluster must contain at least as many HSMs as the
-// operation requires. To add HSMs, use the AWS CloudHSM CreateHsm
+// * The cluster must contain at least as many HSMs as the operation
+// requires. To add HSMs, use the AWS CloudHSM CreateHsm
 // (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_CreateHsm.html)
 // operation. For the CreateCustomKeyStore, UpdateCustomKeyStore, and CreateKey
 // operations, the AWS CloudHSM cluster must have at least two active HSMs, each in
@@ -205,16 +205,16 @@ func (e *CustomKeyStoreHasCMKsException) ErrorFault() smithy.ErrorFault { return
 // DescribeCustomKeyStores operation. This exception is thrown under the following
 // conditions:
 //
-//     * You requested the CreateKey or GenerateRandom operation in a
+// * You requested the CreateKey or GenerateRandom operation in a
 // custom key store that is not connected. These operations are valid only when the
 // custom key store ConnectionState is CONNECTED.
 //
-//     * You requested the
+// * You requested the
 // UpdateCustomKeyStore or DeleteCustomKeyStore operation on a custom key store
 // that is not disconnected. This operation is valid only when the custom key store
 // ConnectionState is DISCONNECTED.
 //
-//     * You requested the ConnectCustomKeyStore
+// * You requested the ConnectCustomKeyStore
 // operation on a custom key store with a ConnectionState of DISCONNECTING or
 // FAILED. This operation is valid for all other ConnectionState values.
 type CustomKeyStoreInvalidStateException struct {
@@ -501,19 +501,19 @@ func (e *InvalidImportTokenException) ErrorFault() smithy.ErrorFault { return sm
 
 // The request was rejected for one of the following reasons:
 //
-//     * The KeyUsage
-// value of the CMK is incompatible with the API operation.
+// * The KeyUsage value
+// of the CMK is incompatible with the API operation.
 //
-//     * The encryption
-// algorithm or signing algorithm specified for the operation is incompatible with
-// the type of key material in the CMK (CustomerMasterKeySpec).
+// * The encryption algorithm
+// or signing algorithm specified for the operation is incompatible with the type
+// of key material in the CMK (CustomerMasterKeySpec).
 //
-// For encrypting,
-// decrypting, re-encrypting, and generating data keys, the KeyUsage must be
-// ENCRYPT_DECRYPT. For signing and verifying, the KeyUsage must be SIGN_VERIFY. To
-// find the KeyUsage of a CMK, use the DescribeKey operation. To find the
-// encryption or signing algorithms supported for a particular CMK, use the
-// DescribeKey operation.
+// For encrypting, decrypting,
+// re-encrypting, and generating data keys, the KeyUsage must be ENCRYPT_DECRYPT.
+// For signing and verifying, the KeyUsage must be SIGN_VERIFY. To find the
+// KeyUsage of a CMK, use the DescribeKey operation. To find the encryption or
+// signing algorithms supported for a particular CMK, use the DescribeKey
+// operation.
 type InvalidKeyUsageException struct {
 	Message *string
 }

@@ -53,14 +53,14 @@ type DescribeNodeAssociationStatusOutput struct {
 
 	// The status of the association or disassociation request. Possible values:
 	//
-	//     *
+	// *
 	// SUCCESS: The association or disassociation succeeded.
 	//
-	//     * FAILED: The
-	// association or disassociation failed.
+	// * FAILED: The association
+	// or disassociation failed.
 	//
-	//     * IN_PROGRESS: The association or
-	// disassociation is still in progress.
+	// * IN_PROGRESS: The association or disassociation is
+	// still in progress.
 	NodeAssociationStatus types.NodeAssociationStatus
 
 	// Metadata pertaining to the operation's result.

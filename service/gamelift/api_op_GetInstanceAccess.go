@@ -30,9 +30,9 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html)
 // Related operations
 //
-//     * DescribeInstances
+// * DescribeInstances
 //
-//     * GetInstanceAccess
+// * GetInstanceAccess
 func (c *Client) GetInstanceAccess(ctx context.Context, params *GetInstanceAccessInput, optFns ...func(*Options)) (*GetInstanceAccessOutput, error) {
 	if params == nil {
 		params = &GetInstanceAccessInput{}

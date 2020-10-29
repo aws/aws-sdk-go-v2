@@ -13,12 +13,12 @@ import (
 
 // Modifies the settings for a replication group.
 //
-//     * Scaling for Amazon
-// ElastiCache for Redis (cluster mode enabled)
+// * Scaling for Amazon ElastiCache
+// for Redis (cluster mode enabled)
 // (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/scaling-redis-cluster-mode-enabled.html)
 // in the ElastiCache User Guide
 //
-//     * ModifyReplicationGroupShardConfiguration
+// * ModifyReplicationGroupShardConfiguration
 // (https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyReplicationGroupShardConfiguration.html)
 // in the ElastiCache API Reference
 //
@@ -58,27 +58,27 @@ type ModifyReplicationGroupInput struct {
 	// This parameter must be specified with the auth-token-update-strategy  parameter.
 	// Password constraints:
 	//
-	//     * Must be only printable ASCII characters
+	// * Must be only printable ASCII characters
 	//
-	//     * Must
-	// be at least 16 characters and no more than 128 characters in length
+	// * Must be at
+	// least 16 characters and no more than 128 characters in length
 	//
-	//     *
-	// Cannot contain any of the following characters: '/', '"', or '@', '%'
+	// * Cannot contain
+	// any of the following characters: '/', '"', or '@', '%'
 	//
-	// For more
-	// information, see AUTH password at AUTH (http://redis.io/commands/AUTH).
+	// For more information,
+	// see AUTH password at AUTH (http://redis.io/commands/AUTH).
 	AuthToken *string
 
 	// Specifies the strategy to use to update the AUTH token. This parameter must be
 	// specified with the auth-token parameter. Possible values:
 	//
-	//     * Rotate
+	// * Rotate
 	//
-	//     *
-	// Set
+	// * Set
 	//
-	// For more information, see Authenticating Users with Redis AUTH
+	// For
+	// more information, see Authenticating Users with Redis AUTH
 	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html)
 	AuthTokenUpdateStrategy types.AuthTokenUpdateStrategyType
 
@@ -137,22 +137,22 @@ type ModifyReplicationGroupInput struct {
 	// Clock UTC). The minimum maintenance window is a 60 minute period. Valid values
 	// for ddd are:
 	//
-	//     * sun
+	// * sun
 	//
-	//     * mon
+	// * mon
 	//
-	//     * tue
+	// * tue
 	//
-	//     * wed
+	// * wed
 	//
-	//     * thu
+	// * thu
 	//
-	//     * fri
-	//
+	// * fri
 	//
 	// * sat
 	//
-	// Example: sun:23:00-mon:01:30
+	// Example:
+	// sun:23:00-mon:01:30
 	PreferredMaintenanceWindow *string
 
 	// For replication groups with a single primary, if this parameter is specified,

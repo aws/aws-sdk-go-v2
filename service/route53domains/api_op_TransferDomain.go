@@ -17,20 +17,19 @@ import (
 // TLDs). For more information about transferring domains, see the following
 // topics:
 //
-//     * For transfer requirements, a detailed procedure, and information
+// * For transfer requirements, a detailed procedure, and information
 // about viewing the status of a domain that you're transferring to Route 53, see
 // Transferring Registration for a Domain to Amazon Route 53
 // (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-transfer-to-route-53.html)
 // in the Amazon Route 53 Developer Guide.
 //
-//     * For information about how to
-// transfer a domain from one AWS account to another, see
-// TransferDomainToAnotherAwsAccount
+// * For information about how to transfer
+// a domain from one AWS account to another, see TransferDomainToAnotherAwsAccount
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html).
 //
-//
-// * For information about how to transfer a domain to another domain registrar,
-// see Transferring a Domain from Amazon Route 53 to Another Registrar
+// *
+// For information about how to transfer a domain to another domain registrar, see
+// Transferring a Domain from Amazon Route 53 to Another Registrar
 // (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-transfer-from-route-53.html)
 // in the Amazon Route 53 Developer Guide.
 //
@@ -77,16 +76,16 @@ type TransferDomainInput struct {
 	// in the Amazon Route 53 Developer Guide. The domain name can contain only the
 	// following characters:
 	//
-	//     * Letters a through z. Domain names are not case
+	// * Letters a through z. Domain names are not case
 	// sensitive.
 	//
-	//     * Numbers 0 through 9.
+	// * Numbers 0 through 9.
 	//
-	//     * Hyphen (-). You can't specify a
-	// hyphen at the beginning or end of a label.
+	// * Hyphen (-). You can't specify a hyphen at
+	// the beginning or end of a label.
 	//
-	//     * Period (.) to separate the
-	// labels in the name, such as the . in example.com.
+	// * Period (.) to separate the labels in the
+	// name, such as the . in example.com.
 	//
 	// This member is required.
 	DomainName *string

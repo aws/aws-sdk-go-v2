@@ -14,18 +14,18 @@ import (
 
 // This operation initiates the vault locking process by doing the following:
 //
+// *
+// Installing a vault lock policy on the specified vault.
 //
-// * Installing a vault lock policy on the specified vault.
+// * Setting the lock state
+// of vault lock to InProgress.
 //
-//     * Setting the lock
-// state of vault lock to InProgress.
+// * Returning a lock ID, which is used to complete
+// the vault locking process.
 //
-//     * Returning a lock ID, which is used to
-// complete the vault locking process.
-//
-// You can set one vault lock policy for each
-// vault and this policy can be up to 20 KB in size. For more information about
-// vault lock policies, see Amazon Glacier Access Control with Vault Lock Policies
+// You can set one vault lock policy for each vault and
+// this policy can be up to 20 KB in size. For more information about vault lock
+// policies, see Amazon Glacier Access Control with Vault Lock Policies
 // (https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock-policy.html).
 // You must complete the vault locking process within 24 hours after the vault lock
 // enters the InProgress state. After the 24 hour window ends, the lock ID expires,

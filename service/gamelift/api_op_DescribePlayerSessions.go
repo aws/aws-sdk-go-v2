@@ -22,22 +22,22 @@ import (
 // pages. If successful, a PlayerSession object is returned for each session
 // matching the request. Available in Amazon GameLift Local.
 //
-//     *
+// *
 // CreatePlayerSession
 //
-//     * CreatePlayerSessions
+// * CreatePlayerSessions
 //
-//     * DescribePlayerSessions
+// * DescribePlayerSessions
 //
+// * Game
+// session placements
 //
-// * Game session placements
+// * StartGameSessionPlacement
 //
-//         * StartGameSessionPlacement
-//
-//         *
+// *
 // DescribeGameSessionPlacement
 //
-//         * StopGameSessionPlacement
+// * StopGameSessionPlacement
 func (c *Client) DescribePlayerSessions(ctx context.Context, params *DescribePlayerSessionsInput, optFns ...func(*Options)) (*DescribePlayerSessionsOutput, error) {
 	if params == nil {
 		params = &DescribePlayerSessionsInput{}
@@ -79,19 +79,18 @@ type DescribePlayerSessionsInput struct {
 	// Player session status to filter results on. Possible player session statuses
 	// include the following:
 	//
-	//     * RESERVED -- The player session request has been
+	// * RESERVED -- The player session request has been
 	// received, but the player has not yet connected to the server process and/or been
 	// validated.
 	//
-	//     * ACTIVE -- The player has been validated by the server process
-	// and is currently connected.
+	// * ACTIVE -- The player has been validated by the server process and
+	// is currently connected.
 	//
-	//     * COMPLETED -- The player connection has been
+	// * COMPLETED -- The player connection has been
 	// dropped.
 	//
-	//     * TIMEDOUT -- A player session request was received, but the
-	// player did not connect and/or was not validated within the timeout limit (60
-	// seconds).
+	// * TIMEDOUT -- A player session request was received, but the player
+	// did not connect and/or was not validated within the timeout limit (60 seconds).
 	PlayerSessionStatusFilter *string
 }
 

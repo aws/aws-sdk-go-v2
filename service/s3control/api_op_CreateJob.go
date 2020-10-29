@@ -21,19 +21,19 @@ import (
 // Amazon Simple Storage Service Developer Guide. This operation creates a S3 Batch
 // Operations job. Related actions include:
 //
-//     * DescribeJob
+// * DescribeJob
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html)
 //
-//
-// * ListJobs
+// *
+// ListJobs
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListJobs.html)
 //
-//
-// * UpdateJobPriority
+// *
+// UpdateJobPriority
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html)
 //
-//
-// * UpdateJobStatus
+// *
+// UpdateJobStatus
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html)
 func (c *Client) CreateJob(ctx context.Context, params *CreateJobInput, optFns ...func(*Options)) (*CreateJobOutput, error) {
 	if params == nil {

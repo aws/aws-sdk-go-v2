@@ -39,11 +39,11 @@ type DescribeInstanceTypeOfferingsInput struct {
 
 	// One or more filters. Filter names and values are case-sensitive.
 	//
-	//     * location
-	// - This depends on the location type. For example, if the location type is region
+	// * location -
+	// This depends on the location type. For example, if the location type is region
 	// (default), the location is the Region code (for example, us-east-2.)
 	//
-	//     *
+	// *
 	// instance-type - The instance type.
 	Filters []*types.Filter
 

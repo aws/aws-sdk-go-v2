@@ -6,11 +6,11 @@ type AccountLimitType string
 
 // Enum values for AccountLimitType
 const (
-	AccountLimitTypeMax_health_checks_by_owner            AccountLimitType = "MAX_HEALTH_CHECKS_BY_OWNER"
-	AccountLimitTypeMax_hosted_zones_by_owner             AccountLimitType = "MAX_HOSTED_ZONES_BY_OWNER"
-	AccountLimitTypeMax_traffic_policy_instances_by_owner AccountLimitType = "MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER"
-	AccountLimitTypeMax_reusable_delegation_sets_by_owner AccountLimitType = "MAX_REUSABLE_DELEGATION_SETS_BY_OWNER"
-	AccountLimitTypeMax_traffic_policies_by_owner         AccountLimitType = "MAX_TRAFFIC_POLICIES_BY_OWNER"
+	AccountLimitTypeMaxHealthChecksByOwner           AccountLimitType = "MAX_HEALTH_CHECKS_BY_OWNER"
+	AccountLimitTypeMaxHostedZonesByOwner            AccountLimitType = "MAX_HOSTED_ZONES_BY_OWNER"
+	AccountLimitTypeMaxTrafficPolicyInstancesByOwner AccountLimitType = "MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER"
+	AccountLimitTypeMaxReusableDelegationSetsByOwner AccountLimitType = "MAX_REUSABLE_DELEGATION_SETS_BY_OWNER"
+	AccountLimitTypeMaxTrafficPoliciesByOwner        AccountLimitType = "MAX_TRAFFIC_POLICIES_BY_OWNER"
 )
 
 // Values returns all known values for AccountLimitType. Note that this can be
@@ -188,13 +188,13 @@ type HealthCheckType string
 
 // Enum values for HealthCheckType
 const (
-	HealthCheckTypeHttp              HealthCheckType = "HTTP"
-	HealthCheckTypeHttps             HealthCheckType = "HTTPS"
-	HealthCheckTypeHttp_str_match    HealthCheckType = "HTTP_STR_MATCH"
-	HealthCheckTypeHttps_str_match   HealthCheckType = "HTTPS_STR_MATCH"
-	HealthCheckTypeTcp               HealthCheckType = "TCP"
-	HealthCheckTypeCalculated        HealthCheckType = "CALCULATED"
-	HealthCheckTypeCloudwatch_metric HealthCheckType = "CLOUDWATCH_METRIC"
+	HealthCheckTypeHttp             HealthCheckType = "HTTP"
+	HealthCheckTypeHttps            HealthCheckType = "HTTPS"
+	HealthCheckTypeHttpStrMatch     HealthCheckType = "HTTP_STR_MATCH"
+	HealthCheckTypeHttpsStrMatch    HealthCheckType = "HTTPS_STR_MATCH"
+	HealthCheckTypeTcp              HealthCheckType = "TCP"
+	HealthCheckTypeCalculated       HealthCheckType = "CALCULATED"
+	HealthCheckTypeCloudwatchMetric HealthCheckType = "CLOUDWATCH_METRIC"
 )
 
 // Values returns all known values for HealthCheckType. Note that this can be
@@ -216,8 +216,8 @@ type HostedZoneLimitType string
 
 // Enum values for HostedZoneLimitType
 const (
-	HostedZoneLimitTypeMax_rrsets_by_zone          HostedZoneLimitType = "MAX_RRSETS_BY_ZONE"
-	HostedZoneLimitTypeMax_vpcs_associated_by_zone HostedZoneLimitType = "MAX_VPCS_ASSOCIATED_BY_ZONE"
+	HostedZoneLimitTypeMaxRrsetsByZone         HostedZoneLimitType = "MAX_RRSETS_BY_ZONE"
+	HostedZoneLimitTypeMaxVpcsAssociatedByZone HostedZoneLimitType = "MAX_VPCS_ASSOCIATED_BY_ZONE"
 )
 
 // Values returns all known values for HostedZoneLimitType. Note that this can be
@@ -354,7 +354,7 @@ type ReusableDelegationSetLimitType string
 
 // Enum values for ReusableDelegationSetLimitType
 const (
-	ReusableDelegationSetLimitTypeMax_zones_by_reusable_delegation_set ReusableDelegationSetLimitType = "MAX_ZONES_BY_REUSABLE_DELEGATION_SET"
+	ReusableDelegationSetLimitTypeMaxZonesByReusableDelegationSet ReusableDelegationSetLimitType = "MAX_ZONES_BY_REUSABLE_DELEGATION_SET"
 )
 
 // Values returns all known values for ReusableDelegationSetLimitType. Note that

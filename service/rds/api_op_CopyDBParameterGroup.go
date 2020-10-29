@@ -35,11 +35,11 @@ type CopyDBParameterGroupInput struct {
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing)
 	// in the Amazon RDS User Guide. Constraints:
 	//
-	//     * Must specify a valid DB
-	// parameter group.
+	// * Must specify a valid DB parameter
+	// group.
 	//
-	//     * Must specify a valid DB parameter group identifier, for
-	// example my-db-param-group, or a valid ARN.
+	// * Must specify a valid DB parameter group identifier, for example
+	// my-db-param-group, or a valid ARN.
 	//
 	// This member is required.
 	SourceDBParameterGroupIdentifier *string
@@ -51,16 +51,16 @@ type CopyDBParameterGroupInput struct {
 
 	// The identifier for the copied DB parameter group. Constraints:
 	//
-	//     * Can't be
-	// null, empty, or blank
+	// * Can't be null,
+	// empty, or blank
 	//
-	//     * Must contain from 1 to 255 letters, numbers, or
-	// hyphens
+	// * Must contain from 1 to 255 letters, numbers, or hyphens
 	//
-	//     * First character must be a letter
+	// *
+	// First character must be a letter
 	//
-	//     * Can't end with a hyphen
-	// or contain two consecutive hyphens
+	// * Can't end with a hyphen or contain two
+	// consecutive hyphens
 	//
 	// Example: my-db-parameter-group
 	//

@@ -22,7 +22,7 @@ import (
 // supported by Amazon S3 on Outposts. The following operation is related to
 // GetObjectTorrent:
 //
-//     * GetObject
+// * GetObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
 func (c *Client) GetObjectTorrent(ctx context.Context, params *GetObjectTorrentInput, optFns ...func(*Options)) (*GetObjectTorrentOutput, error) {
 	if params == nil {

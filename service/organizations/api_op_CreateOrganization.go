@@ -43,17 +43,17 @@ type CreateOrganizationInput struct {
 	// Specifies the feature set supported by the new organization. Each feature set
 	// supports different levels of functionality.
 	//
-	//     * CONSOLIDATED_BILLING: All
-	// member accounts have their bills consolidated to and paid by the management
-	// account. For more information, see Consolidated billing
+	// * CONSOLIDATED_BILLING: All member
+	// accounts have their bills consolidated to and paid by the management account.
+	// For more information, see Consolidated billing
 	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set-cb-only)
 	// in the AWS Organizations User Guide. The consolidated billing feature subset
 	// isn't available for organizations in the AWS GovCloud (US) Region.
 	//
-	//     * ALL:
-	// In addition to all the features supported by the consolidated billing feature
-	// set, the management account can also apply any policy type to any member account
-	// in the organization. For more information, see All features
+	// * ALL: In
+	// addition to all the features supported by the consolidated billing feature set,
+	// the management account can also apply any policy type to any member account in
+	// the organization. For more information, see All features
 	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set-all)
 	// in the AWS Organizations User Guide.
 	FeatureSet types.OrganizationFeatureSet

@@ -26,60 +26,59 @@ import (
 // exceed the RateLimit, but it also must match all the conditions to be counted or
 // blocked. For example, suppose you add the following to a RateBasedRule:
 //
-//     *
-// An IPSet that matches the IP address 192.0.2.44/32
+// * An
+// IPSet that matches the IP address 192.0.2.44/32
 //
-//     * A ByteMatchSet that
-// matches BadBot in the User-Agent header
+// * A ByteMatchSet that matches
+// BadBot in the User-Agent header
 //
-// Further, you specify a RateLimit of
-// 1,000. You then add the RateBasedRule to a WebACL and specify that you want to
-// block requests that meet the conditions in the rule. For a request to be
-// blocked, it must come from the IP address 192.0.2.44 and the User-Agent header
-// in the request must contain the value BadBot. Further, requests that match these
-// two conditions must be received at a rate of more than 1,000 requests every five
+// Further, you specify a RateLimit of 1,000. You
+// then add the RateBasedRule to a WebACL and specify that you want to block
+// requests that meet the conditions in the rule. For a request to be blocked, it
+// must come from the IP address 192.0.2.44 and the User-Agent header in the
+// request must contain the value BadBot. Further, requests that match these two
+// conditions must be received at a rate of more than 1,000 requests every five
 // minutes. If both conditions are met and the rate is exceeded, AWS WAF blocks the
 // requests. If the rate drops below 1,000 for a five-minute period, AWS WAF no
 // longer blocks the requests. As a second example, suppose you want to limit
 // requests to a particular page on your site. To do this, you could add the
 // following to a RateBasedRule:
 //
-//     * A ByteMatchSet with FieldToMatch of URI
+// * A ByteMatchSet with FieldToMatch of URI
 //
+// * A
+// PositionalConstraint of STARTS_WITH
 //
-// * A PositionalConstraint of STARTS_WITH
+// * A TargetString of login
 //
-//     * A TargetString of login
-//
-// Further,
-// you specify a RateLimit of 1,000. By adding this RateBasedRule to a WebACL, you
+// Further, you
+// specify a RateLimit of 1,000. By adding this RateBasedRule to a WebACL, you
 // could limit requests to your login page without affecting the rest of your site.
 // To create and configure a RateBasedRule, perform the following steps:
 //
-//     *
-// Create and update the predicates that you want to include in the rule. For more
+// * Create
+// and update the predicates that you want to include in the rule. For more
 // information, see CreateByteMatchSet, CreateIPSet, and
 // CreateSqlInjectionMatchSet.
 //
-//     * Use GetChangeToken to get the change token
-// that you provide in the ChangeToken parameter of a CreateRule request.
+// * Use GetChangeToken to get the change token that
+// you provide in the ChangeToken parameter of a CreateRule request.
 //
-//     *
-// Submit a CreateRateBasedRule request.
+// * Submit a
+// CreateRateBasedRule request.
 //
-//     * Use GetChangeToken to get the
-// change token that you provide in the ChangeToken parameter of an UpdateRule
-// request.
+// * Use GetChangeToken to get the change token that
+// you provide in the ChangeToken parameter of an UpdateRule request.
 //
-//     * Submit an UpdateRateBasedRule request to specify the predicates
-// that you want to include in the rule.
+// * Submit an
+// UpdateRateBasedRule request to specify the predicates that you want to include
+// in the rule.
 //
-//     * Create and update a WebACL that
-// contains the RateBasedRule. For more information, see CreateWebACL.
+// * Create and update a WebACL that contains the RateBasedRule. For
+// more information, see CreateWebACL.
 //
-// For more
-// information about how to use the AWS WAF API to allow or block HTTP requests,
-// see the AWS WAF Developer Guide
+// For more information about how to use the
+// AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/).
 func (c *Client) CreateRateBasedRule(ctx context.Context, params *CreateRateBasedRuleInput, optFns ...func(*Options)) (*CreateRateBasedRuleOutput, error) {
 	if params == nil {

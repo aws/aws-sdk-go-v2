@@ -6,8 +6,8 @@ type AmbiguousRoleResolutionType string
 
 // Enum values for AmbiguousRoleResolutionType
 const (
-	AmbiguousRoleResolutionTypeAuthenticated_role AmbiguousRoleResolutionType = "AuthenticatedRole"
-	AmbiguousRoleResolutionTypeDeny               AmbiguousRoleResolutionType = "Deny"
+	AmbiguousRoleResolutionTypeAuthenticatedRole AmbiguousRoleResolutionType = "AuthenticatedRole"
+	AmbiguousRoleResolutionTypeDeny              AmbiguousRoleResolutionType = "Deny"
 )
 
 // Values returns all known values for AmbiguousRoleResolutionType. Note that this
@@ -24,8 +24,8 @@ type ErrorCode string
 
 // Enum values for ErrorCode
 const (
-	ErrorCodeAccess_denied         ErrorCode = "AccessDenied"
-	ErrorCodeInternal_server_error ErrorCode = "InternalServerError"
+	ErrorCodeAccessDenied        ErrorCode = "AccessDenied"
+	ErrorCodeInternalServerError ErrorCode = "InternalServerError"
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded in
@@ -42,10 +42,10 @@ type MappingRuleMatchType string
 
 // Enum values for MappingRuleMatchType
 const (
-	MappingRuleMatchTypeEquals      MappingRuleMatchType = "Equals"
-	MappingRuleMatchTypeContains    MappingRuleMatchType = "Contains"
-	MappingRuleMatchTypeStarts_with MappingRuleMatchType = "StartsWith"
-	MappingRuleMatchTypeNot_equal   MappingRuleMatchType = "NotEqual"
+	MappingRuleMatchTypeEquals     MappingRuleMatchType = "Equals"
+	MappingRuleMatchTypeContains   MappingRuleMatchType = "Contains"
+	MappingRuleMatchTypeStartsWith MappingRuleMatchType = "StartsWith"
+	MappingRuleMatchTypeNotEqual   MappingRuleMatchType = "NotEqual"
 )
 
 // Values returns all known values for MappingRuleMatchType. Note that this can be

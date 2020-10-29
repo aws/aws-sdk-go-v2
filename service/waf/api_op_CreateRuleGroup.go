@@ -21,13 +21,13 @@ import (
 // rules that you add to a web ACL. You use UpdateRuleGroup to add rules to the
 // rule group. Rule groups are subject to the following limits:
 //
-//     * Three rule
+// * Three rule
 // groups per account. You can request an increase to this limit by contacting
 // customer support.
 //
-//     * One rule group per web ACL.
+// * One rule group per web ACL.
 //
-//     * Ten rules per rule
+// * Ten rules per rule
 // group.
 //
 // For more information about how to use the AWS WAF API to allow or block

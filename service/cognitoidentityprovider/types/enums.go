@@ -6,10 +6,10 @@ type AccountTakeoverEventActionType string
 
 // Enum values for AccountTakeoverEventActionType
 const (
-	AccountTakeoverEventActionTypeBlock             AccountTakeoverEventActionType = "BLOCK"
-	AccountTakeoverEventActionTypeMfa_if_configured AccountTakeoverEventActionType = "MFA_IF_CONFIGURED"
-	AccountTakeoverEventActionTypeMfa_required      AccountTakeoverEventActionType = "MFA_REQUIRED"
-	AccountTakeoverEventActionTypeNo_action         AccountTakeoverEventActionType = "NO_ACTION"
+	AccountTakeoverEventActionTypeBlock           AccountTakeoverEventActionType = "BLOCK"
+	AccountTakeoverEventActionTypeMfaIfConfigured AccountTakeoverEventActionType = "MFA_IF_CONFIGURED"
+	AccountTakeoverEventActionTypeMfaRequired     AccountTakeoverEventActionType = "MFA_REQUIRED"
+	AccountTakeoverEventActionTypeNoAction        AccountTakeoverEventActionType = "NO_ACTION"
 )
 
 // Values returns all known values for AccountTakeoverEventActionType. Note that
@@ -49,9 +49,9 @@ type AliasAttributeType string
 
 // Enum values for AliasAttributeType
 const (
-	AliasAttributeTypePhone_number       AliasAttributeType = "phone_number"
-	AliasAttributeTypeEmail              AliasAttributeType = "email"
-	AliasAttributeTypePreferred_username AliasAttributeType = "preferred_username"
+	AliasAttributeTypePhoneNumber       AliasAttributeType = "phone_number"
+	AliasAttributeTypeEmail             AliasAttributeType = "email"
+	AliasAttributeTypePreferredUsername AliasAttributeType = "preferred_username"
 )
 
 // Values returns all known values for AliasAttributeType. Note that this can be
@@ -91,13 +91,13 @@ type AuthFlowType string
 
 // Enum values for AuthFlowType
 const (
-	AuthFlowTypeUser_srp_auth            AuthFlowType = "USER_SRP_AUTH"
-	AuthFlowTypeRefresh_token_auth       AuthFlowType = "REFRESH_TOKEN_AUTH"
-	AuthFlowTypeRefresh_token            AuthFlowType = "REFRESH_TOKEN"
-	AuthFlowTypeCustom_auth              AuthFlowType = "CUSTOM_AUTH"
-	AuthFlowTypeAdmin_no_srp_auth        AuthFlowType = "ADMIN_NO_SRP_AUTH"
-	AuthFlowTypeUser_password_auth       AuthFlowType = "USER_PASSWORD_AUTH"
-	AuthFlowTypeAdmin_user_password_auth AuthFlowType = "ADMIN_USER_PASSWORD_AUTH"
+	AuthFlowTypeUserSrpAuth           AuthFlowType = "USER_SRP_AUTH"
+	AuthFlowTypeRefreshTokenAuth      AuthFlowType = "REFRESH_TOKEN_AUTH"
+	AuthFlowTypeRefreshToken          AuthFlowType = "REFRESH_TOKEN"
+	AuthFlowTypeCustomAuth            AuthFlowType = "CUSTOM_AUTH"
+	AuthFlowTypeAdminNoSrpAuth        AuthFlowType = "ADMIN_NO_SRP_AUTH"
+	AuthFlowTypeUserPasswordAuth      AuthFlowType = "USER_PASSWORD_AUTH"
+	AuthFlowTypeAdminUserPasswordAuth AuthFlowType = "ADMIN_USER_PASSWORD_AUTH"
 )
 
 // Values returns all known values for AuthFlowType. Note that this can be expanded
@@ -137,16 +137,16 @@ type ChallengeNameType string
 
 // Enum values for ChallengeNameType
 const (
-	ChallengeNameTypeSms_mfa                  ChallengeNameType = "SMS_MFA"
-	ChallengeNameTypeSoftware_token_mfa       ChallengeNameType = "SOFTWARE_TOKEN_MFA"
-	ChallengeNameTypeSelect_mfa_type          ChallengeNameType = "SELECT_MFA_TYPE"
-	ChallengeNameTypeMfa_setup                ChallengeNameType = "MFA_SETUP"
-	ChallengeNameTypePassword_verifier        ChallengeNameType = "PASSWORD_VERIFIER"
-	ChallengeNameTypeCustom_challenge         ChallengeNameType = "CUSTOM_CHALLENGE"
-	ChallengeNameTypeDevice_srp_auth          ChallengeNameType = "DEVICE_SRP_AUTH"
-	ChallengeNameTypeDevice_password_verifier ChallengeNameType = "DEVICE_PASSWORD_VERIFIER"
-	ChallengeNameTypeAdmin_no_srp_auth        ChallengeNameType = "ADMIN_NO_SRP_AUTH"
-	ChallengeNameTypeNew_password_required    ChallengeNameType = "NEW_PASSWORD_REQUIRED"
+	ChallengeNameTypeSmsMfa                 ChallengeNameType = "SMS_MFA"
+	ChallengeNameTypeSoftwareTokenMfa       ChallengeNameType = "SOFTWARE_TOKEN_MFA"
+	ChallengeNameTypeSelectMfaType          ChallengeNameType = "SELECT_MFA_TYPE"
+	ChallengeNameTypeMfaSetup               ChallengeNameType = "MFA_SETUP"
+	ChallengeNameTypePasswordVerifier       ChallengeNameType = "PASSWORD_VERIFIER"
+	ChallengeNameTypeCustomChallenge        ChallengeNameType = "CUSTOM_CHALLENGE"
+	ChallengeNameTypeDeviceSrpAuth          ChallengeNameType = "DEVICE_SRP_AUTH"
+	ChallengeNameTypeDevicePasswordVerifier ChallengeNameType = "DEVICE_PASSWORD_VERIFIER"
+	ChallengeNameTypeAdminNoSrpAuth         ChallengeNameType = "ADMIN_NO_SRP_AUTH"
+	ChallengeNameTypeNewPasswordRequired    ChallengeNameType = "NEW_PASSWORD_REQUIRED"
 )
 
 // Values returns all known values for ChallengeNameType. Note that this can be
@@ -189,8 +189,8 @@ type CompromisedCredentialsEventActionType string
 
 // Enum values for CompromisedCredentialsEventActionType
 const (
-	CompromisedCredentialsEventActionTypeBlock     CompromisedCredentialsEventActionType = "BLOCK"
-	CompromisedCredentialsEventActionTypeNo_action CompromisedCredentialsEventActionType = "NO_ACTION"
+	CompromisedCredentialsEventActionTypeBlock    CompromisedCredentialsEventActionType = "BLOCK"
+	CompromisedCredentialsEventActionTypeNoAction CompromisedCredentialsEventActionType = "NO_ACTION"
 )
 
 // Values returns all known values for CompromisedCredentialsEventActionType. Note
@@ -208,8 +208,8 @@ type DefaultEmailOptionType string
 
 // Enum values for DefaultEmailOptionType
 const (
-	DefaultEmailOptionTypeConfirm_with_link DefaultEmailOptionType = "CONFIRM_WITH_LINK"
-	DefaultEmailOptionTypeConfirm_with_code DefaultEmailOptionType = "CONFIRM_WITH_CODE"
+	DefaultEmailOptionTypeConfirmWithLink DefaultEmailOptionType = "CONFIRM_WITH_LINK"
+	DefaultEmailOptionTypeConfirmWithCode DefaultEmailOptionType = "CONFIRM_WITH_CODE"
 )
 
 // Values returns all known values for DefaultEmailOptionType. Note that this can
@@ -244,8 +244,8 @@ type DeviceRememberedStatusType string
 
 // Enum values for DeviceRememberedStatusType
 const (
-	DeviceRememberedStatusTypeRemembered     DeviceRememberedStatusType = "remembered"
-	DeviceRememberedStatusTypeNot_remembered DeviceRememberedStatusType = "not_remembered"
+	DeviceRememberedStatusTypeRemembered    DeviceRememberedStatusType = "remembered"
+	DeviceRememberedStatusTypeNotRemembered DeviceRememberedStatusType = "not_remembered"
 )
 
 // Values returns all known values for DeviceRememberedStatusType. Note that this
@@ -286,8 +286,8 @@ type EmailSendingAccountType string
 
 // Enum values for EmailSendingAccountType
 const (
-	EmailSendingAccountTypeCognito_default EmailSendingAccountType = "COGNITO_DEFAULT"
-	EmailSendingAccountTypeDeveloper       EmailSendingAccountType = "DEVELOPER"
+	EmailSendingAccountTypeCognitoDefault EmailSendingAccountType = "COGNITO_DEFAULT"
+	EmailSendingAccountTypeDeveloper      EmailSendingAccountType = "DEVELOPER"
 )
 
 // Values returns all known values for EmailSendingAccountType. Note that this can
@@ -304,9 +304,9 @@ type EventFilterType string
 
 // Enum values for EventFilterType
 const (
-	EventFilterTypeSign_in         EventFilterType = "SIGN_IN"
-	EventFilterTypePassword_change EventFilterType = "PASSWORD_CHANGE"
-	EventFilterTypeSign_up         EventFilterType = "SIGN_UP"
+	EventFilterTypeSignIn         EventFilterType = "SIGN_IN"
+	EventFilterTypePasswordChange EventFilterType = "PASSWORD_CHANGE"
+	EventFilterTypeSignUp         EventFilterType = "SIGN_UP"
 )
 
 // Values returns all known values for EventFilterType. Note that this can be
@@ -362,14 +362,14 @@ type ExplicitAuthFlowsType string
 
 // Enum values for ExplicitAuthFlowsType
 const (
-	ExplicitAuthFlowsTypeAdmin_no_srp_auth              ExplicitAuthFlowsType = "ADMIN_NO_SRP_AUTH"
-	ExplicitAuthFlowsTypeCustom_auth_flow_only          ExplicitAuthFlowsType = "CUSTOM_AUTH_FLOW_ONLY"
-	ExplicitAuthFlowsTypeUser_password_auth             ExplicitAuthFlowsType = "USER_PASSWORD_AUTH"
-	ExplicitAuthFlowsTypeAllow_admin_user_password_auth ExplicitAuthFlowsType = "ALLOW_ADMIN_USER_PASSWORD_AUTH"
-	ExplicitAuthFlowsTypeAllow_custom_auth              ExplicitAuthFlowsType = "ALLOW_CUSTOM_AUTH"
-	ExplicitAuthFlowsTypeAllow_user_password_auth       ExplicitAuthFlowsType = "ALLOW_USER_PASSWORD_AUTH"
-	ExplicitAuthFlowsTypeAllow_user_srp_auth            ExplicitAuthFlowsType = "ALLOW_USER_SRP_AUTH"
-	ExplicitAuthFlowsTypeAllow_refresh_token_auth       ExplicitAuthFlowsType = "ALLOW_REFRESH_TOKEN_AUTH"
+	ExplicitAuthFlowsTypeAdminNoSrpAuth             ExplicitAuthFlowsType = "ADMIN_NO_SRP_AUTH"
+	ExplicitAuthFlowsTypeCustomAuthFlowOnly         ExplicitAuthFlowsType = "CUSTOM_AUTH_FLOW_ONLY"
+	ExplicitAuthFlowsTypeUserPasswordAuth           ExplicitAuthFlowsType = "USER_PASSWORD_AUTH"
+	ExplicitAuthFlowsTypeAllowAdminUserPasswordAuth ExplicitAuthFlowsType = "ALLOW_ADMIN_USER_PASSWORD_AUTH"
+	ExplicitAuthFlowsTypeAllowCustomAuth            ExplicitAuthFlowsType = "ALLOW_CUSTOM_AUTH"
+	ExplicitAuthFlowsTypeAllowUserPasswordAuth      ExplicitAuthFlowsType = "ALLOW_USER_PASSWORD_AUTH"
+	ExplicitAuthFlowsTypeAllowUserSrpAuth           ExplicitAuthFlowsType = "ALLOW_USER_SRP_AUTH"
+	ExplicitAuthFlowsTypeAllowRefreshTokenAuth      ExplicitAuthFlowsType = "ALLOW_REFRESH_TOKEN_AUTH"
 )
 
 // Values returns all known values for ExplicitAuthFlowsType. Note that this can be
@@ -454,9 +454,9 @@ type OAuthFlowType string
 
 // Enum values for OAuthFlowType
 const (
-	OAuthFlowTypeCode               OAuthFlowType = "code"
-	OAuthFlowTypeImplicit           OAuthFlowType = "implicit"
-	OAuthFlowTypeClient_credentials OAuthFlowType = "client_credentials"
+	OAuthFlowTypeCode              OAuthFlowType = "code"
+	OAuthFlowTypeImplicit          OAuthFlowType = "implicit"
+	OAuthFlowTypeClientCredentials OAuthFlowType = "client_credentials"
 )
 
 // Values returns all known values for OAuthFlowType. Note that this can be
@@ -493,9 +493,9 @@ type RecoveryOptionNameType string
 
 // Enum values for RecoveryOptionNameType
 const (
-	RecoveryOptionNameTypeVerified_email        RecoveryOptionNameType = "verified_email"
-	RecoveryOptionNameTypeVerified_phone_number RecoveryOptionNameType = "verified_phone_number"
-	RecoveryOptionNameTypeAdmin_only            RecoveryOptionNameType = "admin_only"
+	RecoveryOptionNameTypeVerifiedEmail       RecoveryOptionNameType = "verified_email"
+	RecoveryOptionNameTypeVerifiedPhoneNumber RecoveryOptionNameType = "verified_phone_number"
+	RecoveryOptionNameTypeAdminOnly           RecoveryOptionNameType = "admin_only"
 )
 
 // Values returns all known values for RecoveryOptionNameType. Note that this can
@@ -623,8 +623,8 @@ type UsernameAttributeType string
 
 // Enum values for UsernameAttributeType
 const (
-	UsernameAttributeTypePhone_number UsernameAttributeType = "phone_number"
-	UsernameAttributeTypeEmail        UsernameAttributeType = "email"
+	UsernameAttributeTypePhoneNumber UsernameAttributeType = "phone_number"
+	UsernameAttributeTypeEmail       UsernameAttributeType = "email"
 )
 
 // Values returns all known values for UsernameAttributeType. Note that this can be
@@ -661,13 +661,13 @@ type UserStatusType string
 
 // Enum values for UserStatusType
 const (
-	UserStatusTypeUnconfirmed           UserStatusType = "UNCONFIRMED"
-	UserStatusTypeConfirmed             UserStatusType = "CONFIRMED"
-	UserStatusTypeArchived              UserStatusType = "ARCHIVED"
-	UserStatusTypeCompromised           UserStatusType = "COMPROMISED"
-	UserStatusTypeUnknown               UserStatusType = "UNKNOWN"
-	UserStatusTypeReset_required        UserStatusType = "RESET_REQUIRED"
-	UserStatusTypeForce_change_password UserStatusType = "FORCE_CHANGE_PASSWORD"
+	UserStatusTypeUnconfirmed         UserStatusType = "UNCONFIRMED"
+	UserStatusTypeConfirmed           UserStatusType = "CONFIRMED"
+	UserStatusTypeArchived            UserStatusType = "ARCHIVED"
+	UserStatusTypeCompromised         UserStatusType = "COMPROMISED"
+	UserStatusTypeUnknown             UserStatusType = "UNKNOWN"
+	UserStatusTypeResetRequired       UserStatusType = "RESET_REQUIRED"
+	UserStatusTypeForceChangePassword UserStatusType = "FORCE_CHANGE_PASSWORD"
 )
 
 // Values returns all known values for UserStatusType. Note that this can be
@@ -689,8 +689,8 @@ type VerifiedAttributeType string
 
 // Enum values for VerifiedAttributeType
 const (
-	VerifiedAttributeTypePhone_number VerifiedAttributeType = "phone_number"
-	VerifiedAttributeTypeEmail        VerifiedAttributeType = "email"
+	VerifiedAttributeTypePhoneNumber VerifiedAttributeType = "phone_number"
+	VerifiedAttributeTypeEmail       VerifiedAttributeType = "email"
 )
 
 // Values returns all known values for VerifiedAttributeType. Note that this can be

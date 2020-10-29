@@ -6,9 +6,9 @@ type AuthMechanismValue string
 
 // Enum values for AuthMechanismValue
 const (
-	AuthMechanismValueDefault     AuthMechanismValue = "default"
-	AuthMechanismValueMongodb_cr  AuthMechanismValue = "mongodb_cr"
-	AuthMechanismValueScram_sha_1 AuthMechanismValue = "scram_sha_1"
+	AuthMechanismValueDefault   AuthMechanismValue = "default"
+	AuthMechanismValueMongodbCr AuthMechanismValue = "mongodb_cr"
+	AuthMechanismValueScramSha1 AuthMechanismValue = "scram_sha_1"
 )
 
 // Values returns all known values for AuthMechanismValue. Note that this can be
@@ -146,10 +146,10 @@ type DmsSslModeValue string
 
 // Enum values for DmsSslModeValue
 const (
-	DmsSslModeValueNone        DmsSslModeValue = "none"
-	DmsSslModeValueRequire     DmsSslModeValue = "require"
-	DmsSslModeValueVerify_ca   DmsSslModeValue = "verify-ca"
-	DmsSslModeValueVerify_full DmsSslModeValue = "verify-full"
+	DmsSslModeValueNone       DmsSslModeValue = "none"
+	DmsSslModeValueRequire    DmsSslModeValue = "require"
+	DmsSslModeValueVerifyCa   DmsSslModeValue = "verify-ca"
+	DmsSslModeValueVerifyFull DmsSslModeValue = "verify-full"
 )
 
 // Values returns all known values for DmsSslModeValue. Note that this can be
@@ -168,9 +168,9 @@ type EncodingTypeValue string
 
 // Enum values for EncodingTypeValue
 const (
-	EncodingTypeValuePlain            EncodingTypeValue = "plain"
-	EncodingTypeValuePlain_dictionary EncodingTypeValue = "plain-dictionary"
-	EncodingTypeValueRle_dictionary   EncodingTypeValue = "rle-dictionary"
+	EncodingTypeValuePlain           EncodingTypeValue = "plain"
+	EncodingTypeValuePlainDictionary EncodingTypeValue = "plain-dictionary"
+	EncodingTypeValueRleDictionary   EncodingTypeValue = "rle-dictionary"
 )
 
 // Values returns all known values for EncodingTypeValue. Note that this can be
@@ -188,8 +188,8 @@ type EncryptionModeValue string
 
 // Enum values for EncryptionModeValue
 const (
-	EncryptionModeValueSse_s3  EncryptionModeValue = "sse-s3"
-	EncryptionModeValueSse_kms EncryptionModeValue = "sse-kms"
+	EncryptionModeValueSseS3  EncryptionModeValue = "sse-s3"
+	EncryptionModeValueSseKms EncryptionModeValue = "sse-kms"
 )
 
 // Values returns all known values for EncryptionModeValue. Note that this can be
@@ -206,8 +206,8 @@ type MessageFormatValue string
 
 // Enum values for MessageFormatValue
 const (
-	MessageFormatValueJson             MessageFormatValue = "json"
-	MessageFormatValueJson_unformatted MessageFormatValue = "json-unformatted"
+	MessageFormatValueJson            MessageFormatValue = "json"
+	MessageFormatValueJsonUnformatted MessageFormatValue = "json-unformatted"
 )
 
 // Values returns all known values for MessageFormatValue. Note that this can be
@@ -224,9 +224,9 @@ type MigrationTypeValue string
 
 // Enum values for MigrationTypeValue
 const (
-	MigrationTypeValueFull_load         MigrationTypeValue = "full-load"
-	MigrationTypeValueCdc               MigrationTypeValue = "cdc"
-	MigrationTypeValueFull_load_and_cdc MigrationTypeValue = "full-load-and-cdc"
+	MigrationTypeValueFullLoad       MigrationTypeValue = "full-load"
+	MigrationTypeValueCdc            MigrationTypeValue = "cdc"
+	MigrationTypeValueFullLoadAndCdc MigrationTypeValue = "full-load-and-cdc"
 )
 
 // Values returns all known values for MigrationTypeValue. Note that this can be
@@ -262,8 +262,8 @@ type ParquetVersionValue string
 
 // Enum values for ParquetVersionValue
 const (
-	ParquetVersionValueParquet_1_0 ParquetVersionValue = "parquet-1-0"
-	ParquetVersionValueParquet_2_0 ParquetVersionValue = "parquet-2-0"
+	ParquetVersionValueParquet10 ParquetVersionValue = "parquet-1-0"
+	ParquetVersionValueParquet20 ParquetVersionValue = "parquet-2-0"
 )
 
 // Values returns all known values for ParquetVersionValue. Note that this can be
@@ -317,8 +317,8 @@ type ReloadOptionValue string
 
 // Enum values for ReloadOptionValue
 const (
-	ReloadOptionValueData_reload   ReloadOptionValue = "data-reload"
-	ReloadOptionValueValidate_only ReloadOptionValue = "validate-only"
+	ReloadOptionValueDataReload   ReloadOptionValue = "data-reload"
+	ReloadOptionValueValidateOnly ReloadOptionValue = "validate-only"
 )
 
 // Values returns all known values for ReloadOptionValue. Note that this can be
@@ -353,9 +353,9 @@ type SafeguardPolicy string
 
 // Enum values for SafeguardPolicy
 const (
-	SafeguardPolicyRely_on_sql_server_replication_agent SafeguardPolicy = "rely-on-sql-server-replication-agent"
-	SafeguardPolicyExclusive_automatic_truncation       SafeguardPolicy = "exclusive-automatic-truncation"
-	SafeguardPolicyShared_automatic_truncation          SafeguardPolicy = "shared-automatic-truncation"
+	SafeguardPolicyRelyOnSqlServerReplicationAgent SafeguardPolicy = "rely-on-sql-server-replication-agent"
+	SafeguardPolicyExclusiveAutomaticTruncation    SafeguardPolicy = "exclusive-automatic-truncation"
+	SafeguardPolicySharedAutomaticTruncation       SafeguardPolicy = "shared-automatic-truncation"
 )
 
 // Values returns all known values for SafeguardPolicy. Note that this can be
@@ -389,9 +389,9 @@ type StartReplicationTaskTypeValue string
 
 // Enum values for StartReplicationTaskTypeValue
 const (
-	StartReplicationTaskTypeValueStart_replication StartReplicationTaskTypeValue = "start-replication"
-	StartReplicationTaskTypeValueResume_processing StartReplicationTaskTypeValue = "resume-processing"
-	StartReplicationTaskTypeValueReload_target     StartReplicationTaskTypeValue = "reload-target"
+	StartReplicationTaskTypeValueStartReplication StartReplicationTaskTypeValue = "start-replication"
+	StartReplicationTaskTypeValueResumeProcessing StartReplicationTaskTypeValue = "resume-processing"
+	StartReplicationTaskTypeValueReloadTarget     StartReplicationTaskTypeValue = "reload-target"
 )
 
 // Values returns all known values for StartReplicationTaskTypeValue. Note that
@@ -410,8 +410,8 @@ type TargetDbType string
 
 // Enum values for TargetDbType
 const (
-	TargetDbTypeSpecific_database  TargetDbType = "specific-database"
-	TargetDbTypeMultiple_databases TargetDbType = "multiple-databases"
+	TargetDbTypeSpecificDatabase  TargetDbType = "specific-database"
+	TargetDbTypeMultipleDatabases TargetDbType = "multiple-databases"
 )
 
 // Values returns all known values for TargetDbType. Note that this can be expanded

@@ -37,21 +37,21 @@ type RestoreDBClusterToPointInTimeInput struct {
 
 	// The name of the new cluster to be created. Constraints:
 	//
-	//     * Must contain from
-	// 1 to 63 letters, numbers, or hyphens.
+	// * Must contain from 1
+	// to 63 letters, numbers, or hyphens.
 	//
-	//     * The first character must be a
-	// letter.
+	// * The first character must be a letter.
 	//
-	//     * Cannot end with a hyphen or contain two consecutive hyphens.
+	// *
+	// Cannot end with a hyphen or contain two consecutive hyphens.
 	//
 	// This member is required.
 	DBClusterIdentifier *string
 
 	// The identifier of the source cluster from which to restore. Constraints:
 	//
-	//     *
-	// Must match the identifier of an existing DBCluster.
+	// * Must
+	// match the identifier of an existing DBCluster.
 	//
 	// This member is required.
 	SourceDBClusterIdentifier *string
@@ -80,15 +80,15 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// by the KmsKeyId parameter. If you do not specify a value for the KmsKeyId
 	// parameter, then the following occurs:
 	//
-	//     * If the cluster is encrypted, then
-	// the restored cluster is encrypted using the AWS KMS key that was used to encrypt
-	// the source cluster.
+	// * If the cluster is encrypted, then the
+	// restored cluster is encrypted using the AWS KMS key that was used to encrypt the
+	// source cluster.
 	//
-	//     * If the cluster is not encrypted, then the restored
-	// cluster is not encrypted.
+	// * If the cluster is not encrypted, then the restored cluster is
+	// not encrypted.
 	//
-	// If DBClusterIdentifier refers to a cluster that is
-	// not encrypted, then the restore request is rejected.
+	// If DBClusterIdentifier refers to a cluster that is not
+	// encrypted, then the restore request is rejected.
 	KmsKeyId *string
 
 	// The port number on which the new cluster accepts connections. Constraints: Must
@@ -98,16 +98,16 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// The date and time to restore the cluster to. Valid values: A time in Universal
 	// Coordinated Time (UTC) format. Constraints:
 	//
-	//     * Must be before the latest
+	// * Must be before the latest
 	// restorable time for the instance.
 	//
-	//     * Must be specified if the
+	// * Must be specified if the
 	// UseLatestRestorableTime parameter is not provided.
 	//
-	//     * Cannot be specified if
-	// the UseLatestRestorableTime parameter is true.
+	// * Cannot be specified if the
+	// UseLatestRestorableTime parameter is true.
 	//
-	//     * Cannot be specified if the
+	// * Cannot be specified if the
 	// RestoreType parameter is copy-on-write.
 	//
 	// Example: 2015-03-07T23:45:00Z

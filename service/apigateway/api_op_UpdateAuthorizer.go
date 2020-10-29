@@ -95,13 +95,13 @@ type UpdateAuthorizerOutput struct {
 
 	// The identity source for which authorization is requested.
 	//
-	//     * For a TOKEN or
+	// * For a TOKEN or
 	// COGNITO_USER_POOLS authorizer, this is required and specifies the request header
 	// mapping expression for the custom header holding the authorization token
 	// submitted by the client. For example, if the token header name is Auth, the
 	// header mapping expression is method.request.header.Auth.
 	//
-	//     * For the REQUEST
+	// * For the REQUEST
 	// authorizer, this is required when authorization caching is enabled. The value is
 	// a comma-separated string of one or more mapping expressions of the specified
 	// request parameters. For example, if an Auth header, a Name query string

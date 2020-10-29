@@ -25,18 +25,18 @@ import (
 // operation has completed, use the following actions to return drift
 // information:
 //
-//     * Use DescribeStackSet to return detailed informaiton about
-// the stack set, including detailed information about the last completed drift
+// * Use DescribeStackSet to return detailed informaiton about the
+// stack set, including detailed information about the last completed drift
 // operation performed on the stack set. (Information about drift operations that
 // are in progress is not included.)
 //
-//     * Use ListStackInstances to return a list
-// of stack instances belonging to the stack set, including the drift status and
-// last drift time checked of each instance.
+// * Use ListStackInstances to return a list of
+// stack instances belonging to the stack set, including the drift status and last
+// drift time checked of each instance.
 //
-//     * Use DescribeStackInstance to
-// return detailed information about a specific stack instance, including its drift
-// status and last drift time checked.
+// * Use DescribeStackInstance to return
+// detailed information about a specific stack instance, including its drift status
+// and last drift time checked.
 //
 // For more information on performing a drift
 // detection operation on a stack set, see Detecting Unmanaged Changes in Stack

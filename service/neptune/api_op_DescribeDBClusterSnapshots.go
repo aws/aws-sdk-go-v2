@@ -34,19 +34,19 @@ type DescribeDBClusterSnapshotsInput struct {
 	// parameter can't be used in conjunction with the DBClusterSnapshotIdentifier
 	// parameter. This parameter is not case-sensitive. Constraints:
 	//
-	//     * If
-	// supplied, must match the identifier of an existing DBCluster.
+	// * If supplied,
+	// must match the identifier of an existing DBCluster.
 	DBClusterIdentifier *string
 
 	// A specific DB cluster snapshot identifier to describe. This parameter can't be
 	// used in conjunction with the DBClusterIdentifier parameter. This value is stored
 	// as a lowercase string. Constraints:
 	//
-	//     * If supplied, must match the
-	// identifier of an existing DBClusterSnapshot.
+	// * If supplied, must match the identifier of
+	// an existing DBClusterSnapshot.
 	//
-	//     * If this identifier is for an
-	// automated snapshot, the SnapshotType parameter must also be specified.
+	// * If this identifier is for an automated
+	// snapshot, the SnapshotType parameter must also be specified.
 	DBClusterSnapshotIdentifier *string
 
 	// This parameter is not currently supported.
@@ -79,27 +79,27 @@ type DescribeDBClusterSnapshotsInput struct {
 	// The type of DB cluster snapshots to be returned. You can specify one of the
 	// following values:
 	//
-	//     * automated - Return all DB cluster snapshots that have
-	// been automatically taken by Amazon Neptune for my AWS account.
+	// * automated - Return all DB cluster snapshots that have been
+	// automatically taken by Amazon Neptune for my AWS account.
 	//
-	//     * manual -
-	// Return all DB cluster snapshots that have been taken by my AWS account.
+	// * manual - Return all
+	// DB cluster snapshots that have been taken by my AWS account.
 	//
-	//     *
-	// shared - Return all manual DB cluster snapshots that have been shared to my AWS
-	// account.
+	// * shared - Return
+	// all manual DB cluster snapshots that have been shared to my AWS account.
 	//
-	//     * public - Return all DB cluster snapshots that have been marked
-	// as public.
+	// *
+	// public - Return all DB cluster snapshots that have been marked as public.
 	//
-	// If you don't specify a SnapshotType value, then both automated and
-	// manual DB cluster snapshots are returned. You can include shared DB cluster
-	// snapshots with these results by setting the IncludeShared parameter to true. You
-	// can include public DB cluster snapshots with these results by setting the
-	// IncludePublic parameter to true. The IncludeShared and IncludePublic parameters
-	// don't apply for SnapshotType values of manual or automated. The IncludePublic
-	// parameter doesn't apply when SnapshotType is set to shared. The IncludeShared
-	// parameter doesn't apply when SnapshotType is set to public.
+	// If
+	// you don't specify a SnapshotType value, then both automated and manual DB
+	// cluster snapshots are returned. You can include shared DB cluster snapshots with
+	// these results by setting the IncludeShared parameter to true. You can include
+	// public DB cluster snapshots with these results by setting the IncludePublic
+	// parameter to true. The IncludeShared and IncludePublic parameters don't apply
+	// for SnapshotType values of manual or automated. The IncludePublic parameter
+	// doesn't apply when SnapshotType is set to shared. The IncludeShared parameter
+	// doesn't apply when SnapshotType is set to public.
 	SnapshotType *string
 }
 

@@ -6,10 +6,10 @@ type AuthorizationType string
 
 // Enum values for AuthorizationType
 const (
-	AuthorizationTypeNone    AuthorizationType = "NONE"
-	AuthorizationTypeAws_iam AuthorizationType = "AWS_IAM"
-	AuthorizationTypeCustom  AuthorizationType = "CUSTOM"
-	AuthorizationTypeJwt     AuthorizationType = "JWT"
+	AuthorizationTypeNone   AuthorizationType = "NONE"
+	AuthorizationTypeAwsIam AuthorizationType = "AWS_IAM"
+	AuthorizationTypeCustom AuthorizationType = "CUSTOM"
+	AuthorizationTypeJwt    AuthorizationType = "JWT"
 )
 
 // Values returns all known values for AuthorizationType. Note that this can be
@@ -47,7 +47,7 @@ type ConnectionType string
 // Enum values for ConnectionType
 const (
 	ConnectionTypeInternet ConnectionType = "INTERNET"
-	ConnectionTypeVpc_link ConnectionType = "VPC_LINK"
+	ConnectionTypeVpcLink  ConnectionType = "VPC_LINK"
 )
 
 // Values returns all known values for ConnectionType. Note that this can be
@@ -64,8 +64,8 @@ type ContentHandlingStrategy string
 
 // Enum values for ContentHandlingStrategy
 const (
-	ContentHandlingStrategyConvert_to_binary ContentHandlingStrategy = "CONVERT_TO_BINARY"
-	ContentHandlingStrategyConvert_to_text   ContentHandlingStrategy = "CONVERT_TO_TEXT"
+	ContentHandlingStrategyConvertToBinary ContentHandlingStrategy = "CONVERT_TO_BINARY"
+	ContentHandlingStrategyConvertToText   ContentHandlingStrategy = "CONVERT_TO_TEXT"
 )
 
 // Values returns all known values for ContentHandlingStrategy. Note that this can
@@ -138,11 +138,11 @@ type IntegrationType string
 
 // Enum values for IntegrationType
 const (
-	IntegrationTypeAws        IntegrationType = "AWS"
-	IntegrationTypeHttp       IntegrationType = "HTTP"
-	IntegrationTypeMock       IntegrationType = "MOCK"
-	IntegrationTypeHttp_proxy IntegrationType = "HTTP_PROXY"
-	IntegrationTypeAws_proxy  IntegrationType = "AWS_PROXY"
+	IntegrationTypeAws       IntegrationType = "AWS"
+	IntegrationTypeHttp      IntegrationType = "HTTP"
+	IntegrationTypeMock      IntegrationType = "MOCK"
+	IntegrationTypeHttpProxy IntegrationType = "HTTP_PROXY"
+	IntegrationTypeAwsProxy  IntegrationType = "AWS_PROXY"
 )
 
 // Values returns all known values for IntegrationType. Note that this can be
@@ -182,9 +182,9 @@ type PassthroughBehavior string
 
 // Enum values for PassthroughBehavior
 const (
-	PassthroughBehaviorWhen_no_match     PassthroughBehavior = "WHEN_NO_MATCH"
-	PassthroughBehaviorNever             PassthroughBehavior = "NEVER"
-	PassthroughBehaviorWhen_no_templates PassthroughBehavior = "WHEN_NO_TEMPLATES"
+	PassthroughBehaviorWhenNoMatch     PassthroughBehavior = "WHEN_NO_MATCH"
+	PassthroughBehaviorNever           PassthroughBehavior = "NEVER"
+	PassthroughBehaviorWhenNoTemplates PassthroughBehavior = "WHEN_NO_TEMPLATES"
 )
 
 // Values returns all known values for PassthroughBehavior. Note that this can be
@@ -220,8 +220,8 @@ type SecurityPolicy string
 
 // Enum values for SecurityPolicy
 const (
-	SecurityPolicyTls_1_0 SecurityPolicy = "TLS_1_0"
-	SecurityPolicyTls_1_2 SecurityPolicy = "TLS_1_2"
+	SecurityPolicyTls10 SecurityPolicy = "TLS_1_0"
+	SecurityPolicyTls12 SecurityPolicy = "TLS_1_2"
 )
 
 // Values returns all known values for SecurityPolicy. Note that this can be

@@ -18,7 +18,7 @@ import (
 // can be called only from the organization's management account. Member accounts
 // can remove themselves with LeaveOrganization instead.
 //
-//     * You can remove an
+// * You can remove an
 // account from your organization only if the account is configured with the
 // information required to operate as a standalone account. When you create an
 // account in an organization using the AWS Organizations console, API, or CLI
@@ -33,7 +33,7 @@ import (
 // (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
 // in the AWS Organizations User Guide.
 //
-//     * After the account leaves the
+// * After the account leaves the
 // organization, all tags that were attached to the account object in the
 // organization are deleted. AWS accounts outside of an organization do not support
 // tags.

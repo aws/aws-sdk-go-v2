@@ -6,9 +6,9 @@ type Architecture string
 
 // Enum values for Architecture
 const (
-	ArchitectureX86_64 Architecture = "X86_64"
-	ArchitectureArm64  Architecture = "ARM64"
-	ArchitectureArmhf  Architecture = "ARMHF"
+	ArchitectureX8664 Architecture = "X86_64"
+	ArchitectureArm64 Architecture = "ARM64"
+	ArchitectureArmhf Architecture = "ARMHF"
 )
 
 // Values returns all known values for Architecture. Note that this can be expanded

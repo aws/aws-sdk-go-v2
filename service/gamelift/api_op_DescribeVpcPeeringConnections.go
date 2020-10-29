@@ -19,20 +19,20 @@ import (
 // information includes both active and pending connections. Active connections
 // identify the IpV4 CIDR block that the VPC uses to connect.
 //
-//     *
+// *
 // CreateVpcPeeringAuthorization
 //
-//     * DescribeVpcPeeringAuthorizations
+// * DescribeVpcPeeringAuthorizations
 //
-//     *
+// *
 // DeleteVpcPeeringAuthorization
 //
-//     * CreateVpcPeeringConnection
+// * CreateVpcPeeringConnection
 //
-//     *
+// *
 // DescribeVpcPeeringConnections
 //
-//     * DeleteVpcPeeringConnection
+// * DeleteVpcPeeringConnection
 func (c *Client) DescribeVpcPeeringConnections(ctx context.Context, params *DescribeVpcPeeringConnectionsInput, optFns ...func(*Options)) (*DescribeVpcPeeringConnectionsOutput, error) {
 	if params == nil {
 		params = &DescribeVpcPeeringConnectionsInput{}

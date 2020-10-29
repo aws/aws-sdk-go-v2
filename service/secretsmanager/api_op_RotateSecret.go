@@ -36,37 +36,36 @@ import (
 // rotation function must end with the versions of the secret in one of two
 // states:
 //
-//     * The AWSPENDING and AWSCURRENT staging labels are attached to the
-// same version of the secret, or
+// * The AWSPENDING and AWSCURRENT staging labels are attached to the same
+// version of the secret, or
 //
-//     * The AWSPENDING staging label is not
-// attached to any version of the secret.
+// * The AWSPENDING staging label is not attached to any
+// version of the secret.
 //
-// If the AWSPENDING staging label is
-// present but not attached to the same version as AWSCURRENT then any later
-// invocation of RotateSecret assumes that a previous rotation request is still in
-// progress and returns an error. Minimum permissions To run this command, you must
-// have the following permissions:
+// If the AWSPENDING staging label is present but not
+// attached to the same version as AWSCURRENT then any later invocation of
+// RotateSecret assumes that a previous rotation request is still in progress and
+// returns an error. Minimum permissions To run this command, you must have the
+// following permissions:
 //
-//     * secretsmanager:RotateSecret
+// * secretsmanager:RotateSecret
 //
-//     *
-// lambda:InvokeFunction (on the function specified in the secret's
-// metadata)
+// * lambda:InvokeFunction
+// (on the function specified in the secret's metadata)
 //
 // Related operations
 //
-//     * To list the secrets in your account, use
-// ListSecrets.
+// * To
+// list the secrets in your account, use ListSecrets.
 //
-//     * To get the details for a version of a secret, use
-// DescribeSecret.
+// * To get the details for a
+// version of a secret, use DescribeSecret.
 //
-//     * To create a new version of a secret, use CreateSecret.
+// * To create a new version of a secret,
+// use CreateSecret.
 //
-//
-// * To attach staging labels to or remove staging labels from a version of a
-// secret, use UpdateSecretVersionStage.
+// * To attach staging labels to or remove staging labels from a
+// version of a secret, use UpdateSecretVersionStage.
 func (c *Client) RotateSecret(ctx context.Context, params *RotateSecretInput, optFns ...func(*Options)) (*RotateSecretOutput, error) {
 	if params == nil {
 		params = &RotateSecretInput{}

@@ -15,40 +15,39 @@ import (
 // them in a specified order. You can search or sort by the following game session
 // attributes:
 //
-//     * gameSessionId -- A unique identifier for the game session.
-// You can use either a GameSessionId or GameSessionArn value.
+// * gameSessionId -- A unique identifier for the game session. You
+// can use either a GameSessionId or GameSessionArn value.
 //
-//     *
-// gameSessionName -- Name assigned to a game session. This value is set when
-// requesting a new game session with CreateGameSession or updating with
-// UpdateGameSession. Game session names do not need to be unique to a game
-// session.
+// * gameSessionName --
+// Name assigned to a game session. This value is set when requesting a new game
+// session with CreateGameSession or updating with UpdateGameSession. Game session
+// names do not need to be unique to a game session.
 //
-//     * gameSessionProperties -- Custom data defined in a game session's
-// GameProperty parameter. GameProperty values are stored as key:value pairs; the
-// filter expression must indicate the key and a string to search the data values
-// for. For example, to search for game sessions with custom data containing the
-// key:value pair "gameMode:brawl", specify the following:
-// gameSessionProperties.gameMode = "brawl". All custom data values are searched as
-// strings.
+// * gameSessionProperties --
+// Custom data defined in a game session's GameProperty parameter. GameProperty
+// values are stored as key:value pairs; the filter expression must indicate the
+// key and a string to search the data values for. For example, to search for game
+// sessions with custom data containing the key:value pair "gameMode:brawl",
+// specify the following: gameSessionProperties.gameMode = "brawl". All custom data
+// values are searched as strings.
 //
-//     * maximumSessions -- Maximum number of player sessions allowed for
-// a game session. This value is set when requesting a new game session with
-// CreateGameSession or updating with UpdateGameSession.
+// * maximumSessions -- Maximum number of player
+// sessions allowed for a game session. This value is set when requesting a new
+// game session with CreateGameSession or updating with UpdateGameSession.
 //
-//     * creationTimeMillis
-// -- Value indicating when a game session was created. It is expressed in Unix
-// time as milliseconds.
+// *
+// creationTimeMillis -- Value indicating when a game session was created. It is
+// expressed in Unix time as milliseconds.
 //
-//     * playerSessionCount -- Number of players currently
-// connected to a game session. This value changes rapidly as players join the
-// session or drop out.
+// * playerSessionCount -- Number of
+// players currently connected to a game session. This value changes rapidly as
+// players join the session or drop out.
 //
-//     * hasAvailablePlayerSessions -- Boolean value
-// indicating whether a game session has reached its maximum number of players. It
-// is highly recommended that all search requests include this filter attribute to
-// optimize search performance and return only sessions that players can
-// join.
+// * hasAvailablePlayerSessions -- Boolean
+// value indicating whether a game session has reached its maximum number of
+// players. It is highly recommended that all search requests include this filter
+// attribute to optimize search performance and return only sessions that players
+// can join.
 //
 // Returned values for playerSessionCount and hasAvailablePlayerSessions
 // change quickly as players join sessions and others drop out. Results should be
@@ -63,29 +62,28 @@ import (
 // search feature finds only game sessions that are in ACTIVE status. To locate
 // games in statuses other than active, use DescribeGameSessionDetails.
 //
-//     *
+// *
 // CreateGameSession
 //
-//     * DescribeGameSessions
+// * DescribeGameSessions
 //
-//     *
-// DescribeGameSessionDetails
+// * DescribeGameSessionDetails
 //
-//     * SearchGameSessions
+// *
+// SearchGameSessions
 //
-//     * UpdateGameSession
-//
+// * UpdateGameSession
 //
 // * GetGameSessionLogUrl
 //
-//     * Game session placements
+// * Game session
+// placements
 //
-//         *
-// StartGameSessionPlacement
+// * StartGameSessionPlacement
 //
-//         * DescribeGameSessionPlacement
+// * DescribeGameSessionPlacement
 //
-//         *
+// *
 // StopGameSessionPlacement
 func (c *Client) SearchGameSessions(ctx context.Context, params *SearchGameSessionsInput, optFns ...func(*Options)) (*SearchGameSessionsOutput, error) {
 	if params == nil {
@@ -115,41 +113,41 @@ type SearchGameSessionsInput struct {
 	// fleet that are in ACTIVE status. A filter expression can contain one or multiple
 	// conditions. Each condition consists of the following:
 	//
-	//     * Operand -- Name of
-	// a game session attribute. Valid values are gameSessionName, gameSessionId,
+	// * Operand -- Name of a
+	// game session attribute. Valid values are gameSessionName, gameSessionId,
 	// gameSessionProperties, maximumSessions, creationTimeMillis, playerSessionCount,
 	// hasAvailablePlayerSessions.
 	//
-	//     * Comparator -- Valid comparators are: =, <>,
-	// <, >, <=, >=.
+	// * Comparator -- Valid comparators are: =, <>, <, >,
+	// <=, >=.
 	//
-	//     * Value -- Value to be searched for. Values may be numbers,
-	// boolean values (true/false) or strings depending on the operand. String values
-	// are case sensitive and must be enclosed in single quotes. Special characters
-	// must be escaped. Boolean and string values can only be used with the comparators
-	// = and <>. For example, the following filter expression searches on
-	// gameSessionName: "FilterExpression": "gameSessionName = 'Matt\\'s Awesome Game
-	// 1'".
+	// * Value -- Value to be searched for. Values may be numbers, boolean
+	// values (true/false) or strings depending on the operand. String values are case
+	// sensitive and must be enclosed in single quotes. Special characters must be
+	// escaped. Boolean and string values can only be used with the comparators = and
+	// <>. For example, the following filter expression searches on gameSessionName:
+	// "FilterExpression": "gameSessionName = 'Matt\\'s Awesome Game 1'".
 	//
-	// To chain multiple conditions in a single expression, use the logical
-	// keywords AND, OR, and NOT and parentheses as needed. For example: x AND y AND
-	// NOT z, NOT (x OR y). Session search evaluates conditions from left to right
-	// using the following precedence rules:
+	// To chain
+	// multiple conditions in a single expression, use the logical keywords AND, OR,
+	// and NOT and parentheses as needed. For example: x AND y AND NOT z, NOT (x OR y).
+	// Session search evaluates conditions from left to right using the following
+	// precedence rules:
 	//
-	//     * =, <>, <, >, <=, >=
+	// * =, <>, <, >, <=, >=
 	//
-	//     *
-	// Parentheses
+	// * Parentheses
 	//
-	//     * NOT
+	// * NOT
 	//
-	//     * AND
+	// * AND
 	//
-	//     * OR
+	// * OR
 	//
-	// For example, this filter expression
-	// retrieves game sessions hosting at least ten players that have an open player
-	// slot: "maximumSessions>=10 AND hasAvailablePlayerSessions=true".
+	// For
+	// example, this filter expression retrieves game sessions hosting at least ten
+	// players that have an open player slot: "maximumSessions>=10 AND
+	// hasAvailablePlayerSessions=true".
 	FilterExpression *string
 
 	// A unique identifier for a fleet to search for active game sessions. You can use
@@ -171,18 +169,17 @@ type SearchGameSessionsInput struct {
 	// included, the request returns results in random order. A sort expression
 	// consists of the following elements:
 	//
-	//     * Operand -- Name of a game session
+	// * Operand -- Name of a game session
 	// attribute. Valid values are gameSessionName, gameSessionId,
 	// gameSessionProperties, maximumSessions, creationTimeMillis, playerSessionCount,
 	// hasAvailablePlayerSessions.
 	//
-	//     * Order -- Valid sort orders are ASC
-	// (ascending) and DESC (descending).
+	// * Order -- Valid sort orders are ASC (ascending)
+	// and DESC (descending).
 	//
-	// For example, this sort expression returns
-	// the oldest active sessions first: "SortExpression": "creationTimeMillis ASC".
-	// Results with a null value for the sort operand are returned at the end of the
-	// list.
+	// For example, this sort expression returns the oldest
+	// active sessions first: "SortExpression": "creationTimeMillis ASC". Results with
+	// a null value for the sort operand are returned at the end of the list.
 	SortExpression *string
 }
 

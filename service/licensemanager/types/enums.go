@@ -6,10 +6,10 @@ type InventoryFilterCondition string
 
 // Enum values for InventoryFilterCondition
 const (
-	InventoryFilterConditionEquals      InventoryFilterCondition = "EQUALS"
-	InventoryFilterConditionNot_equals  InventoryFilterCondition = "NOT_EQUALS"
-	InventoryFilterConditionBegins_with InventoryFilterCondition = "BEGINS_WITH"
-	InventoryFilterConditionContains    InventoryFilterCondition = "CONTAINS"
+	InventoryFilterConditionEquals     InventoryFilterCondition = "EQUALS"
+	InventoryFilterConditionNotEquals  InventoryFilterCondition = "NOT_EQUALS"
+	InventoryFilterConditionBeginsWith InventoryFilterCondition = "BEGINS_WITH"
+	InventoryFilterConditionContains   InventoryFilterCondition = "CONTAINS"
 )
 
 // Values returns all known values for InventoryFilterCondition. Note that this can
@@ -68,11 +68,11 @@ type ResourceType string
 
 // Enum values for ResourceType
 const (
-	ResourceTypeEc2_instance                     ResourceType = "EC2_INSTANCE"
-	ResourceTypeEc2_host                         ResourceType = "EC2_HOST"
-	ResourceTypeEc2_ami                          ResourceType = "EC2_AMI"
-	ResourceTypeRds                              ResourceType = "RDS"
-	ResourceTypeSystems_manager_managed_instance ResourceType = "SYSTEMS_MANAGER_MANAGED_INSTANCE"
+	ResourceTypeEc2Instance                   ResourceType = "EC2_INSTANCE"
+	ResourceTypeEc2Host                       ResourceType = "EC2_HOST"
+	ResourceTypeEc2Ami                        ResourceType = "EC2_AMI"
+	ResourceTypeRds                           ResourceType = "RDS"
+	ResourceTypeSystemsManagerManagedInstance ResourceType = "SYSTEMS_MANAGER_MANAGED_INSTANCE"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded

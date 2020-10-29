@@ -101,10 +101,10 @@ type JournalS3ExportDescription struct {
 	// The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for
 	// a journal export job to do the following:
 	//
-	//     * Write objects into your Amazon
+	// * Write objects into your Amazon
 	// Simple Storage Service (Amazon S3) bucket.
 	//
-	//     * (Optional) Use your customer
+	// * (Optional) Use your customer
 	// master key (CMK) in AWS Key Management Service (AWS KMS) for server-side
 	// encryption of your exported data.
 	//
@@ -198,12 +198,12 @@ type S3ExportConfiguration struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html) in the
 	// Amazon S3 Developer Guide. The following are examples of valid Prefix values:
 	//
+	// *
+	// JournalExports-ForMyLedger/Testing/
 	//
-	// * JournalExports-ForMyLedger/Testing/
+	// * JournalExports
 	//
-	//     * JournalExports
-	//
-	//     * My:Tests/
+	// * My:Tests/
 	//
 	// This member is required.
 	Prefix *string

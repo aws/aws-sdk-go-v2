@@ -544,8 +544,8 @@ type FallbackBehavior string
 
 // Enum values for FallbackBehavior
 const (
-	FallbackBehaviorMatch    FallbackBehavior = "MATCH"
-	FallbackBehaviorNo_match FallbackBehavior = "NO_MATCH"
+	FallbackBehaviorMatch   FallbackBehavior = "MATCH"
+	FallbackBehaviorNoMatch FallbackBehavior = "NO_MATCH"
 )
 
 // Values returns all known values for FallbackBehavior. Note that this can be
@@ -600,49 +600,49 @@ type ParameterExceptionField string
 
 // Enum values for ParameterExceptionField
 const (
-	ParameterExceptionFieldWeb_acl                           ParameterExceptionField = "WEB_ACL"
-	ParameterExceptionFieldRule_group                        ParameterExceptionField = "RULE_GROUP"
-	ParameterExceptionFieldRegex_pattern_set                 ParameterExceptionField = "REGEX_PATTERN_SET"
-	ParameterExceptionFieldIp_set                            ParameterExceptionField = "IP_SET"
-	ParameterExceptionFieldManaged_rule_set                  ParameterExceptionField = "MANAGED_RULE_SET"
-	ParameterExceptionFieldRule                              ParameterExceptionField = "RULE"
-	ParameterExceptionFieldExcluded_rule                     ParameterExceptionField = "EXCLUDED_RULE"
-	ParameterExceptionFieldStatement                         ParameterExceptionField = "STATEMENT"
-	ParameterExceptionFieldByte_match_statement              ParameterExceptionField = "BYTE_MATCH_STATEMENT"
-	ParameterExceptionFieldSqli_match_statement              ParameterExceptionField = "SQLI_MATCH_STATEMENT"
-	ParameterExceptionFieldXss_match_statement               ParameterExceptionField = "XSS_MATCH_STATEMENT"
-	ParameterExceptionFieldSize_constraint_statement         ParameterExceptionField = "SIZE_CONSTRAINT_STATEMENT"
-	ParameterExceptionFieldGeo_match_statement               ParameterExceptionField = "GEO_MATCH_STATEMENT"
-	ParameterExceptionFieldRate_based_statement              ParameterExceptionField = "RATE_BASED_STATEMENT"
-	ParameterExceptionFieldRule_group_reference_statement    ParameterExceptionField = "RULE_GROUP_REFERENCE_STATEMENT"
-	ParameterExceptionFieldRegex_pattern_reference_statement ParameterExceptionField = "REGEX_PATTERN_REFERENCE_STATEMENT"
-	ParameterExceptionFieldIp_set_reference_statement        ParameterExceptionField = "IP_SET_REFERENCE_STATEMENT"
-	ParameterExceptionFieldManaged_rule_set_statement        ParameterExceptionField = "MANAGED_RULE_SET_STATEMENT"
-	ParameterExceptionFieldAnd_statement                     ParameterExceptionField = "AND_STATEMENT"
-	ParameterExceptionFieldOr_statement                      ParameterExceptionField = "OR_STATEMENT"
-	ParameterExceptionFieldNot_statement                     ParameterExceptionField = "NOT_STATEMENT"
-	ParameterExceptionFieldIp_address                        ParameterExceptionField = "IP_ADDRESS"
-	ParameterExceptionFieldIp_address_version                ParameterExceptionField = "IP_ADDRESS_VERSION"
-	ParameterExceptionFieldField_to_match                    ParameterExceptionField = "FIELD_TO_MATCH"
-	ParameterExceptionFieldText_transformation               ParameterExceptionField = "TEXT_TRANSFORMATION"
-	ParameterExceptionFieldSingle_query_argument             ParameterExceptionField = "SINGLE_QUERY_ARGUMENT"
-	ParameterExceptionFieldSingle_header                     ParameterExceptionField = "SINGLE_HEADER"
-	ParameterExceptionFieldDefault_action                    ParameterExceptionField = "DEFAULT_ACTION"
-	ParameterExceptionFieldRule_action                       ParameterExceptionField = "RULE_ACTION"
-	ParameterExceptionFieldEntity_limit                      ParameterExceptionField = "ENTITY_LIMIT"
-	ParameterExceptionFieldOverride_action                   ParameterExceptionField = "OVERRIDE_ACTION"
-	ParameterExceptionFieldScope_value                       ParameterExceptionField = "SCOPE_VALUE"
-	ParameterExceptionFieldResource_arn                      ParameterExceptionField = "RESOURCE_ARN"
-	ParameterExceptionFieldResource_type                     ParameterExceptionField = "RESOURCE_TYPE"
-	ParameterExceptionFieldTags                              ParameterExceptionField = "TAGS"
-	ParameterExceptionFieldTag_keys                          ParameterExceptionField = "TAG_KEYS"
-	ParameterExceptionFieldMetric_name                       ParameterExceptionField = "METRIC_NAME"
-	ParameterExceptionFieldFirewall_manager_statement        ParameterExceptionField = "FIREWALL_MANAGER_STATEMENT"
-	ParameterExceptionFieldFallback_behavior                 ParameterExceptionField = "FALLBACK_BEHAVIOR"
-	ParameterExceptionFieldPosition                          ParameterExceptionField = "POSITION"
-	ParameterExceptionFieldForwarded_ip_config               ParameterExceptionField = "FORWARDED_IP_CONFIG"
-	ParameterExceptionFieldIp_set_forwarded_ip_config        ParameterExceptionField = "IP_SET_FORWARDED_IP_CONFIG"
-	ParameterExceptionFieldHeader_name                       ParameterExceptionField = "HEADER_NAME"
+	ParameterExceptionFieldWebAcl                         ParameterExceptionField = "WEB_ACL"
+	ParameterExceptionFieldRuleGroup                      ParameterExceptionField = "RULE_GROUP"
+	ParameterExceptionFieldRegexPatternSet                ParameterExceptionField = "REGEX_PATTERN_SET"
+	ParameterExceptionFieldIpSet                          ParameterExceptionField = "IP_SET"
+	ParameterExceptionFieldManagedRuleSet                 ParameterExceptionField = "MANAGED_RULE_SET"
+	ParameterExceptionFieldRule                           ParameterExceptionField = "RULE"
+	ParameterExceptionFieldExcludedRule                   ParameterExceptionField = "EXCLUDED_RULE"
+	ParameterExceptionFieldStatement                      ParameterExceptionField = "STATEMENT"
+	ParameterExceptionFieldByteMatchStatement             ParameterExceptionField = "BYTE_MATCH_STATEMENT"
+	ParameterExceptionFieldSqliMatchStatement             ParameterExceptionField = "SQLI_MATCH_STATEMENT"
+	ParameterExceptionFieldXssMatchStatement              ParameterExceptionField = "XSS_MATCH_STATEMENT"
+	ParameterExceptionFieldSizeConstraintStatement        ParameterExceptionField = "SIZE_CONSTRAINT_STATEMENT"
+	ParameterExceptionFieldGeoMatchStatement              ParameterExceptionField = "GEO_MATCH_STATEMENT"
+	ParameterExceptionFieldRateBasedStatement             ParameterExceptionField = "RATE_BASED_STATEMENT"
+	ParameterExceptionFieldRuleGroupReferenceStatement    ParameterExceptionField = "RULE_GROUP_REFERENCE_STATEMENT"
+	ParameterExceptionFieldRegexPatternReferenceStatement ParameterExceptionField = "REGEX_PATTERN_REFERENCE_STATEMENT"
+	ParameterExceptionFieldIpSetReferenceStatement        ParameterExceptionField = "IP_SET_REFERENCE_STATEMENT"
+	ParameterExceptionFieldManagedRuleSetStatement        ParameterExceptionField = "MANAGED_RULE_SET_STATEMENT"
+	ParameterExceptionFieldAndStatement                   ParameterExceptionField = "AND_STATEMENT"
+	ParameterExceptionFieldOrStatement                    ParameterExceptionField = "OR_STATEMENT"
+	ParameterExceptionFieldNotStatement                   ParameterExceptionField = "NOT_STATEMENT"
+	ParameterExceptionFieldIpAddress                      ParameterExceptionField = "IP_ADDRESS"
+	ParameterExceptionFieldIpAddressVersion               ParameterExceptionField = "IP_ADDRESS_VERSION"
+	ParameterExceptionFieldFieldToMatch                   ParameterExceptionField = "FIELD_TO_MATCH"
+	ParameterExceptionFieldTextTransformation             ParameterExceptionField = "TEXT_TRANSFORMATION"
+	ParameterExceptionFieldSingleQueryArgument            ParameterExceptionField = "SINGLE_QUERY_ARGUMENT"
+	ParameterExceptionFieldSingleHeader                   ParameterExceptionField = "SINGLE_HEADER"
+	ParameterExceptionFieldDefaultAction                  ParameterExceptionField = "DEFAULT_ACTION"
+	ParameterExceptionFieldRuleAction                     ParameterExceptionField = "RULE_ACTION"
+	ParameterExceptionFieldEntityLimit                    ParameterExceptionField = "ENTITY_LIMIT"
+	ParameterExceptionFieldOverrideAction                 ParameterExceptionField = "OVERRIDE_ACTION"
+	ParameterExceptionFieldScopeValue                     ParameterExceptionField = "SCOPE_VALUE"
+	ParameterExceptionFieldResourceArn                    ParameterExceptionField = "RESOURCE_ARN"
+	ParameterExceptionFieldResourceType                   ParameterExceptionField = "RESOURCE_TYPE"
+	ParameterExceptionFieldTags                           ParameterExceptionField = "TAGS"
+	ParameterExceptionFieldTagKeys                        ParameterExceptionField = "TAG_KEYS"
+	ParameterExceptionFieldMetricName                     ParameterExceptionField = "METRIC_NAME"
+	ParameterExceptionFieldFirewallManagerStatement       ParameterExceptionField = "FIREWALL_MANAGER_STATEMENT"
+	ParameterExceptionFieldFallbackBehavior               ParameterExceptionField = "FALLBACK_BEHAVIOR"
+	ParameterExceptionFieldPosition                       ParameterExceptionField = "POSITION"
+	ParameterExceptionFieldForwardedIpConfig              ParameterExceptionField = "FORWARDED_IP_CONFIG"
+	ParameterExceptionFieldIpSetForwardedIpConfig         ParameterExceptionField = "IP_SET_FORWARDED_IP_CONFIG"
+	ParameterExceptionFieldHeaderName                     ParameterExceptionField = "HEADER_NAME"
 )
 
 // Values returns all known values for ParameterExceptionField. Note that this can
@@ -700,11 +700,11 @@ type PositionalConstraint string
 
 // Enum values for PositionalConstraint
 const (
-	PositionalConstraintExactly       PositionalConstraint = "EXACTLY"
-	PositionalConstraintStarts_with   PositionalConstraint = "STARTS_WITH"
-	PositionalConstraintEnds_with     PositionalConstraint = "ENDS_WITH"
-	PositionalConstraintContains      PositionalConstraint = "CONTAINS"
-	PositionalConstraintContains_word PositionalConstraint = "CONTAINS_WORD"
+	PositionalConstraintExactly      PositionalConstraint = "EXACTLY"
+	PositionalConstraintStartsWith   PositionalConstraint = "STARTS_WITH"
+	PositionalConstraintEndsWith     PositionalConstraint = "ENDS_WITH"
+	PositionalConstraintContains     PositionalConstraint = "CONTAINS"
+	PositionalConstraintContainsWord PositionalConstraint = "CONTAINS_WORD"
 )
 
 // Values returns all known values for PositionalConstraint. Note that this can be
@@ -724,8 +724,8 @@ type RateBasedStatementAggregateKeyType string
 
 // Enum values for RateBasedStatementAggregateKeyType
 const (
-	RateBasedStatementAggregateKeyTypeIp           RateBasedStatementAggregateKeyType = "IP"
-	RateBasedStatementAggregateKeyTypeForwarded_ip RateBasedStatementAggregateKeyType = "FORWARDED_IP"
+	RateBasedStatementAggregateKeyTypeIp          RateBasedStatementAggregateKeyType = "IP"
+	RateBasedStatementAggregateKeyTypeForwardedIp RateBasedStatementAggregateKeyType = "FORWARDED_IP"
 )
 
 // Values returns all known values for RateBasedStatementAggregateKeyType. Note
@@ -743,9 +743,9 @@ type ResourceType string
 
 // Enum values for ResourceType
 const (
-	ResourceTypeApplication_load_balancer ResourceType = "APPLICATION_LOAD_BALANCER"
-	ResourceTypeApi_gateway               ResourceType = "API_GATEWAY"
-	ResourceTypeAppsync                   ResourceType = "APPSYNC"
+	ResourceTypeApplicationLoadBalancer ResourceType = "APPLICATION_LOAD_BALANCER"
+	ResourceTypeApiGateway              ResourceType = "API_GATEWAY"
+	ResourceTypeAppsync                 ResourceType = "APPSYNC"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -781,12 +781,12 @@ type TextTransformationType string
 
 // Enum values for TextTransformationType
 const (
-	TextTransformationTypeNone                 TextTransformationType = "NONE"
-	TextTransformationTypeCompress_white_space TextTransformationType = "COMPRESS_WHITE_SPACE"
-	TextTransformationTypeHtml_entity_decode   TextTransformationType = "HTML_ENTITY_DECODE"
-	TextTransformationTypeLowercase            TextTransformationType = "LOWERCASE"
-	TextTransformationTypeCmd_line             TextTransformationType = "CMD_LINE"
-	TextTransformationTypeUrl_decode           TextTransformationType = "URL_DECODE"
+	TextTransformationTypeNone               TextTransformationType = "NONE"
+	TextTransformationTypeCompressWhiteSpace TextTransformationType = "COMPRESS_WHITE_SPACE"
+	TextTransformationTypeHtmlEntityDecode   TextTransformationType = "HTML_ENTITY_DECODE"
+	TextTransformationTypeLowercase          TextTransformationType = "LOWERCASE"
+	TextTransformationTypeCmdLine            TextTransformationType = "CMD_LINE"
+	TextTransformationTypeUrlDecode          TextTransformationType = "URL_DECODE"
 )
 
 // Values returns all known values for TextTransformationType. Note that this can

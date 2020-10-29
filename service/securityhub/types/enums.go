@@ -24,10 +24,10 @@ type ComplianceStatus string
 
 // Enum values for ComplianceStatus
 const (
-	ComplianceStatusPassed        ComplianceStatus = "PASSED"
-	ComplianceStatusWarning       ComplianceStatus = "WARNING"
-	ComplianceStatusFailed        ComplianceStatus = "FAILED"
-	ComplianceStatusNot_available ComplianceStatus = "NOT_AVAILABLE"
+	ComplianceStatusPassed       ComplianceStatus = "PASSED"
+	ComplianceStatusWarning      ComplianceStatus = "WARNING"
+	ComplianceStatusFailed       ComplianceStatus = "FAILED"
+	ComplianceStatusNotAvailable ComplianceStatus = "NOT_AVAILABLE"
 )
 
 // Values returns all known values for ComplianceStatus. Note that this can be
@@ -80,8 +80,8 @@ type IntegrationType string
 
 // Enum values for IntegrationType
 const (
-	IntegrationTypeSend_findings_to_security_hub      IntegrationType = "SEND_FINDINGS_TO_SECURITY_HUB"
-	IntegrationTypeReceive_findings_from_security_hub IntegrationType = "RECEIVE_FINDINGS_FROM_SECURITY_HUB"
+	IntegrationTypeSendFindingsToSecurityHub      IntegrationType = "SEND_FINDINGS_TO_SECURITY_HUB"
+	IntegrationTypeReceiveFindingsFromSecurityHub IntegrationType = "RECEIVE_FINDINGS_FROM_SECURITY_HUB"
 )
 
 // Values returns all known values for IntegrationType. Note that this can be
@@ -98,9 +98,9 @@ type MalwareState string
 
 // Enum values for MalwareState
 const (
-	MalwareStateObserved       MalwareState = "OBSERVED"
-	MalwareStateRemoval_failed MalwareState = "REMOVAL_FAILED"
-	MalwareStateRemoved        MalwareState = "REMOVED"
+	MalwareStateObserved      MalwareState = "OBSERVED"
+	MalwareStateRemovalFailed MalwareState = "REMOVAL_FAILED"
+	MalwareStateRemoved       MalwareState = "REMOVED"
 )
 
 // Values returns all known values for MalwareState. Note that this can be expanded
@@ -118,21 +118,21 @@ type MalwareType string
 
 // Enum values for MalwareType
 const (
-	MalwareTypeAdware               MalwareType = "ADWARE"
-	MalwareTypeBlended_threat       MalwareType = "BLENDED_THREAT"
-	MalwareTypeBotnet_agent         MalwareType = "BOTNET_AGENT"
-	MalwareTypeCoin_miner           MalwareType = "COIN_MINER"
-	MalwareTypeExploit_kit          MalwareType = "EXPLOIT_KIT"
-	MalwareTypeKeylogger            MalwareType = "KEYLOGGER"
-	MalwareTypeMacro                MalwareType = "MACRO"
-	MalwareTypePotentially_unwanted MalwareType = "POTENTIALLY_UNWANTED"
-	MalwareTypeSpyware              MalwareType = "SPYWARE"
-	MalwareTypeRansomware           MalwareType = "RANSOMWARE"
-	MalwareTypeRemote_access        MalwareType = "REMOTE_ACCESS"
-	MalwareTypeRootkit              MalwareType = "ROOTKIT"
-	MalwareTypeTrojan               MalwareType = "TROJAN"
-	MalwareTypeVirus                MalwareType = "VIRUS"
-	MalwareTypeWorm                 MalwareType = "WORM"
+	MalwareTypeAdware              MalwareType = "ADWARE"
+	MalwareTypeBlendedThreat       MalwareType = "BLENDED_THREAT"
+	MalwareTypeBotnetAgent         MalwareType = "BOTNET_AGENT"
+	MalwareTypeCoinMiner           MalwareType = "COIN_MINER"
+	MalwareTypeExploitKit          MalwareType = "EXPLOIT_KIT"
+	MalwareTypeKeylogger           MalwareType = "KEYLOGGER"
+	MalwareTypeMacro               MalwareType = "MACRO"
+	MalwareTypePotentiallyUnwanted MalwareType = "POTENTIALLY_UNWANTED"
+	MalwareTypeSpyware             MalwareType = "SPYWARE"
+	MalwareTypeRansomware          MalwareType = "RANSOMWARE"
+	MalwareTypeRemoteAccess        MalwareType = "REMOTE_ACCESS"
+	MalwareTypeRootkit             MalwareType = "ROOTKIT"
+	MalwareTypeTrojan              MalwareType = "TROJAN"
+	MalwareTypeVirus               MalwareType = "VIRUS"
+	MalwareTypeWorm                MalwareType = "WORM"
 )
 
 // Values returns all known values for MalwareType. Note that this can be expanded
@@ -162,8 +162,8 @@ type MapFilterComparison string
 
 // Enum values for MapFilterComparison
 const (
-	MapFilterComparisonEquals     MapFilterComparison = "EQUALS"
-	MapFilterComparisonNot_equals MapFilterComparison = "NOT_EQUALS"
+	MapFilterComparisonEquals    MapFilterComparison = "EQUALS"
+	MapFilterComparisonNotEquals MapFilterComparison = "NOT_EQUALS"
 )
 
 // Values returns all known values for MapFilterComparison. Note that this can be
@@ -198,9 +198,9 @@ type Partition string
 
 // Enum values for Partition
 const (
-	PartitionAws        Partition = "aws"
-	PartitionAws_cn     Partition = "aws-cn"
-	PartitionAws_us_gov Partition = "aws-us-gov"
+	PartitionAws      Partition = "aws"
+	PartitionAwsCn    Partition = "aws-cn"
+	PartitionAwsUsGov Partition = "aws-us-gov"
 )
 
 // Values returns all known values for Partition. Note that this can be expanded in
@@ -324,10 +324,10 @@ type StringFilterComparison string
 
 // Enum values for StringFilterComparison
 const (
-	StringFilterComparisonEquals            StringFilterComparison = "EQUALS"
-	StringFilterComparisonPrefix            StringFilterComparison = "PREFIX"
-	StringFilterComparisonNot_equals        StringFilterComparison = "NOT_EQUALS"
-	StringFilterComparisonPrefix_not_equals StringFilterComparison = "PREFIX_NOT_EQUALS"
+	StringFilterComparisonEquals          StringFilterComparison = "EQUALS"
+	StringFilterComparisonPrefix          StringFilterComparison = "PREFIX"
+	StringFilterComparisonNotEquals       StringFilterComparison = "NOT_EQUALS"
+	StringFilterComparisonPrefixNotEquals StringFilterComparison = "PREFIX_NOT_EQUALS"
 )
 
 // Values returns all known values for StringFilterComparison. Note that this can
@@ -346,12 +346,12 @@ type ThreatIntelIndicatorCategory string
 
 // Enum values for ThreatIntelIndicatorCategory
 const (
-	ThreatIntelIndicatorCategoryBackdoor            ThreatIntelIndicatorCategory = "BACKDOOR"
-	ThreatIntelIndicatorCategoryCard_stealer        ThreatIntelIndicatorCategory = "CARD_STEALER"
-	ThreatIntelIndicatorCategoryCommand_and_control ThreatIntelIndicatorCategory = "COMMAND_AND_CONTROL"
-	ThreatIntelIndicatorCategoryDrop_site           ThreatIntelIndicatorCategory = "DROP_SITE"
-	ThreatIntelIndicatorCategoryExploit_site        ThreatIntelIndicatorCategory = "EXPLOIT_SITE"
-	ThreatIntelIndicatorCategoryKeylogger           ThreatIntelIndicatorCategory = "KEYLOGGER"
+	ThreatIntelIndicatorCategoryBackdoor          ThreatIntelIndicatorCategory = "BACKDOOR"
+	ThreatIntelIndicatorCategoryCardStealer       ThreatIntelIndicatorCategory = "CARD_STEALER"
+	ThreatIntelIndicatorCategoryCommandAndControl ThreatIntelIndicatorCategory = "COMMAND_AND_CONTROL"
+	ThreatIntelIndicatorCategoryDropSite          ThreatIntelIndicatorCategory = "DROP_SITE"
+	ThreatIntelIndicatorCategoryExploitSite       ThreatIntelIndicatorCategory = "EXPLOIT_SITE"
+	ThreatIntelIndicatorCategoryKeylogger         ThreatIntelIndicatorCategory = "KEYLOGGER"
 )
 
 // Values returns all known values for ThreatIntelIndicatorCategory. Note that this
@@ -372,17 +372,17 @@ type ThreatIntelIndicatorType string
 
 // Enum values for ThreatIntelIndicatorType
 const (
-	ThreatIntelIndicatorTypeDomain        ThreatIntelIndicatorType = "DOMAIN"
-	ThreatIntelIndicatorTypeEmail_address ThreatIntelIndicatorType = "EMAIL_ADDRESS"
-	ThreatIntelIndicatorTypeHash_md5      ThreatIntelIndicatorType = "HASH_MD5"
-	ThreatIntelIndicatorTypeHash_sha1     ThreatIntelIndicatorType = "HASH_SHA1"
-	ThreatIntelIndicatorTypeHash_sha256   ThreatIntelIndicatorType = "HASH_SHA256"
-	ThreatIntelIndicatorTypeHash_sha512   ThreatIntelIndicatorType = "HASH_SHA512"
-	ThreatIntelIndicatorTypeIpv4_address  ThreatIntelIndicatorType = "IPV4_ADDRESS"
-	ThreatIntelIndicatorTypeIpv6_address  ThreatIntelIndicatorType = "IPV6_ADDRESS"
-	ThreatIntelIndicatorTypeMutex         ThreatIntelIndicatorType = "MUTEX"
-	ThreatIntelIndicatorTypeProcess       ThreatIntelIndicatorType = "PROCESS"
-	ThreatIntelIndicatorTypeUrl           ThreatIntelIndicatorType = "URL"
+	ThreatIntelIndicatorTypeDomain       ThreatIntelIndicatorType = "DOMAIN"
+	ThreatIntelIndicatorTypeEmailAddress ThreatIntelIndicatorType = "EMAIL_ADDRESS"
+	ThreatIntelIndicatorTypeHashMd5      ThreatIntelIndicatorType = "HASH_MD5"
+	ThreatIntelIndicatorTypeHashSha1     ThreatIntelIndicatorType = "HASH_SHA1"
+	ThreatIntelIndicatorTypeHashSha256   ThreatIntelIndicatorType = "HASH_SHA256"
+	ThreatIntelIndicatorTypeHashSha512   ThreatIntelIndicatorType = "HASH_SHA512"
+	ThreatIntelIndicatorTypeIpv4Address  ThreatIntelIndicatorType = "IPV4_ADDRESS"
+	ThreatIntelIndicatorTypeIpv6Address  ThreatIntelIndicatorType = "IPV6_ADDRESS"
+	ThreatIntelIndicatorTypeMutex        ThreatIntelIndicatorType = "MUTEX"
+	ThreatIntelIndicatorTypeProcess      ThreatIntelIndicatorType = "PROCESS"
+	ThreatIntelIndicatorTypeUrl          ThreatIntelIndicatorType = "URL"
 )
 
 // Values returns all known values for ThreatIntelIndicatorType. Note that this can
@@ -408,10 +408,10 @@ type VerificationState string
 
 // Enum values for VerificationState
 const (
-	VerificationStateUnknown         VerificationState = "UNKNOWN"
-	VerificationStateTrue_positive   VerificationState = "TRUE_POSITIVE"
-	VerificationStateFalse_positive  VerificationState = "FALSE_POSITIVE"
-	VerificationStateBenign_positive VerificationState = "BENIGN_POSITIVE"
+	VerificationStateUnknown        VerificationState = "UNKNOWN"
+	VerificationStateTruePositive   VerificationState = "TRUE_POSITIVE"
+	VerificationStateFalsePositive  VerificationState = "FALSE_POSITIVE"
+	VerificationStateBenignPositive VerificationState = "BENIGN_POSITIVE"
 )
 
 // Values returns all known values for VerificationState. Note that this can be
@@ -430,11 +430,11 @@ type WorkflowState string
 
 // Enum values for WorkflowState
 const (
-	WorkflowStateNew         WorkflowState = "NEW"
-	WorkflowStateAssigned    WorkflowState = "ASSIGNED"
-	WorkflowStateIn_progress WorkflowState = "IN_PROGRESS"
-	WorkflowStateDeferred    WorkflowState = "DEFERRED"
-	WorkflowStateResolved    WorkflowState = "RESOLVED"
+	WorkflowStateNew        WorkflowState = "NEW"
+	WorkflowStateAssigned   WorkflowState = "ASSIGNED"
+	WorkflowStateInProgress WorkflowState = "IN_PROGRESS"
+	WorkflowStateDeferred   WorkflowState = "DEFERRED"
+	WorkflowStateResolved   WorkflowState = "RESOLVED"
 )
 
 // Values returns all known values for WorkflowState. Note that this can be

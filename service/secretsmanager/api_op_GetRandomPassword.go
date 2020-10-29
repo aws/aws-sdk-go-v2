@@ -16,7 +16,7 @@ import (
 // that the system you are generating a password for can support. Minimum
 // permissions To run this command, you must have the following permissions:
 //
-//     *
+// *
 // secretsmanager:GetRandomPassword
 func (c *Client) GetRandomPassword(ctx context.Context, params *GetRandomPasswordInput, optFns ...func(*Options)) (*GetRandomPasswordOutput, error) {
 	if params == nil {

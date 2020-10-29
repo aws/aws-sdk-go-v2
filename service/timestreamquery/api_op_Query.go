@@ -44,12 +44,12 @@ type QueryInput struct {
 	// idempotent, meaning that multiple identical calls have the same effect as one
 	// single call. Your query request will fail in the following cases:
 	//
-	//     * If you
+	// * If you
 	// submit a request with the same client token outside the 5-minute idepotency
 	// window.
 	//
-	//     * If you submit a request with the same client token but a change
-	// in other parameters within the 5-minute idempotency window.
+	// * If you submit a request with the same client token but a change in
+	// other parameters within the 5-minute idempotency window.
 	//
 	// After 4 hours, any
 	// request with the same client token is treated as a new request.

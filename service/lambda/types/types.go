@@ -330,15 +330,15 @@ type FunctionEventInvokeConfig struct {
 	// A destination for events after they have been sent to a function for processing.
 	// Destinations
 	//
-	//     * Function - The Amazon Resource Name (ARN) of a Lambda
+	// * Function - The Amazon Resource Name (ARN) of a Lambda
 	// function.
 	//
-	//     * Queue - The ARN of an SQS queue.
+	// * Queue - The ARN of an SQS queue.
 	//
-	//     * Topic - The ARN of an
-	// SNS topic.
+	// * Topic - The ARN of an SNS
+	// topic.
 	//
-	//     * Event Bus - The ARN of an Amazon EventBridge event bus.
+	// * Event Bus - The ARN of an Amazon EventBridge event bus.
 	DestinationConfig *DestinationConfig
 
 	// The Amazon Resource Name (ARN) of the function.

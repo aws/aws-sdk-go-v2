@@ -45,21 +45,21 @@ type RestoreDBClusterToPointInTimeInput struct {
 
 	// The name of the new DB cluster to be created. Constraints:
 	//
-	//     * Must contain
-	// from 1 to 63 letters, numbers, or hyphens
+	// * Must contain from
+	// 1 to 63 letters, numbers, or hyphens
 	//
-	//     * First character must be a
-	// letter
+	// * First character must be a letter
 	//
-	//     * Can't end with a hyphen or contain two consecutive hyphens
+	// *
+	// Can't end with a hyphen or contain two consecutive hyphens
 	//
 	// This member is required.
 	DBClusterIdentifier *string
 
 	// The identifier of the source DB cluster from which to restore. Constraints:
 	//
-	//
-	// * Must match the identifier of an existing DBCluster.
+	// *
+	// Must match the identifier of an existing DBCluster.
 	//
 	// This member is required.
 	SourceDBClusterIdentifier *string
@@ -68,8 +68,8 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// to 0. Currently, Backtrack is only supported for Aurora MySQL DB clusters.
 	// Default: 0 Constraints:
 	//
-	//     * If specified, this value must be set to a number
-	// from 0 to 259,200 (72 hours).
+	// * If specified, this value must be set to a number from
+	// 0 to 259,200 (72 hours).
 	BacktrackWindow *int64
 
 	// A value that indicates whether to copy all tags from the restored DB cluster to
@@ -80,16 +80,16 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// this argument is omitted, the default DB cluster parameter group for the
 	// specified engine is used. Constraints:
 	//
-	//     * If supplied, must match the name
-	// of an existing DB cluster parameter group.
+	// * If supplied, must match the name of an
+	// existing DB cluster parameter group.
 	//
-	//     * Must be 1 to 255 letters,
-	// numbers, or hyphens.
+	// * Must be 1 to 255 letters, numbers, or
+	// hyphens.
 	//
-	//     * First character must be a letter.
+	// * First character must be a letter.
 	//
-	//     * Can't end
-	// with a hyphen or contain two consecutive hyphens.
+	// * Can't end with a hyphen or
+	// contain two consecutive hyphens.
 	DBClusterParameterGroupName *string
 
 	// The DB subnet group name to use for the new DB cluster. Constraints: If
@@ -139,15 +139,15 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// KmsKeyId parameter. If you don't specify a value for the KmsKeyId parameter,
 	// then the following occurs:
 	//
-	//     * If the DB cluster is encrypted, then the
-	// restored DB cluster is encrypted using the KMS key that was used to encrypt the
-	// source DB cluster.
+	// * If the DB cluster is encrypted, then the restored
+	// DB cluster is encrypted using the KMS key that was used to encrypt the source DB
+	// cluster.
 	//
-	//     * If the DB cluster isn't encrypted, then the restored
-	// DB cluster isn't encrypted.
+	// * If the DB cluster isn't encrypted, then the restored DB cluster
+	// isn't encrypted.
 	//
-	// If DBClusterIdentifier refers to a DB cluster that
-	// isn't encrypted, then the restore request is rejected.
+	// If DBClusterIdentifier refers to a DB cluster that isn't
+	// encrypted, then the restore request is rejected.
 	KmsKeyId *string
 
 	// The name of the option group for the new DB cluster.
@@ -160,17 +160,17 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// The date and time to restore the DB cluster to. Valid Values: Value must be a
 	// time in Universal Coordinated Time (UTC) format Constraints:
 	//
-	//     * Must be
-	// before the latest restorable time for the DB instance
+	// * Must be before
+	// the latest restorable time for the DB instance
 	//
-	//     * Must be specified
-	// if UseLatestRestorableTime parameter isn't provided
+	// * Must be specified if
+	// UseLatestRestorableTime parameter isn't provided
 	//
-	//     * Can't be specified if
-	// the UseLatestRestorableTime parameter is enabled
+	// * Can't be specified if the
+	// UseLatestRestorableTime parameter is enabled
 	//
-	//     * Can't be specified if
-	// the RestoreType parameter is copy-on-write
+	// * Can't be specified if the
+	// RestoreType parameter is copy-on-write
 	//
 	// Example: 2015-03-07T23:45:00Z
 	RestoreToTime *time.Time
@@ -178,14 +178,14 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// The type of restore to be performed. You can specify one of the following
 	// values:
 	//
-	//     * full-copy - The new DB cluster is restored as a full copy of the
+	// * full-copy - The new DB cluster is restored as a full copy of the
 	// source DB cluster.
 	//
-	//     * copy-on-write - The new DB cluster is restored as a
-	// clone of the source DB cluster.
+	// * copy-on-write - The new DB cluster is restored as a clone
+	// of the source DB cluster.
 	//
-	// Constraints: You can't specify copy-on-write if
-	// the engine version of the source DB cluster is earlier than 1.11. If you don't
+	// Constraints: You can't specify copy-on-write if the
+	// engine version of the source DB cluster is earlier than 1.11. If you don't
 	// specify a RestoreType value, then the new DB cluster is restored as a full copy
 	// of the source DB cluster.
 	RestoreType *string

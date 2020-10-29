@@ -13,16 +13,17 @@ import (
 // Adds additional customer communication to an AWS Support case. Use the caseId
 // parameter to identify the case to which to add communication. You can list a set
 // of email addresses to copy on the communication by using the ccEmailAddresses
-// parameter. The communicationBody value contains the text of the communication.
+// parameter. The communicationBody value contains the text of the
+// communication.
 //
+// * You must have a Business or Enterprise support plan to use the
+// AWS Support API.
 //
-// * You must have a Business or Enterprise support plan to use the AWS Support
-// API.
-//
-//     * If you call the AWS Support API from an account that does not have a
-// Business or Enterprise support plan, the SubscriptionRequiredException error
-// message appears. For information about changing your support plan, see AWS
-// Support (http://aws.amazon.com/premiumsupport/).
+// * If you call the AWS Support API from an account that does
+// not have a Business or Enterprise support plan, the
+// SubscriptionRequiredException error message appears. For information about
+// changing your support plan, see AWS Support
+// (http://aws.amazon.com/premiumsupport/).
 func (c *Client) AddCommunicationToCase(ctx context.Context, params *AddCommunicationToCaseInput, optFns ...func(*Options)) (*AddCommunicationToCaseOutput, error) {
 	if params == nil {
 		params = &AddCommunicationToCaseInput{}

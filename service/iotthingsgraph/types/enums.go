@@ -40,10 +40,10 @@ type EntityFilterName string
 
 // Enum values for EntityFilterName
 const (
-	EntityFilterNameName                 EntityFilterName = "NAME"
-	EntityFilterNameNamespace            EntityFilterName = "NAMESPACE"
-	EntityFilterNameSemantic_type_path   EntityFilterName = "SEMANTIC_TYPE_PATH"
-	EntityFilterNameReferenced_entity_id EntityFilterName = "REFERENCED_ENTITY_ID"
+	EntityFilterNameName               EntityFilterName = "NAME"
+	EntityFilterNameNamespace          EntityFilterName = "NAMESPACE"
+	EntityFilterNameSemanticTypePath   EntityFilterName = "SEMANTIC_TYPE_PATH"
+	EntityFilterNameReferencedEntityId EntityFilterName = "REFERENCED_ENTITY_ID"
 )
 
 // Values returns all known values for EntityFilterName. Note that this can be
@@ -62,16 +62,16 @@ type EntityType string
 
 // Enum values for EntityType
 const (
-	EntityTypeDevice       EntityType = "DEVICE"
-	EntityTypeService      EntityType = "SERVICE"
-	EntityTypeDevice_model EntityType = "DEVICE_MODEL"
-	EntityTypeCapability   EntityType = "CAPABILITY"
-	EntityTypeState        EntityType = "STATE"
-	EntityTypeAction       EntityType = "ACTION"
-	EntityTypeEvent        EntityType = "EVENT"
-	EntityTypeProperty     EntityType = "PROPERTY"
-	EntityTypeMapping      EntityType = "MAPPING"
-	EntityTypeEnum         EntityType = "ENUM"
+	EntityTypeDevice      EntityType = "DEVICE"
+	EntityTypeService     EntityType = "SERVICE"
+	EntityTypeDeviceModel EntityType = "DEVICE_MODEL"
+	EntityTypeCapability  EntityType = "CAPABILITY"
+	EntityTypeState       EntityType = "STATE"
+	EntityTypeAction      EntityType = "ACTION"
+	EntityTypeEvent       EntityType = "EVENT"
+	EntityTypeProperty    EntityType = "PROPERTY"
+	EntityTypeMapping     EntityType = "MAPPING"
+	EntityTypeEnum        EntityType = "ENUM"
 )
 
 // Values returns all known values for EntityType. Note that this can be expanded
@@ -96,23 +96,23 @@ type FlowExecutionEventType string
 
 // Enum values for FlowExecutionEventType
 const (
-	FlowExecutionEventTypeExecution_started              FlowExecutionEventType = "EXECUTION_STARTED"
-	FlowExecutionEventTypeExecution_failed               FlowExecutionEventType = "EXECUTION_FAILED"
-	FlowExecutionEventTypeExecution_aborted              FlowExecutionEventType = "EXECUTION_ABORTED"
-	FlowExecutionEventTypeExecution_succeeded            FlowExecutionEventType = "EXECUTION_SUCCEEDED"
-	FlowExecutionEventTypeStep_started                   FlowExecutionEventType = "STEP_STARTED"
-	FlowExecutionEventTypeStep_failed                    FlowExecutionEventType = "STEP_FAILED"
-	FlowExecutionEventTypeStep_succeeded                 FlowExecutionEventType = "STEP_SUCCEEDED"
-	FlowExecutionEventTypeActivity_scheduled             FlowExecutionEventType = "ACTIVITY_SCHEDULED"
-	FlowExecutionEventTypeActivity_started               FlowExecutionEventType = "ACTIVITY_STARTED"
-	FlowExecutionEventTypeActivity_failed                FlowExecutionEventType = "ACTIVITY_FAILED"
-	FlowExecutionEventTypeActivity_succeeded             FlowExecutionEventType = "ACTIVITY_SUCCEEDED"
-	FlowExecutionEventTypeStart_flow_execution_task      FlowExecutionEventType = "START_FLOW_EXECUTION_TASK"
-	FlowExecutionEventTypeSchedule_next_ready_steps_task FlowExecutionEventType = "SCHEDULE_NEXT_READY_STEPS_TASK"
-	FlowExecutionEventTypeThing_action_task              FlowExecutionEventType = "THING_ACTION_TASK"
-	FlowExecutionEventTypeThing_action_task_failed       FlowExecutionEventType = "THING_ACTION_TASK_FAILED"
-	FlowExecutionEventTypeThing_action_task_succeeded    FlowExecutionEventType = "THING_ACTION_TASK_SUCCEEDED"
-	FlowExecutionEventTypeAcknowledge_task_message       FlowExecutionEventType = "ACKNOWLEDGE_TASK_MESSAGE"
+	FlowExecutionEventTypeExecutionStarted           FlowExecutionEventType = "EXECUTION_STARTED"
+	FlowExecutionEventTypeExecutionFailed            FlowExecutionEventType = "EXECUTION_FAILED"
+	FlowExecutionEventTypeExecutionAborted           FlowExecutionEventType = "EXECUTION_ABORTED"
+	FlowExecutionEventTypeExecutionSucceeded         FlowExecutionEventType = "EXECUTION_SUCCEEDED"
+	FlowExecutionEventTypeStepStarted                FlowExecutionEventType = "STEP_STARTED"
+	FlowExecutionEventTypeStepFailed                 FlowExecutionEventType = "STEP_FAILED"
+	FlowExecutionEventTypeStepSucceeded              FlowExecutionEventType = "STEP_SUCCEEDED"
+	FlowExecutionEventTypeActivityScheduled          FlowExecutionEventType = "ACTIVITY_SCHEDULED"
+	FlowExecutionEventTypeActivityStarted            FlowExecutionEventType = "ACTIVITY_STARTED"
+	FlowExecutionEventTypeActivityFailed             FlowExecutionEventType = "ACTIVITY_FAILED"
+	FlowExecutionEventTypeActivitySucceeded          FlowExecutionEventType = "ACTIVITY_SUCCEEDED"
+	FlowExecutionEventTypeStartFlowExecutionTask     FlowExecutionEventType = "START_FLOW_EXECUTION_TASK"
+	FlowExecutionEventTypeScheduleNextReadyStepsTask FlowExecutionEventType = "SCHEDULE_NEXT_READY_STEPS_TASK"
+	FlowExecutionEventTypeThingActionTask            FlowExecutionEventType = "THING_ACTION_TASK"
+	FlowExecutionEventTypeThingActionTaskFailed      FlowExecutionEventType = "THING_ACTION_TASK_FAILED"
+	FlowExecutionEventTypeThingActionTaskSucceeded   FlowExecutionEventType = "THING_ACTION_TASK_SUCCEEDED"
+	FlowExecutionEventTypeAcknowledgeTaskMessage     FlowExecutionEventType = "ACKNOWLEDGE_TASK_MESSAGE"
 )
 
 // Values returns all known values for FlowExecutionEventType. Note that this can
@@ -166,7 +166,7 @@ type FlowTemplateFilterName string
 
 // Enum values for FlowTemplateFilterName
 const (
-	FlowTemplateFilterNameDevice_model_id FlowTemplateFilterName = "DEVICE_MODEL_ID"
+	FlowTemplateFilterNameDeviceModelId FlowTemplateFilterName = "DEVICE_MODEL_ID"
 )
 
 // Values returns all known values for FlowTemplateFilterName. Note that this can
@@ -182,9 +182,9 @@ type NamespaceDeletionStatus string
 
 // Enum values for NamespaceDeletionStatus
 const (
-	NamespaceDeletionStatusIn_progress NamespaceDeletionStatus = "IN_PROGRESS"
-	NamespaceDeletionStatusSucceeded   NamespaceDeletionStatus = "SUCCEEDED"
-	NamespaceDeletionStatusFailed      NamespaceDeletionStatus = "FAILED"
+	NamespaceDeletionStatusInProgress NamespaceDeletionStatus = "IN_PROGRESS"
+	NamespaceDeletionStatusSucceeded  NamespaceDeletionStatus = "SUCCEEDED"
+	NamespaceDeletionStatusFailed     NamespaceDeletionStatus = "FAILED"
 )
 
 // Values returns all known values for NamespaceDeletionStatus. Note that this can
@@ -202,7 +202,7 @@ type NamespaceDeletionStatusErrorCodes string
 
 // Enum values for NamespaceDeletionStatusErrorCodes
 const (
-	NamespaceDeletionStatusErrorCodesValidation_failed NamespaceDeletionStatusErrorCodes = "VALIDATION_FAILED"
+	NamespaceDeletionStatusErrorCodesValidationFailed NamespaceDeletionStatusErrorCodes = "VALIDATION_FAILED"
 )
 
 // Values returns all known values for NamespaceDeletionStatusErrorCodes. Note that
@@ -219,14 +219,14 @@ type SystemInstanceDeploymentStatus string
 
 // Enum values for SystemInstanceDeploymentStatus
 const (
-	SystemInstanceDeploymentStatusNot_deployed         SystemInstanceDeploymentStatus = "NOT_DEPLOYED"
-	SystemInstanceDeploymentStatusBootstrap            SystemInstanceDeploymentStatus = "BOOTSTRAP"
-	SystemInstanceDeploymentStatusDeploy_in_progress   SystemInstanceDeploymentStatus = "DEPLOY_IN_PROGRESS"
-	SystemInstanceDeploymentStatusDeployed_in_target   SystemInstanceDeploymentStatus = "DEPLOYED_IN_TARGET"
-	SystemInstanceDeploymentStatusUndeploy_in_progress SystemInstanceDeploymentStatus = "UNDEPLOY_IN_PROGRESS"
-	SystemInstanceDeploymentStatusFailed               SystemInstanceDeploymentStatus = "FAILED"
-	SystemInstanceDeploymentStatusPending_delete       SystemInstanceDeploymentStatus = "PENDING_DELETE"
-	SystemInstanceDeploymentStatusDeleted_in_target    SystemInstanceDeploymentStatus = "DELETED_IN_TARGET"
+	SystemInstanceDeploymentStatusNotDeployed        SystemInstanceDeploymentStatus = "NOT_DEPLOYED"
+	SystemInstanceDeploymentStatusBootstrap          SystemInstanceDeploymentStatus = "BOOTSTRAP"
+	SystemInstanceDeploymentStatusDeployInProgress   SystemInstanceDeploymentStatus = "DEPLOY_IN_PROGRESS"
+	SystemInstanceDeploymentStatusDeployedInTarget   SystemInstanceDeploymentStatus = "DEPLOYED_IN_TARGET"
+	SystemInstanceDeploymentStatusUndeployInProgress SystemInstanceDeploymentStatus = "UNDEPLOY_IN_PROGRESS"
+	SystemInstanceDeploymentStatusFailed             SystemInstanceDeploymentStatus = "FAILED"
+	SystemInstanceDeploymentStatusPendingDelete      SystemInstanceDeploymentStatus = "PENDING_DELETE"
+	SystemInstanceDeploymentStatusDeletedInTarget    SystemInstanceDeploymentStatus = "DELETED_IN_TARGET"
 )
 
 // Values returns all known values for SystemInstanceDeploymentStatus. Note that
@@ -250,9 +250,9 @@ type SystemInstanceFilterName string
 
 // Enum values for SystemInstanceFilterName
 const (
-	SystemInstanceFilterNameSystem_template_id    SystemInstanceFilterName = "SYSTEM_TEMPLATE_ID"
-	SystemInstanceFilterNameStatus                SystemInstanceFilterName = "STATUS"
-	SystemInstanceFilterNameGreengrass_group_name SystemInstanceFilterName = "GREENGRASS_GROUP_NAME"
+	SystemInstanceFilterNameSystemTemplateId    SystemInstanceFilterName = "SYSTEM_TEMPLATE_ID"
+	SystemInstanceFilterNameStatus              SystemInstanceFilterName = "STATUS"
+	SystemInstanceFilterNameGreengrassGroupName SystemInstanceFilterName = "GREENGRASS_GROUP_NAME"
 )
 
 // Values returns all known values for SystemInstanceFilterName. Note that this can
@@ -270,7 +270,7 @@ type SystemTemplateFilterName string
 
 // Enum values for SystemTemplateFilterName
 const (
-	SystemTemplateFilterNameFlow_template_id SystemTemplateFilterName = "FLOW_TEMPLATE_ID"
+	SystemTemplateFilterNameFlowTemplateId SystemTemplateFilterName = "FLOW_TEMPLATE_ID"
 )
 
 // Values returns all known values for SystemTemplateFilterName. Note that this can
@@ -286,9 +286,9 @@ type UploadStatus string
 
 // Enum values for UploadStatus
 const (
-	UploadStatusIn_progress UploadStatus = "IN_PROGRESS"
-	UploadStatusSucceeded   UploadStatus = "SUCCEEDED"
-	UploadStatusFailed      UploadStatus = "FAILED"
+	UploadStatusInProgress UploadStatus = "IN_PROGRESS"
+	UploadStatusSucceeded  UploadStatus = "SUCCEEDED"
+	UploadStatusFailed     UploadStatus = "FAILED"
 )
 
 // Values returns all known values for UploadStatus. Note that this can be expanded

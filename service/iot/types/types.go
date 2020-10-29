@@ -982,11 +982,11 @@ type Destination struct {
 // dbc123defghijk.iot.us-west-2.amazonaws.com), a customer managed domain, or a
 // default endpoint.
 //
-//     * Data
+// * Data
 //
-//     * Jobs
+// * Jobs
 //
-//     * CredentialProvider
+// * CredentialProvider
 //
 // The domain
 // configuration feature is in public preview and is subject to change.
@@ -2722,13 +2722,13 @@ type ThingIndexingConfiguration struct {
 
 	// Thing indexing mode. Valid values are:
 	//
-	//     * REGISTRY – Your thing index
-	// contains registry data only.
+	// * REGISTRY – Your thing index contains
+	// registry data only.
 	//
-	//     * REGISTRY_AND_SHADOW - Your thing index
-	// contains registry and shadow data.
+	// * REGISTRY_AND_SHADOW - Your thing index contains registry
+	// and shadow data.
 	//
-	//     * OFF - Thing indexing is disabled.
+	// * OFF - Thing indexing is disabled.
 	//
 	// This member is required.
 	ThingIndexingMode ThingIndexingMode
@@ -2742,11 +2742,11 @@ type ThingIndexingConfiguration struct {
 
 	// Thing connectivity indexing mode. Valid values are:
 	//
-	//     * STATUS – Your thing
-	// index contains connectivity status. To enable thing connectivity indexing,
+	// * STATUS – Your thing index
+	// contains connectivity status. To enable thing connectivity indexing,
 	// thingIndexMode must not be set to OFF.
 	//
-	//     * OFF - Thing connectivity status
+	// * OFF - Thing connectivity status
 	// indexing is disabled.
 	ThingConnectivityIndexingMode ThingConnectivityIndexingMode
 }

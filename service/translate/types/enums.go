@@ -22,13 +22,13 @@ type JobStatus string
 
 // Enum values for JobStatus
 const (
-	JobStatusSubmitted            JobStatus = "SUBMITTED"
-	JobStatusIn_progress          JobStatus = "IN_PROGRESS"
-	JobStatusCompleted            JobStatus = "COMPLETED"
-	JobStatusCompleted_with_error JobStatus = "COMPLETED_WITH_ERROR"
-	JobStatusFailed               JobStatus = "FAILED"
-	JobStatusStop_requested       JobStatus = "STOP_REQUESTED"
-	JobStatusStopped              JobStatus = "STOPPED"
+	JobStatusSubmitted          JobStatus = "SUBMITTED"
+	JobStatusInProgress         JobStatus = "IN_PROGRESS"
+	JobStatusCompleted          JobStatus = "COMPLETED"
+	JobStatusCompletedWithError JobStatus = "COMPLETED_WITH_ERROR"
+	JobStatusFailed             JobStatus = "FAILED"
+	JobStatusStopRequested      JobStatus = "STOP_REQUESTED"
+	JobStatusStopped            JobStatus = "STOPPED"
 )
 
 // Values returns all known values for JobStatus. Note that this can be expanded in

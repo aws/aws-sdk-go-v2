@@ -17,10 +17,10 @@ import (
 // low-latency reads and disaster recovery across regions. For more information,
 // see Replication Across Regions Using Global Datastore.
 //
-//     * The
+// * The
 // GlobalReplicationGroupIdSuffix is the name of the Global Datastore.
 //
-//     * The
+// * The
 // PrimaryReplicationGroupId represents the name of the primary cluster that
 // accepts writes and will replicate updates to the secondary cluster.
 func (c *Client) CreateGlobalReplicationGroup(ctx context.Context, params *CreateGlobalReplicationGroupInput, optFns ...func(*Options)) (*CreateGlobalReplicationGroupOutput, error) {
@@ -70,8 +70,8 @@ type CreateGlobalReplicationGroupOutput struct {
 	// only reads. The primary cluster automatically replicates updates to the
 	// secondary cluster.
 	//
-	//     * The GlobalReplicationGroupIdSuffix represents the name
-	// of the Global Datastore, which is what you use to associate a secondary cluster.
+	// * The GlobalReplicationGroupIdSuffix represents the name of
+	// the Global Datastore, which is what you use to associate a secondary cluster.
 	GlobalReplicationGroup *types.GlobalReplicationGroup
 
 	// Metadata pertaining to the operation's result.

@@ -32,14 +32,15 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBuckets.html). The
 // following operations are related to ListObjectsV2:
 //
-//     * GetObject
+// * GetObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
 //
-//     *
-// PutObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
+// *
+// PutObject
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
 //
-//
-// * CreateBucket
+// *
+// CreateBucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
 func (c *Client) ListObjectsV2(ctx context.Context, params *ListObjectsV2Input, optFns ...func(*Options)) (*ListObjectsV2Output, error) {
 	if params == nil {

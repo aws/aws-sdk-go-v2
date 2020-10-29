@@ -15,13 +15,13 @@ import (
 // specified Region for the AWS account. Depending on what information you want
 // returned, you can also specify the following:
 //
-//     * Filters that specify what
-// tags and resource types you want returned. The response includes all tags that
-// are associated with the requested resources.
+// * Filters that specify what tags
+// and resource types you want returned. The response includes all tags that are
+// associated with the requested resources.
 //
-//     * Information about compliance
-// with the account's effective tag policy. For more information on tag policies,
-// see Tag Policies
+// * Information about compliance with
+// the account's effective tag policy. For more information on tag policies, see
+// Tag Policies
 // (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
 // in the AWS Organizations User Guide.
 //
@@ -70,15 +70,15 @@ type GetResourcesInput struct {
 	// resource's Amazon Resource Name (ARN). Consult the AWS General Reference for the
 	// following:
 	//
-	//     * For a list of service name strings, see AWS Service Namespaces
+	// * For a list of service name strings, see AWS Service Namespaces
 	// (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces).
 	//
-	//
-	// * For resource type strings, see Example ARNs
+	// *
+	// For resource type strings, see Example ARNs
 	// (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arns-syntax).
 	//
-	//
-	// * For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
+	// *
+	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
 	// Service Namespaces
 	// (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
@@ -98,41 +98,40 @@ type GetResourcesInput struct {
 	// can include up to 20 values. Note the following when deciding how to use
 	// TagFilters:
 	//
-	//     * If you do specify a TagFilter, the response returns only
-	// those resources that are currently associated with the specified tag.
+	// * If you do specify a TagFilter, the response returns only those
+	// resources that are currently associated with the specified tag.
 	//
-	//     * If
-	// you don't specify a TagFilter, the response includes all resources that were
-	// ever associated with tags. Resources that currently don't have associated tags
-	// are shown with an empty tag set, like this: "Tags": [].
+	// * If you don't
+	// specify a TagFilter, the response includes all resources that were ever
+	// associated with tags. Resources that currently don't have associated tags are
+	// shown with an empty tag set, like this: "Tags": [].
 	//
-	//     * If you specify
-	// more than one filter in a single request, the response returns only those
-	// resources that satisfy all specified filters.
+	// * If you specify more than
+	// one filter in a single request, the response returns only those resources that
+	// satisfy all specified filters.
 	//
-	//     * If you specify a filter
-	// that contains more than one value for a key, the response returns resources that
-	// match any of the specified values for that key.
+	// * If you specify a filter that contains more
+	// than one value for a key, the response returns resources that match any of the
+	// specified values for that key.
 	//
-	//     * If you don't specify any
-	// values for a key, the response returns resources that are tagged with that key
-	// irrespective of the value. For example, for filters: filter1 = {key1, {value1}},
-	// filter2 = {key2, {value2,value3,value4}} , filter3 = {key3}:
+	// * If you don't specify any values for a key, the
+	// response returns resources that are tagged with that key irrespective of the
+	// value. For example, for filters: filter1 = {key1, {value1}}, filter2 = {key2,
+	// {value2,value3,value4}} , filter3 = {key3}:
 	//
-	//         *
-	// GetResources( {filter1} ) returns resources tagged with key1=value1
+	// * GetResources( {filter1} ) returns
+	// resources tagged with key1=value1
 	//
-	//         *
-	// GetResources( {filter2} ) returns resources tagged with key2=value2 or
-	// key2=value3 or key2=value4
+	// * GetResources( {filter2} ) returns resources
+	// tagged with key2=value2 or key2=value3 or key2=value4
 	//
-	//         * GetResources( {filter3} ) returns
-	// resources tagged with any tag containing key3 as its tag key, irrespective of
-	// its value
+	// * GetResources( {filter3}
+	// ) returns resources tagged with any tag containing key3 as its tag key,
+	// irrespective of its value
 	//
-	//         * GetResources( {filter1,filter2,filter3} ) returns resources
-	// tagged with ( key1=value1) and ( key2=value2 or key2=value3 or key2=value4) and
-	// (key3, irrespective of the value)
+	// * GetResources( {filter1,filter2,filter3} ) returns
+	// resources tagged with ( key1=value1) and ( key2=value2 or key2=value3 or
+	// key2=value4) and (key3, irrespective of the value)
 	TagFilters []*types.TagFilter
 
 	// AWS recommends using ResourcesPerPage instead of this parameter. A limit that

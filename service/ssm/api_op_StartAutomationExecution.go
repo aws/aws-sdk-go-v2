@@ -74,13 +74,13 @@ type StartAutomationExecutionInput struct {
 	// might want to tag an automation to identify an environment or operating system.
 	// In this case, you could specify the following key name/value pairs:
 	//
-	//     *
+	// *
 	// Key=environment,Value=test
 	//
-	//     * Key=OS,Value=Windows
+	// * Key=OS,Value=Windows
 	//
-	// To add tags to an
-	// existing patch baseline, use the AddTagsToResource action.
+	// To add tags to an existing
+	// patch baseline, use the AddTagsToResource action.
 	Tags []*types.Tag
 
 	// A location is a combination of AWS Regions and/or AWS accounts where you want to

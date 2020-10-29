@@ -40,27 +40,27 @@ type DescribeLaunchTemplateVersionsInput struct {
 
 	// One or more filters.
 	//
-	//     * create-time - The time the launch template version
-	// was created.
+	// * create-time - The time the launch template version was
+	// created.
 	//
-	//     * ebs-optimized - A boolean that indicates whether the
-	// instance is optimized for Amazon EBS I/O.
+	// * ebs-optimized - A boolean that indicates whether the instance is
+	// optimized for Amazon EBS I/O.
 	//
-	//     * iam-instance-profile - The ARN
-	// of the IAM instance profile.
+	// * iam-instance-profile - The ARN of the IAM
+	// instance profile.
 	//
-	//     * image-id - The ID of the AMI.
+	// * image-id - The ID of the AMI.
 	//
-	//     *
-	// instance-type - The instance type.
+	// * instance-type - The
+	// instance type.
 	//
-	//     * is-default-version - A boolean that
-	// indicates whether the launch template version is the default version.
+	// * is-default-version - A boolean that indicates whether the
+	// launch template version is the default version.
 	//
-	//     *
-	// kernel-id - The kernel ID.
+	// * kernel-id - The kernel ID.
 	//
-	//     * ram-disk-id - The RAM disk ID.
+	// *
+	// ram-disk-id - The RAM disk ID.
 	Filters []*types.Filter
 
 	// The ID of the launch template. To describe one or more versions of a specified

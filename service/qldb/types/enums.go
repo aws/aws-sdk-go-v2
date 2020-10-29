@@ -6,8 +6,8 @@ type ErrorCause string
 
 // Enum values for ErrorCause
 const (
-	ErrorCauseKinesis_stream_not_found ErrorCause = "KINESIS_STREAM_NOT_FOUND"
-	ErrorCauseIam_permission_revoked   ErrorCause = "IAM_PERMISSION_REVOKED"
+	ErrorCauseKinesisStreamNotFound ErrorCause = "KINESIS_STREAM_NOT_FOUND"
+	ErrorCauseIamPermissionRevoked  ErrorCause = "IAM_PERMISSION_REVOKED"
 )
 
 // Values returns all known values for ErrorCause. Note that this can be expanded
@@ -24,9 +24,9 @@ type ExportStatus string
 
 // Enum values for ExportStatus
 const (
-	ExportStatusIn_progress ExportStatus = "IN_PROGRESS"
-	ExportStatusCompleted   ExportStatus = "COMPLETED"
-	ExportStatusCancelled   ExportStatus = "CANCELLED"
+	ExportStatusInProgress ExportStatus = "IN_PROGRESS"
+	ExportStatusCompleted  ExportStatus = "COMPLETED"
+	ExportStatusCancelled  ExportStatus = "CANCELLED"
 )
 
 // Values returns all known values for ExportStatus. Note that this can be expanded
@@ -66,7 +66,7 @@ type PermissionsMode string
 
 // Enum values for PermissionsMode
 const (
-	PermissionsModeAllow_all PermissionsMode = "ALLOW_ALL"
+	PermissionsModeAllowAll PermissionsMode = "ALLOW_ALL"
 )
 
 // Values returns all known values for PermissionsMode. Note that this can be
@@ -82,9 +82,9 @@ type S3ObjectEncryptionType string
 
 // Enum values for S3ObjectEncryptionType
 const (
-	S3ObjectEncryptionTypeSse_kms       S3ObjectEncryptionType = "SSE_KMS"
-	S3ObjectEncryptionTypeSse_s3        S3ObjectEncryptionType = "SSE_S3"
-	S3ObjectEncryptionTypeNo_encryption S3ObjectEncryptionType = "NO_ENCRYPTION"
+	S3ObjectEncryptionTypeSseKms       S3ObjectEncryptionType = "SSE_KMS"
+	S3ObjectEncryptionTypeSseS3        S3ObjectEncryptionType = "SSE_S3"
+	S3ObjectEncryptionTypeNoEncryption S3ObjectEncryptionType = "NO_ENCRYPTION"
 )
 
 // Values returns all known values for S3ObjectEncryptionType. Note that this can

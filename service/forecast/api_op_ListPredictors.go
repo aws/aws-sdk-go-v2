@@ -39,19 +39,19 @@ type ListPredictorsInput struct {
 	// respectively. The match statement consists of a key and a value. Filter
 	// properties
 	//
-	//     * Condition - The condition to apply. Valid values are IS and
+	// * Condition - The condition to apply. Valid values are IS and
 	// IS_NOT. To include the predictors that match the statement, specify IS. To
 	// exclude matching predictors, specify IS_NOT.
 	//
-	//     * Key - The name of the
-	// parameter to filter on. Valid values are DatasetGroupArn and Status.
+	// * Key - The name of the parameter
+	// to filter on. Valid values are DatasetGroupArn and Status.
 	//
-	//     *
-	// Value - The value to match.
+	// * Value - The value
+	// to match.
 	//
-	// For example, to list all predictors whose status is
-	// ACTIVE, you would specify: "Filters": [ { "Condition": "IS", "Key": "Status",
-	// "Value": "ACTIVE" } ]
+	// For example, to list all predictors whose status is ACTIVE, you would
+	// specify: "Filters": [ { "Condition": "IS", "Key": "Status", "Value": "ACTIVE" }
+	// ]
 	Filters []*types.Filter
 
 	// The number of items to return in the response.

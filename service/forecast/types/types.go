@@ -112,13 +112,13 @@ type DatasetImportJobSummary struct {
 	// The last time that the dataset was modified. The time depends on the status of
 	// the job, as follows:
 	//
-	//     * CREATE_PENDING - The same time as CreationTime.
+	// * CREATE_PENDING - The same time as CreationTime.
 	//
+	// *
+	// CREATE_IN_PROGRESS - The current timestamp.
 	//
-	// * CREATE_IN_PROGRESS - The current timestamp.
-	//
-	//     * ACTIVE or CREATE_FAILED -
-	// When the job finished or failed.
+	// * ACTIVE or CREATE_FAILED - When
+	// the job finished or failed.
 	LastModificationTime *time.Time
 
 	// If an error occurred, an informational message about the error.
@@ -128,12 +128,12 @@ type DatasetImportJobSummary struct {
 	// the dataset. For example, when the import job status is CREATE_IN_PROGRESS, the
 	// status of the dataset is UPDATE_IN_PROGRESS. States include:
 	//
-	//     * ACTIVE
+	// * ACTIVE
 	//
+	// *
+	// CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED
 	//
-	// * CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED
-	//
-	//     * DELETE_PENDING,
+	// * DELETE_PENDING,
 	// DELETE_IN_PROGRESS, DELETE_FAILED
 	Status *string
 }
@@ -324,28 +324,27 @@ type FeaturizationMethod struct {
 	// parameters and their valid values for the "filling" featurization method for a
 	// Target Time Series dataset. Bold signifies the default value.
 	//
-	//     *
-	// aggregation: sum, avg, first, min, max
+	// * aggregation:
+	// sum, avg, first, min, max
 	//
-	//     * frontfill: none
+	// * frontfill: none
 	//
-	//     * middlefill:
-	// zero, nan (not a number), value, median, mean, min, max
+	// * middlefill: zero, nan (not a
+	// number), value, median, mean, min, max
 	//
-	//     * backfill: zero,
-	// nan, value, median, mean, min, max
+	// * backfill: zero, nan, value, median,
+	// mean, min, max
 	//
-	// The following list shows the parameters and
-	// their valid values for a Related Time Series featurization method (there are no
-	// defaults):
+	// The following list shows the parameters and their valid values
+	// for a Related Time Series featurization method (there are no defaults):
 	//
-	//     * middlefill: zero, value, median, mean, min, max
+	// *
+	// middlefill: zero, value, median, mean, min, max
 	//
-	//     *
-	// backfill: zero, value, median, mean, min, max
-	//
-	//     * futurefill: zero, value,
+	// * backfill: zero, value,
 	// median, mean, min, max
+	//
+	// * futurefill: zero, value, median, mean, min, max
 	FeaturizationMethodParameters map[string]*string
 }
 
@@ -399,12 +398,12 @@ type ForecastExportJobSummary struct {
 
 	// The status of the forecast export job. States include:
 	//
-	//     * ACTIVE
+	// * ACTIVE
 	//
-	//     *
+	// *
 	// CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED
 	//
-	//     * DELETE_PENDING,
+	// * DELETE_PENDING,
 	// DELETE_IN_PROGRESS, DELETE_FAILED
 	//
 	// The Status of the forecast export job must be
@@ -444,12 +443,12 @@ type ForecastSummary struct {
 
 	// The status of the forecast. States include:
 	//
-	//     * ACTIVE
+	// * ACTIVE
 	//
-	//     * CREATE_PENDING,
+	// * CREATE_PENDING,
 	// CREATE_IN_PROGRESS, CREATE_FAILED
 	//
-	//     * DELETE_PENDING, DELETE_IN_PROGRESS,
+	// * DELETE_PENDING, DELETE_IN_PROGRESS,
 	// DELETE_FAILED
 	//
 	// The Status of the forecast must be ACTIVE before you can query or
@@ -602,19 +601,19 @@ type PredictorSummary struct {
 
 	// The status of the predictor. States include:
 	//
-	//     * ACTIVE
+	// * ACTIVE
 	//
-	//     *
-	// CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED
+	// * CREATE_PENDING,
+	// CREATE_IN_PROGRESS, CREATE_FAILED
 	//
-	//     * DELETE_PENDING,
-	// DELETE_IN_PROGRESS, DELETE_FAILED
+	// * DELETE_PENDING, DELETE_IN_PROGRESS,
+	// DELETE_FAILED
 	//
-	//     * UPDATE_PENDING, UPDATE_IN_PROGRESS,
-	// UPDATE_FAILED
+	// * UPDATE_PENDING, UPDATE_IN_PROGRESS, UPDATE_FAILED
 	//
-	// The Status of the predictor must be ACTIVE before you can use the
-	// predictor to create a forecast.
+	// The Status
+	// of the predictor must be ACTIVE before you can use the predictor to create a
+	// forecast.
 	Status *string
 }
 
@@ -702,34 +701,34 @@ type Statistics struct {
 // are not included in the Jollyday library, but both are supported by Amazon
 // Forecast. Their holidays are: "IN" - INDIA
 //
-//     * JANUARY 26 - REPUBLIC DAY
+// * JANUARY 26 - REPUBLIC DAY
 //
+// *
+// AUGUST 15 - INDEPENDENCE DAY
 //
-// * AUGUST 15 - INDEPENDENCE DAY
+// * OCTOBER 2 GANDHI'S BIRTHDAY
 //
-//     * OCTOBER 2 GANDHI'S BIRTHDAY
+// "KR" - KOREA
 //
-// "KR" -
-// KOREA
+// *
+// JANUARY 1 - NEW YEAR
 //
-//     * JANUARY 1 - NEW YEAR
+// * MARCH 1 - INDEPENDENCE MOVEMENT DAY
 //
-//     * MARCH 1 - INDEPENDENCE MOVEMENT DAY
+// * MAY 5 -
+// CHILDREN'S DAY
 //
+// * JUNE 6 - MEMORIAL DAY
 //
-// * MAY 5 - CHILDREN'S DAY
+// * AUGUST 15 - LIBERATION DAY
 //
-//     * JUNE 6 - MEMORIAL DAY
+// * OCTOBER
+// 3 - NATIONAL FOUNDATION DAY
 //
-//     * AUGUST 15 -
-// LIBERATION DAY
+// * OCTOBER 9 - HANGEUL DAY
 //
-//     * OCTOBER 3 - NATIONAL FOUNDATION DAY
-//
-//     * OCTOBER 9 -
-// HANGEUL DAY
-//
-//     * DECEMBER 25 - CHRISTMAS DAY
+// * DECEMBER 25 -
+// CHRISTMAS DAY
 type SupplementaryFeature struct {
 
 	// The name of the feature. This must be "holiday".
@@ -739,78 +738,77 @@ type SupplementaryFeature struct {
 
 	// One of the following 2 letter country codes:
 	//
-	//     * "AR" - ARGENTINA
+	// * "AR" - ARGENTINA
 	//
-	//     * "AT"
-	// - AUSTRIA
+	// * "AT" -
+	// AUSTRIA
 	//
-	//     * "AU" - AUSTRALIA
+	// * "AU" - AUSTRALIA
 	//
-	//     * "BE" - BELGIUM
+	// * "BE" - BELGIUM
 	//
-	//     * "BR" - BRAZIL
+	// * "BR" - BRAZIL
 	//
+	// * "CA" -
+	// CANADA
 	//
-	// * "CA" - CANADA
+	// * "CN" - CHINA
 	//
-	//     * "CN" - CHINA
+	// * "CZ" - CZECH REPUBLIC
 	//
-	//     * "CZ" - CZECH REPUBLIC
+	// * "DK" - DENMARK
 	//
-	//     * "DK" -
-	// DENMARK
+	// * "EC" -
+	// ECUADOR
 	//
-	//     * "EC" - ECUADOR
+	// * "FI" - FINLAND
 	//
-	//     * "FI" - FINLAND
+	// * "FR" - FRANCE
 	//
-	//     * "FR" - FRANCE
+	// * "DE" - GERMANY
 	//
-	//     *
-	// "DE" - GERMANY
+	// * "HU" -
+	// HUNGARY
 	//
-	//     * "HU" - HUNGARY
+	// * "IE" - IRELAND
 	//
-	//     * "IE" - IRELAND
-	//
-	//     * "IN" - INDIA
-	//
+	// * "IN" - INDIA
 	//
 	// * "IT" - ITALY
 	//
-	//     * "JP" - JAPAN
+	// * "JP" - JAPAN
 	//
-	//     * "KR" - KOREA
+	// *
+	// "KR" - KOREA
 	//
-	//     * "LU" -
-	// LUXEMBOURG
+	// * "LU" - LUXEMBOURG
 	//
-	//     * "MX" - MEXICO
+	// * "MX" - MEXICO
 	//
-	//     * "NL" - NETHERLANDS
+	// * "NL" - NETHERLANDS
 	//
-	//     * "NO" - NORWAY
-	//
+	// * "NO"
+	// - NORWAY
 	//
 	// * "PL" - POLAND
 	//
-	//     * "PT" - PORTUGAL
+	// * "PT" - PORTUGAL
 	//
-	//     * "RU" - RUSSIA
+	// * "RU" - RUSSIA
 	//
-	//     * "ZA" - SOUTH
+	// * "ZA" - SOUTH
 	// AFRICA
 	//
-	//     * "ES" - SPAIN
+	// * "ES" - SPAIN
 	//
-	//     * "SE" - SWEDEN
+	// * "SE" - SWEDEN
 	//
-	//     * "CH" - SWITZERLAND
+	// * "CH" - SWITZERLAND
 	//
-	//     *
-	// "US" - UNITED STATES
+	// * "US" - UNITED
+	// STATES
 	//
-	//     * "UK" - UNITED KINGDOM
+	// * "UK" - UNITED KINGDOM
 	//
 	// This member is required.
 	Value *string
@@ -820,33 +818,32 @@ type SupplementaryFeature struct {
 // organize them. Each tag consists of a key and an optional value, both of which
 // you define. The following basic restrictions apply to tags:
 //
-//     * Maximum
-// number of tags per resource - 50.
+// * Maximum number of
+// tags per resource - 50.
 //
-//     * For each resource, each tag key must be
-// unique, and each tag key can have only one value.
+// * For each resource, each tag key must be unique, and
+// each tag key can have only one value.
 //
-//     * Maximum key length -
-// 128 Unicode characters in UTF-8.
-//
-//     * Maximum value length - 256 Unicode
+// * Maximum key length - 128 Unicode
 // characters in UTF-8.
 //
-//     * If your tagging schema is used across multiple
-// services and resources, remember that other services may have restrictions on
-// allowed characters. Generally allowed characters are: letters, numbers, and
-// spaces representable in UTF-8, and the following characters: + - = . _ : / @.
+// * Maximum value length - 256 Unicode characters in
+// UTF-8.
 //
+// * If your tagging schema is used across multiple services and resources,
+// remember that other services may have restrictions on allowed characters.
+// Generally allowed characters are: letters, numbers, and spaces representable in
+// UTF-8, and the following characters: + - = . _ : / @.
 //
-// * Tag keys and values are case sensitive.
+// * Tag keys and values are
+// case sensitive.
 //
-//     * Do not use aws:, AWS:, or any
-// upper or lowercase combination of such as a prefix for keys as it is reserved
-// for AWS use. You cannot edit or delete tag keys with this prefix. Values can
-// have this prefix. If a tag value has aws as its prefix but the key does not,
-// then Forecast considers it to be a user tag and will count against the limit of
-// 50 tags. Tags with only the key prefix of aws do not count against your tags per
-// resource limit.
+// * Do not use aws:, AWS:, or any upper or lowercase combination
+// of such as a prefix for keys as it is reserved for AWS use. You cannot edit or
+// delete tag keys with this prefix. Values can have this prefix. If a tag value
+// has aws as its prefix but the key does not, then Forecast considers it to be a
+// user tag and will count against the limit of 50 tags. Tags with only the key
+// prefix of aws do not count against your tags per resource limit.
 type Tag struct {
 
 	// One part of a key-value pair that makes up a tag. A key is a general label that
@@ -871,12 +868,12 @@ type TestWindowSummary struct {
 
 	// The status of the test. Possible status values are:
 	//
-	//     * ACTIVE
+	// * ACTIVE
 	//
-	//     *
+	// *
 	// CREATE_IN_PROGRESS
 	//
-	//     * CREATE_FAILED
+	// * CREATE_FAILED
 	Status *string
 
 	// The time at which the test ended.
@@ -908,10 +905,10 @@ type WindowSummary struct {
 
 	// The type of evaluation.
 	//
-	//     * SUMMARY - The average metrics across all
-	// windows.
+	// * SUMMARY - The average metrics across all windows.
 	//
-	//     * COMPUTED - The metrics for the specified window.
+	// *
+	// COMPUTED - The metrics for the specified window.
 	EvaluationType EvaluationType
 
 	// The number of data points within the window.

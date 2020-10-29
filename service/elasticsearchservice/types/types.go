@@ -34,16 +34,16 @@ type AdditionalLimit struct {
 	//
 	// Attributes and their details:
 	//
-	//     *
+	// *
 	// MaximumNumberOfDataNodesSupported
-	//      This attribute will be present in Master
-	// node only to specify how much data nodes upto which given
-	// ESPartitionInstanceType can support as master node.
-	//     *
-	// MaximumNumberOfDataNodesWithoutMasterNode
-	//      This attribute will be present in
-	// Data node only to specify how much data nodes of given ESPartitionInstanceType
-	// upto which you don't need any master nodes to govern them.
+	//  This attribute will be present in Master node
+	// only to specify how much data nodes upto which given ESPartitionInstanceType can
+	// support as master node.
+	// * MaximumNumberOfDataNodesWithoutMasterNode
+	//  This
+	// attribute will be present in Data node only to specify how much data nodes of
+	// given ESPartitionInstanceType upto which you don't need any master nodes to
+	// govern them.
 	LimitName *string
 
 	// Value for given AdditionalLimit$LimitName .
@@ -53,15 +53,15 @@ type AdditionalLimit struct {
 // Status of the advanced options for the specified Elasticsearch domain.
 // Currently, the following advanced options are available:
 //
-//     * Option to allow
+// * Option to allow
 // references to indices in an HTTP request body. Must be false when configuring
 // access to individual sub-resources. By default, the value is true. See
 // Configuration Advanced Options
 // (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options)
 // for more information.
 //
-//     * Option to specify the percentage of heap space that
-// is allocated to field data. By default, this setting is unbounded.
+// * Option to specify the percentage of heap space that is
+// allocated to field data. By default, this setting is unbounded.
 //
 // For more
 // information, see Configuring Advanced Options
@@ -189,12 +189,12 @@ type DomainEndpointOptions struct {
 	//
 	// It can be one of the following values:
 	//
-	//     *
+	// *
 	// Policy-Min-TLS-1-0-2019-07: TLS security policy which supports TLSv1.0 and
 	// higher.
 	//
-	//     * Policy-Min-TLS-1-2-2019-07: TLS security policy which supports
-	// only TLSv1.2
+	// * Policy-Min-TLS-1-2-2019-07: TLS security policy which supports only
+	// TLSv1.2
 	TLSSecurityPolicy TLSSecurityPolicy
 }
 
@@ -591,23 +591,23 @@ type InboundCrossClusterSearchConnectionStatus struct {
 
 	// The state code for inbound connection. This can be one of the following:
 	//
-	//     *
+	// *
 	// PENDING_ACCEPTANCE: Inbound connection is not yet accepted by destination domain
 	// owner.
 	//
-	//     * APPROVED: Inbound connection is pending acceptance by destination
+	// * APPROVED: Inbound connection is pending acceptance by destination
 	// domain owner.
 	//
-	//     * REJECTING: Inbound connection rejection is in process.
+	// * REJECTING: Inbound connection rejection is in process.
 	//
+	// *
+	// REJECTED: Inbound connection is rejected.
 	//
-	// * REJECTED: Inbound connection is rejected.
-	//
-	//     * DELETING: Inbound connection
+	// * DELETING: Inbound connection
 	// deletion is in progress.
 	//
-	//     * DELETED: Inbound connection is deleted and
-	// cannot be used further.
+	// * DELETED: Inbound connection is deleted and cannot be
+	// used further.
 	StatusCode InboundCrossClusterSearchConnectionStatusCode
 }
 
@@ -655,11 +655,11 @@ type Limits struct {
 // Attributes and their
 // details:
 //
-//     * CloudWatchLogsLogGroupArn: ARN of the Cloudwatch log group to
-// which log needs to be published.
+// * CloudWatchLogsLogGroupArn: ARN of the Cloudwatch log group to which
+// log needs to be published.
 //
-//     * Enabled: Whether the log publishing for
-// given log type is enabled or not
+// * Enabled: Whether the log publishing for given log
+// type is enabled or not
 type LogPublishingOption struct {
 
 	// ARN of the Cloudwatch log group to which log needs to be published.
@@ -772,29 +772,29 @@ type OutboundCrossClusterSearchConnectionStatus struct {
 
 	// The state code for outbound connection. This can be one of the following:
 	//
-	//     *
+	// *
 	// VALIDATING: The outbound connection request is being validated.
 	//
-	//     *
+	// *
 	// VALIDATION_FAILED: Validation failed for the connection request.
 	//
-	//     *
+	// *
 	// PENDING_ACCEPTANCE: Outbound connection request is validated and is not yet
 	// accepted by destination domain owner.
 	//
-	//     * PROVISIONING: Outbound connection
+	// * PROVISIONING: Outbound connection
 	// request is in process.
 	//
-	//     * ACTIVE: Outbound connection is active and ready to
+	// * ACTIVE: Outbound connection is active and ready to
 	// use.
 	//
-	//     * REJECTED: Outbound connection request is rejected by destination
-	// domain owner.
+	// * REJECTED: Outbound connection request is rejected by destination domain
+	// owner.
 	//
-	//     * DELETING: Outbound connection deletion is in progress.
+	// * DELETING: Outbound connection deletion is in progress.
 	//
-	//
-	// * DELETED: Outbound connection is deleted and cannot be used further.
+	// * DELETED:
+	// Outbound connection is deleted and cannot be used further.
 	StatusCode OutboundCrossClusterSearchConnectionStatusCode
 }
 
@@ -987,15 +987,14 @@ type StorageType struct {
 	// "instance" storageType we wont have any storageSubType, in case of "ebs"
 	// storageType we will have following valid storageSubTypes
 	//
-	//     * standard
+	// * standard
 	//
-	//     *
-	// gp2
+	// * gp2
 	//
-	//     * io1
+	// *
+	// io1
 	//
-	// Refer VolumeType for more information regarding above EBS
-	// storage options.
+	// Refer VolumeType for more information regarding above EBS storage options.
 	StorageSubTypeName *string
 
 	// List of limits that are applicable for given storage type.
@@ -1003,12 +1002,12 @@ type StorageType struct {
 
 	// Type of the storage. List of available storage options:
 	//
-	//     * instance
-	//
-	// Inbuilt storage available for the given Instance
-	//     * ebs
-	//      Elastic block
-	// storage that would be attached to the given Instance
+	// * instance
+	//  Inbuilt
+	// storage available for the given Instance
+	// * ebs
+	//  Elastic block storage that would
+	// be attached to the given Instance
 	StorageTypeName *string
 }
 
@@ -1018,21 +1017,21 @@ type StorageTypeLimit struct {
 	// Name of storage limits that are applicable for given storage type. If
 	// StorageType is ebs, following storage options are applicable
 	//
-	//     *
+	// *
 	// MinimumVolumeSize
-	//      Minimum amount of volume size that is applicable for
-	// given storage type.It can be empty if it is not applicable.
-	//     *
-	// MaximumVolumeSize
-	//      Maximum amount of volume size that is applicable for
-	// given storage type.It can be empty if it is not applicable.
-	//     * MaximumIops
+	//  Minimum amount of volume size that is applicable for given
+	// storage type.It can be empty if it is not applicable.
+	// * MaximumVolumeSize
 	//
-	// Maximum amount of Iops that is applicable for given storage type.It can be empty
-	// if it is not applicable.
-	//     * MinimumIops
-	//      Minimum amount of Iops that is
+	// Maximum amount of volume size that is applicable for given storage type.It can
+	// be empty if it is not applicable.
+	// * MaximumIops
+	//  Maximum amount of Iops that is
 	// applicable for given storage type.It can be empty if it is not applicable.
+	// *
+	// MinimumIops
+	//  Minimum amount of Iops that is applicable for given storage type.It
+	// can be empty if it is not applicable.
 	LimitName *string
 
 	// Values for the StorageTypeLimit$LimitName .
@@ -1074,14 +1073,13 @@ type UpgradeHistory struct {
 	// The overall status of the update. The status can take one of the following
 	// values:
 	//
-	//     * In Progress
+	// * In Progress
 	//
-	//     * Succeeded
+	// * Succeeded
 	//
-	//     * Succeeded with Issues
+	// * Succeeded with Issues
 	//
-	//     *
-	// Failed
+	// * Failed
 	UpgradeStatus UpgradeStatus
 }
 
@@ -1098,24 +1096,24 @@ type UpgradeStepItem struct {
 	// Represents one of 3 steps that an Upgrade or Upgrade Eligibility Check does
 	// through:
 	//
-	//     * PreUpgradeCheck
+	// * PreUpgradeCheck
 	//
-	//     * Snapshot
+	// * Snapshot
 	//
-	//     * Upgrade
+	// * Upgrade
 	UpgradeStep UpgradeStep
 
 	// The status of a particular step during an upgrade. The status can take one of
 	// the following values:
 	//
-	//     * In Progress
+	// * In Progress
 	//
-	//     * Succeeded
+	// * Succeeded
 	//
-	//     * Succeeded with
-	// Issues
+	// * Succeeded with Issues
 	//
-	//     * Failed
+	// *
+	// Failed
 	UpgradeStepStatus UpgradeStatus
 }
 

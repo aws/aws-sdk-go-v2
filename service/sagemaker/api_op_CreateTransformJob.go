@@ -17,26 +17,26 @@ import (
 // that you have readily available. In the request body, you provide the
 // following:
 //
-//     * TransformJobName - Identifies the transform job. The name must
-// be unique within an AWS Region in an AWS account.
+// * TransformJobName - Identifies the transform job. The name must be
+// unique within an AWS Region in an AWS account.
 //
-//     * ModelName - Identifies
-// the model to use. ModelName must be the name of an existing Amazon SageMaker
-// model in the same AWS Region and AWS account. For information on creating a
-// model, see CreateModel.
+// * ModelName - Identifies the
+// model to use. ModelName must be the name of an existing Amazon SageMaker model
+// in the same AWS Region and AWS account. For information on creating a model, see
+// CreateModel.
 //
-//     * TransformInput - Describes the dataset to be
-// transformed and the Amazon S3 location where it is stored.
+// * TransformInput - Describes the dataset to be transformed and the
+// Amazon S3 location where it is stored.
 //
-//     *
-// TransformOutput - Identifies the Amazon S3 location where you want Amazon
-// SageMaker to save the results from the transform job.
+// * TransformOutput - Identifies the
+// Amazon S3 location where you want Amazon SageMaker to save the results from the
+// transform job.
 //
-//     * TransformResources
-// - Identifies the ML compute instances for the transform job.
+// * TransformResources - Identifies the ML compute instances for
+// the transform job.
 //
-// For more
-// information about how batch transformation works, see Batch Transform
+// For more information about how batch transformation works,
+// see Batch Transform
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html).
 func (c *Client) CreateTransformJob(ctx context.Context, params *CreateTransformJobInput, optFns ...func(*Options)) (*CreateTransformJobOutput, error) {
 	if params == nil {
@@ -111,12 +111,12 @@ type CreateTransformJobInput struct {
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
 	//
-	//     * CreateProcessingJob
+	// * CreateProcessingJob
 	//
-	//     *
+	// *
 	// CreateTrainingJob
 	//
-	//     * CreateTransformJob
+	// * CreateTransformJob
 	ExperimentConfig *types.ExperimentConfig
 
 	// The maximum number of parallel requests that can be sent to each instance in a

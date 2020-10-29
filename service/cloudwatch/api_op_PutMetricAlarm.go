@@ -21,23 +21,23 @@ import (
 // of the alarm. If you are an IAM user, you must have Amazon EC2 permissions for
 // some alarm operations:
 //
-//     * iam:CreateServiceLinkedRole for all alarms with
-// EC2 actions
+// * iam:CreateServiceLinkedRole for all alarms with EC2
+// actions
 //
-//     * ec2:DescribeInstanceStatus and ec2:DescribeInstances for all
-// alarms on EC2 instance status metrics
+// * ec2:DescribeInstanceStatus and ec2:DescribeInstances for all alarms
+// on EC2 instance status metrics
 //
-//     * ec2:StopInstances for alarms with
-// stop actions
+// * ec2:StopInstances for alarms with stop
+// actions
 //
-//     * ec2:TerminateInstances for alarms with terminate actions
+// * ec2:TerminateInstances for alarms with terminate actions
 //
+// * No
+// specific permissions are needed for alarms with recover actions
 //
-// * No specific permissions are needed for alarms with recover actions
-//
-// If you
-// have read/write permissions for Amazon CloudWatch but not for Amazon EC2, you
-// can still create an alarm, but the stop or terminate actions are not performed.
+// If you have
+// read/write permissions for Amazon CloudWatch but not for Amazon EC2, you can
+// still create an alarm, but the stop or terminate actions are not performed.
 // However, if you are later granted the required permissions, the alarm actions
 // that you created earlier are performed. If you are using an IAM role (for
 // example, an EC2 instance profile), you cannot stop or terminate the instance

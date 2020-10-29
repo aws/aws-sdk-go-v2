@@ -113,16 +113,16 @@ type CreateTargetGroupInput struct {
 	// target group. You can't specify targets for a target group using more than one
 	// target type.
 	//
-	//     * instance - Targets are specified by instance ID. This is the
+	// * instance - Targets are specified by instance ID. This is the
 	// default value.
 	//
-	//     * ip - Targets are specified by IP address. You can specify
-	// IP addresses from the subnets of the virtual private cloud (VPC) for the target
+	// * ip - Targets are specified by IP address. You can specify IP
+	// addresses from the subnets of the virtual private cloud (VPC) for the target
 	// group, the RFC 1918 range (10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16), and
 	// the RFC 6598 range (100.64.0.0/10). You can't specify publicly routable IP
 	// addresses.
 	//
-	//     * lambda - The target groups contains a single Lambda function.
+	// * lambda - The target groups contains a single Lambda function.
 	TargetType types.TargetTypeEnum
 
 	// The number of consecutive health check failures required before considering a

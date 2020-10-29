@@ -14,18 +14,18 @@ import (
 // Disassociates an Amazon Virtual Private Cloud (Amazon VPC) from an Amazon Route
 // 53 private hosted zone. Note the following:
 //
-//     * You can't disassociate the
-// last Amazon VPC from a private hosted zone.
+// * You can't disassociate the last
+// Amazon VPC from a private hosted zone.
 //
-//     * You can't convert a private
-// hosted zone into a public hosted zone.
+// * You can't convert a private hosted
+// zone into a public hosted zone.
 //
-//     * You can submit a
+// * You can submit a
 // DisassociateVPCFromHostedZone request using either the account that created the
 // hosted zone or the account that created the Amazon VPC.
 //
-//     * Some services,
-// such as AWS Cloud Map and Amazon Elastic File System (Amazon EFS) automatically
+// * Some services, such
+// as AWS Cloud Map and Amazon Elastic File System (Amazon EFS) automatically
 // create hosted zones and associate VPCs with the hosted zones. A service can
 // create a hosted zone using your account or using its own account. You can
 // disassociate a VPC from a hosted zone only if the service created the hosted

@@ -70,11 +70,11 @@ type Comparator string
 
 // Enum values for Comparator
 const (
-	ComparatorEquals              Comparator = "EQUALS"
-	ComparatorGreater_than        Comparator = "GREATER_THAN"
-	ComparatorLess_than           Comparator = "LESS_THAN"
-	ComparatorGreater_than_equals Comparator = "GREATER_THAN_EQUALS"
-	ComparatorLess_than_equals    Comparator = "LESS_THAN_EQUALS"
+	ComparatorEquals            Comparator = "EQUALS"
+	ComparatorGreaterThan       Comparator = "GREATER_THAN"
+	ComparatorLessThan          Comparator = "LESS_THAN"
+	ComparatorGreaterThanEquals Comparator = "GREATER_THAN_EQUALS"
+	ComparatorLessThanEquals    Comparator = "LESS_THAN_EQUALS"
 )
 
 // Values returns all known values for Comparator. Note that this can be expanded
@@ -94,27 +94,27 @@ type ConnectionPropertyKey string
 
 // Enum values for ConnectionPropertyKey
 const (
-	ConnectionPropertyKeyHost                              ConnectionPropertyKey = "HOST"
-	ConnectionPropertyKeyPort                              ConnectionPropertyKey = "PORT"
-	ConnectionPropertyKeyUser_name                         ConnectionPropertyKey = "USERNAME"
-	ConnectionPropertyKeyPassword                          ConnectionPropertyKey = "PASSWORD"
-	ConnectionPropertyKeyEncrypted_password                ConnectionPropertyKey = "ENCRYPTED_PASSWORD"
-	ConnectionPropertyKeyJdbc_driver_jar_uri               ConnectionPropertyKey = "JDBC_DRIVER_JAR_URI"
-	ConnectionPropertyKeyJdbc_driver_class_name            ConnectionPropertyKey = "JDBC_DRIVER_CLASS_NAME"
-	ConnectionPropertyKeyJdbc_engine                       ConnectionPropertyKey = "JDBC_ENGINE"
-	ConnectionPropertyKeyJdbc_engine_version               ConnectionPropertyKey = "JDBC_ENGINE_VERSION"
-	ConnectionPropertyKeyConfig_files                      ConnectionPropertyKey = "CONFIG_FILES"
-	ConnectionPropertyKeyInstance_id                       ConnectionPropertyKey = "INSTANCE_ID"
-	ConnectionPropertyKeyJdbc_connection_url               ConnectionPropertyKey = "JDBC_CONNECTION_URL"
-	ConnectionPropertyKeyJdbc_enforce_ssl                  ConnectionPropertyKey = "JDBC_ENFORCE_SSL"
-	ConnectionPropertyKeyCustom_jdbc_cert                  ConnectionPropertyKey = "CUSTOM_JDBC_CERT"
-	ConnectionPropertyKeySkip_custom_jdbc_cert_validation  ConnectionPropertyKey = "SKIP_CUSTOM_JDBC_CERT_VALIDATION"
-	ConnectionPropertyKeyCustom_jdbc_cert_string           ConnectionPropertyKey = "CUSTOM_JDBC_CERT_STRING"
-	ConnectionPropertyKeyConnection_url                    ConnectionPropertyKey = "CONNECTION_URL"
-	ConnectionPropertyKeyKafka_bootstrap_servers           ConnectionPropertyKey = "KAFKA_BOOTSTRAP_SERVERS"
-	ConnectionPropertyKeyKafka_ssl_enabled                 ConnectionPropertyKey = "KAFKA_SSL_ENABLED"
-	ConnectionPropertyKeyKafka_custom_cert                 ConnectionPropertyKey = "KAFKA_CUSTOM_CERT"
-	ConnectionPropertyKeyKafka_skip_custom_cert_validation ConnectionPropertyKey = "KAFKA_SKIP_CUSTOM_CERT_VALIDATION"
+	ConnectionPropertyKeyHost                          ConnectionPropertyKey = "HOST"
+	ConnectionPropertyKeyPort                          ConnectionPropertyKey = "PORT"
+	ConnectionPropertyKeyUserName                      ConnectionPropertyKey = "USERNAME"
+	ConnectionPropertyKeyPassword                      ConnectionPropertyKey = "PASSWORD"
+	ConnectionPropertyKeyEncryptedPassword             ConnectionPropertyKey = "ENCRYPTED_PASSWORD"
+	ConnectionPropertyKeyJdbcDriverJarUri              ConnectionPropertyKey = "JDBC_DRIVER_JAR_URI"
+	ConnectionPropertyKeyJdbcDriverClassName           ConnectionPropertyKey = "JDBC_DRIVER_CLASS_NAME"
+	ConnectionPropertyKeyJdbcEngine                    ConnectionPropertyKey = "JDBC_ENGINE"
+	ConnectionPropertyKeyJdbcEngineVersion             ConnectionPropertyKey = "JDBC_ENGINE_VERSION"
+	ConnectionPropertyKeyConfigFiles                   ConnectionPropertyKey = "CONFIG_FILES"
+	ConnectionPropertyKeyInstanceId                    ConnectionPropertyKey = "INSTANCE_ID"
+	ConnectionPropertyKeyJdbcConnectionUrl             ConnectionPropertyKey = "JDBC_CONNECTION_URL"
+	ConnectionPropertyKeyJdbcEnforceSsl                ConnectionPropertyKey = "JDBC_ENFORCE_SSL"
+	ConnectionPropertyKeyCustomJdbcCert                ConnectionPropertyKey = "CUSTOM_JDBC_CERT"
+	ConnectionPropertyKeySkipCustomJdbcCertValidation  ConnectionPropertyKey = "SKIP_CUSTOM_JDBC_CERT_VALIDATION"
+	ConnectionPropertyKeyCustomJdbcCertString          ConnectionPropertyKey = "CUSTOM_JDBC_CERT_STRING"
+	ConnectionPropertyKeyConnectionUrl                 ConnectionPropertyKey = "CONNECTION_URL"
+	ConnectionPropertyKeyKafkaBootstrapServers         ConnectionPropertyKey = "KAFKA_BOOTSTRAP_SERVERS"
+	ConnectionPropertyKeyKafkaSslEnabled               ConnectionPropertyKey = "KAFKA_SSL_ENABLED"
+	ConnectionPropertyKeyKafkaCustomCert               ConnectionPropertyKey = "KAFKA_CUSTOM_CERT"
+	ConnectionPropertyKeyKafkaSkipCustomCertValidation ConnectionPropertyKey = "KAFKA_SKIP_CUSTOM_CERT_VALIDATION"
 )
 
 // Values returns all known values for ConnectionPropertyKey. Note that this can be
@@ -238,9 +238,9 @@ type DeleteBehavior string
 
 // Enum values for DeleteBehavior
 const (
-	DeleteBehaviorLog                   DeleteBehavior = "LOG"
-	DeleteBehaviorDelete_from_database  DeleteBehavior = "DELETE_FROM_DATABASE"
-	DeleteBehaviorDeprecate_in_database DeleteBehavior = "DEPRECATE_IN_DATABASE"
+	DeleteBehaviorLog                 DeleteBehavior = "LOG"
+	DeleteBehaviorDeleteFromDatabase  DeleteBehavior = "DELETE_FROM_DATABASE"
+	DeleteBehaviorDeprecateInDatabase DeleteBehavior = "DEPRECATE_IN_DATABASE"
 )
 
 // Values returns all known values for DeleteBehavior. Note that this can be
@@ -276,9 +276,9 @@ type ExistCondition string
 
 // Enum values for ExistCondition
 const (
-	ExistConditionMust_exist ExistCondition = "MUST_EXIST"
-	ExistConditionNot_exist  ExistCondition = "NOT_EXIST"
-	ExistConditionNone       ExistCondition = "NONE"
+	ExistConditionMustExist ExistCondition = "MUST_EXIST"
+	ExistConditionNotExist  ExistCondition = "NOT_EXIST"
+	ExistConditionNone      ExistCondition = "NONE"
 )
 
 // Values returns all known values for ExistCondition. Note that this can be
@@ -450,15 +450,15 @@ type Permission string
 
 // Enum values for Permission
 const (
-	PermissionAll                  Permission = "ALL"
-	PermissionSelect               Permission = "SELECT"
-	PermissionAlter                Permission = "ALTER"
-	PermissionDrop                 Permission = "DROP"
-	PermissionDelete               Permission = "DELETE"
-	PermissionInsert               Permission = "INSERT"
-	PermissionCreate_database      Permission = "CREATE_DATABASE"
-	PermissionCreate_table         Permission = "CREATE_TABLE"
-	PermissionData_location_access Permission = "DATA_LOCATION_ACCESS"
+	PermissionAll                Permission = "ALL"
+	PermissionSelect             Permission = "SELECT"
+	PermissionAlter              Permission = "ALTER"
+	PermissionDrop               Permission = "DROP"
+	PermissionDelete             Permission = "DELETE"
+	PermissionInsert             Permission = "INSERT"
+	PermissionCreateDatabase     Permission = "CREATE_DATABASE"
+	PermissionCreateTable        Permission = "CREATE_TABLE"
+	PermissionDataLocationAccess Permission = "DATA_LOCATION_ACCESS"
 )
 
 // Values returns all known values for Permission. Note that this can be expanded
@@ -502,8 +502,8 @@ type RecrawlBehavior string
 
 // Enum values for RecrawlBehavior
 const (
-	RecrawlBehaviorCrawl_everything       RecrawlBehavior = "CRAWL_EVERYTHING"
-	RecrawlBehaviorCrawl_new_folders_only RecrawlBehavior = "CRAWL_NEW_FOLDERS_ONLY"
+	RecrawlBehaviorCrawlEverything     RecrawlBehavior = "CRAWL_EVERYTHING"
+	RecrawlBehaviorCrawlNewFoldersOnly RecrawlBehavior = "CRAWL_NEW_FOLDERS_ONLY"
 )
 
 // Values returns all known values for RecrawlBehavior. Note that this can be
@@ -579,7 +579,7 @@ type ScheduleState string
 // Enum values for ScheduleState
 const (
 	ScheduleStateScheduled     ScheduleState = "SCHEDULED"
-	ScheduleStateNot_scheduled ScheduleState = "NOT_SCHEDULED"
+	ScheduleStateNotScheduled  ScheduleState = "NOT_SCHEDULED"
 	ScheduleStateTransitioning ScheduleState = "TRANSITIONING"
 )
 
@@ -634,9 +634,9 @@ type TaskRunSortColumnType string
 
 // Enum values for TaskRunSortColumnType
 const (
-	TaskRunSortColumnTypeTask_run_type TaskRunSortColumnType = "TASK_RUN_TYPE"
-	TaskRunSortColumnTypeStatus        TaskRunSortColumnType = "STATUS"
-	TaskRunSortColumnTypeStarted       TaskRunSortColumnType = "STARTED"
+	TaskRunSortColumnTypeTaskRunType TaskRunSortColumnType = "TASK_RUN_TYPE"
+	TaskRunSortColumnTypeStatus      TaskRunSortColumnType = "STATUS"
+	TaskRunSortColumnTypeStarted     TaskRunSortColumnType = "STARTED"
 )
 
 // Values returns all known values for TaskRunSortColumnType. Note that this can be
@@ -682,11 +682,11 @@ type TaskType string
 
 // Enum values for TaskType
 const (
-	TaskTypeEvaluation              TaskType = "EVALUATION"
-	TaskTypeLabeling_set_generation TaskType = "LABELING_SET_GENERATION"
-	TaskTypeImport_labels           TaskType = "IMPORT_LABELS"
-	TaskTypeExport_labels           TaskType = "EXPORT_LABELS"
-	TaskTypeFind_matches            TaskType = "FIND_MATCHES"
+	TaskTypeEvaluation            TaskType = "EVALUATION"
+	TaskTypeLabelingSetGeneration TaskType = "LABELING_SET_GENERATION"
+	TaskTypeImportLabels          TaskType = "IMPORT_LABELS"
+	TaskTypeExportLabels          TaskType = "EXPORT_LABELS"
+	TaskTypeFindMatches           TaskType = "FIND_MATCHES"
 )
 
 // Values returns all known values for TaskType. Note that this can be expanded in
@@ -706,11 +706,11 @@ type TransformSortColumnType string
 
 // Enum values for TransformSortColumnType
 const (
-	TransformSortColumnTypeName           TransformSortColumnType = "NAME"
-	TransformSortColumnTypeTransform_type TransformSortColumnType = "TRANSFORM_TYPE"
-	TransformSortColumnTypeStatus         TransformSortColumnType = "STATUS"
-	TransformSortColumnTypeCreated        TransformSortColumnType = "CREATED"
-	TransformSortColumnTypeLast_modified  TransformSortColumnType = "LAST_MODIFIED"
+	TransformSortColumnTypeName          TransformSortColumnType = "NAME"
+	TransformSortColumnTypeTransformType TransformSortColumnType = "TRANSFORM_TYPE"
+	TransformSortColumnTypeStatus        TransformSortColumnType = "STATUS"
+	TransformSortColumnTypeCreated       TransformSortColumnType = "CREATED"
+	TransformSortColumnTypeLastModified  TransformSortColumnType = "LAST_MODIFIED"
 )
 
 // Values returns all known values for TransformSortColumnType. Note that this can
@@ -730,9 +730,9 @@ type TransformStatusType string
 
 // Enum values for TransformStatusType
 const (
-	TransformStatusTypeNot_ready TransformStatusType = "NOT_READY"
-	TransformStatusTypeReady     TransformStatusType = "READY"
-	TransformStatusTypeDeleting  TransformStatusType = "DELETING"
+	TransformStatusTypeNotReady TransformStatusType = "NOT_READY"
+	TransformStatusTypeReady    TransformStatusType = "READY"
+	TransformStatusTypeDeleting TransformStatusType = "DELETING"
 )
 
 // Values returns all known values for TransformStatusType. Note that this can be
@@ -750,7 +750,7 @@ type TransformType string
 
 // Enum values for TransformType
 const (
-	TransformTypeFind_matches TransformType = "FIND_MATCHES"
+	TransformTypeFindMatches TransformType = "FIND_MATCHES"
 )
 
 // Values returns all known values for TransformType. Note that this can be
@@ -798,7 +798,7 @@ type TriggerType string
 const (
 	TriggerTypeScheduled   TriggerType = "SCHEDULED"
 	TriggerTypeConditional TriggerType = "CONDITIONAL"
-	TriggerTypeOn_demand   TriggerType = "ON_DEMAND"
+	TriggerTypeOnDemand    TriggerType = "ON_DEMAND"
 )
 
 // Values returns all known values for TriggerType. Note that this can be expanded
@@ -816,8 +816,8 @@ type UpdateBehavior string
 
 // Enum values for UpdateBehavior
 const (
-	UpdateBehaviorLog                UpdateBehavior = "LOG"
-	UpdateBehaviorUpdate_in_database UpdateBehavior = "UPDATE_IN_DATABASE"
+	UpdateBehaviorLog              UpdateBehavior = "LOG"
+	UpdateBehaviorUpdateInDatabase UpdateBehavior = "UPDATE_IN_DATABASE"
 )
 
 // Values returns all known values for UpdateBehavior. Note that this can be

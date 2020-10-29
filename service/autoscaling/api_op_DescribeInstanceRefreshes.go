@@ -15,27 +15,27 @@ import (
 // request by looking at the Status parameter. The following are the possible
 // statuses:
 //
-//     * Pending - The request was created, but the operation has not
+// * Pending - The request was created, but the operation has not
 // started.
 //
-//     * InProgress - The operation is in progress.
+// * InProgress - The operation is in progress.
 //
-//     * Successful -
-// The operation completed successfully.
+// * Successful - The
+// operation completed successfully.
 //
-//     * Failed - The operation failed to
-// complete. You can troubleshoot using the status reason and the scaling
-// activities.
+// * Failed - The operation failed to complete.
+// You can troubleshoot using the status reason and the scaling activities.
 //
-//     * Cancelling - An ongoing operation is being cancelled.
-// Cancellation does not roll back any replacements that have already been
-// completed, but it prevents new replacements from being started.
+// *
+// Cancelling - An ongoing operation is being cancelled. Cancellation does not roll
+// back any replacements that have already been completed, but it prevents new
+// replacements from being started.
 //
-//     * Cancelled
-// - The operation is cancelled.
+// * Cancelled - The operation is cancelled.
 //
-// For more information, see Replacing Auto Scaling
-// Instances Based on an Instance Refresh
+// For
+// more information, see Replacing Auto Scaling Instances Based on an Instance
+// Refresh
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html).
 func (c *Client) DescribeInstanceRefreshes(ctx context.Context, params *DescribeInstanceRefreshesInput, optFns ...func(*Options)) (*DescribeInstanceRefreshesOutput, error) {
 	if params == nil {

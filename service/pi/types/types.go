@@ -28,19 +28,18 @@ type DimensionGroup struct {
 
 	// The name of the dimension group. Valid values are:
 	//
-	//     * db.user
+	// * db.user
 	//
-	//     *
-	// db.host
+	// * db.host
 	//
-	//     * db.sql
+	// *
+	// db.sql
 	//
-	//     * db.sql_tokenized
+	// * db.sql_tokenized
 	//
-	//     * db.wait_event
+	// * db.wait_event
 	//
-	//     *
-	// db.wait_event_type
+	// * db.wait_event_type
 	//
 	// This member is required.
 	Group *string
@@ -50,37 +49,37 @@ type DimensionGroup struct {
 	// requested, or are present in the response. Valid values for elements in the
 	// Dimensions array are:
 	//
-	//     * db.user.id
+	// * db.user.id
 	//
-	//     * db.user.name
+	// * db.user.name
 	//
-	//     * db.host.id
+	// * db.host.id
 	//
+	// *
+	// db.host.name
 	//
-	// * db.host.name
+	// * db.sql.id
 	//
-	//     * db.sql.id
+	// * db.sql.db_id
 	//
-	//     * db.sql.db_id
+	// * db.sql.statement
 	//
-	//     * db.sql.statement
+	// *
+	// db.sql.tokenized_id
 	//
+	// * db.sql_tokenized.id
 	//
-	// * db.sql.tokenized_id
+	// * db.sql_tokenized.db_id
 	//
-	//     * db.sql_tokenized.id
+	// *
+	// db.sql_tokenized.statement
 	//
-	//     * db.sql_tokenized.db_id
+	// * db.wait_event.name
 	//
+	// * db.wait_event.type
 	//
-	// * db.sql_tokenized.statement
-	//
-	//     * db.wait_event.name
-	//
-	//     *
-	// db.wait_event.type
-	//
-	//     * db.wait_event_type.name
+	// *
+	// db.wait_event_type.name
 	Dimensions []*string
 
 	// The maximum number of items to fetch for this dimension group.
@@ -123,10 +122,10 @@ type MetricQuery struct {
 	// The name of a Performance Insights metric to be measured. Valid values for
 	// Metric are:
 	//
-	//     * db.load.avg - a scaled representation of the number of active
+	// * db.load.avg - a scaled representation of the number of active
 	// sessions for the database engine.
 	//
-	//     * db.sampledload.avg - the raw number of
+	// * db.sampledload.avg - the raw number of
 	// active sessions for the database engine.
 	//
 	// This member is required.
@@ -134,10 +133,10 @@ type MetricQuery struct {
 
 	// One or more filters to apply in the request. Restrictions:
 	//
-	//     * Any number of
+	// * Any number of
 	// filters by the same dimension, as specified in the GroupBy parameter.
 	//
-	//     * A
+	// * A
 	// single filter for any other dimension in this dimension group.
 	Filter map[string]*string
 
@@ -166,10 +165,10 @@ type ResponseResourceMetricKey struct {
 	// The name of a Performance Insights metric to be measured. Valid values for
 	// Metric are:
 	//
-	//     * db.load.avg - a scaled representation of the number of active
+	// * db.load.avg - a scaled representation of the number of active
 	// sessions for the database engine.
 	//
-	//     * db.sampledload.avg - the raw number of
+	// * db.sampledload.avg - the raw number of
 	// active sessions for the database engine.
 	//
 	// This member is required.

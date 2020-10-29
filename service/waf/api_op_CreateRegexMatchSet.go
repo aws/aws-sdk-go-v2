@@ -25,24 +25,24 @@ import (
 // can then configure AWS WAF to reject those requests. To create and configure a
 // RegexMatchSet, perform the following steps:
 //
-//     * Use GetChangeToken to get the
+// * Use GetChangeToken to get the
 // change token that you provide in the ChangeToken parameter of a
 // CreateRegexMatchSet request.
 //
-//     * Submit a CreateRegexMatchSet request.
+// * Submit a CreateRegexMatchSet request.
 //
-//     *
-// Use GetChangeToken to get the change token that you provide in the ChangeToken
+// * Use
+// GetChangeToken to get the change token that you provide in the ChangeToken
 // parameter of an UpdateRegexMatchSet request.
 //
-//     * Submit an
-// UpdateRegexMatchSet request to specify the part of the request that you want AWS
-// WAF to inspect (for example, the header or the URI) and the value, using a
-// RegexPatternSet, that you want AWS WAF to watch for.
+// * Submit an UpdateRegexMatchSet
+// request to specify the part of the request that you want AWS WAF to inspect (for
+// example, the header or the URI) and the value, using a RegexPatternSet, that you
+// want AWS WAF to watch for.
 //
-// For more information about
-// how to use the AWS WAF API to allow or block HTTP requests, see the AWS WAF
-// Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/).
+// For more information about how to use the AWS WAF
+// API to allow or block HTTP requests, see the AWS WAF Developer Guide
+// (https://docs.aws.amazon.com/waf/latest/developerguide/).
 func (c *Client) CreateRegexMatchSet(ctx context.Context, params *CreateRegexMatchSetInput, optFns ...func(*Options)) (*CreateRegexMatchSetOutput, error) {
 	if params == nil {
 		params = &CreateRegexMatchSetInput{}

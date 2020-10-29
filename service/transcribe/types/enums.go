@@ -6,8 +6,8 @@ type BaseModelName string
 
 // Enum values for BaseModelName
 const (
-	BaseModelNameNarrow_band BaseModelName = "NarrowBand"
-	BaseModelNameWide_band   BaseModelName = "WideBand"
+	BaseModelNameNarrowBand BaseModelName = "NarrowBand"
+	BaseModelNameWideBand   BaseModelName = "WideBand"
 )
 
 // Values returns all known values for BaseModelName. Note that this can be
@@ -24,7 +24,7 @@ type CLMLanguageCode string
 
 // Enum values for CLMLanguageCode
 const (
-	CLMLanguageCodeEn_us CLMLanguageCode = "en-US"
+	CLMLanguageCodeEnUs CLMLanguageCode = "en-US"
 )
 
 // Values returns all known values for CLMLanguageCode. Note that this can be
@@ -40,42 +40,42 @@ type LanguageCode string
 
 // Enum values for LanguageCode
 const (
-	LanguageCodeAf_za LanguageCode = "af-ZA"
-	LanguageCodeAr_ae LanguageCode = "ar-AE"
-	LanguageCodeAr_sa LanguageCode = "ar-SA"
-	LanguageCodeCy_gb LanguageCode = "cy-GB"
-	LanguageCodeDa_dk LanguageCode = "da-DK"
-	LanguageCodeDe_ch LanguageCode = "de-CH"
-	LanguageCodeDe_de LanguageCode = "de-DE"
-	LanguageCodeEn_ab LanguageCode = "en-AB"
-	LanguageCodeEn_au LanguageCode = "en-AU"
-	LanguageCodeEn_gb LanguageCode = "en-GB"
-	LanguageCodeEn_ie LanguageCode = "en-IE"
-	LanguageCodeEn_in LanguageCode = "en-IN"
-	LanguageCodeEn_us LanguageCode = "en-US"
-	LanguageCodeEn_wl LanguageCode = "en-WL"
-	LanguageCodeEs_es LanguageCode = "es-ES"
-	LanguageCodeEs_us LanguageCode = "es-US"
-	LanguageCodeFa_ir LanguageCode = "fa-IR"
-	LanguageCodeFr_ca LanguageCode = "fr-CA"
-	LanguageCodeFr_fr LanguageCode = "fr-FR"
-	LanguageCodeGa_ie LanguageCode = "ga-IE"
-	LanguageCodeGd_gb LanguageCode = "gd-GB"
-	LanguageCodeHe_il LanguageCode = "he-IL"
-	LanguageCodeHi_in LanguageCode = "hi-IN"
-	LanguageCodeId_id LanguageCode = "id-ID"
-	LanguageCodeIt_it LanguageCode = "it-IT"
-	LanguageCodeJa_jp LanguageCode = "ja-JP"
-	LanguageCodeKo_kr LanguageCode = "ko-KR"
-	LanguageCodeMs_my LanguageCode = "ms-MY"
-	LanguageCodeNl_nl LanguageCode = "nl-NL"
-	LanguageCodePt_br LanguageCode = "pt-BR"
-	LanguageCodePt_pt LanguageCode = "pt-PT"
-	LanguageCodeRu_ru LanguageCode = "ru-RU"
-	LanguageCodeTa_in LanguageCode = "ta-IN"
-	LanguageCodeTe_in LanguageCode = "te-IN"
-	LanguageCodeTr_tr LanguageCode = "tr-TR"
-	LanguageCodeZh_cn LanguageCode = "zh-CN"
+	LanguageCodeAfZa LanguageCode = "af-ZA"
+	LanguageCodeArAe LanguageCode = "ar-AE"
+	LanguageCodeArSa LanguageCode = "ar-SA"
+	LanguageCodeCyGb LanguageCode = "cy-GB"
+	LanguageCodeDaDk LanguageCode = "da-DK"
+	LanguageCodeDeCh LanguageCode = "de-CH"
+	LanguageCodeDeDe LanguageCode = "de-DE"
+	LanguageCodeEnAb LanguageCode = "en-AB"
+	LanguageCodeEnAu LanguageCode = "en-AU"
+	LanguageCodeEnGb LanguageCode = "en-GB"
+	LanguageCodeEnIe LanguageCode = "en-IE"
+	LanguageCodeEnIn LanguageCode = "en-IN"
+	LanguageCodeEnUs LanguageCode = "en-US"
+	LanguageCodeEnWl LanguageCode = "en-WL"
+	LanguageCodeEsEs LanguageCode = "es-ES"
+	LanguageCodeEsUs LanguageCode = "es-US"
+	LanguageCodeFaIr LanguageCode = "fa-IR"
+	LanguageCodeFrCa LanguageCode = "fr-CA"
+	LanguageCodeFrFr LanguageCode = "fr-FR"
+	LanguageCodeGaIe LanguageCode = "ga-IE"
+	LanguageCodeGdGb LanguageCode = "gd-GB"
+	LanguageCodeHeIl LanguageCode = "he-IL"
+	LanguageCodeHiIn LanguageCode = "hi-IN"
+	LanguageCodeIdId LanguageCode = "id-ID"
+	LanguageCodeItIt LanguageCode = "it-IT"
+	LanguageCodeJaJp LanguageCode = "ja-JP"
+	LanguageCodeKoKr LanguageCode = "ko-KR"
+	LanguageCodeMsMy LanguageCode = "ms-MY"
+	LanguageCodeNlNl LanguageCode = "nl-NL"
+	LanguageCodePtBr LanguageCode = "pt-BR"
+	LanguageCodePtPt LanguageCode = "pt-PT"
+	LanguageCodeRuRu LanguageCode = "ru-RU"
+	LanguageCodeTaIn LanguageCode = "ta-IN"
+	LanguageCodeTeIn LanguageCode = "te-IN"
+	LanguageCodeTrTr LanguageCode = "tr-TR"
+	LanguageCodeZhCn LanguageCode = "zh-CN"
 )
 
 // Values returns all known values for LanguageCode. Note that this can be expanded
@@ -154,9 +154,9 @@ type ModelStatus string
 
 // Enum values for ModelStatus
 const (
-	ModelStatusIn_progress ModelStatus = "IN_PROGRESS"
-	ModelStatusFailed      ModelStatus = "FAILED"
-	ModelStatusCompleted   ModelStatus = "COMPLETED"
+	ModelStatusInProgress ModelStatus = "IN_PROGRESS"
+	ModelStatusFailed     ModelStatus = "FAILED"
+	ModelStatusCompleted  ModelStatus = "COMPLETED"
 )
 
 // Values returns all known values for ModelStatus. Note that this can be expanded
@@ -174,8 +174,8 @@ type OutputLocationType string
 
 // Enum values for OutputLocationType
 const (
-	OutputLocationTypeCustomer_bucket OutputLocationType = "CUSTOMER_BUCKET"
-	OutputLocationTypeService_bucket  OutputLocationType = "SERVICE_BUCKET"
+	OutputLocationTypeCustomerBucket OutputLocationType = "CUSTOMER_BUCKET"
+	OutputLocationTypeServiceBucket  OutputLocationType = "SERVICE_BUCKET"
 )
 
 // Values returns all known values for OutputLocationType. Note that this can be
@@ -192,8 +192,8 @@ type RedactionOutput string
 
 // Enum values for RedactionOutput
 const (
-	RedactionOutputRedacted                RedactionOutput = "redacted"
-	RedactionOutputRedacted_and_unredacted RedactionOutput = "redacted_and_unredacted"
+	RedactionOutputRedacted              RedactionOutput = "redacted"
+	RedactionOutputRedactedAndUnredacted RedactionOutput = "redacted_and_unredacted"
 )
 
 // Values returns all known values for RedactionOutput. Note that this can be
@@ -242,10 +242,10 @@ type TranscriptionJobStatus string
 
 // Enum values for TranscriptionJobStatus
 const (
-	TranscriptionJobStatusQueued      TranscriptionJobStatus = "QUEUED"
-	TranscriptionJobStatusIn_progress TranscriptionJobStatus = "IN_PROGRESS"
-	TranscriptionJobStatusFailed      TranscriptionJobStatus = "FAILED"
-	TranscriptionJobStatusCompleted   TranscriptionJobStatus = "COMPLETED"
+	TranscriptionJobStatusQueued     TranscriptionJobStatus = "QUEUED"
+	TranscriptionJobStatusInProgress TranscriptionJobStatus = "IN_PROGRESS"
+	TranscriptionJobStatusFailed     TranscriptionJobStatus = "FAILED"
+	TranscriptionJobStatusCompleted  TranscriptionJobStatus = "COMPLETED"
 )
 
 // Values returns all known values for TranscriptionJobStatus. Note that this can

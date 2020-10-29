@@ -38,18 +38,18 @@ type DescribeLocalGatewayRouteTableVpcAssociationsInput struct {
 
 	// One or more filters.
 	//
-	//     * local-gateway-id - The ID of a local gateway.
+	// * local-gateway-id - The ID of a local gateway.
 	//
-	//     *
+	// *
 	// local-gateway-route-table-id - The ID of the local gateway route table.
 	//
-	//     *
+	// *
 	// local-gateway-route-table-vpc-association-id - The ID of the association.
 	//
-	//     *
+	// *
 	// state - The state of the association.
 	//
-	//     * vpc-id - The ID of the VPC.
+	// * vpc-id - The ID of the VPC.
 	Filters []*types.Filter
 
 	// The IDs of the associations.

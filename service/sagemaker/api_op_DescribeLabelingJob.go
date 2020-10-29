@@ -109,22 +109,22 @@ type DescribeLabelingJobOutput struct {
 	// The S3 location of the JSON file that defines the categories used to label data
 	// objects. Please note the following label-category limits:
 	//
-	//     * Semantic
+	// * Semantic
 	// segmentation labeling jobs using automated labeling: 20 labels
 	//
-	//     * Box
-	// bounding labeling jobs (all): 10 labels
+	// * Box bounding
+	// labeling jobs (all): 10 labels
 	//
-	// The file is a JSON structure in the
-	// following format: {
+	// The file is a JSON structure in the following
+	// format: {
 	//     "document-version": "2018-11-28"
 	//
 	//     "labels": [
 	//
+	//     {
 	//
-	// {
 	//
-	//     "label": "label 1"
+	// "label": "label 1"
 	//
 	//     },
 	//
@@ -134,10 +134,10 @@ type DescribeLabelingJobOutput struct {
 	//
 	//     },
 	//
+	//     ...
 	//
-	// ...
 	//
-	//     {
+	// {
 	//
 	//     "label": "label n"
 	//

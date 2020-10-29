@@ -6,9 +6,9 @@ type ApplicationRestoreType string
 
 // Enum values for ApplicationRestoreType
 const (
-	ApplicationRestoreTypeSkip_restore_from_snapshot   ApplicationRestoreType = "SKIP_RESTORE_FROM_SNAPSHOT"
-	ApplicationRestoreTypeRestore_from_latest_snapshot ApplicationRestoreType = "RESTORE_FROM_LATEST_SNAPSHOT"
-	ApplicationRestoreTypeRestore_from_custom_snapshot ApplicationRestoreType = "RESTORE_FROM_CUSTOM_SNAPSHOT"
+	ApplicationRestoreTypeSkipRestoreFromSnapshot   ApplicationRestoreType = "SKIP_RESTORE_FROM_SNAPSHOT"
+	ApplicationRestoreTypeRestoreFromLatestSnapshot ApplicationRestoreType = "RESTORE_FROM_LATEST_SNAPSHOT"
+	ApplicationRestoreTypeRestoreFromCustomSnapshot ApplicationRestoreType = "RESTORE_FROM_CUSTOM_SNAPSHOT"
 )
 
 // Values returns all known values for ApplicationRestoreType. Note that this can
@@ -26,14 +26,14 @@ type ApplicationStatus string
 
 // Enum values for ApplicationStatus
 const (
-	ApplicationStatusDeleting       ApplicationStatus = "DELETING"
-	ApplicationStatusStarting       ApplicationStatus = "STARTING"
-	ApplicationStatusStopping       ApplicationStatus = "STOPPING"
-	ApplicationStatusReady          ApplicationStatus = "READY"
-	ApplicationStatusRunning        ApplicationStatus = "RUNNING"
-	ApplicationStatusUpdating       ApplicationStatus = "UPDATING"
-	ApplicationStatusAutoscaling    ApplicationStatus = "AUTOSCALING"
-	ApplicationStatusForce_stopping ApplicationStatus = "FORCE_STOPPING"
+	ApplicationStatusDeleting      ApplicationStatus = "DELETING"
+	ApplicationStatusStarting      ApplicationStatus = "STARTING"
+	ApplicationStatusStopping      ApplicationStatus = "STOPPING"
+	ApplicationStatusReady         ApplicationStatus = "READY"
+	ApplicationStatusRunning       ApplicationStatus = "RUNNING"
+	ApplicationStatusUpdating      ApplicationStatus = "UPDATING"
+	ApplicationStatusAutoscaling   ApplicationStatus = "AUTOSCALING"
+	ApplicationStatusForceStopping ApplicationStatus = "FORCE_STOPPING"
 )
 
 // Values returns all known values for ApplicationStatus. Note that this can be
@@ -92,9 +92,9 @@ type InputStartingPosition string
 
 // Enum values for InputStartingPosition
 const (
-	InputStartingPositionNow                InputStartingPosition = "NOW"
-	InputStartingPositionTrim_horizon       InputStartingPosition = "TRIM_HORIZON"
-	InputStartingPositionLast_stopped_point InputStartingPosition = "LAST_STOPPED_POINT"
+	InputStartingPositionNow              InputStartingPosition = "NOW"
+	InputStartingPositionTrimHorizon      InputStartingPosition = "TRIM_HORIZON"
+	InputStartingPositionLastStoppedPoint InputStartingPosition = "LAST_STOPPED_POINT"
 )
 
 // Values returns all known values for InputStartingPosition. Note that this can be
@@ -174,9 +174,9 @@ type RuntimeEnvironment string
 
 // Enum values for RuntimeEnvironment
 const (
-	RuntimeEnvironmentSql_1_0   RuntimeEnvironment = "SQL-1_0"
-	RuntimeEnvironmentFlink_1_6 RuntimeEnvironment = "FLINK-1_6"
-	RuntimeEnvironmentFlink_1_8 RuntimeEnvironment = "FLINK-1_8"
+	RuntimeEnvironmentSql10   RuntimeEnvironment = "SQL-1_0"
+	RuntimeEnvironmentFlink16 RuntimeEnvironment = "FLINK-1_6"
+	RuntimeEnvironmentFlink18 RuntimeEnvironment = "FLINK-1_8"
 )
 
 // Values returns all known values for RuntimeEnvironment. Note that this can be

@@ -20,38 +20,38 @@ import (
 // region within the last 90 days. Lookup supports the following attributes for
 // management events:
 //
-//     * AWS access key
+// * AWS access key
 //
-//     * Event ID
+// * Event ID
 //
-//     * Event name
+// * Event name
 //
+// * Event
+// source
+//
+// * Read only
+//
+// * Resource name
+//
+// * Resource type
+//
+// * User name
+//
+// Lookup
+// supports the following attributes for Insights events:
+//
+// * Event ID
+//
+// * Event
+// name
 //
 // * Event source
 //
-//     * Read only
-//
-//     * Resource name
-//
-//     * Resource type
-//
-//     *
-// User name
-//
-// Lookup supports the following attributes for Insights events:
-//
-//     *
-// Event ID
-//
-//     * Event name
-//
-//     * Event source
-//
-// All attributes are optional. The
-// default number of results returned is 50, with a maximum of 50 possible. The
-// response includes a token that you can use to get the next page of results. The
-// rate of lookup requests is limited to two per second per account. If this limit
-// is exceeded, a throttling error occurs.
+// All attributes are optional. The default number of results
+// returned is 50, with a maximum of 50 possible. The response includes a token
+// that you can use to get the next page of results. The rate of lookup requests is
+// limited to two per second per account. If this limit is exceeded, a throttling
+// error occurs.
 func (c *Client) LookupEvents(ctx context.Context, params *LookupEventsInput, optFns ...func(*Options)) (*LookupEventsOutput, error) {
 	if params == nil {
 		params = &LookupEventsInput{}

@@ -6,16 +6,16 @@ type AnalysisErrorType string
 
 // Enum values for AnalysisErrorType
 const (
-	AnalysisErrorTypeAccess_denied                   AnalysisErrorType = "ACCESS_DENIED"
-	AnalysisErrorTypeSource_not_found                AnalysisErrorType = "SOURCE_NOT_FOUND"
-	AnalysisErrorTypeData_set_not_found              AnalysisErrorType = "DATA_SET_NOT_FOUND"
-	AnalysisErrorTypeInternal_failure                AnalysisErrorType = "INTERNAL_FAILURE"
-	AnalysisErrorTypeParameter_value_incompatible    AnalysisErrorType = "PARAMETER_VALUE_INCOMPATIBLE"
-	AnalysisErrorTypeParameter_type_invalid          AnalysisErrorType = "PARAMETER_TYPE_INVALID"
-	AnalysisErrorTypeParameter_not_found             AnalysisErrorType = "PARAMETER_NOT_FOUND"
-	AnalysisErrorTypeColumn_type_mismatch            AnalysisErrorType = "COLUMN_TYPE_MISMATCH"
-	AnalysisErrorTypeColumn_geographic_role_mismatch AnalysisErrorType = "COLUMN_GEOGRAPHIC_ROLE_MISMATCH"
-	AnalysisErrorTypeColumn_replacement_missing      AnalysisErrorType = "COLUMN_REPLACEMENT_MISSING"
+	AnalysisErrorTypeAccessDenied                 AnalysisErrorType = "ACCESS_DENIED"
+	AnalysisErrorTypeSourceNotFound               AnalysisErrorType = "SOURCE_NOT_FOUND"
+	AnalysisErrorTypeDataSetNotFound              AnalysisErrorType = "DATA_SET_NOT_FOUND"
+	AnalysisErrorTypeInternalFailure              AnalysisErrorType = "INTERNAL_FAILURE"
+	AnalysisErrorTypeParameterValueIncompatible   AnalysisErrorType = "PARAMETER_VALUE_INCOMPATIBLE"
+	AnalysisErrorTypeParameterTypeInvalid         AnalysisErrorType = "PARAMETER_TYPE_INVALID"
+	AnalysisErrorTypeParameterNotFound            AnalysisErrorType = "PARAMETER_NOT_FOUND"
+	AnalysisErrorTypeColumnTypeMismatch           AnalysisErrorType = "COLUMN_TYPE_MISMATCH"
+	AnalysisErrorTypeColumnGeographicRoleMismatch AnalysisErrorType = "COLUMN_GEOGRAPHIC_ROLE_MISMATCH"
+	AnalysisErrorTypeColumnReplacementMissing     AnalysisErrorType = "COLUMN_REPLACEMENT_MISSING"
 )
 
 // Values returns all known values for AnalysisErrorType. Note that this can be
@@ -40,7 +40,7 @@ type AnalysisFilterAttribute string
 
 // Enum values for AnalysisFilterAttribute
 const (
-	AnalysisFilterAttributeQuicksight_user AnalysisFilterAttribute = "QUICKSIGHT_USER"
+	AnalysisFilterAttributeQuicksightUser AnalysisFilterAttribute = "QUICKSIGHT_USER"
 )
 
 // Values returns all known values for AnalysisFilterAttribute. Note that this can
@@ -116,16 +116,16 @@ type DashboardErrorType string
 
 // Enum values for DashboardErrorType
 const (
-	DashboardErrorTypeAccess_denied                   DashboardErrorType = "ACCESS_DENIED"
-	DashboardErrorTypeSource_not_found                DashboardErrorType = "SOURCE_NOT_FOUND"
-	DashboardErrorTypeData_set_not_found              DashboardErrorType = "DATA_SET_NOT_FOUND"
-	DashboardErrorTypeInternal_failure                DashboardErrorType = "INTERNAL_FAILURE"
-	DashboardErrorTypeParameter_value_incompatible    DashboardErrorType = "PARAMETER_VALUE_INCOMPATIBLE"
-	DashboardErrorTypeParameter_type_invalid          DashboardErrorType = "PARAMETER_TYPE_INVALID"
-	DashboardErrorTypeParameter_not_found             DashboardErrorType = "PARAMETER_NOT_FOUND"
-	DashboardErrorTypeColumn_type_mismatch            DashboardErrorType = "COLUMN_TYPE_MISMATCH"
-	DashboardErrorTypeColumn_geographic_role_mismatch DashboardErrorType = "COLUMN_GEOGRAPHIC_ROLE_MISMATCH"
-	DashboardErrorTypeColumn_replacement_missing      DashboardErrorType = "COLUMN_REPLACEMENT_MISSING"
+	DashboardErrorTypeAccessDenied                 DashboardErrorType = "ACCESS_DENIED"
+	DashboardErrorTypeSourceNotFound               DashboardErrorType = "SOURCE_NOT_FOUND"
+	DashboardErrorTypeDataSetNotFound              DashboardErrorType = "DATA_SET_NOT_FOUND"
+	DashboardErrorTypeInternalFailure              DashboardErrorType = "INTERNAL_FAILURE"
+	DashboardErrorTypeParameterValueIncompatible   DashboardErrorType = "PARAMETER_VALUE_INCOMPATIBLE"
+	DashboardErrorTypeParameterTypeInvalid         DashboardErrorType = "PARAMETER_TYPE_INVALID"
+	DashboardErrorTypeParameterNotFound            DashboardErrorType = "PARAMETER_NOT_FOUND"
+	DashboardErrorTypeColumnTypeMismatch           DashboardErrorType = "COLUMN_TYPE_MISMATCH"
+	DashboardErrorTypeColumnGeographicRoleMismatch DashboardErrorType = "COLUMN_GEOGRAPHIC_ROLE_MISMATCH"
+	DashboardErrorTypeColumnReplacementMissing     DashboardErrorType = "COLUMN_REPLACEMENT_MISSING"
 )
 
 // Values returns all known values for DashboardErrorType. Note that this can be
@@ -150,7 +150,7 @@ type DashboardFilterAttribute string
 
 // Enum values for DashboardFilterAttribute
 const (
-	DashboardFilterAttributeQuicksight_user DashboardFilterAttribute = "QUICKSIGHT_USER"
+	DashboardFilterAttributeQuicksightUser DashboardFilterAttribute = "QUICKSIGHT_USER"
 )
 
 // Values returns all known values for DashboardFilterAttribute. Note that this can
@@ -184,8 +184,8 @@ type DataSetImportMode string
 
 // Enum values for DataSetImportMode
 const (
-	DataSetImportModeSpice        DataSetImportMode = "SPICE"
-	DataSetImportModeDirect_query DataSetImportMode = "DIRECT_QUERY"
+	DataSetImportModeSpice       DataSetImportMode = "SPICE"
+	DataSetImportModeDirectQuery DataSetImportMode = "DIRECT_QUERY"
 )
 
 // Values returns all known values for DataSetImportMode. Note that this can be
@@ -202,14 +202,14 @@ type DataSourceErrorInfoType string
 
 // Enum values for DataSourceErrorInfoType
 const (
-	DataSourceErrorInfoTypeAccess_denied                DataSourceErrorInfoType = "ACCESS_DENIED"
-	DataSourceErrorInfoTypeCopy_source_not_found        DataSourceErrorInfoType = "COPY_SOURCE_NOT_FOUND"
-	DataSourceErrorInfoTypeTimeout                      DataSourceErrorInfoType = "TIMEOUT"
-	DataSourceErrorInfoTypeEngine_version_not_supported DataSourceErrorInfoType = "ENGINE_VERSION_NOT_SUPPORTED"
-	DataSourceErrorInfoTypeUnknown_host                 DataSourceErrorInfoType = "UNKNOWN_HOST"
-	DataSourceErrorInfoTypeGeneric_sql_failure          DataSourceErrorInfoType = "GENERIC_SQL_FAILURE"
-	DataSourceErrorInfoTypeConflict                     DataSourceErrorInfoType = "CONFLICT"
-	DataSourceErrorInfoTypeUnknown                      DataSourceErrorInfoType = "UNKNOWN"
+	DataSourceErrorInfoTypeAccessDenied              DataSourceErrorInfoType = "ACCESS_DENIED"
+	DataSourceErrorInfoTypeCopySourceNotFound        DataSourceErrorInfoType = "COPY_SOURCE_NOT_FOUND"
+	DataSourceErrorInfoTypeTimeout                   DataSourceErrorInfoType = "TIMEOUT"
+	DataSourceErrorInfoTypeEngineVersionNotSupported DataSourceErrorInfoType = "ENGINE_VERSION_NOT_SUPPORTED"
+	DataSourceErrorInfoTypeUnknownHost               DataSourceErrorInfoType = "UNKNOWN_HOST"
+	DataSourceErrorInfoTypeGenericSqlFailure         DataSourceErrorInfoType = "GENERIC_SQL_FAILURE"
+	DataSourceErrorInfoTypeConflict                  DataSourceErrorInfoType = "CONFLICT"
+	DataSourceErrorInfoTypeUnknown                   DataSourceErrorInfoType = "UNKNOWN"
 )
 
 // Values returns all known values for DataSourceErrorInfoType. Note that this can
@@ -232,28 +232,28 @@ type DataSourceType string
 
 // Enum values for DataSourceType
 const (
-	DataSourceTypeAdobe_analytics      DataSourceType = "ADOBE_ANALYTICS"
-	DataSourceTypeAmazon_elasticsearch DataSourceType = "AMAZON_ELASTICSEARCH"
-	DataSourceTypeAthena               DataSourceType = "ATHENA"
-	DataSourceTypeAurora               DataSourceType = "AURORA"
-	DataSourceTypeAurora_postgresql    DataSourceType = "AURORA_POSTGRESQL"
-	DataSourceTypeAws_iot_analytics    DataSourceType = "AWS_IOT_ANALYTICS"
-	DataSourceTypeGithub               DataSourceType = "GITHUB"
-	DataSourceTypeJira                 DataSourceType = "JIRA"
-	DataSourceTypeMariadb              DataSourceType = "MARIADB"
-	DataSourceTypeMysql                DataSourceType = "MYSQL"
-	DataSourceTypePostgresql           DataSourceType = "POSTGRESQL"
-	DataSourceTypePresto               DataSourceType = "PRESTO"
-	DataSourceTypeRedshift             DataSourceType = "REDSHIFT"
-	DataSourceTypeS3                   DataSourceType = "S3"
-	DataSourceTypeSalesforce           DataSourceType = "SALESFORCE"
-	DataSourceTypeServicenow           DataSourceType = "SERVICENOW"
-	DataSourceTypeSnowflake            DataSourceType = "SNOWFLAKE"
-	DataSourceTypeSpark                DataSourceType = "SPARK"
-	DataSourceTypeSqlserver            DataSourceType = "SQLSERVER"
-	DataSourceTypeTeradata             DataSourceType = "TERADATA"
-	DataSourceTypeTwitter              DataSourceType = "TWITTER"
-	DataSourceTypeTimestream           DataSourceType = "TIMESTREAM"
+	DataSourceTypeAdobeAnalytics      DataSourceType = "ADOBE_ANALYTICS"
+	DataSourceTypeAmazonElasticsearch DataSourceType = "AMAZON_ELASTICSEARCH"
+	DataSourceTypeAthena              DataSourceType = "ATHENA"
+	DataSourceTypeAurora              DataSourceType = "AURORA"
+	DataSourceTypeAuroraPostgresql    DataSourceType = "AURORA_POSTGRESQL"
+	DataSourceTypeAwsIotAnalytics     DataSourceType = "AWS_IOT_ANALYTICS"
+	DataSourceTypeGithub              DataSourceType = "GITHUB"
+	DataSourceTypeJira                DataSourceType = "JIRA"
+	DataSourceTypeMariadb             DataSourceType = "MARIADB"
+	DataSourceTypeMysql               DataSourceType = "MYSQL"
+	DataSourceTypePostgresql          DataSourceType = "POSTGRESQL"
+	DataSourceTypePresto              DataSourceType = "PRESTO"
+	DataSourceTypeRedshift            DataSourceType = "REDSHIFT"
+	DataSourceTypeS3                  DataSourceType = "S3"
+	DataSourceTypeSalesforce          DataSourceType = "SALESFORCE"
+	DataSourceTypeServicenow          DataSourceType = "SERVICENOW"
+	DataSourceTypeSnowflake           DataSourceType = "SNOWFLAKE"
+	DataSourceTypeSpark               DataSourceType = "SPARK"
+	DataSourceTypeSqlserver           DataSourceType = "SQLSERVER"
+	DataSourceTypeTeradata            DataSourceType = "TERADATA"
+	DataSourceTypeTwitter             DataSourceType = "TWITTER"
+	DataSourceTypeTimestream          DataSourceType = "TIMESTREAM"
 )
 
 // Values returns all known values for DataSourceType. Note that this can be
@@ -308,15 +308,15 @@ type ExceptionResourceType string
 
 // Enum values for ExceptionResourceType
 const (
-	ExceptionResourceTypeUser                 ExceptionResourceType = "USER"
-	ExceptionResourceTypeGroup                ExceptionResourceType = "GROUP"
-	ExceptionResourceTypeNamespace            ExceptionResourceType = "NAMESPACE"
-	ExceptionResourceTypeAccount_settings     ExceptionResourceType = "ACCOUNT_SETTINGS"
-	ExceptionResourceTypeIampolicy_assignment ExceptionResourceType = "IAMPOLICY_ASSIGNMENT"
-	ExceptionResourceTypeData_source          ExceptionResourceType = "DATA_SOURCE"
-	ExceptionResourceTypeData_set             ExceptionResourceType = "DATA_SET"
-	ExceptionResourceTypeVpc_connection       ExceptionResourceType = "VPC_CONNECTION"
-	ExceptionResourceTypeIngestion            ExceptionResourceType = "INGESTION"
+	ExceptionResourceTypeUser                ExceptionResourceType = "USER"
+	ExceptionResourceTypeGroup               ExceptionResourceType = "GROUP"
+	ExceptionResourceTypeNamespace           ExceptionResourceType = "NAMESPACE"
+	ExceptionResourceTypeAccountSettings     ExceptionResourceType = "ACCOUNT_SETTINGS"
+	ExceptionResourceTypeIampolicyAssignment ExceptionResourceType = "IAMPOLICY_ASSIGNMENT"
+	ExceptionResourceTypeDataSource          ExceptionResourceType = "DATA_SOURCE"
+	ExceptionResourceTypeDataSet             ExceptionResourceType = "DATA_SET"
+	ExceptionResourceTypeVpcConnection       ExceptionResourceType = "VPC_CONNECTION"
+	ExceptionResourceTypeIngestion           ExceptionResourceType = "INGESTION"
 )
 
 // Values returns all known values for ExceptionResourceType. Note that this can be
@@ -460,46 +460,46 @@ type IngestionErrorType string
 
 // Enum values for IngestionErrorType
 const (
-	IngestionErrorTypeFailure_to_assume_role             IngestionErrorType = "FAILURE_TO_ASSUME_ROLE"
-	IngestionErrorTypeIngestion_superseded               IngestionErrorType = "INGESTION_SUPERSEDED"
-	IngestionErrorTypeIngestion_canceled                 IngestionErrorType = "INGESTION_CANCELED"
-	IngestionErrorTypeData_set_deleted                   IngestionErrorType = "DATA_SET_DELETED"
-	IngestionErrorTypeData_set_not_spice                 IngestionErrorType = "DATA_SET_NOT_SPICE"
-	IngestionErrorTypeS3_uploaded_file_deleted           IngestionErrorType = "S3_UPLOADED_FILE_DELETED"
-	IngestionErrorTypeS3_manifest_error                  IngestionErrorType = "S3_MANIFEST_ERROR"
-	IngestionErrorTypeData_tolerance_exception           IngestionErrorType = "DATA_TOLERANCE_EXCEPTION"
-	IngestionErrorTypeSpice_table_not_found              IngestionErrorType = "SPICE_TABLE_NOT_FOUND"
-	IngestionErrorTypeData_set_size_limit_exceeded       IngestionErrorType = "DATA_SET_SIZE_LIMIT_EXCEEDED"
-	IngestionErrorTypeRow_size_limit_exceeded            IngestionErrorType = "ROW_SIZE_LIMIT_EXCEEDED"
-	IngestionErrorTypeAccount_capacity_limit_exceeded    IngestionErrorType = "ACCOUNT_CAPACITY_LIMIT_EXCEEDED"
-	IngestionErrorTypeCustomer_error                     IngestionErrorType = "CUSTOMER_ERROR"
-	IngestionErrorTypeData_source_not_found              IngestionErrorType = "DATA_SOURCE_NOT_FOUND"
-	IngestionErrorTypeIam_role_not_available             IngestionErrorType = "IAM_ROLE_NOT_AVAILABLE"
-	IngestionErrorTypeConnection_failure                 IngestionErrorType = "CONNECTION_FAILURE"
-	IngestionErrorTypeSql_table_not_found                IngestionErrorType = "SQL_TABLE_NOT_FOUND"
-	IngestionErrorTypePermission_denied                  IngestionErrorType = "PERMISSION_DENIED"
-	IngestionErrorTypeSsl_certificate_validation_failure IngestionErrorType = "SSL_CERTIFICATE_VALIDATION_FAILURE"
-	IngestionErrorTypeOauth_token_failure                IngestionErrorType = "OAUTH_TOKEN_FAILURE"
-	IngestionErrorTypeSource_api_limit_exceeded_failure  IngestionErrorType = "SOURCE_API_LIMIT_EXCEEDED_FAILURE"
-	IngestionErrorTypePassword_authentication_failure    IngestionErrorType = "PASSWORD_AUTHENTICATION_FAILURE"
-	IngestionErrorTypeSql_schema_mismatch_error          IngestionErrorType = "SQL_SCHEMA_MISMATCH_ERROR"
-	IngestionErrorTypeInvalid_date_format                IngestionErrorType = "INVALID_DATE_FORMAT"
-	IngestionErrorTypeInvalid_dataprep_syntax            IngestionErrorType = "INVALID_DATAPREP_SYNTAX"
-	IngestionErrorTypeSource_resource_limit_exceeded     IngestionErrorType = "SOURCE_RESOURCE_LIMIT_EXCEEDED"
-	IngestionErrorTypeSql_invalid_parameter_value        IngestionErrorType = "SQL_INVALID_PARAMETER_VALUE"
-	IngestionErrorTypeQuery_timeout                      IngestionErrorType = "QUERY_TIMEOUT"
-	IngestionErrorTypeSql_numeric_overflow               IngestionErrorType = "SQL_NUMERIC_OVERFLOW"
-	IngestionErrorTypeUnresolvable_host                  IngestionErrorType = "UNRESOLVABLE_HOST"
-	IngestionErrorTypeUnroutable_host                    IngestionErrorType = "UNROUTABLE_HOST"
-	IngestionErrorTypeSql_exception                      IngestionErrorType = "SQL_EXCEPTION"
-	IngestionErrorTypeS3_file_inaccessible               IngestionErrorType = "S3_FILE_INACCESSIBLE"
-	IngestionErrorTypeIot_file_not_found                 IngestionErrorType = "IOT_FILE_NOT_FOUND"
-	IngestionErrorTypeIot_data_set_file_empty            IngestionErrorType = "IOT_DATA_SET_FILE_EMPTY"
-	IngestionErrorTypeInvalid_data_source_config         IngestionErrorType = "INVALID_DATA_SOURCE_CONFIG"
-	IngestionErrorTypeData_source_auth_failed            IngestionErrorType = "DATA_SOURCE_AUTH_FAILED"
-	IngestionErrorTypeData_source_connection_failed      IngestionErrorType = "DATA_SOURCE_CONNECTION_FAILED"
-	IngestionErrorTypeFailure_to_process_json_file       IngestionErrorType = "FAILURE_TO_PROCESS_JSON_FILE"
-	IngestionErrorTypeInternal_service_error             IngestionErrorType = "INTERNAL_SERVICE_ERROR"
+	IngestionErrorTypeFailureToAssumeRole             IngestionErrorType = "FAILURE_TO_ASSUME_ROLE"
+	IngestionErrorTypeIngestionSuperseded             IngestionErrorType = "INGESTION_SUPERSEDED"
+	IngestionErrorTypeIngestionCanceled               IngestionErrorType = "INGESTION_CANCELED"
+	IngestionErrorTypeDataSetDeleted                  IngestionErrorType = "DATA_SET_DELETED"
+	IngestionErrorTypeDataSetNotSpice                 IngestionErrorType = "DATA_SET_NOT_SPICE"
+	IngestionErrorTypeS3UploadedFileDeleted           IngestionErrorType = "S3_UPLOADED_FILE_DELETED"
+	IngestionErrorTypeS3ManifestError                 IngestionErrorType = "S3_MANIFEST_ERROR"
+	IngestionErrorTypeDataToleranceException          IngestionErrorType = "DATA_TOLERANCE_EXCEPTION"
+	IngestionErrorTypeSpiceTableNotFound              IngestionErrorType = "SPICE_TABLE_NOT_FOUND"
+	IngestionErrorTypeDataSetSizeLimitExceeded        IngestionErrorType = "DATA_SET_SIZE_LIMIT_EXCEEDED"
+	IngestionErrorTypeRowSizeLimitExceeded            IngestionErrorType = "ROW_SIZE_LIMIT_EXCEEDED"
+	IngestionErrorTypeAccountCapacityLimitExceeded    IngestionErrorType = "ACCOUNT_CAPACITY_LIMIT_EXCEEDED"
+	IngestionErrorTypeCustomerError                   IngestionErrorType = "CUSTOMER_ERROR"
+	IngestionErrorTypeDataSourceNotFound              IngestionErrorType = "DATA_SOURCE_NOT_FOUND"
+	IngestionErrorTypeIamRoleNotAvailable             IngestionErrorType = "IAM_ROLE_NOT_AVAILABLE"
+	IngestionErrorTypeConnectionFailure               IngestionErrorType = "CONNECTION_FAILURE"
+	IngestionErrorTypeSqlTableNotFound                IngestionErrorType = "SQL_TABLE_NOT_FOUND"
+	IngestionErrorTypePermissionDenied                IngestionErrorType = "PERMISSION_DENIED"
+	IngestionErrorTypeSslCertificateValidationFailure IngestionErrorType = "SSL_CERTIFICATE_VALIDATION_FAILURE"
+	IngestionErrorTypeOauthTokenFailure               IngestionErrorType = "OAUTH_TOKEN_FAILURE"
+	IngestionErrorTypeSourceApiLimitExceededFailure   IngestionErrorType = "SOURCE_API_LIMIT_EXCEEDED_FAILURE"
+	IngestionErrorTypePasswordAuthenticationFailure   IngestionErrorType = "PASSWORD_AUTHENTICATION_FAILURE"
+	IngestionErrorTypeSqlSchemaMismatchError          IngestionErrorType = "SQL_SCHEMA_MISMATCH_ERROR"
+	IngestionErrorTypeInvalidDateFormat               IngestionErrorType = "INVALID_DATE_FORMAT"
+	IngestionErrorTypeInvalidDataprepSyntax           IngestionErrorType = "INVALID_DATAPREP_SYNTAX"
+	IngestionErrorTypeSourceResourceLimitExceeded     IngestionErrorType = "SOURCE_RESOURCE_LIMIT_EXCEEDED"
+	IngestionErrorTypeSqlInvalidParameterValue        IngestionErrorType = "SQL_INVALID_PARAMETER_VALUE"
+	IngestionErrorTypeQueryTimeout                    IngestionErrorType = "QUERY_TIMEOUT"
+	IngestionErrorTypeSqlNumericOverflow              IngestionErrorType = "SQL_NUMERIC_OVERFLOW"
+	IngestionErrorTypeUnresolvableHost                IngestionErrorType = "UNRESOLVABLE_HOST"
+	IngestionErrorTypeUnroutableHost                  IngestionErrorType = "UNROUTABLE_HOST"
+	IngestionErrorTypeSqlException                    IngestionErrorType = "SQL_EXCEPTION"
+	IngestionErrorTypeS3FileInaccessible              IngestionErrorType = "S3_FILE_INACCESSIBLE"
+	IngestionErrorTypeIotFileNotFound                 IngestionErrorType = "IOT_FILE_NOT_FOUND"
+	IngestionErrorTypeIotDataSetFileEmpty             IngestionErrorType = "IOT_DATA_SET_FILE_EMPTY"
+	IngestionErrorTypeInvalidDataSourceConfig         IngestionErrorType = "INVALID_DATA_SOURCE_CONFIG"
+	IngestionErrorTypeDataSourceAuthFailed            IngestionErrorType = "DATA_SOURCE_AUTH_FAILED"
+	IngestionErrorTypeDataSourceConnectionFailed      IngestionErrorType = "DATA_SOURCE_CONNECTION_FAILED"
+	IngestionErrorTypeFailureToProcessJsonFile        IngestionErrorType = "FAILURE_TO_PROCESS_JSON_FILE"
+	IngestionErrorTypeInternalServiceError            IngestionErrorType = "INTERNAL_SERVICE_ERROR"
 )
 
 // Values returns all known values for IngestionErrorType. Note that this can be
@@ -572,10 +572,10 @@ type IngestionRequestType string
 
 // Enum values for IngestionRequestType
 const (
-	IngestionRequestTypeInitial_ingestion   IngestionRequestType = "INITIAL_INGESTION"
-	IngestionRequestTypeEdit                IngestionRequestType = "EDIT"
-	IngestionRequestTypeIncremental_refresh IngestionRequestType = "INCREMENTAL_REFRESH"
-	IngestionRequestTypeFull_refresh        IngestionRequestType = "FULL_REFRESH"
+	IngestionRequestTypeInitialIngestion   IngestionRequestType = "INITIAL_INGESTION"
+	IngestionRequestTypeEdit               IngestionRequestType = "EDIT"
+	IngestionRequestTypeIncrementalRefresh IngestionRequestType = "INCREMENTAL_REFRESH"
+	IngestionRequestTypeFullRefresh        IngestionRequestType = "FULL_REFRESH"
 )
 
 // Values returns all known values for IngestionRequestType. Note that this can be
@@ -670,8 +670,8 @@ type NamespaceErrorType string
 
 // Enum values for NamespaceErrorType
 const (
-	NamespaceErrorTypePermission_denied      NamespaceErrorType = "PERMISSION_DENIED"
-	NamespaceErrorTypeInternal_service_error NamespaceErrorType = "INTERNAL_SERVICE_ERROR"
+	NamespaceErrorTypePermissionDenied     NamespaceErrorType = "PERMISSION_DENIED"
+	NamespaceErrorTypeInternalServiceError NamespaceErrorType = "INTERNAL_SERVICE_ERROR"
 )
 
 // Values returns all known values for NamespaceErrorType. Note that this can be
@@ -688,11 +688,11 @@ type NamespaceStatus string
 
 // Enum values for NamespaceStatus
 const (
-	NamespaceStatusCreated               NamespaceStatus = "CREATED"
-	NamespaceStatusCreating              NamespaceStatus = "CREATING"
-	NamespaceStatusDeleting              NamespaceStatus = "DELETING"
-	NamespaceStatusRetryable_failure     NamespaceStatus = "RETRYABLE_FAILURE"
-	NamespaceStatusNon_retryable_failure NamespaceStatus = "NON_RETRYABLE_FAILURE"
+	NamespaceStatusCreated             NamespaceStatus = "CREATED"
+	NamespaceStatusCreating            NamespaceStatus = "CREATING"
+	NamespaceStatusDeleting            NamespaceStatus = "DELETING"
+	NamespaceStatusRetryableFailure    NamespaceStatus = "RETRYABLE_FAILURE"
+	NamespaceStatusNonRetryableFailure NamespaceStatus = "NON_RETRYABLE_FAILURE"
 )
 
 // Values returns all known values for NamespaceStatus. Note that this can be
@@ -712,13 +712,13 @@ type ResourceStatus string
 
 // Enum values for ResourceStatus
 const (
-	ResourceStatusCreation_in_progress ResourceStatus = "CREATION_IN_PROGRESS"
-	ResourceStatusCreation_successful  ResourceStatus = "CREATION_SUCCESSFUL"
-	ResourceStatusCreation_failed      ResourceStatus = "CREATION_FAILED"
-	ResourceStatusUpdate_in_progress   ResourceStatus = "UPDATE_IN_PROGRESS"
-	ResourceStatusUpdate_successful    ResourceStatus = "UPDATE_SUCCESSFUL"
-	ResourceStatusUpdate_failed        ResourceStatus = "UPDATE_FAILED"
-	ResourceStatusDeleted              ResourceStatus = "DELETED"
+	ResourceStatusCreationInProgress ResourceStatus = "CREATION_IN_PROGRESS"
+	ResourceStatusCreationSuccessful ResourceStatus = "CREATION_SUCCESSFUL"
+	ResourceStatusCreationFailed     ResourceStatus = "CREATION_FAILED"
+	ResourceStatusUpdateInProgress   ResourceStatus = "UPDATE_IN_PROGRESS"
+	ResourceStatusUpdateSuccessful   ResourceStatus = "UPDATE_SUCCESSFUL"
+	ResourceStatusUpdateFailed       ResourceStatus = "UPDATE_FAILED"
+	ResourceStatusDeleted            ResourceStatus = "DELETED"
 )
 
 // Values returns all known values for ResourceStatus. Note that this can be
@@ -740,8 +740,8 @@ type RowLevelPermissionPolicy string
 
 // Enum values for RowLevelPermissionPolicy
 const (
-	RowLevelPermissionPolicyGrant_access RowLevelPermissionPolicy = "GRANT_ACCESS"
-	RowLevelPermissionPolicyDeny_access  RowLevelPermissionPolicy = "DENY_ACCESS"
+	RowLevelPermissionPolicyGrantAccess RowLevelPermissionPolicy = "GRANT_ACCESS"
+	RowLevelPermissionPolicyDenyAccess  RowLevelPermissionPolicy = "DENY_ACCESS"
 )
 
 // Values returns all known values for RowLevelPermissionPolicy. Note that this can
@@ -758,10 +758,10 @@ type TemplateErrorType string
 
 // Enum values for TemplateErrorType
 const (
-	TemplateErrorTypeSource_not_found   TemplateErrorType = "SOURCE_NOT_FOUND"
-	TemplateErrorTypeData_set_not_found TemplateErrorType = "DATA_SET_NOT_FOUND"
-	TemplateErrorTypeInternal_failure   TemplateErrorType = "INTERNAL_FAILURE"
-	TemplateErrorTypeAccess_denied      TemplateErrorType = "ACCESS_DENIED"
+	TemplateErrorTypeSourceNotFound  TemplateErrorType = "SOURCE_NOT_FOUND"
+	TemplateErrorTypeDataSetNotFound TemplateErrorType = "DATA_SET_NOT_FOUND"
+	TemplateErrorTypeInternalFailure TemplateErrorType = "INTERNAL_FAILURE"
+	TemplateErrorTypeAccessDenied    TemplateErrorType = "ACCESS_DENIED"
 )
 
 // Values returns all known values for TemplateErrorType. Note that this can be
@@ -780,8 +780,8 @@ type TextQualifier string
 
 // Enum values for TextQualifier
 const (
-	TextQualifierDouble_quote TextQualifier = "DOUBLE_QUOTE"
-	TextQualifierSingle_quote TextQualifier = "SINGLE_QUOTE"
+	TextQualifierDoubleQuote TextQualifier = "DOUBLE_QUOTE"
+	TextQualifierSingleQuote TextQualifier = "SINGLE_QUOTE"
 )
 
 // Values returns all known values for TextQualifier. Note that this can be
@@ -798,7 +798,7 @@ type ThemeErrorType string
 
 // Enum values for ThemeErrorType
 const (
-	ThemeErrorTypeInternal_failure ThemeErrorType = "INTERNAL_FAILURE"
+	ThemeErrorTypeInternalFailure ThemeErrorType = "INTERNAL_FAILURE"
 )
 
 // Values returns all known values for ThemeErrorType. Note that this can be
@@ -834,11 +834,11 @@ type UserRole string
 
 // Enum values for UserRole
 const (
-	UserRoleAdmin             UserRole = "ADMIN"
-	UserRoleAuthor            UserRole = "AUTHOR"
-	UserRoleReader            UserRole = "READER"
-	UserRoleRestricted_author UserRole = "RESTRICTED_AUTHOR"
-	UserRoleRestricted_reader UserRole = "RESTRICTED_READER"
+	UserRoleAdmin            UserRole = "ADMIN"
+	UserRoleAuthor           UserRole = "AUTHOR"
+	UserRoleReader           UserRole = "READER"
+	UserRoleRestrictedAuthor UserRole = "RESTRICTED_AUTHOR"
+	UserRoleRestrictedReader UserRole = "RESTRICTED_READER"
 )
 
 // Values returns all known values for UserRole. Note that this can be expanded in

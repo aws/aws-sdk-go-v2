@@ -108,11 +108,11 @@ type Permission string
 
 // Enum values for Permission
 const (
-	PermissionFull_control Permission = "FULL_CONTROL"
-	PermissionWrite        Permission = "WRITE"
-	PermissionWrite_acp    Permission = "WRITE_ACP"
-	PermissionRead         Permission = "READ"
-	PermissionRead_acp     Permission = "READ_ACP"
+	PermissionFullControl Permission = "FULL_CONTROL"
+	PermissionWrite       Permission = "WRITE"
+	PermissionWriteAcp    Permission = "WRITE_ACP"
+	PermissionRead        Permission = "READ"
+	PermissionReadAcp     Permission = "READ_ACP"
 )
 
 // Values returns all known values for Permission. Note that this can be expanded

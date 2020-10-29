@@ -41,11 +41,11 @@ type AutoScalingGroupRecommendation struct {
 	// The finding classification for the Auto Scaling group. Findings for Auto Scaling
 	// groups include:
 	//
-	//     * NotOptimized —An Auto Scaling group is considered not
+	// * NotOptimized —An Auto Scaling group is considered not
 	// optimized when AWS Compute Optimizer identifies a recommendation that can
 	// provide better performance for your workload.
 	//
-	//     * Optimized —An Auto Scaling
+	// * Optimized —An Auto Scaling
 	// group is considered optimized when Compute Optimizer determines that the group
 	// is correctly provisioned to run your workload based on the chosen instance type.
 	// For optimized resources, Compute Optimizer might recommend a new generation
@@ -152,21 +152,21 @@ type InstanceRecommendation struct {
 
 	// The finding classification for the instance. Findings for instances include:
 	//
+	// *
+	// Underprovisioned —An instance is considered under-provisioned when at least one
+	// specification of your instance, such as CPU, memory, or network, does not meet
+	// the performance requirements of your workload. Under-provisioned instances may
+	// lead to poor application performance.
 	//
-	// * Underprovisioned —An instance is considered under-provisioned when at least
-	// one specification of your instance, such as CPU, memory, or network, does not
-	// meet the performance requirements of your workload. Under-provisioned instances
-	// may lead to poor application performance.
-	//
-	//     * Overprovisioned —An instance is
+	// * Overprovisioned —An instance is
 	// considered over-provisioned when at least one specification of your instance,
 	// such as CPU, memory, or network, can be sized down while still meeting the
 	// performance requirements of your workload, and no specification is
 	// under-provisioned. Over-provisioned instances may lead to unnecessary
 	// infrastructure cost.
 	//
-	//     * Optimized —An instance is considered optimized when
-	// all specifications of your instance, such as CPU, memory, and network, meet the
+	// * Optimized —An instance is considered optimized when all
+	// specifications of your instance, such as CPU, memory, and network, meet the
 	// performance requirements of your workload and is not over provisioned. An
 	// optimized instance runs your workloads with optimal performance and
 	// infrastructure cost. For optimized resources, AWS Compute Optimizer might

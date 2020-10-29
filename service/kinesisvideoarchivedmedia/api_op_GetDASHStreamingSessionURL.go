@@ -18,40 +18,40 @@ import (
 // An Amazon Kinesis video stream has the following requirements for providing data
 // through MPEG-DASH:
 //
-//     * The media must contain h.264 or h.265 encoded video
-// and, optionally, AAC or G.711 encoded audio. Specifically, the codec ID of track
-// 1 should be V_MPEG/ISO/AVC (for h.264) or V_MPEGH/ISO/HEVC (for H.265).
+// * The media must contain h.264 or h.265 encoded video and,
+// optionally, AAC or G.711 encoded audio. Specifically, the codec ID of track 1
+// should be V_MPEG/ISO/AVC (for h.264) or V_MPEGH/ISO/HEVC (for H.265).
 // Optionally, the codec ID of track 2 should be A_AAC (for AAC) or A_MS/ACM (for
 // G.711).
 //
-//     * Data retention must be greater than 0.
+// * Data retention must be greater than 0.
 //
-//     * The video track of
-// each fragment must contain codec private data in the Advanced Video Coding (AVC)
-// for H.264 format and HEVC for H.265 format. For more information, see MPEG-4
+// * The video track of each
+// fragment must contain codec private data in the Advanced Video Coding (AVC) for
+// H.264 format and HEVC for H.265 format. For more information, see MPEG-4
 // specification ISO/IEC 14496-15 (https://www.iso.org/standard/55980.html). For
 // information about adapting stream data to a given format, see NAL Adaptation
 // Flags
 // (http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/producer-reference-nal.html).
 //
-//
-// * The audio track (if present) of each fragment must contain codec private data
-// in the AAC format (AAC specification ISO/IEC 13818-7
+// *
+// The audio track (if present) of each fragment must contain codec private data in
+// the AAC format (AAC specification ISO/IEC 13818-7
 // (https://www.iso.org/standard/43345.html)) or the MS Wave format
 // (http://www-mmsp.ece.mcgill.ca/Documents/AudioFormats/WAVE/WAVE.html).
 //
 // The
 // following procedure shows how to use MPEG-DASH with Kinesis Video Streams:
 //
-//
-// * Get an endpoint using GetDataEndpoint
+// *
+// Get an endpoint using GetDataEndpoint
 // (http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_GetDataEndpoint.html),
 // specifying GET_DASH_STREAMING_SESSION_URL for the APIName parameter.
 //
-//     *
-// Retrieve the MPEG-DASH URL using GetDASHStreamingSessionURL. Kinesis Video
-// Streams creates an MPEG-DASH streaming session to be used for accessing content
-// in a stream using the MPEG-DASH protocol. GetDASHStreamingSessionURL returns an
+// * Retrieve
+// the MPEG-DASH URL using GetDASHStreamingSessionURL. Kinesis Video Streams
+// creates an MPEG-DASH streaming session to be used for accessing content in a
+// stream using the MPEG-DASH protocol. GetDASHStreamingSessionURL returns an
 // authenticated URL (that includes an encrypted session token) for the session's
 // MPEG-DASH manifest (the root resource needed for streaming with MPEG-DASH).
 // Don't share or store this token where an unauthorized entity could access it.
@@ -61,53 +61,53 @@ import (
 // time range, and format. No other media data (such as frames outside the
 // requested window or alternate bitrates) is made available.
 //
-//     * Provide the
-// URL (containing the encrypted session token) for the MPEG-DASH manifest to a
-// media player that supports the MPEG-DASH protocol. Kinesis Video Streams makes
-// the initialization fragment and media fragments available through the manifest
-// URL. The initialization fragment contains the codec private data for the stream,
-// and other data needed to set up the video or audio decoder and renderer. The
-// media fragments contain encoded video frames or encoded audio samples.
+// * Provide the URL
+// (containing the encrypted session token) for the MPEG-DASH manifest to a media
+// player that supports the MPEG-DASH protocol. Kinesis Video Streams makes the
+// initialization fragment and media fragments available through the manifest URL.
+// The initialization fragment contains the codec private data for the stream, and
+// other data needed to set up the video or audio decoder and renderer. The media
+// fragments contain encoded video frames or encoded audio samples.
 //
-//     *
-// The media player receives the authenticated URL and requests stream metadata and
-// media data normally. When the media player requests data, it calls the following
+// * The media
+// player receives the authenticated URL and requests stream metadata and media
+// data normally. When the media player requests data, it calls the following
 // actions:
 //
-//         * GetDASHManifest: Retrieves an MPEG DASH manifest, which
-// contains the metadata for the media that you want to playback.
+// * GetDASHManifest: Retrieves an MPEG DASH manifest, which contains the
+// metadata for the media that you want to playback.
 //
-//         *
-// GetMP4InitFragment: Retrieves the MP4 initialization fragment. The media player
-// typically loads the initialization fragment before loading any media fragments.
-// This fragment contains the "fytp" and "moov" MP4 atoms, and the child atoms that
-// are needed to initialize the media player decoder. The initialization fragment
-// does not correspond to a fragment in a Kinesis video stream. It contains only
-// the codec private data for the stream and respective track, which the media
-// player needs to decode the media frames.
+// * GetMP4InitFragment:
+// Retrieves the MP4 initialization fragment. The media player typically loads the
+// initialization fragment before loading any media fragments. This fragment
+// contains the "fytp" and "moov" MP4 atoms, and the child atoms that are needed to
+// initialize the media player decoder. The initialization fragment does not
+// correspond to a fragment in a Kinesis video stream. It contains only the codec
+// private data for the stream and respective track, which the media player needs
+// to decode the media frames.
 //
-//         * GetMP4MediaFragment:
-// Retrieves MP4 media fragments. These fragments contain the "moof" and "mdat" MP4
-// atoms and their child atoms, containing the encoded fragment's media frames and
-// their timestamps. After the first media fragment is made available in a
-// streaming session, any fragments that don't contain the same codec private data
-// cause an error to be returned when those different media fragments are loaded.
-// Therefore, the codec private data should not change between fragments in a
-// session. This also means that the session fails if the fragments in a stream
-// change from having only video to having both audio and video. Data retrieved
-// with this action is billable. See Pricing
+// * GetMP4MediaFragment: Retrieves MP4 media
+// fragments. These fragments contain the "moof" and "mdat" MP4 atoms and their
+// child atoms, containing the encoded fragment's media frames and their
+// timestamps. After the first media fragment is made available in a streaming
+// session, any fragments that don't contain the same codec private data cause an
+// error to be returned when those different media fragments are loaded. Therefore,
+// the codec private data should not change between fragments in a session. This
+// also means that the session fails if the fragments in a stream change from
+// having only video to having both audio and video. Data retrieved with this
+// action is billable. See Pricing
 // (https://aws.amazon.com/kinesis/video-streams/pricing/) for details.
 //
 // The
 // following restrictions apply to MPEG-DASH sessions:
 //
-//     * A streaming session
-// URL should not be shared between players. The service might throttle a session
-// if multiple media players are sharing it. For connection limits, see Kinesis
-// Video Streams Limits
+// * A streaming session URL
+// should not be shared between players. The service might throttle a session if
+// multiple media players are sharing it. For connection limits, see Kinesis Video
+// Streams Limits
 // (http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/limits.html).
 //
-//     * A
+// * A
 // Kinesis video stream can have a maximum of ten active MPEG-DASH streaming
 // sessions. If a new session is created when the maximum number of sessions is
 // already active, the oldest (earliest created) session is closed. The number of
@@ -131,19 +131,19 @@ import (
 // Video Streams archived media API, in addition to the HTTP status code and the
 // response body, it includes the following pieces of information:
 //
-//     *
+// *
 // x-amz-ErrorType HTTP header – contains a more specific error type in addition to
 // what the HTTP status code provides.
 //
-//     * x-amz-RequestId HTTP header – if you
-// want to report an issue to AWS, the support team can better diagnose the problem
-// if given the Request Id.
+// * x-amz-RequestId HTTP header – if you want
+// to report an issue to AWS, the support team can better diagnose the problem if
+// given the Request Id.
 //
-// Both the HTTP status code and the ErrorType header can
-// be utilized to make programmatic decisions about whether errors are retry-able
-// and under what conditions, as well as provide information on what actions the
-// client programmer might need to take in order to successfully try again. For
-// more information, see the Errors section at the bottom of this topic, as well as
+// Both the HTTP status code and the ErrorType header can be
+// utilized to make programmatic decisions about whether errors are retry-able and
+// under what conditions, as well as provide information on what actions the client
+// programmer might need to take in order to successfully try again. For more
+// information, see the Errors section at the bottom of this topic, as well as
 // Common Errors
 // (https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/CommonErrors.html).
 func (c *Client) GetDASHStreamingSessionURL(ctx context.Context, params *GetDASHStreamingSessionURLInput, optFns ...func(*Options)) (*GetDASHStreamingSessionURLOutput, error) {
@@ -219,7 +219,7 @@ type GetDASHStreamingSessionURLInput struct {
 	// Whether to retrieve live, live replay, or archived, on-demand data. Features of
 	// the three types of sessions include the following:
 	//
-	//     * LIVE : For sessions of
+	// * LIVE : For sessions of
 	// this type, the MPEG-DASH manifest is continually updated with the latest
 	// fragments as they become available. We recommend that the media player retrieve
 	// a new manifest on a one-second interval. When this type of session is played in
@@ -233,7 +233,7 @@ type GetDASHStreamingSessionURLInput struct {
 	// missing fragment becomes available after a subsequent fragment is added to the
 	// manifest, the older fragment is not added, and the gap is not filled.
 	//
-	//     *
+	// *
 	// LIVE_REPLAY : For sessions of this type, the MPEG-DASH manifest is updated
 	// similarly to how it is updated for LIVE mode except that it starts by including
 	// fragments from a given start time. Instead of fragments being added as they are
@@ -245,9 +245,9 @@ type GetDASHStreamingSessionURLInput struct {
 	// creation. This mode is also useful to stream previously archived media without
 	// being limited by the 1,000 fragment limit in the ON_DEMAND mode.
 	//
-	//     *
-	// ON_DEMAND : For sessions of this type, the MPEG-DASH manifest contains all the
-	// fragments for the session, up to the number that is specified in
+	// * ON_DEMAND :
+	// For sessions of this type, the MPEG-DASH manifest contains all the fragments for
+	// the session, up to the number that is specified in
 	// MaxMediaPlaylistFragmentResults. The manifest must be retrieved only once for
 	// each session. When this type of session is played in a media player, the user
 	// interface typically displays a scrubber control for choosing the position in the

@@ -6,10 +6,10 @@ type BackupStatus string
 
 // Enum values for BackupStatus
 const (
-	BackupStatusIn_progress BackupStatus = "IN_PROGRESS"
-	BackupStatusOk          BackupStatus = "OK"
-	BackupStatusFailed      BackupStatus = "FAILED"
-	BackupStatusDeleting    BackupStatus = "DELETING"
+	BackupStatusInProgress BackupStatus = "IN_PROGRESS"
+	BackupStatusOk         BackupStatus = "OK"
+	BackupStatusFailed     BackupStatus = "FAILED"
+	BackupStatusDeleting   BackupStatus = "DELETING"
 )
 
 // Values returns all known values for BackupStatus. Note that this can be expanded
@@ -64,9 +64,9 @@ type NodeAssociationStatus string
 
 // Enum values for NodeAssociationStatus
 const (
-	NodeAssociationStatusSuccess     NodeAssociationStatus = "SUCCESS"
-	NodeAssociationStatusFailed      NodeAssociationStatus = "FAILED"
-	NodeAssociationStatusIn_progress NodeAssociationStatus = "IN_PROGRESS"
+	NodeAssociationStatusSuccess    NodeAssociationStatus = "SUCCESS"
+	NodeAssociationStatusFailed     NodeAssociationStatus = "FAILED"
+	NodeAssociationStatusInProgress NodeAssociationStatus = "IN_PROGRESS"
 )
 
 // Values returns all known values for NodeAssociationStatus. Note that this can be
@@ -84,19 +84,19 @@ type ServerStatus string
 
 // Enum values for ServerStatus
 const (
-	ServerStatusBacking_up        ServerStatus = "BACKING_UP"
-	ServerStatusConnection_lost   ServerStatus = "CONNECTION_LOST"
-	ServerStatusCreating          ServerStatus = "CREATING"
-	ServerStatusDeleting          ServerStatus = "DELETING"
-	ServerStatusModifying         ServerStatus = "MODIFYING"
-	ServerStatusFailed            ServerStatus = "FAILED"
-	ServerStatusHealthy           ServerStatus = "HEALTHY"
-	ServerStatusRunning           ServerStatus = "RUNNING"
-	ServerStatusRestoring         ServerStatus = "RESTORING"
-	ServerStatusSetup             ServerStatus = "SETUP"
-	ServerStatusUnder_maintenance ServerStatus = "UNDER_MAINTENANCE"
-	ServerStatusUnhealthy         ServerStatus = "UNHEALTHY"
-	ServerStatusTerminated        ServerStatus = "TERMINATED"
+	ServerStatusBackingUp        ServerStatus = "BACKING_UP"
+	ServerStatusConnectionLost   ServerStatus = "CONNECTION_LOST"
+	ServerStatusCreating         ServerStatus = "CREATING"
+	ServerStatusDeleting         ServerStatus = "DELETING"
+	ServerStatusModifying        ServerStatus = "MODIFYING"
+	ServerStatusFailed           ServerStatus = "FAILED"
+	ServerStatusHealthy          ServerStatus = "HEALTHY"
+	ServerStatusRunning          ServerStatus = "RUNNING"
+	ServerStatusRestoring        ServerStatus = "RESTORING"
+	ServerStatusSetup            ServerStatus = "SETUP"
+	ServerStatusUnderMaintenance ServerStatus = "UNDER_MAINTENANCE"
+	ServerStatusUnhealthy        ServerStatus = "UNHEALTHY"
+	ServerStatusTerminated       ServerStatus = "TERMINATED"
 )
 
 // Values returns all known values for ServerStatus. Note that this can be expanded

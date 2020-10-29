@@ -381,14 +381,13 @@ type NFSFileShareInfo struct {
 
 	// The user mapped to anonymous user. Valid options are the following:
 	//
-	//     *
+	// *
 	// RootSquash: Only root is mapped to anonymous user.
 	//
-	//     * NoSquash: No one is
-	// mapped to anonymous user.
+	// * NoSquash: No one is mapped
+	// to anonymous user.
 	//
-	//     * AllSquash: Everyone is mapped to anonymous
-	// user.
+	// * AllSquash: Everyone is mapped to anonymous user.
 	Squash *string
 
 	// A list of up to 50 tags assigned to the NFS file share, sorted alphabetically by

@@ -49,46 +49,46 @@ type Operator struct {
 	// apply only to certain object fields, as detailed below. The comparison operators
 	// EQ and REF_EQ act on the following fields:
 	//
-	//     * name
+	// * name
 	//
-	//     * @sphere
+	// * @sphere
 	//
-	//     *
-	// parent
+	// * parent
 	//
-	//     * @componentParent
+	// *
+	// @componentParent
 	//
-	//     * @instanceParent
+	// * @instanceParent
 	//
-	//     * @status
+	// * @status
 	//
-	//     *
+	// * @scheduledStartTime
+	//
+	// *
+	// @scheduledEndTime
+	//
+	// * @actualStartTime
+	//
+	// * @actualEndTime
+	//
+	// The comparison
+	// operators GE, LE, and BETWEEN act on the following fields:
+	//
+	// *
 	// @scheduledStartTime
 	//
-	//     * @scheduledEndTime
+	// * @scheduledEndTime
 	//
-	//     * @actualStartTime
+	// * @actualStartTime
 	//
-	//     *
+	// *
 	// @actualEndTime
 	//
-	// The comparison operators GE, LE, and BETWEEN act on the
-	// following fields:
-	//
-	//     * @scheduledStartTime
-	//
-	//     * @scheduledEndTime
-	//
-	//     *
-	// @actualStartTime
-	//
-	//     * @actualEndTime
-	//
-	// Note that fields beginning with the at
-	// sign (@) are read-only and set by the web service. When you name fields, you
-	// should choose names containing only alpha-numeric values, as symbols may be
-	// reserved by AWS Data Pipeline. User-defined fields that you add to a pipeline
-	// should prefix their name with the string "my".
+	// Note that fields beginning with the at sign (@) are read-only
+	// and set by the web service. When you name fields, you should choose names
+	// containing only alpha-numeric values, as symbols may be reserved by AWS Data
+	// Pipeline. User-defined fields that you add to a pipeline should prefix their
+	// name with the string "my".
 	Type OperatorType
 
 	// The value that the actual field value will be compared with.

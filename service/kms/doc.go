@@ -37,17 +37,17 @@
 // Resources For more information about credentials and request signing, see the
 // following:
 //
-//     * AWS Security Credentials
+// * AWS Security Credentials
 // (https://docs.aws.amazon.com/general/latest/gr/aws-security-credentials.html) -
 // This topic provides general information about the types of credentials used for
 // accessing AWS.
 //
-//     * Temporary Security Credentials
+// * Temporary Security Credentials
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html) -
 // This section of the IAM User Guide describes how to create and use temporary
 // security credentials.
 //
-//     * Signature Version 4 Signing Process
+// * Signature Version 4 Signing Process
 // (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html) - This
 // set of topics walks you through the process of signing a request using an access
 // key ID and a secret access key.
@@ -57,12 +57,12 @@
 // most applications. You will likely perform operations other than these, such as
 // creating keys and assigning policies, by using the console.
 //
-//     * Encrypt
+// * Encrypt
 //
+// *
+// Decrypt
 //
-// * Decrypt
+// * GenerateDataKey
 //
-//     * GenerateDataKey
-//
-//     * GenerateDataKeyWithoutPlaintext
+// * GenerateDataKeyWithoutPlaintext
 package kms

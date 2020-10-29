@@ -35,7 +35,7 @@ type ModifyDBInstanceInput struct {
 	// The instance identifier. This value is stored as a lowercase string.
 	// Constraints:
 	//
-	//     * Must match the identifier of an existing DBInstance.
+	// * Must match the identifier of an existing DBInstance.
 	//
 	// This member is required.
 	DBInstanceIdentifier *string
@@ -72,13 +72,13 @@ type ModifyDBInstanceInput struct {
 	// set Apply Immediately to false. This value is stored as a lowercase string.
 	// Constraints:
 	//
-	//     * Must contain from 1 to 63 letters, numbers, or hyphens.
+	// * Must contain from 1 to 63 letters, numbers, or hyphens.
 	//
+	// * The
+	// first character must be a letter.
 	//
-	// * The first character must be a letter.
-	//
-	//     * Cannot end with a hyphen or
-	// contain two consecutive hyphens.
+	// * Cannot end with a hyphen or contain two
+	// consecutive hyphens.
 	//
 	// Example: mydbinstance
 	NewDBInstanceIdentifier *string

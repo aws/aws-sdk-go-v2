@@ -30,21 +30,21 @@ type ApiCacheType string
 
 // Enum values for ApiCacheType
 const (
-	ApiCacheTypeT2_small   ApiCacheType = "T2_SMALL"
-	ApiCacheTypeT2_medium  ApiCacheType = "T2_MEDIUM"
-	ApiCacheTypeR4_large   ApiCacheType = "R4_LARGE"
-	ApiCacheTypeR4_xlarge  ApiCacheType = "R4_XLARGE"
-	ApiCacheTypeR4_2xlarge ApiCacheType = "R4_2XLARGE"
-	ApiCacheTypeR4_4xlarge ApiCacheType = "R4_4XLARGE"
-	ApiCacheTypeR4_8xlarge ApiCacheType = "R4_8XLARGE"
-	ApiCacheTypeSmall      ApiCacheType = "SMALL"
-	ApiCacheTypeMedium     ApiCacheType = "MEDIUM"
-	ApiCacheTypeLarge      ApiCacheType = "LARGE"
-	ApiCacheTypeXlarge     ApiCacheType = "XLARGE"
-	ApiCacheTypeLarge_2x   ApiCacheType = "LARGE_2X"
-	ApiCacheTypeLarge_4x   ApiCacheType = "LARGE_4X"
-	ApiCacheTypeLarge_8x   ApiCacheType = "LARGE_8X"
-	ApiCacheTypeLarge_12x  ApiCacheType = "LARGE_12X"
+	ApiCacheTypeT2Small   ApiCacheType = "T2_SMALL"
+	ApiCacheTypeT2Medium  ApiCacheType = "T2_MEDIUM"
+	ApiCacheTypeR4Large   ApiCacheType = "R4_LARGE"
+	ApiCacheTypeR4Xlarge  ApiCacheType = "R4_XLARGE"
+	ApiCacheTypeR42xlarge ApiCacheType = "R4_2XLARGE"
+	ApiCacheTypeR44xlarge ApiCacheType = "R4_4XLARGE"
+	ApiCacheTypeR48xlarge ApiCacheType = "R4_8XLARGE"
+	ApiCacheTypeSmall     ApiCacheType = "SMALL"
+	ApiCacheTypeMedium    ApiCacheType = "MEDIUM"
+	ApiCacheTypeLarge     ApiCacheType = "LARGE"
+	ApiCacheTypeXlarge    ApiCacheType = "XLARGE"
+	ApiCacheTypeLarge2x   ApiCacheType = "LARGE_2X"
+	ApiCacheTypeLarge4x   ApiCacheType = "LARGE_4X"
+	ApiCacheTypeLarge8x   ApiCacheType = "LARGE_8X"
+	ApiCacheTypeLarge12x  ApiCacheType = "LARGE_12X"
 )
 
 // Values returns all known values for ApiCacheType. Note that this can be expanded
@@ -74,8 +74,8 @@ type ApiCachingBehavior string
 
 // Enum values for ApiCachingBehavior
 const (
-	ApiCachingBehaviorFull_request_caching ApiCachingBehavior = "FULL_REQUEST_CACHING"
-	ApiCachingBehaviorPer_resolver_caching ApiCachingBehavior = "PER_RESOLVER_CACHING"
+	ApiCachingBehaviorFullRequestCaching ApiCachingBehavior = "FULL_REQUEST_CACHING"
+	ApiCachingBehaviorPerResolverCaching ApiCachingBehavior = "PER_RESOLVER_CACHING"
 )
 
 // Values returns all known values for ApiCachingBehavior. Note that this can be
@@ -92,10 +92,10 @@ type AuthenticationType string
 
 // Enum values for AuthenticationType
 const (
-	AuthenticationTypeApi_key                   AuthenticationType = "API_KEY"
-	AuthenticationTypeAws_iam                   AuthenticationType = "AWS_IAM"
-	AuthenticationTypeAmazon_cognito_user_pools AuthenticationType = "AMAZON_COGNITO_USER_POOLS"
-	AuthenticationTypeOpenid_connect            AuthenticationType = "OPENID_CONNECT"
+	AuthenticationTypeApiKey                 AuthenticationType = "API_KEY"
+	AuthenticationTypeAwsIam                 AuthenticationType = "AWS_IAM"
+	AuthenticationTypeAmazonCognitoUserPools AuthenticationType = "AMAZON_COGNITO_USER_POOLS"
+	AuthenticationTypeOpenidConnect          AuthenticationType = "OPENID_CONNECT"
 )
 
 // Values returns all known values for AuthenticationType. Note that this can be
@@ -114,7 +114,7 @@ type AuthorizationType string
 
 // Enum values for AuthorizationType
 const (
-	AuthorizationTypeAws_iam AuthorizationType = "AWS_IAM"
+	AuthorizationTypeAwsIam AuthorizationType = "AWS_IAM"
 )
 
 // Values returns all known values for AuthorizationType. Note that this can be
@@ -148,10 +148,10 @@ type ConflictHandlerType string
 
 // Enum values for ConflictHandlerType
 const (
-	ConflictHandlerTypeOptimistic_concurrency ConflictHandlerType = "OPTIMISTIC_CONCURRENCY"
-	ConflictHandlerTypeLambda                 ConflictHandlerType = "LAMBDA"
-	ConflictHandlerTypeAutomerge              ConflictHandlerType = "AUTOMERGE"
-	ConflictHandlerTypeNone                   ConflictHandlerType = "NONE"
+	ConflictHandlerTypeOptimisticConcurrency ConflictHandlerType = "OPTIMISTIC_CONCURRENCY"
+	ConflictHandlerTypeLambda                ConflictHandlerType = "LAMBDA"
+	ConflictHandlerTypeAutomerge             ConflictHandlerType = "AUTOMERGE"
+	ConflictHandlerTypeNone                  ConflictHandlerType = "NONE"
 )
 
 // Values returns all known values for ConflictHandlerType. Note that this can be
@@ -170,12 +170,12 @@ type DataSourceType string
 
 // Enum values for DataSourceType
 const (
-	DataSourceTypeAws_lambda           DataSourceType = "AWS_LAMBDA"
-	DataSourceTypeAmazon_dynamodb      DataSourceType = "AMAZON_DYNAMODB"
-	DataSourceTypeAmazon_elasticsearch DataSourceType = "AMAZON_ELASTICSEARCH"
-	DataSourceTypeNone                 DataSourceType = "NONE"
-	DataSourceTypeHttp                 DataSourceType = "HTTP"
-	DataSourceTypeRelational_database  DataSourceType = "RELATIONAL_DATABASE"
+	DataSourceTypeAwsLambda           DataSourceType = "AWS_LAMBDA"
+	DataSourceTypeAmazonDynamodb      DataSourceType = "AMAZON_DYNAMODB"
+	DataSourceTypeAmazonElasticsearch DataSourceType = "AMAZON_ELASTICSEARCH"
+	DataSourceTypeNone                DataSourceType = "NONE"
+	DataSourceTypeHttp                DataSourceType = "HTTP"
+	DataSourceTypeRelationalDatabase  DataSourceType = "RELATIONAL_DATABASE"
 )
 
 // Values returns all known values for DataSourceType. Note that this can be
@@ -252,7 +252,7 @@ type RelationalDatabaseSourceType string
 
 // Enum values for RelationalDatabaseSourceType
 const (
-	RelationalDatabaseSourceTypeRds_http_endpoint RelationalDatabaseSourceType = "RDS_HTTP_ENDPOINT"
+	RelationalDatabaseSourceTypeRdsHttpEndpoint RelationalDatabaseSourceType = "RDS_HTTP_ENDPOINT"
 )
 
 // Values returns all known values for RelationalDatabaseSourceType. Note that this

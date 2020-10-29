@@ -43,8 +43,8 @@ type GetTransitGatewayAttachmentPropagationsInput struct {
 
 	// One or more filters. The possible values are:
 	//
-	//     *
-	// transit-gateway-route-table-id - The ID of the transit gateway route table.
+	// * transit-gateway-route-table-id
+	// - The ID of the transit gateway route table.
 	Filters []*types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the

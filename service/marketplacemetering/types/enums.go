@@ -6,9 +6,9 @@ type UsageRecordResultStatus string
 
 // Enum values for UsageRecordResultStatus
 const (
-	UsageRecordResultStatusSuccess                 UsageRecordResultStatus = "Success"
-	UsageRecordResultStatusCustomer_not_subscribed UsageRecordResultStatus = "CustomerNotSubscribed"
-	UsageRecordResultStatusDuplicate_record        UsageRecordResultStatus = "DuplicateRecord"
+	UsageRecordResultStatusSuccess               UsageRecordResultStatus = "Success"
+	UsageRecordResultStatusCustomerNotSubscribed UsageRecordResultStatus = "CustomerNotSubscribed"
+	UsageRecordResultStatusDuplicateRecord       UsageRecordResultStatus = "DuplicateRecord"
 )
 
 // Values returns all known values for UsageRecordResultStatus. Note that this can

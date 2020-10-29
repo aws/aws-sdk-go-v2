@@ -9,7 +9,7 @@ const (
 	ContactTypePerson      ContactType = "PERSON"
 	ContactTypeCompany     ContactType = "COMPANY"
 	ContactTypeAssociation ContactType = "ASSOCIATION"
-	ContactTypePublic_body ContactType = "PUBLIC_BODY"
+	ContactTypePublicBody  ContactType = "PUBLIC_BODY"
 	ContactTypeReseller    ContactType = "RESELLER"
 )
 
@@ -502,14 +502,14 @@ type DomainAvailability string
 
 // Enum values for DomainAvailability
 const (
-	DomainAvailabilityAvailable              DomainAvailability = "AVAILABLE"
-	DomainAvailabilityAvailable_reserved     DomainAvailability = "AVAILABLE_RESERVED"
-	DomainAvailabilityAvailable_preorder     DomainAvailability = "AVAILABLE_PREORDER"
-	DomainAvailabilityUnavailable            DomainAvailability = "UNAVAILABLE"
-	DomainAvailabilityUnavailable_premium    DomainAvailability = "UNAVAILABLE_PREMIUM"
-	DomainAvailabilityUnavailable_restricted DomainAvailability = "UNAVAILABLE_RESTRICTED"
-	DomainAvailabilityReserved               DomainAvailability = "RESERVED"
-	DomainAvailabilityDont_know              DomainAvailability = "DONT_KNOW"
+	DomainAvailabilityAvailable             DomainAvailability = "AVAILABLE"
+	DomainAvailabilityAvailableReserved     DomainAvailability = "AVAILABLE_RESERVED"
+	DomainAvailabilityAvailablePreorder     DomainAvailability = "AVAILABLE_PREORDER"
+	DomainAvailabilityUnavailable           DomainAvailability = "UNAVAILABLE"
+	DomainAvailabilityUnavailablePremium    DomainAvailability = "UNAVAILABLE_PREMIUM"
+	DomainAvailabilityUnavailableRestricted DomainAvailability = "UNAVAILABLE_RESTRICTED"
+	DomainAvailabilityReserved              DomainAvailability = "RESERVED"
+	DomainAvailabilityDontKnow              DomainAvailability = "DONT_KNOW"
 )
 
 // Values returns all known values for DomainAvailability. Note that this can be
@@ -532,35 +532,35 @@ type ExtraParamName string
 
 // Enum values for ExtraParamName
 const (
-	ExtraParamNameDuns_number                      ExtraParamName = "DUNS_NUMBER"
-	ExtraParamNameBrand_number                     ExtraParamName = "BRAND_NUMBER"
-	ExtraParamNameBirth_department                 ExtraParamName = "BIRTH_DEPARTMENT"
-	ExtraParamNameBirth_date_in_yyyy_mm_dd         ExtraParamName = "BIRTH_DATE_IN_YYYY_MM_DD"
-	ExtraParamNameBirth_country                    ExtraParamName = "BIRTH_COUNTRY"
-	ExtraParamNameBirth_city                       ExtraParamName = "BIRTH_CITY"
-	ExtraParamNameDocument_number                  ExtraParamName = "DOCUMENT_NUMBER"
-	ExtraParamNameAu_id_number                     ExtraParamName = "AU_ID_NUMBER"
-	ExtraParamNameAu_id_type                       ExtraParamName = "AU_ID_TYPE"
-	ExtraParamNameCa_legal_type                    ExtraParamName = "CA_LEGAL_TYPE"
-	ExtraParamNameCa_business_entity_type          ExtraParamName = "CA_BUSINESS_ENTITY_TYPE"
-	ExtraParamNameCa_legal_representative          ExtraParamName = "CA_LEGAL_REPRESENTATIVE"
-	ExtraParamNameCa_legal_representative_capacity ExtraParamName = "CA_LEGAL_REPRESENTATIVE_CAPACITY"
-	ExtraParamNameEs_identification                ExtraParamName = "ES_IDENTIFICATION"
-	ExtraParamNameEs_identification_type           ExtraParamName = "ES_IDENTIFICATION_TYPE"
-	ExtraParamNameEs_legal_form                    ExtraParamName = "ES_LEGAL_FORM"
-	ExtraParamNameFi_business_number               ExtraParamName = "FI_BUSINESS_NUMBER"
-	ExtraParamNameOnwer_fi_id_number               ExtraParamName = "FI_ID_NUMBER"
-	ExtraParamNameFi_nationality                   ExtraParamName = "FI_NATIONALITY"
-	ExtraParamNameFi_organization_type             ExtraParamName = "FI_ORGANIZATION_TYPE"
-	ExtraParamNameIt_nationality                   ExtraParamName = "IT_NATIONALITY"
-	ExtraParamNameIt_pin                           ExtraParamName = "IT_PIN"
-	ExtraParamNameIt_registrant_entity_type        ExtraParamName = "IT_REGISTRANT_ENTITY_TYPE"
-	ExtraParamNameRu_passport_data                 ExtraParamName = "RU_PASSPORT_DATA"
-	ExtraParamNameSe_id_number                     ExtraParamName = "SE_ID_NUMBER"
-	ExtraParamNameSg_id_number                     ExtraParamName = "SG_ID_NUMBER"
-	ExtraParamNameVat_number                       ExtraParamName = "VAT_NUMBER"
-	ExtraParamNameUk_contact_type                  ExtraParamName = "UK_CONTACT_TYPE"
-	ExtraParamNameUk_company_number                ExtraParamName = "UK_COMPANY_NUMBER"
+	ExtraParamNameDunsNumber                    ExtraParamName = "DUNS_NUMBER"
+	ExtraParamNameBrandNumber                   ExtraParamName = "BRAND_NUMBER"
+	ExtraParamNameBirthDepartment               ExtraParamName = "BIRTH_DEPARTMENT"
+	ExtraParamNameBirthDateInYyyyMmDd           ExtraParamName = "BIRTH_DATE_IN_YYYY_MM_DD"
+	ExtraParamNameBirthCountry                  ExtraParamName = "BIRTH_COUNTRY"
+	ExtraParamNameBirthCity                     ExtraParamName = "BIRTH_CITY"
+	ExtraParamNameDocumentNumber                ExtraParamName = "DOCUMENT_NUMBER"
+	ExtraParamNameAuIdNumber                    ExtraParamName = "AU_ID_NUMBER"
+	ExtraParamNameAuIdType                      ExtraParamName = "AU_ID_TYPE"
+	ExtraParamNameCaLegalType                   ExtraParamName = "CA_LEGAL_TYPE"
+	ExtraParamNameCaBusinessEntityType          ExtraParamName = "CA_BUSINESS_ENTITY_TYPE"
+	ExtraParamNameCaLegalRepresentative         ExtraParamName = "CA_LEGAL_REPRESENTATIVE"
+	ExtraParamNameCaLegalRepresentativeCapacity ExtraParamName = "CA_LEGAL_REPRESENTATIVE_CAPACITY"
+	ExtraParamNameEsIdentification              ExtraParamName = "ES_IDENTIFICATION"
+	ExtraParamNameEsIdentificationType          ExtraParamName = "ES_IDENTIFICATION_TYPE"
+	ExtraParamNameEsLegalForm                   ExtraParamName = "ES_LEGAL_FORM"
+	ExtraParamNameFiBusinessNumber              ExtraParamName = "FI_BUSINESS_NUMBER"
+	ExtraParamNameOnwerFiIdNumber               ExtraParamName = "FI_ID_NUMBER"
+	ExtraParamNameFiNationality                 ExtraParamName = "FI_NATIONALITY"
+	ExtraParamNameFiOrganizationType            ExtraParamName = "FI_ORGANIZATION_TYPE"
+	ExtraParamNameItNationality                 ExtraParamName = "IT_NATIONALITY"
+	ExtraParamNameItPin                         ExtraParamName = "IT_PIN"
+	ExtraParamNameItRegistrantEntityType        ExtraParamName = "IT_REGISTRANT_ENTITY_TYPE"
+	ExtraParamNameRuPassportData                ExtraParamName = "RU_PASSPORT_DATA"
+	ExtraParamNameSeIdNumber                    ExtraParamName = "SE_ID_NUMBER"
+	ExtraParamNameSgIdNumber                    ExtraParamName = "SG_ID_NUMBER"
+	ExtraParamNameVatNumber                     ExtraParamName = "VAT_NUMBER"
+	ExtraParamNameUkContactType                 ExtraParamName = "UK_CONTACT_TYPE"
+	ExtraParamNameUkCompanyNumber               ExtraParamName = "UK_COMPANY_NUMBER"
 )
 
 // Values returns all known values for ExtraParamName. Note that this can be
@@ -604,11 +604,11 @@ type OperationStatus string
 
 // Enum values for OperationStatus
 const (
-	OperationStatusSubmitted   OperationStatus = "SUBMITTED"
-	OperationStatusIn_progress OperationStatus = "IN_PROGRESS"
-	OperationStatusError       OperationStatus = "ERROR"
-	OperationStatusSuccessful  OperationStatus = "SUCCESSFUL"
-	OperationStatusFailed      OperationStatus = "FAILED"
+	OperationStatusSubmitted  OperationStatus = "SUBMITTED"
+	OperationStatusInProgress OperationStatus = "IN_PROGRESS"
+	OperationStatusError      OperationStatus = "ERROR"
+	OperationStatusSuccessful OperationStatus = "SUCCESSFUL"
+	OperationStatusFailed     OperationStatus = "FAILED"
 )
 
 // Values returns all known values for OperationStatus. Note that this can be
@@ -628,24 +628,24 @@ type OperationType string
 
 // Enum values for OperationType
 const (
-	OperationTypeRegister_domain              OperationType = "REGISTER_DOMAIN"
-	OperationTypeDelete_domain                OperationType = "DELETE_DOMAIN"
-	OperationTypeTransfer_in_domain           OperationType = "TRANSFER_IN_DOMAIN"
-	OperationTypeUpdate_domain_contact        OperationType = "UPDATE_DOMAIN_CONTACT"
-	OperationTypeUpdate_nameserver            OperationType = "UPDATE_NAMESERVER"
-	OperationTypeChange_privacy_protection    OperationType = "CHANGE_PRIVACY_PROTECTION"
-	OperationTypeDomain_lock                  OperationType = "DOMAIN_LOCK"
-	OperationTypeEnable_autorenew             OperationType = "ENABLE_AUTORENEW"
-	OperationTypeDisable_autorenew            OperationType = "DISABLE_AUTORENEW"
-	OperationTypeAdd_dnssec                   OperationType = "ADD_DNSSEC"
-	OperationTypeRemove_dnssec                OperationType = "REMOVE_DNSSEC"
-	OperationTypeExpire_domain                OperationType = "EXPIRE_DOMAIN"
-	OperationTypeTransfer_out_domain          OperationType = "TRANSFER_OUT_DOMAIN"
-	OperationTypeChange_domain_owner          OperationType = "CHANGE_DOMAIN_OWNER"
-	OperationTypeRenew_domain                 OperationType = "RENEW_DOMAIN"
-	OperationTypePush_domain                  OperationType = "PUSH_DOMAIN"
-	OperationTypeInternal_transfer_out_domain OperationType = "INTERNAL_TRANSFER_OUT_DOMAIN"
-	OperationTypeInternal_transfer_in_domain  OperationType = "INTERNAL_TRANSFER_IN_DOMAIN"
+	OperationTypeRegisterDomain            OperationType = "REGISTER_DOMAIN"
+	OperationTypeDeleteDomain              OperationType = "DELETE_DOMAIN"
+	OperationTypeTransferInDomain          OperationType = "TRANSFER_IN_DOMAIN"
+	OperationTypeUpdateDomainContact       OperationType = "UPDATE_DOMAIN_CONTACT"
+	OperationTypeUpdateNameserver          OperationType = "UPDATE_NAMESERVER"
+	OperationTypeChangePrivacyProtection   OperationType = "CHANGE_PRIVACY_PROTECTION"
+	OperationTypeDomainLock                OperationType = "DOMAIN_LOCK"
+	OperationTypeEnableAutorenew           OperationType = "ENABLE_AUTORENEW"
+	OperationTypeDisableAutorenew          OperationType = "DISABLE_AUTORENEW"
+	OperationTypeAddDnssec                 OperationType = "ADD_DNSSEC"
+	OperationTypeRemoveDnssec              OperationType = "REMOVE_DNSSEC"
+	OperationTypeExpireDomain              OperationType = "EXPIRE_DOMAIN"
+	OperationTypeTransferOutDomain         OperationType = "TRANSFER_OUT_DOMAIN"
+	OperationTypeChangeDomainOwner         OperationType = "CHANGE_DOMAIN_OWNER"
+	OperationTypeRenewDomain               OperationType = "RENEW_DOMAIN"
+	OperationTypePushDomain                OperationType = "PUSH_DOMAIN"
+	OperationTypeInternalTransferOutDomain OperationType = "INTERNAL_TRANSFER_OUT_DOMAIN"
+	OperationTypeInternalTransferInDomain  OperationType = "INTERNAL_TRANSFER_IN_DOMAIN"
 )
 
 // Values returns all known values for OperationType. Note that this can be
@@ -700,7 +700,7 @@ type Transferable string
 const (
 	TransferableTransferable   Transferable = "TRANSFERABLE"
 	TransferableUntransferable Transferable = "UNTRANSFERABLE"
-	TransferableDont_know      Transferable = "DONT_KNOW"
+	TransferableDontKnow       Transferable = "DONT_KNOW"
 )
 
 // Values returns all known values for Transferable. Note that this can be expanded

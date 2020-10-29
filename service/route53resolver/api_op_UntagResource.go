@@ -31,28 +31,28 @@ type UntagResourceInput struct {
 	// The Amazon Resource Name (ARN) for the resource that you want to remove tags
 	// from. To get the ARN for a resource, use the applicable Get or List command:
 	//
-	//
-	// * GetResolverEndpoint
+	// *
+	// GetResolverEndpoint
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_GetResolverEndpoint.html)
 	//
-	//
-	// * GetResolverRule
+	// *
+	// GetResolverRule
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_GetResolverRule.html)
 	//
-	//
-	// * GetResolverRuleAssociation
+	// *
+	// GetResolverRuleAssociation
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_GetResolverRuleAssociation.html)
 	//
-	//
-	// * ListResolverEndpoints
+	// *
+	// ListResolverEndpoints
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverEndpoints.html)
 	//
-	//
-	// * ListResolverRuleAssociations
+	// *
+	// ListResolverRuleAssociations
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRuleAssociations.html)
 	//
-	//
-	// * ListResolverRules
+	// *
+	// ListResolverRules
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRules.html)
 	//
 	// This member is required.

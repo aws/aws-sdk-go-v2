@@ -47,15 +47,14 @@ type GetWebACLOutput struct {
 	// Information about the WebACL that you specified in the GetWebACL request. For
 	// more information, see the following topics:
 	//
-	//     * WebACL: Contains
-	// DefaultAction, MetricName, Name, an array of Rule objects, and WebACLId
+	// * WebACL: Contains DefaultAction,
+	// MetricName, Name, an array of Rule objects, and WebACLId
 	//
-	//     *
-	// DefaultAction (Data type is WafAction): Contains Type
+	// * DefaultAction (Data
+	// type is WafAction): Contains Type
 	//
-	//     * Rules: Contains an
-	// array of ActivatedRule objects, which contain Action, Priority, and RuleId
-	//
+	// * Rules: Contains an array of ActivatedRule
+	// objects, which contain Action, Priority, and RuleId
 	//
 	// * Action: Contains Type
 	WebACL *types.WebACL

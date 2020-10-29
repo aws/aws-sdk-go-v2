@@ -490,8 +490,8 @@ type VoiceConnectorAwsRegion string
 
 // Enum values for VoiceConnectorAwsRegion
 const (
-	VoiceConnectorAwsRegionUs_east_1 VoiceConnectorAwsRegion = "us-east-1"
-	VoiceConnectorAwsRegionUs_west_2 VoiceConnectorAwsRegion = "us-west-2"
+	VoiceConnectorAwsRegionUsEast1 VoiceConnectorAwsRegion = "us-east-1"
+	VoiceConnectorAwsRegionUsWest2 VoiceConnectorAwsRegion = "us-west-2"
 )
 
 // Values returns all known values for VoiceConnectorAwsRegion. Note that this can

@@ -43,12 +43,11 @@ type UpdateProvisioningArtifactInput struct {
 
 	// The language code.
 	//
-	//     * en - English (default)
+	// * en - English (default)
 	//
-	//     * jp - Japanese
+	// * jp - Japanese
 	//
-	//     * zh
-	// - Chinese
+	// * zh - Chinese
 	AcceptLanguage *string
 
 	// Indicates whether the product version is active. Inactive provisioning artifacts

@@ -34,41 +34,41 @@ type AdminInitiateAuthInput struct {
 	// The authentication flow for this call to execute. The API action will depend on
 	// this value. For example:
 	//
-	//     * REFRESH_TOKEN_AUTH will take in a valid refresh
+	// * REFRESH_TOKEN_AUTH will take in a valid refresh
 	// token and return new tokens.
 	//
-	//     * USER_SRP_AUTH will take in USERNAME and
-	// SRP_A and return the SRP variables to be used for next challenge execution.
+	// * USER_SRP_AUTH will take in USERNAME and SRP_A
+	// and return the SRP variables to be used for next challenge execution.
 	//
-	//
-	// * USER_PASSWORD_AUTH will take in USERNAME and PASSWORD and return the next
+	// *
+	// USER_PASSWORD_AUTH will take in USERNAME and PASSWORD and return the next
 	// challenge or tokens.
 	//
 	// Valid values include:
 	//
-	//     * USER_SRP_AUTH: Authentication
+	// * USER_SRP_AUTH: Authentication
 	// flow for the Secure Remote Password (SRP) protocol.
 	//
-	//     *
+	// *
 	// REFRESH_TOKEN_AUTH/REFRESH_TOKEN: Authentication flow for refreshing the access
 	// token and ID token by supplying a valid refresh token.
 	//
-	//     * CUSTOM_AUTH:
-	// Custom authentication flow.
+	// * CUSTOM_AUTH: Custom
+	// authentication flow.
 	//
-	//     * ADMIN_NO_SRP_AUTH: Non-SRP authentication
-	// flow; you can pass in the USERNAME and PASSWORD directly if the flow is enabled
-	// for calling the app client.
+	// * ADMIN_NO_SRP_AUTH: Non-SRP authentication flow; you can
+	// pass in the USERNAME and PASSWORD directly if the flow is enabled for calling
+	// the app client.
 	//
-	//     * USER_PASSWORD_AUTH: Non-SRP authentication
-	// flow; USERNAME and PASSWORD are passed directly. If a user migration Lambda
-	// trigger is set, this flow will invoke the user migration Lambda if the USERNAME
-	// is not found in the user pool.
+	// * USER_PASSWORD_AUTH: Non-SRP authentication flow; USERNAME and
+	// PASSWORD are passed directly. If a user migration Lambda trigger is set, this
+	// flow will invoke the user migration Lambda if the USERNAME is not found in the
+	// user pool.
 	//
-	//     * ADMIN_USER_PASSWORD_AUTH: Admin-based user
-	// password authentication. This replaces the ADMIN_NO_SRP_AUTH authentication
-	// flow. In this flow, Cognito receives the password in the request instead of
-	// using the SRP process to verify passwords.
+	// * ADMIN_USER_PASSWORD_AUTH: Admin-based user password
+	// authentication. This replaces the ADMIN_NO_SRP_AUTH authentication flow. In this
+	// flow, Cognito receives the password in the request instead of using the SRP
+	// process to verify passwords.
 	//
 	// This member is required.
 	AuthFlow types.AuthFlowType
@@ -90,19 +90,19 @@ type AdminInitiateAuthInput struct {
 	// The authentication parameters. These are inputs corresponding to the AuthFlow
 	// that you are invoking. The required values depend on the value of AuthFlow:
 	//
+	// *
+	// For USER_SRP_AUTH: USERNAME (required), SRP_A (required), SECRET_HASH (required
+	// if the app client is configured with a client secret), DEVICE_KEY.
 	//
-	// * For USER_SRP_AUTH: USERNAME (required), SRP_A (required), SECRET_HASH
+	// * For
+	// REFRESH_TOKEN_AUTH/REFRESH_TOKEN: REFRESH_TOKEN (required), SECRET_HASH
 	// (required if the app client is configured with a client secret), DEVICE_KEY.
 	//
-	//
-	// * For REFRESH_TOKEN_AUTH/REFRESH_TOKEN: REFRESH_TOKEN (required), SECRET_HASH
-	// (required if the app client is configured with a client secret), DEVICE_KEY.
-	//
-	//
-	// * For ADMIN_NO_SRP_AUTH: USERNAME (required), SECRET_HASH (if app client is
+	// *
+	// For ADMIN_NO_SRP_AUTH: USERNAME (required), SECRET_HASH (if app client is
 	// configured with client secret), PASSWORD (required), DEVICE_KEY.
 	//
-	//     * For
+	// * For
 	// CUSTOM_AUTH: USERNAME (required), SECRET_HASH (if app client is configured with
 	// client secret), DEVICE_KEY. To start the authentication flow with password
 	// verification, include ChallengeName: SRP_A and SRP_A: (The SRP_A Value).
@@ -115,54 +115,53 @@ type AdminInitiateAuthInput struct {
 	// for various triggers. The ClientMetadata value is passed as input to the
 	// functions for only the following triggers:
 	//
-	//     * Pre signup
+	// * Pre signup
 	//
-	//     * Pre
+	// * Pre
 	// authentication
 	//
-	//     * User migration
+	// * User migration
 	//
-	// When Amazon Cognito invokes the functions
-	// for these triggers, it passes a JSON payload, which the function receives as
-	// input. This payload contains a validationData attribute, which provides the data
-	// that you assigned to the ClientMetadata parameter in your AdminInitiateAuth
-	// request. In your function code in AWS Lambda, you can process the validationData
-	// value to enhance your workflow for your specific needs. When you use the
+	// When Amazon Cognito invokes the functions for
+	// these triggers, it passes a JSON payload, which the function receives as input.
+	// This payload contains a validationData attribute, which provides the data that
+	// you assigned to the ClientMetadata parameter in your AdminInitiateAuth request.
+	// In your function code in AWS Lambda, you can process the validationData value to
+	// enhance your workflow for your specific needs. When you use the
 	// AdminInitiateAuth API action, Amazon Cognito also invokes the functions for the
-	// following triggers, but it does not provide the ClientMetadata value as input:
-	//
+	// following triggers, but it does not provide the ClientMetadata value as
+	// input:
 	//
 	// * Post authentication
 	//
-	//     * Custom message
+	// * Custom message
 	//
-	//     * Pre token generation
+	// * Pre token generation
 	//
-	//     *
+	// *
 	// Create auth challenge
 	//
-	//     * Define auth challenge
+	// * Define auth challenge
 	//
-	//     * Verify auth
-	// challenge
+	// * Verify auth challenge
 	//
-	// For more information, see Customizing User Pool Workflows with Lambda
-	// Triggers
+	// For
+	// more information, see Customizing User Pool Workflows with Lambda Triggers
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
 	// in the Amazon Cognito Developer Guide. Take the following limitations into
 	// consideration when you use the ClientMetadata parameter:
 	//
-	//     * Amazon Cognito
-	// does not store the ClientMetadata value. This data is available only to AWS
-	// Lambda triggers that are assigned to a user pool to support custom workflows. If
-	// your user pool configuration does not include triggers, the ClientMetadata
-	// parameter serves no purpose.
+	// * Amazon Cognito does
+	// not store the ClientMetadata value. This data is available only to AWS Lambda
+	// triggers that are assigned to a user pool to support custom workflows. If your
+	// user pool configuration does not include triggers, the ClientMetadata parameter
+	// serves no purpose.
 	//
-	//     * Amazon Cognito does not validate the
-	// ClientMetadata value.
+	// * Amazon Cognito does not validate the ClientMetadata
+	// value.
 	//
-	//     * Amazon Cognito does not encrypt the the
-	// ClientMetadata value, so don't use it to provide sensitive information.
+	// * Amazon Cognito does not encrypt the the ClientMetadata value, so don't
+	// use it to provide sensitive information.
 	ClientMetadata map[string]*string
 
 	// Contextual data such as the user's device fingerprint, IP address, or location
@@ -184,38 +183,38 @@ type AdminInitiateAuthOutput struct {
 	// returned to you in the AdminInitiateAuth response if you need to pass another
 	// challenge.
 	//
-	//     * MFA_SETUP: If MFA is required, users who do not have at least
-	// one of the MFA methods set up are presented with an MFA_SETUP challenge. The
-	// user must set up at least one MFA type to continue to authenticate.
+	// * MFA_SETUP: If MFA is required, users who do not have at least one
+	// of the MFA methods set up are presented with an MFA_SETUP challenge. The user
+	// must set up at least one MFA type to continue to authenticate.
 	//
-	//     *
+	// *
 	// SELECT_MFA_TYPE: Selects the MFA type. Valid MFA options are SMS_MFA for text
 	// SMS MFA, and SOFTWARE_TOKEN_MFA for TOTP software token MFA.
 	//
-	//     * SMS_MFA:
-	// Next challenge is to supply an SMS_MFA_CODE, delivered via SMS.
+	// * SMS_MFA: Next
+	// challenge is to supply an SMS_MFA_CODE, delivered via SMS.
 	//
-	//     *
-	// PASSWORD_VERIFIER: Next challenge is to supply PASSWORD_CLAIM_SIGNATURE,
+	// * PASSWORD_VERIFIER:
+	// Next challenge is to supply PASSWORD_CLAIM_SIGNATURE,
 	// PASSWORD_CLAIM_SECRET_BLOCK, and TIMESTAMP after the client-side SRP
 	// calculations.
 	//
-	//     * CUSTOM_CHALLENGE: This is returned if your custom
+	// * CUSTOM_CHALLENGE: This is returned if your custom
 	// authentication flow determines that the user should pass another challenge
 	// before tokens are issued.
 	//
-	//     * DEVICE_SRP_AUTH: If device tracking was enabled
-	// on your user pool and the previous challenges were passed, this challenge is
+	// * DEVICE_SRP_AUTH: If device tracking was enabled on
+	// your user pool and the previous challenges were passed, this challenge is
 	// returned so that Amazon Cognito can start tracking this device.
 	//
-	//     *
+	// *
 	// DEVICE_PASSWORD_VERIFIER: Similar to PASSWORD_VERIFIER, but for devices only.
 	//
-	//
-	// * ADMIN_NO_SRP_AUTH: This is returned if you need to authenticate with USERNAME
+	// *
+	// ADMIN_NO_SRP_AUTH: This is returned if you need to authenticate with USERNAME
 	// and PASSWORD directly. An app client must be enabled to use this flow.
 	//
-	//     *
+	// *
 	// NEW_PASSWORD_REQUIRED: For users which are required to change their passwords
 	// after successful first login. This challenge should be passed with NEW_PASSWORD
 	// and any other required attributes.

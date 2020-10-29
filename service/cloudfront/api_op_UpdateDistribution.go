@@ -27,68 +27,67 @@ import (
 // in the Amazon CloudFront Developer Guide. To update a web distribution using the
 // CloudFront API
 //
-//     * Submit a GetDistributionConfig
+// * Submit a GetDistributionConfig
 // (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_GetDistributionConfig.html)
 // request to get the current configuration and an Etag header
 //
-//     for the
+// for the
 // distribution. If you update the distribution again, you must get a new Etag
 // header.
 //
-//     * Update the XML document that was returned in the response to your
+// * Update the XML document that was returned in the response to your
 // GetDistributionConfig request to include your changes. When you edit the XML
 // file, be aware of the following:
 //
-//         * You must strip out the ETag
-// parameter that is returned.
+// * You must strip out the ETag parameter that
+// is returned.
 //
-//         * Additional fields are required when you
-// update a distribution. There may be fields included in the XML file for features
-// that you haven't configured for your distribution. This is expected and required
-// to successfully update the distribution.
+// * Additional fields are required when you update a distribution.
+// There may be fields included in the XML file for features that you haven't
+// configured for your distribution. This is expected and required to successfully
+// update the distribution.
 //
-//         * You can't change the value
-// of CallerReference. If you try to change this value, CloudFront returns an
-//
+// * You can't change the value of CallerReference. If
+// you try to change this value, CloudFront returns an
 //
 // IllegalUpdate error.
 //
-//         * The new configuration replaces the existing
-// configuration; the values that you specify in an UpdateDistribution request are
-// not merged into your existing configuration. When you add, delete, or replace
-// values in an element that allows multiple values (for example, CNAME), you must
-// specify all of the values that you want to appear in the updated distribution.
-// In addition,
+// * The
+// new configuration replaces the existing configuration; the values that you
+// specify in an UpdateDistribution request are not merged into your existing
+// configuration. When you add, delete, or replace values in an element that allows
+// multiple values (for example, CNAME), you must specify all of the values that
+// you want to appear in the updated distribution. In addition,
 //
-//         you must update the corresponding Quantity element.
+// you must update
+// the corresponding Quantity element.
 //
-//     *
-// Submit an UpdateDistribution request to update the configuration for your
-// distribution:
+// * Submit an UpdateDistribution request to
+// update the configuration for your distribution:
 //
-//         * In the request body, include the XML document that you
-// updated in Step 2. The request body must include an
+// * In the request body, include
+// the XML document that you updated in Step 2. The request body must include
+// an
 //
-//         XML document with a
-// DistributionConfig element.
+// XML document with a DistributionConfig element.
 //
-//         * Set the value of the HTTP If-Match header
-// to the value of the ETag header that CloudFront returned
+// * Set the value of the HTTP
+// If-Match header to the value of the ETag header that CloudFront returned
 //
-//         when you
-// submitted the GetDistributionConfig request in Step 1.
+// when
+// you submitted the GetDistributionConfig request in Step 1.
 //
-//     * Review the
+// * Review the
 // response to the UpdateDistribution request to confirm that the configuration
 // was
 //
-//     successfully updated.
+// successfully updated.
 //
-//     * Optional: Submit a GetDistribution
+// * Optional: Submit a GetDistribution
 // (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_GetDistribution.html)
 // request to confirm that your changes have propagated.
 //
-//     When propagation is
+// When propagation is
 // complete, the value of Status is Deployed.
 func (c *Client) UpdateDistribution(ctx context.Context, params *UpdateDistributionInput, optFns ...func(*Options)) (*UpdateDistributionOutput, error) {
 	if params == nil {

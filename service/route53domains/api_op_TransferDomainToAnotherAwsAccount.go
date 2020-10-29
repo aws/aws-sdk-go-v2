@@ -13,18 +13,18 @@ import (
 // Transfers a domain from the current AWS account to another AWS account. Note the
 // following:
 //
-//     * The AWS account that you're transferring the domain to must
-// accept the transfer. If the other account doesn't accept the transfer within 3
-// days, we cancel the transfer. See AcceptDomainTransferFromAnotherAwsAccount
+// * The AWS account that you're transferring the domain to must accept
+// the transfer. If the other account doesn't accept the transfer within 3 days, we
+// cancel the transfer. See AcceptDomainTransferFromAnotherAwsAccount
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_AcceptDomainTransferFromAnotherAwsAccount.html).
 //
-//
-// * You can cancel the transfer before the other account accepts it. See
+// *
+// You can cancel the transfer before the other account accepts it. See
 // CancelDomainTransferToAnotherAwsAccount
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_CancelDomainTransferToAnotherAwsAccount.html).
 //
-//
-// * The other account can reject the transfer. See
+// *
+// The other account can reject the transfer. See
 // RejectDomainTransferFromAnotherAwsAccount
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_RejectDomainTransferFromAnotherAwsAccount.html).
 //

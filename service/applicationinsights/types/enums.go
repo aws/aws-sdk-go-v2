@@ -6,9 +6,9 @@ type CloudWatchEventSource string
 
 // Enum values for CloudWatchEventSource
 const (
-	CloudWatchEventSourceEc2         CloudWatchEventSource = "EC2"
-	CloudWatchEventSourceCode_deploy CloudWatchEventSource = "CODE_DEPLOY"
-	CloudWatchEventSourceHealth      CloudWatchEventSource = "HEALTH"
+	CloudWatchEventSourceEc2        CloudWatchEventSource = "EC2"
+	CloudWatchEventSourceCodeDeploy CloudWatchEventSource = "CODE_DEPLOY"
+	CloudWatchEventSourceHealth     CloudWatchEventSource = "HEALTH"
 )
 
 // Values returns all known values for CloudWatchEventSource. Note that this can be
@@ -26,9 +26,9 @@ type ConfigurationEventResourceType string
 
 // Enum values for ConfigurationEventResourceType
 const (
-	ConfigurationEventResourceTypeCloudwatch_alarm ConfigurationEventResourceType = "CLOUDWATCH_ALARM"
-	ConfigurationEventResourceTypeCloudformation   ConfigurationEventResourceType = "CLOUDFORMATION"
-	ConfigurationEventResourceTypeSsm_association  ConfigurationEventResourceType = "SSM_ASSOCIATION"
+	ConfigurationEventResourceTypeCloudwatchAlarm ConfigurationEventResourceType = "CLOUDWATCH_ALARM"
+	ConfigurationEventResourceTypeCloudformation  ConfigurationEventResourceType = "CLOUDFORMATION"
+	ConfigurationEventResourceTypeSsmAssociation  ConfigurationEventResourceType = "SSM_ASSOCIATION"
 )
 
 // Values returns all known values for ConfigurationEventResourceType. Note that
@@ -67,7 +67,7 @@ type FeedbackKey string
 
 // Enum values for FeedbackKey
 const (
-	FeedbackKeyInsights_feedback FeedbackKey = "INSIGHTS_FEEDBACK"
+	FeedbackKeyInsightsFeedback FeedbackKey = "INSIGHTS_FEEDBACK"
 )
 
 // Values returns all known values for FeedbackKey. Note that this can be expanded
@@ -83,9 +83,9 @@ type FeedbackValue string
 
 // Enum values for FeedbackValue
 const (
-	FeedbackValueNot_specified FeedbackValue = "NOT_SPECIFIED"
-	FeedbackValueUseful        FeedbackValue = "USEFUL"
-	FeedbackValueNot_useful    FeedbackValue = "NOT_USEFUL"
+	FeedbackValueNotSpecified FeedbackValue = "NOT_SPECIFIED"
+	FeedbackValueUseful       FeedbackValue = "USEFUL"
+	FeedbackValueNotUseful    FeedbackValue = "NOT_USEFUL"
 )
 
 // Values returns all known values for FeedbackValue. Note that this can be
@@ -163,11 +163,11 @@ type Tier string
 
 // Enum values for Tier
 const (
-	TierDefault        Tier = "DEFAULT"
-	TierDot_net_core   Tier = "DOT_NET_CORE"
-	TierDot_net_worker Tier = "DOT_NET_WORKER"
-	TierDot_net_web    Tier = "DOT_NET_WEB"
-	TierSql_server     Tier = "SQL_SERVER"
+	TierDefault      Tier = "DEFAULT"
+	TierDotNetCore   Tier = "DOT_NET_CORE"
+	TierDotNetWorker Tier = "DOT_NET_WORKER"
+	TierDotNetWeb    Tier = "DOT_NET_WEB"
+	TierSqlServer    Tier = "SQL_SERVER"
 )
 
 // Values returns all known values for Tier. Note that this can be expanded in the

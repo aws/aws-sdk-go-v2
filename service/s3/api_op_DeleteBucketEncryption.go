@@ -24,12 +24,12 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html) in the
 // Amazon Simple Storage Service Developer Guide. Related Resources
 //
-//     *
+// *
 // PutBucketEncryption
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketEncryption.html)
 //
-//
-// * GetBucketEncryption
+// *
+// GetBucketEncryption
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketEncryption.html)
 func (c *Client) DeleteBucketEncryption(ctx context.Context, params *DeleteBucketEncryptionInput, optFns ...func(*Options)) (*DeleteBucketEncryptionOutput, error) {
 	if params == nil {

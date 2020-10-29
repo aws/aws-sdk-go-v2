@@ -49,12 +49,12 @@ import (
 // object in Amazon S3, then when you GET the object, you must use the following
 // headers:
 //
-//     * x-amz-server-side-encryption-customer-algorithm
+// * x-amz-server-side-encryption-customer-algorithm
 //
-//     *
+// *
 // x-amz-server-side-encryption-customer-key
 //
-//     *
+// *
 // x-amz-server-side-encryption-customer-key-MD5
 //
 // For more information about SSE-C,
@@ -72,11 +72,11 @@ import (
 // the object you request does not exist, the error Amazon S3 returns depends on
 // whether you also have the s3:ListBucket permission.
 //
-//     * If you have the
+// * If you have the
 // s3:ListBucket permission on the bucket, Amazon S3 will return an HTTP status
 // code 404 ("no such key") error.
 //
-//     * If you don’t have the s3:ListBucket
+// * If you don’t have the s3:ListBucket
 // permission, Amazon S3 will return an HTTP status code 403 ("access denied")
 // error.
 //
@@ -100,37 +100,36 @@ import (
 // request, either using an Authorization header or a presigned URL, when using
 // these parameters. They cannot be used with an unsigned (anonymous) request.
 //
+// *
+// response-content-type
 //
-// * response-content-type
+// * response-content-language
 //
-//     * response-content-language
+// * response-expires
 //
-//     *
-// response-expires
+// *
+// response-cache-control
 //
-//     * response-cache-control
+// * response-content-disposition
 //
-//     *
-// response-content-disposition
+// *
+// response-content-encoding
 //
-//     * response-content-encoding
-//
-// Additional
-// Considerations about Request Headers If both of the If-Match and
-// If-Unmodified-Since headers are present in the request as follows: If-Match
-// condition evaluates to true, and; If-Unmodified-Since condition evaluates to
-// false; then, S3 returns 200 OK and the data requested. If both of the
-// If-None-Match and If-Modified-Since headers are present in the request as
-// follows: If-None-Match condition evaluates to false, and; If-Modified-Since
-// condition evaluates to true; then, S3 returns 304 Not Modified response code.
-// For more information about conditional requests, see RFC 7232
+// Additional Considerations about Request Headers If
+// both of the If-Match and If-Unmodified-Since headers are present in the request
+// as follows: If-Match condition evaluates to true, and; If-Unmodified-Since
+// condition evaluates to false; then, S3 returns 200 OK and the data requested. If
+// both of the If-None-Match and If-Modified-Since headers are present in the
+// request as follows: If-None-Match condition evaluates to false, and;
+// If-Modified-Since condition evaluates to true; then, S3 returns 304 Not Modified
+// response code. For more information about conditional requests, see RFC 7232
 // (https://tools.ietf.org/html/rfc7232). The following operations are related to
 // GetObject:
 //
-//     * ListBuckets
+// * ListBuckets
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBuckets.html)
 //
-//     *
+// *
 // GetObjectAcl
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAcl.html)
 func (c *Client) GetObject(ctx context.Context, params *GetObjectInput, optFns ...func(*Options)) (*GetObjectOutput, error) {

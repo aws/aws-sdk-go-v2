@@ -55,53 +55,52 @@ type ListResolverQueryLogConfigAssociationsInput struct {
 	// specify the NextToken parameter, you must use the same value for SortBy, if any,
 	// as in the previous request. Valid values include the following elements:
 	//
-	//     *
+	// *
 	// CreationTime: The ID of the query logging association.
 	//
-	//     * Error: If the
-	// value of Status is FAILED, the value of Error indicates the cause:
+	// * Error: If the value of
+	// Status is FAILED, the value of Error indicates the cause:
 	//
-	//         *
+	// *
 	// DESTINATION_NOT_FOUND: The specified destination (for example, an Amazon S3
 	// bucket) was deleted.
 	//
-	//         * ACCESS_DENIED: Permissions don't allow sending
-	// logs to the destination.
+	// * ACCESS_DENIED: Permissions don't allow sending logs to
+	// the destination.
 	//
-	//     If Status is a value other than FAILED, ERROR is
-	// null.
+	// If Status is a value other than FAILED, ERROR is null.
 	//
-	//     * Id: The ID of the query logging association
+	// * Id:
+	// The ID of the query logging association
 	//
-	//     *
-	// ResolverQueryLogConfigId: The ID of the query logging configuration
+	// * ResolverQueryLogConfigId: The ID of
+	// the query logging configuration
 	//
-	//     *
-	// ResourceId: The ID of the VPC that is associated with the query logging
-	// configuration
+	// * ResourceId: The ID of the VPC that is
+	// associated with the query logging configuration
 	//
-	//     * Status: The current status of the configuration. Valid
-	// values include the following:
+	// * Status: The current status of
+	// the configuration. Valid values include the following:
 	//
-	//         * CREATING: Resolver is creating an
-	// association between an Amazon VPC and a query logging configuration.
+	// * CREATING: Resolver is
+	// creating an association between an Amazon VPC and a query logging
+	// configuration.
 	//
-	//         *
-	// CREATED: The association between an Amazon VPC and a query logging configuration
-	// was successfully created. Resolver is logging queries that originate in the
-	// specified VPC.
+	// * CREATED: The association between an Amazon VPC and a query
+	// logging configuration was successfully created. Resolver is logging queries that
+	// originate in the specified VPC.
 	//
-	//         * DELETING: Resolver is deleting this query logging
-	// association.
+	// * DELETING: Resolver is deleting this query
+	// logging association.
 	//
-	//         * FAILED: Resolver either couldn't create or couldn't
+	// * FAILED: Resolver either couldn't create or couldn't
 	// delete the query logging association. Here are two common causes:
 	//
-	//             *
-	// The specified destination (for example, an Amazon S3 bucket) was deleted.
+	// * The
+	// specified destination (for example, an Amazon S3 bucket) was deleted.
 	//
-	//
-	// * Permissions don't allow sending logs to the destination.
+	// *
+	// Permissions don't allow sending logs to the destination.
 	SortBy *string
 
 	// If you specified a value for SortBy, the order that you want query logging

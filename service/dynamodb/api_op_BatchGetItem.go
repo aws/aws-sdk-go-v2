@@ -74,58 +74,57 @@ type BatchGetItemInput struct {
 	// per BatchGetItem request. Each element in the map of items to retrieve consists
 	// of the following:
 	//
-	//     * ConsistentRead - If true, a strongly consistent read is
+	// * ConsistentRead - If true, a strongly consistent read is
 	// used; if false (the default), an eventually consistent read is used.
 	//
-	//     *
+	// *
 	// ExpressionAttributeNames - One or more substitution tokens for attribute names
 	// in the ProjectionExpression parameter. The following are some use cases for
 	// using ExpressionAttributeNames:
 	//
-	//         * To access an attribute whose name
-	// conflicts with a DynamoDB reserved word.
+	// * To access an attribute whose name conflicts
+	// with a DynamoDB reserved word.
 	//
-	//         * To create a placeholder for
-	// repeating occurrences of an attribute name in an expression.
+	// * To create a placeholder for repeating
+	// occurrences of an attribute name in an expression.
 	//
-	//         * To
-	// prevent special characters in an attribute name from being misinterpreted in an
-	// expression.
+	// * To prevent special
+	// characters in an attribute name from being misinterpreted in an expression.
 	//
-	//     Use the # character in an expression to dereference an
-	// attribute name. For example, consider the following attribute name:
+	// Use
+	// the # character in an expression to dereference an attribute name. For example,
+	// consider the following attribute name:
 	//
-	//         *
-	// Percentile
+	// * Percentile
 	//
-	//     The name of this attribute conflicts with a reserved word, so it
-	// cannot be used directly in an expression. (For the complete list of reserved
-	// words, see Reserved Words
+	// The name of this attribute
+	// conflicts with a reserved word, so it cannot be used directly in an expression.
+	// (For the complete list of reserved words, see Reserved Words
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html)
 	// in the Amazon DynamoDB Developer Guide). To work around this, you could specify
 	// the following for ExpressionAttributeNames:
 	//
-	//         * {"#P":"Percentile"}
+	// * {"#P":"Percentile"}
 	//
+	// You could
+	// then use this substitution in an expression, as in this example:
 	//
-	// You could then use this substitution in an expression, as in this example:
+	// * #P =
+	// :val
 	//
-	//
-	// * #P = :val
-	//
-	//     Tokens that begin with the : character are expression attribute
-	// values, which are placeholders for the actual value at runtime. For more
-	// information about expression attribute names, see Accessing Item Attributes
+	// Tokens that begin with the : character are expression attribute values,
+	// which are placeholders for the actual value at runtime. For more information
+	// about expression attribute names, see Accessing Item Attributes
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
 	// in the Amazon DynamoDB Developer Guide.
 	//
-	//     * Keys - An array of primary key
+	// * Keys - An array of primary key
 	// attribute values that define specific items in the table. For each primary key,
 	// you must provide all of the key attributes. For example, with a simple primary
 	// key, you only need to provide the partition key value. For a composite key, you
 	// must provide both the partition key value and the sort key value.
 	//
-	//     *
+	// *
 	// ProjectionExpression - A string that identifies one or more attributes to
 	// retrieve from the table. These attributes can include scalars, sets, or elements
 	// of a JSON document. The attributes in the expression must be separated by
@@ -135,8 +134,8 @@ type BatchGetItemInput struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
 	// in the Amazon DynamoDB Developer Guide.
 	//
-	//     * AttributesToGet - This is a
-	// legacy parameter. Use ProjectionExpression instead. For more information, see
+	// * AttributesToGet - This is a legacy
+	// parameter. Use ProjectionExpression instead. For more information, see
 	// AttributesToGet
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html)
 	// in the Amazon DynamoDB Developer Guide.
@@ -147,17 +146,17 @@ type BatchGetItemInput struct {
 	// Determines the level of detail about provisioned throughput consumption that is
 	// returned in the response:
 	//
-	//     * INDEXES - The response includes the aggregate
+	// * INDEXES - The response includes the aggregate
 	// ConsumedCapacity for the operation, together with ConsumedCapacity for each
 	// table and secondary index that was accessed. Note that some operations, such as
 	// GetItem and BatchGetItem, do not access any indexes at all. In these cases,
-	// specifying INDEXES will only return ConsumedCapacity information for table(s).
+	// specifying INDEXES will only return ConsumedCapacity information for
+	// table(s).
 	//
+	// * TOTAL - The response includes only the aggregate ConsumedCapacity
+	// for the operation.
 	//
-	// * TOTAL - The response includes only the aggregate ConsumedCapacity for the
-	// operation.
-	//
-	//     * NONE - No ConsumedCapacity details are included in the
+	// * NONE - No ConsumedCapacity details are included in the
 	// response.
 	ReturnConsumedCapacity types.ReturnConsumedCapacity
 }
@@ -168,10 +167,10 @@ type BatchGetItemOutput struct {
 	// The read capacity units consumed by the entire BatchGetItem operation. Each
 	// element consists of:
 	//
-	//     * TableName - The table that consumed the provisioned
+	// * TableName - The table that consumed the provisioned
 	// throughput.
 	//
-	//     * CapacityUnits - The total number of capacity units consumed.
+	// * CapacityUnits - The total number of capacity units consumed.
 	ConsumedCapacity []*types.ConsumedCapacity
 
 	// A map of table name to a list of items. Each object in Responses consists of a
@@ -185,20 +184,20 @@ type BatchGetItemOutput struct {
 	// For more information, see RequestItems in the Request Parameters section. Each
 	// element consists of:
 	//
-	//     * Keys - An array of primary key attribute values that
+	// * Keys - An array of primary key attribute values that
 	// define specific items in the table.
 	//
-	//     * ProjectionExpression - One or more
+	// * ProjectionExpression - One or more
 	// attributes to be retrieved from the table or index. By default, all attributes
 	// are returned. If a requested attribute is not found, it does not appear in the
 	// result.
 	//
-	//     * ConsistentRead - The consistency of a read operation. If set to
-	// true, then a strongly consistent read is used; otherwise, an eventually
-	// consistent read is used.
+	// * ConsistentRead - The consistency of a read operation. If set to true,
+	// then a strongly consistent read is used; otherwise, an eventually consistent
+	// read is used.
 	//
-	// If there are no unprocessed keys remaining, the
-	// response contains an empty UnprocessedKeys map.
+	// If there are no unprocessed keys remaining, the response contains
+	// an empty UnprocessedKeys map.
 	UnprocessedKeys map[string]*types.KeysAndAttributes
 
 	// Metadata pertaining to the operation's result.

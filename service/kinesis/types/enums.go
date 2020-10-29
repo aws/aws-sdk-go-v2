@@ -44,14 +44,14 @@ type MetricsName string
 
 // Enum values for MetricsName
 const (
-	MetricsNameIncoming_bytes                        MetricsName = "IncomingBytes"
-	MetricsNameIncoming_records                      MetricsName = "IncomingRecords"
-	MetricsNameOutgoing_bytes                        MetricsName = "OutgoingBytes"
-	MetricsNameOutgoing_records                      MetricsName = "OutgoingRecords"
-	MetricsNameWrite_provisioned_throughput_exceeded MetricsName = "WriteProvisionedThroughputExceeded"
-	MetricsNameRead_provisioned_throughput_exceeded  MetricsName = "ReadProvisionedThroughputExceeded"
-	MetricsNameIterator_age_milliseconds             MetricsName = "IteratorAgeMilliseconds"
-	MetricsNameAll                                   MetricsName = "ALL"
+	MetricsNameIncomingBytes                      MetricsName = "IncomingBytes"
+	MetricsNameIncomingRecords                    MetricsName = "IncomingRecords"
+	MetricsNameOutgoingBytes                      MetricsName = "OutgoingBytes"
+	MetricsNameOutgoingRecords                    MetricsName = "OutgoingRecords"
+	MetricsNameWriteProvisionedThroughputExceeded MetricsName = "WriteProvisionedThroughputExceeded"
+	MetricsNameReadProvisionedThroughputExceeded  MetricsName = "ReadProvisionedThroughputExceeded"
+	MetricsNameIteratorAgeMilliseconds            MetricsName = "IteratorAgeMilliseconds"
+	MetricsNameAll                                MetricsName = "ALL"
 )
 
 // Values returns all known values for MetricsName. Note that this can be expanded
@@ -74,7 +74,7 @@ type ScalingType string
 
 // Enum values for ScalingType
 const (
-	ScalingTypeUniform_scaling ScalingType = "UNIFORM_SCALING"
+	ScalingTypeUniformScaling ScalingType = "UNIFORM_SCALING"
 )
 
 // Values returns all known values for ScalingType. Note that this can be expanded
@@ -90,12 +90,12 @@ type ShardFilterType string
 
 // Enum values for ShardFilterType
 const (
-	ShardFilterTypeAfter_shard_id    ShardFilterType = "AFTER_SHARD_ID"
-	ShardFilterTypeAt_trim_horizon   ShardFilterType = "AT_TRIM_HORIZON"
-	ShardFilterTypeFrom_trim_horizon ShardFilterType = "FROM_TRIM_HORIZON"
-	ShardFilterTypeAt_latest         ShardFilterType = "AT_LATEST"
-	ShardFilterTypeAt_timestamp      ShardFilterType = "AT_TIMESTAMP"
-	ShardFilterTypeFrom_timestamp    ShardFilterType = "FROM_TIMESTAMP"
+	ShardFilterTypeAfterShardId    ShardFilterType = "AFTER_SHARD_ID"
+	ShardFilterTypeAtTrimHorizon   ShardFilterType = "AT_TRIM_HORIZON"
+	ShardFilterTypeFromTrimHorizon ShardFilterType = "FROM_TRIM_HORIZON"
+	ShardFilterTypeAtLatest        ShardFilterType = "AT_LATEST"
+	ShardFilterTypeAtTimestamp     ShardFilterType = "AT_TIMESTAMP"
+	ShardFilterTypeFromTimestamp   ShardFilterType = "FROM_TIMESTAMP"
 )
 
 // Values returns all known values for ShardFilterType. Note that this can be
@@ -116,11 +116,11 @@ type ShardIteratorType string
 
 // Enum values for ShardIteratorType
 const (
-	ShardIteratorTypeAt_sequence_number    ShardIteratorType = "AT_SEQUENCE_NUMBER"
-	ShardIteratorTypeAfter_sequence_number ShardIteratorType = "AFTER_SEQUENCE_NUMBER"
-	ShardIteratorTypeTrim_horizon          ShardIteratorType = "TRIM_HORIZON"
-	ShardIteratorTypeLatest                ShardIteratorType = "LATEST"
-	ShardIteratorTypeAt_timestamp          ShardIteratorType = "AT_TIMESTAMP"
+	ShardIteratorTypeAtSequenceNumber    ShardIteratorType = "AT_SEQUENCE_NUMBER"
+	ShardIteratorTypeAfterSequenceNumber ShardIteratorType = "AFTER_SEQUENCE_NUMBER"
+	ShardIteratorTypeTrimHorizon         ShardIteratorType = "TRIM_HORIZON"
+	ShardIteratorTypeLatest              ShardIteratorType = "LATEST"
+	ShardIteratorTypeAtTimestamp         ShardIteratorType = "AT_TIMESTAMP"
 )
 
 // Values returns all known values for ShardIteratorType. Note that this can be

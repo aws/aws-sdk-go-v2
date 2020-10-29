@@ -148,54 +148,53 @@ type BulkEmailDestinationStatus struct {
 	// The status of a message sent using the SendBulkTemplatedEmail operation.
 	// Possible values for this parameter include:
 	//
-	//     * Success: Amazon SES accepted
-	// the message, and will attempt to deliver it to the recipients.
+	// * Success: Amazon SES accepted the
+	// message, and will attempt to deliver it to the recipients.
 	//
-	//     *
-	// MessageRejected: The message was rejected because it contained a virus.
+	// * MessageRejected:
+	// The message was rejected because it contained a virus.
 	//
-	//     *
+	// *
 	// MailFromDomainNotVerified: The sender's email address or domain was not
 	// verified.
 	//
-	//     * ConfigurationSetDoesNotExist: The configuration set you
-	// specified does not exist.
+	// * ConfigurationSetDoesNotExist: The configuration set you specified
+	// does not exist.
 	//
-	//     * TemplateDoesNotExist: The template you
-	// specified does not exist.
+	// * TemplateDoesNotExist: The template you specified does not
+	// exist.
 	//
-	//     * AccountSuspended: Your account has been shut
-	// down because of issues related to your email sending practices.
+	// * AccountSuspended: Your account has been shut down because of issues
+	// related to your email sending practices.
 	//
-	//     *
-	// AccountThrottled: The number of emails you can send has been reduced because
-	// your account has exceeded its allocated sending limit.
+	// * AccountThrottled: The number of
+	// emails you can send has been reduced because your account has exceeded its
+	// allocated sending limit.
 	//
-	//     *
-	// AccountDailyQuotaExceeded: You have reached or exceeded the maximum number of
-	// emails you can send from your account in a 24-hour period.
+	// * AccountDailyQuotaExceeded: You have reached or
+	// exceeded the maximum number of emails you can send from your account in a
+	// 24-hour period.
 	//
-	//     *
-	// InvalidSendingPoolName: The configuration set you specified refers to an IP pool
-	// that does not exist.
+	// * InvalidSendingPoolName: The configuration set you specified
+	// refers to an IP pool that does not exist.
 	//
-	//     * AccountSendingPaused: Email sending for the Amazon
-	// SES account was disabled using the UpdateAccountSendingEnabled operation.
+	// * AccountSendingPaused: Email sending
+	// for the Amazon SES account was disabled using the UpdateAccountSendingEnabled
+	// operation.
 	//
-	//     *
-	// ConfigurationSetSendingPaused: Email sending for this configuration set was
-	// disabled using the UpdateConfigurationSetSendingEnabled operation.
+	// * ConfigurationSetSendingPaused: Email sending for this
+	// configuration set was disabled using the UpdateConfigurationSetSendingEnabled
+	// operation.
 	//
-	//     *
-	// InvalidParameterValue: One or more of the parameters you specified when calling
-	// this operation was invalid. See the error message for additional information.
+	// * InvalidParameterValue: One or more of the parameters you specified
+	// when calling this operation was invalid. See the error message for additional
+	// information.
 	//
+	// * TransientFailure: Amazon SES was unable to process your request
+	// because of a temporary issue.
 	//
-	// * TransientFailure: Amazon SES was unable to process your request because of a
-	// temporary issue.
-	//
-	//     * Failed: Amazon SES was unable to process your request.
-	// See the error message for additional information.
+	// * Failed: Amazon SES was unable to process your
+	// request. See the error message for additional information.
 	Status BulkEmailStatus
 }
 
@@ -224,10 +223,10 @@ type CloudWatchDimensionConfiguration struct {
 	// do not provide the value of the dimension when you send an email. The default
 	// value must:
 	//
-	//     * This value can only contain ASCII letters (a-z, A-Z), numbers
+	// * This value can only contain ASCII letters (a-z, A-Z), numbers
 	// (0-9), underscores (_), or dashes (-).
 	//
-	//     * Contain less than 256 characters.
+	// * Contain less than 256 characters.
 	//
 	// This member is required.
 	DefaultDimensionValue *string
@@ -235,11 +234,11 @@ type CloudWatchDimensionConfiguration struct {
 	// The name of an Amazon CloudWatch dimension associated with an email sending
 	// metric. The name must:
 	//
-	//     * This value can only contain ASCII letters (a-z,
-	// A-Z), numbers (0-9), underscores (_), or dashes (-).
+	// * This value can only contain ASCII letters (a-z, A-Z),
+	// numbers (0-9), underscores (_), or dashes (-).
 	//
-	//     * Contain less than
-	// 256 characters.
+	// * Contain less than 256
+	// characters.
 	//
 	// This member is required.
 	DimensionName *string
@@ -266,10 +265,10 @@ type ConfigurationSet struct {
 	// The name of the configuration set. The name must meet the following
 	// requirements:
 	//
-	//     * Contain only letters (a-z, A-Z), numbers (0-9), underscores
+	// * Contain only letters (a-z, A-Z), numbers (0-9), underscores
 	// (_), or dashes (-).
 	//
-	//     * Contain 64 characters or fewer.
+	// * Contain 64 characters or fewer.
 	//
 	// This member is required.
 	Name *string
@@ -362,11 +361,11 @@ type EventDestination struct {
 
 	// The name of the event destination. The name must:
 	//
-	//     * This value can only
-	// contain ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes
-	// (-).
+	// * This value can only contain
+	// ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).
 	//
-	//     * Contain less than 64 characters.
+	// *
+	// Contain less than 64 characters.
 	//
 	// This member is required.
 	Name *string
@@ -638,22 +637,22 @@ type MessageTag struct {
 
 	// The name of the tag. The name must:
 	//
-	//     * This value can only contain ASCII
-	// letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).
+	// * This value can only contain ASCII letters
+	// (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).
 	//
-	//     *
-	// Contain less than 256 characters.
+	// * Contain less than
+	// 256 characters.
 	//
 	// This member is required.
 	Name *string
 
 	// The value of the tag. The value must:
 	//
-	//     * This value can only contain ASCII
+	// * This value can only contain ASCII
 	// letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).
 	//
-	//     *
-	// Contain less than 256 characters.
+	// * Contain
+	// less than 256 characters.
 	//
 	// This member is required.
 	Value *string
@@ -729,14 +728,13 @@ type ReceiptFilter struct {
 
 	// The name of the IP address filter. The name must:
 	//
-	//     * This value can only
-	// contain ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes
-	// (-).
+	// * This value can only contain
+	// ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).
 	//
-	//     * Start and end with a letter or number.
+	// *
+	// Start and end with a letter or number.
 	//
-	//     * Contain less than 64
-	// characters.
+	// * Contain less than 64 characters.
 	//
 	// This member is required.
 	Name *string
@@ -776,13 +774,13 @@ type ReceiptRule struct {
 
 	// The name of the receipt rule. The name must:
 	//
-	//     * This value can only contain
+	// * This value can only contain
 	// ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).
 	//
-	//     *
+	// *
 	// Start and end with a letter or number.
 	//
-	//     * Contain less than 64 characters.
+	// * Contain less than 64 characters.
 	//
 	// This member is required.
 	Name *string
@@ -822,14 +820,13 @@ type ReceiptRuleSetMetadata struct {
 
 	// The name of the receipt rule set. The name must:
 	//
-	//     * This value can only
-	// contain ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes
-	// (-).
+	// * This value can only contain
+	// ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).
 	//
-	//     * Start and end with a letter or number.
+	// *
+	// Start and end with a letter or number.
 	//
-	//     * Contain less than 64
-	// characters.
+	// * Contain less than 64 characters.
 	Name *string
 }
 
@@ -930,7 +927,7 @@ type S3Action struct {
 	// saving them to the Amazon S3 bucket. You can use the default master key or a
 	// custom master key you created in AWS KMS as follows:
 	//
-	//     * To use the default
+	// * To use the default
 	// master key, provide an ARN in the form of
 	// arn:aws:kms:REGION:ACCOUNT-ID-WITHOUT-HYPHENS:alias/aws/ses. For example, if
 	// your AWS account ID is 123456789012 and you want to use the default master key
@@ -939,10 +936,10 @@ type S3Action struct {
 	// key, you don't need to perform any extra steps to give Amazon SES permission to
 	// use the key.
 	//
-	//     * To use a custom master key you created in AWS KMS, provide
-	// the ARN of the master key and ensure that you add a statement to your key's
-	// policy to give Amazon SES permission to use it. For more information about
-	// giving permissions, see the Amazon SES Developer Guide
+	// * To use a custom master key you created in AWS KMS, provide the
+	// ARN of the master key and ensure that you add a statement to your key's policy
+	// to give Amazon SES permission to use it. For more information about giving
+	// permissions, see the Amazon SES Developer Guide
 	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html).
 	//
 	// For

@@ -45,20 +45,19 @@ type GetSavingsPlansUtilizationDetailsInput struct {
 	// Filters Savings Plans utilization coverage data for active Savings Plans
 	// dimensions. You can filter data with the following dimensions:
 	//
-	//     *
+	// *
 	// LINKED_ACCOUNT
 	//
-	//     * SAVINGS_PLAN_ARN
+	// * SAVINGS_PLAN_ARN
 	//
-	//     * REGION
+	// * REGION
 	//
-	//     * PAYMENT_OPTION
+	// * PAYMENT_OPTION
 	//
+	// *
+	// INSTANCE_TYPE_FAMILY
 	//
-	// * INSTANCE_TYPE_FAMILY
-	//
-	// GetSavingsPlansUtilizationDetails uses the same
-	// Expression
+	// GetSavingsPlansUtilizationDetails uses the same Expression
 	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
 	// object as the other operations, but only AND is supported among each dimension.
 	Filter *types.Expression

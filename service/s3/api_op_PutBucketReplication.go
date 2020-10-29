@@ -58,12 +58,12 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ReplicationErrorCodeList)
 // The following operations are related to PutBucketReplication:
 //
-//     *
+// *
 // GetBucketReplication
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketReplication.html)
 //
-//
-// * DeleteBucketReplication
+// *
+// DeleteBucketReplication
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketReplication.html)
 func (c *Client) PutBucketReplication(ctx context.Context, params *PutBucketReplicationInput, optFns ...func(*Options)) (*PutBucketReplicationOutput, error) {
 	if params == nil {

@@ -15,15 +15,15 @@ import (
 // with the values provided in the request. You cannot update some fields
 // independent of others. To update a key group:
 //
-//     * Get the current key group
-// with GetKeyGroup or GetKeyGroupConfig.
+// * Get the current key group with
+// GetKeyGroup or GetKeyGroupConfig.
 //
-//     * Locally modify the fields in the
-// key group that you want to update. For example, add or remove public key IDs.
+// * Locally modify the fields in the key group
+// that you want to update. For example, add or remove public key IDs.
 //
-//
-// * Call UpdateKeyGroup with the entire key group object, including the fields
-// that you modified and those that you didn’t.
+// * Call
+// UpdateKeyGroup with the entire key group object, including the fields that you
+// modified and those that you didn’t.
 func (c *Client) UpdateKeyGroup(ctx context.Context, params *UpdateKeyGroupInput, optFns ...func(*Options)) (*UpdateKeyGroupOutput, error) {
 	if params == nil {
 		params = &UpdateKeyGroupInput{}

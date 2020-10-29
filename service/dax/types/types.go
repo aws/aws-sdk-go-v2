@@ -240,16 +240,16 @@ type SSEDescription struct {
 
 	// The current state of server-side encryption:
 	//
-	//     * ENABLING - Server-side
+	// * ENABLING - Server-side
 	// encryption is being enabled.
 	//
-	//     * ENABLED - Server-side encryption is
-	// enabled.
+	// * ENABLED - Server-side encryption is enabled.
 	//
-	//     * DISABLING - Server-side encryption is being disabled.
+	// *
+	// DISABLING - Server-side encryption is being disabled.
 	//
-	//     *
-	// DISABLED - Server-side encryption is disabled.
+	// * DISABLED - Server-side
+	// encryption is disabled.
 	Status SSEStatus
 }
 
@@ -276,10 +276,10 @@ type Subnet struct {
 
 // Represents the output of one of the following actions:
 //
-//     *
-// CreateSubnetGroup
+// * CreateSubnetGroup
 //
-//     * ModifySubnetGroup
+// *
+// ModifySubnetGroup
 type SubnetGroup struct {
 
 	// The description of the subnet group.

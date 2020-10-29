@@ -35,8 +35,7 @@ type DescribeCertificatesInput struct {
 	// omitted, a list of up to MaxRecords certificates is returned. This parameter is
 	// not case sensitive. Constraints
 	//
-	//     * Must match an existing
-	// CertificateIdentifier.
+	// * Must match an existing CertificateIdentifier.
 	CertificateIdentifier *string
 
 	// This parameter is not currently supported.
@@ -52,9 +51,9 @@ type DescribeCertificatesInput struct {
 	// included in the response so that the remaining results can be retrieved.
 	// Default: 100 Constraints:
 	//
-	//     * Minimum: 20
+	// * Minimum: 20
 	//
-	//     * Maximum: 100
+	// * Maximum: 100
 	MaxRecords *int32
 }
 

@@ -32,11 +32,11 @@ type Environment struct {
 
 	// The type of environment. Valid values include the following:
 	//
-	//     * ec2: An
-	// Amazon Elastic Compute Cloud (Amazon EC2) instance connects to the
-	// environment.
+	// * ec2: An Amazon
+	// Elastic Compute Cloud (Amazon EC2) instance connects to the environment.
 	//
-	//     * ssh: Your own server connects to the environment.
+	// * ssh:
+	// Your own server connects to the environment.
 	Type EnvironmentType
 }
 
@@ -53,19 +53,19 @@ type EnvironmentLifecycle struct {
 
 	// The current creation or deletion lifecycle state of the environment.
 	//
-	//     *
+	// *
 	// CREATING: The environment is in the process of being created.
 	//
-	//     * CREATED:
-	// The environment was successfully created.
+	// * CREATED: The
+	// environment was successfully created.
 	//
-	//     * CREATE_FAILED: The environment
-	// failed to be created.
+	// * CREATE_FAILED: The environment failed
+	// to be created.
 	//
-	//     * DELETING: The environment is in the process of
-	// being deleted.
+	// * DELETING: The environment is in the process of being
+	// deleted.
 	//
-	//     * DELETE_FAILED: The environment failed to delete.
+	// * DELETE_FAILED: The environment failed to delete.
 	Status EnvironmentLifecycleStatus
 }
 
@@ -83,13 +83,13 @@ type EnvironmentMember struct {
 	// The type of environment member permissions associated with this environment
 	// member. Available values include:
 	//
-	//     * owner: Owns the environment.
+	// * owner: Owns the environment.
 	//
-	//     *
-	// read-only: Has read-only access to the environment.
+	// * read-only:
+	// Has read-only access to the environment.
 	//
-	//     * read-write: Has
-	// read-write access to the environment.
+	// * read-write: Has read-write access to
+	// the environment.
 	Permissions Permissions
 
 	// The Amazon Resource Name (ARN) of the environment member.

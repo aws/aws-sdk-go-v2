@@ -18,31 +18,31 @@ import (
 // (https://docs.aws.amazon.com/cli/latest/reference/). The following limits apply
 // when using the GetMediaForFragmentList API:
 //
-//     * A client can call
+// * A client can call
 // GetMediaForFragmentList up to five times per second per stream.
 //
-//     * Kinesis
-// Video Streams sends media data at a rate of up to 25 megabytes per second (or
-// 200 megabits per second) during a GetMediaForFragmentList session.
+// * Kinesis Video
+// Streams sends media data at a rate of up to 25 megabytes per second (or 200
+// megabits per second) during a GetMediaForFragmentList session.
 //
-// If an error
-// is thrown after invoking a Kinesis Video Streams archived media API, in addition
-// to the HTTP status code and the response body, it includes the following pieces
-// of information:
+// If an error is
+// thrown after invoking a Kinesis Video Streams archived media API, in addition to
+// the HTTP status code and the response body, it includes the following pieces of
+// information:
 //
-//     * x-amz-ErrorType HTTP header – contains a more specific
-// error type in addition to what the HTTP status code provides.
+// * x-amz-ErrorType HTTP header – contains a more specific error
+// type in addition to what the HTTP status code provides.
 //
-//     *
-// x-amz-RequestId HTTP header – if you want to report an issue to AWS, the support
-// team can better diagnose the problem if given the Request Id.
+// * x-amz-RequestId HTTP
+// header – if you want to report an issue to AWS, the support team can better
+// diagnose the problem if given the Request Id.
 //
-// Both the HTTP
-// status code and the ErrorType header can be utilized to make programmatic
-// decisions about whether errors are retry-able and under what conditions, as well
-// as provide information on what actions the client programmer might need to take
-// in order to successfully try again. For more information, see the Errors section
-// at the bottom of this topic, as well as Common Errors
+// Both the HTTP status code and the
+// ErrorType header can be utilized to make programmatic decisions about whether
+// errors are retry-able and under what conditions, as well as provide information
+// on what actions the client programmer might need to take in order to
+// successfully try again. For more information, see the Errors section at the
+// bottom of this topic, as well as Common Errors
 // (https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/CommonErrors.html).
 func (c *Client) GetMediaForFragmentList(ctx context.Context, params *GetMediaForFragmentListInput, optFns ...func(*Options)) (*GetMediaForFragmentListOutput, error) {
 	if params == nil {
@@ -84,27 +84,27 @@ type GetMediaForFragmentListOutput struct {
 	// The chunks that Kinesis Video Streams returns in the GetMediaForFragmentList
 	// call also include the following additional Matroska (MKV) tags:
 	//
-	//     *
+	// *
 	// AWS_KINESISVIDEO_FRAGMENT_NUMBER - Fragment number returned in the chunk.
 	//
-	//     *
+	// *
 	// AWS_KINESISVIDEO_SERVER_SIDE_TIMESTAMP - Server-side timestamp of the
 	// fragment.
 	//
-	//     * AWS_KINESISVIDEO_PRODUCER_SIDE_TIMESTAMP - Producer-side
-	// timestamp of the fragment.
+	// * AWS_KINESISVIDEO_PRODUCER_SIDE_TIMESTAMP - Producer-side timestamp
+	// of the fragment.
 	//
-	// The following tags will be included if an exception
-	// occurs:
+	// The following tags will be included if an exception occurs:
 	//
-	//     * AWS_KINESISVIDEO_FRAGMENT_NUMBER - The number of the fragment
-	// that threw the exception
+	// *
+	// AWS_KINESISVIDEO_FRAGMENT_NUMBER - The number of the fragment that threw the
+	// exception
 	//
-	//     * AWS_KINESISVIDEO_EXCEPTION_ERROR_CODE - The
-	// integer code of the exception
+	// * AWS_KINESISVIDEO_EXCEPTION_ERROR_CODE - The integer code of the
+	// exception
 	//
-	//     * AWS_KINESISVIDEO_EXCEPTION_MESSAGE - A text
-	// description of the exception
+	// * AWS_KINESISVIDEO_EXCEPTION_MESSAGE - A text description of the
+	// exception
 	Payload io.ReadCloser
 
 	// Metadata pertaining to the operation's result.

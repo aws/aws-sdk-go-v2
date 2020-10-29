@@ -70,25 +70,25 @@ type DeleteLagOutput struct {
 
 	// The state of the LAG. The following are the possible values:
 	//
-	//     * requested:
-	// The initial state of a LAG. The LAG stays in the requested state until the
-	// Letter of Authorization (LOA) is available.
+	// * requested: The
+	// initial state of a LAG. The LAG stays in the requested state until the Letter of
+	// Authorization (LOA) is available.
 	//
-	//     * pending: The LAG has been
-	// approved and is being initialized.
+	// * pending: The LAG has been approved and is
+	// being initialized.
 	//
-	//     * available: The network link is
-	// established and the LAG is ready for use.
+	// * available: The network link is established and the LAG is
+	// ready for use.
 	//
-	//     * down: The network link is
-	// down.
+	// * down: The network link is down.
 	//
-	//     * deleting: The LAG is being deleted.
-	//
-	//     * deleted: The LAG is
+	// * deleting: The LAG is being
 	// deleted.
 	//
-	//     * unknown: The state of the LAG is not available.
+	// * deleted: The LAG is deleted.
+	//
+	// * unknown: The state of the LAG is not
+	// available.
 	LagState types.LagState
 
 	// The location of the LAG.

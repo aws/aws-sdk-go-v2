@@ -15,20 +15,20 @@ import (
 // the specified version of a secret, whichever contains content. Minimum
 // permissions To run this command, you must have the following permissions:
 //
-//     *
+// *
 // secretsmanager:GetSecretValue
 //
-//     * kms:Decrypt - required only if you use a
+// * kms:Decrypt - required only if you use a
 // customer-managed AWS KMS key to encrypt the secret. You do not need this
 // permission to use the account's default AWS managed CMK for Secrets
 // Manager.
 //
 // Related operations
 //
-//     * To create a new version of the secret with
+// * To create a new version of the secret with
 // different encrypted information, use PutSecretValue.
 //
-//     * To retrieve the
+// * To retrieve the
 // non-encrypted details for the secret, use DescribeSecret.
 func (c *Client) GetSecretValue(ctx context.Context, params *GetSecretValueInput, optFns ...func(*Options)) (*GetSecretValueOutput, error) {
 	if params == nil {

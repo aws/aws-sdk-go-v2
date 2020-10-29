@@ -23,17 +23,17 @@ import (
 // malicious strings. To create and configure an XssMatchSet, perform the following
 // steps:
 //
-//     * Use GetChangeToken to get the change token that you provide in the
+// * Use GetChangeToken to get the change token that you provide in the
 // ChangeToken parameter of a CreateXssMatchSet request.
 //
-//     * Submit a
+// * Submit a
 // CreateXssMatchSet request.
 //
-//     * Use GetChangeToken to get the change token
-// that you provide in the ChangeToken parameter of an UpdateXssMatchSet request.
+// * Use GetChangeToken to get the change token that
+// you provide in the ChangeToken parameter of an UpdateXssMatchSet request.
 //
-//
-// * Submit an UpdateXssMatchSet request to specify the parts of web requests in
+// *
+// Submit an UpdateXssMatchSet request to specify the parts of web requests in
 // which you want to allow, block, or count cross-site scripting attacks.
 //
 // For more

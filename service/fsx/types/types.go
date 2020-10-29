@@ -24,19 +24,18 @@ type AdministrativeAction struct {
 
 	// Describes the type of administrative action, as follows:
 	//
-	//     *
-	// FILE_SYSTEM_UPDATE - A file system update administrative action initiated by the
-	// user from the Amazon FSx console, API (UpdateFileSystem), or CLI
-	// (update-file-system). A
+	// * FILE_SYSTEM_UPDATE -
+	// A file system update administrative action initiated by the user from the Amazon
+	// FSx console, API (UpdateFileSystem), or CLI (update-file-system). A
 	//
-	//     * STORAGE_OPTIMIZATION - Once the
-	// FILE_SYSTEM_UPDATE task to increase a file system's storage capacity completes
-	// successfully, a STORAGE_OPTIMIZATION task starts. Storage optimization is the
-	// process of migrating the file system data to the new, larger disks. You can
-	// track the storage migration progress using the ProgressPercent property. When
-	// STORAGE_OPTIMIZATION completes successfully, the parent FILE_SYSTEM_UPDATE
-	// action status changes to COMPLETED. For more information, see Managing Storage
-	// Capacity
+	// *
+	// STORAGE_OPTIMIZATION - Once the FILE_SYSTEM_UPDATE task to increase a file
+	// system's storage capacity completes successfully, a STORAGE_OPTIMIZATION task
+	// starts. Storage optimization is the process of migrating the file system data to
+	// the new, larger disks. You can track the storage migration progress using the
+	// ProgressPercent property. When STORAGE_OPTIMIZATION completes successfully, the
+	// parent FILE_SYSTEM_UPDATE action status changes to COMPLETED. For more
+	// information, see Managing Storage Capacity
 	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html).
 	AdministrativeActionType AdministrativeActionType
 
@@ -51,19 +50,19 @@ type AdministrativeAction struct {
 
 	// Describes the status of the administrative action, as follows:
 	//
-	//     * FAILED -
+	// * FAILED -
 	// Amazon FSx failed to process the administrative action successfully.
 	//
-	//     *
+	// *
 	// IN_PROGRESS - Amazon FSx is processing the administrative action.
 	//
-	//     * PENDING
-	// - Amazon FSx is waiting to process the administrative action.
+	// * PENDING -
+	// Amazon FSx is waiting to process the administrative action.
 	//
-	//     * COMPLETED -
+	// * COMPLETED -
 	// Amazon FSx has finished processing the administrative task.
 	//
-	//     *
+	// *
 	// UPDATED_OPTIMIZING - For a storage capacity increase update, Amazon FSx has
 	// updated the file system with the new storage capacity, and is now performing the
 	// storage optimization process. For more information, see Managing Storage
@@ -105,19 +104,19 @@ type Backup struct {
 
 	// The lifecycle status of the backup.
 	//
-	//     * AVAILABLE - The backup is fully
+	// * AVAILABLE - The backup is fully
 	// available.
 	//
-	//     * CREATING - FSx is creating the backup.
+	// * CREATING - FSx is creating the backup.
 	//
-	//     * TRANSFERRING -
-	// For Lustre file systems only; FSx is transferring the backup to S3.
+	// * TRANSFERRING - For
+	// Lustre file systems only; FSx is transferring the backup to S3.
 	//
-	//     *
-	// DELETED - The backup was deleted is no longer available.
+	// * DELETED - The
+	// backup was deleted is no longer available.
 	//
-	//     * FAILED - Amazon
-	// FSx could not complete the backup.
+	// * FAILED - Amazon FSx could not
+	// complete the backup.
 	//
 	// This member is required.
 	Lifecycle BackupLifecycle
@@ -200,23 +199,23 @@ type CreateFileSystemLustreConfiguration struct {
 	// your file and directory listings up to date as you add or modify objects in your
 	// linked S3 bucket. AutoImportPolicy can have the following values:
 	//
-	//     * NONE -
+	// * NONE -
 	// (Default) AutoImport is off. Amazon FSx only updates file and directory listings
 	// from the linked S3 bucket when the file system is created. FSx does not update
 	// file and directory listings for any new or changed objects after choosing this
 	// option.
 	//
-	//     * NEW - AutoImport is on. Amazon FSx automatically imports
-	// directory listings of any new objects added to the linked S3 bucket that do not
-	// currently exist in the FSx file system.
+	// * NEW - AutoImport is on. Amazon FSx automatically imports directory
+	// listings of any new objects added to the linked S3 bucket that do not currently
+	// exist in the FSx file system.
 	//
-	//     * NEW_CHANGED - AutoImport is on.
-	// Amazon FSx automatically imports file and directory listings of any new objects
-	// added to the S3 bucket and any existing objects that are changed in the S3
-	// bucket after you choose this option.
+	// * NEW_CHANGED - AutoImport is on. Amazon FSx
+	// automatically imports file and directory listings of any new objects added to
+	// the S3 bucket and any existing objects that are changed in the S3 bucket after
+	// you choose this option.
 	//
-	// For more information, see Automatically
-	// import updates from your S3 bucket
+	// For more information, see Automatically import updates
+	// from your S3 bucket
 	// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/autoimport-data-repo.html).
 	AutoImportPolicy AutoImportPolicyType
 
@@ -348,17 +347,17 @@ type CreateFileSystemWindowsConfiguration struct {
 
 	// Specifies the file system deployment type, valid values are the following:
 	//
-	//
-	// * MULTI_AZ_1 - Deploys a high availability file system that is configured for
+	// *
+	// MULTI_AZ_1 - Deploys a high availability file system that is configured for
 	// Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability.
 	// You can only deploy a Multi-AZ file system in AWS Regions that have a minimum of
 	// three Availability Zones. Also supports HDD storage type
 	//
-	//     * SINGLE_AZ_1 -
+	// * SINGLE_AZ_1 -
 	// (Default) Choose to deploy a file system that is configured for single AZ
 	// redundancy.
 	//
-	//     * SINGLE_AZ_2 - The latest generation Single AZ file system.
+	// * SINGLE_AZ_2 - The latest generation Single AZ file system.
 	// Specifies a file system that is configured for single AZ redundancy and supports
 	// HDD storage type.
 	//
@@ -394,19 +393,19 @@ type DataRepositoryConfiguration struct {
 	// listings up to date as you add or modify objects in your linked S3 bucket.
 	// AutoImportPolicy can have the following values:
 	//
-	//     * NONE - (Default)
-	// AutoImport is off. Amazon FSx only updates file and directory listings from the
-	// linked S3 bucket when the file system is created. FSx does not update file and
-	// directory listings for any new or changed objects after choosing this option.
+	// * NONE - (Default) AutoImport
+	// is off. Amazon FSx only updates file and directory listings from the linked S3
+	// bucket when the file system is created. FSx does not update file and directory
+	// listings for any new or changed objects after choosing this option.
 	//
+	// * NEW -
+	// AutoImport is on. Amazon FSx automatically imports directory listings of any new
+	// objects added to the linked S3 bucket that do not currently exist in the FSx
+	// file system.
 	//
-	// * NEW - AutoImport is on. Amazon FSx automatically imports directory listings of
-	// any new objects added to the linked S3 bucket that do not currently exist in the
-	// FSx file system.
-	//
-	//     * NEW_CHANGED - AutoImport is on. Amazon FSx automatically
-	// imports file and directory listings of any new objects added to the S3 bucket
-	// and any existing objects that are changed in the S3 bucket after you choose this
+	// * NEW_CHANGED - AutoImport is on. Amazon FSx automatically imports
+	// file and directory listings of any new objects added to the S3 bucket and any
+	// existing objects that are changed in the S3 bucket after you choose this
 	// option.
 	//
 	// For more information, see Automatically import updates from your S3
@@ -437,23 +436,23 @@ type DataRepositoryConfiguration struct {
 	ImportedFileChunkSize *int32
 
 	// Describes the state of the file system's S3 durable data repository, if it is
-	// configured with an S3 repository. The lifecycle can have the following values:
+	// configured with an S3 repository. The lifecycle can have the following
+	// values:
 	//
+	// * CREATING - The data repository configuration between the FSx file
+	// system and the linked S3 data repository is being created. The data repository
+	// is unavailable.
 	//
-	// * CREATING - The data repository configuration between the FSx file system and
-	// the linked S3 data repository is being created. The data repository is
-	// unavailable.
+	// * AVAILABLE - The data repository is available for use.
 	//
-	//     * AVAILABLE - The data repository is available for use.
-	//
-	//     *
+	// *
 	// MISCONFIGURED - Amazon FSx cannot automatically import updates from the S3
 	// bucket until the data repository configuration is corrected. For more
 	// information, see Troubleshooting a Misconfigured linked S3 bucket
 	// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/troubleshooting.html#troubleshooting-misconfigured-data-repository).
 	//
-	//
-	// * UPDATING - The data repository is undergoing a customer initiated update and
+	// *
+	// UPDATING - The data repository is undergoing a customer initiated update and
 	// availability may be impacted.
 	Lifecycle DataRepositoryLifecycle
 }
@@ -484,29 +483,29 @@ type DataRepositoryTask struct {
 
 	// The lifecycle status of the data repository task, as follows:
 	//
-	//     * PENDING -
+	// * PENDING -
 	// Amazon FSx has not started the task.
 	//
-	//     * EXECUTING - Amazon FSx is processing
-	// the task.
+	// * EXECUTING - Amazon FSx is processing the
+	// task.
 	//
-	//     * FAILED - Amazon FSx was not able to complete the task. For
-	// example, there may be files the task failed to process. The
+	// * FAILED - Amazon FSx was not able to complete the task. For example,
+	// there may be files the task failed to process. The
 	// DataRepositoryTaskFailureDetails property provides more information about task
 	// failures.
 	//
-	//     * SUCCEEDED - FSx completed the task successfully.
+	// * SUCCEEDED - FSx completed the task successfully.
 	//
-	//     *
-	// CANCELED - Amazon FSx canceled the task and it did not complete.
+	// * CANCELED -
+	// Amazon FSx canceled the task and it did not complete.
 	//
-	//     *
-	// CANCELING - FSx is in process of canceling the task.
+	// * CANCELING - FSx is in
+	// process of canceling the task.
 	//
-	// You cannot delete an FSx
-	// for Lustre file system if there are data repository tasks for the file system in
-	// the PENDING or EXECUTING states. Please retry when the data repository task is
-	// finished (with a status of CANCELED, SUCCEEDED, or FAILED). You can use the
+	// You cannot delete an FSx for Lustre file system
+	// if there are data repository tasks for the file system in the PENDING or
+	// EXECUTING states. Please retry when the data repository task is finished (with a
+	// status of CANCELED, SUCCEEDED, or FAILED). You can use the
 	// DescribeDataRepositoryTask action to monitor the task status. Contact the FSx
 	// team if you need to delete your file system immediately.
 	//
@@ -583,12 +582,12 @@ type DataRepositoryTaskFilter struct {
 	// Name of the task property to use in filtering the tasks returned in the
 	// response.
 	//
-	//     * Use file-system-id to retrieve data repository tasks for
-	// specific file systems.
+	// * Use file-system-id to retrieve data repository tasks for specific
+	// file systems.
 	//
-	//     * Use task-lifecycle to retrieve data repository
-	// tasks with one or more specific lifecycle states, as follows: CANCELED,
-	// EXECUTING, FAILED, PENDING, and SUCCEEDED.
+	// * Use task-lifecycle to retrieve data repository tasks with one
+	// or more specific lifecycle states, as follows: CANCELED, EXECUTING, FAILED,
+	// PENDING, and SUCCEEDED.
 	Name DataRepositoryTaskFilterName
 
 	// Use Values to include the specific file system IDs and task lifecycle states for
@@ -706,24 +705,24 @@ type FileSystem struct {
 	// The lifecycle status of the file system, following are the possible values and
 	// what they mean:
 	//
-	//     * AVAILABLE - The file system is in a healthy state, and is
+	// * AVAILABLE - The file system is in a healthy state, and is
 	// reachable and available for use.
 	//
-	//     * CREATING - Amazon FSx is creating the
-	// new file system.
-	//
-	//     * DELETING - Amazon FSx is deleting an existing file
-	// system.
-	//
-	//     * FAILED - An existing file system has experienced an unrecoverable
-	// failure. When creating a new file system, Amazon FSx was unable to create the
+	// * CREATING - Amazon FSx is creating the new
 	// file system.
 	//
-	//     * MISCONFIGURED indicates that the file system is in a failed
-	// but recoverable state.
+	// * DELETING - Amazon FSx is deleting an existing file system.
 	//
-	//     * UPDATING indicates that the file system is
-	// undergoing a customer initiated update.
+	// *
+	// FAILED - An existing file system has experienced an unrecoverable failure. When
+	// creating a new file system, Amazon FSx was unable to create the file system.
+	//
+	// *
+	// MISCONFIGURED indicates that the file system is in a failed but recoverable
+	// state.
+	//
+	// * UPDATING indicates that the file system is undergoing a customer
+	// initiated update.
 	Lifecycle FileSystemLifecycle
 
 	// The configuration for the Amazon FSx for Lustre file system.
@@ -896,13 +895,13 @@ type SelfManagedActiveDirectoryConfiguration struct {
 	// in the private IP version 4 (IPv4) address ranges, as specified in RFC 1918
 	// (http://www.faqs.org/rfcs/rfc1918.html):
 	//
-	//     * 10.0.0.0 - 10.255.255.255 (10/8
+	// * 10.0.0.0 - 10.255.255.255 (10/8
 	// prefix)
 	//
-	//     * 172.16.0.0 - 172.31.255.255 (172.16/12 prefix)
+	// * 172.16.0.0 - 172.31.255.255 (172.16/12 prefix)
 	//
-	//     * 192.168.0.0
-	// - 192.168.255.255 (192.168/16 prefix)
+	// * 192.168.0.0 -
+	// 192.168.255.255 (192.168/16 prefix)
 	//
 	// This member is required.
 	DnsIps []*string
@@ -993,17 +992,17 @@ type UpdateFileSystemLustreConfiguration struct {
 	// your file and directory listing up to date as you add or modify objects in your
 	// linked S3 bucket. AutoImportPolicy can have the following values:
 	//
-	//     * NONE -
+	// * NONE -
 	// (Default) AutoImport is off. Amazon FSx only updates file and directory listings
 	// from the linked S3 bucket when the file system is created. FSx does not update
 	// the file and directory listing for any new or changed objects after choosing
 	// this option.
 	//
-	//     * NEW - AutoImport is on. Amazon FSx automatically imports
+	// * NEW - AutoImport is on. Amazon FSx automatically imports
 	// directory listings of any new objects added to the linked S3 bucket that do not
 	// currently exist in the FSx file system.
 	//
-	//     * NEW_CHANGED - AutoImport is on.
+	// * NEW_CHANGED - AutoImport is on.
 	// Amazon FSx automatically imports file and directory listings of any new objects
 	// added to the S3 bucket and any existing objects that are changed in the S3
 	// bucket after you choose this option.
@@ -1090,18 +1089,18 @@ type WindowsFileSystemConfiguration struct {
 
 	// Specifies the file system deployment type, valid values are the following:
 	//
-	//
-	// * MULTI_AZ_1 - Specifies a high availability file system that is configured for
+	// *
+	// MULTI_AZ_1 - Specifies a high availability file system that is configured for
 	// Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability,
 	// and supports SSD and HDD storage.
 	//
-	//     * SINGLE_AZ_1 - (Default) Specifies a
-	// file system that is configured for single AZ redundancy, only supports SSD
+	// * SINGLE_AZ_1 - (Default) Specifies a file
+	// system that is configured for single AZ redundancy, only supports SSD
 	// storage.
 	//
-	//     * SINGLE_AZ_2 - Latest generation Single AZ file system. Specifies
-	// a file system that is configured for single AZ redundancy and supports SSD and
-	// HDD storage.
+	// * SINGLE_AZ_2 - Latest generation Single AZ file system. Specifies a
+	// file system that is configured for single AZ redundancy and supports SSD and HDD
+	// storage.
 	//
 	// For more information, see Single-AZ and Multi-AZ File Systems
 	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html).

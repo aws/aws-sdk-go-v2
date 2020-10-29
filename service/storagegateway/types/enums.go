@@ -6,13 +6,13 @@ type ActiveDirectoryStatus string
 
 // Enum values for ActiveDirectoryStatus
 const (
-	ActiveDirectoryStatusAccess_denied ActiveDirectoryStatus = "ACCESS_DENIED"
-	ActiveDirectoryStatusDetached      ActiveDirectoryStatus = "DETACHED"
-	ActiveDirectoryStatusJoined        ActiveDirectoryStatus = "JOINED"
-	ActiveDirectoryStatusJoining       ActiveDirectoryStatus = "JOINING"
-	ActiveDirectoryStatusNetwork_error ActiveDirectoryStatus = "NETWORK_ERROR"
-	ActiveDirectoryStatusTimeout       ActiveDirectoryStatus = "TIMEOUT"
-	ActiveDirectoryStatusUnknown_error ActiveDirectoryStatus = "UNKNOWN_ERROR"
+	ActiveDirectoryStatusAccessDenied ActiveDirectoryStatus = "ACCESS_DENIED"
+	ActiveDirectoryStatusDetached     ActiveDirectoryStatus = "DETACHED"
+	ActiveDirectoryStatusJoined       ActiveDirectoryStatus = "JOINED"
+	ActiveDirectoryStatusJoining      ActiveDirectoryStatus = "JOINING"
+	ActiveDirectoryStatusNetworkError ActiveDirectoryStatus = "NETWORK_ERROR"
+	ActiveDirectoryStatusTimeout      ActiveDirectoryStatus = "TIMEOUT"
+	ActiveDirectoryStatusUnknownError ActiveDirectoryStatus = "UNKNOWN_ERROR"
 )
 
 // Values returns all known values for ActiveDirectoryStatus. Note that this can be
@@ -339,8 +339,8 @@ type TapeStorageClass string
 
 // Enum values for TapeStorageClass
 const (
-	TapeStorageClassDeep_archive TapeStorageClass = "DEEP_ARCHIVE"
-	TapeStorageClassGlacier      TapeStorageClass = "GLACIER"
+	TapeStorageClassDeepArchive TapeStorageClass = "DEEP_ARCHIVE"
+	TapeStorageClassGlacier     TapeStorageClass = "GLACIER"
 )
 
 // Values returns all known values for TapeStorageClass. Note that this can be

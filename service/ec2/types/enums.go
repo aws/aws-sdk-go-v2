@@ -24,10 +24,10 @@ type ActivityStatus string
 
 // Enum values for ActivityStatus
 const (
-	ActivityStatusError               ActivityStatus = "error"
-	ActivityStatusPending_fulfillment ActivityStatus = "pending_fulfillment"
-	ActivityStatusPending_termination ActivityStatus = "pending_termination"
-	ActivityStatusFulfilled           ActivityStatus = "fulfilled"
+	ActivityStatusError              ActivityStatus = "error"
+	ActivityStatusPendingFulfillment ActivityStatus = "pending_fulfillment"
+	ActivityStatusPendingTermination ActivityStatus = "pending_termination"
+	ActivityStatusFulfilled          ActivityStatus = "fulfilled"
 )
 
 // Values returns all known values for ActivityStatus. Note that this can be
@@ -90,9 +90,9 @@ type AllocationStrategy string
 
 // Enum values for AllocationStrategy
 const (
-	AllocationStrategyLowest_price       AllocationStrategy = "lowestPrice"
-	AllocationStrategyDiversified        AllocationStrategy = "diversified"
-	AllocationStrategyCapacity_optimized AllocationStrategy = "capacityOptimized"
+	AllocationStrategyLowestPrice       AllocationStrategy = "lowestPrice"
+	AllocationStrategyDiversified       AllocationStrategy = "diversified"
+	AllocationStrategyCapacityOptimized AllocationStrategy = "capacityOptimized"
 )
 
 // Values returns all known values for AllocationStrategy. Note that this can be
@@ -128,9 +128,9 @@ type ArchitectureType string
 
 // Enum values for ArchitectureType
 const (
-	ArchitectureTypeI386   ArchitectureType = "i386"
-	ArchitectureTypeX86_64 ArchitectureType = "x86_64"
-	ArchitectureTypeArm64  ArchitectureType = "arm64"
+	ArchitectureTypeI386  ArchitectureType = "i386"
+	ArchitectureTypeX8664 ArchitectureType = "x86_64"
+	ArchitectureTypeArm64 ArchitectureType = "arm64"
 )
 
 // Values returns all known values for ArchitectureType. Note that this can be
@@ -148,9 +148,9 @@ type ArchitectureValues string
 
 // Enum values for ArchitectureValues
 const (
-	ArchitectureValuesI386   ArchitectureValues = "i386"
-	ArchitectureValuesX86_64 ArchitectureValues = "x86_64"
-	ArchitectureValuesArm64  ArchitectureValues = "arm64"
+	ArchitectureValuesI386  ArchitectureValues = "i386"
+	ArchitectureValuesX8664 ArchitectureValues = "x86_64"
+	ArchitectureValuesArm64 ArchitectureValues = "arm64"
 )
 
 // Values returns all known values for ArchitectureValues. Note that this can be
@@ -309,13 +309,13 @@ type BatchState string
 
 // Enum values for BatchState
 const (
-	BatchStateSubmitted                       BatchState = "submitted"
-	BatchStateActive                          BatchState = "active"
-	BatchStateCancelled                       BatchState = "cancelled"
-	BatchStateFailed                          BatchState = "failed"
-	BatchStateCancelled_running               BatchState = "cancelled_running"
-	BatchStateCancelled_terminating_instances BatchState = "cancelled_terminating"
-	BatchStateModifying                       BatchState = "modifying"
+	BatchStateSubmitted                     BatchState = "submitted"
+	BatchStateActive                        BatchState = "active"
+	BatchStateCancelled                     BatchState = "cancelled"
+	BatchStateFailed                        BatchState = "failed"
+	BatchStateCancelledRunning              BatchState = "cancelled_running"
+	BatchStateCancelledTerminatingInstances BatchState = "cancelled_terminating"
+	BatchStateModifying                     BatchState = "modifying"
 )
 
 // Values returns all known values for BatchState. Note that this can be expanded
@@ -395,10 +395,10 @@ type CancelBatchErrorCode string
 
 // Enum values for CancelBatchErrorCode
 const (
-	CancelBatchErrorCodeFleet_request_id_does_not_exist        CancelBatchErrorCode = "fleetRequestIdDoesNotExist"
-	CancelBatchErrorCodeFleet_request_id_malformed             CancelBatchErrorCode = "fleetRequestIdMalformed"
-	CancelBatchErrorCodeFleet_request_not_in_cancellable_state CancelBatchErrorCode = "fleetRequestNotInCancellableState"
-	CancelBatchErrorCodeUnexpected_error                       CancelBatchErrorCode = "unexpectedError"
+	CancelBatchErrorCodeFleetRequestIdDoesNotExist        CancelBatchErrorCode = "fleetRequestIdDoesNotExist"
+	CancelBatchErrorCodeFleetRequestIdMalformed           CancelBatchErrorCode = "fleetRequestIdMalformed"
+	CancelBatchErrorCodeFleetRequestNotInCancellableState CancelBatchErrorCode = "fleetRequestNotInCancellableState"
+	CancelBatchErrorCodeUnexpectedError                   CancelBatchErrorCode = "unexpectedError"
 )
 
 // Values returns all known values for CancelBatchErrorCode. Note that this can be
@@ -442,17 +442,17 @@ type CapacityReservationInstancePlatform string
 
 // Enum values for CapacityReservationInstancePlatform
 const (
-	CapacityReservationInstancePlatformLinux_unix                         CapacityReservationInstancePlatform = "Linux/UNIX"
-	CapacityReservationInstancePlatformRed_hat_enterprise_linux           CapacityReservationInstancePlatform = "Red Hat Enterprise Linux"
-	CapacityReservationInstancePlatformSuse_linux                         CapacityReservationInstancePlatform = "SUSE Linux"
-	CapacityReservationInstancePlatformWindows                            CapacityReservationInstancePlatform = "Windows"
-	CapacityReservationInstancePlatformWindows_with_sql_server            CapacityReservationInstancePlatform = "Windows with SQL Server"
-	CapacityReservationInstancePlatformWindows_with_sql_server_enterprise CapacityReservationInstancePlatform = "Windows with SQL Server Enterprise"
-	CapacityReservationInstancePlatformWindows_with_sql_server_standard   CapacityReservationInstancePlatform = "Windows with SQL Server Standard"
-	CapacityReservationInstancePlatformWindows_with_sql_server_web        CapacityReservationInstancePlatform = "Windows with SQL Server Web"
-	CapacityReservationInstancePlatformLinux_with_sql_server_standard     CapacityReservationInstancePlatform = "Linux with SQL Server Standard"
-	CapacityReservationInstancePlatformLinux_with_sql_server_web          CapacityReservationInstancePlatform = "Linux with SQL Server Web"
-	CapacityReservationInstancePlatformLinux_with_sql_server_enterprise   CapacityReservationInstancePlatform = "Linux with SQL Server Enterprise"
+	CapacityReservationInstancePlatformLinuxUnix                      CapacityReservationInstancePlatform = "Linux/UNIX"
+	CapacityReservationInstancePlatformRedHatEnterpriseLinux          CapacityReservationInstancePlatform = "Red Hat Enterprise Linux"
+	CapacityReservationInstancePlatformSuseLinux                      CapacityReservationInstancePlatform = "SUSE Linux"
+	CapacityReservationInstancePlatformWindows                        CapacityReservationInstancePlatform = "Windows"
+	CapacityReservationInstancePlatformWindowsWithSqlServer           CapacityReservationInstancePlatform = "Windows with SQL Server"
+	CapacityReservationInstancePlatformWindowsWithSqlServerEnterprise CapacityReservationInstancePlatform = "Windows with SQL Server Enterprise"
+	CapacityReservationInstancePlatformWindowsWithSqlServerStandard   CapacityReservationInstancePlatform = "Windows with SQL Server Standard"
+	CapacityReservationInstancePlatformWindowsWithSqlServerWeb        CapacityReservationInstancePlatform = "Windows with SQL Server Web"
+	CapacityReservationInstancePlatformLinuxWithSqlServerStandard     CapacityReservationInstancePlatform = "Linux with SQL Server Standard"
+	CapacityReservationInstancePlatformLinuxWithSqlServerWeb          CapacityReservationInstancePlatform = "Linux with SQL Server Web"
+	CapacityReservationInstancePlatformLinuxWithSqlServerEnterprise   CapacityReservationInstancePlatform = "Linux with SQL Server Enterprise"
 )
 
 // Values returns all known values for CapacityReservationInstancePlatform. Note
@@ -851,8 +851,8 @@ type DefaultTargetCapacityType string
 
 // Enum values for DefaultTargetCapacityType
 const (
-	DefaultTargetCapacityTypeSpot      DefaultTargetCapacityType = "spot"
-	DefaultTargetCapacityTypeOn_demand DefaultTargetCapacityType = "on-demand"
+	DefaultTargetCapacityTypeSpot     DefaultTargetCapacityType = "spot"
+	DefaultTargetCapacityTypeOnDemand DefaultTargetCapacityType = "on-demand"
 )
 
 // Values returns all known values for DefaultTargetCapacityType. Note that this
@@ -869,10 +869,10 @@ type DeleteFleetErrorCode string
 
 // Enum values for DeleteFleetErrorCode
 const (
-	DeleteFleetErrorCodeFleet_id_does_not_exist      DeleteFleetErrorCode = "fleetIdDoesNotExist"
-	DeleteFleetErrorCodeFleet_id_malformed           DeleteFleetErrorCode = "fleetIdMalformed"
-	DeleteFleetErrorCodeFleet_not_in_deletable_state DeleteFleetErrorCode = "fleetNotInDeletableState"
-	DeleteFleetErrorCodeUnexpected_error             DeleteFleetErrorCode = "unexpectedError"
+	DeleteFleetErrorCodeFleetIdDoesNotExist      DeleteFleetErrorCode = "fleetIdDoesNotExist"
+	DeleteFleetErrorCodeFleetIdMalformed         DeleteFleetErrorCode = "fleetIdMalformed"
+	DeleteFleetErrorCodeFleetNotInDeletableState DeleteFleetErrorCode = "fleetNotInDeletableState"
+	DeleteFleetErrorCodeUnexpectedError          DeleteFleetErrorCode = "unexpectedError"
 )
 
 // Values returns all known values for DeleteFleetErrorCode. Note that this can be
@@ -891,9 +891,9 @@ type DeleteQueuedReservedInstancesErrorCode string
 
 // Enum values for DeleteQueuedReservedInstancesErrorCode
 const (
-	DeleteQueuedReservedInstancesErrorCodeReserved_instances_id_invalid          DeleteQueuedReservedInstancesErrorCode = "reserved-instances-id-invalid"
-	DeleteQueuedReservedInstancesErrorCodeReserved_instances_not_in_queued_state DeleteQueuedReservedInstancesErrorCode = "reserved-instances-not-in-queued-state"
-	DeleteQueuedReservedInstancesErrorCodeUnexpected_error                       DeleteQueuedReservedInstancesErrorCode = "unexpected-error"
+	DeleteQueuedReservedInstancesErrorCodeReservedInstancesIdInvalid        DeleteQueuedReservedInstancesErrorCode = "reserved-instances-id-invalid"
+	DeleteQueuedReservedInstancesErrorCodeReservedInstancesNotInQueuedState DeleteQueuedReservedInstancesErrorCode = "reserved-instances-not-in-queued-state"
+	DeleteQueuedReservedInstancesErrorCodeUnexpectedError                   DeleteQueuedReservedInstancesErrorCode = "unexpected-error"
 )
 
 // Values returns all known values for DeleteQueuedReservedInstancesErrorCode. Note
@@ -1198,10 +1198,10 @@ type EventType string
 
 // Enum values for EventType
 const (
-	EventTypeInstance_change EventType = "instanceChange"
-	EventTypeBatch_change    EventType = "fleetRequestChange"
-	EventTypeError           EventType = "error"
-	EventTypeInformation     EventType = "information"
+	EventTypeInstanceChange EventType = "instanceChange"
+	EventTypeBatchChange    EventType = "fleetRequestChange"
+	EventTypeError          EventType = "error"
+	EventTypeInformation    EventType = "information"
 )
 
 // Values returns all known values for EventType. Note that this can be expanded in
@@ -1220,8 +1220,8 @@ type ExcessCapacityTerminationPolicy string
 
 // Enum values for ExcessCapacityTerminationPolicy
 const (
-	ExcessCapacityTerminationPolicyNo_termination ExcessCapacityTerminationPolicy = "noTermination"
-	ExcessCapacityTerminationPolicyDefault        ExcessCapacityTerminationPolicy = "default"
+	ExcessCapacityTerminationPolicyNoTermination ExcessCapacityTerminationPolicy = "noTermination"
+	ExcessCapacityTerminationPolicyDefault       ExcessCapacityTerminationPolicy = "default"
 )
 
 // Values returns all known values for ExcessCapacityTerminationPolicy. Note that
@@ -1305,10 +1305,10 @@ type FleetActivityStatus string
 
 // Enum values for FleetActivityStatus
 const (
-	FleetActivityStatusError               FleetActivityStatus = "error"
-	FleetActivityStatusPending_fulfillment FleetActivityStatus = "pending_fulfillment"
-	FleetActivityStatusPending_termination FleetActivityStatus = "pending_termination"
-	FleetActivityStatusFulfilled           FleetActivityStatus = "fulfilled"
+	FleetActivityStatusError              FleetActivityStatus = "error"
+	FleetActivityStatusPendingFulfillment FleetActivityStatus = "pending_fulfillment"
+	FleetActivityStatusPendingTermination FleetActivityStatus = "pending_termination"
+	FleetActivityStatusFulfilled          FleetActivityStatus = "fulfilled"
 )
 
 // Values returns all known values for FleetActivityStatus. Note that this can be
@@ -1327,7 +1327,7 @@ type FleetCapacityReservationUsageStrategy string
 
 // Enum values for FleetCapacityReservationUsageStrategy
 const (
-	FleetCapacityReservationUsageStrategyUse_capacity_reservations_first FleetCapacityReservationUsageStrategy = "use-capacity-reservations-first"
+	FleetCapacityReservationUsageStrategyUseCapacityReservationsFirst FleetCapacityReservationUsageStrategy = "use-capacity-reservations-first"
 )
 
 // Values returns all known values for FleetCapacityReservationUsageStrategy. Note
@@ -1344,9 +1344,9 @@ type FleetEventType string
 
 // Enum values for FleetEventType
 const (
-	FleetEventTypeInstance_change FleetEventType = "instance-change"
-	FleetEventTypeFleet_change    FleetEventType = "fleet-change"
-	FleetEventTypeService_error   FleetEventType = "service-error"
+	FleetEventTypeInstanceChange FleetEventType = "instance-change"
+	FleetEventTypeFleetChange    FleetEventType = "fleet-change"
+	FleetEventTypeServiceError   FleetEventType = "service-error"
 )
 
 // Values returns all known values for FleetEventType. Note that this can be
@@ -1364,8 +1364,8 @@ type FleetExcessCapacityTerminationPolicy string
 
 // Enum values for FleetExcessCapacityTerminationPolicy
 const (
-	FleetExcessCapacityTerminationPolicyNo_termination FleetExcessCapacityTerminationPolicy = "no-termination"
-	FleetExcessCapacityTerminationPolicyTermination    FleetExcessCapacityTerminationPolicy = "termination"
+	FleetExcessCapacityTerminationPolicyNoTermination FleetExcessCapacityTerminationPolicy = "no-termination"
+	FleetExcessCapacityTerminationPolicyTermination   FleetExcessCapacityTerminationPolicy = "termination"
 )
 
 // Values returns all known values for FleetExcessCapacityTerminationPolicy. Note
@@ -1383,8 +1383,8 @@ type FleetOnDemandAllocationStrategy string
 
 // Enum values for FleetOnDemandAllocationStrategy
 const (
-	FleetOnDemandAllocationStrategyLowest_price FleetOnDemandAllocationStrategy = "lowest-price"
-	FleetOnDemandAllocationStrategyPrioritized  FleetOnDemandAllocationStrategy = "prioritized"
+	FleetOnDemandAllocationStrategyLowestPrice FleetOnDemandAllocationStrategy = "lowest-price"
+	FleetOnDemandAllocationStrategyPrioritized FleetOnDemandAllocationStrategy = "prioritized"
 )
 
 // Values returns all known values for FleetOnDemandAllocationStrategy. Note that
@@ -1402,13 +1402,13 @@ type FleetStateCode string
 
 // Enum values for FleetStateCode
 const (
-	FleetStateCodeSubmitted                     FleetStateCode = "submitted"
-	FleetStateCodeActive                        FleetStateCode = "active"
-	FleetStateCodeDeleted                       FleetStateCode = "deleted"
-	FleetStateCodeFailed                        FleetStateCode = "failed"
-	FleetStateCodeDeleted_running               FleetStateCode = "deleted_running"
-	FleetStateCodeDeleted_terminating_instances FleetStateCode = "deleted_terminating"
-	FleetStateCodeModifying                     FleetStateCode = "modifying"
+	FleetStateCodeSubmitted                   FleetStateCode = "submitted"
+	FleetStateCodeActive                      FleetStateCode = "active"
+	FleetStateCodeDeleted                     FleetStateCode = "deleted"
+	FleetStateCodeFailed                      FleetStateCode = "failed"
+	FleetStateCodeDeletedRunning              FleetStateCode = "deleted_running"
+	FleetStateCodeDeletedTerminatingInstances FleetStateCode = "deleted_terminating"
+	FleetStateCodeModifying                   FleetStateCode = "modifying"
 )
 
 // Values returns all known values for FleetStateCode. Note that this can be
@@ -1743,8 +1743,8 @@ type InstanceHealthStatus string
 
 // Enum values for InstanceHealthStatus
 const (
-	InstanceHealthStatusHealthy_status   InstanceHealthStatus = "healthy"
-	InstanceHealthStatusUnhealthy_status InstanceHealthStatus = "unhealthy"
+	InstanceHealthStatusHealthyStatus   InstanceHealthStatus = "healthy"
+	InstanceHealthStatusUnhealthyStatus InstanceHealthStatus = "unhealthy"
 )
 
 // Values returns all known values for InstanceHealthStatus. Note that this can be
@@ -1781,8 +1781,8 @@ type InstanceLifecycle string
 
 // Enum values for InstanceLifecycle
 const (
-	InstanceLifecycleSpot      InstanceLifecycle = "spot"
-	InstanceLifecycleOn_demand InstanceLifecycle = "on-demand"
+	InstanceLifecycleSpot     InstanceLifecycle = "spot"
+	InstanceLifecycleOnDemand InstanceLifecycle = "on-demand"
 )
 
 // Values returns all known values for InstanceLifecycle. Note that this can be
@@ -2664,12 +2664,12 @@ type LaunchTemplateErrorCode string
 
 // Enum values for LaunchTemplateErrorCode
 const (
-	LaunchTemplateErrorCodeLaunch_template_id_does_not_exist      LaunchTemplateErrorCode = "launchTemplateIdDoesNotExist"
-	LaunchTemplateErrorCodeLaunch_template_id_malformed           LaunchTemplateErrorCode = "launchTemplateIdMalformed"
-	LaunchTemplateErrorCodeLaunch_template_name_does_not_exist    LaunchTemplateErrorCode = "launchTemplateNameDoesNotExist"
-	LaunchTemplateErrorCodeLaunch_template_name_malformed         LaunchTemplateErrorCode = "launchTemplateNameMalformed"
-	LaunchTemplateErrorCodeLaunch_template_version_does_not_exist LaunchTemplateErrorCode = "launchTemplateVersionDoesNotExist"
-	LaunchTemplateErrorCodeUnexpected_error                       LaunchTemplateErrorCode = "unexpectedError"
+	LaunchTemplateErrorCodeLaunchTemplateIdDoesNotExist      LaunchTemplateErrorCode = "launchTemplateIdDoesNotExist"
+	LaunchTemplateErrorCodeLaunchTemplateIdMalformed         LaunchTemplateErrorCode = "launchTemplateIdMalformed"
+	LaunchTemplateErrorCodeLaunchTemplateNameDoesNotExist    LaunchTemplateErrorCode = "launchTemplateNameDoesNotExist"
+	LaunchTemplateErrorCodeLaunchTemplateNameMalformed       LaunchTemplateErrorCode = "launchTemplateNameMalformed"
+	LaunchTemplateErrorCodeLaunchTemplateVersionDoesNotExist LaunchTemplateErrorCode = "launchTemplateVersionDoesNotExist"
+	LaunchTemplateErrorCodeUnexpectedError                   LaunchTemplateErrorCode = "unexpectedError"
 )
 
 // Values returns all known values for LaunchTemplateErrorCode. Note that this can
@@ -3155,8 +3155,8 @@ type OnDemandAllocationStrategy string
 
 // Enum values for OnDemandAllocationStrategy
 const (
-	OnDemandAllocationStrategyLowest_price OnDemandAllocationStrategy = "lowestPrice"
-	OnDemandAllocationStrategyPrioritized  OnDemandAllocationStrategy = "prioritized"
+	OnDemandAllocationStrategyLowestPrice OnDemandAllocationStrategy = "lowestPrice"
+	OnDemandAllocationStrategyPrioritized OnDemandAllocationStrategy = "prioritized"
 )
 
 // Values returns all known values for OnDemandAllocationStrategy. Note that this
@@ -3191,9 +3191,9 @@ type PaymentOption string
 
 // Enum values for PaymentOption
 const (
-	PaymentOptionAll_upfront     PaymentOption = "AllUpfront"
-	PaymentOptionPartial_upfront PaymentOption = "PartialUpfront"
-	PaymentOptionNo_upfront      PaymentOption = "NoUpfront"
+	PaymentOptionAllUpfront     PaymentOption = "AllUpfront"
+	PaymentOptionPartialUpfront PaymentOption = "PartialUpfront"
+	PaymentOptionNoUpfront      PaymentOption = "NoUpfront"
 )
 
 // Values returns all known values for PaymentOption. Note that this can be
@@ -3453,10 +3453,10 @@ type ReservationState string
 
 // Enum values for ReservationState
 const (
-	ReservationStatePayment_pending ReservationState = "payment-pending"
-	ReservationStatePayment_failed  ReservationState = "payment-failed"
-	ReservationStateActive          ReservationState = "active"
-	ReservationStateRetired         ReservationState = "retired"
+	ReservationStatePaymentPending ReservationState = "payment-pending"
+	ReservationStatePaymentFailed  ReservationState = "payment-failed"
+	ReservationStateActive         ReservationState = "active"
+	ReservationStateRetired        ReservationState = "retired"
 )
 
 // Values returns all known values for ReservationState. Note that this can be
@@ -3756,8 +3756,8 @@ type Scope string
 
 // Enum values for Scope
 const (
-	ScopeAvailability_zone Scope = "Availability Zone"
-	ScopeRegional          Scope = "Region"
+	ScopeAvailabilityZone Scope = "Availability Zone"
+	ScopeRegional         Scope = "Region"
 )
 
 // Values returns all known values for Scope. Note that this can be expanded in the
@@ -3872,9 +3872,9 @@ type SpotAllocationStrategy string
 
 // Enum values for SpotAllocationStrategy
 const (
-	SpotAllocationStrategyLowest_price       SpotAllocationStrategy = "lowest-price"
-	SpotAllocationStrategyDiversified        SpotAllocationStrategy = "diversified"
-	SpotAllocationStrategyCapacity_optimized SpotAllocationStrategy = "capacity-optimized"
+	SpotAllocationStrategyLowestPrice       SpotAllocationStrategy = "lowest-price"
+	SpotAllocationStrategyDiversified       SpotAllocationStrategy = "diversified"
+	SpotAllocationStrategyCapacityOptimized SpotAllocationStrategy = "capacity-optimized"
 )
 
 // Values returns all known values for SpotAllocationStrategy. Note that this can
@@ -4610,10 +4610,10 @@ type UnsuccessfulInstanceCreditSpecificationErrorCode string
 
 // Enum values for UnsuccessfulInstanceCreditSpecificationErrorCode
 const (
-	UnsuccessfulInstanceCreditSpecificationErrorCodeInvalid_instance_id                         UnsuccessfulInstanceCreditSpecificationErrorCode = "InvalidInstanceID.Malformed"
-	UnsuccessfulInstanceCreditSpecificationErrorCodeInstance_not_found                          UnsuccessfulInstanceCreditSpecificationErrorCode = "InvalidInstanceID.NotFound"
-	UnsuccessfulInstanceCreditSpecificationErrorCodeIncorrect_instance_state                    UnsuccessfulInstanceCreditSpecificationErrorCode = "IncorrectInstanceState"
-	UnsuccessfulInstanceCreditSpecificationErrorCodeInstance_credit_specification_not_supported UnsuccessfulInstanceCreditSpecificationErrorCode = "InstanceCreditSpecification.NotSupported"
+	UnsuccessfulInstanceCreditSpecificationErrorCodeInvalidInstanceId                       UnsuccessfulInstanceCreditSpecificationErrorCode = "InvalidInstanceID.Malformed"
+	UnsuccessfulInstanceCreditSpecificationErrorCodeInstanceNotFound                        UnsuccessfulInstanceCreditSpecificationErrorCode = "InvalidInstanceID.NotFound"
+	UnsuccessfulInstanceCreditSpecificationErrorCodeIncorrectInstanceState                  UnsuccessfulInstanceCreditSpecificationErrorCode = "IncorrectInstanceState"
+	UnsuccessfulInstanceCreditSpecificationErrorCodeInstanceCreditSpecificationNotSupported UnsuccessfulInstanceCreditSpecificationErrorCode = "InstanceCreditSpecification.NotSupported"
 )
 
 // Values returns all known values for

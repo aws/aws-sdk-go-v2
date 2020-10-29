@@ -216,20 +216,19 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 // the reasons in the following list might not be applicable to this specific API
 // or operation.
 //
-//     * ACCOUNT_CANNOT_LEAVE_ORGANIZAION: You attempted to remove
-// the management account from the organization. You can't remove the management
+// * ACCOUNT_CANNOT_LEAVE_ORGANIZAION: You attempted to remove the
+// management account from the organization. You can't remove the management
 // account. Instead, after you remove all member accounts, delete the organization
 // itself.
 //
-//     * ACCOUNT_CANNOT_LEAVE_WITHOUT_EULA: You attempted to remove an
-// account from the organization that doesn't yet have enough information to exist
-// as a standalone account. This account requires you to first agree to the AWS
-// Customer Agreement. Follow the steps at Removing a member account from your
-// organization
+// * ACCOUNT_CANNOT_LEAVE_WITHOUT_EULA: You attempted to remove an account
+// from the organization that doesn't yet have enough information to exist as a
+// standalone account. This account requires you to first agree to the AWS Customer
+// Agreement. Follow the steps at Removing a member account from your organization
 // (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#orgs_manage_accounts_remove-from-master)in
 // the AWS Organizations User Guide.
 //
-//     *
+// *
 // ACCOUNT_CANNOT_LEAVE_WITHOUT_PHONE_VERIFICATION: You attempted to remove an
 // account from the organization that doesn't yet have enough information to exist
 // as a standalone account. This account requires you to first complete phone
@@ -238,53 +237,51 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 // (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#orgs_manage_accounts_remove-from-master)
 // in the AWS Organizations User Guide.
 //
-//     *
-// ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED: You attempted to exceed the number of
-// accounts that you can create in one day.
+// * ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED:
+// You attempted to exceed the number of accounts that you can create in one
+// day.
 //
-//     * ACCOUNT_NUMBER_LIMIT_EXCEEDED:
-// You attempted to exceed the limit on the number of accounts in an organization.
-// If you need more accounts, contact AWS Support
-// (https://console.aws.amazon.com/support/home#/) to request an increase in your
-// limit. Or the number of invitations that you tried to send would cause you to
-// exceed the limit of accounts in your organization. Send fewer invitations or
-// contact AWS Support to request an increase in the number of accounts. Deleted
+// * ACCOUNT_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the limit on the
+// number of accounts in an organization. If you need more accounts, contact AWS
+// Support (https://console.aws.amazon.com/support/home#/) to request an increase
+// in your limit. Or the number of invitations that you tried to send would cause
+// you to exceed the limit of accounts in your organization. Send fewer invitations
+// or contact AWS Support to request an increase in the number of accounts. Deleted
 // and closed accounts still count toward your limit. If you get this exception
 // when running a command immediately after creating the organization, wait one
 // hour and try again. After an hour, if the command continues to fail with this
 // error, contact AWS Support (https://console.aws.amazon.com/support/home#/).
 //
+// *
+// CANNOT_REGISTER_MASTER_AS_DELEGATED_ADMINISTRATOR: You attempted to register the
+// management account of the organization as a delegated administrator for an AWS
+// service integrated with Organizations. You can designate only a member account
+// as a delegated administrator.
 //
-// * CANNOT_REGISTER_MASTER_AS_DELEGATED_ADMINISTRATOR: You attempted to register
-// the management account of the organization as a delegated administrator for an
-// AWS service integrated with Organizations. You can designate only a member
-// account as a delegated administrator.
+// * CANNOT_REMOVE_DELEGATED_ADMINISTRATOR_FROM_ORG:
+// You attempted to remove an account that is registered as a delegated
+// administrator for a service integrated with your organization. To complete this
+// operation, you must first deregister this account as a delegated
+// administrator.
 //
-//     *
-// CANNOT_REMOVE_DELEGATED_ADMINISTRATOR_FROM_ORG: You attempted to remove an
-// account that is registered as a delegated administrator for a service integrated
-// with your organization. To complete this operation, you must first deregister
-// this account as a delegated administrator.
+// * CREATE_ORGANIZATION_IN_BILLING_MODE_UNSUPPORTED_REGION: To
+// create an organization in the specified region, you must enable all features
+// mode.
 //
-//     *
-// CREATE_ORGANIZATION_IN_BILLING_MODE_UNSUPPORTED_REGION: To create an
-// organization in the specified region, you must enable all features mode.
+// * DELEGATED_ADMINISTRATOR_EXISTS_FOR_THIS_SERVICE: You attempted to
+// register an AWS account as a delegated administrator for an AWS service that
+// already has a delegated administrator. To complete this operation, you must
+// first deregister any existing delegated administrators for this service.
 //
-//     *
-// DELEGATED_ADMINISTRATOR_EXISTS_FOR_THIS_SERVICE: You attempted to register an
-// AWS account as a delegated administrator for an AWS service that already has a
-// delegated administrator. To complete this operation, you must first deregister
-// any existing delegated administrators for this service.
-//
-//     *
+// *
 // EMAIL_VERIFICATION_CODE_EXPIRED: The email verification code is only valid for a
 // limited period of time. You must resubmit the request and generate a new
 // verfication code.
 //
-//     * HANDSHAKE_RATE_LIMIT_EXCEEDED: You attempted to exceed
-// the number of handshakes that you can send in one day.
+// * HANDSHAKE_RATE_LIMIT_EXCEEDED: You attempted to exceed the
+// number of handshakes that you can send in one day.
 //
-//     *
+// *
 // MASTER_ACCOUNT_ADDRESS_DOES_NOT_MATCH_MARKETPLACE: To create an account in this
 // organization, you first must migrate the organization's management account to
 // the marketplace that corresponds to the management account's address. For
@@ -292,77 +289,77 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 // marketplace. All accounts in an organization must be associated with the same
 // marketplace.
 //
-//     * MASTER_ACCOUNT_MISSING_BUSINESS_LICENSE: Applies only to the
-// AWS Regions in China. To create an organization, the master must have an valid
+// * MASTER_ACCOUNT_MISSING_BUSINESS_LICENSE: Applies only to the AWS
+// Regions in China. To create an organization, the master must have an valid
 // business license. For more information, contact customer support.
 //
-//     *
+// *
 // MASTER_ACCOUNT_MISSING_CONTACT_INFO: To complete this operation, you must first
 // provide a valid contact address and phone number for the management account.
 // Then try the operation again.
 //
-//     * MASTER_ACCOUNT_NOT_GOVCLOUD_ENABLED: To
+// * MASTER_ACCOUNT_NOT_GOVCLOUD_ENABLED: To
 // complete this operation, the management account must have an associated account
 // in the AWS GovCloud (US-West) Region. For more information, see AWS
 // Organizations
 // (http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-organizations.html)
 // in the AWS GovCloud User Guide.
 //
-//     *
-// MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED: To create an organization with this
-// management account, you first must associate a valid payment instrument, such as
-// a credit card, with the account. Follow the steps at To leave an organization
-// when all required account information has not yet been provided
+// * MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED:
+// To create an organization with this management account, you first must associate
+// a valid payment instrument, such as a credit card, with the account. Follow the
+// steps at To leave an organization when all required account information has not
+// yet been provided
 // (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
 // in the AWS Organizations User Guide.
 //
-//     *
+// *
 // MAX_DELEGATED_ADMINISTRATORS_FOR_SERVICE_LIMIT_EXCEEDED: You attempted to
-// register more delegated administrators than allowed for the service principal.
+// register more delegated administrators than allowed for the service
+// principal.
 //
+// * MAX_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED: You attempted to exceed
+// the number of policies of a certain type that can be attached to an entity at
+// one time.
 //
-// * MAX_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED: You attempted to exceed the number
-// of policies of a certain type that can be attached to an entity at one time.
+// * MAX_TAG_LIMIT_EXCEEDED: You have exceeded the number of tags
+// allowed on this resource.
 //
-//
-// * MAX_TAG_LIMIT_EXCEEDED: You have exceeded the number of tags allowed on this
-// resource.
-//
-//     * MEMBER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED: To complete this
-// operation with this member account, you first must associate a valid payment
-// instrument, such as a credit card, with the account. Follow the steps at To
-// leave an organization when all required account information has not yet been
-// provided
+// * MEMBER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED: To
+// complete this operation with this member account, you first must associate a
+// valid payment instrument, such as a credit card, with the account. Follow the
+// steps at To leave an organization when all required account information has not
+// yet been provided
 // (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
 // in the AWS Organizations User Guide.
 //
-//     *
+// *
 // MIN_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED: You attempted to detach a policy from
 // an entity that would cause the entity to have fewer than the minimum number of
 // policies of a certain type required.
 //
-//     *
-// ORGANIZATION_NOT_IN_ALL_FEATURES_MODE: You attempted to perform an operation
-// that requires the organization to be configured to support all features. An
-// organization that supports only consolidated billing features can't perform this
-// operation.
+// * ORGANIZATION_NOT_IN_ALL_FEATURES_MODE:
+// You attempted to perform an operation that requires the organization to be
+// configured to support all features. An organization that supports only
+// consolidated billing features can't perform this operation.
 //
-//     * OU_DEPTH_LIMIT_EXCEEDED: You attempted to create an OU tree
-// that is too many levels deep.
+// *
+// OU_DEPTH_LIMIT_EXCEEDED: You attempted to create an OU tree that is too many
+// levels deep.
 //
-//     * OU_NUMBER_LIMIT_EXCEEDED: You attempted to
-// exceed the number of OUs that you can have in an organization.
+// * OU_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the number of
+// OUs that you can have in an organization.
 //
-//     *
-// POLICY_CONTENT_LIMIT_EXCEEDED: You attempted to create a policy that is larger
-// than the maximum size.
+// * POLICY_CONTENT_LIMIT_EXCEEDED: You
+// attempted to create a policy that is larger than the maximum size.
 //
-//     * POLICY_NUMBER_LIMIT_EXCEEDED: You attempted to
-// exceed the number of policies that you can have in an organization.
+// *
+// POLICY_NUMBER_LIMIT_EXCEEDED: You attempted to exceed the number of policies
+// that you can have in an organization.
 //
-//     *
-// TAG_POLICY_VIOLATION: You attempted to create or update a resource with tags
-// that are not compliant with the tag policy requirements for this account.
+// * TAG_POLICY_VIOLATION: You attempted to
+// create or update a resource with tags that are not compliant with the tag policy
+// requirements for this account.
 type ConstraintViolationException struct {
 	Message *string
 
@@ -590,43 +587,42 @@ func (e *HandshakeAlreadyInStateException) ErrorFault() smithy.ErrorFault { retu
 // code. Some of the reasons in the following list might not be applicable to this
 // specific API or operation:
 //
-//     * ACCOUNT_NUMBER_LIMIT_EXCEEDED: You attempted
-// to exceed the limit on the number of accounts in an organization. Note that
-// deleted and closed accounts still count toward your limit. If you get this
-// exception immediately after creating the organization, wait one hour and try
-// again. If after an hour it continues to fail with this error, contact AWS
-// Support (https://console.aws.amazon.com/support/home#/).
+// * ACCOUNT_NUMBER_LIMIT_EXCEEDED: You attempted to
+// exceed the limit on the number of accounts in an organization. Note that deleted
+// and closed accounts still count toward your limit. If you get this exception
+// immediately after creating the organization, wait one hour and try again. If
+// after an hour it continues to fail with this error, contact AWS Support
+// (https://console.aws.amazon.com/support/home#/).
 //
-//     *
-// ALREADY_IN_AN_ORGANIZATION: The handshake request is invalid because the invited
-// account is already a member of an organization.
+// * ALREADY_IN_AN_ORGANIZATION:
+// The handshake request is invalid because the invited account is already a member
+// of an organization.
 //
-//     *
-// HANDSHAKE_RATE_LIMIT_EXCEEDED: You attempted to exceed the number of handshakes
-// that you can send in one day.
+// * HANDSHAKE_RATE_LIMIT_EXCEEDED: You attempted to exceed
+// the number of handshakes that you can send in one day.
 //
-//     * INVITE_DISABLED_DURING_ENABLE_ALL_FEATURES:
-// You can't issue new invitations to join an organization while it's in the
-// process of enabling all features. You can resume inviting accounts after you
-// finalize the process when all accounts have agreed to the change.
+// *
+// INVITE_DISABLED_DURING_ENABLE_ALL_FEATURES: You can't issue new invitations to
+// join an organization while it's in the process of enabling all features. You can
+// resume inviting accounts after you finalize the process when all accounts have
+// agreed to the change.
 //
-//     *
-// ORGANIZATION_ALREADY_HAS_ALL_FEATURES: The handshake request is invalid because
-// the organization has already enabled all features.
+// * ORGANIZATION_ALREADY_HAS_ALL_FEATURES: The handshake
+// request is invalid because the organization has already enabled all features.
 //
-//     *
+// *
 // ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD: The request failed because the
 // account is from a different marketplace than the accounts in the organization.
 // For example, accounts with India addresses must be associated with the AISPL
 // marketplace. All accounts in an organization must be from the same
 // marketplace.
 //
-//     * ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED: You
+// * ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED: You
 // attempted to change the membership of an account too quickly after its previous
 // change.
 //
-//     * PAYMENT_INSTRUMENT_REQUIRED: You can't complete the operation
-// with an account that doesn't have a payment instrument, such as a credit card,
+// * PAYMENT_INSTRUMENT_REQUIRED: You can't complete the operation with an
+// account that doesn't have a payment instrument, such as a credit card,
 // associated with it.
 type HandshakeConstraintViolationException struct {
 	Message *string
@@ -695,81 +691,80 @@ func (e *InvalidHandshakeTransitionException) ErrorFault() smithy.ErrorFault {
 // additional information about the violated limit: Some of the reasons in the
 // following list might not be applicable to this specific API or operation.
 //
-//     *
+// *
 // DUPLICATE_TAG_KEY: Tag keys must be unique among the tags attached to the same
 // entity.
 //
-//     * IMMUTABLE_POLICY: You specified a policy that is managed by AWS
-// and can't be modified.
+// * IMMUTABLE_POLICY: You specified a policy that is managed by AWS and
+// can't be modified.
 //
-//     * INPUT_REQUIRED: You must include a value for all
-// required parameters.
+// * INPUT_REQUIRED: You must include a value for all required
+// parameters.
 //
-//     * INVALID_ENUM: You specified an invalid value.
+// * INVALID_ENUM: You specified an invalid value.
 //
-//     *
+// *
 // INVALID_ENUM_POLICY_TYPE: You specified an invalid policy type string.
 //
-//     *
+// *
 // INVALID_FULL_NAME_TARGET: You specified a full name that contains invalid
 // characters.
 //
-//     * INVALID_LIST_MEMBER: You provided a list to a parameter that
+// * INVALID_LIST_MEMBER: You provided a list to a parameter that
 // contains at least one invalid value.
 //
-//     * INVALID_PAGINATION_TOKEN: Get the
-// value for the NextToken parameter from the response to a previous call of the
+// * INVALID_PAGINATION_TOKEN: Get the value
+// for the NextToken parameter from the response to a previous call of the
 // operation.
 //
-//     * INVALID_PARTY_TYPE_TARGET: You specified the wrong type of
-// entity (account, organization, or email) as a party.
+// * INVALID_PARTY_TYPE_TARGET: You specified the wrong type of entity
+// (account, organization, or email) as a party.
 //
-//     * INVALID_PATTERN: You
-// provided a value that doesn't match the required pattern.
+// * INVALID_PATTERN: You provided a
+// value that doesn't match the required pattern.
 //
-//     *
-// INVALID_PATTERN_TARGET_ID: You specified a policy target ID that doesn't match
-// the required pattern.
+// * INVALID_PATTERN_TARGET_ID: You
+// specified a policy target ID that doesn't match the required pattern.
 //
-//     * INVALID_ROLE_NAME: You provided a role name that
-// isn't valid. A role name can't begin with the reserved prefix
-// AWSServiceRoleFor.
+// *
+// INVALID_ROLE_NAME: You provided a role name that isn't valid. A role name can't
+// begin with the reserved prefix AWSServiceRoleFor.
 //
-//     * INVALID_SYNTAX_ORGANIZATION_ARN: You specified an
-// invalid Amazon Resource Name (ARN) for the organization.
+// *
+// INVALID_SYNTAX_ORGANIZATION_ARN: You specified an invalid Amazon Resource Name
+// (ARN) for the organization.
 //
-//     *
-// INVALID_SYNTAX_POLICY_ID: You specified an invalid policy ID.
+// * INVALID_SYNTAX_POLICY_ID: You specified an
+// invalid policy ID.
 //
-//     *
-// INVALID_SYSTEM_TAGS_PARAMETER: You specified a tag key that is a system tag. You
-// can’t add, edit, or delete system tag keys because they're reserved for AWS use.
-// System tags don’t count against your tags per resource limit.
+// * INVALID_SYSTEM_TAGS_PARAMETER: You specified a tag key
+// that is a system tag. You can’t add, edit, or delete system tag keys because
+// they're reserved for AWS use. System tags don’t count against your tags per
+// resource limit.
 //
-//     *
-// MAX_FILTER_LIMIT_EXCEEDED: You can specify only one filter parameter for the
-// operation.
+// * MAX_FILTER_LIMIT_EXCEEDED: You can specify only one filter
+// parameter for the operation.
 //
-//     * MAX_LENGTH_EXCEEDED: You provided a string parameter that is
-// longer than allowed.
+// * MAX_LENGTH_EXCEEDED: You provided a string
+// parameter that is longer than allowed.
 //
-//     * MAX_VALUE_EXCEEDED: You provided a numeric parameter
-// that has a larger value than allowed.
+// * MAX_VALUE_EXCEEDED: You provided a
+// numeric parameter that has a larger value than allowed.
 //
-//     * MIN_LENGTH_EXCEEDED: You provided a
-// string parameter that is shorter than allowed.
+// * MIN_LENGTH_EXCEEDED:
+// You provided a string parameter that is shorter than allowed.
 //
-//     * MIN_VALUE_EXCEEDED: You
-// provided a numeric parameter that has a smaller value than allowed.
+// *
+// MIN_VALUE_EXCEEDED: You provided a numeric parameter that has a smaller value
+// than allowed.
 //
-//     *
-// MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS: You can move an account only between
-// entities in the same root.
+// * MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS: You can move an account
+// only between entities in the same root.
 //
-//     * TARGET_NOT_SUPPORTED: You can't perform the
-// specified operation on that target entity.
+// * TARGET_NOT_SUPPORTED: You can't
+// perform the specified operation on that target entity.
 //
-//     *
+// *
 // UNRECOGNIZED_SERVICE_PRINCIPAL: You specified a service principal that isn't
 // recognized.
 type InvalidInputException struct {

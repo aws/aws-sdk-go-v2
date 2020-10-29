@@ -17,21 +17,21 @@ import (
 // Minimum permissions To run this command, you must have the following
 // permissions:
 //
-//     * secretsmanager:DescribeSecret
+// * secretsmanager:DescribeSecret
 //
 // Related operations
 //
-//     * To
-// create a secret, use CreateSecret.
+// * To create a
+// secret, use CreateSecret.
 //
-//     * To modify a secret, use
-// UpdateSecret.
+// * To modify a secret, use UpdateSecret.
 //
-//     * To retrieve the encrypted secret information in a version
-// of the secret, use GetSecretValue.
+// * To
+// retrieve the encrypted secret information in a version of the secret, use
+// GetSecretValue.
 //
-//     * To list all of the secrets in the AWS
-// account, use ListSecrets.
+// * To list all of the secrets in the AWS account, use
+// ListSecrets.
 func (c *Client) DescribeSecret(ctx context.Context, params *DescribeSecretInput, optFns ...func(*Options)) (*DescribeSecretOutput, error) {
 	if params == nil {
 		params = &DescribeSecretInput{}

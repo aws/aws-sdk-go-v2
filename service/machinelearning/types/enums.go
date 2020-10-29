@@ -22,14 +22,14 @@ type BatchPredictionFilterVariable string
 
 // Enum values for BatchPredictionFilterVariable
 const (
-	BatchPredictionFilterVariableCreated_at      BatchPredictionFilterVariable = "CreatedAt"
-	BatchPredictionFilterVariableLast_updated_at BatchPredictionFilterVariable = "LastUpdatedAt"
-	BatchPredictionFilterVariableStatus          BatchPredictionFilterVariable = "Status"
-	BatchPredictionFilterVariableName            BatchPredictionFilterVariable = "Name"
-	BatchPredictionFilterVariableIam_user        BatchPredictionFilterVariable = "IAMUser"
-	BatchPredictionFilterVariableMl_model_id     BatchPredictionFilterVariable = "MLModelId"
-	BatchPredictionFilterVariableDatasource_id   BatchPredictionFilterVariable = "DataSourceId"
-	BatchPredictionFilterVariableData_uri        BatchPredictionFilterVariable = "DataURI"
+	BatchPredictionFilterVariableCreatedAt     BatchPredictionFilterVariable = "CreatedAt"
+	BatchPredictionFilterVariableLastUpdatedAt BatchPredictionFilterVariable = "LastUpdatedAt"
+	BatchPredictionFilterVariableStatus        BatchPredictionFilterVariable = "Status"
+	BatchPredictionFilterVariableName          BatchPredictionFilterVariable = "Name"
+	BatchPredictionFilterVariableIamUser       BatchPredictionFilterVariable = "IAMUser"
+	BatchPredictionFilterVariableMlModelId     BatchPredictionFilterVariable = "MLModelId"
+	BatchPredictionFilterVariableDatasourceId  BatchPredictionFilterVariable = "DataSourceId"
+	BatchPredictionFilterVariableDataUri       BatchPredictionFilterVariable = "DataURI"
 )
 
 // Values returns all known values for BatchPredictionFilterVariable. Note that
@@ -53,12 +53,12 @@ type DataSourceFilterVariable string
 
 // Enum values for DataSourceFilterVariable
 const (
-	DataSourceFilterVariableCreated_at      DataSourceFilterVariable = "CreatedAt"
-	DataSourceFilterVariableLast_updated_at DataSourceFilterVariable = "LastUpdatedAt"
-	DataSourceFilterVariableStatus          DataSourceFilterVariable = "Status"
-	DataSourceFilterVariableName            DataSourceFilterVariable = "Name"
-	DataSourceFilterVariableData_uri        DataSourceFilterVariable = "DataLocationS3"
-	DataSourceFilterVariableIam_user        DataSourceFilterVariable = "IAMUser"
+	DataSourceFilterVariableCreatedAt     DataSourceFilterVariable = "CreatedAt"
+	DataSourceFilterVariableLastUpdatedAt DataSourceFilterVariable = "LastUpdatedAt"
+	DataSourceFilterVariableStatus        DataSourceFilterVariable = "Status"
+	DataSourceFilterVariableName          DataSourceFilterVariable = "Name"
+	DataSourceFilterVariableDataUri       DataSourceFilterVariable = "DataLocationS3"
+	DataSourceFilterVariableIamUser       DataSourceFilterVariable = "IAMUser"
 )
 
 // Values returns all known values for DataSourceFilterVariable. Note that this can
@@ -79,8 +79,8 @@ type DetailsAttributes string
 
 // Enum values for DetailsAttributes
 const (
-	DetailsAttributesPredictive_model_type DetailsAttributes = "PredictiveModelType"
-	DetailsAttributesAlgorithm             DetailsAttributes = "Algorithm"
+	DetailsAttributesPredictiveModelType DetailsAttributes = "PredictiveModelType"
+	DetailsAttributesAlgorithm           DetailsAttributes = "Algorithm"
 )
 
 // Values returns all known values for DetailsAttributes. Note that this can be
@@ -121,14 +121,14 @@ type EvaluationFilterVariable string
 
 // Enum values for EvaluationFilterVariable
 const (
-	EvaluationFilterVariableCreated_at      EvaluationFilterVariable = "CreatedAt"
-	EvaluationFilterVariableLast_updated_at EvaluationFilterVariable = "LastUpdatedAt"
-	EvaluationFilterVariableStatus          EvaluationFilterVariable = "Status"
-	EvaluationFilterVariableName            EvaluationFilterVariable = "Name"
-	EvaluationFilterVariableIam_user        EvaluationFilterVariable = "IAMUser"
-	EvaluationFilterVariableMl_model_id     EvaluationFilterVariable = "MLModelId"
-	EvaluationFilterVariableDatasource_id   EvaluationFilterVariable = "DataSourceId"
-	EvaluationFilterVariableData_uri        EvaluationFilterVariable = "DataURI"
+	EvaluationFilterVariableCreatedAt     EvaluationFilterVariable = "CreatedAt"
+	EvaluationFilterVariableLastUpdatedAt EvaluationFilterVariable = "LastUpdatedAt"
+	EvaluationFilterVariableStatus        EvaluationFilterVariable = "Status"
+	EvaluationFilterVariableName          EvaluationFilterVariable = "Name"
+	EvaluationFilterVariableIamUser       EvaluationFilterVariable = "IAMUser"
+	EvaluationFilterVariableMlModelId     EvaluationFilterVariable = "MLModelId"
+	EvaluationFilterVariableDatasourceId  EvaluationFilterVariable = "DataSourceId"
+	EvaluationFilterVariableDataUri       EvaluationFilterVariable = "DataURI"
 )
 
 // Values returns all known values for EvaluationFilterVariable. Note that this can
@@ -151,16 +151,16 @@ type MLModelFilterVariable string
 
 // Enum values for MLModelFilterVariable
 const (
-	MLModelFilterVariableCreated_at                MLModelFilterVariable = "CreatedAt"
-	MLModelFilterVariableLast_updated_at           MLModelFilterVariable = "LastUpdatedAt"
-	MLModelFilterVariableStatus                    MLModelFilterVariable = "Status"
-	MLModelFilterVariableName                      MLModelFilterVariable = "Name"
-	MLModelFilterVariableIam_user                  MLModelFilterVariable = "IAMUser"
-	MLModelFilterVariableTraining_datasource_id    MLModelFilterVariable = "TrainingDataSourceId"
-	MLModelFilterVariableReal_time_endpoint_status MLModelFilterVariable = "RealtimeEndpointStatus"
-	MLModelFilterVariableMl_model_type             MLModelFilterVariable = "MLModelType"
-	MLModelFilterVariableAlgorithm                 MLModelFilterVariable = "Algorithm"
-	MLModelFilterVariableTraining_data_uri         MLModelFilterVariable = "TrainingDataURI"
+	MLModelFilterVariableCreatedAt              MLModelFilterVariable = "CreatedAt"
+	MLModelFilterVariableLastUpdatedAt          MLModelFilterVariable = "LastUpdatedAt"
+	MLModelFilterVariableStatus                 MLModelFilterVariable = "Status"
+	MLModelFilterVariableName                   MLModelFilterVariable = "Name"
+	MLModelFilterVariableIamUser                MLModelFilterVariable = "IAMUser"
+	MLModelFilterVariableTrainingDatasourceId   MLModelFilterVariable = "TrainingDataSourceId"
+	MLModelFilterVariableRealTimeEndpointStatus MLModelFilterVariable = "RealtimeEndpointStatus"
+	MLModelFilterVariableMlModelType            MLModelFilterVariable = "MLModelType"
+	MLModelFilterVariableAlgorithm              MLModelFilterVariable = "Algorithm"
+	MLModelFilterVariableTrainingDataUri        MLModelFilterVariable = "TrainingDataURI"
 )
 
 // Values returns all known values for MLModelFilterVariable. Note that this can be
@@ -245,10 +245,10 @@ type TaggableResourceType string
 
 // Enum values for TaggableResourceType
 const (
-	TaggableResourceTypeBatch_prediction TaggableResourceType = "BatchPrediction"
-	TaggableResourceTypeDatasource       TaggableResourceType = "DataSource"
-	TaggableResourceTypeEvaluation       TaggableResourceType = "Evaluation"
-	TaggableResourceTypeMl_model         TaggableResourceType = "MLModel"
+	TaggableResourceTypeBatchPrediction TaggableResourceType = "BatchPrediction"
+	TaggableResourceTypeDatasource      TaggableResourceType = "DataSource"
+	TaggableResourceTypeEvaluation      TaggableResourceType = "Evaluation"
+	TaggableResourceTypeMlModel         TaggableResourceType = "MLModel"
 )
 
 // Values returns all known values for TaggableResourceType. Note that this can be

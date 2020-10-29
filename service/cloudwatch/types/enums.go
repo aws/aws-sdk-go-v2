@@ -24,9 +24,9 @@ type AnomalyDetectorStateValue string
 
 // Enum values for AnomalyDetectorStateValue
 const (
-	AnomalyDetectorStateValuePending_training          AnomalyDetectorStateValue = "PENDING_TRAINING"
-	AnomalyDetectorStateValueTrained_insufficient_data AnomalyDetectorStateValue = "TRAINED_INSUFFICIENT_DATA"
-	AnomalyDetectorStateValueTrained                   AnomalyDetectorStateValue = "TRAINED"
+	AnomalyDetectorStateValuePendingTraining         AnomalyDetectorStateValue = "PENDING_TRAINING"
+	AnomalyDetectorStateValueTrainedInsufficientData AnomalyDetectorStateValue = "TRAINED_INSUFFICIENT_DATA"
+	AnomalyDetectorStateValueTrained                 AnomalyDetectorStateValue = "TRAINED"
 )
 
 // Values returns all known values for AnomalyDetectorStateValue. Note that this
@@ -108,8 +108,8 @@ type ScanBy string
 
 // Enum values for ScanBy
 const (
-	ScanByTimestamp_descending ScanBy = "TimestampDescending"
-	ScanByTimestamp_ascending  ScanBy = "TimestampAscending"
+	ScanByTimestampDescending ScanBy = "TimestampDescending"
+	ScanByTimestampAscending  ScanBy = "TimestampAscending"
 )
 
 // Values returns all known values for ScanBy. Note that this can be expanded in
@@ -194,9 +194,9 @@ type StateValue string
 
 // Enum values for StateValue
 const (
-	StateValueOk                StateValue = "OK"
-	StateValueAlarm             StateValue = "ALARM"
-	StateValueInsufficient_data StateValue = "INSUFFICIENT_DATA"
+	StateValueOk               StateValue = "OK"
+	StateValueAlarm            StateValue = "ALARM"
+	StateValueInsufficientData StateValue = "INSUFFICIENT_DATA"
 )
 
 // Values returns all known values for StateValue. Note that this can be expanded
@@ -238,9 +238,9 @@ type StatusCode string
 
 // Enum values for StatusCode
 const (
-	StatusCodeComplete       StatusCode = "Complete"
-	StatusCodeInternal_error StatusCode = "InternalError"
-	StatusCodePartial_data   StatusCode = "PartialData"
+	StatusCodeComplete      StatusCode = "Complete"
+	StatusCodeInternalError StatusCode = "InternalError"
+	StatusCodePartialData   StatusCode = "PartialData"
 )
 
 // Values returns all known values for StatusCode. Note that this can be expanded

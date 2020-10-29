@@ -80,15 +80,15 @@ type DBProxyStatus string
 
 // Enum values for DBProxyStatus
 const (
-	DBProxyStatusAvailable                    DBProxyStatus = "available"
-	DBProxyStatusModifying                    DBProxyStatus = "modifying"
-	DBProxyStatusIncompatible_network         DBProxyStatus = "incompatible-network"
-	DBProxyStatusInsufficient_resource_limits DBProxyStatus = "insufficient-resource-limits"
-	DBProxyStatusCreating                     DBProxyStatus = "creating"
-	DBProxyStatusDeleting                     DBProxyStatus = "deleting"
-	DBProxyStatusSuspended                    DBProxyStatus = "suspended"
-	DBProxyStatusSuspending                   DBProxyStatus = "suspending"
-	DBProxyStatusReactivating                 DBProxyStatus = "reactivating"
+	DBProxyStatusAvailable                  DBProxyStatus = "available"
+	DBProxyStatusModifying                  DBProxyStatus = "modifying"
+	DBProxyStatusIncompatibleNetwork        DBProxyStatus = "incompatible-network"
+	DBProxyStatusInsufficientResourceLimits DBProxyStatus = "insufficient-resource-limits"
+	DBProxyStatusCreating                   DBProxyStatus = "creating"
+	DBProxyStatusDeleting                   DBProxyStatus = "deleting"
+	DBProxyStatusSuspended                  DBProxyStatus = "suspended"
+	DBProxyStatusSuspending                 DBProxyStatus = "suspending"
+	DBProxyStatusReactivating               DBProxyStatus = "reactivating"
 )
 
 // Values returns all known values for DBProxyStatus. Note that this can be
@@ -148,8 +148,8 @@ type ReplicaMode string
 
 // Enum values for ReplicaMode
 const (
-	ReplicaModeOpen_read_only ReplicaMode = "open-read-only"
-	ReplicaModeMounted        ReplicaMode = "mounted"
+	ReplicaModeOpenReadOnly ReplicaMode = "open-read-only"
+	ReplicaModeMounted      ReplicaMode = "mounted"
 )
 
 // Values returns all known values for ReplicaMode. Note that this can be expanded
@@ -192,10 +192,10 @@ type TargetHealthReason string
 
 // Enum values for TargetHealthReason
 const (
-	TargetHealthReasonUnreachable            TargetHealthReason = "UNREACHABLE"
-	TargetHealthReasonConnection_failed      TargetHealthReason = "CONNECTION_FAILED"
-	TargetHealthReasonAuth_failure           TargetHealthReason = "AUTH_FAILURE"
-	TargetHealthReasonPending_proxy_capacity TargetHealthReason = "PENDING_PROXY_CAPACITY"
+	TargetHealthReasonUnreachable          TargetHealthReason = "UNREACHABLE"
+	TargetHealthReasonConnectionFailed     TargetHealthReason = "CONNECTION_FAILED"
+	TargetHealthReasonAuthFailure          TargetHealthReason = "AUTH_FAILURE"
+	TargetHealthReasonPendingProxyCapacity TargetHealthReason = "PENDING_PROXY_CAPACITY"
 )
 
 // Values returns all known values for TargetHealthReason. Note that this can be
@@ -234,9 +234,9 @@ type TargetType string
 
 // Enum values for TargetType
 const (
-	TargetTypeRds_instance            TargetType = "RDS_INSTANCE"
-	TargetTypeRds_serverless_endpoint TargetType = "RDS_SERVERLESS_ENDPOINT"
-	TargetTypeTracked_cluster         TargetType = "TRACKED_CLUSTER"
+	TargetTypeRdsInstance           TargetType = "RDS_INSTANCE"
+	TargetTypeRdsServerlessEndpoint TargetType = "RDS_SERVERLESS_ENDPOINT"
+	TargetTypeTrackedCluster        TargetType = "TRACKED_CLUSTER"
 )
 
 // Values returns all known values for TargetType. Note that this can be expanded

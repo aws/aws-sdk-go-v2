@@ -54,7 +54,7 @@ type DescribeInstanceCreditSpecificationsInput struct {
 
 	// The filters.
 	//
-	//     * instance-id - The ID of the instance.
+	// * instance-id - The ID of the instance.
 	Filters []*types.Filter
 
 	// The instance IDs. Default: Describes all your instances. Constraints: Maximum

@@ -65,9 +65,9 @@ type StartDocumentClassificationJobInput struct {
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
 	// formats:
 	//
-	//     * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	//     * Amazon
+	// * Amazon
 	// Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
@@ -87,23 +87,23 @@ type StartDocumentClassificationJobOutput struct {
 
 	// The status of the job:
 	//
-	//     * SUBMITTED - The job has been received and queued
-	// for processing.
+	// * SUBMITTED - The job has been received and queued for
+	// processing.
 	//
-	//     * IN_PROGRESS - Amazon Comprehend is processing the job.
+	// * IN_PROGRESS - Amazon Comprehend is processing the job.
 	//
+	// *
+	// COMPLETED - The job was successfully completed and the output is available.
 	//
-	// * COMPLETED - The job was successfully completed and the output is available.
+	// *
+	// FAILED - The job did not complete. For details, use the operation.
 	//
-	//
-	// * FAILED - The job did not complete. For details, use the operation.
-	//
-	//     *
+	// *
 	// STOP_REQUESTED - Amazon Comprehend has received a stop request for the job and
 	// is processing the request.
 	//
-	//     * STOPPED - The job was successfully stopped
-	// without completing.
+	// * STOPPED - The job was successfully stopped without
+	// completing.
 	JobStatus types.JobStatus
 
 	// Metadata pertaining to the operation's result.

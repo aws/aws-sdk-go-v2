@@ -49,49 +49,48 @@ type PublishInput struct {
 	// transport protocol, set the value of the MessageStructure parameter to json and
 	// use a JSON object for the Message parameter. Constraints:
 	//
-	//     * With the
-	// exception of SMS, messages must be UTF-8 encoded strings and at most 256 KB in
-	// size (262,144 bytes, not 262,144 characters).
+	// * With the exception
+	// of SMS, messages must be UTF-8 encoded strings and at most 256 KB in size
+	// (262,144 bytes, not 262,144 characters).
 	//
-	//     * For SMS, each message can
-	// contain up to 140 characters. This character limit depends on the encoding
-	// schema. For example, an SMS message can contain 160 GSM characters, 140 ASCII
-	// characters, or 70 UCS-2 characters. If you publish a message that exceeds this
-	// size limit, Amazon SNS sends the message as multiple messages, each fitting
-	// within the size limit. Messages aren't truncated mid-word but are cut off at
-	// whole-word boundaries. The total size limit for a single SMS Publish action is
-	// 1,600 characters.
+	// * For SMS, each message can contain up
+	// to 140 characters. This character limit depends on the encoding schema. For
+	// example, an SMS message can contain 160 GSM characters, 140 ASCII characters, or
+	// 70 UCS-2 characters. If you publish a message that exceeds this size limit,
+	// Amazon SNS sends the message as multiple messages, each fitting within the size
+	// limit. Messages aren't truncated mid-word but are cut off at whole-word
+	// boundaries. The total size limit for a single SMS Publish action is 1,600
+	// characters.
 	//
 	// JSON-specific constraints:
 	//
-	//     * Keys in the JSON object
-	// that correspond to supported transport protocols must have simple JSON string
+	// * Keys in the JSON object that
+	// correspond to supported transport protocols must have simple JSON string
 	// values.
 	//
-	//     * The values will be parsed (unescaped) before they are used in
+	// * The values will be parsed (unescaped) before they are used in
 	// outgoing messages.
 	//
-	//     * Outbound notifications are JSON encoded (meaning that
-	// the characters will be reescaped for sending).
+	// * Outbound notifications are JSON encoded (meaning that the
+	// characters will be reescaped for sending).
 	//
-	//     * Values have a minimum
-	// length of 0 (the empty string, "", is allowed).
+	// * Values have a minimum length of 0
+	// (the empty string, "", is allowed).
 	//
-	//     * Values have a maximum
-	// length bounded by the overall message size (so, including multiple protocols may
-	// limit message sizes).
+	// * Values have a maximum length bounded by
+	// the overall message size (so, including multiple protocols may limit message
+	// sizes).
 	//
-	//     * Non-string values will cause the key to be
-	// ignored.
+	// * Non-string values will cause the key to be ignored.
 	//
-	//     * Keys that do not correspond to supported transport protocols are
-	// ignored.
+	// * Keys that do
+	// not correspond to supported transport protocols are ignored.
 	//
-	//     * Duplicate keys are not allowed.
+	// * Duplicate keys
+	// are not allowed.
 	//
-	//     * Failure to parse or
-	// validate any key or value in the message will cause the Publish call to return
-	// an error (no partial delivery).
+	// * Failure to parse or validate any key or value in the message
+	// will cause the Publish call to return an error (no partial delivery).
 	//
 	// This member is required.
 	Message *string
@@ -125,15 +124,15 @@ type PublishInput struct {
 	// your SMS subscribers and a longer message to your email subscribers. If you set
 	// MessageStructure to json, the value of the Message parameter must:
 	//
-	//     * be a
+	// * be a
 	// syntactically valid JSON object; and
 	//
-	//     * contain at least a top-level JSON
-	// key of "default" with a value that is a string.
+	// * contain at least a top-level JSON key of
+	// "default" with a value that is a string.
 	//
-	// You can define other top-level
-	// keys that define the message you want to send to a specific transport protocol
-	// (e.g., "http"). Valid value: json
+	// You can define other top-level keys
+	// that define the message you want to send to a specific transport protocol (e.g.,
+	// "http"). Valid value: json
 	MessageStructure *string
 
 	// The phone number to which you want to deliver an SMS message. Use E.164 format.

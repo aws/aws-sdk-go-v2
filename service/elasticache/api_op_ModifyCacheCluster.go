@@ -59,27 +59,27 @@ type ModifyCacheClusterInput struct {
 	// This parameter must be specified with the auth-token-update parameter. Password
 	// constraints:
 	//
-	//     * Must be only printable ASCII characters
+	// * Must be only printable ASCII characters
 	//
-	//     * Must be at
-	// least 16 characters and no more than 128 characters in length
+	// * Must be at least 16
+	// characters and no more than 128 characters in length
 	//
-	//     * Cannot
-	// contain any of the following characters: '/', '"', or '@', '%'
+	// * Cannot contain any of
+	// the following characters: '/', '"', or '@', '%'
 	//
-	// For more
-	// information, see AUTH password at AUTH (http://redis.io/commands/AUTH).
+	// For more information, see AUTH
+	// password at AUTH (http://redis.io/commands/AUTH).
 	AuthToken *string
 
 	// Specifies the strategy to use to update the AUTH token. This parameter must be
 	// specified with the auth-token parameter. Possible values:
 	//
-	//     * Rotate
+	// * Rotate
 	//
-	//     *
-	// Set
+	// * Set
 	//
-	// For more information, see Authenticating Users with Redis AUTH
+	// For
+	// more information, see Authenticating Users with Redis AUTH
 	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html)
 	AuthTokenUpdateStrategy types.AuthTokenUpdateStrategyType
 
@@ -127,16 +127,16 @@ type ModifyCacheClusterInput struct {
 	// in this list must match the cache nodes being added in this request. This option
 	// is only supported on Memcached clusters. Scenarios:
 	//
-	//     * Scenario 1: You have
-	// 3 active nodes and wish to add 2 nodes. Specify NumCacheNodes=5 (3 + 2) and
+	// * Scenario 1: You have 3
+	// active nodes and wish to add 2 nodes. Specify NumCacheNodes=5 (3 + 2) and
 	// optionally specify two Availability Zones for the two new nodes.
 	//
-	//     * Scenario
-	// 2: You have 3 active nodes and 2 nodes pending creation (from the scenario 1
-	// call) and want to add 1 more node. Specify NumCacheNodes=6 ((3 + 2) + 1) and
+	// * Scenario 2:
+	// You have 3 active nodes and 2 nodes pending creation (from the scenario 1 call)
+	// and want to add 1 more node. Specify NumCacheNodes=6 ((3 + 2) + 1) and
 	// optionally specify an Availability Zone for the new node.
 	//
-	//     * Scenario 3: You
+	// * Scenario 3: You
 	// want to cancel all pending operations. Specify NumCacheNodes=3 to cancel all
 	// pending operations.
 	//
@@ -151,46 +151,45 @@ type ModifyCacheClusterInput struct {
 	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/CacheNodes.SupportedTypes.html).
 	// Impact of new add/remove requests upon pending requests
 	//
-	//     * Scenario-1
+	// * Scenario-1
 	//
+	// * Pending
+	// Action: Delete
 	//
-	// * Pending Action: Delete
+	// * New Request: Delete
 	//
-	//         * New Request: Delete
+	// * Result: The new delete, pending or
+	// immediate, replaces the pending delete.
 	//
-	//         * Result: The
-	// new delete, pending or immediate, replaces the pending delete.
+	// * Scenario-2
 	//
-	//     *
-	// Scenario-2
+	// * Pending Action:
+	// Delete
 	//
-	//         * Pending Action: Delete
+	// * New Request: Create
 	//
-	//         * New Request: Create
-	//
-	//
-	// * Result: The new create, pending or immediate, replaces the pending delete.
-	//
+	// * Result: The new create, pending or immediate,
+	// replaces the pending delete.
 	//
 	// * Scenario-3
 	//
-	//         * Pending Action: Create
+	// * Pending Action: Create
 	//
-	//         * New Request: Delete
+	// * New
+	// Request: Delete
 	//
-	//
-	// * Result: The new delete, pending or immediate, replaces the pending create.
-	//
+	// * Result: The new delete, pending or immediate, replaces the
+	// pending create.
 	//
 	// * Scenario-4
 	//
-	//         * Pending Action: Create
+	// * Pending Action: Create
 	//
-	//         * New Request: Create
+	// * New Request:
+	// Create
 	//
-	//
-	// * Result: The new create is added to the pending create. Important: If the new
-	// create request is Apply Immediately - Yes, all creates are performed
+	// * Result: The new create is added to the pending create. Important: If
+	// the new create request is Apply Immediately - Yes, all creates are performed
 	// immediately. If the new create request is Apply Immediately - No, all creates
 	// are pending.
 	NewAvailabilityZones []*string
@@ -235,22 +234,22 @@ type ModifyCacheClusterInput struct {
 	// Clock UTC). The minimum maintenance window is a 60 minute period. Valid values
 	// for ddd are:
 	//
-	//     * sun
+	// * sun
 	//
-	//     * mon
+	// * mon
 	//
-	//     * tue
+	// * tue
 	//
-	//     * wed
+	// * wed
 	//
-	//     * thu
+	// * thu
 	//
-	//     * fri
-	//
+	// * fri
 	//
 	// * sat
 	//
-	// Example: sun:23:00-mon:01:30
+	// Example:
+	// sun:23:00-mon:01:30
 	PreferredMaintenanceWindow *string
 
 	// Specifies the VPC Security Groups associated with the cluster. This parameter

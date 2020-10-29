@@ -24,8 +24,8 @@ type Atime string
 
 // Enum values for Atime
 const (
-	AtimeNone        Atime = "NONE"
-	AtimeBest_effort Atime = "BEST_EFFORT"
+	AtimeNone       Atime = "NONE"
+	AtimeBestEffort Atime = "BEST_EFFORT"
 )
 
 // Values returns all known values for Atime. Note that this can be expanded in the
@@ -42,9 +42,9 @@ type EndpointType string
 
 // Enum values for EndpointType
 const (
-	EndpointTypePublic       EndpointType = "PUBLIC"
-	EndpointTypePrivate_link EndpointType = "PRIVATE_LINK"
-	EndpointTypeFips         EndpointType = "FIPS"
+	EndpointTypePublic      EndpointType = "PUBLIC"
+	EndpointTypePrivateLink EndpointType = "PRIVATE_LINK"
+	EndpointTypeFips        EndpointType = "FIPS"
 )
 
 // Values returns all known values for EndpointType. Note that this can be expanded
@@ -62,7 +62,7 @@ type FilterType string
 
 // Enum values for FilterType
 const (
-	FilterTypeSimple_pattern FilterType = "SIMPLE_PATTERN"
+	FilterTypeSimplePattern FilterType = "SIMPLE_PATTERN"
 )
 
 // Values returns all known values for FilterType. Note that this can be expanded
@@ -78,10 +78,10 @@ type Gid string
 
 // Enum values for Gid
 const (
-	GidNone      Gid = "NONE"
-	GidInt_value Gid = "INT_VALUE"
-	GidName      Gid = "NAME"
-	GidBoth      Gid = "BOTH"
+	GidNone     Gid = "NONE"
+	GidIntValue Gid = "INT_VALUE"
+	GidName     Gid = "NAME"
+	GidBoth     Gid = "BOTH"
 )
 
 // Values returns all known values for Gid. Note that this can be expanded in the
@@ -160,8 +160,8 @@ type NfsVersion string
 const (
 	NfsVersionAutomatic NfsVersion = "AUTOMATIC"
 	NfsVersionNfs3      NfsVersion = "NFS3"
-	NfsVersionNfs4_0    NfsVersion = "NFS4_0"
-	NfsVersionNfs4_1    NfsVersion = "NFS4_1"
+	NfsVersionNfs40     NfsVersion = "NFS4_0"
+	NfsVersionNfs41     NfsVersion = "NFS4_1"
 )
 
 // Values returns all known values for NfsVersion. Note that this can be expanded
@@ -198,16 +198,16 @@ type Operator string
 
 // Enum values for Operator
 const (
-	OperatorEq           Operator = "Equals"
-	OperatorNe           Operator = "NotEquals"
-	OperatorIn           Operator = "In"
-	OperatorLe           Operator = "LessThanOrEqual"
-	OperatorLt           Operator = "LessThan"
-	OperatorGe           Operator = "GreaterThanOrEqual"
-	OperatorGt           Operator = "GreaterThan"
-	OperatorContains     Operator = "Contains"
-	OperatorNot_contains Operator = "NotContains"
-	OperatorBegins_with  Operator = "BeginsWith"
+	OperatorEq          Operator = "Equals"
+	OperatorNe          Operator = "NotEquals"
+	OperatorIn          Operator = "In"
+	OperatorLe          Operator = "LessThanOrEqual"
+	OperatorLt          Operator = "LessThan"
+	OperatorGe          Operator = "GreaterThanOrEqual"
+	OperatorGt          Operator = "GreaterThan"
+	OperatorContains    Operator = "Contains"
+	OperatorNotContains Operator = "NotContains"
+	OperatorBeginsWith  Operator = "BeginsWith"
 )
 
 // Values returns all known values for Operator. Note that this can be expanded in
@@ -324,13 +324,13 @@ type S3StorageClass string
 
 // Enum values for S3StorageClass
 const (
-	S3StorageClassStandard            S3StorageClass = "STANDARD"
-	S3StorageClassStandard_ia         S3StorageClass = "STANDARD_IA"
-	S3StorageClassOnezone_ia          S3StorageClass = "ONEZONE_IA"
-	S3StorageClassIntelligent_tiering S3StorageClass = "INTELLIGENT_TIERING"
-	S3StorageClassGlacier             S3StorageClass = "GLACIER"
-	S3StorageClassDeep_archive        S3StorageClass = "DEEP_ARCHIVE"
-	S3StorageClassOutposts            S3StorageClass = "OUTPOSTS"
+	S3StorageClassStandard           S3StorageClass = "STANDARD"
+	S3StorageClassStandardIa         S3StorageClass = "STANDARD_IA"
+	S3StorageClassOnezoneIa          S3StorageClass = "ONEZONE_IA"
+	S3StorageClassIntelligentTiering S3StorageClass = "INTELLIGENT_TIERING"
+	S3StorageClassGlacier            S3StorageClass = "GLACIER"
+	S3StorageClassDeepArchive        S3StorageClass = "DEEP_ARCHIVE"
+	S3StorageClassOutposts           S3StorageClass = "OUTPOSTS"
 )
 
 // Values returns all known values for S3StorageClass. Note that this can be
@@ -478,10 +478,10 @@ type Uid string
 
 // Enum values for Uid
 const (
-	UidNone      Uid = "NONE"
-	UidInt_value Uid = "INT_VALUE"
-	UidName      Uid = "NAME"
-	UidBoth      Uid = "BOTH"
+	UidNone     Uid = "NONE"
+	UidIntValue Uid = "INT_VALUE"
+	UidName     Uid = "NAME"
+	UidBoth     Uid = "BOTH"
 )
 
 // Values returns all known values for Uid. Note that this can be expanded in the
@@ -500,9 +500,9 @@ type VerifyMode string
 
 // Enum values for VerifyMode
 const (
-	VerifyModePoint_in_time_consistent VerifyMode = "POINT_IN_TIME_CONSISTENT"
-	VerifyModeOnly_files_transferred   VerifyMode = "ONLY_FILES_TRANSFERRED"
-	VerifyModeNone                     VerifyMode = "NONE"
+	VerifyModePointInTimeConsistent VerifyMode = "POINT_IN_TIME_CONSISTENT"
+	VerifyModeOnlyFilesTransferred  VerifyMode = "ONLY_FILES_TRANSFERRED"
+	VerifyModeNone                  VerifyMode = "NONE"
 )
 
 // Values returns all known values for VerifyMode. Note that this can be expanded

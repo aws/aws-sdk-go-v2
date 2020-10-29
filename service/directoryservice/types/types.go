@@ -100,13 +100,12 @@ type DirectoryConnectSettings struct {
 	// The user name of an account in the on-premises directory that is used to connect
 	// to the directory. This account must have the following permissions:
 	//
-	//     * Read
+	// * Read
 	// users and groups
 	//
-	//     * Create computer objects
+	// * Create computer objects
 	//
-	//     * Join computers to the
-	// domain
+	// * Join computers to the domain
 	//
 	// This member is required.
 	CustomerUserName *string

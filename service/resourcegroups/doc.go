@@ -22,18 +22,17 @@
 // Groups uses a REST-compliant API that you can use to perform the following types
 // of operations.
 //
-//     * Create, Read, Update, and Delete (CRUD) operations on
-// resource groups and resource query entities
+// * Create, Read, Update, and Delete (CRUD) operations on resource
+// groups and resource query entities
 //
-//     * Applying, editing, and
-// removing tags from resource groups
+// * Applying, editing, and removing tags from
+// resource groups
 //
-//     * Resolving resource group member ARNs
-// so they can be returned as search results
+// * Resolving resource group member ARNs so they can be returned
+// as search results
 //
-//     * Getting data about resources
-// that are members of a group
+// * Getting data about resources that are members of a group
 //
-//     * Searching AWS resources based on a resource
-// query
+// *
+// Searching AWS resources based on a resource query
 package resourcegroups

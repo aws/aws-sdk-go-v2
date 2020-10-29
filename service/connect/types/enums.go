@@ -40,15 +40,15 @@ type ContactFlowType string
 
 // Enum values for ContactFlowType
 const (
-	ContactFlowTypeContact_flow     ContactFlowType = "CONTACT_FLOW"
-	ContactFlowTypeCustomer_queue   ContactFlowType = "CUSTOMER_QUEUE"
-	ContactFlowTypeCustomer_hold    ContactFlowType = "CUSTOMER_HOLD"
-	ContactFlowTypeCustomer_whisper ContactFlowType = "CUSTOMER_WHISPER"
-	ContactFlowTypeAgent_hold       ContactFlowType = "AGENT_HOLD"
-	ContactFlowTypeAgent_whisper    ContactFlowType = "AGENT_WHISPER"
-	ContactFlowTypeOutbound_whisper ContactFlowType = "OUTBOUND_WHISPER"
-	ContactFlowTypeAgent_transfer   ContactFlowType = "AGENT_TRANSFER"
-	ContactFlowTypeQueue_transfer   ContactFlowType = "QUEUE_TRANSFER"
+	ContactFlowTypeContactFlow     ContactFlowType = "CONTACT_FLOW"
+	ContactFlowTypeCustomerQueue   ContactFlowType = "CUSTOMER_QUEUE"
+	ContactFlowTypeCustomerHold    ContactFlowType = "CUSTOMER_HOLD"
+	ContactFlowTypeCustomerWhisper ContactFlowType = "CUSTOMER_WHISPER"
+	ContactFlowTypeAgentHold       ContactFlowType = "AGENT_HOLD"
+	ContactFlowTypeAgentWhisper    ContactFlowType = "AGENT_WHISPER"
+	ContactFlowTypeOutboundWhisper ContactFlowType = "OUTBOUND_WHISPER"
+	ContactFlowTypeAgentTransfer   ContactFlowType = "AGENT_TRANSFER"
+	ContactFlowTypeQueueTransfer   ContactFlowType = "QUEUE_TRANSFER"
 )
 
 // Values returns all known values for ContactFlowType. Note that this can be
@@ -72,19 +72,19 @@ type CurrentMetricName string
 
 // Enum values for CurrentMetricName
 const (
-	CurrentMetricNameAgents_online             CurrentMetricName = "AGENTS_ONLINE"
-	CurrentMetricNameAgents_available          CurrentMetricName = "AGENTS_AVAILABLE"
-	CurrentMetricNameAgents_on_call            CurrentMetricName = "AGENTS_ON_CALL"
-	CurrentMetricNameAgents_non_productive     CurrentMetricName = "AGENTS_NON_PRODUCTIVE"
-	CurrentMetricNameAgents_after_contact_work CurrentMetricName = "AGENTS_AFTER_CONTACT_WORK"
-	CurrentMetricNameAgents_error              CurrentMetricName = "AGENTS_ERROR"
-	CurrentMetricNameAgents_staffed            CurrentMetricName = "AGENTS_STAFFED"
-	CurrentMetricNameContacts_in_queue         CurrentMetricName = "CONTACTS_IN_QUEUE"
-	CurrentMetricNameOldest_contact_age        CurrentMetricName = "OLDEST_CONTACT_AGE"
-	CurrentMetricNameContacts_scheduled        CurrentMetricName = "CONTACTS_SCHEDULED"
-	CurrentMetricNameAgents_on_contact         CurrentMetricName = "AGENTS_ON_CONTACT"
-	CurrentMetricNameSlots_active              CurrentMetricName = "SLOTS_ACTIVE"
-	CurrentMetricNameSlots_available           CurrentMetricName = "SLOTS_AVAILABLE"
+	CurrentMetricNameAgentsOnline           CurrentMetricName = "AGENTS_ONLINE"
+	CurrentMetricNameAgentsAvailable        CurrentMetricName = "AGENTS_AVAILABLE"
+	CurrentMetricNameAgentsOnCall           CurrentMetricName = "AGENTS_ON_CALL"
+	CurrentMetricNameAgentsNonProductive    CurrentMetricName = "AGENTS_NON_PRODUCTIVE"
+	CurrentMetricNameAgentsAfterContactWork CurrentMetricName = "AGENTS_AFTER_CONTACT_WORK"
+	CurrentMetricNameAgentsError            CurrentMetricName = "AGENTS_ERROR"
+	CurrentMetricNameAgentsStaffed          CurrentMetricName = "AGENTS_STAFFED"
+	CurrentMetricNameContactsInQueue        CurrentMetricName = "CONTACTS_IN_QUEUE"
+	CurrentMetricNameOldestContactAge       CurrentMetricName = "OLDEST_CONTACT_AGE"
+	CurrentMetricNameContactsScheduled      CurrentMetricName = "CONTACTS_SCHEDULED"
+	CurrentMetricNameAgentsOnContact        CurrentMetricName = "AGENTS_ON_CONTACT"
+	CurrentMetricNameSlotsActive            CurrentMetricName = "SLOTS_ACTIVE"
+	CurrentMetricNameSlotsAvailable         CurrentMetricName = "SLOTS_AVAILABLE"
 )
 
 // Values returns all known values for CurrentMetricName. Note that this can be
@@ -130,31 +130,31 @@ type HistoricalMetricName string
 
 // Enum values for HistoricalMetricName
 const (
-	HistoricalMetricNameContacts_queued                     HistoricalMetricName = "CONTACTS_QUEUED"
-	HistoricalMetricNameContacts_handled                    HistoricalMetricName = "CONTACTS_HANDLED"
-	HistoricalMetricNameContacts_abandoned                  HistoricalMetricName = "CONTACTS_ABANDONED"
-	HistoricalMetricNameContacts_consulted                  HistoricalMetricName = "CONTACTS_CONSULTED"
-	HistoricalMetricNameContacts_agent_hung_up_first        HistoricalMetricName = "CONTACTS_AGENT_HUNG_UP_FIRST"
-	HistoricalMetricNameContacts_handled_incoming           HistoricalMetricName = "CONTACTS_HANDLED_INCOMING"
-	HistoricalMetricNameContacts_handled_outbound           HistoricalMetricName = "CONTACTS_HANDLED_OUTBOUND"
-	HistoricalMetricNameContacts_hold_abandons              HistoricalMetricName = "CONTACTS_HOLD_ABANDONS"
-	HistoricalMetricNameContacts_transferred_in             HistoricalMetricName = "CONTACTS_TRANSFERRED_IN"
-	HistoricalMetricNameContacts_transferred_out            HistoricalMetricName = "CONTACTS_TRANSFERRED_OUT"
-	HistoricalMetricNameContacts_transferred_in_from_queue  HistoricalMetricName = "CONTACTS_TRANSFERRED_IN_FROM_QUEUE"
-	HistoricalMetricNameContacts_transferred_out_from_queue HistoricalMetricName = "CONTACTS_TRANSFERRED_OUT_FROM_QUEUE"
-	HistoricalMetricNameContacts_missed                     HistoricalMetricName = "CONTACTS_MISSED"
-	HistoricalMetricNameCallback_contacts_handled           HistoricalMetricName = "CALLBACK_CONTACTS_HANDLED"
-	HistoricalMetricNameApi_contacts_handled                HistoricalMetricName = "API_CONTACTS_HANDLED"
-	HistoricalMetricNameOccupancy                           HistoricalMetricName = "OCCUPANCY"
-	HistoricalMetricNameHandle_time                         HistoricalMetricName = "HANDLE_TIME"
-	HistoricalMetricNameAfter_contact_work_time             HistoricalMetricName = "AFTER_CONTACT_WORK_TIME"
-	HistoricalMetricNameQueued_time                         HistoricalMetricName = "QUEUED_TIME"
-	HistoricalMetricNameAbandon_time                        HistoricalMetricName = "ABANDON_TIME"
-	HistoricalMetricNameQueue_answer_time                   HistoricalMetricName = "QUEUE_ANSWER_TIME"
-	HistoricalMetricNameHold_time                           HistoricalMetricName = "HOLD_TIME"
-	HistoricalMetricNameInteraction_time                    HistoricalMetricName = "INTERACTION_TIME"
-	HistoricalMetricNameInteraction_and_hold_time           HistoricalMetricName = "INTERACTION_AND_HOLD_TIME"
-	HistoricalMetricNameService_level                       HistoricalMetricName = "SERVICE_LEVEL"
+	HistoricalMetricNameContactsQueued                  HistoricalMetricName = "CONTACTS_QUEUED"
+	HistoricalMetricNameContactsHandled                 HistoricalMetricName = "CONTACTS_HANDLED"
+	HistoricalMetricNameContactsAbandoned               HistoricalMetricName = "CONTACTS_ABANDONED"
+	HistoricalMetricNameContactsConsulted               HistoricalMetricName = "CONTACTS_CONSULTED"
+	HistoricalMetricNameContactsAgentHungUpFirst        HistoricalMetricName = "CONTACTS_AGENT_HUNG_UP_FIRST"
+	HistoricalMetricNameContactsHandledIncoming         HistoricalMetricName = "CONTACTS_HANDLED_INCOMING"
+	HistoricalMetricNameContactsHandledOutbound         HistoricalMetricName = "CONTACTS_HANDLED_OUTBOUND"
+	HistoricalMetricNameContactsHoldAbandons            HistoricalMetricName = "CONTACTS_HOLD_ABANDONS"
+	HistoricalMetricNameContactsTransferredIn           HistoricalMetricName = "CONTACTS_TRANSFERRED_IN"
+	HistoricalMetricNameContactsTransferredOut          HistoricalMetricName = "CONTACTS_TRANSFERRED_OUT"
+	HistoricalMetricNameContactsTransferredInFromQueue  HistoricalMetricName = "CONTACTS_TRANSFERRED_IN_FROM_QUEUE"
+	HistoricalMetricNameContactsTransferredOutFromQueue HistoricalMetricName = "CONTACTS_TRANSFERRED_OUT_FROM_QUEUE"
+	HistoricalMetricNameContactsMissed                  HistoricalMetricName = "CONTACTS_MISSED"
+	HistoricalMetricNameCallbackContactsHandled         HistoricalMetricName = "CALLBACK_CONTACTS_HANDLED"
+	HistoricalMetricNameApiContactsHandled              HistoricalMetricName = "API_CONTACTS_HANDLED"
+	HistoricalMetricNameOccupancy                       HistoricalMetricName = "OCCUPANCY"
+	HistoricalMetricNameHandleTime                      HistoricalMetricName = "HANDLE_TIME"
+	HistoricalMetricNameAfterContactWorkTime            HistoricalMetricName = "AFTER_CONTACT_WORK_TIME"
+	HistoricalMetricNameQueuedTime                      HistoricalMetricName = "QUEUED_TIME"
+	HistoricalMetricNameAbandonTime                     HistoricalMetricName = "ABANDON_TIME"
+	HistoricalMetricNameQueueAnswerTime                 HistoricalMetricName = "QUEUE_ANSWER_TIME"
+	HistoricalMetricNameHoldTime                        HistoricalMetricName = "HOLD_TIME"
+	HistoricalMetricNameInteractionTime                 HistoricalMetricName = "INTERACTION_TIME"
+	HistoricalMetricNameInteractionAndHoldTime          HistoricalMetricName = "INTERACTION_AND_HOLD_TIME"
+	HistoricalMetricNameServiceLevel                    HistoricalMetricName = "SERVICE_LEVEL"
 )
 
 // Values returns all known values for HistoricalMetricName. Note that this can be
@@ -682,8 +682,8 @@ type PhoneNumberType string
 
 // Enum values for PhoneNumberType
 const (
-	PhoneNumberTypeToll_free PhoneNumberType = "TOLL_FREE"
-	PhoneNumberTypeDid       PhoneNumberType = "DID"
+	PhoneNumberTypeTollFree PhoneNumberType = "TOLL_FREE"
+	PhoneNumberTypeDid      PhoneNumberType = "DID"
 )
 
 // Values returns all known values for PhoneNumberType. Note that this can be
@@ -700,8 +700,8 @@ type PhoneType string
 
 // Enum values for PhoneType
 const (
-	PhoneTypeSoft_phone PhoneType = "SOFT_PHONE"
-	PhoneTypeDesk_phone PhoneType = "DESK_PHONE"
+	PhoneTypeSoftPhone PhoneType = "SOFT_PHONE"
+	PhoneTypeDeskPhone PhoneType = "DESK_PHONE"
 )
 
 // Values returns all known values for PhoneType. Note that this can be expanded in
@@ -776,9 +776,9 @@ type VoiceRecordingTrack string
 
 // Enum values for VoiceRecordingTrack
 const (
-	VoiceRecordingTrackFrom_agent VoiceRecordingTrack = "FROM_AGENT"
-	VoiceRecordingTrackTo_agent   VoiceRecordingTrack = "TO_AGENT"
-	VoiceRecordingTrackAll        VoiceRecordingTrack = "ALL"
+	VoiceRecordingTrackFromAgent VoiceRecordingTrack = "FROM_AGENT"
+	VoiceRecordingTrackToAgent   VoiceRecordingTrack = "TO_AGENT"
+	VoiceRecordingTrackAll       VoiceRecordingTrack = "ALL"
 )
 
 // Values returns all known values for VoiceRecordingTrack. Note that this can be

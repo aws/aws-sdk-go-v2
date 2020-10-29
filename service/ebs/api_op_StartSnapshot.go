@@ -90,13 +90,13 @@ type StartSnapshotInput struct {
 	// The amount of time (in minutes) after which the snapshot is automatically
 	// cancelled if:
 	//
-	//     * No blocks are written to the snapshot.
+	// * No blocks are written to the snapshot.
 	//
-	//     * The snapshot
-	// is not completed after writing the last block of data.
+	// * The snapshot is not
+	// completed after writing the last block of data.
 	//
-	// If no value is
-	// specified, the timeout defaults to 60 minutes.
+	// If no value is specified, the
+	// timeout defaults to 60 minutes.
 	Timeout *int32
 }
 

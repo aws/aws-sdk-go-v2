@@ -64,36 +64,35 @@ type DescribeClassificationJobOutput struct {
 
 	// The current status of the job. Possible values are:
 	//
-	//     * CANCELLED - You
-	// cancelled the job, or you paused the job and didn't resume it within 30 days of
-	// pausing it.
+	// * CANCELLED - You cancelled
+	// the job, or you paused the job and didn't resume it within 30 days of pausing
+	// it.
 	//
-	//     * COMPLETE - For a one-time job, Amazon Macie finished
-	// processing all the data specified for the job. This value doesn't apply to
-	// recurring jobs.
+	// * COMPLETE - For a one-time job, Amazon Macie finished processing all the
+	// data specified for the job. This value doesn't apply to recurring jobs.
 	//
-	//     * IDLE - For a recurring job, the previous scheduled run is
-	// complete and the next scheduled run is pending. This value doesn't apply to
-	// one-time jobs.
+	// * IDLE
+	// - For a recurring job, the previous scheduled run is complete and the next
+	// scheduled run is pending. This value doesn't apply to one-time jobs.
 	//
-	//     * PAUSED - Amazon Macie started running the job but
-	// completion of the job would exceed one or more quotas for your account.
+	// * PAUSED -
+	// Amazon Macie started running the job but completion of the job would exceed one
+	// or more quotas for your account.
 	//
-	//     *
-	// RUNNING - For a one-time job, the job is in progress. For a recurring job, a
-	// scheduled run is in progress.
+	// * RUNNING - For a one-time job, the job is in
+	// progress. For a recurring job, a scheduled run is in progress.
 	//
-	//     * USER_PAUSED - You paused the job. If you
-	// don't resume the job within 30 days of pausing it, the job will expire and be
-	// cancelled.
+	// * USER_PAUSED -
+	// You paused the job. If you don't resume the job within 30 days of pausing it,
+	// the job will expire and be cancelled.
 	JobStatus types.JobStatus
 
 	// The schedule for running the job. Possible values are:
 	//
-	//     * ONE_TIME - The job
+	// * ONE_TIME - The job
 	// runs only once.
 	//
-	//     * SCHEDULED - The job runs on a daily, weekly, or monthly
+	// * SCHEDULED - The job runs on a daily, weekly, or monthly
 	// basis. The scheduleFrequency property indicates the recurrence pattern for the
 	// job.
 	JobType types.JobType

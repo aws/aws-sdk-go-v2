@@ -17,7 +17,7 @@ import (
 // granted to the anonymous user, you can return the ACL of the bucket without
 // using an authorization header. Related Resources
 //
-//     * ListObjects
+// * ListObjects
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjects.html)
 func (c *Client) GetBucketAcl(ctx context.Context, params *GetBucketAclInput, optFns ...func(*Options)) (*GetBucketAclOutput, error) {
 	if params == nil {

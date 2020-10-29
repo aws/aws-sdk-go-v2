@@ -24,19 +24,19 @@ import (
 // the IAM User Guide. Minimum permissions To run this command, you must have the
 // following permissions:
 //
-//     * secretsmanager:PutResourcePolicy
+// * secretsmanager:PutResourcePolicy
 //
 // Related
 // operations
 //
-//     * To retrieve the resource policy attached to a secret, use
+// * To retrieve the resource policy attached to a secret, use
 // GetResourcePolicy.
 //
-//     * To delete the resource-based policy that's attached to
-// a secret, use DeleteResourcePolicy.
+// * To delete the resource-based policy that's attached to a
+// secret, use DeleteResourcePolicy.
 //
-//     * To list all of the currently
-// available secrets, use ListSecrets.
+// * To list all of the currently available
+// secrets, use ListSecrets.
 func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolicyInput, optFns ...func(*Options)) (*PutResourcePolicyOutput, error) {
 	if params == nil {
 		params = &PutResourcePolicyInput{}

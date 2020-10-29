@@ -67,29 +67,28 @@ import (
 // temporarily suspended, the new policy will be in force once the fleet actions
 // are restarted.
 //
-//     * DescribeFleetCapacity
+// * DescribeFleetCapacity
 //
-//     * UpdateFleetCapacity
+// * UpdateFleetCapacity
 //
-//     *
+// *
 // DescribeEC2InstanceLimits
 //
-//     * Manage scaling policies:
+// * Manage scaling policies:
 //
-//         *
-// PutScalingPolicy (auto-scaling)
-//
-//         * DescribeScalingPolicies
+// * PutScalingPolicy
 // (auto-scaling)
 //
-//         * DeleteScalingPolicy (auto-scaling)
+// * DescribeScalingPolicies (auto-scaling)
 //
-//     * Manage fleet
-// actions:
+// * DeleteScalingPolicy
+// (auto-scaling)
 //
-//         * StartFleetActions
+// * Manage fleet actions:
 //
-//         * StopFleetActions
+// * StartFleetActions
+//
+// * StopFleetActions
 func (c *Client) PutScalingPolicy(ctx context.Context, params *PutScalingPolicyInput, optFns ...func(*Options)) (*PutScalingPolicyOutput, error) {
 	if params == nil {
 		params = &PutScalingPolicyInput{}
@@ -120,46 +119,45 @@ type PutScalingPolicyInput struct {
 	// GameLift with Amazon CloudWatch
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html).
 	//
+	// *
+	// ActivatingGameSessions -- Game sessions in the process of being created.
 	//
-	// * ActivatingGameSessions -- Game sessions in the process of being created.
+	// *
+	// ActiveGameSessions -- Game sessions that are currently running.
 	//
-	//
-	// * ActiveGameSessions -- Game sessions that are currently running.
-	//
-	//     *
+	// *
 	// ActiveInstances -- Fleet instances that are currently running at least one game
 	// session.
 	//
-	//     * AvailableGameSessions -- Additional game sessions that fleet
-	// could host simultaneously, given current capacity.
+	// * AvailableGameSessions -- Additional game sessions that fleet could
+	// host simultaneously, given current capacity.
 	//
-	//     *
-	// AvailablePlayerSessions -- Empty player slots in currently active game sessions.
-	// This includes game sessions that are not currently accepting players. Reserved
-	// player slots are not included.
+	// * AvailablePlayerSessions -- Empty
+	// player slots in currently active game sessions. This includes game sessions that
+	// are not currently accepting players. Reserved player slots are not included.
 	//
-	//     * CurrentPlayerSessions -- Player slots in
-	// active game sessions that are being used by a player or are reserved for a
-	// player.
+	// *
+	// CurrentPlayerSessions -- Player slots in active game sessions that are being
+	// used by a player or are reserved for a player.
 	//
-	//     * IdleInstances -- Active instances that are currently hosting zero
-	// game sessions.
+	// * IdleInstances -- Active
+	// instances that are currently hosting zero game sessions.
 	//
-	//     * PercentAvailableGameSessions -- Unused percentage of the
-	// total number of game sessions that a fleet could host simultaneously, given
-	// current capacity. Use this metric for a target-based scaling policy.
+	// *
+	// PercentAvailableGameSessions -- Unused percentage of the total number of game
+	// sessions that a fleet could host simultaneously, given current capacity. Use
+	// this metric for a target-based scaling policy.
 	//
-	//     *
-	// PercentIdleInstances -- Percentage of the total number of active instances that
-	// are hosting zero game sessions.
+	// * PercentIdleInstances --
+	// Percentage of the total number of active instances that are hosting zero game
+	// sessions.
 	//
-	//     * QueueDepth -- Pending game session
-	// placement requests, in any queue, where the current fleet is the top-priority
-	// destination.
+	// * QueueDepth -- Pending game session placement requests, in any
+	// queue, where the current fleet is the top-priority destination.
 	//
-	//     * WaitTime -- Current wait time for pending game session
-	// placement requests, in any queue, where the current fleet is the top-priority
-	// destination.
+	// * WaitTime --
+	// Current wait time for pending game session placement requests, in any queue,
+	// where the current fleet is the top-priority destination.
 	//
 	// This member is required.
 	MetricName types.MetricName
@@ -192,17 +190,17 @@ type PutScalingPolicyInput struct {
 	// The type of adjustment to make to a fleet's instance count (see
 	// FleetCapacity):
 	//
-	//     * ChangeInCapacity -- add (or subtract) the scaling
-	// adjustment value from the current instance count. Positive values scale up while
-	// negative values scale down.
+	// * ChangeInCapacity -- add (or subtract) the scaling adjustment
+	// value from the current instance count. Positive values scale up while negative
+	// values scale down.
 	//
-	//     * ExactCapacity -- set the instance count to
-	// the scaling adjustment value.
+	// * ExactCapacity -- set the instance count to the scaling
+	// adjustment value.
 	//
-	//     * PercentChangeInCapacity -- increase or
-	// reduce the current instance count by the scaling adjustment, read as a
-	// percentage. Positive values scale up while negative values scale down; for
-	// example, a value of "-10" scales the fleet down by 10%.
+	// * PercentChangeInCapacity -- increase or reduce the current
+	// instance count by the scaling adjustment, read as a percentage. Positive values
+	// scale up while negative values scale down; for example, a value of "-10" scales
+	// the fleet down by 10%.
 	ScalingAdjustmentType types.ScalingAdjustmentType
 
 	// The settings for a target-based scaling policy.

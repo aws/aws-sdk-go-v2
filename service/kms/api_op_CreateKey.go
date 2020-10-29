@@ -17,18 +17,18 @@ import (
 // CMK in a different AWS account. You can use the CreateKey operation to create
 // symmetric or asymmetric CMKs.
 //
-//     * Symmetric CMKs contain a 256-bit symmetric
-// key that never leaves AWS KMS unencrypted. To use the CMK, you must call AWS
-// KMS. You can use a symmetric CMK to encrypt and decrypt small amounts of data,
-// but they are typically used to generate data keys
+// * Symmetric CMKs contain a 256-bit symmetric key
+// that never leaves AWS KMS unencrypted. To use the CMK, you must call AWS KMS.
+// You can use a symmetric CMK to encrypt and decrypt small amounts of data, but
+// they are typically used to generate data keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#data-keys)
 // and data keys pairs
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#data-key-pairs).
 // For details, see GenerateDataKey and GenerateDataKeyPair.
 //
-//     * Asymmetric CMKs
-// can contain an RSA key pair or an Elliptic Curve (ECC) key pair. The private key
-// in an asymmetric CMK never leaves AWS KMS unencrypted. However, you can use the
+// * Asymmetric CMKs can
+// contain an RSA key pair or an Elliptic Curve (ECC) key pair. The private key in
+// an asymmetric CMK never leaves AWS KMS unencrypted. However, you can use the
 // GetPublicKey operation to download the public key so it can be used outside of
 // AWS KMS. CMKs with RSA key pairs can be used to encrypt or decrypt data or sign
 // and verify messages (but not both). CMKs with ECC key pairs can be used only to
@@ -133,35 +133,34 @@ type CreateKeyInput struct {
 	// the AWS Key Management Service Developer Guide. AWS KMS supports the following
 	// key specs for CMKs:
 	//
-	//     * Symmetric key (default)
+	// * Symmetric key (default)
 	//
-	//         * SYMMETRIC_DEFAULT
+	// * SYMMETRIC_DEFAULT
 	// (AES-256-GCM)
 	//
-	//     * Asymmetric RSA key pairs
+	// * Asymmetric RSA key pairs
 	//
-	//         * RSA_2048
+	// * RSA_2048
 	//
-	//         *
-	// RSA_3072
+	// * RSA_3072
 	//
-	//         * RSA_4096
+	// * RSA_4096
 	//
-	//     * Asymmetric NIST-recommended elliptic curve
-	// key pairs
+	// *
+	// Asymmetric NIST-recommended elliptic curve key pairs
 	//
-	//         * ECC_NIST_P256 (secp256r1)
+	// * ECC_NIST_P256
+	// (secp256r1)
 	//
-	//         * ECC_NIST_P384
-	// (secp384r1)
+	// * ECC_NIST_P384 (secp384r1)
 	//
-	//         * ECC_NIST_P521 (secp521r1)
+	// * ECC_NIST_P521 (secp521r1)
 	//
-	//     * Other asymmetric
-	// elliptic curve key pairs
+	// * Other
+	// asymmetric elliptic curve key pairs
 	//
-	//         * ECC_SECG_P256K1 (secp256k1), commonly used
-	// for cryptocurrencies.
+	// * ECC_SECG_P256K1 (secp256k1), commonly
+	// used for cryptocurrencies.
 	CustomerMasterKeySpec types.CustomerMasterKeySpec
 
 	// A description of the CMK. Use a description that helps you decide whether the
@@ -174,14 +173,14 @@ type CreateKeyInput struct {
 	// parameter is required only for asymmetric CMKs. You can't change the KeyUsage
 	// value after the CMK is created. Select only one valid value.
 	//
-	//     * For
-	// symmetric CMKs, omit the parameter or specify ENCRYPT_DECRYPT.
+	// * For symmetric
+	// CMKs, omit the parameter or specify ENCRYPT_DECRYPT.
 	//
-	//     * For
-	// asymmetric CMKs with RSA key material, specify ENCRYPT_DECRYPT or SIGN_VERIFY.
+	// * For asymmetric CMKs with
+	// RSA key material, specify ENCRYPT_DECRYPT or SIGN_VERIFY.
 	//
-	//
-	// * For asymmetric CMKs with ECC key material, specify SIGN_VERIFY.
+	// * For asymmetric CMKs
+	// with ECC key material, specify SIGN_VERIFY.
 	KeyUsage types.KeyUsageType
 
 	// The source of the key material for the CMK. You cannot change the origin after
@@ -203,21 +202,21 @@ type CreateKeyInput struct {
 	// The key policy to attach to the CMK. If you provide a key policy, it must meet
 	// the following criteria:
 	//
-	//     * If you don't set BypassPolicyLockoutSafetyCheck
-	// to true, the key policy must allow the principal that is making the CreateKey
+	// * If you don't set BypassPolicyLockoutSafetyCheck to
+	// true, the key policy must allow the principal that is making the CreateKey
 	// request to make a subsequent PutKeyPolicy request on the CMK. This reduces the
 	// risk that the CMK becomes unmanageable. For more information, refer to the
 	// scenario in the Default Key Policy
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam)
 	// section of the AWS Key Management Service Developer Guide .
 	//
-	//     * Each
-	// statement in the key policy must contain one or more principals. The principals
-	// in the key policy must exist and be visible to AWS KMS. When you create a new
-	// AWS principal (for example, an IAM user or role), you might need to enforce a
-	// delay before including the new principal in a key policy because the new
-	// principal might not be immediately visible to AWS KMS. For more information, see
-	// Changes that I make are not always immediately visible
+	// * Each statement in
+	// the key policy must contain one or more principals. The principals in the key
+	// policy must exist and be visible to AWS KMS. When you create a new AWS principal
+	// (for example, an IAM user or role), you might need to enforce a delay before
+	// including the new principal in a key policy because the new principal might not
+	// be immediately visible to AWS KMS. For more information, see Changes that I make
+	// are not always immediately visible
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency)
 	// in the AWS Identity and Access Management User Guide.
 	//

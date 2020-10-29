@@ -38,10 +38,10 @@ type DescribeCoipPoolsInput struct {
 
 	// The filters. The following are the possible values:
 	//
-	//     * coip-pool.pool-id
+	// * coip-pool.pool-id
 	//
-	//
-	// * coip-pool.local-gateway-route-table-id
+	// *
+	// coip-pool.local-gateway-route-table-id
 	Filters []*types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the

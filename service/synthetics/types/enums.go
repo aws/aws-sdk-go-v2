@@ -26,8 +26,8 @@ type CanaryRunStateReasonCode string
 
 // Enum values for CanaryRunStateReasonCode
 const (
-	CanaryRunStateReasonCodeCanary_failure    CanaryRunStateReasonCode = "CANARY_FAILURE"
-	CanaryRunStateReasonCodeExecution_failure CanaryRunStateReasonCode = "EXECUTION_FAILURE"
+	CanaryRunStateReasonCodeCanaryFailure    CanaryRunStateReasonCode = "CANARY_FAILURE"
+	CanaryRunStateReasonCodeExecutionFailure CanaryRunStateReasonCode = "EXECUTION_FAILURE"
 )
 
 // Values returns all known values for CanaryRunStateReasonCode. Note that this can
@@ -76,7 +76,7 @@ type CanaryStateReasonCode string
 
 // Enum values for CanaryStateReasonCode
 const (
-	CanaryStateReasonCodeInvalid_permissions CanaryStateReasonCode = "INVALID_PERMISSIONS"
+	CanaryStateReasonCodeInvalidPermissions CanaryStateReasonCode = "INVALID_PERMISSIONS"
 )
 
 // Values returns all known values for CanaryStateReasonCode. Note that this can be

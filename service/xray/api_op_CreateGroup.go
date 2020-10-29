@@ -40,11 +40,11 @@ type CreateGroupInput struct {
 
 	// The structure containing configurations related to insights.
 	//
-	//     * The
+	// * The
 	// InsightsEnabled boolean can be set to true to enable insights for the new group
 	// or false to disable insights for the new group.
 	//
-	//     * The NotifcationsEnabled
+	// * The NotifcationsEnabled
 	// boolean can be set to true to enable insights notifications for the new group.
 	// Notifications may only be enabled on a group with InsightsEnabled set to true.
 	InsightsConfiguration *types.InsightsConfiguration
@@ -54,22 +54,22 @@ type CreateGroupInput struct {
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the AWS
 	// General Reference. The following restrictions apply to tags:
 	//
-	//     * Maximum
-	// number of user-applied tags per resource: 50
+	// * Maximum number
+	// of user-applied tags per resource: 50
 	//
-	//     * Maximum tag key length: 128
-	// Unicode characters
+	// * Maximum tag key length: 128 Unicode
+	// characters
 	//
-	//     * Maximum tag value length: 256 Unicode characters
+	// * Maximum tag value length: 256 Unicode characters
 	//
+	// * Valid values
+	// for key and value: a-z, A-Z, 0-9, space, and the following characters: _ . : / =
+	// + - and @
 	//
-	// * Valid values for key and value: a-z, A-Z, 0-9, space, and the following
-	// characters: _ . : / = + - and @
+	// * Tag keys and values are case sensitive.
 	//
-	//     * Tag keys and values are case sensitive.
-	//
-	//
-	// * Don't use aws: as a prefix for keys; it's reserved for AWS use.
+	// * Don't use aws: as a
+	// prefix for keys; it's reserved for AWS use.
 	Tags []*types.Tag
 }
 

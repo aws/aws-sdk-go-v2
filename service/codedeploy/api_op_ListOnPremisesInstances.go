@@ -39,11 +39,11 @@ type ListOnPremisesInstancesInput struct {
 
 	// The registration status of the on-premises instances:
 	//
-	//     * Deregistered:
-	// Include deregistered on-premises instances in the resulting list.
+	// * Deregistered: Include
+	// deregistered on-premises instances in the resulting list.
 	//
-	//     *
-	// Registered: Include registered on-premises instances in the resulting list.
+	// * Registered: Include
+	// registered on-premises instances in the resulting list.
 	RegistrationStatus types.RegistrationStatus
 
 	// The on-premises instance tags that are used to restrict the on-premises instance

@@ -76,52 +76,52 @@ type AcceleratorAttributes struct {
 // resources through bring your own IP address (BYOIP). The following describes
 // each BYOIP State that your IP address range can be in.
 //
-//     *
-// PENDING_PROVISIONING — You’ve submitted a request to provision an IP address
-// range but it is not yet provisioned with AWS Global Accelerator.
+// * PENDING_PROVISIONING —
+// You’ve submitted a request to provision an IP address range but it is not yet
+// provisioned with AWS Global Accelerator.
 //
-//     * READY —
-// The address range is provisioned with AWS Global Accelerator and can be
-// advertised.
+// * READY — The address range is
+// provisioned with AWS Global Accelerator and can be advertised.
 //
-//     * PENDING_ADVERTISING — You’ve submitted a request for AWS
-// Global Accelerator to advertise an address range but it is not yet being
-// advertised.
+// *
+// PENDING_ADVERTISING — You’ve submitted a request for AWS Global Accelerator to
+// advertise an address range but it is not yet being advertised.
 //
-//     * ADVERTISING — The address range is being advertised by AWS
+// * ADVERTISING —
+// The address range is being advertised by AWS Global Accelerator.
+//
+// *
+// PENDING_WITHDRAWING — You’ve submitted a request to withdraw an address range
+// from being advertised but it is still being advertised by AWS Global
+// Accelerator.
+//
+// * PENDING_DEPROVISIONING — You’ve submitted a request to
+// deprovision an address range from AWS Global Accelerator but it is still
+// provisioned.
+//
+// * DEPROVISIONED — The address range is deprovisioned from AWS
 // Global Accelerator.
 //
-//     * PENDING_WITHDRAWING — You’ve submitted a request to
-// withdraw an address range from being advertised but it is still being advertised
-// by AWS Global Accelerator.
+// * FAILED_PROVISION — The request to provision the address
+// range from AWS Global Accelerator was not successful. Please make sure that you
+// provide all of the correct information, and try again. If the request fails a
+// second time, contact AWS support.
 //
-//     * PENDING_DEPROVISIONING — You’ve submitted a
-// request to deprovision an address range from AWS Global Accelerator but it is
-// still provisioned.
-//
-//     * DEPROVISIONED — The address range is deprovisioned
-// from AWS Global Accelerator.
-//
-//     * FAILED_PROVISION — The request to provision
-// the address range from AWS Global Accelerator was not successful. Please make
-// sure that you provide all of the correct information, and try again. If the
+// * FAILED_ADVERTISING — The request for AWS
+// Global Accelerator to advertise the address range was not successful. Please
+// make sure that you provide all of the correct information, and try again. If the
 // request fails a second time, contact AWS support.
 //
-//     * FAILED_ADVERTISING —
-// The request for AWS Global Accelerator to advertise the address range was not
-// successful. Please make sure that you provide all of the correct information,
-// and try again. If the request fails a second time, contact AWS support.
+// * FAILED_WITHDRAW — The
+// request to withdraw the address range from advertising by AWS Global Accelerator
+// was not successful. Please make sure that you provide all of the correct
+// information, and try again. If the request fails a second time, contact AWS
+// support.
 //
-//     *
-// FAILED_WITHDRAW — The request to withdraw the address range from advertising by
-// AWS Global Accelerator was not successful. Please make sure that you provide all
-// of the correct information, and try again. If the request fails a second time,
-// contact AWS support.
-//
-//     * FAILED_DEPROVISION — The request to deprovision the
-// address range from AWS Global Accelerator was not successful. Please make sure
-// that you provide all of the correct information, and try again. If the request
-// fails a second time, contact AWS support.
+// * FAILED_DEPROVISION — The request to deprovision the address range
+// from AWS Global Accelerator was not successful. Please make sure that you
+// provide all of the correct information, and try again. If the request fails a
+// second time, contact AWS support.
 type ByoipCidr struct {
 
 	// The address range, in CIDR notation.
@@ -228,22 +228,22 @@ type EndpointDescription struct {
 	// state is healthy, a reason code is not provided. If the endpoint state is
 	// unhealthy, the reason code can be one of the following values:
 	//
-	//     * Timeout:
-	// The health check requests to the endpoint are timing out before returning a
+	// * Timeout: The
+	// health check requests to the endpoint are timing out before returning a
 	// status.
 	//
-	//     * Failed: The health check failed, for example because the endpoint
+	// * Failed: The health check failed, for example because the endpoint
 	// response was invalid (malformed).
 	//
 	// If the endpoint state is initial, the reason
 	// code can be one of the following values:
 	//
-	//     * ProvisioningInProgress: The
-	// endpoint is in the process of being provisioned.
+	// * ProvisioningInProgress: The endpoint
+	// is in the process of being provisioned.
 	//
-	//     * InitialHealthChecking:
-	// Global Accelerator is still setting up the minimum number of health checks for
-	// the endpoint that are required to determine its health status.
+	// * InitialHealthChecking: Global
+	// Accelerator is still setting up the minimum number of health checks for the
+	// endpoint that are required to determine its health status.
 	HealthReason *string
 
 	// The health status of the endpoint.

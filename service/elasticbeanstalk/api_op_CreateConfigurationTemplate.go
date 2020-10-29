@@ -19,12 +19,12 @@ import (
 // configuration settings. Templates aren't associated with any environment. The
 // EnvironmentName response element is always null. Related Topics
 //
-//     *
+// *
 // DescribeConfigurationOptions
 //
-//     * DescribeConfigurationSettings
+// * DescribeConfigurationSettings
 //
-//     *
+// *
 // ListAvailableSolutionStacks
 func (c *Client) CreateConfigurationTemplate(ctx context.Context, params *CreateConfigurationTemplateInput, optFns ...func(*Options)) (*CreateConfigurationTemplateOutput, error) {
 	if params == nil {
@@ -123,17 +123,17 @@ type CreateConfigurationTemplateOutput struct {
 	// DeploymentStatus parameter indicates the deployment status of this configuration
 	// set:
 	//
-	//     * null: This configuration is not associated with a running
+	// * null: This configuration is not associated with a running
 	// environment.
 	//
-	//     * pending: This is a draft configuration that is not deployed
-	// to the associated environment but is in the process of deploying.
+	// * pending: This is a draft configuration that is not deployed to
+	// the associated environment but is in the process of deploying.
 	//
-	//     *
-	// deployed: This is the configuration that is currently deployed to the associated
-	// running environment.
+	// * deployed: This
+	// is the configuration that is currently deployed to the associated running
+	// environment.
 	//
-	//     * failed: This is a draft configuration that failed to
+	// * failed: This is a draft configuration that failed to
 	// successfully deploy.
 	DeploymentStatus types.ConfigurationDeploymentStatus
 

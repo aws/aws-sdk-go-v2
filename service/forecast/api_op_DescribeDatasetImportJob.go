@@ -17,19 +17,19 @@ import (
 // CreateDatasetImportJob request, this operation includes the following
 // properties:
 //
-//     * CreationTime
+// * CreationTime
 //
-//     * LastModificationTime
+// * LastModificationTime
 //
-//     * DataSize
+// * DataSize
 //
+// *
+// FieldStatistics
 //
-// * FieldStatistics
+// * Status
 //
-//     * Status
-//
-//     * Message - If an error occurred,
-// information about the error.
+// * Message - If an error occurred, information about
+// the error.
 func (c *Client) DescribeDatasetImportJob(ctx context.Context, params *DescribeDatasetImportJobInput, optFns ...func(*Options)) (*DescribeDatasetImportJobOutput, error) {
 	if params == nil {
 		params = &DescribeDatasetImportJobInput{}
@@ -82,13 +82,13 @@ type DescribeDatasetImportJobOutput struct {
 	// The last time that the dataset was modified. The time depends on the status of
 	// the job, as follows:
 	//
-	//     * CREATE_PENDING - The same time as CreationTime.
+	// * CREATE_PENDING - The same time as CreationTime.
 	//
+	// *
+	// CREATE_IN_PROGRESS - The current timestamp.
 	//
-	// * CREATE_IN_PROGRESS - The current timestamp.
-	//
-	//     * ACTIVE or CREATE_FAILED -
-	// When the job finished or failed.
+	// * ACTIVE or CREATE_FAILED - When
+	// the job finished or failed.
 	LastModificationTime *time.Time
 
 	// If an error occurred, an informational message about the error.
@@ -98,12 +98,12 @@ type DescribeDatasetImportJobOutput struct {
 	// the dataset. For example, when the import job status is CREATE_IN_PROGRESS, the
 	// status of the dataset is UPDATE_IN_PROGRESS. States include:
 	//
-	//     * ACTIVE
+	// * ACTIVE
 	//
+	// *
+	// CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED
 	//
-	// * CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED
-	//
-	//     * DELETE_PENDING,
+	// * DELETE_PENDING,
 	// DELETE_IN_PROGRESS, DELETE_FAILED
 	Status *string
 
@@ -111,11 +111,11 @@ type DescribeDatasetImportJobOutput struct {
 	// the DataFrequency specified when the dataset was created. The following formats
 	// are supported
 	//
-	//     * "yyyy-MM-dd" For the following data frequencies: Y, M, W,
-	// and D
+	// * "yyyy-MM-dd" For the following data frequencies: Y, M, W, and
+	// D
 	//
-	//     * "yyyy-MM-dd HH:mm:ss" For the following data frequencies: H, 30min,
-	// 15min, and 1min; and optionally, for: Y, M, W, and D
+	// * "yyyy-MM-dd HH:mm:ss" For the following data frequencies: H, 30min, 15min,
+	// and 1min; and optionally, for: Y, M, W, and D
 	TimestampFormat *string
 
 	// Metadata pertaining to the operation's result.

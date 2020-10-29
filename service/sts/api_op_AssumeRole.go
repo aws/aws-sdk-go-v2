@@ -70,14 +70,14 @@ import (
 // other account. If the user is in the same account as the role, then you can do
 // either of the following:
 //
-//     * Attach a policy to the user (identical to the
+// * Attach a policy to the user (identical to the
 // previous user in a different account).
 //
-//     * Add the user as a principal
-// directly in the role's trust policy.
+// * Add the user as a principal directly
+// in the role's trust policy.
 //
-// In this case, the trust policy acts as an
-// IAM resource-based policy. Users in the same account as the role do not need
+// In this case, the trust policy acts as an IAM
+// resource-based policy. Users in the same account as the role do not need
 // explicit permission to assume the role. For more information about trust
 // policies and resource-based policies, see IAM Policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html) in the

@@ -22,14 +22,14 @@ import (
 // RegexMatchSet from a Rule, use UpdateRule. To permanently delete a
 // RegexMatchSet, perform the following steps:
 //
-//     * Update the RegexMatchSet to
+// * Update the RegexMatchSet to
 // remove filters, if any. For more information, see UpdateRegexMatchSet.
 //
-//     *
-// Use GetChangeToken to get the change token that you provide in the ChangeToken
+// * Use
+// GetChangeToken to get the change token that you provide in the ChangeToken
 // parameter of a DeleteRegexMatchSet request.
 //
-//     * Submit a DeleteRegexMatchSet
+// * Submit a DeleteRegexMatchSet
 // request.
 func (c *Client) DeleteRegexMatchSet(ctx context.Context, params *DeleteRegexMatchSetInput, optFns ...func(*Options)) (*DeleteRegexMatchSetOutput, error) {
 	if params == nil {

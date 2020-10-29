@@ -19,12 +19,12 @@ import (
 // script file(s). The script files and all dependencies must be zipped into a
 // single file. You can pull the zip file from either of these locations:
 //
-//     * A
+// * A
 // locally available directory. Use the ZipFile parameter for this option.
 //
-//     *
-// An Amazon Simple Storage Service (Amazon S3) bucket under your AWS account. Use
-// the StorageLocation parameter for this option. You'll need to have an Identity
+// * An
+// Amazon Simple Storage Service (Amazon S3) bucket under your AWS account. Use the
+// StorageLocation parameter for this option. You'll need to have an Identity
 // Access Management (IAM) role that allows the Amazon GameLift service to access
 // your S3 bucket.
 //
@@ -39,16 +39,16 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/setting-up-role.html)
 // Related operations
 //
-//     * CreateScript
+// * CreateScript
 //
-//     * ListScripts
+// * ListScripts
 //
-//     *
-// DescribeScript
+// * DescribeScript
 //
-//     * UpdateScript
+// *
+// UpdateScript
 //
-//     * DeleteScript
+// * DeleteScript
 func (c *Client) CreateScript(ctx context.Context, params *CreateScriptInput, optFns ...func(*Options)) (*CreateScriptOutput, error) {
 	if params == nil {
 		params = &CreateScriptInput{}

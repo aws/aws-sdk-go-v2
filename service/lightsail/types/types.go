@@ -94,39 +94,39 @@ type Alarm struct {
 
 	// The current state of the alarm. An alarm has the following possible states:
 	//
+	// *
+	// ALARM - The metric is outside of the defined threshold.
 	//
-	// * ALARM - The metric is outside of the defined threshold.
+	// * INSUFFICIENT_DATA -
+	// The alarm has just started, the metric is not available, or not enough data is
+	// available for the metric to determine the alarm state.
 	//
-	//     *
-	// INSUFFICIENT_DATA - The alarm has just started, the metric is not available, or
-	// not enough data is available for the metric to determine the alarm state.
-	//
-	//     *
-	// OK - The metric is within the defined threshold.
+	// * OK - The metric is
+	// within the defined threshold.
 	State AlarmState
 
 	// The statistic for the metric associated with the alarm. The following statistics
 	// are available:
 	//
-	//     * Minimum - The lowest value observed during the specified
+	// * Minimum - The lowest value observed during the specified
 	// period. Use this value to determine low volumes of activity for your
 	// application.
 	//
-	//     * Maximum - The highest value observed during the specified
+	// * Maximum - The highest value observed during the specified
 	// period. Use this value to determine high volumes of activity for your
 	// application.
 	//
-	//     * Sum - All values submitted for the matching metric added
+	// * Sum - All values submitted for the matching metric added
 	// together. You can use this statistic to determine the total volume of a
 	// metric.
 	//
-	//     * Average - The value of Sum / SampleCount during the specified
-	// period. By comparing this statistic with the Minimum and Maximum values, you can
+	// * Average - The value of Sum / SampleCount during the specified period.
+	// By comparing this statistic with the Minimum and Maximum values, you can
 	// determine the full scope of a metric and how close the average use is to the
 	// Minimum and Maximum values. This comparison helps you to know when to increase
 	// or decrease your resources.
 	//
-	//     * SampleCount - The count, or number, of data
+	// * SampleCount - The count, or number, of data
 	// points used for the statistical calculation.
 	Statistic MetricStatistic
 
@@ -141,19 +141,18 @@ type Alarm struct {
 	// Specifies how the alarm handles missing data points. An alarm can treat missing
 	// data in the following ways:
 	//
-	//     * breaching - Assume the missing data is not
-	// within the threshold. Missing data counts towards the number of times the metric
-	// is not within the threshold.
+	// * breaching - Assume the missing data is not within
+	// the threshold. Missing data counts towards the number of times the metric is not
+	// within the threshold.
 	//
-	//     * notBreaching - Assume the missing data is
-	// within the threshold. Missing data does not count towards the number of times
-	// the metric is not within the threshold.
+	// * notBreaching - Assume the missing data is within the
+	// threshold. Missing data does not count towards the number of times the metric is
+	// not within the threshold.
 	//
-	//     * ignore - Ignore the missing data.
-	// Maintains the current alarm state.
+	// * ignore - Ignore the missing data. Maintains the
+	// current alarm state.
 	//
-	//     * missing - Missing data is treated as
-	// missing.
+	// * missing - Missing data is treated as missing.
 	TreatMissingData TreatMissingData
 
 	// The unit of the metric associated with the alarm.
@@ -176,45 +175,44 @@ type AttachedDisk struct {
 // for a resource, it is typically effective immediately except under the following
 // conditions:
 //
-//     * If an automatic snapshot has been created for the current
-// day, and you change the snapshot time to a later time of day, then the new
-// snapshot time will be effective the following day. This ensures that two
-// snapshots are not created for the current day.
+// * If an automatic snapshot has been created for the current day,
+// and you change the snapshot time to a later time of day, then the new snapshot
+// time will be effective the following day. This ensures that two snapshots are
+// not created for the current day.
 //
-//     * If an automatic snapshot
-// has not yet been created for the current day, and you change the snapshot time
-// to an earlier time of day, then the new snapshot time will be effective the
-// following day and a snapshot is automatically created at the previously set time
-// for the current day. This ensures that a snapshot is created for the current
-// day.
-//
-//     * If an automatic snapshot has not yet been created for the current
-// day, and you change the snapshot time to a time that is within 30 minutes from
-// your current time, then the new snapshot time will be effective the following
-// day and a snapshot is automatically created at the previously set time for the
-// current day. This ensures that a snapshot is created for the current day,
-// because 30 minutes is required between your current time and the new snapshot
-// time that you specify.
-//
-//     * If an automatic snapshot is scheduled to be
-// created within 30 minutes from your current time and you change the snapshot
-// time, then the new snapshot time will be effective the following day and a
+// * If an automatic snapshot has not yet been
+// created for the current day, and you change the snapshot time to an earlier time
+// of day, then the new snapshot time will be effective the following day and a
 // snapshot is automatically created at the previously set time for the current
-// day. This ensures that a snapshot is created for the current day, because 30
-// minutes is required between your current time and the new snapshot time that you
+// day. This ensures that a snapshot is created for the current day.
+//
+// * If an
+// automatic snapshot has not yet been created for the current day, and you change
+// the snapshot time to a time that is within 30 minutes from your current time,
+// then the new snapshot time will be effective the following day and a snapshot is
+// automatically created at the previously set time for the current day. This
+// ensures that a snapshot is created for the current day, because 30 minutes is
+// required between your current time and the new snapshot time that you
 // specify.
+//
+// * If an automatic snapshot is scheduled to be created within 30
+// minutes from your current time and you change the snapshot time, then the new
+// snapshot time will be effective the following day and a snapshot is
+// automatically created at the previously set time for the current day. This
+// ensures that a snapshot is created for the current day, because 30 minutes is
+// required between your current time and the new snapshot time that you specify.
 type AutoSnapshotAddOnRequest struct {
 
 	// The daily time when an automatic snapshot will be created. Constraints:
 	//
-	//     *
-	// Must be in HH:00 format, and in an hourly increment.
+	// * Must
+	// be in HH:00 format, and in an hourly increment.
 	//
-	//     * Specified in
-	// Coordinated Universal Time (UTC).
+	// * Specified in Coordinated
+	// Universal Time (UTC).
 	//
-	//     * The snapshot will be automatically
-	// created between the time specified and up to 45 minutes after.
+	// * The snapshot will be automatically created between the
+	// time specified and up to 45 minutes after.
 	SnapshotTimeOfDay *string
 }
 
@@ -346,14 +344,14 @@ type CacheBehavior struct {
 	// The cache behavior of the distribution. The following cache behaviors can be
 	// specified:
 	//
-	//     * cache - This option is best for static sites. When specified,
-	// your distribution caches and serves your entire website as static content. This
+	// * cache - This option is best for static sites. When specified, your
+	// distribution caches and serves your entire website as static content. This
 	// behavior is ideal for websites with static content that doesn't change depending
 	// on who views it, or for websites that don't use cookies, headers, or query
 	// strings to personalize content.
 	//
-	//     * dont-cache - This option is best for
-	// sites that serve a mix of static and dynamic content. When specified, your
+	// * dont-cache - This option is best for sites
+	// that serve a mix of static and dynamic content. When specified, your
 	// distribution caches and serve only the content that is specified in the
 	// distribution's CacheBehaviorPerPath parameter. This behavior is ideal for
 	// websites or web applications that use cookies, headers, and query strings to
@@ -375,33 +373,33 @@ type CacheBehaviorPerPath struct {
 	// The cache behavior for the specified path. You can specify one of the following
 	// per-path cache behaviors:
 	//
-	//     * cache - This behavior caches the specified
-	// path.
+	// * cache - This behavior caches the specified path.
 	//
-	//     * dont-cache - This behavior doesn't cache the specified path.
+	// *
+	// dont-cache - This behavior doesn't cache the specified path.
 	Behavior BehaviorEnum
 
 	// The path to a directory or file to cached, or not cache. Use an asterisk symbol
 	// to specify wildcard directories (path/to/assets/*), and file types (*.html,
 	// *jpg, *js). Directories and file paths are case-sensitive. Examples:
 	//
-	//     *
-	// Specify the following to cache all files in the document root of an Apache web
-	// server running on a Lightsail instance. var/www/html/
+	// * Specify
+	// the following to cache all files in the document root of an Apache web server
+	// running on a Lightsail instance. var/www/html/
 	//
-	//     * Specify the
-	// following file to cache only the index page in the document root of an Apache
-	// web server. var/www/html/index.html
+	// * Specify the following file to
+	// cache only the index page in the document root of an Apache web server.
+	// var/www/html/index.html
 	//
-	//     * Specify the following to cache only
-	// the .html files in the document root of an Apache web server.
-	// var/www/html/.html
+	// * Specify the following to cache only the .html files
+	// in the document root of an Apache web server. var/www/html/.html
 	//
-	//     * Specify the following to cache only the .jpg, .png,
-	// and .gif files in the images sub-directory of the document root of an Apache web
-	// server. var/www/html/images/.jpgvar/www/html/images/.pngvar/www/html/images/.gif
-	// Specify the following to cache all files in the images sub-directory of the
-	// document root of an Apache web server. var/www/html/images/
+	// * Specify the
+	// following to cache only the .jpg, .png, and .gif files in the images
+	// sub-directory of the document root of an Apache web server.
+	// var/www/html/images/.jpgvar/www/html/images/.pngvar/www/html/images/.gif Specify
+	// the following to cache all files in the images sub-directory of the document
+	// root of an Apache web server. var/www/html/images/
 	Path *string
 }
 
@@ -414,30 +412,30 @@ type CacheSettings struct {
 	// The HTTP methods that are processed and forwarded to the distribution's origin.
 	// You can specify the following options:
 	//
-	//     * GET,HEAD - The distribution
-	// forwards the GET and HEAD methods.
+	// * GET,HEAD - The distribution forwards
+	// the GET and HEAD methods.
 	//
-	//     * GET,HEAD,OPTIONS - The distribution
-	// forwards the GET, HEAD, and OPTIONS methods.
+	// * GET,HEAD,OPTIONS - The distribution forwards the
+	// GET, HEAD, and OPTIONS methods.
 	//
-	//     *
-	// GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE - The distribution forwards the GET,
-	// HEAD, OPTIONS, PUT, PATCH, POST, and DELETE methods.
+	// * GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE - The
+	// distribution forwards the GET, HEAD, OPTIONS, PUT, PATCH, POST, and DELETE
+	// methods.
 	//
-	// If you specify the third
-	// option, you might need to restrict access to your distribution's origin so users
-	// can't perform operations that you don't want them to. For example, you might not
-	// want users to have permission to delete objects from your origin.
+	// If you specify the third option, you might need to restrict access to
+	// your distribution's origin so users can't perform operations that you don't want
+	// them to. For example, you might not want users to have permission to delete
+	// objects from your origin.
 	AllowedHTTPMethods *string
 
 	// The HTTP method responses that are cached by your distribution. You can specify
 	// the following options:
 	//
-	//     * GET,HEAD - The distribution caches responses to
-	// the GET and HEAD methods.
+	// * GET,HEAD - The distribution caches responses to the
+	// GET and HEAD methods.
 	//
-	//     * GET,HEAD,OPTIONS - The distribution caches
-	// responses to the GET, HEAD, and OPTIONS methods.
+	// * GET,HEAD,OPTIONS - The distribution caches responses to
+	// the GET, HEAD, and OPTIONS methods.
 	CachedHTTPMethods *string
 
 	// The default amount of time that objects stay in the distribution's cache before
@@ -524,10 +522,10 @@ type Certificate struct {
 	// The validation failure reason, if any, of the certificate. The following failure
 	// reasons are possible:
 	//
-	//     * NO_AVAILABLE_CONTACTS - This failure applies to
-	// email validation, which is not available for Lightsail certificates.
+	// * NO_AVAILABLE_CONTACTS - This failure applies to email
+	// validation, which is not available for Lightsail certificates.
 	//
-	//     *
+	// *
 	// ADDITIONAL_VERIFICATION_REQUIRED - Lightsail requires additional information to
 	// process this certificate request. This can happen as a fraud-protection measure,
 	// such as when the domain ranks within the Alexa top 1000 websites. To provide the
@@ -536,22 +534,22 @@ type Certificate struct {
 	// request a certificate for Amazon-owned domain names such as those ending in
 	// amazonaws.com, cloudfront.net, or elasticbeanstalk.com.
 	//
-	//     *
-	// DOMAIN_NOT_ALLOWED - One or more of the domain names in the certificate request
-	// was reported as an unsafe domain by VirusTotal
-	// (https://www.virustotal.com/gui/home/url). To correct the problem, search for
-	// your domain name on the VirusTotal (https://www.virustotal.com/gui/home/url)
-	// website. If your domain is reported as suspicious, see Google Help for Hacked
-	// Websites (https://www.google.com/webmasters/hacked/?hl=en) to learn what you can
-	// do. If you believe that the result is a false positive, notify the organization
-	// that is reporting the domain. VirusTotal is an aggregate of several antivirus
-	// and URL scanners and cannot remove your domain from a block list itself. After
-	// you correct the problem and the VirusTotal registry has been updated, request a
-	// new certificate. If you see this error and your domain is not included in the
+	// * DOMAIN_NOT_ALLOWED -
+	// One or more of the domain names in the certificate request was reported as an
+	// unsafe domain by VirusTotal (https://www.virustotal.com/gui/home/url). To
+	// correct the problem, search for your domain name on the VirusTotal
+	// (https://www.virustotal.com/gui/home/url) website. If your domain is reported as
+	// suspicious, see Google Help for Hacked Websites
+	// (https://www.google.com/webmasters/hacked/?hl=en) to learn what you can do. If
+	// you believe that the result is a false positive, notify the organization that is
+	// reporting the domain. VirusTotal is an aggregate of several antivirus and URL
+	// scanners and cannot remove your domain from a block list itself. After you
+	// correct the problem and the VirusTotal registry has been updated, request a new
+	// certificate. If you see this error and your domain is not included in the
 	// VirusTotal list, visit the AWS Support Center
 	// (https://console.aws.amazon.com/support/home) and create a case.
 	//
-	//     *
+	// *
 	// INVALID_PUBLIC_DOMAIN - One or more of the domain names in the certificate
 	// request is not valid. Typically, this is because a domain name in the request is
 	// not a valid top-level domain. Try to request a certificate again, correcting any
@@ -560,10 +558,10 @@ type Certificate struct {
 	// cannot request a certificate for example.invalidpublicdomain because
 	// invalidpublicdomain is not a valid top-level domain.
 	//
-	//     * OTHER - Typically,
-	// this failure occurs when there is a typographical error in one or more of the
-	// domain names in the certificate request. Try to request a certificate again,
-	// correcting any spelling errors or typos that were in the failed request.
+	// * OTHER - Typically, this
+	// failure occurs when there is a typographical error in one or more of the domain
+	// names in the certificate request. Try to request a certificate again, correcting
+	// any spelling errors or typos that were in the failed request.
 	RequestFailureReason *string
 
 	// The reason the certificate was revoked. This value is present only when the
@@ -695,14 +693,14 @@ type ContactMethod struct {
 	// The current status of the contact method. A contact method has the following
 	// possible status:
 	//
-	//     * PendingVerification - The contact method has not yet
-	// been verified, and the verification has not yet expired.
+	// * PendingVerification - The contact method has not yet been
+	// verified, and the verification has not yet expired.
 	//
-	//     * Valid - The
-	// contact method has been verified.
+	// * Valid - The contact
+	// method has been verified.
 	//
-	//     * InValid - An attempt was made to verify
-	// the contact method, but the verification has expired.
+	// * InValid - An attempt was made to verify the contact
+	// method, but the verification has expired.
 	Status ContactMethodStatus
 
 	// The support code. Include this code in your email to support when you have
@@ -972,20 +970,20 @@ type DomainEntry struct {
 	// exchanger (MX), name server (NS), start of authority (SOA), service locator
 	// (SRV), or text (TXT). The following domain entry types can be used:
 	//
-	//     * A
+	// * A
 	//
+	// *
+	// CNAME
 	//
-	// * CNAME
+	// * MX
 	//
-	//     * MX
+	// * NS
 	//
-	//     * NS
+	// * SOA
 	//
-	//     * SOA
+	// * SRV
 	//
-	//     * SRV
-	//
-	//     * TXT
+	// * TXT
 	Type *string
 }
 
@@ -1075,14 +1073,14 @@ type HeaderObject struct {
 	// The headers that you want your distribution to forward to your origin and base
 	// caching on. You can configure your distribution to do one of the following:
 	//
+	// *
+	// all - Forward all headers to your origin.
 	//
-	// * all - Forward all headers to your origin.
+	// * none - Forward only the default
+	// headers.
 	//
-	//     * none - Forward only the
-	// default headers.
-	//
-	//     * allow-list - Forward only the headers you specify using
-	// the headersAllowList parameter.
+	// * allow-list - Forward only the headers you specify using the
+	// headersAllowList parameter.
 	Option ForwardValues
 }
 
@@ -1096,22 +1094,22 @@ type HostKeyAttributes struct {
 
 	// The SHA-1 fingerprint of the returned SSH host key or RDP certificate.
 	//
-	//     *
+	// *
 	// Example of an SHA-1 SSH fingerprint: SHA1:1CHH6FaAaXjtFOsR/t83vf91SR0
 	//
-	//     *
-	// Example of an SHA-1 RDP fingerprint:
+	// * Example
+	// of an SHA-1 RDP fingerprint:
 	// af:34:51:fe:09:f0:e0:da:b8:4e:56:ca:60:c2:10:ff:38:06:db:45
 	FingerprintSHA1 *string
 
 	// The SHA-256 fingerprint of the returned SSH host key or RDP certificate.
 	//
-	//     *
+	// *
 	// Example of an SHA-256 SSH fingerprint:
 	// SHA256:KTsMnRBh1IhD17HpdfsbzeGA4jOijm5tyXsMjKVbB8o
 	//
-	//     * Example of an SHA-256
-	// RDP fingerprint:
+	// * Example of an SHA-256 RDP
+	// fingerprint:
 	// 03:9b:36:9f:4b:de:4e:61:70:fc:7c:c9:78:e7:d2:1a:1c:25:a8:0c:91:f6:7c:e4:d6:a0:85:c8:b4:53:99:68
 	FingerprintSHA256 *string
 
@@ -1285,21 +1283,21 @@ type InstanceEntry struct {
 	// The port configuration to use for the new Amazon EC2 instance. The following
 	// configuration options are available:
 	//
-	//     * DEFAULT - Use the default firewall
+	// * DEFAULT - Use the default firewall
 	// settings from the Lightsail instance blueprint.
 	//
-	//     * INSTANCE - Use the
-	// configured firewall settings from the source Lightsail instance.
+	// * INSTANCE - Use the configured
+	// firewall settings from the source Lightsail instance.
 	//
-	//     * NONE -
-	// Use the default Amazon EC2 security group.
+	// * NONE - Use the default
+	// Amazon EC2 security group.
 	//
-	//     * CLOSED - All ports closed.
+	// * CLOSED - All ports closed.
 	//
-	// If
-	// you configured lightsail-connect as a cidrListAliases on your instance, or if
-	// you chose to allow the Lightsail browser-based SSH or RDP clients to connect to
-	// your instance, that configuration is not carried over to your new Amazon EC2
+	// If you configured
+	// lightsail-connect as a cidrListAliases on your instance, or if you chose to
+	// allow the Lightsail browser-based SSH or RDP clients to connect to your
+	// instance, that configuration is not carried over to your new Amazon EC2
 	// instance.
 	//
 	// This member is required.
@@ -1344,55 +1342,54 @@ type InstanceHealthSummary struct {
 	// then an instanceHealthReason value is not provided. If instanceHealth is
 	// initial, the instanceHealthReason value can be one of the following:
 	//
-	//     *
+	// *
 	// Lb.RegistrationInProgress - The target instance is in the process of being
 	// registered with the load balancer.
 	//
-	//     * Lb.InitialHealthChecking - The
-	// Lightsail load balancer is still sending the target instance the minimum number
-	// of health checks required to determine its health status.
+	// * Lb.InitialHealthChecking - The Lightsail
+	// load balancer is still sending the target instance the minimum number of health
+	// checks required to determine its health status.
 	//
-	// If instanceHealth is
-	// unhealthy, the instanceHealthReason value can be one of the following:
+	// If instanceHealth is unhealthy,
+	// the instanceHealthReason value can be one of the following:
 	//
-	//     *
+	// *
 	// Instance.ResponseCodeMismatch - The health checks did not return an expected
 	// HTTP code.
 	//
-	//     * Instance.Timeout - The health check requests timed out.
+	// * Instance.Timeout - The health check requests timed out.
 	//
-	//     *
+	// *
 	// Instance.FailedHealthChecks - The health checks failed because the connection to
 	// the target instance timed out, the target instance response was malformed, or
 	// the target instance failed the health check for an unknown reason.
 	//
-	//     *
+	// *
 	// Lb.InternalError - The health checks failed due to an internal error.
 	//
 	// If
 	// instanceHealth is unused, the instanceHealthReason value can be one of the
 	// following:
 	//
-	//     * Instance.NotRegistered - The target instance is not registered
+	// * Instance.NotRegistered - The target instance is not registered
 	// with the target group.
 	//
-	//     * Instance.NotInUse - The target group is not used
-	// by any load balancer, or the target instance is in an Availability Zone that is
-	// not enabled for its load balancer.
+	// * Instance.NotInUse - The target group is not used by
+	// any load balancer, or the target instance is in an Availability Zone that is not
+	// enabled for its load balancer.
 	//
-	//     * Instance.IpUnusable - The target IP
-	// address is reserved for use by a Lightsail load balancer.
+	// * Instance.IpUnusable - The target IP address is
+	// reserved for use by a Lightsail load balancer.
 	//
-	//     *
-	// Instance.InvalidState - The target is in the stopped or terminated state.
+	// * Instance.InvalidState - The
+	// target is in the stopped or terminated state.
 	//
-	// If
-	// instanceHealth is draining, the instanceHealthReason value can be one of the
-	// following:
+	// If instanceHealth is draining,
+	// the instanceHealthReason value can be one of the following:
 	//
-	//     * Instance.DeregistrationInProgress - The target instance is in
-	// the process of being deregistered and the deregistration delay period has not
-	// expired.
+	// *
+	// Instance.DeregistrationInProgress - The target instance is in the process of
+	// being deregistered and the deregistration delay period has not expired.
 	InstanceHealthReason InstanceHealthReason
 
 	// The name of the Lightsail instance for which you are requesting health check
@@ -1444,38 +1441,38 @@ type InstancePortInfo struct {
 
 	// The first port in a range of open ports on an instance. Allowed ports:
 	//
-	//     *
-	// TCP and UDP - 0 to 65535
+	// * TCP
+	// and UDP - 0 to 65535
 	//
-	//     * ICMP - The ICMP type. For example, specify 8 as
-	// the fromPort (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping.
-	// For more information, see Control Messages
+	// * ICMP - The ICMP type. For example, specify 8 as the
+	// fromPort (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping. For
+	// more information, see Control Messages
 	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages)
 	// on Wikipedia.
 	FromPort *int32
 
 	// The IP protocol name. The name can be one of the following:
 	//
-	//     * tcp -
+	// * tcp -
 	// Transmission Control Protocol (TCP) provides reliable, ordered, and
 	// error-checked delivery of streamed data between applications running on hosts
 	// communicating by an IP network. If you have an application that doesn't require
 	// reliable data stream service, use UDP instead.
 	//
-	//     * all - All transport layer
+	// * all - All transport layer
 	// protocol types. For more general information, see Transport layer
 	// (https://en.wikipedia.org/wiki/Transport_layer) on Wikipedia.
 	//
-	//     * udp - With
-	// User Datagram Protocol (UDP), computer applications can send messages (or
-	// datagrams) to other hosts on an Internet Protocol (IP) network. Prior
-	// communications are not required to set up transmission channels or data paths.
-	// Applications that don't require reliable data stream service can use UDP, which
-	// provides a connectionless datagram service that emphasizes reduced latency over
+	// * udp - With User
+	// Datagram Protocol (UDP), computer applications can send messages (or datagrams)
+	// to other hosts on an Internet Protocol (IP) network. Prior communications are
+	// not required to set up transmission channels or data paths. Applications that
+	// don't require reliable data stream service can use UDP, which provides a
+	// connectionless datagram service that emphasizes reduced latency over
 	// reliability. If you do require reliable data stream service, use TCP instead.
 	//
-	//
-	// * icmp - Internet Control Message Protocol (ICMP) is used to send error messages
+	// *
+	// icmp - Internet Control Message Protocol (ICMP) is used to send error messages
 	// and operational information indicating success or failure when communicating
 	// with an instance. For example, an error is indicated when an instance could not
 	// be reached. When you specify icmp as the protocol, you must specify the ICMP
@@ -1484,12 +1481,12 @@ type InstancePortInfo struct {
 
 	// The last port in a range of open ports on an instance. Allowed ports:
 	//
-	//     * TCP
-	// and UDP - 0 to 65535
+	// * TCP and
+	// UDP - 0 to 65535
 	//
-	//     * ICMP - The ICMP code. For example, specify 8 as the
-	// fromPort (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping. For
-	// more information, see Control Messages
+	// * ICMP - The ICMP code. For example, specify 8 as the fromPort
+	// (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping. For more
+	// information, see Control Messages
 	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages)
 	// on Wikipedia.
 	ToPort *int32
@@ -1515,38 +1512,38 @@ type InstancePortState struct {
 
 	// The first port in a range of open ports on an instance. Allowed ports:
 	//
-	//     *
-	// TCP and UDP - 0 to 65535
+	// * TCP
+	// and UDP - 0 to 65535
 	//
-	//     * ICMP - The ICMP type. For example, specify 8 as
-	// the fromPort (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping.
-	// For more information, see Control Messages
+	// * ICMP - The ICMP type. For example, specify 8 as the
+	// fromPort (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping. For
+	// more information, see Control Messages
 	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages)
 	// on Wikipedia.
 	FromPort *int32
 
 	// The IP protocol name. The name can be one of the following:
 	//
-	//     * tcp -
+	// * tcp -
 	// Transmission Control Protocol (TCP) provides reliable, ordered, and
 	// error-checked delivery of streamed data between applications running on hosts
 	// communicating by an IP network. If you have an application that doesn't require
 	// reliable data stream service, use UDP instead.
 	//
-	//     * all - All transport layer
+	// * all - All transport layer
 	// protocol types. For more general information, see Transport layer
 	// (https://en.wikipedia.org/wiki/Transport_layer) on Wikipedia.
 	//
-	//     * udp - With
-	// User Datagram Protocol (UDP), computer applications can send messages (or
-	// datagrams) to other hosts on an Internet Protocol (IP) network. Prior
-	// communications are not required to set up transmission channels or data paths.
-	// Applications that don't require reliable data stream service can use UDP, which
-	// provides a connectionless datagram service that emphasizes reduced latency over
+	// * udp - With User
+	// Datagram Protocol (UDP), computer applications can send messages (or datagrams)
+	// to other hosts on an Internet Protocol (IP) network. Prior communications are
+	// not required to set up transmission channels or data paths. Applications that
+	// don't require reliable data stream service can use UDP, which provides a
+	// connectionless datagram service that emphasizes reduced latency over
 	// reliability. If you do require reliable data stream service, use TCP instead.
 	//
-	//
-	// * icmp - Internet Control Message Protocol (ICMP) is used to send error messages
+	// *
+	// icmp - Internet Control Message Protocol (ICMP) is used to send error messages
 	// and operational information indicating success or failure when communicating
 	// with an instance. For example, an error is indicated when an instance could not
 	// be reached. When you specify icmp as the protocol, you must specify the ICMP
@@ -1559,12 +1556,12 @@ type InstancePortState struct {
 
 	// The last port in a range of open ports on an instance. Allowed ports:
 	//
-	//     * TCP
-	// and UDP - 0 to 65535
+	// * TCP and
+	// UDP - 0 to 65535
 	//
-	//     * ICMP - The ICMP code. For example, specify 8 as the
-	// fromPort (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping. For
-	// more information, see Control Messages
+	// * ICMP - The ICMP code. For example, specify 8 as the fromPort
+	// (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping. For more
+	// information, see Control Messages
 	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages)
 	// on Wikipedia.
 	ToPort *int32
@@ -1848,10 +1845,10 @@ type LoadBalancerTlsCertificate struct {
 	// The validation failure reason, if any, of the certificate. The following failure
 	// reasons are possible:
 	//
-	//     * NO_AVAILABLE_CONTACTS - This failure applies to
-	// email validation, which is not available for Lightsail certificates.
+	// * NO_AVAILABLE_CONTACTS - This failure applies to email
+	// validation, which is not available for Lightsail certificates.
 	//
-	//     *
+	// *
 	// ADDITIONAL_VERIFICATION_REQUIRED - Lightsail requires additional information to
 	// process this certificate request. This can happen as a fraud-protection measure,
 	// such as when the domain ranks within the Alexa top 1000 websites. To provide the
@@ -1860,22 +1857,22 @@ type LoadBalancerTlsCertificate struct {
 	// request a certificate for Amazon-owned domain names such as those ending in
 	// amazonaws.com, cloudfront.net, or elasticbeanstalk.com.
 	//
-	//     *
-	// DOMAIN_NOT_ALLOWED - One or more of the domain names in the certificate request
-	// was reported as an unsafe domain by VirusTotal
-	// (https://www.virustotal.com/gui/home/url). To correct the problem, search for
-	// your domain name on the VirusTotal (https://www.virustotal.com/gui/home/url)
-	// website. If your domain is reported as suspicious, see Google Help for Hacked
-	// Websites (https://www.google.com/webmasters/hacked/?hl=en) to learn what you can
-	// do. If you believe that the result is a false positive, notify the organization
-	// that is reporting the domain. VirusTotal is an aggregate of several antivirus
-	// and URL scanners and cannot remove your domain from a block list itself. After
-	// you correct the problem and the VirusTotal registry has been updated, request a
-	// new certificate. If you see this error and your domain is not included in the
+	// * DOMAIN_NOT_ALLOWED -
+	// One or more of the domain names in the certificate request was reported as an
+	// unsafe domain by VirusTotal (https://www.virustotal.com/gui/home/url). To
+	// correct the problem, search for your domain name on the VirusTotal
+	// (https://www.virustotal.com/gui/home/url) website. If your domain is reported as
+	// suspicious, see Google Help for Hacked Websites
+	// (https://www.google.com/webmasters/hacked/?hl=en) to learn what you can do. If
+	// you believe that the result is a false positive, notify the organization that is
+	// reporting the domain. VirusTotal is an aggregate of several antivirus and URL
+	// scanners and cannot remove your domain from a block list itself. After you
+	// correct the problem and the VirusTotal registry has been updated, request a new
+	// certificate. If you see this error and your domain is not included in the
 	// VirusTotal list, visit the AWS Support Center
 	// (https://console.aws.amazon.com/support/home) and create a case.
 	//
-	//     *
+	// *
 	// INVALID_PUBLIC_DOMAIN - One or more of the domain names in the certificate
 	// request is not valid. Typically, this is because a domain name in the request is
 	// not a valid top-level domain. Try to request a certificate again, correcting any
@@ -1884,10 +1881,10 @@ type LoadBalancerTlsCertificate struct {
 	// cannot request a certificate for example.invalidpublicdomain because
 	// invalidpublicdomain is not a valid top-level domain.
 	//
-	//     * OTHER - Typically,
-	// this failure occurs when there is a typographical error in one or more of the
-	// domain names in the certificate request. Try to request a certificate again,
-	// correcting any spelling errors or typos that were in the failed request.
+	// * OTHER - Typically, this
+	// failure occurs when there is a typographical error in one or more of the domain
+	// names in the certificate request. Try to request a certificate again, correcting
+	// any spelling errors or typos that were in the failed request.
 	FailureReason LoadBalancerTlsCertificateFailureReason
 
 	// When true, the SSL/TLS certificate is attached to the Lightsail load balancer.
@@ -1923,32 +1920,31 @@ type LoadBalancerTlsCertificate struct {
 
 	// The resource type (e.g., LoadBalancerTlsCertificate).
 	//
-	//     * Instance - A
-	// Lightsail instance (a virtual private server)
+	// * Instance - A Lightsail
+	// instance (a virtual private server)
 	//
-	//     * StaticIp - A static IP
-	// address
+	// * StaticIp - A static IP address
 	//
-	//     * KeyPair - The key pair used to connect to a Lightsail instance
+	// * KeyPair
+	// - The key pair used to connect to a Lightsail instance
 	//
+	// * InstanceSnapshot - A
+	// Lightsail instance snapshot
 	//
-	// * InstanceSnapshot - A Lightsail instance snapshot
+	// * Domain - A DNS zone
 	//
-	//     * Domain - A DNS zone
+	// * PeeredVpc - A peered
+	// VPC
 	//
+	// * LoadBalancer - A Lightsail load balancer
 	//
-	// * PeeredVpc - A peered VPC
+	// * LoadBalancerTlsCertificate -
+	// An SSL/TLS certificate associated with a Lightsail load balancer
 	//
-	//     * LoadBalancer - A Lightsail load balancer
+	// * Disk - A
+	// Lightsail block storage disk
 	//
-	//
-	// * LoadBalancerTlsCertificate - An SSL/TLS certificate associated with a
-	// Lightsail load balancer
-	//
-	//     * Disk - A Lightsail block storage disk
-	//
-	//     *
-	// DiskSnapshot - A block storage disk snapshot
+	// * DiskSnapshot - A block storage disk snapshot
 	ResourceType ResourceType
 
 	// The reason the certificate was revoked. This value is present only when the
@@ -2021,24 +2017,23 @@ type LoadBalancerTlsCertificateDomainValidationRecord struct {
 // certificate. The renewal status of the certificate. The following renewal status
 // are possible:
 //
-//     * PendingAutoRenewal - Lightsail is attempting to
-// automatically validate the domain names in the certificate. No further action is
-// required.
+// * PendingAutoRenewal - Lightsail is attempting to automatically
+// validate the domain names in the certificate. No further action is required.
 //
-//     * PendingValidation - Lightsail couldn't automatically validate
-// one or more domain names in the certificate. You must take action to validate
-// these domain names or the certificate won't be renewed. If you used DNS
-// validation, check to make sure your certificate's domain validation records
-// exist in your domain's DNS, and that your certificate remains in use.
+// *
+// PendingValidation - Lightsail couldn't automatically validate one or more domain
+// names in the certificate. You must take action to validate these domain names or
+// the certificate won't be renewed. If you used DNS validation, check to make sure
+// your certificate's domain validation records exist in your domain's DNS, and
+// that your certificate remains in use.
 //
-//     *
-// Success - All domain names in the certificate are validated, and Lightsail
-// renewed the certificate. No further action is required.
+// * Success - All domain names in the
+// certificate are validated, and Lightsail renewed the certificate. No further
+// action is required.
 //
-//     * Failed - One or
-// more domain names were not validated before the certificate expired, and
-// Lightsail did not renew the certificate. You can request a new certificate using
-// the CreateCertificate action.
+// * Failed - One or more domain names were not validated
+// before the certificate expired, and Lightsail did not renew the certificate. You
+// can request a new certificate using the CreateCertificate action.
 type LoadBalancerTlsCertificateRenewalSummary struct {
 
 	// Contains information about the validation of each domain name in the
@@ -2050,23 +2045,23 @@ type LoadBalancerTlsCertificateRenewalSummary struct {
 	// The renewal status of the certificate. The following renewal status are
 	// possible:
 	//
-	//     * PendingAutoRenewal - Lightsail is attempting to automatically
+	// * PendingAutoRenewal - Lightsail is attempting to automatically
 	// validate the domain names of the certificate. No further action is required.
 	//
+	// *
+	// PendingValidation - Lightsail couldn't automatically validate one or more domain
+	// names of the certificate. You must take action to validate these domain names or
+	// the certificate won't be renewed. Check to make sure your certificate's domain
+	// validation records exist in your domain's DNS, and that your certificate remains
+	// in use.
 	//
-	// * PendingValidation - Lightsail couldn't automatically validate one or more
-	// domain names of the certificate. You must take action to validate these domain
-	// names or the certificate won't be renewed. Check to make sure your certificate's
-	// domain validation records exist in your domain's DNS, and that your certificate
-	// remains in use.
+	// * Success - All domain names in the certificate are validated, and
+	// Lightsail renewed the certificate. No further action is required.
 	//
-	//     * Success - All domain names in the certificate are
-	// validated, and Lightsail renewed the certificate. No further action is
-	// required.
-	//
-	//     * Failed - One or more domain names were not validated before the
-	// certificate expired, and Lightsail did not renew the certificate. You can
-	// request a new certificate using the CreateCertificate action.
+	// * Failed -
+	// One or more domain names were not validated before the certificate expired, and
+	// Lightsail did not renew the certificate. You can request a new certificate using
+	// the CreateCertificate action.
 	RenewalStatus LoadBalancerTlsCertificateRenewalStatus
 }
 
@@ -2265,10 +2260,10 @@ type PortInfo struct {
 	// connect to an instance through the ports, and the protocol. Lightsail supports
 	// IPv4 addresses. Examples:
 	//
-	//     * To allow the IP address 192.0.2.44, specify
+	// * To allow the IP address 192.0.2.44, specify
 	// 192.0.2.44 or 192.0.2.44/32.
 	//
-	//     * To allow the IP addresses 192.0.2.0 to
+	// * To allow the IP addresses 192.0.2.0 to
 	// 192.0.2.255, specify 192.0.2.0/24.
 	//
 	// For more information about CIDR block
@@ -2279,38 +2274,38 @@ type PortInfo struct {
 
 	// The first port in a range of open ports on an instance. Allowed ports:
 	//
-	//     *
-	// TCP and UDP - 0 to 65535
+	// * TCP
+	// and UDP - 0 to 65535
 	//
-	//     * ICMP - The ICMP type. For example, specify 8 as
-	// the fromPort (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping.
-	// For more information, see Control Messages
+	// * ICMP - The ICMP type. For example, specify 8 as the
+	// fromPort (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping. For
+	// more information, see Control Messages
 	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages)
 	// on Wikipedia.
 	FromPort *int32
 
 	// The IP protocol name. The name can be one of the following:
 	//
-	//     * tcp -
+	// * tcp -
 	// Transmission Control Protocol (TCP) provides reliable, ordered, and
 	// error-checked delivery of streamed data between applications running on hosts
 	// communicating by an IP network. If you have an application that doesn't require
 	// reliable data stream service, use UDP instead.
 	//
-	//     * all - All transport layer
+	// * all - All transport layer
 	// protocol types. For more general information, see Transport layer
 	// (https://en.wikipedia.org/wiki/Transport_layer) on Wikipedia.
 	//
-	//     * udp - With
-	// User Datagram Protocol (UDP), computer applications can send messages (or
-	// datagrams) to other hosts on an Internet Protocol (IP) network. Prior
-	// communications are not required to set up transmission channels or data paths.
-	// Applications that don't require reliable data stream service can use UDP, which
-	// provides a connectionless datagram service that emphasizes reduced latency over
+	// * udp - With User
+	// Datagram Protocol (UDP), computer applications can send messages (or datagrams)
+	// to other hosts on an Internet Protocol (IP) network. Prior communications are
+	// not required to set up transmission channels or data paths. Applications that
+	// don't require reliable data stream service can use UDP, which provides a
+	// connectionless datagram service that emphasizes reduced latency over
 	// reliability. If you do require reliable data stream service, use TCP instead.
 	//
-	//
-	// * icmp - Internet Control Message Protocol (ICMP) is used to send error messages
+	// *
+	// icmp - Internet Control Message Protocol (ICMP) is used to send error messages
 	// and operational information indicating success or failure when communicating
 	// with an instance. For example, an error is indicated when an instance could not
 	// be reached. When you specify icmp as the protocol, you must specify the ICMP
@@ -2319,12 +2314,12 @@ type PortInfo struct {
 
 	// The last port in a range of open ports on an instance. Allowed ports:
 	//
-	//     * TCP
-	// and UDP - 0 to 65535
+	// * TCP and
+	// UDP - 0 to 65535
 	//
-	//     * ICMP - The ICMP code. For example, specify 8 as the
-	// fromPort (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping. For
-	// more information, see Control Messages
+	// * ICMP - The ICMP code. For example, specify 8 as the fromPort
+	// (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping. For more
+	// information, see Control Messages
 	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages)
 	// on Wikipedia.
 	ToPort *int32
@@ -2654,23 +2649,23 @@ type RenewalSummary struct {
 	// The renewal status of the certificate. The following renewal status are
 	// possible:
 	//
-	//     * PendingAutoRenewal - Lightsail is attempting to automatically
+	// * PendingAutoRenewal - Lightsail is attempting to automatically
 	// validate the domain names of the certificate. No further action is required.
 	//
+	// *
+	// PendingValidation - Lightsail couldn't automatically validate one or more domain
+	// names of the certificate. You must take action to validate these domain names or
+	// the certificate won't be renewed. Check to make sure your certificate's domain
+	// validation records exist in your domain's DNS, and that your certificate remains
+	// in use.
 	//
-	// * PendingValidation - Lightsail couldn't automatically validate one or more
-	// domain names of the certificate. You must take action to validate these domain
-	// names or the certificate won't be renewed. Check to make sure your certificate's
-	// domain validation records exist in your domain's DNS, and that your certificate
-	// remains in use.
+	// * Success - All domain names in the certificate are validated, and
+	// Lightsail renewed the certificate. No further action is required.
 	//
-	//     * Success - All domain names in the certificate are
-	// validated, and Lightsail renewed the certificate. No further action is
-	// required.
-	//
-	//     * Failed - One or more domain names were not validated before the
-	// certificate expired, and Lightsail did not renew the certificate. You can
-	// request a new certificate using the CreateCertificate action.
+	// * Failed -
+	// One or more domain names were not validated before the certificate expired, and
+	// Lightsail did not renew the certificate. You can request a new certificate using
+	// the CreateCertificate action.
 	RenewalStatus RenewalStatus
 
 	// The reason for the renewal status of the certificate.

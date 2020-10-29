@@ -24,9 +24,9 @@ type AnomalyFeedbackType string
 
 // Enum values for AnomalyFeedbackType
 const (
-	AnomalyFeedbackTypeYes              AnomalyFeedbackType = "YES"
-	AnomalyFeedbackTypeNo               AnomalyFeedbackType = "NO"
-	AnomalyFeedbackTypePlanned_activity AnomalyFeedbackType = "PLANNED_ACTIVITY"
+	AnomalyFeedbackTypeYes             AnomalyFeedbackType = "YES"
+	AnomalyFeedbackTypeNo              AnomalyFeedbackType = "NO"
+	AnomalyFeedbackTypePlannedActivity AnomalyFeedbackType = "PLANNED_ACTIVITY"
 )
 
 // Values returns all known values for AnomalyFeedbackType. Note that this can be
@@ -64,9 +64,9 @@ type Context string
 
 // Enum values for Context
 const (
-	ContextCost_and_usage Context = "COST_AND_USAGE"
-	ContextReservations   Context = "RESERVATIONS"
-	ContextSavings_plans  Context = "SAVINGS_PLANS"
+	ContextCostAndUsage Context = "COST_AND_USAGE"
+	ContextReservations Context = "RESERVATIONS"
+	ContextSavingsPlans Context = "SAVINGS_PLANS"
 )
 
 // Values returns all known values for Context. Note that this can be expanded in
@@ -118,7 +118,7 @@ type CostCategoryStatusComponent string
 
 // Enum values for CostCategoryStatusComponent
 const (
-	CostCategoryStatusComponentCost_explorer CostCategoryStatusComponent = "COST_EXPLORER"
+	CostCategoryStatusComponentCostExplorer CostCategoryStatusComponent = "COST_EXPLORER"
 )
 
 // Values returns all known values for CostCategoryStatusComponent. Note that this
@@ -134,35 +134,35 @@ type Dimension string
 
 // Enum values for Dimension
 const (
-	DimensionAz                   Dimension = "AZ"
-	DimensionInstance_type        Dimension = "INSTANCE_TYPE"
-	DimensionLinked_account       Dimension = "LINKED_ACCOUNT"
-	DimensionLinked_account_name  Dimension = "LINKED_ACCOUNT_NAME"
-	DimensionOperation            Dimension = "OPERATION"
-	DimensionPurchase_type        Dimension = "PURCHASE_TYPE"
-	DimensionRegion               Dimension = "REGION"
-	DimensionService              Dimension = "SERVICE"
-	DimensionService_code         Dimension = "SERVICE_CODE"
-	DimensionUsage_type           Dimension = "USAGE_TYPE"
-	DimensionUsage_type_group     Dimension = "USAGE_TYPE_GROUP"
-	DimensionRecord_type          Dimension = "RECORD_TYPE"
-	DimensionOperating_system     Dimension = "OPERATING_SYSTEM"
-	DimensionTenancy              Dimension = "TENANCY"
-	DimensionScope                Dimension = "SCOPE"
-	DimensionPlatform             Dimension = "PLATFORM"
-	DimensionSubscription_id      Dimension = "SUBSCRIPTION_ID"
-	DimensionLegal_entity_name    Dimension = "LEGAL_ENTITY_NAME"
-	DimensionDeployment_option    Dimension = "DEPLOYMENT_OPTION"
-	DimensionDatabase_engine      Dimension = "DATABASE_ENGINE"
-	DimensionCache_engine         Dimension = "CACHE_ENGINE"
-	DimensionInstance_type_family Dimension = "INSTANCE_TYPE_FAMILY"
-	DimensionBilling_entity       Dimension = "BILLING_ENTITY"
-	DimensionReservation_id       Dimension = "RESERVATION_ID"
-	DimensionResource_id          Dimension = "RESOURCE_ID"
-	DimensionRightsizing_type     Dimension = "RIGHTSIZING_TYPE"
-	DimensionSavings_plans_type   Dimension = "SAVINGS_PLANS_TYPE"
-	DimensionSavings_plan_arn     Dimension = "SAVINGS_PLAN_ARN"
-	DimensionPayment_option       Dimension = "PAYMENT_OPTION"
+	DimensionAz                 Dimension = "AZ"
+	DimensionInstanceType       Dimension = "INSTANCE_TYPE"
+	DimensionLinkedAccount      Dimension = "LINKED_ACCOUNT"
+	DimensionLinkedAccountName  Dimension = "LINKED_ACCOUNT_NAME"
+	DimensionOperation          Dimension = "OPERATION"
+	DimensionPurchaseType       Dimension = "PURCHASE_TYPE"
+	DimensionRegion             Dimension = "REGION"
+	DimensionService            Dimension = "SERVICE"
+	DimensionServiceCode        Dimension = "SERVICE_CODE"
+	DimensionUsageType          Dimension = "USAGE_TYPE"
+	DimensionUsageTypeGroup     Dimension = "USAGE_TYPE_GROUP"
+	DimensionRecordType         Dimension = "RECORD_TYPE"
+	DimensionOperatingSystem    Dimension = "OPERATING_SYSTEM"
+	DimensionTenancy            Dimension = "TENANCY"
+	DimensionScope              Dimension = "SCOPE"
+	DimensionPlatform           Dimension = "PLATFORM"
+	DimensionSubscriptionId     Dimension = "SUBSCRIPTION_ID"
+	DimensionLegalEntityName    Dimension = "LEGAL_ENTITY_NAME"
+	DimensionDeploymentOption   Dimension = "DEPLOYMENT_OPTION"
+	DimensionDatabaseEngine     Dimension = "DATABASE_ENGINE"
+	DimensionCacheEngine        Dimension = "CACHE_ENGINE"
+	DimensionInstanceTypeFamily Dimension = "INSTANCE_TYPE_FAMILY"
+	DimensionBillingEntity      Dimension = "BILLING_ENTITY"
+	DimensionReservationId      Dimension = "RESERVATION_ID"
+	DimensionResourceId         Dimension = "RESOURCE_ID"
+	DimensionRightsizingType    Dimension = "RIGHTSIZING_TYPE"
+	DimensionSavingsPlansType   Dimension = "SAVINGS_PLANS_TYPE"
+	DimensionSavingsPlanArn     Dimension = "SAVINGS_PLAN_ARN"
+	DimensionPaymentOption      Dimension = "PAYMENT_OPTION"
 )
 
 // Values returns all known values for Dimension. Note that this can be expanded in
@@ -226,9 +226,9 @@ type GroupDefinitionType string
 
 // Enum values for GroupDefinitionType
 const (
-	GroupDefinitionTypeDimension     GroupDefinitionType = "DIMENSION"
-	GroupDefinitionTypeTag           GroupDefinitionType = "TAG"
-	GroupDefinitionTypeCost_category GroupDefinitionType = "COST_CATEGORY"
+	GroupDefinitionTypeDimension    GroupDefinitionType = "DIMENSION"
+	GroupDefinitionTypeTag          GroupDefinitionType = "TAG"
+	GroupDefinitionTypeCostCategory GroupDefinitionType = "COST_CATEGORY"
 )
 
 // Values returns all known values for GroupDefinitionType. Note that this can be
@@ -246,9 +246,9 @@ type LookbackPeriodInDays string
 
 // Enum values for LookbackPeriodInDays
 const (
-	LookbackPeriodInDaysSeven_days  LookbackPeriodInDays = "SEVEN_DAYS"
-	LookbackPeriodInDaysThirty_days LookbackPeriodInDays = "THIRTY_DAYS"
-	LookbackPeriodInDaysSixty_days  LookbackPeriodInDays = "SIXTY_DAYS"
+	LookbackPeriodInDaysSevenDays  LookbackPeriodInDays = "SEVEN_DAYS"
+	LookbackPeriodInDaysThirtyDays LookbackPeriodInDays = "THIRTY_DAYS"
+	LookbackPeriodInDaysSixtyDays  LookbackPeriodInDays = "SIXTY_DAYS"
 )
 
 // Values returns all known values for LookbackPeriodInDays. Note that this can be
@@ -266,12 +266,12 @@ type MatchOption string
 
 // Enum values for MatchOption
 const (
-	MatchOptionEquals           MatchOption = "EQUALS"
-	MatchOptionStarts_with      MatchOption = "STARTS_WITH"
-	MatchOptionEnds_with        MatchOption = "ENDS_WITH"
-	MatchOptionContains         MatchOption = "CONTAINS"
-	MatchOptionCase_sensitive   MatchOption = "CASE_SENSITIVE"
-	MatchOptionCase_insensitive MatchOption = "CASE_INSENSITIVE"
+	MatchOptionEquals          MatchOption = "EQUALS"
+	MatchOptionStartsWith      MatchOption = "STARTS_WITH"
+	MatchOptionEndsWith        MatchOption = "ENDS_WITH"
+	MatchOptionContains        MatchOption = "CONTAINS"
+	MatchOptionCaseSensitive   MatchOption = "CASE_SENSITIVE"
+	MatchOptionCaseInsensitive MatchOption = "CASE_INSENSITIVE"
 )
 
 // Values returns all known values for MatchOption. Note that this can be expanded
@@ -292,13 +292,13 @@ type Metric string
 
 // Enum values for Metric
 const (
-	MetricBlended_cost            Metric = "BLENDED_COST"
-	MetricUnblended_cost          Metric = "UNBLENDED_COST"
-	MetricAmortized_cost          Metric = "AMORTIZED_COST"
-	MetricNet_unblended_cost      Metric = "NET_UNBLENDED_COST"
-	MetricNet_amortized_cost      Metric = "NET_AMORTIZED_COST"
-	MetricUsage_quantity          Metric = "USAGE_QUANTITY"
-	MetricNormalized_usage_amount Metric = "NORMALIZED_USAGE_AMOUNT"
+	MetricBlendedCost           Metric = "BLENDED_COST"
+	MetricUnblendedCost         Metric = "UNBLENDED_COST"
+	MetricAmortizedCost         Metric = "AMORTIZED_COST"
+	MetricNetUnblendedCost      Metric = "NET_UNBLENDED_COST"
+	MetricNetAmortizedCost      Metric = "NET_AMORTIZED_COST"
+	MetricUsageQuantity         Metric = "USAGE_QUANTITY"
+	MetricNormalizedUsageAmount Metric = "NORMALIZED_USAGE_AMOUNT"
 )
 
 // Values returns all known values for Metric. Note that this can be expanded in
@@ -354,12 +354,12 @@ type NumericOperator string
 
 // Enum values for NumericOperator
 const (
-	NumericOperatorEqual                 NumericOperator = "EQUAL"
-	NumericOperatorGreater_than_or_equal NumericOperator = "GREATER_THAN_OR_EQUAL"
-	NumericOperatorLess_than_or_equal    NumericOperator = "LESS_THAN_OR_EQUAL"
-	NumericOperatorGreater_than          NumericOperator = "GREATER_THAN"
-	NumericOperatorLess_than             NumericOperator = "LESS_THAN"
-	NumericOperatorBetween               NumericOperator = "BETWEEN"
+	NumericOperatorEqual              NumericOperator = "EQUAL"
+	NumericOperatorGreaterThanOrEqual NumericOperator = "GREATER_THAN_OR_EQUAL"
+	NumericOperatorLessThanOrEqual    NumericOperator = "LESS_THAN_OR_EQUAL"
+	NumericOperatorGreaterThan        NumericOperator = "GREATER_THAN"
+	NumericOperatorLessThan           NumericOperator = "LESS_THAN"
+	NumericOperatorBetween            NumericOperator = "BETWEEN"
 )
 
 // Values returns all known values for NumericOperator. Note that this can be
@@ -398,12 +398,12 @@ type PaymentOption string
 
 // Enum values for PaymentOption
 const (
-	PaymentOptionNo_upfront         PaymentOption = "NO_UPFRONT"
-	PaymentOptionPartial_upfront    PaymentOption = "PARTIAL_UPFRONT"
-	PaymentOptionAll_upfront        PaymentOption = "ALL_UPFRONT"
-	PaymentOptionLight_utilization  PaymentOption = "LIGHT_UTILIZATION"
-	PaymentOptionMedium_utilization PaymentOption = "MEDIUM_UTILIZATION"
-	PaymentOptionHeavy_utilization  PaymentOption = "HEAVY_UTILIZATION"
+	PaymentOptionNoUpfront         PaymentOption = "NO_UPFRONT"
+	PaymentOptionPartialUpfront    PaymentOption = "PARTIAL_UPFRONT"
+	PaymentOptionAllUpfront        PaymentOption = "ALL_UPFRONT"
+	PaymentOptionLightUtilization  PaymentOption = "LIGHT_UTILIZATION"
+	PaymentOptionMediumUtilization PaymentOption = "MEDIUM_UTILIZATION"
+	PaymentOptionHeavyUtilization  PaymentOption = "HEAVY_UTILIZATION"
 )
 
 // Values returns all known values for PaymentOption. Note that this can be
@@ -424,8 +424,8 @@ type RecommendationTarget string
 
 // Enum values for RecommendationTarget
 const (
-	RecommendationTargetSame_instance_family  RecommendationTarget = "SAME_INSTANCE_FAMILY"
-	RecommendationTargetCross_instance_family RecommendationTarget = "CROSS_INSTANCE_FAMILY"
+	RecommendationTargetSameInstanceFamily  RecommendationTarget = "SAME_INSTANCE_FAMILY"
+	RecommendationTargetCrossInstanceFamily RecommendationTarget = "CROSS_INSTANCE_FAMILY"
 )
 
 // Values returns all known values for RecommendationTarget. Note that this can be
@@ -496,8 +496,8 @@ type SupportedSavingsPlansType string
 
 // Enum values for SupportedSavingsPlansType
 const (
-	SupportedSavingsPlansTypeCompute_sp      SupportedSavingsPlansType = "COMPUTE_SP"
-	SupportedSavingsPlansTypeEc2_instance_sp SupportedSavingsPlansType = "EC2_INSTANCE_SP"
+	SupportedSavingsPlansTypeComputeSp     SupportedSavingsPlansType = "COMPUTE_SP"
+	SupportedSavingsPlansTypeEc2InstanceSp SupportedSavingsPlansType = "EC2_INSTANCE_SP"
 )
 
 // Values returns all known values for SupportedSavingsPlansType. Note that this
@@ -514,8 +514,8 @@ type TermInYears string
 
 // Enum values for TermInYears
 const (
-	TermInYearsOne_year    TermInYears = "ONE_YEAR"
-	TermInYearsThree_years TermInYears = "THREE_YEARS"
+	TermInYearsOneYear    TermInYears = "ONE_YEAR"
+	TermInYearsThreeYears TermInYears = "THREE_YEARS"
 )
 
 // Values returns all known values for TermInYears. Note that this can be expanded

@@ -6,8 +6,8 @@ type DecimalReturnType string
 
 // Enum values for DecimalReturnType
 const (
-	DecimalReturnTypeString         DecimalReturnType = "STRING"
-	DecimalReturnTypeDouble_or_long DecimalReturnType = "DOUBLE_OR_LONG"
+	DecimalReturnTypeString       DecimalReturnType = "STRING"
+	DecimalReturnTypeDoubleOrLong DecimalReturnType = "DOUBLE_OR_LONG"
 )
 
 // Values returns all known values for DecimalReturnType. Note that this can be

@@ -6,9 +6,9 @@ type ResourceType string
 
 // Enum values for ResourceType
 const (
-	ResourceTypeGroup          ResourceType = "GROUP"
-	ResourceTypeUser           ResourceType = "USER"
-	ResourceTypeIdentity_store ResourceType = "IDENTITY_STORE"
+	ResourceTypeGroup         ResourceType = "GROUP"
+	ResourceTypeUser          ResourceType = "USER"
+	ResourceTypeIdentityStore ResourceType = "IDENTITY_STORE"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded

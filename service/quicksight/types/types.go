@@ -1369,16 +1369,16 @@ type ResourcePermission struct {
 	// The Amazon Resource Name (ARN) of the principal. This can be one of the
 	// following:
 	//
-	//     * The ARN of an Amazon QuickSight user or group associated with
-	// a data source or dataset. (This is common.)
+	// * The ARN of an Amazon QuickSight user or group associated with a
+	// data source or dataset. (This is common.)
 	//
-	//     * The ARN of an Amazon
-	// QuickSight user, group, or namespace associated with an analysis, dashboard,
-	// template, or theme. (This is common.)
+	// * The ARN of an Amazon QuickSight
+	// user, group, or namespace associated with an analysis, dashboard, template, or
+	// theme. (This is common.)
 	//
-	//     * The ARN of an AWS account root:
-	// This is an IAM ARN rather than a QuickSight ARN. Use this option only to share
-	// resources (templates) across AWS accounts. (This is less common.)
+	// * The ARN of an AWS account root: This is an IAM ARN
+	// rather than a QuickSight ARN. Use this option only to share resources
+	// (templates) across AWS accounts. (This is less common.)
 	//
 	// This member is required.
 	Principal *string
@@ -2067,20 +2067,19 @@ type User struct {
 	// The Amazon QuickSight role for the user. The user role can be one of the
 	// following:.
 	//
-	//     * READER: A user who has read-only access to dashboards.
+	// * READER: A user who has read-only access to dashboards.
 	//
-	//     *
-	// AUTHOR: A user who can create data sources, datasets, analyses, and
-	// dashboards.
+	// * AUTHOR:
+	// A user who can create data sources, datasets, analyses, and dashboards.
 	//
-	//     * ADMIN: A user who is an author, who can also manage Amazon
-	// QuickSight settings.
+	// *
+	// ADMIN: A user who is an author, who can also manage Amazon QuickSight
+	// settings.
 	//
-	//     * RESTRICTED_READER: This role isn't currently
-	// available for use.
+	// * RESTRICTED_READER: This role isn't currently available for use.
 	//
-	//     * RESTRICTED_AUTHOR: This role isn't currently available
-	// for use.
+	// *
+	// RESTRICTED_AUTHOR: This role isn't currently available for use.
 	Role UserRole
 
 	// The user's user name.

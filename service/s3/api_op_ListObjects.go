@@ -21,22 +21,23 @@ import (
 // developing applications. For backward compatibility, Amazon S3 continues to
 // support ListObjects. The following operations are related to ListObjects:
 //
-//     *
+// *
 // ListObjectsV2
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html)
 //
-//     *
-// GetObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
+// *
+// GetObject
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
 //
-//
-// * PutObject
+// *
+// PutObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
 //
-//     *
+// *
 // CreateBucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
 //
-//     *
+// *
 // ListBuckets
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBuckets.html)
 func (c *Client) ListObjects(ctx context.Context, params *ListObjectsInput, optFns ...func(*Options)) (*ListObjectsOutput, error) {

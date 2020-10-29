@@ -44,8 +44,8 @@ type ConflictDetailLevelTypeEnum string
 
 // Enum values for ConflictDetailLevelTypeEnum
 const (
-	ConflictDetailLevelTypeEnumFile_level ConflictDetailLevelTypeEnum = "FILE_LEVEL"
-	ConflictDetailLevelTypeEnumLine_level ConflictDetailLevelTypeEnum = "LINE_LEVEL"
+	ConflictDetailLevelTypeEnumFileLevel ConflictDetailLevelTypeEnum = "FILE_LEVEL"
+	ConflictDetailLevelTypeEnumLineLevel ConflictDetailLevelTypeEnum = "LINE_LEVEL"
 )
 
 // Values returns all known values for ConflictDetailLevelTypeEnum. Note that this
@@ -62,10 +62,10 @@ type ConflictResolutionStrategyTypeEnum string
 
 // Enum values for ConflictResolutionStrategyTypeEnum
 const (
-	ConflictResolutionStrategyTypeEnumNone               ConflictResolutionStrategyTypeEnum = "NONE"
-	ConflictResolutionStrategyTypeEnumAccept_source      ConflictResolutionStrategyTypeEnum = "ACCEPT_SOURCE"
-	ConflictResolutionStrategyTypeEnumAccept_destination ConflictResolutionStrategyTypeEnum = "ACCEPT_DESTINATION"
-	ConflictResolutionStrategyTypeEnumAutomerge          ConflictResolutionStrategyTypeEnum = "AUTOMERGE"
+	ConflictResolutionStrategyTypeEnumNone              ConflictResolutionStrategyTypeEnum = "NONE"
+	ConflictResolutionStrategyTypeEnumAcceptSource      ConflictResolutionStrategyTypeEnum = "ACCEPT_SOURCE"
+	ConflictResolutionStrategyTypeEnumAcceptDestination ConflictResolutionStrategyTypeEnum = "ACCEPT_DESTINATION"
+	ConflictResolutionStrategyTypeEnumAutomerge         ConflictResolutionStrategyTypeEnum = "AUTOMERGE"
 )
 
 // Values returns all known values for ConflictResolutionStrategyTypeEnum. Note
@@ -105,9 +105,9 @@ type MergeOptionTypeEnum string
 
 // Enum values for MergeOptionTypeEnum
 const (
-	MergeOptionTypeEnumFast_forward_merge MergeOptionTypeEnum = "FAST_FORWARD_MERGE"
-	MergeOptionTypeEnumSquash_merge       MergeOptionTypeEnum = "SQUASH_MERGE"
-	MergeOptionTypeEnumThree_way_merge    MergeOptionTypeEnum = "THREE_WAY_MERGE"
+	MergeOptionTypeEnumFastForwardMerge MergeOptionTypeEnum = "FAST_FORWARD_MERGE"
+	MergeOptionTypeEnumSquashMerge      MergeOptionTypeEnum = "SQUASH_MERGE"
+	MergeOptionTypeEnumThreeWayMerge    MergeOptionTypeEnum = "THREE_WAY_MERGE"
 )
 
 // Values returns all known values for MergeOptionTypeEnum. Note that this can be
@@ -125,10 +125,10 @@ type ObjectTypeEnum string
 
 // Enum values for ObjectTypeEnum
 const (
-	ObjectTypeEnumFile          ObjectTypeEnum = "FILE"
-	ObjectTypeEnumDirectory     ObjectTypeEnum = "DIRECTORY"
-	ObjectTypeEnumGit_link      ObjectTypeEnum = "GIT_LINK"
-	ObjectTypeEnumSymbolic_link ObjectTypeEnum = "SYMBOLIC_LINK"
+	ObjectTypeEnumFile         ObjectTypeEnum = "FILE"
+	ObjectTypeEnumDirectory    ObjectTypeEnum = "DIRECTORY"
+	ObjectTypeEnumGitLink      ObjectTypeEnum = "GIT_LINK"
+	ObjectTypeEnumSymbolicLink ObjectTypeEnum = "SYMBOLIC_LINK"
 )
 
 // Values returns all known values for ObjectTypeEnum. Note that this can be
@@ -183,15 +183,15 @@ type PullRequestEventType string
 
 // Enum values for PullRequestEventType
 const (
-	PullRequestEventTypePull_request_created                  PullRequestEventType = "PULL_REQUEST_CREATED"
-	PullRequestEventTypePull_request_status_changed           PullRequestEventType = "PULL_REQUEST_STATUS_CHANGED"
-	PullRequestEventTypePull_request_source_reference_updated PullRequestEventType = "PULL_REQUEST_SOURCE_REFERENCE_UPDATED"
-	PullRequestEventTypePull_request_merge_state_changed      PullRequestEventType = "PULL_REQUEST_MERGE_STATE_CHANGED"
-	PullRequestEventTypePull_request_approval_rule_created    PullRequestEventType = "PULL_REQUEST_APPROVAL_RULE_CREATED"
-	PullRequestEventTypePull_request_approval_rule_updated    PullRequestEventType = "PULL_REQUEST_APPROVAL_RULE_UPDATED"
-	PullRequestEventTypePull_request_approval_rule_deleted    PullRequestEventType = "PULL_REQUEST_APPROVAL_RULE_DELETED"
-	PullRequestEventTypePull_request_approval_rule_overridden PullRequestEventType = "PULL_REQUEST_APPROVAL_RULE_OVERRIDDEN"
-	PullRequestEventTypePull_request_approval_state_changed   PullRequestEventType = "PULL_REQUEST_APPROVAL_STATE_CHANGED"
+	PullRequestEventTypePullRequestCreated                PullRequestEventType = "PULL_REQUEST_CREATED"
+	PullRequestEventTypePullRequestStatusChanged          PullRequestEventType = "PULL_REQUEST_STATUS_CHANGED"
+	PullRequestEventTypePullRequestSourceReferenceUpdated PullRequestEventType = "PULL_REQUEST_SOURCE_REFERENCE_UPDATED"
+	PullRequestEventTypePullRequestMergeStateChanged      PullRequestEventType = "PULL_REQUEST_MERGE_STATE_CHANGED"
+	PullRequestEventTypePullRequestApprovalRuleCreated    PullRequestEventType = "PULL_REQUEST_APPROVAL_RULE_CREATED"
+	PullRequestEventTypePullRequestApprovalRuleUpdated    PullRequestEventType = "PULL_REQUEST_APPROVAL_RULE_UPDATED"
+	PullRequestEventTypePullRequestApprovalRuleDeleted    PullRequestEventType = "PULL_REQUEST_APPROVAL_RULE_DELETED"
+	PullRequestEventTypePullRequestApprovalRuleOverridden PullRequestEventType = "PULL_REQUEST_APPROVAL_RULE_OVERRIDDEN"
+	PullRequestEventTypePullRequestApprovalStateChanged   PullRequestEventType = "PULL_REQUEST_APPROVAL_STATE_CHANGED"
 )
 
 // Values returns all known values for PullRequestEventType. Note that this can be
@@ -251,10 +251,10 @@ type ReplacementTypeEnum string
 
 // Enum values for ReplacementTypeEnum
 const (
-	ReplacementTypeEnumKeep_base        ReplacementTypeEnum = "KEEP_BASE"
-	ReplacementTypeEnumKeep_source      ReplacementTypeEnum = "KEEP_SOURCE"
-	ReplacementTypeEnumKeep_destination ReplacementTypeEnum = "KEEP_DESTINATION"
-	ReplacementTypeEnumUse_new_content  ReplacementTypeEnum = "USE_NEW_CONTENT"
+	ReplacementTypeEnumKeepBase        ReplacementTypeEnum = "KEEP_BASE"
+	ReplacementTypeEnumKeepSource      ReplacementTypeEnum = "KEEP_SOURCE"
+	ReplacementTypeEnumKeepDestination ReplacementTypeEnum = "KEEP_DESTINATION"
+	ReplacementTypeEnumUseNewContent   ReplacementTypeEnum = "USE_NEW_CONTENT"
 )
 
 // Values returns all known values for ReplacementTypeEnum. Note that this can be
@@ -273,10 +273,10 @@ type RepositoryTriggerEventEnum string
 
 // Enum values for RepositoryTriggerEventEnum
 const (
-	RepositoryTriggerEventEnumAll              RepositoryTriggerEventEnum = "all"
-	RepositoryTriggerEventEnumUpdate_reference RepositoryTriggerEventEnum = "updateReference"
-	RepositoryTriggerEventEnumCreate_reference RepositoryTriggerEventEnum = "createReference"
-	RepositoryTriggerEventEnumDelete_reference RepositoryTriggerEventEnum = "deleteReference"
+	RepositoryTriggerEventEnumAll             RepositoryTriggerEventEnum = "all"
+	RepositoryTriggerEventEnumUpdateReference RepositoryTriggerEventEnum = "updateReference"
+	RepositoryTriggerEventEnumCreateReference RepositoryTriggerEventEnum = "createReference"
+	RepositoryTriggerEventEnumDeleteReference RepositoryTriggerEventEnum = "deleteReference"
 )
 
 // Values returns all known values for RepositoryTriggerEventEnum. Note that this
@@ -295,8 +295,8 @@ type SortByEnum string
 
 // Enum values for SortByEnum
 const (
-	SortByEnumRepository_name SortByEnum = "repositoryName"
-	SortByEnumModified_date   SortByEnum = "lastModifiedDate"
+	SortByEnumRepositoryName SortByEnum = "repositoryName"
+	SortByEnumModifiedDate   SortByEnum = "lastModifiedDate"
 )
 
 // Values returns all known values for SortByEnum. Note that this can be expanded

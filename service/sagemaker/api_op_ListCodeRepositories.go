@@ -70,19 +70,18 @@ type ListCodeRepositoriesOutput struct {
 	// Gets a list of summaries of the Git repositories. Each summary specifies the
 	// following values for the repository:
 	//
-	//     * Name
+	// * Name
 	//
-	//     * Amazon Resource Name
-	// (ARN)
+	// * Amazon Resource Name (ARN)
 	//
-	//     * Creation time
+	// *
+	// Creation time
 	//
-	//     * Last modified time
+	// * Last modified time
 	//
-	//     * Configuration
-	// information, including the URL location of the repository and the ARN of the AWS
-	// Secrets Manager secret that contains the credentials used to access the
-	// repository.
+	// * Configuration information, including the
+	// URL location of the repository and the ARN of the AWS Secrets Manager secret
+	// that contains the credentials used to access the repository.
 	//
 	// This member is required.
 	CodeRepositorySummaryList []*types.CodeRepositorySummary

@@ -186,8 +186,8 @@ type SoftwareToUpdate string
 
 // Enum values for SoftwareToUpdate
 const (
-	SoftwareToUpdateCore      SoftwareToUpdate = "core"
-	SoftwareToUpdateOta_agent SoftwareToUpdate = "ota_agent"
+	SoftwareToUpdateCore     SoftwareToUpdate = "core"
+	SoftwareToUpdateOtaAgent SoftwareToUpdate = "ota_agent"
 )
 
 // Values returns all known values for SoftwareToUpdate. Note that this can be
@@ -254,7 +254,7 @@ type UpdateTargetsArchitecture string
 const (
 	UpdateTargetsArchitectureArmv6l  UpdateTargetsArchitecture = "armv6l"
 	UpdateTargetsArchitectureArmv7l  UpdateTargetsArchitecture = "armv7l"
-	UpdateTargetsArchitectureX86_64  UpdateTargetsArchitecture = "x86_64"
+	UpdateTargetsArchitectureX8664   UpdateTargetsArchitecture = "x86_64"
 	UpdateTargetsArchitectureAarch64 UpdateTargetsArchitecture = "aarch64"
 )
 
@@ -274,10 +274,10 @@ type UpdateTargetsOperatingSystem string
 
 // Enum values for UpdateTargetsOperatingSystem
 const (
-	UpdateTargetsOperatingSystemUbuntu       UpdateTargetsOperatingSystem = "ubuntu"
-	UpdateTargetsOperatingSystemRaspbian     UpdateTargetsOperatingSystem = "raspbian"
-	UpdateTargetsOperatingSystemAmazon_linux UpdateTargetsOperatingSystem = "amazon_linux"
-	UpdateTargetsOperatingSystemOpenwrt      UpdateTargetsOperatingSystem = "openwrt"
+	UpdateTargetsOperatingSystemUbuntu      UpdateTargetsOperatingSystem = "ubuntu"
+	UpdateTargetsOperatingSystemRaspbian    UpdateTargetsOperatingSystem = "raspbian"
+	UpdateTargetsOperatingSystemAmazonLinux UpdateTargetsOperatingSystem = "amazon_linux"
+	UpdateTargetsOperatingSystemOpenwrt     UpdateTargetsOperatingSystem = "openwrt"
 )
 
 // Values returns all known values for UpdateTargetsOperatingSystem. Note that this

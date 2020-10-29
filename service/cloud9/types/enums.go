@@ -6,8 +6,8 @@ type ConnectionType string
 
 // Enum values for ConnectionType
 const (
-	ConnectionTypeConnect_ssh ConnectionType = "CONNECT_SSH"
-	ConnectionTypeConnect_ssm ConnectionType = "CONNECT_SSM"
+	ConnectionTypeConnectSsh ConnectionType = "CONNECT_SSH"
+	ConnectionTypeConnectSsm ConnectionType = "CONNECT_SSM"
 )
 
 // Values returns all known values for ConnectionType. Note that this can be
@@ -24,11 +24,11 @@ type EnvironmentLifecycleStatus string
 
 // Enum values for EnvironmentLifecycleStatus
 const (
-	EnvironmentLifecycleStatusCreating      EnvironmentLifecycleStatus = "CREATING"
-	EnvironmentLifecycleStatusCreated       EnvironmentLifecycleStatus = "CREATED"
-	EnvironmentLifecycleStatusCreate_failed EnvironmentLifecycleStatus = "CREATE_FAILED"
-	EnvironmentLifecycleStatusDeleting      EnvironmentLifecycleStatus = "DELETING"
-	EnvironmentLifecycleStatusDelete_failed EnvironmentLifecycleStatus = "DELETE_FAILED"
+	EnvironmentLifecycleStatusCreating     EnvironmentLifecycleStatus = "CREATING"
+	EnvironmentLifecycleStatusCreated      EnvironmentLifecycleStatus = "CREATED"
+	EnvironmentLifecycleStatusCreateFailed EnvironmentLifecycleStatus = "CREATE_FAILED"
+	EnvironmentLifecycleStatusDeleting     EnvironmentLifecycleStatus = "DELETING"
+	EnvironmentLifecycleStatusDeleteFailed EnvironmentLifecycleStatus = "DELETE_FAILED"
 )
 
 // Values returns all known values for EnvironmentLifecycleStatus. Note that this
@@ -94,8 +94,8 @@ type MemberPermissions string
 
 // Enum values for MemberPermissions
 const (
-	MemberPermissionsRead_write MemberPermissions = "read-write"
-	MemberPermissionsRead_only  MemberPermissions = "read-only"
+	MemberPermissionsReadWrite MemberPermissions = "read-write"
+	MemberPermissionsReadOnly  MemberPermissions = "read-only"
 )
 
 // Values returns all known values for MemberPermissions. Note that this can be
@@ -112,9 +112,9 @@ type Permissions string
 
 // Enum values for Permissions
 const (
-	PermissionsOwner      Permissions = "owner"
-	PermissionsRead_write Permissions = "read-write"
-	PermissionsRead_only  Permissions = "read-only"
+	PermissionsOwner     Permissions = "owner"
+	PermissionsReadWrite Permissions = "read-write"
+	PermissionsReadOnly  Permissions = "read-only"
 )
 
 // Values returns all known values for Permissions. Note that this can be expanded

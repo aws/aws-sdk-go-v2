@@ -14,47 +14,46 @@ import (
 // supply data for training a model. A dataset group can contain at most three
 // datasets, one for each type of dataset:
 //
-//     * Interactions
+// * Interactions
 //
-//     * Items
+// * Items
 //
-//     *
-// Users
+// * Users
 //
-// To train a model (create a solution), a dataset group that contains an
-// Interactions dataset is required. Call CreateDataset to add a dataset to the
-// group. A dataset group can be in one of the following states:
+// To
+// train a model (create a solution), a dataset group that contains an Interactions
+// dataset is required. Call CreateDataset to add a dataset to the group. A dataset
+// group can be in one of the following states:
 //
-//     * CREATE
-// PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+// * CREATE PENDING > CREATE
+// IN_PROGRESS > ACTIVE -or- CREATE FAILED
 //
-//     * DELETE
-// PENDING
+// * DELETE PENDING
 //
-// To get the status of the dataset group, call DescribeDatasetGroup. If
-// the status shows as CREATE FAILED, the response includes a failureReason key,
-// which describes why the creation failed. You must wait until the status of the
-// dataset group is ACTIVE before adding a dataset to the group. You can specify an
-// AWS Key Management Service (KMS) key to encrypt the datasets in the group. If
-// you specify a KMS key, you must also include an AWS Identity and Access
-// Management (IAM) role that has permission to access the key. APIs that require a
-// dataset group ARN in the request
+// To get the status of
+// the dataset group, call DescribeDatasetGroup. If the status shows as CREATE
+// FAILED, the response includes a failureReason key, which describes why the
+// creation failed. You must wait until the status of the dataset group is ACTIVE
+// before adding a dataset to the group. You can specify an AWS Key Management
+// Service (KMS) key to encrypt the datasets in the group. If you specify a KMS
+// key, you must also include an AWS Identity and Access Management (IAM) role that
+// has permission to access the key. APIs that require a dataset group ARN in the
+// request
 //
-//     * CreateDataset
+// * CreateDataset
 //
-//     *
-// CreateEventTracker
+// * CreateEventTracker
 //
-//     * CreateSolution
+// * CreateSolution
 //
-// Related APIs
+// Related
+// APIs
 //
-//     *
-// ListDatasetGroups
+// * ListDatasetGroups
 //
-//     * DescribeDatasetGroup
+// * DescribeDatasetGroup
 //
-//     * DeleteDatasetGroup
+// * DeleteDatasetGroup
 func (c *Client) CreateDatasetGroup(ctx context.Context, params *CreateDatasetGroupInput, optFns ...func(*Options)) (*CreateDatasetGroupOutput, error) {
 	if params == nil {
 		params = &CreateDatasetGroupInput{}

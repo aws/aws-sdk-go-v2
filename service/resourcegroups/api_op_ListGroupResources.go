@@ -34,7 +34,7 @@ type ListGroupResourcesInput struct {
 	// ListGroupResources operation. Filters the results to include only those of the
 	// specified resource types.
 	//
-	//     * resource-type - Filter resources by their type.
+	// * resource-type - Filter resources by their type.
 	// Specify up to five resource types in the format AWS::ServiceCode::ResourceType.
 	// For example, AWS::EC2::Instance, or AWS::S3::Bucket.
 	//

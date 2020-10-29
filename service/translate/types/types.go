@@ -47,22 +47,22 @@ type InputDataConfig struct {
 	// You can specify one of the following multipurpose internet mail extension (MIME)
 	// types:
 	//
-	//     * text/html: The input data consists of one or more HTML files.
-	// Amazon Translate translates only the text that resides in the html element in
-	// each file.
+	// * text/html: The input data consists of one or more HTML files. Amazon
+	// Translate translates only the text that resides in the html element in each
+	// file.
 	//
-	//     * text/plain: The input data consists of one or more unformatted
-	// text files. Amazon Translate translates every character in this type of input.
+	// * text/plain: The input data consists of one or more unformatted text
+	// files. Amazon Translate translates every character in this type of input.
 	//
-	//
-	// * application/vnd.openxmlformats-officedocument.wordprocessingml.document: The
+	// *
+	// application/vnd.openxmlformats-officedocument.wordprocessingml.document: The
 	// input data consists of one or more Word documents (.docx).
 	//
-	//     *
+	// *
 	// application/vnd.openxmlformats-officedocument.presentationml.presentation: The
 	// input data consists of one or more PowerPoint Presentation files (.pptx).
 	//
-	//     *
+	// *
 	// application/vnd.openxmlformats-officedocument.spreadsheetml.sheet: The input
 	// data consists of one or more Excel Workbook files (.xlsx).
 	//

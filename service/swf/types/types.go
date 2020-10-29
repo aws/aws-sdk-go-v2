@@ -291,16 +291,16 @@ type ActivityTypeInfo struct {
 }
 
 // Provides the details of the CancelTimer decision. Access Control You can use IAM
-// policies to control this decision's access to Amazon SWF resources as follows:
+// policies to control this decision's access to Amazon SWF resources as
+// follows:
 //
+// * Use a Resource element with the domain name to limit the action to
+// only specified domains.
 //
-// * Use a Resource element with the domain name to limit the action to only
-// specified domains.
-//
-//     * Use an Action element to allow or deny permission to
+// * Use an Action element to allow or deny permission to
 // call this action.
 //
-//     * You cannot use an IAM policy to constrain this action's
+// * You cannot use an IAM policy to constrain this action's
 // parameters.
 //
 // If the caller doesn't have sufficient permissions to invoke the
@@ -349,20 +349,20 @@ type CancelTimerFailedEventAttributes struct {
 // can use IAM policies to control this decision's access to Amazon SWF resources
 // as follows:
 //
-//     * Use a Resource element with the domain name to limit the
-// action to only specified domains.
+// * Use a Resource element with the domain name to limit the action
+// to only specified domains.
 //
-//     * Use an Action element to allow or deny
-// permission to call this action.
+// * Use an Action element to allow or deny permission
+// to call this action.
 //
-//     * You cannot use an IAM policy to constrain
-// this action's parameters.
+// * You cannot use an IAM policy to constrain this action's
+// parameters.
 //
-// If the caller doesn't have sufficient permissions to
-// invoke the action, or the parameter values fall outside the specified
-// constraints, the action fails. The associated event attribute's cause parameter
-// is set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see
-// Using IAM to Manage Access to Amazon SWF Workflows
+// If the caller doesn't have sufficient permissions to invoke the
+// action, or the parameter values fall outside the specified constraints, the
+// action fails. The associated event attribute's cause parameter is set to
+// OPERATION_NOT_PERMITTED. For details and example IAM policies, see Using IAM to
+// Manage Access to Amazon SWF Workflows
 // (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type CancelWorkflowExecutionDecisionAttributes struct {
@@ -592,20 +592,20 @@ type CloseStatusFilter struct {
 // You can use IAM policies to control this decision's access to Amazon SWF
 // resources as follows:
 //
-//     * Use a Resource element with the domain name to
-// limit the action to only specified domains.
+// * Use a Resource element with the domain name to limit
+// the action to only specified domains.
 //
-//     * Use an Action element to
-// allow or deny permission to call this action.
+// * Use an Action element to allow or deny
+// permission to call this action.
 //
-//     * You cannot use an IAM
-// policy to constrain this action's parameters.
+// * You cannot use an IAM policy to constrain
+// this action's parameters.
 //
-// If the caller doesn't have
-// sufficient permissions to invoke the action, or the parameter values fall
-// outside the specified constraints, the action fails. The associated event
-// attribute's cause parameter is set to OPERATION_NOT_PERMITTED. For details and
-// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows
+// If the caller doesn't have sufficient permissions to
+// invoke the action, or the parameter values fall outside the specified
+// constraints, the action fails. The associated event attribute's cause parameter
+// is set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see
+// Using IAM to Manage Access to Amazon SWF Workflows
 // (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type CompleteWorkflowExecutionDecisionAttributes struct {
@@ -641,29 +641,29 @@ type CompleteWorkflowExecutionFailedEventAttributes struct {
 // Control You can use IAM policies to control this decision's access to Amazon SWF
 // resources as follows:
 //
-//     * Use a Resource element with the domain name to
-// limit the action to only specified domains.
+// * Use a Resource element with the domain name to limit
+// the action to only specified domains.
 //
-//     * Use an Action element to
-// allow or deny permission to call this action.
+// * Use an Action element to allow or deny
+// permission to call this action.
 //
-//     * Constrain the following
-// parameters by using a Condition element with the appropriate keys.
+// * Constrain the following parameters by using a
+// Condition element with the appropriate keys.
 //
-//         *
-// tag – A tag used to identify the workflow execution
+// * tag – A tag used to identify the
+// workflow execution
 //
-//         * taskList – String
-// constraint. The key is swf:taskList.name.
+// * taskList – String constraint. The key is
+// swf:taskList.name.
 //
-//         * workflowType.version –
-// String constraint. The key is swf:workflowType.version.
+// * workflowType.version – String constraint. The key is
+// swf:workflowType.version.
 //
-// If the caller doesn't
-// have sufficient permissions to invoke the action, or the parameter values fall
-// outside the specified constraints, the action fails. The associated event
-// attribute's cause parameter is set to OPERATION_NOT_PERMITTED. For details and
-// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows
+// If the caller doesn't have sufficient permissions to
+// invoke the action, or the parameter values fall outside the specified
+// constraints, the action fails. The associated event attribute's cause parameter
+// is set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see
+// Using IAM to Manage Access to Amazon SWF Workflows
 // (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type ContinueAsNewWorkflowExecutionDecisionAttributes struct {
@@ -674,21 +674,21 @@ type ContinueAsNewWorkflowExecutionDecisionAttributes struct {
 	// policy specified when registering the workflow type using RegisterWorkflowType.
 	// The supported child policies are:
 	//
-	//     * TERMINATE – The child executions are
+	// * TERMINATE – The child executions are
 	// terminated.
 	//
-	//     * REQUEST_CANCEL – A request to cancel is attempted for each
-	// child execution by recording a WorkflowExecutionCancelRequested event in its
-	// history. It is up to the decider to take appropriate actions when it receives an
+	// * REQUEST_CANCEL – A request to cancel is attempted for each child
+	// execution by recording a WorkflowExecutionCancelRequested event in its history.
+	// It is up to the decider to take appropriate actions when it receives an
 	// execution history with this event.
 	//
-	//     * ABANDON – No action is taken. The
-	// child executions continue to run.
+	// * ABANDON – No action is taken. The child
+	// executions continue to run.
 	//
-	// A child policy for this workflow execution
-	// must be specified either as a default for the workflow type or through this
-	// parameter. If neither this parameter is set nor a default child policy was
-	// specified at registration time then a fault is returned.
+	// A child policy for this workflow execution must be
+	// specified either as a default for the workflow type or through this parameter.
+	// If neither this parameter is set nor a default child policy was specified at
+	// registration time then a fault is returned.
 	ChildPolicy ChildPolicy
 
 	// If set, specifies the total duration for this workflow execution. This overrides
@@ -767,131 +767,131 @@ type ContinueAsNewWorkflowExecutionFailedEventAttributes struct {
 // Specifies a decision made by the decider. A decision can be one of these
 // types:
 //
-//     * CancelTimer – Cancels a previously started timer and records a
+// * CancelTimer – Cancels a previously started timer and records a
 // TimerCanceled event in the history.
 //
-//     * CancelWorkflowExecution – Closes the
+// * CancelWorkflowExecution – Closes the
 // workflow execution and records a WorkflowExecutionCanceled event in the
 // history.
 //
-//     * CompleteWorkflowExecution – Closes the workflow execution and
+// * CompleteWorkflowExecution – Closes the workflow execution and
 // records a WorkflowExecutionCompleted event in the history .
 //
-//     *
+// *
 // ContinueAsNewWorkflowExecution – Closes the workflow execution and starts a new
 // workflow execution of the same type using the same workflow ID and a unique run
 // Id. A WorkflowExecutionContinuedAsNew event is recorded in the history.
 //
-//     *
+// *
 // FailWorkflowExecution – Closes the workflow execution and records a
 // WorkflowExecutionFailed event in the history.
 //
-//     * RecordMarker – Records a
+// * RecordMarker – Records a
 // MarkerRecorded event in the history. Markers can be used for adding custom
 // information in the history for instance to let deciders know that they don't
 // need to look at the history beyond the marker event.
 //
-//     *
+// *
 // RequestCancelActivityTask – Attempts to cancel a previously scheduled activity
 // task. If the activity task was scheduled but has not been assigned to a worker,
 // then it is canceled. If the activity task was already assigned to a worker, then
 // the worker is informed that cancellation has been requested in the response to
 // RecordActivityTaskHeartbeat.
 //
-//     * RequestCancelExternalWorkflowExecution –
+// * RequestCancelExternalWorkflowExecution –
 // Requests that a request be made to cancel the specified external workflow
 // execution and records a RequestCancelExternalWorkflowExecutionInitiated event in
 // the history.
 //
-//     * ScheduleActivityTask – Schedules an activity task.
+// * ScheduleActivityTask – Schedules an activity task.
 //
-//     *
+// *
 // SignalExternalWorkflowExecution – Requests a signal to be delivered to the
 // specified external workflow execution and records a
 // SignalExternalWorkflowExecutionInitiated event in the history.
 //
-//     *
+// *
 // StartChildWorkflowExecution – Requests that a child workflow execution be
 // started and records a StartChildWorkflowExecutionInitiated event in the history.
 // The child workflow execution is a separate workflow execution with its own
 // history.
 //
-//     * StartTimer – Starts a timer for this workflow execution and
-// records a TimerStarted event in the history. This timer fires after the
-// specified delay and record a TimerFired event.
+// * StartTimer – Starts a timer for this workflow execution and records
+// a TimerStarted event in the history. This timer fires after the specified delay
+// and record a TimerFired event.
 //
-// Access Control If you grant
-// permission to use RespondDecisionTaskCompleted, you can use IAM policies to
-// express permissions for the list of decisions returned by this action as if they
-// were members of the API. Treating decisions as a pseudo API maintains a uniform
-// conceptual model and helps keep policies readable. For details and example IAM
-// policies, see Using IAM to Manage Access to Amazon SWF Workflows
+// Access Control If you grant permission to use
+// RespondDecisionTaskCompleted, you can use IAM policies to express permissions
+// for the list of decisions returned by this action as if they were members of the
+// API. Treating decisions as a pseudo API maintains a uniform conceptual model and
+// helps keep policies readable. For details and example IAM policies, see Using
+// IAM to Manage Access to Amazon SWF Workflows
 // (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide. Decision Failure Decisions can fail for
 // several reasons
 //
-//     * The ordering of decisions should follow a logical flow.
-// Some decisions might not make sense in the current context of the workflow
-// execution and therefore fails.
+// * The ordering of decisions should follow a logical flow. Some
+// decisions might not make sense in the current context of the workflow execution
+// and therefore fails.
 //
-//     * A limit on your account was reached.
+// * A limit on your account was reached.
 //
+// * The decision
+// lacks sufficient permissions.
 //
-// * The decision lacks sufficient permissions.
-//
-// One of the following events might
-// be added to the history to indicate an error. The event attribute's cause
-// parameter indicates the cause. If cause is set to OPERATION_NOT_PERMITTED, the
-// decision failed because it lacked sufficient permissions. For details and
-// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows
+// One of the following events might be added to the
+// history to indicate an error. The event attribute's cause parameter indicates
+// the cause. If cause is set to OPERATION_NOT_PERMITTED, the decision failed
+// because it lacked sufficient permissions. For details and example IAM policies,
+// see Using IAM to Manage Access to Amazon SWF Workflows
 // (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-//     * ScheduleActivityTaskFailed – A
+// * ScheduleActivityTaskFailed – A
 // ScheduleActivityTask decision failed. This could happen if the activity type
 // specified in the decision isn't registered, is in a deprecated state, or the
 // decision isn't properly configured.
 //
-//     * RequestCancelActivityTaskFailed – A
+// * RequestCancelActivityTaskFailed – A
 // RequestCancelActivityTask decision failed. This could happen if there is no open
 // activity task with the specified activityId.
 //
-//     * StartTimerFailed – A
-// StartTimer decision failed. This could happen if there is another open timer
-// with the same timerId.
+// * StartTimerFailed – A StartTimer
+// decision failed. This could happen if there is another open timer with the same
+// timerId.
 //
-//     * CancelTimerFailed – A CancelTimer decision failed.
-// This could happen if there is no open timer with the specified timerId.
+// * CancelTimerFailed – A CancelTimer decision failed. This could happen
+// if there is no open timer with the specified timerId.
 //
-//     *
+// *
 // StartChildWorkflowExecutionFailed – A StartChildWorkflowExecution decision
 // failed. This could happen if the workflow type specified isn't registered, is
 // deprecated, or the decision isn't properly configured.
 //
-//     *
+// *
 // SignalExternalWorkflowExecutionFailed – A SignalExternalWorkflowExecution
 // decision failed. This could happen if the workflowID specified in the decision
 // was incorrect.
 //
-//     * RequestCancelExternalWorkflowExecutionFailed – A
+// * RequestCancelExternalWorkflowExecutionFailed – A
 // RequestCancelExternalWorkflowExecution decision failed. This could happen if the
 // workflowID specified in the decision was incorrect.
 //
-//     *
+// *
 // CancelWorkflowExecutionFailed – A CancelWorkflowExecution decision failed. This
 // could happen if there is an unhandled decision task pending in the workflow
 // execution.
 //
-//     * CompleteWorkflowExecutionFailed – A CompleteWorkflowExecution
+// * CompleteWorkflowExecutionFailed – A CompleteWorkflowExecution
 // decision failed. This could happen if there is an unhandled decision task
 // pending in the workflow execution.
 //
-//     * ContinueAsNewWorkflowExecutionFailed –
-// A ContinueAsNewWorkflowExecution decision failed. This could happen if there is
-// an unhandled decision task pending in the workflow execution or the
+// * ContinueAsNewWorkflowExecutionFailed – A
+// ContinueAsNewWorkflowExecution decision failed. This could happen if there is an
+// unhandled decision task pending in the workflow execution or the
 // ContinueAsNewWorkflowExecution decision was not configured correctly.
 //
-//     *
+// *
 // FailWorkflowExecutionFailed – A FailWorkflowExecution decision failed. This
 // could happen if there is an unhandled decision task pending in the workflow
 // execution.
@@ -914,39 +914,39 @@ type ContinueAsNewWorkflowExecutionFailedEventAttributes struct {
 // decision type field to one of the above decision values, and then set the
 // corresponding attributes field shown below:
 //
-//     *
+// *
 // ScheduleActivityTaskDecisionAttributes
 //
-//     *
+// *
 // RequestCancelActivityTaskDecisionAttributes
 //
-//     *
+// *
 // CompleteWorkflowExecutionDecisionAttributes
 //
-//     *
+// *
 // FailWorkflowExecutionDecisionAttributes
 //
-//     *
+// *
 // CancelWorkflowExecutionDecisionAttributes
 //
-//     *
+// *
 // ContinueAsNewWorkflowExecutionDecisionAttributes
 //
-//     *
+// *
 // RecordMarkerDecisionAttributes
 //
-//     * StartTimerDecisionAttributes
+// * StartTimerDecisionAttributes
 //
-//     *
+// *
 // CancelTimerDecisionAttributes
 //
-//     *
+// *
 // SignalExternalWorkflowExecutionDecisionAttributes
 //
-//     *
+// *
 // RequestCancelExternalWorkflowExecutionDecisionAttributes
 //
-//     *
+// *
 // StartChildWorkflowExecutionDecisionAttributes
 type Decision struct {
 
@@ -1109,11 +1109,11 @@ type DomainInfo struct {
 
 	// The status of the domain:
 	//
-	//     * REGISTERED – The domain is properly registered
-	// and available. You can use this domain for registering types and creating new
+	// * REGISTERED – The domain is properly registered and
+	// available. You can use this domain for registering types and creating new
 	// workflow executions.
 	//
-	//     * DEPRECATED – The domain was deprecated using
+	// * DEPRECATED – The domain was deprecated using
 	// DeprecateDomain, but is still in use. You should not create new workflow
 	// executions in this domain.
 	//
@@ -1181,20 +1181,20 @@ type ExternalWorkflowExecutionSignaledEventAttributes struct {
 // can use IAM policies to control this decision's access to Amazon SWF resources
 // as follows:
 //
-//     * Use a Resource element with the domain name to limit the
-// action to only specified domains.
+// * Use a Resource element with the domain name to limit the action
+// to only specified domains.
 //
-//     * Use an Action element to allow or deny
-// permission to call this action.
+// * Use an Action element to allow or deny permission
+// to call this action.
 //
-//     * You cannot use an IAM policy to constrain
-// this action's parameters.
+// * You cannot use an IAM policy to constrain this action's
+// parameters.
 //
-// If the caller doesn't have sufficient permissions to
-// invoke the action, or the parameter values fall outside the specified
-// constraints, the action fails. The associated event attribute's cause parameter
-// is set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see
-// Using IAM to Manage Access to Amazon SWF Workflows
+// If the caller doesn't have sufficient permissions to invoke the
+// action, or the parameter values fall outside the specified constraints, the
+// action fails. The associated event attribute's cause parameter is set to
+// OPERATION_NOT_PERMITTED. For details and example IAM policies, see Using IAM to
+// Manage Access to Amazon SWF Workflows
 // (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type FailWorkflowExecutionDecisionAttributes struct {
@@ -1230,175 +1230,171 @@ type FailWorkflowExecutionFailedEventAttributes struct {
 
 // Event within a workflow execution. A history event can be one of these types:
 //
+// *
+// ActivityTaskCancelRequested – A RequestCancelActivityTask decision was received
+// by the system.
 //
-// * ActivityTaskCancelRequested – A RequestCancelActivityTask decision was
-// received by the system.
+// * ActivityTaskCanceled – The activity task was successfully
+// canceled.
 //
-//     * ActivityTaskCanceled – The activity task was
-// successfully canceled.
+// * ActivityTaskCompleted – An activity worker successfully completed
+// an activity task by calling RespondActivityTaskCompleted.
 //
-//     * ActivityTaskCompleted – An activity worker
-// successfully completed an activity task by calling
-// RespondActivityTaskCompleted.
+// * ActivityTaskFailed
+// – An activity worker failed an activity task by calling
+// RespondActivityTaskFailed.
 //
-//     * ActivityTaskFailed – An activity worker
-// failed an activity task by calling RespondActivityTaskFailed.
+// * ActivityTaskScheduled – An activity task was
+// scheduled for execution.
 //
-//     *
-// ActivityTaskScheduled – An activity task was scheduled for execution.
+// * ActivityTaskStarted – The scheduled activity task
+// was dispatched to a worker.
 //
-//     *
-// ActivityTaskStarted – The scheduled activity task was dispatched to a worker.
+// * ActivityTaskTimedOut – The activity task timed
+// out.
 //
+// * CancelTimerFailed – Failed to process CancelTimer decision. This happens
+// when the decision isn't configured properly, for example no timer exists with
+// the specified timer Id.
 //
-// * ActivityTaskTimedOut – The activity task timed out.
+// * CancelWorkflowExecutionFailed – A request to cancel a
+// workflow execution failed.
 //
-//     * CancelTimerFailed –
-// Failed to process CancelTimer decision. This happens when the decision isn't
-// configured properly, for example no timer exists with the specified timer Id.
+// * ChildWorkflowExecutionCanceled – A child workflow
+// execution, started by this workflow execution, was canceled and closed.
 //
-//
-// * CancelWorkflowExecutionFailed – A request to cancel a workflow execution
-// failed.
-//
-//     * ChildWorkflowExecutionCanceled – A child workflow execution,
-// started by this workflow execution, was canceled and closed.
-//
-//     *
+// *
 // ChildWorkflowExecutionCompleted – A child workflow execution, started by this
 // workflow execution, completed successfully and was closed.
 //
-//     *
+// *
 // ChildWorkflowExecutionFailed – A child workflow execution, started by this
 // workflow execution, failed to complete successfully and was closed.
 //
-//     *
+// *
 // ChildWorkflowExecutionStarted – A child workflow execution was successfully
 // started.
 //
-//     * ChildWorkflowExecutionTerminated – A child workflow execution,
+// * ChildWorkflowExecutionTerminated – A child workflow execution,
 // started by this workflow execution, was terminated.
 //
-//     *
+// *
 // ChildWorkflowExecutionTimedOut – A child workflow execution, started by this
 // workflow execution, timed out and was closed.
 //
-//     *
-// CompleteWorkflowExecutionFailed – The workflow execution failed to complete.
+// * CompleteWorkflowExecutionFailed
+// – The workflow execution failed to complete.
 //
+// *
+// ContinueAsNewWorkflowExecutionFailed – The workflow execution failed to complete
+// after being continued as a new workflow execution.
 //
-// * ContinueAsNewWorkflowExecutionFailed – The workflow execution failed to
-// complete after being continued as a new workflow execution.
+// * DecisionTaskCompleted –
+// The decider successfully completed a decision task by calling
+// RespondDecisionTaskCompleted.
 //
-//     *
-// DecisionTaskCompleted – The decider successfully completed a decision task by
-// calling RespondDecisionTaskCompleted.
+// * DecisionTaskScheduled – A decision task was
+// scheduled for the workflow execution.
 //
-//     * DecisionTaskScheduled – A decision
-// task was scheduled for the workflow execution.
+// * DecisionTaskStarted – The decision task
+// was dispatched to a decider.
 //
-//     * DecisionTaskStarted – The
-// decision task was dispatched to a decider.
+// * DecisionTaskTimedOut – The decision task timed
+// out.
 //
-//     * DecisionTaskTimedOut – The
-// decision task timed out.
+// * ExternalWorkflowExecutionCancelRequested – Request to cancel an external
+// workflow execution was successfully delivered to the target execution.
 //
-//     * ExternalWorkflowExecutionCancelRequested –
-// Request to cancel an external workflow execution was successfully delivered to
-// the target execution.
+// *
+// ExternalWorkflowExecutionSignaled – A signal, requested by this workflow
+// execution, was successfully delivered to the target external workflow
+// execution.
 //
-//     * ExternalWorkflowExecutionSignaled – A signal,
-// requested by this workflow execution, was successfully delivered to the target
-// external workflow execution.
+// * FailWorkflowExecutionFailed – A request to mark a workflow
+// execution as failed, itself failed.
 //
-//     * FailWorkflowExecutionFailed – A request to
-// mark a workflow execution as failed, itself failed.
+// * MarkerRecorded – A marker was recorded in
+// the workflow history as the result of a RecordMarker decision.
 //
-//     * MarkerRecorded – A
-// marker was recorded in the workflow history as the result of a RecordMarker
-// decision.
+// *
+// RecordMarkerFailed – A RecordMarker decision was returned as failed.
 //
-//     * RecordMarkerFailed – A RecordMarker decision was returned as
-// failed.
+// *
+// RequestCancelActivityTaskFailed – Failed to process RequestCancelActivityTask
+// decision. This happens when the decision isn't configured properly.
 //
-//     * RequestCancelActivityTaskFailed – Failed to process
-// RequestCancelActivityTask decision. This happens when the decision isn't
-// configured properly.
+// *
+// RequestCancelExternalWorkflowExecutionFailed – Request to cancel an external
+// workflow execution failed.
 //
-//     * RequestCancelExternalWorkflowExecutionFailed –
-// Request to cancel an external workflow execution failed.
+// * RequestCancelExternalWorkflowExecutionInitiated –
+// A request was made to request the cancellation of an external workflow
+// execution.
 //
-//     *
-// RequestCancelExternalWorkflowExecutionInitiated – A request was made to request
-// the cancellation of an external workflow execution.
+// * ScheduleActivityTaskFailed – Failed to process
+// ScheduleActivityTask decision. This happens when the decision isn't configured
+// properly, for example the activity type specified isn't registered.
 //
-//     *
-// ScheduleActivityTaskFailed – Failed to process ScheduleActivityTask decision.
-// This happens when the decision isn't configured properly, for example the
-// activity type specified isn't registered.
-//
-//     *
+// *
 // SignalExternalWorkflowExecutionFailed – The request to signal an external
 // workflow execution failed.
 //
-//     * SignalExternalWorkflowExecutionInitiated – A
+// * SignalExternalWorkflowExecutionInitiated – A
 // request to signal an external workflow was made.
 //
-//     * StartActivityTaskFailed
-// – A scheduled activity task failed to start.
+// * StartActivityTaskFailed – A
+// scheduled activity task failed to start.
 //
-//     *
-// StartChildWorkflowExecutionFailed – Failed to process
-// StartChildWorkflowExecution decision. This happens when the decision isn't
-// configured properly, for example the workflow type specified isn't registered.
+// * StartChildWorkflowExecutionFailed –
+// Failed to process StartChildWorkflowExecution decision. This happens when the
+// decision isn't configured properly, for example the workflow type specified
+// isn't registered.
 //
+// * StartChildWorkflowExecutionInitiated – A request was made
+// to start a child workflow execution.
 //
-// * StartChildWorkflowExecutionInitiated – A request was made to start a child
-// workflow execution.
+// * StartTimerFailed – Failed to process
+// StartTimer decision. This happens when the decision isn't configured properly,
+// for example a timer already exists with the specified timer Id.
 //
-//     * StartTimerFailed – Failed to process StartTimer
-// decision. This happens when the decision isn't configured properly, for example
-// a timer already exists with the specified timer Id.
-//
-//     * TimerCanceled – A
-// timer, previously started for this workflow execution, was successfully
+// * TimerCanceled
+// – A timer, previously started for this workflow execution, was successfully
 // canceled.
 //
-//     * TimerFired – A timer, previously started for this workflow
+// * TimerFired – A timer, previously started for this workflow
 // execution, fired.
 //
-//     * TimerStarted – A timer was started for the workflow
+// * TimerStarted – A timer was started for the workflow
 // execution due to a StartTimer decision.
 //
-//     * WorkflowExecutionCancelRequested
-// – A request to cancel this workflow execution was made.
+// * WorkflowExecutionCancelRequested – A
+// request to cancel this workflow execution was made.
 //
-//     *
-// WorkflowExecutionCanceled – The workflow execution was successfully canceled and
-// closed.
+// * WorkflowExecutionCanceled
+// – The workflow execution was successfully canceled and closed.
 //
-//     * WorkflowExecutionCompleted – The workflow execution was closed
-// due to successful completion.
+// *
+// WorkflowExecutionCompleted – The workflow execution was closed due to successful
+// completion.
 //
-//     * WorkflowExecutionContinuedAsNew – The
-// workflow execution was closed and a new execution of the same type was created
-// with the same workflowId.
+// * WorkflowExecutionContinuedAsNew – The workflow execution was
+// closed and a new execution of the same type was created with the same
+// workflowId.
 //
-//     * WorkflowExecutionFailed – The workflow
-// execution closed due to a failure.
+// * WorkflowExecutionFailed – The workflow execution closed due to a
+// failure.
 //
-//     * WorkflowExecutionSignaled – An
-// external signal was received for the workflow execution.
+// * WorkflowExecutionSignaled – An external signal was received for the
+// workflow execution.
 //
-//     *
-// WorkflowExecutionStarted – The workflow execution was started.
+// * WorkflowExecutionStarted – The workflow execution was
+// started.
 //
-//     *
-// WorkflowExecutionTerminated – The workflow execution was terminated.
+// * WorkflowExecutionTerminated – The workflow execution was
+// terminated.
 //
-//     *
-// WorkflowExecutionTimedOut – The workflow execution was closed because a time out
-// was exceeded.
+// * WorkflowExecutionTimedOut – The workflow execution was closed
+// because a time out was exceeded.
 type HistoryEvent struct {
 
 	// The system generated ID of the event. This ID uniquely identifies the event with
@@ -1807,20 +1803,20 @@ type MarkerRecordedEventAttributes struct {
 // IAM policies to control this decision's access to Amazon SWF resources as
 // follows:
 //
-//     * Use a Resource element with the domain name to limit the action
-// to only specified domains.
+// * Use a Resource element with the domain name to limit the action to
+// only specified domains.
 //
-//     * Use an Action element to allow or deny
-// permission to call this action.
+// * Use an Action element to allow or deny permission to
+// call this action.
 //
-//     * You cannot use an IAM policy to constrain
-// this action's parameters.
+// * You cannot use an IAM policy to constrain this action's
+// parameters.
 //
-// If the caller doesn't have sufficient permissions to
-// invoke the action, or the parameter values fall outside the specified
-// constraints, the action fails. The associated event attribute's cause parameter
-// is set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see
-// Using IAM to Manage Access to Amazon SWF Workflows
+// If the caller doesn't have sufficient permissions to invoke the
+// action, or the parameter values fall outside the specified constraints, the
+// action fails. The associated event attribute's cause parameter is set to
+// OPERATION_NOT_PERMITTED. For details and example IAM policies, see Using IAM to
+// Manage Access to Amazon SWF Workflows
 // (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type RecordMarkerDecisionAttributes struct {
@@ -1865,20 +1861,20 @@ type RecordMarkerFailedEventAttributes struct {
 // You can use IAM policies to control this decision's access to Amazon SWF
 // resources as follows:
 //
-//     * Use a Resource element with the domain name to
-// limit the action to only specified domains.
+// * Use a Resource element with the domain name to limit
+// the action to only specified domains.
 //
-//     * Use an Action element to
-// allow or deny permission to call this action.
+// * Use an Action element to allow or deny
+// permission to call this action.
 //
-//     * You cannot use an IAM
-// policy to constrain this action's parameters.
+// * You cannot use an IAM policy to constrain
+// this action's parameters.
 //
-// If the caller doesn't have
-// sufficient permissions to invoke the action, or the parameter values fall
-// outside the specified constraints, the action fails. The associated event
-// attribute's cause parameter is set to OPERATION_NOT_PERMITTED. For details and
-// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows
+// If the caller doesn't have sufficient permissions to
+// invoke the action, or the parameter values fall outside the specified
+// constraints, the action fails. The associated event attribute's cause parameter
+// is set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see
+// Using IAM to Manage Access to Amazon SWF Workflows
 // (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type RequestCancelActivityTaskDecisionAttributes struct {
@@ -1920,20 +1916,20 @@ type RequestCancelActivityTaskFailedEventAttributes struct {
 // Access Control You can use IAM policies to control this decision's access to
 // Amazon SWF resources as follows:
 //
-//     * Use a Resource element with the domain
-// name to limit the action to only specified domains.
+// * Use a Resource element with the domain name
+// to limit the action to only specified domains.
 //
-//     * Use an Action element
-// to allow or deny permission to call this action.
+// * Use an Action element to allow
+// or deny permission to call this action.
 //
-//     * You cannot use an IAM
-// policy to constrain this action's parameters.
+// * You cannot use an IAM policy to
+// constrain this action's parameters.
 //
-// If the caller doesn't have
-// sufficient permissions to invoke the action, or the parameter values fall
-// outside the specified constraints, the action fails. The associated event
-// attribute's cause parameter is set to OPERATION_NOT_PERMITTED. For details and
-// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows
+// If the caller doesn't have sufficient
+// permissions to invoke the action, or the parameter values fall outside the
+// specified constraints, the action fails. The associated event attribute's cause
+// parameter is set to OPERATION_NOT_PERMITTED. For details and example IAM
+// policies, see Using IAM to Manage Access to Amazon SWF Workflows
 // (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type RequestCancelExternalWorkflowExecutionDecisionAttributes struct {
@@ -2037,23 +2033,22 @@ type ResourceTag struct {
 // can use IAM policies to control this decision's access to Amazon SWF resources
 // as follows:
 //
-//     * Use a Resource element with the domain name to limit the
-// action to only specified domains.
+// * Use a Resource element with the domain name to limit the action
+// to only specified domains.
 //
-//     * Use an Action element to allow or deny
-// permission to call this action.
+// * Use an Action element to allow or deny permission
+// to call this action.
 //
-//     * Constrain the following parameters by
-// using a Condition element with the appropriate keys.
+// * Constrain the following parameters by using a Condition
+// element with the appropriate keys.
 //
-//         *
-// activityType.name – String constraint. The key is swf:activityType.name.
+// * activityType.name – String constraint. The
+// key is swf:activityType.name.
 //
+// * activityType.version – String constraint. The
+// key is swf:activityType.version.
 //
-// * activityType.version – String constraint. The key is
-// swf:activityType.version.
-//
-//         * taskList – String constraint. The key is
+// * taskList – String constraint. The key is
 // swf:taskList.name.
 //
 // If the caller doesn't have sufficient permissions to invoke
@@ -2241,20 +2236,20 @@ type ScheduleLambdaFunctionFailedEventAttributes struct {
 // Control You can use IAM policies to control this decision's access to Amazon SWF
 // resources as follows:
 //
-//     * Use a Resource element with the domain name to
-// limit the action to only specified domains.
+// * Use a Resource element with the domain name to limit
+// the action to only specified domains.
 //
-//     * Use an Action element to
-// allow or deny permission to call this action.
+// * Use an Action element to allow or deny
+// permission to call this action.
 //
-//     * You cannot use an IAM
-// policy to constrain this action's parameters.
+// * You cannot use an IAM policy to constrain
+// this action's parameters.
 //
-// If the caller doesn't have
-// sufficient permissions to invoke the action, or the parameter values fall
-// outside the specified constraints, the action fails. The associated event
-// attribute's cause parameter is set to OPERATION_NOT_PERMITTED. For details and
-// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows
+// If the caller doesn't have sufficient permissions to
+// invoke the action, or the parameter values fall outside the specified
+// constraints, the action fails. The associated event attribute's cause parameter
+// is set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see
+// Using IAM to Manage Access to Amazon SWF Workflows
 // (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type SignalExternalWorkflowExecutionDecisionAttributes struct {
@@ -2362,33 +2357,32 @@ type SignalExternalWorkflowExecutionInitiatedEventAttributes struct {
 // You can use IAM policies to control this decision's access to Amazon SWF
 // resources as follows:
 //
-//     * Use a Resource element with the domain name to
-// limit the action to only specified domains.
+// * Use a Resource element with the domain name to limit
+// the action to only specified domains.
 //
-//     * Use an Action element to
-// allow or deny permission to call this action.
+// * Use an Action element to allow or deny
+// permission to call this action.
 //
-//     * Constrain the following
-// parameters by using a Condition element with the appropriate keys.
+// * Constrain the following parameters by using a
+// Condition element with the appropriate keys.
 //
-//         *
-// tagList.member.N – The key is "swf:tagList.N" where N is the tag number from 0
-// to 4, inclusive.
+// * tagList.member.N – The key is
+// "swf:tagList.N" where N is the tag number from 0 to 4, inclusive.
 //
-//         * taskList – String constraint. The key is
-// swf:taskList.name.
+// * taskList –
+// String constraint. The key is swf:taskList.name.
 //
-//         * workflowType.name – String constraint. The key is
-// swf:workflowType.name.
+// * workflowType.name – String
+// constraint. The key is swf:workflowType.name.
 //
-//         * workflowType.version – String constraint. The
-// key is swf:workflowType.version.
+// * workflowType.version – String
+// constraint. The key is swf:workflowType.version.
 //
-// If the caller doesn't have sufficient
-// permissions to invoke the action, or the parameter values fall outside the
-// specified constraints, the action fails. The associated event attribute's cause
-// parameter is set to OPERATION_NOT_PERMITTED. For details and example IAM
-// policies, see Using IAM to Manage Access to Amazon SWF Workflows
+// If the caller doesn't have
+// sufficient permissions to invoke the action, or the parameter values fall
+// outside the specified constraints, the action fails. The associated event
+// attribute's cause parameter is set to OPERATION_NOT_PERMITTED. For details and
+// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows
 // (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 type StartChildWorkflowExecutionDecisionAttributes struct {
@@ -2412,22 +2406,22 @@ type StartChildWorkflowExecutionDecisionAttributes struct {
 	// policy overrides the default child policy specified when registering the
 	// workflow type using RegisterWorkflowType. The supported child policies are:
 	//
+	// *
+	// TERMINATE – The child executions are terminated.
 	//
-	// * TERMINATE – The child executions are terminated.
-	//
-	//     * REQUEST_CANCEL – A
-	// request to cancel is attempted for each child execution by recording a
+	// * REQUEST_CANCEL – A request
+	// to cancel is attempted for each child execution by recording a
 	// WorkflowExecutionCancelRequested event in its history. It is up to the decider
 	// to take appropriate actions when it receives an execution history with this
 	// event.
 	//
-	//     * ABANDON – No action is taken. The child executions continue to
-	// run.
+	// * ABANDON – No action is taken. The child executions continue to run.
 	//
-	// A child policy for this workflow execution must be specified either as a
-	// default for the workflow type or through this parameter. If neither this
-	// parameter is set nor a default child policy was specified at registration time
-	// then a fault is returned.
+	// A
+	// child policy for this workflow execution must be specified either as a default
+	// for the workflow type or through this parameter. If neither this parameter is
+	// set nor a default child policy was specified at registration time then a fault
+	// is returned.
 	ChildPolicy ChildPolicy
 
 	// The data attached to the event that can be used by the decider in subsequent
@@ -2543,17 +2537,16 @@ type StartChildWorkflowExecutionInitiatedEventAttributes struct {
 	// terminated by explicitly calling the TerminateWorkflowExecution action or due to
 	// an expired timeout. The supported child policies are:
 	//
-	//     * TERMINATE – The
-	// child executions are terminated.
+	// * TERMINATE – The child
+	// executions are terminated.
 	//
-	//     * REQUEST_CANCEL – A request to cancel is
-	// attempted for each child execution by recording a
-	// WorkflowExecutionCancelRequested event in its history. It is up to the decider
-	// to take appropriate actions when it receives an execution history with this
-	// event.
+	// * REQUEST_CANCEL – A request to cancel is attempted
+	// for each child execution by recording a WorkflowExecutionCancelRequested event
+	// in its history. It is up to the decider to take appropriate actions when it
+	// receives an execution history with this event.
 	//
-	//     * ABANDON – No action is taken. The child executions continue to
-	// run.
+	// * ABANDON – No action is taken.
+	// The child executions continue to run.
 	//
 	// This member is required.
 	ChildPolicy ChildPolicy
@@ -2638,16 +2631,16 @@ type StartLambdaFunctionFailedEventAttributes struct {
 }
 
 // Provides the details of the StartTimer decision. Access Control You can use IAM
-// policies to control this decision's access to Amazon SWF resources as follows:
+// policies to control this decision's access to Amazon SWF resources as
+// follows:
 //
+// * Use a Resource element with the domain name to limit the action to
+// only specified domains.
 //
-// * Use a Resource element with the domain name to limit the action to only
-// specified domains.
-//
-//     * Use an Action element to allow or deny permission to
+// * Use an Action element to allow or deny permission to
 // call this action.
 //
-//     * You cannot use an IAM policy to constrain this action's
+// * You cannot use an IAM policy to constrain this action's
 // parameters.
 //
 // If the caller doesn't have sufficient permissions to invoke the
@@ -2867,17 +2860,16 @@ type WorkflowExecutionConfiguration struct {
 	// is terminated, by calling the TerminateWorkflowExecution action explicitly or
 	// due to an expired timeout. The supported child policies are:
 	//
-	//     * TERMINATE –
-	// The child executions are terminated.
+	// * TERMINATE – The
+	// child executions are terminated.
 	//
-	//     * REQUEST_CANCEL – A request to cancel
-	// is attempted for each child execution by recording a
+	// * REQUEST_CANCEL – A request to cancel is
+	// attempted for each child execution by recording a
 	// WorkflowExecutionCancelRequested event in its history. It is up to the decider
 	// to take appropriate actions when it receives an execution history with this
 	// event.
 	//
-	//     * ABANDON – No action is taken. The child executions continue to
-	// run.
+	// * ABANDON – No action is taken. The child executions continue to run.
 	//
 	// This member is required.
 	ChildPolicy ChildPolicy
@@ -2920,17 +2912,16 @@ type WorkflowExecutionContinuedAsNewEventAttributes struct {
 	// is terminated by calling the TerminateWorkflowExecution action explicitly or due
 	// to an expired timeout. The supported child policies are:
 	//
-	//     * TERMINATE – The
+	// * TERMINATE – The
 	// child executions are terminated.
 	//
-	//     * REQUEST_CANCEL – A request to cancel is
+	// * REQUEST_CANCEL – A request to cancel is
 	// attempted for each child execution by recording a
 	// WorkflowExecutionCancelRequested event in its history. It is up to the decider
 	// to take appropriate actions when it receives an execution history with this
 	// event.
 	//
-	//     * ABANDON – No action is taken. The child executions continue to
-	// run.
+	// * ABANDON – No action is taken. The child executions continue to run.
 	//
 	// This member is required.
 	ChildPolicy ChildPolicy
@@ -3039,24 +3030,24 @@ type WorkflowExecutionInfo struct {
 	// If the execution status is closed then this specifies how the execution was
 	// closed:
 	//
-	//     * COMPLETED – the execution was successfully completed.
+	// * COMPLETED – the execution was successfully completed.
 	//
-	//     *
-	// CANCELED – the execution was canceled.Cancellation allows the implementation to
-	// gracefully clean up before the execution is closed.
+	// * CANCELED –
+	// the execution was canceled.Cancellation allows the implementation to gracefully
+	// clean up before the execution is closed.
 	//
-	//     * TERMINATED – the
-	// execution was force terminated.
+	// * TERMINATED – the execution was force
+	// terminated.
 	//
-	//     * FAILED – the execution failed to
-	// complete.
+	// * FAILED – the execution failed to complete.
 	//
-	//     * TIMED_OUT – the execution did not complete in the alloted time
-	// and was automatically timed out.
+	// * TIMED_OUT – the
+	// execution did not complete in the alloted time and was automatically timed
+	// out.
 	//
-	//     * CONTINUED_AS_NEW – the execution is
-	// logically continued. This means the current execution was completed and a new
-	// execution was started to carry on the workflow.
+	// * CONTINUED_AS_NEW – the execution is logically continued. This means the
+	// current execution was completed and a new execution was started to carry on the
+	// workflow.
 	CloseStatus CloseStatus
 
 	// The time when the workflow execution was closed. Set only if the execution
@@ -3135,17 +3126,16 @@ type WorkflowExecutionStartedEventAttributes struct {
 	// is terminated, by calling the TerminateWorkflowExecution action explicitly or
 	// due to an expired timeout. The supported child policies are:
 	//
-	//     * TERMINATE –
-	// The child executions are terminated.
+	// * TERMINATE – The
+	// child executions are terminated.
 	//
-	//     * REQUEST_CANCEL – A request to cancel
-	// is attempted for each child execution by recording a
+	// * REQUEST_CANCEL – A request to cancel is
+	// attempted for each child execution by recording a
 	// WorkflowExecutionCancelRequested event in its history. It is up to the decider
 	// to take appropriate actions when it receives an execution history with this
 	// event.
 	//
-	//     * ABANDON – No action is taken. The child executions continue to
-	// run.
+	// * ABANDON – No action is taken. The child executions continue to run.
 	//
 	// This member is required.
 	ChildPolicy ChildPolicy
@@ -3207,16 +3197,16 @@ type WorkflowExecutionTerminatedEventAttributes struct {
 	// The policy used for the child workflow executions of this workflow execution.
 	// The supported child policies are:
 	//
-	//     * TERMINATE – The child executions are
+	// * TERMINATE – The child executions are
 	// terminated.
 	//
-	//     * REQUEST_CANCEL – A request to cancel is attempted for each
-	// child execution by recording a WorkflowExecutionCancelRequested event in its
-	// history. It is up to the decider to take appropriate actions when it receives an
+	// * REQUEST_CANCEL – A request to cancel is attempted for each child
+	// execution by recording a WorkflowExecutionCancelRequested event in its history.
+	// It is up to the decider to take appropriate actions when it receives an
 	// execution history with this event.
 	//
-	//     * ABANDON – No action is taken. The
-	// child executions continue to run.
+	// * ABANDON – No action is taken. The child
+	// executions continue to run.
 	//
 	// This member is required.
 	ChildPolicy ChildPolicy
@@ -3239,16 +3229,16 @@ type WorkflowExecutionTimedOutEventAttributes struct {
 	// The policy used for the child workflow executions of this workflow execution.
 	// The supported child policies are:
 	//
-	//     * TERMINATE – The child executions are
+	// * TERMINATE – The child executions are
 	// terminated.
 	//
-	//     * REQUEST_CANCEL – A request to cancel is attempted for each
-	// child execution by recording a WorkflowExecutionCancelRequested event in its
-	// history. It is up to the decider to take appropriate actions when it receives an
+	// * REQUEST_CANCEL – A request to cancel is attempted for each child
+	// execution by recording a WorkflowExecutionCancelRequested event in its history.
+	// It is up to the decider to take appropriate actions when it receives an
 	// execution history with this event.
 	//
-	//     * ABANDON – No action is taken. The
-	// child executions continue to run.
+	// * ABANDON – No action is taken. The child
+	// executions continue to run.
 	//
 	// This member is required.
 	ChildPolicy ChildPolicy
@@ -3284,17 +3274,16 @@ type WorkflowTypeConfiguration struct {
 	// when starting a workflow execution using the StartWorkflowExecution action or
 	// the StartChildWorkflowExecutionDecision. The supported child policies are:
 	//
+	// *
+	// TERMINATE – The child executions are terminated.
 	//
-	// * TERMINATE – The child executions are terminated.
-	//
-	//     * REQUEST_CANCEL – A
-	// request to cancel is attempted for each child execution by recording a
+	// * REQUEST_CANCEL – A request
+	// to cancel is attempted for each child execution by recording a
 	// WorkflowExecutionCancelRequested event in its history. It is up to the decider
 	// to take appropriate actions when it receives an execution history with this
 	// event.
 	//
-	//     * ABANDON – No action is taken. The child executions continue to
-	// run.
+	// * ABANDON – No action is taken. The child executions continue to run.
 	DefaultChildPolicy ChildPolicy
 
 	// The default maximum duration, specified when registering the workflow type, for

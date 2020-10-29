@@ -17,7 +17,7 @@
 // about API actions and data types that you can use to interact with Amazon A2I
 // programmatically. Use this guide to:
 //
-//     * Start a human loop with the
+// * Start a human loop with the
 // StartHumanLoop operation when using Amazon A2I with a custom task type. To learn
 // more about the difference between custom and built-in task types, see Use Task
 // Types
@@ -27,7 +27,7 @@
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-start-human-loop.html#a2i-instructions-starthumanloop)
 // in the Amazon SageMaker Developer Guide.
 //
-//     * Manage your human loops. You can
+// * Manage your human loops. You can
 // list all human loops that you have created, describe individual human loops, and
 // stop and delete human loops. To learn more, see Monitor and Manage Your Human
 // Loop

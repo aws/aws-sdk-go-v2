@@ -37,11 +37,11 @@ type DescribeTrafficMirrorFiltersInput struct {
 
 	// One or more filters. The possible values are:
 	//
-	//     * description: The Traffic
-	// Mirror filter description.
+	// * description: The Traffic Mirror
+	// filter description.
 	//
-	//     * traffic-mirror-filter-id: The ID of the
-	// Traffic Mirror filter.
+	// * traffic-mirror-filter-id: The ID of the Traffic Mirror
+	// filter.
 	Filters []*types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the

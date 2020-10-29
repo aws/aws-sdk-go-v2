@@ -49,35 +49,35 @@ import (
 // specifying the optional AWS Organizations policy ID. The type of entity that you
 // specify determines the data returned in the report.
 //
-//     * Root – When you
-// specify the organizations root as the entity, the resulting report lists all of
-// the services allowed by SCPs that are attached to your root. For each service,
-// the report includes data for all accounts in your organization except the master
+// * Root – When you specify
+// the organizations root as the entity, the resulting report lists all of the
+// services allowed by SCPs that are attached to your root. For each service, the
+// report includes data for all accounts in your organization except the master
 // account, because the master account is not limited by SCPs.
 //
-//     * OU – When you
+// * OU – When you
 // specify an organizational unit (OU) as the entity, the resulting report lists
 // all of the services allowed by SCPs that are attached to the OU and its parents.
 // For each service, the report includes data for all accounts in the OU or its
 // children. This data excludes the master account, because the master account is
 // not limited by SCPs.
 //
-//     * Master account – When you specify the master
-// account, the resulting report lists all AWS services, because the master account
-// is not limited by SCPs. For each service, the report includes data for only the
-// master account.
+// * Master account – When you specify the master account,
+// the resulting report lists all AWS services, because the master account is not
+// limited by SCPs. For each service, the report includes data for only the master
+// account.
 //
-//     * Account – When you specify another account as the entity,
-// the resulting report lists all of the services allowed by SCPs that are attached
-// to the account and its parents. For each service, the report includes data for
-// only the specified account.
+// * Account – When you specify another account as the entity, the
+// resulting report lists all of the services allowed by SCPs that are attached to
+// the account and its parents. For each service, the report includes data for only
+// the specified account.
 //
 // To generate a service last accessed data report for
 // policies, specify an entity path and the optional AWS Organizations policy ID.
 // The type of entity that you specify determines the data returned for each
 // service.
 //
-//     * Root – When you specify the root entity and a policy ID, the
+// * Root – When you specify the root entity and a policy ID, the
 // resulting report lists all of the services that are allowed by the specified
 // SCP. For each service, the report includes data for all accounts in your
 // organization to which the SCP applies. This data excludes the master account,
@@ -85,7 +85,7 @@ import (
 // any entities in the organization, then the report will return a list of services
 // with no data.
 //
-//     * OU – When you specify an OU entity and a policy ID, the
+// * OU – When you specify an OU entity and a policy ID, the
 // resulting report lists all of the services that are allowed by the specified
 // SCP. For each service, the report includes data for all accounts in the OU or
 // its children to which the SCP applies. This means that other accounts outside
@@ -94,14 +94,14 @@ import (
 // If the SCP is not attached to the OU or one of its children, the report will
 // return a list of services with no data.
 //
-//     * Master account – When you specify
-// the master account, the resulting report lists all AWS services, because the
-// master account is not limited by SCPs. If you specify a policy ID in the CLI or
-// API, the policy is ignored. For each service, the report includes data for only
-// the master account.
+// * Master account – When you specify the
+// master account, the resulting report lists all AWS services, because the master
+// account is not limited by SCPs. If you specify a policy ID in the CLI or API,
+// the policy is ignored. For each service, the report includes data for only the
+// master account.
 //
-//     * Account – When you specify another account entity and
-// a policy ID, the resulting report lists all of the services that are allowed by
+// * Account – When you specify another account entity and a
+// policy ID, the resulting report lists all of the services that are allowed by
 // the specified SCP. For each service, the report includes data for only the
 // specified account. This means that other accounts in the organization that are
 // affected by the SCP might not be included in the data. If the SCP is not

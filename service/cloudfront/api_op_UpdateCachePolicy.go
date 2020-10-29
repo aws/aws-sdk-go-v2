@@ -16,15 +16,15 @@ import (
 // request. You cannot update some fields independent of others. To update a cache
 // policy configuration:
 //
-//     * Use GetCachePolicyConfig to get the current
+// * Use GetCachePolicyConfig to get the current
 // configuration.
 //
-//     * Locally modify the fields in the cache policy
-// configuration that you want to update.
+// * Locally modify the fields in the cache policy configuration
+// that you want to update.
 //
-//     * Call UpdateCachePolicy by
-// providing the entire cache policy configuration, including the fields that you
-// modified and those that you didn’t.
+// * Call UpdateCachePolicy by providing the entire cache
+// policy configuration, including the fields that you modified and those that you
+// didn’t.
 func (c *Client) UpdateCachePolicy(ctx context.Context, params *UpdateCachePolicyInput, optFns ...func(*Options)) (*UpdateCachePolicyOutput, error) {
 	if params == nil {
 		params = &UpdateCachePolicyInput{}

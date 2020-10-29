@@ -14,10 +14,10 @@ import (
 // Returns a list of recommended items. The required input depends on the recipe
 // type used to create the solution backing the campaign, as follows:
 //
-//     *
+// *
 // RELATED_ITEMS - itemId required, userId not used
 //
-//     * USER_PERSONALIZATION -
+// * USER_PERSONALIZATION -
 // itemId optional, userId required
 //
 // Campaigns that are backed by a solution

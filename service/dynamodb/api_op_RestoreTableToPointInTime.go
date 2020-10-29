@@ -21,35 +21,35 @@ import (
 // new table. Along with data, the following are also included on the new restored
 // table using point in time recovery:
 //
-//     * Global secondary indexes (GSIs)
+// * Global secondary indexes (GSIs)
 //
+// * Local
+// secondary indexes (LSIs)
 //
-// * Local secondary indexes (LSIs)
+// * Provisioned read and write capacity
 //
-//     * Provisioned read and write capacity
+// * Encryption
+// settings All these settings come from the current settings of the source table
+// at the time of restore.
 //
+// You must manually set up the following on the restored
+// table:
 //
-// * Encryption settings All these settings come from the current settings of the
-// source table at the time of restore.
+// * Auto scaling policies
 //
-// You must manually set up the following on
-// the restored table:
+// * IAM policies
 //
-//     * Auto scaling policies
+// * Amazon CloudWatch metrics and
+// alarms
 //
-//     * IAM policies
+// * Tags
 //
-//     *
-// Amazon CloudWatch metrics and alarms
+// * Stream settings
 //
-//     * Tags
+// * Time to Live (TTL) settings
 //
-//     * Stream settings
-//
-//     *
-// Time to Live (TTL) settings
-//
-//     * Point in time recovery settings
+// * Point in
+// time recovery settings
 func (c *Client) RestoreTableToPointInTime(ctx context.Context, params *RestoreTableToPointInTimeInput, optFns ...func(*Options)) (*RestoreTableToPointInTimeOutput, error) {
 	if params == nil {
 		params = &RestoreTableToPointInTimeInput{}

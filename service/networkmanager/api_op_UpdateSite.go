@@ -46,12 +46,12 @@ type UpdateSiteInput struct {
 
 	// The site location:
 	//
-	//     * Address: The physical address of the site.
+	// * Address: The physical address of the site.
 	//
-	//     *
-	// Latitude: The latitude of the site.
+	// * Latitude:
+	// The latitude of the site.
 	//
-	//     * Longitude: The longitude of the site.
+	// * Longitude: The longitude of the site.
 	Location *types.Location
 }
 

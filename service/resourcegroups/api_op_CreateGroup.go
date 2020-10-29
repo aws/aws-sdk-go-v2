@@ -66,9 +66,8 @@ type CreateGroupOutput struct {
 	// Groups supports adding service configurations for the following resource group
 	// types:
 	//
-	//     * AWS::EC2::CapacityReservationPool - Amazon EC2 capacity
-	// reservation pools. For more information, see Working with capacity reservation
-	// groups
+	// * AWS::EC2::CapacityReservationPool - Amazon EC2 capacity reservation
+	// pools. For more information, see Working with capacity reservation groups
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-using.html#create-cr-group)
 	// in the EC2 Users Guide.
 	GroupConfiguration *types.GroupConfiguration

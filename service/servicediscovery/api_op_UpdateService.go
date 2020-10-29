@@ -13,27 +13,27 @@ import (
 
 // Submits a request to perform the following operations:
 //
-//     * Update the TTL
-// setting for existing DnsRecords configurations
+// * Update the TTL setting
+// for existing DnsRecords configurations
 //
-//     * Add, update, or delete
+// * Add, update, or delete
 // HealthCheckConfig for a specified service You can't add, update, or delete a
 // HealthCheckCustomConfig configuration.
 //
 // For public and private DNS namespaces,
 // note the following:
 //
-//     * If you omit any existing DnsRecords or
-// HealthCheckConfig configurations from an UpdateService request, the
-// configurations are deleted from the service.
+// * If you omit any existing DnsRecords or HealthCheckConfig
+// configurations from an UpdateService request, the configurations are deleted
+// from the service.
 //
-//     * If you omit an existing
-// HealthCheckCustomConfig configuration from an UpdateService request, the
-// configuration is not deleted from the service.
+// * If you omit an existing HealthCheckCustomConfig
+// configuration from an UpdateService request, the configuration is not deleted
+// from the service.
 //
-// When you update settings for a
-// service, AWS Cloud Map also updates the corresponding settings in all the
-// records and health checks that were created by using the specified service.
+// When you update settings for a service, AWS Cloud Map also
+// updates the corresponding settings in all the records and health checks that
+// were created by using the specified service.
 func (c *Client) UpdateService(ctx context.Context, params *UpdateServiceInput, optFns ...func(*Options)) (*UpdateServiceOutput, error) {
 	if params == nil {
 		params = &UpdateServiceInput{}

@@ -29,16 +29,16 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // An exception indicating there was a conflict during a delete operation. The
 // following delete operations can cause a conflict exception:
 //
-//     *
-// DeleteDetector: A conflict exception will occur if the detector has associated
-// Rules or DetectorVersions. You can only delete a detector if it has no Rules or
+// * DeleteDetector: A
+// conflict exception will occur if the detector has associated Rules or
+// DetectorVersions. You can only delete a detector if it has no Rules or
 // DetectorVersions.
 //
-//     * DeleteDetectorVersion: A conflict exception will occur
-// if the DetectorVersion status is ACTIVE.
+// * DeleteDetectorVersion: A conflict exception will occur if
+// the DetectorVersion status is ACTIVE.
 //
-//     * DeleteRule: A conflict exception
-// will occur if the RuleVersion is in use by an associated ACTIVE or INACTIVE
+// * DeleteRule: A conflict exception will
+// occur if the RuleVersion is in use by an associated ACTIVE or INACTIVE
 // DetectorVersion.
 type ConflictException struct {
 	Message *string

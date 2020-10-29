@@ -35,24 +35,23 @@ type DescribeDBClustersInput struct {
 	// information from only the specific DB cluster is returned. This parameter isn't
 	// case-sensitive. Constraints:
 	//
-	//     * If supplied, must match an existing
+	// * If supplied, must match an existing
 	// DBClusterIdentifier.
 	DBClusterIdentifier *string
 
 	// A filter that specifies one or more DB clusters to describe. Supported
 	// filters:
 	//
-	//     * db-cluster-id - Accepts DB cluster identifiers and DB cluster
-	// Amazon Resource Names (ARNs). The results list will only include information
-	// about the DB clusters identified by these ARNs.
+	// * db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
+	// Resource Names (ARNs). The results list will only include information about the
+	// DB clusters identified by these ARNs.
 	//
-	//     * engine - Accepts an
-	// engine name (such as neptune), and restricts the results list to DB clusters
-	// created by that engine.
+	// * engine - Accepts an engine name (such
+	// as neptune), and restricts the results list to DB clusters created by that
+	// engine.
 	//
-	// For example, to invoke this API from the AWS CLI and
-	// filter so that only Neptune DB clusters are returned, you could use the
-	// following command:
+	// For example, to invoke this API from the AWS CLI and filter so that
+	// only Neptune DB clusters are returned, you could use the following command:
 	Filters []*types.Filter
 
 	// An optional pagination token provided by a previous DescribeDBClusters request.

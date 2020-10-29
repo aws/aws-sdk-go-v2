@@ -45,42 +45,41 @@ type EnableMetricsCollectionInput struct {
 	// Specifies which group-level metrics to start collecting. You can specify one or
 	// more of the following metrics:
 	//
-	//     * GroupMinSize
+	// * GroupMinSize
 	//
-	//     * GroupMaxSize
+	// * GroupMaxSize
 	//
-	//     *
+	// *
 	// GroupDesiredCapacity
 	//
-	//     * GroupInServiceInstances
+	// * GroupInServiceInstances
 	//
-	//     *
-	// GroupPendingInstances
+	// * GroupPendingInstances
 	//
-	//     * GroupStandbyInstances
+	// *
+	// GroupStandbyInstances
 	//
-	//     *
-	// GroupTerminatingInstances
+	// * GroupTerminatingInstances
 	//
-	//     * GroupTotalInstances
+	// * GroupTotalInstances
 	//
-	// The instance weighting
-	// feature supports the following additional metrics:
+	// The
+	// instance weighting feature supports the following additional metrics:
 	//
-	//     *
+	// *
 	// GroupInServiceCapacity
 	//
-	//     * GroupPendingCapacity
+	// * GroupPendingCapacity
 	//
-	//     * GroupStandbyCapacity
+	// * GroupStandbyCapacity
 	//
+	// *
+	// GroupTerminatingCapacity
 	//
-	// * GroupTerminatingCapacity
+	// * GroupTotalCapacity
 	//
-	//     * GroupTotalCapacity
-	//
-	// If you omit this
-	// parameter, all metrics are enabled.
+	// If you omit this parameter, all
+	// metrics are enabled.
 	Metrics []*string
 }
 

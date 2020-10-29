@@ -36,16 +36,16 @@ type CopyDBClusterParameterGroupInput struct {
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing)
 	// in the Amazon Aurora User Guide. Constraints:
 	//
-	//     * Must specify a valid DB
-	// cluster parameter group.
+	// * Must specify a valid DB cluster
+	// parameter group.
 	//
-	//     * If the source DB cluster parameter group is in
-	// the same AWS Region as the copy, specify a valid DB parameter group identifier,
-	// for example my-db-cluster-param-group, or a valid ARN.
+	// * If the source DB cluster parameter group is in the same AWS
+	// Region as the copy, specify a valid DB parameter group identifier, for example
+	// my-db-cluster-param-group, or a valid ARN.
 	//
-	//     * If the source DB
-	// parameter group is in a different AWS Region than the copy, specify a valid DB
-	// cluster parameter group ARN, for example
+	// * If the source DB parameter group
+	// is in a different AWS Region than the copy, specify a valid DB cluster parameter
+	// group ARN, for example
 	// arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1.
 	//
 	// This member is required.
@@ -58,19 +58,18 @@ type CopyDBClusterParameterGroupInput struct {
 
 	// The identifier for the copied DB cluster parameter group. Constraints:
 	//
-	//     *
-	// Can't be null, empty, or blank
+	// * Can't
+	// be null, empty, or blank
 	//
-	//     * Must contain from 1 to 255 letters,
-	// numbers, or hyphens
+	// * Must contain from 1 to 255 letters, numbers, or
+	// hyphens
 	//
-	//     * First character must be a letter
+	// * First character must be a letter
 	//
-	//     * Can't end
-	// with a hyphen or contain two consecutive hyphens
+	// * Can't end with a hyphen or
+	// contain two consecutive hyphens
 	//
-	// Example:
-	// my-cluster-param-group1
+	// Example: my-cluster-param-group1
 	//
 	// This member is required.
 	TargetDBClusterParameterGroupIdentifier *string

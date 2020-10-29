@@ -43,11 +43,10 @@ type DescribeVpcEndpointServicePermissionsInput struct {
 
 	// One or more filters.
 	//
-	//     * principal - The ARN of the principal.
+	// * principal - The ARN of the principal.
 	//
-	//     *
-	// principal-type - The principal type (All | Service | OrganizationUnit | Account
-	// | User | Role).
+	// * principal-type
+	// - The principal type (All | Service | OrganizationUnit | Account | User | Role).
 	Filters []*types.Filter
 
 	// The maximum number of results to return for the request in a single page. The

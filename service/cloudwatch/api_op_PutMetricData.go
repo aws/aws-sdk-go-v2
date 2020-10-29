@@ -45,11 +45,11 @@ import (
 // publish data using a statistic set instead, you can only retrieve percentile
 // statistics for this data if one of the following conditions is true:
 //
-//     * The
+// * The
 // SampleCount value of the statistic set is 1 and Min, Max, and Sum are all
 // equal.
 //
-//     * The Min and Max are equal, and Sum is equal to Min multiplied by
+// * The Min and Max are equal, and Sum is equal to Min multiplied by
 // SampleCount.
 func (c *Client) PutMetricData(ctx context.Context, params *PutMetricDataInput, optFns ...func(*Options)) (*PutMetricDataOutput, error) {
 	if params == nil {

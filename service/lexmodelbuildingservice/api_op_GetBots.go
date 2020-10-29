@@ -13,16 +13,15 @@ import (
 
 // Returns bot information as follows:
 //
-//     * If you provide the nameContains
-// field, the response includes information for the $LATEST version of all bots
-// whose name contains the specified string.
+// * If you provide the nameContains field,
+// the response includes information for the $LATEST version of all bots whose name
+// contains the specified string.
 //
-//     * If you don't specify the
-// nameContains field, the operation returns information about the $LATEST version
-// of all of your bots.
+// * If you don't specify the nameContains field,
+// the operation returns information about the $LATEST version of all of your
+// bots.
 //
-// This operation requires permission for the lex:GetBots
-// action.
+// This operation requires permission for the lex:GetBots action.
 func (c *Client) GetBots(ctx context.Context, params *GetBotsInput, optFns ...func(*Options)) (*GetBotsOutput, error) {
 	if params == nil {
 		params = &GetBotsInput{}

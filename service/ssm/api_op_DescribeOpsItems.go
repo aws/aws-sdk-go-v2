@@ -47,43 +47,43 @@ type DescribeOpsItemsInput struct {
 
 	// One or more filters to limit the response.
 	//
-	//     * Key: CreatedTime Operations:
+	// * Key: CreatedTime Operations:
 	// GreaterThan, LessThan
 	//
-	//     * Key: LastModifiedBy Operations: Contains, Equals
+	// * Key: LastModifiedBy Operations: Contains, Equals
 	//
+	// *
+	// Key: LastModifiedTime Operations: GreaterThan, LessThan
 	//
-	// * Key: LastModifiedTime Operations: GreaterThan, LessThan
-	//
-	//     * Key: Priority
+	// * Key: Priority
 	// Operations: Equals
 	//
-	//     * Key: Source Operations: Contains, Equals
+	// * Key: Source Operations: Contains, Equals
 	//
-	//     * Key:
-	// Status Operations: Equals
+	// * Key: Status
+	// Operations: Equals
 	//
-	//     * Key: Title Operations: Contains
+	// * Key: Title Operations: Contains
 	//
-	//     * Key:
-	// OperationalData* Operations: Equals
+	// * Key: OperationalData*
+	// Operations: Equals
 	//
-	//     * Key: OperationalDataKey Operations:
+	// * Key: OperationalDataKey Operations: Equals
+	//
+	// * Key:
+	// OperationalDataValue Operations: Equals, Contains
+	//
+	// * Key: OpsItemId Operations:
 	// Equals
 	//
-	//     * Key: OperationalDataValue Operations: Equals, Contains
+	// * Key: ResourceId Operations: Contains
 	//
-	//     * Key:
-	// OpsItemId Operations: Equals
+	// * Key: AutomationId Operations:
+	// Equals
 	//
-	//     * Key: ResourceId Operations: Contains
-	//
-	//     *
-	// Key: AutomationId Operations: Equals
-	//
-	// *If you filter the response by using the
-	// OperationalData operator, specify a key-value pair by using the following JSON
-	// format: {"key":"key_name","value":"a_value"}
+	// *If you filter the response by using the OperationalData operator,
+	// specify a key-value pair by using the following JSON format:
+	// {"key":"key_name","value":"a_value"}
 	OpsItemFilters []*types.OpsItemFilter
 }
 

@@ -45,12 +45,12 @@ type GetAccountInput struct {
 // The following exception
 // may be thrown when the request fails.
 //
-//     * UnauthorizedException
+// * UnauthorizedException
 //
-//     *
+// *
 // NotFoundException
 //
-//     * TooManyRequestsException
+// * TooManyRequestsException
 //
 // For detailed error code
 // information, including the corresponding HTTP Status Codes, see API Gateway

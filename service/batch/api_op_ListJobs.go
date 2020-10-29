@@ -13,13 +13,13 @@ import (
 
 // Returns a list of AWS Batch jobs. You must specify only one of the following:
 //
+// *
+// a job queue ID to return a list of jobs in that job queue
 //
-// * a job queue ID to return a list of jobs in that job queue
-//
-//     * a multi-node
+// * a multi-node
 // parallel job ID to return a list of that job's nodes
 //
-//     * an array job ID to
+// * an array job ID to
 // return a list of that job's children
 //
 // You can filter the results by job status

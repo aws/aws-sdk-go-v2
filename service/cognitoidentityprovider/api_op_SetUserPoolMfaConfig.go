@@ -36,13 +36,13 @@ type SetUserPoolMfaConfigInput struct {
 
 	// The MFA configuration. Valid values include:
 	//
-	//     * OFF MFA will not be used for
-	// any users.
+	// * OFF MFA will not be used for any
+	// users.
 	//
-	//     * ON MFA is required for all users to sign in.
+	// * ON MFA is required for all users to sign in.
 	//
-	//     * OPTIONAL
-	// MFA will be required only for individual users who have an MFA factor enabled.
+	// * OPTIONAL MFA will be
+	// required only for individual users who have an MFA factor enabled.
 	MfaConfiguration types.UserPoolMfaType
 
 	// The SMS text message MFA configuration.
@@ -56,13 +56,13 @@ type SetUserPoolMfaConfigOutput struct {
 
 	// The MFA configuration. Valid values include:
 	//
-	//     * OFF MFA will not be used for
-	// any users.
+	// * OFF MFA will not be used for any
+	// users.
 	//
-	//     * ON MFA is required for all users to sign in.
+	// * ON MFA is required for all users to sign in.
 	//
-	//     * OPTIONAL
-	// MFA will be required only for individual users who have an MFA factor enabled.
+	// * OPTIONAL MFA will be
+	// required only for individual users who have an MFA factor enabled.
 	MfaConfiguration types.UserPoolMfaType
 
 	// The SMS text message MFA configuration.

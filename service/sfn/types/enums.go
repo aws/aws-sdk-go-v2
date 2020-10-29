@@ -9,7 +9,7 @@ const (
 	ExecutionStatusRunning   ExecutionStatus = "RUNNING"
 	ExecutionStatusSucceeded ExecutionStatus = "SUCCEEDED"
 	ExecutionStatusFailed    ExecutionStatus = "FAILED"
-	ExecutionStatusTimed_out ExecutionStatus = "TIMED_OUT"
+	ExecutionStatusTimedOut  ExecutionStatus = "TIMED_OUT"
 	ExecutionStatusAborted   ExecutionStatus = "ABORTED"
 )
 

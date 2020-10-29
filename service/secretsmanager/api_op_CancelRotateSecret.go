@@ -23,33 +23,32 @@ import (
 // successfully start a rotation, the staging label AWSPENDING must be in one of
 // the following states:
 //
-//     * Not attached to any version at all
+// * Not attached to any version at all
 //
-//     * Attached
-// to the same version as the staging label AWSCURRENT
+// * Attached to the
+// same version as the staging label AWSCURRENT
 //
-// If the staging label
-// AWSPENDING attached to a different version than the version with AWSCURRENT then
-// the attempt to rotate fails. Minimum permissions To run this command, you must
-// have the following permissions:
+// If the staging label AWSPENDING
+// attached to a different version than the version with AWSCURRENT then the
+// attempt to rotate fails. Minimum permissions To run this command, you must have
+// the following permissions:
 //
-//     *
-// secretsmanager:CancelRotateSecret
+// * secretsmanager:CancelRotateSecret
 //
-// Related operations
+// Related
+// operations
 //
-//     * To configure
-// rotation for a secret or to manually trigger a rotation, use RotateSecret.
+// * To configure rotation for a secret or to manually trigger a
+// rotation, use RotateSecret.
 //
+// * To get the rotation configuration details for a
+// secret, use DescribeSecret.
 //
-// * To get the rotation configuration details for a secret, use DescribeSecret.
+// * To list all of the currently available secrets,
+// use ListSecrets.
 //
-//
-// * To list all of the currently available secrets, use ListSecrets.
-//
-//     * To
-// list all of the versions currently associated with a secret, use
-// ListSecretVersionIds.
+// * To list all of the versions currently associated with a
+// secret, use ListSecretVersionIds.
 func (c *Client) CancelRotateSecret(ctx context.Context, params *CancelRotateSecretInput, optFns ...func(*Options)) (*CancelRotateSecretOutput, error) {
 	if params == nil {
 		params = &CancelRotateSecretInput{}

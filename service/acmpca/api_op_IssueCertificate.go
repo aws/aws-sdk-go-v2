@@ -94,49 +94,49 @@ type IssueCertificateInput struct {
 	// the limit set by its parents in the CA hierarchy. The following service-owned
 	// TemplateArn values are supported by ACM Private CA:
 	//
-	//     *
+	// *
 	// arn:aws:acm-pca:::template/CodeSigningCertificate/V1
 	//
-	//     *
+	// *
 	// arn:aws:acm-pca:::template/CodeSigningCertificate_CSRPassthrough/V1
 	//
-	//     *
+	// *
 	// arn:aws:acm-pca:::template/EndEntityCertificate/V1
 	//
-	//     *
+	// *
 	// arn:aws:acm-pca:::template/EndEntityCertificate_CSRPassthrough/V1
 	//
-	//     *
+	// *
 	// arn:aws:acm-pca:::template/EndEntityClientAuthCertificate/V1
 	//
-	//     *
+	// *
 	// arn:aws:acm-pca:::template/EndEntityClientAuthCertificate_CSRPassthrough/V1
 	//
+	// *
+	// arn:aws:acm-pca:::template/EndEntityServerAuthCertificate/V1
 	//
-	// * arn:aws:acm-pca:::template/EndEntityServerAuthCertificate/V1
-	//
-	//     *
+	// *
 	// arn:aws:acm-pca:::template/EndEntityServerAuthCertificate_CSRPassthrough/V1
 	//
+	// *
+	// arn:aws:acm-pca:::template/OCSPSigningCertificate/V1
 	//
-	// * arn:aws:acm-pca:::template/OCSPSigningCertificate/V1
-	//
-	//     *
+	// *
 	// arn:aws:acm-pca:::template/OCSPSigningCertificate_CSRPassthrough/V1
 	//
-	//     *
+	// *
 	// arn:aws:acm-pca:::template/RootCACertificate/V1
 	//
-	//     *
+	// *
 	// arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen0/V1
 	//
-	//     *
+	// *
 	// arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen1/V1
 	//
-	//     *
+	// *
 	// arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen2/V1
 	//
-	//     *
+	// *
 	// arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen3/V1
 	//
 	// For more

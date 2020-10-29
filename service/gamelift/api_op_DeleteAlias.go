@@ -14,19 +14,18 @@ import (
 // attempting to access a server process using the deleted alias receive an error.
 // To delete an alias, specify the alias ID to be deleted.
 //
-//     * CreateAlias
+// * CreateAlias
 //
+// *
+// ListAliases
 //
-// * ListAliases
+// * DescribeAlias
 //
-//     * DescribeAlias
+// * UpdateAlias
 //
-//     * UpdateAlias
+// * DeleteAlias
 //
-//     * DeleteAlias
-//
-//     *
-// ResolveAlias
+// * ResolveAlias
 func (c *Client) DeleteAlias(ctx context.Context, params *DeleteAliasInput, optFns ...func(*Options)) (*DeleteAliasOutput, error) {
 	if params == nil {
 		params = &DeleteAliasInput{}

@@ -24,10 +24,10 @@ type CognitoStreams struct {
 
 	// Status of the Cognito streams. Valid values are:
 	//
-	//     * ENABLED - Streaming of
+	// * ENABLED - Streaming of
 	// updates to identity pool is enabled.
 	//
-	//     * DISABLED - Streaming of updates to
+	// * DISABLED - Streaming of updates to
 	// identity pool is disabled. Bulk publish will also fail if StreamingStatus is
 	// DISABLED.
 	StreamingStatus StreamingStatus

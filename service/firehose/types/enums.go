@@ -6,11 +6,11 @@ type CompressionFormat string
 
 // Enum values for CompressionFormat
 const (
-	CompressionFormatUncompressed  CompressionFormat = "UNCOMPRESSED"
-	CompressionFormatGzip          CompressionFormat = "GZIP"
-	CompressionFormatZip           CompressionFormat = "ZIP"
-	CompressionFormatSnappy        CompressionFormat = "Snappy"
-	CompressionFormatHadoop_snappy CompressionFormat = "HADOOP_SNAPPY"
+	CompressionFormatUncompressed CompressionFormat = "UNCOMPRESSED"
+	CompressionFormatGzip         CompressionFormat = "GZIP"
+	CompressionFormatZip          CompressionFormat = "ZIP"
+	CompressionFormatSnappy       CompressionFormat = "Snappy"
+	CompressionFormatHadoopSnappy CompressionFormat = "HADOOP_SNAPPY"
 )
 
 // Values returns all known values for CompressionFormat. Note that this can be
@@ -48,12 +48,12 @@ type DeliveryStreamEncryptionStatus string
 
 // Enum values for DeliveryStreamEncryptionStatus
 const (
-	DeliveryStreamEncryptionStatusEnabled          DeliveryStreamEncryptionStatus = "ENABLED"
-	DeliveryStreamEncryptionStatusEnabling         DeliveryStreamEncryptionStatus = "ENABLING"
-	DeliveryStreamEncryptionStatusEnabling_failed  DeliveryStreamEncryptionStatus = "ENABLING_FAILED"
-	DeliveryStreamEncryptionStatusDisabled         DeliveryStreamEncryptionStatus = "DISABLED"
-	DeliveryStreamEncryptionStatusDisabling        DeliveryStreamEncryptionStatus = "DISABLING"
-	DeliveryStreamEncryptionStatusDisabling_failed DeliveryStreamEncryptionStatus = "DISABLING_FAILED"
+	DeliveryStreamEncryptionStatusEnabled         DeliveryStreamEncryptionStatus = "ENABLED"
+	DeliveryStreamEncryptionStatusEnabling        DeliveryStreamEncryptionStatus = "ENABLING"
+	DeliveryStreamEncryptionStatusEnablingFailed  DeliveryStreamEncryptionStatus = "ENABLING_FAILED"
+	DeliveryStreamEncryptionStatusDisabled        DeliveryStreamEncryptionStatus = "DISABLED"
+	DeliveryStreamEncryptionStatusDisabling       DeliveryStreamEncryptionStatus = "DISABLING"
+	DeliveryStreamEncryptionStatusDisablingFailed DeliveryStreamEncryptionStatus = "DISABLING_FAILED"
 )
 
 // Values returns all known values for DeliveryStreamEncryptionStatus. Note that
@@ -75,21 +75,21 @@ type DeliveryStreamFailureType string
 
 // Enum values for DeliveryStreamFailureType
 const (
-	DeliveryStreamFailureTypeRetire_kms_grant_failed      DeliveryStreamFailureType = "RETIRE_KMS_GRANT_FAILED"
-	DeliveryStreamFailureTypeCreate_kms_grant_failed      DeliveryStreamFailureType = "CREATE_KMS_GRANT_FAILED"
-	DeliveryStreamFailureTypeKms_access_denied            DeliveryStreamFailureType = "KMS_ACCESS_DENIED"
-	DeliveryStreamFailureTypeDisabled_kms_key             DeliveryStreamFailureType = "DISABLED_KMS_KEY"
-	DeliveryStreamFailureTypeInvalid_kms_key              DeliveryStreamFailureType = "INVALID_KMS_KEY"
-	DeliveryStreamFailureTypeKms_key_not_found            DeliveryStreamFailureType = "KMS_KEY_NOT_FOUND"
-	DeliveryStreamFailureTypeKms_opt_in_required          DeliveryStreamFailureType = "KMS_OPT_IN_REQUIRED"
-	DeliveryStreamFailureTypeCreate_eni_failed            DeliveryStreamFailureType = "CREATE_ENI_FAILED"
-	DeliveryStreamFailureTypeDelete_eni_failed            DeliveryStreamFailureType = "DELETE_ENI_FAILED"
-	DeliveryStreamFailureTypeSubnet_not_found             DeliveryStreamFailureType = "SUBNET_NOT_FOUND"
-	DeliveryStreamFailureTypeSecurity_group_not_found     DeliveryStreamFailureType = "SECURITY_GROUP_NOT_FOUND"
-	DeliveryStreamFailureTypeEni_access_denied            DeliveryStreamFailureType = "ENI_ACCESS_DENIED"
-	DeliveryStreamFailureTypeSubnet_access_denied         DeliveryStreamFailureType = "SUBNET_ACCESS_DENIED"
-	DeliveryStreamFailureTypeSecurity_group_access_denied DeliveryStreamFailureType = "SECURITY_GROUP_ACCESS_DENIED"
-	DeliveryStreamFailureTypeUnknown_error                DeliveryStreamFailureType = "UNKNOWN_ERROR"
+	DeliveryStreamFailureTypeRetireKmsGrantFailed      DeliveryStreamFailureType = "RETIRE_KMS_GRANT_FAILED"
+	DeliveryStreamFailureTypeCreateKmsGrantFailed      DeliveryStreamFailureType = "CREATE_KMS_GRANT_FAILED"
+	DeliveryStreamFailureTypeKmsAccessDenied           DeliveryStreamFailureType = "KMS_ACCESS_DENIED"
+	DeliveryStreamFailureTypeDisabledKmsKey            DeliveryStreamFailureType = "DISABLED_KMS_KEY"
+	DeliveryStreamFailureTypeInvalidKmsKey             DeliveryStreamFailureType = "INVALID_KMS_KEY"
+	DeliveryStreamFailureTypeKmsKeyNotFound            DeliveryStreamFailureType = "KMS_KEY_NOT_FOUND"
+	DeliveryStreamFailureTypeKmsOptInRequired          DeliveryStreamFailureType = "KMS_OPT_IN_REQUIRED"
+	DeliveryStreamFailureTypeCreateEniFailed           DeliveryStreamFailureType = "CREATE_ENI_FAILED"
+	DeliveryStreamFailureTypeDeleteEniFailed           DeliveryStreamFailureType = "DELETE_ENI_FAILED"
+	DeliveryStreamFailureTypeSubnetNotFound            DeliveryStreamFailureType = "SUBNET_NOT_FOUND"
+	DeliveryStreamFailureTypeSecurityGroupNotFound     DeliveryStreamFailureType = "SECURITY_GROUP_NOT_FOUND"
+	DeliveryStreamFailureTypeEniAccessDenied           DeliveryStreamFailureType = "ENI_ACCESS_DENIED"
+	DeliveryStreamFailureTypeSubnetAccessDenied        DeliveryStreamFailureType = "SUBNET_ACCESS_DENIED"
+	DeliveryStreamFailureTypeSecurityGroupAccessDenied DeliveryStreamFailureType = "SECURITY_GROUP_ACCESS_DENIED"
+	DeliveryStreamFailureTypeUnknownError              DeliveryStreamFailureType = "UNKNOWN_ERROR"
 )
 
 // Values returns all known values for DeliveryStreamFailureType. Note that this
@@ -119,11 +119,11 @@ type DeliveryStreamStatus string
 
 // Enum values for DeliveryStreamStatus
 const (
-	DeliveryStreamStatusCreating        DeliveryStreamStatus = "CREATING"
-	DeliveryStreamStatusCreating_failed DeliveryStreamStatus = "CREATING_FAILED"
-	DeliveryStreamStatusDeleting        DeliveryStreamStatus = "DELETING"
-	DeliveryStreamStatusDeleting_failed DeliveryStreamStatus = "DELETING_FAILED"
-	DeliveryStreamStatusActive          DeliveryStreamStatus = "ACTIVE"
+	DeliveryStreamStatusCreating       DeliveryStreamStatus = "CREATING"
+	DeliveryStreamStatusCreatingFailed DeliveryStreamStatus = "CREATING_FAILED"
+	DeliveryStreamStatusDeleting       DeliveryStreamStatus = "DELETING"
+	DeliveryStreamStatusDeletingFailed DeliveryStreamStatus = "DELETING_FAILED"
+	DeliveryStreamStatusActive         DeliveryStreamStatus = "ACTIVE"
 )
 
 // Values returns all known values for DeliveryStreamStatus. Note that this can be
@@ -240,8 +240,8 @@ type KeyType string
 
 // Enum values for KeyType
 const (
-	KeyTypeAws_owned_cmk        KeyType = "AWS_OWNED_CMK"
-	KeyTypeCustomer_managed_cmk KeyType = "CUSTOMER_MANAGED_CMK"
+	KeyTypeAwsOwnedCmk        KeyType = "AWS_OWNED_CMK"
+	KeyTypeCustomerManagedCmk KeyType = "CUSTOMER_MANAGED_CMK"
 )
 
 // Values returns all known values for KeyType. Note that this can be expanded in
@@ -294,8 +294,8 @@ type OrcFormatVersion string
 
 // Enum values for OrcFormatVersion
 const (
-	OrcFormatVersionV0_11 OrcFormatVersion = "V0_11"
-	OrcFormatVersionV0_12 OrcFormatVersion = "V0_12"
+	OrcFormatVersionV011 OrcFormatVersion = "V0_11"
+	OrcFormatVersionV012 OrcFormatVersion = "V0_12"
 )
 
 // Values returns all known values for OrcFormatVersion. Note that this can be
@@ -350,11 +350,11 @@ type ProcessorParameterName string
 
 // Enum values for ProcessorParameterName
 const (
-	ProcessorParameterNameLambda_arn                 ProcessorParameterName = "LambdaArn"
-	ProcessorParameterNameLambda_number_of_retries   ProcessorParameterName = "NumberOfRetries"
-	ProcessorParameterNameRole_arn                   ProcessorParameterName = "RoleArn"
-	ProcessorParameterNameBuffer_size_in_mb          ProcessorParameterName = "BufferSizeInMBs"
-	ProcessorParameterNameBuffer_interval_in_seconds ProcessorParameterName = "BufferIntervalInSeconds"
+	ProcessorParameterNameLambdaArn               ProcessorParameterName = "LambdaArn"
+	ProcessorParameterNameLambdaNumberOfRetries   ProcessorParameterName = "NumberOfRetries"
+	ProcessorParameterNameRoleArn                 ProcessorParameterName = "RoleArn"
+	ProcessorParameterNameBufferSizeInMb          ProcessorParameterName = "BufferSizeInMBs"
+	ProcessorParameterNameBufferIntervalInSeconds ProcessorParameterName = "BufferIntervalInSeconds"
 )
 
 // Values returns all known values for ProcessorParameterName. Note that this can

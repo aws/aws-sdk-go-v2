@@ -6,9 +6,9 @@ type GroupConfigurationStatus string
 
 // Enum values for GroupConfigurationStatus
 const (
-	GroupConfigurationStatusUpdating        GroupConfigurationStatus = "UPDATING"
-	GroupConfigurationStatusUpdate_complete GroupConfigurationStatus = "UPDATE_COMPLETE"
-	GroupConfigurationStatusUpdate_failed   GroupConfigurationStatus = "UPDATE_FAILED"
+	GroupConfigurationStatusUpdating       GroupConfigurationStatus = "UPDATING"
+	GroupConfigurationStatusUpdateComplete GroupConfigurationStatus = "UPDATE_COMPLETE"
+	GroupConfigurationStatusUpdateFailed   GroupConfigurationStatus = "UPDATE_FAILED"
 )
 
 // Values returns all known values for GroupConfigurationStatus. Note that this can
@@ -44,8 +44,8 @@ type QueryErrorCode string
 
 // Enum values for QueryErrorCode
 const (
-	QueryErrorCodeCloudformation_stack_inactive     QueryErrorCode = "CLOUDFORMATION_STACK_INACTIVE"
-	QueryErrorCodeCloudformation_stack_not_existing QueryErrorCode = "CLOUDFORMATION_STACK_NOT_EXISTING"
+	QueryErrorCodeCloudformationStackInactive    QueryErrorCode = "CLOUDFORMATION_STACK_INACTIVE"
+	QueryErrorCodeCloudformationStackNotExisting QueryErrorCode = "CLOUDFORMATION_STACK_NOT_EXISTING"
 )
 
 // Values returns all known values for QueryErrorCode. Note that this can be
@@ -62,8 +62,8 @@ type QueryType string
 
 // Enum values for QueryType
 const (
-	QueryTypeTag_filters_1_0          QueryType = "TAG_FILTERS_1_0"
-	QueryTypeCloudformation_stack_1_0 QueryType = "CLOUDFORMATION_STACK_1_0"
+	QueryTypeTagFilters10          QueryType = "TAG_FILTERS_1_0"
+	QueryTypeCloudformationStack10 QueryType = "CLOUDFORMATION_STACK_1_0"
 )
 
 // Values returns all known values for QueryType. Note that this can be expanded in

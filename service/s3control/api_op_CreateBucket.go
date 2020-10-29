@@ -24,40 +24,40 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules).
 // S3 on Outposts buckets do not support
 //
-//     * ACLs. Instead, configure access
-// point policies to manage access to buckets.
+// * ACLs. Instead, configure access point
+// policies to manage access to buckets.
 //
-//     * Public access.
+// * Public access.
 //
-//     * Object
-// Lock
+// * Object Lock
 //
-//     * Bucket Location constraint
+// * Bucket
+// Location constraint
 //
-// For an example of the request syntax for
-// Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and
-// outpost-id in your API request, see the  Example
+// For an example of the request syntax for Amazon S3 on
+// Outposts that uses the S3 on Outposts endpoint hostname prefix and outpost-id in
+// your API request, see the  Example
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_CreateBucket.html#API_control_CreateBucket_Examples)
 // section below. The following actions are related to CreateBucket for Amazon S3
 // on Outposts:
 //
-//     * PutObject
+// * PutObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
 //
-//     *
+// *
 // GetBucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_GetBucket.html)
 //
-//
-// * DeleteBucket
+// *
+// DeleteBucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_DeleteBucket.html)
 //
-//
-// * CreateAccessPoint
+// *
+// CreateAccessPoint
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_CreateAccessPoint.html)
 //
-//
-// * PutAccessPointPolicy
+// *
+// PutAccessPointPolicy
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_PutAccessPointPolicy.html)
 func (c *Client) CreateBucket(ctx context.Context, params *CreateBucketInput, optFns ...func(*Options)) (*CreateBucketOutput, error) {
 	if params == nil {

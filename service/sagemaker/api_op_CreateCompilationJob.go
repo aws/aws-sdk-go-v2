@@ -19,24 +19,23 @@ import (
 // Greengrass. In that case, deploy them as an ML resource. In the request body,
 // you provide the following:
 //
-//     * A name for the compilation job
+// * A name for the compilation job
 //
-//     *
-// Information about the input model artifacts
+// * Information
+// about the input model artifacts
 //
-//     * The output location for the
-// compiled model and the device (target) that the model runs on
+// * The output location for the compiled model
+// and the device (target) that the model runs on
 //
-//     * The Amazon
-// Resource Name (ARN) of the IAM role that Amazon SageMaker assumes to perform the
-// model compilation job.
+// * The Amazon Resource Name (ARN)
+// of the IAM role that Amazon SageMaker assumes to perform the model compilation
+// job.
 //
-// You can also provide a Tag to track the model
-// compilation job's resource use and costs. The response body contains the
-// CompilationJobArn for the compiled job. To stop a model compilation job, use
-// StopCompilationJob. To get information about a particular model compilation job,
-// use DescribeCompilationJob. To get information about multiple model compilation
-// jobs, use ListCompilationJobs.
+// You can also provide a Tag to track the model compilation job's resource
+// use and costs. The response body contains the CompilationJobArn for the compiled
+// job. To stop a model compilation job, use StopCompilationJob. To get information
+// about a particular model compilation job, use DescribeCompilationJob. To get
+// information about multiple model compilation jobs, use ListCompilationJobs.
 func (c *Client) CreateCompilationJob(ctx context.Context, params *CreateCompilationJobInput, optFns ...func(*Options)) (*CreateCompilationJobOutput, error) {
 	if params == nil {
 		params = &CreateCompilationJobInput{}
@@ -77,21 +76,20 @@ type CreateCompilationJobInput struct {
 	// perform tasks on your behalf. During model compilation, Amazon SageMaker needs
 	// your permission to:
 	//
-	//     * Read input data from an S3 bucket
+	// * Read input data from an S3 bucket
 	//
-	//     * Write model
+	// * Write model
 	// artifacts to an S3 bucket
 	//
-	//     * Write logs to Amazon CloudWatch Logs
+	// * Write logs to Amazon CloudWatch Logs
 	//
-	//     *
-	// Publish metrics to Amazon CloudWatch
+	// * Publish
+	// metrics to Amazon CloudWatch
 	//
-	// You grant permissions for all of these
-	// tasks to an IAM role. To pass this role to Amazon SageMaker, the caller of this
-	// API must have the iam:PassRole permission. For more information, see Amazon
-	// SageMaker Roles.
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html)
+	// You grant permissions for all of these tasks to an
+	// IAM role. To pass this role to Amazon SageMaker, the caller of this API must
+	// have the iam:PassRole permission. For more information, see Amazon SageMaker
+	// Roles. (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html)
 	//
 	// This member is required.
 	RoleArn *string
@@ -109,8 +107,8 @@ type CreateCompilationJobOutput struct {
 	// If the action is successful, the service sends back an HTTP 200 response. Amazon
 	// SageMaker returns the following data in JSON format:
 	//
-	//     * CompilationJobArn:
-	// The Amazon Resource Name (ARN) of the compiled job.
+	// * CompilationJobArn: The
+	// Amazon Resource Name (ARN) of the compiled job.
 	//
 	// This member is required.
 	CompilationJobArn *string

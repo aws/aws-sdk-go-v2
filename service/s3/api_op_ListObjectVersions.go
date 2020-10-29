@@ -19,17 +19,18 @@ import (
 // bucket. This action is not supported by Amazon S3 on Outposts. The following
 // operations are related to ListObjectVersions:
 //
-//     * ListObjectsV2
+// * ListObjectsV2
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html)
 //
-//     *
-// GetObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
+// *
+// GetObject
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
 //
-//
-// * PutObject
+// *
+// PutObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
 //
-//     *
+// *
 // DeleteObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html)
 func (c *Client) ListObjectVersions(ctx context.Context, params *ListObjectVersionsInput, optFns ...func(*Options)) (*ListObjectVersionsOutput, error) {

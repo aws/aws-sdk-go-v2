@@ -228,32 +228,31 @@ type InputTransformer struct {
 	// valid JSON. If InputTemplate is a JSON object (surrounded by curly braces), the
 	// following restrictions apply:
 	//
-	//     * The placeholder cannot be used as an object
+	// * The placeholder cannot be used as an object
 	// key.
 	//
-	//     * Object values cannot include quote marks.
+	// * Object values cannot include quote marks.
 	//
-	// The following example
-	// shows the syntax for using InputPathsMap and InputTemplate.
-	// "InputTransformer":
+	// The following example shows
+	// the syntax for using InputPathsMap and InputTemplate.  "InputTransformer":
+	//
+	// {
+	//
+	//     "InputPathsMap": {"instance": "$.detail.instance","status":
+	// "$.detail.status"},
+	//
+	//     "InputTemplate": " is in state "
+	//
+	// } To have the
+	// InputTemplate include quote marks within a JSON string, escape each quote marks
+	// with a slash, as in the following example:  "InputTransformer":
 	//     {
 	//
-	//     "InputPathsMap": {"instance":
-	// "$.detail.instance","status": "$.detail.status"},
 	//
-	//     "InputTemplate": " is in
-	// state "
+	// "InputPathsMap": {"instance": "$.detail.instance","status":
+	// "$.detail.status"},
 	//
-	// } To have the InputTemplate include quote marks within a JSON string,
-	// escape each quote marks with a slash, as in the following example:
-	// "InputTransformer":
-	//     {
-	//
-	//     "InputPathsMap": {"instance":
-	// "$.detail.instance","status": "$.detail.status"},
-	//
-	//     "InputTemplate": " is in
-	// state """
+	//     "InputTemplate": " is in state """
 	//
 	//     }
 	//

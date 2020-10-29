@@ -26,9 +26,9 @@ type Capability string
 
 // Enum values for Capability
 const (
-	CapabilityCapability_iam         Capability = "CAPABILITY_IAM"
-	CapabilityCapability_named_iam   Capability = "CAPABILITY_NAMED_IAM"
-	CapabilityCapability_auto_expand Capability = "CAPABILITY_AUTO_EXPAND"
+	CapabilityCapabilityIam        Capability = "CAPABILITY_IAM"
+	CapabilityCapabilityNamedIam   Capability = "CAPABILITY_NAMED_IAM"
+	CapabilityCapabilityAutoExpand Capability = "CAPABILITY_AUTO_EXPAND"
 )
 
 // Values returns all known values for Capability. Note that this can be expanded
@@ -68,11 +68,11 @@ type ChangeSetStatus string
 
 // Enum values for ChangeSetStatus
 const (
-	ChangeSetStatusCreate_pending     ChangeSetStatus = "CREATE_PENDING"
-	ChangeSetStatusCreate_in_progress ChangeSetStatus = "CREATE_IN_PROGRESS"
-	ChangeSetStatusCreate_complete    ChangeSetStatus = "CREATE_COMPLETE"
-	ChangeSetStatusDelete_complete    ChangeSetStatus = "DELETE_COMPLETE"
-	ChangeSetStatusFailed             ChangeSetStatus = "FAILED"
+	ChangeSetStatusCreatePending    ChangeSetStatus = "CREATE_PENDING"
+	ChangeSetStatusCreateInProgress ChangeSetStatus = "CREATE_IN_PROGRESS"
+	ChangeSetStatusCreateComplete   ChangeSetStatus = "CREATE_COMPLETE"
+	ChangeSetStatusDeleteComplete   ChangeSetStatus = "DELETE_COMPLETE"
+	ChangeSetStatusFailed           ChangeSetStatus = "FAILED"
 )
 
 // Values returns all known values for ChangeSetStatus. Note that this can be
@@ -170,9 +170,9 @@ type DifferenceType string
 
 // Enum values for DifferenceType
 const (
-	DifferenceTypeAdd       DifferenceType = "ADD"
-	DifferenceTypeRemove    DifferenceType = "REMOVE"
-	DifferenceTypeNot_equal DifferenceType = "NOT_EQUAL"
+	DifferenceTypeAdd      DifferenceType = "ADD"
+	DifferenceTypeRemove   DifferenceType = "REMOVE"
+	DifferenceTypeNotEqual DifferenceType = "NOT_EQUAL"
 )
 
 // Values returns all known values for DifferenceType. Note that this can be
@@ -208,12 +208,12 @@ type ExecutionStatus string
 
 // Enum values for ExecutionStatus
 const (
-	ExecutionStatusUnavailable         ExecutionStatus = "UNAVAILABLE"
-	ExecutionStatusAvailable           ExecutionStatus = "AVAILABLE"
-	ExecutionStatusExecute_in_progress ExecutionStatus = "EXECUTE_IN_PROGRESS"
-	ExecutionStatusExecute_complete    ExecutionStatus = "EXECUTE_COMPLETE"
-	ExecutionStatusExecute_failed      ExecutionStatus = "EXECUTE_FAILED"
-	ExecutionStatusObsolete            ExecutionStatus = "OBSOLETE"
+	ExecutionStatusUnavailable       ExecutionStatus = "UNAVAILABLE"
+	ExecutionStatusAvailable         ExecutionStatus = "AVAILABLE"
+	ExecutionStatusExecuteInProgress ExecutionStatus = "EXECUTE_IN_PROGRESS"
+	ExecutionStatusExecuteComplete   ExecutionStatus = "EXECUTE_COMPLETE"
+	ExecutionStatusExecuteFailed     ExecutionStatus = "EXECUTE_FAILED"
+	ExecutionStatusObsolete          ExecutionStatus = "OBSOLETE"
 )
 
 // Values returns all known values for ExecutionStatus. Note that this can be
@@ -276,9 +276,9 @@ type OnFailure string
 
 // Enum values for OnFailure
 const (
-	OnFailureDo_nothing OnFailure = "DO_NOTHING"
-	OnFailureRollback   OnFailure = "ROLLBACK"
-	OnFailureDelete     OnFailure = "DELETE"
+	OnFailureDoNothing OnFailure = "DO_NOTHING"
+	OnFailureRollback  OnFailure = "ROLLBACK"
+	OnFailureDelete    OnFailure = "DELETE"
 )
 
 // Values returns all known values for OnFailure. Note that this can be expanded in
@@ -296,10 +296,10 @@ type OperationStatus string
 
 // Enum values for OperationStatus
 const (
-	OperationStatusPending     OperationStatus = "PENDING"
-	OperationStatusIn_progress OperationStatus = "IN_PROGRESS"
-	OperationStatusSuccess     OperationStatus = "SUCCESS"
-	OperationStatusFailed      OperationStatus = "FAILED"
+	OperationStatusPending    OperationStatus = "PENDING"
+	OperationStatusInProgress OperationStatus = "IN_PROGRESS"
+	OperationStatusSuccess    OperationStatus = "SUCCESS"
+	OperationStatusFailed     OperationStatus = "FAILED"
 )
 
 // Values returns all known values for OperationStatus. Note that this can be
@@ -318,8 +318,8 @@ type PermissionModels string
 
 // Enum values for PermissionModels
 const (
-	PermissionModelsService_managed PermissionModels = "SERVICE_MANAGED"
-	PermissionModelsSelf_managed    PermissionModels = "SELF_MANAGED"
+	PermissionModelsServiceManaged PermissionModels = "SERVICE_MANAGED"
+	PermissionModelsSelfManaged    PermissionModels = "SELF_MANAGED"
 )
 
 // Values returns all known values for PermissionModels. Note that this can be
@@ -336,9 +336,9 @@ type ProvisioningType string
 
 // Enum values for ProvisioningType
 const (
-	ProvisioningTypeNon_provisionable ProvisioningType = "NON_PROVISIONABLE"
-	ProvisioningTypeImmutable         ProvisioningType = "IMMUTABLE"
-	ProvisioningTypeFully_mutable     ProvisioningType = "FULLY_MUTABLE"
+	ProvisioningTypeNonProvisionable ProvisioningType = "NON_PROVISIONABLE"
+	ProvisioningTypeImmutable        ProvisioningType = "IMMUTABLE"
+	ProvisioningTypeFullyMutable     ProvisioningType = "FULLY_MUTABLE"
 )
 
 // Values returns all known values for ProvisioningType. Note that this can be
@@ -356,9 +356,9 @@ type RegistrationStatus string
 
 // Enum values for RegistrationStatus
 const (
-	RegistrationStatusComplete    RegistrationStatus = "COMPLETE"
-	RegistrationStatusIn_progress RegistrationStatus = "IN_PROGRESS"
-	RegistrationStatusFailed      RegistrationStatus = "FAILED"
+	RegistrationStatusComplete   RegistrationStatus = "COMPLETE"
+	RegistrationStatusInProgress RegistrationStatus = "IN_PROGRESS"
+	RegistrationStatusFailed     RegistrationStatus = "FAILED"
 )
 
 // Values returns all known values for RegistrationStatus. Note that this can be
@@ -476,22 +476,22 @@ type ResourceStatus string
 
 // Enum values for ResourceStatus
 const (
-	ResourceStatusCreate_in_progress          ResourceStatus = "CREATE_IN_PROGRESS"
-	ResourceStatusCreate_failed               ResourceStatus = "CREATE_FAILED"
-	ResourceStatusCreate_complete             ResourceStatus = "CREATE_COMPLETE"
-	ResourceStatusDelete_in_progress          ResourceStatus = "DELETE_IN_PROGRESS"
-	ResourceStatusDelete_failed               ResourceStatus = "DELETE_FAILED"
-	ResourceStatusDelete_complete             ResourceStatus = "DELETE_COMPLETE"
-	ResourceStatusDelete_skipped              ResourceStatus = "DELETE_SKIPPED"
-	ResourceStatusUpdate_in_progress          ResourceStatus = "UPDATE_IN_PROGRESS"
-	ResourceStatusUpdate_failed               ResourceStatus = "UPDATE_FAILED"
-	ResourceStatusUpdate_complete             ResourceStatus = "UPDATE_COMPLETE"
-	ResourceStatusImport_failed               ResourceStatus = "IMPORT_FAILED"
-	ResourceStatusImport_complete             ResourceStatus = "IMPORT_COMPLETE"
-	ResourceStatusImport_in_progress          ResourceStatus = "IMPORT_IN_PROGRESS"
-	ResourceStatusImport_rollback_in_progress ResourceStatus = "IMPORT_ROLLBACK_IN_PROGRESS"
-	ResourceStatusImport_rollback_failed      ResourceStatus = "IMPORT_ROLLBACK_FAILED"
-	ResourceStatusImport_rollback_complete    ResourceStatus = "IMPORT_ROLLBACK_COMPLETE"
+	ResourceStatusCreateInProgress         ResourceStatus = "CREATE_IN_PROGRESS"
+	ResourceStatusCreateFailed             ResourceStatus = "CREATE_FAILED"
+	ResourceStatusCreateComplete           ResourceStatus = "CREATE_COMPLETE"
+	ResourceStatusDeleteInProgress         ResourceStatus = "DELETE_IN_PROGRESS"
+	ResourceStatusDeleteFailed             ResourceStatus = "DELETE_FAILED"
+	ResourceStatusDeleteComplete           ResourceStatus = "DELETE_COMPLETE"
+	ResourceStatusDeleteSkipped            ResourceStatus = "DELETE_SKIPPED"
+	ResourceStatusUpdateInProgress         ResourceStatus = "UPDATE_IN_PROGRESS"
+	ResourceStatusUpdateFailed             ResourceStatus = "UPDATE_FAILED"
+	ResourceStatusUpdateComplete           ResourceStatus = "UPDATE_COMPLETE"
+	ResourceStatusImportFailed             ResourceStatus = "IMPORT_FAILED"
+	ResourceStatusImportComplete           ResourceStatus = "IMPORT_COMPLETE"
+	ResourceStatusImportInProgress         ResourceStatus = "IMPORT_IN_PROGRESS"
+	ResourceStatusImportRollbackInProgress ResourceStatus = "IMPORT_ROLLBACK_IN_PROGRESS"
+	ResourceStatusImportRollbackFailed     ResourceStatus = "IMPORT_ROLLBACK_FAILED"
+	ResourceStatusImportRollbackComplete   ResourceStatus = "IMPORT_ROLLBACK_COMPLETE"
 )
 
 // Values returns all known values for ResourceStatus. Note that this can be
@@ -522,9 +522,9 @@ type StackDriftDetectionStatus string
 
 // Enum values for StackDriftDetectionStatus
 const (
-	StackDriftDetectionStatusDetection_in_progress StackDriftDetectionStatus = "DETECTION_IN_PROGRESS"
-	StackDriftDetectionStatusDetection_failed      StackDriftDetectionStatus = "DETECTION_FAILED"
-	StackDriftDetectionStatusDetection_complete    StackDriftDetectionStatus = "DETECTION_COMPLETE"
+	StackDriftDetectionStatusDetectionInProgress StackDriftDetectionStatus = "DETECTION_IN_PROGRESS"
+	StackDriftDetectionStatusDetectionFailed     StackDriftDetectionStatus = "DETECTION_FAILED"
+	StackDriftDetectionStatusDetectionComplete   StackDriftDetectionStatus = "DETECTION_COMPLETE"
 )
 
 // Values returns all known values for StackDriftDetectionStatus. Note that this
@@ -542,10 +542,10 @@ type StackDriftStatus string
 
 // Enum values for StackDriftStatus
 const (
-	StackDriftStatusDrifted     StackDriftStatus = "DRIFTED"
-	StackDriftStatusIn_sync     StackDriftStatus = "IN_SYNC"
-	StackDriftStatusUnknown     StackDriftStatus = "UNKNOWN"
-	StackDriftStatusNot_checked StackDriftStatus = "NOT_CHECKED"
+	StackDriftStatusDrifted    StackDriftStatus = "DRIFTED"
+	StackDriftStatusInSync     StackDriftStatus = "IN_SYNC"
+	StackDriftStatusUnknown    StackDriftStatus = "UNKNOWN"
+	StackDriftStatusNotChecked StackDriftStatus = "NOT_CHECKED"
 )
 
 // Values returns all known values for StackDriftStatus. Note that this can be
@@ -590,7 +590,7 @@ type StackInstanceFilterName string
 
 // Enum values for StackInstanceFilterName
 const (
-	StackInstanceFilterNameDetailed_status StackInstanceFilterName = "DETAILED_STATUS"
+	StackInstanceFilterNameDetailedStatus StackInstanceFilterName = "DETAILED_STATUS"
 )
 
 // Values returns all known values for StackInstanceFilterName. Note that this can
@@ -626,10 +626,10 @@ type StackResourceDriftStatus string
 
 // Enum values for StackResourceDriftStatus
 const (
-	StackResourceDriftStatusIn_sync     StackResourceDriftStatus = "IN_SYNC"
-	StackResourceDriftStatusModified    StackResourceDriftStatus = "MODIFIED"
-	StackResourceDriftStatusDeleted     StackResourceDriftStatus = "DELETED"
-	StackResourceDriftStatusNot_checked StackResourceDriftStatus = "NOT_CHECKED"
+	StackResourceDriftStatusInSync     StackResourceDriftStatus = "IN_SYNC"
+	StackResourceDriftStatusModified   StackResourceDriftStatus = "MODIFIED"
+	StackResourceDriftStatusDeleted    StackResourceDriftStatus = "DELETED"
+	StackResourceDriftStatusNotChecked StackResourceDriftStatus = "NOT_CHECKED"
 )
 
 // Values returns all known values for StackResourceDriftStatus. Note that this can
@@ -648,11 +648,11 @@ type StackSetDriftDetectionStatus string
 
 // Enum values for StackSetDriftDetectionStatus
 const (
-	StackSetDriftDetectionStatusCompleted       StackSetDriftDetectionStatus = "COMPLETED"
-	StackSetDriftDetectionStatusFailed          StackSetDriftDetectionStatus = "FAILED"
-	StackSetDriftDetectionStatusPartial_success StackSetDriftDetectionStatus = "PARTIAL_SUCCESS"
-	StackSetDriftDetectionStatusIn_progress     StackSetDriftDetectionStatus = "IN_PROGRESS"
-	StackSetDriftDetectionStatusStopped         StackSetDriftDetectionStatus = "STOPPED"
+	StackSetDriftDetectionStatusCompleted      StackSetDriftDetectionStatus = "COMPLETED"
+	StackSetDriftDetectionStatusFailed         StackSetDriftDetectionStatus = "FAILED"
+	StackSetDriftDetectionStatusPartialSuccess StackSetDriftDetectionStatus = "PARTIAL_SUCCESS"
+	StackSetDriftDetectionStatusInProgress     StackSetDriftDetectionStatus = "IN_PROGRESS"
+	StackSetDriftDetectionStatusStopped        StackSetDriftDetectionStatus = "STOPPED"
 )
 
 // Values returns all known values for StackSetDriftDetectionStatus. Note that this
@@ -672,9 +672,9 @@ type StackSetDriftStatus string
 
 // Enum values for StackSetDriftStatus
 const (
-	StackSetDriftStatusDrifted     StackSetDriftStatus = "DRIFTED"
-	StackSetDriftStatusIn_sync     StackSetDriftStatus = "IN_SYNC"
-	StackSetDriftStatusNot_checked StackSetDriftStatus = "NOT_CHECKED"
+	StackSetDriftStatusDrifted    StackSetDriftStatus = "DRIFTED"
+	StackSetDriftStatusInSync     StackSetDriftStatus = "IN_SYNC"
+	StackSetDriftStatusNotChecked StackSetDriftStatus = "NOT_CHECKED"
 )
 
 // Values returns all known values for StackSetDriftStatus. Note that this can be
@@ -692,10 +692,10 @@ type StackSetOperationAction string
 
 // Enum values for StackSetOperationAction
 const (
-	StackSetOperationActionCreate       StackSetOperationAction = "CREATE"
-	StackSetOperationActionUpdate       StackSetOperationAction = "UPDATE"
-	StackSetOperationActionDelete       StackSetOperationAction = "DELETE"
-	StackSetOperationActionDetect_drift StackSetOperationAction = "DETECT_DRIFT"
+	StackSetOperationActionCreate      StackSetOperationAction = "CREATE"
+	StackSetOperationActionUpdate      StackSetOperationAction = "UPDATE"
+	StackSetOperationActionDelete      StackSetOperationAction = "DELETE"
+	StackSetOperationActionDetectDrift StackSetOperationAction = "DETECT_DRIFT"
 )
 
 // Values returns all known values for StackSetOperationAction. Note that this can
@@ -783,28 +783,28 @@ type StackStatus string
 
 // Enum values for StackStatus
 const (
-	StackStatusCreate_in_progress                           StackStatus = "CREATE_IN_PROGRESS"
-	StackStatusCreate_failed                                StackStatus = "CREATE_FAILED"
-	StackStatusCreate_complete                              StackStatus = "CREATE_COMPLETE"
-	StackStatusRollback_in_progress                         StackStatus = "ROLLBACK_IN_PROGRESS"
-	StackStatusRollback_failed                              StackStatus = "ROLLBACK_FAILED"
-	StackStatusRollback_complete                            StackStatus = "ROLLBACK_COMPLETE"
-	StackStatusDelete_in_progress                           StackStatus = "DELETE_IN_PROGRESS"
-	StackStatusDelete_failed                                StackStatus = "DELETE_FAILED"
-	StackStatusDelete_complete                              StackStatus = "DELETE_COMPLETE"
-	StackStatusUpdate_in_progress                           StackStatus = "UPDATE_IN_PROGRESS"
-	StackStatusUpdate_complete_cleanup_in_progress          StackStatus = "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS"
-	StackStatusUpdate_complete                              StackStatus = "UPDATE_COMPLETE"
-	StackStatusUpdate_rollback_in_progress                  StackStatus = "UPDATE_ROLLBACK_IN_PROGRESS"
-	StackStatusUpdate_rollback_failed                       StackStatus = "UPDATE_ROLLBACK_FAILED"
-	StackStatusUpdate_rollback_complete_cleanup_in_progress StackStatus = "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS"
-	StackStatusUpdate_rollback_complete                     StackStatus = "UPDATE_ROLLBACK_COMPLETE"
-	StackStatusReview_in_progress                           StackStatus = "REVIEW_IN_PROGRESS"
-	StackStatusImport_in_progress                           StackStatus = "IMPORT_IN_PROGRESS"
-	StackStatusImport_complete                              StackStatus = "IMPORT_COMPLETE"
-	StackStatusImport_rollback_in_progress                  StackStatus = "IMPORT_ROLLBACK_IN_PROGRESS"
-	StackStatusImport_rollback_failed                       StackStatus = "IMPORT_ROLLBACK_FAILED"
-	StackStatusImport_rollback_complete                     StackStatus = "IMPORT_ROLLBACK_COMPLETE"
+	StackStatusCreateInProgress                        StackStatus = "CREATE_IN_PROGRESS"
+	StackStatusCreateFailed                            StackStatus = "CREATE_FAILED"
+	StackStatusCreateComplete                          StackStatus = "CREATE_COMPLETE"
+	StackStatusRollbackInProgress                      StackStatus = "ROLLBACK_IN_PROGRESS"
+	StackStatusRollbackFailed                          StackStatus = "ROLLBACK_FAILED"
+	StackStatusRollbackComplete                        StackStatus = "ROLLBACK_COMPLETE"
+	StackStatusDeleteInProgress                        StackStatus = "DELETE_IN_PROGRESS"
+	StackStatusDeleteFailed                            StackStatus = "DELETE_FAILED"
+	StackStatusDeleteComplete                          StackStatus = "DELETE_COMPLETE"
+	StackStatusUpdateInProgress                        StackStatus = "UPDATE_IN_PROGRESS"
+	StackStatusUpdateCompleteCleanupInProgress         StackStatus = "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS"
+	StackStatusUpdateComplete                          StackStatus = "UPDATE_COMPLETE"
+	StackStatusUpdateRollbackInProgress                StackStatus = "UPDATE_ROLLBACK_IN_PROGRESS"
+	StackStatusUpdateRollbackFailed                    StackStatus = "UPDATE_ROLLBACK_FAILED"
+	StackStatusUpdateRollbackCompleteCleanupInProgress StackStatus = "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS"
+	StackStatusUpdateRollbackComplete                  StackStatus = "UPDATE_ROLLBACK_COMPLETE"
+	StackStatusReviewInProgress                        StackStatus = "REVIEW_IN_PROGRESS"
+	StackStatusImportInProgress                        StackStatus = "IMPORT_IN_PROGRESS"
+	StackStatusImportComplete                          StackStatus = "IMPORT_COMPLETE"
+	StackStatusImportRollbackInProgress                StackStatus = "IMPORT_ROLLBACK_IN_PROGRESS"
+	StackStatusImportRollbackFailed                    StackStatus = "IMPORT_ROLLBACK_FAILED"
+	StackStatusImportRollbackComplete                  StackStatus = "IMPORT_ROLLBACK_COMPLETE"
 )
 
 // Values returns all known values for StackStatus. Note that this can be expanded

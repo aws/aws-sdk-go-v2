@@ -33,7 +33,7 @@ func (c *Client) DeleteBandwidthRateLimit(ctx context.Context, params *DeleteBan
 
 // A JSON object containing the following fields:
 //
-//     *
+// *
 // DeleteBandwidthRateLimitInput$BandwidthType
 type DeleteBandwidthRateLimitInput struct {
 

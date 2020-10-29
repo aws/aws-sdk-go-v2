@@ -77,12 +77,12 @@ type DescribeTrialComponentOutput struct {
 
 	// The status of the component. States include:
 	//
-	//     * InProgress
+	// * InProgress
 	//
-	//     *
-	// Completed
+	// * Completed
 	//
-	//     * Failed
+	// *
+	// Failed
 	Status *types.TrialComponentStatus
 
 	// The Amazon Resource Name (ARN) of the trial component.

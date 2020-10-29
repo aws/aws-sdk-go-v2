@@ -14,7 +14,7 @@ import (
 // Retrieves the compiled information from a RequestEnvironmentInfo request.
 // Related Topics
 //
-//     * RequestEnvironmentInfo
+// * RequestEnvironmentInfo
 func (c *Client) RetrieveEnvironmentInfo(ctx context.Context, params *RetrieveEnvironmentInfoInput, optFns ...func(*Options)) (*RetrieveEnvironmentInfoOutput, error) {
 	if params == nil {
 		params = &RetrieveEnvironmentInfoInput{}

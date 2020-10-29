@@ -57,16 +57,16 @@ type CreateEventSubscriptionInput struct {
 
 	// The name of the event subscription to be created. Constraints:
 	//
-	//     * Cannot be
+	// * Cannot be
 	// null, empty, or blank.
 	//
-	//     * Must contain from 1 to 255 alphanumeric characters
-	// or hyphens.
+	// * Must contain from 1 to 255 alphanumeric characters or
+	// hyphens.
 	//
-	//     * First character must be a letter.
+	// * First character must be a letter.
 	//
-	//     * Cannot end with a
-	// hyphen or contain two consecutive hyphens.
+	// * Cannot end with a hyphen or
+	// contain two consecutive hyphens.
 	//
 	// This member is required.
 	SubscriptionName *string

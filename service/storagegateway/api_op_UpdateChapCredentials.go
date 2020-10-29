@@ -33,16 +33,16 @@ func (c *Client) UpdateChapCredentials(ctx context.Context, params *UpdateChapCr
 
 // A JSON object containing one or more of the following fields:
 //
-//     *
+// *
 // UpdateChapCredentialsInput$InitiatorName
 //
-//     *
+// *
 // UpdateChapCredentialsInput$SecretToAuthenticateInitiator
 //
-//     *
+// *
 // UpdateChapCredentialsInput$SecretToAuthenticateTarget
 //
-//     *
+// *
 // UpdateChapCredentialsInput$TargetARN
 type UpdateChapCredentialsInput struct {
 

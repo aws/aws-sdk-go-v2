@@ -42,13 +42,12 @@ type CreateSiteInput struct {
 	// Manager console. If you specify the address, the latitude and longitude are
 	// automatically calculated.
 	//
-	//     * Address: The physical address of the site.
+	// * Address: The physical address of the site.
 	//
+	// *
+	// Latitude: The latitude of the site.
 	//
-	// * Latitude: The latitude of the site.
-	//
-	//     * Longitude: The longitude of the
-	// site.
+	// * Longitude: The longitude of the site.
 	Location *types.Location
 
 	// The tags to apply to the resource during creation.

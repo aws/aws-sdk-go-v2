@@ -136,18 +136,18 @@ type Fragment struct {
 // and less than or equal to the end time are returned. For example, if a stream
 // contains fragments with the following start timestamps:
 //
-//     * 00:00:00
+// * 00:00:00
 //
-//     *
+// *
 // 00:00:02
 //
-//     * 00:00:04
+// * 00:00:04
 //
-//     * 00:00:06
+// * 00:00:06
 //
-// A fragment selector range with a start
-// time of 00:00:01 and end time of 00:00:04 would return the fragments with start
-// times of 00:00:02 and 00:00:04.
+// A fragment selector range with a start time of
+// 00:00:01 and end time of 00:00:04 would return the fragments with start times of
+// 00:00:02 and 00:00:04.
 type FragmentSelector struct {
 
 	// The origin of the timestamps to use (Server or Producer).

@@ -40,18 +40,17 @@ type PutResolverRulePolicyInput struct {
 	// account to be able to perform. You can specify the following operations in the
 	// Actions section of the statement:
 	//
-	//     * route53resolver:GetResolverRule
+	// * route53resolver:GetResolverRule
 	//
-	//     *
+	// *
 	// route53resolver:AssociateResolverRule
 	//
-	//     *
+	// *
 	// route53resolver:DisassociateResolverRule
 	//
-	//     *
-	// route53resolver:ListResolverRules
+	// * route53resolver:ListResolverRules
 	//
-	//     *
+	// *
 	// route53resolver:ListResolverRuleAssociations
 	//
 	// In the Resource section of the

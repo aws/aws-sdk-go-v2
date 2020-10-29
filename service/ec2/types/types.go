@@ -413,11 +413,11 @@ type CapacityReservation struct {
 	// Indicates the way in which the Capacity Reservation ends. A Capacity Reservation
 	// can have one of the following end types:
 	//
-	//     * unlimited - The Capacity
-	// Reservation remains active until you explicitly cancel it.
+	// * unlimited - The Capacity Reservation
+	// remains active until you explicitly cancel it.
 	//
-	//     * limited - The
-	// Capacity Reservation expires automatically at a specified date and time.
+	// * limited - The Capacity
+	// Reservation expires automatically at a specified date and time.
 	EndDateType EndDateType
 
 	// Indicates whether the Capacity Reservation supports instances with temporary,
@@ -427,16 +427,16 @@ type CapacityReservation struct {
 	// Indicates the type of instance launches that the Capacity Reservation accepts.
 	// The options include:
 	//
-	//     * open - The Capacity Reservation accepts all
-	// instances that have matching attributes (instance type, platform, and
-	// Availability Zone). Instances that have matching attributes launch into the
-	// Capacity Reservation automatically without specifying any additional
-	// parameters.
+	// * open - The Capacity Reservation accepts all instances
+	// that have matching attributes (instance type, platform, and Availability Zone).
+	// Instances that have matching attributes launch into the Capacity Reservation
+	// automatically without specifying any additional parameters.
 	//
-	//     * targeted - The Capacity Reservation only accepts instances
-	// that have matching attributes (instance type, platform, and Availability Zone),
-	// and explicitly target the Capacity Reservation. This ensures that only permitted
-	// instances can use the reserved capacity.
+	// * targeted - The
+	// Capacity Reservation only accepts instances that have matching attributes
+	// (instance type, platform, and Availability Zone), and explicitly target the
+	// Capacity Reservation. This ensures that only permitted instances can use the
+	// reserved capacity.
 	InstanceMatchCriteria InstanceMatchCriteria
 
 	// The type of operating system for which the Capacity Reservation reserves
@@ -452,24 +452,24 @@ type CapacityReservation struct {
 	// The current state of the Capacity Reservation. A Capacity Reservation can be in
 	// one of the following states:
 	//
-	//     * active - The Capacity Reservation is active
-	// and the capacity is available for your use.
+	// * active - The Capacity Reservation is active and
+	// the capacity is available for your use.
 	//
-	//     * expired - The Capacity
-	// Reservation expired automatically at the date and time specified in your
-	// request. The reserved capacity is no longer available for your use.
+	// * expired - The Capacity Reservation
+	// expired automatically at the date and time specified in your request. The
+	// reserved capacity is no longer available for your use.
 	//
-	//     *
-	// cancelled - The Capacity Reservation was manually cancelled. The reserved
-	// capacity is no longer available for your use.
+	// * cancelled - The
+	// Capacity Reservation was manually cancelled. The reserved capacity is no longer
+	// available for your use.
 	//
-	//     * pending - The Capacity
-	// Reservation request was successful but the capacity provisioning is still
-	// pending.
+	// * pending - The Capacity Reservation request was
+	// successful but the capacity provisioning is still pending.
 	//
-	//     * failed - The Capacity Reservation request has failed. A request
-	// might fail due to invalid request parameters, capacity constraints, or instance
-	// limit constraints. Failed requests are retained for 60 minutes.
+	// * failed - The
+	// Capacity Reservation request has failed. A request might fail due to invalid
+	// request parameters, capacity constraints, or instance limit constraints. Failed
+	// requests are retained for 60 minutes.
 	State CapacityReservationState
 
 	// Any tags assigned to the Capacity Reservation.
@@ -478,11 +478,11 @@ type CapacityReservation struct {
 	// Indicates the tenancy of the Capacity Reservation. A Capacity Reservation can
 	// have one of the following tenancy settings:
 	//
-	//     * default - The Capacity
+	// * default - The Capacity
 	// Reservation is created on hardware that is shared with other AWS accounts.
 	//
-	//
-	// * dedicated - The Capacity Reservation is created on single-tenant hardware that
+	// *
+	// dedicated - The Capacity Reservation is created on single-tenant hardware that
 	// is dedicated to a single AWS account.
 	Tenancy CapacityReservationTenancy
 
@@ -562,12 +562,12 @@ type CapacityReservationSpecification struct {
 	// Indicates the instance's Capacity Reservation preferences. Possible preferences
 	// include:
 	//
-	//     * open - The instance can run in any open Capacity Reservation
-	// that has matching attributes (instance type, platform, Availability Zone).
+	// * open - The instance can run in any open Capacity Reservation that
+	// has matching attributes (instance type, platform, Availability Zone).
 	//
-	//
-	// * none - The instance avoids running in a Capacity Reservation even if one is
-	// available. The instance runs as an On-Demand Instance.
+	// * none -
+	// The instance avoids running in a Capacity Reservation even if one is available.
+	// The instance runs as an On-Demand Instance.
 	CapacityReservationPreference CapacityReservationPreference
 
 	// Information about the target Capacity Reservation or Capacity Reservation group.
@@ -586,12 +586,12 @@ type CapacityReservationSpecificationResponse struct {
 	// Describes the instance's Capacity Reservation preferences. Possible preferences
 	// include:
 	//
-	//     * open - The instance can run in any open Capacity Reservation
-	// that has matching attributes (instance type, platform, Availability Zone).
+	// * open - The instance can run in any open Capacity Reservation that
+	// has matching attributes (instance type, platform, Availability Zone).
 	//
-	//
-	// * none - The instance avoids running in a Capacity Reservation even if one is
-	// available. The instance runs in On-Demand capacity.
+	// * none -
+	// The instance avoids running in a Capacity Reservation even if one is available.
+	// The instance runs in On-Demand capacity.
 	CapacityReservationPreference CapacityReservationPreference
 
 	// Information about the targeted Capacity Reservation or Capacity Reservation
@@ -926,20 +926,20 @@ type ClientVpnEndpointStatus struct {
 
 	// The state of the Client VPN endpoint. Possible states include:
 	//
-	//     *
+	// *
 	// pending-associate - The Client VPN endpoint has been created but no target
 	// networks have been associated. The Client VPN endpoint cannot accept
 	// connections.
 	//
-	//     * available - The Client VPN endpoint has been created and a
+	// * available - The Client VPN endpoint has been created and a
 	// target network has been associated. The Client VPN endpoint can accept
 	// connections.
 	//
-	//     * deleting - The Client VPN endpoint is being deleted. The
-	// Client VPN endpoint cannot accept connections.
+	// * deleting - The Client VPN endpoint is being deleted. The Client
+	// VPN endpoint cannot accept connections.
 	//
-	//     * deleted - The Client VPN
-	// endpoint has been deleted. The Client VPN endpoint cannot accept connections.
+	// * deleted - The Client VPN endpoint has
+	// been deleted. The Client VPN endpoint cannot accept connections.
 	Code ClientVpnEndpointStatusCode
 
 	// A message about the status of the Client VPN endpoint.
@@ -1374,11 +1374,11 @@ type DescribeFastSnapshotRestoreSuccessItem struct {
 
 	// The reason for the state transition. The possible values are as follows:
 	//
-	//     *
+	// *
 	// Client.UserInitiated - The state successfully transitioned to enabling or
 	// disabling.
 	//
-	//     * Client.UserInitiated - Lifecycle state transition - The state
+	// * Client.UserInitiated - Lifecycle state transition - The state
 	// successfully transitioned to optimizing, enabled, or disabled.
 	StateTransitionReason *string
 }
@@ -1536,11 +1536,11 @@ type DisableFastSnapshotRestoreSuccessItem struct {
 
 	// The reason for the state transition. The possible values are as follows:
 	//
-	//     *
+	// *
 	// Client.UserInitiated - The state successfully transitioned to enabling or
 	// disabling.
 	//
-	//     * Client.UserInitiated - Lifecycle state transition - The state
+	// * Client.UserInitiated - Lifecycle state transition - The state
 	// successfully transitioned to optimizing, enabled, or disabled.
 	StateTransitionReason *string
 }
@@ -1973,11 +1973,11 @@ type EnableFastSnapshotRestoreSuccessItem struct {
 
 	// The reason for the state transition. The possible values are as follows:
 	//
-	//     *
+	// *
 	// Client.UserInitiated - The state successfully transitioned to enabling or
 	// disabling.
 	//
-	//     * Client.UserInitiated - Lifecycle state transition - The state
+	// * Client.UserInitiated - Lifecycle state transition - The state
 	// successfully transitioned to optimizing, enabled, or disabled.
 	StateTransitionReason *string
 }
@@ -1990,77 +1990,77 @@ type EventInformation struct {
 
 	// The event. The following are the error events:
 	//
-	//     * iamFleetRoleInvalid - The
-	// EC2 Fleet or Spot Fleet did not have the required permissions either to launch
-	// or terminate an instance.
+	// * iamFleetRoleInvalid - The EC2
+	// Fleet or Spot Fleet did not have the required permissions either to launch or
+	// terminate an instance.
 	//
-	//     * spotFleetRequestConfigurationInvalid - The
+	// * spotFleetRequestConfigurationInvalid - The
 	// configuration is not valid. For more information, see the description of the
 	// event.
 	//
-	//     * spotInstanceCountLimitExceeded - You've reached the limit on the
+	// * spotInstanceCountLimitExceeded - You've reached the limit on the
 	// number of Spot Instances that you can launch.
 	//
 	// The following are the
 	// fleetRequestChange events:
 	//
-	//     * active - The EC2 Fleet or Spot Fleet request
-	// has been validated and Amazon EC2 is attempting to maintain the target number of
+	// * active - The EC2 Fleet or Spot Fleet request has
+	// been validated and Amazon EC2 is attempting to maintain the target number of
 	// running Spot Instances.
 	//
-	//     * cancelled - The EC2 Fleet or Spot Fleet request
-	// is canceled and has no running Spot Instances. The EC2 Fleet or Spot Fleet will
-	// be deleted two days after its instances were terminated.
+	// * cancelled - The EC2 Fleet or Spot Fleet request is
+	// canceled and has no running Spot Instances. The EC2 Fleet or Spot Fleet will be
+	// deleted two days after its instances were terminated.
 	//
-	//     *
-	// cancelled_running - The EC2 Fleet or Spot Fleet request is canceled and does not
-	// launch additional Spot Instances. Existing Spot Instances continue to run until
-	// they are interrupted or terminated.
+	// * cancelled_running - The
+	// EC2 Fleet or Spot Fleet request is canceled and does not launch additional Spot
+	// Instances. Existing Spot Instances continue to run until they are interrupted or
+	// terminated.
 	//
-	//     * cancelled_terminating - The EC2 Fleet
-	// or Spot Fleet request is canceled and its Spot Instances are terminating.
+	// * cancelled_terminating - The EC2 Fleet or Spot Fleet request is
+	// canceled and its Spot Instances are terminating.
 	//
-	//     *
-	// expired - The EC2 Fleet or Spot Fleet request has expired. A subsequent event
-	// indicates that the instances were terminated, if the request was created with
+	// * expired - The EC2 Fleet or
+	// Spot Fleet request has expired. A subsequent event indicates that the instances
+	// were terminated, if the request was created with
 	// TerminateInstancesWithExpiration set.
 	//
-	//     * modify_in_progress - A request to
+	// * modify_in_progress - A request to
 	// modify the EC2 Fleet or Spot Fleet request was accepted and is in progress.
 	//
+	// *
+	// modify_successful - The EC2 Fleet or Spot Fleet request was modified.
 	//
-	// * modify_successful - The EC2 Fleet or Spot Fleet request was modified.
-	//
-	//     *
+	// *
 	// price_update - The price for a launch configuration was adjusted because it was
 	// too high. This change is permanent.
 	//
-	//     * submitted - The EC2 Fleet or Spot
-	// Fleet request is being evaluated and Amazon EC2 is preparing to launch the
-	// target number of Spot Instances.
+	// * submitted - The EC2 Fleet or Spot Fleet
+	// request is being evaluated and Amazon EC2 is preparing to launch the target
+	// number of Spot Instances.
 	//
 	// The following are the instanceChange events:
 	//
+	// *
+	// launched - A request was fulfilled and a new instance was launched.
 	//
-	// * launched - A request was fulfilled and a new instance was launched.
-	//
-	//     *
+	// *
 	// terminated - An instance was terminated by the user.
 	//
 	// The following are the
 	// Information events:
 	//
-	//     * launchSpecTemporarilyBlacklisted - The configuration
-	// is not valid and several attempts to launch instances have failed. For more
+	// * launchSpecTemporarilyBlacklisted - The configuration is
+	// not valid and several attempts to launch instances have failed. For more
 	// information, see the description of the event.
 	//
-	//     * launchSpecUnusable - The
-	// price in a launch specification is not valid because it is below the Spot price
-	// or the Spot price is above the On-Demand price.
+	// * launchSpecUnusable - The price
+	// in a launch specification is not valid because it is below the Spot price or the
+	// Spot price is above the On-Demand price.
 	//
-	//     * fleetProgressHalted - The
-	// price in every launch specification is not valid. A launch specification might
-	// become valid if the Spot price changes.
+	// * fleetProgressHalted - The price in
+	// every launch specification is not valid. A launch specification might become
+	// valid if the Spot price changes.
 	EventSubType *string
 
 	// The ID of the instance. This information is available only for instanceChange
@@ -2213,28 +2213,28 @@ type FederatedAuthenticationRequest struct {
 // supported by a describe operation are documented with the describe operation.
 // For example:
 //
-//     * DescribeAvailabilityZones
+// * DescribeAvailabilityZones
 //
-//     * DescribeImages
+// * DescribeImages
 //
-//     *
+// *
 // DescribeInstances
 //
-//     * DescribeKeyPairs
+// * DescribeKeyPairs
 //
-//     * DescribeSecurityGroups
+// * DescribeSecurityGroups
 //
-//     *
+// *
 // DescribeSnapshots
 //
-//     * DescribeSubnets
+// * DescribeSubnets
 //
-//     * DescribeTags
+// * DescribeTags
 //
-//     *
-// DescribeVolumes
+// * DescribeVolumes
 //
-//     * DescribeVpcs
+// *
+// DescribeVpcs
 type Filter struct {
 
 	// The name of the filter. Filter names are case-sensitive.
@@ -2626,16 +2626,16 @@ type FpgaImageState struct {
 
 	// The state. The following are the possible values:
 	//
-	//     * pending - AFI bitstream
+	// * pending - AFI bitstream
 	// generation is in progress.
 	//
-	//     * available - The AFI is available for use.
+	// * available - The AFI is available for use.
 	//
+	// *
+	// failed - AFI bitstream generation failed.
 	//
-	// * failed - AFI bitstream generation failed.
-	//
-	//     * unavailable - The AFI is no
-	// longer available for use.
+	// * unavailable - The AFI is no longer
+	// available for use.
 	Code FpgaImageStateCode
 
 	// If the state is failed, this is the error message.
@@ -2729,15 +2729,15 @@ type HistoryRecord struct {
 
 	// The event type.
 	//
-	//     * error - An error with the Spot Fleet request.
+	// * error - An error with the Spot Fleet request.
 	//
-	//     *
+	// *
 	// fleetRequestChange - A change in the status or configuration of the Spot Fleet
 	// request.
 	//
-	//     * instanceChange - An instance was launched or terminated.
+	// * instanceChange - An instance was launched or terminated.
 	//
-	//     *
+	// *
 	// Information - An informational event.
 	EventType EventType
 
@@ -3910,22 +3910,22 @@ type InstanceState struct {
 	// decimal values between 0 and 255. The valid values for instance-state-code will
 	// all be in the range of the low byte and they are:
 	//
-	//     * 0 : pending
+	// * 0 : pending
 	//
-	//     * 16 :
+	// * 16 :
 	// running
 	//
-	//     * 32 : shutting-down
+	// * 32 : shutting-down
 	//
-	//     * 48 : terminated
+	// * 48 : terminated
 	//
-	//     * 64 : stopping
+	// * 64 : stopping
 	//
+	// * 80 :
+	// stopped
 	//
-	// * 80 : stopped
-	//
-	// You can ignore the high byte value by zeroing out all of the
-	// bits above 2^8 or 256 in decimal.
+	// You can ignore the high byte value by zeroing out all of the bits above
+	// 2^8 or 256 in decimal.
 	Code *int32
 
 	// The current state of the instance.
@@ -4462,12 +4462,12 @@ type LaunchTemplateCapacityReservationSpecificationRequest struct {
 	// Indicates the instance's Capacity Reservation preferences. Possible preferences
 	// include:
 	//
-	//     * open - The instance can run in any open Capacity Reservation
-	// that has matching attributes (instance type, platform, Availability Zone).
+	// * open - The instance can run in any open Capacity Reservation that
+	// has matching attributes (instance type, platform, Availability Zone).
 	//
-	//
-	// * none - The instance avoids running in a Capacity Reservation even if one is
-	// available. The instance runs in On-Demand capacity.
+	// * none -
+	// The instance avoids running in a Capacity Reservation even if one is available.
+	// The instance runs in On-Demand capacity.
 	CapacityReservationPreference CapacityReservationPreference
 
 	// Information about the target Capacity Reservation or Capacity Reservation group.
@@ -4480,12 +4480,12 @@ type LaunchTemplateCapacityReservationSpecificationResponse struct {
 	// Indicates the instance's Capacity Reservation preferences. Possible preferences
 	// include:
 	//
-	//     * open - The instance can run in any open Capacity Reservation
-	// that has matching attributes (instance type, platform, Availability Zone).
+	// * open - The instance can run in any open Capacity Reservation that
+	// has matching attributes (instance type, platform, Availability Zone).
 	//
-	//
-	// * none - The instance avoids running in a Capacity Reservation even if one is
-	// available. The instance runs in On-Demand capacity.
+	// * none -
+	// The instance avoids running in a Capacity Reservation even if one is available.
+	// The instance runs in On-Demand capacity.
 	CapacityReservationPreference CapacityReservationPreference
 
 	// Information about the target Capacity Reservation or Capacity Reservation group.
@@ -5477,21 +5477,21 @@ type ModifyVpnTunnelOptionsSpecification struct {
 	// gateway. Constraints: A size /30 CIDR block from the 169.254.0.0/16 range. The
 	// following CIDR blocks are reserved and cannot be used:
 	//
-	//     * 169.254.0.0/30
+	// * 169.254.0.0/30
 	//
+	// *
+	// 169.254.1.0/30
 	//
-	// * 169.254.1.0/30
+	// * 169.254.2.0/30
 	//
-	//     * 169.254.2.0/30
+	// * 169.254.3.0/30
 	//
-	//     * 169.254.3.0/30
+	// * 169.254.4.0/30
 	//
-	//     *
-	// 169.254.4.0/30
+	// *
+	// 169.254.5.0/30
 	//
-	//     * 169.254.5.0/30
-	//
-	//     * 169.254.169.252/30
+	// * 169.254.169.252/30
 	TunnelInsideCidr *string
 
 	// The range of inside IPv6 addresses for the tunnel. Any specified CIDR blocks
@@ -5537,26 +5537,26 @@ type NatGateway struct {
 	// If the NAT gateway could not be created, specifies the error message for the
 	// failure, that corresponds to the error code.
 	//
-	//     * For
+	// * For
 	// InsufficientFreeAddressesInSubnet: "Subnet has insufficient free addresses to
 	// create this NAT gateway"
 	//
-	//     * For Gateway.NotAttached: "Network vpc-xxxxxxxx
-	// has no Internet gateway attached"
+	// * For Gateway.NotAttached: "Network vpc-xxxxxxxx has
+	// no Internet gateway attached"
 	//
-	//     * For InvalidAllocationID.NotFound:
-	// "Elastic IP address eipalloc-xxxxxxxx could not be associated with this NAT
-	// gateway"
+	// * For InvalidAllocationID.NotFound: "Elastic IP
+	// address eipalloc-xxxxxxxx could not be associated with this NAT gateway"
 	//
-	//     * For Resource.AlreadyAssociated: "Elastic IP address
-	// eipalloc-xxxxxxxx is already associated"
+	// * For
+	// Resource.AlreadyAssociated: "Elastic IP address eipalloc-xxxxxxxx is already
+	// associated"
 	//
-	//     * For InternalError: "Network
-	// interface eni-xxxxxxxx, created and used internally by this NAT gateway is in an
-	// invalid state. Please try again."
+	// * For InternalError: "Network interface eni-xxxxxxxx, created and
+	// used internally by this NAT gateway is in an invalid state. Please try
+	// again."
 	//
-	//     * For InvalidSubnetID.NotFound: "The
-	// specified subnet subnet-xxxxxxxx does not exist or could not be found."
+	// * For InvalidSubnetID.NotFound: "The specified subnet subnet-xxxxxxxx
+	// does not exist or could not be found."
 	FailureMessage *string
 
 	// Information about the IP addresses and network interface associated with the NAT
@@ -5573,22 +5573,22 @@ type NatGateway struct {
 
 	// The state of the NAT gateway.
 	//
-	//     * pending: The NAT gateway is being created
-	// and is not ready to process traffic.
+	// * pending: The NAT gateway is being created and
+	// is not ready to process traffic.
 	//
-	//     * failed: The NAT gateway could not be
+	// * failed: The NAT gateway could not be
 	// created. Check the failureCode and failureMessage fields for the reason.
 	//
-	//     *
+	// *
 	// available: The NAT gateway is able to process traffic. This status remains until
 	// you delete the NAT gateway, and does not indicate the health of the NAT
 	// gateway.
 	//
-	//     * deleting: The NAT gateway is in the process of being terminated
-	// and may still be processing traffic.
+	// * deleting: The NAT gateway is in the process of being terminated and
+	// may still be processing traffic.
 	//
-	//     * deleted: The NAT gateway has been
-	// terminated and is no longer processing traffic.
+	// * deleted: The NAT gateway has been terminated
+	// and is no longer processing traffic.
 	State NatGatewayState
 
 	// The ID of the subnet in which the NAT gateway is located.
@@ -7202,14 +7202,14 @@ type Route struct {
 
 	// Describes how the route was created.
 	//
-	//     * CreateRouteTable - The route was
+	// * CreateRouteTable - The route was
 	// automatically created when the route table was created.
 	//
-	//     * CreateRoute - The
+	// * CreateRoute - The
 	// route was manually added to the route table.
 	//
-	//     * EnableVgwRoutePropagation -
-	// The route was propagated by route propagation.
+	// * EnableVgwRoutePropagation - The
+	// route was propagated by route propagation.
 	Origin RouteOrigin
 
 	// The state of the route. The blackhole state indicates that the route's target
@@ -8403,12 +8403,12 @@ type SpotInstanceRequest struct {
 
 	// The end date of the request, in UTC format (YYYY-MM-DDTHH:MM:SSZ).
 	//
-	//     * For a
+	// * For a
 	// persistent request, the request remains active until the validUntil date and
 	// time is reached. Otherwise, the request remains active until you cancel it.
 	//
-	//
-	// * For a one-time request, the request remains active until all instances launch,
+	// *
+	// For a one-time request, the request remains active until all instances launch,
 	// the request is canceled, or the validUntil date and time is reached. By default,
 	// the request is valid for 7 days from the date the request was created.
 	ValidUntil *time.Time
@@ -8470,13 +8470,13 @@ type SpotMarketOptions struct {
 	// The end date of the request, in UTC format (YYYY-MM-DDTHH:MM:SSZ). Supported
 	// only for persistent requests.
 	//
-	//     * For a persistent request, the request
-	// remains active until the ValidUntil date and time is reached. Otherwise, the
-	// request remains active until you cancel it.
+	// * For a persistent request, the request remains
+	// active until the ValidUntil date and time is reached. Otherwise, the request
+	// remains active until you cancel it.
 	//
-	//     * For a one-time request,
-	// ValidUntil is not supported. The request remains active until all instances
-	// launch or you cancel the request.
+	// * For a one-time request, ValidUntil is not
+	// supported. The request remains active until all instances launch or you cancel
+	// the request.
 	ValidUntil *time.Time
 }
 
@@ -8649,48 +8649,48 @@ type StateReason struct {
 
 	// The message for the state change.
 	//
-	//     * Server.InsufficientInstanceCapacity:
-	// There was insufficient capacity available to satisfy the launch request.
+	// * Server.InsufficientInstanceCapacity: There
+	// was insufficient capacity available to satisfy the launch request.
 	//
-	//     *
+	// *
 	// Server.InternalError: An internal error caused the instance to terminate during
 	// launch.
 	//
-	//     * Server.ScheduledStop: The instance was stopped due to a scheduled
+	// * Server.ScheduledStop: The instance was stopped due to a scheduled
 	// retirement.
 	//
-	//     * Server.SpotInstanceShutdown: The instance was stopped because
+	// * Server.SpotInstanceShutdown: The instance was stopped because the
+	// number of Spot requests with a maximum price equal to or higher than the Spot
+	// price exceeded available capacity or because of an increase in the Spot
+	// price.
+	//
+	// * Server.SpotInstanceTermination: The instance was terminated because
 	// the number of Spot requests with a maximum price equal to or higher than the
 	// Spot price exceeded available capacity or because of an increase in the Spot
 	// price.
 	//
-	//     * Server.SpotInstanceTermination: The instance was terminated
-	// because the number of Spot requests with a maximum price equal to or higher than
-	// the Spot price exceeded available capacity or because of an increase in the Spot
-	// price.
+	// * Client.InstanceInitiatedShutdown: The instance was shut down using the
+	// shutdown -h command from the instance.
 	//
-	//     * Client.InstanceInitiatedShutdown: The instance was shut down using
-	// the shutdown -h command from the instance.
-	//
-	//     * Client.InstanceTerminated: The
+	// * Client.InstanceTerminated: The
 	// instance was terminated or rebooted during AMI creation.
 	//
-	//     *
+	// *
 	// Client.InternalError: A client error caused the instance to terminate during
 	// launch.
 	//
-	//     * Client.InvalidSnapshot.NotFound: The specified snapshot was not
+	// * Client.InvalidSnapshot.NotFound: The specified snapshot was not
 	// found.
 	//
-	//     * Client.UserInitiatedHibernate: Hibernation was initiated on the
+	// * Client.UserInitiatedHibernate: Hibernation was initiated on the
 	// instance.
 	//
-	//     * Client.UserInitiatedShutdown: The instance was shut down using
-	// the Amazon EC2 API.
+	// * Client.UserInitiatedShutdown: The instance was shut down using the
+	// Amazon EC2 API.
 	//
-	//     * Client.VolumeLimitExceeded: The limit on the number
-	// of EBS volumes or total storage was exceeded. Decrease usage or request an
-	// increase in your account limits.
+	// * Client.VolumeLimitExceeded: The limit on the number of EBS
+	// volumes or total storage was exceeded. Decrease usage or request an increase in
+	// your account limits.
 	Message *string
 }
 
@@ -10659,21 +10659,21 @@ type VpnTunnelOptionsSpecification struct {
 	// gateway. Constraints: A size /30 CIDR block from the 169.254.0.0/16 range. The
 	// following CIDR blocks are reserved and cannot be used:
 	//
-	//     * 169.254.0.0/30
+	// * 169.254.0.0/30
 	//
+	// *
+	// 169.254.1.0/30
 	//
-	// * 169.254.1.0/30
+	// * 169.254.2.0/30
 	//
-	//     * 169.254.2.0/30
+	// * 169.254.3.0/30
 	//
-	//     * 169.254.3.0/30
+	// * 169.254.4.0/30
 	//
-	//     *
-	// 169.254.4.0/30
+	// *
+	// 169.254.5.0/30
 	//
-	//     * 169.254.5.0/30
-	//
-	//     * 169.254.169.252/30
+	// * 169.254.169.252/30
 	TunnelInsideCidr *string
 
 	// The range of inside IPv6 addresses for the tunnel. Any specified CIDR blocks

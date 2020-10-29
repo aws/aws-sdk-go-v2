@@ -76,13 +76,13 @@ type AuthenticateCognitoActionConfig struct {
 	// The behavior if the user is not authenticated. The following are possible
 	// values:
 	//
-	//     * deny - Return an HTTP 401 Unauthorized error.
+	// * deny - Return an HTTP 401 Unauthorized error.
 	//
-	//     * allow -
-	// Allow the request to be forwarded to the target.
+	// * allow - Allow the
+	// request to be forwarded to the target.
 	//
-	//     * authenticate - Redirect
-	// the request to the IdP authorization endpoint. This is the default value.
+	// * authenticate - Redirect the request to
+	// the IdP authorization endpoint. This is the default value.
 	OnUnauthenticatedRequest AuthenticateCognitoActionConditionalBehaviorEnum
 
 	// The set of user claims to be requested from the IdP. The default is openid. To
@@ -144,13 +144,13 @@ type AuthenticateOidcActionConfig struct {
 	// The behavior if the user is not authenticated. The following are possible
 	// values:
 	//
-	//     * deny - Return an HTTP 401 Unauthorized error.
+	// * deny - Return an HTTP 401 Unauthorized error.
 	//
-	//     * allow -
-	// Allow the request to be forwarded to the target.
+	// * allow - Allow the
+	// request to be forwarded to the target.
 	//
-	//     * authenticate - Redirect
-	// the request to the IdP authorization endpoint. This is the default value.
+	// * authenticate - Redirect the request to
+	// the IdP authorization endpoint. This is the default value.
 	OnUnauthenticatedRequest AuthenticateOidcActionConditionalBehaviorEnum
 
 	// The set of user claims to be requested from the IdP. The default is openid. To
@@ -298,37 +298,37 @@ type Limit struct {
 
 	// The name of the limit. The possible values are:
 	//
-	//     *
-	// application-load-balancers
+	// * application-load-balancers
 	//
-	//     * listeners-per-application-load-balancer
+	// *
+	// listeners-per-application-load-balancer
 	//
-	//     *
+	// *
 	// listeners-per-network-load-balancer
 	//
-	//     * network-load-balancers
+	// * network-load-balancers
 	//
-	//     *
+	// *
 	// rules-per-application-load-balancer
 	//
-	//     * target-groups
+	// * target-groups
 	//
-	//     *
+	// *
 	// target-groups-per-action-on-application-load-balancer
 	//
-	//     *
+	// *
 	// target-groups-per-action-on-network-load-balancer
 	//
-	//     *
+	// *
 	// target-groups-per-application-load-balancer
 	//
-	//     *
+	// *
 	// targets-per-application-load-balancer
 	//
-	//     *
+	// *
 	// targets-per-availability-zone-per-network-load-balancer
 	//
-	//     *
+	// *
 	// targets-per-network-load-balancer
 	Name *string
 }
@@ -436,40 +436,40 @@ type LoadBalancerAttribute struct {
 	// The name of the attribute. The following attributes are supported by both
 	// Application Load Balancers and Network Load Balancers:
 	//
-	//     *
-	// access_logs.s3.enabled - Indicates whether access logs are enabled. The value is
-	// true or false. The default is false.
+	// * access_logs.s3.enabled
+	// - Indicates whether access logs are enabled. The value is true or false. The
+	// default is false.
 	//
-	//     * access_logs.s3.bucket - The name of
-	// the S3 bucket for the access logs. This attribute is required if access logs are
-	// enabled. The bucket must exist in the same region as the load balancer and have
-	// a bucket policy that grants Elastic Load Balancing permissions to write to the
-	// bucket.
+	// * access_logs.s3.bucket - The name of the S3 bucket for the
+	// access logs. This attribute is required if access logs are enabled. The bucket
+	// must exist in the same region as the load balancer and have a bucket policy that
+	// grants Elastic Load Balancing permissions to write to the bucket.
 	//
-	//     * access_logs.s3.prefix - The prefix for the location in the S3
-	// bucket for the access logs.
+	// *
+	// access_logs.s3.prefix - The prefix for the location in the S3 bucket for the
+	// access logs.
 	//
-	//     * deletion_protection.enabled - Indicates
-	// whether deletion protection is enabled. The value is true or false. The default
-	// is false.
+	// * deletion_protection.enabled - Indicates whether deletion
+	// protection is enabled. The value is true or false. The default is false.
 	//
-	// The following attributes are supported by only Application Load
-	// Balancers:
+	// The
+	// following attributes are supported by only Application Load Balancers:
 	//
-	//     * idle_timeout.timeout_seconds - The idle timeout value, in
-	// seconds. The valid range is 1-4000 seconds. The default is 60 seconds.
+	// *
+	// idle_timeout.timeout_seconds - The idle timeout value, in seconds. The valid
+	// range is 1-4000 seconds. The default is 60 seconds.
 	//
-	//     *
+	// *
 	// routing.http.desync_mitigation_mode - Determines how the load balancer handles
 	// requests that might pose a security risk to your application. The possible
 	// values are monitor, defensive, and strictest. The default is defensive.
 	//
-	//     *
+	// *
 	// routing.http.drop_invalid_header_fields.enabled - Indicates whether HTTP headers
 	// with invalid header fields are removed by the load balancer (true) or routed to
 	// targets (false). The default is false.
 	//
-	//     * routing.http2.enabled - Indicates
+	// * routing.http2.enabled - Indicates
 	// whether HTTP/2 is enabled. The value is true or false. The default is true.
 	// Elastic Load Balancing requires that message header names contain only
 	// alphanumeric characters and hyphens.
@@ -477,9 +477,9 @@ type LoadBalancerAttribute struct {
 	// The following attributes are supported by
 	// only Network Load Balancers:
 	//
-	//     * load_balancing.cross_zone.enabled -
-	// Indicates whether cross-zone load balancing is enabled. The value is true or
-	// false. The default is false.
+	// * load_balancing.cross_zone.enabled - Indicates
+	// whether cross-zone load balancing is enabled. The value is true or false. The
+	// default is false.
 	Key *string
 
 	// The value of the attribute.
@@ -556,21 +556,20 @@ type QueryStringKeyValuePair struct {
 // path. Any components that you do not modify retain their original values. You
 // can reuse URI components using the following reserved keywords:
 //
-//     *
+// *
 // #{protocol}
 //
-//     * #{host}
+// * #{host}
 //
-//     * #{port}
+// * #{port}
 //
-//     * #{path} (the leading "/" is
-// removed)
+// * #{path} (the leading "/" is removed)
 //
-//     * #{query}
+// *
+// #{query}
 //
-// For example, you can change the path to
-// "/new/#{path}", the hostname to "example.#{host}", or the query to
-// "#{query}&value=xyz".
+// For example, you can change the path to "/new/#{path}", the hostname
+// to "example.#{host}", or the query to "#{query}&value=xyz".
 type RedirectActionConfig struct {
 
 	// The HTTP redirect code. The redirect is either permanent (HTTP 301) or temporary
@@ -631,19 +630,19 @@ type RuleCondition struct {
 
 	// The field in the HTTP request. The following are the possible values:
 	//
-	//     *
+	// *
 	// http-header
 	//
-	//     * http-request-method
+	// * http-request-method
 	//
-	//     * host-header
+	// * host-header
 	//
-	//     * path-pattern
+	// * path-pattern
 	//
+	// *
+	// query-string
 	//
-	// * query-string
-	//
-	//     * source-ip
+	// * source-ip
 	Field *string
 
 	// Information for a host header condition. Specify only when Field is host-header.
@@ -675,32 +674,32 @@ type RuleCondition struct {
 	// my.example.com) in Values. A host name is case insensitive, can be up to 128
 	// characters in length, and can contain any of the following characters.
 	//
-	//     *
-	// A-Z, a-z, 0-9
+	// * A-Z,
+	// a-z, 0-9
 	//
-	//     * - .
+	// * - .
 	//
-	//     * * (matches 0 or more characters)
+	// * * (matches 0 or more characters)
 	//
-	//     * ?
-	// (matches exactly 1 character)
+	// * ? (matches exactly 1
+	// character)
 	//
-	// If Field is path-pattern and you are not using
-	// PathPatternConfig, you can specify a single path pattern (for example, /img/*)
-	// in Values. A path pattern is case-sensitive, can be up to 128 characters in
-	// length, and can contain any of the following characters.
+	// If Field is path-pattern and you are not using PathPatternConfig,
+	// you can specify a single path pattern (for example, /img/*) in Values. A path
+	// pattern is case-sensitive, can be up to 128 characters in length, and can
+	// contain any of the following characters.
 	//
-	//     * A-Z, a-z, 0-9
+	// * A-Z, a-z, 0-9
 	//
+	// * _ - . $ / ~ " ' @ :
+	// +
 	//
-	// * _ - . $ / ~ " ' @ : +
+	// * & (using &)
 	//
-	//     * & (using &)
+	// * * (matches 0 or more characters)
 	//
-	//     * * (matches 0 or more
-	// characters)
-	//
-	//     * ? (matches exactly 1 character)
+	// * ? (matches exactly 1
+	// character)
 	Values []*string
 }
 
@@ -872,39 +871,39 @@ type TargetGroupAttribute struct {
 	// The name of the attribute. The following attributes are supported by both
 	// Application Load Balancers and Network Load Balancers:
 	//
-	//     *
+	// *
 	// deregistration_delay.timeout_seconds - The amount of time, in seconds, for
 	// Elastic Load Balancing to wait before changing the state of a deregistering
 	// target from draining to unused. The range is 0-3600 seconds. The default value
 	// is 300 seconds. If the target is a Lambda function, this attribute is not
 	// supported.
 	//
-	//     * stickiness.enabled - Indicates whether sticky sessions are
+	// * stickiness.enabled - Indicates whether sticky sessions are
 	// enabled. The value is true or false. The default is false.
 	//
-	//     *
-	// stickiness.type - The type of sticky sessions. The possible values are
+	// * stickiness.type -
+	// The type of sticky sessions. The possible values are
 	//
+	// lb_cookie for Application
+	// Load Balancers or source_ip for Network Load Balancers.
 	//
-	// lb_cookie for Application Load Balancers or source_ip for Network Load
-	// Balancers.
+	// The following
+	// attributes are supported only if the load balancer is an Application Load
+	// Balancer and the target is an instance or an IP address:
 	//
-	// The following attributes are supported only if the load balancer is
-	// an Application Load Balancer and the target is an instance or an IP address:
+	// *
+	// load_balancing.algorithm.type - The load balancing algorithm determines how the
+	// load balancer selects targets when routing requests. The value is round_robin or
+	// least_outstanding_requests. The default is round_robin.
 	//
-	//
-	// * load_balancing.algorithm.type - The load balancing algorithm determines how
-	// the load balancer selects targets when routing requests. The value is
-	// round_robin or least_outstanding_requests. The default is round_robin.
-	//
-	//     *
+	// *
 	// slow_start.duration_seconds - The time period, in seconds, during which a newly
 	// registered target receives an increasing share of the traffic to the target
 	// group. After this time period ends, the target receives its full share of
 	// traffic. The range is 30-900 seconds (15 minutes). The default is 0 seconds
 	// (disabled).
 	//
-	//     * stickiness.lb_cookie.duration_seconds - The time period, in
+	// * stickiness.lb_cookie.duration_seconds - The time period, in
 	// seconds, during which requests from a client should be routed to the same
 	// target. After this time period expires, the load balancer-generated cookie is
 	// considered stale. The range is 1 second to 1 week (604800 seconds). The default
@@ -914,19 +913,18 @@ type TargetGroupAttribute struct {
 	// the load balancer is an Application Load Balancer and the target is a Lambda
 	// function:
 	//
-	//     * lambda.multi_value_headers.enabled - Indicates whether the
-	// request and response headers that are exchanged between the load balancer and
-	// the Lambda function include arrays of values or strings. The value is true or
-	// false. The default is false. If the value is false and the request contains a
-	// duplicate header field name or query parameter key, the load balancer uses the
-	// last value sent by the client.
+	// * lambda.multi_value_headers.enabled - Indicates whether the request
+	// and response headers that are exchanged between the load balancer and the Lambda
+	// function include arrays of values or strings. The value is true or false. The
+	// default is false. If the value is false and the request contains a duplicate
+	// header field name or query parameter key, the load balancer uses the last value
+	// sent by the client.
 	//
-	// The following attribute is supported only by
-	// Network Load Balancers:
+	// The following attribute is supported only by Network Load
+	// Balancers:
 	//
-	//     * proxy_protocol_v2.enabled - Indicates whether
-	// Proxy Protocol version 2 is enabled. The value is true or false. The default is
-	// false.
+	// * proxy_protocol_v2.enabled - Indicates whether Proxy Protocol
+	// version 2 is enabled. The value is true or false. The default is false.
 	Key *string
 
 	// The value of the attribute.
@@ -966,64 +964,63 @@ type TargetHealth struct {
 	// If the target state is initial, the reason code can be one of the following
 	// values:
 	//
-	//     * Elb.RegistrationInProgress - The target is in the process of
-	// being registered with the load balancer.
+	// * Elb.RegistrationInProgress - The target is in the process of being
+	// registered with the load balancer.
 	//
-	//     * Elb.InitialHealthChecking - The
-	// load balancer is still sending the target the minimum number of health checks
+	// * Elb.InitialHealthChecking - The load
+	// balancer is still sending the target the minimum number of health checks
 	// required to determine its health status.
 	//
 	// If the target state is unhealthy, the
 	// reason code can be one of the following values:
 	//
-	//     *
-	// Target.ResponseCodeMismatch - The health checks did not return an expected HTTP
-	// code. Applies only to Application Load Balancers.
+	// * Target.ResponseCodeMismatch -
+	// The health checks did not return an expected HTTP code. Applies only to
+	// Application Load Balancers.
 	//
-	//     * Target.Timeout - The
-	// health check requests timed out. Applies only to Application Load Balancers.
+	// * Target.Timeout - The health check requests timed
+	// out. Applies only to Application Load Balancers.
 	//
+	// * Target.FailedHealthChecks -
+	// The load balancer received an error while establishing a connection to the
+	// target or the target response was malformed.
 	//
-	// * Target.FailedHealthChecks - The load balancer received an error while
-	// establishing a connection to the target or the target response was malformed.
-	//
-	//
-	// * Elb.InternalError - The health checks failed due to an internal error. Applies
-	// only to Application Load Balancers.
-	//
-	// If the target state is unused, the reason
-	// code can be one of the following values:
-	//
-	//     * Target.NotRegistered - The
-	// target is not registered with the target group.
-	//
-	//     * Target.NotInUse - The
-	// target group is not used by any load balancer or the target is in an
-	// Availability Zone that is not enabled for its load balancer.
-	//
-	//     *
-	// Target.InvalidState - The target is in the stopped or terminated state.
-	//
-	//     *
-	// Target.IpUnusable - The target IP address is reserved for use by a load
-	// balancer.
-	//
-	// If the target state is draining, the reason code can be the following
-	// value:
-	//
-	//     * Target.DeregistrationInProgress - The target is in the process of
-	// being deregistered and the deregistration delay period has not expired.
-	//
-	// If the
-	// target state is unavailable, the reason code can be the following value:
-	//
-	//     *
-	// Target.HealthCheckDisabled - Health checks are disabled for the target group.
-	// Applies only to Application Load Balancers.
-	//
-	//     * Elb.InternalError - Target
-	// health is unavailable due to an internal error. Applies only to Network Load
+	// * Elb.InternalError - The health
+	// checks failed due to an internal error. Applies only to Application Load
 	// Balancers.
+	//
+	// If the target state is unused, the reason code can be one of the
+	// following values:
+	//
+	// * Target.NotRegistered - The target is not registered with
+	// the target group.
+	//
+	// * Target.NotInUse - The target group is not used by any load
+	// balancer or the target is in an Availability Zone that is not enabled for its
+	// load balancer.
+	//
+	// * Target.InvalidState - The target is in the stopped or
+	// terminated state.
+	//
+	// * Target.IpUnusable - The target IP address is reserved for
+	// use by a load balancer.
+	//
+	// If the target state is draining, the reason code can be
+	// the following value:
+	//
+	// * Target.DeregistrationInProgress - The target is in the
+	// process of being deregistered and the deregistration delay period has not
+	// expired.
+	//
+	// If the target state is unavailable, the reason code can be the
+	// following value:
+	//
+	// * Target.HealthCheckDisabled - Health checks are disabled for
+	// the target group. Applies only to Application Load Balancers.
+	//
+	// *
+	// Elb.InternalError - Target health is unavailable due to an internal error.
+	// Applies only to Network Load Balancers.
 	Reason TargetHealthReasonEnum
 
 	// The state of the target.

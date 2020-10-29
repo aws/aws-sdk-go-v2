@@ -22,11 +22,11 @@ type Action string
 
 // Enum values for Action
 const (
-	ActionClipboard_copy_from_local_device Action = "CLIPBOARD_COPY_FROM_LOCAL_DEVICE"
-	ActionClipboard_copy_to_local_device   Action = "CLIPBOARD_COPY_TO_LOCAL_DEVICE"
-	ActionFile_upload                      Action = "FILE_UPLOAD"
-	ActionFile_download                    Action = "FILE_DOWNLOAD"
-	ActionPrinting_to_local_device         Action = "PRINTING_TO_LOCAL_DEVICE"
+	ActionClipboardCopyFromLocalDevice Action = "CLIPBOARD_COPY_FROM_LOCAL_DEVICE"
+	ActionClipboardCopyToLocalDevice   Action = "CLIPBOARD_COPY_TO_LOCAL_DEVICE"
+	ActionFileUpload                   Action = "FILE_UPLOAD"
+	ActionFileDownload                 Action = "FILE_DOWNLOAD"
+	ActionPrintingToLocalDevice        Action = "PRINTING_TO_LOCAL_DEVICE"
 )
 
 // Values returns all known values for Action. Note that this can be expanded in
@@ -66,10 +66,10 @@ type FleetAttribute string
 
 // Enum values for FleetAttribute
 const (
-	FleetAttributeVpc_configuration                    FleetAttribute = "VPC_CONFIGURATION"
-	FleetAttributeVpc_configuration_security_group_ids FleetAttribute = "VPC_CONFIGURATION_SECURITY_GROUP_IDS"
-	FleetAttributeDomain_join_info                     FleetAttribute = "DOMAIN_JOIN_INFO"
-	FleetAttributeIam_role_arn                         FleetAttribute = "IAM_ROLE_ARN"
+	FleetAttributeVpcConfiguration                 FleetAttribute = "VPC_CONFIGURATION"
+	FleetAttributeVpcConfigurationSecurityGroupIds FleetAttribute = "VPC_CONFIGURATION_SECURITY_GROUP_IDS"
+	FleetAttributeDomainJoinInfo                   FleetAttribute = "DOMAIN_JOIN_INFO"
+	FleetAttributeIamRoleArn                       FleetAttribute = "IAM_ROLE_ARN"
 )
 
 // Values returns all known values for FleetAttribute. Note that this can be
@@ -88,34 +88,34 @@ type FleetErrorCode string
 
 // Enum values for FleetErrorCode
 const (
-	FleetErrorCodeIam_service_role_missing_eni_describe_action             FleetErrorCode = "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION"
-	FleetErrorCodeIam_service_role_missing_eni_create_action               FleetErrorCode = "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION"
-	FleetErrorCodeIam_service_role_missing_eni_delete_action               FleetErrorCode = "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION"
-	FleetErrorCodeNetwork_interface_limit_exceeded                         FleetErrorCode = "NETWORK_INTERFACE_LIMIT_EXCEEDED"
-	FleetErrorCodeInternal_service_error                                   FleetErrorCode = "INTERNAL_SERVICE_ERROR"
-	FleetErrorCodeIam_service_role_is_missing                              FleetErrorCode = "IAM_SERVICE_ROLE_IS_MISSING"
-	FleetErrorCodeMachine_role_is_missing                                  FleetErrorCode = "MACHINE_ROLE_IS_MISSING"
-	FleetErrorCodeSts_disabled_in_region                                   FleetErrorCode = "STS_DISABLED_IN_REGION"
-	FleetErrorCodeSubnet_has_insufficient_ip_addresses                     FleetErrorCode = "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES"
-	FleetErrorCodeIam_service_role_missing_describe_subnet_action          FleetErrorCode = "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION"
-	FleetErrorCodeSubnet_not_found                                         FleetErrorCode = "SUBNET_NOT_FOUND"
-	FleetErrorCodeImage_not_found                                          FleetErrorCode = "IMAGE_NOT_FOUND"
-	FleetErrorCodeInvalid_subnet_configuration                             FleetErrorCode = "INVALID_SUBNET_CONFIGURATION"
-	FleetErrorCodeSecurity_groups_not_found                                FleetErrorCode = "SECURITY_GROUPS_NOT_FOUND"
-	FleetErrorCodeIgw_not_attached                                         FleetErrorCode = "IGW_NOT_ATTACHED"
-	FleetErrorCodeIam_service_role_missing_describe_security_groups_action FleetErrorCode = "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION"
-	FleetErrorCodeDomain_join_error_file_not_found                         FleetErrorCode = "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND"
-	FleetErrorCodeDomain_join_error_access_denied                          FleetErrorCode = "DOMAIN_JOIN_ERROR_ACCESS_DENIED"
-	FleetErrorCodeDomain_join_error_logon_failure                          FleetErrorCode = "DOMAIN_JOIN_ERROR_LOGON_FAILURE"
-	FleetErrorCodeDomain_join_error_invalid_parameter                      FleetErrorCode = "DOMAIN_JOIN_ERROR_INVALID_PARAMETER"
-	FleetErrorCodeDomain_join_error_more_data                              FleetErrorCode = "DOMAIN_JOIN_ERROR_MORE_DATA"
-	FleetErrorCodeDomain_join_error_no_such_domain                         FleetErrorCode = "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN"
-	FleetErrorCodeDomain_join_error_not_supported                          FleetErrorCode = "DOMAIN_JOIN_ERROR_NOT_SUPPORTED"
-	FleetErrorCodeDomain_join_nerr_invalid_workgroup_name                  FleetErrorCode = "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME"
-	FleetErrorCodeDomain_join_nerr_workstation_not_started                 FleetErrorCode = "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED"
-	FleetErrorCodeDomain_join_error_ds_machine_account_quota_exceeded      FleetErrorCode = "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED"
-	FleetErrorCodeDomain_join_nerr_password_expired                        FleetErrorCode = "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED"
-	FleetErrorCodeDomain_join_internal_service_error                       FleetErrorCode = "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+	FleetErrorCodeIamServiceRoleMissingEniDescribeAction            FleetErrorCode = "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION"
+	FleetErrorCodeIamServiceRoleMissingEniCreateAction              FleetErrorCode = "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION"
+	FleetErrorCodeIamServiceRoleMissingEniDeleteAction              FleetErrorCode = "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION"
+	FleetErrorCodeNetworkInterfaceLimitExceeded                     FleetErrorCode = "NETWORK_INTERFACE_LIMIT_EXCEEDED"
+	FleetErrorCodeInternalServiceError                              FleetErrorCode = "INTERNAL_SERVICE_ERROR"
+	FleetErrorCodeIamServiceRoleIsMissing                           FleetErrorCode = "IAM_SERVICE_ROLE_IS_MISSING"
+	FleetErrorCodeMachineRoleIsMissing                              FleetErrorCode = "MACHINE_ROLE_IS_MISSING"
+	FleetErrorCodeStsDisabledInRegion                               FleetErrorCode = "STS_DISABLED_IN_REGION"
+	FleetErrorCodeSubnetHasInsufficientIpAddresses                  FleetErrorCode = "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES"
+	FleetErrorCodeIamServiceRoleMissingDescribeSubnetAction         FleetErrorCode = "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION"
+	FleetErrorCodeSubnetNotFound                                    FleetErrorCode = "SUBNET_NOT_FOUND"
+	FleetErrorCodeImageNotFound                                     FleetErrorCode = "IMAGE_NOT_FOUND"
+	FleetErrorCodeInvalidSubnetConfiguration                        FleetErrorCode = "INVALID_SUBNET_CONFIGURATION"
+	FleetErrorCodeSecurityGroupsNotFound                            FleetErrorCode = "SECURITY_GROUPS_NOT_FOUND"
+	FleetErrorCodeIgwNotAttached                                    FleetErrorCode = "IGW_NOT_ATTACHED"
+	FleetErrorCodeIamServiceRoleMissingDescribeSecurityGroupsAction FleetErrorCode = "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION"
+	FleetErrorCodeDomainJoinErrorFileNotFound                       FleetErrorCode = "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND"
+	FleetErrorCodeDomainJoinErrorAccessDenied                       FleetErrorCode = "DOMAIN_JOIN_ERROR_ACCESS_DENIED"
+	FleetErrorCodeDomainJoinErrorLogonFailure                       FleetErrorCode = "DOMAIN_JOIN_ERROR_LOGON_FAILURE"
+	FleetErrorCodeDomainJoinErrorInvalidParameter                   FleetErrorCode = "DOMAIN_JOIN_ERROR_INVALID_PARAMETER"
+	FleetErrorCodeDomainJoinErrorMoreData                           FleetErrorCode = "DOMAIN_JOIN_ERROR_MORE_DATA"
+	FleetErrorCodeDomainJoinErrorNoSuchDomain                       FleetErrorCode = "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN"
+	FleetErrorCodeDomainJoinErrorNotSupported                       FleetErrorCode = "DOMAIN_JOIN_ERROR_NOT_SUPPORTED"
+	FleetErrorCodeDomainJoinNerrInvalidWorkgroupName                FleetErrorCode = "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME"
+	FleetErrorCodeDomainJoinNerrWorkstationNotStarted               FleetErrorCode = "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED"
+	FleetErrorCodeDomainJoinErrorDsMachineAccountQuotaExceeded      FleetErrorCode = "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED"
+	FleetErrorCodeDomainJoinNerrPasswordExpired                     FleetErrorCode = "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED"
+	FleetErrorCodeDomainJoinInternalServiceError                    FleetErrorCode = "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
 )
 
 // Values returns all known values for FleetErrorCode. Note that this can be
@@ -180,8 +180,8 @@ type FleetType string
 
 // Enum values for FleetType
 const (
-	FleetTypeAlways_on FleetType = "ALWAYS_ON"
-	FleetTypeOn_demand FleetType = "ON_DEMAND"
+	FleetTypeAlwaysOn FleetType = "ALWAYS_ON"
+	FleetTypeOnDemand FleetType = "ON_DEMAND"
 )
 
 // Values returns all known values for FleetType. Note that this can be expanded in
@@ -198,15 +198,15 @@ type ImageBuilderState string
 
 // Enum values for ImageBuilderState
 const (
-	ImageBuilderStatePending        ImageBuilderState = "PENDING"
-	ImageBuilderStateUpdating_agent ImageBuilderState = "UPDATING_AGENT"
-	ImageBuilderStateRunning        ImageBuilderState = "RUNNING"
-	ImageBuilderStateStopping       ImageBuilderState = "STOPPING"
-	ImageBuilderStateStopped        ImageBuilderState = "STOPPED"
-	ImageBuilderStateRebooting      ImageBuilderState = "REBOOTING"
-	ImageBuilderStateSnapshotting   ImageBuilderState = "SNAPSHOTTING"
-	ImageBuilderStateDeleting       ImageBuilderState = "DELETING"
-	ImageBuilderStateFailed         ImageBuilderState = "FAILED"
+	ImageBuilderStatePending       ImageBuilderState = "PENDING"
+	ImageBuilderStateUpdatingAgent ImageBuilderState = "UPDATING_AGENT"
+	ImageBuilderStateRunning       ImageBuilderState = "RUNNING"
+	ImageBuilderStateStopping      ImageBuilderState = "STOPPING"
+	ImageBuilderStateStopped       ImageBuilderState = "STOPPED"
+	ImageBuilderStateRebooting     ImageBuilderState = "REBOOTING"
+	ImageBuilderStateSnapshotting  ImageBuilderState = "SNAPSHOTTING"
+	ImageBuilderStateDeleting      ImageBuilderState = "DELETING"
+	ImageBuilderStateFailed        ImageBuilderState = "FAILED"
 )
 
 // Values returns all known values for ImageBuilderState. Note that this can be
@@ -230,8 +230,8 @@ type ImageBuilderStateChangeReasonCode string
 
 // Enum values for ImageBuilderStateChangeReasonCode
 const (
-	ImageBuilderStateChangeReasonCodeInternal_error    ImageBuilderStateChangeReasonCode = "INTERNAL_ERROR"
-	ImageBuilderStateChangeReasonCodeImage_unavailable ImageBuilderStateChangeReasonCode = "IMAGE_UNAVAILABLE"
+	ImageBuilderStateChangeReasonCodeInternalError    ImageBuilderStateChangeReasonCode = "INTERNAL_ERROR"
+	ImageBuilderStateChangeReasonCodeImageUnavailable ImageBuilderStateChangeReasonCode = "IMAGE_UNAVAILABLE"
 )
 
 // Values returns all known values for ImageBuilderStateChangeReasonCode. Note that
@@ -273,9 +273,9 @@ type ImageStateChangeReasonCode string
 
 // Enum values for ImageStateChangeReasonCode
 const (
-	ImageStateChangeReasonCodeInternal_error              ImageStateChangeReasonCode = "INTERNAL_ERROR"
-	ImageStateChangeReasonCodeImage_builder_not_available ImageStateChangeReasonCode = "IMAGE_BUILDER_NOT_AVAILABLE"
-	ImageStateChangeReasonCodeImage_copy_failure          ImageStateChangeReasonCode = "IMAGE_COPY_FAILURE"
+	ImageStateChangeReasonCodeInternalError            ImageStateChangeReasonCode = "INTERNAL_ERROR"
+	ImageStateChangeReasonCodeImageBuilderNotAvailable ImageStateChangeReasonCode = "IMAGE_BUILDER_NOT_AVAILABLE"
+	ImageStateChangeReasonCodeImageCopyFailure         ImageStateChangeReasonCode = "IMAGE_COPY_FAILURE"
 )
 
 // Values returns all known values for ImageStateChangeReasonCode. Note that this
@@ -329,9 +329,9 @@ type PlatformType string
 
 // Enum values for PlatformType
 const (
-	PlatformTypeWindows             PlatformType = "WINDOWS"
-	PlatformTypeWindows_server_2016 PlatformType = "WINDOWS_SERVER_2016"
-	PlatformTypeWindows_server_2019 PlatformType = "WINDOWS_SERVER_2019"
+	PlatformTypeWindows           PlatformType = "WINDOWS"
+	PlatformTypeWindowsServer2016 PlatformType = "WINDOWS_SERVER_2016"
+	PlatformTypeWindowsServer2019 PlatformType = "WINDOWS_SERVER_2019"
 )
 
 // Values returns all known values for PlatformType. Note that this can be expanded
@@ -349,8 +349,8 @@ type SessionConnectionState string
 
 // Enum values for SessionConnectionState
 const (
-	SessionConnectionStateConnected     SessionConnectionState = "CONNECTED"
-	SessionConnectionStateNot_connected SessionConnectionState = "NOT_CONNECTED"
+	SessionConnectionStateConnected    SessionConnectionState = "CONNECTED"
+	SessionConnectionStateNotConnected SessionConnectionState = "NOT_CONNECTED"
 )
 
 // Values returns all known values for SessionConnectionState. Note that this can
@@ -387,17 +387,17 @@ type StackAttribute string
 
 // Enum values for StackAttribute
 const (
-	StackAttributeStorage_connectors             StackAttribute = "STORAGE_CONNECTORS"
-	StackAttributeStorage_connector_homefolders  StackAttribute = "STORAGE_CONNECTOR_HOMEFOLDERS"
-	StackAttributeStorage_connector_google_drive StackAttribute = "STORAGE_CONNECTOR_GOOGLE_DRIVE"
-	StackAttributeStorage_connector_one_drive    StackAttribute = "STORAGE_CONNECTOR_ONE_DRIVE"
-	StackAttributeRedirect_url                   StackAttribute = "REDIRECT_URL"
-	StackAttributeFeedback_url                   StackAttribute = "FEEDBACK_URL"
-	StackAttributeTheme_name                     StackAttribute = "THEME_NAME"
-	StackAttributeUser_settings                  StackAttribute = "USER_SETTINGS"
-	StackAttributeEmbed_host_domains             StackAttribute = "EMBED_HOST_DOMAINS"
-	StackAttributeIam_role_arn                   StackAttribute = "IAM_ROLE_ARN"
-	StackAttributeAccess_endpoints               StackAttribute = "ACCESS_ENDPOINTS"
+	StackAttributeStorageConnectors           StackAttribute = "STORAGE_CONNECTORS"
+	StackAttributeStorageConnectorHomefolders StackAttribute = "STORAGE_CONNECTOR_HOMEFOLDERS"
+	StackAttributeStorageConnectorGoogleDrive StackAttribute = "STORAGE_CONNECTOR_GOOGLE_DRIVE"
+	StackAttributeStorageConnectorOneDrive    StackAttribute = "STORAGE_CONNECTOR_ONE_DRIVE"
+	StackAttributeRedirectUrl                 StackAttribute = "REDIRECT_URL"
+	StackAttributeFeedbackUrl                 StackAttribute = "FEEDBACK_URL"
+	StackAttributeThemeName                   StackAttribute = "THEME_NAME"
+	StackAttributeUserSettings                StackAttribute = "USER_SETTINGS"
+	StackAttributeEmbedHostDomains            StackAttribute = "EMBED_HOST_DOMAINS"
+	StackAttributeIamRoleArn                  StackAttribute = "IAM_ROLE_ARN"
+	StackAttributeAccessEndpoints             StackAttribute = "ACCESS_ENDPOINTS"
 )
 
 // Values returns all known values for StackAttribute. Note that this can be
@@ -423,8 +423,8 @@ type StackErrorCode string
 
 // Enum values for StackErrorCode
 const (
-	StackErrorCodeStorage_connector_error StackErrorCode = "STORAGE_CONNECTOR_ERROR"
-	StackErrorCodeInternal_service_error  StackErrorCode = "INTERNAL_SERVICE_ERROR"
+	StackErrorCodeStorageConnectorError StackErrorCode = "STORAGE_CONNECTOR_ERROR"
+	StackErrorCodeInternalServiceError  StackErrorCode = "INTERNAL_SERVICE_ERROR"
 )
 
 // Values returns all known values for StackErrorCode. Note that this can be
@@ -441,9 +441,9 @@ type StorageConnectorType string
 
 // Enum values for StorageConnectorType
 const (
-	StorageConnectorTypeHomefolders  StorageConnectorType = "HOMEFOLDERS"
-	StorageConnectorTypeGoogle_drive StorageConnectorType = "GOOGLE_DRIVE"
-	StorageConnectorTypeOne_drive    StorageConnectorType = "ONE_DRIVE"
+	StorageConnectorTypeHomefolders StorageConnectorType = "HOMEFOLDERS"
+	StorageConnectorTypeGoogleDrive StorageConnectorType = "GOOGLE_DRIVE"
+	StorageConnectorTypeOneDrive    StorageConnectorType = "ONE_DRIVE"
 )
 
 // Values returns all known values for StorageConnectorType. Note that this can be
@@ -479,9 +479,9 @@ type UsageReportExecutionErrorCode string
 
 // Enum values for UsageReportExecutionErrorCode
 const (
-	UsageReportExecutionErrorCodeResource_not_found     UsageReportExecutionErrorCode = "RESOURCE_NOT_FOUND"
-	UsageReportExecutionErrorCodeAccess_denied          UsageReportExecutionErrorCode = "ACCESS_DENIED"
-	UsageReportExecutionErrorCodeInternal_service_error UsageReportExecutionErrorCode = "INTERNAL_SERVICE_ERROR"
+	UsageReportExecutionErrorCodeResourceNotFound     UsageReportExecutionErrorCode = "RESOURCE_NOT_FOUND"
+	UsageReportExecutionErrorCodeAccessDenied         UsageReportExecutionErrorCode = "ACCESS_DENIED"
+	UsageReportExecutionErrorCodeInternalServiceError UsageReportExecutionErrorCode = "INTERNAL_SERVICE_ERROR"
 )
 
 // Values returns all known values for UsageReportExecutionErrorCode. Note that
@@ -516,10 +516,10 @@ type UserStackAssociationErrorCode string
 
 // Enum values for UserStackAssociationErrorCode
 const (
-	UserStackAssociationErrorCodeStack_not_found     UserStackAssociationErrorCode = "STACK_NOT_FOUND"
-	UserStackAssociationErrorCodeUser_name_not_found UserStackAssociationErrorCode = "USER_NAME_NOT_FOUND"
-	UserStackAssociationErrorCodeDirectory_not_found UserStackAssociationErrorCode = "DIRECTORY_NOT_FOUND"
-	UserStackAssociationErrorCodeInternal_error      UserStackAssociationErrorCode = "INTERNAL_ERROR"
+	UserStackAssociationErrorCodeStackNotFound     UserStackAssociationErrorCode = "STACK_NOT_FOUND"
+	UserStackAssociationErrorCodeUserNameNotFound  UserStackAssociationErrorCode = "USER_NAME_NOT_FOUND"
+	UserStackAssociationErrorCodeDirectoryNotFound UserStackAssociationErrorCode = "DIRECTORY_NOT_FOUND"
+	UserStackAssociationErrorCodeInternalError     UserStackAssociationErrorCode = "INTERNAL_ERROR"
 )
 
 // Values returns all known values for UserStackAssociationErrorCode. Note that

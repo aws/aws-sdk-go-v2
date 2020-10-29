@@ -31,7 +31,7 @@ type ListDistributionConfigurationsInput struct {
 
 	// The filters.
 	//
-	//     * name - The name of this distribution configuration.
+	// * name - The name of this distribution configuration.
 	Filters []*types.Filter
 
 	// The maximum items to return in a request.

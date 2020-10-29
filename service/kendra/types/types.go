@@ -895,25 +895,25 @@ type SalesforceConfiguration struct {
 	// the key/value pairs required to connect to your Salesforce instance. The secret
 	// must contain a JSON structure with the following keys:
 	//
-	//     * authenticationUrl
-	// - The OAUTH endpoint that Amazon Kendra connects to get an OAUTH token.
+	// * authenticationUrl -
+	// The OAUTH endpoint that Amazon Kendra connects to get an OAUTH token.
 	//
-	//     *
+	// *
 	// consumerKey - The application public key generated when you created your
 	// Salesforce application.
 	//
-	//     * consumerSecret - The application private key
+	// * consumerSecret - The application private key
 	// generated when you created your Salesforce application.
 	//
-	//     * password - The
+	// * password - The
 	// password associated with the user logging in to the Salesforce instance.
 	//
-	//     *
+	// *
 	// securityToken - The token associated with the user account logging in to the
 	// Salesforce instance.
 	//
-	//     * username - The user name of the user logging in to
-	// the Salesforce instance.
+	// * username - The user name of the user logging in to the
+	// Salesforce instance.
 	//
 	// This member is required.
 	SecretArn *string
@@ -1255,33 +1255,33 @@ type SharePointConfiguration struct {
 // the Sortable flag set to true, otherwise Amazon Kendra returns an exception. You
 // can sort attributes of the following types.
 //
-//     * Date value
+// * Date value
 //
-//     * Long
-// value
+// * Long value
 //
-//     * String value
+// *
+// String value
 //
 // You can't sort attributes of the following type.
 //
-//
-// * String list value
+// * String list
+// value
 type SortingConfiguration struct {
 
 	// The name of the document attribute used to sort the response. You can use any
 	// field that has the Sortable flag set to true. You can also sort by any of the
 	// following built-in attributes:
 	//
-	//     * _category
+	// * _category
 	//
-	//     * _created_at
+	// * _created_at
 	//
-	//     *
+	// *
 	// _last_updated_at
 	//
-	//     * _version
+	// * _version
 	//
-	//     * _view_count
+	// * _view_count
 	//
 	// This member is required.
 	DocumentAttributeKey *string

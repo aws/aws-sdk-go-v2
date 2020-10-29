@@ -82,12 +82,12 @@ type PackageVersionErrorCode string
 
 // Enum values for PackageVersionErrorCode
 const (
-	PackageVersionErrorCodeAlready_exists      PackageVersionErrorCode = "ALREADY_EXISTS"
-	PackageVersionErrorCodeMismatched_revision PackageVersionErrorCode = "MISMATCHED_REVISION"
-	PackageVersionErrorCodeMismatched_status   PackageVersionErrorCode = "MISMATCHED_STATUS"
-	PackageVersionErrorCodeNot_allowed         PackageVersionErrorCode = "NOT_ALLOWED"
-	PackageVersionErrorCodeNot_found           PackageVersionErrorCode = "NOT_FOUND"
-	PackageVersionErrorCodeSkipped             PackageVersionErrorCode = "SKIPPED"
+	PackageVersionErrorCodeAlreadyExists      PackageVersionErrorCode = "ALREADY_EXISTS"
+	PackageVersionErrorCodeMismatchedRevision PackageVersionErrorCode = "MISMATCHED_REVISION"
+	PackageVersionErrorCodeMismatchedStatus   PackageVersionErrorCode = "MISMATCHED_STATUS"
+	PackageVersionErrorCodeNotAllowed         PackageVersionErrorCode = "NOT_ALLOWED"
+	PackageVersionErrorCodeNotFound           PackageVersionErrorCode = "NOT_FOUND"
+	PackageVersionErrorCodeSkipped            PackageVersionErrorCode = "SKIPPED"
 )
 
 // Values returns all known values for PackageVersionErrorCode. Note that this can
@@ -108,7 +108,7 @@ type PackageVersionSortType string
 
 // Enum values for PackageVersionSortType
 const (
-	PackageVersionSortTypePublished_time PackageVersionSortType = "PUBLISHED_TIME"
+	PackageVersionSortTypePublishedTime PackageVersionSortType = "PUBLISHED_TIME"
 )
 
 // Values returns all known values for PackageVersionSortType. Note that this can
@@ -150,11 +150,11 @@ type ResourceType string
 
 // Enum values for ResourceType
 const (
-	ResourceTypeDomain          ResourceType = "domain"
-	ResourceTypeRepository      ResourceType = "repository"
-	ResourceTypePackage         ResourceType = "package"
-	ResourceTypePackage_version ResourceType = "package-version"
-	ResourceTypeAsset           ResourceType = "asset"
+	ResourceTypeDomain         ResourceType = "domain"
+	ResourceTypeRepository     ResourceType = "repository"
+	ResourceTypePackage        ResourceType = "package"
+	ResourceTypePackageVersion ResourceType = "package-version"
+	ResourceTypeAsset          ResourceType = "asset"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -174,11 +174,11 @@ type ValidationExceptionReason string
 
 // Enum values for ValidationExceptionReason
 const (
-	ValidationExceptionReasonCannot_parse            ValidationExceptionReason = "CANNOT_PARSE"
-	ValidationExceptionReasonEncryption_key_error    ValidationExceptionReason = "ENCRYPTION_KEY_ERROR"
-	ValidationExceptionReasonField_validation_failed ValidationExceptionReason = "FIELD_VALIDATION_FAILED"
-	ValidationExceptionReasonUnknown_operation       ValidationExceptionReason = "UNKNOWN_OPERATION"
-	ValidationExceptionReasonOther                   ValidationExceptionReason = "OTHER"
+	ValidationExceptionReasonCannotParse           ValidationExceptionReason = "CANNOT_PARSE"
+	ValidationExceptionReasonEncryptionKeyError    ValidationExceptionReason = "ENCRYPTION_KEY_ERROR"
+	ValidationExceptionReasonFieldValidationFailed ValidationExceptionReason = "FIELD_VALIDATION_FAILED"
+	ValidationExceptionReasonUnknownOperation      ValidationExceptionReason = "UNKNOWN_OPERATION"
+	ValidationExceptionReasonOther                 ValidationExceptionReason = "OTHER"
 )
 
 // Values returns all known values for ValidationExceptionReason. Note that this

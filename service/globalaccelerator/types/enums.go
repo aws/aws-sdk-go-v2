@@ -6,8 +6,8 @@ type AcceleratorStatus string
 
 // Enum values for AcceleratorStatus
 const (
-	AcceleratorStatusDeployed    AcceleratorStatus = "DEPLOYED"
-	AcceleratorStatusIn_progress AcceleratorStatus = "IN_PROGRESS"
+	AcceleratorStatusDeployed   AcceleratorStatus = "DEPLOYED"
+	AcceleratorStatusInProgress AcceleratorStatus = "IN_PROGRESS"
 )
 
 // Values returns all known values for AcceleratorStatus. Note that this can be
@@ -24,17 +24,17 @@ type ByoipCidrState string
 
 // Enum values for ByoipCidrState
 const (
-	ByoipCidrStatePending_provisioning   ByoipCidrState = "PENDING_PROVISIONING"
-	ByoipCidrStateReady                  ByoipCidrState = "READY"
-	ByoipCidrStatePending_advertising    ByoipCidrState = "PENDING_ADVERTISING"
-	ByoipCidrStateAdvertising            ByoipCidrState = "ADVERTISING"
-	ByoipCidrStatePending_withdrawing    ByoipCidrState = "PENDING_WITHDRAWING"
-	ByoipCidrStatePending_deprovisioning ByoipCidrState = "PENDING_DEPROVISIONING"
-	ByoipCidrStateDeprovisioned          ByoipCidrState = "DEPROVISIONED"
-	ByoipCidrStateFailed_provision       ByoipCidrState = "FAILED_PROVISION"
-	ByoipCidrStateFailed_advertising     ByoipCidrState = "FAILED_ADVERTISING"
-	ByoipCidrStateFailed_withdraw        ByoipCidrState = "FAILED_WITHDRAW"
-	ByoipCidrStateFailed_deprovision     ByoipCidrState = "FAILED_DEPROVISION"
+	ByoipCidrStatePendingProvisioning   ByoipCidrState = "PENDING_PROVISIONING"
+	ByoipCidrStateReady                 ByoipCidrState = "READY"
+	ByoipCidrStatePendingAdvertising    ByoipCidrState = "PENDING_ADVERTISING"
+	ByoipCidrStateAdvertising           ByoipCidrState = "ADVERTISING"
+	ByoipCidrStatePendingWithdrawing    ByoipCidrState = "PENDING_WITHDRAWING"
+	ByoipCidrStatePendingDeprovisioning ByoipCidrState = "PENDING_DEPROVISIONING"
+	ByoipCidrStateDeprovisioned         ByoipCidrState = "DEPROVISIONED"
+	ByoipCidrStateFailedProvision       ByoipCidrState = "FAILED_PROVISION"
+	ByoipCidrStateFailedAdvertising     ByoipCidrState = "FAILED_ADVERTISING"
+	ByoipCidrStateFailedWithdraw        ByoipCidrState = "FAILED_WITHDRAW"
+	ByoipCidrStateFailedDeprovision     ByoipCidrState = "FAILED_DEPROVISION"
 )
 
 // Values returns all known values for ByoipCidrState. Note that this can be
@@ -60,8 +60,8 @@ type ClientAffinity string
 
 // Enum values for ClientAffinity
 const (
-	ClientAffinityNone      ClientAffinity = "NONE"
-	ClientAffinitySource_ip ClientAffinity = "SOURCE_IP"
+	ClientAffinityNone     ClientAffinity = "NONE"
+	ClientAffinitySourceIp ClientAffinity = "SOURCE_IP"
 )
 
 // Values returns all known values for ClientAffinity. Note that this can be

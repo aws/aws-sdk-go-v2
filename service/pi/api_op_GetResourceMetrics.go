@@ -83,20 +83,20 @@ type GetResourceMetricsInput struct {
 	// Insights. A period can be as short as one second, or as long as one day (86400
 	// seconds). Valid values are:
 	//
-	//     * 1 (one second)
+	// * 1 (one second)
 	//
-	//     * 60 (one minute)
+	// * 60 (one minute)
 	//
-	//     *
-	// 300 (five minutes)
+	// * 300 (five
+	// minutes)
 	//
-	//     * 3600 (one hour)
+	// * 3600 (one hour)
 	//
-	//     * 86400 (twenty-four hours)
+	// * 86400 (twenty-four hours)
 	//
-	// If
-	// you don't specify PeriodInSeconds, then Performance Insights will choose a value
-	// for you, with a goal of returning roughly 100-200 data points in the response.
+	// If you don't specify
+	// PeriodInSeconds, then Performance Insights will choose a value for you, with a
+	// goal of returning roughly 100-200 data points in the response.
 	PeriodInSeconds *int32
 }
 

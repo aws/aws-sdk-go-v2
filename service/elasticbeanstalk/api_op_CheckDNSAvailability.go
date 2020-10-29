@@ -40,10 +40,10 @@ type CheckDNSAvailabilityOutput struct {
 
 	// Indicates if the specified CNAME is available:
 	//
-	//     * true : The CNAME is
+	// * true : The CNAME is
 	// available.
 	//
-	//     * false : The CNAME is not available.
+	// * false : The CNAME is not available.
 	Available *bool
 
 	// The fully qualified CNAME to reserve when CreateEnvironment is called with the

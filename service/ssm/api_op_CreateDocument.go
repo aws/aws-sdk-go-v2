@@ -39,15 +39,15 @@ type CreateDocumentInput struct {
 	// referencing the file in a command. For examples, see the following topics in the
 	// AWS Systems Manager User Guide.
 	//
-	//     * Create an SSM document (AWS API)
+	// * Create an SSM document (AWS API)
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-api.html)
 	//
-	//
-	// * Create an SSM document (AWS CLI)
+	// *
+	// Create an SSM document (AWS CLI)
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-cli.html)
 	//
-	//
-	// * Create an SSM document (API)
+	// *
+	// Create an SSM document (API)
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-api.html)
 	//
 	// This member is required.
@@ -57,11 +57,11 @@ type CreateDocumentInput struct {
 	// document name prefixes. These are reserved by AWS for use as document name
 	// prefixes:
 	//
-	//     * aws-
+	// * aws-
 	//
-	//     * amazon
+	// * amazon
 	//
-	//     * amzn
+	// * amzn
 	//
 	// This member is required.
 	Name *string
@@ -93,9 +93,9 @@ type CreateDocumentInput struct {
 	// or the environment where it will run. In this case, you could specify the
 	// following key name/value pairs:
 	//
-	//     * Key=OS,Value=Windows
+	// * Key=OS,Value=Windows
 	//
-	//     *
+	// *
 	// Key=Environment,Value=Production
 	//
 	// To add tags to an existing SSM document, use

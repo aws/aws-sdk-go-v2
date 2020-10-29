@@ -92,10 +92,10 @@ type ConfigurationSetAttribute string
 
 // Enum values for ConfigurationSetAttribute
 const (
-	ConfigurationSetAttributeEvent_destinations ConfigurationSetAttribute = "eventDestinations"
-	ConfigurationSetAttributeTracking_options   ConfigurationSetAttribute = "trackingOptions"
-	ConfigurationSetAttributeDelivery_options   ConfigurationSetAttribute = "deliveryOptions"
-	ConfigurationSetAttributeReputation_options ConfigurationSetAttribute = "reputationOptions"
+	ConfigurationSetAttributeEventDestinations ConfigurationSetAttribute = "eventDestinations"
+	ConfigurationSetAttributeTrackingOptions   ConfigurationSetAttribute = "trackingOptions"
+	ConfigurationSetAttributeDeliveryOptions   ConfigurationSetAttribute = "deliveryOptions"
+	ConfigurationSetAttributeReputationOptions ConfigurationSetAttribute = "reputationOptions"
 )
 
 // Values returns all known values for ConfigurationSetAttribute. Note that this
@@ -136,9 +136,9 @@ type DimensionValueSource string
 
 // Enum values for DimensionValueSource
 const (
-	DimensionValueSourceMessage_tag  DimensionValueSource = "messageTag"
-	DimensionValueSourceEmail_header DimensionValueSource = "emailHeader"
-	DimensionValueSourceLink_tag     DimensionValueSource = "linkTag"
+	DimensionValueSourceMessageTag  DimensionValueSource = "messageTag"
+	DimensionValueSourceEmailHeader DimensionValueSource = "emailHeader"
+	DimensionValueSourceLinkTag     DimensionValueSource = "linkTag"
 )
 
 // Values returns all known values for DimensionValueSource. Note that this can be
@@ -180,14 +180,14 @@ type EventType string
 
 // Enum values for EventType
 const (
-	EventTypeSend              EventType = "send"
-	EventTypeReject            EventType = "reject"
-	EventTypeBounce            EventType = "bounce"
-	EventTypeComplaint         EventType = "complaint"
-	EventTypeDelivery          EventType = "delivery"
-	EventTypeOpen              EventType = "open"
-	EventTypeClick             EventType = "click"
-	EventTypeRendering_failure EventType = "renderingFailure"
+	EventTypeSend             EventType = "send"
+	EventTypeReject           EventType = "reject"
+	EventTypeBounce           EventType = "bounce"
+	EventTypeComplaint        EventType = "complaint"
+	EventTypeDelivery         EventType = "delivery"
+	EventTypeOpen             EventType = "open"
+	EventTypeClick            EventType = "click"
+	EventTypeRenderingFailure EventType = "renderingFailure"
 )
 
 // Values returns all known values for EventType. Note that this can be expanded in
@@ -302,7 +302,7 @@ type StopScope string
 
 // Enum values for StopScope
 const (
-	StopScopeRule_set StopScope = "RuleSet"
+	StopScopeRuleSet StopScope = "RuleSet"
 )
 
 // Values returns all known values for StopScope. Note that this can be expanded in

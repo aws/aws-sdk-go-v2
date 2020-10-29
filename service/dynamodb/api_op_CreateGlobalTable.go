@@ -18,44 +18,44 @@ import (
 // of global tables. If you want to add a new replica table to a global table, each
 // of the following conditions must be true:
 //
-//     * The table must have the same
+// * The table must have the same
 // primary key as all of the other replicas.
 //
-//     * The table must have the same
-// name as all of the other replicas.
+// * The table must have the same name
+// as all of the other replicas.
 //
-//     * The table must have DynamoDB Streams
-// enabled, with the stream containing both the new and the old images of the
-// item.
+// * The table must have DynamoDB Streams enabled,
+// with the stream containing both the new and the old images of the item.
 //
-//     * None of the replica tables in the global table can contain any
-// data.
+// * None
+// of the replica tables in the global table can contain any data.
 //
-// If global secondary indexes are specified, then the following conditions
-// must also be met:
+// If global
+// secondary indexes are specified, then the following conditions must also be
+// met:
 //
-//     * The global secondary indexes must have the same name.
+// * The global secondary indexes must have the same name.
 //
+// * The global
+// secondary indexes must have the same hash key and sort key (if present).
 //
-// * The global secondary indexes must have the same hash key and sort key (if
-// present).
+// If
+// local secondary indexes are specified, then the following conditions must also
+// be met:
 //
-// If local secondary indexes are specified, then the following
-// conditions must also be met:
+// * The local secondary indexes must have the same name.
 //
-//     * The local secondary indexes must have the
-// same name.
+// * The local
+// secondary indexes must have the same hash key and sort key (if present).
 //
-//     * The local secondary indexes must have the same hash key and
-// sort key (if present).
-//
-// Write capacity settings should be set consistently
-// across your replica tables and secondary indexes. DynamoDB strongly recommends
-// enabling auto scaling to manage the write capacity settings for all of your
-// global tables replicas and indexes. If you prefer to manage write capacity
-// settings manually, you should provision equal replicated write capacity units to
-// your replica tables. You should also provision equal replicated write capacity
-// units to matching secondary indexes across your global table.
+// Write
+// capacity settings should be set consistently across your replica tables and
+// secondary indexes. DynamoDB strongly recommends enabling auto scaling to manage
+// the write capacity settings for all of your global tables replicas and indexes.
+// If you prefer to manage write capacity settings manually, you should provision
+// equal replicated write capacity units to your replica tables. You should also
+// provision equal replicated write capacity units to matching secondary indexes
+// across your global table.
 func (c *Client) CreateGlobalTable(ctx context.Context, params *CreateGlobalTableInput, optFns ...func(*Options)) (*CreateGlobalTableOutput, error) {
 	if params == nil {
 		params = &CreateGlobalTableInput{}

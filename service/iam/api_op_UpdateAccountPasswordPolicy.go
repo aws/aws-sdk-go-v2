@@ -12,8 +12,8 @@ import (
 
 // Updates the password policy settings for the AWS account.
 //
-//     * This operation
-// does not support partial updates. No parameters are required, but if you do not
+// * This operation does
+// not support partial updates. No parameters are required, but if you do not
 // specify a parameter, that parameter's value reverts to its default value. See
 // the Request Parameters section for each parameter's default value. Also note
 // that some parameters do not allow the default parameter to be explicitly set.

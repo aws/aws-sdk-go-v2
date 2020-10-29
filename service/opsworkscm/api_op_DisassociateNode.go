@@ -50,7 +50,7 @@ type DisassociateNodeInput struct {
 	// required for Puppet. Attributes required in a DisassociateNode request for
 	// Chef
 	//
-	//     * CHEF_ORGANIZATION: The Chef organization with which the node was
+	// * CHEF_ORGANIZATION: The Chef organization with which the node was
 	// associated. By default only one organization named default can exist.
 	EngineAttributes []*types.EngineAttribute
 }

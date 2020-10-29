@@ -6,8 +6,8 @@ type AlgorithmSortBy string
 
 // Enum values for AlgorithmSortBy
 const (
-	AlgorithmSortByName          AlgorithmSortBy = "Name"
-	AlgorithmSortByCreation_time AlgorithmSortBy = "CreationTime"
+	AlgorithmSortByName         AlgorithmSortBy = "Name"
+	AlgorithmSortByCreationTime AlgorithmSortBy = "CreationTime"
 )
 
 // Values returns all known values for AlgorithmSortBy. Note that this can be
@@ -24,11 +24,11 @@ type AlgorithmStatus string
 
 // Enum values for AlgorithmStatus
 const (
-	AlgorithmStatusPending     AlgorithmStatus = "Pending"
-	AlgorithmStatusIn_progress AlgorithmStatus = "InProgress"
-	AlgorithmStatusCompleted   AlgorithmStatus = "Completed"
-	AlgorithmStatusFailed      AlgorithmStatus = "Failed"
-	AlgorithmStatusDeleting    AlgorithmStatus = "Deleting"
+	AlgorithmStatusPending    AlgorithmStatus = "Pending"
+	AlgorithmStatusInProgress AlgorithmStatus = "InProgress"
+	AlgorithmStatusCompleted  AlgorithmStatus = "Completed"
+	AlgorithmStatusFailed     AlgorithmStatus = "Failed"
+	AlgorithmStatusDeleting   AlgorithmStatus = "Deleting"
 )
 
 // Values returns all known values for AlgorithmStatus. Note that this can be
@@ -48,38 +48,38 @@ type AppInstanceType string
 
 // Enum values for AppInstanceType
 const (
-	AppInstanceTypeSystem           AppInstanceType = "system"
-	AppInstanceTypeMl_t3_micro      AppInstanceType = "ml.t3.micro"
-	AppInstanceTypeMl_t3_small      AppInstanceType = "ml.t3.small"
-	AppInstanceTypeMl_t3_medium     AppInstanceType = "ml.t3.medium"
-	AppInstanceTypeMl_t3_large      AppInstanceType = "ml.t3.large"
-	AppInstanceTypeMl_t3_xlarge     AppInstanceType = "ml.t3.xlarge"
-	AppInstanceTypeMl_t3_2xlarge    AppInstanceType = "ml.t3.2xlarge"
-	AppInstanceTypeMl_m5_large      AppInstanceType = "ml.m5.large"
-	AppInstanceTypeMl_m5_xlarge     AppInstanceType = "ml.m5.xlarge"
-	AppInstanceTypeMl_m5_2xlarge    AppInstanceType = "ml.m5.2xlarge"
-	AppInstanceTypeMl_m5_4xlarge    AppInstanceType = "ml.m5.4xlarge"
-	AppInstanceTypeMl_m5_8xlarge    AppInstanceType = "ml.m5.8xlarge"
-	AppInstanceTypeMl_m5_12xlarge   AppInstanceType = "ml.m5.12xlarge"
-	AppInstanceTypeMl_m5_16xlarge   AppInstanceType = "ml.m5.16xlarge"
-	AppInstanceTypeMl_m5_24xlarge   AppInstanceType = "ml.m5.24xlarge"
-	AppInstanceTypeMl_c5_large      AppInstanceType = "ml.c5.large"
-	AppInstanceTypeMl_c5_xlarge     AppInstanceType = "ml.c5.xlarge"
-	AppInstanceTypeMl_c5_2xlarge    AppInstanceType = "ml.c5.2xlarge"
-	AppInstanceTypeMl_c5_4xlarge    AppInstanceType = "ml.c5.4xlarge"
-	AppInstanceTypeMl_c5_9xlarge    AppInstanceType = "ml.c5.9xlarge"
-	AppInstanceTypeMl_c5_12xlarge   AppInstanceType = "ml.c5.12xlarge"
-	AppInstanceTypeMl_c5_18xlarge   AppInstanceType = "ml.c5.18xlarge"
-	AppInstanceTypeMl_c5_24xlarge   AppInstanceType = "ml.c5.24xlarge"
-	AppInstanceTypeMl_p3_2xlarge    AppInstanceType = "ml.p3.2xlarge"
-	AppInstanceTypeMl_p3_8xlarge    AppInstanceType = "ml.p3.8xlarge"
-	AppInstanceTypeMl_p3_16xlarge   AppInstanceType = "ml.p3.16xlarge"
-	AppInstanceTypeMl_g4dn_xlarge   AppInstanceType = "ml.g4dn.xlarge"
-	AppInstanceTypeMl_g4dn_2xlarge  AppInstanceType = "ml.g4dn.2xlarge"
-	AppInstanceTypeMl_g4dn_4xlarge  AppInstanceType = "ml.g4dn.4xlarge"
-	AppInstanceTypeMl_g4dn_8xlarge  AppInstanceType = "ml.g4dn.8xlarge"
-	AppInstanceTypeMl_g4dn_12xlarge AppInstanceType = "ml.g4dn.12xlarge"
-	AppInstanceTypeMl_g4dn_16xlarge AppInstanceType = "ml.g4dn.16xlarge"
+	AppInstanceTypeSystem         AppInstanceType = "system"
+	AppInstanceTypeMlT3Micro      AppInstanceType = "ml.t3.micro"
+	AppInstanceTypeMlT3Small      AppInstanceType = "ml.t3.small"
+	AppInstanceTypeMlT3Medium     AppInstanceType = "ml.t3.medium"
+	AppInstanceTypeMlT3Large      AppInstanceType = "ml.t3.large"
+	AppInstanceTypeMlT3Xlarge     AppInstanceType = "ml.t3.xlarge"
+	AppInstanceTypeMlT32xlarge    AppInstanceType = "ml.t3.2xlarge"
+	AppInstanceTypeMlM5Large      AppInstanceType = "ml.m5.large"
+	AppInstanceTypeMlM5Xlarge     AppInstanceType = "ml.m5.xlarge"
+	AppInstanceTypeMlM52xlarge    AppInstanceType = "ml.m5.2xlarge"
+	AppInstanceTypeMlM54xlarge    AppInstanceType = "ml.m5.4xlarge"
+	AppInstanceTypeMlM58xlarge    AppInstanceType = "ml.m5.8xlarge"
+	AppInstanceTypeMlM512xlarge   AppInstanceType = "ml.m5.12xlarge"
+	AppInstanceTypeMlM516xlarge   AppInstanceType = "ml.m5.16xlarge"
+	AppInstanceTypeMlM524xlarge   AppInstanceType = "ml.m5.24xlarge"
+	AppInstanceTypeMlC5Large      AppInstanceType = "ml.c5.large"
+	AppInstanceTypeMlC5Xlarge     AppInstanceType = "ml.c5.xlarge"
+	AppInstanceTypeMlC52xlarge    AppInstanceType = "ml.c5.2xlarge"
+	AppInstanceTypeMlC54xlarge    AppInstanceType = "ml.c5.4xlarge"
+	AppInstanceTypeMlC59xlarge    AppInstanceType = "ml.c5.9xlarge"
+	AppInstanceTypeMlC512xlarge   AppInstanceType = "ml.c5.12xlarge"
+	AppInstanceTypeMlC518xlarge   AppInstanceType = "ml.c5.18xlarge"
+	AppInstanceTypeMlC524xlarge   AppInstanceType = "ml.c5.24xlarge"
+	AppInstanceTypeMlP32xlarge    AppInstanceType = "ml.p3.2xlarge"
+	AppInstanceTypeMlP38xlarge    AppInstanceType = "ml.p3.8xlarge"
+	AppInstanceTypeMlP316xlarge   AppInstanceType = "ml.p3.16xlarge"
+	AppInstanceTypeMlG4dnXlarge   AppInstanceType = "ml.g4dn.xlarge"
+	AppInstanceTypeMlG4dn2xlarge  AppInstanceType = "ml.g4dn.2xlarge"
+	AppInstanceTypeMlG4dn4xlarge  AppInstanceType = "ml.g4dn.4xlarge"
+	AppInstanceTypeMlG4dn8xlarge  AppInstanceType = "ml.g4dn.8xlarge"
+	AppInstanceTypeMlG4dn12xlarge AppInstanceType = "ml.g4dn.12xlarge"
+	AppInstanceTypeMlG4dn16xlarge AppInstanceType = "ml.g4dn.16xlarge"
 )
 
 // Values returns all known values for AppInstanceType. Note that this can be
@@ -258,16 +258,16 @@ type AutoMLJobSecondaryStatus string
 
 // Enum values for AutoMLJobSecondaryStatus
 const (
-	AutoMLJobSecondaryStatusStarting                        AutoMLJobSecondaryStatus = "Starting"
-	AutoMLJobSecondaryStatusAnalyzing_data                  AutoMLJobSecondaryStatus = "AnalyzingData"
-	AutoMLJobSecondaryStatusFeature_engineering             AutoMLJobSecondaryStatus = "FeatureEngineering"
-	AutoMLJobSecondaryStatusModel_tuning                    AutoMLJobSecondaryStatus = "ModelTuning"
-	AutoMLJobSecondaryStatusMax_candidates_reached          AutoMLJobSecondaryStatus = "MaxCandidatesReached"
-	AutoMLJobSecondaryStatusFailed                          AutoMLJobSecondaryStatus = "Failed"
-	AutoMLJobSecondaryStatusStopped                         AutoMLJobSecondaryStatus = "Stopped"
-	AutoMLJobSecondaryStatusMax_auto_ml_job_runtime_reached AutoMLJobSecondaryStatus = "MaxAutoMLJobRuntimeReached"
-	AutoMLJobSecondaryStatusStopping                        AutoMLJobSecondaryStatus = "Stopping"
-	AutoMLJobSecondaryStatusCandidate_definitions_generated AutoMLJobSecondaryStatus = "CandidateDefinitionsGenerated"
+	AutoMLJobSecondaryStatusStarting                      AutoMLJobSecondaryStatus = "Starting"
+	AutoMLJobSecondaryStatusAnalyzingData                 AutoMLJobSecondaryStatus = "AnalyzingData"
+	AutoMLJobSecondaryStatusFeatureEngineering            AutoMLJobSecondaryStatus = "FeatureEngineering"
+	AutoMLJobSecondaryStatusModelTuning                   AutoMLJobSecondaryStatus = "ModelTuning"
+	AutoMLJobSecondaryStatusMaxCandidatesReached          AutoMLJobSecondaryStatus = "MaxCandidatesReached"
+	AutoMLJobSecondaryStatusFailed                        AutoMLJobSecondaryStatus = "Failed"
+	AutoMLJobSecondaryStatusStopped                       AutoMLJobSecondaryStatus = "Stopped"
+	AutoMLJobSecondaryStatusMaxAutoMlJobRuntimeReached    AutoMLJobSecondaryStatus = "MaxAutoMLJobRuntimeReached"
+	AutoMLJobSecondaryStatusStopping                      AutoMLJobSecondaryStatus = "Stopping"
+	AutoMLJobSecondaryStatusCandidateDefinitionsGenerated AutoMLJobSecondaryStatus = "CandidateDefinitionsGenerated"
 )
 
 // Values returns all known values for AutoMLJobSecondaryStatus. Note that this can
@@ -292,11 +292,11 @@ type AutoMLJobStatus string
 
 // Enum values for AutoMLJobStatus
 const (
-	AutoMLJobStatusCompleted   AutoMLJobStatus = "Completed"
-	AutoMLJobStatusIn_progress AutoMLJobStatus = "InProgress"
-	AutoMLJobStatusFailed      AutoMLJobStatus = "Failed"
-	AutoMLJobStatusStopped     AutoMLJobStatus = "Stopped"
-	AutoMLJobStatusStopping    AutoMLJobStatus = "Stopping"
+	AutoMLJobStatusCompleted  AutoMLJobStatus = "Completed"
+	AutoMLJobStatusInProgress AutoMLJobStatus = "InProgress"
+	AutoMLJobStatusFailed     AutoMLJobStatus = "Failed"
+	AutoMLJobStatusStopped    AutoMLJobStatus = "Stopped"
+	AutoMLJobStatusStopping   AutoMLJobStatus = "Stopping"
 )
 
 // Values returns all known values for AutoMLJobStatus. Note that this can be
@@ -319,7 +319,7 @@ const (
 	AutoMLMetricEnumAccuracy AutoMLMetricEnum = "Accuracy"
 	AutoMLMetricEnumMse      AutoMLMetricEnum = "MSE"
 	AutoMLMetricEnumF1       AutoMLMetricEnum = "F1"
-	AutoMLMetricEnumF1_macro AutoMLMetricEnum = "F1macro"
+	AutoMLMetricEnumF1Macro  AutoMLMetricEnum = "F1macro"
 	AutoMLMetricEnumAuc      AutoMLMetricEnum = "AUC"
 )
 
@@ -340,8 +340,8 @@ type AutoMLS3DataType string
 
 // Enum values for AutoMLS3DataType
 const (
-	AutoMLS3DataTypeManifest_file AutoMLS3DataType = "ManifestFile"
-	AutoMLS3DataTypeS3_prefix     AutoMLS3DataType = "S3Prefix"
+	AutoMLS3DataTypeManifestFile AutoMLS3DataType = "ManifestFile"
+	AutoMLS3DataTypeS3Prefix     AutoMLS3DataType = "S3Prefix"
 )
 
 // Values returns all known values for AutoMLS3DataType. Note that this can be
@@ -358,9 +358,9 @@ type AutoMLSortBy string
 
 // Enum values for AutoMLSortBy
 const (
-	AutoMLSortByName          AutoMLSortBy = "Name"
-	AutoMLSortByCreation_time AutoMLSortBy = "CreationTime"
-	AutoMLSortByStatus        AutoMLSortBy = "Status"
+	AutoMLSortByName         AutoMLSortBy = "Name"
+	AutoMLSortByCreationTime AutoMLSortBy = "CreationTime"
+	AutoMLSortByStatus       AutoMLSortBy = "Status"
 )
 
 // Values returns all known values for AutoMLSortBy. Note that this can be expanded
@@ -396,8 +396,8 @@ type AwsManagedHumanLoopRequestSource string
 
 // Enum values for AwsManagedHumanLoopRequestSource
 const (
-	AwsManagedHumanLoopRequestSourceRekognition_detect_moderation_labels_image_v3 AwsManagedHumanLoopRequestSource = "AWS/Rekognition/DetectModerationLabels/Image/V3"
-	AwsManagedHumanLoopRequestSourceTextract_analyze_document_forms_v1            AwsManagedHumanLoopRequestSource = "AWS/Textract/AnalyzeDocument/Forms/V1"
+	AwsManagedHumanLoopRequestSourceRekognitionDetectModerationLabelsImageV3 AwsManagedHumanLoopRequestSource = "AWS/Rekognition/DetectModerationLabels/Image/V3"
+	AwsManagedHumanLoopRequestSourceTextractAnalyzeDocumentFormsV1           AwsManagedHumanLoopRequestSource = "AWS/Textract/AnalyzeDocument/Forms/V1"
 )
 
 // Values returns all known values for AwsManagedHumanLoopRequestSource. Note that
@@ -415,8 +415,8 @@ type BatchStrategy string
 
 // Enum values for BatchStrategy
 const (
-	BatchStrategyMulti_record  BatchStrategy = "MultiRecord"
-	BatchStrategySingle_record BatchStrategy = "SingleRecord"
+	BatchStrategyMultiRecord  BatchStrategy = "MultiRecord"
+	BatchStrategySingleRecord BatchStrategy = "SingleRecord"
 )
 
 // Values returns all known values for BatchStrategy. Note that this can be
@@ -471,11 +471,11 @@ type CandidateStatus string
 
 // Enum values for CandidateStatus
 const (
-	CandidateStatusCompleted   CandidateStatus = "Completed"
-	CandidateStatusIn_progress CandidateStatus = "InProgress"
-	CandidateStatusFailed      CandidateStatus = "Failed"
-	CandidateStatusStopped     CandidateStatus = "Stopped"
-	CandidateStatusStopping    CandidateStatus = "Stopping"
+	CandidateStatusCompleted  CandidateStatus = "Completed"
+	CandidateStatusInProgress CandidateStatus = "InProgress"
+	CandidateStatusFailed     CandidateStatus = "Failed"
+	CandidateStatusStopped    CandidateStatus = "Stopped"
+	CandidateStatusStopping   CandidateStatus = "Stopping"
 )
 
 // Values returns all known values for CandidateStatus. Note that this can be
@@ -551,9 +551,9 @@ type CodeRepositorySortBy string
 
 // Enum values for CodeRepositorySortBy
 const (
-	CodeRepositorySortByName               CodeRepositorySortBy = "Name"
-	CodeRepositorySortByCreation_time      CodeRepositorySortBy = "CreationTime"
-	CodeRepositorySortByLast_modified_time CodeRepositorySortBy = "LastModifiedTime"
+	CodeRepositorySortByName             CodeRepositorySortBy = "Name"
+	CodeRepositorySortByCreationTime     CodeRepositorySortBy = "CreationTime"
+	CodeRepositorySortByLastModifiedTime CodeRepositorySortBy = "LastModifiedTime"
 )
 
 // Values returns all known values for CodeRepositorySortBy. Note that this can be
@@ -633,8 +633,8 @@ type ContainerMode string
 
 // Enum values for ContainerMode
 const (
-	ContainerModeSingle_model ContainerMode = "SingleModel"
-	ContainerModeMulti_model  ContainerMode = "MultiModel"
+	ContainerModeSingleModel ContainerMode = "SingleModel"
+	ContainerModeMultiModel  ContainerMode = "MultiModel"
 )
 
 // Values returns all known values for ContainerMode. Note that this can be
@@ -651,8 +651,8 @@ type ContentClassifier string
 
 // Enum values for ContentClassifier
 const (
-	ContentClassifierFree_of_personally_identifiable_information ContentClassifier = "FreeOfPersonallyIdentifiableInformation"
-	ContentClassifierFree_of_adult_content                       ContentClassifier = "FreeOfAdultContent"
+	ContentClassifierFreeOfPersonallyIdentifiableInformation ContentClassifier = "FreeOfPersonallyIdentifiableInformation"
+	ContentClassifierFreeOfAdultContent                      ContentClassifier = "FreeOfAdultContent"
 )
 
 // Values returns all known values for ContentClassifier. Note that this can be
@@ -669,10 +669,10 @@ type DetailedAlgorithmStatus string
 
 // Enum values for DetailedAlgorithmStatus
 const (
-	DetailedAlgorithmStatusNot_started DetailedAlgorithmStatus = "NotStarted"
-	DetailedAlgorithmStatusIn_progress DetailedAlgorithmStatus = "InProgress"
-	DetailedAlgorithmStatusCompleted   DetailedAlgorithmStatus = "Completed"
-	DetailedAlgorithmStatusFailed      DetailedAlgorithmStatus = "Failed"
+	DetailedAlgorithmStatusNotStarted DetailedAlgorithmStatus = "NotStarted"
+	DetailedAlgorithmStatusInProgress DetailedAlgorithmStatus = "InProgress"
+	DetailedAlgorithmStatusCompleted  DetailedAlgorithmStatus = "Completed"
+	DetailedAlgorithmStatusFailed     DetailedAlgorithmStatus = "Failed"
 )
 
 // Values returns all known values for DetailedAlgorithmStatus. Note that this can
@@ -691,10 +691,10 @@ type DetailedModelPackageStatus string
 
 // Enum values for DetailedModelPackageStatus
 const (
-	DetailedModelPackageStatusNot_started DetailedModelPackageStatus = "NotStarted"
-	DetailedModelPackageStatusIn_progress DetailedModelPackageStatus = "InProgress"
-	DetailedModelPackageStatusCompleted   DetailedModelPackageStatus = "Completed"
-	DetailedModelPackageStatusFailed      DetailedModelPackageStatus = "Failed"
+	DetailedModelPackageStatusNotStarted DetailedModelPackageStatus = "NotStarted"
+	DetailedModelPackageStatusInProgress DetailedModelPackageStatus = "InProgress"
+	DetailedModelPackageStatusCompleted  DetailedModelPackageStatus = "Completed"
+	DetailedModelPackageStatusFailed     DetailedModelPackageStatus = "Failed"
 )
 
 // Values returns all known values for DetailedModelPackageStatus. Note that this
@@ -791,14 +791,14 @@ type EndpointStatus string
 
 // Enum values for EndpointStatus
 const (
-	EndpointStatusOut_of_service  EndpointStatus = "OutOfService"
-	EndpointStatusCreating        EndpointStatus = "Creating"
-	EndpointStatusUpdating        EndpointStatus = "Updating"
-	EndpointStatusSystem_updating EndpointStatus = "SystemUpdating"
-	EndpointStatusRolling_back    EndpointStatus = "RollingBack"
-	EndpointStatusIn_service      EndpointStatus = "InService"
-	EndpointStatusDeleting        EndpointStatus = "Deleting"
-	EndpointStatusFailed          EndpointStatus = "Failed"
+	EndpointStatusOutOfService   EndpointStatus = "OutOfService"
+	EndpointStatusCreating       EndpointStatus = "Creating"
+	EndpointStatusUpdating       EndpointStatus = "Updating"
+	EndpointStatusSystemUpdating EndpointStatus = "SystemUpdating"
+	EndpointStatusRollingBack    EndpointStatus = "RollingBack"
+	EndpointStatusInService      EndpointStatus = "InService"
+	EndpointStatusDeleting       EndpointStatus = "Deleting"
+	EndpointStatusFailed         EndpointStatus = "Failed"
 )
 
 // Values returns all known values for EndpointStatus. Note that this can be
@@ -821,13 +821,13 @@ type ExecutionStatus string
 
 // Enum values for ExecutionStatus
 const (
-	ExecutionStatusPending                   ExecutionStatus = "Pending"
-	ExecutionStatusCompleted                 ExecutionStatus = "Completed"
-	ExecutionStatusCompleted_with_violations ExecutionStatus = "CompletedWithViolations"
-	ExecutionStatusIn_progress               ExecutionStatus = "InProgress"
-	ExecutionStatusFailed                    ExecutionStatus = "Failed"
-	ExecutionStatusStopping                  ExecutionStatus = "Stopping"
-	ExecutionStatusStopped                   ExecutionStatus = "Stopped"
+	ExecutionStatusPending                 ExecutionStatus = "Pending"
+	ExecutionStatusCompleted               ExecutionStatus = "Completed"
+	ExecutionStatusCompletedWithViolations ExecutionStatus = "CompletedWithViolations"
+	ExecutionStatusInProgress              ExecutionStatus = "InProgress"
+	ExecutionStatusFailed                  ExecutionStatus = "Failed"
+	ExecutionStatusStopping                ExecutionStatus = "Stopping"
+	ExecutionStatusStopped                 ExecutionStatus = "Stopped"
 )
 
 // Values returns all known values for ExecutionStatus. Note that this can be
@@ -953,10 +953,10 @@ type HyperParameterScalingType string
 
 // Enum values for HyperParameterScalingType
 const (
-	HyperParameterScalingTypeAuto                HyperParameterScalingType = "Auto"
-	HyperParameterScalingTypeLinear              HyperParameterScalingType = "Linear"
-	HyperParameterScalingTypeLogarithmic         HyperParameterScalingType = "Logarithmic"
-	HyperParameterScalingTypeReverse_logarithmic HyperParameterScalingType = "ReverseLogarithmic"
+	HyperParameterScalingTypeAuto               HyperParameterScalingType = "Auto"
+	HyperParameterScalingTypeLinear             HyperParameterScalingType = "Linear"
+	HyperParameterScalingTypeLogarithmic        HyperParameterScalingType = "Logarithmic"
+	HyperParameterScalingTypeReverseLogarithmic HyperParameterScalingType = "ReverseLogarithmic"
 )
 
 // Values returns all known values for HyperParameterScalingType. Note that this
@@ -1015,11 +1015,11 @@ type HyperParameterTuningJobStatus string
 
 // Enum values for HyperParameterTuningJobStatus
 const (
-	HyperParameterTuningJobStatusCompleted   HyperParameterTuningJobStatus = "Completed"
-	HyperParameterTuningJobStatusIn_progress HyperParameterTuningJobStatus = "InProgress"
-	HyperParameterTuningJobStatusFailed      HyperParameterTuningJobStatus = "Failed"
-	HyperParameterTuningJobStatusStopped     HyperParameterTuningJobStatus = "Stopped"
-	HyperParameterTuningJobStatusStopping    HyperParameterTuningJobStatus = "Stopping"
+	HyperParameterTuningJobStatusCompleted  HyperParameterTuningJobStatus = "Completed"
+	HyperParameterTuningJobStatusInProgress HyperParameterTuningJobStatus = "InProgress"
+	HyperParameterTuningJobStatusFailed     HyperParameterTuningJobStatus = "Failed"
+	HyperParameterTuningJobStatusStopped    HyperParameterTuningJobStatus = "Stopped"
+	HyperParameterTuningJobStatusStopping   HyperParameterTuningJobStatus = "Stopping"
 )
 
 // Values returns all known values for HyperParameterTuningJobStatus. Note that
@@ -1059,8 +1059,8 @@ type HyperParameterTuningJobWarmStartType string
 
 // Enum values for HyperParameterTuningJobWarmStartType
 const (
-	HyperParameterTuningJobWarmStartTypeIdentical_data_and_algorithm HyperParameterTuningJobWarmStartType = "IdenticalDataAndAlgorithm"
-	HyperParameterTuningJobWarmStartTypeTransfer_learning            HyperParameterTuningJobWarmStartType = "TransferLearning"
+	HyperParameterTuningJobWarmStartTypeIdenticalDataAndAlgorithm HyperParameterTuningJobWarmStartType = "IdenticalDataAndAlgorithm"
+	HyperParameterTuningJobWarmStartTypeTransferLearning          HyperParameterTuningJobWarmStartType = "TransferLearning"
 )
 
 // Values returns all known values for HyperParameterTuningJobWarmStartType. Note
@@ -1078,44 +1078,44 @@ type InstanceType string
 
 // Enum values for InstanceType
 const (
-	InstanceTypeMl_t2_medium    InstanceType = "ml.t2.medium"
-	InstanceTypeMl_t2_large     InstanceType = "ml.t2.large"
-	InstanceTypeMl_t2_xlarge    InstanceType = "ml.t2.xlarge"
-	InstanceTypeMl_t2_2xlarge   InstanceType = "ml.t2.2xlarge"
-	InstanceTypeMl_t3_medium    InstanceType = "ml.t3.medium"
-	InstanceTypeMl_t3_large     InstanceType = "ml.t3.large"
-	InstanceTypeMl_t3_xlarge    InstanceType = "ml.t3.xlarge"
-	InstanceTypeMl_t3_2xlarge   InstanceType = "ml.t3.2xlarge"
-	InstanceTypeMl_m4_xlarge    InstanceType = "ml.m4.xlarge"
-	InstanceTypeMl_m4_2xlarge   InstanceType = "ml.m4.2xlarge"
-	InstanceTypeMl_m4_4xlarge   InstanceType = "ml.m4.4xlarge"
-	InstanceTypeMl_m4_10xlarge  InstanceType = "ml.m4.10xlarge"
-	InstanceTypeMl_m4_16xlarge  InstanceType = "ml.m4.16xlarge"
-	InstanceTypeMl_m5_xlarge    InstanceType = "ml.m5.xlarge"
-	InstanceTypeMl_m5_2xlarge   InstanceType = "ml.m5.2xlarge"
-	InstanceTypeMl_m5_4xlarge   InstanceType = "ml.m5.4xlarge"
-	InstanceTypeMl_m5_12xlarge  InstanceType = "ml.m5.12xlarge"
-	InstanceTypeMl_m5_24xlarge  InstanceType = "ml.m5.24xlarge"
-	InstanceTypeMl_c4_xlarge    InstanceType = "ml.c4.xlarge"
-	InstanceTypeMl_c4_2xlarge   InstanceType = "ml.c4.2xlarge"
-	InstanceTypeMl_c4_4xlarge   InstanceType = "ml.c4.4xlarge"
-	InstanceTypeMl_c4_8xlarge   InstanceType = "ml.c4.8xlarge"
-	InstanceTypeMl_c5_xlarge    InstanceType = "ml.c5.xlarge"
-	InstanceTypeMl_c5_2xlarge   InstanceType = "ml.c5.2xlarge"
-	InstanceTypeMl_c5_4xlarge   InstanceType = "ml.c5.4xlarge"
-	InstanceTypeMl_c5_9xlarge   InstanceType = "ml.c5.9xlarge"
-	InstanceTypeMl_c5_18xlarge  InstanceType = "ml.c5.18xlarge"
-	InstanceTypeMl_c5d_xlarge   InstanceType = "ml.c5d.xlarge"
-	InstanceTypeMl_c5d_2xlarge  InstanceType = "ml.c5d.2xlarge"
-	InstanceTypeMl_c5d_4xlarge  InstanceType = "ml.c5d.4xlarge"
-	InstanceTypeMl_c5d_9xlarge  InstanceType = "ml.c5d.9xlarge"
-	InstanceTypeMl_c5d_18xlarge InstanceType = "ml.c5d.18xlarge"
-	InstanceTypeMl_p2_xlarge    InstanceType = "ml.p2.xlarge"
-	InstanceTypeMl_p2_8xlarge   InstanceType = "ml.p2.8xlarge"
-	InstanceTypeMl_p2_16xlarge  InstanceType = "ml.p2.16xlarge"
-	InstanceTypeMl_p3_2xlarge   InstanceType = "ml.p3.2xlarge"
-	InstanceTypeMl_p3_8xlarge   InstanceType = "ml.p3.8xlarge"
-	InstanceTypeMl_p3_16xlarge  InstanceType = "ml.p3.16xlarge"
+	InstanceTypeMlT2Medium    InstanceType = "ml.t2.medium"
+	InstanceTypeMlT2Large     InstanceType = "ml.t2.large"
+	InstanceTypeMlT2Xlarge    InstanceType = "ml.t2.xlarge"
+	InstanceTypeMlT22xlarge   InstanceType = "ml.t2.2xlarge"
+	InstanceTypeMlT3Medium    InstanceType = "ml.t3.medium"
+	InstanceTypeMlT3Large     InstanceType = "ml.t3.large"
+	InstanceTypeMlT3Xlarge    InstanceType = "ml.t3.xlarge"
+	InstanceTypeMlT32xlarge   InstanceType = "ml.t3.2xlarge"
+	InstanceTypeMlM4Xlarge    InstanceType = "ml.m4.xlarge"
+	InstanceTypeMlM42xlarge   InstanceType = "ml.m4.2xlarge"
+	InstanceTypeMlM44xlarge   InstanceType = "ml.m4.4xlarge"
+	InstanceTypeMlM410xlarge  InstanceType = "ml.m4.10xlarge"
+	InstanceTypeMlM416xlarge  InstanceType = "ml.m4.16xlarge"
+	InstanceTypeMlM5Xlarge    InstanceType = "ml.m5.xlarge"
+	InstanceTypeMlM52xlarge   InstanceType = "ml.m5.2xlarge"
+	InstanceTypeMlM54xlarge   InstanceType = "ml.m5.4xlarge"
+	InstanceTypeMlM512xlarge  InstanceType = "ml.m5.12xlarge"
+	InstanceTypeMlM524xlarge  InstanceType = "ml.m5.24xlarge"
+	InstanceTypeMlC4Xlarge    InstanceType = "ml.c4.xlarge"
+	InstanceTypeMlC42xlarge   InstanceType = "ml.c4.2xlarge"
+	InstanceTypeMlC44xlarge   InstanceType = "ml.c4.4xlarge"
+	InstanceTypeMlC48xlarge   InstanceType = "ml.c4.8xlarge"
+	InstanceTypeMlC5Xlarge    InstanceType = "ml.c5.xlarge"
+	InstanceTypeMlC52xlarge   InstanceType = "ml.c5.2xlarge"
+	InstanceTypeMlC54xlarge   InstanceType = "ml.c5.4xlarge"
+	InstanceTypeMlC59xlarge   InstanceType = "ml.c5.9xlarge"
+	InstanceTypeMlC518xlarge  InstanceType = "ml.c5.18xlarge"
+	InstanceTypeMlC5dXlarge   InstanceType = "ml.c5d.xlarge"
+	InstanceTypeMlC5d2xlarge  InstanceType = "ml.c5d.2xlarge"
+	InstanceTypeMlC5d4xlarge  InstanceType = "ml.c5d.4xlarge"
+	InstanceTypeMlC5d9xlarge  InstanceType = "ml.c5d.9xlarge"
+	InstanceTypeMlC5d18xlarge InstanceType = "ml.c5d.18xlarge"
+	InstanceTypeMlP2Xlarge    InstanceType = "ml.p2.xlarge"
+	InstanceTypeMlP28xlarge   InstanceType = "ml.p2.8xlarge"
+	InstanceTypeMlP216xlarge  InstanceType = "ml.p2.16xlarge"
+	InstanceTypeMlP32xlarge   InstanceType = "ml.p3.2xlarge"
+	InstanceTypeMlP38xlarge   InstanceType = "ml.p3.8xlarge"
+	InstanceTypeMlP316xlarge  InstanceType = "ml.p3.16xlarge"
 )
 
 // Values returns all known values for InstanceType. Note that this can be expanded
@@ -1187,7 +1187,7 @@ type LabelingJobStatus string
 // Enum values for LabelingJobStatus
 const (
 	LabelingJobStatusInitializing LabelingJobStatus = "Initializing"
-	LabelingJobStatusIn_progress  LabelingJobStatus = "InProgress"
+	LabelingJobStatusInProgress   LabelingJobStatus = "InProgress"
 	LabelingJobStatusCompleted    LabelingJobStatus = "Completed"
 	LabelingJobStatusFailed       LabelingJobStatus = "Failed"
 	LabelingJobStatusStopping     LabelingJobStatus = "Stopping"
@@ -1212,9 +1212,9 @@ type ListCompilationJobsSortBy string
 
 // Enum values for ListCompilationJobsSortBy
 const (
-	ListCompilationJobsSortByName          ListCompilationJobsSortBy = "Name"
-	ListCompilationJobsSortByCreation_time ListCompilationJobsSortBy = "CreationTime"
-	ListCompilationJobsSortByStatus        ListCompilationJobsSortBy = "Status"
+	ListCompilationJobsSortByName         ListCompilationJobsSortBy = "Name"
+	ListCompilationJobsSortByCreationTime ListCompilationJobsSortBy = "CreationTime"
+	ListCompilationJobsSortByStatus       ListCompilationJobsSortBy = "Status"
 )
 
 // Values returns all known values for ListCompilationJobsSortBy. Note that this
@@ -1232,7 +1232,7 @@ type ListLabelingJobsForWorkteamSortByOptions string
 
 // Enum values for ListLabelingJobsForWorkteamSortByOptions
 const (
-	ListLabelingJobsForWorkteamSortByOptionsCreation_time ListLabelingJobsForWorkteamSortByOptions = "CreationTime"
+	ListLabelingJobsForWorkteamSortByOptionsCreationTime ListLabelingJobsForWorkteamSortByOptions = "CreationTime"
 )
 
 // Values returns all known values for ListLabelingJobsForWorkteamSortByOptions.
@@ -1285,8 +1285,8 @@ type ModelPackageSortBy string
 
 // Enum values for ModelPackageSortBy
 const (
-	ModelPackageSortByName          ModelPackageSortBy = "Name"
-	ModelPackageSortByCreation_time ModelPackageSortBy = "CreationTime"
+	ModelPackageSortByName         ModelPackageSortBy = "Name"
+	ModelPackageSortByCreationTime ModelPackageSortBy = "CreationTime"
 )
 
 // Values returns all known values for ModelPackageSortBy. Note that this can be
@@ -1303,11 +1303,11 @@ type ModelPackageStatus string
 
 // Enum values for ModelPackageStatus
 const (
-	ModelPackageStatusPending     ModelPackageStatus = "Pending"
-	ModelPackageStatusIn_progress ModelPackageStatus = "InProgress"
-	ModelPackageStatusCompleted   ModelPackageStatus = "Completed"
-	ModelPackageStatusFailed      ModelPackageStatus = "Failed"
-	ModelPackageStatusDeleting    ModelPackageStatus = "Deleting"
+	ModelPackageStatusPending    ModelPackageStatus = "Pending"
+	ModelPackageStatusInProgress ModelPackageStatus = "InProgress"
+	ModelPackageStatusCompleted  ModelPackageStatus = "Completed"
+	ModelPackageStatusFailed     ModelPackageStatus = "Failed"
+	ModelPackageStatusDeleting   ModelPackageStatus = "Deleting"
 )
 
 // Values returns all known values for ModelPackageStatus. Note that this can be
@@ -1345,9 +1345,9 @@ type MonitoringExecutionSortKey string
 
 // Enum values for MonitoringExecutionSortKey
 const (
-	MonitoringExecutionSortKeyCreation_time  MonitoringExecutionSortKey = "CreationTime"
-	MonitoringExecutionSortKeyScheduled_time MonitoringExecutionSortKey = "ScheduledTime"
-	MonitoringExecutionSortKeyStatus         MonitoringExecutionSortKey = "Status"
+	MonitoringExecutionSortKeyCreationTime  MonitoringExecutionSortKey = "CreationTime"
+	MonitoringExecutionSortKeyScheduledTime MonitoringExecutionSortKey = "ScheduledTime"
+	MonitoringExecutionSortKeyStatus        MonitoringExecutionSortKey = "Status"
 )
 
 // Values returns all known values for MonitoringExecutionSortKey. Note that this
@@ -1365,9 +1365,9 @@ type MonitoringScheduleSortKey string
 
 // Enum values for MonitoringScheduleSortKey
 const (
-	MonitoringScheduleSortKeyName          MonitoringScheduleSortKey = "Name"
-	MonitoringScheduleSortKeyCreation_time MonitoringScheduleSortKey = "CreationTime"
-	MonitoringScheduleSortKeyStatus        MonitoringScheduleSortKey = "Status"
+	MonitoringScheduleSortKeyName         MonitoringScheduleSortKey = "Name"
+	MonitoringScheduleSortKeyCreationTime MonitoringScheduleSortKey = "CreationTime"
+	MonitoringScheduleSortKeyStatus       MonitoringScheduleSortKey = "Status"
 )
 
 // Values returns all known values for MonitoringScheduleSortKey. Note that this
@@ -1385,12 +1385,12 @@ type NotebookInstanceAcceleratorType string
 
 // Enum values for NotebookInstanceAcceleratorType
 const (
-	NotebookInstanceAcceleratorTypeMl_eia1_medium NotebookInstanceAcceleratorType = "ml.eia1.medium"
-	NotebookInstanceAcceleratorTypeMl_eia1_large  NotebookInstanceAcceleratorType = "ml.eia1.large"
-	NotebookInstanceAcceleratorTypeMl_eia1_xlarge NotebookInstanceAcceleratorType = "ml.eia1.xlarge"
-	NotebookInstanceAcceleratorTypeMl_eia2_medium NotebookInstanceAcceleratorType = "ml.eia2.medium"
-	NotebookInstanceAcceleratorTypeMl_eia2_large  NotebookInstanceAcceleratorType = "ml.eia2.large"
-	NotebookInstanceAcceleratorTypeMl_eia2_xlarge NotebookInstanceAcceleratorType = "ml.eia2.xlarge"
+	NotebookInstanceAcceleratorTypeMlEia1Medium NotebookInstanceAcceleratorType = "ml.eia1.medium"
+	NotebookInstanceAcceleratorTypeMlEia1Large  NotebookInstanceAcceleratorType = "ml.eia1.large"
+	NotebookInstanceAcceleratorTypeMlEia1Xlarge NotebookInstanceAcceleratorType = "ml.eia1.xlarge"
+	NotebookInstanceAcceleratorTypeMlEia2Medium NotebookInstanceAcceleratorType = "ml.eia2.medium"
+	NotebookInstanceAcceleratorTypeMlEia2Large  NotebookInstanceAcceleratorType = "ml.eia2.large"
+	NotebookInstanceAcceleratorTypeMlEia2Xlarge NotebookInstanceAcceleratorType = "ml.eia2.xlarge"
 )
 
 // Values returns all known values for NotebookInstanceAcceleratorType. Note that
@@ -1412,9 +1412,9 @@ type NotebookInstanceLifecycleConfigSortKey string
 
 // Enum values for NotebookInstanceLifecycleConfigSortKey
 const (
-	NotebookInstanceLifecycleConfigSortKeyName               NotebookInstanceLifecycleConfigSortKey = "Name"
-	NotebookInstanceLifecycleConfigSortKeyCreation_time      NotebookInstanceLifecycleConfigSortKey = "CreationTime"
-	NotebookInstanceLifecycleConfigSortKeyLast_modified_time NotebookInstanceLifecycleConfigSortKey = "LastModifiedTime"
+	NotebookInstanceLifecycleConfigSortKeyName             NotebookInstanceLifecycleConfigSortKey = "Name"
+	NotebookInstanceLifecycleConfigSortKeyCreationTime     NotebookInstanceLifecycleConfigSortKey = "CreationTime"
+	NotebookInstanceLifecycleConfigSortKeyLastModifiedTime NotebookInstanceLifecycleConfigSortKey = "LastModifiedTime"
 )
 
 // Values returns all known values for NotebookInstanceLifecycleConfigSortKey. Note
@@ -1452,9 +1452,9 @@ type NotebookInstanceSortKey string
 
 // Enum values for NotebookInstanceSortKey
 const (
-	NotebookInstanceSortKeyName          NotebookInstanceSortKey = "Name"
-	NotebookInstanceSortKeyCreation_time NotebookInstanceSortKey = "CreationTime"
-	NotebookInstanceSortKeyStatus        NotebookInstanceSortKey = "Status"
+	NotebookInstanceSortKeyName         NotebookInstanceSortKey = "Name"
+	NotebookInstanceSortKeyCreationTime NotebookInstanceSortKey = "CreationTime"
+	NotebookInstanceSortKeyStatus       NotebookInstanceSortKey = "Status"
 )
 
 // Values returns all known values for NotebookInstanceSortKey. Note that this can
@@ -1556,16 +1556,16 @@ type Operator string
 
 // Enum values for Operator
 const (
-	OperatorEquals                   Operator = "Equals"
-	OperatorNot_equals               Operator = "NotEquals"
-	OperatorGreater_than             Operator = "GreaterThan"
-	OperatorGreater_than_or_equal_to Operator = "GreaterThanOrEqualTo"
-	OperatorLess_than                Operator = "LessThan"
-	OperatorLess_than_or_equal_to    Operator = "LessThanOrEqualTo"
-	OperatorContains                 Operator = "Contains"
-	OperatorExists                   Operator = "Exists"
-	OperatorNot_exists               Operator = "NotExists"
-	OperatorIn                       Operator = "In"
+	OperatorEquals               Operator = "Equals"
+	OperatorNotEquals            Operator = "NotEquals"
+	OperatorGreaterThan          Operator = "GreaterThan"
+	OperatorGreaterThanOrEqualTo Operator = "GreaterThanOrEqualTo"
+	OperatorLessThan             Operator = "LessThan"
+	OperatorLessThanOrEqualTo    Operator = "LessThanOrEqualTo"
+	OperatorContains             Operator = "Contains"
+	OperatorExists               Operator = "Exists"
+	OperatorNotExists            Operator = "NotExists"
+	OperatorIn                   Operator = "In"
 )
 
 // Values returns all known values for Operator. Note that this can be expanded in
@@ -1611,7 +1611,7 @@ const (
 	ParameterTypeInteger     ParameterType = "Integer"
 	ParameterTypeContinuous  ParameterType = "Continuous"
 	ParameterTypeCategorical ParameterType = "Categorical"
-	ParameterTypeFree_text   ParameterType = "FreeText"
+	ParameterTypeFreeText    ParameterType = "FreeText"
 )
 
 // Values returns all known values for ParameterType. Note that this can be
@@ -1630,9 +1630,9 @@ type ProblemType string
 
 // Enum values for ProblemType
 const (
-	ProblemTypeBinary_classification     ProblemType = "BinaryClassification"
-	ProblemTypeMulticlass_classification ProblemType = "MulticlassClassification"
-	ProblemTypeRegression                ProblemType = "Regression"
+	ProblemTypeBinaryClassification     ProblemType = "BinaryClassification"
+	ProblemTypeMulticlassClassification ProblemType = "MulticlassClassification"
+	ProblemTypeRegression               ProblemType = "Regression"
 )
 
 // Values returns all known values for ProblemType. Note that this can be expanded
@@ -1650,44 +1650,44 @@ type ProcessingInstanceType string
 
 // Enum values for ProcessingInstanceType
 const (
-	ProcessingInstanceTypeMl_t3_medium   ProcessingInstanceType = "ml.t3.medium"
-	ProcessingInstanceTypeMl_t3_large    ProcessingInstanceType = "ml.t3.large"
-	ProcessingInstanceTypeMl_t3_xlarge   ProcessingInstanceType = "ml.t3.xlarge"
-	ProcessingInstanceTypeMl_t3_2xlarge  ProcessingInstanceType = "ml.t3.2xlarge"
-	ProcessingInstanceTypeMl_m4_xlarge   ProcessingInstanceType = "ml.m4.xlarge"
-	ProcessingInstanceTypeMl_m4_2xlarge  ProcessingInstanceType = "ml.m4.2xlarge"
-	ProcessingInstanceTypeMl_m4_4xlarge  ProcessingInstanceType = "ml.m4.4xlarge"
-	ProcessingInstanceTypeMl_m4_10xlarge ProcessingInstanceType = "ml.m4.10xlarge"
-	ProcessingInstanceTypeMl_m4_16xlarge ProcessingInstanceType = "ml.m4.16xlarge"
-	ProcessingInstanceTypeMl_c4_xlarge   ProcessingInstanceType = "ml.c4.xlarge"
-	ProcessingInstanceTypeMl_c4_2xlarge  ProcessingInstanceType = "ml.c4.2xlarge"
-	ProcessingInstanceTypeMl_c4_4xlarge  ProcessingInstanceType = "ml.c4.4xlarge"
-	ProcessingInstanceTypeMl_c4_8xlarge  ProcessingInstanceType = "ml.c4.8xlarge"
-	ProcessingInstanceTypeMl_p2_xlarge   ProcessingInstanceType = "ml.p2.xlarge"
-	ProcessingInstanceTypeMl_p2_8xlarge  ProcessingInstanceType = "ml.p2.8xlarge"
-	ProcessingInstanceTypeMl_p2_16xlarge ProcessingInstanceType = "ml.p2.16xlarge"
-	ProcessingInstanceTypeMl_p3_2xlarge  ProcessingInstanceType = "ml.p3.2xlarge"
-	ProcessingInstanceTypeMl_p3_8xlarge  ProcessingInstanceType = "ml.p3.8xlarge"
-	ProcessingInstanceTypeMl_p3_16xlarge ProcessingInstanceType = "ml.p3.16xlarge"
-	ProcessingInstanceTypeMl_c5_xlarge   ProcessingInstanceType = "ml.c5.xlarge"
-	ProcessingInstanceTypeMl_c5_2xlarge  ProcessingInstanceType = "ml.c5.2xlarge"
-	ProcessingInstanceTypeMl_c5_4xlarge  ProcessingInstanceType = "ml.c5.4xlarge"
-	ProcessingInstanceTypeMl_c5_9xlarge  ProcessingInstanceType = "ml.c5.9xlarge"
-	ProcessingInstanceTypeMl_c5_18xlarge ProcessingInstanceType = "ml.c5.18xlarge"
-	ProcessingInstanceTypeMl_m5_large    ProcessingInstanceType = "ml.m5.large"
-	ProcessingInstanceTypeMl_m5_xlarge   ProcessingInstanceType = "ml.m5.xlarge"
-	ProcessingInstanceTypeMl_m5_2xlarge  ProcessingInstanceType = "ml.m5.2xlarge"
-	ProcessingInstanceTypeMl_m5_4xlarge  ProcessingInstanceType = "ml.m5.4xlarge"
-	ProcessingInstanceTypeMl_m5_12xlarge ProcessingInstanceType = "ml.m5.12xlarge"
-	ProcessingInstanceTypeMl_m5_24xlarge ProcessingInstanceType = "ml.m5.24xlarge"
-	ProcessingInstanceTypeMl_r5_large    ProcessingInstanceType = "ml.r5.large"
-	ProcessingInstanceTypeMl_r5_xlarge   ProcessingInstanceType = "ml.r5.xlarge"
-	ProcessingInstanceTypeMl_r5_2xlarge  ProcessingInstanceType = "ml.r5.2xlarge"
-	ProcessingInstanceTypeMl_r5_4xlarge  ProcessingInstanceType = "ml.r5.4xlarge"
-	ProcessingInstanceTypeMl_r5_8xlarge  ProcessingInstanceType = "ml.r5.8xlarge"
-	ProcessingInstanceTypeMl_r5_12xlarge ProcessingInstanceType = "ml.r5.12xlarge"
-	ProcessingInstanceTypeMl_r5_16xlarge ProcessingInstanceType = "ml.r5.16xlarge"
-	ProcessingInstanceTypeMl_r5_24xlarge ProcessingInstanceType = "ml.r5.24xlarge"
+	ProcessingInstanceTypeMlT3Medium   ProcessingInstanceType = "ml.t3.medium"
+	ProcessingInstanceTypeMlT3Large    ProcessingInstanceType = "ml.t3.large"
+	ProcessingInstanceTypeMlT3Xlarge   ProcessingInstanceType = "ml.t3.xlarge"
+	ProcessingInstanceTypeMlT32xlarge  ProcessingInstanceType = "ml.t3.2xlarge"
+	ProcessingInstanceTypeMlM4Xlarge   ProcessingInstanceType = "ml.m4.xlarge"
+	ProcessingInstanceTypeMlM42xlarge  ProcessingInstanceType = "ml.m4.2xlarge"
+	ProcessingInstanceTypeMlM44xlarge  ProcessingInstanceType = "ml.m4.4xlarge"
+	ProcessingInstanceTypeMlM410xlarge ProcessingInstanceType = "ml.m4.10xlarge"
+	ProcessingInstanceTypeMlM416xlarge ProcessingInstanceType = "ml.m4.16xlarge"
+	ProcessingInstanceTypeMlC4Xlarge   ProcessingInstanceType = "ml.c4.xlarge"
+	ProcessingInstanceTypeMlC42xlarge  ProcessingInstanceType = "ml.c4.2xlarge"
+	ProcessingInstanceTypeMlC44xlarge  ProcessingInstanceType = "ml.c4.4xlarge"
+	ProcessingInstanceTypeMlC48xlarge  ProcessingInstanceType = "ml.c4.8xlarge"
+	ProcessingInstanceTypeMlP2Xlarge   ProcessingInstanceType = "ml.p2.xlarge"
+	ProcessingInstanceTypeMlP28xlarge  ProcessingInstanceType = "ml.p2.8xlarge"
+	ProcessingInstanceTypeMlP216xlarge ProcessingInstanceType = "ml.p2.16xlarge"
+	ProcessingInstanceTypeMlP32xlarge  ProcessingInstanceType = "ml.p3.2xlarge"
+	ProcessingInstanceTypeMlP38xlarge  ProcessingInstanceType = "ml.p3.8xlarge"
+	ProcessingInstanceTypeMlP316xlarge ProcessingInstanceType = "ml.p3.16xlarge"
+	ProcessingInstanceTypeMlC5Xlarge   ProcessingInstanceType = "ml.c5.xlarge"
+	ProcessingInstanceTypeMlC52xlarge  ProcessingInstanceType = "ml.c5.2xlarge"
+	ProcessingInstanceTypeMlC54xlarge  ProcessingInstanceType = "ml.c5.4xlarge"
+	ProcessingInstanceTypeMlC59xlarge  ProcessingInstanceType = "ml.c5.9xlarge"
+	ProcessingInstanceTypeMlC518xlarge ProcessingInstanceType = "ml.c5.18xlarge"
+	ProcessingInstanceTypeMlM5Large    ProcessingInstanceType = "ml.m5.large"
+	ProcessingInstanceTypeMlM5Xlarge   ProcessingInstanceType = "ml.m5.xlarge"
+	ProcessingInstanceTypeMlM52xlarge  ProcessingInstanceType = "ml.m5.2xlarge"
+	ProcessingInstanceTypeMlM54xlarge  ProcessingInstanceType = "ml.m5.4xlarge"
+	ProcessingInstanceTypeMlM512xlarge ProcessingInstanceType = "ml.m5.12xlarge"
+	ProcessingInstanceTypeMlM524xlarge ProcessingInstanceType = "ml.m5.24xlarge"
+	ProcessingInstanceTypeMlR5Large    ProcessingInstanceType = "ml.r5.large"
+	ProcessingInstanceTypeMlR5Xlarge   ProcessingInstanceType = "ml.r5.xlarge"
+	ProcessingInstanceTypeMlR52xlarge  ProcessingInstanceType = "ml.r5.2xlarge"
+	ProcessingInstanceTypeMlR54xlarge  ProcessingInstanceType = "ml.r5.4xlarge"
+	ProcessingInstanceTypeMlR58xlarge  ProcessingInstanceType = "ml.r5.8xlarge"
+	ProcessingInstanceTypeMlR512xlarge ProcessingInstanceType = "ml.r5.12xlarge"
+	ProcessingInstanceTypeMlR516xlarge ProcessingInstanceType = "ml.r5.16xlarge"
+	ProcessingInstanceTypeMlR524xlarge ProcessingInstanceType = "ml.r5.24xlarge"
 )
 
 // Values returns all known values for ProcessingInstanceType. Note that this can
@@ -1740,11 +1740,11 @@ type ProcessingJobStatus string
 
 // Enum values for ProcessingJobStatus
 const (
-	ProcessingJobStatusIn_progress ProcessingJobStatus = "InProgress"
-	ProcessingJobStatusCompleted   ProcessingJobStatus = "Completed"
-	ProcessingJobStatusFailed      ProcessingJobStatus = "Failed"
-	ProcessingJobStatusStopping    ProcessingJobStatus = "Stopping"
-	ProcessingJobStatusStopped     ProcessingJobStatus = "Stopped"
+	ProcessingJobStatusInProgress ProcessingJobStatus = "InProgress"
+	ProcessingJobStatusCompleted  ProcessingJobStatus = "Completed"
+	ProcessingJobStatusFailed     ProcessingJobStatus = "Failed"
+	ProcessingJobStatusStopping   ProcessingJobStatus = "Stopping"
+	ProcessingJobStatusStopped    ProcessingJobStatus = "Stopped"
 )
 
 // Values returns all known values for ProcessingJobStatus. Note that this can be
@@ -1801,8 +1801,8 @@ type ProcessingS3DataType string
 
 // Enum values for ProcessingS3DataType
 const (
-	ProcessingS3DataTypeManifest_file ProcessingS3DataType = "ManifestFile"
-	ProcessingS3DataTypeS3_prefix     ProcessingS3DataType = "S3Prefix"
+	ProcessingS3DataTypeManifestFile ProcessingS3DataType = "ManifestFile"
+	ProcessingS3DataTypeS3Prefix     ProcessingS3DataType = "S3Prefix"
 )
 
 // Values returns all known values for ProcessingS3DataType. Note that this can be
@@ -1838,7 +1838,7 @@ type ProcessingS3UploadMode string
 // Enum values for ProcessingS3UploadMode
 const (
 	ProcessingS3UploadModeContinuous ProcessingS3UploadMode = "Continuous"
-	ProcessingS3UploadModeEnd_of_job ProcessingS3UploadMode = "EndOfJob"
+	ProcessingS3UploadModeEndOfJob   ProcessingS3UploadMode = "EndOfJob"
 )
 
 // Values returns all known values for ProcessingS3UploadMode. Note that this can
@@ -1855,12 +1855,12 @@ type ProductionVariantAcceleratorType string
 
 // Enum values for ProductionVariantAcceleratorType
 const (
-	ProductionVariantAcceleratorTypeMl_eia1_medium ProductionVariantAcceleratorType = "ml.eia1.medium"
-	ProductionVariantAcceleratorTypeMl_eia1_large  ProductionVariantAcceleratorType = "ml.eia1.large"
-	ProductionVariantAcceleratorTypeMl_eia1_xlarge ProductionVariantAcceleratorType = "ml.eia1.xlarge"
-	ProductionVariantAcceleratorTypeMl_eia2_medium ProductionVariantAcceleratorType = "ml.eia2.medium"
-	ProductionVariantAcceleratorTypeMl_eia2_large  ProductionVariantAcceleratorType = "ml.eia2.large"
-	ProductionVariantAcceleratorTypeMl_eia2_xlarge ProductionVariantAcceleratorType = "ml.eia2.xlarge"
+	ProductionVariantAcceleratorTypeMlEia1Medium ProductionVariantAcceleratorType = "ml.eia1.medium"
+	ProductionVariantAcceleratorTypeMlEia1Large  ProductionVariantAcceleratorType = "ml.eia1.large"
+	ProductionVariantAcceleratorTypeMlEia1Xlarge ProductionVariantAcceleratorType = "ml.eia1.xlarge"
+	ProductionVariantAcceleratorTypeMlEia2Medium ProductionVariantAcceleratorType = "ml.eia2.medium"
+	ProductionVariantAcceleratorTypeMlEia2Large  ProductionVariantAcceleratorType = "ml.eia2.large"
+	ProductionVariantAcceleratorTypeMlEia2Xlarge ProductionVariantAcceleratorType = "ml.eia2.xlarge"
 )
 
 // Values returns all known values for ProductionVariantAcceleratorType. Note that
@@ -1882,72 +1882,72 @@ type ProductionVariantInstanceType string
 
 // Enum values for ProductionVariantInstanceType
 const (
-	ProductionVariantInstanceTypeMl_t2_medium     ProductionVariantInstanceType = "ml.t2.medium"
-	ProductionVariantInstanceTypeMl_t2_large      ProductionVariantInstanceType = "ml.t2.large"
-	ProductionVariantInstanceTypeMl_t2_xlarge     ProductionVariantInstanceType = "ml.t2.xlarge"
-	ProductionVariantInstanceTypeMl_t2_2xlarge    ProductionVariantInstanceType = "ml.t2.2xlarge"
-	ProductionVariantInstanceTypeMl_m4_xlarge     ProductionVariantInstanceType = "ml.m4.xlarge"
-	ProductionVariantInstanceTypeMl_m4_2xlarge    ProductionVariantInstanceType = "ml.m4.2xlarge"
-	ProductionVariantInstanceTypeMl_m4_4xlarge    ProductionVariantInstanceType = "ml.m4.4xlarge"
-	ProductionVariantInstanceTypeMl_m4_10xlarge   ProductionVariantInstanceType = "ml.m4.10xlarge"
-	ProductionVariantInstanceTypeMl_m4_16xlarge   ProductionVariantInstanceType = "ml.m4.16xlarge"
-	ProductionVariantInstanceTypeMl_m5_large      ProductionVariantInstanceType = "ml.m5.large"
-	ProductionVariantInstanceTypeMl_m5_xlarge     ProductionVariantInstanceType = "ml.m5.xlarge"
-	ProductionVariantInstanceTypeMl_m5_2xlarge    ProductionVariantInstanceType = "ml.m5.2xlarge"
-	ProductionVariantInstanceTypeMl_m5_4xlarge    ProductionVariantInstanceType = "ml.m5.4xlarge"
-	ProductionVariantInstanceTypeMl_m5_12xlarge   ProductionVariantInstanceType = "ml.m5.12xlarge"
-	ProductionVariantInstanceTypeMl_m5_24xlarge   ProductionVariantInstanceType = "ml.m5.24xlarge"
-	ProductionVariantInstanceTypeMl_m5d_large     ProductionVariantInstanceType = "ml.m5d.large"
-	ProductionVariantInstanceTypeMl_m5d_xlarge    ProductionVariantInstanceType = "ml.m5d.xlarge"
-	ProductionVariantInstanceTypeMl_m5d_2xlarge   ProductionVariantInstanceType = "ml.m5d.2xlarge"
-	ProductionVariantInstanceTypeMl_m5d_4xlarge   ProductionVariantInstanceType = "ml.m5d.4xlarge"
-	ProductionVariantInstanceTypeMl_m5d_12xlarge  ProductionVariantInstanceType = "ml.m5d.12xlarge"
-	ProductionVariantInstanceTypeMl_m5d_24xlarge  ProductionVariantInstanceType = "ml.m5d.24xlarge"
-	ProductionVariantInstanceTypeMl_c4_large      ProductionVariantInstanceType = "ml.c4.large"
-	ProductionVariantInstanceTypeMl_c4_xlarge     ProductionVariantInstanceType = "ml.c4.xlarge"
-	ProductionVariantInstanceTypeMl_c4_2xlarge    ProductionVariantInstanceType = "ml.c4.2xlarge"
-	ProductionVariantInstanceTypeMl_c4_4xlarge    ProductionVariantInstanceType = "ml.c4.4xlarge"
-	ProductionVariantInstanceTypeMl_c4_8xlarge    ProductionVariantInstanceType = "ml.c4.8xlarge"
-	ProductionVariantInstanceTypeMl_p2_xlarge     ProductionVariantInstanceType = "ml.p2.xlarge"
-	ProductionVariantInstanceTypeMl_p2_8xlarge    ProductionVariantInstanceType = "ml.p2.8xlarge"
-	ProductionVariantInstanceTypeMl_p2_16xlarge   ProductionVariantInstanceType = "ml.p2.16xlarge"
-	ProductionVariantInstanceTypeMl_p3_2xlarge    ProductionVariantInstanceType = "ml.p3.2xlarge"
-	ProductionVariantInstanceTypeMl_p3_8xlarge    ProductionVariantInstanceType = "ml.p3.8xlarge"
-	ProductionVariantInstanceTypeMl_p3_16xlarge   ProductionVariantInstanceType = "ml.p3.16xlarge"
-	ProductionVariantInstanceTypeMl_c5_large      ProductionVariantInstanceType = "ml.c5.large"
-	ProductionVariantInstanceTypeMl_c5_xlarge     ProductionVariantInstanceType = "ml.c5.xlarge"
-	ProductionVariantInstanceTypeMl_c5_2xlarge    ProductionVariantInstanceType = "ml.c5.2xlarge"
-	ProductionVariantInstanceTypeMl_c5_4xlarge    ProductionVariantInstanceType = "ml.c5.4xlarge"
-	ProductionVariantInstanceTypeMl_c5_9xlarge    ProductionVariantInstanceType = "ml.c5.9xlarge"
-	ProductionVariantInstanceTypeMl_c5_18xlarge   ProductionVariantInstanceType = "ml.c5.18xlarge"
-	ProductionVariantInstanceTypeMl_c5d_large     ProductionVariantInstanceType = "ml.c5d.large"
-	ProductionVariantInstanceTypeMl_c5d_xlarge    ProductionVariantInstanceType = "ml.c5d.xlarge"
-	ProductionVariantInstanceTypeMl_c5d_2xlarge   ProductionVariantInstanceType = "ml.c5d.2xlarge"
-	ProductionVariantInstanceTypeMl_c5d_4xlarge   ProductionVariantInstanceType = "ml.c5d.4xlarge"
-	ProductionVariantInstanceTypeMl_c5d_9xlarge   ProductionVariantInstanceType = "ml.c5d.9xlarge"
-	ProductionVariantInstanceTypeMl_c5d_18xlarge  ProductionVariantInstanceType = "ml.c5d.18xlarge"
-	ProductionVariantInstanceTypeMl_g4dn_xlarge   ProductionVariantInstanceType = "ml.g4dn.xlarge"
-	ProductionVariantInstanceTypeMl_g4dn_2xlarge  ProductionVariantInstanceType = "ml.g4dn.2xlarge"
-	ProductionVariantInstanceTypeMl_g4dn_4xlarge  ProductionVariantInstanceType = "ml.g4dn.4xlarge"
-	ProductionVariantInstanceTypeMl_g4dn_8xlarge  ProductionVariantInstanceType = "ml.g4dn.8xlarge"
-	ProductionVariantInstanceTypeMl_g4dn_12xlarge ProductionVariantInstanceType = "ml.g4dn.12xlarge"
-	ProductionVariantInstanceTypeMl_g4dn_16xlarge ProductionVariantInstanceType = "ml.g4dn.16xlarge"
-	ProductionVariantInstanceTypeMl_r5_large      ProductionVariantInstanceType = "ml.r5.large"
-	ProductionVariantInstanceTypeMl_r5_xlarge     ProductionVariantInstanceType = "ml.r5.xlarge"
-	ProductionVariantInstanceTypeMl_r5_2xlarge    ProductionVariantInstanceType = "ml.r5.2xlarge"
-	ProductionVariantInstanceTypeMl_r5_4xlarge    ProductionVariantInstanceType = "ml.r5.4xlarge"
-	ProductionVariantInstanceTypeMl_r5_12xlarge   ProductionVariantInstanceType = "ml.r5.12xlarge"
-	ProductionVariantInstanceTypeMl_r5_24xlarge   ProductionVariantInstanceType = "ml.r5.24xlarge"
-	ProductionVariantInstanceTypeMl_r5d_large     ProductionVariantInstanceType = "ml.r5d.large"
-	ProductionVariantInstanceTypeMl_r5d_xlarge    ProductionVariantInstanceType = "ml.r5d.xlarge"
-	ProductionVariantInstanceTypeMl_r5d_2xlarge   ProductionVariantInstanceType = "ml.r5d.2xlarge"
-	ProductionVariantInstanceTypeMl_r5d_4xlarge   ProductionVariantInstanceType = "ml.r5d.4xlarge"
-	ProductionVariantInstanceTypeMl_r5d_12xlarge  ProductionVariantInstanceType = "ml.r5d.12xlarge"
-	ProductionVariantInstanceTypeMl_r5d_24xlarge  ProductionVariantInstanceType = "ml.r5d.24xlarge"
-	ProductionVariantInstanceTypeMl_inf1_xlarge   ProductionVariantInstanceType = "ml.inf1.xlarge"
-	ProductionVariantInstanceTypeMl_inf1_2xlarge  ProductionVariantInstanceType = "ml.inf1.2xlarge"
-	ProductionVariantInstanceTypeMl_inf1_6xlarge  ProductionVariantInstanceType = "ml.inf1.6xlarge"
-	ProductionVariantInstanceTypeMl_inf1_24xlarge ProductionVariantInstanceType = "ml.inf1.24xlarge"
+	ProductionVariantInstanceTypeMlT2Medium     ProductionVariantInstanceType = "ml.t2.medium"
+	ProductionVariantInstanceTypeMlT2Large      ProductionVariantInstanceType = "ml.t2.large"
+	ProductionVariantInstanceTypeMlT2Xlarge     ProductionVariantInstanceType = "ml.t2.xlarge"
+	ProductionVariantInstanceTypeMlT22xlarge    ProductionVariantInstanceType = "ml.t2.2xlarge"
+	ProductionVariantInstanceTypeMlM4Xlarge     ProductionVariantInstanceType = "ml.m4.xlarge"
+	ProductionVariantInstanceTypeMlM42xlarge    ProductionVariantInstanceType = "ml.m4.2xlarge"
+	ProductionVariantInstanceTypeMlM44xlarge    ProductionVariantInstanceType = "ml.m4.4xlarge"
+	ProductionVariantInstanceTypeMlM410xlarge   ProductionVariantInstanceType = "ml.m4.10xlarge"
+	ProductionVariantInstanceTypeMlM416xlarge   ProductionVariantInstanceType = "ml.m4.16xlarge"
+	ProductionVariantInstanceTypeMlM5Large      ProductionVariantInstanceType = "ml.m5.large"
+	ProductionVariantInstanceTypeMlM5Xlarge     ProductionVariantInstanceType = "ml.m5.xlarge"
+	ProductionVariantInstanceTypeMlM52xlarge    ProductionVariantInstanceType = "ml.m5.2xlarge"
+	ProductionVariantInstanceTypeMlM54xlarge    ProductionVariantInstanceType = "ml.m5.4xlarge"
+	ProductionVariantInstanceTypeMlM512xlarge   ProductionVariantInstanceType = "ml.m5.12xlarge"
+	ProductionVariantInstanceTypeMlM524xlarge   ProductionVariantInstanceType = "ml.m5.24xlarge"
+	ProductionVariantInstanceTypeMlM5dLarge     ProductionVariantInstanceType = "ml.m5d.large"
+	ProductionVariantInstanceTypeMlM5dXlarge    ProductionVariantInstanceType = "ml.m5d.xlarge"
+	ProductionVariantInstanceTypeMlM5d2xlarge   ProductionVariantInstanceType = "ml.m5d.2xlarge"
+	ProductionVariantInstanceTypeMlM5d4xlarge   ProductionVariantInstanceType = "ml.m5d.4xlarge"
+	ProductionVariantInstanceTypeMlM5d12xlarge  ProductionVariantInstanceType = "ml.m5d.12xlarge"
+	ProductionVariantInstanceTypeMlM5d24xlarge  ProductionVariantInstanceType = "ml.m5d.24xlarge"
+	ProductionVariantInstanceTypeMlC4Large      ProductionVariantInstanceType = "ml.c4.large"
+	ProductionVariantInstanceTypeMlC4Xlarge     ProductionVariantInstanceType = "ml.c4.xlarge"
+	ProductionVariantInstanceTypeMlC42xlarge    ProductionVariantInstanceType = "ml.c4.2xlarge"
+	ProductionVariantInstanceTypeMlC44xlarge    ProductionVariantInstanceType = "ml.c4.4xlarge"
+	ProductionVariantInstanceTypeMlC48xlarge    ProductionVariantInstanceType = "ml.c4.8xlarge"
+	ProductionVariantInstanceTypeMlP2Xlarge     ProductionVariantInstanceType = "ml.p2.xlarge"
+	ProductionVariantInstanceTypeMlP28xlarge    ProductionVariantInstanceType = "ml.p2.8xlarge"
+	ProductionVariantInstanceTypeMlP216xlarge   ProductionVariantInstanceType = "ml.p2.16xlarge"
+	ProductionVariantInstanceTypeMlP32xlarge    ProductionVariantInstanceType = "ml.p3.2xlarge"
+	ProductionVariantInstanceTypeMlP38xlarge    ProductionVariantInstanceType = "ml.p3.8xlarge"
+	ProductionVariantInstanceTypeMlP316xlarge   ProductionVariantInstanceType = "ml.p3.16xlarge"
+	ProductionVariantInstanceTypeMlC5Large      ProductionVariantInstanceType = "ml.c5.large"
+	ProductionVariantInstanceTypeMlC5Xlarge     ProductionVariantInstanceType = "ml.c5.xlarge"
+	ProductionVariantInstanceTypeMlC52xlarge    ProductionVariantInstanceType = "ml.c5.2xlarge"
+	ProductionVariantInstanceTypeMlC54xlarge    ProductionVariantInstanceType = "ml.c5.4xlarge"
+	ProductionVariantInstanceTypeMlC59xlarge    ProductionVariantInstanceType = "ml.c5.9xlarge"
+	ProductionVariantInstanceTypeMlC518xlarge   ProductionVariantInstanceType = "ml.c5.18xlarge"
+	ProductionVariantInstanceTypeMlC5dLarge     ProductionVariantInstanceType = "ml.c5d.large"
+	ProductionVariantInstanceTypeMlC5dXlarge    ProductionVariantInstanceType = "ml.c5d.xlarge"
+	ProductionVariantInstanceTypeMlC5d2xlarge   ProductionVariantInstanceType = "ml.c5d.2xlarge"
+	ProductionVariantInstanceTypeMlC5d4xlarge   ProductionVariantInstanceType = "ml.c5d.4xlarge"
+	ProductionVariantInstanceTypeMlC5d9xlarge   ProductionVariantInstanceType = "ml.c5d.9xlarge"
+	ProductionVariantInstanceTypeMlC5d18xlarge  ProductionVariantInstanceType = "ml.c5d.18xlarge"
+	ProductionVariantInstanceTypeMlG4dnXlarge   ProductionVariantInstanceType = "ml.g4dn.xlarge"
+	ProductionVariantInstanceTypeMlG4dn2xlarge  ProductionVariantInstanceType = "ml.g4dn.2xlarge"
+	ProductionVariantInstanceTypeMlG4dn4xlarge  ProductionVariantInstanceType = "ml.g4dn.4xlarge"
+	ProductionVariantInstanceTypeMlG4dn8xlarge  ProductionVariantInstanceType = "ml.g4dn.8xlarge"
+	ProductionVariantInstanceTypeMlG4dn12xlarge ProductionVariantInstanceType = "ml.g4dn.12xlarge"
+	ProductionVariantInstanceTypeMlG4dn16xlarge ProductionVariantInstanceType = "ml.g4dn.16xlarge"
+	ProductionVariantInstanceTypeMlR5Large      ProductionVariantInstanceType = "ml.r5.large"
+	ProductionVariantInstanceTypeMlR5Xlarge     ProductionVariantInstanceType = "ml.r5.xlarge"
+	ProductionVariantInstanceTypeMlR52xlarge    ProductionVariantInstanceType = "ml.r5.2xlarge"
+	ProductionVariantInstanceTypeMlR54xlarge    ProductionVariantInstanceType = "ml.r5.4xlarge"
+	ProductionVariantInstanceTypeMlR512xlarge   ProductionVariantInstanceType = "ml.r5.12xlarge"
+	ProductionVariantInstanceTypeMlR524xlarge   ProductionVariantInstanceType = "ml.r5.24xlarge"
+	ProductionVariantInstanceTypeMlR5dLarge     ProductionVariantInstanceType = "ml.r5d.large"
+	ProductionVariantInstanceTypeMlR5dXlarge    ProductionVariantInstanceType = "ml.r5d.xlarge"
+	ProductionVariantInstanceTypeMlR5d2xlarge   ProductionVariantInstanceType = "ml.r5d.2xlarge"
+	ProductionVariantInstanceTypeMlR5d4xlarge   ProductionVariantInstanceType = "ml.r5d.4xlarge"
+	ProductionVariantInstanceTypeMlR5d12xlarge  ProductionVariantInstanceType = "ml.r5d.12xlarge"
+	ProductionVariantInstanceTypeMlR5d24xlarge  ProductionVariantInstanceType = "ml.r5d.24xlarge"
+	ProductionVariantInstanceTypeMlInf1Xlarge   ProductionVariantInstanceType = "ml.inf1.xlarge"
+	ProductionVariantInstanceTypeMlInf12xlarge  ProductionVariantInstanceType = "ml.inf1.2xlarge"
+	ProductionVariantInstanceTypeMlInf16xlarge  ProductionVariantInstanceType = "ml.inf1.6xlarge"
+	ProductionVariantInstanceTypeMlInf124xlarge ProductionVariantInstanceType = "ml.inf1.24xlarge"
 )
 
 // Values returns all known values for ProductionVariantInstanceType. Note that
@@ -2065,10 +2065,10 @@ type ResourceType string
 
 // Enum values for ResourceType
 const (
-	ResourceTypeTraining_job               ResourceType = "TrainingJob"
-	ResourceTypeExperiment                 ResourceType = "Experiment"
-	ResourceTypeExperiment_trial           ResourceType = "ExperimentTrial"
-	ResourceTypeExperiment_trial_component ResourceType = "ExperimentTrialComponent"
+	ResourceTypeTrainingJob              ResourceType = "TrainingJob"
+	ResourceTypeExperiment               ResourceType = "Experiment"
+	ResourceTypeExperimentTrial          ResourceType = "ExperimentTrial"
+	ResourceTypeExperimentTrialComponent ResourceType = "ExperimentTrialComponent"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -2123,12 +2123,12 @@ type RuleEvaluationStatus string
 
 // Enum values for RuleEvaluationStatus
 const (
-	RuleEvaluationStatusIn_progress     RuleEvaluationStatus = "InProgress"
-	RuleEvaluationStatusNo_issues_found RuleEvaluationStatus = "NoIssuesFound"
-	RuleEvaluationStatusIssues_found    RuleEvaluationStatus = "IssuesFound"
-	RuleEvaluationStatusError           RuleEvaluationStatus = "Error"
-	RuleEvaluationStatusStopping        RuleEvaluationStatus = "Stopping"
-	RuleEvaluationStatusStopped         RuleEvaluationStatus = "Stopped"
+	RuleEvaluationStatusInProgress    RuleEvaluationStatus = "InProgress"
+	RuleEvaluationStatusNoIssuesFound RuleEvaluationStatus = "NoIssuesFound"
+	RuleEvaluationStatusIssuesFound   RuleEvaluationStatus = "IssuesFound"
+	RuleEvaluationStatusError         RuleEvaluationStatus = "Error"
+	RuleEvaluationStatusStopping      RuleEvaluationStatus = "Stopping"
+	RuleEvaluationStatusStopped       RuleEvaluationStatus = "Stopped"
 )
 
 // Values returns all known values for RuleEvaluationStatus. Note that this can be
@@ -2149,8 +2149,8 @@ type S3DataDistribution string
 
 // Enum values for S3DataDistribution
 const (
-	S3DataDistributionFully_replicated  S3DataDistribution = "FullyReplicated"
-	S3DataDistributionSharded_by_s3_key S3DataDistribution = "ShardedByS3Key"
+	S3DataDistributionFullyReplicated S3DataDistribution = "FullyReplicated"
+	S3DataDistributionShardedByS3Key  S3DataDistribution = "ShardedByS3Key"
 )
 
 // Values returns all known values for S3DataDistribution. Note that this can be
@@ -2167,9 +2167,9 @@ type S3DataType string
 
 // Enum values for S3DataType
 const (
-	S3DataTypeManifest_file           S3DataType = "ManifestFile"
-	S3DataTypeS3_prefix               S3DataType = "S3Prefix"
-	S3DataTypeAugmented_manifest_file S3DataType = "AugmentedManifestFile"
+	S3DataTypeManifestFile          S3DataType = "ManifestFile"
+	S3DataTypeS3Prefix              S3DataType = "S3Prefix"
+	S3DataTypeAugmentedManifestFile S3DataType = "AugmentedManifestFile"
 )
 
 // Values returns all known values for S3DataType. Note that this can be expanded
@@ -2227,20 +2227,20 @@ type SecondaryStatus string
 
 // Enum values for SecondaryStatus
 const (
-	SecondaryStatusStarting                   SecondaryStatus = "Starting"
-	SecondaryStatusLaunching_ml_instances     SecondaryStatus = "LaunchingMLInstances"
-	SecondaryStatusPreparing_training_stack   SecondaryStatus = "PreparingTrainingStack"
-	SecondaryStatusDownloading                SecondaryStatus = "Downloading"
-	SecondaryStatusDownloading_training_image SecondaryStatus = "DownloadingTrainingImage"
-	SecondaryStatusTraining                   SecondaryStatus = "Training"
-	SecondaryStatusUploading                  SecondaryStatus = "Uploading"
-	SecondaryStatusStopping                   SecondaryStatus = "Stopping"
-	SecondaryStatusStopped                    SecondaryStatus = "Stopped"
-	SecondaryStatusMax_runtime_exceeded       SecondaryStatus = "MaxRuntimeExceeded"
-	SecondaryStatusCompleted                  SecondaryStatus = "Completed"
-	SecondaryStatusFailed                     SecondaryStatus = "Failed"
-	SecondaryStatusInterrupted                SecondaryStatus = "Interrupted"
-	SecondaryStatusMax_wait_time_exceeded     SecondaryStatus = "MaxWaitTimeExceeded"
+	SecondaryStatusStarting                 SecondaryStatus = "Starting"
+	SecondaryStatusLaunchingMlInstances     SecondaryStatus = "LaunchingMLInstances"
+	SecondaryStatusPreparingTrainingStack   SecondaryStatus = "PreparingTrainingStack"
+	SecondaryStatusDownloading              SecondaryStatus = "Downloading"
+	SecondaryStatusDownloadingTrainingImage SecondaryStatus = "DownloadingTrainingImage"
+	SecondaryStatusTraining                 SecondaryStatus = "Training"
+	SecondaryStatusUploading                SecondaryStatus = "Uploading"
+	SecondaryStatusStopping                 SecondaryStatus = "Stopping"
+	SecondaryStatusStopped                  SecondaryStatus = "Stopped"
+	SecondaryStatusMaxRuntimeExceeded       SecondaryStatus = "MaxRuntimeExceeded"
+	SecondaryStatusCompleted                SecondaryStatus = "Completed"
+	SecondaryStatusFailed                   SecondaryStatus = "Failed"
+	SecondaryStatusInterrupted              SecondaryStatus = "Interrupted"
+	SecondaryStatusMaxWaitTimeExceeded      SecondaryStatus = "MaxWaitTimeExceeded"
 )
 
 // Values returns all known values for SecondaryStatus. Note that this can be
@@ -2269,9 +2269,9 @@ type SortBy string
 
 // Enum values for SortBy
 const (
-	SortByName          SortBy = "Name"
-	SortByCreation_time SortBy = "CreationTime"
-	SortByStatus        SortBy = "Status"
+	SortByName         SortBy = "Name"
+	SortByCreationTime SortBy = "CreationTime"
+	SortByStatus       SortBy = "Status"
 )
 
 // Values returns all known values for SortBy. Note that this can be expanded in
@@ -2289,8 +2289,8 @@ type SortExperimentsBy string
 
 // Enum values for SortExperimentsBy
 const (
-	SortExperimentsByName          SortExperimentsBy = "Name"
-	SortExperimentsByCreation_time SortExperimentsBy = "CreationTime"
+	SortExperimentsByName         SortExperimentsBy = "Name"
+	SortExperimentsByCreationTime SortExperimentsBy = "CreationTime"
 )
 
 // Values returns all known values for SortExperimentsBy. Note that this can be
@@ -2325,8 +2325,8 @@ type SortTrialComponentsBy string
 
 // Enum values for SortTrialComponentsBy
 const (
-	SortTrialComponentsByName          SortTrialComponentsBy = "Name"
-	SortTrialComponentsByCreation_time SortTrialComponentsBy = "CreationTime"
+	SortTrialComponentsByName         SortTrialComponentsBy = "Name"
+	SortTrialComponentsByCreationTime SortTrialComponentsBy = "CreationTime"
 )
 
 // Values returns all known values for SortTrialComponentsBy. Note that this can be
@@ -2343,8 +2343,8 @@ type SortTrialsBy string
 
 // Enum values for SortTrialsBy
 const (
-	SortTrialsByName          SortTrialsBy = "Name"
-	SortTrialsByCreation_time SortTrialsBy = "CreationTime"
+	SortTrialsByName         SortTrialsBy = "Name"
+	SortTrialsByCreationTime SortTrialsBy = "CreationTime"
 )
 
 // Values returns all known values for SortTrialsBy. Note that this can be expanded
@@ -2383,33 +2383,33 @@ type TargetDevice string
 
 // Enum values for TargetDevice
 const (
-	TargetDeviceLambda        TargetDevice = "lambda"
-	TargetDeviceMl_m4         TargetDevice = "ml_m4"
-	TargetDeviceMl_m5         TargetDevice = "ml_m5"
-	TargetDeviceMl_c4         TargetDevice = "ml_c4"
-	TargetDeviceMl_c5         TargetDevice = "ml_c5"
-	TargetDeviceMl_p2         TargetDevice = "ml_p2"
-	TargetDeviceMl_p3         TargetDevice = "ml_p3"
-	TargetDeviceMl_g4dn       TargetDevice = "ml_g4dn"
-	TargetDeviceMl_inf1       TargetDevice = "ml_inf1"
-	TargetDeviceJetson_tx1    TargetDevice = "jetson_tx1"
-	TargetDeviceJetson_tx2    TargetDevice = "jetson_tx2"
-	TargetDeviceJetson_nano   TargetDevice = "jetson_nano"
-	TargetDeviceJetson_xavier TargetDevice = "jetson_xavier"
-	TargetDeviceRasp3b        TargetDevice = "rasp3b"
-	TargetDeviceImx8qm        TargetDevice = "imx8qm"
-	TargetDeviceDeeplens      TargetDevice = "deeplens"
-	TargetDeviceRk3399        TargetDevice = "rk3399"
-	TargetDeviceRk3288        TargetDevice = "rk3288"
-	TargetDeviceAisage        TargetDevice = "aisage"
-	TargetDeviceSbe_c         TargetDevice = "sbe_c"
-	TargetDeviceQcs605        TargetDevice = "qcs605"
-	TargetDeviceQcs603        TargetDevice = "qcs603"
-	TargetDeviceSitara_am57x  TargetDevice = "sitara_am57x"
-	TargetDeviceAmba_cv22     TargetDevice = "amba_cv22"
-	TargetDeviceX86_win32     TargetDevice = "x86_win32"
-	TargetDeviceX86_win64     TargetDevice = "x86_win64"
-	TargetDeviceCoreml        TargetDevice = "coreml"
+	TargetDeviceLambda       TargetDevice = "lambda"
+	TargetDeviceMlM4         TargetDevice = "ml_m4"
+	TargetDeviceMlM5         TargetDevice = "ml_m5"
+	TargetDeviceMlC4         TargetDevice = "ml_c4"
+	TargetDeviceMlC5         TargetDevice = "ml_c5"
+	TargetDeviceMlP2         TargetDevice = "ml_p2"
+	TargetDeviceMlP3         TargetDevice = "ml_p3"
+	TargetDeviceMlG4dn       TargetDevice = "ml_g4dn"
+	TargetDeviceMlInf1       TargetDevice = "ml_inf1"
+	TargetDeviceJetsonTx1    TargetDevice = "jetson_tx1"
+	TargetDeviceJetsonTx2    TargetDevice = "jetson_tx2"
+	TargetDeviceJetsonNano   TargetDevice = "jetson_nano"
+	TargetDeviceJetsonXavier TargetDevice = "jetson_xavier"
+	TargetDeviceRasp3b       TargetDevice = "rasp3b"
+	TargetDeviceImx8qm       TargetDevice = "imx8qm"
+	TargetDeviceDeeplens     TargetDevice = "deeplens"
+	TargetDeviceRk3399       TargetDevice = "rk3399"
+	TargetDeviceRk3288       TargetDevice = "rk3288"
+	TargetDeviceAisage       TargetDevice = "aisage"
+	TargetDeviceSbeC         TargetDevice = "sbe_c"
+	TargetDeviceQcs605       TargetDevice = "qcs605"
+	TargetDeviceQcs603       TargetDevice = "qcs603"
+	TargetDeviceSitaraAm57x  TargetDevice = "sitara_am57x"
+	TargetDeviceAmbaCv22     TargetDevice = "amba_cv22"
+	TargetDeviceX86Win32     TargetDevice = "x86_win32"
+	TargetDeviceX86Win64     TargetDevice = "x86_win64"
+	TargetDeviceCoreml       TargetDevice = "coreml"
 )
 
 // Values returns all known values for TargetDevice. Note that this can be expanded
@@ -2451,9 +2451,9 @@ type TargetPlatformAccelerator string
 
 // Enum values for TargetPlatformAccelerator
 const (
-	TargetPlatformAcceleratorIntel_graphics TargetPlatformAccelerator = "INTEL_GRAPHICS"
-	TargetPlatformAcceleratorMali           TargetPlatformAccelerator = "MALI"
-	TargetPlatformAcceleratorNvidia         TargetPlatformAccelerator = "NVIDIA"
+	TargetPlatformAcceleratorIntelGraphics TargetPlatformAccelerator = "INTEL_GRAPHICS"
+	TargetPlatformAcceleratorMali          TargetPlatformAccelerator = "MALI"
+	TargetPlatformAcceleratorNvidia        TargetPlatformAccelerator = "NVIDIA"
 )
 
 // Values returns all known values for TargetPlatformAccelerator. Note that this
@@ -2471,11 +2471,11 @@ type TargetPlatformArch string
 
 // Enum values for TargetPlatformArch
 const (
-	TargetPlatformArchX86_64     TargetPlatformArch = "X86_64"
-	TargetPlatformArchX86        TargetPlatformArch = "X86"
-	TargetPlatformArchArm64      TargetPlatformArch = "ARM64"
-	TargetPlatformArchArm_eabi   TargetPlatformArch = "ARM_EABI"
-	TargetPlatformArchArm_eabihf TargetPlatformArch = "ARM_EABIHF"
+	TargetPlatformArchX8664     TargetPlatformArch = "X86_64"
+	TargetPlatformArchX86       TargetPlatformArch = "X86"
+	TargetPlatformArchArm64     TargetPlatformArch = "ARM64"
+	TargetPlatformArchArmEabi   TargetPlatformArch = "ARM_EABI"
+	TargetPlatformArchArmEabihf TargetPlatformArch = "ARM_EABIHF"
 )
 
 // Values returns all known values for TargetPlatformArch. Note that this can be
@@ -2531,44 +2531,44 @@ type TrainingInstanceType string
 
 // Enum values for TrainingInstanceType
 const (
-	TrainingInstanceTypeMl_m4_xlarge     TrainingInstanceType = "ml.m4.xlarge"
-	TrainingInstanceTypeMl_m4_2xlarge    TrainingInstanceType = "ml.m4.2xlarge"
-	TrainingInstanceTypeMl_m4_4xlarge    TrainingInstanceType = "ml.m4.4xlarge"
-	TrainingInstanceTypeMl_m4_10xlarge   TrainingInstanceType = "ml.m4.10xlarge"
-	TrainingInstanceTypeMl_m4_16xlarge   TrainingInstanceType = "ml.m4.16xlarge"
-	TrainingInstanceTypeMl_g4dn_xlarge   TrainingInstanceType = "ml.g4dn.xlarge"
-	TrainingInstanceTypeMl_g4dn_2xlarge  TrainingInstanceType = "ml.g4dn.2xlarge"
-	TrainingInstanceTypeMl_g4dn_4xlarge  TrainingInstanceType = "ml.g4dn.4xlarge"
-	TrainingInstanceTypeMl_g4dn_8xlarge  TrainingInstanceType = "ml.g4dn.8xlarge"
-	TrainingInstanceTypeMl_g4dn_12xlarge TrainingInstanceType = "ml.g4dn.12xlarge"
-	TrainingInstanceTypeMl_g4dn_16xlarge TrainingInstanceType = "ml.g4dn.16xlarge"
-	TrainingInstanceTypeMl_m5_large      TrainingInstanceType = "ml.m5.large"
-	TrainingInstanceTypeMl_m5_xlarge     TrainingInstanceType = "ml.m5.xlarge"
-	TrainingInstanceTypeMl_m5_2xlarge    TrainingInstanceType = "ml.m5.2xlarge"
-	TrainingInstanceTypeMl_m5_4xlarge    TrainingInstanceType = "ml.m5.4xlarge"
-	TrainingInstanceTypeMl_m5_12xlarge   TrainingInstanceType = "ml.m5.12xlarge"
-	TrainingInstanceTypeMl_m5_24xlarge   TrainingInstanceType = "ml.m5.24xlarge"
-	TrainingInstanceTypeMl_c4_xlarge     TrainingInstanceType = "ml.c4.xlarge"
-	TrainingInstanceTypeMl_c4_2xlarge    TrainingInstanceType = "ml.c4.2xlarge"
-	TrainingInstanceTypeMl_c4_4xlarge    TrainingInstanceType = "ml.c4.4xlarge"
-	TrainingInstanceTypeMl_c4_8xlarge    TrainingInstanceType = "ml.c4.8xlarge"
-	TrainingInstanceTypeMl_p2_xlarge     TrainingInstanceType = "ml.p2.xlarge"
-	TrainingInstanceTypeMl_p2_8xlarge    TrainingInstanceType = "ml.p2.8xlarge"
-	TrainingInstanceTypeMl_p2_16xlarge   TrainingInstanceType = "ml.p2.16xlarge"
-	TrainingInstanceTypeMl_p3_2xlarge    TrainingInstanceType = "ml.p3.2xlarge"
-	TrainingInstanceTypeMl_p3_8xlarge    TrainingInstanceType = "ml.p3.8xlarge"
-	TrainingInstanceTypeMl_p3_16xlarge   TrainingInstanceType = "ml.p3.16xlarge"
-	TrainingInstanceTypeMl_p3dn_24xlarge TrainingInstanceType = "ml.p3dn.24xlarge"
-	TrainingInstanceTypeMl_c5_xlarge     TrainingInstanceType = "ml.c5.xlarge"
-	TrainingInstanceTypeMl_c5_2xlarge    TrainingInstanceType = "ml.c5.2xlarge"
-	TrainingInstanceTypeMl_c5_4xlarge    TrainingInstanceType = "ml.c5.4xlarge"
-	TrainingInstanceTypeMl_c5_9xlarge    TrainingInstanceType = "ml.c5.9xlarge"
-	TrainingInstanceTypeMl_c5_18xlarge   TrainingInstanceType = "ml.c5.18xlarge"
-	TrainingInstanceTypeMl_c5n_xlarge    TrainingInstanceType = "ml.c5n.xlarge"
-	TrainingInstanceTypeMl_c5n_2xlarge   TrainingInstanceType = "ml.c5n.2xlarge"
-	TrainingInstanceTypeMl_c5n_4xlarge   TrainingInstanceType = "ml.c5n.4xlarge"
-	TrainingInstanceTypeMl_c5n_9xlarge   TrainingInstanceType = "ml.c5n.9xlarge"
-	TrainingInstanceTypeMl_c5n_18xlarge  TrainingInstanceType = "ml.c5n.18xlarge"
+	TrainingInstanceTypeMlM4Xlarge     TrainingInstanceType = "ml.m4.xlarge"
+	TrainingInstanceTypeMlM42xlarge    TrainingInstanceType = "ml.m4.2xlarge"
+	TrainingInstanceTypeMlM44xlarge    TrainingInstanceType = "ml.m4.4xlarge"
+	TrainingInstanceTypeMlM410xlarge   TrainingInstanceType = "ml.m4.10xlarge"
+	TrainingInstanceTypeMlM416xlarge   TrainingInstanceType = "ml.m4.16xlarge"
+	TrainingInstanceTypeMlG4dnXlarge   TrainingInstanceType = "ml.g4dn.xlarge"
+	TrainingInstanceTypeMlG4dn2xlarge  TrainingInstanceType = "ml.g4dn.2xlarge"
+	TrainingInstanceTypeMlG4dn4xlarge  TrainingInstanceType = "ml.g4dn.4xlarge"
+	TrainingInstanceTypeMlG4dn8xlarge  TrainingInstanceType = "ml.g4dn.8xlarge"
+	TrainingInstanceTypeMlG4dn12xlarge TrainingInstanceType = "ml.g4dn.12xlarge"
+	TrainingInstanceTypeMlG4dn16xlarge TrainingInstanceType = "ml.g4dn.16xlarge"
+	TrainingInstanceTypeMlM5Large      TrainingInstanceType = "ml.m5.large"
+	TrainingInstanceTypeMlM5Xlarge     TrainingInstanceType = "ml.m5.xlarge"
+	TrainingInstanceTypeMlM52xlarge    TrainingInstanceType = "ml.m5.2xlarge"
+	TrainingInstanceTypeMlM54xlarge    TrainingInstanceType = "ml.m5.4xlarge"
+	TrainingInstanceTypeMlM512xlarge   TrainingInstanceType = "ml.m5.12xlarge"
+	TrainingInstanceTypeMlM524xlarge   TrainingInstanceType = "ml.m5.24xlarge"
+	TrainingInstanceTypeMlC4Xlarge     TrainingInstanceType = "ml.c4.xlarge"
+	TrainingInstanceTypeMlC42xlarge    TrainingInstanceType = "ml.c4.2xlarge"
+	TrainingInstanceTypeMlC44xlarge    TrainingInstanceType = "ml.c4.4xlarge"
+	TrainingInstanceTypeMlC48xlarge    TrainingInstanceType = "ml.c4.8xlarge"
+	TrainingInstanceTypeMlP2Xlarge     TrainingInstanceType = "ml.p2.xlarge"
+	TrainingInstanceTypeMlP28xlarge    TrainingInstanceType = "ml.p2.8xlarge"
+	TrainingInstanceTypeMlP216xlarge   TrainingInstanceType = "ml.p2.16xlarge"
+	TrainingInstanceTypeMlP32xlarge    TrainingInstanceType = "ml.p3.2xlarge"
+	TrainingInstanceTypeMlP38xlarge    TrainingInstanceType = "ml.p3.8xlarge"
+	TrainingInstanceTypeMlP316xlarge   TrainingInstanceType = "ml.p3.16xlarge"
+	TrainingInstanceTypeMlP3dn24xlarge TrainingInstanceType = "ml.p3dn.24xlarge"
+	TrainingInstanceTypeMlC5Xlarge     TrainingInstanceType = "ml.c5.xlarge"
+	TrainingInstanceTypeMlC52xlarge    TrainingInstanceType = "ml.c5.2xlarge"
+	TrainingInstanceTypeMlC54xlarge    TrainingInstanceType = "ml.c5.4xlarge"
+	TrainingInstanceTypeMlC59xlarge    TrainingInstanceType = "ml.c5.9xlarge"
+	TrainingInstanceTypeMlC518xlarge   TrainingInstanceType = "ml.c5.18xlarge"
+	TrainingInstanceTypeMlC5nXlarge    TrainingInstanceType = "ml.c5n.xlarge"
+	TrainingInstanceTypeMlC5n2xlarge   TrainingInstanceType = "ml.c5n.2xlarge"
+	TrainingInstanceTypeMlC5n4xlarge   TrainingInstanceType = "ml.c5n.4xlarge"
+	TrainingInstanceTypeMlC5n9xlarge   TrainingInstanceType = "ml.c5n.9xlarge"
+	TrainingInstanceTypeMlC5n18xlarge  TrainingInstanceType = "ml.c5n.18xlarge"
 )
 
 // Values returns all known values for TrainingInstanceType. Note that this can be
@@ -2661,11 +2661,11 @@ type TrainingJobStatus string
 
 // Enum values for TrainingJobStatus
 const (
-	TrainingJobStatusIn_progress TrainingJobStatus = "InProgress"
-	TrainingJobStatusCompleted   TrainingJobStatus = "Completed"
-	TrainingJobStatusFailed      TrainingJobStatus = "Failed"
-	TrainingJobStatusStopping    TrainingJobStatus = "Stopping"
-	TrainingJobStatusStopped     TrainingJobStatus = "Stopped"
+	TrainingJobStatusInProgress TrainingJobStatus = "InProgress"
+	TrainingJobStatusCompleted  TrainingJobStatus = "Completed"
+	TrainingJobStatusFailed     TrainingJobStatus = "Failed"
+	TrainingJobStatusStopping   TrainingJobStatus = "Stopping"
+	TrainingJobStatusStopped    TrainingJobStatus = "Stopped"
 )
 
 // Values returns all known values for TrainingJobStatus. Note that this can be
@@ -2685,32 +2685,32 @@ type TransformInstanceType string
 
 // Enum values for TransformInstanceType
 const (
-	TransformInstanceTypeMl_m4_xlarge   TransformInstanceType = "ml.m4.xlarge"
-	TransformInstanceTypeMl_m4_2xlarge  TransformInstanceType = "ml.m4.2xlarge"
-	TransformInstanceTypeMl_m4_4xlarge  TransformInstanceType = "ml.m4.4xlarge"
-	TransformInstanceTypeMl_m4_10xlarge TransformInstanceType = "ml.m4.10xlarge"
-	TransformInstanceTypeMl_m4_16xlarge TransformInstanceType = "ml.m4.16xlarge"
-	TransformInstanceTypeMl_c4_xlarge   TransformInstanceType = "ml.c4.xlarge"
-	TransformInstanceTypeMl_c4_2xlarge  TransformInstanceType = "ml.c4.2xlarge"
-	TransformInstanceTypeMl_c4_4xlarge  TransformInstanceType = "ml.c4.4xlarge"
-	TransformInstanceTypeMl_c4_8xlarge  TransformInstanceType = "ml.c4.8xlarge"
-	TransformInstanceTypeMl_p2_xlarge   TransformInstanceType = "ml.p2.xlarge"
-	TransformInstanceTypeMl_p2_8xlarge  TransformInstanceType = "ml.p2.8xlarge"
-	TransformInstanceTypeMl_p2_16xlarge TransformInstanceType = "ml.p2.16xlarge"
-	TransformInstanceTypeMl_p3_2xlarge  TransformInstanceType = "ml.p3.2xlarge"
-	TransformInstanceTypeMl_p3_8xlarge  TransformInstanceType = "ml.p3.8xlarge"
-	TransformInstanceTypeMl_p3_16xlarge TransformInstanceType = "ml.p3.16xlarge"
-	TransformInstanceTypeMl_c5_xlarge   TransformInstanceType = "ml.c5.xlarge"
-	TransformInstanceTypeMl_c5_2xlarge  TransformInstanceType = "ml.c5.2xlarge"
-	TransformInstanceTypeMl_c5_4xlarge  TransformInstanceType = "ml.c5.4xlarge"
-	TransformInstanceTypeMl_c5_9xlarge  TransformInstanceType = "ml.c5.9xlarge"
-	TransformInstanceTypeMl_c5_18xlarge TransformInstanceType = "ml.c5.18xlarge"
-	TransformInstanceTypeMl_m5_large    TransformInstanceType = "ml.m5.large"
-	TransformInstanceTypeMl_m5_xlarge   TransformInstanceType = "ml.m5.xlarge"
-	TransformInstanceTypeMl_m5_2xlarge  TransformInstanceType = "ml.m5.2xlarge"
-	TransformInstanceTypeMl_m5_4xlarge  TransformInstanceType = "ml.m5.4xlarge"
-	TransformInstanceTypeMl_m5_12xlarge TransformInstanceType = "ml.m5.12xlarge"
-	TransformInstanceTypeMl_m5_24xlarge TransformInstanceType = "ml.m5.24xlarge"
+	TransformInstanceTypeMlM4Xlarge   TransformInstanceType = "ml.m4.xlarge"
+	TransformInstanceTypeMlM42xlarge  TransformInstanceType = "ml.m4.2xlarge"
+	TransformInstanceTypeMlM44xlarge  TransformInstanceType = "ml.m4.4xlarge"
+	TransformInstanceTypeMlM410xlarge TransformInstanceType = "ml.m4.10xlarge"
+	TransformInstanceTypeMlM416xlarge TransformInstanceType = "ml.m4.16xlarge"
+	TransformInstanceTypeMlC4Xlarge   TransformInstanceType = "ml.c4.xlarge"
+	TransformInstanceTypeMlC42xlarge  TransformInstanceType = "ml.c4.2xlarge"
+	TransformInstanceTypeMlC44xlarge  TransformInstanceType = "ml.c4.4xlarge"
+	TransformInstanceTypeMlC48xlarge  TransformInstanceType = "ml.c4.8xlarge"
+	TransformInstanceTypeMlP2Xlarge   TransformInstanceType = "ml.p2.xlarge"
+	TransformInstanceTypeMlP28xlarge  TransformInstanceType = "ml.p2.8xlarge"
+	TransformInstanceTypeMlP216xlarge TransformInstanceType = "ml.p2.16xlarge"
+	TransformInstanceTypeMlP32xlarge  TransformInstanceType = "ml.p3.2xlarge"
+	TransformInstanceTypeMlP38xlarge  TransformInstanceType = "ml.p3.8xlarge"
+	TransformInstanceTypeMlP316xlarge TransformInstanceType = "ml.p3.16xlarge"
+	TransformInstanceTypeMlC5Xlarge   TransformInstanceType = "ml.c5.xlarge"
+	TransformInstanceTypeMlC52xlarge  TransformInstanceType = "ml.c5.2xlarge"
+	TransformInstanceTypeMlC54xlarge  TransformInstanceType = "ml.c5.4xlarge"
+	TransformInstanceTypeMlC59xlarge  TransformInstanceType = "ml.c5.9xlarge"
+	TransformInstanceTypeMlC518xlarge TransformInstanceType = "ml.c5.18xlarge"
+	TransformInstanceTypeMlM5Large    TransformInstanceType = "ml.m5.large"
+	TransformInstanceTypeMlM5Xlarge   TransformInstanceType = "ml.m5.xlarge"
+	TransformInstanceTypeMlM52xlarge  TransformInstanceType = "ml.m5.2xlarge"
+	TransformInstanceTypeMlM54xlarge  TransformInstanceType = "ml.m5.4xlarge"
+	TransformInstanceTypeMlM512xlarge TransformInstanceType = "ml.m5.12xlarge"
+	TransformInstanceTypeMlM524xlarge TransformInstanceType = "ml.m5.24xlarge"
 )
 
 // Values returns all known values for TransformInstanceType. Note that this can be
@@ -2751,11 +2751,11 @@ type TransformJobStatus string
 
 // Enum values for TransformJobStatus
 const (
-	TransformJobStatusIn_progress TransformJobStatus = "InProgress"
-	TransformJobStatusCompleted   TransformJobStatus = "Completed"
-	TransformJobStatusFailed      TransformJobStatus = "Failed"
-	TransformJobStatusStopping    TransformJobStatus = "Stopping"
-	TransformJobStatusStopped     TransformJobStatus = "Stopped"
+	TransformJobStatusInProgress TransformJobStatus = "InProgress"
+	TransformJobStatusCompleted  TransformJobStatus = "Completed"
+	TransformJobStatusFailed     TransformJobStatus = "Failed"
+	TransformJobStatusStopping   TransformJobStatus = "Stopping"
+	TransformJobStatusStopped    TransformJobStatus = "Stopped"
 )
 
 // Values returns all known values for TransformJobStatus. Note that this can be
@@ -2775,11 +2775,11 @@ type TrialComponentPrimaryStatus string
 
 // Enum values for TrialComponentPrimaryStatus
 const (
-	TrialComponentPrimaryStatusIn_progress TrialComponentPrimaryStatus = "InProgress"
-	TrialComponentPrimaryStatusCompleted   TrialComponentPrimaryStatus = "Completed"
-	TrialComponentPrimaryStatusFailed      TrialComponentPrimaryStatus = "Failed"
-	TrialComponentPrimaryStatusStopping    TrialComponentPrimaryStatus = "Stopping"
-	TrialComponentPrimaryStatusStopped     TrialComponentPrimaryStatus = "Stopped"
+	TrialComponentPrimaryStatusInProgress TrialComponentPrimaryStatus = "InProgress"
+	TrialComponentPrimaryStatusCompleted  TrialComponentPrimaryStatus = "Completed"
+	TrialComponentPrimaryStatusFailed     TrialComponentPrimaryStatus = "Failed"
+	TrialComponentPrimaryStatusStopping   TrialComponentPrimaryStatus = "Stopping"
+	TrialComponentPrimaryStatusStopped    TrialComponentPrimaryStatus = "Stopped"
 )
 
 // Values returns all known values for TrialComponentPrimaryStatus. Note that this

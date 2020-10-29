@@ -84,18 +84,17 @@ type KeySchemaElement struct {
 
 	// The role that this key attribute will assume:
 	//
-	//     * HASH - partition key
+	// * HASH - partition key
 	//
-	//     *
-	// RANGE - sort key
+	// * RANGE -
+	// sort key
 	//
-	// The partition key of an item is also known as its hash
-	// attribute. The term "hash attribute" derives from DynamoDB's usage of an
-	// internal hash function to evenly distribute data items across partitions, based
-	// on their partition key values. The sort key of an item is also known as its
-	// range attribute. The term "range attribute" derives from the way DynamoDB stores
-	// items with the same partition key physically close together, in sorted order by
-	// the sort key value.
+	// The partition key of an item is also known as its hash attribute. The
+	// term "hash attribute" derives from DynamoDB's usage of an internal hash function
+	// to evenly distribute data items across partitions, based on their partition key
+	// values. The sort key of an item is also known as its range attribute. The term
+	// "range attribute" derives from the way DynamoDB stores items with the same
+	// partition key physically close together, in sorted order by the sort key value.
 	//
 	// This member is required.
 	KeyType KeyType
@@ -117,14 +116,14 @@ type Record struct {
 
 	// The type of data modification that was performed on the DynamoDB table:
 	//
-	//     *
+	// *
 	// INSERT - a new item was added to the table.
 	//
-	//     * MODIFY - one or more of an
+	// * MODIFY - one or more of an
 	// existing item's attributes were modified.
 	//
-	//     * REMOVE - the item was deleted
-	// from the table
+	// * REMOVE - the item was deleted from
+	// the table
 	EventName OperationType
 
 	// The AWS service from which the stream record originated. For DynamoDB Streams,
@@ -141,9 +140,9 @@ type Record struct {
 	// Items that are deleted by the Time to Live process after expiration have the
 	// following fields:
 	//
-	//     * Records[].userIdentity.type "Service"
+	// * Records[].userIdentity.type "Service"
 	//
-	//     *
+	// *
 	// Records[].userIdentity.principalId "dynamodb.amazonaws.com"
 	UserIdentity *Identity
 }
@@ -185,12 +184,12 @@ type Stream struct {
 	// from another table might have the same timestamp. However, the combination of
 	// the following three elements is guaranteed to be unique:
 	//
-	//     * the AWS customer
+	// * the AWS customer
 	// ID.
 	//
-	//     * the table name
+	// * the table name
 	//
-	//     * the StreamLabel
+	// * the StreamLabel
 	StreamLabel *string
 
 	// The DynamoDB table with which the stream is associated.
@@ -226,42 +225,42 @@ type StreamDescription struct {
 	// from another table might have the same timestamp. However, the combination of
 	// the following three elements is guaranteed to be unique:
 	//
-	//     * the AWS customer
+	// * the AWS customer
 	// ID.
 	//
-	//     * the table name
+	// * the table name
 	//
-	//     * the StreamLabel
+	// * the StreamLabel
 	StreamLabel *string
 
 	// Indicates the current status of the stream:
 	//
-	//     * ENABLING - Streams is
-	// currently being enabled on the DynamoDB table.
+	// * ENABLING - Streams is currently
+	// being enabled on the DynamoDB table.
 	//
-	//     * ENABLED - the stream is
-	// enabled.
+	// * ENABLED - the stream is enabled.
 	//
-	//     * DISABLING - Streams is currently being disabled on the DynamoDB
-	// table.
+	// *
+	// DISABLING - Streams is currently being disabled on the DynamoDB table.
 	//
-	//     * DISABLED - the stream is disabled.
+	// *
+	// DISABLED - the stream is disabled.
 	StreamStatus StreamStatus
 
 	// Indicates the format of the records within this stream:
 	//
-	//     * KEYS_ONLY - only
-	// the key attributes of items that were modified in the DynamoDB table.
+	// * KEYS_ONLY - only the
+	// key attributes of items that were modified in the DynamoDB table.
 	//
-	//     *
-	// NEW_IMAGE - entire items from the table, as they appeared after they were
+	// * NEW_IMAGE -
+	// entire items from the table, as they appeared after they were modified.
+	//
+	// *
+	// OLD_IMAGE - entire items from the table, as they appeared before they were
 	// modified.
 	//
-	//     * OLD_IMAGE - entire items from the table, as they appeared
-	// before they were modified.
-	//
-	//     * NEW_AND_OLD_IMAGES - both the new and the old
-	// images of the items from the table.
+	// * NEW_AND_OLD_IMAGES - both the new and the old images of the items
+	// from the table.
 	StreamViewType StreamViewType
 
 	// The DynamoDB table with which the stream is associated.
@@ -294,16 +293,15 @@ type StreamRecord struct {
 	// The type of data from the modified DynamoDB item that was captured in this
 	// stream record:
 	//
-	//     * KEYS_ONLY - only the key attributes of the modified
-	// item.
+	// * KEYS_ONLY - only the key attributes of the modified item.
 	//
-	//     * NEW_IMAGE - the entire item, as it appeared after it was
-	// modified.
+	// *
+	// NEW_IMAGE - the entire item, as it appeared after it was modified.
 	//
-	//     * OLD_IMAGE - the entire item, as it appeared before it was
-	// modified.
+	// * OLD_IMAGE
+	// - the entire item, as it appeared before it was modified.
 	//
-	//     * NEW_AND_OLD_IMAGES - both the new and the old item images of
-	// the item.
+	// * NEW_AND_OLD_IMAGES
+	// - both the new and the old item images of the item.
 	StreamViewType StreamViewType
 }

@@ -15,39 +15,39 @@
 // programming language. The SDKs perform tasks such as the following
 // automatically:
 //
-//     * Cryptographically sign your service requests
+// * Cryptographically sign your service requests
 //
-//     * Retry
+// * Retry
 // requests
 //
-//     * Handle error responses
+// * Handle error responses
 //
 // Additional Information
 //
-//     * Amazon SQS
-// Product Page (http://aws.amazon.com/sqs/)
+// * Amazon SQS Product
+// Page (http://aws.amazon.com/sqs/)
 //
-//     * Amazon Simple Queue Service
-// Developer Guide
+// * Amazon Simple Queue Service Developer
+// Guide
 //
-//         * Making API Requests
+// * Making API Requests
 // (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-making-api-requests.html)
 //
-//
-// * Amazon SQS Message Attributes
+// *
+// Amazon SQS Message Attributes
 // (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes)
 //
-//
-// * Amazon SQS Dead-Letter Queues
+// *
+// Amazon SQS Dead-Letter Queues
 // (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html)
 //
-//
-// * Amazon SQS in the AWS CLI Command Reference
+// *
+// Amazon SQS in the AWS CLI Command Reference
 // (http://docs.aws.amazon.com/cli/latest/reference/sqs/index.html)
 //
-//     * Amazon
-// Web Services General Reference
+// * Amazon Web
+// Services General Reference
 //
-//         * Regions and Endpoints
+// * Regions and Endpoints
 // (https://docs.aws.amazon.com/general/latest/gr/rande.html#sqs_region)
 package sqs

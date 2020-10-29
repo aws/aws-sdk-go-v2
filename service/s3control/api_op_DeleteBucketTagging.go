@@ -30,12 +30,12 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_DeleteBucketTagging.html#API_control_DeleteBucketTagging_Examples)
 // section below. The following actions are related to DeleteBucketTagging:
 //
-//     *
+// *
 // GetBucketTagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html)
 //
-//
-// * PutBucketTagging
+// *
+// PutBucketTagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html)
 func (c *Client) DeleteBucketTagging(ctx context.Context, params *DeleteBucketTaggingInput, optFns ...func(*Options)) (*DeleteBucketTaggingOutput, error) {
 	if params == nil {

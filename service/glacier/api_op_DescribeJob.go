@@ -134,16 +134,16 @@ type DescribeJobOutput struct {
 	// is retrieved, this value is the same as the ArchiveSHA256TreeHash value. This
 	// field is null for the following:
 	//
-	//     * Archive retrieval jobs that specify a
-	// range that is not tree-hash aligned
+	// * Archive retrieval jobs that specify a range
+	// that is not tree-hash aligned
 	//
-	//     * Archival jobs that specify a range
-	// that is equal to the whole archive, when the job status is InProgress
+	// * Archival jobs that specify a range that is
+	// equal to the whole archive, when the job status is InProgress
 	//
-	//     *
-	// Inventory jobs
+	// * Inventory
+	// jobs
 	//
-	//     * Select jobs
+	// * Select jobs
 	SHA256TreeHash *string
 
 	// An Amazon SNS topic that receives notification.

@@ -26,19 +26,19 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status).
 // Related Resources
 //
-//     * GetPublicAccessBlock
+// * GetPublicAccessBlock
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetPublicAccessBlock.html)
 //
-//
-// * DeletePublicAccessBlock
+// *
+// DeletePublicAccessBlock
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeletePublicAccessBlock.html)
 //
-//
-// * GetBucketPolicyStatus
+// *
+// GetBucketPolicyStatus
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicyStatus.html)
 //
-//
-// * Using Amazon S3 Block Public Access
+// *
+// Using Amazon S3 Block Public Access
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html)
 func (c *Client) PutPublicAccessBlock(ctx context.Context, params *PutPublicAccessBlockInput, optFns ...func(*Options)) (*PutPublicAccessBlockOutput, error) {
 	if params == nil {

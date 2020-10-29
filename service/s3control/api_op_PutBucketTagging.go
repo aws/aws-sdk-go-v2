@@ -43,49 +43,48 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).
 // PutBucketTagging has the following special errors:
 //
-//     * Error code:
+// * Error code:
 // InvalidTagError
 //
-//         * Description: The tag provided was not a valid tag.
-// This error can occur if the tag did not pass input validation. For information
-// about tag restrictions, see  User-Defined Tag Restrictions
+// * Description: The tag provided was not a valid tag. This error
+// can occur if the tag did not pass input validation. For information about tag
+// restrictions, see  User-Defined Tag Restrictions
 // (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html)
 // and  AWS-Generated Cost Allocation Tag Restrictions
 // (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/aws-tag-restrictions.html).
 //
+// *
+// Error code: MalformedXMLError
 //
-// * Error code: MalformedXMLError
+// * Description: The XML provided does not match
+// the schema.
 //
-//         * Description: The XML provided does
-// not match the schema.
+// * Error code: OperationAbortedError
 //
-//     * Error code: OperationAbortedError
+// * Description: A conflicting
+// conditional operation is currently in progress against this resource. Try
+// again.
 //
-//         *
-// Description: A conflicting conditional operation is currently in progress
-// against this resource. Try again.
+// * Error code: InternalError
 //
-//     * Error code: InternalError
+// * Description: The service was unable to
+// apply the provided tag to the bucket.
 //
-//         *
-// Description: The service was unable to apply the provided tag to the
-// bucket.
-//
-// All Amazon S3 on Outposts REST API requests for this action require an
-// additional parameter of outpost-id to be passed with the request and an S3 on
-// Outposts endpoint hostname prefix instead of s3-control. For an example of the
-// request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint
-// hostname prefix and the outpost-id derived using the access point ARN, see the
-// Example
+// All Amazon S3 on Outposts REST API
+// requests for this action require an additional parameter of outpost-id to be
+// passed with the request and an S3 on Outposts endpoint hostname prefix instead
+// of s3-control. For an example of the request syntax for Amazon S3 on Outposts
+// that uses the S3 on Outposts endpoint hostname prefix and the outpost-id derived
+// using the access point ARN, see the  Example
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_PutBucketTagging.html#API_control_PutBucketTagging_Examples)
 // section below. The following actions are related to PutBucketTagging:
 //
-//     *
+// *
 // GetBucketTagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html)
 //
-//
-// * DeleteBucketTagging
+// *
+// DeleteBucketTagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html)
 func (c *Client) PutBucketTagging(ctx context.Context, params *PutBucketTaggingInput, optFns ...func(*Options)) (*PutBucketTaggingOutput, error) {
 	if params == nil {

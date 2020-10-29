@@ -6,7 +6,7 @@ type ColumnNullable string
 
 // Enum values for ColumnNullable
 const (
-	ColumnNullableNot_null ColumnNullable = "NOT_NULL"
+	ColumnNullableNotNull  ColumnNullable = "NOT_NULL"
 	ColumnNullableNullable ColumnNullable = "NULLABLE"
 	ColumnNullableUnknown  ColumnNullable = "UNKNOWN"
 )
@@ -46,9 +46,9 @@ type EncryptionOption string
 
 // Enum values for EncryptionOption
 const (
-	EncryptionOptionSse_s3  EncryptionOption = "SSE_S3"
-	EncryptionOptionSse_kms EncryptionOption = "SSE_KMS"
-	EncryptionOptionCse_kms EncryptionOption = "CSE_KMS"
+	EncryptionOptionSseS3  EncryptionOption = "SSE_S3"
+	EncryptionOptionSseKms EncryptionOption = "SSE_KMS"
+	EncryptionOptionCseKms EncryptionOption = "CSE_KMS"
 )
 
 // Values returns all known values for EncryptionOption. Note that this can be
@@ -110,7 +110,7 @@ type ThrottleReason string
 
 // Enum values for ThrottleReason
 const (
-	ThrottleReasonConcurrent_query_limit_exceeded ThrottleReason = "CONCURRENT_QUERY_LIMIT_EXCEEDED"
+	ThrottleReasonConcurrentQueryLimitExceeded ThrottleReason = "CONCURRENT_QUERY_LIMIT_EXCEEDED"
 )
 
 // Values returns all known values for ThrottleReason. Note that this can be

@@ -36,7 +36,7 @@ type ModifyDBInstanceInput struct {
 	// The DB instance identifier. This value is stored as a lowercase string.
 	// Constraints:
 	//
-	//     * Must match the identifier of an existing DBInstance.
+	// * Must match the identifier of an existing DBInstance.
 	//
 	// This member is required.
 	DBInstanceIdentifier *string
@@ -88,17 +88,17 @@ type ModifyDBInstanceInput struct {
 	// the DB cluster. For more information, see ModifyDBCluster. Default: Uses
 	// existing setting Constraints:
 	//
-	//     * Must be a value from 0 to 35
+	// * Must be a value from 0 to 35
 	//
-	//     * Can be
+	// * Can be
 	// specified for a MySQL read replica only if the source is running MySQL 5.6 or
 	// later
 	//
-	//     * Can be specified for a PostgreSQL read replica only if the source
-	// is running PostgreSQL 9.3.5
+	// * Can be specified for a PostgreSQL read replica only if the source is
+	// running PostgreSQL 9.3.5
 	//
-	//     * Can't be set to 0 if the DB instance is a
-	// source to read replicas
+	// * Can't be set to 0 if the DB instance is a source to
+	// read replicas
 	BackupRetentionPeriod *int32
 
 	// Indicates the certificate that needs to be associated with the instance.
@@ -112,12 +112,12 @@ type ModifyDBInstanceInput struct {
 	// the appropriate instructions for your DB engine to rotate your SSL/TLS
 	// certificate:
 	//
-	//     * For more information about rotating your SSL/TLS certificate
-	// for RDS DB engines, see  Rotating Your SSL/TLS Certificate.
+	// * For more information about rotating your SSL/TLS certificate for
+	// RDS DB engines, see  Rotating Your SSL/TLS Certificate.
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL-certificate-rotation.html)
 	// in the Amazon RDS User Guide.
 	//
-	//     * For more information about rotating your
+	// * For more information about rotating your
 	// SSL/TLS certificate for Aurora DB engines, see  Rotating Your SSL/TLS
 	// Certificate
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL-certificate-rotation.html)
@@ -173,7 +173,7 @@ type ModifyDBInstanceInput struct {
 	// setting doesn't result in an outage and the change is asynchronously applied as
 	// soon as possible. Constraints:
 	//
-	//     * If supplied, must match existing
+	// * If supplied, must match existing
 	// DBSecurityGroups.
 	DBSecurityGroups []*string
 
@@ -309,13 +309,13 @@ type ModifyDBInstanceInput struct {
 	// maintenance window if you disable Apply Immediately. This value is stored as a
 	// lowercase string. Constraints:
 	//
-	//     * Must contain from 1 to 63 letters,
-	// numbers, or hyphens.
+	// * Must contain from 1 to 63 letters, numbers, or
+	// hyphens.
 	//
-	//     * The first character must be a letter.
+	// * The first character must be a letter.
 	//
-	//     * Can't
-	// end with a hyphen or contain two consecutive hyphens.
+	// * Can't end with a hyphen or
+	// contain two consecutive hyphens.
 	//
 	// Example: mydbinstance
 	NewDBInstanceIdentifier *string
@@ -351,16 +351,15 @@ type ModifyDBInstanceInput struct {
 	// daily time range for creating automated backups is managed by the DB cluster.
 	// For more information, see ModifyDBCluster. Constraints:
 	//
-	//     * Must be in the
-	// format hh24:mi-hh24:mi
+	// * Must be in the format
+	// hh24:mi-hh24:mi
 	//
-	//     * Must be in Universal Time Coordinated (UTC)
+	// * Must be in Universal Time Coordinated (UTC)
 	//
-	//     *
-	// Must not conflict with the preferred maintenance window
+	// * Must not
+	// conflict with the preferred maintenance window
 	//
-	//     * Must be at least
-	// 30 minutes
+	// * Must be at least 30 minutes
 	PreferredBackupWindow *string
 
 	// The weekly time range (in UTC) during which system maintenance can occur, which
@@ -446,8 +445,8 @@ type ModifyDBInstanceInput struct {
 	// associated list of EC2 VPC security groups is managed by the DB cluster. For
 	// more information, see ModifyDBCluster. Constraints:
 	//
-	//     * If supplied, must
-	// match existing VpcSecurityGroupIds.
+	// * If supplied, must match
+	// existing VpcSecurityGroupIds.
 	VpcSecurityGroupIds []*string
 }
 

@@ -11,5 +11,5 @@
 // some amount of data capacity in a multi-tenant database. Getting Entitlement
 // Records
 //
-//     * GetEntitlements- Gets the entitlements for a Marketplace product.
+// * GetEntitlements- Gets the entitlements for a Marketplace product.
 package marketplaceentitlementservice

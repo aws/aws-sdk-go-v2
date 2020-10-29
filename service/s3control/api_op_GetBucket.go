@@ -19,15 +19,15 @@ import (
 // in the Amazon Simple Storage Service Developer Guide. The following actions are
 // related to GetBucket for Amazon S3 on Outposts:
 //
-//     * PutObject
+// * PutObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
 //
-//     *
+// *
 // CreateBucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_CreateBucket.html)
 //
-//
-// * DeleteBucket
+// *
+// DeleteBucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_DeleteBucket.html)
 func (c *Client) GetBucket(ctx context.Context, params *GetBucketInput, optFns ...func(*Options)) (*GetBucketOutput, error) {
 	if params == nil {

@@ -28,10 +28,10 @@ type ProviderType string
 
 // Enum values for ProviderType
 const (
-	ProviderTypeCode_commit               ProviderType = "CodeCommit"
-	ProviderTypeGit_hub                   ProviderType = "GitHub"
-	ProviderTypeBitbucket                 ProviderType = "Bitbucket"
-	ProviderTypeGit_hub_enterprise_server ProviderType = "GitHubEnterpriseServer"
+	ProviderTypeCodeCommit             ProviderType = "CodeCommit"
+	ProviderTypeGitHub                 ProviderType = "GitHub"
+	ProviderTypeBitbucket              ProviderType = "Bitbucket"
+	ProviderTypeGitHubEnterpriseServer ProviderType = "GitHubEnterpriseServer"
 )
 
 // Values returns all known values for ProviderType. Note that this can be expanded
@@ -50,8 +50,8 @@ type Reaction string
 
 // Enum values for Reaction
 const (
-	ReactionThumbs_up   Reaction = "ThumbsUp"
-	ReactionThumbs_down Reaction = "ThumbsDown"
+	ReactionThumbsUp   Reaction = "ThumbsUp"
+	ReactionThumbsDown Reaction = "ThumbsDown"
 )
 
 // Values returns all known values for Reaction. Note that this can be expanded in
@@ -90,8 +90,8 @@ type Type string
 
 // Enum values for Type
 const (
-	TypePull_request        Type = "PullRequest"
-	TypeRepository_analysis Type = "RepositoryAnalysis"
+	TypePullRequest        Type = "PullRequest"
+	TypeRepositoryAnalysis Type = "RepositoryAnalysis"
 )
 
 // Values returns all known values for Type. Note that this can be expanded in the

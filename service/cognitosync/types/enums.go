@@ -6,10 +6,10 @@ type BulkPublishStatus string
 
 // Enum values for BulkPublishStatus
 const (
-	BulkPublishStatusNot_started BulkPublishStatus = "NOT_STARTED"
-	BulkPublishStatusIn_progress BulkPublishStatus = "IN_PROGRESS"
-	BulkPublishStatusFailed      BulkPublishStatus = "FAILED"
-	BulkPublishStatusSucceeded   BulkPublishStatus = "SUCCEEDED"
+	BulkPublishStatusNotStarted BulkPublishStatus = "NOT_STARTED"
+	BulkPublishStatusInProgress BulkPublishStatus = "IN_PROGRESS"
+	BulkPublishStatusFailed     BulkPublishStatus = "FAILED"
+	BulkPublishStatusSucceeded  BulkPublishStatus = "SUCCEEDED"
 )
 
 // Values returns all known values for BulkPublishStatus. Note that this can be
@@ -46,10 +46,10 @@ type Platform string
 
 // Enum values for Platform
 const (
-	PlatformApns         Platform = "APNS"
-	PlatformApns_sandbox Platform = "APNS_SANDBOX"
-	PlatformGcm          Platform = "GCM"
-	PlatformAdm          Platform = "ADM"
+	PlatformApns        Platform = "APNS"
+	PlatformApnsSandbox Platform = "APNS_SANDBOX"
+	PlatformGcm         Platform = "GCM"
+	PlatformAdm         Platform = "ADM"
 )
 
 // Values returns all known values for Platform. Note that this can be expanded in

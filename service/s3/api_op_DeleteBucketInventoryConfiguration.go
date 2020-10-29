@@ -23,16 +23,16 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-inventory.html).
 // Operations related to DeleteBucketInventoryConfiguration include:
 //
-//     *
+// *
 // GetBucketInventoryConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketInventoryConfiguration.html)
 //
-//
-// * PutBucketInventoryConfiguration
+// *
+// PutBucketInventoryConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketInventoryConfiguration.html)
 //
-//
-// * ListBucketInventoryConfigurations
+// *
+// ListBucketInventoryConfigurations
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketInventoryConfigurations.html)
 func (c *Client) DeleteBucketInventoryConfiguration(ctx context.Context, params *DeleteBucketInventoryConfigurationInput, optFns ...func(*Options)) (*DeleteBucketInventoryConfigurationOutput, error) {
 	if params == nil {

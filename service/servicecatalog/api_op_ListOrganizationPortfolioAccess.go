@@ -34,15 +34,15 @@ type ListOrganizationPortfolioAccessInput struct {
 
 	// The organization node type that will be returned in the output.
 	//
-	//     *
-	// ORGANIZATION - Organization that has access to the portfolio.
+	// * ORGANIZATION
+	// - Organization that has access to the portfolio.
 	//
-	//     *
-	// ORGANIZATIONAL_UNIT - Organizational unit that has access to the portfolio
-	// within your organization.
+	// * ORGANIZATIONAL_UNIT -
+	// Organizational unit that has access to the portfolio within your
+	// organization.
 	//
-	//     * ACCOUNT - Account that has access to the
-	// portfolio within your organization.
+	// * ACCOUNT - Account that has access to the portfolio within your
+	// organization.
 	//
 	// This member is required.
 	OrganizationNodeType types.OrganizationNodeType
@@ -54,12 +54,11 @@ type ListOrganizationPortfolioAccessInput struct {
 
 	// The language code.
 	//
-	//     * en - English (default)
+	// * en - English (default)
 	//
-	//     * jp - Japanese
+	// * jp - Japanese
 	//
-	//     * zh
-	// - Chinese
+	// * zh - Chinese
 	AcceptLanguage *string
 
 	// The maximum number of items to return with this call.

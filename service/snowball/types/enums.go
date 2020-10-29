@@ -6,11 +6,11 @@ type ClusterState string
 
 // Enum values for ClusterState
 const (
-	ClusterStateAwaiting_quorum ClusterState = "AwaitingQuorum"
-	ClusterStatePending         ClusterState = "Pending"
-	ClusterStateIn_use          ClusterState = "InUse"
-	ClusterStateComplete        ClusterState = "Complete"
-	ClusterStateCancelled       ClusterState = "Cancelled"
+	ClusterStateAwaitingQuorum ClusterState = "AwaitingQuorum"
+	ClusterStatePending        ClusterState = "Pending"
+	ClusterStateInUse          ClusterState = "InUse"
+	ClusterStateComplete       ClusterState = "Complete"
+	ClusterStateCancelled      ClusterState = "Cancelled"
 )
 
 // Values returns all known values for ClusterState. Note that this can be expanded
@@ -30,19 +30,19 @@ type JobState string
 
 // Enum values for JobState
 const (
-	JobStateNew                       JobState = "New"
-	JobStatePreparing_appliance       JobState = "PreparingAppliance"
-	JobStatePreparing_shipment        JobState = "PreparingShipment"
-	JobStateIn_transit_to_customer    JobState = "InTransitToCustomer"
-	JobStateWith_customer             JobState = "WithCustomer"
-	JobStateIn_transit_to_aws         JobState = "InTransitToAWS"
-	JobStateWith_aws_sorting_facility JobState = "WithAWSSortingFacility"
-	JobStateWith_aws                  JobState = "WithAWS"
-	JobStateIn_progress               JobState = "InProgress"
-	JobStateComplete                  JobState = "Complete"
-	JobStateCancelled                 JobState = "Cancelled"
-	JobStateListing                   JobState = "Listing"
-	JobStatePending                   JobState = "Pending"
+	JobStateNew                    JobState = "New"
+	JobStatePreparingAppliance     JobState = "PreparingAppliance"
+	JobStatePreparingShipment      JobState = "PreparingShipment"
+	JobStateInTransitToCustomer    JobState = "InTransitToCustomer"
+	JobStateWithCustomer           JobState = "WithCustomer"
+	JobStateInTransitToAws         JobState = "InTransitToAWS"
+	JobStateWithAwsSortingFacility JobState = "WithAWSSortingFacility"
+	JobStateWithAws                JobState = "WithAWS"
+	JobStateInProgress             JobState = "InProgress"
+	JobStateComplete               JobState = "Complete"
+	JobStateCancelled              JobState = "Cancelled"
+	JobStateListing                JobState = "Listing"
+	JobStatePending                JobState = "Pending"
 )
 
 // Values returns all known values for JobState. Note that this can be expanded in
@@ -70,9 +70,9 @@ type JobType string
 
 // Enum values for JobType
 const (
-	JobTypeImport    JobType = "IMPORT"
-	JobTypeExport    JobType = "EXPORT"
-	JobTypeLocal_use JobType = "LOCAL_USE"
+	JobTypeImport   JobType = "IMPORT"
+	JobTypeExport   JobType = "EXPORT"
+	JobTypeLocalUse JobType = "LOCAL_USE"
 )
 
 // Values returns all known values for JobType. Note that this can be expanded in
@@ -108,10 +108,10 @@ type ShippingLabelStatus string
 
 // Enum values for ShippingLabelStatus
 const (
-	ShippingLabelStatusIn_progress ShippingLabelStatus = "InProgress"
-	ShippingLabelStatusTimed_out   ShippingLabelStatus = "TimedOut"
-	ShippingLabelStatusSucceeded   ShippingLabelStatus = "Succeeded"
-	ShippingLabelStatusFailed      ShippingLabelStatus = "Failed"
+	ShippingLabelStatusInProgress ShippingLabelStatus = "InProgress"
+	ShippingLabelStatusTimedOut   ShippingLabelStatus = "TimedOut"
+	ShippingLabelStatusSucceeded  ShippingLabelStatus = "Succeeded"
+	ShippingLabelStatusFailed     ShippingLabelStatus = "Failed"
 )
 
 // Values returns all known values for ShippingLabelStatus. Note that this can be
@@ -130,10 +130,10 @@ type ShippingOption string
 
 // Enum values for ShippingOption
 const (
-	ShippingOptionSecond_day ShippingOption = "SECOND_DAY"
-	ShippingOptionNext_day   ShippingOption = "NEXT_DAY"
-	ShippingOptionExpress    ShippingOption = "EXPRESS"
-	ShippingOptionStandard   ShippingOption = "STANDARD"
+	ShippingOptionSecondDay ShippingOption = "SECOND_DAY"
+	ShippingOptionNextDay   ShippingOption = "NEXT_DAY"
+	ShippingOptionExpress   ShippingOption = "EXPRESS"
+	ShippingOptionStandard  ShippingOption = "STANDARD"
 )
 
 // Values returns all known values for ShippingOption. Note that this can be
@@ -152,13 +152,13 @@ type SnowballCapacity string
 
 // Enum values for SnowballCapacity
 const (
-	SnowballCapacityT50           SnowballCapacity = "T50"
-	SnowballCapacityT80           SnowballCapacity = "T80"
-	SnowballCapacityT100          SnowballCapacity = "T100"
-	SnowballCapacityT42           SnowballCapacity = "T42"
-	SnowballCapacityT98           SnowballCapacity = "T98"
-	SnowballCapacityT8            SnowballCapacity = "T8"
-	SnowballCapacityNo_preference SnowballCapacity = "NoPreference"
+	SnowballCapacityT50          SnowballCapacity = "T50"
+	SnowballCapacityT80          SnowballCapacity = "T80"
+	SnowballCapacityT100         SnowballCapacity = "T100"
+	SnowballCapacityT42          SnowballCapacity = "T42"
+	SnowballCapacityT98          SnowballCapacity = "T98"
+	SnowballCapacityT8           SnowballCapacity = "T8"
+	SnowballCapacityNoPreference SnowballCapacity = "NoPreference"
 )
 
 // Values returns all known values for SnowballCapacity. Note that this can be
@@ -182,10 +182,10 @@ type SnowballType string
 const (
 	SnowballTypeStandard SnowballType = "STANDARD"
 	SnowballTypeEdge     SnowballType = "EDGE"
-	SnowballTypeEdge_c   SnowballType = "EDGE_C"
-	SnowballTypeEdge_cg  SnowballType = "EDGE_CG"
-	SnowballTypeEdge_s   SnowballType = "EDGE_S"
-	SnowballTypeSnc1_hdd SnowballType = "SNC1_HDD"
+	SnowballTypeEdgeC    SnowballType = "EDGE_C"
+	SnowballTypeEdgeCg   SnowballType = "EDGE_CG"
+	SnowballTypeEdgeS    SnowballType = "EDGE_S"
+	SnowballTypeSnc1Hdd  SnowballType = "SNC1_HDD"
 )
 
 // Values returns all known values for SnowballType. Note that this can be expanded

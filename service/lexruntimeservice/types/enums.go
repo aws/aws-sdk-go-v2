@@ -42,11 +42,11 @@ type DialogActionType string
 
 // Enum values for DialogActionType
 const (
-	DialogActionTypeElicit_intent  DialogActionType = "ElicitIntent"
-	DialogActionTypeConfirm_intent DialogActionType = "ConfirmIntent"
-	DialogActionTypeElicit_slot    DialogActionType = "ElicitSlot"
-	DialogActionTypeClose          DialogActionType = "Close"
-	DialogActionTypeDelegate       DialogActionType = "Delegate"
+	DialogActionTypeElicitIntent  DialogActionType = "ElicitIntent"
+	DialogActionTypeConfirmIntent DialogActionType = "ConfirmIntent"
+	DialogActionTypeElicitSlot    DialogActionType = "ElicitSlot"
+	DialogActionTypeClose         DialogActionType = "Close"
+	DialogActionTypeDelegate      DialogActionType = "Delegate"
 )
 
 // Values returns all known values for DialogActionType. Note that this can be
@@ -66,12 +66,12 @@ type DialogState string
 
 // Enum values for DialogState
 const (
-	DialogStateElicit_intent         DialogState = "ElicitIntent"
-	DialogStateConfirm_intent        DialogState = "ConfirmIntent"
-	DialogStateElicit_slot           DialogState = "ElicitSlot"
-	DialogStateFulfilled             DialogState = "Fulfilled"
-	DialogStateReady_for_fulfillment DialogState = "ReadyForFulfillment"
-	DialogStateFailed                DialogState = "Failed"
+	DialogStateElicitIntent        DialogState = "ElicitIntent"
+	DialogStateConfirmIntent       DialogState = "ConfirmIntent"
+	DialogStateElicitSlot          DialogState = "ElicitSlot"
+	DialogStateFulfilled           DialogState = "Fulfilled"
+	DialogStateReadyForFulfillment DialogState = "ReadyForFulfillment"
+	DialogStateFailed              DialogState = "Failed"
 )
 
 // Values returns all known values for DialogState. Note that this can be expanded
@@ -92,9 +92,9 @@ type FulfillmentState string
 
 // Enum values for FulfillmentState
 const (
-	FulfillmentStateFulfilled             FulfillmentState = "Fulfilled"
-	FulfillmentStateFailed                FulfillmentState = "Failed"
-	FulfillmentStateReady_for_fulfillment FulfillmentState = "ReadyForFulfillment"
+	FulfillmentStateFulfilled           FulfillmentState = "Fulfilled"
+	FulfillmentStateFailed              FulfillmentState = "Failed"
+	FulfillmentStateReadyForFulfillment FulfillmentState = "ReadyForFulfillment"
 )
 
 // Values returns all known values for FulfillmentState. Note that this can be
@@ -112,10 +112,10 @@ type MessageFormatType string
 
 // Enum values for MessageFormatType
 const (
-	MessageFormatTypePlain_text     MessageFormatType = "PlainText"
-	MessageFormatTypeCustom_payload MessageFormatType = "CustomPayload"
-	MessageFormatTypeSsml           MessageFormatType = "SSML"
-	MessageFormatTypeComposite      MessageFormatType = "Composite"
+	MessageFormatTypePlainText     MessageFormatType = "PlainText"
+	MessageFormatTypeCustomPayload MessageFormatType = "CustomPayload"
+	MessageFormatTypeSsml          MessageFormatType = "SSML"
+	MessageFormatTypeComposite     MessageFormatType = "Composite"
 )
 
 // Values returns all known values for MessageFormatType. Note that this can be

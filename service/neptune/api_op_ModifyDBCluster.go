@@ -34,7 +34,7 @@ type ModifyDBClusterInput struct {
 	// The DB cluster identifier for the cluster being modified. This parameter is not
 	// case-sensitive. Constraints:
 	//
-	//     * Must match the identifier of an existing
+	// * Must match the identifier of an existing
 	// DBCluster.
 	//
 	// This member is required.
@@ -55,7 +55,7 @@ type ModifyDBClusterInput struct {
 	// The number of days for which automated backups are retained. You must specify a
 	// minimum value of 1. Default: 1 Constraints:
 	//
-	//     * Must be a value from 1 to 35
+	// * Must be a value from 1 to 35
 	BackupRetentionPeriod *int32
 
 	// The configuration setting for the log types to be enabled for export to
@@ -88,16 +88,16 @@ type ModifyDBClusterInput struct {
 	// The new DB cluster identifier for the DB cluster when renaming a DB cluster.
 	// This value is stored as a lowercase string. Constraints:
 	//
-	//     * Must contain
-	// from 1 to 63 letters, numbers, or hyphens
+	// * Must contain from 1
+	// to 63 letters, numbers, or hyphens
 	//
-	//     * The first character must be a
-	// letter
+	// * The first character must be a letter
 	//
-	//     * Cannot end with a hyphen or contain two consecutive
-	// hyphens
+	// *
+	// Cannot end with a hyphen or contain two consecutive hyphens
 	//
-	// Example: my-cluster2
+	// Example:
+	// my-cluster2
 	NewDBClusterIdentifier *string
 
 	// (Not supported by Neptune)
@@ -112,15 +112,15 @@ type ModifyDBClusterInput struct {
 	// 30-minute window selected at random from an 8-hour block of time for each AWS
 	// Region. Constraints:
 	//
-	//     * Must be in the format hh24:mi-hh24:mi.
+	// * Must be in the format hh24:mi-hh24:mi.
 	//
-	//     * Must
-	// be in Universal Coordinated Time (UTC).
+	// * Must be in
+	// Universal Coordinated Time (UTC).
 	//
-	//     * Must not conflict with the
-	// preferred maintenance window.
+	// * Must not conflict with the preferred
+	// maintenance window.
 	//
-	//     * Must be at least 30 minutes.
+	// * Must be at least 30 minutes.
 	PreferredBackupWindow *string
 
 	// The weekly time range during which system maintenance can occur, in Universal

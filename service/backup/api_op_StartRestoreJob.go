@@ -43,29 +43,29 @@ type StartRestoreJobInput struct {
 	// exists. You need to specify specific metadata to restore an Amazon Elastic File
 	// System (Amazon EFS) instance:
 	//
-	//     * file-system-id: The ID of the Amazon EFS
-	// file system that is backed up by AWS Backup. Returned in
+	// * file-system-id: The ID of the Amazon EFS file
+	// system that is backed up by AWS Backup. Returned in
 	// GetRecoveryPointRestoreMetadata.
 	//
-	//     * Encrypted: A Boolean value that, if
-	// true, specifies that the file system is encrypted. If KmsKeyId is specified,
-	// Encrypted must be set to true.
+	// * Encrypted: A Boolean value that, if true,
+	// specifies that the file system is encrypted. If KmsKeyId is specified, Encrypted
+	// must be set to true.
 	//
-	//     * KmsKeyId: Specifies the AWS KMS key that
-	// is used to encrypt the restored file system. You can specify a key from another
-	// AWS account provided that key it is properly shared with your account via AWS
-	// KMS.
+	// * KmsKeyId: Specifies the AWS KMS key that is used to
+	// encrypt the restored file system. You can specify a key from another AWS account
+	// provided that key it is properly shared with your account via AWS KMS.
 	//
-	//     * PerformanceMode: Specifies the throughput mode of the file system.
+	// *
+	// PerformanceMode: Specifies the throughput mode of the file system.
 	//
-	//
-	// * CreationToken: A user-supplied value that ensures the uniqueness (idempotency)
+	// *
+	// CreationToken: A user-supplied value that ensures the uniqueness (idempotency)
 	// of the request.
 	//
-	//     * newFileSystem: A Boolean value that, if true, specifies
-	// that the recovery point is restored to a new Amazon EFS file system.
+	// * newFileSystem: A Boolean value that, if true, specifies that
+	// the recovery point is restored to a new Amazon EFS file system.
 	//
-	//     *
+	// *
 	// ItemsToRestore : A serialized list of up to five strings where each string is a
 	// file path. Use ItemsToRestore to restore specific files or directories rather
 	// than the entire file system. This parameter is optional.
@@ -85,21 +85,20 @@ type StartRestoreJobInput struct {
 
 	// Starts a job to restore a recovery point for one of the following resources:
 	//
+	// *
+	// DynamoDB for Amazon DynamoDB
 	//
-	// * DynamoDB for Amazon DynamoDB
+	// * EBS for Amazon Elastic Block Store
 	//
-	//     * EBS for Amazon Elastic Block Store
+	// * EC2 for
+	// Amazon Elastic Compute Cloud
 	//
-	//     *
-	// EC2 for Amazon Elastic Compute Cloud
+	// * EFS for Amazon Elastic File System
 	//
-	//     * EFS for Amazon Elastic File System
+	// * RDS for
+	// Amazon Relational Database Service
 	//
-	//
-	// * RDS for Amazon Relational Database Service
-	//
-	//     * Storage Gateway for AWS
-	// Storage Gateway
+	// * Storage Gateway for AWS Storage Gateway
 	ResourceType *string
 }
 

@@ -38,13 +38,13 @@ type DescribeManagedPrefixListsInput struct {
 
 	// One or more filters.
 	//
-	//     * owner-id - The ID of the prefix list owner.
+	// * owner-id - The ID of the prefix list owner.
 	//
-	//     *
+	// *
 	// prefix-list-id - The ID of the prefix list.
 	//
-	//     * prefix-list-name - The name
-	// of the prefix list.
+	// * prefix-list-name - The name of
+	// the prefix list.
 	Filters []*types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the

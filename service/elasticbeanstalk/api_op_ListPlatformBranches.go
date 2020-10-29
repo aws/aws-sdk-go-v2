@@ -39,30 +39,29 @@ type ListPlatformBranchesInput struct {
 	// Most operators take a single value. The in and not_in operators can take
 	// multiple values.
 	//
-	//     * Attribute = BranchName:
+	// * Attribute = BranchName:
 	//
-	//         * Operator: = | != |
-	// begins_with | ends_with | contains | in | not_in
+	// * Operator: = | != | begins_with |
+	// ends_with | contains | in | not_in
 	//
-	//     * Attribute =
-	// LifecycleState:
+	// * Attribute = LifecycleState:
 	//
-	//         * Operator: = | != | in | not_in
+	// * Operator: =
+	// | != | in | not_in
 	//
-	//         * Values:
-	// beta | supported | deprecated | retired
+	// * Values: beta | supported | deprecated | retired
 	//
-	//     * Attribute = PlatformName:
+	// *
+	// Attribute = PlatformName:
 	//
+	// * Operator: = | != | begins_with | ends_with |
+	// contains | in | not_in
 	//
-	// * Operator: = | != | begins_with | ends_with | contains | in | not_in
+	// * Attribute = TierType:
 	//
-	//     *
-	// Attribute = TierType:
+	// * Operator: = | !=
 	//
-	//         * Operator: = | !=
-	//
-	//         * Values:
+	// * Values:
 	// WebServer/Standard | Worker/SQS/HTTP
 	//
 	// Array size: limited to 10 SearchFilter

@@ -43,8 +43,8 @@ type SavingsPlanOfferingPropertyKey string
 
 // Enum values for SavingsPlanOfferingPropertyKey
 const (
-	SavingsPlanOfferingPropertyKeyRegion          SavingsPlanOfferingPropertyKey = "region"
-	SavingsPlanOfferingPropertyKeyInstance_family SavingsPlanOfferingPropertyKey = "instanceFamily"
+	SavingsPlanOfferingPropertyKeyRegion         SavingsPlanOfferingPropertyKey = "region"
+	SavingsPlanOfferingPropertyKeyInstanceFamily SavingsPlanOfferingPropertyKey = "instanceFamily"
 )
 
 // Values returns all known values for SavingsPlanOfferingPropertyKey. Note that
@@ -62,9 +62,9 @@ type SavingsPlanPaymentOption string
 
 // Enum values for SavingsPlanPaymentOption
 const (
-	SavingsPlanPaymentOptionAll_upfront     SavingsPlanPaymentOption = "All Upfront"
-	SavingsPlanPaymentOptionPartial_upfront SavingsPlanPaymentOption = "Partial Upfront"
-	SavingsPlanPaymentOptionNo_upfront      SavingsPlanPaymentOption = "No Upfront"
+	SavingsPlanPaymentOptionAllUpfront     SavingsPlanPaymentOption = "All Upfront"
+	SavingsPlanPaymentOptionPartialUpfront SavingsPlanPaymentOption = "Partial Upfront"
+	SavingsPlanPaymentOptionNoUpfront      SavingsPlanPaymentOption = "No Upfront"
 )
 
 // Values returns all known values for SavingsPlanPaymentOption. Note that this can
@@ -102,12 +102,12 @@ type SavingsPlanRateFilterAttribute string
 
 // Enum values for SavingsPlanRateFilterAttribute
 const (
-	SavingsPlanRateFilterAttributeRegion              SavingsPlanRateFilterAttribute = "region"
-	SavingsPlanRateFilterAttributeInstance_family     SavingsPlanRateFilterAttribute = "instanceFamily"
-	SavingsPlanRateFilterAttributeInstance_type       SavingsPlanRateFilterAttribute = "instanceType"
-	SavingsPlanRateFilterAttributeProduct_description SavingsPlanRateFilterAttribute = "productDescription"
-	SavingsPlanRateFilterAttributeTenancy             SavingsPlanRateFilterAttribute = "tenancy"
-	SavingsPlanRateFilterAttributeProduct_id          SavingsPlanRateFilterAttribute = "productId"
+	SavingsPlanRateFilterAttributeRegion             SavingsPlanRateFilterAttribute = "region"
+	SavingsPlanRateFilterAttributeInstanceFamily     SavingsPlanRateFilterAttribute = "instanceFamily"
+	SavingsPlanRateFilterAttributeInstanceType       SavingsPlanRateFilterAttribute = "instanceType"
+	SavingsPlanRateFilterAttributeProductDescription SavingsPlanRateFilterAttribute = "productDescription"
+	SavingsPlanRateFilterAttributeTenancy            SavingsPlanRateFilterAttribute = "tenancy"
+	SavingsPlanRateFilterAttributeProductId          SavingsPlanRateFilterAttribute = "productId"
 )
 
 // Values returns all known values for SavingsPlanRateFilterAttribute. Note that
@@ -129,14 +129,14 @@ type SavingsPlanRateFilterName string
 
 // Enum values for SavingsPlanRateFilterName
 const (
-	SavingsPlanRateFilterNameRegion              SavingsPlanRateFilterName = "region"
-	SavingsPlanRateFilterNameInstance_type       SavingsPlanRateFilterName = "instanceType"
-	SavingsPlanRateFilterNameProduct_description SavingsPlanRateFilterName = "productDescription"
-	SavingsPlanRateFilterNameTenancy             SavingsPlanRateFilterName = "tenancy"
-	SavingsPlanRateFilterNameProduct_type        SavingsPlanRateFilterName = "productType"
-	SavingsPlanRateFilterNameService_code        SavingsPlanRateFilterName = "serviceCode"
-	SavingsPlanRateFilterNameUsage_type          SavingsPlanRateFilterName = "usageType"
-	SavingsPlanRateFilterNameOperation           SavingsPlanRateFilterName = "operation"
+	SavingsPlanRateFilterNameRegion             SavingsPlanRateFilterName = "region"
+	SavingsPlanRateFilterNameInstanceType       SavingsPlanRateFilterName = "instanceType"
+	SavingsPlanRateFilterNameProductDescription SavingsPlanRateFilterName = "productDescription"
+	SavingsPlanRateFilterNameTenancy            SavingsPlanRateFilterName = "tenancy"
+	SavingsPlanRateFilterNameProductType        SavingsPlanRateFilterName = "productType"
+	SavingsPlanRateFilterNameServiceCode        SavingsPlanRateFilterName = "serviceCode"
+	SavingsPlanRateFilterNameUsageType          SavingsPlanRateFilterName = "usageType"
+	SavingsPlanRateFilterNameOperation          SavingsPlanRateFilterName = "operation"
 )
 
 // Values returns all known values for SavingsPlanRateFilterName. Note that this
@@ -159,11 +159,11 @@ type SavingsPlanRatePropertyKey string
 
 // Enum values for SavingsPlanRatePropertyKey
 const (
-	SavingsPlanRatePropertyKeyRegion              SavingsPlanRatePropertyKey = "region"
-	SavingsPlanRatePropertyKeyInstance_type       SavingsPlanRatePropertyKey = "instanceType"
-	SavingsPlanRatePropertyKeyInstance_family     SavingsPlanRatePropertyKey = "instanceFamily"
-	SavingsPlanRatePropertyKeyProduct_description SavingsPlanRatePropertyKey = "productDescription"
-	SavingsPlanRatePropertyKeyTenancy             SavingsPlanRatePropertyKey = "tenancy"
+	SavingsPlanRatePropertyKeyRegion             SavingsPlanRatePropertyKey = "region"
+	SavingsPlanRatePropertyKeyInstanceType       SavingsPlanRatePropertyKey = "instanceType"
+	SavingsPlanRatePropertyKeyInstanceFamily     SavingsPlanRatePropertyKey = "instanceFamily"
+	SavingsPlanRatePropertyKeyProductDescription SavingsPlanRatePropertyKey = "productDescription"
+	SavingsPlanRatePropertyKeyTenancy            SavingsPlanRatePropertyKey = "tenancy"
 )
 
 // Values returns all known values for SavingsPlanRatePropertyKey. Note that this
@@ -203,9 +203,9 @@ type SavingsPlanRateUnit string
 
 // Enum values for SavingsPlanRateUnit
 const (
-	SavingsPlanRateUnitHours            SavingsPlanRateUnit = "Hrs"
-	SavingsPlanRateUnitLambda_gb_second SavingsPlanRateUnit = "Lambda-GB-Second"
-	SavingsPlanRateUnitRequest          SavingsPlanRateUnit = "Request"
+	SavingsPlanRateUnitHours          SavingsPlanRateUnit = "Hrs"
+	SavingsPlanRateUnitLambdaGbSecond SavingsPlanRateUnit = "Lambda-GB-Second"
+	SavingsPlanRateUnitRequest        SavingsPlanRateUnit = "Request"
 )
 
 // Values returns all known values for SavingsPlanRateUnit. Note that this can be
@@ -223,15 +223,15 @@ type SavingsPlansFilterName string
 
 // Enum values for SavingsPlansFilterName
 const (
-	SavingsPlansFilterNameRegion              SavingsPlansFilterName = "region"
-	SavingsPlansFilterNameEc2_instance_family SavingsPlansFilterName = "ec2-instance-family"
-	SavingsPlansFilterNameCommitment          SavingsPlansFilterName = "commitment"
-	SavingsPlansFilterNameUpfront             SavingsPlansFilterName = "upfront"
-	SavingsPlansFilterNameTerm                SavingsPlansFilterName = "term"
-	SavingsPlansFilterNameSavings_plan_type   SavingsPlansFilterName = "savings-plan-type"
-	SavingsPlansFilterNamePayment_option      SavingsPlansFilterName = "payment-option"
-	SavingsPlansFilterNameStart               SavingsPlansFilterName = "start"
-	SavingsPlansFilterNameEnd                 SavingsPlansFilterName = "end"
+	SavingsPlansFilterNameRegion            SavingsPlansFilterName = "region"
+	SavingsPlansFilterNameEc2InstanceFamily SavingsPlansFilterName = "ec2-instance-family"
+	SavingsPlansFilterNameCommitment        SavingsPlansFilterName = "commitment"
+	SavingsPlansFilterNameUpfront           SavingsPlansFilterName = "upfront"
+	SavingsPlansFilterNameTerm              SavingsPlansFilterName = "term"
+	SavingsPlansFilterNameSavingsPlanType   SavingsPlansFilterName = "savings-plan-type"
+	SavingsPlansFilterNamePaymentOption     SavingsPlansFilterName = "payment-option"
+	SavingsPlansFilterNameStart             SavingsPlansFilterName = "start"
+	SavingsPlansFilterNameEnd               SavingsPlansFilterName = "end"
 )
 
 // Values returns all known values for SavingsPlansFilterName. Note that this can
@@ -255,12 +255,12 @@ type SavingsPlanState string
 
 // Enum values for SavingsPlanState
 const (
-	SavingsPlanStatePayment_pending SavingsPlanState = "payment-pending"
-	SavingsPlanStatePayment_failed  SavingsPlanState = "payment-failed"
-	SavingsPlanStateActive          SavingsPlanState = "active"
-	SavingsPlanStateRetired         SavingsPlanState = "retired"
-	SavingsPlanStateQueued          SavingsPlanState = "queued"
-	SavingsPlanStateQueued_deleted  SavingsPlanState = "queued-deleted"
+	SavingsPlanStatePaymentPending SavingsPlanState = "payment-pending"
+	SavingsPlanStatePaymentFailed  SavingsPlanState = "payment-failed"
+	SavingsPlanStateActive         SavingsPlanState = "active"
+	SavingsPlanStateRetired        SavingsPlanState = "retired"
+	SavingsPlanStateQueued         SavingsPlanState = "queued"
+	SavingsPlanStateQueuedDeleted  SavingsPlanState = "queued-deleted"
 )
 
 // Values returns all known values for SavingsPlanState. Note that this can be
@@ -281,8 +281,8 @@ type SavingsPlanType string
 
 // Enum values for SavingsPlanType
 const (
-	SavingsPlanTypeCompute      SavingsPlanType = "Compute"
-	SavingsPlanTypeEc2_instance SavingsPlanType = "EC2Instance"
+	SavingsPlanTypeCompute     SavingsPlanType = "Compute"
+	SavingsPlanTypeEc2Instance SavingsPlanType = "EC2Instance"
 )
 
 // Values returns all known values for SavingsPlanType. Note that this can be

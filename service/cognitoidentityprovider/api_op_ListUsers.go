@@ -44,47 +44,46 @@ type ListUsersInput struct {
 	// Quotation marks within the filter string must be escaped using the backslash (\)
 	// character. For example, "family_name = \"Reddy\"".
 	//
-	//     * AttributeName: The
-	// name of the attribute to search for. You can only search for one attribute at a
-	// time.
+	// * AttributeName: The name of
+	// the attribute to search for. You can only search for one attribute at a time.
 	//
-	//     * Filter-Type: For an exact match, use =, for example, "given_name =
-	// \"Jon\"". For a prefix ("starts with") match, use ^=, for example, "given_name
-	// ^= \"Jon\"".
+	// *
+	// Filter-Type: For an exact match, use =, for example, "given_name = \"Jon\"". For
+	// a prefix ("starts with") match, use ^=, for example, "given_name ^= \"Jon\"".
 	//
-	//     * AttributeValue: The attribute value that must be matched for
-	// each user.
+	// *
+	// AttributeValue: The attribute value that must be matched for each user.
 	//
-	// If the filter string is empty, ListUsers returns all users in the
-	// user pool. You can only search for the following standard attributes:
+	// If the
+	// filter string is empty, ListUsers returns all users in the user pool. You can
+	// only search for the following standard attributes:
 	//
-	//     *
-	// username (case-sensitive)
+	// * username
+	// (case-sensitive)
 	//
-	//     * email
+	// * email
 	//
-	//     * phone_number
+	// * phone_number
 	//
-	//     * name
+	// * name
 	//
-	//     *
-	// given_name
+	// * given_name
 	//
-	//     * family_name
+	// *
+	// family_name
 	//
-	//     * preferred_username
+	// * preferred_username
 	//
-	//     *
-	// cognito:user_status (called Status in the Console) (case-insensitive)
+	// * cognito:user_status (called Status in the
+	// Console) (case-insensitive)
 	//
-	//     *
-	// status (called Enabled in the Console) (case-sensitive)
+	// * status (called Enabled in the Console)
+	// (case-sensitive)
 	//
-	//     * sub
+	// * sub
 	//
-	// Custom
-	// attributes are not searchable. For more information, see Searching for Users
-	// Using the ListUsers API
+	// Custom attributes are not searchable. For more
+	// information, see Searching for Users Using the ListUsers API
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-manage-user-accounts.html#cognito-user-pools-searching-for-users-using-listusers-api)
 	// and Examples of Using the ListUsers API
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-manage-user-accounts.html#cognito-user-pools-searching-for-users-listusers-api-examples)

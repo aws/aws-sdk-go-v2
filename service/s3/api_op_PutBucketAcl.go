@@ -17,31 +17,31 @@ import (
 // the ACL of a bucket, you must have WRITE_ACP permission. You can use one of the
 // following two ways to set a bucket's permissions:
 //
-//     * Specify the ACL in the
+// * Specify the ACL in the
 // request body
 //
-//     * Specify permissions using request headers
+// * Specify permissions using request headers
 //
-// You cannot
-// specify access permission using both the body and the request headers. Depending
-// on your application needs, you may choose to set the ACL on a bucket using
-// either the request body or the headers. For example, if you have an existing
-// application that updates a bucket ACL using the request body, then you can
-// continue to use that approach. Access Permissions
+// You cannot specify
+// access permission using both the body and the request headers. Depending on your
+// application needs, you may choose to set the ACL on a bucket using either the
+// request body or the headers. For example, if you have an existing application
+// that updates a bucket ACL using the request body, then you can continue to use
+// that approach. Access Permissions
 //
-// You can set access
-// permissions using one of the following methods:
+// You can set access permissions using one of
+// the following methods:
 //
-//     * Specify a canned ACL with
-// the x-amz-acl request header. Amazon S3 supports a set of predefined ACLs, known
-// as canned ACLs. Each canned ACL has a predefined set of grantees and
-// permissions. Specify the canned ACL name as the value of x-amz-acl. If you use
-// this header, you cannot use other access control-specific headers in your
-// request. For more information, see Canned ACL
+// * Specify a canned ACL with the x-amz-acl request
+// header. Amazon S3 supports a set of predefined ACLs, known as canned ACLs. Each
+// canned ACL has a predefined set of grantees and permissions. Specify the canned
+// ACL name as the value of x-amz-acl. If you use this header, you cannot use other
+// access control-specific headers in your request. For more information, see
+// Canned ACL
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL).
 //
-//
-// * Specify access permissions explicitly with the x-amz-grant-read,
+// *
+// Specify access permissions explicitly with the x-amz-grant-read,
 // x-amz-grant-read-acp, x-amz-grant-write-acp, and x-amz-grant-full-control
 // headers. When using these headers, you specify explicit access permissions and
 // grantees (AWS accounts or Amazon S3 groups) who will receive the permission. If
@@ -51,102 +51,99 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html). You specify
 // each grantee as a type=value pair, where the type is one of the following:
 //
+// * id
+// – if the value specified is the canonical user ID of an AWS account
 //
-// * id – if the value specified is the canonical user ID of an AWS account
+// * uri – if
+// you are granting permissions to a predefined group
 //
+// * emailAddress – if the
+// value specified is the email address of an AWS account Using email addresses to
+// specify a grantee is only supported in the following AWS Regions:
 //
-// * uri – if you are granting permissions to a predefined group
+// * US East (N.
+// Virginia)
 //
-//         *
-// emailAddress – if the value specified is the email address of an AWS account
-// Using email addresses to specify a grantee is only supported in the following
-// AWS Regions:
+// * US West (N. California)
 //
-//             * US East (N. Virginia)
+// * US West (Oregon)
 //
-//             * US West (N.
-// California)
-//
-//             * US West (Oregon)
-//
-//             * Asia Pacific
+// * Asia Pacific
 // (Singapore)
 //
-//             * Asia Pacific (Sydney)
+// * Asia Pacific (Sydney)
 //
-//             * Asia Pacific
-// (Tokyo)
+// * Asia Pacific (Tokyo)
 //
-//             * Europe (Ireland)
+// * Europe
+// (Ireland)
 //
-//             * South America (São
-// Paulo)
+// * South America (São Paulo)
 //
-//         For a list of all the Amazon S3 supported Regions and endpoints,
-// see Regions and Endpoints
+// For a list of all the Amazon S3
+// supported Regions and endpoints, see Regions and Endpoints
 // (https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the AWS
 // General Reference.
 //
-//     For example, the following x-amz-grant-write header
-// grants create, overwrite, and delete objects permission to LogDelivery group
-// predefined by Amazon S3 and two AWS accounts identified by their email
-// addresses. x-amz-grant-write:
-// uri="http://acs.amazonaws.com/groups/s3/LogDelivery", id="111122223333",
-// id="555566667777"
+// For example, the following x-amz-grant-write header grants
+// create, overwrite, and delete objects permission to LogDelivery group predefined
+// by Amazon S3 and two AWS accounts identified by their email addresses.
+// x-amz-grant-write: uri="http://acs.amazonaws.com/groups/s3/LogDelivery",
+// id="111122223333", id="555566667777"
 //
-// You can use either a canned ACL or specify access permissions
-// explicitly. You cannot do both. Grantee Values
+// You can use either a canned ACL or specify
+// access permissions explicitly. You cannot do both. Grantee Values
 //
-// You can specify the person
-// (grantee) to whom you're assigning access rights (using request elements) in the
-// following ways:
+// You can
+// specify the person (grantee) to whom you're assigning access rights (using
+// request elements) in the following ways:
 //
-//     * By the person's ID: <>ID<><>GranteesEmail<>  DisplayName
-// is optional and ignored in the request
+// * By the person's ID:
+// <>ID<><>GranteesEmail<>  DisplayName is optional and ignored in the request
 //
-//     * By URI:
-// <>http://acs.amazonaws.com/groups/global/AuthenticatedUsers<>
+// *
+// By URI: <>http://acs.amazonaws.com/groups/global/AuthenticatedUsers<>
 //
-//     * By Email
-// address: <>Grantees@email.com<>lt;/Grantee> The grantee is resolved to the
+// * By
+// Email address: <>Grantees@email.com<>lt;/Grantee> The grantee is resolved to the
 // CanonicalUser and, in a response to a GET Object acl request, appears as the
 // CanonicalUser. Using email addresses to specify a grantee is only supported in
 // the following AWS Regions:
 //
-//         * US East (N. Virginia)
+// * US East (N. Virginia)
 //
-//         * US West
-// (N. California)
+// * US West (N.
+// California)
 //
-//         * US West (Oregon)
+// * US West (Oregon)
 //
-//         * Asia Pacific
-// (Singapore)
+// * Asia Pacific (Singapore)
 //
-//         * Asia Pacific (Sydney)
+// * Asia Pacific
+// (Sydney)
 //
-//         * Asia Pacific (Tokyo)
-//
+// * Asia Pacific (Tokyo)
 //
 // * Europe (Ireland)
 //
-//         * South America (São Paulo)
+// * South America (São
+// Paulo)
 //
-//     For a list of all
-// the Amazon S3 supported Regions and endpoints, see Regions and Endpoints
+// For a list of all the Amazon S3 supported Regions and endpoints, see
+// Regions and Endpoints
 // (https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the AWS
 // General Reference.
 //
 // Related Resources
 //
-//     * CreateBucket
+// * CreateBucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
 //
-//     *
+// *
 // DeleteBucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html)
 //
-//     *
+// *
 // GetObjectAcl
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAcl.html)
 func (c *Client) PutBucketAcl(ctx context.Context, params *PutBucketAclInput, optFns ...func(*Options)) (*PutBucketAclOutput, error) {

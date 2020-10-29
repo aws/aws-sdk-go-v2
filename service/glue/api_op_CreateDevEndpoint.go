@@ -108,22 +108,22 @@ type CreateDevEndpointInput struct {
 	// The type of predefined worker that is allocated to the development endpoint.
 	// Accepts a value of Standard, G.1X, or G.2X.
 	//
-	//     * For the Standard worker type,
+	// * For the Standard worker type,
 	// each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors
 	// per worker.
 	//
-	//     * For the G.1X worker type, each worker maps to 1 DPU (4 vCPU,
-	// 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend
-	// this worker type for memory-intensive jobs.
+	// * For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16
+	// GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this
+	// worker type for memory-intensive jobs.
 	//
-	//     * For the G.2X worker type,
-	// each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1
-	// executor per worker. We recommend this worker type for memory-intensive
-	// jobs.
+	// * For the G.2X worker type, each worker
+	// maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor
+	// per worker. We recommend this worker type for memory-intensive jobs.
 	//
-	// Known issue: when a development endpoint is created with the
-	// G.2XWorkerType configuration, the Spark drivers for the development endpoint
-	// will run on 4 vCPU, 16 GB of memory, and a 64 GB disk.
+	// Known
+	// issue: when a development endpoint is created with the G.2XWorkerType
+	// configuration, the Spark drivers for the development endpoint will run on 4
+	// vCPU, 16 GB of memory, and a 64 GB disk.
 	WorkerType types.WorkerType
 }
 
@@ -131,12 +131,12 @@ type CreateDevEndpointOutput struct {
 
 	// The map of arguments used to configure this DevEndpoint. Valid arguments are:
 	//
+	// *
+	// "--enable-glue-datacatalog": ""
 	//
-	// * "--enable-glue-datacatalog": ""
+	// * "GLUE_PYTHON_VERSION": "3"
 	//
-	//     * "GLUE_PYTHON_VERSION": "3"
-	//
-	//     *
+	// *
 	// "GLUE_PYTHON_VERSION": "2"
 	//
 	// You can specify a version of Python support for

@@ -34,19 +34,19 @@ type DescribeDBSnapshotsInput struct {
 	// parameter can't be used in conjunction with DBSnapshotIdentifier. This parameter
 	// isn't case-sensitive. Constraints:
 	//
-	//     * If supplied, must match the identifier
-	// of an existing DBInstance.
+	// * If supplied, must match the identifier of
+	// an existing DBInstance.
 	DBInstanceIdentifier *string
 
 	// A specific DB snapshot identifier to describe. This parameter can't be used in
 	// conjunction with DBInstanceIdentifier. This value is stored as a lowercase
 	// string. Constraints:
 	//
-	//     * If supplied, must match the identifier of an
-	// existing DBSnapshot.
+	// * If supplied, must match the identifier of an existing
+	// DBSnapshot.
 	//
-	//     * If this identifier is for an automated snapshot, the
-	// SnapshotType parameter must also be specified.
+	// * If this identifier is for an automated snapshot, the SnapshotType
+	// parameter must also be specified.
 	DBSnapshotIdentifier *string
 
 	// A specific DB resource ID to describe.
@@ -55,19 +55,19 @@ type DescribeDBSnapshotsInput struct {
 	// A filter that specifies one or more DB snapshots to describe. Supported
 	// filters:
 	//
-	//     * db-instance-id - Accepts DB instance identifiers and DB instance
+	// * db-instance-id - Accepts DB instance identifiers and DB instance
 	// Amazon Resource Names (ARNs).
 	//
-	//     * db-snapshot-id - Accepts DB snapshot
+	// * db-snapshot-id - Accepts DB snapshot
 	// identifiers.
 	//
-	//     * dbi-resource-id - Accepts identifiers of source DB
-	// instances.
+	// * dbi-resource-id - Accepts identifiers of source DB instances.
 	//
-	//     * snapshot-type - Accepts types of DB snapshots.
+	// *
+	// snapshot-type - Accepts types of DB snapshots.
 	//
-	//     * engine -
-	// Accepts names of database engines.
+	// * engine - Accepts names of
+	// database engines.
 	Filters []*types.Filter
 
 	// A value that indicates whether to include manual DB cluster snapshots that are
@@ -97,21 +97,21 @@ type DescribeDBSnapshotsInput struct {
 	// The type of snapshots to be returned. You can specify one of the following
 	// values:
 	//
-	//     * automated - Return all DB snapshots that have been automatically
+	// * automated - Return all DB snapshots that have been automatically
 	// taken by Amazon RDS for my AWS account.
 	//
-	//     * manual - Return all DB snapshots
-	// that have been taken by my AWS account.
+	// * manual - Return all DB snapshots that
+	// have been taken by my AWS account.
 	//
-	//     * shared - Return all manual DB
-	// snapshots that have been shared to my AWS account.
+	// * shared - Return all manual DB snapshots
+	// that have been shared to my AWS account.
 	//
-	//     * public - Return all DB
-	// snapshots that have been marked as public.
+	// * public - Return all DB snapshots
+	// that have been marked as public.
 	//
-	//     * awsbackup - Return the DB
-	// snapshots managed by the AWS Backup service. For information about AWS Backup,
-	// see the  AWS Backup Developer Guide.
+	// * awsbackup - Return the DB snapshots managed
+	// by the AWS Backup service. For information about AWS Backup, see the  AWS Backup
+	// Developer Guide.
 	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html) The
 	// awsbackup type does not apply to Aurora.
 	//

@@ -135,31 +135,30 @@ type CapacityProvider struct {
 	// organize it. Each tag consists of a key and an optional value, both of which you
 	// define. The following basic restrictions apply to tags:
 	//
-	//     * Maximum number of
+	// * Maximum number of
 	// tags per resource - 50
 	//
-	//     * For each resource, each tag key must be unique,
-	// and each tag key can have only one value.
+	// * For each resource, each tag key must be unique, and
+	// each tag key can have only one value.
 	//
-	//     * Maximum key length - 128
-	// Unicode characters in UTF-8
+	// * Maximum key length - 128 Unicode
+	// characters in UTF-8
 	//
-	//     * Maximum value length - 256 Unicode characters
-	// in UTF-8
+	// * Maximum value length - 256 Unicode characters in UTF-8
 	//
-	//     * If your tagging schema is used across multiple services and
-	// resources, remember that other services may have restrictions on allowed
-	// characters. Generally allowed characters are: letters, numbers, and spaces
-	// representable in UTF-8, and the following characters: + - = . _ : / @.
+	// *
+	// If your tagging schema is used across multiple services and resources, remember
+	// that other services may have restrictions on allowed characters. Generally
+	// allowed characters are: letters, numbers, and spaces representable in UTF-8, and
+	// the following characters: + - = . _ : / @.
 	//
-	//     *
-	// Tag keys and values are case-sensitive.
+	// * Tag keys and values are
+	// case-sensitive.
 	//
-	//     * Do not use aws:, AWS:, or any
-	// upper or lowercase combination of such as a prefix for either keys or values as
-	// it is reserved for AWS use. You cannot edit or delete tag keys or values with
-	// this prefix. Tags with this prefix do not count against your tags per resource
-	// limit.
+	// * Do not use aws:, AWS:, or any upper or lowercase combination
+	// of such as a prefix for either keys or values as it is reserved for AWS use. You
+	// cannot edit or delete tag keys or values with this prefix. Tags with this prefix
+	// do not count against your tags per resource limit.
 	Tags []*Tag
 
 	// The update status of the capacity provider. The following are the possible
@@ -255,24 +254,24 @@ type Cluster struct {
 	// Additional information about your clusters that are separated by launch type,
 	// including:
 	//
-	//     * runningEC2TasksCount
+	// * runningEC2TasksCount
 	//
-	//     * RunningFargateTasksCount
+	// * RunningFargateTasksCount
 	//
-	//     *
+	// *
 	// pendingEC2TasksCount
 	//
-	//     * pendingFargateTasksCount
+	// * pendingFargateTasksCount
 	//
-	//     *
-	// activeEC2ServiceCount
+	// * activeEC2ServiceCount
 	//
-	//     * activeFargateServiceCount
+	// *
+	// activeFargateServiceCount
 	//
-	//     *
-	// drainingEC2ServiceCount
+	// * drainingEC2ServiceCount
 	//
-	//     * drainingFargateServiceCount
+	// *
+	// drainingFargateServiceCount
 	Statistics []*KeyValuePair
 
 	// The status of the cluster. The following are the possible states that will be
@@ -293,31 +292,30 @@ type Cluster struct {
 	// them. Each tag consists of a key and an optional value, both of which you
 	// define. The following basic restrictions apply to tags:
 	//
-	//     * Maximum number of
+	// * Maximum number of
 	// tags per resource - 50
 	//
-	//     * For each resource, each tag key must be unique,
-	// and each tag key can have only one value.
+	// * For each resource, each tag key must be unique, and
+	// each tag key can have only one value.
 	//
-	//     * Maximum key length - 128
-	// Unicode characters in UTF-8
+	// * Maximum key length - 128 Unicode
+	// characters in UTF-8
 	//
-	//     * Maximum value length - 256 Unicode characters
-	// in UTF-8
+	// * Maximum value length - 256 Unicode characters in UTF-8
 	//
-	//     * If your tagging schema is used across multiple services and
-	// resources, remember that other services may have restrictions on allowed
-	// characters. Generally allowed characters are: letters, numbers, and spaces
-	// representable in UTF-8, and the following characters: + - = . _ : / @.
+	// *
+	// If your tagging schema is used across multiple services and resources, remember
+	// that other services may have restrictions on allowed characters. Generally
+	// allowed characters are: letters, numbers, and spaces representable in UTF-8, and
+	// the following characters: + - = . _ : / @.
 	//
-	//     *
-	// Tag keys and values are case-sensitive.
+	// * Tag keys and values are
+	// case-sensitive.
 	//
-	//     * Do not use aws:, AWS:, or any
-	// upper or lowercase combination of such as a prefix for either keys or values as
-	// it is reserved for AWS use. You cannot edit or delete tag keys or values with
-	// this prefix. Tags with this prefix do not count against your tags per resource
-	// limit.
+	// * Do not use aws:, AWS:, or any upper or lowercase combination
+	// of such as a prefix for either keys or values as it is reserved for AWS use. You
+	// cannot edit or delete tag keys or values with this prefix. Tags with this prefix
+	// do not count against your tags per resource limit.
 	Tags []*Tag
 }
 
@@ -438,19 +436,18 @@ type ContainerDefinition struct {
 	// values below 2 in your container definitions. For CPU values below 2 (including
 	// null), the behavior varies based on your Amazon ECS container agent version:
 	//
+	// *
+	// Agent versions less than or equal to 1.1.0: Null and zero CPU values are passed
+	// to Docker as 0, which Docker then converts to 1,024 CPU shares. CPU values of 1
+	// are passed to Docker as 1, which the Linux kernel converts to two CPU shares.
 	//
-	// * Agent versions less than or equal to 1.1.0: Null and zero CPU values are
-	// passed to Docker as 0, which Docker then converts to 1,024 CPU shares. CPU
-	// values of 1 are passed to Docker as 1, which the Linux kernel converts to two
-	// CPU shares.
+	// *
+	// Agent versions greater than or equal to 1.2.0: Null, zero, and CPU values of 1
+	// are passed to Docker as 2.
 	//
-	//     * Agent versions greater than or equal to 1.2.0: Null, zero,
-	// and CPU values of 1 are passed to Docker as 2.
-	//
-	// On Windows container instances,
-	// the CPU limit is enforced as an absolute limit, or a quota. Windows containers
-	// only have access to the specified amount of CPU that is described in the task
-	// definition.
+	// On Windows container instances, the CPU limit is
+	// enforced as an absolute limit, or a quota. Windows containers only have access
+	// to the specified amount of CPU that is described in the task definition.
 	Cpu *int32
 
 	// The dependencies defined for container startup and shutdown. A container can
@@ -625,27 +622,27 @@ type ContainerDefinition struct {
 	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the IMAGE
 	// parameter of docker run (https://docs.docker.com/engine/reference/run/).
 	//
-	//     *
-	// When a new task starts, the Amazon ECS container agent pulls the latest version
-	// of the specified image and tag for the container to use. However, subsequent
+	// * When
+	// a new task starts, the Amazon ECS container agent pulls the latest version of
+	// the specified image and tag for the container to use. However, subsequent
 	// updates to a repository image are not propagated to already running tasks.
 	//
-	//
-	// * Images in Amazon ECR repositories can be specified by either using the full
+	// *
+	// Images in Amazon ECR repositories can be specified by either using the full
 	// registry/repository:tag or registry/repository@digest. For example,
 	// 012345678910.dkr.ecr..amazonaws.com/:latest or
 	// 012345678910.dkr.ecr..amazonaws.com/@sha256:94afd1f2e64d908bc90dbca0035a5b567EXAMPLE.
 	//
-	//
-	// * Images in official repositories on Docker Hub use a single name (for example,
+	// *
+	// Images in official repositories on Docker Hub use a single name (for example,
 	// ubuntu or mongo).
 	//
-	//     * Images in other repositories on Docker Hub are
-	// qualified with an organization name (for example, amazon/amazon-ecs-agent).
+	// * Images in other repositories on Docker Hub are qualified
+	// with an organization name (for example, amazon/amazon-ecs-agent).
 	//
-	//
-	// * Images in other online repositories are qualified further by a domain name
-	// (for example, quay.io/assemblyline/ubuntu).
+	// * Images in
+	// other online repositories are qualified further by a domain name (for example,
+	// quay.io/assemblyline/ubuntu).
 	Image *string
 
 	// When this parameter is true, this allows you to deploy containerized
@@ -920,21 +917,20 @@ type ContainerDefinition struct {
 	// use the following formats. If specifying a UID or GID, you must specify it as a
 	// positive integer.
 	//
-	//     * user
+	// * user
 	//
-	//     * user:group
+	// * user:group
 	//
-	//     * uid
+	// * uid
 	//
-	//     * uid:gid
+	// * uid:gid
 	//
-	//     *
-	// user:gid
+	// * user:gid
 	//
-	//     * uid:group
+	// *
+	// uid:group
 	//
-	// This parameter is not supported for Windows
-	// containers.
+	// This parameter is not supported for Windows containers.
 	User *string
 
 	// Data volumes to mount from another container. This parameter maps to VolumesFrom
@@ -975,20 +971,20 @@ type ContainerDependency struct {
 	// The dependency condition of the container. The following are the available
 	// conditions and their behavior:
 	//
-	//     * START - This condition emulates the
-	// behavior of links and volumes today. It validates that a dependent container is
-	// started before permitting other containers to start.
+	// * START - This condition emulates the behavior
+	// of links and volumes today. It validates that a dependent container is started
+	// before permitting other containers to start.
 	//
-	//     * COMPLETE - This
-	// condition validates that a dependent container runs to completion (exits) before
+	// * COMPLETE - This condition
+	// validates that a dependent container runs to completion (exits) before
 	// permitting other containers to start. This can be useful for nonessential
 	// containers that run a script and then exit.
 	//
-	//     * SUCCESS - This condition is
-	// the same as COMPLETE, but it also requires that the container exits with a zero
+	// * SUCCESS - This condition is the
+	// same as COMPLETE, but it also requires that the container exits with a zero
 	// status.
 	//
-	//     * HEALTHY - This condition validates that the dependent container
+	// * HEALTHY - This condition validates that the dependent container
 	// passes its Docker health check before permitting other containers to start. This
 	// requires that the dependent container has health checks configured. This
 	// condition is confirmed only at task startup.
@@ -1089,31 +1085,30 @@ type ContainerInstance struct {
 	// organize them. Each tag consists of a key and an optional value, both of which
 	// you define. The following basic restrictions apply to tags:
 	//
-	//     * Maximum
-	// number of tags per resource - 50
+	// * Maximum number of
+	// tags per resource - 50
 	//
-	//     * For each resource, each tag key must be
-	// unique, and each tag key can have only one value.
+	// * For each resource, each tag key must be unique, and
+	// each tag key can have only one value.
 	//
-	//     * Maximum key length -
-	// 128 Unicode characters in UTF-8
-	//
-	//     * Maximum value length - 256 Unicode
+	// * Maximum key length - 128 Unicode
 	// characters in UTF-8
 	//
-	//     * If your tagging schema is used across multiple
-	// services and resources, remember that other services may have restrictions on
-	// allowed characters. Generally allowed characters are: letters, numbers, and
-	// spaces representable in UTF-8, and the following characters: + - = . _ : / @.
+	// * Maximum value length - 256 Unicode characters in UTF-8
 	//
+	// *
+	// If your tagging schema is used across multiple services and resources, remember
+	// that other services may have restrictions on allowed characters. Generally
+	// allowed characters are: letters, numbers, and spaces representable in UTF-8, and
+	// the following characters: + - = . _ : / @.
 	//
-	// * Tag keys and values are case-sensitive.
+	// * Tag keys and values are
+	// case-sensitive.
 	//
-	//     * Do not use aws:, AWS:, or any
-	// upper or lowercase combination of such as a prefix for either keys or values as
-	// it is reserved for AWS use. You cannot edit or delete tag keys or values with
-	// this prefix. Tags with this prefix do not count against your tags per resource
-	// limit.
+	// * Do not use aws:, AWS:, or any upper or lowercase combination
+	// of such as a prefix for either keys or values as it is reserved for AWS use. You
+	// cannot edit or delete tag keys or values with this prefix. Tags with this prefix
+	// do not count against your tags per resource limit.
 	Tags []*Tag
 
 	// The version counter for the container instance. Every time a container instance
@@ -1518,49 +1513,48 @@ type FirelensConfiguration struct {
 // task details in the console. The following describes the possible healthStatus
 // values for a container:
 //
-//     * HEALTHY-The container health check has passed
+// * HEALTHY-The container health check has passed
 // successfully.
 //
-//     * UNHEALTHY-The container health check has failed.
+// * UNHEALTHY-The container health check has failed.
 //
-//     *
-// UNKNOWN-The container health check is being evaluated or there is no container
-// health check defined.
+// * UNKNOWN-The
+// container health check is being evaluated or there is no container health check
+// defined.
 //
-// The following describes the possible healthStatus values
-// for a task. The container health check status of nonessential containers do not
-// have an effect on the health status of a task.
+// The following describes the possible healthStatus values for a task.
+// The container health check status of nonessential containers do not have an
+// effect on the health status of a task.
 //
-//     * HEALTHY-All essential
-// containers within the task have passed their health checks.
+// * HEALTHY-All essential containers
+// within the task have passed their health checks.
 //
-//     * UNHEALTHY-One
-// or more essential containers have failed their health check.
+// * UNHEALTHY-One or more
+// essential containers have failed their health check.
 //
-//     * UNKNOWN-The
-// essential containers within the task are still having their health checks
-// evaluated or there are no container health checks defined.
+// * UNKNOWN-The essential
+// containers within the task are still having their health checks evaluated or
+// there are no container health checks defined.
 //
-// If a task is run
-// manually, and not as part of a service, the task will continue its lifecycle
-// regardless of its health status. For tasks that are part of a service, if the
-// task reports as unhealthy then the task will be stopped and the service
-// scheduler will replace it. The following are notes about container health check
-// support:
+// If a task is run manually, and
+// not as part of a service, the task will continue its lifecycle regardless of its
+// health status. For tasks that are part of a service, if the task reports as
+// unhealthy then the task will be stopped and the service scheduler will replace
+// it. The following are notes about container health check support:
 //
-//     * Container health checks require version 1.17.0 or greater of the
-// Amazon ECS container agent. For more information, see Updating the Amazon ECS
-// Container Agent
+// * Container
+// health checks require version 1.17.0 or greater of the Amazon ECS container
+// agent. For more information, see Updating the Amazon ECS Container Agent
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html).
 //
-//
-// * Container health checks are supported for Fargate tasks if you are using
+// *
+// Container health checks are supported for Fargate tasks if you are using
 // platform version 1.1.0 or greater. For more information, see AWS Fargate
 // Platform Versions
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html).
 //
-//
-// * Container health checks are not supported for tasks that are part of a service
+// *
+// Container health checks are not supported for tasks that are part of a service
 // that is configured to use a Classic Load Balancer.
 type HealthCheck struct {
 
@@ -1840,16 +1834,16 @@ type LoadBalancer struct {
 // documentation. The following should be noted when specifying a log configuration
 // for your containers:
 //
-//     * Amazon ECS currently supports a subset of the
-// logging drivers available to the Docker daemon (shown in the valid values
-// below). Additional log drivers may be available in future releases of the Amazon
-// ECS container agent.
+// * Amazon ECS currently supports a subset of the logging
+// drivers available to the Docker daemon (shown in the valid values below).
+// Additional log drivers may be available in future releases of the Amazon ECS
+// container agent.
 //
-//     * This parameter requires version 1.18 of the Docker
-// Remote API or greater on your container instance.
+// * This parameter requires version 1.18 of the Docker Remote
+// API or greater on your container instance.
 //
-//     * For tasks using the EC2
-// launch type, the Amazon ECS container agent running on a container instance must
+// * For tasks using the EC2 launch
+// type, the Amazon ECS container agent running on a container instance must
 // register the logging drivers available on that instance with the
 // ECS_AVAILABLE_LOGGING_DRIVERS environment variable before containers placed on
 // that instance can use these log configuration options. For more information, see
@@ -1857,8 +1851,8 @@ type LoadBalancer struct {
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html)
 // in the Amazon Elastic Container Service Developer Guide.
 //
-//     * For tasks using
-// the Fargate launch type, because you do not have access to the underlying
+// * For tasks using the
+// Fargate launch type, because you do not have access to the underlying
 // infrastructure your tasks are hosted on, any additional software needed will
 // have to be installed outside of the task. For example, the Fluentd output
 // aggregators or a remote host running Logstash to send Gelf logs to.
@@ -2119,35 +2113,34 @@ type ProxyConfiguration struct {
 	// The set of network configuration parameters to provide the Container Network
 	// Interface (CNI) plugin, specified as key-value pairs.
 	//
-	//     * IgnoredUID -
-	// (Required) The user ID (UID) of the proxy container as defined by the user
-	// parameter in a container definition. This is used to ensure the proxy ignores
-	// its own traffic. If IgnoredGID is specified, this field can be empty.
+	// * IgnoredUID - (Required)
+	// The user ID (UID) of the proxy container as defined by the user parameter in a
+	// container definition. This is used to ensure the proxy ignores its own traffic.
+	// If IgnoredGID is specified, this field can be empty.
 	//
-	//     *
-	// IgnoredGID - (Required) The group ID (GID) of the proxy container as defined by
-	// the user parameter in a container definition. This is used to ensure the proxy
-	// ignores its own traffic. If IgnoredUID is specified, this field can be empty.
+	// * IgnoredGID - (Required)
+	// The group ID (GID) of the proxy container as defined by the user parameter in a
+	// container definition. This is used to ensure the proxy ignores its own traffic.
+	// If IgnoredUID is specified, this field can be empty.
 	//
+	// * AppPorts - (Required)
+	// The list of ports that the application uses. Network traffic to these ports is
+	// forwarded to the ProxyIngressPort and ProxyEgressPort.
 	//
-	// * AppPorts - (Required) The list of ports that the application uses. Network
-	// traffic to these ports is forwarded to the ProxyIngressPort and
-	// ProxyEgressPort.
+	// * ProxyIngressPort -
+	// (Required) Specifies the port that incoming traffic to the AppPorts is directed
+	// to.
 	//
-	//     * ProxyIngressPort - (Required) Specifies the port that
-	// incoming traffic to the AppPorts is directed to.
+	// * ProxyEgressPort - (Required) Specifies the port that outgoing traffic
+	// from the AppPorts is directed to.
 	//
-	//     * ProxyEgressPort -
-	// (Required) Specifies the port that outgoing traffic from the AppPorts is
-	// directed to.
-	//
-	//     * EgressIgnoredPorts - (Required) The egress traffic going to
-	// the specified ports is ignored and not redirected to the ProxyEgressPort. It can
-	// be an empty list.
-	//
-	//     * EgressIgnoredIPs - (Required) The egress traffic going
-	// to the specified IP addresses is ignored and not redirected to the
+	// * EgressIgnoredPorts - (Required) The egress
+	// traffic going to the specified ports is ignored and not redirected to the
 	// ProxyEgressPort. It can be an empty list.
+	//
+	// * EgressIgnoredIPs - (Required) The
+	// egress traffic going to the specified IP addresses is ignored and not redirected
+	// to the ProxyEgressPort. It can be an empty list.
 	Properties []*KeyValuePair
 
 	// The proxy type. The only supported value is APPMESH.
@@ -2234,15 +2227,15 @@ type Scale struct {
 // An object representing the secret to expose to your container. Secrets can be
 // exposed to a container in the following ways:
 //
-//     * To inject sensitive data
-// into your containers as environment variables, use the secrets container
-// definition parameter.
-//
-//     * To reference sensitive information in the log
-// configuration of a container, use the secretOptions container definition
+// * To inject sensitive data into
+// your containers as environment variables, use the secrets container definition
 // parameter.
 //
-// For more information, see Specifying Sensitive Data
+// * To reference sensitive information in the log configuration of a
+// container, use the secretOptions container definition parameter.
+//
+// For more
+// information, see Specifying Sensitive Data
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html)
 // in the Amazon Elastic Container Service Developer Guide.
 type Secret struct {
@@ -2360,18 +2353,18 @@ type Service struct {
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html).
 	// There are two service scheduler strategies available:
 	//
-	//     * REPLICA-The replica
+	// * REPLICA-The replica
 	// scheduling strategy places and maintains the desired number of tasks across your
 	// cluster. By default, the service scheduler spreads tasks across Availability
 	// Zones. You can use task placement strategies and constraints to customize task
 	// placement decisions.
 	//
-	//     * DAEMON-The daemon scheduling strategy deploys
-	// exactly one task on each active container instance that meets all of the task
-	// placement constraints that you specify in your cluster. The service scheduler
-	// also evaluates the task placement constraints for running tasks and will stop
-	// tasks that do not meet the placement constraints. Fargate tasks do not support
-	// the DAEMON scheduling strategy.
+	// * DAEMON-The daemon scheduling strategy deploys exactly
+	// one task on each active container instance that meets all of the task placement
+	// constraints that you specify in your cluster. The service scheduler also
+	// evaluates the task placement constraints for running tasks and will stop tasks
+	// that do not meet the placement constraints. Fargate tasks do not support the
+	// DAEMON scheduling strategy.
 	SchedulingStrategy SchedulingStrategy
 
 	// The ARN that identifies the service. The ARN contains the arn:aws:ecs namespace,
@@ -2398,31 +2391,30 @@ type Service struct {
 	// them. Each tag consists of a key and an optional value, both of which you
 	// define. The following basic restrictions apply to tags:
 	//
-	//     * Maximum number of
+	// * Maximum number of
 	// tags per resource - 50
 	//
-	//     * For each resource, each tag key must be unique,
-	// and each tag key can have only one value.
+	// * For each resource, each tag key must be unique, and
+	// each tag key can have only one value.
 	//
-	//     * Maximum key length - 128
-	// Unicode characters in UTF-8
+	// * Maximum key length - 128 Unicode
+	// characters in UTF-8
 	//
-	//     * Maximum value length - 256 Unicode characters
-	// in UTF-8
+	// * Maximum value length - 256 Unicode characters in UTF-8
 	//
-	//     * If your tagging schema is used across multiple services and
-	// resources, remember that other services may have restrictions on allowed
-	// characters. Generally allowed characters are: letters, numbers, and spaces
-	// representable in UTF-8, and the following characters: + - = . _ : / @.
+	// *
+	// If your tagging schema is used across multiple services and resources, remember
+	// that other services may have restrictions on allowed characters. Generally
+	// allowed characters are: letters, numbers, and spaces representable in UTF-8, and
+	// the following characters: + - = . _ : / @.
 	//
-	//     *
-	// Tag keys and values are case-sensitive.
+	// * Tag keys and values are
+	// case-sensitive.
 	//
-	//     * Do not use aws:, AWS:, or any
-	// upper or lowercase combination of such as a prefix for either keys or values as
-	// it is reserved for AWS use. You cannot edit or delete tag keys or values with
-	// this prefix. Tags with this prefix do not count against your tags per resource
-	// limit.
+	// * Do not use aws:, AWS:, or any upper or lowercase combination
+	// of such as a prefix for either keys or values as it is reserved for AWS use. You
+	// cannot edit or delete tag keys or values with this prefix. Tags with this prefix
+	// do not count against your tags per resource limit.
 	Tags []*Tag
 
 	// The task definition to use for tasks in the service. This value is specified
@@ -2504,13 +2496,13 @@ type Setting struct {
 // for multiple containers in a single task that also uses either the awsvpc or
 // host network mode for the following reasons:
 //
-//     * For tasks that use the
-// awsvpc network mode, if you set systemControls for any container, it applies to
-// all containers in the task. If you set different systemControls for multiple
+// * For tasks that use the awsvpc
+// network mode, if you set systemControls for any container, it applies to all
+// containers in the task. If you set different systemControls for multiple
 // containers in a single task, the container that is started last determines which
 // systemControls take effect.
 //
-//     * For tasks that use the host network mode, the
+// * For tasks that use the host network mode, the
 // systemControls parameter applies to the container instance's kernel parameter as
 // well as that of all containers of any tasks running on that container instance.
 type SystemControl struct {
@@ -2526,31 +2518,30 @@ type SystemControl struct {
 // them. Each tag consists of a key and an optional value, both of which you
 // define. The following basic restrictions apply to tags:
 //
-//     * Maximum number of
+// * Maximum number of
 // tags per resource - 50
 //
-//     * For each resource, each tag key must be unique,
-// and each tag key can have only one value.
+// * For each resource, each tag key must be unique, and
+// each tag key can have only one value.
 //
-//     * Maximum key length - 128
-// Unicode characters in UTF-8
+// * Maximum key length - 128 Unicode
+// characters in UTF-8
 //
-//     * Maximum value length - 256 Unicode characters
-// in UTF-8
+// * Maximum value length - 256 Unicode characters in UTF-8
 //
-//     * If your tagging schema is used across multiple services and
-// resources, remember that other services may have restrictions on allowed
-// characters. Generally allowed characters are: letters, numbers, and spaces
-// representable in UTF-8, and the following characters: + - = . _ : / @.
+// *
+// If your tagging schema is used across multiple services and resources, remember
+// that other services may have restrictions on allowed characters. Generally
+// allowed characters are: letters, numbers, and spaces representable in UTF-8, and
+// the following characters: + - = . _ : / @.
 //
-//     *
-// Tag keys and values are case-sensitive.
+// * Tag keys and values are
+// case-sensitive.
 //
-//     * Do not use aws:, AWS:, or any
-// upper or lowercase combination of such as a prefix for either keys or values as
-// it is reserved for AWS use. You cannot edit or delete tag keys or values with
-// this prefix. Tags with this prefix do not count against your tags per resource
-// limit.
+// * Do not use aws:, AWS:, or any upper or lowercase combination
+// of such as a prefix for either keys or values as it is reserved for AWS use. You
+// cannot edit or delete tag keys or values with this prefix. Tags with this prefix
+// do not count against your tags per resource limit.
 type Tag struct {
 
 	// One part of a key-value pair that make up a tag. A key is a general label that
@@ -2603,22 +2594,22 @@ type Task struct {
 	// must use one of the following values, which determines your range of supported
 	// values for the memory parameter:
 	//
-	//     * 256 (.25 vCPU) - Available memory
-	// values: 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB)
+	// * 256 (.25 vCPU) - Available memory values:
+	// 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB)
 	//
-	//     * 512 (.5 vCPU) - Available
-	// memory values: 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB)
+	// * 512 (.5 vCPU) - Available memory
+	// values: 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB)
 	//
-	//     * 1024 (1
-	// vCPU) - Available memory values: 2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5
-	// GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB)
+	// * 1024 (1 vCPU) -
+	// Available memory values: 2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB),
+	// 6144 (6 GB), 7168 (7 GB), 8192 (8 GB)
 	//
-	//     * 2048 (2 vCPU) - Available
-	// memory values: Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1
-	// GB)
+	// * 2048 (2 vCPU) - Available memory
+	// values: Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB)
 	//
-	//     * 4096 (4 vCPU) - Available memory values: Between 8192 (8 GB) and
-	// 30720 (30 GB) in increments of 1024 (1 GB)
+	// *
+	// 4096 (4 vCPU) - Available memory values: Between 8192 (8 GB) and 30720 (30 GB)
+	// in increments of 1024 (1 GB)
 	Cpu *string
 
 	// The Unix timestamp for when the task was created (the task entered the PENDING
@@ -2669,21 +2660,21 @@ type Task struct {
 	// one of the following values, which determines your range of supported values for
 	// the cpu parameter:
 	//
-	//     * 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available cpu
+	// * 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available cpu
 	// values: 256 (.25 vCPU)
 	//
-	//     * 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB)
-	// - Available cpu values: 512 (.5 vCPU)
+	// * 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) -
+	// Available cpu values: 512 (.5 vCPU)
 	//
-	//     * 2048 (2 GB), 3072 (3 GB), 4096 (4
-	// GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB) - Available cpu values:
-	// 1024 (1 vCPU)
+	// * 2048 (2 GB), 3072 (3 GB), 4096 (4 GB),
+	// 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB) - Available cpu values: 1024
+	// (1 vCPU)
 	//
-	//     * Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024
-	// (1 GB) - Available cpu values: 2048 (2 vCPU)
+	// * Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB) -
+	// Available cpu values: 2048 (2 vCPU)
 	//
-	//     * Between 8192 (8 GB) and
-	// 30720 (30 GB) in increments of 1024 (1 GB) - Available cpu values: 4096 (4 vCPU)
+	// * Between 8192 (8 GB) and 30720 (30 GB) in
+	// increments of 1024 (1 GB) - Available cpu values: 4096 (4 vCPU)
 	Memory *string
 
 	// One or more container overrides.
@@ -2731,31 +2722,30 @@ type Task struct {
 	// them. Each tag consists of a key and an optional value, both of which you
 	// define. The following basic restrictions apply to tags:
 	//
-	//     * Maximum number of
+	// * Maximum number of
 	// tags per resource - 50
 	//
-	//     * For each resource, each tag key must be unique,
-	// and each tag key can have only one value.
+	// * For each resource, each tag key must be unique, and
+	// each tag key can have only one value.
 	//
-	//     * Maximum key length - 128
-	// Unicode characters in UTF-8
+	// * Maximum key length - 128 Unicode
+	// characters in UTF-8
 	//
-	//     * Maximum value length - 256 Unicode characters
-	// in UTF-8
+	// * Maximum value length - 256 Unicode characters in UTF-8
 	//
-	//     * If your tagging schema is used across multiple services and
-	// resources, remember that other services may have restrictions on allowed
-	// characters. Generally allowed characters are: letters, numbers, and spaces
-	// representable in UTF-8, and the following characters: + - = . _ : / @.
+	// *
+	// If your tagging schema is used across multiple services and resources, remember
+	// that other services may have restrictions on allowed characters. Generally
+	// allowed characters are: letters, numbers, and spaces representable in UTF-8, and
+	// the following characters: + - = . _ : / @.
 	//
-	//     *
-	// Tag keys and values are case-sensitive.
+	// * Tag keys and values are
+	// case-sensitive.
 	//
-	//     * Do not use aws:, AWS:, or any
-	// upper or lowercase combination of such as a prefix for either keys or values as
-	// it is reserved for AWS use. You cannot edit or delete tag keys or values with
-	// this prefix. Tags with this prefix do not count against your tags per resource
-	// limit.
+	// * Do not use aws:, AWS:, or any upper or lowercase combination
+	// of such as a prefix for either keys or values as it is reserved for AWS use. You
+	// cannot edit or delete tag keys or values with this prefix. Tags with this prefix
+	// do not count against your tags per resource limit.
 	Tags []*Tag
 
 	// The Amazon Resource Name (ARN) of the task.
@@ -2797,23 +2787,22 @@ type TaskDefinition struct {
 	// launch type, this field is required and you must use one of the following
 	// values, which determines your range of valid values for the memory parameter:
 	//
-	//
-	// * 256 (.25 vCPU) - Available memory values: 512 (0.5 GB), 1024 (1 GB), 2048 (2
+	// *
+	// 256 (.25 vCPU) - Available memory values: 512 (0.5 GB), 1024 (1 GB), 2048 (2
 	// GB)
 	//
-	//     * 512 (.5 vCPU) - Available memory values: 1024 (1 GB), 2048 (2 GB),
-	// 3072 (3 GB), 4096 (4 GB)
+	// * 512 (.5 vCPU) - Available memory values: 1024 (1 GB), 2048 (2 GB), 3072
+	// (3 GB), 4096 (4 GB)
 	//
-	//     * 1024 (1 vCPU) - Available memory values: 2048 (2
-	// GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8
-	// GB)
+	// * 1024 (1 vCPU) - Available memory values: 2048 (2 GB),
+	// 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB)
 	//
-	//     * 2048 (2 vCPU) - Available memory values: Between 4096 (4 GB) and
-	// 16384 (16 GB) in increments of 1024 (1 GB)
+	// *
+	// 2048 (2 vCPU) - Available memory values: Between 4096 (4 GB) and 16384 (16 GB)
+	// in increments of 1024 (1 GB)
 	//
-	//     * 4096 (4 vCPU) - Available
-	// memory values: Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1
-	// GB)
+	// * 4096 (4 vCPU) - Available memory values: Between
+	// 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB)
 	Cpu *string
 
 	// The Amazon Resource Name (ARN) of the task execution role that grants the Amazon
@@ -2854,12 +2843,12 @@ type TaskDefinition struct {
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	//
-	//     * For tasks that
-	// use the host IPC mode, IPC namespace related systemControls are not supported.
+	// * For tasks that use
+	// the host IPC mode, IPC namespace related systemControls are not supported.
 	//
-	//
-	// * For tasks that use the task IPC mode, IPC namespace related systemControls
-	// will apply to all containers within a task.
+	// *
+	// For tasks that use the task IPC mode, IPC namespace related systemControls will
+	// apply to all containers within a task.
 	//
 	// This parameter is not supported for
 	// Windows containers or tasks using the Fargate launch type.
@@ -2872,21 +2861,21 @@ type TaskDefinition struct {
 	// following values, which determines your range of valid values for the cpu
 	// parameter:
 	//
-	//     * 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available cpu values:
-	// 256 (.25 vCPU)
+	// * 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available cpu values: 256
+	// (.25 vCPU)
 	//
-	//     * 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) -
-	// Available cpu values: 512 (.5 vCPU)
+	// * 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) - Available cpu
+	// values: 512 (.5 vCPU)
 	//
-	//     * 2048 (2 GB), 3072 (3 GB), 4096 (4
-	// GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB) - Available cpu values:
-	// 1024 (1 vCPU)
+	// * 2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB),
+	// 6144 (6 GB), 7168 (7 GB), 8192 (8 GB) - Available cpu values: 1024 (1 vCPU)
 	//
-	//     * Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024
-	// (1 GB) - Available cpu values: 2048 (2 vCPU)
+	// *
+	// Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB) - Available
+	// cpu values: 2048 (2 vCPU)
 	//
-	//     * Between 8192 (8 GB) and
-	// 30720 (30 GB) in increments of 1024 (1 GB) - Available cpu values: 4096 (4 vCPU)
+	// * Between 8192 (8 GB) and 30720 (30 GB) in increments
+	// of 1024 (1 GB) - Available cpu values: 4096 (4 vCPU)
 	Memory *string
 
 	// The Docker networking mode to use for the containers in the task. The valid
@@ -3111,20 +3100,19 @@ type TaskSet struct {
 	// state. If the following conditions are met, the task set will be in
 	// STEADY_STATE:
 	//
-	//     * The task runningCount is equal to the
-	// computedDesiredCount.
+	// * The task runningCount is equal to the computedDesiredCount.
 	//
-	//     * The pendingCount is 0.
+	// *
+	// The pendingCount is 0.
 	//
-	//     * There are no tasks
-	// running on container instances in the DRAINING status.
+	// * There are no tasks running on container instances in
+	// the DRAINING status.
 	//
-	//     * All tasks are
-	// reporting a healthy status from the load balancers, service discovery, and
-	// container health checks.
+	// * All tasks are reporting a healthy status from the load
+	// balancers, service discovery, and container health checks.
 	//
-	// If any of those conditions are not met, the stability
-	// status returns STABILIZING.
+	// If any of those
+	// conditions are not met, the stability status returns STABILIZING.
 	StabilityStatus StabilityStatus
 
 	// The Unix timestamp for when the task set stability status was retrieved.
@@ -3145,31 +3133,30 @@ type TaskSet struct {
 	// them. Each tag consists of a key and an optional value, both of which you
 	// define. The following basic restrictions apply to tags:
 	//
-	//     * Maximum number of
+	// * Maximum number of
 	// tags per resource - 50
 	//
-	//     * For each resource, each tag key must be unique,
-	// and each tag key can have only one value.
+	// * For each resource, each tag key must be unique, and
+	// each tag key can have only one value.
 	//
-	//     * Maximum key length - 128
-	// Unicode characters in UTF-8
+	// * Maximum key length - 128 Unicode
+	// characters in UTF-8
 	//
-	//     * Maximum value length - 256 Unicode characters
-	// in UTF-8
+	// * Maximum value length - 256 Unicode characters in UTF-8
 	//
-	//     * If your tagging schema is used across multiple services and
-	// resources, remember that other services may have restrictions on allowed
-	// characters. Generally allowed characters are: letters, numbers, and spaces
-	// representable in UTF-8, and the following characters: + - = . _ : / @.
+	// *
+	// If your tagging schema is used across multiple services and resources, remember
+	// that other services may have restrictions on allowed characters. Generally
+	// allowed characters are: letters, numbers, and spaces representable in UTF-8, and
+	// the following characters: + - = . _ : / @.
 	//
-	//     *
-	// Tag keys and values are case-sensitive.
+	// * Tag keys and values are
+	// case-sensitive.
 	//
-	//     * Do not use aws:, AWS:, or any
-	// upper or lowercase combination of such as a prefix for either keys or values as
-	// it is reserved for AWS use. You cannot edit or delete tag keys or values with
-	// this prefix. Tags with this prefix do not count against your tags per resource
-	// limit.
+	// * Do not use aws:, AWS:, or any upper or lowercase combination
+	// of such as a prefix for either keys or values as it is reserved for AWS use. You
+	// cannot edit or delete tag keys or values with this prefix. Tags with this prefix
+	// do not count against your tags per resource limit.
 	Tags []*Tag
 
 	// The task definition the task set is using.

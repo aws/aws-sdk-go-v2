@@ -45,22 +45,22 @@ type CreateServerInput struct {
 	// in the AWS Certificate Manager User Guide. Certificates with the following
 	// cryptographic algorithms and key sizes are supported:
 	//
-	//     * 2048-bit RSA
+	// * 2048-bit RSA
 	// (RSA_2048)
 	//
-	//     * 4096-bit RSA (RSA_4096)
+	// * 4096-bit RSA (RSA_4096)
 	//
-	//     * Elliptic Prime Curve 256 bit
+	// * Elliptic Prime Curve 256 bit
 	// (EC_prime256v1)
 	//
-	//     * Elliptic Prime Curve 384 bit (EC_secp384r1)
+	// * Elliptic Prime Curve 384 bit (EC_secp384r1)
 	//
-	//     *
-	// Elliptic Prime Curve 521 bit (EC_secp521r1)
+	// * Elliptic Prime
+	// Curve 521 bit (EC_secp521r1)
 	//
-	// The certificate must be a valid
-	// SSL/TLS X.509 version 3 certificate with FQDN or IP address specified and
-	// information about the issuer.
+	// The certificate must be a valid SSL/TLS X.509
+	// version 3 certificate with FQDN or IP address specified and information about
+	// the issuer.
 	Certificate *string
 
 	// The virtual private cloud (VPC) endpoint settings that are configured for your
@@ -111,16 +111,16 @@ type CreateServerInput struct {
 	// protocol client can connect to your server's endpoint. The available protocols
 	// are:
 	//
-	//     * SFTP (Secure Shell (SSH) File Transfer Protocol): File transfer over
+	// * SFTP (Secure Shell (SSH) File Transfer Protocol): File transfer over
 	// SSH
 	//
-	//     * FTPS (File Transfer Protocol Secure): File transfer with TLS
+	// * FTPS (File Transfer Protocol Secure): File transfer with TLS
 	// encryption
 	//
-	//     * FTP (File Transfer Protocol): Unencrypted file transfer
+	// * FTP (File Transfer Protocol): Unencrypted file transfer
 	//
-	// If
-	// you select FTPS, you must choose a certificate stored in AWS Certificate Manager
+	// If you
+	// select FTPS, you must choose a certificate stored in AWS Certificate Manager
 	// (ACM) which will be used to identify your server when clients connect to it over
 	// FTPS. If Protocol includes either FTP or FTPS, then the EndpointType must be VPC
 	// and the IdentityProviderType must be API_GATEWAY. If Protocol includes FTP, then

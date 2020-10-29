@@ -120,9 +120,9 @@ type NamespaceType string
 
 // Enum values for NamespaceType
 const (
-	NamespaceTypeDns_public  NamespaceType = "DNS_PUBLIC"
-	NamespaceTypeDns_private NamespaceType = "DNS_PRIVATE"
-	NamespaceTypeHttp        NamespaceType = "HTTP"
+	NamespaceTypeDnsPublic  NamespaceType = "DNS_PUBLIC"
+	NamespaceTypeDnsPrivate NamespaceType = "DNS_PRIVATE"
+	NamespaceTypeHttp       NamespaceType = "HTTP"
 )
 
 // Values returns all known values for NamespaceType. Note that this can be
@@ -140,11 +140,11 @@ type OperationFilterName string
 
 // Enum values for OperationFilterName
 const (
-	OperationFilterNameNamespace_id OperationFilterName = "NAMESPACE_ID"
-	OperationFilterNameService_id   OperationFilterName = "SERVICE_ID"
-	OperationFilterNameStatus       OperationFilterName = "STATUS"
-	OperationFilterNameType         OperationFilterName = "TYPE"
-	OperationFilterNameUpdate_date  OperationFilterName = "UPDATE_DATE"
+	OperationFilterNameNamespaceId OperationFilterName = "NAMESPACE_ID"
+	OperationFilterNameServiceId   OperationFilterName = "SERVICE_ID"
+	OperationFilterNameStatus      OperationFilterName = "STATUS"
+	OperationFilterNameType        OperationFilterName = "TYPE"
+	OperationFilterNameUpdateDate  OperationFilterName = "UPDATE_DATE"
 )
 
 // Values returns all known values for OperationFilterName. Note that this can be
@@ -206,11 +206,11 @@ type OperationType string
 
 // Enum values for OperationType
 const (
-	OperationTypeCreate_namespace    OperationType = "CREATE_NAMESPACE"
-	OperationTypeDelete_namespace    OperationType = "DELETE_NAMESPACE"
-	OperationTypeUpdate_service      OperationType = "UPDATE_SERVICE"
-	OperationTypeRegister_instance   OperationType = "REGISTER_INSTANCE"
-	OperationTypeDeregister_instance OperationType = "DEREGISTER_INSTANCE"
+	OperationTypeCreateNamespace    OperationType = "CREATE_NAMESPACE"
+	OperationTypeDeleteNamespace    OperationType = "DELETE_NAMESPACE"
+	OperationTypeUpdateService      OperationType = "UPDATE_SERVICE"
+	OperationTypeRegisterInstance   OperationType = "REGISTER_INSTANCE"
+	OperationTypeDeregisterInstance OperationType = "DEREGISTER_INSTANCE"
 )
 
 // Values returns all known values for OperationType. Note that this can be
@@ -270,7 +270,7 @@ type ServiceFilterName string
 
 // Enum values for ServiceFilterName
 const (
-	ServiceFilterNameNamespace_id ServiceFilterName = "NAMESPACE_ID"
+	ServiceFilterNameNamespaceId ServiceFilterName = "NAMESPACE_ID"
 )
 
 // Values returns all known values for ServiceFilterName. Note that this can be

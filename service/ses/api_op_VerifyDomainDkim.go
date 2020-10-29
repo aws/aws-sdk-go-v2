@@ -27,12 +27,12 @@ import (
 // email that you send from the domain is authenticated using DKIM. To create the
 // CNAME records for DKIM authentication, use the following values:
 //
-//     * Name:
+// * Name:
 // token._domainkey.example.com
 //
-//     * Type: CNAME
+// * Type: CNAME
 //
-//     * Value:
+// * Value:
 // token.dkim.amazonses.com
 //
 // In the preceding example, replace token with one of

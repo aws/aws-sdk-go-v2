@@ -54,19 +54,19 @@ type SetPermissionInput struct {
 	// The user's permission level, which must be set to one of the following strings.
 	// You cannot set your own permissions level.
 	//
-	//     * deny
+	// * deny
 	//
-	//     * show
+	// * show
 	//
-	//     *
-	// deploy
+	// * deploy
 	//
-	//     * manage
+	// *
+	// manage
 	//
-	//     * iam_only
+	// * iam_only
 	//
-	// For more information about the permissions
-	// associated with these levels, see Managing User Permissions
+	// For more information about the permissions associated with
+	// these levels, see Managing User Permissions
 	// (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 	Level *string
 }

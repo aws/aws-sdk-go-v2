@@ -19,16 +19,16 @@ import (
 // text string. To encrypt and store binary data as part of the version of a
 // secret, you must use either the AWS CLI or one of the AWS SDKs.
 //
-//     * If a
-// version with a VersionId with the same value as the ClientRequestToken parameter
-// already exists, the operation results in an error. You cannot modify an existing
+// * If a version
+// with a VersionId with the same value as the ClientRequestToken parameter already
+// exists, the operation results in an error. You cannot modify an existing
 // version, you can only create a new version.
 //
-//     * If you include SecretString
-// or SecretBinary to create a new secret version, Secrets Manager automatically
+// * If you include SecretString or
+// SecretBinary to create a new secret version, Secrets Manager automatically
 // attaches the staging label AWSCURRENT to the new version.
 //
-//     * If you call an
+// * If you call an
 // operation to encrypt or decrypt the SecretString or SecretBinary for a secret in
 // the same account as the calling user and that secret doesn't specify a AWS KMS
 // encryption key, Secrets Manager uses the account's default AWS managed customer
@@ -39,13 +39,13 @@ import (
 // the account's AWS-managed CMK, it can result in a one-time significant delay in
 // returning the result.
 //
-//     * If the secret resides in a different AWS account
-// from the credentials calling an API that requires encryption or decryption of
-// the secret value then you must create and use a custom AWS KMS CMK because you
-// can't access the default CMK for the account using credentials from a different
-// AWS account. Store the ARN of the CMK in the secret when you create the secret
-// or when you update it by including it in the KMSKeyId. If you call an API that
-// must encrypt or decrypt SecretString or SecretBinary using credentials from a
+// * If the secret resides in a different AWS account from
+// the credentials calling an API that requires encryption or decryption of the
+// secret value then you must create and use a custom AWS KMS CMK because you can't
+// access the default CMK for the account using credentials from a different AWS
+// account. Store the ARN of the CMK in the secret when you create the secret or
+// when you update it by including it in the KMSKeyId. If you call an API that must
+// encrypt or decrypt SecretString or SecretBinary using credentials from a
 // different account then the AWS KMS key policy must grant cross-account access to
 // that other account's user or role for both the kms:GenerateDataKey and
 // kms:Decrypt operations.
@@ -53,30 +53,29 @@ import (
 // Minimum permissions To run this command, you must have
 // the following permissions:
 //
-//     * secretsmanager:UpdateSecret
+// * secretsmanager:UpdateSecret
 //
-//     *
-// kms:GenerateDataKey - needed only if you use a custom AWS KMS key to encrypt the
-// secret. You do not need this permission to use the account's AWS managed CMK for
-// Secrets Manager.
+// * kms:GenerateDataKey
+// - needed only if you use a custom AWS KMS key to encrypt the secret. You do not
+// need this permission to use the account's AWS managed CMK for Secrets
+// Manager.
 //
-//     * kms:Decrypt - needed only if you use a custom AWS KMS
-// key to encrypt the secret. You do not need this permission to use the account's
-// AWS managed CMK for Secrets Manager.
+// * kms:Decrypt - needed only if you use a custom AWS KMS key to encrypt
+// the secret. You do not need this permission to use the account's AWS managed CMK
+// for Secrets Manager.
 //
 // Related operations
 //
-//     * To create a new
-// secret, use CreateSecret.
+// * To create a new secret, use
+// CreateSecret.
 //
-//     * To add only a new version to an existing
-// secret, use PutSecretValue.
+// * To add only a new version to an existing secret, use
+// PutSecretValue.
 //
-//     * To get the details for a secret, use
-// DescribeSecret.
+// * To get the details for a secret, use DescribeSecret.
 //
-//     * To list the versions contained in a secret, use
-// ListSecretVersionIds.
+// * To
+// list the versions contained in a secret, use ListSecretVersionIds.
 func (c *Client) UpdateSecret(ctx context.Context, params *UpdateSecretInput, optFns ...func(*Options)) (*UpdateSecretOutput, error) {
 	if params == nil {
 		params = &UpdateSecretInput{}
@@ -130,21 +129,21 @@ type UpdateSecretInput struct {
 	// prevent the accidental creation of duplicate versions if there are failures and
 	// retries during the Lambda rotation function's processing.
 	//
-	//     * If the
+	// * If the
 	// ClientRequestToken value isn't already associated with a version of the secret
 	// then a new version of the secret is created.
 	//
-	//     * If a version with this value
+	// * If a version with this value
 	// already exists and that version's SecretString and SecretBinary values are the
 	// same as those in the request then the request is ignored (the operation is
 	// idempotent).
 	//
-	//     * If a version with this value already exists and that
-	// version's SecretString and SecretBinary values are different from the request
-	// then an error occurs because you cannot modify an existing secret value.
+	// * If a version with this value already exists and that version's
+	// SecretString and SecretBinary values are different from the request then an
+	// error occurs because you cannot modify an existing secret value.
 	//
-	// This
-	// value becomes the VersionId of the new version.
+	// This value
+	// becomes the VersionId of the new version.
 	ClientRequestToken *string
 
 	// (Optional) Specifies an updated user-provided description of the secret.

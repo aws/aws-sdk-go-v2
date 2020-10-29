@@ -6,17 +6,17 @@ type ComparisonOperator string
 
 // Enum values for ComparisonOperator
 const (
-	ComparisonOperatorEq           ComparisonOperator = "EQ"
-	ComparisonOperatorNe           ComparisonOperator = "NE"
-	ComparisonOperatorLe           ComparisonOperator = "LE"
-	ComparisonOperatorLt           ComparisonOperator = "LT"
-	ComparisonOperatorGe           ComparisonOperator = "GE"
-	ComparisonOperatorGt           ComparisonOperator = "GT"
-	ComparisonOperatorContains     ComparisonOperator = "CONTAINS"
-	ComparisonOperatorNot_contains ComparisonOperator = "NOT_CONTAINS"
-	ComparisonOperatorBegins_with  ComparisonOperator = "BEGINS_WITH"
-	ComparisonOperatorIn           ComparisonOperator = "IN"
-	ComparisonOperatorBetween      ComparisonOperator = "BETWEEN"
+	ComparisonOperatorEq          ComparisonOperator = "EQ"
+	ComparisonOperatorNe          ComparisonOperator = "NE"
+	ComparisonOperatorLe          ComparisonOperator = "LE"
+	ComparisonOperatorLt          ComparisonOperator = "LT"
+	ComparisonOperatorGe          ComparisonOperator = "GE"
+	ComparisonOperatorGt          ComparisonOperator = "GT"
+	ComparisonOperatorContains    ComparisonOperator = "CONTAINS"
+	ComparisonOperatorNotContains ComparisonOperator = "NOT_CONTAINS"
+	ComparisonOperatorBeginsWith  ComparisonOperator = "BEGINS_WITH"
+	ComparisonOperatorIn          ComparisonOperator = "IN"
+	ComparisonOperatorBetween     ComparisonOperator = "BETWEEN"
 )
 
 // Values returns all known values for ComparisonOperator. Note that this can be
@@ -42,10 +42,10 @@ type DataLakeResourceType string
 
 // Enum values for DataLakeResourceType
 const (
-	DataLakeResourceTypeCatalog       DataLakeResourceType = "CATALOG"
-	DataLakeResourceTypeDatabase      DataLakeResourceType = "DATABASE"
-	DataLakeResourceTypeTable         DataLakeResourceType = "TABLE"
-	DataLakeResourceTypeData_location DataLakeResourceType = "DATA_LOCATION"
+	DataLakeResourceTypeCatalog      DataLakeResourceType = "CATALOG"
+	DataLakeResourceTypeDatabase     DataLakeResourceType = "DATABASE"
+	DataLakeResourceTypeTable        DataLakeResourceType = "TABLE"
+	DataLakeResourceTypeDataLocation DataLakeResourceType = "DATA_LOCATION"
 )
 
 // Values returns all known values for DataLakeResourceType. Note that this can be
@@ -64,9 +64,9 @@ type FieldNameString string
 
 // Enum values for FieldNameString
 const (
-	FieldNameStringResource_arn  FieldNameString = "RESOURCE_ARN"
-	FieldNameStringRole_arn      FieldNameString = "ROLE_ARN"
-	FieldNameStringLast_modified FieldNameString = "LAST_MODIFIED"
+	FieldNameStringResourceArn  FieldNameString = "RESOURCE_ARN"
+	FieldNameStringRoleArn      FieldNameString = "ROLE_ARN"
+	FieldNameStringLastModified FieldNameString = "LAST_MODIFIED"
 )
 
 // Values returns all known values for FieldNameString. Note that this can be
@@ -84,16 +84,16 @@ type Permission string
 
 // Enum values for Permission
 const (
-	PermissionAll                  Permission = "ALL"
-	PermissionSelect               Permission = "SELECT"
-	PermissionAlter                Permission = "ALTER"
-	PermissionDrop                 Permission = "DROP"
-	PermissionDelete               Permission = "DELETE"
-	PermissionInsert               Permission = "INSERT"
-	PermissionDescribe             Permission = "DESCRIBE"
-	PermissionCreate_database      Permission = "CREATE_DATABASE"
-	PermissionCreate_table         Permission = "CREATE_TABLE"
-	PermissionData_location_access Permission = "DATA_LOCATION_ACCESS"
+	PermissionAll                Permission = "ALL"
+	PermissionSelect             Permission = "SELECT"
+	PermissionAlter              Permission = "ALTER"
+	PermissionDrop               Permission = "DROP"
+	PermissionDelete             Permission = "DELETE"
+	PermissionInsert             Permission = "INSERT"
+	PermissionDescribe           Permission = "DESCRIBE"
+	PermissionCreateDatabase     Permission = "CREATE_DATABASE"
+	PermissionCreateTable        Permission = "CREATE_TABLE"
+	PermissionDataLocationAccess Permission = "DATA_LOCATION_ACCESS"
 )
 
 // Values returns all known values for Permission. Note that this can be expanded

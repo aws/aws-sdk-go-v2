@@ -21,38 +21,38 @@ import (
 // it is a good idea to check the rule set syntax using ValidateMatchmakingRuleSet
 // before creating a new rule set. Learn more
 //
-//     * Build a Rule Set
+// * Build a Rule Set
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-rulesets.html)
 //
-//
-// * Design a Matchmaker
+// *
+// Design a Matchmaker
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-configuration.html)
 //
-//
-// * Matchmaking with FlexMatch
+// *
+// Matchmaking with FlexMatch
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-intro.html)
 //
 // Related
 // operations
 //
-//     * CreateMatchmakingConfiguration
+// * CreateMatchmakingConfiguration
 //
-//     *
+// *
 // DescribeMatchmakingConfigurations
 //
-//     * UpdateMatchmakingConfiguration
+// * UpdateMatchmakingConfiguration
 //
-//     *
+// *
 // DeleteMatchmakingConfiguration
 //
-//     * CreateMatchmakingRuleSet
+// * CreateMatchmakingRuleSet
 //
-//     *
+// *
 // DescribeMatchmakingRuleSets
 //
-//     * ValidateMatchmakingRuleSet
+// * ValidateMatchmakingRuleSet
 //
-//     *
+// *
 // DeleteMatchmakingRuleSet
 func (c *Client) CreateMatchmakingRuleSet(ctx context.Context, params *CreateMatchmakingRuleSetInput, optFns ...func(*Options)) (*CreateMatchmakingRuleSetOutput, error) {
 	if params == nil {

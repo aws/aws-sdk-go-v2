@@ -38,14 +38,14 @@ import (
 // or groups that should be granted specific permissions on the bucket. There are
 // two ways to grant the appropriate permissions using the request headers.
 //
-//     *
+// *
 // Specify a canned ACL using the x-amz-acl request header. Amazon S3 supports a
 // set of predefined ACLs, known as canned ACLs. Each canned ACL has a predefined
 // set of grantees and permissions. For more information, see Canned ACL
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL).
 //
-//
-// * Specify access permissions explicitly using the x-amz-grant-read,
+// *
+// Specify access permissions explicitly using the x-amz-grant-read,
 // x-amz-grant-write, x-amz-grant-read-acp, x-amz-grant-write-acp, and
 // x-amz-grant-full-control headers. These headers map to the set of permissions
 // Amazon S3 supports in an ACL. For more information, see Access control list
@@ -53,55 +53,52 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html). You specify
 // each grantee as a type=value pair, where the type is one of the following:
 //
+// * id
+// – if the value specified is the canonical user ID of an AWS account
 //
-// * id – if the value specified is the canonical user ID of an AWS account
+// * uri – if
+// you are granting permissions to a predefined group
 //
+// * emailAddress – if the
+// value specified is the email address of an AWS account Using email addresses to
+// specify a grantee is only supported in the following AWS Regions:
 //
-// * uri – if you are granting permissions to a predefined group
+// * US East (N.
+// Virginia)
 //
-//         *
-// emailAddress – if the value specified is the email address of an AWS account
-// Using email addresses to specify a grantee is only supported in the following
-// AWS Regions:
+// * US West (N. California)
 //
-//             * US East (N. Virginia)
+// * US West (Oregon)
 //
-//             * US West (N.
-// California)
-//
-//             * US West (Oregon)
-//
-//             * Asia Pacific
+// * Asia Pacific
 // (Singapore)
 //
-//             * Asia Pacific (Sydney)
+// * Asia Pacific (Sydney)
 //
-//             * Asia Pacific
-// (Tokyo)
+// * Asia Pacific (Tokyo)
 //
-//             * Europe (Ireland)
+// * Europe
+// (Ireland)
 //
-//             * South America (São
-// Paulo)
+// * South America (São Paulo)
 //
-//         For a list of all the Amazon S3 supported Regions and endpoints,
-// see Regions and Endpoints
+// For a list of all the Amazon S3
+// supported Regions and endpoints, see Regions and Endpoints
 // (https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the AWS
 // General Reference.
 //
-//     For example, the following x-amz-grant-read header
-// grants the AWS accounts identified by account IDs permissions to read object
-// data and its metadata: x-amz-grant-read: id="11112222333",
-// id="444455556666"
+// For example, the following x-amz-grant-read header grants
+// the AWS accounts identified by account IDs permissions to read object data and
+// its metadata: x-amz-grant-read: id="11112222333", id="444455556666"
 //
-// You can use either a canned ACL or specify access permissions
-// explicitly. You cannot do both. The following operations are related to
-// CreateBucket:
+// You can use
+// either a canned ACL or specify access permissions explicitly. You cannot do
+// both. The following operations are related to CreateBucket:
 //
-//     * PutObject
+// * PutObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
 //
-//     *
+// *
 // DeleteBucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html)
 func (c *Client) CreateBucket(ctx context.Context, params *CreateBucketInput, optFns ...func(*Options)) (*CreateBucketOutput, error) {

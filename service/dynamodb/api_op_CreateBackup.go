@@ -26,15 +26,14 @@ import (
 // does not support causal consistency. Along with data, the following are also
 // included on the backups:
 //
-//     * Global secondary indexes (GSIs)
+// * Global secondary indexes (GSIs)
 //
-//     * Local
-// secondary indexes (LSIs)
+// * Local secondary
+// indexes (LSIs)
 //
-//     * Streams
+// * Streams
 //
-//     * Provisioned read and write
-// capacity
+// * Provisioned read and write capacity
 func (c *Client) CreateBackup(ctx context.Context, params *CreateBackupInput, optFns ...func(*Options)) (*CreateBackupOutput, error) {
 	if params == nil {
 		params = &CreateBackupInput{}

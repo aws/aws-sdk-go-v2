@@ -38,15 +38,15 @@ type DescribeLocalGatewayRouteTablesInput struct {
 
 	// One or more filters.
 	//
-	//     * local-gateway-id - The ID of a local gateway.
+	// * local-gateway-id - The ID of a local gateway.
 	//
-	//     *
+	// *
 	// local-gateway-route-table-id - The ID of a local gateway route table.
 	//
-	//     *
+	// *
 	// outpost-arn - The Amazon Resource Name (ARN) of the Outpost.
 	//
-	//     * state - The
+	// * state - The
 	// state of the local gateway route table.
 	Filters []*types.Filter
 

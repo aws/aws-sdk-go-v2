@@ -6,7 +6,7 @@ type ArrayJobDependency string
 
 // Enum values for ArrayJobDependency
 const (
-	ArrayJobDependencyN_to_n     ArrayJobDependency = "N_TO_N"
+	ArrayJobDependencyNToN       ArrayJobDependency = "N_TO_N"
 	ArrayJobDependencySequential ArrayJobDependency = "SEQUENTIAL"
 )
 
@@ -86,9 +86,9 @@ type CRAllocationStrategy string
 
 // Enum values for CRAllocationStrategy
 const (
-	CRAllocationStrategyBest_fit                CRAllocationStrategy = "BEST_FIT"
-	CRAllocationStrategyBest_fit_progressive    CRAllocationStrategy = "BEST_FIT_PROGRESSIVE"
-	CRAllocationStrategySpot_capacity_optimized CRAllocationStrategy = "SPOT_CAPACITY_OPTIMIZED"
+	CRAllocationStrategyBestFit               CRAllocationStrategy = "BEST_FIT"
+	CRAllocationStrategyBestFitProgressive    CRAllocationStrategy = "BEST_FIT_PROGRESSIVE"
+	CRAllocationStrategySpotCapacityOptimized CRAllocationStrategy = "SPOT_CAPACITY_OPTIMIZED"
 )
 
 // Values returns all known values for CRAllocationStrategy. Note that this can be
@@ -234,13 +234,13 @@ type LogDriver string
 
 // Enum values for LogDriver
 const (
-	LogDriverJson_file LogDriver = "json-file"
-	LogDriverSyslog    LogDriver = "syslog"
-	LogDriverJournald  LogDriver = "journald"
-	LogDriverGelf      LogDriver = "gelf"
-	LogDriverFluentd   LogDriver = "fluentd"
-	LogDriverAwslogs   LogDriver = "awslogs"
-	LogDriverSplunk    LogDriver = "splunk"
+	LogDriverJsonFile LogDriver = "json-file"
+	LogDriverSyslog   LogDriver = "syslog"
+	LogDriverJournald LogDriver = "journald"
+	LogDriverGelf     LogDriver = "gelf"
+	LogDriverFluentd  LogDriver = "fluentd"
+	LogDriverAwslogs  LogDriver = "awslogs"
+	LogDriverSplunk   LogDriver = "splunk"
 )
 
 // Values returns all known values for LogDriver. Note that this can be expanded in

@@ -17,11 +17,11 @@ import (
 // that were created in a specific time range. You can also filter on one of the
 // following:
 //
-//     * ExperimentName
+// * ExperimentName
 //
-//     * SourceArn
+// * SourceArn
 //
-//     * TrialName
+// * TrialName
 func (c *Client) ListTrialComponents(ctx context.Context, params *ListTrialComponentsInput, optFns ...func(*Options)) (*ListTrialComponentsOutput, error) {
 	if params == nil {
 		params = &ListTrialComponentsInput{}

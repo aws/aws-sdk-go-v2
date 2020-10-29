@@ -14,11 +14,11 @@ import (
 // Returns the endpoint of a repository for a specific package format. A repository
 // has one endpoint for each package format:
 //
-//     * npm
+// * npm
 //
-//     * pypi
+// * pypi
 //
-//     * maven
+// * maven
 func (c *Client) GetRepositoryEndpoint(ctx context.Context, params *GetRepositoryEndpointInput, optFns ...func(*Options)) (*GetRepositoryEndpointOutput, error) {
 	if params == nil {
 		params = &GetRepositoryEndpointInput{}
@@ -44,11 +44,11 @@ type GetRepositoryEndpointInput struct {
 	// Returns which endpoint of a repository to return. A repository has one endpoint
 	// for each package format:
 	//
-	//     * npm
+	// * npm
 	//
-	//     * pypi
+	// * pypi
 	//
-	//     * maven
+	// * maven
 	//
 	// This member is required.
 	Format types.PackageFormat

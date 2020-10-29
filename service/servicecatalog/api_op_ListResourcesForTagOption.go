@@ -43,9 +43,9 @@ type ListResourcesForTagOptionInput struct {
 
 	// The resource type.
 	//
-	//     * Portfolio
+	// * Portfolio
 	//
-	//     * Product
+	// * Product
 	ResourceType *string
 }
 

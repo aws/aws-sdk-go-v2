@@ -84,9 +84,9 @@ type CapacityProviderUpdateStatus string
 
 // Enum values for CapacityProviderUpdateStatus
 const (
-	CapacityProviderUpdateStatusDelete_in_progress CapacityProviderUpdateStatus = "DELETE_IN_PROGRESS"
-	CapacityProviderUpdateStatusDelete_complete    CapacityProviderUpdateStatus = "DELETE_COMPLETE"
-	CapacityProviderUpdateStatusDelete_failed      CapacityProviderUpdateStatus = "DELETE_FAILED"
+	CapacityProviderUpdateStatusDeleteInProgress CapacityProviderUpdateStatus = "DELETE_IN_PROGRESS"
+	CapacityProviderUpdateStatusDeleteComplete   CapacityProviderUpdateStatus = "DELETE_COMPLETE"
+	CapacityProviderUpdateStatusDeleteFailed     CapacityProviderUpdateStatus = "DELETE_FAILED"
 )
 
 // Values returns all known values for CapacityProviderUpdateStatus. Note that this
@@ -126,7 +126,7 @@ type ClusterSettingName string
 
 // Enum values for ClusterSettingName
 const (
-	ClusterSettingNameContainer_insights ClusterSettingName = "containerInsights"
+	ClusterSettingNameContainerInsights ClusterSettingName = "containerInsights"
 )
 
 // Values returns all known values for ClusterSettingName. Note that this can be
@@ -216,11 +216,11 @@ type ContainerInstanceStatus string
 
 // Enum values for ContainerInstanceStatus
 const (
-	ContainerInstanceStatusActive              ContainerInstanceStatus = "ACTIVE"
-	ContainerInstanceStatusDraining            ContainerInstanceStatus = "DRAINING"
-	ContainerInstanceStatusRegistering         ContainerInstanceStatus = "REGISTERING"
-	ContainerInstanceStatusDeregistering       ContainerInstanceStatus = "DEREGISTERING"
-	ContainerInstanceStatusRegistration_failed ContainerInstanceStatus = "REGISTRATION_FAILED"
+	ContainerInstanceStatusActive             ContainerInstanceStatus = "ACTIVE"
+	ContainerInstanceStatusDraining           ContainerInstanceStatus = "DRAINING"
+	ContainerInstanceStatusRegistering        ContainerInstanceStatus = "REGISTERING"
+	ContainerInstanceStatusDeregistering      ContainerInstanceStatus = "DEREGISTERING"
+	ContainerInstanceStatusRegistrationFailed ContainerInstanceStatus = "REGISTRATION_FAILED"
 )
 
 // Values returns all known values for ContainerInstanceStatus. Note that this can
@@ -240,9 +240,9 @@ type DeploymentControllerType string
 
 // Enum values for DeploymentControllerType
 const (
-	DeploymentControllerTypeEcs         DeploymentControllerType = "ECS"
-	DeploymentControllerTypeCode_deploy DeploymentControllerType = "CODE_DEPLOY"
-	DeploymentControllerTypeExternal    DeploymentControllerType = "EXTERNAL"
+	DeploymentControllerTypeEcs        DeploymentControllerType = "ECS"
+	DeploymentControllerTypeCodeDeploy DeploymentControllerType = "CODE_DEPLOY"
+	DeploymentControllerTypeExternal   DeploymentControllerType = "EXTERNAL"
 )
 
 // Values returns all known values for DeploymentControllerType. Note that this can
@@ -428,7 +428,7 @@ type LogDriver string
 
 // Enum values for LogDriver
 const (
-	LogDriverJson_file   LogDriver = "json-file"
+	LogDriverJsonFile    LogDriver = "json-file"
 	LogDriverSyslog      LogDriver = "syslog"
 	LogDriverJournald    LogDriver = "journald"
 	LogDriverGelf        LogDriver = "gelf"
@@ -534,8 +534,8 @@ type PlacementConstraintType string
 
 // Enum values for PlacementConstraintType
 const (
-	PlacementConstraintTypeDistinct_instance PlacementConstraintType = "distinctInstance"
-	PlacementConstraintTypeMember_of         PlacementConstraintType = "memberOf"
+	PlacementConstraintTypeDistinctInstance PlacementConstraintType = "distinctInstance"
+	PlacementConstraintTypeMemberOf         PlacementConstraintType = "memberOf"
 )
 
 // Values returns all known values for PlacementConstraintType. Note that this can
@@ -588,8 +588,8 @@ type PropagateTags string
 
 // Enum values for PropagateTags
 const (
-	PropagateTagsTask_definition PropagateTags = "TASK_DEFINITION"
-	PropagateTagsService         PropagateTags = "SERVICE"
+	PropagateTagsTaskDefinition PropagateTags = "TASK_DEFINITION"
+	PropagateTagsService        PropagateTags = "SERVICE"
 )
 
 // Values returns all known values for PropagateTags. Note that this can be
@@ -622,8 +622,8 @@ type ResourceType string
 
 // Enum values for ResourceType
 const (
-	ResourceTypeGpu                   ResourceType = "GPU"
-	ResourceTypeInference_accelerator ResourceType = "InferenceAccelerator"
+	ResourceTypeGpu                  ResourceType = "GPU"
+	ResourceTypeInferenceAccelerator ResourceType = "InferenceAccelerator"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -708,11 +708,11 @@ type SettingName string
 
 // Enum values for SettingName
 const (
-	SettingNameService_long_arn_format            SettingName = "serviceLongArnFormat"
-	SettingNameTask_long_arn_format               SettingName = "taskLongArnFormat"
-	SettingNameContainer_instance_long_arn_format SettingName = "containerInstanceLongArnFormat"
-	SettingNameAwsvpc_trunking                    SettingName = "awsvpcTrunking"
-	SettingNameContainer_insights                 SettingName = "containerInsights"
+	SettingNameServiceLongArnFormat           SettingName = "serviceLongArnFormat"
+	SettingNameTaskLongArnFormat              SettingName = "taskLongArnFormat"
+	SettingNameContainerInstanceLongArnFormat SettingName = "containerInstanceLongArnFormat"
+	SettingNameAwsvpcTrunking                 SettingName = "awsvpcTrunking"
+	SettingNameContainerInsights              SettingName = "containerInsights"
 )
 
 // Values returns all known values for SettingName. Note that this can be expanded
@@ -750,8 +750,8 @@ type StabilityStatus string
 
 // Enum values for StabilityStatus
 const (
-	StabilityStatusSteady_state StabilityStatus = "STEADY_STATE"
-	StabilityStatusStabilizing  StabilityStatus = "STABILIZING"
+	StabilityStatusSteadyState StabilityStatus = "STEADY_STATE"
+	StabilityStatusStabilizing StabilityStatus = "STABILIZING"
 )
 
 // Values returns all known values for StabilityStatus. Note that this can be
@@ -768,7 +768,7 @@ type TargetType string
 
 // Enum values for TargetType
 const (
-	TargetTypeContainer_instance TargetType = "container-instance"
+	TargetTypeContainerInstance TargetType = "container-instance"
 )
 
 // Values returns all known values for TargetType. Note that this can be expanded
@@ -820,7 +820,7 @@ type TaskDefinitionPlacementConstraintType string
 
 // Enum values for TaskDefinitionPlacementConstraintType
 const (
-	TaskDefinitionPlacementConstraintTypeMember_of TaskDefinitionPlacementConstraintType = "memberOf"
+	TaskDefinitionPlacementConstraintTypeMemberOf TaskDefinitionPlacementConstraintType = "memberOf"
 )
 
 // Values returns all known values for TaskDefinitionPlacementConstraintType. Note
@@ -887,9 +887,9 @@ type TaskStopCode string
 
 // Enum values for TaskStopCode
 const (
-	TaskStopCodeTask_failed_to_start       TaskStopCode = "TaskFailedToStart"
-	TaskStopCodeEssential_container_exited TaskStopCode = "EssentialContainerExited"
-	TaskStopCodeUser_initiated             TaskStopCode = "UserInitiated"
+	TaskStopCodeTaskFailedToStart        TaskStopCode = "TaskFailedToStart"
+	TaskStopCodeEssentialContainerExited TaskStopCode = "EssentialContainerExited"
+	TaskStopCodeUserInitiated            TaskStopCode = "UserInitiated"
 )
 
 // Values returns all known values for TaskStopCode. Note that this can be expanded

@@ -90,10 +90,10 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // whose age exceeds this limit are subject to removal (trimming) from the stream.
 // You might receive a TrimmedDataAccessException if:
 //
-//     * You request a shard
+// * You request a shard
 // iterator with a sequence number older than the trim point (24 hours).
 //
-//     * You
+// * You
 // obtain a shard iterator, but before you use the iterator in a GetRecords
 // request, a stream record in the shard exceeds the 24 hour period and is trimmed.
 // This causes the iterator to access a record that no longer exists.

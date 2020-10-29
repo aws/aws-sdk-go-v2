@@ -19,46 +19,45 @@ type Block struct {
 	// The type of text item that's recognized. In operations for text detection, the
 	// following types are returned:
 	//
-	//     * PAGE - Contains a list of the LINE Block
+	// * PAGE - Contains a list of the LINE Block
 	// objects that are detected on a document page.
 	//
-	//     * WORD - A word detected on a
+	// * WORD - A word detected on a
 	// document page. A word is one or more ISO basic Latin script characters that
 	// aren't separated by spaces.
 	//
-	//     * LINE - A string of tab-delimited, contiguous
+	// * LINE - A string of tab-delimited, contiguous
 	// words that are detected on a document page.
 	//
 	// In text analysis operations, the
 	// following types are returned:
 	//
-	//     * PAGE - Contains a list of child Block
-	// objects that are detected on a document page.
+	// * PAGE - Contains a list of child Block objects
+	// that are detected on a document page.
 	//
-	//     * KEY_VALUE_SET - Stores the
-	// KEY and VALUE Block objects for linked text that's detected on a document page.
-	// Use the EntityType field to determine if a KEY_VALUE_SET object is a KEY Block
-	// object or a VALUE Block object.
+	// * KEY_VALUE_SET - Stores the KEY and
+	// VALUE Block objects for linked text that's detected on a document page. Use the
+	// EntityType field to determine if a KEY_VALUE_SET object is a KEY Block object or
+	// a VALUE Block object.
 	//
-	//     * WORD - A word that's detected on a
-	// document page. A word is one or more ISO basic Latin script characters that
-	// aren't separated by spaces.
+	// * WORD - A word that's detected on a document page. A
+	// word is one or more ISO basic Latin script characters that aren't separated by
+	// spaces.
 	//
-	//     * LINE - A string of tab-delimited, contiguous
-	// words that are detected on a document page.
+	// * LINE - A string of tab-delimited, contiguous words that are detected
+	// on a document page.
 	//
-	//     * TABLE - A table that's
-	// detected on a document page. A table is grid-based information with two or more
-	// rows or columns, with a cell span of one row and one column each.
+	// * TABLE - A table that's detected on a document page. A
+	// table is grid-based information with two or more rows or columns, with a cell
+	// span of one row and one column each.
 	//
-	//     * CELL -
-	// A cell within a detected table. The cell is the parent of the block that
-	// contains the text in the cell.
+	// * CELL - A cell within a detected table.
+	// The cell is the parent of the block that contains the text in the cell.
 	//
-	//     * SELECTION_ELEMENT - A selection element
-	// such as an option button (radio button) or a check box that's detected on a
-	// document page. Use the value of SelectionStatus to determine the status of the
-	// selection element.
+	// *
+	// SELECTION_ELEMENT - A selection element such as an option button (radio button)
+	// or a check box that's detected on a document page. Use the value of
+	// SelectionStatus to determine the status of the selection element.
 	BlockType BlockType
 
 	// The column in which a table cell appears. The first column position is 1.
@@ -76,13 +75,13 @@ type Block struct {
 
 	// The type of entity. The following can be returned:
 	//
-	//     * KEY - An identifier
-	// for a field on the document.
+	// * KEY - An identifier for a
+	// field on the document.
 	//
-	//     * VALUE - The field text.
+	// * VALUE - The field text.
 	//
-	// EntityTypes isn't
-	// returned by DetectDocumentText and GetDocumentTextDetection.
+	// EntityTypes isn't returned by
+	// DetectDocumentText and GetDocumentTextDetection.
 	EntityTypes []EntityType
 
 	// The location of the recognized text on the image. It includes an axis-aligned,
@@ -108,10 +107,10 @@ type Block struct {
 	// when the current block has no child blocks. The list size can be the
 	// following:
 	//
-	//     * 0 - The block has no child blocks.
+	// * 0 - The block has no child blocks.
 	//
-	//     * 1 - The block has
-	// child blocks.
+	// * 1 - The block has child
+	// blocks.
 	Relationships []*Relationship
 
 	// The row in which a table cell is located. The first row position is 1. RowIndex

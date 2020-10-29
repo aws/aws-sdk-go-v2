@@ -840,30 +840,30 @@ type PipelineExecution struct {
 
 	// The status of the pipeline execution.
 	//
-	//     * InProgress: The pipeline execution
-	// is currently running.
+	// * InProgress: The pipeline execution is
+	// currently running.
 	//
-	//     * Stopped: The pipeline execution was manually
-	// stopped. For more information, see Stopped Executions
+	// * Stopped: The pipeline execution was manually stopped. For
+	// more information, see Stopped Executions
 	// (https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped).
 	//
-	//
-	// * Stopping: The pipeline execution received a request to be manually stopped.
+	// *
+	// Stopping: The pipeline execution received a request to be manually stopped.
 	// Depending on the selected stop mode, the execution is either completing or
 	// abandoning in-progress actions. For more information, see Stopped Executions
 	// (https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped).
 	//
+	// *
+	// Succeeded: The pipeline execution was completed successfully.
 	//
-	// * Succeeded: The pipeline execution was completed successfully.
-	//
-	//     *
-	// Superseded: While this pipeline execution was waiting for the next stage to be
-	// completed, a newer pipeline execution advanced and continued through the
-	// pipeline instead. For more information, see Superseded Executions
+	// * Superseded:
+	// While this pipeline execution was waiting for the next stage to be completed, a
+	// newer pipeline execution advanced and continued through the pipeline instead.
+	// For more information, see Superseded Executions
 	// (https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded).
 	//
-	//
-	// * Failed: The pipeline execution was not completed successfully.
+	// *
+	// Failed: The pipeline execution was not completed successfully.
 	Status PipelineExecutionStatus
 }
 
@@ -885,30 +885,30 @@ type PipelineExecutionSummary struct {
 
 	// The status of the pipeline execution.
 	//
-	//     * InProgress: The pipeline execution
-	// is currently running.
+	// * InProgress: The pipeline execution is
+	// currently running.
 	//
-	//     * Stopped: The pipeline execution was manually
-	// stopped. For more information, see Stopped Executions
+	// * Stopped: The pipeline execution was manually stopped. For
+	// more information, see Stopped Executions
 	// (https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped).
 	//
-	//
-	// * Stopping: The pipeline execution received a request to be manually stopped.
+	// *
+	// Stopping: The pipeline execution received a request to be manually stopped.
 	// Depending on the selected stop mode, the execution is either completing or
 	// abandoning in-progress actions. For more information, see Stopped Executions
 	// (https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped).
 	//
+	// *
+	// Succeeded: The pipeline execution was completed successfully.
 	//
-	// * Succeeded: The pipeline execution was completed successfully.
-	//
-	//     *
-	// Superseded: While this pipeline execution was waiting for the next stage to be
-	// completed, a newer pipeline execution advanced and continued through the
-	// pipeline instead. For more information, see Superseded Executions
+	// * Superseded:
+	// While this pipeline execution was waiting for the next stage to be completed, a
+	// newer pipeline execution advanced and continued through the pipeline instead.
+	// For more information, see Superseded Executions
 	// (https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded).
 	//
-	//
-	// * Failed: The pipeline execution was not completed successfully.
+	// *
+	// Failed: The pipeline execution was not completed successfully.
 	Status PipelineExecutionStatus
 
 	// The interaction that stopped a pipeline execution.
@@ -1177,17 +1177,17 @@ type WebhookDefinition struct {
 
 	// Supported options are GITHUB_HMAC, IP, and UNAUTHENTICATED.
 	//
-	//     * For
-	// information about the authentication scheme implemented by GITHUB_HMAC, see
-	// Securing your webhooks (https://developer.github.com/webhooks/securing/) on the
-	// GitHub Developer website.
+	// * For information
+	// about the authentication scheme implemented by GITHUB_HMAC, see Securing your
+	// webhooks (https://developer.github.com/webhooks/securing/) on the GitHub
+	// Developer website.
 	//
-	//     * IP rejects webhooks trigger requests unless
-	// they originate from an IP address in the IP range whitelisted in the
-	// authentication configuration.
+	// * IP rejects webhooks trigger requests unless they originate
+	// from an IP address in the IP range whitelisted in the authentication
+	// configuration.
 	//
-	//     * UNAUTHENTICATED accepts all webhook trigger
-	// requests regardless of origin.
+	// * UNAUTHENTICATED accepts all webhook trigger requests
+	// regardless of origin.
 	//
 	// This member is required.
 	Authentication WebhookAuthenticationType

@@ -17,15 +17,15 @@ import (
 // AWS accounts for which you have explicit create volume permissions. The create
 // volume permissions fall into the following categories:
 //
-//     * public: The owner
-// of the snapshot granted create volume permissions for the snapshot to the all
+// * public: The owner of
+// the snapshot granted create volume permissions for the snapshot to the all
 // group. All AWS accounts have create volume permissions for these snapshots.
 //
-//
-// * explicit: The owner of the snapshot granted create volume permissions to a
+// *
+// explicit: The owner of the snapshot granted create volume permissions to a
 // specific AWS account.
 //
-//     * implicit: An AWS account has implicit create volume
+// * implicit: An AWS account has implicit create volume
 // permissions for all snapshots it owns.
 //
 // The list of snapshots returned can be
@@ -78,46 +78,45 @@ type DescribeSnapshotsInput struct {
 
 	// The filters.
 	//
-	//     * description - A description of the snapshot.
+	// * description - A description of the snapshot.
 	//
-	//     *
-	// encrypted - Indicates whether the snapshot is encrypted (true | false)
+	// * encrypted -
+	// Indicates whether the snapshot is encrypted (true | false)
 	//
-	//     *
-	// owner-alias - The owner alias, from an Amazon-maintained list (amazon). This is
-	// not the user-configured AWS account alias set using the IAM console. We
-	// recommend that you use the related parameter instead of this filter.
+	// * owner-alias - The
+	// owner alias, from an Amazon-maintained list (amazon). This is not the
+	// user-configured AWS account alias set using the IAM console. We recommend that
+	// you use the related parameter instead of this filter.
 	//
-	//     *
-	// owner-id - The AWS account ID of the owner. We recommend that you use the
-	// related parameter instead of this filter.
+	// * owner-id - The AWS
+	// account ID of the owner. We recommend that you use the related parameter instead
+	// of this filter.
 	//
-	//     * progress - The progress of the
-	// snapshot, as a percentage (for example, 80%).
+	// * progress - The progress of the snapshot, as a percentage (for
+	// example, 80%).
 	//
-	//     * snapshot-id - The snapshot
-	// ID.
+	// * snapshot-id - The snapshot ID.
 	//
-	//     * start-time - The time stamp when the snapshot was initiated.
+	// * start-time - The time stamp
+	// when the snapshot was initiated.
 	//
-	//     *
-	// status - The status of the snapshot (pending | completed | error).
+	// * status - The status of the snapshot (pending
+	// | completed | error).
 	//
-	//     * tag: -
-	// The key/value combination of a tag assigned to the resource. Use the tag key in
-	// the filter name and the tag value as the filter value. For example, to find all
-	// resources that have a tag with the key Owner and the value TeamA, specify
-	// tag:Owner for the filter name and TeamA for the filter value.
+	// * tag: - The key/value combination of a tag assigned to
+	// the resource. Use the tag key in the filter name and the tag value as the filter
+	// value. For example, to find all resources that have a tag with the key Owner and
+	// the value TeamA, specify tag:Owner for the filter name and TeamA for the filter
+	// value.
 	//
-	//     * tag-key -
-	// The key of a tag assigned to the resource. Use this filter to find all resources
-	// assigned a tag with a specific key, regardless of the tag value.
+	// * tag-key - The key of a tag assigned to the resource. Use this filter
+	// to find all resources assigned a tag with a specific key, regardless of the tag
+	// value.
 	//
-	//     *
-	// volume-id - The ID of the volume the snapshot is for.
+	// * volume-id - The ID of the volume the snapshot is for.
 	//
-	//     * volume-size - The
-	// size of the volume, in GiB.
+	// * volume-size -
+	// The size of the volume, in GiB.
 	Filters []*types.Filter
 
 	// The maximum number of snapshot results returned by DescribeSnapshots in

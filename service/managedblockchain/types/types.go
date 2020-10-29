@@ -52,21 +52,21 @@ type Invitation struct {
 
 	// The status of the invitation:
 	//
-	//     * PENDING - The invitee has not created a
-	// member to join the network, and the invitation has not yet expired.
+	// * PENDING - The invitee has not created a member
+	// to join the network, and the invitation has not yet expired.
 	//
-	//     *
-	// ACCEPTING - The invitee has begun creating a member, and creation has not yet
-	// completed.
+	// * ACCEPTING - The
+	// invitee has begun creating a member, and creation has not yet completed.
 	//
-	//     * ACCEPTED - The invitee created a member and joined the network
-	// using the InvitationID.
+	// *
+	// ACCEPTED - The invitee created a member and joined the network using the
+	// InvitationID.
 	//
-	//     * REJECTED - The invitee rejected the invitation.
+	// * REJECTED - The invitee rejected the invitation.
 	//
-	//
-	// * EXPIRED - The invitee neither created a member nor rejected the invitation
-	// before the ExpirationDate.
+	// * EXPIRED -
+	// The invitee neither created a member nor rejected the invitation before the
+	// ExpirationDate.
 	Status InvitationStatus
 }
 
@@ -121,24 +121,24 @@ type Member struct {
 
 	// The status of a member.
 	//
-	//     * CREATING - The AWS account is in the process of
+	// * CREATING - The AWS account is in the process of
 	// creating a member.
 	//
-	//     * AVAILABLE - The member has been created and can
+	// * AVAILABLE - The member has been created and can
 	// participate in the network.
 	//
-	//     * CREATE_FAILED - The AWS account attempted to
+	// * CREATE_FAILED - The AWS account attempted to
 	// create a member and creation failed.
 	//
-	//     * DELETING - The member and all
-	// associated resources are in the process of being deleted. Either the AWS account
-	// that owns the member deleted it, or the member is being deleted as the result of
-	// an APPROVEDPROPOSAL to remove the member.
+	// * DELETING - The member and all associated
+	// resources are in the process of being deleted. Either the AWS account that owns
+	// the member deleted it, or the member is being deleted as the result of an
+	// APPROVEDPROPOSAL to remove the member.
 	//
-	//     * DELETED - The member can no
-	// longer participate on the network and all associated resources are deleted.
-	// Either the AWS account that owns the member deleted it, or the member is being
-	// deleted as the result of an APPROVEDPROPOSAL to remove the member.
+	// * DELETED - The member can no longer
+	// participate on the network and all associated resources are deleted. Either the
+	// AWS account that owns the member deleted it, or the member is being deleted as
+	// the result of an APPROVEDPROPOSAL to remove the member.
 	Status MemberStatus
 }
 
@@ -251,24 +251,24 @@ type MemberSummary struct {
 
 	// The status of the member.
 	//
-	//     * CREATING - The AWS account is in the process of
+	// * CREATING - The AWS account is in the process of
 	// creating a member.
 	//
-	//     * AVAILABLE - The member has been created and can
+	// * AVAILABLE - The member has been created and can
 	// participate in the network.
 	//
-	//     * CREATE_FAILED - The AWS account attempted to
+	// * CREATE_FAILED - The AWS account attempted to
 	// create a member and creation failed.
 	//
-	//     * DELETING - The member and all
-	// associated resources are in the process of being deleted. Either the AWS account
-	// that owns the member deleted it, or the member is being deleted as the result of
-	// an APPROVEDPROPOSAL to remove the member.
+	// * DELETING - The member and all associated
+	// resources are in the process of being deleted. Either the AWS account that owns
+	// the member deleted it, or the member is being deleted as the result of an
+	// APPROVEDPROPOSAL to remove the member.
 	//
-	//     * DELETED - The member can no
-	// longer participate on the network and all associated resources are deleted.
-	// Either the AWS account that owns the member deleted it, or the member is being
-	// deleted as the result of an APPROVEDPROPOSAL to remove the member.
+	// * DELETED - The member can no longer
+	// participate on the network and all associated resources are deleted. Either the
+	// AWS account that owns the member deleted it, or the member is being deleted as
+	// the result of an APPROVEDPROPOSAL to remove the member.
 	Status MemberStatus
 }
 
@@ -541,27 +541,26 @@ type Proposal struct {
 
 	// The status of the proposal. Values are as follows:
 	//
-	//     * IN_PROGRESS - The
-	// proposal is active and open for member voting.
+	// * IN_PROGRESS - The proposal
+	// is active and open for member voting.
 	//
-	//     * APPROVED - The proposal
-	// was approved with sufficient YES votes among members according to the
-	// VotingPolicy specified for the Network. The specified proposal actions are
-	// carried out.
+	// * APPROVED - The proposal was approved
+	// with sufficient YES votes among members according to the VotingPolicy specified
+	// for the Network. The specified proposal actions are carried out.
 	//
-	//     * REJECTED - The proposal was rejected with insufficient YES
-	// votes among members according to the VotingPolicy specified for the Network. The
-	// specified ProposalActions are not carried out.
+	// * REJECTED -
+	// The proposal was rejected with insufficient YES votes among members according to
+	// the VotingPolicy specified for the Network. The specified ProposalActions are
+	// not carried out.
 	//
-	//     * EXPIRED - Members did not
-	// cast the number of votes required to determine the proposal outcome before the
-	// proposal expired. The specified ProposalActions are not carried out.
+	// * EXPIRED - Members did not cast the number of votes required
+	// to determine the proposal outcome before the proposal expired. The specified
+	// ProposalActions are not carried out.
 	//
-	//     *
-	// ACTION_FAILED - One or more of the specified ProposalActions in a proposal that
-	// was approved could not be completed because of an error. The ACTION_FAILED
-	// status occurs even if only one ProposalAction fails and other actions are
-	// successful.
+	// * ACTION_FAILED - One or more of the
+	// specified ProposalActions in a proposal that was approved could not be completed
+	// because of an error. The ACTION_FAILED status occurs even if only one
+	// ProposalAction fails and other actions are successful.
 	Status ProposalStatus
 
 	// The current total of YES votes cast on the proposal by members.
@@ -608,25 +607,25 @@ type ProposalSummary struct {
 
 	// The status of the proposal. Values are as follows:
 	//
-	//     * IN_PROGRESS - The
-	// proposal is active and open for member voting.
+	// * IN_PROGRESS - The proposal
+	// is active and open for member voting.
 	//
-	//     * APPROVED - The proposal
-	// was approved with sufficient YES votes among members according to the
-	// VotingPolicy specified for the Network. The specified proposal actions are
-	// carried out.
+	// * APPROVED - The proposal was approved
+	// with sufficient YES votes among members according to the VotingPolicy specified
+	// for the Network. The specified proposal actions are carried out.
 	//
-	//     * REJECTED - The proposal was rejected with insufficient YES
-	// votes among members according to the VotingPolicy specified for the Network. The
-	// specified ProposalActions are not carried out.
+	// * REJECTED -
+	// The proposal was rejected with insufficient YES votes among members according to
+	// the VotingPolicy specified for the Network. The specified ProposalActions are
+	// not carried out.
 	//
-	//     * EXPIRED - Members did not
-	// cast the number of votes required to determine the proposal outcome before the
-	// proposal expired. The specified ProposalActions are not carried out.
+	// * EXPIRED - Members did not cast the number of votes required
+	// to determine the proposal outcome before the proposal expired. The specified
+	// ProposalActions are not carried out.
 	//
-	//     *
-	// ACTION_FAILED - One or more of the specified ProposalActions in a proposal that
-	// was approved could not be completed because of an error.
+	// * ACTION_FAILED - One or more of the
+	// specified ProposalActions in a proposal that was approved could not be completed
+	// because of an error.
 	Status ProposalStatus
 }
 

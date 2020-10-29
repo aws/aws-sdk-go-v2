@@ -45,60 +45,59 @@ type DescribeVolumesInput struct {
 
 	// The filters.
 	//
-	//     * attachment.attach-time - The time stamp when the attachment
+	// * attachment.attach-time - The time stamp when the attachment
 	// initiated.
 	//
-	//     * attachment.delete-on-termination - Whether the volume is
-	// deleted on instance termination.
+	// * attachment.delete-on-termination - Whether the volume is deleted
+	// on instance termination.
 	//
-	//     * attachment.device - The device name
-	// specified in the block device mapping (for example, /dev/sda1).
+	// * attachment.device - The device name specified in the
+	// block device mapping (for example, /dev/sda1).
 	//
-	//     *
-	// attachment.instance-id - The ID of the instance the volume is attached to.
+	// * attachment.instance-id - The
+	// ID of the instance the volume is attached to.
 	//
+	// * attachment.status - The
+	// attachment state (attaching | attached | detaching).
 	//
-	// * attachment.status - The attachment state (attaching | attached | detaching).
+	// * availability-zone - The
+	// Availability Zone in which the volume was created.
 	//
+	// * create-time - The time
+	// stamp when the volume was created.
 	//
-	// * availability-zone - The Availability Zone in which the volume was created.
+	// * encrypted - Indicates whether the volume
+	// is encrypted (true | false)
 	//
+	// * multi-attach-enabled - Indicates whether the
+	// volume is enabled for Multi-Attach (true | false)
 	//
-	// * create-time - The time stamp when the volume was created.
+	// * fast-restored - Indicates
+	// whether the volume was created from a snapshot that is enabled for fast snapshot
+	// restore (true | false).
 	//
-	//     * encrypted -
-	// Indicates whether the volume is encrypted (true | false)
+	// * size - The size of the volume, in GiB.
 	//
-	//     *
-	// multi-attach-enabled - Indicates whether the volume is enabled for Multi-Attach
-	// (true | false)
+	// * snapshot-id
+	// - The snapshot from which the volume was created.
 	//
-	//     * fast-restored - Indicates whether the volume was created
-	// from a snapshot that is enabled for fast snapshot restore (true | false).
+	// * status - The state of the
+	// volume (creating | available | in-use | deleting | deleted | error).
 	//
-	//     *
-	// size - The size of the volume, in GiB.
+	// * tag: -
+	// The key/value combination of a tag assigned to the resource. Use the tag key in
+	// the filter name and the tag value as the filter value. For example, to find all
+	// resources that have a tag with the key Owner and the value TeamA, specify
+	// tag:Owner for the filter name and TeamA for the filter value.
 	//
-	//     * snapshot-id - The snapshot from
-	// which the volume was created.
+	// * tag-key - The
+	// key of a tag assigned to the resource. Use this filter to find all resources
+	// assigned a tag with a specific key, regardless of the tag value.
 	//
-	//     * status - The state of the volume (creating
-	// | available | in-use | deleting | deleted | error).
+	// * volume-id -
+	// The volume ID.
 	//
-	//     * tag: - The key/value
-	// combination of a tag assigned to the resource. Use the tag key in the filter
-	// name and the tag value as the filter value. For example, to find all resources
-	// that have a tag with the key Owner and the value TeamA, specify tag:Owner for
-	// the filter name and TeamA for the filter value.
-	//
-	//     * tag-key - The key of a
-	// tag assigned to the resource. Use this filter to find all resources assigned a
-	// tag with a specific key, regardless of the tag value.
-	//
-	//     * volume-id - The
-	// volume ID.
-	//
-	//     * volume-type - The Amazon EBS volume type. This can be gp2 for
+	// * volume-type - The Amazon EBS volume type. This can be gp2 for
 	// General Purpose SSD, io1 or io2 for Provisioned IOPS SSD, st1 for Throughput
 	// Optimized HDD, sc1 for Cold HDD, or standard for Magnetic volumes.
 	Filters []*types.Filter

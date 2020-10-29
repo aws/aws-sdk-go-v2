@@ -19,17 +19,17 @@ import (
 // (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-writing-an-sqs-policy.html#write-messages-to-shared-queue)
 // in the Amazon Simple Queue Service Developer Guide.
 //
-//     * AddPermission
-// generates a policy for you. You can use SetQueueAttributes to upload your
-// policy. For more information, see Using Custom Policies with the Amazon SQS
-// Access Policy Language
+// * AddPermission generates a
+// policy for you. You can use SetQueueAttributes to upload your policy. For more
+// information, see Using Custom Policies with the Amazon SQS Access Policy
+// Language
 // (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-creating-custom-policies.html)
 // in the Amazon Simple Queue Service Developer Guide.
 //
-//     * An Amazon SQS policy
-// can have a maximum of 7 actions.
+// * An Amazon SQS policy can
+// have a maximum of 7 actions.
 //
-//     * To remove the ability to change queue
+// * To remove the ability to change queue
 // permissions, you must deny permission to the AddPermission, RemovePermission,
 // and SetQueueAttributes actions in your IAM policy.
 //

@@ -55,10 +55,10 @@ type PutIntegrationResponseInput struct {
 	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following
 	// behaviors:
 	//
-	//     * CONVERT_TO_BINARY: Converts a response payload from a
+	// * CONVERT_TO_BINARY: Converts a response payload from a
 	// Base64-encoded string to the corresponding binary blob.
 	//
-	//     * CONVERT_TO_TEXT:
+	// * CONVERT_TO_TEXT:
 	// Converts a response payload from a binary blob to a Base64-encoded string.
 	//
 	// If
@@ -104,10 +104,10 @@ type PutIntegrationResponseOutput struct {
 	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following
 	// behaviors:
 	//
-	//     * CONVERT_TO_BINARY: Converts a response payload from a
+	// * CONVERT_TO_BINARY: Converts a response payload from a
 	// Base64-encoded string to the corresponding binary blob.
 	//
-	//     * CONVERT_TO_TEXT:
+	// * CONVERT_TO_TEXT:
 	// Converts a response payload from a binary blob to a Base64-encoded string.
 	//
 	// If

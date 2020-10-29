@@ -39,11 +39,11 @@ type UpdateEnvironmentMembershipInput struct {
 	// The replacement type of environment member permissions you want to associate
 	// with this environment member. Available values include:
 	//
-	//     * read-only: Has
+	// * read-only: Has
 	// read-only access to the environment.
 	//
-	//     * read-write: Has read-write access to
-	// the environment.
+	// * read-write: Has read-write access to the
+	// environment.
 	//
 	// This member is required.
 	Permissions types.MemberPermissions

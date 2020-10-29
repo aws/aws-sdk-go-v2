@@ -16,12 +16,11 @@ import (
 // plan. Resources can be included by specifying patterns for a ListOfTags and
 // selected Resources. For example, consider the following patterns:
 //
-//     *
-// Resources: "arn:aws:ec2:region:account-id:volume/volume-id"
+// * Resources:
+// "arn:aws:ec2:region:account-id:volume/volume-id"
 //
-//     *
+// *
 // ConditionKey:"department"ConditionValue:"finance"ConditionType:"StringEquals"
-//
 //
 // *
 // ConditionKey:"importance"ConditionValue:"critical"ConditionType:"StringEquals"

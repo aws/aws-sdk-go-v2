@@ -6,8 +6,8 @@ type AdminStatus string
 
 // Enum values for AdminStatus
 const (
-	AdminStatusEnabled               AdminStatus = "ENABLED"
-	AdminStatusDisabling_in_progress AdminStatus = "DISABLING_IN_PROGRESS"
+	AdminStatusEnabled             AdminStatus = "ENABLED"
+	AdminStatusDisablingInProgress AdminStatus = "DISABLING_IN_PROGRESS"
 )
 
 // Values returns all known values for AdminStatus. Note that this can be expanded
@@ -68,9 +68,9 @@ type EffectivePermission string
 
 // Enum values for EffectivePermission
 const (
-	EffectivePermissionPublic     EffectivePermission = "PUBLIC"
-	EffectivePermissionNot_public EffectivePermission = "NOT_PUBLIC"
-	EffectivePermissionUnknown    EffectivePermission = "UNKNOWN"
+	EffectivePermissionPublic    EffectivePermission = "PUBLIC"
+	EffectivePermissionNotPublic EffectivePermission = "NOT_PUBLIC"
+	EffectivePermissionUnknown   EffectivePermission = "UNKNOWN"
 )
 
 // Values returns all known values for EffectivePermission. Note that this can be
@@ -90,7 +90,7 @@ type EncryptionType string
 const (
 	EncryptionTypeNone    EncryptionType = "NONE"
 	EncryptionTypeAes256  EncryptionType = "AES256"
-	EncryptionTypeAws_kms EncryptionType = "aws:kms"
+	EncryptionTypeAwsKms  EncryptionType = "aws:kms"
 	EncryptionTypeUnknown EncryptionType = "UNKNOWN"
 )
 
@@ -128,7 +128,7 @@ type FindingActionType string
 
 // Enum values for FindingActionType
 const (
-	FindingActionTypeAws_api_call FindingActionType = "AWS_API_CALL"
+	FindingActionTypeAwsApiCall FindingActionType = "AWS_API_CALL"
 )
 
 // Values returns all known values for FindingActionType. Note that this can be
@@ -162,9 +162,9 @@ type FindingPublishingFrequency string
 
 // Enum values for FindingPublishingFrequency
 const (
-	FindingPublishingFrequencyFifteen_minutes FindingPublishingFrequency = "FIFTEEN_MINUTES"
-	FindingPublishingFrequencyOne_hour        FindingPublishingFrequency = "ONE_HOUR"
-	FindingPublishingFrequencySix_hours       FindingPublishingFrequency = "SIX_HOURS"
+	FindingPublishingFrequencyFifteenMinutes FindingPublishingFrequency = "FIFTEEN_MINUTES"
+	FindingPublishingFrequencyOneHour        FindingPublishingFrequency = "ONE_HOUR"
+	FindingPublishingFrequencySixHours       FindingPublishingFrequency = "SIX_HOURS"
 )
 
 // Values returns all known values for FindingPublishingFrequency. Note that this
@@ -219,16 +219,16 @@ type FindingType string
 
 // Enum values for FindingType
 const (
-	FindingTypeSensitivedata_s3object_multiple             FindingType = "SensitiveData:S3Object/Multiple"
-	FindingTypeSensitivedata_s3object_financial            FindingType = "SensitiveData:S3Object/Financial"
-	FindingTypeSensitivedata_s3object_personal             FindingType = "SensitiveData:S3Object/Personal"
-	FindingTypeSensitivedata_s3object_credentials          FindingType = "SensitiveData:S3Object/Credentials"
-	FindingTypeSensitivedata_s3object_customidentifier     FindingType = "SensitiveData:S3Object/CustomIdentifier"
-	FindingTypePolicy_iamuser_s3bucketpublic               FindingType = "Policy:IAMUser/S3BucketPublic"
-	FindingTypePolicy_iamuser_s3bucketsharedexternally     FindingType = "Policy:IAMUser/S3BucketSharedExternally"
-	FindingTypePolicy_iamuser_s3bucketreplicatedexternally FindingType = "Policy:IAMUser/S3BucketReplicatedExternally"
-	FindingTypePolicy_iamuser_s3bucketencryptiondisabled   FindingType = "Policy:IAMUser/S3BucketEncryptionDisabled"
-	FindingTypePolicy_iamuser_s3blockpublicaccessdisabled  FindingType = "Policy:IAMUser/S3BlockPublicAccessDisabled"
+	FindingTypeSensitivedataS3objectMultiple             FindingType = "SensitiveData:S3Object/Multiple"
+	FindingTypeSensitivedataS3objectFinancial            FindingType = "SensitiveData:S3Object/Financial"
+	FindingTypeSensitivedataS3objectPersonal             FindingType = "SensitiveData:S3Object/Personal"
+	FindingTypeSensitivedataS3objectCredentials          FindingType = "SensitiveData:S3Object/Credentials"
+	FindingTypeSensitivedataS3objectCustomidentifier     FindingType = "SensitiveData:S3Object/CustomIdentifier"
+	FindingTypePolicyIamuserS3bucketpublic               FindingType = "Policy:IAMUser/S3BucketPublic"
+	FindingTypePolicyIamuserS3bucketsharedexternally     FindingType = "Policy:IAMUser/S3BucketSharedExternally"
+	FindingTypePolicyIamuserS3bucketreplicatedexternally FindingType = "Policy:IAMUser/S3BucketReplicatedExternally"
+	FindingTypePolicyIamuserS3bucketencryptiondisabled   FindingType = "Policy:IAMUser/S3BucketEncryptionDisabled"
+	FindingTypePolicyIamuserS3blockpublicaccessdisabled  FindingType = "Policy:IAMUser/S3BlockPublicAccessDisabled"
 )
 
 // Values returns all known values for FindingType. Note that this can be expanded
@@ -253,10 +253,10 @@ type GroupBy string
 
 // Enum values for GroupBy
 const (
-	GroupByResourcesaffected_s3bucket_name GroupBy = "resourcesAffected.s3Bucket.name"
-	GroupByType                            GroupBy = "type"
-	GroupByClassificationdetails_jobid     GroupBy = "classificationDetails.jobId"
-	GroupBySeverity_description            GroupBy = "severity.description"
+	GroupByResourcesaffectedS3bucketName GroupBy = "resourcesAffected.s3Bucket.name"
+	GroupByType                          GroupBy = "type"
+	GroupByClassificationdetailsJobid    GroupBy = "classificationDetails.jobId"
+	GroupBySeverityDescription           GroupBy = "severity.description"
 )
 
 // Values returns all known values for GroupBy. Note that this can be expanded in
@@ -303,12 +303,12 @@ type JobStatus string
 
 // Enum values for JobStatus
 const (
-	JobStatusRunning     JobStatus = "RUNNING"
-	JobStatusPaused      JobStatus = "PAUSED"
-	JobStatusCancelled   JobStatus = "CANCELLED"
-	JobStatusComplete    JobStatus = "COMPLETE"
-	JobStatusIdle        JobStatus = "IDLE"
-	JobStatusUser_paused JobStatus = "USER_PAUSED"
+	JobStatusRunning    JobStatus = "RUNNING"
+	JobStatusPaused     JobStatus = "PAUSED"
+	JobStatusCancelled  JobStatus = "CANCELLED"
+	JobStatusComplete   JobStatus = "COMPLETE"
+	JobStatusIdle       JobStatus = "IDLE"
+	JobStatusUserPaused JobStatus = "USER_PAUSED"
 )
 
 // Values returns all known values for JobStatus. Note that this can be expanded in
@@ -329,7 +329,7 @@ type JobType string
 
 // Enum values for JobType
 const (
-	JobTypeOne_time  JobType = "ONE_TIME"
+	JobTypeOneTime   JobType = "ONE_TIME"
 	JobTypeScheduled JobType = "SCHEDULED"
 )
 
@@ -461,11 +461,11 @@ type ScopeFilterKey string
 
 // Enum values for ScopeFilterKey
 const (
-	ScopeFilterKeyBucket_creation_date      ScopeFilterKey = "BUCKET_CREATION_DATE"
-	ScopeFilterKeyObject_extension          ScopeFilterKey = "OBJECT_EXTENSION"
-	ScopeFilterKeyObject_last_modified_date ScopeFilterKey = "OBJECT_LAST_MODIFIED_DATE"
-	ScopeFilterKeyObject_size               ScopeFilterKey = "OBJECT_SIZE"
-	ScopeFilterKeyTag                       ScopeFilterKey = "TAG"
+	ScopeFilterKeyBucketCreationDate     ScopeFilterKey = "BUCKET_CREATION_DATE"
+	ScopeFilterKeyObjectExtension        ScopeFilterKey = "OBJECT_EXTENSION"
+	ScopeFilterKeyObjectLastModifiedDate ScopeFilterKey = "OBJECT_LAST_MODIFIED_DATE"
+	ScopeFilterKeyObjectSize             ScopeFilterKey = "OBJECT_SIZE"
+	ScopeFilterKeyTag                    ScopeFilterKey = "TAG"
 )
 
 // Values returns all known values for ScopeFilterKey. Note that this can be
@@ -485,10 +485,10 @@ type SensitiveDataItemCategory string
 
 // Enum values for SensitiveDataItemCategory
 const (
-	SensitiveDataItemCategoryFinancial_information SensitiveDataItemCategory = "FINANCIAL_INFORMATION"
-	SensitiveDataItemCategoryPersonal_information  SensitiveDataItemCategory = "PERSONAL_INFORMATION"
-	SensitiveDataItemCategoryCredentials           SensitiveDataItemCategory = "CREDENTIALS"
-	SensitiveDataItemCategoryCustom_identifier     SensitiveDataItemCategory = "CUSTOM_IDENTIFIER"
+	SensitiveDataItemCategoryFinancialInformation SensitiveDataItemCategory = "FINANCIAL_INFORMATION"
+	SensitiveDataItemCategoryPersonalInformation  SensitiveDataItemCategory = "PERSONAL_INFORMATION"
+	SensitiveDataItemCategoryCredentials          SensitiveDataItemCategory = "CREDENTIALS"
+	SensitiveDataItemCategoryCustomIdentifier     SensitiveDataItemCategory = "CUSTOM_IDENTIFIER"
 )
 
 // Values returns all known values for SensitiveDataItemCategory. Note that this
@@ -527,10 +527,10 @@ type SharedAccess string
 
 // Enum values for SharedAccess
 const (
-	SharedAccessExternal   SharedAccess = "EXTERNAL"
-	SharedAccessInternal   SharedAccess = "INTERNAL"
-	SharedAccessNot_shared SharedAccess = "NOT_SHARED"
-	SharedAccessUnknown    SharedAccess = "UNKNOWN"
+	SharedAccessExternal  SharedAccess = "EXTERNAL"
+	SharedAccessInternal  SharedAccess = "INTERNAL"
+	SharedAccessNotShared SharedAccess = "NOT_SHARED"
+	SharedAccessUnknown   SharedAccess = "UNKNOWN"
 )
 
 // Values returns all known values for SharedAccess. Note that this can be expanded
@@ -549,13 +549,13 @@ type StorageClass string
 
 // Enum values for StorageClass
 const (
-	StorageClassStandard            StorageClass = "STANDARD"
-	StorageClassReduced_redundancy  StorageClass = "REDUCED_REDUNDANCY"
-	StorageClassStandard_ia         StorageClass = "STANDARD_IA"
-	StorageClassIntelligent_tiering StorageClass = "INTELLIGENT_TIERING"
-	StorageClassDeep_archive        StorageClass = "DEEP_ARCHIVE"
-	StorageClassOnezone_ia          StorageClass = "ONEZONE_IA"
-	StorageClassGlacier             StorageClass = "GLACIER"
+	StorageClassStandard           StorageClass = "STANDARD"
+	StorageClassReducedRedundancy  StorageClass = "REDUCED_REDUNDANCY"
+	StorageClassStandardIa         StorageClass = "STANDARD_IA"
+	StorageClassIntelligentTiering StorageClass = "INTELLIGENT_TIERING"
+	StorageClassDeepArchive        StorageClass = "DEEP_ARCHIVE"
+	StorageClassOnezoneIa          StorageClass = "ONEZONE_IA"
+	StorageClassGlacier            StorageClass = "GLACIER"
 )
 
 // Values returns all known values for StorageClass. Note that this can be expanded
@@ -577,7 +577,7 @@ type TagTarget string
 
 // Enum values for TagTarget
 const (
-	TagTargetS3_object TagTarget = "S3_OBJECT"
+	TagTargetS3Object TagTarget = "S3_OBJECT"
 )
 
 // Values returns all known values for TagTarget. Note that this can be expanded in
@@ -682,8 +682,8 @@ type UsageType string
 
 // Enum values for UsageType
 const (
-	UsageTypeData_inventory_evaluation UsageType = "DATA_INVENTORY_EVALUATION"
-	UsageTypeSensitive_data_discovery  UsageType = "SENSITIVE_DATA_DISCOVERY"
+	UsageTypeDataInventoryEvaluation UsageType = "DATA_INVENTORY_EVALUATION"
+	UsageTypeSensitiveDataDiscovery  UsageType = "SENSITIVE_DATA_DISCOVERY"
 )
 
 // Values returns all known values for UsageType. Note that this can be expanded in
