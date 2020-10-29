@@ -162,6 +162,7 @@ func (m *awsRestxml_serializeOpCompleteMultipartUpload) HandleSerialize(ctx cont
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
 		if err := awsRestxml_serializeDocumentCompletedMultipartUpload(input.MultipartUpload, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -593,6 +594,7 @@ func (m *awsRestxml_serializeOpCreateBucket) HandleSerialize(ctx context.Context
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
 		if err := awsRestxml_serializeDocumentCreateBucketConfiguration(input.CreateBucketConfiguration, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -1966,6 +1968,7 @@ func (m *awsRestxml_serializeOpDeleteObjects) HandleSerialize(ctx context.Contex
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
 		if err := awsRestxml_serializeDocumentDelete(input.Delete, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -5424,6 +5427,7 @@ func (m *awsRestxml_serializeOpPutBucketAccelerateConfiguration) HandleSerialize
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
 		if err := awsRestxml_serializeDocumentAccelerateConfiguration(input.AccelerateConfiguration, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -5519,6 +5523,7 @@ func (m *awsRestxml_serializeOpPutBucketAcl) HandleSerialize(ctx context.Context
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
 		if err := awsRestxml_serializeDocumentAccessControlPolicy(input.AccessControlPolicy, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -5661,6 +5666,7 @@ func (m *awsRestxml_serializeOpPutBucketAnalyticsConfiguration) HandleSerialize(
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
 		if err := awsRestxml_serializeDocumentAnalyticsConfiguration(input.AnalyticsConfiguration, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -5760,6 +5766,7 @@ func (m *awsRestxml_serializeOpPutBucketCors) HandleSerialize(ctx context.Contex
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
 		if err := awsRestxml_serializeDocumentCORSConfiguration(input.CORSConfiguration, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -5862,6 +5869,7 @@ func (m *awsRestxml_serializeOpPutBucketEncryption) HandleSerialize(ctx context.
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
 		if err := awsRestxml_serializeDocumentServerSideEncryptionConfiguration(input.ServerSideEncryptionConfiguration, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -5964,6 +5972,7 @@ func (m *awsRestxml_serializeOpPutBucketInventoryConfiguration) HandleSerialize(
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
 		if err := awsRestxml_serializeDocumentInventoryConfiguration(input.InventoryConfiguration, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -6063,6 +6072,7 @@ func (m *awsRestxml_serializeOpPutBucketLifecycleConfiguration) HandleSerialize(
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
 		if err := awsRestxml_serializeDocumentBucketLifecycleConfiguration(input.LifecycleConfiguration, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -6158,6 +6168,7 @@ func (m *awsRestxml_serializeOpPutBucketLogging) HandleSerialize(ctx context.Con
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
 		if err := awsRestxml_serializeDocumentBucketLoggingStatus(input.BucketLoggingStatus, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -6260,6 +6271,7 @@ func (m *awsRestxml_serializeOpPutBucketMetricsConfiguration) HandleSerialize(ct
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
 		if err := awsRestxml_serializeDocumentMetricsConfiguration(input.MetricsConfiguration, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -6359,6 +6371,7 @@ func (m *awsRestxml_serializeOpPutBucketNotificationConfiguration) HandleSeriali
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
 		if err := awsRestxml_serializeDocumentNotificationConfiguration(input.NotificationConfiguration, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -6454,6 +6467,7 @@ func (m *awsRestxml_serializeOpPutBucketOwnershipControls) HandleSerialize(ctx c
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
 		if err := awsRestxml_serializeDocumentOwnershipControls(input.OwnershipControls, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -6553,6 +6567,7 @@ func (m *awsRestxml_serializeOpPutBucketPolicy) HandleSerialize(ctx context.Cont
 		},
 		Attr: rootAttr,
 	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
 	if err := awsRestxml_serializeOpDocumentPutBucketPolicyInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -6674,6 +6689,7 @@ func (m *awsRestxml_serializeOpPutBucketReplication) HandleSerialize(ctx context
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
 		if err := awsRestxml_serializeDocumentReplicationConfiguration(input.ReplicationConfiguration, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -6783,6 +6799,7 @@ func (m *awsRestxml_serializeOpPutBucketRequestPayment) HandleSerialize(ctx cont
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
 		if err := awsRestxml_serializeDocumentRequestPaymentConfiguration(input.RequestPaymentConfiguration, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -6885,6 +6902,7 @@ func (m *awsRestxml_serializeOpPutBucketTagging) HandleSerialize(ctx context.Con
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
 		if err := awsRestxml_serializeDocumentTagging(input.Tagging, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -6987,6 +7005,7 @@ func (m *awsRestxml_serializeOpPutBucketVersioning) HandleSerialize(ctx context.
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
 		if err := awsRestxml_serializeDocumentVersioningConfiguration(input.VersioningConfiguration, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -7096,6 +7115,7 @@ func (m *awsRestxml_serializeOpPutBucketWebsite) HandleSerialize(ctx context.Con
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
 		if err := awsRestxml_serializeDocumentWebsiteConfiguration(input.WebsiteConfiguration, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -7467,6 +7487,7 @@ func (m *awsRestxml_serializeOpPutObjectAcl) HandleSerialize(ctx context.Context
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
 		if err := awsRestxml_serializeDocumentAccessControlPolicy(input.AccessControlPolicy, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -7630,6 +7651,7 @@ func (m *awsRestxml_serializeOpPutObjectLegalHold) HandleSerialize(ctx context.C
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
 		if err := awsRestxml_serializeDocumentObjectLockLegalHold(input.LegalHold, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -7753,6 +7775,7 @@ func (m *awsRestxml_serializeOpPutObjectLockConfiguration) HandleSerialize(ctx c
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
 		if err := awsRestxml_serializeDocumentObjectLockConfiguration(input.ObjectLockConfiguration, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -7867,6 +7890,7 @@ func (m *awsRestxml_serializeOpPutObjectRetention) HandleSerialize(ctx context.C
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
 		if err := awsRestxml_serializeDocumentObjectLockRetention(input.Retention, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -7995,6 +8019,7 @@ func (m *awsRestxml_serializeOpPutObjectTagging) HandleSerialize(ctx context.Con
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
 		if err := awsRestxml_serializeDocumentTagging(input.Tagging, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -8113,6 +8138,7 @@ func (m *awsRestxml_serializeOpPutPublicAccessBlock) HandleSerialize(ctx context
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
 		if err := awsRestxml_serializeDocumentPublicAccessBlockConfiguration(input.PublicAccessBlockConfiguration, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -8215,6 +8241,7 @@ func (m *awsRestxml_serializeOpRestoreObject) HandleSerialize(ctx context.Contex
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
 		if err := awsRestxml_serializeDocumentRestoreRequest(input.RestoreRequest, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -8328,6 +8355,7 @@ func (m *awsRestxml_serializeOpSelectObjectContent) HandleSerialize(ctx context.
 		},
 		Attr: rootAttr,
 	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
 	if err := awsRestxml_serializeOpDocumentSelectObjectContentInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}

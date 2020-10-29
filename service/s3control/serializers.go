@@ -64,6 +64,7 @@ func (m *awsRestxml_serializeOpCreateAccessPoint) HandleSerialize(ctx context.Co
 		},
 		Attr: rootAttr,
 	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://awss3control.amazonaws.com/doc/2018-08-20/"))
 	if err := awsRestxml_serializeOpDocumentCreateAccessPointInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -199,6 +200,7 @@ func (m *awsRestxml_serializeOpCreateBucket) HandleSerialize(ctx context.Context
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://awss3control.amazonaws.com/doc/2018-08-20/"))
 		if err := awsRestxml_serializeDocumentCreateBucketConfiguration(input.CreateBucketConfiguration, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -336,6 +338,7 @@ func (m *awsRestxml_serializeOpCreateJob) HandleSerialize(ctx context.Context, i
 		},
 		Attr: rootAttr,
 	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://awss3control.amazonaws.com/doc/2018-08-20/"))
 	if err := awsRestxml_serializeOpDocumentCreateJobInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2040,6 +2043,7 @@ func (m *awsRestxml_serializeOpPutAccessPointPolicy) HandleSerialize(ctx context
 		},
 		Attr: rootAttr,
 	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://awss3control.amazonaws.com/doc/2018-08-20/"))
 	if err := awsRestxml_serializeOpDocumentPutAccessPointPolicyInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2149,6 +2153,7 @@ func (m *awsRestxml_serializeOpPutBucketLifecycleConfiguration) HandleSerialize(
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://awss3control.amazonaws.com/doc/2018-08-20/"))
 		if err := awsRestxml_serializeDocumentLifecycleConfiguration(input.LifecycleConfiguration, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -2241,6 +2246,7 @@ func (m *awsRestxml_serializeOpPutBucketPolicy) HandleSerialize(ctx context.Cont
 		},
 		Attr: rootAttr,
 	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://awss3control.amazonaws.com/doc/2018-08-20/"))
 	if err := awsRestxml_serializeOpDocumentPutBucketPolicyInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2355,6 +2361,7 @@ func (m *awsRestxml_serializeOpPutBucketTagging) HandleSerialize(ctx context.Con
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://awss3control.amazonaws.com/doc/2018-08-20/"))
 		if err := awsRestxml_serializeDocumentTagging(input.Tagging, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
@@ -2447,6 +2454,7 @@ func (m *awsRestxml_serializeOpPutJobTagging) HandleSerialize(ctx context.Contex
 		},
 		Attr: rootAttr,
 	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://awss3control.amazonaws.com/doc/2018-08-20/"))
 	if err := awsRestxml_serializeOpDocumentPutJobTaggingInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2558,6 +2566,7 @@ func (m *awsRestxml_serializeOpPutPublicAccessBlock) HandleSerialize(ctx context
 			},
 			Attr: payloadRootAttr,
 		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://awss3control.amazonaws.com/doc/2018-08-20/"))
 		if err := awsRestxml_serializeDocumentPublicAccessBlockConfiguration(input.PublicAccessBlockConfiguration, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
