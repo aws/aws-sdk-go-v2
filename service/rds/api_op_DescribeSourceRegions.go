@@ -47,8 +47,8 @@ type DescribeSourceRegionsInput struct {
 
 	// The source AWS Region name. For example, us-east-1. Constraints:
 	//
-	//     * Must
-	// specify a valid AWS Region name.
+	// * Must specify
+	// a valid AWS Region name.
 	RegionName *string
 }
 

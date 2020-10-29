@@ -49,24 +49,24 @@ type RespondToAuthChallengeInput struct {
 	// ChallengeName, for example: SECRET_HASH (if app client is configured with client
 	// secret) applies to all inputs below (including SOFTWARE_TOKEN_MFA).
 	//
-	//     *
-	// SMS_MFA: SMS_MFA_CODE, USERNAME.
+	// * SMS_MFA:
+	// SMS_MFA_CODE, USERNAME.
 	//
-	//     * PASSWORD_VERIFIER:
-	// PASSWORD_CLAIM_SIGNATURE, PASSWORD_CLAIM_SECRET_BLOCK, TIMESTAMP, USERNAME.
+	// * PASSWORD_VERIFIER: PASSWORD_CLAIM_SIGNATURE,
+	// PASSWORD_CLAIM_SECRET_BLOCK, TIMESTAMP, USERNAME.
 	//
+	// * NEW_PASSWORD_REQUIRED:
+	// NEW_PASSWORD, any other required attributes, USERNAME.
 	//
-	// * NEW_PASSWORD_REQUIRED: NEW_PASSWORD, any other required attributes,
-	// USERNAME.
+	// * SOFTWARE_TOKEN_MFA:
+	// USERNAME and SOFTWARE_TOKEN_MFA_CODE are required attributes.
 	//
-	//     * SOFTWARE_TOKEN_MFA: USERNAME and SOFTWARE_TOKEN_MFA_CODE are
-	// required attributes.
+	// * DEVICE_SRP_AUTH
+	// requires USERNAME, DEVICE_KEY, SRP_A (and SECRET_HASH).
 	//
-	//     * DEVICE_SRP_AUTH requires USERNAME, DEVICE_KEY, SRP_A
-	// (and SECRET_HASH).
-	//
-	//     * DEVICE_PASSWORD_VERIFIER requires everything that
-	// PASSWORD_VERIFIER requires plus DEVICE_KEY.
+	// *
+	// DEVICE_PASSWORD_VERIFIER requires everything that PASSWORD_VERIFIER requires
+	// plus DEVICE_KEY.
 	ChallengeResponses map[string]*string
 
 	// A map of custom key-value pairs that you can provide as input for any custom
@@ -86,17 +86,17 @@ type RespondToAuthChallengeInput struct {
 	// in the Amazon Cognito Developer Guide. Take the following limitations into
 	// consideration when you use the ClientMetadata parameter:
 	//
-	//     * Amazon Cognito
-	// does not store the ClientMetadata value. This data is available only to AWS
-	// Lambda triggers that are assigned to a user pool to support custom workflows. If
-	// your user pool configuration does not include triggers, the ClientMetadata
-	// parameter serves no purpose.
+	// * Amazon Cognito does
+	// not store the ClientMetadata value. This data is available only to AWS Lambda
+	// triggers that are assigned to a user pool to support custom workflows. If your
+	// user pool configuration does not include triggers, the ClientMetadata parameter
+	// serves no purpose.
 	//
-	//     * Amazon Cognito does not validate the
-	// ClientMetadata value.
+	// * Amazon Cognito does not validate the ClientMetadata
+	// value.
 	//
-	//     * Amazon Cognito does not encrypt the the
-	// ClientMetadata value, so don't use it to provide sensitive information.
+	// * Amazon Cognito does not encrypt the the ClientMetadata value, so don't
+	// use it to provide sensitive information.
 	ClientMetadata map[string]*string
 
 	// The session which should be passed both ways in challenge-response calls to the

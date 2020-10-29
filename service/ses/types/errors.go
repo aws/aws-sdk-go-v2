@@ -524,11 +524,11 @@ func (e *InvalidTemplateException) ErrorFault() smithy.ErrorFault { return smith
 // redirects is invalid. This error appears most often in the following
 // situations:
 //
-//     * When the tracking domain you specified is not verified in
-// Amazon SES.
+// * When the tracking domain you specified is not verified in Amazon
+// SES.
 //
-//     * When the tracking domain you specified is not a valid domain
-// or subdomain.
+// * When the tracking domain you specified is not a valid domain or
+// subdomain.
 type InvalidTrackingOptionsException struct {
 	Message *string
 }

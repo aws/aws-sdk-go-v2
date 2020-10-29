@@ -48,27 +48,27 @@ type StartExportTaskInput struct {
 	// authorized to execute the following operations. These can be set in the KMS key
 	// policy:
 	//
-	//     * GrantOperation.Encrypt
+	// * GrantOperation.Encrypt
 	//
-	//     * GrantOperation.Decrypt
+	// * GrantOperation.Decrypt
 	//
-	//     *
+	// *
 	// GrantOperation.GenerateDataKey
 	//
-	//     *
+	// *
 	// GrantOperation.GenerateDataKeyWithoutPlaintext
 	//
-	//     *
+	// *
 	// GrantOperation.ReEncryptFrom
 	//
-	//     * GrantOperation.ReEncryptTo
+	// * GrantOperation.ReEncryptTo
 	//
-	//     *
+	// *
 	// GrantOperation.CreateGrant
 	//
-	//     * GrantOperation.DescribeKey
+	// * GrantOperation.DescribeKey
 	//
-	//     *
+	// *
 	// GrantOperation.RetireGrant
 	//
 	// This member is required.
@@ -87,20 +87,20 @@ type StartExportTaskInput struct {
 	// The data to be exported from the snapshot. If this parameter is not provided,
 	// all the snapshot data is exported. Valid values are the following:
 	//
-	//     *
-	// database - Export all the data from a specified database.
+	// * database -
+	// Export all the data from a specified database.
 	//
-	//     * database.table
-	// table-name - Export a table of the snapshot. This format is valid only for RDS
-	// for MySQL, RDS for MariaDB, and Aurora MySQL.
+	// * database.table table-name -
+	// Export a table of the snapshot. This format is valid only for RDS for MySQL, RDS
+	// for MariaDB, and Aurora MySQL.
 	//
-	//     * database.schema schema-name
-	// - Export a database schema of the snapshot. This format is valid only for RDS
-	// for PostgreSQL and Aurora PostgreSQL.
-	//
-	//     * database.schema.table table-name -
-	// Export a table of the database schema. This format is valid only for RDS for
+	// * database.schema schema-name - Export a
+	// database schema of the snapshot. This format is valid only for RDS for
 	// PostgreSQL and Aurora PostgreSQL.
+	//
+	// * database.schema.table table-name - Export a
+	// table of the database schema. This format is valid only for RDS for PostgreSQL
+	// and Aurora PostgreSQL.
 	ExportOnly []*string
 
 	// The Amazon S3 bucket prefix to use as the file name and path of the exported
@@ -114,20 +114,20 @@ type StartExportTaskOutput struct {
 
 	// The data exported from the snapshot. Valid values are the following:
 	//
-	//     *
-	// database - Export all the data from a specified database.
+	// * database
+	// - Export all the data from a specified database.
 	//
-	//     * database.table
-	// table-name - Export a table of the snapshot. This format is valid only for RDS
-	// for MySQL, RDS for MariaDB, and Aurora MySQL.
+	// * database.table table-name -
+	// Export a table of the snapshot. This format is valid only for RDS for MySQL, RDS
+	// for MariaDB, and Aurora MySQL.
 	//
-	//     * database.schema schema-name
-	// - Export a database schema of the snapshot. This format is valid only for RDS
-	// for PostgreSQL and Aurora PostgreSQL.
-	//
-	//     * database.schema.table table-name -
-	// Export a table of the database schema. This format is valid only for RDS for
+	// * database.schema schema-name - Export a
+	// database schema of the snapshot. This format is valid only for RDS for
 	// PostgreSQL and Aurora PostgreSQL.
+	//
+	// * database.schema.table table-name - Export a
+	// table of the database schema. This format is valid only for RDS for PostgreSQL
+	// and Aurora PostgreSQL.
 	ExportOnly []*string
 
 	// A unique identifier for the snapshot export task. This ID isn't an identifier

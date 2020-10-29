@@ -24,8 +24,8 @@ type EgressFilterType string
 
 // Enum values for EgressFilterType
 const (
-	EgressFilterTypeAllow_all EgressFilterType = "ALLOW_ALL"
-	EgressFilterTypeDrop_all  EgressFilterType = "DROP_ALL"
+	EgressFilterTypeAllowAll EgressFilterType = "ALLOW_ALL"
+	EgressFilterTypeDropAll  EgressFilterType = "DROP_ALL"
 )
 
 // Values returns all known values for EgressFilterType. Note that this can be
@@ -62,11 +62,11 @@ type GrpcRetryPolicyEvent string
 
 // Enum values for GrpcRetryPolicyEvent
 const (
-	GrpcRetryPolicyEventCancelled          GrpcRetryPolicyEvent = "cancelled"
-	GrpcRetryPolicyEventDeadline_exceeded  GrpcRetryPolicyEvent = "deadline-exceeded"
-	GrpcRetryPolicyEventInternal           GrpcRetryPolicyEvent = "internal"
-	GrpcRetryPolicyEventResource_exhausted GrpcRetryPolicyEvent = "resource-exhausted"
-	GrpcRetryPolicyEventUnavailable        GrpcRetryPolicyEvent = "unavailable"
+	GrpcRetryPolicyEventCancelled         GrpcRetryPolicyEvent = "cancelled"
+	GrpcRetryPolicyEventDeadlineExceeded  GrpcRetryPolicyEvent = "deadline-exceeded"
+	GrpcRetryPolicyEventInternal          GrpcRetryPolicyEvent = "internal"
+	GrpcRetryPolicyEventResourceExhausted GrpcRetryPolicyEvent = "resource-exhausted"
+	GrpcRetryPolicyEventUnavailable       GrpcRetryPolicyEvent = "unavailable"
 )
 
 // Values returns all known values for GrpcRetryPolicyEvent. Note that this can be
@@ -218,7 +218,7 @@ type TcpRetryPolicyEvent string
 
 // Enum values for TcpRetryPolicyEvent
 const (
-	TcpRetryPolicyEventConnection_error TcpRetryPolicyEvent = "connection-error"
+	TcpRetryPolicyEventConnectionError TcpRetryPolicyEvent = "connection-error"
 )
 
 // Values returns all known values for TcpRetryPolicyEvent. Note that this can be

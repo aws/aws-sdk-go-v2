@@ -21,28 +21,27 @@ import (
 // fleet's scaling policies are in force or suspended, call DescribeFleetAttributes
 // and check the stopped actions.
 //
-//     * DescribeFleetCapacity
+// * DescribeFleetCapacity
 //
-//     *
+// *
 // UpdateFleetCapacity
 //
-//     * DescribeEC2InstanceLimits
+// * DescribeEC2InstanceLimits
 //
-//     * Manage scaling
-// policies:
+// * Manage scaling policies:
 //
-//         * PutScalingPolicy (auto-scaling)
+// *
+// PutScalingPolicy (auto-scaling)
 //
-//         *
-// DescribeScalingPolicies (auto-scaling)
+// * DescribeScalingPolicies (auto-scaling)
 //
-//         * DeleteScalingPolicy
-// (auto-scaling)
+// *
+// DeleteScalingPolicy (auto-scaling)
 //
-//     * Manage fleet actions:
+// * Manage fleet actions:
 //
-//         * StartFleetActions
-//
+// *
+// StartFleetActions
 //
 // * StopFleetActions
 func (c *Client) DescribeScalingPolicies(ctx context.Context, params *DescribeScalingPoliciesInput, optFns ...func(*Options)) (*DescribeScalingPoliciesOutput, error) {
@@ -81,25 +80,25 @@ type DescribeScalingPoliciesInput struct {
 	// Scaling policy status to filter results on. A scaling policy is only in force
 	// when in an ACTIVE status.
 	//
-	//     * ACTIVE -- The scaling policy is currently in
+	// * ACTIVE -- The scaling policy is currently in
 	// force.
 	//
-	//     * UPDATEREQUESTED -- A request to update the scaling policy has been
+	// * UPDATEREQUESTED -- A request to update the scaling policy has been
 	// received.
 	//
-	//     * UPDATING -- A change is being made to the scaling policy.
+	// * UPDATING -- A change is being made to the scaling policy.
 	//
+	// *
+	// DELETEREQUESTED -- A request to delete the scaling policy has been received.
 	//
-	// * DELETEREQUESTED -- A request to delete the scaling policy has been received.
+	// *
+	// DELETING -- The scaling policy is being deleted.
 	//
-	//
-	// * DELETING -- The scaling policy is being deleted.
-	//
-	//     * DELETED -- The scaling
+	// * DELETED -- The scaling
 	// policy has been deleted.
 	//
-	//     * ERROR -- An error occurred in creating the
-	// policy. It should be removed and recreated.
+	// * ERROR -- An error occurred in creating the policy.
+	// It should be removed and recreated.
 	StatusFilter types.ScalingStatusType
 }
 

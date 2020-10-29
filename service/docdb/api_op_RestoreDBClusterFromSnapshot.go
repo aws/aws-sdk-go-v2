@@ -38,16 +38,15 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// The name of the cluster to create from the snapshot or cluster snapshot. This
 	// parameter isn't case sensitive. Constraints:
 	//
-	//     * Must contain from 1 to 63
+	// * Must contain from 1 to 63
 	// letters, numbers, or hyphens.
 	//
-	//     * The first character must be a letter.
+	// * The first character must be a letter.
 	//
+	// * Cannot
+	// end with a hyphen or contain two consecutive hyphens.
 	//
-	// * Cannot end with a hyphen or contain two consecutive hyphens.
-	//
-	// Example:
-	// my-snapshot-id
+	// Example: my-snapshot-id
 	//
 	// This member is required.
 	DBClusterIdentifier *string
@@ -62,8 +61,8 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// either the name or the Amazon Resource Name (ARN) to specify a cluster snapshot.
 	// However, you can use only the ARN to specify a snapshot. Constraints:
 	//
-	//     *
-	// Must match the identifier of an existing snapshot.
+	// * Must
+	// match the identifier of an existing snapshot.
 	//
 	// This member is required.
 	SnapshotIdentifier *string
@@ -97,13 +96,13 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// AWS KMS encryption key. If you do not specify a value for the KmsKeyId
 	// parameter, then the following occurs:
 	//
-	//     * If the snapshot or cluster snapshot
-	// in SnapshotIdentifier is encrypted, then the restored cluster is encrypted using
-	// the AWS KMS key that was used to encrypt the snapshot or the cluster snapshot.
+	// * If the snapshot or cluster snapshot in
+	// SnapshotIdentifier is encrypted, then the restored cluster is encrypted using
+	// the AWS KMS key that was used to encrypt the snapshot or the cluster
+	// snapshot.
 	//
-	//
-	// * If the snapshot or the cluster snapshot in SnapshotIdentifier is not
-	// encrypted, then the restored DB cluster is not encrypted.
+	// * If the snapshot or the cluster snapshot in SnapshotIdentifier is
+	// not encrypted, then the restored DB cluster is not encrypted.
 	KmsKeyId *string
 
 	// The port number on which the new cluster accepts connections. Constraints: Must

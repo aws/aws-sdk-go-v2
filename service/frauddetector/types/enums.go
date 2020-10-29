@@ -6,9 +6,9 @@ type DataSource string
 
 // Enum values for DataSource
 const (
-	DataSourceEvent                DataSource = "EVENT"
-	DataSourceModel_score          DataSource = "MODEL_SCORE"
-	DataSourceExternal_model_score DataSource = "EXTERNAL_MODEL_SCORE"
+	DataSourceEvent              DataSource = "EVENT"
+	DataSourceModelScore         DataSource = "MODEL_SCORE"
+	DataSourceExternalModelScore DataSource = "EXTERNAL_MODEL_SCORE"
 )
 
 // Values returns all known values for DataSource. Note that this can be expanded
@@ -154,7 +154,7 @@ type ModelTypeEnum string
 
 // Enum values for ModelTypeEnum
 const (
-	ModelTypeEnumOnline_fraud_insights ModelTypeEnum = "ONLINE_FRAUD_INSIGHTS"
+	ModelTypeEnumOnlineFraudInsights ModelTypeEnum = "ONLINE_FRAUD_INSIGHTS"
 )
 
 // Values returns all known values for ModelTypeEnum. Note that this can be
@@ -188,8 +188,8 @@ type RuleExecutionMode string
 
 // Enum values for RuleExecutionMode
 const (
-	RuleExecutionModeAll_matched   RuleExecutionMode = "ALL_MATCHED"
-	RuleExecutionModeFirst_matched RuleExecutionMode = "FIRST_MATCHED"
+	RuleExecutionModeAllMatched   RuleExecutionMode = "ALL_MATCHED"
+	RuleExecutionModeFirstMatched RuleExecutionMode = "FIRST_MATCHED"
 )
 
 // Values returns all known values for RuleExecutionMode. Note that this can be
@@ -206,7 +206,7 @@ type TrainingDataSourceEnum string
 
 // Enum values for TrainingDataSourceEnum
 const (
-	TrainingDataSourceEnumExternal_events TrainingDataSourceEnum = "EXTERNAL_EVENTS"
+	TrainingDataSourceEnumExternalEvents TrainingDataSourceEnum = "EXTERNAL_EVENTS"
 )
 
 // Values returns all known values for TrainingDataSourceEnum. Note that this can

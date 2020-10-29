@@ -15,20 +15,20 @@ import (
 // connection. To modify the target gateway, the following migration options are
 // available:
 //
-//     * An existing virtual private gateway to a new virtual private
+// * An existing virtual private gateway to a new virtual private
 // gateway
 //
-//     * An existing virtual private gateway to a transit gateway
+// * An existing virtual private gateway to a transit gateway
 //
-//     *
-// An existing transit gateway to a new transit gateway
+// * An
+// existing transit gateway to a new transit gateway
 //
-//     * An existing transit
-// gateway to a virtual private gateway
+// * An existing transit gateway
+// to a virtual private gateway
 //
-// Before you perform the migration to the
-// new gateway, you must configure the new gateway. Use CreateVpnGateway to create
-// a virtual private gateway, or CreateTransitGateway to create a transit gateway.
+// Before you perform the migration to the new
+// gateway, you must configure the new gateway. Use CreateVpnGateway to create a
+// virtual private gateway, or CreateTransitGateway to create a transit gateway.
 // This step is required when you migrate from a virtual private gateway with
 // static routes to a transit gateway. You must delete the static routes before you
 // migrate to the new gateway. Keep a copy of the static route before you delete

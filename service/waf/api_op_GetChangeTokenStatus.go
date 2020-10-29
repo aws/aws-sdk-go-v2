@@ -20,15 +20,15 @@ import (
 // global use. Returns the status of a ChangeToken that you got by calling
 // GetChangeToken. ChangeTokenStatus is one of the following values:
 //
-//     *
+// *
 // PROVISIONED: You requested the change token by calling GetChangeToken, but you
 // haven't used it yet in a call to create, update, or delete an AWS WAF object.
 //
+// *
+// PENDING: AWS WAF is propagating the create, update, or delete request to all AWS
+// WAF servers.
 //
-// * PENDING: AWS WAF is propagating the create, update, or delete request to all
-// AWS WAF servers.
-//
-//     * INSYNC: Propagation is complete.
+// * INSYNC: Propagation is complete.
 func (c *Client) GetChangeTokenStatus(ctx context.Context, params *GetChangeTokenStatusInput, optFns ...func(*Options)) (*GetChangeTokenStatusOutput, error) {
 	if params == nil {
 		params = &GetChangeTokenStatusInput{}

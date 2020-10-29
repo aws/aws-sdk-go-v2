@@ -13,17 +13,17 @@ import (
 
 // Gets an origin request policy, including the following metadata:
 //
-//     * The
-// policy’s identifier.
+// * The policy’s
+// identifier.
 //
-//     * The date and time when the policy was last
-// modified.
+// * The date and time when the policy was last modified.
 //
-// To get an origin request policy, you must provide the policy’s
-// identifier. If the origin request policy is attached to a distribution’s cache
-// behavior, you can get the policy’s identifier using ListDistributions or
-// GetDistribution. If the origin request policy is not attached to a cache
-// behavior, you can get the identifier using ListOriginRequestPolicies.
+// To get an
+// origin request policy, you must provide the policy’s identifier. If the origin
+// request policy is attached to a distribution’s cache behavior, you can get the
+// policy’s identifier using ListDistributions or GetDistribution. If the origin
+// request policy is not attached to a cache behavior, you can get the identifier
+// using ListOriginRequestPolicies.
 func (c *Client) GetOriginRequestPolicy(ctx context.Context, params *GetOriginRequestPolicyInput, optFns ...func(*Options)) (*GetOriginRequestPolicyOutput, error) {
 	if params == nil {
 		params = &GetOriginRequestPolicyInput{}

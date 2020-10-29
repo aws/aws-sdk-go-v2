@@ -33,21 +33,20 @@ type GetSupportedResourceTypesOutput struct {
 
 	// Contains a string with the supported AWS resource types:
 	//
-	//     * DynamoDB for
-	// Amazon DynamoDB
+	// * DynamoDB for Amazon
+	// DynamoDB
 	//
-	//     * EBS for Amazon Elastic Block Store
+	// * EBS for Amazon Elastic Block Store
 	//
-	//     * EC2 for Amazon
-	// Elastic Compute Cloud
+	// * EC2 for Amazon Elastic Compute
+	// Cloud
 	//
-	//     * EFS for Amazon Elastic File System
+	// * EFS for Amazon Elastic File System
 	//
-	//     * RDS for
-	// Amazon Relational Database Service
+	// * RDS for Amazon Relational
+	// Database Service
 	//
-	//     * Storage Gateway for AWS Storage
-	// Gateway
+	// * Storage Gateway for AWS Storage Gateway
 	ResourceTypes []*string
 
 	// Metadata pertaining to the operation's result.

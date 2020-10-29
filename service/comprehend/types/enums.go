@@ -6,8 +6,8 @@ type DocumentClassifierDataFormat string
 
 // Enum values for DocumentClassifierDataFormat
 const (
-	DocumentClassifierDataFormatComprehend_csv     DocumentClassifierDataFormat = "COMPREHEND_CSV"
-	DocumentClassifierDataFormatAugmented_manifest DocumentClassifierDataFormat = "AUGMENTED_MANIFEST"
+	DocumentClassifierDataFormatComprehendCsv     DocumentClassifierDataFormat = "COMPREHEND_CSV"
+	DocumentClassifierDataFormatAugmentedManifest DocumentClassifierDataFormat = "AUGMENTED_MANIFEST"
 )
 
 // Values returns all known values for DocumentClassifierDataFormat. Note that this
@@ -24,8 +24,8 @@ type DocumentClassifierMode string
 
 // Enum values for DocumentClassifierMode
 const (
-	DocumentClassifierModeMulti_class DocumentClassifierMode = "MULTI_CLASS"
-	DocumentClassifierModeMulti_label DocumentClassifierMode = "MULTI_LABEL"
+	DocumentClassifierModeMultiClass DocumentClassifierMode = "MULTI_CLASS"
+	DocumentClassifierModeMultiLabel DocumentClassifierMode = "MULTI_LABEL"
 )
 
 // Values returns all known values for DocumentClassifierMode. Note that this can
@@ -42,11 +42,11 @@ type EndpointStatus string
 
 // Enum values for EndpointStatus
 const (
-	EndpointStatusCreating   EndpointStatus = "CREATING"
-	EndpointStatusDeleting   EndpointStatus = "DELETING"
-	EndpointStatusFailed     EndpointStatus = "FAILED"
-	EndpointStatusIn_service EndpointStatus = "IN_SERVICE"
-	EndpointStatusUpdating   EndpointStatus = "UPDATING"
+	EndpointStatusCreating  EndpointStatus = "CREATING"
+	EndpointStatusDeleting  EndpointStatus = "DELETING"
+	EndpointStatusFailed    EndpointStatus = "FAILED"
+	EndpointStatusInService EndpointStatus = "IN_SERVICE"
+	EndpointStatusUpdating  EndpointStatus = "UPDATING"
 )
 
 // Values returns all known values for EndpointStatus. Note that this can be
@@ -66,8 +66,8 @@ type EntityRecognizerDataFormat string
 
 // Enum values for EntityRecognizerDataFormat
 const (
-	EntityRecognizerDataFormatComprehend_csv     EntityRecognizerDataFormat = "COMPREHEND_CSV"
-	EntityRecognizerDataFormatAugmented_manifest EntityRecognizerDataFormat = "AUGMENTED_MANIFEST"
+	EntityRecognizerDataFormatComprehendCsv     EntityRecognizerDataFormat = "COMPREHEND_CSV"
+	EntityRecognizerDataFormatAugmentedManifest EntityRecognizerDataFormat = "AUGMENTED_MANIFEST"
 )
 
 // Values returns all known values for EntityRecognizerDataFormat. Note that this
@@ -84,15 +84,15 @@ type EntityType string
 
 // Enum values for EntityType
 const (
-	EntityTypePerson          EntityType = "PERSON"
-	EntityTypeLocation        EntityType = "LOCATION"
-	EntityTypeOrganization    EntityType = "ORGANIZATION"
-	EntityTypeCommercial_item EntityType = "COMMERCIAL_ITEM"
-	EntityTypeEvent           EntityType = "EVENT"
-	EntityTypeDate            EntityType = "DATE"
-	EntityTypeQuantity        EntityType = "QUANTITY"
-	EntityTypeTitle           EntityType = "TITLE"
-	EntityTypeOther           EntityType = "OTHER"
+	EntityTypePerson         EntityType = "PERSON"
+	EntityTypeLocation       EntityType = "LOCATION"
+	EntityTypeOrganization   EntityType = "ORGANIZATION"
+	EntityTypeCommercialItem EntityType = "COMMERCIAL_ITEM"
+	EntityTypeEvent          EntityType = "EVENT"
+	EntityTypeDate           EntityType = "DATE"
+	EntityTypeQuantity       EntityType = "QUANTITY"
+	EntityTypeTitle          EntityType = "TITLE"
+	EntityTypeOther          EntityType = "OTHER"
 )
 
 // Values returns all known values for EntityType. Note that this can be expanded
@@ -116,8 +116,8 @@ type InputFormat string
 
 // Enum values for InputFormat
 const (
-	InputFormatOne_doc_per_file InputFormat = "ONE_DOC_PER_FILE"
-	InputFormatOne_doc_per_line InputFormat = "ONE_DOC_PER_LINE"
+	InputFormatOneDocPerFile InputFormat = "ONE_DOC_PER_FILE"
+	InputFormatOneDocPerLine InputFormat = "ONE_DOC_PER_LINE"
 )
 
 // Values returns all known values for InputFormat. Note that this can be expanded
@@ -134,12 +134,12 @@ type JobStatus string
 
 // Enum values for JobStatus
 const (
-	JobStatusSubmitted      JobStatus = "SUBMITTED"
-	JobStatusIn_progress    JobStatus = "IN_PROGRESS"
-	JobStatusCompleted      JobStatus = "COMPLETED"
-	JobStatusFailed         JobStatus = "FAILED"
-	JobStatusStop_requested JobStatus = "STOP_REQUESTED"
-	JobStatusStopped        JobStatus = "STOPPED"
+	JobStatusSubmitted     JobStatus = "SUBMITTED"
+	JobStatusInProgress    JobStatus = "IN_PROGRESS"
+	JobStatusCompleted     JobStatus = "COMPLETED"
+	JobStatusFailed        JobStatus = "FAILED"
+	JobStatusStopRequested JobStatus = "STOP_REQUESTED"
+	JobStatusStopped       JobStatus = "STOPPED"
 )
 
 // Values returns all known values for JobStatus. Note that this can be expanded in
@@ -160,18 +160,18 @@ type LanguageCode string
 
 // Enum values for LanguageCode
 const (
-	LanguageCodeEn    LanguageCode = "en"
-	LanguageCodeEs    LanguageCode = "es"
-	LanguageCodeFr    LanguageCode = "fr"
-	LanguageCodeDe    LanguageCode = "de"
-	LanguageCodeIt    LanguageCode = "it"
-	LanguageCodePt    LanguageCode = "pt"
-	LanguageCodeAr    LanguageCode = "ar"
-	LanguageCodeHi    LanguageCode = "hi"
-	LanguageCodeJa    LanguageCode = "ja"
-	LanguageCodeKo    LanguageCode = "ko"
-	LanguageCodeZh    LanguageCode = "zh"
-	LanguageCodeZh_tw LanguageCode = "zh-TW"
+	LanguageCodeEn   LanguageCode = "en"
+	LanguageCodeEs   LanguageCode = "es"
+	LanguageCodeFr   LanguageCode = "fr"
+	LanguageCodeDe   LanguageCode = "de"
+	LanguageCodeIt   LanguageCode = "it"
+	LanguageCodePt   LanguageCode = "pt"
+	LanguageCodeAr   LanguageCode = "ar"
+	LanguageCodeHi   LanguageCode = "hi"
+	LanguageCodeJa   LanguageCode = "ja"
+	LanguageCodeKo   LanguageCode = "ko"
+	LanguageCodeZh   LanguageCode = "zh"
+	LanguageCodeZhTw LanguageCode = "zh-TW"
 )
 
 // Values returns all known values for LanguageCode. Note that this can be expanded
@@ -198,13 +198,13 @@ type ModelStatus string
 
 // Enum values for ModelStatus
 const (
-	ModelStatusSubmitted      ModelStatus = "SUBMITTED"
-	ModelStatusTraining       ModelStatus = "TRAINING"
-	ModelStatusDeleting       ModelStatus = "DELETING"
-	ModelStatusStop_requested ModelStatus = "STOP_REQUESTED"
-	ModelStatusStopped        ModelStatus = "STOPPED"
-	ModelStatusIn_error       ModelStatus = "IN_ERROR"
-	ModelStatusTrained        ModelStatus = "TRAINED"
+	ModelStatusSubmitted     ModelStatus = "SUBMITTED"
+	ModelStatusTraining      ModelStatus = "TRAINING"
+	ModelStatusDeleting      ModelStatus = "DELETING"
+	ModelStatusStopRequested ModelStatus = "STOP_REQUESTED"
+	ModelStatusStopped       ModelStatus = "STOPPED"
+	ModelStatusInError       ModelStatus = "IN_ERROR"
+	ModelStatusTrained       ModelStatus = "TRAINED"
 )
 
 // Values returns all known values for ModelStatus. Note that this can be expanded
@@ -276,8 +276,8 @@ type PiiEntitiesDetectionMaskMode string
 
 // Enum values for PiiEntitiesDetectionMaskMode
 const (
-	PiiEntitiesDetectionMaskModeMask                         PiiEntitiesDetectionMaskMode = "MASK"
-	PiiEntitiesDetectionMaskModeReplace_with_pii_entity_type PiiEntitiesDetectionMaskMode = "REPLACE_WITH_PII_ENTITY_TYPE"
+	PiiEntitiesDetectionMaskModeMask                     PiiEntitiesDetectionMaskMode = "MASK"
+	PiiEntitiesDetectionMaskModeReplaceWithPiiEntityType PiiEntitiesDetectionMaskMode = "REPLACE_WITH_PII_ENTITY_TYPE"
 )
 
 // Values returns all known values for PiiEntitiesDetectionMaskMode. Note that this
@@ -294,8 +294,8 @@ type PiiEntitiesDetectionMode string
 
 // Enum values for PiiEntitiesDetectionMode
 const (
-	PiiEntitiesDetectionModeOnly_redaction PiiEntitiesDetectionMode = "ONLY_REDACTION"
-	PiiEntitiesDetectionModeOnly_offsets   PiiEntitiesDetectionMode = "ONLY_OFFSETS"
+	PiiEntitiesDetectionModeOnlyRedaction PiiEntitiesDetectionMode = "ONLY_REDACTION"
+	PiiEntitiesDetectionModeOnlyOffsets   PiiEntitiesDetectionMode = "ONLY_OFFSETS"
 )
 
 // Values returns all known values for PiiEntitiesDetectionMode. Note that this can
@@ -312,29 +312,29 @@ type PiiEntityType string
 
 // Enum values for PiiEntityType
 const (
-	PiiEntityTypeBank_account_number PiiEntityType = "BANK_ACCOUNT_NUMBER"
-	PiiEntityTypeBank_routing        PiiEntityType = "BANK_ROUTING"
-	PiiEntityTypeCredit_debit_number PiiEntityType = "CREDIT_DEBIT_NUMBER"
-	PiiEntityTypeCredit_debit_cvv    PiiEntityType = "CREDIT_DEBIT_CVV"
-	PiiEntityTypeCredit_debit_expiry PiiEntityType = "CREDIT_DEBIT_EXPIRY"
-	PiiEntityTypePin                 PiiEntityType = "PIN"
-	PiiEntityTypeEmail               PiiEntityType = "EMAIL"
-	PiiEntityTypeAddress             PiiEntityType = "ADDRESS"
-	PiiEntityTypeName                PiiEntityType = "NAME"
-	PiiEntityTypePhone               PiiEntityType = "PHONE"
-	PiiEntityTypeSsn                 PiiEntityType = "SSN"
-	PiiEntityTypeDate_time           PiiEntityType = "DATE_TIME"
-	PiiEntityTypePassport_number     PiiEntityType = "PASSPORT_NUMBER"
-	PiiEntityTypeDriver_id           PiiEntityType = "DRIVER_ID"
-	PiiEntityTypeUrl                 PiiEntityType = "URL"
-	PiiEntityTypeAge                 PiiEntityType = "AGE"
-	PiiEntityTypeUsername            PiiEntityType = "USERNAME"
-	PiiEntityTypePassword            PiiEntityType = "PASSWORD"
-	PiiEntityTypeAws_access_key      PiiEntityType = "AWS_ACCESS_KEY"
-	PiiEntityTypeAws_secret_key      PiiEntityType = "AWS_SECRET_KEY"
-	PiiEntityTypeIp_address          PiiEntityType = "IP_ADDRESS"
-	PiiEntityTypeMac_address         PiiEntityType = "MAC_ADDRESS"
-	PiiEntityTypeAll                 PiiEntityType = "ALL"
+	PiiEntityTypeBankAccountNumber PiiEntityType = "BANK_ACCOUNT_NUMBER"
+	PiiEntityTypeBankRouting       PiiEntityType = "BANK_ROUTING"
+	PiiEntityTypeCreditDebitNumber PiiEntityType = "CREDIT_DEBIT_NUMBER"
+	PiiEntityTypeCreditDebitCvv    PiiEntityType = "CREDIT_DEBIT_CVV"
+	PiiEntityTypeCreditDebitExpiry PiiEntityType = "CREDIT_DEBIT_EXPIRY"
+	PiiEntityTypePin               PiiEntityType = "PIN"
+	PiiEntityTypeEmail             PiiEntityType = "EMAIL"
+	PiiEntityTypeAddress           PiiEntityType = "ADDRESS"
+	PiiEntityTypeName              PiiEntityType = "NAME"
+	PiiEntityTypePhone             PiiEntityType = "PHONE"
+	PiiEntityTypeSsn               PiiEntityType = "SSN"
+	PiiEntityTypeDateTime          PiiEntityType = "DATE_TIME"
+	PiiEntityTypePassportNumber    PiiEntityType = "PASSPORT_NUMBER"
+	PiiEntityTypeDriverId          PiiEntityType = "DRIVER_ID"
+	PiiEntityTypeUrl               PiiEntityType = "URL"
+	PiiEntityTypeAge               PiiEntityType = "AGE"
+	PiiEntityTypeUsername          PiiEntityType = "USERNAME"
+	PiiEntityTypePassword          PiiEntityType = "PASSWORD"
+	PiiEntityTypeAwsAccessKey      PiiEntityType = "AWS_ACCESS_KEY"
+	PiiEntityTypeAwsSecretKey      PiiEntityType = "AWS_SECRET_KEY"
+	PiiEntityTypeIpAddress         PiiEntityType = "IP_ADDRESS"
+	PiiEntityTypeMacAddress        PiiEntityType = "MAC_ADDRESS"
+	PiiEntityTypeAll               PiiEntityType = "ALL"
 )
 
 // Values returns all known values for PiiEntityType. Note that this can be

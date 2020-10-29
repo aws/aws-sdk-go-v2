@@ -44,10 +44,10 @@ type ShardIteratorType string
 
 // Enum values for ShardIteratorType
 const (
-	ShardIteratorTypeTrim_horizon          ShardIteratorType = "TRIM_HORIZON"
-	ShardIteratorTypeLatest                ShardIteratorType = "LATEST"
-	ShardIteratorTypeAt_sequence_number    ShardIteratorType = "AT_SEQUENCE_NUMBER"
-	ShardIteratorTypeAfter_sequence_number ShardIteratorType = "AFTER_SEQUENCE_NUMBER"
+	ShardIteratorTypeTrimHorizon         ShardIteratorType = "TRIM_HORIZON"
+	ShardIteratorTypeLatest              ShardIteratorType = "LATEST"
+	ShardIteratorTypeAtSequenceNumber    ShardIteratorType = "AT_SEQUENCE_NUMBER"
+	ShardIteratorTypeAfterSequenceNumber ShardIteratorType = "AFTER_SEQUENCE_NUMBER"
 )
 
 // Values returns all known values for ShardIteratorType. Note that this can be
@@ -88,10 +88,10 @@ type StreamViewType string
 
 // Enum values for StreamViewType
 const (
-	StreamViewTypeNew_image          StreamViewType = "NEW_IMAGE"
-	StreamViewTypeOld_image          StreamViewType = "OLD_IMAGE"
-	StreamViewTypeNew_and_old_images StreamViewType = "NEW_AND_OLD_IMAGES"
-	StreamViewTypeKeys_only          StreamViewType = "KEYS_ONLY"
+	StreamViewTypeNewImage        StreamViewType = "NEW_IMAGE"
+	StreamViewTypeOldImage        StreamViewType = "OLD_IMAGE"
+	StreamViewTypeNewAndOldImages StreamViewType = "NEW_AND_OLD_IMAGES"
+	StreamViewTypeKeysOnly        StreamViewType = "KEYS_ONLY"
 )
 
 // Values returns all known values for StreamViewType. Note that this can be

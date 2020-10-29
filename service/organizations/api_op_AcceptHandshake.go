@@ -15,7 +15,7 @@ import (
 // proposed by the handshake request. This operation can be called only by the
 // following principals when they also have the relevant IAM permissions:
 //
-//     *
+// *
 // Invitation to join or Approve all features request handshakes: only a principal
 // from the member account. The user who calls the API for an invitation to join
 // must have the organizations:AcceptHandshake permission. If you enabled all
@@ -26,10 +26,9 @@ import (
 // (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integration_services.html#orgs_integration_service-linked-roles)
 // in the AWS Organizations User Guide.
 //
-//     * Enable all features final
-// confirmation handshake: only a principal from the management account. For more
-// information about invitations, see Inviting an AWS Account to Join Your
-// Organization
+// * Enable all features final confirmation
+// handshake: only a principal from the management account. For more information
+// about invitations, see Inviting an AWS Account to Join Your Organization
 // (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_invites.html)
 // in the AWS Organizations User Guide. For more information about requests to
 // enable all features in the organization, see Enabling All Features in Your

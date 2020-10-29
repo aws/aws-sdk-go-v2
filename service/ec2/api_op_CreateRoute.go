@@ -18,15 +18,15 @@ import (
 // IPv4 address 192.0.2.3, and the route table includes the following two IPv4
 // routes:
 //
-//     * 192.0.2.0/24 (goes to some target A)
+// * 192.0.2.0/24 (goes to some target A)
 //
-//     * 192.0.2.0/28 (goes to
-// some target B)
+// * 192.0.2.0/28 (goes to some
+// target B)
 //
-// Both routes apply to the traffic destined for 192.0.2.3.
-// However, the second route in the list covers a smaller number of IP addresses
-// and is therefore more specific, so we use that route to determine where to
-// target the traffic. For more information about route tables, see Route Tables
+// Both routes apply to the traffic destined for 192.0.2.3. However, the
+// second route in the list covers a smaller number of IP addresses and is
+// therefore more specific, so we use that route to determine where to target the
+// traffic. For more information about route tables, see Route Tables
 // (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html) in the
 // Amazon Virtual Private Cloud User Guide.
 func (c *Client) CreateRoute(ctx context.Context, params *CreateRouteInput, optFns ...func(*Options)) (*CreateRouteOutput, error) {

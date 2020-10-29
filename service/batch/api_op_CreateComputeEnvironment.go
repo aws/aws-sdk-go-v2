@@ -41,15 +41,15 @@ import (
 // you install on the compute resources. To use a new AMI for your AWS Batch
 // jobs:
 //
-//     * Create a new compute environment with the new AMI.
+// * Create a new compute environment with the new AMI.
 //
-//     * Add the
-// compute environment to an existing job queue.
+// * Add the compute
+// environment to an existing job queue.
 //
-//     * Remove the old compute
-// environment from your job queue.
+// * Remove the old compute environment from
+// your job queue.
 //
-//     * Delete the old compute environment.
+// * Delete the old compute environment.
 func (c *Client) CreateComputeEnvironment(ctx context.Context, params *CreateComputeEnvironmentInput, optFns ...func(*Options)) (*CreateComputeEnvironmentOutput, error) {
 	if params == nil {
 		params = &CreateComputeEnvironmentInput{}

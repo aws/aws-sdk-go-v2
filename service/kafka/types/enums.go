@@ -22,9 +22,9 @@ type ClientBroker string
 
 // Enum values for ClientBroker
 const (
-	ClientBrokerTls           ClientBroker = "TLS"
-	ClientBrokerTls_plaintext ClientBroker = "TLS_PLAINTEXT"
-	ClientBrokerPlaintext     ClientBroker = "PLAINTEXT"
+	ClientBrokerTls          ClientBroker = "TLS"
+	ClientBrokerTlsPlaintext ClientBroker = "TLS_PLAINTEXT"
+	ClientBrokerPlaintext    ClientBroker = "PLAINTEXT"
 )
 
 // Values returns all known values for ClientBroker. Note that this can be expanded
@@ -66,9 +66,9 @@ type ConfigurationState string
 
 // Enum values for ConfigurationState
 const (
-	ConfigurationStateActive        ConfigurationState = "ACTIVE"
-	ConfigurationStateDeleting      ConfigurationState = "DELETING"
-	ConfigurationStateDelete_failed ConfigurationState = "DELETE_FAILED"
+	ConfigurationStateActive       ConfigurationState = "ACTIVE"
+	ConfigurationStateDeleting     ConfigurationState = "DELETING"
+	ConfigurationStateDeleteFailed ConfigurationState = "DELETE_FAILED"
 )
 
 // Values returns all known values for ConfigurationState. Note that this can be
@@ -86,9 +86,9 @@ type EnhancedMonitoring string
 
 // Enum values for EnhancedMonitoring
 const (
-	EnhancedMonitoringDefault              EnhancedMonitoring = "DEFAULT"
-	EnhancedMonitoringPer_broker           EnhancedMonitoring = "PER_BROKER"
-	EnhancedMonitoringPer_topic_per_broker EnhancedMonitoring = "PER_TOPIC_PER_BROKER"
+	EnhancedMonitoringDefault           EnhancedMonitoring = "DEFAULT"
+	EnhancedMonitoringPerBroker         EnhancedMonitoring = "PER_BROKER"
+	EnhancedMonitoringPerTopicPerBroker EnhancedMonitoring = "PER_TOPIC_PER_BROKER"
 )
 
 // Values returns all known values for EnhancedMonitoring. Note that this can be

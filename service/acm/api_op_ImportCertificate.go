@@ -25,48 +25,47 @@ import (
 // certificates that you import. Note the following guidelines when importing third
 // party certificates:
 //
-//     * You must enter the private key that matches the
+// * You must enter the private key that matches the
 // certificate you are importing.
 //
-//     * The private key must be unencrypted. You
+// * The private key must be unencrypted. You
 // cannot import a private key that is protected by a password or a passphrase.
 //
-//
-// * If the certificate you are importing is not self-signed, you must enter its
+// *
+// If the certificate you are importing is not self-signed, you must enter its
 // certificate chain.
 //
-//     * If a certificate chain is included, the issuer must be
-// the subject of one of the certificates in the chain.
+// * If a certificate chain is included, the issuer must be the
+// subject of one of the certificates in the chain.
 //
-//     * The certificate,
-// private key, and certificate chain must be PEM-encoded.
+// * The certificate, private
+// key, and certificate chain must be PEM-encoded.
 //
-//     * The current time
-// must be between the Not Before and Not After certificate fields.
+// * The current time must be
+// between the Not Before and Not After certificate fields.
 //
-//     * The
-// Issuer field must not be empty.
+// * The Issuer field
+// must not be empty.
 //
-//     * The OCSP authority URL, if present, must
-// not exceed 1000 characters.
+// * The OCSP authority URL, if present, must not exceed 1000
+// characters.
 //
-//     * To import a new certificate, omit the
-// CertificateArn argument. Include this argument only when you want to replace a
-// previously imported certifica
+// * To import a new certificate, omit the CertificateArn argument.
+// Include this argument only when you want to replace a previously imported
+// certifica
 //
-//     * When you import a certificate by using the
-// CLI, you must specify the certificate, the certificate chain, and the private
-// key by their file names preceded by file://. For example, you can specify a
-// certificate saved in the C:\temp folder as
-// file://C:\temp\certificate_to_import.pem. If you are making an HTTP or HTTPS
-// Query request, include these arguments as BLOBs.
+// * When you import a certificate by using the CLI, you must specify
+// the certificate, the certificate chain, and the private key by their file names
+// preceded by file://. For example, you can specify a certificate saved in the
+// C:\temp folder as file://C:\temp\certificate_to_import.pem. If you are making an
+// HTTP or HTTPS Query request, include these arguments as BLOBs.
 //
-//     * When you import a
-// certificate by using an SDK, you must specify the certificate, the certificate
-// chain, and the private key files in the manner required by the programming
-// language you're using.
+// * When you
+// import a certificate by using an SDK, you must specify the certificate, the
+// certificate chain, and the private key files in the manner required by the
+// programming language you're using.
 //
-//     * The cryptographic algorithm of an imported
+// * The cryptographic algorithm of an imported
 // certificate must match the algorithm of the signing CA. For example, if the
 // signing CA key type is RSA, then the certificate key type must also be
 // RSA.

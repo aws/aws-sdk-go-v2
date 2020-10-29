@@ -6,9 +6,9 @@ type AMITypes string
 
 // Enum values for AMITypes
 const (
-	AMITypesAl2_x86_64     AMITypes = "AL2_x86_64"
-	AMITypesAl2_x86_64_gpu AMITypes = "AL2_x86_64_GPU"
-	AMITypesAl2_arm_64     AMITypes = "AL2_ARM_64"
+	AMITypesAl2X8664    AMITypes = "AL2_x86_64"
+	AMITypesAl2X8664Gpu AMITypes = "AL2_x86_64_GPU"
+	AMITypesAl2Arm64    AMITypes = "AL2_ARM_64"
 )
 
 // Values returns all known values for AMITypes. Note that this can be expanded in
@@ -50,18 +50,18 @@ type ErrorCode string
 
 // Enum values for ErrorCode
 const (
-	ErrorCodeSubnet_not_found            ErrorCode = "SubnetNotFound"
-	ErrorCodeSecurity_group_not_found    ErrorCode = "SecurityGroupNotFound"
-	ErrorCodeEni_limit_reached           ErrorCode = "EniLimitReached"
-	ErrorCodeIp_not_available            ErrorCode = "IpNotAvailable"
-	ErrorCodeAccess_denied               ErrorCode = "AccessDenied"
-	ErrorCodeOperation_not_permitted     ErrorCode = "OperationNotPermitted"
-	ErrorCodeVpc_id_not_found            ErrorCode = "VpcIdNotFound"
-	ErrorCodeUnknown                     ErrorCode = "Unknown"
-	ErrorCodeNode_creation_failure       ErrorCode = "NodeCreationFailure"
-	ErrorCodePod_eviction_failure        ErrorCode = "PodEvictionFailure"
-	ErrorCodeInsufficient_free_addresses ErrorCode = "InsufficientFreeAddresses"
-	ErrorCodeCluster_unreachable         ErrorCode = "ClusterUnreachable"
+	ErrorCodeSubnetNotFound            ErrorCode = "SubnetNotFound"
+	ErrorCodeSecurityGroupNotFound     ErrorCode = "SecurityGroupNotFound"
+	ErrorCodeEniLimitReached           ErrorCode = "EniLimitReached"
+	ErrorCodeIpNotAvailable            ErrorCode = "IpNotAvailable"
+	ErrorCodeAccessDenied              ErrorCode = "AccessDenied"
+	ErrorCodeOperationNotPermitted     ErrorCode = "OperationNotPermitted"
+	ErrorCodeVpcIdNotFound             ErrorCode = "VpcIdNotFound"
+	ErrorCodeUnknown                   ErrorCode = "Unknown"
+	ErrorCodeNodeCreationFailure       ErrorCode = "NodeCreationFailure"
+	ErrorCodePodEvictionFailure        ErrorCode = "PodEvictionFailure"
+	ErrorCodeInsufficientFreeAddresses ErrorCode = "InsufficientFreeAddresses"
+	ErrorCodeClusterUnreachable        ErrorCode = "ClusterUnreachable"
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded in
@@ -88,11 +88,11 @@ type FargateProfileStatus string
 
 // Enum values for FargateProfileStatus
 const (
-	FargateProfileStatusCreating      FargateProfileStatus = "CREATING"
-	FargateProfileStatusActive        FargateProfileStatus = "ACTIVE"
-	FargateProfileStatusDeleting      FargateProfileStatus = "DELETING"
-	FargateProfileStatusCreate_failed FargateProfileStatus = "CREATE_FAILED"
-	FargateProfileStatusDelete_failed FargateProfileStatus = "DELETE_FAILED"
+	FargateProfileStatusCreating     FargateProfileStatus = "CREATING"
+	FargateProfileStatusActive       FargateProfileStatus = "ACTIVE"
+	FargateProfileStatusDeleting     FargateProfileStatus = "DELETING"
+	FargateProfileStatusCreateFailed FargateProfileStatus = "CREATE_FAILED"
+	FargateProfileStatusDeleteFailed FargateProfileStatus = "DELETE_FAILED"
 )
 
 // Values returns all known values for FargateProfileStatus. Note that this can be
@@ -112,11 +112,11 @@ type LogType string
 
 // Enum values for LogType
 const (
-	LogTypeApi                LogType = "api"
-	LogTypeAudit              LogType = "audit"
-	LogTypeAuthenticator      LogType = "authenticator"
-	LogTypeController_manager LogType = "controllerManager"
-	LogTypeScheduler          LogType = "scheduler"
+	LogTypeApi               LogType = "api"
+	LogTypeAudit             LogType = "audit"
+	LogTypeAuthenticator     LogType = "authenticator"
+	LogTypeControllerManager LogType = "controllerManager"
+	LogTypeScheduler         LogType = "scheduler"
 )
 
 // Values returns all known values for LogType. Note that this can be expanded in
@@ -136,24 +136,24 @@ type NodegroupIssueCode string
 
 // Enum values for NodegroupIssueCode
 const (
-	NodegroupIssueCodeAuto_scaling_group_not_found             NodegroupIssueCode = "AutoScalingGroupNotFound"
-	NodegroupIssueCodeAuto_scaling_group_invalid_configuration NodegroupIssueCode = "AutoScalingGroupInvalidConfiguration"
-	NodegroupIssueCodeEc2_security_group_not_found             NodegroupIssueCode = "Ec2SecurityGroupNotFound"
-	NodegroupIssueCodeEc2_security_group_deletion_failure      NodegroupIssueCode = "Ec2SecurityGroupDeletionFailure"
-	NodegroupIssueCodeEc2_launch_template_not_found            NodegroupIssueCode = "Ec2LaunchTemplateNotFound"
-	NodegroupIssueCodeEc2_launch_template_version_mismatch     NodegroupIssueCode = "Ec2LaunchTemplateVersionMismatch"
-	NodegroupIssueCodeEc2_subnet_not_found                     NodegroupIssueCode = "Ec2SubnetNotFound"
-	NodegroupIssueCodeEc2_subnet_invalid_configuration         NodegroupIssueCode = "Ec2SubnetInvalidConfiguration"
-	NodegroupIssueCodeIam_instance_profile_not_found           NodegroupIssueCode = "IamInstanceProfileNotFound"
-	NodegroupIssueCodeIam_limit_exceeded                       NodegroupIssueCode = "IamLimitExceeded"
-	NodegroupIssueCodeIam_node_role_not_found                  NodegroupIssueCode = "IamNodeRoleNotFound"
-	NodegroupIssueCodeNode_creation_failure                    NodegroupIssueCode = "NodeCreationFailure"
-	NodegroupIssueCodeAsg_instance_launch_failures             NodegroupIssueCode = "AsgInstanceLaunchFailures"
-	NodegroupIssueCodeInstance_limit_exceeded                  NodegroupIssueCode = "InstanceLimitExceeded"
-	NodegroupIssueCodeInsufficient_free_addresses              NodegroupIssueCode = "InsufficientFreeAddresses"
-	NodegroupIssueCodeAccess_denied                            NodegroupIssueCode = "AccessDenied"
-	NodegroupIssueCodeInternal_failure                         NodegroupIssueCode = "InternalFailure"
-	NodegroupIssueCodeCluster_unreachable                      NodegroupIssueCode = "ClusterUnreachable"
+	NodegroupIssueCodeAutoScalingGroupNotFound             NodegroupIssueCode = "AutoScalingGroupNotFound"
+	NodegroupIssueCodeAutoScalingGroupInvalidConfiguration NodegroupIssueCode = "AutoScalingGroupInvalidConfiguration"
+	NodegroupIssueCodeEc2SecurityGroupNotFound             NodegroupIssueCode = "Ec2SecurityGroupNotFound"
+	NodegroupIssueCodeEc2SecurityGroupDeletionFailure      NodegroupIssueCode = "Ec2SecurityGroupDeletionFailure"
+	NodegroupIssueCodeEc2LaunchTemplateNotFound            NodegroupIssueCode = "Ec2LaunchTemplateNotFound"
+	NodegroupIssueCodeEc2LaunchTemplateVersionMismatch     NodegroupIssueCode = "Ec2LaunchTemplateVersionMismatch"
+	NodegroupIssueCodeEc2SubnetNotFound                    NodegroupIssueCode = "Ec2SubnetNotFound"
+	NodegroupIssueCodeEc2SubnetInvalidConfiguration        NodegroupIssueCode = "Ec2SubnetInvalidConfiguration"
+	NodegroupIssueCodeIamInstanceProfileNotFound           NodegroupIssueCode = "IamInstanceProfileNotFound"
+	NodegroupIssueCodeIamLimitExceeded                     NodegroupIssueCode = "IamLimitExceeded"
+	NodegroupIssueCodeIamNodeRoleNotFound                  NodegroupIssueCode = "IamNodeRoleNotFound"
+	NodegroupIssueCodeNodeCreationFailure                  NodegroupIssueCode = "NodeCreationFailure"
+	NodegroupIssueCodeAsgInstanceLaunchFailures            NodegroupIssueCode = "AsgInstanceLaunchFailures"
+	NodegroupIssueCodeInstanceLimitExceeded                NodegroupIssueCode = "InstanceLimitExceeded"
+	NodegroupIssueCodeInsufficientFreeAddresses            NodegroupIssueCode = "InsufficientFreeAddresses"
+	NodegroupIssueCodeAccessDenied                         NodegroupIssueCode = "AccessDenied"
+	NodegroupIssueCodeInternalFailure                      NodegroupIssueCode = "InternalFailure"
+	NodegroupIssueCodeClusterUnreachable                   NodegroupIssueCode = "ClusterUnreachable"
 )
 
 // Values returns all known values for NodegroupIssueCode. Note that this can be
@@ -186,13 +186,13 @@ type NodegroupStatus string
 
 // Enum values for NodegroupStatus
 const (
-	NodegroupStatusCreating      NodegroupStatus = "CREATING"
-	NodegroupStatusActive        NodegroupStatus = "ACTIVE"
-	NodegroupStatusUpdating      NodegroupStatus = "UPDATING"
-	NodegroupStatusDeleting      NodegroupStatus = "DELETING"
-	NodegroupStatusCreate_failed NodegroupStatus = "CREATE_FAILED"
-	NodegroupStatusDelete_failed NodegroupStatus = "DELETE_FAILED"
-	NodegroupStatusDegraded      NodegroupStatus = "DEGRADED"
+	NodegroupStatusCreating     NodegroupStatus = "CREATING"
+	NodegroupStatusActive       NodegroupStatus = "ACTIVE"
+	NodegroupStatusUpdating     NodegroupStatus = "UPDATING"
+	NodegroupStatusDeleting     NodegroupStatus = "DELETING"
+	NodegroupStatusCreateFailed NodegroupStatus = "CREATE_FAILED"
+	NodegroupStatusDeleteFailed NodegroupStatus = "DELETE_FAILED"
+	NodegroupStatusDegraded     NodegroupStatus = "DEGRADED"
 )
 
 // Values returns all known values for NodegroupStatus. Note that this can be
@@ -214,18 +214,18 @@ type UpdateParamType string
 
 // Enum values for UpdateParamType
 const (
-	UpdateParamTypeVersion                 UpdateParamType = "Version"
-	UpdateParamTypePlatform_version        UpdateParamType = "PlatformVersion"
-	UpdateParamTypeEndpoint_private_access UpdateParamType = "EndpointPrivateAccess"
-	UpdateParamTypeEndpoint_public_access  UpdateParamType = "EndpointPublicAccess"
-	UpdateParamTypeCluster_logging         UpdateParamType = "ClusterLogging"
-	UpdateParamTypeDesired_size            UpdateParamType = "DesiredSize"
-	UpdateParamTypeLabels_to_add           UpdateParamType = "LabelsToAdd"
-	UpdateParamTypeLabels_to_remove        UpdateParamType = "LabelsToRemove"
-	UpdateParamTypeMax_size                UpdateParamType = "MaxSize"
-	UpdateParamTypeMin_size                UpdateParamType = "MinSize"
-	UpdateParamTypeRelease_version         UpdateParamType = "ReleaseVersion"
-	UpdateParamTypePublic_access_cidrs     UpdateParamType = "PublicAccessCidrs"
+	UpdateParamTypeVersion               UpdateParamType = "Version"
+	UpdateParamTypePlatformVersion       UpdateParamType = "PlatformVersion"
+	UpdateParamTypeEndpointPrivateAccess UpdateParamType = "EndpointPrivateAccess"
+	UpdateParamTypeEndpointPublicAccess  UpdateParamType = "EndpointPublicAccess"
+	UpdateParamTypeClusterLogging        UpdateParamType = "ClusterLogging"
+	UpdateParamTypeDesiredSize           UpdateParamType = "DesiredSize"
+	UpdateParamTypeLabelsToAdd           UpdateParamType = "LabelsToAdd"
+	UpdateParamTypeLabelsToRemove        UpdateParamType = "LabelsToRemove"
+	UpdateParamTypeMaxSize               UpdateParamType = "MaxSize"
+	UpdateParamTypeMinSize               UpdateParamType = "MinSize"
+	UpdateParamTypeReleaseVersion        UpdateParamType = "ReleaseVersion"
+	UpdateParamTypePublicAccessCidrs     UpdateParamType = "PublicAccessCidrs"
 )
 
 // Values returns all known values for UpdateParamType. Note that this can be
@@ -252,10 +252,10 @@ type UpdateStatus string
 
 // Enum values for UpdateStatus
 const (
-	UpdateStatusIn_progress UpdateStatus = "InProgress"
-	UpdateStatusFailed      UpdateStatus = "Failed"
-	UpdateStatusCancelled   UpdateStatus = "Cancelled"
-	UpdateStatusSuccessful  UpdateStatus = "Successful"
+	UpdateStatusInProgress UpdateStatus = "InProgress"
+	UpdateStatusFailed     UpdateStatus = "Failed"
+	UpdateStatusCancelled  UpdateStatus = "Cancelled"
+	UpdateStatusSuccessful UpdateStatus = "Successful"
 )
 
 // Values returns all known values for UpdateStatus. Note that this can be expanded
@@ -274,10 +274,10 @@ type UpdateType string
 
 // Enum values for UpdateType
 const (
-	UpdateTypeVersion_update         UpdateType = "VersionUpdate"
-	UpdateTypeEndpoint_access_update UpdateType = "EndpointAccessUpdate"
-	UpdateTypeLogging_update         UpdateType = "LoggingUpdate"
-	UpdateTypeConfig_update          UpdateType = "ConfigUpdate"
+	UpdateTypeVersionUpdate        UpdateType = "VersionUpdate"
+	UpdateTypeEndpointAccessUpdate UpdateType = "EndpointAccessUpdate"
+	UpdateTypeLoggingUpdate        UpdateType = "LoggingUpdate"
+	UpdateTypeConfigUpdate         UpdateType = "ConfigUpdate"
 )
 
 // Values returns all known values for UpdateType. Note that this can be expanded

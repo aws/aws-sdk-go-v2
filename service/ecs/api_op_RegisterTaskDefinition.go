@@ -76,22 +76,21 @@ type RegisterTaskDefinitionInput struct {
 	// following values, which determines your range of supported values for the memory
 	// parameter:
 	//
-	//     * 256 (.25 vCPU) - Available memory values: 512 (0.5 GB), 1024
-	// (1 GB), 2048 (2 GB)
+	// * 256 (.25 vCPU) - Available memory values: 512 (0.5 GB), 1024 (1
+	// GB), 2048 (2 GB)
 	//
-	//     * 512 (.5 vCPU) - Available memory values: 1024 (1 GB),
-	// 2048 (2 GB), 3072 (3 GB), 4096 (4 GB)
+	// * 512 (.5 vCPU) - Available memory values: 1024 (1 GB), 2048
+	// (2 GB), 3072 (3 GB), 4096 (4 GB)
 	//
-	//     * 1024 (1 vCPU) - Available memory
-	// values: 2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7
-	// GB), 8192 (8 GB)
+	// * 1024 (1 vCPU) - Available memory values:
+	// 2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB),
+	// 8192 (8 GB)
 	//
-	//     * 2048 (2 vCPU) - Available memory values: Between 4096 (4
-	// GB) and 16384 (16 GB) in increments of 1024 (1 GB)
+	// * 2048 (2 vCPU) - Available memory values: Between 4096 (4 GB) and
+	// 16384 (16 GB) in increments of 1024 (1 GB)
 	//
-	//     * 4096 (4 vCPU) -
-	// Available memory values: Between 8192 (8 GB) and 30720 (30 GB) in increments of
-	// 1024 (1 GB)
+	// * 4096 (4 vCPU) - Available memory
+	// values: Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB)
 	Cpu *string
 
 	// The Amazon Resource Name (ARN) of the task execution role that grants the Amazon
@@ -124,12 +123,12 @@ type RegisterTaskDefinitionInput struct {
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	//
-	//     * For tasks that
-	// use the host IPC mode, IPC namespace related systemControls are not supported.
+	// * For tasks that use
+	// the host IPC mode, IPC namespace related systemControls are not supported.
 	//
-	//
-	// * For tasks that use the task IPC mode, IPC namespace related systemControls
-	// will apply to all containers within a task.
+	// *
+	// For tasks that use the task IPC mode, IPC namespace related systemControls will
+	// apply to all containers within a task.
 	//
 	// This parameter is not supported for
 	// Windows containers or tasks using the Fargate launch type.
@@ -145,22 +144,21 @@ type RegisterTaskDefinitionInput struct {
 	// and you must use one of the following values, which determines your range of
 	// supported values for the cpu parameter:
 	//
-	//     * 512 (0.5 GB), 1024 (1 GB), 2048
-	// (2 GB) - Available cpu values: 256 (.25 vCPU)
+	// * 512 (0.5 GB), 1024 (1 GB), 2048 (2
+	// GB) - Available cpu values: 256 (.25 vCPU)
 	//
-	//     * 1024 (1 GB), 2048 (2 GB),
-	// 3072 (3 GB), 4096 (4 GB) - Available cpu values: 512 (.5 vCPU)
+	// * 1024 (1 GB), 2048 (2 GB), 3072 (3
+	// GB), 4096 (4 GB) - Available cpu values: 512 (.5 vCPU)
 	//
-	//     * 2048 (2
-	// GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8
-	// GB) - Available cpu values: 1024 (1 vCPU)
+	// * 2048 (2 GB), 3072 (3
+	// GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB) - Available
+	// cpu values: 1024 (1 vCPU)
 	//
-	//     * Between 4096 (4 GB) and 16384
-	// (16 GB) in increments of 1024 (1 GB) - Available cpu values: 2048 (2 vCPU)
+	// * Between 4096 (4 GB) and 16384 (16 GB) in increments
+	// of 1024 (1 GB) - Available cpu values: 2048 (2 vCPU)
 	//
-	//
-	// * Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB) - Available
-	// cpu values: 4096 (4 vCPU)
+	// * Between 8192 (8 GB) and
+	// 30720 (30 GB) in increments of 1024 (1 GB) - Available cpu values: 4096 (4 vCPU)
 	Memory *string
 
 	// The Docker networking mode to use for the containers in the task. The valid
@@ -233,31 +231,30 @@ type RegisterTaskDefinitionInput struct {
 	// organize them. Each tag consists of a key and an optional value, both of which
 	// you define. The following basic restrictions apply to tags:
 	//
-	//     * Maximum
-	// number of tags per resource - 50
+	// * Maximum number of
+	// tags per resource - 50
 	//
-	//     * For each resource, each tag key must be
-	// unique, and each tag key can have only one value.
+	// * For each resource, each tag key must be unique, and
+	// each tag key can have only one value.
 	//
-	//     * Maximum key length -
-	// 128 Unicode characters in UTF-8
-	//
-	//     * Maximum value length - 256 Unicode
+	// * Maximum key length - 128 Unicode
 	// characters in UTF-8
 	//
-	//     * If your tagging schema is used across multiple
-	// services and resources, remember that other services may have restrictions on
-	// allowed characters. Generally allowed characters are: letters, numbers, and
-	// spaces representable in UTF-8, and the following characters: + - = . _ : / @.
+	// * Maximum value length - 256 Unicode characters in UTF-8
 	//
+	// *
+	// If your tagging schema is used across multiple services and resources, remember
+	// that other services may have restrictions on allowed characters. Generally
+	// allowed characters are: letters, numbers, and spaces representable in UTF-8, and
+	// the following characters: + - = . _ : / @.
 	//
-	// * Tag keys and values are case-sensitive.
+	// * Tag keys and values are
+	// case-sensitive.
 	//
-	//     * Do not use aws:, AWS:, or any
-	// upper or lowercase combination of such as a prefix for either keys or values as
-	// it is reserved for AWS use. You cannot edit or delete tag keys or values with
-	// this prefix. Tags with this prefix do not count against your tags per resource
-	// limit.
+	// * Do not use aws:, AWS:, or any upper or lowercase combination
+	// of such as a prefix for either keys or values as it is reserved for AWS use. You
+	// cannot edit or delete tag keys or values with this prefix. Tags with this prefix
+	// do not count against your tags per resource limit.
 	Tags []*types.Tag
 
 	// The short name or full Amazon Resource Name (ARN) of the IAM role that

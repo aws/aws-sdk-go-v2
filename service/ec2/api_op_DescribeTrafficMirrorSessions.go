@@ -38,30 +38,30 @@ type DescribeTrafficMirrorSessionsInput struct {
 
 	// One or more filters. The possible values are:
 	//
-	//     * description: The Traffic
-	// Mirror session description.
+	// * description: The Traffic Mirror
+	// session description.
 	//
-	//     * network-interface-id: The ID of the Traffic
-	// Mirror session network interface.
+	// * network-interface-id: The ID of the Traffic Mirror
+	// session network interface.
 	//
-	//     * owner-id: The ID of the account that
-	// owns the Traffic Mirror session.
+	// * owner-id: The ID of the account that owns the
+	// Traffic Mirror session.
 	//
-	//     * packet-length: The assigned number of
-	// packets to mirror.
+	// * packet-length: The assigned number of packets to
+	// mirror.
 	//
-	//     * session-number: The assigned session number.
+	// * session-number: The assigned session number.
 	//
-	//     *
+	// *
 	// traffic-mirror-filter-id: The ID of the Traffic Mirror filter.
 	//
-	//     *
+	// *
 	// traffic-mirror-session-id: The ID of the Traffic Mirror session.
 	//
-	//     *
+	// *
 	// traffic-mirror-target-id: The ID of the Traffic Mirror target.
 	//
-	//     *
+	// *
 	// virtual-network-id: The virtual network ID of the Traffic Mirror session.
 	Filters []*types.Filter
 

@@ -16,12 +16,12 @@ import (
 // In addition to listing the parameters specified in the CreateDataset request,
 // this operation includes the following dataset properties:
 //
-//     * CreationTime
+// * CreationTime
 //
+// *
+// LastModificationTime
 //
-// * LastModificationTime
-//
-//     * Status
+// * Status
 func (c *Client) DescribeDataset(ctx context.Context, params *DescribeDatasetInput, optFns ...func(*Options)) (*DescribeDatasetOutput, error) {
 	if params == nil {
 		params = &DescribeDatasetInput{}
@@ -84,18 +84,18 @@ type DescribeDatasetOutput struct {
 
 	// The status of the dataset. States include:
 	//
-	//     * ACTIVE
+	// * ACTIVE
 	//
-	//     * CREATE_PENDING,
+	// * CREATE_PENDING,
 	// CREATE_IN_PROGRESS, CREATE_FAILED
 	//
-	//     * DELETE_PENDING, DELETE_IN_PROGRESS,
+	// * DELETE_PENDING, DELETE_IN_PROGRESS,
 	// DELETE_FAILED
 	//
-	//     * UPDATE_PENDING, UPDATE_IN_PROGRESS, UPDATE_FAILED
+	// * UPDATE_PENDING, UPDATE_IN_PROGRESS, UPDATE_FAILED
 	//
-	// The
-	// UPDATE states apply while data is imported to the dataset from a call to the
+	// The UPDATE
+	// states apply while data is imported to the dataset from a call to the
 	// CreateDatasetImportJob operation and reflect the status of the dataset import
 	// job. For example, when the import job status is CREATE_IN_PROGRESS, the status
 	// of the dataset is UPDATE_IN_PROGRESS. The Status of the dataset must be ACTIVE

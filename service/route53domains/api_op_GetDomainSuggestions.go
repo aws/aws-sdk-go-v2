@@ -37,21 +37,21 @@ type GetDomainSuggestionsInput struct {
 	// in the Amazon Route 53 Developer Guide. The domain name can contain only the
 	// following characters:
 	//
-	//     * Letters a through z. Domain names are not case
+	// * Letters a through z. Domain names are not case
 	// sensitive.
 	//
-	//     * Numbers 0 through 9.
+	// * Numbers 0 through 9.
 	//
-	//     * Hyphen (-). You can't specify a
-	// hyphen at the beginning or end of a label.
+	// * Hyphen (-). You can't specify a hyphen at
+	// the beginning or end of a label.
 	//
-	//     * Period (.) to separate the
-	// labels in the name, such as the . in example.com.
+	// * Period (.) to separate the labels in the
+	// name, such as the . in example.com.
 	//
-	// Internationalized domain
-	// names are not supported for some top-level domains. To determine whether the TLD
-	// that you want to use supports internationalized domain names, see Domains that
-	// You Can Register with Amazon Route 53
+	// Internationalized domain names are not
+	// supported for some top-level domains. To determine whether the TLD that you want
+	// to use supports internationalized domain names, see Domains that You Can
+	// Register with Amazon Route 53
 	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html).
 	//
 	// This member is required.

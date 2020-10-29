@@ -42,15 +42,14 @@ type DescribeClientVpnAuthorizationRulesInput struct {
 
 	// One or more filters. Filter names and values are case-sensitive.
 	//
-	//     *
-	// description - The description of the authorization rule.
+	// * description
+	// - The description of the authorization rule.
 	//
-	//     * destination-cidr
-	// - The CIDR of the network to which the authorization rule applies.
+	// * destination-cidr - The CIDR of
+	// the network to which the authorization rule applies.
 	//
-	//     *
-	// group-id - The ID of the Active Directory group to which the authorization rule
-	// grants access.
+	// * group-id - The ID of the
+	// Active Directory group to which the authorization rule grants access.
 	Filters []*types.Filter
 
 	// The maximum number of results to return for the request in a single page. The

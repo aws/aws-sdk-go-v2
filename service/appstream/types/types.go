@@ -155,84 +155,82 @@ type Fleet struct {
 	// The instance type to use when launching fleet instances. The following instance
 	// types are available:
 	//
-	//     * stream.standard.medium
+	// * stream.standard.medium
 	//
-	//     *
-	// stream.standard.large
+	// * stream.standard.large
 	//
-	//     * stream.compute.large
+	// *
+	// stream.compute.large
 	//
-	//     * stream.compute.xlarge
-	//
+	// * stream.compute.xlarge
 	//
 	// * stream.compute.2xlarge
 	//
-	//     * stream.compute.4xlarge
+	// *
+	// stream.compute.4xlarge
 	//
-	//     *
-	// stream.compute.8xlarge
+	// * stream.compute.8xlarge
 	//
-	//     * stream.memory.large
+	// * stream.memory.large
 	//
-	//     * stream.memory.xlarge
-	//
+	// *
+	// stream.memory.xlarge
 	//
 	// * stream.memory.2xlarge
 	//
-	//     * stream.memory.4xlarge
+	// * stream.memory.4xlarge
 	//
-	//     *
+	// *
 	// stream.memory.8xlarge
 	//
-	//     * stream.memory.z1d.large
+	// * stream.memory.z1d.large
 	//
-	//     *
-	// stream.memory.z1d.xlarge
+	// * stream.memory.z1d.xlarge
 	//
-	//     * stream.memory.z1d.2xlarge
+	// *
+	// stream.memory.z1d.2xlarge
 	//
-	//     *
-	// stream.memory.z1d.3xlarge
+	// * stream.memory.z1d.3xlarge
 	//
-	//     * stream.memory.z1d.6xlarge
+	// *
+	// stream.memory.z1d.6xlarge
 	//
-	//     *
-	// stream.memory.z1d.12xlarge
+	// * stream.memory.z1d.12xlarge
 	//
-	//     * stream.graphics-design.large
+	// *
+	// stream.graphics-design.large
 	//
-	//     *
-	// stream.graphics-design.xlarge
+	// * stream.graphics-design.xlarge
 	//
-	//     * stream.graphics-design.2xlarge
+	// *
+	// stream.graphics-design.2xlarge
 	//
-	//     *
-	// stream.graphics-design.4xlarge
+	// * stream.graphics-design.4xlarge
 	//
-	//     * stream.graphics-desktop.2xlarge
+	// *
+	// stream.graphics-desktop.2xlarge
 	//
-	//     *
-	// stream.graphics.g4dn.xlarge
+	// * stream.graphics.g4dn.xlarge
 	//
-	//     * stream.graphics.g4dn.2xlarge
+	// *
+	// stream.graphics.g4dn.2xlarge
 	//
-	//     *
-	// stream.graphics.g4dn.4xlarge
+	// * stream.graphics.g4dn.4xlarge
 	//
-	//     * stream.graphics.g4dn.8xlarge
+	// *
+	// stream.graphics.g4dn.8xlarge
 	//
-	//     *
-	// stream.graphics.g4dn.12xlarge
+	// * stream.graphics.g4dn.12xlarge
 	//
-	//     * stream.graphics.g4dn.16xlarge
+	// *
+	// stream.graphics.g4dn.16xlarge
 	//
-	//     *
-	// stream.graphics-pro.4xlarge
+	// * stream.graphics-pro.4xlarge
 	//
-	//     * stream.graphics-pro.8xlarge
+	// *
+	// stream.graphics-pro.8xlarge
 	//
-	//     *
-	// stream.graphics-pro.16xlarge
+	// * stream.graphics-pro.16xlarge
 	//
 	// This member is required.
 	InstanceType *string
@@ -461,84 +459,82 @@ type ImageBuilder struct {
 	// The instance type for the image builder. The following instance types are
 	// available:
 	//
-	//     * stream.standard.medium
+	// * stream.standard.medium
 	//
-	//     * stream.standard.large
+	// * stream.standard.large
 	//
-	//     *
+	// *
 	// stream.compute.large
 	//
-	//     * stream.compute.xlarge
+	// * stream.compute.xlarge
 	//
-	//     *
-	// stream.compute.2xlarge
+	// * stream.compute.2xlarge
 	//
-	//     * stream.compute.4xlarge
+	// *
+	// stream.compute.4xlarge
 	//
-	//     *
-	// stream.compute.8xlarge
+	// * stream.compute.8xlarge
 	//
-	//     * stream.memory.large
+	// * stream.memory.large
 	//
-	//     * stream.memory.xlarge
-	//
+	// *
+	// stream.memory.xlarge
 	//
 	// * stream.memory.2xlarge
 	//
-	//     * stream.memory.4xlarge
+	// * stream.memory.4xlarge
 	//
-	//     *
+	// *
 	// stream.memory.8xlarge
 	//
-	//     * stream.memory.z1d.large
+	// * stream.memory.z1d.large
 	//
-	//     *
-	// stream.memory.z1d.xlarge
+	// * stream.memory.z1d.xlarge
 	//
-	//     * stream.memory.z1d.2xlarge
+	// *
+	// stream.memory.z1d.2xlarge
 	//
-	//     *
-	// stream.memory.z1d.3xlarge
+	// * stream.memory.z1d.3xlarge
 	//
-	//     * stream.memory.z1d.6xlarge
+	// *
+	// stream.memory.z1d.6xlarge
 	//
-	//     *
-	// stream.memory.z1d.12xlarge
+	// * stream.memory.z1d.12xlarge
 	//
-	//     * stream.graphics-design.large
+	// *
+	// stream.graphics-design.large
 	//
-	//     *
-	// stream.graphics-design.xlarge
+	// * stream.graphics-design.xlarge
 	//
-	//     * stream.graphics-design.2xlarge
+	// *
+	// stream.graphics-design.2xlarge
 	//
-	//     *
-	// stream.graphics-design.4xlarge
+	// * stream.graphics-design.4xlarge
 	//
-	//     * stream.graphics-desktop.2xlarge
+	// *
+	// stream.graphics-desktop.2xlarge
 	//
-	//     *
-	// stream.graphics.g4dn.xlarge
+	// * stream.graphics.g4dn.xlarge
 	//
-	//     * stream.graphics.g4dn.2xlarge
+	// *
+	// stream.graphics.g4dn.2xlarge
 	//
-	//     *
-	// stream.graphics.g4dn.4xlarge
+	// * stream.graphics.g4dn.4xlarge
 	//
-	//     * stream.graphics.g4dn.8xlarge
+	// *
+	// stream.graphics.g4dn.8xlarge
 	//
-	//     *
-	// stream.graphics.g4dn.12xlarge
+	// * stream.graphics.g4dn.12xlarge
 	//
-	//     * stream.graphics.g4dn.16xlarge
+	// *
+	// stream.graphics.g4dn.16xlarge
 	//
-	//     *
-	// stream.graphics-pro.4xlarge
+	// * stream.graphics-pro.4xlarge
 	//
-	//     * stream.graphics-pro.8xlarge
+	// *
+	// stream.graphics-pro.8xlarge
 	//
-	//     *
-	// stream.graphics-pro.16xlarge
+	// * stream.graphics-pro.16xlarge
 	InstanceType *string
 
 	// Describes the network details of the fleet or image builder instance.
@@ -831,18 +827,18 @@ type User struct {
 	// The status of the user in the user pool. The status can be one of the
 	// following:
 	//
-	//     * UNCONFIRMED – The user is created but not confirmed.
+	// * UNCONFIRMED – The user is created but not confirmed.
 	//
-	//     *
-	// CONFIRMED – The user is confirmed.
+	// * CONFIRMED
+	// – The user is confirmed.
 	//
-	//     * ARCHIVED – The user is no longer
-	// active.
+	// * ARCHIVED – The user is no longer active.
 	//
-	//     * COMPROMISED – The user is disabled because of a potential
-	// security threat.
+	// *
+	// COMPROMISED – The user is disabled because of a potential security threat.
 	//
-	//     * UNKNOWN – The user status is not known.
+	// *
+	// UNKNOWN – The user status is not known.
 	Status *string
 
 	// The email address of the user. Users' email addresses are case-sensitive.

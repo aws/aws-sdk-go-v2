@@ -6,11 +6,11 @@ type ActionTypeEnum string
 
 // Enum values for ActionTypeEnum
 const (
-	ActionTypeEnumForward              ActionTypeEnum = "forward"
-	ActionTypeEnumAuthenticate_oidc    ActionTypeEnum = "authenticate-oidc"
-	ActionTypeEnumAuthenticate_cognito ActionTypeEnum = "authenticate-cognito"
-	ActionTypeEnumRedirect             ActionTypeEnum = "redirect"
-	ActionTypeEnumFixed_response       ActionTypeEnum = "fixed-response"
+	ActionTypeEnumForward             ActionTypeEnum = "forward"
+	ActionTypeEnumAuthenticateOidc    ActionTypeEnum = "authenticate-oidc"
+	ActionTypeEnumAuthenticateCognito ActionTypeEnum = "authenticate-cognito"
+	ActionTypeEnumRedirect            ActionTypeEnum = "redirect"
+	ActionTypeEnumFixedResponse       ActionTypeEnum = "fixed-response"
 )
 
 // Values returns all known values for ActionTypeEnum. Note that this can be
@@ -90,8 +90,8 @@ type LoadBalancerSchemeEnum string
 
 // Enum values for LoadBalancerSchemeEnum
 const (
-	LoadBalancerSchemeEnumInternet_facing LoadBalancerSchemeEnum = "internet-facing"
-	LoadBalancerSchemeEnumInternal        LoadBalancerSchemeEnum = "internal"
+	LoadBalancerSchemeEnumInternetFacing LoadBalancerSchemeEnum = "internet-facing"
+	LoadBalancerSchemeEnumInternal       LoadBalancerSchemeEnum = "internal"
 )
 
 // Values returns all known values for LoadBalancerSchemeEnum. Note that this can
@@ -108,10 +108,10 @@ type LoadBalancerStateEnum string
 
 // Enum values for LoadBalancerStateEnum
 const (
-	LoadBalancerStateEnumActive          LoadBalancerStateEnum = "active"
-	LoadBalancerStateEnumProvisioning    LoadBalancerStateEnum = "provisioning"
-	LoadBalancerStateEnumActive_impaired LoadBalancerStateEnum = "active_impaired"
-	LoadBalancerStateEnumFailed          LoadBalancerStateEnum = "failed"
+	LoadBalancerStateEnumActive         LoadBalancerStateEnum = "active"
+	LoadBalancerStateEnumProvisioning   LoadBalancerStateEnum = "provisioning"
+	LoadBalancerStateEnumActiveImpaired LoadBalancerStateEnum = "active_impaired"
+	LoadBalancerStateEnumFailed         LoadBalancerStateEnum = "failed"
 )
 
 // Values returns all known values for LoadBalancerStateEnum. Note that this can be
@@ -148,12 +148,12 @@ type ProtocolEnum string
 
 // Enum values for ProtocolEnum
 const (
-	ProtocolEnumHttp    ProtocolEnum = "HTTP"
-	ProtocolEnumHttps   ProtocolEnum = "HTTPS"
-	ProtocolEnumTcp     ProtocolEnum = "TCP"
-	ProtocolEnumTls     ProtocolEnum = "TLS"
-	ProtocolEnumUdp     ProtocolEnum = "UDP"
-	ProtocolEnumTcp_udp ProtocolEnum = "TCP_UDP"
+	ProtocolEnumHttp   ProtocolEnum = "HTTP"
+	ProtocolEnumHttps  ProtocolEnum = "HTTPS"
+	ProtocolEnumTcp    ProtocolEnum = "TCP"
+	ProtocolEnumTls    ProtocolEnum = "TLS"
+	ProtocolEnumUdp    ProtocolEnum = "UDP"
+	ProtocolEnumTcpUdp ProtocolEnum = "TCP_UDP"
 )
 
 // Values returns all known values for ProtocolEnum. Note that this can be expanded
@@ -174,8 +174,8 @@ type RedirectActionStatusCodeEnum string
 
 // Enum values for RedirectActionStatusCodeEnum
 const (
-	RedirectActionStatusCodeEnumHttp_301 RedirectActionStatusCodeEnum = "HTTP_301"
-	RedirectActionStatusCodeEnumHttp_302 RedirectActionStatusCodeEnum = "HTTP_302"
+	RedirectActionStatusCodeEnumHttp301 RedirectActionStatusCodeEnum = "HTTP_301"
+	RedirectActionStatusCodeEnumHttp302 RedirectActionStatusCodeEnum = "HTTP_302"
 )
 
 // Values returns all known values for RedirectActionStatusCodeEnum. Note that this
@@ -192,18 +192,18 @@ type TargetHealthReasonEnum string
 
 // Enum values for TargetHealthReasonEnum
 const (
-	TargetHealthReasonEnumRegistration_in_progress   TargetHealthReasonEnum = "Elb.RegistrationInProgress"
-	TargetHealthReasonEnumInitial_health_checking    TargetHealthReasonEnum = "Elb.InitialHealthChecking"
-	TargetHealthReasonEnumResponse_code_mismatch     TargetHealthReasonEnum = "Target.ResponseCodeMismatch"
-	TargetHealthReasonEnumTimeout                    TargetHealthReasonEnum = "Target.Timeout"
-	TargetHealthReasonEnumFailed_health_checks       TargetHealthReasonEnum = "Target.FailedHealthChecks"
-	TargetHealthReasonEnumNot_registered             TargetHealthReasonEnum = "Target.NotRegistered"
-	TargetHealthReasonEnumNot_in_use                 TargetHealthReasonEnum = "Target.NotInUse"
-	TargetHealthReasonEnumDeregistration_in_progress TargetHealthReasonEnum = "Target.DeregistrationInProgress"
-	TargetHealthReasonEnumInvalid_state              TargetHealthReasonEnum = "Target.InvalidState"
-	TargetHealthReasonEnumIp_unusable                TargetHealthReasonEnum = "Target.IpUnusable"
-	TargetHealthReasonEnumHealth_check_disabled      TargetHealthReasonEnum = "Target.HealthCheckDisabled"
-	TargetHealthReasonEnumInternal_error             TargetHealthReasonEnum = "Elb.InternalError"
+	TargetHealthReasonEnumRegistrationInProgress   TargetHealthReasonEnum = "Elb.RegistrationInProgress"
+	TargetHealthReasonEnumInitialHealthChecking    TargetHealthReasonEnum = "Elb.InitialHealthChecking"
+	TargetHealthReasonEnumResponseCodeMismatch     TargetHealthReasonEnum = "Target.ResponseCodeMismatch"
+	TargetHealthReasonEnumTimeout                  TargetHealthReasonEnum = "Target.Timeout"
+	TargetHealthReasonEnumFailedHealthChecks       TargetHealthReasonEnum = "Target.FailedHealthChecks"
+	TargetHealthReasonEnumNotRegistered            TargetHealthReasonEnum = "Target.NotRegistered"
+	TargetHealthReasonEnumNotInUse                 TargetHealthReasonEnum = "Target.NotInUse"
+	TargetHealthReasonEnumDeregistrationInProgress TargetHealthReasonEnum = "Target.DeregistrationInProgress"
+	TargetHealthReasonEnumInvalidState             TargetHealthReasonEnum = "Target.InvalidState"
+	TargetHealthReasonEnumIpUnusable               TargetHealthReasonEnum = "Target.IpUnusable"
+	TargetHealthReasonEnumHealthCheckDisabled      TargetHealthReasonEnum = "Target.HealthCheckDisabled"
+	TargetHealthReasonEnumInternalError            TargetHealthReasonEnum = "Elb.InternalError"
 )
 
 // Values returns all known values for TargetHealthReasonEnum. Note that this can

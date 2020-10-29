@@ -39,148 +39,147 @@ type CreateFilterInput struct {
 	// Represents the criteria to be used in the filter for querying findings. You can
 	// only use the following attributes to query findings:
 	//
-	//     * accountId
+	// * accountId
 	//
-	//     *
-	// region
+	// * region
 	//
-	//     * confidence
+	// *
+	// confidence
 	//
-	//     * id
+	// * id
 	//
-	//     *
-	// resource.accessKeyDetails.accessKeyId
+	// * resource.accessKeyDetails.accessKeyId
 	//
-	//     *
+	// *
 	// resource.accessKeyDetails.principalId
 	//
-	//     *
-	// resource.accessKeyDetails.userName
+	// * resource.accessKeyDetails.userName
 	//
-	//     * resource.accessKeyDetails.userType
+	// *
+	// resource.accessKeyDetails.userType
 	//
+	// *
+	// resource.instanceDetails.iamInstanceProfile.id
 	//
-	// * resource.instanceDetails.iamInstanceProfile.id
-	//
-	//     *
+	// *
 	// resource.instanceDetails.imageId
 	//
-	//     * resource.instanceDetails.instanceId
+	// * resource.instanceDetails.instanceId
 	//
+	// *
+	// resource.instanceDetails.outpostArn
 	//
-	// * resource.instanceDetails.outpostArn
-	//
-	//     *
+	// *
 	// resource.instanceDetails.networkInterfaces.ipv6Addresses
 	//
-	//     *
+	// *
 	// resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress
 	//
+	// *
+	// resource.instanceDetails.networkInterfaces.publicDnsName
 	//
-	// * resource.instanceDetails.networkInterfaces.publicDnsName
-	//
-	//     *
+	// *
 	// resource.instanceDetails.networkInterfaces.publicIp
 	//
-	//     *
+	// *
 	// resource.instanceDetails.networkInterfaces.securityGroups.groupId
 	//
-	//     *
+	// *
 	// resource.instanceDetails.networkInterfaces.securityGroups.groupName
 	//
-	//     *
+	// *
 	// resource.instanceDetails.networkInterfaces.subnetId
 	//
-	//     *
+	// *
 	// resource.instanceDetails.networkInterfaces.vpcId
 	//
-	//     *
+	// *
 	// resource.instanceDetails.tags.key
 	//
-	//     * resource.instanceDetails.tags.value
+	// * resource.instanceDetails.tags.value
 	//
+	// *
+	// resource.resourceType
 	//
-	// * resource.resourceType
+	// * service.action.actionType
 	//
-	//     * service.action.actionType
-	//
-	//     *
+	// *
 	// service.action.awsApiCallAction.api
 	//
-	//     *
+	// *
 	// service.action.awsApiCallAction.callerType
 	//
-	//     *
+	// *
 	// service.action.awsApiCallAction.remoteIpDetails.city.cityName
 	//
-	//     *
+	// *
 	// service.action.awsApiCallAction.remoteIpDetails.country.countryName
 	//
-	//     *
+	// *
 	// service.action.awsApiCallAction.remoteIpDetails.ipAddressV4
 	//
-	//     *
+	// *
 	// service.action.awsApiCallAction.remoteIpDetails.organization.asn
 	//
-	//     *
+	// *
 	// service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg
 	//
-	//     *
+	// *
 	// service.action.awsApiCallAction.serviceName
 	//
-	//     *
+	// *
 	// service.action.dnsRequestAction.domain
 	//
-	//     *
+	// *
 	// service.action.networkConnectionAction.blocked
 	//
-	//     *
+	// *
 	// service.action.networkConnectionAction.connectionDirection
 	//
-	//     *
+	// *
 	// service.action.networkConnectionAction.localPortDetails.port
 	//
-	//     *
+	// *
 	// service.action.networkConnectionAction.protocol
 	//
-	//     *
+	// *
 	// service.action.networkConnectionAction.localIpDetails.ipAddressV4
 	//
-	//     *
+	// *
 	// service.action.networkConnectionAction.remoteIpDetails.city.cityName
 	//
-	//     *
+	// *
 	// service.action.networkConnectionAction.remoteIpDetails.country.countryName
 	//
+	// *
+	// service.action.networkConnectionAction.remoteIpDetails.ipAddressV4
 	//
-	// * service.action.networkConnectionAction.remoteIpDetails.ipAddressV4
-	//
-	//     *
+	// *
 	// service.action.networkConnectionAction.remoteIpDetails.organization.asn
 	//
-	//     *
+	// *
 	// service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg
 	//
+	// *
+	// service.action.networkConnectionAction.remotePortDetails.port
 	//
-	// * service.action.networkConnectionAction.remotePortDetails.port
-	//
-	//     *
+	// *
 	// service.additionalInfo.threatListName
 	//
-	//     * service.archived When this
-	// attribute is set to TRUE, only archived findings are listed. When it's set to
-	// FALSE, only unarchived findings are listed. When this attribute is not set, all
-	// existing findings are listed.
+	// * service.archived When this attribute is
+	// set to TRUE, only archived findings are listed. When it's set to FALSE, only
+	// unarchived findings are listed. When this attribute is not set, all existing
+	// findings are listed.
 	//
-	//     * service.resourceRole
+	// * service.resourceRole
 	//
-	//     * severity
+	// * severity
 	//
-	//     *
-	// type
+	// * type
 	//
-	//     * updatedAt Type: ISO 8601 string format: YYYY-MM-DDTHH:MM:SS.SSSZ or
-	// YYYY-MM-DDTHH:MM:SSZ depending on whether the value contains milliseconds.
+	// * updatedAt
+	// Type: ISO 8601 string format: YYYY-MM-DDTHH:MM:SS.SSSZ or YYYY-MM-DDTHH:MM:SSZ
+	// depending on whether the value contains milliseconds.
 	//
 	// This member is required.
 	FindingCriteria *types.FindingCriteria

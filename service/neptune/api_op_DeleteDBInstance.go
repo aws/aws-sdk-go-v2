@@ -43,7 +43,7 @@ type DeleteDBInstanceInput struct {
 	// The DB instance identifier for the DB instance to be deleted. This parameter
 	// isn't case-sensitive. Constraints:
 	//
-	//     * Must match the name of an existing DB
+	// * Must match the name of an existing DB
 	// instance.
 	//
 	// This member is required.
@@ -53,16 +53,16 @@ type DeleteDBInstanceInput struct {
 	// set to false. Specifying this parameter and also setting the SkipFinalShapshot
 	// parameter to true results in an error. Constraints:
 	//
-	//     * Must be 1 to 255
-	// letters or numbers.
+	// * Must be 1 to 255 letters
+	// or numbers.
 	//
-	//     * First character must be a letter
+	// * First character must be a letter
 	//
-	//     * Cannot end
-	// with a hyphen or contain two consecutive hyphens
+	// * Cannot end with a hyphen or
+	// contain two consecutive hyphens
 	//
-	//     * Cannot be specified when
-	// deleting a Read Replica.
+	// * Cannot be specified when deleting a Read
+	// Replica.
 	FinalDBSnapshotIdentifier *string
 
 	// Determines whether a final DB snapshot is created before the DB instance is

@@ -70,12 +70,12 @@ type CreateTrialComponentInput struct {
 
 	// The status of the component. States include:
 	//
-	//     * InProgress
+	// * InProgress
 	//
-	//     *
-	// Completed
+	// * Completed
 	//
-	//     * Failed
+	// *
+	// Failed
 	Status *types.TrialComponentStatus
 
 	// A list of tags to associate with the component. You can use Search API to search

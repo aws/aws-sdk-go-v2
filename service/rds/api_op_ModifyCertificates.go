@@ -19,12 +19,12 @@ import (
 // new DB instances use the default certificate provided by RDS. You might need to
 // override the default certificate in the following situations:
 //
-//     * You already
+// * You already
 // migrated your applications to support the latest certificate authority (CA)
 // certificate, but the new CA certificate is not yet the RDS default CA
 // certificate for the specified AWS Region.
 //
-//     * RDS has already moved to a new
+// * RDS has already moved to a new
 // default CA certificate for the specified AWS Region, but you are still in the
 // process of supporting the new CA certificate. In this case, you temporarily need
 // additional time to finish your application changes.

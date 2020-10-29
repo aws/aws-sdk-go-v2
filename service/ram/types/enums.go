@@ -6,8 +6,8 @@ type ResourceOwner string
 
 // Enum values for ResourceOwner
 const (
-	ResourceOwnerSelf           ResourceOwner = "SELF"
-	ResourceOwnerOther_accounts ResourceOwner = "OTHER-ACCOUNTS"
+	ResourceOwnerSelf          ResourceOwner = "SELF"
+	ResourceOwnerOtherAccounts ResourceOwner = "OTHER-ACCOUNTS"
 )
 
 // Values returns all known values for ResourceOwner. Note that this can be
@@ -67,9 +67,9 @@ type ResourceShareFeatureSet string
 
 // Enum values for ResourceShareFeatureSet
 const (
-	ResourceShareFeatureSetCreated_from_policy   ResourceShareFeatureSet = "CREATED_FROM_POLICY"
-	ResourceShareFeatureSetPromoting_to_standard ResourceShareFeatureSet = "PROMOTING_TO_STANDARD"
-	ResourceShareFeatureSetStandard              ResourceShareFeatureSet = "STANDARD"
+	ResourceShareFeatureSetCreatedFromPolicy   ResourceShareFeatureSet = "CREATED_FROM_POLICY"
+	ResourceShareFeatureSetPromotingToStandard ResourceShareFeatureSet = "PROMOTING_TO_STANDARD"
+	ResourceShareFeatureSetStandard            ResourceShareFeatureSet = "STANDARD"
 )
 
 // Values returns all known values for ResourceShareFeatureSet. Note that this can
@@ -134,11 +134,11 @@ type ResourceStatus string
 
 // Enum values for ResourceStatus
 const (
-	ResourceStatusAvailable                   ResourceStatus = "AVAILABLE"
-	ResourceStatusZonal_resource_inaccessible ResourceStatus = "ZONAL_RESOURCE_INACCESSIBLE"
-	ResourceStatusLimit_exceeded              ResourceStatus = "LIMIT_EXCEEDED"
-	ResourceStatusUnavailable                 ResourceStatus = "UNAVAILABLE"
-	ResourceStatusPending                     ResourceStatus = "PENDING"
+	ResourceStatusAvailable                 ResourceStatus = "AVAILABLE"
+	ResourceStatusZonalResourceInaccessible ResourceStatus = "ZONAL_RESOURCE_INACCESSIBLE"
+	ResourceStatusLimitExceeded             ResourceStatus = "LIMIT_EXCEEDED"
+	ResourceStatusUnavailable               ResourceStatus = "UNAVAILABLE"
+	ResourceStatusPending                   ResourceStatus = "PENDING"
 )
 
 // Values returns all known values for ResourceStatus. Note that this can be

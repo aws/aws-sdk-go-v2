@@ -54,57 +54,55 @@ type ListResolverQueryLogConfigsInput struct {
 	// specify the NextToken parameter, you must use the same value for SortBy, if any,
 	// as in the previous request. Valid values include the following elements:
 	//
-	//     *
-	// Arn: The ARN of the query logging configuration
+	// * Arn:
+	// The ARN of the query logging configuration
 	//
-	//     * AssociationCount: The
-	// number of VPCs that are associated with the specified configuration
+	// * AssociationCount: The number of
+	// VPCs that are associated with the specified configuration
 	//
-	//     *
-	// CreationTime: The date and time that Resolver returned when the configuration
-	// was created
+	// * CreationTime: The
+	// date and time that Resolver returned when the configuration was created
 	//
-	//     * CreatorRequestId: The value that was specified for
-	// CreatorRequestId when the configuration was created
+	// *
+	// CreatorRequestId: The value that was specified for CreatorRequestId when the
+	// configuration was created
 	//
-	//     * DestinationArn: The
-	// location that logs are sent to
+	// * DestinationArn: The location that logs are sent
+	// to
 	//
-	//     * Id: The ID of the configuration
+	// * Id: The ID of the configuration
 	//
-	//     *
-	// Name: The name of the configuration
+	// * Name: The name of the configuration
 	//
-	//     * OwnerId: The AWS account number of
-	// the account that created the configuration
+	// *
+	// OwnerId: The AWS account number of the account that created the configuration
 	//
-	//     * ShareStatus: Whether the
-	// configuration is shared with other AWS accounts or shared with the current
-	// account by another AWS account. Sharing is configured through AWS Resource
-	// Access Manager (AWS RAM).
+	// *
+	// ShareStatus: Whether the configuration is shared with other AWS accounts or
+	// shared with the current account by another AWS account. Sharing is configured
+	// through AWS Resource Access Manager (AWS RAM).
 	//
-	//     * Status: The current status of the
-	// configuration. Valid values include the following:
+	// * Status: The current status of
+	// the configuration. Valid values include the following:
 	//
-	//         * CREATING: Resolver
-	// is creating the query logging configuration.
+	// * CREATING: Resolver is
+	// creating the query logging configuration.
 	//
-	//         * CREATED: The query
-	// logging configuration was successfully created. Resolver is logging queries that
+	// * CREATED: The query logging
+	// configuration was successfully created. Resolver is logging queries that
 	// originate in the specified VPC.
 	//
-	//         * DELETING: Resolver is deleting this
-	// query logging configuration.
+	// * DELETING: Resolver is deleting this query
+	// logging configuration.
 	//
-	//         * FAILED: Resolver either couldn't create
-	// or couldn't delete the query logging configuration. Here are two common
-	// causes:
+	// * FAILED: Resolver either couldn't create or couldn't
+	// delete the query logging configuration. Here are two common causes:
 	//
-	//             * The specified destination (for example, an Amazon S3
-	// bucket) was deleted.
+	// * The
+	// specified destination (for example, an Amazon S3 bucket) was deleted.
 	//
-	//             * Permissions don't allow sending logs to the
-	// destination.
+	// *
+	// Permissions don't allow sending logs to the destination.
 	SortBy *string
 
 	// If you specified a value for SortBy, the order that you want query logging

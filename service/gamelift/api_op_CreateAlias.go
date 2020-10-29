@@ -25,18 +25,18 @@ import (
 // including an alias ID and an ARN. You can reassign an alias to another fleet by
 // calling UpdateAlias.
 //
-//     * CreateAlias
+// * CreateAlias
 //
-//     * ListAliases
+// * ListAliases
 //
-//     *
-// DescribeAlias
+// * DescribeAlias
 //
-//     * UpdateAlias
+// *
+// UpdateAlias
 //
-//     * DeleteAlias
+// * DeleteAlias
 //
-//     * ResolveAlias
+// * ResolveAlias
 func (c *Client) CreateAlias(ctx context.Context, params *CreateAliasInput, optFns ...func(*Options)) (*CreateAliasOutput, error) {
 	if params == nil {
 		params = &CreateAliasInput{}

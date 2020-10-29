@@ -107,20 +107,19 @@ type EntityFilter struct {
 // Summary information about an AWS Health event. AWS Health events can be public
 // or account-specific:
 //
-//     * Public events might be service events that are not
+// * Public events might be service events that are not
 // specific to an AWS account. For example, if there is an issue with an AWS
 // Region, AWS Health provides information about the event, even if you don't use
 // services or resources in that Region.
 //
-//     * Account-specific events are
-// specific to either your AWS account or an account in your organization. For
-// example, if there's an issue with Amazon Elastic Compute Cloud in a Region that
-// you use, AWS Health provides information about the event and the affected
-// resources in the account.
+// * Account-specific events are specific to
+// either your AWS account or an account in your organization. For example, if
+// there's an issue with Amazon Elastic Compute Cloud in a Region that you use, AWS
+// Health provides information about the event and the affected resources in the
+// account.
 //
-// You can determine if an event is public or
-// account-specific by using the eventScopeCode parameter. For more information,
-// see eventScopeCode
+// You can determine if an event is public or account-specific by using
+// the eventScopeCode parameter. For more information, see eventScopeCode
 // (https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html#AWSHealth-Type-Event-eventScopeCode).
 type Event struct {
 
@@ -139,16 +138,16 @@ type Event struct {
 	// This parameter specifies if the AWS Health event is a public AWS service event
 	// or an account-specific event.
 	//
-	//     * If the eventScopeCode value is PUBLIC, then
-	// the affectedAccounts value is always empty.
+	// * If the eventScopeCode value is PUBLIC, then the
+	// affectedAccounts value is always empty.
 	//
-	//     * If the eventScopeCode value
-	// is ACCOUNT_SPECIFIC, then the affectedAccounts value lists the affected AWS
+	// * If the eventScopeCode value is
+	// ACCOUNT_SPECIFIC, then the affectedAccounts value lists the affected AWS
 	// accounts in your organization. For example, if an event affects a service such
 	// as Amazon Elastic Compute Cloud and you have AWS accounts that use that service,
 	// those account IDs appear in the response.
 	//
-	//     * If the eventScopeCode value is
+	// * If the eventScopeCode value is
 	// NONE, then the eventArn that you specified in the request is invalid or doesn't
 	// exist.
 	EventScopeCode EventScopeCode
@@ -383,16 +382,16 @@ type OrganizationEvent struct {
 	// This parameter specifies if the AWS Health event is a public AWS service event
 	// or an account-specific event.
 	//
-	//     * If the eventScopeCode value is PUBLIC, then
-	// the affectedAccounts value is always empty.
+	// * If the eventScopeCode value is PUBLIC, then the
+	// affectedAccounts value is always empty.
 	//
-	//     * If the eventScopeCode value
-	// is ACCOUNT_SPECIFIC, then the affectedAccounts value lists the affected AWS
+	// * If the eventScopeCode value is
+	// ACCOUNT_SPECIFIC, then the affectedAccounts value lists the affected AWS
 	// accounts in your organization. For example, if an event affects a service such
 	// as Amazon Elastic Compute Cloud and you have AWS accounts that use that service,
 	// those account IDs appear in the response.
 	//
-	//     * If the eventScopeCode value is
+	// * If the eventScopeCode value is
 	// NONE, then the eventArn that you specified in the request is invalid or doesn't
 	// exist.
 	EventScopeCode EventScopeCode
@@ -437,20 +436,19 @@ type OrganizationEventDetails struct {
 	// Summary information about an AWS Health event. AWS Health events can be public
 	// or account-specific:
 	//
-	//     * Public events might be service events that are not
+	// * Public events might be service events that are not
 	// specific to an AWS account. For example, if there is an issue with an AWS
 	// Region, AWS Health provides information about the event, even if you don't use
 	// services or resources in that Region.
 	//
-	//     * Account-specific events are
-	// specific to either your AWS account or an account in your organization. For
-	// example, if there's an issue with Amazon Elastic Compute Cloud in a Region that
-	// you use, AWS Health provides information about the event and the affected
-	// resources in the account.
+	// * Account-specific events are specific to
+	// either your AWS account or an account in your organization. For example, if
+	// there's an issue with Amazon Elastic Compute Cloud in a Region that you use, AWS
+	// Health provides information about the event and the affected resources in the
+	// account.
 	//
-	// You can determine if an event is public or
-	// account-specific by using the eventScopeCode parameter. For more information,
-	// see eventScopeCode
+	// You can determine if an event is public or account-specific by using
+	// the eventScopeCode parameter. For more information, see eventScopeCode
 	// (https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html#AWSHealth-Type-Event-eventScopeCode).
 	Event *Event
 

@@ -22,22 +22,22 @@ import (
 // session for each player and a set of new PlayerSession objects is returned.
 // Player sessions cannot be updated. Available in Amazon GameLift Local.
 //
-//     *
+// *
 // CreatePlayerSession
 //
-//     * CreatePlayerSessions
+// * CreatePlayerSessions
 //
-//     * DescribePlayerSessions
+// * DescribePlayerSessions
 //
+// * Game
+// session placements
 //
-// * Game session placements
+// * StartGameSessionPlacement
 //
-//         * StartGameSessionPlacement
-//
-//         *
+// *
 // DescribeGameSessionPlacement
 //
-//         * StopGameSessionPlacement
+// * StopGameSessionPlacement
 func (c *Client) CreatePlayerSessions(ctx context.Context, params *CreatePlayerSessionsInput, optFns ...func(*Options)) (*CreatePlayerSessionsOutput, error) {
 	if params == nil {
 		params = &CreatePlayerSessionsInput{}

@@ -45,12 +45,12 @@ import (
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_ChangeResourceRecordSets.html).
 // To verify that the hosted zone has been deleted, do one of the following:
 //
-//     *
-// Use the GetHostedZone action to request information about the hosted zone.
+// * Use
+// the GetHostedZone action to request information about the hosted zone.
 //
-//
-// * Use the ListHostedZones action to get a list of the hosted zones associated
-// with the current AWS account.
+// * Use
+// the ListHostedZones action to get a list of the hosted zones associated with the
+// current AWS account.
 func (c *Client) DeleteHostedZone(ctx context.Context, params *DeleteHostedZoneInput, optFns ...func(*Options)) (*DeleteHostedZoneOutput, error) {
 	if params == nil {
 		params = &DeleteHostedZoneInput{}

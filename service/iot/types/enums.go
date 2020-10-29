@@ -60,12 +60,12 @@ type AuditCheckRunStatus string
 
 // Enum values for AuditCheckRunStatus
 const (
-	AuditCheckRunStatusIn_progress                 AuditCheckRunStatus = "IN_PROGRESS"
-	AuditCheckRunStatusWaiting_for_data_collection AuditCheckRunStatus = "WAITING_FOR_DATA_COLLECTION"
-	AuditCheckRunStatusCanceled                    AuditCheckRunStatus = "CANCELED"
-	AuditCheckRunStatusCompleted_compliant         AuditCheckRunStatus = "COMPLETED_COMPLIANT"
-	AuditCheckRunStatusCompleted_non_compliant     AuditCheckRunStatus = "COMPLETED_NON_COMPLIANT"
-	AuditCheckRunStatusFailed                      AuditCheckRunStatus = "FAILED"
+	AuditCheckRunStatusInProgress               AuditCheckRunStatus = "IN_PROGRESS"
+	AuditCheckRunStatusWaitingForDataCollection AuditCheckRunStatus = "WAITING_FOR_DATA_COLLECTION"
+	AuditCheckRunStatusCanceled                 AuditCheckRunStatus = "CANCELED"
+	AuditCheckRunStatusCompletedCompliant       AuditCheckRunStatus = "COMPLETED_COMPLIANT"
+	AuditCheckRunStatusCompletedNonCompliant    AuditCheckRunStatus = "COMPLETED_NON_COMPLIANT"
+	AuditCheckRunStatusFailed                   AuditCheckRunStatus = "FAILED"
 )
 
 // Values returns all known values for AuditCheckRunStatus. Note that this can be
@@ -130,12 +130,12 @@ type AuditMitigationActionsExecutionStatus string
 
 // Enum values for AuditMitigationActionsExecutionStatus
 const (
-	AuditMitigationActionsExecutionStatusIn_progress AuditMitigationActionsExecutionStatus = "IN_PROGRESS"
-	AuditMitigationActionsExecutionStatusCompleted   AuditMitigationActionsExecutionStatus = "COMPLETED"
-	AuditMitigationActionsExecutionStatusFailed      AuditMitigationActionsExecutionStatus = "FAILED"
-	AuditMitigationActionsExecutionStatusCanceled    AuditMitigationActionsExecutionStatus = "CANCELED"
-	AuditMitigationActionsExecutionStatusSkipped     AuditMitigationActionsExecutionStatus = "SKIPPED"
-	AuditMitigationActionsExecutionStatusPending     AuditMitigationActionsExecutionStatus = "PENDING"
+	AuditMitigationActionsExecutionStatusInProgress AuditMitigationActionsExecutionStatus = "IN_PROGRESS"
+	AuditMitigationActionsExecutionStatusCompleted  AuditMitigationActionsExecutionStatus = "COMPLETED"
+	AuditMitigationActionsExecutionStatusFailed     AuditMitigationActionsExecutionStatus = "FAILED"
+	AuditMitigationActionsExecutionStatusCanceled   AuditMitigationActionsExecutionStatus = "CANCELED"
+	AuditMitigationActionsExecutionStatusSkipped    AuditMitigationActionsExecutionStatus = "SKIPPED"
+	AuditMitigationActionsExecutionStatusPending    AuditMitigationActionsExecutionStatus = "PENDING"
 )
 
 // Values returns all known values for AuditMitigationActionsExecutionStatus. Note
@@ -157,10 +157,10 @@ type AuditMitigationActionsTaskStatus string
 
 // Enum values for AuditMitigationActionsTaskStatus
 const (
-	AuditMitigationActionsTaskStatusIn_progress AuditMitigationActionsTaskStatus = "IN_PROGRESS"
-	AuditMitigationActionsTaskStatusCompleted   AuditMitigationActionsTaskStatus = "COMPLETED"
-	AuditMitigationActionsTaskStatusFailed      AuditMitigationActionsTaskStatus = "FAILED"
-	AuditMitigationActionsTaskStatusCanceled    AuditMitigationActionsTaskStatus = "CANCELED"
+	AuditMitigationActionsTaskStatusInProgress AuditMitigationActionsTaskStatus = "IN_PROGRESS"
+	AuditMitigationActionsTaskStatusCompleted  AuditMitigationActionsTaskStatus = "COMPLETED"
+	AuditMitigationActionsTaskStatusFailed     AuditMitigationActionsTaskStatus = "FAILED"
+	AuditMitigationActionsTaskStatusCanceled   AuditMitigationActionsTaskStatus = "CANCELED"
 )
 
 // Values returns all known values for AuditMitigationActionsTaskStatus. Note that
@@ -196,10 +196,10 @@ type AuditTaskStatus string
 
 // Enum values for AuditTaskStatus
 const (
-	AuditTaskStatusIn_progress AuditTaskStatus = "IN_PROGRESS"
-	AuditTaskStatusCompleted   AuditTaskStatus = "COMPLETED"
-	AuditTaskStatusFailed      AuditTaskStatus = "FAILED"
-	AuditTaskStatusCanceled    AuditTaskStatus = "CANCELED"
+	AuditTaskStatusInProgress AuditTaskStatus = "IN_PROGRESS"
+	AuditTaskStatusCompleted  AuditTaskStatus = "COMPLETED"
+	AuditTaskStatusFailed     AuditTaskStatus = "FAILED"
+	AuditTaskStatusCanceled   AuditTaskStatus = "CANCELED"
 )
 
 // Values returns all known values for AuditTaskStatus. Note that this can be
@@ -218,8 +218,8 @@ type AuditTaskType string
 
 // Enum values for AuditTaskType
 const (
-	AuditTaskTypeOn_demand_audit_task AuditTaskType = "ON_DEMAND_AUDIT_TASK"
-	AuditTaskTypeScheduled_audit_task AuditTaskType = "SCHEDULED_AUDIT_TASK"
+	AuditTaskTypeOnDemandAuditTask  AuditTaskType = "ON_DEMAND_AUDIT_TASK"
+	AuditTaskTypeScheduledAuditTask AuditTaskType = "SCHEDULED_AUDIT_TASK"
 )
 
 // Values returns all known values for AuditTaskType. Note that this can be
@@ -236,9 +236,9 @@ type AuthDecision string
 
 // Enum values for AuthDecision
 const (
-	AuthDecisionAllowed       AuthDecision = "ALLOWED"
-	AuthDecisionExplicit_deny AuthDecision = "EXPLICIT_DENY"
-	AuthDecisionImplicit_deny AuthDecision = "IMPLICIT_DENY"
+	AuthDecisionAllowed      AuthDecision = "ALLOWED"
+	AuthDecisionExplicitDeny AuthDecision = "EXPLICIT_DENY"
+	AuthDecisionImplicitDeny AuthDecision = "IMPLICIT_DENY"
 )
 
 // Values returns all known values for AuthDecision. Note that this can be expanded
@@ -309,10 +309,10 @@ type AwsJobAbortCriteriaFailureType string
 
 // Enum values for AwsJobAbortCriteriaFailureType
 const (
-	AwsJobAbortCriteriaFailureTypeFailed    AwsJobAbortCriteriaFailureType = "FAILED"
-	AwsJobAbortCriteriaFailureTypeRejected  AwsJobAbortCriteriaFailureType = "REJECTED"
-	AwsJobAbortCriteriaFailureTypeTimed_out AwsJobAbortCriteriaFailureType = "TIMED_OUT"
-	AwsJobAbortCriteriaFailureTypeAll       AwsJobAbortCriteriaFailureType = "ALL"
+	AwsJobAbortCriteriaFailureTypeFailed   AwsJobAbortCriteriaFailureType = "FAILED"
+	AwsJobAbortCriteriaFailureTypeRejected AwsJobAbortCriteriaFailureType = "REJECTED"
+	AwsJobAbortCriteriaFailureTypeTimedOut AwsJobAbortCriteriaFailureType = "TIMED_OUT"
+	AwsJobAbortCriteriaFailureTypeAll      AwsJobAbortCriteriaFailureType = "ALL"
 )
 
 // Values returns all known values for AwsJobAbortCriteriaFailureType. Note that
@@ -396,8 +396,8 @@ type CertificateMode string
 
 // Enum values for CertificateMode
 const (
-	CertificateModeDefault  CertificateMode = "DEFAULT"
-	CertificateModeSni_only CertificateMode = "SNI_ONLY"
+	CertificateModeDefault CertificateMode = "DEFAULT"
+	CertificateModeSniOnly CertificateMode = "SNI_ONLY"
 )
 
 // Values returns all known values for CertificateMode. Note that this can be
@@ -414,12 +414,12 @@ type CertificateStatus string
 
 // Enum values for CertificateStatus
 const (
-	CertificateStatusActive             CertificateStatus = "ACTIVE"
-	CertificateStatusInactive           CertificateStatus = "INACTIVE"
-	CertificateStatusRevoked            CertificateStatus = "REVOKED"
-	CertificateStatusPending_transfer   CertificateStatus = "PENDING_TRANSFER"
-	CertificateStatusRegister_inactive  CertificateStatus = "REGISTER_INACTIVE"
-	CertificateStatusPending_activation CertificateStatus = "PENDING_ACTIVATION"
+	CertificateStatusActive            CertificateStatus = "ACTIVE"
+	CertificateStatusInactive          CertificateStatus = "INACTIVE"
+	CertificateStatusRevoked           CertificateStatus = "REVOKED"
+	CertificateStatusPendingTransfer   CertificateStatus = "PENDING_TRANSFER"
+	CertificateStatusRegisterInactive  CertificateStatus = "REGISTER_INACTIVE"
+	CertificateStatusPendingActivation CertificateStatus = "PENDING_ACTIVATION"
 )
 
 // Values returns all known values for CertificateStatus. Note that this can be
@@ -440,14 +440,14 @@ type ComparisonOperator string
 
 // Enum values for ComparisonOperator
 const (
-	ComparisonOperatorLess_than           ComparisonOperator = "less-than"
-	ComparisonOperatorLess_than_equals    ComparisonOperator = "less-than-equals"
-	ComparisonOperatorGreater_than        ComparisonOperator = "greater-than"
-	ComparisonOperatorGreater_than_equals ComparisonOperator = "greater-than-equals"
-	ComparisonOperatorIn_cidr_set         ComparisonOperator = "in-cidr-set"
-	ComparisonOperatorNot_in_cidr_set     ComparisonOperator = "not-in-cidr-set"
-	ComparisonOperatorIn_port_set         ComparisonOperator = "in-port-set"
-	ComparisonOperatorNot_in_port_set     ComparisonOperator = "not-in-port-set"
+	ComparisonOperatorLessThan          ComparisonOperator = "less-than"
+	ComparisonOperatorLessThanEquals    ComparisonOperator = "less-than-equals"
+	ComparisonOperatorGreaterThan       ComparisonOperator = "greater-than"
+	ComparisonOperatorGreaterThanEquals ComparisonOperator = "greater-than-equals"
+	ComparisonOperatorInCidrSet         ComparisonOperator = "in-cidr-set"
+	ComparisonOperatorNotInCidrSet      ComparisonOperator = "not-in-cidr-set"
+	ComparisonOperatorInPortSet         ComparisonOperator = "in-port-set"
+	ComparisonOperatorNotInPortSet      ComparisonOperator = "not-in-port-set"
 )
 
 // Values returns all known values for ComparisonOperator. Note that this can be
@@ -515,7 +515,7 @@ type DimensionType string
 
 // Enum values for DimensionType
 const (
-	DimensionTypeTopic_filter DimensionType = "TOPIC_FILTER"
+	DimensionTypeTopicFilter DimensionType = "TOPIC_FILTER"
 )
 
 // Values returns all known values for DimensionType. Note that this can be
@@ -531,8 +531,8 @@ type DimensionValueOperator string
 
 // Enum values for DimensionValueOperator
 const (
-	DimensionValueOperatorIn     DimensionValueOperator = "IN"
-	DimensionValueOperatorNot_in DimensionValueOperator = "NOT_IN"
+	DimensionValueOperatorIn    DimensionValueOperator = "IN"
+	DimensionValueOperatorNotIn DimensionValueOperator = "NOT_IN"
 )
 
 // Values returns all known values for DimensionValueOperator. Note that this can
@@ -567,9 +567,9 @@ type DomainType string
 
 // Enum values for DomainType
 const (
-	DomainTypeEndpoint         DomainType = "ENDPOINT"
-	DomainTypeAws_managed      DomainType = "AWS_MANAGED"
-	DomainTypeCustomer_managed DomainType = "CUSTOMER_MANAGED"
+	DomainTypeEndpoint        DomainType = "ENDPOINT"
+	DomainTypeAwsManaged      DomainType = "AWS_MANAGED"
+	DomainTypeCustomerManaged DomainType = "CUSTOMER_MANAGED"
 )
 
 // Values returns all known values for DomainType. Note that this can be expanded
@@ -625,17 +625,17 @@ type EventType string
 
 // Enum values for EventType
 const (
-	EventTypeThing                  EventType = "THING"
-	EventTypeThing_group            EventType = "THING_GROUP"
-	EventTypeThing_type             EventType = "THING_TYPE"
-	EventTypeThing_group_membership EventType = "THING_GROUP_MEMBERSHIP"
-	EventTypeThing_group_hierarchy  EventType = "THING_GROUP_HIERARCHY"
-	EventTypeThing_type_association EventType = "THING_TYPE_ASSOCIATION"
-	EventTypeJob                    EventType = "JOB"
-	EventTypeJob_execution          EventType = "JOB_EXECUTION"
-	EventTypePolicy                 EventType = "POLICY"
-	EventTypeCertificate            EventType = "CERTIFICATE"
-	EventTypeCa_certificate         EventType = "CA_CERTIFICATE"
+	EventTypeThing                EventType = "THING"
+	EventTypeThingGroup           EventType = "THING_GROUP"
+	EventTypeThingType            EventType = "THING_TYPE"
+	EventTypeThingGroupMembership EventType = "THING_GROUP_MEMBERSHIP"
+	EventTypeThingGroupHierarchy  EventType = "THING_GROUP_HIERARCHY"
+	EventTypeThingTypeAssociation EventType = "THING_TYPE_ASSOCIATION"
+	EventTypeJob                  EventType = "JOB"
+	EventTypeJobExecution         EventType = "JOB_EXECUTION"
+	EventTypePolicy               EventType = "POLICY"
+	EventTypeCertificate          EventType = "CERTIFICATE"
+	EventTypeCaCertificate        EventType = "CA_CERTIFICATE"
 )
 
 // Values returns all known values for EventType. Note that this can be expanded in
@@ -701,10 +701,10 @@ type JobExecutionFailureType string
 
 // Enum values for JobExecutionFailureType
 const (
-	JobExecutionFailureTypeFailed    JobExecutionFailureType = "FAILED"
-	JobExecutionFailureTypeRejected  JobExecutionFailureType = "REJECTED"
-	JobExecutionFailureTypeTimed_out JobExecutionFailureType = "TIMED_OUT"
-	JobExecutionFailureTypeAll       JobExecutionFailureType = "ALL"
+	JobExecutionFailureTypeFailed   JobExecutionFailureType = "FAILED"
+	JobExecutionFailureTypeRejected JobExecutionFailureType = "REJECTED"
+	JobExecutionFailureTypeTimedOut JobExecutionFailureType = "TIMED_OUT"
+	JobExecutionFailureTypeAll      JobExecutionFailureType = "ALL"
 )
 
 // Values returns all known values for JobExecutionFailureType. Note that this can
@@ -723,14 +723,14 @@ type JobExecutionStatus string
 
 // Enum values for JobExecutionStatus
 const (
-	JobExecutionStatusQueued      JobExecutionStatus = "QUEUED"
-	JobExecutionStatusIn_progress JobExecutionStatus = "IN_PROGRESS"
-	JobExecutionStatusSucceeded   JobExecutionStatus = "SUCCEEDED"
-	JobExecutionStatusFailed      JobExecutionStatus = "FAILED"
-	JobExecutionStatusTimed_out   JobExecutionStatus = "TIMED_OUT"
-	JobExecutionStatusRejected    JobExecutionStatus = "REJECTED"
-	JobExecutionStatusRemoved     JobExecutionStatus = "REMOVED"
-	JobExecutionStatusCanceled    JobExecutionStatus = "CANCELED"
+	JobExecutionStatusQueued     JobExecutionStatus = "QUEUED"
+	JobExecutionStatusInProgress JobExecutionStatus = "IN_PROGRESS"
+	JobExecutionStatusSucceeded  JobExecutionStatus = "SUCCEEDED"
+	JobExecutionStatusFailed     JobExecutionStatus = "FAILED"
+	JobExecutionStatusTimedOut   JobExecutionStatus = "TIMED_OUT"
+	JobExecutionStatusRejected   JobExecutionStatus = "REJECTED"
+	JobExecutionStatusRemoved    JobExecutionStatus = "REMOVED"
+	JobExecutionStatusCanceled   JobExecutionStatus = "CANCELED"
 )
 
 // Values returns all known values for JobExecutionStatus. Note that this can be
@@ -753,10 +753,10 @@ type JobStatus string
 
 // Enum values for JobStatus
 const (
-	JobStatusIn_progress          JobStatus = "IN_PROGRESS"
-	JobStatusCanceled             JobStatus = "CANCELED"
-	JobStatusCompleted            JobStatus = "COMPLETED"
-	JobStatusDeletion_in_progress JobStatus = "DELETION_IN_PROGRESS"
+	JobStatusInProgress         JobStatus = "IN_PROGRESS"
+	JobStatusCanceled           JobStatus = "CANCELED"
+	JobStatusCompleted          JobStatus = "COMPLETED"
+	JobStatusDeletionInProgress JobStatus = "DELETION_IN_PROGRESS"
 )
 
 // Values returns all known values for JobStatus. Note that this can be expanded in
@@ -799,8 +799,8 @@ type LogTargetType string
 
 // Enum values for LogTargetType
 const (
-	LogTargetTypeDefault     LogTargetType = "DEFAULT"
-	LogTargetTypeThing_group LogTargetType = "THING_GROUP"
+	LogTargetTypeDefault    LogTargetType = "DEFAULT"
+	LogTargetTypeThingGroup LogTargetType = "THING_GROUP"
 )
 
 // Values returns all known values for LogTargetType. Note that this can be
@@ -835,12 +835,12 @@ type MitigationActionType string
 
 // Enum values for MitigationActionType
 const (
-	MitigationActionTypeUpdate_device_certificate      MitigationActionType = "UPDATE_DEVICE_CERTIFICATE"
-	MitigationActionTypeUpdate_ca_certificate          MitigationActionType = "UPDATE_CA_CERTIFICATE"
-	MitigationActionTypeAdd_things_to_thing_group      MitigationActionType = "ADD_THINGS_TO_THING_GROUP"
-	MitigationActionTypeReplace_default_policy_version MitigationActionType = "REPLACE_DEFAULT_POLICY_VERSION"
-	MitigationActionTypeEnable_iot_logging             MitigationActionType = "ENABLE_IOT_LOGGING"
-	MitigationActionTypePublish_finding_to_sns         MitigationActionType = "PUBLISH_FINDING_TO_SNS"
+	MitigationActionTypeUpdateDeviceCertificate     MitigationActionType = "UPDATE_DEVICE_CERTIFICATE"
+	MitigationActionTypeUpdateCaCertificate         MitigationActionType = "UPDATE_CA_CERTIFICATE"
+	MitigationActionTypeAddThingsToThingGroup       MitigationActionType = "ADD_THINGS_TO_THING_GROUP"
+	MitigationActionTypeReplaceDefaultPolicyVersion MitigationActionType = "REPLACE_DEFAULT_POLICY_VERSION"
+	MitigationActionTypeEnableIotLogging            MitigationActionType = "ENABLE_IOT_LOGGING"
+	MitigationActionTypePublishFindingToSns         MitigationActionType = "PUBLISH_FINDING_TO_SNS"
 )
 
 // Values returns all known values for MitigationActionType. Note that this can be
@@ -861,10 +861,10 @@ type OTAUpdateStatus string
 
 // Enum values for OTAUpdateStatus
 const (
-	OTAUpdateStatusCreate_pending     OTAUpdateStatus = "CREATE_PENDING"
-	OTAUpdateStatusCreate_in_progress OTAUpdateStatus = "CREATE_IN_PROGRESS"
-	OTAUpdateStatusCreate_complete    OTAUpdateStatus = "CREATE_COMPLETE"
-	OTAUpdateStatusCreate_failed      OTAUpdateStatus = "CREATE_FAILED"
+	OTAUpdateStatusCreatePending    OTAUpdateStatus = "CREATE_PENDING"
+	OTAUpdateStatusCreateInProgress OTAUpdateStatus = "CREATE_IN_PROGRESS"
+	OTAUpdateStatusCreateComplete   OTAUpdateStatus = "CREATE_COMPLETE"
+	OTAUpdateStatusCreateFailed     OTAUpdateStatus = "CREATE_FAILED"
 )
 
 // Values returns all known values for OTAUpdateStatus. Note that this can be
@@ -883,7 +883,7 @@ type PolicyTemplateName string
 
 // Enum values for PolicyTemplateName
 const (
-	PolicyTemplateNameBlank_policy PolicyTemplateName = "BLANK_POLICY"
+	PolicyTemplateNameBlankPolicy PolicyTemplateName = "BLANK_POLICY"
 )
 
 // Values returns all known values for PolicyTemplateName. Note that this can be
@@ -935,14 +935,14 @@ type ResourceType string
 
 // Enum values for ResourceType
 const (
-	ResourceTypeDevice_certificate    ResourceType = "DEVICE_CERTIFICATE"
-	ResourceTypeCa_certificate        ResourceType = "CA_CERTIFICATE"
-	ResourceTypeIot_policy            ResourceType = "IOT_POLICY"
-	ResourceTypeCognito_identity_pool ResourceType = "COGNITO_IDENTITY_POOL"
-	ResourceTypeClient_id             ResourceType = "CLIENT_ID"
-	ResourceTypeAccount_settings      ResourceType = "ACCOUNT_SETTINGS"
-	ResourceTypeRole_alias            ResourceType = "ROLE_ALIAS"
-	ResourceTypeIam_role              ResourceType = "IAM_ROLE"
+	ResourceTypeDeviceCertificate   ResourceType = "DEVICE_CERTIFICATE"
+	ResourceTypeCaCertificate       ResourceType = "CA_CERTIFICATE"
+	ResourceTypeIotPolicy           ResourceType = "IOT_POLICY"
+	ResourceTypeCognitoIdentityPool ResourceType = "COGNITO_IDENTITY_POOL"
+	ResourceTypeClientId            ResourceType = "CLIENT_ID"
+	ResourceTypeAccountSettings     ResourceType = "ACCOUNT_SETTINGS"
+	ResourceTypeRoleAlias           ResourceType = "ROLE_ALIAS"
+	ResourceTypeIamRole             ResourceType = "IAM_ROLE"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -983,9 +983,9 @@ type ServiceType string
 
 // Enum values for ServiceType
 const (
-	ServiceTypeData                ServiceType = "DATA"
-	ServiceTypeCredential_provider ServiceType = "CREDENTIAL_PROVIDER"
-	ServiceTypeJobs                ServiceType = "JOBS"
+	ServiceTypeData               ServiceType = "DATA"
+	ServiceTypeCredentialProvider ServiceType = "CREDENTIAL_PROVIDER"
+	ServiceTypeJobs               ServiceType = "JOBS"
 )
 
 // Values returns all known values for ServiceType. Note that this can be expanded
@@ -1082,9 +1082,9 @@ type ThingIndexingMode string
 
 // Enum values for ThingIndexingMode
 const (
-	ThingIndexingModeOff                 ThingIndexingMode = "OFF"
-	ThingIndexingModeRegistry            ThingIndexingMode = "REGISTRY"
-	ThingIndexingModeRegistry_and_shadow ThingIndexingMode = "REGISTRY_AND_SHADOW"
+	ThingIndexingModeOff               ThingIndexingMode = "OFF"
+	ThingIndexingModeRegistry          ThingIndexingMode = "REGISTRY"
+	ThingIndexingModeRegistryAndShadow ThingIndexingMode = "REGISTRY_AND_SHADOW"
 )
 
 // Values returns all known values for ThingIndexingMode. Note that this can be
@@ -1102,10 +1102,10 @@ type TopicRuleDestinationStatus string
 
 // Enum values for TopicRuleDestinationStatus
 const (
-	TopicRuleDestinationStatusEnabled     TopicRuleDestinationStatus = "ENABLED"
-	TopicRuleDestinationStatusIn_progress TopicRuleDestinationStatus = "IN_PROGRESS"
-	TopicRuleDestinationStatusDisabled    TopicRuleDestinationStatus = "DISABLED"
-	TopicRuleDestinationStatusError       TopicRuleDestinationStatus = "ERROR"
+	TopicRuleDestinationStatusEnabled    TopicRuleDestinationStatus = "ENABLED"
+	TopicRuleDestinationStatusInProgress TopicRuleDestinationStatus = "IN_PROGRESS"
+	TopicRuleDestinationStatusDisabled   TopicRuleDestinationStatus = "DISABLED"
+	TopicRuleDestinationStatusError      TopicRuleDestinationStatus = "ERROR"
 )
 
 // Values returns all known values for TopicRuleDestinationStatus. Note that this
@@ -1124,9 +1124,9 @@ type ViolationEventType string
 
 // Enum values for ViolationEventType
 const (
-	ViolationEventTypeIn_alarm          ViolationEventType = "in-alarm"
-	ViolationEventTypeAlarm_cleared     ViolationEventType = "alarm-cleared"
-	ViolationEventTypeAlarm_invalidated ViolationEventType = "alarm-invalidated"
+	ViolationEventTypeInAlarm          ViolationEventType = "in-alarm"
+	ViolationEventTypeAlarmCleared     ViolationEventType = "alarm-cleared"
+	ViolationEventTypeAlarmInvalidated ViolationEventType = "alarm-invalidated"
 )
 
 // Values returns all known values for ViolationEventType. Note that this can be

@@ -12,101 +12,99 @@ import (
 
 // Imports a signed private CA certificate into ACM Private CA. This action is used
 // when you are using a chain of trust whose root is located outside ACM Private
-// CA. Before you can call this action, the following preparations must in place:
-//
+// CA. Before you can call this action, the following preparations must in
+// place:
 //
 // * In ACM Private CA, call the CreateCertificateAuthority
 // (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html)
 // action to create the private CA that that you plan to back with the imported
 // certificate.
 //
-//     * Call the GetCertificateAuthorityCsr
+// * Call the GetCertificateAuthorityCsr
 // (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificateAuthorityCsr.html)
 // action to generate a certificate signing request (CSR).
 //
-//     * Sign the CSR
-// using a root or intermediate CA hosted by either an on-premises PKI hierarchy or
-// by a commercial CA.
+// * Sign the CSR using a
+// root or intermediate CA hosted by either an on-premises PKI hierarchy or by a
+// commercial CA.
 //
-//     * Create a certificate chain and copy the signed
-// certificate and the certificate chain to your working directory.
+// * Create a certificate chain and copy the signed certificate and
+// the certificate chain to your working directory.
 //
-// The following
-// requirements apply when you import a CA certificate.
+// The following requirements
+// apply when you import a CA certificate.
 //
-//     * You cannot import a
-// non-self-signed certificate for use as a root CA.
+// * You cannot import a non-self-signed
+// certificate for use as a root CA.
 //
-//     * You cannot import a
-// self-signed certificate for use as a subordinate CA.
+// * You cannot import a self-signed certificate
+// for use as a subordinate CA.
 //
-//     * Your certificate
-// chain must not include the private CA certificate that you are importing.
+// * Your certificate chain must not include the
+// private CA certificate that you are importing.
 //
-//     *
-// Your ACM Private CA-hosted or on-premises CA certificate must be the last
-// certificate in your chain. The subordinate certificate, if any, that your root
-// CA signed must be next to last. The subordinate certificate signed by the
-// preceding subordinate CA must come next, and so on until your chain is built.
-//
+// * Your ACM Private CA-hosted or
+// on-premises CA certificate must be the last certificate in your chain. The
+// subordinate certificate, if any, that your root CA signed must be next to last.
+// The subordinate certificate signed by the preceding subordinate CA must come
+// next, and so on until your chain is built.
 //
 // * The chain must be PEM-encoded.
 //
-//     * The maximum allowed size of a
-// certificate is 32 KB.
+// *
+// The maximum allowed size of a certificate is 32 KB.
 //
-//     * The maximum allowed size of a certificate chain is
-// 2 MB.
+// * The maximum allowed size
+// of a certificate chain is 2 MB.
 //
-// Enforcement of Critical Constraints ACM Private CA allows the following
-// extensions to be marked critical in the imported CA certificate or chain.
+// Enforcement of Critical Constraints ACM Private
+// CA allows the following extensions to be marked critical in the imported CA
+// certificate or chain.
 //
-//     *
-// Basic constraints (must be marked critical)
+// * Basic constraints (must be marked critical)
 //
-//     * Subject alternative names
-//
+// * Subject
+// alternative names
 //
 // * Key usage
 //
-//     * Extended key usage
+// * Extended key usage
 //
-//     * Authority key identifier
+// * Authority key
+// identifier
 //
-//     *
-// Subject key identifier
+// * Subject key identifier
 //
-//     * Issuer alternative name
+// * Issuer alternative name
 //
-//     * Subject directory
-// attributes
+// * Subject
+// directory attributes
 //
-//     * Subject information access
+// * Subject information access
 //
-//     * Certificate policies
+// * Certificate policies
 //
-//     *
+// *
 // Policy mappings
 //
-//     * Inhibit anyPolicy
+// * Inhibit anyPolicy
 //
 // ACM Private CA rejects the following
 // extensions when they are marked critical in an imported CA certificate or
 // chain.
 //
-//     * Name constraints
+// * Name constraints
 //
-//     * Policy constraints
+// * Policy constraints
 //
-//     * CRL distribution
-// points
+// * CRL distribution points
 //
-//     * Authority information access
+// *
+// Authority information access
 //
-//     * Freshest CRL
+// * Freshest CRL
 //
-//     * Any other
-// extension
+// * Any other extension
 func (c *Client) ImportCertificateAuthorityCertificate(ctx context.Context, params *ImportCertificateAuthorityCertificateInput, optFns ...func(*Options)) (*ImportCertificateAuthorityCertificateOutput, error) {
 	if params == nil {
 		params = &ImportCertificateAuthorityCertificateInput{}

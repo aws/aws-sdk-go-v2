@@ -39,15 +39,16 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_GetBucketPolicy.html#API_control_GetBucketPolicy_Examples)
 // section below. The following actions are related to GetBucketPolicy:
 //
-//     *
-// GetObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
+// *
+// GetObject
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
 //
-//
-// * PutBucketPolicy
+// *
+// PutBucketPolicy
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html)
 //
-//
-// * DeleteBucketPolicy
+// *
+// DeleteBucketPolicy
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html)
 func (c *Client) GetBucketPolicy(ctx context.Context, params *GetBucketPolicyInput, optFns ...func(*Options)) (*GetBucketPolicyOutput, error) {
 	if params == nil {

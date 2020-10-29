@@ -6,8 +6,8 @@ type ContentClassifier string
 
 // Enum values for ContentClassifier
 const (
-	ContentClassifierFree_of_personally_identifiable_information ContentClassifier = "FreeOfPersonallyIdentifiableInformation"
-	ContentClassifierFree_of_adult_content                       ContentClassifier = "FreeOfAdultContent"
+	ContentClassifierFreeOfPersonallyIdentifiableInformation ContentClassifier = "FreeOfPersonallyIdentifiableInformation"
+	ContentClassifierFreeOfAdultContent                      ContentClassifier = "FreeOfAdultContent"
 )
 
 // Values returns all known values for ContentClassifier. Note that this can be
@@ -24,11 +24,11 @@ type HumanLoopStatus string
 
 // Enum values for HumanLoopStatus
 const (
-	HumanLoopStatusIn_progress HumanLoopStatus = "InProgress"
-	HumanLoopStatusFailed      HumanLoopStatus = "Failed"
-	HumanLoopStatusCompleted   HumanLoopStatus = "Completed"
-	HumanLoopStatusStopped     HumanLoopStatus = "Stopped"
-	HumanLoopStatusStopping    HumanLoopStatus = "Stopping"
+	HumanLoopStatusInProgress HumanLoopStatus = "InProgress"
+	HumanLoopStatusFailed     HumanLoopStatus = "Failed"
+	HumanLoopStatusCompleted  HumanLoopStatus = "Completed"
+	HumanLoopStatusStopped    HumanLoopStatus = "Stopped"
+	HumanLoopStatusStopping   HumanLoopStatus = "Stopping"
 )
 
 // Values returns all known values for HumanLoopStatus. Note that this can be

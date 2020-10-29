@@ -251,12 +251,12 @@ type MinimumProtocolVersion string
 
 // Enum values for MinimumProtocolVersion
 const (
-	MinimumProtocolVersionSslv3       MinimumProtocolVersion = "SSLv3"
-	MinimumProtocolVersionTlsv1       MinimumProtocolVersion = "TLSv1"
-	MinimumProtocolVersionTlsv1_2016  MinimumProtocolVersion = "TLSv1_2016"
-	MinimumProtocolVersionTlsv11_2016 MinimumProtocolVersion = "TLSv1.1_2016"
-	MinimumProtocolVersionTlsv12_2018 MinimumProtocolVersion = "TLSv1.2_2018"
-	MinimumProtocolVersionTlsv12_2019 MinimumProtocolVersion = "TLSv1.2_2019"
+	MinimumProtocolVersionSslv3      MinimumProtocolVersion = "SSLv3"
+	MinimumProtocolVersionTlsv1      MinimumProtocolVersion = "TLSv1"
+	MinimumProtocolVersionTlsv12016  MinimumProtocolVersion = "TLSv1_2016"
+	MinimumProtocolVersionTlsv112016 MinimumProtocolVersion = "TLSv1.1_2016"
+	MinimumProtocolVersionTlsv122018 MinimumProtocolVersion = "TLSv1.2_2018"
+	MinimumProtocolVersionTlsv122019 MinimumProtocolVersion = "TLSv1.2_2019"
 )
 
 // Values returns all known values for MinimumProtocolVersion. Note that this can
@@ -380,9 +380,9 @@ type PriceClass string
 
 // Enum values for PriceClass
 const (
-	PriceClassPriceclass_100 PriceClass = "PriceClass_100"
-	PriceClassPriceclass_200 PriceClass = "PriceClass_200"
-	PriceClassPriceclass_all PriceClass = "PriceClass_All"
+	PriceClassPriceclass100 PriceClass = "PriceClass_100"
+	PriceClassPriceclass200 PriceClass = "PriceClass_200"
+	PriceClassPriceclassAll PriceClass = "PriceClass_All"
 )
 
 // Values returns all known values for PriceClass. Note that this can be expanded

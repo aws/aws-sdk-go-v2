@@ -7,16 +7,16 @@ type AgentParameterField string
 // Enum values for AgentParameterField
 const (
 	// Sampling interval in milliseconds used to sample profiles.
-	AgentParameterFieldSampling_interval_in_milliseconds AgentParameterField = "SamplingIntervalInMilliseconds"
+	AgentParameterFieldSamplingIntervalInMilliseconds AgentParameterField = "SamplingIntervalInMilliseconds"
 	// Reporting interval in milliseconds used to report profiles.
-	AgentParameterFieldReporting_interval_in_milliseconds AgentParameterField = "ReportingIntervalInMilliseconds"
+	AgentParameterFieldReportingIntervalInMilliseconds AgentParameterField = "ReportingIntervalInMilliseconds"
 	// Minimum time in milliseconds between sending reports.
-	AgentParameterFieldMinimum_time_for_reporting_in_milliseconds AgentParameterField = "MinimumTimeForReportingInMilliseconds"
+	AgentParameterFieldMinimumTimeForReportingInMilliseconds AgentParameterField = "MinimumTimeForReportingInMilliseconds"
 	// Percentage of memory to be used by CodeGuru profiler. Minimum of 30MB is
 	// required for the agent.
-	AgentParameterFieldMemory_usage_limit_percent AgentParameterField = "MemoryUsageLimitPercent"
+	AgentParameterFieldMemoryUsageLimitPercent AgentParameterField = "MemoryUsageLimitPercent"
 	// Maximum stack depth to be captured by the CodeGuru Profiler.
-	AgentParameterFieldMax_stack_depth AgentParameterField = "MaxStackDepth"
+	AgentParameterFieldMaxStackDepth AgentParameterField = "MaxStackDepth"
 )
 
 // Values returns all known values for AgentParameterField. Note that this can be
@@ -82,7 +82,7 @@ type MetricType string
 const (
 	// Metric value aggregated for all instances of a frame name in a profile relative
 	// to the root frame.
-	MetricTypeAggregated_relative_total_time MetricType = "AGGREGATED_RELATIVE_TOTAL_TIME"
+	MetricTypeAggregatedRelativeTotalTime MetricType = "AGGREGATED_RELATIVE_TOTAL_TIME"
 )
 
 // Values returns all known values for MetricType. Note that this can be expanded
@@ -99,9 +99,9 @@ type OrderBy string
 // Enum values for OrderBy
 const (
 	// Order by timestamp in descending order.
-	OrderByTimestamp_descending OrderBy = "TimestampDescending"
+	OrderByTimestampDescending OrderBy = "TimestampDescending"
 	// Order by timestamp in ascending order.
-	OrderByTimestamp_ascending OrderBy = "TimestampAscending"
+	OrderByTimestampAscending OrderBy = "TimestampAscending"
 )
 
 // Values returns all known values for OrderBy. Note that this can be expanded in
@@ -119,23 +119,23 @@ type MetadataField string
 // Enum values for MetadataField
 const (
 	// Compute platform on which agent is running.
-	MetadataFieldCompute_platform MetadataField = "ComputePlatform"
+	MetadataFieldComputePlatform MetadataField = "ComputePlatform"
 	// Unique identifier for the agent instance.
-	MetadataFieldAgent_id MetadataField = "AgentId"
+	MetadataFieldAgentId MetadataField = "AgentId"
 	// AWS requestId of the Lambda invocation.
-	MetadataFieldAws_request_id MetadataField = "AwsRequestId"
+	MetadataFieldAwsRequestId MetadataField = "AwsRequestId"
 	// Execution environment on which Lambda function is running.
-	MetadataFieldExecution_environment MetadataField = "ExecutionEnvironment"
+	MetadataFieldExecutionEnvironment MetadataField = "ExecutionEnvironment"
 	// Function ARN that's used to invoke the Lambda function.
-	MetadataFieldLambda_function_arn MetadataField = "LambdaFunctionArn"
+	MetadataFieldLambdaFunctionArn MetadataField = "LambdaFunctionArn"
 	// Memory allocated for the Lambda function.
-	MetadataFieldLambda_memory_limit_in_mb MetadataField = "LambdaMemoryLimitInMB"
+	MetadataFieldLambdaMemoryLimitInMb MetadataField = "LambdaMemoryLimitInMB"
 	// Time in milliseconds left before the execution times out.
-	MetadataFieldLambda_remaining_time_in_milliseconds MetadataField = "LambdaRemainingTimeInMilliseconds"
+	MetadataFieldLambdaRemainingTimeInMilliseconds MetadataField = "LambdaRemainingTimeInMilliseconds"
 	// Time in milliseconds between two invocations of the Lambda function.
-	MetadataFieldLambda_time_gap_between_invokes_in_milliseconds MetadataField = "LambdaTimeGapBetweenInvokesInMilliseconds"
+	MetadataFieldLambdaTimeGapBetweenInvokesInMilliseconds MetadataField = "LambdaTimeGapBetweenInvokesInMilliseconds"
 	// Time in milliseconds for the previous Lambda invocation.
-	MetadataFieldLambda_previous_execution_time_in_milliseconds MetadataField = "LambdaPreviousExecutionTimeInMilliseconds"
+	MetadataFieldLambdaPreviousExecutionTimeInMilliseconds MetadataField = "LambdaPreviousExecutionTimeInMilliseconds"
 )
 
 // Values returns all known values for MetadataField. Note that this can be
@@ -160,7 +160,7 @@ type ActionGroup string
 // Enum values for ActionGroup
 const (
 	// Permission group type for Agent APIs - ConfigureAgent, PostAgentProfile
-	ActionGroupAgent_permissions ActionGroup = "agentPermissions"
+	ActionGroupAgentPermissions ActionGroup = "agentPermissions"
 )
 
 // Values returns all known values for ActionGroup. Note that this can be expanded

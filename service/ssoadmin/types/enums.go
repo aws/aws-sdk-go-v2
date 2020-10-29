@@ -24,8 +24,8 @@ type ProvisioningStatus string
 
 // Enum values for ProvisioningStatus
 const (
-	ProvisioningStatusLatest_permission_set_provisioned     ProvisioningStatus = "LATEST_PERMISSION_SET_PROVISIONED"
-	ProvisioningStatusLatest_permission_set_not_provisioned ProvisioningStatus = "LATEST_PERMISSION_SET_NOT_PROVISIONED"
+	ProvisioningStatusLatestPermissionSetProvisioned    ProvisioningStatus = "LATEST_PERMISSION_SET_PROVISIONED"
+	ProvisioningStatusLatestPermissionSetNotProvisioned ProvisioningStatus = "LATEST_PERMISSION_SET_NOT_PROVISIONED"
 )
 
 // Values returns all known values for ProvisioningStatus. Note that this can be
@@ -42,8 +42,8 @@ type ProvisionTargetType string
 
 // Enum values for ProvisionTargetType
 const (
-	ProvisionTargetTypeAws_account              ProvisionTargetType = "AWS_ACCOUNT"
-	ProvisionTargetTypeAll_provisioned_accounts ProvisionTargetType = "ALL_PROVISIONED_ACCOUNTS"
+	ProvisionTargetTypeAwsAccount             ProvisionTargetType = "AWS_ACCOUNT"
+	ProvisionTargetTypeAllProvisionedAccounts ProvisionTargetType = "ALL_PROVISIONED_ACCOUNTS"
 )
 
 // Values returns all known values for ProvisionTargetType. Note that this can be
@@ -60,9 +60,9 @@ type StatusValues string
 
 // Enum values for StatusValues
 const (
-	StatusValuesIn_progress StatusValues = "IN_PROGRESS"
-	StatusValuesFailed      StatusValues = "FAILED"
-	StatusValuesSucceeded   StatusValues = "SUCCEEDED"
+	StatusValuesInProgress StatusValues = "IN_PROGRESS"
+	StatusValuesFailed     StatusValues = "FAILED"
+	StatusValuesSucceeded  StatusValues = "SUCCEEDED"
 )
 
 // Values returns all known values for StatusValues. Note that this can be expanded
@@ -80,7 +80,7 @@ type TargetType string
 
 // Enum values for TargetType
 const (
-	TargetTypeAws_account TargetType = "AWS_ACCOUNT"
+	TargetTypeAwsAccount TargetType = "AWS_ACCOUNT"
 )
 
 // Values returns all known values for TargetType. Note that this can be expanded

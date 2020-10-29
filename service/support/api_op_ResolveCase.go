@@ -13,11 +13,11 @@ import (
 // Resolves a support case. This operation takes a caseId and returns the initial
 // and final state of the case.
 //
-//     * You must have a Business or Enterprise
-// support plan to use the AWS Support API.
+// * You must have a Business or Enterprise support
+// plan to use the AWS Support API.
 //
-//     * If you call the AWS Support API
-// from an account that does not have a Business or Enterprise support plan, the
+// * If you call the AWS Support API from an
+// account that does not have a Business or Enterprise support plan, the
 // SubscriptionRequiredException error message appears. For information about
 // changing your support plan, see AWS Support
 // (http://aws.amazon.com/premiumsupport/).

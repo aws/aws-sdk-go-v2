@@ -6,10 +6,10 @@ type ActionOnFailure string
 
 // Enum values for ActionOnFailure
 const (
-	ActionOnFailureTerminate_job_flow ActionOnFailure = "TERMINATE_JOB_FLOW"
-	ActionOnFailureTerminate_cluster  ActionOnFailure = "TERMINATE_CLUSTER"
-	ActionOnFailureCancel_and_wait    ActionOnFailure = "CANCEL_AND_WAIT"
-	ActionOnFailureContinue           ActionOnFailure = "CONTINUE"
+	ActionOnFailureTerminateJobFlow ActionOnFailure = "TERMINATE_JOB_FLOW"
+	ActionOnFailureTerminateCluster ActionOnFailure = "TERMINATE_CLUSTER"
+	ActionOnFailureCancelAndWait    ActionOnFailure = "CANCEL_AND_WAIT"
+	ActionOnFailureContinue         ActionOnFailure = "CONTINUE"
 )
 
 // Values returns all known values for ActionOnFailure. Note that this can be
@@ -28,9 +28,9 @@ type AdjustmentType string
 
 // Enum values for AdjustmentType
 const (
-	AdjustmentTypeChange_in_capacity         AdjustmentType = "CHANGE_IN_CAPACITY"
-	AdjustmentTypePercent_change_in_capacity AdjustmentType = "PERCENT_CHANGE_IN_CAPACITY"
-	AdjustmentTypeExact_capacity             AdjustmentType = "EXACT_CAPACITY"
+	AdjustmentTypeChangeInCapacity        AdjustmentType = "CHANGE_IN_CAPACITY"
+	AdjustmentTypePercentChangeInCapacity AdjustmentType = "PERCENT_CHANGE_IN_CAPACITY"
+	AdjustmentTypeExactCapacity           AdjustmentType = "EXACT_CAPACITY"
 )
 
 // Values returns all known values for AdjustmentType. Note that this can be
@@ -74,9 +74,9 @@ type AutoScalingPolicyStateChangeReasonCode string
 
 // Enum values for AutoScalingPolicyStateChangeReasonCode
 const (
-	AutoScalingPolicyStateChangeReasonCodeUser_request      AutoScalingPolicyStateChangeReasonCode = "USER_REQUEST"
-	AutoScalingPolicyStateChangeReasonCodeProvision_failure AutoScalingPolicyStateChangeReasonCode = "PROVISION_FAILURE"
-	AutoScalingPolicyStateChangeReasonCodeCleanup_failure   AutoScalingPolicyStateChangeReasonCode = "CLEANUP_FAILURE"
+	AutoScalingPolicyStateChangeReasonCodeUserRequest      AutoScalingPolicyStateChangeReasonCode = "USER_REQUEST"
+	AutoScalingPolicyStateChangeReasonCodeProvisionFailure AutoScalingPolicyStateChangeReasonCode = "PROVISION_FAILURE"
+	AutoScalingPolicyStateChangeReasonCodeCleanupFailure   AutoScalingPolicyStateChangeReasonCode = "CLEANUP_FAILURE"
 )
 
 // Values returns all known values for AutoScalingPolicyStateChangeReasonCode. Note
@@ -113,13 +113,13 @@ type ClusterState string
 
 // Enum values for ClusterState
 const (
-	ClusterStateStarting               ClusterState = "STARTING"
-	ClusterStateBootstrapping          ClusterState = "BOOTSTRAPPING"
-	ClusterStateRunning                ClusterState = "RUNNING"
-	ClusterStateWaiting                ClusterState = "WAITING"
-	ClusterStateTerminating            ClusterState = "TERMINATING"
-	ClusterStateTerminated             ClusterState = "TERMINATED"
-	ClusterStateTerminated_with_errors ClusterState = "TERMINATED_WITH_ERRORS"
+	ClusterStateStarting             ClusterState = "STARTING"
+	ClusterStateBootstrapping        ClusterState = "BOOTSTRAPPING"
+	ClusterStateRunning              ClusterState = "RUNNING"
+	ClusterStateWaiting              ClusterState = "WAITING"
+	ClusterStateTerminating          ClusterState = "TERMINATING"
+	ClusterStateTerminated           ClusterState = "TERMINATED"
+	ClusterStateTerminatedWithErrors ClusterState = "TERMINATED_WITH_ERRORS"
 )
 
 // Values returns all known values for ClusterState. Note that this can be expanded
@@ -141,14 +141,14 @@ type ClusterStateChangeReasonCode string
 
 // Enum values for ClusterStateChangeReasonCode
 const (
-	ClusterStateChangeReasonCodeInternal_error         ClusterStateChangeReasonCode = "INTERNAL_ERROR"
-	ClusterStateChangeReasonCodeValidation_error       ClusterStateChangeReasonCode = "VALIDATION_ERROR"
-	ClusterStateChangeReasonCodeInstance_failure       ClusterStateChangeReasonCode = "INSTANCE_FAILURE"
-	ClusterStateChangeReasonCodeInstance_fleet_timeout ClusterStateChangeReasonCode = "INSTANCE_FLEET_TIMEOUT"
-	ClusterStateChangeReasonCodeBootstrap_failure      ClusterStateChangeReasonCode = "BOOTSTRAP_FAILURE"
-	ClusterStateChangeReasonCodeUser_request           ClusterStateChangeReasonCode = "USER_REQUEST"
-	ClusterStateChangeReasonCodeStep_failure           ClusterStateChangeReasonCode = "STEP_FAILURE"
-	ClusterStateChangeReasonCodeAll_steps_completed    ClusterStateChangeReasonCode = "ALL_STEPS_COMPLETED"
+	ClusterStateChangeReasonCodeInternalError        ClusterStateChangeReasonCode = "INTERNAL_ERROR"
+	ClusterStateChangeReasonCodeValidationError      ClusterStateChangeReasonCode = "VALIDATION_ERROR"
+	ClusterStateChangeReasonCodeInstanceFailure      ClusterStateChangeReasonCode = "INSTANCE_FAILURE"
+	ClusterStateChangeReasonCodeInstanceFleetTimeout ClusterStateChangeReasonCode = "INSTANCE_FLEET_TIMEOUT"
+	ClusterStateChangeReasonCodeBootstrapFailure     ClusterStateChangeReasonCode = "BOOTSTRAP_FAILURE"
+	ClusterStateChangeReasonCodeUserRequest          ClusterStateChangeReasonCode = "USER_REQUEST"
+	ClusterStateChangeReasonCodeStepFailure          ClusterStateChangeReasonCode = "STEP_FAILURE"
+	ClusterStateChangeReasonCodeAllStepsCompleted    ClusterStateChangeReasonCode = "ALL_STEPS_COMPLETED"
 )
 
 // Values returns all known values for ClusterStateChangeReasonCode. Note that this
@@ -171,10 +171,10 @@ type ComparisonOperator string
 
 // Enum values for ComparisonOperator
 const (
-	ComparisonOperatorGreater_than_or_equal ComparisonOperator = "GREATER_THAN_OR_EQUAL"
-	ComparisonOperatorGreater_than          ComparisonOperator = "GREATER_THAN"
-	ComparisonOperatorLess_than             ComparisonOperator = "LESS_THAN"
-	ComparisonOperatorLess_than_or_equal    ComparisonOperator = "LESS_THAN_OR_EQUAL"
+	ComparisonOperatorGreaterThanOrEqual ComparisonOperator = "GREATER_THAN_OR_EQUAL"
+	ComparisonOperatorGreaterThan        ComparisonOperator = "GREATER_THAN"
+	ComparisonOperatorLessThan           ComparisonOperator = "LESS_THAN"
+	ComparisonOperatorLessThanOrEqual    ComparisonOperator = "LESS_THAN_OR_EQUAL"
 )
 
 // Values returns all known values for ComparisonOperator. Note that this can be
@@ -229,8 +229,8 @@ type InstanceCollectionType string
 
 // Enum values for InstanceCollectionType
 const (
-	InstanceCollectionTypeInstance_fleet InstanceCollectionType = "INSTANCE_FLEET"
-	InstanceCollectionTypeInstance_group InstanceCollectionType = "INSTANCE_GROUP"
+	InstanceCollectionTypeInstanceFleet InstanceCollectionType = "INSTANCE_FLEET"
+	InstanceCollectionTypeInstanceGroup InstanceCollectionType = "INSTANCE_GROUP"
 )
 
 // Values returns all known values for InstanceCollectionType. Note that this can
@@ -275,10 +275,10 @@ type InstanceFleetStateChangeReasonCode string
 
 // Enum values for InstanceFleetStateChangeReasonCode
 const (
-	InstanceFleetStateChangeReasonCodeInternal_error     InstanceFleetStateChangeReasonCode = "INTERNAL_ERROR"
-	InstanceFleetStateChangeReasonCodeValidation_error   InstanceFleetStateChangeReasonCode = "VALIDATION_ERROR"
-	InstanceFleetStateChangeReasonCodeInstance_failure   InstanceFleetStateChangeReasonCode = "INSTANCE_FAILURE"
-	InstanceFleetStateChangeReasonCodeCluster_terminated InstanceFleetStateChangeReasonCode = "CLUSTER_TERMINATED"
+	InstanceFleetStateChangeReasonCodeInternalError     InstanceFleetStateChangeReasonCode = "INTERNAL_ERROR"
+	InstanceFleetStateChangeReasonCodeValidationError   InstanceFleetStateChangeReasonCode = "VALIDATION_ERROR"
+	InstanceFleetStateChangeReasonCodeInstanceFailure   InstanceFleetStateChangeReasonCode = "INSTANCE_FAILURE"
+	InstanceFleetStateChangeReasonCodeClusterTerminated InstanceFleetStateChangeReasonCode = "CLUSTER_TERMINATED"
 )
 
 // Values returns all known values for InstanceFleetStateChangeReasonCode. Note
@@ -327,7 +327,7 @@ const (
 	InstanceGroupStateTerminating   InstanceGroupState = "TERMINATING"
 	InstanceGroupStateTerminated    InstanceGroupState = "TERMINATED"
 	InstanceGroupStateArrested      InstanceGroupState = "ARRESTED"
-	InstanceGroupStateShutting_down InstanceGroupState = "SHUTTING_DOWN"
+	InstanceGroupStateShuttingDown  InstanceGroupState = "SHUTTING_DOWN"
 	InstanceGroupStateEnded         InstanceGroupState = "ENDED"
 )
 
@@ -354,10 +354,10 @@ type InstanceGroupStateChangeReasonCode string
 
 // Enum values for InstanceGroupStateChangeReasonCode
 const (
-	InstanceGroupStateChangeReasonCodeInternal_error     InstanceGroupStateChangeReasonCode = "INTERNAL_ERROR"
-	InstanceGroupStateChangeReasonCodeValidation_error   InstanceGroupStateChangeReasonCode = "VALIDATION_ERROR"
-	InstanceGroupStateChangeReasonCodeInstance_failure   InstanceGroupStateChangeReasonCode = "INSTANCE_FAILURE"
-	InstanceGroupStateChangeReasonCodeCluster_terminated InstanceGroupStateChangeReasonCode = "CLUSTER_TERMINATED"
+	InstanceGroupStateChangeReasonCodeInternalError     InstanceGroupStateChangeReasonCode = "INTERNAL_ERROR"
+	InstanceGroupStateChangeReasonCodeValidationError   InstanceGroupStateChangeReasonCode = "VALIDATION_ERROR"
+	InstanceGroupStateChangeReasonCodeInstanceFailure   InstanceGroupStateChangeReasonCode = "INSTANCE_FAILURE"
+	InstanceGroupStateChangeReasonCodeClusterTerminated InstanceGroupStateChangeReasonCode = "CLUSTER_TERMINATED"
 )
 
 // Values returns all known values for InstanceGroupStateChangeReasonCode. Note
@@ -417,11 +417,11 @@ type InstanceState string
 
 // Enum values for InstanceState
 const (
-	InstanceStateAwaiting_fulfillment InstanceState = "AWAITING_FULFILLMENT"
-	InstanceStateProvisioning         InstanceState = "PROVISIONING"
-	InstanceStateBootstrapping        InstanceState = "BOOTSTRAPPING"
-	InstanceStateRunning              InstanceState = "RUNNING"
-	InstanceStateTerminated           InstanceState = "TERMINATED"
+	InstanceStateAwaitingFulfillment InstanceState = "AWAITING_FULFILLMENT"
+	InstanceStateProvisioning        InstanceState = "PROVISIONING"
+	InstanceStateBootstrapping       InstanceState = "BOOTSTRAPPING"
+	InstanceStateRunning             InstanceState = "RUNNING"
+	InstanceStateTerminated          InstanceState = "TERMINATED"
 )
 
 // Values returns all known values for InstanceState. Note that this can be
@@ -441,11 +441,11 @@ type InstanceStateChangeReasonCode string
 
 // Enum values for InstanceStateChangeReasonCode
 const (
-	InstanceStateChangeReasonCodeInternal_error     InstanceStateChangeReasonCode = "INTERNAL_ERROR"
-	InstanceStateChangeReasonCodeValidation_error   InstanceStateChangeReasonCode = "VALIDATION_ERROR"
-	InstanceStateChangeReasonCodeInstance_failure   InstanceStateChangeReasonCode = "INSTANCE_FAILURE"
-	InstanceStateChangeReasonCodeBootstrap_failure  InstanceStateChangeReasonCode = "BOOTSTRAP_FAILURE"
-	InstanceStateChangeReasonCodeCluster_terminated InstanceStateChangeReasonCode = "CLUSTER_TERMINATED"
+	InstanceStateChangeReasonCodeInternalError     InstanceStateChangeReasonCode = "INTERNAL_ERROR"
+	InstanceStateChangeReasonCodeValidationError   InstanceStateChangeReasonCode = "VALIDATION_ERROR"
+	InstanceStateChangeReasonCodeInstanceFailure   InstanceStateChangeReasonCode = "INSTANCE_FAILURE"
+	InstanceStateChangeReasonCodeBootstrapFailure  InstanceStateChangeReasonCode = "BOOTSTRAP_FAILURE"
+	InstanceStateChangeReasonCodeClusterTerminated InstanceStateChangeReasonCode = "CLUSTER_TERMINATED"
 )
 
 // Values returns all known values for InstanceStateChangeReasonCode. Note that
@@ -470,7 +470,7 @@ const (
 	JobFlowExecutionStateBootstrapping JobFlowExecutionState = "BOOTSTRAPPING"
 	JobFlowExecutionStateRunning       JobFlowExecutionState = "RUNNING"
 	JobFlowExecutionStateWaiting       JobFlowExecutionState = "WAITING"
-	JobFlowExecutionStateShutting_down JobFlowExecutionState = "SHUTTING_DOWN"
+	JobFlowExecutionStateShuttingDown  JobFlowExecutionState = "SHUTTING_DOWN"
 	JobFlowExecutionStateTerminated    JobFlowExecutionState = "TERMINATED"
 	JobFlowExecutionStateCompleted     JobFlowExecutionState = "COMPLETED"
 	JobFlowExecutionStateFailed        JobFlowExecutionState = "FAILED"
@@ -496,8 +496,8 @@ type MarketType string
 
 // Enum values for MarketType
 const (
-	MarketTypeOn_demand MarketType = "ON_DEMAND"
-	MarketTypeSpot      MarketType = "SPOT"
+	MarketTypeOnDemand MarketType = "ON_DEMAND"
+	MarketTypeSpot     MarketType = "SPOT"
 )
 
 // Values returns all known values for MarketType. Note that this can be expanded
@@ -514,16 +514,16 @@ type NotebookExecutionStatus string
 
 // Enum values for NotebookExecutionStatus
 const (
-	NotebookExecutionStatusStart_pending NotebookExecutionStatus = "START_PENDING"
-	NotebookExecutionStatusStarting      NotebookExecutionStatus = "STARTING"
-	NotebookExecutionStatusRunning       NotebookExecutionStatus = "RUNNING"
-	NotebookExecutionStatusFinishing     NotebookExecutionStatus = "FINISHING"
-	NotebookExecutionStatusFinished      NotebookExecutionStatus = "FINISHED"
-	NotebookExecutionStatusFailing       NotebookExecutionStatus = "FAILING"
-	NotebookExecutionStatusFailed        NotebookExecutionStatus = "FAILED"
-	NotebookExecutionStatusStop_pending  NotebookExecutionStatus = "STOP_PENDING"
-	NotebookExecutionStatusStopping      NotebookExecutionStatus = "STOPPING"
-	NotebookExecutionStatusStopped       NotebookExecutionStatus = "STOPPED"
+	NotebookExecutionStatusStartPending NotebookExecutionStatus = "START_PENDING"
+	NotebookExecutionStatusStarting     NotebookExecutionStatus = "STARTING"
+	NotebookExecutionStatusRunning      NotebookExecutionStatus = "RUNNING"
+	NotebookExecutionStatusFinishing    NotebookExecutionStatus = "FINISHING"
+	NotebookExecutionStatusFinished     NotebookExecutionStatus = "FINISHED"
+	NotebookExecutionStatusFailing      NotebookExecutionStatus = "FAILING"
+	NotebookExecutionStatusFailed       NotebookExecutionStatus = "FAILED"
+	NotebookExecutionStatusStopPending  NotebookExecutionStatus = "STOP_PENDING"
+	NotebookExecutionStatusStopping     NotebookExecutionStatus = "STOPPING"
+	NotebookExecutionStatusStopped      NotebookExecutionStatus = "STOPPED"
 )
 
 // Values returns all known values for NotebookExecutionStatus. Note that this can
@@ -548,7 +548,7 @@ type OnDemandProvisioningAllocationStrategy string
 
 // Enum values for OnDemandProvisioningAllocationStrategy
 const (
-	OnDemandProvisioningAllocationStrategyLowest_price OnDemandProvisioningAllocationStrategy = "lowest-price"
+	OnDemandProvisioningAllocationStrategyLowestPrice OnDemandProvisioningAllocationStrategy = "lowest-price"
 )
 
 // Values returns all known values for OnDemandProvisioningAllocationStrategy. Note
@@ -605,8 +605,8 @@ type ScaleDownBehavior string
 
 // Enum values for ScaleDownBehavior
 const (
-	ScaleDownBehaviorTerminate_at_instance_hour   ScaleDownBehavior = "TERMINATE_AT_INSTANCE_HOUR"
-	ScaleDownBehaviorTerminate_at_task_completion ScaleDownBehavior = "TERMINATE_AT_TASK_COMPLETION"
+	ScaleDownBehaviorTerminateAtInstanceHour   ScaleDownBehavior = "TERMINATE_AT_INSTANCE_HOUR"
+	ScaleDownBehaviorTerminateAtTaskCompletion ScaleDownBehavior = "TERMINATE_AT_TASK_COMPLETION"
 )
 
 // Values returns all known values for ScaleDownBehavior. Note that this can be
@@ -623,7 +623,7 @@ type SpotProvisioningAllocationStrategy string
 
 // Enum values for SpotProvisioningAllocationStrategy
 const (
-	SpotProvisioningAllocationStrategyCapacity_optimized SpotProvisioningAllocationStrategy = "capacity-optimized"
+	SpotProvisioningAllocationStrategyCapacityOptimized SpotProvisioningAllocationStrategy = "capacity-optimized"
 )
 
 // Values returns all known values for SpotProvisioningAllocationStrategy. Note
@@ -640,8 +640,8 @@ type SpotProvisioningTimeoutAction string
 
 // Enum values for SpotProvisioningTimeoutAction
 const (
-	SpotProvisioningTimeoutActionSwitch_to_on_demand SpotProvisioningTimeoutAction = "SWITCH_TO_ON_DEMAND"
-	SpotProvisioningTimeoutActionTerminate_cluster   SpotProvisioningTimeoutAction = "TERMINATE_CLUSTER"
+	SpotProvisioningTimeoutActionSwitchToOnDemand SpotProvisioningTimeoutAction = "SWITCH_TO_ON_DEMAND"
+	SpotProvisioningTimeoutActionTerminateCluster SpotProvisioningTimeoutAction = "TERMINATE_CLUSTER"
 )
 
 // Values returns all known values for SpotProvisioningTimeoutAction. Note that
@@ -659,11 +659,11 @@ type Statistic string
 
 // Enum values for Statistic
 const (
-	StatisticSample_count Statistic = "SAMPLE_COUNT"
-	StatisticAverage      Statistic = "AVERAGE"
-	StatisticSum          Statistic = "SUM"
-	StatisticMinimum      Statistic = "MINIMUM"
-	StatisticMaximum      Statistic = "MAXIMUM"
+	StatisticSampleCount Statistic = "SAMPLE_COUNT"
+	StatisticAverage     Statistic = "AVERAGE"
+	StatisticSum         Statistic = "SUM"
+	StatisticMinimum     Statistic = "MINIMUM"
+	StatisticMaximum     Statistic = "MAXIMUM"
 )
 
 // Values returns all known values for Statistic. Note that this can be expanded in
@@ -683,8 +683,8 @@ type StepCancellationOption string
 
 // Enum values for StepCancellationOption
 const (
-	StepCancellationOptionSend_interrupt    StepCancellationOption = "SEND_INTERRUPT"
-	StepCancellationOptionTerminate_process StepCancellationOption = "TERMINATE_PROCESS"
+	StepCancellationOptionSendInterrupt    StepCancellationOption = "SEND_INTERRUPT"
+	StepCancellationOptionTerminateProcess StepCancellationOption = "TERMINATE_PROCESS"
 )
 
 // Values returns all known values for StepCancellationOption. Note that this can
@@ -729,13 +729,13 @@ type StepState string
 
 // Enum values for StepState
 const (
-	StepStatePending        StepState = "PENDING"
-	StepStateCancel_pending StepState = "CANCEL_PENDING"
-	StepStateRunning        StepState = "RUNNING"
-	StepStateCompleted      StepState = "COMPLETED"
-	StepStateCancelled      StepState = "CANCELLED"
-	StepStateFailed         StepState = "FAILED"
-	StepStateInterrupted    StepState = "INTERRUPTED"
+	StepStatePending       StepState = "PENDING"
+	StepStateCancelPending StepState = "CANCEL_PENDING"
+	StepStateRunning       StepState = "RUNNING"
+	StepStateCompleted     StepState = "COMPLETED"
+	StepStateCancelled     StepState = "CANCELLED"
+	StepStateFailed        StepState = "FAILED"
+	StepStateInterrupted   StepState = "INTERRUPTED"
 )
 
 // Values returns all known values for StepState. Note that this can be expanded in
@@ -773,33 +773,33 @@ type Unit string
 
 // Enum values for Unit
 const (
-	UnitNone                  Unit = "NONE"
-	UnitSeconds               Unit = "SECONDS"
-	UnitMicro_seconds         Unit = "MICRO_SECONDS"
-	UnitMilli_seconds         Unit = "MILLI_SECONDS"
-	UnitBytes                 Unit = "BYTES"
-	UnitKilo_bytes            Unit = "KILO_BYTES"
-	UnitMega_bytes            Unit = "MEGA_BYTES"
-	UnitGiga_bytes            Unit = "GIGA_BYTES"
-	UnitTera_bytes            Unit = "TERA_BYTES"
-	UnitBits                  Unit = "BITS"
-	UnitKilo_bits             Unit = "KILO_BITS"
-	UnitMega_bits             Unit = "MEGA_BITS"
-	UnitGiga_bits             Unit = "GIGA_BITS"
-	UnitTera_bits             Unit = "TERA_BITS"
-	UnitPercent               Unit = "PERCENT"
-	UnitCount                 Unit = "COUNT"
-	UnitBytes_per_second      Unit = "BYTES_PER_SECOND"
-	UnitKilo_bytes_per_second Unit = "KILO_BYTES_PER_SECOND"
-	UnitMega_bytes_per_second Unit = "MEGA_BYTES_PER_SECOND"
-	UnitGiga_bytes_per_second Unit = "GIGA_BYTES_PER_SECOND"
-	UnitTera_bytes_per_second Unit = "TERA_BYTES_PER_SECOND"
-	UnitBits_per_second       Unit = "BITS_PER_SECOND"
-	UnitKilo_bits_per_second  Unit = "KILO_BITS_PER_SECOND"
-	UnitMega_bits_per_second  Unit = "MEGA_BITS_PER_SECOND"
-	UnitGiga_bits_per_second  Unit = "GIGA_BITS_PER_SECOND"
-	UnitTera_bits_per_second  Unit = "TERA_BITS_PER_SECOND"
-	UnitCount_per_second      Unit = "COUNT_PER_SECOND"
+	UnitNone               Unit = "NONE"
+	UnitSeconds            Unit = "SECONDS"
+	UnitMicroSeconds       Unit = "MICRO_SECONDS"
+	UnitMilliSeconds       Unit = "MILLI_SECONDS"
+	UnitBytes              Unit = "BYTES"
+	UnitKiloBytes          Unit = "KILO_BYTES"
+	UnitMegaBytes          Unit = "MEGA_BYTES"
+	UnitGigaBytes          Unit = "GIGA_BYTES"
+	UnitTeraBytes          Unit = "TERA_BYTES"
+	UnitBits               Unit = "BITS"
+	UnitKiloBits           Unit = "KILO_BITS"
+	UnitMegaBits           Unit = "MEGA_BITS"
+	UnitGigaBits           Unit = "GIGA_BITS"
+	UnitTeraBits           Unit = "TERA_BITS"
+	UnitPercent            Unit = "PERCENT"
+	UnitCount              Unit = "COUNT"
+	UnitBytesPerSecond     Unit = "BYTES_PER_SECOND"
+	UnitKiloBytesPerSecond Unit = "KILO_BYTES_PER_SECOND"
+	UnitMegaBytesPerSecond Unit = "MEGA_BYTES_PER_SECOND"
+	UnitGigaBytesPerSecond Unit = "GIGA_BYTES_PER_SECOND"
+	UnitTeraBytesPerSecond Unit = "TERA_BYTES_PER_SECOND"
+	UnitBitsPerSecond      Unit = "BITS_PER_SECOND"
+	UnitKiloBitsPerSecond  Unit = "KILO_BITS_PER_SECOND"
+	UnitMegaBitsPerSecond  Unit = "MEGA_BITS_PER_SECOND"
+	UnitGigaBitsPerSecond  Unit = "GIGA_BITS_PER_SECOND"
+	UnitTeraBitsPerSecond  Unit = "TERA_BITS_PER_SECOND"
+	UnitCountPerSecond     Unit = "COUNT_PER_SECOND"
 )
 
 // Values returns all known values for Unit. Note that this can be expanded in the

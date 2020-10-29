@@ -20,16 +20,16 @@ import (
 // specified client request token doesn't exist, this operation does the
 // following:
 //
-//     * Creates a new Amazon FSx file system from backup with an
-// assigned ID, and an initial lifecycle state of CREATING.
+// * Creates a new Amazon FSx file system from backup with an assigned
+// ID, and an initial lifecycle state of CREATING.
 //
-//     * Returns the
-// description of the file system.
+// * Returns the description of
+// the file system.
 //
-// Parameters like Active Directory, default share
-// name, automatic backup, and backup settings default to the parameters of the
-// file system that was backed up, unless overridden. You can explicitly supply
-// other settings. By using the idempotent operation, you can retry a
+// Parameters like Active Directory, default share name,
+// automatic backup, and backup settings default to the parameters of the file
+// system that was backed up, unless overridden. You can explicitly supply other
+// settings. By using the idempotent operation, you can retry a
 // CreateFileSystemFromBackup call without the risk of creating an extra file
 // system. This approach can be useful when an initial call fails in a way that
 // makes it unclear whether a file system was created. Examples are if a transport
@@ -91,19 +91,18 @@ type CreateFileSystemFromBackupInput struct {
 	// Sets the storage type for the Windows file system you're creating from a backup.
 	// Valid values are SSD and HDD.
 	//
-	//     * Set to SSD to use solid state drive
-	// storage. Supported on all Windows deployment types.
+	// * Set to SSD to use solid state drive storage.
+	// Supported on all Windows deployment types.
 	//
-	//     * Set to HDD to use
-	// hard disk drive storage. Supported on SINGLE_AZ_2 and MULTI_AZ_1 Windows file
-	// system deployment types.
+	// * Set to HDD to use hard disk drive
+	// storage. Supported on SINGLE_AZ_2 and MULTI_AZ_1 Windows file system deployment
+	// types.
 	//
-	// Default value is SSD. HDD and SSD storage types have
-	// different minimum storage capacity requirements. A restored file system's
-	// storage capacity is tied to the file system that was backed up. You can create a
-	// file system that uses HDD storage from a backup of a file system that used SSD
-	// storage only if the original SSD file system had a storage capacity of at least
-	// 2000 GiB.
+	// Default value is SSD. HDD and SSD storage types have different minimum
+	// storage capacity requirements. A restored file system's storage capacity is tied
+	// to the file system that was backed up. You can create a file system that uses
+	// HDD storage from a backup of a file system that used SSD storage only if the
+	// original SSD file system had a storage capacity of at least 2000 GiB.
 	StorageType types.StorageType
 
 	// The tags to be applied to the file system at file system creation. The key value

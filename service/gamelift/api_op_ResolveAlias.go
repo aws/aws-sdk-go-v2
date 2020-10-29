@@ -12,19 +12,18 @@ import (
 
 // Retrieves the fleet ID that an alias is currently pointing to.
 //
-//     *
-// CreateAlias
+// * CreateAlias
 //
-//     * ListAliases
+// *
+// ListAliases
 //
-//     * DescribeAlias
+// * DescribeAlias
 //
-//     * UpdateAlias
+// * UpdateAlias
 //
-//     *
-// DeleteAlias
+// * DeleteAlias
 //
-//     * ResolveAlias
+// * ResolveAlias
 func (c *Client) ResolveAlias(ctx context.Context, params *ResolveAliasInput, optFns ...func(*Options)) (*ResolveAliasOutput, error) {
 	if params == nil {
 		params = &ResolveAliasInput{}

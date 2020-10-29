@@ -43,13 +43,13 @@ type CreateReplicationTaskInput struct {
 
 	// An identifier for the replication task. Constraints:
 	//
-	//     * Must contain 1-255
+	// * Must contain 1-255
 	// alphanumeric characters or hyphens.
 	//
-	//     * First character must be a letter.
+	// * First character must be a letter.
 	//
-	//
-	// * Cannot end with a hyphen or contain two consecutive hyphens.
+	// *
+	// Cannot end with a hyphen or contain two consecutive hyphens.
 	//
 	// This member is required.
 	ReplicationTaskIdentifier *string

@@ -73,30 +73,30 @@ type CreateStackInstancesInput struct {
 	// their values, be aware of how AWS CloudFormation sets parameter values during
 	// stack instance operations:
 	//
-	//     * To override the current value for a parameter,
+	// * To override the current value for a parameter,
 	// include the parameter and specify its value.
 	//
-	//     * To leave a parameter set to
-	// its present value, you can do one of the following:
+	// * To leave a parameter set to its
+	// present value, you can do one of the following:
 	//
-	//         * Do not include
-	// the parameter in the list.
+	// * Do not include the parameter
+	// in the list.
 	//
-	//         * Include the parameter and specify
-	// UsePreviousValue as true. (You cannot specify both a value and set
-	// UsePreviousValue to true.)
+	// * Include the parameter and specify UsePreviousValue as true. (You
+	// cannot specify both a value and set UsePreviousValue to true.)
 	//
-	//     * To set all overridden parameter back to the
-	// values specified in the stack set, specify a parameter list but do not include
-	// any parameters.
+	// * To set all
+	// overridden parameter back to the values specified in the stack set, specify a
+	// parameter list but do not include any parameters.
 	//
-	//     * To leave all parameters set to their present values, do
-	// not specify this property at all.
+	// * To leave all parameters set
+	// to their present values, do not specify this property at all.
 	//
-	// During stack set updates, any parameter
-	// values overridden for a stack instance are not updated, but retain their
-	// overridden value. You can only override the parameter values that are specified
-	// in the stack set; to add or delete a parameter itself, use UpdateStackSet
+	// During stack set
+	// updates, any parameter values overridden for a stack instance are not updated,
+	// but retain their overridden value. You can only override the parameter values
+	// that are specified in the stack set; to add or delete a parameter itself, use
+	// UpdateStackSet
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html)
 	// to update the stack set template.
 	ParameterOverrides []*types.Parameter

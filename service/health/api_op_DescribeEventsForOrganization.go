@@ -18,15 +18,15 @@ import (
 // any affected resources. To retrieve that information, use the following
 // operations:
 //
-//     * DescribeAffectedAccountsForOrganization
+// * DescribeAffectedAccountsForOrganization
 // (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedAccountsForOrganization.html)
 //
-//
-// * DescribeEventDetailsForOrganization
+// *
+// DescribeEventDetailsForOrganization
 // (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html)
 //
-//
-// * DescribeAffectedEntitiesForOrganization
+// *
+// DescribeAffectedEntitiesForOrganization
 // (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html)
 //
 // If

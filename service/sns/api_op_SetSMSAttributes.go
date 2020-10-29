@@ -61,11 +61,11 @@ type SetSMSAttributesInput struct {
 	// – The type of SMS message that you will send by default. You can assign the
 	// following values:
 	//
-	//     * Promotional – (Default) Noncritical messages, such as
+	// * Promotional – (Default) Noncritical messages, such as
 	// marketing messages. Amazon SNS optimizes the message delivery to incur the
 	// lowest cost.
 	//
-	//     * Transactional – Critical messages that support customer
+	// * Transactional – Critical messages that support customer
 	// transactions, such as one-time passcodes for multi-factor authentication. Amazon
 	// SNS optimizes the message delivery to achieve the highest
 	// reliability.
@@ -76,29 +76,29 @@ type SetSMSAttributesInput struct {
 	// information for each SMS message that was successfully delivered by your
 	// account:
 	//
-	//     * Time that the message was published (in UTC)
+	// * Time that the message was published (in UTC)
 	//
-	//     * Message ID
+	// * Message ID
 	//
+	// *
+	// Destination phone number
 	//
-	// * Destination phone number
+	// * Message type
 	//
-	//     * Message type
+	// * Delivery status
 	//
-	//     * Delivery status
+	// * Message price (in
+	// USD)
 	//
-	//     *
-	// Message price (in USD)
+	// * Part number (a message is split into multiple parts if it is too long
+	// for a single message)
 	//
-	//     * Part number (a message is split into multiple
-	// parts if it is too long for a single message)
+	// * Total number of parts
 	//
-	//     * Total number of parts
-	//
-	// To
-	// receive the report, the bucket must have a policy that allows the Amazon SNS
-	// service principle to perform the s3:PutObject and s3:GetBucketLocation actions.
-	// For an example bucket policy and usage report, see Monitoring SMS Activity
+	// To receive the report, the
+	// bucket must have a policy that allows the Amazon SNS service principle to
+	// perform the s3:PutObject and s3:GetBucketLocation actions. For an example bucket
+	// policy and usage report, see Monitoring SMS Activity
 	// (https://docs.aws.amazon.com/sns/latest/dg/sms_stats.html) in the Amazon SNS
 	// Developer Guide.
 	//

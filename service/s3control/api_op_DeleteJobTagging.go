@@ -18,18 +18,18 @@ import (
 // action. For more information, see Controlling access and labeling jobs using
 // tags
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags)
-// in the Amazon Simple Storage Service Developer Guide. Related actions include:
-//
+// in the Amazon Simple Storage Service Developer Guide. Related actions
+// include:
 //
 // * CreateJob
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html)
 //
-//
-// * GetJobTagging
+// *
+// GetJobTagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetJobTagging.html)
 //
-//
-// * PutJobTagging
+// *
+// PutJobTagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutJobTagging.html)
 func (c *Client) DeleteJobTagging(ctx context.Context, params *DeleteJobTaggingInput, optFns ...func(*Options)) (*DeleteJobTaggingOutput, error) {
 	if params == nil {

@@ -22,24 +22,24 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/matchmaker-build.html)
 // Related operations
 //
-//     * CreateMatchmakingConfiguration
+// * CreateMatchmakingConfiguration
 //
-//     *
+// *
 // DescribeMatchmakingConfigurations
 //
-//     * UpdateMatchmakingConfiguration
+// * UpdateMatchmakingConfiguration
 //
-//     *
+// *
 // DeleteMatchmakingConfiguration
 //
-//     * CreateMatchmakingRuleSet
+// * CreateMatchmakingRuleSet
 //
-//     *
+// *
 // DescribeMatchmakingRuleSets
 //
-//     * ValidateMatchmakingRuleSet
+// * ValidateMatchmakingRuleSet
 //
-//     *
+// *
 // DeleteMatchmakingRuleSet
 func (c *Client) DescribeMatchmakingConfigurations(ctx context.Context, params *DescribeMatchmakingConfigurationsInput, optFns ...func(*Options)) (*DescribeMatchmakingConfigurationsOutput, error) {
 	if params == nil {

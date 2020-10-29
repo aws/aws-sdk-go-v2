@@ -59,14 +59,14 @@ type DescribeStackResourcesInput struct {
 	// The name or the unique stack ID that is associated with the stack, which are not
 	// always interchangeable:
 	//
-	//     * Running stacks: You can specify either the
-	// stack's name or its unique stack ID.
+	// * Running stacks: You can specify either the stack's
+	// name or its unique stack ID.
 	//
-	//     * Deleted stacks: You must specify the
-	// unique stack ID.
+	// * Deleted stacks: You must specify the unique
+	// stack ID.
 	//
-	// Default: There is no default value. Required: Conditional. If
-	// you do not specify StackName, you must specify PhysicalResourceId.
+	// Default: There is no default value. Required: Conditional. If you do
+	// not specify StackName, you must specify PhysicalResourceId.
 	StackName *string
 }
 

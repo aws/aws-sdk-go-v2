@@ -15,29 +15,29 @@ import (
 // get game session placement details, specify the placement ID. If successful, a
 // GameSessionPlacement object is returned.
 //
-//     * CreateGameSession
+// * CreateGameSession
 //
-//     *
+// *
 // DescribeGameSessions
 //
-//     * DescribeGameSessionDetails
+// * DescribeGameSessionDetails
 //
-//     *
-// SearchGameSessions
+// * SearchGameSessions
 //
-//     * UpdateGameSession
+// *
+// UpdateGameSession
 //
-//     * GetGameSessionLogUrl
+// * GetGameSessionLogUrl
 //
-//     *
-// Game session placements
+// * Game session placements
 //
-//         * StartGameSessionPlacement
+// *
+// StartGameSessionPlacement
 //
-//         *
-// DescribeGameSessionPlacement
+// * DescribeGameSessionPlacement
 //
-//         * StopGameSessionPlacement
+// *
+// StopGameSessionPlacement
 func (c *Client) DescribeGameSessionPlacement(ctx context.Context, params *DescribeGameSessionPlacementInput, optFns ...func(*Options)) (*DescribeGameSessionPlacementOutput, error) {
 	if params == nil {
 		params = &DescribeGameSessionPlacementInput{}

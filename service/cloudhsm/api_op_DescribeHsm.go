@@ -109,11 +109,11 @@ type DescribeHsmOutput struct {
 
 	// Specifies the type of subscription for the HSM.
 	//
-	//     * PRODUCTION - The HSM is
-	// being used in a production environment.
+	// * PRODUCTION - The HSM is being
+	// used in a production environment.
 	//
-	//     * TRIAL - The HSM is being used in
-	// a product trial.
+	// * TRIAL - The HSM is being used in a product
+	// trial.
 	SubscriptionType types.SubscriptionType
 
 	// The name of the HSM vendor.

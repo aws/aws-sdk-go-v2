@@ -6,9 +6,9 @@ type EventSourcePosition string
 
 // Enum values for EventSourcePosition
 const (
-	EventSourcePositionTrim_horizon EventSourcePosition = "TRIM_HORIZON"
-	EventSourcePositionLatest       EventSourcePosition = "LATEST"
-	EventSourcePositionAt_timestamp EventSourcePosition = "AT_TIMESTAMP"
+	EventSourcePositionTrimHorizon EventSourcePosition = "TRIM_HORIZON"
+	EventSourcePositionLatest      EventSourcePosition = "LATEST"
+	EventSourcePositionAtTimestamp EventSourcePosition = "AT_TIMESTAMP"
 )
 
 // Values returns all known values for EventSourcePosition. Note that this can be
@@ -128,9 +128,9 @@ type ProvisionedConcurrencyStatusEnum string
 
 // Enum values for ProvisionedConcurrencyStatusEnum
 const (
-	ProvisionedConcurrencyStatusEnumIn_progress ProvisionedConcurrencyStatusEnum = "IN_PROGRESS"
-	ProvisionedConcurrencyStatusEnumReady       ProvisionedConcurrencyStatusEnum = "READY"
-	ProvisionedConcurrencyStatusEnumFailed      ProvisionedConcurrencyStatusEnum = "FAILED"
+	ProvisionedConcurrencyStatusEnumInProgress ProvisionedConcurrencyStatusEnum = "IN_PROGRESS"
+	ProvisionedConcurrencyStatusEnumReady      ProvisionedConcurrencyStatusEnum = "READY"
+	ProvisionedConcurrencyStatusEnumFailed     ProvisionedConcurrencyStatusEnum = "FAILED"
 )
 
 // Values returns all known values for ProvisionedConcurrencyStatusEnum. Note that

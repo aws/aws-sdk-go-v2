@@ -6,11 +6,11 @@ type DeploymentStatus string
 
 // Enum values for DeploymentStatus
 const (
-	DeploymentStatusPending_update DeploymentStatus = "PENDING_UPDATE"
-	DeploymentStatusIn_progress    DeploymentStatus = "IN_PROGRESS"
-	DeploymentStatusCompleted      DeploymentStatus = "COMPLETED"
-	DeploymentStatusNot_eligible   DeploymentStatus = "NOT_ELIGIBLE"
-	DeploymentStatusEligible       DeploymentStatus = "ELIGIBLE"
+	DeploymentStatusPendingUpdate DeploymentStatus = "PENDING_UPDATE"
+	DeploymentStatusInProgress    DeploymentStatus = "IN_PROGRESS"
+	DeploymentStatusCompleted     DeploymentStatus = "COMPLETED"
+	DeploymentStatusNotEligible   DeploymentStatus = "NOT_ELIGIBLE"
+	DeploymentStatusEligible      DeploymentStatus = "ELIGIBLE"
 )
 
 // Values returns all known values for DeploymentStatus. Note that this can be
@@ -50,11 +50,11 @@ type DomainPackageStatus string
 
 // Enum values for DomainPackageStatus
 const (
-	DomainPackageStatusAssociating         DomainPackageStatus = "ASSOCIATING"
-	DomainPackageStatusAssociation_failed  DomainPackageStatus = "ASSOCIATION_FAILED"
-	DomainPackageStatusActive              DomainPackageStatus = "ACTIVE"
-	DomainPackageStatusDissociating        DomainPackageStatus = "DISSOCIATING"
-	DomainPackageStatusDissociation_failed DomainPackageStatus = "DISSOCIATION_FAILED"
+	DomainPackageStatusAssociating        DomainPackageStatus = "ASSOCIATING"
+	DomainPackageStatusAssociationFailed  DomainPackageStatus = "ASSOCIATION_FAILED"
+	DomainPackageStatusActive             DomainPackageStatus = "ACTIVE"
+	DomainPackageStatusDissociating       DomainPackageStatus = "DISSOCIATING"
+	DomainPackageStatusDissociationFailed DomainPackageStatus = "DISSOCIATION_FAILED"
 )
 
 // Values returns all known values for DomainPackageStatus. Note that this can be
@@ -222,12 +222,12 @@ type InboundCrossClusterSearchConnectionStatusCode string
 
 // Enum values for InboundCrossClusterSearchConnectionStatusCode
 const (
-	InboundCrossClusterSearchConnectionStatusCodePending_acceptance InboundCrossClusterSearchConnectionStatusCode = "PENDING_ACCEPTANCE"
-	InboundCrossClusterSearchConnectionStatusCodeApproved           InboundCrossClusterSearchConnectionStatusCode = "APPROVED"
-	InboundCrossClusterSearchConnectionStatusCodeRejecting          InboundCrossClusterSearchConnectionStatusCode = "REJECTING"
-	InboundCrossClusterSearchConnectionStatusCodeRejected           InboundCrossClusterSearchConnectionStatusCode = "REJECTED"
-	InboundCrossClusterSearchConnectionStatusCodeDeleting           InboundCrossClusterSearchConnectionStatusCode = "DELETING"
-	InboundCrossClusterSearchConnectionStatusCodeDeleted            InboundCrossClusterSearchConnectionStatusCode = "DELETED"
+	InboundCrossClusterSearchConnectionStatusCodePendingAcceptance InboundCrossClusterSearchConnectionStatusCode = "PENDING_ACCEPTANCE"
+	InboundCrossClusterSearchConnectionStatusCodeApproved          InboundCrossClusterSearchConnectionStatusCode = "APPROVED"
+	InboundCrossClusterSearchConnectionStatusCodeRejecting         InboundCrossClusterSearchConnectionStatusCode = "REJECTING"
+	InboundCrossClusterSearchConnectionStatusCodeRejected          InboundCrossClusterSearchConnectionStatusCode = "REJECTED"
+	InboundCrossClusterSearchConnectionStatusCodeDeleting          InboundCrossClusterSearchConnectionStatusCode = "DELETING"
+	InboundCrossClusterSearchConnectionStatusCodeDeleted           InboundCrossClusterSearchConnectionStatusCode = "DELETED"
 )
 
 // Values returns all known values for
@@ -249,10 +249,10 @@ type LogType string
 
 // Enum values for LogType
 const (
-	LogTypeIndex_slow_logs     LogType = "INDEX_SLOW_LOGS"
-	LogTypeSearch_slow_logs    LogType = "SEARCH_SLOW_LOGS"
-	LogTypeEs_application_logs LogType = "ES_APPLICATION_LOGS"
-	LogTypeAudit_logs          LogType = "AUDIT_LOGS"
+	LogTypeIndexSlowLogs     LogType = "INDEX_SLOW_LOGS"
+	LogTypeSearchSlowLogs    LogType = "SEARCH_SLOW_LOGS"
+	LogTypeEsApplicationLogs LogType = "ES_APPLICATION_LOGS"
+	LogTypeAuditLogs         LogType = "AUDIT_LOGS"
 )
 
 // Values returns all known values for LogType. Note that this can be expanded in
@@ -291,14 +291,14 @@ type OutboundCrossClusterSearchConnectionStatusCode string
 
 // Enum values for OutboundCrossClusterSearchConnectionStatusCode
 const (
-	OutboundCrossClusterSearchConnectionStatusCodePending_acceptance OutboundCrossClusterSearchConnectionStatusCode = "PENDING_ACCEPTANCE"
-	OutboundCrossClusterSearchConnectionStatusCodeValidating         OutboundCrossClusterSearchConnectionStatusCode = "VALIDATING"
-	OutboundCrossClusterSearchConnectionStatusCodeValidation_failed  OutboundCrossClusterSearchConnectionStatusCode = "VALIDATION_FAILED"
-	OutboundCrossClusterSearchConnectionStatusCodeProvisioning       OutboundCrossClusterSearchConnectionStatusCode = "PROVISIONING"
-	OutboundCrossClusterSearchConnectionStatusCodeActive             OutboundCrossClusterSearchConnectionStatusCode = "ACTIVE"
-	OutboundCrossClusterSearchConnectionStatusCodeRejected           OutboundCrossClusterSearchConnectionStatusCode = "REJECTED"
-	OutboundCrossClusterSearchConnectionStatusCodeDeleting           OutboundCrossClusterSearchConnectionStatusCode = "DELETING"
-	OutboundCrossClusterSearchConnectionStatusCodeDeleted            OutboundCrossClusterSearchConnectionStatusCode = "DELETED"
+	OutboundCrossClusterSearchConnectionStatusCodePendingAcceptance OutboundCrossClusterSearchConnectionStatusCode = "PENDING_ACCEPTANCE"
+	OutboundCrossClusterSearchConnectionStatusCodeValidating        OutboundCrossClusterSearchConnectionStatusCode = "VALIDATING"
+	OutboundCrossClusterSearchConnectionStatusCodeValidationFailed  OutboundCrossClusterSearchConnectionStatusCode = "VALIDATION_FAILED"
+	OutboundCrossClusterSearchConnectionStatusCodeProvisioning      OutboundCrossClusterSearchConnectionStatusCode = "PROVISIONING"
+	OutboundCrossClusterSearchConnectionStatusCodeActive            OutboundCrossClusterSearchConnectionStatusCode = "ACTIVE"
+	OutboundCrossClusterSearchConnectionStatusCodeRejected          OutboundCrossClusterSearchConnectionStatusCode = "REJECTED"
+	OutboundCrossClusterSearchConnectionStatusCodeDeleting          OutboundCrossClusterSearchConnectionStatusCode = "DELETING"
+	OutboundCrossClusterSearchConnectionStatusCodeDeleted           OutboundCrossClusterSearchConnectionStatusCode = "DELETED"
 )
 
 // Values returns all known values for
@@ -322,14 +322,14 @@ type PackageStatus string
 
 // Enum values for PackageStatus
 const (
-	PackageStatusCopying           PackageStatus = "COPYING"
-	PackageStatusCopy_failed       PackageStatus = "COPY_FAILED"
-	PackageStatusValidating        PackageStatus = "VALIDATING"
-	PackageStatusValidation_failed PackageStatus = "VALIDATION_FAILED"
-	PackageStatusAvailable         PackageStatus = "AVAILABLE"
-	PackageStatusDeleting          PackageStatus = "DELETING"
-	PackageStatusDeleted           PackageStatus = "DELETED"
-	PackageStatusDelete_failed     PackageStatus = "DELETE_FAILED"
+	PackageStatusCopying          PackageStatus = "COPYING"
+	PackageStatusCopyFailed       PackageStatus = "COPY_FAILED"
+	PackageStatusValidating       PackageStatus = "VALIDATING"
+	PackageStatusValidationFailed PackageStatus = "VALIDATION_FAILED"
+	PackageStatusAvailable        PackageStatus = "AVAILABLE"
+	PackageStatusDeleting         PackageStatus = "DELETING"
+	PackageStatusDeleted          PackageStatus = "DELETED"
+	PackageStatusDeleteFailed     PackageStatus = "DELETE_FAILED"
 )
 
 // Values returns all known values for PackageStatus. Note that this can be
@@ -368,9 +368,9 @@ type ReservedElasticsearchInstancePaymentOption string
 
 // Enum values for ReservedElasticsearchInstancePaymentOption
 const (
-	ReservedElasticsearchInstancePaymentOptionAll_upfront     ReservedElasticsearchInstancePaymentOption = "ALL_UPFRONT"
-	ReservedElasticsearchInstancePaymentOptionPartial_upfront ReservedElasticsearchInstancePaymentOption = "PARTIAL_UPFRONT"
-	ReservedElasticsearchInstancePaymentOptionNo_upfront      ReservedElasticsearchInstancePaymentOption = "NO_UPFRONT"
+	ReservedElasticsearchInstancePaymentOptionAllUpfront     ReservedElasticsearchInstancePaymentOption = "ALL_UPFRONT"
+	ReservedElasticsearchInstancePaymentOptionPartialUpfront ReservedElasticsearchInstancePaymentOption = "PARTIAL_UPFRONT"
+	ReservedElasticsearchInstancePaymentOptionNoUpfront      ReservedElasticsearchInstancePaymentOption = "NO_UPFRONT"
 )
 
 // Values returns all known values for ReservedElasticsearchInstancePaymentOption.
@@ -389,8 +389,8 @@ type TLSSecurityPolicy string
 
 // Enum values for TLSSecurityPolicy
 const (
-	TLSSecurityPolicyPolicy_min_tls_1_0_2019_07 TLSSecurityPolicy = "Policy-Min-TLS-1-0-2019-07"
-	TLSSecurityPolicyPolicy_min_tls_1_2_2019_07 TLSSecurityPolicy = "Policy-Min-TLS-1-2-2019-07"
+	TLSSecurityPolicyPolicyMinTls10201907 TLSSecurityPolicy = "Policy-Min-TLS-1-0-2019-07"
+	TLSSecurityPolicyPolicyMinTls12201907 TLSSecurityPolicy = "Policy-Min-TLS-1-2-2019-07"
 )
 
 // Values returns all known values for TLSSecurityPolicy. Note that this can be
@@ -407,10 +407,10 @@ type UpgradeStatus string
 
 // Enum values for UpgradeStatus
 const (
-	UpgradeStatusIn_progress           UpgradeStatus = "IN_PROGRESS"
-	UpgradeStatusSucceeded             UpgradeStatus = "SUCCEEDED"
-	UpgradeStatusSucceeded_with_issues UpgradeStatus = "SUCCEEDED_WITH_ISSUES"
-	UpgradeStatusFailed                UpgradeStatus = "FAILED"
+	UpgradeStatusInProgress          UpgradeStatus = "IN_PROGRESS"
+	UpgradeStatusSucceeded           UpgradeStatus = "SUCCEEDED"
+	UpgradeStatusSucceededWithIssues UpgradeStatus = "SUCCEEDED_WITH_ISSUES"
+	UpgradeStatusFailed              UpgradeStatus = "FAILED"
 )
 
 // Values returns all known values for UpgradeStatus. Note that this can be
@@ -429,9 +429,9 @@ type UpgradeStep string
 
 // Enum values for UpgradeStep
 const (
-	UpgradeStepPre_upgrade_check UpgradeStep = "PRE_UPGRADE_CHECK"
-	UpgradeStepSnapshot          UpgradeStep = "SNAPSHOT"
-	UpgradeStepUpgrade           UpgradeStep = "UPGRADE"
+	UpgradeStepPreUpgradeCheck UpgradeStep = "PRE_UPGRADE_CHECK"
+	UpgradeStepSnapshot        UpgradeStep = "SNAPSHOT"
+	UpgradeStepUpgrade         UpgradeStep = "UPGRADE"
 )
 
 // Values returns all known values for UpgradeStep. Note that this can be expanded

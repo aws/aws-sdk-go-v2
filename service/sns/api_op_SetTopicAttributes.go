@@ -33,22 +33,22 @@ type SetTopicAttributesInput struct {
 	// names, descriptions, and values of the special request parameters that the
 	// SetTopicAttributes action uses:
 	//
-	//     * DeliveryPolicy – The policy that defines
-	// how Amazon SNS retries failed deliveries to HTTP/S endpoints.
+	// * DeliveryPolicy – The policy that defines how
+	// Amazon SNS retries failed deliveries to HTTP/S endpoints.
 	//
-	//     * DisplayName
-	// – The display name to use for a topic with SMS subscriptions.
+	// * DisplayName – The
+	// display name to use for a topic with SMS subscriptions.
 	//
-	//     * Policy –
-	// The policy that defines who can access your topic. By default, only the topic
-	// owner can publish or subscribe to the topic.
+	// * Policy – The policy
+	// that defines who can access your topic. By default, only the topic owner can
+	// publish or subscribe to the topic.
 	//
-	// The following attribute applies
-	// only to server-side-encryption
+	// The following attribute applies only to
+	// server-side-encryption
 	// (https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html):
 	//
-	//
-	// * KmsMasterKeyId – The ID of an AWS-managed customer master key (CMK) for Amazon
+	// *
+	// KmsMasterKeyId – The ID of an AWS-managed customer master key (CMK) for Amazon
 	// SNS or a custom CMK. For more information, see Key Terms
 	// (https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms).
 	// For more examples, see KeyId
@@ -58,17 +58,17 @@ type SetTopicAttributesInput struct {
 	// The following attribute
 	// applies only to FIFO topics:
 	//
-	//     * ContentBasedDeduplication – Enables
+	// * ContentBasedDeduplication – Enables
 	// content-based deduplication. Amazon SNS uses a SHA-256 hash to generate the
 	// MessageDeduplicationId using the body of the message (but not the attributes of
 	// the message).
 	//
-	//     * When ContentBasedDeduplication is in effect, messages with
+	// * When ContentBasedDeduplication is in effect, messages with
 	// identical content sent within the deduplication interval are treated as
 	// duplicates and only one copy of the message is delivered.
 	//
-	//     * If the queue
-	// has ContentBasedDeduplication set, your MessageDeduplicationId overrides the
+	// * If the queue has
+	// ContentBasedDeduplication set, your MessageDeduplicationId overrides the
 	// generated one.
 	//
 	// This member is required.

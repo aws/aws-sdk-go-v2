@@ -6,39 +6,39 @@ type ActivityType string
 
 // Enum values for ActivityType
 const (
-	ActivityTypeDocument_checked_in                        ActivityType = "DOCUMENT_CHECKED_IN"
-	ActivityTypeDocument_checked_out                       ActivityType = "DOCUMENT_CHECKED_OUT"
-	ActivityTypeDocument_renamed                           ActivityType = "DOCUMENT_RENAMED"
-	ActivityTypeDocument_version_uploaded                  ActivityType = "DOCUMENT_VERSION_UPLOADED"
-	ActivityTypeDocument_version_deleted                   ActivityType = "DOCUMENT_VERSION_DELETED"
-	ActivityTypeDocument_version_viewed                    ActivityType = "DOCUMENT_VERSION_VIEWED"
-	ActivityTypeDocument_version_downloaded                ActivityType = "DOCUMENT_VERSION_DOWNLOADED"
-	ActivityTypeDocument_recycled                          ActivityType = "DOCUMENT_RECYCLED"
-	ActivityTypeDocument_restored                          ActivityType = "DOCUMENT_RESTORED"
-	ActivityTypeDocument_reverted                          ActivityType = "DOCUMENT_REVERTED"
-	ActivityTypeDocument_shared                            ActivityType = "DOCUMENT_SHARED"
-	ActivityTypeDocument_unshared                          ActivityType = "DOCUMENT_UNSHARED"
-	ActivityTypeDocument_share_permission_changed          ActivityType = "DOCUMENT_SHARE_PERMISSION_CHANGED"
-	ActivityTypeDocument_shareable_link_created            ActivityType = "DOCUMENT_SHAREABLE_LINK_CREATED"
-	ActivityTypeDocument_shareable_link_removed            ActivityType = "DOCUMENT_SHAREABLE_LINK_REMOVED"
-	ActivityTypeDocument_shareable_link_permission_changed ActivityType = "DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED"
-	ActivityTypeDocument_moved                             ActivityType = "DOCUMENT_MOVED"
-	ActivityTypeDocument_comment_added                     ActivityType = "DOCUMENT_COMMENT_ADDED"
-	ActivityTypeDocument_comment_deleted                   ActivityType = "DOCUMENT_COMMENT_DELETED"
-	ActivityTypeDocument_annotation_added                  ActivityType = "DOCUMENT_ANNOTATION_ADDED"
-	ActivityTypeDocument_annotation_deleted                ActivityType = "DOCUMENT_ANNOTATION_DELETED"
-	ActivityTypeFolder_created                             ActivityType = "FOLDER_CREATED"
-	ActivityTypeFolder_deleted                             ActivityType = "FOLDER_DELETED"
-	ActivityTypeFolder_renamed                             ActivityType = "FOLDER_RENAMED"
-	ActivityTypeFolder_recycled                            ActivityType = "FOLDER_RECYCLED"
-	ActivityTypeFolder_restored                            ActivityType = "FOLDER_RESTORED"
-	ActivityTypeFolder_shared                              ActivityType = "FOLDER_SHARED"
-	ActivityTypeFolder_unshared                            ActivityType = "FOLDER_UNSHARED"
-	ActivityTypeFolder_share_permission_changed            ActivityType = "FOLDER_SHARE_PERMISSION_CHANGED"
-	ActivityTypeFolder_shareable_link_created              ActivityType = "FOLDER_SHAREABLE_LINK_CREATED"
-	ActivityTypeFolder_shareable_link_removed              ActivityType = "FOLDER_SHAREABLE_LINK_REMOVED"
-	ActivityTypeFolder_shareable_link_permission_changed   ActivityType = "FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED"
-	ActivityTypeFolder_moved                               ActivityType = "FOLDER_MOVED"
+	ActivityTypeDocumentCheckedIn                      ActivityType = "DOCUMENT_CHECKED_IN"
+	ActivityTypeDocumentCheckedOut                     ActivityType = "DOCUMENT_CHECKED_OUT"
+	ActivityTypeDocumentRenamed                        ActivityType = "DOCUMENT_RENAMED"
+	ActivityTypeDocumentVersionUploaded                ActivityType = "DOCUMENT_VERSION_UPLOADED"
+	ActivityTypeDocumentVersionDeleted                 ActivityType = "DOCUMENT_VERSION_DELETED"
+	ActivityTypeDocumentVersionViewed                  ActivityType = "DOCUMENT_VERSION_VIEWED"
+	ActivityTypeDocumentVersionDownloaded              ActivityType = "DOCUMENT_VERSION_DOWNLOADED"
+	ActivityTypeDocumentRecycled                       ActivityType = "DOCUMENT_RECYCLED"
+	ActivityTypeDocumentRestored                       ActivityType = "DOCUMENT_RESTORED"
+	ActivityTypeDocumentReverted                       ActivityType = "DOCUMENT_REVERTED"
+	ActivityTypeDocumentShared                         ActivityType = "DOCUMENT_SHARED"
+	ActivityTypeDocumentUnshared                       ActivityType = "DOCUMENT_UNSHARED"
+	ActivityTypeDocumentSharePermissionChanged         ActivityType = "DOCUMENT_SHARE_PERMISSION_CHANGED"
+	ActivityTypeDocumentShareableLinkCreated           ActivityType = "DOCUMENT_SHAREABLE_LINK_CREATED"
+	ActivityTypeDocumentShareableLinkRemoved           ActivityType = "DOCUMENT_SHAREABLE_LINK_REMOVED"
+	ActivityTypeDocumentShareableLinkPermissionChanged ActivityType = "DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED"
+	ActivityTypeDocumentMoved                          ActivityType = "DOCUMENT_MOVED"
+	ActivityTypeDocumentCommentAdded                   ActivityType = "DOCUMENT_COMMENT_ADDED"
+	ActivityTypeDocumentCommentDeleted                 ActivityType = "DOCUMENT_COMMENT_DELETED"
+	ActivityTypeDocumentAnnotationAdded                ActivityType = "DOCUMENT_ANNOTATION_ADDED"
+	ActivityTypeDocumentAnnotationDeleted              ActivityType = "DOCUMENT_ANNOTATION_DELETED"
+	ActivityTypeFolderCreated                          ActivityType = "FOLDER_CREATED"
+	ActivityTypeFolderDeleted                          ActivityType = "FOLDER_DELETED"
+	ActivityTypeFolderRenamed                          ActivityType = "FOLDER_RENAMED"
+	ActivityTypeFolderRecycled                         ActivityType = "FOLDER_RECYCLED"
+	ActivityTypeFolderRestored                         ActivityType = "FOLDER_RESTORED"
+	ActivityTypeFolderShared                           ActivityType = "FOLDER_SHARED"
+	ActivityTypeFolderUnshared                         ActivityType = "FOLDER_UNSHARED"
+	ActivityTypeFolderSharePermissionChanged           ActivityType = "FOLDER_SHARE_PERMISSION_CHANGED"
+	ActivityTypeFolderShareableLinkCreated             ActivityType = "FOLDER_SHAREABLE_LINK_CREATED"
+	ActivityTypeFolderShareableLinkRemoved             ActivityType = "FOLDER_SHAREABLE_LINK_REMOVED"
+	ActivityTypeFolderShareableLinkPermissionChanged   ActivityType = "FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED"
+	ActivityTypeFolderMoved                            ActivityType = "FOLDER_MOVED"
 )
 
 // Values returns all known values for ActivityType. Note that this can be expanded
@@ -142,8 +142,8 @@ type DocumentSourceType string
 
 // Enum values for DocumentSourceType
 const (
-	DocumentSourceTypeOriginal      DocumentSourceType = "ORIGINAL"
-	DocumentSourceTypeWith_comments DocumentSourceType = "WITH_COMMENTS"
+	DocumentSourceTypeOriginal     DocumentSourceType = "ORIGINAL"
+	DocumentSourceTypeWithComments DocumentSourceType = "WITH_COMMENTS"
 )
 
 // Values returns all known values for DocumentSourceType. Note that this can be
@@ -178,9 +178,9 @@ type DocumentThumbnailType string
 
 // Enum values for DocumentThumbnailType
 const (
-	DocumentThumbnailTypeSmall    DocumentThumbnailType = "SMALL"
-	DocumentThumbnailTypeSmall_hq DocumentThumbnailType = "SMALL_HQ"
-	DocumentThumbnailTypeLarge    DocumentThumbnailType = "LARGE"
+	DocumentThumbnailTypeSmall   DocumentThumbnailType = "SMALL"
+	DocumentThumbnailTypeSmallHq DocumentThumbnailType = "SMALL_HQ"
+	DocumentThumbnailTypeLarge   DocumentThumbnailType = "LARGE"
 )
 
 // Values returns all known values for DocumentThumbnailType. Note that this can be
@@ -241,9 +241,9 @@ const (
 	LocaleTypeEs      LocaleType = "es"
 	LocaleTypeJa      LocaleType = "ja"
 	LocaleTypeRu      LocaleType = "ru"
-	LocaleTypeZh_cn   LocaleType = "zh_CN"
-	LocaleTypeZh_tw   LocaleType = "zh_TW"
-	LocaleTypePt_br   LocaleType = "pt_BR"
+	LocaleTypeZhCn    LocaleType = "zh_CN"
+	LocaleTypeZhTw    LocaleType = "zh_TW"
+	LocaleTypePtBr    LocaleType = "pt_BR"
 	LocaleTypeDefault LocaleType = "default"
 )
 
@@ -312,7 +312,7 @@ type ResourceCollectionType string
 
 // Enum values for ResourceCollectionType
 const (
-	ResourceCollectionTypeShared_with_me ResourceCollectionType = "SHARED_WITH_ME"
+	ResourceCollectionTypeSharedWithMe ResourceCollectionType = "SHARED_WITH_ME"
 )
 
 // Values returns all known values for ResourceCollectionType. Note that this can
@@ -494,8 +494,8 @@ type UserFilterType string
 
 // Enum values for UserFilterType
 const (
-	UserFilterTypeAll            UserFilterType = "ALL"
-	UserFilterTypeActive_pending UserFilterType = "ACTIVE_PENDING"
+	UserFilterTypeAll           UserFilterType = "ALL"
+	UserFilterTypeActivePending UserFilterType = "ACTIVE_PENDING"
 )
 
 // Values returns all known values for UserFilterType. Note that this can be
@@ -512,11 +512,11 @@ type UserSortType string
 
 // Enum values for UserSortType
 const (
-	UserSortTypeUser_name     UserSortType = "USER_NAME"
-	UserSortTypeFull_name     UserSortType = "FULL_NAME"
-	UserSortTypeStorage_limit UserSortType = "STORAGE_LIMIT"
-	UserSortTypeUser_status   UserSortType = "USER_STATUS"
-	UserSortTypeStorage_used  UserSortType = "STORAGE_USED"
+	UserSortTypeUserName     UserSortType = "USER_NAME"
+	UserSortTypeFullName     UserSortType = "FULL_NAME"
+	UserSortTypeStorageLimit UserSortType = "STORAGE_LIMIT"
+	UserSortTypeUserStatus   UserSortType = "USER_STATUS"
+	UserSortTypeStorageUsed  UserSortType = "STORAGE_USED"
 )
 
 // Values returns all known values for UserSortType. Note that this can be expanded

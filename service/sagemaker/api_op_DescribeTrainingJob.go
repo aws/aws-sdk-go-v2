@@ -65,59 +65,58 @@ type DescribeTrainingJobOutput struct {
 	// SecondaryStatusTransition. Amazon SageMaker provides primary statuses and
 	// secondary statuses that apply to each of them: InProgress
 	//
-	//     * Starting -
-	// Starting the training job.
+	// * Starting - Starting
+	// the training job.
 	//
-	//     * Downloading - An optional stage for algorithms
-	// that support File training input mode. It indicates that data is being
-	// downloaded to the ML storage volumes.
+	// * Downloading - An optional stage for algorithms that support
+	// File training input mode. It indicates that data is being downloaded to the ML
+	// storage volumes.
 	//
-	//     * Training - Training is in
-	// progress.
+	// * Training - Training is in progress.
 	//
-	//     * Interrupted - The job stopped because the managed spot training
-	// instances were interrupted.
+	// * Interrupted - The job
+	// stopped because the managed spot training instances were interrupted.
 	//
-	//     * Uploading - Training is complete and the
-	// model artifacts are being uploaded to the S3 location.
+	// *
+	// Uploading - Training is complete and the model artifacts are being uploaded to
+	// the S3 location.
 	//
 	// Completed
 	//
-	//     *
-	// Completed - The training job has completed.
+	// * Completed - The training job has
+	// completed.
 	//
 	// Failed
 	//
-	//     * Failed - The training
-	// job has failed. The reason for the failure is returned in the FailureReason
-	// field of DescribeTrainingJobResponse.
+	// * Failed - The training job has failed. The reason for the
+	// failure is returned in the FailureReason field of
+	// DescribeTrainingJobResponse.
 	//
 	// Stopped
 	//
-	//     * MaxRuntimeExceeded - The
-	// job stopped because it exceeded the maximum allowed runtime.
+	// * MaxRuntimeExceeded - The job stopped
+	// because it exceeded the maximum allowed runtime.
 	//
-	//     *
-	// MaxWaitTimeExceeded - The job stopped because it exceeded the maximum allowed
-	// wait time.
+	// * MaxWaitTimeExceeded - The
+	// job stopped because it exceeded the maximum allowed wait time.
 	//
-	//     * Stopped - The training job has stopped.
+	// * Stopped - The
+	// training job has stopped.
 	//
 	// Stopping
 	//
-	//     *
-	// Stopping - Stopping the training job.
+	// * Stopping - Stopping the training
+	// job.
 	//
-	// Valid values for SecondaryStatus are
-	// subject to change. We no longer support the following secondary statuses:
+	// Valid values for SecondaryStatus are subject to change. We no longer
+	// support the following secondary statuses:
 	//
-	//     *
-	// LaunchingMLInstances
+	// * LaunchingMLInstances
 	//
-	//     * PreparingTrainingStack
+	// *
+	// PreparingTrainingStack
 	//
-	//     *
-	// DownloadingTrainingImage
+	// * DownloadingTrainingImage
 	//
 	// This member is required.
 	SecondaryStatus types.SecondaryStatus
@@ -146,22 +145,22 @@ type DescribeTrainingJobOutput struct {
 	// The status of the training job. Amazon SageMaker provides the following training
 	// job statuses:
 	//
-	//     * InProgress - The training is in progress.
+	// * InProgress - The training is in progress.
 	//
-	//     * Completed
-	// - The training job has completed.
+	// * Completed - The
+	// training job has completed.
 	//
-	//     * Failed - The training job has failed.
-	// To see the reason for the failure, see the FailureReason field in the response
-	// to a DescribeTrainingJobResponse call.
+	// * Failed - The training job has failed. To see the
+	// reason for the failure, see the FailureReason field in the response to a
+	// DescribeTrainingJobResponse call.
 	//
-	//     * Stopping - The training job is
-	// stopping.
+	// * Stopping - The training job is stopping.
 	//
-	//     * Stopped - The training job has stopped.
+	// *
+	// Stopped - The training job has stopped.
 	//
-	// For more detailed
-	// information, see SecondaryStatus.
+	// For more detailed information, see
+	// SecondaryStatus.
 	//
 	// This member is required.
 	TrainingJobStatus types.TrainingJobStatus
@@ -210,12 +209,12 @@ type DescribeTrainingJobOutput struct {
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
 	//
-	//     * CreateProcessingJob
+	// * CreateProcessingJob
 	//
-	//     *
+	// *
 	// CreateTrainingJob
 	//
-	//     * CreateTransformJob
+	// * CreateTransformJob
 	ExperimentConfig *types.ExperimentConfig
 
 	// If the training job failed, the reason it failed.

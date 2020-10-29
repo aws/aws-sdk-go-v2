@@ -20,42 +20,41 @@ import (
 // global use. Inserts or deletes RegexPatternString objects in a RegexPatternSet.
 // For each RegexPatternString object, you specify the following values:
 //
-//     *
-// Whether to insert or delete the RegexPatternString.
+// * Whether
+// to insert or delete the RegexPatternString.
 //
-//     * The regular
-// expression pattern that you want to insert or delete. For more information, see
+// * The regular expression pattern
+// that you want to insert or delete. For more information, see
 // RegexPatternSet.
 //
 // For example, you can create a RegexPatternString such as
 // B[a@]dB[o0]t. AWS WAF will match this RegexPatternString to:
 //
-//     * BadBot
+// * BadBot
 //
+// *
+// BadB0t
 //
-// * BadB0t
+// * B@dBot
 //
-//     * B@dBot
+// * B@dB0t
 //
-//     * B@dB0t
+// To create and configure a RegexPatternSet, perform
+// the following steps:
 //
-// To create and configure a RegexPatternSet,
-// perform the following steps:
+// * Create a RegexPatternSet. For more information, see
+// CreateRegexPatternSet.
 //
-//     * Create a RegexPatternSet. For more
-// information, see CreateRegexPatternSet.
+// * Use GetChangeToken to get the change token that you
+// provide in the ChangeToken parameter of an UpdateRegexPatternSet request.
 //
-//     * Use GetChangeToken to get the
-// change token that you provide in the ChangeToken parameter of an
-// UpdateRegexPatternSet request.
+// *
+// Submit an UpdateRegexPatternSet request to specify the regular expression
+// pattern that you want AWS WAF to watch for.
 //
-//     * Submit an UpdateRegexPatternSet request to
-// specify the regular expression pattern that you want AWS WAF to watch for.
-//
-// For
-// more information about how to use the AWS WAF API to allow or block HTTP
-// requests, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/).
+// For more information about how to
+// use the AWS WAF API to allow or block HTTP requests, see the AWS WAF Developer
+// Guide (https://docs.aws.amazon.com/waf/latest/developerguide/).
 func (c *Client) UpdateRegexPatternSet(ctx context.Context, params *UpdateRegexPatternSetInput, optFns ...func(*Options)) (*UpdateRegexPatternSetOutput, error) {
 	if params == nil {
 		params = &UpdateRegexPatternSetInput{}

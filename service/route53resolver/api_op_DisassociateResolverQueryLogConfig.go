@@ -17,11 +17,11 @@ import (
 // logging configuration with other accounts, VPCs can be disassociated from the
 // configuration in the following ways:
 //
-//     * The accounts that you shared the
+// * The accounts that you shared the
 // configuration with can disassociate VPCs from the configuration.
 //
-//     * You can
-// stop sharing the configuration.
+// * You can stop
+// sharing the configuration.
 func (c *Client) DisassociateResolverQueryLogConfig(ctx context.Context, params *DisassociateResolverQueryLogConfigInput, optFns ...func(*Options)) (*DisassociateResolverQueryLogConfigOutput, error) {
 	if params == nil {
 		params = &DisassociateResolverQueryLogConfigInput{}

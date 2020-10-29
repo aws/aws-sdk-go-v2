@@ -17,15 +17,15 @@ import (
 // is 25. The type of targets returned depends on the deployment's compute platform
 // or deployment method:
 //
-//     * EC2/On-premises: Information about EC2 instance
+// * EC2/On-premises: Information about EC2 instance
 // targets.
 //
-//     * AWS Lambda: Information about Lambda functions targets.
+// * AWS Lambda: Information about Lambda functions targets.
 //
-//     *
-// Amazon ECS: Information about Amazon ECS service targets.
+// * Amazon
+// ECS: Information about Amazon ECS service targets.
 //
-//     * CloudFormation:
+// * CloudFormation:
 // Information about targets of blue/green deployments initiated by a
 // CloudFormation stack update.
 func (c *Client) BatchGetDeploymentTargets(ctx context.Context, params *BatchGetDeploymentTargetsInput, optFns ...func(*Options)) (*BatchGetDeploymentTargetsOutput, error) {
@@ -52,22 +52,21 @@ type BatchGetDeploymentTargetsInput struct {
 	// determines the type of the targets and their formats. The maximum number of
 	// deployment target IDs you can specify is 25.
 	//
-	//     * For deployments that use the
+	// * For deployments that use the
 	// EC2/On-premises compute platform, the target IDs are EC2 or on-premises
 	// instances IDs, and their target type is instanceTarget.
 	//
-	//     * For deployments
-	// that use the AWS Lambda compute platform, the target IDs are the names of Lambda
+	// * For deployments that
+	// use the AWS Lambda compute platform, the target IDs are the names of Lambda
 	// functions, and their target type is instanceTarget.
 	//
-	//     * For deployments that
-	// use the Amazon ECS compute platform, the target IDs are pairs of Amazon ECS
-	// clusters and services specified using the format :. Their target type is
-	// ecsTarget.
+	// * For deployments that use
+	// the Amazon ECS compute platform, the target IDs are pairs of Amazon ECS clusters
+	// and services specified using the format :. Their target type is ecsTarget.
 	//
-	//     * For deployments that are deployed with AWS CloudFormation, the
-	// target IDs are CloudFormation stack IDs. Their target type is
-	// cloudFormationTarget.
+	// *
+	// For deployments that are deployed with AWS CloudFormation, the target IDs are
+	// CloudFormation stack IDs. Their target type is cloudFormationTarget.
 	TargetIds []*string
 }
 
@@ -77,17 +76,17 @@ type BatchGetDeploymentTargetsOutput struct {
 	// about the target, such as its status and lifecycle events. The type of the
 	// target objects depends on the deployment' compute platform.
 	//
-	//     *
-	// EC2/On-premises: Each target object is an EC2 or on-premises instance.
+	// * EC2/On-premises:
+	// Each target object is an EC2 or on-premises instance.
 	//
-	//     *
-	// AWS Lambda: The target object is a specific version of an AWS Lambda function.
+	// * AWS Lambda: The target
+	// object is a specific version of an AWS Lambda function.
 	//
+	// * Amazon ECS: The
+	// target object is an Amazon ECS service.
 	//
-	// * Amazon ECS: The target object is an Amazon ECS service.
-	//
-	//     * CloudFormation:
-	// The target object is an AWS CloudFormation blue/green deployment.
+	// * CloudFormation: The target object is
+	// an AWS CloudFormation blue/green deployment.
 	DeploymentTargets []*types.DeploymentTarget
 
 	// Metadata pertaining to the operation's result.

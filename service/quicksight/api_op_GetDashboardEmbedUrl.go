@@ -18,15 +18,15 @@ import (
 // user's browser. The following rules apply to the combination of URL and
 // authorization code:
 //
-//     * They must be used together.
+// * They must be used together.
 //
-//     * They can be used
-// one time only.
+// * They can be used one time
+// only.
 //
-//     * They are valid for 5 minutes after you run this command.
+// * They are valid for 5 minutes after you run this command.
 //
-//
-// * The resulting user session is valid for 10 hours.
+// * The
+// resulting user session is valid for 10 hours.
 //
 // For more information, see
 // Embedding Amazon QuickSight
@@ -80,17 +80,17 @@ type GetDashboardEmbedUrlInput struct {
 	// identity type. You can use this for any Amazon QuickSight users in your account
 	// (readers, authors, or admins) authenticated as one of the following:
 	//
-	//     *
-	// Active Directory (AD) users or group members
+	// * Active
+	// Directory (AD) users or group members
 	//
-	//     * Invited nonfederated users
+	// * Invited nonfederated users
 	//
+	// * IAM users
+	// and IAM role-based sessions authenticated through Federated Single Sign-On using
+	// SAML, OpenID Connect, or IAM federation.
 	//
-	// * IAM users and IAM role-based sessions authenticated through Federated Single
-	// Sign-On using SAML, OpenID Connect, or IAM federation.
-	//
-	// Omit this parameter for
-	// users in the third group – IAM users and IAM role-based sessions.
+	// Omit this parameter for users in the
+	// third group – IAM users and IAM role-based sessions.
 	UserArn *string
 }
 

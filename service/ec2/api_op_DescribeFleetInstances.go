@@ -42,7 +42,7 @@ type DescribeFleetInstancesInput struct {
 
 	// The filters.
 	//
-	//     * instance-type - The instance type.
+	// * instance-type - The instance type.
 	Filters []*types.Filter
 
 	// The maximum number of results to return in a single call. Specify a value

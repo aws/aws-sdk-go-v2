@@ -45,16 +45,16 @@ type ModifyListenerInput struct {
 	// policy. You can specify one policy name. The following are the possible
 	// values:
 	//
-	//     * HTTP1Only
+	// * HTTP1Only
 	//
-	//     * HTTP2Only
+	// * HTTP2Only
 	//
-	//     * HTTP2Optional
+	// * HTTP2Optional
 	//
-	//     *
-	// HTTP2Preferred
+	// * HTTP2Preferred
 	//
-	//     * None
+	// *
+	// None
 	//
 	// For more information, see ALPN Policies
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies)
@@ -91,28 +91,28 @@ type ModifyListenerInput struct {
 	// [HTTPS and TLS listeners] The security policy that defines which protocols and
 	// ciphers are supported. The following are the possible values:
 	//
-	//     *
+	// *
 	// ELBSecurityPolicy-2016-08
 	//
-	//     * ELBSecurityPolicy-TLS-1-0-2015-04
+	// * ELBSecurityPolicy-TLS-1-0-2015-04
 	//
-	//     *
+	// *
 	// ELBSecurityPolicy-TLS-1-1-2017-01
 	//
-	//     * ELBSecurityPolicy-TLS-1-2-2017-01
+	// * ELBSecurityPolicy-TLS-1-2-2017-01
 	//
+	// *
+	// ELBSecurityPolicy-TLS-1-2-Ext-2018-06
 	//
-	// * ELBSecurityPolicy-TLS-1-2-Ext-2018-06
+	// * ELBSecurityPolicy-FS-2018-06
 	//
-	//     * ELBSecurityPolicy-FS-2018-06
+	// *
+	// ELBSecurityPolicy-FS-1-1-2019-08
 	//
+	// * ELBSecurityPolicy-FS-1-2-2019-08
 	//
-	// * ELBSecurityPolicy-FS-1-1-2019-08
-	//
-	//     * ELBSecurityPolicy-FS-1-2-2019-08
-	//
-	//
-	// * ELBSecurityPolicy-FS-1-2-Res-2019-08
+	// *
+	// ELBSecurityPolicy-FS-1-2-Res-2019-08
 	//
 	// For more information, see Security
 	// Policies

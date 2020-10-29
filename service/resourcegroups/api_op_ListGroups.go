@@ -32,16 +32,16 @@ type ListGroupsInput struct {
 	// Filters, formatted as GroupFilter objects, that you want to apply to a
 	// ListGroups operation.
 	//
-	//     * resource-type - Filter the results to include only
+	// * resource-type - Filter the results to include only
 	// those of the specified resource types. Specify up to five resource types in the
 	// format AWS::ServiceCode::ResourceType . For example, AWS::EC2::Instance, or
 	// AWS::S3::Bucket.
 	//
-	//     * configuration-type - Filter the results to include only
+	// * configuration-type - Filter the results to include only
 	// those groups that have the specified configuration types attached. The current
 	// supported values are:
 	//
-	//         * AWS:EC2::CapacityReservationPool
+	// * AWS:EC2::CapacityReservationPool
 	Filters []*types.GroupFilter
 
 	// The total number of results that you want included on each page of the response.

@@ -75,20 +75,20 @@ type GetProtectionStatusOutput struct {
 
 	// Details about the attack, including the following:
 	//
-	//     * Attack type
+	// * Attack type
 	//
-	//     *
-	// Account ID
+	// * Account
+	// ID
 	//
-	//     * ARN of the resource attacked
+	// * ARN of the resource attacked
 	//
-	//     * Start time of the attack
+	// * Start time of the attack
 	//
+	// * End time of
+	// the attack (ongoing attacks will not have an end time)
 	//
-	// * End time of the attack (ongoing attacks will not have an end time)
-	//
-	// The
-	// details are in JSON format.
+	// The details are in JSON
+	// format.
 	Data *string
 
 	// If you have more objects than the number that you specified for MaxResults in

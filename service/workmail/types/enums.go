@@ -44,11 +44,11 @@ type FolderName string
 
 // Enum values for FolderName
 const (
-	FolderNameInbox         FolderName = "INBOX"
-	FolderNameDeleted_items FolderName = "DELETED_ITEMS"
-	FolderNameSent_items    FolderName = "SENT_ITEMS"
-	FolderNameDrafts        FolderName = "DRAFTS"
-	FolderNameJunk_email    FolderName = "JUNK_EMAIL"
+	FolderNameInbox        FolderName = "INBOX"
+	FolderNameDeletedItems FolderName = "DELETED_ITEMS"
+	FolderNameSentItems    FolderName = "SENT_ITEMS"
+	FolderNameDrafts       FolderName = "DRAFTS"
+	FolderNameJunkEmail    FolderName = "JUNK_EMAIL"
 )
 
 // Values returns all known values for FolderName. Note that this can be expanded
@@ -108,9 +108,9 @@ type PermissionType string
 
 // Enum values for PermissionType
 const (
-	PermissionTypeFull_access    PermissionType = "FULL_ACCESS"
-	PermissionTypeSend_as        PermissionType = "SEND_AS"
-	PermissionTypeSend_on_behalf PermissionType = "SEND_ON_BEHALF"
+	PermissionTypeFullAccess   PermissionType = "FULL_ACCESS"
+	PermissionTypeSendAs       PermissionType = "SEND_AS"
+	PermissionTypeSendOnBehalf PermissionType = "SEND_ON_BEHALF"
 )
 
 // Values returns all known values for PermissionType. Note that this can be
@@ -146,9 +146,9 @@ type RetentionAction string
 
 // Enum values for RetentionAction
 const (
-	RetentionActionNone               RetentionAction = "NONE"
-	RetentionActionDelete             RetentionAction = "DELETE"
-	RetentionActionPermanently_delete RetentionAction = "PERMANENTLY_DELETE"
+	RetentionActionNone              RetentionAction = "NONE"
+	RetentionActionDelete            RetentionAction = "DELETE"
+	RetentionActionPermanentlyDelete RetentionAction = "PERMANENTLY_DELETE"
 )
 
 // Values returns all known values for RetentionAction. Note that this can be
@@ -166,9 +166,9 @@ type UserRole string
 
 // Enum values for UserRole
 const (
-	UserRoleUser        UserRole = "USER"
-	UserRoleResource    UserRole = "RESOURCE"
-	UserRoleSystem_user UserRole = "SYSTEM_USER"
+	UserRoleUser       UserRole = "USER"
+	UserRoleResource   UserRole = "RESOURCE"
+	UserRoleSystemUser UserRole = "SYSTEM_USER"
 )
 
 // Values returns all known values for UserRole. Note that this can be expanded in

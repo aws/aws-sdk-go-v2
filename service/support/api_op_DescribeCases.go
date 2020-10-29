@@ -17,24 +17,24 @@ import (
 // to specify how much information to return. The response returns the following in
 // JSON format:
 //
-//     * One or more CaseDetails
+// * One or more CaseDetails
 // (https://docs.aws.amazon.com/awssupport/latest/APIReference/API_CaseDetails.html)
 // data types.
 //
-//     * One or more nextToken values, which specify where to paginate
-// the returned records represented by the CaseDetails objects.
+// * One or more nextToken values, which specify where to paginate the
+// returned records represented by the CaseDetails objects.
 //
-// Case data is
-// available for 12 months after creation. If a case was created more than 12
-// months ago, a request might return an error.
+// Case data is available
+// for 12 months after creation. If a case was created more than 12 months ago, a
+// request might return an error.
 //
-//     * You must have a Business or
-// Enterprise support plan to use the AWS Support API.
+// * You must have a Business or Enterprise support
+// plan to use the AWS Support API.
 //
-//     * If you call the AWS
-// Support API from an account that does not have a Business or Enterprise support
-// plan, the SubscriptionRequiredException error message appears. For information
-// about changing your support plan, see AWS Support
+// * If you call the AWS Support API from an
+// account that does not have a Business or Enterprise support plan, the
+// SubscriptionRequiredException error message appears. For information about
+// changing your support plan, see AWS Support
 // (http://aws.amazon.com/premiumsupport/).
 func (c *Client) DescribeCases(ctx context.Context, params *DescribeCasesInput, optFns ...func(*Options)) (*DescribeCasesOutput, error) {
 	if params == nil {

@@ -18,18 +18,18 @@ import (
 // have permission to perform the s3:GetJobTagging action. For more information,
 // see Controlling access and labeling jobs using tags
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags)
-// in the Amazon Simple Storage Service Developer Guide. Related actions include:
-//
+// in the Amazon Simple Storage Service Developer Guide. Related actions
+// include:
 //
 // * CreateJob
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html)
 //
-//
-// * PutJobTagging
+// *
+// PutJobTagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutJobTagging.html)
 //
-//
-// * DeleteJobTagging
+// *
+// DeleteJobTagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteJobTagging.html)
 func (c *Client) GetJobTagging(ctx context.Context, params *GetJobTaggingInput, optFns ...func(*Options)) (*GetJobTaggingOutput, error) {
 	if params == nil {

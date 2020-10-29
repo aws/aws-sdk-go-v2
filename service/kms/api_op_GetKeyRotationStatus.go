@@ -23,17 +23,17 @@ import (
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 // AWS Key Management Service Developer Guide.
 //
-//     * Disabled: The key rotation
-// status does not change when you disable a CMK. However, while the CMK is
-// disabled, AWS KMS does not rotate the backing key.
+// * Disabled: The key rotation status
+// does not change when you disable a CMK. However, while the CMK is disabled, AWS
+// KMS does not rotate the backing key.
 //
-//     * Pending deletion:
-// While a CMK is pending deletion, its key rotation status is false and AWS KMS
-// does not rotate the backing key. If you cancel the deletion, the original key
-// rotation status is restored.
+// * Pending deletion: While a CMK is pending
+// deletion, its key rotation status is false and AWS KMS does not rotate the
+// backing key. If you cancel the deletion, the original key rotation status is
+// restored.
 //
-// To perform this operation on a CMK in a different
-// AWS account, specify the key ARN in the value of the KeyId parameter.
+// To perform this operation on a CMK in a different AWS account,
+// specify the key ARN in the value of the KeyId parameter.
 func (c *Client) GetKeyRotationStatus(ctx context.Context, params *GetKeyRotationStatusInput, optFns ...func(*Options)) (*GetKeyRotationStatusOutput, error) {
 	if params == nil {
 		params = &GetKeyRotationStatusInput{}
@@ -55,10 +55,10 @@ type GetKeyRotationStatusInput struct {
 	// Amazon Resource Name (ARN) of the CMK. To specify a CMK in a different AWS
 	// account, you must use the key ARN. For example:
 	//
-	//     * Key ID:
+	// * Key ID:
 	// 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
-	//     * Key ARN:
+	// * Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To

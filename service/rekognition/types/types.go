@@ -366,15 +366,15 @@ type Face struct {
 // only the default attributes. The corresponding Start operations don't have a
 // FaceAttributes input parameter.
 //
-//     * GetCelebrityRecognition
+// * GetCelebrityRecognition
 //
-//     *
+// *
 // GetPersonTracking
 //
-//     * GetFaceSearch
+// * GetFaceSearch
 //
-// The Amazon Rekognition Image DetectFaces
-// and IndexFaces operations can return all facial attributes. To specify which
+// The Amazon Rekognition Image DetectFaces and
+// IndexFaces operations can return all facial attributes. To specify which
 // attributes to return, use the Attributes input parameter for DetectFaces. For
 // IndexFaces, use the DetectAttributes input parameter.
 type FaceDetail struct {
@@ -1348,24 +1348,24 @@ type UnindexedFace struct {
 
 	// An array of reasons that specify why a face wasn't indexed.
 	//
-	//     * EXTREME_POSE
-	// - The face is at a pose that can't be detected. For example, the head is turned
+	// * EXTREME_POSE -
+	// The face is at a pose that can't be detected. For example, the head is turned
 	// too far away from the camera.
 	//
-	//     * EXCEEDS_MAX_FACES - The number of faces
+	// * EXCEEDS_MAX_FACES - The number of faces
 	// detected is already higher than that specified by the MaxFaces input parameter
 	// for IndexFaces.
 	//
-	//     * LOW_BRIGHTNESS - The image is too dark.
+	// * LOW_BRIGHTNESS - The image is too dark.
 	//
-	//     *
-	// LOW_SHARPNESS - The image is too blurry.
+	// * LOW_SHARPNESS -
+	// The image is too blurry.
 	//
-	//     * LOW_CONFIDENCE - The face was
-	// detected with a low confidence.
+	// * LOW_CONFIDENCE - The face was detected with a low
+	// confidence.
 	//
-	//     * SMALL_BOUNDING_BOX - The bounding box
-	// around the face is too small.
+	// * SMALL_BOUNDING_BOX - The bounding box around the face is too
+	// small.
 	Reasons []Reason
 }
 

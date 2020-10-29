@@ -40,9 +40,9 @@ type GetUsageForecastInput struct {
 	// Which metric Cost Explorer uses to create your forecast. Valid values for a
 	// GetUsageForecast call are the following:
 	//
-	//     * USAGE_QUANTITY
+	// * USAGE_QUANTITY
 	//
-	//     *
+	// *
 	// NORMALIZED_USAGE_AMOUNT
 	//
 	// This member is required.

@@ -54,20 +54,20 @@ type AdminRespondToAuthChallengeInput struct {
 	// The challenge responses. These are inputs corresponding to the value of
 	// ChallengeName, for example:
 	//
-	//     * SMS_MFA: SMS_MFA_CODE, USERNAME, SECRET_HASH
-	// (if app client is configured with client secret).
+	// * SMS_MFA: SMS_MFA_CODE, USERNAME, SECRET_HASH (if
+	// app client is configured with client secret).
 	//
-	//     * PASSWORD_VERIFIER:
+	// * PASSWORD_VERIFIER:
 	// PASSWORD_CLAIM_SIGNATURE, PASSWORD_CLAIM_SECRET_BLOCK, TIMESTAMP, USERNAME,
 	// SECRET_HASH (if app client is configured with client secret).
 	//
-	//     *
+	// *
 	// ADMIN_NO_SRP_AUTH: PASSWORD, USERNAME, SECRET_HASH (if app client is configured
 	// with client secret).
 	//
-	//     * NEW_PASSWORD_REQUIRED: NEW_PASSWORD, any other
-	// required attributes, USERNAME, SECRET_HASH (if app client is configured with
-	// client secret).
+	// * NEW_PASSWORD_REQUIRED: NEW_PASSWORD, any other required
+	// attributes, USERNAME, SECRET_HASH (if app client is configured with client
+	// secret).
 	//
 	// The value of the USERNAME attribute must be the user's actual
 	// username, not an alias (such as email address or phone number). To make this
@@ -94,17 +94,17 @@ type AdminRespondToAuthChallengeInput struct {
 	// in the Amazon Cognito Developer Guide. Take the following limitations into
 	// consideration when you use the ClientMetadata parameter:
 	//
-	//     * Amazon Cognito
-	// does not store the ClientMetadata value. This data is available only to AWS
-	// Lambda triggers that are assigned to a user pool to support custom workflows. If
-	// your user pool configuration does not include triggers, the ClientMetadata
-	// parameter serves no purpose.
+	// * Amazon Cognito does
+	// not store the ClientMetadata value. This data is available only to AWS Lambda
+	// triggers that are assigned to a user pool to support custom workflows. If your
+	// user pool configuration does not include triggers, the ClientMetadata parameter
+	// serves no purpose.
 	//
-	//     * Amazon Cognito does not validate the
-	// ClientMetadata value.
+	// * Amazon Cognito does not validate the ClientMetadata
+	// value.
 	//
-	//     * Amazon Cognito does not encrypt the the
-	// ClientMetadata value, so don't use it to provide sensitive information.
+	// * Amazon Cognito does not encrypt the the ClientMetadata value, so don't
+	// use it to provide sensitive information.
 	ClientMetadata map[string]*string
 
 	// Contextual data such as the user's device fingerprint, IP address, or location

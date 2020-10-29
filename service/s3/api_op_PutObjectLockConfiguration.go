@@ -16,8 +16,8 @@ import (
 // placed in the specified bucket. DefaultRetention requires either Days or Years.
 // You can't specify both at the same time. Related Resources
 //
-//     * Locking
-// Objects (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html)
+// * Locking Objects
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html)
 func (c *Client) PutObjectLockConfiguration(ctx context.Context, params *PutObjectLockConfigurationInput, optFns ...func(*Options)) (*PutObjectLockConfigurationOutput, error) {
 	if params == nil {
 		params = &PutObjectLockConfigurationInput{}

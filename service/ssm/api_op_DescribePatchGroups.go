@@ -32,19 +32,19 @@ type DescribePatchGroupsInput struct {
 	// One or more filters. Use a filter to return a more specific list of results. For
 	// DescribePatchGroups,valid filter keys include the following:
 	//
-	//     * NAME_PREFIX:
-	// The name of the patch group. Wildcards (*) are accepted.
+	// * NAME_PREFIX: The
+	// name of the patch group. Wildcards (*) are accepted.
 	//
-	//     *
-	// OPERATING_SYSTEM: The supported operating system type to return results for. For
-	// valid operating system values, see
-	// GetDefaultPatchBaselineRequest$OperatingSystem in CreatePatchBaseline.
-	// Examples:
+	// * OPERATING_SYSTEM: The
+	// supported operating system type to return results for. For valid operating
+	// system values, see GetDefaultPatchBaselineRequest$OperatingSystem in
+	// CreatePatchBaseline. Examples:
 	//
-	//         * --filters Key=NAME_PREFIX,Values=MyPatchGroup*
+	// * --filters
+	// Key=NAME_PREFIX,Values=MyPatchGroup*
 	//
-	//         *
-	// --filters Key=OPERATING_SYSTEM,Values=AMAZON_LINUX_2
+	// * --filters
+	// Key=OPERATING_SYSTEM,Values=AMAZON_LINUX_2
 	Filters []*types.PatchOrchestratorFilter
 
 	// The maximum number of patch groups to return (per page).

@@ -10,7 +10,7 @@
 // environment. Service Endpoint The Cost Explorer API provides the following
 // endpoint:
 //
-//     * https://ce.us-east-1.amazonaws.com
+// * https://ce.us-east-1.amazonaws.com
 //
 // For information about costs
 // associated with the Cost Explorer API, see AWS Cost Management Pricing

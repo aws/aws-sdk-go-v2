@@ -21,29 +21,29 @@ import (
 // results as a set of sequential pages. If successful, a GameSessionDetail object
 // is returned for each session matching the request.
 //
-//     * CreateGameSession
+// * CreateGameSession
 //
+// *
+// DescribeGameSessions
 //
-// * DescribeGameSessions
+// * DescribeGameSessionDetails
 //
-//     * DescribeGameSessionDetails
+// * SearchGameSessions
 //
-//     *
-// SearchGameSessions
+// *
+// UpdateGameSession
 //
-//     * UpdateGameSession
+// * GetGameSessionLogUrl
 //
-//     * GetGameSessionLogUrl
+// * Game session placements
 //
-//     *
-// Game session placements
+// *
+// StartGameSessionPlacement
 //
-//         * StartGameSessionPlacement
+// * DescribeGameSessionPlacement
 //
-//         *
-// DescribeGameSessionPlacement
-//
-//         * StopGameSessionPlacement
+// *
+// StopGameSessionPlacement
 func (c *Client) DescribeGameSessionDetails(ctx context.Context, params *DescribeGameSessionDetailsInput, optFns ...func(*Options)) (*DescribeGameSessionDetailsOutput, error) {
 	if params == nil {
 		params = &DescribeGameSessionDetailsInput{}

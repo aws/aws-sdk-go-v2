@@ -447,154 +447,150 @@ func (e *TableNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.
 // The entire transaction request was canceled. DynamoDB cancels a
 // TransactWriteItems request under the following circumstances:
 //
-//     * A condition
-// in one of the condition expressions is not met.
+// * A condition in
+// one of the condition expressions is not met.
 //
-//     * A table in the
+// * A table in the
 // TransactWriteItems request is in a different account or region.
 //
-//     * More than
-// one action in the TransactWriteItems operation targets the same item.
+// * More than one
+// action in the TransactWriteItems operation targets the same item.
 //
-//     *
-// There is insufficient provisioned capacity for the transaction to be
-// completed.
+// * There is
+// insufficient provisioned capacity for the transaction to be completed.
 //
-//     * An item size becomes too large (larger than 400 KB), or a
-// local secondary index (LSI) becomes too large, or a similar validation error
-// occurs because of changes made by the transaction.
+// * An
+// item size becomes too large (larger than 400 KB), or a local secondary index
+// (LSI) becomes too large, or a similar validation error occurs because of changes
+// made by the transaction.
 //
-//     * There is a user error,
-// such as an invalid data format.
+// * There is a user error, such as an invalid data
+// format.
 //
-// DynamoDB cancels a TransactGetItems request
-// under the following circumstances:
+// DynamoDB cancels a TransactGetItems request under the following
+// circumstances:
 //
-//     * There is an ongoing TransactGetItems
-// operation that conflicts with a concurrent PutItem, UpdateItem, DeleteItem or
-// TransactWriteItems request. In this case the TransactGetItems operation fails
-// with a TransactionCanceledException.
+// * There is an ongoing TransactGetItems operation that conflicts
+// with a concurrent PutItem, UpdateItem, DeleteItem or TransactWriteItems request.
+// In this case the TransactGetItems operation fails with a
+// TransactionCanceledException.
 //
-//     * A table in the TransactGetItems
-// request is in a different account or region.
+// * A table in the TransactGetItems request is in a
+// different account or region.
 //
-//     * There is insufficient
-// provisioned capacity for the transaction to be completed.
+// * There is insufficient provisioned capacity for
+// the transaction to be completed.
 //
-//     * There is a user
-// error, such as an invalid data format.
+// * There is a user error, such as an invalid
+// data format.
 //
-// If using Java, DynamoDB lists the
-// cancellation reasons on the CancellationReasons property. This property is not
-// set for other languages. Transaction cancellation reasons are ordered in the
-// order of requested items, if an item has no error it will have NONE code and
-// Null message. Cancellation reason codes and possible error messages:
+// If using Java, DynamoDB lists the cancellation reasons on the
+// CancellationReasons property. This property is not set for other languages.
+// Transaction cancellation reasons are ordered in the order of requested items, if
+// an item has no error it will have NONE code and Null message. Cancellation
+// reason codes and possible error messages:
 //
-//     * No
-// Errors:
+// * No Errors:
 //
-//         * Code: NONE
+// * Code: NONE
 //
-//         * Message: null
+// *
+// Message: null
 //
-//     * Conditional Check
-// Failed:
+// * Conditional Check Failed:
 //
-//         * Code: ConditionalCheckFailed
+// * Code: ConditionalCheckFailed
 //
-//         * Message: The
-// conditional request failed.
+// *
+// Message: The conditional request failed.
 //
-//     * Item Collection Size Limit Exceeded:
-//
+// * Item Collection Size Limit
+// Exceeded:
 //
 // * Code: ItemCollectionSizeLimitExceeded
 //
-//         * Message: Collection size
+// * Message: Collection size
 // exceeded.
 //
-//     * Transaction Conflict:
+// * Transaction Conflict:
 //
-//         * Code: TransactionConflict
+// * Code: TransactionConflict
 //
+// * Message:
+// Transaction is ongoing for the item.
 //
-// * Message: Transaction is ongoing for the item.
+// * Provisioned Throughput Exceeded:
 //
-//     * Provisioned Throughput
-// Exceeded:
+// *
+// Code: ProvisionedThroughputExceeded
 //
-//         * Code: ProvisionedThroughputExceeded
+// * Messages:
 //
-//         * Messages:
+// * The level of configured
+// provisioned throughput for the table was exceeded. Consider increasing your
+// provisioning level with the UpdateTable API. This Message is received when
+// provisioned throughput is exceeded is on a provisioned DynamoDB table.
 //
+// * The
+// level of configured provisioned throughput for one or more global secondary
+// indexes of the table was exceeded. Consider increasing your provisioning level
+// for the under-provisioned global secondary indexes with the UpdateTable API.
+// This message is returned when provisioned throughput is exceeded is on a
+// provisioned GSI.
 //
-// * The level of configured provisioned throughput for the table was exceeded.
-// Consider increasing your provisioning level with the UpdateTable API. This
-// Message is received when provisioned throughput is exceeded is on a provisioned
-// DynamoDB table.
-//
-//             * The level of configured provisioned throughput
-// for one or more global secondary indexes of the table was exceeded. Consider
-// increasing your provisioning level for the under-provisioned global secondary
-// indexes with the UpdateTable API. This message is returned when provisioned
-// throughput is exceeded is on a provisioned GSI.
-//
-//     * Throttling Error:
-//
+// * Throttling Error:
 //
 // * Code: ThrottlingError
 //
-//         * Messages:
+// * Messages:
 //
-//             * Throughput exceeds
-// the current capacity of your table or index. DynamoDB is automatically scaling
-// your table or index so please try again shortly. If exceptions persist, check if
-// you have a hot key:
+// *
+// Throughput exceeds the current capacity of your table or index. DynamoDB is
+// automatically scaling your table or index so please try again shortly. If
+// exceptions persist, check if you have a hot key:
 // https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-partition-key-design.html.
 // This message is returned when writes get throttled on an On-Demand table as
 // DynamoDB is automatically scaling the table.
 //
-//             * Throughput exceeds
-// the current capacity for one or more global secondary indexes. DynamoDB is
-// automatically scaling your index so please try again shortly. This message is
-// returned when when writes get throttled on an On-Demand GSI as DynamoDB is
-// automatically scaling the GSI.
+// * Throughput exceeds the current
+// capacity for one or more global secondary indexes. DynamoDB is automatically
+// scaling your index so please try again shortly. This message is returned when
+// when writes get throttled on an On-Demand GSI as DynamoDB is automatically
+// scaling the GSI.
 //
-//     * Validation Error:
+// * Validation Error:
 //
-//         * Code:
-// ValidationError
+// * Code: ValidationError
 //
-//         * Messages:
+// * Messages:
 //
-//             * One or more parameter values
-// were invalid.
+// *
+// One or more parameter values were invalid.
 //
-//             * The update expression attempted to update the
-// secondary index key beyond allowed size limits.
+// * The update expression attempted to
+// update the secondary index key beyond allowed size limits.
 //
-//             * The update
+// * The update
 // expression attempted to update the secondary index key to unsupported type.
 //
+// *
+// An operand in the update expression has an incorrect data type.
 //
-// * An operand in the update expression has an incorrect data type.
+// * Item size to
+// update has exceeded the maximum allowed size.
 //
-//             *
-// Item size to update has exceeded the maximum allowed size.
+// * Number overflow. Attempting to
+// store a number with magnitude larger than supported range.
 //
-//             * Number
-// overflow. Attempting to store a number with magnitude larger than supported
-// range.
+// * Type mismatch for
+// attribute to update.
 //
-//             * Type mismatch for attribute to update.
+// * Nesting Levels have exceeded supported limits.
 //
-//             *
-// Nesting Levels have exceeded supported limits.
+// * The
+// document path provided in the update expression is invalid for update.
 //
-//             * The document path
-// provided in the update expression is invalid for update.
-//
-//             * The
+// * The
 // provided expression refers to an attribute that does not exist in the item.
 type TransactionCanceledException struct {
 	Message *string

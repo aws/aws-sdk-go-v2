@@ -40,28 +40,28 @@ type DescribeClustersInput struct {
 	// the settings for the cluster are included. If STATISTICS is specified, the
 	// following additional information, separated by launch type, is included:
 	//
-	//     *
+	// *
 	// runningEC2TasksCount
 	//
-	//     * runningFargateTasksCount
+	// * runningFargateTasksCount
 	//
-	//     *
-	// pendingEC2TasksCount
+	// * pendingEC2TasksCount
 	//
-	//     * pendingFargateTasksCount
+	// *
+	// pendingFargateTasksCount
 	//
-	//     *
-	// activeEC2ServiceCount
+	// * activeEC2ServiceCount
 	//
-	//     * activeFargateServiceCount
+	// *
+	// activeFargateServiceCount
 	//
-	//     *
-	// drainingEC2ServiceCount
+	// * drainingEC2ServiceCount
 	//
-	//     * drainingFargateServiceCount
+	// *
+	// drainingFargateServiceCount
 	//
-	// If TAGS is
-	// specified, the metadata tags associated with the cluster are included.
+	// If TAGS is specified, the metadata tags associated
+	// with the cluster are included.
 	Include []types.ClusterField
 }
 

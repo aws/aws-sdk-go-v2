@@ -43,19 +43,19 @@ type GetPlatformApplicationAttributesOutput struct {
 
 	// Attributes include the following:
 	//
-	//     * EventEndpointCreated – Topic ARN to
-	// which EndpointCreated event notifications should be sent.
+	// * EventEndpointCreated – Topic ARN to which
+	// EndpointCreated event notifications should be sent.
 	//
-	//     *
-	// EventEndpointDeleted – Topic ARN to which EndpointDeleted event notifications
+	// * EventEndpointDeleted –
+	// Topic ARN to which EndpointDeleted event notifications should be sent.
+	//
+	// *
+	// EventEndpointUpdated – Topic ARN to which EndpointUpdate event notifications
 	// should be sent.
 	//
-	//     * EventEndpointUpdated – Topic ARN to which EndpointUpdate
-	// event notifications should be sent.
-	//
-	//     * EventDeliveryFailure – Topic ARN to
-	// which DeliveryFailure event notifications should be sent upon Direct Publish
-	// delivery failure (permanent) to one of the application's endpoints.
+	// * EventDeliveryFailure – Topic ARN to which DeliveryFailure
+	// event notifications should be sent upon Direct Publish delivery failure
+	// (permanent) to one of the application's endpoints.
 	Attributes map[string]*string
 
 	// Metadata pertaining to the operation's result.

@@ -148,10 +148,10 @@ type LifecyclePolicyPreviewStatus string
 
 // Enum values for LifecyclePolicyPreviewStatus
 const (
-	LifecyclePolicyPreviewStatusIn_progress LifecyclePolicyPreviewStatus = "IN_PROGRESS"
-	LifecyclePolicyPreviewStatusComplete    LifecyclePolicyPreviewStatus = "COMPLETE"
-	LifecyclePolicyPreviewStatusExpired     LifecyclePolicyPreviewStatus = "EXPIRED"
-	LifecyclePolicyPreviewStatusFailed      LifecyclePolicyPreviewStatus = "FAILED"
+	LifecyclePolicyPreviewStatusInProgress LifecyclePolicyPreviewStatus = "IN_PROGRESS"
+	LifecyclePolicyPreviewStatusComplete   LifecyclePolicyPreviewStatus = "COMPLETE"
+	LifecyclePolicyPreviewStatusExpired    LifecyclePolicyPreviewStatus = "EXPIRED"
+	LifecyclePolicyPreviewStatusFailed     LifecyclePolicyPreviewStatus = "FAILED"
 )
 
 // Values returns all known values for LifecyclePolicyPreviewStatus. Note that this
@@ -170,9 +170,9 @@ type ScanStatus string
 
 // Enum values for ScanStatus
 const (
-	ScanStatusIn_progress ScanStatus = "IN_PROGRESS"
-	ScanStatusComplete    ScanStatus = "COMPLETE"
-	ScanStatusFailed      ScanStatus = "FAILED"
+	ScanStatusInProgress ScanStatus = "IN_PROGRESS"
+	ScanStatusComplete   ScanStatus = "COMPLETE"
+	ScanStatusFailed     ScanStatus = "FAILED"
 )
 
 // Values returns all known values for ScanStatus. Note that this can be expanded

@@ -57,13 +57,13 @@ type ResetDBClusterParameterGroupOutput struct {
 
 	// The name of a cluster parameter group. Constraints:
 	//
-	//     * Must be from 1 to 255
+	// * Must be from 1 to 255
 	// letters or numbers.
 	//
-	//     * The first character must be a letter.
+	// * The first character must be a letter.
 	//
-	//     * Cannot
-	// end with a hyphen or contain two consecutive hyphens.
+	// * Cannot end with
+	// a hyphen or contain two consecutive hyphens.
 	//
 	// This value is stored as a
 	// lowercase string.

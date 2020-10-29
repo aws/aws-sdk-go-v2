@@ -15,21 +15,21 @@ import (
 // in the file gateway type. To leave a file share field unchanged, set the
 // corresponding input field to null. Updates the following file share setting:
 //
+// *
+// Default storage class for your S3 bucket
 //
-// * Default storage class for your S3 bucket
-//
-//     * Metadata defaults for your S3
+// * Metadata defaults for your S3
 // bucket
 //
-//     * Allowed NFS clients for your file share
+// * Allowed NFS clients for your file share
 //
-//     * Squash settings
+// * Squash settings
 //
+// * Write
+// status of your file share
 //
-// * Write status of your file share
-//
-// To leave a file share field unchanged, set
-// the corresponding input field to null. This operation is only supported in file
+// To leave a file share field unchanged, set the
+// corresponding input field to null. This operation is only supported in file
 // gateways.
 func (c *Client) UpdateNFSFileShare(ctx context.Context, params *UpdateNFSFileShareInput, optFns ...func(*Options)) (*UpdateNFSFileShareOutput, error) {
 	if params == nil {
@@ -107,14 +107,13 @@ type UpdateNFSFileShareInput struct {
 
 	// The user mapped to anonymous user. Valid values are the following:
 	//
-	//     *
+	// *
 	// RootSquash: Only root is mapped to anonymous user.
 	//
-	//     * NoSquash: No one is
-	// mapped to anonymous user.
+	// * NoSquash: No one is mapped
+	// to anonymous user.
 	//
-	//     * AllSquash: Everyone is mapped to anonymous
-	// user.
+	// * AllSquash: Everyone is mapped to anonymous user.
 	Squash *string
 }
 

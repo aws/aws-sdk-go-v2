@@ -42,20 +42,20 @@ type CancelExportTaskOutput struct {
 
 	// The data exported from the snapshot. Valid values are the following:
 	//
-	//     *
-	// database - Export all the data from a specified database.
+	// * database
+	// - Export all the data from a specified database.
 	//
-	//     * database.table
-	// table-name - Export a table of the snapshot. This format is valid only for RDS
-	// for MySQL, RDS for MariaDB, and Aurora MySQL.
+	// * database.table table-name -
+	// Export a table of the snapshot. This format is valid only for RDS for MySQL, RDS
+	// for MariaDB, and Aurora MySQL.
 	//
-	//     * database.schema schema-name
-	// - Export a database schema of the snapshot. This format is valid only for RDS
-	// for PostgreSQL and Aurora PostgreSQL.
-	//
-	//     * database.schema.table table-name -
-	// Export a table of the database schema. This format is valid only for RDS for
+	// * database.schema schema-name - Export a
+	// database schema of the snapshot. This format is valid only for RDS for
 	// PostgreSQL and Aurora PostgreSQL.
+	//
+	// * database.schema.table table-name - Export a
+	// table of the database schema. This format is valid only for RDS for PostgreSQL
+	// and Aurora PostgreSQL.
 	ExportOnly []*string
 
 	// A unique identifier for the snapshot export task. This ID isn't an identifier

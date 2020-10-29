@@ -37,10 +37,10 @@ type SendEventInput struct {
 
 	// The content type of the request. Supported types are:
 	//
-	//     *
+	// *
 	// application/vnd.amazonaws.connect.event.typing
 	//
-	//     *
+	// *
 	// application/vnd.amazonaws.connect.event.connection.acknowledged
 	//
 	// This member is required.

@@ -396,88 +396,87 @@ type Connection struct {
 
 	// These key-value pairs define parameters for the connection:
 	//
-	//     * HOST - The
-	// host URI: either the fully qualified domain name (FQDN) or the IPv4 address of
-	// the database host.
+	// * HOST - The host
+	// URI: either the fully qualified domain name (FQDN) or the IPv4 address of the
+	// database host.
 	//
-	//     * PORT - The port number, between 1024 and 65535, of the
-	// port on which the database host is listening for database connections.
+	// * PORT - The port number, between 1024 and 65535, of the port on
+	// which the database host is listening for database connections.
 	//
-	//     *
-	// USER_NAME - The name under which to log in to the database. The value string for
-	// USER_NAME is "USERNAME".
+	// * USER_NAME -
+	// The name under which to log in to the database. The value string for USER_NAME
+	// is "USERNAME".
 	//
-	//     * PASSWORD - A password, if one is used, for the
-	// user name.
+	// * PASSWORD - A password, if one is used, for the user name.
 	//
-	//     * ENCRYPTED_PASSWORD - When you enable connection password
-	// protection by setting ConnectionPasswordEncryption in the Data Catalog
-	// encryption settings, this field stores the encrypted password.
+	// *
+	// ENCRYPTED_PASSWORD - When you enable connection password protection by setting
+	// ConnectionPasswordEncryption in the Data Catalog encryption settings, this field
+	// stores the encrypted password.
 	//
-	//     *
-	// JDBC_DRIVER_JAR_URI - The Amazon Simple Storage Service (Amazon S3) path of the
-	// JAR file that contains the JDBC driver to use.
-	//
-	//     * JDBC_DRIVER_CLASS_NAME -
-	// The class name of the JDBC driver to use.
-	//
-	//     * JDBC_ENGINE - The name of the
-	// JDBC engine to use.
-	//
-	//     * JDBC_ENGINE_VERSION - The version of the JDBC engine
+	// * JDBC_DRIVER_JAR_URI - The Amazon Simple
+	// Storage Service (Amazon S3) path of the JAR file that contains the JDBC driver
 	// to use.
 	//
-	//     * CONFIG_FILES - (Reserved for future use.)
+	// * JDBC_DRIVER_CLASS_NAME - The class name of the JDBC driver to use.
 	//
-	//     * INSTANCE_ID -
-	// The instance ID to use.
+	// *
+	// JDBC_ENGINE - The name of the JDBC engine to use.
 	//
-	//     * JDBC_CONNECTION_URL - The URL for connecting to a
-	// JDBC data source.
+	// * JDBC_ENGINE_VERSION - The
+	// version of the JDBC engine to use.
 	//
-	//     * JDBC_ENFORCE_SSL - A Boolean string (true, false)
-	// specifying whether Secure Sockets Layer (SSL) with hostname matching is enforced
-	// for the JDBC connection on the client. The default is false.
+	// * CONFIG_FILES - (Reserved for future
+	// use.)
 	//
-	//     *
-	// CUSTOM_JDBC_CERT - An Amazon S3 location specifying the customer's root
-	// certificate. AWS Glue uses this root certificate to validate the customer’s
+	// * INSTANCE_ID - The instance ID to use.
+	//
+	// * JDBC_CONNECTION_URL - The URL
+	// for connecting to a JDBC data source.
+	//
+	// * JDBC_ENFORCE_SSL - A Boolean string
+	// (true, false) specifying whether Secure Sockets Layer (SSL) with hostname
+	// matching is enforced for the JDBC connection on the client. The default is
+	// false.
+	//
+	// * CUSTOM_JDBC_CERT - An Amazon S3 location specifying the customer's
+	// root certificate. AWS Glue uses this root certificate to validate the customer’s
 	// certificate when connecting to the customer database. AWS Glue only handles
 	// X.509 certificates. The certificate provided must be DER-encoded and supplied in
 	// Base64 encoding PEM format.
 	//
-	//     * SKIP_CUSTOM_JDBC_CERT_VALIDATION - By
-	// default, this is false. AWS Glue validates the Signature algorithm and Subject
-	// Public Key Algorithm for the customer certificate. The only permitted algorithms
-	// for the Signature algorithm are SHA256withRSA, SHA384withRSA or SHA512withRSA.
-	// For the Subject Public Key Algorithm, the key length must be at least 2048. You
-	// can set the value of this property to true to skip AWS Glue’s validation of the
-	// customer certificate.
+	// * SKIP_CUSTOM_JDBC_CERT_VALIDATION - By default,
+	// this is false. AWS Glue validates the Signature algorithm and Subject Public Key
+	// Algorithm for the customer certificate. The only permitted algorithms for the
+	// Signature algorithm are SHA256withRSA, SHA384withRSA or SHA512withRSA. For the
+	// Subject Public Key Algorithm, the key length must be at least 2048. You can set
+	// the value of this property to true to skip AWS Glue’s validation of the customer
+	// certificate.
 	//
-	//     * CUSTOM_JDBC_CERT_STRING - A custom JDBC certificate
-	// string which is used for domain match or distinguished name match to prevent a
+	// * CUSTOM_JDBC_CERT_STRING - A custom JDBC certificate string which
+	// is used for domain match or distinguished name match to prevent a
 	// man-in-the-middle attack. In Oracle database, this is used as the
 	// SSL_SERVER_CERT_DN; in Microsoft SQL Server, this is used as the
 	// hostNameInCertificate.
 	//
-	//     * CONNECTION_URL - The URL for connecting to a
-	// general (non-JDBC) data source.
+	// * CONNECTION_URL - The URL for connecting to a general
+	// (non-JDBC) data source.
 	//
-	//     * KAFKA_BOOTSTRAP_SERVERS - A
-	// comma-separated list of host and port pairs that are the addresses of the Apache
-	// Kafka brokers in a Kafka cluster to which a Kafka client will connect to and
-	// bootstrap itself.
+	// * KAFKA_BOOTSTRAP_SERVERS - A comma-separated list of
+	// host and port pairs that are the addresses of the Apache Kafka brokers in a
+	// Kafka cluster to which a Kafka client will connect to and bootstrap itself.
 	//
-	//     * KAFKA_SSL_ENABLED - Whether to enable or disable SSL on
-	// an Apache Kafka connection. Default value is "true".
+	// *
+	// KAFKA_SSL_ENABLED - Whether to enable or disable SSL on an Apache Kafka
+	// connection. Default value is "true".
 	//
-	//     * KAFKA_CUSTOM_CERT -
-	// The Amazon S3 URL for the private CA cert file (.pem format). The default is an
-	// empty string.
+	// * KAFKA_CUSTOM_CERT - The Amazon S3 URL
+	// for the private CA cert file (.pem format). The default is an empty string.
 	//
-	//     * KAFKA_SKIP_CUSTOM_CERT_VALIDATION - Whether to skip the
-	// validation of the CA cert file or not. AWS Glue validates for three algorithms:
-	// SHA256withRSA, SHA384withRSA and SHA512withRSA. Default value is "false".
+	// *
+	// KAFKA_SKIP_CUSTOM_CERT_VALIDATION - Whether to skip the validation of the CA
+	// cert file or not. AWS Glue validates for three algorithms: SHA256withRSA,
+	// SHA384withRSA and SHA512withRSA. Default value is "false".
 	ConnectionProperties map[string]*string
 
 	// The type of the connection. Currently, SFTP is not supported.
@@ -516,18 +515,18 @@ type ConnectionInput struct {
 
 	// The type of the connection. Currently, these types are supported:
 	//
-	//     * JDBC -
+	// * JDBC -
 	// Designates a connection to a database through Java Database Connectivity
 	// (JDBC).
 	//
-	//     * KAFKA - Designates a connection to an Apache Kafka streaming
+	// * KAFKA - Designates a connection to an Apache Kafka streaming
 	// platform.
 	//
-	//     * MONGODB - Designates a connection to a MongoDB document
+	// * MONGODB - Designates a connection to a MongoDB document
 	// database.
 	//
-	//     * NETWORK - Designates a network connection to a data source
-	// within an Amazon Virtual Private Cloud environment (Amazon VPC).
+	// * NETWORK - Designates a network connection to a data source within
+	// an Amazon Virtual Private Cloud environment (Amazon VPC).
 	//
 	// SFTP is not
 	// supported.
@@ -1007,12 +1006,12 @@ type DevEndpoint struct {
 
 	// A map of arguments used to configure the DevEndpoint. Valid arguments are:
 	//
+	// *
+	// "--enable-glue-datacatalog": ""
 	//
-	// * "--enable-glue-datacatalog": ""
+	// * "GLUE_PYTHON_VERSION": "3"
 	//
-	//     * "GLUE_PYTHON_VERSION": "3"
-	//
-	//     *
+	// *
 	// "GLUE_PYTHON_VERSION": "2"
 	//
 	// You can specify a version of Python support for
@@ -1116,22 +1115,22 @@ type DevEndpoint struct {
 	// The type of predefined worker that is allocated to the development endpoint.
 	// Accepts a value of Standard, G.1X, or G.2X.
 	//
-	//     * For the Standard worker type,
+	// * For the Standard worker type,
 	// each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors
 	// per worker.
 	//
-	//     * For the G.1X worker type, each worker maps to 1 DPU (4 vCPU,
-	// 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend
-	// this worker type for memory-intensive jobs.
+	// * For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16
+	// GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this
+	// worker type for memory-intensive jobs.
 	//
-	//     * For the G.2X worker type,
-	// each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1
-	// executor per worker. We recommend this worker type for memory-intensive
-	// jobs.
+	// * For the G.2X worker type, each worker
+	// maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor
+	// per worker. We recommend this worker type for memory-intensive jobs.
 	//
-	// Known issue: when a development endpoint is created with the
-	// G.2XWorkerType configuration, the Spark drivers for the development endpoint
-	// will run on 4 vCPU, 16 GB of memory, and a 64 GB disk.
+	// Known
+	// issue: when a development endpoint is created with the G.2XWorkerType
+	// configuration, the Spark drivers for the development endpoint will run on 4
+	// vCPU, 16 GB of memory, and a 64 GB disk.
 	WorkerType WorkerType
 
 	// The YARN endpoint address used by this DevEndpoint.
@@ -1537,13 +1536,13 @@ type Job struct {
 	// allocated for MaxCapacity depends on whether you are running a Python shell job,
 	// an Apache Spark ETL job, or an Apache Spark streaming ETL job:
 	//
-	//     * When you
+	// * When you
 	// specify a Python shell job (JobCommand.Name="pythonshell"), you can allocate
 	// either 0.0625 or 1 DPU. The default is 0.0625 DPU.
 	//
-	//     * When you specify an
-	// Apache Spark ETL job (JobCommand.Name="glueetl") or Apache Spark streaming ETL
-	// job (JobCommand.Name="gluestreaming"), you can allocate from 2 to 100 DPUs. The
+	// * When you specify an Apache
+	// Spark ETL job (JobCommand.Name="glueetl") or Apache Spark streaming ETL job
+	// (JobCommand.Name="gluestreaming"), you can allocate from 2 to 100 DPUs. The
 	// default is 10 DPUs. This job type cannot have a fractional DPU allocation.
 	MaxCapacity *float64
 
@@ -1578,17 +1577,17 @@ type Job struct {
 	// The type of predefined worker that is allocated when a job runs. Accepts a value
 	// of Standard, G.1X, or G.2X.
 	//
-	//     * For the Standard worker type, each worker
+	// * For the Standard worker type, each worker
 	// provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.
 	//
+	// *
+	// For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64
+	// GB disk), and provides 1 executor per worker. We recommend this worker type for
+	// memory-intensive jobs.
 	//
-	// * For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory,
-	// 64 GB disk), and provides 1 executor per worker. We recommend this worker type
-	// for memory-intensive jobs.
-	//
-	//     * For the G.2X worker type, each worker maps to
-	// 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per
-	// worker. We recommend this worker type for memory-intensive jobs.
+	// * For the G.2X worker type, each worker maps to 2 DPU (8
+	// vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We
+	// recommend this worker type for memory-intensive jobs.
 	WorkerType WorkerType
 }
 
@@ -1726,11 +1725,11 @@ type JobRun struct {
 	// allocated for MaxCapacity depends on whether you are running a Python shell job
 	// or an Apache Spark ETL job:
 	//
-	//     * When you specify a Python shell job
+	// * When you specify a Python shell job
 	// (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The
 	// default is 0.0625 DPU.
 	//
-	//     * When you specify an Apache Spark ETL job
+	// * When you specify an Apache Spark ETL job
 	// (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is
 	// 10 DPUs. This job type cannot have a fractional DPU allocation.
 	MaxCapacity *float64
@@ -1768,16 +1767,15 @@ type JobRun struct {
 	// The type of predefined worker that is allocated when a job runs. Accepts a value
 	// of Standard, G.1X, or G.2X.
 	//
-	//     * For the Standard worker type, each worker
+	// * For the Standard worker type, each worker
 	// provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.
 	//
-	//
-	// * For the G.1X worker type, each worker provides 4 vCPU, 16 GB of memory and a
+	// *
+	// For the G.1X worker type, each worker provides 4 vCPU, 16 GB of memory and a
 	// 64GB disk, and 1 executor per worker.
 	//
-	//     * For the G.2X worker type, each
-	// worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per
-	// worker.
+	// * For the G.2X worker type, each worker
+	// provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per worker.
 	WorkerType WorkerType
 }
 
@@ -1836,11 +1834,11 @@ type JobUpdate struct {
 	// allocated for MaxCapacity depends on whether you are running a Python shell job
 	// or an Apache Spark ETL job:
 	//
-	//     * When you specify a Python shell job
+	// * When you specify a Python shell job
 	// (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The
 	// default is 0.0625 DPU.
 	//
-	//     * When you specify an Apache Spark ETL job
+	// * When you specify an Apache Spark ETL job
 	// (JobCommand.Name="glueetl") or Apache Spark streaming ETL job
 	// (JobCommand.Name="gluestreaming"), you can allocate from 2 to 100 DPUs. The
 	// default is 10 DPUs. This job type cannot have a fractional DPU allocation.
@@ -1875,17 +1873,17 @@ type JobUpdate struct {
 	// The type of predefined worker that is allocated when a job runs. Accepts a value
 	// of Standard, G.1X, or G.2X.
 	//
-	//     * For the Standard worker type, each worker
+	// * For the Standard worker type, each worker
 	// provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.
 	//
+	// *
+	// For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64
+	// GB disk), and provides 1 executor per worker. We recommend this worker type for
+	// memory-intensive jobs.
 	//
-	// * For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory,
-	// 64 GB disk), and provides 1 executor per worker. We recommend this worker type
-	// for memory-intensive jobs.
-	//
-	//     * For the G.2X worker type, each worker maps to
-	// 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per
-	// worker. We recommend this worker type for memory-intensive jobs.
+	// * For the G.2X worker type, each worker maps to 2 DPU (8
+	// vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We
+	// recommend this worker type for memory-intensive jobs.
 	WorkerType WorkerType
 }
 
@@ -2055,16 +2053,16 @@ type MLTransform struct {
 	// pricing page (http://aws.amazon.com/glue/pricing/). MaxCapacity is a mutually
 	// exclusive option with NumberOfWorkers and WorkerType.
 	//
-	//     * If either
+	// * If either
 	// NumberOfWorkers or WorkerType is set, then MaxCapacity cannot be set.
 	//
-	//     * If
+	// * If
 	// MaxCapacity is set then neither NumberOfWorkers or WorkerType can be set.
 	//
-	//     *
-	// If WorkerType is set, then NumberOfWorkers is required (and vice versa).
+	// * If
+	// WorkerType is set, then NumberOfWorkers is required (and vice versa).
 	//
-	//     *
+	// *
 	// MaxCapacity and NumberOfWorkers must both be at least 1.
 	//
 	// When the WorkerType
@@ -2096,12 +2094,11 @@ type MLTransform struct {
 	// permissions to AWS Glue resources, and Amazon S3 permissions required by the
 	// transform.
 	//
-	//     * This role needs AWS Glue service role permissions to allow
-	// access to resources in AWS Glue. See Attach a Policy to IAM Users That Access
-	// AWS Glue
+	// * This role needs AWS Glue service role permissions to allow access
+	// to resources in AWS Glue. See Attach a Policy to IAM Users That Access AWS Glue
 	// (https://docs.aws.amazon.com/glue/latest/dg/attach-policy-iam-user.html).
 	//
-	//     *
+	// *
 	// This role needs permission to your Amazon Simple Storage Service (Amazon S3)
 	// sources, targets, temporary directory, scripts, and any libraries used by the
 	// task run for this transform.
@@ -2124,31 +2121,31 @@ type MLTransform struct {
 	// The type of predefined worker that is allocated when a task of this transform
 	// runs. Accepts a value of Standard, G.1X, or G.2X.
 	//
-	//     * For the Standard worker
+	// * For the Standard worker
 	// type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2
 	// executors per worker.
 	//
-	//     * For the G.1X worker type, each worker provides 4
-	// vCPU, 16 GB of memory and a 64GB disk, and 1 executor per worker.
+	// * For the G.1X worker type, each worker provides 4 vCPU,
+	// 16 GB of memory and a 64GB disk, and 1 executor per worker.
 	//
-	//     * For the
-	// G.2X worker type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk,
-	// and 1 executor per worker.
+	// * For the G.2X
+	// worker type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and
+	// 1 executor per worker.
 	//
 	// MaxCapacity is a mutually exclusive option with
 	// NumberOfWorkers and WorkerType.
 	//
-	//     * If either NumberOfWorkers or WorkerType
-	// is set, then MaxCapacity cannot be set.
+	// * If either NumberOfWorkers or WorkerType is
+	// set, then MaxCapacity cannot be set.
 	//
-	//     * If MaxCapacity is set then
-	// neither NumberOfWorkers or WorkerType can be set.
+	// * If MaxCapacity is set then neither
+	// NumberOfWorkers or WorkerType can be set.
 	//
-	//     * If WorkerType is set,
-	// then NumberOfWorkers is required (and vice versa).
+	// * If WorkerType is set, then
+	// NumberOfWorkers is required (and vice versa).
 	//
-	//     * MaxCapacity and
-	// NumberOfWorkers must both be at least 1.
+	// * MaxCapacity and NumberOfWorkers
+	// must both be at least 1.
 	WorkerType WorkerType
 }
 

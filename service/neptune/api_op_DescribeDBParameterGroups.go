@@ -33,8 +33,8 @@ type DescribeDBParameterGroupsInput struct {
 
 	// The name of a specific DB parameter group to return details for. Constraints:
 	//
-	//
-	// * If supplied, must match the name of an existing DBClusterParameterGroup.
+	// *
+	// If supplied, must match the name of an existing DBClusterParameterGroup.
 	DBParameterGroupName *string
 
 	// This parameter is not currently supported.

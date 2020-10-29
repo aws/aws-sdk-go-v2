@@ -35,7 +35,7 @@ type DescribeDBClusterSnapshotsInput struct {
 	// parameter can't be used with the DBClusterSnapshotIdentifier parameter. This
 	// parameter is not case sensitive. Constraints:
 	//
-	//     * If provided, must match the
+	// * If provided, must match the
 	// identifier of an existing DBCluster.
 	DBClusterIdentifier *string
 
@@ -43,11 +43,11 @@ type DescribeDBClusterSnapshotsInput struct {
 	// with the DBClusterIdentifier parameter. This value is stored as a lowercase
 	// string. Constraints:
 	//
-	//     * If provided, must match the identifier of an
-	// existing DBClusterSnapshot.
+	// * If provided, must match the identifier of an existing
+	// DBClusterSnapshot.
 	//
-	//     * If this identifier is for an automated
-	// snapshot, the SnapshotType parameter must also be specified.
+	// * If this identifier is for an automated snapshot, the
+	// SnapshotType parameter must also be specified.
 	DBClusterSnapshotIdentifier *string
 
 	// This parameter is not currently supported.
@@ -77,27 +77,27 @@ type DescribeDBClusterSnapshotsInput struct {
 	// The type of cluster snapshots to be returned. You can specify one of the
 	// following values:
 	//
-	//     * automated - Return all cluster snapshots that Amazon
+	// * automated - Return all cluster snapshots that Amazon
 	// DocumentDB has automatically created for your AWS account.
 	//
-	//     * manual -
-	// Return all cluster snapshots that you have manually created for your AWS
+	// * manual - Return
+	// all cluster snapshots that you have manually created for your AWS account.
+	//
+	// *
+	// shared - Return all manual cluster snapshots that have been shared to your AWS
 	// account.
 	//
-	//     * shared - Return all manual cluster snapshots that have been
-	// shared to your AWS account.
+	// * public - Return all cluster snapshots that have been marked as
+	// public.
 	//
-	//     * public - Return all cluster snapshots that
-	// have been marked as public.
-	//
-	// If you don't specify a SnapshotType value, then
-	// both automated and manual cluster snapshots are returned. You can include shared
-	// cluster snapshots with these results by setting the IncludeShared parameter to
-	// true. You can include public cluster snapshots with these results by setting the
-	// IncludePublic parameter to true. The IncludeShared and IncludePublic parameters
-	// don't apply for SnapshotType values of manual or automated. The IncludePublic
-	// parameter doesn't apply when SnapshotType is set to shared. The IncludeShared
-	// parameter doesn't apply when SnapshotType is set to public.
+	// If you don't specify a SnapshotType value, then both automated and
+	// manual cluster snapshots are returned. You can include shared cluster snapshots
+	// with these results by setting the IncludeShared parameter to true. You can
+	// include public cluster snapshots with these results by setting the IncludePublic
+	// parameter to true. The IncludeShared and IncludePublic parameters don't apply
+	// for SnapshotType values of manual or automated. The IncludePublic parameter
+	// doesn't apply when SnapshotType is set to shared. The IncludeShared parameter
+	// doesn't apply when SnapshotType is set to public.
 	SnapshotType *string
 }
 

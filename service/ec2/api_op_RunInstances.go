@@ -16,35 +16,35 @@ import (
 // permissions. You can specify a number of options, or leave the default options.
 // The following rules apply:
 //
-//     * [EC2-VPC] If you don't specify a subnet ID, we
+// * [EC2-VPC] If you don't specify a subnet ID, we
 // choose a default subnet from your default VPC for you. If you don't have a
 // default VPC, you must specify a subnet ID in the request.
 //
-//     * [EC2-Classic]
-// If don't specify an Availability Zone, we choose one for you.
+// * [EC2-Classic] If
+// don't specify an Availability Zone, we choose one for you.
 //
-//     * Some
-// instance types must be launched into a VPC. If you do not have a default VPC, or
-// if you do not specify a subnet ID, the request fails. For more information, see
+// * Some instance
+// types must be launched into a VPC. If you do not have a default VPC, or if you
+// do not specify a subnet ID, the request fails. For more information, see
 // Instance types available only in a VPC
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html#vpc-only-instance-types).
 //
-//
-// * [EC2-VPC] All instances have a network interface with a primary private IPv4
+// *
+// [EC2-VPC] All instances have a network interface with a primary private IPv4
 // address. If you don't specify this address, we choose one from the IPv4 range of
 // your subnet.
 //
-//     * Not all instance types support IPv6 addresses. For more
+// * Not all instance types support IPv6 addresses. For more
 // information, see Instance types
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html).
 //
-//
-// * If you don't specify a security group ID, we use the default security group.
-// For more information, see Security groups
+// * If
+// you don't specify a security group ID, we use the default security group. For
+// more information, see Security groups
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html).
 //
-//
-// * If any of the AMIs have a product code attached for which the user has not
+// *
+// If any of the AMIs have a product code attached for which the user has not
 // subscribed, the request fails.
 //
 // You can create a launch template

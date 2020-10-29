@@ -69,13 +69,13 @@ type ModifyClusterInput struct {
 	// associated with the cluster, and not in the list of groups to apply, will be
 	// revoked from the cluster. Constraints:
 	//
-	//     * Must be 1 to 255 alphanumeric
+	// * Must be 1 to 255 alphanumeric
 	// characters or hyphens
 	//
-	//     * First character must be a letter
+	// * First character must be a letter
 	//
-	//     * Cannot end
-	// with a hyphen or contain two consecutive hyphens
+	// * Cannot end with a
+	// hyphen or contain two consecutive hyphens
 	ClusterSecurityGroups []*string
 
 	// The new cluster type. When you submit your cluster resize request, your existing
@@ -153,36 +153,36 @@ type ModifyClusterInput struct {
 	// user account for a cluster if the password is lost. Default: Uses existing
 	// setting. Constraints:
 	//
-	//     * Must be between 8 and 64 characters in length.
+	// * Must be between 8 and 64 characters in length.
 	//
+	// * Must
+	// contain at least one uppercase letter.
 	//
-	// * Must contain at least one uppercase letter.
+	// * Must contain at least one lowercase
+	// letter.
 	//
-	//     * Must contain at least one
-	// lowercase letter.
+	// * Must contain one number.
 	//
-	//     * Must contain one number.
-	//
-	//     * Can be any printable
-	// ASCII character (ASCII code 33 to 126) except ' (single quote), " (double
-	// quote), \, /, @, or space.
+	// * Can be any printable ASCII character
+	// (ASCII code 33 to 126) except ' (single quote), " (double quote), \, /, @, or
+	// space.
 	MasterUserPassword *string
 
 	// The new identifier for the cluster. Constraints:
 	//
-	//     * Must contain from 1 to
-	// 63 alphanumeric characters or hyphens.
+	// * Must contain from 1 to 63
+	// alphanumeric characters or hyphens.
 	//
-	//     * Alphabetic characters must be
+	// * Alphabetic characters must be
 	// lowercase.
 	//
-	//     * First character must be a letter.
+	// * First character must be a letter.
 	//
-	//     * Cannot end with a
-	// hyphen or contain two consecutive hyphens.
+	// * Cannot end with a hyphen or
+	// contain two consecutive hyphens.
 	//
-	//     * Must be unique for all
-	// clusters within an AWS account.
+	// * Must be unique for all clusters within an
+	// AWS account.
 	//
 	// Example: examplecluster
 	NewClusterIdentifier *string

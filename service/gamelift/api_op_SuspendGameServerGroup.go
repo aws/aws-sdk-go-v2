@@ -16,11 +16,11 @@ import (
 // instances or the game server group. You can restart activity by calling
 // ResumeGameServerGroup. You can suspend the following activity:
 //
-//     * Instance
-// type replacement - This activity evaluates the current game hosting viability of
-// all Spot instance types that are defined for the game server group. It updates
-// the Auto Scaling group to remove nonviable Spot Instance types, which have a
-// higher chance of game server interruptions. It then balances capacity across the
+// * Instance type
+// replacement - This activity evaluates the current game hosting viability of all
+// Spot instance types that are defined for the game server group. It updates the
+// Auto Scaling group to remove nonviable Spot Instance types, which have a higher
+// chance of game server interruptions. It then balances capacity across the
 // remaining viable Spot Instance types. When this activity is suspended, the Auto
 // Scaling group continues with its current balance, regardless of viability.
 // Instance protection, utilization metrics, and capacity scaling activities
@@ -33,24 +33,23 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
 // Related operations
 //
-//     * CreateGameServerGroup
+// * CreateGameServerGroup
 //
-//     * ListGameServerGroups
+// * ListGameServerGroups
 //
+// *
+// DescribeGameServerGroup
 //
-// * DescribeGameServerGroup
+// * UpdateGameServerGroup
 //
-//     * UpdateGameServerGroup
+// * DeleteGameServerGroup
 //
-//     *
-// DeleteGameServerGroup
+// *
+// ResumeGameServerGroup
 //
-//     * ResumeGameServerGroup
+// * SuspendGameServerGroup
 //
-//     *
-// SuspendGameServerGroup
-//
-//     * DescribeGameServerInstances
+// * DescribeGameServerInstances
 func (c *Client) SuspendGameServerGroup(ctx context.Context, params *SuspendGameServerGroupInput, optFns ...func(*Options)) (*SuspendGameServerGroupOutput, error) {
 	if params == nil {
 		params = &SuspendGameServerGroupInput{}

@@ -19,10 +19,10 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/about-object-ownership.html).
 // The following operations are related to GetBucketOwnershipControls:
 //
-//     *
+// *
 // PutBucketOwnershipControls
 //
-//     * DeleteBucketOwnershipControls
+// * DeleteBucketOwnershipControls
 func (c *Client) GetBucketOwnershipControls(ctx context.Context, params *GetBucketOwnershipControlsInput, optFns ...func(*Options)) (*GetBucketOwnershipControlsOutput, error) {
 	if params == nil {
 		params = &GetBucketOwnershipControlsInput{}

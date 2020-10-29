@@ -38,16 +38,16 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-match.html)
 // Related operations
 //
-//     * StartMatchmaking
+// * StartMatchmaking
 //
-//     * DescribeMatchmaking
+// * DescribeMatchmaking
 //
-//     *
+// *
 // StopMatchmaking
 //
-//     * AcceptMatch
+// * AcceptMatch
 //
-//     * StartMatchBackfill
+// * StartMatchBackfill
 func (c *Client) StartMatchBackfill(ctx context.Context, params *StartMatchBackfillInput, optFns ...func(*Options)) (*StartMatchBackfillOutput, error) {
 	if params == nil {
 		params = &StartMatchBackfillInput{}
@@ -86,16 +86,16 @@ type StartMatchBackfillInput struct {
 	// session. This information is used by the matchmaker to find new players and add
 	// them to the existing game.
 	//
-	//     * PlayerID, PlayerAttributes, Team -\\- This
+	// * PlayerID, PlayerAttributes, Team -\\- This
 	// information is maintained in the GameSession object, MatchmakerData property,
 	// for all players who are currently assigned to the game session. The matchmaker
 	// data is in JSON syntax, formatted as a string. For more details, see  Match Data
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data).
 	//
-	//
-	// * LatencyInMs -\\- If the matchmaker uses player latency, include a latency
-	// value, in milliseconds, for the Region that the game session is currently in. Do
-	// not include latency values for any other Region.
+	// *
+	// LatencyInMs -\\- If the matchmaker uses player latency, include a latency value,
+	// in milliseconds, for the Region that the game session is currently in. Do not
+	// include latency values for any other Region.
 	//
 	// This member is required.
 	Players []*types.Player

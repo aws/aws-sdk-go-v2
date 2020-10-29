@@ -6,8 +6,8 @@ type ChangeType string
 
 // Enum values for ChangeType
 const (
-	ChangeTypeImmediate       ChangeType = "IMMEDIATE"
-	ChangeTypeRequires_reboot ChangeType = "REQUIRES_REBOOT"
+	ChangeTypeImmediate      ChangeType = "IMMEDIATE"
+	ChangeTypeRequiresReboot ChangeType = "REQUIRES_REBOOT"
 )
 
 // Values returns all known values for ChangeType. Note that this can be expanded
@@ -44,8 +44,8 @@ type ParameterType string
 
 // Enum values for ParameterType
 const (
-	ParameterTypeDefault            ParameterType = "DEFAULT"
-	ParameterTypeNode_type_specific ParameterType = "NODE_TYPE_SPECIFIC"
+	ParameterTypeDefault          ParameterType = "DEFAULT"
+	ParameterTypeNodeTypeSpecific ParameterType = "NODE_TYPE_SPECIFIC"
 )
 
 // Values returns all known values for ParameterType. Note that this can be
@@ -62,9 +62,9 @@ type SourceType string
 
 // Enum values for SourceType
 const (
-	SourceTypeCluster         SourceType = "CLUSTER"
-	SourceTypeParameter_group SourceType = "PARAMETER_GROUP"
-	SourceTypeSubnet_group    SourceType = "SUBNET_GROUP"
+	SourceTypeCluster        SourceType = "CLUSTER"
+	SourceTypeParameterGroup SourceType = "PARAMETER_GROUP"
+	SourceTypeSubnetGroup    SourceType = "SUBNET_GROUP"
 )
 
 // Values returns all known values for SourceType. Note that this can be expanded

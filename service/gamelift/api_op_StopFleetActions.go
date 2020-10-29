@@ -22,19 +22,19 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 // Related operations
 //
-//     * CreateFleet
+// * CreateFleet
 //
-//     * ListFleets
+// * ListFleets
 //
-//     * DeleteFleet
+// * DeleteFleet
 //
+// *
+// DescribeFleetAttributes
 //
-// * DescribeFleetAttributes
+// * UpdateFleetAttributes
 //
-//     * UpdateFleetAttributes
-//
-//     * StartFleetActions
-// or StopFleetActions
+// * StartFleetActions or
+// StopFleetActions
 func (c *Client) StopFleetActions(ctx context.Context, params *StopFleetActionsInput, optFns ...func(*Options)) (*StopFleetActionsOutput, error) {
 	if params == nil {
 		params = &StopFleetActionsInput{}

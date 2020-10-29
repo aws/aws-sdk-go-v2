@@ -56,11 +56,11 @@ type CreateDBClusterParameterGroupInput struct {
 
 	// The name of the DB cluster parameter group. Constraints:
 	//
-	//     * Must match the
-	// name of an existing DB cluster parameter group.
+	// * Must match the name
+	// of an existing DB cluster parameter group.
 	//
-	// This value is stored as a
-	// lowercase string.
+	// This value is stored as a lowercase
+	// string.
 	//
 	// This member is required.
 	DBClusterParameterGroupName *string

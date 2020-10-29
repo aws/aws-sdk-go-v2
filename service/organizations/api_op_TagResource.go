@@ -14,17 +14,17 @@ import (
 // Adds one or more tags to the specified resource. Currently, you can attach tags
 // to the following resources in AWS Organizations.
 //
-//     * AWS account
+// * AWS account
 //
-//     *
-// Organization root
+// * Organization
+// root
 //
-//     * Organizational unit (OU)
+// * Organizational unit (OU)
 //
-//     * Policy (any type)
+// * Policy (any type)
 //
-// This
-// operation can be called only from the organization's management account.
+// This operation can be
+// called only from the organization's management account.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -50,23 +50,23 @@ type TagResourceInput struct {
 	// A list of tags to add to the specified resource. You can specify any of the
 	// following taggable resources.
 	//
-	//     * AWS account – specify the account ID
-	// number.
+	// * AWS account – specify the account ID number.
 	//
-	//     * Organizational unit – specify the OU ID that begins with ou- and
-	// looks similar to: ou-1a2b-34uvwxyz
+	// *
+	// Organizational unit – specify the OU ID that begins with ou- and looks similar
+	// to: ou-1a2b-34uvwxyz
 	//
-	//     * Root – specify the root ID that begins
-	// with r- and looks similar to: r-1a2b
+	// * Root – specify the root ID that begins with r- and looks
+	// similar to: r-1a2b
 	//
-	//     * Policy – specify the policy ID that
-	// begins with p- andlooks similar to: p-12abcdefg3
+	// * Policy – specify the policy ID that begins with p-
+	// andlooks similar to: p-12abcdefg3
 	//
-	// For each tag in the list, you
-	// must specify both a tag key and a value. You can set the value to an empty
-	// string, but you can't set it to null. If any one of the tags is invalid or if
-	// you exceed the allowed number of tags for an account user, then the entire
-	// request fails and the account is not created.
+	// For each tag in the list, you must specify
+	// both a tag key and a value. You can set the value to an empty string, but you
+	// can't set it to null. If any one of the tags is invalid or if you exceed the
+	// allowed number of tags for an account user, then the entire request fails and
+	// the account is not created.
 	//
 	// This member is required.
 	Tags []*types.Tag

@@ -40,14 +40,14 @@ type ImportInstallationMediaInput struct {
 	// includes supported DB engines that require an on-premises customer provided
 	// license. Valid Values:
 	//
-	//     * sqlserver-ee
+	// * sqlserver-ee
 	//
-	//     * sqlserver-se
+	// * sqlserver-se
 	//
-	//     *
-	// sqlserver-ex
+	// * sqlserver-ex
 	//
-	//     * sqlserver-web
+	// *
+	// sqlserver-web
 	//
 	// This member is required.
 	Engine *string

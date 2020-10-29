@@ -64,13 +64,13 @@ type CertificateAuthorityStatus string
 
 // Enum values for CertificateAuthorityStatus
 const (
-	CertificateAuthorityStatusCreating            CertificateAuthorityStatus = "CREATING"
-	CertificateAuthorityStatusPending_certificate CertificateAuthorityStatus = "PENDING_CERTIFICATE"
-	CertificateAuthorityStatusActive              CertificateAuthorityStatus = "ACTIVE"
-	CertificateAuthorityStatusDeleted             CertificateAuthorityStatus = "DELETED"
-	CertificateAuthorityStatusDisabled            CertificateAuthorityStatus = "DISABLED"
-	CertificateAuthorityStatusExpired             CertificateAuthorityStatus = "EXPIRED"
-	CertificateAuthorityStatusFailed              CertificateAuthorityStatus = "FAILED"
+	CertificateAuthorityStatusCreating           CertificateAuthorityStatus = "CREATING"
+	CertificateAuthorityStatusPendingCertificate CertificateAuthorityStatus = "PENDING_CERTIFICATE"
+	CertificateAuthorityStatusActive             CertificateAuthorityStatus = "ACTIVE"
+	CertificateAuthorityStatusDeleted            CertificateAuthorityStatus = "DELETED"
+	CertificateAuthorityStatusDisabled           CertificateAuthorityStatus = "DISABLED"
+	CertificateAuthorityStatusExpired            CertificateAuthorityStatus = "EXPIRED"
+	CertificateAuthorityStatusFailed             CertificateAuthorityStatus = "FAILED"
 )
 
 // Values returns all known values for CertificateAuthorityStatus. Note that this
@@ -110,9 +110,9 @@ type FailureReason string
 
 // Enum values for FailureReason
 const (
-	FailureReasonRequest_timed_out     FailureReason = "REQUEST_TIMED_OUT"
-	FailureReasonUnsupported_algorithm FailureReason = "UNSUPPORTED_ALGORITHM"
-	FailureReasonOther                 FailureReason = "OTHER"
+	FailureReasonRequestTimedOut      FailureReason = "REQUEST_TIMED_OUT"
+	FailureReasonUnsupportedAlgorithm FailureReason = "UNSUPPORTED_ALGORITHM"
+	FailureReasonOther                FailureReason = "OTHER"
 )
 
 // Values returns all known values for FailureReason. Note that this can be
@@ -130,10 +130,10 @@ type KeyAlgorithm string
 
 // Enum values for KeyAlgorithm
 const (
-	KeyAlgorithmRsa_2048      KeyAlgorithm = "RSA_2048"
-	KeyAlgorithmRsa_4096      KeyAlgorithm = "RSA_4096"
-	KeyAlgorithmEc_prime256v1 KeyAlgorithm = "EC_prime256v1"
-	KeyAlgorithmEc_secp384r1  KeyAlgorithm = "EC_secp384r1"
+	KeyAlgorithmRsa2048      KeyAlgorithm = "RSA_2048"
+	KeyAlgorithmRsa4096      KeyAlgorithm = "RSA_4096"
+	KeyAlgorithmEcPrime256v1 KeyAlgorithm = "EC_prime256v1"
+	KeyAlgorithmEcSecp384r1  KeyAlgorithm = "EC_secp384r1"
 )
 
 // Values returns all known values for KeyAlgorithm. Note that this can be expanded
@@ -152,8 +152,8 @@ type ResourceOwner string
 
 // Enum values for ResourceOwner
 const (
-	ResourceOwnerSelf           ResourceOwner = "SELF"
-	ResourceOwnerOther_accounts ResourceOwner = "OTHER_ACCOUNTS"
+	ResourceOwnerSelf          ResourceOwner = "SELF"
+	ResourceOwnerOtherAccounts ResourceOwner = "OTHER_ACCOUNTS"
 )
 
 // Values returns all known values for ResourceOwner. Note that this can be
@@ -170,14 +170,14 @@ type RevocationReason string
 
 // Enum values for RevocationReason
 const (
-	RevocationReasonUnspecified                      RevocationReason = "UNSPECIFIED"
-	RevocationReasonKey_compromise                   RevocationReason = "KEY_COMPROMISE"
-	RevocationReasonCertificate_authority_compromise RevocationReason = "CERTIFICATE_AUTHORITY_COMPROMISE"
-	RevocationReasonAffiliation_changed              RevocationReason = "AFFILIATION_CHANGED"
-	RevocationReasonSuperseded                       RevocationReason = "SUPERSEDED"
-	RevocationReasonCessation_of_operation           RevocationReason = "CESSATION_OF_OPERATION"
-	RevocationReasonPrivilege_withdrawn              RevocationReason = "PRIVILEGE_WITHDRAWN"
-	RevocationReasonA_a_compromise                   RevocationReason = "A_A_COMPROMISE"
+	RevocationReasonUnspecified                    RevocationReason = "UNSPECIFIED"
+	RevocationReasonKeyCompromise                  RevocationReason = "KEY_COMPROMISE"
+	RevocationReasonCertificateAuthorityCompromise RevocationReason = "CERTIFICATE_AUTHORITY_COMPROMISE"
+	RevocationReasonAffiliationChanged             RevocationReason = "AFFILIATION_CHANGED"
+	RevocationReasonSuperseded                     RevocationReason = "SUPERSEDED"
+	RevocationReasonCessationOfOperation           RevocationReason = "CESSATION_OF_OPERATION"
+	RevocationReasonPrivilegeWithdrawn             RevocationReason = "PRIVILEGE_WITHDRAWN"
+	RevocationReasonAACompromise                   RevocationReason = "A_A_COMPROMISE"
 )
 
 // Values returns all known values for RevocationReason. Note that this can be
@@ -226,7 +226,7 @@ type ValidityPeriodType string
 
 // Enum values for ValidityPeriodType
 const (
-	ValidityPeriodTypeEnd_date ValidityPeriodType = "END_DATE"
+	ValidityPeriodTypeEndDate  ValidityPeriodType = "END_DATE"
 	ValidityPeriodTypeAbsolute ValidityPeriodType = "ABSOLUTE"
 	ValidityPeriodTypeDays     ValidityPeriodType = "DAYS"
 	ValidityPeriodTypeMonths   ValidityPeriodType = "MONTHS"

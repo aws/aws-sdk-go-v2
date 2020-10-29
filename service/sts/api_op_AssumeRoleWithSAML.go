@@ -97,19 +97,19 @@ import (
 // specifies this SAML provider in its trust policy. For more information, see the
 // following resources:
 //
-//     * About SAML 2.0-based Federation
+// * About SAML 2.0-based Federation
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html)
 // in the IAM User Guide.
 //
-//     * Creating SAML Identity Providers
+// * Creating SAML Identity Providers
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_saml.html)
 // in the IAM User Guide.
 //
-//     * Configuring a Relying Party and Claims
+// * Configuring a Relying Party and Claims
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_saml_relying-party.html)
 // in the IAM User Guide.
 //
-//     * Creating a Role for SAML 2.0 Federation
+// * Creating a Role for SAML 2.0 Federation
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_saml.html)
 // in the IAM User Guide.
 func (c *Client) AssumeRoleWithSAML(ctx context.Context, params *AssumeRoleWithSAMLInput, optFns ...func(*Options)) (*AssumeRoleWithSAMLOutput, error) {

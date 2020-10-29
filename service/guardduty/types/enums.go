@@ -6,8 +6,8 @@ type AdminStatus string
 
 // Enum values for AdminStatus
 const (
-	AdminStatusEnabled             AdminStatus = "ENABLED"
-	AdminStatusDisable_in_progress AdminStatus = "DISABLE_IN_PROGRESS"
+	AdminStatusEnabled           AdminStatus = "ENABLED"
+	AdminStatusDisableInProgress AdminStatus = "DISABLE_IN_PROGRESS"
 )
 
 // Values returns all known values for AdminStatus. Note that this can be expanded
@@ -24,10 +24,10 @@ type DataSource string
 
 // Enum values for DataSource
 const (
-	DataSourceFlow_logs   DataSource = "FLOW_LOGS"
-	DataSourceCloud_trail DataSource = "CLOUD_TRAIL"
-	DataSourceDns_logs    DataSource = "DNS_LOGS"
-	DataSourceS3_logs     DataSource = "S3_LOGS"
+	DataSourceFlowLogs   DataSource = "FLOW_LOGS"
+	DataSourceCloudTrail DataSource = "CLOUD_TRAIL"
+	DataSourceDnsLogs    DataSource = "DNS_LOGS"
+	DataSourceS3Logs     DataSource = "S3_LOGS"
 )
 
 // Values returns all known values for DataSource. Note that this can be expanded
@@ -98,8 +98,8 @@ type Feedback string
 
 // Enum values for Feedback
 const (
-	FeedbackUseful     Feedback = "USEFUL"
-	FeedbackNot_useful Feedback = "NOT_USEFUL"
+	FeedbackUseful    Feedback = "USEFUL"
+	FeedbackNotUseful Feedback = "NOT_USEFUL"
 )
 
 // Values returns all known values for Feedback. Note that this can be expanded in
@@ -134,9 +134,9 @@ type FindingPublishingFrequency string
 
 // Enum values for FindingPublishingFrequency
 const (
-	FindingPublishingFrequencyFifteen_minutes FindingPublishingFrequency = "FIFTEEN_MINUTES"
-	FindingPublishingFrequencyOne_hour        FindingPublishingFrequency = "ONE_HOUR"
-	FindingPublishingFrequencySix_hours       FindingPublishingFrequency = "SIX_HOURS"
+	FindingPublishingFrequencyFifteenMinutes FindingPublishingFrequency = "FIFTEEN_MINUTES"
+	FindingPublishingFrequencyOneHour        FindingPublishingFrequency = "ONE_HOUR"
+	FindingPublishingFrequencySixHours       FindingPublishingFrequency = "SIX_HOURS"
 )
 
 // Values returns all known values for FindingPublishingFrequency. Note that this
@@ -154,7 +154,7 @@ type FindingStatisticType string
 
 // Enum values for FindingStatisticType
 const (
-	FindingStatisticTypeCount_by_severity FindingStatisticType = "COUNT_BY_SEVERITY"
+	FindingStatisticTypeCountBySeverity FindingStatisticType = "COUNT_BY_SEVERITY"
 )
 
 // Values returns all known values for FindingStatisticType. Note that this can be
@@ -170,12 +170,12 @@ type IpSetFormat string
 
 // Enum values for IpSetFormat
 const (
-	IpSetFormatTxt         IpSetFormat = "TXT"
-	IpSetFormatStix        IpSetFormat = "STIX"
-	IpSetFormatOtx_csv     IpSetFormat = "OTX_CSV"
-	IpSetFormatAlien_vault IpSetFormat = "ALIEN_VAULT"
-	IpSetFormatProof_point IpSetFormat = "PROOF_POINT"
-	IpSetFormatFire_eye    IpSetFormat = "FIRE_EYE"
+	IpSetFormatTxt        IpSetFormat = "TXT"
+	IpSetFormatStix       IpSetFormat = "STIX"
+	IpSetFormatOtxCsv     IpSetFormat = "OTX_CSV"
+	IpSetFormatAlienVault IpSetFormat = "ALIEN_VAULT"
+	IpSetFormatProofPoint IpSetFormat = "PROOF_POINT"
+	IpSetFormatFireEye    IpSetFormat = "FIRE_EYE"
 )
 
 // Values returns all known values for IpSetFormat. Note that this can be expanded
@@ -196,13 +196,13 @@ type IpSetStatus string
 
 // Enum values for IpSetStatus
 const (
-	IpSetStatusInactive       IpSetStatus = "INACTIVE"
-	IpSetStatusActivating     IpSetStatus = "ACTIVATING"
-	IpSetStatusActive         IpSetStatus = "ACTIVE"
-	IpSetStatusDeactivating   IpSetStatus = "DEACTIVATING"
-	IpSetStatusError          IpSetStatus = "ERROR"
-	IpSetStatusDelete_pending IpSetStatus = "DELETE_PENDING"
-	IpSetStatusDeleted        IpSetStatus = "DELETED"
+	IpSetStatusInactive      IpSetStatus = "INACTIVE"
+	IpSetStatusActivating    IpSetStatus = "ACTIVATING"
+	IpSetStatusActive        IpSetStatus = "ACTIVE"
+	IpSetStatusDeactivating  IpSetStatus = "DEACTIVATING"
+	IpSetStatusError         IpSetStatus = "ERROR"
+	IpSetStatusDeletePending IpSetStatus = "DELETE_PENDING"
+	IpSetStatusDeleted       IpSetStatus = "DELETED"
 )
 
 // Values returns all known values for IpSetStatus. Note that this can be expanded
@@ -242,10 +242,10 @@ type PublishingStatus string
 
 // Enum values for PublishingStatus
 const (
-	PublishingStatusPending_verification                       PublishingStatus = "PENDING_VERIFICATION"
-	PublishingStatusPublishing                                 PublishingStatus = "PUBLISHING"
-	PublishingStatusUnable_to_publish_fix_destination_property PublishingStatus = "UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY"
-	PublishingStatusStopped                                    PublishingStatus = "STOPPED"
+	PublishingStatusPendingVerification                   PublishingStatus = "PENDING_VERIFICATION"
+	PublishingStatusPublishing                            PublishingStatus = "PUBLISHING"
+	PublishingStatusUnableToPublishFixDestinationProperty PublishingStatus = "UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY"
+	PublishingStatusStopped                               PublishingStatus = "STOPPED"
 )
 
 // Values returns all known values for PublishingStatus. Note that this can be
@@ -264,12 +264,12 @@ type ThreatIntelSetFormat string
 
 // Enum values for ThreatIntelSetFormat
 const (
-	ThreatIntelSetFormatTxt         ThreatIntelSetFormat = "TXT"
-	ThreatIntelSetFormatStix        ThreatIntelSetFormat = "STIX"
-	ThreatIntelSetFormatOtx_csv     ThreatIntelSetFormat = "OTX_CSV"
-	ThreatIntelSetFormatAlien_vault ThreatIntelSetFormat = "ALIEN_VAULT"
-	ThreatIntelSetFormatProof_point ThreatIntelSetFormat = "PROOF_POINT"
-	ThreatIntelSetFormatFire_eye    ThreatIntelSetFormat = "FIRE_EYE"
+	ThreatIntelSetFormatTxt        ThreatIntelSetFormat = "TXT"
+	ThreatIntelSetFormatStix       ThreatIntelSetFormat = "STIX"
+	ThreatIntelSetFormatOtxCsv     ThreatIntelSetFormat = "OTX_CSV"
+	ThreatIntelSetFormatAlienVault ThreatIntelSetFormat = "ALIEN_VAULT"
+	ThreatIntelSetFormatProofPoint ThreatIntelSetFormat = "PROOF_POINT"
+	ThreatIntelSetFormatFireEye    ThreatIntelSetFormat = "FIRE_EYE"
 )
 
 // Values returns all known values for ThreatIntelSetFormat. Note that this can be
@@ -290,13 +290,13 @@ type ThreatIntelSetStatus string
 
 // Enum values for ThreatIntelSetStatus
 const (
-	ThreatIntelSetStatusInactive       ThreatIntelSetStatus = "INACTIVE"
-	ThreatIntelSetStatusActivating     ThreatIntelSetStatus = "ACTIVATING"
-	ThreatIntelSetStatusActive         ThreatIntelSetStatus = "ACTIVE"
-	ThreatIntelSetStatusDeactivating   ThreatIntelSetStatus = "DEACTIVATING"
-	ThreatIntelSetStatusError          ThreatIntelSetStatus = "ERROR"
-	ThreatIntelSetStatusDelete_pending ThreatIntelSetStatus = "DELETE_PENDING"
-	ThreatIntelSetStatusDeleted        ThreatIntelSetStatus = "DELETED"
+	ThreatIntelSetStatusInactive      ThreatIntelSetStatus = "INACTIVE"
+	ThreatIntelSetStatusActivating    ThreatIntelSetStatus = "ACTIVATING"
+	ThreatIntelSetStatusActive        ThreatIntelSetStatus = "ACTIVE"
+	ThreatIntelSetStatusDeactivating  ThreatIntelSetStatus = "DEACTIVATING"
+	ThreatIntelSetStatusError         ThreatIntelSetStatus = "ERROR"
+	ThreatIntelSetStatusDeletePending ThreatIntelSetStatus = "DELETE_PENDING"
+	ThreatIntelSetStatusDeleted       ThreatIntelSetStatus = "DELETED"
 )
 
 // Values returns all known values for ThreatIntelSetStatus. Note that this can be
@@ -318,10 +318,10 @@ type UsageStatisticType string
 
 // Enum values for UsageStatisticType
 const (
-	UsageStatisticTypeSum_by_account     UsageStatisticType = "SUM_BY_ACCOUNT"
-	UsageStatisticTypeSum_by_data_source UsageStatisticType = "SUM_BY_DATA_SOURCE"
-	UsageStatisticTypeSum_by_resource    UsageStatisticType = "SUM_BY_RESOURCE"
-	UsageStatisticTypeTop_resources      UsageStatisticType = "TOP_RESOURCES"
+	UsageStatisticTypeSumByAccount    UsageStatisticType = "SUM_BY_ACCOUNT"
+	UsageStatisticTypeSumByDataSource UsageStatisticType = "SUM_BY_DATA_SOURCE"
+	UsageStatisticTypeSumByResource   UsageStatisticType = "SUM_BY_RESOURCE"
+	UsageStatisticTypeTopResources    UsageStatisticType = "TOP_RESOURCES"
 )
 
 // Values returns all known values for UsageStatisticType. Note that this can be

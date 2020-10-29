@@ -41,12 +41,11 @@ type AssociateProductWithPortfolioInput struct {
 
 	// The language code.
 	//
-	//     * en - English (default)
+	// * en - English (default)
 	//
-	//     * jp - Japanese
+	// * jp - Japanese
 	//
-	//     * zh
-	// - Chinese
+	// * zh - Chinese
 	AcceptLanguage *string
 
 	// The identifier of the source portfolio.

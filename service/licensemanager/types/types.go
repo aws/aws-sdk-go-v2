@@ -216,36 +216,36 @@ type ProductInformation struct {
 	// Product information filters. The following filters and logical operators are
 	// supported when the resource type is SSM_MANAGED:
 	//
-	//     * Application Name - The
-	// name of the application. Logical operator is EQUALS.
+	// * Application Name - The name
+	// of the application. Logical operator is EQUALS.
 	//
-	//     * Application
-	// Publisher - The publisher of the application. Logical operator is EQUALS.
+	// * Application Publisher - The
+	// publisher of the application. Logical operator is EQUALS.
 	//
-	//     *
-	// Application Version - The version of the application. Logical operator is
-	// EQUALS.
+	// * Application Version
+	// - The version of the application. Logical operator is EQUALS.
 	//
-	//     * Platform Name - The name of the platform. Logical operator is
-	// EQUALS.
+	// * Platform Name -
+	// The name of the platform. Logical operator is EQUALS.
 	//
-	//     * Platform Type - The platform type. Logical operator is EQUALS.
+	// * Platform Type - The
+	// platform type. Logical operator is EQUALS.
 	//
+	// * License Included - The type of
+	// license included. Logical operators are EQUALS and NOT_EQUALS. Possible values
+	// are: sql-server-enterprise | sql-server-standard | sql-server-web |
+	// windows-server-datacenter.
 	//
-	// * License Included - The type of license included. Logical operators are EQUALS
-	// and NOT_EQUALS. Possible values are: sql-server-enterprise | sql-server-standard
-	// | sql-server-web | windows-server-datacenter.
+	// The following filters and logical operators are
+	// supported when the resource type is RDS:
 	//
-	// The following filters and logical
-	// operators are supported when the resource type is RDS:
+	// * Engine Edition - The edition of the
+	// database engine. Logical operator is EQUALS. Possible values are: oracle-ee |
+	// oracle-se | oracle-se1 | oracle-se2.
 	//
-	//     * Engine Edition -
-	// The edition of the database engine. Logical operator is EQUALS. Possible values
-	// are: oracle-ee | oracle-se | oracle-se1 | oracle-se2.
-	//
-	//     * License Pack - The
-	// license pack. Logical operator is EQUALS. Possible values are: data guard |
-	// diagnostic pack sqlt | tuning pack sqlt | ols | olap.
+	// * License Pack - The license pack. Logical
+	// operator is EQUALS. Possible values are: data guard | diagnostic pack sqlt |
+	// tuning pack sqlt | ols | olap.
 	//
 	// This member is required.
 	ProductInformationFilterList []*ProductInformationFilter

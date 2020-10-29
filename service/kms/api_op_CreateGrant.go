@@ -23,14 +23,14 @@ import (
 // operation that the CMK does not support, CreateGrant fails with a
 // ValidationException.
 //
-//     * Grants for symmetric CMKs cannot allow operations
-// that are not supported for symmetric CMKs, including Sign, Verify, and
-// GetPublicKey. (There are limited exceptions to this rule for legacy operations,
-// but you should not create a grant for an operation that AWS KMS does not
-// support.)
+// * Grants for symmetric CMKs cannot allow operations that
+// are not supported for symmetric CMKs, including Sign, Verify, and GetPublicKey.
+// (There are limited exceptions to this rule for legacy operations, but you should
+// not create a grant for an operation that AWS KMS does not support.)
 //
-//     * Grants for asymmetric CMKs cannot allow operations that are not
-// supported for asymmetric CMKs, including operations that generate data keys
+// * Grants
+// for asymmetric CMKs cannot allow operations that are not supported for
+// asymmetric CMKs, including operations that generate data keys
 // (https://docs.aws.amazon.com/kms/latest/APIReference/API_GenerateDataKey) or
 // data key pairs
 // (https://docs.aws.amazon.com/kms/latest/APIReference/API_GenerateDataKeyPair),
@@ -41,12 +41,12 @@ import (
 // CMKs in custom key stores
 // (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html).
 //
-//
-// * Grants for asymmetric CMKs with a KeyUsage of ENCRYPT_DECRYPT cannot allow the
+// *
+// Grants for asymmetric CMKs with a KeyUsage of ENCRYPT_DECRYPT cannot allow the
 // Sign or Verify operations. Grants for asymmetric CMKs with a KeyUsage of
 // SIGN_VERIFY cannot allow the Encrypt or Decrypt operations.
 //
-//     * Grants for
+// * Grants for
 // asymmetric CMKs cannot include an encryption context grant constraint. An
 // encryption context is not supported on asymmetric CMKs.
 //
@@ -96,10 +96,10 @@ type CreateGrantInput struct {
 	// to. Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To specify
 	// a CMK in a different AWS account, you must use the key ARN. For example:
 	//
-	//     *
-	// Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// * Key
+	// ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
-	//     * Key ARN:
+	// * Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To

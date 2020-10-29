@@ -136,34 +136,34 @@ type MedicalTranscriptionJob struct {
 	// about why the job failed. The FailureReason field contains one of the following
 	// values:
 	//
-	//     * Unsupported media format- The media format specified in the
+	// * Unsupported media format- The media format specified in the
 	// MediaFormat field of the request isn't valid. See the description of the
 	// MediaFormat field for a list of valid values.
 	//
-	//     * The media format provided
-	// does not match the detected media format- The media format of the audio file
-	// doesn't match the format specified in the MediaFormat field in the request.
-	// Check the media format of your media file and make sure the two values match.
+	// * The media format provided does
+	// not match the detected media format- The media format of the audio file doesn't
+	// match the format specified in the MediaFormat field in the request. Check the
+	// media format of your media file and make sure the two values match.
 	//
-	//
-	// * Invalid sample rate for audio file- The sample rate specified in the
+	// * Invalid
+	// sample rate for audio file- The sample rate specified in the
 	// MediaSampleRateHertz of the request isn't valid. The sample rate must be between
 	// 8000 and 48000 Hertz.
 	//
-	//     * The sample rate provided does not match the
-	// detected sample rate- The sample rate in the audio file doesn't match the sample
-	// rate specified in the MediaSampleRateHertz field in the request. Check the
-	// sample rate of your media file and make sure that the two values match.
+	// * The sample rate provided does not match the detected
+	// sample rate- The sample rate in the audio file doesn't match the sample rate
+	// specified in the MediaSampleRateHertz field in the request. Check the sample
+	// rate of your media file and make sure that the two values match.
 	//
-	//     *
-	// Invalid file size: file size too large- The size of your audio file is larger
-	// than what Amazon Transcribe Medical can process. For more information, see
-	// Guidelines and Quotas
+	// * Invalid file
+	// size: file size too large- The size of your audio file is larger than what
+	// Amazon Transcribe Medical can process. For more information, see Guidelines and
+	// Quotas
 	// (https://docs.aws.amazon.com/transcribe/latest/dg/limits-guidelines.html#limits)
 	// in the Amazon Transcribe Medical Guide
 	//
-	//     * Invalid number of channels: number
-	// of channels too large- Your audio contains more channels than Amazon Transcribe
+	// * Invalid number of channels: number of
+	// channels too large- Your audio contains more channels than Amazon Transcribe
 	// Medical is configured to process. To request additional channels, see Amazon
 	// Transcribe Medical Endpoints and Quotas
 	// (https://docs.aws.amazon.com/general/latest/gr/transcribe-medical.html) in the
@@ -200,7 +200,7 @@ type MedicalTranscriptionJob struct {
 	// specialty enables you to generate transcriptions for the following medical
 	// fields:
 	//
-	//     * Family Medicine
+	// * Family Medicine
 	Specialty Specialty
 
 	// A timestamp that shows when the job started processing.
@@ -389,35 +389,35 @@ type TranscriptionJob struct {
 	// about why the job failed. The FailureReason field can contain one of the
 	// following values:
 	//
-	//     * Unsupported media format - The media format specified
-	// in the MediaFormat field of the request isn't valid. See the description of the
+	// * Unsupported media format - The media format specified in
+	// the MediaFormat field of the request isn't valid. See the description of the
 	// MediaFormat field for a list of valid values.
 	//
-	//     * The media format provided
-	// does not match the detected media format - The media format of the audio file
-	// doesn't match the format specified in the MediaFormat field in the request.
-	// Check the media format of your media file and make sure that the two values
-	// match.
+	// * The media format provided does
+	// not match the detected media format - The media format of the audio file doesn't
+	// match the format specified in the MediaFormat field in the request. Check the
+	// media format of your media file and make sure that the two values match.
 	//
-	//     * Invalid sample rate for audio file - The sample rate specified in
-	// the MediaSampleRateHertz of the request isn't valid. The sample rate must be
-	// between 8000 and 48000 Hertz.
+	// *
+	// Invalid sample rate for audio file - The sample rate specified in the
+	// MediaSampleRateHertz of the request isn't valid. The sample rate must be between
+	// 8000 and 48000 Hertz.
 	//
-	//     * The sample rate provided does not match the
-	// detected sample rate - The sample rate in the audio file doesn't match the
-	// sample rate specified in the MediaSampleRateHertz field in the request. Check
-	// the sample rate of your media file and make sure that the two values match.
+	// * The sample rate provided does not match the detected
+	// sample rate - The sample rate in the audio file doesn't match the sample rate
+	// specified in the MediaSampleRateHertz field in the request. Check the sample
+	// rate of your media file and make sure that the two values match.
 	//
-	//
-	// * Invalid file size: file size too large - The size of your audio file is larger
-	// than Amazon Transcribe can process. For more information, see Limits
+	// * Invalid file
+	// size: file size too large - The size of your audio file is larger than Amazon
+	// Transcribe can process. For more information, see Limits
 	// (https://docs.aws.amazon.com/transcribe/latest/dg/limits-guidelines.html#limits)
 	// in the Amazon Transcribe Developer Guide.
 	//
-	//     * Invalid number of channels:
-	// number of channels too large - Your audio contains more channels than Amazon
-	// Transcribe is configured to process. To request additional channels, see Amazon
-	// Transcribe Limits
+	// * Invalid number of channels: number
+	// of channels too large - Your audio contains more channels than Amazon Transcribe
+	// is configured to process. To request additional channels, see Amazon Transcribe
+	// Limits
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits-amazon-transcribe)
 	// in the Amazon Web Services General Reference.
 	FailureReason *string

@@ -41,11 +41,11 @@ type ListDevicePoolsInput struct {
 
 	// The device pools' type. Allowed values include:
 	//
-	//     * CURATED: A device pool
-	// that is created and managed by AWS Device Farm.
+	// * CURATED: A device pool that
+	// is created and managed by AWS Device Farm.
 	//
-	//     * PRIVATE: A device pool
-	// that is created and managed by the device pool developer.
+	// * PRIVATE: A device pool that is
+	// created and managed by the device pool developer.
 	Type types.DevicePoolType
 }
 

@@ -19,26 +19,26 @@ import (
 // the receiving service, they are Base64 encoded and compressed with the gzip
 // format. The following destinations are supported for subscription filters:
 //
+// * An
+// Amazon Kinesis stream belonging to the same account as the subscription filter,
+// for same-account delivery.
 //
-// * An Amazon Kinesis stream belonging to the same account as the subscription
-// filter, for same-account delivery.
+// * A logical destination that belongs to a different
+// account, for cross-account delivery.
 //
-//     * A logical destination that belongs to
-// a different account, for cross-account delivery.
+// * An Amazon Kinesis Firehose delivery
+// stream that belongs to the same account as the subscription filter, for
+// same-account delivery.
 //
-//     * An Amazon Kinesis
-// Firehose delivery stream that belongs to the same account as the subscription
-// filter, for same-account delivery.
+// * An AWS Lambda function that belongs to the same
+// account as the subscription filter, for same-account delivery.
 //
-//     * An AWS Lambda function that belongs to
-// the same account as the subscription filter, for same-account delivery.
-//
-// There
-// can only be one subscription filter associated with a log group. If you are
-// updating an existing filter, you must specify the correct name in filterName.
-// Otherwise, the call fails because you cannot associate a second filter with a
-// log group. To perform a PutSubscriptionFilter operation, you must also have the
-// iam:PassRole permission.
+// There can only
+// be one subscription filter associated with a log group. If you are updating an
+// existing filter, you must specify the correct name in filterName. Otherwise, the
+// call fails because you cannot associate a second filter with a log group. To
+// perform a PutSubscriptionFilter operation, you must also have the iam:PassRole
+// permission.
 func (c *Client) PutSubscriptionFilter(ctx context.Context, params *PutSubscriptionFilterInput, optFns ...func(*Options)) (*PutSubscriptionFilterOutput, error) {
 	if params == nil {
 		params = &PutSubscriptionFilterInput{}
@@ -59,19 +59,19 @@ type PutSubscriptionFilterInput struct {
 	// The ARN of the destination to deliver matching log events to. Currently, the
 	// supported destinations are:
 	//
-	//     * An Amazon Kinesis stream belonging to the
-	// same account as the subscription filter, for same-account delivery.
+	// * An Amazon Kinesis stream belonging to the same
+	// account as the subscription filter, for same-account delivery.
 	//
-	//     * A
-	// logical destination (specified using an ARN) belonging to a different account,
-	// for cross-account delivery.
+	// * A logical
+	// destination (specified using an ARN) belonging to a different account, for
+	// cross-account delivery.
 	//
-	//     * An Amazon Kinesis Firehose delivery stream
-	// belonging to the same account as the subscription filter, for same-account
-	// delivery.
+	// * An Amazon Kinesis Firehose delivery stream belonging
+	// to the same account as the subscription filter, for same-account delivery.
 	//
-	//     * An AWS Lambda function belonging to the same account as the
-	// subscription filter, for same-account delivery.
+	// * An
+	// AWS Lambda function belonging to the same account as the subscription filter,
+	// for same-account delivery.
 	//
 	// This member is required.
 	DestinationArn *string

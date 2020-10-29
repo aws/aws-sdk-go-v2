@@ -22,24 +22,23 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
 // Related operations
 //
-//     * CreateGameServerGroup
+// * CreateGameServerGroup
 //
-//     * ListGameServerGroups
+// * ListGameServerGroups
 //
+// *
+// DescribeGameServerGroup
 //
-// * DescribeGameServerGroup
+// * UpdateGameServerGroup
 //
-//     * UpdateGameServerGroup
+// * DeleteGameServerGroup
 //
-//     *
-// DeleteGameServerGroup
+// *
+// ResumeGameServerGroup
 //
-//     * ResumeGameServerGroup
+// * SuspendGameServerGroup
 //
-//     *
-// SuspendGameServerGroup
-//
-//     * DescribeGameServerInstances
+// * DescribeGameServerInstances
 func (c *Client) DescribeGameServerGroup(ctx context.Context, params *DescribeGameServerGroupInput, optFns ...func(*Options)) (*DescribeGameServerGroupOutput, error) {
 	if params == nil {
 		params = &DescribeGameServerGroupInput{}

@@ -6,10 +6,10 @@ type Capability string
 
 // Enum values for Capability
 const (
-	CapabilityCapability_iam             Capability = "CAPABILITY_IAM"
-	CapabilityCapability_named_iam       Capability = "CAPABILITY_NAMED_IAM"
-	CapabilityCapability_auto_expand     Capability = "CAPABILITY_AUTO_EXPAND"
-	CapabilityCapability_resource_policy Capability = "CAPABILITY_RESOURCE_POLICY"
+	CapabilityCapabilityIam            Capability = "CAPABILITY_IAM"
+	CapabilityCapabilityNamedIam       Capability = "CAPABILITY_NAMED_IAM"
+	CapabilityCapabilityAutoExpand     Capability = "CAPABILITY_AUTO_EXPAND"
+	CapabilityCapabilityResourcePolicy Capability = "CAPABILITY_RESOURCE_POLICY"
 )
 
 // Values returns all known values for Capability. Note that this can be expanded

@@ -16,12 +16,11 @@ import (
 // set of required field and keywords. You specify a schema when you call
 // CreateDataset. Related APIs
 //
-//     * ListSchemas
+// * ListSchemas
 //
-//     * DescribeSchema
+// * DescribeSchema
 //
-//     *
-// DeleteSchema
+// * DeleteSchema
 func (c *Client) CreateSchema(ctx context.Context, params *CreateSchemaInput, optFns ...func(*Options)) (*CreateSchemaOutput, error) {
 	if params == nil {
 		params = &CreateSchemaInput{}

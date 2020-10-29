@@ -38,14 +38,14 @@ type LookupAttributeKey string
 
 // Enum values for LookupAttributeKey
 const (
-	LookupAttributeKeyEvent_id      LookupAttributeKey = "EventId"
-	LookupAttributeKeyEvent_name    LookupAttributeKey = "EventName"
-	LookupAttributeKeyRead_only     LookupAttributeKey = "ReadOnly"
-	LookupAttributeKeyUsername      LookupAttributeKey = "Username"
-	LookupAttributeKeyResource_type LookupAttributeKey = "ResourceType"
-	LookupAttributeKeyResource_name LookupAttributeKey = "ResourceName"
-	LookupAttributeKeyEvent_source  LookupAttributeKey = "EventSource"
-	LookupAttributeKeyAccess_key_id LookupAttributeKey = "AccessKeyId"
+	LookupAttributeKeyEventId      LookupAttributeKey = "EventId"
+	LookupAttributeKeyEventName    LookupAttributeKey = "EventName"
+	LookupAttributeKeyReadOnly     LookupAttributeKey = "ReadOnly"
+	LookupAttributeKeyUsername     LookupAttributeKey = "Username"
+	LookupAttributeKeyResourceType LookupAttributeKey = "ResourceType"
+	LookupAttributeKeyResourceName LookupAttributeKey = "ResourceName"
+	LookupAttributeKeyEventSource  LookupAttributeKey = "EventSource"
+	LookupAttributeKeyAccessKeyId  LookupAttributeKey = "AccessKeyId"
 )
 
 // Values returns all known values for LookupAttributeKey. Note that this can be

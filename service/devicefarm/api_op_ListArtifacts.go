@@ -37,12 +37,11 @@ type ListArtifactsInput struct {
 
 	// The artifacts' type. Allowed values include:
 	//
-	//     * FILE
+	// * FILE
 	//
-	//     * LOG
+	// * LOG
 	//
-	//     *
-	// SCREENSHOT
+	// * SCREENSHOT
 	//
 	// This member is required.
 	Type types.ArtifactCategory

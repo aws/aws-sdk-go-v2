@@ -109,27 +109,27 @@ import (
 // information about how to use web identity federation and the
 // AssumeRoleWithWebIdentity API, see the following resources:
 //
-//     * Using Web
+// * Using Web
 // Identity Federation API Operations for Mobile Apps
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc_manual.html)
 // and Federation Through a Web-based Identity Provider
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_assumerolewithwebidentity).
 //
-//
-// * Web Identity Federation Playground
+// *
+// Web Identity Federation Playground
 // (https://aws.amazon.com/blogs/aws/the-aws-web-identity-federation-playground/).
 // Walk through the process of authenticating through Login with Amazon, Facebook,
 // or Google, getting temporary security credentials, and then using those
 // credentials to make a request to AWS.
 //
-//     * AWS SDK for iOS Developer Guide
+// * AWS SDK for iOS Developer Guide
 // (http://aws.amazon.com/sdkforios/) and AWS SDK for Android Developer Guide
 // (http://aws.amazon.com/sdkforandroid/). These toolkits contain sample apps that
 // show how to invoke the identity providers. The toolkits then show how to use the
 // information from these providers to get and use temporary security
 // credentials.
 //
-//     * Web Identity Federation with Mobile Applications
+// * Web Identity Federation with Mobile Applications
 // (http://aws.amazon.com/articles/web-identity-federation-with-mobile-applications).
 // This article discusses web identity federation and shows an example of how to
 // use web identity federation to get access to content in Amazon S3.

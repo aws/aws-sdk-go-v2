@@ -52,14 +52,13 @@ type UpdateResolverInput struct {
 
 	// The resolver type.
 	//
-	//     * UNIT: A UNIT resolver type. A UNIT resolver is the
-	// default resolver type. A UNIT resolver enables you to execute a GraphQL query
-	// against a single data source.
+	// * UNIT: A UNIT resolver type. A UNIT resolver is the default
+	// resolver type. A UNIT resolver enables you to execute a GraphQL query against a
+	// single data source.
 	//
-	//     * PIPELINE: A PIPELINE resolver type. A
-	// PIPELINE resolver enables you to execute a series of Function in a serial
-	// manner. You can use a pipeline resolver to execute a GraphQL query against
-	// multiple data sources.
+	// * PIPELINE: A PIPELINE resolver type. A PIPELINE resolver
+	// enables you to execute a series of Function in a serial manner. You can use a
+	// pipeline resolver to execute a GraphQL query against multiple data sources.
 	Kind types.ResolverKind
 
 	// The PipelineConfig.

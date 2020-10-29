@@ -19,12 +19,11 @@ import (
 // mount target is not deleted. The operation requires permissions for the
 // following actions:
 //
-//     * elasticfilesystem:ModifyMountTargetSecurityGroups
-// action on the mount target's file system.
+// * elasticfilesystem:ModifyMountTargetSecurityGroups action
+// on the mount target's file system.
 //
-//     *
-// ec2:ModifyNetworkInterfaceAttribute action on the mount target's network
-// interface.
+// * ec2:ModifyNetworkInterfaceAttribute action
+// on the mount target's network interface.
 func (c *Client) ModifyMountTargetSecurityGroups(ctx context.Context, params *ModifyMountTargetSecurityGroupsInput, optFns ...func(*Options)) (*ModifyMountTargetSecurityGroupsOutput, error) {
 	if params == nil {
 		params = &ModifyMountTargetSecurityGroupsInput{}

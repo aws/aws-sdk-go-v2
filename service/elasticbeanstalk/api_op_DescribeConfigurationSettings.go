@@ -19,7 +19,7 @@ import (
 // draft configuration of an environment that is either in the process of
 // deployment or that failed to deploy. Related Topics
 //
-//     *
+// *
 // DeleteEnvironmentConfiguration
 func (c *Client) DescribeConfigurationSettings(ctx context.Context, params *DescribeConfigurationSettingsInput, optFns ...func(*Options)) (*DescribeConfigurationSettingsOutput, error) {
 	if params == nil {

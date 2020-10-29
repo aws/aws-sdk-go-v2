@@ -25,41 +25,41 @@ import (
 // access type that you choose when you onboard to Studio. The following options
 // are available:
 //
-//     * PublicInternetOnly - Non-EFS traffic goes through a VPC
+// * PublicInternetOnly - Non-EFS traffic goes through a VPC
 // managed by Amazon SageMaker, which allows internet access. This is the default
 // value.
 //
-//     * VpcOnly - All Studio traffic is through the specified VPC and
-// subnets. Internet access is disabled by default. To allow internet access, you
-// must specify a NAT gateway. When internet access is disabled, you won't be able
-// to train or host models unless your VPC has an interface endpoint (PrivateLink)
-// or a NAT gateway and your security groups allow outbound connections.
+// * VpcOnly - All Studio traffic is through the specified VPC and subnets.
+// Internet access is disabled by default. To allow internet access, you must
+// specify a NAT gateway. When internet access is disabled, you won't be able to
+// train or host models unless your VPC has an interface endpoint (PrivateLink) or
+// a NAT gateway and your security groups allow outbound connections.
 //
 // VpcOnly
 // network access type When you choose VpcOnly, you must specify the following:
 //
+// *
+// Security group inbound and outbound rules to allow NFS traffic over TCP on port
+// 2049 between the domain and the EFS volume
 //
-// * Security group inbound and outbound rules to allow NFS traffic over TCP on
-// port 2049 between the domain and the EFS volume
-//
-//     * Security group inbound
-// and outbound rules to allow traffic between the JupyterServer app and the
+// * Security group inbound and
+// outbound rules to allow traffic between the JupyterServer app and the
 // KernelGateway apps
 //
-//     * Interface endpoints to access the SageMaker API and
+// * Interface endpoints to access the SageMaker API and
 // SageMaker runtime
 //
 // For more information, see:
 //
-//     * Security groups for your
-// VPC (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html)
+// * Security groups for your VPC
+// (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html)
 //
-//
-// * VPC with public and private subnets (NAT)
+// *
+// VPC with public and private subnets (NAT)
 // (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Scenario2.html)
 //
-//     *
-// Connect to SageMaker through a VPC interface endpoint
+// * Connect
+// to SageMaker through a VPC interface endpoint
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/interface-vpc-endpoint.html)
 func (c *Client) CreateDomain(ctx context.Context, params *CreateDomainInput, optFns ...func(*Options)) (*CreateDomainOutput, error) {
 	if params == nil {
@@ -107,11 +107,11 @@ type CreateDomainInput struct {
 	// Specifies the VPC used for non-EFS traffic. The default value is
 	// PublicInternetOnly.
 	//
-	//     * PublicInternetOnly - Non-EFS traffic is through a VPC
+	// * PublicInternetOnly - Non-EFS traffic is through a VPC
 	// managed by Amazon SageMaker, which allows direct internet access
 	//
-	//     * VpcOnly
-	// - All Studio traffic is through the specified VPC and subnets
+	// * VpcOnly -
+	// All Studio traffic is through the specified VPC and subnets
 	AppNetworkAccessType types.AppNetworkAccessType
 
 	// The AWS Key Management Service (KMS) encryption key ID. Encryption with a

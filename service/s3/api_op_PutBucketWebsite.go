@@ -23,16 +23,16 @@ import (
 // bucket policy that grants them the S3:PutBucketWebsite permission. To redirect
 // all website requests sent to the bucket's website endpoint, you add a website
 // configuration with the following elements. Because all requests are sent to
-// another website, you don't need to provide index document name for the bucket.
-//
+// another website, you don't need to provide index document name for the
+// bucket.
 //
 // * WebsiteConfiguration
 //
-//     * RedirectAllRequestsTo
+// * RedirectAllRequestsTo
 //
-//     * HostName
+// * HostName
 //
-//     *
+// *
 // Protocol
 //
 // If you want granular control over redirects, you can use the following
@@ -41,46 +41,45 @@ import (
 // configuration must provide an index document for the bucket, because some
 // requests might not be redirected.
 //
-//     * WebsiteConfiguration
+// * WebsiteConfiguration
 //
-//     *
-// IndexDocument
+// * IndexDocument
 //
-//     * Suffix
+// *
+// Suffix
 //
-//     * ErrorDocument
+// * ErrorDocument
 //
-//     * Key
+// * Key
 //
-//     *
-// RoutingRules
+// * RoutingRules
 //
-//     * RoutingRule
+// * RoutingRule
 //
-//     * Condition
+// * Condition
 //
-//     *
+// *
 // HttpErrorCodeReturnedEquals
 //
-//     * KeyPrefixEquals
+// * KeyPrefixEquals
 //
-//     * Redirect
+// * Redirect
 //
-//     *
-// Protocol
+// * Protocol
 //
-//     * HostName
+// *
+// HostName
 //
-//     * ReplaceKeyPrefixWith
+// * ReplaceKeyPrefixWith
 //
-//     * ReplaceKeyWith
-//
+// * ReplaceKeyWith
 //
 // * HttpRedirectCode
 //
-// Amazon S3 has a limitation of 50 routing rules per website
-// configuration. If you require more than 50 routing rules, you can use object
-// redirect. For more information, see Configuring an Object Redirect
+// Amazon
+// S3 has a limitation of 50 routing rules per website configuration. If you
+// require more than 50 routing rules, you can use object redirect. For more
+// information, see Configuring an Object Redirect
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html) in
 // the Amazon Simple Storage Service Developer Guide.
 func (c *Client) PutBucketWebsite(ctx context.Context, params *PutBucketWebsiteInput, optFns ...func(*Options)) (*PutBucketWebsiteOutput, error) {

@@ -11,19 +11,19 @@
 // and Amazon Redshift. Use the following links to get started on the Amazon
 // AppFlow API:
 //
-//     * Actions
+// * Actions
 // (https://docs.aws.amazon.com/appflow/1.0/APIReference/API_Operations.html): An
 // alphabetical list of all Amazon AppFlow API operations.
 //
-//     * Data types
+// * Data types
 // (https://docs.aws.amazon.com/appflow/1.0/APIReference/API_Types.html): An
 // alphabetical list of all Amazon AppFlow data types.
 //
-//     * Common parameters
+// * Common parameters
 // (https://docs.aws.amazon.com/appflow/1.0/APIReference/CommonParameters.html):
 // Parameters that all Query operations can use.
 //
-//     * Common errors
+// * Common errors
 // (https://docs.aws.amazon.com/appflow/1.0/APIReference/CommonErrors.html): Client
 // and server errors that all operations can return.
 //

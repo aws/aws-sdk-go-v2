@@ -25,18 +25,18 @@ import (
 // in mind when you carry out an API command that immediately follows a previous
 // API command. To manage eventual consistency, you can do the following:
 //
-//     *
+// *
 // Confirm the state of the resource before you run a command to modify it. Run the
 // DescribeTasks command using an exponential backoff algorithm to ensure that you
 // allow enough time for the previous command to propagate through the system. To
 // do this, run the DescribeTasks command repeatedly, starting with a couple of
-// seconds of wait time and increasing gradually up to five minutes of wait time.
+// seconds of wait time and increasing gradually up to five minutes of wait
+// time.
 //
-//
-// * Add wait time between subsequent commands, even if the DescribeTasks command
-// returns an accurate response. Apply an exponential backoff algorithm starting
-// with a couple of seconds of wait time, and increase gradually up to about five
-// minutes of wait time.
+// * Add wait time between subsequent commands, even if the DescribeTasks
+// command returns an accurate response. Apply an exponential backoff algorithm
+// starting with a couple of seconds of wait time, and increase gradually up to
+// about five minutes of wait time.
 func (c *Client) RunTask(ctx context.Context, params *RunTaskInput, optFns ...func(*Options)) (*RunTaskOutput, error) {
 	if params == nil {
 		params = &RunTaskInput{}
@@ -163,31 +163,30 @@ type RunTaskInput struct {
 	// them. Each tag consists of a key and an optional value, both of which you
 	// define. The following basic restrictions apply to tags:
 	//
-	//     * Maximum number of
+	// * Maximum number of
 	// tags per resource - 50
 	//
-	//     * For each resource, each tag key must be unique,
-	// and each tag key can have only one value.
+	// * For each resource, each tag key must be unique, and
+	// each tag key can have only one value.
 	//
-	//     * Maximum key length - 128
-	// Unicode characters in UTF-8
+	// * Maximum key length - 128 Unicode
+	// characters in UTF-8
 	//
-	//     * Maximum value length - 256 Unicode characters
-	// in UTF-8
+	// * Maximum value length - 256 Unicode characters in UTF-8
 	//
-	//     * If your tagging schema is used across multiple services and
-	// resources, remember that other services may have restrictions on allowed
-	// characters. Generally allowed characters are: letters, numbers, and spaces
-	// representable in UTF-8, and the following characters: + - = . _ : / @.
+	// *
+	// If your tagging schema is used across multiple services and resources, remember
+	// that other services may have restrictions on allowed characters. Generally
+	// allowed characters are: letters, numbers, and spaces representable in UTF-8, and
+	// the following characters: + - = . _ : / @.
 	//
-	//     *
-	// Tag keys and values are case-sensitive.
+	// * Tag keys and values are
+	// case-sensitive.
 	//
-	//     * Do not use aws:, AWS:, or any
-	// upper or lowercase combination of such as a prefix for either keys or values as
-	// it is reserved for AWS use. You cannot edit or delete tag keys or values with
-	// this prefix. Tags with this prefix do not count against your tags per resource
-	// limit.
+	// * Do not use aws:, AWS:, or any upper or lowercase combination
+	// of such as a prefix for either keys or values as it is reserved for AWS use. You
+	// cannot edit or delete tag keys or values with this prefix. Tags with this prefix
+	// do not count against your tags per resource limit.
 	Tags []*types.Tag
 }
 

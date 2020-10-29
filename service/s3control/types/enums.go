@@ -104,8 +104,8 @@ type JobManifestFormat string
 
 // Enum values for JobManifestFormat
 const (
-	JobManifestFormatS3batchoperations_csv_20180820 JobManifestFormat = "S3BatchOperations_CSV_20180820"
-	JobManifestFormatS3inventoryreport_csv_20161130 JobManifestFormat = "S3InventoryReport_CSV_20161130"
+	JobManifestFormatS3batchoperationsCsv20180820 JobManifestFormat = "S3BatchOperations_CSV_20180820"
+	JobManifestFormatS3inventoryreportCsv20161130 JobManifestFormat = "S3InventoryReport_CSV_20161130"
 )
 
 // Values returns all known values for JobManifestFormat. Note that this can be
@@ -122,7 +122,7 @@ type JobReportFormat string
 
 // Enum values for JobReportFormat
 const (
-	JobReportFormatReport_csv_20180820 JobReportFormat = "Report_CSV_20180820"
+	JobReportFormatReportCsv20180820 JobReportFormat = "Report_CSV_20180820"
 )
 
 // Values returns all known values for JobReportFormat. Note that this can be
@@ -260,13 +260,13 @@ type S3CannedAccessControlList string
 
 // Enum values for S3CannedAccessControlList
 const (
-	S3CannedAccessControlListPrivate                   S3CannedAccessControlList = "private"
-	S3CannedAccessControlListPublic_read               S3CannedAccessControlList = "public-read"
-	S3CannedAccessControlListPublic_read_write         S3CannedAccessControlList = "public-read-write"
-	S3CannedAccessControlListAws_exec_read             S3CannedAccessControlList = "aws-exec-read"
-	S3CannedAccessControlListAuthenticated_read        S3CannedAccessControlList = "authenticated-read"
-	S3CannedAccessControlListBucket_owner_read         S3CannedAccessControlList = "bucket-owner-read"
-	S3CannedAccessControlListBucket_owner_full_control S3CannedAccessControlList = "bucket-owner-full-control"
+	S3CannedAccessControlListPrivate                S3CannedAccessControlList = "private"
+	S3CannedAccessControlListPublicRead             S3CannedAccessControlList = "public-read"
+	S3CannedAccessControlListPublicReadWrite        S3CannedAccessControlList = "public-read-write"
+	S3CannedAccessControlListAwsExecRead            S3CannedAccessControlList = "aws-exec-read"
+	S3CannedAccessControlListAuthenticatedRead      S3CannedAccessControlList = "authenticated-read"
+	S3CannedAccessControlListBucketOwnerRead        S3CannedAccessControlList = "bucket-owner-read"
+	S3CannedAccessControlListBucketOwnerFullControl S3CannedAccessControlList = "bucket-owner-full-control"
 )
 
 // Values returns all known values for S3CannedAccessControlList. Note that this
@@ -306,9 +306,9 @@ type S3GranteeTypeIdentifier string
 
 // Enum values for S3GranteeTypeIdentifier
 const (
-	S3GranteeTypeIdentifierCanonical     S3GranteeTypeIdentifier = "id"
-	S3GranteeTypeIdentifierEmail_address S3GranteeTypeIdentifier = "emailAddress"
-	S3GranteeTypeIdentifierGroup         S3GranteeTypeIdentifier = "uri"
+	S3GranteeTypeIdentifierCanonical    S3GranteeTypeIdentifier = "id"
+	S3GranteeTypeIdentifierEmailAddress S3GranteeTypeIdentifier = "emailAddress"
+	S3GranteeTypeIdentifierGroup        S3GranteeTypeIdentifier = "uri"
 )
 
 // Values returns all known values for S3GranteeTypeIdentifier. Note that this can
@@ -398,11 +398,11 @@ type S3Permission string
 
 // Enum values for S3Permission
 const (
-	S3PermissionFull_control S3Permission = "FULL_CONTROL"
-	S3PermissionRead         S3Permission = "READ"
-	S3PermissionWrite        S3Permission = "WRITE"
-	S3PermissionRead_acp     S3Permission = "READ_ACP"
-	S3PermissionWrite_acp    S3Permission = "WRITE_ACP"
+	S3PermissionFullControl S3Permission = "FULL_CONTROL"
+	S3PermissionRead        S3Permission = "READ"
+	S3PermissionWrite       S3Permission = "WRITE"
+	S3PermissionReadAcp     S3Permission = "READ_ACP"
+	S3PermissionWriteAcp    S3Permission = "WRITE_ACP"
 )
 
 // Values returns all known values for S3Permission. Note that this can be expanded
@@ -440,12 +440,12 @@ type S3StorageClass string
 
 // Enum values for S3StorageClass
 const (
-	S3StorageClassStandard            S3StorageClass = "STANDARD"
-	S3StorageClassStandard_ia         S3StorageClass = "STANDARD_IA"
-	S3StorageClassOnezone_ia          S3StorageClass = "ONEZONE_IA"
-	S3StorageClassGlacier             S3StorageClass = "GLACIER"
-	S3StorageClassIntelligent_tiering S3StorageClass = "INTELLIGENT_TIERING"
-	S3StorageClassDeep_archive        S3StorageClass = "DEEP_ARCHIVE"
+	S3StorageClassStandard           S3StorageClass = "STANDARD"
+	S3StorageClassStandardIa         S3StorageClass = "STANDARD_IA"
+	S3StorageClassOnezoneIa          S3StorageClass = "ONEZONE_IA"
+	S3StorageClassGlacier            S3StorageClass = "GLACIER"
+	S3StorageClassIntelligentTiering S3StorageClass = "INTELLIGENT_TIERING"
+	S3StorageClassDeepArchive        S3StorageClass = "DEEP_ARCHIVE"
 )
 
 // Values returns all known values for S3StorageClass. Note that this can be
@@ -466,11 +466,11 @@ type TransitionStorageClass string
 
 // Enum values for TransitionStorageClass
 const (
-	TransitionStorageClassGlacier             TransitionStorageClass = "GLACIER"
-	TransitionStorageClassStandard_ia         TransitionStorageClass = "STANDARD_IA"
-	TransitionStorageClassOnezone_ia          TransitionStorageClass = "ONEZONE_IA"
-	TransitionStorageClassIntelligent_tiering TransitionStorageClass = "INTELLIGENT_TIERING"
-	TransitionStorageClassDeep_archive        TransitionStorageClass = "DEEP_ARCHIVE"
+	TransitionStorageClassGlacier            TransitionStorageClass = "GLACIER"
+	TransitionStorageClassStandardIa         TransitionStorageClass = "STANDARD_IA"
+	TransitionStorageClassOnezoneIa          TransitionStorageClass = "ONEZONE_IA"
+	TransitionStorageClassIntelligentTiering TransitionStorageClass = "INTELLIGENT_TIERING"
+	TransitionStorageClassDeepArchive        TransitionStorageClass = "DEEP_ARCHIVE"
 )
 
 // Values returns all known values for TransitionStorageClass. Note that this can

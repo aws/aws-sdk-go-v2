@@ -60,8 +60,8 @@ type KeyType string
 
 // Enum values for KeyType
 const (
-	KeyTypeSpeke      KeyType = "speke"
-	KeyTypeStatic_key KeyType = "static-key"
+	KeyTypeSpeke     KeyType = "speke"
+	KeyTypeStaticKey KeyType = "static-key"
 )
 
 // Values returns all known values for KeyType. Note that this can be expanded in
@@ -94,11 +94,11 @@ type Protocol string
 
 // Enum values for Protocol
 const (
-	ProtocolZixi_push Protocol = "zixi-push"
-	ProtocolRtp_fec   Protocol = "rtp-fec"
-	ProtocolRtp       Protocol = "rtp"
-	ProtocolZixi_pull Protocol = "zixi-pull"
-	ProtocolRist      Protocol = "rist"
+	ProtocolZixiPush Protocol = "zixi-push"
+	ProtocolRtpFec   Protocol = "rtp-fec"
+	ProtocolRtp      Protocol = "rtp"
+	ProtocolZixiPull Protocol = "zixi-pull"
+	ProtocolRist     Protocol = "rist"
 )
 
 // Values returns all known values for Protocol. Note that this can be expanded in
@@ -140,7 +140,7 @@ type ResourceType string
 
 // Enum values for ResourceType
 const (
-	ResourceTypeMbps_outbound_bandwidth ResourceType = "Mbps_Outbound_Bandwidth"
+	ResourceTypeMbpsOutboundBandwidth ResourceType = "Mbps_Outbound_Bandwidth"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded

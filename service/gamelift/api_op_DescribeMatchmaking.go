@@ -28,16 +28,16 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-notification.html)
 // Related operations
 //
-//     * StartMatchmaking
+// * StartMatchmaking
 //
-//     * DescribeMatchmaking
+// * DescribeMatchmaking
 //
-//     *
+// *
 // StopMatchmaking
 //
-//     * AcceptMatch
+// * AcceptMatch
 //
-//     * StartMatchBackfill
+// * StartMatchBackfill
 func (c *Client) DescribeMatchmaking(ctx context.Context, params *DescribeMatchmakingInput, optFns ...func(*Options)) (*DescribeMatchmakingOutput, error) {
 	if params == nil {
 		params = &DescribeMatchmakingInput{}

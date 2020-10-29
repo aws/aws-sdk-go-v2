@@ -40,9 +40,9 @@ type AlarmState string
 
 // Enum values for AlarmState
 const (
-	AlarmStateOk                AlarmState = "OK"
-	AlarmStateAlarm             AlarmState = "ALARM"
-	AlarmStateInsufficient_data AlarmState = "INSUFFICIENT_DATA"
+	AlarmStateOk               AlarmState = "OK"
+	AlarmStateAlarm            AlarmState = "ALARM"
+	AlarmStateInsufficientData AlarmState = "INSUFFICIENT_DATA"
 )
 
 // Values returns all known values for AlarmState. Note that this can be expanded
@@ -60,10 +60,10 @@ type AutoSnapshotStatus string
 
 // Enum values for AutoSnapshotStatus
 const (
-	AutoSnapshotStatusSuccess     AutoSnapshotStatus = "Success"
-	AutoSnapshotStatusFailed      AutoSnapshotStatus = "Failed"
-	AutoSnapshotStatusIn_progress AutoSnapshotStatus = "InProgress"
-	AutoSnapshotStatusNot_found   AutoSnapshotStatus = "NotFound"
+	AutoSnapshotStatusSuccess    AutoSnapshotStatus = "Success"
+	AutoSnapshotStatusFailed     AutoSnapshotStatus = "Failed"
+	AutoSnapshotStatusInProgress AutoSnapshotStatus = "InProgress"
+	AutoSnapshotStatusNotFound   AutoSnapshotStatus = "NotFound"
 )
 
 // Values returns all known values for AutoSnapshotStatus. Note that this can be
@@ -475,14 +475,14 @@ type InstanceMetricName string
 
 // Enum values for InstanceMetricName
 const (
-	InstanceMetricNameCpuutilization             InstanceMetricName = "CPUUtilization"
-	InstanceMetricNameNetworkin                  InstanceMetricName = "NetworkIn"
-	InstanceMetricNameNetworkout                 InstanceMetricName = "NetworkOut"
-	InstanceMetricNameStatuscheckfailed          InstanceMetricName = "StatusCheckFailed"
-	InstanceMetricNameStatuscheckfailed_instance InstanceMetricName = "StatusCheckFailed_Instance"
-	InstanceMetricNameStatuscheckfailed_system   InstanceMetricName = "StatusCheckFailed_System"
-	InstanceMetricNameBurstcapacitytime          InstanceMetricName = "BurstCapacityTime"
-	InstanceMetricNameBurstcapacitypercentage    InstanceMetricName = "BurstCapacityPercentage"
+	InstanceMetricNameCpuutilization            InstanceMetricName = "CPUUtilization"
+	InstanceMetricNameNetworkin                 InstanceMetricName = "NetworkIn"
+	InstanceMetricNameNetworkout                InstanceMetricName = "NetworkOut"
+	InstanceMetricNameStatuscheckfailed         InstanceMetricName = "StatusCheckFailed"
+	InstanceMetricNameStatuscheckfailedInstance InstanceMetricName = "StatusCheckFailed_Instance"
+	InstanceMetricNameStatuscheckfailedSystem   InstanceMetricName = "StatusCheckFailed_System"
+	InstanceMetricNameBurstcapacitytime         InstanceMetricName = "BurstCapacityTime"
+	InstanceMetricNameBurstcapacitypercentage   InstanceMetricName = "BurstCapacityPercentage"
 )
 
 // Values returns all known values for InstanceMetricName. Note that this can be
@@ -543,9 +543,9 @@ type LoadBalancerAttributeName string
 
 // Enum values for LoadBalancerAttributeName
 const (
-	LoadBalancerAttributeNameHealthcheckpath                            LoadBalancerAttributeName = "HealthCheckPath"
-	LoadBalancerAttributeNameSessionstickinessenabled                   LoadBalancerAttributeName = "SessionStickinessEnabled"
-	LoadBalancerAttributeNameSessionstickiness_lb_cookiedurationseconds LoadBalancerAttributeName = "SessionStickiness_LB_CookieDurationSeconds"
+	LoadBalancerAttributeNameHealthcheckpath                          LoadBalancerAttributeName = "HealthCheckPath"
+	LoadBalancerAttributeNameSessionstickinessenabled                 LoadBalancerAttributeName = "SessionStickinessEnabled"
+	LoadBalancerAttributeNameSessionstickinessLbCookiedurationseconds LoadBalancerAttributeName = "SessionStickiness_LB_CookieDurationSeconds"
 )
 
 // Values returns all known values for LoadBalancerAttributeName. Note that this
@@ -566,12 +566,12 @@ const (
 	LoadBalancerMetricNameClienttlsnegotiationerrorcount LoadBalancerMetricName = "ClientTLSNegotiationErrorCount"
 	LoadBalancerMetricNameHealthyhostcount               LoadBalancerMetricName = "HealthyHostCount"
 	LoadBalancerMetricNameUnhealthyhostcount             LoadBalancerMetricName = "UnhealthyHostCount"
-	LoadBalancerMetricNameHttpcode_lb_4xx_count          LoadBalancerMetricName = "HTTPCode_LB_4XX_Count"
-	LoadBalancerMetricNameHttpcode_lb_5xx_count          LoadBalancerMetricName = "HTTPCode_LB_5XX_Count"
-	LoadBalancerMetricNameHttpcode_instance_2xx_count    LoadBalancerMetricName = "HTTPCode_Instance_2XX_Count"
-	LoadBalancerMetricNameHttpcode_instance_3xx_count    LoadBalancerMetricName = "HTTPCode_Instance_3XX_Count"
-	LoadBalancerMetricNameHttpcode_instance_4xx_count    LoadBalancerMetricName = "HTTPCode_Instance_4XX_Count"
-	LoadBalancerMetricNameHttpcode_instance_5xx_count    LoadBalancerMetricName = "HTTPCode_Instance_5XX_Count"
+	LoadBalancerMetricNameHttpcodeLb4xxCount             LoadBalancerMetricName = "HTTPCode_LB_4XX_Count"
+	LoadBalancerMetricNameHttpcodeLb5xxCount             LoadBalancerMetricName = "HTTPCode_LB_5XX_Count"
+	LoadBalancerMetricNameHttpcodeInstance2xxCount       LoadBalancerMetricName = "HTTPCode_Instance_2XX_Count"
+	LoadBalancerMetricNameHttpcodeInstance3xxCount       LoadBalancerMetricName = "HTTPCode_Instance_3XX_Count"
+	LoadBalancerMetricNameHttpcodeInstance4xxCount       LoadBalancerMetricName = "HTTPCode_Instance_4XX_Count"
+	LoadBalancerMetricNameHttpcodeInstance5xxCount       LoadBalancerMetricName = "HTTPCode_Instance_5XX_Count"
 	LoadBalancerMetricNameInstanceresponsetime           LoadBalancerMetricName = "InstanceResponseTime"
 	LoadBalancerMetricNameRejectedconnectioncount        LoadBalancerMetricName = "RejectedConnectionCount"
 	LoadBalancerMetricNameRequestcount                   LoadBalancerMetricName = "RequestCount"
@@ -601,8 +601,8 @@ type LoadBalancerProtocol string
 
 // Enum values for LoadBalancerProtocol
 const (
-	LoadBalancerProtocolHttp_https LoadBalancerProtocol = "HTTP_HTTPS"
-	LoadBalancerProtocolHttp       LoadBalancerProtocol = "HTTP"
+	LoadBalancerProtocolHttpHttps LoadBalancerProtocol = "HTTP_HTTPS"
+	LoadBalancerProtocolHttp      LoadBalancerProtocol = "HTTP"
 )
 
 // Values returns all known values for LoadBalancerProtocol. Note that this can be
@@ -782,17 +782,17 @@ const (
 	MetricNameNetworkin                      MetricName = "NetworkIn"
 	MetricNameNetworkout                     MetricName = "NetworkOut"
 	MetricNameStatuscheckfailed              MetricName = "StatusCheckFailed"
-	MetricNameStatuscheckfailed_instance     MetricName = "StatusCheckFailed_Instance"
-	MetricNameStatuscheckfailed_system       MetricName = "StatusCheckFailed_System"
+	MetricNameStatuscheckfailedInstance      MetricName = "StatusCheckFailed_Instance"
+	MetricNameStatuscheckfailedSystem        MetricName = "StatusCheckFailed_System"
 	MetricNameClienttlsnegotiationerrorcount MetricName = "ClientTLSNegotiationErrorCount"
 	MetricNameHealthyhostcount               MetricName = "HealthyHostCount"
 	MetricNameUnhealthyhostcount             MetricName = "UnhealthyHostCount"
-	MetricNameHttpcode_lb_4xx_count          MetricName = "HTTPCode_LB_4XX_Count"
-	MetricNameHttpcode_lb_5xx_count          MetricName = "HTTPCode_LB_5XX_Count"
-	MetricNameHttpcode_instance_2xx_count    MetricName = "HTTPCode_Instance_2XX_Count"
-	MetricNameHttpcode_instance_3xx_count    MetricName = "HTTPCode_Instance_3XX_Count"
-	MetricNameHttpcode_instance_4xx_count    MetricName = "HTTPCode_Instance_4XX_Count"
-	MetricNameHttpcode_instance_5xx_count    MetricName = "HTTPCode_Instance_5XX_Count"
+	MetricNameHttpcodeLb4xxCount             MetricName = "HTTPCode_LB_4XX_Count"
+	MetricNameHttpcodeLb5xxCount             MetricName = "HTTPCode_LB_5XX_Count"
+	MetricNameHttpcodeInstance2xxCount       MetricName = "HTTPCode_Instance_2XX_Count"
+	MetricNameHttpcodeInstance3xxCount       MetricName = "HTTPCode_Instance_3XX_Count"
+	MetricNameHttpcodeInstance4xxCount       MetricName = "HTTPCode_Instance_4XX_Count"
+	MetricNameHttpcodeInstance5xxCount       MetricName = "HTTPCode_Instance_5XX_Count"
 	MetricNameInstanceresponsetime           MetricName = "InstanceResponseTime"
 	MetricNameRejectedconnectioncount        MetricName = "RejectedConnectionCount"
 	MetricNameRequestcount                   MetricName = "RequestCount"
@@ -1218,20 +1218,20 @@ type RegionName string
 
 // Enum values for RegionName
 const (
-	RegionNameUs_east_1      RegionName = "us-east-1"
-	RegionNameUs_east_2      RegionName = "us-east-2"
-	RegionNameUs_west_1      RegionName = "us-west-1"
-	RegionNameUs_west_2      RegionName = "us-west-2"
-	RegionNameEu_west_1      RegionName = "eu-west-1"
-	RegionNameEu_west_2      RegionName = "eu-west-2"
-	RegionNameEu_west_3      RegionName = "eu-west-3"
-	RegionNameEu_central_1   RegionName = "eu-central-1"
-	RegionNameCa_central_1   RegionName = "ca-central-1"
-	RegionNameAp_south_1     RegionName = "ap-south-1"
-	RegionNameAp_southeast_1 RegionName = "ap-southeast-1"
-	RegionNameAp_southeast_2 RegionName = "ap-southeast-2"
-	RegionNameAp_northeast_1 RegionName = "ap-northeast-1"
-	RegionNameAp_northeast_2 RegionName = "ap-northeast-2"
+	RegionNameUsEast1      RegionName = "us-east-1"
+	RegionNameUsEast2      RegionName = "us-east-2"
+	RegionNameUsWest1      RegionName = "us-west-1"
+	RegionNameUsWest2      RegionName = "us-west-2"
+	RegionNameEuWest1      RegionName = "eu-west-1"
+	RegionNameEuWest2      RegionName = "eu-west-2"
+	RegionNameEuWest3      RegionName = "eu-west-3"
+	RegionNameEuCentral1   RegionName = "eu-central-1"
+	RegionNameCaCentral1   RegionName = "ca-central-1"
+	RegionNameApSouth1     RegionName = "ap-south-1"
+	RegionNameApSoutheast1 RegionName = "ap-southeast-1"
+	RegionNameApSoutheast2 RegionName = "ap-southeast-2"
+	RegionNameApNortheast1 RegionName = "ap-northeast-1"
+	RegionNameApNortheast2 RegionName = "ap-northeast-2"
 )
 
 // Values returns all known values for RegionName. Note that this can be expanded

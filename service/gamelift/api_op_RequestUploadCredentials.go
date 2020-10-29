@@ -20,16 +20,16 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-cli-uploading.html#gamelift-build-cli-uploading-create-build)
 // Related operations
 //
-//     * CreateBuild
+// * CreateBuild
 //
-//     * ListBuilds
+// * ListBuilds
 //
-//     * DescribeBuild
+// * DescribeBuild
 //
+// *
+// UpdateBuild
 //
-// * UpdateBuild
-//
-//     * DeleteBuild
+// * DeleteBuild
 func (c *Client) RequestUploadCredentials(ctx context.Context, params *RequestUploadCredentialsInput, optFns ...func(*Options)) (*RequestUploadCredentialsOutput, error) {
 	if params == nil {
 		params = &RequestUploadCredentialsInput{}

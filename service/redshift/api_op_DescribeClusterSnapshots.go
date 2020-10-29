@@ -47,19 +47,19 @@ type DescribeClusterSnapshotsInput struct {
 	// cluster, that is, a cluster that has not been deleted. Values for this parameter
 	// work as follows:
 	//
-	//     * If ClusterExists is set to true, ClusterIdentifier is
+	// * If ClusterExists is set to true, ClusterIdentifier is
 	// required.
 	//
-	//     * If ClusterExists is set to false and ClusterIdentifier isn't
+	// * If ClusterExists is set to false and ClusterIdentifier isn't
 	// specified, all snapshots associated with deleted clusters (orphaned snapshots)
 	// are returned.
 	//
-	//     * If ClusterExists is set to false and ClusterIdentifier is
+	// * If ClusterExists is set to false and ClusterIdentifier is
 	// specified for a deleted cluster, snapshots associated with that cluster are
 	// returned.
 	//
-	//     * If ClusterExists is set to false and ClusterIdentifier is
-	// specified for an existing cluster, no snapshots are returned.
+	// * If ClusterExists is set to false and ClusterIdentifier is specified
+	// for an existing cluster, no snapshots are returned.
 	ClusterExists *bool
 
 	// The identifier of the cluster which generated the requested snapshots.

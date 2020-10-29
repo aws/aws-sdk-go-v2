@@ -18,10 +18,10 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html). The
 // following operations are related to PutBucketRequestPayment:
 //
-//     * CreateBucket
+// * CreateBucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
 //
-//     *
+// *
 // GetBucketRequestPayment
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketRequestPayment.html)
 func (c *Client) PutBucketRequestPayment(ctx context.Context, params *PutBucketRequestPaymentInput, optFns ...func(*Options)) (*PutBucketRequestPaymentOutput, error) {

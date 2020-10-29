@@ -62,10 +62,10 @@ type ComplianceType string
 
 // Enum values for ComplianceType
 const (
-	ComplianceTypeCompliant         ComplianceType = "COMPLIANT"
-	ComplianceTypeNon_compliant     ComplianceType = "NON_COMPLIANT"
-	ComplianceTypeNot_applicable    ComplianceType = "NOT_APPLICABLE"
-	ComplianceTypeInsufficient_data ComplianceType = "INSUFFICIENT_DATA"
+	ComplianceTypeCompliant        ComplianceType = "COMPLIANT"
+	ComplianceTypeNonCompliant     ComplianceType = "NON_COMPLIANT"
+	ComplianceTypeNotApplicable    ComplianceType = "NOT_APPLICABLE"
+	ComplianceTypeInsufficientData ComplianceType = "INSUFFICIENT_DATA"
 )
 
 // Values returns all known values for ComplianceType. Note that this can be
@@ -84,8 +84,8 @@ type ConfigRuleComplianceSummaryGroupKey string
 
 // Enum values for ConfigRuleComplianceSummaryGroupKey
 const (
-	ConfigRuleComplianceSummaryGroupKeyAccount_id ConfigRuleComplianceSummaryGroupKey = "ACCOUNT_ID"
-	ConfigRuleComplianceSummaryGroupKeyAws_region ConfigRuleComplianceSummaryGroupKey = "AWS_REGION"
+	ConfigRuleComplianceSummaryGroupKeyAccountId ConfigRuleComplianceSummaryGroupKey = "ACCOUNT_ID"
+	ConfigRuleComplianceSummaryGroupKeyAwsRegion ConfigRuleComplianceSummaryGroupKey = "AWS_REGION"
 )
 
 // Values returns all known values for ConfigRuleComplianceSummaryGroupKey. Note
@@ -103,10 +103,10 @@ type ConfigRuleState string
 
 // Enum values for ConfigRuleState
 const (
-	ConfigRuleStateActive           ConfigRuleState = "ACTIVE"
-	ConfigRuleStateDeleting         ConfigRuleState = "DELETING"
-	ConfigRuleStateDeleting_results ConfigRuleState = "DELETING_RESULTS"
-	ConfigRuleStateEvaluating       ConfigRuleState = "EVALUATING"
+	ConfigRuleStateActive          ConfigRuleState = "ACTIVE"
+	ConfigRuleStateDeleting        ConfigRuleState = "DELETING"
+	ConfigRuleStateDeletingResults ConfigRuleState = "DELETING_RESULTS"
+	ConfigRuleStateEvaluating      ConfigRuleState = "EVALUATING"
 )
 
 // Values returns all known values for ConfigRuleState. Note that this can be
@@ -149,8 +149,8 @@ type ConformancePackComplianceType string
 
 // Enum values for ConformancePackComplianceType
 const (
-	ConformancePackComplianceTypeCompliant     ConformancePackComplianceType = "COMPLIANT"
-	ConformancePackComplianceTypeNon_compliant ConformancePackComplianceType = "NON_COMPLIANT"
+	ConformancePackComplianceTypeCompliant    ConformancePackComplianceType = "COMPLIANT"
+	ConformancePackComplianceTypeNonCompliant ConformancePackComplianceType = "NON_COMPLIANT"
 )
 
 // Values returns all known values for ConformancePackComplianceType. Note that
@@ -168,11 +168,11 @@ type ConformancePackState string
 
 // Enum values for ConformancePackState
 const (
-	ConformancePackStateCreate_in_progress ConformancePackState = "CREATE_IN_PROGRESS"
-	ConformancePackStateCreate_complete    ConformancePackState = "CREATE_COMPLETE"
-	ConformancePackStateCreate_failed      ConformancePackState = "CREATE_FAILED"
-	ConformancePackStateDelete_in_progress ConformancePackState = "DELETE_IN_PROGRESS"
-	ConformancePackStateDelete_failed      ConformancePackState = "DELETE_FAILED"
+	ConformancePackStateCreateInProgress ConformancePackState = "CREATE_IN_PROGRESS"
+	ConformancePackStateCreateComplete   ConformancePackState = "CREATE_COMPLETE"
+	ConformancePackStateCreateFailed     ConformancePackState = "CREATE_FAILED"
+	ConformancePackStateDeleteInProgress ConformancePackState = "DELETE_IN_PROGRESS"
+	ConformancePackStateDeleteFailed     ConformancePackState = "DELETE_FAILED"
 )
 
 // Values returns all known values for ConformancePackState. Note that this can be
@@ -192,9 +192,9 @@ type DeliveryStatus string
 
 // Enum values for DeliveryStatus
 const (
-	DeliveryStatusSuccess        DeliveryStatus = "Success"
-	DeliveryStatusFailure        DeliveryStatus = "Failure"
-	DeliveryStatusNot_applicable DeliveryStatus = "Not_Applicable"
+	DeliveryStatusSuccess       DeliveryStatus = "Success"
+	DeliveryStatusFailure       DeliveryStatus = "Failure"
+	DeliveryStatusNotApplicable DeliveryStatus = "Not_Applicable"
 )
 
 // Values returns all known values for DeliveryStatus. Note that this can be
@@ -212,7 +212,7 @@ type EventSource string
 
 // Enum values for EventSource
 const (
-	EventSourceAws_config EventSource = "aws.config"
+	EventSourceAwsConfig EventSource = "aws.config"
 )
 
 // Values returns all known values for EventSource. Note that this can be expanded
@@ -228,11 +228,11 @@ type MaximumExecutionFrequency string
 
 // Enum values for MaximumExecutionFrequency
 const (
-	MaximumExecutionFrequencyOne_hour         MaximumExecutionFrequency = "One_Hour"
-	MaximumExecutionFrequencyThree_hours      MaximumExecutionFrequency = "Three_Hours"
-	MaximumExecutionFrequencySix_hours        MaximumExecutionFrequency = "Six_Hours"
-	MaximumExecutionFrequencyTwelve_hours     MaximumExecutionFrequency = "Twelve_Hours"
-	MaximumExecutionFrequencyTwentyfour_hours MaximumExecutionFrequency = "TwentyFour_Hours"
+	MaximumExecutionFrequencyOneHour         MaximumExecutionFrequency = "One_Hour"
+	MaximumExecutionFrequencyThreeHours      MaximumExecutionFrequency = "Three_Hours"
+	MaximumExecutionFrequencySixHours        MaximumExecutionFrequency = "Six_Hours"
+	MaximumExecutionFrequencyTwelveHours     MaximumExecutionFrequency = "Twelve_Hours"
+	MaximumExecutionFrequencyTwentyfourHours MaximumExecutionFrequency = "TwentyFour_Hours"
 )
 
 // Values returns all known values for MaximumExecutionFrequency. Note that this
@@ -252,15 +252,15 @@ type MemberAccountRuleStatus string
 
 // Enum values for MemberAccountRuleStatus
 const (
-	MemberAccountRuleStatusCreate_successful  MemberAccountRuleStatus = "CREATE_SUCCESSFUL"
-	MemberAccountRuleStatusCreate_in_progress MemberAccountRuleStatus = "CREATE_IN_PROGRESS"
-	MemberAccountRuleStatusCreate_failed      MemberAccountRuleStatus = "CREATE_FAILED"
-	MemberAccountRuleStatusDelete_successful  MemberAccountRuleStatus = "DELETE_SUCCESSFUL"
-	MemberAccountRuleStatusDelete_failed      MemberAccountRuleStatus = "DELETE_FAILED"
-	MemberAccountRuleStatusDelete_in_progress MemberAccountRuleStatus = "DELETE_IN_PROGRESS"
-	MemberAccountRuleStatusUpdate_successful  MemberAccountRuleStatus = "UPDATE_SUCCESSFUL"
-	MemberAccountRuleStatusUpdate_in_progress MemberAccountRuleStatus = "UPDATE_IN_PROGRESS"
-	MemberAccountRuleStatusUpdate_failed      MemberAccountRuleStatus = "UPDATE_FAILED"
+	MemberAccountRuleStatusCreateSuccessful MemberAccountRuleStatus = "CREATE_SUCCESSFUL"
+	MemberAccountRuleStatusCreateInProgress MemberAccountRuleStatus = "CREATE_IN_PROGRESS"
+	MemberAccountRuleStatusCreateFailed     MemberAccountRuleStatus = "CREATE_FAILED"
+	MemberAccountRuleStatusDeleteSuccessful MemberAccountRuleStatus = "DELETE_SUCCESSFUL"
+	MemberAccountRuleStatusDeleteFailed     MemberAccountRuleStatus = "DELETE_FAILED"
+	MemberAccountRuleStatusDeleteInProgress MemberAccountRuleStatus = "DELETE_IN_PROGRESS"
+	MemberAccountRuleStatusUpdateSuccessful MemberAccountRuleStatus = "UPDATE_SUCCESSFUL"
+	MemberAccountRuleStatusUpdateInProgress MemberAccountRuleStatus = "UPDATE_IN_PROGRESS"
+	MemberAccountRuleStatusUpdateFailed     MemberAccountRuleStatus = "UPDATE_FAILED"
 )
 
 // Values returns all known values for MemberAccountRuleStatus. Note that this can
@@ -306,9 +306,9 @@ type OrganizationConfigRuleTriggerType string
 
 // Enum values for OrganizationConfigRuleTriggerType
 const (
-	OrganizationConfigRuleTriggerTypeConfiguration_item_change_notification          OrganizationConfigRuleTriggerType = "ConfigurationItemChangeNotification"
-	OrganizationConfigRuleTriggerTypeOversized_configuration_item_change_notifcation OrganizationConfigRuleTriggerType = "OversizedConfigurationItemChangeNotification"
-	OrganizationConfigRuleTriggerTypeScheduled_notification                          OrganizationConfigRuleTriggerType = "ScheduledNotification"
+	OrganizationConfigRuleTriggerTypeConfigurationItemChangeNotification         OrganizationConfigRuleTriggerType = "ConfigurationItemChangeNotification"
+	OrganizationConfigRuleTriggerTypeOversizedConfigurationItemChangeNotifcation OrganizationConfigRuleTriggerType = "OversizedConfigurationItemChangeNotification"
+	OrganizationConfigRuleTriggerTypeScheduledNotification                       OrganizationConfigRuleTriggerType = "ScheduledNotification"
 )
 
 // Values returns all known values for OrganizationConfigRuleTriggerType. Note that
@@ -327,15 +327,15 @@ type OrganizationResourceDetailedStatus string
 
 // Enum values for OrganizationResourceDetailedStatus
 const (
-	OrganizationResourceDetailedStatusCreate_successful  OrganizationResourceDetailedStatus = "CREATE_SUCCESSFUL"
-	OrganizationResourceDetailedStatusCreate_in_progress OrganizationResourceDetailedStatus = "CREATE_IN_PROGRESS"
-	OrganizationResourceDetailedStatusCreate_failed      OrganizationResourceDetailedStatus = "CREATE_FAILED"
-	OrganizationResourceDetailedStatusDelete_successful  OrganizationResourceDetailedStatus = "DELETE_SUCCESSFUL"
-	OrganizationResourceDetailedStatusDelete_failed      OrganizationResourceDetailedStatus = "DELETE_FAILED"
-	OrganizationResourceDetailedStatusDelete_in_progress OrganizationResourceDetailedStatus = "DELETE_IN_PROGRESS"
-	OrganizationResourceDetailedStatusUpdate_successful  OrganizationResourceDetailedStatus = "UPDATE_SUCCESSFUL"
-	OrganizationResourceDetailedStatusUpdate_in_progress OrganizationResourceDetailedStatus = "UPDATE_IN_PROGRESS"
-	OrganizationResourceDetailedStatusUpdate_failed      OrganizationResourceDetailedStatus = "UPDATE_FAILED"
+	OrganizationResourceDetailedStatusCreateSuccessful OrganizationResourceDetailedStatus = "CREATE_SUCCESSFUL"
+	OrganizationResourceDetailedStatusCreateInProgress OrganizationResourceDetailedStatus = "CREATE_IN_PROGRESS"
+	OrganizationResourceDetailedStatusCreateFailed     OrganizationResourceDetailedStatus = "CREATE_FAILED"
+	OrganizationResourceDetailedStatusDeleteSuccessful OrganizationResourceDetailedStatus = "DELETE_SUCCESSFUL"
+	OrganizationResourceDetailedStatusDeleteFailed     OrganizationResourceDetailedStatus = "DELETE_FAILED"
+	OrganizationResourceDetailedStatusDeleteInProgress OrganizationResourceDetailedStatus = "DELETE_IN_PROGRESS"
+	OrganizationResourceDetailedStatusUpdateSuccessful OrganizationResourceDetailedStatus = "UPDATE_SUCCESSFUL"
+	OrganizationResourceDetailedStatusUpdateInProgress OrganizationResourceDetailedStatus = "UPDATE_IN_PROGRESS"
+	OrganizationResourceDetailedStatusUpdateFailed     OrganizationResourceDetailedStatus = "UPDATE_FAILED"
 )
 
 // Values returns all known values for OrganizationResourceDetailedStatus. Note
@@ -360,15 +360,15 @@ type OrganizationResourceStatus string
 
 // Enum values for OrganizationResourceStatus
 const (
-	OrganizationResourceStatusCreate_successful  OrganizationResourceStatus = "CREATE_SUCCESSFUL"
-	OrganizationResourceStatusCreate_in_progress OrganizationResourceStatus = "CREATE_IN_PROGRESS"
-	OrganizationResourceStatusCreate_failed      OrganizationResourceStatus = "CREATE_FAILED"
-	OrganizationResourceStatusDelete_successful  OrganizationResourceStatus = "DELETE_SUCCESSFUL"
-	OrganizationResourceStatusDelete_failed      OrganizationResourceStatus = "DELETE_FAILED"
-	OrganizationResourceStatusDelete_in_progress OrganizationResourceStatus = "DELETE_IN_PROGRESS"
-	OrganizationResourceStatusUpdate_successful  OrganizationResourceStatus = "UPDATE_SUCCESSFUL"
-	OrganizationResourceStatusUpdate_in_progress OrganizationResourceStatus = "UPDATE_IN_PROGRESS"
-	OrganizationResourceStatusUpdate_failed      OrganizationResourceStatus = "UPDATE_FAILED"
+	OrganizationResourceStatusCreateSuccessful OrganizationResourceStatus = "CREATE_SUCCESSFUL"
+	OrganizationResourceStatusCreateInProgress OrganizationResourceStatus = "CREATE_IN_PROGRESS"
+	OrganizationResourceStatusCreateFailed     OrganizationResourceStatus = "CREATE_FAILED"
+	OrganizationResourceStatusDeleteSuccessful OrganizationResourceStatus = "DELETE_SUCCESSFUL"
+	OrganizationResourceStatusDeleteFailed     OrganizationResourceStatus = "DELETE_FAILED"
+	OrganizationResourceStatusDeleteInProgress OrganizationResourceStatus = "DELETE_IN_PROGRESS"
+	OrganizationResourceStatusUpdateSuccessful OrganizationResourceStatus = "UPDATE_SUCCESSFUL"
+	OrganizationResourceStatusUpdateInProgress OrganizationResourceStatus = "UPDATE_IN_PROGRESS"
+	OrganizationResourceStatusUpdateFailed     OrganizationResourceStatus = "UPDATE_FAILED"
 )
 
 // Values returns all known values for OrganizationResourceStatus. Note that this
@@ -392,15 +392,15 @@ type OrganizationRuleStatus string
 
 // Enum values for OrganizationRuleStatus
 const (
-	OrganizationRuleStatusCreate_successful  OrganizationRuleStatus = "CREATE_SUCCESSFUL"
-	OrganizationRuleStatusCreate_in_progress OrganizationRuleStatus = "CREATE_IN_PROGRESS"
-	OrganizationRuleStatusCreate_failed      OrganizationRuleStatus = "CREATE_FAILED"
-	OrganizationRuleStatusDelete_successful  OrganizationRuleStatus = "DELETE_SUCCESSFUL"
-	OrganizationRuleStatusDelete_failed      OrganizationRuleStatus = "DELETE_FAILED"
-	OrganizationRuleStatusDelete_in_progress OrganizationRuleStatus = "DELETE_IN_PROGRESS"
-	OrganizationRuleStatusUpdate_successful  OrganizationRuleStatus = "UPDATE_SUCCESSFUL"
-	OrganizationRuleStatusUpdate_in_progress OrganizationRuleStatus = "UPDATE_IN_PROGRESS"
-	OrganizationRuleStatusUpdate_failed      OrganizationRuleStatus = "UPDATE_FAILED"
+	OrganizationRuleStatusCreateSuccessful OrganizationRuleStatus = "CREATE_SUCCESSFUL"
+	OrganizationRuleStatusCreateInProgress OrganizationRuleStatus = "CREATE_IN_PROGRESS"
+	OrganizationRuleStatusCreateFailed     OrganizationRuleStatus = "CREATE_FAILED"
+	OrganizationRuleStatusDeleteSuccessful OrganizationRuleStatus = "DELETE_SUCCESSFUL"
+	OrganizationRuleStatusDeleteFailed     OrganizationRuleStatus = "DELETE_FAILED"
+	OrganizationRuleStatusDeleteInProgress OrganizationRuleStatus = "DELETE_IN_PROGRESS"
+	OrganizationRuleStatusUpdateSuccessful OrganizationRuleStatus = "UPDATE_SUCCESSFUL"
+	OrganizationRuleStatusUpdateInProgress OrganizationRuleStatus = "UPDATE_IN_PROGRESS"
+	OrganizationRuleStatusUpdateFailed     OrganizationRuleStatus = "UPDATE_FAILED"
 )
 
 // Values returns all known values for OrganizationRuleStatus. Note that this can
@@ -424,8 +424,8 @@ type Owner string
 
 // Enum values for Owner
 const (
-	OwnerCustom_lambda Owner = "CUSTOM_LAMBDA"
-	OwnerAws           Owner = "AWS"
+	OwnerCustomLambda Owner = "CUSTOM_LAMBDA"
+	OwnerAws          Owner = "AWS"
 )
 
 // Values returns all known values for Owner. Note that this can be expanded in the
@@ -462,10 +462,10 @@ type RemediationExecutionState string
 
 // Enum values for RemediationExecutionState
 const (
-	RemediationExecutionStateQueued      RemediationExecutionState = "QUEUED"
-	RemediationExecutionStateIn_progress RemediationExecutionState = "IN_PROGRESS"
-	RemediationExecutionStateSucceeded   RemediationExecutionState = "SUCCEEDED"
-	RemediationExecutionStateFailed      RemediationExecutionState = "FAILED"
+	RemediationExecutionStateQueued     RemediationExecutionState = "QUEUED"
+	RemediationExecutionStateInProgress RemediationExecutionState = "IN_PROGRESS"
+	RemediationExecutionStateSucceeded  RemediationExecutionState = "SUCCEEDED"
+	RemediationExecutionStateFailed     RemediationExecutionState = "FAILED"
 )
 
 // Values returns all known values for RemediationExecutionState. Note that this
@@ -505,7 +505,7 @@ type RemediationTargetType string
 
 // Enum values for RemediationTargetType
 const (
-	RemediationTargetTypeSsm_document RemediationTargetType = "SSM_DOCUMENT"
+	RemediationTargetTypeSsmDocument RemediationTargetType = "SSM_DOCUMENT"
 )
 
 // Values returns all known values for RemediationTargetType. Note that this can be
@@ -521,9 +521,9 @@ type ResourceCountGroupKey string
 
 // Enum values for ResourceCountGroupKey
 const (
-	ResourceCountGroupKeyResource_type ResourceCountGroupKey = "RESOURCE_TYPE"
-	ResourceCountGroupKeyAccount_id    ResourceCountGroupKey = "ACCOUNT_ID"
-	ResourceCountGroupKeyAws_region    ResourceCountGroupKey = "AWS_REGION"
+	ResourceCountGroupKeyResourceType ResourceCountGroupKey = "RESOURCE_TYPE"
+	ResourceCountGroupKeyAccountId    ResourceCountGroupKey = "ACCOUNT_ID"
+	ResourceCountGroupKeyAwsRegion    ResourceCountGroupKey = "AWS_REGION"
 )
 
 // Values returns all known values for ResourceCountGroupKey. Note that this can be
@@ -741,7 +741,7 @@ type ResourceValueType string
 
 // Enum values for ResourceValueType
 const (
-	ResourceValueTypeResource_id ResourceValueType = "RESOURCE_ID"
+	ResourceValueTypeResourceId ResourceValueType = "RESOURCE_ID"
 )
 
 // Values returns all known values for ResourceValueType. Note that this can be

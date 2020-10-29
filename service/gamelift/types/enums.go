@@ -42,9 +42,9 @@ type BalancingStrategy string
 
 // Enum values for BalancingStrategy
 const (
-	BalancingStrategySpot_only      BalancingStrategy = "SPOT_ONLY"
-	BalancingStrategySpot_preferred BalancingStrategy = "SPOT_PREFERRED"
-	BalancingStrategyOn_demand_only BalancingStrategy = "ON_DEMAND_ONLY"
+	BalancingStrategySpotOnly      BalancingStrategy = "SPOT_ONLY"
+	BalancingStrategySpotPreferred BalancingStrategy = "SPOT_PREFERRED"
+	BalancingStrategyOnDemandOnly  BalancingStrategy = "ON_DEMAND_ONLY"
 )
 
 // Values returns all known values for BalancingStrategy. Note that this can be
@@ -252,39 +252,39 @@ type EventCode string
 
 // Enum values for EventCode
 const (
-	EventCodeGeneric_event                                    EventCode = "GENERIC_EVENT"
-	EventCodeFleet_created                                    EventCode = "FLEET_CREATED"
-	EventCodeFleet_deleted                                    EventCode = "FLEET_DELETED"
-	EventCodeFleet_scaling_event                              EventCode = "FLEET_SCALING_EVENT"
-	EventCodeFleet_state_downloading                          EventCode = "FLEET_STATE_DOWNLOADING"
-	EventCodeFleet_state_validating                           EventCode = "FLEET_STATE_VALIDATING"
-	EventCodeFleet_state_building                             EventCode = "FLEET_STATE_BUILDING"
-	EventCodeFleet_state_activating                           EventCode = "FLEET_STATE_ACTIVATING"
-	EventCodeFleet_state_active                               EventCode = "FLEET_STATE_ACTIVE"
-	EventCodeFleet_state_error                                EventCode = "FLEET_STATE_ERROR"
-	EventCodeFleet_initialization_failed                      EventCode = "FLEET_INITIALIZATION_FAILED"
-	EventCodeFleet_binary_download_failed                     EventCode = "FLEET_BINARY_DOWNLOAD_FAILED"
-	EventCodeFleet_validation_launch_path_not_found           EventCode = "FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND"
-	EventCodeFleet_validation_executable_runtime_failure      EventCode = "FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE"
-	EventCodeFleet_validation_timed_out                       EventCode = "FLEET_VALIDATION_TIMED_OUT"
-	EventCodeFleet_activation_failed                          EventCode = "FLEET_ACTIVATION_FAILED"
-	EventCodeFleet_activation_failed_no_instances             EventCode = "FLEET_ACTIVATION_FAILED_NO_INSTANCES"
-	EventCodeFleet_new_game_session_protection_policy_updated EventCode = "FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED"
-	EventCodeServer_process_invalid_path                      EventCode = "SERVER_PROCESS_INVALID_PATH"
-	EventCodeServer_process_sdk_initialization_timeout        EventCode = "SERVER_PROCESS_SDK_INITIALIZATION_TIMEOUT"
-	EventCodeServer_process_process_ready_timeout             EventCode = "SERVER_PROCESS_PROCESS_READY_TIMEOUT"
-	EventCodeServer_process_crashed                           EventCode = "SERVER_PROCESS_CRASHED"
-	EventCodeServer_process_terminated_unhealthy              EventCode = "SERVER_PROCESS_TERMINATED_UNHEALTHY"
-	EventCodeServer_process_force_terminated                  EventCode = "SERVER_PROCESS_FORCE_TERMINATED"
-	EventCodeServer_process_process_exit_timeout              EventCode = "SERVER_PROCESS_PROCESS_EXIT_TIMEOUT"
-	EventCodeGame_session_activation_timeout                  EventCode = "GAME_SESSION_ACTIVATION_TIMEOUT"
-	EventCodeFleet_creation_extracting_build                  EventCode = "FLEET_CREATION_EXTRACTING_BUILD"
-	EventCodeFleet_creation_running_installer                 EventCode = "FLEET_CREATION_RUNNING_INSTALLER"
-	EventCodeFleet_creation_validating_runtime_config         EventCode = "FLEET_CREATION_VALIDATING_RUNTIME_CONFIG"
-	EventCodeFleet_vpc_peering_succeeded                      EventCode = "FLEET_VPC_PEERING_SUCCEEDED"
-	EventCodeFleet_vpc_peering_failed                         EventCode = "FLEET_VPC_PEERING_FAILED"
-	EventCodeFleet_vpc_peering_deleted                        EventCode = "FLEET_VPC_PEERING_DELETED"
-	EventCodeInstance_interrupted                             EventCode = "INSTANCE_INTERRUPTED"
+	EventCodeGenericEvent                               EventCode = "GENERIC_EVENT"
+	EventCodeFleetCreated                               EventCode = "FLEET_CREATED"
+	EventCodeFleetDeleted                               EventCode = "FLEET_DELETED"
+	EventCodeFleetScalingEvent                          EventCode = "FLEET_SCALING_EVENT"
+	EventCodeFleetStateDownloading                      EventCode = "FLEET_STATE_DOWNLOADING"
+	EventCodeFleetStateValidating                       EventCode = "FLEET_STATE_VALIDATING"
+	EventCodeFleetStateBuilding                         EventCode = "FLEET_STATE_BUILDING"
+	EventCodeFleetStateActivating                       EventCode = "FLEET_STATE_ACTIVATING"
+	EventCodeFleetStateActive                           EventCode = "FLEET_STATE_ACTIVE"
+	EventCodeFleetStateError                            EventCode = "FLEET_STATE_ERROR"
+	EventCodeFleetInitializationFailed                  EventCode = "FLEET_INITIALIZATION_FAILED"
+	EventCodeFleetBinaryDownloadFailed                  EventCode = "FLEET_BINARY_DOWNLOAD_FAILED"
+	EventCodeFleetValidationLaunchPathNotFound          EventCode = "FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND"
+	EventCodeFleetValidationExecutableRuntimeFailure    EventCode = "FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE"
+	EventCodeFleetValidationTimedOut                    EventCode = "FLEET_VALIDATION_TIMED_OUT"
+	EventCodeFleetActivationFailed                      EventCode = "FLEET_ACTIVATION_FAILED"
+	EventCodeFleetActivationFailedNoInstances           EventCode = "FLEET_ACTIVATION_FAILED_NO_INSTANCES"
+	EventCodeFleetNewGameSessionProtectionPolicyUpdated EventCode = "FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED"
+	EventCodeServerProcessInvalidPath                   EventCode = "SERVER_PROCESS_INVALID_PATH"
+	EventCodeServerProcessSdkInitializationTimeout      EventCode = "SERVER_PROCESS_SDK_INITIALIZATION_TIMEOUT"
+	EventCodeServerProcessProcessReadyTimeout           EventCode = "SERVER_PROCESS_PROCESS_READY_TIMEOUT"
+	EventCodeServerProcessCrashed                       EventCode = "SERVER_PROCESS_CRASHED"
+	EventCodeServerProcessTerminatedUnhealthy           EventCode = "SERVER_PROCESS_TERMINATED_UNHEALTHY"
+	EventCodeServerProcessForceTerminated               EventCode = "SERVER_PROCESS_FORCE_TERMINATED"
+	EventCodeServerProcessProcessExitTimeout            EventCode = "SERVER_PROCESS_PROCESS_EXIT_TIMEOUT"
+	EventCodeGameSessionActivationTimeout               EventCode = "GAME_SESSION_ACTIVATION_TIMEOUT"
+	EventCodeFleetCreationExtractingBuild               EventCode = "FLEET_CREATION_EXTRACTING_BUILD"
+	EventCodeFleetCreationRunningInstaller              EventCode = "FLEET_CREATION_RUNNING_INSTALLER"
+	EventCodeFleetCreationValidatingRuntimeConfig       EventCode = "FLEET_CREATION_VALIDATING_RUNTIME_CONFIG"
+	EventCodeFleetVpcPeeringSucceeded                   EventCode = "FLEET_VPC_PEERING_SUCCEEDED"
+	EventCodeFleetVpcPeeringFailed                      EventCode = "FLEET_VPC_PEERING_FAILED"
+	EventCodeFleetVpcPeeringDeleted                     EventCode = "FLEET_VPC_PEERING_DELETED"
+	EventCodeInstanceInterrupted                        EventCode = "INSTANCE_INTERRUPTED"
 )
 
 // Values returns all known values for EventCode. Note that this can be expanded in
@@ -414,7 +414,7 @@ type GameServerGroupAction string
 
 // Enum values for GameServerGroupAction
 const (
-	GameServerGroupActionReplace_instance_types GameServerGroupAction = "REPLACE_INSTANCE_TYPES"
+	GameServerGroupActionReplaceInstanceTypes GameServerGroupAction = "REPLACE_INSTANCE_TYPES"
 )
 
 // Values returns all known values for GameServerGroupAction. Note that this can be
@@ -430,9 +430,9 @@ type GameServerGroupDeleteOption string
 
 // Enum values for GameServerGroupDeleteOption
 const (
-	GameServerGroupDeleteOptionSafe_delete  GameServerGroupDeleteOption = "SAFE_DELETE"
-	GameServerGroupDeleteOptionForce_delete GameServerGroupDeleteOption = "FORCE_DELETE"
-	GameServerGroupDeleteOptionRetain       GameServerGroupDeleteOption = "RETAIN"
+	GameServerGroupDeleteOptionSafeDelete  GameServerGroupDeleteOption = "SAFE_DELETE"
+	GameServerGroupDeleteOptionForceDelete GameServerGroupDeleteOption = "FORCE_DELETE"
+	GameServerGroupDeleteOptionRetain      GameServerGroupDeleteOption = "RETAIN"
 )
 
 // Values returns all known values for GameServerGroupDeleteOption. Note that this
@@ -544,13 +544,13 @@ type GameServerGroupStatus string
 
 // Enum values for GameServerGroupStatus
 const (
-	GameServerGroupStatusNew              GameServerGroupStatus = "NEW"
-	GameServerGroupStatusActivating       GameServerGroupStatus = "ACTIVATING"
-	GameServerGroupStatusActive           GameServerGroupStatus = "ACTIVE"
-	GameServerGroupStatusDelete_scheduled GameServerGroupStatus = "DELETE_SCHEDULED"
-	GameServerGroupStatusDeleting         GameServerGroupStatus = "DELETING"
-	GameServerGroupStatusDeleted          GameServerGroupStatus = "DELETED"
-	GameServerGroupStatusError            GameServerGroupStatus = "ERROR"
+	GameServerGroupStatusNew             GameServerGroupStatus = "NEW"
+	GameServerGroupStatusActivating      GameServerGroupStatus = "ACTIVATING"
+	GameServerGroupStatusActive          GameServerGroupStatus = "ACTIVE"
+	GameServerGroupStatusDeleteScheduled GameServerGroupStatus = "DELETE_SCHEDULED"
+	GameServerGroupStatusDeleting        GameServerGroupStatus = "DELETING"
+	GameServerGroupStatusDeleted         GameServerGroupStatus = "DELETED"
+	GameServerGroupStatusError           GameServerGroupStatus = "ERROR"
 )
 
 // Values returns all known values for GameServerGroupStatus. Note that this can be
@@ -588,9 +588,9 @@ type GameServerInstanceStatus string
 
 // Enum values for GameServerInstanceStatus
 const (
-	GameServerInstanceStatusActive           GameServerInstanceStatus = "ACTIVE"
-	GameServerInstanceStatusDraining         GameServerInstanceStatus = "DRAINING"
-	GameServerInstanceStatusSpot_terminating GameServerInstanceStatus = "SPOT_TERMINATING"
+	GameServerInstanceStatusActive          GameServerInstanceStatus = "ACTIVE"
+	GameServerInstanceStatusDraining        GameServerInstanceStatus = "DRAINING"
+	GameServerInstanceStatusSpotTerminating GameServerInstanceStatus = "SPOT_TERMINATING"
 )
 
 // Values returns all known values for GameServerInstanceStatus. Note that this can
@@ -608,8 +608,8 @@ type GameServerProtectionPolicy string
 
 // Enum values for GameServerProtectionPolicy
 const (
-	GameServerProtectionPolicyNo_protection   GameServerProtectionPolicy = "NO_PROTECTION"
-	GameServerProtectionPolicyFull_protection GameServerProtectionPolicy = "FULL_PROTECTION"
+	GameServerProtectionPolicyNoProtection   GameServerProtectionPolicy = "NO_PROTECTION"
+	GameServerProtectionPolicyFullProtection GameServerProtectionPolicy = "FULL_PROTECTION"
 )
 
 // Values returns all known values for GameServerProtectionPolicy. Note that this
@@ -647,7 +647,7 @@ const (
 	GameSessionPlacementStatePending   GameSessionPlacementState = "PENDING"
 	GameSessionPlacementStateFulfilled GameSessionPlacementState = "FULFILLED"
 	GameSessionPlacementStateCancelled GameSessionPlacementState = "CANCELLED"
-	GameSessionPlacementStateTimed_out GameSessionPlacementState = "TIMED_OUT"
+	GameSessionPlacementStateTimedOut  GameSessionPlacementState = "TIMED_OUT"
 	GameSessionPlacementStateFailed    GameSessionPlacementState = "FAILED"
 )
 
@@ -746,14 +746,14 @@ type MatchmakingConfigurationStatus string
 
 // Enum values for MatchmakingConfigurationStatus
 const (
-	MatchmakingConfigurationStatusCancelled           MatchmakingConfigurationStatus = "CANCELLED"
-	MatchmakingConfigurationStatusCompleted           MatchmakingConfigurationStatus = "COMPLETED"
-	MatchmakingConfigurationStatusFailed              MatchmakingConfigurationStatus = "FAILED"
-	MatchmakingConfigurationStatusPlacing             MatchmakingConfigurationStatus = "PLACING"
-	MatchmakingConfigurationStatusQueued              MatchmakingConfigurationStatus = "QUEUED"
-	MatchmakingConfigurationStatusRequires_acceptance MatchmakingConfigurationStatus = "REQUIRES_ACCEPTANCE"
-	MatchmakingConfigurationStatusSearching           MatchmakingConfigurationStatus = "SEARCHING"
-	MatchmakingConfigurationStatusTimed_out           MatchmakingConfigurationStatus = "TIMED_OUT"
+	MatchmakingConfigurationStatusCancelled          MatchmakingConfigurationStatus = "CANCELLED"
+	MatchmakingConfigurationStatusCompleted          MatchmakingConfigurationStatus = "COMPLETED"
+	MatchmakingConfigurationStatusFailed             MatchmakingConfigurationStatus = "FAILED"
+	MatchmakingConfigurationStatusPlacing            MatchmakingConfigurationStatus = "PLACING"
+	MatchmakingConfigurationStatusQueued             MatchmakingConfigurationStatus = "QUEUED"
+	MatchmakingConfigurationStatusRequiresAcceptance MatchmakingConfigurationStatus = "REQUIRES_ACCEPTANCE"
+	MatchmakingConfigurationStatusSearching          MatchmakingConfigurationStatus = "SEARCHING"
+	MatchmakingConfigurationStatusTimedOut           MatchmakingConfigurationStatus = "TIMED_OUT"
 )
 
 // Values returns all known values for MatchmakingConfigurationStatus. Note that
@@ -813,9 +813,9 @@ type OperatingSystem string
 
 // Enum values for OperatingSystem
 const (
-	OperatingSystemWindows_2012   OperatingSystem = "WINDOWS_2012"
-	OperatingSystemAmazon_linux   OperatingSystem = "AMAZON_LINUX"
-	OperatingSystemAmazon_linux_2 OperatingSystem = "AMAZON_LINUX_2"
+	OperatingSystemWindows2012  OperatingSystem = "WINDOWS_2012"
+	OperatingSystemAmazonLinux  OperatingSystem = "AMAZON_LINUX"
+	OperatingSystemAmazonLinux2 OperatingSystem = "AMAZON_LINUX_2"
 )
 
 // Values returns all known values for OperatingSystem. Note that this can be
@@ -833,8 +833,8 @@ type PlayerSessionCreationPolicy string
 
 // Enum values for PlayerSessionCreationPolicy
 const (
-	PlayerSessionCreationPolicyAccept_all PlayerSessionCreationPolicy = "ACCEPT_ALL"
-	PlayerSessionCreationPolicyDeny_all   PlayerSessionCreationPolicy = "DENY_ALL"
+	PlayerSessionCreationPolicyAcceptAll PlayerSessionCreationPolicy = "ACCEPT_ALL"
+	PlayerSessionCreationPolicyDenyAll   PlayerSessionCreationPolicy = "DENY_ALL"
 )
 
 // Values returns all known values for PlayerSessionCreationPolicy. Note that this
@@ -947,13 +947,13 @@ type ScalingStatusType string
 
 // Enum values for ScalingStatusType
 const (
-	ScalingStatusTypeActive           ScalingStatusType = "ACTIVE"
-	ScalingStatusTypeUpdate_requested ScalingStatusType = "UPDATE_REQUESTED"
-	ScalingStatusTypeUpdating         ScalingStatusType = "UPDATING"
-	ScalingStatusTypeDelete_requested ScalingStatusType = "DELETE_REQUESTED"
-	ScalingStatusTypeDeleting         ScalingStatusType = "DELETING"
-	ScalingStatusTypeDeleted          ScalingStatusType = "DELETED"
-	ScalingStatusTypeError            ScalingStatusType = "ERROR"
+	ScalingStatusTypeActive          ScalingStatusType = "ACTIVE"
+	ScalingStatusTypeUpdateRequested ScalingStatusType = "UPDATE_REQUESTED"
+	ScalingStatusTypeUpdating        ScalingStatusType = "UPDATING"
+	ScalingStatusTypeDeleteRequested ScalingStatusType = "DELETE_REQUESTED"
+	ScalingStatusTypeDeleting        ScalingStatusType = "DELETING"
+	ScalingStatusTypeDeleted         ScalingStatusType = "DELETED"
+	ScalingStatusTypeError           ScalingStatusType = "ERROR"
 )
 
 // Values returns all known values for ScalingStatusType. Note that this can be

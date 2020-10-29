@@ -77,24 +77,25 @@ type CreateStackInput struct {
 	// This member is required.
 	ServiceRoleArn *string
 
-	// The default AWS OpsWorks Stacks agent version. You have the following options:
+	// The default AWS OpsWorks Stacks agent version. You have the following
+	// options:
 	//
+	// * Auto-update - Set this parameter to LATEST. AWS OpsWorks Stacks
+	// automatically installs new agent versions on the stack's instances as soon as
+	// they are available.
 	//
-	// * Auto-update - Set this parameter to LATEST. AWS OpsWorks Stacks automatically
-	// installs new agent versions on the stack's instances as soon as they are
-	// available.
+	// * Fixed version - Set this parameter to your preferred
+	// agent version. To update the agent version, you must edit the stack
+	// configuration and specify a new version. AWS OpsWorks Stacks then automatically
+	// installs that version on the stack's instances.
 	//
-	//     * Fixed version - Set this parameter to your preferred agent
-	// version. To update the agent version, you must edit the stack configuration and
-	// specify a new version. AWS OpsWorks Stacks then automatically installs that
-	// version on the stack's instances.
-	//
-	// The default setting is the most recent
-	// release of the agent. To specify an agent version, you must use the complete
-	// version number, not the abbreviated number shown on the console. For a list of
-	// available agent version numbers, call DescribeAgentVersions. AgentVersion cannot
-	// be set to Chef 12.2. You can also specify an agent version when you create or
-	// update an instance, which overrides the stack's default setting.
+	// The default setting is the most
+	// recent release of the agent. To specify an agent version, you must use the
+	// complete version number, not the abbreviated number shown on the console. For a
+	// list of available agent version numbers, call DescribeAgentVersions.
+	// AgentVersion cannot be set to Chef 12.2. You can also specify an agent version
+	// when you create or update an instance, which overrides the stack's default
+	// setting.
 	AgentVersion *string
 
 	// One or more user-defined key-value pairs to be added to the stack attributes.
@@ -138,27 +139,27 @@ type CreateStackInput struct {
 	// unless you specify a different operating system when you create the instance.
 	// You can specify one of the following.
 	//
-	//     * A supported Linux operating system:
-	// An Amazon Linux version, such as Amazon Linux 2018.03, Amazon Linux 2017.09,
-	// Amazon Linux 2017.03, Amazon Linux 2016.09, Amazon Linux 2016.03, Amazon Linux
-	// 2015.09, or Amazon Linux 2015.03.
+	// * A supported Linux operating system: An
+	// Amazon Linux version, such as Amazon Linux 2018.03, Amazon Linux 2017.09, Amazon
+	// Linux 2017.03, Amazon Linux 2016.09, Amazon Linux 2016.03, Amazon Linux 2015.09,
+	// or Amazon Linux 2015.03.
 	//
-	//     * A supported Ubuntu operating system,
-	// such as Ubuntu 16.04 LTS, Ubuntu 14.04 LTS, or Ubuntu 12.04 LTS.
+	// * A supported Ubuntu operating system, such as Ubuntu
+	// 16.04 LTS, Ubuntu 14.04 LTS, or Ubuntu 12.04 LTS.
 	//
-	//     * CentOS
-	// Linux 7
+	// * CentOS Linux 7
 	//
-	//     * Red Hat Enterprise Linux 7
+	// * Red Hat
+	// Enterprise Linux 7
 	//
-	//     * A supported Windows operating
-	// system, such as Microsoft Windows Server 2012 R2 Base, Microsoft Windows Server
-	// 2012 R2 with SQL Server Express, Microsoft Windows Server 2012 R2 with SQL
-	// Server Standard, or Microsoft Windows Server 2012 R2 with SQL Server Web.
+	// * A supported Windows operating system, such as Microsoft
+	// Windows Server 2012 R2 Base, Microsoft Windows Server 2012 R2 with SQL Server
+	// Express, Microsoft Windows Server 2012 R2 with SQL Server Standard, or Microsoft
+	// Windows Server 2012 R2 with SQL Server Web.
 	//
-	//     *
-	// A custom AMI: Custom. You specify the custom AMI you want to use when you create
-	// instances. For more information, see  Using Custom AMIs
+	// * A custom AMI: Custom. You specify
+	// the custom AMI you want to use when you create instances. For more information,
+	// see  Using Custom AMIs
 	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html).
 	//
 	// The
@@ -198,33 +199,33 @@ type CreateStackInput struct {
 	// is set to Layer_Dependent, which creates host names by appending integers to the
 	// layer's short name. The other themes are:
 	//
-	//     * Baked_Goods
+	// * Baked_Goods
 	//
-	//     * Clouds
+	// * Clouds
 	//
+	// *
+	// Europe_Cities
 	//
-	// * Europe_Cities
+	// * Fruits
 	//
-	//     * Fruits
+	// * Greek_Deities_and_Titans
 	//
-	//     * Greek_Deities_and_Titans
-	//
-	//     *
+	// *
 	// Legendary_creatures_from_Japan
 	//
-	//     * Planets_and_Moons
+	// * Planets_and_Moons
 	//
-	//     * Roman_Deities
+	// * Roman_Deities
 	//
+	// *
+	// Scottish_Islands
 	//
-	// * Scottish_Islands
+	// * US_Cities
 	//
-	//     * US_Cities
+	// * Wild_Cats
 	//
-	//     * Wild_Cats
-	//
-	// To obtain a generated host
-	// name, call GetHostNameSuggestion, which returns a host name based on the current
+	// To obtain a generated host name,
+	// call GetHostNameSuggestion, which returns a host name based on the current
 	// theme.
 	HostnameTheme *string
 
@@ -237,13 +238,13 @@ type CreateStackInput struct {
 	// UseOpsworksSecurityGroups you can instead provide your own custom security
 	// groups. UseOpsworksSecurityGroups has the following settings:
 	//
-	//     * True - AWS
+	// * True - AWS
 	// OpsWorks Stacks automatically associates the appropriate built-in security group
 	// with each layer (default setting). You can associate additional security groups
 	// with a layer after you create it, but you cannot delete the built-in security
 	// group.
 	//
-	//     * False - AWS OpsWorks Stacks does not associate built-in security
+	// * False - AWS OpsWorks Stacks does not associate built-in security
 	// groups with layers. You must create appropriate EC2 security groups and
 	// associate a security group with each layer that you create. However, you can
 	// still manually associate a built-in security group with a layer on creation;
@@ -258,24 +259,24 @@ type CreateStackInput struct {
 	// stack's region. All instances are launched into this VPC. You cannot change the
 	// ID later.
 	//
-	//     * If your account supports EC2-Classic, the default value is no
+	// * If your account supports EC2-Classic, the default value is no
 	// VPC.
 	//
-	//     * If your account does not support EC2-Classic, the default value is
-	// the default VPC for the specified region.
+	// * If your account does not support EC2-Classic, the default value is the
+	// default VPC for the specified region.
 	//
-	// If the VPC ID corresponds to a
-	// default VPC and you have specified either the DefaultAvailabilityZone or the
+	// If the VPC ID corresponds to a default
+	// VPC and you have specified either the DefaultAvailabilityZone or the
 	// DefaultSubnetId parameter only, AWS OpsWorks Stacks infers the value of the
 	// other parameter. If you specify neither parameter, AWS OpsWorks Stacks sets
 	// these parameters to the first valid Availability Zone for the specified region
 	// and the corresponding default VPC subnet ID, respectively. If you specify a
 	// nondefault VPC ID, note the following:
 	//
-	//     * It must belong to a VPC in your
+	// * It must belong to a VPC in your
 	// account that is in the specified region.
 	//
-	//     * You must specify a value for
+	// * You must specify a value for
 	// DefaultSubnetId.
 	//
 	// For more information about how to use AWS OpsWorks Stacks with

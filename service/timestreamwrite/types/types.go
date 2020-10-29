@@ -108,18 +108,18 @@ type RejectedRecord struct {
 	// The reason why a record was not successfully inserted into Timestream. Possible
 	// causes of failure include:
 	//
-	//     * Records with duplicate data where there are
+	// * Records with duplicate data where there are
 	// multiple records with the same dimensions, timestamps, and measure names but
 	// different measure values.
 	//
-	//     * Records with timestamps that lie outside the
+	// * Records with timestamps that lie outside the
 	// retention duration of the memory store
 	//
-	//     * Records with dimensions or
-	// measures that exceed the Timestream defined limits.
+	// * Records with dimensions or measures
+	// that exceed the Timestream defined limits.
 	//
-	// For more information, see
-	// Access Management
+	// For more information, see Access
+	// Management
 	// (https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html) in
 	// the Timestream Developer Guide.
 	Reason *string
@@ -169,10 +169,10 @@ type Table struct {
 
 	// The current state of the table:
 	//
-	//     * DELETING - The table is being deleted.
+	// * DELETING - The table is being deleted.
 	//
-	//
-	// * ACTIVE - The table is ready for use.
+	// *
+	// ACTIVE - The table is ready for use.
 	TableStatus TableStatus
 }
 

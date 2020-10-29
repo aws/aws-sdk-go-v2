@@ -43,14 +43,14 @@ type GetTransitGatewayRouteTablePropagationsInput struct {
 
 	// One or more filters. The possible values are:
 	//
-	//     * resource-id - The ID of the
+	// * resource-id - The ID of the
 	// resource.
 	//
-	//     * resource-type - The resource type. Valid values are vpc | vpn |
+	// * resource-type - The resource type. Valid values are vpc | vpn |
 	// direct-connect-gateway | peering.
 	//
-	//     * transit-gateway-attachment-id - The ID
-	// of the attachment.
+	// * transit-gateway-attachment-id - The ID of
+	// the attachment.
 	Filters []*types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the

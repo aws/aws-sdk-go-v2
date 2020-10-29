@@ -16,18 +16,18 @@ import (
 // your input as a single line JSON string. Minimum permissions To run this
 // command, you must have the following permissions:
 //
-//     *
+// *
 // secretsmanager:GetResourcePolicy
 //
 // Related operations
 //
-//     * To attach a resource
+// * To attach a resource
 // policy to a secret, use PutResourcePolicy.
 //
-//     * To delete the resource-based
+// * To delete the resource-based
 // policy attached to a secret, use DeleteResourcePolicy.
 //
-//     * To list all of the
+// * To list all of the
 // currently available secrets, use ListSecrets.
 func (c *Client) GetResourcePolicy(ctx context.Context, params *GetResourcePolicyInput, optFns ...func(*Options)) (*GetResourcePolicyOutput, error) {
 	if params == nil {

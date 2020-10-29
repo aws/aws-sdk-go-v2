@@ -126,9 +126,9 @@ type BucketLogsPermission string
 
 // Enum values for BucketLogsPermission
 const (
-	BucketLogsPermissionFull_control BucketLogsPermission = "FULL_CONTROL"
-	BucketLogsPermissionRead         BucketLogsPermission = "READ"
-	BucketLogsPermissionWrite        BucketLogsPermission = "WRITE"
+	BucketLogsPermissionFullControl BucketLogsPermission = "FULL_CONTROL"
+	BucketLogsPermissionRead        BucketLogsPermission = "READ"
+	BucketLogsPermissionWrite       BucketLogsPermission = "WRITE"
 )
 
 // Values returns all known values for BucketLogsPermission. Note that this can be
@@ -657,14 +657,14 @@ type ObjectStorageClass string
 
 // Enum values for ObjectStorageClass
 const (
-	ObjectStorageClassStandard            ObjectStorageClass = "STANDARD"
-	ObjectStorageClassReduced_redundancy  ObjectStorageClass = "REDUCED_REDUNDANCY"
-	ObjectStorageClassGlacier             ObjectStorageClass = "GLACIER"
-	ObjectStorageClassStandard_ia         ObjectStorageClass = "STANDARD_IA"
-	ObjectStorageClassOnezone_ia          ObjectStorageClass = "ONEZONE_IA"
-	ObjectStorageClassIntelligent_tiering ObjectStorageClass = "INTELLIGENT_TIERING"
-	ObjectStorageClassDeep_archive        ObjectStorageClass = "DEEP_ARCHIVE"
-	ObjectStorageClassOutposts            ObjectStorageClass = "OUTPOSTS"
+	ObjectStorageClassStandard           ObjectStorageClass = "STANDARD"
+	ObjectStorageClassReducedRedundancy  ObjectStorageClass = "REDUCED_REDUNDANCY"
+	ObjectStorageClassGlacier            ObjectStorageClass = "GLACIER"
+	ObjectStorageClassStandardIa         ObjectStorageClass = "STANDARD_IA"
+	ObjectStorageClassOnezoneIa          ObjectStorageClass = "ONEZONE_IA"
+	ObjectStorageClassIntelligentTiering ObjectStorageClass = "INTELLIGENT_TIERING"
+	ObjectStorageClassDeepArchive        ObjectStorageClass = "DEEP_ARCHIVE"
+	ObjectStorageClassOutposts           ObjectStorageClass = "OUTPOSTS"
 )
 
 // Values returns all known values for ObjectStorageClass. Note that this can be
@@ -737,11 +737,11 @@ type Permission string
 
 // Enum values for Permission
 const (
-	PermissionFull_control Permission = "FULL_CONTROL"
-	PermissionWrite        Permission = "WRITE"
-	PermissionWrite_acp    Permission = "WRITE_ACP"
-	PermissionRead         Permission = "READ"
-	PermissionRead_acp     Permission = "READ_ACP"
+	PermissionFullControl Permission = "FULL_CONTROL"
+	PermissionWrite       Permission = "WRITE"
+	PermissionWriteAcp    Permission = "WRITE_ACP"
+	PermissionRead        Permission = "READ"
+	PermissionReadAcp     Permission = "READ_ACP"
 )
 
 // Values returns all known values for Permission. Note that this can be expanded
@@ -939,14 +939,14 @@ type StorageClass string
 
 // Enum values for StorageClass
 const (
-	StorageClassStandard            StorageClass = "STANDARD"
-	StorageClassReduced_redundancy  StorageClass = "REDUCED_REDUNDANCY"
-	StorageClassStandard_ia         StorageClass = "STANDARD_IA"
-	StorageClassOnezone_ia          StorageClass = "ONEZONE_IA"
-	StorageClassIntelligent_tiering StorageClass = "INTELLIGENT_TIERING"
-	StorageClassGlacier             StorageClass = "GLACIER"
-	StorageClassDeep_archive        StorageClass = "DEEP_ARCHIVE"
-	StorageClassOutposts            StorageClass = "OUTPOSTS"
+	StorageClassStandard           StorageClass = "STANDARD"
+	StorageClassReducedRedundancy  StorageClass = "REDUCED_REDUNDANCY"
+	StorageClassStandardIa         StorageClass = "STANDARD_IA"
+	StorageClassOnezoneIa          StorageClass = "ONEZONE_IA"
+	StorageClassIntelligentTiering StorageClass = "INTELLIGENT_TIERING"
+	StorageClassGlacier            StorageClass = "GLACIER"
+	StorageClassDeepArchive        StorageClass = "DEEP_ARCHIVE"
+	StorageClassOutposts           StorageClass = "OUTPOSTS"
 )
 
 // Values returns all known values for StorageClass. Note that this can be expanded
@@ -969,7 +969,7 @@ type StorageClassAnalysisSchemaVersion string
 
 // Enum values for StorageClassAnalysisSchemaVersion
 const (
-	StorageClassAnalysisSchemaVersionV_1 StorageClassAnalysisSchemaVersion = "V_1"
+	StorageClassAnalysisSchemaVersionV1 StorageClassAnalysisSchemaVersion = "V_1"
 )
 
 // Values returns all known values for StorageClassAnalysisSchemaVersion. Note that
@@ -1024,11 +1024,11 @@ type TransitionStorageClass string
 
 // Enum values for TransitionStorageClass
 const (
-	TransitionStorageClassGlacier             TransitionStorageClass = "GLACIER"
-	TransitionStorageClassStandard_ia         TransitionStorageClass = "STANDARD_IA"
-	TransitionStorageClassOnezone_ia          TransitionStorageClass = "ONEZONE_IA"
-	TransitionStorageClassIntelligent_tiering TransitionStorageClass = "INTELLIGENT_TIERING"
-	TransitionStorageClassDeep_archive        TransitionStorageClass = "DEEP_ARCHIVE"
+	TransitionStorageClassGlacier            TransitionStorageClass = "GLACIER"
+	TransitionStorageClassStandardIa         TransitionStorageClass = "STANDARD_IA"
+	TransitionStorageClassOnezoneIa          TransitionStorageClass = "ONEZONE_IA"
+	TransitionStorageClassIntelligentTiering TransitionStorageClass = "INTELLIGENT_TIERING"
+	TransitionStorageClassDeepArchive        TransitionStorageClass = "DEEP_ARCHIVE"
 )
 
 // Values returns all known values for TransitionStorageClass. Note that this can

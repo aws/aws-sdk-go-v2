@@ -24,26 +24,26 @@ import (
 // any of the Rules in a WebACL, AWS WAF responds to the request with the default
 // action. To create and configure a WebACL, perform the following steps:
 //
-//     *
-// Create and update the ByteMatchSet objects and other predicates that you want to
+// * Create
+// and update the ByteMatchSet objects and other predicates that you want to
 // include in Rules. For more information, see CreateByteMatchSet,
 // UpdateByteMatchSet, CreateIPSet, UpdateIPSet, CreateSqlInjectionMatchSet, and
 // UpdateSqlInjectionMatchSet.
 //
-//     * Create and update the Rules that you want to
+// * Create and update the Rules that you want to
 // include in the WebACL. For more information, see CreateRule and UpdateRule.
 //
-//
-// * Use GetChangeToken to get the change token that you provide in the ChangeToken
+// *
+// Use GetChangeToken to get the change token that you provide in the ChangeToken
 // parameter of a CreateWebACL request.
 //
-//     * Submit a CreateWebACL request.
+// * Submit a CreateWebACL request.
 //
-//
-// * Use GetChangeToken to get the change token that you provide in the ChangeToken
+// * Use
+// GetChangeToken to get the change token that you provide in the ChangeToken
 // parameter of an UpdateWebACL request.
 //
-//     * Submit an UpdateWebACL request to
+// * Submit an UpdateWebACL request to
 // specify the Rules that you want to include in the WebACL, to specify the default
 // action, and to associate the WebACL with a CloudFront distribution.
 //

@@ -6,13 +6,13 @@ type BlockType string
 
 // Enum values for BlockType
 const (
-	BlockTypeKey_value_set     BlockType = "KEY_VALUE_SET"
-	BlockTypePage              BlockType = "PAGE"
-	BlockTypeLine              BlockType = "LINE"
-	BlockTypeWord              BlockType = "WORD"
-	BlockTypeTable             BlockType = "TABLE"
-	BlockTypeCell              BlockType = "CELL"
-	BlockTypeSelection_element BlockType = "SELECTION_ELEMENT"
+	BlockTypeKeyValueSet      BlockType = "KEY_VALUE_SET"
+	BlockTypePage             BlockType = "PAGE"
+	BlockTypeLine             BlockType = "LINE"
+	BlockTypeWord             BlockType = "WORD"
+	BlockTypeTable            BlockType = "TABLE"
+	BlockTypeCell             BlockType = "CELL"
+	BlockTypeSelectionElement BlockType = "SELECTION_ELEMENT"
 )
 
 // Values returns all known values for BlockType. Note that this can be expanded in
@@ -34,8 +34,8 @@ type ContentClassifier string
 
 // Enum values for ContentClassifier
 const (
-	ContentClassifierFree_of_personally_identifiable_information ContentClassifier = "FreeOfPersonallyIdentifiableInformation"
-	ContentClassifierFree_of_adult_content                       ContentClassifier = "FreeOfAdultContent"
+	ContentClassifierFreeOfPersonallyIdentifiableInformation ContentClassifier = "FreeOfPersonallyIdentifiableInformation"
+	ContentClassifierFreeOfAdultContent                      ContentClassifier = "FreeOfAdultContent"
 )
 
 // Values returns all known values for ContentClassifier. Note that this can be
@@ -88,10 +88,10 @@ type JobStatus string
 
 // Enum values for JobStatus
 const (
-	JobStatusIn_progress     JobStatus = "IN_PROGRESS"
-	JobStatusSucceeded       JobStatus = "SUCCEEDED"
-	JobStatusFailed          JobStatus = "FAILED"
-	JobStatusPartial_success JobStatus = "PARTIAL_SUCCESS"
+	JobStatusInProgress     JobStatus = "IN_PROGRESS"
+	JobStatusSucceeded      JobStatus = "SUCCEEDED"
+	JobStatusFailed         JobStatus = "FAILED"
+	JobStatusPartialSuccess JobStatus = "PARTIAL_SUCCESS"
 )
 
 // Values returns all known values for JobStatus. Note that this can be expanded in
@@ -110,9 +110,9 @@ type RelationshipType string
 
 // Enum values for RelationshipType
 const (
-	RelationshipTypeValue            RelationshipType = "VALUE"
-	RelationshipTypeChild            RelationshipType = "CHILD"
-	RelationshipTypeComplex_features RelationshipType = "COMPLEX_FEATURES"
+	RelationshipTypeValue           RelationshipType = "VALUE"
+	RelationshipTypeChild           RelationshipType = "CHILD"
+	RelationshipTypeComplexFeatures RelationshipType = "COMPLEX_FEATURES"
 )
 
 // Values returns all known values for RelationshipType. Note that this can be
@@ -130,8 +130,8 @@ type SelectionStatus string
 
 // Enum values for SelectionStatus
 const (
-	SelectionStatusSelected     SelectionStatus = "SELECTED"
-	SelectionStatusNot_selected SelectionStatus = "NOT_SELECTED"
+	SelectionStatusSelected    SelectionStatus = "SELECTED"
+	SelectionStatusNotSelected SelectionStatus = "NOT_SELECTED"
 )
 
 // Values returns all known values for SelectionStatus. Note that this can be

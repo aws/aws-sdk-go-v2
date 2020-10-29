@@ -20,20 +20,20 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html) in the
 // Amazon Simple Storage Service Developer Guide. Related actions include:
 //
-//     *
+// *
 // CreateJob
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html)
 //
-//
-// * DescribeJob
+// *
+// DescribeJob
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html)
 //
-//
-// * UpdateJobPriority
+// *
+// UpdateJobPriority
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html)
 //
-//
-// * UpdateJobStatus
+// *
+// UpdateJobStatus
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html)
 func (c *Client) ListJobs(ctx context.Context, params *ListJobsInput, optFns ...func(*Options)) (*ListJobsOutput, error) {
 	if params == nil {

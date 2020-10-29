@@ -44,11 +44,11 @@ type RegisterUserInput struct {
 	// Amazon QuickSight supports several ways of managing the identity of users. This
 	// parameter accepts two values:
 	//
-	//     * IAM: A user whose identity maps to an
-	// existing IAM user or role.
+	// * IAM: A user whose identity maps to an existing
+	// IAM user or role.
 	//
-	//     * QUICKSIGHT: A user whose identity is owned and
-	// managed internally by Amazon QuickSight.
+	// * QUICKSIGHT: A user whose identity is owned and managed
+	// internally by Amazon QuickSight.
 	//
 	// This member is required.
 	IdentityType types.IdentityType
@@ -61,20 +61,19 @@ type RegisterUserInput struct {
 	// The Amazon QuickSight role for the user. The user role can be one of the
 	// following:
 	//
-	//     * READER: A user who has read-only access to dashboards.
+	// * READER: A user who has read-only access to dashboards.
 	//
-	//     *
-	// AUTHOR: A user who can create data sources, datasets, analyses, and
-	// dashboards.
+	// * AUTHOR:
+	// A user who can create data sources, datasets, analyses, and dashboards.
 	//
-	//     * ADMIN: A user who is an author, who can also manage Amazon
-	// QuickSight settings.
+	// *
+	// ADMIN: A user who is an author, who can also manage Amazon QuickSight
+	// settings.
 	//
-	//     * RESTRICTED_READER: This role isn't currently
-	// available for use.
+	// * RESTRICTED_READER: This role isn't currently available for use.
 	//
-	//     * RESTRICTED_AUTHOR: This role isn't currently available
-	// for use.
+	// *
+	// RESTRICTED_AUTHOR: This role isn't currently available for use.
 	//
 	// This member is required.
 	UserRole types.UserRole
@@ -83,18 +82,18 @@ type RegisterUserInput struct {
 	// want to assign to this user. Customized permissions allows you to control a
 	// user's access by restricting access the following operations:
 	//
-	//     * Create and
+	// * Create and
 	// update data sources
 	//
-	//     * Create and update datasets
+	// * Create and update datasets
 	//
-	//     * Create and update
-	// email reports
+	// * Create and update email
+	// reports
 	//
-	//     * Subscribe to email reports
+	// * Subscribe to email reports
 	//
-	// To add custom permissions to an
-	// existing user, use UpdateUser instead. A set of custom permissions includes any
+	// To add custom permissions to an existing
+	// user, use UpdateUser instead. A set of custom permissions includes any
 	// combination of these restrictions. Currently, you need to create the profile
 	// names for custom permission sets by using the QuickSight console. Then, you use
 	// the RegisterUser API operation to assign the named set of permissions to a

@@ -47,71 +47,70 @@ type GetQueueAttributesInput struct {
 	// least 1 minute after the producers stop sending messages. This period is
 	// required for the queue metadata to reach eventual consistency.
 	//
-	//     * All –
-	// Returns all values.
+	// * All – Returns
+	// all values.
 	//
-	//     * ApproximateNumberOfMessages – Returns the approximate
-	// number of messages available for retrieval from the queue.
+	// * ApproximateNumberOfMessages – Returns the approximate number of
+	// messages available for retrieval from the queue.
 	//
-	//     *
+	// *
 	// ApproximateNumberOfMessagesDelayed – Returns the approximate number of messages
 	// in the queue that are delayed and not available for reading immediately. This
 	// can happen when the queue is configured as a delay queue or when a message has
 	// been sent with a delay parameter.
 	//
-	//     * ApproximateNumberOfMessagesNotVisible –
+	// * ApproximateNumberOfMessagesNotVisible –
 	// Returns the approximate number of messages that are in flight. Messages are
 	// considered to be in flight if they have been sent to a client but have not yet
 	// been deleted or have not yet reached the end of their visibility window.
 	//
-	//     *
+	// *
 	// CreatedTimestamp – Returns the time when the queue was created in seconds (epoch
 	// time (http://en.wikipedia.org/wiki/Unix_time)).
 	//
-	//     * DelaySeconds – Returns
-	// the default delay on the queue in seconds.
+	// * DelaySeconds – Returns the
+	// default delay on the queue in seconds.
 	//
-	//     * LastModifiedTimestamp –
-	// Returns the time when the queue was last changed in seconds (epoch time
+	// * LastModifiedTimestamp – Returns the
+	// time when the queue was last changed in seconds (epoch time
 	// (http://en.wikipedia.org/wiki/Unix_time)).
 	//
-	//     * MaximumMessageSize – Returns
-	// the limit of how many bytes a message can contain before Amazon SQS rejects
-	// it.
+	// * MaximumMessageSize – Returns the
+	// limit of how many bytes a message can contain before Amazon SQS rejects it.
 	//
-	//     * MessageRetentionPeriod – Returns the length of time, in seconds, for
-	// which Amazon SQS retains a message.
+	// *
+	// MessageRetentionPeriod – Returns the length of time, in seconds, for which
+	// Amazon SQS retains a message.
 	//
-	//     * Policy – Returns the policy of the
-	// queue.
+	// * Policy – Returns the policy of the queue.
 	//
-	//     * QueueArn – Returns the Amazon resource name (ARN) of the queue.
+	// *
+	// QueueArn – Returns the Amazon resource name (ARN) of the queue.
 	//
-	//
-	// * ReceiveMessageWaitTimeSeconds – Returns the length of time, in seconds, for
+	// *
+	// ReceiveMessageWaitTimeSeconds – Returns the length of time, in seconds, for
 	// which the ReceiveMessage action waits for a message to arrive.
 	//
-	//     *
-	// RedrivePolicy – The string that includes the parameters for the dead-letter
-	// queue functionality of the source queue as a JSON object. For more information
-	// about the redrive policy and dead-letter queues, see Using Amazon SQS
-	// Dead-Letter Queues
+	// * RedrivePolicy
+	// – The string that includes the parameters for the dead-letter queue
+	// functionality of the source queue as a JSON object. For more information about
+	// the redrive policy and dead-letter queues, see Using Amazon SQS Dead-Letter
+	// Queues
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html)
 	// in the Amazon Simple Queue Service Developer Guide.
 	//
-	//         *
-	// deadLetterTargetArn – The Amazon Resource Name (ARN) of the dead-letter queue to
-	// which Amazon SQS moves messages after the value of maxReceiveCount is
-	// exceeded.
+	// * deadLetterTargetArn – The
+	// Amazon Resource Name (ARN) of the dead-letter queue to which Amazon SQS moves
+	// messages after the value of maxReceiveCount is exceeded.
 	//
-	//         * maxReceiveCount – The number of times a message is
-	// delivered to the source queue before being moved to the dead-letter queue. When
-	// the ReceiveCount for a message exceeds the maxReceiveCount for a queue, Amazon
-	// SQS moves the message to the dead-letter-queue.
+	// * maxReceiveCount –
+	// The number of times a message is delivered to the source queue before being
+	// moved to the dead-letter queue. When the ReceiveCount for a message exceeds the
+	// maxReceiveCount for a queue, Amazon SQS moves the message to the
+	// dead-letter-queue.
 	//
-	//     * VisibilityTimeout –
-	// Returns the visibility timeout for the queue. For more information about the
-	// visibility timeout, see Visibility Timeout
+	// * VisibilityTimeout – Returns the visibility timeout for the
+	// queue. For more information about the visibility timeout, see Visibility Timeout
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html)
 	// in the Amazon Simple Queue Service Developer Guide.
 	//
@@ -119,24 +118,24 @@ type GetQueueAttributesInput struct {
 	// apply only to server-side-encryption
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html):
 	//
-	//
-	// * KmsMasterKeyId – Returns the ID of an AWS-managed customer master key (CMK)
-	// for Amazon SQS or a custom CMK. For more information, see Key Terms
+	// *
+	// KmsMasterKeyId – Returns the ID of an AWS-managed customer master key (CMK) for
+	// Amazon SQS or a custom CMK. For more information, see Key Terms
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-sse-key-terms).
 	//
-	//
-	// * KmsDataKeyReusePeriodSeconds – Returns the length of time, in seconds, for
-	// which Amazon SQS can reuse a data key to encrypt or decrypt messages before
-	// calling AWS KMS again. For more information, see How Does the Data Key Reuse
-	// Period Work?
+	// *
+	// KmsDataKeyReusePeriodSeconds – Returns the length of time, in seconds, for which
+	// Amazon SQS can reuse a data key to encrypt or decrypt messages before calling
+	// AWS KMS again. For more information, see How Does the Data Key Reuse Period
+	// Work?
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-how-does-the-data-key-reuse-period-work).
 	//
 	// The
 	// following attributes apply only to FIFO (first-in-first-out) queues
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html):
 	//
-	//
-	// * FifoQueue – Returns whether the queue is FIFO. For more information, see FIFO
+	// *
+	// FifoQueue – Returns whether the queue is FIFO. For more information, see FIFO
 	// Queue Logic
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-understanding-logic)
 	// in the Amazon Simple Queue Service Developer Guide. To determine whether a queue
@@ -144,7 +143,7 @@ type GetQueueAttributesInput struct {
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html),
 	// you can check whether QueueName ends with the .fifo suffix.
 	//
-	//     *
+	// *
 	// ContentBasedDeduplication – Returns whether content-based deduplication is
 	// enabled for the queue. For more information, see Exactly-Once Processing
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing)

@@ -24,8 +24,8 @@ type ListEventTypesFilterName string
 
 // Enum values for ListEventTypesFilterName
 const (
-	ListEventTypesFilterNameResource_type ListEventTypesFilterName = "RESOURCE_TYPE"
-	ListEventTypesFilterNameService_name  ListEventTypesFilterName = "SERVICE_NAME"
+	ListEventTypesFilterNameResourceType ListEventTypesFilterName = "RESOURCE_TYPE"
+	ListEventTypesFilterNameServiceName  ListEventTypesFilterName = "SERVICE_NAME"
 )
 
 // Values returns all known values for ListEventTypesFilterName. Note that this can
@@ -42,10 +42,10 @@ type ListNotificationRulesFilterName string
 
 // Enum values for ListNotificationRulesFilterName
 const (
-	ListNotificationRulesFilterNameEvent_type_id  ListNotificationRulesFilterName = "EVENT_TYPE_ID"
-	ListNotificationRulesFilterNameCreated_by     ListNotificationRulesFilterName = "CREATED_BY"
-	ListNotificationRulesFilterNameResource       ListNotificationRulesFilterName = "RESOURCE"
-	ListNotificationRulesFilterNameTarget_address ListNotificationRulesFilterName = "TARGET_ADDRESS"
+	ListNotificationRulesFilterNameEventTypeId   ListNotificationRulesFilterName = "EVENT_TYPE_ID"
+	ListNotificationRulesFilterNameCreatedBy     ListNotificationRulesFilterName = "CREATED_BY"
+	ListNotificationRulesFilterNameResource      ListNotificationRulesFilterName = "RESOURCE"
+	ListNotificationRulesFilterNameTargetAddress ListNotificationRulesFilterName = "TARGET_ADDRESS"
 )
 
 // Values returns all known values for ListNotificationRulesFilterName. Note that
@@ -65,9 +65,9 @@ type ListTargetsFilterName string
 
 // Enum values for ListTargetsFilterName
 const (
-	ListTargetsFilterNameTarget_type    ListTargetsFilterName = "TARGET_TYPE"
-	ListTargetsFilterNameTarget_address ListTargetsFilterName = "TARGET_ADDRESS"
-	ListTargetsFilterNameTarget_status  ListTargetsFilterName = "TARGET_STATUS"
+	ListTargetsFilterNameTargetType    ListTargetsFilterName = "TARGET_TYPE"
+	ListTargetsFilterNameTargetAddress ListTargetsFilterName = "TARGET_ADDRESS"
+	ListTargetsFilterNameTargetStatus  ListTargetsFilterName = "TARGET_STATUS"
 )
 
 // Values returns all known values for ListTargetsFilterName. Note that this can be

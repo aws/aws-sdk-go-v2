@@ -52,14 +52,14 @@ type GetSqlInjectionMatchSetOutput struct {
 	// GetSqlInjectionMatchSet request. For more information, see the following
 	// topics:
 	//
-	//     * SqlInjectionMatchSet: Contains Name, SqlInjectionMatchSetId, and
-	// an array of SqlInjectionMatchTuple objects
+	// * SqlInjectionMatchSet: Contains Name, SqlInjectionMatchSetId, and an
+	// array of SqlInjectionMatchTuple objects
 	//
-	//     * SqlInjectionMatchTuple: Each
+	// * SqlInjectionMatchTuple: Each
 	// SqlInjectionMatchTuple object contains FieldToMatch and TextTransformation
 	//
-	//
-	// * FieldToMatch: Contains Data and Type
+	// *
+	// FieldToMatch: Contains Data and Type
 	SqlInjectionMatchSet *types.SqlInjectionMatchSet
 
 	// Metadata pertaining to the operation's result.

@@ -6,8 +6,8 @@ type ErrorCode string
 
 // Enum values for ErrorCode
 const (
-	ErrorCodeInternal_service_exception  ErrorCode = "InternalServiceException"
-	ErrorCodeInvalid_parameter_exception ErrorCode = "InvalidParameterException"
+	ErrorCodeInternalServiceException  ErrorCode = "InternalServiceException"
+	ErrorCodeInvalidParameterException ErrorCode = "InvalidParameterException"
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded in
@@ -24,9 +24,9 @@ type GroupByAttribute string
 
 // Enum values for GroupByAttribute
 const (
-	GroupByAttributeTarget_id     GroupByAttribute = "TARGET_ID"
-	GroupByAttributeRegion        GroupByAttribute = "REGION"
-	GroupByAttributeResource_type GroupByAttribute = "RESOURCE_TYPE"
+	GroupByAttributeTargetId     GroupByAttribute = "TARGET_ID"
+	GroupByAttributeRegion       GroupByAttribute = "REGION"
+	GroupByAttributeResourceType GroupByAttribute = "RESOURCE_TYPE"
 )
 
 // Values returns all known values for GroupByAttribute. Note that this can be

@@ -31,16 +31,16 @@ type AccountTakeoverActionType struct {
 
 	// The event action.
 	//
-	//     * BLOCK Choosing this action will block the request.
+	// * BLOCK Choosing this action will block the request.
 	//
+	// *
+	// MFA_IF_CONFIGURED Throw MFA challenge if user has configured it, else allow the
+	// request.
 	//
-	// * MFA_IF_CONFIGURED Throw MFA challenge if user has configured it, else allow
-	// the request.
+	// * MFA_REQUIRED Throw MFA challenge if user has configured it, else
+	// block the request.
 	//
-	//     * MFA_REQUIRED Throw MFA challenge if user has configured it,
-	// else block the request.
-	//
-	//     * NO_ACTION Allow the user sign-in.
+	// * NO_ACTION Allow the user sign-in.
 	//
 	// This member is required.
 	EventAction AccountTakeoverEventActionType
@@ -352,15 +352,15 @@ type EmailConfigurationType struct {
 	// that configuration set are applied to the email. Configuration sets can be used
 	// to apply the following types of rules to emails:
 	//
-	//     * Event publishing –
-	// Amazon SES can track the number of send, delivery, open, click, bounce, and
-	// complaint events for each email sent. Use event publishing to send information
-	// about these events to other AWS services such as SNS and CloudWatch.
+	// * Event publishing – Amazon
+	// SES can track the number of send, delivery, open, click, bounce, and complaint
+	// events for each email sent. Use event publishing to send information about these
+	// events to other AWS services such as SNS and CloudWatch.
 	//
-	//     * IP
-	// pool management – When leasing dedicated IP addresses with Amazon SES, you can
-	// create groups of IP addresses, called dedicated IP pools. You can then associate
-	// the dedicated IP pools with configuration sets.
+	// * IP pool management –
+	// When leasing dedicated IP addresses with Amazon SES, you can create groups of IP
+	// addresses, called dedicated IP pools. You can then associate the dedicated IP
+	// pools with configuration sets.
 	ConfigurationSet *string
 
 	// Specifies whether Amazon Cognito emails your users by using its built-in email
@@ -404,13 +404,13 @@ type EmailConfigurationType struct {
 	// email address is used in one of the following ways, depending on the value that
 	// you specify for the EmailSendingAccount parameter:
 	//
-	//     * If you specify
+	// * If you specify
 	// COGNITO_DEFAULT, Amazon Cognito uses this address as the custom FROM address
 	// when it emails your users by using its built-in email account.
 	//
-	//     * If you
-	// specify DEVELOPER, Amazon Cognito emails your users with this address by calling
-	// Amazon SES on your behalf.
+	// * If you specify
+	// DEVELOPER, Amazon Cognito emails your users with this address by calling Amazon
+	// SES on your behalf.
 	SourceArn *string
 }
 
@@ -529,76 +529,73 @@ type IdentityProviderType struct {
 	// The identity provider details. The following list describes the provider detail
 	// keys for each identity provider type.
 	//
-	//     * For Google and Login with Amazon:
+	// * For Google and Login with Amazon:
 	//
+	// *
+	// client_id
 	//
-	// * client_id
-	//
-	//         * client_secret
-	//
-	//         * authorize_scopes
-	//
-	//     * For
-	// Facebook:
-	//
-	//         * client_id
-	//
-	//         * client_secret
-	//
-	//         *
-	// authorize_scopes
-	//
-	//         * api_version
-	//
-	//     * For Sign in with Apple:
-	//
-	//
-	// * client_id
-	//
-	//         * team_id
-	//
-	//         * key_id
-	//
-	//         * private_key
-	//
+	// * client_secret
 	//
 	// * authorize_scopes
 	//
-	//     * For OIDC providers:
+	// * For Facebook:
 	//
-	//         * client_id
+	// * client_id
 	//
-	//         *
+	// *
 	// client_secret
 	//
-	//         * attributes_request_method
+	// * authorize_scopes
 	//
-	//         * oidc_issuer
+	// * api_version
 	//
+	// * For Sign in with Apple:
+	//
+	// *
+	// client_id
+	//
+	// * team_id
+	//
+	// * key_id
+	//
+	// * private_key
 	//
 	// * authorize_scopes
 	//
-	//         * authorize_url if not available from discovery URL
-	// specified by oidc_issuer key
+	// * For OIDC
+	// providers:
 	//
-	//         * token_url if not available from
+	// * client_id
+	//
+	// * client_secret
+	//
+	// * attributes_request_method
+	//
+	// *
+	// oidc_issuer
+	//
+	// * authorize_scopes
+	//
+	// * authorize_url if not available from discovery
+	// URL specified by oidc_issuer key
+	//
+	// * token_url if not available from discovery
+	// URL specified by oidc_issuer key
+	//
+	// * attributes_url if not available from
 	// discovery URL specified by oidc_issuer key
 	//
-	//         * attributes_url if not
-	// available from discovery URL specified by oidc_issuer key
+	// * jwks_uri if not available from
+	// discovery URL specified by oidc_issuer key
 	//
-	//         * jwks_uri if
-	// not available from discovery URL specified by oidc_issuer key
+	// * authorize_scopes
 	//
-	//         *
-	// authorize_scopes
+	// * For SAML
+	// providers:
 	//
-	//     * For SAML providers:
+	// * MetadataFile OR MetadataURL
 	//
-	//         * MetadataFile OR
-	// MetadataURL
-	//
-	//         * IDPSignOut optional
+	// * IDPSignOut optional
 	ProviderDetails map[string]*string
 
 	// The identity provider name.
@@ -1083,30 +1080,29 @@ type UserImportJobType struct {
 
 	// The status of the user import job. One of the following:
 	//
-	//     * Created - The
-	// job was created but not started.
+	// * Created - The job
+	// was created but not started.
 	//
-	//     * Pending - A transition state. You have
-	// started the job, but it has not begun importing users yet.
+	// * Pending - A transition state. You have started
+	// the job, but it has not begun importing users yet.
 	//
-	//     * InProgress -
-	// The job has started, and users are being imported.
+	// * InProgress - The job has
+	// started, and users are being imported.
 	//
-	//     * Stopping - You have
-	// stopped the job, but the job has not stopped importing users yet.
+	// * Stopping - You have stopped the job,
+	// but the job has not stopped importing users yet.
 	//
-	//     * Stopped
-	// - You have stopped the job, and the job has stopped importing users.
+	// * Stopped - You have stopped
+	// the job, and the job has stopped importing users.
 	//
-	//     *
-	// Succeeded - The job has completed successfully.
+	// * Succeeded - The job has
+	// completed successfully.
 	//
-	//     * Failed - The job has
-	// stopped due to an error.
+	// * Failed - The job has stopped due to an error.
 	//
-	//     * Expired - You created a job, but did not start
-	// the job within 24-48 hours. All data associated with the job was deleted, and
-	// the job cannot be started.
+	// *
+	// Expired - You created a job, but did not start the job within 24-48 hours. All
+	// data associated with the job was deleted, and the job cannot be started.
 	Status UserImportJobStatusType
 
 	// The user pool ID for the user pool that the users are being imported into.
@@ -1119,16 +1115,16 @@ type UsernameConfigurationType struct {
 	// Specifies whether username case sensitivity will be applied for all users in the
 	// user pool through Cognito APIs. Valid values include:
 	//
-	//     * True : Enables case
+	// * True : Enables case
 	// sensitivity for all username input. When this option is set to True, users must
 	// sign in using the exact capitalization of their given username. For example,
 	// “UserName”. This is the default value.
 	//
-	//     * False : Enables case insensitivity
-	// for all username input. For example, when this option is set to False, users
-	// will be able to sign in using either "username" or "Username". This option also
-	// enables both preferred_username and email alias to be case insensitive, in
-	// addition to the username attribute.
+	// * False : Enables case insensitivity for
+	// all username input. For example, when this option is set to False, users will be
+	// able to sign in using either "username" or "Username". This option also enables
+	// both preferred_username and email alias to be case insensitive, in addition to
+	// the username attribute.
 	//
 	// This member is required.
 	CaseSensitive *bool
@@ -1192,12 +1188,12 @@ type UserPoolClientType struct {
 	// A list of allowed redirect (callback) URLs for the identity providers. A
 	// redirect URI must:
 	//
-	//     * Be an absolute URI.
+	// * Be an absolute URI.
 	//
-	//     * Be registered with the
+	// * Be registered with the
 	// authorization server.
 	//
-	//     * Not include a fragment component.
+	// * Not include a fragment component.
 	//
 	// See OAuth 2.0 -
 	// Redirection Endpoint (https://tools.ietf.org/html/rfc6749#section-3.1.2). Amazon
@@ -1220,17 +1216,17 @@ type UserPoolClientType struct {
 	// The default redirect URI. Must be in the CallbackURLs list. A redirect URI
 	// must:
 	//
-	//     * Be an absolute URI.
+	// * Be an absolute URI.
 	//
-	//     * Be registered with the authorization
-	// server.
+	// * Be registered with the authorization server.
 	//
-	//     * Not include a fragment component.
+	// *
+	// Not include a fragment component.
 	//
-	// See OAuth 2.0 - Redirection
-	// Endpoint (https://tools.ietf.org/html/rfc6749#section-3.1.2). Amazon Cognito
-	// requires HTTPS over HTTP except for http://localhost for testing purposes only.
-	// App callback URLs such as myapp://example are also supported.
+	// See OAuth 2.0 - Redirection Endpoint
+	// (https://tools.ietf.org/html/rfc6749#section-3.1.2). Amazon Cognito requires
+	// HTTPS over HTTP except for http://localhost for testing purposes only. App
+	// callback URLs such as myapp://example are also supported.
 	DefaultRedirectURI *string
 
 	// The authentication flows that are supported by the user pool clients. Flow names
@@ -1238,25 +1234,24 @@ type UserPoolClientType struct {
 	// prefix. Note that values with ALLOW_ prefix cannot be used along with values
 	// without ALLOW_ prefix. Valid values include:
 	//
-	//     *
-	// ALLOW_ADMIN_USER_PASSWORD_AUTH: Enable admin based user password authentication
-	// flow ADMIN_USER_PASSWORD_AUTH. This setting replaces the ADMIN_NO_SRP_AUTH
-	// setting. With this authentication flow, Cognito receives the password in the
-	// request instead of using the SRP (Secure Remote Password protocol) protocol to
-	// verify passwords.
+	// * ALLOW_ADMIN_USER_PASSWORD_AUTH:
+	// Enable admin based user password authentication flow ADMIN_USER_PASSWORD_AUTH.
+	// This setting replaces the ADMIN_NO_SRP_AUTH setting. With this authentication
+	// flow, Cognito receives the password in the request instead of using the SRP
+	// (Secure Remote Password protocol) protocol to verify passwords.
 	//
-	//     * ALLOW_CUSTOM_AUTH: Enable Lambda trigger based
+	// *
+	// ALLOW_CUSTOM_AUTH: Enable Lambda trigger based authentication.
+	//
+	// *
+	// ALLOW_USER_PASSWORD_AUTH: Enable user password-based authentication. In this
+	// flow, Cognito receives the password in the request instead of using the SRP
+	// protocol to verify passwords.
+	//
+	// * ALLOW_USER_SRP_AUTH: Enable SRP based
 	// authentication.
 	//
-	//     * ALLOW_USER_PASSWORD_AUTH: Enable user password-based
-	// authentication. In this flow, Cognito receives the password in the request
-	// instead of using the SRP protocol to verify passwords.
-	//
-	//     *
-	// ALLOW_USER_SRP_AUTH: Enable SRP based authentication.
-	//
-	//     *
-	// ALLOW_REFRESH_TOKEN_AUTH: Enable authflow to refresh tokens.
+	// * ALLOW_REFRESH_TOKEN_AUTH: Enable authflow to refresh tokens.
 	ExplicitAuthFlows []ExplicitAuthFlowsType
 
 	// The time limit, specified by tokenValidityUnits, defaulting to hours, after
@@ -1278,10 +1273,10 @@ type UserPoolClientType struct {
 	// LEGACY, those APIs will return a UserNotFoundException exception if the user
 	// does not exist in the user pool. Valid values include:
 	//
-	//     * ENABLED - This
+	// * ENABLED - This
 	// prevents user existence-related errors.
 	//
-	//     * LEGACY - This represents the old
+	// * LEGACY - This represents the old
 	// behavior of Cognito where user existence related errors are not
 	// prevented.
 	//
@@ -1407,15 +1402,15 @@ type UserPoolType struct {
 
 	// Can be one of the following values:
 	//
-	//     * OFF - MFA tokens are not required and
+	// * OFF - MFA tokens are not required and
 	// cannot be specified during user registration.
 	//
-	//     * ON - MFA tokens are
-	// required for all user registrations. You can only specify required when you are
-	// initially creating a user pool.
+	// * ON - MFA tokens are required
+	// for all user registrations. You can only specify required when you are initially
+	// creating a user pool.
 	//
-	//     * OPTIONAL - Users have the option when
-	// registering to create an MFA token.
+	// * OPTIONAL - Users have the option when registering to
+	// create an MFA token.
 	MfaConfiguration UserPoolMfaType
 
 	// The name of the user pool.
@@ -1485,27 +1480,26 @@ type UserType struct {
 
 	// The user status. Can be one of the following:
 	//
-	//     * UNCONFIRMED - User has been
+	// * UNCONFIRMED - User has been
 	// created but not confirmed.
 	//
-	//     * CONFIRMED - User has been confirmed.
+	// * CONFIRMED - User has been confirmed.
 	//
-	//     *
-	// ARCHIVED - User is no longer active.
+	// * ARCHIVED -
+	// User is no longer active.
 	//
-	//     * COMPROMISED - User is disabled due
-	// to a potential security threat.
+	// * COMPROMISED - User is disabled due to a potential
+	// security threat.
 	//
-	//     * UNKNOWN - User status is not known.
+	// * UNKNOWN - User status is not known.
 	//
+	// * RESET_REQUIRED - User
+	// is confirmed, but the user must request a code and reset his or her password
+	// before he or she can sign in.
 	//
-	// * RESET_REQUIRED - User is confirmed, but the user must request a code and reset
-	// his or her password before he or she can sign in.
-	//
-	//     * FORCE_CHANGE_PASSWORD -
-	// The user is confirmed and the user can sign in using a temporary password, but
-	// on first sign-in, the user must change his or her password to a new value before
-	// doing anything else.
+	// * FORCE_CHANGE_PASSWORD - The user is confirmed
+	// and the user can sign in using a temporary password, but on first sign-in, the
+	// user must change his or her password to a new value before doing anything else.
 	UserStatus UserStatusType
 
 	// The user name of the user you wish to describe.

@@ -15,11 +15,11 @@ import (
 // quota template does not apply the quota increase requests from the template.
 // Related operations
 //
-//     * To enable the quota template, call
+// * To enable the quota template, call
 // AssociateServiceQuotaTemplate.
 //
-//     * To delete a specific service quota from
-// the template, use DeleteServiceQuotaIncreaseRequestFromTemplate.
+// * To delete a specific service quota from the
+// template, use DeleteServiceQuotaIncreaseRequestFromTemplate.
 func (c *Client) DisassociateServiceQuotaTemplate(ctx context.Context, params *DisassociateServiceQuotaTemplateInput, optFns ...func(*Options)) (*DisassociateServiceQuotaTemplateOutput, error) {
 	if params == nil {
 		params = &DisassociateServiceQuotaTemplateInput{}

@@ -49,13 +49,13 @@ type RestoreDBInstanceFromS3Input struct {
 	// The DB instance identifier. This parameter is stored as a lowercase string.
 	// Constraints:
 	//
-	//     * Must contain from 1 to 63 letters, numbers, or hyphens.
+	// * Must contain from 1 to 63 letters, numbers, or hyphens.
 	//
+	// * First
+	// character must be a letter.
 	//
-	// * First character must be a letter.
-	//
-	//     * Can't end with a hyphen or contain
-	// two consecutive hyphens.
+	// * Can't end with a hyphen or contain two
+	// consecutive hyphens.
 	//
 	// Example: mydbinstance
 	//
@@ -198,13 +198,13 @@ type RestoreDBInstanceFromS3Input struct {
 
 	// The name for the master user. Constraints:
 	//
-	//     * Must be 1 to 16 letters or
+	// * Must be 1 to 16 letters or
 	// numbers.
 	//
-	//     * First character must be a letter.
+	// * First character must be a letter.
 	//
-	//     * Can't be a reserved
-	// word for the chosen database engine.
+	// * Can't be a reserved word for
+	// the chosen database engine.
 	MasterUsername *string
 
 	// The upper limit to which Amazon RDS can automatically scale the storage of the
@@ -257,16 +257,15 @@ type RestoreDBInstanceFromS3Input struct {
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow)
 	// in the Amazon RDS User Guide. Constraints:
 	//
-	//     * Must be in the format
+	// * Must be in the format
 	// hh24:mi-hh24:mi.
 	//
-	//     * Must be in Universal Coordinated Time (UTC).
+	// * Must be in Universal Coordinated Time (UTC).
 	//
-	//     * Must
-	// not conflict with the preferred maintenance window.
+	// * Must not
+	// conflict with the preferred maintenance window.
 	//
-	//     * Must be at least 30
-	// minutes.
+	// * Must be at least 30 minutes.
 	PreferredBackupWindow *string
 
 	// The time range each week during which system maintenance can occur, in Universal
@@ -274,18 +273,18 @@ type RestoreDBInstanceFromS3Input struct {
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#Concepts.DBMaintenance)
 	// in the Amazon RDS User Guide. Constraints:
 	//
-	//     * Must be in the format
+	// * Must be in the format
 	// ddd:hh24:mi-ddd:hh24:mi.
 	//
-	//     * Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
+	// * Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
 	//
+	// *
+	// Must be in Universal Coordinated Time (UTC).
 	//
-	// * Must be in Universal Coordinated Time (UTC).
-	//
-	//     * Must not conflict with the
+	// * Must not conflict with the
 	// preferred backup window.
 	//
-	//     * Must be at least 30 minutes.
+	// * Must be at least 30 minutes.
 	PreferredMaintenanceWindow *string
 
 	// The number of CPU cores and the number of threads per core for the DB instance

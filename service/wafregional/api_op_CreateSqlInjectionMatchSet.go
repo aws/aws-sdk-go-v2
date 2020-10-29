@@ -23,17 +23,17 @@ import (
 // malicious strings. To create and configure a SqlInjectionMatchSet, perform the
 // following steps:
 //
-//     * Use GetChangeToken to get the change token that you
-// provide in the ChangeToken parameter of a CreateSqlInjectionMatchSet request.
+// * Use GetChangeToken to get the change token that you provide
+// in the ChangeToken parameter of a CreateSqlInjectionMatchSet request.
 //
+// * Submit
+// a CreateSqlInjectionMatchSet request.
 //
-// * Submit a CreateSqlInjectionMatchSet request.
-//
-//     * Use GetChangeToken to get
-// the change token that you provide in the ChangeToken parameter of an
+// * Use GetChangeToken to get the change
+// token that you provide in the ChangeToken parameter of an
 // UpdateSqlInjectionMatchSet request.
 //
-//     * Submit an UpdateSqlInjectionMatchSet
+// * Submit an UpdateSqlInjectionMatchSet
 // request to specify the parts of web requests in which you want to allow, block,
 // or count malicious SQL code.
 //

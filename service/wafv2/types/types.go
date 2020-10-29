@@ -86,14 +86,14 @@ type ByteMatchStatement struct {
 	// characters or underscore (A-Z, a-z, 0-9, or _). In addition, SearchString must
 	// be a word, which means that both of the following are true:
 	//
-	//     * SearchString
-	// is at the beginning of the specified part of the web request or is preceded by a
+	// * SearchString is
+	// at the beginning of the specified part of the web request or is preceded by a
 	// character other than an alphanumeric character or underscore (_). Examples
 	// include the value of a header and ;BadBot.
 	//
-	//     * SearchString is at the end of
-	// the specified part of the web request or is followed by a character other than
-	// an alphanumeric character or underscore (_), for example, BadBot; and
+	// * SearchString is at the end of the
+	// specified part of the web request or is followed by a character other than an
+	// alphanumeric character or underscore (_), for example, BadBot; and
 	// -BadBot;.
 	//
 	// EXACTLY The value of the specified part of the web request must
@@ -110,18 +110,18 @@ type ByteMatchStatement struct {
 	// maximum length of the value is 50 bytes. Valid values depend on the component
 	// that you specify for inspection in FieldToMatch:
 	//
-	//     * Method: The HTTP method
-	// that you want AWS WAF to search for. This indicates the type of operation
-	// specified in the request.
+	// * Method: The HTTP method that
+	// you want AWS WAF to search for. This indicates the type of operation specified
+	// in the request.
 	//
-	//     * UriPath: The value that you want AWS WAF to
-	// search for in the URI path, for example, /images/daily-ad.jpg.
+	// * UriPath: The value that you want AWS WAF to search for in the
+	// URI path, for example, /images/daily-ad.jpg.
 	//
-	// If SearchString
-	// includes alphabetic characters A-Z and a-z, note that the value is case
-	// sensitive. If you're using the AWS WAF API Specify a base64-encoded version of
-	// the value. The maximum length of the value before you base64-encode it is 50
-	// bytes. For example, suppose the value of Type is HEADER and the value of Data is
+	// If SearchString includes
+	// alphabetic characters A-Z and a-z, note that the value is case sensitive. If
+	// you're using the AWS WAF API Specify a base64-encoded version of the value. The
+	// maximum length of the value before you base64-encode it is 50 bytes. For
+	// example, suppose the value of Type is HEADER and the value of Data is
 	// User-Agent. If you want to search the User-Agent header for the value BadBot,
 	// you base64-encode BadBot using MIME base64-encoding and include the resulting
 	// value, QmFkQm90, in the value of SearchString. If you're using the AWS CLI or
@@ -254,12 +254,12 @@ type FirewallManagerRuleGroup struct {
 	// action settings. In a Rule, you must specify either this OverrideAction setting
 	// or the rule Action setting, but not both:
 	//
-	//     * If the rule statement
-	// references a rule group, use this override action setting and not the action
-	// setting.
+	// * If the rule statement references a
+	// rule group, use this override action setting and not the action setting.
 	//
-	//     * If the rule statement does not reference a rule group, use the
-	// rule action setting and not this rule override action setting.
+	// * If
+	// the rule statement does not reference a rule group, use the rule action setting
+	// and not this rule override action setting.
 	//
 	// This member is required.
 	OverrideAction *OverrideAction
@@ -325,12 +325,11 @@ type ForwardedIPConfig struct {
 	// present in the request, AWS WAF doesn't apply the rule to the web request at
 	// all. You can specify the following fallback behaviors:
 	//
-	//     * MATCH - Treat the
-	// web request as matching the rule statement. AWS WAF applies the rule action to
-	// the request.
+	// * MATCH - Treat the web
+	// request as matching the rule statement. AWS WAF applies the rule action to the
+	// request.
 	//
-	//     * NO_MATCH - Treat the web request as not matching the rule
-	// statement.
+	// * NO_MATCH - Treat the web request as not matching the rule statement.
 	//
 	// This member is required.
 	FallbackBehavior FallbackBehavior
@@ -392,11 +391,11 @@ type HTTPRequest struct {
 	// with a CloudFront distribution, this is the value of one of the following fields
 	// in CloudFront access logs:
 	//
-	//     * c-ip, if the viewer did not use an HTTP proxy
-	// or a load balancer to send the request
+	// * c-ip, if the viewer did not use an HTTP proxy or a
+	// load balancer to send the request
 	//
-	//     * x-forwarded-for, if the viewer did
-	// use an HTTP proxy or a load balancer to send the request
+	// * x-forwarded-for, if the viewer did use an
+	// HTTP proxy or a load balancer to send the request
 	ClientIP *string
 
 	// The two-letter country code for the country that the request originated from.
@@ -441,20 +440,19 @@ type IPSet struct {
 	// IP addresses in Classless Inter-Domain Routing (CIDR) notation. AWS WAF supports
 	// all address ranges for IP versions IPv4 and IPv6. Examples:
 	//
-	//     * To configure
-	// AWS WAF to allow, block, or count requests that originated from the IP address
+	// * To configure AWS
+	// WAF to allow, block, or count requests that originated from the IP address
 	// 192.0.2.44, specify 192.0.2.44/32.
 	//
-	//     * To configure AWS WAF to allow, block,
-	// or count requests that originated from IP addresses from 192.0.2.0 to
-	// 192.0.2.255, specify 192.0.2.0/24.
+	// * To configure AWS WAF to allow, block, or
+	// count requests that originated from IP addresses from 192.0.2.0 to 192.0.2.255,
+	// specify 192.0.2.0/24.
 	//
-	//     * To configure AWS WAF to allow, block,
-	// or count requests that originated from the IP address
-	// 1111:0000:0000:0000:0000:0000:0000:0111, specify
-	// 1111:0000:0000:0000:0000:0000:0000:0111/128.
+	// * To configure AWS WAF to allow, block, or count requests
+	// that originated from the IP address 1111:0000:0000:0000:0000:0000:0000:0111,
+	// specify 1111:0000:0000:0000:0000:0000:0000:0111/128.
 	//
-	//     * To configure AWS WAF to
+	// * To configure AWS WAF to
 	// allow, block, or count requests that originated from IP addresses
 	// 1111:0000:0000:0000:0000:0000:0000:0000 to
 	// 1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify
@@ -503,12 +501,11 @@ type IPSetForwardedIPConfig struct {
 	// present in the request, AWS WAF doesn't apply the rule to the web request at
 	// all. You can specify the following fallback behaviors:
 	//
-	//     * MATCH - Treat the
-	// web request as matching the rule statement. AWS WAF applies the rule action to
-	// the request.
+	// * MATCH - Treat the web
+	// request as matching the rule statement. AWS WAF applies the rule action to the
+	// request.
 	//
-	//     * NO_MATCH - Treat the web request as not matching the rule
-	// statement.
+	// * NO_MATCH - Treat the web request as not matching the rule statement.
 	//
 	// This member is required.
 	FallbackBehavior FallbackBehavior
@@ -527,16 +524,16 @@ type IPSetForwardedIPConfig struct {
 	// identifies the original client and the rest identify proxies that the request
 	// went through. The options for this setting are the following:
 	//
-	//     * FIRST -
-	// Inspect the first IP address in the list of IP addresses in the header. This is
-	// usually the client's original IP.
+	// * FIRST - Inspect
+	// the first IP address in the list of IP addresses in the header. This is usually
+	// the client's original IP.
 	//
-	//     * LAST - Inspect the last IP address in
-	// the list of IP addresses in the header.
+	// * LAST - Inspect the last IP address in the list of
+	// IP addresses in the header.
 	//
-	//     * ANY - Inspect all IP addresses in
-	// the header for a match. If the header contains more than 10 IP addresses, AWS
-	// WAF inspects the last 10.
+	// * ANY - Inspect all IP addresses in the header for
+	// a match. If the header contains more than 10 IP addresses, AWS WAF inspects the
+	// last 10.
 	//
 	// This member is required.
 	Position ForwardedIPPosition
@@ -747,12 +744,12 @@ type OrStatement struct {
 // action settings. In a Rule, you must specify either this OverrideAction setting
 // or the rule Action setting, but not both:
 //
-//     * If the rule statement
-// references a rule group, use this override action setting and not the action
-// setting.
+// * If the rule statement references a
+// rule group, use this override action setting and not the action setting.
 //
-//     * If the rule statement does not reference a rule group, use the
-// rule action setting and not this rule override action setting.
+// * If
+// the rule statement does not reference a rule group, use the rule action setting
+// and not this rule override action setting.
 type OverrideAction struct {
 
 	// Override the rule action setting to count.
@@ -788,31 +785,31 @@ type QueryString struct {
 // create a rate-based rule with a nested AND rule statement that contains the
 // following nested statements:
 //
-//     * An IP match statement with an IP set that
+// * An IP match statement with an IP set that
 // specified the address 192.0.2.44.
 //
-//     * A string match statement that searches
-// in the User-Agent header for the string BadBot.
+// * A string match statement that searches in
+// the User-Agent header for the string BadBot.
 //
-// In this rate-based rule, you
-// also define a rate limit. For this example, the rate limit is 1,000. Requests
-// that meet both of the conditions in the statements are counted. If the count
-// exceeds 1,000 requests per five minutes, the rule action triggers. Requests that
-// do not meet both conditions are not counted towards the rate limit and are not
-// affected by this rule. You cannot nest a RateBasedStatement, for example for use
-// inside a NotStatement or OrStatement. It can only be referenced as a top-level
-// statement within a rule.
+// In this rate-based rule, you also
+// define a rate limit. For this example, the rate limit is 1,000. Requests that
+// meet both of the conditions in the statements are counted. If the count exceeds
+// 1,000 requests per five minutes, the rule action triggers. Requests that do not
+// meet both conditions are not counted towards the rate limit and are not affected
+// by this rule. You cannot nest a RateBasedStatement, for example for use inside a
+// NotStatement or OrStatement. It can only be referenced as a top-level statement
+// within a rule.
 type RateBasedStatement struct {
 
 	// Setting that indicates how to aggregate the request counts. The options are the
 	// following:
 	//
-	//     * IP - Aggregate the request counts on the IP address from the
-	// web request origin.
+	// * IP - Aggregate the request counts on the IP address from the web
+	// request origin.
 	//
-	//     * FORWARDED_IP - Aggregate the request counts on the
-	// first IP address in an HTTP header. If you use this, configure the
-	// ForwardedIPConfig, to specify the header to use.
+	// * FORWARDED_IP - Aggregate the request counts on the first IP
+	// address in an HTTP header. If you use this, configure the ForwardedIPConfig, to
+	// specify the header to use.
 	//
 	// This member is required.
 	AggregateKeyType RateBasedStatementAggregateKeyType
@@ -1002,11 +999,11 @@ type Rule struct {
 	// ManagedRuleGroupStatement. You must specify either this Action setting or the
 	// rule OverrideAction setting, but not both:
 	//
-	//     * If the rule statement does not
+	// * If the rule statement does not
 	// reference a rule group, use this rule action setting and not the rule override
 	// action setting.
 	//
-	//     * If the rule statement references a rule group, use the
+	// * If the rule statement references a rule group, use the
 	// override action setting and not this action setting.
 	Action *RuleAction
 
@@ -1017,12 +1014,12 @@ type Rule struct {
 	// action settings. In a Rule, you must specify either this OverrideAction setting
 	// or the rule Action setting, but not both:
 	//
-	//     * If the rule statement
-	// references a rule group, use this override action setting and not the action
-	// setting.
+	// * If the rule statement references a
+	// rule group, use this override action setting and not the action setting.
 	//
-	//     * If the rule statement does not reference a rule group, use the
-	// rule action setting and not this rule override action setting.
+	// * If
+	// the rule statement does not reference a rule group, use the rule action setting
+	// and not this rule override action setting.
 	OverrideAction *OverrideAction
 }
 
@@ -1377,20 +1374,20 @@ type Statement struct {
 	// create a rate-based rule with a nested AND rule statement that contains the
 	// following nested statements:
 	//
-	//     * An IP match statement with an IP set that
+	// * An IP match statement with an IP set that
 	// specified the address 192.0.2.44.
 	//
-	//     * A string match statement that searches
-	// in the User-Agent header for the string BadBot.
+	// * A string match statement that searches in
+	// the User-Agent header for the string BadBot.
 	//
-	// In this rate-based rule, you
-	// also define a rate limit. For this example, the rate limit is 1,000. Requests
-	// that meet both of the conditions in the statements are counted. If the count
-	// exceeds 1,000 requests per five minutes, the rule action triggers. Requests that
-	// do not meet both conditions are not counted towards the rate limit and are not
-	// affected by this rule. You cannot nest a RateBasedStatement, for example for use
-	// inside a NotStatement or OrStatement. It can only be referenced as a top-level
-	// statement within a rule.
+	// In this rate-based rule, you also
+	// define a rate limit. For this example, the rate limit is 1,000. Requests that
+	// meet both of the conditions in the statements are counted. If the count exceeds
+	// 1,000 requests per five minutes, the rule action triggers. Requests that do not
+	// meet both conditions are not counted towards the rate limit and are not affected
+	// by this rule. You cannot nest a RateBasedStatement, for example for use inside a
+	// NotStatement or OrStatement. It can only be referenced as a top-level statement
+	// within a rule.
 	RateBasedStatement *RateBasedStatement
 
 	// A rule statement used to search web request components for matches with regular
@@ -1516,64 +1513,64 @@ type TextTransformation struct {
 	// and using unusual formatting to disguise some or all of the command, use this
 	// option to perform the following transformations:
 	//
-	//     * Delete the following
+	// * Delete the following
 	// characters: \ " ' ^
 	//
-	//     * Delete spaces before the following characters: / (
+	// * Delete spaces before the following characters: / (
 	//
+	// *
+	// Replace the following characters with a space: , ;
 	//
-	// * Replace the following characters with a space: , ;
+	// * Replace multiple spaces
+	// with one space
 	//
-	//     * Replace multiple
-	// spaces with one space
-	//
-	//     * Convert uppercase letters (A-Z) to lowercase
+	// * Convert uppercase letters (A-Z) to lowercase
 	// (a-z)
 	//
 	// COMPRESS_WHITE_SPACE Use this option to replace the following characters
 	// with a space character (decimal 32):
 	//
-	//     * \f, formfeed, decimal 12
+	// * \f, formfeed, decimal 12
 	//
-	//     * \t,
-	// tab, decimal 9
+	// * \t, tab,
+	// decimal 9
 	//
-	//     * \n, newline, decimal 10
+	// * \n, newline, decimal 10
 	//
-	//     * \r, carriage return,
-	// decimal 13
+	// * \r, carriage return, decimal 13
 	//
-	//     * \v, vertical tab, decimal 11
+	// * \v,
+	// vertical tab, decimal 11
 	//
-	//     * non-breaking space,
-	// decimal 160
+	// * non-breaking space, decimal
+	// 160
 	//
 	// COMPRESS_WHITE_SPACE also replaces multiple spaces with one space.
 	// HTML_ENTITY_DECODE Use this option to replace HTML-encoded characters with
 	// unencoded characters. HTML_ENTITY_DECODE performs the following operations:
 	//
+	// *
+	// Replaces (ampersand)quot; with "
 	//
-	// * Replaces (ampersand)quot; with "
-	//
-	//     * Replaces (ampersand)nbsp; with a
+	// * Replaces (ampersand)nbsp; with a
 	// non-breaking space, decimal 160
 	//
-	//     * Replaces (ampersand)lt; with a "less
-	// than" symbol
+	// * Replaces (ampersand)lt; with a "less than"
+	// symbol
 	//
-	//     * Replaces (ampersand)gt; with >
+	// * Replaces (ampersand)gt; with >
 	//
-	//     * Replaces characters
-	// that are represented in hexadecimal format, (ampersand)#xhhhh;, with the
-	// corresponding characters
+	// * Replaces characters that are
+	// represented in hexadecimal format, (ampersand)#xhhhh;, with the corresponding
+	// characters
 	//
-	//     * Replaces characters that are represented in
-	// decimal format, (ampersand)#nnnn;, with the corresponding characters
+	// * Replaces characters that are represented in decimal format,
+	// (ampersand)#nnnn;, with the corresponding characters
 	//
-	// LOWERCASE
-	// Use this option to convert uppercase letters (A-Z) to lowercase (a-z).
-	// URL_DECODE Use this option to decode a URL-encoded value. NONE Specify NONE if
-	// you don't want any text transformations.
+	// LOWERCASE Use this option
+	// to convert uppercase letters (A-Z) to lowercase (a-z). URL_DECODE Use this
+	// option to decode a URL-encoded value. NONE Specify NONE if you don't want any
+	// text transformations.
 	//
 	// This member is required.
 	Type TextTransformationType

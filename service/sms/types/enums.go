@@ -133,12 +133,12 @@ type AppStatus string
 
 // Enum values for AppStatus
 const (
-	AppStatusCreating      AppStatus = "CREATING"
-	AppStatusActive        AppStatus = "ACTIVE"
-	AppStatusUpdating      AppStatus = "UPDATING"
-	AppStatusDeleting      AppStatus = "DELETING"
-	AppStatusDeleted       AppStatus = "DELETED"
-	AppStatusDelete_failed AppStatus = "DELETE_FAILED"
+	AppStatusCreating     AppStatus = "CREATING"
+	AppStatusActive       AppStatus = "ACTIVE"
+	AppStatusUpdating     AppStatus = "UPDATING"
+	AppStatusDeleting     AppStatus = "DELETING"
+	AppStatusDeleted      AppStatus = "DELETED"
+	AppStatusDeleteFailed AppStatus = "DELETE_FAILED"
 )
 
 // Values returns all known values for AppStatus. Note that this can be expanded in
@@ -329,8 +329,8 @@ type ScriptType string
 
 // Enum values for ScriptType
 const (
-	ScriptTypeShell_script      ScriptType = "SHELL_SCRIPT"
-	ScriptTypePowershell_script ScriptType = "POWERSHELL_SCRIPT"
+	ScriptTypeShellScript      ScriptType = "SHELL_SCRIPT"
+	ScriptTypePowershellScript ScriptType = "POWERSHELL_SCRIPT"
 )
 
 // Values returns all known values for ScriptType. Note that this can be expanded

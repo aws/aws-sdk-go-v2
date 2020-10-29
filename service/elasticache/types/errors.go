@@ -1037,11 +1037,11 @@ func (e *SnapshotAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smi
 
 // You attempted one of the following operations:
 //
-//     * Creating a snapshot of a
-// Redis cluster running on a cache.t1.micro cache node.
+// * Creating a snapshot of a Redis
+// cluster running on a cache.t1.micro cache node.
 //
-//     * Creating a snapshot
-// of a cluster that is running Memcached rather than Redis.
+// * Creating a snapshot of a
+// cluster that is running Memcached rather than Redis.
 //
 // Neither of these are
 // supported by ElastiCache.

@@ -14,19 +14,19 @@ import (
 // groups per account. You must use the following guidelines when naming a log
 // group:
 //
-//     * Log group names must be unique within a region for an AWS
-// account.
+// * Log group names must be unique within a region for an AWS account.
 //
-//     * Log group names can be between 1 and 512 characters long.
+// *
+// Log group names can be between 1 and 512 characters long.
 //
-//     *
-// Log group names consist of the following characters: a-z, A-Z, 0-9, '_'
-// (underscore), '-' (hyphen), '/' (forward slash), '.' (period), and '#' (number
-// sign)
+// * Log group names
+// consist of the following characters: a-z, A-Z, 0-9, '_' (underscore), '-'
+// (hyphen), '/' (forward slash), '.' (period), and '#' (number sign)
 //
-// When you create a log group, by default the log events in the log group
-// never expire. To set a retention policy so that events expire and are deleted
-// after a specified time, use PutRetentionPolicy
+// When you
+// create a log group, by default the log events in the log group never expire. To
+// set a retention policy so that events expire and are deleted after a specified
+// time, use PutRetentionPolicy
 // (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutRetentionPolicy.html).
 // If you associate a AWS Key Management Service (AWS KMS) customer master key
 // (CMK) with the log group, ingested data is encrypted using the CMK. This

@@ -6,14 +6,14 @@ type AccessDeniedErrorCode string
 
 // Enum values for AccessDeniedErrorCode
 const (
-	AccessDeniedErrorCodeAccess_denied_to_assessment_target   AccessDeniedErrorCode = "ACCESS_DENIED_TO_ASSESSMENT_TARGET"
-	AccessDeniedErrorCodeAccess_denied_to_assessment_template AccessDeniedErrorCode = "ACCESS_DENIED_TO_ASSESSMENT_TEMPLATE"
-	AccessDeniedErrorCodeAccess_denied_to_assessment_run      AccessDeniedErrorCode = "ACCESS_DENIED_TO_ASSESSMENT_RUN"
-	AccessDeniedErrorCodeAccess_denied_to_finding             AccessDeniedErrorCode = "ACCESS_DENIED_TO_FINDING"
-	AccessDeniedErrorCodeAccess_denied_to_resource_group      AccessDeniedErrorCode = "ACCESS_DENIED_TO_RESOURCE_GROUP"
-	AccessDeniedErrorCodeAccess_denied_to_rules_package       AccessDeniedErrorCode = "ACCESS_DENIED_TO_RULES_PACKAGE"
-	AccessDeniedErrorCodeAccess_denied_to_sns_topic           AccessDeniedErrorCode = "ACCESS_DENIED_TO_SNS_TOPIC"
-	AccessDeniedErrorCodeAccess_denied_to_iam_role            AccessDeniedErrorCode = "ACCESS_DENIED_TO_IAM_ROLE"
+	AccessDeniedErrorCodeAccessDeniedToAssessmentTarget   AccessDeniedErrorCode = "ACCESS_DENIED_TO_ASSESSMENT_TARGET"
+	AccessDeniedErrorCodeAccessDeniedToAssessmentTemplate AccessDeniedErrorCode = "ACCESS_DENIED_TO_ASSESSMENT_TEMPLATE"
+	AccessDeniedErrorCodeAccessDeniedToAssessmentRun      AccessDeniedErrorCode = "ACCESS_DENIED_TO_ASSESSMENT_RUN"
+	AccessDeniedErrorCodeAccessDeniedToFinding            AccessDeniedErrorCode = "ACCESS_DENIED_TO_FINDING"
+	AccessDeniedErrorCodeAccessDeniedToResourceGroup      AccessDeniedErrorCode = "ACCESS_DENIED_TO_RESOURCE_GROUP"
+	AccessDeniedErrorCodeAccessDeniedToRulesPackage       AccessDeniedErrorCode = "ACCESS_DENIED_TO_RULES_PACKAGE"
+	AccessDeniedErrorCodeAccessDeniedToSnsTopic           AccessDeniedErrorCode = "ACCESS_DENIED_TO_SNS_TOPIC"
+	AccessDeniedErrorCodeAccessDeniedToIamRole            AccessDeniedErrorCode = "ACCESS_DENIED_TO_IAM_ROLE"
 )
 
 // Values returns all known values for AccessDeniedErrorCode. Note that this can be
@@ -82,10 +82,10 @@ type AssessmentRunNotificationSnsStatusCode string
 
 // Enum values for AssessmentRunNotificationSnsStatusCode
 const (
-	AssessmentRunNotificationSnsStatusCodeSuccess              AssessmentRunNotificationSnsStatusCode = "SUCCESS"
-	AssessmentRunNotificationSnsStatusCodeTopic_does_not_exist AssessmentRunNotificationSnsStatusCode = "TOPIC_DOES_NOT_EXIST"
-	AssessmentRunNotificationSnsStatusCodeAccess_denied        AssessmentRunNotificationSnsStatusCode = "ACCESS_DENIED"
-	AssessmentRunNotificationSnsStatusCodeInternal_error       AssessmentRunNotificationSnsStatusCode = "INTERNAL_ERROR"
+	AssessmentRunNotificationSnsStatusCodeSuccess           AssessmentRunNotificationSnsStatusCode = "SUCCESS"
+	AssessmentRunNotificationSnsStatusCodeTopicDoesNotExist AssessmentRunNotificationSnsStatusCode = "TOPIC_DOES_NOT_EXIST"
+	AssessmentRunNotificationSnsStatusCodeAccessDenied      AssessmentRunNotificationSnsStatusCode = "ACCESS_DENIED"
+	AssessmentRunNotificationSnsStatusCodeInternalError     AssessmentRunNotificationSnsStatusCode = "INTERNAL_ERROR"
 )
 
 // Values returns all known values for AssessmentRunNotificationSnsStatusCode. Note
@@ -105,19 +105,19 @@ type AssessmentRunState string
 
 // Enum values for AssessmentRunState
 const (
-	AssessmentRunStateCreated                           AssessmentRunState = "CREATED"
-	AssessmentRunStateStart_data_collection_pending     AssessmentRunState = "START_DATA_COLLECTION_PENDING"
-	AssessmentRunStateStart_data_collection_in_progress AssessmentRunState = "START_DATA_COLLECTION_IN_PROGRESS"
-	AssessmentRunStateCollecting_data                   AssessmentRunState = "COLLECTING_DATA"
-	AssessmentRunStateStop_data_collection_pending      AssessmentRunState = "STOP_DATA_COLLECTION_PENDING"
-	AssessmentRunStateData_collected                    AssessmentRunState = "DATA_COLLECTED"
-	AssessmentRunStateStart_evaluating_rules_pending    AssessmentRunState = "START_EVALUATING_RULES_PENDING"
-	AssessmentRunStateEvaluating_rules                  AssessmentRunState = "EVALUATING_RULES"
-	AssessmentRunStateFailed                            AssessmentRunState = "FAILED"
-	AssessmentRunStateError                             AssessmentRunState = "ERROR"
-	AssessmentRunStateCompleted                         AssessmentRunState = "COMPLETED"
-	AssessmentRunStateCompleted_with_errors             AssessmentRunState = "COMPLETED_WITH_ERRORS"
-	AssessmentRunStateCanceled                          AssessmentRunState = "CANCELED"
+	AssessmentRunStateCreated                       AssessmentRunState = "CREATED"
+	AssessmentRunStateStartDataCollectionPending    AssessmentRunState = "START_DATA_COLLECTION_PENDING"
+	AssessmentRunStateStartDataCollectionInProgress AssessmentRunState = "START_DATA_COLLECTION_IN_PROGRESS"
+	AssessmentRunStateCollectingData                AssessmentRunState = "COLLECTING_DATA"
+	AssessmentRunStateStopDataCollectionPending     AssessmentRunState = "STOP_DATA_COLLECTION_PENDING"
+	AssessmentRunStateDataCollected                 AssessmentRunState = "DATA_COLLECTED"
+	AssessmentRunStateStartEvaluatingRulesPending   AssessmentRunState = "START_EVALUATING_RULES_PENDING"
+	AssessmentRunStateEvaluatingRules               AssessmentRunState = "EVALUATING_RULES"
+	AssessmentRunStateFailed                        AssessmentRunState = "FAILED"
+	AssessmentRunStateError                         AssessmentRunState = "ERROR"
+	AssessmentRunStateCompleted                     AssessmentRunState = "COMPLETED"
+	AssessmentRunStateCompletedWithErrors           AssessmentRunState = "COMPLETED_WITH_ERRORS"
+	AssessmentRunStateCanceled                      AssessmentRunState = "CANCELED"
 )
 
 // Values returns all known values for AssessmentRunState. Note that this can be
@@ -145,7 +145,7 @@ type AssetType string
 
 // Enum values for AssetType
 const (
-	AssetTypeEc2_instance AssetType = "ec2-instance"
+	AssetTypeEc2Instance AssetType = "ec2-instance"
 )
 
 // Values returns all known values for AssetType. Note that this can be expanded in
@@ -161,12 +161,12 @@ type FailedItemErrorCode string
 
 // Enum values for FailedItemErrorCode
 const (
-	FailedItemErrorCodeInvalid_arn         FailedItemErrorCode = "INVALID_ARN"
-	FailedItemErrorCodeDuplicate_arn       FailedItemErrorCode = "DUPLICATE_ARN"
-	FailedItemErrorCodeItem_does_not_exist FailedItemErrorCode = "ITEM_DOES_NOT_EXIST"
-	FailedItemErrorCodeAccess_denied       FailedItemErrorCode = "ACCESS_DENIED"
-	FailedItemErrorCodeLimit_exceeded      FailedItemErrorCode = "LIMIT_EXCEEDED"
-	FailedItemErrorCodeInternal_error      FailedItemErrorCode = "INTERNAL_ERROR"
+	FailedItemErrorCodeInvalidArn       FailedItemErrorCode = "INVALID_ARN"
+	FailedItemErrorCodeDuplicateArn     FailedItemErrorCode = "DUPLICATE_ARN"
+	FailedItemErrorCodeItemDoesNotExist FailedItemErrorCode = "ITEM_DOES_NOT_EXIST"
+	FailedItemErrorCodeAccessDenied     FailedItemErrorCode = "ACCESS_DENIED"
+	FailedItemErrorCodeLimitExceeded    FailedItemErrorCode = "LIMIT_EXCEEDED"
+	FailedItemErrorCodeInternalError    FailedItemErrorCode = "INTERNAL_ERROR"
 )
 
 // Values returns all known values for FailedItemErrorCode. Note that this can be
@@ -187,11 +187,11 @@ type InspectorEvent string
 
 // Enum values for InspectorEvent
 const (
-	InspectorEventAssessment_run_started       InspectorEvent = "ASSESSMENT_RUN_STARTED"
-	InspectorEventAssessment_run_completed     InspectorEvent = "ASSESSMENT_RUN_COMPLETED"
-	InspectorEventAssessment_run_state_changed InspectorEvent = "ASSESSMENT_RUN_STATE_CHANGED"
-	InspectorEventFinding_reported             InspectorEvent = "FINDING_REPORTED"
-	InspectorEventOther                        InspectorEvent = "OTHER"
+	InspectorEventAssessmentRunStarted      InspectorEvent = "ASSESSMENT_RUN_STARTED"
+	InspectorEventAssessmentRunCompleted    InspectorEvent = "ASSESSMENT_RUN_COMPLETED"
+	InspectorEventAssessmentRunStateChanged InspectorEvent = "ASSESSMENT_RUN_STATE_CHANGED"
+	InspectorEventFindingReported           InspectorEvent = "FINDING_REPORTED"
+	InspectorEventOther                     InspectorEvent = "OTHER"
 )
 
 // Values returns all known values for InspectorEvent. Note that this can be
@@ -211,8 +211,8 @@ type InvalidCrossAccountRoleErrorCode string
 
 // Enum values for InvalidCrossAccountRoleErrorCode
 const (
-	InvalidCrossAccountRoleErrorCodeRole_does_not_exist_or_invalid_trust_relationship InvalidCrossAccountRoleErrorCode = "ROLE_DOES_NOT_EXIST_OR_INVALID_TRUST_RELATIONSHIP"
-	InvalidCrossAccountRoleErrorCodeRole_does_not_have_correct_policy                 InvalidCrossAccountRoleErrorCode = "ROLE_DOES_NOT_HAVE_CORRECT_POLICY"
+	InvalidCrossAccountRoleErrorCodeRoleDoesNotExistOrInvalidTrustRelationship InvalidCrossAccountRoleErrorCode = "ROLE_DOES_NOT_EXIST_OR_INVALID_TRUST_RELATIONSHIP"
+	InvalidCrossAccountRoleErrorCodeRoleDoesNotHaveCorrectPolicy               InvalidCrossAccountRoleErrorCode = "ROLE_DOES_NOT_HAVE_CORRECT_POLICY"
 )
 
 // Values returns all known values for InvalidCrossAccountRoleErrorCode. Note that
@@ -230,60 +230,60 @@ type InvalidInputErrorCode string
 
 // Enum values for InvalidInputErrorCode
 const (
-	InvalidInputErrorCodeInvalid_assessment_target_arn                  InvalidInputErrorCode = "INVALID_ASSESSMENT_TARGET_ARN"
-	InvalidInputErrorCodeInvalid_assessment_template_arn                InvalidInputErrorCode = "INVALID_ASSESSMENT_TEMPLATE_ARN"
-	InvalidInputErrorCodeInvalid_assessment_run_arn                     InvalidInputErrorCode = "INVALID_ASSESSMENT_RUN_ARN"
-	InvalidInputErrorCodeInvalid_finding_arn                            InvalidInputErrorCode = "INVALID_FINDING_ARN"
-	InvalidInputErrorCodeInvalid_resource_group_arn                     InvalidInputErrorCode = "INVALID_RESOURCE_GROUP_ARN"
-	InvalidInputErrorCodeInvalid_rules_package_arn                      InvalidInputErrorCode = "INVALID_RULES_PACKAGE_ARN"
-	InvalidInputErrorCodeInvalid_resource_arn                           InvalidInputErrorCode = "INVALID_RESOURCE_ARN"
-	InvalidInputErrorCodeInvalid_sns_topic_arn                          InvalidInputErrorCode = "INVALID_SNS_TOPIC_ARN"
-	InvalidInputErrorCodeInvalid_iam_role_arn                           InvalidInputErrorCode = "INVALID_IAM_ROLE_ARN"
-	InvalidInputErrorCodeInvalid_assessment_target_name                 InvalidInputErrorCode = "INVALID_ASSESSMENT_TARGET_NAME"
-	InvalidInputErrorCodeInvalid_assessment_target_name_pattern         InvalidInputErrorCode = "INVALID_ASSESSMENT_TARGET_NAME_PATTERN"
-	InvalidInputErrorCodeInvalid_assessment_template_name               InvalidInputErrorCode = "INVALID_ASSESSMENT_TEMPLATE_NAME"
-	InvalidInputErrorCodeInvalid_assessment_template_name_pattern       InvalidInputErrorCode = "INVALID_ASSESSMENT_TEMPLATE_NAME_PATTERN"
-	InvalidInputErrorCodeInvalid_assessment_template_duration           InvalidInputErrorCode = "INVALID_ASSESSMENT_TEMPLATE_DURATION"
-	InvalidInputErrorCodeInvalid_assessment_template_duration_range     InvalidInputErrorCode = "INVALID_ASSESSMENT_TEMPLATE_DURATION_RANGE"
-	InvalidInputErrorCodeInvalid_assessment_run_duration_range          InvalidInputErrorCode = "INVALID_ASSESSMENT_RUN_DURATION_RANGE"
-	InvalidInputErrorCodeInvalid_assessment_run_start_time_range        InvalidInputErrorCode = "INVALID_ASSESSMENT_RUN_START_TIME_RANGE"
-	InvalidInputErrorCodeInvalid_assessment_run_completion_time_range   InvalidInputErrorCode = "INVALID_ASSESSMENT_RUN_COMPLETION_TIME_RANGE"
-	InvalidInputErrorCodeInvalid_assessment_run_state_change_time_range InvalidInputErrorCode = "INVALID_ASSESSMENT_RUN_STATE_CHANGE_TIME_RANGE"
-	InvalidInputErrorCodeInvalid_assessment_run_state                   InvalidInputErrorCode = "INVALID_ASSESSMENT_RUN_STATE"
-	InvalidInputErrorCodeInvalid_tag                                    InvalidInputErrorCode = "INVALID_TAG"
-	InvalidInputErrorCodeInvalid_tag_key                                InvalidInputErrorCode = "INVALID_TAG_KEY"
-	InvalidInputErrorCodeInvalid_tag_value                              InvalidInputErrorCode = "INVALID_TAG_VALUE"
-	InvalidInputErrorCodeInvalid_resource_group_tag_key                 InvalidInputErrorCode = "INVALID_RESOURCE_GROUP_TAG_KEY"
-	InvalidInputErrorCodeInvalid_resource_group_tag_value               InvalidInputErrorCode = "INVALID_RESOURCE_GROUP_TAG_VALUE"
-	InvalidInputErrorCodeInvalid_attribute                              InvalidInputErrorCode = "INVALID_ATTRIBUTE"
-	InvalidInputErrorCodeInvalid_user_attribute                         InvalidInputErrorCode = "INVALID_USER_ATTRIBUTE"
-	InvalidInputErrorCodeInvalid_user_attribute_key                     InvalidInputErrorCode = "INVALID_USER_ATTRIBUTE_KEY"
-	InvalidInputErrorCodeInvalid_user_attribute_value                   InvalidInputErrorCode = "INVALID_USER_ATTRIBUTE_VALUE"
-	InvalidInputErrorCodeInvalid_pagination_token                       InvalidInputErrorCode = "INVALID_PAGINATION_TOKEN"
-	InvalidInputErrorCodeInvalid_max_results                            InvalidInputErrorCode = "INVALID_MAX_RESULTS"
-	InvalidInputErrorCodeInvalid_agent_id                               InvalidInputErrorCode = "INVALID_AGENT_ID"
-	InvalidInputErrorCodeInvalid_auto_scaling_group                     InvalidInputErrorCode = "INVALID_AUTO_SCALING_GROUP"
-	InvalidInputErrorCodeInvalid_rule_name                              InvalidInputErrorCode = "INVALID_RULE_NAME"
-	InvalidInputErrorCodeInvalid_severity                               InvalidInputErrorCode = "INVALID_SEVERITY"
-	InvalidInputErrorCodeInvalid_locale                                 InvalidInputErrorCode = "INVALID_LOCALE"
-	InvalidInputErrorCodeInvalid_event                                  InvalidInputErrorCode = "INVALID_EVENT"
-	InvalidInputErrorCodeAssessment_target_name_already_taken           InvalidInputErrorCode = "ASSESSMENT_TARGET_NAME_ALREADY_TAKEN"
-	InvalidInputErrorCodeAssessment_template_name_already_taken         InvalidInputErrorCode = "ASSESSMENT_TEMPLATE_NAME_ALREADY_TAKEN"
-	InvalidInputErrorCodeInvalid_number_of_assessment_target_arns       InvalidInputErrorCode = "INVALID_NUMBER_OF_ASSESSMENT_TARGET_ARNS"
-	InvalidInputErrorCodeInvalid_number_of_assessment_template_arns     InvalidInputErrorCode = "INVALID_NUMBER_OF_ASSESSMENT_TEMPLATE_ARNS"
-	InvalidInputErrorCodeInvalid_number_of_assessment_run_arns          InvalidInputErrorCode = "INVALID_NUMBER_OF_ASSESSMENT_RUN_ARNS"
-	InvalidInputErrorCodeInvalid_number_of_finding_arns                 InvalidInputErrorCode = "INVALID_NUMBER_OF_FINDING_ARNS"
-	InvalidInputErrorCodeInvalid_number_of_resource_group_arns          InvalidInputErrorCode = "INVALID_NUMBER_OF_RESOURCE_GROUP_ARNS"
-	InvalidInputErrorCodeInvalid_number_of_rules_package_arns           InvalidInputErrorCode = "INVALID_NUMBER_OF_RULES_PACKAGE_ARNS"
-	InvalidInputErrorCodeInvalid_number_of_assessment_run_states        InvalidInputErrorCode = "INVALID_NUMBER_OF_ASSESSMENT_RUN_STATES"
-	InvalidInputErrorCodeInvalid_number_of_tags                         InvalidInputErrorCode = "INVALID_NUMBER_OF_TAGS"
-	InvalidInputErrorCodeInvalid_number_of_resource_group_tags          InvalidInputErrorCode = "INVALID_NUMBER_OF_RESOURCE_GROUP_TAGS"
-	InvalidInputErrorCodeInvalid_number_of_attributes                   InvalidInputErrorCode = "INVALID_NUMBER_OF_ATTRIBUTES"
-	InvalidInputErrorCodeInvalid_number_of_user_attributes              InvalidInputErrorCode = "INVALID_NUMBER_OF_USER_ATTRIBUTES"
-	InvalidInputErrorCodeInvalid_number_of_agent_ids                    InvalidInputErrorCode = "INVALID_NUMBER_OF_AGENT_IDS"
-	InvalidInputErrorCodeInvalid_number_of_auto_scaling_groups          InvalidInputErrorCode = "INVALID_NUMBER_OF_AUTO_SCALING_GROUPS"
-	InvalidInputErrorCodeInvalid_number_of_rule_names                   InvalidInputErrorCode = "INVALID_NUMBER_OF_RULE_NAMES"
-	InvalidInputErrorCodeInvalid_number_of_severities                   InvalidInputErrorCode = "INVALID_NUMBER_OF_SEVERITIES"
+	InvalidInputErrorCodeInvalidAssessmentTargetArn               InvalidInputErrorCode = "INVALID_ASSESSMENT_TARGET_ARN"
+	InvalidInputErrorCodeInvalidAssessmentTemplateArn             InvalidInputErrorCode = "INVALID_ASSESSMENT_TEMPLATE_ARN"
+	InvalidInputErrorCodeInvalidAssessmentRunArn                  InvalidInputErrorCode = "INVALID_ASSESSMENT_RUN_ARN"
+	InvalidInputErrorCodeInvalidFindingArn                        InvalidInputErrorCode = "INVALID_FINDING_ARN"
+	InvalidInputErrorCodeInvalidResourceGroupArn                  InvalidInputErrorCode = "INVALID_RESOURCE_GROUP_ARN"
+	InvalidInputErrorCodeInvalidRulesPackageArn                   InvalidInputErrorCode = "INVALID_RULES_PACKAGE_ARN"
+	InvalidInputErrorCodeInvalidResourceArn                       InvalidInputErrorCode = "INVALID_RESOURCE_ARN"
+	InvalidInputErrorCodeInvalidSnsTopicArn                       InvalidInputErrorCode = "INVALID_SNS_TOPIC_ARN"
+	InvalidInputErrorCodeInvalidIamRoleArn                        InvalidInputErrorCode = "INVALID_IAM_ROLE_ARN"
+	InvalidInputErrorCodeInvalidAssessmentTargetName              InvalidInputErrorCode = "INVALID_ASSESSMENT_TARGET_NAME"
+	InvalidInputErrorCodeInvalidAssessmentTargetNamePattern       InvalidInputErrorCode = "INVALID_ASSESSMENT_TARGET_NAME_PATTERN"
+	InvalidInputErrorCodeInvalidAssessmentTemplateName            InvalidInputErrorCode = "INVALID_ASSESSMENT_TEMPLATE_NAME"
+	InvalidInputErrorCodeInvalidAssessmentTemplateNamePattern     InvalidInputErrorCode = "INVALID_ASSESSMENT_TEMPLATE_NAME_PATTERN"
+	InvalidInputErrorCodeInvalidAssessmentTemplateDuration        InvalidInputErrorCode = "INVALID_ASSESSMENT_TEMPLATE_DURATION"
+	InvalidInputErrorCodeInvalidAssessmentTemplateDurationRange   InvalidInputErrorCode = "INVALID_ASSESSMENT_TEMPLATE_DURATION_RANGE"
+	InvalidInputErrorCodeInvalidAssessmentRunDurationRange        InvalidInputErrorCode = "INVALID_ASSESSMENT_RUN_DURATION_RANGE"
+	InvalidInputErrorCodeInvalidAssessmentRunStartTimeRange       InvalidInputErrorCode = "INVALID_ASSESSMENT_RUN_START_TIME_RANGE"
+	InvalidInputErrorCodeInvalidAssessmentRunCompletionTimeRange  InvalidInputErrorCode = "INVALID_ASSESSMENT_RUN_COMPLETION_TIME_RANGE"
+	InvalidInputErrorCodeInvalidAssessmentRunStateChangeTimeRange InvalidInputErrorCode = "INVALID_ASSESSMENT_RUN_STATE_CHANGE_TIME_RANGE"
+	InvalidInputErrorCodeInvalidAssessmentRunState                InvalidInputErrorCode = "INVALID_ASSESSMENT_RUN_STATE"
+	InvalidInputErrorCodeInvalidTag                               InvalidInputErrorCode = "INVALID_TAG"
+	InvalidInputErrorCodeInvalidTagKey                            InvalidInputErrorCode = "INVALID_TAG_KEY"
+	InvalidInputErrorCodeInvalidTagValue                          InvalidInputErrorCode = "INVALID_TAG_VALUE"
+	InvalidInputErrorCodeInvalidResourceGroupTagKey               InvalidInputErrorCode = "INVALID_RESOURCE_GROUP_TAG_KEY"
+	InvalidInputErrorCodeInvalidResourceGroupTagValue             InvalidInputErrorCode = "INVALID_RESOURCE_GROUP_TAG_VALUE"
+	InvalidInputErrorCodeInvalidAttribute                         InvalidInputErrorCode = "INVALID_ATTRIBUTE"
+	InvalidInputErrorCodeInvalidUserAttribute                     InvalidInputErrorCode = "INVALID_USER_ATTRIBUTE"
+	InvalidInputErrorCodeInvalidUserAttributeKey                  InvalidInputErrorCode = "INVALID_USER_ATTRIBUTE_KEY"
+	InvalidInputErrorCodeInvalidUserAttributeValue                InvalidInputErrorCode = "INVALID_USER_ATTRIBUTE_VALUE"
+	InvalidInputErrorCodeInvalidPaginationToken                   InvalidInputErrorCode = "INVALID_PAGINATION_TOKEN"
+	InvalidInputErrorCodeInvalidMaxResults                        InvalidInputErrorCode = "INVALID_MAX_RESULTS"
+	InvalidInputErrorCodeInvalidAgentId                           InvalidInputErrorCode = "INVALID_AGENT_ID"
+	InvalidInputErrorCodeInvalidAutoScalingGroup                  InvalidInputErrorCode = "INVALID_AUTO_SCALING_GROUP"
+	InvalidInputErrorCodeInvalidRuleName                          InvalidInputErrorCode = "INVALID_RULE_NAME"
+	InvalidInputErrorCodeInvalidSeverity                          InvalidInputErrorCode = "INVALID_SEVERITY"
+	InvalidInputErrorCodeInvalidLocale                            InvalidInputErrorCode = "INVALID_LOCALE"
+	InvalidInputErrorCodeInvalidEvent                             InvalidInputErrorCode = "INVALID_EVENT"
+	InvalidInputErrorCodeAssessmentTargetNameAlreadyTaken         InvalidInputErrorCode = "ASSESSMENT_TARGET_NAME_ALREADY_TAKEN"
+	InvalidInputErrorCodeAssessmentTemplateNameAlreadyTaken       InvalidInputErrorCode = "ASSESSMENT_TEMPLATE_NAME_ALREADY_TAKEN"
+	InvalidInputErrorCodeInvalidNumberOfAssessmentTargetArns      InvalidInputErrorCode = "INVALID_NUMBER_OF_ASSESSMENT_TARGET_ARNS"
+	InvalidInputErrorCodeInvalidNumberOfAssessmentTemplateArns    InvalidInputErrorCode = "INVALID_NUMBER_OF_ASSESSMENT_TEMPLATE_ARNS"
+	InvalidInputErrorCodeInvalidNumberOfAssessmentRunArns         InvalidInputErrorCode = "INVALID_NUMBER_OF_ASSESSMENT_RUN_ARNS"
+	InvalidInputErrorCodeInvalidNumberOfFindingArns               InvalidInputErrorCode = "INVALID_NUMBER_OF_FINDING_ARNS"
+	InvalidInputErrorCodeInvalidNumberOfResourceGroupArns         InvalidInputErrorCode = "INVALID_NUMBER_OF_RESOURCE_GROUP_ARNS"
+	InvalidInputErrorCodeInvalidNumberOfRulesPackageArns          InvalidInputErrorCode = "INVALID_NUMBER_OF_RULES_PACKAGE_ARNS"
+	InvalidInputErrorCodeInvalidNumberOfAssessmentRunStates       InvalidInputErrorCode = "INVALID_NUMBER_OF_ASSESSMENT_RUN_STATES"
+	InvalidInputErrorCodeInvalidNumberOfTags                      InvalidInputErrorCode = "INVALID_NUMBER_OF_TAGS"
+	InvalidInputErrorCodeInvalidNumberOfResourceGroupTags         InvalidInputErrorCode = "INVALID_NUMBER_OF_RESOURCE_GROUP_TAGS"
+	InvalidInputErrorCodeInvalidNumberOfAttributes                InvalidInputErrorCode = "INVALID_NUMBER_OF_ATTRIBUTES"
+	InvalidInputErrorCodeInvalidNumberOfUserAttributes            InvalidInputErrorCode = "INVALID_NUMBER_OF_USER_ATTRIBUTES"
+	InvalidInputErrorCodeInvalidNumberOfAgentIds                  InvalidInputErrorCode = "INVALID_NUMBER_OF_AGENT_IDS"
+	InvalidInputErrorCodeInvalidNumberOfAutoScalingGroups         InvalidInputErrorCode = "INVALID_NUMBER_OF_AUTO_SCALING_GROUPS"
+	InvalidInputErrorCodeInvalidNumberOfRuleNames                 InvalidInputErrorCode = "INVALID_NUMBER_OF_RULE_NAMES"
+	InvalidInputErrorCodeInvalidNumberOfSeverities                InvalidInputErrorCode = "INVALID_NUMBER_OF_SEVERITIES"
 )
 
 // Values returns all known values for InvalidInputErrorCode. Note that this can be
@@ -352,11 +352,11 @@ type LimitExceededErrorCode string
 
 // Enum values for LimitExceededErrorCode
 const (
-	LimitExceededErrorCodeAssessment_target_limit_exceeded   LimitExceededErrorCode = "ASSESSMENT_TARGET_LIMIT_EXCEEDED"
-	LimitExceededErrorCodeAssessment_template_limit_exceeded LimitExceededErrorCode = "ASSESSMENT_TEMPLATE_LIMIT_EXCEEDED"
-	LimitExceededErrorCodeAssessment_run_limit_exceeded      LimitExceededErrorCode = "ASSESSMENT_RUN_LIMIT_EXCEEDED"
-	LimitExceededErrorCodeResource_group_limit_exceeded      LimitExceededErrorCode = "RESOURCE_GROUP_LIMIT_EXCEEDED"
-	LimitExceededErrorCodeEvent_subscription_limit_exceeded  LimitExceededErrorCode = "EVENT_SUBSCRIPTION_LIMIT_EXCEEDED"
+	LimitExceededErrorCodeAssessmentTargetLimitExceeded   LimitExceededErrorCode = "ASSESSMENT_TARGET_LIMIT_EXCEEDED"
+	LimitExceededErrorCodeAssessmentTemplateLimitExceeded LimitExceededErrorCode = "ASSESSMENT_TEMPLATE_LIMIT_EXCEEDED"
+	LimitExceededErrorCodeAssessmentRunLimitExceeded      LimitExceededErrorCode = "ASSESSMENT_RUN_LIMIT_EXCEEDED"
+	LimitExceededErrorCodeResourceGroupLimitExceeded      LimitExceededErrorCode = "RESOURCE_GROUP_LIMIT_EXCEEDED"
+	LimitExceededErrorCodeEventSubscriptionLimitExceeded  LimitExceededErrorCode = "EVENT_SUBSCRIPTION_LIMIT_EXCEEDED"
 )
 
 // Values returns all known values for LimitExceededErrorCode. Note that this can
@@ -376,7 +376,7 @@ type Locale string
 
 // Enum values for Locale
 const (
-	LocaleEn_us Locale = "EN_US"
+	LocaleEnUs Locale = "EN_US"
 )
 
 // Values returns all known values for Locale. Note that this can be expanded in
@@ -392,14 +392,14 @@ type NoSuchEntityErrorCode string
 
 // Enum values for NoSuchEntityErrorCode
 const (
-	NoSuchEntityErrorCodeAssessment_target_does_not_exist   NoSuchEntityErrorCode = "ASSESSMENT_TARGET_DOES_NOT_EXIST"
-	NoSuchEntityErrorCodeAssessment_template_does_not_exist NoSuchEntityErrorCode = "ASSESSMENT_TEMPLATE_DOES_NOT_EXIST"
-	NoSuchEntityErrorCodeAssessment_run_does_not_exist      NoSuchEntityErrorCode = "ASSESSMENT_RUN_DOES_NOT_EXIST"
-	NoSuchEntityErrorCodeFinding_does_not_exist             NoSuchEntityErrorCode = "FINDING_DOES_NOT_EXIST"
-	NoSuchEntityErrorCodeResource_group_does_not_exist      NoSuchEntityErrorCode = "RESOURCE_GROUP_DOES_NOT_EXIST"
-	NoSuchEntityErrorCodeRules_package_does_not_exist       NoSuchEntityErrorCode = "RULES_PACKAGE_DOES_NOT_EXIST"
-	NoSuchEntityErrorCodeSns_topic_does_not_exist           NoSuchEntityErrorCode = "SNS_TOPIC_DOES_NOT_EXIST"
-	NoSuchEntityErrorCodeIam_role_does_not_exist            NoSuchEntityErrorCode = "IAM_ROLE_DOES_NOT_EXIST"
+	NoSuchEntityErrorCodeAssessmentTargetDoesNotExist   NoSuchEntityErrorCode = "ASSESSMENT_TARGET_DOES_NOT_EXIST"
+	NoSuchEntityErrorCodeAssessmentTemplateDoesNotExist NoSuchEntityErrorCode = "ASSESSMENT_TEMPLATE_DOES_NOT_EXIST"
+	NoSuchEntityErrorCodeAssessmentRunDoesNotExist      NoSuchEntityErrorCode = "ASSESSMENT_RUN_DOES_NOT_EXIST"
+	NoSuchEntityErrorCodeFindingDoesNotExist            NoSuchEntityErrorCode = "FINDING_DOES_NOT_EXIST"
+	NoSuchEntityErrorCodeResourceGroupDoesNotExist      NoSuchEntityErrorCode = "RESOURCE_GROUP_DOES_NOT_EXIST"
+	NoSuchEntityErrorCodeRulesPackageDoesNotExist       NoSuchEntityErrorCode = "RULES_PACKAGE_DOES_NOT_EXIST"
+	NoSuchEntityErrorCodeSnsTopicDoesNotExist           NoSuchEntityErrorCode = "SNS_TOPIC_DOES_NOT_EXIST"
+	NoSuchEntityErrorCodeIamRoleDoesNotExist            NoSuchEntityErrorCode = "IAM_ROLE_DOES_NOT_EXIST"
 )
 
 // Values returns all known values for NoSuchEntityErrorCode. Note that this can be
@@ -422,8 +422,8 @@ type PreviewStatus string
 
 // Enum values for PreviewStatus
 const (
-	PreviewStatusWork_in_progress PreviewStatus = "WORK_IN_PROGRESS"
-	PreviewStatusCompleted        PreviewStatus = "COMPLETED"
+	PreviewStatusWorkInProgress PreviewStatus = "WORK_IN_PROGRESS"
+	PreviewStatusCompleted      PreviewStatus = "COMPLETED"
 )
 
 // Values returns all known values for PreviewStatus. Note that this can be
@@ -458,9 +458,9 @@ type ReportStatus string
 
 // Enum values for ReportStatus
 const (
-	ReportStatusWork_in_progress ReportStatus = "WORK_IN_PROGRESS"
-	ReportStatusFailed           ReportStatus = "FAILED"
-	ReportStatusCompleted        ReportStatus = "COMPLETED"
+	ReportStatusWorkInProgress ReportStatus = "WORK_IN_PROGRESS"
+	ReportStatusFailed         ReportStatus = "FAILED"
+	ReportStatusCompleted      ReportStatus = "COMPLETED"
 )
 
 // Values returns all known values for ReportStatus. Note that this can be expanded
@@ -496,8 +496,8 @@ type ScopeType string
 
 // Enum values for ScopeType
 const (
-	ScopeTypeInstance_id       ScopeType = "INSTANCE_ID"
-	ScopeTypeRules_package_arn ScopeType = "RULES_PACKAGE_ARN"
+	ScopeTypeInstanceId      ScopeType = "INSTANCE_ID"
+	ScopeTypeRulesPackageArn ScopeType = "RULES_PACKAGE_ARN"
 )
 
 // Values returns all known values for ScopeType. Note that this can be expanded in
@@ -538,8 +538,8 @@ type StopAction string
 
 // Enum values for StopAction
 const (
-	StopActionStart_evaluation StopAction = "START_EVALUATION"
-	StopActionSkip_evaluation  StopAction = "SKIP_EVALUATION"
+	StopActionStartEvaluation StopAction = "START_EVALUATION"
+	StopActionSkipEvaluation  StopAction = "SKIP_EVALUATION"
 )
 
 // Values returns all known values for StopAction. Note that this can be expanded

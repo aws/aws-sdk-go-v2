@@ -58,17 +58,17 @@ type CreateLicenseConfigurationInput struct {
 	// #allowedTenancy=EC2-DedicatedHost). The available rules vary by dimension, as
 	// follows.
 	//
-	//     * Cores dimension: allowedTenancy | licenseAffinityToHost |
+	// * Cores dimension: allowedTenancy | licenseAffinityToHost |
 	// maximumCores | minimumCores
 	//
-	//     * Instances dimension: allowedTenancy |
+	// * Instances dimension: allowedTenancy |
 	// maximumCores | minimumCores | maximumSockets | minimumSockets | maximumVcpus |
 	// minimumVcpus
 	//
-	//     * Sockets dimension: allowedTenancy | licenseAffinityToHost |
+	// * Sockets dimension: allowedTenancy | licenseAffinityToHost |
 	// maximumSockets | minimumSockets
 	//
-	//     * vCPUs dimension: allowedTenancy |
+	// * vCPUs dimension: allowedTenancy |
 	// honorVcpuOptimization | maximumVcpus | minimumVcpus
 	//
 	// The unit for

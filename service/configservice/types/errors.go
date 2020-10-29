@@ -51,26 +51,26 @@ func (e *InsufficientDeliveryPolicyException) ErrorFault() smithy.ErrorFault {
 
 // Indicates one of the following errors:
 //
-//     * For PutConfigRule, the rule cannot
-// be created because the IAM role assigned to AWS Config lacks permissions to
-// perform the config:Put* action.
+// * For PutConfigRule, the rule cannot be
+// created because the IAM role assigned to AWS Config lacks permissions to perform
+// the config:Put* action.
 //
-//     * For PutConfigRule, the AWS Lambda
-// function cannot be invoked. Check the function ARN, and check the function's
-// permissions.
+// * For PutConfigRule, the AWS Lambda function cannot be
+// invoked. Check the function ARN, and check the function's permissions.
 //
-//     * For PutOrganizationConfigRule, organization config rule
-// cannot be created because you do not have permissions to call IAM GetRole action
-// or create a service linked role.
+// * For
+// PutOrganizationConfigRule, organization config rule cannot be created because
+// you do not have permissions to call IAM GetRole action or create a service
+// linked role.
 //
-//     * For PutConformancePack and
-// PutOrganizationConformancePack, a conformance pack cannot be created because you
-// do not have permissions:
+// * For PutConformancePack and PutOrganizationConformancePack, a
+// conformance pack cannot be created because you do not have permissions:
 //
-//         * To call IAM GetRole action or create a
-// service linked role.
+// * To
+// call IAM GetRole action or create a service linked role.
 //
-//         * To read Amazon S3 bucket.
+// * To read Amazon S3
+// bucket.
 type InsufficientPermissionsException struct {
 	Message *string
 }
@@ -951,32 +951,31 @@ func (e *RemediationInProgressException) ErrorFault() smithy.ErrorFault { return
 
 // You see this exception in the following cases:
 //
-//     * For DeleteConfigRule, AWS
+// * For DeleteConfigRule, AWS
 // Config is deleting this rule. Try your request again later.
 //
-//     * For
+// * For
 // DeleteConfigRule, the rule is deleting your evaluation results. Try your request
 // again later.
 //
-//     * For DeleteConfigRule, a remediation action is associated
-// with the rule and AWS Config cannot delete this rule. Delete the remediation
-// action associated with the rule before deleting the rule and try your request
+// * For DeleteConfigRule, a remediation action is associated with
+// the rule and AWS Config cannot delete this rule. Delete the remediation action
+// associated with the rule before deleting the rule and try your request again
+// later.
+//
+// * For PutConfigOrganizationRule, organization config rule deletion is in
+// progress. Try your request again later.
+//
+// * For DeleteOrganizationConfigRule,
+// organization config rule creation is in progress. Try your request again
+// later.
+//
+// * For PutConformancePack and PutOrganizationConformancePack, a
+// conformance pack creation, update, and deletion is in progress. Try your request
 // again later.
 //
-//     * For PutConfigOrganizationRule, organization config rule
-// deletion is in progress. Try your request again later.
-//
-//     * For
-// DeleteOrganizationConfigRule, organization config rule creation is in progress.
-// Try your request again later.
-//
-//     * For PutConformancePack and
-// PutOrganizationConformancePack, a conformance pack creation, update, and
-// deletion is in progress. Try your request again later.
-//
-//     * For
-// DeleteConformancePack, a conformance pack creation, update, and deletion is in
-// progress. Try your request again later.
+// * For DeleteConformancePack, a conformance pack creation, update,
+// and deletion is in progress. Try your request again later.
 type ResourceInUseException struct {
 	Message *string
 }

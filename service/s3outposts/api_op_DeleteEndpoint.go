@@ -15,12 +15,12 @@ import (
 // Outposts buckets so that you can perform actions within your virtual private
 // cloud (VPC). This action deletes an endpoint. Related actions include:
 //
-//     *
+// *
 // CreateEndpoint
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_CreateEndpoint.html)
 //
-//
-// * ListEndpoints
+// *
+// ListEndpoints
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_ListEndpoints.html)
 func (c *Client) DeleteEndpoint(ctx context.Context, params *DeleteEndpointInput, optFns ...func(*Options)) (*DeleteEndpointOutput, error) {
 	if params == nil {

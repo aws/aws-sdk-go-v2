@@ -17,18 +17,18 @@ import (
 // deleting the cluster; you cannot cancel or revert this operation. This operation
 // is not valid for:
 //
-//     * Redis (cluster mode enabled) clusters
+// * Redis (cluster mode enabled) clusters
 //
-//     * A cluster
-// that is the last read replica of a replication group
+// * A cluster that is
+// the last read replica of a replication group
 //
-//     * A node group (shard)
-// that has Multi-AZ mode enabled
+// * A node group (shard) that has
+// Multi-AZ mode enabled
 //
-//     * A cluster from a Redis (cluster mode
-// enabled) replication group
+// * A cluster from a Redis (cluster mode enabled)
+// replication group
 //
-//     * A cluster that is not in the available state
+// * A cluster that is not in the available state
 func (c *Client) DeleteCacheCluster(ctx context.Context, params *DeleteCacheClusterInput, optFns ...func(*Options)) (*DeleteCacheClusterOutput, error) {
 	if params == nil {
 		params = &DeleteCacheClusterInput{}

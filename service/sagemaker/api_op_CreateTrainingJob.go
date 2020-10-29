@@ -19,39 +19,39 @@ import (
 // that you know how to use them for inferences. In the request body, you provide
 // the following:
 //
-//     * AlgorithmSpecification - Identifies the training algorithm
-// to use.
+// * AlgorithmSpecification - Identifies the training algorithm to
+// use.
 //
-//     * HyperParameters - Specify these algorithm-specific parameters to
-// enable the estimation of model parameters during training. Hyperparameters can
-// be tuned to optimize this learning process. For a list of hyperparameters for
-// each training algorithm provided by Amazon SageMaker, see Algorithms
+// * HyperParameters - Specify these algorithm-specific parameters to enable
+// the estimation of model parameters during training. Hyperparameters can be tuned
+// to optimize this learning process. For a list of hyperparameters for each
+// training algorithm provided by Amazon SageMaker, see Algorithms
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html).
 //
-//     *
-// InputDataConfig - Describes the training dataset and the Amazon S3, EFS, or FSx
-// location where it is stored.
+// * InputDataConfig
+// - Describes the training dataset and the Amazon S3, EFS, or FSx location where
+// it is stored.
 //
-//     * OutputDataConfig - Identifies the Amazon S3
-// bucket where you want Amazon SageMaker to save the results of model training.
+// * OutputDataConfig - Identifies the Amazon S3 bucket where you
+// want Amazon SageMaker to save the results of model training.
 //
+// * ResourceConfig -
+// Identifies the resources, ML compute instances, and ML storage volumes to deploy
+// for model training. In distributed training, you specify more than one
+// instance.
 //
-// * ResourceConfig - Identifies the resources, ML compute instances, and ML
-// storage volumes to deploy for model training. In distributed training, you
-// specify more than one instance.
-//
-//     * EnableManagedSpotTraining - Optimize the
-// cost of training machine learning models by up to 80% by using Amazon EC2 Spot
-// instances. For more information, see Managed Spot Training
+// * EnableManagedSpotTraining - Optimize the cost of training machine
+// learning models by up to 80% by using Amazon EC2 Spot instances. For more
+// information, see Managed Spot Training
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/model-managed-spot-training.html).
 //
-//
-// * RoleARN - The Amazon Resource Number (ARN) that Amazon SageMaker assumes to
+// *
+// RoleARN - The Amazon Resource Number (ARN) that Amazon SageMaker assumes to
 // perform tasks on your behalf during model training. You must grant this role the
 // necessary permissions so that Amazon SageMaker can successfully complete model
 // training.
 //
-//     * StoppingCondition - To help cap training costs, use
+// * StoppingCondition - To help cap training costs, use
 // MaxRuntimeInSeconds to set a time limit for training. Use MaxWaitTimeInSeconds
 // to specify how long you are willing to wait for a managed spot training job to
 // complete.
@@ -173,12 +173,12 @@ type CreateTrainingJobInput struct {
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
 	//
-	//     * CreateProcessingJob
+	// * CreateProcessingJob
 	//
-	//     *
+	// *
 	// CreateTrainingJob
 	//
-	//     * CreateTransformJob
+	// * CreateTransformJob
 	ExperimentConfig *types.ExperimentConfig
 
 	// Algorithm-specific parameters that influence the quality of the model. You set

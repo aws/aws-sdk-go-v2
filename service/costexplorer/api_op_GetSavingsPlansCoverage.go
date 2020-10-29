@@ -17,17 +17,17 @@ import (
 // dimensions, Cost Categories, and nested expressions. For any time period, you
 // can filter data for Savings Plans usage with the following dimensions:
 //
-//     *
+// *
 // LINKED_ACCOUNT
 //
-//     * REGION
+// * REGION
 //
-//     * SERVICE
+// * SERVICE
 //
-//     * INSTANCE_FAMILY
+// * INSTANCE_FAMILY
 //
-// To determine
-// valid values for a dimension, use the GetDimensionValues operation.
+// To determine valid
+// values for a dimension, use the GetDimensionValues operation.
 func (c *Client) GetSavingsPlansCoverage(ctx context.Context, params *GetSavingsPlansCoverageInput, optFns ...func(*Options)) (*GetSavingsPlansCoverageOutput, error) {
 	if params == nil {
 		params = &GetSavingsPlansCoverageInput{}
@@ -55,17 +55,17 @@ type GetSavingsPlansCoverageInput struct {
 	// Filters Savings Plans coverage data by dimensions. You can filter data for
 	// Savings Plans usage with the following dimensions:
 	//
-	//     * LINKED_ACCOUNT
+	// * LINKED_ACCOUNT
 	//
-	//     *
+	// *
 	// REGION
 	//
-	//     * SERVICE
+	// * SERVICE
 	//
-	//     * INSTANCE_FAMILY
+	// * INSTANCE_FAMILY
 	//
-	// GetSavingsPlansCoverage uses the
-	// same Expression
+	// GetSavingsPlansCoverage uses the same
+	// Expression
 	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
 	// object as the other operations, but only AND is supported among each dimension.
 	// If there are multiple values for a dimension, they are OR'd together. Cost

@@ -44,22 +44,21 @@ type AlgorithmSpecification struct {
 	// default is false and time-series metrics aren't generated except in the
 	// following cases:
 	//
-	//     * You use one of the Amazon SageMaker built-in
-	// algorithms
+	// * You use one of the Amazon SageMaker built-in algorithms
 	//
-	//     * You use one of the following Prebuilt Amazon SageMaker Docker
-	// Images
+	// *
+	// You use one of the following Prebuilt Amazon SageMaker Docker Images
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/pre-built-containers-frameworks-deep-learning.html):
 	//
+	// *
+	// Tensorflow (version >= 1.15)
 	//
-	// * Tensorflow (version >= 1.15)
+	// * MXNet (version >= 1.6)
 	//
-	//         * MXNet (version >= 1.6)
+	// * PyTorch (version >=
+	// 1.3)
 	//
-	//         *
-	// PyTorch (version >= 1.3)
-	//
-	//     * You specify at least one MetricDefinition
+	// * You specify at least one MetricDefinition
 	EnableSageMakerMetricsTimeSeries *bool
 
 	// A list of metric definition objects. Each object specifies the metric name and
@@ -188,7 +187,7 @@ type AnnotationConsolidationConfig struct {
 	// Bounding box - Finds the most similar boxes from different workers based on the
 	// Jaccard index of the boxes.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:ACS-BoundingBoxarn:aws:lambda:us-east-2:266458841044:function:ACS-BoundingBoxarn:aws:lambda:us-west-2:081040173940:function:ACS-BoundingBoxarn:aws:lambda:eu-west-1:568282634449:function:ACS-BoundingBoxarn:aws:lambda:ap-northeast-1:477331159723:function:ACS-BoundingBoxarn:aws:lambda:ap-southeast-2:454466003867:function:ACS-BoundingBoxarn:aws:lambda:ap-south-1:565803892007:function:ACS-BoundingBoxarn:aws:lambda:eu-central-1:203001061592:function:ACS-BoundingBoxarn:aws:lambda:ap-northeast-2:845288260483:function:ACS-BoundingBoxarn:aws:lambda:eu-west-2:487402164563:function:ACS-BoundingBoxarn:aws:lambda:ap-southeast-1:377565633583:function:ACS-BoundingBoxarn:aws:lambda:ca-central-1:918755190332:function:ACS-BoundingBox
 	//
 	// Image
@@ -196,7 +195,7 @@ type AnnotationConsolidationConfig struct {
 	// estimate the true class of an image based on annotations from individual
 	// workers.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:ACS-ImageMultiClassarn:aws:lambda:us-east-2:266458841044:function:ACS-ImageMultiClassarn:aws:lambda:us-west-2:081040173940:function:ACS-ImageMultiClassarn:aws:lambda:eu-west-1:568282634449:function:ACS-ImageMultiClassarn:aws:lambda:ap-northeast-1:477331159723:function:ACS-ImageMultiClassarn:aws:lambda:ap-southeast-2:454466003867:function:ACS-ImageMultiClassarn:aws:lambda:ap-south-1:565803892007:function:ACS-ImageMultiClassarn:aws:lambda:eu-central-1:203001061592:function:ACS-ImageMultiClassarn:aws:lambda:ap-northeast-2:845288260483:function:ACS-ImageMultiClassarn:aws:lambda:eu-west-2:487402164563:function:ACS-ImageMultiClassarn:aws:lambda:ap-southeast-1:377565633583:function:ACS-ImageMultiClassarn:aws:lambda:ca-central-1:918755190332:function:ACS-ImageMultiClass
 	//
 	// Multi-label
@@ -204,20 +203,19 @@ type AnnotationConsolidationConfig struct {
 	// to estimate the true classes of an image based on annotations from individual
 	// workers.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:ACS-ImageMultiClassMultiLabelarn:aws:lambda:us-east-2:266458841044:function:ACS-ImageMultiClassMultiLabelarn:aws:lambda:us-west-2:081040173940:function:ACS-ImageMultiClassMultiLabelarn:aws:lambda:eu-west-1:568282634449:function:ACS-ImageMultiClassMultiLabelarn:aws:lambda:ap-northeast-1:477331159723:function:ACS-ImageMultiClassMultiLabelarn:aws:lambda:ap-southeast-2:454466003867:function:ACS-ImageMultiClassMultiLabelarn:aws:lambda:ap-south-1:565803892007:function:ACS-ImageMultiClassMultiLabelarn:aws:lambda:eu-central-1:203001061592:function:ACS-ImageMultiClassMultiLabelarn:aws:lambda:ap-northeast-2:845288260483:function:ACS-ImageMultiClassMultiLabelarn:aws:lambda:eu-west-2:487402164563:function:ACS-ImageMultiClassMultiLabelarn:aws:lambda:ap-southeast-1:377565633583:function:ACS-ImageMultiClassMultiLabelarn:aws:lambda:ca-central-1:918755190332:function:ACS-ImageMultiClassMultiLabel
 	//
 	// Semantic
 	// segmentation - Treats each pixel in an image as a multi-class classification and
 	// treats pixel annotations from workers as "votes" for the correct label.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:ACS-SemanticSegmentationarn:aws:lambda:us-east-2:266458841044:function:ACS-SemanticSegmentationarn:aws:lambda:us-west-2:081040173940:function:ACS-SemanticSegmentationarn:aws:lambda:eu-west-1:568282634449:function:ACS-SemanticSegmentationarn:aws:lambda:ap-northeast-1:477331159723:function:ACS-SemanticSegmentationarn:aws:lambda:ap-southeast-2:454466003867:function:ACS-SemanticSegmentationarn:aws:lambda:ap-south-1:565803892007:function:ACS-SemanticSegmentationarn:aws:lambda:eu-central-1:203001061592:function:ACS-SemanticSegmentationarn:aws:lambda:ap-northeast-2:845288260483:function:ACS-SemanticSegmentationarn:aws:lambda:eu-west-2:487402164563:function:ACS-SemanticSegmentationarn:aws:lambda:ap-southeast-1:377565633583:function:ACS-SemanticSegmentationarn:aws:lambda:ca-central-1:918755190332:function:ACS-SemanticSegmentation
 	//
 	// Text
 	// classification - Uses a variant of the Expectation Maximization approach to
 	// estimate the true class of text based on annotations from individual workers.
-	//
 	//
 	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:ACS-TextMultiClassarn:aws:lambda:us-east-2:266458841044:function:ACS-TextMultiClassarn:aws:lambda:us-west-2:081040173940:function:ACS-TextMultiClassarn:aws:lambda:eu-west-1:568282634449:function:ACS-TextMultiClassarn:aws:lambda:ap-northeast-1:477331159723:function:ACS-TextMultiClassarn:aws:lambda:ap-southeast-2:454466003867:function:ACS-TextMultiClassarn:aws:lambda:ap-south-1:565803892007:function:ACS-TextMultiClassarn:aws:lambda:eu-central-1:203001061592:function:ACS-TextMultiClassarn:aws:lambda:ap-northeast-2:845288260483:function:ACS-TextMultiClassarn:aws:lambda:eu-west-2:487402164563:function:ACS-TextMultiClassarn:aws:lambda:ap-southeast-1:377565633583:function:ACS-TextMultiClassarn:aws:lambda:ca-central-1:918755190332:function:ACS-TextMultiClass
@@ -227,21 +225,21 @@ type AnnotationConsolidationConfig struct {
 	// estimate the true classes of text based on annotations from individual
 	// workers.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:ACS-TextMultiClassMultiLabelarn:aws:lambda:us-east-2:266458841044:function:ACS-TextMultiClassMultiLabelarn:aws:lambda:us-west-2:081040173940:function:ACS-TextMultiClassMultiLabelarn:aws:lambda:eu-west-1:568282634449:function:ACS-TextMultiClassMultiLabelarn:aws:lambda:ap-northeast-1:477331159723:function:ACS-TextMultiClassMultiLabelarn:aws:lambda:ap-southeast-2:454466003867:function:ACS-TextMultiClassMultiLabelarn:aws:lambda:ap-south-1:565803892007:function:ACS-TextMultiClassMultiLabelarn:aws:lambda:eu-central-1:203001061592:function:ACS-TextMultiClassMultiLabelarn:aws:lambda:ap-northeast-2:845288260483:function:ACS-TextMultiClassMultiLabelarn:aws:lambda:eu-west-2:487402164563:function:ACS-TextMultiClassMultiLabelarn:aws:lambda:ap-southeast-1:377565633583:function:ACS-TextMultiClassMultiLabelarn:aws:lambda:ca-central-1:918755190332:function:ACS-TextMultiClassMultiLabel
 	//
 	// Named
 	// entity recognition - Groups similar selections and calculates aggregate
 	// boundaries, resolving to most-assigned label.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:ACS-NamedEntityRecognitionarn:aws:lambda:us-east-2:266458841044:function:ACS-NamedEntityRecognitionarn:aws:lambda:us-west-2:081040173940:function:ACS-NamedEntityRecognitionarn:aws:lambda:eu-west-1:568282634449:function:ACS-NamedEntityRecognitionarn:aws:lambda:ap-northeast-1:477331159723:function:ACS-NamedEntityRecognitionarn:aws:lambda:ap-southeast-2:454466003867:function:ACS-NamedEntityRecognitionarn:aws:lambda:ap-south-1:565803892007:function:ACS-NamedEntityRecognitionarn:aws:lambda:eu-central-1:203001061592:function:ACS-NamedEntityRecognitionarn:aws:lambda:ap-northeast-2:845288260483:function:ACS-NamedEntityRecognitionarn:aws:lambda:eu-west-2:487402164563:function:ACS-NamedEntityRecognitionarn:aws:lambda:ap-southeast-1:377565633583:function:ACS-NamedEntityRecognitionarn:aws:lambda:ca-central-1:918755190332:function:ACS-NamedEntityRecognition
 	//
 	// Named
 	// entity recognition - Groups similar selections and calculates aggregate
 	// boundaries, resolving to most-assigned label.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:ACS-NamedEntityRecognitionarn:aws:lambda:us-east-2:266458841044:function:ACS-NamedEntityRecognitionarn:aws:lambda:us-west-2:081040173940:function:ACS-NamedEntityRecognitionarn:aws:lambda:eu-west-1:568282634449:function:ACS-NamedEntityRecognitionarn:aws:lambda:ap-northeast-1:477331159723:function:ACS-NamedEntityRecognitionarn:aws:lambda:ap-southeast-2:454466003867:function:ACS-NamedEntityRecognitionarn:aws:lambda:ap-south-1:565803892007:function:ACS-NamedEntityRecognitionarn:aws:lambda:eu-central-1:203001061592:function:ACS-NamedEntityRecognitionarn:aws:lambda:ap-northeast-2:845288260483:function:ACS-NamedEntityRecognitionarn:aws:lambda:eu-west-2:487402164563:function:ACS-NamedEntityRecognitionarn:aws:lambda:ap-southeast-1:377565633583:function:ACS-NamedEntityRecognitionarn:aws:lambda:ca-central-1:918755190332:function:ACS-NamedEntityRecognition
 	//
 	// Video
@@ -249,7 +247,7 @@ type AnnotationConsolidationConfig struct {
 	// using predefined labels that you specify. Workers are shown videos and are asked
 	// to choose one label for each video.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:ACS-VideoMultiClassarn:aws:lambda:us-east-2:266458841044:function:ACS-VideoMultiClassarn:aws:lambda:us-west-2:081040173940:function:ACS-VideoMultiClassarn:aws:lambda:eu-west-1:568282634449:function:ACS-VideoMultiClassarn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VideoMultiClassarn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VideoMultiClassarn:aws:lambda:ap-south-1:565803892007:function:ACS-VideoMultiClassarn:aws:lambda:eu-central-1:203001061592:function:ACS-VideoMultiClassarn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VideoMultiClassarn:aws:lambda:eu-west-2:487402164563:function:ACS-VideoMultiClassarn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VideoMultiClassarn:aws:lambda:ca-central-1:918755190332:function:ACS-VideoMultiClass
 	//
 	// Video
@@ -259,7 +257,7 @@ type AnnotationConsolidationConfig struct {
 	// and localize various objects in a series of video frames, such as cars, bikes,
 	// and pedestrians.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:ACS-VideoObjectDetectionarn:aws:lambda:us-east-2:266458841044:function:ACS-VideoObjectDetectionarn:aws:lambda:us-west-2:081040173940:function:ACS-VideoObjectDetectionarn:aws:lambda:eu-west-1:568282634449:function:ACS-VideoObjectDetectionarn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VideoObjectDetectionarn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VideoObjectDetectionarn:aws:lambda:ap-south-1:565803892007:function:ACS-VideoObjectDetectionarn:aws:lambda:eu-central-1:203001061592:function:ACS-VideoObjectDetectionarn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VideoObjectDetectionarn:aws:lambda:eu-west-2:487402164563:function:ACS-VideoObjectDetectionarn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VideoObjectDetectionarn:aws:lambda:ca-central-1:918755190332:function:ACS-VideoObjectDetection
 	//
 	// Video
@@ -268,7 +266,7 @@ type AnnotationConsolidationConfig struct {
 	// bounding boxes. For example, you can use this task to ask workers to track the
 	// movement of objects, such as cars, bikes, and pedestrians.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:ACS-VideoObjectTrackingarn:aws:lambda:us-east-2:266458841044:function:ACS-VideoObjectTrackingarn:aws:lambda:us-west-2:081040173940:function:ACS-VideoObjectTrackingarn:aws:lambda:eu-west-1:568282634449:function:ACS-VideoObjectTrackingarn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VideoObjectTrackingarn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VideoObjectTrackingarn:aws:lambda:ap-south-1:565803892007:function:ACS-VideoObjectTrackingarn:aws:lambda:eu-central-1:203001061592:function:ACS-VideoObjectTrackingarn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VideoObjectTrackingarn:aws:lambda:eu-west-2:487402164563:function:ACS-VideoObjectTrackingarn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VideoObjectTrackingarn:aws:lambda:ca-central-1:918755190332:function:ACS-VideoObjectTracking
 	//
 	// 3D
@@ -277,7 +275,7 @@ type AnnotationConsolidationConfig struct {
 	// example, you can use this task type to ask workers to identify different types
 	// of objects in a point cloud, such as cars, bikes, and pedestrians.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:ACS-3DPointCloudObjectDetectionarn:aws:lambda:us-east-2:266458841044:function:ACS-3DPointCloudObjectDetectionarn:aws:lambda:us-west-2:081040173940:function:ACS-3DPointCloudObjectDetectionarn:aws:lambda:eu-west-1:568282634449:function:ACS-3DPointCloudObjectDetectionarn:aws:lambda:ap-northeast-1:477331159723:function:ACS-3DPointCloudObjectDetectionarn:aws:lambda:ap-southeast-2:454466003867:function:ACS-3DPointCloudObjectDetectionarn:aws:lambda:ap-south-1:565803892007:function:ACS-3DPointCloudObjectDetectionarn:aws:lambda:eu-central-1:203001061592:function:ACS-3DPointCloudObjectDetectionarn:aws:lambda:ap-northeast-2:845288260483:function:ACS-3DPointCloudObjectDetectionarn:aws:lambda:eu-west-2:487402164563:function:ACS-3DPointCloudObjectDetectionarn:aws:lambda:ap-southeast-1:377565633583:function:ACS-3DPointCloudObjectDetectionarn:aws:lambda:ca-central-1:918755190332:function:ACS-3DPointCloudObjectDetection
 	//
 	// 3D
@@ -286,7 +284,7 @@ type AnnotationConsolidationConfig struct {
 	// For example, you can use this task type to ask workers to track the movement of
 	// vehicles across multiple point cloud frames.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:ACS-3DPointCloudObjectTrackingarn:aws:lambda:us-east-2:266458841044:function:ACS-3DPointCloudObjectTrackingarn:aws:lambda:us-west-2:081040173940:function:ACS-3DPointCloudObjectTrackingarn:aws:lambda:eu-west-1:568282634449:function:ACS-3DPointCloudObjectTrackingarn:aws:lambda:ap-northeast-1:477331159723:function:ACS-3DPointCloudObjectTrackingarn:aws:lambda:ap-southeast-2:454466003867:function:ACS-3DPointCloudObjectTrackingarn:aws:lambda:ap-south-1:565803892007:function:ACS-3DPointCloudObjectTrackingarn:aws:lambda:eu-central-1:203001061592:function:ACS-3DPointCloudObjectTrackingarn:aws:lambda:ap-northeast-2:845288260483:function:ACS-3DPointCloudObjectTrackingarn:aws:lambda:eu-west-2:487402164563:function:ACS-3DPointCloudObjectTrackingarn:aws:lambda:ap-southeast-1:377565633583:function:ACS-3DPointCloudObjectTrackingarn:aws:lambda:ca-central-1:918755190332:function:ACS-3DPointCloudObjectTracking
 	//
 	// 3D
@@ -295,7 +293,7 @@ type AnnotationConsolidationConfig struct {
 	// point cloud using different colors where each color is assigned to one of the
 	// classes you specify.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:ACS-3DPointCloudSemanticSegmentationarn:aws:lambda:us-east-2:266458841044:function:ACS-3DPointCloudSemanticSegmentationarn:aws:lambda:us-west-2:081040173940:function:ACS-3DPointCloudSemanticSegmentationarn:aws:lambda:eu-west-1:568282634449:function:ACS-3DPointCloudSemanticSegmentationarn:aws:lambda:ap-northeast-1:477331159723:function:ACS-3DPointCloudSemanticSegmentationarn:aws:lambda:ap-southeast-2:454466003867:function:ACS-3DPointCloudSemanticSegmentationarn:aws:lambda:ap-south-1:565803892007:function:ACS-3DPointCloudSemanticSegmentationarn:aws:lambda:eu-central-1:203001061592:function:ACS-3DPointCloudSemanticSegmentationarn:aws:lambda:ap-northeast-2:845288260483:function:ACS-3DPointCloudSemanticSegmentationarn:aws:lambda:eu-west-2:487402164563:function:ACS-3DPointCloudSemanticSegmentationarn:aws:lambda:ap-southeast-1:377565633583:function:ACS-3DPointCloudSemanticSegmentationarn:aws:lambda:ca-central-1:918755190332:function:ACS-3DPointCloudSemanticSegmentation
 	//
 	// Use
@@ -307,7 +305,7 @@ type AnnotationConsolidationConfig struct {
 	// multi-class classification and treats pixel adjusted annotations from workers as
 	// "votes" for the correct label.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentSemanticSegmentationarn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentSemanticSegmentationarn:aws:lambda:us-west-2:081040173940:function:ACS-AdjustmentSemanticSegmentationarn:aws:lambda:eu-west-1:568282634449:function:ACS-AdjustmentSemanticSegmentationarn:aws:lambda:ap-northeast-1:477331159723:function:ACS-AdjustmentSemanticSegmentationarn:aws:lambda:ap-southeast-2:454466003867:function:ACS-AdjustmentSemanticSegmentationarn:aws:lambda:ap-south-1:565803892007:function:ACS-AdjustmentSemanticSegmentationarn:aws:lambda:eu-central-1:203001061592:function:ACS-AdjustmentSemanticSegmentationarn:aws:lambda:ap-northeast-2:845288260483:function:ACS-AdjustmentSemanticSegmentationarn:aws:lambda:eu-west-2:487402164563:function:ACS-AdjustmentSemanticSegmentationarn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentSemanticSegmentationarn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentSemanticSegmentation
 	//
 	// Semantic
@@ -315,7 +313,7 @@ type AnnotationConsolidationConfig struct {
 	// approach to estimate the true class of verification judgment for semantic
 	// segmentation labels based on annotations from individual workers.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:ACS-VerificationSemanticSegmentationarn:aws:lambda:us-east-2:266458841044:function:ACS-VerificationSemanticSegmentationarn:aws:lambda:us-west-2:081040173940:function:ACS-VerificationSemanticSegmentationarn:aws:lambda:eu-west-1:568282634449:function:ACS-VerificationSemanticSegmentationarn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VerificationSemanticSegmentationarn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VerificationSemanticSegmentationarn:aws:lambda:ap-south-1:565803892007:function:ACS-VerificationSemanticSegmentationarn:aws:lambda:eu-central-1:203001061592:function:ACS-VerificationSemanticSegmentationarn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VerificationSemanticSegmentationarn:aws:lambda:eu-west-2:487402164563:function:ACS-VerificationSemanticSegmentationarn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VerificationSemanticSegmentationarn:aws:lambda:ca-central-1:918755190332:function:ACS-VerificationSemanticSegmentation
 	//
 	// Bounding
@@ -323,14 +321,14 @@ type AnnotationConsolidationConfig struct {
 	// estimate the true class of verification judgement for bounding box labels based
 	// on annotations from individual workers.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:ACS-VerificationBoundingBoxarn:aws:lambda:us-east-2:266458841044:function:ACS-VerificationBoundingBoxarn:aws:lambda:us-west-2:081040173940:function:ACS-VerificationBoundingBoxarn:aws:lambda:eu-west-1:568282634449:function:ACS-VerificationBoundingBoxarn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VerificationBoundingBoxarn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VerificationBoundingBoxarn:aws:lambda:ap-south-1:565803892007:function:ACS-VerificationBoundingBoxarn:aws:lambda:eu-central-1:203001061592:function:ACS-VerificationBoundingBoxarn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VerificationBoundingBoxarn:aws:lambda:eu-west-2:487402164563:function:ACS-VerificationBoundingBoxarn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VerificationBoundingBoxarn:aws:lambda:ca-central-1:918755190332:function:ACS-VerificationBoundingBox
 	//
 	// Bounding
 	// box adjustment - Finds the most similar boxes from different workers based on
 	// the Jaccard index of the adjusted annotations.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentBoundingBoxarn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentBoundingBoxarn:aws:lambda:us-west-2:081040173940:function:ACS-AdjustmentBoundingBoxarn:aws:lambda:eu-west-1:568282634449:function:ACS-AdjustmentBoundingBoxarn:aws:lambda:ap-northeast-1:477331159723:function:ACS-AdjustmentBoundingBoxarn:aws:lambda:ap-southeast-2:454466003867:function:ACS-AdjustmentBoundingBoxarn:aws:lambda:ap-south-1:565803892007:function:ACS-AdjustmentBoundingBoxarn:aws:lambda:eu-central-1:203001061592:function:ACS-AdjustmentBoundingBoxarn:aws:lambda:ap-northeast-2:845288260483:function:ACS-AdjustmentBoundingBoxarn:aws:lambda:eu-west-2:487402164563:function:ACS-AdjustmentBoundingBoxarn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentBoundingBoxarn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentBoundingBox
 	//
 	// Video
@@ -338,7 +336,7 @@ type AnnotationConsolidationConfig struct {
 	// adjust bounding boxes that workers have added to video frames to classify and
 	// localize objects in a sequence of video frames.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentVideoObjectDetectionarn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentVideoObjectDetectionarn:aws:lambda:us-west-2:081040173940:function:ACS-AdjustmentVideoObjectDetectionarn:aws:lambda:eu-west-1:568282634449:function:ACS-AdjustmentVideoObjectDetectionarn:aws:lambda:ap-northeast-1:477331159723:function:ACS-AdjustmentVideoObjectDetectionarn:aws:lambda:ap-southeast-2:454466003867:function:ACS-AdjustmentVideoObjectDetectionarn:aws:lambda:ap-south-1:565803892007:function:ACS-AdjustmentVideoObjectDetectionarn:aws:lambda:eu-central-1:203001061592:function:ACS-AdjustmentVideoObjectDetectionarn:aws:lambda:ap-northeast-2:845288260483:function:ACS-AdjustmentVideoObjectDetectionarn:aws:lambda:eu-west-2:487402164563:function:ACS-AdjustmentVideoObjectDetectionarn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentVideoObjectDetectionarn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentVideoObjectDetection
 	//
 	// Video
@@ -346,14 +344,14 @@ type AnnotationConsolidationConfig struct {
 	// adjust bounding boxes that workers have added to video frames to track object
 	// movement across a sequence of video frames.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentVideoObjectTrackingarn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentVideoObjectTrackingarn:aws:lambda:us-west-2:081040173940:function:ACS-AdjustmentVideoObjectTrackingarn:aws:lambda:eu-west-1:568282634449:function:ACS-AdjustmentVideoObjectTrackingarn:aws:lambda:ap-northeast-1:477331159723:function:ACS-AdjustmentVideoObjectTrackingarn:aws:lambda:ap-southeast-2:454466003867:function:ACS-AdjustmentVideoObjectTrackingarn:aws:lambda:ap-south-1:565803892007:function:ACS-AdjustmentVideoObjectTrackingarn:aws:lambda:eu-central-1:203001061592:function:ACS-AdjustmentVideoObjectTrackingarn:aws:lambda:ap-northeast-2:845288260483:function:ACS-AdjustmentVideoObjectTrackingarn:aws:lambda:eu-west-2:487402164563:function:ACS-AdjustmentVideoObjectTrackingarn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentVideoObjectTrackingarn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentVideoObjectTracking
 	//
 	// 3D
 	// point cloud object detection adjustment - Use this task type when you want
 	// workers to adjust 3D cuboids around objects in a 3D point cloud.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:ACS-Adjustment3DPointCloudObjectDetectionarn:aws:lambda:us-east-2:266458841044:function:ACS-Adjustment3DPointCloudObjectDetectionarn:aws:lambda:us-west-2:081040173940:function:ACS-Adjustment3DPointCloudObjectDetectionarn:aws:lambda:eu-west-1:568282634449:function:ACS-Adjustment3DPointCloudObjectDetectionarn:aws:lambda:ap-northeast-1:477331159723:function:ACS-Adjustment3DPointCloudObjectDetectionarn:aws:lambda:ap-southeast-2:454466003867:function:ACS-Adjustment3DPointCloudObjectDetectionarn:aws:lambda:ap-south-1:565803892007:function:ACS-Adjustment3DPointCloudObjectDetectionarn:aws:lambda:eu-central-1:203001061592:function:ACS-Adjustment3DPointCloudObjectDetectionarn:aws:lambda:ap-northeast-2:845288260483:function:ACS-Adjustment3DPointCloudObjectDetectionarn:aws:lambda:eu-west-2:487402164563:function:ACS-Adjustment3DPointCloudObjectDetectionarn:aws:lambda:ap-southeast-1:377565633583:function:ACS-Adjustment3DPointCloudObjectDetectionarn:aws:lambda:ca-central-1:918755190332:function:ACS-Adjustment3DPointCloudObjectDetection
 	//
 	// 3D
@@ -361,7 +359,7 @@ type AnnotationConsolidationConfig struct {
 	// workers to adjust 3D cuboids around objects that appear in a sequence of 3D
 	// point cloud frames.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:ACS-Adjustment3DPointCloudObjectTrackingarn:aws:lambda:us-east-2:266458841044:function:ACS-Adjustment3DPointCloudObjectTrackingarn:aws:lambda:us-west-2:081040173940:function:ACS-Adjustment3DPointCloudObjectTrackingarn:aws:lambda:eu-west-1:568282634449:function:ACS-Adjustment3DPointCloudObjectTrackingarn:aws:lambda:ap-northeast-1:477331159723:function:ACS-Adjustment3DPointCloudObjectTrackingarn:aws:lambda:ap-southeast-2:454466003867:function:ACS-Adjustment3DPointCloudObjectTrackingarn:aws:lambda:ap-south-1:565803892007:function:ACS-Adjustment3DPointCloudObjectTrackingarn:aws:lambda:eu-central-1:203001061592:function:ACS-Adjustment3DPointCloudObjectTrackingarn:aws:lambda:ap-northeast-2:845288260483:function:ACS-Adjustment3DPointCloudObjectTrackingarn:aws:lambda:eu-west-2:487402164563:function:ACS-Adjustment3DPointCloudObjectTrackingarn:aws:lambda:ap-southeast-1:377565633583:function:ACS-Adjustment3DPointCloudObjectTrackingarn:aws:lambda:ca-central-1:918755190332:function:ACS-Adjustment3DPointCloudObjectTracking
 	//
 	// 3D
@@ -369,7 +367,7 @@ type AnnotationConsolidationConfig struct {
 	// workers to adjust a point-level semantic segmentation masks using a paint
 	// tool.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:ACS-Adjustment3DPointCloudSemanticSegmentationarn:aws:lambda:us-east-2:266458841044:function:ACS-Adjustment3DPointCloudSemanticSegmentationarn:aws:lambda:us-west-2:081040173940:function:ACS-Adjustment3DPointCloudSemanticSegmentationarn:aws:lambda:eu-west-1:568282634449:function:ACS-Adjustment3DPointCloudSemanticSegmentationarn:aws:lambda:ap-northeast-1:477331159723:function:ACS-Adjustment3DPointCloudSemanticSegmentationarn:aws:lambda:ap-southeast-2:454466003867:function:ACS-Adjustment3DPointCloudSemanticSegmentationarn:aws:lambda:ap-south-1:565803892007:function:ACS-Adjustment3DPointCloudSemanticSegmentationarn:aws:lambda:eu-central-1:203001061592:function:ACS-Adjustment3DPointCloudSemanticSegmentationarn:aws:lambda:ap-northeast-2:845288260483:function:ACS-Adjustment3DPointCloudSemanticSegmentationarn:aws:lambda:eu-west-2:487402164563:function:ACS-Adjustment3DPointCloudSemanticSegmentationarn:aws:lambda:ap-southeast-1:377565633583:function:ACS-Adjustment3DPointCloudSemanticSegmentationarn:aws:lambda:ca-central-1:918755190332:function:ACS-Adjustment3DPointCloudSemanticSegmentation
 	//
 	// This member is required.
@@ -570,69 +568,69 @@ type AutoMLJobObjective struct {
 	// machine learning system. This metric is optimized during training to provide the
 	// best estimate for model parameter values from data. Here are the options:
 	//
-	//     *
+	// *
 	// MSE: The mean squared error (MSE) is the average of the squared differences
 	// between the predicted and actual values. It is used for regression. MSE values
 	// are always positive, the better a model is at predicting the actual values the
 	// smaller the MSE value. When the data contains outliers, they tend to dominate
 	// the MSE which might cause subpar prediction performance.
 	//
-	//     * Accuracy: The
-	// ratio of the number correctly classified items to the total number (correctly
-	// and incorrectly) classified. It is used for binary and multiclass
-	// classification. Measures how close the predicted class values are to the actual
-	// values. Accuracy values vary between zero and one, one being perfect accuracy
-	// and zero perfect inaccuracy.
+	// * Accuracy: The ratio
+	// of the number correctly classified items to the total number (correctly and
+	// incorrectly) classified. It is used for binary and multiclass classification.
+	// Measures how close the predicted class values are to the actual values. Accuracy
+	// values vary between zero and one, one being perfect accuracy and zero perfect
+	// inaccuracy.
 	//
-	//     * F1: The F1 score is the harmonic mean of the
-	// precision and recall. It is used for binary classification into classes
-	// traditionally referred to as positive and negative. Predictions are said to be
-	// true when they match their actual (correct) class; false when they do not.
-	// Precision is the ratio of the true positive predictions to all positive
-	// predictions (including the false positives) in a data set and measures the
-	// quality of the prediction when it predicts the positive class. Recall (or
-	// sensitivity) is the ratio of the true positive predictions to all actual
-	// positive instances and measures how completely a model predicts the actual class
-	// members in a data set. The standard F1 score weighs precision and recall
-	// equally. But which metric is paramount typically depends on specific aspects of
-	// a problem. F1 scores vary between zero and one, one being the best possible
-	// performance and zero the worst.
+	// * F1: The F1 score is the harmonic mean of the precision and
+	// recall. It is used for binary classification into classes traditionally referred
+	// to as positive and negative. Predictions are said to be true when they match
+	// their actual (correct) class; false when they do not. Precision is the ratio of
+	// the true positive predictions to all positive predictions (including the false
+	// positives) in a data set and measures the quality of the prediction when it
+	// predicts the positive class. Recall (or sensitivity) is the ratio of the true
+	// positive predictions to all actual positive instances and measures how
+	// completely a model predicts the actual class members in a data set. The standard
+	// F1 score weighs precision and recall equally. But which metric is paramount
+	// typically depends on specific aspects of a problem. F1 scores vary between zero
+	// and one, one being the best possible performance and zero the worst.
 	//
-	//     * AUC: The area under the curve (AUC)
-	// metric is used to compare and evaluate binary classification by algorithms such
-	// as logistic regression that return probabilities. A threshold is needed to map
-	// the probabilities into classifications. The relevant curve is the receiver
-	// operating characteristic curve that plots the true positive rate (TPR) of
-	// predictions (or recall) against the false positive rate (FPR) as a function of
-	// the threshold value, above which a prediction is considered positive. Increasing
-	// the threshold results in fewer false positives but more false negatives. AUC is
-	// the area under this receiver operating characteristic curve and so provides an
-	// aggregated measure of the model performance across all possible classification
-	// thresholds. The AUC score can also be interpreted as the probability that a
-	// randomly selected positive data point is more likely to be predicted positive
-	// than a randomly selected negative example. AUC scores vary between zero and one,
-	// one being perfect accuracy and one half not better than a random classifier.
-	// Values less that one half predict worse than a random predictor and such
-	// consistently bad predictors can be inverted to obtain better than random
-	// predictors.
+	// * AUC: The
+	// area under the curve (AUC) metric is used to compare and evaluate binary
+	// classification by algorithms such as logistic regression that return
+	// probabilities. A threshold is needed to map the probabilities into
+	// classifications. The relevant curve is the receiver operating characteristic
+	// curve that plots the true positive rate (TPR) of predictions (or recall) against
+	// the false positive rate (FPR) as a function of the threshold value, above which
+	// a prediction is considered positive. Increasing the threshold results in fewer
+	// false positives but more false negatives. AUC is the area under this receiver
+	// operating characteristic curve and so provides an aggregated measure of the
+	// model performance across all possible classification thresholds. The AUC score
+	// can also be interpreted as the probability that a randomly selected positive
+	// data point is more likely to be predicted positive than a randomly selected
+	// negative example. AUC scores vary between zero and one, one being perfect
+	// accuracy and one half not better than a random classifier. Values less that one
+	// half predict worse than a random predictor and such consistently bad predictors
+	// can be inverted to obtain better than random predictors.
 	//
-	//     * F1macro: The F1macro score applies F1 scoring to multiclass
-	// classification. In this context, you have multiple classes to predict. You just
-	// calculate the precision and recall for each class as you did for the positive
-	// class in binary classification. Then used these values to calculate the F1 score
-	// for each class and average them to obtain the F1macro score. F1macro scores vary
-	// between zero and one, one being the best possible performance and zero the
-	// worst.
+	// * F1macro: The F1macro
+	// score applies F1 scoring to multiclass classification. In this context, you have
+	// multiple classes to predict. You just calculate the precision and recall for
+	// each class as you did for the positive class in binary classification. Then used
+	// these values to calculate the F1 score for each class and average them to obtain
+	// the F1macro score. F1macro scores vary between zero and one, one being the best
+	// possible performance and zero the worst.
 	//
-	// If you do not specify a metric explicitly, the default behavior is to
-	// automatically use:
+	// If you do not specify a metric
+	// explicitly, the default behavior is to automatically use:
 	//
-	//     * MSE: for regression.
+	// * MSE: for
+	// regression.
 	//
-	//     * F1: for binary
-	// classification
+	// * F1: for binary classification
 	//
-	//     * Accuracy: for multiclass classification.
+	// * Accuracy: for multiclass
+	// classification.
 	//
 	// This member is required.
 	MetricName AutoMLMetricEnum
@@ -1415,38 +1413,38 @@ type EndpointSummary struct {
 
 	// The status of the endpoint.
 	//
-	//     * OutOfService: Endpoint is not available to
-	// take incoming requests.
+	// * OutOfService: Endpoint is not available to take
+	// incoming requests.
 	//
-	//     * Creating: CreateEndpoint is executing.
+	// * Creating: CreateEndpoint is executing.
 	//
-	//     *
-	// Updating: UpdateEndpoint or UpdateEndpointWeightsAndCapacities is executing.
+	// * Updating:
+	// UpdateEndpoint or UpdateEndpointWeightsAndCapacities is executing.
 	//
-	//
-	// * SystemUpdating: Endpoint is undergoing maintenance and cannot be updated or
+	// *
+	// SystemUpdating: Endpoint is undergoing maintenance and cannot be updated or
 	// deleted or re-scaled until it has completed. This maintenance operation does not
 	// change any customer-specified values such as VPC config, KMS encryption, model,
 	// instance type, or instance count.
 	//
-	//     * RollingBack: Endpoint fails to scale up
-	// or down or change its variant weight and is in the process of rolling back to
-	// its previous configuration. Once the rollback completes, endpoint returns to an
+	// * RollingBack: Endpoint fails to scale up or
+	// down or change its variant weight and is in the process of rolling back to its
+	// previous configuration. Once the rollback completes, endpoint returns to an
 	// InService status. This transitional status only applies to an endpoint that has
 	// autoscaling enabled and is undergoing variant weight or capacity changes as part
 	// of an UpdateEndpointWeightsAndCapacities call or when the
 	// UpdateEndpointWeightsAndCapacities operation is called explicitly.
 	//
-	//     *
-	// InService: Endpoint is available to process incoming requests.
+	// * InService:
+	// Endpoint is available to process incoming requests.
 	//
-	//     * Deleting:
-	// DeleteEndpoint is executing.
+	// * Deleting: DeleteEndpoint
+	// is executing.
 	//
-	//     * Failed: Endpoint could not be created,
-	// updated, or re-scaled. Use DescribeEndpointOutput$FailureReason for information
-	// about the failure. DeleteEndpoint is the only operation that can be performed on
-	// a failed endpoint.
+	// * Failed: Endpoint could not be created, updated, or re-scaled.
+	// Use DescribeEndpointOutput$FailureReason for information about the failure.
+	// DeleteEndpoint is the only operation that can be performed on a failed
+	// endpoint.
 	//
 	// To get a list of endpoints with a specified status, use the
 	// ListEndpointsInput$StatusEquals filter.
@@ -1501,12 +1499,12 @@ type Experiment struct {
 // Associates a SageMaker job as a trial component with an experiment and trial.
 // Specified when you call the following APIs:
 //
-//     * CreateProcessingJob
+// * CreateProcessingJob
 //
-//     *
+// *
 // CreateTrainingJob
 //
-//     * CreateTransformJob
+// * CreateTransformJob
 type ExperimentConfig struct {
 
 	// The name of an existing experiment to associate the trial component with.
@@ -1634,31 +1632,31 @@ type Filter struct {
 	// for text properties. A SearchExpression can include the Contains operator
 	// multiple times when the value of Name is one of the following:
 	//
-	//     *
+	// *
 	// Experiment.DisplayName
 	//
-	//     * Experiment.ExperimentName
+	// * Experiment.ExperimentName
 	//
-	//     * Experiment.Tags
+	// * Experiment.Tags
 	//
+	// *
+	// Trial.DisplayName
 	//
-	// * Trial.DisplayName
+	// * Trial.TrialName
 	//
-	//     * Trial.TrialName
+	// * Trial.Tags
 	//
-	//     * Trial.Tags
-	//
-	//     *
+	// *
 	// TrialComponent.DisplayName
 	//
-	//     * TrialComponent.TrialComponentName
+	// * TrialComponent.TrialComponentName
 	//
-	//     *
+	// *
 	// TrialComponent.Tags
 	//
-	//     * TrialComponent.InputArtifacts
+	// * TrialComponent.InputArtifacts
 	//
-	//     *
+	// *
 	// TrialComponent.OutputArtifacts
 	//
 	// A SearchExpression can include only one Contains
@@ -1847,222 +1845,218 @@ type HumanLoopConfig struct {
 	// are in US dollars and should be based on the complexity of the task; the longer
 	// it takes in your initial testing, the more you should offer.
 	//
-	//     * 0.036
+	// * 0.036
 	//
-	//     *
+	// *
 	// 0.048
 	//
-	//     * 0.060
+	// * 0.060
 	//
-	//     * 0.072
+	// * 0.072
 	//
-	//     * 0.120
+	// * 0.120
 	//
-	//     * 0.240
+	// * 0.240
 	//
-	//     * 0.360
+	// * 0.360
 	//
-	//     *
-	// 0.480
+	// * 0.480
 	//
-	//     * 0.600
+	// * 0.600
 	//
-	//     * 0.720
+	// * 0.720
 	//
-	//     * 0.840
+	// *
+	// 0.840
 	//
-	//     * 0.960
+	// * 0.960
 	//
-	//     * 1.080
+	// * 1.080
 	//
-	//     *
-	// 1.200
+	// * 1.200
 	//
-	// Use one of the following prices for image classification, text
-	// classification, and custom tasks. Prices are in US dollars.
+	// Use one of the following prices for image
+	// classification, text classification, and custom tasks. Prices are in US
+	// dollars.
 	//
-	//     * 0.012
+	// * 0.012
 	//
-	//     *
-	// 0.024
+	// * 0.024
 	//
-	//     * 0.036
+	// * 0.036
 	//
-	//     * 0.048
+	// * 0.048
 	//
-	//     * 0.060
+	// * 0.060
 	//
-	//     * 0.072
+	// * 0.072
 	//
-	//     * 0.120
+	// * 0.120
 	//
-	//     *
+	// *
 	// 0.240
 	//
-	//     * 0.360
+	// * 0.360
 	//
-	//     * 0.480
+	// * 0.480
 	//
-	//     * 0.600
+	// * 0.600
 	//
-	//     * 0.720
+	// * 0.720
 	//
-	//     * 0.840
+	// * 0.840
 	//
-	//     *
-	// 0.960
+	// * 0.960
 	//
-	//     * 1.080
+	// * 1.080
 	//
-	//     * 1.200
+	// *
+	// 1.200
 	//
-	// Use one of the following prices for semantic
-	// segmentation tasks. Prices are in US dollars.
+	// Use one of the following prices for semantic segmentation tasks. Prices
+	// are in US dollars.
 	//
-	//     * 0.840
+	// * 0.840
 	//
-	//     * 0.960
+	// * 0.960
 	//
-	//     *
-	// 1.080
+	// * 1.080
 	//
-	//     * 1.200
+	// * 1.200
 	//
-	// Use one of the following prices for Textract AnalyzeDocument
-	// Important Form Key Amazon Augmented AI review tasks. Prices are in US dollars.
-	//
+	// Use one of the following
+	// prices for Textract AnalyzeDocument Important Form Key Amazon Augmented AI
+	// review tasks. Prices are in US dollars.
 	//
 	// * 2.400
 	//
-	//     * 2.280
+	// * 2.280
 	//
-	//     * 2.160
+	// * 2.160
 	//
-	//     * 2.040
+	// * 2.040
 	//
-	//     * 1.920
+	// *
+	// 1.920
 	//
-	//     * 1.800
+	// * 1.800
 	//
-	//     *
-	// 1.680
+	// * 1.680
 	//
-	//     * 1.560
+	// * 1.560
 	//
-	//     * 1.440
+	// * 1.440
 	//
-	//     * 1.320
+	// * 1.320
 	//
-	//     * 1.200
+	// * 1.200
 	//
-	//     * 1.080
+	// * 1.080
 	//
-	//     *
-	// 0.960
+	// * 0.960
 	//
-	//     * 0.840
+	// *
+	// 0.840
 	//
-	//     * 0.720
+	// * 0.720
 	//
-	//     * 0.600
+	// * 0.600
 	//
-	//     * 0.480
+	// * 0.480
 	//
-	//     * 0.360
+	// * 0.360
 	//
-	//     *
-	// 0.240
+	// * 0.240
 	//
-	//     * 0.120
+	// * 0.120
 	//
-	//     * 0.072
+	// * 0.072
 	//
-	//     * 0.060
+	// * 0.060
 	//
-	//     * 0.048
+	// *
+	// 0.048
 	//
-	//     * 0.036
+	// * 0.036
 	//
-	//     *
-	// 0.024
+	// * 0.024
 	//
-	//     * 0.012
+	// * 0.012
 	//
-	// Use one of the following prices for Rekognition
-	// DetectModerationLabels Amazon Augmented AI review tasks. Prices are in US
-	// dollars.
-	//
-	//     * 1.200
-	//
-	//     * 1.080
-	//
-	//     * 0.960
-	//
-	//     * 0.840
-	//
-	//     * 0.720
-	//
-	//     *
-	// 0.600
-	//
-	//     * 0.480
-	//
-	//     * 0.360
-	//
-	//     * 0.240
-	//
-	//     * 0.120
-	//
-	//     * 0.072
-	//
-	//     *
-	// 0.060
-	//
-	//     * 0.048
-	//
-	//     * 0.036
-	//
-	//     * 0.024
-	//
-	//     * 0.012
-	//
-	// Use one of the
-	// following prices for Amazon Augmented AI custom human review tasks. Prices are
+	// Use one of the following prices for
+	// Rekognition DetectModerationLabels Amazon Augmented AI review tasks. Prices are
 	// in US dollars.
 	//
-	//     * 1.200
+	// * 1.200
 	//
-	//     * 1.080
+	// * 1.080
 	//
-	//     * 0.960
+	// * 0.960
 	//
-	//     * 0.840
+	// * 0.840
 	//
-	//     *
+	// * 0.720
+	//
+	// * 0.600
+	//
+	// * 0.480
+	//
+	// *
+	// 0.360
+	//
+	// * 0.240
+	//
+	// * 0.120
+	//
+	// * 0.072
+	//
+	// * 0.060
+	//
+	// * 0.048
+	//
+	// * 0.036
+	//
+	// * 0.024
+	//
+	// *
+	// 0.012
+	//
+	// Use one of the following prices for Amazon Augmented AI custom human
+	// review tasks. Prices are in US dollars.
+	//
+	// * 1.200
+	//
+	// * 1.080
+	//
+	// * 0.960
+	//
+	// * 0.840
+	//
+	// *
 	// 0.720
 	//
-	//     * 0.600
+	// * 0.600
 	//
-	//     * 0.480
+	// * 0.480
 	//
-	//     * 0.360
+	// * 0.360
 	//
-	//     * 0.240
+	// * 0.240
 	//
-	//     * 0.120
+	// * 0.120
 	//
-	//     *
-	// 0.072
+	// * 0.072
 	//
-	//     * 0.060
+	// * 0.060
 	//
-	//     * 0.048
+	// * 0.048
 	//
-	//     * 0.036
+	// *
+	// 0.036
 	//
-	//     * 0.024
+	// * 0.024
 	//
-	//     * 0.012
+	// * 0.012
 	PublicWorkforceTaskPrice *PublicWorkforceTaskPrice
 
 	// The length of time that a task remains available for review by human workers.
@@ -2110,40 +2104,40 @@ type HumanTaskConfig struct {
 	// Bounding box - Finds the most similar boxes from different workers based on the
 	// Jaccard index of the boxes.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:PRE-BoundingBox
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-2:266458841044:function:PRE-BoundingBox
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-west-2:081040173940:function:PRE-BoundingBox
 	//
-	//     *
+	// *
 	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-BoundingBox
 	//
-	//     *
+	// *
 	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-BoundingBox
 	//
-	//     *
+	// *
 	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-BoundingBox
 	//
-	//     *
+	// *
 	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-BoundingBox
 	//
-	//     *
+	// *
 	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-BoundingBox
 	//
-	//     *
+	// *
 	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-BoundingBox
 	//
-	//     *
+	// *
 	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-BoundingBox
 	//
-	//     *
+	// *
 	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-BoundingBox
 	//
-	//     *
+	// *
 	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-BoundingBox
 	//
 	// Image
@@ -2151,40 +2145,40 @@ type HumanTaskConfig struct {
 	// estimate the true class of an image based on annotations from individual
 	// workers.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:PRE-ImageMultiClass
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-2:266458841044:function:PRE-ImageMultiClass
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-west-2:081040173940:function:PRE-ImageMultiClass
 	//
-	//     *
+	// *
 	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-ImageMultiClass
 	//
-	//     *
+	// *
 	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-ImageMultiClass
 	//
-	//     *
+	// *
 	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-ImageMultiClass
 	//
-	//     *
+	// *
 	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-ImageMultiClass
 	//
-	//     *
+	// *
 	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-ImageMultiClass
 	//
-	//     *
+	// *
 	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-ImageMultiClass
 	//
-	//     *
+	// *
 	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-ImageMultiClass
 	//
-	//     *
+	// *
 	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-ImageMultiClass
 	//
-	//     *
+	// *
 	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-ImageMultiClass
 	//
 	// Multi-label
@@ -2192,45 +2186,38 @@ type HumanTaskConfig struct {
 	// to estimate the true classes of an image based on annotations from individual
 	// workers.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:PRE-ImageMultiClassMultiLabel
 	//
+	// *
+	// arn:aws:lambda:us-east-2:266458841044:function:PRE-ImageMultiClassMultiLabel
 	//
-	// * arn:aws:lambda:us-east-2:266458841044:function:PRE-ImageMultiClassMultiLabel
-	//
-	//
-	// * arn:aws:lambda:us-west-2:081040173940:function:PRE-ImageMultiClassMultiLabel
-	//
+	// *
+	// arn:aws:lambda:us-west-2:081040173940:function:PRE-ImageMultiClassMultiLabel
 	//
 	// *
 	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-ImageMultiClassMultiLabel
 	//
+	// *
+	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-ImageMultiClassMultiLabel
 	//
-	// * arn:aws:lambda:eu-west-1:568282634449:function:PRE-ImageMultiClassMultiLabel
-	//
-	//
-	// * arn:aws:lambda:eu-west-2:487402164563:function:PRE-ImageMultiClassMultiLabel
-	//
+	// *
+	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-ImageMultiClassMultiLabel
 	//
 	// *
 	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-ImageMultiClassMultiLabel
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-ImageMultiClassMultiLabel
-	//
 	//
 	// *
 	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-ImageMultiClassMultiLabel
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-ImageMultiClassMultiLabel
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-ImageMultiClassMultiLabel
-	//
 	//
 	// *
 	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-ImageMultiClassMultiLabel
@@ -2239,39 +2226,38 @@ type HumanTaskConfig struct {
 	// segmentation - Treats each pixel in an image as a multi-class classification and
 	// treats pixel annotations from workers as "votes" for the correct label.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:PRE-SemanticSegmentation
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-2:266458841044:function:PRE-SemanticSegmentation
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-west-2:081040173940:function:PRE-SemanticSegmentation
 	//
-	//     *
+	// *
 	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-SemanticSegmentation
 	//
+	// *
+	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-SemanticSegmentation
 	//
-	// * arn:aws:lambda:eu-west-1:568282634449:function:PRE-SemanticSegmentation
-	//
-	//     *
+	// *
 	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-SemanticSegmentation
 	//
-	//     *
+	// *
 	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-SemanticSegmentation
 	//
+	// *
+	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-SemanticSegmentation
 	//
-	// * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-SemanticSegmentation
+	// *
+	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-SemanticSegmentation
 	//
+	// *
+	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-SemanticSegmentation
 	//
-	// * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-SemanticSegmentation
-	//
-	//
-	// * arn:aws:lambda:ap-south-1:565803892007:function:PRE-SemanticSegmentation
-	//
-	//
-	// * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-SemanticSegmentation
-	//
+	// *
+	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-SemanticSegmentation
 	//
 	// *
 	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-SemanticSegmentation
@@ -2280,40 +2266,40 @@ type HumanTaskConfig struct {
 	// classification - Uses a variant of the Expectation Maximization approach to
 	// estimate the true class of text based on annotations from individual workers.
 	//
+	// *
+	// arn:aws:lambda:us-east-1:432418664414:function:PRE-TextMultiClass
 	//
-	// * arn:aws:lambda:us-east-1:432418664414:function:PRE-TextMultiClass
-	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-2:266458841044:function:PRE-TextMultiClass
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-west-2:081040173940:function:PRE-TextMultiClass
 	//
-	//     *
+	// *
 	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-TextMultiClass
 	//
-	//     *
+	// *
 	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-TextMultiClass
 	//
-	//     *
+	// *
 	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-TextMultiClass
 	//
-	//     *
+	// *
 	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-TextMultiClass
 	//
-	//     *
+	// *
 	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-TextMultiClass
 	//
-	//     *
+	// *
 	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-TextMultiClass
 	//
-	//     *
+	// *
 	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-TextMultiClass
 	//
-	//     *
+	// *
 	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-TextMultiClass
 	//
-	//     *
+	// *
 	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-TextMultiClass
 	//
 	// Multi-label
@@ -2321,44 +2307,38 @@ type HumanTaskConfig struct {
 	// estimate the true classes of text based on annotations from individual
 	// workers.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:PRE-TextMultiClassMultiLabel
 	//
+	// *
+	// arn:aws:lambda:us-east-2:266458841044:function:PRE-TextMultiClassMultiLabel
 	//
-	// * arn:aws:lambda:us-east-2:266458841044:function:PRE-TextMultiClassMultiLabel
-	//
-	//
-	// * arn:aws:lambda:us-west-2:081040173940:function:PRE-TextMultiClassMultiLabel
-	//
+	// *
+	// arn:aws:lambda:us-west-2:081040173940:function:PRE-TextMultiClassMultiLabel
 	//
 	// *
 	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-TextMultiClassMultiLabel
 	//
+	// *
+	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-TextMultiClassMultiLabel
 	//
-	// * arn:aws:lambda:eu-west-1:568282634449:function:PRE-TextMultiClassMultiLabel
-	//
-	//
-	// * arn:aws:lambda:eu-west-2:487402164563:function:PRE-TextMultiClassMultiLabel
-	//
+	// *
+	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-TextMultiClassMultiLabel
 	//
 	// *
 	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-TextMultiClassMultiLabel
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-TextMultiClassMultiLabel
-	//
 	//
 	// *
 	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-TextMultiClassMultiLabel
 	//
-	//
-	// * arn:aws:lambda:ap-south-1:565803892007:function:PRE-TextMultiClassMultiLabel
-	//
+	// *
+	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-TextMultiClassMultiLabel
 	//
 	// *
 	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-TextMultiClassMultiLabel
-	//
 	//
 	// *
 	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-TextMultiClassMultiLabel
@@ -2367,42 +2347,38 @@ type HumanTaskConfig struct {
 	// entity recognition - Groups similar selections and calculates aggregate
 	// boundaries, resolving to most-assigned label.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:PRE-NamedEntityRecognition
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-2:266458841044:function:PRE-NamedEntityRecognition
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-west-2:081040173940:function:PRE-NamedEntityRecognition
 	//
-	//     *
+	// *
 	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-NamedEntityRecognition
 	//
+	// *
+	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-NamedEntityRecognition
 	//
-	// * arn:aws:lambda:eu-west-1:568282634449:function:PRE-NamedEntityRecognition
+	// *
+	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-NamedEntityRecognition
 	//
-	//
-	// * arn:aws:lambda:eu-west-2:487402164563:function:PRE-NamedEntityRecognition
-	//
-	//
-	// * arn:aws:lambda:eu-central-1:203001061592:function:PRE-NamedEntityRecognition
-	//
+	// *
+	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-NamedEntityRecognition
 	//
 	// *
 	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-NamedEntityRecognition
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-NamedEntityRecognition
 	//
-	//
-	// * arn:aws:lambda:ap-south-1:565803892007:function:PRE-NamedEntityRecognition
-	//
+	// *
+	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-NamedEntityRecognition
 	//
 	// *
 	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-NamedEntityRecognition
-	//
 	//
 	// *
 	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-NamedEntityRecognition
@@ -2412,40 +2388,40 @@ type HumanTaskConfig struct {
 	// using predefined labels that you specify. Workers are shown videos and are asked
 	// to choose one label for each video.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:PRE-VideoMultiClass
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-2:266458841044:function:PRE-VideoMultiClass
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-west-2:081040173940:function:PRE-VideoMultiClass
 	//
-	//     *
+	// *
 	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-VideoMultiClass
 	//
-	//     *
+	// *
 	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-VideoMultiClass
 	//
-	//     *
+	// *
 	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-VideoMultiClass
 	//
-	//     *
+	// *
 	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-VideoMultiClass
 	//
-	//     *
+	// *
 	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-VideoMultiClass
 	//
-	//     *
+	// *
 	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-VideoMultiClass
 	//
-	//     *
+	// *
 	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-VideoMultiClass
 	//
-	//     *
+	// *
 	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-VideoMultiClass
 	//
-	//     *
+	// *
 	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-VideoMultiClass
 	//
 	// Video
@@ -2455,39 +2431,38 @@ type HumanTaskConfig struct {
 	// and localize various objects in a series of video frames, such as cars, bikes,
 	// and pedestrians.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:PRE-VideoObjectDetection
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-2:266458841044:function:PRE-VideoObjectDetection
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-west-2:081040173940:function:PRE-VideoObjectDetection
 	//
-	//     *
+	// *
 	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-VideoObjectDetection
 	//
-	//     *
+	// *
 	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-VideoObjectDetection
 	//
+	// *
+	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-VideoObjectDetection
 	//
-	// * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-VideoObjectDetection
+	// *
+	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-VideoObjectDetection
 	//
+	// *
+	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-VideoObjectDetection
 	//
-	// * arn:aws:lambda:ap-south-1:565803892007:function:PRE-VideoObjectDetection
+	// *
+	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-VideoObjectDetection
 	//
+	// *
+	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-VideoObjectDetection
 	//
-	// * arn:aws:lambda:eu-central-1:203001061592:function:PRE-VideoObjectDetection
-	//
-	//
-	// * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-VideoObjectDetection
-	//
-	//
-	// * arn:aws:lambda:eu-west-2:487402164563:function:PRE-VideoObjectDetection
-	//
-	//     *
+	// *
 	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-VideoObjectDetection
-	//
 	//
 	// *
 	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-VideoObjectDetection
@@ -2498,41 +2473,41 @@ type HumanTaskConfig struct {
 	// bounding boxes. For example, you can use this task to ask workers to track the
 	// movement of objects, such as cars, bikes, and pedestrians.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:PRE-VideoObjectTracking
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-2:266458841044:function:PRE-VideoObjectTracking
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-west-2:081040173940:function:PRE-VideoObjectTracking
 	//
-	//     *
+	// *
 	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-VideoObjectTracking
 	//
-	//     *
+	// *
 	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-VideoObjectTracking
 	//
+	// *
+	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-VideoObjectTracking
 	//
-	// * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-VideoObjectTracking
+	// *
+	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-VideoObjectTracking
 	//
-	//
-	// * arn:aws:lambda:ap-south-1:565803892007:function:PRE-VideoObjectTracking
-	//
-	//     *
+	// *
 	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-VideoObjectTracking
 	//
-	//     *
+	// *
 	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-VideoObjectTracking
 	//
+	// *
+	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-VideoObjectTracking
 	//
-	// * arn:aws:lambda:eu-west-2:487402164563:function:PRE-VideoObjectTracking
-	//
-	//     *
+	// *
 	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-VideoObjectTracking
 	//
-	//
-	// * arn:aws:lambda:ca-central-1:918755190332:function:PRE-VideoObjectTracking
+	// *
+	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-VideoObjectTracking
 	//
 	// 3D
 	// Point Cloud Modalities Use the following pre-annotation lambdas for 3D point
@@ -2544,49 +2519,38 @@ type HumanTaskConfig struct {
 	// identify different types of objects in a point cloud, such as cars, bikes, and
 	// pedestrians.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:PRE-3DPointCloudObjectDetection
-	//
 	//
 	// *
 	// arn:aws:lambda:us-east-2:266458841044:function:PRE-3DPointCloudObjectDetection
 	//
-	//
 	// *
 	// arn:aws:lambda:us-west-2:081040173940:function:PRE-3DPointCloudObjectDetection
-	//
 	//
 	// *
 	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-3DPointCloudObjectDetection
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-3DPointCloudObjectDetection
-	//
 	//
 	// *
 	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-3DPointCloudObjectDetection
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-3DPointCloudObjectDetection
-	//
 	//
 	// *
 	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-3DPointCloudObjectDetection
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-3DPointCloudObjectDetection
-	//
 	//
 	// *
 	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-3DPointCloudObjectDetection
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-3DPointCloudObjectDetection
-	//
 	//
 	// *
 	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-3DPointCloudObjectDetection
@@ -2597,49 +2561,38 @@ type HumanTaskConfig struct {
 	// For example, you can use this task type to ask workers to track the movement of
 	// vehicles across multiple point cloud frames.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:PRE-3DPointCloudObjectTracking
-	//
 	//
 	// *
 	// arn:aws:lambda:us-east-2:266458841044:function:PRE-3DPointCloudObjectTracking
 	//
-	//
 	// *
 	// arn:aws:lambda:us-west-2:081040173940:function:PRE-3DPointCloudObjectTracking
-	//
 	//
 	// *
 	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-3DPointCloudObjectTracking
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-3DPointCloudObjectTracking
-	//
 	//
 	// *
 	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-3DPointCloudObjectTracking
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-3DPointCloudObjectTracking
-	//
 	//
 	// *
 	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-3DPointCloudObjectTracking
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-3DPointCloudObjectTracking
-	//
 	//
 	// *
 	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-3DPointCloudObjectTracking
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-3DPointCloudObjectTracking
-	//
 	//
 	// *
 	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-3DPointCloudObjectTracking
@@ -2650,49 +2603,38 @@ type HumanTaskConfig struct {
 	// point cloud using different colors where each color is assigned to one of the
 	// classes you specify.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:PRE-3DPointCloudSemanticSegmentation
-	//
 	//
 	// *
 	// arn:aws:lambda:us-east-2:266458841044:function:PRE-3DPointCloudSemanticSegmentation
 	//
-	//
 	// *
 	// arn:aws:lambda:us-west-2:081040173940:function:PRE-3DPointCloudSemanticSegmentation
-	//
 	//
 	// *
 	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-3DPointCloudSemanticSegmentation
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-3DPointCloudSemanticSegmentation
-	//
 	//
 	// *
 	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-3DPointCloudSemanticSegmentation
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-3DPointCloudSemanticSegmentation
-	//
 	//
 	// *
 	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-3DPointCloudSemanticSegmentation
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-3DPointCloudSemanticSegmentation
-	//
 	//
 	// *
 	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-3DPointCloudSemanticSegmentation
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-3DPointCloudSemanticSegmentation
-	//
 	//
 	// *
 	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-3DPointCloudSemanticSegmentation
@@ -2706,49 +2648,38 @@ type HumanTaskConfig struct {
 	// approach to estimate the true class of verification judgement for bounding box
 	// labels based on annotations from individual workers.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:PRE-Adjustment3DPointCloudObjectTracking
-	//
 	//
 	// *
 	// arn:aws:lambda:us-east-2:266458841044:function:PRE-Adjustment3DPointCloudObjectTracking
 	//
-	//
 	// *
 	// arn:aws:lambda:us-west-2:081040173940:function:PRE-Adjustment3DPointCloudObjectTracking
-	//
 	//
 	// *
 	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-Adjustment3DPointCloudObjectTracking
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-Adjustment3DPointCloudObjectTracking
-	//
 	//
 	// *
 	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-Adjustment3DPointCloudObjectTracking
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-Adjustment3DPointCloudObjectTracking
-	//
 	//
 	// *
 	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-Adjustment3DPointCloudObjectTracking
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-Adjustment3DPointCloudObjectTracking
-	//
 	//
 	// *
 	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-Adjustment3DPointCloudObjectTracking
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-Adjustment3DPointCloudObjectTracking
-	//
 	//
 	// *
 	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-Adjustment3DPointCloudObjectTracking
@@ -2757,42 +2688,38 @@ type HumanTaskConfig struct {
 	// box adjustment - Finds the most similar boxes from different workers based on
 	// the Jaccard index of the adjusted annotations.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:PRE-AdjustmentBoundingBox
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-2:266458841044:function:PRE-AdjustmentBoundingBox
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-west-2:081040173940:function:PRE-AdjustmentBoundingBox
 	//
-	//     *
+	// *
 	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-AdjustmentBoundingBox
 	//
+	// *
+	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-AdjustmentBoundingBox
 	//
-	// * arn:aws:lambda:eu-west-1:568282634449:function:PRE-AdjustmentBoundingBox
+	// *
+	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-AdjustmentBoundingBox
 	//
-	//
-	// * arn:aws:lambda:eu-west-2:487402164563:function:PRE-AdjustmentBoundingBox
-	//
-	//
-	// * arn:aws:lambda:eu-central-1:203001061592:function:PRE-AdjustmentBoundingBox
-	//
+	// *
+	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-AdjustmentBoundingBox
 	//
 	// *
 	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-AdjustmentBoundingBox
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-AdjustmentBoundingBox
 	//
-	//
-	// * arn:aws:lambda:ap-south-1:565803892007:function:PRE-AdjustmentBoundingBox
-	//
+	// *
+	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-AdjustmentBoundingBox
 	//
 	// *
 	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-AdjustmentBoundingBox
-	//
 	//
 	// *
 	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-AdjustmentBoundingBox
@@ -2802,49 +2729,38 @@ type HumanTaskConfig struct {
 	// approach to estimate the true class of verification judgment for semantic
 	// segmentation labels based on annotations from individual workers.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:PRE-VerificationSemanticSegmentation
-	//
 	//
 	// *
 	// arn:aws:lambda:us-east-2:266458841044:function:PRE-VerificationSemanticSegmentation
 	//
-	//
 	// *
 	// arn:aws:lambda:us-west-2:081040173940:function:PRE-VerificationSemanticSegmentation
-	//
 	//
 	// *
 	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-VerificationSemanticSegmentation
 	//
-	//
 	// *
 	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-VerificationSemanticSegmentation
-	//
 	//
 	// *
 	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-VerificationSemanticSegmentation
 	//
-	//
 	// *
 	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-VerificationSemanticSegmentation
-	//
 	//
 	// *
 	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-VerificationSemanticSegmentation
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-VerificationSemanticSegmentation
-	//
 	//
 	// *
 	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-VerificationSemanticSegmentation
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-VerificationSemanticSegmentation
-	//
 	//
 	// *
 	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-VerificationSemanticSegmentation
@@ -2854,49 +2770,38 @@ type HumanTaskConfig struct {
 	// classification and treats pixel adjusted annotations from workers as "votes" for
 	// the correct label.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:PRE-AdjustmentSemanticSegmentation
-	//
 	//
 	// *
 	// arn:aws:lambda:us-east-2:266458841044:function:PRE-AdjustmentSemanticSegmentation
 	//
-	//
 	// *
 	// arn:aws:lambda:us-west-2:081040173940:function:PRE-AdjustmentSemanticSegmentation
-	//
 	//
 	// *
 	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-AdjustmentSemanticSegmentation
 	//
-	//
 	// *
 	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-AdjustmentSemanticSegmentation
-	//
 	//
 	// *
 	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-AdjustmentSemanticSegmentation
 	//
-	//
 	// *
 	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-AdjustmentSemanticSegmentation
-	//
 	//
 	// *
 	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-AdjustmentSemanticSegmentation
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-AdjustmentSemanticSegmentation
-	//
 	//
 	// *
 	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-AdjustmentSemanticSegmentation
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-AdjustmentSemanticSegmentation
-	//
 	//
 	// *
 	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-AdjustmentSemanticSegmentation
@@ -2906,49 +2811,38 @@ type HumanTaskConfig struct {
 	// adjust bounding boxes that workers have added to video frames to classify and
 	// localize objects in a sequence of video frames.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:PRE-AdjustmentVideoObjectDetection
-	//
 	//
 	// *
 	// arn:aws:lambda:us-east-2:266458841044:function:PRE-AdjustmentVideoObjectDetection
 	//
-	//
 	// *
 	// arn:aws:lambda:us-west-2:081040173940:function:PRE-AdjustmentVideoObjectDetection
-	//
 	//
 	// *
 	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-AdjustmentVideoObjectDetection
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-AdjustmentVideoObjectDetection
-	//
 	//
 	// *
 	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-AdjustmentVideoObjectDetection
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-AdjustmentVideoObjectDetection
-	//
 	//
 	// *
 	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-AdjustmentVideoObjectDetection
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-AdjustmentVideoObjectDetection
-	//
 	//
 	// *
 	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-AdjustmentVideoObjectDetection
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-AdjustmentVideoObjectDetection
-	//
 	//
 	// *
 	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-AdjustmentVideoObjectDetection
@@ -2958,49 +2852,38 @@ type HumanTaskConfig struct {
 	// adjust bounding boxes that workers have added to video frames to track object
 	// movement across a sequence of video frames.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:PRE-AdjustmentVideoObjectTracking
-	//
 	//
 	// *
 	// arn:aws:lambda:us-east-2:266458841044:function:PRE-AdjustmentVideoObjectTracking
 	//
-	//
 	// *
 	// arn:aws:lambda:us-west-2:081040173940:function:PRE-AdjustmentVideoObjectTracking
-	//
 	//
 	// *
 	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-AdjustmentVideoObjectTracking
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-AdjustmentVideoObjectTracking
-	//
 	//
 	// *
 	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-AdjustmentVideoObjectTracking
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-AdjustmentVideoObjectTracking
-	//
 	//
 	// *
 	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-AdjustmentVideoObjectTracking
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-AdjustmentVideoObjectTracking
-	//
 	//
 	// *
 	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-AdjustmentVideoObjectTracking
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-AdjustmentVideoObjectTracking
-	//
 	//
 	// *
 	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-AdjustmentVideoObjectTracking
@@ -3009,49 +2892,38 @@ type HumanTaskConfig struct {
 	// point cloud object detection adjustment - Adjust 3D cuboids in a point cloud
 	// frame.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:PRE-Adjustment3DPointCloudObjectDetection
-	//
 	//
 	// *
 	// arn:aws:lambda:us-east-2:266458841044:function:PRE-Adjustment3DPointCloudObjectDetection
 	//
-	//
 	// *
 	// arn:aws:lambda:us-west-2:081040173940:function:PRE-Adjustment3DPointCloudObjectDetection
-	//
 	//
 	// *
 	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-Adjustment3DPointCloudObjectDetection
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-Adjustment3DPointCloudObjectDetection
-	//
 	//
 	// *
 	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-Adjustment3DPointCloudObjectDetection
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-Adjustment3DPointCloudObjectDetection
-	//
 	//
 	// *
 	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-Adjustment3DPointCloudObjectDetection
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-Adjustment3DPointCloudObjectDetection
-	//
 	//
 	// *
 	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-Adjustment3DPointCloudObjectDetection
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-Adjustment3DPointCloudObjectDetection
-	//
 	//
 	// *
 	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-Adjustment3DPointCloudObjectDetection
@@ -3060,49 +2932,38 @@ type HumanTaskConfig struct {
 	// point cloud object tracking adjustment - Adjust 3D cuboids across a sequence of
 	// point cloud frames.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:PRE-Adjustment3DPointCloudObjectTracking
-	//
 	//
 	// *
 	// arn:aws:lambda:us-east-2:266458841044:function:PRE-Adjustment3DPointCloudObjectTracking
 	//
-	//
 	// *
 	// arn:aws:lambda:us-west-2:081040173940:function:PRE-Adjustment3DPointCloudObjectTracking
-	//
 	//
 	// *
 	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-Adjustment3DPointCloudObjectTracking
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-Adjustment3DPointCloudObjectTracking
-	//
 	//
 	// *
 	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-Adjustment3DPointCloudObjectTracking
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-Adjustment3DPointCloudObjectTracking
-	//
 	//
 	// *
 	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-Adjustment3DPointCloudObjectTracking
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-Adjustment3DPointCloudObjectTracking
-	//
 	//
 	// *
 	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-Adjustment3DPointCloudObjectTracking
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-Adjustment3DPointCloudObjectTracking
-	//
 	//
 	// *
 	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-Adjustment3DPointCloudObjectTracking
@@ -3111,49 +2972,38 @@ type HumanTaskConfig struct {
 	// point cloud semantic segmentation adjustment - Adjust semantic segmentation
 	// masks in a 3D point cloud.
 	//
-	//     *
+	// *
 	// arn:aws:lambda:us-east-1:432418664414:function:PRE-Adjustment3DPointCloudSemanticSegmentation
-	//
 	//
 	// *
 	// arn:aws:lambda:us-east-2:266458841044:function:PRE-Adjustment3DPointCloudSemanticSegmentation
 	//
-	//
 	// *
 	// arn:aws:lambda:us-west-2:081040173940:function:PRE-Adjustment3DPointCloudSemanticSegmentation
-	//
 	//
 	// *
 	// arn:aws:lambda:eu-west-1:568282634449:function:PRE-Adjustment3DPointCloudSemanticSegmentation
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-Adjustment3DPointCloudSemanticSegmentation
-	//
 	//
 	// *
 	// arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-Adjustment3DPointCloudSemanticSegmentation
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-south-1:565803892007:function:PRE-Adjustment3DPointCloudSemanticSegmentation
-	//
 	//
 	// *
 	// arn:aws:lambda:eu-central-1:203001061592:function:PRE-Adjustment3DPointCloudSemanticSegmentation
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-Adjustment3DPointCloudSemanticSegmentation
-	//
 	//
 	// *
 	// arn:aws:lambda:eu-west-2:487402164563:function:PRE-Adjustment3DPointCloudSemanticSegmentation
 	//
-	//
 	// *
 	// arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-Adjustment3DPointCloudSemanticSegmentation
-	//
 	//
 	// *
 	// arn:aws:lambda:ca-central-1:918755190332:function:PRE-Adjustment3DPointCloudSemanticSegmentation
@@ -3429,17 +3279,17 @@ type HyperParameterTrainingJobSummary struct {
 
 	// The status of the objective metric for the training job:
 	//
-	//     * Succeeded: The
-	// final objective metric for the training job was evaluated by the hyperparameter
-	// tuning job and used in the hyperparameter tuning process.
+	// * Succeeded: The final
+	// objective metric for the training job was evaluated by the hyperparameter tuning
+	// job and used in the hyperparameter tuning process.
 	//
-	//     * Pending: The
-	// training job is in progress and evaluation of its final objective metric is
-	// pending.
+	// * Pending: The training job
+	// is in progress and evaluation of its final objective metric is pending.
 	//
-	//     * Failed: The final objective metric for the training job was not
-	// evaluated, and was not used in the hyperparameter tuning process. This typically
-	// occurs when the training job failed or did not emit an objective metric.
+	// *
+	// Failed: The final objective metric for the training job was not evaluated, and
+	// was not used in the hyperparameter tuning process. This typically occurs when
+	// the training job failed or did not emit an objective metric.
 	ObjectiveStatus ObjectiveStatus
 
 	// Specifies the time when the training job ends on training instances. You are
@@ -3623,11 +3473,11 @@ type ImageConfig struct {
 
 	// Set this to one of the following values:
 	//
-	//     * Platform - The model image is
-	// hosted in Amazon ECR.
+	// * Platform - The model image is hosted
+	// in Amazon ECR.
 	//
-	//     * Vpc - The model image is hosted in a private Docker
-	// registry in your VPC.
+	// * Vpc - The model image is hosted in a private Docker registry
+	// in your VPC.
 	//
 	// This member is required.
 	RepositoryAccessMode RepositoryAccessMode
@@ -3673,173 +3523,168 @@ type InputConfig struct {
 	// with a JSON dictionary form. The data inputs are InputConfig$Framework
 	// specific.
 	//
-	//     * TensorFlow: You must specify the name and shape (NHWC format)
-	// of the expected data inputs using a dictionary format for your trained model.
-	// The dictionary formats required for the console and CLI are different.
+	// * TensorFlow: You must specify the name and shape (NHWC format) of
+	// the expected data inputs using a dictionary format for your trained model. The
+	// dictionary formats required for the console and CLI are different.
 	//
+	// * Examples
+	// for one input:
+	//
+	// * If using the console, {"input":[1,1024,1024,3]}
+	//
+	// * If using
+	// the CLI, {\"input\":[1,1024,1024,3]}
+	//
+	// * Examples for two inputs:
+	//
+	// * If using the
+	// console, {"data1": [1,28,28,1], "data2":[1,28,28,1]}
+	//
+	// * If using the CLI,
+	// {\"data1\": [1,28,28,1], \"data2\":[1,28,28,1]}
+	//
+	// * KERAS: You must specify the
+	// name and shape (NCHW format) of expected data inputs using a dictionary format
+	// for your trained model. Note that while Keras model artifacts should be uploaded
+	// in NHWC (channel-last) format, DataInputConfig should be specified in NCHW
+	// (channel-first) format. The dictionary formats required for the console and CLI
+	// are different.
 	//
 	// * Examples for one input:
 	//
-	//             * If using the console,
-	// {"input":[1,1024,1024,3]}
-	//
-	//             * If using the CLI,
-	// {\"input\":[1,1024,1024,3]}
-	//
-	//         * Examples for two inputs:
-	//
-	//             *
-	// If using the console, {"data1": [1,28,28,1], "data2":[1,28,28,1]}
-	//
-	//             *
-	// If using the CLI, {\"data1\": [1,28,28,1], \"data2\":[1,28,28,1]}
-	//
-	//     * KERAS:
-	// You must specify the name and shape (NCHW format) of expected data inputs using
-	// a dictionary format for your trained model. Note that while Keras model
-	// artifacts should be uploaded in NHWC (channel-last) format, DataInputConfig
-	// should be specified in NCHW (channel-first) format. The dictionary formats
-	// required for the console and CLI are different.
-	//
-	//         * Examples for one
-	// input:
-	//
-	//             * If using the console, {"input_1":[1,3,224,224]}
-	//
+	// * If using the console,
+	// {"input_1":[1,3,224,224]}
 	//
 	// * If using the CLI, {\"input_1\":[1,3,224,224]}
 	//
-	//         * Examples for two
-	// inputs:
+	// *
+	// Examples for two inputs:
 	//
-	//             * If using the console, {"input_1": [1,3,224,224],
+	// * If using the console, {"input_1": [1,3,224,224],
 	// "input_2":[1,3,224,224]}
 	//
-	//             * If using the CLI, {\"input_1\":
-	// [1,3,224,224], \"input_2\":[1,3,224,224]}
+	// * If using the CLI, {\"input_1\": [1,3,224,224],
+	// \"input_2\":[1,3,224,224]}
 	//
-	//     * MXNET/ONNX: You must specify
-	// the name and shape (NCHW format) of the expected data inputs in order using a
-	// dictionary format for your trained model. The dictionary formats required for
-	// the console and CLI are different.
+	// * MXNET/ONNX: You must specify the name and shape
+	// (NCHW format) of the expected data inputs in order using a dictionary format for
+	// your trained model. The dictionary formats required for the console and CLI are
+	// different.
 	//
-	//         * Examples for one input:
+	// * Examples for one input:
 	//
+	// * If using the console,
+	// {"data":[1,3,1024,1024]}
 	//
-	// * If using the console, {"data":[1,3,1024,1024]}
+	// * If using the CLI, {\"data\":[1,3,1024,1024]}
 	//
-	//             * If using the
-	// CLI, {\"data\":[1,3,1024,1024]}
+	// *
+	// Examples for two inputs:
 	//
-	//         * Examples for two inputs:
+	// * If using the console, {"var1": [1,1,28,28],
+	// "var2":[1,1,28,28]}
 	//
+	// * If using the CLI, {\"var1\": [1,1,28,28],
+	// \"var2\":[1,1,28,28]}
 	//
-	// * If using the console, {"var1": [1,1,28,28], "var2":[1,1,28,28]}
+	// * PyTorch: You can either specify the name and shape
+	// (NCHW format) of expected data inputs in order using a dictionary format for
+	// your trained model or you can specify the shape only using a list format. The
+	// dictionary formats required for the console and CLI are different. The list
+	// formats for the console and CLI are the same.
 	//
-	//             *
-	// If using the CLI, {\"var1\": [1,1,28,28], \"var2\":[1,1,28,28]}
+	// * Examples for one input in
+	// dictionary format:
 	//
-	//     * PyTorch:
-	// You can either specify the name and shape (NCHW format) of expected data inputs
-	// in order using a dictionary format for your trained model or you can specify the
-	// shape only using a list format. The dictionary formats required for the console
-	// and CLI are different. The list formats for the console and CLI are the same.
+	// * If using the console, {"input0":[1,3,224,224]}
 	//
+	// * If using
+	// the CLI, {\"input0\":[1,3,224,224]}
 	//
-	// * Examples for one input in dictionary format:
-	//
-	//             * If using the
-	// console, {"input0":[1,3,224,224]}
-	//
-	//             * If using the CLI,
-	// {\"input0\":[1,3,224,224]}
-	//
-	//         * Example for one input in list format:
+	// * Example for one input in list format:
 	// [[1,3,224,224]]
 	//
-	//         * Examples for two inputs in dictionary format:
+	// * Examples for two inputs in dictionary format:
 	//
+	// * If using the
+	// console, {"input0":[1,3,224,224], "input1":[1,3,224,224]}
 	//
-	// * If using the console, {"input0":[1,3,224,224], "input1":[1,3,224,224]}
+	// * If using the CLI,
+	// {\"input0\":[1,3,224,224], \"input1\":[1,3,224,224]}
 	//
+	// * Example for two inputs
+	// in list format: [[1,3,224,224], [1,3,224,224]]
 	//
-	// * If using the CLI, {\"input0\":[1,3,224,224], \"input1\":[1,3,224,224]}
+	// * XGBOOST: input data name and
+	// shape are not needed.
 	//
+	// DataInputConfig supports the following parameters for
+	// CoreMLOutputConfig$TargetDevice (ML Model format):
 	//
-	// * Example for two inputs in list format: [[1,3,224,224], [1,3,224,224]]
+	// * shape: Input shape, for
+	// example {"input_1": {"shape": [1,224,224,3]}}. In addition to static input
+	// shapes, CoreML converter supports Flexible input shapes:
 	//
-	//     *
-	// XGBOOST: input data name and shape are not needed.
+	// * Range Dimension. You
+	// can use the Range Dimension feature if you know the input shape will be within
+	// some specific interval in that dimension, for example: {"input_1": {"shape":
+	// ["1..10", 224, 224, 3]}}
 	//
-	// DataInputConfig supports the
-	// following parameters for CoreMLOutputConfig$TargetDevice (ML Model format):
+	// * Enumerated shapes. Sometimes, the models are trained
+	// to work only on a select set of inputs. You can enumerate all supported input
+	// shapes, for example: {"input_1": {"shape": [[1, 224, 224, 3], [1, 160, 160,
+	// 3]]}}
 	//
-	//
-	// * shape: Input shape, for example {"input_1": {"shape": [1,224,224,3]}}. In
-	// addition to static input shapes, CoreML converter supports Flexible input
-	// shapes:
-	//
-	//         * Range Dimension. You can use the Range Dimension feature if
-	// you know the input shape will be within some specific interval in that
-	// dimension, for example: {"input_1": {"shape": ["1..10", 224, 224, 3]}}
-	//
-	//
-	// * Enumerated shapes. Sometimes, the models are trained to work only on a select
-	// set of inputs. You can enumerate all supported input shapes, for example:
-	// {"input_1": {"shape": [[1, 224, 224, 3], [1, 160, 160, 3]]}}
-	//
-	//     *
-	// default_shape: Default input shape. You can set a default shape during
+	// * default_shape: Default input shape. You can set a default shape during
 	// conversion for both Range Dimension and Enumerated Shapes. For example
 	// {"input_1": {"shape": ["1..10", 224, 224, 3], "default_shape": [1, 224, 224,
 	// 3]}}
 	//
-	//     * type: Input type. Allowed values: Image and Tensor. By default, the
+	// * type: Input type. Allowed values: Image and Tensor. By default, the
 	// converter generates an ML Model with inputs of type Tensor (MultiArray). User
 	// can set input type to be Image. Image input type requires additional input
 	// parameters such as bias and scale.
 	//
-	//     * bias: If the input type is an Image,
-	// you need to provide the bias vector.
+	// * bias: If the input type is an Image, you
+	// need to provide the bias vector.
 	//
-	//     * scale: If the input type is an
-	// Image, you need to provide a scale factor.
+	// * scale: If the input type is an Image, you
+	// need to provide a scale factor.
 	//
-	// CoreML ClassifierConfig parameters
-	// can be specified using OutputConfig$CompilerOptions. CoreML converter supports
+	// CoreML ClassifierConfig parameters can be
+	// specified using OutputConfig$CompilerOptions. CoreML converter supports
 	// Tensorflow and PyTorch models. CoreML conversion examples:
 	//
-	//     * Tensor type
+	// * Tensor type
 	// input:
 	//
-	//         * "DataInputConfig": {"input_1": {"shape": [[1,224,224,3],
+	// * "DataInputConfig": {"input_1": {"shape": [[1,224,224,3],
 	// [1,160,160,3]], "default_shape": [1,224,224,3]}}
 	//
-	//     * Tensor type input
-	// without input name (PyTorch):
-	//
-	//         * "DataInputConfig": [{"shape":
-	// [[1,3,224,224], [1,3,160,160]], "default_shape": [1,3,224,224]}]
-	//
-	//     * Image
-	// type input:
-	//
-	//         * "DataInputConfig": {"input_1": {"shape": [[1,224,224,3],
-	// [1,160,160,3]], "default_shape": [1,224,224,3], "type": "Image", "bias":
-	// [-1,-1,-1], "scale": 0.007843137255}}
-	//
-	//         * "CompilerOptions":
-	// {"class_labels": "imagenet_labels_1000.txt"}
-	//
-	//     * Image type input without
+	// * Tensor type input without
 	// input name (PyTorch):
 	//
-	//         * "DataInputConfig": [{"shape": [[1,3,224,224],
-	// [1,3,160,160]], "default_shape": [1,3,224,224], "type": "Image", "bias":
-	// [-1,-1,-1], "scale": 0.007843137255}]
+	// * "DataInputConfig": [{"shape": [[1,3,224,224],
+	// [1,3,160,160]], "default_shape": [1,3,224,224]}]
 	//
-	//         * "CompilerOptions":
-	// {"class_labels": "imagenet_labels_1000.txt"}
+	// * Image type input:
+	//
+	// *
+	// "DataInputConfig": {"input_1": {"shape": [[1,224,224,3], [1,160,160,3]],
+	// "default_shape": [1,224,224,3], "type": "Image", "bias": [-1,-1,-1], "scale":
+	// 0.007843137255}}
+	//
+	// * "CompilerOptions": {"class_labels":
+	// "imagenet_labels_1000.txt"}
+	//
+	// * Image type input without input name (PyTorch):
+	//
+	// *
+	// "DataInputConfig": [{"shape": [[1,3,224,224], [1,3,160,160]], "default_shape":
+	// [1,3,224,224], "type": "Image", "bias": [-1,-1,-1], "scale": 0.007843137255}]
+	//
+	// *
+	// "CompilerOptions": {"class_labels": "imagenet_labels_1000.txt"}
 	//
 	// This member is required.
 	DataInputConfig *string
@@ -3960,20 +3805,20 @@ type LabelingJobAlgorithmsConfig struct {
 	// Specifies the Amazon Resource Name (ARN) of the algorithm used for
 	// auto-labeling. You must select one of the following ARNs:
 	//
-	//     * Image
+	// * Image
 	// classification
 	// arn:aws:sagemaker:region:027400017018:labeling-job-algorithm-specification/image-classification
 	//
-	//
-	// * Text classification
+	// *
+	// Text classification
 	// arn:aws:sagemaker:region:027400017018:labeling-job-algorithm-specification/text-classification
 	//
-	//
-	// * Object detection
+	// *
+	// Object detection
 	// arn:aws:sagemaker:region:027400017018:labeling-job-algorithm-specification/object-detection
 	//
-	//
-	// * Semantic Segmentation
+	// *
+	// Semantic Segmentation
 	// arn:aws:sagemaker:region:027400017018:labeling-job-algorithm-specification/semantic-segmentation
 	//
 	// This member is required.
@@ -4109,11 +3954,11 @@ type LabelingJobResourceConfig struct {
 	// encrypt data on the storage volume attached to the ML compute instance(s) that
 	// run the training job. The VolumeKmsKeyId can be any of the following formats:
 	//
+	// *
+	// // KMS Key ID "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	// * // KMS Key ID "1234abcd-12ab-34cd-56ef-1234567890ab"
-	//
-	//     * // Amazon Resource
-	// Name (ARN) of a KMS Key
+	// * // Amazon Resource Name
+	// (ARN) of a KMS Key
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 }
@@ -4712,11 +4557,11 @@ type MonitoringStoppingCondition struct {
 // to filter on a training job's InputDataConfig property with a specific channel
 // name and S3Uri prefix, define the following filters:
 //
-//     *
+// *
 // '{Name:"InputDataConfig.ChannelName", "Operator":"Equals", "Value":"train"}',
 //
-//
-// * '{Name:"InputDataConfig.DataSource.S3DataSource.S3Uri", "Operator":"Contains",
+// *
+// '{Name:"InputDataConfig.DataSource.S3DataSource.S3Uri", "Operator":"Contains",
 // "Value":"mybucket/catdata"}'
 type NestedFilters struct {
 
@@ -4984,55 +4829,54 @@ type OutputConfig struct {
 	// accelerators and highly recommended for CPU compilations. For any other cases,
 	// it is optional to specify CompilerOptions.
 	//
-	//     * CPU: Compilation for CPU
+	// * CPU: Compilation for CPU supports
+	// the following compiler options.
+	//
+	// * mcpu: CPU micro-architecture. For example,
+	// {'mcpu': 'skylake-avx512'}
+	//
+	// * mattr: CPU flags. For example, {'mattr': ['+neon',
+	// '+vfpv4']}
+	//
+	// * ARM: Details of ARM CPU compilations.
+	//
+	// * NEON: NEON is an
+	// implementation of the Advanced SIMD extension used in ARMv7 processors. For
+	// example, add {'mattr': ['+neon']} to the compiler options if compiling for ARM
+	// 32-bit platform with the NEON support.
+	//
+	// * NVIDIA: Compilation for NVIDIA GPU
 	// supports the following compiler options.
 	//
-	//         * mcpu: CPU
-	// micro-architecture. For example, {'mcpu': 'skylake-avx512'}
-	//
-	//         * mattr:
-	// CPU flags. For example, {'mattr': ['+neon', '+vfpv4']}
-	//
-	//     * ARM: Details of
-	// ARM CPU compilations.
-	//
-	//         * NEON: NEON is an implementation of the Advanced
-	// SIMD extension used in ARMv7 processors. For example, add {'mattr': ['+neon']}
-	// to the compiler options if compiling for ARM 32-bit platform with the NEON
-	// support.
-	//
-	//     * NVIDIA: Compilation for NVIDIA GPU supports the following
-	// compiler options.
-	//
-	//         * gpu_code: Specifies the targeted architecture.
-	//
+	// * gpu_code: Specifies the targeted
+	// architecture.
 	//
 	// * trt-ver: Specifies the TensorRT versions in x.y.z. format.
 	//
-	//         *
+	// *
 	// cuda-ver: Specifies the CUDA version in x.y format.
 	//
-	//     For example,
-	// {'gpu-code': 'sm_72', 'trt-ver': '6.0.1', 'cuda-ver': '10.1'}
+	// For example, {'gpu-code':
+	// 'sm_72', 'trt-ver': '6.0.1', 'cuda-ver': '10.1'}
 	//
-	//     * ANDROID:
-	// Compilation for the Android OS supports the following compiler options:
+	// * ANDROID: Compilation for the
+	// Android OS supports the following compiler options:
 	//
+	// * ANDROID_PLATFORM:
+	// Specifies the Android API levels. Available levels range from 21 to 29. For
+	// example, {'ANDROID_PLATFORM': 28}.
 	//
-	// * ANDROID_PLATFORM: Specifies the Android API levels. Available levels range
-	// from 21 to 29. For example, {'ANDROID_PLATFORM': 28}.
+	// * mattr: Add {'mattr': ['+neon']} to
+	// compiler options if compiling for ARM 32-bit platform with NEON support.
 	//
-	//         * mattr: Add
-	// {'mattr': ['+neon']} to compiler options if compiling for ARM 32-bit platform
-	// with NEON support.
+	// *
+	// CoreML: Compilation for the CoreML OutputConfig$TargetDevice supports the
+	// following compiler options:
 	//
-	//     * CoreML: Compilation for the CoreML
-	// OutputConfig$TargetDevice supports the following compiler options:
-	//
-	//         *
-	// class_labels: Specifies the classification labels file name inside input tar.gz
-	// file. For example, {"class_labels": "imagenet_labels_1000.txt"}. Labels inside
-	// the txt file should be separated by newlines.
+	// * class_labels: Specifies the classification labels
+	// file name inside input tar.gz file. For example, {"class_labels":
+	// "imagenet_labels_1000.txt"}. Labels inside the txt file should be separated by
+	// newlines.
 	CompilerOptions *string
 
 	// Identifies the target device or the machine learning instance that you want to
@@ -5046,28 +4890,28 @@ type OutputConfig struct {
 	// TargetDevice. The following examples show how to configure the TargetPlatform
 	// and CompilerOptions JSON strings for popular target platforms:
 	//
-	//     * Raspberry
-	// Pi 3 Model B+ "TargetPlatform": {"Os": "LINUX", "Arch": "ARM_EABIHF"},
+	// * Raspberry Pi 3
+	// Model B+ "TargetPlatform": {"Os": "LINUX", "Arch": "ARM_EABIHF"},
 	// "CompilerOptions": {'mattr': ['+neon']}
 	//
-	//     * Jetson TX2 "TargetPlatform":
-	// {"Os": "LINUX", "Arch": "ARM64", "Accelerator": "NVIDIA"}, "CompilerOptions":
+	// * Jetson TX2 "TargetPlatform": {"Os":
+	// "LINUX", "Arch": "ARM64", "Accelerator": "NVIDIA"}, "CompilerOptions":
 	// {'gpu-code': 'sm_62', 'trt-ver': '6.0.1', 'cuda-ver': '10.0'}
 	//
-	//     * EC2
-	// m5.2xlarge instance OS "TargetPlatform": {"Os": "LINUX", "Arch": "X86_64",
-	// "Accelerator": "NVIDIA"}, "CompilerOptions": {'mcpu': 'skylake-avx512'}
+	// * EC2 m5.2xlarge
+	// instance OS "TargetPlatform": {"Os": "LINUX", "Arch": "X86_64", "Accelerator":
+	// "NVIDIA"}, "CompilerOptions": {'mcpu': 'skylake-avx512'}
 	//
-	//     *
-	// RK3399 "TargetPlatform": {"Os": "LINUX", "Arch": "ARM64", "Accelerator":
-	// "MALI"}
+	// * RK3399
+	// "TargetPlatform": {"Os": "LINUX", "Arch": "ARM64", "Accelerator": "MALI"}
 	//
-	//     * ARMv7 phone (CPU) "TargetPlatform": {"Os": "ANDROID", "Arch":
-	// "ARM_EABI"}, "CompilerOptions": {'ANDROID_PLATFORM': 25, 'mattr': ['+neon']}
+	// *
+	// ARMv7 phone (CPU) "TargetPlatform": {"Os": "ANDROID", "Arch": "ARM_EABI"},
+	// "CompilerOptions": {'ANDROID_PLATFORM': 25, 'mattr': ['+neon']}
 	//
-	//
-	// * ARMv8 phone (CPU) "TargetPlatform": {"Os": "ANDROID", "Arch": "ARM64"},
-	// "CompilerOptions": {'ANDROID_PLATFORM': 29}
+	// * ARMv8 phone
+	// (CPU) "TargetPlatform": {"Os": "ANDROID", "Arch": "ARM64"}, "CompilerOptions":
+	// {'ANDROID_PLATFORM': 29}
 	TargetPlatform *TargetPlatform
 }
 
@@ -5085,24 +4929,24 @@ type OutputDataConfig struct {
 	// encrypt the model artifacts at rest using Amazon S3 server-side encryption. The
 	// KmsKeyId can be any of the following formats:
 	//
-	//     * // KMS Key ID
+	// * // KMS Key ID
 	// "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	//     * // Amazon Resource Name (ARN) of a
-	// KMS Key
+	// * // Amazon Resource Name (ARN) of a KMS
+	// Key
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
+	// *
+	// // KMS Key Alias "alias/ExampleAlias"
 	//
-	// * // KMS Key Alias "alias/ExampleAlias"
+	// * // Amazon Resource Name (ARN) of a KMS
+	// Key Alias "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"
 	//
-	//     * // Amazon Resource Name (ARN) of
-	// a KMS Key Alias "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"
-	//
-	// If you
-	// use a KMS key ID or an alias of your master key, the Amazon SageMaker execution
-	// role must include permissions to call kms:Encrypt. If you don't provide a KMS
-	// key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role's
-	// account. Amazon SageMaker uses server-side encryption with KMS-managed keys for
+	// If you use a
+	// KMS key ID or an alias of your master key, the Amazon SageMaker execution role
+	// must include permissions to call kms:Encrypt. If you don't provide a KMS key ID,
+	// Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account.
+	// Amazon SageMaker uses server-side encryption with KMS-managed keys for
 	// OutputDataConfig. If you use a bucket policy with an s3:PutObject permission
 	// that only allows objects with server-side encryption, set the condition key of
 	// s3:x-amz-server-side-encryption to "aws:kms". For more information, see
@@ -5243,12 +5087,12 @@ type ProcessingJob struct {
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
 	//
-	//     * CreateProcessingJob
+	// * CreateProcessingJob
 	//
-	//     *
+	// *
 	// CreateTrainingJob
 	//
-	//     * CreateTransformJob
+	// * CreateTransformJob
 	ExperimentConfig *ExperimentConfig
 
 	// A string, up to one KB in size, that contains the reason a processing job
@@ -5557,222 +5401,218 @@ type PropertyNameSuggestion struct {
 // are in US dollars and should be based on the complexity of the task; the longer
 // it takes in your initial testing, the more you should offer.
 //
-//     * 0.036
+// * 0.036
 //
-//     *
+// *
 // 0.048
 //
-//     * 0.060
+// * 0.060
 //
-//     * 0.072
+// * 0.072
 //
-//     * 0.120
+// * 0.120
 //
-//     * 0.240
+// * 0.240
 //
-//     * 0.360
+// * 0.360
 //
-//     *
-// 0.480
+// * 0.480
 //
-//     * 0.600
+// * 0.600
 //
-//     * 0.720
+// * 0.720
 //
-//     * 0.840
+// *
+// 0.840
 //
-//     * 0.960
+// * 0.960
 //
-//     * 1.080
+// * 1.080
 //
-//     *
-// 1.200
+// * 1.200
 //
-// Use one of the following prices for image classification, text
-// classification, and custom tasks. Prices are in US dollars.
+// Use one of the following prices for image
+// classification, text classification, and custom tasks. Prices are in US
+// dollars.
 //
-//     * 0.012
+// * 0.012
 //
-//     *
-// 0.024
+// * 0.024
 //
-//     * 0.036
+// * 0.036
 //
-//     * 0.048
+// * 0.048
 //
-//     * 0.060
+// * 0.060
 //
-//     * 0.072
+// * 0.072
 //
-//     * 0.120
+// * 0.120
 //
-//     *
+// *
 // 0.240
 //
-//     * 0.360
+// * 0.360
 //
-//     * 0.480
+// * 0.480
 //
-//     * 0.600
+// * 0.600
 //
-//     * 0.720
+// * 0.720
 //
-//     * 0.840
+// * 0.840
 //
-//     *
-// 0.960
+// * 0.960
 //
-//     * 1.080
+// * 1.080
 //
-//     * 1.200
+// *
+// 1.200
 //
-// Use one of the following prices for semantic
-// segmentation tasks. Prices are in US dollars.
+// Use one of the following prices for semantic segmentation tasks. Prices
+// are in US dollars.
 //
-//     * 0.840
+// * 0.840
 //
-//     * 0.960
+// * 0.960
 //
-//     *
-// 1.080
+// * 1.080
 //
-//     * 1.200
+// * 1.200
 //
-// Use one of the following prices for Textract AnalyzeDocument
-// Important Form Key Amazon Augmented AI review tasks. Prices are in US dollars.
-//
+// Use one of the following
+// prices for Textract AnalyzeDocument Important Form Key Amazon Augmented AI
+// review tasks. Prices are in US dollars.
 //
 // * 2.400
 //
-//     * 2.280
+// * 2.280
 //
-//     * 2.160
+// * 2.160
 //
-//     * 2.040
+// * 2.040
 //
-//     * 1.920
+// *
+// 1.920
 //
-//     * 1.800
+// * 1.800
 //
-//     *
-// 1.680
+// * 1.680
 //
-//     * 1.560
+// * 1.560
 //
-//     * 1.440
+// * 1.440
 //
-//     * 1.320
+// * 1.320
 //
-//     * 1.200
+// * 1.200
 //
-//     * 1.080
+// * 1.080
 //
-//     *
-// 0.960
+// * 0.960
 //
-//     * 0.840
+// *
+// 0.840
 //
-//     * 0.720
+// * 0.720
 //
-//     * 0.600
+// * 0.600
 //
-//     * 0.480
+// * 0.480
 //
-//     * 0.360
+// * 0.360
 //
-//     *
-// 0.240
+// * 0.240
 //
-//     * 0.120
+// * 0.120
 //
-//     * 0.072
+// * 0.072
 //
-//     * 0.060
+// * 0.060
 //
-//     * 0.048
+// *
+// 0.048
 //
-//     * 0.036
+// * 0.036
 //
-//     *
-// 0.024
+// * 0.024
 //
-//     * 0.012
+// * 0.012
 //
-// Use one of the following prices for Rekognition
-// DetectModerationLabels Amazon Augmented AI review tasks. Prices are in US
-// dollars.
-//
-//     * 1.200
-//
-//     * 1.080
-//
-//     * 0.960
-//
-//     * 0.840
-//
-//     * 0.720
-//
-//     *
-// 0.600
-//
-//     * 0.480
-//
-//     * 0.360
-//
-//     * 0.240
-//
-//     * 0.120
-//
-//     * 0.072
-//
-//     *
-// 0.060
-//
-//     * 0.048
-//
-//     * 0.036
-//
-//     * 0.024
-//
-//     * 0.012
-//
-// Use one of the
-// following prices for Amazon Augmented AI custom human review tasks. Prices are
+// Use one of the following prices for
+// Rekognition DetectModerationLabels Amazon Augmented AI review tasks. Prices are
 // in US dollars.
 //
-//     * 1.200
+// * 1.200
 //
-//     * 1.080
+// * 1.080
 //
-//     * 0.960
+// * 0.960
 //
-//     * 0.840
+// * 0.840
 //
-//     *
+// * 0.720
+//
+// * 0.600
+//
+// * 0.480
+//
+// *
+// 0.360
+//
+// * 0.240
+//
+// * 0.120
+//
+// * 0.072
+//
+// * 0.060
+//
+// * 0.048
+//
+// * 0.036
+//
+// * 0.024
+//
+// *
+// 0.012
+//
+// Use one of the following prices for Amazon Augmented AI custom human
+// review tasks. Prices are in US dollars.
+//
+// * 1.200
+//
+// * 1.080
+//
+// * 0.960
+//
+// * 0.840
+//
+// *
 // 0.720
 //
-//     * 0.600
+// * 0.600
 //
-//     * 0.480
+// * 0.480
 //
-//     * 0.360
+// * 0.360
 //
-//     * 0.240
+// * 0.240
 //
-//     * 0.120
+// * 0.120
 //
-//     *
-// 0.072
+// * 0.072
 //
-//     * 0.060
+// * 0.060
 //
-//     * 0.048
+// * 0.048
 //
-//     * 0.036
+// *
+// 0.036
 //
-//     * 0.024
+// * 0.024
 //
-//     * 0.012
+// * 0.012
 type PublicWorkforceTaskPrice struct {
 
 	// Defines the amount of money paid to an Amazon Mechanical Turk worker in United
@@ -5865,11 +5705,11 @@ type ResourceConfig struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html).
 	// The VolumeKmsKeyId can be in any of the following formats:
 	//
-	//     * // KMS Key ID
+	// * // KMS Key ID
 	// "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	//     * // Amazon Resource Name (ARN) of a
-	// KMS Key
+	// * // Amazon Resource Name (ARN) of a KMS
+	// Key
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 }
@@ -5929,10 +5769,10 @@ type S3DataSource struct {
 	// Depending on the value specified for the S3DataType, identifies either a key
 	// name prefix or a manifest. For example:
 	//
-	//     * A key name prefix might look like
+	// * A key name prefix might look like
 	// this: s3://bucketname/exampleprefix
 	//
-	//     * A manifest might look like this:
+	// * A manifest might look like this:
 	// s3://bucketname/example.manifest A manifest is an S3 object which is a JSON file
 	// consisting of an array of elements. The first element is a prefix which is
 	// followed by one or more suffixes. SageMaker appends the suffix elements to the
@@ -5977,37 +5817,37 @@ type ScheduleConfig struct {
 	// A cron expression that describes details about the monitoring schedule.
 	// Currently the only supported cron expressions are:
 	//
-	//     * If you want to set the
-	// job to start every hour, please use the following: Hourly: cron(0 * ? * * *)
+	// * If you want to set the job
+	// to start every hour, please use the following: Hourly: cron(0 * ? * * *)
 	//
-	//
-	// * If you want to start the job daily: cron(0 [00-23] ? * * *)
+	// * If
+	// you want to start the job daily: cron(0 [00-23] ? * * *)
 	//
 	// For example, the
 	// following are valid cron expressions:
 	//
-	//     * Daily at noon UTC: cron(0 12 ? * *
+	// * Daily at noon UTC: cron(0 12 ? * *
 	// *)
 	//
-	//     * Daily at midnight UTC: cron(0 0 ? * * *)
+	// * Daily at midnight UTC: cron(0 0 ? * * *)
 	//
-	// To support running every 6,
-	// 12 hours, the following are also supported: cron(0 [00-23]/[01-24] ? * * *) For
+	// To support running every 6, 12
+	// hours, the following are also supported: cron(0 [00-23]/[01-24] ? * * *) For
 	// example, the following are valid cron expressions:
 	//
-	//     * Every 12 hours,
-	// starting at 5pm UTC: cron(0 17/12 ? * * *)
+	// * Every 12 hours, starting
+	// at 5pm UTC: cron(0 17/12 ? * * *)
 	//
-	//     * Every two hours starting at
-	// midnight: cron(0 0/2 ? * * *)
+	// * Every two hours starting at midnight:
+	// cron(0 0/2 ? * * *)
 	//
-	//     * Even though the cron expression is set to
-	// start at 5PM UTC, note that there could be a delay of 0-20 minutes from the
-	// actual requested time to run the execution.
+	// * Even though the cron expression is set to start at 5PM
+	// UTC, note that there could be a delay of 0-20 minutes from the actual requested
+	// time to run the execution.
 	//
-	//     * We recommend that if you
-	// would like a daily schedule, you do not provide this parameter. Amazon SageMaker
-	// will pick a time for running every day.
+	// * We recommend that if you would like a daily
+	// schedule, you do not provide this parameter. Amazon SageMaker will pick a time
+	// for running every day.
 	//
 	// This member is required.
 	ScheduleExpression *string
@@ -6019,20 +5859,20 @@ type ScheduleConfig struct {
 // filter, or nested filter. A SearchExpression can contain up to twenty elements.
 // A SearchExpression contains the following components:
 //
-//     * A list of Filter
+// * A list of Filter
 // objects. Each filter defines a simple Boolean expression comprised of a resource
 // property name, Boolean operator, and value.
 //
-//     * A list of NestedFilter
-// objects. Each nested filter defines a list of Boolean expressions using a list
-// of resource properties. A nested filter is satisfied if a single object in the
-// list satisfies all Boolean expressions.
+// * A list of NestedFilter objects.
+// Each nested filter defines a list of Boolean expressions using a list of
+// resource properties. A nested filter is satisfied if a single object in the list
+// satisfies all Boolean expressions.
 //
-//     * A list of SearchExpression
-// objects. A search expression object can be nested in a list of search expression
+// * A list of SearchExpression objects. A
+// search expression object can be nested in a list of search expression
 // objects.
 //
-//     * A Boolean operator: And or Or.
+// * A Boolean operator: And or Or.
 type SearchExpression struct {
 
 	// A list of filter objects.
@@ -6087,51 +5927,50 @@ type SecondaryStatusTransition struct {
 	// Contains a secondary status information from a training job. Status might be one
 	// of the following secondary statuses: InProgress
 	//
-	//     * Starting - Starting the
+	// * Starting - Starting the
 	// training job.
 	//
-	//     * Downloading - An optional stage for algorithms that support
+	// * Downloading - An optional stage for algorithms that support
 	// File training input mode. It indicates that data is being downloaded to the ML
 	// storage volumes.
 	//
-	//     * Training - Training is in progress.
+	// * Training - Training is in progress.
 	//
-	//     * Uploading -
-	// Training is complete and the model artifacts are being uploaded to the S3
+	// * Uploading - Training
+	// is complete and the model artifacts are being uploaded to the S3
 	// location.
 	//
 	// Completed
 	//
-	//     * Completed - The training job has
-	// completed.
+	// * Completed - The training job has completed.
 	//
 	// Failed
 	//
-	//     * Failed - The training job has failed. The reason for
-	// the failure is returned in the FailureReason field of
-	// DescribeTrainingJobResponse.
+	// *
+	// Failed - The training job has failed. The reason for the failure is returned in
+	// the FailureReason field of DescribeTrainingJobResponse.
 	//
 	// Stopped
 	//
-	//     * MaxRuntimeExceeded - The job
-	// stopped because it exceeded the maximum allowed runtime.
+	// *
+	// MaxRuntimeExceeded - The job stopped because it exceeded the maximum allowed
+	// runtime.
 	//
-	//     * Stopped - The
-	// training job has stopped.
+	// * Stopped - The training job has stopped.
 	//
 	// Stopping
 	//
-	//     * Stopping - Stopping the training
-	// job.
+	// * Stopping -
+	// Stopping the training job.
 	//
-	// We no longer support the following secondary statuses:
+	// We no longer support the following secondary
+	// statuses:
 	//
-	//     *
-	// LaunchingMLInstances
+	// * LaunchingMLInstances
 	//
-	//     * PreparingTrainingStack
+	// * PreparingTrainingStack
 	//
-	//     *
+	// *
 	// DownloadingTrainingImage
 	//
 	// This member is required.
@@ -6146,41 +5985,40 @@ type SecondaryStatusTransition struct {
 	// SageMaker provides secondary statuses and status messages that apply to each of
 	// them: Starting
 	//
-	//     * Starting the training job.
+	// * Starting the training job.
 	//
-	//     * Launching requested ML
+	// * Launching requested ML
 	// instances.
 	//
-	//     * Insufficient capacity error from EC2 while launching
-	// instances, retrying!
+	// * Insufficient capacity error from EC2 while launching instances,
+	// retrying!
 	//
-	//     * Launched instance was unhealthy, replacing it!
+	// * Launched instance was unhealthy, replacing it!
 	//
-	//
-	// * Preparing the instances for training.
+	// * Preparing the
+	// instances for training.
 	//
 	// Training
 	//
-	//     * Downloading the
-	// training image.
+	// * Downloading the training image.
 	//
-	//     * Training image download completed. Training in
-	// progress.
+	// * Training
+	// image download completed. Training in progress.
 	//
-	// Status messages are subject to change. Therefore, we recommend not
-	// including them in code that programmatically initiates actions. For examples,
-	// don't use status messages in if statements. To have an overview of your training
-	// job's progress, view TrainingJobStatus and SecondaryStatus in
-	// DescribeTrainingJob, and StatusMessage together. For example, at the start of a
-	// training job, you might see the following:
+	// Status messages are subject to
+	// change. Therefore, we recommend not including them in code that programmatically
+	// initiates actions. For examples, don't use status messages in if statements. To
+	// have an overview of your training job's progress, view TrainingJobStatus and
+	// SecondaryStatus in DescribeTrainingJob, and StatusMessage together. For example,
+	// at the start of a training job, you might see the following:
 	//
-	//     * TrainingJobStatus -
-	// InProgress
+	// *
+	// TrainingJobStatus - InProgress
 	//
-	//     * SecondaryStatus - Training
+	// * SecondaryStatus - Training
 	//
-	//     * StatusMessage - Downloading
-	// the training image
+	// * StatusMessage -
+	// Downloading the training image
 	StatusMessage *string
 }
 
@@ -6348,29 +6186,29 @@ type TargetPlatform struct {
 
 	// Specifies a target platform architecture.
 	//
-	//     * X86_64: 64-bit version of the
-	// x86 instruction set.
+	// * X86_64: 64-bit version of the x86
+	// instruction set.
 	//
-	//     * X86: 32-bit version of the x86 instruction set.
+	// * X86: 32-bit version of the x86 instruction set.
 	//
+	// * ARM64:
+	// ARMv8 64-bit CPU.
 	//
-	// * ARM64: ARMv8 64-bit CPU.
+	// * ARM_EABIHF: ARMv7 32-bit, Hard Float.
 	//
-	//     * ARM_EABIHF: ARMv7 32-bit, Hard Float.
-	//
-	//     *
-	// ARM_EABI: ARMv7 32-bit, Soft Float. Used by Android 32-bit ARM platform.
+	// * ARM_EABI: ARMv7
+	// 32-bit, Soft Float. Used by Android 32-bit ARM platform.
 	//
 	// This member is required.
 	Arch TargetPlatformArch
 
 	// Specifies a target platform OS.
 	//
-	//     * LINUX: Linux-based operating systems.
+	// * LINUX: Linux-based operating systems.
 	//
-	//
-	// * ANDROID: Android operating systems. Android API level can be specified using
-	// the ANDROID_PLATFORM compiler option. For example, "CompilerOptions":
+	// *
+	// ANDROID: Android operating systems. Android API level can be specified using the
+	// ANDROID_PLATFORM compiler option. For example, "CompilerOptions":
 	// {'ANDROID_PLATFORM': 28}
 	//
 	// This member is required.
@@ -6378,14 +6216,14 @@ type TargetPlatform struct {
 
 	// Specifies a target platform accelerator (optional).
 	//
-	//     * NVIDIA: Nvidia
-	// graphics processing unit. It also requires gpu-code, trt-ver, cuda-ver compiler
+	// * NVIDIA: Nvidia graphics
+	// processing unit. It also requires gpu-code, trt-ver, cuda-ver compiler
 	// options
 	//
-	//     * MALI: ARM Mali graphics processor
+	// * MALI: ARM Mali graphics processor
 	//
-	//     * INTEL_GRAPHICS:
-	// Integrated Intel graphics
+	// * INTEL_GRAPHICS: Integrated Intel
+	// graphics
 	Accelerator TargetPlatformAccelerator
 }
 
@@ -6460,12 +6298,12 @@ type TrainingJob struct {
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
 	//
-	//     * CreateProcessingJob
+	// * CreateProcessingJob
 	//
-	//     *
+	// *
 	// CreateTrainingJob
 	//
-	//     * CreateTransformJob
+	// * CreateTransformJob
 	ExperimentConfig *ExperimentConfig
 
 	// If the training job failed, the reason it failed.
@@ -6509,52 +6347,51 @@ type TrainingJob struct {
 	// under SecondaryStatusTransition. Amazon SageMaker provides primary statuses and
 	// secondary statuses that apply to each of them: InProgress
 	//
-	//     * Starting -
-	// Starting the training job.
+	// * Starting - Starting
+	// the training job.
 	//
-	//     * Downloading - An optional stage for algorithms
-	// that support File training input mode. It indicates that data is being
-	// downloaded to the ML storage volumes.
+	// * Downloading - An optional stage for algorithms that support
+	// File training input mode. It indicates that data is being downloaded to the ML
+	// storage volumes.
 	//
-	//     * Training - Training is in
-	// progress.
+	// * Training - Training is in progress.
 	//
-	//     * Uploading - Training is complete and the model artifacts are
-	// being uploaded to the S3 location.
+	// * Uploading - Training
+	// is complete and the model artifacts are being uploaded to the S3
+	// location.
 	//
 	// Completed
 	//
-	//     * Completed - The training
-	// job has completed.
+	// * Completed - The training job has completed.
 	//
 	// Failed
 	//
-	//     * Failed - The training job has failed. The
-	// reason for the failure is returned in the FailureReason field of
-	// DescribeTrainingJobResponse.
+	// *
+	// Failed - The training job has failed. The reason for the failure is returned in
+	// the FailureReason field of DescribeTrainingJobResponse.
 	//
 	// Stopped
 	//
-	//     * MaxRuntimeExceeded - The job
-	// stopped because it exceeded the maximum allowed runtime.
+	// *
+	// MaxRuntimeExceeded - The job stopped because it exceeded the maximum allowed
+	// runtime.
 	//
-	//     * Stopped - The
-	// training job has stopped.
+	// * Stopped - The training job has stopped.
 	//
 	// Stopping
 	//
-	//     * Stopping - Stopping the training
-	// job.
+	// * Stopping -
+	// Stopping the training job.
 	//
-	// Valid values for SecondaryStatus are subject to change. We no longer
-	// support the following secondary statuses:
+	// Valid values for SecondaryStatus are subject to
+	// change. We no longer support the following secondary statuses:
 	//
-	//     * LaunchingMLInstances
+	// *
+	// LaunchingMLInstances
 	//
-	//     *
-	// PreparingTrainingStack
+	// * PreparingTrainingStack
 	//
-	//     * DownloadingTrainingImage
+	// * DownloadingTrainingImage
 	SecondaryStatus SecondaryStatus
 
 	// A history of all of the secondary statuses that the training job has
@@ -6593,23 +6430,22 @@ type TrainingJob struct {
 
 	// The status of the training job. Training job statuses are:
 	//
-	//     * InProgress -
-	// The training is in progress.
+	// * InProgress - The
+	// training is in progress.
 	//
-	//     * Completed - The training job has
-	// completed.
+	// * Completed - The training job has completed.
 	//
-	//     * Failed - The training job has failed. To see the reason for
-	// the failure, see the FailureReason field in the response to a
-	// DescribeTrainingJobResponse call.
+	// *
+	// Failed - The training job has failed. To see the reason for the failure, see the
+	// FailureReason field in the response to a DescribeTrainingJobResponse call.
 	//
-	//     * Stopping - The training job is
-	// stopping.
+	// *
+	// Stopping - The training job is stopping.
 	//
-	//     * Stopped - The training job has stopped.
+	// * Stopped - The training job has
+	// stopped.
 	//
-	// For more detailed
-	// information, see SecondaryStatus.
+	// For more detailed information, see SecondaryStatus.
 	TrainingJobStatus TrainingJobStatus
 
 	// Indicates the time when the training job starts on training instances. You are
@@ -6812,9 +6648,9 @@ type TransformInput struct {
 	// supports a number of record-oriented binary data formats. Currently, the
 	// supported record formats are:
 	//
-	//     * RecordIO
+	// * RecordIO
 	//
-	//     * TFRecord
+	// * TFRecord
 	//
 	// When splitting is
 	// enabled, the size of a mini-batch depends on the values of the BatchStrategy and
@@ -6867,12 +6703,12 @@ type TransformJob struct {
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
 	//
-	//     * CreateProcessingJob
+	// * CreateProcessingJob
 	//
-	//     *
+	// *
 	// CreateTrainingJob
 	//
-	//     * CreateTransformJob
+	// * CreateTransformJob
 	ExperimentConfig *ExperimentConfig
 
 	// If the transform job failed, the reason it failed.
@@ -6928,20 +6764,19 @@ type TransformJob struct {
 
 	// The status of the transform job. Transform job statuses are:
 	//
-	//     * InProgress -
-	// The job is in progress.
+	// * InProgress - The
+	// job is in progress.
 	//
-	//     * Completed - The job has completed.
+	// * Completed - The job has completed.
 	//
-	//     * Failed
-	// - The transform job has failed. To see the reason for the failure, see the
+	// * Failed - The
+	// transform job has failed. To see the reason for the failure, see the
 	// FailureReason field in the response to a DescribeTransformJob call.
 	//
-	//     *
-	// Stopping - The transform job is stopping.
+	// * Stopping
+	// - The transform job is stopping.
 	//
-	//     * Stopped - The transform job has
-	// stopped.
+	// * Stopped - The transform job has stopped.
 	TransformJobStatus TransformJobStatus
 
 	// Describes the results of a transform job.
@@ -7067,16 +6902,16 @@ type TransformOutput struct {
 	// encrypt the model artifacts at rest using Amazon S3 server-side encryption. The
 	// KmsKeyId can be any of the following formats:
 	//
-	//     * Key ID:
+	// * Key ID:
 	// 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
-	//     * Key ARN:
+	// * Key ARN:
 	// arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
+	// *
+	// Alias name: alias/ExampleAlias
 	//
-	// * Alias name: alias/ExampleAlias
-	//
-	//     * Alias name ARN:
+	// * Alias name ARN:
 	// arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias
 	//
 	// If you don't provide a
@@ -7113,15 +6948,15 @@ type TransformResources struct {
 	// that run the batch transform job. The VolumeKmsKeyId can be any of the following
 	// formats:
 	//
-	//     * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
-	//     * Key ARN:
+	// * Key ARN:
 	// arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
+	// *
+	// Alias name: alias/ExampleAlias
 	//
-	// * Alias name: alias/ExampleAlias
-	//
-	//     * Alias name ARN:
+	// * Alias name ARN:
 	// arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias
 	VolumeKmsKeyId *string
 }
@@ -7142,10 +6977,10 @@ type TransformS3DataSource struct {
 	// Depending on the value specified for the S3DataType, identifies either a key
 	// name prefix or a manifest. For example:
 	//
-	//     * A key name prefix might look like
+	// * A key name prefix might look like
 	// this: s3://bucketname/exampleprefix.
 	//
-	//     * A manifest might look like this:
+	// * A manifest might look like this:
 	// s3://bucketname/example.manifest The manifest is an S3 object which is a JSON
 	// file with the following format: [ {"prefix":
 	// "s3://customer_bucket/some/prefix/"},"relative/path/to/custdata-1","relative/path/custdata-2",..."relative/path/custdata-N"]
@@ -7416,12 +7251,12 @@ type TrialComponentSummary struct {
 
 	// The status of the component. States include:
 	//
-	//     * InProgress
+	// * InProgress
 	//
-	//     *
-	// Completed
+	// * Completed
 	//
-	//     * Failed
+	// *
+	// Failed
 	Status *TrialComponentStatus
 
 	// The ARN of the trial component.
@@ -7491,35 +7326,35 @@ type UiConfig struct {
 	// point cloud object detection and 3D point cloud object detection adjustment
 	// labeling jobs.
 	//
-	//     *
+	// *
 	// arn:aws:sagemaker:aws-region:394669845002:human-task-ui/PointCloudObjectDetection
 	//
 	// Use
 	// this HumanTaskUiArn for 3D point cloud object tracking and 3D point cloud object
 	// tracking adjustment labeling jobs.
 	//
-	//     *
+	// *
 	// arn:aws:sagemaker:aws-region:394669845002:human-task-ui/PointCloudObjectTracking
 	//
 	// Use
 	// this HumanTaskUiArn for 3D point cloud semantic segmentation and 3D point cloud
 	// semantic segmentation adjustment labeling jobs.
 	//
-	//     *
+	// *
 	// arn:aws:sagemaker:aws-region:394669845002:human-task-ui/PointCloudSemanticSegmentation
 	//
 	// Video
 	// Frame HumanTaskUiArns Use this HumanTaskUiArn for video frame object detection
 	// and video frame object detection adjustment labeling jobs.
 	//
-	//     *
+	// *
 	// arn:aws:sagemaker:region:394669845002:human-task-ui/VideoObjectDetection
 	//
 	// Use
 	// this HumanTaskUiArn for video frame object tracking and video frame object
 	// tracking adjustment labeling jobs.
 	//
-	//     *
+	// *
 	// arn:aws:sagemaker:aws-region:394669845002:human-task-ui/VideoObjectTracking
 	HumanTaskUiArn *string
 
@@ -7627,17 +7462,17 @@ type VariantProperty struct {
 
 	// The type of variant property. The supported values are:
 	//
-	//     *
-	// DesiredInstanceCount: Overrides the existing variant instance counts using the
+	// * DesiredInstanceCount:
+	// Overrides the existing variant instance counts using the
 	// ProductionVariant$InitialInstanceCount values in the
 	// CreateEndpointConfigInput$ProductionVariants.
 	//
-	//     * DesiredWeight: Overrides
-	// the existing variant weights using the ProductionVariant$InitialVariantWeight
-	// values in the CreateEndpointConfigInput$ProductionVariants.
+	// * DesiredWeight: Overrides the
+	// existing variant weights using the ProductionVariant$InitialVariantWeight values
+	// in the CreateEndpointConfigInput$ProductionVariants.
 	//
-	//     *
-	// DataCaptureConfig: (Not currently supported.)
+	// * DataCaptureConfig: (Not
+	// currently supported.)
 	//
 	// This member is required.
 	VariantPropertyType VariantPropertyType

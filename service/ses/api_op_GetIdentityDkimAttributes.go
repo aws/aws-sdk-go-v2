@@ -17,14 +17,14 @@ import (
 // tokens have been published. This operation takes a list of identities as input
 // and returns the following information for each:
 //
-//     * Whether Easy DKIM signing
-// is enabled or disabled.
+// * Whether Easy DKIM signing is
+// enabled or disabled.
 //
-//     * A set of DKIM tokens that represent the identity.
-// If the identity is an email address, the tokens represent the domain of that
+// * A set of DKIM tokens that represent the identity. If the
+// identity is an email address, the tokens represent the domain of that
 // address.
 //
-//     * Whether Amazon SES has successfully verified the DKIM tokens
+// * Whether Amazon SES has successfully verified the DKIM tokens
 // published in the domain's DNS. This information is only returned for domain name
 // identities, not for email addresses.
 //

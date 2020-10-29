@@ -30,8 +30,8 @@ type PerformanceMode string
 
 // Enum values for PerformanceMode
 const (
-	PerformanceModeGeneral_purpose PerformanceMode = "generalPurpose"
-	PerformanceModeMax_io          PerformanceMode = "maxIO"
+	PerformanceModeGeneralPurpose PerformanceMode = "generalPurpose"
+	PerformanceModeMaxIo          PerformanceMode = "maxIO"
 )
 
 // Values returns all known values for PerformanceMode. Note that this can be
@@ -88,11 +88,11 @@ type TransitionToIARules string
 
 // Enum values for TransitionToIARules
 const (
-	TransitionToIARulesAfter_7_days  TransitionToIARules = "AFTER_7_DAYS"
-	TransitionToIARulesAfter_14_days TransitionToIARules = "AFTER_14_DAYS"
-	TransitionToIARulesAfter_30_days TransitionToIARules = "AFTER_30_DAYS"
-	TransitionToIARulesAfter_60_days TransitionToIARules = "AFTER_60_DAYS"
-	TransitionToIARulesAfter_90_days TransitionToIARules = "AFTER_90_DAYS"
+	TransitionToIARulesAfter7Days  TransitionToIARules = "AFTER_7_DAYS"
+	TransitionToIARulesAfter14Days TransitionToIARules = "AFTER_14_DAYS"
+	TransitionToIARulesAfter30Days TransitionToIARules = "AFTER_30_DAYS"
+	TransitionToIARulesAfter60Days TransitionToIARules = "AFTER_60_DAYS"
+	TransitionToIARulesAfter90Days TransitionToIARules = "AFTER_90_DAYS"
 )
 
 // Values returns all known values for TransitionToIARules. Note that this can be

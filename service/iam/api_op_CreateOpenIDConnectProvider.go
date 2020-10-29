@@ -16,19 +16,19 @@ import (
 // Such a policy establishes a trust relationship between AWS and the OIDC
 // provider. When you create the IAM OIDC provider, you specify the following:
 //
+// *
+// The URL of the OIDC identity provider (IdP) to trust
 //
-// * The URL of the OIDC identity provider (IdP) to trust
+// * A list of client IDs
+// (also known as audiences) that identify the application or applications that are
+// allowed to authenticate using the OIDC provider
 //
-//     * A list of client
-// IDs (also known as audiences) that identify the application or applications that
-// are allowed to authenticate using the OIDC provider
+// * A list of thumbprints of one
+// or more server certificates that the IdP uses
 //
-//     * A list of thumbprints
-// of one or more server certificates that the IdP uses
-//
-// You get all of this
-// information from the OIDC IdP that you want to use to access AWS. The trust for
-// the OIDC provider is derived from the IAM provider that this operation creates.
+// You get all of this information
+// from the OIDC IdP that you want to use to access AWS. The trust for the OIDC
+// provider is derived from the IAM provider that this operation creates.
 // Therefore, it is best to limit access to the CreateOpenIDConnectProvider
 // operation to highly privileged users.
 func (c *Client) CreateOpenIDConnectProvider(ctx context.Context, params *CreateOpenIDConnectProviderInput, optFns ...func(*Options)) (*CreateOpenIDConnectProviderOutput, error) {

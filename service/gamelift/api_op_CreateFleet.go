@@ -24,47 +24,47 @@ import (
 // following tasks. You can track the process of a fleet by checking the fleet
 // status or by monitoring fleet creation events:
 //
-//     * Creates a fleet resource.
+// * Creates a fleet resource.
 // Status: NEW.
 //
-//     * Begins writing events to the fleet event log, which can be
+// * Begins writing events to the fleet event log, which can be
 // accessed in the Amazon GameLift console.
 //
-//     * Sets the fleet's target capacity
-// to 1 (desired instances), which triggers Amazon GameLift to start one new EC2
+// * Sets the fleet's target capacity to
+// 1 (desired instances), which triggers Amazon GameLift to start one new EC2
 // instance.
 //
-//     * Downloads the game build or Realtime script to the new instance
-// and installs it. Statuses: DOWNLOADING, VALIDATING, BUILDING.
+// * Downloads the game build or Realtime script to the new instance and
+// installs it. Statuses: DOWNLOADING, VALIDATING, BUILDING.
 //
-//     * Starts
-// launching server processes on the instance. If the fleet is configured to run
-// multiple server processes per instance, Amazon GameLift staggers each process
-// launch by a few seconds. Status: ACTIVATING.
+// * Starts launching
+// server processes on the instance. If the fleet is configured to run multiple
+// server processes per instance, Amazon GameLift staggers each process launch by a
+// few seconds. Status: ACTIVATING.
 //
-//     * Sets the fleet's status to
-// ACTIVE as soon as one server process is ready to host a game session.
+// * Sets the fleet's status to ACTIVE as soon as
+// one server process is ready to host a game session.
 //
-// Learn
-// more Setting Up Fleets
+// Learn more Setting Up
+// Fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)Debug
 // Fleet Creation Issues
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html#fleets-creating-debug-creation)
 // Related operations
 //
-//     * CreateFleet
+// * CreateFleet
 //
-//     * ListFleets
+// * ListFleets
 //
-//     * DeleteFleet
+// * DeleteFleet
 //
+// *
+// DescribeFleetAttributes
 //
-// * DescribeFleetAttributes
+// * UpdateFleetAttributes
 //
-//     * UpdateFleetAttributes
-//
-//     * StartFleetActions
-// or StopFleetActions
+// * StartFleetActions or
+// StopFleetActions
 func (c *Client) CreateFleet(ctx context.Context, params *CreateFleetInput, optFns ...func(*Options)) (*CreateFleetOutput, error) {
 	if params == nil {
 		params = &CreateFleetInput{}
@@ -116,11 +116,11 @@ type CreateFleetInput struct {
 	// fleet with certificate generation results fails with a 4xx unsupported Region
 	// error. Valid values include:
 	//
-	//     * GENERATED - Generate a TLS/SSL certificate
-	// for this fleet.
+	// * GENERATED - Generate a TLS/SSL certificate for
+	// this fleet.
 	//
-	//     * DISABLED - (default) Do not generate a TLS/SSL
-	// certificate for this fleet.
+	// * DISABLED - (default) Do not generate a TLS/SSL certificate for
+	// this fleet.
 	CertificateConfiguration *types.CertificateConfiguration
 
 	// A human-readable description of a fleet.
@@ -170,11 +170,11 @@ type CreateFleetInput struct {
 	// change will only affect sessions created after the policy change. You can also
 	// set protection for individual instances using UpdateGameSession.
 	//
-	//     *
-	// NoProtection - The game session can be terminated during a scale-down event.
+	// * NoProtection
+	// - The game session can be terminated during a scale-down event.
 	//
-	//
-	// * FullProtection - If the game session is in an ACTIVE status, it cannot be
+	// *
+	// FullProtection - If the game session is in an ACTIVE status, it cannot be
 	// terminated during a scale-down event.
 	NewGameSessionProtectionPolicy types.ProtectionPolicy
 

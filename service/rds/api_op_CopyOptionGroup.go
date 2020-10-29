@@ -32,8 +32,8 @@ type CopyOptionGroupInput struct {
 
 	// The identifier for the source option group. Constraints:
 	//
-	//     * Must specify a
-	// valid option group.
+	// * Must specify a valid
+	// option group.
 	//
 	// This member is required.
 	SourceOptionGroupIdentifier *string
@@ -45,15 +45,15 @@ type CopyOptionGroupInput struct {
 
 	// The identifier for the copied option group. Constraints:
 	//
-	//     * Can't be null,
+	// * Can't be null,
 	// empty, or blank
 	//
-	//     * Must contain from 1 to 255 letters, numbers, or hyphens
+	// * Must contain from 1 to 255 letters, numbers, or hyphens
 	//
+	// *
+	// First character must be a letter
 	//
-	// * First character must be a letter
-	//
-	//     * Can't end with a hyphen or contain two
+	// * Can't end with a hyphen or contain two
 	// consecutive hyphens
 	//
 	// Example: my-option-group

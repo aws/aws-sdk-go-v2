@@ -29,50 +29,50 @@ import (
 // across all players. To place a new game session request, specify the
 // following:
 //
-//     * The queue name and a set of game session properties and
+// * The queue name and a set of game session properties and
 // settings
 //
-//     * A unique ID (such as a UUID) for the placement. You use this ID
-// to track the status of the placement request
+// * A unique ID (such as a UUID) for the placement. You use this ID to
+// track the status of the placement request
 //
-//     * (Optional) A set of player
-// data and a unique player ID for each player that you are joining to the new game
-// session (player data is optional, but if you include it, you must also provide a
-// unique ID for each player)
+// * (Optional) A set of player data and
+// a unique player ID for each player that you are joining to the new game session
+// (player data is optional, but if you include it, you must also provide a unique
+// ID for each player)
 //
-//     * Latency data for all players (if you want to
-// optimize game play for the players)
+// * Latency data for all players (if you want to optimize
+// game play for the players)
 //
-// If successful, a new game session placement
-// is created. To track the status of a placement request, call
+// If successful, a new game session placement is
+// created. To track the status of a placement request, call
 // DescribeGameSessionPlacement and check the request's status. If the status is
 // FULFILLED, a new game session has been created and a game session ARN and Region
 // are referenced. If the placement request times out, you can resubmit the request
 // or retry it with a different queue.
 //
-//     * CreateGameSession
+// * CreateGameSession
 //
-//     *
+// *
 // DescribeGameSessions
 //
-//     * DescribeGameSessionDetails
+// * DescribeGameSessionDetails
 //
-//     *
-// SearchGameSessions
+// * SearchGameSessions
 //
-//     * UpdateGameSession
+// *
+// UpdateGameSession
 //
-//     * GetGameSessionLogUrl
+// * GetGameSessionLogUrl
 //
-//     *
-// Game session placements
+// * Game session placements
 //
-//         * StartGameSessionPlacement
+// *
+// StartGameSessionPlacement
 //
-//         *
-// DescribeGameSessionPlacement
+// * DescribeGameSessionPlacement
 //
-//         * StopGameSessionPlacement
+// *
+// StopGameSessionPlacement
 func (c *Client) StartGameSessionPlacement(ctx context.Context, params *StartGameSessionPlacementInput, optFns ...func(*Options)) (*StartGameSessionPlacementOutput, error) {
 	if params == nil {
 		params = &StartGameSessionPlacementInput{}

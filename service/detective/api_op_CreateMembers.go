@@ -18,14 +18,14 @@ import (
 // list of accounts to invite. The response separates the requested accounts into
 // two lists:
 //
-//     * The accounts that CreateMembers was able to start the
-// verification for. This list includes member accounts that are being verified,
-// that have passed verification and are being sent an invitation, and that have
-// failed verification.
+// * The accounts that CreateMembers was able to start the verification
+// for. This list includes member accounts that are being verified, that have
+// passed verification and are being sent an invitation, and that have failed
+// verification.
 //
-//     * The accounts that CreateMembers was unable to
-// process. This list includes accounts that were already invited to be member
-// accounts in the behavior graph.
+// * The accounts that CreateMembers was unable to process. This
+// list includes accounts that were already invited to be member accounts in the
+// behavior graph.
 func (c *Client) CreateMembers(ctx context.Context, params *CreateMembersInput, optFns ...func(*Options)) (*CreateMembersOutput, error) {
 	if params == nil {
 		params = &CreateMembersInput{}

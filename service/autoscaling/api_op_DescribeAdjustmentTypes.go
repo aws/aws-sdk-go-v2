@@ -16,12 +16,12 @@ import (
 // policies; they do not apply to target tracking scaling policies. The following
 // adjustment types are supported:
 //
-//     * ChangeInCapacity
+// * ChangeInCapacity
 //
-//     * ExactCapacity
+// * ExactCapacity
 //
-//
-// * PercentChangeInCapacity
+// *
+// PercentChangeInCapacity
 func (c *Client) DescribeAdjustmentTypes(ctx context.Context, params *DescribeAdjustmentTypesInput, optFns ...func(*Options)) (*DescribeAdjustmentTypesOutput, error) {
 	if params == nil {
 		params = &DescribeAdjustmentTypesInput{}

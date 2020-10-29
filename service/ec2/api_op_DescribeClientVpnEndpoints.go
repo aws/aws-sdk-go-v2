@@ -40,11 +40,11 @@ type DescribeClientVpnEndpointsInput struct {
 
 	// One or more filters. Filter names and values are case-sensitive.
 	//
-	//     *
-	// endpoint-id - The ID of the Client VPN endpoint.
+	// * endpoint-id
+	// - The ID of the Client VPN endpoint.
 	//
-	//     * transport-protocol - The
-	// transport protocol (tcp | udp).
+	// * transport-protocol - The transport
+	// protocol (tcp | udp).
 	Filters []*types.Filter
 
 	// The maximum number of results to return for the request in a single page. The

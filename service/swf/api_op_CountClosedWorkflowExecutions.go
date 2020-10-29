@@ -17,22 +17,22 @@ import (
 // changes. Access Control You can use IAM policies to control this action's access
 // to Amazon SWF resources as follows:
 //
-//     * Use a Resource element with the
-// domain name to limit the action to only specified domains.
+// * Use a Resource element with the domain
+// name to limit the action to only specified domains.
 //
-//     * Use an Action
-// element to allow or deny permission to call this action.
+// * Use an Action element to
+// allow or deny permission to call this action.
 //
-//     * Constrain the
-// following parameters by using a Condition element with the appropriate keys.
+// * Constrain the following
+// parameters by using a Condition element with the appropriate keys.
 //
+// *
+// tagFilter.tag: String constraint. The key is swf:tagFilter.tag.
 //
-// * tagFilter.tag: String constraint. The key is swf:tagFilter.tag.
-//
-//         *
+// *
 // typeFilter.name: String constraint. The key is swf:typeFilter.name.
 //
-//         *
+// *
 // typeFilter.version: String constraint. The key is swf:typeFilter.version.
 //
 // If

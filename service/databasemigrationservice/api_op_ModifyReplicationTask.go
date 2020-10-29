@@ -72,13 +72,13 @@ type ModifyReplicationTaskInput struct {
 
 	// The replication task identifier. Constraints:
 	//
-	//     * Must contain 1-255
-	// alphanumeric characters or hyphens.
+	// * Must contain 1-255 alphanumeric
+	// characters or hyphens.
 	//
-	//     * First character must be a letter.
+	// * First character must be a letter.
 	//
-	//
-	// * Cannot end with a hyphen or contain two consecutive hyphens.
+	// * Cannot end with a
+	// hyphen or contain two consecutive hyphens.
 	ReplicationTaskIdentifier *string
 
 	// JSON file that contains settings for the task, such as task metadata settings.

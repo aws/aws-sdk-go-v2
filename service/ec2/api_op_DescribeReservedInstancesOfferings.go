@@ -50,25 +50,25 @@ type DescribeReservedInstancesOfferingsInput struct {
 
 	// One or more filters.
 	//
-	//     * availability-zone - The Availability Zone where the
+	// * availability-zone - The Availability Zone where the
 	// Reserved Instance can be used.
 	//
-	//     * duration - The duration of the Reserved
+	// * duration - The duration of the Reserved
 	// Instance (for example, one year or three years), in seconds (31536000 |
 	// 94608000).
 	//
-	//     * fixed-price - The purchase price of the Reserved Instance (for
+	// * fixed-price - The purchase price of the Reserved Instance (for
 	// example, 9800.0).
 	//
-	//     * instance-type - The instance type that is covered by
-	// the reservation.
+	// * instance-type - The instance type that is covered by the
+	// reservation.
 	//
-	//     * marketplace - Set to true to show only Reserved Instance
+	// * marketplace - Set to true to show only Reserved Instance
 	// Marketplace offerings. When this filter is not used, which is the default
 	// behavior, all offerings from both AWS and the Reserved Instance Marketplace are
 	// listed.
 	//
-	//     * product-description - The Reserved Instance product platform
+	// * product-description - The Reserved Instance product platform
 	// description. Instances that include (Amazon VPC) in the product platform
 	// description will only be displayed to EC2-Classic account holders and are for
 	// use with Amazon VPC. (Linux/UNIX | Linux/UNIX (Amazon VPC) | SUSE Linux | SUSE
@@ -78,15 +78,14 @@ type DescribeReservedInstancesOfferingsInput struct {
 	// Windows with SQL Server Web (Amazon VPC) | Windows with SQL Server Enterprise |
 	// Windows with SQL Server Enterprise (Amazon VPC))
 	//
-	//     *
+	// *
 	// reserved-instances-offering-id - The Reserved Instances offering ID.
 	//
-	//     *
-	// scope - The scope of the Reserved Instance (Availability Zone or Region).
+	// * scope -
+	// The scope of the Reserved Instance (Availability Zone or Region).
 	//
-	//     *
-	// usage-price - The usage price of the Reserved Instance, per hour (for example,
-	// 0.84).
+	// * usage-price
+	// - The usage price of the Reserved Instance, per hour (for example, 0.84).
 	Filters []*types.Filter
 
 	// Include Reserved Instance Marketplace offerings in the response.

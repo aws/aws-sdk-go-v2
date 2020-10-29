@@ -58,10 +58,10 @@ type BatchExecuteStatementInput struct {
 	// times as the number of parameter sets provided. To execute a SQL statement with
 	// no parameters, use one of the following options:
 	//
-	//     * Specify one or more
-	// empty parameter sets.
+	// * Specify one or more empty
+	// parameter sets.
 	//
-	//     * Use the ExecuteStatement operation instead of the
+	// * Use the ExecuteStatement operation instead of the
 	// BatchExecuteStatement operation.
 	//
 	// Array parameters are not supported.

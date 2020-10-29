@@ -28,36 +28,36 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html#gamelift-metrics-fleet)
 // Related operations
 //
-//     * CreateFleet
+// * CreateFleet
 //
-//     * ListFleets
+// * ListFleets
 //
-//     * DeleteFleet
+// * DeleteFleet
 //
+// * Describe
+// fleets:
 //
-// * Describe fleets:
+// * DescribeFleetAttributes
 //
-//         * DescribeFleetAttributes
+// * DescribeFleetCapacity
 //
-//         *
-// DescribeFleetCapacity
+// *
+// DescribeFleetPortSettings
 //
-//         * DescribeFleetPortSettings
+// * DescribeFleetUtilization
 //
-//         *
-// DescribeFleetUtilization
+// *
+// DescribeRuntimeConfiguration
 //
-//         * DescribeRuntimeConfiguration
+// * DescribeEC2InstanceLimits
 //
-//         *
-// DescribeEC2InstanceLimits
+// *
+// DescribeFleetEvents
 //
-//         * DescribeFleetEvents
+// * UpdateFleetAttributes
 //
-//     *
-// UpdateFleetAttributes
-//
-//     * StartFleetActions or StopFleetActions
+// * StartFleetActions or
+// StopFleetActions
 func (c *Client) DescribeFleetCapacity(ctx context.Context, params *DescribeFleetCapacityInput, optFns ...func(*Options)) (*DescribeFleetCapacityOutput, error) {
 	if params == nil {
 		params = &DescribeFleetCapacityInput{}

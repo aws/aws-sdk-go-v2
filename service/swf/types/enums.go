@@ -6,10 +6,10 @@ type ActivityTaskTimeoutType string
 
 // Enum values for ActivityTaskTimeoutType
 const (
-	ActivityTaskTimeoutTypeStart_to_close    ActivityTaskTimeoutType = "START_TO_CLOSE"
-	ActivityTaskTimeoutTypeSchedule_to_start ActivityTaskTimeoutType = "SCHEDULE_TO_START"
-	ActivityTaskTimeoutTypeSchedule_to_close ActivityTaskTimeoutType = "SCHEDULE_TO_CLOSE"
-	ActivityTaskTimeoutTypeHeartbeat         ActivityTaskTimeoutType = "HEARTBEAT"
+	ActivityTaskTimeoutTypeStartToClose    ActivityTaskTimeoutType = "START_TO_CLOSE"
+	ActivityTaskTimeoutTypeScheduleToStart ActivityTaskTimeoutType = "SCHEDULE_TO_START"
+	ActivityTaskTimeoutTypeScheduleToClose ActivityTaskTimeoutType = "SCHEDULE_TO_CLOSE"
+	ActivityTaskTimeoutTypeHeartbeat       ActivityTaskTimeoutType = "HEARTBEAT"
 )
 
 // Values returns all known values for ActivityTaskTimeoutType. Note that this can
@@ -28,8 +28,8 @@ type CancelTimerFailedCause string
 
 // Enum values for CancelTimerFailedCause
 const (
-	CancelTimerFailedCauseTimer_id_unknown        CancelTimerFailedCause = "TIMER_ID_UNKNOWN"
-	CancelTimerFailedCauseOperation_not_permitted CancelTimerFailedCause = "OPERATION_NOT_PERMITTED"
+	CancelTimerFailedCauseTimerIdUnknown        CancelTimerFailedCause = "TIMER_ID_UNKNOWN"
+	CancelTimerFailedCauseOperationNotPermitted CancelTimerFailedCause = "OPERATION_NOT_PERMITTED"
 )
 
 // Values returns all known values for CancelTimerFailedCause. Note that this can
@@ -46,8 +46,8 @@ type CancelWorkflowExecutionFailedCause string
 
 // Enum values for CancelWorkflowExecutionFailedCause
 const (
-	CancelWorkflowExecutionFailedCauseUnhandled_decision      CancelWorkflowExecutionFailedCause = "UNHANDLED_DECISION"
-	CancelWorkflowExecutionFailedCauseOperation_not_permitted CancelWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
+	CancelWorkflowExecutionFailedCauseUnhandledDecision     CancelWorkflowExecutionFailedCause = "UNHANDLED_DECISION"
+	CancelWorkflowExecutionFailedCauseOperationNotPermitted CancelWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
 )
 
 // Values returns all known values for CancelWorkflowExecutionFailedCause. Note
@@ -65,9 +65,9 @@ type ChildPolicy string
 
 // Enum values for ChildPolicy
 const (
-	ChildPolicyTerminate      ChildPolicy = "TERMINATE"
-	ChildPolicyRequest_cancel ChildPolicy = "REQUEST_CANCEL"
-	ChildPolicyAbandon        ChildPolicy = "ABANDON"
+	ChildPolicyTerminate     ChildPolicy = "TERMINATE"
+	ChildPolicyRequestCancel ChildPolicy = "REQUEST_CANCEL"
+	ChildPolicyAbandon       ChildPolicy = "ABANDON"
 )
 
 // Values returns all known values for ChildPolicy. Note that this can be expanded
@@ -85,12 +85,12 @@ type CloseStatus string
 
 // Enum values for CloseStatus
 const (
-	CloseStatusCompleted        CloseStatus = "COMPLETED"
-	CloseStatusFailed           CloseStatus = "FAILED"
-	CloseStatusCanceled         CloseStatus = "CANCELED"
-	CloseStatusTerminated       CloseStatus = "TERMINATED"
-	CloseStatusContinued_as_new CloseStatus = "CONTINUED_AS_NEW"
-	CloseStatusTimed_out        CloseStatus = "TIMED_OUT"
+	CloseStatusCompleted      CloseStatus = "COMPLETED"
+	CloseStatusFailed         CloseStatus = "FAILED"
+	CloseStatusCanceled       CloseStatus = "CANCELED"
+	CloseStatusTerminated     CloseStatus = "TERMINATED"
+	CloseStatusContinuedAsNew CloseStatus = "CONTINUED_AS_NEW"
+	CloseStatusTimedOut       CloseStatus = "TIMED_OUT"
 )
 
 // Values returns all known values for CloseStatus. Note that this can be expanded
@@ -111,8 +111,8 @@ type CompleteWorkflowExecutionFailedCause string
 
 // Enum values for CompleteWorkflowExecutionFailedCause
 const (
-	CompleteWorkflowExecutionFailedCauseUnhandled_decision      CompleteWorkflowExecutionFailedCause = "UNHANDLED_DECISION"
-	CompleteWorkflowExecutionFailedCauseOperation_not_permitted CompleteWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
+	CompleteWorkflowExecutionFailedCauseUnhandledDecision     CompleteWorkflowExecutionFailedCause = "UNHANDLED_DECISION"
+	CompleteWorkflowExecutionFailedCauseOperationNotPermitted CompleteWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
 )
 
 // Values returns all known values for CompleteWorkflowExecutionFailedCause. Note
@@ -130,15 +130,15 @@ type ContinueAsNewWorkflowExecutionFailedCause string
 
 // Enum values for ContinueAsNewWorkflowExecutionFailedCause
 const (
-	ContinueAsNewWorkflowExecutionFailedCauseUnhandled_decision                                 ContinueAsNewWorkflowExecutionFailedCause = "UNHANDLED_DECISION"
-	ContinueAsNewWorkflowExecutionFailedCauseWorkflow_type_deprecated                           ContinueAsNewWorkflowExecutionFailedCause = "WORKFLOW_TYPE_DEPRECATED"
-	ContinueAsNewWorkflowExecutionFailedCauseWorkflow_type_does_not_exist                       ContinueAsNewWorkflowExecutionFailedCause = "WORKFLOW_TYPE_DOES_NOT_EXIST"
-	ContinueAsNewWorkflowExecutionFailedCauseDefault_execution_start_to_close_timeout_undefined ContinueAsNewWorkflowExecutionFailedCause = "DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED"
-	ContinueAsNewWorkflowExecutionFailedCauseDefault_task_start_to_close_timeout_undefined      ContinueAsNewWorkflowExecutionFailedCause = "DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED"
-	ContinueAsNewWorkflowExecutionFailedCauseDefault_task_list_undefined                        ContinueAsNewWorkflowExecutionFailedCause = "DEFAULT_TASK_LIST_UNDEFINED"
-	ContinueAsNewWorkflowExecutionFailedCauseDefault_child_policy_undefined                     ContinueAsNewWorkflowExecutionFailedCause = "DEFAULT_CHILD_POLICY_UNDEFINED"
-	ContinueAsNewWorkflowExecutionFailedCauseContinue_as_new_workflow_execution_rate_exceeded   ContinueAsNewWorkflowExecutionFailedCause = "CONTINUE_AS_NEW_WORKFLOW_EXECUTION_RATE_EXCEEDED"
-	ContinueAsNewWorkflowExecutionFailedCauseOperation_not_permitted                            ContinueAsNewWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
+	ContinueAsNewWorkflowExecutionFailedCauseUnhandledDecision                            ContinueAsNewWorkflowExecutionFailedCause = "UNHANDLED_DECISION"
+	ContinueAsNewWorkflowExecutionFailedCauseWorkflowTypeDeprecated                       ContinueAsNewWorkflowExecutionFailedCause = "WORKFLOW_TYPE_DEPRECATED"
+	ContinueAsNewWorkflowExecutionFailedCauseWorkflowTypeDoesNotExist                     ContinueAsNewWorkflowExecutionFailedCause = "WORKFLOW_TYPE_DOES_NOT_EXIST"
+	ContinueAsNewWorkflowExecutionFailedCauseDefaultExecutionStartToCloseTimeoutUndefined ContinueAsNewWorkflowExecutionFailedCause = "DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED"
+	ContinueAsNewWorkflowExecutionFailedCauseDefaultTaskStartToCloseTimeoutUndefined      ContinueAsNewWorkflowExecutionFailedCause = "DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED"
+	ContinueAsNewWorkflowExecutionFailedCauseDefaultTaskListUndefined                     ContinueAsNewWorkflowExecutionFailedCause = "DEFAULT_TASK_LIST_UNDEFINED"
+	ContinueAsNewWorkflowExecutionFailedCauseDefaultChildPolicyUndefined                  ContinueAsNewWorkflowExecutionFailedCause = "DEFAULT_CHILD_POLICY_UNDEFINED"
+	ContinueAsNewWorkflowExecutionFailedCauseContinueAsNewWorkflowExecutionRateExceeded   ContinueAsNewWorkflowExecutionFailedCause = "CONTINUE_AS_NEW_WORKFLOW_EXECUTION_RATE_EXCEEDED"
+	ContinueAsNewWorkflowExecutionFailedCauseOperationNotPermitted                        ContinueAsNewWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
 )
 
 // Values returns all known values for ContinueAsNewWorkflowExecutionFailedCause.
@@ -163,7 +163,7 @@ type DecisionTaskTimeoutType string
 
 // Enum values for DecisionTaskTimeoutType
 const (
-	DecisionTaskTimeoutTypeStart_to_close DecisionTaskTimeoutType = "START_TO_CLOSE"
+	DecisionTaskTimeoutTypeStartToClose DecisionTaskTimeoutType = "START_TO_CLOSE"
 )
 
 // Values returns all known values for DecisionTaskTimeoutType. Note that this can
@@ -359,8 +359,8 @@ type FailWorkflowExecutionFailedCause string
 
 // Enum values for FailWorkflowExecutionFailedCause
 const (
-	FailWorkflowExecutionFailedCauseUnhandled_decision      FailWorkflowExecutionFailedCause = "UNHANDLED_DECISION"
-	FailWorkflowExecutionFailedCauseOperation_not_permitted FailWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
+	FailWorkflowExecutionFailedCauseUnhandledDecision     FailWorkflowExecutionFailedCause = "UNHANDLED_DECISION"
+	FailWorkflowExecutionFailedCauseOperationNotPermitted FailWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
 )
 
 // Values returns all known values for FailWorkflowExecutionFailedCause. Note that
@@ -378,7 +378,7 @@ type LambdaFunctionTimeoutType string
 
 // Enum values for LambdaFunctionTimeoutType
 const (
-	LambdaFunctionTimeoutTypeStart_to_close LambdaFunctionTimeoutType = "START_TO_CLOSE"
+	LambdaFunctionTimeoutTypeStartToClose LambdaFunctionTimeoutType = "START_TO_CLOSE"
 )
 
 // Values returns all known values for LambdaFunctionTimeoutType. Note that this
@@ -394,7 +394,7 @@ type RecordMarkerFailedCause string
 
 // Enum values for RecordMarkerFailedCause
 const (
-	RecordMarkerFailedCauseOperation_not_permitted RecordMarkerFailedCause = "OPERATION_NOT_PERMITTED"
+	RecordMarkerFailedCauseOperationNotPermitted RecordMarkerFailedCause = "OPERATION_NOT_PERMITTED"
 )
 
 // Values returns all known values for RecordMarkerFailedCause. Note that this can
@@ -428,8 +428,8 @@ type RequestCancelActivityTaskFailedCause string
 
 // Enum values for RequestCancelActivityTaskFailedCause
 const (
-	RequestCancelActivityTaskFailedCauseActivity_id_unknown     RequestCancelActivityTaskFailedCause = "ACTIVITY_ID_UNKNOWN"
-	RequestCancelActivityTaskFailedCauseOperation_not_permitted RequestCancelActivityTaskFailedCause = "OPERATION_NOT_PERMITTED"
+	RequestCancelActivityTaskFailedCauseActivityIdUnknown     RequestCancelActivityTaskFailedCause = "ACTIVITY_ID_UNKNOWN"
+	RequestCancelActivityTaskFailedCauseOperationNotPermitted RequestCancelActivityTaskFailedCause = "OPERATION_NOT_PERMITTED"
 )
 
 // Values returns all known values for RequestCancelActivityTaskFailedCause. Note
@@ -447,9 +447,9 @@ type RequestCancelExternalWorkflowExecutionFailedCause string
 
 // Enum values for RequestCancelExternalWorkflowExecutionFailedCause
 const (
-	RequestCancelExternalWorkflowExecutionFailedCauseUnknown_external_workflow_execution                      RequestCancelExternalWorkflowExecutionFailedCause = "UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION"
-	RequestCancelExternalWorkflowExecutionFailedCauseRequest_cancel_external_workflow_execution_rate_exceeded RequestCancelExternalWorkflowExecutionFailedCause = "REQUEST_CANCEL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED"
-	RequestCancelExternalWorkflowExecutionFailedCauseOperation_not_permitted                                  RequestCancelExternalWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
+	RequestCancelExternalWorkflowExecutionFailedCauseUnknownExternalWorkflowExecution                   RequestCancelExternalWorkflowExecutionFailedCause = "UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION"
+	RequestCancelExternalWorkflowExecutionFailedCauseRequestCancelExternalWorkflowExecutionRateExceeded RequestCancelExternalWorkflowExecutionFailedCause = "REQUEST_CANCEL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED"
+	RequestCancelExternalWorkflowExecutionFailedCauseOperationNotPermitted                              RequestCancelExternalWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
 )
 
 // Values returns all known values for
@@ -468,17 +468,17 @@ type ScheduleActivityTaskFailedCause string
 
 // Enum values for ScheduleActivityTaskFailedCause
 const (
-	ScheduleActivityTaskFailedCauseActivity_type_deprecated                    ScheduleActivityTaskFailedCause = "ACTIVITY_TYPE_DEPRECATED"
-	ScheduleActivityTaskFailedCauseActivity_type_does_not_exist                ScheduleActivityTaskFailedCause = "ACTIVITY_TYPE_DOES_NOT_EXIST"
-	ScheduleActivityTaskFailedCauseActivity_id_already_in_use                  ScheduleActivityTaskFailedCause = "ACTIVITY_ID_ALREADY_IN_USE"
-	ScheduleActivityTaskFailedCauseOpen_activities_limit_exceeded              ScheduleActivityTaskFailedCause = "OPEN_ACTIVITIES_LIMIT_EXCEEDED"
-	ScheduleActivityTaskFailedCauseActivity_creation_rate_exceeded             ScheduleActivityTaskFailedCause = "ACTIVITY_CREATION_RATE_EXCEEDED"
-	ScheduleActivityTaskFailedCauseDefault_schedule_to_close_timeout_undefined ScheduleActivityTaskFailedCause = "DEFAULT_SCHEDULE_TO_CLOSE_TIMEOUT_UNDEFINED"
-	ScheduleActivityTaskFailedCauseDefault_task_list_undefined                 ScheduleActivityTaskFailedCause = "DEFAULT_TASK_LIST_UNDEFINED"
-	ScheduleActivityTaskFailedCauseDefault_schedule_to_start_timeout_undefined ScheduleActivityTaskFailedCause = "DEFAULT_SCHEDULE_TO_START_TIMEOUT_UNDEFINED"
-	ScheduleActivityTaskFailedCauseDefault_start_to_close_timeout_undefined    ScheduleActivityTaskFailedCause = "DEFAULT_START_TO_CLOSE_TIMEOUT_UNDEFINED"
-	ScheduleActivityTaskFailedCauseDefault_heartbeat_timeout_undefined         ScheduleActivityTaskFailedCause = "DEFAULT_HEARTBEAT_TIMEOUT_UNDEFINED"
-	ScheduleActivityTaskFailedCauseOperation_not_permitted                     ScheduleActivityTaskFailedCause = "OPERATION_NOT_PERMITTED"
+	ScheduleActivityTaskFailedCauseActivityTypeDeprecated                 ScheduleActivityTaskFailedCause = "ACTIVITY_TYPE_DEPRECATED"
+	ScheduleActivityTaskFailedCauseActivityTypeDoesNotExist               ScheduleActivityTaskFailedCause = "ACTIVITY_TYPE_DOES_NOT_EXIST"
+	ScheduleActivityTaskFailedCauseActivityIdAlreadyInUse                 ScheduleActivityTaskFailedCause = "ACTIVITY_ID_ALREADY_IN_USE"
+	ScheduleActivityTaskFailedCauseOpenActivitiesLimitExceeded            ScheduleActivityTaskFailedCause = "OPEN_ACTIVITIES_LIMIT_EXCEEDED"
+	ScheduleActivityTaskFailedCauseActivityCreationRateExceeded           ScheduleActivityTaskFailedCause = "ACTIVITY_CREATION_RATE_EXCEEDED"
+	ScheduleActivityTaskFailedCauseDefaultScheduleToCloseTimeoutUndefined ScheduleActivityTaskFailedCause = "DEFAULT_SCHEDULE_TO_CLOSE_TIMEOUT_UNDEFINED"
+	ScheduleActivityTaskFailedCauseDefaultTaskListUndefined               ScheduleActivityTaskFailedCause = "DEFAULT_TASK_LIST_UNDEFINED"
+	ScheduleActivityTaskFailedCauseDefaultScheduleToStartTimeoutUndefined ScheduleActivityTaskFailedCause = "DEFAULT_SCHEDULE_TO_START_TIMEOUT_UNDEFINED"
+	ScheduleActivityTaskFailedCauseDefaultStartToCloseTimeoutUndefined    ScheduleActivityTaskFailedCause = "DEFAULT_START_TO_CLOSE_TIMEOUT_UNDEFINED"
+	ScheduleActivityTaskFailedCauseDefaultHeartbeatTimeoutUndefined       ScheduleActivityTaskFailedCause = "DEFAULT_HEARTBEAT_TIMEOUT_UNDEFINED"
+	ScheduleActivityTaskFailedCauseOperationNotPermitted                  ScheduleActivityTaskFailedCause = "OPERATION_NOT_PERMITTED"
 )
 
 // Values returns all known values for ScheduleActivityTaskFailedCause. Note that
@@ -505,10 +505,10 @@ type ScheduleLambdaFunctionFailedCause string
 
 // Enum values for ScheduleLambdaFunctionFailedCause
 const (
-	ScheduleLambdaFunctionFailedCauseId_already_in_use                      ScheduleLambdaFunctionFailedCause = "ID_ALREADY_IN_USE"
-	ScheduleLambdaFunctionFailedCauseOpen_lambda_functions_limit_exceeded   ScheduleLambdaFunctionFailedCause = "OPEN_LAMBDA_FUNCTIONS_LIMIT_EXCEEDED"
-	ScheduleLambdaFunctionFailedCauseLambda_function_creation_rate_exceeded ScheduleLambdaFunctionFailedCause = "LAMBDA_FUNCTION_CREATION_RATE_EXCEEDED"
-	ScheduleLambdaFunctionFailedCauseLambda_service_not_available_in_region ScheduleLambdaFunctionFailedCause = "LAMBDA_SERVICE_NOT_AVAILABLE_IN_REGION"
+	ScheduleLambdaFunctionFailedCauseIdAlreadyInUse                     ScheduleLambdaFunctionFailedCause = "ID_ALREADY_IN_USE"
+	ScheduleLambdaFunctionFailedCauseOpenLambdaFunctionsLimitExceeded   ScheduleLambdaFunctionFailedCause = "OPEN_LAMBDA_FUNCTIONS_LIMIT_EXCEEDED"
+	ScheduleLambdaFunctionFailedCauseLambdaFunctionCreationRateExceeded ScheduleLambdaFunctionFailedCause = "LAMBDA_FUNCTION_CREATION_RATE_EXCEEDED"
+	ScheduleLambdaFunctionFailedCauseLambdaServiceNotAvailableInRegion  ScheduleLambdaFunctionFailedCause = "LAMBDA_SERVICE_NOT_AVAILABLE_IN_REGION"
 )
 
 // Values returns all known values for ScheduleLambdaFunctionFailedCause. Note that
@@ -528,9 +528,9 @@ type SignalExternalWorkflowExecutionFailedCause string
 
 // Enum values for SignalExternalWorkflowExecutionFailedCause
 const (
-	SignalExternalWorkflowExecutionFailedCauseUnknown_external_workflow_execution              SignalExternalWorkflowExecutionFailedCause = "UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION"
-	SignalExternalWorkflowExecutionFailedCauseSignal_external_workflow_execution_rate_exceeded SignalExternalWorkflowExecutionFailedCause = "SIGNAL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED"
-	SignalExternalWorkflowExecutionFailedCauseOperation_not_permitted                          SignalExternalWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
+	SignalExternalWorkflowExecutionFailedCauseUnknownExternalWorkflowExecution            SignalExternalWorkflowExecutionFailedCause = "UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION"
+	SignalExternalWorkflowExecutionFailedCauseSignalExternalWorkflowExecutionRateExceeded SignalExternalWorkflowExecutionFailedCause = "SIGNAL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED"
+	SignalExternalWorkflowExecutionFailedCauseOperationNotPermitted                       SignalExternalWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
 )
 
 // Values returns all known values for SignalExternalWorkflowExecutionFailedCause.
@@ -549,17 +549,17 @@ type StartChildWorkflowExecutionFailedCause string
 
 // Enum values for StartChildWorkflowExecutionFailedCause
 const (
-	StartChildWorkflowExecutionFailedCauseWorkflow_type_does_not_exist                       StartChildWorkflowExecutionFailedCause = "WORKFLOW_TYPE_DOES_NOT_EXIST"
-	StartChildWorkflowExecutionFailedCauseWorkflow_type_deprecated                           StartChildWorkflowExecutionFailedCause = "WORKFLOW_TYPE_DEPRECATED"
-	StartChildWorkflowExecutionFailedCauseOpen_children_limit_exceeded                       StartChildWorkflowExecutionFailedCause = "OPEN_CHILDREN_LIMIT_EXCEEDED"
-	StartChildWorkflowExecutionFailedCauseOpen_workflows_limit_exceeded                      StartChildWorkflowExecutionFailedCause = "OPEN_WORKFLOWS_LIMIT_EXCEEDED"
-	StartChildWorkflowExecutionFailedCauseChild_creation_rate_exceeded                       StartChildWorkflowExecutionFailedCause = "CHILD_CREATION_RATE_EXCEEDED"
-	StartChildWorkflowExecutionFailedCauseWorkflow_already_running                           StartChildWorkflowExecutionFailedCause = "WORKFLOW_ALREADY_RUNNING"
-	StartChildWorkflowExecutionFailedCauseDefault_execution_start_to_close_timeout_undefined StartChildWorkflowExecutionFailedCause = "DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED"
-	StartChildWorkflowExecutionFailedCauseDefault_task_list_undefined                        StartChildWorkflowExecutionFailedCause = "DEFAULT_TASK_LIST_UNDEFINED"
-	StartChildWorkflowExecutionFailedCauseDefault_task_start_to_close_timeout_undefined      StartChildWorkflowExecutionFailedCause = "DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED"
-	StartChildWorkflowExecutionFailedCauseDefault_child_policy_undefined                     StartChildWorkflowExecutionFailedCause = "DEFAULT_CHILD_POLICY_UNDEFINED"
-	StartChildWorkflowExecutionFailedCauseOperation_not_permitted                            StartChildWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
+	StartChildWorkflowExecutionFailedCauseWorkflowTypeDoesNotExist                     StartChildWorkflowExecutionFailedCause = "WORKFLOW_TYPE_DOES_NOT_EXIST"
+	StartChildWorkflowExecutionFailedCauseWorkflowTypeDeprecated                       StartChildWorkflowExecutionFailedCause = "WORKFLOW_TYPE_DEPRECATED"
+	StartChildWorkflowExecutionFailedCauseOpenChildrenLimitExceeded                    StartChildWorkflowExecutionFailedCause = "OPEN_CHILDREN_LIMIT_EXCEEDED"
+	StartChildWorkflowExecutionFailedCauseOpenWorkflowsLimitExceeded                   StartChildWorkflowExecutionFailedCause = "OPEN_WORKFLOWS_LIMIT_EXCEEDED"
+	StartChildWorkflowExecutionFailedCauseChildCreationRateExceeded                    StartChildWorkflowExecutionFailedCause = "CHILD_CREATION_RATE_EXCEEDED"
+	StartChildWorkflowExecutionFailedCauseWorkflowAlreadyRunning                       StartChildWorkflowExecutionFailedCause = "WORKFLOW_ALREADY_RUNNING"
+	StartChildWorkflowExecutionFailedCauseDefaultExecutionStartToCloseTimeoutUndefined StartChildWorkflowExecutionFailedCause = "DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED"
+	StartChildWorkflowExecutionFailedCauseDefaultTaskListUndefined                     StartChildWorkflowExecutionFailedCause = "DEFAULT_TASK_LIST_UNDEFINED"
+	StartChildWorkflowExecutionFailedCauseDefaultTaskStartToCloseTimeoutUndefined      StartChildWorkflowExecutionFailedCause = "DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED"
+	StartChildWorkflowExecutionFailedCauseDefaultChildPolicyUndefined                  StartChildWorkflowExecutionFailedCause = "DEFAULT_CHILD_POLICY_UNDEFINED"
+	StartChildWorkflowExecutionFailedCauseOperationNotPermitted                        StartChildWorkflowExecutionFailedCause = "OPERATION_NOT_PERMITTED"
 )
 
 // Values returns all known values for StartChildWorkflowExecutionFailedCause. Note
@@ -586,7 +586,7 @@ type StartLambdaFunctionFailedCause string
 
 // Enum values for StartLambdaFunctionFailedCause
 const (
-	StartLambdaFunctionFailedCauseAssume_role_failed StartLambdaFunctionFailedCause = "ASSUME_ROLE_FAILED"
+	StartLambdaFunctionFailedCauseAssumeRoleFailed StartLambdaFunctionFailedCause = "ASSUME_ROLE_FAILED"
 )
 
 // Values returns all known values for StartLambdaFunctionFailedCause. Note that
@@ -603,10 +603,10 @@ type StartTimerFailedCause string
 
 // Enum values for StartTimerFailedCause
 const (
-	StartTimerFailedCauseTimer_id_already_in_use      StartTimerFailedCause = "TIMER_ID_ALREADY_IN_USE"
-	StartTimerFailedCauseOpen_timers_limit_exceeded   StartTimerFailedCause = "OPEN_TIMERS_LIMIT_EXCEEDED"
-	StartTimerFailedCauseTimer_creation_rate_exceeded StartTimerFailedCause = "TIMER_CREATION_RATE_EXCEEDED"
-	StartTimerFailedCauseOperation_not_permitted      StartTimerFailedCause = "OPERATION_NOT_PERMITTED"
+	StartTimerFailedCauseTimerIdAlreadyInUse       StartTimerFailedCause = "TIMER_ID_ALREADY_IN_USE"
+	StartTimerFailedCauseOpenTimersLimitExceeded   StartTimerFailedCause = "OPEN_TIMERS_LIMIT_EXCEEDED"
+	StartTimerFailedCauseTimerCreationRateExceeded StartTimerFailedCause = "TIMER_CREATION_RATE_EXCEEDED"
+	StartTimerFailedCauseOperationNotPermitted     StartTimerFailedCause = "OPERATION_NOT_PERMITTED"
 )
 
 // Values returns all known values for StartTimerFailedCause. Note that this can be
@@ -625,7 +625,7 @@ type WorkflowExecutionCancelRequestedCause string
 
 // Enum values for WorkflowExecutionCancelRequestedCause
 const (
-	WorkflowExecutionCancelRequestedCauseChild_policy_applied WorkflowExecutionCancelRequestedCause = "CHILD_POLICY_APPLIED"
+	WorkflowExecutionCancelRequestedCauseChildPolicyApplied WorkflowExecutionCancelRequestedCause = "CHILD_POLICY_APPLIED"
 )
 
 // Values returns all known values for WorkflowExecutionCancelRequestedCause. Note
@@ -642,9 +642,9 @@ type WorkflowExecutionTerminatedCause string
 
 // Enum values for WorkflowExecutionTerminatedCause
 const (
-	WorkflowExecutionTerminatedCauseChild_policy_applied WorkflowExecutionTerminatedCause = "CHILD_POLICY_APPLIED"
-	WorkflowExecutionTerminatedCauseEvent_limit_exceeded WorkflowExecutionTerminatedCause = "EVENT_LIMIT_EXCEEDED"
-	WorkflowExecutionTerminatedCauseOperator_initiated   WorkflowExecutionTerminatedCause = "OPERATOR_INITIATED"
+	WorkflowExecutionTerminatedCauseChildPolicyApplied WorkflowExecutionTerminatedCause = "CHILD_POLICY_APPLIED"
+	WorkflowExecutionTerminatedCauseEventLimitExceeded WorkflowExecutionTerminatedCause = "EVENT_LIMIT_EXCEEDED"
+	WorkflowExecutionTerminatedCauseOperatorInitiated  WorkflowExecutionTerminatedCause = "OPERATOR_INITIATED"
 )
 
 // Values returns all known values for WorkflowExecutionTerminatedCause. Note that
@@ -663,7 +663,7 @@ type WorkflowExecutionTimeoutType string
 
 // Enum values for WorkflowExecutionTimeoutType
 const (
-	WorkflowExecutionTimeoutTypeStart_to_close WorkflowExecutionTimeoutType = "START_TO_CLOSE"
+	WorkflowExecutionTimeoutTypeStartToClose WorkflowExecutionTimeoutType = "START_TO_CLOSE"
 )
 
 // Values returns all known values for WorkflowExecutionTimeoutType. Note that this

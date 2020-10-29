@@ -38,13 +38,13 @@ type CreateDBInstanceInput struct {
 	// The DB instance identifier. This parameter is stored as a lowercase string.
 	// Constraints:
 	//
-	//     * Must contain from 1 to 63 letters, numbers, or hyphens.
+	// * Must contain from 1 to 63 letters, numbers, or hyphens.
 	//
+	// * First
+	// character must be a letter.
 	//
-	// * First character must be a letter.
-	//
-	//     * Cannot end with a hyphen or contain
-	// two consecutive hyphens.
+	// * Cannot end with a hyphen or contain two
+	// consecutive hyphens.
 	//
 	// Example: mydbinstance
 	//
@@ -78,10 +78,10 @@ type CreateDBInstanceInput struct {
 	// retention period for automated backups is managed by the DB cluster. For more
 	// information, see CreateDBCluster. Default: 1 Constraints:
 	//
-	//     * Must be a value
+	// * Must be a value
 	// from 0 to 35
 	//
-	//     * Cannot be set to 0 if the DB instance is a source to Read
+	// * Cannot be set to 0 if the DB instance is a source to Read
 	// Replicas
 	BackupRetentionPeriod *int32
 
@@ -103,12 +103,12 @@ type CreateDBInstanceInput struct {
 	// argument is omitted, the default DBParameterGroup for the specified engine is
 	// used. Constraints:
 	//
-	//     * Must be 1 to 255 letters, numbers, or hyphens.
+	// * Must be 1 to 255 letters, numbers, or hyphens.
 	//
-	//     *
-	// First character must be a letter
+	// * First
+	// character must be a letter
 	//
-	//     * Cannot end with a hyphen or contain two
+	// * Cannot end with a hyphen or contain two
 	// consecutive hyphens
 	DBParameterGroupName *string
 

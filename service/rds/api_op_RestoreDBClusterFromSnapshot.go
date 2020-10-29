@@ -44,16 +44,16 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// The name of the DB cluster to create from the DB snapshot or DB cluster
 	// snapshot. This parameter isn't case-sensitive. Constraints:
 	//
-	//     * Must contain
-	// from 1 to 63 letters, numbers, or hyphens
+	// * Must contain from
+	// 1 to 63 letters, numbers, or hyphens
 	//
-	//     * First character must be a
-	// letter
+	// * First character must be a letter
 	//
-	//     * Can't end with a hyphen or contain two consecutive
-	// hyphens
+	// *
+	// Can't end with a hyphen or contain two consecutive hyphens
 	//
-	// Example: my-snapshot-id
+	// Example:
+	// my-snapshot-id
 	//
 	// This member is required.
 	DBClusterIdentifier *string
@@ -69,7 +69,7 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// cluster snapshot. However, you can use only the ARN to specify a DB snapshot.
 	// Constraints:
 	//
-	//     * Must match the identifier of an existing Snapshot.
+	// * Must match the identifier of an existing Snapshot.
 	//
 	// This member is required.
 	SnapshotIdentifier *string
@@ -82,8 +82,8 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// to 0. Currently, Backtrack is only supported for Aurora MySQL DB clusters.
 	// Default: 0 Constraints:
 	//
-	//     * If specified, this value must be set to a number
-	// from 0 to 259,200 (72 hours).
+	// * If specified, this value must be set to a number from
+	// 0 to 259,200 (72 hours).
 	BacktrackWindow *int64
 
 	// A value that indicates whether to copy all tags from the restored DB cluster to
@@ -94,16 +94,16 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// this argument is omitted, the default DB cluster parameter group for the
 	// specified engine is used. Constraints:
 	//
-	//     * If supplied, must match the name
-	// of an existing default DB cluster parameter group.
+	// * If supplied, must match the name of an
+	// existing default DB cluster parameter group.
 	//
-	//     * Must be 1 to 255
-	// letters, numbers, or hyphens.
+	// * Must be 1 to 255 letters,
+	// numbers, or hyphens.
 	//
-	//     * First character must be a letter.
+	// * First character must be a letter.
 	//
-	//     *
-	// Can't end with a hyphen or contain two consecutive hyphens.
+	// * Can't end with a
+	// hyphen or contain two consecutive hyphens.
 	DBClusterParameterGroupName *string
 
 	// The name of the DB subnet group to use for the new DB cluster. Constraints: If
@@ -174,12 +174,12 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// ARN for the KMS encryption key. If you don't specify a value for the KmsKeyId
 	// parameter, then the following occurs:
 	//
-	//     * If the DB snapshot or DB cluster
+	// * If the DB snapshot or DB cluster
 	// snapshot in SnapshotIdentifier is encrypted, then the restored DB cluster is
 	// encrypted using the KMS key that was used to encrypt the DB snapshot or DB
 	// cluster snapshot.
 	//
-	//     * If the DB snapshot or DB cluster snapshot in
+	// * If the DB snapshot or DB cluster snapshot in
 	// SnapshotIdentifier isn't encrypted, then the restored DB cluster isn't
 	// encrypted.
 	KmsKeyId *string

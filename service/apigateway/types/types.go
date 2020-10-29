@@ -116,13 +116,13 @@ type Authorizer struct {
 
 	// The identity source for which authorization is requested.
 	//
-	//     * For a TOKEN or
+	// * For a TOKEN or
 	// COGNITO_USER_POOLS authorizer, this is required and specifies the request header
 	// mapping expression for the custom header holding the authorization token
 	// submitted by the client. For example, if the token header name is Auth, the
 	// header mapping expression is method.request.header.Auth.
 	//
-	//     * For the REQUEST
+	// * For the REQUEST
 	// authorizer, this is required when authorization caching is enabled. The value is
 	// a comma-separated string of one or more mapping expressions of the specified
 	// request parameters. For example, if an Auth header, a Name query string
@@ -534,52 +534,51 @@ type GatewayResponse struct {
 
 	// The response type of the associated GatewayResponse. Valid values are
 	//
-	//     *
+	// *
 	// ACCESS_DENIED
 	//
-	//     * API_CONFIGURATION_ERROR
+	// * API_CONFIGURATION_ERROR
 	//
-	//     * AUTHORIZER_FAILURE
+	// * AUTHORIZER_FAILURE
 	//
-	//     *
+	// *
 	// AUTHORIZER_CONFIGURATION_ERROR
 	//
-	//     * BAD_REQUEST_PARAMETERS
+	// * BAD_REQUEST_PARAMETERS
 	//
-	//     *
-	// BAD_REQUEST_BODY
+	// * BAD_REQUEST_BODY
 	//
-	//     * DEFAULT_4XX
+	// *
+	// DEFAULT_4XX
 	//
-	//     * DEFAULT_5XX
+	// * DEFAULT_5XX
 	//
-	//     * EXPIRED_TOKEN
-	//
+	// * EXPIRED_TOKEN
 	//
 	// * INVALID_SIGNATURE
 	//
-	//     * INTEGRATION_FAILURE
+	// *
+	// INTEGRATION_FAILURE
 	//
-	//     * INTEGRATION_TIMEOUT
+	// * INTEGRATION_TIMEOUT
 	//
-	//     *
-	// INVALID_API_KEY
+	// * INVALID_API_KEY
 	//
-	//     * MISSING_AUTHENTICATION_TOKEN
+	// *
+	// MISSING_AUTHENTICATION_TOKEN
 	//
-	//     * QUOTA_EXCEEDED
+	// * QUOTA_EXCEEDED
 	//
-	//     *
-	// REQUEST_TOO_LARGE
+	// * REQUEST_TOO_LARGE
 	//
-	//     * RESOURCE_NOT_FOUND
+	// *
+	// RESOURCE_NOT_FOUND
 	//
-	//     * THROTTLED
+	// * THROTTLED
 	//
-	//     *
-	// UNAUTHORIZED
+	// * UNAUTHORIZED
 	//
-	//     * UNSUPPORTED_MEDIA_TYPE
+	// * UNSUPPORTED_MEDIA_TYPE
 	ResponseType GatewayResponseType
 
 	// The HTTP status code for this GatewayResponse.
@@ -619,10 +618,10 @@ type Integration struct {
 	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following
 	// behaviors:
 	//
-	//     * CONVERT_TO_BINARY: Converts a request payload from a
+	// * CONVERT_TO_BINARY: Converts a request payload from a
 	// Base64-encoded string to the corresponding binary blob.
 	//
-	//     * CONVERT_TO_TEXT:
+	// * CONVERT_TO_TEXT:
 	// Converts a request payload from a binary blob to a Base64-encoded string.
 	//
 	// If
@@ -681,23 +680,23 @@ type Integration struct {
 	// the content type does not match any of the mapped content types, as specified in
 	// requestTemplates. The valid value is one of the following:
 	//
-	//     * WHEN_NO_MATCH:
+	// * WHEN_NO_MATCH:
 	// passes the method request body through the integration request to the back end
 	// without transformation when the method request content type does not match any
 	// content type associated with the mapping templates defined in the integration
 	// request.
 	//
-	//     * WHEN_NO_TEMPLATES: passes the method request body through the
+	// * WHEN_NO_TEMPLATES: passes the method request body through the
 	// integration request to the back end without transformation when no mapping
 	// template is defined in the integration request. If a template is defined when
 	// this option is selected, the method request of an unmapped content-type will be
 	// rejected with an HTTP 415 Unsupported Media Type response.
 	//
-	//     * NEVER: rejects
-	// the method request with an HTTP 415 Unsupported Media Type response when either
-	// the method request content type does not match any content type associated with
-	// the mapping templates defined in the integration request or no mapping template
-	// is defined in the integration request.
+	// * NEVER: rejects the
+	// method request with an HTTP 415 Unsupported Media Type response when either the
+	// method request content type does not match any content type associated with the
+	// mapping templates defined in the integration request or no mapping template is
+	// defined in the integration request.
 	PassthroughBehavior *string
 
 	// A key-value map specifying request parameters that are passed from the method
@@ -724,48 +723,48 @@ type Integration struct {
 	// Specifies an API method integration type. The valid value is one of the
 	// following:
 	//
-	//     * AWS: for integrating the API method request with an AWS
-	// service action, including the Lambda function-invoking action. With the Lambda
+	// * AWS: for integrating the API method request with an AWS service
+	// action, including the Lambda function-invoking action. With the Lambda
 	// function-invoking action, this is referred to as the Lambda custom integration.
 	// With any other AWS service action, this is known as AWS integration.
 	//
-	//     *
+	// *
 	// AWS_PROXY: for integrating the API method request with the Lambda
 	// function-invoking action with the client request passed through as-is. This
 	// integration is also referred to as the Lambda proxy integration.
 	//
-	//     * HTTP:
-	// for integrating the API method request with an HTTP endpoint, including a
-	// private HTTP endpoint within a VPC. This integration is also referred to as the
-	// HTTP custom integration.
+	// * HTTP: for
+	// integrating the API method request with an HTTP endpoint, including a private
+	// HTTP endpoint within a VPC. This integration is also referred to as the HTTP
+	// custom integration.
 	//
-	//     * HTTP_PROXY: for integrating the API method
-	// request with an HTTP endpoint, including a private HTTP endpoint within a VPC,
-	// with the client request passed through as-is. This is also referred to as the
-	// HTTP proxy integration.
+	// * HTTP_PROXY: for integrating the API method request with
+	// an HTTP endpoint, including a private HTTP endpoint within a VPC, with the
+	// client request passed through as-is. This is also referred to as the HTTP proxy
+	// integration.
 	//
-	//     * MOCK: for integrating the API method request with
-	// API Gateway as a "loop-back" endpoint without invoking any backend.
+	// * MOCK: for integrating the API method request with API Gateway as
+	// a "loop-back" endpoint without invoking any backend.
 	//
-	// For the
-	// HTTP and HTTP proxy integrations, each integration can specify a protocol
-	// (http/https), port and path. Standard 80 and 443 ports are supported as well as
-	// custom ports above 1024. An HTTP or HTTP proxy integration with a connectionType
-	// of VPC_LINK is referred to as a private integration and uses a VpcLink to
-	// connect API Gateway to a network load balancer of a VPC.
+	// For the HTTP and HTTP
+	// proxy integrations, each integration can specify a protocol (http/https), port
+	// and path. Standard 80 and 443 ports are supported as well as custom ports above
+	// 1024. An HTTP or HTTP proxy integration with a connectionType of VPC_LINK is
+	// referred to as a private integration and uses a VpcLink to connect API Gateway
+	// to a network load balancer of a VPC.
 	Type IntegrationType
 
 	// Specifies Uniform Resource Identifier (URI) of the integration endpoint.
 	//
-	//     *
-	// For HTTP or HTTP_PROXY integrations, the URI must be a fully formed, encoded
-	// HTTP(S) URL according to the RFC-3986 specification
+	// * For
+	// HTTP or HTTP_PROXY integrations, the URI must be a fully formed, encoded HTTP(S)
+	// URL according to the RFC-3986 specification
 	// (https://en.wikipedia.org/wiki/Uniform_Resource_Identifier), for either standard
 	// integration, where connectionType is not VPC_LINK, or private integration, where
 	// connectionType is VPC_LINK. For a private HTTP integration, the URI is not used
 	// for routing.
 	//
-	//     * For AWS or AWS_PROXY integrations, the URI is of the form
+	// * For AWS or AWS_PROXY integrations, the URI is of the form
 	// arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api}.
 	// Here, {Region} is the API Gateway region (e.g., us-east-1); {service} is the
 	// name of the integrated AWS service (e.g., s3); and {subdomain} is a designated
@@ -794,10 +793,10 @@ type IntegrationResponse struct {
 	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following
 	// behaviors:
 	//
-	//     * CONVERT_TO_BINARY: Converts a response payload from a
+	// * CONVERT_TO_BINARY: Converts a response payload from a
 	// Base64-encoded string to the corresponding binary blob.
 	//
-	//     * CONVERT_TO_TEXT:
+	// * CONVERT_TO_TEXT:
 	// Converts a response payload from a binary blob to a Base64-encoded string.
 	//
 	// If
@@ -1453,11 +1452,11 @@ type RestApi struct {
 	// The source of the API key for metering requests according to a usage plan. Valid
 	// values are:
 	//
-	//     * HEADER to read the API key from the X-API-Key header of a
+	// * HEADER to read the API key from the X-API-Key header of a
 	// request.
 	//
-	//     * AUTHORIZER to read the API key from the UsageIdentifierKey from
-	// a custom authorizer.
+	// * AUTHORIZER to read the API key from the UsageIdentifierKey from a
+	// custom authorizer.
 	ApiKeySource ApiKeySourceType
 
 	// The list of binary media types supported by the RestApi. By default, the RestApi

@@ -35,20 +35,20 @@ import (
 // is canceled by a call to DeleteVpcPeeringAuthorization. You must create or
 // delete the peering connection while the authorization is valid.
 //
-//     *
+// *
 // CreateVpcPeeringAuthorization
 //
-//     * DescribeVpcPeeringAuthorizations
+// * DescribeVpcPeeringAuthorizations
 //
-//     *
+// *
 // DeleteVpcPeeringAuthorization
 //
-//     * CreateVpcPeeringConnection
+// * CreateVpcPeeringConnection
 //
-//     *
+// *
 // DescribeVpcPeeringConnections
 //
-//     * DeleteVpcPeeringConnection
+// * DeleteVpcPeeringConnection
 func (c *Client) CreateVpcPeeringAuthorization(ctx context.Context, params *CreateVpcPeeringAuthorizationInput, optFns ...func(*Options)) (*CreateVpcPeeringAuthorizationOutput, error) {
 	if params == nil {
 		params = &CreateVpcPeeringAuthorizationInput{}

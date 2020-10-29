@@ -20,24 +20,24 @@ import (
 // devices as applications and track their migration status. To start an import
 // request, do this:
 //
-//     * Download the specially formatted comma separated value
+// * Download the specially formatted comma separated value
 // (CSV) import template, which you can find here:
 // https://s3-us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv
 // (https://s3-us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv).
 //
+// *
+// Fill out the template with your server and application data.
 //
-// * Fill out the template with your server and application data.
+// * Upload your
+// import file to an Amazon S3 bucket, and make a note of it's Object URL. Your
+// import file must be in the CSV format.
 //
-//     * Upload
-// your import file to an Amazon S3 bucket, and make a note of it's Object URL.
-// Your import file must be in the CSV format.
+// * Use the console or the StartImportTask
+// command with the AWS CLI or one of the AWS SDKs to import the records from your
+// file.
 //
-//     * Use the console or the
-// StartImportTask command with the AWS CLI or one of the AWS SDKs to import the
-// records from your file.
-//
-// For more information, including step-by-step
-// procedures, see Migration Hub Import
+// For more information, including step-by-step procedures, see Migration
+// Hub Import
 // (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-import.html)
 // in the AWS Application Discovery Service User Guide. There are limits to the
 // number of import tasks you can create (and delete) in an AWS account. For more

@@ -33,11 +33,11 @@ import (
 // section below. The following actions are related to
 // PutBucketLifecycleConfiguration:
 //
-//     * GetBucketLifecycleConfiguration
+// * GetBucketLifecycleConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html)
 //
-//
-// * DeleteBucketLifecycleConfiguration
+// *
+// DeleteBucketLifecycleConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html)
 func (c *Client) PutBucketLifecycleConfiguration(ctx context.Context, params *PutBucketLifecycleConfigurationInput, optFns ...func(*Options)) (*PutBucketLifecycleConfigurationOutput, error) {
 	if params == nil {

@@ -62,23 +62,23 @@ type ImportSnapshotInput struct {
 	// Encrypted flag must also be set. The CMK identifier may be provided in any of
 	// the following formats:
 	//
-	//     * Key ID
+	// * Key ID
 	//
-	//     * Key alias. The alias ARN contains
-	// the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID
-	// of the CMK owner, the alias namespace, and then the CMK alias. For example,
+	// * Key alias. The alias ARN contains the
+	// arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of
+	// the CMK owner, the alias namespace, and then the CMK alias. For example,
 	// arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
 	//
-	//     * ARN using key ID.
-	// The ID ARN contains the arn:aws:kms namespace, followed by the Region of the
-	// CMK, the AWS account ID of the CMK owner, the key namespace, and then the CMK
-	// ID. For example,
+	// * ARN using key ID. The
+	// ID ARN contains the arn:aws:kms namespace, followed by the Region of the CMK,
+	// the AWS account ID of the CMK owner, the key namespace, and then the CMK ID. For
+	// example,
 	// arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.
 	//
-	//
-	// * ARN using key alias. The alias ARN contains the arn:aws:kms namespace,
-	// followed by the Region of the CMK, the AWS account ID of the CMK owner, the
-	// alias namespace, and then the CMK alias. For example,
+	// *
+	// ARN using key alias. The alias ARN contains the arn:aws:kms namespace, followed
+	// by the Region of the CMK, the AWS account ID of the CMK owner, the alias
+	// namespace, and then the CMK alias. For example,
 	// arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
 	//
 	// AWS parses KmsKeyId

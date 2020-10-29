@@ -26,8 +26,8 @@ type ComputeType string
 
 // Enum values for ComputeType
 const (
-	ComputeTypeAcu_1 ComputeType = "ACU_1"
-	ComputeTypeAcu_2 ComputeType = "ACU_2"
+	ComputeTypeAcu1 ComputeType = "ACU_1"
+	ComputeTypeAcu2 ComputeType = "ACU_2"
 )
 
 // Values returns all known values for ComputeType. Note that this can be expanded

@@ -48,10 +48,9 @@ type DomainDescription struct {
 
 	// The current status of a domain. The valid values are
 	//
-	//     * Active
+	// * Active
 	//
-	//     *
-	// Deleted
+	// * Deleted
 	Status DomainStatus
 }
 
@@ -79,10 +78,10 @@ type DomainSummary struct {
 
 	// A string that contains the status of the domain. The valid values are:
 	//
-	//     *
+	// *
 	// Active
 	//
-	//     * Deleted
+	// * Deleted
 	Status DomainStatus
 }
 
@@ -107,14 +106,14 @@ type PackageDependency struct {
 	// The namespace of the package. The package component that specifies its namespace
 	// depends on its type. For example:
 	//
-	//     * The namespace of a Maven package is its
+	// * The namespace of a Maven package is its
 	// groupId.
 	//
-	//     * The namespace of an npm package is its scope.
+	// * The namespace of an npm package is its scope.
 	//
-	//     * A Python
-	// package does not contain a corresponding component, so Python packages do not
-	// have a namespace.
+	// * A Python package
+	// does not contain a corresponding component, so Python packages do not have a
+	// namespace.
 	Namespace *string
 
 	// The name of the package that this package depends on.
@@ -134,24 +133,24 @@ type PackageSummary struct {
 
 	// The format of the package. Valid values are:
 	//
-	//     * npm
+	// * npm
 	//
-	//     * pypi
+	// * pypi
 	//
-	//     * maven
+	// * maven
 	Format PackageFormat
 
 	// The namespace of the package. The package component that specifies its namespace
 	// depends on its type. For example:
 	//
-	//     * The namespace of a Maven package is its
+	// * The namespace of a Maven package is its
 	// groupId.
 	//
-	//     * The namespace of an npm package is its scope.
+	// * The namespace of an npm package is its scope.
 	//
-	//     * A Python
-	// package does not contain a corresponding component, so Python packages do not
-	// have a namespace.
+	// * A Python package
+	// does not contain a corresponding component, so Python packages do not have a
+	// namespace.
 	Namespace *string
 
 	// The name of the package.
@@ -168,13 +167,13 @@ type PackageVersionDescription struct {
 
 	// The format of the package version. The valid package formats are:
 	//
-	//     * npm: A
-	// Node Package Manager (npm) package.
+	// * npm: A Node
+	// Package Manager (npm) package.
 	//
-	//     * pypi: A Python Package Index (PyPI)
+	// * pypi: A Python Package Index (PyPI)
 	// package.
 	//
-	//     * maven: A Maven package that contains compiled code in a
+	// * maven: A Maven package that contains compiled code in a
 	// distributable format, such as a JAR file.
 	Format PackageFormat
 
@@ -187,14 +186,14 @@ type PackageVersionDescription struct {
 	// The namespace of the package. The package component that specifies its namespace
 	// depends on its type. For example:
 	//
-	//     * The namespace of a Maven package is its
+	// * The namespace of a Maven package is its
 	// groupId.
 	//
-	//     * The namespace of an npm package is its scope.
+	// * The namespace of an npm package is its scope.
 	//
-	//     * A Python
-	// package does not contain a corresponding component, so Python packages do not
-	// have a namespace.
+	// * A Python package
+	// does not contain a corresponding component, so Python packages do not have a
+	// namespace.
 	Namespace *string
 
 	// The name of the requested package.
@@ -213,14 +212,13 @@ type PackageVersionDescription struct {
 	// A string that contains the status of the package version. It can be one of the
 	// following:
 	//
-	//     * Published
+	// * Published
 	//
-	//     * Unfinished
+	// * Unfinished
 	//
-	//     * Unlisted
+	// * Unlisted
 	//
-	//     * Archived
-	//
+	// * Archived
 	//
 	// * Disposed
 	Status PackageVersionStatus
@@ -239,19 +237,19 @@ type PackageVersionError struct {
 
 	// The error code associated with the error. Valid error codes are:
 	//
-	//     *
+	// *
 	// ALREADY_EXISTS
 	//
-	//     * MISMATCHED_REVISION
+	// * MISMATCHED_REVISION
 	//
-	//     * MISMATCHED_STATUS
+	// * MISMATCHED_STATUS
 	//
-	//     *
-	// NOT_ALLOWED
+	// * NOT_ALLOWED
 	//
-	//     * NOT_FOUND
+	// *
+	// NOT_FOUND
 	//
-	//     * SKIPPED
+	// * SKIPPED
 	ErrorCode PackageVersionErrorCode
 
 	// The error message associated with the error.
@@ -267,14 +265,13 @@ type PackageVersionSummary struct {
 	// A string that contains the status of the package version. It can be one of the
 	// following:
 	//
-	//     * Published
+	// * Published
 	//
-	//     * Unfinished
+	// * Unfinished
 	//
-	//     * Unlisted
+	// * Unlisted
 	//
-	//     * Archived
-	//
+	// * Archived
 	//
 	// * Disposed
 	//
@@ -337,13 +334,13 @@ type RepositoryExternalConnectionInfo struct {
 	// The package format associated with a repository's external connection. The valid
 	// package formats are:
 	//
-	//     * npm: A Node Package Manager (npm) package.
+	// * npm: A Node Package Manager (npm) package.
 	//
-	//     *
-	// pypi: A Python Package Index (PyPI) package.
+	// * pypi: A
+	// Python Package Index (PyPI) package.
 	//
-	//     * maven: A Maven package that
-	// contains compiled code in a distributable format, such as a JAR file.
+	// * maven: A Maven package that contains
+	// compiled code in a distributable format, such as a JAR file.
 	PackageFormat PackageFormat
 
 	// The status of the external connection of a repository. There is one valid value,
@@ -399,16 +396,16 @@ type SuccessfulPackageVersionInfo struct {
 
 	// The status of a package version. Valid statuses are:
 	//
-	//     * Published
+	// * Published
 	//
-	//     *
+	// *
 	// Unfinished
 	//
-	//     * Unlisted
+	// * Unlisted
 	//
-	//     * Archived
+	// * Archived
 	//
-	//     * Disposed
+	// * Disposed
 	Status PackageVersionStatus
 }
 

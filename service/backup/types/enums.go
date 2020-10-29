@@ -36,21 +36,21 @@ type BackupVaultEvent string
 
 // Enum values for BackupVaultEvent
 const (
-	BackupVaultEventBackup_job_started      BackupVaultEvent = "BACKUP_JOB_STARTED"
-	BackupVaultEventBackup_job_completed    BackupVaultEvent = "BACKUP_JOB_COMPLETED"
-	BackupVaultEventBackup_job_successful   BackupVaultEvent = "BACKUP_JOB_SUCCESSFUL"
-	BackupVaultEventBackup_job_failed       BackupVaultEvent = "BACKUP_JOB_FAILED"
-	BackupVaultEventBackup_job_expired      BackupVaultEvent = "BACKUP_JOB_EXPIRED"
-	BackupVaultEventRestore_job_started     BackupVaultEvent = "RESTORE_JOB_STARTED"
-	BackupVaultEventRestore_job_completed   BackupVaultEvent = "RESTORE_JOB_COMPLETED"
-	BackupVaultEventRestore_job_successful  BackupVaultEvent = "RESTORE_JOB_SUCCESSFUL"
-	BackupVaultEventRestore_job_failed      BackupVaultEvent = "RESTORE_JOB_FAILED"
-	BackupVaultEventCopy_job_started        BackupVaultEvent = "COPY_JOB_STARTED"
-	BackupVaultEventCopy_job_successful     BackupVaultEvent = "COPY_JOB_SUCCESSFUL"
-	BackupVaultEventCopy_job_failed         BackupVaultEvent = "COPY_JOB_FAILED"
-	BackupVaultEventRecovery_point_modified BackupVaultEvent = "RECOVERY_POINT_MODIFIED"
-	BackupVaultEventBackup_plan_created     BackupVaultEvent = "BACKUP_PLAN_CREATED"
-	BackupVaultEventBackup_plan_modified    BackupVaultEvent = "BACKUP_PLAN_MODIFIED"
+	BackupVaultEventBackupJobStarted      BackupVaultEvent = "BACKUP_JOB_STARTED"
+	BackupVaultEventBackupJobCompleted    BackupVaultEvent = "BACKUP_JOB_COMPLETED"
+	BackupVaultEventBackupJobSuccessful   BackupVaultEvent = "BACKUP_JOB_SUCCESSFUL"
+	BackupVaultEventBackupJobFailed       BackupVaultEvent = "BACKUP_JOB_FAILED"
+	BackupVaultEventBackupJobExpired      BackupVaultEvent = "BACKUP_JOB_EXPIRED"
+	BackupVaultEventRestoreJobStarted     BackupVaultEvent = "RESTORE_JOB_STARTED"
+	BackupVaultEventRestoreJobCompleted   BackupVaultEvent = "RESTORE_JOB_COMPLETED"
+	BackupVaultEventRestoreJobSuccessful  BackupVaultEvent = "RESTORE_JOB_SUCCESSFUL"
+	BackupVaultEventRestoreJobFailed      BackupVaultEvent = "RESTORE_JOB_FAILED"
+	BackupVaultEventCopyJobStarted        BackupVaultEvent = "COPY_JOB_STARTED"
+	BackupVaultEventCopyJobSuccessful     BackupVaultEvent = "COPY_JOB_SUCCESSFUL"
+	BackupVaultEventCopyJobFailed         BackupVaultEvent = "COPY_JOB_FAILED"
+	BackupVaultEventRecoveryPointModified BackupVaultEvent = "RECOVERY_POINT_MODIFIED"
+	BackupVaultEventBackupPlanCreated     BackupVaultEvent = "BACKUP_PLAN_CREATED"
+	BackupVaultEventBackupPlanModified    BackupVaultEvent = "BACKUP_PLAN_MODIFIED"
 )
 
 // Values returns all known values for BackupVaultEvent. Note that this can be

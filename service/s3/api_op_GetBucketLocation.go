@@ -18,10 +18,10 @@ import (
 // this implementation of the operation, you must be the bucket owner. The
 // following operations are related to GetBucketLocation:
 //
-//     * GetObject
+// * GetObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
 //
-//     *
+// *
 // CreateBucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
 func (c *Client) GetBucketLocation(ctx context.Context, params *GetBucketLocationInput, optFns ...func(*Options)) (*GetBucketLocationOutput, error) {

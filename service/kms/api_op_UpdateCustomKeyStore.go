@@ -19,12 +19,12 @@ import (
 // key store, use the DescribeCustomKeyStores operation. Use the parameters of
 // UpdateCustomKeyStore to edit your keystore settings.
 //
-//     * Use the
+// * Use the
 // NewCustomKeyStoreName parameter to change the friendly name of the custom key
 // store to the value that you specify.
 //
-//     * Use the KeyStorePassword parameter
-// tell AWS KMS the current password of the kmsuser crypto user (CU)
+// * Use the KeyStorePassword parameter tell
+// AWS KMS the current password of the kmsuser crypto user (CU)
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-store-concepts.html#concept-kmsuser)
 // in the associated AWS CloudHSM cluster. You can use this parameter to fix
 // connection failures
@@ -33,14 +33,14 @@ import (
 // kmsuser password has changed. This value does not change the password in the AWS
 // CloudHSM cluster.
 //
-//     * Use the CloudHsmClusterId parameter to associate the
-// custom key store with a different, but related, AWS CloudHSM cluster. You can
-// use this parameter to repair a custom key store if its AWS CloudHSM cluster
-// becomes corrupted or is deleted, or when you need to create or restore a cluster
-// from a backup.
+// * Use the CloudHsmClusterId parameter to associate the custom
+// key store with a different, but related, AWS CloudHSM cluster. You can use this
+// parameter to repair a custom key store if its AWS CloudHSM cluster becomes
+// corrupted or is deleted, or when you need to create or restore a cluster from a
+// backup.
 //
-// If the operation succeeds, it returns a JSON object with no
-// properties. This operation is part of the Custom Key Store feature
+// If the operation succeeds, it returns a JSON object with no properties.
+// This operation is part of the Custom Key Store feature
 // (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
 // feature in AWS KMS, which combines the convenience and extensive integration of
 // AWS KMS with the isolation and control of a single-tenant key store.

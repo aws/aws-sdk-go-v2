@@ -164,10 +164,10 @@ type ValidationExceptionReason string
 
 // Enum values for ValidationExceptionReason
 const (
-	ValidationExceptionReasonUnknown_operation       ValidationExceptionReason = "UnknownOperation"
-	ValidationExceptionReasonCannot_parse            ValidationExceptionReason = "CannotParse"
-	ValidationExceptionReasonField_validation_failed ValidationExceptionReason = "FieldValidationFailed"
-	ValidationExceptionReasonOther                   ValidationExceptionReason = "Other"
+	ValidationExceptionReasonUnknownOperation      ValidationExceptionReason = "UnknownOperation"
+	ValidationExceptionReasonCannotParse           ValidationExceptionReason = "CannotParse"
+	ValidationExceptionReasonFieldValidationFailed ValidationExceptionReason = "FieldValidationFailed"
+	ValidationExceptionReasonOther                 ValidationExceptionReason = "Other"
 )
 
 // Values returns all known values for ValidationExceptionReason. Note that this

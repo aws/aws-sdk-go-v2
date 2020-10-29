@@ -23,7 +23,7 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html). The
 // following operation is related to GetObjectTagging:
 //
-//     * PutObjectTagging
+// * PutObjectTagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectTagging.html)
 func (c *Client) GetObjectTagging(ctx context.Context, params *GetObjectTaggingInput, optFns ...func(*Options)) (*GetObjectTaggingOutput, error) {
 	if params == nil {

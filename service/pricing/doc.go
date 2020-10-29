@@ -20,8 +20,8 @@
 // Service Endpoint AWS Price List Service API provides the following two
 // endpoints:
 //
-//     * https://api.pricing.us-east-1.amazonaws.com
+// * https://api.pricing.us-east-1.amazonaws.com
 //
-//     *
+// *
 // https://api.pricing.ap-south-1.amazonaws.com
 package pricing

@@ -37,12 +37,12 @@ type DescribeLocalGatewayVirtualInterfaceGroupsInput struct {
 
 	// One or more filters.
 	//
-	//     * local-gateway-id - The ID of a local gateway.
+	// * local-gateway-id - The ID of a local gateway.
 	//
-	//     *
+	// *
 	// local-gateway-virtual-interface-id - The ID of the virtual interface.
 	//
-	//     *
+	// *
 	// local-gateway-virtual-interface-group-id - The ID of the virtual interface
 	// group.
 	Filters []*types.Filter

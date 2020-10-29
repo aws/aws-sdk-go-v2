@@ -37,27 +37,26 @@ type DescribeNatGatewaysInput struct {
 
 	// One or more filters.
 	//
-	//     * nat-gateway-id - The ID of the NAT gateway.
+	// * nat-gateway-id - The ID of the NAT gateway.
 	//
-	//     *
-	// state - The state of the NAT gateway (pending | failed | available | deleting |
+	// * state -
+	// The state of the NAT gateway (pending | failed | available | deleting |
 	// deleted).
 	//
-	//     * subnet-id - The ID of the subnet in which the NAT gateway
+	// * subnet-id - The ID of the subnet in which the NAT gateway
 	// resides.
 	//
-	//     * tag: - The key/value combination of a tag assigned to the
-	// resource. Use the tag key in the filter name and the tag value as the filter
-	// value. For example, to find all resources that have a tag with the key Owner and
-	// the value TeamA, specify tag:Owner for the filter name and TeamA for the filter
-	// value.
+	// * tag: - The key/value combination of a tag assigned to the resource.
+	// Use the tag key in the filter name and the tag value as the filter value. For
+	// example, to find all resources that have a tag with the key Owner and the value
+	// TeamA, specify tag:Owner for the filter name and TeamA for the filter value.
 	//
-	//     * tag-key - The key of a tag assigned to the resource. Use this
-	// filter to find all resources assigned a tag with a specific key, regardless of
-	// the tag value.
+	// *
+	// tag-key - The key of a tag assigned to the resource. Use this filter to find all
+	// resources assigned a tag with a specific key, regardless of the tag value.
 	//
-	//     * vpc-id - The ID of the VPC in which the NAT gateway
-	// resides.
+	// *
+	// vpc-id - The ID of the VPC in which the NAT gateway resides.
 	Filter []*types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the

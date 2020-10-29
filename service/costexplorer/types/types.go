@@ -89,35 +89,34 @@ type AnomalyMonitor struct {
 
 	// Use Expression to filter by cost or by usage. There are two patterns:
 	//
-	//     *
-	// Simple dimension values - You can set the dimension name and values for the
-	// filters that you plan to use. For example, you can filter for REGION==us-east-1
-	// OR REGION==us-west-1. For GetRightsizingRecommendation, the Region is a full
-	// name (for example, REGION==US East (N. Virginia). The Expression example looks
-	// like: { "Dimensions": { "Key": "REGION", "Values": [ "us-east-1", “us-west-1” ]
-	// } } The list of dimension values are OR'd together to retrieve cost or usage
-	// data. You can create Expression and DimensionValues objects using either with*
-	// methods or set* methods in multiple lines.
+	// * Simple
+	// dimension values - You can set the dimension name and values for the filters
+	// that you plan to use. For example, you can filter for REGION==us-east-1 OR
+	// REGION==us-west-1. For GetRightsizingRecommendation, the Region is a full name
+	// (for example, REGION==US East (N. Virginia). The Expression example looks like:
+	// { "Dimensions": { "Key": "REGION", "Values": [ "us-east-1", “us-west-1” ] } }
+	// The list of dimension values are OR'd together to retrieve cost or usage data.
+	// You can create Expression and DimensionValues objects using either with* methods
+	// or set* methods in multiple lines.
 	//
-	//     * Compound dimension values with
-	// logical operations - You can use multiple Expression types and the logical
-	// operators AND/OR/NOT to create a list of one or more Expression objects. This
-	// allows you to filter on more advanced options. For example, you can filter on
-	// ((REGION == us-east-1 OR REGION == us-west-1) OR (TAG.Type == Type1)) AND
-	// (USAGE_TYPE != DataTransfer). The Expression for that looks like this: { "And":
-	// [ {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [ "us-east-1",
-	// "us-west-1" ] }}, {"Tags": { "Key": "TagName", "Values": ["Value1"] } } ]},
-	// {"Not": {"Dimensions": { "Key": "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] }
-	// Because each Expression can have only one operator, the service returns an error
-	// if more than one is specified. The following example shows an Expression object
-	// that creates an error.  { "And": [ ... ], "DimensionValues": { "Dimension":
-	// "USAGE_TYPE", "Values": [ "DataTransfer" ] } }
+	// * Compound dimension values with logical
+	// operations - You can use multiple Expression types and the logical operators
+	// AND/OR/NOT to create a list of one or more Expression objects. This allows you
+	// to filter on more advanced options. For example, you can filter on ((REGION ==
+	// us-east-1 OR REGION == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE !=
+	// DataTransfer). The Expression for that looks like this: { "And": [ {"Or": [
+	// {"Dimensions": { "Key": "REGION", "Values": [ "us-east-1", "us-west-1" ] }},
+	// {"Tags": { "Key": "TagName", "Values": ["Value1"] } } ]}, {"Not": {"Dimensions":
+	// { "Key": "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] }  Because each
+	// Expression can have only one operator, the service returns an error if more than
+	// one is specified. The following example shows an Expression object that creates
+	// an error.  { "And": [ ... ], "DimensionValues": { "Dimension": "USAGE_TYPE",
+	// "Values": [ "DataTransfer" ] } }
 	//
-	// For GetRightsizingRecommendation
-	// action, a combination of OR and NOT is not supported. OR is not supported
-	// between different dimensions, or dimensions and tags. NOT operators aren't
-	// supported. Dimensions are also limited to LINKED_ACCOUNT, REGION, or
-	// RIGHTSIZING_TYPE.
+	// For GetRightsizingRecommendation action, a
+	// combination of OR and NOT is not supported. OR is not supported between
+	// different dimensions, or dimensions and tags. NOT operators aren't supported.
+	// Dimensions are also limited to LINKED_ACCOUNT, REGION, or RIGHTSIZING_TYPE.
 	MonitorSpecification *Expression
 }
 
@@ -601,35 +600,34 @@ type ESInstanceDetails struct {
 
 // Use Expression to filter by cost or by usage. There are two patterns:
 //
-//     *
-// Simple dimension values - You can set the dimension name and values for the
-// filters that you plan to use. For example, you can filter for REGION==us-east-1
-// OR REGION==us-west-1. For GetRightsizingRecommendation, the Region is a full
-// name (for example, REGION==US East (N. Virginia). The Expression example looks
-// like: { "Dimensions": { "Key": "REGION", "Values": [ "us-east-1", “us-west-1” ]
-// } } The list of dimension values are OR'd together to retrieve cost or usage
-// data. You can create Expression and DimensionValues objects using either with*
-// methods or set* methods in multiple lines.
+// * Simple
+// dimension values - You can set the dimension name and values for the filters
+// that you plan to use. For example, you can filter for REGION==us-east-1 OR
+// REGION==us-west-1. For GetRightsizingRecommendation, the Region is a full name
+// (for example, REGION==US East (N. Virginia). The Expression example looks like:
+// { "Dimensions": { "Key": "REGION", "Values": [ "us-east-1", “us-west-1” ] } }
+// The list of dimension values are OR'd together to retrieve cost or usage data.
+// You can create Expression and DimensionValues objects using either with* methods
+// or set* methods in multiple lines.
 //
-//     * Compound dimension values with
-// logical operations - You can use multiple Expression types and the logical
-// operators AND/OR/NOT to create a list of one or more Expression objects. This
-// allows you to filter on more advanced options. For example, you can filter on
-// ((REGION == us-east-1 OR REGION == us-west-1) OR (TAG.Type == Type1)) AND
-// (USAGE_TYPE != DataTransfer). The Expression for that looks like this: { "And":
-// [ {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [ "us-east-1",
-// "us-west-1" ] }}, {"Tags": { "Key": "TagName", "Values": ["Value1"] } } ]},
-// {"Not": {"Dimensions": { "Key": "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] }
-// Because each Expression can have only one operator, the service returns an error
-// if more than one is specified. The following example shows an Expression object
-// that creates an error.  { "And": [ ... ], "DimensionValues": { "Dimension":
-// "USAGE_TYPE", "Values": [ "DataTransfer" ] } }
+// * Compound dimension values with logical
+// operations - You can use multiple Expression types and the logical operators
+// AND/OR/NOT to create a list of one or more Expression objects. This allows you
+// to filter on more advanced options. For example, you can filter on ((REGION ==
+// us-east-1 OR REGION == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE !=
+// DataTransfer). The Expression for that looks like this: { "And": [ {"Or": [
+// {"Dimensions": { "Key": "REGION", "Values": [ "us-east-1", "us-west-1" ] }},
+// {"Tags": { "Key": "TagName", "Values": ["Value1"] } } ]}, {"Not": {"Dimensions":
+// { "Key": "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] }  Because each
+// Expression can have only one operator, the service returns an error if more than
+// one is specified. The following example shows an Expression object that creates
+// an error.  { "And": [ ... ], "DimensionValues": { "Dimension": "USAGE_TYPE",
+// "Values": [ "DataTransfer" ] } }
 //
-// For GetRightsizingRecommendation
-// action, a combination of OR and NOT is not supported. OR is not supported
-// between different dimensions, or dimensions and tags. NOT operators aren't
-// supported. Dimensions are also limited to LINKED_ACCOUNT, REGION, or
-// RIGHTSIZING_TYPE.
+// For GetRightsizingRecommendation action, a
+// combination of OR and NOT is not supported. OR is not supported between
+// different dimensions, or dimensions and tags. NOT operators aren't supported.
+// Dimensions are also limited to LINKED_ACCOUNT, REGION, or RIGHTSIZING_TYPE.
 type Expression struct {
 
 	// Return results that match both Dimension objects.

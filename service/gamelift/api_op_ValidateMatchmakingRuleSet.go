@@ -15,30 +15,30 @@ import (
 // allowed property expressions. To validate syntax, provide a rule set JSON
 // string. Learn more
 //
-//     * Build a Rule Set
+// * Build a Rule Set
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-rulesets.html)
 //
 // Related
 // operations
 //
-//     * CreateMatchmakingConfiguration
+// * CreateMatchmakingConfiguration
 //
-//     *
+// *
 // DescribeMatchmakingConfigurations
 //
-//     * UpdateMatchmakingConfiguration
+// * UpdateMatchmakingConfiguration
 //
-//     *
+// *
 // DeleteMatchmakingConfiguration
 //
-//     * CreateMatchmakingRuleSet
+// * CreateMatchmakingRuleSet
 //
-//     *
+// *
 // DescribeMatchmakingRuleSets
 //
-//     * ValidateMatchmakingRuleSet
+// * ValidateMatchmakingRuleSet
 //
-//     *
+// *
 // DeleteMatchmakingRuleSet
 func (c *Client) ValidateMatchmakingRuleSet(ctx context.Context, params *ValidateMatchmakingRuleSetInput, optFns ...func(*Options)) (*ValidateMatchmakingRuleSetOutput, error) {
 	if params == nil {

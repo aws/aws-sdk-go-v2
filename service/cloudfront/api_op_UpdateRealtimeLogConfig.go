@@ -16,13 +16,13 @@ import (
 // request. You cannot update some parameters independent of others. To update a
 // real-time log configuration:
 //
-//     * Call GetRealtimeLogConfig to get the current
+// * Call GetRealtimeLogConfig to get the current
 // real-time log configuration.
 //
-//     * Locally modify the parameters in the
-// real-time log configuration that you want to update.
+// * Locally modify the parameters in the real-time
+// log configuration that you want to update.
 //
-//     * Call this API
+// * Call this API
 // (UpdateRealtimeLogConfig) by providing the entire real-time log configuration,
 // including the parameters that you modified and those that you didn’t.
 //

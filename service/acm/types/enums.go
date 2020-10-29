@@ -6,13 +6,13 @@ type CertificateStatus string
 
 // Enum values for CertificateStatus
 const (
-	CertificateStatusPending_validation   CertificateStatus = "PENDING_VALIDATION"
-	CertificateStatusIssued               CertificateStatus = "ISSUED"
-	CertificateStatusInactive             CertificateStatus = "INACTIVE"
-	CertificateStatusExpired              CertificateStatus = "EXPIRED"
-	CertificateStatusValidation_timed_out CertificateStatus = "VALIDATION_TIMED_OUT"
-	CertificateStatusRevoked              CertificateStatus = "REVOKED"
-	CertificateStatusFailed               CertificateStatus = "FAILED"
+	CertificateStatusPendingValidation  CertificateStatus = "PENDING_VALIDATION"
+	CertificateStatusIssued             CertificateStatus = "ISSUED"
+	CertificateStatusInactive           CertificateStatus = "INACTIVE"
+	CertificateStatusExpired            CertificateStatus = "EXPIRED"
+	CertificateStatusValidationTimedOut CertificateStatus = "VALIDATION_TIMED_OUT"
+	CertificateStatusRevoked            CertificateStatus = "REVOKED"
+	CertificateStatusFailed             CertificateStatus = "FAILED"
 )
 
 // Values returns all known values for CertificateStatus. Note that this can be
@@ -53,9 +53,9 @@ type CertificateType string
 
 // Enum values for CertificateType
 const (
-	CertificateTypeImported      CertificateType = "IMPORTED"
-	CertificateTypeAmazon_issued CertificateType = "AMAZON_ISSUED"
-	CertificateTypePrivate       CertificateType = "PRIVATE"
+	CertificateTypeImported     CertificateType = "IMPORTED"
+	CertificateTypeAmazonIssued CertificateType = "AMAZON_ISSUED"
+	CertificateTypePrivate      CertificateType = "PRIVATE"
 )
 
 // Values returns all known values for CertificateType. Note that this can be
@@ -73,9 +73,9 @@ type DomainStatus string
 
 // Enum values for DomainStatus
 const (
-	DomainStatusPending_validation DomainStatus = "PENDING_VALIDATION"
-	DomainStatusSuccess            DomainStatus = "SUCCESS"
-	DomainStatusFailed             DomainStatus = "FAILED"
+	DomainStatusPendingValidation DomainStatus = "PENDING_VALIDATION"
+	DomainStatusSuccess           DomainStatus = "SUCCESS"
+	DomainStatusFailed            DomainStatus = "FAILED"
 )
 
 // Values returns all known values for DomainStatus. Note that this can be expanded
@@ -93,18 +93,18 @@ type ExtendedKeyUsageName string
 
 // Enum values for ExtendedKeyUsageName
 const (
-	ExtendedKeyUsageNameTls_web_server_authentication ExtendedKeyUsageName = "TLS_WEB_SERVER_AUTHENTICATION"
-	ExtendedKeyUsageNameTls_web_client_authentication ExtendedKeyUsageName = "TLS_WEB_CLIENT_AUTHENTICATION"
-	ExtendedKeyUsageNameCode_signing                  ExtendedKeyUsageName = "CODE_SIGNING"
-	ExtendedKeyUsageNameEmail_protection              ExtendedKeyUsageName = "EMAIL_PROTECTION"
-	ExtendedKeyUsageNameTime_stamping                 ExtendedKeyUsageName = "TIME_STAMPING"
-	ExtendedKeyUsageNameOcsp_signing                  ExtendedKeyUsageName = "OCSP_SIGNING"
-	ExtendedKeyUsageNameIpsec_end_system              ExtendedKeyUsageName = "IPSEC_END_SYSTEM"
-	ExtendedKeyUsageNameIpsec_tunnel                  ExtendedKeyUsageName = "IPSEC_TUNNEL"
-	ExtendedKeyUsageNameIpsec_user                    ExtendedKeyUsageName = "IPSEC_USER"
-	ExtendedKeyUsageNameAny                           ExtendedKeyUsageName = "ANY"
-	ExtendedKeyUsageNameNone                          ExtendedKeyUsageName = "NONE"
-	ExtendedKeyUsageNameCustom                        ExtendedKeyUsageName = "CUSTOM"
+	ExtendedKeyUsageNameTlsWebServerAuthentication ExtendedKeyUsageName = "TLS_WEB_SERVER_AUTHENTICATION"
+	ExtendedKeyUsageNameTlsWebClientAuthentication ExtendedKeyUsageName = "TLS_WEB_CLIENT_AUTHENTICATION"
+	ExtendedKeyUsageNameCodeSigning                ExtendedKeyUsageName = "CODE_SIGNING"
+	ExtendedKeyUsageNameEmailProtection            ExtendedKeyUsageName = "EMAIL_PROTECTION"
+	ExtendedKeyUsageNameTimeStamping               ExtendedKeyUsageName = "TIME_STAMPING"
+	ExtendedKeyUsageNameOcspSigning                ExtendedKeyUsageName = "OCSP_SIGNING"
+	ExtendedKeyUsageNameIpsecEndSystem             ExtendedKeyUsageName = "IPSEC_END_SYSTEM"
+	ExtendedKeyUsageNameIpsecTunnel                ExtendedKeyUsageName = "IPSEC_TUNNEL"
+	ExtendedKeyUsageNameIpsecUser                  ExtendedKeyUsageName = "IPSEC_USER"
+	ExtendedKeyUsageNameAny                        ExtendedKeyUsageName = "ANY"
+	ExtendedKeyUsageNameNone                       ExtendedKeyUsageName = "NONE"
+	ExtendedKeyUsageNameCustom                     ExtendedKeyUsageName = "CUSTOM"
 )
 
 // Values returns all known values for ExtendedKeyUsageName. Note that this can be
@@ -131,23 +131,23 @@ type FailureReason string
 
 // Enum values for FailureReason
 const (
-	FailureReasonNo_available_contacts            FailureReason = "NO_AVAILABLE_CONTACTS"
-	FailureReasonAdditional_verification_required FailureReason = "ADDITIONAL_VERIFICATION_REQUIRED"
-	FailureReasonDomain_not_allowed               FailureReason = "DOMAIN_NOT_ALLOWED"
-	FailureReasonInvalid_public_domain            FailureReason = "INVALID_PUBLIC_DOMAIN"
-	FailureReasonDomain_validation_denied         FailureReason = "DOMAIN_VALIDATION_DENIED"
-	FailureReasonCaa_error                        FailureReason = "CAA_ERROR"
-	FailureReasonPca_limit_exceeded               FailureReason = "PCA_LIMIT_EXCEEDED"
-	FailureReasonPca_invalid_arn                  FailureReason = "PCA_INVALID_ARN"
-	FailureReasonPca_invalid_state                FailureReason = "PCA_INVALID_STATE"
-	FailureReasonPca_request_failed               FailureReason = "PCA_REQUEST_FAILED"
-	FailureReasonPca_name_constraints_validation  FailureReason = "PCA_NAME_CONSTRAINTS_VALIDATION"
-	FailureReasonPca_resource_not_found           FailureReason = "PCA_RESOURCE_NOT_FOUND"
-	FailureReasonPca_invalid_args                 FailureReason = "PCA_INVALID_ARGS"
-	FailureReasonPca_invalid_duration             FailureReason = "PCA_INVALID_DURATION"
-	FailureReasonPca_access_denied                FailureReason = "PCA_ACCESS_DENIED"
-	FailureReasonSlr_not_found                    FailureReason = "SLR_NOT_FOUND"
-	FailureReasonOther                            FailureReason = "OTHER"
+	FailureReasonNoAvailableContacts            FailureReason = "NO_AVAILABLE_CONTACTS"
+	FailureReasonAdditionalVerificationRequired FailureReason = "ADDITIONAL_VERIFICATION_REQUIRED"
+	FailureReasonDomainNotAllowed               FailureReason = "DOMAIN_NOT_ALLOWED"
+	FailureReasonInvalidPublicDomain            FailureReason = "INVALID_PUBLIC_DOMAIN"
+	FailureReasonDomainValidationDenied         FailureReason = "DOMAIN_VALIDATION_DENIED"
+	FailureReasonCaaError                       FailureReason = "CAA_ERROR"
+	FailureReasonPcaLimitExceeded               FailureReason = "PCA_LIMIT_EXCEEDED"
+	FailureReasonPcaInvalidArn                  FailureReason = "PCA_INVALID_ARN"
+	FailureReasonPcaInvalidState                FailureReason = "PCA_INVALID_STATE"
+	FailureReasonPcaRequestFailed               FailureReason = "PCA_REQUEST_FAILED"
+	FailureReasonPcaNameConstraintsValidation   FailureReason = "PCA_NAME_CONSTRAINTS_VALIDATION"
+	FailureReasonPcaResourceNotFound            FailureReason = "PCA_RESOURCE_NOT_FOUND"
+	FailureReasonPcaInvalidArgs                 FailureReason = "PCA_INVALID_ARGS"
+	FailureReasonPcaInvalidDuration             FailureReason = "PCA_INVALID_DURATION"
+	FailureReasonPcaAccessDenied                FailureReason = "PCA_ACCESS_DENIED"
+	FailureReasonSlrNotFound                    FailureReason = "SLR_NOT_FOUND"
+	FailureReasonOther                          FailureReason = "OTHER"
 )
 
 // Values returns all known values for FailureReason. Note that this can be
@@ -179,12 +179,12 @@ type KeyAlgorithm string
 
 // Enum values for KeyAlgorithm
 const (
-	KeyAlgorithmRsa_2048      KeyAlgorithm = "RSA_2048"
-	KeyAlgorithmRsa_1024      KeyAlgorithm = "RSA_1024"
-	KeyAlgorithmRsa_4096      KeyAlgorithm = "RSA_4096"
-	KeyAlgorithmEc_prime256v1 KeyAlgorithm = "EC_prime256v1"
-	KeyAlgorithmEc_secp384r1  KeyAlgorithm = "EC_secp384r1"
-	KeyAlgorithmEc_secp521r1  KeyAlgorithm = "EC_secp521r1"
+	KeyAlgorithmRsa2048      KeyAlgorithm = "RSA_2048"
+	KeyAlgorithmRsa1024      KeyAlgorithm = "RSA_1024"
+	KeyAlgorithmRsa4096      KeyAlgorithm = "RSA_4096"
+	KeyAlgorithmEcPrime256v1 KeyAlgorithm = "EC_prime256v1"
+	KeyAlgorithmEcSecp384r1  KeyAlgorithm = "EC_secp384r1"
+	KeyAlgorithmEcSecp521r1  KeyAlgorithm = "EC_secp521r1"
 )
 
 // Values returns all known values for KeyAlgorithm. Note that this can be expanded
@@ -205,17 +205,17 @@ type KeyUsageName string
 
 // Enum values for KeyUsageName
 const (
-	KeyUsageNameDigital_signature   KeyUsageName = "DIGITAL_SIGNATURE"
-	KeyUsageNameNon_repudation      KeyUsageName = "NON_REPUDIATION"
-	KeyUsageNameKey_encipherment    KeyUsageName = "KEY_ENCIPHERMENT"
-	KeyUsageNameData_encipherment   KeyUsageName = "DATA_ENCIPHERMENT"
-	KeyUsageNameKey_agreement       KeyUsageName = "KEY_AGREEMENT"
-	KeyUsageNameCertificate_signing KeyUsageName = "CERTIFICATE_SIGNING"
-	KeyUsageNameCrl_signing         KeyUsageName = "CRL_SIGNING"
-	KeyUsageNameEnchiper_only       KeyUsageName = "ENCIPHER_ONLY"
-	KeyUsageNameDecipher_only       KeyUsageName = "DECIPHER_ONLY"
-	KeyUsageNameAny                 KeyUsageName = "ANY"
-	KeyUsageNameCustom              KeyUsageName = "CUSTOM"
+	KeyUsageNameDigitalSignature   KeyUsageName = "DIGITAL_SIGNATURE"
+	KeyUsageNameNonRepudation      KeyUsageName = "NON_REPUDIATION"
+	KeyUsageNameKeyEncipherment    KeyUsageName = "KEY_ENCIPHERMENT"
+	KeyUsageNameDataEncipherment   KeyUsageName = "DATA_ENCIPHERMENT"
+	KeyUsageNameKeyAgreement       KeyUsageName = "KEY_AGREEMENT"
+	KeyUsageNameCertificateSigning KeyUsageName = "CERTIFICATE_SIGNING"
+	KeyUsageNameCrlSigning         KeyUsageName = "CRL_SIGNING"
+	KeyUsageNameEnchiperOnly       KeyUsageName = "ENCIPHER_ONLY"
+	KeyUsageNameDecipherOnly       KeyUsageName = "DECIPHER_ONLY"
+	KeyUsageNameAny                KeyUsageName = "ANY"
+	KeyUsageNameCustom             KeyUsageName = "CUSTOM"
 )
 
 // Values returns all known values for KeyUsageName. Note that this can be expanded
@@ -275,10 +275,10 @@ type RenewalStatus string
 
 // Enum values for RenewalStatus
 const (
-	RenewalStatusPending_auto_renewal RenewalStatus = "PENDING_AUTO_RENEWAL"
-	RenewalStatusPending_validation   RenewalStatus = "PENDING_VALIDATION"
-	RenewalStatusSuccess              RenewalStatus = "SUCCESS"
-	RenewalStatusFailed               RenewalStatus = "FAILED"
+	RenewalStatusPendingAutoRenewal RenewalStatus = "PENDING_AUTO_RENEWAL"
+	RenewalStatusPendingValidation  RenewalStatus = "PENDING_VALIDATION"
+	RenewalStatusSuccess            RenewalStatus = "SUCCESS"
+	RenewalStatusFailed             RenewalStatus = "FAILED"
 )
 
 // Values returns all known values for RenewalStatus. Note that this can be
@@ -297,16 +297,16 @@ type RevocationReason string
 
 // Enum values for RevocationReason
 const (
-	RevocationReasonUnspecified            RevocationReason = "UNSPECIFIED"
-	RevocationReasonKey_compromise         RevocationReason = "KEY_COMPROMISE"
-	RevocationReasonCa_compromise          RevocationReason = "CA_COMPROMISE"
-	RevocationReasonAffiliation_changed    RevocationReason = "AFFILIATION_CHANGED"
-	RevocationReasonSuperceded             RevocationReason = "SUPERCEDED"
-	RevocationReasonCessation_of_operation RevocationReason = "CESSATION_OF_OPERATION"
-	RevocationReasonCertificate_hold       RevocationReason = "CERTIFICATE_HOLD"
-	RevocationReasonRemove_from_crl        RevocationReason = "REMOVE_FROM_CRL"
-	RevocationReasonPrivilege_withdrawn    RevocationReason = "PRIVILEGE_WITHDRAWN"
-	RevocationReasonA_a_compromise         RevocationReason = "A_A_COMPROMISE"
+	RevocationReasonUnspecified          RevocationReason = "UNSPECIFIED"
+	RevocationReasonKeyCompromise        RevocationReason = "KEY_COMPROMISE"
+	RevocationReasonCaCompromise         RevocationReason = "CA_COMPROMISE"
+	RevocationReasonAffiliationChanged   RevocationReason = "AFFILIATION_CHANGED"
+	RevocationReasonSuperceded           RevocationReason = "SUPERCEDED"
+	RevocationReasonCessationOfOperation RevocationReason = "CESSATION_OF_OPERATION"
+	RevocationReasonCertificateHold      RevocationReason = "CERTIFICATE_HOLD"
+	RevocationReasonRemoveFromCrl        RevocationReason = "REMOVE_FROM_CRL"
+	RevocationReasonPrivilegeWithdrawn   RevocationReason = "PRIVILEGE_WITHDRAWN"
+	RevocationReasonAACompromise         RevocationReason = "A_A_COMPROMISE"
 )
 
 // Values returns all known values for RevocationReason. Note that this can be

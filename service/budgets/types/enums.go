@@ -6,16 +6,16 @@ type ActionStatus string
 
 // Enum values for ActionStatus
 const (
-	ActionStatusStandby               ActionStatus = "STANDBY"
-	ActionStatusPending               ActionStatus = "PENDING"
-	ActionStatusExecution_in_progress ActionStatus = "EXECUTION_IN_PROGRESS"
-	ActionStatusExecution_success     ActionStatus = "EXECUTION_SUCCESS"
-	ActionStatusExecution_failure     ActionStatus = "EXECUTION_FAILURE"
-	ActionStatusReverse_in_progress   ActionStatus = "REVERSE_IN_PROGRESS"
-	ActionStatusReverse_success       ActionStatus = "REVERSE_SUCCESS"
-	ActionStatusReverse_failure       ActionStatus = "REVERSE_FAILURE"
-	ActionStatusReset_in_progress     ActionStatus = "RESET_IN_PROGRESS"
-	ActionStatusReset_failure         ActionStatus = "RESET_FAILURE"
+	ActionStatusStandby             ActionStatus = "STANDBY"
+	ActionStatusPending             ActionStatus = "PENDING"
+	ActionStatusExecutionInProgress ActionStatus = "EXECUTION_IN_PROGRESS"
+	ActionStatusExecutionSuccess    ActionStatus = "EXECUTION_SUCCESS"
+	ActionStatusExecutionFailure    ActionStatus = "EXECUTION_FAILURE"
+	ActionStatusReverseInProgress   ActionStatus = "REVERSE_IN_PROGRESS"
+	ActionStatusReverseSuccess      ActionStatus = "REVERSE_SUCCESS"
+	ActionStatusReverseFailure      ActionStatus = "REVERSE_FAILURE"
+	ActionStatusResetInProgress     ActionStatus = "RESET_IN_PROGRESS"
+	ActionStatusResetFailure        ActionStatus = "RESET_FAILURE"
 )
 
 // Values returns all known values for ActionStatus. Note that this can be expanded
@@ -40,8 +40,8 @@ type ActionSubType string
 
 // Enum values for ActionSubType
 const (
-	ActionSubTypeStop_ec2 ActionSubType = "STOP_EC2_INSTANCES"
-	ActionSubTypeStop_rds ActionSubType = "STOP_RDS_INSTANCES"
+	ActionSubTypeStopEc2 ActionSubType = "STOP_EC2_INSTANCES"
+	ActionSubTypeStopRds ActionSubType = "STOP_RDS_INSTANCES"
 )
 
 // Values returns all known values for ActionSubType. Note that this can be
@@ -122,9 +122,9 @@ type ComparisonOperator string
 
 // Enum values for ComparisonOperator
 const (
-	ComparisonOperatorGreater_than ComparisonOperator = "GREATER_THAN"
-	ComparisonOperatorLess_than    ComparisonOperator = "LESS_THAN"
-	ComparisonOperatorEqual_to     ComparisonOperator = "EQUAL_TO"
+	ComparisonOperatorGreaterThan ComparisonOperator = "GREATER_THAN"
+	ComparisonOperatorLessThan    ComparisonOperator = "LESS_THAN"
+	ComparisonOperatorEqualTo     ComparisonOperator = "EQUAL_TO"
 )
 
 // Values returns all known values for ComparisonOperator. Note that this can be
@@ -242,8 +242,8 @@ type ThresholdType string
 
 // Enum values for ThresholdType
 const (
-	ThresholdTypePercentage     ThresholdType = "PERCENTAGE"
-	ThresholdTypeAbsolute_value ThresholdType = "ABSOLUTE_VALUE"
+	ThresholdTypePercentage    ThresholdType = "PERCENTAGE"
+	ThresholdTypeAbsoluteValue ThresholdType = "ABSOLUTE_VALUE"
 )
 
 // Values returns all known values for ThresholdType. Note that this can be

@@ -26,9 +26,9 @@ type AutoRollbackEvent string
 
 // Enum values for AutoRollbackEvent
 const (
-	AutoRollbackEventDeployment_failure         AutoRollbackEvent = "DEPLOYMENT_FAILURE"
-	AutoRollbackEventDeployment_stop_on_alarm   AutoRollbackEvent = "DEPLOYMENT_STOP_ON_ALARM"
-	AutoRollbackEventDeployment_stop_on_request AutoRollbackEvent = "DEPLOYMENT_STOP_ON_REQUEST"
+	AutoRollbackEventDeploymentFailure       AutoRollbackEvent = "DEPLOYMENT_FAILURE"
+	AutoRollbackEventDeploymentStopOnAlarm   AutoRollbackEvent = "DEPLOYMENT_STOP_ON_ALARM"
+	AutoRollbackEventDeploymentStopOnRequest AutoRollbackEvent = "DEPLOYMENT_STOP_ON_REQUEST"
 )
 
 // Values returns all known values for AutoRollbackEvent. Note that this can be
@@ -116,8 +116,8 @@ type DeploymentOption string
 
 // Enum values for DeploymentOption
 const (
-	DeploymentOptionWith_traffic_control    DeploymentOption = "WITH_TRAFFIC_CONTROL"
-	DeploymentOptionWithout_traffic_control DeploymentOption = "WITHOUT_TRAFFIC_CONTROL"
+	DeploymentOptionWithTrafficControl    DeploymentOption = "WITH_TRAFFIC_CONTROL"
+	DeploymentOptionWithoutTrafficControl DeploymentOption = "WITHOUT_TRAFFIC_CONTROL"
 )
 
 // Values returns all known values for DeploymentOption. Note that this can be
@@ -134,8 +134,8 @@ type DeploymentReadyAction string
 
 // Enum values for DeploymentReadyAction
 const (
-	DeploymentReadyActionContinue_deployment DeploymentReadyAction = "CONTINUE_DEPLOYMENT"
-	DeploymentReadyActionStop_deployment     DeploymentReadyAction = "STOP_DEPLOYMENT"
+	DeploymentReadyActionContinueDeployment DeploymentReadyAction = "CONTINUE_DEPLOYMENT"
+	DeploymentReadyActionStopDeployment     DeploymentReadyAction = "STOP_DEPLOYMENT"
 )
 
 // Values returns all known values for DeploymentReadyAction. Note that this can be
@@ -152,14 +152,14 @@ type DeploymentStatus string
 
 // Enum values for DeploymentStatus
 const (
-	DeploymentStatusCreated     DeploymentStatus = "Created"
-	DeploymentStatusQueued      DeploymentStatus = "Queued"
-	DeploymentStatusIn_progress DeploymentStatus = "InProgress"
-	DeploymentStatusBaking      DeploymentStatus = "Baking"
-	DeploymentStatusSucceeded   DeploymentStatus = "Succeeded"
-	DeploymentStatusFailed      DeploymentStatus = "Failed"
-	DeploymentStatusStopped     DeploymentStatus = "Stopped"
-	DeploymentStatusReady       DeploymentStatus = "Ready"
+	DeploymentStatusCreated    DeploymentStatus = "Created"
+	DeploymentStatusQueued     DeploymentStatus = "Queued"
+	DeploymentStatusInProgress DeploymentStatus = "InProgress"
+	DeploymentStatusBaking     DeploymentStatus = "Baking"
+	DeploymentStatusSucceeded  DeploymentStatus = "Succeeded"
+	DeploymentStatusFailed     DeploymentStatus = "Failed"
+	DeploymentStatusStopped    DeploymentStatus = "Stopped"
+	DeploymentStatusReady      DeploymentStatus = "Ready"
 )
 
 // Values returns all known values for DeploymentStatus. Note that this can be
@@ -182,10 +182,10 @@ type DeploymentTargetType string
 
 // Enum values for DeploymentTargetType
 const (
-	DeploymentTargetTypeInstance_target       DeploymentTargetType = "InstanceTarget"
-	DeploymentTargetTypeLambda_target         DeploymentTargetType = "LambdaTarget"
-	DeploymentTargetTypeEcs_target            DeploymentTargetType = "ECSTarget"
-	DeploymentTargetTypeCloudformation_target DeploymentTargetType = "CloudFormationTarget"
+	DeploymentTargetTypeInstanceTarget       DeploymentTargetType = "InstanceTarget"
+	DeploymentTargetTypeLambdaTarget         DeploymentTargetType = "LambdaTarget"
+	DeploymentTargetTypeEcsTarget            DeploymentTargetType = "ECSTarget"
+	DeploymentTargetTypeCloudformationTarget DeploymentTargetType = "CloudFormationTarget"
 )
 
 // Values returns all known values for DeploymentTargetType. Note that this can be
@@ -204,8 +204,8 @@ type DeploymentType string
 
 // Enum values for DeploymentType
 const (
-	DeploymentTypeIn_place   DeploymentType = "IN_PLACE"
-	DeploymentTypeBlue_green DeploymentType = "BLUE_GREEN"
+	DeploymentTypeInPlace   DeploymentType = "IN_PLACE"
+	DeploymentTypeBlueGreen DeploymentType = "BLUE_GREEN"
 )
 
 // Values returns all known values for DeploymentType. Note that this can be
@@ -222,8 +222,8 @@ type DeploymentWaitType string
 
 // Enum values for DeploymentWaitType
 const (
-	DeploymentWaitTypeReady_wait       DeploymentWaitType = "READY_WAIT"
-	DeploymentWaitTypeTermination_wait DeploymentWaitType = "TERMINATION_WAIT"
+	DeploymentWaitTypeReadyWait       DeploymentWaitType = "READY_WAIT"
+	DeploymentWaitTypeTerminationWait DeploymentWaitType = "TERMINATION_WAIT"
 )
 
 // Values returns all known values for DeploymentWaitType. Note that this can be
@@ -240,9 +240,9 @@ type EC2TagFilterType string
 
 // Enum values for EC2TagFilterType
 const (
-	EC2TagFilterTypeKey_only      EC2TagFilterType = "KEY_ONLY"
-	EC2TagFilterTypeValue_only    EC2TagFilterType = "VALUE_ONLY"
-	EC2TagFilterTypeKey_and_value EC2TagFilterType = "KEY_AND_VALUE"
+	EC2TagFilterTypeKeyOnly     EC2TagFilterType = "KEY_ONLY"
+	EC2TagFilterTypeValueOnly   EC2TagFilterType = "VALUE_ONLY"
+	EC2TagFilterTypeKeyAndValue EC2TagFilterType = "KEY_AND_VALUE"
 )
 
 // Values returns all known values for EC2TagFilterType. Note that this can be
@@ -260,40 +260,40 @@ type ErrorCode string
 
 // Enum values for ErrorCode
 const (
-	ErrorCodeAgent_issue                                 ErrorCode = "AGENT_ISSUE"
-	ErrorCodeAlarm_active                                ErrorCode = "ALARM_ACTIVE"
-	ErrorCodeApplication_missing                         ErrorCode = "APPLICATION_MISSING"
-	ErrorCodeAutoscaling_validation_error                ErrorCode = "AUTOSCALING_VALIDATION_ERROR"
-	ErrorCodeAuto_scaling_configuration                  ErrorCode = "AUTO_SCALING_CONFIGURATION"
-	ErrorCodeAuto_scaling_iam_role_permissions           ErrorCode = "AUTO_SCALING_IAM_ROLE_PERMISSIONS"
-	ErrorCodeCodedeploy_resource_cannot_be_found         ErrorCode = "CODEDEPLOY_RESOURCE_CANNOT_BE_FOUND"
-	ErrorCodeCustomer_application_unhealthy              ErrorCode = "CUSTOMER_APPLICATION_UNHEALTHY"
-	ErrorCodeDeployment_group_missing                    ErrorCode = "DEPLOYMENT_GROUP_MISSING"
-	ErrorCodeEcs_update_error                            ErrorCode = "ECS_UPDATE_ERROR"
-	ErrorCodeElastic_load_balancing_invalid              ErrorCode = "ELASTIC_LOAD_BALANCING_INVALID"
-	ErrorCodeElb_invalid_instance                        ErrorCode = "ELB_INVALID_INSTANCE"
-	ErrorCodeHealth_constraints                          ErrorCode = "HEALTH_CONSTRAINTS"
-	ErrorCodeHealth_constraints_invalid                  ErrorCode = "HEALTH_CONSTRAINTS_INVALID"
-	ErrorCodeHook_execution_failure                      ErrorCode = "HOOK_EXECUTION_FAILURE"
-	ErrorCodeIam_role_missing                            ErrorCode = "IAM_ROLE_MISSING"
-	ErrorCodeIam_role_permissions                        ErrorCode = "IAM_ROLE_PERMISSIONS"
-	ErrorCodeInternal_error                              ErrorCode = "INTERNAL_ERROR"
-	ErrorCodeInvalid_ecs_service                         ErrorCode = "INVALID_ECS_SERVICE"
-	ErrorCodeInvalid_lambda_configuration                ErrorCode = "INVALID_LAMBDA_CONFIGURATION"
-	ErrorCodeInvalid_lambda_function                     ErrorCode = "INVALID_LAMBDA_FUNCTION"
-	ErrorCodeInvalid_revision                            ErrorCode = "INVALID_REVISION"
-	ErrorCodeManual_stop                                 ErrorCode = "MANUAL_STOP"
-	ErrorCodeMissing_blue_green_deployment_configuration ErrorCode = "MISSING_BLUE_GREEN_DEPLOYMENT_CONFIGURATION"
-	ErrorCodeMissing_elb_information                     ErrorCode = "MISSING_ELB_INFORMATION"
-	ErrorCodeMissing_github_token                        ErrorCode = "MISSING_GITHUB_TOKEN"
-	ErrorCodeNo_ec2_subscription                         ErrorCode = "NO_EC2_SUBSCRIPTION"
-	ErrorCodeNo_instances                                ErrorCode = "NO_INSTANCES"
-	ErrorCodeOver_max_instances                          ErrorCode = "OVER_MAX_INSTANCES"
-	ErrorCodeResource_limit_exceeded                     ErrorCode = "RESOURCE_LIMIT_EXCEEDED"
-	ErrorCodeRevision_missing                            ErrorCode = "REVISION_MISSING"
-	ErrorCodeThrottled                                   ErrorCode = "THROTTLED"
-	ErrorCodeTimeout                                     ErrorCode = "TIMEOUT"
-	ErrorCodeCloudformation_stack_failure                ErrorCode = "CLOUDFORMATION_STACK_FAILURE"
+	ErrorCodeAgentIssue                              ErrorCode = "AGENT_ISSUE"
+	ErrorCodeAlarmActive                             ErrorCode = "ALARM_ACTIVE"
+	ErrorCodeApplicationMissing                      ErrorCode = "APPLICATION_MISSING"
+	ErrorCodeAutoscalingValidationError              ErrorCode = "AUTOSCALING_VALIDATION_ERROR"
+	ErrorCodeAutoScalingConfiguration                ErrorCode = "AUTO_SCALING_CONFIGURATION"
+	ErrorCodeAutoScalingIamRolePermissions           ErrorCode = "AUTO_SCALING_IAM_ROLE_PERMISSIONS"
+	ErrorCodeCodedeployResourceCannotBeFound         ErrorCode = "CODEDEPLOY_RESOURCE_CANNOT_BE_FOUND"
+	ErrorCodeCustomerApplicationUnhealthy            ErrorCode = "CUSTOMER_APPLICATION_UNHEALTHY"
+	ErrorCodeDeploymentGroupMissing                  ErrorCode = "DEPLOYMENT_GROUP_MISSING"
+	ErrorCodeEcsUpdateError                          ErrorCode = "ECS_UPDATE_ERROR"
+	ErrorCodeElasticLoadBalancingInvalid             ErrorCode = "ELASTIC_LOAD_BALANCING_INVALID"
+	ErrorCodeElbInvalidInstance                      ErrorCode = "ELB_INVALID_INSTANCE"
+	ErrorCodeHealthConstraints                       ErrorCode = "HEALTH_CONSTRAINTS"
+	ErrorCodeHealthConstraintsInvalid                ErrorCode = "HEALTH_CONSTRAINTS_INVALID"
+	ErrorCodeHookExecutionFailure                    ErrorCode = "HOOK_EXECUTION_FAILURE"
+	ErrorCodeIamRoleMissing                          ErrorCode = "IAM_ROLE_MISSING"
+	ErrorCodeIamRolePermissions                      ErrorCode = "IAM_ROLE_PERMISSIONS"
+	ErrorCodeInternalError                           ErrorCode = "INTERNAL_ERROR"
+	ErrorCodeInvalidEcsService                       ErrorCode = "INVALID_ECS_SERVICE"
+	ErrorCodeInvalidLambdaConfiguration              ErrorCode = "INVALID_LAMBDA_CONFIGURATION"
+	ErrorCodeInvalidLambdaFunction                   ErrorCode = "INVALID_LAMBDA_FUNCTION"
+	ErrorCodeInvalidRevision                         ErrorCode = "INVALID_REVISION"
+	ErrorCodeManualStop                              ErrorCode = "MANUAL_STOP"
+	ErrorCodeMissingBlueGreenDeploymentConfiguration ErrorCode = "MISSING_BLUE_GREEN_DEPLOYMENT_CONFIGURATION"
+	ErrorCodeMissingElbInformation                   ErrorCode = "MISSING_ELB_INFORMATION"
+	ErrorCodeMissingGithubToken                      ErrorCode = "MISSING_GITHUB_TOKEN"
+	ErrorCodeNoEc2Subscription                       ErrorCode = "NO_EC2_SUBSCRIPTION"
+	ErrorCodeNoInstances                             ErrorCode = "NO_INSTANCES"
+	ErrorCodeOverMaxInstances                        ErrorCode = "OVER_MAX_INSTANCES"
+	ErrorCodeResourceLimitExceeded                   ErrorCode = "RESOURCE_LIMIT_EXCEEDED"
+	ErrorCodeRevisionMissing                         ErrorCode = "REVISION_MISSING"
+	ErrorCodeThrottled                               ErrorCode = "THROTTLED"
+	ErrorCodeTimeout                                 ErrorCode = "TIMEOUT"
+	ErrorCodeCloudformationStackFailure              ErrorCode = "CLOUDFORMATION_STACK_FAILURE"
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded in
@@ -362,8 +362,8 @@ type GreenFleetProvisioningAction string
 
 // Enum values for GreenFleetProvisioningAction
 const (
-	GreenFleetProvisioningActionDiscover_existing       GreenFleetProvisioningAction = "DISCOVER_EXISTING"
-	GreenFleetProvisioningActionCopy_auto_scaling_group GreenFleetProvisioningAction = "COPY_AUTO_SCALING_GROUP"
+	GreenFleetProvisioningActionDiscoverExisting     GreenFleetProvisioningAction = "DISCOVER_EXISTING"
+	GreenFleetProvisioningActionCopyAutoScalingGroup GreenFleetProvisioningAction = "COPY_AUTO_SCALING_GROUP"
 )
 
 // Values returns all known values for GreenFleetProvisioningAction. Note that this
@@ -380,8 +380,8 @@ type InstanceAction string
 
 // Enum values for InstanceAction
 const (
-	InstanceActionTerminate  InstanceAction = "TERMINATE"
-	InstanceActionKeep_alive InstanceAction = "KEEP_ALIVE"
+	InstanceActionTerminate InstanceAction = "TERMINATE"
+	InstanceActionKeepAlive InstanceAction = "KEEP_ALIVE"
 )
 
 // Values returns all known values for InstanceAction. Note that this can be
@@ -398,13 +398,13 @@ type InstanceStatus string
 
 // Enum values for InstanceStatus
 const (
-	InstanceStatusPending     InstanceStatus = "Pending"
-	InstanceStatusIn_progress InstanceStatus = "InProgress"
-	InstanceStatusSucceeded   InstanceStatus = "Succeeded"
-	InstanceStatusFailed      InstanceStatus = "Failed"
-	InstanceStatusSkipped     InstanceStatus = "Skipped"
-	InstanceStatusUnknown     InstanceStatus = "Unknown"
-	InstanceStatusReady       InstanceStatus = "Ready"
+	InstanceStatusPending    InstanceStatus = "Pending"
+	InstanceStatusInProgress InstanceStatus = "InProgress"
+	InstanceStatusSucceeded  InstanceStatus = "Succeeded"
+	InstanceStatusFailed     InstanceStatus = "Failed"
+	InstanceStatusSkipped    InstanceStatus = "Skipped"
+	InstanceStatusUnknown    InstanceStatus = "Unknown"
+	InstanceStatusReady      InstanceStatus = "Ready"
 )
 
 // Values returns all known values for InstanceStatus. Note that this can be
@@ -444,12 +444,12 @@ type LifecycleErrorCode string
 
 // Enum values for LifecycleErrorCode
 const (
-	LifecycleErrorCodeSuccess               LifecycleErrorCode = "Success"
-	LifecycleErrorCodeScript_missing        LifecycleErrorCode = "ScriptMissing"
-	LifecycleErrorCodeScript_not_executable LifecycleErrorCode = "ScriptNotExecutable"
-	LifecycleErrorCodeScript_timed_out      LifecycleErrorCode = "ScriptTimedOut"
-	LifecycleErrorCodeScript_failed         LifecycleErrorCode = "ScriptFailed"
-	LifecycleErrorCodeUnknown_error         LifecycleErrorCode = "UnknownError"
+	LifecycleErrorCodeSuccess             LifecycleErrorCode = "Success"
+	LifecycleErrorCodeScriptMissing       LifecycleErrorCode = "ScriptMissing"
+	LifecycleErrorCodeScriptNotExecutable LifecycleErrorCode = "ScriptNotExecutable"
+	LifecycleErrorCodeScriptTimedOut      LifecycleErrorCode = "ScriptTimedOut"
+	LifecycleErrorCodeScriptFailed        LifecycleErrorCode = "ScriptFailed"
+	LifecycleErrorCodeUnknownError        LifecycleErrorCode = "UnknownError"
 )
 
 // Values returns all known values for LifecycleErrorCode. Note that this can be
@@ -470,12 +470,12 @@ type LifecycleEventStatus string
 
 // Enum values for LifecycleEventStatus
 const (
-	LifecycleEventStatusPending     LifecycleEventStatus = "Pending"
-	LifecycleEventStatusIn_progress LifecycleEventStatus = "InProgress"
-	LifecycleEventStatusSucceeded   LifecycleEventStatus = "Succeeded"
-	LifecycleEventStatusFailed      LifecycleEventStatus = "Failed"
-	LifecycleEventStatusSkipped     LifecycleEventStatus = "Skipped"
-	LifecycleEventStatusUnknown     LifecycleEventStatus = "Unknown"
+	LifecycleEventStatusPending    LifecycleEventStatus = "Pending"
+	LifecycleEventStatusInProgress LifecycleEventStatus = "InProgress"
+	LifecycleEventStatusSucceeded  LifecycleEventStatus = "Succeeded"
+	LifecycleEventStatusFailed     LifecycleEventStatus = "Failed"
+	LifecycleEventStatusSkipped    LifecycleEventStatus = "Skipped"
+	LifecycleEventStatusUnknown    LifecycleEventStatus = "Unknown"
 )
 
 // Values returns all known values for LifecycleEventStatus. Note that this can be
@@ -516,8 +516,8 @@ type MinimumHealthyHostsType string
 
 // Enum values for MinimumHealthyHostsType
 const (
-	MinimumHealthyHostsTypeHost_count    MinimumHealthyHostsType = "HOST_COUNT"
-	MinimumHealthyHostsTypeFleet_percent MinimumHealthyHostsType = "FLEET_PERCENT"
+	MinimumHealthyHostsTypeHostCount    MinimumHealthyHostsType = "HOST_COUNT"
+	MinimumHealthyHostsTypeFleetPercent MinimumHealthyHostsType = "FLEET_PERCENT"
 )
 
 // Values returns all known values for MinimumHealthyHostsType. Note that this can
@@ -610,9 +610,9 @@ type TagFilterType string
 
 // Enum values for TagFilterType
 const (
-	TagFilterTypeKey_only      TagFilterType = "KEY_ONLY"
-	TagFilterTypeValue_only    TagFilterType = "VALUE_ONLY"
-	TagFilterTypeKey_and_value TagFilterType = "KEY_AND_VALUE"
+	TagFilterTypeKeyOnly     TagFilterType = "KEY_ONLY"
+	TagFilterTypeValueOnly   TagFilterType = "VALUE_ONLY"
+	TagFilterTypeKeyAndValue TagFilterType = "KEY_AND_VALUE"
 )
 
 // Values returns all known values for TagFilterType. Note that this can be
@@ -630,8 +630,8 @@ type TargetFilterName string
 
 // Enum values for TargetFilterName
 const (
-	TargetFilterNameTarget_status         TargetFilterName = "TargetStatus"
-	TargetFilterNameServer_instance_label TargetFilterName = "ServerInstanceLabel"
+	TargetFilterNameTargetStatus        TargetFilterName = "TargetStatus"
+	TargetFilterNameServerInstanceLabel TargetFilterName = "ServerInstanceLabel"
 )
 
 // Values returns all known values for TargetFilterName. Note that this can be
@@ -666,13 +666,13 @@ type TargetStatus string
 
 // Enum values for TargetStatus
 const (
-	TargetStatusPending     TargetStatus = "Pending"
-	TargetStatusIn_progress TargetStatus = "InProgress"
-	TargetStatusSucceeded   TargetStatus = "Succeeded"
-	TargetStatusFailed      TargetStatus = "Failed"
-	TargetStatusSkipped     TargetStatus = "Skipped"
-	TargetStatusUnknown     TargetStatus = "Unknown"
-	TargetStatusReady       TargetStatus = "Ready"
+	TargetStatusPending    TargetStatus = "Pending"
+	TargetStatusInProgress TargetStatus = "InProgress"
+	TargetStatusSucceeded  TargetStatus = "Succeeded"
+	TargetStatusFailed     TargetStatus = "Failed"
+	TargetStatusSkipped    TargetStatus = "Skipped"
+	TargetStatusUnknown    TargetStatus = "Unknown"
+	TargetStatusReady      TargetStatus = "Ready"
 )
 
 // Values returns all known values for TargetStatus. Note that this can be expanded
@@ -714,16 +714,16 @@ type TriggerEventType string
 
 // Enum values for TriggerEventType
 const (
-	TriggerEventTypeDeployment_start    TriggerEventType = "DeploymentStart"
-	TriggerEventTypeDeployment_success  TriggerEventType = "DeploymentSuccess"
-	TriggerEventTypeDeployment_failure  TriggerEventType = "DeploymentFailure"
-	TriggerEventTypeDeployment_stop     TriggerEventType = "DeploymentStop"
-	TriggerEventTypeDeployment_rollback TriggerEventType = "DeploymentRollback"
-	TriggerEventTypeDeployment_ready    TriggerEventType = "DeploymentReady"
-	TriggerEventTypeInstance_start      TriggerEventType = "InstanceStart"
-	TriggerEventTypeInstance_success    TriggerEventType = "InstanceSuccess"
-	TriggerEventTypeInstance_failure    TriggerEventType = "InstanceFailure"
-	TriggerEventTypeInstance_ready      TriggerEventType = "InstanceReady"
+	TriggerEventTypeDeploymentStart    TriggerEventType = "DeploymentStart"
+	TriggerEventTypeDeploymentSuccess  TriggerEventType = "DeploymentSuccess"
+	TriggerEventTypeDeploymentFailure  TriggerEventType = "DeploymentFailure"
+	TriggerEventTypeDeploymentStop     TriggerEventType = "DeploymentStop"
+	TriggerEventTypeDeploymentRollback TriggerEventType = "DeploymentRollback"
+	TriggerEventTypeDeploymentReady    TriggerEventType = "DeploymentReady"
+	TriggerEventTypeInstanceStart      TriggerEventType = "InstanceStart"
+	TriggerEventTypeInstanceSuccess    TriggerEventType = "InstanceSuccess"
+	TriggerEventTypeInstanceFailure    TriggerEventType = "InstanceFailure"
+	TriggerEventTypeInstanceReady      TriggerEventType = "InstanceReady"
 )
 
 // Values returns all known values for TriggerEventType. Note that this can be

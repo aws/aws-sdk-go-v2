@@ -38,12 +38,11 @@ type ListPortfolioAccessInput struct {
 
 	// The language code.
 	//
-	//     * en - English (default)
+	// * en - English (default)
 	//
-	//     * jp - Japanese
+	// * jp - Japanese
 	//
-	//     * zh
-	// - Chinese
+	// * zh - Chinese
 	AcceptLanguage *string
 
 	// The ID of an organization node the portfolio is shared with. All children of

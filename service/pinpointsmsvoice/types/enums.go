@@ -6,13 +6,13 @@ type EventType string
 
 // Enum values for EventType
 const (
-	EventTypeInitiated_call EventType = "INITIATED_CALL"
-	EventTypeRinging        EventType = "RINGING"
-	EventTypeAnswered       EventType = "ANSWERED"
-	EventTypeCompleted_call EventType = "COMPLETED_CALL"
-	EventTypeBusy           EventType = "BUSY"
-	EventTypeFailed         EventType = "FAILED"
-	EventTypeNo_answer      EventType = "NO_ANSWER"
+	EventTypeInitiatedCall EventType = "INITIATED_CALL"
+	EventTypeRinging       EventType = "RINGING"
+	EventTypeAnswered      EventType = "ANSWERED"
+	EventTypeCompletedCall EventType = "COMPLETED_CALL"
+	EventTypeBusy          EventType = "BUSY"
+	EventTypeFailed        EventType = "FAILED"
+	EventTypeNoAnswer      EventType = "NO_ANSWER"
 )
 
 // Values returns all known values for EventType. Note that this can be expanded in

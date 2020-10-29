@@ -30,23 +30,23 @@ import (
 // minProvisionedTPS as necessary. Status A campaign can be in one of the following
 // states:
 //
-//     * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 //
-//
-// * DELETE PENDING > DELETE IN_PROGRESS
+// *
+// DELETE PENDING > DELETE IN_PROGRESS
 //
 // To get the campaign status, call
 // DescribeCampaign. Wait until the status of the campaign is ACTIVE before asking
 // the campaign for recommendations. Related APIs
 //
-//     * ListCampaigns
+// * ListCampaigns
 //
-//     *
+// *
 // DescribeCampaign
 //
-//     * UpdateCampaign
+// * UpdateCampaign
 //
-//     * DeleteCampaign
+// * DeleteCampaign
 func (c *Client) CreateCampaign(ctx context.Context, params *CreateCampaignInput, optFns ...func(*Options)) (*CreateCampaignOutput, error) {
 	if params == nil {
 		params = &CreateCampaignInput{}

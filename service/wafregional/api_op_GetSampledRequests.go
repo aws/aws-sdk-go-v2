@@ -54,13 +54,12 @@ type GetSampledRequestsInput struct {
 
 	// RuleId is one of three values:
 	//
-	//     * The RuleId of the Rule or the RuleGroupId
-	// of the RuleGroup for which you want GetSampledRequests to return a sample of
+	// * The RuleId of the Rule or the RuleGroupId of
+	// the RuleGroup for which you want GetSampledRequests to return a sample of
 	// requests.
 	//
-	//     * Default_Action, which causes GetSampledRequests to return a
-	// sample of the requests that didn't match any of the rules in the specified
-	// WebACL.
+	// * Default_Action, which causes GetSampledRequests to return a sample
+	// of the requests that didn't match any of the rules in the specified WebACL.
 	//
 	// This member is required.
 	RuleId *string

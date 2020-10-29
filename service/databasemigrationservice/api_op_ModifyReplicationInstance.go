@@ -58,13 +58,13 @@ type ModifyReplicationInstanceInput struct {
 	// is asynchronously applied as soon as possible. An outage does result if these
 	// factors apply:
 	//
-	//     * This parameter is set to true during the maintenance
+	// * This parameter is set to true during the maintenance
 	// window.
 	//
-	//     * A newer minor version is available.
+	// * A newer minor version is available.
 	//
-	//     * AWS DMS has enabled
-	// automatic patching for the given engine version.
+	// * AWS DMS has enabled automatic
+	// patching for the given engine version.
 	AutoMinorVersionUpgrade *bool
 
 	// The engine version number of the replication instance. When modifying a major

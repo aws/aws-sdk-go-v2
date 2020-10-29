@@ -38,13 +38,12 @@ type DescribeClusterVersionsInput struct {
 	// The name of a specific cluster parameter group family to return details for.
 	// Constraints:
 	//
-	//     * Must be 1 to 255 alphanumeric characters
+	// * Must be 1 to 255 alphanumeric characters
 	//
-	//     * First
-	// character must be a letter
+	// * First character must
+	// be a letter
 	//
-	//     * Cannot end with a hyphen or contain two
-	// consecutive hyphens
+	// * Cannot end with a hyphen or contain two consecutive hyphens
 	ClusterParameterGroupFamily *string
 
 	// The specific cluster version to return. Example: 1.0

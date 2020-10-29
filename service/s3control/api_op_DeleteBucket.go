@@ -30,15 +30,15 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_DeleteBucket.html#API_control_DeleteBucket_Examples)
 // section below. Related Resources
 //
-//     * CreateBucket
+// * CreateBucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html)
 //
-//
-// * GetBucket
+// *
+// GetBucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_GetBucket.html)
 //
-//
-// * DeleteObject
+// *
+// DeleteObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html)
 func (c *Client) DeleteBucket(ctx context.Context, params *DeleteBucketInput, optFns ...func(*Options)) (*DeleteBucketOutput, error) {
 	if params == nil {

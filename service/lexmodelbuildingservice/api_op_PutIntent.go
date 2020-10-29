@@ -17,46 +17,45 @@ import (
 // bot, for example, you would create an OrderPizza intent. To create an intent or
 // replace an existing intent, you must provide the following:
 //
-//     * Intent name.
-// For example, OrderPizza.
+// * Intent name. For
+// example, OrderPizza.
 //
-//     * Sample utterances. For example, "Can I order a
-// pizza, please." and "I want to order a pizza."
+// * Sample utterances. For example, "Can I order a pizza,
+// please." and "I want to order a pizza."
 //
-//     * Information to be
-// gathered. You specify slot types for the information that your bot will request
-// from the user. You can specify standard slot types, such as a date or a time, or
-// custom slot types such as the size and crust of a pizza.
+// * Information to be gathered. You
+// specify slot types for the information that your bot will request from the user.
+// You can specify standard slot types, such as a date or a time, or custom slot
+// types such as the size and crust of a pizza.
 //
-//     * How the intent
-// will be fulfilled. You can provide a Lambda function or configure the intent to
-// return the intent information to the client application. If you use a Lambda
-// function, when all of the intent information is available, Amazon Lex invokes
-// your Lambda function. If you configure your intent to return the intent
-// information to the client application.
+// * How the intent will be
+// fulfilled. You can provide a Lambda function or configure the intent to return
+// the intent information to the client application. If you use a Lambda function,
+// when all of the intent information is available, Amazon Lex invokes your Lambda
+// function. If you configure your intent to return the intent information to the
+// client application.
 //
-// You can specify other optional
-// information in the request, such as:
+// You can specify other optional information in the request,
+// such as:
 //
-//     * A confirmation prompt to ask the
-// user to confirm an intent. For example, "Shall I order your pizza?"
+// * A confirmation prompt to ask the user to confirm an intent. For
+// example, "Shall I order your pizza?"
 //
-//     * A
-// conclusion statement to send to the user after the intent has been fulfilled.
-// For example, "I placed your pizza order."
+// * A conclusion statement to send to the
+// user after the intent has been fulfilled. For example, "I placed your pizza
+// order."
 //
-//     * A follow-up prompt that asks
-// the user for additional activity. For example, asking "Do you want to order a
-// drink with your pizza?"
+// * A follow-up prompt that asks the user for additional activity. For
+// example, asking "Do you want to order a drink with your pizza?"
 //
-// If you specify an existing intent name to update the
-// intent, Amazon Lex replaces the values in the $LATEST version of the intent with
-// the values in the request. Amazon Lex removes fields that you don't provide in
-// the request. If you don't specify the required fields, Amazon Lex throws an
-// exception. When you update the $LATEST version of an intent, the status field of
-// any bot that uses the $LATEST version of the intent is set to NOT_BUILT. For
-// more information, see how-it-works. This operation requires permissions for the
-// lex:PutIntent action.
+// If you specify
+// an existing intent name to update the intent, Amazon Lex replaces the values in
+// the $LATEST version of the intent with the values in the request. Amazon Lex
+// removes fields that you don't provide in the request. If you don't specify the
+// required fields, Amazon Lex throws an exception. When you update the $LATEST
+// version of an intent, the status field of any bot that uses the $LATEST version
+// of the intent is set to NOT_BUILT. For more information, see how-it-works. This
+// operation requires permissions for the lex:PutIntent action.
 func (c *Client) PutIntent(ctx context.Context, params *PutIntentInput, optFns ...func(*Options)) (*PutIntentOutput, error) {
 	if params == nil {
 		params = &PutIntentInput{}
@@ -132,22 +131,22 @@ type PutIntentInput struct {
 	// the user to order a drink. The action that Amazon Lex takes depends on the
 	// user's response, as follows:
 	//
-	//     * If the user says "Yes" it responds with the
+	// * If the user says "Yes" it responds with the
 	// clarification prompt that is configured for the bot.
 	//
-	//     * if the user says
-	// "Yes" and continues with an utterance that triggers an intent it starts a
-	// conversation for the intent.
+	// * if the user says "Yes"
+	// and continues with an utterance that triggers an intent it starts a conversation
+	// for the intent.
 	//
-	//     * If the user says "No" it responds with the
-	// rejection statement configured for the the follow-up prompt.
+	// * If the user says "No" it responds with the rejection
+	// statement configured for the the follow-up prompt.
 	//
-	//     * If it
-	// doesn't recognize the utterance it repeats the follow-up prompt again.
+	// * If it doesn't recognize
+	// the utterance it repeats the follow-up prompt again.
 	//
-	// The
-	// followUpPrompt field and the conclusionStatement field are mutually exclusive.
-	// You can specify only one.
+	// The followUpPrompt field
+	// and the conclusionStatement field are mutually exclusive. You can specify only
+	// one.
 	FollowUpPrompt *types.FollowUpPrompt
 
 	// Required. Describes how the intent is fulfilled. For example, after a user

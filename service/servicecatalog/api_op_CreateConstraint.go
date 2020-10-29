@@ -78,28 +78,27 @@ type CreateConstraintInput struct {
 
 	// The type of constraint.
 	//
-	//     * LAUNCH
+	// * LAUNCH
 	//
-	//     * NOTIFICATION
+	// * NOTIFICATION
 	//
-	//     *
-	// RESOURCE_UPDATE
+	// * RESOURCE_UPDATE
 	//
-	//     * STACKSET
+	// *
+	// STACKSET
 	//
-	//     * TEMPLATE
+	// * TEMPLATE
 	//
 	// This member is required.
 	Type *string
 
 	// The language code.
 	//
-	//     * en - English (default)
+	// * en - English (default)
 	//
-	//     * jp - Japanese
+	// * jp - Japanese
 	//
-	//     * zh
-	// - Chinese
+	// * zh - Chinese
 	AcceptLanguage *string
 
 	// The description of the constraint.

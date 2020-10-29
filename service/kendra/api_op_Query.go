@@ -18,17 +18,16 @@ import (
 // Kendra searches your index for text content and question and answer (FAQ)
 // content. By default the response contains three types of results.
 //
-//     *
-// Relevant passages
+// * Relevant
+// passages
 //
-//     * Matching FAQs
+// * Matching FAQs
 //
-//     * Relevant documents
+// * Relevant documents
 //
-// You can
-// specify that the query return only one type of result using the
-// QueryResultTypeConfig parameter. Each query returns the 100 most relevant
-// results.
+// You can specify that the query
+// return only one type of result using the QueryResultTypeConfig parameter. Each
+// query returns the 100 most relevant results.
 func (c *Client) Query(ctx context.Context, params *QueryInput, optFns ...func(*Options)) (*QueryOutput, error) {
 	if params == nil {
 		params = &QueryInput{}

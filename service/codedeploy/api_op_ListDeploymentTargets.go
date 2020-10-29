@@ -37,11 +37,11 @@ type ListDeploymentTargetsInput struct {
 
 	// A key used to filter the returned targets. The two valid values are:
 	//
-	//     *
+	// *
 	// TargetStatus - A TargetStatus filter string can be Failed, InProgress, Pending,
 	// Ready, Skipped, Succeeded, or Unknown.
 	//
-	//     * ServerInstanceLabel - A
+	// * ServerInstanceLabel - A
 	// ServerInstanceLabel filter string can be Blue or Green.
 	TargetFilters map[string][]*string
 }

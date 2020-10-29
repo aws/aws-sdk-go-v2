@@ -32,29 +32,29 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html).
 // GetBucketLifecycleConfiguration has the following special error:
 //
-//     * Error
-// code: NoSuchLifecycleConfiguration
+// * Error code:
+// NoSuchLifecycleConfiguration
 //
-//         * Description: The lifecycle
-// configuration does not exist.
+// * Description: The lifecycle configuration does
+// not exist.
 //
-//         * HTTP Status Code: 404 Not Found
+// * HTTP Status Code: 404 Not Found
 //
-//
-// * SOAP Fault Code Prefix: Client
+// * SOAP Fault Code Prefix:
+// Client
 //
 // The following operations are related to
 // GetBucketLifecycleConfiguration:
 //
-//     * GetBucketLifecycle
+// * GetBucketLifecycle
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycle.html)
 //
-//
-// * PutBucketLifecycle
+// *
+// PutBucketLifecycle
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycle.html)
 //
-//
-// * DeleteBucketLifecycle
+// *
+// DeleteBucketLifecycle
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketLifecycle.html)
 func (c *Client) GetBucketLifecycleConfiguration(ctx context.Context, params *GetBucketLifecycleConfigurationInput, optFns ...func(*Options)) (*GetBucketLifecycleConfigurationOutput, error) {
 	if params == nil {

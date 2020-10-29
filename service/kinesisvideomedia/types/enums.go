@@ -6,12 +6,12 @@ type StartSelectorType string
 
 // Enum values for StartSelectorType
 const (
-	StartSelectorTypeFragment_number    StartSelectorType = "FRAGMENT_NUMBER"
-	StartSelectorTypeServer_timestamp   StartSelectorType = "SERVER_TIMESTAMP"
-	StartSelectorTypeProducer_timestamp StartSelectorType = "PRODUCER_TIMESTAMP"
-	StartSelectorTypeNow                StartSelectorType = "NOW"
-	StartSelectorTypeEarliest           StartSelectorType = "EARLIEST"
-	StartSelectorTypeContinuation_token StartSelectorType = "CONTINUATION_TOKEN"
+	StartSelectorTypeFragmentNumber    StartSelectorType = "FRAGMENT_NUMBER"
+	StartSelectorTypeServerTimestamp   StartSelectorType = "SERVER_TIMESTAMP"
+	StartSelectorTypeProducerTimestamp StartSelectorType = "PRODUCER_TIMESTAMP"
+	StartSelectorTypeNow               StartSelectorType = "NOW"
+	StartSelectorTypeEarliest          StartSelectorType = "EARLIEST"
+	StartSelectorTypeContinuationToken StartSelectorType = "CONTINUATION_TOKEN"
 )
 
 // Values returns all known values for StartSelectorType. Note that this can be

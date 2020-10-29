@@ -250,9 +250,9 @@ type DocumentClassificationJobProperties struct {
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
 	// formats:
 	//
-	//     * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	//     * Amazon
+	// * Amazon
 	// Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
@@ -295,12 +295,12 @@ type DocumentClassifierInputDataConfig struct {
 
 	// The format of your training data:
 	//
-	//     * COMPREHEND_CSV: A two-column CSV file,
+	// * COMPREHEND_CSV: A two-column CSV file,
 	// where labels are provided in the first column, and documents are provided in the
 	// second. If you use this value, you must provide the S3Uri parameter in your
 	// request.
 	//
-	//     * AUGMENTED_MANIFEST: A labeled dataset that is produced by Amazon
+	// * AUGMENTED_MANIFEST: A labeled dataset that is produced by Amazon
 	// SageMaker Ground Truth. This file is in JSON lines format. Each line is a
 	// complete JSON object that contains a training document and its associated
 	// labels. If you use this value, you must provide the AugmentedManifests parameter
@@ -335,16 +335,16 @@ type DocumentClassifierOutputDataConfig struct {
 	// encrypt the output results from an analysis job. The KmsKeyId can be one of the
 	// following formats:
 	//
-	//     * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	//
-	// * Amazon Resource Name (ARN) of a KMS Key:
+	// *
+	// Amazon Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
+	// *
+	// KMS Key Alias: "alias/ExampleAlias"
 	//
-	// * KMS Key Alias: "alias/ExampleAlias"
-	//
-	//     * ARN of a KMS Key Alias:
+	// * ARN of a KMS Key Alias:
 	// "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"
 	KmsKeyId *string
 
@@ -420,9 +420,9 @@ type DocumentClassifierProperties struct {
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
 	// formats:
 	//
-	//     * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	//     * Amazon
+	// * Amazon
 	// Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
@@ -520,9 +520,9 @@ type DominantLanguageDetectionJobProperties struct {
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
 	// formats:
 	//
-	//     * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	//     * Amazon
+	// * Amazon
 	// Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
@@ -652,9 +652,9 @@ type EntitiesDetectionJobProperties struct {
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
 	// formats:
 	//
-	//     * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	//     * Amazon
+	// * Amazon
 	// Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
@@ -786,23 +786,22 @@ type EntityRecognizerInputDataConfig struct {
 
 	// The format of your training data:
 	//
-	//     * COMPREHEND_CSV: A CSV file that
-	// supplements your training documents. The CSV file contains information about the
-	// custom entities that your trained model will detect. The required format of the
-	// file depends on whether you are providing annotations or an entity list. If you
-	// use this value, you must provide your CSV file by using either the Annotations
-	// or EntityList parameters. You must provide your training documents by using the
+	// * COMPREHEND_CSV: A CSV file that supplements
+	// your training documents. The CSV file contains information about the custom
+	// entities that your trained model will detect. The required format of the file
+	// depends on whether you are providing annotations or an entity list. If you use
+	// this value, you must provide your CSV file by using either the Annotations or
+	// EntityList parameters. You must provide your training documents by using the
 	// Documents parameter.
 	//
-	//     * AUGMENTED_MANIFEST: A labeled dataset that is
-	// produced by Amazon SageMaker Ground Truth. This file is in JSON lines format.
-	// Each line is a complete JSON object that contains a training document and its
-	// labels. Each label annotates a named entity in the training document. If you use
-	// this value, you must provide the AugmentedManifests parameter in your
-	// request.
+	// * AUGMENTED_MANIFEST: A labeled dataset that is produced
+	// by Amazon SageMaker Ground Truth. This file is in JSON lines format. Each line
+	// is a complete JSON object that contains a training document and its labels. Each
+	// label annotates a named entity in the training document. If you use this value,
+	// you must provide the AugmentedManifests parameter in your request.
 	//
-	// If you don't specify a value, Amazon Comprehend uses COMPREHEND_CSV as
-	// the default.
+	// If you don't
+	// specify a value, Amazon Comprehend uses COMPREHEND_CSV as the default.
 	DataFormat EntityRecognizerDataFormat
 
 	// The S3 location of the folder that contains the training documents for your
@@ -893,9 +892,9 @@ type EntityRecognizerProperties struct {
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
 	// formats:
 	//
-	//     * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	//     * Amazon
+	// * Amazon
 	// Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
@@ -957,14 +956,13 @@ type InputDataConfig struct {
 
 	// Specifies how the text in an input file should be processed:
 	//
-	//     *
-	// ONE_DOC_PER_FILE - Each file is considered a separate document. Use this option
-	// when you are processing large documents, such as newspaper articles or
-	// scientific papers.
+	// * ONE_DOC_PER_FILE
+	// - Each file is considered a separate document. Use this option when you are
+	// processing large documents, such as newspaper articles or scientific papers.
 	//
-	//     * ONE_DOC_PER_LINE - Each line in a file is considered a
-	// separate document. Use this option when you are processing many short documents,
-	// such as text messages.
+	// *
+	// ONE_DOC_PER_LINE - Each line in a file is considered a separate document. Use
+	// this option when you are processing many short documents, such as text messages.
 	InputFormat InputFormat
 }
 
@@ -1056,9 +1054,9 @@ type KeyPhrasesDetectionJobProperties struct {
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
 	// formats:
 	//
-	//     * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	//     * Amazon
+	// * Amazon
 	// Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
@@ -1089,16 +1087,16 @@ type OutputDataConfig struct {
 	// encrypt the output results from an analysis job. The KmsKeyId can be one of the
 	// following formats:
 	//
-	//     * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	//
-	// * Amazon Resource Name (ARN) of a KMS Key:
+	// *
+	// Amazon Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
+	// *
+	// KMS Key Alias: "alias/ExampleAlias"
 	//
-	// * KMS Key Alias: "alias/ExampleAlias"
-	//
-	//     * ARN of a KMS Key Alias:
+	// * ARN of a KMS Key Alias:
 	// "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"
 	KmsKeyId *string
 }
@@ -1301,9 +1299,9 @@ type SentimentDetectionJobProperties struct {
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
 	// formats:
 	//
-	//     * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	//     * Amazon
+	// * Amazon
 	// Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
@@ -1443,9 +1441,9 @@ type TopicsDetectionJobProperties struct {
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
 	// formats:
 	//
-	//     * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	//     * Amazon
+	// * Amazon
 	// Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string

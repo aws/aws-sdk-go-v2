@@ -122,13 +122,13 @@ type BatchInferenceJob struct {
 	// The status of the batch inference job. The status is one of the following
 	// values:
 	//
-	//     * PENDING
+	// * PENDING
 	//
-	//     * IN PROGRESS
+	// * IN PROGRESS
 	//
-	//     * ACTIVE
+	// * ACTIVE
 	//
-	//     * CREATE FAILED
+	// * CREATE FAILED
 	Status *string
 }
 
@@ -186,13 +186,13 @@ type BatchInferenceJobSummary struct {
 	// The status of the batch inference job. The status is one of the following
 	// values:
 	//
-	//     * PENDING
+	// * PENDING
 	//
-	//     * IN PROGRESS
+	// * IN PROGRESS
 	//
-	//     * ACTIVE
+	// * ACTIVE
 	//
-	//     * CREATE FAILED
+	// * CREATE FAILED
 	Status *string
 }
 
@@ -231,10 +231,10 @@ type Campaign struct {
 
 	// The status of the campaign. A campaign can be in one of the following states:
 	//
+	// *
+	// CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-	//
-	//     * DELETE
+	// * DELETE
 	// PENDING > DELETE IN_PROGRESS
 	Status *string
 }
@@ -268,10 +268,10 @@ type CampaignSummary struct {
 
 	// The status of the campaign. A campaign can be in one of the following states:
 	//
+	// *
+	// CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-	//
-	//     * DELETE
+	// * DELETE
 	// PENDING > DELETE IN_PROGRESS
 	Status *string
 }
@@ -302,10 +302,10 @@ type CampaignUpdateSummary struct {
 	// The status of the campaign update. A campaign update can be in one of the
 	// following states:
 	//
-	//     * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or-
-	// CREATE FAILED
+	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
+	// FAILED
 	//
-	//     * DELETE PENDING > DELETE IN_PROGRESS
+	// * DELETE PENDING > DELETE IN_PROGRESS
 	Status *string
 }
 
@@ -346,11 +346,11 @@ type Dataset struct {
 
 	// One of the following values:
 	//
-	//     * Interactions
+	// * Interactions
 	//
-	//     * Items
+	// * Items
 	//
-	//     * Users
+	// * Users
 	DatasetType *string
 
 	// A time stamp that shows when the dataset was updated.
@@ -364,10 +364,10 @@ type Dataset struct {
 
 	// The status of the dataset. A dataset can be in one of the following states:
 	//
+	// *
+	// CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-	//
-	//     * DELETE
+	// * DELETE
 	// PENDING > DELETE IN_PROGRESS
 	Status *string
 }
@@ -404,10 +404,10 @@ type DatasetGroup struct {
 	// The current status of the dataset group. A dataset group can be in one of the
 	// following states:
 	//
-	//     * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or-
-	// CREATE FAILED
+	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
+	// FAILED
 	//
-	//     * DELETE PENDING
+	// * DELETE PENDING
 	Status *string
 }
 
@@ -433,10 +433,10 @@ type DatasetGroupSummary struct {
 	// The status of the dataset group. A dataset group can be in one of the following
 	// states:
 	//
-	//     * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 	//
-	//
-	// * DELETE PENDING
+	// *
+	// DELETE PENDING
 	Status *string
 }
 
@@ -445,7 +445,7 @@ type DatasetGroupSummary struct {
 // CreateDatasetImportJob. A dataset import job can be in one of the following
 // states:
 //
-//     * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 type DatasetImportJob struct {
 
 	// The creation date and time (in Unix time) of the dataset import job.
@@ -476,8 +476,8 @@ type DatasetImportJob struct {
 	// The status of the dataset import job. A dataset import job can be in one of the
 	// following states:
 	//
-	//     * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or-
-	// CREATE FAILED
+	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
+	// FAILED
 	Status *string
 }
 
@@ -503,8 +503,8 @@ type DatasetImportJobSummary struct {
 	// The status of the dataset import job. A dataset import job can be in one of the
 	// following states:
 	//
-	//     * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or-
-	// CREATE FAILED
+	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
+	// FAILED
 	Status *string
 }
 
@@ -557,14 +557,14 @@ type DatasetSummary struct {
 
 	// The dataset type. One of the following values:
 	//
-	//     * Interactions
+	// * Interactions
 	//
-	//     *
-	// Items
+	// * Items
 	//
-	//     * Users
+	// *
+	// Users
 	//
-	//     * Event-Interactions
+	// * Event-Interactions
 	DatasetType *string
 
 	// The date and time (in Unix time) that the dataset was last updated.
@@ -575,10 +575,10 @@ type DatasetSummary struct {
 
 	// The status of the dataset. A dataset can be in one of the following states:
 	//
+	// *
+	// CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-	//
-	//     * DELETE
+	// * DELETE
 	// PENDING > DELETE IN_PROGRESS
 	Status *string
 }
@@ -681,10 +681,10 @@ type EventTracker struct {
 	// The status of the event tracker. An event tracker can be in one of the following
 	// states:
 	//
-	//     * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 	//
-	//
-	// * DELETE PENDING > DELETE IN_PROGRESS
+	// *
+	// DELETE PENDING > DELETE IN_PROGRESS
 	Status *string
 
 	// The ID of the event tracker. Include this ID in requests to the PutEvents
@@ -711,10 +711,10 @@ type EventTrackerSummary struct {
 	// The status of the event tracker. An event tracker can be in one of the following
 	// states:
 	//
-	//     * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 	//
-	//
-	// * DELETE PENDING > DELETE IN_PROGRESS
+	// *
+	// DELETE PENDING > DELETE IN_PROGRESS
 	Status *string
 }
 
@@ -741,8 +741,8 @@ type FeatureTransformation struct {
 	// The status of the feature transformation. A feature transformation can be in one
 	// of the following states:
 	//
-	//     * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE
-	// -or- CREATE FAILED
+	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or-
+	// CREATE FAILED
 	Status *string
 }
 
@@ -899,12 +899,12 @@ type Recipe struct {
 
 	// One of the following values:
 	//
-	//     * PERSONALIZED_RANKING
+	// * PERSONALIZED_RANKING
 	//
-	//     * RELATED_ITEMS
+	// * RELATED_ITEMS
 	//
-	//
-	// * USER_PERSONALIZATION
+	// *
+	// USER_PERSONALIZATION
 	RecipeType *string
 
 	// The status of the recipe.
@@ -993,10 +993,10 @@ type Solution struct {
 
 	// The status of the solution. A solution can be in one of the following states:
 	//
+	// *
+	// CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-	//
-	//     * DELETE
+	// * DELETE
 	// PENDING > DELETE IN_PROGRESS
 	Status *string
 }
@@ -1040,10 +1040,10 @@ type SolutionSummary struct {
 
 	// The status of the solution. A solution can be in one of the following states:
 	//
+	// *
+	// CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-	//
-	//     * DELETE
+	// * DELETE
 	// PENDING > DELETE IN_PROGRESS
 	Status *string
 }
@@ -1091,14 +1091,14 @@ type SolutionVersion struct {
 	// The status of the solution version. A solution version can be in one of the
 	// following states:
 	//
-	//     * CREATE PENDING
+	// * CREATE PENDING
 	//
-	//     * CREATE IN_PROGRESS
+	// * CREATE IN_PROGRESS
 	//
-	//     *
-	// ACTIVE
+	// * ACTIVE
 	//
-	//     * CREATE FAILED
+	// * CREATE
+	// FAILED
 	Status *string
 
 	// The time used to train the model. You are billed for the time it takes to train
@@ -1140,8 +1140,8 @@ type SolutionVersionSummary struct {
 	// The status of the solution version. A solution version can be in one of the
 	// following states:
 	//
-	//     * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or-
-	// CREATE FAILED
+	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
+	// FAILED
 	Status *string
 }
 

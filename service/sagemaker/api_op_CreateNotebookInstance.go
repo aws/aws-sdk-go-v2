@@ -21,29 +21,29 @@ import (
 // specific algorithm or with a machine learning framework. After receiving the
 // request, Amazon SageMaker does the following:
 //
-//     * Creates a network interface
-// in the Amazon SageMaker VPC.
+// * Creates a network interface in
+// the Amazon SageMaker VPC.
 //
-//     * (Option) If you specified SubnetId, Amazon
+// * (Option) If you specified SubnetId, Amazon
 // SageMaker creates a network interface in your own VPC, which is inferred from
 // the subnet ID that you provide in the input. When creating this network
 // interface, Amazon SageMaker attaches the security group that you specified in
 // the request to the network interface that it creates in your VPC.
 //
-//     *
-// Launches an EC2 instance of the type specified in the request in the Amazon
-// SageMaker VPC. If you specified SubnetId of your VPC, Amazon SageMaker specifies
-// both network interfaces when launching this instance. This enables inbound
-// traffic from your own VPC to the notebook instance, assuming that the security
-// groups allow it.
+// * Launches an
+// EC2 instance of the type specified in the request in the Amazon SageMaker VPC.
+// If you specified SubnetId of your VPC, Amazon SageMaker specifies both network
+// interfaces when launching this instance. This enables inbound traffic from your
+// own VPC to the notebook instance, assuming that the security groups allow
+// it.
 //
-// After creating the notebook instance, Amazon SageMaker returns
-// its Amazon Resource Name (ARN). You can't change the name of a notebook instance
-// after you create it. After Amazon SageMaker creates the notebook instance, you
-// can connect to the Jupyter server and work in Jupyter notebooks. For example,
-// you can write code to explore a dataset that you can use for model training,
-// train a model, host models by creating Amazon SageMaker endpoints, and validate
-// hosted models. For more information, see How It Works
+// After creating the notebook instance, Amazon SageMaker returns its Amazon
+// Resource Name (ARN). You can't change the name of a notebook instance after you
+// create it. After Amazon SageMaker creates the notebook instance, you can connect
+// to the Jupyter server and work in Jupyter notebooks. For example, you can write
+// code to explore a dataset that you can use for model training, train a model,
+// host models by creating Amazon SageMaker endpoints, and validate hosted models.
+// For more information, see How It Works
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html).
 func (c *Client) CreateNotebookInstance(ctx context.Context, params *CreateNotebookInstanceInput, optFns ...func(*Options)) (*CreateNotebookInstanceOutput, error) {
 	if params == nil {

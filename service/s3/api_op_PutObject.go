@@ -64,10 +64,10 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketVersioning.html).
 // Related Resources
 //
-//     * CopyObject
+// * CopyObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html)
 //
-//     *
+// *
 // DeleteObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html)
 func (c *Client) PutObject(ctx context.Context, params *PutObjectInput, optFns ...func(*Options)) (*PutObjectOutput, error) {

@@ -6,12 +6,12 @@ type CertificateState string
 
 // Enum values for CertificateState
 const (
-	CertificateStateRegistering       CertificateState = "Registering"
-	CertificateStateRegistered        CertificateState = "Registered"
-	CertificateStateRegister_failed   CertificateState = "RegisterFailed"
-	CertificateStateDeregistering     CertificateState = "Deregistering"
-	CertificateStateDeregistered      CertificateState = "Deregistered"
-	CertificateStateDeregister_failed CertificateState = "DeregisterFailed"
+	CertificateStateRegistering      CertificateState = "Registering"
+	CertificateStateRegistered       CertificateState = "Registered"
+	CertificateStateRegisterFailed   CertificateState = "RegisterFailed"
+	CertificateStateDeregistering    CertificateState = "Deregistering"
+	CertificateStateDeregistered     CertificateState = "Deregistered"
+	CertificateStateDeregisterFailed CertificateState = "DeregisterFailed"
 )
 
 // Values returns all known values for CertificateState. Note that this can be
@@ -104,10 +104,10 @@ type DirectoryType string
 
 // Enum values for DirectoryType
 const (
-	DirectoryTypeSimple_ad           DirectoryType = "SimpleAD"
-	DirectoryTypeAd_connector        DirectoryType = "ADConnector"
-	DirectoryTypeMicrosoft_ad        DirectoryType = "MicrosoftAD"
-	DirectoryTypeShared_microsoft_ad DirectoryType = "SharedMicrosoftAD"
+	DirectoryTypeSimpleAd          DirectoryType = "SimpleAD"
+	DirectoryTypeAdConnector       DirectoryType = "ADConnector"
+	DirectoryTypeMicrosoftAd       DirectoryType = "MicrosoftAD"
+	DirectoryTypeSharedMicrosoftAd DirectoryType = "SharedMicrosoftAD"
 )
 
 // Values returns all known values for DirectoryType. Note that this can be
@@ -154,12 +154,12 @@ type IpRouteStatusMsg string
 
 // Enum values for IpRouteStatusMsg
 const (
-	IpRouteStatusMsgAdding        IpRouteStatusMsg = "Adding"
-	IpRouteStatusMsgAdded         IpRouteStatusMsg = "Added"
-	IpRouteStatusMsgRemoving      IpRouteStatusMsg = "Removing"
-	IpRouteStatusMsgRemoved       IpRouteStatusMsg = "Removed"
-	IpRouteStatusMsgAdd_failed    IpRouteStatusMsg = "AddFailed"
-	IpRouteStatusMsgRemove_failed IpRouteStatusMsg = "RemoveFailed"
+	IpRouteStatusMsgAdding       IpRouteStatusMsg = "Adding"
+	IpRouteStatusMsgAdded        IpRouteStatusMsg = "Added"
+	IpRouteStatusMsgRemoving     IpRouteStatusMsg = "Removing"
+	IpRouteStatusMsgRemoved      IpRouteStatusMsg = "Removed"
+	IpRouteStatusMsgAddFailed    IpRouteStatusMsg = "AddFailed"
+	IpRouteStatusMsgRemoveFailed IpRouteStatusMsg = "RemoveFailed"
 )
 
 // Values returns all known values for IpRouteStatusMsg. Note that this can be
@@ -180,10 +180,10 @@ type LDAPSStatus string
 
 // Enum values for LDAPSStatus
 const (
-	LDAPSStatusEnabling      LDAPSStatus = "Enabling"
-	LDAPSStatusEnabled       LDAPSStatus = "Enabled"
-	LDAPSStatusEnable_failed LDAPSStatus = "EnableFailed"
-	LDAPSStatusDisabled      LDAPSStatus = "Disabled"
+	LDAPSStatusEnabling     LDAPSStatus = "Enabling"
+	LDAPSStatusEnabled      LDAPSStatus = "Enabled"
+	LDAPSStatusEnableFailed LDAPSStatus = "EnableFailed"
+	LDAPSStatusDisabled     LDAPSStatus = "Disabled"
 )
 
 // Values returns all known values for LDAPSStatus. Note that this can be expanded
@@ -276,15 +276,15 @@ type SchemaExtensionStatus string
 
 // Enum values for SchemaExtensionStatus
 const (
-	SchemaExtensionStatusInitializing         SchemaExtensionStatus = "Initializing"
-	SchemaExtensionStatusCreating_snapshot    SchemaExtensionStatus = "CreatingSnapshot"
-	SchemaExtensionStatusUpdating_schema      SchemaExtensionStatus = "UpdatingSchema"
-	SchemaExtensionStatusReplicating          SchemaExtensionStatus = "Replicating"
-	SchemaExtensionStatusCancel_in_progress   SchemaExtensionStatus = "CancelInProgress"
-	SchemaExtensionStatusRollback_in_progress SchemaExtensionStatus = "RollbackInProgress"
-	SchemaExtensionStatusCancelled            SchemaExtensionStatus = "Cancelled"
-	SchemaExtensionStatusFailed               SchemaExtensionStatus = "Failed"
-	SchemaExtensionStatusCompleted            SchemaExtensionStatus = "Completed"
+	SchemaExtensionStatusInitializing       SchemaExtensionStatus = "Initializing"
+	SchemaExtensionStatusCreatingSnapshot   SchemaExtensionStatus = "CreatingSnapshot"
+	SchemaExtensionStatusUpdatingSchema     SchemaExtensionStatus = "UpdatingSchema"
+	SchemaExtensionStatusReplicating        SchemaExtensionStatus = "Replicating"
+	SchemaExtensionStatusCancelInProgress   SchemaExtensionStatus = "CancelInProgress"
+	SchemaExtensionStatusRollbackInProgress SchemaExtensionStatus = "RollbackInProgress"
+	SchemaExtensionStatusCancelled          SchemaExtensionStatus = "Cancelled"
+	SchemaExtensionStatusFailed             SchemaExtensionStatus = "Failed"
+	SchemaExtensionStatusCompleted          SchemaExtensionStatus = "Completed"
 )
 
 // Values returns all known values for SchemaExtensionStatus. Note that this can be
@@ -344,15 +344,15 @@ type ShareStatus string
 
 // Enum values for ShareStatus
 const (
-	ShareStatusShared             ShareStatus = "Shared"
-	ShareStatusPending_acceptance ShareStatus = "PendingAcceptance"
-	ShareStatusRejected           ShareStatus = "Rejected"
-	ShareStatusRejecting          ShareStatus = "Rejecting"
-	ShareStatusReject_failed      ShareStatus = "RejectFailed"
-	ShareStatusSharing            ShareStatus = "Sharing"
-	ShareStatusShare_failed       ShareStatus = "ShareFailed"
-	ShareStatusDeleted            ShareStatus = "Deleted"
-	ShareStatusDeleting           ShareStatus = "Deleting"
+	ShareStatusShared            ShareStatus = "Shared"
+	ShareStatusPendingAcceptance ShareStatus = "PendingAcceptance"
+	ShareStatusRejected          ShareStatus = "Rejected"
+	ShareStatusRejecting         ShareStatus = "Rejecting"
+	ShareStatusRejectFailed      ShareStatus = "RejectFailed"
+	ShareStatusSharing           ShareStatus = "Sharing"
+	ShareStatusShareFailed       ShareStatus = "ShareFailed"
+	ShareStatusDeleted           ShareStatus = "Deleted"
+	ShareStatusDeleting          ShareStatus = "Deleting"
 )
 
 // Values returns all known values for ShareStatus. Note that this can be expanded
@@ -430,10 +430,10 @@ type TopicStatus string
 
 // Enum values for TopicStatus
 const (
-	TopicStatusRegistered      TopicStatus = "Registered"
-	TopicStatusTopic_not_found TopicStatus = "Topic not found"
-	TopicStatusFailed          TopicStatus = "Failed"
-	TopicStatusDeleted         TopicStatus = "Deleted"
+	TopicStatusRegistered    TopicStatus = "Registered"
+	TopicStatusTopicNotFound TopicStatus = "Topic not found"
+	TopicStatusFailed        TopicStatus = "Failed"
+	TopicStatusDeleted       TopicStatus = "Deleted"
 )
 
 // Values returns all known values for TopicStatus. Note that this can be expanded
@@ -452,9 +452,9 @@ type TrustDirection string
 
 // Enum values for TrustDirection
 const (
-	TrustDirectionOne_way_outgoing TrustDirection = "One-Way: Outgoing"
-	TrustDirectionOne_way_incoming TrustDirection = "One-Way: Incoming"
-	TrustDirectionTwo_way          TrustDirection = "Two-Way"
+	TrustDirectionOneWayOutgoing TrustDirection = "One-Way: Outgoing"
+	TrustDirectionOneWayIncoming TrustDirection = "One-Way: Incoming"
+	TrustDirectionTwoWay         TrustDirection = "Two-Way"
 )
 
 // Values returns all known values for TrustDirection. Note that this can be
@@ -472,17 +472,17 @@ type TrustState string
 
 // Enum values for TrustState
 const (
-	TrustStateCreating      TrustState = "Creating"
-	TrustStateCreated       TrustState = "Created"
-	TrustStateVerifying     TrustState = "Verifying"
-	TrustStateVerify_failed TrustState = "VerifyFailed"
-	TrustStateVerified      TrustState = "Verified"
-	TrustStateUpdating      TrustState = "Updating"
-	TrustStateUpdate_failed TrustState = "UpdateFailed"
-	TrustStateUpdated       TrustState = "Updated"
-	TrustStateDeleting      TrustState = "Deleting"
-	TrustStateDeleted       TrustState = "Deleted"
-	TrustStateFailed        TrustState = "Failed"
+	TrustStateCreating     TrustState = "Creating"
+	TrustStateCreated      TrustState = "Created"
+	TrustStateVerifying    TrustState = "Verifying"
+	TrustStateVerifyFailed TrustState = "VerifyFailed"
+	TrustStateVerified     TrustState = "Verified"
+	TrustStateUpdating     TrustState = "Updating"
+	TrustStateUpdateFailed TrustState = "UpdateFailed"
+	TrustStateUpdated      TrustState = "Updated"
+	TrustStateDeleting     TrustState = "Deleting"
+	TrustStateDeleted      TrustState = "Deleted"
+	TrustStateFailed       TrustState = "Failed"
 )
 
 // Values returns all known values for TrustState. Note that this can be expanded

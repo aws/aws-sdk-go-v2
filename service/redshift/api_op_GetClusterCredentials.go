@@ -66,20 +66,20 @@ type GetClusterCredentialsInput struct {
 	// (https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html) in the
 	// Amazon Redshift Database Developer Guide. Constraints:
 	//
-	//     * Must be 1 to 64
+	// * Must be 1 to 64
 	// alphanumeric characters or hyphens. The user name can't be PUBLIC.
 	//
-	//     * Must
+	// * Must
 	// contain only lowercase letters, numbers, underscore, plus sign, period (dot), at
 	// symbol (@), or hyphen.
 	//
-	//     * First character must be a letter.
+	// * First character must be a letter.
 	//
-	//     * Must not
-	// contain a colon ( : ) or slash ( / ).
+	// * Must not contain
+	// a colon ( : ) or slash ( / ).
 	//
-	//     * Cannot be a reserved word. A list
-	// of reserved words can be found in Reserved Words
+	// * Cannot be a reserved word. A list of reserved
+	// words can be found in Reserved Words
 	// (http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html) in the Amazon
 	// Redshift Database Developer Guide.
 	//
@@ -95,19 +95,19 @@ type GetClusterCredentialsInput struct {
 	// existing user. If not specified, a new user is added only to PUBLIC. Database
 	// group name constraints
 	//
-	//     * Must be 1 to 64 alphanumeric characters or
-	// hyphens
+	// * Must be 1 to 64 alphanumeric characters or hyphens
 	//
-	//     * Must contain only lowercase letters, numbers, underscore, plus
-	// sign, period (dot), at symbol (@), or hyphen.
+	// *
+	// Must contain only lowercase letters, numbers, underscore, plus sign, period
+	// (dot), at symbol (@), or hyphen.
 	//
-	//     * First character must be a
-	// letter.
+	// * First character must be a letter.
 	//
-	//     * Must not contain a colon ( : ) or slash ( / ).
+	// * Must
+	// not contain a colon ( : ) or slash ( / ).
 	//
-	//     * Cannot be a
-	// reserved word. A list of reserved words can be found in Reserved Words
+	// * Cannot be a reserved word. A list
+	// of reserved words can be found in Reserved Words
 	// (http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html) in the Amazon
 	// Redshift Database Developer Guide.
 	DbGroups []*string
@@ -115,22 +115,21 @@ type GetClusterCredentialsInput struct {
 	// The name of a database that DbUser is authorized to log on to. If DbName is not
 	// specified, DbUser can log on to any existing database. Constraints:
 	//
-	//     * Must
-	// be 1 to 64 alphanumeric characters or hyphens
+	// * Must be 1
+	// to 64 alphanumeric characters or hyphens
 	//
-	//     * Must contain only lowercase
-	// letters, numbers, underscore, plus sign, period (dot), at symbol (@), or
-	// hyphen.
+	// * Must contain only lowercase letters,
+	// numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.
 	//
-	//     * First character must be a letter.
+	// * First
+	// character must be a letter.
 	//
-	//     * Must not contain a colon
-	// ( : ) or slash ( / ).
+	// * Must not contain a colon ( : ) or slash ( / ).
 	//
-	//     * Cannot be a reserved word. A list of reserved words
-	// can be found in Reserved Words
-	// (http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html) in the Amazon
-	// Redshift Database Developer Guide.
+	// *
+	// Cannot be a reserved word. A list of reserved words can be found in Reserved
+	// Words (http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html) in the
+	// Amazon Redshift Database Developer Guide.
 	DbName *string
 
 	// The number of seconds until the returned temporary password expires. Constraint:

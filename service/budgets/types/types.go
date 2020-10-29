@@ -154,18 +154,17 @@ type Budget struct {
 	// The cost filters, such as service or tag, that are applied to a budget. AWS
 	// Budgets supports the following services as a filter for RI budgets:
 	//
-	//     *
-	// Amazon Elastic Compute Cloud - Compute
+	// * Amazon
+	// Elastic Compute Cloud - Compute
 	//
-	//     * Amazon Redshift
+	// * Amazon Redshift
 	//
-	//     * Amazon
-	// Relational Database Service
+	// * Amazon Relational Database
+	// Service
 	//
-	//     * Amazon ElastiCache
+	// * Amazon ElastiCache
 	//
-	//     * Amazon
-	// Elasticsearch Service
+	// * Amazon Elasticsearch Service
 	CostFilters map[string][]*string
 
 	// The types of costs that are included in this COST budget. USAGE, RI_UTILIZATION,
@@ -352,15 +351,15 @@ type IamActionDefinition struct {
 // you want to be notified when you go over 160 dollars, create a notification with
 // the following parameters:
 //
-//     * A notificationType of ACTUAL
+// * A notificationType of ACTUAL
 //
-//     * A
-// thresholdType of PERCENTAGE
+// * A thresholdType of
+// PERCENTAGE
 //
-//     * A comparisonOperator of GREATER_THAN
+// * A comparisonOperator of GREATER_THAN
 //
-//     * A
-// notification threshold of 80
+// * A notification threshold
+// of 80
 type Notification struct {
 
 	// The comparison that is used for this notification.
@@ -427,10 +426,10 @@ type ScpActionDefinition struct {
 // The amount of cost or usage that is measured for a budget. For example, a Spend
 // for 3 GB of S3 usage would have the following parameters:
 //
-//     * An Amount of
-// 3
+// * An Amount of 3
 //
-//     * A unit of GB
+// * A
+// unit of GB
 type Spend struct {
 
 	// The cost or usage amount that is associated with a budget forecast, actual
@@ -469,10 +468,10 @@ type SsmActionDefinition struct {
 // subscription type and either an Amazon SNS topic or an email address. For
 // example, an email subscriber would have the following parameters:
 //
-//     * A
+// * A
 // subscriptionType of EMAIL
 //
-//     * An address of example@example.com
+// * An address of example@example.com
 type Subscriber struct {
 
 	// The address that AWS sends budget notifications to, either an SNS topic or an

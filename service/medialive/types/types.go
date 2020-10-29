@@ -1079,11 +1079,11 @@ type EbuTtDDestinationSettings struct {
 
 	// Specifies how to handle the gap between the lines (in multi-line captions).
 	//
-	//
-	// * enabled: Fill with the captions background color (as specified in the input
+	// *
+	// enabled: Fill with the captions background color (as specified in the input
 	// captions).
 	//
-	//     * disabled: Leave the gap unfilled.
+	// * disabled: Leave the gap unfilled.
 	FillLineGap EbuTtDFillLineGapControl
 
 	// Specifies the font family to include in the font data attached to the EBU-TT
@@ -1094,27 +1094,26 @@ type EbuTtDDestinationSettings struct {
 	// copied from the input captions. The size is always set to 100% to allow the
 	// downstream player to choose the size.
 	//
-	//     * Enter a list of font families, as a
+	// * Enter a list of font families, as a
 	// comma-separated list of font names, in order of preference. The name can be a
 	// font family (such as “Arial”), or a generic font family (such as “serif”), or
 	// “default” (to let the downstream player choose the font).
 	//
-	//     * Leave blank to
-	// set the family to “monospace”.
+	// * Leave blank to set
+	// the family to “monospace”.
 	FontFamily *string
 
 	// Specifies the style information (font color, font position, and so on) to
 	// include in the font data that is attached to the EBU-TT captions.
 	//
-	//     *
-	// include: Take the style information (font color, font position, and so on) from
-	// the source captions and include that information in the font data attached to
-	// the EBU-TT captions. This option is valid only if the source captions are
-	// Embedded or Teletext.
+	// * include:
+	// Take the style information (font color, font position, and so on) from the
+	// source captions and include that information in the font data attached to the
+	// EBU-TT captions. This option is valid only if the source captions are Embedded
+	// or Teletext.
 	//
-	//     * exclude: In the font data attached to the EBU-TT
-	// captions, set the font family to "monospaced". Do not include any other style
-	// information.
+	// * exclude: In the font data attached to the EBU-TT captions, set
+	// the font family to "monospaced". Do not include any other style information.
 	StyleControl EbuTtDDestinationStyleControl
 }
 
@@ -1488,13 +1487,13 @@ type H264Settings struct {
 	// Leave as STANDARD_QUALITY or choose a different value (which might result in
 	// additional costs to run the channel).
 	//
-	//     * ENHANCED_QUALITY: Produces a
-	// slightly better video quality without an increase in the bitrate. Has an effect
-	// only when the Rate control mode is QVBR or CBR. If this channel is in a
-	// MediaLive multiplex, the value must be ENHANCED_QUALITY.
+	// * ENHANCED_QUALITY: Produces a slightly
+	// better video quality without an increase in the bitrate. Has an effect only when
+	// the Rate control mode is QVBR or CBR. If this channel is in a MediaLive
+	// multiplex, the value must be ENHANCED_QUALITY.
 	//
-	//     *
-	// STANDARD_QUALITY: Valid for any Rate control mode.
+	// * STANDARD_QUALITY: Valid for
+	// any Rate control mode.
 	QualityLevel H264QualityLevel
 
 	// Controls the target quality for the video encode. Applies only when the rate
@@ -1502,13 +1501,13 @@ type H264Settings struct {
 	// bitrate field that suit your most important viewing devices. Recommended values
 	// are:
 	//
-	//     * Primary screen: Quality level: 8 to 10. Max bitrate: 4M
+	// * Primary screen: Quality level: 8 to 10. Max bitrate: 4M
 	//
-	//     * PC or
-	// tablet: Quality level: 7. Max bitrate: 1.5M to 3M
+	// * PC or tablet:
+	// Quality level: 7. Max bitrate: 1.5M to 3M
 	//
-	//     * Smartphone: Quality
-	// level: 6. Max bitrate: 1M to 1.5M
+	// * Smartphone: Quality level: 6. Max
+	// bitrate: 1M to 1.5M
 	QvbrQualityLevel *int32
 
 	// Rate control mode. QVBR: Quality will match the specified quality level except
@@ -1528,10 +1527,10 @@ type H264Settings struct {
 
 	// Scene change detection.
 	//
-	//     * On: inserts I-frames when scene change is
+	// * On: inserts I-frames when scene change is
 	// detected.
 	//
-	//     * Off: does not force an I-frame when scene change is detected.
+	// * Off: does not force an I-frame when scene change is detected.
 	SceneChangeDetect H264SceneChangeDetect
 
 	// Number of slices per picture. Must be less than or equal to the number of
@@ -1562,11 +1561,11 @@ type H264Settings struct {
 
 	// Determines how timecodes should be inserted into the video elementary stream.
 	//
+	// *
+	// 'disabled': Do not include timecodes
 	//
-	// * 'disabled': Do not include timecodes
-	//
-	//     * 'picTimingSei': Pass through
-	// picture timing SEI messages from the source specified in Timecode Config
+	// * 'picTimingSei': Pass through picture
+	// timing SEI messages from the source specified in Timecode Config
 	TimecodeInsertion H264TimecodeInsertionBehavior
 }
 
@@ -1693,13 +1692,13 @@ type H265Settings struct {
 	// bitrate field that suit your most important viewing devices. Recommended values
 	// are:
 	//
-	//     * Primary screen: Quality level: 8 to 10. Max bitrate: 4M
+	// * Primary screen: Quality level: 8 to 10. Max bitrate: 4M
 	//
-	//     * PC or
-	// tablet: Quality level: 7. Max bitrate: 1.5M to 3M
+	// * PC or tablet:
+	// Quality level: 7. Max bitrate: 1.5M to 3M
 	//
-	//     * Smartphone: Quality
-	// level: 6. Max bitrate: 1M to 1.5M
+	// * Smartphone: Quality level: 6. Max
+	// bitrate: 1M to 1.5M
 	QvbrQualityLevel *int32
 
 	// Rate control mode. QVBR: Quality will match the specified quality level except
@@ -1730,11 +1729,11 @@ type H265Settings struct {
 
 	// Determines how timecodes should be inserted into the video elementary stream.
 	//
+	// *
+	// 'disabled': Do not include timecodes
 	//
-	// * 'disabled': Do not include timecodes
-	//
-	//     * 'picTimingSei': Pass through
-	// picture timing SEI messages from the source specified in Timecode Config
+	// * 'picTimingSei': Pass through picture
+	// timing SEI messages from the source specified in Timecode Config
 	TimecodeInsertion H265TimecodeInsertionBehavior
 }
 
@@ -2515,13 +2514,13 @@ type InputSettings struct {
 	// Turns on the filter for this input. MPEG-2 inputs have the deblocking filter
 	// enabled by default.
 	//
-	//     * auto - filtering will be applied depending on input
+	// * auto - filtering will be applied depending on input
 	// type/quality
 	//
-	//     * disabled - no filtering will be applied to the input
+	// * disabled - no filtering will be applied to the input
 	//
-	//     *
-	// forced - filtering will be applied regardless of input type
+	// * forced -
+	// filtering will be applied regardless of input type
 	InputFilter InputFilter
 
 	// Input settings.
@@ -2531,11 +2530,11 @@ type InputSettings struct {
 	// in this input. Applicable data types are captions, timecode, AFD, and SCTE-104
 	// messages.
 	//
-	//     * PREFER: Extract from SMPTE-2038 if present in this input,
-	// otherwise extract from another source (if any).
+	// * PREFER: Extract from SMPTE-2038 if present in this input, otherwise
+	// extract from another source (if any).
 	//
-	//     * IGNORE: Never extract any
-	// ancillary data from SMPTE-2038.
+	// * IGNORE: Never extract any ancillary
+	// data from SMPTE-2038.
 	Smpte2038DataPreference Smpte2038DataPreference
 
 	// Loop input if it is a file. This allows a file input to be streamed
@@ -3142,14 +3141,14 @@ type MsSmoothGroupSettings struct {
 	// is sent and the same Live Event is used without changing the publishing point,
 	// clients might see cached video from the previous run. Options:
 	//
-	//     *
+	// *
 	// "useConfigured" - use the value provided in eventId
 	//
-	//     * "useTimestamp" -
-	// generate and send an event ID based on the current timestamp
+	// * "useTimestamp" - generate
+	// and send an event ID based on the current timestamp
 	//
-	//     * "noEventId"
-	// - do not send an event ID to the IIS server.
+	// * "noEventId" - do not send
+	// an event ID to the IIS server.
 	EventIdMode SmoothGroupEventIdMode
 
 	// When set to sendEos, send EOS signal to IIS server when stopping the event
@@ -3181,16 +3180,16 @@ type MsSmoothGroupSettings struct {
 
 	// Identifies the type of data to place in the sparse track:
 	//
-	//     * SCTE35: Insert
+	// * SCTE35: Insert
 	// SCTE-35 messages from the source content. With each message, insert an IDR frame
 	// to start a new segment.
 	//
-	//     * SCTE35_WITHOUT_SEGMENTATION: Insert SCTE-35
-	// messages from the source content. With each message, insert an IDR frame but
-	// don't start a new segment.
+	// * SCTE35_WITHOUT_SEGMENTATION: Insert SCTE-35 messages
+	// from the source content. With each message, insert an IDR frame but don't start
+	// a new segment.
 	//
-	//     * NONE: Don't generate a sparse track for any
-	// outputs in this output group.
+	// * NONE: Don't generate a sparse track for any outputs in this
+	// output group.
 	SparseTrackType SmoothGroupSparseTrackType
 
 	// When set to send, send stream manifest so publishing point doesn't start until
@@ -3203,10 +3202,10 @@ type MsSmoothGroupSettings struct {
 
 	// Type of timestamp date offset to use.
 	//
-	//     * useEventStartDate: Use the date the
+	// * useEventStartDate: Use the date the
 	// event was started as the offset
 	//
-	//     * useConfiguredOffset: Use an explicitly
+	// * useConfiguredOffset: Use an explicitly
 	// configured date as the offset
 	TimestampOffsetMode SmoothGroupTimestampOffsetMode
 }
@@ -3887,12 +3886,11 @@ type RtmpGroupSettings struct {
 
 	// Controls the behavior of this RTMP group if input becomes unavailable.
 	//
-	//     *
+	// *
 	// emitOutput: Emit a slate until input returns.
 	//
-	//     * pauseOutput: Stop
-	// transmitting data until input returns. This does not close the underlying RTMP
-	// connection.
+	// * pauseOutput: Stop transmitting
+	// data until input returns. This does not close the underlying RTMP connection.
 	InputLossAction InputLossActionForRtmpOut
 
 	// If a streaming output fails, number of seconds to wait until a restart is
@@ -4021,18 +4019,18 @@ type Scte27SourceSettings struct {
 	// The pid field is used in conjunction with the caption selector languageCode
 	// field as follows:
 	//
-	//     * Specify PID and Language: Extracts captions from that
-	// PID; the language is "informational".
+	// * Specify PID and Language: Extracts captions from that PID;
+	// the language is "informational".
 	//
-	//     * Specify PID and omit Language:
-	// Extracts the specified PID.
+	// * Specify PID and omit Language: Extracts the
+	// specified PID.
 	//
-	//     * Omit PID and specify Language: Extracts the
-	// specified language, whichever PID that happens to be.
+	// * Omit PID and specify Language: Extracts the specified
+	// language, whichever PID that happens to be.
 	//
-	//     * Omit PID and omit
-	// Language: Valid only if source is DVB-Sub that is being passed through; all
-	// languages will be passed through.
+	// * Omit PID and omit Language: Valid
+	// only if source is DVB-Sub that is being passed through; all languages will be
+	// passed through.
 	Pid *int32
 }
 
@@ -4344,11 +4342,11 @@ type TemporalFilterSettings struct {
 
 	// If you enable this filter, the results are the following:
 	//
-	//     * If the source
+	// * If the source
 	// content is noisy (it contains excessive digital artifacts), the filter cleans up
 	// the source.
 	//
-	//     * If the source content is already clean, the filter tends to
+	// * If the source content is already clean, the filter tends to
 	// decrease the bitrate, especially when the rate control mode is QVBR.
 	PostFilterSharpening TemporalFilterPostFilterSharpening
 

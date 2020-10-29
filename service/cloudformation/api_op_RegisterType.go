@@ -15,16 +15,16 @@ import (
 // available for use in CloudFormation templates in your AWS account, and
 // includes:
 //
-//     * Validating the resource schema
+// * Validating the resource schema
 //
-//     * Determining which
-// handlers have been specified for the resource
+// * Determining which handlers have
+// been specified for the resource
 //
-//     * Making the resource type
-// available for use in your account
+// * Making the resource type available for use in
+// your account
 //
-// For more information on how to develop types
-// and ready them for registeration, see Creating Resource Providers
+// For more information on how to develop types and ready them for
+// registeration, see Creating Resource Providers
 // (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html)
 // in the CloudFormation CLI User Guide. You can have a maximum of 50 resource type
 // versions registered at a time. This maximum is per account and per region. Use
@@ -68,18 +68,17 @@ type RegisterTypeInput struct {
 	// organization namespaces are reserved and cannot be used in your resource type
 	// names:
 	//
-	//     * Alexa
+	// * Alexa
 	//
-	//     * AMZN
+	// * AMZN
 	//
-	//     * Amazon
+	// * Amazon
 	//
-	//     * AWS
+	// * AWS
 	//
-	//     * Custom
+	// * Custom
 	//
-	//     *
-	// Dev
+	// * Dev
 	//
 	// This member is required.
 	TypeName *string

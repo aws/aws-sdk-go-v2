@@ -18,28 +18,27 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 // Related operations
 //
-//     * CreateFleet
+// * CreateFleet
 //
-//     * ListFleets
+// * ListFleets
 //
-//     * DeleteFleet
+// * DeleteFleet
 //
+// *
+// DescribeFleetAttributes
 //
-// * DescribeFleetAttributes
+// * Update fleets:
 //
-//     * Update fleets:
+// * UpdateFleetAttributes
 //
-//         *
-// UpdateFleetAttributes
+// *
+// UpdateFleetCapacity
 //
-//         * UpdateFleetCapacity
+// * UpdateFleetPortSettings
 //
-//         *
-// UpdateFleetPortSettings
+// * UpdateRuntimeConfiguration
 //
-//         * UpdateRuntimeConfiguration
-//
-//     *
+// *
 // StartFleetActions or StopFleetActions
 func (c *Client) UpdateFleetAttributes(ctx context.Context, params *UpdateFleetAttributesInput, optFns ...func(*Options)) (*UpdateFleetAttributesOutput, error) {
 	if params == nil {
@@ -82,12 +81,12 @@ type UpdateFleetAttributesInput struct {
 	// fleet. Instances that already exist are not affected. You can set protection for
 	// individual instances using UpdateGameSession.
 	//
-	//     * NoProtection -- The game
+	// * NoProtection -- The game
 	// session can be terminated during a scale-down event.
 	//
-	//     * FullProtection -- If
-	// the game session is in an ACTIVE status, it cannot be terminated during a
-	// scale-down event.
+	// * FullProtection -- If the
+	// game session is in an ACTIVE status, it cannot be terminated during a scale-down
+	// event.
 	NewGameSessionProtectionPolicy types.ProtectionPolicy
 
 	// Policy that limits the number of game sessions an individual player can create

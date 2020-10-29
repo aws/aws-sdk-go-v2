@@ -24,7 +24,7 @@ type Framework string
 
 // Enum values for Framework
 const (
-	FrameworkHyperledger_fabric Framework = "HYPERLEDGER_FABRIC"
+	FrameworkHyperledgerFabric Framework = "HYPERLEDGER_FABRIC"
 )
 
 // Values returns all known values for Framework. Note that this can be expanded in
@@ -64,12 +64,12 @@ type MemberStatus string
 
 // Enum values for MemberStatus
 const (
-	MemberStatusCreating      MemberStatus = "CREATING"
-	MemberStatusAvailable     MemberStatus = "AVAILABLE"
-	MemberStatusCreate_failed MemberStatus = "CREATE_FAILED"
-	MemberStatusUpdating      MemberStatus = "UPDATING"
-	MemberStatusDeleting      MemberStatus = "DELETING"
-	MemberStatusDeleted       MemberStatus = "DELETED"
+	MemberStatusCreating     MemberStatus = "CREATING"
+	MemberStatusAvailable    MemberStatus = "AVAILABLE"
+	MemberStatusCreateFailed MemberStatus = "CREATE_FAILED"
+	MemberStatusUpdating     MemberStatus = "UPDATING"
+	MemberStatusDeleting     MemberStatus = "DELETING"
+	MemberStatusDeleted      MemberStatus = "DELETED"
 )
 
 // Values returns all known values for MemberStatus. Note that this can be expanded
@@ -90,11 +90,11 @@ type NetworkStatus string
 
 // Enum values for NetworkStatus
 const (
-	NetworkStatusCreating      NetworkStatus = "CREATING"
-	NetworkStatusAvailable     NetworkStatus = "AVAILABLE"
-	NetworkStatusCreate_failed NetworkStatus = "CREATE_FAILED"
-	NetworkStatusDeleting      NetworkStatus = "DELETING"
-	NetworkStatusDeleted       NetworkStatus = "DELETED"
+	NetworkStatusCreating     NetworkStatus = "CREATING"
+	NetworkStatusAvailable    NetworkStatus = "AVAILABLE"
+	NetworkStatusCreateFailed NetworkStatus = "CREATE_FAILED"
+	NetworkStatusDeleting     NetworkStatus = "DELETING"
+	NetworkStatusDeleted      NetworkStatus = "DELETED"
 )
 
 // Values returns all known values for NetworkStatus. Note that this can be
@@ -114,13 +114,13 @@ type NodeStatus string
 
 // Enum values for NodeStatus
 const (
-	NodeStatusCreating      NodeStatus = "CREATING"
-	NodeStatusAvailable     NodeStatus = "AVAILABLE"
-	NodeStatusCreate_failed NodeStatus = "CREATE_FAILED"
-	NodeStatusUpdating      NodeStatus = "UPDATING"
-	NodeStatusDeleting      NodeStatus = "DELETING"
-	NodeStatusDeleted       NodeStatus = "DELETED"
-	NodeStatusFailed        NodeStatus = "FAILED"
+	NodeStatusCreating     NodeStatus = "CREATING"
+	NodeStatusAvailable    NodeStatus = "AVAILABLE"
+	NodeStatusCreateFailed NodeStatus = "CREATE_FAILED"
+	NodeStatusUpdating     NodeStatus = "UPDATING"
+	NodeStatusDeleting     NodeStatus = "DELETING"
+	NodeStatusDeleted      NodeStatus = "DELETED"
+	NodeStatusFailed       NodeStatus = "FAILED"
 )
 
 // Values returns all known values for NodeStatus. Note that this can be expanded
@@ -142,11 +142,11 @@ type ProposalStatus string
 
 // Enum values for ProposalStatus
 const (
-	ProposalStatusIn_progress   ProposalStatus = "IN_PROGRESS"
-	ProposalStatusApproved      ProposalStatus = "APPROVED"
-	ProposalStatusRejected      ProposalStatus = "REJECTED"
-	ProposalStatusExpired       ProposalStatus = "EXPIRED"
-	ProposalStatusAction_failed ProposalStatus = "ACTION_FAILED"
+	ProposalStatusInProgress   ProposalStatus = "IN_PROGRESS"
+	ProposalStatusApproved     ProposalStatus = "APPROVED"
+	ProposalStatusRejected     ProposalStatus = "REJECTED"
+	ProposalStatusExpired      ProposalStatus = "EXPIRED"
+	ProposalStatusActionFailed ProposalStatus = "ACTION_FAILED"
 )
 
 // Values returns all known values for ProposalStatus. Note that this can be
@@ -184,8 +184,8 @@ type ThresholdComparator string
 
 // Enum values for ThresholdComparator
 const (
-	ThresholdComparatorGreater_than             ThresholdComparator = "GREATER_THAN"
-	ThresholdComparatorGreater_than_or_equal_to ThresholdComparator = "GREATER_THAN_OR_EQUAL_TO"
+	ThresholdComparatorGreaterThan          ThresholdComparator = "GREATER_THAN"
+	ThresholdComparatorGreaterThanOrEqualTo ThresholdComparator = "GREATER_THAN_OR_EQUAL_TO"
 )
 
 // Values returns all known values for ThresholdComparator. Note that this can be

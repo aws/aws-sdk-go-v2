@@ -6,8 +6,8 @@ type ClientVersion string
 
 // Enum values for ClientVersion
 const (
-	ClientVersionFive_one   ClientVersion = "5.1"
-	ClientVersionFive_three ClientVersion = "5.3"
+	ClientVersionFiveOne   ClientVersion = "5.1"
+	ClientVersionFiveThree ClientVersion = "5.3"
 )
 
 // Values returns all known values for ClientVersion. Note that this can be

@@ -108,23 +108,23 @@ type ApplicationVersionDescription struct {
 	// if you specified True for the Process parameter of the CreateApplicationVersion
 	// action. The following list describes the possible values.
 	//
-	//     * Unprocessed –
+	// * Unprocessed –
 	// Application version wasn't pre-processed or validated. Elastic Beanstalk will
 	// validate configuration files during deployment of the application version to an
 	// environment.
 	//
-	//     * Processing – Elastic Beanstalk is currently processing the
+	// * Processing – Elastic Beanstalk is currently processing the
 	// application version.
 	//
-	//     * Building – Application version is currently
-	// undergoing an AWS CodeBuild build.
+	// * Building – Application version is currently undergoing
+	// an AWS CodeBuild build.
 	//
-	//     * Processed – Elastic Beanstalk was
-	// successfully pre-processed and validated.
+	// * Processed – Elastic Beanstalk was successfully
+	// pre-processed and validated.
 	//
-	//     * Failed – Either the AWS
-	// CodeBuild build failed or configuration files didn't pass validation. This
-	// application version isn't usable.
+	// * Failed – Either the AWS CodeBuild build failed
+	// or configuration files didn't pass validation. This application version isn't
+	// usable.
 	Status ApplicationVersionStatus
 
 	// A unique identifier for the application version.
@@ -179,13 +179,13 @@ type BuildConfiguration struct {
 
 	// Information about the compute resources the build project will use.
 	//
-	//     *
+	// *
 	// BUILD_GENERAL1_SMALL: Use up to 3 GB memory and 2 vCPUs for builds
 	//
-	//     *
+	// *
 	// BUILD_GENERAL1_MEDIUM: Use up to 7 GB memory and 4 vCPUs for builds
 	//
-	//     *
+	// *
 	// BUILD_GENERAL1_LARGE: Use up to 15 GB memory and 8 vCPUs for builds
 	ComputeType ComputeType
 
@@ -208,17 +208,16 @@ type ConfigurationOptionDescription struct {
 	// An indication of which action is required if the value for this configuration
 	// option changes:
 	//
-	//     * NoInterruption : There is no interruption to the
-	// environment or application availability.
+	// * NoInterruption : There is no interruption to the environment
+	// or application availability.
 	//
-	//     * RestartEnvironment : The
-	// environment is entirely restarted, all AWS resources are deleted and recreated,
-	// and the environment is unavailable during the process.
+	// * RestartEnvironment : The environment is entirely
+	// restarted, all AWS resources are deleted and recreated, and the environment is
+	// unavailable during the process.
 	//
-	//     *
-	// RestartApplicationServer : The environment is available the entire time.
-	// However, a short application outage occurs when the application servers on the
-	// running Amazon EC2 instances are restarted.
+	// * RestartApplicationServer : The environment is
+	// available the entire time. However, a short application outage occurs when the
+	// application servers on the running Amazon EC2 instances are restarted.
 	ChangeSeverity *string
 
 	// The default value for this configuration option.
@@ -248,12 +247,12 @@ type ConfigurationOptionDescription struct {
 
 	// An indication of whether the user defined this configuration option:
 	//
-	//     * true
-	// : This configuration option was defined by the user. It is a valid choice for
+	// * true :
+	// This configuration option was defined by the user. It is a valid choice for
 	// specifying if this as an Option to Remove when updating configuration
 	// settings.
 	//
-	//     * false : This configuration was not defined by the
+	// * false : This configuration was not defined by the
 	// user.
 	//
 	// Constraint: You can remove only UserDefined options from a configuration.
@@ -266,18 +265,18 @@ type ConfigurationOptionDescription struct {
 	// An indication of which type of values this option has and whether it is
 	// allowable to select one or more than one of the possible values:
 	//
-	//     * Scalar :
+	// * Scalar :
 	// Values for this option are a single selection from the possible values, or an
 	// unformatted string, or numeric value governed by the MIN/MAX/Regex
 	// constraints.
 	//
-	//     * List : Values for this option are multiple selections from
-	// the possible values.
+	// * List : Values for this option are multiple selections from the
+	// possible values.
 	//
-	//     * Boolean : Values for this option are either true or
-	// false .
+	// * Boolean : Values for this option are either true or false
+	// .
 	//
-	//     * Json : Values for this option are a JSON representation of a
+	// * Json : Values for this option are a JSON representation of a
 	// ConfigDocument.
 	ValueType ConfigurationOptionValueType
 }
@@ -319,17 +318,17 @@ type ConfigurationSettingsDescription struct {
 	// DeploymentStatus parameter indicates the deployment status of this configuration
 	// set:
 	//
-	//     * null: This configuration is not associated with a running
+	// * null: This configuration is not associated with a running
 	// environment.
 	//
-	//     * pending: This is a draft configuration that is not deployed
-	// to the associated environment but is in the process of deploying.
+	// * pending: This is a draft configuration that is not deployed to
+	// the associated environment but is in the process of deploying.
 	//
-	//     *
-	// deployed: This is the configuration that is currently deployed to the associated
-	// running environment.
+	// * deployed: This
+	// is the configuration that is currently deployed to the associated running
+	// environment.
 	//
-	//     * failed: This is a draft configuration that failed to
+	// * failed: This is a draft configuration that failed to
 	// successfully deploy.
 	DeploymentStatus ConfigurationDeploymentStatus
 
@@ -411,13 +410,12 @@ type Deployment struct {
 
 	// The status of the deployment:
 	//
-	//     * In Progress : The deployment is in
-	// progress.
+	// * In Progress : The deployment is in progress.
 	//
-	//     * Deployed : The deployment succeeded.
+	// *
+	// Deployed : The deployment succeeded.
 	//
-	//     * Failed : The
-	// deployment failed.
+	// * Failed : The deployment failed.
 	Status *string
 
 	// The version label of the application version in the deployment.
@@ -467,20 +465,20 @@ type EnvironmentDescription struct {
 	// Describes the health status of the environment. AWS Elastic Beanstalk indicates
 	// the failure levels for a running environment:
 	//
-	//     * Red: Indicates the
-	// environment is not responsive. Occurs when three or more consecutive failures
-	// occur for an environment.
+	// * Red: Indicates the environment
+	// is not responsive. Occurs when three or more consecutive failures occur for an
+	// environment.
 	//
-	//     * Yellow: Indicates that something is wrong.
-	// Occurs when two consecutive failures occur for an environment.
+	// * Yellow: Indicates that something is wrong. Occurs when two
+	// consecutive failures occur for an environment.
 	//
-	//     * Green:
-	// Indicates the environment is healthy and fully functional.
+	// * Green: Indicates the
+	// environment is healthy and fully functional.
 	//
-	//     * Grey: Default
-	// health for a new environment. The environment is not fully launched and health
-	// checks have not started or health checks are suspended during an
-	// UpdateEnvironment or RestartEnvironment request.
+	// * Grey: Default health for a new
+	// environment. The environment is not fully launched and health checks have not
+	// started or health checks are suspended during an UpdateEnvironment or
+	// RestartEnvironment request.
 	//
 	// Default: Grey
 	Health EnvironmentHealth
@@ -507,20 +505,20 @@ type EnvironmentDescription struct {
 
 	// The current operational status of the environment:
 	//
-	//     * Launching: Environment
-	// is in the process of initial deployment.
+	// * Launching: Environment is
+	// in the process of initial deployment.
 	//
-	//     * Updating: Environment is in the
-	// process of updating its configuration settings or application version.
+	// * Updating: Environment is in the process
+	// of updating its configuration settings or application version.
 	//
-	//     *
-	// Ready: Environment is available to have an action performed on it, such as
-	// update or terminate.
+	// * Ready:
+	// Environment is available to have an action performed on it, such as update or
+	// terminate.
 	//
-	//     * Terminating: Environment is in the shut-down
-	// process.
+	// * Terminating: Environment is in the shut-down process.
 	//
-	//     * Terminated: Environment is not running.
+	// *
+	// Terminated: Environment is not running.
 	Status EnvironmentStatus
 
 	// The name of the configuration template used to originally launch this
@@ -608,18 +606,18 @@ type EnvironmentTier struct {
 
 	// The name of this environment tier. Valid values:
 	//
-	//     * For Web server tier –
+	// * For Web server tier –
 	// WebServer
 	//
-	//     * For Worker tier – Worker
+	// * For Worker tier – Worker
 	Name *string
 
 	// The type of this environment tier. Valid values:
 	//
-	//     * For Web server tier –
+	// * For Web server tier –
 	// Standard
 	//
-	//     * For Worker tier – SQS/HTTP
+	// * For Worker tier – SQS/HTTP
 	Type *string
 
 	// The version of this environment tier. When you don't set a value to it, Elastic
@@ -1005,16 +1003,16 @@ type PlatformFilter struct {
 	// value is supported for all current operators. The following list shows valid
 	// filter values for some filter attributes.
 	//
-	//     * PlatformStatus: Creating |
-	// Failed | Ready | Deleting | Deleted
+	// * PlatformStatus: Creating | Failed |
+	// Ready | Deleting | Deleted
 	//
-	//     * PlatformLifecycleState: recommended
+	// * PlatformLifecycleState: recommended
 	//
+	// *
+	// SupportedTier: WebServer/Standard | Worker/SQS/HTTP
 	//
-	// * SupportedTier: WebServer/Standard | Worker/SQS/HTTP
-	//
-	//     * SupportedAddon:
-	// Log/S3 | Monitoring/Healthd | WorkerDaemon/SQSD
+	// * SupportedAddon: Log/S3 |
+	// Monitoring/Healthd | WorkerDaemon/SQSD
 	Values []*string
 }
 
@@ -1211,12 +1209,12 @@ type SourceBuildInformation struct {
 	// The location of the source code, as a formatted string, depending on the value
 	// of SourceRepository
 	//
-	//     * For CodeCommit, the format is the repository name and
+	// * For CodeCommit, the format is the repository name and
 	// commit ID, separated by a forward slash. For example,
 	// my-git-repo/265cfa0cf6af46153527f55d6503ec030551f57a.
 	//
-	//     * For S3, the format
-	// is the S3 bucket name and object key, separated by a forward slash. For example,
+	// * For S3, the format is
+	// the S3 bucket name and object key, separated by a forward slash. For example,
 	// my-s3-bucket/Folders/my-source-file.
 	//
 	// This member is required.
@@ -1224,18 +1222,18 @@ type SourceBuildInformation struct {
 
 	// Location where the repository is stored.
 	//
-	//     * CodeCommit
+	// * CodeCommit
 	//
-	//     * S3
+	// * S3
 	//
 	// This member is required.
 	SourceRepository SourceRepository
 
 	// The type of repository.
 	//
-	//     * Git
+	// * Git
 	//
-	//     * Zip
+	// * Zip
 	//
 	// This member is required.
 	SourceType SourceType
@@ -1316,10 +1314,10 @@ type ValidationMessage struct {
 
 	// An indication of the severity of this message:
 	//
-	//     * error: This message
-	// indicates that this is not a valid setting for an option.
+	// * error: This message indicates
+	// that this is not a valid setting for an option.
 	//
-	//     * warning: This
-	// message is providing information you should take into account.
+	// * warning: This message is
+	// providing information you should take into account.
 	Severity ValidationSeverity
 }

@@ -88,15 +88,15 @@ type GetEvaluationOutput struct {
 	// the DataSource. One of the following metric is returned based on the type of the
 	// MLModel:
 	//
-	//     * BinaryAUC: A binary MLModel uses the Area Under the Curve (AUC)
+	// * BinaryAUC: A binary MLModel uses the Area Under the Curve (AUC)
 	// technique to measure performance.
 	//
-	//     * RegressionRMSE: A regression MLModel
-	// uses the Root Mean Square Error (RMSE) technique to measure performance. RMSE
+	// * RegressionRMSE: A regression MLModel uses
+	// the Root Mean Square Error (RMSE) technique to measure performance. RMSE
 	// measures the difference between predicted and actual values for a single
 	// variable.
 	//
-	//     * MulticlassAvgFScore: A multiclass MLModel uses the F1 score
+	// * MulticlassAvgFScore: A multiclass MLModel uses the F1 score
 	// technique to measure performance.
 	//
 	// For more information about performance
@@ -111,19 +111,19 @@ type GetEvaluationOutput struct {
 	// The status of the evaluation. This element can have one of the following
 	// values:
 	//
-	//     * PENDING - Amazon Machine Language (Amazon ML) submitted a request
-	// to evaluate an MLModel.
+	// * PENDING - Amazon Machine Language (Amazon ML) submitted a request to
+	// evaluate an MLModel.
 	//
-	//     * INPROGRESS - The evaluation is underway.
+	// * INPROGRESS - The evaluation is underway.
 	//
-	//     *
-	// FAILED - The request to evaluate an MLModel did not run to completion. It is not
-	// usable.
+	// * FAILED - The
+	// request to evaluate an MLModel did not run to completion. It is not usable.
 	//
-	//     * COMPLETED - The evaluation process completed successfully.
+	// *
+	// COMPLETED - The evaluation process completed successfully.
 	//
-	//     *
-	// DELETED - The Evaluation is marked as deleted. It is not usable.
+	// * DELETED - The
+	// Evaluation is marked as deleted. It is not usable.
 	Status types.EntityStatus
 
 	// Metadata pertaining to the operation's result.

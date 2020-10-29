@@ -16,62 +16,61 @@ import (
 // when a rule is triggered. You can configure the following as targets for
 // Events:
 //
-//     * EC2 instances
+// * EC2 instances
 //
-//     * SSM Run Command
+// * SSM Run Command
 //
-//     * SSM Automation
+// * SSM Automation
 //
-//     *
-// AWS Lambda functions
+// * AWS Lambda
+// functions
 //
-//     * Data streams in Amazon Kinesis Data Streams
+// * Data streams in Amazon Kinesis Data Streams
 //
-//     *
-// Data delivery streams in Amazon Kinesis Data Firehose
+// * Data delivery
+// streams in Amazon Kinesis Data Firehose
 //
-//     * Amazon ECS tasks
+// * Amazon ECS tasks
 //
+// * AWS Step
+// Functions state machines
 //
-// * AWS Step Functions state machines
+// * AWS Batch jobs
 //
-//     * AWS Batch jobs
+// * AWS CodeBuild projects
 //
-//     * AWS CodeBuild
-// projects
+// *
+// Pipelines in AWS CodePipeline
 //
-//     * Pipelines in AWS CodePipeline
+// * Amazon Inspector assessment templates
 //
-//     * Amazon Inspector assessment
-// templates
+// * Amazon
+// SNS topics
 //
-//     * Amazon SNS topics
+// * Amazon SQS queues, including FIFO queues
 //
-//     * Amazon SQS queues, including FIFO
-// queues
+// * The default event bus
+// of another AWS account
 //
-//     * The default event bus of another AWS account
+// * Amazon API Gateway REST APIs
 //
-//     * Amazon API
-// Gateway REST APIs
+// * Redshift Clusters to
+// invoke Data API ExecuteStatement on
 //
-//     * Redshift Clusters to invoke Data API ExecuteStatement
-// on
-//
-// Creating rules with built-in targets is supported only in the AWS Management
-// Console. The built-in targets are EC2 CreateSnapshot API call, EC2
-// RebootInstances API call, EC2 StopInstances API call, and EC2 TerminateInstances
-// API call. For some target types, PutTargets provides target-specific parameters.
-// If the target is a Kinesis data stream, you can optionally specify which shard
-// the event goes to by using the KinesisParameters argument. To invoke a command
-// on multiple EC2 instances with one rule, you can use the RunCommandParameters
-// field. To be able to make API calls against the resources that you own, Amazon
-// EventBridge (CloudWatch Events) needs the appropriate permissions. For AWS
-// Lambda and Amazon SNS resources, EventBridge relies on resource-based policies.
-// For EC2 instances, Kinesis data streams, AWS Step Functions state machines and
-// API Gateway REST APIs, EventBridge relies on IAM roles that you specify in the
-// RoleARN argument in PutTargets. For more information, see Authentication and
-// Access Control
+// Creating rules with built-in targets is
+// supported only in the AWS Management Console. The built-in targets are EC2
+// CreateSnapshot API call, EC2 RebootInstances API call, EC2 StopInstances API
+// call, and EC2 TerminateInstances API call. For some target types, PutTargets
+// provides target-specific parameters. If the target is a Kinesis data stream, you
+// can optionally specify which shard the event goes to by using the
+// KinesisParameters argument. To invoke a command on multiple EC2 instances with
+// one rule, you can use the RunCommandParameters field. To be able to make API
+// calls against the resources that you own, Amazon EventBridge (CloudWatch Events)
+// needs the appropriate permissions. For AWS Lambda and Amazon SNS resources,
+// EventBridge relies on resource-based policies. For EC2 instances, Kinesis data
+// streams, AWS Step Functions state machines and API Gateway REST APIs,
+// EventBridge relies on IAM roles that you specify in the RoleARN argument in
+// PutTargets. For more information, see Authentication and Access Control
 // (https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html)
 // in the Amazon EventBridge User Guide. If another AWS account is in the same
 // region and has granted you permission (using PutPermission), you can send events
@@ -94,32 +93,31 @@ import (
 // are mutually exclusive and optional parameters of a target. When a rule is
 // triggered due to a matched event:
 //
-//     * If none of the following arguments are
+// * If none of the following arguments are
 // specified for a target, then the entire event is passed to the target in JSON
 // format (unless the target is Amazon EC2 Run Command or Amazon ECS task, in which
 // case nothing from the event is passed to the target).
 //
-//     * If Input is
-// specified in the form of valid JSON, then the matched event is overridden with
-// this constant.
+// * If Input is specified
+// in the form of valid JSON, then the matched event is overridden with this
+// constant.
 //
-//     * If InputPath is specified in the form of JSONPath (for
-// example, $.detail), then only the part of the event specified in the path is
-// passed to the target (for example, only the detail part of the event is
-// passed).
+// * If InputPath is specified in the form of JSONPath (for example,
+// $.detail), then only the part of the event specified in the path is passed to
+// the target (for example, only the detail part of the event is passed).
 //
-//     * If InputTransformer is specified, then one or more specified
-// JSONPaths are extracted from the event and used as values in a template that you
-// specify as the input to the target.
+// * If
+// InputTransformer is specified, then one or more specified JSONPaths are
+// extracted from the event and used as values in a template that you specify as
+// the input to the target.
 //
-// When you specify InputPath or
-// InputTransformer, you must use JSON dot notation, not bracket notation. When you
-// add targets to a rule and the associated rule triggers soon after, new or
-// updated targets might not be immediately invoked. Allow a short period of time
-// for changes to take effect. This action can partially fail if too many requests
-// are made at the same time. If that happens, FailedEntryCount is non-zero in the
-// response and each entry in FailedEntries provides the ID of the failed target
-// and the error code.
+// When you specify InputPath or InputTransformer, you
+// must use JSON dot notation, not bracket notation. When you add targets to a rule
+// and the associated rule triggers soon after, new or updated targets might not be
+// immediately invoked. Allow a short period of time for changes to take effect.
+// This action can partially fail if too many requests are made at the same time.
+// If that happens, FailedEntryCount is non-zero in the response and each entry in
+// FailedEntries provides the ID of the failed target and the error code.
 func (c *Client) PutTargets(ctx context.Context, params *PutTargetsInput, optFns ...func(*Options)) (*PutTargetsOutput, error) {
 	if params == nil {
 		params = &PutTargetsInput{}

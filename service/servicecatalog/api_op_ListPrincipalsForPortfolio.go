@@ -36,12 +36,11 @@ type ListPrincipalsForPortfolioInput struct {
 
 	// The language code.
 	//
-	//     * en - English (default)
+	// * en - English (default)
 	//
-	//     * jp - Japanese
+	// * jp - Japanese
 	//
-	//     * zh
-	// - Chinese
+	// * zh - Chinese
 	AcceptLanguage *string
 
 	// The maximum number of items to return with this call.

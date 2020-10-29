@@ -26,34 +26,34 @@ type ArtifactType string
 
 // Enum values for ArtifactType
 const (
-	ArtifactTypeUnknown                  ArtifactType = "UNKNOWN"
-	ArtifactTypeScreenshot               ArtifactType = "SCREENSHOT"
-	ArtifactTypeDevice_log               ArtifactType = "DEVICE_LOG"
-	ArtifactTypeMessage_log              ArtifactType = "MESSAGE_LOG"
-	ArtifactTypeVideo_log                ArtifactType = "VIDEO_LOG"
-	ArtifactTypeResult_log               ArtifactType = "RESULT_LOG"
-	ArtifactTypeService_log              ArtifactType = "SERVICE_LOG"
-	ArtifactTypeWebkit_log               ArtifactType = "WEBKIT_LOG"
-	ArtifactTypeInstrumentation_output   ArtifactType = "INSTRUMENTATION_OUTPUT"
-	ArtifactTypeExerciser_monkey_output  ArtifactType = "EXERCISER_MONKEY_OUTPUT"
-	ArtifactTypeCalabash_json_output     ArtifactType = "CALABASH_JSON_OUTPUT"
-	ArtifactTypeCalabash_pretty_output   ArtifactType = "CALABASH_PRETTY_OUTPUT"
-	ArtifactTypeCalabash_standard_output ArtifactType = "CALABASH_STANDARD_OUTPUT"
-	ArtifactTypeCalabash_java_xml_output ArtifactType = "CALABASH_JAVA_XML_OUTPUT"
-	ArtifactTypeAutomation_output        ArtifactType = "AUTOMATION_OUTPUT"
-	ArtifactTypeAppium_server_output     ArtifactType = "APPIUM_SERVER_OUTPUT"
-	ArtifactTypeAppium_java_output       ArtifactType = "APPIUM_JAVA_OUTPUT"
-	ArtifactTypeAppium_java_xml_output   ArtifactType = "APPIUM_JAVA_XML_OUTPUT"
-	ArtifactTypeAppium_python_output     ArtifactType = "APPIUM_PYTHON_OUTPUT"
-	ArtifactTypeAppium_python_xml_output ArtifactType = "APPIUM_PYTHON_XML_OUTPUT"
-	ArtifactTypeExplorer_event_log       ArtifactType = "EXPLORER_EVENT_LOG"
-	ArtifactTypeExplorer_summary_log     ArtifactType = "EXPLORER_SUMMARY_LOG"
-	ArtifactTypeApplication_crash_report ArtifactType = "APPLICATION_CRASH_REPORT"
-	ArtifactTypeXctest_log               ArtifactType = "XCTEST_LOG"
-	ArtifactTypeVideo                    ArtifactType = "VIDEO"
-	ArtifactTypeCustomer_artifact        ArtifactType = "CUSTOMER_ARTIFACT"
-	ArtifactTypeCustomer_artifact_log    ArtifactType = "CUSTOMER_ARTIFACT_LOG"
-	ArtifactTypeTestspec_output          ArtifactType = "TESTSPEC_OUTPUT"
+	ArtifactTypeUnknown                ArtifactType = "UNKNOWN"
+	ArtifactTypeScreenshot             ArtifactType = "SCREENSHOT"
+	ArtifactTypeDeviceLog              ArtifactType = "DEVICE_LOG"
+	ArtifactTypeMessageLog             ArtifactType = "MESSAGE_LOG"
+	ArtifactTypeVideoLog               ArtifactType = "VIDEO_LOG"
+	ArtifactTypeResultLog              ArtifactType = "RESULT_LOG"
+	ArtifactTypeServiceLog             ArtifactType = "SERVICE_LOG"
+	ArtifactTypeWebkitLog              ArtifactType = "WEBKIT_LOG"
+	ArtifactTypeInstrumentationOutput  ArtifactType = "INSTRUMENTATION_OUTPUT"
+	ArtifactTypeExerciserMonkeyOutput  ArtifactType = "EXERCISER_MONKEY_OUTPUT"
+	ArtifactTypeCalabashJsonOutput     ArtifactType = "CALABASH_JSON_OUTPUT"
+	ArtifactTypeCalabashPrettyOutput   ArtifactType = "CALABASH_PRETTY_OUTPUT"
+	ArtifactTypeCalabashStandardOutput ArtifactType = "CALABASH_STANDARD_OUTPUT"
+	ArtifactTypeCalabashJavaXmlOutput  ArtifactType = "CALABASH_JAVA_XML_OUTPUT"
+	ArtifactTypeAutomationOutput       ArtifactType = "AUTOMATION_OUTPUT"
+	ArtifactTypeAppiumServerOutput     ArtifactType = "APPIUM_SERVER_OUTPUT"
+	ArtifactTypeAppiumJavaOutput       ArtifactType = "APPIUM_JAVA_OUTPUT"
+	ArtifactTypeAppiumJavaXmlOutput    ArtifactType = "APPIUM_JAVA_XML_OUTPUT"
+	ArtifactTypeAppiumPythonOutput     ArtifactType = "APPIUM_PYTHON_OUTPUT"
+	ArtifactTypeAppiumPythonXmlOutput  ArtifactType = "APPIUM_PYTHON_XML_OUTPUT"
+	ArtifactTypeExplorerEventLog       ArtifactType = "EXPLORER_EVENT_LOG"
+	ArtifactTypeExplorerSummaryLog     ArtifactType = "EXPLORER_SUMMARY_LOG"
+	ArtifactTypeApplicationCrashReport ArtifactType = "APPLICATION_CRASH_REPORT"
+	ArtifactTypeXctestLog              ArtifactType = "XCTEST_LOG"
+	ArtifactTypeVideo                  ArtifactType = "VIDEO"
+	ArtifactTypeCustomerArtifact       ArtifactType = "CUSTOMER_ARTIFACT"
+	ArtifactTypeCustomerArtifactLog    ArtifactType = "CUSTOMER_ARTIFACT_LOG"
+	ArtifactTypeTestspecOutput         ArtifactType = "TESTSPEC_OUTPUT"
 )
 
 // Values returns all known values for ArtifactType. Note that this can be expanded
@@ -130,19 +130,19 @@ type DeviceAttribute string
 
 // Enum values for DeviceAttribute
 const (
-	DeviceAttributeArn                   DeviceAttribute = "ARN"
-	DeviceAttributePlatform              DeviceAttribute = "PLATFORM"
-	DeviceAttributeForm_factor           DeviceAttribute = "FORM_FACTOR"
-	DeviceAttributeManufacturer          DeviceAttribute = "MANUFACTURER"
-	DeviceAttributeRemote_access_enabled DeviceAttribute = "REMOTE_ACCESS_ENABLED"
-	DeviceAttributeRemote_debug_enabled  DeviceAttribute = "REMOTE_DEBUG_ENABLED"
-	DeviceAttributeAppium_version        DeviceAttribute = "APPIUM_VERSION"
-	DeviceAttributeInstance_arn          DeviceAttribute = "INSTANCE_ARN"
-	DeviceAttributeInstance_labels       DeviceAttribute = "INSTANCE_LABELS"
-	DeviceAttributeFleet_type            DeviceAttribute = "FLEET_TYPE"
-	DeviceAttributeOs_version            DeviceAttribute = "OS_VERSION"
-	DeviceAttributeModel                 DeviceAttribute = "MODEL"
-	DeviceAttributeAvailability          DeviceAttribute = "AVAILABILITY"
+	DeviceAttributeArn                 DeviceAttribute = "ARN"
+	DeviceAttributePlatform            DeviceAttribute = "PLATFORM"
+	DeviceAttributeFormFactor          DeviceAttribute = "FORM_FACTOR"
+	DeviceAttributeManufacturer        DeviceAttribute = "MANUFACTURER"
+	DeviceAttributeRemoteAccessEnabled DeviceAttribute = "REMOTE_ACCESS_ENABLED"
+	DeviceAttributeRemoteDebugEnabled  DeviceAttribute = "REMOTE_DEBUG_ENABLED"
+	DeviceAttributeAppiumVersion       DeviceAttribute = "APPIUM_VERSION"
+	DeviceAttributeInstanceArn         DeviceAttribute = "INSTANCE_ARN"
+	DeviceAttributeInstanceLabels      DeviceAttribute = "INSTANCE_LABELS"
+	DeviceAttributeFleetType           DeviceAttribute = "FLEET_TYPE"
+	DeviceAttributeOsVersion           DeviceAttribute = "OS_VERSION"
+	DeviceAttributeModel               DeviceAttribute = "MODEL"
+	DeviceAttributeAvailability        DeviceAttribute = "AVAILABILITY"
 )
 
 // Values returns all known values for DeviceAttribute. Note that this can be
@@ -170,10 +170,10 @@ type DeviceAvailability string
 
 // Enum values for DeviceAvailability
 const (
-	DeviceAvailabilityTemporary_not_available DeviceAvailability = "TEMPORARY_NOT_AVAILABLE"
-	DeviceAvailabilityBusy                    DeviceAvailability = "BUSY"
-	DeviceAvailabilityAvailable               DeviceAvailability = "AVAILABLE"
-	DeviceAvailabilityHighly_available        DeviceAvailability = "HIGHLY_AVAILABLE"
+	DeviceAvailabilityTemporaryNotAvailable DeviceAvailability = "TEMPORARY_NOT_AVAILABLE"
+	DeviceAvailabilityBusy                  DeviceAvailability = "BUSY"
+	DeviceAvailabilityAvailable             DeviceAvailability = "AVAILABLE"
+	DeviceAvailabilityHighlyAvailable       DeviceAvailability = "HIGHLY_AVAILABLE"
 )
 
 // Values returns all known values for DeviceAvailability. Note that this can be
@@ -192,18 +192,18 @@ type DeviceFilterAttribute string
 
 // Enum values for DeviceFilterAttribute
 const (
-	DeviceFilterAttributeArn                   DeviceFilterAttribute = "ARN"
-	DeviceFilterAttributePlatform              DeviceFilterAttribute = "PLATFORM"
-	DeviceFilterAttributeOs_version            DeviceFilterAttribute = "OS_VERSION"
-	DeviceFilterAttributeModel                 DeviceFilterAttribute = "MODEL"
-	DeviceFilterAttributeAvailability          DeviceFilterAttribute = "AVAILABILITY"
-	DeviceFilterAttributeForm_factor           DeviceFilterAttribute = "FORM_FACTOR"
-	DeviceFilterAttributeManufacturer          DeviceFilterAttribute = "MANUFACTURER"
-	DeviceFilterAttributeRemote_access_enabled DeviceFilterAttribute = "REMOTE_ACCESS_ENABLED"
-	DeviceFilterAttributeRemote_debug_enabled  DeviceFilterAttribute = "REMOTE_DEBUG_ENABLED"
-	DeviceFilterAttributeInstance_arn          DeviceFilterAttribute = "INSTANCE_ARN"
-	DeviceFilterAttributeInstance_labels       DeviceFilterAttribute = "INSTANCE_LABELS"
-	DeviceFilterAttributeFleet_type            DeviceFilterAttribute = "FLEET_TYPE"
+	DeviceFilterAttributeArn                 DeviceFilterAttribute = "ARN"
+	DeviceFilterAttributePlatform            DeviceFilterAttribute = "PLATFORM"
+	DeviceFilterAttributeOsVersion           DeviceFilterAttribute = "OS_VERSION"
+	DeviceFilterAttributeModel               DeviceFilterAttribute = "MODEL"
+	DeviceFilterAttributeAvailability        DeviceFilterAttribute = "AVAILABILITY"
+	DeviceFilterAttributeFormFactor          DeviceFilterAttribute = "FORM_FACTOR"
+	DeviceFilterAttributeManufacturer        DeviceFilterAttribute = "MANUFACTURER"
+	DeviceFilterAttributeRemoteAccessEnabled DeviceFilterAttribute = "REMOTE_ACCESS_ENABLED"
+	DeviceFilterAttributeRemoteDebugEnabled  DeviceFilterAttribute = "REMOTE_DEBUG_ENABLED"
+	DeviceFilterAttributeInstanceArn         DeviceFilterAttribute = "INSTANCE_ARN"
+	DeviceFilterAttributeInstanceLabels      DeviceFilterAttribute = "INSTANCE_LABELS"
+	DeviceFilterAttributeFleetType           DeviceFilterAttribute = "FLEET_TYPE"
 )
 
 // Values returns all known values for DeviceFilterAttribute. Note that this can be
@@ -312,8 +312,8 @@ type ExecutionResultCode string
 
 // Enum values for ExecutionResultCode
 const (
-	ExecutionResultCodeParsing_failed            ExecutionResultCode = "PARSING_FAILED"
-	ExecutionResultCodeVpc_endpoint_setup_failed ExecutionResultCode = "VPC_ENDPOINT_SETUP_FAILED"
+	ExecutionResultCodeParsingFailed          ExecutionResultCode = "PARSING_FAILED"
+	ExecutionResultCodeVpcEndpointSetupFailed ExecutionResultCode = "VPC_ENDPOINT_SETUP_FAILED"
 )
 
 // Values returns all known values for ExecutionResultCode. Note that this can be
@@ -330,15 +330,15 @@ type ExecutionStatus string
 
 // Enum values for ExecutionStatus
 const (
-	ExecutionStatusPending             ExecutionStatus = "PENDING"
-	ExecutionStatusPending_concurrnecy ExecutionStatus = "PENDING_CONCURRENCY"
-	ExecutionStatusPending_device      ExecutionStatus = "PENDING_DEVICE"
-	ExecutionStatusProcessing          ExecutionStatus = "PROCESSING"
-	ExecutionStatusScheduling          ExecutionStatus = "SCHEDULING"
-	ExecutionStatusPreparing           ExecutionStatus = "PREPARING"
-	ExecutionStatusRunning             ExecutionStatus = "RUNNING"
-	ExecutionStatusCompleted           ExecutionStatus = "COMPLETED"
-	ExecutionStatusStopping            ExecutionStatus = "STOPPING"
+	ExecutionStatusPending            ExecutionStatus = "PENDING"
+	ExecutionStatusPendingConcurrnecy ExecutionStatus = "PENDING_CONCURRENCY"
+	ExecutionStatusPendingDevice      ExecutionStatus = "PENDING_DEVICE"
+	ExecutionStatusProcessing         ExecutionStatus = "PROCESSING"
+	ExecutionStatusScheduling         ExecutionStatus = "SCHEDULING"
+	ExecutionStatusPreparing          ExecutionStatus = "PREPARING"
+	ExecutionStatusRunning            ExecutionStatus = "RUNNING"
+	ExecutionStatusCompleted          ExecutionStatus = "COMPLETED"
+	ExecutionStatusStopping           ExecutionStatus = "STOPPING"
 )
 
 // Values returns all known values for ExecutionStatus. Note that this can be
@@ -362,10 +362,10 @@ type InstanceStatus string
 
 // Enum values for InstanceStatus
 const (
-	InstanceStatusIn_use        InstanceStatus = "IN_USE"
-	InstanceStatusPreparing     InstanceStatus = "PREPARING"
-	InstanceStatusAvailable     InstanceStatus = "AVAILABLE"
-	InstanceStatusNot_available InstanceStatus = "NOT_AVAILABLE"
+	InstanceStatusInUse        InstanceStatus = "IN_USE"
+	InstanceStatusPreparing    InstanceStatus = "PREPARING"
+	InstanceStatusAvailable    InstanceStatus = "AVAILABLE"
+	InstanceStatusNotAvailable InstanceStatus = "NOT_AVAILABLE"
 )
 
 // Values returns all known values for InstanceStatus. Note that this can be
@@ -385,8 +385,8 @@ type InteractionMode string
 // Enum values for InteractionMode
 const (
 	InteractionModeInteractive InteractionMode = "INTERACTIVE"
-	InteractionModeNo_video    InteractionMode = "NO_VIDEO"
-	InteractionModeVideo_only  InteractionMode = "VIDEO_ONLY"
+	InteractionModeNoVideo     InteractionMode = "NO_VIDEO"
+	InteractionModeVideoOnly   InteractionMode = "VIDEO_ONLY"
 )
 
 // Values returns all known values for InteractionMode. Note that this can be
@@ -474,14 +474,14 @@ type RuleOperator string
 
 // Enum values for RuleOperator
 const (
-	RuleOperatorEquals                 RuleOperator = "EQUALS"
-	RuleOperatorLess_than              RuleOperator = "LESS_THAN"
-	RuleOperatorLess_than_or_equals    RuleOperator = "LESS_THAN_OR_EQUALS"
-	RuleOperatorGreater_than           RuleOperator = "GREATER_THAN"
-	RuleOperatorGreater_than_or_equals RuleOperator = "GREATER_THAN_OR_EQUALS"
-	RuleOperatorIn                     RuleOperator = "IN"
-	RuleOperatorNot_in                 RuleOperator = "NOT_IN"
-	RuleOperatorContains               RuleOperator = "CONTAINS"
+	RuleOperatorEquals              RuleOperator = "EQUALS"
+	RuleOperatorLessThan            RuleOperator = "LESS_THAN"
+	RuleOperatorLessThanOrEquals    RuleOperator = "LESS_THAN_OR_EQUALS"
+	RuleOperatorGreaterThan         RuleOperator = "GREATER_THAN"
+	RuleOperatorGreaterThanOrEquals RuleOperator = "GREATER_THAN_OR_EQUALS"
+	RuleOperatorIn                  RuleOperator = "IN"
+	RuleOperatorNotIn               RuleOperator = "NOT_IN"
+	RuleOperatorContains            RuleOperator = "CONTAINS"
 )
 
 // Values returns all known values for RuleOperator. Note that this can be expanded
@@ -504,23 +504,23 @@ type SampleType string
 
 // Enum values for SampleType
 const (
-	SampleTypeCpu                 SampleType = "CPU"
-	SampleTypeMemory              SampleType = "MEMORY"
-	SampleTypeThreads             SampleType = "THREADS"
-	SampleTypeRx_rate             SampleType = "RX_RATE"
-	SampleTypeTx_rate             SampleType = "TX_RATE"
-	SampleTypeRx                  SampleType = "RX"
-	SampleTypeTx                  SampleType = "TX"
-	SampleTypeNative_frames       SampleType = "NATIVE_FRAMES"
-	SampleTypeNative_fps          SampleType = "NATIVE_FPS"
-	SampleTypeNative_min_drawtime SampleType = "NATIVE_MIN_DRAWTIME"
-	SampleTypeNative_avg_drawtime SampleType = "NATIVE_AVG_DRAWTIME"
-	SampleTypeNative_max_drawtime SampleType = "NATIVE_MAX_DRAWTIME"
-	SampleTypeOpengl_frames       SampleType = "OPENGL_FRAMES"
-	SampleTypeOpengl_fps          SampleType = "OPENGL_FPS"
-	SampleTypeOpengl_min_drawtime SampleType = "OPENGL_MIN_DRAWTIME"
-	SampleTypeOpengl_avg_drawtime SampleType = "OPENGL_AVG_DRAWTIME"
-	SampleTypeOpengl_max_drawtime SampleType = "OPENGL_MAX_DRAWTIME"
+	SampleTypeCpu               SampleType = "CPU"
+	SampleTypeMemory            SampleType = "MEMORY"
+	SampleTypeThreads           SampleType = "THREADS"
+	SampleTypeRxRate            SampleType = "RX_RATE"
+	SampleTypeTxRate            SampleType = "TX_RATE"
+	SampleTypeRx                SampleType = "RX"
+	SampleTypeTx                SampleType = "TX"
+	SampleTypeNativeFrames      SampleType = "NATIVE_FRAMES"
+	SampleTypeNativeFps         SampleType = "NATIVE_FPS"
+	SampleTypeNativeMinDrawtime SampleType = "NATIVE_MIN_DRAWTIME"
+	SampleTypeNativeAvgDrawtime SampleType = "NATIVE_AVG_DRAWTIME"
+	SampleTypeNativeMaxDrawtime SampleType = "NATIVE_MAX_DRAWTIME"
+	SampleTypeOpenglFrames      SampleType = "OPENGL_FRAMES"
+	SampleTypeOpenglFps         SampleType = "OPENGL_FPS"
+	SampleTypeOpenglMinDrawtime SampleType = "OPENGL_MIN_DRAWTIME"
+	SampleTypeOpenglAvgDrawtime SampleType = "OPENGL_AVG_DRAWTIME"
+	SampleTypeOpenglMaxDrawtime SampleType = "OPENGL_MAX_DRAWTIME"
 )
 
 // Values returns all known values for SampleType. Note that this can be expanded
@@ -571,9 +571,9 @@ type TestGridSessionArtifactType string
 
 // Enum values for TestGridSessionArtifactType
 const (
-	TestGridSessionArtifactTypeUnknown      TestGridSessionArtifactType = "UNKNOWN"
-	TestGridSessionArtifactTypeVideo        TestGridSessionArtifactType = "VIDEO"
-	TestGridSessionArtifactTypeSelenium_log TestGridSessionArtifactType = "SELENIUM_LOG"
+	TestGridSessionArtifactTypeUnknown     TestGridSessionArtifactType = "UNKNOWN"
+	TestGridSessionArtifactTypeVideo       TestGridSessionArtifactType = "VIDEO"
+	TestGridSessionArtifactTypeSeleniumLog TestGridSessionArtifactType = "SELENIUM_LOG"
 )
 
 // Values returns all known values for TestGridSessionArtifactType. Note that this
@@ -611,27 +611,27 @@ type TestType string
 
 // Enum values for TestType
 const (
-	TestTypeBuiltin_fuzz            TestType = "BUILTIN_FUZZ"
-	TestTypeBuiltin_explorer        TestType = "BUILTIN_EXPLORER"
-	TestTypeWeb_performance_profile TestType = "WEB_PERFORMANCE_PROFILE"
-	TestTypeAppium_java_junit       TestType = "APPIUM_JAVA_JUNIT"
-	TestTypeAppium_java_testng      TestType = "APPIUM_JAVA_TESTNG"
-	TestTypeAppium_python           TestType = "APPIUM_PYTHON"
-	TestTypeAppium_node             TestType = "APPIUM_NODE"
-	TestTypeAppium_ruby             TestType = "APPIUM_RUBY"
-	TestTypeAppium_web_java_junit   TestType = "APPIUM_WEB_JAVA_JUNIT"
-	TestTypeAppium_web_java_testng  TestType = "APPIUM_WEB_JAVA_TESTNG"
-	TestTypeAppium_web_python       TestType = "APPIUM_WEB_PYTHON"
-	TestTypeAppium_web_node         TestType = "APPIUM_WEB_NODE"
-	TestTypeAppium_web_ruby         TestType = "APPIUM_WEB_RUBY"
-	TestTypeCalabash                TestType = "CALABASH"
-	TestTypeInstrumentation         TestType = "INSTRUMENTATION"
-	TestTypeUiautomation            TestType = "UIAUTOMATION"
-	TestTypeUiautomator             TestType = "UIAUTOMATOR"
-	TestTypeXctest                  TestType = "XCTEST"
-	TestTypeXctest_ui               TestType = "XCTEST_UI"
-	TestTypeRemote_access_record    TestType = "REMOTE_ACCESS_RECORD"
-	TestTypeRemote_access_replay    TestType = "REMOTE_ACCESS_REPLAY"
+	TestTypeBuiltinFuzz           TestType = "BUILTIN_FUZZ"
+	TestTypeBuiltinExplorer       TestType = "BUILTIN_EXPLORER"
+	TestTypeWebPerformanceProfile TestType = "WEB_PERFORMANCE_PROFILE"
+	TestTypeAppiumJavaJunit       TestType = "APPIUM_JAVA_JUNIT"
+	TestTypeAppiumJavaTestng      TestType = "APPIUM_JAVA_TESTNG"
+	TestTypeAppiumPython          TestType = "APPIUM_PYTHON"
+	TestTypeAppiumNode            TestType = "APPIUM_NODE"
+	TestTypeAppiumRuby            TestType = "APPIUM_RUBY"
+	TestTypeAppiumWebJavaJunit    TestType = "APPIUM_WEB_JAVA_JUNIT"
+	TestTypeAppiumWebJavaTestng   TestType = "APPIUM_WEB_JAVA_TESTNG"
+	TestTypeAppiumWebPython       TestType = "APPIUM_WEB_PYTHON"
+	TestTypeAppiumWebNode         TestType = "APPIUM_WEB_NODE"
+	TestTypeAppiumWebRuby         TestType = "APPIUM_WEB_RUBY"
+	TestTypeCalabash              TestType = "CALABASH"
+	TestTypeInstrumentation       TestType = "INSTRUMENTATION"
+	TestTypeUiautomation          TestType = "UIAUTOMATION"
+	TestTypeUiautomator           TestType = "UIAUTOMATOR"
+	TestTypeXctest                TestType = "XCTEST"
+	TestTypeXctestUi              TestType = "XCTEST_UI"
+	TestTypeRemoteAccessRecord    TestType = "REMOTE_ACCESS_RECORD"
+	TestTypeRemoteAccessReplay    TestType = "REMOTE_ACCESS_REPLAY"
 )
 
 // Values returns all known values for TestType. Note that this can be expanded in
@@ -707,38 +707,38 @@ type UploadType string
 
 // Enum values for UploadType
 const (
-	UploadTypeAndroid_app                         UploadType = "ANDROID_APP"
-	UploadTypeIos_app                             UploadType = "IOS_APP"
-	UploadTypeWeb_app                             UploadType = "WEB_APP"
-	UploadTypeExternal_data                       UploadType = "EXTERNAL_DATA"
-	UploadTypeAppium_java_junit_test_package      UploadType = "APPIUM_JAVA_JUNIT_TEST_PACKAGE"
-	UploadTypeAppium_java_testng_test_package     UploadType = "APPIUM_JAVA_TESTNG_TEST_PACKAGE"
-	UploadTypeAppium_python_test_package          UploadType = "APPIUM_PYTHON_TEST_PACKAGE"
-	UploadTypeAppium_node_test_package            UploadType = "APPIUM_NODE_TEST_PACKAGE"
-	UploadTypeAppium_ruby_test_package            UploadType = "APPIUM_RUBY_TEST_PACKAGE"
-	UploadTypeAppium_web_java_junit_test_package  UploadType = "APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE"
-	UploadTypeAppium_web_java_testng_test_package UploadType = "APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE"
-	UploadTypeAppium_web_python_test_package      UploadType = "APPIUM_WEB_PYTHON_TEST_PACKAGE"
-	UploadTypeAppium_web_node_test_package        UploadType = "APPIUM_WEB_NODE_TEST_PACKAGE"
-	UploadTypeAppium_web_ruby_test_package        UploadType = "APPIUM_WEB_RUBY_TEST_PACKAGE"
-	UploadTypeCalabash_test_package               UploadType = "CALABASH_TEST_PACKAGE"
-	UploadTypeInstrumentation_test_package        UploadType = "INSTRUMENTATION_TEST_PACKAGE"
-	UploadTypeUiautomation_test_package           UploadType = "UIAUTOMATION_TEST_PACKAGE"
-	UploadTypeUiautomator_test_package            UploadType = "UIAUTOMATOR_TEST_PACKAGE"
-	UploadTypeXctest_test_package                 UploadType = "XCTEST_TEST_PACKAGE"
-	UploadTypeXctest_ui_test_package              UploadType = "XCTEST_UI_TEST_PACKAGE"
-	UploadTypeAppium_java_junit_test_spec         UploadType = "APPIUM_JAVA_JUNIT_TEST_SPEC"
-	UploadTypeAppium_java_testng_test_spec        UploadType = "APPIUM_JAVA_TESTNG_TEST_SPEC"
-	UploadTypeAppium_python_test_spec             UploadType = "APPIUM_PYTHON_TEST_SPEC"
-	UploadTypeAppium_node_test_spec               UploadType = "APPIUM_NODE_TEST_SPEC"
-	UploadTypeAppium_ruby_test_spec               UploadType = "APPIUM_RUBY_TEST_SPEC"
-	UploadTypeAppium_web_java_junit_test_spec     UploadType = "APPIUM_WEB_JAVA_JUNIT_TEST_SPEC"
-	UploadTypeAppium_web_java_testng_test_spec    UploadType = "APPIUM_WEB_JAVA_TESTNG_TEST_SPEC"
-	UploadTypeAppium_web_python_test_spec         UploadType = "APPIUM_WEB_PYTHON_TEST_SPEC"
-	UploadTypeAppium_web_node_test_spec           UploadType = "APPIUM_WEB_NODE_TEST_SPEC"
-	UploadTypeAppium_web_ruby_test_spec           UploadType = "APPIUM_WEB_RUBY_TEST_SPEC"
-	UploadTypeInstrumentation_test_spec           UploadType = "INSTRUMENTATION_TEST_SPEC"
-	UploadTypeXctest_ui_test_spec                 UploadType = "XCTEST_UI_TEST_SPEC"
+	UploadTypeAndroidApp                     UploadType = "ANDROID_APP"
+	UploadTypeIosApp                         UploadType = "IOS_APP"
+	UploadTypeWebApp                         UploadType = "WEB_APP"
+	UploadTypeExternalData                   UploadType = "EXTERNAL_DATA"
+	UploadTypeAppiumJavaJunitTestPackage     UploadType = "APPIUM_JAVA_JUNIT_TEST_PACKAGE"
+	UploadTypeAppiumJavaTestngTestPackage    UploadType = "APPIUM_JAVA_TESTNG_TEST_PACKAGE"
+	UploadTypeAppiumPythonTestPackage        UploadType = "APPIUM_PYTHON_TEST_PACKAGE"
+	UploadTypeAppiumNodeTestPackage          UploadType = "APPIUM_NODE_TEST_PACKAGE"
+	UploadTypeAppiumRubyTestPackage          UploadType = "APPIUM_RUBY_TEST_PACKAGE"
+	UploadTypeAppiumWebJavaJunitTestPackage  UploadType = "APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE"
+	UploadTypeAppiumWebJavaTestngTestPackage UploadType = "APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE"
+	UploadTypeAppiumWebPythonTestPackage     UploadType = "APPIUM_WEB_PYTHON_TEST_PACKAGE"
+	UploadTypeAppiumWebNodeTestPackage       UploadType = "APPIUM_WEB_NODE_TEST_PACKAGE"
+	UploadTypeAppiumWebRubyTestPackage       UploadType = "APPIUM_WEB_RUBY_TEST_PACKAGE"
+	UploadTypeCalabashTestPackage            UploadType = "CALABASH_TEST_PACKAGE"
+	UploadTypeInstrumentationTestPackage     UploadType = "INSTRUMENTATION_TEST_PACKAGE"
+	UploadTypeUiautomationTestPackage        UploadType = "UIAUTOMATION_TEST_PACKAGE"
+	UploadTypeUiautomatorTestPackage         UploadType = "UIAUTOMATOR_TEST_PACKAGE"
+	UploadTypeXctestTestPackage              UploadType = "XCTEST_TEST_PACKAGE"
+	UploadTypeXctestUiTestPackage            UploadType = "XCTEST_UI_TEST_PACKAGE"
+	UploadTypeAppiumJavaJunitTestSpec        UploadType = "APPIUM_JAVA_JUNIT_TEST_SPEC"
+	UploadTypeAppiumJavaTestngTestSpec       UploadType = "APPIUM_JAVA_TESTNG_TEST_SPEC"
+	UploadTypeAppiumPythonTestSpec           UploadType = "APPIUM_PYTHON_TEST_SPEC"
+	UploadTypeAppiumNodeTestSpec             UploadType = "APPIUM_NODE_TEST_SPEC"
+	UploadTypeAppiumRubyTestSpec             UploadType = "APPIUM_RUBY_TEST_SPEC"
+	UploadTypeAppiumWebJavaJunitTestSpec     UploadType = "APPIUM_WEB_JAVA_JUNIT_TEST_SPEC"
+	UploadTypeAppiumWebJavaTestngTestSpec    UploadType = "APPIUM_WEB_JAVA_TESTNG_TEST_SPEC"
+	UploadTypeAppiumWebPythonTestSpec        UploadType = "APPIUM_WEB_PYTHON_TEST_SPEC"
+	UploadTypeAppiumWebNodeTestSpec          UploadType = "APPIUM_WEB_NODE_TEST_SPEC"
+	UploadTypeAppiumWebRubyTestSpec          UploadType = "APPIUM_WEB_RUBY_TEST_SPEC"
+	UploadTypeInstrumentationTestSpec        UploadType = "INSTRUMENTATION_TEST_SPEC"
+	UploadTypeXctestUiTestSpec               UploadType = "XCTEST_UI_TEST_SPEC"
 )
 
 // Values returns all known values for UploadType. Note that this can be expanded

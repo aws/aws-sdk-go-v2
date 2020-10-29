@@ -19,7 +19,7 @@ import (
 // according to the configuration provided. You can access information about all
 // traffic that AWS WAF inspects using the following steps:
 //
-//     * Create an Amazon
+// * Create an Amazon
 // Kinesis Data Firehose. Create the data firehose with a PUT source and in the
 // Region that you are operating. If you are capturing logs for Amazon CloudFront,
 // always create the firehose in US East (N. Virginia). Give the data firehose a
@@ -27,13 +27,13 @@ import (
 // aws-waf-logs-us-east-2-analytics. Do not create the data firehose using a
 // Kinesis stream as your source.
 //
-//     * Associate that firehose to your web ACL
-// using a PutLoggingConfiguration request.
+// * Associate that firehose to your web ACL using
+// a PutLoggingConfiguration request.
 //
-// When you successfully enable logging
-// using a PutLoggingConfiguration request, AWS WAF will create a service linked
-// role with the necessary permissions to write logs to the Amazon Kinesis Data
-// Firehose. For more information, see Logging Web ACL Traffic Information
+// When you successfully enable logging using a
+// PutLoggingConfiguration request, AWS WAF will create a service linked role with
+// the necessary permissions to write logs to the Amazon Kinesis Data Firehose. For
+// more information, see Logging Web ACL Traffic Information
 // (https://docs.aws.amazon.com/waf/latest/developerguide/logging.html) in the AWS
 // WAF Developer Guide.
 func (c *Client) PutLoggingConfiguration(ctx context.Context, params *PutLoggingConfigurationInput, optFns ...func(*Options)) (*PutLoggingConfigurationOutput, error) {

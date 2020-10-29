@@ -47,13 +47,13 @@ type DescribeConfigurationAggregatorSourcesStatusInput struct {
 
 	// Filters the status type.
 	//
-	//     * Valid value FAILED indicates errors while moving
+	// * Valid value FAILED indicates errors while moving
 	// data.
 	//
-	//     * Valid value SUCCEEDED indicates the data was successfully moved.
+	// * Valid value SUCCEEDED indicates the data was successfully moved.
 	//
-	//
-	// * Valid value OUTDATED indicates the data is not the most recent.
+	// *
+	// Valid value OUTDATED indicates the data is not the most recent.
 	UpdateStatus []types.AggregatedSourceStatusType
 }
 

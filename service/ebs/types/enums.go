@@ -6,8 +6,8 @@ type AccessDeniedExceptionReason string
 
 // Enum values for AccessDeniedExceptionReason
 const (
-	AccessDeniedExceptionReasonUnauthorized_account     AccessDeniedExceptionReason = "UNAUTHORIZED_ACCOUNT"
-	AccessDeniedExceptionReasonDependency_access_denied AccessDeniedExceptionReason = "DEPENDENCY_ACCESS_DENIED"
+	AccessDeniedExceptionReasonUnauthorizedAccount    AccessDeniedExceptionReason = "UNAUTHORIZED_ACCOUNT"
+	AccessDeniedExceptionReasonDependencyAccessDenied AccessDeniedExceptionReason = "DEPENDENCY_ACCESS_DENIED"
 )
 
 // Values returns all known values for AccessDeniedExceptionReason. Note that this
@@ -24,7 +24,7 @@ type ChecksumAggregationMethod string
 
 // Enum values for ChecksumAggregationMethod
 const (
-	ChecksumAggregationMethodChecksum_aggregation_linear ChecksumAggregationMethod = "LINEAR"
+	ChecksumAggregationMethodChecksumAggregationLinear ChecksumAggregationMethod = "LINEAR"
 )
 
 // Values returns all known values for ChecksumAggregationMethod. Note that this
@@ -40,7 +40,7 @@ type ChecksumAlgorithm string
 
 // Enum values for ChecksumAlgorithm
 const (
-	ChecksumAlgorithmChecksum_algorithm_sha256 ChecksumAlgorithm = "SHA256"
+	ChecksumAlgorithmChecksumAlgorithmSha256 ChecksumAlgorithm = "SHA256"
 )
 
 // Values returns all known values for ChecksumAlgorithm. Note that this can be
@@ -56,8 +56,8 @@ type RequestThrottledExceptionReason string
 
 // Enum values for RequestThrottledExceptionReason
 const (
-	RequestThrottledExceptionReasonAccount_throttled            RequestThrottledExceptionReason = "ACCOUNT_THROTTLED"
-	RequestThrottledExceptionReasonDependency_request_throttled RequestThrottledExceptionReason = "DEPENDENCY_REQUEST_THROTTLED"
+	RequestThrottledExceptionReasonAccountThrottled           RequestThrottledExceptionReason = "ACCOUNT_THROTTLED"
+	RequestThrottledExceptionReasonDependencyRequestThrottled RequestThrottledExceptionReason = "DEPENDENCY_REQUEST_THROTTLED"
 )
 
 // Values returns all known values for RequestThrottledExceptionReason. Note that
@@ -75,8 +75,8 @@ type ResourceNotFoundExceptionReason string
 
 // Enum values for ResourceNotFoundExceptionReason
 const (
-	ResourceNotFoundExceptionReasonSnapshot_not_found            ResourceNotFoundExceptionReason = "SNAPSHOT_NOT_FOUND"
-	ResourceNotFoundExceptionReasonDependency_resource_not_found ResourceNotFoundExceptionReason = "DEPENDENCY_RESOURCE_NOT_FOUND"
+	ResourceNotFoundExceptionReasonSnapshotNotFound           ResourceNotFoundExceptionReason = "SNAPSHOT_NOT_FOUND"
+	ResourceNotFoundExceptionReasonDependencyResourceNotFound ResourceNotFoundExceptionReason = "DEPENDENCY_RESOURCE_NOT_FOUND"
 )
 
 // Values returns all known values for ResourceNotFoundExceptionReason. Note that
@@ -94,7 +94,7 @@ type ServiceQuotaExceededExceptionReason string
 
 // Enum values for ServiceQuotaExceededExceptionReason
 const (
-	ServiceQuotaExceededExceptionReasonDependency_service_quota_exceeded ServiceQuotaExceededExceptionReason = "DEPENDENCY_SERVICE_QUOTA_EXCEEDED"
+	ServiceQuotaExceededExceptionReasonDependencyServiceQuotaExceeded ServiceQuotaExceededExceptionReason = "DEPENDENCY_SERVICE_QUOTA_EXCEEDED"
 )
 
 // Values returns all known values for ServiceQuotaExceededExceptionReason. Note
@@ -131,17 +131,17 @@ type ValidationExceptionReason string
 
 // Enum values for ValidationExceptionReason
 const (
-	ValidationExceptionReasonInvalid_customer_key       ValidationExceptionReason = "INVALID_CUSTOMER_KEY"
-	ValidationExceptionReasonInvalid_page_token         ValidationExceptionReason = "INVALID_PAGE_TOKEN"
-	ValidationExceptionReasonInvalid_block_token        ValidationExceptionReason = "INVALID_BLOCK_TOKEN"
-	ValidationExceptionReasonInvalid_snapshot_id        ValidationExceptionReason = "INVALID_SNAPSHOT_ID"
-	ValidationExceptionReasonUnrelated_snapshots        ValidationExceptionReason = "UNRELATED_SNAPSHOTS"
-	ValidationExceptionReasonInvalid_block              ValidationExceptionReason = "INVALID_BLOCK"
-	ValidationExceptionReasonInvalid_content_encoding   ValidationExceptionReason = "INVALID_CONTENT_ENCODING"
-	ValidationExceptionReasonInvalid_tag                ValidationExceptionReason = "INVALID_TAG"
-	ValidationExceptionReasonInvalid_dependency_request ValidationExceptionReason = "INVALID_DEPENDENCY_REQUEST"
-	ValidationExceptionReasonInvalid_parameter_value    ValidationExceptionReason = "INVALID_PARAMETER_VALUE"
-	ValidationExceptionReasonInvalid_volume_size        ValidationExceptionReason = "INVALID_VOLUME_SIZE"
+	ValidationExceptionReasonInvalidCustomerKey       ValidationExceptionReason = "INVALID_CUSTOMER_KEY"
+	ValidationExceptionReasonInvalidPageToken         ValidationExceptionReason = "INVALID_PAGE_TOKEN"
+	ValidationExceptionReasonInvalidBlockToken        ValidationExceptionReason = "INVALID_BLOCK_TOKEN"
+	ValidationExceptionReasonInvalidSnapshotId        ValidationExceptionReason = "INVALID_SNAPSHOT_ID"
+	ValidationExceptionReasonUnrelatedSnapshots       ValidationExceptionReason = "UNRELATED_SNAPSHOTS"
+	ValidationExceptionReasonInvalidBlock             ValidationExceptionReason = "INVALID_BLOCK"
+	ValidationExceptionReasonInvalidContentEncoding   ValidationExceptionReason = "INVALID_CONTENT_ENCODING"
+	ValidationExceptionReasonInvalidTag               ValidationExceptionReason = "INVALID_TAG"
+	ValidationExceptionReasonInvalidDependencyRequest ValidationExceptionReason = "INVALID_DEPENDENCY_REQUEST"
+	ValidationExceptionReasonInvalidParameterValue    ValidationExceptionReason = "INVALID_PARAMETER_VALUE"
+	ValidationExceptionReasonInvalidVolumeSize        ValidationExceptionReason = "INVALID_VOLUME_SIZE"
 )
 
 // Values returns all known values for ValidationExceptionReason. Note that this

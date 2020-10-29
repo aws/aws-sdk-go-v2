@@ -32,7 +32,7 @@ type DescribeDBEngineVersionsInput struct {
 	// The name of a specific DB parameter group family to return details for.
 	// Constraints:
 	//
-	//     * If supplied, must match an existing DBParameterGroupFamily.
+	// * If supplied, must match an existing DBParameterGroupFamily.
 	DBParameterGroupFamily *string
 
 	// A value that indicates whether only the default version of the specified engine

@@ -22,12 +22,12 @@ type DeploymentEventType string
 
 // Enum values for DeploymentEventType
 const (
-	DeploymentEventTypePercentage_updated   DeploymentEventType = "PERCENTAGE_UPDATED"
-	DeploymentEventTypeRollback_started     DeploymentEventType = "ROLLBACK_STARTED"
-	DeploymentEventTypeRollback_completed   DeploymentEventType = "ROLLBACK_COMPLETED"
-	DeploymentEventTypeBake_time_started    DeploymentEventType = "BAKE_TIME_STARTED"
-	DeploymentEventTypeDeployment_started   DeploymentEventType = "DEPLOYMENT_STARTED"
-	DeploymentEventTypeDeployment_completed DeploymentEventType = "DEPLOYMENT_COMPLETED"
+	DeploymentEventTypePercentageUpdated   DeploymentEventType = "PERCENTAGE_UPDATED"
+	DeploymentEventTypeRollbackStarted     DeploymentEventType = "ROLLBACK_STARTED"
+	DeploymentEventTypeRollbackCompleted   DeploymentEventType = "ROLLBACK_COMPLETED"
+	DeploymentEventTypeBakeTimeStarted     DeploymentEventType = "BAKE_TIME_STARTED"
+	DeploymentEventTypeDeploymentStarted   DeploymentEventType = "DEPLOYMENT_STARTED"
+	DeploymentEventTypeDeploymentCompleted DeploymentEventType = "DEPLOYMENT_COMPLETED"
 )
 
 // Values returns all known values for DeploymentEventType. Note that this can be
@@ -48,12 +48,12 @@ type DeploymentState string
 
 // Enum values for DeploymentState
 const (
-	DeploymentStateBaking       DeploymentState = "BAKING"
-	DeploymentStateValidating   DeploymentState = "VALIDATING"
-	DeploymentStateDeploying    DeploymentState = "DEPLOYING"
-	DeploymentStateComplete     DeploymentState = "COMPLETE"
-	DeploymentStateRolling_back DeploymentState = "ROLLING_BACK"
-	DeploymentStateRolled_back  DeploymentState = "ROLLED_BACK"
+	DeploymentStateBaking      DeploymentState = "BAKING"
+	DeploymentStateValidating  DeploymentState = "VALIDATING"
+	DeploymentStateDeploying   DeploymentState = "DEPLOYING"
+	DeploymentStateComplete    DeploymentState = "COMPLETE"
+	DeploymentStateRollingBack DeploymentState = "ROLLING_BACK"
+	DeploymentStateRolledBack  DeploymentState = "ROLLED_BACK"
 )
 
 // Values returns all known values for DeploymentState. Note that this can be
@@ -74,10 +74,10 @@ type EnvironmentState string
 
 // Enum values for EnvironmentState
 const (
-	EnvironmentStateReady_for_deployment EnvironmentState = "READY_FOR_DEPLOYMENT"
-	EnvironmentStateDeploying            EnvironmentState = "DEPLOYING"
-	EnvironmentStateRolling_back         EnvironmentState = "ROLLING_BACK"
-	EnvironmentStateRolled_back          EnvironmentState = "ROLLED_BACK"
+	EnvironmentStateReadyForDeployment EnvironmentState = "READY_FOR_DEPLOYMENT"
+	EnvironmentStateDeploying          EnvironmentState = "DEPLOYING"
+	EnvironmentStateRollingBack        EnvironmentState = "ROLLING_BACK"
+	EnvironmentStateRolledBack         EnvironmentState = "ROLLED_BACK"
 )
 
 // Values returns all known values for EnvironmentState. Note that this can be
@@ -114,8 +114,8 @@ type ReplicateTo string
 
 // Enum values for ReplicateTo
 const (
-	ReplicateToNone         ReplicateTo = "NONE"
-	ReplicateToSsm_document ReplicateTo = "SSM_DOCUMENT"
+	ReplicateToNone        ReplicateTo = "NONE"
+	ReplicateToSsmDocument ReplicateTo = "SSM_DOCUMENT"
 )
 
 // Values returns all known values for ReplicateTo. Note that this can be expanded
@@ -132,10 +132,10 @@ type TriggeredBy string
 
 // Enum values for TriggeredBy
 const (
-	TriggeredByUser             TriggeredBy = "USER"
-	TriggeredByAppconfig        TriggeredBy = "APPCONFIG"
-	TriggeredByCloudwatch_alarm TriggeredBy = "CLOUDWATCH_ALARM"
-	TriggeredByInternal_error   TriggeredBy = "INTERNAL_ERROR"
+	TriggeredByUser            TriggeredBy = "USER"
+	TriggeredByAppconfig       TriggeredBy = "APPCONFIG"
+	TriggeredByCloudwatchAlarm TriggeredBy = "CLOUDWATCH_ALARM"
+	TriggeredByInternalError   TriggeredBy = "INTERNAL_ERROR"
 )
 
 // Values returns all known values for TriggeredBy. Note that this can be expanded
@@ -154,8 +154,8 @@ type ValidatorType string
 
 // Enum values for ValidatorType
 const (
-	ValidatorTypeJson_schema ValidatorType = "JSON_SCHEMA"
-	ValidatorTypeLambda      ValidatorType = "LAMBDA"
+	ValidatorTypeJsonSchema ValidatorType = "JSON_SCHEMA"
+	ValidatorTypeLambda     ValidatorType = "LAMBDA"
 )
 
 // Values returns all known values for ValidatorType. Note that this can be

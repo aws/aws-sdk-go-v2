@@ -117,18 +117,18 @@ type PutBotInput struct {
 	// you don't define a clarification prompt, at runtime Amazon Lex will return a 400
 	// Bad Request exception in three cases:
 	//
-	//     * Follow-up prompt - When the user
+	// * Follow-up prompt - When the user
 	// responds to a follow-up prompt but does not provide an intent. For example, in
 	// response to a follow-up prompt that says "Would you like anything else today?"
 	// the user says "Yes." Amazon Lex will return a 400 Bad Request exception because
 	// it does not have a clarification prompt to send to the user to get an intent.
 	//
-	//
-	// * Lambda function - When using a Lambda function, you return an ElicitIntent
+	// *
+	// Lambda function - When using a Lambda function, you return an ElicitIntent
 	// dialog type. Since Amazon Lex does not have a clarification prompt to get an
 	// intent from the user, it returns a 400 Bad Request exception.
 	//
-	//     * PutSession
+	// * PutSession
 	// operation - When using the PutSession operation, you send an ElicitIntent dialog
 	// type. Since Amazon Lex does not have a clarification prompt to get an intent
 	// from the user, it returns a 400 Bad Request exception.
@@ -155,30 +155,29 @@ type PutBotInput struct {
 	// parameter to true, your bot has access to accuracy improvements. The Regions
 	// where you can set the enableModelImprovements parameter to true are:
 	//
-	//     * US
-	// East (N. Virginia) (us-east-1)
+	// * US East
+	// (N. Virginia) (us-east-1)
 	//
-	//     * US West (Oregon) (us-west-2)
+	// * US West (Oregon) (us-west-2)
 	//
-	//     * Asia
-	// Pacific (Sydney) (ap-southeast-2)
+	// * Asia Pacific
+	// (Sydney) (ap-southeast-2)
 	//
-	//     * EU (Ireland) (eu-west-1)
+	// * EU (Ireland) (eu-west-1)
 	//
-	// In other
-	// Regions, the enableModelImprovements parameter is set to true by default. In
-	// these Regions setting the parameter to false throws a ValidationException
-	// exception.
+	// In other Regions, the
+	// enableModelImprovements parameter is set to true by default. In these Regions
+	// setting the parameter to false throws a ValidationException exception.
 	//
-	//     * Asia Pacific (Singapore) (ap-southeast-1)
+	// * Asia
+	// Pacific (Singapore) (ap-southeast-1)
 	//
-	//     * Asia Pacific
-	// (Tokyo) (ap-northeast-1)
+	// * Asia Pacific (Tokyo) (ap-northeast-1)
 	//
-	//     * EU (Frankfurt) (eu-central-1)
+	// *
+	// EU (Frankfurt) (eu-central-1)
 	//
-	//     * EU (London)
-	// (eu-west-2)
+	// * EU (London) (eu-west-2)
 	EnableModelImprovements *bool
 
 	// The maximum time in seconds that Amazon Lex retains the data gathered in a
@@ -207,15 +206,15 @@ type PutBotInput struct {
 	// if they are configured for the bot. You must set the enableModelImprovements
 	// parameter to true to use confidence scores.
 	//
-	//     * US East (N. Virginia)
+	// * US East (N. Virginia)
 	// (us-east-1)
 	//
-	//     * US West (Oregon) (us-west-2)
+	// * US West (Oregon) (us-west-2)
 	//
-	//     * Asia Pacific (Sydney)
+	// * Asia Pacific (Sydney)
 	// (ap-southeast-2)
 	//
-	//     * EU (Ireland) (eu-west-1)
+	// * EU (Ireland) (eu-west-1)
 	//
 	// In other Regions, the
 	// enableModelImprovements parameter is set to true by default. For example,
@@ -224,14 +223,14 @@ type PutBotInput struct {
 	// following confidence scores: IntentA (0.70), IntentB (0.60), IntentC (0.50). The
 	// response from the PostText operation would be:
 	//
-	//     * AMAZON.FallbackIntent
+	// * AMAZON.FallbackIntent
 	//
+	// *
+	// IntentA
 	//
-	// * IntentA
+	// * IntentB
 	//
-	//     * IntentB
-	//
-	//     * IntentC
+	// * IntentC
 	NluIntentConfidenceThreshold *float64
 
 	// If you set the processBehavior element to BUILD, Amazon Lex builds the bot so

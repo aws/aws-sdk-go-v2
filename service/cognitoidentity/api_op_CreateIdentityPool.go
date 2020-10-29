@@ -15,17 +15,17 @@ import (
 // information that is specific to your AWS account. The keys for
 // SupportedLoginProviders are as follows:
 //
-//     * Facebook: graph.facebook.com
+// * Facebook: graph.facebook.com
 //
+// *
+// Google: accounts.google.com
 //
-// * Google: accounts.google.com
+// * Amazon: www.amazon.com
 //
-//     * Amazon: www.amazon.com
-//
-//     * Twitter:
+// * Twitter:
 // api.twitter.com
 //
-//     * Digits: www.digits.com
+// * Digits: www.digits.com
 //
 // You must use AWS Developer
 // credentials to call this API.

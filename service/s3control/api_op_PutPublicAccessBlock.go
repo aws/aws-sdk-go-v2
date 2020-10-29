@@ -19,11 +19,11 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html).
 // Related actions include:
 //
-//     * GetPublicAccessBlock
+// * GetPublicAccessBlock
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetPublicAccessBlock.html)
 //
-//
-// * DeletePublicAccessBlock
+// *
+// DeletePublicAccessBlock
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeletePublicAccessBlock.html)
 func (c *Client) PutPublicAccessBlock(ctx context.Context, params *PutPublicAccessBlockInput, optFns ...func(*Options)) (*PutPublicAccessBlockOutput, error) {
 	if params == nil {

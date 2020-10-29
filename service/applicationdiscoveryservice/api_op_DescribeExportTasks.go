@@ -35,8 +35,8 @@ type DescribeExportTasksInput struct {
 
 	// One or more filters.
 	//
-	//     * AgentId - ID of the agent whose collected data will
-	// be exported
+	// * AgentId - ID of the agent whose collected data will be
+	// exported
 	Filters []*types.ExportFilter
 
 	// The maximum number of volume results returned by DescribeExportTasks in

@@ -18,20 +18,20 @@ import (
 // manage the Amazon GameLift fleets. Identify the connection to delete by the
 // connection ID and fleet ID. If successful, the connection is removed.
 //
-//     *
+// *
 // CreateVpcPeeringAuthorization
 //
-//     * DescribeVpcPeeringAuthorizations
+// * DescribeVpcPeeringAuthorizations
 //
-//     *
+// *
 // DeleteVpcPeeringAuthorization
 //
-//     * CreateVpcPeeringConnection
+// * CreateVpcPeeringConnection
 //
-//     *
+// *
 // DescribeVpcPeeringConnections
 //
-//     * DeleteVpcPeeringConnection
+// * DeleteVpcPeeringConnection
 func (c *Client) DeleteVpcPeeringConnection(ctx context.Context, params *DeleteVpcPeeringConnectionInput, optFns ...func(*Options)) (*DeleteVpcPeeringConnectionOutput, error) {
 	if params == nil {
 		params = &DeleteVpcPeeringConnectionInput{}

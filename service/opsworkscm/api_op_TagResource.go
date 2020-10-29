@@ -40,22 +40,21 @@ type TagResourceInput struct {
 	// A map that contains tag keys and tag values to attach to AWS OpsWorks-CM servers
 	// or backups.
 	//
-	//     * The key cannot be empty.
+	// * The key cannot be empty.
 	//
-	//     * The key can be a maximum of
-	// 127 characters, and can contain only Unicode letters, numbers, or separators, or
-	// the following special characters: + - = . _ : /
+	// * The key can be a maximum of 127
+	// characters, and can contain only Unicode letters, numbers, or separators, or the
+	// following special characters: + - = . _ : /
 	//
-	//     * The value can be a
-	// maximum 255 characters, and contain only Unicode letters, numbers, or
-	// separators, or the following special characters: + - = . _ : /
+	// * The value can be a maximum 255
+	// characters, and contain only Unicode letters, numbers, or separators, or the
+	// following special characters: + - = . _ : /
 	//
-	//     * Leading
-	// and trailing white spaces are trimmed from both the key and value.
+	// * Leading and trailing white spaces
+	// are trimmed from both the key and value.
 	//
-	//     * A
-	// maximum of 50 user-applied tags is allowed for any AWS OpsWorks-CM server or
-	// backup.
+	// * A maximum of 50 user-applied tags is
+	// allowed for any AWS OpsWorks-CM server or backup.
 	//
 	// This member is required.
 	Tags []*types.Tag

@@ -52,18 +52,17 @@ type GetBulkPublishDetailsOutput struct {
 
 	// Status of the last bulk publish operation, valid values are:
 	//
-	//     * NOT_STARTED
-	// - No bulk publish has been requested for this identity pool
+	// * NOT_STARTED - No
+	// bulk publish has been requested for this identity pool
 	//
-	//     * IN_PROGRESS -
-	// Data is being published to the configured stream
+	// * IN_PROGRESS - Data is
+	// being published to the configured stream
 	//
-	//     * SUCCEEDED - All data for
-	// the identity pool has been published to the configured stream
+	// * SUCCEEDED - All data for the
+	// identity pool has been published to the configured stream
 	//
-	//     * FAILED -
-	// Some portion of the data has failed to publish, check FailureMessage for the
-	// cause.
+	// * FAILED - Some
+	// portion of the data has failed to publish, check FailureMessage for the cause.
 	BulkPublishStatus types.BulkPublishStatus
 
 	// If BulkPublishStatus is FAILED this field will contain the error message that

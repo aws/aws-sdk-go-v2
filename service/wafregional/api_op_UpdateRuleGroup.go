@@ -22,22 +22,22 @@ import (
 // per rule group. To create and configure a RuleGroup, perform the following
 // steps:
 //
-//     * Create and update the Rules that you want to include in the
-// RuleGroup. See CreateRule.
+// * Create and update the Rules that you want to include in the RuleGroup.
+// See CreateRule.
 //
-//     * Use GetChangeToken to get the change token
-// that you provide in the ChangeToken parameter of an UpdateRuleGroup request.
+// * Use GetChangeToken to get the change token that you provide
+// in the ChangeToken parameter of an UpdateRuleGroup request.
 //
+// * Submit an
+// UpdateRuleGroup request to add Rules to the RuleGroup.
 //
-// * Submit an UpdateRuleGroup request to add Rules to the RuleGroup.
+// * Create and update a
+// WebACL that contains the RuleGroup. See CreateWebACL.
 //
-//     * Create
-// and update a WebACL that contains the RuleGroup. See CreateWebACL.
-//
-// If you want
-// to replace one Rule with another, you delete the existing one and add the new
-// one. For more information about how to use the AWS WAF API to allow or block
-// HTTP requests, see the AWS WAF Developer Guide
+// If you want to replace
+// one Rule with another, you delete the existing one and add the new one. For more
+// information about how to use the AWS WAF API to allow or block HTTP requests,
+// see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/).
 func (c *Client) UpdateRuleGroup(ctx context.Context, params *UpdateRuleGroupInput, optFns ...func(*Options)) (*UpdateRuleGroupOutput, error) {
 	if params == nil {

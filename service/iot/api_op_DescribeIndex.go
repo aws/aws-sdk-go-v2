@@ -46,16 +46,16 @@ type DescribeIndexOutput struct {
 	// Contains a value that specifies the type of indexing performed. Valid values
 	// are:
 	//
-	//     * REGISTRY – Your thing index contains only registry data.
+	// * REGISTRY – Your thing index contains only registry data.
 	//
-	//     *
-	// REGISTRY_AND_SHADOW - Your thing index contains registry data and shadow data.
+	// *
+	// REGISTRY_AND_SHADOW - Your thing index contains registry data and shadow
+	// data.
 	//
+	// * REGISTRY_AND_CONNECTIVITY_STATUS - Your thing index contains registry
+	// data and thing connectivity status data.
 	//
-	// * REGISTRY_AND_CONNECTIVITY_STATUS - Your thing index contains registry data and
-	// thing connectivity status data.
-	//
-	//     *
+	// *
 	// REGISTRY_AND_SHADOW_AND_CONNECTIVITY_STATUS - Your thing index contains registry
 	// data, shadow data, and thing connectivity status data.
 	Schema *string

@@ -13,35 +13,35 @@ import (
 
 // This action is available if all of the following are true:
 //
-//     * You're
-// authorized to create accounts in the AWS GovCloud (US) Region. For more
-// information on the AWS GovCloud (US) Region, see the  AWS GovCloud User Guide.
+// * You're authorized
+// to create accounts in the AWS GovCloud (US) Region. For more information on the
+// AWS GovCloud (US) Region, see the  AWS GovCloud User Guide.
 // (http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/welcome.html)
 //
-//     *
-// You already have an account in the AWS GovCloud (US) Region that is paired with
-// a management account of an organization in the commercial Region.
+// * You
+// already have an account in the AWS GovCloud (US) Region that is paired with a
+// management account of an organization in the commercial Region.
 //
-//     * You
-// call this action from the management account of your organization in the
-// commercial Region.
+// * You call this
+// action from the management account of your organization in the commercial
+// Region.
 //
-//     * You have the organizations:CreateGovCloudAccount
-// permission.
+// * You have the organizations:CreateGovCloudAccount permission.
 //
-// AWS Organizations automatically creates the required service-linked
-// role named AWSServiceRoleForOrganizations. For more information, see AWS
-// Organizations and Service-Linked Roles
+// AWS
+// Organizations automatically creates the required service-linked role named
+// AWSServiceRoleForOrganizations. For more information, see AWS Organizations and
+// Service-Linked Roles
 // (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html#orgs_integrate_services-using_slrs)
 // in the AWS Organizations User Guide. AWS automatically enables AWS CloudTrail
 // for AWS GovCloud (US) accounts, but you should also do the following:
 //
-//     *
-// Verify that AWS CloudTrail is enabled to store logs.
+// * Verify
+// that AWS CloudTrail is enabled to store logs.
 //
-//     * Create an S3 bucket
-// for AWS CloudTrail log storage. For more information, see Verifying AWS
-// CloudTrail Is Enabled
+// * Create an S3 bucket for AWS
+// CloudTrail log storage. For more information, see Verifying AWS CloudTrail Is
+// Enabled
 // (http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/verifying-cloudtrail.html)
 // in the AWS GovCloud User Guide.
 //
@@ -64,12 +64,12 @@ import (
 // a few minutes before you can successfully access the account. To check the
 // status of the request, do one of the following:
 //
-//     * Use the OperationId
-// response element from this operation to provide as a parameter to the
+// * Use the OperationId response
+// element from this operation to provide as a parameter to the
 // DescribeCreateAccountStatus operation.
 //
-//     * Check the AWS CloudTrail log for
-// the CreateAccountResult event. For information on using AWS CloudTrail with
+// * Check the AWS CloudTrail log for the
+// CreateAccountResult event. For information on using AWS CloudTrail with
 // Organizations, see Monitoring the Activity in Your Organization
 // (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_monitoring.html)
 // in the AWS Organizations User Guide.
@@ -93,7 +93,7 @@ import (
 // (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html)
 // in the AWS Organizations User Guide.
 //
-//     * When you create an account in an
+// * When you create an account in an
 // organization using the AWS Organizations console, API, or CLI commands, the
 // information required for the account to operate as a standalone account is not
 // automatically collected. This includes a payment method and signing the end user
@@ -103,21 +103,20 @@ import (
 // (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
 // in the AWS Organizations User Guide.
 //
-//     * If you get an exception that
-// indicates that you exceeded your account limits for the organization, contact
+// * If you get an exception that indicates
+// that you exceeded your account limits for the organization, contact AWS Support
+// (https://console.aws.amazon.com/support/home#/).
+//
+// * If you get an exception that
+// indicates that the operation failed because your organization is still
+// initializing, wait one hour and then try again. If the error persists, contact
 // AWS Support (https://console.aws.amazon.com/support/home#/).
 //
-//     * If you get
-// an exception that indicates that the operation failed because your organization
-// is still initializing, wait one hour and then try again. If the error persists,
-// contact AWS Support (https://console.aws.amazon.com/support/home#/).
-//
-//     *
-// Using CreateGovCloudAccount to create multiple temporary accounts isn't
-// recommended. You can only close an account from the AWS Billing and Cost
-// Management console, and you must be signed in as the root user. For information
-// on the requirements and process for closing an account, see Closing an AWS
-// Account
+// * Using
+// CreateGovCloudAccount to create multiple temporary accounts isn't recommended.
+// You can only close an account from the AWS Billing and Cost Management console,
+// and you must be signed in as the root user. For information on the requirements
+// and process for closing an account, see Closing an AWS Account
 // (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html)
 // in the AWS Organizations User Guide.
 //

@@ -58,18 +58,18 @@ type CreateDataSourceFromS3Input struct {
 
 	// The data specification of a DataSource:
 	//
-	//     * DataLocationS3 - The Amazon S3
+	// * DataLocationS3 - The Amazon S3
 	// location of the observation data.
 	//
-	//     * DataSchemaLocationS3 - The Amazon S3
+	// * DataSchemaLocationS3 - The Amazon S3
 	// location of the DataSchema.
 	//
-	//     * DataSchema - A JSON string representing the
+	// * DataSchema - A JSON string representing the
 	// schema. This is not required if DataSchemaUri is specified.
 	//
-	//     *
-	// DataRearrangement - A JSON string that represents the splitting and
-	// rearrangement requirements for the Datasource. Sample -
+	// * DataRearrangement
+	// - A JSON string that represents the splitting and rearrangement requirements for
+	// the Datasource. Sample -
 	// "{\"splitting\":{\"percentBegin\":10,\"percentEnd\":60}}"
 	//
 	// This member is required.

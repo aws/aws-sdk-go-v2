@@ -6,8 +6,8 @@ type MemberDisabledReason string
 
 // Enum values for MemberDisabledReason
 const (
-	MemberDisabledReasonVolume_too_high MemberDisabledReason = "VOLUME_TOO_HIGH"
-	MemberDisabledReasonVolume_unknown  MemberDisabledReason = "VOLUME_UNKNOWN"
+	MemberDisabledReasonVolumeTooHigh MemberDisabledReason = "VOLUME_TOO_HIGH"
+	MemberDisabledReasonVolumeUnknown MemberDisabledReason = "VOLUME_UNKNOWN"
 )
 
 // Values returns all known values for MemberDisabledReason. Note that this can be
@@ -24,11 +24,11 @@ type MemberStatus string
 
 // Enum values for MemberStatus
 const (
-	MemberStatusInvited                  MemberStatus = "INVITED"
-	MemberStatusVerification_in_progress MemberStatus = "VERIFICATION_IN_PROGRESS"
-	MemberStatusVerification_failed      MemberStatus = "VERIFICATION_FAILED"
-	MemberStatusEnabled                  MemberStatus = "ENABLED"
-	MemberStatusAccepted_but_disabled    MemberStatus = "ACCEPTED_BUT_DISABLED"
+	MemberStatusInvited                MemberStatus = "INVITED"
+	MemberStatusVerificationInProgress MemberStatus = "VERIFICATION_IN_PROGRESS"
+	MemberStatusVerificationFailed     MemberStatus = "VERIFICATION_FAILED"
+	MemberStatusEnabled                MemberStatus = "ENABLED"
+	MemberStatusAcceptedButDisabled    MemberStatus = "ACCEPTED_BUT_DISABLED"
 )
 
 // Values returns all known values for MemberStatus. Note that this can be expanded

@@ -17,36 +17,35 @@ import (
 // associated value. By assigning tags to your resources, you can do the
 // following:
 //
-//     * Administrative grouping and discovery - Attach tags to
-// resources to aid in organization and search. For example, you could search for
-// all resources with the key name Project and the value MyImportantProject. Or
-// search for all resources with the key name Cost Center and the value 41200.
+// * Administrative grouping and discovery - Attach tags to resources
+// to aid in organization and search. For example, you could search for all
+// resources with the key name Project and the value MyImportantProject. Or search
+// for all resources with the key name Cost Center and the value 41200.
 //
-//
-// * Access control - Reference tags in IAM user-based and resource-based policies.
-// You can use tags to restrict access to only an IAM user or role that has a
-// specified tag attached. You can also restrict access to only those resources
-// that have a certain tag attached. For examples of policies that show how to use
-// tags to control access, see Control Access Using IAM Tags
+// * Access
+// control - Reference tags in IAM user-based and resource-based policies. You can
+// use tags to restrict access to only an IAM user or role that has a specified tag
+// attached. You can also restrict access to only those resources that have a
+// certain tag attached. For examples of policies that show how to use tags to
+// control access, see Control Access Using IAM Tags
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html) in the IAM
 // User Guide.
 //
-//     * Cost allocation - Use tags to help track which individuals
-// and teams are using which AWS resources.
+// * Cost allocation - Use tags to help track which individuals and
+// teams are using which AWS resources.
 //
-//     * Make sure that you have no
-// invalid tags and that you do not exceed the allowed number of tags per role. In
-// either case, the entire request fails and no tags are added to the role.
+// * Make sure that you have no invalid tags
+// and that you do not exceed the allowed number of tags per role. In either case,
+// the entire request fails and no tags are added to the role.
 //
-//     *
-// AWS always interprets the tag Value as a single string. If you need to store an
-// array, you can store comma-separated values in the string. However, you must
-// interpret the value in your code.
+// * AWS always
+// interprets the tag Value as a single string. If you need to store an array, you
+// can store comma-separated values in the string. However, you must interpret the
+// value in your code.
 //
-// For more information about tagging, see
-// Tagging IAM Identities
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
-// Guide.
+// For more information about tagging, see Tagging IAM
+// Identities (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
+// the IAM User Guide.
 func (c *Client) TagRole(ctx context.Context, params *TagRoleInput, optFns ...func(*Options)) (*TagRoleOutput, error) {
 	if params == nil {
 		params = &TagRoleInput{}

@@ -51,19 +51,19 @@ type DescribeContributorInsightsOutput struct {
 	// Returns information about the last failure that encountered. The most common
 	// exceptions for a FAILED status are:
 	//
-	//     * LimitExceededException - Per-account
+	// * LimitExceededException - Per-account
 	// Amazon CloudWatch Contributor Insights rule limit reached. Please disable
 	// Contributor Insights for other tables/indexes OR disable Contributor Insights
 	// rules before retrying.
 	//
-	//     * AccessDeniedException - Amazon CloudWatch
-	// Contributor Insights rules cannot be modified due to insufficient permissions.
+	// * AccessDeniedException - Amazon CloudWatch Contributor
+	// Insights rules cannot be modified due to insufficient permissions.
 	//
-	//
-	// * AccessDeniedException - Failed to create service-linked role for Contributor
+	// *
+	// AccessDeniedException - Failed to create service-linked role for Contributor
 	// Insights due to insufficient permissions.
 	//
-	//     * InternalServerError - Failed to
+	// * InternalServerError - Failed to
 	// create Amazon CloudWatch Contributor Insights rules. Please retry request.
 	FailureException *types.FailureException
 

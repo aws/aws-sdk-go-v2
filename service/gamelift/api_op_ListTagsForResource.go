@@ -16,35 +16,33 @@ import (
 // the permissions necessary to manage tags for the following GameLift resource
 // types:
 //
-//     * Build
+// * Build
 //
-//     * Script
+// * Script
 //
-//     * Fleet
+// * Fleet
 //
-//     * Alias
+// * Alias
 //
-//     *
-// GameSessionQueue
+// * GameSessionQueue
 //
-//     * MatchmakingConfiguration
+// *
+// MatchmakingConfiguration
 //
-//     * MatchmakingRuleSet
+// * MatchmakingRuleSet
 //
-// To
-// list tags for a resource, specify the unique ARN value for the resource. Learn
-// more Tagging AWS Resources
+// To list tags for a resource,
+// specify the unique ARN value for the resource. Learn more Tagging AWS Resources
 // (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the AWS
 // General Reference  AWS Tagging Strategies
 // (http://aws.amazon.com/answers/account-management/aws-tagging-strategies/)
 // Related operations
 //
-//     * TagResource
+// * TagResource
 //
-//     * UntagResource
+// * UntagResource
 //
-//     *
-// ListTagsForResource
+// * ListTagsForResource
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

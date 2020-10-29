@@ -6,14 +6,14 @@ type DomainStatus string
 
 // Enum values for DomainStatus
 const (
-	DomainStatusPending_verification   DomainStatus = "PENDING_VERIFICATION"
-	DomainStatusIn_progress            DomainStatus = "IN_PROGRESS"
-	DomainStatusAvailable              DomainStatus = "AVAILABLE"
-	DomainStatusPending_deployment     DomainStatus = "PENDING_DEPLOYMENT"
-	DomainStatusFailed                 DomainStatus = "FAILED"
-	DomainStatusCreating               DomainStatus = "CREATING"
-	DomainStatusRequesting_certificate DomainStatus = "REQUESTING_CERTIFICATE"
-	DomainStatusUpdating               DomainStatus = "UPDATING"
+	DomainStatusPendingVerification   DomainStatus = "PENDING_VERIFICATION"
+	DomainStatusInProgress            DomainStatus = "IN_PROGRESS"
+	DomainStatusAvailable             DomainStatus = "AVAILABLE"
+	DomainStatusPendingDeployment     DomainStatus = "PENDING_DEPLOYMENT"
+	DomainStatusFailed                DomainStatus = "FAILED"
+	DomainStatusCreating              DomainStatus = "CREATING"
+	DomainStatusRequestingCertificate DomainStatus = "REQUESTING_CERTIFICATE"
+	DomainStatusUpdating              DomainStatus = "UPDATING"
 )
 
 // Values returns all known values for DomainStatus. Note that this can be expanded
@@ -64,10 +64,10 @@ type JobType string
 
 // Enum values for JobType
 const (
-	JobTypeRelease  JobType = "RELEASE"
-	JobTypeRetry    JobType = "RETRY"
-	JobTypeManual   JobType = "MANUAL"
-	JobTypeWeb_hook JobType = "WEB_HOOK"
+	JobTypeRelease JobType = "RELEASE"
+	JobTypeRetry   JobType = "RETRY"
+	JobTypeManual  JobType = "MANUAL"
+	JobTypeWebHook JobType = "WEB_HOOK"
 )
 
 // Values returns all known values for JobType. Note that this can be expanded in
@@ -106,7 +106,7 @@ const (
 	StageBeta         Stage = "BETA"
 	StageDevelopment  Stage = "DEVELOPMENT"
 	StageExperimental Stage = "EXPERIMENTAL"
-	StagePull_request Stage = "PULL_REQUEST"
+	StagePullRequest  Stage = "PULL_REQUEST"
 )
 
 // Values returns all known values for Stage. Note that this can be expanded in the

@@ -24,25 +24,25 @@ import (
 // a particular ReceiveMessage response. If this happens, repeat the request. For
 // each message returned, the response includes the following:
 //
-//     * The message
+// * The message
 // body.
 //
-//     * An MD5 digest of the message body. For information about MD5, see
+// * An MD5 digest of the message body. For information about MD5, see
 // RFC1321 (https://www.ietf.org/rfc/rfc1321.txt).
 //
-//     * The MessageId you
-// received when you sent the message to the queue.
+// * The MessageId you received
+// when you sent the message to the queue.
 //
-//     * The receipt handle.
+// * The receipt handle.
 //
+// * The message
+// attributes.
 //
-// * The message attributes.
+// * An MD5 digest of the message attributes.
 //
-//     * An MD5 digest of the message attributes.
-//
-// The
-// receipt handle is the identifier you must provide when deleting the message. For
-// more information, see Queue and Message Identifiers
+// The receipt handle is
+// the identifier you must provide when deleting the message. For more information,
+// see Queue and Message Identifiers
 // (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-queue-message-identifiers.html)
 // in the Amazon Simple Queue Service Developer Guide. You can provide the
 // VisibilityTimeout parameter in your request. The parameter is applied to the
@@ -84,42 +84,41 @@ type ReceiveMessageInput struct {
 	// A list of attributes that need to be returned along with each message. These
 	// attributes include:
 	//
-	//     * All – Returns all values.
+	// * All – Returns all values.
 	//
-	//     *
+	// *
 	// ApproximateFirstReceiveTimestamp – Returns the time the message was first
 	// received from the queue (epoch time (http://en.wikipedia.org/wiki/Unix_time) in
 	// milliseconds).
 	//
-	//     * ApproximateReceiveCount – Returns the number of times a
+	// * ApproximateReceiveCount – Returns the number of times a
 	// message has been received across all queues but not deleted.
 	//
-	//     *
-	// AWSTraceHeader – Returns the AWS X-Ray trace header string.
+	// * AWSTraceHeader –
+	// Returns the AWS X-Ray trace header string.
 	//
-	//     * SenderId
+	// * SenderId
 	//
+	// * For an IAM user,
+	// returns the IAM user ID, for example ABCDEFGHI1JKLMNOPQ23R.
 	//
-	// * For an IAM user, returns the IAM user ID, for example ABCDEFGHI1JKLMNOPQ23R.
+	// * For an IAM role,
+	// returns the IAM role ID, for example ABCDE1F2GH3I4JK5LMNOP:i-a123b456.
 	//
-	//
-	// * For an IAM role, returns the IAM role ID, for example
-	// ABCDE1F2GH3I4JK5LMNOP:i-a123b456.
-	//
-	//     * SentTimestamp – Returns the time the
-	// message was sent to the queue (epoch time
+	// *
+	// SentTimestamp – Returns the time the message was sent to the queue (epoch time
 	// (http://en.wikipedia.org/wiki/Unix_time) in milliseconds).
 	//
-	//     *
+	// *
 	// MessageDeduplicationId – Returns the value provided by the producer that calls
 	// the SendMessage action.
 	//
-	//     * MessageGroupId – Returns the value provided by
-	// the producer that calls the SendMessage action. Messages with the same
+	// * MessageGroupId – Returns the value provided by the
+	// producer that calls the SendMessage action. Messages with the same
 	// MessageGroupId are returned in sequence.
 	//
-	//     * SequenceNumber – Returns the
-	// value provided by Amazon SQS.
+	// * SequenceNumber – Returns the value
+	// provided by Amazon SQS.
 	AttributeNames []types.QueueAttributeName
 
 	// The maximum number of messages to return. Amazon SQS never returns more messages
@@ -129,26 +128,26 @@ type ReceiveMessageInput struct {
 
 	// The name of the message attribute, where N is the index.
 	//
-	//     * The name can
-	// contain alphanumeric characters and the underscore (_), hyphen (-), and period
-	// (.).
+	// * The name can contain
+	// alphanumeric characters and the underscore (_), hyphen (-), and period (.).
 	//
-	//     * The name is case-sensitive and must be unique among all attribute
-	// names for the message.
+	// *
+	// The name is case-sensitive and must be unique among all attribute names for the
+	// message.
 	//
-	//     * The name must not start with AWS-reserved prefixes
-	// such as AWS. or Amazon. (or any casing variants).
+	// * The name must not start with AWS-reserved prefixes such as AWS. or
+	// Amazon. (or any casing variants).
 	//
-	//     * The name must not start
-	// or end with a period (.), and it should not have periods in succession (..).
+	// * The name must not start or end with a
+	// period (.), and it should not have periods in succession (..).
 	//
+	// * The name can
+	// be up to 256 characters long.
 	//
-	// * The name can be up to 256 characters long.
-	//
-	// When using ReceiveMessage, you can
-	// send a list of attribute names to receive, or you can return all of the
-	// attributes by specifying All or . in your request. You can also use all message
-	// attributes starting with a prefix, for example bar..
+	// When using ReceiveMessage, you can send a list of
+	// attribute names to receive, or you can return all of the attributes by
+	// specifying All or . in your request. You can also use all message attributes
+	// starting with a prefix, for example bar..
 	MessageAttributeNames []*string
 
 	// This parameter applies only to FIFO (first-in-first-out) queues. The token used
@@ -158,25 +157,25 @@ type ReceiveMessageInput struct {
 	// to retrieve the same set of messages, even if their visibility timeout has not
 	// yet expired.
 	//
-	//     * You can use ReceiveRequestAttemptId only for 5 minutes after
-	// a ReceiveMessage action.
+	// * You can use ReceiveRequestAttemptId only for 5 minutes after a
+	// ReceiveMessage action.
 	//
-	//     * When you set FifoQueue, a caller of the
-	// ReceiveMessage action can provide a ReceiveRequestAttemptId explicitly.
+	// * When you set FifoQueue, a caller of the ReceiveMessage
+	// action can provide a ReceiveRequestAttemptId explicitly.
 	//
-	//     *
-	// If a caller of the ReceiveMessage action doesn't provide a
-	// ReceiveRequestAttemptId, Amazon SQS generates a ReceiveRequestAttemptId.
+	// * If a caller of the
+	// ReceiveMessage action doesn't provide a ReceiveRequestAttemptId, Amazon SQS
+	// generates a ReceiveRequestAttemptId.
 	//
-	//     *
-	// It is possible to retry the ReceiveMessage action with the same
-	// ReceiveRequestAttemptId if none of the messages have been modified (deleted or
-	// had their visibility changes).
+	// * It is possible to retry the
+	// ReceiveMessage action with the same ReceiveRequestAttemptId if none of the
+	// messages have been modified (deleted or had their visibility changes).
 	//
-	//     * During a visibility timeout, subsequent
-	// calls with the same ReceiveRequestAttemptId return the same messages and receipt
-	// handles. If a retry occurs within the deduplication interval, it resets the
-	// visibility timeout. For more information, see Visibility Timeout
+	// * During
+	// a visibility timeout, subsequent calls with the same ReceiveRequestAttemptId
+	// return the same messages and receipt handles. If a retry occurs within the
+	// deduplication interval, it resets the visibility timeout. For more information,
+	// see Visibility Timeout
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html)
 	// in the Amazon Simple Queue Service Developer Guide. If a caller of the
 	// ReceiveMessage action still processes messages when the visibility timeout
@@ -188,15 +187,15 @@ type ReceiveMessageInput struct {
 	// before the visibility timeout expires and extend the visibility timeout as
 	// necessary.
 	//
-	//     * While messages with a particular MessageGroupId are invisible,
-	// no more messages belonging to the same MessageGroupId are returned until the
+	// * While messages with a particular MessageGroupId are invisible, no
+	// more messages belonging to the same MessageGroupId are returned until the
 	// visibility timeout expires. You can still receive messages with another
 	// MessageGroupId as long as it is also visible.
 	//
-	//     * If a caller of
-	// ReceiveMessage can't track the ReceiveRequestAttemptId, no retries work until
-	// the original visibility timeout expires. As a result, delays might occur but the
-	// messages in the queue remain in a strict order.
+	// * If a caller of ReceiveMessage
+	// can't track the ReceiveRequestAttemptId, no retries work until the original
+	// visibility timeout expires. As a result, delays might occur but the messages in
+	// the queue remain in a strict order.
 	//
 	// The maximum length of
 	// ReceiveRequestAttemptId is 128 characters. ReceiveRequestAttemptId can contain

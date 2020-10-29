@@ -6,18 +6,18 @@ type EndpointTypesElement string
 
 // Enum values for EndpointTypesElement
 const (
-	EndpointTypesElementPush              EndpointTypesElement = "PUSH"
-	EndpointTypesElementGcm               EndpointTypesElement = "GCM"
-	EndpointTypesElementApns              EndpointTypesElement = "APNS"
-	EndpointTypesElementApns_sandbox      EndpointTypesElement = "APNS_SANDBOX"
-	EndpointTypesElementApns_voip         EndpointTypesElement = "APNS_VOIP"
-	EndpointTypesElementApns_voip_sandbox EndpointTypesElement = "APNS_VOIP_SANDBOX"
-	EndpointTypesElementAdm               EndpointTypesElement = "ADM"
-	EndpointTypesElementSms               EndpointTypesElement = "SMS"
-	EndpointTypesElementVoice             EndpointTypesElement = "VOICE"
-	EndpointTypesElementEmail             EndpointTypesElement = "EMAIL"
-	EndpointTypesElementBaidu             EndpointTypesElement = "BAIDU"
-	EndpointTypesElementCustom            EndpointTypesElement = "CUSTOM"
+	EndpointTypesElementPush            EndpointTypesElement = "PUSH"
+	EndpointTypesElementGcm             EndpointTypesElement = "GCM"
+	EndpointTypesElementApns            EndpointTypesElement = "APNS"
+	EndpointTypesElementApnsSandbox     EndpointTypesElement = "APNS_SANDBOX"
+	EndpointTypesElementApnsVoip        EndpointTypesElement = "APNS_VOIP"
+	EndpointTypesElementApnsVoipSandbox EndpointTypesElement = "APNS_VOIP_SANDBOX"
+	EndpointTypesElementAdm             EndpointTypesElement = "ADM"
+	EndpointTypesElementSms             EndpointTypesElement = "SMS"
+	EndpointTypesElementVoice           EndpointTypesElement = "VOICE"
+	EndpointTypesElementEmail           EndpointTypesElement = "EMAIL"
+	EndpointTypesElementBaidu           EndpointTypesElement = "BAIDU"
+	EndpointTypesElementCustom          EndpointTypesElement = "CUSTOM"
 )
 
 // Values returns all known values for EndpointTypesElement. Note that this can be
@@ -44,9 +44,9 @@ type Action string
 
 // Enum values for Action
 const (
-	ActionOpen_app  Action = "OPEN_APP"
-	ActionDeep_link Action = "DEEP_LINK"
-	ActionUrl       Action = "URL"
+	ActionOpenApp  Action = "OPEN_APP"
+	ActionDeepLink Action = "DEEP_LINK"
+	ActionUrl      Action = "URL"
 )
 
 // Values returns all known values for Action. Note that this can be expanded in
@@ -82,13 +82,13 @@ type CampaignStatus string
 
 // Enum values for CampaignStatus
 const (
-	CampaignStatusScheduled        CampaignStatus = "SCHEDULED"
-	CampaignStatusExecuting        CampaignStatus = "EXECUTING"
-	CampaignStatusPending_next_run CampaignStatus = "PENDING_NEXT_RUN"
-	CampaignStatusCompleted        CampaignStatus = "COMPLETED"
-	CampaignStatusPaused           CampaignStatus = "PAUSED"
-	CampaignStatusDeleted          CampaignStatus = "DELETED"
-	CampaignStatusInvalid          CampaignStatus = "INVALID"
+	CampaignStatusScheduled      CampaignStatus = "SCHEDULED"
+	CampaignStatusExecuting      CampaignStatus = "EXECUTING"
+	CampaignStatusPendingNextRun CampaignStatus = "PENDING_NEXT_RUN"
+	CampaignStatusCompleted      CampaignStatus = "COMPLETED"
+	CampaignStatusPaused         CampaignStatus = "PAUSED"
+	CampaignStatusDeleted        CampaignStatus = "DELETED"
+	CampaignStatusInvalid        CampaignStatus = "INVALID"
 )
 
 // Values returns all known values for CampaignStatus. Note that this can be
@@ -110,18 +110,18 @@ type ChannelType string
 
 // Enum values for ChannelType
 const (
-	ChannelTypePush              ChannelType = "PUSH"
-	ChannelTypeGcm               ChannelType = "GCM"
-	ChannelTypeApns              ChannelType = "APNS"
-	ChannelTypeApns_sandbox      ChannelType = "APNS_SANDBOX"
-	ChannelTypeApns_voip         ChannelType = "APNS_VOIP"
-	ChannelTypeApns_voip_sandbox ChannelType = "APNS_VOIP_SANDBOX"
-	ChannelTypeAdm               ChannelType = "ADM"
-	ChannelTypeSms               ChannelType = "SMS"
-	ChannelTypeVoice             ChannelType = "VOICE"
-	ChannelTypeEmail             ChannelType = "EMAIL"
-	ChannelTypeBaidu             ChannelType = "BAIDU"
-	ChannelTypeCustom            ChannelType = "CUSTOM"
+	ChannelTypePush            ChannelType = "PUSH"
+	ChannelTypeGcm             ChannelType = "GCM"
+	ChannelTypeApns            ChannelType = "APNS"
+	ChannelTypeApnsSandbox     ChannelType = "APNS_SANDBOX"
+	ChannelTypeApnsVoip        ChannelType = "APNS_VOIP"
+	ChannelTypeApnsVoipSandbox ChannelType = "APNS_VOIP_SANDBOX"
+	ChannelTypeAdm             ChannelType = "ADM"
+	ChannelTypeSms             ChannelType = "SMS"
+	ChannelTypeVoice           ChannelType = "VOICE"
+	ChannelTypeEmail           ChannelType = "EMAIL"
+	ChannelTypeBaidu           ChannelType = "BAIDU"
+	ChannelTypeCustom          ChannelType = "CUSTOM"
 )
 
 // Values returns all known values for ChannelType. Note that this can be expanded
@@ -148,13 +148,13 @@ type DeliveryStatus string
 
 // Enum values for DeliveryStatus
 const (
-	DeliveryStatusSuccessful        DeliveryStatus = "SUCCESSFUL"
-	DeliveryStatusThrottled         DeliveryStatus = "THROTTLED"
-	DeliveryStatusTemporary_failure DeliveryStatus = "TEMPORARY_FAILURE"
-	DeliveryStatusPermanent_failure DeliveryStatus = "PERMANENT_FAILURE"
-	DeliveryStatusUnknown_failure   DeliveryStatus = "UNKNOWN_FAILURE"
-	DeliveryStatusOpt_out           DeliveryStatus = "OPT_OUT"
-	DeliveryStatusDuplicate         DeliveryStatus = "DUPLICATE"
+	DeliveryStatusSuccessful       DeliveryStatus = "SUCCESSFUL"
+	DeliveryStatusThrottled        DeliveryStatus = "THROTTLED"
+	DeliveryStatusTemporaryFailure DeliveryStatus = "TEMPORARY_FAILURE"
+	DeliveryStatusPermanentFailure DeliveryStatus = "PERMANENT_FAILURE"
+	DeliveryStatusUnknownFailure   DeliveryStatus = "UNKNOWN_FAILURE"
+	DeliveryStatusOptOut           DeliveryStatus = "OPT_OUT"
+	DeliveryStatusDuplicate        DeliveryStatus = "DUPLICATE"
 )
 
 // Values returns all known values for DeliveryStatus. Note that this can be
@@ -194,10 +194,10 @@ type Duration string
 
 // Enum values for Duration
 const (
-	DurationHr_24  Duration = "HR_24"
-	DurationDay_7  Duration = "DAY_7"
-	DurationDay_14 Duration = "DAY_14"
-	DurationDay_30 Duration = "DAY_30"
+	DurationHr24  Duration = "HR_24"
+	DurationDay7  Duration = "DAY_7"
+	DurationDay14 Duration = "DAY_14"
+	DurationDay30 Duration = "DAY_30"
 )
 
 // Values returns all known values for Duration. Note that this can be expanded in
@@ -298,15 +298,15 @@ type JobStatus string
 
 // Enum values for JobStatus
 const (
-	JobStatusCreated                      JobStatus = "CREATED"
-	JobStatusPreparing_for_initialization JobStatus = "PREPARING_FOR_INITIALIZATION"
-	JobStatusInitializing                 JobStatus = "INITIALIZING"
-	JobStatusProcessing                   JobStatus = "PROCESSING"
-	JobStatusPending_job                  JobStatus = "PENDING_JOB"
-	JobStatusCompleting                   JobStatus = "COMPLETING"
-	JobStatusCompleted                    JobStatus = "COMPLETED"
-	JobStatusFailing                      JobStatus = "FAILING"
-	JobStatusFailed                       JobStatus = "FAILED"
+	JobStatusCreated                    JobStatus = "CREATED"
+	JobStatusPreparingForInitialization JobStatus = "PREPARING_FOR_INITIALIZATION"
+	JobStatusInitializing               JobStatus = "INITIALIZING"
+	JobStatusProcessing                 JobStatus = "PROCESSING"
+	JobStatusPendingJob                 JobStatus = "PENDING_JOB"
+	JobStatusCompleting                 JobStatus = "COMPLETING"
+	JobStatusCompleted                  JobStatus = "COMPLETED"
+	JobStatusFailing                    JobStatus = "FAILING"
+	JobStatusFailed                     JobStatus = "FAILED"
 )
 
 // Values returns all known values for JobStatus. Note that this can be expanded in

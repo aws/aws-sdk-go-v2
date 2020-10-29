@@ -6,12 +6,12 @@ type AggregateType string
 
 // Enum values for AggregateType
 const (
-	AggregateTypeAverage            AggregateType = "AVERAGE"
-	AggregateTypeCount              AggregateType = "COUNT"
-	AggregateTypeMaximum            AggregateType = "MAXIMUM"
-	AggregateTypeMinimum            AggregateType = "MINIMUM"
-	AggregateTypeSum                AggregateType = "SUM"
-	AggregateTypeStandard_deviation AggregateType = "STANDARD_DEVIATION"
+	AggregateTypeAverage           AggregateType = "AVERAGE"
+	AggregateTypeCount             AggregateType = "COUNT"
+	AggregateTypeMaximum           AggregateType = "MAXIMUM"
+	AggregateTypeMinimum           AggregateType = "MINIMUM"
+	AggregateTypeSum               AggregateType = "SUM"
+	AggregateTypeStandardDeviation AggregateType = "STANDARD_DEVIATION"
 )
 
 // Values returns all known values for AggregateType. Note that this can be
@@ -32,7 +32,7 @@ type AssetErrorCode string
 
 // Enum values for AssetErrorCode
 const (
-	AssetErrorCodeInternal_failure AssetErrorCode = "INTERNAL_FAILURE"
+	AssetErrorCodeInternalFailure AssetErrorCode = "INTERNAL_FAILURE"
 )
 
 // Values returns all known values for AssetErrorCode. Note that this can be
@@ -149,9 +149,9 @@ type CapabilitySyncStatus string
 
 // Enum values for CapabilitySyncStatus
 const (
-	CapabilitySyncStatusIn_sync     CapabilitySyncStatus = "IN_SYNC"
-	CapabilitySyncStatusOut_of_sync CapabilitySyncStatus = "OUT_OF_SYNC"
-	CapabilitySyncStatusSync_failed CapabilitySyncStatus = "SYNC_FAILED"
+	CapabilitySyncStatusInSync     CapabilitySyncStatus = "IN_SYNC"
+	CapabilitySyncStatusOutOfSync  CapabilitySyncStatus = "OUT_OF_SYNC"
+	CapabilitySyncStatusSyncFailed CapabilitySyncStatus = "SYNC_FAILED"
 )
 
 // Values returns all known values for CapabilitySyncStatus. Note that this can be
@@ -169,8 +169,8 @@ type ErrorCode string
 
 // Enum values for ErrorCode
 const (
-	ErrorCodeValidation_error ErrorCode = "VALIDATION_ERROR"
-	ErrorCodeInternal_failure ErrorCode = "INTERNAL_FAILURE"
+	ErrorCodeValidationError ErrorCode = "VALIDATION_ERROR"
+	ErrorCodeInternalFailure ErrorCode = "INTERNAL_FAILURE"
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded in
@@ -223,8 +223,8 @@ type ListAssetsFilter string
 
 // Enum values for ListAssetsFilter
 const (
-	ListAssetsFilterAll       ListAssetsFilter = "ALL"
-	ListAssetsFilterTop_level ListAssetsFilter = "TOP_LEVEL"
+	ListAssetsFilterAll      ListAssetsFilter = "ALL"
+	ListAssetsFilterTopLevel ListAssetsFilter = "TOP_LEVEL"
 )
 
 // Values returns all known values for ListAssetsFilter. Note that this can be
@@ -261,9 +261,9 @@ type MonitorErrorCode string
 
 // Enum values for MonitorErrorCode
 const (
-	MonitorErrorCodeInternal_failure MonitorErrorCode = "INTERNAL_FAILURE"
-	MonitorErrorCodeValidation_error MonitorErrorCode = "VALIDATION_ERROR"
-	MonitorErrorCodeLimit_exceeded   MonitorErrorCode = "LIMIT_EXCEEDED"
+	MonitorErrorCodeInternalFailure MonitorErrorCode = "INTERNAL_FAILURE"
+	MonitorErrorCodeValidationError MonitorErrorCode = "VALIDATION_ERROR"
+	MonitorErrorCodeLimitExceeded   MonitorErrorCode = "LIMIT_EXCEEDED"
 )
 
 // Values returns all known values for MonitorErrorCode. Note that this can be

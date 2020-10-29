@@ -540,13 +540,13 @@ type GatewayCapabilitySummary struct {
 	// The synchronization status of the capability configuration. The sync status can
 	// be one of the following:
 	//
-	//     * IN_SYNC – The gateway is running the capability
+	// * IN_SYNC – The gateway is running the capability
 	// configuration.
 	//
-	//     * OUT_OF_SYNC – The gateway hasn't received the capability
+	// * OUT_OF_SYNC – The gateway hasn't received the capability
 	// configuration.
 	//
-	//     * SYNC_FAILED – The gateway rejected the capability
+	// * SYNC_FAILED – The gateway rejected the capability
 	// configuration.
 	//
 	// This member is required.
@@ -657,11 +657,11 @@ type Identity struct {
 
 // Contains an image that is one of the following:
 //
-//     * An image file. Choose
-// this option to upload a new image.
+// * An image file. Choose this
+// option to upload a new image.
 //
-//     * The ID of an existing image. Choose
-// this option to keep an existing image.
+// * The ID of an existing image. Choose this option
+// to keep an existing image.
 type Image struct {
 
 	// Contains an image file.

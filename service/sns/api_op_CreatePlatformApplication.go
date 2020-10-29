@@ -17,28 +17,27 @@ import (
 // PlatformPrincipal and PlatformCredential are received from the notification
 // service.
 //
-//     * For ADM, PlatformPrincipal is client id and PlatformCredential
-// is client secret.
+// * For ADM, PlatformPrincipal is client id and PlatformCredential is
+// client secret.
 //
-//     * For Baidu, PlatformPrincipal is API key and
-// PlatformCredential is secret key.
+// * For Baidu, PlatformPrincipal is API key and PlatformCredential
+// is secret key.
 //
-//     * For APNS and APNS_SANDBOX,
-// PlatformPrincipal is SSL certificate and PlatformCredential is private key.
-//
-//
-// * For GCM (Firebase Cloud Messaging), there is no PlatformPrincipal and the
-// PlatformCredential is API key.
-//
-//     * For MPNS, PlatformPrincipal is TLS
+// * For APNS and APNS_SANDBOX, PlatformPrincipal is SSL
 // certificate and PlatformCredential is private key.
 //
-//     * For WNS,
-// PlatformPrincipal is Package Security Identifier and PlatformCredential is
-// secret key.
+// * For GCM (Firebase Cloud
+// Messaging), there is no PlatformPrincipal and the PlatformCredential is API
+// key.
 //
-// You can use the returned PlatformApplicationArn as an attribute for
-// the CreatePlatformEndpoint action.
+// * For MPNS, PlatformPrincipal is TLS certificate and PlatformCredential is
+// private key.
+//
+// * For WNS, PlatformPrincipal is Package Security Identifier and
+// PlatformCredential is secret key.
+//
+// You can use the returned
+// PlatformApplicationArn as an attribute for the CreatePlatformEndpoint action.
 func (c *Client) CreatePlatformApplication(ctx context.Context, params *CreatePlatformApplicationInput, optFns ...func(*Options)) (*CreatePlatformApplicationOutput, error) {
 	if params == nil {
 		params = &CreatePlatformApplicationInput{}

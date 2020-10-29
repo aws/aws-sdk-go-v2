@@ -69,11 +69,11 @@ type ImportRestApiOutput struct {
 	// The source of the API key for metering requests according to a usage plan. Valid
 	// values are:
 	//
-	//     * HEADER to read the API key from the X-API-Key header of a
+	// * HEADER to read the API key from the X-API-Key header of a
 	// request.
 	//
-	//     * AUTHORIZER to read the API key from the UsageIdentifierKey from
-	// a custom authorizer.
+	// * AUTHORIZER to read the API key from the UsageIdentifierKey from a
+	// custom authorizer.
 	ApiKeySource types.ApiKeySourceType
 
 	// The list of binary media types supported by the RestApi. By default, the RestApi

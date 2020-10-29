@@ -31,18 +31,18 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 // Some of the reasons in the following list might not apply to this specific
 // operation.
 //
-//     * You must meet the prerequisites for using tag policies. For
+// * You must meet the prerequisites for using tag policies. For
 // information, see Prerequisites and Permissions for Using Tag Policies
 // (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies-prereqs.html)
 // in the AWS Organizations User Guide.
 //
-//     * You must enable the tag policies
-// service principal (tagpolicies.tag.amazonaws.com) to integrate with AWS
-// Organizations For information, see EnableAWSServiceAccess
+// * You must enable the tag policies service
+// principal (tagpolicies.tag.amazonaws.com) to integrate with AWS Organizations
+// For information, see EnableAWSServiceAccess
 // (http://docs.aws.amazon.com/organizations/latest/APIReference/API_EnableAWSServiceAccess.html).
 //
-//
-// * You must have a tag policy attached to the organization root, an OU, or an
+// *
+// You must have a tag policy attached to the organization root, an OU, or an
 // account.
 type ConstraintViolationException struct {
 	Message *string
@@ -80,19 +80,19 @@ func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smith
 
 // This error indicates one of the following:
 //
-//     * A parameter is missing.
+// * A parameter is missing.
 //
-//     *
-// A malformed string was supplied for the request parameter.
+// * A
+// malformed string was supplied for the request parameter.
 //
-//     * An
-// out-of-range value was supplied for the request parameter.
+// * An out-of-range
+// value was supplied for the request parameter.
 //
-//     * The target ID
-// is invalid, unsupported, or doesn't exist.
+// * The target ID is invalid,
+// unsupported, or doesn't exist.
 //
-//     * You can't access the Amazon S3
-// bucket for report storage. For more information, see Additional Requirements for
+// * You can't access the Amazon S3 bucket for
+// report storage. For more information, see Additional Requirements for
 // Organization-wide Tag Compliance Reports
 // (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies-prereqs.html#bucket-policies-org-report)
 // in the AWS Organizations User Guide.

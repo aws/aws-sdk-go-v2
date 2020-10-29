@@ -21,13 +21,13 @@ import (
 // (SSE-C) when you store the object in Amazon S3, then when you retrieve the
 // metadata from the object, you must use the following headers:
 //
-//     *
+// *
 // x-amz-server-side-encryption-customer-algorithm
 //
-//     *
+// *
 // x-amz-server-side-encryption-customer-key
 //
-//     *
+// *
 // x-amz-server-side-encryption-customer-key-MD5
 //
 // For more information about SSE-C,
@@ -42,49 +42,49 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTCommonRequestHeaders.html).
 // Consider the following when using request headers:
 //
-//     * Consideration 1 – If
-// both of the If-Match and If-Unmodified-Since headers are present in the request
-// as follows:
-//
-//         * If-Match condition evaluates to true, and;
-//
-//         *
-// If-Unmodified-Since condition evaluates to false;
-//
-//     Then Amazon S3 returns
-// 200 OK and the data requested.
-//
-//     * Consideration 2 – If both of the
-// If-None-Match and If-Modified-Since headers are present in the request as
+// * Consideration 1 – If both
+// of the If-Match and If-Unmodified-Since headers are present in the request as
 // follows:
 //
-//         * If-None-Match condition evaluates to false, and;
+// * If-Match condition evaluates to true, and;
 //
-//         *
-// If-Modified-Since condition evaluates to true;
+// * If-Unmodified-Since
+// condition evaluates to false;
 //
-//     Then Amazon S3 returns the
-// 304 Not Modified response code.
+// Then Amazon S3 returns 200 OK and the data
+// requested.
 //
-// For more information about conditional
-// requests, see RFC 7232 (https://tools.ietf.org/html/rfc7232). Permissions You
-// need the s3:GetObject permission for this operation. For more information, see
-// Specifying Permissions in a Policy
+// * Consideration 2 – If both of the If-None-Match and
+// If-Modified-Since headers are present in the request as follows:
+//
+// *
+// If-None-Match condition evaluates to false, and;
+//
+// * If-Modified-Since condition
+// evaluates to true;
+//
+// Then Amazon S3 returns the 304 Not Modified response
+// code.
+//
+// For more information about conditional requests, see RFC 7232
+// (https://tools.ietf.org/html/rfc7232). Permissions You need the s3:GetObject
+// permission for this operation. For more information, see Specifying Permissions
+// in a Policy
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html). If
 // the object you request does not exist, the error Amazon S3 returns depends on
 // whether you also have the s3:ListBucket permission.
 //
-//     * If you have the
+// * If you have the
 // s3:ListBucket permission on the bucket, Amazon S3 returns an HTTP status code
 // 404 ("no such key") error.
 //
-//     * If you don’t have the s3:ListBucket
-// permission, Amazon S3 returns an HTTP status code 403 ("access denied")
-// error.
+// * If you don’t have the s3:ListBucket permission,
+// Amazon S3 returns an HTTP status code 403 ("access denied") error.
 //
-// The following operation is related to HeadObject:
+// The
+// following operation is related to HeadObject:
 //
-//     * GetObject
+// * GetObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
 func (c *Client) HeadObject(ctx context.Context, params *HeadObjectInput, optFns ...func(*Options)) (*HeadObjectOutput, error) {
 	if params == nil {
@@ -271,8 +271,8 @@ type HeadObjectOutput struct {
 	// object metadata (HeadObject) from these buckets, Amazon S3 will return the
 	// x-amz-replication-status header in the response as follows:
 	//
-	//     * If requesting
-	// an object from the source bucket — Amazon S3 will return the
+	// * If requesting an
+	// object from the source bucket — Amazon S3 will return the
 	// x-amz-replication-status header if the object in your request is eligible for
 	// replication. For example, suppose that in your replication configuration, you
 	// specify object prefix TaxDocs requesting Amazon S3 to replicate objects with key
@@ -281,13 +281,12 @@ type HeadObjectOutput struct {
 	// this key name prefix, Amazon S3 will return the x-amz-replication-status header
 	// with value PENDING, COMPLETED or FAILED indicating object replication status.
 	//
+	// *
+	// If requesting an object from the destination bucket — Amazon S3 will return the
+	// x-amz-replication-status header with value REPLICA if the object in your request
+	// is a replica that Amazon S3 created.
 	//
-	// * If requesting an object from the destination bucket — Amazon S3 will return
-	// the x-amz-replication-status header with value REPLICA if the object in your
-	// request is a replica that Amazon S3 created.
-	//
-	// For more information, see
-	// Replication
+	// For more information, see Replication
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html).
 	ReplicationStatus types.ReplicationStatus
 

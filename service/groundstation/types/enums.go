@@ -6,8 +6,8 @@ type AngleUnits string
 
 // Enum values for AngleUnits
 const (
-	AngleUnitsDegree_angle AngleUnits = "DEGREE_ANGLE"
-	AngleUnitsRadian       AngleUnits = "RADIAN"
+	AngleUnitsDegreeAngle AngleUnits = "DEGREE_ANGLE"
+	AngleUnitsRadian      AngleUnits = "RADIAN"
 )
 
 // Values returns all known values for AngleUnits. Note that this can be expanded
@@ -44,12 +44,12 @@ type ConfigCapabilityType string
 
 // Enum values for ConfigCapabilityType
 const (
-	ConfigCapabilityTypeAntenna_downlink              ConfigCapabilityType = "antenna-downlink"
-	ConfigCapabilityTypeAntenna_downlink_demod_decode ConfigCapabilityType = "antenna-downlink-demod-decode"
-	ConfigCapabilityTypeTracking                      ConfigCapabilityType = "tracking"
-	ConfigCapabilityTypeDataflow_endpoint             ConfigCapabilityType = "dataflow-endpoint"
-	ConfigCapabilityTypeAntenna_uplink                ConfigCapabilityType = "antenna-uplink"
-	ConfigCapabilityTypeUplink_echo                   ConfigCapabilityType = "uplink-echo"
+	ConfigCapabilityTypeAntennaDownlink            ConfigCapabilityType = "antenna-downlink"
+	ConfigCapabilityTypeAntennaDownlinkDemodDecode ConfigCapabilityType = "antenna-downlink-demod-decode"
+	ConfigCapabilityTypeTracking                   ConfigCapabilityType = "tracking"
+	ConfigCapabilityTypeDataflowEndpoint           ConfigCapabilityType = "dataflow-endpoint"
+	ConfigCapabilityTypeAntennaUplink              ConfigCapabilityType = "antenna-uplink"
+	ConfigCapabilityTypeUplinkEcho                 ConfigCapabilityType = "uplink-echo"
 )
 
 // Values returns all known values for ConfigCapabilityType. Note that this can be
@@ -70,18 +70,18 @@ type ContactStatus string
 
 // Enum values for ContactStatus
 const (
-	ContactStatusScheduling         ContactStatus = "SCHEDULING"
-	ContactStatusFailed_to_schedule ContactStatus = "FAILED_TO_SCHEDULE"
-	ContactStatusScheduled          ContactStatus = "SCHEDULED"
-	ContactStatusCancelled          ContactStatus = "CANCELLED"
-	ContactStatusAws_cancelled      ContactStatus = "AWS_CANCELLED"
-	ContactStatusPrepass            ContactStatus = "PREPASS"
-	ContactStatusPass               ContactStatus = "PASS"
-	ContactStatusPostpass           ContactStatus = "POSTPASS"
-	ContactStatusCompleted          ContactStatus = "COMPLETED"
-	ContactStatusFailed             ContactStatus = "FAILED"
-	ContactStatusAvailable          ContactStatus = "AVAILABLE"
-	ContactStatusCancelling         ContactStatus = "CANCELLING"
+	ContactStatusScheduling       ContactStatus = "SCHEDULING"
+	ContactStatusFailedToSchedule ContactStatus = "FAILED_TO_SCHEDULE"
+	ContactStatusScheduled        ContactStatus = "SCHEDULED"
+	ContactStatusCancelled        ContactStatus = "CANCELLED"
+	ContactStatusAwsCancelled     ContactStatus = "AWS_CANCELLED"
+	ContactStatusPrepass          ContactStatus = "PREPASS"
+	ContactStatusPass             ContactStatus = "PASS"
+	ContactStatusPostpass         ContactStatus = "POSTPASS"
+	ContactStatusCompleted        ContactStatus = "COMPLETED"
+	ContactStatusFailed           ContactStatus = "FAILED"
+	ContactStatusAvailable        ContactStatus = "AVAILABLE"
+	ContactStatusCancelling       ContactStatus = "CANCELLING"
 )
 
 // Values returns all known values for ContactStatus. Note that this can be
@@ -188,9 +188,9 @@ type Polarization string
 
 // Enum values for Polarization
 const (
-	PolarizationRight_hand Polarization = "RIGHT_HAND"
-	PolarizationLeft_hand  Polarization = "LEFT_HAND"
-	PolarizationNone       Polarization = "NONE"
+	PolarizationRightHand Polarization = "RIGHT_HAND"
+	PolarizationLeftHand  Polarization = "LEFT_HAND"
+	PolarizationNone      Polarization = "NONE"
 )
 
 // Values returns all known values for Polarization. Note that this can be expanded

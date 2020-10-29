@@ -14,34 +14,34 @@ import (
 
 // Use this operation to update the configuration of an existing Amazon FSx file
 // system. You can update multiple properties in a single request. For Amazon FSx
-// for Windows File Server file systems, you can update the following properties:
-//
+// for Windows File Server file systems, you can update the following
+// properties:
 //
 // * AutomaticBackupRetentionDays
 //
-//     * DailyAutomaticBackupStartTime
+// * DailyAutomaticBackupStartTime
 //
-//     *
+// *
 // SelfManagedActiveDirectoryConfiguration
 //
-//     * StorageCapacity
+// * StorageCapacity
 //
-//     *
+// *
 // ThroughputCapacity
 //
-//     * WeeklyMaintenanceStartTime
+// * WeeklyMaintenanceStartTime
 //
-// For Amazon FSx for Lustre
-// file systems, you can update the following properties:
+// For Amazon FSx for Lustre file
+// systems, you can update the following properties:
 //
-//     * AutoImportPolicy
+// * AutoImportPolicy
 //
+// *
+// AutomaticBackupRetentionDays
 //
-// * AutomaticBackupRetentionDays
+// * DailyAutomaticBackupStartTime
 //
-//     * DailyAutomaticBackupStartTime
-//
-//     *
+// *
 // WeeklyMaintenanceStartTime
 func (c *Client) UpdateFileSystem(ctx context.Context, params *UpdateFileSystemInput, optFns ...func(*Options)) (*UpdateFileSystemOutput, error) {
 	if params == nil {

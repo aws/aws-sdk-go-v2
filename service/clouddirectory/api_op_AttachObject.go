@@ -14,9 +14,9 @@ import (
 // Attaches an existing object to another object. An object can be accessed in two
 // ways:
 //
-//     * Using the path
+// * Using the path
 //
-//     * Using ObjectIdentifier
+// * Using ObjectIdentifier
 func (c *Client) AttachObject(ctx context.Context, params *AttachObjectInput, optFns ...func(*Options)) (*AttachObjectOutput, error) {
 	if params == nil {
 		params = &AttachObjectInput{}

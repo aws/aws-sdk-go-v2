@@ -57,14 +57,14 @@ type UploadServerCertificateInput struct {
 	// pattern (http://wikipedia.org/wiki/regex) used to validate this parameter is a
 	// string of characters consisting of the following:
 	//
-	//     * Any printable ASCII
+	// * Any printable ASCII
 	// character ranging from the space character (\u0020) through the end of the ASCII
 	// character range
 	//
-	//     * The printable characters in the Basic Latin and Latin-1
+	// * The printable characters in the Basic Latin and Latin-1
 	// Supplement character set (through \u00FF)
 	//
-	//     * The special characters tab
+	// * The special characters tab
 	// (\u0009), line feed (\u000A), and carriage return (\u000D)
 	//
 	// This member is required.
@@ -74,15 +74,15 @@ type UploadServerCertificateInput struct {
 	// (http://wikipedia.org/wiki/regex) used to validate this parameter is a string of
 	// characters consisting of the following:
 	//
-	//     * Any printable ASCII character
-	// ranging from the space character (\u0020) through the end of the ASCII character
+	// * Any printable ASCII character ranging
+	// from the space character (\u0020) through the end of the ASCII character
 	// range
 	//
-	//     * The printable characters in the Basic Latin and Latin-1 Supplement
+	// * The printable characters in the Basic Latin and Latin-1 Supplement
 	// character set (through \u00FF)
 	//
-	//     * The special characters tab (\u0009), line
-	// feed (\u000A), and carriage return (\u000D)
+	// * The special characters tab (\u0009), line feed
+	// (\u000A), and carriage return (\u000D)
 	//
 	// This member is required.
 	PrivateKey *string
@@ -101,15 +101,15 @@ type UploadServerCertificateInput struct {
 	// (http://wikipedia.org/wiki/regex) used to validate this parameter is a string of
 	// characters consisting of the following:
 	//
-	//     * Any printable ASCII character
-	// ranging from the space character (\u0020) through the end of the ASCII character
+	// * Any printable ASCII character ranging
+	// from the space character (\u0020) through the end of the ASCII character
 	// range
 	//
-	//     * The printable characters in the Basic Latin and Latin-1 Supplement
+	// * The printable characters in the Basic Latin and Latin-1 Supplement
 	// character set (through \u00FF)
 	//
-	//     * The special characters tab (\u0009), line
-	// feed (\u000A), and carriage return (\u000D)
+	// * The special characters tab (\u0009), line feed
+	// (\u000A), and carriage return (\u000D)
 	CertificateChain *string
 
 	// The path for the server certificate. For more information about paths, see IAM

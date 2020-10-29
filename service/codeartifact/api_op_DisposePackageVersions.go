@@ -49,11 +49,11 @@ type DisposePackageVersionsInput struct {
 	// A format that specifies the type of package versions you want to dispose. The
 	// valid values are:
 	//
-	//     * npm
+	// * npm
 	//
-	//     * pypi
+	// * pypi
 	//
-	//     * maven
+	// * maven
 	//
 	// This member is required.
 	Format types.PackageFormat
@@ -80,29 +80,29 @@ type DisposePackageVersionsInput struct {
 
 	// The expected status of the package version to dispose. Valid values are:
 	//
-	//     *
+	// *
 	// Published
 	//
-	//     * Unfinished
+	// * Unfinished
 	//
-	//     * Unlisted
+	// * Unlisted
 	//
-	//     * Archived
+	// * Archived
 	//
-	//     * Disposed
+	// * Disposed
 	ExpectedStatus types.PackageVersionStatus
 
 	// The namespace of the package. The package component that specifies its namespace
 	// depends on its type. For example:
 	//
-	//     * The namespace of a Maven package is its
+	// * The namespace of a Maven package is its
 	// groupId.
 	//
-	//     * The namespace of an npm package is its scope.
+	// * The namespace of an npm package is its scope.
 	//
-	//     * A Python
-	// package does not contain a corresponding component, so Python packages do not
-	// have a namespace.
+	// * A Python package
+	// does not contain a corresponding component, so Python packages do not have a
+	// namespace.
 	Namespace *string
 
 	// The revisions of the package versions you want to dispose.
@@ -114,19 +114,19 @@ type DisposePackageVersionsOutput struct {
 	// A PackageVersionError object that contains a map of errors codes for the
 	// disposed package versions that failed. The possible error codes are:
 	//
-	//     *
+	// *
 	// ALREADY_EXISTS
 	//
-	//     * MISMATCHED_REVISION
+	// * MISMATCHED_REVISION
 	//
-	//     * MISMATCHED_STATUS
+	// * MISMATCHED_STATUS
 	//
-	//     *
-	// NOT_ALLOWED
+	// * NOT_ALLOWED
 	//
-	//     * NOT_FOUND
+	// *
+	// NOT_FOUND
 	//
-	//     * SKIPPED
+	// * SKIPPED
 	FailedVersions map[string]*types.PackageVersionError
 
 	// A list of the package versions that were successfully disposed.

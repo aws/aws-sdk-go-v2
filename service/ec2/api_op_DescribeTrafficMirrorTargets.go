@@ -37,20 +37,20 @@ type DescribeTrafficMirrorTargetsInput struct {
 
 	// One or more filters. The possible values are:
 	//
-	//     * description: The Traffic
-	// Mirror target description.
+	// * description: The Traffic Mirror
+	// target description.
 	//
-	//     * network-interface-id: The ID of the Traffic
-	// Mirror session network interface.
+	// * network-interface-id: The ID of the Traffic Mirror
+	// session network interface.
 	//
-	//     * network-load-balancer-arn: The Amazon
-	// Resource Name (ARN) of the Network Load Balancer that is associated with the
-	// session.
+	// * network-load-balancer-arn: The Amazon Resource
+	// Name (ARN) of the Network Load Balancer that is associated with the session.
 	//
-	//     * owner-id: The ID of the account that owns the Traffic Mirror
-	// session.
+	// *
+	// owner-id: The ID of the account that owns the Traffic Mirror session.
 	//
-	//     * traffic-mirror-target-id: The ID of the Traffic Mirror target.
+	// *
+	// traffic-mirror-target-id: The ID of the Traffic Mirror target.
 	Filters []*types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the

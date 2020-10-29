@@ -42,13 +42,13 @@ type CopyPackageVersionsInput struct {
 
 	// The format of the package that is copied. The valid package types are:
 	//
-	//     *
-	// npm: A Node Package Manager (npm) package.
+	// * npm: A
+	// Node Package Manager (npm) package.
 	//
-	//     * pypi: A Python Package Index
-	// (PyPI) package.
+	// * pypi: A Python Package Index (PyPI)
+	// package.
 	//
-	//     * maven: A Maven package that contains compiled code in a
+	// * maven: A Maven package that contains compiled code in a
 	// distributable format, such as a JAR file.
 	//
 	// This member is required.
@@ -83,14 +83,14 @@ type CopyPackageVersionsInput struct {
 	// The namespace of the package. The package component that specifies its namespace
 	// depends on its type. For example:
 	//
-	//     * The namespace of a Maven package is its
+	// * The namespace of a Maven package is its
 	// groupId.
 	//
-	//     * The namespace of an npm package is its scope.
+	// * The namespace of an npm package is its scope.
 	//
-	//     * A Python
-	// package does not contain a corresponding component, so Python packages do not
-	// have a namespace.
+	// * A Python package
+	// does not contain a corresponding component, so Python packages do not have a
+	// namespace.
 	Namespace *string
 
 	// A list of key-value pairs. The keys are package versions and the values are
@@ -110,19 +110,19 @@ type CopyPackageVersionsOutput struct {
 	// A map of package versions that failed to copy and their error codes. The
 	// possible error codes are in the PackageVersionError data type. They are:
 	//
-	//     *
+	// *
 	// ALREADY_EXISTS
 	//
-	//     * MISMATCHED_REVISION
+	// * MISMATCHED_REVISION
 	//
-	//     * MISMATCHED_STATUS
+	// * MISMATCHED_STATUS
 	//
-	//     *
-	// NOT_ALLOWED
+	// * NOT_ALLOWED
 	//
-	//     * NOT_FOUND
+	// *
+	// NOT_FOUND
 	//
-	//     * SKIPPED
+	// * SKIPPED
 	FailedVersions map[string]*types.PackageVersionError
 
 	// A list of the package versions that were successfully copied to your repository.

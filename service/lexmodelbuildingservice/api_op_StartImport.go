@@ -33,13 +33,13 @@ type StartImportInput struct {
 	// Specifies the action that the StartImport operation should take when there is an
 	// existing resource with the same name.
 	//
-	//     * FAIL_ON_CONFLICT - The import
-	// operation is stopped on the first conflict between a resource in the import file
-	// and an existing resource. The name of the resource causing the conflict is in
-	// the failureReason field of the response to the GetImport operation.
-	// OVERWRITE_LATEST - The import operation proceeds even if there is a conflict
-	// with an existing resource. The $LASTEST version of the existing resource is
-	// overwritten with the data from the import file.
+	// * FAIL_ON_CONFLICT - The import operation
+	// is stopped on the first conflict between a resource in the import file and an
+	// existing resource. The name of the resource causing the conflict is in the
+	// failureReason field of the response to the GetImport operation. OVERWRITE_LATEST
+	// - The import operation proceeds even if there is a conflict with an existing
+	// resource. The $LASTEST version of the existing resource is overwritten with the
+	// data from the import file.
 	//
 	// This member is required.
 	MergeStrategy types.MergeStrategy
@@ -54,10 +54,10 @@ type StartImportInput struct {
 	// Specifies the type of resource to export. Each resource also exports any
 	// resources that it depends on.
 	//
-	//     * A bot exports dependent intents.
+	// * A bot exports dependent intents.
 	//
-	//     * An
-	// intent exports dependent slot types.
+	// * An intent
+	// exports dependent slot types.
 	//
 	// This member is required.
 	ResourceType types.ResourceType

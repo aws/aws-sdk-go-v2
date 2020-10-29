@@ -43,12 +43,11 @@ type CreatePortfolioShareInput struct {
 
 	// The language code.
 	//
-	//     * en - English (default)
+	// * en - English (default)
 	//
-	//     * jp - Japanese
+	// * jp - Japanese
 	//
-	//     * zh
-	// - Chinese
+	// * zh - Chinese
 	AcceptLanguage *string
 
 	// The AWS account ID. For example, 123456789012.

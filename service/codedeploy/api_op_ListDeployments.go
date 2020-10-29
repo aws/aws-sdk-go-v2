@@ -51,22 +51,22 @@ type ListDeploymentsInput struct {
 
 	// A subset of deployments to list by status:
 	//
-	//     * Created: Include created
+	// * Created: Include created
 	// deployments in the resulting list.
 	//
-	//     * Queued: Include queued deployments in
-	// the resulting list.
-	//
-	//     * In Progress: Include in-progress deployments in the
+	// * Queued: Include queued deployments in the
 	// resulting list.
 	//
-	//     * Succeeded: Include successful deployments in the
-	// resulting list.
-	//
-	//     * Failed: Include failed deployments in the resulting
+	// * In Progress: Include in-progress deployments in the resulting
 	// list.
 	//
-	//     * Stopped: Include stopped deployments in the resulting list.
+	// * Succeeded: Include successful deployments in the resulting list.
+	//
+	// *
+	// Failed: Include failed deployments in the resulting list.
+	//
+	// * Stopped: Include
+	// stopped deployments in the resulting list.
 	IncludeOnlyStatuses []types.DeploymentStatus
 
 	// An identifier returned from the previous list deployments call. It can be used

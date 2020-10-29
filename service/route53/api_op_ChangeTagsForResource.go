@@ -41,10 +41,10 @@ type ChangeTagsForResourceInput struct {
 
 	// The type of the resource.
 	//
-	//     * The resource type for health checks is
+	// * The resource type for health checks is
 	// healthcheck.
 	//
-	//     * The resource type for hosted zones is hostedzone.
+	// * The resource type for hosted zones is hostedzone.
 	//
 	// This member is required.
 	ResourceType types.TagResourceType

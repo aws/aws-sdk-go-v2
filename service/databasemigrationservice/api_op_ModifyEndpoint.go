@@ -44,16 +44,16 @@ type ModifyEndpointInput struct {
 	// The settings in JSON format for the DMS transfer type of source endpoint.
 	// Attributes include the following:
 	//
-	//     * serviceAccessRoleArn - The AWS Identity
-	// and Access Management (IAM) role that has permission to access the Amazon S3
+	// * serviceAccessRoleArn - The AWS Identity and
+	// Access Management (IAM) role that has permission to access the Amazon S3
 	// bucket.
 	//
-	//     * BucketName - The name of the S3 bucket to use.
+	// * BucketName - The name of the S3 bucket to use.
 	//
-	//     *
-	// compressionType - An optional parameter to use GZIP to compress the target
-	// files. Either set this parameter to NONE (the default) or don't use it to leave
-	// the files uncompressed.
+	// * compressionType -
+	// An optional parameter to use GZIP to compress the target files. Either set this
+	// parameter to NONE (the default) or don't use it to leave the files
+	// uncompressed.
 	//
 	// Shorthand syntax for these settings is as follows:
 	// ServiceAccessRoleArn=string ,BucketName=string,CompressionType=string JSON

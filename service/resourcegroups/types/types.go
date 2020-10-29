@@ -18,13 +18,13 @@ type FailedResource struct {
 // A resource group that contains AWS resources. You can assign resources to the
 // group by associating either of the following elements with the group:
 //
-//     *
+// *
 // ResourceQuery - Use a resource query to specify a set of tag keys and values.
 // All resources in the same AWS Region and AWS account that have those keys with
 // the same values are included in the group. You can add a resource query when you
 // create the group.
 //
-//     * GroupConfiguration - Use a service configuration to
+// * GroupConfiguration - Use a service configuration to
 // associate the group with an AWS service. The configuration specifies which
 // resource types can be included in the group.
 type Group struct {
@@ -70,14 +70,14 @@ type GroupConfigurationItem struct {
 	// Specifies the type of group configuration item. Each item must have a unique
 	// value for type. You can specify the following string values:
 	//
-	//     *
+	// *
 	// AWS::EC2::CapacityReservationPool For more information about EC2 capacity
 	// reservation groups, see Working with capacity reservation groups
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-using.html#create-cr-group)
 	// in the EC2 Users Guide.
 	//
-	//     * AWS::ResourceGroups::Generic - Supports
-	// parameters that configure the behavior of resource groups of any type.
+	// * AWS::ResourceGroups::Generic - Supports parameters
+	// that configure the behavior of resource groups of any type.
 	//
 	// This member is required.
 	Type *string
@@ -92,21 +92,20 @@ type GroupConfigurationParameter struct {
 	// The name of the group configuration parameter. You can specify the following
 	// string values:
 	//
-	//     * For configuration item type
-	// AWS::ResourceGroups::Generic:
+	// * For configuration item type AWS::ResourceGroups::Generic:
 	//
-	//         * allowed-resource-types Specifies the
-	// types of resources that you can add to this group by using the GroupResources
-	// operation.
+	// *
+	// allowed-resource-types Specifies the types of resources that you can add to this
+	// group by using the GroupResources operation.
 	//
-	//     * For configuration item type
+	// * For configuration item type
 	// AWS::EC2::CapacityReservationPool:
 	//
-	//         * None - This configuration item
-	// type doesn't support any parameters.
+	// * None - This configuration item type
+	// doesn't support any parameters.
 	//
-	//     For more information about EC2
-	// capacity reservation groups, see Working with capacity reservation groups
+	// For more information about EC2 capacity
+	// reservation groups, see Working with capacity reservation groups
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-using.html#create-cr-group)
 	// in the EC2 Users Guide.
 	//
@@ -115,8 +114,8 @@ type GroupConfigurationParameter struct {
 
 	// The values of for this parameter. You can specify the following string value:
 	//
-	//
-	// * For item type allowed-resource-types: the only supported parameter value is
+	// *
+	// For item type allowed-resource-types: the only supported parameter value is
 	// AWS::EC2::CapacityReservation.
 	Values []*string
 }
@@ -221,14 +220,14 @@ type ResourceIdentifier struct {
 // resource query JSON string that includes only resources that meet the following
 // criteria:
 //
-//     * The resource type must be either resource_type1 or
+// * The resource type must be either resource_type1 or
 // resource_type2.
 //
-//     * The resource must have a tag Key1 with a value of either
+// * The resource must have a tag Key1 with a value of either
 // ValueA or ValueB.
 //
-//     * The resource must have a tag Key2 with a value of
-// either ValueC or ValueD.
+// * The resource must have a tag Key2 with a value of either
+// ValueC or ValueD.
 //
 // { "Type": "TAG_FILTERS_1_0", "Query": {
 // "ResourceTypeFilters": [ "resource_type1", "resource_type2"], "TagFilters": [ {
@@ -260,11 +259,11 @@ type ResourceQuery struct {
 
 	// The type of the query. You can use the following values:
 	//
-	//     *
+	// *
 	// CLOUDFORMATION_STACK_1_0: Specifies that the Query contains an ARN for a
 	// CloudFormation stack.
 	//
-	//     * TAG_FILTERS_1_0: Specifies that the Query parameter
+	// * TAG_FILTERS_1_0: Specifies that the Query parameter
 	// contains a JSON string that represents a collection of simple tag filters for
 	// resource types and tags. The JSON string uses a syntax similar to the
 	// GetResources
@@ -282,24 +281,24 @@ type ResourceQuery struct {
 	// [{"Stage":["Test","Deploy"]},{"Version":["1","2"]}] The results of this query
 	// could include the following.
 	//
-	//         * An EC2 instance that has the following
-	// two tags: {"Stage":"Deploy"}, and {"Version":"2"}
+	// * An EC2 instance that has the following two tags:
+	// {"Stage":"Deploy"}, and {"Version":"2"}
 	//
-	//         * An S3 bucket that
-	// has the following two tags: {"Stage":"Test"}, and {"Version":"1"}
+	// * An S3 bucket that has the following
+	// two tags: {"Stage":"Test"}, and {"Version":"1"}
 	//
-	//     The query
-	// would not include the following items in the results, however.
+	// The query would not include the
+	// following items in the results, however.
 	//
-	//         * An EC2
-	// instance that has only the following tag: {"Stage":"Deploy"}. The instance does
-	// not have all of the tag keys specified in the filter, so it is excluded from the
-	// results.
+	// * An EC2 instance that has only the
+	// following tag: {"Stage":"Deploy"}. The instance does not have all of the tag
+	// keys specified in the filter, so it is excluded from the results.
 	//
-	//         * An RDS database that has the following two tags:
-	// {"Stage":"Archived"} and {"Version":"4"} The database has all of the tag keys,
-	// but none of those keys has an associated value that matches at least one of the
-	// specified values in the filter.
+	// * An RDS
+	// database that has the following two tags: {"Stage":"Archived"} and
+	// {"Version":"4"} The database has all of the tag keys, but none of those keys has
+	// an associated value that matches at least one of the specified values in the
+	// filter.
 	//
 	// This member is required.
 	Type QueryType

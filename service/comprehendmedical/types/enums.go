@@ -28,40 +28,40 @@ type EntitySubType string
 
 // Enum values for EntitySubType
 const (
-	EntitySubTypeName                    EntitySubType = "NAME"
-	EntitySubTypeDosage                  EntitySubType = "DOSAGE"
-	EntitySubTypeRoute_or_mode           EntitySubType = "ROUTE_OR_MODE"
-	EntitySubTypeForm                    EntitySubType = "FORM"
-	EntitySubTypeFrequency               EntitySubType = "FREQUENCY"
-	EntitySubTypeDuration                EntitySubType = "DURATION"
-	EntitySubTypeGeneric_name            EntitySubType = "GENERIC_NAME"
-	EntitySubTypeBrand_name              EntitySubType = "BRAND_NAME"
-	EntitySubTypeStrength                EntitySubType = "STRENGTH"
-	EntitySubTypeRate                    EntitySubType = "RATE"
-	EntitySubTypeAcuity                  EntitySubType = "ACUITY"
-	EntitySubTypeTest_name               EntitySubType = "TEST_NAME"
-	EntitySubTypeTest_value              EntitySubType = "TEST_VALUE"
-	EntitySubTypeTest_units              EntitySubType = "TEST_UNITS"
-	EntitySubTypeProcedure_name          EntitySubType = "PROCEDURE_NAME"
-	EntitySubTypeTreatment_name          EntitySubType = "TREATMENT_NAME"
-	EntitySubTypeDate                    EntitySubType = "DATE"
-	EntitySubTypeAge                     EntitySubType = "AGE"
-	EntitySubTypeContact_point           EntitySubType = "CONTACT_POINT"
-	EntitySubTypeEmail                   EntitySubType = "EMAIL"
-	EntitySubTypeIdentifier              EntitySubType = "IDENTIFIER"
-	EntitySubTypeUrl                     EntitySubType = "URL"
-	EntitySubTypeAddress                 EntitySubType = "ADDRESS"
-	EntitySubTypeProfession              EntitySubType = "PROFESSION"
-	EntitySubTypeSystem_organ_site       EntitySubType = "SYSTEM_ORGAN_SITE"
-	EntitySubTypeDirection               EntitySubType = "DIRECTION"
-	EntitySubTypeQuality                 EntitySubType = "QUALITY"
-	EntitySubTypeQuantity                EntitySubType = "QUANTITY"
-	EntitySubTypeTime_expression         EntitySubType = "TIME_EXPRESSION"
-	EntitySubTypeTime_to_medication_name EntitySubType = "TIME_TO_MEDICATION_NAME"
-	EntitySubTypeTime_to_dx_name         EntitySubType = "TIME_TO_DX_NAME"
-	EntitySubTypeTime_to_test_name       EntitySubType = "TIME_TO_TEST_NAME"
-	EntitySubTypeTime_to_procedure_name  EntitySubType = "TIME_TO_PROCEDURE_NAME"
-	EntitySubTypeTime_to_treatment_name  EntitySubType = "TIME_TO_TREATMENT_NAME"
+	EntitySubTypeName                 EntitySubType = "NAME"
+	EntitySubTypeDosage               EntitySubType = "DOSAGE"
+	EntitySubTypeRouteOrMode          EntitySubType = "ROUTE_OR_MODE"
+	EntitySubTypeForm                 EntitySubType = "FORM"
+	EntitySubTypeFrequency            EntitySubType = "FREQUENCY"
+	EntitySubTypeDuration             EntitySubType = "DURATION"
+	EntitySubTypeGenericName          EntitySubType = "GENERIC_NAME"
+	EntitySubTypeBrandName            EntitySubType = "BRAND_NAME"
+	EntitySubTypeStrength             EntitySubType = "STRENGTH"
+	EntitySubTypeRate                 EntitySubType = "RATE"
+	EntitySubTypeAcuity               EntitySubType = "ACUITY"
+	EntitySubTypeTestName             EntitySubType = "TEST_NAME"
+	EntitySubTypeTestValue            EntitySubType = "TEST_VALUE"
+	EntitySubTypeTestUnits            EntitySubType = "TEST_UNITS"
+	EntitySubTypeProcedureName        EntitySubType = "PROCEDURE_NAME"
+	EntitySubTypeTreatmentName        EntitySubType = "TREATMENT_NAME"
+	EntitySubTypeDate                 EntitySubType = "DATE"
+	EntitySubTypeAge                  EntitySubType = "AGE"
+	EntitySubTypeContactPoint         EntitySubType = "CONTACT_POINT"
+	EntitySubTypeEmail                EntitySubType = "EMAIL"
+	EntitySubTypeIdentifier           EntitySubType = "IDENTIFIER"
+	EntitySubTypeUrl                  EntitySubType = "URL"
+	EntitySubTypeAddress              EntitySubType = "ADDRESS"
+	EntitySubTypeProfession           EntitySubType = "PROFESSION"
+	EntitySubTypeSystemOrganSite      EntitySubType = "SYSTEM_ORGAN_SITE"
+	EntitySubTypeDirection            EntitySubType = "DIRECTION"
+	EntitySubTypeQuality              EntitySubType = "QUALITY"
+	EntitySubTypeQuantity             EntitySubType = "QUANTITY"
+	EntitySubTypeTimeExpression       EntitySubType = "TIME_EXPRESSION"
+	EntitySubTypeTimeToMedicationName EntitySubType = "TIME_TO_MEDICATION_NAME"
+	EntitySubTypeTimeToDxName         EntitySubType = "TIME_TO_DX_NAME"
+	EntitySubTypeTimeToTestName       EntitySubType = "TIME_TO_TEST_NAME"
+	EntitySubTypeTimeToProcedureName  EntitySubType = "TIME_TO_PROCEDURE_NAME"
+	EntitySubTypeTimeToTreatmentName  EntitySubType = "TIME_TO_TREATMENT_NAME"
 )
 
 // Values returns all known values for EntitySubType. Note that this can be
@@ -110,12 +110,12 @@ type EntityType string
 
 // Enum values for EntityType
 const (
-	EntityTypeMedication                   EntityType = "MEDICATION"
-	EntityTypeMedical_condition            EntityType = "MEDICAL_CONDITION"
-	EntityTypeProtected_health_information EntityType = "PROTECTED_HEALTH_INFORMATION"
-	EntityTypeTest_treatment_procedure     EntityType = "TEST_TREATMENT_PROCEDURE"
-	EntityTypeAnatomy                      EntityType = "ANATOMY"
-	EntityTypeTime_expression              EntityType = "TIME_EXPRESSION"
+	EntityTypeMedication                 EntityType = "MEDICATION"
+	EntityTypeMedicalCondition           EntityType = "MEDICAL_CONDITION"
+	EntityTypeProtectedHealthInformation EntityType = "PROTECTED_HEALTH_INFORMATION"
+	EntityTypeTestTreatmentProcedure     EntityType = "TEST_TREATMENT_PROCEDURE"
+	EntityTypeAnatomy                    EntityType = "ANATOMY"
+	EntityTypeTimeExpression             EntityType = "TIME_EXPRESSION"
 )
 
 // Values returns all known values for EntityType. Note that this can be expanded
@@ -136,11 +136,11 @@ type ICD10CMAttributeType string
 
 // Enum values for ICD10CMAttributeType
 const (
-	ICD10CMAttributeTypeAcuity            ICD10CMAttributeType = "ACUITY"
-	ICD10CMAttributeTypeDirection         ICD10CMAttributeType = "DIRECTION"
-	ICD10CMAttributeTypeSystem_organ_site ICD10CMAttributeType = "SYSTEM_ORGAN_SITE"
-	ICD10CMAttributeTypeQuality           ICD10CMAttributeType = "QUALITY"
-	ICD10CMAttributeTypeQuantity          ICD10CMAttributeType = "QUANTITY"
+	ICD10CMAttributeTypeAcuity          ICD10CMAttributeType = "ACUITY"
+	ICD10CMAttributeTypeDirection       ICD10CMAttributeType = "DIRECTION"
+	ICD10CMAttributeTypeSystemOrganSite ICD10CMAttributeType = "SYSTEM_ORGAN_SITE"
+	ICD10CMAttributeTypeQuality         ICD10CMAttributeType = "QUALITY"
+	ICD10CMAttributeTypeQuantity        ICD10CMAttributeType = "QUANTITY"
 )
 
 // Values returns all known values for ICD10CMAttributeType. Note that this can be
@@ -160,7 +160,7 @@ type ICD10CMEntityCategory string
 
 // Enum values for ICD10CMEntityCategory
 const (
-	ICD10CMEntityCategoryMedical_condition ICD10CMEntityCategory = "MEDICAL_CONDITION"
+	ICD10CMEntityCategoryMedicalCondition ICD10CMEntityCategory = "MEDICAL_CONDITION"
 )
 
 // Values returns all known values for ICD10CMEntityCategory. Note that this can be
@@ -176,7 +176,7 @@ type ICD10CMEntityType string
 
 // Enum values for ICD10CMEntityType
 const (
-	ICD10CMEntityTypeDx_name ICD10CMEntityType = "DX_NAME"
+	ICD10CMEntityTypeDxName ICD10CMEntityType = "DX_NAME"
 )
 
 // Values returns all known values for ICD10CMEntityType. Note that this can be
@@ -214,13 +214,13 @@ type JobStatus string
 
 // Enum values for JobStatus
 const (
-	JobStatusSubmitted       JobStatus = "SUBMITTED"
-	JobStatusIn_progress     JobStatus = "IN_PROGRESS"
-	JobStatusCompleted       JobStatus = "COMPLETED"
-	JobStatusPartial_success JobStatus = "PARTIAL_SUCCESS"
-	JobStatusFailed          JobStatus = "FAILED"
-	JobStatusStop_requested  JobStatus = "STOP_REQUESTED"
-	JobStatusStopped         JobStatus = "STOPPED"
+	JobStatusSubmitted      JobStatus = "SUBMITTED"
+	JobStatusInProgress     JobStatus = "IN_PROGRESS"
+	JobStatusCompleted      JobStatus = "COMPLETED"
+	JobStatusPartialSuccess JobStatus = "PARTIAL_SUCCESS"
+	JobStatusFailed         JobStatus = "FAILED"
+	JobStatusStopRequested  JobStatus = "STOP_REQUESTED"
+	JobStatusStopped        JobStatus = "STOPPED"
 )
 
 // Values returns all known values for JobStatus. Note that this can be expanded in
@@ -258,24 +258,24 @@ type RelationshipType string
 
 // Enum values for RelationshipType
 const (
-	RelationshipTypeEvery             RelationshipType = "EVERY"
-	RelationshipTypeWith_dosage       RelationshipType = "WITH_DOSAGE"
-	RelationshipTypeAdministered_via  RelationshipType = "ADMINISTERED_VIA"
-	RelationshipTypeFor               RelationshipType = "FOR"
-	RelationshipTypeNegative          RelationshipType = "NEGATIVE"
-	RelationshipTypeOverlap           RelationshipType = "OVERLAP"
-	RelationshipTypeDosage            RelationshipType = "DOSAGE"
-	RelationshipTypeRoute_or_mode     RelationshipType = "ROUTE_OR_MODE"
-	RelationshipTypeForm              RelationshipType = "FORM"
-	RelationshipTypeFrequency         RelationshipType = "FREQUENCY"
-	RelationshipTypeDuration          RelationshipType = "DURATION"
-	RelationshipTypeStrength          RelationshipType = "STRENGTH"
-	RelationshipTypeRate              RelationshipType = "RATE"
-	RelationshipTypeAcuity            RelationshipType = "ACUITY"
-	RelationshipTypeTest_value        RelationshipType = "TEST_VALUE"
-	RelationshipTypeTest_units        RelationshipType = "TEST_UNITS"
-	RelationshipTypeDirection         RelationshipType = "DIRECTION"
-	RelationshipTypeSystem_organ_site RelationshipType = "SYSTEM_ORGAN_SITE"
+	RelationshipTypeEvery           RelationshipType = "EVERY"
+	RelationshipTypeWithDosage      RelationshipType = "WITH_DOSAGE"
+	RelationshipTypeAdministeredVia RelationshipType = "ADMINISTERED_VIA"
+	RelationshipTypeFor             RelationshipType = "FOR"
+	RelationshipTypeNegative        RelationshipType = "NEGATIVE"
+	RelationshipTypeOverlap         RelationshipType = "OVERLAP"
+	RelationshipTypeDosage          RelationshipType = "DOSAGE"
+	RelationshipTypeRouteOrMode     RelationshipType = "ROUTE_OR_MODE"
+	RelationshipTypeForm            RelationshipType = "FORM"
+	RelationshipTypeFrequency       RelationshipType = "FREQUENCY"
+	RelationshipTypeDuration        RelationshipType = "DURATION"
+	RelationshipTypeStrength        RelationshipType = "STRENGTH"
+	RelationshipTypeRate            RelationshipType = "RATE"
+	RelationshipTypeAcuity          RelationshipType = "ACUITY"
+	RelationshipTypeTestValue       RelationshipType = "TEST_VALUE"
+	RelationshipTypeTestUnits       RelationshipType = "TEST_UNITS"
+	RelationshipTypeDirection       RelationshipType = "DIRECTION"
+	RelationshipTypeSystemOrganSite RelationshipType = "SYSTEM_ORGAN_SITE"
 )
 
 // Values returns all known values for RelationshipType. Note that this can be
@@ -308,13 +308,13 @@ type RxNormAttributeType string
 
 // Enum values for RxNormAttributeType
 const (
-	RxNormAttributeTypeDosage        RxNormAttributeType = "DOSAGE"
-	RxNormAttributeTypeDuration      RxNormAttributeType = "DURATION"
-	RxNormAttributeTypeForm          RxNormAttributeType = "FORM"
-	RxNormAttributeTypeFrequency     RxNormAttributeType = "FREQUENCY"
-	RxNormAttributeTypeRate          RxNormAttributeType = "RATE"
-	RxNormAttributeTypeRoute_or_mode RxNormAttributeType = "ROUTE_OR_MODE"
-	RxNormAttributeTypeStrength      RxNormAttributeType = "STRENGTH"
+	RxNormAttributeTypeDosage      RxNormAttributeType = "DOSAGE"
+	RxNormAttributeTypeDuration    RxNormAttributeType = "DURATION"
+	RxNormAttributeTypeForm        RxNormAttributeType = "FORM"
+	RxNormAttributeTypeFrequency   RxNormAttributeType = "FREQUENCY"
+	RxNormAttributeTypeRate        RxNormAttributeType = "RATE"
+	RxNormAttributeTypeRouteOrMode RxNormAttributeType = "ROUTE_OR_MODE"
+	RxNormAttributeTypeStrength    RxNormAttributeType = "STRENGTH"
 )
 
 // Values returns all known values for RxNormAttributeType. Note that this can be
@@ -352,8 +352,8 @@ type RxNormEntityType string
 
 // Enum values for RxNormEntityType
 const (
-	RxNormEntityTypeBrand_name   RxNormEntityType = "BRAND_NAME"
-	RxNormEntityTypeGeneric_name RxNormEntityType = "GENERIC_NAME"
+	RxNormEntityTypeBrandName   RxNormEntityType = "BRAND_NAME"
+	RxNormEntityTypeGenericName RxNormEntityType = "GENERIC_NAME"
 )
 
 // Values returns all known values for RxNormEntityType. Note that this can be

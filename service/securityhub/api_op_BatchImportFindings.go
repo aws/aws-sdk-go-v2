@@ -19,25 +19,25 @@ import (
 // fields and objects, which Security Hub customers use to manage their
 // investigation workflow.
 //
-//     * Confidence
+// * Confidence
 //
-//     * Criticality
+// * Criticality
 //
-//     * Note
+// * Note
 //
-//     *
+// *
 // RelatedFindings
 //
-//     * Severity
+// * Severity
 //
-//     * Types
+// * Types
 //
-//     * UserDefinedFields
+// * UserDefinedFields
 //
-//     *
+// *
 // VerificationState
 //
-//     * Workflow
+// * Workflow
 func (c *Client) BatchImportFindings(ctx context.Context, params *BatchImportFindingsInput, optFns ...func(*Options)) (*BatchImportFindingsOutput, error) {
 	if params == nil {
 		params = &BatchImportFindingsInput{}

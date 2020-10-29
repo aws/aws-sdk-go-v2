@@ -14,28 +14,28 @@ import (
 // Gets definitions of the specified entities. Uses the latest version of the
 // user's namespace by default. This API returns the following TDM entities.
 //
-//     *
+// *
 // Properties
 //
-//     * States
+// * States
 //
-//     * Events
+// * Events
 //
-//     * Actions
+// * Actions
 //
-//     * Capabilities
+// * Capabilities
 //
-//     *
-// Mappings
+// * Mappings
 //
-//     * Devices
+// *
+// Devices
 //
-//     * Device Models
+// * Device Models
 //
-//     * Services
+// * Services
 //
-// This action
-// doesn't return definitions for systems, flows, and deployments.
+// This action doesn't return definitions for
+// systems, flows, and deployments.
 func (c *Client) GetEntities(ctx context.Context, params *GetEntitiesInput, optFns ...func(*Options)) (*GetEntitiesOutput, error) {
 	if params == nil {
 		params = &GetEntitiesInput{}

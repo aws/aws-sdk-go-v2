@@ -33,14 +33,14 @@ type DescribeInstallationMediaInput struct {
 	// A filter that specifies one or more installation media to describe. Supported
 	// filters include the following:
 	//
-	//     * custom-availability-zone-id - Accepts
-	// custom Availability Zone (AZ) identifiers. The results list includes information
-	// about only the custom AZs identified by these identifiers.
+	// * custom-availability-zone-id - Accepts custom
+	// Availability Zone (AZ) identifiers. The results list includes information about
+	// only the custom AZs identified by these identifiers.
 	//
-	//     * engine -
-	// Accepts database engines. The results list includes information about only the
-	// database engines identified by these identifiers. For more information about the
-	// valid engines for installation media, see ImportInstallationMedia.
+	// * engine - Accepts
+	// database engines. The results list includes information about only the database
+	// engines identified by these identifiers. For more information about the valid
+	// engines for installation media, see ImportInstallationMedia.
 	Filters []*types.Filter
 
 	// The installation medium ID.

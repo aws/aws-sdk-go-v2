@@ -22,8 +22,8 @@ type DeviceStatus string
 
 // Enum values for DeviceStatus
 const (
-	DeviceStatusActive     DeviceStatus = "ACTIVE"
-	DeviceStatusSigned_out DeviceStatus = "SIGNED_OUT"
+	DeviceStatusActive    DeviceStatus = "ACTIVE"
+	DeviceStatusSignedOut DeviceStatus = "SIGNED_OUT"
 )
 
 // Values returns all known values for DeviceStatus. Note that this can be expanded
@@ -40,14 +40,14 @@ type DomainStatus string
 
 // Enum values for DomainStatus
 const (
-	DomainStatusPending_validation     DomainStatus = "PENDING_VALIDATION"
-	DomainStatusAssociating            DomainStatus = "ASSOCIATING"
-	DomainStatusActive                 DomainStatus = "ACTIVE"
-	DomainStatusInactive               DomainStatus = "INACTIVE"
-	DomainStatusDisassociating         DomainStatus = "DISASSOCIATING"
-	DomainStatusDisassociated          DomainStatus = "DISASSOCIATED"
-	DomainStatusFailed_to_associate    DomainStatus = "FAILED_TO_ASSOCIATE"
-	DomainStatusFailed_to_disassociate DomainStatus = "FAILED_TO_DISASSOCIATE"
+	DomainStatusPendingValidation    DomainStatus = "PENDING_VALIDATION"
+	DomainStatusAssociating          DomainStatus = "ASSOCIATING"
+	DomainStatusActive               DomainStatus = "ACTIVE"
+	DomainStatusInactive             DomainStatus = "INACTIVE"
+	DomainStatusDisassociating       DomainStatus = "DISASSOCIATING"
+	DomainStatusDisassociated        DomainStatus = "DISASSOCIATED"
+	DomainStatusFailedToAssociate    DomainStatus = "FAILED_TO_ASSOCIATE"
+	DomainStatusFailedToDisassociate DomainStatus = "FAILED_TO_DISASSOCIATE"
 )
 
 // Values returns all known values for DomainStatus. Note that this can be expanded
@@ -70,12 +70,12 @@ type FleetStatus string
 
 // Enum values for FleetStatus
 const (
-	FleetStatusCreating         FleetStatus = "CREATING"
-	FleetStatusActive           FleetStatus = "ACTIVE"
-	FleetStatusDeleting         FleetStatus = "DELETING"
-	FleetStatusDeleted          FleetStatus = "DELETED"
-	FleetStatusFailed_to_create FleetStatus = "FAILED_TO_CREATE"
-	FleetStatusFailed_to_delete FleetStatus = "FAILED_TO_DELETE"
+	FleetStatusCreating       FleetStatus = "CREATING"
+	FleetStatusActive         FleetStatus = "ACTIVE"
+	FleetStatusDeleting       FleetStatus = "DELETING"
+	FleetStatusDeleted        FleetStatus = "DELETED"
+	FleetStatusFailedToCreate FleetStatus = "FAILED_TO_CREATE"
+	FleetStatusFailedToDelete FleetStatus = "FAILED_TO_DELETE"
 )
 
 // Values returns all known values for FleetStatus. Note that this can be expanded

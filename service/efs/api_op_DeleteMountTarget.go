@@ -21,17 +21,16 @@ import (
 // mount target. This operation requires permissions for the following action on
 // the file system:
 //
-//     * elasticfilesystem:DeleteMountTarget
+// * elasticfilesystem:DeleteMountTarget
 //
-// The
-// DeleteMountTarget call returns while the mount target state is still deleting.
-// You can check the mount target deletion by calling the DescribeMountTargets
-// operation, which returns a list of mount target descriptions for the given file
-// system. The operation also requires permissions for the following Amazon EC2
-// action on the mount target's network interface:
+// The DeleteMountTarget
+// call returns while the mount target state is still deleting. You can check the
+// mount target deletion by calling the DescribeMountTargets operation, which
+// returns a list of mount target descriptions for the given file system. The
+// operation also requires permissions for the following Amazon EC2 action on the
+// mount target's network interface:
 //
-//     *
-// ec2:DeleteNetworkInterface
+// * ec2:DeleteNetworkInterface
 func (c *Client) DeleteMountTarget(ctx context.Context, params *DeleteMountTargetInput, optFns ...func(*Options)) (*DeleteMountTargetOutput, error) {
 	if params == nil {
 		params = &DeleteMountTargetInput{}

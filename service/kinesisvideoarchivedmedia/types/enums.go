@@ -6,8 +6,8 @@ type ClipFragmentSelectorType string
 
 // Enum values for ClipFragmentSelectorType
 const (
-	ClipFragmentSelectorTypeProducer_timestamp ClipFragmentSelectorType = "PRODUCER_TIMESTAMP"
-	ClipFragmentSelectorTypeServer_timestamp   ClipFragmentSelectorType = "SERVER_TIMESTAMP"
+	ClipFragmentSelectorTypeProducerTimestamp ClipFragmentSelectorType = "PRODUCER_TIMESTAMP"
+	ClipFragmentSelectorTypeServerTimestamp   ClipFragmentSelectorType = "SERVER_TIMESTAMP"
 )
 
 // Values returns all known values for ClipFragmentSelectorType. Note that this can
@@ -24,8 +24,8 @@ type ContainerFormat string
 
 // Enum values for ContainerFormat
 const (
-	ContainerFormatFragmented_mp4 ContainerFormat = "FRAGMENTED_MP4"
-	ContainerFormatMpeg_ts        ContainerFormat = "MPEG_TS"
+	ContainerFormatFragmentedMp4 ContainerFormat = "FRAGMENTED_MP4"
+	ContainerFormatMpegTs        ContainerFormat = "MPEG_TS"
 )
 
 // Values returns all known values for ContainerFormat. Note that this can be
@@ -78,8 +78,8 @@ type DASHFragmentSelectorType string
 
 // Enum values for DASHFragmentSelectorType
 const (
-	DASHFragmentSelectorTypeProducer_timestamp DASHFragmentSelectorType = "PRODUCER_TIMESTAMP"
-	DASHFragmentSelectorTypeServer_timestamp   DASHFragmentSelectorType = "SERVER_TIMESTAMP"
+	DASHFragmentSelectorTypeProducerTimestamp DASHFragmentSelectorType = "PRODUCER_TIMESTAMP"
+	DASHFragmentSelectorTypeServerTimestamp   DASHFragmentSelectorType = "SERVER_TIMESTAMP"
 )
 
 // Values returns all known values for DASHFragmentSelectorType. Note that this can
@@ -96,9 +96,9 @@ type DASHPlaybackMode string
 
 // Enum values for DASHPlaybackMode
 const (
-	DASHPlaybackModeLive        DASHPlaybackMode = "LIVE"
-	DASHPlaybackModeLive_replay DASHPlaybackMode = "LIVE_REPLAY"
-	DASHPlaybackModeOn_demand   DASHPlaybackMode = "ON_DEMAND"
+	DASHPlaybackModeLive       DASHPlaybackMode = "LIVE"
+	DASHPlaybackModeLiveReplay DASHPlaybackMode = "LIVE_REPLAY"
+	DASHPlaybackModeOnDemand   DASHPlaybackMode = "ON_DEMAND"
 )
 
 // Values returns all known values for DASHPlaybackMode. Note that this can be
@@ -116,8 +116,8 @@ type FragmentSelectorType string
 
 // Enum values for FragmentSelectorType
 const (
-	FragmentSelectorTypeProducer_timestamp FragmentSelectorType = "PRODUCER_TIMESTAMP"
-	FragmentSelectorTypeServer_timestamp   FragmentSelectorType = "SERVER_TIMESTAMP"
+	FragmentSelectorTypeProducerTimestamp FragmentSelectorType = "PRODUCER_TIMESTAMP"
+	FragmentSelectorTypeServerTimestamp   FragmentSelectorType = "SERVER_TIMESTAMP"
 )
 
 // Values returns all known values for FragmentSelectorType. Note that this can be
@@ -134,9 +134,9 @@ type HLSDiscontinuityMode string
 
 // Enum values for HLSDiscontinuityMode
 const (
-	HLSDiscontinuityModeAlways           HLSDiscontinuityMode = "ALWAYS"
-	HLSDiscontinuityModeNever            HLSDiscontinuityMode = "NEVER"
-	HLSDiscontinuityModeOn_discontinuity HLSDiscontinuityMode = "ON_DISCONTINUITY"
+	HLSDiscontinuityModeAlways          HLSDiscontinuityMode = "ALWAYS"
+	HLSDiscontinuityModeNever           HLSDiscontinuityMode = "NEVER"
+	HLSDiscontinuityModeOnDiscontinuity HLSDiscontinuityMode = "ON_DISCONTINUITY"
 )
 
 // Values returns all known values for HLSDiscontinuityMode. Note that this can be
@@ -172,8 +172,8 @@ type HLSFragmentSelectorType string
 
 // Enum values for HLSFragmentSelectorType
 const (
-	HLSFragmentSelectorTypeProducer_timestamp HLSFragmentSelectorType = "PRODUCER_TIMESTAMP"
-	HLSFragmentSelectorTypeServer_timestamp   HLSFragmentSelectorType = "SERVER_TIMESTAMP"
+	HLSFragmentSelectorTypeProducerTimestamp HLSFragmentSelectorType = "PRODUCER_TIMESTAMP"
+	HLSFragmentSelectorTypeServerTimestamp   HLSFragmentSelectorType = "SERVER_TIMESTAMP"
 )
 
 // Values returns all known values for HLSFragmentSelectorType. Note that this can
@@ -190,9 +190,9 @@ type HLSPlaybackMode string
 
 // Enum values for HLSPlaybackMode
 const (
-	HLSPlaybackModeLive        HLSPlaybackMode = "LIVE"
-	HLSPlaybackModeLive_replay HLSPlaybackMode = "LIVE_REPLAY"
-	HLSPlaybackModeOn_demand   HLSPlaybackMode = "ON_DEMAND"
+	HLSPlaybackModeLive       HLSPlaybackMode = "LIVE"
+	HLSPlaybackModeLiveReplay HLSPlaybackMode = "LIVE_REPLAY"
+	HLSPlaybackModeOnDemand   HLSPlaybackMode = "ON_DEMAND"
 )
 
 // Values returns all known values for HLSPlaybackMode. Note that this can be

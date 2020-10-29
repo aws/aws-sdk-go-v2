@@ -30,23 +30,23 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html). The
 // following operations are related to ListParts:
 //
-//     * CreateMultipartUpload
+// * CreateMultipartUpload
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html)
 //
-//
-// * UploadPart
+// *
+// UploadPart
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)
 //
-//     *
+// *
 // CompleteMultipartUpload
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html)
 //
-//
-// * AbortMultipartUpload
+// *
+// AbortMultipartUpload
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html)
 //
-//
-// * ListMultipartUploads
+// *
+// ListMultipartUploads
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html)
 func (c *Client) ListParts(ctx context.Context, params *ListPartsInput, optFns ...func(*Options)) (*ListPartsOutput, error) {
 	if params == nil {

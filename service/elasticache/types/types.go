@@ -63,56 +63,54 @@ type CacheCluster struct {
 	// current generation types provide more memory and computational power at lower
 	// cost when compared to their equivalent previous generation counterparts.
 	//
-	//     *
+	// *
 	// General purpose:
 	//
-	//         * Current generation: M5 node types: cache.m5.large,
+	// * Current generation: M5 node types: cache.m5.large,
 	// cache.m5.xlarge, cache.m5.2xlarge, cache.m5.4xlarge, cache.m5.12xlarge,
 	// cache.m5.24xlarge M4 node types: cache.m4.large, cache.m4.xlarge,
 	// cache.m4.2xlarge, cache.m4.4xlarge, cache.m4.10xlarge T3 node types:
 	// cache.t3.micro, cache.t3.small, cache.t3.medium T2 node types: cache.t2.micro,
 	// cache.t2.small, cache.t2.medium
 	//
-	//         * Previous generation: (not
-	// recommended) T1 node types: cache.t1.micro M1 node types: cache.m1.small,
-	// cache.m1.medium, cache.m1.large, cache.m1.xlarge M3 node types: cache.m3.medium,
-	// cache.m3.large, cache.m3.xlarge, cache.m3.2xlarge
+	// * Previous generation: (not recommended) T1
+	// node types: cache.t1.micro M1 node types: cache.m1.small, cache.m1.medium,
+	// cache.m1.large, cache.m1.xlarge M3 node types: cache.m3.medium, cache.m3.large,
+	// cache.m3.xlarge, cache.m3.2xlarge
 	//
-	//     * Compute optimized:
+	// * Compute optimized:
 	//
+	// * Previous generation:
+	// (not recommended) C1 node types: cache.c1.xlarge
 	//
-	// * Previous generation: (not recommended) C1 node types: cache.c1.xlarge
+	// * Memory optimized:
 	//
-	//     *
-	// Memory optimized:
+	// * Current
+	// generation: R5 node types: cache.r5.large, cache.r5.xlarge, cache.r5.2xlarge,
+	// cache.r5.4xlarge, cache.r5.12xlarge, cache.r5.24xlarge R4 node types:
+	// cache.r4.large, cache.r4.xlarge, cache.r4.2xlarge, cache.r4.4xlarge,
+	// cache.r4.8xlarge, cache.r4.16xlarge
 	//
-	//         * Current generation: R5 node types: cache.r5.large,
-	// cache.r5.xlarge, cache.r5.2xlarge, cache.r5.4xlarge, cache.r5.12xlarge,
-	// cache.r5.24xlarge R4 node types: cache.r4.large, cache.r4.xlarge,
-	// cache.r4.2xlarge, cache.r4.4xlarge, cache.r4.8xlarge, cache.r4.16xlarge
+	// * Previous generation: (not recommended) M2
+	// node types: cache.m2.xlarge, cache.m2.2xlarge, cache.m2.4xlarge R3 node types:
+	// cache.r3.large, cache.r3.xlarge, cache.r3.2xlarge,
 	//
-	//
-	// * Previous generation: (not recommended) M2 node types: cache.m2.xlarge,
-	// cache.m2.2xlarge, cache.m2.4xlarge R3 node types: cache.r3.large,
-	// cache.r3.xlarge, cache.r3.2xlarge,
-	//
-	//         cache.r3.4xlarge,
+	// cache.r3.4xlarge,
 	// cache.r3.8xlarge
 	//
 	// Additional node type info
 	//
-	//     * All current generation
-	// instance types are created in Amazon VPC by default.
+	// * All current generation instance
+	// types are created in Amazon VPC by default.
 	//
-	//     * Redis append-only
-	// files (AOF) are not supported for T1 or T2 instances.
+	// * Redis append-only files (AOF) are
+	// not supported for T1 or T2 instances.
 	//
-	//     * Redis Multi-AZ with
-	// automatic failover is not supported on T1 instances.
+	// * Redis Multi-AZ with automatic failover
+	// is not supported on T1 instances.
 	//
-	//     * Redis configuration
-	// variables appendonly and appendfsync are not supported on Redis version 2.8.22
-	// and later.
+	// * Redis configuration variables appendonly
+	// and appendfsync are not supported on Redis version 2.8.22 and later.
 	CacheNodeType *string
 
 	// A list of cache nodes that are members of the cluster.
@@ -166,22 +164,22 @@ type CacheCluster struct {
 	// Clock UTC). The minimum maintenance window is a 60 minute period. Valid values
 	// for ddd are:
 	//
-	//     * sun
+	// * sun
 	//
-	//     * mon
+	// * mon
 	//
-	//     * tue
+	// * tue
 	//
-	//     * wed
+	// * wed
 	//
-	//     * thu
+	// * thu
 	//
-	//     * fri
-	//
+	// * fri
 	//
 	// * sat
 	//
-	// Example: sun:23:00-mon:01:30
+	// Example:
+	// sun:23:00-mon:01:30
 	PreferredMaintenanceWindow *string
 
 	// The outpost ARN in which the cache cluster is created.
@@ -240,55 +238,54 @@ type CacheEngineVersion struct {
 // computational power at lower cost when compared to their equivalent previous
 // generation counterparts.
 //
-//     * General purpose:
+// * General purpose:
 //
-//         * Current generation:
-// M5 node types: cache.m5.large, cache.m5.xlarge, cache.m5.2xlarge,
-// cache.m5.4xlarge, cache.m5.12xlarge, cache.m5.24xlarge M4 node types:
-// cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge,
-// cache.m4.10xlarge T3 node types: cache.t3.micro, cache.t3.small, cache.t3.medium
-// T2 node types: cache.t2.micro, cache.t2.small, cache.t2.medium
+// * Current generation: M5 node
+// types: cache.m5.large, cache.m5.xlarge, cache.m5.2xlarge, cache.m5.4xlarge,
+// cache.m5.12xlarge, cache.m5.24xlarge M4 node types: cache.m4.large,
+// cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge, cache.m4.10xlarge T3 node
+// types: cache.t3.micro, cache.t3.small, cache.t3.medium T2 node types:
+// cache.t2.micro, cache.t2.small, cache.t2.medium
 //
-//         *
-// Previous generation: (not recommended) T1 node types: cache.t1.micro M1 node
-// types: cache.m1.small, cache.m1.medium, cache.m1.large, cache.m1.xlarge M3 node
-// types: cache.m3.medium, cache.m3.large, cache.m3.xlarge, cache.m3.2xlarge
+// * Previous generation: (not
+// recommended) T1 node types: cache.t1.micro M1 node types: cache.m1.small,
+// cache.m1.medium, cache.m1.large, cache.m1.xlarge M3 node types: cache.m3.medium,
+// cache.m3.large, cache.m3.xlarge, cache.m3.2xlarge
 //
-//     *
-// Compute optimized:
+// * Compute optimized:
 //
-//         * Previous generation: (not recommended) C1 node
-// types: cache.c1.xlarge
+// *
+// Previous generation: (not recommended) C1 node types: cache.c1.xlarge
 //
-//     * Memory optimized:
+// * Memory
+// optimized:
 //
-//         * Current generation:
-// R5 node types: cache.r5.large, cache.r5.xlarge, cache.r5.2xlarge,
-// cache.r5.4xlarge, cache.r5.12xlarge, cache.r5.24xlarge R4 node types:
-// cache.r4.large, cache.r4.xlarge, cache.r4.2xlarge, cache.r4.4xlarge,
-// cache.r4.8xlarge, cache.r4.16xlarge
+// * Current generation: R5 node types: cache.r5.large,
+// cache.r5.xlarge, cache.r5.2xlarge, cache.r5.4xlarge, cache.r5.12xlarge,
+// cache.r5.24xlarge R4 node types: cache.r4.large, cache.r4.xlarge,
+// cache.r4.2xlarge, cache.r4.4xlarge, cache.r4.8xlarge, cache.r4.16xlarge
 //
-//         * Previous generation: (not
-// recommended) M2 node types: cache.m2.xlarge, cache.m2.2xlarge, cache.m2.4xlarge
-// R3 node types: cache.r3.large, cache.r3.xlarge, cache.r3.2xlarge,
+// *
+// Previous generation: (not recommended) M2 node types: cache.m2.xlarge,
+// cache.m2.2xlarge, cache.m2.4xlarge R3 node types: cache.r3.large,
+// cache.r3.xlarge, cache.r3.2xlarge,
 //
-//
-// cache.r3.4xlarge, cache.r3.8xlarge
+// cache.r3.4xlarge,
+// cache.r3.8xlarge
 //
 // Additional node type info
 //
-//     * All current
-// generation instance types are created in Amazon VPC by default.
+// * All current generation instance
+// types are created in Amazon VPC by default.
 //
-//     * Redis
-// append-only files (AOF) are not supported for T1 or T2 instances.
+// * Redis append-only files (AOF) are
+// not supported for T1 or T2 instances.
 //
-//     * Redis
-// Multi-AZ with automatic failover is not supported on T1 instances.
+// * Redis Multi-AZ with automatic failover
+// is not supported on T1 instances.
 //
-//     * Redis
-// configuration variables appendonly and appendfsync are not supported on Redis
-// version 2.8.22 and later.
+// * Redis configuration variables appendonly
+// and appendfsync are not supported on Redis version 2.8.22 and later.
 type CacheNode struct {
 
 	// The date and time when the cache node was created.
@@ -434,12 +431,12 @@ type CacheParameterGroupStatus struct {
 
 // Represents the output of one of the following operations:
 //
-//     *
+// *
 // AuthorizeCacheSecurityGroupIngress
 //
-//     * CreateCacheSecurityGroup
+// * CreateCacheSecurityGroup
 //
-//     *
+// *
 // RevokeCacheSecurityGroupIngress
 type CacheSecurityGroup struct {
 
@@ -474,10 +471,10 @@ type CacheSecurityGroupMembership struct {
 
 // Represents the output of one of the following operations:
 //
-//     *
+// *
 // CreateCacheSubnetGroup
 //
-//     * ModifyCacheSubnetGroup
+// * ModifyCacheSubnetGroup
 type CacheSubnetGroup struct {
 
 	// The ARN (Amazon Resource Name) of the cache subnet group.
@@ -506,16 +503,15 @@ type ConfigureShard struct {
 	// type of Redis replication group you are working with. The minimum number of
 	// replicas in a shard or replication group is:
 	//
-	//     * Redis (cluster mode
-	// disabled)
+	// * Redis (cluster mode disabled)
 	//
-	//         * If Multi-AZ: 1
+	// *
+	// If Multi-AZ: 1
 	//
-	//         * If Multi-AZ: 0
+	// * If Multi-AZ: 0
 	//
-	//     * Redis
-	// (cluster mode enabled): 0 (though you will not be able to failover to a replica
-	// if your primary node fails)
+	// * Redis (cluster mode enabled): 0 (though you
+	// will not be able to failover to a replica if your primary node fails)
 	//
 	// This member is required.
 	NewReplicaCount *int32
@@ -642,8 +638,8 @@ type GlobalNodeGroup struct {
 // only reads. The primary cluster automatically replicates updates to the
 // secondary cluster.
 //
-//     * The GlobalReplicationGroupIdSuffix represents the name
-// of the Global Datastore, which is what you use to associate a secondary cluster.
+// * The GlobalReplicationGroupIdSuffix represents the name of
+// the Global Datastore, which is what you use to associate a secondary cluster.
 type GlobalReplicationGroup struct {
 
 	// The ARN (Amazon Resource Name) of the global replication group.
@@ -1147,55 +1143,54 @@ type ReservedCacheNode struct {
 	// provide more memory and computational power at lower cost when compared to their
 	// equivalent previous generation counterparts.
 	//
-	//     * General purpose:
+	// * General purpose:
 	//
-	//         *
-	// Current generation: M5 node types: cache.m5.large, cache.m5.xlarge,
-	// cache.m5.2xlarge, cache.m5.4xlarge, cache.m5.12xlarge, cache.m5.24xlarge M4 node
-	// types: cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge,
+	// * Current
+	// generation: M5 node types: cache.m5.large, cache.m5.xlarge, cache.m5.2xlarge,
+	// cache.m5.4xlarge, cache.m5.12xlarge, cache.m5.24xlarge M4 node types:
+	// cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge,
 	// cache.m4.10xlarge T3 node types: cache.t3.micro, cache.t3.small, cache.t3.medium
 	// T2 node types: cache.t2.micro, cache.t2.small, cache.t2.medium
 	//
-	//         *
-	// Previous generation: (not recommended) T1 node types: cache.t1.micro M1 node
-	// types: cache.m1.small, cache.m1.medium, cache.m1.large, cache.m1.xlarge M3 node
-	// types: cache.m3.medium, cache.m3.large, cache.m3.xlarge, cache.m3.2xlarge
+	// * Previous
+	// generation: (not recommended) T1 node types: cache.t1.micro M1 node types:
+	// cache.m1.small, cache.m1.medium, cache.m1.large, cache.m1.xlarge M3 node types:
+	// cache.m3.medium, cache.m3.large, cache.m3.xlarge, cache.m3.2xlarge
 	//
-	//     *
-	// Compute optimized:
+	// * Compute
+	// optimized:
 	//
-	//         * Previous generation: (not recommended) C1 node
-	// types: cache.c1.xlarge
+	// * Previous generation: (not recommended) C1 node types:
+	// cache.c1.xlarge
 	//
-	//     * Memory optimized:
+	// * Memory optimized:
 	//
-	//         * Current generation:
-	// R5 node types: cache.r5.large, cache.r5.xlarge, cache.r5.2xlarge,
-	// cache.r5.4xlarge, cache.r5.12xlarge, cache.r5.24xlarge R4 node types:
-	// cache.r4.large, cache.r4.xlarge, cache.r4.2xlarge, cache.r4.4xlarge,
-	// cache.r4.8xlarge, cache.r4.16xlarge
+	// * Current generation: R5 node types:
+	// cache.r5.large, cache.r5.xlarge, cache.r5.2xlarge, cache.r5.4xlarge,
+	// cache.r5.12xlarge, cache.r5.24xlarge R4 node types: cache.r4.large,
+	// cache.r4.xlarge, cache.r4.2xlarge, cache.r4.4xlarge, cache.r4.8xlarge,
+	// cache.r4.16xlarge
 	//
-	//         * Previous generation: (not
-	// recommended) M2 node types: cache.m2.xlarge, cache.m2.2xlarge, cache.m2.4xlarge
-	// R3 node types: cache.r3.large, cache.r3.xlarge, cache.r3.2xlarge,
+	// * Previous generation: (not recommended) M2 node types:
+	// cache.m2.xlarge, cache.m2.2xlarge, cache.m2.4xlarge R3 node types:
+	// cache.r3.large, cache.r3.xlarge, cache.r3.2xlarge,
 	//
-	//
-	// cache.r3.4xlarge, cache.r3.8xlarge
+	// cache.r3.4xlarge,
+	// cache.r3.8xlarge
 	//
 	// Additional node type info
 	//
-	//     * All current
-	// generation instance types are created in Amazon VPC by default.
+	// * All current generation instance
+	// types are created in Amazon VPC by default.
 	//
-	//     * Redis
-	// append-only files (AOF) are not supported for T1 or T2 instances.
+	// * Redis append-only files (AOF) are
+	// not supported for T1 or T2 instances.
 	//
-	//     * Redis
-	// Multi-AZ with automatic failover is not supported on T1 instances.
+	// * Redis Multi-AZ with automatic failover
+	// is not supported on T1 instances.
 	//
-	//     * Redis
-	// configuration variables appendonly and appendfsync are not supported on Redis
-	// version 2.8.22 and later.
+	// * Redis configuration variables appendonly
+	// and appendfsync are not supported on Redis version 2.8.22 and later.
 	CacheNodeType *string
 
 	// The duration of the reservation in seconds.
@@ -1241,55 +1236,54 @@ type ReservedCacheNodesOffering struct {
 	// provide more memory and computational power at lower cost when compared to their
 	// equivalent previous generation counterparts.
 	//
-	//     * General purpose:
+	// * General purpose:
 	//
-	//         *
-	// Current generation: M5 node types: cache.m5.large, cache.m5.xlarge,
-	// cache.m5.2xlarge, cache.m5.4xlarge, cache.m5.12xlarge, cache.m5.24xlarge M4 node
-	// types: cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge,
+	// * Current
+	// generation: M5 node types: cache.m5.large, cache.m5.xlarge, cache.m5.2xlarge,
+	// cache.m5.4xlarge, cache.m5.12xlarge, cache.m5.24xlarge M4 node types:
+	// cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge,
 	// cache.m4.10xlarge T3 node types: cache.t3.micro, cache.t3.small, cache.t3.medium
 	// T2 node types: cache.t2.micro, cache.t2.small, cache.t2.medium
 	//
-	//         *
-	// Previous generation: (not recommended) T1 node types: cache.t1.micro M1 node
-	// types: cache.m1.small, cache.m1.medium, cache.m1.large, cache.m1.xlarge M3 node
-	// types: cache.m3.medium, cache.m3.large, cache.m3.xlarge, cache.m3.2xlarge
+	// * Previous
+	// generation: (not recommended) T1 node types: cache.t1.micro M1 node types:
+	// cache.m1.small, cache.m1.medium, cache.m1.large, cache.m1.xlarge M3 node types:
+	// cache.m3.medium, cache.m3.large, cache.m3.xlarge, cache.m3.2xlarge
 	//
-	//     *
-	// Compute optimized:
+	// * Compute
+	// optimized:
 	//
-	//         * Previous generation: (not recommended) C1 node
-	// types: cache.c1.xlarge
+	// * Previous generation: (not recommended) C1 node types:
+	// cache.c1.xlarge
 	//
-	//     * Memory optimized:
+	// * Memory optimized:
 	//
-	//         * Current generation:
-	// R5 node types: cache.r5.large, cache.r5.xlarge, cache.r5.2xlarge,
-	// cache.r5.4xlarge, cache.r5.12xlarge, cache.r5.24xlarge R4 node types:
-	// cache.r4.large, cache.r4.xlarge, cache.r4.2xlarge, cache.r4.4xlarge,
-	// cache.r4.8xlarge, cache.r4.16xlarge
+	// * Current generation: R5 node types:
+	// cache.r5.large, cache.r5.xlarge, cache.r5.2xlarge, cache.r5.4xlarge,
+	// cache.r5.12xlarge, cache.r5.24xlarge R4 node types: cache.r4.large,
+	// cache.r4.xlarge, cache.r4.2xlarge, cache.r4.4xlarge, cache.r4.8xlarge,
+	// cache.r4.16xlarge
 	//
-	//         * Previous generation: (not
-	// recommended) M2 node types: cache.m2.xlarge, cache.m2.2xlarge, cache.m2.4xlarge
-	// R3 node types: cache.r3.large, cache.r3.xlarge, cache.r3.2xlarge,
+	// * Previous generation: (not recommended) M2 node types:
+	// cache.m2.xlarge, cache.m2.2xlarge, cache.m2.4xlarge R3 node types:
+	// cache.r3.large, cache.r3.xlarge, cache.r3.2xlarge,
 	//
-	//
-	// cache.r3.4xlarge, cache.r3.8xlarge
+	// cache.r3.4xlarge,
+	// cache.r3.8xlarge
 	//
 	// Additional node type info
 	//
-	//     * All current
-	// generation instance types are created in Amazon VPC by default.
+	// * All current generation instance
+	// types are created in Amazon VPC by default.
 	//
-	//     * Redis
-	// append-only files (AOF) are not supported for T1 or T2 instances.
+	// * Redis append-only files (AOF) are
+	// not supported for T1 or T2 instances.
 	//
-	//     * Redis
-	// Multi-AZ with automatic failover is not supported on T1 instances.
+	// * Redis Multi-AZ with automatic failover
+	// is not supported on T1 instances.
 	//
-	//     * Redis
-	// configuration variables appendonly and appendfsync are not supported on Redis
-	// version 2.8.22 and later.
+	// * Redis configuration variables appendonly
+	// and appendfsync are not supported on Redis version 2.8.22 and later.
 	CacheNodeType *string
 
 	// The duration of the offering. in seconds.
@@ -1421,56 +1415,54 @@ type Snapshot struct {
 	// current generation types provide more memory and computational power at lower
 	// cost when compared to their equivalent previous generation counterparts.
 	//
-	//     *
+	// *
 	// General purpose:
 	//
-	//         * Current generation: M5 node types: cache.m5.large,
+	// * Current generation: M5 node types: cache.m5.large,
 	// cache.m5.xlarge, cache.m5.2xlarge, cache.m5.4xlarge, cache.m5.12xlarge,
 	// cache.m5.24xlarge M4 node types: cache.m4.large, cache.m4.xlarge,
 	// cache.m4.2xlarge, cache.m4.4xlarge, cache.m4.10xlarge T3 node types:
 	// cache.t3.micro, cache.t3.small, cache.t3.medium T2 node types: cache.t2.micro,
 	// cache.t2.small, cache.t2.medium
 	//
-	//         * Previous generation: (not
-	// recommended) T1 node types: cache.t1.micro M1 node types: cache.m1.small,
-	// cache.m1.medium, cache.m1.large, cache.m1.xlarge M3 node types: cache.m3.medium,
-	// cache.m3.large, cache.m3.xlarge, cache.m3.2xlarge
+	// * Previous generation: (not recommended) T1
+	// node types: cache.t1.micro M1 node types: cache.m1.small, cache.m1.medium,
+	// cache.m1.large, cache.m1.xlarge M3 node types: cache.m3.medium, cache.m3.large,
+	// cache.m3.xlarge, cache.m3.2xlarge
 	//
-	//     * Compute optimized:
+	// * Compute optimized:
 	//
+	// * Previous generation:
+	// (not recommended) C1 node types: cache.c1.xlarge
 	//
-	// * Previous generation: (not recommended) C1 node types: cache.c1.xlarge
+	// * Memory optimized:
 	//
-	//     *
-	// Memory optimized:
+	// * Current
+	// generation: R5 node types: cache.r5.large, cache.r5.xlarge, cache.r5.2xlarge,
+	// cache.r5.4xlarge, cache.r5.12xlarge, cache.r5.24xlarge R4 node types:
+	// cache.r4.large, cache.r4.xlarge, cache.r4.2xlarge, cache.r4.4xlarge,
+	// cache.r4.8xlarge, cache.r4.16xlarge
 	//
-	//         * Current generation: R5 node types: cache.r5.large,
-	// cache.r5.xlarge, cache.r5.2xlarge, cache.r5.4xlarge, cache.r5.12xlarge,
-	// cache.r5.24xlarge R4 node types: cache.r4.large, cache.r4.xlarge,
-	// cache.r4.2xlarge, cache.r4.4xlarge, cache.r4.8xlarge, cache.r4.16xlarge
+	// * Previous generation: (not recommended) M2
+	// node types: cache.m2.xlarge, cache.m2.2xlarge, cache.m2.4xlarge R3 node types:
+	// cache.r3.large, cache.r3.xlarge, cache.r3.2xlarge,
 	//
-	//
-	// * Previous generation: (not recommended) M2 node types: cache.m2.xlarge,
-	// cache.m2.2xlarge, cache.m2.4xlarge R3 node types: cache.r3.large,
-	// cache.r3.xlarge, cache.r3.2xlarge,
-	//
-	//         cache.r3.4xlarge,
+	// cache.r3.4xlarge,
 	// cache.r3.8xlarge
 	//
 	// Additional node type info
 	//
-	//     * All current generation
-	// instance types are created in Amazon VPC by default.
+	// * All current generation instance
+	// types are created in Amazon VPC by default.
 	//
-	//     * Redis append-only
-	// files (AOF) are not supported for T1 or T2 instances.
+	// * Redis append-only files (AOF) are
+	// not supported for T1 or T2 instances.
 	//
-	//     * Redis Multi-AZ with
-	// automatic failover is not supported on T1 instances.
+	// * Redis Multi-AZ with automatic failover
+	// is not supported on T1 instances.
 	//
-	//     * Redis configuration
-	// variables appendonly and appendfsync are not supported on Redis version 2.8.22
-	// and later.
+	// * Redis configuration variables appendonly
+	// and appendfsync are not supported on Redis version 2.8.22 and later.
 	CacheNodeType *string
 
 	// The cache parameter group that is associated with the source cluster.
@@ -1512,22 +1504,22 @@ type Snapshot struct {
 	// Clock UTC). The minimum maintenance window is a 60 minute period. Valid values
 	// for ddd are:
 	//
-	//     * sun
+	// * sun
 	//
-	//     * mon
+	// * mon
 	//
-	//     * tue
+	// * tue
 	//
-	//     * wed
+	// * wed
 	//
-	//     * thu
+	// * thu
 	//
-	//     * fri
-	//
+	// * fri
 	//
 	// * sat
 	//
-	// Example: sun:23:00-mon:01:30
+	// Example:
+	// sun:23:00-mon:01:30
 	PreferredMaintenanceWindow *string
 
 	// The ARN (Amazon Resource Name) of the preferred outpost.

@@ -40,9 +40,9 @@ type AuthorizerType string
 
 // Enum values for AuthorizerType
 const (
-	AuthorizerTypeToken              AuthorizerType = "TOKEN"
-	AuthorizerTypeRequest            AuthorizerType = "REQUEST"
-	AuthorizerTypeCognito_user_pools AuthorizerType = "COGNITO_USER_POOLS"
+	AuthorizerTypeToken            AuthorizerType = "TOKEN"
+	AuthorizerTypeRequest          AuthorizerType = "REQUEST"
+	AuthorizerTypeCognitoUserPools AuthorizerType = "COGNITO_USER_POOLS"
 )
 
 // Values returns all known values for AuthorizerType. Note that this can be
@@ -60,14 +60,14 @@ type CacheClusterSize string
 
 // Enum values for CacheClusterSize
 const (
-	CacheClusterSizeSize_0_point_5_gb  CacheClusterSize = "0.5"
-	CacheClusterSizeSize_1_point_6_gb  CacheClusterSize = "1.6"
-	CacheClusterSizeSize_6_point_1_gb  CacheClusterSize = "6.1"
-	CacheClusterSizeSize_13_point_5_gb CacheClusterSize = "13.5"
-	CacheClusterSizeSize_28_point_4_gb CacheClusterSize = "28.4"
-	CacheClusterSizeSize_58_point_2_gb CacheClusterSize = "58.2"
-	CacheClusterSizeSize_118_gb        CacheClusterSize = "118"
-	CacheClusterSizeSize_237_gb        CacheClusterSize = "237"
+	CacheClusterSizeSize0Point5Gb  CacheClusterSize = "0.5"
+	CacheClusterSizeSize1Point6Gb  CacheClusterSize = "1.6"
+	CacheClusterSizeSize6Point1Gb  CacheClusterSize = "6.1"
+	CacheClusterSizeSize13Point5Gb CacheClusterSize = "13.5"
+	CacheClusterSizeSize28Point4Gb CacheClusterSize = "28.4"
+	CacheClusterSizeSize58Point2Gb CacheClusterSize = "58.2"
+	CacheClusterSizeSize118Gb      CacheClusterSize = "118"
+	CacheClusterSizeSize237Gb      CacheClusterSize = "237"
 )
 
 // Values returns all known values for CacheClusterSize. Note that this can be
@@ -90,11 +90,11 @@ type CacheClusterStatus string
 
 // Enum values for CacheClusterStatus
 const (
-	CacheClusterStatusCreate_in_progress CacheClusterStatus = "CREATE_IN_PROGRESS"
-	CacheClusterStatusAvailable          CacheClusterStatus = "AVAILABLE"
-	CacheClusterStatusDelete_in_progress CacheClusterStatus = "DELETE_IN_PROGRESS"
-	CacheClusterStatusNot_available      CacheClusterStatus = "NOT_AVAILABLE"
-	CacheClusterStatusFlush_in_progress  CacheClusterStatus = "FLUSH_IN_PROGRESS"
+	CacheClusterStatusCreateInProgress CacheClusterStatus = "CREATE_IN_PROGRESS"
+	CacheClusterStatusAvailable        CacheClusterStatus = "AVAILABLE"
+	CacheClusterStatusDeleteInProgress CacheClusterStatus = "DELETE_IN_PROGRESS"
+	CacheClusterStatusNotAvailable     CacheClusterStatus = "NOT_AVAILABLE"
+	CacheClusterStatusFlushInProgress  CacheClusterStatus = "FLUSH_IN_PROGRESS"
 )
 
 // Values returns all known values for CacheClusterStatus. Note that this can be
@@ -115,7 +115,7 @@ type ConnectionType string
 // Enum values for ConnectionType
 const (
 	ConnectionTypeInternet ConnectionType = "INTERNET"
-	ConnectionTypeVpc_link ConnectionType = "VPC_LINK"
+	ConnectionTypeVpcLink  ConnectionType = "VPC_LINK"
 )
 
 // Values returns all known values for ConnectionType. Note that this can be
@@ -132,8 +132,8 @@ type ContentHandlingStrategy string
 
 // Enum values for ContentHandlingStrategy
 const (
-	ContentHandlingStrategyConvert_to_binary ContentHandlingStrategy = "CONVERT_TO_BINARY"
-	ContentHandlingStrategyConvert_to_text   ContentHandlingStrategy = "CONVERT_TO_TEXT"
+	ContentHandlingStrategyConvertToBinary ContentHandlingStrategy = "CONVERT_TO_BINARY"
+	ContentHandlingStrategyConvertToText   ContentHandlingStrategy = "CONVERT_TO_TEXT"
 )
 
 // Values returns all known values for ContentHandlingStrategy. Note that this can
@@ -150,18 +150,18 @@ type DocumentationPartType string
 
 // Enum values for DocumentationPartType
 const (
-	DocumentationPartTypeApi             DocumentationPartType = "API"
-	DocumentationPartTypeAuthorizer      DocumentationPartType = "AUTHORIZER"
-	DocumentationPartTypeModel           DocumentationPartType = "MODEL"
-	DocumentationPartTypeResource        DocumentationPartType = "RESOURCE"
-	DocumentationPartTypeMethod          DocumentationPartType = "METHOD"
-	DocumentationPartTypePath_parameter  DocumentationPartType = "PATH_PARAMETER"
-	DocumentationPartTypeQuery_parameter DocumentationPartType = "QUERY_PARAMETER"
-	DocumentationPartTypeRequest_header  DocumentationPartType = "REQUEST_HEADER"
-	DocumentationPartTypeRequest_body    DocumentationPartType = "REQUEST_BODY"
-	DocumentationPartTypeResponse        DocumentationPartType = "RESPONSE"
-	DocumentationPartTypeResponse_header DocumentationPartType = "RESPONSE_HEADER"
-	DocumentationPartTypeResponse_body   DocumentationPartType = "RESPONSE_BODY"
+	DocumentationPartTypeApi            DocumentationPartType = "API"
+	DocumentationPartTypeAuthorizer     DocumentationPartType = "AUTHORIZER"
+	DocumentationPartTypeModel          DocumentationPartType = "MODEL"
+	DocumentationPartTypeResource       DocumentationPartType = "RESOURCE"
+	DocumentationPartTypeMethod         DocumentationPartType = "METHOD"
+	DocumentationPartTypePathParameter  DocumentationPartType = "PATH_PARAMETER"
+	DocumentationPartTypeQueryParameter DocumentationPartType = "QUERY_PARAMETER"
+	DocumentationPartTypeRequestHeader  DocumentationPartType = "REQUEST_HEADER"
+	DocumentationPartTypeRequestBody    DocumentationPartType = "REQUEST_BODY"
+	DocumentationPartTypeResponse       DocumentationPartType = "RESPONSE"
+	DocumentationPartTypeResponseHeader DocumentationPartType = "RESPONSE_HEADER"
+	DocumentationPartTypeResponseBody   DocumentationPartType = "RESPONSE_BODY"
 )
 
 // Values returns all known values for DocumentationPartType. Note that this can be
@@ -228,26 +228,26 @@ type GatewayResponseType string
 
 // Enum values for GatewayResponseType
 const (
-	GatewayResponseTypeDefault_4xx                    GatewayResponseType = "DEFAULT_4XX"
-	GatewayResponseTypeDefault_5xx                    GatewayResponseType = "DEFAULT_5XX"
-	GatewayResponseTypeResource_not_found             GatewayResponseType = "RESOURCE_NOT_FOUND"
-	GatewayResponseTypeUnauthorized                   GatewayResponseType = "UNAUTHORIZED"
-	GatewayResponseTypeInvalid_api_key                GatewayResponseType = "INVALID_API_KEY"
-	GatewayResponseTypeAccess_denied                  GatewayResponseType = "ACCESS_DENIED"
-	GatewayResponseTypeAuthorizer_failure             GatewayResponseType = "AUTHORIZER_FAILURE"
-	GatewayResponseTypeAuthorizer_configuration_error GatewayResponseType = "AUTHORIZER_CONFIGURATION_ERROR"
-	GatewayResponseTypeInvalid_signature              GatewayResponseType = "INVALID_SIGNATURE"
-	GatewayResponseTypeExpired_token                  GatewayResponseType = "EXPIRED_TOKEN"
-	GatewayResponseTypeMissing_authentication_token   GatewayResponseType = "MISSING_AUTHENTICATION_TOKEN"
-	GatewayResponseTypeIntegration_failure            GatewayResponseType = "INTEGRATION_FAILURE"
-	GatewayResponseTypeIntegration_timeout            GatewayResponseType = "INTEGRATION_TIMEOUT"
-	GatewayResponseTypeApi_configuration_error        GatewayResponseType = "API_CONFIGURATION_ERROR"
-	GatewayResponseTypeUnsupported_media_type         GatewayResponseType = "UNSUPPORTED_MEDIA_TYPE"
-	GatewayResponseTypeBad_request_parameters         GatewayResponseType = "BAD_REQUEST_PARAMETERS"
-	GatewayResponseTypeBad_request_body               GatewayResponseType = "BAD_REQUEST_BODY"
-	GatewayResponseTypeRequest_too_large              GatewayResponseType = "REQUEST_TOO_LARGE"
-	GatewayResponseTypeThrottled                      GatewayResponseType = "THROTTLED"
-	GatewayResponseTypeQuota_exceeded                 GatewayResponseType = "QUOTA_EXCEEDED"
+	GatewayResponseTypeDefault4xx                   GatewayResponseType = "DEFAULT_4XX"
+	GatewayResponseTypeDefault5xx                   GatewayResponseType = "DEFAULT_5XX"
+	GatewayResponseTypeResourceNotFound             GatewayResponseType = "RESOURCE_NOT_FOUND"
+	GatewayResponseTypeUnauthorized                 GatewayResponseType = "UNAUTHORIZED"
+	GatewayResponseTypeInvalidApiKey                GatewayResponseType = "INVALID_API_KEY"
+	GatewayResponseTypeAccessDenied                 GatewayResponseType = "ACCESS_DENIED"
+	GatewayResponseTypeAuthorizerFailure            GatewayResponseType = "AUTHORIZER_FAILURE"
+	GatewayResponseTypeAuthorizerConfigurationError GatewayResponseType = "AUTHORIZER_CONFIGURATION_ERROR"
+	GatewayResponseTypeInvalidSignature             GatewayResponseType = "INVALID_SIGNATURE"
+	GatewayResponseTypeExpiredToken                 GatewayResponseType = "EXPIRED_TOKEN"
+	GatewayResponseTypeMissingAuthenticationToken   GatewayResponseType = "MISSING_AUTHENTICATION_TOKEN"
+	GatewayResponseTypeIntegrationFailure           GatewayResponseType = "INTEGRATION_FAILURE"
+	GatewayResponseTypeIntegrationTimeout           GatewayResponseType = "INTEGRATION_TIMEOUT"
+	GatewayResponseTypeApiConfigurationError        GatewayResponseType = "API_CONFIGURATION_ERROR"
+	GatewayResponseTypeUnsupportedMediaType         GatewayResponseType = "UNSUPPORTED_MEDIA_TYPE"
+	GatewayResponseTypeBadRequestParameters         GatewayResponseType = "BAD_REQUEST_PARAMETERS"
+	GatewayResponseTypeBadRequestBody               GatewayResponseType = "BAD_REQUEST_BODY"
+	GatewayResponseTypeRequestTooLarge              GatewayResponseType = "REQUEST_TOO_LARGE"
+	GatewayResponseTypeThrottled                    GatewayResponseType = "THROTTLED"
+	GatewayResponseTypeQuotaExceeded                GatewayResponseType = "QUOTA_EXCEEDED"
 )
 
 // Values returns all known values for GatewayResponseType. Note that this can be
@@ -282,11 +282,11 @@ type IntegrationType string
 
 // Enum values for IntegrationType
 const (
-	IntegrationTypeHttp       IntegrationType = "HTTP"
-	IntegrationTypeAws        IntegrationType = "AWS"
-	IntegrationTypeMock       IntegrationType = "MOCK"
-	IntegrationTypeHttp_proxy IntegrationType = "HTTP_PROXY"
-	IntegrationTypeAws_proxy  IntegrationType = "AWS_PROXY"
+	IntegrationTypeHttp      IntegrationType = "HTTP"
+	IntegrationTypeAws       IntegrationType = "AWS"
+	IntegrationTypeMock      IntegrationType = "MOCK"
+	IntegrationTypeHttpProxy IntegrationType = "HTTP_PROXY"
+	IntegrationTypeAwsProxy  IntegrationType = "AWS_PROXY"
 )
 
 // Values returns all known values for IntegrationType. Note that this can be
@@ -388,8 +388,8 @@ type SecurityPolicy string
 
 // Enum values for SecurityPolicy
 const (
-	SecurityPolicyTls_1_0 SecurityPolicy = "TLS_1_0"
-	SecurityPolicyTls_1_2 SecurityPolicy = "TLS_1_2"
+	SecurityPolicyTls10 SecurityPolicy = "TLS_1_0"
+	SecurityPolicyTls12 SecurityPolicy = "TLS_1_2"
 )
 
 // Values returns all known values for SecurityPolicy. Note that this can be
@@ -406,9 +406,9 @@ type UnauthorizedCacheControlHeaderStrategy string
 
 // Enum values for UnauthorizedCacheControlHeaderStrategy
 const (
-	UnauthorizedCacheControlHeaderStrategyFail_with_403                   UnauthorizedCacheControlHeaderStrategy = "FAIL_WITH_403"
-	UnauthorizedCacheControlHeaderStrategySucceed_with_response_header    UnauthorizedCacheControlHeaderStrategy = "SUCCEED_WITH_RESPONSE_HEADER"
-	UnauthorizedCacheControlHeaderStrategySucceed_without_response_header UnauthorizedCacheControlHeaderStrategy = "SUCCEED_WITHOUT_RESPONSE_HEADER"
+	UnauthorizedCacheControlHeaderStrategyFailWith403                  UnauthorizedCacheControlHeaderStrategy = "FAIL_WITH_403"
+	UnauthorizedCacheControlHeaderStrategySucceedWithResponseHeader    UnauthorizedCacheControlHeaderStrategy = "SUCCEED_WITH_RESPONSE_HEADER"
+	UnauthorizedCacheControlHeaderStrategySucceedWithoutResponseHeader UnauthorizedCacheControlHeaderStrategy = "SUCCEED_WITHOUT_RESPONSE_HEADER"
 )
 
 // Values returns all known values for UnauthorizedCacheControlHeaderStrategy. Note

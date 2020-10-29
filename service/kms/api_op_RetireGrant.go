@@ -14,20 +14,20 @@ import (
 // You should revoke a grant when you intend to actively deny operations that
 // depend on it. The following are permitted to call this API:
 //
-//     * The AWS
-// account (root user) under which the grant was created
+// * The AWS account
+// (root user) under which the grant was created
 //
-//     * The
-// RetiringPrincipal, if present in the grant
+// * The RetiringPrincipal, if
+// present in the grant
 //
-//     * The GranteePrincipal, if
-// RetireGrant is an operation specified in the grant
+// * The GranteePrincipal, if RetireGrant is an operation
+// specified in the grant
 //
-// You must identify the grant
-// to retire by its grant token or by a combination of the grant ID and the Amazon
-// Resource Name (ARN) of the customer master key (CMK). A grant token is a unique
-// variable-length base64-encoded string. A grant ID is a 64 character unique
-// identifier of a grant. The CreateGrant operation returns both.
+// You must identify the grant to retire by its grant token
+// or by a combination of the grant ID and the Amazon Resource Name (ARN) of the
+// customer master key (CMK). A grant token is a unique variable-length
+// base64-encoded string. A grant ID is a 64 character unique identifier of a
+// grant. The CreateGrant operation returns both.
 func (c *Client) RetireGrant(ctx context.Context, params *RetireGrantInput, optFns ...func(*Options)) (*RetireGrantOutput, error) {
 	if params == nil {
 		params = &RetireGrantInput{}
@@ -48,7 +48,7 @@ type RetireGrantInput struct {
 	// Unique identifier of the grant to retire. The grant ID is returned in the
 	// response to a CreateGrant operation.
 	//
-	//     * Grant ID Example -
+	// * Grant ID Example -
 	// 0123456789012345678901234567890123456789012345678901234567890123
 	GrantId *string
 

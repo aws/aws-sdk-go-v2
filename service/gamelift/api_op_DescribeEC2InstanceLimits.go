@@ -13,11 +13,11 @@ import (
 
 // Retrieves the following information for the specified EC2 instance type:
 //
-//     *
+// *
 // Maximum number of instances allowed per AWS account (service limit).
 //
-//     *
-// Current usage for the AWS account.
+// * Current
+// usage for the AWS account.
 //
 // To learn more about the capabilities of each
 // instance type, see Amazon EC2 Instance Types
@@ -26,19 +26,19 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 // Related operations
 //
-//     * CreateFleet
+// * CreateFleet
 //
-//     * ListFleets
+// * ListFleets
 //
-//     * DeleteFleet
+// * DeleteFleet
 //
+// *
+// DescribeFleetAttributes
 //
-// * DescribeFleetAttributes
+// * UpdateFleetAttributes
 //
-//     * UpdateFleetAttributes
-//
-//     * StartFleetActions
-// or StopFleetActions
+// * StartFleetActions or
+// StopFleetActions
 func (c *Client) DescribeEC2InstanceLimits(ctx context.Context, params *DescribeEC2InstanceLimitsInput, optFns ...func(*Options)) (*DescribeEC2InstanceLimitsOutput, error) {
 	if params == nil {
 		params = &DescribeEC2InstanceLimitsInput{}

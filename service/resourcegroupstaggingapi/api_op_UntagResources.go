@@ -16,14 +16,14 @@ import (
 // succeeds even if you attempt to remove tags from a resource that were already
 // removed. Note the following:
 //
-//     * To remove tags from a resource, you need the
+// * To remove tags from a resource, you need the
 // necessary permissions for the service that the resource belongs to as well as
 // permissions for removing tags. For more information, see this list
 // (http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/Welcome.html).
 //
-//
-// * You can only tag resources that are located in the specified Region for the
-// AWS account.
+// *
+// You can only tag resources that are located in the specified Region for the AWS
+// account.
 func (c *Client) UntagResources(ctx context.Context, params *UntagResourcesInput, optFns ...func(*Options)) (*UntagResourcesOutput, error) {
 	if params == nil {
 		params = &UntagResourcesInput{}

@@ -17,14 +17,15 @@ import (
 // bucket owner must use an authentication device to change the versioning state of
 // the bucket. The following operations are related to GetBucketVersioning:
 //
-//     *
-// GetObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
+// *
+// GetObject
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
 //
-//
-// * PutObject
+// *
+// PutObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
 //
-//     *
+// *
 // DeleteObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html)
 func (c *Client) GetBucketVersioning(ctx context.Context, params *GetBucketVersioningInput, optFns ...func(*Options)) (*GetBucketVersioningOutput, error) {

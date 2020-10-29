@@ -1239,17 +1239,16 @@ type ObjectReference struct {
 	// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_access_objects.html).
 	// You can identify an object in one of the following ways:
 	//
-	//     *
-	// $ObjectIdentifier - An object identifier is an opaque string provided by Amazon
-	// Cloud Directory. When creating objects, the system will provide you with the
-	// identifier of the created object. An object’s identifier is immutable and no two
-	// objects will ever share the same object identifier
+	// * $ObjectIdentifier -
+	// An object identifier is an opaque string provided by Amazon Cloud Directory.
+	// When creating objects, the system will provide you with the identifier of the
+	// created object. An object’s identifier is immutable and no two objects will ever
+	// share the same object identifier
 	//
-	//     * /some/path -
-	// Identifies the object based on path
+	// * /some/path - Identifies the object based on
+	// path
 	//
-	//     * #SomeBatchReference - Identifies the
-	// object in a batch call
+	// * #SomeBatchReference - Identifies the object in a batch call
 	Selector *string
 }
 

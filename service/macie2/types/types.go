@@ -325,17 +325,17 @@ type BucketMetadata struct {
 	// Specifies whether the bucket is shared with another AWS account. Possible values
 	// are:
 	//
-	//     * EXTERNAL - The bucket is shared with an AWS account that isn't part
-	// of the same Amazon Macie organization.
+	// * EXTERNAL - The bucket is shared with an AWS account that isn't part of
+	// the same Amazon Macie organization.
 	//
-	//     * INTERNAL - The bucket is shared
-	// with an AWS account that's part of the same Amazon Macie organization.
+	// * INTERNAL - The bucket is shared with an
+	// AWS account that's part of the same Amazon Macie organization.
 	//
-	//     *
-	// NOT_SHARED - The bucket isn't shared with other AWS accounts.
+	// * NOT_SHARED -
+	// The bucket isn't shared with other AWS accounts.
 	//
-	//     * UNKNOWN -
-	// Amazon Macie wasn't able to evaluate the shared access settings for the bucket.
+	// * UNKNOWN - Amazon Macie
+	// wasn't able to evaluate the shared access settings for the bucket.
 	SharedAccess SharedAccess
 
 	// The total storage size, in bytes, of the bucket.
@@ -393,13 +393,13 @@ type BucketPublicAccess struct {
 	// Specifies whether the bucket is publicly accessible due to the combination of
 	// permissions settings that apply to the bucket. Possible values are:
 	//
-	//     *
+	// *
 	// NOT_PUBLIC - The bucket isn't publicly accessible.
 	//
-	//     * PUBLIC - The bucket is
+	// * PUBLIC - The bucket is
 	// publicly accessible.
 	//
-	//     * UNKNOWN - Amazon Macie can't determine whether the
+	// * UNKNOWN - Amazon Macie can't determine whether the
 	// bucket is publicly accessible.
 	EffectivePermission EffectivePermission
 
@@ -511,17 +511,17 @@ type ClassificationResultStatus struct {
 
 	// The status of the finding. Possible values are:
 	//
-	//     * COMPLETE - Amazon Macie
-	// successfully completed its analysis of the object that the finding applies to.
+	// * COMPLETE - Amazon Macie
+	// successfully completed its analysis of the object that the finding applies
+	// to.
 	//
+	// * PARTIAL - Macie was able to analyze only a subset of the data in the
+	// object that the finding applies to. For example, the object is a compressed or
+	// archive file that contains files in an unsupported format.
 	//
-	// * PARTIAL - Macie was able to analyze only a subset of the data in the object
-	// that the finding applies to. For example, the object is a compressed or archive
-	// file that contains files in an unsupported format.
-	//
-	//     * SKIPPED - Macie wasn't
-	// able to analyze the object that the finding applies to. For example, the object
-	// is a malformed file or a file that uses an unsupported format.
+	// * SKIPPED - Macie
+	// wasn't able to analyze the object that the finding applies to. For example, the
+	// object is a malformed file or a file that uses an unsupported format.
 	Code *string
 
 	// A brief description of the status of the finding. Amazon Macie uses this value
@@ -983,36 +983,35 @@ type JobSummary struct {
 
 	// The current status of the job. Possible values are:
 	//
-	//     * CANCELLED - You
-	// cancelled the job, or you paused the job and didn't resume it within 30 days of
-	// pausing it.
+	// * CANCELLED - You cancelled
+	// the job, or you paused the job and didn't resume it within 30 days of pausing
+	// it.
 	//
-	//     * COMPLETE - For a one-time job, Amazon Macie finished
-	// processing all the data specified for the job. This value doesn't apply to
-	// recurring jobs.
+	// * COMPLETE - For a one-time job, Amazon Macie finished processing all the
+	// data specified for the job. This value doesn't apply to recurring jobs.
 	//
-	//     * IDLE - For a recurring job, the previous scheduled run is
-	// complete and the next scheduled run is pending. This value doesn't apply to
-	// one-time jobs.
+	// * IDLE
+	// - For a recurring job, the previous scheduled run is complete and the next
+	// scheduled run is pending. This value doesn't apply to one-time jobs.
 	//
-	//     * PAUSED - Amazon Macie started running the job but
-	// completion of the job would exceed one or more quotas for your account.
+	// * PAUSED -
+	// Amazon Macie started running the job but completion of the job would exceed one
+	// or more quotas for your account.
 	//
-	//     *
-	// RUNNING - For a one-time job, the job is in progress. For a recurring job, a
-	// scheduled run is in progress.
+	// * RUNNING - For a one-time job, the job is in
+	// progress. For a recurring job, a scheduled run is in progress.
 	//
-	//     * USER_PAUSED - You paused the job. If you
-	// don't resume the job within 30 days of pausing it, the job will expire and be
-	// cancelled.
+	// * USER_PAUSED -
+	// You paused the job. If you don't resume the job within 30 days of pausing it,
+	// the job will expire and be cancelled.
 	JobStatus JobStatus
 
 	// The schedule for running the job. Possible values are:
 	//
-	//     * ONE_TIME - The job
+	// * ONE_TIME - The job
 	// runs only once.
 	//
-	//     * SCHEDULED - The job runs on a daily, weekly, or monthly
+	// * SCHEDULED - The job runs on a daily, weekly, or monthly
 	// basis.
 	JobType JobType
 
@@ -1239,30 +1238,30 @@ type Range struct {
 
 	// Possible values are:
 	//
-	//     * In an Occurrences.lineRanges array, the number of
-	// lines from the beginning of the file to the end of the sensitive data.
+	// * In an Occurrences.lineRanges array, the number of lines
+	// from the beginning of the file to the end of the sensitive data.
 	//
-	//     * In
-	// an Occurrences.offsetRanges array, the number of characters from the beginning
-	// of the file to the end of the sensitive data.
+	// * In an
+	// Occurrences.offsetRanges array, the number of characters from the beginning of
+	// the file to the end of the sensitive data.
 	//
-	//     * In a Page object, the
-	// number of lines (lineRange) or characters (offsetRange) from the beginning of
-	// the page to the end of the sensitive data.
+	// * In a Page object, the number of
+	// lines (lineRange) or characters (offsetRange) from the beginning of the page to
+	// the end of the sensitive data.
 	End *int64
 
 	// Possible values are:
 	//
-	//     * In an Occurrences.lineRanges array, the number of
-	// lines from the beginning of the file to the beginning of the sensitive data.
+	// * In an Occurrences.lineRanges array, the number of lines
+	// from the beginning of the file to the beginning of the sensitive data.
 	//
+	// * In an
+	// Occurrences.offsetRanges array, the number of characters from the beginning of
+	// the file to the beginning of the sensitive data.
 	//
-	// * In an Occurrences.offsetRanges array, the number of characters from the
-	// beginning of the file to the beginning of the sensitive data.
-	//
-	//     * In a Page
-	// object, the number of lines (lineRange) or characters (offsetRange) from the
-	// beginning of the page to the beginning of the sensitive data.
+	// * In a Page object, the number
+	// of lines (lineRange) or characters (offsetRange) from the beginning of the page
+	// to the beginning of the sensitive data.
 	Start *int64
 
 	// The column number for the column that contains the data, if the file contains
@@ -1570,15 +1569,15 @@ type SimpleScopeTerm struct {
 	// The operator to use in the condition. Valid operators for each supported
 	// property (key) are:
 	//
-	//     * OBJECT_EXTENSION - EQ (equals) or NE (not equals)
+	// * OBJECT_EXTENSION - EQ (equals) or NE (not equals)
 	//
+	// *
+	// OBJECT_LAST_MODIFIED_DATE - Any operator except CONTAINS
 	//
-	// * OBJECT_LAST_MODIFIED_DATE - Any operator except CONTAINS
+	// * OBJECT_SIZE - Any
+	// operator except CONTAINS
 	//
-	//     * OBJECT_SIZE -
-	// Any operator except CONTAINS
-	//
-	//     * TAG - EQ (equals) or NE (not equals)
+	// * TAG - EQ (equals) or NE (not equals)
 	Comparator JobComparator
 
 	// The object property to use in the condition.
@@ -1589,21 +1588,21 @@ type SimpleScopeTerm struct {
 	// Macie uses an OR operator to join the values. Otherwise, this array can specify
 	// only one value. Valid values for each supported property (key) are:
 	//
-	//     *
+	// *
 	// OBJECT_EXTENSION - A string that represents the file name extension of an
 	// object. For example: doc, docx, pdf
 	//
-	//     * OBJECT_LAST_MODIFIED_DATE - The date
-	// and time (in UTC and extended ISO 8601 format) when an object was created or
-	// last changed, whichever is latest. For example: 2020-09-28T14:31:13Z
+	// * OBJECT_LAST_MODIFIED_DATE - The date and
+	// time (in UTC and extended ISO 8601 format) when an object was created or last
+	// changed, whichever is latest. For example: 2020-09-28T14:31:13Z
 	//
-	//     *
-	// OBJECT_SIZE - An integer that represents the storage size (in bytes) of an
-	// object.
+	// * OBJECT_SIZE -
+	// An integer that represents the storage size (in bytes) of an object.
 	//
-	//     * TAG - A string that represents a tag key for an object. For
-	// advanced options, use a TagScopeTerm object, instead of a SimpleScopeTerm
-	// object, to define a tag-based condition for the job.
+	// * TAG - A
+	// string that represents a tag key for an object. For advanced options, use a
+	// TagScopeTerm object, instead of a SimpleScopeTerm object, to define a tag-based
+	// condition for the job.
 	Values []*string
 }
 
@@ -1731,19 +1730,18 @@ type UsageStatisticsFilter struct {
 	// accountId, this array can specify multiple values. Otherwise, this array can
 	// specify only one value. Valid values for each supported field are:
 	//
-	//     *
-	// accountId - The unique identifier for an AWS account.
+	// * accountId
+	// - The unique identifier for an AWS account.
 	//
-	//     * freeTrialStartDate
-	// - The date and time, in UTC and extended ISO 8601 format, when the free trial
-	// started for an account.
-	//
-	//     * serviceLimit - A Boolean (true or false) value
-	// that indicates whether an account has reached its monthly quota.
-	//
-	//     * total -
-	// A string that represents the current, estimated month-to-date cost for an
+	// * freeTrialStartDate - The date and
+	// time, in UTC and extended ISO 8601 format, when the free trial started for an
 	// account.
+	//
+	// * serviceLimit - A Boolean (true or false) value that indicates
+	// whether an account has reached its monthly quota.
+	//
+	// * total - A string that
+	// represents the current, estimated month-to-date cost for an account.
 	Values []*string
 }
 

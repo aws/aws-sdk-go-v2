@@ -47,10 +47,10 @@ type ModifyCacheParameterGroupInput struct {
 
 // Represents the output of one of the following operations:
 //
-//     *
+// *
 // ModifyCacheParameterGroup
 //
-//     * ResetCacheParameterGroup
+// * ResetCacheParameterGroup
 type ModifyCacheParameterGroupOutput struct {
 
 	// The name of the cache parameter group.

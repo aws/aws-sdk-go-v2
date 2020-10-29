@@ -16,13 +16,13 @@ import (
 // communication. The set is available for 1 hour after it's created. The
 // expiryTime returned in the response is when the set expires.
 //
-//     * You must
-// have a Business or Enterprise support plan to use the AWS Support API.
+// * You must have a
+// Business or Enterprise support plan to use the AWS Support API.
 //
-//     * If
-// you call the AWS Support API from an account that does not have a Business or
-// Enterprise support plan, the SubscriptionRequiredException error message
-// appears. For information about changing your support plan, see AWS Support
+// * If you call
+// the AWS Support API from an account that does not have a Business or Enterprise
+// support plan, the SubscriptionRequiredException error message appears. For
+// information about changing your support plan, see AWS Support
 // (http://aws.amazon.com/premiumsupport/).
 func (c *Client) AddAttachmentsToSet(ctx context.Context, params *AddAttachmentsToSetInput, optFns ...func(*Options)) (*AddAttachmentsToSetOutput, error) {
 	if params == nil {

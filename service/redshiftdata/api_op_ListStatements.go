@@ -50,27 +50,26 @@ type ListStatementsInput struct {
 	// you provide.
 	StatementName *string
 
-	// The status of the SQL statement to list. Status values are defined as follows:
-	//
+	// The status of the SQL statement to list. Status values are defined as
+	// follows:
 	//
 	// * ABORTED - The query run was stopped by the user.
 	//
-	//     * ALL - A status value
-	// that includes all query statuses. This value can be used to filter results.
-	//
+	// * ALL - A status
+	// value that includes all query statuses. This value can be used to filter
+	// results.
 	//
 	// * FAILED - The query run failed.
 	//
-	//     * FINISHED - The query has finished
+	// * FINISHED - The query has finished
 	// running.
 	//
-	//     * PICKED - The query has been chosen to be run.
+	// * PICKED - The query has been chosen to be run.
 	//
-	//     * STARTED -
-	// The query run has started.
+	// * STARTED - The query
+	// run has started.
 	//
-	//     * SUBMITTED - The query was submitted, but not
-	// yet processed.
+	// * SUBMITTED - The query was submitted, but not yet processed.
 	Status types.StatusString
 }
 

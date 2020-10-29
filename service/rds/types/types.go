@@ -8,90 +8,90 @@ import (
 
 // Describes a quota for an AWS account. The following are account quotas:
 //
-//     *
+// *
 // AllocatedStorage - The total allocated storage per account, in GiB. The used
 // value is the total allocated storage in the account, in GiB.
 //
-//     *
+// *
 // AuthorizationsPerDBSecurityGroup - The number of ingress rules per DB security
 // group. The used value is the highest number of ingress rules in a DB security
 // group in the account. Other DB security groups in the account might have a lower
 // number of ingress rules.
 //
-//     * CustomEndpointsPerDBCluster - The number of
-// custom endpoints per DB cluster. The used value is the highest number of custom
+// * CustomEndpointsPerDBCluster - The number of custom
+// endpoints per DB cluster. The used value is the highest number of custom
 // endpoints in a DB clusters in the account. Other DB clusters in the account
 // might have a lower number of custom endpoints.
 //
-//     * DBClusterParameterGroups -
-// The number of DB cluster parameter groups per account, excluding default
-// parameter groups. The used value is the count of nondefault DB cluster parameter
-// groups in the account.
+// * DBClusterParameterGroups - The
+// number of DB cluster parameter groups per account, excluding default parameter
+// groups. The used value is the count of nondefault DB cluster parameter groups in
+// the account.
 //
-//     * DBClusterRoles - The number of associated AWS
-// Identity and Access Management (IAM) roles per DB cluster. The used value is the
-// highest number of associated IAM roles for a DB cluster in the account. Other DB
+// * DBClusterRoles - The number of associated AWS Identity and
+// Access Management (IAM) roles per DB cluster. The used value is the highest
+// number of associated IAM roles for a DB cluster in the account. Other DB
 // clusters in the account might have a lower number of associated IAM roles.
 //
+// *
+// DBClusters - The number of DB clusters per account. The used value is the count
+// of DB clusters in the account.
 //
-// * DBClusters - The number of DB clusters per account. The used value is the
-// count of DB clusters in the account.
+// * DBInstanceRoles - The number of associated IAM
+// roles per DB instance. The used value is the highest number of associated IAM
+// roles for a DB instance in the account. Other DB instances in the account might
+// have a lower number of associated IAM roles.
 //
-//     * DBInstanceRoles - The number of
-// associated IAM roles per DB instance. The used value is the highest number of
-// associated IAM roles for a DB instance in the account. Other DB instances in the
-// account might have a lower number of associated IAM roles.
+// * DBInstances - The number of DB
+// instances per account. The used value is the count of the DB instances in the
+// account. Amazon RDS DB instances, Amazon Aurora DB instances, Amazon Neptune
+// instances, and Amazon DocumentDB instances apply to this quota.
 //
-//     * DBInstances -
-// The number of DB instances per account. The used value is the count of the DB
-// instances in the account. Amazon RDS DB instances, Amazon Aurora DB instances,
-// Amazon Neptune instances, and Amazon DocumentDB instances apply to this quota.
-//
-//
-// * DBParameterGroups - The number of DB parameter groups per account, excluding
+// *
+// DBParameterGroups - The number of DB parameter groups per account, excluding
 // default parameter groups. The used value is the count of nondefault DB parameter
 // groups in the account.
 //
-//     * DBSecurityGroups - The number of DB security
-// groups (not VPC security groups) per account, excluding the default security
-// group. The used value is the count of nondefault DB security groups in the
-// account.
+// * DBSecurityGroups - The number of DB security groups
+// (not VPC security groups) per account, excluding the default security group. The
+// used value is the count of nondefault DB security groups in the account.
 //
-//     * DBSubnetGroups - The number of DB subnet groups per account. The
-// used value is the count of the DB subnet groups in the account.
+// *
+// DBSubnetGroups - The number of DB subnet groups per account. The used value is
+// the count of the DB subnet groups in the account.
 //
-//     *
-// EventSubscriptions - The number of event subscriptions per account. The used
-// value is the count of the event subscriptions in the account.
+// * EventSubscriptions - The
+// number of event subscriptions per account. The used value is the count of the
+// event subscriptions in the account.
 //
-//     *
-// ManualClusterSnapshots - The number of manual DB cluster snapshots per account.
-// The used value is the count of the manual DB cluster snapshots in the account.
+// * ManualClusterSnapshots - The number of
+// manual DB cluster snapshots per account. The used value is the count of the
+// manual DB cluster snapshots in the account.
 //
+// * ManualSnapshots - The number of
+// manual DB instance snapshots per account. The used value is the count of the
+// manual DB instance snapshots in the account.
 //
-// * ManualSnapshots - The number of manual DB instance snapshots per account. The
-// used value is the count of the manual DB instance snapshots in the account.
+// * OptionGroups - The number of DB
+// option groups per account, excluding default option groups. The used value is
+// the count of nondefault DB option groups in the account.
 //
+// *
+// ReadReplicasPerMaster - The number of read replicas per DB instance. The used
+// value is the highest number of read replicas for a DB instance in the account.
+// Other DB instances in the account might have a lower number of read replicas.
 //
-// * OptionGroups - The number of DB option groups per account, excluding default
-// option groups. The used value is the count of nondefault DB option groups in the
-// account.
+// *
+// ReservedDBInstances - The number of reserved DB instances per account. The used
+// value is the count of the active reserved DB instances in the account.
 //
-//     * ReadReplicasPerMaster - The number of read replicas per DB
-// instance. The used value is the highest number of read replicas for a DB
-// instance in the account. Other DB instances in the account might have a lower
-// number of read replicas.
+// *
+// SubnetsPerDBSubnetGroup - The number of subnets per DB subnet group. The used
+// value is highest number of subnets for a DB subnet group in the account. Other
+// DB subnet groups in the account might have a lower number of subnets.
 //
-//     * ReservedDBInstances - The number of reserved DB
-// instances per account. The used value is the count of the active reserved DB
-// instances in the account.
-//
-//     * SubnetsPerDBSubnetGroup - The number of subnets
-// per DB subnet group. The used value is highest number of subnets for a DB subnet
-// group in the account. Other DB subnet groups in the account might have a lower
-// number of subnets.
-//
-// For more information, see Quotas for Amazon RDS
+// For more
+// information, see Quotas for Amazon RDS
 // (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html) in the
 // Amazon RDS User Guide and Quotas for Amazon Aurora
 // (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_Limits.html)
@@ -552,18 +552,17 @@ type DBClusterBacktrack struct {
 	// The status of the backtrack. This property returns one of the following
 	// values:
 	//
-	//     * applying - The backtrack is currently being applied to or rolled
-	// back from the DB cluster.
+	// * applying - The backtrack is currently being applied to or rolled back
+	// from the DB cluster.
 	//
-	//     * completed - The backtrack has successfully been
-	// applied to or rolled back from the DB cluster.
+	// * completed - The backtrack has successfully been applied
+	// to or rolled back from the DB cluster.
 	//
-	//     * failed - An error occurred
-	// while the backtrack was applied to or rolled back from the DB cluster.
+	// * failed - An error occurred while the
+	// backtrack was applied to or rolled back from the DB cluster.
 	//
-	//     *
-	// pending - The backtrack is currently pending application to or rollback from the
-	// DB cluster.
+	// * pending - The
+	// backtrack is currently pending application to or rollback from the DB cluster.
 	Status *string
 }
 
@@ -571,17 +570,17 @@ type DBClusterBacktrack struct {
 // Aurora DB cluster. This data type is used as a response element in the following
 // actions:
 //
-//     * CreateDBClusterEndpoint
+// * CreateDBClusterEndpoint
 //
-//     * DescribeDBClusterEndpoints
+// * DescribeDBClusterEndpoints
 //
-//     *
+// *
 // ModifyDBClusterEndpoint
 //
-//     * DeleteDBClusterEndpoint
+// * DeleteDBClusterEndpoint
 //
-// For the data structure
-// that represents Amazon RDS DB instance endpoints, see Endpoint.
+// For the data structure that
+// represents Amazon RDS DB instance endpoints, see Endpoint.
 type DBClusterEndpoint struct {
 
 	// The type associated with a custom endpoint. One of: READER, WRITER, ANY.
@@ -688,16 +687,16 @@ type DBClusterRole struct {
 	// Describes the state of association between the IAM role and the DB cluster. The
 	// Status property returns one of the following values:
 	//
-	//     * ACTIVE - the IAM
-	// role ARN is associated with the DB cluster and can be used to access other AWS
+	// * ACTIVE - the IAM role
+	// ARN is associated with the DB cluster and can be used to access other AWS
 	// services on your behalf.
 	//
-	//     * PENDING - the IAM role ARN is being associated
-	// with the DB cluster.
+	// * PENDING - the IAM role ARN is being associated with
+	// the DB cluster.
 	//
-	//     * INVALID - the IAM role ARN is associated with the DB
-	// cluster, but the DB cluster is unable to assume the IAM role in order to access
-	// other AWS services on your behalf.
+	// * INVALID - the IAM role ARN is associated with the DB cluster,
+	// but the DB cluster is unable to assume the IAM role in order to access other AWS
+	// services on your behalf.
 	Status *string
 }
 
@@ -854,7 +853,7 @@ type DBEngineVersion struct {
 	// A list of features supported by the DB engine. Supported feature names include
 	// the following.
 	//
-	//     * s3Import
+	// * s3Import
 	SupportedFeatureNames []*string
 
 	// A list of the character sets supported by the Oracle DB engine for the
@@ -999,14 +998,13 @@ type DBInstance struct {
 	// accounts is enabled, and otherwise false. IAM database authentication can be
 	// enabled for the following database engines
 	//
-	//     * For MySQL 5.6, minor version
+	// * For MySQL 5.6, minor version
 	// 5.6.34 or higher
 	//
-	//     * For MySQL 5.7, minor version 5.7.16 or higher
+	// * For MySQL 5.7, minor version 5.7.16 or higher
 	//
-	//     *
-	// Aurora 5.6 or higher. To enable IAM database authentication for Aurora, see
-	// DBCluster Type.
+	// * Aurora 5.6
+	// or higher. To enable IAM database authentication for Aurora, see DBCluster Type.
 	IAMDatabaseAuthenticationEnabled *bool
 
 	// Provides the date and time the DB instance was created.
@@ -1227,14 +1225,14 @@ type DBInstanceAutomatedBackup struct {
 
 	// Provides a list of status information for an automated backup:
 	//
-	//     * active -
+	// * active -
 	// automated backups for current instances
 	//
-	//     * retained - automated backups for
+	// * retained - automated backups for
 	// deleted instances
 	//
-	//     * creating - automated backups that are waiting for the
-	// first automated snapshot to be available.
+	// * creating - automated backups that are waiting for the first
+	// automated snapshot to be available.
 	Status *string
 
 	// Specifies the storage type associated with the automated backup.
@@ -1268,15 +1266,15 @@ type DBInstanceRole struct {
 	// Describes the state of association between the IAM role and the DB instance. The
 	// Status property returns one of the following values:
 	//
-	//     * ACTIVE - the IAM
-	// role ARN is associated with the DB instance and can be used to access other AWS
+	// * ACTIVE - the IAM role
+	// ARN is associated with the DB instance and can be used to access other AWS
 	// services on your behalf.
 	//
-	//     * PENDING - the IAM role ARN is being associated
-	// with the DB instance.
+	// * PENDING - the IAM role ARN is being associated with
+	// the DB instance.
 	//
-	//     * INVALID - the IAM role ARN is associated with the
-	// DB instance, but the DB instance is unable to assume the IAM role in order to
+	// * INVALID - the IAM role ARN is associated with the DB
+	// instance, but the DB instance is unable to assume the IAM role in order to
 	// access other AWS services on your behalf.
 	Status *string
 }
@@ -1322,19 +1320,19 @@ type DBParameterGroup struct {
 // The status of the DB parameter group. This data type is used as a response
 // element in the following actions:
 //
-//     * CreateDBInstance
+// * CreateDBInstance
 //
-//     *
+// *
 // CreateDBInstanceReadReplica
 //
-//     * DeleteDBInstance
+// * DeleteDBInstance
 //
-//     * ModifyDBInstance
+// * ModifyDBInstance
 //
+// *
+// RebootDBInstance
 //
-// * RebootDBInstance
-//
-//     * RestoreDBInstanceFromDBSnapshot
+// * RestoreDBInstanceFromDBSnapshot
 type DBParameterGroupStatus struct {
 
 	// The name of the DB parameter group.
@@ -1505,15 +1503,15 @@ type DBSecurityGroup struct {
 
 // This data type is used as a response element in the following actions:
 //
-//     *
+// *
 // ModifyDBInstance
 //
-//     * RebootDBInstance
+// * RebootDBInstance
 //
-//     *
-// RestoreDBInstanceFromDBSnapshot
+// * RestoreDBInstanceFromDBSnapshot
 //
-//     * RestoreDBInstanceToPointInTime
+// *
+// RestoreDBInstanceToPointInTime
 type DBSecurityGroupMembership struct {
 
 	// The name of the DB security group.
@@ -1728,12 +1726,12 @@ type DoubleRange struct {
 
 // This data type is used as a response element in the following actions:
 //
-//     *
+// *
 // AuthorizeDBSecurityGroupIngress
 //
-//     * DescribeDBSecurityGroups
+// * DescribeDBSecurityGroups
 //
-//     *
+// *
 // RevokeDBSecurityGroupIngress
 type EC2SecurityGroup struct {
 
@@ -1756,15 +1754,15 @@ type EC2SecurityGroup struct {
 // DB instance. This data type is used as a response element in the following
 // actions:
 //
-//     * CreateDBInstance
+// * CreateDBInstance
 //
-//     * DescribeDBInstances
+// * DescribeDBInstances
 //
-//     *
-// DeleteDBInstance
+// * DeleteDBInstance
 //
-// For the data structure that represents Amazon Aurora DB
-// cluster endpoints, see DBClusterEndpoint.
+// For the
+// data structure that represents Amazon Aurora DB cluster endpoints, see
+// DBClusterEndpoint.
 type Endpoint struct {
 
 	// Specifies the DNS address of the DB instance.
@@ -1874,20 +1872,20 @@ type ExportTask struct {
 
 	// The data exported from the snapshot. Valid values are the following:
 	//
-	//     *
-	// database - Export all the data from a specified database.
+	// * database
+	// - Export all the data from a specified database.
 	//
-	//     * database.table
-	// table-name - Export a table of the snapshot. This format is valid only for RDS
-	// for MySQL, RDS for MariaDB, and Aurora MySQL.
+	// * database.table table-name -
+	// Export a table of the snapshot. This format is valid only for RDS for MySQL, RDS
+	// for MariaDB, and Aurora MySQL.
 	//
-	//     * database.schema schema-name
-	// - Export a database schema of the snapshot. This format is valid only for RDS
-	// for PostgreSQL and Aurora PostgreSQL.
-	//
-	//     * database.schema.table table-name -
-	// Export a table of the database schema. This format is valid only for RDS for
+	// * database.schema schema-name - Export a
+	// database schema of the snapshot. This format is valid only for RDS for
 	// PostgreSQL and Aurora PostgreSQL.
+	//
+	// * database.schema.table table-name - Export a
+	// table of the database schema. This format is valid only for RDS for PostgreSQL
+	// and Aurora PostgreSQL.
 	ExportOnly []*string
 
 	// A unique identifier for the snapshot export task. This ID isn't an identifier
@@ -1946,18 +1944,17 @@ type ExportTask struct {
 // operation are documented with the describe operation. Currently, wildcards are
 // not supported in filters. The following actions can be filtered:
 //
-//     *
+// *
 // DescribeDBClusterBacktracks
 //
-//     * DescribeDBClusterEndpoints
+// * DescribeDBClusterEndpoints
 //
-//     *
+// *
 // DescribeDBClusters
 //
-//     * DescribeDBInstances
+// * DescribeDBInstances
 //
-//     *
-// DescribePendingMaintenanceActions
+// * DescribePendingMaintenanceActions
 type Filter struct {
 
 	// The name of the filter. Filter names are case-sensitive.
@@ -2587,17 +2584,17 @@ type PendingModifiedValues struct {
 // parameter. You can set the processor features of the DB instance class for a DB
 // instance when you call one of the following actions:
 //
-//     * CreateDBInstance
+// * CreateDBInstance
 //
+// *
+// ModifyDBInstance
 //
-// * ModifyDBInstance
+// * RestoreDBInstanceFromDBSnapshot
 //
-//     * RestoreDBInstanceFromDBSnapshot
-//
-//     *
+// *
 // RestoreDBInstanceFromS3
 //
-//     * RestoreDBInstanceToPointInTime
+// * RestoreDBInstanceToPointInTime
 //
 // You can view the
 // valid processor values for a particular instance class by calling the
@@ -2605,24 +2602,24 @@ type PendingModifiedValues struct {
 // the DBInstanceClass parameter. In addition, you can use the following actions
 // for DB instance class processor information:
 //
-//     * DescribeDBInstances
+// * DescribeDBInstances
 //
-//     *
+// *
 // DescribeDBSnapshots
 //
-//     * DescribeValidDBInstanceModifications
+// * DescribeValidDBInstanceModifications
 //
 // If you call
 // DescribeDBInstances, ProcessorFeature returns non-null values only if the
 // following conditions are met:
 //
-//     * You are accessing an Oracle DB instance.
+// * You are accessing an Oracle DB instance.
 //
-//
-// * Your Oracle DB instance class supports configuring the number of CPU cores and
+// *
+// Your Oracle DB instance class supports configuring the number of CPU cores and
 // threads per core.
 //
-//     * The current number CPU cores and threads is set to a
+// * The current number CPU cores and threads is set to a
 // non-default value.
 //
 // For more information, see Configuring the Processor of the

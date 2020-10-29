@@ -16,14 +16,14 @@ import (
 // integrated with Security Hub. When you use the EnableSecurityHub operation to
 // enable Security Hub, you also automatically enable the following standards.
 //
+// *
+// CIS AWS Foundations
 //
-// * CIS AWS Foundations
+// * AWS Foundational Security Best Practices
 //
-//     * AWS Foundational Security Best Practices
-//
-// You do
-// not enable the Payment Card Industry Data Security Standard (PCI DSS) standard.
-// To not enable the automatically enabled standards, set EnableDefaultStandards to
+// You do not
+// enable the Payment Card Industry Data Security Standard (PCI DSS) standard. To
+// not enable the automatically enabled standards, set EnableDefaultStandards to
 // false. After you enable Security Hub, to enable a standard, use the
 // BatchEnableStandards operation. To disable a standard, use the
 // BatchDisableStandards operation. To learn more, see Setting Up AWS Security Hub

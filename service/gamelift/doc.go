@@ -12,7 +12,7 @@
 // Amazon GameLift Developer Guide
 // (http://docs.aws.amazon.com/gamelift/latest/developerguide/).
 //
-//     * Managed
+// * Managed
 // GameLift -- GameLift offers a fully managed service to set up and maintain
 // computing machines for hosting, manage game session and player session life
 // cycle, and handle security, storage, and performance tracking. You can use
@@ -20,12 +20,12 @@
 // configure your game session management to minimize player latency, or add
 // FlexMatch for matchmaking.
 //
-//     * Managed GameLift with Realtime Servers – With
+// * Managed GameLift with Realtime Servers – With
 // GameLift Realtime Servers, you can quickly configure and set up game servers for
 // your game. Realtime Servers provides a game server framework with core Amazon
 // GameLift infrastructure already built in.
 //
-//     * GameLift FleetIQ – Use GameLift
+// * GameLift FleetIQ – Use GameLift
 // FleetIQ as a standalone feature while managing your own EC2 instances and Auto
 // Scaling groups for game hosting. GameLift FleetIQ provides optimizations that
 // make low-cost Spot Instances viable for game hosting.
@@ -35,11 +35,11 @@
 // You can find links to language-specific SDK guides and the AWS CLI reference
 // with each operation and data type topic. Useful links:
 //
-//     * GameLift API
+// * GameLift API
 // operations listed by tasks
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html)
 //
-//
-// * GameLift tools and resources
+// *
+// GameLift tools and resources
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-components.html)
 package gamelift

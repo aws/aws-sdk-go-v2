@@ -6,8 +6,8 @@ type GetEntitlementFilterName string
 
 // Enum values for GetEntitlementFilterName
 const (
-	GetEntitlementFilterNameCustomer_identifier GetEntitlementFilterName = "CUSTOMER_IDENTIFIER"
-	GetEntitlementFilterNameDimension           GetEntitlementFilterName = "DIMENSION"
+	GetEntitlementFilterNameCustomerIdentifier GetEntitlementFilterName = "CUSTOMER_IDENTIFIER"
+	GetEntitlementFilterNameDimension          GetEntitlementFilterName = "DIMENSION"
 )
 
 // Values returns all known values for GetEntitlementFilterName. Note that this can

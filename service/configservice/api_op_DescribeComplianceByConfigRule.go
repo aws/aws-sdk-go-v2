@@ -18,19 +18,19 @@ import (
 // has no current evaluation results for the rule, it returns INSUFFICIENT_DATA.
 // This result might indicate one of the following conditions:
 //
-//     * AWS Config
-// has never invoked an evaluation for the rule. To check whether it has, use the
+// * AWS Config has
+// never invoked an evaluation for the rule. To check whether it has, use the
 // DescribeConfigRuleEvaluationStatus action to get the
 // LastSuccessfulInvocationTime and LastFailedInvocationTime.
 //
-//     * The rule's AWS
+// * The rule's AWS
 // Lambda function is failing to send evaluation results to AWS Config. Verify that
 // the role you assigned to your configuration recorder includes the
 // config:PutEvaluations permission. If the rule is a custom rule, verify that the
 // AWS Lambda execution role includes the config:PutEvaluations permission.
 //
-//     *
-// The rule's AWS Lambda function has returned NOT_APPLICABLE for all evaluation
+// * The
+// rule's AWS Lambda function has returned NOT_APPLICABLE for all evaluation
 // results. This can occur if the resources were deleted or removed from the rule's
 // scope.
 func (c *Client) DescribeComplianceByConfigRule(ctx context.Context, params *DescribeComplianceByConfigRuleInput, optFns ...func(*Options)) (*DescribeComplianceByConfigRuleOutput, error) {

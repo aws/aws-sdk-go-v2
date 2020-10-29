@@ -14,12 +14,12 @@ import (
 // stamp. This makes the secret accessible to query once again. Minimum permissions
 // To run this command, you must have the following permissions:
 //
-//     *
+// *
 // secretsmanager:RestoreSecret
 //
 // Related operations
 //
-//     * To delete a secret, use
+// * To delete a secret, use
 // DeleteSecret.
 func (c *Client) RestoreSecret(ctx context.Context, params *RestoreSecretInput, optFns ...func(*Options)) (*RestoreSecretOutput, error) {
 	if params == nil {

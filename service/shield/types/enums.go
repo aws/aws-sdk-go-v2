@@ -24,14 +24,14 @@ type AttackPropertyIdentifier string
 
 // Enum values for AttackPropertyIdentifier
 const (
-	AttackPropertyIdentifierDestination_url              AttackPropertyIdentifier = "DESTINATION_URL"
-	AttackPropertyIdentifierReferrer                     AttackPropertyIdentifier = "REFERRER"
-	AttackPropertyIdentifierSource_asn                   AttackPropertyIdentifier = "SOURCE_ASN"
-	AttackPropertyIdentifierSource_country               AttackPropertyIdentifier = "SOURCE_COUNTRY"
-	AttackPropertyIdentifierSource_ip_address            AttackPropertyIdentifier = "SOURCE_IP_ADDRESS"
-	AttackPropertyIdentifierSource_user_agent            AttackPropertyIdentifier = "SOURCE_USER_AGENT"
-	AttackPropertyIdentifierWordpress_pingback_reflector AttackPropertyIdentifier = "WORDPRESS_PINGBACK_REFLECTOR"
-	AttackPropertyIdentifierWordpress_pingback_source    AttackPropertyIdentifier = "WORDPRESS_PINGBACK_SOURCE"
+	AttackPropertyIdentifierDestinationUrl             AttackPropertyIdentifier = "DESTINATION_URL"
+	AttackPropertyIdentifierReferrer                   AttackPropertyIdentifier = "REFERRER"
+	AttackPropertyIdentifierSourceAsn                  AttackPropertyIdentifier = "SOURCE_ASN"
+	AttackPropertyIdentifierSourceCountry              AttackPropertyIdentifier = "SOURCE_COUNTRY"
+	AttackPropertyIdentifierSourceIpAddress            AttackPropertyIdentifier = "SOURCE_IP_ADDRESS"
+	AttackPropertyIdentifierSourceUserAgent            AttackPropertyIdentifier = "SOURCE_USER_AGENT"
+	AttackPropertyIdentifierWordpressPingbackReflector AttackPropertyIdentifier = "WORDPRESS_PINGBACK_REFLECTOR"
+	AttackPropertyIdentifierWordpressPingbackSource    AttackPropertyIdentifier = "WORDPRESS_PINGBACK_SOURCE"
 )
 
 // Values returns all known values for AttackPropertyIdentifier. Note that this can

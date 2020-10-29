@@ -25,16 +25,16 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/analytics-storage-class.html)
 // in the Amazon Simple Storage Service Developer Guide. Related Resources
 //
-//     *
+// *
 // DeleteBucketAnalyticsConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketAnalyticsConfiguration.html)
 //
-//
-// * ListBucketAnalyticsConfigurations
+// *
+// ListBucketAnalyticsConfigurations
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketAnalyticsConfigurations.html)
 //
-//
-// * PutBucketAnalyticsConfiguration
+// *
+// PutBucketAnalyticsConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketAnalyticsConfiguration.html)
 func (c *Client) GetBucketAnalyticsConfiguration(ctx context.Context, params *GetBucketAnalyticsConfigurationInput, optFns ...func(*Options)) (*GetBucketAnalyticsConfigurationOutput, error) {
 	if params == nil {

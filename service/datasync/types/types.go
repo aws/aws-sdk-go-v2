@@ -106,15 +106,15 @@ type NfsMountOptions struct {
 	// automatically selects a version based on negotiation with the NFS server. You
 	// can specify the following NFS versions:
 	//
-	//     * NFSv3
+	// * NFSv3
 	// (https://tools.ietf.org/html/rfc1813) - stateless protocol version that allows
 	// for asynchronous writes on the server.
 	//
-	//     * NFSv4.0
+	// * NFSv4.0
 	// (https://tools.ietf.org/html/rfc3530) - stateful, firewall-friendly protocol
 	// version that supports delegations and pseudo filesystems.
 	//
-	//     * NFSv4.1
+	// * NFSv4.1
 	// (https://tools.ietf.org/html/rfc5661) - stateful protocol version that supports
 	// sessions, directory delegations, and parallel data processing. Version 4.1 also
 	// includes all features available in version 4.0.

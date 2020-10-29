@@ -33,7 +33,7 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html) in
 // the Amazon Simple Storage Service Developer Guide. Related Resources
 //
-//     *
+// *
 // PutBucketAccelerateConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketAccelerateConfiguration.html)
 func (c *Client) GetBucketAccelerateConfiguration(ctx context.Context, params *GetBucketAccelerateConfigurationInput, optFns ...func(*Options)) (*GetBucketAccelerateConfigurationOutput, error) {

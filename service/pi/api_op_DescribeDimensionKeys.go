@@ -58,10 +58,10 @@ type DescribeDimensionKeysInput struct {
 	// The name of a Performance Insights metric to be measured. Valid values for
 	// Metric are:
 	//
-	//     * db.load.avg - a scaled representation of the number of active
+	// * db.load.avg - a scaled representation of the number of active
 	// sessions for the database engine.
 	//
-	//     * db.sampledload.avg - the raw number of
+	// * db.sampledload.avg - the raw number of
 	// active sessions for the database engine.
 	//
 	// This member is required.
@@ -83,12 +83,11 @@ type DescribeDimensionKeysInput struct {
 
 	// One or more filters to apply in the request. Restrictions:
 	//
-	//     * Any number of
+	// * Any number of
 	// filters by the same dimension, as specified in the GroupBy or Partition
 	// parameters.
 	//
-	//     * A single filter for any other dimension in this dimension
-	// group.
+	// * A single filter for any other dimension in this dimension group.
 	Filter map[string]*string
 
 	// The maximum number of items to return in the response. If more items exist than
@@ -109,20 +108,20 @@ type DescribeDimensionKeysInput struct {
 	// Insights. A period can be as short as one second, or as long as one day (86400
 	// seconds). Valid values are:
 	//
-	//     * 1 (one second)
+	// * 1 (one second)
 	//
-	//     * 60 (one minute)
+	// * 60 (one minute)
 	//
-	//     *
-	// 300 (five minutes)
+	// * 300 (five
+	// minutes)
 	//
-	//     * 3600 (one hour)
+	// * 3600 (one hour)
 	//
-	//     * 86400 (twenty-four hours)
+	// * 86400 (twenty-four hours)
 	//
-	// If
-	// you don't specify PeriodInSeconds, then Performance Insights will choose a value
-	// for you, with a goal of returning roughly 100-200 data points in the response.
+	// If you don't specify
+	// PeriodInSeconds, then Performance Insights will choose a value for you, with a
+	// goal of returning roughly 100-200 data points in the response.
 	PeriodInSeconds *int32
 }
 

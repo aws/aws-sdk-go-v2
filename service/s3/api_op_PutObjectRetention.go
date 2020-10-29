@@ -14,7 +14,7 @@ import (
 // Places an Object Retention configuration on an object. This action is not
 // supported by Amazon S3 on Outposts. Related Resources
 //
-//     * Locking Objects
+// * Locking Objects
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html)
 func (c *Client) PutObjectRetention(ctx context.Context, params *PutObjectRetentionInput, optFns ...func(*Options)) (*PutObjectRetentionOutput, error) {
 	if params == nil {

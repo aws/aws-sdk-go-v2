@@ -35,7 +35,7 @@ type ModifyDBInstanceInput struct {
 	// The DB instance identifier. This value is stored as a lowercase string.
 	// Constraints:
 	//
-	//     * Must match the identifier of an existing DBInstance.
+	// * Must match the identifier of an existing DBInstance.
 	//
 	// This member is required.
 	DBInstanceIdentifier *string
@@ -108,7 +108,7 @@ type ModifyDBInstanceInput struct {
 	// setting doesn't result in an outage and the change is asynchronously applied as
 	// soon as possible. Constraints:
 	//
-	//     * If supplied, must match existing
+	// * If supplied, must match existing
 	// DBSecurityGroups.
 	DBSecurityGroups []*string
 
@@ -184,13 +184,13 @@ type ModifyDBInstanceInput struct {
 	// maintenance window if Apply Immediately to false. This value is stored as a
 	// lowercase string. Constraints:
 	//
-	//     * Must contain from 1 to 63 letters,
-	// numbers, or hyphens.
+	// * Must contain from 1 to 63 letters, numbers, or
+	// hyphens.
 	//
-	//     * The first character must be a letter.
+	// * The first character must be a letter.
 	//
-	//     * Cannot
-	// end with a hyphen or contain two consecutive hyphens.
+	// * Cannot end with a hyphen or
+	// contain two consecutive hyphens.
 	//
 	// Example: mydbinstance
 	NewDBInstanceIdentifier *string
@@ -206,15 +206,15 @@ type ModifyDBInstanceInput struct {
 	// backups is managed by the DB cluster. For more information, see ModifyDBCluster.
 	// Constraints:
 	//
-	//     * Must be in the format hh24:mi-hh24:mi
+	// * Must be in the format hh24:mi-hh24:mi
 	//
-	//     * Must be in
-	// Universal Time Coordinated (UTC)
+	// * Must be in Universal
+	// Time Coordinated (UTC)
 	//
-	//     * Must not conflict with the preferred
-	// maintenance window
+	// * Must not conflict with the preferred maintenance
+	// window
 	//
-	//     * Must be at least 30 minutes
+	// * Must be at least 30 minutes
 	PreferredBackupWindow *string
 
 	// The weekly time range (in UTC) during which system maintenance can occur, which
@@ -252,7 +252,7 @@ type ModifyDBInstanceInput struct {
 	// list of EC2 VPC security groups is managed by the DB cluster. For more
 	// information, see ModifyDBCluster. Constraints:
 	//
-	//     * If supplied, must match
+	// * If supplied, must match
 	// existing VpcSecurityGroupIds.
 	VpcSecurityGroupIds []*string
 }

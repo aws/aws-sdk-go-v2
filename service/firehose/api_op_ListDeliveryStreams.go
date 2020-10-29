@@ -38,10 +38,10 @@ type ListDeliveryStreamsInput struct {
 
 	// The delivery stream type. This can be one of the following values:
 	//
-	//     *
-	// DirectPut: Provider applications access the delivery stream directly.
+	// * DirectPut:
+	// Provider applications access the delivery stream directly.
 	//
-	//     *
+	// *
 	// KinesisStreamAsSource: The delivery stream uses a Kinesis data stream as a
 	// source.
 	//

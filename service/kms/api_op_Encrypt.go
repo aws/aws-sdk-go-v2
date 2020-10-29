@@ -14,24 +14,24 @@ import (
 // Encrypts plaintext into ciphertext by using a customer master key (CMK). The
 // Encrypt operation has two primary use cases:
 //
-//     * You can encrypt small
-// amounts of arbitrary data, such as a personal identifier or database password,
-// or other sensitive information.
+// * You can encrypt small amounts of
+// arbitrary data, such as a personal identifier or database password, or other
+// sensitive information.
 //
-//     * You can use the Encrypt operation to move
-// encrypted data from one AWS Region to another. For example, in Region A,
-// generate a data key and use the plaintext key to encrypt your data. Then, in
-// Region A, use the Encrypt operation to encrypt the plaintext data key under a
-// CMK in Region B. Now, you can move the encrypted data and the encrypted data key
-// to Region B. When necessary, you can decrypt the encrypted data key and the
-// encrypted data entirely within in Region B.
+// * You can use the Encrypt operation to move encrypted
+// data from one AWS Region to another. For example, in Region A, generate a data
+// key and use the plaintext key to encrypt your data. Then, in Region A, use the
+// Encrypt operation to encrypt the plaintext data key under a CMK in Region B.
+// Now, you can move the encrypted data and the encrypted data key to Region B.
+// When necessary, you can decrypt the encrypted data key and the encrypted data
+// entirely within in Region B.
 //
-// You don't need to use the Encrypt
-// operation to encrypt a data key. The GenerateDataKey and GenerateDataKeyPair
-// operations return a plaintext data key and an encrypted copy of that data key.
-// When you encrypt data, you must specify a symmetric or asymmetric CMK to use in
-// the encryption operation. The CMK must have a KeyUsage value of ENCRYPT_DECRYPT.
-// To find the KeyUsage of a CMK, use the DescribeKey operation. If you use a
+// You don't need to use the Encrypt operation to
+// encrypt a data key. The GenerateDataKey and GenerateDataKeyPair operations
+// return a plaintext data key and an encrypted copy of that data key. When you
+// encrypt data, you must specify a symmetric or asymmetric CMK to use in the
+// encryption operation. The CMK must have a KeyUsage value of ENCRYPT_DECRYPT. To
+// find the KeyUsage of a CMK, use the DescribeKey operation. If you use a
 // symmetric CMK, you can use an encryption context to add additional security to
 // your encryption operation. If you specify an EncryptionContext when encrypting
 // data, you must specify the same encryption context (a case-sensitive exact
@@ -52,35 +52,34 @@ import (
 // of the data that you can encrypt varies with the type of CMK and the encryption
 // algorithm that you choose.
 //
-//     * Symmetric CMKs
+// * Symmetric CMKs
 //
-//         * SYMMETRIC_DEFAULT:
-// 4096 bytes
+// * SYMMETRIC_DEFAULT: 4096 bytes
 //
-//     * RSA_2048
+// *
+// RSA_2048
 //
-//         * RSAES_OAEP_SHA_1: 214 bytes
+// * RSAES_OAEP_SHA_1: 214 bytes
 //
-//         *
-// RSAES_OAEP_SHA_256: 190 bytes
+// * RSAES_OAEP_SHA_256: 190 bytes
 //
-//     * RSA_3072
+// *
+// RSA_3072
 //
-//         * RSAES_OAEP_SHA_1: 342
-// bytes
+// * RSAES_OAEP_SHA_1: 342 bytes
 //
-//         * RSAES_OAEP_SHA_256: 318 bytes
+// * RSAES_OAEP_SHA_256: 318 bytes
 //
-//     * RSA_4096
+// *
+// RSA_4096
 //
-//         *
-// RSAES_OAEP_SHA_1: 470 bytes
+// * RSAES_OAEP_SHA_1: 470 bytes
 //
-//         * RSAES_OAEP_SHA_256: 446 bytes
+// * RSAES_OAEP_SHA_256: 446 bytes
 //
-// The CMK
-// that you use for this operation must be in a compatible key state. For details,
-// see How Key State Affects Use of a Customer Master Key
+// The
+// CMK that you use for this operation must be in a compatible key state. For
+// details, see How Key State Affects Use of a Customer Master Key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 // AWS Key Management Service Developer Guide. To perform this operation on a CMK
 // in a different AWS account, specify the key ARN or alias ARN in the value of the
@@ -107,16 +106,16 @@ type EncryptInput struct {
 	// alias name, prefix it with "alias/". To specify a CMK in a different AWS
 	// account, you must use the key ARN or alias ARN. For example:
 	//
-	//     * Key ID:
+	// * Key ID:
 	// 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
-	//     * Key ARN:
+	// * Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
+	// *
+	// Alias name: alias/ExampleAlias
 	//
-	// * Alias name: alias/ExampleAlias
-	//
-	//     * Alias ARN:
+	// * Alias ARN:
 	// arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
 	//
 	// To get the key ID and key

@@ -22,36 +22,36 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-multiprocess.html)
 // Related operations
 //
-//     * CreateFleet
+// * CreateFleet
 //
-//     * ListFleets
+// * ListFleets
 //
-//     * DeleteFleet
+// * DeleteFleet
 //
+// * Describe
+// fleets:
 //
-// * Describe fleets:
+// * DescribeFleetAttributes
 //
-//         * DescribeFleetAttributes
+// * DescribeFleetCapacity
 //
-//         *
-// DescribeFleetCapacity
+// *
+// DescribeFleetPortSettings
 //
-//         * DescribeFleetPortSettings
+// * DescribeFleetUtilization
 //
-//         *
-// DescribeFleetUtilization
+// *
+// DescribeRuntimeConfiguration
 //
-//         * DescribeRuntimeConfiguration
+// * DescribeEC2InstanceLimits
 //
-//         *
-// DescribeEC2InstanceLimits
+// *
+// DescribeFleetEvents
 //
-//         * DescribeFleetEvents
+// * UpdateFleetAttributes
 //
-//     *
-// UpdateFleetAttributes
-//
-//     * StartFleetActions or StopFleetActions
+// * StartFleetActions or
+// StopFleetActions
 func (c *Client) DescribeRuntimeConfiguration(ctx context.Context, params *DescribeRuntimeConfigurationInput, optFns ...func(*Options)) (*DescribeRuntimeConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeRuntimeConfigurationInput{}

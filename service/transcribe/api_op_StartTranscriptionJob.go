@@ -102,19 +102,19 @@ type StartTranscriptionJobInput struct {
 	// key. You can use either of the following to identify a KMS key in the current
 	// account:
 	//
-	//     * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	//     * KMS
-	// Key Alias: "alias/ExampleAlias"
+	// * KMS Key Alias:
+	// "alias/ExampleAlias"
 	//
-	// You can use either of the following to identify
-	// a KMS key in the current account or another account:
+	// You can use either of the following to identify a KMS key
+	// in the current account or another account:
 	//
-	//     * Amazon Resource Name
-	// (ARN) of a KMS Key: "arn:aws:kms:region:account
+	// * Amazon Resource Name (ARN) of a
+	// KMS Key: "arn:aws:kms:region:account
 	// ID:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	//     * ARN of a KMS Key Alias:
+	// * ARN of a KMS Key Alias:
 	// "arn:aws:kms:region:account ID:alias/ExampleAlias"
 	//
 	// If you don't specify an

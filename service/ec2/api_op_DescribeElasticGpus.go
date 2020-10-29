@@ -42,21 +42,20 @@ type DescribeElasticGpusInput struct {
 
 	// The filters.
 	//
-	//     * availability-zone - The Availability Zone in which the
-	// Elastic Graphics accelerator resides.
+	// * availability-zone - The Availability Zone in which the Elastic
+	// Graphics accelerator resides.
 	//
-	//     * elastic-gpu-health - The status of
-	// the Elastic Graphics accelerator (OK | IMPAIRED).
+	// * elastic-gpu-health - The status of the Elastic
+	// Graphics accelerator (OK | IMPAIRED).
 	//
-	//     * elastic-gpu-state - The
-	// state of the Elastic Graphics accelerator (ATTACHED).
+	// * elastic-gpu-state - The state of the
+	// Elastic Graphics accelerator (ATTACHED).
 	//
-	//     * elastic-gpu-type -
-	// The type of Elastic Graphics accelerator; for example, eg1.medium.
+	// * elastic-gpu-type - The type of
+	// Elastic Graphics accelerator; for example, eg1.medium.
 	//
-	//     *
-	// instance-id - The ID of the instance to which the Elastic Graphics accelerator
-	// is associated.
+	// * instance-id - The ID
+	// of the instance to which the Elastic Graphics accelerator is associated.
 	Filters []*types.Filter
 
 	// The maximum number of results to return in a single call. To retrieve the

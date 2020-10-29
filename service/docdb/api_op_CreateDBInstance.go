@@ -43,13 +43,13 @@ type CreateDBInstanceInput struct {
 	// The instance identifier. This parameter is stored as a lowercase string.
 	// Constraints:
 	//
-	//     * Must contain from 1 to 63 letters, numbers, or hyphens.
+	// * Must contain from 1 to 63 letters, numbers, or hyphens.
 	//
+	// * The
+	// first character must be a letter.
 	//
-	// * The first character must be a letter.
-	//
-	//     * Cannot end with a hyphen or
-	// contain two consecutive hyphens.
+	// * Cannot end with a hyphen or contain two
+	// consecutive hyphens.
 	//
 	// Example: mydbinstance
 	//

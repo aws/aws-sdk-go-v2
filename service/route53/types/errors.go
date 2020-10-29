@@ -27,7 +27,7 @@ func (e *ConcurrentModification) ErrorFault() smithy.ErrorFault { return smithy.
 
 // The cause of this error depends on the operation that you're performing:
 //
-//     *
+// *
 // Create a public hosted zone: Two hosted zones that have the same name or that
 // have a parent/child relationship (example.com and test.example.com) can't have
 // any common name servers. You tried to create a hosted zone that has the same
@@ -37,11 +37,11 @@ func (e *ConcurrentModification) ErrorFault() smithy.ErrorFault { return smithy.
 // CreateReusableDelegationSet
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateReusableDelegationSet.html).
 //
-//
-// * Create a private hosted zone: A hosted zone with the specified name already
+// *
+// Create a private hosted zone: A hosted zone with the specified name already
 // exists and is already associated with the Amazon VPC that you specified.
 //
-//     *
+// *
 // Associate VPCs with a private hosted zone: The VPC that you specified is already
 // associated with another hosted zone that has the same name.
 type ConflictingDomainExists struct {
@@ -174,12 +174,12 @@ func (e *DelegationSetNotReusable) ErrorFault() smithy.ErrorFault { return smith
 // The health check you're attempting to create already exists. Amazon Route 53
 // returns this error when you submit a request that has the following values:
 //
-//
-// * The same value for CallerReference as an existing health check, and one or
-// more values that differ from the existing health check that has the same caller
+// *
+// The same value for CallerReference as an existing health check, and one or more
+// values that differ from the existing health check that has the same caller
 // reference.
 //
-//     * The same value for CallerReference as a health check that you
+// * The same value for CallerReference as a health check that you
 // created and later deleted, regardless of the other settings in the request.
 type HealthCheckAlreadyExists struct {
 	Message *string
@@ -323,15 +323,15 @@ func (e *IncompatibleVersion) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // Amazon Route 53 doesn't have the permissions required to create log streams and
 // send query logs to log streams. Possible causes include the following:
 //
-//     *
-// There is no resource policy that specifies the log group ARN in the value for
+// * There
+// is no resource policy that specifies the log group ARN in the value for
 // Resource.
 //
-//     * The resource policy that includes the log group ARN in the
-// value for Resource doesn't have the necessary permissions.
+// * The resource policy that includes the log group ARN in the value
+// for Resource doesn't have the necessary permissions.
 //
-//     * The resource
-// policy hasn't finished propagating yet.
+// * The resource policy
+// hasn't finished propagating yet.
 type InsufficientCloudWatchLogsResourcePolicy struct {
 	Message *string
 }

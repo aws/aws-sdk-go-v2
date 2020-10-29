@@ -49,13 +49,13 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// Name of the DB instance to create from the DB snapshot. This parameter isn't
 	// case-sensitive. Constraints:
 	//
-	//     * Must contain from 1 to 63 numbers, letters,
-	// or hyphens
+	// * Must contain from 1 to 63 numbers, letters, or
+	// hyphens
 	//
-	//     * First character must be a letter
+	// * First character must be a letter
 	//
-	//     * Can't end with a
-	// hyphen or contain two consecutive hyphens
+	// * Can't end with a hyphen or
+	// contain two consecutive hyphens
 	//
 	// Example: my-snapshot-id
 	//
@@ -64,12 +64,12 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 
 	// The identifier for the DB snapshot to restore from. Constraints:
 	//
-	//     * Must
-	// match the identifier of an existing DBSnapshot.
+	// * Must match
+	// the identifier of an existing DBSnapshot.
 	//
-	//     * If you are restoring from
-	// a shared manual DB snapshot, the DBSnapshotIdentifier must be the ARN of the
-	// shared DB snapshot.
+	// * If you are restoring from a shared
+	// manual DB snapshot, the DBSnapshotIdentifier must be the ARN of the shared DB
+	// snapshot.
 	//
 	// This member is required.
 	DBSnapshotIdentifier *string
@@ -105,16 +105,16 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// not specify a value for DBParameterGroupName, then the default DBParameterGroup
 	// for the specified DB engine is used. Constraints:
 	//
-	//     * If supplied, must match
-	// the name of an existing DBParameterGroup.
+	// * If supplied, must match the
+	// name of an existing DBParameterGroup.
 	//
-	//     * Must be 1 to 255 letters,
-	// numbers, or hyphens.
+	// * Must be 1 to 255 letters, numbers, or
+	// hyphens.
 	//
-	//     * First character must be a letter.
+	// * First character must be a letter.
 	//
-	//     * Can't end
-	// with a hyphen or contain two consecutive hyphens.
+	// * Can't end with a hyphen or
+	// contain two consecutive hyphens.
 	DBParameterGroupName *string
 
 	// The DB subnet group name to use for the new instance. Constraints: If supplied,
@@ -161,29 +161,29 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// can restore a MariaDB 10.1 DB instance from a MySQL 5.6 snapshot. Valid
 	// Values:
 	//
-	//     * mariadb
+	// * mariadb
 	//
-	//     * mysql
+	// * mysql
 	//
-	//     * oracle-ee
+	// * oracle-ee
 	//
-	//     * oracle-se2
+	// * oracle-se2
 	//
-	//     *
-	// oracle-se1
+	// * oracle-se1
 	//
-	//     * oracle-se
+	// *
+	// oracle-se
 	//
-	//     * postgres
+	// * postgres
 	//
-	//     * sqlserver-ee
+	// * sqlserver-ee
 	//
-	//     *
-	// sqlserver-se
+	// * sqlserver-se
 	//
-	//     * sqlserver-ex
+	// * sqlserver-ex
 	//
-	//     * sqlserver-web
+	// *
+	// sqlserver-web
 	Engine *string
 
 	// Specifies the amount of provisioned IOPS for the DB instance, expressed in I/O

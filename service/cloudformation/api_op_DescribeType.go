@@ -64,11 +64,11 @@ type DescribeTypeOutput struct {
 
 	// The deprecation status of the type. Valid values include:
 	//
-	//     * LIVE: The type
-	// is registered and can be used in CloudFormation operations, dependent on its
+	// * LIVE: The type is
+	// registered and can be used in CloudFormation operations, dependent on its
 	// provisioning behavior and visibility scope.
 	//
-	//     * DEPRECATED: The type has been
+	// * DEPRECATED: The type has been
 	// deregistered and can no longer be used in CloudFormation operations.
 	DeprecatedStatus types.DeprecatedStatus
 
@@ -100,23 +100,23 @@ type DescribeTypeOutput struct {
 	// provisioning type during registration, based on the types of handlers in the
 	// schema handler package submitted. Valid values include:
 	//
-	//     * FULLY_MUTABLE:
-	// The type includes an update handler to process updates to the type during stack
+	// * FULLY_MUTABLE: The
+	// type includes an update handler to process updates to the type during stack
 	// update operations.
 	//
-	//     * IMMUTABLE: The type does not include an update
-	// handler, so the type cannot be updated and must instead be replaced during stack
-	// update operations.
+	// * IMMUTABLE: The type does not include an update handler, so
+	// the type cannot be updated and must instead be replaced during stack update
+	// operations.
 	//
-	//     * NON_PROVISIONABLE: The type does not include all of
-	// the following handlers, and therefore cannot actually be provisioned.
+	// * NON_PROVISIONABLE: The type does not include all of the following
+	// handlers, and therefore cannot actually be provisioned.
 	//
-	//         *
-	// create
+	// * create
 	//
-	//         * read
+	// * read
 	//
-	//         * delete
+	// *
+	// delete
 	ProvisioningType types.ProvisioningType
 
 	// The schema that defines the type. For more information on type schemas, see
@@ -140,12 +140,12 @@ type DescribeTypeOutput struct {
 	// The scope at which the type is visible and usable in CloudFormation operations.
 	// Valid values include:
 	//
-	//     * PRIVATE: The type is only visible and usable within
-	// the account in which it is registered. Currently, AWS CloudFormation marks any
-	// types you register as PRIVATE.
+	// * PRIVATE: The type is only visible and usable within the
+	// account in which it is registered. Currently, AWS CloudFormation marks any types
+	// you register as PRIVATE.
 	//
-	//     * PUBLIC: The type is publically visible and
-	// usable within any Amazon account.
+	// * PUBLIC: The type is publically visible and usable
+	// within any Amazon account.
 	Visibility types.Visibility
 
 	// Metadata pertaining to the operation's result.

@@ -281,7 +281,7 @@ type StageRetryMode string
 
 // Enum values for StageRetryMode
 const (
-	StageRetryModeFailed_actions StageRetryMode = "FAILED_ACTIONS"
+	StageRetryModeFailedActions StageRetryMode = "FAILED_ACTIONS"
 )
 
 // Values returns all known values for StageRetryMode. Note that this can be
@@ -341,7 +341,7 @@ type WebhookAuthenticationType string
 
 // Enum values for WebhookAuthenticationType
 const (
-	WebhookAuthenticationTypeGithub_hmac     WebhookAuthenticationType = "GITHUB_HMAC"
+	WebhookAuthenticationTypeGithubHmac      WebhookAuthenticationType = "GITHUB_HMAC"
 	WebhookAuthenticationTypeIp              WebhookAuthenticationType = "IP"
 	WebhookAuthenticationTypeUnauthenticated WebhookAuthenticationType = "UNAUTHENTICATED"
 )

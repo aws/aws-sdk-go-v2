@@ -16,18 +16,18 @@ import (
 // retrieve results in sequential pages. Returned aliases are not listed in any
 // particular order.
 //
-//     * CreateAlias
+// * CreateAlias
 //
-//     * ListAliases
+// * ListAliases
 //
-//     * DescribeAlias
+// * DescribeAlias
 //
+// *
+// UpdateAlias
 //
-// * UpdateAlias
+// * DeleteAlias
 //
-//     * DeleteAlias
-//
-//     * ResolveAlias
+// * ResolveAlias
 func (c *Client) ListAliases(ctx context.Context, params *ListAliasesInput, optFns ...func(*Options)) (*ListAliasesOutput, error) {
 	if params == nil {
 		params = &ListAliasesInput{}
@@ -63,12 +63,12 @@ type ListAliasesInput struct {
 	// aliases with a certain routing type. To retrieve all aliases, leave this
 	// parameter empty. Possible routing types include the following:
 	//
-	//     * SIMPLE --
-	// The alias resolves to one specific fleet. Use this type when routing to active
+	// * SIMPLE -- The
+	// alias resolves to one specific fleet. Use this type when routing to active
 	// fleets.
 	//
-	//     * TERMINAL -- The alias does not resolve to a fleet but instead can
-	// be used to display a message to the user. A terminal alias throws a
+	// * TERMINAL -- The alias does not resolve to a fleet but instead can be
+	// used to display a message to the user. A terminal alias throws a
 	// TerminalRoutingStrategyException with the RoutingStrategy message embedded.
 	RoutingStrategyType types.RoutingStrategyType
 }

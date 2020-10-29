@@ -18,13 +18,13 @@ import (
 // DescribeTrustedAdvisorCheckRefreshStatuses operation. If you call this operation
 // for these checks, you might see an InvalidParameterValue error.
 //
-//     * You must
-// have a Business or Enterprise support plan to use the AWS Support API.
+// * You must have
+// a Business or Enterprise support plan to use the AWS Support API.
 //
-//     * If
-// you call the AWS Support API from an account that does not have a Business or
-// Enterprise support plan, the SubscriptionRequiredException error message
-// appears. For information about changing your support plan, see AWS Support
+// * If you call
+// the AWS Support API from an account that does not have a Business or Enterprise
+// support plan, the SubscriptionRequiredException error message appears. For
+// information about changing your support plan, see AWS Support
 // (http://aws.amazon.com/premiumsupport/).
 func (c *Client) DescribeTrustedAdvisorCheckRefreshStatuses(ctx context.Context, params *DescribeTrustedAdvisorCheckRefreshStatusesInput, optFns ...func(*Options)) (*DescribeTrustedAdvisorCheckRefreshStatusesOutput, error) {
 	if params == nil {

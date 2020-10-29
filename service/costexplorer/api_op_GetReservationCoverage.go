@@ -19,35 +19,34 @@ import (
 // any time period, you can filter data about reservation usage by the following
 // dimensions:
 //
-//     * AZ
+// * AZ
 //
-//     * CACHE_ENGINE
+// * CACHE_ENGINE
 //
-//     * DATABASE_ENGINE
+// * DATABASE_ENGINE
 //
-//     *
-// DEPLOYMENT_OPTION
+// * DEPLOYMENT_OPTION
 //
-//     * INSTANCE_TYPE
+// *
+// INSTANCE_TYPE
 //
-//     * LINKED_ACCOUNT
+// * LINKED_ACCOUNT
 //
-//     *
-// OPERATING_SYSTEM
+// * OPERATING_SYSTEM
 //
-//     * PLATFORM
+// * PLATFORM
 //
-//     * REGION
+// * REGION
 //
-//     * SERVICE
+// *
+// SERVICE
 //
-//     * TAG
+// * TAG
 //
-//     *
-// TENANCY
+// * TENANCY
 //
-// To determine valid values for a dimension, use the GetDimensionValues
-// operation.
+// To determine valid values for a dimension, use the
+// GetDimensionValues operation.
 func (c *Client) GetReservationCoverage(ctx context.Context, params *GetReservationCoverageInput, optFns ...func(*Options)) (*GetReservationCoverageOutput, error) {
 	if params == nil {
 		params = &GetReservationCoverageInput{}
@@ -80,32 +79,31 @@ type GetReservationCoverageInput struct {
 	// Filters utilization data by dimensions. You can filter by the following
 	// dimensions:
 	//
-	//     * AZ
+	// * AZ
 	//
-	//     * CACHE_ENGINE
+	// * CACHE_ENGINE
 	//
-	//     * DATABASE_ENGINE
+	// * DATABASE_ENGINE
 	//
-	//     *
-	// DEPLOYMENT_OPTION
+	// * DEPLOYMENT_OPTION
 	//
-	//     * INSTANCE_TYPE
+	// *
+	// INSTANCE_TYPE
 	//
-	//     * LINKED_ACCOUNT
+	// * LINKED_ACCOUNT
 	//
-	//     *
-	// OPERATING_SYSTEM
+	// * OPERATING_SYSTEM
 	//
-	//     * PLATFORM
+	// * PLATFORM
 	//
-	//     * REGION
+	// * REGION
 	//
-	//     * SERVICE
+	// *
+	// SERVICE
 	//
-	//     * TAG
+	// * TAG
 	//
-	//     *
-	// TENANCY
+	// * TENANCY
 	//
 	// GetReservationCoverage uses the same Expression
 	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
@@ -124,28 +122,27 @@ type GetReservationCoverageInput struct {
 
 	// You can group the data by the following attributes:
 	//
-	//     * AZ
+	// * AZ
 	//
-	//     *
-	// CACHE_ENGINE
+	// * CACHE_ENGINE
 	//
-	//     * DATABASE_ENGINE
+	// *
+	// DATABASE_ENGINE
 	//
-	//     * DEPLOYMENT_OPTION
+	// * DEPLOYMENT_OPTION
 	//
-	//     *
-	// INSTANCE_TYPE
+	// * INSTANCE_TYPE
 	//
-	//     * LINKED_ACCOUNT
+	// * LINKED_ACCOUNT
 	//
-	//     * OPERATING_SYSTEM
+	// *
+	// OPERATING_SYSTEM
 	//
-	//     * PLATFORM
-	//
+	// * PLATFORM
 	//
 	// * REGION
 	//
-	//     * TENANCY
+	// * TENANCY
 	GroupBy []*types.GroupDefinition
 
 	// The measurement that you want your reservation coverage reported in. Valid

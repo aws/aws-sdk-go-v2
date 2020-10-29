@@ -57,16 +57,16 @@ type CreateClusterParameterGroupInput struct {
 
 	// The name of the cluster parameter group. Constraints:
 	//
-	//     * Must be 1 to 255
+	// * Must be 1 to 255
 	// alphanumeric characters or hyphens
 	//
-	//     * First character must be a letter.
+	// * First character must be a letter.
 	//
+	// *
+	// Cannot end with a hyphen or contain two consecutive hyphens.
 	//
-	// * Cannot end with a hyphen or contain two consecutive hyphens.
-	//
-	//     * Must be
-	// unique withing your AWS account.
+	// * Must be unique
+	// withing your AWS account.
 	//
 	// This value is stored as a lower-case string.
 	//

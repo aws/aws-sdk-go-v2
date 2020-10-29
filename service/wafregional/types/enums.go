@@ -616,13 +616,13 @@ type MatchFieldType string
 
 // Enum values for MatchFieldType
 const (
-	MatchFieldTypeUri              MatchFieldType = "URI"
-	MatchFieldTypeQuery_string     MatchFieldType = "QUERY_STRING"
-	MatchFieldTypeHeader           MatchFieldType = "HEADER"
-	MatchFieldTypeMethod           MatchFieldType = "METHOD"
-	MatchFieldTypeBody             MatchFieldType = "BODY"
-	MatchFieldTypeSingle_query_arg MatchFieldType = "SINGLE_QUERY_ARG"
-	MatchFieldTypeAll_query_args   MatchFieldType = "ALL_QUERY_ARGS"
+	MatchFieldTypeUri            MatchFieldType = "URI"
+	MatchFieldTypeQueryString    MatchFieldType = "QUERY_STRING"
+	MatchFieldTypeHeader         MatchFieldType = "HEADER"
+	MatchFieldTypeMethod         MatchFieldType = "METHOD"
+	MatchFieldTypeBody           MatchFieldType = "BODY"
+	MatchFieldTypeSingleQueryArg MatchFieldType = "SINGLE_QUERY_ARG"
+	MatchFieldTypeAllQueryArgs   MatchFieldType = "ALL_QUERY_ARGS"
 )
 
 // Values returns all known values for MatchFieldType. Note that this can be
@@ -644,13 +644,13 @@ type MigrationErrorType string
 
 // Enum values for MigrationErrorType
 const (
-	MigrationErrorTypeEntity_not_supported     MigrationErrorType = "ENTITY_NOT_SUPPORTED"
-	MigrationErrorTypeEntity_not_found         MigrationErrorType = "ENTITY_NOT_FOUND"
-	MigrationErrorTypeS3_bucket_no_permission  MigrationErrorType = "S3_BUCKET_NO_PERMISSION"
-	MigrationErrorTypeS3_bucket_not_accessible MigrationErrorType = "S3_BUCKET_NOT_ACCESSIBLE"
-	MigrationErrorTypeS3_bucket_not_found      MigrationErrorType = "S3_BUCKET_NOT_FOUND"
-	MigrationErrorTypeS3_bucket_invalid_region MigrationErrorType = "S3_BUCKET_INVALID_REGION"
-	MigrationErrorTypeS3_internal_error        MigrationErrorType = "S3_INTERNAL_ERROR"
+	MigrationErrorTypeEntityNotSupported    MigrationErrorType = "ENTITY_NOT_SUPPORTED"
+	MigrationErrorTypeEntityNotFound        MigrationErrorType = "ENTITY_NOT_FOUND"
+	MigrationErrorTypeS3BucketNoPermission  MigrationErrorType = "S3_BUCKET_NO_PERMISSION"
+	MigrationErrorTypeS3BucketNotAccessible MigrationErrorType = "S3_BUCKET_NOT_ACCESSIBLE"
+	MigrationErrorTypeS3BucketNotFound      MigrationErrorType = "S3_BUCKET_NOT_FOUND"
+	MigrationErrorTypeS3BucketInvalidRegion MigrationErrorType = "S3_BUCKET_INVALID_REGION"
+	MigrationErrorTypeS3InternalError       MigrationErrorType = "S3_INTERNAL_ERROR"
 )
 
 // Values returns all known values for MigrationErrorType. Note that this can be
@@ -672,24 +672,24 @@ type ParameterExceptionField string
 
 // Enum values for ParameterExceptionField
 const (
-	ParameterExceptionFieldChange_action                       ParameterExceptionField = "CHANGE_ACTION"
-	ParameterExceptionFieldWaf_action                          ParameterExceptionField = "WAF_ACTION"
-	ParameterExceptionFieldWaf_override_action                 ParameterExceptionField = "WAF_OVERRIDE_ACTION"
-	ParameterExceptionFieldPredicate_type                      ParameterExceptionField = "PREDICATE_TYPE"
-	ParameterExceptionFieldIpset_type                          ParameterExceptionField = "IPSET_TYPE"
-	ParameterExceptionFieldByte_match_field_type               ParameterExceptionField = "BYTE_MATCH_FIELD_TYPE"
-	ParameterExceptionFieldSql_injection_match_field_type      ParameterExceptionField = "SQL_INJECTION_MATCH_FIELD_TYPE"
-	ParameterExceptionFieldByte_match_text_transformation      ParameterExceptionField = "BYTE_MATCH_TEXT_TRANSFORMATION"
-	ParameterExceptionFieldByte_match_positional_constraint    ParameterExceptionField = "BYTE_MATCH_POSITIONAL_CONSTRAINT"
-	ParameterExceptionFieldSize_constraint_comparison_operator ParameterExceptionField = "SIZE_CONSTRAINT_COMPARISON_OPERATOR"
-	ParameterExceptionFieldGeo_match_location_type             ParameterExceptionField = "GEO_MATCH_LOCATION_TYPE"
-	ParameterExceptionFieldGeo_match_location_value            ParameterExceptionField = "GEO_MATCH_LOCATION_VALUE"
-	ParameterExceptionFieldRate_key                            ParameterExceptionField = "RATE_KEY"
-	ParameterExceptionFieldRule_type                           ParameterExceptionField = "RULE_TYPE"
-	ParameterExceptionFieldNext_marker                         ParameterExceptionField = "NEXT_MARKER"
-	ParameterExceptionFieldResource_arn                        ParameterExceptionField = "RESOURCE_ARN"
-	ParameterExceptionFieldTags                                ParameterExceptionField = "TAGS"
-	ParameterExceptionFieldTag_keys                            ParameterExceptionField = "TAG_KEYS"
+	ParameterExceptionFieldChangeAction                     ParameterExceptionField = "CHANGE_ACTION"
+	ParameterExceptionFieldWafAction                        ParameterExceptionField = "WAF_ACTION"
+	ParameterExceptionFieldWafOverrideAction                ParameterExceptionField = "WAF_OVERRIDE_ACTION"
+	ParameterExceptionFieldPredicateType                    ParameterExceptionField = "PREDICATE_TYPE"
+	ParameterExceptionFieldIpsetType                        ParameterExceptionField = "IPSET_TYPE"
+	ParameterExceptionFieldByteMatchFieldType               ParameterExceptionField = "BYTE_MATCH_FIELD_TYPE"
+	ParameterExceptionFieldSqlInjectionMatchFieldType       ParameterExceptionField = "SQL_INJECTION_MATCH_FIELD_TYPE"
+	ParameterExceptionFieldByteMatchTextTransformation      ParameterExceptionField = "BYTE_MATCH_TEXT_TRANSFORMATION"
+	ParameterExceptionFieldByteMatchPositionalConstraint    ParameterExceptionField = "BYTE_MATCH_POSITIONAL_CONSTRAINT"
+	ParameterExceptionFieldSizeConstraintComparisonOperator ParameterExceptionField = "SIZE_CONSTRAINT_COMPARISON_OPERATOR"
+	ParameterExceptionFieldGeoMatchLocationType             ParameterExceptionField = "GEO_MATCH_LOCATION_TYPE"
+	ParameterExceptionFieldGeoMatchLocationValue            ParameterExceptionField = "GEO_MATCH_LOCATION_VALUE"
+	ParameterExceptionFieldRateKey                          ParameterExceptionField = "RATE_KEY"
+	ParameterExceptionFieldRuleType                         ParameterExceptionField = "RULE_TYPE"
+	ParameterExceptionFieldNextMarker                       ParameterExceptionField = "NEXT_MARKER"
+	ParameterExceptionFieldResourceArn                      ParameterExceptionField = "RESOURCE_ARN"
+	ParameterExceptionFieldTags                             ParameterExceptionField = "TAGS"
+	ParameterExceptionFieldTagKeys                          ParameterExceptionField = "TAG_KEYS"
 )
 
 // Values returns all known values for ParameterExceptionField. Note that this can
@@ -722,10 +722,10 @@ type ParameterExceptionReason string
 
 // Enum values for ParameterExceptionReason
 const (
-	ParameterExceptionReasonInvalid_option      ParameterExceptionReason = "INVALID_OPTION"
-	ParameterExceptionReasonIllegal_combination ParameterExceptionReason = "ILLEGAL_COMBINATION"
-	ParameterExceptionReasonIllegal_argument    ParameterExceptionReason = "ILLEGAL_ARGUMENT"
-	ParameterExceptionReasonInvalid_tag_key     ParameterExceptionReason = "INVALID_TAG_KEY"
+	ParameterExceptionReasonInvalidOption      ParameterExceptionReason = "INVALID_OPTION"
+	ParameterExceptionReasonIllegalCombination ParameterExceptionReason = "ILLEGAL_COMBINATION"
+	ParameterExceptionReasonIllegalArgument    ParameterExceptionReason = "ILLEGAL_ARGUMENT"
+	ParameterExceptionReasonInvalidTagKey      ParameterExceptionReason = "INVALID_TAG_KEY"
 )
 
 // Values returns all known values for ParameterExceptionReason. Note that this can
@@ -744,11 +744,11 @@ type PositionalConstraint string
 
 // Enum values for PositionalConstraint
 const (
-	PositionalConstraintExactly       PositionalConstraint = "EXACTLY"
-	PositionalConstraintStarts_with   PositionalConstraint = "STARTS_WITH"
-	PositionalConstraintEnds_with     PositionalConstraint = "ENDS_WITH"
-	PositionalConstraintContains      PositionalConstraint = "CONTAINS"
-	PositionalConstraintContains_word PositionalConstraint = "CONTAINS_WORD"
+	PositionalConstraintExactly      PositionalConstraint = "EXACTLY"
+	PositionalConstraintStartsWith   PositionalConstraint = "STARTS_WITH"
+	PositionalConstraintEndsWith     PositionalConstraint = "ENDS_WITH"
+	PositionalConstraintContains     PositionalConstraint = "CONTAINS"
+	PositionalConstraintContainsWord PositionalConstraint = "CONTAINS_WORD"
 )
 
 // Values returns all known values for PositionalConstraint. Note that this can be
@@ -768,13 +768,13 @@ type PredicateType string
 
 // Enum values for PredicateType
 const (
-	PredicateTypeIp_match            PredicateType = "IPMatch"
-	PredicateTypeByte_match          PredicateType = "ByteMatch"
-	PredicateTypeSql_injection_match PredicateType = "SqlInjectionMatch"
-	PredicateTypeGeo_match           PredicateType = "GeoMatch"
-	PredicateTypeSize_constraint     PredicateType = "SizeConstraint"
-	PredicateTypeXss_match           PredicateType = "XssMatch"
-	PredicateTypeRegex_match         PredicateType = "RegexMatch"
+	PredicateTypeIpMatch           PredicateType = "IPMatch"
+	PredicateTypeByteMatch         PredicateType = "ByteMatch"
+	PredicateTypeSqlInjectionMatch PredicateType = "SqlInjectionMatch"
+	PredicateTypeGeoMatch          PredicateType = "GeoMatch"
+	PredicateTypeSizeConstraint    PredicateType = "SizeConstraint"
+	PredicateTypeXssMatch          PredicateType = "XssMatch"
+	PredicateTypeRegexMatch        PredicateType = "RegexMatch"
 )
 
 // Values returns all known values for PredicateType. Note that this can be
@@ -812,8 +812,8 @@ type ResourceType string
 
 // Enum values for ResourceType
 const (
-	ResourceTypeApplication_load_balancer ResourceType = "APPLICATION_LOAD_BALANCER"
-	ResourceTypeApi_gateway               ResourceType = "API_GATEWAY"
+	ResourceTypeApplicationLoadBalancer ResourceType = "APPLICATION_LOAD_BALANCER"
+	ResourceTypeApiGateway              ResourceType = "API_GATEWAY"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -830,12 +830,12 @@ type TextTransformation string
 
 // Enum values for TextTransformation
 const (
-	TextTransformationNone                 TextTransformation = "NONE"
-	TextTransformationCompress_white_space TextTransformation = "COMPRESS_WHITE_SPACE"
-	TextTransformationHtml_entity_decode   TextTransformation = "HTML_ENTITY_DECODE"
-	TextTransformationLowercase            TextTransformation = "LOWERCASE"
-	TextTransformationCmd_line             TextTransformation = "CMD_LINE"
-	TextTransformationUrl_decode           TextTransformation = "URL_DECODE"
+	TextTransformationNone               TextTransformation = "NONE"
+	TextTransformationCompressWhiteSpace TextTransformation = "COMPRESS_WHITE_SPACE"
+	TextTransformationHtmlEntityDecode   TextTransformation = "HTML_ENTITY_DECODE"
+	TextTransformationLowercase          TextTransformation = "LOWERCASE"
+	TextTransformationCmdLine            TextTransformation = "CMD_LINE"
+	TextTransformationUrlDecode          TextTransformation = "URL_DECODE"
 )
 
 // Values returns all known values for TextTransformation. Note that this can be
@@ -894,9 +894,9 @@ type WafRuleType string
 
 // Enum values for WafRuleType
 const (
-	WafRuleTypeRegular    WafRuleType = "REGULAR"
-	WafRuleTypeRate_based WafRuleType = "RATE_BASED"
-	WafRuleTypeGroup      WafRuleType = "GROUP"
+	WafRuleTypeRegular   WafRuleType = "REGULAR"
+	WafRuleTypeRateBased WafRuleType = "RATE_BASED"
+	WafRuleTypeGroup     WafRuleType = "GROUP"
 )
 
 // Values returns all known values for WafRuleType. Note that this can be expanded

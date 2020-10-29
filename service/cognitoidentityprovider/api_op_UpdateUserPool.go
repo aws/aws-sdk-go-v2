@@ -73,15 +73,15 @@ type UpdateUserPoolInput struct {
 
 	// Can be one of the following values:
 	//
-	//     * OFF - MFA tokens are not required and
+	// * OFF - MFA tokens are not required and
 	// cannot be specified during user registration.
 	//
-	//     * ON - MFA tokens are
-	// required for all user registrations. You can only specify required when you are
-	// initially creating a user pool.
+	// * ON - MFA tokens are required
+	// for all user registrations. You can only specify required when you are initially
+	// creating a user pool.
 	//
-	//     * OPTIONAL - Users have the option when
-	// registering to create an MFA token.
+	// * OPTIONAL - Users have the option when registering to
+	// create an MFA token.
 	MfaConfiguration types.UserPoolMfaType
 
 	// A container with the policies you wish to update in a user pool.

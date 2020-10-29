@@ -46,16 +46,16 @@ type RestoreDBClusterFromS3Input struct {
 	// The name of the DB cluster to create from the source data in the Amazon S3
 	// bucket. This parameter isn't case-sensitive. Constraints:
 	//
-	//     * Must contain
-	// from 1 to 63 letters, numbers, or hyphens.
+	// * Must contain from 1
+	// to 63 letters, numbers, or hyphens.
 	//
-	//     * First character must be a
-	// letter.
+	// * First character must be a letter.
 	//
-	//     * Can't end with a hyphen or contain two consecutive
-	// hyphens.
+	// *
+	// Can't end with a hyphen or contain two consecutive hyphens.
 	//
-	// Example: my-cluster1
+	// Example:
+	// my-cluster1
 	//
 	// This member is required.
 	DBClusterIdentifier *string
@@ -76,13 +76,13 @@ type RestoreDBClusterFromS3Input struct {
 
 	// The name of the master user for the restored DB cluster. Constraints:
 	//
-	//     *
-	// Must be 1 to 16 letters or numbers.
+	// * Must be
+	// 1 to 16 letters or numbers.
 	//
-	//     * First character must be a letter.
+	// * First character must be a letter.
 	//
-	//
-	// * Can't be a reserved word for the chosen database engine.
+	// * Can't be a
+	// reserved word for the chosen database engine.
 	//
 	// This member is required.
 	MasterUsername *string
@@ -119,15 +119,15 @@ type RestoreDBClusterFromS3Input struct {
 	// to 0. Currently, Backtrack is only supported for Aurora MySQL DB clusters.
 	// Default: 0 Constraints:
 	//
-	//     * If specified, this value must be set to a number
-	// from 0 to 259,200 (72 hours).
+	// * If specified, this value must be set to a number from
+	// 0 to 259,200 (72 hours).
 	BacktrackWindow *int64
 
 	// The number of days for which automated backups of the restored DB cluster are
 	// retained. You must specify a minimum value of 1. Default: 1 Constraints:
 	//
-	//     *
-	// Must be a value from 1 to 35
+	// * Must
+	// be a value from 1 to 35
 	BackupRetentionPeriod *int32
 
 	// A value that indicates that the restored DB cluster should be associated with
@@ -141,8 +141,8 @@ type RestoreDBClusterFromS3Input struct {
 	// The name of the DB cluster parameter group to associate with the restored DB
 	// cluster. If this argument is omitted, default.aurora5.6 is used. Constraints:
 	//
-	//
-	// * If supplied, must match the name of an existing DBClusterParameterGroup.
+	// *
+	// If supplied, must match the name of an existing DBClusterParameterGroup.
 	DBClusterParameterGroupName *string
 
 	// A DB subnet group to associate with the restored DB cluster. Constraints: If
@@ -227,16 +227,15 @@ type RestoreDBClusterFromS3Input struct {
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora)
 	// in the Amazon Aurora User Guide. Constraints:
 	//
-	//     * Must be in the format
+	// * Must be in the format
 	// hh24:mi-hh24:mi.
 	//
-	//     * Must be in Universal Coordinated Time (UTC).
+	// * Must be in Universal Coordinated Time (UTC).
 	//
-	//     * Must
-	// not conflict with the preferred maintenance window.
+	// * Must not
+	// conflict with the preferred maintenance window.
 	//
-	//     * Must be at least 30
-	// minutes.
+	// * Must be at least 30 minutes.
 	PreferredBackupWindow *string
 
 	// The weekly time range during which system maintenance can occur, in Universal

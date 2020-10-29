@@ -21,33 +21,33 @@ type AccountGateResult struct {
 
 	// The status of the account gate function.
 	//
-	//     * SUCCEEDED: The account gate
-	// function has determined that the account and Region passes any requirements for
-	// a stack set operation to occur. AWS CloudFormation proceeds with the stack
-	// operation in that account and Region.
+	// * SUCCEEDED: The account gate function
+	// has determined that the account and Region passes any requirements for a stack
+	// set operation to occur. AWS CloudFormation proceeds with the stack operation in
+	// that account and Region.
 	//
-	//     * FAILED: The account gate function
-	// has determined that the account and Region does not meet the requirements for a
-	// stack set operation to occur. AWS CloudFormation cancels the stack set operation
-	// in that account and Region, and sets the stack set operation result status for
-	// that account and Region to FAILED.
+	// * FAILED: The account gate function has determined
+	// that the account and Region does not meet the requirements for a stack set
+	// operation to occur. AWS CloudFormation cancels the stack set operation in that
+	// account and Region, and sets the stack set operation result status for that
+	// account and Region to FAILED.
 	//
-	//     * SKIPPED: AWS CloudFormation has
-	// skipped calling the account gate function for this account and Region, for one
-	// of the following reasons:
+	// * SKIPPED: AWS CloudFormation has skipped calling
+	// the account gate function for this account and Region, for one of the following
+	// reasons:
 	//
-	//         * An account gate function has not been
-	// specified for the account and Region. AWS CloudFormation proceeds with the stack
-	// set operation in this account and Region.
+	// * An account gate function has not been specified for the account and
+	// Region. AWS CloudFormation proceeds with the stack set operation in this account
+	// and Region.
 	//
-	//         * The
-	// AWSCloudFormationStackSetExecutionRole of the stack set adminstration account
-	// lacks permissions to invoke the function. AWS CloudFormation proceeds with the
-	// stack set operation in this account and Region.
+	// * The AWSCloudFormationStackSetExecutionRole of the stack set
+	// adminstration account lacks permissions to invoke the function. AWS
+	// CloudFormation proceeds with the stack set operation in this account and
+	// Region.
 	//
-	//         * Either no action is
-	// necessary, or no action is possible, on the stack. AWS CloudFormation skips the
-	// stack set operation in this account and Region.
+	// * Either no action is necessary, or no action is possible, on the
+	// stack. AWS CloudFormation skips the stack set operation in this account and
+	// Region.
 	Status AccountGateStatus
 
 	// The reason for the account gate status assigned to this account and Region for
@@ -58,15 +58,15 @@ type AccountGateResult struct {
 // The AccountLimit data type. CloudFormation has the following limits per
 // account:
 //
-//     * Number of concurrent resources
+// * Number of concurrent resources
 //
-//     * Number of stacks
+// * Number of stacks
 //
-//     *
-// Number of stack outputs
+// * Number of
+// stack outputs
 //
-// For more information about these account limits, and
-// other CloudFormation limits, see AWS CloudFormation Limits
+// For more information about these account limits, and other
+// CloudFormation limits, see AWS CloudFormation Limits
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html)
 // in the AWS CloudFormation User Guide.
 type AccountLimit struct {
@@ -300,15 +300,15 @@ type PropertyDifference struct {
 
 	// The type of property difference.
 	//
-	//     * ADD: A value has been added to a
-	// resource property that is an array or list data type.
+	// * ADD: A value has been added to a resource
+	// property that is an array or list data type.
 	//
-	//     * REMOVE: The
-	// property has been removed from the current resource configuration.
+	// * REMOVE: The property has been
+	// removed from the current resource configuration.
 	//
-	//     *
-	// NOT_EQUAL: The current property value differs from its expected value (as
-	// defined in the stack template and any values specified as template parameters).
+	// * NOT_EQUAL: The current
+	// property value differs from its expected value (as defined in the stack template
+	// and any values specified as template parameters).
 	//
 	// This member is required.
 	DifferenceType DifferenceType
@@ -379,27 +379,27 @@ type ResourceChangeDetail struct {
 	// The group to which the CausingEntity value belongs. There are five entity
 	// groups:
 	//
-	//     * ResourceReference entities are Ref intrinsic functions that refer
-	// to resources in the template, such as { "Ref" : "MyEC2InstanceResource" }.
+	// * ResourceReference entities are Ref intrinsic functions that refer to
+	// resources in the template, such as { "Ref" : "MyEC2InstanceResource" }.
 	//
-	//
-	// * ParameterReference entities are Ref intrinsic functions that get template
+	// *
+	// ParameterReference entities are Ref intrinsic functions that get template
 	// parameter values, such as { "Ref" : "MyPasswordParameter" }.
 	//
-	//     *
+	// *
 	// ResourceAttribute entities are Fn::GetAtt intrinsic functions that get resource
 	// attribute values, such as { "Fn::GetAtt" : [ "MyEC2InstanceResource",
 	// "PublicDnsName" ] }.
 	//
-	//     * DirectModification entities are changes that are
-	// made directly to the template.
+	// * DirectModification entities are changes that are made
+	// directly to the template.
 	//
-	//     * Automatic entities are
-	// AWS::CloudFormation::Stack resource types, which are also known as nested
-	// stacks. If you made no changes to the AWS::CloudFormation::Stack resource, AWS
-	// CloudFormation sets the ChangeSource to Automatic because the nested stack's
-	// template might have changed. Changes to a nested stack's template aren't visible
-	// to AWS CloudFormation until you run an update on the parent stack.
+	// * Automatic entities are AWS::CloudFormation::Stack
+	// resource types, which are also known as nested stacks. If you made no changes to
+	// the AWS::CloudFormation::Stack resource, AWS CloudFormation sets the
+	// ChangeSource to Automatic because the nested stack's template might have
+	// changed. Changes to a nested stack's template aren't visible to AWS
+	// CloudFormation until you run an update on the parent stack.
 	ChangeSource ChangeSource
 
 	// Indicates whether AWS CloudFormation can determine the target value, and whether
@@ -517,20 +517,20 @@ type RollbackConfiguration struct {
 	// triggers replace any list of triggers previously specified for the stack. This
 	// means:
 	//
-	//     * To use the rollback triggers previously specified for this stack,
-	// if any, don't specify this parameter.
+	// * To use the rollback triggers previously specified for this stack, if
+	// any, don't specify this parameter.
 	//
-	//     * To specify new or updated rollback
+	// * To specify new or updated rollback
 	// triggers, you must specify all the triggers that you want used for this stack,
 	// even triggers you've specifed before (for example, when creating the stack or
 	// during a previous stack update). Any triggers that you don't include in the
 	// updated list of triggers are no longer applied to the stack.
 	//
-	//     * To remove
-	// all currently specified triggers, specify an empty list for this parameter.
+	// * To remove all
+	// currently specified triggers, specify an empty list for this parameter.
 	//
-	// If
-	// a specified trigger is missing, the entire stack operation fails and is rolled
+	// If a
+	// specified trigger is missing, the entire stack operation fails and is rolled
 	// back.
 	RollbackTriggers []*RollbackTrigger
 }
@@ -587,10 +587,10 @@ type Stack struct {
 
 	// Boolean to enable or disable rollback on stack creation failures:
 	//
-	//     * true:
+	// * true:
 	// disable rollback
 	//
-	//     * false: enable rollback
+	// * false: enable rollback
 	DisableRollback *bool
 
 	// Information on whether a stack's actual configuration differs, or has drifted,
@@ -668,18 +668,18 @@ type StackDriftInformation struct {
 	// Status of the stack's actual configuration compared to its expected template
 	// configuration.
 	//
-	//     * DRIFTED: The stack differs from its expected template
+	// * DRIFTED: The stack differs from its expected template
 	// configuration. A stack is considered to have drifted if one or more of its
 	// resources have drifted.
 	//
-	//     * NOT_CHECKED: AWS CloudFormation has not checked
-	// if the stack differs from its expected template configuration.
+	// * NOT_CHECKED: AWS CloudFormation has not checked if
+	// the stack differs from its expected template configuration.
 	//
-	//     * IN_SYNC:
-	// The stack's actual configuration matches its expected template configuration.
+	// * IN_SYNC: The
+	// stack's actual configuration matches its expected template configuration.
 	//
-	//
-	// * UNKNOWN: This value is reserved for future use.
+	// *
+	// UNKNOWN: This value is reserved for future use.
 	//
 	// This member is required.
 	StackDriftStatus StackDriftStatus
@@ -698,18 +698,18 @@ type StackDriftInformationSummary struct {
 	// Status of the stack's actual configuration compared to its expected template
 	// configuration.
 	//
-	//     * DRIFTED: The stack differs from its expected template
+	// * DRIFTED: The stack differs from its expected template
 	// configuration. A stack is considered to have drifted if one or more of its
 	// resources have drifted.
 	//
-	//     * NOT_CHECKED: AWS CloudFormation has not checked
-	// if the stack differs from its expected template configuration.
+	// * NOT_CHECKED: AWS CloudFormation has not checked if
+	// the stack differs from its expected template configuration.
 	//
-	//     * IN_SYNC:
-	// The stack's actual configuration matches its expected template configuration.
+	// * IN_SYNC: The
+	// stack's actual configuration matches its expected template configuration.
 	//
-	//
-	// * UNKNOWN: This value is reserved for future use.
+	// *
+	// UNKNOWN: This value is reserved for future use.
 	//
 	// This member is required.
 	StackDriftStatus StackDriftStatus
@@ -793,20 +793,20 @@ type StackInstance struct {
 	// Status of the stack instance's actual configuration compared to the expected
 	// template and parameter configuration of the stack set to which it belongs.
 	//
-	//
-	// * DRIFTED: The stack differs from the expected template and parameter
+	// *
+	// DRIFTED: The stack differs from the expected template and parameter
 	// configuration of the stack set to which it belongs. A stack instance is
 	// considered to have drifted if one or more of the resources in the associated
 	// stack have drifted.
 	//
-	//     * NOT_CHECKED: AWS CloudFormation has not checked if
-	// the stack instance differs from its expected stack set configuration.
+	// * NOT_CHECKED: AWS CloudFormation has not checked if the
+	// stack instance differs from its expected stack set configuration.
 	//
-	//     *
-	// IN_SYNC: The stack instance's actual configuration matches its expected stack
-	// set configuration.
+	// * IN_SYNC:
+	// The stack instance's actual configuration matches its expected stack set
+	// configuration.
 	//
-	//     * UNKNOWN: This value is reserved for future use.
+	// * UNKNOWN: This value is reserved for future use.
 	DriftStatus StackDriftStatus
 
 	// Most recent time when CloudFormation performed a drift detection operation on
@@ -839,24 +839,24 @@ type StackInstance struct {
 	// The status of the stack instance, in terms of its synchronization with its
 	// associated stack set.
 	//
-	//     * INOPERABLE: A DeleteStackInstances operation has
-	// failed and left the stack in an unstable state. Stacks in this state are
-	// excluded from further UpdateStackSet operations. You might need to perform a
+	// * INOPERABLE: A DeleteStackInstances operation has failed
+	// and left the stack in an unstable state. Stacks in this state are excluded from
+	// further UpdateStackSet operations. You might need to perform a
 	// DeleteStackInstances operation, with RetainStacks set to true, to delete the
 	// stack instance, and then delete the stack manually.
 	//
-	//     * OUTDATED: The stack
-	// isn't currently up to date with the stack set because:
+	// * OUTDATED: The stack isn't
+	// currently up to date with the stack set because:
 	//
-	//         * The associated
-	// stack failed during a CreateStackSet or UpdateStackSet operation.
+	// * The associated stack failed
+	// during a CreateStackSet or UpdateStackSet operation.
 	//
-	//         * The
-	// stack was part of a CreateStackSet or UpdateStackSet operation that failed or
-	// was stopped before the stack was created or updated.
+	// * The stack was part of a
+	// CreateStackSet or UpdateStackSet operation that failed or was stopped before the
+	// stack was created or updated.
 	//
-	//     * CURRENT: The stack
-	// is currently up to date with the stack set.
+	// * CURRENT: The stack is currently up to date with
+	// the stack set.
 	Status StackInstanceStatus
 
 	// The explanation for the specific status code that is assigned to this stack
@@ -871,26 +871,26 @@ type StackInstanceComprehensiveStatus struct {
 	// cancelled. This is either because a user has stopped the stack set operation, or
 	// because the failure tolerance of the stack set operation has been exceeded.
 	//
-	//
-	// * FAILED: The operation in the specified account and Region failed. If the stack
+	// *
+	// FAILED: The operation in the specified account and Region failed. If the stack
 	// set operation fails in enough accounts within a Region, the failure tolerance
 	// for the stack set operation as a whole might be exceeded.
 	//
-	//     * INOPERABLE: A
+	// * INOPERABLE: A
 	// DeleteStackInstances operation has failed and left the stack in an unstable
 	// state. Stacks in this state are excluded from further UpdateStackSet operations.
 	// You might need to perform a DeleteStackInstances operation, with RetainStacks
-	// set to true, to delete the stack instance, and then delete the stack manually.
+	// set to true, to delete the stack instance, and then delete the stack
+	// manually.
 	//
+	// * PENDING: The operation in the specified account and Region has yet
+	// to start.
 	//
-	// * PENDING: The operation in the specified account and Region has yet to start.
+	// * RUNNING: The operation in the specified account and Region is
+	// currently in progress.
 	//
-	//
-	// * RUNNING: The operation in the specified account and Region is currently in
-	// progress.
-	//
-	//     * SUCCEEDED: The operation in the specified account and Region
-	// completed successfully.
+	// * SUCCEEDED: The operation in the specified account and
+	// Region completed successfully.
 	DetailedStatus StackInstanceDetailedStatus
 }
 
@@ -914,20 +914,20 @@ type StackInstanceSummary struct {
 	// Status of the stack instance's actual configuration compared to the expected
 	// template and parameter configuration of the stack set to which it belongs.
 	//
-	//
-	// * DRIFTED: The stack differs from the expected template and parameter
+	// *
+	// DRIFTED: The stack differs from the expected template and parameter
 	// configuration of the stack set to which it belongs. A stack instance is
 	// considered to have drifted if one or more of the resources in the associated
 	// stack have drifted.
 	//
-	//     * NOT_CHECKED: AWS CloudFormation has not checked if
-	// the stack instance differs from its expected stack set configuration.
+	// * NOT_CHECKED: AWS CloudFormation has not checked if the
+	// stack instance differs from its expected stack set configuration.
 	//
-	//     *
-	// IN_SYNC: The stack instance's actual configuration matches its expected stack
-	// set configuration.
+	// * IN_SYNC:
+	// The stack instance's actual configuration matches its expected stack set
+	// configuration.
 	//
-	//     * UNKNOWN: This value is reserved for future use.
+	// * UNKNOWN: This value is reserved for future use.
 	DriftStatus StackDriftStatus
 
 	// Most recent time when CloudFormation performed a drift detection operation on
@@ -956,24 +956,24 @@ type StackInstanceSummary struct {
 	// The status of the stack instance, in terms of its synchronization with its
 	// associated stack set.
 	//
-	//     * INOPERABLE: A DeleteStackInstances operation has
-	// failed and left the stack in an unstable state. Stacks in this state are
-	// excluded from further UpdateStackSet operations. You might need to perform a
+	// * INOPERABLE: A DeleteStackInstances operation has failed
+	// and left the stack in an unstable state. Stacks in this state are excluded from
+	// further UpdateStackSet operations. You might need to perform a
 	// DeleteStackInstances operation, with RetainStacks set to true, to delete the
 	// stack instance, and then delete the stack manually.
 	//
-	//     * OUTDATED: The stack
-	// isn't currently up to date with the stack set because:
+	// * OUTDATED: The stack isn't
+	// currently up to date with the stack set because:
 	//
-	//         * The associated
-	// stack failed during a CreateStackSet or UpdateStackSet operation.
+	// * The associated stack failed
+	// during a CreateStackSet or UpdateStackSet operation.
 	//
-	//         * The
-	// stack was part of a CreateStackSet or UpdateStackSet operation that failed or
-	// was stopped before the stack was created or updated.
+	// * The stack was part of a
+	// CreateStackSet or UpdateStackSet operation that failed or was stopped before the
+	// stack was created or updated.
 	//
-	//     * CURRENT: The stack
-	// is currently up to date with the stack set.
+	// * CURRENT: The stack is currently up to date with
+	// the stack set.
 	Status StackInstanceStatus
 
 	// The explanation for the specific status code assigned to this stack instance.
@@ -1117,19 +1117,18 @@ type StackResourceDrift struct {
 	// Status of the resource's actual configuration compared to its expected
 	// configuration
 	//
-	//     * DELETED: The resource differs from its expected template
+	// * DELETED: The resource differs from its expected template
 	// configuration because the resource has been deleted.
 	//
-	//     * MODIFIED: One or
-	// more resource properties differ from their expected values (as defined in the
-	// stack template and any values specified as template parameters).
+	// * MODIFIED: One or more
+	// resource properties differ from their expected values (as defined in the stack
+	// template and any values specified as template parameters).
 	//
-	//     * IN_SYNC:
-	// The resources's actual configuration matches its expected template
-	// configuration.
+	// * IN_SYNC: The
+	// resources's actual configuration matches its expected template configuration.
 	//
-	//     * NOT_CHECKED: AWS CloudFormation does not currently return
-	// this value.
+	// *
+	// NOT_CHECKED: AWS CloudFormation does not currently return this value.
 	//
 	// This member is required.
 	StackResourceDriftStatus StackResourceDriftStatus
@@ -1175,20 +1174,20 @@ type StackResourceDriftInformation struct {
 	// Status of the resource's actual configuration compared to its expected
 	// configuration
 	//
-	//     * DELETED: The resource differs from its expected
-	// configuration in that it has been deleted.
+	// * DELETED: The resource differs from its expected configuration
+	// in that it has been deleted.
 	//
-	//     * MODIFIED: The resource differs
-	// from its expected configuration.
+	// * MODIFIED: The resource differs from its expected
+	// configuration.
 	//
-	//     * NOT_CHECKED: AWS CloudFormation has not
-	// checked if the resource differs from its expected configuration. Any resources
-	// that do not currently support drift detection have a status of NOT_CHECKED. For
-	// more information, see Resources that Support Drift Detection
+	// * NOT_CHECKED: AWS CloudFormation has not checked if the
+	// resource differs from its expected configuration. Any resources that do not
+	// currently support drift detection have a status of NOT_CHECKED. For more
+	// information, see Resources that Support Drift Detection
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html).
 	//
-	//
-	// * IN_SYNC: The resources's actual configuration matches its expected
+	// *
+	// IN_SYNC: The resources's actual configuration matches its expected
 	// configuration.
 	//
 	// This member is required.
@@ -1206,16 +1205,16 @@ type StackResourceDriftInformationSummary struct {
 	// Status of the resource's actual configuration compared to its expected
 	// configuration
 	//
-	//     * DELETED: The resource differs from its expected
-	// configuration in that it has been deleted.
+	// * DELETED: The resource differs from its expected configuration
+	// in that it has been deleted.
 	//
-	//     * MODIFIED: The resource differs
-	// from its expected configuration.
+	// * MODIFIED: The resource differs from its expected
+	// configuration.
 	//
-	//     * NOT_CHECKED: AWS CloudFormation has not
-	// checked if the resource differs from its expected configuration. Any resources
-	// that do not currently support drift detection have a status of NOT_CHECKED. For
-	// more information, see Resources that Support Drift Detection
+	// * NOT_CHECKED: AWS CloudFormation has not checked if the
+	// resource differs from its expected configuration. Any resources that do not
+	// currently support drift detection have a status of NOT_CHECKED. For more
+	// information, see Resources that Support Drift Detection
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html).
 	// If you performed an ContinueUpdateRollback operation on a stack, any resources
 	// included in ResourcesToSkip will also have a status of NOT_CHECKED. For more
@@ -1224,7 +1223,7 @@ type StackResourceDriftInformationSummary struct {
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html)
 	// in the AWS CloudFormation User Guide.
 	//
-	//     * IN_SYNC: The resources's actual
+	// * IN_SYNC: The resources's actual
 	// configuration matches its expected configuration.
 	//
 	// This member is required.
@@ -1321,15 +1320,15 @@ type StackSet struct {
 
 	// Describes how the IAM roles required for stack set operations are created.
 	//
-	//
-	// * With self-managed permissions, you must create the administrator and execution
+	// *
+	// With self-managed permissions, you must create the administrator and execution
 	// roles required to deploy to target accounts. For more information, see Grant
 	// Self-Managed Stack Set Permissions
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html).
 	//
-	//
-	// * With service-managed permissions, StackSets automatically creates the IAM
-	// roles required to deploy to accounts managed by AWS Organizations. For more
+	// *
+	// With service-managed permissions, StackSets automatically creates the IAM roles
+	// required to deploy to accounts managed by AWS Organizations. For more
 	// information, see Grant Service-Managed Stack Set Permissions
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-service-managed.html).
 	PermissionModel PermissionModels
@@ -1373,21 +1372,21 @@ type StackSetDriftDetectionDetails struct {
 
 	// The status of the stack set drift detection operation.
 	//
-	//     * COMPLETED: The
-	// drift detection operation completed without failing on any stack instances.
+	// * COMPLETED: The drift
+	// detection operation completed without failing on any stack instances.
 	//
+	// * FAILED:
+	// The drift detection operation exceeded the specified failure tolerance.
 	//
-	// * FAILED: The drift detection operation exceeded the specified failure
-	// tolerance.
+	// *
+	// PARTIAL_SUCCESS: The drift detection operation completed without exceeding the
+	// failure tolerance for the operation.
 	//
-	//     * PARTIAL_SUCCESS: The drift detection operation completed
-	// without exceeding the failure tolerance for the operation.
+	// * IN_PROGRESS: The drift detection
+	// operation is currently being performed.
 	//
-	//     * IN_PROGRESS:
-	// The drift detection operation is currently being performed.
-	//
-	//     * STOPPED: The
-	// user has cancelled the drift detection operation.
+	// * STOPPED: The user has cancelled the
+	// drift detection operation.
 	DriftDetectionStatus StackSetDriftDetectionStatus
 
 	// Status of the stack set's actual configuration compared to its expected template
@@ -1395,17 +1394,17 @@ type StackSetDriftDetectionDetails struct {
 	// more of its stack instances have drifted from their expected template and
 	// parameter configuration.
 	//
-	//     * DRIFTED: One or more of the stack instances
+	// * DRIFTED: One or more of the stack instances
 	// belonging to the stack set stack differs from the expected template and
 	// parameter configuration. A stack instance is considered to have drifted if one
 	// or more of the resources in the associated stack have drifted.
 	//
-	//     *
-	// NOT_CHECKED: AWS CloudFormation has not checked the stack set for drift.
+	// * NOT_CHECKED:
+	// AWS CloudFormation has not checked the stack set for drift.
 	//
-	//     *
-	// IN_SYNC: All of the stack instances belonging to the stack set stack match from
-	// the expected template and parameter configuration.
+	// * IN_SYNC: All of
+	// the stack instances belonging to the stack set stack match from the expected
+	// template and parameter configuration.
 	DriftStatus StackSetDriftStatus
 
 	// The number of stack instances that have drifted from the expected template and
@@ -1432,16 +1431,16 @@ type StackSetDriftDetectionDetails struct {
 	// The total number of stack instances belonging to this stack set. The total
 	// number of stack instances is equal to the total of:
 	//
-	//     * Stack instances that
+	// * Stack instances that
 	// match the stack set configuration.
 	//
-	//     * Stack instances that have drifted from
-	// the stack set configuration.
+	// * Stack instances that have drifted from the
+	// stack set configuration.
 	//
-	//     * Stack instances where the drift detection
-	// operation has failed.
+	// * Stack instances where the drift detection operation
+	// has failed.
 	//
-	//     * Stack instances currently being checked for drift.
+	// * Stack instances currently being checked for drift.
 	TotalStackInstancesCount *int32
 }
 
@@ -1509,7 +1508,7 @@ type StackSetOperation struct {
 
 	// The status of the operation.
 	//
-	//     * FAILED: The operation exceeded the specified
+	// * FAILED: The operation exceeded the specified
 	// failure tolerance. The failure tolerance value that you've set for an operation
 	// is applied for each Region during stack create and update operations. If the
 	// number of failed stacks within a Region exceeds the failure tolerance, the
@@ -1517,24 +1516,24 @@ type StackSetOperation struct {
 	// status of the operation as a whole to FAILED, and AWS CloudFormation cancels the
 	// operation in any remaining Regions.
 	//
-	//     * QUEUED: [Service-managed permissions]
-	// For automatic deployments that require a sequence of operations, the operation
-	// is queued to be performed. For more information, see the stack set operation
-	// status codes
+	// * QUEUED: [Service-managed permissions] For
+	// automatic deployments that require a sequence of operations, the operation is
+	// queued to be performed. For more information, see the stack set operation status
+	// codes
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-status-codes)
 	// in the AWS CloudFormation User Guide.
 	//
-	//     * RUNNING: The operation is currently
+	// * RUNNING: The operation is currently
 	// being performed.
 	//
-	//     * STOPPED: The user has cancelled the operation.
+	// * STOPPED: The user has cancelled the operation.
 	//
-	//     *
-	// STOPPING: The operation is in the process of stopping, at user request.
+	// * STOPPING:
+	// The operation is in the process of stopping, at user request.
 	//
-	//     *
-	// SUCCEEDED: The operation completed creating or updating all the specified stacks
-	// without exceeding the failure tolerance for the operation.
+	// * SUCCEEDED: The
+	// operation completed creating or updating all the specified stacks without
+	// exceeding the failure tolerance for the operation.
 	Status StackSetOperationStatus
 }
 
@@ -1607,24 +1606,24 @@ type StackSetOperationResultSummary struct {
 	// The result status of the stack set operation for the given account in the given
 	// Region.
 	//
-	//     * CANCELLED: The operation in the specified account and Region has
-	// been cancelled. This is either because a user has stopped the stack set
-	// operation, or because the failure tolerance of the stack set operation has been
-	// exceeded.
+	// * CANCELLED: The operation in the specified account and Region has been
+	// cancelled. This is either because a user has stopped the stack set operation, or
+	// because the failure tolerance of the stack set operation has been exceeded.
 	//
-	//     * FAILED: The operation in the specified account and Region
-	// failed. If the stack set operation fails in enough accounts within a Region, the
-	// failure tolerance for the stack set operation as a whole might be exceeded.
+	// *
+	// FAILED: The operation in the specified account and Region failed. If the stack
+	// set operation fails in enough accounts within a Region, the failure tolerance
+	// for the stack set operation as a whole might be exceeded.
 	//
+	// * RUNNING: The
+	// operation in the specified account and Region is currently in progress.
 	//
-	// * RUNNING: The operation in the specified account and Region is currently in
-	// progress.
+	// *
+	// PENDING: The operation in the specified account and Region has yet to start.
 	//
-	//     * PENDING: The operation in the specified account and Region has
-	// yet to start.
-	//
-	//     * SUCCEEDED: The operation in the specified account and
-	// Region completed successfully.
+	// *
+	// SUCCEEDED: The operation in the specified account and Region completed
+	// successfully.
 	Status StackSetOperationResultStatus
 
 	// The reason for the assigned result status.
@@ -1657,7 +1656,7 @@ type StackSetOperationSummary struct {
 
 	// The overall status of the operation.
 	//
-	//     * FAILED: The operation exceeded the
+	// * FAILED: The operation exceeded the
 	// specified failure tolerance. The failure tolerance value that you've set for an
 	// operation is applied for each Region during stack create and update operations.
 	// If the number of failed stacks within a Region exceeds the failure tolerance,
@@ -1665,24 +1664,24 @@ type StackSetOperationSummary struct {
 	// the status of the operation as a whole to FAILED, and AWS CloudFormation cancels
 	// the operation in any remaining Regions.
 	//
-	//     * QUEUED: [Service-managed
-	// permissions] For automatic deployments that require a sequence of operations,
-	// the operation is queued to be performed. For more information, see the stack set
-	// operation status codes
+	// * QUEUED: [Service-managed permissions]
+	// For automatic deployments that require a sequence of operations, the operation
+	// is queued to be performed. For more information, see the stack set operation
+	// status codes
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-status-codes)
 	// in the AWS CloudFormation User Guide.
 	//
-	//     * RUNNING: The operation is currently
+	// * RUNNING: The operation is currently
 	// being performed.
 	//
-	//     * STOPPED: The user has cancelled the operation.
+	// * STOPPED: The user has cancelled the operation.
 	//
-	//     *
-	// STOPPING: The operation is in the process of stopping, at user request.
+	// * STOPPING:
+	// The operation is in the process of stopping, at user request.
 	//
-	//     *
-	// SUCCEEDED: The operation completed creating or updating all the specified stacks
-	// without exceeding the failure tolerance for the operation.
+	// * SUCCEEDED: The
+	// operation completed creating or updating all the specified stacks without
+	// exceeding the failure tolerance for the operation.
 	Status StackSetOperationStatus
 }
 
@@ -1703,20 +1702,20 @@ type StackSetSummary struct {
 	// more of its stack instances have drifted from their expected template and
 	// parameter configuration.
 	//
-	//     * DRIFTED: One or more of the stack instances
+	// * DRIFTED: One or more of the stack instances
 	// belonging to the stack set stack differs from the expected template and
 	// parameter configuration. A stack instance is considered to have drifted if one
 	// or more of the resources in the associated stack have drifted.
 	//
-	//     *
-	// NOT_CHECKED: AWS CloudFormation has not checked the stack set for drift.
+	// * NOT_CHECKED:
+	// AWS CloudFormation has not checked the stack set for drift.
 	//
-	//     *
-	// IN_SYNC: All of the stack instances belonging to the stack set stack match from
-	// the expected template and parameter configuration.
+	// * IN_SYNC: All of
+	// the stack instances belonging to the stack set stack match from the expected
+	// template and parameter configuration.
 	//
-	//     * UNKNOWN: This value is
-	// reserved for future use.
+	// * UNKNOWN: This value is reserved for
+	// future use.
 	DriftStatus StackDriftStatus
 
 	// Most recent time when CloudFormation performed a drift detection operation on
@@ -1726,15 +1725,15 @@ type StackSetSummary struct {
 
 	// Describes how the IAM roles required for stack set operations are created.
 	//
-	//
-	// * With self-managed permissions, you must create the administrator and execution
+	// *
+	// With self-managed permissions, you must create the administrator and execution
 	// roles required to deploy to target accounts. For more information, see Grant
 	// Self-Managed Stack Set Permissions
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html).
 	//
-	//
-	// * With service-managed permissions, StackSets automatically creates the IAM
-	// roles required to deploy to accounts managed by AWS Organizations. For more
+	// *
+	// With service-managed permissions, StackSets automatically creates the IAM roles
+	// required to deploy to accounts managed by AWS Organizations. For more
 	// information, see Grant Service-Managed Stack Set Permissions
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-service-managed.html).
 	PermissionModel PermissionModels

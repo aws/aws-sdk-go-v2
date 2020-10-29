@@ -14,21 +14,21 @@ import (
 // Registers a new domain. Access Control You can use IAM policies to control this
 // action's access to Amazon SWF resources as follows:
 //
-//     * You cannot use an IAM
+// * You cannot use an IAM
 // policy to control domain access for this action. The name of the domain being
 // registered is available as the resource of this action.
 //
-//     * Use an Action
-// element to allow or deny permission to call this action.
+// * Use an Action element
+// to allow or deny permission to call this action.
 //
-//     * You cannot use
-// an IAM policy to constrain this action's parameters.
+// * You cannot use an IAM policy
+// to constrain this action's parameters.
 //
-// If the caller doesn't have
-// sufficient permissions to invoke the action, or the parameter values fall
-// outside the specified constraints, the action fails. The associated event
-// attribute's cause parameter is set to OPERATION_NOT_PERMITTED. For details and
-// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows
+// If the caller doesn't have sufficient
+// permissions to invoke the action, or the parameter values fall outside the
+// specified constraints, the action fails. The associated event attribute's cause
+// parameter is set to OPERATION_NOT_PERMITTED. For details and example IAM
+// policies, see Using IAM to Manage Access to Amazon SWF Workflows
 // (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 func (c *Client) RegisterDomain(ctx context.Context, params *RegisterDomainInput, optFns ...func(*Options)) (*RegisterDomainOutput, error) {

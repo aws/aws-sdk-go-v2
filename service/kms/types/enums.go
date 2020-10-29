@@ -6,9 +6,9 @@ type AlgorithmSpec string
 
 // Enum values for AlgorithmSpec
 const (
-	AlgorithmSpecRsaes_pkcs1_v1_5   AlgorithmSpec = "RSAES_PKCS1_V1_5"
-	AlgorithmSpecRsaes_oaep_sha_1   AlgorithmSpec = "RSAES_OAEP_SHA_1"
-	AlgorithmSpecRsaes_oaep_sha_256 AlgorithmSpec = "RSAES_OAEP_SHA_256"
+	AlgorithmSpecRsaesPkcs1V15   AlgorithmSpec = "RSAES_PKCS1_V1_5"
+	AlgorithmSpecRsaesOaepSha1   AlgorithmSpec = "RSAES_OAEP_SHA_1"
+	AlgorithmSpecRsaesOaepSha256 AlgorithmSpec = "RSAES_OAEP_SHA_256"
 )
 
 // Values returns all known values for AlgorithmSpec. Note that this can be
@@ -26,15 +26,15 @@ type ConnectionErrorCodeType string
 
 // Enum values for ConnectionErrorCodeType
 const (
-	ConnectionErrorCodeTypeInvalid_credentials        ConnectionErrorCodeType = "INVALID_CREDENTIALS"
-	ConnectionErrorCodeTypeCluster_not_found          ConnectionErrorCodeType = "CLUSTER_NOT_FOUND"
-	ConnectionErrorCodeTypeNetwork_errors             ConnectionErrorCodeType = "NETWORK_ERRORS"
-	ConnectionErrorCodeTypeInternal_error             ConnectionErrorCodeType = "INTERNAL_ERROR"
-	ConnectionErrorCodeTypeInsufficient_cloudhsm_hsms ConnectionErrorCodeType = "INSUFFICIENT_CLOUDHSM_HSMS"
-	ConnectionErrorCodeTypeUser_locked_out            ConnectionErrorCodeType = "USER_LOCKED_OUT"
-	ConnectionErrorCodeTypeUser_not_found             ConnectionErrorCodeType = "USER_NOT_FOUND"
-	ConnectionErrorCodeTypeUser_logged_in             ConnectionErrorCodeType = "USER_LOGGED_IN"
-	ConnectionErrorCodeTypeSubnet_not_found           ConnectionErrorCodeType = "SUBNET_NOT_FOUND"
+	ConnectionErrorCodeTypeInvalidCredentials       ConnectionErrorCodeType = "INVALID_CREDENTIALS"
+	ConnectionErrorCodeTypeClusterNotFound          ConnectionErrorCodeType = "CLUSTER_NOT_FOUND"
+	ConnectionErrorCodeTypeNetworkErrors            ConnectionErrorCodeType = "NETWORK_ERRORS"
+	ConnectionErrorCodeTypeInternalError            ConnectionErrorCodeType = "INTERNAL_ERROR"
+	ConnectionErrorCodeTypeInsufficientCloudhsmHsms ConnectionErrorCodeType = "INSUFFICIENT_CLOUDHSM_HSMS"
+	ConnectionErrorCodeTypeUserLockedOut            ConnectionErrorCodeType = "USER_LOCKED_OUT"
+	ConnectionErrorCodeTypeUserNotFound             ConnectionErrorCodeType = "USER_NOT_FOUND"
+	ConnectionErrorCodeTypeUserLoggedIn             ConnectionErrorCodeType = "USER_LOGGED_IN"
+	ConnectionErrorCodeTypeSubnetNotFound           ConnectionErrorCodeType = "SUBNET_NOT_FOUND"
 )
 
 // Values returns all known values for ConnectionErrorCodeType. Note that this can
@@ -82,14 +82,14 @@ type CustomerMasterKeySpec string
 
 // Enum values for CustomerMasterKeySpec
 const (
-	CustomerMasterKeySpecRsa_2048          CustomerMasterKeySpec = "RSA_2048"
-	CustomerMasterKeySpecRsa_3072          CustomerMasterKeySpec = "RSA_3072"
-	CustomerMasterKeySpecRsa_4096          CustomerMasterKeySpec = "RSA_4096"
-	CustomerMasterKeySpecEcc_nist_p256     CustomerMasterKeySpec = "ECC_NIST_P256"
-	CustomerMasterKeySpecEcc_nist_p384     CustomerMasterKeySpec = "ECC_NIST_P384"
-	CustomerMasterKeySpecEcc_nist_p521     CustomerMasterKeySpec = "ECC_NIST_P521"
-	CustomerMasterKeySpecEcc_secg_p256k1   CustomerMasterKeySpec = "ECC_SECG_P256K1"
-	CustomerMasterKeySpecSymmetric_default CustomerMasterKeySpec = "SYMMETRIC_DEFAULT"
+	CustomerMasterKeySpecRsa2048          CustomerMasterKeySpec = "RSA_2048"
+	CustomerMasterKeySpecRsa3072          CustomerMasterKeySpec = "RSA_3072"
+	CustomerMasterKeySpecRsa4096          CustomerMasterKeySpec = "RSA_4096"
+	CustomerMasterKeySpecEccNistP256      CustomerMasterKeySpec = "ECC_NIST_P256"
+	CustomerMasterKeySpecEccNistP384      CustomerMasterKeySpec = "ECC_NIST_P384"
+	CustomerMasterKeySpecEccNistP521      CustomerMasterKeySpec = "ECC_NIST_P521"
+	CustomerMasterKeySpecEccSecgP256k1    CustomerMasterKeySpec = "ECC_SECG_P256K1"
+	CustomerMasterKeySpecSymmetricDefault CustomerMasterKeySpec = "SYMMETRIC_DEFAULT"
 )
 
 // Values returns all known values for CustomerMasterKeySpec. Note that this can be
@@ -112,13 +112,13 @@ type DataKeyPairSpec string
 
 // Enum values for DataKeyPairSpec
 const (
-	DataKeyPairSpecRsa_2048        DataKeyPairSpec = "RSA_2048"
-	DataKeyPairSpecRsa_3072        DataKeyPairSpec = "RSA_3072"
-	DataKeyPairSpecRsa_4096        DataKeyPairSpec = "RSA_4096"
-	DataKeyPairSpecEcc_nist_p256   DataKeyPairSpec = "ECC_NIST_P256"
-	DataKeyPairSpecEcc_nist_p384   DataKeyPairSpec = "ECC_NIST_P384"
-	DataKeyPairSpecEcc_nist_p521   DataKeyPairSpec = "ECC_NIST_P521"
-	DataKeyPairSpecEcc_secg_p256k1 DataKeyPairSpec = "ECC_SECG_P256K1"
+	DataKeyPairSpecRsa2048       DataKeyPairSpec = "RSA_2048"
+	DataKeyPairSpecRsa3072       DataKeyPairSpec = "RSA_3072"
+	DataKeyPairSpecRsa4096       DataKeyPairSpec = "RSA_4096"
+	DataKeyPairSpecEccNistP256   DataKeyPairSpec = "ECC_NIST_P256"
+	DataKeyPairSpecEccNistP384   DataKeyPairSpec = "ECC_NIST_P384"
+	DataKeyPairSpecEccNistP521   DataKeyPairSpec = "ECC_NIST_P521"
+	DataKeyPairSpecEccSecgP256k1 DataKeyPairSpec = "ECC_SECG_P256K1"
 )
 
 // Values returns all known values for DataKeyPairSpec. Note that this can be
@@ -140,8 +140,8 @@ type DataKeySpec string
 
 // Enum values for DataKeySpec
 const (
-	DataKeySpecAes_256 DataKeySpec = "AES_256"
-	DataKeySpecAes_128 DataKeySpec = "AES_128"
+	DataKeySpecAes256 DataKeySpec = "AES_256"
+	DataKeySpecAes128 DataKeySpec = "AES_128"
 )
 
 // Values returns all known values for DataKeySpec. Note that this can be expanded
@@ -158,9 +158,9 @@ type EncryptionAlgorithmSpec string
 
 // Enum values for EncryptionAlgorithmSpec
 const (
-	EncryptionAlgorithmSpecSymmetric_default  EncryptionAlgorithmSpec = "SYMMETRIC_DEFAULT"
-	EncryptionAlgorithmSpecRsaes_oaep_sha_1   EncryptionAlgorithmSpec = "RSAES_OAEP_SHA_1"
-	EncryptionAlgorithmSpecRsaes_oaep_sha_256 EncryptionAlgorithmSpec = "RSAES_OAEP_SHA_256"
+	EncryptionAlgorithmSpecSymmetricDefault EncryptionAlgorithmSpec = "SYMMETRIC_DEFAULT"
+	EncryptionAlgorithmSpecRsaesOaepSha1    EncryptionAlgorithmSpec = "RSAES_OAEP_SHA_1"
+	EncryptionAlgorithmSpecRsaesOaepSha256  EncryptionAlgorithmSpec = "RSAES_OAEP_SHA_256"
 )
 
 // Values returns all known values for EncryptionAlgorithmSpec. Note that this can
@@ -178,8 +178,8 @@ type ExpirationModelType string
 
 // Enum values for ExpirationModelType
 const (
-	ExpirationModelTypeKey_material_expires         ExpirationModelType = "KEY_MATERIAL_EXPIRES"
-	ExpirationModelTypeKey_material_does_not_expire ExpirationModelType = "KEY_MATERIAL_DOES_NOT_EXPIRE"
+	ExpirationModelTypeKeyMaterialExpires       ExpirationModelType = "KEY_MATERIAL_EXPIRES"
+	ExpirationModelTypeKeyMaterialDoesNotExpire ExpirationModelType = "KEY_MATERIAL_DOES_NOT_EXPIRE"
 )
 
 // Values returns all known values for ExpirationModelType. Note that this can be
@@ -280,8 +280,8 @@ type KeyUsageType string
 
 // Enum values for KeyUsageType
 const (
-	KeyUsageTypeSign_verify     KeyUsageType = "SIGN_VERIFY"
-	KeyUsageTypeEncrypt_decrypt KeyUsageType = "ENCRYPT_DECRYPT"
+	KeyUsageTypeSignVerify     KeyUsageType = "SIGN_VERIFY"
+	KeyUsageTypeEncryptDecrypt KeyUsageType = "ENCRYPT_DECRYPT"
 )
 
 // Values returns all known values for KeyUsageType. Note that this can be expanded
@@ -316,9 +316,9 @@ type OriginType string
 
 // Enum values for OriginType
 const (
-	OriginTypeAws_kms      OriginType = "AWS_KMS"
-	OriginTypeExternal     OriginType = "EXTERNAL"
-	OriginTypeAws_cloudhsm OriginType = "AWS_CLOUDHSM"
+	OriginTypeAwsKms      OriginType = "AWS_KMS"
+	OriginTypeExternal    OriginType = "EXTERNAL"
+	OriginTypeAwsCloudhsm OriginType = "AWS_CLOUDHSM"
 )
 
 // Values returns all known values for OriginType. Note that this can be expanded
@@ -336,15 +336,15 @@ type SigningAlgorithmSpec string
 
 // Enum values for SigningAlgorithmSpec
 const (
-	SigningAlgorithmSpecRsassa_pss_sha_256        SigningAlgorithmSpec = "RSASSA_PSS_SHA_256"
-	SigningAlgorithmSpecRsassa_pss_sha_384        SigningAlgorithmSpec = "RSASSA_PSS_SHA_384"
-	SigningAlgorithmSpecRsassa_pss_sha_512        SigningAlgorithmSpec = "RSASSA_PSS_SHA_512"
-	SigningAlgorithmSpecRsassa_pkcs1_v1_5_sha_256 SigningAlgorithmSpec = "RSASSA_PKCS1_V1_5_SHA_256"
-	SigningAlgorithmSpecRsassa_pkcs1_v1_5_sha_384 SigningAlgorithmSpec = "RSASSA_PKCS1_V1_5_SHA_384"
-	SigningAlgorithmSpecRsassa_pkcs1_v1_5_sha_512 SigningAlgorithmSpec = "RSASSA_PKCS1_V1_5_SHA_512"
-	SigningAlgorithmSpecEcdsa_sha_256             SigningAlgorithmSpec = "ECDSA_SHA_256"
-	SigningAlgorithmSpecEcdsa_sha_384             SigningAlgorithmSpec = "ECDSA_SHA_384"
-	SigningAlgorithmSpecEcdsa_sha_512             SigningAlgorithmSpec = "ECDSA_SHA_512"
+	SigningAlgorithmSpecRsassaPssSha256      SigningAlgorithmSpec = "RSASSA_PSS_SHA_256"
+	SigningAlgorithmSpecRsassaPssSha384      SigningAlgorithmSpec = "RSASSA_PSS_SHA_384"
+	SigningAlgorithmSpecRsassaPssSha512      SigningAlgorithmSpec = "RSASSA_PSS_SHA_512"
+	SigningAlgorithmSpecRsassaPkcs1V15Sha256 SigningAlgorithmSpec = "RSASSA_PKCS1_V1_5_SHA_256"
+	SigningAlgorithmSpecRsassaPkcs1V15Sha384 SigningAlgorithmSpec = "RSASSA_PKCS1_V1_5_SHA_384"
+	SigningAlgorithmSpecRsassaPkcs1V15Sha512 SigningAlgorithmSpec = "RSASSA_PKCS1_V1_5_SHA_512"
+	SigningAlgorithmSpecEcdsaSha256          SigningAlgorithmSpec = "ECDSA_SHA_256"
+	SigningAlgorithmSpecEcdsaSha384          SigningAlgorithmSpec = "ECDSA_SHA_384"
+	SigningAlgorithmSpecEcdsaSha512          SigningAlgorithmSpec = "ECDSA_SHA_512"
 )
 
 // Values returns all known values for SigningAlgorithmSpec. Note that this can be
@@ -368,7 +368,7 @@ type WrappingKeySpec string
 
 // Enum values for WrappingKeySpec
 const (
-	WrappingKeySpecRsa_2048 WrappingKeySpec = "RSA_2048"
+	WrappingKeySpecRsa2048 WrappingKeySpec = "RSA_2048"
 )
 
 // Values returns all known values for WrappingKeySpec. Note that this can be

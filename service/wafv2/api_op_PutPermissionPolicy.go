@@ -14,15 +14,14 @@ import (
 // across accounts. You must be the owner of the rule group to perform this
 // operation. This action is subject to the following restrictions:
 //
-//     * You can
+// * You can
 // attach only one policy with each PutPermissionPolicy request.
 //
-//     * The ARN in
-// the request must be a valid WAF RuleGroup ARN and the rule group must exist in
-// the same region.
+// * The ARN in the
+// request must be a valid WAF RuleGroup ARN and the rule group must exist in the
+// same region.
 //
-//     * The user making the request must be the owner of the
-// rule group.
+// * The user making the request must be the owner of the rule group.
 func (c *Client) PutPermissionPolicy(ctx context.Context, params *PutPermissionPolicyInput, optFns ...func(*Options)) (*PutPermissionPolicyOutput, error) {
 	if params == nil {
 		params = &PutPermissionPolicyInput{}
@@ -43,20 +42,20 @@ type PutPermissionPolicyInput struct {
 	// The policy to attach to the specified rule group. The policy specifications must
 	// conform to the following:
 	//
-	//     * The policy must be composed using IAM Policy
+	// * The policy must be composed using IAM Policy
 	// version 2012-10-17 or version 2015-01-01.
 	//
-	//     * The policy must include
+	// * The policy must include
 	// specifications for Effect, Action, and Principal.
 	//
-	//     * Effect must specify
+	// * Effect must specify
 	// Allow.
 	//
-	//     * Action must specify wafv2:CreateWebACL, wafv2:UpdateWebACL, and
+	// * Action must specify wafv2:CreateWebACL, wafv2:UpdateWebACL, and
 	// wafv2:PutFirewallManagerRuleGroups. AWS WAF rejects any extra actions or
 	// wildcard actions in the policy.
 	//
-	//     * The policy must not include a Resource
+	// * The policy must not include a Resource
 	// parameter.
 	//
 	// For more information, see IAM Policies

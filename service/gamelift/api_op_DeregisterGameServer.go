@@ -20,18 +20,18 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
 // Related operations
 //
-//     * RegisterGameServer
+// * RegisterGameServer
 //
-//     * ListGameServers
+// * ListGameServers
 //
-//     *
+// *
 // ClaimGameServer
 //
-//     * DescribeGameServer
+// * DescribeGameServer
 //
-//     * UpdateGameServer
+// * UpdateGameServer
 //
-//     *
+// *
 // DeregisterGameServer
 func (c *Client) DeregisterGameServer(ctx context.Context, params *DeregisterGameServerInput, optFns ...func(*Options)) (*DeregisterGameServerOutput, error) {
 	if params == nil {

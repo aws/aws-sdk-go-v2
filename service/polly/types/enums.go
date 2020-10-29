@@ -114,10 +114,10 @@ type OutputFormat string
 
 // Enum values for OutputFormat
 const (
-	OutputFormatJson       OutputFormat = "json"
-	OutputFormatMp3        OutputFormat = "mp3"
-	OutputFormatOgg_vorbis OutputFormat = "ogg_vorbis"
-	OutputFormatPcm        OutputFormat = "pcm"
+	OutputFormatJson      OutputFormat = "json"
+	OutputFormatMp3       OutputFormat = "mp3"
+	OutputFormatOggVorbis OutputFormat = "ogg_vorbis"
+	OutputFormatPcm       OutputFormat = "pcm"
 )
 
 // Values returns all known values for OutputFormat. Note that this can be expanded
@@ -158,10 +158,10 @@ type TaskStatus string
 
 // Enum values for TaskStatus
 const (
-	TaskStatusScheduled   TaskStatus = "scheduled"
-	TaskStatusIn_progress TaskStatus = "inProgress"
-	TaskStatusCompleted   TaskStatus = "completed"
-	TaskStatusFailed      TaskStatus = "failed"
+	TaskStatusScheduled  TaskStatus = "scheduled"
+	TaskStatusInProgress TaskStatus = "inProgress"
+	TaskStatusCompleted  TaskStatus = "completed"
+	TaskStatusFailed     TaskStatus = "failed"
 )
 
 // Values returns all known values for TaskStatus. Note that this can be expanded

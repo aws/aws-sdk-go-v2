@@ -19,7 +19,7 @@ import (
 // support bundle logs. Use RetrieveEnvironmentInfo to obtain the set of logs.
 // Related Topics
 //
-//     * RetrieveEnvironmentInfo
+// * RetrieveEnvironmentInfo
 func (c *Client) RequestEnvironmentInfo(ctx context.Context, params *RequestEnvironmentInfoInput, optFns ...func(*Options)) (*RequestEnvironmentInfoOutput, error) {
 	if params == nil {
 		params = &RequestEnvironmentInfoInput{}

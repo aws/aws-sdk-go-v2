@@ -28,25 +28,24 @@ import (
 // operation has the following default limits. By default, you cannot do the
 // following:
 //
-//     * Scale more than ten times per rolling 24-hour period per
-// stream
+// * Scale more than ten times per rolling 24-hour period per stream
 //
-//     * Scale up to more than double your current shard count for a
-// stream
+// *
+// Scale up to more than double your current shard count for a stream
 //
-//     * Scale down below half your current shard count for a stream
+// * Scale down
+// below half your current shard count for a stream
 //
-//     *
-// Scale up to more than 500 shards in a stream
+// * Scale up to more than 500
+// shards in a stream
 //
-//     * Scale a stream with more
-// than 500 shards down unless the result is less than 500 shards
+// * Scale a stream with more than 500 shards down unless the
+// result is less than 500 shards
 //
-//     * Scale up
-// to more than the shard limit for your account
+// * Scale up to more than the shard limit for your
+// account
 //
-// For the default limits for an AWS
-// account, see Streams Limits
+// For the default limits for an AWS account, see Streams Limits
 // (https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html)
 // in the Amazon Kinesis Data Streams Developer Guide. To request an increase in
 // the call rate limit, the shard limit for this API, or your overall shard limit,
@@ -82,18 +81,18 @@ type UpdateShardCountInput struct {
 	// The new number of shards. This value has the following default limits. By
 	// default, you cannot do the following:
 	//
-	//     * Set this value to more than double
-	// your current shard count for a stream.
-	//
-	//     * Set this value below half your
+	// * Set this value to more than double your
 	// current shard count for a stream.
 	//
-	//     * Set this value to more than 500 shards
-	// in a stream (the default limit for shard count per stream is 500 per account per
-	// region), unless you request a limit increase.
+	// * Set this value below half your current
+	// shard count for a stream.
 	//
-	//     * Scale a stream with more
-	// than 500 shards down unless you set this value to less than 500 shards.
+	// * Set this value to more than 500 shards in a stream
+	// (the default limit for shard count per stream is 500 per account per region),
+	// unless you request a limit increase.
+	//
+	// * Scale a stream with more than 500 shards
+	// down unless you set this value to less than 500 shards.
 	//
 	// This member is required.
 	TargetShardCount *int32

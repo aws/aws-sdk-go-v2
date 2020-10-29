@@ -25,28 +25,27 @@ import (
 // private key and that the message hasn't changed since it was signed. To use the
 // Sign operation, provide the following information:
 //
-//     * Use the KeyId
-// parameter to identify an asymmetric CMK with a KeyUsage value of SIGN_VERIFY. To
-// get the KeyUsage value of a CMK, use the DescribeKey operation. The caller must
-// have kms:Sign permission on the CMK.
+// * Use the KeyId parameter to
+// identify an asymmetric CMK with a KeyUsage value of SIGN_VERIFY. To get the
+// KeyUsage value of a CMK, use the DescribeKey operation. The caller must have
+// kms:Sign permission on the CMK.
 //
-//     * Use the Message parameter to specify
-// the message or message digest to sign. You can submit messages of up to 4096
-// bytes. To sign a larger message, generate a hash digest of the message, and then
+// * Use the Message parameter to specify the
+// message or message digest to sign. You can submit messages of up to 4096 bytes.
+// To sign a larger message, generate a hash digest of the message, and then
 // provide the hash digest in the Message parameter. To indicate whether the
 // message is a full message or a digest, use the MessageType parameter.
 //
-//     *
-// Choose a signing algorithm that is compatible with the CMK.
+// * Choose
+// a signing algorithm that is compatible with the CMK.
 //
-// When signing a
-// message, be sure to record the CMK and the signing algorithm. This information
-// is required to verify the signature. To verify the signature that this operation
-// generates, use the Verify operation. Or use the GetPublicKey operation to
-// download the public key and then use the public key to verify the signature
-// outside of AWS KMS. The CMK that you use for this operation must be in a
-// compatible key state. For details, see How Key State Affects Use of a Customer
-// Master Key
+// When signing a message, be
+// sure to record the CMK and the signing algorithm. This information is required
+// to verify the signature. To verify the signature that this operation generates,
+// use the Verify operation. Or use the GetPublicKey operation to download the
+// public key and then use the public key to verify the signature outside of AWS
+// KMS. The CMK that you use for this operation must be in a compatible key state.
+// For details, see How Key State Affects Use of a Customer Master Key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 // AWS Key Management Service Developer Guide.
 func (c *Client) Sign(ctx context.Context, params *SignInput, optFns ...func(*Options)) (*SignOutput, error) {
@@ -73,16 +72,16 @@ type SignInput struct {
 	// alias name, prefix it with "alias/". To specify a CMK in a different AWS
 	// account, you must use the key ARN or alias ARN. For example:
 	//
-	//     * Key ID:
+	// * Key ID:
 	// 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
-	//     * Key ARN:
+	// * Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
+	// *
+	// Alias name: alias/ExampleAlias
 	//
-	// * Alias name: alias/ExampleAlias
-	//
-	//     * Alias ARN:
+	// * Alias ARN:
 	// arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
 	//
 	// To get the key ID and key
@@ -126,12 +125,12 @@ type SignOutput struct {
 
 	// The cryptographic signature that was generated for the message.
 	//
-	//     * When used
+	// * When used
 	// with the supported RSA signing algorithms, the encoding of this value is defined
 	// by PKCS #1 in RFC 8017 (https://tools.ietf.org/html/rfc8017).
 	//
-	//     * When used
-	// with the ECDSA_SHA_256, ECDSA_SHA_384, or ECDSA_SHA_512 signing algorithms, this
+	// * When used with
+	// the ECDSA_SHA_256, ECDSA_SHA_384, or ECDSA_SHA_512 signing algorithms, this
 	// value is a DER-encoded object as defined by ANS X9.62–2005 and RFC 3279 Section
 	// 2.2.3 (https://tools.ietf.org/html/rfc3279#section-2.2.3). This is the most
 	// commonly used signature format and is appropriate for most uses.

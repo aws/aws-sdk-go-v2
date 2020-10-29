@@ -220,8 +220,8 @@ type TLSSecurityPolicy string
 
 // Enum values for TLSSecurityPolicy
 const (
-	TLSSecurityPolicyPolicy_min_tls_1_0_2019_07 TLSSecurityPolicy = "Policy-Min-TLS-1-0-2019-07"
-	TLSSecurityPolicyPolicy_min_tls_1_2_2019_07 TLSSecurityPolicy = "Policy-Min-TLS-1-2-2019-07"
+	TLSSecurityPolicyPolicyMinTls10201907 TLSSecurityPolicy = "Policy-Min-TLS-1-0-2019-07"
+	TLSSecurityPolicyPolicyMinTls12201907 TLSSecurityPolicy = "Policy-Min-TLS-1-2-2019-07"
 )
 
 // Values returns all known values for TLSSecurityPolicy. Note that this can be

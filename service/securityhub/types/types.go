@@ -231,12 +231,12 @@ type AwsApiGatewayStageDetails struct {
 	// alphanumeric and underscore characters. Variable values can contain the
 	// following characters:
 	//
-	//     * Uppercase and lowercase letters
+	// * Uppercase and lowercase letters
 	//
-	//     * Numbers
+	// * Numbers
 	//
-	//
-	// * Special characters -._~:/?#&=,
+	// * Special
+	// characters -._~:/?#&=,
 	Variables map[string]*string
 
 	// The ARN of the web ACL associated with the stage.
@@ -357,12 +357,12 @@ type AwsApiGatewayV2StageDetails struct {
 	// alphanumeric and underscore characters. Variable values can contain the
 	// following characters:
 	//
-	//     * Uppercase and lowercase letters
+	// * Uppercase and lowercase letters
 	//
-	//     * Numbers
+	// * Numbers
 	//
-	//
-	// * Special characters -._~:/?#&=,
+	// * Special
+	// characters -._~:/?#&=,
 	StageVariables map[string]*string
 }
 
@@ -504,11 +504,11 @@ type AwsCertificateManagerCertificateDetails struct {
 
 // Contains information about one of the following:
 //
-//     * The initial validation
-// of each domain name that occurs as a result of the RequestCertificate request
+// * The initial validation of
+// each domain name that occurs as a result of the RequestCertificate request
 //
-//
-// * The validation of each domain name in the certificate, as it pertains to AWS
+// *
+// The validation of each domain name in the certificate, as it pertains to AWS
 // Certificate Manager managed renewal
 type AwsCertificateManagerCertificateDomainValidationOption struct {
 
@@ -608,15 +608,15 @@ type AwsCloudFrontDistributionCacheBehavior struct {
 	// The protocol that viewers can use to access the files in an origin. You can
 	// specify the following options:
 	//
-	//     * allow-all - Viewers can use HTTP or
-	// HTTPS.
+	// * allow-all - Viewers can use HTTP or HTTPS.
 	//
-	//     * redirect-to-https - CloudFront responds to HTTP requests with an
-	// HTTP status code of 301 (Moved Permanently) and the HTTPS URL. The viewer then
-	// uses the new URL to resubmit.
+	// *
+	// redirect-to-https - CloudFront responds to HTTP requests with an HTTP status
+	// code of 301 (Moved Permanently) and the HTTPS URL. The viewer then uses the new
+	// URL to resubmit.
 	//
-	//     * https-only - CloudFront responds to HTTP
-	// request with an HTTP status code of 403 (Forbidden).
+	// * https-only - CloudFront responds to HTTP request with an
+	// HTTP status code of 403 (Forbidden).
 	ViewerProtocolPolicy *string
 }
 
@@ -633,15 +633,15 @@ type AwsCloudFrontDistributionDefaultCacheBehavior struct {
 	// The protocol that viewers can use to access the files in an origin. You can
 	// specify the following options:
 	//
-	//     * allow-all - Viewers can use HTTP or
-	// HTTPS.
+	// * allow-all - Viewers can use HTTP or HTTPS.
 	//
-	//     * redirect-to-https - CloudFront responds to HTTP requests with an
-	// HTTP status code of 301 (Moved Permanently) and the HTTPS URL. The viewer then
-	// uses the new URL to resubmit.
+	// *
+	// redirect-to-https - CloudFront responds to HTTP requests with an HTTP status
+	// code of 301 (Moved Permanently) and the HTTPS URL. The viewer then uses the new
+	// URL to resubmit.
 	//
-	//     * https-only - CloudFront responds to HTTP
-	// request with an HTTP status code of 403 (Forbidden).
+	// * https-only - CloudFront responds to HTTP request with an
+	// HTTP status code of 403 (Forbidden).
 	ViewerProtocolPolicy *string
 }
 
@@ -866,16 +866,16 @@ type AwsCodeBuildProjectEnvironment struct {
 	// The type of credentials AWS CodeBuild uses to pull images in your build. Valid
 	// values:
 	//
-	//     * CODEBUILD specifies that AWS CodeBuild uses its own credentials.
-	// This requires that you modify your ECR repository policy to trust the AWS
-	// CodeBuild service principal.
+	// * CODEBUILD specifies that AWS CodeBuild uses its own credentials. This
+	// requires that you modify your ECR repository policy to trust the AWS CodeBuild
+	// service principal.
 	//
-	//     * SERVICE_ROLE specifies that AWS CodeBuild
-	// uses your build project's service role.
+	// * SERVICE_ROLE specifies that AWS CodeBuild uses your build
+	// project's service role.
 	//
-	// When you use a cross-account or private
-	// registry image, you must use SERVICE_ROLE credentials. When you use an AWS
-	// CodeBuild curated image, you must use CODEBUILD credentials.
+	// When you use a cross-account or private registry image,
+	// you must use SERVICE_ROLE credentials. When you use an AWS CodeBuild curated
+	// image, you must use CODEBUILD credentials.
 	ImagePullCredentialsType *string
 
 	// The credentials for access to a private registry.
@@ -924,57 +924,57 @@ type AwsCodeBuildProjectSource struct {
 	// Information about the location of the source code to be built. Valid values
 	// include:
 	//
-	//     * For source code settings that are specified in the source action
-	// of a pipeline in AWS CodePipeline, location should not be specified. If it is
+	// * For source code settings that are specified in the source action of
+	// a pipeline in AWS CodePipeline, location should not be specified. If it is
 	// specified, AWS CodePipeline ignores it. This is because AWS CodePipeline uses
 	// the settings in a pipeline's source action instead of this value.
 	//
-	//     * For
-	// source code in an AWS CodeCommit repository, the HTTPS clone URL to the
-	// repository that contains the source code and the build spec file (for example,
+	// * For source
+	// code in an AWS CodeCommit repository, the HTTPS clone URL to the repository that
+	// contains the source code and the build spec file (for example,
 	// https://git-codecommit.region-ID.amazonaws.com/v1/repos/repo-name ).
 	//
-	//     * For
+	// * For
 	// source code in an S3 input bucket, one of the following.
 	//
-	//         * The path to
-	// the ZIP file that contains the source code (for example,
+	// * The path to the ZIP
+	// file that contains the source code (for example,
 	// bucket-name/path/to/object-name.zip).
 	//
-	//         * The path to the folder that
-	// contains the source code (for example,
-	// bucket-name/path/to/source-code/folder/).
+	// * The path to the folder that contains
+	// the source code (for example, bucket-name/path/to/source-code/folder/).
 	//
-	//     * For source code in a GitHub
+	// * For
+	// source code in a GitHub repository, the HTTPS clone URL to the repository that
+	// contains the source and the build spec file.
+	//
+	// * For source code in a Bitbucket
 	// repository, the HTTPS clone URL to the repository that contains the source and
 	// the build spec file.
-	//
-	//     * For source code in a Bitbucket repository, the HTTPS
-	// clone URL to the repository that contains the source and the build spec file.
 	Location *string
 
 	// The type of repository that contains the source code to be built. Valid values
 	// are:
 	//
-	//     * BITBUCKET - The source code is in a Bitbucket repository.
+	// * BITBUCKET - The source code is in a Bitbucket repository.
 	//
-	//     *
-	// CODECOMMIT - The source code is in an AWS CodeCommit repository.
+	// * CODECOMMIT
+	// - The source code is in an AWS CodeCommit repository.
 	//
-	//     *
-	// CODEPIPELINE - The source code settings are specified in the source action of a
-	// pipeline in AWS CodePipeline.
+	// * CODEPIPELINE - The
+	// source code settings are specified in the source action of a pipeline in AWS
+	// CodePipeline.
 	//
-	//     * GITHUB - The source code is in a GitHub
-	// repository.
+	// * GITHUB - The source code is in a GitHub repository.
 	//
-	//     * GITHUB_ENTERPRISE - The source code is in a GitHub Enterprise
-	// repository.
+	// *
+	// GITHUB_ENTERPRISE - The source code is in a GitHub Enterprise repository.
 	//
-	//     * NO_SOURCE - The project does not have input source code.
+	// *
+	// NO_SOURCE - The project does not have input source code.
 	//
-	//
-	// * S3 - The source code is in an S3 input bucket.
+	// * S3 - The source code
+	// is in an S3 input bucket.
 	Type *string
 }
 
@@ -1639,10 +1639,10 @@ type AwsElasticsearchDomainDomainEndpointOptions struct {
 	// The TLS security policy to apply to the HTTPS endpoint of the Elasticsearch
 	// domain. Valid values:
 	//
-	//     * Policy-Min-TLS-1-0-2019-07, which supports TLSv1.0
-	// and higher
+	// * Policy-Min-TLS-1-0-2019-07, which supports TLSv1.0 and
+	// higher
 	//
-	//     * Policy-Min-TLS-1-2-2019-07, which only supports TLSv1.2
+	// * Policy-Min-TLS-1-2-2019-07, which only supports TLSv1.2
 	TLSSecurityPolicy *string
 }
 
@@ -2760,15 +2760,15 @@ type AwsRdsDbInstanceAssociatedRole struct {
 	// Describes the state of the association between the IAM role and the DB instance.
 	// The Status property returns one of the following values:
 	//
-	//     * ACTIVE - The IAM
+	// * ACTIVE - The IAM
 	// role ARN is associated with the DB instance and can be used to access other AWS
 	// services on your behalf.
 	//
-	//     * PENDING - The IAM role ARN is being associated
-	// with the DB instance.
+	// * PENDING - The IAM role ARN is being associated with
+	// the DB instance.
 	//
-	//     * INVALID - The IAM role ARN is associated with the
-	// DB instance. But the DB instance is unable to assume the IAM role in order to
+	// * INVALID - The IAM role ARN is associated with the DB
+	// instance. But the DB instance is unable to assume the IAM role in order to
 	// access other AWS services on your behalf.
 	Status *string
 }
@@ -2869,13 +2869,13 @@ type AwsRdsDbInstanceDetails struct {
 	// accounts is enabled, and otherwise false. IAM database authentication can be
 	// enabled for the following database engines.
 	//
-	//     * For MySQL 5.6, minor version
+	// * For MySQL 5.6, minor version
 	// 5.6.34 or higher
 	//
-	//     * For MySQL 5.7, minor version 5.7.16 or higher
+	// * For MySQL 5.7, minor version 5.7.16 or higher
 	//
-	//     *
-	// Aurora 5.6 or higher
+	// * Aurora 5.6
+	// or higher
 	IAMDatabaseAuthenticationEnabled *bool
 
 	// Indicates when the DB instance was created. Uses the date-time format specified
@@ -3360,20 +3360,19 @@ type AwsRedshiftClusterDetails struct {
 	// The availability status of the cluster for queries. Possible values are the
 	// following:
 	//
-	//     * Available - The cluster is available for queries.
+	// * Available - The cluster is available for queries.
 	//
-	//     *
-	// Unavailable - The cluster is not available for queries.
+	// * Unavailable -
+	// The cluster is not available for queries.
 	//
-	//     * Maintenance - The
-	// cluster is intermittently available for queries due to maintenance activities.
+	// * Maintenance - The cluster is
+	// intermittently available for queries due to maintenance activities.
 	//
+	// * Modifying
+	// -The cluster is intermittently available for queries due to changes that modify
+	// the cluster.
 	//
-	// * Modifying -The cluster is intermittently available for queries due to changes
-	// that modify the cluster.
-	//
-	//     * Failed - The cluster failed and is not available
-	// for queries.
+	// * Failed - The cluster failed and is not available for queries.
 	ClusterAvailabilityStatus *string
 
 	// Indicates when the cluster was created. Uses the date-time format specified in
@@ -4232,18 +4231,18 @@ type AwsSecurityFindingFilters struct {
 	// The status of the investigation into a finding. Allowed values are the
 	// following.
 	//
-	//     * NEW - The initial state of a finding, before it is reviewed.
+	// * NEW - The initial state of a finding, before it is reviewed.
 	//
-	//
-	// * NOTIFIED - Indicates that the resource owner has been notified about the
+	// *
+	// NOTIFIED - Indicates that the resource owner has been notified about the
 	// security issue. Used when the initial reviewer is not the resource owner, and
 	// needs intervention from the resource owner.
 	//
-	//     * SUPPRESSED - The finding will
-	// not be reviewed again and will not be acted upon.
+	// * SUPPRESSED - The finding will not
+	// be reviewed again and will not be acted upon.
 	//
-	//     * RESOLVED - The finding
-	// was reviewed and remediated and is now considered resolved.
+	// * RESOLVED - The finding was
+	// reviewed and remediated and is now considered resolved.
 	WorkflowStatus []*StringFilter
 }
 
@@ -4408,21 +4407,20 @@ type Compliance struct {
 
 	// The result of a standards check. The valid values for Status are as follows.
 	//
+	// *
+	// PASSED - Standards check passed for all evaluated resources.
 	//
-	// * PASSED - Standards check passed for all evaluated resources.
+	// * WARNING - Some
+	// information is missing or this check is not supported for your configuration.
 	//
-	//         *
-	// WARNING - Some information is missing or this check is not supported for your
-	// configuration.
+	// *
+	// FAILED - Standards check failed for at least one evaluated resource.
 	//
-	//         * FAILED - Standards check failed for at least one
-	// evaluated resource.
-	//
-	//         * NOT_AVAILABLE - Check could not be performed due
-	// to a service outage, API error, or because the result of the AWS Config
-	// evaluation was NOT_APPLICABLE. If the AWS Config evaluation result was
-	// NOT_APPLICABLE, then after 3 days, Security Hub automatically archives the
-	// finding.
+	// *
+	// NOT_AVAILABLE - Check could not be performed due to a service outage, API error,
+	// or because the result of the AWS Config evaluation was NOT_APPLICABLE. If the
+	// AWS Config evaluation result was NOT_APPLICABLE, then after 3 days, Security Hub
+	// automatically archives the finding.
 	Status ComplianceStatus
 
 	// For findings generated from controls, a list of reasons behind the value of
@@ -4693,25 +4691,25 @@ type Member struct {
 	// The status of the relationship between the member account and its master
 	// account. The status can have one of the following values:
 	//
-	//     * CREATED -
-	// Indicates that the master account added the member account, but has not yet
-	// invited the member account.
-	//
-	//     * INVITED - Indicates that the master account
-	// invited the member account. The member account has not yet responded to the
-	// invitation.
-	//
-	//     * ASSOCIATED - Indicates that the member account accepted the
-	// invitation.
-	//
-	//     * REMOVED - Indicates that the master account disassociated the
+	// * CREATED - Indicates
+	// that the master account added the member account, but has not yet invited the
 	// member account.
 	//
-	//     * RESIGNED - Indicates that the member account
-	// disassociated themselves from the master account.
+	// * INVITED - Indicates that the master account invited the
+	// member account. The member account has not yet responded to the invitation.
 	//
-	//     * DELETED - Indicates
-	// that the master account deleted the member account.
+	// *
+	// ASSOCIATED - Indicates that the member account accepted the invitation.
+	//
+	// *
+	// REMOVED - Indicates that the master account disassociated the member account.
+	//
+	// *
+	// RESIGNED - Indicates that the member account disassociated themselves from the
+	// master account.
+	//
+	// * DELETED - Indicates that the master account deleted the
+	// member account.
 	MemberStatus *string
 
 	// The timestamp for the date and time when the member account was updated.
@@ -4966,10 +4964,10 @@ type Product struct {
 	// The types of integration that the product supports. Available values are the
 	// following.
 	//
-	//     * SEND_FINDINGS_TO_SECURITY_HUB - Indicates that the integration
+	// * SEND_FINDINGS_TO_SECURITY_HUB - Indicates that the integration
 	// sends findings to Security Hub.
 	//
-	//     * RECEIVE_FINDINGS_FROM_SECURITY_HUB -
+	// * RECEIVE_FINDINGS_FROM_SECURITY_HUB -
 	// Indicates that the integration receives findings from Security Hub.
 	IntegrationTypes []IntegrationType
 
@@ -5179,14 +5177,14 @@ type ResourceDetails struct {
 	// Details about a resource that are not available in a type-specific details
 	// object. Use the Other object in the following cases.
 	//
-	//     * The type-specific
-	// object does not contain all of the fields that you want to populate. In this
-	// case, first use the type-specific object to populate those fields. Use the Other
+	// * The type-specific object
+	// does not contain all of the fields that you want to populate. In this case,
+	// first use the type-specific object to populate those fields. Use the Other
 	// object to populate the fields that are missing from the type-specific object.
 	//
-	//
-	// * The resource type does not have a corresponding object. This includes
-	// resources for which the type is Other.
+	// *
+	// The resource type does not have a corresponding object. This includes resources
+	// for which the type is Other.
 	Other map[string]*string
 }
 
@@ -5211,34 +5209,34 @@ type Severity struct {
 
 	// The severity value of the finding. The allowed values are the following.
 	//
-	//     *
+	// *
 	// INFORMATIONAL - No issue was found.
 	//
-	//     * LOW - The issue does not require
-	// action on its own.
+	// * LOW - The issue does not require action
+	// on its own.
 	//
-	//     * MEDIUM - The issue must be addressed but not
-	// urgently.
+	// * MEDIUM - The issue must be addressed but not urgently.
 	//
-	//     * HIGH - The issue must be addressed as a priority.
+	// * HIGH -
+	// The issue must be addressed as a priority.
 	//
-	//     *
-	// CRITICAL - The issue must be remediated immediately to avoid it escalating.
+	// * CRITICAL - The issue must be
+	// remediated immediately to avoid it escalating.
 	//
-	// If
-	// you provide Normalized and do not provide Label, then Label is set automatically
-	// as follows.
+	// If you provide Normalized and do
+	// not provide Label, then Label is set automatically as follows.
 	//
-	//     * 0 - INFORMATIONAL
+	// * 0 -
+	// INFORMATIONAL
 	//
-	//     * 1–39 - LOW
+	// * 1–39 - LOW
 	//
-	//     * 40–69 - MEDIUM
-	//
+	// * 40–69 - MEDIUM
 	//
 	// * 70–89 - HIGH
 	//
-	//     * 90–100 - CRITICAL
+	// * 90–100 -
+	// CRITICAL
 	Label SeverityLabel
 
 	// Deprecated. The normalized severity of a finding. This attribute is being
@@ -5246,16 +5244,16 @@ type Severity struct {
 	// and do not provide Normalized, then Normalized is set automatically as
 	// follows.
 	//
-	//     * INFORMATIONAL - 0
+	// * INFORMATIONAL - 0
 	//
-	//     * LOW - 1
+	// * LOW - 1
 	//
-	//     * MEDIUM - 40
+	// * MEDIUM - 40
 	//
-	//     * HIGH
-	// - 70
+	// * HIGH - 70
 	//
-	//     * CRITICAL - 90
+	// * CRITICAL
+	// - 90
 	Normalized *int32
 
 	// The native severity from the finding product that generated the finding.
@@ -5272,35 +5270,35 @@ type SeverityUpdate struct {
 
 	// The severity value of the finding. The allowed values are the following.
 	//
-	//     *
+	// *
 	// INFORMATIONAL - No issue was found.
 	//
-	//     * LOW - The issue does not require
-	// action on its own.
+	// * LOW - The issue does not require action
+	// on its own.
 	//
-	//     * MEDIUM - The issue must be addressed but not
-	// urgently.
+	// * MEDIUM - The issue must be addressed but not urgently.
 	//
-	//     * HIGH - The issue must be addressed as a priority.
+	// * HIGH -
+	// The issue must be addressed as a priority.
 	//
-	//     *
-	// CRITICAL - The issue must be remediated immediately to avoid it escalating.
+	// * CRITICAL - The issue must be
+	// remediated immediately to avoid it escalating.
 	Label SeverityLabel
 
 	// The normalized severity for the finding. This attribute is to be deprecated in
 	// favor of Label. If you provide Normalized and do not provide Label, Label is set
 	// automatically as follows.
 	//
-	//     * 0 - INFORMATIONAL
+	// * 0 - INFORMATIONAL
 	//
-	//     * 1–39 - LOW
+	// * 1–39 - LOW
 	//
-	//     *
-	// 40–69 - MEDIUM
+	// * 40–69 -
+	// MEDIUM
 	//
-	//     * 70–89 - HIGH
+	// * 70–89 - HIGH
 	//
-	//     * 90–100 - CRITICAL
+	// * 90–100 - CRITICAL
 	Normalized *int32
 
 	// The native severity as defined by the AWS service or integrated partner product
@@ -5457,31 +5455,30 @@ type StringFilter struct {
 	// for values that contain the filter criteria value, use one of the following
 	// comparison operators:
 	//
-	//     * To search for values that exactly match the filter
+	// * To search for values that exactly match the filter
 	// value, use EQUALS. For example, the filter ResourceType EQUALS
 	// AwsEc2SecurityGroup only matches findings that have a resource type of
 	// AwsEc2SecurityGroup.
 	//
-	//     * To search for values that start with the filter
-	// value, use PREFIX. For example, the filter ResourceType PREFIX AwsIam matches
-	// findings that have a resource type that starts with AwsIam. Findings with a
-	// resource type of AwsIamPolicy, AwsIamRole, or AwsIamUser would all
-	// match.
+	// * To search for values that start with the filter value,
+	// use PREFIX. For example, the filter ResourceType PREFIX AwsIam matches findings
+	// that have a resource type that starts with AwsIam. Findings with a resource type
+	// of AwsIamPolicy, AwsIamRole, or AwsIamUser would all match.
 	//
-	// EQUALS and PREFIX filters on the same field are joined by OR. A finding
-	// matches if it matches any one of those filters. To search for values that do not
-	// contain the filter criteria value, use one of the following comparison
-	// operators:
+	// EQUALS and PREFIX
+	// filters on the same field are joined by OR. A finding matches if it matches any
+	// one of those filters. To search for values that do not contain the filter
+	// criteria value, use one of the following comparison operators:
 	//
-	//     * To search for values that do not exactly match the filter
-	// value, use NOT_EQUALS. For example, the filter ResourceType NOT_EQUALS
-	// AwsIamPolicy matches findings that have a resource type other than
-	// AwsIamPolicy.
+	// * To search for
+	// values that do not exactly match the filter value, use NOT_EQUALS. For example,
+	// the filter ResourceType NOT_EQUALS AwsIamPolicy matches findings that have a
+	// resource type other than AwsIamPolicy.
 	//
-	//     * To search for values that do not start with the filter
-	// value, use PREFIX_NOT_EQUALS. For example, the filter ResourceType
-	// PREFIX_NOT_EQUALS AwsIam matches findings that have a resource type that does
-	// not start with AwsIam. Findings with a resource type of AwsIamPolicy,
+	// * To search for values that do not start
+	// with the filter value, use PREFIX_NOT_EQUALS. For example, the filter
+	// ResourceType PREFIX_NOT_EQUALS AwsIam matches findings that have a resource type
+	// that does not start with AwsIam. Findings with a resource type of AwsIamPolicy,
 	// AwsIamRole, or AwsIamUser would all be excluded from the results.
 	//
 	// NOT_EQUALS
@@ -5497,15 +5494,15 @@ type StringFilter struct {
 	// or AwsEc2. It then excludes findings that have a resource type of AwsIamPolicy
 	// and findings that have a resource type of AwsEc2NetworkInterface.
 	//
-	//     *
+	// *
 	// ResourceType PREFIX AwsIam
 	//
-	//     * ResourceType PREFIX AwsEc2
+	// * ResourceType PREFIX AwsEc2
 	//
-	//     * ResourceType
+	// * ResourceType
 	// NOT_EQUALS AwsIamPolicy
 	//
-	//     * ResourceType NOT_EQUALS AwsEc2NetworkInterface
+	// * ResourceType NOT_EQUALS AwsEc2NetworkInterface
 	Comparison StringFilterComparison
 
 	// The string filter value. Filter values are case sensitive. For example, the
@@ -5598,16 +5595,15 @@ type WafAction struct {
 	// Specifies how you want AWS WAF to respond to requests that match the settings in
 	// a rule. Valid settings include the following:
 	//
-	//     * ALLOW - AWS WAF allows
+	// * ALLOW - AWS WAF allows
 	// requests
 	//
-	//     * BLOCK - AWS WAF blocks requests
+	// * BLOCK - AWS WAF blocks requests
 	//
-	//     * COUNT - AWS WAF
-	// increments a counter of the requests that match all of the conditions in the
-	// rule. AWS WAF then continues to inspect the web request based on the remaining
-	// rules in the web ACL. You can't specify COUNT for the default action for a
-	// WebACL.
+	// * COUNT - AWS WAF increments a
+	// counter of the requests that match all of the conditions in the rule. AWS WAF
+	// then continues to inspect the web request based on the remaining rules in the
+	// web ACL. You can't specify COUNT for the default action for a WebACL.
 	Type *string
 }
 
@@ -5632,17 +5628,17 @@ type Workflow struct {
 	// The status of the investigation into the finding. The allowed values are the
 	// following.
 	//
-	//     * NEW - The initial state of a finding, before it is reviewed.
+	// * NEW - The initial state of a finding, before it is reviewed.
 	//
-	//
-	// * NOTIFIED - Indicates that you notified the resource owner about the security
+	// *
+	// NOTIFIED - Indicates that you notified the resource owner about the security
 	// issue. Used when the initial reviewer is not the resource owner, and needs
 	// intervention from the resource owner.
 	//
-	//     * SUPPRESSED - The finding will not
-	// be reviewed again and will not be acted upon.
+	// * SUPPRESSED - The finding will not be
+	// reviewed again and will not be acted upon.
 	//
-	//     * RESOLVED - The finding was
+	// * RESOLVED - The finding was
 	// reviewed and remediated and is now considered resolved.
 	Status WorkflowStatus
 }
@@ -5653,17 +5649,17 @@ type WorkflowUpdate struct {
 	// The status of the investigation into the finding. The allowed values are the
 	// following.
 	//
-	//     * NEW - The initial state of a finding, before it is reviewed.
+	// * NEW - The initial state of a finding, before it is reviewed.
 	//
-	//
-	// * NOTIFIED - Indicates that you notified the resource owner about the security
+	// *
+	// NOTIFIED - Indicates that you notified the resource owner about the security
 	// issue. Used when the initial reviewer is not the resource owner, and needs
 	// intervention from the resource owner.
 	//
-	//     * RESOLVED - The finding was reviewed
-	// and remediated and is now considered resolved.
+	// * RESOLVED - The finding was reviewed and
+	// remediated and is now considered resolved.
 	//
-	//     * SUPPRESSED - The finding
-	// will not be reviewed again and will not be acted upon.
+	// * SUPPRESSED - The finding will not
+	// be reviewed again and will not be acted upon.
 	Status WorkflowStatus
 }

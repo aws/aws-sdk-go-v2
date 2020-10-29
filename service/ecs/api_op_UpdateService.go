@@ -48,8 +48,8 @@ import (
 // deployment configuration parameters, minimumHealthyPercent and maximumPercent,
 // to determine the deployment strategy.
 //
-//     * If minimumHealthyPercent is below
-// 100%, the scheduler can ignore desiredCount temporarily during a deployment. For
+// * If minimumHealthyPercent is below 100%,
+// the scheduler can ignore desiredCount temporarily during a deployment. For
 // example, if desiredCount is four tasks, a minimum of 50% allows the scheduler to
 // stop two existing tasks before starting two new tasks. Tasks for services that
 // do not use a load balancer are considered healthy if they are in the RUNNING
@@ -57,7 +57,7 @@ import (
 // they are in the RUNNING state and the container instance they are hosted on is
 // reported as healthy by the load balancer.
 //
-//     * The maximumPercent parameter
+// * The maximumPercent parameter
 // represents an upper limit on the number of running tasks during a deployment,
 // which enables you to define the deployment batch size. For example, if
 // desiredCount is four tasks, a maximum of 200% starts four new tasks before
@@ -72,39 +72,39 @@ import (
 // When the service scheduler launches new tasks, it determines task placement in
 // your cluster with the following logic:
 //
-//     * Determine which of the container
+// * Determine which of the container
 // instances in your cluster can support your service's task definition (for
 // example, they have the required CPU, memory, ports, and container instance
 // attributes).
 //
-//     * By default, the service scheduler attempts to balance tasks
+// * By default, the service scheduler attempts to balance tasks
 // across Availability Zones in this manner (although you can choose a different
 // placement strategy):
 //
-//         * Sort the valid container instances by the fewest
-// number of running tasks for this service in the same Availability Zone as the
-// instance. For example, if zone A has one running service task and zones B and C
-// each have zero, valid container instances in either zone B or C are considered
-// optimal for placement.
-//
-//         * Place the new service task on a valid
-// container instance in an optimal Availability Zone (based on the previous
-// steps), favoring container instances with the fewest number of running tasks for
-// this service.
-//
-// When the service scheduler stops running tasks, it attempts to
-// maintain balance across the Availability Zones in your cluster using the
-// following logic:
-//
-//     * Sort the container instances by the largest number of
-// running tasks for this service in the same Availability Zone as the instance.
+// * Sort the valid container instances by the fewest number
+// of running tasks for this service in the same Availability Zone as the instance.
 // For example, if zone A has one running service task and zones B and C each have
-// two, container instances in either zone B or C are considered optimal for
-// termination.
+// zero, valid container instances in either zone B or C are considered optimal for
+// placement.
 //
-//     * Stop the task on a container instance in an optimal
-// Availability Zone (based on the previous steps), favoring container instances
-// with the largest number of running tasks for this service.
+// * Place the new service task on a valid container instance in an
+// optimal Availability Zone (based on the previous steps), favoring container
+// instances with the fewest number of running tasks for this service.
+//
+// When the
+// service scheduler stops running tasks, it attempts to maintain balance across
+// the Availability Zones in your cluster using the following logic:
+//
+// * Sort the
+// container instances by the largest number of running tasks for this service in
+// the same Availability Zone as the instance. For example, if zone A has one
+// running service task and zones B and C each have two, container instances in
+// either zone B or C are considered optimal for termination.
+//
+// * Stop the task on a
+// container instance in an optimal Availability Zone (based on the previous
+// steps), favoring container instances with the largest number of running tasks
+// for this service.
 func (c *Client) UpdateService(ctx context.Context, params *UpdateServiceInput, optFns ...func(*Options)) (*UpdateServiceOutput, error) {
 	if params == nil {
 		params = &UpdateServiceInput{}

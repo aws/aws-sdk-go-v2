@@ -18,19 +18,19 @@ import (
 // of your report job and a list of entities that could have used group or policy
 // permissions to access the specified service.
 //
-//     * Group – For a group report,
-// this operation returns a list of users in the group that could have used the
-// group’s policies in an attempt to access the service.
+// * Group – For a group report, this
+// operation returns a list of users in the group that could have used the group’s
+// policies in an attempt to access the service.
 //
-//     * Policy – For a
-// policy report, this operation returns a list of entities (users or roles) that
-// could have used the policy in an attempt to access the service.
+// * Policy – For a policy report,
+// this operation returns a list of entities (users or roles) that could have used
+// the policy in an attempt to access the service.
 //
-// You can also
-// use this operation for user or role reports to retrieve details about those
-// entities. If the operation fails, the GetServiceLastAccessedDetailsWithEntities
-// operation returns the reason that it failed. By default, the list of associated
-// entities is sorted by date, with the most recent access listed first.
+// You can also use this operation
+// for user or role reports to retrieve details about those entities. If the
+// operation fails, the GetServiceLastAccessedDetailsWithEntities operation returns
+// the reason that it failed. By default, the list of associated entities is sorted
+// by date, with the most recent access listed first.
 func (c *Client) GetServiceLastAccessedDetailsWithEntities(ctx context.Context, params *GetServiceLastAccessedDetailsWithEntitiesInput, optFns ...func(*Options)) (*GetServiceLastAccessedDetailsWithEntitiesOutput, error) {
 	if params == nil {
 		params = &GetServiceLastAccessedDetailsWithEntitiesInput{}

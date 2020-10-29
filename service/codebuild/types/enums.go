@@ -6,8 +6,8 @@ type ArtifactNamespace string
 
 // Enum values for ArtifactNamespace
 const (
-	ArtifactNamespaceNone     ArtifactNamespace = "NONE"
-	ArtifactNamespaceBuild_id ArtifactNamespace = "BUILD_ID"
+	ArtifactNamespaceNone    ArtifactNamespace = "NONE"
+	ArtifactNamespaceBuildId ArtifactNamespace = "BUILD_ID"
 )
 
 // Values returns all known values for ArtifactNamespace. Note that this can be
@@ -44,7 +44,7 @@ type ArtifactsType string
 const (
 	ArtifactsTypeCodepipeline ArtifactsType = "CODEPIPELINE"
 	ArtifactsTypeS3           ArtifactsType = "S3"
-	ArtifactsTypeNo_artifacts ArtifactsType = "NO_ARTIFACTS"
+	ArtifactsTypeNoArtifacts  ArtifactsType = "NO_ARTIFACTS"
 )
 
 // Values returns all known values for ArtifactsType. Note that this can be
@@ -62,9 +62,9 @@ type AuthType string
 
 // Enum values for AuthType
 const (
-	AuthTypeOauth                 AuthType = "OAUTH"
-	AuthTypeBasic_auth            AuthType = "BASIC_AUTH"
-	AuthTypePersonal_access_token AuthType = "PERSONAL_ACCESS_TOKEN"
+	AuthTypeOauth               AuthType = "OAUTH"
+	AuthTypeBasicAuth           AuthType = "BASIC_AUTH"
+	AuthTypePersonalAccessToken AuthType = "PERSONAL_ACCESS_TOKEN"
 )
 
 // Values returns all known values for AuthType. Note that this can be expanded in
@@ -82,13 +82,13 @@ type BuildBatchPhaseType string
 
 // Enum values for BuildBatchPhaseType
 const (
-	BuildBatchPhaseTypeSubmitted          BuildBatchPhaseType = "SUBMITTED"
-	BuildBatchPhaseTypeDownload_batchspec BuildBatchPhaseType = "DOWNLOAD_BATCHSPEC"
-	BuildBatchPhaseTypeIn_progress        BuildBatchPhaseType = "IN_PROGRESS"
-	BuildBatchPhaseTypeCombine_artifacts  BuildBatchPhaseType = "COMBINE_ARTIFACTS"
-	BuildBatchPhaseTypeSucceeded          BuildBatchPhaseType = "SUCCEEDED"
-	BuildBatchPhaseTypeFailed             BuildBatchPhaseType = "FAILED"
-	BuildBatchPhaseTypeStopped            BuildBatchPhaseType = "STOPPED"
+	BuildBatchPhaseTypeSubmitted         BuildBatchPhaseType = "SUBMITTED"
+	BuildBatchPhaseTypeDownloadBatchspec BuildBatchPhaseType = "DOWNLOAD_BATCHSPEC"
+	BuildBatchPhaseTypeInProgress        BuildBatchPhaseType = "IN_PROGRESS"
+	BuildBatchPhaseTypeCombineArtifacts  BuildBatchPhaseType = "COMBINE_ARTIFACTS"
+	BuildBatchPhaseTypeSucceeded         BuildBatchPhaseType = "SUCCEEDED"
+	BuildBatchPhaseTypeFailed            BuildBatchPhaseType = "FAILED"
+	BuildBatchPhaseTypeStopped           BuildBatchPhaseType = "STOPPED"
 )
 
 // Values returns all known values for BuildBatchPhaseType. Note that this can be
@@ -110,17 +110,17 @@ type BuildPhaseType string
 
 // Enum values for BuildPhaseType
 const (
-	BuildPhaseTypeSubmitted        BuildPhaseType = "SUBMITTED"
-	BuildPhaseTypeQueued           BuildPhaseType = "QUEUED"
-	BuildPhaseTypeProvisioning     BuildPhaseType = "PROVISIONING"
-	BuildPhaseTypeDownload_source  BuildPhaseType = "DOWNLOAD_SOURCE"
-	BuildPhaseTypeInstall          BuildPhaseType = "INSTALL"
-	BuildPhaseTypePre_build        BuildPhaseType = "PRE_BUILD"
-	BuildPhaseTypeBuild            BuildPhaseType = "BUILD"
-	BuildPhaseTypePost_build       BuildPhaseType = "POST_BUILD"
-	BuildPhaseTypeUpload_artifacts BuildPhaseType = "UPLOAD_ARTIFACTS"
-	BuildPhaseTypeFinalizing       BuildPhaseType = "FINALIZING"
-	BuildPhaseTypeCompleted        BuildPhaseType = "COMPLETED"
+	BuildPhaseTypeSubmitted       BuildPhaseType = "SUBMITTED"
+	BuildPhaseTypeQueued          BuildPhaseType = "QUEUED"
+	BuildPhaseTypeProvisioning    BuildPhaseType = "PROVISIONING"
+	BuildPhaseTypeDownloadSource  BuildPhaseType = "DOWNLOAD_SOURCE"
+	BuildPhaseTypeInstall         BuildPhaseType = "INSTALL"
+	BuildPhaseTypePreBuild        BuildPhaseType = "PRE_BUILD"
+	BuildPhaseTypeBuild           BuildPhaseType = "BUILD"
+	BuildPhaseTypePostBuild       BuildPhaseType = "POST_BUILD"
+	BuildPhaseTypeUploadArtifacts BuildPhaseType = "UPLOAD_ARTIFACTS"
+	BuildPhaseTypeFinalizing      BuildPhaseType = "FINALIZING"
+	BuildPhaseTypeCompleted       BuildPhaseType = "COMPLETED"
 )
 
 // Values returns all known values for BuildPhaseType. Note that this can be
@@ -146,9 +146,9 @@ type CacheMode string
 
 // Enum values for CacheMode
 const (
-	CacheModeLocal_docker_layer_cache CacheMode = "LOCAL_DOCKER_LAYER_CACHE"
-	CacheModeLocal_source_cache       CacheMode = "LOCAL_SOURCE_CACHE"
-	CacheModeLocal_custom_cache       CacheMode = "LOCAL_CUSTOM_CACHE"
+	CacheModeLocalDockerLayerCache CacheMode = "LOCAL_DOCKER_LAYER_CACHE"
+	CacheModeLocalSourceCache      CacheMode = "LOCAL_SOURCE_CACHE"
+	CacheModeLocalCustomCache      CacheMode = "LOCAL_CUSTOM_CACHE"
 )
 
 // Values returns all known values for CacheMode. Note that this can be expanded in
@@ -166,9 +166,9 @@ type CacheType string
 
 // Enum values for CacheType
 const (
-	CacheTypeNo_cache CacheType = "NO_CACHE"
-	CacheTypeS3       CacheType = "S3"
-	CacheTypeLocal    CacheType = "LOCAL"
+	CacheTypeNoCache CacheType = "NO_CACHE"
+	CacheTypeS3      CacheType = "S3"
+	CacheTypeLocal   CacheType = "LOCAL"
 )
 
 // Values returns all known values for CacheType. Note that this can be expanded in
@@ -186,10 +186,10 @@ type ComputeType string
 
 // Enum values for ComputeType
 const (
-	ComputeTypeBuild_general1_small   ComputeType = "BUILD_GENERAL1_SMALL"
-	ComputeTypeBuild_general1_medium  ComputeType = "BUILD_GENERAL1_MEDIUM"
-	ComputeTypeBuild_general1_large   ComputeType = "BUILD_GENERAL1_LARGE"
-	ComputeTypeBuild_general1_2xlarge ComputeType = "BUILD_GENERAL1_2XLARGE"
+	ComputeTypeBuildGeneral1Small   ComputeType = "BUILD_GENERAL1_SMALL"
+	ComputeTypeBuildGeneral1Medium  ComputeType = "BUILD_GENERAL1_MEDIUM"
+	ComputeTypeBuildGeneral1Large   ComputeType = "BUILD_GENERAL1_LARGE"
+	ComputeTypeBuildGeneral12xlarge ComputeType = "BUILD_GENERAL1_2XLARGE"
 )
 
 // Values returns all known values for ComputeType. Note that this can be expanded
@@ -208,7 +208,7 @@ type CredentialProviderType string
 
 // Enum values for CredentialProviderType
 const (
-	CredentialProviderTypeSecrets_manager CredentialProviderType = "SECRETS_MANAGER"
+	CredentialProviderTypeSecretsManager CredentialProviderType = "SECRETS_MANAGER"
 )
 
 // Values returns all known values for CredentialProviderType. Note that this can
@@ -224,11 +224,11 @@ type EnvironmentType string
 
 // Enum values for EnvironmentType
 const (
-	EnvironmentTypeWindows_container             EnvironmentType = "WINDOWS_CONTAINER"
-	EnvironmentTypeLinux_container               EnvironmentType = "LINUX_CONTAINER"
-	EnvironmentTypeLinux_gpu_container           EnvironmentType = "LINUX_GPU_CONTAINER"
-	EnvironmentTypeArm_container                 EnvironmentType = "ARM_CONTAINER"
-	EnvironmentTypeWindows_server_2019_container EnvironmentType = "WINDOWS_SERVER_2019_CONTAINER"
+	EnvironmentTypeWindowsContainer           EnvironmentType = "WINDOWS_CONTAINER"
+	EnvironmentTypeLinuxContainer             EnvironmentType = "LINUX_CONTAINER"
+	EnvironmentTypeLinuxGpuContainer          EnvironmentType = "LINUX_GPU_CONTAINER"
+	EnvironmentTypeArmContainer               EnvironmentType = "ARM_CONTAINER"
+	EnvironmentTypeWindowsServer2019Container EnvironmentType = "WINDOWS_SERVER_2019_CONTAINER"
 )
 
 // Values returns all known values for EnvironmentType. Note that this can be
@@ -248,9 +248,9 @@ type EnvironmentVariableType string
 
 // Enum values for EnvironmentVariableType
 const (
-	EnvironmentVariableTypePlaintext       EnvironmentVariableType = "PLAINTEXT"
-	EnvironmentVariableTypeParameter_store EnvironmentVariableType = "PARAMETER_STORE"
-	EnvironmentVariableTypeSecrets_manager EnvironmentVariableType = "SECRETS_MANAGER"
+	EnvironmentVariableTypePlaintext      EnvironmentVariableType = "PLAINTEXT"
+	EnvironmentVariableTypeParameterStore EnvironmentVariableType = "PARAMETER_STORE"
+	EnvironmentVariableTypeSecretsManager EnvironmentVariableType = "SECRETS_MANAGER"
 )
 
 // Values returns all known values for EnvironmentVariableType. Note that this can
@@ -284,8 +284,8 @@ type ImagePullCredentialsType string
 
 // Enum values for ImagePullCredentialsType
 const (
-	ImagePullCredentialsTypeCodebuild    ImagePullCredentialsType = "CODEBUILD"
-	ImagePullCredentialsTypeService_role ImagePullCredentialsType = "SERVICE_ROLE"
+	ImagePullCredentialsTypeCodebuild   ImagePullCredentialsType = "CODEBUILD"
+	ImagePullCredentialsTypeServiceRole ImagePullCredentialsType = "SERVICE_ROLE"
 )
 
 // Values returns all known values for ImagePullCredentialsType. Note that this can
@@ -304,7 +304,7 @@ type LanguageType string
 const (
 	LanguageTypeJava    LanguageType = "JAVA"
 	LanguageTypePython  LanguageType = "PYTHON"
-	LanguageTypeNode_js LanguageType = "NODE_JS"
+	LanguageTypeNodeJs  LanguageType = "NODE_JS"
 	LanguageTypeRuby    LanguageType = "RUBY"
 	LanguageTypeGolang  LanguageType = "GOLANG"
 	LanguageTypeDocker  LanguageType = "DOCKER"
@@ -354,10 +354,10 @@ type PlatformType string
 
 // Enum values for PlatformType
 const (
-	PlatformTypeDebian         PlatformType = "DEBIAN"
-	PlatformTypeAmazon_linux   PlatformType = "AMAZON_LINUX"
-	PlatformTypeUbuntu         PlatformType = "UBUNTU"
-	PlatformTypeWindows_server PlatformType = "WINDOWS_SERVER"
+	PlatformTypeDebian        PlatformType = "DEBIAN"
+	PlatformTypeAmazonLinux   PlatformType = "AMAZON_LINUX"
+	PlatformTypeUbuntu        PlatformType = "UBUNTU"
+	PlatformTypeWindowsServer PlatformType = "WINDOWS_SERVER"
 )
 
 // Values returns all known values for PlatformType. Note that this can be expanded
@@ -376,9 +376,9 @@ type ProjectSortByType string
 
 // Enum values for ProjectSortByType
 const (
-	ProjectSortByTypeName               ProjectSortByType = "NAME"
-	ProjectSortByTypeCreated_time       ProjectSortByType = "CREATED_TIME"
-	ProjectSortByTypeLast_modified_time ProjectSortByType = "LAST_MODIFIED_TIME"
+	ProjectSortByTypeName             ProjectSortByType = "NAME"
+	ProjectSortByTypeCreatedTime      ProjectSortByType = "CREATED_TIME"
+	ProjectSortByTypeLastModifiedTime ProjectSortByType = "LAST_MODIFIED_TIME"
 )
 
 // Values returns all known values for ProjectSortByType. Note that this can be
@@ -396,8 +396,8 @@ type ReportCodeCoverageSortByType string
 
 // Enum values for ReportCodeCoverageSortByType
 const (
-	ReportCodeCoverageSortByTypeLine_coverage_percentage ReportCodeCoverageSortByType = "LINE_COVERAGE_PERCENTAGE"
-	ReportCodeCoverageSortByTypeFile_path                ReportCodeCoverageSortByType = "FILE_PATH"
+	ReportCodeCoverageSortByTypeLineCoveragePercentage ReportCodeCoverageSortByType = "LINE_COVERAGE_PERCENTAGE"
+	ReportCodeCoverageSortByTypeFilePath               ReportCodeCoverageSortByType = "FILE_PATH"
 )
 
 // Values returns all known values for ReportCodeCoverageSortByType. Note that this
@@ -414,8 +414,8 @@ type ReportExportConfigType string
 
 // Enum values for ReportExportConfigType
 const (
-	ReportExportConfigTypeS3        ReportExportConfigType = "S3"
-	ReportExportConfigTypeNo_export ReportExportConfigType = "NO_EXPORT"
+	ReportExportConfigTypeS3       ReportExportConfigType = "S3"
+	ReportExportConfigTypeNoExport ReportExportConfigType = "NO_EXPORT"
 )
 
 // Values returns all known values for ReportExportConfigType. Note that this can
@@ -432,9 +432,9 @@ type ReportGroupSortByType string
 
 // Enum values for ReportGroupSortByType
 const (
-	ReportGroupSortByTypeName               ReportGroupSortByType = "NAME"
-	ReportGroupSortByTypeCreated_time       ReportGroupSortByType = "CREATED_TIME"
-	ReportGroupSortByTypeLast_modified_time ReportGroupSortByType = "LAST_MODIFIED_TIME"
+	ReportGroupSortByTypeName             ReportGroupSortByType = "NAME"
+	ReportGroupSortByTypeCreatedTime      ReportGroupSortByType = "CREATED_TIME"
+	ReportGroupSortByTypeLastModifiedTime ReportGroupSortByType = "LAST_MODIFIED_TIME"
 )
 
 // Values returns all known values for ReportGroupSortByType. Note that this can be
@@ -494,8 +494,8 @@ type ReportType string
 
 // Enum values for ReportType
 const (
-	ReportTypeTest          ReportType = "TEST"
-	ReportTypeCode_coverage ReportType = "CODE_COVERAGE"
+	ReportTypeTest         ReportType = "TEST"
+	ReportTypeCodeCoverage ReportType = "CODE_COVERAGE"
 )
 
 // Values returns all known values for ReportType. Note that this can be expanded
@@ -512,8 +512,8 @@ type RetryBuildBatchType string
 
 // Enum values for RetryBuildBatchType
 const (
-	RetryBuildBatchTypeRetry_all_builds    RetryBuildBatchType = "RETRY_ALL_BUILDS"
-	RetryBuildBatchTypeRetry_failed_builds RetryBuildBatchType = "RETRY_FAILED_BUILDS"
+	RetryBuildBatchTypeRetryAllBuilds    RetryBuildBatchType = "RETRY_ALL_BUILDS"
+	RetryBuildBatchTypeRetryFailedBuilds RetryBuildBatchType = "RETRY_FAILED_BUILDS"
 )
 
 // Values returns all known values for RetryBuildBatchType. Note that this can be
@@ -530,9 +530,9 @@ type ServerType string
 
 // Enum values for ServerType
 const (
-	ServerTypeGithub            ServerType = "GITHUB"
-	ServerTypeBitbucket         ServerType = "BITBUCKET"
-	ServerTypeGithub_enterprise ServerType = "GITHUB_ENTERPRISE"
+	ServerTypeGithub           ServerType = "GITHUB"
+	ServerTypeBitbucket        ServerType = "BITBUCKET"
+	ServerTypeGithubEnterprise ServerType = "GITHUB_ENTERPRISE"
 )
 
 // Values returns all known values for ServerType. Note that this can be expanded
@@ -550,8 +550,8 @@ type SharedResourceSortByType string
 
 // Enum values for SharedResourceSortByType
 const (
-	SharedResourceSortByTypeArn           SharedResourceSortByType = "ARN"
-	SharedResourceSortByTypeModified_time SharedResourceSortByType = "MODIFIED_TIME"
+	SharedResourceSortByTypeArn          SharedResourceSortByType = "ARN"
+	SharedResourceSortByTypeModifiedTime SharedResourceSortByType = "MODIFIED_TIME"
 )
 
 // Values returns all known values for SharedResourceSortByType. Note that this can
@@ -602,13 +602,13 @@ type SourceType string
 
 // Enum values for SourceType
 const (
-	SourceTypeCodecommit        SourceType = "CODECOMMIT"
-	SourceTypeCodepipeline      SourceType = "CODEPIPELINE"
-	SourceTypeGithub            SourceType = "GITHUB"
-	SourceTypeS3                SourceType = "S3"
-	SourceTypeBitbucket         SourceType = "BITBUCKET"
-	SourceTypeGithub_enterprise SourceType = "GITHUB_ENTERPRISE"
-	SourceTypeNo_source         SourceType = "NO_SOURCE"
+	SourceTypeCodecommit       SourceType = "CODECOMMIT"
+	SourceTypeCodepipeline     SourceType = "CODEPIPELINE"
+	SourceTypeGithub           SourceType = "GITHUB"
+	SourceTypeS3               SourceType = "S3"
+	SourceTypeBitbucket        SourceType = "BITBUCKET"
+	SourceTypeGithubEnterprise SourceType = "GITHUB_ENTERPRISE"
+	SourceTypeNoSource         SourceType = "NO_SOURCE"
 )
 
 // Values returns all known values for SourceType. Note that this can be expanded
@@ -630,12 +630,12 @@ type StatusType string
 
 // Enum values for StatusType
 const (
-	StatusTypeSucceeded   StatusType = "SUCCEEDED"
-	StatusTypeFailed      StatusType = "FAILED"
-	StatusTypeFault       StatusType = "FAULT"
-	StatusTypeTimed_out   StatusType = "TIMED_OUT"
-	StatusTypeIn_progress StatusType = "IN_PROGRESS"
-	StatusTypeStopped     StatusType = "STOPPED"
+	StatusTypeSucceeded  StatusType = "SUCCEEDED"
+	StatusTypeFailed     StatusType = "FAILED"
+	StatusTypeFault      StatusType = "FAULT"
+	StatusTypeTimedOut   StatusType = "TIMED_OUT"
+	StatusTypeInProgress StatusType = "IN_PROGRESS"
+	StatusTypeStopped    StatusType = "STOPPED"
 )
 
 // Values returns all known values for StatusType. Note that this can be expanded
@@ -656,8 +656,8 @@ type WebhookBuildType string
 
 // Enum values for WebhookBuildType
 const (
-	WebhookBuildTypeBuild       WebhookBuildType = "BUILD"
-	WebhookBuildTypeBuild_batch WebhookBuildType = "BUILD_BATCH"
+	WebhookBuildTypeBuild      WebhookBuildType = "BUILD"
+	WebhookBuildTypeBuildBatch WebhookBuildType = "BUILD_BATCH"
 )
 
 // Values returns all known values for WebhookBuildType. Note that this can be
@@ -674,12 +674,12 @@ type WebhookFilterType string
 
 // Enum values for WebhookFilterType
 const (
-	WebhookFilterTypeEvent            WebhookFilterType = "EVENT"
-	WebhookFilterTypeBase_ref         WebhookFilterType = "BASE_REF"
-	WebhookFilterTypeHead_ref         WebhookFilterType = "HEAD_REF"
-	WebhookFilterTypeActor_account_id WebhookFilterType = "ACTOR_ACCOUNT_ID"
-	WebhookFilterTypeFile_path        WebhookFilterType = "FILE_PATH"
-	WebhookFilterTypeCommit_message   WebhookFilterType = "COMMIT_MESSAGE"
+	WebhookFilterTypeEvent          WebhookFilterType = "EVENT"
+	WebhookFilterTypeBaseRef        WebhookFilterType = "BASE_REF"
+	WebhookFilterTypeHeadRef        WebhookFilterType = "HEAD_REF"
+	WebhookFilterTypeActorAccountId WebhookFilterType = "ACTOR_ACCOUNT_ID"
+	WebhookFilterTypeFilePath       WebhookFilterType = "FILE_PATH"
+	WebhookFilterTypeCommitMessage  WebhookFilterType = "COMMIT_MESSAGE"
 )
 
 // Values returns all known values for WebhookFilterType. Note that this can be

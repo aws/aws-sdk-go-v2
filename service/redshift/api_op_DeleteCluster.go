@@ -46,16 +46,16 @@ type DeleteClusterInput struct {
 
 	// The identifier of the cluster to be deleted. Constraints:
 	//
-	//     * Must contain
+	// * Must contain
 	// lowercase characters.
 	//
-	//     * Must contain from 1 to 63 alphanumeric characters
-	// or hyphens.
+	// * Must contain from 1 to 63 alphanumeric characters or
+	// hyphens.
 	//
-	//     * First character must be a letter.
+	// * First character must be a letter.
 	//
-	//     * Cannot end with a
-	// hyphen or contain two consecutive hyphens.
+	// * Cannot end with a hyphen or
+	// contain two consecutive hyphens.
 	//
 	// This member is required.
 	ClusterIdentifier *string
@@ -64,13 +64,13 @@ type DeleteClusterInput struct {
 	// deleting the cluster. If this parameter is provided, SkipFinalClusterSnapshot
 	// must be false. Constraints:
 	//
-	//     * Must be 1 to 255 alphanumeric characters.
+	// * Must be 1 to 255 alphanumeric characters.
 	//
+	// *
+	// First character must be a letter.
 	//
-	// * First character must be a letter.
-	//
-	//     * Cannot end with a hyphen or contain
-	// two consecutive hyphens.
+	// * Cannot end with a hyphen or contain two
+	// consecutive hyphens.
 	FinalClusterSnapshotIdentifier *string
 
 	// The number of days that a manual snapshot is retained. If the value is -1, the

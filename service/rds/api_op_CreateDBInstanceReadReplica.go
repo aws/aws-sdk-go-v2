@@ -53,37 +53,37 @@ type CreateDBInstanceReadReplicaInput struct {
 	// The identifier of the DB instance that will act as the source for the read
 	// replica. Each DB instance can have up to five read replicas. Constraints:
 	//
-	//     *
+	// *
 	// Must be the identifier of an existing MySQL, MariaDB, Oracle, PostgreSQL, or SQL
 	// Server DB instance.
 	//
-	//     * Can specify a DB instance that is a MySQL read
-	// replica only if the source is running MySQL 5.6 or later.
+	// * Can specify a DB instance that is a MySQL read replica
+	// only if the source is running MySQL 5.6 or later.
 	//
-	//     * For the
-	// limitations of Oracle read replicas, see Read Replica Limitations with Oracle
+	// * For the limitations of
+	// Oracle read replicas, see Read Replica Limitations with Oracle
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html)
 	// in the Amazon RDS User Guide.
 	//
-	//     * For the limitations of SQL Server read
+	// * For the limitations of SQL Server read
 	// replicas, see Read Replica Limitations with Microsoft SQL Server
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/SQLServer.ReadReplicas.Limitations.html)
 	// in the Amazon RDS User Guide.
 	//
-	//     * Can specify a PostgreSQL DB instance only
-	// if the source is running PostgreSQL 9.3.5 or later (9.4.7 and higher for
+	// * Can specify a PostgreSQL DB instance only if
+	// the source is running PostgreSQL 9.3.5 or later (9.4.7 and higher for
 	// cross-region replication).
 	//
-	//     * The specified DB instance must have automatic
+	// * The specified DB instance must have automatic
 	// backups enabled, that is, its backup retention period must be greater than 0.
 	//
+	// *
+	// If the source DB instance is in the same AWS Region as the read replica, specify
+	// a valid DB instance identifier.
 	//
-	// * If the source DB instance is in the same AWS Region as the read replica,
-	// specify a valid DB instance identifier.
-	//
-	//     * If the source DB instance is in a
-	// different AWS Region from the read replica, specify a valid DB instance ARN. For
-	// more information, see Constructing an ARN for Amazon RDS
+	// * If the source DB instance is in a different
+	// AWS Region from the read replica, specify a valid DB instance ARN. For more
+	// information, see Constructing an ARN for Amazon RDS
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing)
 	// in the Amazon RDS User Guide. This doesn't apply to SQL Server, which doesn't
 	// support cross-region replicas.
@@ -120,38 +120,38 @@ type CreateDBInstanceReadReplicaInput struct {
 	// replica. Currently, specifying a parameter group for this operation is only
 	// supported for Oracle DB instances. Constraints:
 	//
-	//     * Must be 1 to 255 letters,
+	// * Must be 1 to 255 letters,
 	// numbers, or hyphens.
 	//
-	//     * First character must be a letter
+	// * First character must be a letter
 	//
-	//     * Can't end
-	// with a hyphen or contain two consecutive hyphens
+	// * Can't end with a
+	// hyphen or contain two consecutive hyphens
 	DBParameterGroupName *string
 
 	// Specifies a DB subnet group for the DB instance. The new DB instance is created
 	// in the VPC associated with the DB subnet group. If no DB subnet group is
 	// specified, then the new DB instance isn't created in a VPC. Constraints:
 	//
-	//     *
-	// Can only be specified if the source DB instance identifier specifies a DB
-	// instance in another AWS Region.
+	// * Can
+	// only be specified if the source DB instance identifier specifies a DB instance
+	// in another AWS Region.
 	//
-	//     * If supplied, must match the name of an
-	// existing DBSubnetGroup.
+	// * If supplied, must match the name of an existing
+	// DBSubnetGroup.
 	//
-	//     * The specified DB subnet group must be in the same
-	// AWS Region in which the operation is running.
+	// * The specified DB subnet group must be in the same AWS Region
+	// in which the operation is running.
 	//
-	//     * All read replicas in one
-	// AWS Region that are created from the same source DB instance must either:>
+	// * All read replicas in one AWS Region that
+	// are created from the same source DB instance must either:>
 	//
+	// * Specify DB subnet
+	// groups from the same VPC. All these read replicas are created in the same
+	// VPC.
 	//
-	// * Specify DB subnet groups from the same VPC. All these read replicas are
-	// created in the same VPC.
-	//
-	//         * Not specify a DB subnet group. All these
-	// read replicas are created outside of any VPC.
+	// * Not specify a DB subnet group. All these read replicas are created
+	// outside of any VPC.
 	//
 	// Example: mySubnetgroup
 	DBSubnetGroupName *string
@@ -267,7 +267,7 @@ type CreateDBInstanceReadReplicaInput struct {
 	// Region that contains the encrypted source DB instance. The presigned URL request
 	// must contain the following parameter values:
 	//
-	//     * DestinationRegion - The AWS
+	// * DestinationRegion - The AWS
 	// Region that the encrypted read replica is created in. This AWS Region is the
 	// same one where the CreateDBInstanceReadReplica action is called that contains
 	// this presigned URL. For example, if you create an encrypted DB instance in the
@@ -278,12 +278,12 @@ type CreateDBInstanceReadReplicaInput struct {
 	// example, the DestinationRegion in the presigned URL must be set to the us-east-1
 	// AWS Region.
 	//
-	//     * KmsKeyId - The AWS KMS key identifier for the key to use to
+	// * KmsKeyId - The AWS KMS key identifier for the key to use to
 	// encrypt the read replica in the destination AWS Region. This is the same
 	// identifier for both the CreateDBInstanceReadReplica action that is called in the
 	// destination AWS Region, and the action contained in the presigned URL.
 	//
-	//     *
+	// *
 	// SourceDBInstanceIdentifier - The DB instance identifier for the encrypted DB
 	// instance to be replicated. This identifier must be in the Amazon Resource Name
 	// (ARN) format for the source AWS Region. For example, if you are creating an

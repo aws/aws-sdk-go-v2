@@ -16,21 +16,21 @@ import (
 // to listing the properties provided in the CreatePredictor request, this
 // operation lists the following properties:
 //
-//     * DatasetImportJobArns - The
-// dataset import jobs used to import training data.
+// * DatasetImportJobArns - The dataset
+// import jobs used to import training data.
 //
-//     * AutoMLAlgorithmArns -
-// If AutoML is performed, the algorithms that were evaluated.
+// * AutoMLAlgorithmArns - If AutoML is
+// performed, the algorithms that were evaluated.
 //
-//     *
-// CreationTime
+// * CreationTime
 //
-//     * LastModificationTime
+// *
+// LastModificationTime
 //
-//     * Status
+// * Status
 //
-//     * Message - If an
-// error occurred, information about the error.
+// * Message - If an error occurred, information
+// about the error.
 func (c *Client) DescribePredictor(ctx context.Context, params *DescribePredictorInput, optFns ...func(*Options)) (*DescribePredictorOutput, error) {
 	if params == nil {
 		params = &DescribePredictorInput{}
@@ -121,19 +121,19 @@ type DescribePredictorOutput struct {
 
 	// The status of the predictor. States include:
 	//
-	//     * ACTIVE
+	// * ACTIVE
 	//
-	//     *
-	// CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED
+	// * CREATE_PENDING,
+	// CREATE_IN_PROGRESS, CREATE_FAILED
 	//
-	//     * DELETE_PENDING,
-	// DELETE_IN_PROGRESS, DELETE_FAILED
+	// * DELETE_PENDING, DELETE_IN_PROGRESS,
+	// DELETE_FAILED
 	//
-	//     * UPDATE_PENDING, UPDATE_IN_PROGRESS,
-	// UPDATE_FAILED
+	// * UPDATE_PENDING, UPDATE_IN_PROGRESS, UPDATE_FAILED
 	//
-	// The Status of the predictor must be ACTIVE before you can use the
-	// predictor to create a forecast.
+	// The Status
+	// of the predictor must be ACTIVE before you can use the predictor to create a
+	// forecast.
 	Status *string
 
 	// The default training parameters or overrides selected during model training. If

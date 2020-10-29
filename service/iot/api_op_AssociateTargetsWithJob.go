@@ -12,14 +12,14 @@ import (
 
 // Associates a group with a continuous job. The following criteria must be met:
 //
-//
-// * The job must have been created with the targetSelection field set to
+// *
+// The job must have been created with the targetSelection field set to
 // "CONTINUOUS".
 //
-//     * The job status must currently be "IN_PROGRESS".
+// * The job status must currently be "IN_PROGRESS".
 //
-//     * The
-// total number of targets associated with a job must not exceed 100.
+// * The total
+// number of targets associated with a job must not exceed 100.
 func (c *Client) AssociateTargetsWithJob(ctx context.Context, params *AssociateTargetsWithJobInput, optFns ...func(*Options)) (*AssociateTargetsWithJobOutput, error) {
 	if params == nil {
 		params = &AssociateTargetsWithJobInput{}

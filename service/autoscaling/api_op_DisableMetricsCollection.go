@@ -35,39 +35,38 @@ type DisableMetricsCollectionInput struct {
 
 	// Specifies one or more of the following metrics:
 	//
-	//     * GroupMinSize
+	// * GroupMinSize
 	//
-	//     *
+	// *
 	// GroupMaxSize
 	//
-	//     * GroupDesiredCapacity
+	// * GroupDesiredCapacity
 	//
-	//     * GroupInServiceInstances
+	// * GroupInServiceInstances
 	//
-	//     *
+	// *
 	// GroupPendingInstances
 	//
-	//     * GroupStandbyInstances
+	// * GroupStandbyInstances
 	//
-	//     *
-	// GroupTerminatingInstances
+	// * GroupTerminatingInstances
 	//
-	//     * GroupTotalInstances
+	// *
+	// GroupTotalInstances
 	//
-	//     *
-	// GroupInServiceCapacity
+	// * GroupInServiceCapacity
 	//
-	//     * GroupPendingCapacity
+	// * GroupPendingCapacity
 	//
-	//     * GroupStandbyCapacity
-	//
+	// *
+	// GroupStandbyCapacity
 	//
 	// * GroupTerminatingCapacity
 	//
-	//     * GroupTotalCapacity
+	// * GroupTotalCapacity
 	//
-	// If you omit this
-	// parameter, all metrics are disabled.
+	// If you
+	// omit this parameter, all metrics are disabled.
 	Metrics []*string
 }
 

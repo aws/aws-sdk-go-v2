@@ -35,26 +35,26 @@ type PutParameterInput struct {
 	// slash character (/) when you create or reference a parameter. For example:
 	// /Dev/DBServer/MySQL/db-string13 Naming Constraints:
 	//
-	//     * Parameter names are
-	// case sensitive.
+	// * Parameter names are case
+	// sensitive.
 	//
-	//     * A parameter name must be unique within an AWS Region
+	// * A parameter name must be unique within an AWS Region
 	//
+	// * A
+	// parameter name can't be prefixed with "aws" or "ssm" (case-insensitive).
 	//
-	// * A parameter name can't be prefixed with "aws" or "ssm" (case-insensitive).
-	//
-	//
-	// * Parameter names can include only the following symbols and letters:
+	// *
+	// Parameter names can include only the following symbols and letters:
 	// a-zA-Z0-9_.-/
 	//
-	//     * A parameter name can't include spaces.
+	// * A parameter name can't include spaces.
 	//
-	//     * Parameter
-	// hierarchies are limited to a maximum depth of fifteen levels.
+	// * Parameter hierarchies
+	// are limited to a maximum depth of fifteen levels.
 	//
-	// For additional
-	// information about valid values for parameter names, see About requirements and
-	// constraints for parameter names
+	// For additional information
+	// about valid values for parameter names, see About requirements and constraints
+	// for parameter names
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html)
 	// in the AWS Systems Manager User Guide. The maximum length constraint listed
 	// below includes capacity for additional system attributes that are not part of
@@ -82,10 +82,10 @@ type PutParameterInput struct {
 	// The data type for a String parameter. Supported data types include plain text
 	// and Amazon Machine Image IDs. The following data type values are supported.
 	//
+	// *
+	// text
 	//
-	// * text
-	//
-	//     * aws:ec2:image
+	// * aws:ec2:image
 	//
 	// When you create a String parameter and specify
 	// aws:ec2:image, Systems Manager validates the parameter value is in the required
@@ -106,13 +106,13 @@ type PutParameterInput struct {
 	// type. If you don't specify a key ID, the system uses the default key associated
 	// with your AWS account.
 	//
-	//     * To use your default AWS KMS key, choose the
+	// * To use your default AWS KMS key, choose the
 	// SecureString data type, and do not specify the Key ID when you create the
 	// parameter. The system automatically populates Key ID with your default KMS
 	// key.
 	//
-	//     * To use a custom KMS key, choose the SecureString data type with the
-	// Key ID parameter.
+	// * To use a custom KMS key, choose the SecureString data type with the Key
+	// ID parameter.
 	KeyId *string
 
 	// Overwrite an existing parameter. If not specified, will default to "false".
@@ -143,15 +143,15 @@ type PutParameterInput struct {
 	// data referenced by the parameter. In this case, you could specify the following
 	// key name/value pairs:
 	//
-	//     * Key=Resource,Value=S3bucket
+	// * Key=Resource,Value=S3bucket
 	//
-	//     *
-	// Key=OS,Value=Windows
+	// * Key=OS,Value=Windows
 	//
-	//     * Key=ParameterType,Value=LicenseKey
+	// *
+	// Key=ParameterType,Value=LicenseKey
 	//
-	// To add tags to
-	// an existing Systems Manager parameter, use the AddTagsToResource action.
+	// To add tags to an existing Systems Manager
+	// parameter, use the AddTagsToResource action.
 	Tags []*types.Tag
 
 	// The parameter tier to assign to a parameter. Parameter Store offers a standard
@@ -181,13 +181,13 @@ type PutParameterInput struct {
 	// begin using Parameter Store is the standard-parameter tier. If you use the
 	// advanced-parameter tier, you can specify one of the following as the default:
 	//
-	//
-	// * Advanced: With this option, Parameter Store evaluates all requests as advanced
+	// *
+	// Advanced: With this option, Parameter Store evaluates all requests as advanced
 	// parameters.
 	//
-	//     * Intelligent-Tiering: With this option, Parameter Store
-	// evaluates each request to determine if the parameter is standard or advanced. If
-	// the request doesn't include any options that require an advanced parameter, the
+	// * Intelligent-Tiering: With this option, Parameter Store evaluates
+	// each request to determine if the parameter is standard or advanced. If the
+	// request doesn't include any options that require an advanced parameter, the
 	// parameter is created in the standard-parameter tier. If one or more options
 	// requiring an advanced parameter are included in the request, Parameter Store
 	// create a parameter in the advanced-parameter tier. This approach helps control
@@ -197,17 +197,17 @@ type PutParameterInput struct {
 	// Options that require an advanced parameter
 	// include the following:
 	//
-	//     * The content size of the parameter is more than 4
+	// * The content size of the parameter is more than 4
 	// KB.
 	//
-	//     * The parameter uses a parameter policy.
+	// * The parameter uses a parameter policy.
 	//
-	//     * More than 10,000
-	// parameters already exist in your AWS account in the current Region.
+	// * More than 10,000 parameters
+	// already exist in your AWS account in the current Region.
 	//
-	// For more
-	// information about configuring the default tier option, see Specifying a default
-	// parameter tier
+	// For more information
+	// about configuring the default tier option, see Specifying a default parameter
+	// tier
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-default-tier.html)
 	// in the AWS Systems Manager User Guide.
 	Tier types.ParameterTier

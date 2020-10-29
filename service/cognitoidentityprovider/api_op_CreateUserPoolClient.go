@@ -74,12 +74,12 @@ type CreateUserPoolClientInput struct {
 	// A list of allowed redirect (callback) URLs for the identity providers. A
 	// redirect URI must:
 	//
-	//     * Be an absolute URI.
+	// * Be an absolute URI.
 	//
-	//     * Be registered with the
+	// * Be registered with the
 	// authorization server.
 	//
-	//     * Not include a fragment component.
+	// * Not include a fragment component.
 	//
 	// See OAuth 2.0 -
 	// Redirection Endpoint (https://tools.ietf.org/html/rfc6749#section-3.1.2). Amazon
@@ -90,17 +90,17 @@ type CreateUserPoolClientInput struct {
 	// The default redirect URI. Must be in the CallbackURLs list. A redirect URI
 	// must:
 	//
-	//     * Be an absolute URI.
+	// * Be an absolute URI.
 	//
-	//     * Be registered with the authorization
-	// server.
+	// * Be registered with the authorization server.
 	//
-	//     * Not include a fragment component.
+	// *
+	// Not include a fragment component.
 	//
-	// See OAuth 2.0 - Redirection
-	// Endpoint (https://tools.ietf.org/html/rfc6749#section-3.1.2). Amazon Cognito
-	// requires HTTPS over HTTP except for http://localhost for testing purposes only.
-	// App callback URLs such as myapp://example are also supported.
+	// See OAuth 2.0 - Redirection Endpoint
+	// (https://tools.ietf.org/html/rfc6749#section-3.1.2). Amazon Cognito requires
+	// HTTPS over HTTP except for http://localhost for testing purposes only. App
+	// callback URLs such as myapp://example are also supported.
 	DefaultRedirectURI *string
 
 	// The authentication flows that are supported by the user pool clients. Flow names
@@ -108,25 +108,24 @@ type CreateUserPoolClientInput struct {
 	// prefix. Note that values with ALLOW_ prefix cannot be used along with values
 	// without ALLOW_ prefix. Valid values include:
 	//
-	//     *
-	// ALLOW_ADMIN_USER_PASSWORD_AUTH: Enable admin based user password authentication
-	// flow ADMIN_USER_PASSWORD_AUTH. This setting replaces the ADMIN_NO_SRP_AUTH
-	// setting. With this authentication flow, Cognito receives the password in the
-	// request instead of using the SRP (Secure Remote Password protocol) protocol to
-	// verify passwords.
+	// * ALLOW_ADMIN_USER_PASSWORD_AUTH:
+	// Enable admin based user password authentication flow ADMIN_USER_PASSWORD_AUTH.
+	// This setting replaces the ADMIN_NO_SRP_AUTH setting. With this authentication
+	// flow, Cognito receives the password in the request instead of using the SRP
+	// (Secure Remote Password protocol) protocol to verify passwords.
 	//
-	//     * ALLOW_CUSTOM_AUTH: Enable Lambda trigger based
+	// *
+	// ALLOW_CUSTOM_AUTH: Enable Lambda trigger based authentication.
+	//
+	// *
+	// ALLOW_USER_PASSWORD_AUTH: Enable user password-based authentication. In this
+	// flow, Cognito receives the password in the request instead of using the SRP
+	// protocol to verify passwords.
+	//
+	// * ALLOW_USER_SRP_AUTH: Enable SRP based
 	// authentication.
 	//
-	//     * ALLOW_USER_PASSWORD_AUTH: Enable user password-based
-	// authentication. In this flow, Cognito receives the password in the request
-	// instead of using the SRP protocol to verify passwords.
-	//
-	//     *
-	// ALLOW_USER_SRP_AUTH: Enable SRP based authentication.
-	//
-	//     *
-	// ALLOW_REFRESH_TOKEN_AUTH: Enable authflow to refresh tokens.
+	// * ALLOW_REFRESH_TOKEN_AUTH: Enable authflow to refresh tokens.
 	ExplicitAuthFlows []types.ExplicitAuthFlowsType
 
 	// Boolean to specify whether you want to generate a secret for the user pool
@@ -150,10 +149,10 @@ type CreateUserPoolClientInput struct {
 	// LEGACY, those APIs will return a UserNotFoundException exception if the user
 	// does not exist in the user pool. Valid values include:
 	//
-	//     * ENABLED - This
+	// * ENABLED - This
 	// prevents user existence-related errors.
 	//
-	//     * LEGACY - This represents the old
+	// * LEGACY - This represents the old
 	// behavior of Cognito where user existence related errors are not
 	// prevented.
 	//

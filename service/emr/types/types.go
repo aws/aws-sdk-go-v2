@@ -934,28 +934,28 @@ type InstanceFleetStatus struct {
 
 	// A code representing the instance fleet status.
 	//
-	//     * PROVISIONING—The instance
+	// * PROVISIONING—The instance
 	// fleet is provisioning EC2 resources and is not yet ready to run jobs.
 	//
-	//     *
+	// *
 	// BOOTSTRAPPING—EC2 instances and other resources have been provisioned and the
 	// bootstrap actions specified for the instances are underway.
 	//
-	//     * RUNNING—EC2
+	// * RUNNING—EC2
 	// instances and other resources are running. They are either executing jobs or
 	// waiting to execute jobs.
 	//
-	//     * RESIZING—A resize operation is underway. EC2
+	// * RESIZING—A resize operation is underway. EC2
 	// instances are either being added or removed.
 	//
-	//     * SUSPENDED—A resize operation
+	// * SUSPENDED—A resize operation
 	// could not complete. Existing EC2 instances are running, but instances can't be
 	// added or removed.
 	//
-	//     * TERMINATING—The instance fleet is terminating EC2
+	// * TERMINATING—The instance fleet is terminating EC2
 	// instances.
 	//
-	//     * TERMINATED—The instance fleet is no longer active, and all EC2
+	// * TERMINATED—The instance fleet is no longer active, and all EC2
 	// instances have been terminated.
 	State InstanceFleetState
 
@@ -1713,37 +1713,36 @@ type NotebookExecution struct {
 
 	// The status of the notebook execution.
 	//
-	//     * START_PENDING indicates that the
+	// * START_PENDING indicates that the
 	// cluster has received the execution request but execution has not begun.
 	//
-	//     *
+	// *
 	// STARTING indicates that the execution is starting on the cluster.
 	//
-	//     * RUNNING
+	// * RUNNING
 	// indicates that the execution is being processed by the cluster.
 	//
-	//     * FINISHING
+	// * FINISHING
 	// indicates that execution processing is in the final stages.
 	//
-	//     * FINISHED
+	// * FINISHED
 	// indicates that the execution has completed without error.
 	//
-	//     * FAILING
-	// indicates that the execution is failing and will not finish successfully.
+	// * FAILING indicates
+	// that the execution is failing and will not finish successfully.
 	//
-	//     *
-	// FAILED indicates that the execution failed.
+	// * FAILED
+	// indicates that the execution failed.
 	//
-	//     * STOP_PENDING indicates that
-	// the cluster has received a StopNotebookExecution request and the stop is
-	// pending.
+	// * STOP_PENDING indicates that the cluster
+	// has received a StopNotebookExecution request and the stop is pending.
 	//
-	//     * STOPPING indicates that the cluster is in the process of
-	// stopping the execution as a result of a StopNotebookExecution request.
+	// *
+	// STOPPING indicates that the cluster is in the process of stopping the execution
+	// as a result of a StopNotebookExecution request.
 	//
-	//     *
-	// STOPPED indicates that the execution stopped because of a StopNotebookExecution
-	// request.
+	// * STOPPED indicates that the
+	// execution stopped because of a StopNotebookExecution request.
 	Status NotebookExecutionStatus
 
 	// A list of tags associated with a notebook execution. Tags are user-defined key
@@ -1772,37 +1771,36 @@ type NotebookExecutionSummary struct {
 
 	// The status of the notebook execution.
 	//
-	//     * START_PENDING indicates that the
+	// * START_PENDING indicates that the
 	// cluster has received the execution request but execution has not begun.
 	//
-	//     *
+	// *
 	// STARTING indicates that the execution is starting on the cluster.
 	//
-	//     * RUNNING
+	// * RUNNING
 	// indicates that the execution is being processed by the cluster.
 	//
-	//     * FINISHING
+	// * FINISHING
 	// indicates that execution processing is in the final stages.
 	//
-	//     * FINISHED
+	// * FINISHED
 	// indicates that the execution has completed without error.
 	//
-	//     * FAILING
-	// indicates that the execution is failing and will not finish successfully.
+	// * FAILING indicates
+	// that the execution is failing and will not finish successfully.
 	//
-	//     *
-	// FAILED indicates that the execution failed.
+	// * FAILED
+	// indicates that the execution failed.
 	//
-	//     * STOP_PENDING indicates that
-	// the cluster has received a StopNotebookExecution request and the stop is
-	// pending.
+	// * STOP_PENDING indicates that the cluster
+	// has received a StopNotebookExecution request and the stop is pending.
 	//
-	//     * STOPPING indicates that the cluster is in the process of
-	// stopping the execution as a result of a StopNotebookExecution request.
+	// *
+	// STOPPING indicates that the cluster is in the process of stopping the execution
+	// as a result of a StopNotebookExecution request.
 	//
-	//     *
-	// STOPPED indicates that the execution stopped because of a StopNotebookExecution
-	// request.
+	// * STOPPED indicates that the
+	// execution stopped because of a StopNotebookExecution request.
 	Status NotebookExecutionStatus
 }
 

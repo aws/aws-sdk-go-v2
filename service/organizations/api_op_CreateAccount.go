@@ -19,13 +19,13 @@ import (
 // access the account. To check the status of the request, do one of the
 // following:
 //
-//     * Use the Id member of the CreateAccountStatus response element
-// from this operation to provide as a parameter to the DescribeCreateAccountStatus
+// * Use the Id member of the CreateAccountStatus response element from
+// this operation to provide as a parameter to the DescribeCreateAccountStatus
 // operation.
 //
-//     * Check the AWS CloudTrail log for the CreateAccountResult
-// event. For information on using AWS CloudTrail with AWS Organizations, see
-// Monitoring the Activity in Your Organization
+// * Check the AWS CloudTrail log for the CreateAccountResult event.
+// For information on using AWS CloudTrail with AWS Organizations, see Monitoring
+// the Activity in Your Organization
 // (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_monitoring.html)
 // in the AWS Organizations User Guide.
 //
@@ -48,7 +48,7 @@ import (
 // (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html)
 // in the AWS Organizations User Guide.
 //
-//     * When you create an account in an
+// * When you create an account in an
 // organization using the AWS Organizations console, API, or CLI commands, the
 // information required for the account to operate as a standalone account, such as
 // a payment method and signing the end user license agreement (EULA) is not
@@ -58,20 +58,20 @@ import (
 // (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
 // in the AWS Organizations User Guide.
 //
-//     * If you get an exception that
-// indicates that you exceeded your account limits for the organization, contact
+// * If you get an exception that indicates
+// that you exceeded your account limits for the organization, contact AWS Support
+// (https://console.aws.amazon.com/support/home#/).
+//
+// * If you get an exception that
+// indicates that the operation failed because your organization is still
+// initializing, wait one hour and then try again. If the error persists, contact
 // AWS Support (https://console.aws.amazon.com/support/home#/).
 //
-//     * If you get
-// an exception that indicates that the operation failed because your organization
-// is still initializing, wait one hour and then try again. If the error persists,
-// contact AWS Support (https://console.aws.amazon.com/support/home#/).
-//
-//     *
-// Using CreateAccount to create multiple temporary accounts isn't recommended. You
-// can only close an account from the Billing and Cost Management Console, and you
-// must be signed in as the root user. For information on the requirements and
-// process for closing an account, see Closing an AWS Account
+// * Using
+// CreateAccount to create multiple temporary accounts isn't recommended. You can
+// only close an account from the Billing and Cost Management Console, and you must
+// be signed in as the root user. For information on the requirements and process
+// for closing an account, see Closing an AWS Account
 // (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html)
 // in the AWS Organizations User Guide.
 //
@@ -132,12 +132,12 @@ type CreateAccountInput struct {
 	// role name defaults to OrganizationAccountAccessRole. For more information about
 	// how to use this role to access the member account, see the following links:
 	//
-	//
-	// * Accessing and Administering the Member Accounts in Your Organization
+	// *
+	// Accessing and Administering the Member Accounts in Your Organization
 	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html#orgs_manage_accounts_create-cross-account-role)
 	// in the AWS Organizations User Guide
 	//
-	//     * Steps 2 and 3 in Tutorial: Delegate
+	// * Steps 2 and 3 in Tutorial: Delegate
 	// Access Across AWS Accounts Using IAM Roles
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html)
 	// in the IAM User Guide

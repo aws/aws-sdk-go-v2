@@ -33,25 +33,25 @@ import (
 // use Amazon S3 Select to query objects that have the following format
 // properties:
 //
-//     * CSV, JSON, and Parquet - Objects must be in CSV, JSON, or
-// Parquet format.
+// * CSV, JSON, and Parquet - Objects must be in CSV, JSON, or Parquet
+// format.
 //
-//     * UTF-8 - UTF-8 is the only encoding type Amazon S3 Select
-// supports.
+// * UTF-8 - UTF-8 is the only encoding type Amazon S3 Select supports.
 //
-//     * GZIP or BZIP2 - CSV and JSON files can be compressed using GZIP
-// or BZIP2. GZIP and BZIP2 are the only compression formats that Amazon S3 Select
-// supports for CSV and JSON files. Amazon S3 Select supports columnar compression
-// for Parquet using GZIP or Snappy. Amazon S3 Select does not support whole-object
-// compression for Parquet objects.
+// *
+// GZIP or BZIP2 - CSV and JSON files can be compressed using GZIP or BZIP2. GZIP
+// and BZIP2 are the only compression formats that Amazon S3 Select supports for
+// CSV and JSON files. Amazon S3 Select supports columnar compression for Parquet
+// using GZIP or Snappy. Amazon S3 Select does not support whole-object compression
+// for Parquet objects.
 //
-//     * Server-side encryption - Amazon S3
-// Select supports querying objects that are protected with server-side encryption.
-// For objects that are encrypted with customer-provided encryption keys (SSE-C),
-// you must use HTTPS, and you must use the headers that are documented in the
-// GetObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html).
-// For more information about SSE-C, see Server-Side Encryption (Using
-// Customer-Provided Encryption Keys)
+// * Server-side encryption - Amazon S3 Select supports
+// querying objects that are protected with server-side encryption. For objects
+// that are encrypted with customer-provided encryption keys (SSE-C), you must use
+// HTTPS, and you must use the headers that are documented in the GetObject
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html). For more
+// information about SSE-C, see Server-Side Encryption (Using Customer-Provided
+// Encryption Keys)
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html)
 // in the Amazon Simple Storage Service Developer Guide. For objects that are
 // encrypted with Amazon S3 managed encryption keys (SSE-S3) and customer master
@@ -72,16 +72,16 @@ import (
 // following GetObject functionality. For more information, see GetObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html).
 //
-//     *
-// Range: Although you can specify a scan range for an Amazon S3 Select request
-// (see SelectObjectContentRequest - ScanRange
+// * Range:
+// Although you can specify a scan range for an Amazon S3 Select request (see
+// SelectObjectContentRequest - ScanRange
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_SelectObjectContent.html#AmazonS3-SelectObjectContent-request-ScanRange)
 // in the request parameters), you cannot specify the range of bytes of an object
 // to return.
 //
-//     * GLACIER, DEEP_ARCHIVE and REDUCED_REDUNDANCY storage classes:
-// You cannot specify the GLACIER, DEEP_ARCHIVE, or REDUCED_REDUNDANCY storage
-// classes. For more information, about storage classes see Storage Classes
+// * GLACIER, DEEP_ARCHIVE and REDUCED_REDUNDANCY storage classes: You
+// cannot specify the GLACIER, DEEP_ARCHIVE, or REDUCED_REDUNDANCY storage classes.
+// For more information, about storage classes see Storage Classes
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#storage-class-intro)
 // in the Amazon Simple Storage Service Developer Guide.
 //
@@ -91,15 +91,15 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#SelectObjectContentErrorCodeList)
 // Related Resources
 //
-//     * GetObject
+// * GetObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
 //
-//     *
+// *
 // GetBucketLifecycleConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycleConfiguration.html)
 //
-//
-// * PutBucketLifecycleConfiguration
+// *
+// PutBucketLifecycleConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html)
 func (c *Client) SelectObjectContent(ctx context.Context, params *SelectObjectContentInput, optFns ...func(*Options)) (*SelectObjectContentOutput, error) {
 	if params == nil {
@@ -184,14 +184,14 @@ type SelectObjectContentInput struct {
 	// 14.35.1 about how to specify the start and end of the range. ScanRangemay be
 	// used in the following ways:
 	//
-	//     * 50100 - process only the records starting
-	// between the bytes 50 and 100 (inclusive, counting from zero)
+	// * 50100 - process only the records starting between
+	// the bytes 50 and 100 (inclusive, counting from zero)
 	//
-	//     * 50 - process
-	// only the records starting after the byte 50
+	// * 50 - process only the
+	// records starting after the byte 50
 	//
-	//     * 50 - process only the records
-	// within the last 50 bytes of the file.
+	// * 50 - process only the records within the
+	// last 50 bytes of the file.
 	ScanRange *types.ScanRange
 }
 

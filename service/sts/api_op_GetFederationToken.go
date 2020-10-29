@@ -45,10 +45,10 @@ import (
 // can use the temporary credentials created by GetFederationToken in any AWS
 // service except the following:
 //
-//     * You cannot call any IAM operations using
-// the AWS CLI or the AWS API.
+// * You cannot call any IAM operations using the
+// AWS CLI or the AWS API.
 //
-//     * You cannot call any STS operations except
+// * You cannot call any STS operations except
 // GetCallerIdentity.
 //
 // You must pass an inline or managed session policy

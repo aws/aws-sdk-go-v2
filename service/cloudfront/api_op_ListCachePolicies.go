@@ -47,10 +47,10 @@ type ListCachePoliciesInput struct {
 	// A filter to return only the specified kinds of cache policies. Valid values
 	// are:
 	//
-	//     * managed – Returns only the managed policies created by AWS.
+	// * managed – Returns only the managed policies created by AWS.
 	//
-	//     *
-	// custom – Returns only the custom policies created in your AWS account.
+	// * custom –
+	// Returns only the custom policies created in your AWS account.
 	Type types.CachePolicyType
 }
 

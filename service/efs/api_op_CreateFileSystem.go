@@ -19,21 +19,21 @@ import (
 // currently exist that is owned by the caller's AWS account with the specified
 // creation token, this operation does the following:
 //
-//     * Creates a new, empty
-// file system. The file system will have an Amazon EFS assigned ID, and an initial
+// * Creates a new, empty file
+// system. The file system will have an Amazon EFS assigned ID, and an initial
 // lifecycle state creating.
 //
-//     * Returns with the description of the created
-// file system.
+// * Returns with the description of the created file
+// system.
 //
-// Otherwise, this operation returns a FileSystemAlreadyExists error
-// with the ID of the existing file system. For basic use cases, you can use a
-// randomly generated UUID for the creation token. The idempotent operation allows
-// you to retry a CreateFileSystem call without risk of creating an extra file
-// system. This can happen when an initial call fails in a way that leaves it
-// uncertain whether or not a file system was actually created. An example might be
-// that a transport level timeout occurred or your connection was reset. As long as
-// you use the same creation token, if the initial call had succeeded in creating a
+// Otherwise, this operation returns a FileSystemAlreadyExists error with
+// the ID of the existing file system. For basic use cases, you can use a randomly
+// generated UUID for the creation token. The idempotent operation allows you to
+// retry a CreateFileSystem call without risk of creating an extra file system.
+// This can happen when an initial call fails in a way that leaves it uncertain
+// whether or not a file system was actually created. An example might be that a
+// transport level timeout occurred or your connection was reset. As long as you
+// use the same creation token, if the initial call had succeeded in creating a
 // file system, the client can learn of its existence from the
 // FileSystemAlreadyExists error. The CreateFileSystem call returns while the file
 // system's lifecycle state is still creating. You can check the file system
@@ -89,18 +89,18 @@ type CreateFileSystemInput struct {
 	// parameter is not specified, the default CMK for Amazon EFS is used. This ID can
 	// be in one of the following formats:
 	//
-	//     * Key ID - A unique identifier of the
-	// key, for example 1234abcd-12ab-34cd-56ef-1234567890ab.
+	// * Key ID - A unique identifier of the key,
+	// for example 1234abcd-12ab-34cd-56ef-1234567890ab.
 	//
-	//     * ARN - An Amazon
-	// Resource Name (ARN) for the key, for example
+	// * ARN - An Amazon Resource
+	// Name (ARN) for the key, for example
 	// arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab.
 	//
-	//
-	// * Key alias - A previously created display name for a key, for example
+	// *
+	// Key alias - A previously created display name for a key, for example
 	// alias/projectKey1.
 	//
-	//     * Key alias ARN - An ARN for a key alias, for example
+	// * Key alias ARN - An ARN for a key alias, for example
 	// arn:aws:kms:us-west-2:444455556666:alias/projectKey1.
 	//
 	// If KmsKeyId is specified,

@@ -15,11 +15,11 @@ import (
 // key-value pairs, name and value, passed to the optional parameter filters. There
 // are three valid tag filter names:
 //
-//     * tagKey
+// * tagKey
 //
-//     * tagValue
+// * tagValue
 //
-//     *
+// *
 // configurationId
 //
 // Also, all configuration items associated with your user account

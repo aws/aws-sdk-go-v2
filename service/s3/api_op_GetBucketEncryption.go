@@ -25,12 +25,11 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html). The
 // following operations are related to GetBucketEncryption:
 //
-//     *
-// PutBucketEncryption
+// * PutBucketEncryption
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketEncryption.html)
 //
-//
-// * DeleteBucketEncryption
+// *
+// DeleteBucketEncryption
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketEncryption.html)
 func (c *Client) GetBucketEncryption(ctx context.Context, params *GetBucketEncryptionInput, optFns ...func(*Options)) (*GetBucketEncryptionOutput, error) {
 	if params == nil {

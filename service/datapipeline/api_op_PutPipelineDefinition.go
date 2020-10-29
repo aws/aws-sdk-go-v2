@@ -17,19 +17,19 @@ import (
 // pipeline are saved unless one of the following validation errors exist in the
 // pipeline.
 //
-//     * An object is missing a name or identifier field.
+// * An object is missing a name or identifier field.
 //
-//     * A
-// string or reference field is empty.
+// * A string or
+// reference field is empty.
 //
-//     * The number of objects in the pipeline
-// exceeds the allowed maximum number of objects.
+// * The number of objects in the pipeline exceeds the
+// allowed maximum number of objects.
 //
-//     * The pipeline is in a
-// FINISHED state.
+// * The pipeline is in a FINISHED
+// state.
 //
-// Pipeline object definitions are passed to the
-// PutPipelineDefinition action and returned by the GetPipelineDefinition action.
+// Pipeline object definitions are passed to the PutPipelineDefinition
+// action and returned by the GetPipelineDefinition action.
 func (c *Client) PutPipelineDefinition(ctx context.Context, params *PutPipelineDefinitionInput, optFns ...func(*Options)) (*PutPipelineDefinitionOutput, error) {
 	if params == nil {
 		params = &PutPipelineDefinitionInput{}

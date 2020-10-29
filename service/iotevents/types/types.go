@@ -76,11 +76,11 @@ type Action struct {
 // in the AWS IoT SiteWise API Reference. For parameters that are string data type,
 // you can specify the following options:
 //
-//     * Use a string. For example, the
+// * Use a string. For example, the
 // timeInSeconds value can be '1586400675'.
 //
-//     * Use an expression. For example,
-// the timeInSeconds value can be
+// * Use an expression. For example, the
+// timeInSeconds value can be
 // '${$input.TemperatureInput.sensorData.timestamp/1000}'. For more information,
 // see Expressions
 // (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
@@ -104,12 +104,12 @@ type AssetPropertyTimestamp struct {
 // in the AWS IoT SiteWise API Reference. For parameters that are string data type,
 // you can specify the following options:
 //
-//     * Use a string. For example, the
-// quality value can be 'GOOD'.
+// * Use a string. For example, the quality
+// value can be 'GOOD'.
 //
-//     * Use an expression. For example, the quality
-// value can be $input.TemperatureInput.sensorData.quality . For more information,
-// see Expressions
+// * Use an expression. For example, the quality value can be
+// $input.TemperatureInput.sensorData.quality . For more information, see
+// Expressions
 // (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
 // in the AWS IoT Events Developer Guide.
 type AssetPropertyValue struct {
@@ -138,10 +138,10 @@ type AssetPropertyValue struct {
 // in the AWS IoT SiteWise API Reference. For parameters that are string data type,
 // you can specify the following options:
 //
-//     * Use a string. For example, the
+// * Use a string. For example, the
 // doubleValue value can be '47.9'.
 //
-//     * Use an expression. For example, the
+// * Use an expression. For example, the
 // doubleValue value can be $input.TemperatureInput.sensorData.temperature. For
 // more information, see Expressions
 // (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
@@ -354,28 +354,27 @@ type DynamoDBAction struct {
 	// The data type for the hash key (also called the partition key). You can specify
 	// the following values:
 	//
-	//     * STRING - The hash key is a string.
+	// * STRING - The hash key is a string.
 	//
-	//     * NUMBER -
-	// The hash key is a number.
+	// * NUMBER - The hash
+	// key is a number.
 	//
-	// If you don't specify hashKeyType, the default value
-	// is STRING.
+	// If you don't specify hashKeyType, the default value is STRING.
 	HashKeyType *string
 
 	// The type of operation to perform. You can specify the following values:
 	//
-	//     *
+	// *
 	// INSERT - Insert data as a new item into the DynamoDB table. This item uses the
 	// specified hash key as a partition key. If you specified a range key, the item
 	// uses the range key as a sort key.
 	//
-	//     * UPDATE - Update an existing item of the
+	// * UPDATE - Update an existing item of the
 	// DynamoDB table with new data. This item's partition key must match the specified
 	// hash key. If you specified a range key, the range key must match the item's sort
 	// key.
 	//
-	//     * DELETE - Delete an existing item of the DynamoDB table. This item's
+	// * DELETE - Delete an existing item of the DynamoDB table. This item's
 	// partition key must match the specified hash key. If you specified a range key,
 	// the range key must match the item's sort key.
 	//
@@ -400,13 +399,12 @@ type DynamoDBAction struct {
 	// The data type for the range key (also called the sort key), You can specify the
 	// following values:
 	//
-	//     * STRING - The range key is a string.
+	// * STRING - The range key is a string.
 	//
-	//     * NUMBER - The
-	// range key is number.
+	// * NUMBER - The range
+	// key is number.
 	//
-	// If you don't specify rangeKeyField, the default value is
-	// STRING.
+	// If you don't specify rangeKeyField, the default value is STRING.
 	RangeKeyType *string
 
 	// The value of the range key (also called the sort key).
@@ -572,11 +570,11 @@ type IotEventsAction struct {
 // property in AWS IoT SiteWise. For parameters that are string data type, you can
 // specify the following options:
 //
-//     * Use a string. For example, the
-// propertyAlias value can be '/company/windfarm/3/turbine/7/temperature'.
+// * Use a string. For example, the propertyAlias
+// value can be '/company/windfarm/3/turbine/7/temperature'.
 //
-//     *
-// Use an expression. For example, the propertyAlias value can be
+// * Use an expression.
+// For example, the propertyAlias value can be
 // 'company/windfarm/${$input.TemperatureInput.sensorData.windfarmID}/turbine/${$input.TemperatureInput.sensorData.turbineID}/temperature'.
 // For more information, see Expressions
 // (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)

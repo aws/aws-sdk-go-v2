@@ -18,16 +18,16 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html)
 // Related operations
 //
-//     * CreateBuild
+// * CreateBuild
 //
-//     * ListBuilds
+// * ListBuilds
 //
-//     * DescribeBuild
+// * DescribeBuild
 //
+// *
+// UpdateBuild
 //
-// * UpdateBuild
-//
-//     * DeleteBuild
+// * DeleteBuild
 func (c *Client) DeleteBuild(ctx context.Context, params *DeleteBuildInput, optFns ...func(*Options)) (*DeleteBuildOutput, error) {
 	if params == nil {
 		params = &DeleteBuildInput{}

@@ -14,25 +14,25 @@ import (
 // the configuration name. A matchmaking configuration cannot be deleted if it is
 // being used in any active matchmaking tickets. Related operations
 //
-//     *
+// *
 // CreateMatchmakingConfiguration
 //
-//     * DescribeMatchmakingConfigurations
+// * DescribeMatchmakingConfigurations
 //
-//     *
+// *
 // UpdateMatchmakingConfiguration
 //
-//     * DeleteMatchmakingConfiguration
+// * DeleteMatchmakingConfiguration
 //
-//     *
+// *
 // CreateMatchmakingRuleSet
 //
-//     * DescribeMatchmakingRuleSets
+// * DescribeMatchmakingRuleSets
 //
-//     *
+// *
 // ValidateMatchmakingRuleSet
 //
-//     * DeleteMatchmakingRuleSet
+// * DeleteMatchmakingRuleSet
 func (c *Client) DeleteMatchmakingConfiguration(ctx context.Context, params *DeleteMatchmakingConfigurationInput, optFns ...func(*Options)) (*DeleteMatchmakingConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteMatchmakingConfigurationInput{}

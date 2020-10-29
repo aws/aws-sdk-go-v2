@@ -50,16 +50,16 @@ type CreateClientVpnEndpointInput struct {
 	// connection logging, data about client connections is sent to a Cloudwatch Logs
 	// log stream. The following information is logged:
 	//
-	//     * Client connection
+	// * Client connection
 	// requests
 	//
-	//     * Client connection results (successful and unsuccessful)
+	// * Client connection results (successful and unsuccessful)
 	//
-	//     *
-	// Reasons for unsuccessful client connection requests
+	// * Reasons
+	// for unsuccessful client connection requests
 	//
-	//     * Client connection
-	// termination time
+	// * Client connection termination
+	// time
 	//
 	// This member is required.
 	ConnectionLogOptions *types.ConnectionLogOptions

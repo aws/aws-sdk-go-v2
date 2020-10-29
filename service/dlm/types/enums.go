@@ -42,7 +42,7 @@ type PolicyTypeValues string
 
 // Enum values for PolicyTypeValues
 const (
-	PolicyTypeValuesEbs_snapshot_management PolicyTypeValues = "EBS_SNAPSHOT_MANAGEMENT"
+	PolicyTypeValuesEbsSnapshotManagement PolicyTypeValues = "EBS_SNAPSHOT_MANAGEMENT"
 )
 
 // Values returns all known values for PolicyTypeValues. Note that this can be

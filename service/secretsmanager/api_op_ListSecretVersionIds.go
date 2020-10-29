@@ -21,13 +21,13 @@ import (
 // next call to the same API to request the next part of the list. Minimum
 // permissions To run this command, you must have the following permissions:
 //
-//     *
+// *
 // secretsmanager:ListSecretVersionIds
 //
 // Related operations
 //
-//     * To list the
-// secrets in an account, use ListSecrets.
+// * To list the secrets
+// in an account, use ListSecrets.
 func (c *Client) ListSecretVersionIds(ctx context.Context, params *ListSecretVersionIdsInput, optFns ...func(*Options)) (*ListSecretVersionIdsOutput, error) {
 	if params == nil {
 		params = &ListSecretVersionIdsInput{}

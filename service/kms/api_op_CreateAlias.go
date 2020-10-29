@@ -25,43 +25,43 @@ import (
 // get the alias that you created, use the ListAliases operation. To use aliases
 // successfully, be aware of the following information.
 //
-//     * Each alias points to
+// * Each alias points to
 // only one CMK at a time, although a single CMK can have multiple aliases. The
 // alias and its associated CMK must be in the same AWS account and Region.
 //
-//     *
-// You can associate an alias with any customer managed CMK in the same AWS account
-// and Region. However, you do not have permission to associate an alias with an
-// AWS managed CMK
+// * You
+// can associate an alias with any customer managed CMK in the same AWS account and
+// Region. However, you do not have permission to associate an alias with an AWS
+// managed CMK
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk)
 // or an AWS owned CMK
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk).
 //
-//
-// * To change the CMK associated with an alias, use the UpdateAlias operation. The
+// *
+// To change the CMK associated with an alias, use the UpdateAlias operation. The
 // current CMK and the new CMK must be the same type (both symmetric or both
 // asymmetric) and they must have the same key usage (ENCRYPT_DECRYPT or
 // SIGN_VERIFY). This restriction prevents cryptographic errors in code that uses
 // aliases.
 //
-//     * The alias name must begin with alias/ followed by a name, such
-// as alias/ExampleAlias. It can contain only alphanumeric characters, forward
-// slashes (/), underscores (_), and dashes (-). The alias name cannot begin with
+// * The alias name must begin with alias/ followed by a name, such as
+// alias/ExampleAlias. It can contain only alphanumeric characters, forward slashes
+// (/), underscores (_), and dashes (-). The alias name cannot begin with
 // alias/aws/. The alias/aws/ prefix is reserved for AWS managed CMKs
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk).
 //
-//
-// * The alias name must be unique within an AWS Region. However, you can use the
+// *
+// The alias name must be unique within an AWS Region. However, you can use the
 // same alias name in multiple Regions of the same AWS account. Each instance of
 // the alias is associated with a CMK in its Region.
 //
-//     * After you create an
-// alias, you cannot change its alias name. However, you can use the DeleteAlias
-// operation to delete the alias and then create a new alias with the desired
-// name.
+// * After you create an alias,
+// you cannot change its alias name. However, you can use the DeleteAlias operation
+// to delete the alias and then create a new alias with the desired name.
 //
-//     * You can use an alias name or alias ARN to identify a CMK in AWS KMS
-// cryptographic operations
+// * You
+// can use an alias name or alias ARN to identify a CMK in AWS KMS cryptographic
+// operations
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
 // and in the DescribeKey operation. However, you cannot use alias names or alias
 // ARNs in API operations that manage CMKs, such as DisableKey or GetKeyPolicy. For

@@ -30,8 +30,8 @@ type CustomerPolicyScopeIdType string
 
 // Enum values for CustomerPolicyScopeIdType
 const (
-	CustomerPolicyScopeIdTypeAccount  CustomerPolicyScopeIdType = "ACCOUNT"
-	CustomerPolicyScopeIdTypeOrg_unit CustomerPolicyScopeIdType = "ORG_UNIT"
+	CustomerPolicyScopeIdTypeAccount CustomerPolicyScopeIdType = "ACCOUNT"
+	CustomerPolicyScopeIdTypeOrgUnit CustomerPolicyScopeIdType = "ORG_UNIT"
 )
 
 // Values returns all known values for CustomerPolicyScopeIdType. Note that this
@@ -106,12 +106,12 @@ type SecurityServiceType string
 
 // Enum values for SecurityServiceType
 const (
-	SecurityServiceTypeWaf                           SecurityServiceType = "WAF"
-	SecurityServiceTypeWafv2                         SecurityServiceType = "WAFV2"
-	SecurityServiceTypeShield_advanced               SecurityServiceType = "SHIELD_ADVANCED"
-	SecurityServiceTypeSecurity_groups_common        SecurityServiceType = "SECURITY_GROUPS_COMMON"
-	SecurityServiceTypeSecurity_groups_content_audit SecurityServiceType = "SECURITY_GROUPS_CONTENT_AUDIT"
-	SecurityServiceTypeSecurity_groups_usage_audit   SecurityServiceType = "SECURITY_GROUPS_USAGE_AUDIT"
+	SecurityServiceTypeWaf                        SecurityServiceType = "WAF"
+	SecurityServiceTypeWafv2                      SecurityServiceType = "WAFV2"
+	SecurityServiceTypeShieldAdvanced             SecurityServiceType = "SHIELD_ADVANCED"
+	SecurityServiceTypeSecurityGroupsCommon       SecurityServiceType = "SECURITY_GROUPS_COMMON"
+	SecurityServiceTypeSecurityGroupsContentAudit SecurityServiceType = "SECURITY_GROUPS_CONTENT_AUDIT"
+	SecurityServiceTypeSecurityGroupsUsageAudit   SecurityServiceType = "SECURITY_GROUPS_USAGE_AUDIT"
 )
 
 // Values returns all known values for SecurityServiceType. Note that this can be

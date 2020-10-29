@@ -249,13 +249,13 @@ type Group struct {
 
 	// The structure containing configurations related to insights.
 	//
-	//     * The
+	// * The
 	// InsightsEnabled boolean can be set to true to enable insights for the group or
 	// false to disable insights for the group.
 	//
-	//     * The NotifcationsEnabled boolean
-	// can be set to true to enable insights notifications through Amazon EventBridge
-	// for the group.
+	// * The NotifcationsEnabled boolean can
+	// be set to true to enable insights notifications through Amazon EventBridge for
+	// the group.
 	InsightsConfiguration *InsightsConfiguration
 }
 
@@ -273,12 +273,12 @@ type GroupSummary struct {
 
 	// The structure containing configurations related to insights.
 	//
-	//     * The
+	// * The
 	// InsightsEnabled boolean can be set to true to enable insights for the group or
 	// false to disable insights for the group.
 	//
-	//     * The NotificationsEnabled boolean
-	// can be set to true to enable insights notifications. Notifications can only be
+	// * The NotificationsEnabled boolean can
+	// be set to true to enable insights notifications. Notifications can only be
 	// enabled on a group with InsightsEnabled set to true.
 	InsightsConfiguration *InsightsConfiguration
 }
@@ -670,19 +670,19 @@ type Service struct {
 
 	// The type of service.
 	//
-	//     * AWS Resource - The type of an AWS resource. For
-	// example, AWS::EC2::Instance for an application running on Amazon EC2 or
+	// * AWS Resource - The type of an AWS resource. For example,
+	// AWS::EC2::Instance for an application running on Amazon EC2 or
 	// AWS::DynamoDB::Table for an Amazon DynamoDB table that the application used.
 	//
-	//
-	// * AWS Service - The type of an AWS service. For example, AWS::DynamoDB for
+	// *
+	// AWS Service - The type of an AWS service. For example, AWS::DynamoDB for
 	// downstream calls to Amazon DynamoDB that didn't target a specific table.
 	//
-	//     *
+	// *
 	// client - Represents the clients that sent requests to a root service.
 	//
-	//     *
-	// remote - A downstream service of indeterminate type.
+	// * remote
+	// - A downstream service of indeterminate type.
 	Type *string
 }
 
@@ -726,14 +726,14 @@ type ServiceStatistics struct {
 // resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in
 // the AWS General Reference. The following restrictions apply to tags:
 //
-//     *
-// Maximum number of user-applied tags per resource: 50
+// * Maximum
+// number of user-applied tags per resource: 50
 //
-//     * Tag keys and values
-// are case sensitive.
+// * Tag keys and values are case
+// sensitive.
 //
-//     * Don't use aws: as a prefix for keys; it's reserved
-// for AWS use. You cannot edit or delete system tags.
+// * Don't use aws: as a prefix for keys; it's reserved for AWS use.
+// You cannot edit or delete system tags.
 type Tag struct {
 
 	// A tag key, such as Stage or Name. A tag key cannot be empty. The key can be a

@@ -178,10 +178,10 @@ type ObjectType string
 
 // Enum values for ObjectType
 const (
-	ObjectTypeNode      ObjectType = "NODE"
-	ObjectTypeLeaf_node ObjectType = "LEAF_NODE"
-	ObjectTypePolicy    ObjectType = "POLICY"
-	ObjectTypeIndex     ObjectType = "INDEX"
+	ObjectTypeNode     ObjectType = "NODE"
+	ObjectTypeLeafNode ObjectType = "LEAF_NODE"
+	ObjectTypePolicy   ObjectType = "POLICY"
+	ObjectTypeIndex    ObjectType = "INDEX"
 )
 
 // Values returns all known values for ObjectType. Note that this can be expanded
@@ -200,11 +200,11 @@ type RangeMode string
 
 // Enum values for RangeMode
 const (
-	RangeModeFirst                      RangeMode = "FIRST"
-	RangeModeLast                       RangeMode = "LAST"
-	RangeModeLast_before_missing_values RangeMode = "LAST_BEFORE_MISSING_VALUES"
-	RangeModeInclusive                  RangeMode = "INCLUSIVE"
-	RangeModeExclusive                  RangeMode = "EXCLUSIVE"
+	RangeModeFirst                   RangeMode = "FIRST"
+	RangeModeLast                    RangeMode = "LAST"
+	RangeModeLastBeforeMissingValues RangeMode = "LAST_BEFORE_MISSING_VALUES"
+	RangeModeInclusive               RangeMode = "INCLUSIVE"
+	RangeModeExclusive               RangeMode = "EXCLUSIVE"
 )
 
 // Values returns all known values for RangeMode. Note that this can be expanded in
@@ -224,8 +224,8 @@ type RequiredAttributeBehavior string
 
 // Enum values for RequiredAttributeBehavior
 const (
-	RequiredAttributeBehaviorRequired_always RequiredAttributeBehavior = "REQUIRED_ALWAYS"
-	RequiredAttributeBehaviorNot_required    RequiredAttributeBehavior = "NOT_REQUIRED"
+	RequiredAttributeBehaviorRequiredAlways RequiredAttributeBehavior = "REQUIRED_ALWAYS"
+	RequiredAttributeBehaviorNotRequired    RequiredAttributeBehavior = "NOT_REQUIRED"
 )
 
 // Values returns all known values for RequiredAttributeBehavior. Note that this
@@ -242,10 +242,10 @@ type RuleType string
 
 // Enum values for RuleType
 const (
-	RuleTypeBinary_length     RuleType = "BINARY_LENGTH"
-	RuleTypeNumber_comparison RuleType = "NUMBER_COMPARISON"
-	RuleTypeString_from_set   RuleType = "STRING_FROM_SET"
-	RuleTypeString_length     RuleType = "STRING_LENGTH"
+	RuleTypeBinaryLength     RuleType = "BINARY_LENGTH"
+	RuleTypeNumberComparison RuleType = "NUMBER_COMPARISON"
+	RuleTypeStringFromSet    RuleType = "STRING_FROM_SET"
+	RuleTypeStringLength     RuleType = "STRING_LENGTH"
 )
 
 // Values returns all known values for RuleType. Note that this can be expanded in
@@ -264,8 +264,8 @@ type UpdateActionType string
 
 // Enum values for UpdateActionType
 const (
-	UpdateActionTypeCreate_or_update UpdateActionType = "CREATE_OR_UPDATE"
-	UpdateActionTypeDelete           UpdateActionType = "DELETE"
+	UpdateActionTypeCreateOrUpdate UpdateActionType = "CREATE_OR_UPDATE"
+	UpdateActionTypeDelete         UpdateActionType = "DELETE"
 )
 
 // Values returns all known values for UpdateActionType. Note that this can be

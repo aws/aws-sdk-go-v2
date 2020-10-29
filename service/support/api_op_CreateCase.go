@@ -16,12 +16,11 @@ import (
 // API doesn't support requesting service limit increases. You can submit a service
 // limit increase in the following ways:
 //
-//     * Submit a request from the AWS
-// Support Center Create Case
-// (https://console.aws.amazon.com/support/home#/case/create) page.
+// * Submit a request from the AWS Support
+// Center Create Case (https://console.aws.amazon.com/support/home#/case/create)
+// page.
 //
-//     * Use the
-// Service Quotas RequestServiceQuotaIncrease
+// * Use the Service Quotas RequestServiceQuotaIncrease
 // (https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_RequestServiceQuotaIncrease.html)
 // operation.
 //
@@ -33,10 +32,10 @@ import (
 // the AWS Support Center (https://console.aws.amazon.com/support). Use the
 // DescribeCases operation to get the displayId.
 //
-//     * You must have a Business or
+// * You must have a Business or
 // Enterprise support plan to use the AWS Support API.
 //
-//     * If you call the AWS
+// * If you call the AWS
 // Support API from an account that does not have a Business or Enterprise support
 // plan, the SubscriptionRequiredException error message appears. For information
 // about changing your support plan, see AWS Support

@@ -24,10 +24,10 @@ type BodyPart string
 
 // Enum values for BodyPart
 const (
-	BodyPartFace       BodyPart = "FACE"
-	BodyPartHead       BodyPart = "HEAD"
-	BodyPartLeft_hand  BodyPart = "LEFT_HAND"
-	BodyPartRight_hand BodyPart = "RIGHT_HAND"
+	BodyPartFace      BodyPart = "FACE"
+	BodyPartHead      BodyPart = "HEAD"
+	BodyPartLeftHand  BodyPart = "LEFT_HAND"
+	BodyPartRightHand BodyPart = "RIGHT_HAND"
 )
 
 // Values returns all known values for BodyPart. Note that this can be expanded in
@@ -64,8 +64,8 @@ type ContentClassifier string
 
 // Enum values for ContentClassifier
 const (
-	ContentClassifierFree_of_personally_identifiable_information ContentClassifier = "FreeOfPersonallyIdentifiableInformation"
-	ContentClassifierFree_of_adult_content                       ContentClassifier = "FreeOfAdultContent"
+	ContentClassifierFreeOfPersonallyIdentifiableInformation ContentClassifier = "FreeOfPersonallyIdentifiableInformation"
+	ContentClassifierFreeOfAdultContent                      ContentClassifier = "FreeOfAdultContent"
 )
 
 // Values returns all known values for ContentClassifier. Note that this can be
@@ -278,10 +278,10 @@ type OrientationCorrection string
 
 // Enum values for OrientationCorrection
 const (
-	OrientationCorrectionRotate_0   OrientationCorrection = "ROTATE_0"
-	OrientationCorrectionRotate_90  OrientationCorrection = "ROTATE_90"
-	OrientationCorrectionRotate_180 OrientationCorrection = "ROTATE_180"
-	OrientationCorrectionRotate_270 OrientationCorrection = "ROTATE_270"
+	OrientationCorrectionRotate0   OrientationCorrection = "ROTATE_0"
+	OrientationCorrectionRotate90  OrientationCorrection = "ROTATE_90"
+	OrientationCorrectionRotate180 OrientationCorrection = "ROTATE_180"
+	OrientationCorrectionRotate270 OrientationCorrection = "ROTATE_270"
 )
 
 // Values returns all known values for OrientationCorrection. Note that this can be
@@ -338,15 +338,15 @@ type ProjectVersionStatus string
 
 // Enum values for ProjectVersionStatus
 const (
-	ProjectVersionStatusTraining_in_progress ProjectVersionStatus = "TRAINING_IN_PROGRESS"
-	ProjectVersionStatusTraining_completed   ProjectVersionStatus = "TRAINING_COMPLETED"
-	ProjectVersionStatusTraining_failed      ProjectVersionStatus = "TRAINING_FAILED"
-	ProjectVersionStatusStarting             ProjectVersionStatus = "STARTING"
-	ProjectVersionStatusRunning              ProjectVersionStatus = "RUNNING"
-	ProjectVersionStatusFailed               ProjectVersionStatus = "FAILED"
-	ProjectVersionStatusStopping             ProjectVersionStatus = "STOPPING"
-	ProjectVersionStatusStopped              ProjectVersionStatus = "STOPPED"
-	ProjectVersionStatusDeleting             ProjectVersionStatus = "DELETING"
+	ProjectVersionStatusTrainingInProgress ProjectVersionStatus = "TRAINING_IN_PROGRESS"
+	ProjectVersionStatusTrainingCompleted  ProjectVersionStatus = "TRAINING_COMPLETED"
+	ProjectVersionStatusTrainingFailed     ProjectVersionStatus = "TRAINING_FAILED"
+	ProjectVersionStatusStarting           ProjectVersionStatus = "STARTING"
+	ProjectVersionStatusRunning            ProjectVersionStatus = "RUNNING"
+	ProjectVersionStatusFailed             ProjectVersionStatus = "FAILED"
+	ProjectVersionStatusStopping           ProjectVersionStatus = "STOPPING"
+	ProjectVersionStatusStopped            ProjectVersionStatus = "STOPPED"
+	ProjectVersionStatusDeleting           ProjectVersionStatus = "DELETING"
 )
 
 // Values returns all known values for ProjectVersionStatus. Note that this can be
@@ -370,9 +370,9 @@ type ProtectiveEquipmentType string
 
 // Enum values for ProtectiveEquipmentType
 const (
-	ProtectiveEquipmentTypeFace_cover ProtectiveEquipmentType = "FACE_COVER"
-	ProtectiveEquipmentTypeHand_cover ProtectiveEquipmentType = "HAND_COVER"
-	ProtectiveEquipmentTypeHead_cover ProtectiveEquipmentType = "HEAD_COVER"
+	ProtectiveEquipmentTypeFaceCover ProtectiveEquipmentType = "FACE_COVER"
+	ProtectiveEquipmentTypeHandCover ProtectiveEquipmentType = "HAND_COVER"
+	ProtectiveEquipmentTypeHeadCover ProtectiveEquipmentType = "HEAD_COVER"
 )
 
 // Values returns all known values for ProtectiveEquipmentType. Note that this can
@@ -414,13 +414,13 @@ type Reason string
 
 // Enum values for Reason
 const (
-	ReasonExceeds_max_faces  Reason = "EXCEEDS_MAX_FACES"
-	ReasonExtreme_pose       Reason = "EXTREME_POSE"
-	ReasonLow_brightness     Reason = "LOW_BRIGHTNESS"
-	ReasonLow_sharpness      Reason = "LOW_SHARPNESS"
-	ReasonLow_confidence     Reason = "LOW_CONFIDENCE"
-	ReasonSmall_bounding_box Reason = "SMALL_BOUNDING_BOX"
-	ReasonLow_face_quality   Reason = "LOW_FACE_QUALITY"
+	ReasonExceedsMaxFaces  Reason = "EXCEEDS_MAX_FACES"
+	ReasonExtremePose      Reason = "EXTREME_POSE"
+	ReasonLowBrightness    Reason = "LOW_BRIGHTNESS"
+	ReasonLowSharpness     Reason = "LOW_SHARPNESS"
+	ReasonLowConfidence    Reason = "LOW_CONFIDENCE"
+	ReasonSmallBoundingBox Reason = "SMALL_BOUNDING_BOX"
+	ReasonLowFaceQuality   Reason = "LOW_FACE_QUALITY"
 )
 
 // Values returns all known values for Reason. Note that this can be expanded in
@@ -442,8 +442,8 @@ type SegmentType string
 
 // Enum values for SegmentType
 const (
-	SegmentTypeTechnical_cue SegmentType = "TECHNICAL_CUE"
-	SegmentTypeShot          SegmentType = "SHOT"
+	SegmentTypeTechnicalCue SegmentType = "TECHNICAL_CUE"
+	SegmentTypeShot         SegmentType = "SHOT"
 )
 
 // Values returns all known values for SegmentType. Note that this can be expanded
@@ -484,9 +484,9 @@ type TechnicalCueType string
 
 // Enum values for TechnicalCueType
 const (
-	TechnicalCueTypeColor_bars   TechnicalCueType = "ColorBars"
-	TechnicalCueTypeEnd_credits  TechnicalCueType = "EndCredits"
-	TechnicalCueTypeBlack_frames TechnicalCueType = "BlackFrames"
+	TechnicalCueTypeColorBars   TechnicalCueType = "ColorBars"
+	TechnicalCueTypeEndCredits  TechnicalCueType = "EndCredits"
+	TechnicalCueTypeBlackFrames TechnicalCueType = "BlackFrames"
 )
 
 // Values returns all known values for TechnicalCueType. Note that this can be
@@ -522,9 +522,9 @@ type VideoJobStatus string
 
 // Enum values for VideoJobStatus
 const (
-	VideoJobStatusIn_progress VideoJobStatus = "IN_PROGRESS"
-	VideoJobStatusSucceeded   VideoJobStatus = "SUCCEEDED"
-	VideoJobStatusFailed      VideoJobStatus = "FAILED"
+	VideoJobStatusInProgress VideoJobStatus = "IN_PROGRESS"
+	VideoJobStatusSucceeded  VideoJobStatus = "SUCCEEDED"
+	VideoJobStatusFailed     VideoJobStatus = "FAILED"
 )
 
 // Values returns all known values for VideoJobStatus. Note that this can be

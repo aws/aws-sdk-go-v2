@@ -25,10 +25,10 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html). The
 // following operations are related to DeleteBucketPolicy
 //
-//     * CreateBucket
+// * CreateBucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
 //
-//     *
+// *
 // DeleteObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html)
 func (c *Client) DeleteBucketPolicy(ctx context.Context, params *DeleteBucketPolicyInput, optFns ...func(*Options)) (*DeleteBucketPolicyOutput, error) {

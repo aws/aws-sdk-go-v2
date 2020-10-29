@@ -26,9 +26,9 @@ type AccessStatus string
 
 // Enum values for AccessStatus
 const (
-	AccessStatusEnabled      AccessStatus = "ENABLED"
-	AccessStatusUnder_change AccessStatus = "UNDER_CHANGE"
-	AccessStatusDisabled     AccessStatus = "DISABLED"
+	AccessStatusEnabled     AccessStatus = "ENABLED"
+	AccessStatusUnderChange AccessStatus = "UNDER_CHANGE"
+	AccessStatusDisabled    AccessStatus = "DISABLED"
 )
 
 // Values returns all known values for AccessStatus. Note that this can be expanded
@@ -82,9 +82,9 @@ type CopyProductStatus string
 
 // Enum values for CopyProductStatus
 const (
-	CopyProductStatusSucceeded   CopyProductStatus = "SUCCEEDED"
-	CopyProductStatusIn_progress CopyProductStatus = "IN_PROGRESS"
-	CopyProductStatusFailed      CopyProductStatus = "FAILED"
+	CopyProductStatusSucceeded  CopyProductStatus = "SUCCEEDED"
+	CopyProductStatusInProgress CopyProductStatus = "IN_PROGRESS"
+	CopyProductStatusFailed     CopyProductStatus = "FAILED"
 )
 
 // Values returns all known values for CopyProductStatus. Note that this can be
@@ -120,9 +120,9 @@ type OrganizationNodeType string
 
 // Enum values for OrganizationNodeType
 const (
-	OrganizationNodeTypeOrganization        OrganizationNodeType = "ORGANIZATION"
-	OrganizationNodeTypeOrganizational_unit OrganizationNodeType = "ORGANIZATIONAL_UNIT"
-	OrganizationNodeTypeAccount             OrganizationNodeType = "ACCOUNT"
+	OrganizationNodeTypeOrganization       OrganizationNodeType = "ORGANIZATION"
+	OrganizationNodeTypeOrganizationalUnit OrganizationNodeType = "ORGANIZATIONAL_UNIT"
+	OrganizationNodeTypeAccount            OrganizationNodeType = "ACCOUNT"
 )
 
 // Values returns all known values for OrganizationNodeType. Note that this can be
@@ -140,9 +140,9 @@ type PortfolioShareType string
 
 // Enum values for PortfolioShareType
 const (
-	PortfolioShareTypeImported           PortfolioShareType = "IMPORTED"
-	PortfolioShareTypeAws_servicecatalog PortfolioShareType = "AWS_SERVICECATALOG"
-	PortfolioShareTypeAws_organizations  PortfolioShareType = "AWS_ORGANIZATIONS"
+	PortfolioShareTypeImported          PortfolioShareType = "IMPORTED"
+	PortfolioShareTypeAwsServicecatalog PortfolioShareType = "AWS_SERVICECATALOG"
+	PortfolioShareTypeAwsOrganizations  PortfolioShareType = "AWS_ORGANIZATIONS"
 )
 
 // Values returns all known values for PortfolioShareType. Note that this can be
@@ -192,8 +192,8 @@ type ProductType string
 
 // Enum values for ProductType
 const (
-	ProductTypeCloud_formation_template ProductType = "CLOUD_FORMATION_TEMPLATE"
-	ProductTypeMarketplace              ProductType = "MARKETPLACE"
+	ProductTypeCloudFormationTemplate ProductType = "CLOUD_FORMATION_TEMPLATE"
+	ProductTypeMarketplace            ProductType = "MARKETPLACE"
 )
 
 // Values returns all known values for ProductType. Note that this can be expanded
@@ -270,12 +270,12 @@ type ProvisionedProductPlanStatus string
 
 // Enum values for ProvisionedProductPlanStatus
 const (
-	ProvisionedProductPlanStatusCreate_in_progress  ProvisionedProductPlanStatus = "CREATE_IN_PROGRESS"
-	ProvisionedProductPlanStatusCreate_success      ProvisionedProductPlanStatus = "CREATE_SUCCESS"
-	ProvisionedProductPlanStatusCreate_failed       ProvisionedProductPlanStatus = "CREATE_FAILED"
-	ProvisionedProductPlanStatusExecute_in_progress ProvisionedProductPlanStatus = "EXECUTE_IN_PROGRESS"
-	ProvisionedProductPlanStatusExecute_success     ProvisionedProductPlanStatus = "EXECUTE_SUCCESS"
-	ProvisionedProductPlanStatusExecute_failed      ProvisionedProductPlanStatus = "EXECUTE_FAILED"
+	ProvisionedProductPlanStatusCreateInProgress  ProvisionedProductPlanStatus = "CREATE_IN_PROGRESS"
+	ProvisionedProductPlanStatusCreateSuccess     ProvisionedProductPlanStatus = "CREATE_SUCCESS"
+	ProvisionedProductPlanStatusCreateFailed      ProvisionedProductPlanStatus = "CREATE_FAILED"
+	ProvisionedProductPlanStatusExecuteInProgress ProvisionedProductPlanStatus = "EXECUTE_IN_PROGRESS"
+	ProvisionedProductPlanStatusExecuteSuccess    ProvisionedProductPlanStatus = "EXECUTE_SUCCESS"
+	ProvisionedProductPlanStatusExecuteFailed     ProvisionedProductPlanStatus = "EXECUTE_FAILED"
 )
 
 // Values returns all known values for ProvisionedProductPlanStatus. Note that this
@@ -312,11 +312,11 @@ type ProvisionedProductStatus string
 
 // Enum values for ProvisionedProductStatus
 const (
-	ProvisionedProductStatusAvailable        ProvisionedProductStatus = "AVAILABLE"
-	ProvisionedProductStatusUnder_change     ProvisionedProductStatus = "UNDER_CHANGE"
-	ProvisionedProductStatusTainted          ProvisionedProductStatus = "TAINTED"
-	ProvisionedProductStatusError            ProvisionedProductStatus = "ERROR"
-	ProvisionedProductStatusPlan_in_progress ProvisionedProductStatus = "PLAN_IN_PROGRESS"
+	ProvisionedProductStatusAvailable      ProvisionedProductStatus = "AVAILABLE"
+	ProvisionedProductStatusUnderChange    ProvisionedProductStatus = "UNDER_CHANGE"
+	ProvisionedProductStatusTainted        ProvisionedProductStatus = "TAINTED"
+	ProvisionedProductStatusError          ProvisionedProductStatus = "ERROR"
+	ProvisionedProductStatusPlanInProgress ProvisionedProductStatus = "PLAN_IN_PROGRESS"
 )
 
 // Values returns all known values for ProvisionedProductStatus. Note that this can
@@ -388,9 +388,9 @@ type ProvisioningArtifactType string
 
 // Enum values for ProvisioningArtifactType
 const (
-	ProvisioningArtifactTypeCloud_formation_template ProvisioningArtifactType = "CLOUD_FORMATION_TEMPLATE"
-	ProvisioningArtifactTypeMarketplace_ami          ProvisioningArtifactType = "MARKETPLACE_AMI"
-	ProvisioningArtifactTypeMarketplace_car          ProvisioningArtifactType = "MARKETPLACE_CAR"
+	ProvisioningArtifactTypeCloudFormationTemplate ProvisioningArtifactType = "CLOUD_FORMATION_TEMPLATE"
+	ProvisioningArtifactTypeMarketplaceAmi         ProvisioningArtifactType = "MARKETPLACE_AMI"
+	ProvisioningArtifactTypeMarketplaceCar         ProvisioningArtifactType = "MARKETPLACE_CAR"
 )
 
 // Values returns all known values for ProvisioningArtifactType. Note that this can
@@ -408,11 +408,11 @@ type RecordStatus string
 
 // Enum values for RecordStatus
 const (
-	RecordStatusCreated              RecordStatus = "CREATED"
-	RecordStatusIn_progress          RecordStatus = "IN_PROGRESS"
-	RecordStatusIn_progress_in_error RecordStatus = "IN_PROGRESS_IN_ERROR"
-	RecordStatusSucceeded            RecordStatus = "SUCCEEDED"
-	RecordStatusFailed               RecordStatus = "FAILED"
+	RecordStatusCreated           RecordStatus = "CREATED"
+	RecordStatusInProgress        RecordStatus = "IN_PROGRESS"
+	RecordStatusInProgressInError RecordStatus = "IN_PROGRESS_IN_ERROR"
+	RecordStatusSucceeded         RecordStatus = "SUCCEEDED"
+	RecordStatusFailed            RecordStatus = "FAILED"
 )
 
 // Values returns all known values for RecordStatus. Note that this can be expanded
@@ -561,11 +561,11 @@ type ShareStatus string
 
 // Enum values for ShareStatus
 const (
-	ShareStatusNot_started           ShareStatus = "NOT_STARTED"
-	ShareStatusIn_progress           ShareStatus = "IN_PROGRESS"
-	ShareStatusCompleted             ShareStatus = "COMPLETED"
-	ShareStatusCompleted_with_errors ShareStatus = "COMPLETED_WITH_ERRORS"
-	ShareStatusError                 ShareStatus = "ERROR"
+	ShareStatusNotStarted          ShareStatus = "NOT_STARTED"
+	ShareStatusInProgress          ShareStatus = "IN_PROGRESS"
+	ShareStatusCompleted           ShareStatus = "COMPLETED"
+	ShareStatusCompletedWithErrors ShareStatus = "COMPLETED_WITH_ERRORS"
+	ShareStatusError               ShareStatus = "ERROR"
 )
 
 // Values returns all known values for ShareStatus. Note that this can be expanded

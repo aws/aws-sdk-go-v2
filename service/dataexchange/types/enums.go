@@ -6,7 +6,7 @@ type AssetType string
 
 // Enum values for AssetType
 const (
-	AssetTypeS3_snapshot AssetType = "S3_SNAPSHOT"
+	AssetTypeS3Snapshot AssetType = "S3_SNAPSHOT"
 )
 
 // Values returns all known values for AssetType. Note that this can be expanded in
@@ -22,13 +22,13 @@ type Code string
 
 // Enum values for Code
 const (
-	CodeAccess_denied_exception          Code = "ACCESS_DENIED_EXCEPTION"
-	CodeInternal_server_exception        Code = "INTERNAL_SERVER_EXCEPTION"
-	CodeMalware_detected                 Code = "MALWARE_DETECTED"
-	CodeResource_not_found_exception     Code = "RESOURCE_NOT_FOUND_EXCEPTION"
-	CodeService_quota_exceeded_exception Code = "SERVICE_QUOTA_EXCEEDED_EXCEPTION"
-	CodeValidation_exception             Code = "VALIDATION_EXCEPTION"
-	CodeMalware_scan_encrypted_file      Code = "MALWARE_SCAN_ENCRYPTED_FILE"
+	CodeAccessDeniedException         Code = "ACCESS_DENIED_EXCEPTION"
+	CodeInternalServerException       Code = "INTERNAL_SERVER_EXCEPTION"
+	CodeMalwareDetected               Code = "MALWARE_DETECTED"
+	CodeResourceNotFoundException     Code = "RESOURCE_NOT_FOUND_EXCEPTION"
+	CodeServiceQuotaExceededException Code = "SERVICE_QUOTA_EXCEEDED_EXCEPTION"
+	CodeValidationException           Code = "VALIDATION_EXCEPTION"
+	CodeMalwareScanEncryptedFile      Code = "MALWARE_SCAN_ENCRYPTED_FILE"
 )
 
 // Values returns all known values for Code. Note that this can be expanded in the
@@ -50,8 +50,8 @@ type JobErrorLimitName string
 
 // Enum values for JobErrorLimitName
 const (
-	JobErrorLimitNameAssets_per_revision JobErrorLimitName = "Assets per revision"
-	JobErrorLimitNameAsset_size_in_gb    JobErrorLimitName = "Asset size in GB"
+	JobErrorLimitNameAssetsPerRevision JobErrorLimitName = "Assets per revision"
+	JobErrorLimitNameAssetSizeInGb     JobErrorLimitName = "Asset size in GB"
 )
 
 // Values returns all known values for JobErrorLimitName. Note that this can be
@@ -86,18 +86,18 @@ type LimitName string
 
 // Enum values for LimitName
 const (
-	LimitNameProducts_per_account                                           LimitName = "Products per account"
-	LimitNameData_sets_per_account                                          LimitName = "Data sets per account"
-	LimitNameData_sets_per_product                                          LimitName = "Data sets per product"
-	LimitNameRevisions_per_data_set                                         LimitName = "Revisions per data set"
-	LimitNameAssets_per_revision                                            LimitName = "Assets per revision"
-	LimitNameAssets_per_import_job_from_amazon_s3                           LimitName = "Assets per import job from Amazon S3"
-	LimitNameAsset_per_export_job_from_amazon_s3                            LimitName = "Asset per export job from Amazon S3"
-	LimitNameAsset_size_in_gb                                               LimitName = "Asset size in GB"
-	LimitNameConcurrent_in_progress_jobs_to_import_assets_from_amazon_s3    LimitName = "Concurrent in progress jobs to import assets from Amazon S3"
-	LimitNameConcurrent_in_progress_jobs_to_import_assets_from_a_signed_url LimitName = "Concurrent in progress jobs to import assets from a signed URL"
-	LimitNameConcurrent_in_progress_jobs_to_export_assets_to_amazon_s3      LimitName = "Concurrent in progress jobs to export assets to Amazon S3"
-	LimitNameConcurrent_in_progress_jobs_to_export_assets_to_a_signed_url   LimitName = "Concurrent in progress jobs to export assets to a signed URL"
+	LimitNameProductsPerAccount                                   LimitName = "Products per account"
+	LimitNameDataSetsPerAccount                                   LimitName = "Data sets per account"
+	LimitNameDataSetsPerProduct                                   LimitName = "Data sets per product"
+	LimitNameRevisionsPerDataSet                                  LimitName = "Revisions per data set"
+	LimitNameAssetsPerRevision                                    LimitName = "Assets per revision"
+	LimitNameAssetsPerImportJobFromAmazonS3                       LimitName = "Assets per import job from Amazon S3"
+	LimitNameAssetPerExportJobFromAmazonS3                        LimitName = "Asset per export job from Amazon S3"
+	LimitNameAssetSizeInGb                                        LimitName = "Asset size in GB"
+	LimitNameConcurrentInProgressJobsToImportAssetsFromAmazonS3   LimitName = "Concurrent in progress jobs to import assets from Amazon S3"
+	LimitNameConcurrentInProgressJobsToImportAssetsFromASignedUrl LimitName = "Concurrent in progress jobs to import assets from a signed URL"
+	LimitNameConcurrentInProgressJobsToExportAssetsToAmazonS3     LimitName = "Concurrent in progress jobs to export assets to Amazon S3"
+	LimitNameConcurrentInProgressJobsToExportAssetsToASignedUrl   LimitName = "Concurrent in progress jobs to export assets to a signed URL"
 )
 
 // Values returns all known values for LimitName. Note that this can be expanded in
@@ -142,7 +142,7 @@ type ResourceType string
 
 // Enum values for ResourceType
 const (
-	ResourceTypeData_set ResourceType = "DATA_SET"
+	ResourceTypeDataSet  ResourceType = "DATA_SET"
 	ResourceTypeRevision ResourceType = "REVISION"
 	ResourceTypeAsset    ResourceType = "ASSET"
 	ResourceTypeJob      ResourceType = "JOB"
@@ -164,8 +164,8 @@ type ServerSideEncryptionTypes string
 
 // Enum values for ServerSideEncryptionTypes
 const (
-	ServerSideEncryptionTypesAws_kms ServerSideEncryptionTypes = "aws:kms"
-	ServerSideEncryptionTypesAes256  ServerSideEncryptionTypes = "AES256"
+	ServerSideEncryptionTypesAwsKms ServerSideEncryptionTypes = "aws:kms"
+	ServerSideEncryptionTypesAes256 ServerSideEncryptionTypes = "AES256"
 )
 
 // Values returns all known values for ServerSideEncryptionTypes. Note that this
@@ -182,12 +182,12 @@ type State string
 
 // Enum values for State
 const (
-	StateWaiting     State = "WAITING"
-	StateIn_progress State = "IN_PROGRESS"
-	StateError       State = "ERROR"
-	StateCompleted   State = "COMPLETED"
-	StateCancelled   State = "CANCELLED"
-	StateTimed_out   State = "TIMED_OUT"
+	StateWaiting    State = "WAITING"
+	StateInProgress State = "IN_PROGRESS"
+	StateError      State = "ERROR"
+	StateCompleted  State = "COMPLETED"
+	StateCancelled  State = "CANCELLED"
+	StateTimedOut   State = "TIMED_OUT"
 )
 
 // Values returns all known values for State. Note that this can be expanded in the
@@ -208,10 +208,10 @@ type Type string
 
 // Enum values for Type
 const (
-	TypeImport_assets_from_s3        Type = "IMPORT_ASSETS_FROM_S3"
-	TypeImport_asset_from_signed_url Type = "IMPORT_ASSET_FROM_SIGNED_URL"
-	TypeExport_assets_to_s3          Type = "EXPORT_ASSETS_TO_S3"
-	TypeExport_asset_to_signed_url   Type = "EXPORT_ASSET_TO_SIGNED_URL"
+	TypeImportAssetsFromS3       Type = "IMPORT_ASSETS_FROM_S3"
+	TypeImportAssetFromSignedUrl Type = "IMPORT_ASSET_FROM_SIGNED_URL"
+	TypeExportAssetsToS3         Type = "EXPORT_ASSETS_TO_S3"
+	TypeExportAssetToSignedUrl   Type = "EXPORT_ASSET_TO_SIGNED_URL"
 )
 
 // Values returns all known values for Type. Note that this can be expanded in the

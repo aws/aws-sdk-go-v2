@@ -24,11 +24,11 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html). The
 // following operations are related to DeleteBucketWebsite:
 //
-//     * GetBucketWebsite
+// * GetBucketWebsite
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketWebsite.html)
 //
-//
-// * PutBucketWebsite
+// *
+// PutBucketWebsite
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketWebsite.html)
 func (c *Client) DeleteBucketWebsite(ctx context.Context, params *DeleteBucketWebsiteInput, optFns ...func(*Options)) (*DeleteBucketWebsiteOutput, error) {
 	if params == nil {

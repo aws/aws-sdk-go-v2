@@ -39,19 +39,19 @@ type ListDatasetImportJobsInput struct {
 	// respectively. The match statement consists of a key and a value. Filter
 	// properties
 	//
-	//     * Condition - The condition to apply. Valid values are IS and
+	// * Condition - The condition to apply. Valid values are IS and
 	// IS_NOT. To include the datasets that match the statement, specify IS. To exclude
 	// matching datasets, specify IS_NOT.
 	//
-	//     * Key - The name of the parameter to
-	// filter on. Valid values are DatasetArn and Status.
+	// * Key - The name of the parameter to filter
+	// on. Valid values are DatasetArn and Status.
 	//
-	//     * Value - The value to
-	// match.
+	// * Value - The value to match.
 	//
-	// For example, to list all dataset import jobs whose status is ACTIVE, you
-	// specify the following filter: "Filters": [ { "Condition": "IS", "Key": "Status",
-	// "Value": "ACTIVE" } ]
+	// For
+	// example, to list all dataset import jobs whose status is ACTIVE, you specify the
+	// following filter: "Filters": [ { "Condition": "IS", "Key": "Status", "Value":
+	// "ACTIVE" } ]
 	Filters []*types.Filter
 
 	// The number of items to return in the response.

@@ -46,12 +46,12 @@ type ListReportsInput struct {
 
 	// Specifies the sort order for the list of returned reports. Valid values are:
 	//
-	//
-	// * ASCENDING: return reports in chronological order based on their creation
+	// *
+	// ASCENDING: return reports in chronological order based on their creation
 	// date.
 	//
-	//     * DESCENDING: return reports in the reverse chronological order based
-	// on their creation date.
+	// * DESCENDING: return reports in the reverse chronological order based on
+	// their creation date.
 	SortOrder types.SortOrderType
 }
 

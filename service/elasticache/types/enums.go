@@ -6,8 +6,8 @@ type AuthenticationType string
 
 // Enum values for AuthenticationType
 const (
-	AuthenticationTypePassword    AuthenticationType = "password"
-	AuthenticationTypeNo_password AuthenticationType = "no-password"
+	AuthenticationTypePassword   AuthenticationType = "password"
+	AuthenticationTypeNoPassword AuthenticationType = "no-password"
 )
 
 // Values returns all known values for AuthenticationType. Note that this can be
@@ -84,8 +84,8 @@ type AZMode string
 
 // Enum values for AZMode
 const (
-	AZModeSingle_az AZMode = "single-az"
-	AZModeCross_az  AZMode = "cross-az"
+	AZModeSingleAz AZMode = "single-az"
+	AZModeCrossAz  AZMode = "cross-az"
 )
 
 // Values returns all known values for AZMode. Note that this can be expanded in
@@ -156,12 +156,12 @@ type NodeUpdateStatus string
 
 // Enum values for NodeUpdateStatus
 const (
-	NodeUpdateStatusNot_applied      NodeUpdateStatus = "not-applied"
-	NodeUpdateStatusWaiting_to_start NodeUpdateStatus = "waiting-to-start"
-	NodeUpdateStatusIn_progress      NodeUpdateStatus = "in-progress"
-	NodeUpdateStatusStopping         NodeUpdateStatus = "stopping"
-	NodeUpdateStatusStopped          NodeUpdateStatus = "stopped"
-	NodeUpdateStatusComplete         NodeUpdateStatus = "complete"
+	NodeUpdateStatusNotApplied     NodeUpdateStatus = "not-applied"
+	NodeUpdateStatusWaitingToStart NodeUpdateStatus = "waiting-to-start"
+	NodeUpdateStatusInProgress     NodeUpdateStatus = "in-progress"
+	NodeUpdateStatusStopping       NodeUpdateStatus = "stopping"
+	NodeUpdateStatusStopped        NodeUpdateStatus = "stopped"
+	NodeUpdateStatusComplete       NodeUpdateStatus = "complete"
 )
 
 // Values returns all known values for NodeUpdateStatus. Note that this can be
@@ -182,8 +182,8 @@ type OutpostMode string
 
 // Enum values for OutpostMode
 const (
-	OutpostModeSingle_outpost OutpostMode = "single-outpost"
-	OutpostModeCross_outpost  OutpostMode = "cross-outpost"
+	OutpostModeSingleOutpost OutpostMode = "single-outpost"
+	OutpostModeCrossOutpost  OutpostMode = "cross-outpost"
 )
 
 // Values returns all known values for OutpostMode. Note that this can be expanded
@@ -261,7 +261,7 @@ type ServiceUpdateType string
 
 // Enum values for ServiceUpdateType
 const (
-	ServiceUpdateTypeSecurity_update ServiceUpdateType = "security-update"
+	ServiceUpdateTypeSecurityUpdate ServiceUpdateType = "security-update"
 )
 
 // Values returns all known values for ServiceUpdateType. Note that this can be
@@ -325,15 +325,15 @@ type UpdateActionStatus string
 
 // Enum values for UpdateActionStatus
 const (
-	UpdateActionStatusNot_applied      UpdateActionStatus = "not-applied"
-	UpdateActionStatusWaiting_to_start UpdateActionStatus = "waiting-to-start"
-	UpdateActionStatusIn_progress      UpdateActionStatus = "in-progress"
-	UpdateActionStatusStopping         UpdateActionStatus = "stopping"
-	UpdateActionStatusStopped          UpdateActionStatus = "stopped"
-	UpdateActionStatusComplete         UpdateActionStatus = "complete"
-	UpdateActionStatusScheduling       UpdateActionStatus = "scheduling"
-	UpdateActionStatusScheduled        UpdateActionStatus = "scheduled"
-	UpdateActionStatusNot_applicable   UpdateActionStatus = "not-applicable"
+	UpdateActionStatusNotApplied     UpdateActionStatus = "not-applied"
+	UpdateActionStatusWaitingToStart UpdateActionStatus = "waiting-to-start"
+	UpdateActionStatusInProgress     UpdateActionStatus = "in-progress"
+	UpdateActionStatusStopping       UpdateActionStatus = "stopping"
+	UpdateActionStatusStopped        UpdateActionStatus = "stopped"
+	UpdateActionStatusComplete       UpdateActionStatus = "complete"
+	UpdateActionStatusScheduling     UpdateActionStatus = "scheduling"
+	UpdateActionStatusScheduled      UpdateActionStatus = "scheduled"
+	UpdateActionStatusNotApplicable  UpdateActionStatus = "not-applicable"
 )
 
 // Values returns all known values for UpdateActionStatus. Note that this can be

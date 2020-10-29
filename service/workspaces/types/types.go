@@ -483,13 +483,13 @@ type WorkspaceCreationProperties struct {
 	// number of domain components (DCs) is two or more. For example,
 	// OU=WorkSpaces_machines,DC=machines,DC=example,DC=com.
 	//
-	//     * To avoid errors,
+	// * To avoid errors,
 	// certain characters in the distinguished name must be escaped. For more
 	// information, see  Distinguished Names
 	// (https://docs.microsoft.com/previous-versions/windows/desktop/ldap/distinguished-names)
 	// in the Microsoft documentation.
 	//
-	//     * The API doesn't validate whether the OU
+	// * The API doesn't validate whether the OU
 	// exists.
 	DefaultOu *string
 

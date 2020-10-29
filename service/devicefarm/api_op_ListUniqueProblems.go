@@ -54,21 +54,20 @@ type ListUniqueProblemsOutput struct {
 
 	// Information about the unique problems. Allowed values include:
 	//
-	//     * PENDING
+	// * PENDING
 	//
+	// *
+	// PASSED
 	//
-	// * PASSED
+	// * WARNED
 	//
-	//     * WARNED
+	// * FAILED
 	//
-	//     * FAILED
+	// * SKIPPED
 	//
-	//     * SKIPPED
+	// * ERRORED
 	//
-	//     * ERRORED
-	//
-	//     *
-	// STOPPED
+	// * STOPPED
 	UniqueProblems map[string][]*types.UniqueProblem
 
 	// Metadata pertaining to the operation's result.

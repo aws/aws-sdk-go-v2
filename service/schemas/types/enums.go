@@ -6,9 +6,9 @@ type CodeGenerationStatus string
 
 // Enum values for CodeGenerationStatus
 const (
-	CodeGenerationStatusCreate_in_progress CodeGenerationStatus = "CREATE_IN_PROGRESS"
-	CodeGenerationStatusCreate_complete    CodeGenerationStatus = "CREATE_COMPLETE"
-	CodeGenerationStatusCreate_failed      CodeGenerationStatus = "CREATE_FAILED"
+	CodeGenerationStatusCreateInProgress CodeGenerationStatus = "CREATE_IN_PROGRESS"
+	CodeGenerationStatusCreateComplete   CodeGenerationStatus = "CREATE_COMPLETE"
+	CodeGenerationStatusCreateFailed     CodeGenerationStatus = "CREATE_FAILED"
 )
 
 // Values returns all known values for CodeGenerationStatus. Note that this can be

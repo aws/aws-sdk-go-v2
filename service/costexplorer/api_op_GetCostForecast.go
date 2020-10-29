@@ -43,17 +43,16 @@ type GetCostForecastInput struct {
 	// (http://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/).
 	// Valid values for a GetCostForecast call are the following:
 	//
-	//     *
-	// AMORTIZED_COST
+	// * AMORTIZED_COST
 	//
-	//     * BLENDED_COST
+	// *
+	// BLENDED_COST
 	//
-	//     * NET_AMORTIZED_COST
+	// * NET_AMORTIZED_COST
 	//
-	//     *
-	// NET_UNBLENDED_COST
+	// * NET_UNBLENDED_COST
 	//
-	//     * UNBLENDED_COST
+	// * UNBLENDED_COST
 	//
 	// This member is required.
 	Metric types.Metric

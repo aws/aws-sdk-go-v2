@@ -42,11 +42,11 @@ type GetPackageVersionReadmeInput struct {
 	// A format that specifies the type of the package version with the requested
 	// readme file. The valid values are:
 	//
-	//     * npm
+	// * npm
 	//
-	//     * pypi
+	// * pypi
 	//
-	//     * maven
+	// * maven
 	//
 	// This member is required.
 	Format types.PackageFormat
@@ -73,14 +73,14 @@ type GetPackageVersionReadmeInput struct {
 	// The namespace of the package. The package component that specifies its namespace
 	// depends on its type. For example:
 	//
-	//     * The namespace of a Maven package is its
+	// * The namespace of a Maven package is its
 	// groupId.
 	//
-	//     * The namespace of an npm package is its scope.
+	// * The namespace of an npm package is its scope.
 	//
-	//     * A Python
-	// package does not contain a corresponding component, so Python packages do not
-	// have a namespace.
+	// * A Python package
+	// does not contain a corresponding component, so Python packages do not have a
+	// namespace.
 	Namespace *string
 }
 
@@ -89,24 +89,24 @@ type GetPackageVersionReadmeOutput struct {
 	// The format of the package with the requested readme file. Valid format types
 	// are:
 	//
-	//     * npm
+	// * npm
 	//
-	//     * pypi
+	// * pypi
 	//
-	//     * maven
+	// * maven
 	Format types.PackageFormat
 
 	// The namespace of the package. The package component that specifies its namespace
 	// depends on its type. For example:
 	//
-	//     * The namespace of a Maven package is its
+	// * The namespace of a Maven package is its
 	// groupId.
 	//
-	//     * The namespace of an npm package is its scope.
+	// * The namespace of an npm package is its scope.
 	//
-	//     * A Python
-	// package does not contain a corresponding component, so Python packages do not
-	// have a namespace.
+	// * A Python package
+	// does not contain a corresponding component, so Python packages do not have a
+	// namespace.
 	Namespace *string
 
 	// The name of the package that contains the returned readme file.

@@ -57,17 +57,17 @@ type GetUserAttributeVerificationCodeInput struct {
 	// in the Amazon Cognito Developer Guide. Take the following limitations into
 	// consideration when you use the ClientMetadata parameter:
 	//
-	//     * Amazon Cognito
-	// does not store the ClientMetadata value. This data is available only to AWS
-	// Lambda triggers that are assigned to a user pool to support custom workflows. If
-	// your user pool configuration does not include triggers, the ClientMetadata
-	// parameter serves no purpose.
+	// * Amazon Cognito does
+	// not store the ClientMetadata value. This data is available only to AWS Lambda
+	// triggers that are assigned to a user pool to support custom workflows. If your
+	// user pool configuration does not include triggers, the ClientMetadata parameter
+	// serves no purpose.
 	//
-	//     * Amazon Cognito does not validate the
-	// ClientMetadata value.
+	// * Amazon Cognito does not validate the ClientMetadata
+	// value.
 	//
-	//     * Amazon Cognito does not encrypt the the
-	// ClientMetadata value, so don't use it to provide sensitive information.
+	// * Amazon Cognito does not encrypt the the ClientMetadata value, so don't
+	// use it to provide sensitive information.
 	ClientMetadata map[string]*string
 }
 

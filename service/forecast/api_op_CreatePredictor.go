@@ -34,19 +34,19 @@ import (
 // see EvaluationResult. When AutoML is enabled, the following properties are
 // disallowed:
 //
-//     * AlgorithmArn
+// * AlgorithmArn
 //
-//     * HPOConfig
+// * HPOConfig
 //
-//     * PerformHPO
+// * PerformHPO
 //
-//     *
-// TrainingParameters
+// * TrainingParameters
 //
-// To get a list of all of your predictors, use the
-// ListPredictors operation. Before you can use the predictor to create a forecast,
-// the Status of the predictor must be ACTIVE, signifying that training has
-// completed. To get the status, use the DescribePredictor operation.
+// To
+// get a list of all of your predictors, use the ListPredictors operation. Before
+// you can use the predictor to create a forecast, the Status of the predictor must
+// be ACTIVE, signifying that training has completed. To get the status, use the
+// DescribePredictor operation.
 func (c *Client) CreatePredictor(ctx context.Context, params *CreatePredictorInput, optFns ...func(*Options)) (*CreatePredictorOutput, error) {
 	if params == nil {
 		params = &CreatePredictorInput{}
@@ -93,19 +93,19 @@ type CreatePredictorInput struct {
 	// The Amazon Resource Name (ARN) of the algorithm to use for model training.
 	// Required if PerformAutoML is not set to true. Supported algorithms:
 	//
-	//     *
+	// *
 	// arn:aws:forecast:::algorithm/ARIMA
 	//
-	//     *
-	// arn:aws:forecast:::algorithm/Deep_AR_Plus Supports hyperparameter optimization
-	// (HPO)
+	// * arn:aws:forecast:::algorithm/Deep_AR_Plus
+	// Supports hyperparameter optimization (HPO)
 	//
-	//     * arn:aws:forecast:::algorithm/ETS
+	// *
+	// arn:aws:forecast:::algorithm/ETS
 	//
-	//     *
-	// arn:aws:forecast:::algorithm/NPTS
+	// * arn:aws:forecast:::algorithm/NPTS
 	//
-	//     * arn:aws:forecast:::algorithm/Prophet
+	// *
+	// arn:aws:forecast:::algorithm/Prophet
 	AlgorithmArn *string
 
 	// An AWS Key Management Service (KMS) key and the AWS Identity and Access
@@ -145,40 +145,39 @@ type CreatePredictorInput struct {
 	// to specify an algorithm and PerformAutoML must be false. The following algorithm
 	// supports HPO:
 	//
-	//     * DeepAR+
+	// * DeepAR+
 	PerformHPO *bool
 
 	// The optional metadata that you apply to the predictor to help you categorize and
 	// organize them. Each tag consists of a key and an optional value, both of which
 	// you define. The following basic restrictions apply to tags:
 	//
-	//     * Maximum
-	// number of tags per resource - 50.
+	// * Maximum number of
+	// tags per resource - 50.
 	//
-	//     * For each resource, each tag key must be
-	// unique, and each tag key can have only one value.
+	// * For each resource, each tag key must be unique, and
+	// each tag key can have only one value.
 	//
-	//     * Maximum key length -
-	// 128 Unicode characters in UTF-8.
-	//
-	//     * Maximum value length - 256 Unicode
+	// * Maximum key length - 128 Unicode
 	// characters in UTF-8.
 	//
-	//     * If your tagging schema is used across multiple
-	// services and resources, remember that other services may have restrictions on
-	// allowed characters. Generally allowed characters are: letters, numbers, and
-	// spaces representable in UTF-8, and the following characters: + - = . _ : / @.
+	// * Maximum value length - 256 Unicode characters in
+	// UTF-8.
 	//
+	// * If your tagging schema is used across multiple services and resources,
+	// remember that other services may have restrictions on allowed characters.
+	// Generally allowed characters are: letters, numbers, and spaces representable in
+	// UTF-8, and the following characters: + - = . _ : / @.
 	//
-	// * Tag keys and values are case sensitive.
+	// * Tag keys and values are
+	// case sensitive.
 	//
-	//     * Do not use aws:, AWS:, or any
-	// upper or lowercase combination of such as a prefix for keys as it is reserved
-	// for AWS use. You cannot edit or delete tag keys with this prefix. Values can
-	// have this prefix. If a tag value has aws as its prefix but the key does not,
-	// then Forecast considers it to be a user tag and will count against the limit of
-	// 50 tags. Tags with only the key prefix of aws do not count against your tags per
-	// resource limit.
+	// * Do not use aws:, AWS:, or any upper or lowercase combination
+	// of such as a prefix for keys as it is reserved for AWS use. You cannot edit or
+	// delete tag keys with this prefix. Values can have this prefix. If a tag value
+	// has aws as its prefix but the key does not, then Forecast considers it to be a
+	// user tag and will count against the limit of 50 tags. Tags with only the key
+	// prefix of aws do not count against your tags per resource limit.
 	Tags []*types.Tag
 
 	// The hyperparameters to override for model training. The hyperparameters that you

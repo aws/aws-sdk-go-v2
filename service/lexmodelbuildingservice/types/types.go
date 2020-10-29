@@ -66,14 +66,14 @@ type BotChannelAssociation struct {
 
 	// The status of the bot channel.
 	//
-	//     * CREATED - The channel has been created and
-	// is ready for use.
+	// * CREATED - The channel has been created and is
+	// ready for use.
 	//
-	//     * IN_PROGRESS - Channel creation is in progress.
+	// * IN_PROGRESS - Channel creation is in progress.
 	//
-	//     *
-	// FAILED - There was an error creating the channel. For information about the
-	// reason for the failure, see the failureReason field.
+	// * FAILED -
+	// There was an error creating the channel. For information about the reason for
+	// the failure, see the failureReason field.
 	Status ChannelStatus
 
 	// Specifies the type of association by indicating the type of channel being
@@ -189,11 +189,11 @@ type ConversationLogsResponse struct {
 // slot type that specifies the type of crust that the pizza should have. The slot
 // type could include the values
 //
-//     * thick
+// * thick
 //
-//     * thin
+// * thin
 //
-//     * stuffed
+// * stuffed
 type EnumerationValue struct {
 
 	// The value of the slot type.
@@ -231,14 +231,14 @@ type FollowUpPrompt struct {
 // function; you don't need to upgrade your client application. Consider the
 // following examples:
 //
-//     * In a pizza ordering application, after the user
-// provides all of the information for placing an order, you use a Lambda function
-// to place an order with a pizzeria.
+// * In a pizza ordering application, after the user provides
+// all of the information for placing an order, you use a Lambda function to place
+// an order with a pizzeria.
 //
-//     * In a gaming application, when a user
-// says "pick up a rock," this information must go back to the client application
-// so that it can perform the operation and update the graphics. In this case, you
-// want Amazon Lex to return the intent data to the client.
+// * In a gaming application, when a user says "pick up
+// a rock," this information must go back to the client application so that it can
+// perform the operation and update the graphics. In this case, you want Amazon Lex
+// to return the intent data to the client.
 type FulfillmentActivity struct {
 
 	// How the intent should be fulfilled, either by running a Lambda function or by
@@ -506,20 +506,20 @@ type SlotTypeRegexConfiguration struct {
 	// regular expression. Amazon Lex supports the following characters in the regular
 	// expression:
 	//
-	//     * A-Z, a-z
+	// * A-Z, a-z
 	//
-	//     * 0-9
+	// * 0-9
 	//
-	//     * Unicode characters ("\
-	// u")
+	// * Unicode characters ("\ u")
 	//
-	// Represent Unicode characters with four digits, for example "\u0041" or
-	// "\u005A". The following regular expression operators are not supported:
+	// Represent Unicode
+	// characters with four digits, for example "\u0041" or "\u005A". The following
+	// regular expression operators are not supported:
 	//
-	//     *
-	// Infinite repeaters: *, +, or {x,} with no upper bound.
+	// * Infinite repeaters: *, +, or
+	// {x,} with no upper bound.
 	//
-	//     * Wild card (.)
+	// * Wild card (.)
 	//
 	// This member is required.
 	Pattern *string

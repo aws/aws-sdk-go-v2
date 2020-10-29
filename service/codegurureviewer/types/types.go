@@ -62,16 +62,15 @@ type CodeReview struct {
 
 	// The valid code review states are:
 	//
-	//     * Completed: The code review is
-	// complete.
+	// * Completed: The code review is complete.
 	//
-	//     * Pending: The code review started and has not completed or
-	// failed.
+	// *
+	// Pending: The code review started and has not completed or failed.
 	//
-	//     * Failed: The code review failed.
+	// * Failed: The
+	// code review failed.
 	//
-	//     * Deleting: The code review
-	// is being deleted.
+	// * Deleting: The code review is being deleted.
 	State JobState
 
 	// The reason for the state of the code review.
@@ -119,16 +118,16 @@ type CodeReviewSummary struct {
 
 	// The state of the code review. The valid code review states are:
 	//
-	//     *
-	// Completed: The code review is complete.
+	// * Completed:
+	// The code review is complete.
 	//
-	//     * Pending: The code review started
-	// and has not completed or failed.
+	// * Pending: The code review started and has not
+	// completed or failed.
 	//
-	//     * Failed: The code review failed.
+	// * Failed: The code review failed.
 	//
-	//     *
-	// Deleting: The code review is being deleted.
+	// * Deleting: The code
+	// review is being deleted.
 	State JobState
 
 	// The type of the code review.
@@ -137,14 +136,14 @@ type CodeReviewSummary struct {
 
 // The type of a code review. There are two code review types:
 //
-//     * PullRequest -
-// A code review that is automatically triggered by a pull request on an assocaited
+// * PullRequest - A
+// code review that is automatically triggered by a pull request on an assocaited
 // repository. Because this type of code review is automatically generated, you
 // cannot specify this code review type using CreateCodeReview
 // (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview).
 //
-//
-// * RepositoryAnalysis - A code review that analyzes all code under a specified
+// *
+// RepositoryAnalysis - A code review that analyzes all code under a specified
 // branch in an associated respository. The assocated repository is specified using
 // its ARN in CreateCodeReview
 // (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview).
@@ -355,27 +354,26 @@ type RepositoryAssociation struct {
 	// The state of the repository association. The valid repository association states
 	// are:
 	//
-	//     * Associated: The repository association is complete.
+	// * Associated: The repository association is complete.
 	//
-	//     *
-	// Associating: CodeGuru Reviewer is:
+	// * Associating:
+	// CodeGuru Reviewer is:
 	//
-	//         * Setting up pull request
-	// notifications. This is required for pull requests to trigger a CodeGuru Reviewer
-	// review. If your repository ProviderType is GitHub, GitHub Enterprise Server, or
-	// Bitbucket, CodeGuru Reviewer creates webhooks in your repository to trigger
-	// CodeGuru Reviewer reviews. If you delete these webhooks, reviews of code in your
-	// repository cannot be triggered.
+	// * Setting up pull request notifications. This is required
+	// for pull requests to trigger a CodeGuru Reviewer review. If your repository
+	// ProviderType is GitHub, GitHub Enterprise Server, or Bitbucket, CodeGuru
+	// Reviewer creates webhooks in your repository to trigger CodeGuru Reviewer
+	// reviews. If you delete these webhooks, reviews of code in your repository cannot
+	// be triggered.
 	//
-	//         * Setting up source code access. This
-	// is required for CodeGuru Reviewer to securely clone code in your repository.
+	// * Setting up source code access. This is required for CodeGuru
+	// Reviewer to securely clone code in your repository.
 	//
+	// * Failed: The repository
+	// failed to associate or disassociate.
 	//
-	// * Failed: The repository failed to associate or disassociate.
-	//
-	//     *
-	// Disassociating: CodeGuru Reviewer is removing the repository's pull request
-	// notifications and source code access.
+	// * Disassociating: CodeGuru Reviewer is
+	// removing the repository's pull request notifications and source code access.
 	State RepositoryAssociationState
 
 	// A description of why the repository association is in the current state.
@@ -423,27 +421,26 @@ type RepositoryAssociationSummary struct {
 	// The state of the repository association. The valid repository association states
 	// are:
 	//
-	//     * Associated: The repository association is complete.
+	// * Associated: The repository association is complete.
 	//
-	//     *
-	// Associating: CodeGuru Reviewer is:
+	// * Associating:
+	// CodeGuru Reviewer is:
 	//
-	//         * Setting up pull request
-	// notifications. This is required for pull requests to trigger a CodeGuru Reviewer
-	// review. If your repository ProviderType is GitHub, GitHub Enterprise Server, or
-	// Bitbucket, CodeGuru Reviewer creates webhooks in your repository to trigger
-	// CodeGuru Reviewer reviews. If you delete these webhooks, reviews of code in your
-	// repository cannot be triggered.
+	// * Setting up pull request notifications. This is required
+	// for pull requests to trigger a CodeGuru Reviewer review. If your repository
+	// ProviderType is GitHub, GitHub Enterprise Server, or Bitbucket, CodeGuru
+	// Reviewer creates webhooks in your repository to trigger CodeGuru Reviewer
+	// reviews. If you delete these webhooks, reviews of code in your repository cannot
+	// be triggered.
 	//
-	//         * Setting up source code access. This
-	// is required for CodeGuru Reviewer to securely clone code in your repository.
+	// * Setting up source code access. This is required for CodeGuru
+	// Reviewer to securely clone code in your repository.
 	//
+	// * Failed: The repository
+	// failed to associate or disassociate.
 	//
-	// * Failed: The repository failed to associate or disassociate.
-	//
-	//     *
-	// Disassociating: CodeGuru Reviewer is removing the repository's pull request
-	// notifications and source code access.
+	// * Disassociating: CodeGuru Reviewer is
+	// removing the repository's pull request notifications and source code access.
 	State RepositoryAssociationState
 }
 

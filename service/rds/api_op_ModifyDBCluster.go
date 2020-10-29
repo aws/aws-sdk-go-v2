@@ -65,14 +65,14 @@ type ModifyDBClusterInput struct {
 	// to 0. Currently, Backtrack is only supported for Aurora MySQL DB clusters.
 	// Default: 0 Constraints:
 	//
-	//     * If specified, this value must be set to a number
-	// from 0 to 259,200 (72 hours).
+	// * If specified, this value must be set to a number from
+	// 0 to 259,200 (72 hours).
 	BacktrackWindow *int64
 
 	// The number of days for which automated backups are retained. You must specify a
 	// minimum value of 1. Default: 1 Constraints:
 	//
-	//     * Must be a value from 1 to 35
+	// * Must be a value from 1 to 35
 	BackupRetentionPeriod *int32
 
 	// The configuration setting for the log types to be enabled for export to
@@ -92,12 +92,12 @@ type ModifyDBClusterInput struct {
 	// aren't applied during the next maintenance window but instead are applied
 	// immediately. Default: The existing name setting Constraints:
 	//
-	//     * The DB
-	// parameter group must be in the same DB parameter group family as this DB
-	// cluster.
+	// * The DB parameter
+	// group must be in the same DB parameter group family as this DB cluster.
 	//
-	//     * The DBInstanceParameterGroupName parameter is only valid in
-	// combination with the AllowMajorVersionUpgrade parameter.
+	// * The
+	// DBInstanceParameterGroupName parameter is only valid in combination with the
+	// AllowMajorVersionUpgrade parameter.
 	DBInstanceParameterGroupName *string
 
 	// A value that indicates whether the DB cluster has deletion protection enabled.
@@ -162,14 +162,13 @@ type ModifyDBClusterInput struct {
 	// The new DB cluster identifier for the DB cluster when renaming a DB cluster.
 	// This value is stored as a lowercase string. Constraints:
 	//
-	//     * Must contain
-	// from 1 to 63 letters, numbers, or hyphens
+	// * Must contain from 1
+	// to 63 letters, numbers, or hyphens
 	//
-	//     * The first character must be a
-	// letter
+	// * The first character must be a letter
 	//
-	//     * Can't end with a hyphen or contain two consecutive
-	// hyphens
+	// *
+	// Can't end with a hyphen or contain two consecutive hyphens
 	//
 	// Example: my-cluster2
 	NewDBClusterIdentifier *string
@@ -197,16 +196,15 @@ type ModifyDBClusterInput struct {
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora)
 	// in the Amazon Aurora User Guide. Constraints:
 	//
-	//     * Must be in the format
+	// * Must be in the format
 	// hh24:mi-hh24:mi.
 	//
-	//     * Must be in Universal Coordinated Time (UTC).
+	// * Must be in Universal Coordinated Time (UTC).
 	//
-	//     * Must
-	// not conflict with the preferred maintenance window.
+	// * Must not
+	// conflict with the preferred maintenance window.
 	//
-	//     * Must be at least 30
-	// minutes.
+	// * Must be at least 30 minutes.
 	PreferredBackupWindow *string
 
 	// The weekly time range during which system maintenance can occur, in Universal

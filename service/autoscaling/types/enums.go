@@ -70,19 +70,19 @@ type LifecycleState string
 
 // Enum values for LifecycleState
 const (
-	LifecycleStatePending             LifecycleState = "Pending"
-	LifecycleStatePending_wait        LifecycleState = "Pending:Wait"
-	LifecycleStatePending_proceed     LifecycleState = "Pending:Proceed"
-	LifecycleStateQuarantined         LifecycleState = "Quarantined"
-	LifecycleStateIn_service          LifecycleState = "InService"
-	LifecycleStateTerminating         LifecycleState = "Terminating"
-	LifecycleStateTerminating_wait    LifecycleState = "Terminating:Wait"
-	LifecycleStateTerminating_proceed LifecycleState = "Terminating:Proceed"
-	LifecycleStateTerminated          LifecycleState = "Terminated"
-	LifecycleStateDetaching           LifecycleState = "Detaching"
-	LifecycleStateDetached            LifecycleState = "Detached"
-	LifecycleStateEntering_standby    LifecycleState = "EnteringStandby"
-	LifecycleStateStandby             LifecycleState = "Standby"
+	LifecycleStatePending            LifecycleState = "Pending"
+	LifecycleStatePendingWait        LifecycleState = "Pending:Wait"
+	LifecycleStatePendingProceed     LifecycleState = "Pending:Proceed"
+	LifecycleStateQuarantined        LifecycleState = "Quarantined"
+	LifecycleStateInService          LifecycleState = "InService"
+	LifecycleStateTerminating        LifecycleState = "Terminating"
+	LifecycleStateTerminatingWait    LifecycleState = "Terminating:Wait"
+	LifecycleStateTerminatingProceed LifecycleState = "Terminating:Proceed"
+	LifecycleStateTerminated         LifecycleState = "Terminated"
+	LifecycleStateDetaching          LifecycleState = "Detaching"
+	LifecycleStateDetached           LifecycleState = "Detached"
+	LifecycleStateEnteringStandby    LifecycleState = "EnteringStandby"
+	LifecycleStateStandby            LifecycleState = "Standby"
 )
 
 // Values returns all known values for LifecycleState. Note that this can be

@@ -15,10 +15,10 @@ import (
 // URL from CreateTestGridUrlResult$url. You can use the following to look up
 // sessions:
 //
-//     * The session ARN (GetTestGridSessionRequest$sessionArn).
+// * The session ARN (GetTestGridSessionRequest$sessionArn).
 //
-//     *
-// The project ARN and a session ID (GetTestGridSessionRequest$projectArn and
+// * The
+// project ARN and a session ID (GetTestGridSessionRequest$projectArn and
 // GetTestGridSessionRequest$sessionId).
 func (c *Client) GetTestGridSession(ctx context.Context, params *GetTestGridSessionInput, optFns ...func(*Options)) (*GetTestGridSessionOutput, error) {
 	if params == nil {

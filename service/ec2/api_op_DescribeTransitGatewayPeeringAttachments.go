@@ -37,22 +37,21 @@ type DescribeTransitGatewayPeeringAttachmentsInput struct {
 
 	// One or more filters. The possible values are:
 	//
-	//     *
-	// transit-gateway-attachment-id - The ID of the transit gateway attachment.
+	// * transit-gateway-attachment-id -
+	// The ID of the transit gateway attachment.
 	//
-	//     *
-	// local-owner-id - The ID of your AWS account.
+	// * local-owner-id - The ID of your AWS
+	// account.
 	//
-	//     * remote-owner-id - The ID of
-	// the AWS account in the remote Region that owns the transit gateway.
+	// * remote-owner-id - The ID of the AWS account in the remote Region
+	// that owns the transit gateway.
 	//
-	//     * state
-	// - The state of the peering attachment. Valid values are available | deleted |
-	// deleting | failed | failing | initiatingRequest | modifying | pendingAcceptance
-	// | pending | rollingBack | rejected | rejecting).
+	// * state - The state of the peering attachment.
+	// Valid values are available | deleted | deleting | failed | failing |
+	// initiatingRequest | modifying | pendingAcceptance | pending | rollingBack |
+	// rejected | rejecting).
 	//
-	//     * transit-gateway-id - The
-	// ID of the transit gateway.
+	// * transit-gateway-id - The ID of the transit gateway.
 	Filters []*types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the

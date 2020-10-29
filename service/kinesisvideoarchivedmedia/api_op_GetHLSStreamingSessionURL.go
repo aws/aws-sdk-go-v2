@@ -18,24 +18,24 @@ import (
 // Amazon Kinesis video stream has the following requirements for providing data
 // through HLS:
 //
-//     * The media must contain h.264 or h.265 encoded video and,
+// * The media must contain h.264 or h.265 encoded video and,
 // optionally, AAC encoded audio. Specifically, the codec ID of track 1 should be
 // V_MPEG/ISO/AVC (for h.264) or V_MPEG/ISO/HEVC (for h.265). Optionally, the codec
 // ID of track 2 should be A_AAC.
 //
-//     * Data retention must be greater than 0.
+// * Data retention must be greater than 0.
 //
-//
-// * The video track of each fragment must contain codec private data in the
-// Advanced Video Coding (AVC) for H.264 format or HEVC for H.265 format (MPEG-4
+// * The
+// video track of each fragment must contain codec private data in the Advanced
+// Video Coding (AVC) for H.264 format or HEVC for H.265 format (MPEG-4
 // specification ISO/IEC 14496-15 (https://www.iso.org/standard/55980.html)). For
 // information about adapting stream data to a given format, see NAL Adaptation
 // Flags
 // (http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/producer-reference-nal.html).
 //
-//
-// * The audio track (if present) of each fragment must contain codec private data
-// in the AAC format (AAC specification ISO/IEC 13818-7
+// *
+// The audio track (if present) of each fragment must contain codec private data in
+// the AAC format (AAC specification ISO/IEC 13818-7
 // (https://www.iso.org/standard/43345.html)).
 //
 // Kinesis Video Streams HLS sessions
@@ -45,75 +45,74 @@ import (
 // specification (https://tools.ietf.org/html/draft-pantos-http-live-streaming-23).
 // The following procedure shows how to use HLS with Kinesis Video Streams:
 //
-//     *
-// Get an endpoint using GetDataEndpoint
+// * Get
+// an endpoint using GetDataEndpoint
 // (http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_GetDataEndpoint.html),
 // specifying GET_HLS_STREAMING_SESSION_URL for the APIName parameter.
 //
-//     *
-// Retrieve the HLS URL using GetHLSStreamingSessionURL. Kinesis Video Streams
-// creates an HLS streaming session to be used for accessing content in a stream
-// using the HLS protocol. GetHLSStreamingSessionURL returns an authenticated URL
-// (that includes an encrypted session token) for the session's HLS master playlist
-// (the root resource needed for streaming with HLS). Don't share or store this
-// token where an unauthorized entity could access it. The token provides access to
-// the content of the stream. Safeguard the token with the same measures that you
-// would use with your AWS credentials. The media that is made available through
-// the playlist consists only of the requested stream, time range, and format. No
-// other media data (such as frames outside the requested window or alternate
-// bitrates) is made available.
+// * Retrieve
+// the HLS URL using GetHLSStreamingSessionURL. Kinesis Video Streams creates an
+// HLS streaming session to be used for accessing content in a stream using the HLS
+// protocol. GetHLSStreamingSessionURL returns an authenticated URL (that includes
+// an encrypted session token) for the session's HLS master playlist (the root
+// resource needed for streaming with HLS). Don't share or store this token where
+// an unauthorized entity could access it. The token provides access to the content
+// of the stream. Safeguard the token with the same measures that you would use
+// with your AWS credentials. The media that is made available through the playlist
+// consists only of the requested stream, time range, and format. No other media
+// data (such as frames outside the requested window or alternate bitrates) is made
+// available.
 //
-//     * Provide the URL (containing the encrypted
-// session token) for the HLS master playlist to a media player that supports the
-// HLS protocol. Kinesis Video Streams makes the HLS media playlist, initialization
-// fragment, and media fragments available through the master playlist URL. The
-// initialization fragment contains the codec private data for the stream, and
-// other data needed to set up the video or audio decoder and renderer. The media
-// fragments contain H.264-encoded video frames or AAC-encoded audio samples.
+// * Provide the URL (containing the encrypted session token) for the
+// HLS master playlist to a media player that supports the HLS protocol. Kinesis
+// Video Streams makes the HLS media playlist, initialization fragment, and media
+// fragments available through the master playlist URL. The initialization fragment
+// contains the codec private data for the stream, and other data needed to set up
+// the video or audio decoder and renderer. The media fragments contain
+// H.264-encoded video frames or AAC-encoded audio samples.
 //
+// * The media player
+// receives the authenticated URL and requests stream metadata and media data
+// normally. When the media player requests data, it calls the following
+// actions:
 //
-// * The media player receives the authenticated URL and requests stream metadata
-// and media data normally. When the media player requests data, it calls the
-// following actions:
+// * GetHLSMasterPlaylist: Retrieves an HLS master playlist, which
+// contains a URL for the GetHLSMediaPlaylist action for each track, and additional
+// metadata for the media player, including estimated bitrate and resolution.
 //
-//         * GetHLSMasterPlaylist: Retrieves an HLS master
-// playlist, which contains a URL for the GetHLSMediaPlaylist action for each
-// track, and additional metadata for the media player, including estimated bitrate
-// and resolution.
+// *
+// GetHLSMediaPlaylist: Retrieves an HLS media playlist, which contains a URL to
+// access the MP4 initialization fragment with the GetMP4InitFragment action, and
+// URLs to access the MP4 media fragments with the GetMP4MediaFragment actions. The
+// HLS media playlist also contains metadata about the stream that the player needs
+// to play it, such as whether the PlaybackMode is LIVE or ON_DEMAND. The HLS media
+// playlist is typically static for sessions with a PlaybackType of ON_DEMAND. The
+// HLS media playlist is continually updated with new fragments for sessions with a
+// PlaybackType of LIVE. There is a distinct HLS media playlist for the video track
+// and the audio track (if applicable) that contains MP4 media URLs for the
+// specific track.
 //
-//         * GetHLSMediaPlaylist: Retrieves an HLS media playlist,
-// which contains a URL to access the MP4 initialization fragment with the
-// GetMP4InitFragment action, and URLs to access the MP4 media fragments with the
-// GetMP4MediaFragment actions. The HLS media playlist also contains metadata about
-// the stream that the player needs to play it, such as whether the PlaybackMode is
-// LIVE or ON_DEMAND. The HLS media playlist is typically static for sessions with
-// a PlaybackType of ON_DEMAND. The HLS media playlist is continually updated with
-// new fragments for sessions with a PlaybackType of LIVE. There is a distinct HLS
-// media playlist for the video track and the audio track (if applicable) that
-// contains MP4 media URLs for the specific track.
+// * GetMP4InitFragment: Retrieves the MP4 initialization
+// fragment. The media player typically loads the initialization fragment before
+// loading any media fragments. This fragment contains the "fytp" and "moov" MP4
+// atoms, and the child atoms that are needed to initialize the media player
+// decoder. The initialization fragment does not correspond to a fragment in a
+// Kinesis video stream. It contains only the codec private data for the stream and
+// respective track, which the media player needs to decode the media frames.
 //
-//         * GetMP4InitFragment:
-// Retrieves the MP4 initialization fragment. The media player typically loads the
-// initialization fragment before loading any media fragments. This fragment
-// contains the "fytp" and "moov" MP4 atoms, and the child atoms that are needed to
-// initialize the media player decoder. The initialization fragment does not
-// correspond to a fragment in a Kinesis video stream. It contains only the codec
-// private data for the stream and respective track, which the media player needs
-// to decode the media frames.
-//
-//         * GetMP4MediaFragment: Retrieves MP4 media
-// fragments. These fragments contain the "moof" and "mdat" MP4 atoms and their
-// child atoms, containing the encoded fragment's media frames and their
-// timestamps. After the first media fragment is made available in a streaming
-// session, any fragments that don't contain the same codec private data cause an
-// error to be returned when those different media fragments are loaded. Therefore,
-// the codec private data should not change between fragments in a session. This
-// also means that the session fails if the fragments in a stream change from
-// having only video to having both audio and video. Data retrieved with this
-// action is billable. See Pricing
+// *
+// GetMP4MediaFragment: Retrieves MP4 media fragments. These fragments contain the
+// "moof" and "mdat" MP4 atoms and their child atoms, containing the encoded
+// fragment's media frames and their timestamps. After the first media fragment is
+// made available in a streaming session, any fragments that don't contain the same
+// codec private data cause an error to be returned when those different media
+// fragments are loaded. Therefore, the codec private data should not change
+// between fragments in a session. This also means that the session fails if the
+// fragments in a stream change from having only video to having both audio and
+// video. Data retrieved with this action is billable. See Pricing
 // (https://aws.amazon.com/kinesis/video-streams/pricing/) for details.
 //
-//         *
+// *
 // GetTSFragment: Retrieves MPEG TS fragments containing both initialization and
 // media data for all tracks in the stream. If the ContainerFormat is MPEG_TS, this
 // API is used instead of GetMP4InitFragment and GetMP4MediaFragment to retrieve
@@ -124,12 +123,12 @@ import (
 // The following
 // restrictions apply to HLS sessions:
 //
-//     * A streaming session URL should not be
+// * A streaming session URL should not be
 // shared between players. The service might throttle a session if multiple media
 // players are sharing it. For connection limits, see Kinesis Video Streams Limits
 // (http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/limits.html).
 //
-//     * A
+// * A
 // Kinesis video stream can have a maximum of ten active HLS streaming sessions. If
 // a new session is created when the maximum number of sessions is already active,
 // the oldest (earliest created) session is closed. The number of active GetMedia
@@ -152,19 +151,19 @@ import (
 // Video Streams archived media API, in addition to the HTTP status code and the
 // response body, it includes the following pieces of information:
 //
-//     *
+// *
 // x-amz-ErrorType HTTP header – contains a more specific error type in addition to
 // what the HTTP status code provides.
 //
-//     * x-amz-RequestId HTTP header – if you
-// want to report an issue to AWS, the support team can better diagnose the problem
-// if given the Request Id.
+// * x-amz-RequestId HTTP header – if you want
+// to report an issue to AWS, the support team can better diagnose the problem if
+// given the Request Id.
 //
-// Both the HTTP status code and the ErrorType header can
-// be utilized to make programmatic decisions about whether errors are retry-able
-// and under what conditions, as well as provide information on what actions the
-// client programmer might need to take in order to successfully try again. For
-// more information, see the Errors section at the bottom of this topic, as well as
+// Both the HTTP status code and the ErrorType header can be
+// utilized to make programmatic decisions about whether errors are retry-able and
+// under what conditions, as well as provide information on what actions the client
+// programmer might need to take in order to successfully try again. For more
+// information, see the Errors section at the bottom of this topic, as well as
 // Common Errors
 // (https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/CommonErrors.html).
 func (c *Client) GetHLSStreamingSessionURL(ctx context.Context, params *GetHLSStreamingSessionURLInput, optFns ...func(*Options)) (*GetHLSStreamingSessionURLOutput, error) {
@@ -206,24 +205,23 @@ type GetHLSStreamingSessionURLInput struct {
 	// fragment being played immediately after the previous fragment. The following
 	// modes are supported:
 	//
-	//     * ALWAYS: a discontinuity marker is placed between
-	// every fragment in the HLS media playlist. It is recommended to use a value of
-	// ALWAYS if the fragment timestamps are not accurate.
+	// * ALWAYS: a discontinuity marker is placed between every
+	// fragment in the HLS media playlist. It is recommended to use a value of ALWAYS
+	// if the fragment timestamps are not accurate.
 	//
-	//     * NEVER: no
-	// discontinuity markers are placed anywhere. It is recommended to use a value of
-	// NEVER to ensure the media player timeline most accurately maps to the producer
-	// timestamps.
+	// * NEVER: no discontinuity markers
+	// are placed anywhere. It is recommended to use a value of NEVER to ensure the
+	// media player timeline most accurately maps to the producer timestamps.
 	//
-	//     * ON_DISCONTIUNITY: a discontinuity marker is placed between
-	// fragments that have a gap or overlap of more than 50 milliseconds. For most
-	// playback scenarios, it is recommended to use a value of ON_DISCONTINUITY so that
-	// the media player timeline is only reset when there is a significant issue with
-	// the media timeline (e.g. a missing fragment).
+	// *
+	// ON_DISCONTIUNITY: a discontinuity marker is placed between fragments that have a
+	// gap or overlap of more than 50 milliseconds. For most playback scenarios, it is
+	// recommended to use a value of ON_DISCONTINUITY so that the media player timeline
+	// is only reset when there is a significant issue with the media timeline (e.g. a
+	// missing fragment).
 	//
-	// The default is ALWAYS when
-	// HLSFragmentSelector is set to SERVER_TIMESTAMP, and NEVER when it is set to
-	// PRODUCER_TIMESTAMP.
+	// The default is ALWAYS when HLSFragmentSelector is set to
+	// SERVER_TIMESTAMP, and NEVER when it is set to PRODUCER_TIMESTAMP.
 	DiscontinuityMode types.HLSDiscontinuityMode
 
 	// Specifies when the fragment start timestamps should be included in the HLS media
@@ -271,7 +269,7 @@ type GetHLSStreamingSessionURLInput struct {
 	// Whether to retrieve live, live replay, or archived, on-demand data. Features of
 	// the three types of sessions include the following:
 	//
-	//     * LIVE : For sessions of
+	// * LIVE : For sessions of
 	// this type, the HLS media playlist is continually updated with the latest
 	// fragments as they become available. We recommend that the media player retrieve
 	// a new playlist on a one-second interval. When this type of session is played in
@@ -285,7 +283,7 @@ type GetHLSStreamingSessionURLInput struct {
 	// becomes available after a subsequent fragment is added to the playlist, the
 	// older fragment is not added, and the gap is not filled.
 	//
-	//     * LIVE_REPLAY : For
+	// * LIVE_REPLAY : For
 	// sessions of this type, the HLS media playlist is updated similarly to how it is
 	// updated for LIVE mode except that it starts by including fragments from a given
 	// start time. Instead of fragments being added as they are ingested, fragments are
@@ -297,9 +295,9 @@ type GetHLSStreamingSessionURLInput struct {
 	// also useful to stream previously archived media without being limited by the
 	// 1,000 fragment limit in the ON_DEMAND mode.
 	//
-	//     * ON_DEMAND : For sessions of
-	// this type, the HLS media playlist contains all the fragments for the session, up
-	// to the number that is specified in MaxMediaPlaylistFragmentResults. The playlist
+	// * ON_DEMAND : For sessions of this
+	// type, the HLS media playlist contains all the fragments for the session, up to
+	// the number that is specified in MaxMediaPlaylistFragmentResults. The playlist
 	// must be retrieved only once for each session. When this type of session is
 	// played in a media player, the user interface typically displays a scrubber
 	// control for choosing the position in the playback window to display.

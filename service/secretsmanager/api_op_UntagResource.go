@@ -19,15 +19,15 @@ import (
 // Minimum permissions To run this command, you must have the following
 // permissions:
 //
-//     * secretsmanager:UntagResource
+// * secretsmanager:UntagResource
 //
 // Related operations
 //
-//     * To
-// add one or more tags to the collection attached to a secret, use TagResource.
+// * To add one
+// or more tags to the collection attached to a secret, use TagResource.
 //
-//
-// * To view the list of tags attached to a secret, use DescribeSecret.
+// * To view
+// the list of tags attached to a secret, use DescribeSecret.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

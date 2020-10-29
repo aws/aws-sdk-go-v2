@@ -6,9 +6,9 @@ type EndpointType string
 
 // Enum values for EndpointType
 const (
-	EndpointTypePublic       EndpointType = "PUBLIC"
-	EndpointTypeVpc          EndpointType = "VPC"
-	EndpointTypeVpc_endpoint EndpointType = "VPC_ENDPOINT"
+	EndpointTypePublic      EndpointType = "PUBLIC"
+	EndpointTypeVpc         EndpointType = "VPC"
+	EndpointTypeVpcEndpoint EndpointType = "VPC_ENDPOINT"
 )
 
 // Values returns all known values for EndpointType. Note that this can be expanded
@@ -44,8 +44,8 @@ type IdentityProviderType string
 
 // Enum values for IdentityProviderType
 const (
-	IdentityProviderTypeService_managed IdentityProviderType = "SERVICE_MANAGED"
-	IdentityProviderTypeApi_gateway     IdentityProviderType = "API_GATEWAY"
+	IdentityProviderTypeServiceManaged IdentityProviderType = "SERVICE_MANAGED"
+	IdentityProviderTypeApiGateway     IdentityProviderType = "API_GATEWAY"
 )
 
 // Values returns all known values for IdentityProviderType. Note that this can be
@@ -82,12 +82,12 @@ type State string
 
 // Enum values for State
 const (
-	StateOffline      State = "OFFLINE"
-	StateOnline       State = "ONLINE"
-	StateStarting     State = "STARTING"
-	StateStopping     State = "STOPPING"
-	StateStart_failed State = "START_FAILED"
-	StateStop_failed  State = "STOP_FAILED"
+	StateOffline     State = "OFFLINE"
+	StateOnline      State = "ONLINE"
+	StateStarting    State = "STARTING"
+	StateStopping    State = "STOPPING"
+	StateStartFailed State = "START_FAILED"
+	StateStopFailed  State = "STOP_FAILED"
 )
 
 // Values returns all known values for State. Note that this can be expanded in the

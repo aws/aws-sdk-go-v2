@@ -62,22 +62,21 @@ type CreateCanaryInput struct {
 	// exist, and must include lambda.amazonaws.com as a principal in the trust policy.
 	// The role must also have the following permissions:
 	//
-	//     * s3:PutObject
+	// * s3:PutObject
 	//
-	//     *
+	// *
 	// s3:GetBucketLocation
 	//
-	//     * s3:ListAllMyBuckets
+	// * s3:ListAllMyBuckets
 	//
-	//     *
-	// cloudwatch:PutMetricData
+	// * cloudwatch:PutMetricData
 	//
-	//     * logs:CreateLogGroup
+	// *
+	// logs:CreateLogGroup
 	//
-	//     *
-	// logs:CreateLogStream
+	// * logs:CreateLogStream
 	//
-	//     * logs:PutLogEvents
+	// * logs:PutLogEvents
 	//
 	// This member is required.
 	ExecutionRoleArn *string

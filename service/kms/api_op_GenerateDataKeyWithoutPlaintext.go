@@ -67,15 +67,15 @@ type GenerateDataKeyWithoutPlaintextInput struct {
 	// CMK in a different AWS account, you must use the key ARN or alias ARN. For
 	// example:
 	//
-	//     * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
-	//     * Key ARN:
+	// * Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
+	// *
+	// Alias name: alias/ExampleAlias
 	//
-	// * Alias name: alias/ExampleAlias
-	//
-	//     * Alias ARN:
+	// * Alias ARN:
 	// arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
 	//
 	// To get the key ID and key

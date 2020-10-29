@@ -28,10 +28,10 @@ type FindingSourceType string
 
 // Enum values for FindingSourceType
 const (
-	FindingSourceTypePolicy          FindingSourceType = "POLICY"
-	FindingSourceTypeBucket_acl      FindingSourceType = "BUCKET_ACL"
-	FindingSourceTypeS3_access_point FindingSourceType = "S3_ACCESS_POINT"
-	FindingSourceTypeKms_grant       FindingSourceType = "KMS_GRANT"
+	FindingSourceTypePolicy        FindingSourceType = "POLICY"
+	FindingSourceTypeBucketAcl     FindingSourceType = "BUCKET_ACL"
+	FindingSourceTypeS3AccessPoint FindingSourceType = "S3_ACCESS_POINT"
+	FindingSourceTypeKmsGrant      FindingSourceType = "KMS_GRANT"
 )
 
 // Values returns all known values for FindingSourceType. Note that this can be
@@ -106,10 +106,10 @@ type ReasonCode string
 
 // Enum values for ReasonCode
 const (
-	ReasonCodeAws_service_access_disabled          ReasonCode = "AWS_SERVICE_ACCESS_DISABLED"
-	ReasonCodeDelegated_administrator_deregistered ReasonCode = "DELEGATED_ADMINISTRATOR_DEREGISTERED"
-	ReasonCodeOrganization_deleted                 ReasonCode = "ORGANIZATION_DELETED"
-	ReasonCodeService_linked_role_creation_failed  ReasonCode = "SERVICE_LINKED_ROLE_CREATION_FAILED"
+	ReasonCodeAwsServiceAccessDisabled           ReasonCode = "AWS_SERVICE_ACCESS_DISABLED"
+	ReasonCodeDelegatedAdministratorDeregistered ReasonCode = "DELEGATED_ADMINISTRATOR_DEREGISTERED"
+	ReasonCodeOrganizationDeleted                ReasonCode = "ORGANIZATION_DELETED"
+	ReasonCodeServiceLinkedRoleCreationFailed    ReasonCode = "SERVICE_LINKED_ROLE_CREATION_FAILED"
 )
 
 // Values returns all known values for ReasonCode. Note that this can be expanded
@@ -172,10 +172,10 @@ type ValidationExceptionReason string
 
 // Enum values for ValidationExceptionReason
 const (
-	ValidationExceptionReasonUnknown_operation       ValidationExceptionReason = "unknownOperation"
-	ValidationExceptionReasonCannot_parse            ValidationExceptionReason = "cannotParse"
-	ValidationExceptionReasonField_validation_failed ValidationExceptionReason = "fieldValidationFailed"
-	ValidationExceptionReasonOther                   ValidationExceptionReason = "other"
+	ValidationExceptionReasonUnknownOperation      ValidationExceptionReason = "unknownOperation"
+	ValidationExceptionReasonCannotParse           ValidationExceptionReason = "cannotParse"
+	ValidationExceptionReasonFieldValidationFailed ValidationExceptionReason = "fieldValidationFailed"
+	ValidationExceptionReasonOther                 ValidationExceptionReason = "other"
 )
 
 // Values returns all known values for ValidationExceptionReason. Note that this

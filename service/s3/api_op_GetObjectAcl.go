@@ -18,14 +18,14 @@ import (
 // version, use the versionId subresource. The following operations are related to
 // GetObjectAcl:
 //
-//     * GetObject
+// * GetObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
 //
-//     *
+// *
 // DeleteObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html)
 //
-//     *
+// *
 // PutObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
 func (c *Client) GetObjectAcl(ctx context.Context, params *GetObjectAclInput, optFns ...func(*Options)) (*GetObjectAclOutput, error) {
 	if params == nil {

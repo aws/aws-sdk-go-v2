@@ -17,14 +17,14 @@ import (
 // architecture, including the management and mapping of the service endpoints, it
 // is not recommended that you use this API unless:
 //
-//     * Your application uses a
+// * Your application uses a
 // programming language that does not yet have SDK support
 //
-//     * You require
-// better control over the client-side implementation
+// * You require better
+// control over the client-side implementation
 //
-// For detailed information on
-// how to use DescribeEndpoints, see The Endpoint Discovery Pattern and REST APIs
+// For detailed information on how to
+// use DescribeEndpoints, see The Endpoint Discovery Pattern and REST APIs
 // (https://docs.aws.amazon.com/timestream/latest/developerguide/Using-API.endpoint-discovery.html).
 func (c *Client) DescribeEndpoints(ctx context.Context, params *DescribeEndpointsInput, optFns ...func(*Options)) (*DescribeEndpointsOutput, error) {
 	if params == nil {

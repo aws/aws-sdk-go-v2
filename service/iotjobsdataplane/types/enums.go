@@ -6,14 +6,14 @@ type JobExecutionStatus string
 
 // Enum values for JobExecutionStatus
 const (
-	JobExecutionStatusQueued      JobExecutionStatus = "QUEUED"
-	JobExecutionStatusIn_progress JobExecutionStatus = "IN_PROGRESS"
-	JobExecutionStatusSucceeded   JobExecutionStatus = "SUCCEEDED"
-	JobExecutionStatusFailed      JobExecutionStatus = "FAILED"
-	JobExecutionStatusTimed_out   JobExecutionStatus = "TIMED_OUT"
-	JobExecutionStatusRejected    JobExecutionStatus = "REJECTED"
-	JobExecutionStatusRemoved     JobExecutionStatus = "REMOVED"
-	JobExecutionStatusCanceled    JobExecutionStatus = "CANCELED"
+	JobExecutionStatusQueued     JobExecutionStatus = "QUEUED"
+	JobExecutionStatusInProgress JobExecutionStatus = "IN_PROGRESS"
+	JobExecutionStatusSucceeded  JobExecutionStatus = "SUCCEEDED"
+	JobExecutionStatusFailed     JobExecutionStatus = "FAILED"
+	JobExecutionStatusTimedOut   JobExecutionStatus = "TIMED_OUT"
+	JobExecutionStatusRejected   JobExecutionStatus = "REJECTED"
+	JobExecutionStatusRemoved    JobExecutionStatus = "REMOVED"
+	JobExecutionStatusCanceled   JobExecutionStatus = "CANCELED"
 )
 
 // Values returns all known values for JobExecutionStatus. Note that this can be

@@ -34,29 +34,28 @@ import (
 // GetGameSessionLogUrl to download the log files. Available in Amazon GameLift
 // Local.
 //
-//     * CreateGameSession
+// * CreateGameSession
 //
-//     * DescribeGameSessions
+// * DescribeGameSessions
 //
-//     *
+// *
 // DescribeGameSessionDetails
 //
-//     * SearchGameSessions
+// * SearchGameSessions
 //
-//     * UpdateGameSession
+// * UpdateGameSession
 //
+// *
+// GetGameSessionLogUrl
 //
-// * GetGameSessionLogUrl
+// * Game session placements
 //
-//     * Game session placements
+// * StartGameSessionPlacement
 //
-//         *
-// StartGameSessionPlacement
+// *
+// DescribeGameSessionPlacement
 //
-//         * DescribeGameSessionPlacement
-//
-//         *
-// StopGameSessionPlacement
+// * StopGameSessionPlacement
 func (c *Client) CreateGameSession(ctx context.Context, params *CreateGameSessionInput, optFns ...func(*Options)) (*CreateGameSessionOutput, error) {
 	if params == nil {
 		params = &CreateGameSessionInput{}

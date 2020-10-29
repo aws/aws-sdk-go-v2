@@ -32,20 +32,20 @@ import (
 // the request's status using DescribeVpcPeeringConnections, or by monitoring fleet
 // events for success or failure using DescribeFleetEvents.
 //
-//     *
+// *
 // CreateVpcPeeringAuthorization
 //
-//     * DescribeVpcPeeringAuthorizations
+// * DescribeVpcPeeringAuthorizations
 //
-//     *
+// *
 // DeleteVpcPeeringAuthorization
 //
-//     * CreateVpcPeeringConnection
+// * CreateVpcPeeringConnection
 //
-//     *
+// *
 // DescribeVpcPeeringConnections
 //
-//     * DeleteVpcPeeringConnection
+// * DeleteVpcPeeringConnection
 func (c *Client) CreateVpcPeeringConnection(ctx context.Context, params *CreateVpcPeeringConnectionInput, optFns ...func(*Options)) (*CreateVpcPeeringConnectionOutput, error) {
 	if params == nil {
 		params = &CreateVpcPeeringConnectionInput{}

@@ -16,30 +16,29 @@ import (
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_manage.html#id_users_deleting_cli).
 // Before attempting to delete a user, remove the following items:
 //
-//     * Password
+// * Password
 // (DeleteLoginProfile)
 //
-//     * Access keys (DeleteAccessKey)
+// * Access keys (DeleteAccessKey)
 //
-//     * Signing
-// certificate (DeleteSigningCertificate)
+// * Signing certificate
+// (DeleteSigningCertificate)
 //
-//     * SSH public key
-// (DeleteSSHPublicKey)
+// * SSH public key (DeleteSSHPublicKey)
 //
-//     * Git credentials (DeleteServiceSpecificCredential)
+// * Git
+// credentials (DeleteServiceSpecificCredential)
 //
+// * Multi-factor authentication
+// (MFA) device (DeactivateMFADevice, DeleteVirtualMFADevice)
 //
-// * Multi-factor authentication (MFA) device (DeactivateMFADevice,
-// DeleteVirtualMFADevice)
+// * Inline policies
+// (DeleteUserPolicy)
 //
-//     * Inline policies (DeleteUserPolicy)
+// * Attached managed policies (DetachUserPolicy)
 //
-//     *
-// Attached managed policies (DetachUserPolicy)
-//
-//     * Group memberships
-// (RemoveUserFromGroup)
+// * Group
+// memberships (RemoveUserFromGroup)
 func (c *Client) DeleteUser(ctx context.Context, params *DeleteUserInput, optFns ...func(*Options)) (*DeleteUserOutput, error) {
 	if params == nil {
 		params = &DeleteUserInput{}

@@ -15,13 +15,13 @@ import (
 // Retrieves a paginated list of asset summaries. You can use this operation to do
 // the following:
 //
-//     * List assets based on a specific asset model.
+// * List assets based on a specific asset model.
 //
-//     * List
-// top-level assets.
+// * List top-level
+// assets.
 //
-// You can't use this operation to list all assets. To retrieve
-// summaries for all of your assets, use ListAssetModels
+// You can't use this operation to list all assets. To retrieve summaries
+// for all of your assets, use ListAssetModels
 // (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_ListAssetModels.html)
 // to get all of your asset model IDs. Then, use ListAssets to get all assets for
 // each asset model.
@@ -49,14 +49,13 @@ type ListAssetsInput struct {
 	// The filter for the requested list of assets. Choose one of the following
 	// options:
 	//
-	//     * ALL – The list includes all assets for a given asset model ID.
-	// The assetModelId parameter is required if you filter by ALL.
+	// * ALL – The list includes all assets for a given asset model ID. The
+	// assetModelId parameter is required if you filter by ALL.
 	//
-	//     * TOP_LEVEL –
-	// The list includes only top-level assets in the asset hierarchy tree.
+	// * TOP_LEVEL – The list
+	// includes only top-level assets in the asset hierarchy tree.
 	//
-	// Default:
-	// ALL
+	// Default: ALL
 	Filter types.ListAssetsFilter
 
 	// The maximum number of results to be returned per paginated request. Default: 50

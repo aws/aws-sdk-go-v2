@@ -23,19 +23,18 @@ import (
 // LifecycleConfiguration and disables lifecycle management. In the request,
 // specify the following:
 //
-//     * The ID for the file system for which you are
-// enabling, disabling, or modifying lifecycle management.
+// * The ID for the file system for which you are enabling,
+// disabling, or modifying lifecycle management.
 //
-//     * A
-// LifecyclePolicies array of LifecyclePolicy objects that define when files are
-// moved to the IA storage class. The array can contain only one LifecyclePolicy
-// item.
+// * A LifecyclePolicies array of
+// LifecyclePolicy objects that define when files are moved to the IA storage
+// class. The array can contain only one LifecyclePolicy item.
 //
-// This operation requires permissions for the
-// elasticfilesystem:PutLifecycleConfiguration operation. To apply a
-// LifecycleConfiguration object to an encrypted file system, you need the same AWS
-// Key Management Service (AWS KMS) permissions as when you created the encrypted
-// file system.
+// This operation
+// requires permissions for the elasticfilesystem:PutLifecycleConfiguration
+// operation. To apply a LifecycleConfiguration object to an encrypted file system,
+// you need the same AWS Key Management Service (AWS KMS) permissions as when you
+// created the encrypted file system.
 func (c *Client) PutLifecycleConfiguration(ctx context.Context, params *PutLifecycleConfigurationInput, optFns ...func(*Options)) (*PutLifecycleConfigurationOutput, error) {
 	if params == nil {
 		params = &PutLifecycleConfigurationInput{}

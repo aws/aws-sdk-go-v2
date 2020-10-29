@@ -80,14 +80,14 @@ type CreatePatchBaselineInput struct {
 	// The action for Patch Manager to take on patches included in the RejectedPackages
 	// list.
 	//
-	//     * ALLOW_AS_DEPENDENCY: A package in the Rejected patches list is
+	// * ALLOW_AS_DEPENDENCY: A package in the Rejected patches list is
 	// installed only if it is a dependency of another package. It is considered
 	// compliant with the patch baseline, and its status is reported as InstalledOther.
 	// This is the default action if no option is specified.
 	//
-	//     * BLOCK: Packages in
-	// the RejectedPatches list, and packages that include them as dependencies, are
-	// not installed under any circumstances. If a package was installed before it was
+	// * BLOCK: Packages in the
+	// RejectedPatches list, and packages that include them as dependencies, are not
+	// installed under any circumstances. If a package was installed before it was
 	// added to the Rejected patches list, it is considered non-compliant with the
 	// patch baseline, and its status is reported as InstalledRejected.
 	RejectedPatchesAction types.PatchAction
@@ -102,10 +102,10 @@ type CreatePatchBaselineInput struct {
 	// of patches it specifies and the operating system family it applies to. In this
 	// case, you could specify the following key name/value pairs:
 	//
-	//     *
+	// *
 	// Key=PatchSeverity,Value=Critical
 	//
-	//     * Key=OS,Value=Windows
+	// * Key=OS,Value=Windows
 	//
 	// To add tags to an
 	// existing patch baseline, use the AddTagsToResource action.

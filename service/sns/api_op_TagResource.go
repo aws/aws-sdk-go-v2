@@ -16,20 +16,20 @@ import (
 // Developer Guide. When you use topic tags, keep the following guidelines in
 // mind:
 //
-//     * Adding more than 50 tags to a topic isn't recommended.
+// * Adding more than 50 tags to a topic isn't recommended.
 //
-//     * Tags
-// don't have any semantic meaning. Amazon SNS interprets tags as character
-// strings.
+// * Tags don't
+// have any semantic meaning. Amazon SNS interprets tags as character strings.
 //
-//     * Tags are case-sensitive.
+// *
+// Tags are case-sensitive.
 //
-//     * A new tag with a key identical
-// to that of an existing tag overwrites the existing tag.
+// * A new tag with a key identical to that of an
+// existing tag overwrites the existing tag.
 //
-//     * Tagging actions
-// are limited to 10 TPS per AWS account, per AWS region. If your application
-// requires a higher throughput, file a technical support request
+// * Tagging actions are limited to 10
+// TPS per AWS account, per AWS region. If your application requires a higher
+// throughput, file a technical support request
 // (https://console.aws.amazon.com/support/home#/case/create?issueType=technical).
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {

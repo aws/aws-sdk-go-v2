@@ -6,7 +6,7 @@ type AccessDeniedForDependencyExceptionReason string
 
 // Enum values for AccessDeniedForDependencyExceptionReason
 const (
-	AccessDeniedForDependencyExceptionReasonAccess_denied_during_create_service_linked_role AccessDeniedForDependencyExceptionReason = "ACCESS_DENIED_DURING_CREATE_SERVICE_LINKED_ROLE"
+	AccessDeniedForDependencyExceptionReasonAccessDeniedDuringCreateServiceLinkedRole AccessDeniedForDependencyExceptionReason = "ACCESS_DENIED_DURING_CREATE_SERVICE_LINKED_ROLE"
 )
 
 // Values returns all known values for AccessDeniedForDependencyExceptionReason.
@@ -59,10 +59,10 @@ type ActionType string
 
 // Enum values for ActionType
 const (
-	ActionTypeInvite_account_to_organization        ActionType = "INVITE"
-	ActionTypeEnable_all_features                   ActionType = "ENABLE_ALL_FEATURES"
-	ActionTypeApprove_all_features                  ActionType = "APPROVE_ALL_FEATURES"
-	ActionTypeAdd_organizations_service_linked_role ActionType = "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE"
+	ActionTypeInviteAccountToOrganization       ActionType = "INVITE"
+	ActionTypeEnableAllFeatures                 ActionType = "ENABLE_ALL_FEATURES"
+	ActionTypeApproveAllFeatures                ActionType = "APPROVE_ALL_FEATURES"
+	ActionTypeAddOrganizationsServiceLinkedRole ActionType = "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE"
 )
 
 // Values returns all known values for ActionType. Note that this can be expanded
@@ -81,8 +81,8 @@ type ChildType string
 
 // Enum values for ChildType
 const (
-	ChildTypeAccount             ChildType = "ACCOUNT"
-	ChildTypeOrganizational_unit ChildType = "ORGANIZATIONAL_UNIT"
+	ChildTypeAccount            ChildType = "ACCOUNT"
+	ChildTypeOrganizationalUnit ChildType = "ORGANIZATIONAL_UNIT"
 )
 
 // Values returns all known values for ChildType. Note that this can be expanded in
@@ -99,34 +99,34 @@ type ConstraintViolationExceptionReason string
 
 // Enum values for ConstraintViolationExceptionReason
 const (
-	ConstraintViolationExceptionReasonAccount_number_limit_exceeded                           ConstraintViolationExceptionReason = "ACCOUNT_NUMBER_LIMIT_EXCEEDED"
-	ConstraintViolationExceptionReasonHandshake_rate_limit_exceeded                           ConstraintViolationExceptionReason = "HANDSHAKE_RATE_LIMIT_EXCEEDED"
-	ConstraintViolationExceptionReasonOu_number_limit_exceeded                                ConstraintViolationExceptionReason = "OU_NUMBER_LIMIT_EXCEEDED"
-	ConstraintViolationExceptionReasonOu_depth_limit_exceeded                                 ConstraintViolationExceptionReason = "OU_DEPTH_LIMIT_EXCEEDED"
-	ConstraintViolationExceptionReasonPolicy_number_limit_exceeded                            ConstraintViolationExceptionReason = "POLICY_NUMBER_LIMIT_EXCEEDED"
-	ConstraintViolationExceptionReasonPolicy_content_limit_exceeded                           ConstraintViolationExceptionReason = "POLICY_CONTENT_LIMIT_EXCEEDED"
-	ConstraintViolationExceptionReasonMax_policy_type_attachment_limit_exceeded               ConstraintViolationExceptionReason = "MAX_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED"
-	ConstraintViolationExceptionReasonMin_policy_type_attachment_limit_exceeded               ConstraintViolationExceptionReason = "MIN_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED"
-	ConstraintViolationExceptionReasonAccount_cannot_leave_organization                       ConstraintViolationExceptionReason = "ACCOUNT_CANNOT_LEAVE_ORGANIZATION"
-	ConstraintViolationExceptionReasonAccount_cannot_leave_without_eula                       ConstraintViolationExceptionReason = "ACCOUNT_CANNOT_LEAVE_WITHOUT_EULA"
-	ConstraintViolationExceptionReasonAccount_cannot_leave_without_phone_verification         ConstraintViolationExceptionReason = "ACCOUNT_CANNOT_LEAVE_WITHOUT_PHONE_VERIFICATION"
-	ConstraintViolationExceptionReasonMaster_account_payment_instrument_required              ConstraintViolationExceptionReason = "MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED"
-	ConstraintViolationExceptionReasonMember_account_payment_instrument_required              ConstraintViolationExceptionReason = "MEMBER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED"
-	ConstraintViolationExceptionReasonAccount_creation_rate_limit_exceeded                    ConstraintViolationExceptionReason = "ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED"
-	ConstraintViolationExceptionReasonMaster_account_address_does_not_match_marketplace       ConstraintViolationExceptionReason = "MASTER_ACCOUNT_ADDRESS_DOES_NOT_MATCH_MARKETPLACE"
-	ConstraintViolationExceptionReasonMaster_account_missing_contact_info                     ConstraintViolationExceptionReason = "MASTER_ACCOUNT_MISSING_CONTACT_INFO"
-	ConstraintViolationExceptionReasonMaster_account_not_govcloud_enabled                     ConstraintViolationExceptionReason = "MASTER_ACCOUNT_NOT_GOVCLOUD_ENABLED"
-	ConstraintViolationExceptionReasonOrganization_not_in_all_features_mode                   ConstraintViolationExceptionReason = "ORGANIZATION_NOT_IN_ALL_FEATURES_MODE"
-	ConstraintViolationExceptionReasonCreate_organization_in_billing_mode_unsupported_region  ConstraintViolationExceptionReason = "CREATE_ORGANIZATION_IN_BILLING_MODE_UNSUPPORTED_REGION"
-	ConstraintViolationExceptionReasonEmail_verification_code_expired                         ConstraintViolationExceptionReason = "EMAIL_VERIFICATION_CODE_EXPIRED"
-	ConstraintViolationExceptionReasonWait_period_active                                      ConstraintViolationExceptionReason = "WAIT_PERIOD_ACTIVE"
-	ConstraintViolationExceptionReasonMax_tag_limit_exceeded                                  ConstraintViolationExceptionReason = "MAX_TAG_LIMIT_EXCEEDED"
-	ConstraintViolationExceptionReasonTag_policy_violation                                    ConstraintViolationExceptionReason = "TAG_POLICY_VIOLATION"
-	ConstraintViolationExceptionReasonMax_delegated_administrators_for_service_limit_exceeded ConstraintViolationExceptionReason = "MAX_DELEGATED_ADMINISTRATORS_FOR_SERVICE_LIMIT_EXCEEDED"
-	ConstraintViolationExceptionReasonCannot_register_master_as_delegated_administrator       ConstraintViolationExceptionReason = "CANNOT_REGISTER_MASTER_AS_DELEGATED_ADMINISTRATOR"
-	ConstraintViolationExceptionReasonCannot_remove_delegated_administrator_from_org          ConstraintViolationExceptionReason = "CANNOT_REMOVE_DELEGATED_ADMINISTRATOR_FROM_ORG"
-	ConstraintViolationExceptionReasonDelegated_administrator_exists_for_this_service         ConstraintViolationExceptionReason = "DELEGATED_ADMINISTRATOR_EXISTS_FOR_THIS_SERVICE"
-	ConstraintViolationExceptionReasonMaster_account_missing_business_license                 ConstraintViolationExceptionReason = "MASTER_ACCOUNT_MISSING_BUSINESS_LICENSE"
+	ConstraintViolationExceptionReasonAccountNumberLimitExceeded                        ConstraintViolationExceptionReason = "ACCOUNT_NUMBER_LIMIT_EXCEEDED"
+	ConstraintViolationExceptionReasonHandshakeRateLimitExceeded                        ConstraintViolationExceptionReason = "HANDSHAKE_RATE_LIMIT_EXCEEDED"
+	ConstraintViolationExceptionReasonOuNumberLimitExceeded                             ConstraintViolationExceptionReason = "OU_NUMBER_LIMIT_EXCEEDED"
+	ConstraintViolationExceptionReasonOuDepthLimitExceeded                              ConstraintViolationExceptionReason = "OU_DEPTH_LIMIT_EXCEEDED"
+	ConstraintViolationExceptionReasonPolicyNumberLimitExceeded                         ConstraintViolationExceptionReason = "POLICY_NUMBER_LIMIT_EXCEEDED"
+	ConstraintViolationExceptionReasonPolicyContentLimitExceeded                        ConstraintViolationExceptionReason = "POLICY_CONTENT_LIMIT_EXCEEDED"
+	ConstraintViolationExceptionReasonMaxPolicyTypeAttachmentLimitExceeded              ConstraintViolationExceptionReason = "MAX_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED"
+	ConstraintViolationExceptionReasonMinPolicyTypeAttachmentLimitExceeded              ConstraintViolationExceptionReason = "MIN_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED"
+	ConstraintViolationExceptionReasonAccountCannotLeaveOrganization                    ConstraintViolationExceptionReason = "ACCOUNT_CANNOT_LEAVE_ORGANIZATION"
+	ConstraintViolationExceptionReasonAccountCannotLeaveWithoutEula                     ConstraintViolationExceptionReason = "ACCOUNT_CANNOT_LEAVE_WITHOUT_EULA"
+	ConstraintViolationExceptionReasonAccountCannotLeaveWithoutPhoneVerification        ConstraintViolationExceptionReason = "ACCOUNT_CANNOT_LEAVE_WITHOUT_PHONE_VERIFICATION"
+	ConstraintViolationExceptionReasonMasterAccountPaymentInstrumentRequired            ConstraintViolationExceptionReason = "MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED"
+	ConstraintViolationExceptionReasonMemberAccountPaymentInstrumentRequired            ConstraintViolationExceptionReason = "MEMBER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED"
+	ConstraintViolationExceptionReasonAccountCreationRateLimitExceeded                  ConstraintViolationExceptionReason = "ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED"
+	ConstraintViolationExceptionReasonMasterAccountAddressDoesNotMatchMarketplace       ConstraintViolationExceptionReason = "MASTER_ACCOUNT_ADDRESS_DOES_NOT_MATCH_MARKETPLACE"
+	ConstraintViolationExceptionReasonMasterAccountMissingContactInfo                   ConstraintViolationExceptionReason = "MASTER_ACCOUNT_MISSING_CONTACT_INFO"
+	ConstraintViolationExceptionReasonMasterAccountNotGovcloudEnabled                   ConstraintViolationExceptionReason = "MASTER_ACCOUNT_NOT_GOVCLOUD_ENABLED"
+	ConstraintViolationExceptionReasonOrganizationNotInAllFeaturesMode                  ConstraintViolationExceptionReason = "ORGANIZATION_NOT_IN_ALL_FEATURES_MODE"
+	ConstraintViolationExceptionReasonCreateOrganizationInBillingModeUnsupportedRegion  ConstraintViolationExceptionReason = "CREATE_ORGANIZATION_IN_BILLING_MODE_UNSUPPORTED_REGION"
+	ConstraintViolationExceptionReasonEmailVerificationCodeExpired                      ConstraintViolationExceptionReason = "EMAIL_VERIFICATION_CODE_EXPIRED"
+	ConstraintViolationExceptionReasonWaitPeriodActive                                  ConstraintViolationExceptionReason = "WAIT_PERIOD_ACTIVE"
+	ConstraintViolationExceptionReasonMaxTagLimitExceeded                               ConstraintViolationExceptionReason = "MAX_TAG_LIMIT_EXCEEDED"
+	ConstraintViolationExceptionReasonTagPolicyViolation                                ConstraintViolationExceptionReason = "TAG_POLICY_VIOLATION"
+	ConstraintViolationExceptionReasonMaxDelegatedAdministratorsForServiceLimitExceeded ConstraintViolationExceptionReason = "MAX_DELEGATED_ADMINISTRATORS_FOR_SERVICE_LIMIT_EXCEEDED"
+	ConstraintViolationExceptionReasonCannotRegisterMasterAsDelegatedAdministrator      ConstraintViolationExceptionReason = "CANNOT_REGISTER_MASTER_AS_DELEGATED_ADMINISTRATOR"
+	ConstraintViolationExceptionReasonCannotRemoveDelegatedAdministratorFromOrg         ConstraintViolationExceptionReason = "CANNOT_REMOVE_DELEGATED_ADMINISTRATOR_FROM_ORG"
+	ConstraintViolationExceptionReasonDelegatedAdministratorExistsForThisService        ConstraintViolationExceptionReason = "DELEGATED_ADMINISTRATOR_EXISTS_FOR_THIS_SERVICE"
+	ConstraintViolationExceptionReasonMasterAccountMissingBusinessLicense               ConstraintViolationExceptionReason = "MASTER_ACCOUNT_MISSING_BUSINESS_LICENSE"
 )
 
 // Values returns all known values for ConstraintViolationExceptionReason. Note
@@ -170,15 +170,15 @@ type CreateAccountFailureReason string
 
 // Enum values for CreateAccountFailureReason
 const (
-	CreateAccountFailureReasonAccount_limit_exceeded          CreateAccountFailureReason = "ACCOUNT_LIMIT_EXCEEDED"
-	CreateAccountFailureReasonEmail_already_exists            CreateAccountFailureReason = "EMAIL_ALREADY_EXISTS"
-	CreateAccountFailureReasonInvalid_address                 CreateAccountFailureReason = "INVALID_ADDRESS"
-	CreateAccountFailureReasonInvalid_email                   CreateAccountFailureReason = "INVALID_EMAIL"
-	CreateAccountFailureReasonConcurrent_account_modification CreateAccountFailureReason = "CONCURRENT_ACCOUNT_MODIFICATION"
-	CreateAccountFailureReasonInternal_failure                CreateAccountFailureReason = "INTERNAL_FAILURE"
-	CreateAccountFailureReasonGovcloud_account_already_exists CreateAccountFailureReason = "GOVCLOUD_ACCOUNT_ALREADY_EXISTS"
-	CreateAccountFailureReasonMissing_business_validation     CreateAccountFailureReason = "MISSING_BUSINESS_VALIDATION"
-	CreateAccountFailureReasonMissing_payment_instrument      CreateAccountFailureReason = "MISSING_PAYMENT_INSTRUMENT"
+	CreateAccountFailureReasonAccountLimitExceeded          CreateAccountFailureReason = "ACCOUNT_LIMIT_EXCEEDED"
+	CreateAccountFailureReasonEmailAlreadyExists            CreateAccountFailureReason = "EMAIL_ALREADY_EXISTS"
+	CreateAccountFailureReasonInvalidAddress                CreateAccountFailureReason = "INVALID_ADDRESS"
+	CreateAccountFailureReasonInvalidEmail                  CreateAccountFailureReason = "INVALID_EMAIL"
+	CreateAccountFailureReasonConcurrentAccountModification CreateAccountFailureReason = "CONCURRENT_ACCOUNT_MODIFICATION"
+	CreateAccountFailureReasonInternalFailure               CreateAccountFailureReason = "INTERNAL_FAILURE"
+	CreateAccountFailureReasonGovcloudAccountAlreadyExists  CreateAccountFailureReason = "GOVCLOUD_ACCOUNT_ALREADY_EXISTS"
+	CreateAccountFailureReasonMissingBusinessValidation     CreateAccountFailureReason = "MISSING_BUSINESS_VALIDATION"
+	CreateAccountFailureReasonMissingPaymentInstrument      CreateAccountFailureReason = "MISSING_PAYMENT_INSTRUMENT"
 )
 
 // Values returns all known values for CreateAccountFailureReason. Note that this
@@ -202,9 +202,9 @@ type CreateAccountState string
 
 // Enum values for CreateAccountState
 const (
-	CreateAccountStateIn_progress CreateAccountState = "IN_PROGRESS"
-	CreateAccountStateSucceeded   CreateAccountState = "SUCCEEDED"
-	CreateAccountStateFailed      CreateAccountState = "FAILED"
+	CreateAccountStateInProgress CreateAccountState = "IN_PROGRESS"
+	CreateAccountStateSucceeded  CreateAccountState = "SUCCEEDED"
+	CreateAccountStateFailed     CreateAccountState = "FAILED"
 )
 
 // Values returns all known values for CreateAccountState. Note that this can be
@@ -222,9 +222,9 @@ type EffectivePolicyType string
 
 // Enum values for EffectivePolicyType
 const (
-	EffectivePolicyTypeTag_policy                EffectivePolicyType = "TAG_POLICY"
-	EffectivePolicyTypeBackup_policy             EffectivePolicyType = "BACKUP_POLICY"
-	EffectivePolicyTypeAiservices_opt_out_policy EffectivePolicyType = "AISERVICES_OPT_OUT_POLICY"
+	EffectivePolicyTypeTagPolicy              EffectivePolicyType = "TAG_POLICY"
+	EffectivePolicyTypeBackupPolicy           EffectivePolicyType = "BACKUP_POLICY"
+	EffectivePolicyTypeAiservicesOptOutPolicy EffectivePolicyType = "AISERVICES_OPT_OUT_POLICY"
 )
 
 // Values returns all known values for EffectivePolicyType. Note that this can be
@@ -242,14 +242,14 @@ type HandshakeConstraintViolationExceptionReason string
 
 // Enum values for HandshakeConstraintViolationExceptionReason
 const (
-	HandshakeConstraintViolationExceptionReasonAccount_number_limit_exceeded                      HandshakeConstraintViolationExceptionReason = "ACCOUNT_NUMBER_LIMIT_EXCEEDED"
-	HandshakeConstraintViolationExceptionReasonHandshake_rate_limit_exceeded                      HandshakeConstraintViolationExceptionReason = "HANDSHAKE_RATE_LIMIT_EXCEEDED"
-	HandshakeConstraintViolationExceptionReasonAlready_in_an_organization                         HandshakeConstraintViolationExceptionReason = "ALREADY_IN_AN_ORGANIZATION"
-	HandshakeConstraintViolationExceptionReasonOrganization_already_has_all_features              HandshakeConstraintViolationExceptionReason = "ORGANIZATION_ALREADY_HAS_ALL_FEATURES"
-	HandshakeConstraintViolationExceptionReasonInvite_disabled_during_enable_all_features         HandshakeConstraintViolationExceptionReason = "INVITE_DISABLED_DURING_ENABLE_ALL_FEATURES"
-	HandshakeConstraintViolationExceptionReasonPayment_instrument_required                        HandshakeConstraintViolationExceptionReason = "PAYMENT_INSTRUMENT_REQUIRED"
-	HandshakeConstraintViolationExceptionReasonOrganization_from_different_seller_of_record       HandshakeConstraintViolationExceptionReason = "ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD"
-	HandshakeConstraintViolationExceptionReasonOrganization_membership_change_rate_limit_exceeded HandshakeConstraintViolationExceptionReason = "ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED"
+	HandshakeConstraintViolationExceptionReasonAccountNumberLimitExceeded                    HandshakeConstraintViolationExceptionReason = "ACCOUNT_NUMBER_LIMIT_EXCEEDED"
+	HandshakeConstraintViolationExceptionReasonHandshakeRateLimitExceeded                    HandshakeConstraintViolationExceptionReason = "HANDSHAKE_RATE_LIMIT_EXCEEDED"
+	HandshakeConstraintViolationExceptionReasonAlreadyInAnOrganization                       HandshakeConstraintViolationExceptionReason = "ALREADY_IN_AN_ORGANIZATION"
+	HandshakeConstraintViolationExceptionReasonOrganizationAlreadyHasAllFeatures             HandshakeConstraintViolationExceptionReason = "ORGANIZATION_ALREADY_HAS_ALL_FEATURES"
+	HandshakeConstraintViolationExceptionReasonInviteDisabledDuringEnableAllFeatures         HandshakeConstraintViolationExceptionReason = "INVITE_DISABLED_DURING_ENABLE_ALL_FEATURES"
+	HandshakeConstraintViolationExceptionReasonPaymentInstrumentRequired                     HandshakeConstraintViolationExceptionReason = "PAYMENT_INSTRUMENT_REQUIRED"
+	HandshakeConstraintViolationExceptionReasonOrganizationFromDifferentSellerOfRecord       HandshakeConstraintViolationExceptionReason = "ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD"
+	HandshakeConstraintViolationExceptionReasonOrganizationMembershipChangeRateLimitExceeded HandshakeConstraintViolationExceptionReason = "ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED"
 )
 
 // Values returns all known values for HandshakeConstraintViolationExceptionReason.
@@ -293,14 +293,14 @@ type HandshakeResourceType string
 
 // Enum values for HandshakeResourceType
 const (
-	HandshakeResourceTypeAccount                  HandshakeResourceType = "ACCOUNT"
-	HandshakeResourceTypeOrganization             HandshakeResourceType = "ORGANIZATION"
-	HandshakeResourceTypeOrganization_feature_set HandshakeResourceType = "ORGANIZATION_FEATURE_SET"
-	HandshakeResourceTypeEmail                    HandshakeResourceType = "EMAIL"
-	HandshakeResourceTypeMaster_email             HandshakeResourceType = "MASTER_EMAIL"
-	HandshakeResourceTypeMaster_name              HandshakeResourceType = "MASTER_NAME"
-	HandshakeResourceTypeNotes                    HandshakeResourceType = "NOTES"
-	HandshakeResourceTypeParent_handshake         HandshakeResourceType = "PARENT_HANDSHAKE"
+	HandshakeResourceTypeAccount                HandshakeResourceType = "ACCOUNT"
+	HandshakeResourceTypeOrganization           HandshakeResourceType = "ORGANIZATION"
+	HandshakeResourceTypeOrganizationFeatureSet HandshakeResourceType = "ORGANIZATION_FEATURE_SET"
+	HandshakeResourceTypeEmail                  HandshakeResourceType = "EMAIL"
+	HandshakeResourceTypeMasterEmail            HandshakeResourceType = "MASTER_EMAIL"
+	HandshakeResourceTypeMasterName             HandshakeResourceType = "MASTER_NAME"
+	HandshakeResourceTypeNotes                  HandshakeResourceType = "NOTES"
+	HandshakeResourceTypeParentHandshake        HandshakeResourceType = "PARENT_HANDSHAKE"
 )
 
 // Values returns all known values for HandshakeResourceType. Note that this can be
@@ -367,29 +367,29 @@ type InvalidInputExceptionReason string
 
 // Enum values for InvalidInputExceptionReason
 const (
-	InvalidInputExceptionReasonInvalid_party_type_target              InvalidInputExceptionReason = "INVALID_PARTY_TYPE_TARGET"
-	InvalidInputExceptionReasonInvalid_syntax_organization            InvalidInputExceptionReason = "INVALID_SYNTAX_ORGANIZATION_ARN"
-	InvalidInputExceptionReasonInvalid_syntax_policy                  InvalidInputExceptionReason = "INVALID_SYNTAX_POLICY_ID"
-	InvalidInputExceptionReasonInvalid_enum                           InvalidInputExceptionReason = "INVALID_ENUM"
-	InvalidInputExceptionReasonInvalid_enum_policy_type               InvalidInputExceptionReason = "INVALID_ENUM_POLICY_TYPE"
-	InvalidInputExceptionReasonInvalid_list_member                    InvalidInputExceptionReason = "INVALID_LIST_MEMBER"
-	InvalidInputExceptionReasonMax_length_exceeded                    InvalidInputExceptionReason = "MAX_LENGTH_EXCEEDED"
-	InvalidInputExceptionReasonMax_value_exceeded                     InvalidInputExceptionReason = "MAX_VALUE_EXCEEDED"
-	InvalidInputExceptionReasonMin_length_exceeded                    InvalidInputExceptionReason = "MIN_LENGTH_EXCEEDED"
-	InvalidInputExceptionReasonMin_value_exceeded                     InvalidInputExceptionReason = "MIN_VALUE_EXCEEDED"
-	InvalidInputExceptionReasonImmutable_policy                       InvalidInputExceptionReason = "IMMUTABLE_POLICY"
-	InvalidInputExceptionReasonInvalid_pattern                        InvalidInputExceptionReason = "INVALID_PATTERN"
-	InvalidInputExceptionReasonInvalid_pattern_target_id              InvalidInputExceptionReason = "INVALID_PATTERN_TARGET_ID"
-	InvalidInputExceptionReasonInput_required                         InvalidInputExceptionReason = "INPUT_REQUIRED"
-	InvalidInputExceptionReasonInvalid_pagination_token               InvalidInputExceptionReason = "INVALID_NEXT_TOKEN"
-	InvalidInputExceptionReasonMax_filter_limit_exceeded              InvalidInputExceptionReason = "MAX_LIMIT_EXCEEDED_FILTER"
-	InvalidInputExceptionReasonMoving_account_between_different_roots InvalidInputExceptionReason = "MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS"
-	InvalidInputExceptionReasonInvalid_full_name_target               InvalidInputExceptionReason = "INVALID_FULL_NAME_TARGET"
-	InvalidInputExceptionReasonUnrecognized_service_principal         InvalidInputExceptionReason = "UNRECOGNIZED_SERVICE_PRINCIPAL"
-	InvalidInputExceptionReasonInvalid_role_name                      InvalidInputExceptionReason = "INVALID_ROLE_NAME"
-	InvalidInputExceptionReasonInvalid_system_tags_parameter          InvalidInputExceptionReason = "INVALID_SYSTEM_TAGS_PARAMETER"
-	InvalidInputExceptionReasonDuplicate_tag_key                      InvalidInputExceptionReason = "DUPLICATE_TAG_KEY"
-	InvalidInputExceptionReasonTarget_not_supported                   InvalidInputExceptionReason = "TARGET_NOT_SUPPORTED"
+	InvalidInputExceptionReasonInvalidPartyTypeTarget             InvalidInputExceptionReason = "INVALID_PARTY_TYPE_TARGET"
+	InvalidInputExceptionReasonInvalidSyntaxOrganization          InvalidInputExceptionReason = "INVALID_SYNTAX_ORGANIZATION_ARN"
+	InvalidInputExceptionReasonInvalidSyntaxPolicy                InvalidInputExceptionReason = "INVALID_SYNTAX_POLICY_ID"
+	InvalidInputExceptionReasonInvalidEnum                        InvalidInputExceptionReason = "INVALID_ENUM"
+	InvalidInputExceptionReasonInvalidEnumPolicyType              InvalidInputExceptionReason = "INVALID_ENUM_POLICY_TYPE"
+	InvalidInputExceptionReasonInvalidListMember                  InvalidInputExceptionReason = "INVALID_LIST_MEMBER"
+	InvalidInputExceptionReasonMaxLengthExceeded                  InvalidInputExceptionReason = "MAX_LENGTH_EXCEEDED"
+	InvalidInputExceptionReasonMaxValueExceeded                   InvalidInputExceptionReason = "MAX_VALUE_EXCEEDED"
+	InvalidInputExceptionReasonMinLengthExceeded                  InvalidInputExceptionReason = "MIN_LENGTH_EXCEEDED"
+	InvalidInputExceptionReasonMinValueExceeded                   InvalidInputExceptionReason = "MIN_VALUE_EXCEEDED"
+	InvalidInputExceptionReasonImmutablePolicy                    InvalidInputExceptionReason = "IMMUTABLE_POLICY"
+	InvalidInputExceptionReasonInvalidPattern                     InvalidInputExceptionReason = "INVALID_PATTERN"
+	InvalidInputExceptionReasonInvalidPatternTargetId             InvalidInputExceptionReason = "INVALID_PATTERN_TARGET_ID"
+	InvalidInputExceptionReasonInputRequired                      InvalidInputExceptionReason = "INPUT_REQUIRED"
+	InvalidInputExceptionReasonInvalidPaginationToken             InvalidInputExceptionReason = "INVALID_NEXT_TOKEN"
+	InvalidInputExceptionReasonMaxFilterLimitExceeded             InvalidInputExceptionReason = "MAX_LIMIT_EXCEEDED_FILTER"
+	InvalidInputExceptionReasonMovingAccountBetweenDifferentRoots InvalidInputExceptionReason = "MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS"
+	InvalidInputExceptionReasonInvalidFullNameTarget              InvalidInputExceptionReason = "INVALID_FULL_NAME_TARGET"
+	InvalidInputExceptionReasonUnrecognizedServicePrincipal       InvalidInputExceptionReason = "UNRECOGNIZED_SERVICE_PRINCIPAL"
+	InvalidInputExceptionReasonInvalidRoleName                    InvalidInputExceptionReason = "INVALID_ROLE_NAME"
+	InvalidInputExceptionReasonInvalidSystemTagsParameter         InvalidInputExceptionReason = "INVALID_SYSTEM_TAGS_PARAMETER"
+	InvalidInputExceptionReasonDuplicateTagKey                    InvalidInputExceptionReason = "DUPLICATE_TAG_KEY"
+	InvalidInputExceptionReasonTargetNotSupported                 InvalidInputExceptionReason = "TARGET_NOT_SUPPORTED"
 )
 
 // Values returns all known values for InvalidInputExceptionReason. Note that this
@@ -427,8 +427,8 @@ type OrganizationFeatureSet string
 
 // Enum values for OrganizationFeatureSet
 const (
-	OrganizationFeatureSetAll                  OrganizationFeatureSet = "ALL"
-	OrganizationFeatureSetConsolidated_billing OrganizationFeatureSet = "CONSOLIDATED_BILLING"
+	OrganizationFeatureSetAll                 OrganizationFeatureSet = "ALL"
+	OrganizationFeatureSetConsolidatedBilling OrganizationFeatureSet = "CONSOLIDATED_BILLING"
 )
 
 // Values returns all known values for OrganizationFeatureSet. Note that this can
@@ -445,8 +445,8 @@ type ParentType string
 
 // Enum values for ParentType
 const (
-	ParentTypeRoot                ParentType = "ROOT"
-	ParentTypeOrganizational_unit ParentType = "ORGANIZATIONAL_UNIT"
+	ParentTypeRoot               ParentType = "ROOT"
+	ParentTypeOrganizationalUnit ParentType = "ORGANIZATIONAL_UNIT"
 )
 
 // Values returns all known values for ParentType. Note that this can be expanded
@@ -463,10 +463,10 @@ type PolicyType string
 
 // Enum values for PolicyType
 const (
-	PolicyTypeService_control_policy    PolicyType = "SERVICE_CONTROL_POLICY"
-	PolicyTypeTag_policy                PolicyType = "TAG_POLICY"
-	PolicyTypeBackup_policy             PolicyType = "BACKUP_POLICY"
-	PolicyTypeAiservices_opt_out_policy PolicyType = "AISERVICES_OPT_OUT_POLICY"
+	PolicyTypeServiceControlPolicy   PolicyType = "SERVICE_CONTROL_POLICY"
+	PolicyTypeTagPolicy              PolicyType = "TAG_POLICY"
+	PolicyTypeBackupPolicy           PolicyType = "BACKUP_POLICY"
+	PolicyTypeAiservicesOptOutPolicy PolicyType = "AISERVICES_OPT_OUT_POLICY"
 )
 
 // Values returns all known values for PolicyType. Note that this can be expanded
@@ -485,9 +485,9 @@ type PolicyTypeStatus string
 
 // Enum values for PolicyTypeStatus
 const (
-	PolicyTypeStatusEnabled         PolicyTypeStatus = "ENABLED"
-	PolicyTypeStatusPending_enable  PolicyTypeStatus = "PENDING_ENABLE"
-	PolicyTypeStatusPending_disable PolicyTypeStatus = "PENDING_DISABLE"
+	PolicyTypeStatusEnabled        PolicyTypeStatus = "ENABLED"
+	PolicyTypeStatusPendingEnable  PolicyTypeStatus = "PENDING_ENABLE"
+	PolicyTypeStatusPendingDisable PolicyTypeStatus = "PENDING_DISABLE"
 )
 
 // Values returns all known values for PolicyTypeStatus. Note that this can be
@@ -505,9 +505,9 @@ type TargetType string
 
 // Enum values for TargetType
 const (
-	TargetTypeAccount             TargetType = "ACCOUNT"
-	TargetTypeOrganizational_unit TargetType = "ORGANIZATIONAL_UNIT"
-	TargetTypeRoot                TargetType = "ROOT"
+	TargetTypeAccount            TargetType = "ACCOUNT"
+	TargetTypeOrganizationalUnit TargetType = "ORGANIZATIONAL_UNIT"
+	TargetTypeRoot               TargetType = "ROOT"
 )
 
 // Values returns all known values for TargetType. Note that this can be expanded

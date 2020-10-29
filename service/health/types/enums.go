@@ -42,9 +42,9 @@ type EventScopeCode string
 
 // Enum values for EventScopeCode
 const (
-	EventScopeCodePublic           EventScopeCode = "PUBLIC"
-	EventScopeCodeAccount_specific EventScopeCode = "ACCOUNT_SPECIFIC"
-	EventScopeCodeNone             EventScopeCode = "NONE"
+	EventScopeCodePublic          EventScopeCode = "PUBLIC"
+	EventScopeCodeAccountSpecific EventScopeCode = "ACCOUNT_SPECIFIC"
+	EventScopeCodeNone            EventScopeCode = "NONE"
 )
 
 // Values returns all known values for EventScopeCode. Note that this can be
@@ -82,10 +82,10 @@ type EventTypeCategory string
 
 // Enum values for EventTypeCategory
 const (
-	EventTypeCategoryIssue                EventTypeCategory = "issue"
-	EventTypeCategoryAccount_notification EventTypeCategory = "accountNotification"
-	EventTypeCategoryScheduled_change     EventTypeCategory = "scheduledChange"
-	EventTypeCategoryInvestigation        EventTypeCategory = "investigation"
+	EventTypeCategoryIssue               EventTypeCategory = "issue"
+	EventTypeCategoryAccountNotification EventTypeCategory = "accountNotification"
+	EventTypeCategoryScheduledChange     EventTypeCategory = "scheduledChange"
+	EventTypeCategoryInvestigation       EventTypeCategory = "investigation"
 )
 
 // Values returns all known values for EventTypeCategory. Note that this can be

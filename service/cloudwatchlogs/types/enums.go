@@ -24,12 +24,12 @@ type ExportTaskStatusCode string
 
 // Enum values for ExportTaskStatusCode
 const (
-	ExportTaskStatusCodeCancelled      ExportTaskStatusCode = "CANCELLED"
-	ExportTaskStatusCodeCompleted      ExportTaskStatusCode = "COMPLETED"
-	ExportTaskStatusCodeFailed         ExportTaskStatusCode = "FAILED"
-	ExportTaskStatusCodePending        ExportTaskStatusCode = "PENDING"
-	ExportTaskStatusCodePending_cancel ExportTaskStatusCode = "PENDING_CANCEL"
-	ExportTaskStatusCodeRunning        ExportTaskStatusCode = "RUNNING"
+	ExportTaskStatusCodeCancelled     ExportTaskStatusCode = "CANCELLED"
+	ExportTaskStatusCodeCompleted     ExportTaskStatusCode = "COMPLETED"
+	ExportTaskStatusCodeFailed        ExportTaskStatusCode = "FAILED"
+	ExportTaskStatusCodePending       ExportTaskStatusCode = "PENDING"
+	ExportTaskStatusCodePendingCancel ExportTaskStatusCode = "PENDING_CANCEL"
+	ExportTaskStatusCodeRunning       ExportTaskStatusCode = "RUNNING"
 )
 
 // Values returns all known values for ExportTaskStatusCode. Note that this can be

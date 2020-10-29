@@ -45,8 +45,8 @@ type ModifyDBParameterGroupInput struct {
 
 	// The name of the DB parameter group. Constraints:
 	//
-	//     * If supplied, must match
-	// the name of an existing DBParameterGroup.
+	// * If supplied, must match the
+	// name of an existing DBParameterGroup.
 	//
 	// This member is required.
 	DBParameterGroupName *string

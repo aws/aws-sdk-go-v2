@@ -15,24 +15,24 @@ import (
 // You can use the labeled data to train machine learning models. You can select
 // your workforce from one of three providers:
 //
-//     * A private workforce that you
+// * A private workforce that you
 // create. It can include employees, contractors, and outside experts. Use a
 // private workforce when want the data to stay within your organization or when a
 // specific set of skills is required.
 //
-//     * One or more vendors that you select
-// from the AWS Marketplace. Vendors provide expertise in specific areas.
+// * One or more vendors that you select from
+// the AWS Marketplace. Vendors provide expertise in specific areas.
 //
-//     *
-// The Amazon Mechanical Turk workforce. This is the largest workforce, but it
-// should only be used for public data or data that has been stripped of any
-// personally identifiable information.
+// * The Amazon
+// Mechanical Turk workforce. This is the largest workforce, but it should only be
+// used for public data or data that has been stripped of any personally
+// identifiable information.
 //
-// You can also use automated data labeling
-// to reduce the number of data objects that need to be labeled by a human.
-// Automated data labeling uses active learning to determine if a data object can
-// be labeled by machine or if it needs to be sent to a human worker. For more
-// information, see Using Automated Data Labeling
+// You can also use automated data labeling to reduce
+// the number of data objects that need to be labeled by a human. Automated data
+// labeling uses active learning to determine if a data object can be labeled by
+// machine or if it needs to be sent to a human worker. For more information, see
+// Using Automated Data Labeling
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-automated-labeling.html).
 // The data objects to be labeled are contained in an Amazon S3 bucket. You create
 // a manifest file that describes the location of each object. For more

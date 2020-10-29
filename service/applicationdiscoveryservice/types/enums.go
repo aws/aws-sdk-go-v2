@@ -32,9 +32,9 @@ type BatchDeleteImportDataErrorCode string
 
 // Enum values for BatchDeleteImportDataErrorCode
 const (
-	BatchDeleteImportDataErrorCodeNot_found             BatchDeleteImportDataErrorCode = "NOT_FOUND"
-	BatchDeleteImportDataErrorCodeInternal_server_error BatchDeleteImportDataErrorCode = "INTERNAL_SERVER_ERROR"
-	BatchDeleteImportDataErrorCodeOver_limit            BatchDeleteImportDataErrorCode = "OVER_LIMIT"
+	BatchDeleteImportDataErrorCodeNotFound            BatchDeleteImportDataErrorCode = "NOT_FOUND"
+	BatchDeleteImportDataErrorCodeInternalServerError BatchDeleteImportDataErrorCode = "INTERNAL_SERVER_ERROR"
+	BatchDeleteImportDataErrorCodeOverLimit           BatchDeleteImportDataErrorCode = "OVER_LIMIT"
 )
 
 // Values returns all known values for BatchDeleteImportDataErrorCode. Note that
@@ -75,13 +75,13 @@ type ContinuousExportStatus string
 
 // Enum values for ContinuousExportStatus
 const (
-	ContinuousExportStatusStart_in_progress ContinuousExportStatus = "START_IN_PROGRESS"
-	ContinuousExportStatusStart_failed      ContinuousExportStatus = "START_FAILED"
-	ContinuousExportStatusActive            ContinuousExportStatus = "ACTIVE"
-	ContinuousExportStatusError             ContinuousExportStatus = "ERROR"
-	ContinuousExportStatusStop_in_progress  ContinuousExportStatus = "STOP_IN_PROGRESS"
-	ContinuousExportStatusStop_failed       ContinuousExportStatus = "STOP_FAILED"
-	ContinuousExportStatusInactive          ContinuousExportStatus = "INACTIVE"
+	ContinuousExportStatusStartInProgress ContinuousExportStatus = "START_IN_PROGRESS"
+	ContinuousExportStatusStartFailed     ContinuousExportStatus = "START_FAILED"
+	ContinuousExportStatusActive          ContinuousExportStatus = "ACTIVE"
+	ContinuousExportStatusError           ContinuousExportStatus = "ERROR"
+	ContinuousExportStatusStopInProgress  ContinuousExportStatus = "STOP_IN_PROGRESS"
+	ContinuousExportStatusStopFailed      ContinuousExportStatus = "STOP_FAILED"
+	ContinuousExportStatusInactive        ContinuousExportStatus = "INACTIVE"
 )
 
 // Values returns all known values for ContinuousExportStatus. Note that this can
@@ -137,9 +137,9 @@ type ExportStatus string
 
 // Enum values for ExportStatus
 const (
-	ExportStatusFailed      ExportStatus = "FAILED"
-	ExportStatusSucceeded   ExportStatus = "SUCCEEDED"
-	ExportStatusIn_progress ExportStatus = "IN_PROGRESS"
+	ExportStatusFailed     ExportStatus = "FAILED"
+	ExportStatusSucceeded  ExportStatus = "SUCCEEDED"
+	ExportStatusInProgress ExportStatus = "IN_PROGRESS"
 )
 
 // Values returns all known values for ExportStatus. Note that this can be expanded
@@ -157,17 +157,17 @@ type ImportStatus string
 
 // Enum values for ImportStatus
 const (
-	ImportStatusImport_in_progress                  ImportStatus = "IMPORT_IN_PROGRESS"
-	ImportStatusImport_complete                     ImportStatus = "IMPORT_COMPLETE"
-	ImportStatusImport_complete_with_errors         ImportStatus = "IMPORT_COMPLETE_WITH_ERRORS"
-	ImportStatusImport_failed                       ImportStatus = "IMPORT_FAILED"
-	ImportStatusImport_failed_server_limit_exceeded ImportStatus = "IMPORT_FAILED_SERVER_LIMIT_EXCEEDED"
-	ImportStatusImport_failed_record_limit_exceeded ImportStatus = "IMPORT_FAILED_RECORD_LIMIT_EXCEEDED"
-	ImportStatusDelete_in_progress                  ImportStatus = "DELETE_IN_PROGRESS"
-	ImportStatusDelete_complete                     ImportStatus = "DELETE_COMPLETE"
-	ImportStatusDelete_failed                       ImportStatus = "DELETE_FAILED"
-	ImportStatusDelete_failed_limit_exceeded        ImportStatus = "DELETE_FAILED_LIMIT_EXCEEDED"
-	ImportStatusInternal_error                      ImportStatus = "INTERNAL_ERROR"
+	ImportStatusImportInProgress                ImportStatus = "IMPORT_IN_PROGRESS"
+	ImportStatusImportComplete                  ImportStatus = "IMPORT_COMPLETE"
+	ImportStatusImportCompleteWithErrors        ImportStatus = "IMPORT_COMPLETE_WITH_ERRORS"
+	ImportStatusImportFailed                    ImportStatus = "IMPORT_FAILED"
+	ImportStatusImportFailedServerLimitExceeded ImportStatus = "IMPORT_FAILED_SERVER_LIMIT_EXCEEDED"
+	ImportStatusImportFailedRecordLimitExceeded ImportStatus = "IMPORT_FAILED_RECORD_LIMIT_EXCEEDED"
+	ImportStatusDeleteInProgress                ImportStatus = "DELETE_IN_PROGRESS"
+	ImportStatusDeleteComplete                  ImportStatus = "DELETE_COMPLETE"
+	ImportStatusDeleteFailed                    ImportStatus = "DELETE_FAILED"
+	ImportStatusDeleteFailedLimitExceeded       ImportStatus = "DELETE_FAILED_LIMIT_EXCEEDED"
+	ImportStatusInternalError                   ImportStatus = "INTERNAL_ERROR"
 )
 
 // Values returns all known values for ImportStatus. Note that this can be expanded
@@ -193,9 +193,9 @@ type ImportTaskFilterName string
 
 // Enum values for ImportTaskFilterName
 const (
-	ImportTaskFilterNameImport_task_id ImportTaskFilterName = "IMPORT_TASK_ID"
-	ImportTaskFilterNameStatus         ImportTaskFilterName = "STATUS"
-	ImportTaskFilterNameName           ImportTaskFilterName = "NAME"
+	ImportTaskFilterNameImportTaskId ImportTaskFilterName = "IMPORT_TASK_ID"
+	ImportTaskFilterNameStatus       ImportTaskFilterName = "STATUS"
+	ImportTaskFilterNameName         ImportTaskFilterName = "NAME"
 )
 
 // Values returns all known values for ImportTaskFilterName. Note that this can be

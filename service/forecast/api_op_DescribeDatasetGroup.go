@@ -16,15 +16,14 @@ import (
 // addition to listing the parameters provided in the CreateDatasetGroup request,
 // this operation includes the following properties:
 //
-//     * DatasetArns - The
-// datasets belonging to the group.
+// * DatasetArns - The datasets
+// belonging to the group.
 //
-//     * CreationTime
+// * CreationTime
 //
-//     *
-// LastModificationTime
+// * LastModificationTime
 //
-//     * Status
+// * Status
 func (c *Client) DescribeDatasetGroup(ctx context.Context, params *DescribeDatasetGroupInput, optFns ...func(*Options)) (*DescribeDatasetGroupOutput, error) {
 	if params == nil {
 		params = &DescribeDatasetGroupInput{}
@@ -73,20 +72,20 @@ type DescribeDatasetGroupOutput struct {
 
 	// The status of the dataset group. States include:
 	//
-	//     * ACTIVE
+	// * ACTIVE
 	//
-	//     *
-	// CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED
+	// * CREATE_PENDING,
+	// CREATE_IN_PROGRESS, CREATE_FAILED
 	//
-	//     * DELETE_PENDING,
-	// DELETE_IN_PROGRESS, DELETE_FAILED
+	// * DELETE_PENDING, DELETE_IN_PROGRESS,
+	// DELETE_FAILED
 	//
-	//     * UPDATE_PENDING, UPDATE_IN_PROGRESS,
-	// UPDATE_FAILED
+	// * UPDATE_PENDING, UPDATE_IN_PROGRESS, UPDATE_FAILED
 	//
-	// The UPDATE states apply when you call the UpdateDatasetGroup
-	// operation. The Status of the dataset group must be ACTIVE before you can use the
-	// dataset group to create a predictor.
+	// The UPDATE
+	// states apply when you call the UpdateDatasetGroup operation. The Status of the
+	// dataset group must be ACTIVE before you can use the dataset group to create a
+	// predictor.
 	Status *string
 
 	// Metadata pertaining to the operation's result.

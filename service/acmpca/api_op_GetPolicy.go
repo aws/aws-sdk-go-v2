@@ -16,25 +16,25 @@ import (
 // (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_PutPolicy.html) and
 // removed with DeletePolicy. About Policies
 //
-//     * A policy grants access on a
-// private CA to an AWS customer account, to AWS Organizations, or to an AWS
-// Organizations unit. Policies are under the control of a CA administrator. For
-// more information, see Using a Resource Based Policy with ACM Private CA.
+// * A policy grants access on a private
+// CA to an AWS customer account, to AWS Organizations, or to an AWS Organizations
+// unit. Policies are under the control of a CA administrator. For more
+// information, see Using a Resource Based Policy with ACM Private CA.
 //
-//     *
-// A policy permits a user of AWS Certificate Manager (ACM) to issue ACM
-// certificates signed by a CA in another account.
+// * A policy
+// permits a user of AWS Certificate Manager (ACM) to issue ACM certificates signed
+// by a CA in another account.
 //
-//     * For ACM to manage
-// automatic renewal of these certificates, the ACM user must configure a Service
-// Linked Role (SLR). The SLR allows the ACM service to assume the identity of the
-// user, subject to confirmation against the ACM Private CA policy. For more
-// information, see Using a Service Linked Role with ACM
+// * For ACM to manage automatic renewal of these
+// certificates, the ACM user must configure a Service Linked Role (SLR). The SLR
+// allows the ACM service to assume the identity of the user, subject to
+// confirmation against the ACM Private CA policy. For more information, see Using
+// a Service Linked Role with ACM
 // (https://docs.aws.amazon.com/acm/latest/userguide/acm-slr.html).
 //
-//     * Updates
-// made in AWS Resource Manager (RAM) are reflected in policies. For more
-// information, see Using AWS Resource Access Manager (RAM) with ACM Private CA.
+// * Updates made
+// in AWS Resource Manager (RAM) are reflected in policies. For more information,
+// see Using AWS Resource Access Manager (RAM) with ACM Private CA.
 func (c *Client) GetPolicy(ctx context.Context, params *GetPolicyInput, optFns ...func(*Options)) (*GetPolicyOutput, error) {
 	if params == nil {
 		params = &GetPolicyInput{}

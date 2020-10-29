@@ -43,13 +43,13 @@ type CreateDBInstanceInput struct {
 	// The DB instance identifier. This parameter is stored as a lowercase string.
 	// Constraints:
 	//
-	//     * Must contain from 1 to 63 letters, numbers, or hyphens.
+	// * Must contain from 1 to 63 letters, numbers, or hyphens.
 	//
+	// * First
+	// character must be a letter.
 	//
-	// * First character must be a letter.
-	//
-	//     * Can't end with a hyphen or contain
-	// two consecutive hyphens.
+	// * Can't end with a hyphen or contain two
+	// consecutive hyphens.
 	//
 	// Example: mydbinstance
 	//
@@ -59,37 +59,37 @@ type CreateDBInstanceInput struct {
 	// The name of the database engine to be used for this instance. Not every database
 	// engine is available for every AWS Region. Valid Values:
 	//
-	//     * aurora (for MySQL
+	// * aurora (for MySQL
 	// 5.6-compatible Aurora)
 	//
-	//     * aurora-mysql (for MySQL 5.7-compatible Aurora)
+	// * aurora-mysql (for MySQL 5.7-compatible Aurora)
 	//
+	// *
+	// aurora-postgresql
 	//
-	// * aurora-postgresql
+	// * mariadb
 	//
-	//     * mariadb
+	// * mysql
 	//
-	//     * mysql
+	// * oracle-ee
 	//
-	//     * oracle-ee
+	// * oracle-se2
 	//
-	//     *
-	// oracle-se2
+	// *
+	// oracle-se1
 	//
-	//     * oracle-se1
+	// * oracle-se
 	//
-	//     * oracle-se
+	// * postgres
 	//
-	//     * postgres
+	// * sqlserver-ee
 	//
-	//     *
-	// sqlserver-ee
+	// * sqlserver-se
 	//
-	//     * sqlserver-se
+	// *
+	// sqlserver-ex
 	//
-	//     * sqlserver-ex
-	//
-	//     * sqlserver-web
+	// * sqlserver-web
 	//
 	// This member is required.
 	Engine *string
@@ -100,79 +100,78 @@ type CreateDBInstanceInput struct {
 	// for the space that you use in an Aurora cluster volume. MySQL Constraints to the
 	// amount of storage for each storage type are the following:
 	//
-	//     * General
-	// Purpose (SSD) storage (gp2): Must be an integer from 20 to 65536.
+	// * General Purpose
+	// (SSD) storage (gp2): Must be an integer from 20 to 65536.
 	//
-	//     *
-	// Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.
+	// * Provisioned IOPS
+	// storage (io1): Must be an integer from 100 to 65536.
 	//
-	//     *
-	// Magnetic storage (standard): Must be an integer from 5 to 3072.
+	// * Magnetic storage
+	// (standard): Must be an integer from 5 to 3072.
 	//
-	// MariaDB
-	// Constraints to the amount of storage for each storage type are the following:
+	// MariaDB Constraints to the
+	// amount of storage for each storage type are the following:
 	//
+	// * General Purpose
+	// (SSD) storage (gp2): Must be an integer from 20 to 65536.
 	//
-	// * General Purpose (SSD) storage (gp2): Must be an integer from 20 to 65536.
+	// * Provisioned IOPS
+	// storage (io1): Must be an integer from 100 to 65536.
 	//
+	// * Magnetic storage
+	// (standard): Must be an integer from 5 to 3072.
 	//
-	// * Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.
+	// PostgreSQL Constraints to the
+	// amount of storage for each storage type are the following:
 	//
-	//     *
-	// Magnetic storage (standard): Must be an integer from 5 to 3072.
+	// * General Purpose
+	// (SSD) storage (gp2): Must be an integer from 20 to 65536.
 	//
-	// PostgreSQL
-	// Constraints to the amount of storage for each storage type are the following:
+	// * Provisioned IOPS
+	// storage (io1): Must be an integer from 100 to 65536.
 	//
+	// * Magnetic storage
+	// (standard): Must be an integer from 5 to 3072.
 	//
-	// * General Purpose (SSD) storage (gp2): Must be an integer from 20 to 65536.
+	// Oracle Constraints to the amount
+	// of storage for each storage type are the following:
 	//
+	// * General Purpose (SSD)
+	// storage (gp2): Must be an integer from 20 to 65536.
 	//
-	// * Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.
+	// * Provisioned IOPS storage
+	// (io1): Must be an integer from 100 to 65536.
 	//
-	//     *
-	// Magnetic storage (standard): Must be an integer from 5 to 3072.
+	// * Magnetic storage (standard):
+	// Must be an integer from 10 to 3072.
 	//
-	// Oracle
-	// Constraints to the amount of storage for each storage type are the following:
+	// SQL Server Constraints to the amount of
+	// storage for each storage type are the following:
 	//
+	// * General Purpose (SSD)
+	// storage (gp2):
 	//
-	// * General Purpose (SSD) storage (gp2): Must be an integer from 20 to 65536.
-	//
-	//
-	// * Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.
-	//
-	//     *
-	// Magnetic storage (standard): Must be an integer from 10 to 3072.
-	//
-	// SQL Server
-	// Constraints to the amount of storage for each storage type are the following:
-	//
-	//
-	// * General Purpose (SSD) storage (gp2):
-	//
-	//         * Enterprise and Standard
-	// editions: Must be an integer from 200 to 16384.
-	//
-	//         * Web and Express
-	// editions: Must be an integer from 20 to 16384.
-	//
-	//     * Provisioned IOPS storage
-	// (io1):
-	//
-	//         * Enterprise and Standard editions: Must be an integer from 200
+	// * Enterprise and Standard editions: Must be an integer from 200
 	// to 16384.
 	//
-	//         * Web and Express editions: Must be an integer from 100 to
-	// 16384.
+	// * Web and Express editions: Must be an integer from 20 to 16384.
 	//
-	//     * Magnetic storage (standard):
+	// *
+	// Provisioned IOPS storage (io1):
 	//
-	//         * Enterprise and Standard
+	// * Enterprise and Standard editions: Must be an
+	// integer from 200 to 16384.
+	//
+	// * Web and Express editions: Must be an integer from
+	// 100 to 16384.
+	//
+	// * Magnetic storage (standard):
+	//
+	// * Enterprise and Standard
 	// editions: Must be an integer from 200 to 1024.
 	//
-	//         * Web and Express
-	// editions: Must be an integer from 20 to 1024.
+	// * Web and Express editions: Must
+	// be an integer from 20 to 1024.
 	AllocatedStorage *int32
 
 	// A value that indicates whether minor engine upgrades are applied automatically
@@ -198,11 +197,11 @@ type CreateDBInstanceInput struct {
 	// disables automated backups. Amazon Aurora Not applicable. The retention period
 	// for automated backups is managed by the DB cluster. Default: 1 Constraints:
 	//
+	// *
+	// Must be a value from 0 to 35
 	//
-	// * Must be a value from 0 to 35
-	//
-	//     * Can't be set to 0 if the DB instance is a
-	// source to read replicas
+	// * Can't be set to 0 if the DB instance is a source
+	// to read replicas
 	BackupRetentionPeriod *int32
 
 	// For supported engines, indicates that the DB instance should be associated with
@@ -224,71 +223,70 @@ type CreateDBInstanceInput struct {
 	// this parameter isn't specified, no database is created in the DB instance.
 	// Constraints:
 	//
-	//     * Must contain 1 to 64 letters or numbers.
+	// * Must contain 1 to 64 letters or numbers.
 	//
-	//     * Must begin
-	// with a letter. Subsequent characters can be letters, underscores, or digits
-	// (0-9).
+	// * Must begin with a
+	// letter. Subsequent characters can be letters, underscores, or digits (0-9).
 	//
-	//     * Can't be a word reserved by the specified database engine
+	// *
+	// Can't be a word reserved by the specified database engine
 	//
-	// MariaDB
-	// The name of the database to create when the DB instance is created. If this
-	// parameter isn't specified, no database is created in the DB instance.
-	// Constraints:
-	//
-	//     * Must contain 1 to 64 letters or numbers.
-	//
-	//     * Must begin
-	// with a letter. Subsequent characters can be letters, underscores, or digits
-	// (0-9).
-	//
-	//     * Can't be a word reserved by the specified database
-	// engine
-	//
-	// PostgreSQL The name of the database to create when the DB instance is
-	// created. If this parameter isn't specified, the default "postgres" database is
-	// created in the DB instance. Constraints:
-	//
-	//     * Must contain 1 to 63 letters,
-	// numbers, or underscores.
-	//
-	//     * Must begin with a letter. Subsequent characters
-	// can be letters, underscores, or digits (0-9).
-	//
-	//     * Can't be a word reserved by
-	// the specified database engine
-	//
-	// Oracle The Oracle System ID (SID) of the created
-	// DB instance. If you specify null, the default value ORCL is used. You can't
-	// specify the string NULL, or any other reserved word, for DBName. Default: ORCL
-	// Constraints:
-	//
-	//     * Can't be longer than 8 characters
-	//
-	// SQL Server Not
-	// applicable. Must be null. Amazon Aurora The name of the database to create when
-	// the primary instance of the DB cluster is created. If this parameter isn't
+	// MariaDB The name of
+	// the database to create when the DB instance is created. If this parameter isn't
 	// specified, no database is created in the DB instance. Constraints:
 	//
-	//     * Must
+	// * Must
 	// contain 1 to 64 letters or numbers.
 	//
-	//     * Can't be a word reserved by the
-	// specified database engine
+	// * Must begin with a letter. Subsequent
+	// characters can be letters, underscores, or digits (0-9).
+	//
+	// * Can't be a word
+	// reserved by the specified database engine
+	//
+	// PostgreSQL The name of the database
+	// to create when the DB instance is created. If this parameter isn't specified,
+	// the default "postgres" database is created in the DB instance. Constraints:
+	//
+	// *
+	// Must contain 1 to 63 letters, numbers, or underscores.
+	//
+	// * Must begin with a
+	// letter. Subsequent characters can be letters, underscores, or digits (0-9).
+	//
+	// *
+	// Can't be a word reserved by the specified database engine
+	//
+	// Oracle The Oracle
+	// System ID (SID) of the created DB instance. If you specify null, the default
+	// value ORCL is used. You can't specify the string NULL, or any other reserved
+	// word, for DBName. Default: ORCL Constraints:
+	//
+	// * Can't be longer than 8
+	// characters
+	//
+	// SQL Server Not applicable. Must be null. Amazon Aurora The name of
+	// the database to create when the primary instance of the DB cluster is created.
+	// If this parameter isn't specified, no database is created in the DB instance.
+	// Constraints:
+	//
+	// * Must contain 1 to 64 letters or numbers.
+	//
+	// * Can't be a word
+	// reserved by the specified database engine
 	DBName *string
 
 	// The name of the DB parameter group to associate with this DB instance. If you do
 	// not specify a value, then the default DB parameter group for the specified DB
 	// engine and version is used. Constraints:
 	//
-	//     * Must be 1 to 255 letters,
-	// numbers, or hyphens.
+	// * Must be 1 to 255 letters, numbers,
+	// or hyphens.
 	//
-	//     * First character must be a letter
+	// * First character must be a letter
 	//
-	//     * Can't end
-	// with a hyphen or contain two consecutive hyphens
+	// * Can't end with a hyphen or
+	// contain two consecutive hyphens
 	DBParameterGroupName *string
 
 	// A list of DB security groups to associate with this DB instance. Default: The
@@ -340,26 +338,26 @@ type CreateDBInstanceInput struct {
 	// Amazon Aurora Not applicable. Mapping AWS IAM accounts to database accounts is
 	// managed by the DB cluster. MySQL
 	//
-	//     * For MySQL 5.6, minor version 5.6.34 or
+	// * For MySQL 5.6, minor version 5.6.34 or
 	// higher
 	//
-	//     * For MySQL 5.7, minor version 5.7.16 or higher
+	// * For MySQL 5.7, minor version 5.7.16 or higher
 	//
-	//     * For MySQL
-	// 8.0, minor version 8.0.16 or higher
+	// * For MySQL 8.0, minor
+	// version 8.0.16 or higher
 	//
 	// PostgreSQL
 	//
-	//     * For PostgreSQL 9.5, minor
-	// version 9.5.15 or higher
+	// * For PostgreSQL 9.5, minor version 9.5.15
+	// or higher
 	//
-	//     * For PostgreSQL 9.6, minor version 9.6.11 or
-	// higher
+	// * For PostgreSQL 9.6, minor version 9.6.11 or higher
 	//
-	//     * PostgreSQL 10.6, 10.7, and 10.9
+	// * PostgreSQL
+	// 10.6, 10.7, and 10.9
 	//
-	// For more information, see  IAM
-	// Database Authentication for MySQL and PostgreSQL
+	// For more information, see  IAM Database Authentication for
+	// MySQL and PostgreSQL
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html)
 	// in the Amazon RDS User Guide.
 	EnableIAMDatabaseAuthentication *bool
@@ -429,64 +427,62 @@ type CreateDBInstanceInput struct {
 	// The name for the master user. Amazon Aurora Not applicable. The name for the
 	// master user is managed by the DB cluster. MariaDB Constraints:
 	//
-	//     * Required
-	// for MariaDB.
+	// * Required for
+	// MariaDB.
 	//
-	//     * Must be 1 to 16 letters or numbers.
+	// * Must be 1 to 16 letters or numbers.
 	//
-	//     * Can't be a
-	// reserved word for the chosen database engine.
+	// * Can't be a reserved word for
+	// the chosen database engine.
 	//
-	// Microsoft SQL Server
+	// Microsoft SQL Server Constraints:
+	//
+	// * Required for
+	// SQL Server.
+	//
+	// * Must be 1 to 128 letters or numbers.
+	//
+	// * The first character must
+	// be a letter.
+	//
+	// * Can't be a reserved word for the chosen database engine.
+	//
+	// MySQL
 	// Constraints:
 	//
-	//     * Required for SQL Server.
+	// * Required for MySQL.
 	//
-	//     * Must be 1 to 128 letters or
-	// numbers.
+	// * Must be 1 to 16 letters or numbers.
 	//
-	//     * The first character must be a letter.
+	// *
+	// First character must be a letter.
 	//
-	//     * Can't be a reserved
-	// word for the chosen database engine.
-	//
-	// MySQL Constraints:
-	//
-	//     * Required for
-	// MySQL.
-	//
-	//     * Must be 1 to 16 letters or numbers.
-	//
-	//     * First character must be
-	// a letter.
-	//
-	//     * Can't be a reserved word for the chosen database
-	// engine.
+	// * Can't be a reserved word for the chosen
+	// database engine.
 	//
 	// Oracle Constraints:
 	//
-	//     * Required for Oracle.
+	// * Required for Oracle.
 	//
-	//     * Must be 1 to 30
+	// * Must be 1 to 30
 	// letters or numbers.
 	//
-	//     * First character must be a letter.
+	// * First character must be a letter.
 	//
-	//     * Can't be a
-	// reserved word for the chosen database engine.
+	// * Can't be a reserved
+	// word for the chosen database engine.
 	//
 	// PostgreSQL Constraints:
 	//
-	//     *
-	// Required for PostgreSQL.
+	// * Required for
+	// PostgreSQL.
 	//
-	//     * Must be 1 to 63 letters or numbers.
+	// * Must be 1 to 63 letters or numbers.
 	//
-	//     * First
-	// character must be a letter.
+	// * First character must be a
+	// letter.
 	//
-	//     * Can't be a reserved word for the chosen
-	// database engine.
+	// * Can't be a reserved word for the chosen database engine.
 	MasterUsername *string
 
 	// The upper limit to which Amazon RDS can automatically scale the storage of the
@@ -555,16 +551,15 @@ type CreateDBInstanceInput struct {
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow)
 	// in the Amazon RDS User Guide. Constraints:
 	//
-	//     * Must be in the format
+	// * Must be in the format
 	// hh24:mi-hh24:mi.
 	//
-	//     * Must be in Universal Coordinated Time (UTC).
+	// * Must be in Universal Coordinated Time (UTC).
 	//
-	//     * Must
-	// not conflict with the preferred maintenance window.
+	// * Must not
+	// conflict with the preferred maintenance window.
 	//
-	//     * Must be at least 30
-	// minutes.
+	// * Must be at least 30 minutes.
 	PreferredBackupWindow *string
 
 	// The time range each week during which system maintenance can occur, in Universal
@@ -599,22 +594,22 @@ type CreateDBInstanceInput struct {
 	// DBSubnetGroupName isn't specified, and PubliclyAccessible isn't specified, the
 	// following applies:
 	//
-	//     * If the default VPC in the target region doesn’t have
-	// an Internet gateway attached to it, the DB instance is private.
+	// * If the default VPC in the target region doesn’t have an
+	// Internet gateway attached to it, the DB instance is private.
 	//
-	//     * If the
-	// default VPC in the target region has an Internet gateway attached to it, the DB
-	// instance is public.
+	// * If the default
+	// VPC in the target region has an Internet gateway attached to it, the DB instance
+	// is public.
 	//
-	// If DBSubnetGroupName is specified, and PubliclyAccessible
-	// isn't specified, the following applies:
+	// If DBSubnetGroupName is specified, and PubliclyAccessible isn't
+	// specified, the following applies:
 	//
-	//     * If the subnets are part of a VPC
-	// that doesn’t have an Internet gateway attached to it, the DB instance is
-	// private.
+	// * If the subnets are part of a VPC that
+	// doesn’t have an Internet gateway attached to it, the DB instance is private.
 	//
-	//     * If the subnets are part of a VPC that has an Internet gateway
-	// attached to it, the DB instance is public.
+	// *
+	// If the subnets are part of a VPC that has an Internet gateway attached to it,
+	// the DB instance is public.
 	PubliclyAccessible *bool
 
 	// A value that indicates whether the DB instance is encrypted. By default, it

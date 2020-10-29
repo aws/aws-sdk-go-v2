@@ -84,13 +84,13 @@ type DescribedServer struct {
 	// protocol client can connect to your server's endpoint. The available protocols
 	// are:
 	//
-	//     * SFTP (Secure Shell (SSH) File Transfer Protocol): File transfer over
+	// * SFTP (Secure Shell (SSH) File Transfer Protocol): File transfer over
 	// SSH
 	//
-	//     * FTPS (File Transfer Protocol Secure): File transfer with TLS
+	// * FTPS (File Transfer Protocol Secure): File transfer with TLS
 	// encryption
 	//
-	//     * FTP (File Transfer Protocol): Unencrypted file transfer
+	// * FTP (File Transfer Protocol): Unencrypted file transfer
 	Protocols []Protocol
 
 	// Specifies the name of the security policy that is attached to the server.

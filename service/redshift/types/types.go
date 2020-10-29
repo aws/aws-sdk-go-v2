@@ -60,20 +60,19 @@ type Cluster struct {
 	// The availability status of the cluster for queries. Possible values are the
 	// following:
 	//
-	//     * Available - The cluster is available for queries.
+	// * Available - The cluster is available for queries.
 	//
-	//     *
-	// Unavailable - The cluster is not available for queries.
+	// * Unavailable -
+	// The cluster is not available for queries.
 	//
-	//     * Maintenance - The
-	// cluster is intermittently available for queries due to maintenance activities.
+	// * Maintenance - The cluster is
+	// intermittently available for queries due to maintenance activities.
 	//
+	// * Modifying
+	// - The cluster is intermittently available for queries due to changes that modify
+	// the cluster.
 	//
-	// * Modifying - The cluster is intermittently available for queries due to changes
-	// that modify the cluster.
-	//
-	//     * Failed - The cluster failed and is not available
-	// for queries.
+	// * Failed - The cluster failed and is not available for queries.
 	ClusterAvailabilityStatus *string
 
 	// The date and time that the cluster was created.
@@ -109,51 +108,51 @@ type Cluster struct {
 
 	// The current state of the cluster. Possible values are the following:
 	//
-	//     *
+	// *
 	// available
 	//
-	//     * available, prep-for-resize
+	// * available, prep-for-resize
 	//
-	//     * available, resize-cleanup
+	// * available, resize-cleanup
 	//
+	// *
+	// cancelling-resize
 	//
-	// * cancelling-resize
+	// * creating
 	//
-	//     * creating
+	// * deleting
 	//
-	//     * deleting
+	// * final-snapshot
 	//
-	//     * final-snapshot
-	//
-	//     *
+	// *
 	// hardware-failure
 	//
-	//     * incompatible-hsm
+	// * incompatible-hsm
 	//
-	//     * incompatible-network
+	// * incompatible-network
 	//
-	//     *
+	// *
 	// incompatible-parameters
 	//
-	//     * incompatible-restore
+	// * incompatible-restore
 	//
-	//     * modifying
+	// * modifying
 	//
-	//     *
-	// paused
+	// * paused
 	//
-	//     * rebooting
+	// *
+	// rebooting
 	//
-	//     * renaming
+	// * renaming
 	//
-	//     * resizing
+	// * resizing
 	//
-	//     * rotating-keys
-	//
+	// * rotating-keys
 	//
 	// * storage-full
 	//
-	//     * updating-hsm
+	// *
+	// updating-hsm
 	ClusterStatus *string
 
 	// The name of the subnet group that is associated with the cluster. This parameter
@@ -203,10 +202,10 @@ type Cluster struct {
 	// The status of next expected snapshot for clusters having a valid snapshot
 	// schedule and backups enabled. Possible values are the following:
 	//
-	//     * OnTrack
-	// - The next snapshot is expected to be taken on time.
+	// * OnTrack -
+	// The next snapshot is expected to be taken on time.
 	//
-	//     * Pending - The next
+	// * Pending - The next
 	// snapshot is pending to be taken.
 	ExpectedNextSnapshotScheduleTimeStatus *string
 
@@ -265,10 +264,10 @@ type Cluster struct {
 
 	// Returns the following:
 	//
-	//     * AllowCancelResize: a boolean value indicating if
-	// the resize operation can be cancelled.
+	// * AllowCancelResize: a boolean value indicating if the
+	// resize operation can be cancelled.
 	//
-	//     * ResizeType: Returns ClassicResize
+	// * ResizeType: Returns ClassicResize
 	ResizeInfo *ResizeInfo
 
 	// A value that describes the status of a cluster restore action. This parameter
@@ -327,14 +326,14 @@ type ClusterIamRole struct {
 	// A value that describes the status of the IAM role's association with an Amazon
 	// Redshift cluster. The following are possible statuses and descriptions.
 	//
-	//     *
+	// *
 	// in-sync: The role is available for use by the cluster.
 	//
-	//     * adding: The role
-	// is in the process of being associated with the cluster.
+	// * adding: The role is in
+	// the process of being associated with the cluster.
 	//
-	//     * removing: The
-	// role is in the process of being disassociated with the cluster.
+	// * removing: The role is in
+	// the process of being disassociated with the cluster.
 	ApplyStatus *string
 
 	// The Amazon Resource Name (ARN) of the IAM role, for example,
@@ -398,28 +397,28 @@ type ClusterParameterStatus struct {
 	// the database, waiting for a cluster reboot, or encountered an error when being
 	// applied. The following are possible statuses and descriptions.
 	//
-	//     * in-sync:
-	// The parameter value is in sync with the database.
+	// * in-sync: The
+	// parameter value is in sync with the database.
 	//
-	//     * pending-reboot: The
-	// parameter value will be applied after the cluster reboots.
+	// * pending-reboot: The parameter
+	// value will be applied after the cluster reboots.
 	//
-	//     * applying: The
-	// parameter value is being applied to the database.
+	// * applying: The parameter
+	// value is being applied to the database.
 	//
-	//     * invalid-parameter:
-	// Cannot apply the parameter value because it has an invalid value or syntax.
+	// * invalid-parameter: Cannot apply the
+	// parameter value because it has an invalid value or syntax.
 	//
+	// * apply-deferred:
+	// The parameter contains static property changes. The changes are deferred until
+	// the cluster reboots.
 	//
-	// * apply-deferred: The parameter contains static property changes. The changes
-	// are deferred until the cluster reboots.
+	// * apply-error: Cannot connect to the cluster. The
+	// parameter change will be applied after the cluster reboots.
 	//
-	//     * apply-error: Cannot connect to
-	// the cluster. The parameter change will be applied after the cluster reboots.
-	//
-	//
-	// * unknown-error: Cannot apply the parameter change right now. The change will be
-	// applied after the cluster reboots.
+	// * unknown-error:
+	// Cannot apply the parameter change right now. The change will be applied after
+	// the cluster reboots.
 	ParameterApplyStatus *string
 
 	// The name of the parameter.
@@ -716,11 +715,11 @@ type EventSubscription struct {
 	// The status of the Amazon Redshift event notification subscription.
 	// Constraints:
 	//
-	//     * Can be one of the following: active | no-permission |
+	// * Can be one of the following: active | no-permission |
 	// topic-not-exist
 	//
-	//     * The status "no-permission" indicates that Amazon Redshift
-	// no longer has permission to post to the Amazon SNS topic. The status
+	// * The status "no-permission" indicates that Amazon Redshift no
+	// longer has permission to post to the Amazon SNS topic. The status
 	// "topic-not-exist" indicates that the topic was deleted after the subscription
 	// was created.
 	Status *string
@@ -1011,21 +1010,20 @@ type ReservedNode struct {
 
 	// The state of the reserved compute node. Possible Values:
 	//
-	//     *
-	// pending-payment-This reserved node has recently been purchased, and the sale has
-	// been approved, but payment has not yet been confirmed.
+	// * pending-payment-This
+	// reserved node has recently been purchased, and the sale has been approved, but
+	// payment has not yet been confirmed.
 	//
-	//     * active-This
-	// reserved node is owned by the caller and is available for use.
+	// * active-This reserved node is owned by the
+	// caller and is available for use.
 	//
-	//     *
-	// payment-failed-Payment failed for the purchase attempt.
+	// * payment-failed-Payment failed for the
+	// purchase attempt.
 	//
-	//     * retired-The
-	// reserved node is no longer available.
+	// * retired-The reserved node is no longer available.
 	//
-	//     * exchanging-The owner is exchanging
-	// the reserved node for another reserved node.
+	// *
+	// exchanging-The owner is exchanging the reserved node for another reserved node.
 	State *string
 
 	// The hourly rate Amazon Redshift charges you for this reserved node.
@@ -1351,13 +1349,13 @@ type Snapshot struct {
 	// The snapshot status. The value of the status depends on the API operation
 	// used:
 	//
-	//     * CreateClusterSnapshot and CopyClusterSnapshot returns status as
+	// * CreateClusterSnapshot and CopyClusterSnapshot returns status as
 	// "creating".
 	//
-	//     * DescribeClusterSnapshots returns status as "creating",
+	// * DescribeClusterSnapshots returns status as "creating",
 	// "available", "final snapshot", or "failed".
 	//
-	//     * DeleteClusterSnapshot returns
+	// * DeleteClusterSnapshot returns
 	// status as "deleted".
 	Status *string
 
@@ -1544,29 +1542,29 @@ type TaggedResource struct {
 	// The type of resource with which the tag is associated. Valid resource types
 	// are:
 	//
-	//     * Cluster
+	// * Cluster
 	//
-	//     * CIDR/IP
+	// * CIDR/IP
 	//
-	//     * EC2 security group
+	// * EC2 security group
 	//
-	//     * Snapshot
+	// * Snapshot
 	//
+	// * Cluster security
+	// group
 	//
-	// * Cluster security group
+	// * Subnet group
 	//
-	//     * Subnet group
+	// * HSM connection
 	//
-	//     * HSM connection
+	// * HSM certificate
 	//
-	//     * HSM
-	// certificate
+	// * Parameter
+	// group
 	//
-	//     * Parameter group
-	//
-	// For more information about Amazon Redshift
-	// resource types and constructing ARNs, go to Constructing an Amazon Redshift
-	// Amazon Resource Name (ARN)
+	// For more information about Amazon Redshift resource types and
+	// constructing ARNs, go to Constructing an Amazon Redshift Amazon Resource Name
+	// (ARN)
 	// (https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-overview.html#redshift-iam-access-control-specify-actions)
 	// in the Amazon Redshift Cluster Management Guide.
 	ResourceType *string
@@ -1598,13 +1596,13 @@ type UsageLimit struct {
 	// The action that Amazon Redshift takes when the limit is reached. Possible values
 	// are:
 	//
-	//     * log - To log an event in a system table. The default is log.
+	// * log - To log an event in a system table. The default is log.
 	//
-	//     *
+	// *
 	// emit-metric - To emit CloudWatch metrics.
 	//
-	//     * disable - To disable the
-	// feature until the next usage period begins.
+	// * disable - To disable the feature
+	// until the next usage period begins.
 	BreachAction UsageLimitBreachAction
 
 	// The identifier of the cluster with a usage limit.

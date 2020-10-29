@@ -14,16 +14,16 @@ import (
 // on the policy to indicate that it has been deleted. However, Route 53 never
 // fully deletes the traffic policy. Note the following:
 //
-//     * Deleted traffic
+// * Deleted traffic
 // policies aren't listed if you run ListTrafficPolicies
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListTrafficPolicies.html).
 //
+// *
+// There's no way to get a list of deleted policies.
 //
-// * There's no way to get a list of deleted policies.
-//
-//     * If you retain the ID
-// of the policy, you can get information about the policy, including the traffic
-// policy document, by running GetTrafficPolicy
+// * If you retain the ID of the
+// policy, you can get information about the policy, including the traffic policy
+// document, by running GetTrafficPolicy
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetTrafficPolicy.html).
 func (c *Client) DeleteTrafficPolicy(ctx context.Context, params *DeleteTrafficPolicyInput, optFns ...func(*Options)) (*DeleteTrafficPolicyOutput, error) {
 	if params == nil {

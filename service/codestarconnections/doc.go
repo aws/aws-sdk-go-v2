@@ -22,47 +22,47 @@
 // GitHub Enterprise Server, you create a host for your connections. You can work
 // with connections by calling:
 //
-//     * CreateConnection, which creates a uniquely
-// named connection that can be referenced by services such as CodePipeline.
+// * CreateConnection, which creates a uniquely named
+// connection that can be referenced by services such as CodePipeline.
 //
-//     *
+// *
 // DeleteConnection, which deletes the specified connection.
 //
-//     * GetConnection,
+// * GetConnection,
 // which returns information about the connection, including the connection
 // status.
 //
-//     * ListConnections, which lists the connections associated with your
+// * ListConnections, which lists the connections associated with your
 // account.
 //
 // You can work with hosts by calling:
 //
-//     * CreateHost, which creates a
+// * CreateHost, which creates a
 // host that represents the infrastructure where your provider is installed.
 //
-//     *
+// *
 // DeleteHost, which deletes the specified host.
 //
-//     * GetHost, which returns
+// * GetHost, which returns
 // information about the host, including the setup status.
 //
-//     * ListHosts, which
+// * ListHosts, which
 // lists the hosts associated with your account.
 //
 // You can work with tags in AWS
 // CodeStar Connections by calling the following:
 //
-//     * ListTagsForResource, which
+// * ListTagsForResource, which
 // gets information about AWS tags for a specified Amazon Resource Name (ARN) in
 // AWS CodeStar Connections.
 //
-//     * TagResource, which adds or updates tags for a
+// * TagResource, which adds or updates tags for a
 // resource in AWS CodeStar Connections.
 //
-//     * UntagResource, which removes tags
-// for a resource in AWS CodeStar Connections.
+// * UntagResource, which removes tags for a
+// resource in AWS CodeStar Connections.
 //
-// For information about how to use
-// AWS CodeStar Connections, see the Developer Tools User Guide
+// For information about how to use AWS
+// CodeStar Connections, see the Developer Tools User Guide
 // (https://docs.aws.amazon.com/dtconsole/latest/userguide/welcome-connections.html).
 package codestarconnections

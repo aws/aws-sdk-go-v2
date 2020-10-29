@@ -33,13 +33,13 @@ type CreateClusterInput struct {
 	// The cluster identifier. This parameter is stored as a lowercase string.
 	// Constraints:
 	//
-	//     * A name must contain from 1 to 20 alphanumeric characters or
+	// * A name must contain from 1 to 20 alphanumeric characters or
 	// hyphens.
 	//
-	//     * The first character must be a letter.
+	// * The first character must be a letter.
 	//
-	//     * A name cannot end
-	// with a hyphen or contain two consecutive hyphens.
+	// * A name cannot end with a
+	// hyphen or contain two consecutive hyphens.
 	//
 	// This member is required.
 	ClusterName *string
@@ -88,24 +88,24 @@ type CreateClusterInput struct {
 	// Clock UTC). The minimum maintenance window is a 60 minute period. Valid values
 	// for ddd are:
 	//
-	//     * sun
+	// * sun
 	//
-	//     * mon
+	// * mon
 	//
-	//     * tue
+	// * tue
 	//
-	//     * wed
+	// * wed
 	//
-	//     * thu
+	// * thu
 	//
-	//     * fri
-	//
+	// * fri
 	//
 	// * sat
 	//
-	// Example: sun:05:00-sun:09:00 If you don't specify a preferred maintenance
-	// window when you create or modify a cache cluster, DAX assigns a 60-minute
-	// maintenance window on a randomly selected day of the week.
+	// Example:
+	// sun:05:00-sun:09:00 If you don't specify a preferred maintenance window when you
+	// create or modify a cache cluster, DAX assigns a 60-minute maintenance window on
+	// a randomly selected day of the week.
 	PreferredMaintenanceWindow *string
 
 	// Represents the settings used to enable server-side encryption on the cluster.

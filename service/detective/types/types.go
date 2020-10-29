@@ -42,13 +42,13 @@ type MemberDetail struct {
 	// member account is not enabled. The reason can have one of the following
 	// values:
 	//
-	//     * VOLUME_TOO_HIGH - Indicates that adding the member account would
+	// * VOLUME_TOO_HIGH - Indicates that adding the member account would
 	// cause the data volume for the behavior graph to be too high.
 	//
-	//     *
-	// VOLUME_UNKNOWN - Indicates that Detective is unable to verify the data volume
-	// for the member account. This is usually because the member account is not
-	// enrolled in Amazon GuardDuty.
+	// * VOLUME_UNKNOWN -
+	// Indicates that Detective is unable to verify the data volume for the member
+	// account. This is usually because the member account is not enrolled in Amazon
+	// GuardDuty.
 	DisabledReason MemberDisabledReason
 
 	// The AWS account root user email address for the member account.
@@ -79,30 +79,30 @@ type MemberDetail struct {
 	// The current membership status of the member account. The status can have one of
 	// the following values:
 	//
-	//     * INVITED - Indicates that the member was sent an
+	// * INVITED - Indicates that the member was sent an
 	// invitation but has not yet responded.
 	//
-	//     * VERIFICATION_IN_PROGRESS -
-	// Indicates that Detective is verifying that the account identifier and email
-	// address provided for the member account match. If they do match, then Detective
-	// sends the invitation. If the email address and account identifier don't match,
-	// then the member cannot be added to the behavior graph.
+	// * VERIFICATION_IN_PROGRESS - Indicates
+	// that Detective is verifying that the account identifier and email address
+	// provided for the member account match. If they do match, then Detective sends
+	// the invitation. If the email address and account identifier don't match, then
+	// the member cannot be added to the behavior graph.
 	//
-	//     *
-	// VERIFICATION_FAILED - Indicates that the account and email address provided for
-	// the member account do not match, and Detective did not send an invitation to the
-	// account.
+	// * VERIFICATION_FAILED -
+	// Indicates that the account and email address provided for the member account do
+	// not match, and Detective did not send an invitation to the account.
 	//
-	//     * ENABLED - Indicates that the member account accepted the
-	// invitation to contribute to the behavior graph.
+	// * ENABLED -
+	// Indicates that the member account accepted the invitation to contribute to the
+	// behavior graph.
 	//
-	//     * ACCEPTED_BUT_DISABLED -
-	// Indicates that the member account accepted the invitation but is prevented from
-	// contributing data to the behavior graph. DisabledReason provides the reason why
-	// the member account is not enabled.
+	// * ACCEPTED_BUT_DISABLED - Indicates that the member account
+	// accepted the invitation but is prevented from contributing data to the behavior
+	// graph. DisabledReason provides the reason why the member account is not
+	// enabled.
 	//
-	// Member accounts that declined an invitation
-	// or that were removed from the behavior graph are not included.
+	// Member accounts that declined an invitation or that were removed from
+	// the behavior graph are not included.
 	Status MemberStatus
 
 	// The date and time that the member account was last updated. The value is in

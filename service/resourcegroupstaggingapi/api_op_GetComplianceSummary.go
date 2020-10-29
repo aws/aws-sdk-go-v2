@@ -58,15 +58,15 @@ type GetComplianceSummaryInput struct {
 	// resource's Amazon Resource Name (ARN). Consult the AWS General Reference for the
 	// following:
 	//
-	//     * For a list of service name strings, see AWS Service Namespaces
+	// * For a list of service name strings, see AWS Service Namespaces
 	// (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces).
 	//
-	//
-	// * For resource type strings, see Example ARNs
+	// *
+	// For resource type strings, see Example ARNs
 	// (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arns-syntax).
 	//
-	//
-	// * For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
+	// *
+	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
 	// Service Namespaces
 	// (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//

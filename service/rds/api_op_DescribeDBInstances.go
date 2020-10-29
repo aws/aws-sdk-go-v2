@@ -36,33 +36,33 @@ type DescribeDBInstancesInput struct {
 	// information from only the specific DB instance is returned. This parameter isn't
 	// case-sensitive. Constraints:
 	//
-	//     * If supplied, must match the identifier of an
+	// * If supplied, must match the identifier of an
 	// existing DBInstance.
 	DBInstanceIdentifier *string
 
 	// A filter that specifies one or more DB instances to describe. Supported
 	// filters:
 	//
-	//     * db-cluster-id - Accepts DB cluster identifiers and DB cluster
-	// Amazon Resource Names (ARNs). The results list will only include information
-	// about the DB instances associated with the DB clusters identified by these
-	// ARNs.
+	// * db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
+	// Resource Names (ARNs). The results list will only include information about the
+	// DB instances associated with the DB clusters identified by these ARNs.
 	//
-	//     * db-instance-id - Accepts DB instance identifiers and DB instance
-	// Amazon Resource Names (ARNs). The results list will only include information
-	// about the DB instances identified by these ARNs.
+	// *
+	// db-instance-id - Accepts DB instance identifiers and DB instance Amazon Resource
+	// Names (ARNs). The results list will only include information about the DB
+	// instances identified by these ARNs.
 	//
-	//     * dbi-resource-id -
-	// Accepts DB instance resource identifiers. The results list will only include
-	// information about the DB instances identified by these DB instance resource
-	// identifiers.
+	// * dbi-resource-id - Accepts DB instance
+	// resource identifiers. The results list will only include information about the
+	// DB instances identified by these DB instance resource identifiers.
 	//
-	//     * domain - Accepts Active Directory directory IDs. The results
-	// list will only include information about the DB instances associated with these
-	// domains.
+	// * domain -
+	// Accepts Active Directory directory IDs. The results list will only include
+	// information about the DB instances associated with these domains.
 	//
-	//     * engine - Accepts engine names. The results list will only
-	// include information about the DB instances for these engines.
+	// * engine -
+	// Accepts engine names. The results list will only include information about the
+	// DB instances for these engines.
 	Filters []*types.Filter
 
 	// An optional pagination token provided by a previous DescribeDBInstances request.

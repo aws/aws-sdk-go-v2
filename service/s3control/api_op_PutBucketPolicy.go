@@ -39,12 +39,12 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API__control_PutBucketPolicy.html#API_control_PutBucketPolicy_Examples)
 // section below. The following actions are related to PutBucketPolicy:
 //
-//     *
+// *
 // GetBucketPolicy
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html)
 //
-//
-// * DeleteBucketPolicy
+// *
+// DeleteBucketPolicy
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html)
 func (c *Client) PutBucketPolicy(ctx context.Context, params *PutBucketPolicyInput, optFns ...func(*Options)) (*PutBucketPolicyOutput, error) {
 	if params == nil {

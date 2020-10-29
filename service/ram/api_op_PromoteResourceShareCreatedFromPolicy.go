@@ -15,10 +15,10 @@ import (
 // modified in AWS RAM. Use this API action to promote the resource share. When you
 // promote the resource share, it becomes:
 //
-//     * Visible to all principals that it
-// is shared with.
+// * Visible to all principals that it is
+// shared with.
 //
-//     * Modifiable in AWS RAM.
+// * Modifiable in AWS RAM.
 func (c *Client) PromoteResourceShareCreatedFromPolicy(ctx context.Context, params *PromoteResourceShareCreatedFromPolicyInput, optFns ...func(*Options)) (*PromoteResourceShareCreatedFromPolicyOutput, error) {
 	if params == nil {
 		params = &PromoteResourceShareCreatedFromPolicyInput{}

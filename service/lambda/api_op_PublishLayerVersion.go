@@ -53,14 +53,14 @@ type PublishLayerVersionInput struct {
 
 	// The layer's software license. It can be any of the following:
 	//
-	//     * An SPDX
-	// license identifier (https://spdx.org/licenses/). For example, MIT.
+	// * An SPDX license
+	// identifier (https://spdx.org/licenses/). For example, MIT.
 	//
-	//     * The
-	// URL of a license hosted on the internet. For example,
+	// * The URL of a
+	// license hosted on the internet. For example,
 	// https://opensource.org/licenses/MIT.
 	//
-	//     * The full text of the license.
+	// * The full text of the license.
 	LicenseInfo *string
 }
 

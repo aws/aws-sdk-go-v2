@@ -16,45 +16,43 @@ import (
 // workflow execution. Access Control You can use IAM policies to control this
 // action's access to Amazon SWF resources as follows:
 //
-//     * Use a Resource
-// element with the domain name to limit the action to only specified domains.
+// * Use a Resource element
+// with the domain name to limit the action to only specified domains.
 //
+// * Use an
+// Action element to allow or deny permission to call this action.
 //
-// * Use an Action element to allow or deny permission to call this action.
+// * Constrain the
+// following parameters by using a Condition element with the appropriate keys.
 //
-//     *
-// Constrain the following parameters by using a Condition element with the
-// appropriate keys.
+// *
+// tagList.member.0: The key is swf:tagList.member.0.
 //
-//         * tagList.member.0: The key is
-// swf:tagList.member.0.
+// * tagList.member.1: The key
+// is swf:tagList.member.1.
 //
-//         * tagList.member.1: The key is
-// swf:tagList.member.1.
-//
-//         * tagList.member.2: The key is
+// * tagList.member.2: The key is
 // swf:tagList.member.2.
 //
-//         * tagList.member.3: The key is
-// swf:tagList.member.3.
+// * tagList.member.3: The key is swf:tagList.member.3.
 //
-//         * tagList.member.4: The key is
-// swf:tagList.member.4.
+// *
+// tagList.member.4: The key is swf:tagList.member.4.
 //
-//         * taskList: String constraint. The key is
-// swf:taskList.name.
+// * taskList: String
+// constraint. The key is swf:taskList.name.
 //
-//         * workflowType.name: String constraint. The key is
-// swf:workflowType.name.
+// * workflowType.name: String
+// constraint. The key is swf:workflowType.name.
 //
-//         * workflowType.version: String constraint. The
-// key is swf:workflowType.version.
+// * workflowType.version: String
+// constraint. The key is swf:workflowType.version.
 //
-// If the caller doesn't have sufficient
-// permissions to invoke the action, or the parameter values fall outside the
-// specified constraints, the action fails. The associated event attribute's cause
-// parameter is set to OPERATION_NOT_PERMITTED. For details and example IAM
-// policies, see Using IAM to Manage Access to Amazon SWF Workflows
+// If the caller doesn't have
+// sufficient permissions to invoke the action, or the parameter values fall
+// outside the specified constraints, the action fails. The associated event
+// attribute's cause parameter is set to OPERATION_NOT_PERMITTED. For details and
+// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows
 // (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 func (c *Client) StartWorkflowExecution(ctx context.Context, params *StartWorkflowExecutionInput, optFns ...func(*Options)) (*StartWorkflowExecutionOutput, error) {
@@ -102,22 +100,22 @@ type StartWorkflowExecutionInput struct {
 	// policy overrides the default child policy specified when registering the
 	// workflow type using RegisterWorkflowType. The supported child policies are:
 	//
+	// *
+	// TERMINATE – The child executions are terminated.
 	//
-	// * TERMINATE – The child executions are terminated.
-	//
-	//     * REQUEST_CANCEL – A
-	// request to cancel is attempted for each child execution by recording a
+	// * REQUEST_CANCEL – A request
+	// to cancel is attempted for each child execution by recording a
 	// WorkflowExecutionCancelRequested event in its history. It is up to the decider
 	// to take appropriate actions when it receives an execution history with this
 	// event.
 	//
-	//     * ABANDON – No action is taken. The child executions continue to
-	// run.
+	// * ABANDON – No action is taken. The child executions continue to run.
 	//
-	// A child policy for this workflow execution must be specified either as a
-	// default for the workflow type or through this parameter. If neither this
-	// parameter is set nor a default child policy was specified at registration time
-	// then a fault is returned.
+	// A
+	// child policy for this workflow execution must be specified either as a default
+	// for the workflow type or through this parameter. If neither this parameter is
+	// set nor a default child policy was specified at registration time then a fault
+	// is returned.
 	ChildPolicy types.ChildPolicy
 
 	// The total duration for this workflow execution. This overrides the

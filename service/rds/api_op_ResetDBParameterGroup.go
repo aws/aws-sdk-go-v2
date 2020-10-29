@@ -38,8 +38,8 @@ type ResetDBParameterGroupInput struct {
 
 	// The name of the DB parameter group. Constraints:
 	//
-	//     * Must match the name of
-	// an existing DBParameterGroup.
+	// * Must match the name of an
+	// existing DBParameterGroup.
 	//
 	// This member is required.
 	DBParameterGroupName *string

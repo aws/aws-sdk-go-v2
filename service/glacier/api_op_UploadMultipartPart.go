@@ -17,16 +17,16 @@ import (
 // for a multipart upload. Amazon Glacier rejects your upload part request if any
 // of the following conditions is true:
 //
-//     * SHA256 tree hash does not matchTo
-// ensure that part data is not corrupted in transmission, you compute a SHA256
-// tree hash of the part and include it in your request. Upon receiving the part
-// data, Amazon S3 Glacier also computes a SHA256 tree hash. If these hash values
-// don't match, the operation fails. For information about computing a SHA256 tree
-// hash, see Computing Checksums
+// * SHA256 tree hash does not matchTo ensure
+// that part data is not corrupted in transmission, you compute a SHA256 tree hash
+// of the part and include it in your request. Upon receiving the part data, Amazon
+// S3 Glacier also computes a SHA256 tree hash. If these hash values don't match,
+// the operation fails. For information about computing a SHA256 tree hash, see
+// Computing Checksums
 // (https://docs.aws.amazon.com/amazonglacier/latest/dev/checksum-calculations.html).
 //
-//
-// * Part size does not matchThe size of each part except the last must match the
+// *
+// Part size does not matchThe size of each part except the last must match the
 // size specified in the corresponding InitiateMultipartUpload request. The size of
 // the last part must be the same size as, or smaller than, the specified size. If
 // you upload a part whose size is smaller than the part size you specified in your
@@ -34,7 +34,7 @@ import (
 // upload part request will succeed. However, the subsequent Complete Multipart
 // Upload request will fail.
 //
-//     * Range does not alignThe byte range value in the
+// * Range does not alignThe byte range value in the
 // request does not align with the part size specified in the corresponding
 // initiate request. For example, if you specify a part size of 4194304 bytes (4
 // MB), then 0 to 4194303 bytes (4 MB - 1) and 4194304 (4 MB) to 8388607 (8 MB - 1)

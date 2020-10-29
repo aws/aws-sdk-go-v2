@@ -38,12 +38,11 @@ type DescribeProvisioningParametersInput struct {
 
 	// The language code.
 	//
-	//     * en - English (default)
+	// * en - English (default)
 	//
-	//     * jp - Japanese
+	// * jp - Japanese
 	//
-	//     * zh
-	// - Chinese
+	// * zh - Chinese
 	AcceptLanguage *string
 
 	// The path identifier of the product. This value is optional if the product has a

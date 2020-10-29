@@ -14,10 +14,10 @@ import (
 // markers) in the bucket must be deleted before the bucket itself can be deleted.
 // Related Resources
 //
-//     * CreateBucket
+// * CreateBucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
 //
-//     *
+// *
 // DeleteObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html)
 func (c *Client) DeleteBucket(ctx context.Context, params *DeleteBucketInput, optFns ...func(*Options)) (*DeleteBucketOutput, error) {

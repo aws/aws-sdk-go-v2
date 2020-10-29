@@ -94,24 +94,23 @@ type DescribeStatementOutput struct {
 	// The status of the SQL statement being described. Status values are defined as
 	// follows:
 	//
-	//     * ABORTED - The query run was stopped by the user.
+	// * ABORTED - The query run was stopped by the user.
 	//
-	//     * ALL - A
-	// status value that includes all query statuses. This value can be used to filter
+	// * ALL - A status
+	// value that includes all query statuses. This value can be used to filter
 	// results.
 	//
-	//     * FAILED - The query run failed.
+	// * FAILED - The query run failed.
 	//
-	//     * FINISHED - The query has
-	// finished running.
+	// * FINISHED - The query has finished
+	// running.
 	//
-	//     * PICKED - The query has been chosen to be run.
+	// * PICKED - The query has been chosen to be run.
 	//
-	//     *
-	// STARTED - The query run has started.
+	// * STARTED - The query
+	// run has started.
 	//
-	//     * SUBMITTED - The query was submitted,
-	// but not yet processed.
+	// * SUBMITTED - The query was submitted, but not yet processed.
 	Status types.StatusString
 
 	// The date and time (UTC) that the metadata for the SQL statement was last

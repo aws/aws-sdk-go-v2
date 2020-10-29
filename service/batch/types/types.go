@@ -485,18 +485,18 @@ type ContainerProperties struct {
 	// Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the IMAGE
 	// parameter of docker run (https://docs.docker.com/engine/reference/run/).
 	//
-	//     *
+	// *
 	// Images in Amazon ECR repositories use the full registry and repository URI (for
 	// example, 012345678910.dkr.ecr..amazonaws.com/).
 	//
-	//     * Images in official
+	// * Images in official
 	// repositories on Docker Hub use a single name (for example, ubuntu or mongo).
 	//
-	//
-	// * Images in other repositories on Docker Hub are qualified with an organization
+	// *
+	// Images in other repositories on Docker Hub are qualified with an organization
 	// name (for example, amazon/amazon-ecs-agent).
 	//
-	//     * Images in other online
+	// * Images in other online
 	// repositories are qualified further by a domain name (for example,
 	// quay.io/assemblyline/ubuntu).
 	Image *string
@@ -1145,14 +1145,14 @@ type NodeOverrides struct {
 	// the number of nodes that are specified in the job definition. To use this
 	// override:
 	//
-	//     * There must be at least one node range in your job definition
-	// that has an open upper boundary (such as : or n:).
+	// * There must be at least one node range in your job definition that
+	// has an open upper boundary (such as : or n:).
 	//
-	//     * The lower boundary of
-	// the node range specified in the job definition must be fewer than the number of
-	// nodes specified in the override.
+	// * The lower boundary of the node
+	// range specified in the job definition must be fewer than the number of nodes
+	// specified in the override.
 	//
-	//     * The main node index specified in the job
+	// * The main node index specified in the job
 	// definition must be fewer than the number of nodes specified in the override.
 	NumNodes *int32
 }
@@ -1266,15 +1266,15 @@ type RetryStrategy struct {
 // An object representing the secret to expose to your container. Secrets can be
 // exposed to a container in the following ways:
 //
-//     * To inject sensitive data
-// into your containers as environment variables, use the secrets container
-// definition parameter.
-//
-//     * To reference sensitive information in the log
-// configuration of a container, use the secretOptions container definition
+// * To inject sensitive data into
+// your containers as environment variables, use the secrets container definition
 // parameter.
 //
-// For more information, see Specifying Sensitive Data
+// * To reference sensitive information in the log configuration of a
+// container, use the secretOptions container definition parameter.
+//
+// For more
+// information, see Specifying Sensitive Data
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html)
 // in the Amazon Elastic Container Service Developer Guide.
 type Secret struct {

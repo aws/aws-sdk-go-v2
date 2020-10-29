@@ -98,12 +98,12 @@ type PutScalingPolicyInput struct {
 
 	// One of the following policy types:
 	//
-	//     * TargetTrackingScaling
+	// * TargetTrackingScaling
 	//
-	//     *
-	// StepScaling
+	// * StepScaling
 	//
-	//     * SimpleScaling (default)
+	// *
+	// SimpleScaling (default)
 	PolicyType *string
 
 	// The amount by which to scale, based on the specified adjustment type. A positive
@@ -121,19 +121,19 @@ type PutScalingPolicyInput struct {
 	// A target tracking scaling policy. Includes support for predefined or customized
 	// metrics. The following predefined metrics are available:
 	//
-	//     *
+	// *
 	// ASGAverageCPUUtilization
 	//
-	//     * ASGAverageNetworkIn
+	// * ASGAverageNetworkIn
 	//
-	//     *
-	// ASGAverageNetworkOut
+	// * ASGAverageNetworkOut
 	//
-	//     * ALBRequestCountPerTarget
+	// *
+	// ALBRequestCountPerTarget
 	//
-	// If you specify
-	// ALBRequestCountPerTarget for the metric, you must specify the ResourceLabel
-	// parameter with the PredefinedMetricSpecification. For more information, see
+	// If you specify ALBRequestCountPerTarget for the
+	// metric, you must specify the ResourceLabel parameter with the
+	// PredefinedMetricSpecification. For more information, see
 	// TargetTrackingConfiguration
 	// (https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_TargetTrackingConfiguration.html)
 	// in the Amazon EC2 Auto Scaling API Reference. Required if the policy type is

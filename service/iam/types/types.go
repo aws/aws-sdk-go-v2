@@ -101,14 +101,13 @@ type AccessKeyLastUsed struct {
 	// (http://www.iso.org/iso/iso8601), when the access key was most recently used.
 	// This field is null in the following situations:
 	//
-	//     * The user does not have an
+	// * The user does not have an
 	// access key.
 	//
-	//     * An access key exists but has not been used since IAM began
+	// * An access key exists but has not been used since IAM began
 	// tracking this information.
 	//
-	//     * There is no sign-in data associated with the
-	// user.
+	// * There is no sign-in data associated with the user.
 	//
 	// This member is required.
 	LastUsedDate *time.Time
@@ -116,16 +115,16 @@ type AccessKeyLastUsed struct {
 	// The AWS Region where this access key was most recently used. The value for this
 	// field is "N/A" in the following situations:
 	//
-	//     * The user does not have an
-	// access key.
+	// * The user does not have an access
+	// key.
 	//
-	//     * An access key exists but has not been used since IAM began
-	// tracking this information.
+	// * An access key exists but has not been used since IAM began tracking this
+	// information.
 	//
-	//     * There is no sign-in data associated with the
-	// user.
+	// * There is no sign-in data associated with the user.
 	//
-	// For more information about AWS Regions, see Regions and Endpoints
+	// For more
+	// information about AWS Regions, see Regions and Endpoints
 	// (https://docs.aws.amazon.com/general/latest/gr/rande.html) in the Amazon Web
 	// Services General Reference.
 	//
@@ -135,14 +134,14 @@ type AccessKeyLastUsed struct {
 	// The name of the AWS service with which this access key was most recently used.
 	// The value of this field is "N/A" in the following situations:
 	//
-	//     * The user
-	// does not have an access key.
+	// * The user does
+	// not have an access key.
 	//
-	//     * An access key exists but has not been used
-	// since IAM started tracking this information.
+	// * An access key exists but has not been used since IAM
+	// started tracking this information.
 	//
-	//     * There is no sign-in data
-	// associated with the user.
+	// * There is no sign-in data associated with
+	// the user.
 	//
 	// This member is required.
 	ServiceName *string
@@ -379,12 +378,12 @@ type EvaluationResult struct {
 // Contains information about an IAM group entity. This data type is used as a
 // response element in the following operations:
 //
-//     * CreateGroup
+// * CreateGroup
 //
-//     *
-// GetGroup
+// * GetGroup
 //
-//     * ListGroups
+// *
+// ListGroups
 type Group struct {
 
 	// The Amazon Resource Name (ARN) specifying the group. For more information about
@@ -462,15 +461,14 @@ type GroupDetail struct {
 // Contains information about an instance profile. This data type is used as a
 // response element in the following operations:
 //
-//     * CreateInstanceProfile
+// * CreateInstanceProfile
 //
+// *
+// GetInstanceProfile
 //
-// * GetInstanceProfile
+// * ListInstanceProfiles
 //
-//     * ListInstanceProfiles
-//
-//     *
-// ListInstanceProfilesForRole
+// * ListInstanceProfilesForRole
 type InstanceProfile struct {
 
 	// The Amazon Resource Name (ARN) specifying the instance profile. For more
@@ -1540,12 +1538,12 @@ type TrackedActionLastAccessed struct {
 // Contains information about an IAM user entity. This data type is used as a
 // response element in the following operations:
 //
-//     * CreateUser
+// * CreateUser
 //
-//     * GetUser
+// * GetUser
 //
-//
-// * ListUsers
+// *
+// ListUsers
 type User struct {
 
 	// The Amazon Resource Name (ARN) that identifies the user. For more information
@@ -1592,16 +1590,16 @@ type User struct {
 	// value), then it indicates that they never signed in with a password. This can be
 	// because:
 	//
-	//     * The user never had a password.
+	// * The user never had a password.
 	//
-	//     * A password exists but has
-	// not been used since IAM started tracking this information on October 20,
-	// 2014.
+	// * A password exists but has not been
+	// used since IAM started tracking this information on October 20, 2014.
 	//
-	// A null value does not mean that the user never had a password. Also, if
-	// the user does not currently have a password but had one in the past, then this
-	// field contains the date and time the most recent password was used. This value
-	// is returned only in the GetUser and ListUsers operations.
+	// A null
+	// value does not mean that the user never had a password. Also, if the user does
+	// not currently have a password but had one in the past, then this field contains
+	// the date and time the most recent password was used. This value is returned only
+	// in the GetUser and ListUsers operations.
 	PasswordLastUsed *time.Time
 
 	// The ARN of the policy used to set the permissions boundary for the user. For

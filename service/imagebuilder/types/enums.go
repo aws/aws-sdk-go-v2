@@ -122,8 +122,8 @@ type PipelineExecutionStartCondition string
 
 // Enum values for PipelineExecutionStartCondition
 const (
-	PipelineExecutionStartConditionExpression_match_only                             PipelineExecutionStartCondition = "EXPRESSION_MATCH_ONLY"
-	PipelineExecutionStartConditionExpression_match_and_dependency_updates_available PipelineExecutionStartCondition = "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE"
+	PipelineExecutionStartConditionExpressionMatchOnly                          PipelineExecutionStartCondition = "EXPRESSION_MATCH_ONLY"
+	PipelineExecutionStartConditionExpressionMatchAndDependencyUpdatesAvailable PipelineExecutionStartCondition = "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE"
 )
 
 // Values returns all known values for PipelineExecutionStartCondition. Note that

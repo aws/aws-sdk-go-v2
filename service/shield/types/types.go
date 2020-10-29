@@ -92,46 +92,46 @@ type AttackVectorDescription struct {
 
 	// The attack type. Valid values:
 	//
-	//     * UDP_TRAFFIC
+	// * UDP_TRAFFIC
 	//
-	//     * UDP_FRAGMENT
+	// * UDP_FRAGMENT
 	//
-	//     *
+	// *
 	// GENERIC_UDP_REFLECTION
 	//
-	//     * DNS_REFLECTION
+	// * DNS_REFLECTION
 	//
-	//     * NTP_REFLECTION
+	// * NTP_REFLECTION
 	//
-	//     *
+	// *
 	// CHARGEN_REFLECTION
 	//
-	//     * SSDP_REFLECTION
+	// * SSDP_REFLECTION
 	//
-	//     * PORT_MAPPER
+	// * PORT_MAPPER
 	//
-	//     *
-	// RIP_REFLECTION
+	// * RIP_REFLECTION
 	//
-	//     * SNMP_REFLECTION
+	// *
+	// SNMP_REFLECTION
 	//
-	//     * MSSQL_REFLECTION
+	// * MSSQL_REFLECTION
 	//
-	//     *
-	// NET_BIOS_REFLECTION
+	// * NET_BIOS_REFLECTION
 	//
-	//     * SYN_FLOOD
+	// * SYN_FLOOD
 	//
-	//     * ACK_FLOOD
+	// *
+	// ACK_FLOOD
 	//
-	//     * REQUEST_FLOOD
-	//
+	// * REQUEST_FLOOD
 	//
 	// * HTTP_REFLECTION
 	//
-	//     * UDS_REFLECTION
+	// * UDS_REFLECTION
 	//
-	//     * MEMCACHED_REFLECTION
+	// *
+	// MEMCACHED_REFLECTION
 	//
 	// This member is required.
 	VectorType *string

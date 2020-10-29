@@ -14,34 +14,33 @@ import (
 // CreateDatasetImportJob to import your training data to a dataset. There are
 // three types of datasets:
 //
-//     * Interactions
+// * Interactions
 //
-//     * Items
+// * Items
 //
-//     * Users
+// * Users
 //
-// Each
-// dataset type has an associated schema with required field types. Only the
-// Interactions dataset is required in order to train a model (also referred to as
-// creating a solution). A dataset can be in one of the following states:
+// Each dataset type
+// has an associated schema with required field types. Only the Interactions
+// dataset is required in order to train a model (also referred to as creating a
+// solution). A dataset can be in one of the following states:
 //
-//     *
-// CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+// * CREATE PENDING >
+// CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 //
-//     * DELETE
-// PENDING > DELETE IN_PROGRESS
+// * DELETE PENDING > DELETE
+// IN_PROGRESS
 //
-// To get the status of the dataset, call
-// DescribeDataset. Related APIs
+// To get the status of the dataset, call DescribeDataset. Related
+// APIs
 //
-//     * CreateDatasetGroup
+// * CreateDatasetGroup
 //
-//     * ListDatasets
-//
+// * ListDatasets
 //
 // * DescribeDataset
 //
-//     * DeleteDataset
+// * DeleteDataset
 func (c *Client) CreateDataset(ctx context.Context, params *CreateDatasetInput, optFns ...func(*Options)) (*CreateDatasetOutput, error) {
 	if params == nil {
 		params = &CreateDatasetInput{}
@@ -66,12 +65,12 @@ type CreateDatasetInput struct {
 
 	// The type of dataset. One of the following (case insensitive) values:
 	//
-	//     *
+	// *
 	// Interactions
 	//
-	//     * Items
+	// * Items
 	//
-	//     * Users
+	// * Users
 	//
 	// This member is required.
 	DatasetType *string

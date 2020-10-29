@@ -16,14 +16,14 @@ import (
 // HostedZoneOwner structure in the response contains one of the following
 // values:
 //
-//     * An OwningAccount element, which contains the account number of
-// either the current AWS account or another AWS account. Some services, such as
-// AWS Cloud Map, create hosted zones using the current account.
+// * An OwningAccount element, which contains the account number of either
+// the current AWS account or another AWS account. Some services, such as AWS Cloud
+// Map, create hosted zones using the current account.
 //
-//     * An
-// OwningService element, which identifies the AWS service that created and owns
-// the hosted zone. For example, if a hosted zone was created by Amazon Elastic
-// File System (Amazon EFS), the value of Owner is efs.amazonaws.com.
+// * An OwningService element,
+// which identifies the AWS service that created and owns the hosted zone. For
+// example, if a hosted zone was created by Amazon Elastic File System (Amazon
+// EFS), the value of Owner is efs.amazonaws.com.
 func (c *Client) ListHostedZonesByVPC(ctx context.Context, params *ListHostedZonesByVPCInput, optFns ...func(*Options)) (*ListHostedZonesByVPCOutput, error) {
 	if params == nil {
 		params = &ListHostedZonesByVPCInput{}

@@ -92,28 +92,27 @@ type ListResourceRecordSetsInput struct {
 	// resource record sets: A | AAAA | CAA | CNAME | MX | NAPTR | PTR | SPF | SRV |
 	// TXT Values for alias resource record sets:
 	//
-	//     * API Gateway custom regional
-	// API or edge-optimized API: A
+	// * API Gateway custom regional API or
+	// edge-optimized API: A
 	//
-	//     * CloudFront distribution: A or AAAA
+	// * CloudFront distribution: A or AAAA
 	//
-	//     *
-	// Elastic Beanstalk environment that has a regionalized subdomain: A
+	// * Elastic Beanstalk
+	// environment that has a regionalized subdomain: A
 	//
-	//     *
-	// Elastic Load Balancing load balancer: A | AAAA
+	// * Elastic Load Balancing load
+	// balancer: A | AAAA
 	//
-	//     * S3 bucket: A
+	// * S3 bucket: A
 	//
-	//     * VPC
-	// interface VPC endpoint: A
+	// * VPC interface VPC endpoint: A
 	//
-	//     * Another resource record set in this hosted
-	// zone: The type of the resource record set that the alias
-	// references.
+	// * Another
+	// resource record set in this hosted zone: The type of the resource record set
+	// that the alias references.
 	//
-	// Constraint: Specifying type without specifying name returns an
-	// InvalidInput error.
+	// Constraint: Specifying type without specifying name
+	// returns an InvalidInput error.
 	StartRecordType types.RRType
 }
 
