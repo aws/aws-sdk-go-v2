@@ -58,6 +58,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	v4Internal "github.com/aws/aws-sdk-go-v2/aws/signer/internal/v4"
 	"github.com/awslabs/smithy-go/httpbinding"
+	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
 const (
@@ -67,7 +68,7 @@ const (
 
 // HTTPSigner is an interface to a SigV4 signer that can sign HTTP requests
 type HTTPSigner interface {
-	SignHTTP(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error
+	SignHTTP(ctx context.Context, credentials aws.Credentials, r *smithyhttp.Request, payloadHash string, service string, region string, signingTime time.Time) error
 }
 
 type keyDerivator interface {
@@ -107,7 +108,7 @@ func NewSigner(optFns ...func(signer *Signer)) *Signer {
 }
 
 type httpSigner struct {
-	Request      *http.Request
+	Request      *smithyhttp.Request
 	ServiceName  string
 	Region       string
 	Time         v4Internal.SigningTime
@@ -137,7 +138,7 @@ func (s *httpSigner) Build() (signedRequest, error) {
 		sort.Strings(query[key])
 	}
 
-	v4Internal.SanitizeHostForHeader(req)
+	v4Internal.SanitizeHostForHeader(req.Request)
 
 	credentialScope := s.buildCredentialScope()
 	credentialStr := s.Credentials.AccessKeyID + "/" + credentialScope
@@ -154,9 +155,11 @@ func (s *httpSigner) Build() (signedRequest, error) {
 		}
 	}
 
-	host := req.URL.Host
+	var host string
 	if len(req.Host) > 0 {
 		host = req.Host
+	} else {
+		host = req.HostPrefix + req.URL.Host
 	}
 
 	signedHeaders, signedHeadersStr, canonicalHeaderStr := s.buildCanonicalHeaders(host, v4Internal.IgnoredHeaders, unsignedHeaders, s.Request.ContentLength)
@@ -197,7 +200,7 @@ func (s *httpSigner) Build() (signedRequest, error) {
 	req.URL.RawQuery = rawQuery.String()
 
 	return signedRequest{
-		Request:         req,
+		Request:         req.Request,
 		SignedHeaders:   signedHeaders,
 		CanonicalString: canonicalString,
 		StringToSign:    strToSign,
@@ -241,7 +244,7 @@ func buildAuthorizationHeader(credentialStr, signedHeadersStr, signingSignature 
 // will not be lost.
 //
 // The passed in request will be modified in place.
-func (v4 Signer) SignHTTP(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error {
+func (v4 Signer) SignHTTP(ctx context.Context, credentials aws.Credentials, r *smithyhttp.Request, payloadHash string, service string, region string, signingTime time.Time) error {
 	signer := &httpSigner{
 		Request:                r,
 		PayloadHash:            payloadHash,
@@ -292,11 +295,11 @@ func (v4 Signer) SignHTTP(ctx context.Context, credentials aws.Credentials, r *h
 //
 // This method does not modify the provided request.
 func (v4 *Signer) PresignHTTP(
-	ctx context.Context, credentials aws.Credentials, r *http.Request,
+	ctx context.Context, credentials aws.Credentials, r *smithyhttp.Request,
 	payloadHash string, service string, region string, signingTime time.Time,
 ) (signedURI string, signedHeaders http.Header, err error) {
 	signer := &httpSigner{
-		Request:                r.Clone(r.Context()),
+		Request:                r.Clone(),
 		PayloadHash:            payloadHash,
 		ServiceName:            service,
 		Region:                 region,

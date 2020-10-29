@@ -182,7 +182,7 @@ func addHTTPSignerV4Middleware(stack *middleware.Stack, o Options) {
 }
 
 type HTTPSignerV4 interface {
-	SignHTTP(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error
+	SignHTTP(ctx context.Context, credentials aws.Credentials, r *smithyhttp.Request, payloadHash string, service string, region string, signingTime time.Time) error
 }
 
 func configureSignerV4(s *v4.Signer) {

@@ -78,7 +78,7 @@ public final class AwsSignatureVersion4 implements GoIntegration {
             writer.addUseImports(AwsGoDependency.AWS_CORE);
             writer.addUseImports(SmithyGoDependency.NET_HTTP);
             writer.addUseImports(SmithyGoDependency.TIME);
-            writer.write("SignHTTP(ctx context.Context, credentials aws.Credentials, r *http.Request, "
+            writer.write("SignHTTP(ctx context.Context, credentials aws.Credentials, r *smithyhttp.Request, "
                     + "payloadHash string, service string, region string, signingTime time.Time) error");
         });
     }

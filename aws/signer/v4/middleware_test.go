@@ -83,7 +83,7 @@ func TestComputePayloadHashMiddleware(t *testing.T) {
 
 type httpSignerFunc func(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error
 
-func (f httpSignerFunc) SignHTTP(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error {
+func (f httpSignerFunc) SignHTTP(ctx context.Context, credentials aws.Credentials, r *smithyhttp.Request, payloadHash string, service string, region string, signingTime time.Time) error {
 	return f(ctx, credentials, r, payloadHash, service, region, signingTime)
 }
 
