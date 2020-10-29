@@ -218,10 +218,6 @@ type Condition struct {
 	KeyPrefixEquals *string
 }
 
-//
-type ContinuationEvent struct {
-}
-
 // Container for all response elements.
 type CopyObjectResult struct {
 
@@ -541,12 +537,6 @@ type EncryptionConfiguration struct {
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
 	// in the AWS Key Management Service Developer Guide.
 	ReplicaKmsKeyID *string
-}
-
-// A message that indicates the request is complete and no more messages will be
-// sent. You should not assume that the request is complete until the client
-// receives an EndEvent.
-type EndEvent struct {
 }
 
 // Container for all error elements.
@@ -2273,26 +2263,6 @@ type PolicyStatus struct {
 	IsPublic *bool
 }
 
-// This data type contains information about progress of an operation.
-type Progress struct {
-
-	// The current number of uncompressed object bytes processed.
-	BytesProcessed *int64
-
-	// The current number of bytes of records payload data returned.
-	BytesReturned *int64
-
-	// The current number of object bytes scanned.
-	BytesScanned *int64
-}
-
-// This data type contains information about the progress event of an operation.
-type ProgressEvent struct {
-
-	// The Progress event details.
-	Details *Progress
-}
-
 // The PublicAccessBlock configuration that you want to apply to this Amazon S3
 // bucket. You can enable the configuration options in any combination. For more
 // information about when Amazon S3 considers a bucket or object public, see The
@@ -2363,13 +2333,6 @@ type QueueConfiguration struct {
 	// An optional unique identifier for configurations in a notification
 	// configuration. If you don't provide one, Amazon S3 will assign an ID.
 	Id *string
-}
-
-// The container for the records event.
-type RecordsEvent struct {
-
-	// The byte array of partial, one or more result records.
-	Payload []byte
 }
 
 // Specifies how requests are redirected. In the event of an error, you can specify
@@ -2579,14 +2542,6 @@ type RequestPaymentConfiguration struct {
 	Payer Payer
 }
 
-// Container for specifying if periodic QueryProgress messages should be sent.
-type RequestProgress struct {
-
-	// Specifies whether periodic QueryProgress frames should be sent. Valid values:
-	// TRUE, FALSE. Default value: FALSE.
-	Enabled *bool
-}
-
 // Container for restore job parameters.
 type RestoreRequest struct {
 
@@ -2674,65 +2629,6 @@ type S3Location struct {
 	// A list of metadata to store with the restore results in S3.
 	UserMetadata []*MetadataEntry
 }
-
-// Specifies the byte range of the object to get the records from. A record is
-// processed when its first byte is contained by the range. This parameter is
-// optional, but when specified, it must not be empty. See RFC 2616, Section
-// 14.35.1 about how to specify the start and end of the range.
-type ScanRange struct {
-
-	// Specifies the end of the byte range. This parameter is optional. Valid values:
-	// non-negative integers. The default value is one less than the size of the object
-	// being queried. If only the End parameter is supplied, it is interpreted to mean
-	// scan the last N bytes of the file. For example, 50 means scan the last 50 bytes.
-	End *int64
-
-	// Specifies the start of the byte range. This parameter is optional. Valid values:
-	// non-negative integers. The default value is 0. If only start is supplied, it
-	// means scan from that point to the end of the file.For example; 50 means scan
-	// from byte 50 until the end of the file.
-	Start *int64
-}
-
-// The container for selecting objects from a content event stream.
-type SelectObjectContentEventStream interface {
-	isSelectObjectContentEventStream()
-}
-
-// The Continuation Event.
-type SelectObjectContentEventStreamMemberCont struct {
-	Value *ContinuationEvent
-}
-
-func (*SelectObjectContentEventStreamMemberCont) isSelectObjectContentEventStream() {}
-
-// The Progress Event.
-type SelectObjectContentEventStreamMemberProgress struct {
-	Value *ProgressEvent
-}
-
-func (*SelectObjectContentEventStreamMemberProgress) isSelectObjectContentEventStream() {}
-
-// The Stats Event.
-type SelectObjectContentEventStreamMemberStats struct {
-	Value *StatsEvent
-}
-
-func (*SelectObjectContentEventStreamMemberStats) isSelectObjectContentEventStream() {}
-
-// The End Event.
-type SelectObjectContentEventStreamMemberEnd struct {
-	Value *EndEvent
-}
-
-func (*SelectObjectContentEventStreamMemberEnd) isSelectObjectContentEventStream() {}
-
-// The Records Event.
-type SelectObjectContentEventStreamMemberRecords struct {
-	Value *RecordsEvent
-}
-
-func (*SelectObjectContentEventStreamMemberRecords) isSelectObjectContentEventStream() {}
 
 // Describes the parameters for Select job types.
 type SelectParameters struct {
@@ -2849,26 +2745,6 @@ type SseKmsEncryptedObjects struct {
 
 // Specifies the use of SSE-S3 to encrypt delivered inventory reports.
 type SSES3 struct {
-}
-
-// Container for the stats details.
-type Stats struct {
-
-	// The total number of uncompressed object bytes processed.
-	BytesProcessed *int64
-
-	// The total number of bytes of records payload data returned.
-	BytesReturned *int64
-
-	// The total number of object bytes scanned.
-	BytesScanned *int64
-}
-
-// Container for the Stats Event.
-type StatsEvent struct {
-
-	// The Stats event details.
-	Details *Stats
 }
 
 // Specifies data related to access patterns to be collected and made available to
@@ -3008,12 +2884,3 @@ type WebsiteConfiguration struct {
 	// Rules that define when a redirect is applied and the redirect behavior.
 	RoutingRules []*RoutingRule
 }
-
-// UnknownUnionMember is returned when a union member is returned over the wire,
-// but has an unknown tag.
-type UnknownUnionMember struct {
-	Tag   string
-	Value []byte
-}
-
-func (*UnknownUnionMember) isSelectObjectContentEventStream() {}

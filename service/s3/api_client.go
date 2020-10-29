@@ -389,8 +389,6 @@ func getBucketFromInput(input interface{}) (*string, bool) {
 		return i.Bucket, true
 	case *RestoreObjectInput:
 		return i.Bucket, true
-	case *SelectObjectContentInput:
-		return i.Bucket, true
 	case *UploadPartInput:
 		return i.Bucket, true
 	case *UploadPartCopyInput:
