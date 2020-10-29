@@ -450,26 +450,6 @@ func (m *validateOpStopStreamEncryption) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpSubscribeToShard struct {
-}
-
-func (*validateOpSubscribeToShard) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpSubscribeToShard) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*SubscribeToShardInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpSubscribeToShardInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpUpdateShardCount struct {
 }
 
@@ -578,10 +558,6 @@ func addOpStopStreamEncryptionValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpStopStreamEncryption{}, middleware.After)
 }
 
-func addOpSubscribeToShardValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpSubscribeToShard{}, middleware.After)
-}
-
 func addOpUpdateShardCountValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateShardCount{}, middleware.After)
 }
@@ -626,21 +602,6 @@ func validateShardFilter(v *types.ShardFilter) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ShardFilter"}
-	if len(v.Type) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Type"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateStartingPosition(v *types.StartingPosition) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "StartingPosition"}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
@@ -1042,31 +1003,6 @@ func validateOpStopStreamEncryptionInput(v *StopStreamEncryptionInput) error {
 	}
 	if v.KeyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpSubscribeToShardInput(v *SubscribeToShardInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "SubscribeToShardInput"}
-	if v.ShardId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ShardId"))
-	}
-	if v.StartingPosition == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StartingPosition"))
-	} else if v.StartingPosition != nil {
-		if err := validateStartingPosition(v.StartingPosition); err != nil {
-			invalidParams.AddNested("StartingPosition", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.ConsumerARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ConsumerARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

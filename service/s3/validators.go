@@ -1670,26 +1670,6 @@ func (m *validateOpRestoreObject) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpSelectObjectContent struct {
-}
-
-func (*validateOpSelectObjectContent) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpSelectObjectContent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*SelectObjectContentInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpSelectObjectContentInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpUploadPartCopy struct {
 }
 
@@ -2060,10 +2040,6 @@ func addOpPutPublicAccessBlockValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpRestoreObjectValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRestoreObject{}, middleware.After)
-}
-
-func addOpSelectObjectContentValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpSelectObjectContent{}, middleware.After)
 }
 
 func addOpUploadPartCopyValidationMiddleware(stack *middleware.Stack) error {
@@ -5025,36 +5001,6 @@ func validateOpRestoreObjectInput(v *RestoreObjectInput) error {
 	}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
-	}
-	if v.Bucket == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpSelectObjectContentInput(v *SelectObjectContentInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "SelectObjectContentInput"}
-	if v.Key == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Key"))
-	}
-	if v.OutputSerialization == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OutputSerialization"))
-	}
-	if len(v.ExpressionType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ExpressionType"))
-	}
-	if v.InputSerialization == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InputSerialization"))
-	}
-	if v.Expression == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Expression"))
 	}
 	if v.Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))

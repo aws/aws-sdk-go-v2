@@ -5,7 +5,6 @@ package s3
 import (
 	"bytes"
 	"context"
-	"encoding/base64"
 	"encoding/xml"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
@@ -10229,139 +10228,6 @@ func awsRestxml_deserializeOpHttpBindingsRestoreObjectOutput(v *RestoreObjectOut
 	return nil
 }
 
-type awsRestxml_deserializeOpSelectObjectContent struct {
-}
-
-func (*awsRestxml_deserializeOpSelectObjectContent) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpSelectObjectContent) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorSelectObjectContent(response, &metadata)
-	}
-	output := &SelectObjectContentOutput{}
-	out.Result = output
-
-	var buff [1024]byte
-	ringBuffer := smithyio.NewRingBuffer(buff[:])
-	body := io.TeeReader(response.Body, ringBuffer)
-	rootDecoder := xml.NewDecoder(body)
-	t, err := smithyxml.FetchRootElement(rootDecoder)
-	if err == io.EOF {
-		return out, metadata, nil
-	}
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-	}
-
-	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsRestxml_deserializeDocumentSelectObjectContentEventStream(&output.Payload, decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-	}
-
-	return out, metadata, err
-}
-
-func awsRestxml_deserializeOpErrorSelectObjectContent(response *smithyhttp.Response, metadata *middleware.Metadata) error {
-	var errorBuffer bytes.Buffer
-	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
-		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
-	}
-	errorBody := bytes.NewReader(errorBuffer.Bytes())
-
-	errorCode := "UnknownError"
-	errorMessage := errorCode
-
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
-	if err != nil {
-		return err
-	}
-	if hostID := errorComponents.HostID; len(hostID) != 0 {
-		s3shared.SetHostIDMetadata(metadata, hostID)
-	}
-	if reqID := errorComponents.RequestID; len(reqID) != 0 {
-		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
-	}
-	if len(errorComponents.Code) != 0 {
-		errorCode = errorComponents.Code
-	}
-	if len(errorComponents.Message) != 0 {
-		errorMessage = errorComponents.Message
-	}
-	errorBody.Seek(0, io.SeekStart)
-	switch {
-	default:
-		genericError := &smithy.GenericAPIError{
-			Code:    errorCode,
-			Message: errorMessage,
-		}
-		return genericError
-
-	}
-}
-
-func awsRestxml_deserializeOpDocumentSelectObjectContentOutput(v **SelectObjectContentOutput, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	var sv *SelectObjectContentOutput
-	if *v == nil {
-		sv = &SelectObjectContentOutput{}
-	} else {
-		sv = *v
-	}
-
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			break
-		}
-		originalDecoder := decoder
-		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
-		switch {
-		case strings.EqualFold("Payload", t.Name.Local):
-			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-			if err := awsRestxml_deserializeDocumentSelectObjectContentEventStream(&sv.Payload, nodeDecoder); err != nil {
-				return err
-			}
-
-		default:
-			// Do nothing and ignore the unexpected tag element
-
-		}
-		decoder = originalDecoder
-	}
-	*v = sv
-	return nil
-}
-
 type awsRestxml_deserializeOpUploadPart struct {
 }
 
@@ -11751,38 +11617,6 @@ func awsRestxml_deserializeDocumentCondition(v **types.Condition, decoder smithy
 	return nil
 }
 
-func awsRestxml_deserializeDocumentContinuationEvent(v **types.ContinuationEvent, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	var sv *types.ContinuationEvent
-	if *v == nil {
-		sv = &types.ContinuationEvent{}
-	} else {
-		sv = *v
-	}
-
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			break
-		}
-		originalDecoder := decoder
-		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
-		switch {
-		default:
-			// Do nothing and ignore the unexpected tag element
-
-		}
-		decoder = originalDecoder
-	}
-	*v = sv
-	return nil
-}
-
 func awsRestxml_deserializeDocumentCopyObjectResult(v **types.CopyObjectResult, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12631,38 +12465,6 @@ func awsRestxml_deserializeDocumentEncryptionConfiguration(v **types.EncryptionC
 				sv.ReplicaKmsKeyID = &xtv
 			}
 
-		default:
-			// Do nothing and ignore the unexpected tag element
-
-		}
-		decoder = originalDecoder
-	}
-	*v = sv
-	return nil
-}
-
-func awsRestxml_deserializeDocumentEndEvent(v **types.EndEvent, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	var sv *types.EndEvent
-	if *v == nil {
-		sv = &types.EndEvent{}
-	} else {
-		sv = *v
-	}
-
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			break
-		}
-		originalDecoder := decoder
-		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
-		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
 
@@ -16440,127 +16242,6 @@ func awsRestxml_deserializeDocumentPolicyStatus(v **types.PolicyStatus, decoder 
 	return nil
 }
 
-func awsRestxml_deserializeDocumentProgress(v **types.Progress, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	var sv *types.Progress
-	if *v == nil {
-		sv = &types.Progress{}
-	} else {
-		sv = *v
-	}
-
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			break
-		}
-		originalDecoder := decoder
-		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
-		switch {
-		case strings.EqualFold("BytesProcessed", t.Name.Local):
-			val, done, err := decoder.Value()
-			if err != nil {
-				return err
-			}
-			if done {
-				break
-			}
-			if val != nil {
-				xtv := string(val)
-				i64, err := strconv.ParseInt(xtv, 10, 64)
-				if err != nil {
-					return err
-				}
-				sv.BytesProcessed = &i64
-			}
-
-		case strings.EqualFold("BytesReturned", t.Name.Local):
-			val, done, err := decoder.Value()
-			if err != nil {
-				return err
-			}
-			if done {
-				break
-			}
-			if val != nil {
-				xtv := string(val)
-				i64, err := strconv.ParseInt(xtv, 10, 64)
-				if err != nil {
-					return err
-				}
-				sv.BytesReturned = &i64
-			}
-
-		case strings.EqualFold("BytesScanned", t.Name.Local):
-			val, done, err := decoder.Value()
-			if err != nil {
-				return err
-			}
-			if done {
-				break
-			}
-			if val != nil {
-				xtv := string(val)
-				i64, err := strconv.ParseInt(xtv, 10, 64)
-				if err != nil {
-					return err
-				}
-				sv.BytesScanned = &i64
-			}
-
-		default:
-			// Do nothing and ignore the unexpected tag element
-
-		}
-		decoder = originalDecoder
-	}
-	*v = sv
-	return nil
-}
-
-func awsRestxml_deserializeDocumentProgressEvent(v **types.ProgressEvent, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	var sv *types.ProgressEvent
-	if *v == nil {
-		sv = &types.ProgressEvent{}
-	} else {
-		sv = *v
-	}
-
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			break
-		}
-		originalDecoder := decoder
-		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
-		switch {
-		case strings.EqualFold("Details", t.Name.Local):
-			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-			if err := awsRestxml_deserializeDocumentProgress(&sv.Details, nodeDecoder); err != nil {
-				return err
-			}
-
-		default:
-			// Do nothing and ignore the unexpected tag element
-
-		}
-		decoder = originalDecoder
-	}
-	*v = sv
-	return nil
-}
-
 func awsRestxml_deserializeDocumentPublicAccessBlockConfiguration(v **types.PublicAccessBlockConfiguration, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16794,59 +16475,6 @@ func awsRestxml_deserializeDocumentQueueConfigurationListUnwrapped(v *[]*types.Q
 	*v = sv
 	return nil
 }
-func awsRestxml_deserializeDocumentRecordsEvent(v **types.RecordsEvent, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	var sv *types.RecordsEvent
-	if *v == nil {
-		sv = &types.RecordsEvent{}
-	} else {
-		sv = *v
-	}
-
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			break
-		}
-		originalDecoder := decoder
-		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
-		switch {
-		case strings.EqualFold("Payload", t.Name.Local):
-			var data string
-			val, done, err := decoder.Value()
-			if err != nil {
-				return err
-			}
-			if done {
-				if val == nil {
-					sv.Payload = []byte{}
-				}
-				break
-			}
-			if val != nil {
-				xtv := string(val)
-				data = xtv
-			}
-			sv.Payload, err = base64.StdEncoding.DecodeString(data)
-			if err != nil {
-				return err
-			}
-
-		default:
-			// Do nothing and ignore the unexpected tag element
-
-		}
-		decoder = originalDecoder
-	}
-	*v = sv
-	return nil
-}
-
 func awsRestxml_deserializeDocumentRedirect(v **types.Redirect, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17613,14 +17241,6 @@ func awsRestxml_deserializeDocumentS3KeyFilter(v **types.S3KeyFilter, decoder sm
 	return nil
 }
 
-func awsRestxml_deserializeDocumentSelectObjectContentEventStream(v *types.SelectObjectContentEventStream, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	// TODO: implement union serialization.
-	return nil
-}
-
 func awsRestxml_deserializeDocumentServerSideEncryptionByDefault(v **types.ServerSideEncryptionByDefault, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17972,127 +17592,6 @@ func awsRestxml_deserializeDocumentSSES3(v **types.SSES3, decoder smithyxml.Node
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
-		default:
-			// Do nothing and ignore the unexpected tag element
-
-		}
-		decoder = originalDecoder
-	}
-	*v = sv
-	return nil
-}
-
-func awsRestxml_deserializeDocumentStats(v **types.Stats, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	var sv *types.Stats
-	if *v == nil {
-		sv = &types.Stats{}
-	} else {
-		sv = *v
-	}
-
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			break
-		}
-		originalDecoder := decoder
-		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
-		switch {
-		case strings.EqualFold("BytesProcessed", t.Name.Local):
-			val, done, err := decoder.Value()
-			if err != nil {
-				return err
-			}
-			if done {
-				break
-			}
-			if val != nil {
-				xtv := string(val)
-				i64, err := strconv.ParseInt(xtv, 10, 64)
-				if err != nil {
-					return err
-				}
-				sv.BytesProcessed = &i64
-			}
-
-		case strings.EqualFold("BytesReturned", t.Name.Local):
-			val, done, err := decoder.Value()
-			if err != nil {
-				return err
-			}
-			if done {
-				break
-			}
-			if val != nil {
-				xtv := string(val)
-				i64, err := strconv.ParseInt(xtv, 10, 64)
-				if err != nil {
-					return err
-				}
-				sv.BytesReturned = &i64
-			}
-
-		case strings.EqualFold("BytesScanned", t.Name.Local):
-			val, done, err := decoder.Value()
-			if err != nil {
-				return err
-			}
-			if done {
-				break
-			}
-			if val != nil {
-				xtv := string(val)
-				i64, err := strconv.ParseInt(xtv, 10, 64)
-				if err != nil {
-					return err
-				}
-				sv.BytesScanned = &i64
-			}
-
-		default:
-			// Do nothing and ignore the unexpected tag element
-
-		}
-		decoder = originalDecoder
-	}
-	*v = sv
-	return nil
-}
-
-func awsRestxml_deserializeDocumentStatsEvent(v **types.StatsEvent, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	var sv *types.StatsEvent
-	if *v == nil {
-		sv = &types.StatsEvent{}
-	} else {
-		sv = *v
-	}
-
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			break
-		}
-		originalDecoder := decoder
-		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
-		switch {
-		case strings.EqualFold("Details", t.Name.Local):
-			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-			if err := awsRestxml_deserializeDocumentStats(&sv.Details, nodeDecoder); err != nil {
-				return err
-			}
-
 		default:
 			// Do nothing and ignore the unexpected tag element
 
