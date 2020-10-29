@@ -5,8 +5,10 @@ import (
 	"crypto/x509"
 	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/awslabs/smithy-go/logging"
 )
 
 // resolveDefaultAWSConfig will write default configuration values into the cfg
@@ -17,6 +19,7 @@ import (
 func resolveDefaultAWSConfig(cfg *aws.Config, cfgs configs) error {
 	*cfg = aws.Config{
 		Credentials: aws.AnonymousCredentials{},
+		Logger:      logging.NewStandardLogger(os.Stderr),
 	}
 	return nil
 }
@@ -150,6 +153,34 @@ func resolveEndpointResolver(cfg *aws.Config, configs configs) error {
 	}
 
 	cfg.EndpointResolver = endpointResolver
+
+	return nil
+}
+
+func resolveLogger(cfg *aws.Config, configs configs) error {
+	logger, found, err := getLogger(configs)
+	if err != nil {
+		return err
+	}
+	if !found {
+		return nil
+	}
+
+	cfg.Logger = logger
+
+	return nil
+}
+
+func resolveClientLogMode(cfg *aws.Config, configs configs) error {
+	mode, found, err := getClientLogMode(configs)
+	if err != nil {
+		return err
+	}
+	if !found {
+		return nil
+	}
+
+	cfg.ClientLogMode = mode
 
 	return nil
 }
