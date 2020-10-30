@@ -116,19 +116,19 @@ func benchPutSessionSmithy(b *testing.B) {
 			FulfillmentState: types.FulfillmentStateFulfilled,
 			IntentName:       ptr.String("fooIntent"),
 			Message:          ptr.String("fooMessage"),
-			MessageFormat:    types.MessageFormatTypePlain_text,
+			MessageFormat:    types.MessageFormatTypePlainText,
 			SlotToElicit:     ptr.String("fooSlot"),
 			Slots: map[string]*string{
 				"fooSlot": ptr.String("fooValue"),
 				"barSlot": ptr.String("barValue"),
 			},
-			Type: types.DialogActionTypeElicit_slot,
+			Type: types.DialogActionTypeElicitSlot,
 		},
 		RecentIntentSummaryView: []*types.IntentSummary{
 			{
 				CheckpointLabel:    ptr.String("fooLabel"),
 				ConfirmationStatus: types.ConfirmationStatusConfirmed,
-				DialogActionType:   types.DialogActionTypeElicit_slot,
+				DialogActionType:   types.DialogActionTypeElicitSlot,
 				FulfillmentState:   types.FulfillmentStateFulfilled,
 				IntentName:         ptr.String("fooIntent"),
 				SlotToElicit:       ptr.String("fooSlot"),
