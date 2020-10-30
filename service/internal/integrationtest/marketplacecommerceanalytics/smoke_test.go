@@ -28,7 +28,7 @@ func TestInteg_00_GenerateDataSet(t *testing.T) {
 	client := marketplacecommerceanalytics.NewFromConfig(cfg)
 	params := &marketplacecommerceanalytics.GenerateDataSetInput{
 		DataSetPublicationDate:  aws.Time(smithytime.ParseEpochSeconds(0.000000)),
-		DataSetType:             types.DataSetTypeDaily_business_fees,
+		DataSetType:             types.DataSetTypeDailyBusinessFees,
 		DestinationS3BucketName: aws.String("fake-bucket"),
 		RoleNameArn:             aws.String("fake-arn"),
 		SnsTopicArn:             aws.String("fake-arn"),
