@@ -45,12 +45,14 @@ public class AddAwsConfigFields implements GoIntegration {
     public static final String ENDPOINT_RESOLVER_CONFIG_NAME = "EndpointResolver";
     public static final String HTTP_CLIENT_CONFIG_NAME = "HTTPClient";
     public static final String RETRYER_CONFIG_NAME = "Retryer";
+    public static final String API_OPTIONS_CONFIG_NAME = "APIOptions";
+    public static final String LOGGER_CONFIG_NAME = "Logger";
+    public static final String LOG_MODE_CONFIG_NAME = "ClientLogMode";
 
     private static final String RESOLVE_HTTP_CLIENT = "resolveHTTPClient";
     private static final String RESOLVE_RETRYER = "resolveRetryer";
     private static final String RESOLVE_AWS_CONFIG_ENDPOINT_RESOLVER = "resolveAWSEndpointResolver";
 
-    public static final String API_OPTIONS_CONFIG_NAME = "APIOptions";
     private static final List<AwsConfigField> AWS_CONFIG_FIELDS = ListUtils.of(
             AwsConfigField.builder()
                     .name(REGION_CONFIG_NAME)
@@ -90,6 +92,16 @@ public class AddAwsConfigFields implements GoIntegration {
                     .generatedOnClient(false)
                     .awsResolveFunction(SymbolUtils.createValueSymbolBuilder(RESOLVE_AWS_CONFIG_ENDPOINT_RESOLVER)
                             .build())
+                    .build(),
+            AwsConfigField.builder()
+                    .name(LOGGER_CONFIG_NAME)
+                    .type(getAwsCoreSymbol("Logger"))
+                    .generatedOnClient(false)
+                    .build(),
+            AwsConfigField.builder()
+                    .name(LOG_MODE_CONFIG_NAME)
+                    .type(getAwsCoreSymbol("ClientLogMode"))
+                    .documentation("Configures the events that will be sent to the configured logger.")
                     .build()
     );
 
