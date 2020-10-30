@@ -4,6 +4,8 @@ LINTIGNORESINGLEFIGHT='internal/sync/singleflight/singleflight.go:.+error should
 UNIT_TEST_TAGS=
 BUILD_TAGS=-tags "example,codegen,integration,ec2env"
 
+SMITHY_GO_SRC ?= $(shell pwd)/../smithy-go
+
 EACHMODULE_FAILFAST ?= true
 EACHMODULE_FAILFAST_FLAG=-fail-fast=${EACHMODULE_FAILFAST}
 
@@ -38,7 +40,7 @@ all: generate unit
 ###################
 # Code Generation #
 ###################
-generate: smithy-generate gen-config-asserts gen-repo-mod-replace tidy-modules-. add-module-license-files gen-aws-ptrs
+generate: smithy-generate gen-config-asserts gen-repo-mod-replace gen-mod-dropreplace-smithy tidy-modules-. add-module-license-files gen-aws-ptrs
 
 smithy-generate:
 	cd codegen && ./gradlew clean build -Plog-tests && ./gradlew clean
@@ -67,8 +69,13 @@ gen-repo-mod-replace:
 	@echo "Generating go.mod replace for repo modules"
 	cd internal/repotools/cmd/makerelative && go run ./
 
-gen-mod-replace-local:
-	./mod_replace_local_submodules.sh `pwd` `pwd` `pwd`/../smithy-go
+gen-mod-replace-smithy:
+	cd ./internal/repotools/cmd/eachmodule \
+    		&& go run . "go mod edit -replace github.com/awslabs/smithy-go=${SMITHY_GO_SRC}"
+
+gen-mod-dropreplace-smithy:
+	cd ./internal/repotools/cmd/eachmodule \
+    		&& go run . "go mod edit -dropreplace github.com/awslabs/smithy-go"
 
 gen-aws-ptrs:
 	cd aws && go generate
