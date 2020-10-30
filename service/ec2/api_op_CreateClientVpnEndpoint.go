@@ -93,6 +93,10 @@ type CreateClientVpnEndpointInput struct {
 	// also specify the ID of the VPC that contains the security groups.
 	SecurityGroupIds []*string
 
+	// Specify whether to enable the self-service portal for the Client VPN endpoint.
+	// Default Value: enabled
+	SelfServicePortal types.SelfServicePortal
+
 	// Indicates whether split-tunnel is enabled on the AWS Client VPN endpoint. By
 	// default, split-tunnel on a VPN endpoint is disabled. For information about
 	// split-tunnel VPN endpoints, see Split-Tunnel AWS Client VPN Endpoint

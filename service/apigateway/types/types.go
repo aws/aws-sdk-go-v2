@@ -1469,6 +1469,13 @@ type RestApi struct {
 	// The API's description.
 	Description *string
 
+	// Specifies whether clients can invoke your API by using the default execute-api
+	// endpoint. By default, clients can invoke your API with the default
+	// https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that
+	// clients use a custom domain name to invoke your API, disable the default
+	// endpoint.
+	DisableExecuteApiEndpoint *bool
+
 	// The endpoint configuration of this RestApi showing the endpoint types of the
 	// API.
 	EndpointConfiguration *EndpointConfiguration

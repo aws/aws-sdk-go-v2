@@ -34,14 +34,6 @@ type GetUsagePlanInput struct {
 	//
 	// This member is required.
 	UsagePlanId *string
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // Represents a usage plan than can specify who can assess associated API stages

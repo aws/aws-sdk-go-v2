@@ -33,14 +33,6 @@ type DeleteClientCertificateInput struct {
 	//
 	// This member is required.
 	ClientCertificateId *string
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 type DeleteClientCertificateOutput struct {

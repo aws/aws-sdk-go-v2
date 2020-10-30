@@ -4610,6 +4610,23 @@ func awsRestjson1_serializeDocument__listOfCaptionSelector(v []*types.CaptionSel
 	return nil
 }
 
+func awsRestjson1_serializeDocument__listOfFailoverCondition(v []*types.FailoverCondition, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			av.Null()
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentFailoverCondition(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocument__listOfHlsAdMarkers(v []types.HlsAdMarkers, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -5381,6 +5398,18 @@ func awsRestjson1_serializeDocumentAudioTrackSelection(v *types.AudioTrackSelect
 func awsRestjson1_serializeDocumentAutomaticInputFailoverSettings(v *types.AutomaticInputFailoverSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ErrorClearTimeMsec != nil {
+		ok := object.Key("errorClearTimeMsec")
+		ok.Integer(*v.ErrorClearTimeMsec)
+	}
+
+	if v.FailoverConditions != nil {
+		ok := object.Key("failoverConditions")
+		if err := awsRestjson1_serializeDocument__listOfFailoverCondition(v.FailoverConditions, ok); err != nil {
+			return err
+		}
+	}
 
 	if len(v.InputPreference) > 0 {
 		ok := object.Key("inputPreference")
@@ -6281,6 +6310,34 @@ func awsRestjson1_serializeDocumentEncoderSettings(v *types.EncoderSettings, val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentFailoverCondition(v *types.FailoverCondition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FailoverConditionSettings != nil {
+		ok := object.Key("failoverConditionSettings")
+		if err := awsRestjson1_serializeDocumentFailoverConditionSettings(v.FailoverConditionSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFailoverConditionSettings(v *types.FailoverConditionSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InputLossSettings != nil {
+		ok := object.Key("inputLossSettings")
+		if err := awsRestjson1_serializeDocumentInputLossFailoverSettings(v.InputLossSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentFeatureActivations(v *types.FeatureActivations, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7102,6 +7159,11 @@ func awsRestjson1_serializeDocumentHlsGroupSettings(v *types.HlsGroupSettings, v
 		ok.String(string(v.DirectoryStructure))
 	}
 
+	if len(v.DiscontinuityTags) > 0 {
+		ok := object.Key("discontinuityTags")
+		ok.String(string(v.DiscontinuityTags))
+	}
+
 	if len(v.EncryptionType) > 0 {
 		ok := object.Key("encryptionType")
 		ok.String(string(v.EncryptionType))
@@ -7122,6 +7184,11 @@ func awsRestjson1_serializeDocumentHlsGroupSettings(v *types.HlsGroupSettings, v
 	if len(v.IFrameOnlyPlaylists) > 0 {
 		ok := object.Key("iFrameOnlyPlaylists")
 		ok.String(string(v.IFrameOnlyPlaylists))
+	}
+
+	if len(v.IncompleteSegmentBehavior) > 0 {
+		ok := object.Key("incompleteSegmentBehavior")
+		ok.String(string(v.IncompleteSegmentBehavior))
 	}
 
 	if v.IndexNSegments != nil {
@@ -7606,6 +7673,18 @@ func awsRestjson1_serializeDocumentInputLossBehavior(v *types.InputLossBehavior,
 	if v.RepeatFrameMsec != nil {
 		ok := object.Key("repeatFrameMsec")
 		ok.Integer(*v.RepeatFrameMsec)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInputLossFailoverSettings(v *types.InputLossFailoverSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InputLossThresholdMsec != nil {
+		ok := object.Key("inputLossThresholdMsec")
+		ok.Integer(*v.InputLossThresholdMsec)
 	}
 
 	return nil

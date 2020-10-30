@@ -10448,6 +10448,11 @@ func awsRestjson1_deserializeDocumentCriterionAdditionalProperties(v **types.Cri
 				return err
 			}
 
+		case "eqExactMatch":
+			if err := awsRestjson1_deserializeDocument__listOf__string(&sv.EqExactMatch, value); err != nil {
+				return err
+			}
+
 		case "gt":
 			if value != nil {
 				jtv, ok := value.(json.Number)

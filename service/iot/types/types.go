@@ -1397,6 +1397,13 @@ type Job struct {
 	// The time, in seconds since the epoch, when the job was last updated.
 	LastUpdatedAt *time.Time
 
+	// The namespace used to indicate that a job is a customer-managed job. When you
+	// specify a value for this parameter, AWS IoT Core sends jobs notifications to
+	// MQTT topics that contain the value in the following format.
+	// $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/ The
+	// namespaceId feature is in public preview.
+	NamespaceId *string
+
 	// Configuration for pre-signed S3 URLs.
 	PresignedUrlConfig *PresignedUrlConfig
 

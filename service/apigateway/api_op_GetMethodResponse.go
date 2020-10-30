@@ -48,14 +48,6 @@ type GetMethodResponseInput struct {
 	//
 	// This member is required.
 	StatusCode *string
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // Represents a method response of a given HTTP status code returned to the client.

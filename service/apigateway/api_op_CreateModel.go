@@ -34,11 +34,6 @@ type CreateModelInput struct {
 	// This member is required.
 	ContentType *string
 
-	// [Required] The name of the model. Must be alphanumeric.
-	//
-	// This member is required.
-	Name *string
-
 	// [Required] The RestApi identifier under which the Model will be created.
 	//
 	// This member is required.
@@ -50,12 +45,6 @@ type CreateModelInput struct {
 	// The schema for the model. For application/json models, this should be JSON
 	// schema draft 4 (https://tools.ietf.org/html/draft-zyp-json-schema-04) model.
 	Schema *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // Represents the data structure of a method's request or response payload. A

@@ -50,6 +50,13 @@ type AssociateTargetsWithJobInput struct {
 	// An optional comment string describing why the job was associated with the
 	// targets.
 	Comment *string
+
+	// The namespace used to indicate that a job is a customer-managed job. When you
+	// specify a value for this parameter, AWS IoT Core sends jobs notifications to
+	// MQTT topics that contain the value in the following format.
+	// $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/ The
+	// namespaceId feature is in public preview.
+	NamespaceId *string
 }
 
 type AssociateTargetsWithJobOutput struct {

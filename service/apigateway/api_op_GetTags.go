@@ -38,17 +38,9 @@ type GetTagsInput struct {
 	// default value is 25 and the maximum value is 500.
 	Limit *int32
 
-	Name *string
-
 	// (Not currently supported) The current pagination position in the paged result
 	// set.
 	Position *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // The collection of tags. Each tag element is associated with a given resource.

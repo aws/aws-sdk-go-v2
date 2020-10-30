@@ -45,14 +45,6 @@ type CreateUsagePlanKeyInput struct {
 	//
 	// This member is required.
 	UsagePlanId *string
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // Represents a usage plan key to identify a plan customer. To associate an API

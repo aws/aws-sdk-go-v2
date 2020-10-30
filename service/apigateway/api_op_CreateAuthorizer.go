@@ -31,11 +31,6 @@ func (c *Client) CreateAuthorizer(ctx context.Context, params *CreateAuthorizerI
 // Request to add a new Authorizer to an existing RestApi resource.
 type CreateAuthorizerInput struct {
 
-	// [Required] The name of the authorizer.
-	//
-	// This member is required.
-	Name *string
-
 	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.
@@ -115,12 +110,6 @@ type CreateAuthorizerInput struct {
 	// arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}. For a TOKEN
 	// or REQUEST authorizer, this is not defined.
 	ProviderARNs []*string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // Represents an authorization layer for methods. If enabled on a method, API

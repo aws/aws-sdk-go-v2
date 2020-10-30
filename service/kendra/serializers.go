@@ -1338,6 +1338,333 @@ func awsAwsjson11_serializeDocumentColumnConfiguration(v *types.ColumnConfigurat
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentConfluenceAttachmentConfiguration(v *types.ConfluenceAttachmentConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AttachmentFieldMappings != nil {
+		ok := object.Key("AttachmentFieldMappings")
+		if err := awsAwsjson11_serializeDocumentConfluenceAttachmentFieldMappingsList(v.AttachmentFieldMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CrawlAttachments != nil {
+		ok := object.Key("CrawlAttachments")
+		ok.Boolean(*v.CrawlAttachments)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentConfluenceAttachmentFieldMappingsList(v []*types.ConfluenceAttachmentToIndexFieldMapping, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			av.Null()
+			continue
+		}
+		if err := awsAwsjson11_serializeDocumentConfluenceAttachmentToIndexFieldMapping(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentConfluenceAttachmentToIndexFieldMapping(v *types.ConfluenceAttachmentToIndexFieldMapping, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DataSourceFieldName) > 0 {
+		ok := object.Key("DataSourceFieldName")
+		ok.String(string(v.DataSourceFieldName))
+	}
+
+	if v.DateFieldFormat != nil {
+		ok := object.Key("DateFieldFormat")
+		ok.String(*v.DateFieldFormat)
+	}
+
+	if v.IndexFieldName != nil {
+		ok := object.Key("IndexFieldName")
+		ok.String(*v.IndexFieldName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentConfluenceBlogConfiguration(v *types.ConfluenceBlogConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BlogFieldMappings != nil {
+		ok := object.Key("BlogFieldMappings")
+		if err := awsAwsjson11_serializeDocumentConfluenceBlogFieldMappingsList(v.BlogFieldMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentConfluenceBlogFieldMappingsList(v []*types.ConfluenceBlogToIndexFieldMapping, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			av.Null()
+			continue
+		}
+		if err := awsAwsjson11_serializeDocumentConfluenceBlogToIndexFieldMapping(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentConfluenceBlogToIndexFieldMapping(v *types.ConfluenceBlogToIndexFieldMapping, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DataSourceFieldName) > 0 {
+		ok := object.Key("DataSourceFieldName")
+		ok.String(string(v.DataSourceFieldName))
+	}
+
+	if v.DateFieldFormat != nil {
+		ok := object.Key("DateFieldFormat")
+		ok.String(*v.DateFieldFormat)
+	}
+
+	if v.IndexFieldName != nil {
+		ok := object.Key("IndexFieldName")
+		ok.String(*v.IndexFieldName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentConfluenceConfiguration(v *types.ConfluenceConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AttachmentConfiguration != nil {
+		ok := object.Key("AttachmentConfiguration")
+		if err := awsAwsjson11_serializeDocumentConfluenceAttachmentConfiguration(v.AttachmentConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.BlogConfiguration != nil {
+		ok := object.Key("BlogConfiguration")
+		if err := awsAwsjson11_serializeDocumentConfluenceBlogConfiguration(v.BlogConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ExclusionPatterns != nil {
+		ok := object.Key("ExclusionPatterns")
+		if err := awsAwsjson11_serializeDocumentDataSourceInclusionsExclusionsStrings(v.ExclusionPatterns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InclusionPatterns != nil {
+		ok := object.Key("InclusionPatterns")
+		if err := awsAwsjson11_serializeDocumentDataSourceInclusionsExclusionsStrings(v.InclusionPatterns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PageConfiguration != nil {
+		ok := object.Key("PageConfiguration")
+		if err := awsAwsjson11_serializeDocumentConfluencePageConfiguration(v.PageConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SecretArn != nil {
+		ok := object.Key("SecretArn")
+		ok.String(*v.SecretArn)
+	}
+
+	if v.ServerUrl != nil {
+		ok := object.Key("ServerUrl")
+		ok.String(*v.ServerUrl)
+	}
+
+	if v.SpaceConfiguration != nil {
+		ok := object.Key("SpaceConfiguration")
+		if err := awsAwsjson11_serializeDocumentConfluenceSpaceConfiguration(v.SpaceConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Version) > 0 {
+		ok := object.Key("Version")
+		ok.String(string(v.Version))
+	}
+
+	if v.VpcConfiguration != nil {
+		ok := object.Key("VpcConfiguration")
+		if err := awsAwsjson11_serializeDocumentDataSourceVpcConfiguration(v.VpcConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentConfluencePageConfiguration(v *types.ConfluencePageConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PageFieldMappings != nil {
+		ok := object.Key("PageFieldMappings")
+		if err := awsAwsjson11_serializeDocumentConfluencePageFieldMappingsList(v.PageFieldMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentConfluencePageFieldMappingsList(v []*types.ConfluencePageToIndexFieldMapping, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			av.Null()
+			continue
+		}
+		if err := awsAwsjson11_serializeDocumentConfluencePageToIndexFieldMapping(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentConfluencePageToIndexFieldMapping(v *types.ConfluencePageToIndexFieldMapping, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DataSourceFieldName) > 0 {
+		ok := object.Key("DataSourceFieldName")
+		ok.String(string(v.DataSourceFieldName))
+	}
+
+	if v.DateFieldFormat != nil {
+		ok := object.Key("DateFieldFormat")
+		ok.String(*v.DateFieldFormat)
+	}
+
+	if v.IndexFieldName != nil {
+		ok := object.Key("IndexFieldName")
+		ok.String(*v.IndexFieldName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentConfluenceSpaceConfiguration(v *types.ConfluenceSpaceConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CrawlArchivedSpaces != nil {
+		ok := object.Key("CrawlArchivedSpaces")
+		ok.Boolean(*v.CrawlArchivedSpaces)
+	}
+
+	if v.CrawlPersonalSpaces != nil {
+		ok := object.Key("CrawlPersonalSpaces")
+		ok.Boolean(*v.CrawlPersonalSpaces)
+	}
+
+	if v.ExcludeSpaces != nil {
+		ok := object.Key("ExcludeSpaces")
+		if err := awsAwsjson11_serializeDocumentConfluenceSpaceList(v.ExcludeSpaces, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IncludeSpaces != nil {
+		ok := object.Key("IncludeSpaces")
+		if err := awsAwsjson11_serializeDocumentConfluenceSpaceList(v.IncludeSpaces, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SpaceFieldMappings != nil {
+		ok := object.Key("SpaceFieldMappings")
+		if err := awsAwsjson11_serializeDocumentConfluenceSpaceFieldMappingsList(v.SpaceFieldMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentConfluenceSpaceFieldMappingsList(v []*types.ConfluenceSpaceToIndexFieldMapping, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			av.Null()
+			continue
+		}
+		if err := awsAwsjson11_serializeDocumentConfluenceSpaceToIndexFieldMapping(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentConfluenceSpaceList(v []*string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			av.Null()
+			continue
+		}
+		av.String(*v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentConfluenceSpaceToIndexFieldMapping(v *types.ConfluenceSpaceToIndexFieldMapping, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DataSourceFieldName) > 0 {
+		ok := object.Key("DataSourceFieldName")
+		ok.String(string(v.DataSourceFieldName))
+	}
+
+	if v.DateFieldFormat != nil {
+		ok := object.Key("DateFieldFormat")
+		ok.String(*v.DateFieldFormat)
+	}
+
+	if v.IndexFieldName != nil {
+		ok := object.Key("IndexFieldName")
+		ok.String(*v.IndexFieldName)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentConnectionConfiguration(v *types.ConnectionConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1420,6 +1747,13 @@ func awsAwsjson11_serializeDocumentDatabaseConfiguration(v *types.DatabaseConfig
 func awsAwsjson11_serializeDocumentDataSourceConfiguration(v *types.DataSourceConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ConfluenceConfiguration != nil {
+		ok := object.Key("ConfluenceConfiguration")
+		if err := awsAwsjson11_serializeDocumentConfluenceConfiguration(v.ConfluenceConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.DatabaseConfiguration != nil {
 		ok := object.Key("DatabaseConfiguration")

@@ -49,8 +49,6 @@ type PutMethodResponseInput struct {
 	// This member is required.
 	StatusCode *string
 
-	Name *string
-
 	// Specifies the Model resources used for the response's content type. Response
 	// models are represented as a key/value map, with a content type as the key and a
 	// Model name as the value.
@@ -69,12 +67,6 @@ type PutMethodResponseInput struct {
 	// integration.response.body.{JSON-expression}, where JSON-expression is a valid
 	// JSON expression without the $ prefix.)
 	ResponseParameters map[string]*bool
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // Represents a method response of a given HTTP status code returned to the client.

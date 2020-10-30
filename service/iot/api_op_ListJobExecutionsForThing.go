@@ -37,6 +37,13 @@ type ListJobExecutionsForThingInput struct {
 	// The maximum number of results to be returned per request.
 	MaxResults *int32
 
+	// The namespace used to indicate that a job is a customer-managed job. When you
+	// specify a value for this parameter, AWS IoT Core sends jobs notifications to
+	// MQTT topics that contain the value in the following format.
+	// $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/ The
+	// namespaceId feature is in public preview.
+	NamespaceId *string
+
 	// The token to retrieve the next set of results.
 	NextToken *string
 

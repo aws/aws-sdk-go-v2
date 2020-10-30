@@ -34,16 +34,8 @@ type GetVpcLinksInput struct {
 	// maximum value is 500.
 	Limit *int32
 
-	Name *string
-
 	// The current pagination position in the paged result set.
 	Position *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // The collection of VPC links under the caller's account in a region. Getting

@@ -180,6 +180,62 @@ type DBCluster struct {
 	VpcSecurityGroups []*VpcSecurityGroupMembership
 }
 
+// This data type represents the information you need to connect to an Amazon
+// Neptune DB cluster. This data type is used as a response element in the
+// following actions:
+//
+// * CreateDBClusterEndpoint
+//
+// * DescribeDBClusterEndpoints
+//
+// *
+// ModifyDBClusterEndpoint
+//
+// * DeleteDBClusterEndpoint
+//
+// For the data structure that
+// represents Amazon Neptune DB instance endpoints, see Endpoint.
+type DBClusterEndpoint struct {
+
+	// The type associated with a custom endpoint. One of: READER, WRITER, ANY.
+	CustomEndpointType *string
+
+	// The Amazon Resource Name (ARN) for the endpoint.
+	DBClusterEndpointArn *string
+
+	// The identifier associated with the endpoint. This parameter is stored as a
+	// lowercase string.
+	DBClusterEndpointIdentifier *string
+
+	// A unique system-generated identifier for an endpoint. It remains the same for
+	// the whole life of the endpoint.
+	DBClusterEndpointResourceIdentifier *string
+
+	// The DB cluster identifier of the DB cluster associated with the endpoint. This
+	// parameter is stored as a lowercase string.
+	DBClusterIdentifier *string
+
+	// The DNS address of the endpoint.
+	Endpoint *string
+
+	// The type of the endpoint. One of: READER, WRITER, CUSTOM.
+	EndpointType *string
+
+	// List of DB instance identifiers that aren't part of the custom endpoint group.
+	// All other eligible instances are reachable through the custom endpoint. Only
+	// relevant if the list of static members is empty.
+	ExcludedMembers []*string
+
+	// List of DB instance identifiers that are part of the custom endpoint group.
+	StaticMembers []*string
+
+	// The current status of the endpoint. One of: creating, available, deleting,
+	// inactive, modifying. The inactive state applies to an endpoint that cannot be
+	// used for a certain kind of cluster, such as a writer endpoint for a read-only
+	// secondary cluster in a global database.
+	Status *string
+}
+
 // Contains information about an instance that is part of a DB cluster.
 type DBClusterMember struct {
 
@@ -231,6 +287,10 @@ type DBClusterParameterGroup struct {
 // Describes an AWS Identity and Access Management (IAM) role that is associated
 // with a DB cluster.
 type DBClusterRole struct {
+
+	// The name of the feature associated with the AWS Identity and Access Management
+	// (IAM) role. For the list of supported feature names, see DBEngineVersion.
+	FeatureName *string
 
 	// The Amazon Resource Name (ARN) of the IAM role that is associated with the DB
 	// cluster.
@@ -724,7 +784,8 @@ type DoubleRange struct {
 	To *float64
 }
 
-// Specifies a connection endpoint.
+// Specifies a connection endpoint. For the data structure that represents Amazon
+// Neptune DB cluster endpoints, see DBClusterEndpoint.
 type Endpoint struct {
 
 	// Specifies the DNS address of the DB instance.

@@ -64,7 +64,7 @@ type CreateAppInput struct {
 
 type CreateAppOutput struct {
 
-	// The App's Amazon Resource Name (ARN).
+	// The Amazon Resource Name (ARN) of the app.
 	AppArn *string
 
 	// Metadata pertaining to the operation's result.

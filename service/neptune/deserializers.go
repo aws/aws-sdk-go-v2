@@ -877,6 +877,117 @@ func awsAwsquery_deserializeOpErrorCreateDBCluster(response *smithyhttp.Response
 	}
 }
 
+type awsAwsquery_deserializeOpCreateDBClusterEndpoint struct {
+}
+
+func (*awsAwsquery_deserializeOpCreateDBClusterEndpoint) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsquery_deserializeOpCreateDBClusterEndpoint) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsquery_deserializeOpErrorCreateDBClusterEndpoint(response, &metadata)
+	}
+	output := &CreateDBClusterEndpointOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsAwsquery_deserializeOpDocumentCreateDBClusterEndpointOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsquery_deserializeOpErrorCreateDBClusterEndpoint(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
+	if err != nil {
+		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	case strings.EqualFold("DBClusterEndpointAlreadyExistsFault", errorCode):
+		return awsAwsquery_deserializeErrorDBClusterEndpointAlreadyExistsFault(response, errorBody)
+
+	case strings.EqualFold("DBClusterEndpointQuotaExceededFault", errorCode):
+		return awsAwsquery_deserializeErrorDBClusterEndpointQuotaExceededFault(response, errorBody)
+
+	case strings.EqualFold("DBClusterNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorDBClusterNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("DBInstanceNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorDBInstanceNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("InvalidDBClusterStateFault", errorCode):
+		return awsAwsquery_deserializeErrorInvalidDBClusterStateFault(response, errorBody)
+
+	case strings.EqualFold("InvalidDBInstanceStateFault", errorCode):
+		return awsAwsquery_deserializeErrorInvalidDBInstanceStateFault(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsquery_deserializeOpCreateDBClusterParameterGroup struct {
 }
 
@@ -1660,6 +1771,108 @@ func awsAwsquery_deserializeOpErrorDeleteDBCluster(response *smithyhttp.Response
 	}
 }
 
+type awsAwsquery_deserializeOpDeleteDBClusterEndpoint struct {
+}
+
+func (*awsAwsquery_deserializeOpDeleteDBClusterEndpoint) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsquery_deserializeOpDeleteDBClusterEndpoint) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsquery_deserializeOpErrorDeleteDBClusterEndpoint(response, &metadata)
+	}
+	output := &DeleteDBClusterEndpointOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsAwsquery_deserializeOpDocumentDeleteDBClusterEndpointOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsquery_deserializeOpErrorDeleteDBClusterEndpoint(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
+	if err != nil {
+		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	case strings.EqualFold("DBClusterEndpointNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorDBClusterEndpointNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("InvalidDBClusterEndpointStateFault", errorCode):
+		return awsAwsquery_deserializeErrorInvalidDBClusterEndpointStateFault(response, errorBody)
+
+	case strings.EqualFold("InvalidDBClusterStateFault", errorCode):
+		return awsAwsquery_deserializeErrorInvalidDBClusterStateFault(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsquery_deserializeOpDeleteDBClusterParameterGroup struct {
 }
 
@@ -2255,6 +2468,102 @@ func awsAwsquery_deserializeOpErrorDeleteEventSubscription(response *smithyhttp.
 
 	case strings.EqualFold("SubscriptionNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorSubscriptionNotFoundFault(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsquery_deserializeOpDescribeDBClusterEndpoints struct {
+}
+
+func (*awsAwsquery_deserializeOpDescribeDBClusterEndpoints) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsquery_deserializeOpDescribeDBClusterEndpoints) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsquery_deserializeOpErrorDescribeDBClusterEndpoints(response, &metadata)
+	}
+	output := &DescribeDBClusterEndpointsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsAwsquery_deserializeOpDocumentDescribeDBClusterEndpointsOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsquery_deserializeOpErrorDescribeDBClusterEndpoints(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
+	if err != nil {
+		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	case strings.EqualFold("DBClusterNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorDBClusterNotFoundFault(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -4309,6 +4618,114 @@ func awsAwsquery_deserializeOpErrorModifyDBCluster(response *smithyhttp.Response
 	}
 }
 
+type awsAwsquery_deserializeOpModifyDBClusterEndpoint struct {
+}
+
+func (*awsAwsquery_deserializeOpModifyDBClusterEndpoint) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsquery_deserializeOpModifyDBClusterEndpoint) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsquery_deserializeOpErrorModifyDBClusterEndpoint(response, &metadata)
+	}
+	output := &ModifyDBClusterEndpointOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsAwsquery_deserializeOpDocumentModifyDBClusterEndpointOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsquery_deserializeOpErrorModifyDBClusterEndpoint(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
+	if err != nil {
+		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	case strings.EqualFold("DBClusterEndpointNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorDBClusterEndpointNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("DBInstanceNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorDBInstanceNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("InvalidDBClusterEndpointStateFault", errorCode):
+		return awsAwsquery_deserializeErrorInvalidDBClusterEndpointStateFault(response, errorBody)
+
+	case strings.EqualFold("InvalidDBClusterStateFault", errorCode):
+		return awsAwsquery_deserializeErrorInvalidDBClusterStateFault(response, errorBody)
+
+	case strings.EqualFold("InvalidDBInstanceStateFault", errorCode):
+		return awsAwsquery_deserializeErrorInvalidDBInstanceStateFault(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsquery_deserializeOpModifyDBClusterParameterGroup struct {
 }
 
@@ -6256,6 +6673,105 @@ func awsAwsquery_deserializeErrorDBClusterAlreadyExistsFault(response *smithyhtt
 	return output
 }
 
+func awsAwsquery_deserializeErrorDBClusterEndpointAlreadyExistsFault(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.DBClusterEndpointAlreadyExistsFault{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsAwsquery_deserializeDocumentDBClusterEndpointAlreadyExistsFault(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
+func awsAwsquery_deserializeErrorDBClusterEndpointNotFoundFault(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.DBClusterEndpointNotFoundFault{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsAwsquery_deserializeDocumentDBClusterEndpointNotFoundFault(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
+func awsAwsquery_deserializeErrorDBClusterEndpointQuotaExceededFault(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.DBClusterEndpointQuotaExceededFault{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsAwsquery_deserializeDocumentDBClusterEndpointQuotaExceededFault(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
 func awsAwsquery_deserializeErrorDBClusterNotFoundFault(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.DBClusterNotFoundFault{}
 	var buff [1024]byte
@@ -7168,6 +7684,39 @@ func awsAwsquery_deserializeErrorInsufficientStorageClusterCapacityFault(respons
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
 	err = awsAwsquery_deserializeDocumentInsufficientStorageClusterCapacityFault(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
+func awsAwsquery_deserializeErrorInvalidDBClusterEndpointStateFault(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.InvalidDBClusterEndpointStateFault{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsAwsquery_deserializeDocumentInvalidDBClusterEndpointStateFault(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -9145,6 +9694,383 @@ func awsAwsquery_deserializeDocumentDBClusterAlreadyExistsFault(v **types.DBClus
 	return nil
 }
 
+func awsAwsquery_deserializeDocumentDBClusterEndpoint(v **types.DBClusterEndpoint, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.DBClusterEndpoint
+	if *v == nil {
+		sv = &types.DBClusterEndpoint{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("CustomEndpointType", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.CustomEndpointType = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.CustomEndpointType = &xtv
+			}
+
+		case strings.EqualFold("DBClusterEndpointArn", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.DBClusterEndpointArn = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.DBClusterEndpointArn = &xtv
+			}
+
+		case strings.EqualFold("DBClusterEndpointIdentifier", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.DBClusterEndpointIdentifier = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.DBClusterEndpointIdentifier = &xtv
+			}
+
+		case strings.EqualFold("DBClusterEndpointResourceIdentifier", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.DBClusterEndpointResourceIdentifier = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.DBClusterEndpointResourceIdentifier = &xtv
+			}
+
+		case strings.EqualFold("DBClusterIdentifier", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.DBClusterIdentifier = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.DBClusterIdentifier = &xtv
+			}
+
+		case strings.EqualFold("Endpoint", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.Endpoint = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.Endpoint = &xtv
+			}
+
+		case strings.EqualFold("EndpointType", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.EndpointType = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.EndpointType = &xtv
+			}
+
+		case strings.EqualFold("ExcludedMembers", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentStringList(&sv.ExcludedMembers, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("StaticMembers", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentStringList(&sv.StaticMembers, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("Status", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.Status = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.Status = &xtv
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentDBClusterEndpointAlreadyExistsFault(v **types.DBClusterEndpointAlreadyExistsFault, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.DBClusterEndpointAlreadyExistsFault
+	if *v == nil {
+		sv = &types.DBClusterEndpointAlreadyExistsFault{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("message", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.Message = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.Message = &xtv
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentDBClusterEndpointList(v *[]*types.DBClusterEndpoint, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []*types.DBClusterEndpoint
+	if *v == nil {
+		sv = make([]*types.DBClusterEndpoint, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		for {
+			if strings.EqualFold("DBClusterEndpointList", t.Name.Local) {
+				var col *types.DBClusterEndpoint
+				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+				if err := awsAwsquery_deserializeDocumentDBClusterEndpoint(&col, nodeDecoder); err != nil {
+					return err
+				}
+				sv = append(sv, col)
+				break
+			} else {
+				break
+			}
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentDBClusterEndpointListUnwrapped(v *[]*types.DBClusterEndpoint, decoder smithyxml.NodeDecoder) error {
+	var sv []*types.DBClusterEndpoint
+	if *v == nil {
+		sv = make([]*types.DBClusterEndpoint, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv *types.DBClusterEndpoint
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		if err := awsAwsquery_deserializeDocumentDBClusterEndpoint(&mv, nodeDecoder); err != nil {
+			return err
+		}
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
+func awsAwsquery_deserializeDocumentDBClusterEndpointNotFoundFault(v **types.DBClusterEndpointNotFoundFault, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.DBClusterEndpointNotFoundFault
+	if *v == nil {
+		sv = &types.DBClusterEndpointNotFoundFault{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("message", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.Message = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.Message = &xtv
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentDBClusterEndpointQuotaExceededFault(v **types.DBClusterEndpointQuotaExceededFault, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.DBClusterEndpointQuotaExceededFault
+	if *v == nil {
+		sv = &types.DBClusterEndpointQuotaExceededFault{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("message", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.Message = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.Message = &xtv
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentDBClusterList(v *[]*types.DBCluster, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9812,6 +10738,22 @@ func awsAwsquery_deserializeDocumentDBClusterRole(v **types.DBClusterRole, decod
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("FeatureName", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.FeatureName = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.FeatureName = &xtv
+			}
+
 		case strings.EqualFold("RoleArn", t.Name.Local):
 			val, done, err := decoder.Value()
 			if err != nil {
@@ -14541,6 +15483,54 @@ func awsAwsquery_deserializeDocumentInsufficientStorageClusterCapacityFault(v **
 	return nil
 }
 
+func awsAwsquery_deserializeDocumentInvalidDBClusterEndpointStateFault(v **types.InvalidDBClusterEndpointStateFault, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.InvalidDBClusterEndpointStateFault
+	if *v == nil {
+		sv = &types.InvalidDBClusterEndpointStateFault{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("message", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.Message = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.Message = &xtv
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentInvalidDBClusterSnapshotStateFault(v **types.InvalidDBClusterSnapshotStateFault, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17632,6 +18622,88 @@ func awsAwsquery_deserializeDocumentStorageTypeNotSupportedFault(v **types.Stora
 	return nil
 }
 
+func awsAwsquery_deserializeDocumentStringList(v *[]*string, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []*string
+	if *v == nil {
+		sv = make([]*string, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		memberDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		decoder = memberDecoder
+		for {
+			if strings.EqualFold("member", t.Name.Local) {
+				var col *string
+				val, done, err := decoder.Value()
+				if err != nil {
+					return err
+				}
+				if done {
+					if val == nil {
+						col = ptr.String("")
+					}
+					break
+				}
+				if val != nil {
+					xtv := string(val)
+					col = &xtv
+				}
+				sv = append(sv, col)
+			} else {
+				break
+			}
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentStringListUnwrapped(v *[]*string, decoder smithyxml.NodeDecoder) error {
+	var sv []*string
+	if *v == nil {
+		sv = make([]*string, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv *string
+		t := decoder.StartEl
+		_ = t
+		val, done, err := decoder.Value()
+		if err != nil {
+			return err
+		}
+		if done {
+			if val == nil {
+				mv = ptr.String("")
+			}
+			break
+		}
+		if val != nil {
+			xtv := string(val)
+			mv = &xtv
+		}
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
 func awsAwsquery_deserializeDocumentSubnet(v **types.Subnet, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -18967,6 +20039,178 @@ func awsAwsquery_deserializeOpDocumentCopyDBParameterGroupOutput(v **CopyDBParam
 	return nil
 }
 
+func awsAwsquery_deserializeOpDocumentCreateDBClusterEndpointOutput(v **CreateDBClusterEndpointOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *CreateDBClusterEndpointOutput
+	if *v == nil {
+		sv = &CreateDBClusterEndpointOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("CustomEndpointType", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.CustomEndpointType = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.CustomEndpointType = &xtv
+			}
+
+		case strings.EqualFold("DBClusterEndpointArn", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.DBClusterEndpointArn = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.DBClusterEndpointArn = &xtv
+			}
+
+		case strings.EqualFold("DBClusterEndpointIdentifier", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.DBClusterEndpointIdentifier = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.DBClusterEndpointIdentifier = &xtv
+			}
+
+		case strings.EqualFold("DBClusterEndpointResourceIdentifier", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.DBClusterEndpointResourceIdentifier = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.DBClusterEndpointResourceIdentifier = &xtv
+			}
+
+		case strings.EqualFold("DBClusterIdentifier", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.DBClusterIdentifier = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.DBClusterIdentifier = &xtv
+			}
+
+		case strings.EqualFold("Endpoint", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.Endpoint = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.Endpoint = &xtv
+			}
+
+		case strings.EqualFold("EndpointType", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.EndpointType = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.EndpointType = &xtv
+			}
+
+		case strings.EqualFold("ExcludedMembers", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentStringList(&sv.ExcludedMembers, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("StaticMembers", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentStringList(&sv.StaticMembers, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("Status", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.Status = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.Status = &xtv
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeOpDocumentCreateDBClusterOutput(v **CreateDBClusterOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -19233,6 +20477,178 @@ func awsAwsquery_deserializeOpDocumentCreateEventSubscriptionOutput(v **CreateEv
 	return nil
 }
 
+func awsAwsquery_deserializeOpDocumentDeleteDBClusterEndpointOutput(v **DeleteDBClusterEndpointOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *DeleteDBClusterEndpointOutput
+	if *v == nil {
+		sv = &DeleteDBClusterEndpointOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("CustomEndpointType", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.CustomEndpointType = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.CustomEndpointType = &xtv
+			}
+
+		case strings.EqualFold("DBClusterEndpointArn", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.DBClusterEndpointArn = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.DBClusterEndpointArn = &xtv
+			}
+
+		case strings.EqualFold("DBClusterEndpointIdentifier", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.DBClusterEndpointIdentifier = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.DBClusterEndpointIdentifier = &xtv
+			}
+
+		case strings.EqualFold("DBClusterEndpointResourceIdentifier", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.DBClusterEndpointResourceIdentifier = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.DBClusterEndpointResourceIdentifier = &xtv
+			}
+
+		case strings.EqualFold("DBClusterIdentifier", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.DBClusterIdentifier = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.DBClusterIdentifier = &xtv
+			}
+
+		case strings.EqualFold("Endpoint", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.Endpoint = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.Endpoint = &xtv
+			}
+
+		case strings.EqualFold("EndpointType", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.EndpointType = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.EndpointType = &xtv
+			}
+
+		case strings.EqualFold("ExcludedMembers", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentStringList(&sv.ExcludedMembers, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("StaticMembers", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentStringList(&sv.StaticMembers, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("Status", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.Status = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.Status = &xtv
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeOpDocumentDeleteDBClusterOutput(v **DeleteDBClusterOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -19469,6 +20885,60 @@ func awsAwsquery_deserializeOpDocumentDeleteEventSubscriptionOutput(v **DeleteEv
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentEventSubscription(&sv.EventSubscription, nodeDecoder); err != nil {
 				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeOpDocumentDescribeDBClusterEndpointsOutput(v **DescribeDBClusterEndpointsOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *DescribeDBClusterEndpointsOutput
+	if *v == nil {
+		sv = &DescribeDBClusterEndpointsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("DBClusterEndpoints", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentDBClusterEndpointList(&sv.DBClusterEndpoints, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("Marker", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.Marker = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.Marker = &xtv
 			}
 
 		default:
@@ -20437,6 +21907,178 @@ func awsAwsquery_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsForR
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentTagList(&sv.TagList, nodeDecoder); err != nil {
 				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeOpDocumentModifyDBClusterEndpointOutput(v **ModifyDBClusterEndpointOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *ModifyDBClusterEndpointOutput
+	if *v == nil {
+		sv = &ModifyDBClusterEndpointOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("CustomEndpointType", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.CustomEndpointType = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.CustomEndpointType = &xtv
+			}
+
+		case strings.EqualFold("DBClusterEndpointArn", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.DBClusterEndpointArn = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.DBClusterEndpointArn = &xtv
+			}
+
+		case strings.EqualFold("DBClusterEndpointIdentifier", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.DBClusterEndpointIdentifier = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.DBClusterEndpointIdentifier = &xtv
+			}
+
+		case strings.EqualFold("DBClusterEndpointResourceIdentifier", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.DBClusterEndpointResourceIdentifier = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.DBClusterEndpointResourceIdentifier = &xtv
+			}
+
+		case strings.EqualFold("DBClusterIdentifier", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.DBClusterIdentifier = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.DBClusterIdentifier = &xtv
+			}
+
+		case strings.EqualFold("Endpoint", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.Endpoint = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.Endpoint = &xtv
+			}
+
+		case strings.EqualFold("EndpointType", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.EndpointType = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.EndpointType = &xtv
+			}
+
+		case strings.EqualFold("ExcludedMembers", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentStringList(&sv.ExcludedMembers, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("StaticMembers", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentStringList(&sv.StaticMembers, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("Status", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.Status = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.Status = &xtv
 			}
 
 		default:

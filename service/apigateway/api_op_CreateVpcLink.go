@@ -36,11 +36,6 @@ func (c *Client) CreateVpcLink(ctx context.Context, params *CreateVpcLinkInput, 
 // services.
 type CreateVpcLinkInput struct {
 
-	// [Required] The name used to label and identify the VPC link.
-	//
-	// This member is required.
-	Name *string
-
 	// [Required] The ARN of the network load balancer of the VPC targeted by the VPC
 	// link. The network load balancer must be owned by the same AWS account of the API
 	// owner.
@@ -55,12 +50,6 @@ type CreateVpcLinkInput struct {
 	// tag key can be up to 128 characters and must not start with aws:. The tag value
 	// can be up to 256 characters.
 	Tags map[string]*string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // An API Gateway VPC link for a RestApi to access resources in an Amazon Virtual

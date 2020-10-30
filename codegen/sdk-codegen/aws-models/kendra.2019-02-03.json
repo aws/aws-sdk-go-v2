@@ -647,6 +647,519 @@
         "smithy.api#httpError": 409
       }
     },
+    "com.amazonaws.kendra#ConfluenceAttachmentConfiguration": {
+      "type": "structure",
+      "members": {
+        "CrawlAttachments": {
+          "target": "com.amazonaws.kendra#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates whether Amazon Kendra indexes attachments to the pages and blogs in the Confluence\n            data source. </p>"
+          }
+        },
+        "AttachmentFieldMappings": {
+          "target": "com.amazonaws.kendra#ConfluenceAttachmentFieldMappingsList",
+          "traits": {
+            "smithy.api#documentation": "<p>Defines how attachment metadata fields should be mapped to index fields. Before you\n            can map a field, you must first create an index field with a matching type using the\n            console or the <code>UpdateIndex</code> operation.</p>\n        <p>If you specify the <code>AttachentFieldMappings</code> parameter, you must specify at\n            least one field mapping.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Specifies the attachment settings for the Confluence data source. Attachment settings\n            are optional, if you don't specify settings attachments, Amazon Kendra won't index them.</p>"
+      }
+    },
+    "com.amazonaws.kendra#ConfluenceAttachmentFieldMappingsList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.kendra#ConfluenceAttachmentToIndexFieldMapping"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 11
+        }
+      }
+    },
+    "com.amazonaws.kendra#ConfluenceAttachmentFieldName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "AUTHOR",
+            "name": "AUTHOR"
+          },
+          {
+            "value": "CONTENT_TYPE",
+            "name": "CONTENT_TYPE"
+          },
+          {
+            "value": "CREATED_DATE",
+            "name": "CREATED_DATE"
+          },
+          {
+            "value": "DISPLAY_URL",
+            "name": "DISPLAY_URL"
+          },
+          {
+            "value": "FILE_SIZE",
+            "name": "FILE_SIZE"
+          },
+          {
+            "value": "ITEM_TYPE",
+            "name": "ITEM_TYPE"
+          },
+          {
+            "value": "PARENT_ID",
+            "name": "PARENT_ID"
+          },
+          {
+            "value": "SPACE_KEY",
+            "name": "SPACE_KEY"
+          },
+          {
+            "value": "SPACE_NAME",
+            "name": "SPACE_NAME"
+          },
+          {
+            "value": "URL",
+            "name": "URL"
+          },
+          {
+            "value": "VERSION",
+            "name": "VERSION"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.kendra#ConfluenceAttachmentToIndexFieldMapping": {
+      "type": "structure",
+      "members": {
+        "DateFieldFormat": {
+          "target": "com.amazonaws.kendra#DataSourceDateFieldFormat",
+          "traits": {
+            "smithy.api#documentation": "<p>The format for date fields in the data source. If the field specified in\n                <code>DataSourceFieldName</code> is a date field you must specify the date format.\n            If the field is not a date field, an exception is thrown.</p>"
+          }
+        },
+        "IndexFieldName": {
+          "target": "com.amazonaws.kendra#IndexFieldName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the index field to map to the Confluence data source field. The index\n            field type must match the Confluence field type.</p>"
+          }
+        },
+        "DataSourceFieldName": {
+          "target": "com.amazonaws.kendra#ConfluenceAttachmentFieldName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the field in the data source. </p>\n        <p>You must first create the index field using the \n            operation. </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Defines the mapping between a field in the Confluence data source to a Amazon Kendra index\n            field.</p>\n        <p>You must first create the index field using the \n            operation. </p>"
+      }
+    },
+    "com.amazonaws.kendra#ConfluenceBlogConfiguration": {
+      "type": "structure",
+      "members": {
+        "BlogFieldMappings": {
+          "target": "com.amazonaws.kendra#ConfluenceBlogFieldMappingsList",
+          "traits": {
+            "smithy.api#documentation": "<p>Defines how blog metadata fields should be mapped to index fields. Before you can map\n            a field, you must first create an index field with a matching type using the console or\n            the <code>UpdateIndex</code> operation.</p>\n        <p>If you specify the <code>BlogFieldMappings</code> parameter, you must specify at least\n            one field mapping.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Specifies the blog settings for the Confluence data source. Blogs are always indexed\n            unless filtered from the index by the <code>ExclusionPatterns</code> or\n                <code>InclusionPatterns</code> fields in the  data type.</p>"
+      }
+    },
+    "com.amazonaws.kendra#ConfluenceBlogFieldMappingsList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.kendra#ConfluenceBlogToIndexFieldMapping"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 9
+        }
+      }
+    },
+    "com.amazonaws.kendra#ConfluenceBlogFieldName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "AUTHOR",
+            "name": "AUTHOR"
+          },
+          {
+            "value": "DISPLAY_URL",
+            "name": "DISPLAY_URL"
+          },
+          {
+            "value": "ITEM_TYPE",
+            "name": "ITEM_TYPE"
+          },
+          {
+            "value": "LABELS",
+            "name": "LABELS"
+          },
+          {
+            "value": "PUBLISH_DATE",
+            "name": "PUBLISH_DATE"
+          },
+          {
+            "value": "SPACE_KEY",
+            "name": "SPACE_KEY"
+          },
+          {
+            "value": "SPACE_NAME",
+            "name": "SPACE_NAME"
+          },
+          {
+            "value": "URL",
+            "name": "URL"
+          },
+          {
+            "value": "VERSION",
+            "name": "VERSION"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.kendra#ConfluenceBlogToIndexFieldMapping": {
+      "type": "structure",
+      "members": {
+        "DataSourceFieldName": {
+          "target": "com.amazonaws.kendra#ConfluenceBlogFieldName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the field in the data source. </p>"
+          }
+        },
+        "DateFieldFormat": {
+          "target": "com.amazonaws.kendra#DataSourceDateFieldFormat",
+          "traits": {
+            "smithy.api#documentation": "<p>The format for date fields in the data source. If the field specified in\n                <code>DataSourceFieldName</code> is a date field you must specify the date format.\n            If the field is not a date field, an exception is thrown.</p>"
+          }
+        },
+        "IndexFieldName": {
+          "target": "com.amazonaws.kendra#IndexFieldName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the index field to map to the Confluence data source field. The index\n            field type must match the Confluence field type.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Defines the mapping between a blog field in the Confluence data source to a Amazon Kendra\n            index field.</p>\n        <p>You must first create the index field using the \n            operation. </p>"
+      }
+    },
+    "com.amazonaws.kendra#ConfluenceConfiguration": {
+      "type": "structure",
+      "members": {
+        "ExclusionPatterns": {
+          "target": "com.amazonaws.kendra#DataSourceInclusionsExclusionsStrings",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of regular expression patterns that apply to a URL on the Confluence server. An\n            exclusion pattern can apply to a blog post, a page, a space, or an attachment. Items\n            that match the pattern are excluded from the index. Items that don't match the pattern\n            are included in the index. If a item matches both an exclusion pattern and an inclusion\n            pattern, the item isn't included in the index.</p>"
+          }
+        },
+        "PageConfiguration": {
+          "target": "com.amazonaws.kendra#ConfluencePageConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies configuration information for indexing Confluence pages.</p>"
+          }
+        },
+        "AttachmentConfiguration": {
+          "target": "com.amazonaws.kendra#ConfluenceAttachmentConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies configuration information for indexing attachments to Confluence blogs and\n            pages.</p>"
+          }
+        },
+        "SpaceConfiguration": {
+          "target": "com.amazonaws.kendra#ConfluenceSpaceConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies configuration information for indexing Confluence spaces.</p>"
+          }
+        },
+        "BlogConfiguration": {
+          "target": "com.amazonaws.kendra#ConfluenceBlogConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p> Specifies configuration information for indexing Confluence blogs.</p>"
+          }
+        },
+        "ServerUrl": {
+          "target": "com.amazonaws.kendra#Url",
+          "traits": {
+            "smithy.api#documentation": "<p>The URL of your Confluence instance. Use the full URL of the server. For example,\n                <code>https://server.example.com:port/</code>. You can also use an IP address, for\n            example, <code>https://192.168.1.113/</code>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "SecretArn": {
+          "target": "com.amazonaws.kendra#SecretArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that contains the\n            key/value pairs required to connect to your Confluence server. The secret must contain a\n            JSON structure with the following keys:</p>\n        <ul>\n            <li>\n                <p>username - The user name of a user with administrative privileges for the\n                    Confluence server.</p>\n            </li>\n            <li>\n                <p>password - The password associated with the user logging in to the Confluence\n                    server.</p>\n            </li>\n         </ul>",
+            "smithy.api#required": {}
+          }
+        },
+        "Version": {
+          "target": "com.amazonaws.kendra#ConfluenceVersion",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the version of the Confluence installation that you are connecting\n            to.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "VpcConfiguration": {
+          "target": "com.amazonaws.kendra#DataSourceVpcConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the information for connecting to an Amazon VPC.</p>"
+          }
+        },
+        "InclusionPatterns": {
+          "target": "com.amazonaws.kendra#DataSourceInclusionsExclusionsStrings",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of regular expression patterns that apply to a URL on the Confluence server. An\n            inclusion pattern can apply to a blog post, a page, a space, or an attachment. Items\n            that match the patterns are included in the index. Items that don't match the pattern\n            are excluded from the index. If an item matches both an inclusion pattern and an\n            exclusion pattern, the item isn't included in the index.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Provides configuration information for data sources that connect to Confluence.</p>"
+      }
+    },
+    "com.amazonaws.kendra#ConfluencePageConfiguration": {
+      "type": "structure",
+      "members": {
+        "PageFieldMappings": {
+          "target": "com.amazonaws.kendra#ConfluencePageFieldMappingsList",
+          "traits": {
+            "smithy.api#documentation": "<p>Defines how page metadata fields should be mapped to index fields. Before you can map\n            a field, you must first create an index field with a matching type using the console or\n            the <code>UpdateIndex</code> operation.</p>\n        <p>If you specify the <code>PageFieldMappings</code> parameter, you must specify at least\n            one field mapping.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Specifies the page settings for the Confluence data source.</p>"
+      }
+    },
+    "com.amazonaws.kendra#ConfluencePageFieldMappingsList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.kendra#ConfluencePageToIndexFieldMapping"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 12
+        }
+      }
+    },
+    "com.amazonaws.kendra#ConfluencePageFieldName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "AUTHOR",
+            "name": "AUTHOR"
+          },
+          {
+            "value": "CONTENT_STATUS",
+            "name": "CONTENT_STATUS"
+          },
+          {
+            "value": "CREATED_DATE",
+            "name": "CREATED_DATE"
+          },
+          {
+            "value": "DISPLAY_URL",
+            "name": "DISPLAY_URL"
+          },
+          {
+            "value": "ITEM_TYPE",
+            "name": "ITEM_TYPE"
+          },
+          {
+            "value": "LABELS",
+            "name": "LABELS"
+          },
+          {
+            "value": "MODIFIED_DATE",
+            "name": "MODIFIED_DATE"
+          },
+          {
+            "value": "PARENT_ID",
+            "name": "PARENT_ID"
+          },
+          {
+            "value": "SPACE_KEY",
+            "name": "SPACE_KEY"
+          },
+          {
+            "value": "SPACE_NAME",
+            "name": "SPACE_NAME"
+          },
+          {
+            "value": "URL",
+            "name": "URL"
+          },
+          {
+            "value": "VERSION",
+            "name": "VERSION"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.kendra#ConfluencePageToIndexFieldMapping": {
+      "type": "structure",
+      "members": {
+        "DateFieldFormat": {
+          "target": "com.amazonaws.kendra#DataSourceDateFieldFormat",
+          "traits": {
+            "smithy.api#documentation": "<p>The format for date fields in the data source. If the field specified in\n                <code>DataSourceFieldName</code> is a date field you must specify the date format.\n            If the field is not a date field, an exception is thrown.</p>"
+          }
+        },
+        "DataSourceFieldName": {
+          "target": "com.amazonaws.kendra#ConfluencePageFieldName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the field in the data source. </p>"
+          }
+        },
+        "IndexFieldName": {
+          "target": "com.amazonaws.kendra#IndexFieldName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the index field to map to the Confluence data source field. The index\n            field type must match the Confluence field type.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Defines the mapping between a field in the Confluence data source to a Amazon Kendra index\n            field.</p>\n        <p>You must first create the index field using the \n            operation. </p>"
+      }
+    },
+    "com.amazonaws.kendra#ConfluenceSpaceConfiguration": {
+      "type": "structure",
+      "members": {
+        "CrawlPersonalSpaces": {
+          "target": "com.amazonaws.kendra#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies whether Amazon Kendra should index personal spaces. Users can add restrictions to\n            items in personal spaces. If personal spaces are indexed, queries without user context\n            information may return restricted items from a personal space in their results. For more\n            information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html\">Filtering on user context</a>.</p>"
+          }
+        },
+        "ExcludeSpaces": {
+          "target": "com.amazonaws.kendra#ConfluenceSpaceList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of space keys of Confluence spaces. If you include a key, the blogs, documents,\n            and attachments in the space are not indexed. If a space is in both the\n                <code>ExcludeSpaces</code> and the <code>IncludeSpaces</code> list, the space is\n            excluded.</p>"
+          }
+        },
+        "SpaceFieldMappings": {
+          "target": "com.amazonaws.kendra#ConfluenceSpaceFieldMappingsList",
+          "traits": {
+            "smithy.api#documentation": "<p>Defines how space metadata fields should be mapped to index fields. Before you can map\n            a field, you must first create an index field with a matching type using the console or\n            the <code>UpdateIndex</code> operation.</p>\n        <p>If you specify the <code>SpaceFieldMappings</code> parameter, you must specify at\n            least one field mapping.</p>"
+          }
+        },
+        "IncludeSpaces": {
+          "target": "com.amazonaws.kendra#ConfluenceSpaceList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of space keys for Confluence spaces. If you include a key, the blogs,\n            documents, and attachments in the space are indexed. Spaces that aren't in the list\n            aren't indexed. A space in the list must exist. Otherwise, Amazon Kendra logs an error when the\n            data source is synchronized. If a space is in both the <code>IncludeSpaces</code> and\n            the <code>ExcludeSpaces</code> list, the space is excluded.</p>"
+          }
+        },
+        "CrawlArchivedSpaces": {
+          "target": "com.amazonaws.kendra#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies whether Amazon Kendra should index archived spaces.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Specifies the configuration for indexing Confluence spaces.</p>"
+      }
+    },
+    "com.amazonaws.kendra#ConfluenceSpaceFieldMappingsList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.kendra#ConfluenceSpaceToIndexFieldMapping"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 4
+        }
+      }
+    },
+    "com.amazonaws.kendra#ConfluenceSpaceFieldName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "DISPLAY_URL",
+            "name": "DISPLAY_URL"
+          },
+          {
+            "value": "ITEM_TYPE",
+            "name": "ITEM_TYPE"
+          },
+          {
+            "value": "SPACE_KEY",
+            "name": "SPACE_KEY"
+          },
+          {
+            "value": "URL",
+            "name": "URL"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.kendra#ConfluenceSpaceIdentifier": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 255
+        },
+        "smithy.api#pattern": "^\\P{C}*$"
+      }
+    },
+    "com.amazonaws.kendra#ConfluenceSpaceList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.kendra#ConfluenceSpaceIdentifier"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1
+        }
+      }
+    },
+    "com.amazonaws.kendra#ConfluenceSpaceToIndexFieldMapping": {
+      "type": "structure",
+      "members": {
+        "DateFieldFormat": {
+          "target": "com.amazonaws.kendra#DataSourceDateFieldFormat",
+          "traits": {
+            "smithy.api#documentation": "<p>The format for date fields in the data source. If the field specified in\n                <code>DataSourceFieldName</code> is a date field you must specify the date format.\n            If the field is not a date field, an exception is thrown.</p>"
+          }
+        },
+        "DataSourceFieldName": {
+          "target": "com.amazonaws.kendra#ConfluenceSpaceFieldName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the field in the data source. </p>"
+          }
+        },
+        "IndexFieldName": {
+          "target": "com.amazonaws.kendra#IndexFieldName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the index field to map to the Confluence data source field. The index\n            field type must match the Confluence field type.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Defines the mapping between a field in the Confluence data source to a Amazon Kendra index\n            field.</p>\n        <p>You must first create the index field using the \n            operation. </p>"
+      }
+    },
+    "com.amazonaws.kendra#ConfluenceVersion": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "SERVER",
+            "name": "SERVER"
+          }
+        ]
+      }
+    },
     "com.amazonaws.kendra#ConnectionConfiguration": {
       "type": "structure",
       "members": {
@@ -1068,6 +1581,12 @@
           "traits": {
             "smithy.api#documentation": "<p>Provides configuration for data sources that connect to ServiceNow instances.</p>"
           }
+        },
+        "ConfluenceConfiguration": {
+          "target": "com.amazonaws.kendra#ConfluenceConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>Provides configuration information for connecting to a Confluence data source.</p>"
+          }
         }
       },
       "traits": {
@@ -1450,6 +1969,10 @@
           {
             "value": "CUSTOM",
             "name": "CUSTOM"
+          },
+          {
+            "value": "CONFLUENCE",
+            "name": "CONFLUENCE"
           }
         ]
       }

@@ -70,21 +70,28 @@ type CreateTopicInput struct {
 	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters)
 	// in the AWS Key Management Service API Reference.
 	//
-	// The following attribute
-	// applies only to FIFO topics:
+	// The following attributes apply
+	// only to FIFO topics
+	// (https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html):
 	//
-	// * ContentBasedDeduplication – Enables
-	// content-based deduplication. Amazon SNS uses a SHA-256 hash to generate the
-	// MessageDeduplicationId using the body of the message (but not the attributes of
-	// the message).
+	// * FifoTopic –
+	// When this is set to true, a FIFO topic is created.
 	//
-	// * When ContentBasedDeduplication is in effect, messages with
-	// identical content sent within the deduplication interval are treated as
-	// duplicates and only one copy of the message is delivered.
+	// * ContentBasedDeduplication
+	// – Enables content-based deduplication for FIFO topics.
 	//
-	// * If the queue has
-	// ContentBasedDeduplication set, your MessageDeduplicationId overrides the
-	// generated one.
+	// * By default,
+	// ContentBasedDeduplication is set to false. If you create a FIFO topic and this
+	// attribute is false, you must specify a value for the MessageDeduplicationId
+	// parameter for the Publish
+	// (https://docs.aws.amazon.com/sns/latest/api/API_Publish.html) action.
+	//
+	// * When
+	// you set ContentBasedDeduplication to true, Amazon SNS uses a SHA-256 hash to
+	// generate the MessageDeduplicationId using the body of the message (but not the
+	// attributes of the message). (Optional) To override the generated value, you can
+	// specify a value for the the MessageDeduplicationId parameter for the Publish
+	// action.
 	Attributes map[string]*string
 
 	// The list of tags to add to a new topic. To be able to tag a topic on creation,

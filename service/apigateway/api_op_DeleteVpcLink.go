@@ -34,14 +34,6 @@ type DeleteVpcLinkInput struct {
 	//
 	// This member is required.
 	VpcLinkId *string
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 type DeleteVpcLinkOutput struct {

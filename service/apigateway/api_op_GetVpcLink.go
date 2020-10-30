@@ -35,14 +35,6 @@ type GetVpcLinkInput struct {
 	//
 	// This member is required.
 	VpcLinkId *string
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // An API Gateway VPC link for a RestApi to access resources in an Amazon Virtual

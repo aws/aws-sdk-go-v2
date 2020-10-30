@@ -98,6 +98,9 @@ type CreateNFSFileShareInput struct {
 	// File share default values. Optional.
 	NFSFileShareDefaults *types.NFSFileShareDefaults
 
+	// The notification policy of the file share.
+	NotificationPolicy *string
+
 	// A value that sets the access control list (ACL) permission for objects in the S3
 	// bucket that a file gateway puts objects into. The default value is private.
 	ObjectACL types.ObjectACL

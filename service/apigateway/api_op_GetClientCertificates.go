@@ -34,16 +34,8 @@ type GetClientCertificatesInput struct {
 	// maximum value is 500.
 	Limit *int32
 
-	Name *string
-
 	// The current pagination position in the paged result set.
 	Position *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // Represents a collection of ClientCertificate resources. Use Client-Side

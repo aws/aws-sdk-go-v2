@@ -45,18 +45,10 @@ type CreateBasePathMappingInput struct {
 	// name after the domain name.
 	BasePath *string
 
-	Name *string
-
 	// The name of the API's stage that you want to use for this mapping. Specify
 	// '(none)' if you want callers to explicitly specify the stage name after any base
 	// path name.
 	Stage *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // Represents the base path that callers of the API must provide as part of the URL

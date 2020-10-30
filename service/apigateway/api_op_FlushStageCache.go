@@ -38,14 +38,6 @@ type FlushStageCacheInput struct {
 	//
 	// This member is required.
 	StageName *string
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 type FlushStageCacheOutput struct {

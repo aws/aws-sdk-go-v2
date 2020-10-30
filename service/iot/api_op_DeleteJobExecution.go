@@ -54,6 +54,13 @@ type DeleteJobExecutionInput struct {
 	// update the job execution status. Use caution and ensure that the device is able
 	// to recover to a valid state.
 	Force *bool
+
+	// The namespace used to indicate that a job is a customer-managed job. When you
+	// specify a value for this parameter, AWS IoT Core sends jobs notifications to
+	// MQTT topics that contain the value in the following format.
+	// $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/ The
+	// namespaceId feature is in public preview.
+	NamespaceId *string
 }
 
 type DeleteJobExecutionOutput struct {

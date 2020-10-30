@@ -62,10 +62,16 @@ var defaultPartitions = endpoints.Partitions{
 			"eu-west-3":      endpoints.Endpoint{},
 			"me-south-1":     endpoints.Endpoint{},
 			"sa-east-1":      endpoints.Endpoint{},
-			"us-east-1":      endpoints.Endpoint{},
-			"us-east-2":      endpoints.Endpoint{},
-			"us-west-1":      endpoints.Endpoint{},
-			"us-west-2":      endpoints.Endpoint{},
+			"servicediscovery-fips": endpoints.Endpoint{
+				Hostname: "servicediscovery-fips.ca-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-central-1",
+				},
+			},
+			"us-east-1": endpoints.Endpoint{},
+			"us-east-2": endpoints.Endpoint{},
+			"us-west-1": endpoints.Endpoint{},
+			"us-west-2": endpoints.Endpoint{},
 		},
 	},
 	{

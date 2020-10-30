@@ -12,7 +12,10 @@ import (
 )
 
 // Sets the resource policy on a repository that specifies permissions to access
-// it.
+// it. When you call PutRepositoryPermissionsPolicy, the resource policy on the
+// repository is ignored when evaluting permissions. This ensures that the owner of
+// a repository cannot lock themselves out of the repository, which would prevent
+// them from being able to update the resource policy.
 func (c *Client) PutRepositoryPermissionsPolicy(ctx context.Context, params *PutRepositoryPermissionsPolicyInput, optFns ...func(*Options)) (*PutRepositoryPermissionsPolicyOutput, error) {
 	if params == nil {
 		params = &PutRepositoryPermissionsPolicyInput{}

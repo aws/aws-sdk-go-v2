@@ -3468,6 +3468,21 @@ func validateLongColumnStatisticsData(v *types.LongColumnStatisticsData) error {
 	}
 }
 
+func validateMLUserDataEncryption(v *types.MLUserDataEncryption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MLUserDataEncryption"}
+	if len(v.MlUserDataEncryptionMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MlUserDataEncryptionMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOrder(v *types.Order) error {
 	if v == nil {
 		return nil
@@ -3686,6 +3701,23 @@ func validateTaskRunSortCriteria(v *types.TaskRunSortCriteria) error {
 	}
 	if len(v.Column) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Column"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTransformEncryption(v *types.TransformEncryption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TransformEncryption"}
+	if v.MlUserDataEncryption != nil {
+		if err := validateMLUserDataEncryption(v.MlUserDataEncryption); err != nil {
+			invalidParams.AddNested("MlUserDataEncryption", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4214,11 +4246,9 @@ func validateOpCreateMLTransformInput(v *CreateMLTransformInput) error {
 	if v.Role == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Role"))
 	}
-	if v.InputRecordTables == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InputRecordTables"))
-	} else if v.InputRecordTables != nil {
-		if err := validateGlueTables(v.InputRecordTables); err != nil {
-			invalidParams.AddNested("InputRecordTables", err.(smithy.InvalidParamsError))
+	if v.TransformEncryption != nil {
+		if err := validateTransformEncryption(v.TransformEncryption); err != nil {
+			invalidParams.AddNested("TransformEncryption", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Parameters == nil {
@@ -4226,6 +4256,13 @@ func validateOpCreateMLTransformInput(v *CreateMLTransformInput) error {
 	} else if v.Parameters != nil {
 		if err := validateTransformParameters(v.Parameters); err != nil {
 			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InputRecordTables == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputRecordTables"))
+	} else if v.InputRecordTables != nil {
+		if err := validateGlueTables(v.InputRecordTables); err != nil {
+			invalidParams.AddNested("InputRecordTables", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

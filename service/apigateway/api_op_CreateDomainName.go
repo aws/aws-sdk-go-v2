@@ -72,8 +72,6 @@ type CreateDomainNameInput struct {
 	// domain name.
 	MutualTlsAuthentication *types.MutualTlsAuthenticationInput
 
-	Name *string
-
 	// The reference to an AWS-managed certificate that will be used by regional
 	// endpoint for this domain name. AWS Certificate Manager is the only supported
 	// source.
@@ -91,12 +89,6 @@ type CreateDomainNameInput struct {
 	// tag key can be up to 128 characters and must not start with aws:. The tag value
 	// can be up to 256 characters.
 	Tags map[string]*string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // Represents a custom domain name as a user-friendly host name of an API

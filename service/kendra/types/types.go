@@ -185,6 +185,208 @@ type ColumnConfiguration struct {
 	FieldMappings []*DataSourceToIndexFieldMapping
 }
 
+// Specifies the attachment settings for the Confluence data source. Attachment
+// settings are optional, if you don't specify settings attachments, Amazon Kendra
+// won't index them.
+type ConfluenceAttachmentConfiguration struct {
+
+	// Defines how attachment metadata fields should be mapped to index fields. Before
+	// you can map a field, you must first create an index field with a matching type
+	// using the console or the UpdateIndex operation. If you specify the
+	// AttachentFieldMappings parameter, you must specify at least one field mapping.
+	AttachmentFieldMappings []*ConfluenceAttachmentToIndexFieldMapping
+
+	// Indicates whether Amazon Kendra indexes attachments to the pages and blogs in
+	// the Confluence data source.
+	CrawlAttachments *bool
+}
+
+// Defines the mapping between a field in the Confluence data source to a Amazon
+// Kendra index field. You must first create the index field using the operation.
+type ConfluenceAttachmentToIndexFieldMapping struct {
+
+	// The name of the field in the data source. You must first create the index field
+	// using the operation.
+	DataSourceFieldName ConfluenceAttachmentFieldName
+
+	// The format for date fields in the data source. If the field specified in
+	// DataSourceFieldName is a date field you must specify the date format. If the
+	// field is not a date field, an exception is thrown.
+	DateFieldFormat *string
+
+	// The name of the index field to map to the Confluence data source field. The
+	// index field type must match the Confluence field type.
+	IndexFieldName *string
+}
+
+// Specifies the blog settings for the Confluence data source. Blogs are always
+// indexed unless filtered from the index by the ExclusionPatterns or
+// InclusionPatterns fields in the data type.
+type ConfluenceBlogConfiguration struct {
+
+	// Defines how blog metadata fields should be mapped to index fields. Before you
+	// can map a field, you must first create an index field with a matching type using
+	// the console or the UpdateIndex operation. If you specify the BlogFieldMappings
+	// parameter, you must specify at least one field mapping.
+	BlogFieldMappings []*ConfluenceBlogToIndexFieldMapping
+}
+
+// Defines the mapping between a blog field in the Confluence data source to a
+// Amazon Kendra index field. You must first create the index field using the
+// operation.
+type ConfluenceBlogToIndexFieldMapping struct {
+
+	// The name of the field in the data source.
+	DataSourceFieldName ConfluenceBlogFieldName
+
+	// The format for date fields in the data source. If the field specified in
+	// DataSourceFieldName is a date field you must specify the date format. If the
+	// field is not a date field, an exception is thrown.
+	DateFieldFormat *string
+
+	// The name of the index field to map to the Confluence data source field. The
+	// index field type must match the Confluence field type.
+	IndexFieldName *string
+}
+
+// Provides configuration information for data sources that connect to Confluence.
+type ConfluenceConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that contains
+	// the key/value pairs required to connect to your Confluence server. The secret
+	// must contain a JSON structure with the following keys:
+	//
+	// * username - The user
+	// name of a user with administrative privileges for the Confluence server.
+	//
+	// *
+	// password - The password associated with the user logging in to the Confluence
+	// server.
+	//
+	// This member is required.
+	SecretArn *string
+
+	// The URL of your Confluence instance. Use the full URL of the server. For
+	// example, https://server.example.com:port/. You can also use an IP address, for
+	// example, https://192.168.1.113/.
+	//
+	// This member is required.
+	ServerUrl *string
+
+	// Specifies the version of the Confluence installation that you are connecting to.
+	//
+	// This member is required.
+	Version ConfluenceVersion
+
+	// Specifies configuration information for indexing attachments to Confluence blogs
+	// and pages.
+	AttachmentConfiguration *ConfluenceAttachmentConfiguration
+
+	// Specifies configuration information for indexing Confluence blogs.
+	BlogConfiguration *ConfluenceBlogConfiguration
+
+	// A list of regular expression patterns that apply to a URL on the Confluence
+	// server. An exclusion pattern can apply to a blog post, a page, a space, or an
+	// attachment. Items that match the pattern are excluded from the index. Items that
+	// don't match the pattern are included in the index. If a item matches both an
+	// exclusion pattern and an inclusion pattern, the item isn't included in the
+	// index.
+	ExclusionPatterns []*string
+
+	// A list of regular expression patterns that apply to a URL on the Confluence
+	// server. An inclusion pattern can apply to a blog post, a page, a space, or an
+	// attachment. Items that match the patterns are included in the index. Items that
+	// don't match the pattern are excluded from the index. If an item matches both an
+	// inclusion pattern and an exclusion pattern, the item isn't included in the
+	// index.
+	InclusionPatterns []*string
+
+	// Specifies configuration information for indexing Confluence pages.
+	PageConfiguration *ConfluencePageConfiguration
+
+	// Specifies configuration information for indexing Confluence spaces.
+	SpaceConfiguration *ConfluenceSpaceConfiguration
+
+	// Specifies the information for connecting to an Amazon VPC.
+	VpcConfiguration *DataSourceVpcConfiguration
+}
+
+// Specifies the page settings for the Confluence data source.
+type ConfluencePageConfiguration struct {
+
+	// Defines how page metadata fields should be mapped to index fields. Before you
+	// can map a field, you must first create an index field with a matching type using
+	// the console or the UpdateIndex operation. If you specify the PageFieldMappings
+	// parameter, you must specify at least one field mapping.
+	PageFieldMappings []*ConfluencePageToIndexFieldMapping
+}
+
+// Defines the mapping between a field in the Confluence data source to a Amazon
+// Kendra index field. You must first create the index field using the operation.
+type ConfluencePageToIndexFieldMapping struct {
+
+	// The name of the field in the data source.
+	DataSourceFieldName ConfluencePageFieldName
+
+	// The format for date fields in the data source. If the field specified in
+	// DataSourceFieldName is a date field you must specify the date format. If the
+	// field is not a date field, an exception is thrown.
+	DateFieldFormat *string
+
+	// The name of the index field to map to the Confluence data source field. The
+	// index field type must match the Confluence field type.
+	IndexFieldName *string
+}
+
+// Specifies the configuration for indexing Confluence spaces.
+type ConfluenceSpaceConfiguration struct {
+
+	// Specifies whether Amazon Kendra should index archived spaces.
+	CrawlArchivedSpaces *bool
+
+	// Specifies whether Amazon Kendra should index personal spaces. Users can add
+	// restrictions to items in personal spaces. If personal spaces are indexed,
+	// queries without user context information may return restricted items from a
+	// personal space in their results. For more information, see Filtering on user
+	// context (https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html).
+	CrawlPersonalSpaces *bool
+
+	// A list of space keys of Confluence spaces. If you include a key, the blogs,
+	// documents, and attachments in the space are not indexed. If a space is in both
+	// the ExcludeSpaces and the IncludeSpaces list, the space is excluded.
+	ExcludeSpaces []*string
+
+	// A list of space keys for Confluence spaces. If you include a key, the blogs,
+	// documents, and attachments in the space are indexed. Spaces that aren't in the
+	// list aren't indexed. A space in the list must exist. Otherwise, Amazon Kendra
+	// logs an error when the data source is synchronized. If a space is in both the
+	// IncludeSpaces and the ExcludeSpaces list, the space is excluded.
+	IncludeSpaces []*string
+
+	// Defines how space metadata fields should be mapped to index fields. Before you
+	// can map a field, you must first create an index field with a matching type using
+	// the console or the UpdateIndex operation. If you specify the SpaceFieldMappings
+	// parameter, you must specify at least one field mapping.
+	SpaceFieldMappings []*ConfluenceSpaceToIndexFieldMapping
+}
+
+// Defines the mapping between a field in the Confluence data source to a Amazon
+// Kendra index field. You must first create the index field using the operation.
+type ConfluenceSpaceToIndexFieldMapping struct {
+
+	// The name of the field in the data source.
+	DataSourceFieldName ConfluenceSpaceFieldName
+
+	// The format for date fields in the data source. If the field specified in
+	// DataSourceFieldName is a date field you must specify the date format. If the
+	// field is not a date field, an exception is thrown.
+	DateFieldFormat *string
+
+	// The name of the index field to map to the Confluence data source field. The
+	// index field type must match the Confluence field type.
+	IndexFieldName *string
+}
+
 // Provides the information necessary to connect to a database.
 type ConnectionConfiguration struct {
 
@@ -254,6 +456,9 @@ type DatabaseConfiguration struct {
 
 // Configuration information for a Amazon Kendra data source.
 type DataSourceConfiguration struct {
+
+	// Provides configuration information for connecting to a Confluence data source.
+	ConfluenceConfiguration *ConfluenceConfiguration
 
 	// Provides information necessary to create a data source connector for a database.
 	DatabaseConfiguration *DatabaseConfiguration

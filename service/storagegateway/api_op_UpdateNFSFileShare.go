@@ -13,7 +13,7 @@ import (
 
 // Updates a Network File System (NFS) file share. This operation is only supported
 // in the file gateway type. To leave a file share field unchanged, set the
-// corresponding input field to null. Updates the following file share setting:
+// corresponding input field to null. Updates the following file share settings:
 //
 // *
 // Default storage class for your S3 bucket
@@ -27,10 +27,6 @@ import (
 //
 // * Write
 // status of your file share
-//
-// To leave a file share field unchanged, set the
-// corresponding input field to null. This operation is only supported in file
-// gateways.
 func (c *Client) UpdateNFSFileShare(ctx context.Context, params *UpdateNFSFileShareInput, optFns ...func(*Options)) (*UpdateNFSFileShareOutput, error) {
 	if params == nil {
 		params = &UpdateNFSFileShareInput{}
@@ -86,6 +82,9 @@ type UpdateNFSFileShareInput struct {
 
 	// The default values for the file share. Optional.
 	NFSFileShareDefaults *types.NFSFileShareDefaults
+
+	// The notification policy of the file share.
+	NotificationPolicy *string
 
 	// A value that sets the access control list (ACL) permission for objects in the S3
 	// bucket that a file gateway puts objects into. The default value is private.

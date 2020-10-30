@@ -45,17 +45,9 @@ type UpdateMethodInput struct {
 	// This member is required.
 	RestApiId *string
 
-	Name *string
-
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []*types.PatchOperation
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // Represents a client-facing interface by which the client calls the API to access

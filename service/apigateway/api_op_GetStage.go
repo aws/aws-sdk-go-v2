@@ -40,14 +40,6 @@ type GetStageInput struct {
 	//
 	// This member is required.
 	StageName *string
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // Represents a unique identifier for a version of a deployed RestApi that is

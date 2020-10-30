@@ -38,14 +38,6 @@ type GetRequestValidatorInput struct {
 	//
 	// This member is required.
 	RestApiId *string
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // A set of validation rules for incoming Method requests. In OpenAPI, a

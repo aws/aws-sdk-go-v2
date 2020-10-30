@@ -19,26 +19,25 @@
 // each of which maps to a set of assets, or files. Repositories are polyglot, so a
 // single repository can contain packages of any supported type. Each repository
 // exposes endpoints for fetching and publishing packages using tools like the npm
-// CLI, the Maven CLI ( mvn ), and pip . You can create up to 100 repositories per
-// AWS account.
+// CLI, the Maven CLI ( mvn ), and pip .
 //
-// * Domain: Repositories are aggregated into a higher-level entity
-// known as a domain. All package assets and metadata are stored in the domain, but
-// are consumed through repositories. A given package asset, such as a Maven JAR
-// file, is stored once per domain, no matter how many repositories it's present
-// in. All of the assets and metadata in a domain are encrypted with the same
-// customer master key (CMK) stored in AWS Key Management Service (AWS KMS). Each
-// repository is a member of a single domain and can't be moved to a different
-// domain. The domain allows organizational policy to be applied across multiple
-// repositories, such as which accounts can access repositories in the domain, and
-// which public repositories can be used as sources of packages. Although an
-// organization can have multiple domains, we recommend a single production domain
-// that contains all published artifacts so that teams can find and share packages
-// across their organization.
+// * Domain: Repositories are aggregated
+// into a higher-level entity known as a domain. All package assets and metadata
+// are stored in the domain, but are consumed through repositories. A given package
+// asset, such as a Maven JAR file, is stored once per domain, no matter how many
+// repositories it's present in. All of the assets and metadata in a domain are
+// encrypted with the same customer master key (CMK) stored in AWS Key Management
+// Service (AWS KMS). Each repository is a member of a single domain and can't be
+// moved to a different domain. The domain allows organizational policy to be
+// applied across multiple repositories, such as which accounts can access
+// repositories in the domain, and which public repositories can be used as sources
+// of packages. Although an organization can have multiple domains, we recommend a
+// single production domain that contains all published artifacts so that teams can
+// find and share packages across their organization.
 //
-// * Package: A package is a bundle of software and the
-// metadata required to resolve dependencies and install the software. CodeArtifact
-// supports npm
+// * Package: A package is a
+// bundle of software and the metadata required to resolve dependencies and install
+// the software. CodeArtifact supports npm
 // (https://docs.aws.amazon.com/codeartifact/latest/ug/using-npm.html), PyPI
 // (https://docs.aws.amazon.com/codeartifact/latest/ug/using-python.html), and
 // Maven (https://docs.aws.amazon.com/codeartifact/latest/ug/using-maven) package

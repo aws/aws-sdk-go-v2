@@ -43,14 +43,6 @@ type GetModelInput struct {
 	// references and returns a flattened model schema or not (false) The default is
 	// false.
 	Flatten *bool
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // Represents the data structure of a method's request or response payload. A

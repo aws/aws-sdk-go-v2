@@ -34,14 +34,6 @@ type GetClientCertificateInput struct {
 	//
 	// This member is required.
 	ClientCertificateId *string
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // Represents a client certificate used to configure client-side SSL authentication

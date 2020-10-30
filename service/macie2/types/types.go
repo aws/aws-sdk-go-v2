@@ -537,6 +537,31 @@ type CriterionAdditionalProperties struct {
 	// An equal to condition to apply to a specified property value for findings.
 	Eq []*string
 
+	// A condition that requires an array field on a finding to exactly match the
+	// specified property values. You can use this operator with the following
+	// properties:
+	//
+	// * customDataIdentifiers.detections.arn
+	//
+	// *
+	// customDataIdentifiers.detections.name
+	//
+	// * resourcesAffected.s3Bucket.tags.key
+	//
+	// *
+	// resourcesAffected.s3Bucket.tags.value
+	//
+	// * resourcesAffected.s3Object.tags.key
+	//
+	// *
+	// resourcesAffected.s3Object.tags.value
+	//
+	// * sensitiveData.category
+	//
+	// *
+	// sensitiveData.detections.type
+	EqExactMatch []*string
+
 	// A greater than condition to apply to a specified property value for findings.
 	Gt *int64
 

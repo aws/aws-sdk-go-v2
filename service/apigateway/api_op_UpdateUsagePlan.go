@@ -35,17 +35,9 @@ type UpdateUsagePlanInput struct {
 	// This member is required.
 	UsagePlanId *string
 
-	Name *string
-
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []*types.PatchOperation
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // Represents a usage plan than can specify who can assess associated API stages

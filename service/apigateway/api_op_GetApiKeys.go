@@ -42,19 +42,11 @@ type GetApiKeysInput struct {
 	// maximum value is 500.
 	Limit *int32
 
-	Name *string
-
 	// The name of queried API keys.
 	NameQuery *string
 
 	// The current pagination position in the paged result set.
 	Position *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // Represents a collection of API keys as represented by an ApiKeys resource. Use

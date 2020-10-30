@@ -2462,6 +2462,58 @@ func awsAwsjson11_serializeDocumentDmsTransferSettings(v *types.DmsTransferSetti
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentDocDbSettings(v *types.DocDbSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DatabaseName != nil {
+		ok := object.Key("DatabaseName")
+		ok.String(*v.DatabaseName)
+	}
+
+	if v.DocsToInvestigate != nil {
+		ok := object.Key("DocsToInvestigate")
+		ok.Integer(*v.DocsToInvestigate)
+	}
+
+	if v.ExtractDocId != nil {
+		ok := object.Key("ExtractDocId")
+		ok.Boolean(*v.ExtractDocId)
+	}
+
+	if v.KmsKeyId != nil {
+		ok := object.Key("KmsKeyId")
+		ok.String(*v.KmsKeyId)
+	}
+
+	if len(v.NestingLevel) > 0 {
+		ok := object.Key("NestingLevel")
+		ok.String(string(v.NestingLevel))
+	}
+
+	if v.Password != nil {
+		ok := object.Key("Password")
+		ok.String(*v.Password)
+	}
+
+	if v.Port != nil {
+		ok := object.Key("Port")
+		ok.Integer(*v.Port)
+	}
+
+	if v.ServerName != nil {
+		ok := object.Key("ServerName")
+		ok.String(*v.ServerName)
+	}
+
+	if v.Username != nil {
+		ok := object.Key("Username")
+		ok.String(*v.Username)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDynamoDbSettings(v *types.DynamoDbSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3713,6 +3765,13 @@ func awsAwsjson11_serializeOpDocumentCreateEndpointInput(v *CreateEndpointInput,
 		}
 	}
 
+	if v.DocDbSettings != nil {
+		ok := object.Key("DocDbSettings")
+		if err := awsAwsjson11_serializeDocumentDocDbSettings(v.DocDbSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DynamoDbSettings != nil {
 		ok := object.Key("DynamoDbSettings")
 		if err := awsAwsjson11_serializeDocumentDynamoDbSettings(v.DynamoDbSettings, ok); err != nil {
@@ -4811,6 +4870,13 @@ func awsAwsjson11_serializeOpDocumentModifyEndpointInput(v *ModifyEndpointInput,
 	if v.DmsTransferSettings != nil {
 		ok := object.Key("DmsTransferSettings")
 		if err := awsAwsjson11_serializeDocumentDmsTransferSettings(v.DmsTransferSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DocDbSettings != nil {
+		ok := object.Key("DocDbSettings")
+		if err := awsAwsjson11_serializeDocumentDocDbSettings(v.DocDbSettings, ok); err != nil {
 			return err
 		}
 	}

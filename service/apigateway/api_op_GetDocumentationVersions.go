@@ -38,16 +38,8 @@ type GetDocumentationVersionsInput struct {
 	// maximum value is 500.
 	Limit *int32
 
-	Name *string
-
 	// The current pagination position in the paged result set.
 	Position *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // The collection of documentation snapshots of an API. Use the

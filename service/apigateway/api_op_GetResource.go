@@ -47,14 +47,6 @@ type GetResourceInput struct {
 	// single-valued list and contain the "methods" string. For example, GET
 	// /restapis/{restapi_id}/resources/{resource_id}?embed=methods.
 	Embed []*string
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // Represents an API resource. Create an API

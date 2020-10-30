@@ -112,7 +112,7 @@ type CopySnapshotInput struct {
 	// export a snapshot, be sure Amazon ElastiCache has the needed permissions to this
 	// S3 bucket. For more information, see Step 2: Grant ElastiCache Access to Your
 	// Amazon S3 Bucket
-	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access)
+	// (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access)
 	// in the Amazon ElastiCache User Guide. For more information, see Exporting a
 	// Snapshot
 	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html)

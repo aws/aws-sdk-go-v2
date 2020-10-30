@@ -96,8 +96,6 @@ type PutIntegrationInput struct {
 	// AWS, this field is required.
 	IntegrationHttpMethod *string
 
-	Name *string
-
 	// Specifies the pass-through behavior for incoming requests based on the
 	// Content-Type header in the request, and the available mapping templates
 	// specified as the requestTemplates property on the Integration resource. There
@@ -130,15 +128,9 @@ type PutIntegrationInput struct {
 	// type value is the key in this map, and the template (as a String) is the value.
 	RequestTemplates map[string]*string
 
-	Template *bool
-
-	TemplateSkipList []*string
-
 	// Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
 	// milliseconds or 29 seconds.
 	TimeoutInMillis *int32
-
-	Title *string
 
 	TlsConfig *types.TlsConfig
 

@@ -36,17 +36,9 @@ type UpdateClientCertificateInput struct {
 	// This member is required.
 	ClientCertificateId *string
 
-	Name *string
-
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []*types.PatchOperation
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // Represents a client certificate used to configure client-side SSL authentication

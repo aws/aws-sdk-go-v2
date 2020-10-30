@@ -1100,6 +1100,20 @@
     "com.amazonaws.medialive#AutomaticInputFailoverSettings": {
       "type": "structure",
       "members": {
+        "ErrorClearTimeMsec": {
+          "target": "com.amazonaws.medialive#__integerMin1",
+          "traits": {
+            "smithy.api#documentation": "This clear time defines the requirement a recovered input must meet to be considered healthy. The input must have no failover conditions for this length of time. Enter a time in milliseconds. This value is particularly important if the input_preference for the failover pair is set to PRIMARY_INPUT_PREFERRED, because after this time, MediaLive will switch back to the primary input.",
+            "smithy.api#jsonName": "errorClearTimeMsec"
+          }
+        },
+        "FailoverConditions": {
+          "target": "com.amazonaws.medialive#__listOfFailoverCondition",
+          "traits": {
+            "smithy.api#documentation": "A list of failover conditions. If any of these conditions occur, MediaLive will perform a failover to the other input.",
+            "smithy.api#jsonName": "failoverConditions"
+          }
+        },
         "SecondaryInputId": {
           "target": "com.amazonaws.medialive#__string",
           "traits": {
@@ -6655,6 +6669,36 @@
         "smithy.api#documentation": "Encoder Settings"
       }
     },
+    "com.amazonaws.medialive#FailoverCondition": {
+      "type": "structure",
+      "members": {
+        "FailoverConditionSettings": {
+          "target": "com.amazonaws.medialive#FailoverConditionSettings",
+          "traits": {
+            "smithy.api#documentation": "Failover condition type-specific settings.",
+            "smithy.api#jsonName": "failoverConditionSettings"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Failover Condition settings. There can be multiple failover conditions inside AutomaticInputFailoverSettings."
+      }
+    },
+    "com.amazonaws.medialive#FailoverConditionSettings": {
+      "type": "structure",
+      "members": {
+        "InputLossSettings": {
+          "target": "com.amazonaws.medialive#InputLossFailoverSettings",
+          "traits": {
+            "smithy.api#documentation": "MediaLive will perform a failover if content is not detected in this input for the specified period.",
+            "smithy.api#jsonName": "inputLossSettings"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Settings for one failover condition."
+      }
+    },
     "com.amazonaws.medialive#FeatureActivations": {
       "type": "structure",
       "members": {
@@ -8681,6 +8725,22 @@
         ]
       }
     },
+    "com.amazonaws.medialive#HlsDiscontinuityTags": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "Hls Discontinuity Tags",
+        "smithy.api#enum": [
+          {
+            "value": "INSERT",
+            "name": "INSERT"
+          },
+          {
+            "value": "NEVER_INSERT",
+            "name": "NEVER_INSERT"
+          }
+        ]
+      }
+    },
     "com.amazonaws.medialive#HlsEncryptionType": {
       "type": "string",
       "traits": {
@@ -8812,6 +8872,13 @@
             "smithy.api#jsonName": "segmentLength"
           }
         },
+        "IncompleteSegmentBehavior": {
+          "target": "com.amazonaws.medialive#HlsIncompleteSegmentBehavior",
+          "traits": {
+            "smithy.api#documentation": "Specifies whether to include the final (incomplete) segment in the media output when the pipeline stops producing output because of a channel stop, a channel pause or a loss of input to the pipeline.\nAuto means that MediaLive decides whether to include the final segment, depending on the channel class and the types of output groups.\nSuppress means to never include the incomplete segment. We recommend you choose Auto and let MediaLive control the behavior.",
+            "smithy.api#jsonName": "incompleteSegmentBehavior"
+          }
+        },
         "ProgramDateTimePeriod": {
           "target": "com.amazonaws.medialive#__integerMin0Max3600",
           "traits": {
@@ -8866,6 +8933,13 @@
           "traits": {
             "smithy.api#documentation": "Parameter that control output group behavior on input loss.",
             "smithy.api#jsonName": "inputLossAction"
+          }
+        },
+        "DiscontinuityTags": {
+          "target": "com.amazonaws.medialive#HlsDiscontinuityTags",
+          "traits": {
+            "smithy.api#documentation": "Specifies whether to insert EXT-X-DISCONTINUITY tags in the HLS child manifests for this output group.\nTypically, choose Insert because these tags are required in the manifest (according to the HLS specification) and serve an important purpose.\nChoose Never Insert only if the downstream system is doing real-time failover (without using the MediaLive automatic failover feature) and only if that downstream system has advised you to exclude the tags.",
+            "smithy.api#jsonName": "discontinuityTags"
           }
         },
         "ManifestDurationFormat": {
@@ -9030,6 +9104,22 @@
           {
             "value": "ENABLED",
             "name": "ENABLED"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.medialive#HlsIncompleteSegmentBehavior": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "Hls Incomplete Segment Behavior",
+        "smithy.api#enum": [
+          {
+            "value": "AUTO",
+            "name": "AUTO"
+          },
+          {
+            "value": "SUPPRESS",
+            "name": "SUPPRESS"
           }
         ]
       }
@@ -10358,6 +10448,21 @@
       },
       "traits": {
         "smithy.api#documentation": "Input Loss Behavior"
+      }
+    },
+    "com.amazonaws.medialive#InputLossFailoverSettings": {
+      "type": "structure",
+      "members": {
+        "InputLossThresholdMsec": {
+          "target": "com.amazonaws.medialive#__integerMin100",
+          "traits": {
+            "smithy.api#documentation": "The amount of time (in milliseconds) that no input is detected. After that time, an input failover will occur.",
+            "smithy.api#jsonName": "inputLossThresholdMsec"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "MediaLive will perform a failover if content is not detected in this input for the specified period."
       }
     },
     "com.amazonaws.medialive#InputLossImageType": {
@@ -18950,6 +19055,15 @@
         }
       }
     },
+    "com.amazonaws.medialive#__integerMin100": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#documentation": "Placeholder documentation for __integerMin100",
+        "smithy.api#range": {
+          "min": 100
+        }
+      }
+    },
     "com.amazonaws.medialive#__integerMin1000": {
       "type": "integer",
       "traits": {
@@ -19334,6 +19448,15 @@
       },
       "traits": {
         "smithy.api#documentation": "Placeholder documentation for __listOfChannelSummary"
+      }
+    },
+    "com.amazonaws.medialive#__listOfFailoverCondition": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.medialive#FailoverCondition"
+      },
+      "traits": {
+        "smithy.api#documentation": "Placeholder documentation for __listOfFailoverCondition"
       }
     },
     "com.amazonaws.medialive#__listOfHlsAdMarkers": {

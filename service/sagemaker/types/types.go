@@ -374,7 +374,7 @@ type AnnotationConsolidationConfig struct {
 	AnnotationConsolidationLambdaArn *string
 }
 
-// The app's details.
+// Details about an Amazon SageMaker app.
 type AppDetails struct {
 
 	// The name of the app.
@@ -394,6 +394,25 @@ type AppDetails struct {
 
 	// The user profile name.
 	UserProfileName *string
+}
+
+// The configuration for running an Amazon SageMaker image as a KernelGateway app.
+type AppImageConfigDetails struct {
+
+	// The Amazon Resource Name (ARN) of the AppImageConfig.
+	AppImageConfigArn *string
+
+	// The name of the AppImageConfig.
+	AppImageConfigName *string
+
+	// When the AppImageConfig was created.
+	CreationTime *time.Time
+
+	// The KernelGateway app.
+	KernelGatewayImageConfig *KernelGatewayImageConfig
+
+	// When the AppImageConfig was last modified.
+	LastModifiedTime *time.Time
 }
 
 // Configuration to run a processing job in a specified container image.
@@ -1110,6 +1129,23 @@ type ContinuousParameterRangeSpecification struct {
 	MinValue *string
 }
 
+// A custom image.
+type CustomImage struct {
+
+	// The name of the AppImageConfig.
+	//
+	// This member is required.
+	AppImageConfigName *string
+
+	// The name of the CustomImage. Must be unique to your account.
+	//
+	// This member is required.
+	ImageName *string
+
+	// The version number of the CustomImage.
+	ImageVersionNumber *int32
+}
+
 //
 type DataCaptureConfig struct {
 
@@ -1553,6 +1589,20 @@ type ExperimentSummary struct {
 
 	// When the experiment was last modified.
 	LastModifiedTime *time.Time
+}
+
+// The Amazon Elastic File System (EFS) storage configuration for an image.
+type FileSystemConfig struct {
+
+	// The default POSIX group ID. If not specified, defaults to 100.
+	DefaultGid *int32
+
+	// The default POSIX user ID. If not specified, defaults to 1000.
+	DefaultUid *int32
+
+	// The path within the image to mount the user's EFS home directory. The directory
+	// should be empty. If not specified, defaults to /home/sagemaker-user.
+	MountPath *string
 }
 
 // Specifies a file system data source for a channel.
@@ -3467,6 +3517,46 @@ type HyperParameterTuningJobWarmStartConfig struct {
 	WarmStartType HyperParameterTuningJobWarmStartType
 }
 
+// A SageMaker image. A SageMaker image represents a set of container images that
+// are derived from a common base container image. Each of these container images
+// is represented by a SageMaker ImageVersion.
+type Image struct {
+
+	// When the image was created.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the image.
+	//
+	// This member is required.
+	ImageArn *string
+
+	// The name of the image.
+	//
+	// This member is required.
+	ImageName *string
+
+	// The status of the image.
+	//
+	// This member is required.
+	ImageStatus ImageStatus
+
+	// When the image was last modified.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The description of the image.
+	Description *string
+
+	// The name of the image as displayed.
+	DisplayName *string
+
+	// When a create, update, or delete operation fails, the reason for the failure.
+	FailureReason *string
+}
+
 // Specifies whether the model container is in Amazon ECR or a private Docker
 // registry accessible from your Amazon Virtual Private Cloud (VPC).
 type ImageConfig struct {
@@ -3481,6 +3571,44 @@ type ImageConfig struct {
 	//
 	// This member is required.
 	RepositoryAccessMode RepositoryAccessMode
+}
+
+// A version of a SageMaker Image. A version represents an existing container
+// image.
+type ImageVersion struct {
+
+	// When the version was created.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the image the version is based on.
+	//
+	// This member is required.
+	ImageArn *string
+
+	// The ARN of the version.
+	//
+	// This member is required.
+	ImageVersionArn *string
+
+	// The status of the version.
+	//
+	// This member is required.
+	ImageVersionStatus ImageVersionStatus
+
+	// When the version was last modified.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The version number.
+	//
+	// This member is required.
+	Version *int32
+
+	// When a create or delete operation fails, the reason for the failure.
+	FailureReason *string
 }
 
 // Defines how to perform inference generation after a training job is run.
@@ -3757,12 +3885,41 @@ type JupyterServerAppSettings struct {
 	DefaultResourceSpec *ResourceSpec
 }
 
-// The kernel gateway app settings.
+// The KernelGateway app settings.
 type KernelGatewayAppSettings struct {
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker
-	// image created on the instance.
+	// A list of custom images that are configured to run as a KernelGateway app.
+	CustomImages []*CustomImage
+
+	// The default instance type and the Amazon Resource Name (ARN) of the default
+	// SageMaker image used by the KernelGateway app.
 	DefaultResourceSpec *ResourceSpec
+}
+
+// The configuration for an Amazon SageMaker KernelGateway app.
+type KernelGatewayImageConfig struct {
+
+	// Defines how a kernel is started and the arguments, environment variables, and
+	// metadata that are available to the kernel.
+	//
+	// This member is required.
+	KernelSpecs []*KernelSpec
+
+	// The file system configuration.
+	FileSystemConfig *FileSystemConfig
+}
+
+// Defines how a kernel is started and the arguments, environment variables, and
+// metadata that are available to the kernel.
+type KernelSpec struct {
+
+	// The name of the kernel. Must be unique to your account.
+	//
+	// This member is required.
+	Name *string
+
+	// The display name of the kernel.
+	DisplayName *string
 }
 
 // Provides a breakdown of the number of objects labeled.
@@ -4870,6 +5027,13 @@ type OutputConfig struct {
 	// compiler options if compiling for ARM 32-bit platform with NEON support.
 	//
 	// *
+	// INFERENTIA: Compilation for target ml_inf1 uses compiler options passed in as a
+	// JSON string. For example, "CompilerOptions": "\"--verbose 1 --num-neuroncores 2
+	// -O2\"". For information about supported compiler options, see  Neuron Compiler
+	// CLI
+	// (https://github.com/aws/aws-neuron-sdk/blob/master/docs/neuron-cc/command-line-reference.md).
+	//
+	// *
 	// CoreML: Compilation for the CoreML OutputConfig$TargetDevice supports the
 	// following compiler options:
 	//
@@ -5730,16 +5894,18 @@ type ResourceLimits struct {
 	MaxParallelTrainingJobs *int32
 }
 
-// The instance type and the Amazon Resource Name (ARN) of the SageMaker image
-// created on the instance. The ARN is stored as metadata in SageMaker Studio
-// notebooks.
+// Specifies the ARN's of a SageMaker image and SageMaker image version, and the
+// instance type that the version runs on.
 type ResourceSpec struct {
 
-	// The instance type.
+	// The instance type that the image version runs on.
 	InstanceType AppInstanceType
 
-	// The Amazon Resource Name (ARN) of the SageMaker image created on the instance.
+	// The ARN of the SageMaker image that the image version belongs to.
 	SageMakerImageArn *string
+
+	// The ARN of the image version created on the instance.
+	SageMakerImageVersionArn *string
 }
 
 // The retention policy for data stored on an Amazon Elastic File System (EFS)
@@ -7443,7 +7609,10 @@ type UserSettings struct {
 	// The kernel gateway app settings.
 	KernelGatewayAppSettings *KernelGatewayAppSettings
 
-	// The security groups.
+	// The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses
+	// for communication. Optional when the CreateDomain.AppNetworkAccessType parameter
+	// is set to PublicInternetOnly. Required when the
+	// CreateDomain.AppNetworkAccessType parameter is set to VpcOnly.
 	SecurityGroups []*string
 
 	// The sharing settings.

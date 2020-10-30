@@ -44,8 +44,6 @@ type GetDocumentationPartsInput struct {
 	// UNDOCUMENTED for DocumentationPart resources without content.
 	LocationStatus types.LocationStatusType
 
-	Name *string
-
 	// The name of API entities of the to-be-retrieved documentation parts.
 	NameQuery *string
 
@@ -54,12 +52,6 @@ type GetDocumentationPartsInput struct {
 
 	// The current pagination position in the paged result set.
 	Position *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 
 	// The type of API entities of the to-be-retrieved documentation parts.
 	Type types.DocumentationPartType

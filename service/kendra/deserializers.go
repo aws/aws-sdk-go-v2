@@ -4007,6 +4007,676 @@ func awsAwsjson11_deserializeDocumentConflictException(v **types.ConflictExcepti
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentConfluenceAttachmentConfiguration(v **types.ConfluenceAttachmentConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConfluenceAttachmentConfiguration
+	if *v == nil {
+		sv = &types.ConfluenceAttachmentConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AttachmentFieldMappings":
+			if err := awsAwsjson11_deserializeDocumentConfluenceAttachmentFieldMappingsList(&sv.AttachmentFieldMappings, value); err != nil {
+				return err
+			}
+
+		case "CrawlAttachments":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.CrawlAttachments = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentConfluenceAttachmentFieldMappingsList(v *[]*types.ConfluenceAttachmentToIndexFieldMapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.ConfluenceAttachmentToIndexFieldMapping
+	if *v == nil {
+		cv = []*types.ConfluenceAttachmentToIndexFieldMapping{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.ConfluenceAttachmentToIndexFieldMapping
+		if err := awsAwsjson11_deserializeDocumentConfluenceAttachmentToIndexFieldMapping(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentConfluenceAttachmentToIndexFieldMapping(v **types.ConfluenceAttachmentToIndexFieldMapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConfluenceAttachmentToIndexFieldMapping
+	if *v == nil {
+		sv = &types.ConfluenceAttachmentToIndexFieldMapping{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DataSourceFieldName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConfluenceAttachmentFieldName to be of type string, got %T instead", value)
+				}
+				sv.DataSourceFieldName = types.ConfluenceAttachmentFieldName(jtv)
+			}
+
+		case "DateFieldFormat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataSourceDateFieldFormat to be of type string, got %T instead", value)
+				}
+				sv.DateFieldFormat = &jtv
+			}
+
+		case "IndexFieldName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IndexFieldName to be of type string, got %T instead", value)
+				}
+				sv.IndexFieldName = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentConfluenceBlogConfiguration(v **types.ConfluenceBlogConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConfluenceBlogConfiguration
+	if *v == nil {
+		sv = &types.ConfluenceBlogConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BlogFieldMappings":
+			if err := awsAwsjson11_deserializeDocumentConfluenceBlogFieldMappingsList(&sv.BlogFieldMappings, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentConfluenceBlogFieldMappingsList(v *[]*types.ConfluenceBlogToIndexFieldMapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.ConfluenceBlogToIndexFieldMapping
+	if *v == nil {
+		cv = []*types.ConfluenceBlogToIndexFieldMapping{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.ConfluenceBlogToIndexFieldMapping
+		if err := awsAwsjson11_deserializeDocumentConfluenceBlogToIndexFieldMapping(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentConfluenceBlogToIndexFieldMapping(v **types.ConfluenceBlogToIndexFieldMapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConfluenceBlogToIndexFieldMapping
+	if *v == nil {
+		sv = &types.ConfluenceBlogToIndexFieldMapping{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DataSourceFieldName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConfluenceBlogFieldName to be of type string, got %T instead", value)
+				}
+				sv.DataSourceFieldName = types.ConfluenceBlogFieldName(jtv)
+			}
+
+		case "DateFieldFormat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataSourceDateFieldFormat to be of type string, got %T instead", value)
+				}
+				sv.DateFieldFormat = &jtv
+			}
+
+		case "IndexFieldName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IndexFieldName to be of type string, got %T instead", value)
+				}
+				sv.IndexFieldName = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentConfluenceConfiguration(v **types.ConfluenceConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConfluenceConfiguration
+	if *v == nil {
+		sv = &types.ConfluenceConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AttachmentConfiguration":
+			if err := awsAwsjson11_deserializeDocumentConfluenceAttachmentConfiguration(&sv.AttachmentConfiguration, value); err != nil {
+				return err
+			}
+
+		case "BlogConfiguration":
+			if err := awsAwsjson11_deserializeDocumentConfluenceBlogConfiguration(&sv.BlogConfiguration, value); err != nil {
+				return err
+			}
+
+		case "ExclusionPatterns":
+			if err := awsAwsjson11_deserializeDocumentDataSourceInclusionsExclusionsStrings(&sv.ExclusionPatterns, value); err != nil {
+				return err
+			}
+
+		case "InclusionPatterns":
+			if err := awsAwsjson11_deserializeDocumentDataSourceInclusionsExclusionsStrings(&sv.InclusionPatterns, value); err != nil {
+				return err
+			}
+
+		case "PageConfiguration":
+			if err := awsAwsjson11_deserializeDocumentConfluencePageConfiguration(&sv.PageConfiguration, value); err != nil {
+				return err
+			}
+
+		case "SecretArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretArn to be of type string, got %T instead", value)
+				}
+				sv.SecretArn = &jtv
+			}
+
+		case "ServerUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Url to be of type string, got %T instead", value)
+				}
+				sv.ServerUrl = &jtv
+			}
+
+		case "SpaceConfiguration":
+			if err := awsAwsjson11_deserializeDocumentConfluenceSpaceConfiguration(&sv.SpaceConfiguration, value); err != nil {
+				return err
+			}
+
+		case "Version":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConfluenceVersion to be of type string, got %T instead", value)
+				}
+				sv.Version = types.ConfluenceVersion(jtv)
+			}
+
+		case "VpcConfiguration":
+			if err := awsAwsjson11_deserializeDocumentDataSourceVpcConfiguration(&sv.VpcConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentConfluencePageConfiguration(v **types.ConfluencePageConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConfluencePageConfiguration
+	if *v == nil {
+		sv = &types.ConfluencePageConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "PageFieldMappings":
+			if err := awsAwsjson11_deserializeDocumentConfluencePageFieldMappingsList(&sv.PageFieldMappings, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentConfluencePageFieldMappingsList(v *[]*types.ConfluencePageToIndexFieldMapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.ConfluencePageToIndexFieldMapping
+	if *v == nil {
+		cv = []*types.ConfluencePageToIndexFieldMapping{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.ConfluencePageToIndexFieldMapping
+		if err := awsAwsjson11_deserializeDocumentConfluencePageToIndexFieldMapping(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentConfluencePageToIndexFieldMapping(v **types.ConfluencePageToIndexFieldMapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConfluencePageToIndexFieldMapping
+	if *v == nil {
+		sv = &types.ConfluencePageToIndexFieldMapping{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DataSourceFieldName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConfluencePageFieldName to be of type string, got %T instead", value)
+				}
+				sv.DataSourceFieldName = types.ConfluencePageFieldName(jtv)
+			}
+
+		case "DateFieldFormat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataSourceDateFieldFormat to be of type string, got %T instead", value)
+				}
+				sv.DateFieldFormat = &jtv
+			}
+
+		case "IndexFieldName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IndexFieldName to be of type string, got %T instead", value)
+				}
+				sv.IndexFieldName = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentConfluenceSpaceConfiguration(v **types.ConfluenceSpaceConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConfluenceSpaceConfiguration
+	if *v == nil {
+		sv = &types.ConfluenceSpaceConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CrawlArchivedSpaces":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.CrawlArchivedSpaces = &jtv
+			}
+
+		case "CrawlPersonalSpaces":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.CrawlPersonalSpaces = &jtv
+			}
+
+		case "ExcludeSpaces":
+			if err := awsAwsjson11_deserializeDocumentConfluenceSpaceList(&sv.ExcludeSpaces, value); err != nil {
+				return err
+			}
+
+		case "IncludeSpaces":
+			if err := awsAwsjson11_deserializeDocumentConfluenceSpaceList(&sv.IncludeSpaces, value); err != nil {
+				return err
+			}
+
+		case "SpaceFieldMappings":
+			if err := awsAwsjson11_deserializeDocumentConfluenceSpaceFieldMappingsList(&sv.SpaceFieldMappings, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentConfluenceSpaceFieldMappingsList(v *[]*types.ConfluenceSpaceToIndexFieldMapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.ConfluenceSpaceToIndexFieldMapping
+	if *v == nil {
+		cv = []*types.ConfluenceSpaceToIndexFieldMapping{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.ConfluenceSpaceToIndexFieldMapping
+		if err := awsAwsjson11_deserializeDocumentConfluenceSpaceToIndexFieldMapping(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentConfluenceSpaceList(v *[]*string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*string
+	if *v == nil {
+		cv = []*string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ConfluenceSpaceIdentifier to be of type string, got %T instead", value)
+			}
+			col = &jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentConfluenceSpaceToIndexFieldMapping(v **types.ConfluenceSpaceToIndexFieldMapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConfluenceSpaceToIndexFieldMapping
+	if *v == nil {
+		sv = &types.ConfluenceSpaceToIndexFieldMapping{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DataSourceFieldName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConfluenceSpaceFieldName to be of type string, got %T instead", value)
+				}
+				sv.DataSourceFieldName = types.ConfluenceSpaceFieldName(jtv)
+			}
+
+		case "DateFieldFormat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataSourceDateFieldFormat to be of type string, got %T instead", value)
+				}
+				sv.DateFieldFormat = &jtv
+			}
+
+		case "IndexFieldName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IndexFieldName to be of type string, got %T instead", value)
+				}
+				sv.IndexFieldName = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentConnectionConfiguration(v **types.ConnectionConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4174,6 +4844,11 @@ func awsAwsjson11_deserializeDocumentDataSourceConfiguration(v **types.DataSourc
 
 	for key, value := range shape {
 		switch key {
+		case "ConfluenceConfiguration":
+			if err := awsAwsjson11_deserializeDocumentConfluenceConfiguration(&sv.ConfluenceConfiguration, value); err != nil {
+				return err
+			}
+
 		case "DatabaseConfiguration":
 			if err := awsAwsjson11_deserializeDocumentDatabaseConfiguration(&sv.DatabaseConfiguration, value); err != nil {
 				return err

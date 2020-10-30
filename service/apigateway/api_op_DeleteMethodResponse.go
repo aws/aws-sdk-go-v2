@@ -48,14 +48,6 @@ type DeleteMethodResponseInput struct {
 	//
 	// This member is required.
 	StatusCode *string
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 type DeleteMethodResponseOutput struct {

@@ -34,16 +34,8 @@ type GetRestApisInput struct {
 	// maximum value is 500.
 	Limit *int32
 
-	Name *string
-
 	// The current pagination position in the paged result set.
 	Position *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // Contains references to your APIs and links that guide you in how to interact

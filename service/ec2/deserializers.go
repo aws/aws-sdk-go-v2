@@ -1297,6 +1297,97 @@ func awsEc2query_deserializeOpErrorAssociateDhcpOptions(response *smithyhttp.Res
 	}
 }
 
+type awsEc2query_deserializeOpAssociateEnclaveCertificateIamRole struct {
+}
+
+func (*awsEc2query_deserializeOpAssociateEnclaveCertificateIamRole) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsEc2query_deserializeOpAssociateEnclaveCertificateIamRole) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsEc2query_deserializeOpErrorAssociateEnclaveCertificateIamRole(response, &metadata)
+	}
+	output := &AssociateEnclaveCertificateIamRoleOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsEc2query_deserializeOpDocumentAssociateEnclaveCertificateIamRoleOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsEc2query_deserializeOpErrorAssociateEnclaveCertificateIamRole(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := ec2query.GetErrorResponseComponents(errorBody)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.SetRequestIDMetadata(metadata, errorComponents.RequestID)
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsEc2query_deserializeOpAssociateIamInstanceProfile struct {
 }
 
@@ -25503,6 +25594,97 @@ func awsEc2query_deserializeOpErrorDisassociateClientVpnTargetNetwork(response *
 	}
 }
 
+type awsEc2query_deserializeOpDisassociateEnclaveCertificateIamRole struct {
+}
+
+func (*awsEc2query_deserializeOpDisassociateEnclaveCertificateIamRole) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsEc2query_deserializeOpDisassociateEnclaveCertificateIamRole) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsEc2query_deserializeOpErrorDisassociateEnclaveCertificateIamRole(response, &metadata)
+	}
+	output := &DisassociateEnclaveCertificateIamRoleOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsEc2query_deserializeOpDocumentDisassociateEnclaveCertificateIamRoleOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsEc2query_deserializeOpErrorDisassociateEnclaveCertificateIamRole(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := ec2query.GetErrorResponseComponents(errorBody)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.SetRequestIDMetadata(metadata, errorComponents.RequestID)
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsEc2query_deserializeOpDisassociateIamInstanceProfile struct {
 }
 
@@ -27018,6 +27200,97 @@ func (m *awsEc2query_deserializeOpExportTransitGatewayRoutes) HandleDeserialize(
 }
 
 func awsEc2query_deserializeOpErrorExportTransitGatewayRoutes(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := ec2query.GetErrorResponseComponents(errorBody)
+	if err != nil {
+		return err
+	}
+	awsmiddleware.SetRequestIDMetadata(metadata, errorComponents.RequestID)
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsEc2query_deserializeOpGetAssociatedEnclaveCertificateIamRoles struct {
+}
+
+func (*awsEc2query_deserializeOpGetAssociatedEnclaveCertificateIamRoles) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsEc2query_deserializeOpGetAssociatedEnclaveCertificateIamRoles) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsEc2query_deserializeOpErrorGetAssociatedEnclaveCertificateIamRoles(response, &metadata)
+	}
+	output := &GetAssociatedEnclaveCertificateIamRolesOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsEc2query_deserializeOpDocumentGetAssociatedEnclaveCertificateIamRolesOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsEc2query_deserializeOpErrorGetAssociatedEnclaveCertificateIamRoles(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -39232,6 +39505,163 @@ func awsEc2query_deserializeDocumentAssignedPrivateIpAddressListUnwrapped(v *[]*
 	*v = sv
 	return nil
 }
+func awsEc2query_deserializeDocumentAssociatedRole(v **types.AssociatedRole, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.AssociatedRole
+	if *v == nil {
+		sv = &types.AssociatedRole{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("associatedRoleArn", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.AssociatedRoleArn = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.AssociatedRoleArn = &xtv
+			}
+
+		case strings.EqualFold("certificateS3BucketName", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.CertificateS3BucketName = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.CertificateS3BucketName = &xtv
+			}
+
+		case strings.EqualFold("certificateS3ObjectKey", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.CertificateS3ObjectKey = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.CertificateS3ObjectKey = &xtv
+			}
+
+		case strings.EqualFold("encryptionKmsKeyId", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.EncryptionKmsKeyId = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.EncryptionKmsKeyId = &xtv
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentAssociatedRolesList(v *[]*types.AssociatedRole, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []*types.AssociatedRole
+	if *v == nil {
+		sv = make([]*types.AssociatedRole, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		for {
+			if strings.EqualFold("item", t.Name.Local) {
+				var col *types.AssociatedRole
+				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+				if err := awsEc2query_deserializeDocumentAssociatedRole(&col, nodeDecoder); err != nil {
+					return err
+				}
+				sv = append(sv, col)
+				break
+			} else {
+				break
+			}
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentAssociatedRolesListUnwrapped(v *[]*types.AssociatedRole, decoder smithyxml.NodeDecoder) error {
+	var sv []*types.AssociatedRole
+	if *v == nil {
+		sv = make([]*types.AssociatedRole, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv *types.AssociatedRole
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		if err := awsEc2query_deserializeDocumentAssociatedRole(&mv, nodeDecoder); err != nil {
+			return err
+		}
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
 func awsEc2query_deserializeDocumentAssociatedTargetNetwork(v **types.AssociatedTargetNetwork, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -43281,6 +43711,22 @@ func awsEc2query_deserializeDocumentClientVpnEndpoint(v **types.ClientVpnEndpoin
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsEc2query_deserializeDocumentClientVpnSecurityGroupIdSet(&sv.SecurityGroupIds, nodeDecoder); err != nil {
 				return err
+			}
+
+		case strings.EqualFold("selfServicePortalUrl", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.SelfServicePortalUrl = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.SelfServicePortalUrl = &xtv
 			}
 
 		case strings.EqualFold("serverCertificateArn", t.Name.Local):
@@ -49721,6 +50167,54 @@ func awsEc2query_deserializeDocumentEnableFastSnapshotRestoreSuccessSetUnwrapped
 	*v = sv
 	return nil
 }
+func awsEc2query_deserializeDocumentEnclaveOptions(v **types.EnclaveOptions, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.EnclaveOptions
+	if *v == nil {
+		sv = &types.EnclaveOptions{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("enabled", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.Enabled = &xtv
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsEc2query_deserializeDocumentEndpointSet(v *[]*types.ClientVpnEndpoint, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -50601,6 +51095,22 @@ func awsEc2query_deserializeDocumentFederatedAuthentication(v **types.FederatedA
 			if val != nil {
 				xtv := string(val)
 				sv.SamlProviderArn = &xtv
+			}
+
+		case strings.EqualFold("selfServiceSamlProviderArn", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.SelfServiceSamlProviderArn = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.SelfServiceSamlProviderArn = &xtv
 			}
 
 		default:
@@ -56509,6 +57019,12 @@ func awsEc2query_deserializeDocumentInstance(v **types.Instance, decoder smithyx
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
 				sv.EnaSupport = &xtv
+			}
+
+		case strings.EqualFold("enclaveOptions", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentEnclaveOptions(&sv.EnclaveOptions, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("hibernationOptions", t.Name.Local):
@@ -63151,6 +63667,54 @@ func awsEc2query_deserializeDocumentLaunchTemplateElasticInferenceAcceleratorRes
 	*v = sv
 	return nil
 }
+func awsEc2query_deserializeDocumentLaunchTemplateEnclaveOptions(v **types.LaunchTemplateEnclaveOptions, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.LaunchTemplateEnclaveOptions
+	if *v == nil {
+		sv = &types.LaunchTemplateEnclaveOptions{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("enabled", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.Enabled = &xtv
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsEc2query_deserializeDocumentLaunchTemplateHibernationOptions(v **types.LaunchTemplateHibernationOptions, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -75460,6 +76024,12 @@ func awsEc2query_deserializeDocumentResponseLaunchTemplateData(v **types.Respons
 		case strings.EqualFold("elasticInferenceAcceleratorSet", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsEc2query_deserializeDocumentLaunchTemplateElasticInferenceAcceleratorResponseList(&sv.ElasticInferenceAccelerators, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("enclaveOptions", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentLaunchTemplateEnclaveOptions(&sv.EnclaveOptions, nodeDecoder); err != nil {
 				return err
 			}
 
@@ -88091,6 +88661,19 @@ func awsEc2query_deserializeDocumentTransitGatewayVpcAttachmentOptions(v **types
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("applianceModeSupport", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.ApplianceModeSupport = types.ApplianceModeSupportValue(xtv)
+			}
+
 		case strings.EqualFold("dnsSupport", t.Name.Local):
 			val, done, err := decoder.Value()
 			if err != nil {
@@ -94523,6 +95106,86 @@ func awsEc2query_deserializeDocumentAssociateDhcpOptionsOutput(v **AssociateDhcp
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeOpDocumentAssociateEnclaveCertificateIamRoleOutput(v **AssociateEnclaveCertificateIamRoleOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *AssociateEnclaveCertificateIamRoleOutput
+	if *v == nil {
+		sv = &AssociateEnclaveCertificateIamRoleOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("certificateS3BucketName", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.CertificateS3BucketName = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.CertificateS3BucketName = &xtv
+			}
+
+		case strings.EqualFold("certificateS3ObjectKey", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.CertificateS3ObjectKey = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.CertificateS3ObjectKey = &xtv
+			}
+
+		case strings.EqualFold("encryptionKmsKeyId", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.EncryptionKmsKeyId = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.EncryptionKmsKeyId = &xtv
+			}
+
 		default:
 			// Do nothing and ignore the unexpected tag element
 
@@ -102864,6 +103527,12 @@ func awsEc2query_deserializeOpDocumentDescribeInstanceAttributeOutput(v **Descri
 				return err
 			}
 
+		case strings.EqualFold("enclaveOptions", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentEnclaveOptions(&sv.EnclaveOptions, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("groupSet", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsEc2query_deserializeDocumentGroupIdentifierList(&sv.Groups, nodeDecoder); err != nil {
@@ -107546,6 +108215,54 @@ func awsEc2query_deserializeOpDocumentDisassociateClientVpnTargetNetworkOutput(v
 	return nil
 }
 
+func awsEc2query_deserializeOpDocumentDisassociateEnclaveCertificateIamRoleOutput(v **DisassociateEnclaveCertificateIamRoleOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *DisassociateEnclaveCertificateIamRoleOutput
+	if *v == nil {
+		sv = &DisassociateEnclaveCertificateIamRoleOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("return", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.Return = &xtv
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsEc2query_deserializeOpDocumentDisassociateIamInstanceProfileOutput(v **DisassociateIamInstanceProfileOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -108403,6 +109120,44 @@ func awsEc2query_deserializeOpDocumentExportTransitGatewayRoutesOutput(v **Expor
 			if val != nil {
 				xtv := string(val)
 				sv.S3Location = &xtv
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeOpDocumentGetAssociatedEnclaveCertificateIamRolesOutput(v **GetAssociatedEnclaveCertificateIamRolesOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *GetAssociatedEnclaveCertificateIamRolesOutput
+	if *v == nil {
+		sv = &GetAssociatedEnclaveCertificateIamRolesOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("associatedRoleSet", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentAssociatedRolesList(&sv.AssociatedRoles, nodeDecoder); err != nil {
+				return err
 			}
 
 		default:

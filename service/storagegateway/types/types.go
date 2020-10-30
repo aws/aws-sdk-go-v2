@@ -354,6 +354,9 @@ type NFSFileShareInfo struct {
 	// permissions. This operation is only supported for file gateways.
 	NFSFileShareDefaults *NFSFileShareDefaults
 
+	// The notification policy of the file share.
+	NotificationPolicy *string
+
 	// A value that sets the access control list (ACL) permission for objects in the S3
 	// bucket that a file gateway puts objects into. The default value is private.
 	ObjectACL ObjectACL
@@ -433,6 +436,9 @@ type PoolInfo struct {
 // is only supported for file gateways.
 type SMBFileShareInfo struct {
 
+	// Indicates whether AccessBasedEnumeration is enabled.
+	AccessBasedEnumeration *bool
+
 	// A list of users or groups in the Active Directory that have administrator rights
 	// to the file share. A group must be prefixed with the @ character. Acceptable
 	// formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be
@@ -500,6 +506,9 @@ type SMBFileShareInfo struct {
 	// The ARN of the backend storage used for storing file data. A prefix name can be
 	// added to the S3 bucket name. It must end with a "/".
 	LocationARN *string
+
+	// The notification policy of the file share.
+	NotificationPolicy *string
 
 	// A value that sets the access control list (ACL) permission for objects in the S3
 	// bucket that a file gateway puts objects into. The default value is private.

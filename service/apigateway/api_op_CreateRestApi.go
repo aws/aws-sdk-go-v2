@@ -31,11 +31,6 @@ func (c *Client) CreateRestApi(ctx context.Context, params *CreateRestApiInput, 
 // The POST Request to add a new RestApi resource to your collection.
 type CreateRestApiInput struct {
 
-	// [Required] The name of the RestApi.
-	//
-	// This member is required.
-	Name *string
-
 	// The source of the API key for metering requests according to a usage plan. Valid
 	// values are:
 	//
@@ -56,6 +51,13 @@ type CreateRestApiInput struct {
 	// The description of the RestApi.
 	Description *string
 
+	// Specifies whether clients can invoke your API by using the default execute-api
+	// endpoint. By default, clients can invoke your API with the default
+	// https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that
+	// clients use a custom domain name to invoke your API, disable the default
+	// endpoint.
+	DisableExecuteApiEndpoint *bool
+
 	// The endpoint configuration of this RestApi showing the endpoint types of the
 	// API.
 	EndpointConfiguration *types.EndpointConfiguration
@@ -75,12 +77,6 @@ type CreateRestApiInput struct {
 	// tag key can be up to 128 characters and must not start with aws:. The tag value
 	// can be up to 256 characters.
 	Tags map[string]*string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 
 	// A version identifier for the API.
 	Version *string
@@ -109,6 +105,13 @@ type CreateRestApiOutput struct {
 
 	// The API's description.
 	Description *string
+
+	// Specifies whether clients can invoke your API by using the default execute-api
+	// endpoint. By default, clients can invoke your API with the default
+	// https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that
+	// clients use a custom domain name to invoke your API, disable the default
+	// endpoint.
+	DisableExecuteApiEndpoint *bool
 
 	// The endpoint configuration of this RestApi showing the endpoint types of the
 	// API.
@@ -165,7 +168,6 @@ func addOperationCreateRestApiMiddlewares(stack *middleware.Stack, options Optio
 	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpCreateRestApiValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRestApi(options.Region), middleware.Before)
 	addRequestIDRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)

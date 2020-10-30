@@ -13,7 +13,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/apigateway"
 
 	"github.com/awslabs/smithy-go/middleware"
-	"github.com/awslabs/smithy-go/ptr"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
@@ -52,10 +51,7 @@ func TestAddAcceptHeader(t *testing.T) {
 	svc := apigateway.New(options)
 	fm := requestRetrieverMiddleware{}
 
-	_, err := svc.GetAccount(context.Background(), &apigateway.GetAccountInput{
-		Name:  ptr.String("mock_name"),
-		Title: ptr.String("mock_title"),
-	}, func(options *apigateway.Options) {
+	_, err := svc.GetAccount(context.Background(), &apigateway.GetAccountInput{}, func(options *apigateway.Options) {
 		options.APIOptions = append(options.APIOptions, func(stack *middleware.Stack) error {
 			stack.Build.Add(&fm, middleware.After)
 			return nil
@@ -77,7 +73,7 @@ type requestRetrieverMiddleware struct {
 	request *smithyhttp.Request
 }
 
-func (*requestRetrieverMiddleware) ID() string { return "S3:requestRetrieverMiddleware" }
+func (*requestRetrieverMiddleware) ID() string { return "apigateway:requestRetrieverMiddleware" }
 
 func (rm *requestRetrieverMiddleware) HandleBuild(
 	ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler,

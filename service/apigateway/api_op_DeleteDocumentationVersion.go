@@ -37,14 +37,6 @@ type DeleteDocumentationVersionInput struct {
 	//
 	// This member is required.
 	RestApiId *string
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 type DeleteDocumentationVersionOutput struct {

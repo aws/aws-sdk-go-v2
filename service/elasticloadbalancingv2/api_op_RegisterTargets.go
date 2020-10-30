@@ -43,9 +43,7 @@ type RegisterTargetsInput struct {
 	// This member is required.
 	TargetGroupArn *string
 
-	// The targets. To register a target by instance ID, specify the instance ID. To
-	// register a target by IP address, specify the IP address. To register a Lambda
-	// function, specify the ARN of the Lambda function.
+	// The targets.
 	//
 	// This member is required.
 	Targets []*types.TargetDescription

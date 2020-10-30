@@ -87,39 +87,39 @@ type BatchUpdatePartitionRequestEntry struct {
 	PartitionValueList []*string
 }
 
-// Defines a binary column statistics data.
+// Defines column statistics supported for bit sequence data values.
 type BinaryColumnStatisticsData struct {
 
-	// Average length of the column.
+	// The average bit sequence length in the column.
 	//
 	// This member is required.
 	AverageLength *float64
 
-	// Maximum length of the column.
+	// The size of the longest bit sequence in the column.
 	//
 	// This member is required.
 	MaximumLength *int64
 
-	// Number of nulls.
+	// The number of null values in the column.
 	//
 	// This member is required.
 	NumberOfNulls *int64
 }
 
-// Defines a boolean column statistics.
+// Defines column statistics supported for Boolean data columns.
 type BooleanColumnStatisticsData struct {
 
-	// Number of false value.
+	// The number of false values in the column.
 	//
 	// This member is required.
 	NumberOfFalses *int64
 
-	// Number of nulls.
+	// The number of null values in the column.
 	//
 	// This member is required.
 	NumberOfNulls *int64
 
-	// Number of true value.
+	// The number of true values in the column.
 	//
 	// This member is required.
 	NumberOfTrues *int64
@@ -273,77 +273,78 @@ type Column struct {
 	Type *string
 }
 
-// Defines a column containing error.
+// Encapsulates a column name that failed and the reason for failure.
 type ColumnError struct {
 
-	// The name of the column.
+	// The name of the column that failed.
 	ColumnName *string
 
-	// The error message occurred during operation.
+	// An error message with the reason for the failure of an operation.
 	Error *ErrorDetail
 }
 
-// Defines a column statistics.
+// Represents the generated column-level statistics for a table or partition.
 type ColumnStatistics struct {
 
-	// The analyzed time of the column statistics.
+	// The timestamp of when column statistics were generated.
 	//
 	// This member is required.
 	AnalyzedTime *time.Time
 
-	// The name of the column.
+	// Name of column which statistics belong to.
 	//
 	// This member is required.
 	ColumnName *string
 
-	// The type of the column.
+	// The data type of the column.
 	//
 	// This member is required.
 	ColumnType *string
 
-	// The statistics of the column.
+	// A ColumnStatisticData object that contains the statistics data values.
 	//
 	// This member is required.
 	StatisticsData *ColumnStatisticsData
 }
 
-// Defines a column statistics data.
+// Contains the individual types of column statistics data. Only one data object
+// should be set and indicated by the Type attribute.
 type ColumnStatisticsData struct {
 
-	// The name of the column.
+	// The type of column statistics data.
 	//
 	// This member is required.
 	Type ColumnStatisticsType
 
-	// Binary Column Statistics Data.
+	// Binary column statistics data.
 	BinaryColumnStatisticsData *BinaryColumnStatisticsData
 
-	// Boolean Column Statistics Data.
+	// Boolean column statistics data.
 	BooleanColumnStatisticsData *BooleanColumnStatisticsData
 
-	// Date Column Statistics Data.
+	// Date column statistics data.
 	DateColumnStatisticsData *DateColumnStatisticsData
 
-	// Decimal Column Statistics Data.
+	// Decimal column statistics data.
 	DecimalColumnStatisticsData *DecimalColumnStatisticsData
 
-	// Double Column Statistics Data.
+	// Double column statistics data.
 	DoubleColumnStatisticsData *DoubleColumnStatisticsData
 
-	// Long Column Statistics Data.
+	// Long column statistics data.
 	LongColumnStatisticsData *LongColumnStatisticsData
 
-	// String Column Statistics Data.
+	// String column statistics data.
 	StringColumnStatisticsData *StringColumnStatisticsData
 }
 
-// Defines a column containing error.
+// Encapsulates a ColumnStatistics object that failed and the reason for failure.
 type ColumnStatisticsError struct {
 
 	// The ColumnStatistics of the column.
 	ColumnStatistics *ColumnStatistics
 
-	// The error message occurred during operation.
+	// An error message with the reason for the failure of an operation.
 	Error *ErrorDetail
 }
 
@@ -946,43 +947,43 @@ type DataLakePrincipal struct {
 	DataLakePrincipalIdentifier *string
 }
 
-// Defines a date column statistics data.
+// Defines column statistics supported for timestamp data columns.
 type DateColumnStatisticsData struct {
 
-	// Number of distinct values.
+	// The number of distinct values in a column.
 	//
 	// This member is required.
 	NumberOfDistinctValues *int64
 
-	// Number of nulls.
+	// The number of null values in the column.
 	//
 	// This member is required.
 	NumberOfNulls *int64
 
-	// Maximum value of the column.
+	// The highest value in the column.
 	MaximumValue *time.Time
 
-	// Minimum value of the column.
+	// The lowest value in the column.
 	MinimumValue *time.Time
 }
 
-// Defines a decimal column statistics data.
+// Defines column statistics supported for fixed-point number data columns.
 type DecimalColumnStatisticsData struct {
 
-	// Number of distinct values.
+	// The number of distinct values in a column.
 	//
 	// This member is required.
 	NumberOfDistinctValues *int64
 
-	// Number of nulls.
+	// The number of null values in the column.
 	//
 	// This member is required.
 	NumberOfNulls *int64
 
-	// Maximum value of the column.
+	// The highest value in the column.
 	MaximumValue *DecimalNumber
 
-	// Minimum value of the column.
+	// The lowest value in the column.
 	MinimumValue *DecimalNumber
 }
 
@@ -1156,23 +1157,23 @@ type DevEndpointCustomLibraries struct {
 	ExtraPythonLibsS3Path *string
 }
 
-// Defines a double column statistics data.
+// Defines column statistics supported for floating-point number data columns.
 type DoubleColumnStatisticsData struct {
 
-	// Number of distinct values.
+	// The number of distinct values in a column.
 	//
 	// This member is required.
 	NumberOfDistinctValues *int64
 
-	// Number of nulls.
+	// The number of null values in the column.
 	//
 	// This member is required.
 	NumberOfNulls *int64
 
-	// Maximum value of the column.
+	// The highest value in the column.
 	MaximumValue *float64
 
-	// Minimum value of the column.
+	// The lowest value in the column.
 	MinimumValue *float64
 }
 
@@ -1970,23 +1971,23 @@ type Location struct {
 	S3 []*CodeGenNodeArg
 }
 
-// Defines a long column statistics data.
+// Defines column statistics supported for integer data columns.
 type LongColumnStatisticsData struct {
 
-	// Number of distinct values.
+	// The number of distinct values in a column.
 	//
 	// This member is required.
 	NumberOfDistinctValues *int64
 
-	// Number of nulls.
+	// The number of null values in the column.
 	//
 	// This member is required.
 	NumberOfNulls *int64
 
-	// Maximum value of the column.
+	// The highest value in the column.
 	MaximumValue *int64
 
-	// Minimum value of the column.
+	// The lowest value in the column.
 	MinimumValue *int64
 }
 
@@ -2114,6 +2115,11 @@ type MLTransform struct {
 	// The timeout in minutes of the machine learning transform.
 	Timeout *int32
 
+	// The encryption-at-rest settings of the transform that apply to accessing user
+	// data. Machine learning transforms can access user data encrypted in Amazon S3
+	// using KMS.
+	TransformEncryption *TransformEncryption
+
 	// The unique transform ID that is generated for the machine learning transform.
 	// The ID is guaranteed to be unique and does not change.
 	TransformId *string
@@ -2147,6 +2153,25 @@ type MLTransform struct {
 	// * MaxCapacity and NumberOfWorkers
 	// must both be at least 1.
 	WorkerType WorkerType
+}
+
+// The encryption-at-rest settings of the transform that apply to accessing user
+// data.
+type MLUserDataEncryption struct {
+
+	// The encryption mode applied to user data. Valid values are:
+	//
+	// * DISABLED:
+	// encryption is disabled
+	//
+	// * SSEKMS: use of server-side encryption with AWS Key
+	// Management Service (SSE-KMS) for user data stored in Amazon S3.
+	//
+	// This member is required.
+	MlUserDataEncryptionMode MLUserDataEncryptionModeString
+
+	// The ID for the customer-provided KMS key.
+	KmsKeyId *string
 }
 
 // Specifies an Amazon DocumentDB or MongoDB data store to crawl.
@@ -2581,25 +2606,25 @@ type StorageDescriptor struct {
 	StoredAsSubDirectories *bool
 }
 
-// Defines a string column statistics data.
+// Defines column statistics supported for character sequence data values.
 type StringColumnStatisticsData struct {
 
-	// Average value of the column.
+	// The average string length in the column.
 	//
 	// This member is required.
 	AverageLength *float64
 
-	// Maximum value of the column.
+	// The size of the longest string in the column.
 	//
 	// This member is required.
 	MaximumLength *int64
 
-	// Number of distinct values.
+	// The number of distinct values in a column.
 	//
 	// This member is required.
 	NumberOfDistinctValues *int64
 
-	// Number of nulls.
+	// The number of null values in the column.
 	//
 	// This member is required.
 	NumberOfNulls *int64
@@ -2859,6 +2884,20 @@ type TaskRunSortCriteria struct {
 	SortDirection SortDirectionType
 }
 
+// The encryption-at-rest settings of the transform that apply to accessing user
+// data. Machine learning transforms can access user data encrypted in Amazon S3
+// using KMS. Additionally, imported labels and trained transforms can now be
+// encrypted using a customer provided KMS key.
+type TransformEncryption struct {
+
+	// An MLUserDataEncryption object containing the encryption mode and
+	// customer-provided KMS key ID.
+	MlUserDataEncryption *MLUserDataEncryption
+
+	// The name of the security configuration.
+	TaskRunSecurityConfigurationName *string
+}
+
 // The criteria used to filter the machine learning transforms.
 type TransformFilterCriteria struct {
 
@@ -2907,7 +2946,7 @@ type TransformParameters struct {
 
 	// The type of machine learning transform. For information about the types of
 	// machine learning transforms, see Creating Machine Learning Transforms
-	// (http://docs.aws.amazon.com/glue/latest/dg/add-job-machine-learning-transform.html).
+	// (https://docs.aws.amazon.com/glue/latest/dg/add-job-machine-learning-transform.html).
 	//
 	// This member is required.
 	TransformType TransformType

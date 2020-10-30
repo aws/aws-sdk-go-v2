@@ -35,12 +35,6 @@ func (c *Client) CreateModelPackage(ctx context.Context, params *CreateModelPack
 
 type CreateModelPackageInput struct {
 
-	// The name of the model package. The name must have 1 to 63 characters. Valid
-	// characters are a-z, A-Z, 0-9, and - (hyphen).
-	//
-	// This member is required.
-	ModelPackageName *string
-
 	// Whether to certify the model package for listing on AWS Marketplace.
 	CertifyForMarketplace *bool
 
@@ -60,6 +54,10 @@ type CreateModelPackageInput struct {
 
 	// A description of the model package.
 	ModelPackageDescription *string
+
+	// The name of the model package. The name must have 1 to 63 characters. Valid
+	// characters are a-z, A-Z, 0-9, and - (hyphen).
+	ModelPackageName *string
 
 	// Details about the algorithm that was used to create the model package.
 	SourceAlgorithmSpecification *types.SourceAlgorithmSpecification

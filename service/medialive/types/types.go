@@ -350,6 +350,17 @@ type AutomaticInputFailoverSettings struct {
 	// This member is required.
 	SecondaryInputId *string
 
+	// This clear time defines the requirement a recovered input must meet to be
+	// considered healthy. The input must have no failover conditions for this length
+	// of time. Enter a time in milliseconds. This value is particularly important if
+	// the input_preference for the failover pair is set to PRIMARY_INPUT_PREFERRED,
+	// because after this time, MediaLive will switch back to the primary input.
+	ErrorClearTimeMsec *int32
+
+	// A list of failover conditions. If any of these conditions occur, MediaLive will
+	// perform a failover to the other input.
+	FailoverConditions []*FailoverCondition
+
 	// Input preference when deciding which input to make active when a previously
 	// failed input has recovered.
 	InputPreference InputPreference
@@ -1190,6 +1201,22 @@ type EncoderSettings struct {
 	NielsenConfiguration *NielsenConfiguration
 }
 
+// Failover Condition settings. There can be multiple failover conditions inside
+// AutomaticInputFailoverSettings.
+type FailoverCondition struct {
+
+	// Failover condition type-specific settings.
+	FailoverConditionSettings *FailoverConditionSettings
+}
+
+// Settings for one failover condition.
+type FailoverConditionSettings struct {
+
+	// MediaLive will perform a failover if content is not detected in this input for
+	// the specified period.
+	InputLossSettings *InputLossFailoverSettings
+}
+
 // Feature Activations
 type FeatureActivations struct {
 
@@ -1880,6 +1907,14 @@ type HlsGroupSettings struct {
 	// Place segments in subdirectories.
 	DirectoryStructure HlsDirectoryStructure
 
+	// Specifies whether to insert EXT-X-DISCONTINUITY tags in the HLS child manifests
+	// for this output group. Typically, choose Insert because these tags are required
+	// in the manifest (according to the HLS specification) and serve an important
+	// purpose. Choose Never Insert only if the downstream system is doing real-time
+	// failover (without using the MediaLive automatic failover feature) and only if
+	// that downstream system has advised you to exclude the tags.
+	DiscontinuityTags HlsDiscontinuityTags
+
 	// Encrypts the segments with the given encryption scheme. Exclude this parameter
 	// if no encryption is desired.
 	EncryptionType HlsEncryptionType
@@ -1898,6 +1933,14 @@ type HlsGroupSettings struct {
 	// more #EXT-X-BYTERANGE entries identifying the I-frame position. For example,
 	// #EXT-X-BYTERANGE:160364@1461888"
 	IFrameOnlyPlaylists IFrameOnlyPlaylistType
+
+	// Specifies whether to include the final (incomplete) segment in the media output
+	// when the pipeline stops producing output because of a channel stop, a channel
+	// pause or a loss of input to the pipeline. Auto means that MediaLive decides
+	// whether to include the final segment, depending on the channel class and the
+	// types of output groups. Suppress means to never include the incomplete segment.
+	// We recommend you choose Auto and let MediaLive control the behavior.
+	IncompleteSegmentBehavior HlsIncompleteSegmentBehavior
 
 	// Applies only if Mode field is LIVE. Specifies the maximum number of segments in
 	// the media manifest file. After this maximum, older segments are removed from the
@@ -2448,6 +2491,15 @@ type InputLossBehavior struct {
 
 	// Documentation update needed
 	RepeatFrameMsec *int32
+}
+
+// MediaLive will perform a failover if content is not detected in this input for
+// the specified period.
+type InputLossFailoverSettings struct {
+
+	// The amount of time (in milliseconds) that no input is detected. After that time,
+	// an input failover will occur.
+	InputLossThresholdMsec *int32
 }
 
 // Action to prepare an input for a future immediate input switch.

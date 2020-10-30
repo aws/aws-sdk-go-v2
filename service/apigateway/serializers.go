@@ -99,11 +99,6 @@ func awsRestjson1_serializeOpDocumentCreateApiKeyInput(v *CreateApiKeyInput, val
 		ok.Boolean(*v.GenerateDistinctId)
 	}
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.StageKeys != nil {
 		ok := object.Key("stageKeys")
 		if err := awsRestjson1_serializeDocumentListOfStageKeys(v.StageKeys, ok); err != nil {
@@ -116,23 +111,6 @@ func awsRestjson1_serializeOpDocumentCreateApiKeyInput(v *CreateApiKeyInput, val
 		if err := awsRestjson1_serializeDocumentMapOfStringToString(v.Tags, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	if v.Value != nil {
@@ -254,33 +232,11 @@ func awsRestjson1_serializeOpDocumentCreateAuthorizerInput(v *CreateAuthorizerIn
 		ok.String(*v.IdentityValidationExpression)
 	}
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.ProviderARNs != nil {
 		ok := object.Key("providerARNs")
 		if err := awsRestjson1_serializeDocumentListOfARNs(v.ProviderARNs, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	if len(v.Type) > 0 {
@@ -377,11 +333,6 @@ func awsRestjson1_serializeOpDocumentCreateBasePathMappingInput(v *CreateBasePat
 		ok.String(*v.BasePath)
 	}
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.RestApiId != nil {
 		ok := object.Key("restApiId")
 		ok.String(*v.RestApiId)
@@ -390,23 +341,6 @@ func awsRestjson1_serializeOpDocumentCreateBasePathMappingInput(v *CreateBasePat
 	if v.Stage != nil {
 		ok := object.Key("stage")
 		ok.String(*v.Stage)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -515,11 +449,6 @@ func awsRestjson1_serializeOpDocumentCreateDeploymentInput(v *CreateDeploymentIn
 		ok.String(*v.Description)
 	}
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.StageDescription != nil {
 		ok := object.Key("stageDescription")
 		ok.String(*v.StageDescription)
@@ -528,23 +457,6 @@ func awsRestjson1_serializeOpDocumentCreateDeploymentInput(v *CreateDeploymentIn
 	if v.StageName != nil {
 		ok := object.Key("stageName")
 		ok.String(*v.StageName)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	if v.TracingEnabled != nil {
@@ -650,31 +562,9 @@ func awsRestjson1_serializeOpDocumentCreateDocumentationPartInput(v *CreateDocum
 		}
 	}
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.Properties != nil {
 		ok := object.Key("properties")
 		ok.String(*v.Properties)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -771,31 +661,9 @@ func awsRestjson1_serializeOpDocumentCreateDocumentationVersionInput(v *CreateDo
 		ok.String(*v.DocumentationVersion)
 	}
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.StageName != nil {
 		ok := object.Key("stageName")
 		ok.String(*v.StageName)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -910,11 +778,6 @@ func awsRestjson1_serializeOpDocumentCreateDomainNameInput(v *CreateDomainNameIn
 		}
 	}
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.RegionalCertificateArn != nil {
 		ok := object.Key("regionalCertificateArn")
 		ok.String(*v.RegionalCertificateArn)
@@ -935,23 +798,6 @@ func awsRestjson1_serializeOpDocumentCreateDomainNameInput(v *CreateDomainNameIn
 		if err := awsRestjson1_serializeDocumentMapOfStringToString(v.Tags, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -1048,31 +894,9 @@ func awsRestjson1_serializeOpDocumentCreateModelInput(v *CreateModelInput, value
 		ok.String(*v.Description)
 	}
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.Schema != nil {
 		ok := object.Key("schema")
 		ok.String(*v.Schema)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -1158,28 +982,6 @@ func awsRestjson1_serializeOpHttpBindingsCreateRequestValidatorInput(v *CreateRe
 func awsRestjson1_serializeOpDocumentCreateRequestValidatorInput(v *CreateRequestValidatorInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
-	}
 
 	if v.ValidateRequestBody != nil {
 		ok := object.Key("validateRequestBody")
@@ -1287,31 +1089,9 @@ func awsRestjson1_serializeOpDocumentCreateResourceInput(v *CreateResourceInput,
 	object := value.Object()
 	defer object.Close()
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.PathPart != nil {
 		ok := object.Key("pathPart")
 		ok.String(*v.PathPart)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -1404,6 +1184,11 @@ func awsRestjson1_serializeOpDocumentCreateRestApiInput(v *CreateRestApiInput, v
 		ok.String(*v.Description)
 	}
 
+	if v.DisableExecuteApiEndpoint != nil {
+		ok := object.Key("disableExecuteApiEndpoint")
+		ok.Boolean(*v.DisableExecuteApiEndpoint)
+	}
+
 	if v.EndpointConfiguration != nil {
 		ok := object.Key("endpointConfiguration")
 		if err := awsRestjson1_serializeDocumentEndpointConfiguration(v.EndpointConfiguration, ok); err != nil {
@@ -1416,11 +1201,6 @@ func awsRestjson1_serializeOpDocumentCreateRestApiInput(v *CreateRestApiInput, v
 		ok.Integer(*v.MinimumCompressionSize)
 	}
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.Policy != nil {
 		ok := object.Key("policy")
 		ok.String(*v.Policy)
@@ -1431,23 +1211,6 @@ func awsRestjson1_serializeOpDocumentCreateRestApiInput(v *CreateRestApiInput, v
 		if err := awsRestjson1_serializeDocumentMapOfStringToString(v.Tags, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	if v.Version != nil {
@@ -1571,11 +1334,6 @@ func awsRestjson1_serializeOpDocumentCreateStageInput(v *CreateStageInput, value
 		ok.String(*v.DocumentationVersion)
 	}
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.StageName != nil {
 		ok := object.Key("stageName")
 		ok.String(*v.StageName)
@@ -1586,23 +1344,6 @@ func awsRestjson1_serializeOpDocumentCreateStageInput(v *CreateStageInput, value
 		if err := awsRestjson1_serializeDocumentMapOfStringToString(v.Tags, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	if v.TracingEnabled != nil {
@@ -1697,11 +1438,6 @@ func awsRestjson1_serializeOpDocumentCreateUsagePlanInput(v *CreateUsagePlanInpu
 		ok.String(*v.Description)
 	}
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.Quota != nil {
 		ok := object.Key("quota")
 		if err := awsRestjson1_serializeDocumentQuotaSettings(v.Quota, ok); err != nil {
@@ -1716,28 +1452,11 @@ func awsRestjson1_serializeOpDocumentCreateUsagePlanInput(v *CreateUsagePlanInpu
 		}
 	}
 
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
 	if v.Throttle != nil {
 		ok := object.Key("throttle")
 		if err := awsRestjson1_serializeDocumentThrottleSettings(v.Throttle, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -1834,28 +1553,6 @@ func awsRestjson1_serializeOpDocumentCreateUsagePlanKeyInput(v *CreateUsagePlanK
 		ok.String(*v.KeyType)
 	}
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
-	}
-
 	return nil
 }
 
@@ -1929,11 +1626,6 @@ func awsRestjson1_serializeOpDocumentCreateVpcLinkInput(v *CreateVpcLinkInput, v
 		ok.String(*v.Description)
 	}
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentMapOfStringToString(v.Tags, ok); err != nil {
@@ -1946,23 +1638,6 @@ func awsRestjson1_serializeOpDocumentCreateVpcLinkInput(v *CreateVpcLinkInput, v
 		if err := awsRestjson1_serializeDocumentListOfString(v.TargetArns, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -2007,17 +1682,6 @@ func (m *awsRestjson1_serializeOpDeleteApiKey) HandleSerialize(ctx context.Conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentDeleteApiKeyInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2040,35 +1704,6 @@ func awsRestjson1_serializeOpHttpBindingsDeleteApiKeyInput(v *DeleteApiKeyInput,
 		if err := encoder.SetURI("apiKey").String(*v.ApiKey); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentDeleteApiKeyInput(v *DeleteApiKeyInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -2113,17 +1748,6 @@ func (m *awsRestjson1_serializeOpDeleteAuthorizer) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentDeleteAuthorizerInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2158,35 +1782,6 @@ func awsRestjson1_serializeOpHttpBindingsDeleteAuthorizerInput(v *DeleteAuthoriz
 		if err := encoder.SetURI("restApiId").String(*v.RestApiId); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentDeleteAuthorizerInput(v *DeleteAuthorizerInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -2231,17 +1826,6 @@ func (m *awsRestjson1_serializeOpDeleteBasePathMapping) HandleSerialize(ctx cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentDeleteBasePathMappingInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2276,35 +1860,6 @@ func awsRestjson1_serializeOpHttpBindingsDeleteBasePathMappingInput(v *DeleteBas
 		if err := encoder.SetURI("domainName").String(*v.DomainName); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentDeleteBasePathMappingInput(v *DeleteBasePathMappingInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -2349,17 +1904,6 @@ func (m *awsRestjson1_serializeOpDeleteClientCertificate) HandleSerialize(ctx co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentDeleteClientCertificateInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2382,35 +1926,6 @@ func awsRestjson1_serializeOpHttpBindingsDeleteClientCertificateInput(v *DeleteC
 		if err := encoder.SetURI("clientCertificateId").String(*v.ClientCertificateId); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentDeleteClientCertificateInput(v *DeleteClientCertificateInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -2455,17 +1970,6 @@ func (m *awsRestjson1_serializeOpDeleteDeployment) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentDeleteDeploymentInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2500,35 +2004,6 @@ func awsRestjson1_serializeOpHttpBindingsDeleteDeploymentInput(v *DeleteDeployme
 		if err := encoder.SetURI("restApiId").String(*v.RestApiId); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentDeleteDeploymentInput(v *DeleteDeploymentInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -2573,17 +2048,6 @@ func (m *awsRestjson1_serializeOpDeleteDocumentationPart) HandleSerialize(ctx co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentDeleteDocumentationPartInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2618,35 +2082,6 @@ func awsRestjson1_serializeOpHttpBindingsDeleteDocumentationPartInput(v *DeleteD
 		if err := encoder.SetURI("restApiId").String(*v.RestApiId); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentDeleteDocumentationPartInput(v *DeleteDocumentationPartInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -2691,17 +2126,6 @@ func (m *awsRestjson1_serializeOpDeleteDocumentationVersion) HandleSerialize(ctx
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentDeleteDocumentationVersionInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2736,35 +2160,6 @@ func awsRestjson1_serializeOpHttpBindingsDeleteDocumentationVersionInput(v *Dele
 		if err := encoder.SetURI("restApiId").String(*v.RestApiId); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentDeleteDocumentationVersionInput(v *DeleteDocumentationVersionInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -2809,17 +2204,6 @@ func (m *awsRestjson1_serializeOpDeleteDomainName) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentDeleteDomainNameInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2842,35 +2226,6 @@ func awsRestjson1_serializeOpHttpBindingsDeleteDomainNameInput(v *DeleteDomainNa
 		if err := encoder.SetURI("domainName").String(*v.DomainName); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentDeleteDomainNameInput(v *DeleteDomainNameInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -2915,17 +2270,6 @@ func (m *awsRestjson1_serializeOpDeleteGatewayResponse) HandleSerialize(ctx cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentDeleteGatewayResponseInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2960,35 +2304,6 @@ func awsRestjson1_serializeOpHttpBindingsDeleteGatewayResponseInput(v *DeleteGat
 		if err := encoder.SetURI("restApiId").String(*v.RestApiId); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentDeleteGatewayResponseInput(v *DeleteGatewayResponseInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -3030,17 +2345,6 @@ func (m *awsRestjson1_serializeOpDeleteIntegration) HandleSerialize(ctx context.
 	}
 
 	if err := awsRestjson1_serializeOpHttpBindingsDeleteIntegrationInput(input, restEncoder); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentDeleteIntegrationInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3095,35 +2399,6 @@ func awsRestjson1_serializeOpHttpBindingsDeleteIntegrationInput(v *DeleteIntegra
 	return nil
 }
 
-func awsRestjson1_serializeOpDocumentDeleteIntegrationInput(v *DeleteIntegrationInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
-	}
-
-	return nil
-}
-
 type awsRestjson1_serializeOpDeleteIntegrationResponse struct {
 }
 
@@ -3160,17 +2435,6 @@ func (m *awsRestjson1_serializeOpDeleteIntegrationResponse) HandleSerialize(ctx 
 	}
 
 	if err := awsRestjson1_serializeOpHttpBindingsDeleteIntegrationResponseInput(input, restEncoder); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentDeleteIntegrationResponseInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3237,35 +2501,6 @@ func awsRestjson1_serializeOpHttpBindingsDeleteIntegrationResponseInput(v *Delet
 	return nil
 }
 
-func awsRestjson1_serializeOpDocumentDeleteIntegrationResponseInput(v *DeleteIntegrationResponseInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
-	}
-
-	return nil
-}
-
 type awsRestjson1_serializeOpDeleteMethod struct {
 }
 
@@ -3302,17 +2537,6 @@ func (m *awsRestjson1_serializeOpDeleteMethod) HandleSerialize(ctx context.Conte
 	}
 
 	if err := awsRestjson1_serializeOpHttpBindingsDeleteMethodInput(input, restEncoder); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentDeleteMethodInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3367,35 +2591,6 @@ func awsRestjson1_serializeOpHttpBindingsDeleteMethodInput(v *DeleteMethodInput,
 	return nil
 }
 
-func awsRestjson1_serializeOpDocumentDeleteMethodInput(v *DeleteMethodInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
-	}
-
-	return nil
-}
-
 type awsRestjson1_serializeOpDeleteMethodResponse struct {
 }
 
@@ -3432,17 +2627,6 @@ func (m *awsRestjson1_serializeOpDeleteMethodResponse) HandleSerialize(ctx conte
 	}
 
 	if err := awsRestjson1_serializeOpHttpBindingsDeleteMethodResponseInput(input, restEncoder); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentDeleteMethodResponseInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3509,35 +2693,6 @@ func awsRestjson1_serializeOpHttpBindingsDeleteMethodResponseInput(v *DeleteMeth
 	return nil
 }
 
-func awsRestjson1_serializeOpDocumentDeleteMethodResponseInput(v *DeleteMethodResponseInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
-	}
-
-	return nil
-}
-
 type awsRestjson1_serializeOpDeleteModel struct {
 }
 
@@ -3577,17 +2732,6 @@ func (m *awsRestjson1_serializeOpDeleteModel) HandleSerialize(ctx context.Contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentDeleteModelInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -3622,35 +2766,6 @@ func awsRestjson1_serializeOpHttpBindingsDeleteModelInput(v *DeleteModelInput, e
 		if err := encoder.SetURI("restApiId").String(*v.RestApiId); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentDeleteModelInput(v *DeleteModelInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -3695,17 +2810,6 @@ func (m *awsRestjson1_serializeOpDeleteRequestValidator) HandleSerialize(ctx con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentDeleteRequestValidatorInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -3740,35 +2844,6 @@ func awsRestjson1_serializeOpHttpBindingsDeleteRequestValidatorInput(v *DeleteRe
 		if err := encoder.SetURI("restApiId").String(*v.RestApiId); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentDeleteRequestValidatorInput(v *DeleteRequestValidatorInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -3813,17 +2888,6 @@ func (m *awsRestjson1_serializeOpDeleteResource) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentDeleteResourceInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -3858,35 +2922,6 @@ func awsRestjson1_serializeOpHttpBindingsDeleteResourceInput(v *DeleteResourceIn
 		if err := encoder.SetURI("restApiId").String(*v.RestApiId); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentDeleteResourceInput(v *DeleteResourceInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -3931,17 +2966,6 @@ func (m *awsRestjson1_serializeOpDeleteRestApi) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentDeleteRestApiInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -3964,35 +2988,6 @@ func awsRestjson1_serializeOpHttpBindingsDeleteRestApiInput(v *DeleteRestApiInpu
 		if err := encoder.SetURI("restApiId").String(*v.RestApiId); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentDeleteRestApiInput(v *DeleteRestApiInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -4037,17 +3032,6 @@ func (m *awsRestjson1_serializeOpDeleteStage) HandleSerialize(ctx context.Contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentDeleteStageInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -4082,35 +3066,6 @@ func awsRestjson1_serializeOpHttpBindingsDeleteStageInput(v *DeleteStageInput, e
 		if err := encoder.SetURI("stageName").String(*v.StageName); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentDeleteStageInput(v *DeleteStageInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -4155,17 +3110,6 @@ func (m *awsRestjson1_serializeOpDeleteUsagePlan) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentDeleteUsagePlanInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -4188,35 +3132,6 @@ func awsRestjson1_serializeOpHttpBindingsDeleteUsagePlanInput(v *DeleteUsagePlan
 		if err := encoder.SetURI("usagePlanId").String(*v.UsagePlanId); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentDeleteUsagePlanInput(v *DeleteUsagePlanInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -4261,17 +3176,6 @@ func (m *awsRestjson1_serializeOpDeleteUsagePlanKey) HandleSerialize(ctx context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentDeleteUsagePlanKeyInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -4306,35 +3210,6 @@ func awsRestjson1_serializeOpHttpBindingsDeleteUsagePlanKeyInput(v *DeleteUsageP
 		if err := encoder.SetURI("usagePlanId").String(*v.UsagePlanId); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentDeleteUsagePlanKeyInput(v *DeleteUsagePlanKeyInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -4379,17 +3254,6 @@ func (m *awsRestjson1_serializeOpDeleteVpcLink) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentDeleteVpcLinkInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -4412,35 +3276,6 @@ func awsRestjson1_serializeOpHttpBindingsDeleteVpcLinkInput(v *DeleteVpcLinkInpu
 		if err := encoder.SetURI("vpcLinkId").String(*v.VpcLinkId); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentDeleteVpcLinkInput(v *DeleteVpcLinkInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -4485,17 +3320,6 @@ func (m *awsRestjson1_serializeOpFlushStageAuthorizersCache) HandleSerialize(ctx
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentFlushStageAuthorizersCacheInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -4530,35 +3354,6 @@ func awsRestjson1_serializeOpHttpBindingsFlushStageAuthorizersCacheInput(v *Flus
 		if err := encoder.SetURI("stageName").String(*v.StageName); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentFlushStageAuthorizersCacheInput(v *FlushStageAuthorizersCacheInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -4603,17 +3398,6 @@ func (m *awsRestjson1_serializeOpFlushStageCache) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentFlushStageCacheInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -4648,35 +3432,6 @@ func awsRestjson1_serializeOpHttpBindingsFlushStageCacheInput(v *FlushStageCache
 		if err := encoder.SetURI("stageName").String(*v.StageName); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentFlushStageCacheInput(v *FlushStageCacheInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -4752,33 +3507,11 @@ func awsRestjson1_serializeOpDocumentGenerateClientCertificateInput(v *GenerateC
 		ok.String(*v.Description)
 	}
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentMapOfStringToString(v.Tags, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -4819,17 +3552,6 @@ func (m *awsRestjson1_serializeOpGetAccount) HandleSerialize(ctx context.Context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetAccountInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -4840,35 +3562,6 @@ func (m *awsRestjson1_serializeOpGetAccount) HandleSerialize(ctx context.Context
 func awsRestjson1_serializeOpHttpBindingsGetAccountInput(v *GetAccountInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetAccountInput(v *GetAccountInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -4913,17 +3606,6 @@ func (m *awsRestjson1_serializeOpGetApiKey) HandleSerialize(ctx context.Context,
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetApiKeyInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -4950,35 +3632,6 @@ func awsRestjson1_serializeOpHttpBindingsGetApiKeyInput(v *GetApiKeyInput, encod
 
 	if v.IncludeValue != nil {
 		encoder.SetQuery("includeValue").Boolean(*v.IncludeValue)
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetApiKeyInput(v *GetApiKeyInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -5023,17 +3676,6 @@ func (m *awsRestjson1_serializeOpGetApiKeys) HandleSerialize(ctx context.Context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetApiKeysInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -5064,35 +3706,6 @@ func awsRestjson1_serializeOpHttpBindingsGetApiKeysInput(v *GetApiKeysInput, enc
 
 	if v.Position != nil {
 		encoder.SetQuery("position").String(*v.Position)
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetApiKeysInput(v *GetApiKeysInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -5137,17 +3750,6 @@ func (m *awsRestjson1_serializeOpGetAuthorizer) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetAuthorizerInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -5182,35 +3784,6 @@ func awsRestjson1_serializeOpHttpBindingsGetAuthorizerInput(v *GetAuthorizerInpu
 		if err := encoder.SetURI("restApiId").String(*v.RestApiId); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetAuthorizerInput(v *GetAuthorizerInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -5255,17 +3828,6 @@ func (m *awsRestjson1_serializeOpGetAuthorizers) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetAuthorizersInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -5296,35 +3858,6 @@ func awsRestjson1_serializeOpHttpBindingsGetAuthorizersInput(v *GetAuthorizersIn
 		if err := encoder.SetURI("restApiId").String(*v.RestApiId); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetAuthorizersInput(v *GetAuthorizersInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -5369,17 +3902,6 @@ func (m *awsRestjson1_serializeOpGetBasePathMapping) HandleSerialize(ctx context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetBasePathMappingInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -5414,35 +3936,6 @@ func awsRestjson1_serializeOpHttpBindingsGetBasePathMappingInput(v *GetBasePathM
 		if err := encoder.SetURI("domainName").String(*v.DomainName); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetBasePathMappingInput(v *GetBasePathMappingInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -5487,17 +3980,6 @@ func (m *awsRestjson1_serializeOpGetBasePathMappings) HandleSerialize(ctx contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetBasePathMappingsInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -5528,35 +4010,6 @@ func awsRestjson1_serializeOpHttpBindingsGetBasePathMappingsInput(v *GetBasePath
 
 	if v.Position != nil {
 		encoder.SetQuery("position").String(*v.Position)
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetBasePathMappingsInput(v *GetBasePathMappingsInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -5601,17 +4054,6 @@ func (m *awsRestjson1_serializeOpGetClientCertificate) HandleSerialize(ctx conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetClientCertificateInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -5634,35 +4076,6 @@ func awsRestjson1_serializeOpHttpBindingsGetClientCertificateInput(v *GetClientC
 		if err := encoder.SetURI("clientCertificateId").String(*v.ClientCertificateId); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetClientCertificateInput(v *GetClientCertificateInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -5707,17 +4120,6 @@ func (m *awsRestjson1_serializeOpGetClientCertificates) HandleSerialize(ctx cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetClientCertificatesInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -5736,35 +4138,6 @@ func awsRestjson1_serializeOpHttpBindingsGetClientCertificatesInput(v *GetClient
 
 	if v.Position != nil {
 		encoder.SetQuery("position").String(*v.Position)
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetClientCertificatesInput(v *GetClientCertificatesInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -5806,17 +4179,6 @@ func (m *awsRestjson1_serializeOpGetDeployment) HandleSerialize(ctx context.Cont
 	}
 
 	if err := awsRestjson1_serializeOpHttpBindingsGetDeploymentInput(input, restEncoder); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetDeploymentInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5868,35 +4230,6 @@ func awsRestjson1_serializeOpHttpBindingsGetDeploymentInput(v *GetDeploymentInpu
 	return nil
 }
 
-func awsRestjson1_serializeOpDocumentGetDeploymentInput(v *GetDeploymentInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
-	}
-
-	return nil
-}
-
 type awsRestjson1_serializeOpGetDeployments struct {
 }
 
@@ -5936,17 +4269,6 @@ func (m *awsRestjson1_serializeOpGetDeployments) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetDeploymentsInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -5977,35 +4299,6 @@ func awsRestjson1_serializeOpHttpBindingsGetDeploymentsInput(v *GetDeploymentsIn
 		if err := encoder.SetURI("restApiId").String(*v.RestApiId); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetDeploymentsInput(v *GetDeploymentsInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -6050,17 +4343,6 @@ func (m *awsRestjson1_serializeOpGetDocumentationPart) HandleSerialize(ctx conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetDocumentationPartInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -6095,35 +4377,6 @@ func awsRestjson1_serializeOpHttpBindingsGetDocumentationPartInput(v *GetDocumen
 		if err := encoder.SetURI("restApiId").String(*v.RestApiId); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetDocumentationPartInput(v *GetDocumentationPartInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -6165,17 +4418,6 @@ func (m *awsRestjson1_serializeOpGetDocumentationParts) HandleSerialize(ctx cont
 	}
 
 	if err := awsRestjson1_serializeOpHttpBindingsGetDocumentationPartsInput(input, restEncoder); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetDocumentationPartsInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -6230,35 +4472,6 @@ func awsRestjson1_serializeOpHttpBindingsGetDocumentationPartsInput(v *GetDocume
 	return nil
 }
 
-func awsRestjson1_serializeOpDocumentGetDocumentationPartsInput(v *GetDocumentationPartsInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
-	}
-
-	return nil
-}
-
 type awsRestjson1_serializeOpGetDocumentationVersion struct {
 }
 
@@ -6298,17 +4511,6 @@ func (m *awsRestjson1_serializeOpGetDocumentationVersion) HandleSerialize(ctx co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetDocumentationVersionInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -6343,35 +4545,6 @@ func awsRestjson1_serializeOpHttpBindingsGetDocumentationVersionInput(v *GetDocu
 		if err := encoder.SetURI("restApiId").String(*v.RestApiId); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetDocumentationVersionInput(v *GetDocumentationVersionInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -6416,17 +4589,6 @@ func (m *awsRestjson1_serializeOpGetDocumentationVersions) HandleSerialize(ctx c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetDocumentationVersionsInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -6457,35 +4619,6 @@ func awsRestjson1_serializeOpHttpBindingsGetDocumentationVersionsInput(v *GetDoc
 		if err := encoder.SetURI("restApiId").String(*v.RestApiId); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetDocumentationVersionsInput(v *GetDocumentationVersionsInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -6530,17 +4663,6 @@ func (m *awsRestjson1_serializeOpGetDomainName) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetDomainNameInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -6563,35 +4685,6 @@ func awsRestjson1_serializeOpHttpBindingsGetDomainNameInput(v *GetDomainNameInpu
 		if err := encoder.SetURI("domainName").String(*v.DomainName); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetDomainNameInput(v *GetDomainNameInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -6636,17 +4729,6 @@ func (m *awsRestjson1_serializeOpGetDomainNames) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetDomainNamesInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -6665,35 +4747,6 @@ func awsRestjson1_serializeOpHttpBindingsGetDomainNamesInput(v *GetDomainNamesIn
 
 	if v.Position != nil {
 		encoder.SetQuery("position").String(*v.Position)
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetDomainNamesInput(v *GetDomainNamesInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -6860,17 +4913,6 @@ func (m *awsRestjson1_serializeOpGetGatewayResponse) HandleSerialize(ctx context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetGatewayResponseInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -6905,35 +4947,6 @@ func awsRestjson1_serializeOpHttpBindingsGetGatewayResponseInput(v *GetGatewayRe
 		if err := encoder.SetURI("restApiId").String(*v.RestApiId); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetGatewayResponseInput(v *GetGatewayResponseInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -6978,17 +4991,6 @@ func (m *awsRestjson1_serializeOpGetGatewayResponses) HandleSerialize(ctx contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetGatewayResponsesInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -7019,35 +5021,6 @@ func awsRestjson1_serializeOpHttpBindingsGetGatewayResponsesInput(v *GetGatewayR
 		if err := encoder.SetURI("restApiId").String(*v.RestApiId); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetGatewayResponsesInput(v *GetGatewayResponsesInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -7089,17 +5062,6 @@ func (m *awsRestjson1_serializeOpGetIntegration) HandleSerialize(ctx context.Con
 	}
 
 	if err := awsRestjson1_serializeOpHttpBindingsGetIntegrationInput(input, restEncoder); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetIntegrationInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -7154,35 +5116,6 @@ func awsRestjson1_serializeOpHttpBindingsGetIntegrationInput(v *GetIntegrationIn
 	return nil
 }
 
-func awsRestjson1_serializeOpDocumentGetIntegrationInput(v *GetIntegrationInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
-	}
-
-	return nil
-}
-
 type awsRestjson1_serializeOpGetIntegrationResponse struct {
 }
 
@@ -7219,17 +5152,6 @@ func (m *awsRestjson1_serializeOpGetIntegrationResponse) HandleSerialize(ctx con
 	}
 
 	if err := awsRestjson1_serializeOpHttpBindingsGetIntegrationResponseInput(input, restEncoder); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetIntegrationResponseInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -7296,35 +5218,6 @@ func awsRestjson1_serializeOpHttpBindingsGetIntegrationResponseInput(v *GetInteg
 	return nil
 }
 
-func awsRestjson1_serializeOpDocumentGetIntegrationResponseInput(v *GetIntegrationResponseInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
-	}
-
-	return nil
-}
-
 type awsRestjson1_serializeOpGetMethod struct {
 }
 
@@ -7361,17 +5254,6 @@ func (m *awsRestjson1_serializeOpGetMethod) HandleSerialize(ctx context.Context,
 	}
 
 	if err := awsRestjson1_serializeOpHttpBindingsGetMethodInput(input, restEncoder); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetMethodInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -7426,35 +5308,6 @@ func awsRestjson1_serializeOpHttpBindingsGetMethodInput(v *GetMethodInput, encod
 	return nil
 }
 
-func awsRestjson1_serializeOpDocumentGetMethodInput(v *GetMethodInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
-	}
-
-	return nil
-}
-
 type awsRestjson1_serializeOpGetMethodResponse struct {
 }
 
@@ -7491,17 +5344,6 @@ func (m *awsRestjson1_serializeOpGetMethodResponse) HandleSerialize(ctx context.
 	}
 
 	if err := awsRestjson1_serializeOpHttpBindingsGetMethodResponseInput(input, restEncoder); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetMethodResponseInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -7568,35 +5410,6 @@ func awsRestjson1_serializeOpHttpBindingsGetMethodResponseInput(v *GetMethodResp
 	return nil
 }
 
-func awsRestjson1_serializeOpDocumentGetMethodResponseInput(v *GetMethodResponseInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
-	}
-
-	return nil
-}
-
 type awsRestjson1_serializeOpGetModel struct {
 }
 
@@ -7633,17 +5446,6 @@ func (m *awsRestjson1_serializeOpGetModel) HandleSerialize(ctx context.Context, 
 	}
 
 	if err := awsRestjson1_serializeOpHttpBindingsGetModelInput(input, restEncoder); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetModelInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -7690,35 +5492,6 @@ func awsRestjson1_serializeOpHttpBindingsGetModelInput(v *GetModelInput, encoder
 	return nil
 }
 
-func awsRestjson1_serializeOpDocumentGetModelInput(v *GetModelInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
-	}
-
-	return nil
-}
-
 type awsRestjson1_serializeOpGetModels struct {
 }
 
@@ -7758,17 +5531,6 @@ func (m *awsRestjson1_serializeOpGetModels) HandleSerialize(ctx context.Context,
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetModelsInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -7799,35 +5561,6 @@ func awsRestjson1_serializeOpHttpBindingsGetModelsInput(v *GetModelsInput, encod
 		if err := encoder.SetURI("restApiId").String(*v.RestApiId); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetModelsInput(v *GetModelsInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -7872,17 +5605,6 @@ func (m *awsRestjson1_serializeOpGetModelTemplate) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetModelTemplateInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -7917,35 +5639,6 @@ func awsRestjson1_serializeOpHttpBindingsGetModelTemplateInput(v *GetModelTempla
 		if err := encoder.SetURI("restApiId").String(*v.RestApiId); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetModelTemplateInput(v *GetModelTemplateInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -7990,17 +5683,6 @@ func (m *awsRestjson1_serializeOpGetRequestValidator) HandleSerialize(ctx contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetRequestValidatorInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -8035,35 +5717,6 @@ func awsRestjson1_serializeOpHttpBindingsGetRequestValidatorInput(v *GetRequestV
 		if err := encoder.SetURI("restApiId").String(*v.RestApiId); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetRequestValidatorInput(v *GetRequestValidatorInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -8108,17 +5761,6 @@ func (m *awsRestjson1_serializeOpGetRequestValidators) HandleSerialize(ctx conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetRequestValidatorsInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -8149,35 +5791,6 @@ func awsRestjson1_serializeOpHttpBindingsGetRequestValidatorsInput(v *GetRequest
 		if err := encoder.SetURI("restApiId").String(*v.RestApiId); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetRequestValidatorsInput(v *GetRequestValidatorsInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -8219,17 +5832,6 @@ func (m *awsRestjson1_serializeOpGetResource) HandleSerialize(ctx context.Contex
 	}
 
 	if err := awsRestjson1_serializeOpHttpBindingsGetResourceInput(input, restEncoder); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetResourceInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -8281,35 +5883,6 @@ func awsRestjson1_serializeOpHttpBindingsGetResourceInput(v *GetResourceInput, e
 	return nil
 }
 
-func awsRestjson1_serializeOpDocumentGetResourceInput(v *GetResourceInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
-	}
-
-	return nil
-}
-
 type awsRestjson1_serializeOpGetResources struct {
 }
 
@@ -8346,17 +5919,6 @@ func (m *awsRestjson1_serializeOpGetResources) HandleSerialize(ctx context.Conte
 	}
 
 	if err := awsRestjson1_serializeOpHttpBindingsGetResourcesInput(input, restEncoder); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetResourcesInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -8404,35 +5966,6 @@ func awsRestjson1_serializeOpHttpBindingsGetResourcesInput(v *GetResourcesInput,
 	return nil
 }
 
-func awsRestjson1_serializeOpDocumentGetResourcesInput(v *GetResourcesInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
-	}
-
-	return nil
-}
-
 type awsRestjson1_serializeOpGetRestApi struct {
 }
 
@@ -8472,17 +6005,6 @@ func (m *awsRestjson1_serializeOpGetRestApi) HandleSerialize(ctx context.Context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetRestApiInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -8505,35 +6027,6 @@ func awsRestjson1_serializeOpHttpBindingsGetRestApiInput(v *GetRestApiInput, enc
 		if err := encoder.SetURI("restApiId").String(*v.RestApiId); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetRestApiInput(v *GetRestApiInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -8578,17 +6071,6 @@ func (m *awsRestjson1_serializeOpGetRestApis) HandleSerialize(ctx context.Contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetRestApisInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -8607,35 +6089,6 @@ func awsRestjson1_serializeOpHttpBindingsGetRestApisInput(v *GetRestApisInput, e
 
 	if v.Position != nil {
 		encoder.SetQuery("position").String(*v.Position)
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetRestApisInput(v *GetRestApisInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -8795,17 +6248,6 @@ func (m *awsRestjson1_serializeOpGetSdkType) HandleSerialize(ctx context.Context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetSdkTypeInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -8828,35 +6270,6 @@ func awsRestjson1_serializeOpHttpBindingsGetSdkTypeInput(v *GetSdkTypeInput, enc
 		if err := encoder.SetURI("id").String(*v.Id); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetSdkTypeInput(v *GetSdkTypeInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -8901,17 +6314,6 @@ func (m *awsRestjson1_serializeOpGetSdkTypes) HandleSerialize(ctx context.Contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetSdkTypesInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -8930,35 +6332,6 @@ func awsRestjson1_serializeOpHttpBindingsGetSdkTypesInput(v *GetSdkTypesInput, e
 
 	if v.Position != nil {
 		encoder.SetQuery("position").String(*v.Position)
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetSdkTypesInput(v *GetSdkTypesInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -9003,17 +6376,6 @@ func (m *awsRestjson1_serializeOpGetStage) HandleSerialize(ctx context.Context, 
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetStageInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -9048,35 +6410,6 @@ func awsRestjson1_serializeOpHttpBindingsGetStageInput(v *GetStageInput, encoder
 		if err := encoder.SetURI("stageName").String(*v.StageName); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetStageInput(v *GetStageInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -9121,17 +6454,6 @@ func (m *awsRestjson1_serializeOpGetStages) HandleSerialize(ctx context.Context,
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetStagesInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -9158,35 +6480,6 @@ func awsRestjson1_serializeOpHttpBindingsGetStagesInput(v *GetStagesInput, encod
 		if err := encoder.SetURI("restApiId").String(*v.RestApiId); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetStagesInput(v *GetStagesInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -9231,17 +6524,6 @@ func (m *awsRestjson1_serializeOpGetTags) HandleSerialize(ctx context.Context, i
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetTagsInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -9272,35 +6554,6 @@ func awsRestjson1_serializeOpHttpBindingsGetTagsInput(v *GetTagsInput, encoder *
 		if err := encoder.SetURI("resourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetTagsInput(v *GetTagsInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -9342,17 +6595,6 @@ func (m *awsRestjson1_serializeOpGetUsage) HandleSerialize(ctx context.Context, 
 	}
 
 	if err := awsRestjson1_serializeOpHttpBindingsGetUsageInput(input, restEncoder); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetUsageInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -9403,35 +6645,6 @@ func awsRestjson1_serializeOpHttpBindingsGetUsageInput(v *GetUsageInput, encoder
 	return nil
 }
 
-func awsRestjson1_serializeOpDocumentGetUsageInput(v *GetUsageInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
-	}
-
-	return nil
-}
-
 type awsRestjson1_serializeOpGetUsagePlan struct {
 }
 
@@ -9471,17 +6684,6 @@ func (m *awsRestjson1_serializeOpGetUsagePlan) HandleSerialize(ctx context.Conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetUsagePlanInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -9504,35 +6706,6 @@ func awsRestjson1_serializeOpHttpBindingsGetUsagePlanInput(v *GetUsagePlanInput,
 		if err := encoder.SetURI("usagePlanId").String(*v.UsagePlanId); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetUsagePlanInput(v *GetUsagePlanInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -9577,17 +6750,6 @@ func (m *awsRestjson1_serializeOpGetUsagePlanKey) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetUsagePlanKeyInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -9622,35 +6784,6 @@ func awsRestjson1_serializeOpHttpBindingsGetUsagePlanKeyInput(v *GetUsagePlanKey
 		if err := encoder.SetURI("usagePlanId").String(*v.UsagePlanId); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetUsagePlanKeyInput(v *GetUsagePlanKeyInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -9695,17 +6828,6 @@ func (m *awsRestjson1_serializeOpGetUsagePlanKeys) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetUsagePlanKeysInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -9740,35 +6862,6 @@ func awsRestjson1_serializeOpHttpBindingsGetUsagePlanKeysInput(v *GetUsagePlanKe
 		if err := encoder.SetURI("usagePlanId").String(*v.UsagePlanId); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetUsagePlanKeysInput(v *GetUsagePlanKeysInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -9813,17 +6906,6 @@ func (m *awsRestjson1_serializeOpGetUsagePlans) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetUsagePlansInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -9846,35 +6928,6 @@ func awsRestjson1_serializeOpHttpBindingsGetUsagePlansInput(v *GetUsagePlansInpu
 
 	if v.Position != nil {
 		encoder.SetQuery("position").String(*v.Position)
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetUsagePlansInput(v *GetUsagePlansInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -9919,17 +6972,6 @@ func (m *awsRestjson1_serializeOpGetVpcLink) HandleSerialize(ctx context.Context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetVpcLinkInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -9952,35 +6994,6 @@ func awsRestjson1_serializeOpHttpBindingsGetVpcLinkInput(v *GetVpcLinkInput, enc
 		if err := encoder.SetURI("vpcLinkId").String(*v.VpcLinkId); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetVpcLinkInput(v *GetVpcLinkInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -10025,17 +7038,6 @@ func (m *awsRestjson1_serializeOpGetVpcLinks) HandleSerialize(ctx context.Contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetVpcLinksInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -10054,35 +7056,6 @@ func awsRestjson1_serializeOpHttpBindingsGetVpcLinksInput(v *GetVpcLinksInput, e
 
 	if v.Position != nil {
 		encoder.SetQuery("position").String(*v.Position)
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetVpcLinksInput(v *GetVpcLinksInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -10127,17 +7100,6 @@ func (m *awsRestjson1_serializeOpImportApiKeys) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentImportApiKeysInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -10156,35 +7118,6 @@ func awsRestjson1_serializeOpHttpBindingsImportApiKeysInput(v *ImportApiKeysInpu
 
 	if len(v.Format) > 0 {
 		encoder.SetQuery("format").String(string(v.Format))
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentImportApiKeysInput(v *ImportApiKeysInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -10229,17 +7162,6 @@ func (m *awsRestjson1_serializeOpImportDocumentationParts) HandleSerialize(ctx c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentImportDocumentationPartsInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -10270,35 +7192,6 @@ func awsRestjson1_serializeOpHttpBindingsImportDocumentationPartsInput(v *Import
 		if err := encoder.SetURI("restApiId").String(*v.RestApiId); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentImportDocumentationPartsInput(v *ImportDocumentationPartsInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -10377,33 +7270,11 @@ func awsRestjson1_serializeOpDocumentImportRestApiInput(v *ImportRestApiInput, v
 	object := value.Object()
 	defer object.Close()
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.Parameters != nil {
 		ok := object.Key("parameters")
 		if err := awsRestjson1_serializeDocumentMapOfStringToString(v.Parameters, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -10502,11 +7373,6 @@ func awsRestjson1_serializeOpDocumentPutGatewayResponseInput(v *PutGatewayRespon
 	object := value.Object()
 	defer object.Close()
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.ResponseParameters != nil {
 		ok := object.Key("responseParameters")
 		if err := awsRestjson1_serializeDocumentMapOfStringToString(v.ResponseParameters, ok); err != nil {
@@ -10524,23 +7390,6 @@ func awsRestjson1_serializeOpDocumentPutGatewayResponseInput(v *PutGatewayRespon
 	if v.StatusCode != nil {
 		ok := object.Key("statusCode")
 		ok.String(*v.StatusCode)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -10688,11 +7537,6 @@ func awsRestjson1_serializeOpDocumentPutIntegrationInput(v *PutIntegrationInput,
 		ok.String(*v.IntegrationHttpMethod)
 	}
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.PassthroughBehavior != nil {
 		ok := object.Key("passthroughBehavior")
 		ok.String(*v.PassthroughBehavior)
@@ -10712,26 +7556,9 @@ func awsRestjson1_serializeOpDocumentPutIntegrationInput(v *PutIntegrationInput,
 		}
 	}
 
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
 	if v.TimeoutInMillis != nil {
 		ok := object.Key("timeoutInMillis")
 		ok.Integer(*v.TimeoutInMillis)
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	if v.TlsConfig != nil {
@@ -10876,11 +7703,6 @@ func awsRestjson1_serializeOpDocumentPutIntegrationResponseInput(v *PutIntegrati
 		ok.String(string(v.ContentHandling))
 	}
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.ResponseParameters != nil {
 		ok := object.Key("responseParameters")
 		if err := awsRestjson1_serializeDocumentMapOfStringToString(v.ResponseParameters, ok); err != nil {
@@ -10898,23 +7720,6 @@ func awsRestjson1_serializeOpDocumentPutIntegrationResponseInput(v *PutIntegrati
 	if v.SelectionPattern != nil {
 		ok := object.Key("selectionPattern")
 		ok.String(*v.SelectionPattern)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -11047,11 +7852,6 @@ func awsRestjson1_serializeOpDocumentPutMethodInput(v *PutMethodInput, value smi
 		ok.String(*v.AuthorizerId)
 	}
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.OperationName != nil {
 		ok := object.Key("operationName")
 		ok.String(*v.OperationName)
@@ -11074,23 +7874,6 @@ func awsRestjson1_serializeOpDocumentPutMethodInput(v *PutMethodInput, value smi
 	if v.RequestValidatorId != nil {
 		ok := object.Key("requestValidatorId")
 		ok.String(*v.RequestValidatorId)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -11213,11 +7996,6 @@ func awsRestjson1_serializeOpDocumentPutMethodResponseInput(v *PutMethodResponse
 	object := value.Object()
 	defer object.Close()
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.ResponseModels != nil {
 		ok := object.Key("responseModels")
 		if err := awsRestjson1_serializeDocumentMapOfStringToString(v.ResponseModels, ok); err != nil {
@@ -11230,23 +8008,6 @@ func awsRestjson1_serializeOpDocumentPutMethodResponseInput(v *PutMethodResponse
 		if err := awsRestjson1_serializeDocumentMapOfStringToBoolean(v.ResponseParameters, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -11341,33 +8102,11 @@ func awsRestjson1_serializeOpDocumentPutRestApiInput(v *PutRestApiInput, value s
 	object := value.Object()
 	defer object.Close()
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.Parameters != nil {
 		ok := object.Key("parameters")
 		if err := awsRestjson1_serializeDocumentMapOfStringToString(v.Parameters, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -11454,33 +8193,11 @@ func awsRestjson1_serializeOpDocumentTagResourceInput(v *TagResourceInput, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentMapOfStringToString(v.Tags, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -11803,17 +8520,6 @@ func (m *awsRestjson1_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -11845,35 +8551,6 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 			}
 			encoder.AddQuery("tagKeys").String(*v.TagKeys[i])
 		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -11944,33 +8621,11 @@ func awsRestjson1_serializeOpDocumentUpdateAccountInput(v *UpdateAccountInput, v
 	object := value.Object()
 	defer object.Close()
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.PatchOperations != nil {
 		ok := object.Key("patchOperations")
 		if err := awsRestjson1_serializeDocumentListOfPatchOperation(v.PatchOperations, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -12057,33 +8712,11 @@ func awsRestjson1_serializeOpDocumentUpdateApiKeyInput(v *UpdateApiKeyInput, val
 	object := value.Object()
 	defer object.Close()
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.PatchOperations != nil {
 		ok := object.Key("patchOperations")
 		if err := awsRestjson1_serializeDocumentListOfPatchOperation(v.PatchOperations, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -12182,33 +8815,11 @@ func awsRestjson1_serializeOpDocumentUpdateAuthorizerInput(v *UpdateAuthorizerIn
 	object := value.Object()
 	defer object.Close()
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.PatchOperations != nil {
 		ok := object.Key("patchOperations")
 		if err := awsRestjson1_serializeDocumentListOfPatchOperation(v.PatchOperations, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -12307,33 +8918,11 @@ func awsRestjson1_serializeOpDocumentUpdateBasePathMappingInput(v *UpdateBasePat
 	object := value.Object()
 	defer object.Close()
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.PatchOperations != nil {
 		ok := object.Key("patchOperations")
 		if err := awsRestjson1_serializeDocumentListOfPatchOperation(v.PatchOperations, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -12420,33 +9009,11 @@ func awsRestjson1_serializeOpDocumentUpdateClientCertificateInput(v *UpdateClien
 	object := value.Object()
 	defer object.Close()
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.PatchOperations != nil {
 		ok := object.Key("patchOperations")
 		if err := awsRestjson1_serializeDocumentListOfPatchOperation(v.PatchOperations, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -12545,33 +9112,11 @@ func awsRestjson1_serializeOpDocumentUpdateDeploymentInput(v *UpdateDeploymentIn
 	object := value.Object()
 	defer object.Close()
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.PatchOperations != nil {
 		ok := object.Key("patchOperations")
 		if err := awsRestjson1_serializeDocumentListOfPatchOperation(v.PatchOperations, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -12670,33 +9215,11 @@ func awsRestjson1_serializeOpDocumentUpdateDocumentationPartInput(v *UpdateDocum
 	object := value.Object()
 	defer object.Close()
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.PatchOperations != nil {
 		ok := object.Key("patchOperations")
 		if err := awsRestjson1_serializeDocumentListOfPatchOperation(v.PatchOperations, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -12795,33 +9318,11 @@ func awsRestjson1_serializeOpDocumentUpdateDocumentationVersionInput(v *UpdateDo
 	object := value.Object()
 	defer object.Close()
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.PatchOperations != nil {
 		ok := object.Key("patchOperations")
 		if err := awsRestjson1_serializeDocumentListOfPatchOperation(v.PatchOperations, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -12908,33 +9409,11 @@ func awsRestjson1_serializeOpDocumentUpdateDomainNameInput(v *UpdateDomainNameIn
 	object := value.Object()
 	defer object.Close()
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.PatchOperations != nil {
 		ok := object.Key("patchOperations")
 		if err := awsRestjson1_serializeDocumentListOfPatchOperation(v.PatchOperations, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -13033,33 +9512,11 @@ func awsRestjson1_serializeOpDocumentUpdateGatewayResponseInput(v *UpdateGateway
 	object := value.Object()
 	defer object.Close()
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.PatchOperations != nil {
 		ok := object.Key("patchOperations")
 		if err := awsRestjson1_serializeDocumentListOfPatchOperation(v.PatchOperations, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -13170,33 +9627,11 @@ func awsRestjson1_serializeOpDocumentUpdateIntegrationInput(v *UpdateIntegration
 	object := value.Object()
 	defer object.Close()
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.PatchOperations != nil {
 		ok := object.Key("patchOperations")
 		if err := awsRestjson1_serializeDocumentListOfPatchOperation(v.PatchOperations, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -13319,33 +9754,11 @@ func awsRestjson1_serializeOpDocumentUpdateIntegrationResponseInput(v *UpdateInt
 	object := value.Object()
 	defer object.Close()
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.PatchOperations != nil {
 		ok := object.Key("patchOperations")
 		if err := awsRestjson1_serializeDocumentListOfPatchOperation(v.PatchOperations, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -13456,33 +9869,11 @@ func awsRestjson1_serializeOpDocumentUpdateMethodInput(v *UpdateMethodInput, val
 	object := value.Object()
 	defer object.Close()
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.PatchOperations != nil {
 		ok := object.Key("patchOperations")
 		if err := awsRestjson1_serializeDocumentListOfPatchOperation(v.PatchOperations, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -13605,33 +9996,11 @@ func awsRestjson1_serializeOpDocumentUpdateMethodResponseInput(v *UpdateMethodRe
 	object := value.Object()
 	defer object.Close()
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.PatchOperations != nil {
 		ok := object.Key("patchOperations")
 		if err := awsRestjson1_serializeDocumentListOfPatchOperation(v.PatchOperations, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -13730,33 +10099,11 @@ func awsRestjson1_serializeOpDocumentUpdateModelInput(v *UpdateModelInput, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.PatchOperations != nil {
 		ok := object.Key("patchOperations")
 		if err := awsRestjson1_serializeDocumentListOfPatchOperation(v.PatchOperations, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -13855,33 +10202,11 @@ func awsRestjson1_serializeOpDocumentUpdateRequestValidatorInput(v *UpdateReques
 	object := value.Object()
 	defer object.Close()
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.PatchOperations != nil {
 		ok := object.Key("patchOperations")
 		if err := awsRestjson1_serializeDocumentListOfPatchOperation(v.PatchOperations, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -13980,33 +10305,11 @@ func awsRestjson1_serializeOpDocumentUpdateResourceInput(v *UpdateResourceInput,
 	object := value.Object()
 	defer object.Close()
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.PatchOperations != nil {
 		ok := object.Key("patchOperations")
 		if err := awsRestjson1_serializeDocumentListOfPatchOperation(v.PatchOperations, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -14093,33 +10396,11 @@ func awsRestjson1_serializeOpDocumentUpdateRestApiInput(v *UpdateRestApiInput, v
 	object := value.Object()
 	defer object.Close()
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.PatchOperations != nil {
 		ok := object.Key("patchOperations")
 		if err := awsRestjson1_serializeDocumentListOfPatchOperation(v.PatchOperations, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -14218,33 +10499,11 @@ func awsRestjson1_serializeOpDocumentUpdateStageInput(v *UpdateStageInput, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.PatchOperations != nil {
 		ok := object.Key("patchOperations")
 		if err := awsRestjson1_serializeDocumentListOfPatchOperation(v.PatchOperations, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -14343,33 +10602,11 @@ func awsRestjson1_serializeOpDocumentUpdateUsageInput(v *UpdateUsageInput, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.PatchOperations != nil {
 		ok := object.Key("patchOperations")
 		if err := awsRestjson1_serializeDocumentListOfPatchOperation(v.PatchOperations, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -14456,33 +10693,11 @@ func awsRestjson1_serializeOpDocumentUpdateUsagePlanInput(v *UpdateUsagePlanInpu
 	object := value.Object()
 	defer object.Close()
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.PatchOperations != nil {
 		ok := object.Key("patchOperations")
 		if err := awsRestjson1_serializeDocumentListOfPatchOperation(v.PatchOperations, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil
@@ -14569,33 +10784,11 @@ func awsRestjson1_serializeOpDocumentUpdateVpcLinkInput(v *UpdateVpcLinkInput, v
 	object := value.Object()
 	defer object.Close()
 
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
 	if v.PatchOperations != nil {
 		ok := object.Key("patchOperations")
 		if err := awsRestjson1_serializeDocumentListOfPatchOperation(v.PatchOperations, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.Template != nil {
-		ok := object.Key("template")
-		ok.Boolean(*v.Template)
-	}
-
-	if v.TemplateSkipList != nil {
-		ok := object.Key("templateSkipList")
-		if err := awsRestjson1_serializeDocumentListOfString(v.TemplateSkipList, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Title != nil {
-		ok := object.Key("title")
-		ok.String(*v.Title)
 	}
 
 	return nil

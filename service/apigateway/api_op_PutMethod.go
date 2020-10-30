@@ -70,8 +70,6 @@ type PutMethodInput struct {
 	// Gateway when you created the authorizer.
 	AuthorizerId *string
 
-	Name *string
-
 	// A human-friendly operation identifier for the method. For example, you can
 	// assign the operationName of ListPets for the GET /pets method in the PetStore
 	// example.
@@ -94,12 +92,6 @@ type PutMethodInput struct {
 
 	// The identifier of a RequestValidator for validating the method request.
 	RequestValidatorId *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // Represents a client-facing interface by which the client calls the API to access

@@ -735,6 +735,32 @@ func validateColumnConfiguration(v *types.ColumnConfiguration) error {
 	}
 }
 
+func validateConfluenceConfiguration(v *types.ConfluenceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConfluenceConfiguration"}
+	if v.ServerUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerUrl"))
+	}
+	if v.SecretArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretArn"))
+	}
+	if len(v.Version) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Version"))
+	}
+	if v.VpcConfiguration != nil {
+		if err := validateDataSourceVpcConfiguration(v.VpcConfiguration); err != nil {
+			invalidParams.AddNested("VpcConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateConnectionConfiguration(v *types.ConnectionConfiguration) error {
 	if v == nil {
 		return nil
@@ -834,6 +860,11 @@ func validateDataSourceConfiguration(v *types.DataSourceConfiguration) error {
 	if v.ServiceNowConfiguration != nil {
 		if err := validateServiceNowConfiguration(v.ServiceNowConfiguration); err != nil {
 			invalidParams.AddNested("ServiceNowConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ConfluenceConfiguration != nil {
+		if err := validateConfluenceConfiguration(v.ConfluenceConfiguration); err != nil {
+			invalidParams.AddNested("ConfluenceConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

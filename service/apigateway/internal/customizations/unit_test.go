@@ -56,10 +56,7 @@ func Test_EmptyResponse(t *testing.T) {
 
 			client := apigateway.NewFromConfig(cfg)
 
-			params := &apigateway.GetAccountInput{
-				Name:  aws.String("name"),
-				Title: aws.String("title"),
-			}
+			params := &apigateway.GetAccountInput{}
 			_, err := client.GetAccount(ctx, params)
 			if c.expectError {
 				var apiErr smithy.APIError

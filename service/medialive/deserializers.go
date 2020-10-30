@@ -10943,6 +10943,38 @@ func awsRestjson1_deserializeDocument__listOfChannelSummary(v *[]*types.ChannelS
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__listOfFailoverCondition(v *[]*types.FailoverCondition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []*types.FailoverCondition
+	if *v == nil {
+		cv = []*types.FailoverCondition{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col *types.FailoverCondition
+		if err := awsRestjson1_deserializeDocumentFailoverCondition(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOfHlsAdMarkers(v *[]types.HlsAdMarkers, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12977,6 +13009,24 @@ func awsRestjson1_deserializeDocumentAutomaticInputFailoverSettings(v **types.Au
 
 	for key, value := range shape {
 		switch key {
+		case "errorClearTimeMsec":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ErrorClearTimeMsec = ptr.Int32(int32(i64))
+			}
+
+		case "failoverConditions":
+			if err := awsRestjson1_deserializeDocument__listOfFailoverCondition(&sv.FailoverConditions, value); err != nil {
+				return err
+			}
+
 		case "inputPreference":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15429,6 +15479,78 @@ func awsRestjson1_deserializeDocumentEncoderSettings(v **types.EncoderSettings, 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentFailoverCondition(v **types.FailoverCondition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FailoverCondition
+	if *v == nil {
+		sv = &types.FailoverCondition{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "failoverConditionSettings":
+			if err := awsRestjson1_deserializeDocumentFailoverConditionSettings(&sv.FailoverConditionSettings, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFailoverConditionSettings(v **types.FailoverConditionSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FailoverConditionSettings
+	if *v == nil {
+		sv = &types.FailoverConditionSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "inputLossSettings":
+			if err := awsRestjson1_deserializeDocumentInputLossFailoverSettings(&sv.InputLossSettings, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentFeatureActivations(v **types.FeatureActivations, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17352,6 +17474,15 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				sv.DirectoryStructure = types.HlsDirectoryStructure(jtv)
 			}
 
+		case "discontinuityTags":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HlsDiscontinuityTags to be of type string, got %T instead", value)
+				}
+				sv.DiscontinuityTags = types.HlsDiscontinuityTags(jtv)
+			}
+
 		case "encryptionType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17382,6 +17513,15 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 					return fmt.Errorf("expected IFrameOnlyPlaylistType to be of type string, got %T instead", value)
 				}
 				sv.IFrameOnlyPlaylists = types.IFrameOnlyPlaylistType(jtv)
+			}
+
+		case "incompleteSegmentBehavior":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HlsIncompleteSegmentBehavior to be of type string, got %T instead", value)
+				}
+				sv.IncompleteSegmentBehavior = types.HlsIncompleteSegmentBehavior(jtv)
 			}
 
 		case "indexNSegments":
@@ -19011,6 +19151,50 @@ func awsRestjson1_deserializeDocumentInputLossBehavior(v **types.InputLossBehavi
 					return err
 				}
 				sv.RepeatFrameMsec = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentInputLossFailoverSettings(v **types.InputLossFailoverSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InputLossFailoverSettings
+	if *v == nil {
+		sv = &types.InputLossFailoverSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "inputLossThresholdMsec":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin100 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.InputLossThresholdMsec = ptr.Int32(int32(i64))
 			}
 
 		default:

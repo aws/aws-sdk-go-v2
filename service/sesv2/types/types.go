@@ -218,6 +218,58 @@ type CloudWatchDimensionConfiguration struct {
 	DimensionValueSource DimensionValueSource
 }
 
+// A contact is the end-user who is receiving the email.
+type Contact struct {
+
+	// The contact's email address.
+	EmailAddress *string
+
+	// A timestamp noting the last time the contact's information was updated.
+	LastUpdatedTimestamp *time.Time
+
+	// The default topic preferences applied to the contact.
+	TopicDefaultPreferences []*TopicPreference
+
+	// The contact's preference for being opted-in to or opted-out of a topic.
+	TopicPreferences []*TopicPreference
+
+	// A boolean value status noting if the contact is unsubscribed from all contact
+	// list topics.
+	UnsubscribeAll *bool
+}
+
+// A list that contains contacts that have subscribed to a particular topic or
+// topics.
+type ContactList struct {
+
+	// The name of the contact list.
+	ContactListName *string
+
+	// A timestamp noting the last time the contact list was updated.
+	LastUpdatedTimestamp *time.Time
+}
+
+// An object that contains details about the action of a contact list.
+type ContactListDestination struct {
+
+	// >The type of action that you want to perform on the addresses. Acceptable
+	// values:
+	//
+	// * PUT: add the addresses to the contact list. If the record already
+	// exists, it will override it with the new value.
+	//
+	// * DELETE: remove the addresses
+	// from the contact list.
+	//
+	// This member is required.
+	ContactListImportAction ContactListImportAction
+
+	// The name of the contact list.
+	//
+	// This member is required.
+	ContactListName *string
+}
+
 // An object that represents the content of the email, and optionally a character
 // set specification.
 type Content struct {
@@ -757,14 +809,17 @@ type ImportDataSource struct {
 // going to target.
 type ImportDestination struct {
 
+	// An object that contains the action of the import job towards a contact list.
+	ContactListDestination *ContactListDestination
+
 	// An object that contains the action of the import job towards suppression list.
-	//
-	// This member is required.
 	SuppressionListDestination *SuppressionListDestination
 }
 
 // A summary of the import job.
 type ImportJobSummary struct {
+
+	// The date and time when the import job was created.
 	CreatedTimestamp *time.Time
 
 	// An object that contains details about the resource destination the import job is
@@ -818,6 +873,29 @@ type KinesisFirehoseDestination struct {
 	//
 	// This member is required.
 	IamRoleArn *string
+}
+
+// A filter that can be applied to a list of contacts.
+type ListContactsFilter struct {
+
+	// The status by which you are filtering: OPT_IN or OPT_OUT.
+	FilteredStatus SubscriptionStatus
+
+	// Used for filtering by a specific topic preference.
+	TopicFilter *TopicFilter
+}
+
+// An object used to specify a list or topic to which an email belongs, which will
+// be used when a contact chooses to unsubscribe.
+type ListManagementOptions struct {
+
+	// The name of the contact list.
+	//
+	// This member is required.
+	ContactListName *string
+
+	// The name of the topic.
+	TopicName *string
 }
 
 // A list of attributes that are associated with a MAIL FROM domain.
@@ -1258,6 +1336,55 @@ type Template struct {
 	// The name of the template. You will refer to this name when you send email using
 	// the SendTemplatedEmail or SendBulkTemplatedEmail operations.
 	TemplateName *string
+}
+
+// An interest group, theme, or label within a list. Lists can have multiple
+// topics.
+type Topic struct {
+
+	// The default subscription status to be applied to a contact if the contact has
+	// not noted their preference for subscribing to a topic.
+	//
+	// This member is required.
+	DefaultSubscriptionStatus SubscriptionStatus
+
+	// The name of the topic the contact will see.
+	//
+	// This member is required.
+	DisplayName *string
+
+	// The name of the topic.
+	//
+	// This member is required.
+	TopicName *string
+
+	// A description of what the topic is about, which the contact will see.
+	Description *string
+}
+
+// Used for filtering by a specific topic preference.
+type TopicFilter struct {
+
+	// The name of a topic on which you wish to apply the filter.
+	TopicName *string
+
+	// Notes that the default subscription status should be applied to a contact
+	// because the contact has not noted their preference for subscribing to a topic.
+	UseDefaultIfPreferenceUnavailable *bool
+}
+
+// The contact's preference for being opted-in to or opted-out of a topic.
+type TopicPreference struct {
+
+	// The contact's subscription status to a topic which is either OPT_IN or OPT_OUT.
+	//
+	// This member is required.
+	SubscriptionStatus SubscriptionStatus
+
+	// The name of the topic.
+	//
+	// This member is required.
+	TopicName *string
 }
 
 // An object that defines the tracking options for a configuration set. When you

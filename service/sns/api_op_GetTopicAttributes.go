@@ -80,6 +80,29 @@ type GetTopicAttributesOutput struct {
 	// For more examples, see KeyId
 	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters)
 	// in the AWS Key Management Service API Reference.
+	//
+	// The following attributes apply
+	// only to FIFO topics
+	// (https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html):
+	//
+	// * FifoTopic –
+	// When this is set to true, a FIFO topic is created.
+	//
+	// * ContentBasedDeduplication
+	// – Enables content-based deduplication for FIFO topics.
+	//
+	// * By default,
+	// ContentBasedDeduplication is set to false. If you create a FIFO topic and this
+	// attribute is false, you must specify a value for the MessageDeduplicationId
+	// parameter for the Publish
+	// (https://docs.aws.amazon.com/sns/latest/api/API_Publish.html) action.
+	//
+	// * When
+	// you set ContentBasedDeduplication to true, Amazon SNS uses a SHA-256 hash to
+	// generate the MessageDeduplicationId using the body of the message (but not the
+	// attributes of the message). (Optional) To override the generated value, you can
+	// specify a value for the the MessageDeduplicationId parameter for the Publish
+	// action.
 	Attributes map[string]*string
 
 	// Metadata pertaining to the operation's result.

@@ -1430,6 +1430,26 @@ func (m *validateOpUpdateSMBFileShare) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateSMBFileShareVisibility struct {
+}
+
+func (*validateOpUpdateSMBFileShareVisibility) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSMBFileShareVisibility) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSMBFileShareVisibilityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSMBFileShareVisibilityInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateSMBSecurityStrategy struct {
 }
 
@@ -1774,6 +1794,10 @@ func addOpUpdateSMBFileShareValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpUpdateSMBFileShare{}, middleware.After)
 }
 
+func addOpUpdateSMBFileShareVisibilityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSMBFileShareVisibility{}, middleware.After)
+}
+
 func addOpUpdateSMBSecurityStrategyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateSMBSecurityStrategy{}, middleware.After)
 }
@@ -1791,17 +1815,17 @@ func validateAutomaticTapeCreationRule(v *types.AutomaticTapeCreationRule) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AutomaticTapeCreationRule"}
+	if v.MinimumNumTapes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MinimumNumTapes"))
+	}
+	if v.TapeSizeInBytes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TapeSizeInBytes"))
+	}
 	if v.TapeBarcodePrefix == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TapeBarcodePrefix"))
 	}
 	if v.PoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PoolId"))
-	}
-	if v.TapeSizeInBytes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TapeSizeInBytes"))
-	}
-	if v.MinimumNumTapes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MinimumNumTapes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1867,13 +1891,8 @@ func validateOpActivateGatewayInput(v *ActivateGatewayInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ActivateGatewayInput"}
-	if v.Tags != nil {
-		if err := validateTags(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.GatewayName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GatewayName"))
+	if v.GatewayRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayRegion"))
 	}
 	if v.ActivationKey == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActivationKey"))
@@ -1881,8 +1900,13 @@ func validateOpActivateGatewayInput(v *ActivateGatewayInput) error {
 	if v.GatewayTimezone == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GatewayTimezone"))
 	}
-	if v.GatewayRegion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GatewayRegion"))
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GatewayName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1896,11 +1920,11 @@ func validateOpAddCacheInput(v *AddCacheInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddCacheInput"}
-	if v.DiskIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DiskIds"))
-	}
 	if v.GatewayARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
+	}
+	if v.DiskIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DiskIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1936,11 +1960,11 @@ func validateOpAddUploadBufferInput(v *AddUploadBufferInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddUploadBufferInput"}
-	if v.GatewayARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
-	}
 	if v.DiskIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DiskIds"))
+	}
+	if v.GatewayARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1990,14 +2014,14 @@ func validateOpAttachVolumeInput(v *AttachVolumeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AttachVolumeInput"}
+	if v.VolumeARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VolumeARN"))
+	}
 	if v.NetworkInterfaceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NetworkInterfaceId"))
 	}
 	if v.GatewayARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
-	}
-	if v.VolumeARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VolumeARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2011,11 +2035,11 @@ func validateOpCancelArchivalInput(v *CancelArchivalInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CancelArchivalInput"}
-	if v.TapeARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TapeARN"))
-	}
 	if v.GatewayARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
+	}
+	if v.TapeARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TapeARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2029,11 +2053,11 @@ func validateOpCancelRetrievalInput(v *CancelRetrievalInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CancelRetrievalInput"}
-	if v.GatewayARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
-	}
 	if v.TapeARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TapeARN"))
+	}
+	if v.GatewayARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2047,16 +2071,8 @@ func validateOpCreateCachediSCSIVolumeInput(v *CreateCachediSCSIVolumeInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateCachediSCSIVolumeInput"}
-	if v.GatewayARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
-	}
-	if v.VolumeSizeInBytes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VolumeSizeInBytes"))
-	}
-	if v.Tags != nil {
-		if err := validateTags(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
+	if v.TargetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetName"))
 	}
 	if v.NetworkInterfaceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NetworkInterfaceId"))
@@ -2064,8 +2080,16 @@ func validateOpCreateCachediSCSIVolumeInput(v *CreateCachediSCSIVolumeInput) err
 	if v.ClientToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
 	}
-	if v.TargetName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetName"))
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GatewayARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
+	}
+	if v.VolumeSizeInBytes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VolumeSizeInBytes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2082,19 +2106,19 @@ func validateOpCreateNFSFileShareInput(v *CreateNFSFileShareInput) error {
 	if v.Role == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Role"))
 	}
-	if v.GatewayARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
+	if v.LocationARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocationARN"))
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
 	}
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ClientToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
-	}
-	if v.LocationARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LocationARN"))
+	if v.GatewayARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2108,22 +2132,22 @@ func validateOpCreateSMBFileShareInput(v *CreateSMBFileShareInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateSMBFileShareInput"}
-	if v.LocationARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LocationARN"))
-	}
-	if v.ClientToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
-	}
 	if v.Role == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Role"))
-	}
-	if v.GatewayARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
 	}
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.GatewayARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
+	}
+	if v.LocationARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocationARN"))
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2137,13 +2161,13 @@ func validateOpCreateSnapshotFromVolumeRecoveryPointInput(v *CreateSnapshotFromV
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateSnapshotFromVolumeRecoveryPointInput"}
+	if v.VolumeARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VolumeARN"))
+	}
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.VolumeARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VolumeARN"))
 	}
 	if v.SnapshotDescription == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SnapshotDescription"))
@@ -2160,13 +2184,13 @@ func validateOpCreateSnapshotInput(v *CreateSnapshotInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateSnapshotInput"}
+	if v.VolumeARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VolumeARN"))
+	}
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.VolumeARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VolumeARN"))
 	}
 	if v.SnapshotDescription == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SnapshotDescription"))
@@ -2183,6 +2207,15 @@ func validateOpCreateStorediSCSIVolumeInput(v *CreateStorediSCSIVolumeInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateStorediSCSIVolumeInput"}
+	if v.NetworkInterfaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkInterfaceId"))
+	}
+	if v.PreserveExistingData == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PreserveExistingData"))
+	}
+	if v.GatewayARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
+	}
 	if v.DiskId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DiskId"))
 	}
@@ -2193,15 +2226,6 @@ func validateOpCreateStorediSCSIVolumeInput(v *CreateStorediSCSIVolumeInput) err
 	}
 	if v.TargetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetName"))
-	}
-	if v.PreserveExistingData == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PreserveExistingData"))
-	}
-	if v.GatewayARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
-	}
-	if v.NetworkInterfaceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NetworkInterfaceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2215,9 +2239,6 @@ func validateOpCreateTapePoolInput(v *CreateTapePoolInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateTapePoolInput"}
-	if len(v.StorageClass) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("StorageClass"))
-	}
 	if v.PoolName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PoolName"))
 	}
@@ -2225,6 +2246,9 @@ func validateOpCreateTapePoolInput(v *CreateTapePoolInput) error {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if len(v.StorageClass) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageClass"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2238,22 +2262,22 @@ func validateOpCreateTapesInput(v *CreateTapesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateTapesInput"}
-	if v.NumTapesToCreate == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NumTapesToCreate"))
+	if v.GatewayARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
 	}
-	if v.TapeSizeInBytes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TapeSizeInBytes"))
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
 	}
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.GatewayARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
+	if v.NumTapesToCreate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NumTapesToCreate"))
 	}
-	if v.ClientToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	if v.TapeSizeInBytes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TapeSizeInBytes"))
 	}
 	if v.TapeBarcodePrefix == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TapeBarcodePrefix"))
@@ -2270,8 +2294,8 @@ func validateOpCreateTapeWithBarcodeInput(v *CreateTapeWithBarcodeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateTapeWithBarcodeInput"}
-	if v.TapeSizeInBytes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TapeSizeInBytes"))
+	if v.TapeBarcode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TapeBarcode"))
 	}
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
@@ -2281,8 +2305,8 @@ func validateOpCreateTapeWithBarcodeInput(v *CreateTapeWithBarcodeInput) error {
 	if v.GatewayARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
 	}
-	if v.TapeBarcode == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TapeBarcode"))
+	if v.TapeSizeInBytes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TapeSizeInBytes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2311,11 +2335,11 @@ func validateOpDeleteBandwidthRateLimitInput(v *DeleteBandwidthRateLimitInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteBandwidthRateLimitInput"}
-	if v.BandwidthType == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BandwidthType"))
-	}
 	if v.GatewayARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
+	}
+	if v.BandwidthType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BandwidthType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2740,17 +2764,17 @@ func validateOpJoinDomainInput(v *JoinDomainInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "JoinDomainInput"}
-	if v.DomainName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
-	}
 	if v.GatewayARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
 	}
-	if v.UserName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
-	}
 	if v.Password == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Password"))
+	}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.UserName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2854,11 +2878,11 @@ func validateOpRemoveTagsFromResourceInput(v *RemoveTagsFromResourceInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RemoveTagsFromResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2887,11 +2911,11 @@ func validateOpRetrieveTapeArchiveInput(v *RetrieveTapeArchiveInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RetrieveTapeArchiveInput"}
-	if v.GatewayARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
-	}
 	if v.TapeARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TapeARN"))
+	}
+	if v.GatewayARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2905,11 +2929,11 @@ func validateOpRetrieveTapeRecoveryPointInput(v *RetrieveTapeRecoveryPointInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RetrieveTapeRecoveryPointInput"}
-	if v.TapeARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TapeARN"))
-	}
 	if v.GatewayARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
+	}
+	if v.TapeARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TapeARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2923,11 +2947,11 @@ func validateOpSetLocalConsolePasswordInput(v *SetLocalConsolePasswordInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SetLocalConsolePasswordInput"}
-	if v.LocalConsolePassword == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LocalConsolePassword"))
-	}
 	if v.GatewayARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
+	}
+	if v.LocalConsolePassword == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocalConsolePassword"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3004,15 +3028,15 @@ func validateOpUpdateAutomaticTapeCreationPolicyInput(v *UpdateAutomaticTapeCrea
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateAutomaticTapeCreationPolicyInput"}
+	if v.GatewayARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
+	}
 	if v.AutomaticTapeCreationRules == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AutomaticTapeCreationRules"))
 	} else if v.AutomaticTapeCreationRules != nil {
 		if err := validateAutomaticTapeCreationRules(v.AutomaticTapeCreationRules); err != nil {
 			invalidParams.AddNested("AutomaticTapeCreationRules", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.GatewayARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3041,14 +3065,14 @@ func validateOpUpdateChapCredentialsInput(v *UpdateChapCredentialsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateChapCredentialsInput"}
-	if v.TargetARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetARN"))
-	}
 	if v.InitiatorName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InitiatorName"))
 	}
 	if v.SecretToAuthenticateInitiator == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SecretToAuthenticateInitiator"))
+	}
+	if v.TargetARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3138,16 +3162,34 @@ func validateOpUpdateSMBFileShareInput(v *UpdateSMBFileShareInput) error {
 	}
 }
 
+func validateOpUpdateSMBFileShareVisibilityInput(v *UpdateSMBFileShareVisibilityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSMBFileShareVisibilityInput"}
+	if v.GatewayARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
+	}
+	if v.FileSharesVisible == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileSharesVisible"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateSMBSecurityStrategyInput(v *UpdateSMBSecurityStrategyInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateSMBSecurityStrategyInput"}
-	if len(v.SMBSecurityStrategy) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("SMBSecurityStrategy"))
-	}
 	if v.GatewayARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
+	}
+	if len(v.SMBSecurityStrategy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SMBSecurityStrategy"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3161,19 +3203,19 @@ func validateOpUpdateSnapshotScheduleInput(v *UpdateSnapshotScheduleInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateSnapshotScheduleInput"}
-	if v.Tags != nil {
-		if err := validateTags(v.Tags); err != nil {
-			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
-		}
+	if v.VolumeARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VolumeARN"))
 	}
 	if v.RecurrenceInHours == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RecurrenceInHours"))
 	}
-	if v.VolumeARN == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VolumeARN"))
-	}
 	if v.StartAt == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StartAt"))
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -29,17 +29,10 @@ func (c *Client) UpdateAccount(ctx context.Context, params *UpdateAccountInput, 
 
 // Requests API Gateway to change information about the current Account resource.
 type UpdateAccountInput struct {
-	Name *string
 
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []*types.PatchOperation
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // Represents an AWS account that is associated with API Gateway. To view the

@@ -66,8 +66,6 @@ type PutIntegrationResponseInput struct {
 	// the integration response to the method response without modification.
 	ContentHandling types.ContentHandlingStrategy
 
-	Name *string
-
 	// A key-value map specifying response parameters that are passed to the method
 	// response from the back end. The key is a method response header parameter name
 	// and the mapped value is an integration response header value, a static value
@@ -86,12 +84,6 @@ type PutIntegrationResponseInput struct {
 
 	// Specifies the selection pattern of a put integration response.
 	SelectionPattern *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // Represents an integration response. The status code must map to an existing

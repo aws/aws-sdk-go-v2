@@ -98,7 +98,7 @@ type CreateLabelingJobInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// The S3 URL of the file that defines the categories used to label the data
+	// The S3 URI of the file that defines the categories used to label the data
 	// objects. For 3D point cloud task types, see Create a Labeling Category
 	// Configuration File for 3D Point Cloud Labeling Jobs
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud-label-category-config.html).

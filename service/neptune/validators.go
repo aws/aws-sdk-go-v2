@@ -150,6 +150,26 @@ func (m *validateOpCopyDBParameterGroup) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateDBClusterEndpoint struct {
+}
+
+func (*validateOpCreateDBClusterEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDBClusterEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDBClusterEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDBClusterEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDBCluster struct {
 }
 
@@ -290,6 +310,26 @@ func (m *validateOpCreateEventSubscription) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteDBClusterEndpoint struct {
+}
+
+func (*validateOpDeleteDBClusterEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDBClusterEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDBClusterEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDBClusterEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteDBCluster struct {
 }
 
@@ -425,6 +465,26 @@ func (m *validateOpDeleteEventSubscription) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteEventSubscriptionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeDBClusterEndpoints struct {
+}
+
+func (*validateOpDescribeDBClusterEndpoints) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeDBClusterEndpoints) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeDBClusterEndpointsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeDBClusterEndpointsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -805,6 +865,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpModifyDBClusterEndpoint struct {
+}
+
+func (*validateOpModifyDBClusterEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyDBClusterEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyDBClusterEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyDBClusterEndpointInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1198,6 +1278,10 @@ func addOpCopyDBParameterGroupValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpCopyDBParameterGroup{}, middleware.After)
 }
 
+func addOpCreateDBClusterEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDBClusterEndpoint{}, middleware.After)
+}
+
 func addOpCreateDBClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDBCluster{}, middleware.After)
 }
@@ -1226,6 +1310,10 @@ func addOpCreateEventSubscriptionValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpCreateEventSubscription{}, middleware.After)
 }
 
+func addOpDeleteDBClusterEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDBClusterEndpoint{}, middleware.After)
+}
+
 func addOpDeleteDBClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDBCluster{}, middleware.After)
 }
@@ -1252,6 +1340,10 @@ func addOpDeleteDBSubnetGroupValidationMiddleware(stack *middleware.Stack) error
 
 func addOpDeleteEventSubscriptionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteEventSubscription{}, middleware.After)
+}
+
+func addOpDescribeDBClusterEndpointsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeDBClusterEndpoints{}, middleware.After)
 }
 
 func addOpDescribeDBClusterParameterGroupsValidationMiddleware(stack *middleware.Stack) error {
@@ -1328,6 +1420,10 @@ func addOpDescribeValidDBInstanceModificationsValidationMiddleware(stack *middle
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpModifyDBClusterEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyDBClusterEndpoint{}, middleware.After)
 }
 
 func addOpModifyDBClusterValidationMiddleware(stack *middleware.Stack) error {
@@ -1460,11 +1556,11 @@ func validateOpAddSourceIdentifierToSubscriptionInput(v *AddSourceIdentifierToSu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddSourceIdentifierToSubscriptionInput"}
-	if v.SourceIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceIdentifier"))
-	}
 	if v.SubscriptionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionName"))
+	}
+	if v.SourceIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1499,11 +1595,11 @@ func validateOpApplyPendingMaintenanceActionInput(v *ApplyPendingMaintenanceActi
 	if v.ApplyAction == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplyAction"))
 	}
-	if v.ResourceIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceIdentifier"))
-	}
 	if v.OptInType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OptInType"))
+	}
+	if v.ResourceIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1517,11 +1613,11 @@ func validateOpCopyDBClusterParameterGroupInput(v *CopyDBClusterParameterGroupIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CopyDBClusterParameterGroupInput"}
-	if v.SourceDBClusterParameterGroupIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceDBClusterParameterGroupIdentifier"))
-	}
 	if v.TargetDBClusterParameterGroupIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetDBClusterParameterGroupIdentifier"))
+	}
+	if v.SourceDBClusterParameterGroupIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceDBClusterParameterGroupIdentifier"))
 	}
 	if v.TargetDBClusterParameterGroupDescription == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetDBClusterParameterGroupDescription"))
@@ -1538,11 +1634,11 @@ func validateOpCopyDBClusterSnapshotInput(v *CopyDBClusterSnapshotInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CopyDBClusterSnapshotInput"}
-	if v.SourceDBClusterSnapshotIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceDBClusterSnapshotIdentifier"))
-	}
 	if v.TargetDBClusterSnapshotIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetDBClusterSnapshotIdentifier"))
+	}
+	if v.SourceDBClusterSnapshotIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceDBClusterSnapshotIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1556,14 +1652,35 @@ func validateOpCopyDBParameterGroupInput(v *CopyDBParameterGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CopyDBParameterGroupInput"}
-	if v.TargetDBParameterGroupIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetDBParameterGroupIdentifier"))
-	}
 	if v.TargetDBParameterGroupDescription == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetDBParameterGroupDescription"))
 	}
+	if v.TargetDBParameterGroupIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetDBParameterGroupIdentifier"))
+	}
 	if v.SourceDBParameterGroupIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceDBParameterGroupIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateDBClusterEndpointInput(v *CreateDBClusterEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDBClusterEndpointInput"}
+	if v.DBClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DBClusterIdentifier"))
+	}
+	if v.EndpointType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointType"))
+	}
+	if v.DBClusterEndpointIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DBClusterEndpointIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1598,11 +1715,11 @@ func validateOpCreateDBClusterParameterGroupInput(v *CreateDBClusterParameterGro
 	if v.DBClusterParameterGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DBClusterParameterGroupName"))
 	}
-	if v.Description == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Description"))
-	}
 	if v.DBParameterGroupFamily == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DBParameterGroupFamily"))
+	}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1616,11 +1733,11 @@ func validateOpCreateDBClusterSnapshotInput(v *CreateDBClusterSnapshotInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDBClusterSnapshotInput"}
-	if v.DBClusterSnapshotIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DBClusterSnapshotIdentifier"))
-	}
 	if v.DBClusterIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DBClusterIdentifier"))
+	}
+	if v.DBClusterSnapshotIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DBClusterSnapshotIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1634,11 +1751,11 @@ func validateOpCreateDBInstanceInput(v *CreateDBInstanceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDBInstanceInput"}
-	if v.Engine == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Engine"))
-	}
 	if v.DBInstanceClass == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DBInstanceClass"))
+	}
+	if v.Engine == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Engine"))
 	}
 	if v.DBInstanceIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DBInstanceIdentifier"))
@@ -1676,11 +1793,11 @@ func validateOpCreateDBSubnetGroupInput(v *CreateDBSubnetGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDBSubnetGroupInput"}
-	if v.DBSubnetGroupDescription == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DBSubnetGroupDescription"))
-	}
 	if v.SubnetIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
+	}
+	if v.DBSubnetGroupDescription == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DBSubnetGroupDescription"))
 	}
 	if v.DBSubnetGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DBSubnetGroupName"))
@@ -1697,11 +1814,26 @@ func validateOpCreateEventSubscriptionInput(v *CreateEventSubscriptionInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateEventSubscriptionInput"}
+	if v.SubscriptionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionName"))
+	}
 	if v.SnsTopicArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SnsTopicArn"))
 	}
-	if v.SubscriptionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionName"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteDBClusterEndpointInput(v *DeleteDBClusterEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDBClusterEndpointInput"}
+	if v.DBClusterEndpointIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DBClusterEndpointIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1815,6 +1947,23 @@ func validateOpDeleteEventSubscriptionInput(v *DeleteEventSubscriptionInput) err
 	}
 }
 
+func validateOpDescribeDBClusterEndpointsInput(v *DescribeDBClusterEndpointsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeDBClusterEndpointsInput"}
+	if v.Filters != nil {
+		if err := validateFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeDBClusterParameterGroupsInput(v *DescribeDBClusterParameterGroupsInput) error {
 	if v == nil {
 		return nil
@@ -1837,13 +1986,13 @@ func validateOpDescribeDBClusterParametersInput(v *DescribeDBClusterParametersIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeDBClusterParametersInput"}
+	if v.DBClusterParameterGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DBClusterParameterGroupName"))
+	}
 	if v.Filters != nil {
 		if err := validateFilterList(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.DBClusterParameterGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DBClusterParameterGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1957,13 +2106,13 @@ func validateOpDescribeDBParametersInput(v *DescribeDBParametersInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeDBParametersInput"}
+	if v.DBParameterGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DBParameterGroupName"))
+	}
 	if v.Filters != nil {
 		if err := validateFilterList(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.DBParameterGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DBParameterGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2152,6 +2301,21 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	}
 }
 
+func validateOpModifyDBClusterEndpointInput(v *ModifyDBClusterEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyDBClusterEndpointInput"}
+	if v.DBClusterEndpointIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DBClusterEndpointIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpModifyDBClusterInput(v *ModifyDBClusterInput) error {
 	if v == nil {
 		return nil
@@ -2172,11 +2336,11 @@ func validateOpModifyDBClusterParameterGroupInput(v *ModifyDBClusterParameterGro
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyDBClusterParameterGroupInput"}
-	if v.DBClusterParameterGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DBClusterParameterGroupName"))
-	}
 	if v.Parameters == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Parameters"))
+	}
+	if v.DBClusterParameterGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DBClusterParameterGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2241,11 +2405,11 @@ func validateOpModifyDBSubnetGroupInput(v *ModifyDBSubnetGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyDBSubnetGroupInput"}
-	if v.SubnetIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
-	}
 	if v.DBSubnetGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DBSubnetGroupName"))
+	}
+	if v.SubnetIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2304,11 +2468,11 @@ func validateOpRemoveRoleFromDBClusterInput(v *RemoveRoleFromDBClusterInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RemoveRoleFromDBClusterInput"}
-	if v.DBClusterIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DBClusterIdentifier"))
-	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.DBClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DBClusterIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2322,11 +2486,11 @@ func validateOpRemoveSourceIdentifierFromSubscriptionInput(v *RemoveSourceIdenti
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RemoveSourceIdentifierFromSubscriptionInput"}
-	if v.SourceIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceIdentifier"))
-	}
 	if v.SubscriptionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionName"))
+	}
+	if v.SourceIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

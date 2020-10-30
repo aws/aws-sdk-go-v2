@@ -2311,6 +2311,15 @@ func awsRestjson1_deserializeOpDocumentCreateRestApiOutput(v **CreateRestApiOutp
 				sv.Description = &jtv
 			}
 
+		case "disableExecuteApiEndpoint":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.DisableExecuteApiEndpoint = &jtv
+			}
+
 		case "endpointConfiguration":
 			if err := awsRestjson1_deserializeDocumentEndpointConfiguration(&sv.EndpointConfiguration, value); err != nil {
 				return err
@@ -11542,6 +11551,15 @@ func awsRestjson1_deserializeOpDocumentGetRestApiOutput(v **GetRestApiOutput, va
 				sv.Description = &jtv
 			}
 
+		case "disableExecuteApiEndpoint":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.DisableExecuteApiEndpoint = &jtv
+			}
+
 		case "endpointConfiguration":
 			if err := awsRestjson1_deserializeDocumentEndpointConfiguration(&sv.EndpointConfiguration, value); err != nil {
 				return err
@@ -14641,6 +14659,15 @@ func awsRestjson1_deserializeOpDocumentImportRestApiOutput(v **ImportRestApiOutp
 				sv.Description = &jtv
 			}
 
+		case "disableExecuteApiEndpoint":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.DisableExecuteApiEndpoint = &jtv
+			}
+
 		case "endpointConfiguration":
 			if err := awsRestjson1_deserializeDocumentEndpointConfiguration(&sv.EndpointConfiguration, value); err != nil {
 				return err
@@ -15966,6 +15993,15 @@ func awsRestjson1_deserializeOpDocumentPutRestApiOutput(v **PutRestApiOutput, va
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Description = &jtv
+			}
+
+		case "disableExecuteApiEndpoint":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.DisableExecuteApiEndpoint = &jtv
 			}
 
 		case "endpointConfiguration":
@@ -20373,6 +20409,15 @@ func awsRestjson1_deserializeOpDocumentUpdateRestApiOutput(v **UpdateRestApiOutp
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Description = &jtv
+			}
+
+		case "disableExecuteApiEndpoint":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.DisableExecuteApiEndpoint = &jtv
 			}
 
 		case "endpointConfiguration":
@@ -25048,6 +25093,15 @@ func awsRestjson1_deserializeDocumentRestApi(v **types.RestApi, value interface{
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Description = &jtv
+			}
+
+		case "disableExecuteApiEndpoint":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.DisableExecuteApiEndpoint = &jtv
 			}
 
 		case "endpointConfiguration":

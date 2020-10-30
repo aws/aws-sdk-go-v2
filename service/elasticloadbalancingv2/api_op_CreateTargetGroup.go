@@ -61,8 +61,10 @@ type CreateTargetGroupInput struct {
 	// the default is 35 seconds.
 	HealthCheckIntervalSeconds *int32
 
-	// [HTTP/HTTPS health checks] The ping path that is the destination on the targets
-	// for health checks. The default is /.
+	// [HTTP/HTTPS health checks] The destination for health checks on the targets.
+	// [HTTP1 or HTTP2 protocol version] The ping path. The default is /. [GRPC
+	// protocol version] The path of a custom health check method with the format
+	// /package.service/method. The default is /AWS.ALB/healthcheck.
 	HealthCheckPath *string
 
 	// The port the load balancer uses when performing health checks on targets. The
@@ -90,8 +92,8 @@ type CreateTargetGroupInput struct {
 	// is 3. If the target type is lambda, the default is 5.
 	HealthyThresholdCount *int32
 
-	// [HTTP/HTTPS health checks] The HTTP codes to use when checking for a successful
-	// response from a target.
+	// [HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a
+	// successful response from a target.
 	Matcher *types.Matcher
 
 	// The port on which the targets receive traffic. This port is used unless you
@@ -105,6 +107,11 @@ type CreateTargetGroupInput struct {
 	// listener must be associated with a TCP_UDP target group. If the target is a
 	// Lambda function, this parameter does not apply.
 	Protocol types.ProtocolEnum
+
+	// [HTTP/HTTPS protocol] The protocol version. Specify GRPC to send requests to
+	// targets using gRPC. Specify HTTP2 to send requests to targets using HTTP/2. The
+	// default is HTTP1, which sends requests to targets using HTTP/1.1.
+	ProtocolVersion *string
 
 	// The tags to assign to the target group.
 	Tags []*types.Tag

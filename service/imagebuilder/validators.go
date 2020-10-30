@@ -943,11 +943,11 @@ func validateOpCancelImageCreationInput(v *CancelImageCreationInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CancelImageCreationInput"}
-	if v.ImageBuildVersionArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ImageBuildVersionArn"))
-	}
 	if v.ClientToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if v.ImageBuildVersionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageBuildVersionArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -964,11 +964,11 @@ func validateOpCreateComponentInput(v *CreateComponentInput) error {
 	if v.ClientToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.SemanticVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SemanticVersion"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if len(v.Platform) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Platform"))
@@ -985,11 +985,11 @@ func validateOpCreateDistributionConfigurationInput(v *CreateDistributionConfigu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDistributionConfigurationInput"}
-	if v.ClientToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
 	}
 	if v.Distributions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Distributions"))
@@ -1010,14 +1010,14 @@ func validateOpCreateImageInput(v *CreateImageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateImageInput"}
-	if v.InfrastructureConfigurationArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InfrastructureConfigurationArn"))
+	if v.ImageRecipeArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageRecipeArn"))
 	}
 	if v.ClientToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
 	}
-	if v.ImageRecipeArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ImageRecipeArn"))
+	if v.InfrastructureConfigurationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InfrastructureConfigurationArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1031,11 +1031,11 @@ func validateOpCreateImagePipelineInput(v *CreateImagePipelineInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateImagePipelineInput"}
-	if v.ClientToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
-	}
 	if v.ImageRecipeArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ImageRecipeArn"))
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
@@ -1055,6 +1055,12 @@ func validateOpCreateImageRecipeInput(v *CreateImageRecipeInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateImageRecipeInput"}
+	if v.SemanticVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SemanticVersion"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.Components == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Components"))
 	} else if v.Components != nil {
@@ -1062,17 +1068,11 @@ func validateOpCreateImageRecipeInput(v *CreateImageRecipeInput) error {
 			invalidParams.AddNested("Components", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
 	}
 	if v.ParentImage == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ParentImage"))
-	}
-	if v.SemanticVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SemanticVersion"))
-	}
-	if v.ClientToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1086,11 +1086,11 @@ func validateOpCreateInfrastructureConfigurationInput(v *CreateInfrastructureCon
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateInfrastructureConfigurationInput"}
-	if v.InstanceProfileName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceProfileName"))
-	}
 	if v.ClientToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if v.InstanceProfileName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceProfileName"))
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
@@ -1332,23 +1332,23 @@ func validateOpImportComponentInput(v *ImportComponentInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ImportComponentInput"}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if len(v.Platform) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Platform"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.SemanticVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SemanticVersion"))
 	}
 	if len(v.Format) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Format"))
-	}
-	if v.ClientToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if len(v.Platform) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Platform"))
-	}
-	if len(v.Type) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1422,11 +1422,11 @@ func validateOpPutComponentPolicyInput(v *PutComponentPolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutComponentPolicyInput"}
-	if v.ComponentArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ComponentArn"))
-	}
 	if v.Policy == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
+	}
+	if v.ComponentArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComponentArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1458,11 +1458,11 @@ func validateOpPutImageRecipePolicyInput(v *PutImageRecipePolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutImageRecipePolicyInput"}
-	if v.Policy == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
-	}
 	if v.ImageRecipeArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ImageRecipeArn"))
+	}
+	if v.Policy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1476,11 +1476,11 @@ func validateOpStartImagePipelineExecutionInput(v *StartImagePipelineExecutionIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartImagePipelineExecutionInput"}
-	if v.ImagePipelineArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ImagePipelineArn"))
-	}
 	if v.ClientToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if v.ImagePipelineArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImagePipelineArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1530,11 +1530,11 @@ func validateOpUpdateDistributionConfigurationInput(v *UpdateDistributionConfigu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDistributionConfigurationInput"}
-	if v.DistributionConfigurationArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DistributionConfigurationArn"))
-	}
 	if v.ClientToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if v.DistributionConfigurationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DistributionConfigurationArn"))
 	}
 	if v.Distributions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Distributions"))
@@ -1555,17 +1555,17 @@ func validateOpUpdateImagePipelineInput(v *UpdateImagePipelineInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateImagePipelineInput"}
-	if v.ClientToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
-	}
 	if v.ImageRecipeArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ImageRecipeArn"))
 	}
-	if v.ImagePipelineArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ImagePipelineArn"))
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
 	}
 	if v.InfrastructureConfigurationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InfrastructureConfigurationArn"))
+	}
+	if v.ImagePipelineArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImagePipelineArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

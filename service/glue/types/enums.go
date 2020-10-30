@@ -410,6 +410,25 @@ func (LogicalOperator) Values() []LogicalOperator {
 	}
 }
 
+type MLUserDataEncryptionModeString string
+
+// Enum values for MLUserDataEncryptionModeString
+const (
+	MLUserDataEncryptionModeStringDisabled MLUserDataEncryptionModeString = "DISABLED"
+	MLUserDataEncryptionModeStringSsekms   MLUserDataEncryptionModeString = "SSE-KMS"
+)
+
+// Values returns all known values for MLUserDataEncryptionModeString. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (MLUserDataEncryptionModeString) Values() []MLUserDataEncryptionModeString {
+	return []MLUserDataEncryptionModeString{
+		"DISABLED",
+		"SSE-KMS",
+	}
+}
+
 type NodeType string
 
 // Enum values for NodeType

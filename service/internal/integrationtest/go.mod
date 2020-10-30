@@ -83,7 +83,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/wafregional v0.28.0
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v0.28.0
 	github.com/aws/aws-sdk-go-v2/service/workspaces v0.28.0
-	github.com/awslabs/smithy-go v0.2.2-0.20201026231331-345290040c23
+	github.com/awslabs/smithy-go v0.3.0
 )
 
 go 1.15

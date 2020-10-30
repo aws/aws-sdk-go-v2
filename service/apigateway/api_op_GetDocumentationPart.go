@@ -38,14 +38,6 @@ type GetDocumentationPartInput struct {
 	//
 	// This member is required.
 	RestApiId *string
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // A documentation part for a targeted API entity. A documentation part consists of

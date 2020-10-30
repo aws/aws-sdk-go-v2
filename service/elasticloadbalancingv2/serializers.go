@@ -2365,6 +2365,11 @@ func awsAwsquery_serializeDocumentMatcher(v *types.Matcher, value query.Value) e
 	object := value.Object()
 	_ = object
 
+	if v.GrpcCode != nil {
+		objectKey := object.Key("GrpcCode")
+		objectKey.String(*v.GrpcCode)
+	}
+
 	if v.HttpCode != nil {
 		objectKey := object.Key("HttpCode")
 		objectKey.String(*v.HttpCode)
@@ -3183,6 +3188,11 @@ func awsAwsquery_serializeOpDocumentCreateTargetGroupInput(v *CreateTargetGroupI
 	if len(v.Protocol) > 0 {
 		objectKey := object.Key("Protocol")
 		objectKey.String(string(v.Protocol))
+	}
+
+	if v.ProtocolVersion != nil {
+		objectKey := object.Key("ProtocolVersion")
+		objectKey.String(*v.ProtocolVersion)
 	}
 
 	if v.Tags != nil {

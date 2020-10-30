@@ -39,14 +39,6 @@ type DeleteBasePathMappingInput struct {
 	//
 	// This member is required.
 	DomainName *string
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 type DeleteBasePathMappingOutput struct {

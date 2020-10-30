@@ -74,10 +74,13 @@ type ModifyDBClusterInput struct {
 	// database accounts, and otherwise false. Default: false
 	EnableIAMDatabaseAuthentication *bool
 
-	// The version number of the database engine. Currently, setting this parameter has
-	// no effect. To upgrade your database engine to the most recent release, use the
-	// ApplyPendingMaintenanceAction API. For a list of valid engine versions, see
-	// CreateDBInstance, or call DescribeDBEngineVersions.
+	// The version number of the database engine to which you want to upgrade. Changing
+	// this parameter results in an outage. The change is applied during the next
+	// maintenance window unless the ApplyImmediately parameter is set to true. For a
+	// list of valid engine versions, see Engine Releases for Amazon Neptune
+	// (https://docs.aws.amazon.com/neptune/latest/userguide/engine-releases.html), or
+	// call DescribeDBEngineVersions
+	// (https://docs.aws.amazon.com/neptune/latest/userguide/api-other-apis.html#DescribeDBEngineVersions).
 	EngineVersion *string
 
 	// The new password for the master database user. This password can contain any

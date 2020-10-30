@@ -29,13 +29,6 @@ func (c *Client) GetAccount(ctx context.Context, params *GetAccountInput, optFns
 
 // Requests API Gateway to get information about the current Account resource.
 type GetAccountInput struct {
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // Represents an AWS account that is associated with API Gateway. To view the

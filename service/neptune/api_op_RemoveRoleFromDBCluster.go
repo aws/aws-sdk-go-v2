@@ -38,6 +38,11 @@ type RemoveRoleFromDBClusterInput struct {
 	//
 	// This member is required.
 	RoleArn *string
+
+	// The name of the feature for the DB cluster that the IAM role is to be
+	// disassociated from. For the list of supported feature names, see
+	// DBEngineVersion.
+	FeatureName *string
 }
 
 type RemoveRoleFromDBClusterOutput struct {

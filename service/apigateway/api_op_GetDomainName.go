@@ -36,14 +36,6 @@ type GetDomainNameInput struct {
 	//
 	// This member is required.
 	DomainName *string
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // Represents a custom domain name as a user-friendly host name of an API

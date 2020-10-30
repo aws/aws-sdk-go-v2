@@ -36,17 +36,9 @@ type UpdateRestApiInput struct {
 	// This member is required.
 	RestApiId *string
 
-	Name *string
-
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []*types.PatchOperation
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // Represents a REST API. Create an API
@@ -72,6 +64,13 @@ type UpdateRestApiOutput struct {
 
 	// The API's description.
 	Description *string
+
+	// Specifies whether clients can invoke your API by using the default execute-api
+	// endpoint. By default, clients can invoke your API with the default
+	// https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that
+	// clients use a custom domain name to invoke your API, disable the default
+	// endpoint.
+	DisableExecuteApiEndpoint *bool
 
 	// The endpoint configuration of this RestApi showing the endpoint types of the
 	// API.

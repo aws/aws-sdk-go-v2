@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Retrieves table statistics of columns.
+// Retrieves table statistics of columns. The Identity and Access Management (IAM)
+// permission required for this operation is GetTable.
 func (c *Client) GetColumnStatisticsForTable(ctx context.Context, params *GetColumnStatisticsForTableInput, optFns ...func(*Options)) (*GetColumnStatisticsForTableOutput, error) {
 	if params == nil {
 		params = &GetColumnStatisticsForTableInput{}

@@ -41,14 +41,6 @@ type DeleteUsagePlanKeyInput struct {
 	//
 	// This member is required.
 	UsagePlanId *string
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 type DeleteUsagePlanKeyOutput struct {

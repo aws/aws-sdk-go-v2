@@ -4092,6 +4092,13 @@ func awsRestjson1_serializeDocumentCriterionAdditionalProperties(v *types.Criter
 		}
 	}
 
+	if v.EqExactMatch != nil {
+		ok := object.Key("eqExactMatch")
+		if err := awsRestjson1_serializeDocument__listOf__string(v.EqExactMatch, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Gt != nil {
 		ok := object.Key("gt")
 		ok.Long(*v.Gt)

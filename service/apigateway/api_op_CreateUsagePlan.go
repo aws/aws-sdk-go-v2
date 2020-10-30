@@ -33,11 +33,6 @@ func (c *Client) CreateUsagePlan(ctx context.Context, params *CreateUsagePlanInp
 // payload.
 type CreateUsagePlanInput struct {
 
-	// [Required] The name of the usage plan.
-	//
-	// This member is required.
-	Name *string
-
 	// The associated API stages of the usage plan.
 	ApiStages []*types.ApiStage
 
@@ -52,14 +47,8 @@ type CreateUsagePlanInput struct {
 	// can be up to 256 characters.
 	Tags map[string]*string
 
-	Template *bool
-
-	TemplateSkipList []*string
-
 	// The throttling limits of the usage plan.
 	Throttle *types.ThrottleSettings
-
-	Title *string
 }
 
 // Represents a usage plan than can specify who can assess associated API stages
@@ -117,7 +106,6 @@ func addOperationCreateUsagePlanMiddlewares(stack *middleware.Stack, options Opt
 	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpCreateUsagePlanValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateUsagePlan(options.Region), middleware.Before)
 	addRequestIDRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)

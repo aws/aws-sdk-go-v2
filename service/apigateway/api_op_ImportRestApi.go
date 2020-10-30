@@ -37,8 +37,6 @@ type ImportRestApiInput struct {
 	// (false) when a warning is encountered. The default value is false.
 	FailOnWarnings *bool
 
-	Name *string
-
 	// A key-value map of context-specific query string parameters specifying the
 	// behavior of different API importing operations. The following shows
 	// operation-specific parameters and their supported values. To exclude
@@ -54,12 +52,6 @@ type ImportRestApiInput struct {
 	// endpointConfigurationTypes=REGIONAL --body
 	// 'file:///path/to/imported-api-body.json'
 	Parameters map[string]*string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // Represents a REST API. Create an API
@@ -85,6 +77,13 @@ type ImportRestApiOutput struct {
 
 	// The API's description.
 	Description *string
+
+	// Specifies whether clients can invoke your API by using the default execute-api
+	// endpoint. By default, clients can invoke your API with the default
+	// https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that
+	// clients use a custom domain name to invoke your API, disable the default
+	// endpoint.
+	DisableExecuteApiEndpoint *bool
 
 	// The endpoint configuration of this RestApi showing the endpoint types of the
 	// API.

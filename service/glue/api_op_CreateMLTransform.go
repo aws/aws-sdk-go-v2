@@ -130,6 +130,11 @@ type CreateMLTransformInput struct {
 	// terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours).
 	Timeout *int32
 
+	// The encryption-at-rest settings of the transform that apply to accessing user
+	// data. Machine learning transforms can access user data encrypted in Amazon S3
+	// using KMS.
+	TransformEncryption *types.TransformEncryption
+
 	// The type of predefined worker that is allocated when this task runs. Accepts a
 	// value of Standard, G.1X, or G.2X.
 	//

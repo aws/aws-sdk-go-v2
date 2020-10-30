@@ -340,6 +340,10 @@ func awsRestjson1_serializeOpHttpBindingsAssociateTargetsWithJobInput(v *Associa
 		}
 	}
 
+	if v.NamespaceId != nil {
+		encoder.SetQuery("namespaceId").String(*v.NamespaceId)
+	}
+
 	return nil
 }
 
@@ -2037,6 +2041,11 @@ func awsRestjson1_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smi
 		if err := awsRestjson1_serializeDocumentJobExecutionsRolloutConfig(v.JobExecutionsRolloutConfig, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.NamespaceId != nil {
+		ok := object.Key("namespaceId")
+		ok.String(*v.NamespaceId)
 	}
 
 	if v.PresignedUrlConfig != nil {
@@ -4443,6 +4452,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteJobInput(v *DeleteJobInput, encod
 		}
 	}
 
+	if v.NamespaceId != nil {
+		encoder.SetQuery("namespaceId").String(*v.NamespaceId)
+	}
+
 	return nil
 }
 
@@ -4520,6 +4533,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteJobExecutionInput(v *DeleteJobExe
 		if err := encoder.SetURI("jobId").String(*v.JobId); err != nil {
 			return err
 		}
+	}
+
+	if v.NamespaceId != nil {
+		encoder.SetQuery("namespaceId").String(*v.NamespaceId)
 	}
 
 	if v.ThingName == nil {
@@ -10258,6 +10275,10 @@ func awsRestjson1_serializeOpHttpBindingsListJobExecutionsForThingInput(v *ListJ
 		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
+	if v.NamespaceId != nil {
+		encoder.SetQuery("namespaceId").String(*v.NamespaceId)
+	}
+
 	if v.NextToken != nil {
 		encoder.SetQuery("nextToken").String(*v.NextToken)
 	}
@@ -10334,6 +10355,10 @@ func awsRestjson1_serializeOpHttpBindingsListJobsInput(v *ListJobsInput, encoder
 
 	if v.MaxResults != nil {
 		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NamespaceId != nil {
+		encoder.SetQuery("namespaceId").String(*v.NamespaceId)
 	}
 
 	if v.NextToken != nil {
@@ -15574,6 +15599,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateJobInput(v *UpdateJobInput, encod
 		if err := encoder.SetURI("jobId").String(*v.JobId); err != nil {
 			return err
 		}
+	}
+
+	if v.NamespaceId != nil {
+		encoder.SetQuery("namespaceId").String(*v.NamespaceId)
 	}
 
 	return nil

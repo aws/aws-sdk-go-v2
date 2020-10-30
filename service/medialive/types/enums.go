@@ -2296,6 +2296,24 @@ func (HlsDirectoryStructure) Values() []HlsDirectoryStructure {
 	}
 }
 
+type HlsDiscontinuityTags string
+
+// Enum values for HlsDiscontinuityTags
+const (
+	HlsDiscontinuityTagsInsert      HlsDiscontinuityTags = "INSERT"
+	HlsDiscontinuityTagsNeverInsert HlsDiscontinuityTags = "NEVER_INSERT"
+)
+
+// Values returns all known values for HlsDiscontinuityTags. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HlsDiscontinuityTags) Values() []HlsDiscontinuityTags {
+	return []HlsDiscontinuityTags{
+		"INSERT",
+		"NEVER_INSERT",
+	}
+}
+
 type HlsEncryptionType string
 
 // Enum values for HlsEncryptionType
@@ -2347,6 +2365,24 @@ func (HlsId3SegmentTaggingState) Values() []HlsId3SegmentTaggingState {
 	return []HlsId3SegmentTaggingState{
 		"DISABLED",
 		"ENABLED",
+	}
+}
+
+type HlsIncompleteSegmentBehavior string
+
+// Enum values for HlsIncompleteSegmentBehavior
+const (
+	HlsIncompleteSegmentBehaviorAuto     HlsIncompleteSegmentBehavior = "AUTO"
+	HlsIncompleteSegmentBehaviorSuppress HlsIncompleteSegmentBehavior = "SUPPRESS"
+)
+
+// Values returns all known values for HlsIncompleteSegmentBehavior. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HlsIncompleteSegmentBehavior) Values() []HlsIncompleteSegmentBehavior {
+	return []HlsIncompleteSegmentBehavior{
+		"AUTO",
+		"SUPPRESS",
 	}
 }
 

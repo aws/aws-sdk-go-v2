@@ -43,19 +43,11 @@ type GetUsagePlanKeysInput struct {
 	// maximum value is 500.
 	Limit *int32
 
-	Name *string
-
 	// A query parameter specifying the name of the to-be-returned usage plan keys.
 	NameQuery *string
 
 	// The current pagination position in the paged result set.
 	Position *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // Represents the collection of usage plan keys added to usage plans for the

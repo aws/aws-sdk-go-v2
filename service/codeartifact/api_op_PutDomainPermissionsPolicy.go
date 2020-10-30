@@ -11,7 +11,11 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Sets a resource policy on a domain that specifies permissions to access it.
+// Sets a resource policy on a domain that specifies permissions to access it. When
+// you call PutDomainPermissionsPolicy, the resource policy on the domain is
+// ignored when evaluting permissions. This ensures that the owner of a domain
+// cannot lock themselves out of the domain, which would prevent them from being
+// able to update the resource policy.
 func (c *Client) PutDomainPermissionsPolicy(ctx context.Context, params *PutDomainPermissionsPolicyInput, optFns ...func(*Options)) (*PutDomainPermissionsPolicyOutput, error) {
 	if params == nil {
 		params = &PutDomainPermissionsPolicyInput{}

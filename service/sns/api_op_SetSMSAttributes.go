@@ -13,9 +13,10 @@ import (
 // Use this request to set the default settings for sending SMS messages and
 // receiving daily SMS usage reports. You can override some of these settings for a
 // single message when you use the Publish action with the
-// MessageAttributes.entry.N parameter. For more information, see Sending an SMS
-// Message (https://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html) in
-// the Amazon SNS Developer Guide.
+// MessageAttributes.entry.N parameter. For more information, see Publishing to a
+// mobile phone
+// (https://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html) in the
+// Amazon SNS Developer Guide.
 func (c *Client) SetSMSAttributes(ctx context.Context, params *SetSMSAttributesInput, optFns ...func(*Options)) (*SetSMSAttributesOutput, error) {
 	if params == nil {
 		params = &SetSMSAttributesInput{}

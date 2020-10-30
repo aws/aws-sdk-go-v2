@@ -68,6 +68,9 @@ type DescribeSMBSettingsOutput struct {
 	// The name of the domain that the gateway is joined to.
 	DomainName *string
 
+	// The shares on this gateway appear when listing shares.
+	FileSharesVisible *bool
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
 	// return a list of gateways for your account and AWS Region.
 	GatewayARN *string

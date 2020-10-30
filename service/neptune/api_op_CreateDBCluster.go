@@ -94,12 +94,11 @@ type CreateDBClusterInput struct {
 	// The list of log types that need to be enabled for exporting to CloudWatch Logs.
 	EnableCloudwatchLogsExports []*string
 
-	// True to enable mapping of AWS Identity and Access Management (IAM) accounts to
-	// database accounts, and otherwise false. Default: false
+	// Not supported by Neptune.
 	EnableIAMDatabaseAuthentication *bool
 
-	// The version number of the database engine to use. Currently, setting this
-	// parameter has no effect. Example: 1.0.1
+	// The version number of the database engine to use for the new DB cluster.
+	// Example: 1.0.2.1
 	EngineVersion *string
 
 	// The AWS KMS key identifier for an encrypted DB cluster. The KMS key identifier

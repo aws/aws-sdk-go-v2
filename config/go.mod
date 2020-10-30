@@ -7,7 +7,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/credentials v0.1.3
 	github.com/aws/aws-sdk-go-v2/ec2imds v0.1.3
 	github.com/aws/aws-sdk-go-v2/service/sts v0.28.0
-	github.com/awslabs/smithy-go v0.2.2-0.20201026231331-345290040c23
+	github.com/awslabs/smithy-go v0.3.0
 )
 
 replace (

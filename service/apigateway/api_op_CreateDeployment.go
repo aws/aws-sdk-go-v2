@@ -51,19 +51,11 @@ type CreateDeploymentInput struct {
 	// The description for the Deployment resource to create.
 	Description *string
 
-	Name *string
-
 	// The description of the Stage resource for the Deployment resource to create.
 	StageDescription *string
 
 	// The name of the Stage resource for the Deployment resource to create.
 	StageName *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 
 	// Specifies whether active tracing with X-ray is enabled for the Stage.
 	TracingEnabled *bool

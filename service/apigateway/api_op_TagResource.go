@@ -40,14 +40,6 @@ type TagResourceInput struct {
 	//
 	// This member is required.
 	Tags map[string]*string
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 type TagResourceOutput struct {

@@ -46,9 +46,6 @@ type CreateApiKeyInput struct {
 	// created API key value. This parameter is deprecated and should not be used.
 	GenerateDistinctId *bool
 
-	// The name of the ApiKey.
-	Name *string
-
 	// DEPRECATED FOR USAGE PLANS - Specifies stages associated with the API key.
 	StageKeys []*types.StageKey
 
@@ -56,12 +53,6 @@ type CreateApiKeyInput struct {
 	// tag key can be up to 128 characters and must not start with aws:. The tag value
 	// can be up to 256 characters.
 	Tags map[string]*string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 
 	// Specifies a value of the API key.
 	Value *string

@@ -41,14 +41,6 @@ type GetBasePathMappingInput struct {
 	//
 	// This member is required.
 	DomainName *string
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // Represents the base path that callers of the API must provide as part of the URL

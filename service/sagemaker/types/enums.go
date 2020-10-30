@@ -44,6 +44,26 @@ func (AlgorithmStatus) Values() []AlgorithmStatus {
 	}
 }
 
+type AppImageConfigSortKey string
+
+// Enum values for AppImageConfigSortKey
+const (
+	AppImageConfigSortKeyCreationtime     AppImageConfigSortKey = "CreationTime"
+	AppImageConfigSortKeyLastmodifiedtime AppImageConfigSortKey = "LastModifiedTime"
+	AppImageConfigSortKeyName             AppImageConfigSortKey = "Name"
+)
+
+// Values returns all known values for AppImageConfigSortKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AppImageConfigSortKey) Values() []AppImageConfigSortKey {
+	return []AppImageConfigSortKey{
+		"CreationTime",
+		"LastModifiedTime",
+		"Name",
+	}
+}
+
 type AppInstanceType string
 
 // Enum values for AppInstanceType
@@ -731,10 +751,13 @@ type DomainStatus string
 
 // Enum values for DomainStatus
 const (
-	DomainStatusDeleting  DomainStatus = "Deleting"
-	DomainStatusFailed    DomainStatus = "Failed"
-	DomainStatusInservice DomainStatus = "InService"
-	DomainStatusPending   DomainStatus = "Pending"
+	DomainStatusDeleting     DomainStatus = "Deleting"
+	DomainStatusFailed       DomainStatus = "Failed"
+	DomainStatusInservice    DomainStatus = "InService"
+	DomainStatusPending      DomainStatus = "Pending"
+	DomainStatusUpdating     DomainStatus = "Updating"
+	DomainStatusUpdateFailed DomainStatus = "Update_Failed"
+	DomainStatusDeleteFailed DomainStatus = "Delete_Failed"
 )
 
 // Values returns all known values for DomainStatus. Note that this can be expanded
@@ -746,6 +769,9 @@ func (DomainStatus) Values() []DomainStatus {
 		"Failed",
 		"InService",
 		"Pending",
+		"Updating",
+		"Update_Failed",
+		"Delete_Failed",
 	}
 }
 
@@ -914,6 +940,7 @@ const (
 	FrameworkPytorch    Framework = "PYTORCH"
 	FrameworkXgboost    Framework = "XGBOOST"
 	FrameworkTflite     Framework = "TFLITE"
+	FrameworkDarknet    Framework = "DARKNET"
 )
 
 // Values returns all known values for Framework. Note that this can be expanded in
@@ -928,6 +955,7 @@ func (Framework) Values() []Framework {
 		"PYTORCH",
 		"XGBOOST",
 		"TFLITE",
+		"DARKNET",
 	}
 }
 
@@ -1071,6 +1099,134 @@ func (HyperParameterTuningJobWarmStartType) Values() []HyperParameterTuningJobWa
 	return []HyperParameterTuningJobWarmStartType{
 		"IdenticalDataAndAlgorithm",
 		"TransferLearning",
+	}
+}
+
+type ImageSortBy string
+
+// Enum values for ImageSortBy
+const (
+	ImageSortByCreationTime     ImageSortBy = "CREATION_TIME"
+	ImageSortByLastModifiedTime ImageSortBy = "LAST_MODIFIED_TIME"
+	ImageSortByImageName        ImageSortBy = "IMAGE_NAME"
+)
+
+// Values returns all known values for ImageSortBy. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ImageSortBy) Values() []ImageSortBy {
+	return []ImageSortBy{
+		"CREATION_TIME",
+		"LAST_MODIFIED_TIME",
+		"IMAGE_NAME",
+	}
+}
+
+type ImageSortOrder string
+
+// Enum values for ImageSortOrder
+const (
+	ImageSortOrderAscending  ImageSortOrder = "ASCENDING"
+	ImageSortOrderDescending ImageSortOrder = "DESCENDING"
+)
+
+// Values returns all known values for ImageSortOrder. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ImageSortOrder) Values() []ImageSortOrder {
+	return []ImageSortOrder{
+		"ASCENDING",
+		"DESCENDING",
+	}
+}
+
+type ImageStatus string
+
+// Enum values for ImageStatus
+const (
+	ImageStatusCreating     ImageStatus = "CREATING"
+	ImageStatusCreated      ImageStatus = "CREATED"
+	ImageStatusCreateFailed ImageStatus = "CREATE_FAILED"
+	ImageStatusUpdating     ImageStatus = "UPDATING"
+	ImageStatusUpdateFailed ImageStatus = "UPDATE_FAILED"
+	ImageStatusDeleting     ImageStatus = "DELETING"
+	ImageStatusDeleteFailed ImageStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for ImageStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ImageStatus) Values() []ImageStatus {
+	return []ImageStatus{
+		"CREATING",
+		"CREATED",
+		"CREATE_FAILED",
+		"UPDATING",
+		"UPDATE_FAILED",
+		"DELETING",
+		"DELETE_FAILED",
+	}
+}
+
+type ImageVersionSortBy string
+
+// Enum values for ImageVersionSortBy
+const (
+	ImageVersionSortByCreationTime     ImageVersionSortBy = "CREATION_TIME"
+	ImageVersionSortByLastModifiedTime ImageVersionSortBy = "LAST_MODIFIED_TIME"
+	ImageVersionSortByVersion          ImageVersionSortBy = "VERSION"
+)
+
+// Values returns all known values for ImageVersionSortBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ImageVersionSortBy) Values() []ImageVersionSortBy {
+	return []ImageVersionSortBy{
+		"CREATION_TIME",
+		"LAST_MODIFIED_TIME",
+		"VERSION",
+	}
+}
+
+type ImageVersionSortOrder string
+
+// Enum values for ImageVersionSortOrder
+const (
+	ImageVersionSortOrderAscending  ImageVersionSortOrder = "ASCENDING"
+	ImageVersionSortOrderDescending ImageVersionSortOrder = "DESCENDING"
+)
+
+// Values returns all known values for ImageVersionSortOrder. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ImageVersionSortOrder) Values() []ImageVersionSortOrder {
+	return []ImageVersionSortOrder{
+		"ASCENDING",
+		"DESCENDING",
+	}
+}
+
+type ImageVersionStatus string
+
+// Enum values for ImageVersionStatus
+const (
+	ImageVersionStatusCreating     ImageVersionStatus = "CREATING"
+	ImageVersionStatusCreated      ImageVersionStatus = "CREATED"
+	ImageVersionStatusCreateFailed ImageVersionStatus = "CREATE_FAILED"
+	ImageVersionStatusDeleting     ImageVersionStatus = "DELETING"
+	ImageVersionStatusDeleteFailed ImageVersionStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for ImageVersionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ImageVersionStatus) Values() []ImageVersionStatus {
+	return []ImageVersionStatus{
+		"CREATING",
+		"CREATED",
+		"CREATE_FAILED",
+		"DELETING",
+		"DELETE_FAILED",
 	}
 }
 
@@ -2559,6 +2715,7 @@ const (
 	TrainingInstanceTypeMlP38xlarge    TrainingInstanceType = "ml.p3.8xlarge"
 	TrainingInstanceTypeMlP316xlarge   TrainingInstanceType = "ml.p3.16xlarge"
 	TrainingInstanceTypeMlP3dn24xlarge TrainingInstanceType = "ml.p3dn.24xlarge"
+	TrainingInstanceTypeMlP4d24xlarge  TrainingInstanceType = "ml.p4d.24xlarge"
 	TrainingInstanceTypeMlC5Xlarge     TrainingInstanceType = "ml.c5.xlarge"
 	TrainingInstanceTypeMlC52xlarge    TrainingInstanceType = "ml.c5.2xlarge"
 	TrainingInstanceTypeMlC54xlarge    TrainingInstanceType = "ml.c5.4xlarge"
@@ -2604,6 +2761,7 @@ func (TrainingInstanceType) Values() []TrainingInstanceType {
 		"ml.p3.8xlarge",
 		"ml.p3.16xlarge",
 		"ml.p3dn.24xlarge",
+		"ml.p4d.24xlarge",
 		"ml.c5.xlarge",
 		"ml.c5.2xlarge",
 		"ml.c5.4xlarge",
@@ -2817,10 +2975,13 @@ type UserProfileStatus string
 
 // Enum values for UserProfileStatus
 const (
-	UserProfileStatusDeleting  UserProfileStatus = "Deleting"
-	UserProfileStatusFailed    UserProfileStatus = "Failed"
-	UserProfileStatusInservice UserProfileStatus = "InService"
-	UserProfileStatusPending   UserProfileStatus = "Pending"
+	UserProfileStatusDeleting     UserProfileStatus = "Deleting"
+	UserProfileStatusFailed       UserProfileStatus = "Failed"
+	UserProfileStatusInservice    UserProfileStatus = "InService"
+	UserProfileStatusPending      UserProfileStatus = "Pending"
+	UserProfileStatusUpdating     UserProfileStatus = "Updating"
+	UserProfileStatusUpdateFailed UserProfileStatus = "Update_Failed"
+	UserProfileStatusDeleteFailed UserProfileStatus = "Delete_Failed"
 )
 
 // Values returns all known values for UserProfileStatus. Note that this can be
@@ -2832,6 +2993,9 @@ func (UserProfileStatus) Values() []UserProfileStatus {
 		"Failed",
 		"InService",
 		"Pending",
+		"Updating",
+		"Update_Failed",
+		"Delete_Failed",
 	}
 }
 

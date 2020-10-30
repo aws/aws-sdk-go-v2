@@ -64,6 +64,10 @@ type CreateSMBFileShareInput struct {
 	// This member is required.
 	Role *string
 
+	// The files and folders on this share will only be visible to users with read
+	// access.
+	AccessBasedEnumeration *bool
+
 	// A list of users or groups in the Active Directory that will be granted
 	// administrator privileges on the file share. These users can do all file
 	// operations as the super-user. Acceptable formats include: DOMAIN\User1, user1,
@@ -115,6 +119,9 @@ type CreateSMBFileShareInput struct {
 	// Amazon S3 server-side encryption. Storage Gateway does not support asymmetric
 	// CMKs. This value can only be set when KMSEncrypted is true. Optional.
 	KMSKey *string
+
+	// The notification policy of the file share.
+	NotificationPolicy *string
 
 	// A value that sets the access control list (ACL) permission for objects in the S3
 	// bucket that a file gateway puts objects into. The default value is private.

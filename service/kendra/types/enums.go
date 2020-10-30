@@ -19,6 +19,151 @@ func (AdditionalResultAttributeValueType) Values() []AdditionalResultAttributeVa
 	}
 }
 
+type ConfluenceAttachmentFieldName string
+
+// Enum values for ConfluenceAttachmentFieldName
+const (
+	ConfluenceAttachmentFieldNameAuthor      ConfluenceAttachmentFieldName = "AUTHOR"
+	ConfluenceAttachmentFieldNameContentType ConfluenceAttachmentFieldName = "CONTENT_TYPE"
+	ConfluenceAttachmentFieldNameCreatedDate ConfluenceAttachmentFieldName = "CREATED_DATE"
+	ConfluenceAttachmentFieldNameDisplayUrl  ConfluenceAttachmentFieldName = "DISPLAY_URL"
+	ConfluenceAttachmentFieldNameFileSize    ConfluenceAttachmentFieldName = "FILE_SIZE"
+	ConfluenceAttachmentFieldNameItemType    ConfluenceAttachmentFieldName = "ITEM_TYPE"
+	ConfluenceAttachmentFieldNameParentId    ConfluenceAttachmentFieldName = "PARENT_ID"
+	ConfluenceAttachmentFieldNameSpaceKey    ConfluenceAttachmentFieldName = "SPACE_KEY"
+	ConfluenceAttachmentFieldNameSpaceName   ConfluenceAttachmentFieldName = "SPACE_NAME"
+	ConfluenceAttachmentFieldNameUrl         ConfluenceAttachmentFieldName = "URL"
+	ConfluenceAttachmentFieldNameVersion     ConfluenceAttachmentFieldName = "VERSION"
+)
+
+// Values returns all known values for ConfluenceAttachmentFieldName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ConfluenceAttachmentFieldName) Values() []ConfluenceAttachmentFieldName {
+	return []ConfluenceAttachmentFieldName{
+		"AUTHOR",
+		"CONTENT_TYPE",
+		"CREATED_DATE",
+		"DISPLAY_URL",
+		"FILE_SIZE",
+		"ITEM_TYPE",
+		"PARENT_ID",
+		"SPACE_KEY",
+		"SPACE_NAME",
+		"URL",
+		"VERSION",
+	}
+}
+
+type ConfluenceBlogFieldName string
+
+// Enum values for ConfluenceBlogFieldName
+const (
+	ConfluenceBlogFieldNameAuthor      ConfluenceBlogFieldName = "AUTHOR"
+	ConfluenceBlogFieldNameDisplayUrl  ConfluenceBlogFieldName = "DISPLAY_URL"
+	ConfluenceBlogFieldNameItemType    ConfluenceBlogFieldName = "ITEM_TYPE"
+	ConfluenceBlogFieldNameLabels      ConfluenceBlogFieldName = "LABELS"
+	ConfluenceBlogFieldNamePublishDate ConfluenceBlogFieldName = "PUBLISH_DATE"
+	ConfluenceBlogFieldNameSpaceKey    ConfluenceBlogFieldName = "SPACE_KEY"
+	ConfluenceBlogFieldNameSpaceName   ConfluenceBlogFieldName = "SPACE_NAME"
+	ConfluenceBlogFieldNameUrl         ConfluenceBlogFieldName = "URL"
+	ConfluenceBlogFieldNameVersion     ConfluenceBlogFieldName = "VERSION"
+)
+
+// Values returns all known values for ConfluenceBlogFieldName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConfluenceBlogFieldName) Values() []ConfluenceBlogFieldName {
+	return []ConfluenceBlogFieldName{
+		"AUTHOR",
+		"DISPLAY_URL",
+		"ITEM_TYPE",
+		"LABELS",
+		"PUBLISH_DATE",
+		"SPACE_KEY",
+		"SPACE_NAME",
+		"URL",
+		"VERSION",
+	}
+}
+
+type ConfluencePageFieldName string
+
+// Enum values for ConfluencePageFieldName
+const (
+	ConfluencePageFieldNameAuthor        ConfluencePageFieldName = "AUTHOR"
+	ConfluencePageFieldNameContentStatus ConfluencePageFieldName = "CONTENT_STATUS"
+	ConfluencePageFieldNameCreatedDate   ConfluencePageFieldName = "CREATED_DATE"
+	ConfluencePageFieldNameDisplayUrl    ConfluencePageFieldName = "DISPLAY_URL"
+	ConfluencePageFieldNameItemType      ConfluencePageFieldName = "ITEM_TYPE"
+	ConfluencePageFieldNameLabels        ConfluencePageFieldName = "LABELS"
+	ConfluencePageFieldNameModifiedDate  ConfluencePageFieldName = "MODIFIED_DATE"
+	ConfluencePageFieldNameParentId      ConfluencePageFieldName = "PARENT_ID"
+	ConfluencePageFieldNameSpaceKey      ConfluencePageFieldName = "SPACE_KEY"
+	ConfluencePageFieldNameSpaceName     ConfluencePageFieldName = "SPACE_NAME"
+	ConfluencePageFieldNameUrl           ConfluencePageFieldName = "URL"
+	ConfluencePageFieldNameVersion       ConfluencePageFieldName = "VERSION"
+)
+
+// Values returns all known values for ConfluencePageFieldName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConfluencePageFieldName) Values() []ConfluencePageFieldName {
+	return []ConfluencePageFieldName{
+		"AUTHOR",
+		"CONTENT_STATUS",
+		"CREATED_DATE",
+		"DISPLAY_URL",
+		"ITEM_TYPE",
+		"LABELS",
+		"MODIFIED_DATE",
+		"PARENT_ID",
+		"SPACE_KEY",
+		"SPACE_NAME",
+		"URL",
+		"VERSION",
+	}
+}
+
+type ConfluenceSpaceFieldName string
+
+// Enum values for ConfluenceSpaceFieldName
+const (
+	ConfluenceSpaceFieldNameDisplayUrl ConfluenceSpaceFieldName = "DISPLAY_URL"
+	ConfluenceSpaceFieldNameItemType   ConfluenceSpaceFieldName = "ITEM_TYPE"
+	ConfluenceSpaceFieldNameSpaceKey   ConfluenceSpaceFieldName = "SPACE_KEY"
+	ConfluenceSpaceFieldNameUrl        ConfluenceSpaceFieldName = "URL"
+)
+
+// Values returns all known values for ConfluenceSpaceFieldName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConfluenceSpaceFieldName) Values() []ConfluenceSpaceFieldName {
+	return []ConfluenceSpaceFieldName{
+		"DISPLAY_URL",
+		"ITEM_TYPE",
+		"SPACE_KEY",
+		"URL",
+	}
+}
+
+type ConfluenceVersion string
+
+// Enum values for ConfluenceVersion
+const (
+	ConfluenceVersionServer ConfluenceVersion = "SERVER"
+)
+
+// Values returns all known values for ConfluenceVersion. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConfluenceVersion) Values() []ConfluenceVersion {
+	return []ConfluenceVersion{
+		"SERVER",
+	}
+}
+
 type ContentType string
 
 // Enum values for ContentType
@@ -128,6 +273,7 @@ const (
 	DataSourceTypeOnedrive   DataSourceType = "ONEDRIVE"
 	DataSourceTypeServicenow DataSourceType = "SERVICENOW"
 	DataSourceTypeCustom     DataSourceType = "CUSTOM"
+	DataSourceTypeConfluence DataSourceType = "CONFLUENCE"
 )
 
 // Values returns all known values for DataSourceType. Note that this can be
@@ -142,6 +288,7 @@ func (DataSourceType) Values() []DataSourceType {
 		"ONEDRIVE",
 		"SERVICENOW",
 		"CUSTOM",
+		"CONFLUENCE",
 	}
 }
 

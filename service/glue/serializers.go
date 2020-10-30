@@ -8011,6 +8011,23 @@ func awsAwsjson11_serializeDocumentMatchCriteria(v []*string, value smithyjson.V
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentMLUserDataEncryption(v *types.MLUserDataEncryption, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KmsKeyId != nil {
+		ok := object.Key("KmsKeyId")
+		ok.String(*v.KmsKeyId)
+	}
+
+	if len(v.MlUserDataEncryptionMode) > 0 {
+		ok := object.Key("MlUserDataEncryptionMode")
+		ok.String(string(v.MlUserDataEncryptionMode))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentMongoDBTarget(v *types.MongoDBTarget, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8987,6 +9004,25 @@ func awsAwsjson11_serializeDocumentTaskRunSortCriteria(v *types.TaskRunSortCrite
 	if len(v.SortDirection) > 0 {
 		ok := object.Key("SortDirection")
 		ok.String(string(v.SortDirection))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTransformEncryption(v *types.TransformEncryption, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MlUserDataEncryption != nil {
+		ok := object.Key("MlUserDataEncryption")
+		if err := awsAwsjson11_serializeDocumentMLUserDataEncryption(v.MlUserDataEncryption, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TaskRunSecurityConfigurationName != nil {
+		ok := object.Key("TaskRunSecurityConfigurationName")
+		ok.String(*v.TaskRunSecurityConfigurationName)
 	}
 
 	return nil
@@ -10079,6 +10115,13 @@ func awsAwsjson11_serializeOpDocumentCreateMLTransformInput(v *CreateMLTransform
 	if v.Timeout != nil {
 		ok := object.Key("Timeout")
 		ok.Integer(*v.Timeout)
+	}
+
+	if v.TransformEncryption != nil {
+		ok := object.Key("TransformEncryption")
+		if err := awsAwsjson11_serializeDocumentTransformEncryption(v.TransformEncryption, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.WorkerType) > 0 {

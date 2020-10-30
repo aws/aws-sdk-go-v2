@@ -46,17 +46,9 @@ type GetGatewayResponsesInput struct {
 	// pagination and the limit does not apply here.
 	Limit *int32
 
-	Name *string
-
 	// The current pagination position in the paged result set. The GatewayResponse
 	// collection does not support pagination and the position does not apply here.
 	Position *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // The collection of the GatewayResponse instances of a RestApi as a

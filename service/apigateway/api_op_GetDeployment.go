@@ -51,14 +51,6 @@ type GetDeploymentInput struct {
 	// "apisummary" string. For example, GET
 	// /restapis/{restapi_id}/deployments/{deployment_id}?embed=apisummary.
 	Embed []*string
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // An immutable representation of a RestApi resource that can be called by users

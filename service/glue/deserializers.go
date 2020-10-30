@@ -24402,6 +24402,11 @@ func awsAwsjson11_deserializeDocumentMLTransform(v **types.MLTransform, value in
 				sv.Timeout = ptr.Int32(int32(i64))
 			}
 
+		case "TransformEncryption":
+			if err := awsAwsjson11_deserializeDocumentTransformEncryption(&sv.TransformEncryption, value); err != nil {
+				return err
+			}
+
 		case "TransformId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24458,6 +24463,55 @@ func awsAwsjson11_deserializeDocumentMLTransformNotReadyException(v **types.MLTr
 					return fmt.Errorf("expected MessageString to be of type string, got %T instead", value)
 				}
 				sv.Message = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentMLUserDataEncryption(v **types.MLUserDataEncryption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MLUserDataEncryption
+	if *v == nil {
+		sv = &types.MLUserDataEncryption{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "KmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NameString to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyId = &jtv
+			}
+
+		case "MlUserDataEncryptionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MLUserDataEncryptionModeString to be of type string, got %T instead", value)
+				}
+				sv.MlUserDataEncryptionMode = types.MLUserDataEncryptionModeString(jtv)
 			}
 
 		default:
@@ -27530,6 +27584,51 @@ func awsAwsjson11_deserializeDocumentTaskRunProperties(v **types.TaskRunProperti
 					return fmt.Errorf("expected TaskType to be of type string, got %T instead", value)
 				}
 				sv.TaskType = types.TaskType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTransformEncryption(v **types.TransformEncryption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TransformEncryption
+	if *v == nil {
+		sv = &types.TransformEncryption{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MlUserDataEncryption":
+			if err := awsAwsjson11_deserializeDocumentMLUserDataEncryption(&sv.MlUserDataEncryption, value); err != nil {
+				return err
+			}
+
+		case "TaskRunSecurityConfigurationName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NameString to be of type string, got %T instead", value)
+				}
+				sv.TaskRunSecurityConfigurationName = &jtv
 			}
 
 		default:
@@ -31799,6 +31898,11 @@ func awsAwsjson11_deserializeOpDocumentGetMLTransformOutput(v **GetMLTransformOu
 					return err
 				}
 				sv.Timeout = ptr.Int32(int32(i64))
+			}
+
+		case "TransformEncryption":
+			if err := awsAwsjson11_deserializeDocumentTransformEncryption(&sv.TransformEncryption, value); err != nil {
+				return err
 			}
 
 		case "TransformId":

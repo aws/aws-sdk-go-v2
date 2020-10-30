@@ -11,20 +11,22 @@ import (
 	"time"
 )
 
-// Generates a temporary authentication token for accessing repositories in the
+// Generates a temporary authorization token for accessing repositories in the
 // domain. This API requires the codeartifact:GetAuthorizationToken and
-// sts:GetServiceBearerToken permissions. CodeArtifact authorization tokens are
-// valid for a period of 12 hours when created with the login command. You can call
-// login periodically to refresh the token. When you create an authorization token
-// with the GetAuthorizationToken API, you can set a custom authorization period,
-// up to a maximum of 12 hours, with the durationSeconds parameter. The
-// authorization period begins after login or GetAuthorizationToken is called. If
-// login or GetAuthorizationToken is called while assuming a role, the token
-// lifetime is independent of the maximum session duration of the role. For
-// example, if you call sts assume-role and specify a session duration of 15
-// minutes, then generate a CodeArtifact authorization token, the token will be
-// valid for the full authorization period even though this is longer than the
-// 15-minute session duration. See Using IAM Roles
+// sts:GetServiceBearerToken permissions. For more information about authorization
+// tokens, see AWS CodeArtifact authentication and tokens
+// (https://docs.aws.amazon.com/codeartifact/latest/ug/tokens-authentication.html).
+// CodeArtifact authorization tokens are valid for a period of 12 hours when
+// created with the login command. You can call login periodically to refresh the
+// token. When you create an authorization token with the GetAuthorizationToken
+// API, you can set a custom authorization period, up to a maximum of 12 hours,
+// with the durationSeconds parameter. The authorization period begins after login
+// or GetAuthorizationToken is called. If login or GetAuthorizationToken is called
+// while assuming a role, the token lifetime is independent of the maximum session
+// duration of the role. For example, if you call sts assume-role and specify a
+// session duration of 15 minutes, then generate a CodeArtifact authorization
+// token, the token will be valid for the full authorization period even though
+// this is longer than the 15-minute session duration. See Using IAM Roles
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html) for more
 // information on controlling session duration.
 func (c *Client) GetAuthorizationToken(ctx context.Context, params *GetAuthorizationTokenInput, optFns ...func(*Options)) (*GetAuthorizationTokenOutput, error) {
@@ -53,7 +55,10 @@ type GetAuthorizationTokenInput struct {
 	// include dashes or spaces.
 	DomainOwner *string
 
-	// The time, in seconds, that the generated authorization token is valid.
+	// The time, in seconds, that the generated authorization token is valid. Valid
+	// values are 0 and any number between 900 (15 minutes) and 43200 (12 hours). A
+	// value of 0 will set the expiration of the authorization token to the same
+	// expiration of the user's role's temporary credentials.
 	DurationSeconds *int64
 }
 

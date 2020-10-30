@@ -67,6 +67,9 @@ type ModifyClientVpnEndpointInput struct {
 	// The IDs of one or more security groups to apply to the target network.
 	SecurityGroupIds []*string
 
+	// Specify whether to enable the self-service portal for the Client VPN endpoint.
+	SelfServicePortal types.SelfServicePortal
+
 	// The ARN of the server certificate to be used. The server certificate must be
 	// provisioned in AWS Certificate Manager (ACM).
 	ServerCertificateArn *string

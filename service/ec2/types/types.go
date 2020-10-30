@@ -120,6 +120,24 @@ type AssignedPrivateIpAddress struct {
 	PrivateIpAddress *string
 }
 
+// Information about the associated IAM roles.
+type AssociatedRole struct {
+
+	// The ARN of the associated IAM role.
+	AssociatedRoleArn *string
+
+	// The name of the Amazon S3 bucket in which the Amazon S3 object is stored.
+	CertificateS3BucketName *string
+
+	// The key of the Amazon S3 object ey where the certificate, certificate chain, and
+	// encrypted private key bundle is stored. The object key is formated as follows:
+	// certificate_arn/role_arn.
+	CertificateS3ObjectKey *string
+
+	// The ID of the KMS key used to encrypt the private key.
+	EncryptionKmsKeyId *string
+}
+
 // Describes a target network that is associated with a Client VPN endpoint. A
 // target network is a subnet in a VPC.
 type AssociatedTargetNetwork struct {
@@ -749,7 +767,7 @@ type ClientData struct {
 
 // Describes the authentication methods used by a Client VPN endpoint. For more
 // information, see Authentication
-// (https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/authentication-authrization.html#client-authentication)
+// (https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/client-authentication.html)
 // in the AWS Client VPN Administrator Guide.
 type ClientVpnAuthentication struct {
 
@@ -891,6 +909,9 @@ type ClientVpnEndpoint struct {
 
 	// The IDs of the security groups for the target network.
 	SecurityGroupIds []*string
+
+	// The URL of the self-service portal.
+	SelfServicePortalUrl *string
 
 	// The ARN of the server certificate.
 	ServerCertificateArn *string
@@ -1174,6 +1195,11 @@ type CreateFleetInstance struct {
 
 // Describes the options for a VPC attachment.
 type CreateTransitGatewayVpcAttachmentRequestOptions struct {
+
+	// Enable or disable support for appliance mode. If enabled, a traffic flow between
+	// a source and destination uses the same Availability Zone for the VPC attachment
+	// for the lifetime of that flow. The default is disable.
+	ApplianceModeSupport ApplianceModeSupportValue
 
 	// Enable or disable DNS support. The default is enable.
 	DnsSupport DnsSupportValue
@@ -1982,6 +2008,24 @@ type EnableFastSnapshotRestoreSuccessItem struct {
 	StateTransitionReason *string
 }
 
+// Indicates whether the instance is enabled for AWS Nitro Enclaves.
+type EnclaveOptions struct {
+
+	// If this parameter is set to true, the instance is enabled for AWS Nitro
+	// Enclaves; otherwise, it is not enabled for AWS Nitro Enclaves.
+	Enabled *bool
+}
+
+// Indicates whether the instance is enabled for AWS Nitro Enclaves. For more
+// information, see  AWS Nitro Enclaves
+// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html) in the
+// Amazon Elastic Compute Cloud User Guide.
+type EnclaveOptionsRequest struct {
+
+	// To enable the instance for AWS Nitro Enclaves, set this parameter to true.
+	Enabled *bool
+}
+
 // Describes an EC2 Fleet or Spot Fleet event.
 type EventInformation struct {
 
@@ -2193,11 +2237,15 @@ type FailedQueuedPurchaseDeletion struct {
 	ReservedInstancesId *string
 }
 
-// Describes the IAM SAML identity provider used for federated authentication.
+// Describes the IAM SAML identity providers used for federated authentication.
 type FederatedAuthentication struct {
 
 	// The Amazon Resource Name (ARN) of the IAM SAML identity provider.
 	SamlProviderArn *string
+
+	// The Amazon Resource Name (ARN) of the IAM SAML identity provider for the
+	// self-service portal.
+	SelfServiceSamlProviderArn *string
 }
 
 // The IAM SAML identity provider used for federated authentication.
@@ -2205,6 +2253,10 @@ type FederatedAuthenticationRequest struct {
 
 	// The Amazon Resource Name (ARN) of the IAM SAML identity provider.
 	SAMLProviderArn *string
+
+	// The Amazon Resource Name (ARN) of the IAM SAML identity provider for the
+	// self-service portal.
+	SelfServiceSAMLProviderArn *string
 }
 
 // A filter name and value pair that is used to return a more specific list of
@@ -3378,6 +3430,9 @@ type Instance struct {
 
 	// Specifies whether enhanced networking with ENA is enabled.
 	EnaSupport *bool
+
+	// Indicates whether the instance is enabled for AWS Nitro Enclaves.
+	EnclaveOptions *EnclaveOptions
 
 	// Indicates whether the instance is enabled for hibernation.
 	HibernationOptions *HibernationOptions
@@ -4614,6 +4669,24 @@ type LaunchTemplateElasticInferenceAcceleratorResponse struct {
 	Type *string
 }
 
+// Indicates whether the instance is enabled for AWS Nitro Enclaves.
+type LaunchTemplateEnclaveOptions struct {
+
+	// If this parameter is set to true, the instance is enabled for AWS Nitro
+	// Enclaves; otherwise, it is not enabled for AWS Nitro Enclaves.
+	Enabled *bool
+}
+
+// Indicates whether the instance is enabled for AWS Nitro Enclaves. For more
+// information, see  AWS Nitro Enclaves
+// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html) in the
+// Amazon Elastic Compute Cloud User Guide.
+type LaunchTemplateEnclaveOptionsRequest struct {
+
+	// To enable the instance for AWS Nitro Enclaves, set this parameter to true.
+	Enabled *bool
+}
+
 // Indicates whether an instance is configured for hibernation.
 type LaunchTemplateHibernationOptions struct {
 
@@ -5384,6 +5457,11 @@ type ModifyTransitGatewayOptions struct {
 
 // Describes the options for a VPC attachment.
 type ModifyTransitGatewayVpcAttachmentRequestOptions struct {
+
+	// Enable or disable support for appliance mode. If enabled, a traffic flow between
+	// a source and destination uses the same Availability Zone for the VPC attachment
+	// for the lifetime of that flow. The default is disable.
+	ApplianceModeSupport ApplianceModeSupportValue
 
 	// Enable or disable DNS support. The default is enable.
 	DnsSupport DnsSupportValue
@@ -6615,6 +6693,16 @@ type RequestLaunchTemplateData struct {
 	// The elastic inference accelerator for the instance.
 	ElasticInferenceAccelerators []*LaunchTemplateElasticInferenceAccelerator
 
+	// Indicates whether the instance is enabled for AWS Nitro Enclaves. For more
+	// information, see  AWS Nitro Enclaves
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html) in the
+	// Amazon Elastic Compute Cloud User Guide. You can't enable AWS Nitro Enclaves and
+	// hibernation on the same instance. For more information about AWS Nitro Enclaves
+	// requirements, see  AWS Nitro Enclaves
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html#nitro-enclave-reqs)
+	// in the Amazon Elastic Compute Cloud User Guide.
+	EnclaveOptions *LaunchTemplateEnclaveOptionsRequest
+
 	// Indicates whether an instance is enabled for hibernation. This parameter is
 	// valid only if the instance meets the hibernation prerequisites
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites).
@@ -7101,6 +7189,9 @@ type ResponseLaunchTemplateData struct {
 
 	// The elastic inference accelerator for the instance.
 	ElasticInferenceAccelerators []*LaunchTemplateElasticInferenceAcceleratorResponse
+
+	// Indicates whether the instance is enabled for AWS Nitro Enclaves.
+	EnclaveOptions *LaunchTemplateEnclaveOptions
 
 	// Indicates whether an instance is configured for hibernation. For more
 	// information, see Hibernate Your Instance
@@ -9685,6 +9776,9 @@ type TransitGatewayVpcAttachment struct {
 
 // Describes the VPC attachment options.
 type TransitGatewayVpcAttachmentOptions struct {
+
+	// Indicates whether appliance mode support is enabled.
+	ApplianceModeSupport ApplianceModeSupportValue
 
 	// Indicates whether DNS support is enabled.
 	DnsSupport DnsSupportValue

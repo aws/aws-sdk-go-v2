@@ -8240,6 +8240,22 @@ func awsAwsquery_deserializeDocumentMatcher(v **types.Matcher, decoder smithyxml
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("GrpcCode", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.GrpcCode = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.GrpcCode = &xtv
+			}
+
 		case strings.EqualFold("HttpCode", t.Name.Local):
 			val, done, err := decoder.Value()
 			if err != nil {
@@ -10002,6 +10018,22 @@ func awsAwsquery_deserializeDocumentTargetGroup(v **types.TargetGroup, decoder s
 			if val != nil {
 				xtv := string(val)
 				sv.Protocol = types.ProtocolEnum(xtv)
+			}
+
+		case strings.EqualFold("ProtocolVersion", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				if val == nil {
+					sv.ProtocolVersion = ptr.String("")
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.ProtocolVersion = &xtv
 			}
 
 		case strings.EqualFold("TargetGroupArn", t.Name.Local):

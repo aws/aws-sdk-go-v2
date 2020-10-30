@@ -788,7 +788,7 @@
         "DefaultActions": {
           "target": "com.amazonaws.elasticloadbalancingv2#Actions",
           "traits": {
-            "smithy.api#documentation": "<p>The actions for the default rule. The rule must include one forward action or one or more fixed-response actions.</p>\n         <p>If the action type is <code>forward</code>, you specify one or more target groups.\n      The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer.\n      The protocol of the target group must be TCP, TLS, UDP, or TCP_UDP for a Network Load Balancer.</p>\n         <p>[HTTPS listeners] If the action type is <code>authenticate-oidc</code>, you authenticate users through an identity provider \n      that is OpenID Connect (OIDC) compliant.</p>\n         <p>[HTTPS listeners] If the action type is <code>authenticate-cognito</code>, you authenticate users through the user pools\n      supported by Amazon Cognito.</p>\n         <p>[Application Load Balancer] If the action type is <code>redirect</code>, you redirect specified client requests \n      from one URL to another.</p>\n         <p>[Application Load Balancer] If the action type is <code>fixed-response</code>, you drop specified client requests \n      and return a custom HTTP response.</p>",
+            "smithy.api#documentation": "<p>The actions for the default rule.</p>",
             "smithy.api#required": {}
           }
         },
@@ -1007,7 +1007,7 @@
         "Actions": {
           "target": "com.amazonaws.elasticloadbalancingv2#Actions",
           "traits": {
-            "smithy.api#documentation": "<p>The actions. Each rule must include exactly one of the following types of actions: \n      <code>forward</code>, <code>fixed-response</code>, or <code>redirect</code>, and it must be the\n      last action to be performed.</p>\n         <p>If the action type is <code>forward</code>, you specify one or more target groups.\n      The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer.\n      The protocol of the target group must be TCP, TLS, UDP, or TCP_UDP for a Network Load Balancer.</p>\n         <p>[HTTPS listeners] If the action type is <code>authenticate-oidc</code>, you authenticate users through an identity provider \n      that is OpenID Connect (OIDC) compliant.</p>\n         <p>[HTTPS listeners] If the action type is <code>authenticate-cognito</code>, you authenticate users through the user pools\n      supported by Amazon Cognito.</p>\n         <p>[Application Load Balancer] If the action type is <code>redirect</code>, you redirect specified client requests \n      from one URL to another.</p>\n         <p>[Application Load Balancer] If the action type is <code>fixed-response</code>, you drop specified client requests \n      and return a custom HTTP response.</p>",
+            "smithy.api#documentation": "<p>The actions.</p>",
             "smithy.api#required": {}
           }
         },
@@ -1027,7 +1027,7 @@
         "Conditions": {
           "target": "com.amazonaws.elasticloadbalancingv2#RuleConditionList",
           "traits": {
-            "smithy.api#documentation": "<p>The conditions. \n      Each rule can optionally include up to one of each of the following conditions:\n      <code>http-request-method</code>, <code>host-header</code>, <code>path-pattern</code>, and <code>source-ip</code>. \n      Each rule can also optionally include one or more of each of the following conditions:\n      <code>http-header</code> and <code>query-string</code>.</p>",
+            "smithy.api#documentation": "<p>The conditions.</p>",
             "smithy.api#required": {}
           }
         }
@@ -1098,6 +1098,12 @@
             "smithy.api#documentation": "<p>The number of consecutive health check failures required before considering a target unhealthy. \n      For target groups with a protocol of HTTP or HTTPS, the default is 2. \n      For target groups with a protocol of TCP or TLS, this value must be the same as the healthy threshold count.\n      If the target type is <code>lambda</code>, the default is 2.</p>"
           }
         },
+        "ProtocolVersion": {
+          "target": "com.amazonaws.elasticloadbalancingv2#ProtocolVersion",
+          "traits": {
+            "smithy.api#documentation": "<p>[HTTP/HTTPS protocol] The protocol version. \n      Specify <code>GRPC</code> to send requests to targets using gRPC.\n      Specify <code>HTTP2</code> to send requests to targets using HTTP/2.\n      The default is <code>HTTP1</code>, which sends requests to targets using HTTP/1.1.</p>"
+          }
+        },
         "HealthCheckEnabled": {
           "target": "com.amazonaws.elasticloadbalancingv2#HealthCheckEnabled",
           "traits": {
@@ -1113,13 +1119,13 @@
         "HealthCheckPath": {
           "target": "com.amazonaws.elasticloadbalancingv2#Path",
           "traits": {
-            "smithy.api#documentation": "<p>[HTTP/HTTPS health checks] The ping path that is the destination on the targets for\n      health checks. The default is /.</p>"
+            "smithy.api#documentation": "<p>[HTTP/HTTPS health checks] The destination for health checks on the targets.</p>\n         <p>[HTTP1 or HTTP2 protocol version] The ping path. The default is /.</p>\n         <p>[GRPC protocol version] The path of a custom health check method with the format /package.service/method. \n      The default is /AWS.ALB/healthcheck.</p>"
           }
         },
         "Matcher": {
           "target": "com.amazonaws.elasticloadbalancingv2#Matcher",
           "traits": {
-            "smithy.api#documentation": "<p>[HTTP/HTTPS health checks] The HTTP codes to use when checking for a successful response from a target.</p>"
+            "smithy.api#documentation": "<p>[HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a successful \n      response from a target.</p>"
           }
         },
         "VpcId": {
@@ -2267,6 +2273,9 @@
         "smithy.api#documentation": "<p>Information about a forward action.</p>"
       }
     },
+    "com.amazonaws.elasticloadbalancingv2#GrpcCode": {
+      "type": "string"
+    },
     "com.amazonaws.elasticloadbalancingv2#HealthCheckEnabled": {
       "type": "boolean",
       "traits": {
@@ -2889,13 +2898,18 @@
         "HttpCode": {
           "target": "com.amazonaws.elasticloadbalancingv2#HttpCode",
           "traits": {
-            "smithy.api#documentation": "<p>The HTTP codes.</p>\n         <p>For Application Load Balancers, you can specify values between 200 and 499, and the\n      default value is 200. You can specify multiple values (for example, \"200,202\") or a range of\n      values (for example, \"200-299\").</p>\n         <p>For Network Load Balancers, this is 200–399.</p>",
-            "smithy.api#required": {}
+            "smithy.api#documentation": "<p>For Application Load Balancers, you can specify values between 200 and 499, and the\n      default value is 200. You can specify multiple values (for example, \"200,202\") or a range of\n      values (for example, \"200-299\").</p> \n         <p>For Network Load Balancers, this is \"200–399\".</p>"
+          }
+        },
+        "GrpcCode": {
+          "target": "com.amazonaws.elasticloadbalancingv2#GrpcCode",
+          "traits": {
+            "smithy.api#documentation": "<p>You can specify values between 0 and 99. You can specify multiple values \n      (for example, \"0,1\") or a range of values (for example, \"0-5\"). The default\n       value is 12.</p>"
           }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Information to use when checking for a successful response from a target.</p>"
+        "smithy.api#documentation": "<p>The codes to use when checking for a successful response from a target. If the protocol version \n      is gRPC, these are gRPC codes. Otherwise, these are HTTP codes.</p>"
       }
     },
     "com.amazonaws.elasticloadbalancingv2#Max": {
@@ -3003,7 +3017,7 @@
         "DefaultActions": {
           "target": "com.amazonaws.elasticloadbalancingv2#Actions",
           "traits": {
-            "smithy.api#documentation": "<p>The actions for the default rule. The rule must include one forward action or one or more fixed-response actions.</p>\n         <p>If the action type is <code>forward</code>, you specify one or more target groups.\n      The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer. \n      The protocol of the target group must be TCP, TLS, UDP, or TCP_UDP for a Network Load Balancer.</p>\n         <p>[HTTPS listeners] If the action type is <code>authenticate-oidc</code>, you authenticate users through an identity provider \n      that is OpenID Connect (OIDC) compliant.</p>\n         <p>[HTTPS listeners] If the action type is <code>authenticate-cognito</code>, you authenticate users through the user pools\n      supported by Amazon Cognito.</p>\n         <p>[Application Load Balancer] If the action type is <code>redirect</code>, you redirect specified client requests \n      from one URL to another.</p>\n         <p>[Application Load Balancer] If the action type is <code>fixed-response</code>, you drop specified client requests \n      and return a custom HTTP response.</p>"
+            "smithy.api#documentation": "<p>The actions for the default rule.</p>"
           }
         },
         "SslPolicy": {
@@ -3128,13 +3142,13 @@
         "Conditions": {
           "target": "com.amazonaws.elasticloadbalancingv2#RuleConditionList",
           "traits": {
-            "smithy.api#documentation": "<p>The conditions. Each rule can include zero or one of the following conditions:\n      <code>http-request-method</code>, <code>host-header</code>, <code>path-pattern</code>,\n      and <code>source-ip</code>, and zero or more of the following conditions:\n      <code>http-header</code> and <code>query-string</code>.</p>"
+            "smithy.api#documentation": "<p>The conditions.</p>"
           }
         },
         "Actions": {
           "target": "com.amazonaws.elasticloadbalancingv2#Actions",
           "traits": {
-            "smithy.api#documentation": "<p>The actions. Each rule must include exactly one of the following types of actions: \n      <code>forward</code>, <code>fixed-response</code>, or <code>redirect</code>, and it must be the\n      last action to be performed.</p>\n         <p>If the action type is <code>forward</code>, you specify one or more target groups.\n      The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer.\n      The protocol of the target group must be TCP, TLS, UDP, or TCP_UDP for a Network Load Balancer.</p>\n         <p>[HTTPS listeners] If the action type is <code>authenticate-oidc</code>, you authenticate users through an identity provider \n      that is OpenID Connect (OIDC) compliant.</p>\n         <p>[HTTPS listeners] If the action type is <code>authenticate-cognito</code>, you authenticate users through the user pools\n      supported by Amazon Cognito.</p>\n         <p>[Application Load Balancer] If the action type is <code>redirect</code>, you redirect specified client requests \n      from one URL to another.</p>\n         <p>[Application Load Balancer] If the action type is <code>fixed-response</code>, you drop specified client requests \n      and return a custom HTTP response.</p>"
+            "smithy.api#documentation": "<p>The actions.</p>"
           }
         },
         "RuleArn": {
@@ -3240,7 +3254,7 @@
         "HealthCheckIntervalSeconds": {
           "target": "com.amazonaws.elasticloadbalancingv2#HealthCheckIntervalSeconds",
           "traits": {
-            "smithy.api#documentation": "<p>The approximate amount of time, in seconds, between health checks of an individual\n      target. For Application Load Balancers, the range is 5 to 300 seconds. For Network Load\n      Balancers, the supported values are 10 or 30 seconds.</p>\n         <p>With Network Load Balancers, you can't modify this setting.</p>"
+            "smithy.api#documentation": "<p>The approximate amount of time, in seconds, between health checks of an individual\n      target. For HTTP and HTTPS health checks, the range is 5 to 300 seconds. For TPC\n      health checks, the supported values are 10 or 30 seconds.</p>\n         <p>With Network Load Balancers, you can't modify this setting.</p>"
           }
         },
         "HealthCheckPort": {
@@ -3270,7 +3284,7 @@
         "HealthCheckPath": {
           "target": "com.amazonaws.elasticloadbalancingv2#Path",
           "traits": {
-            "smithy.api#documentation": "<p>[HTTP/HTTPS health checks] The ping path that is the destination for the health check\n      request.</p>"
+            "smithy.api#documentation": "<p>[HTTP/HTTPS health checks] The destination for health checks on the targets.</p>\n         <p>[HTTP1 or HTTP2 protocol version] The ping path. The default is /.</p>\n         <p>[GRPC protocol version] The path of a custom health check method with the format /package.service/method. \n      The default is /AWS.ALB/healthcheck.</p>"
           }
         },
         "HealthCheckEnabled": {
@@ -3282,13 +3296,13 @@
         "UnhealthyThresholdCount": {
           "target": "com.amazonaws.elasticloadbalancingv2#HealthCheckThresholdCount",
           "traits": {
-            "smithy.api#documentation": "<p>The number of consecutive health check failures required before considering the target\n      unhealthy. For Network Load Balancers, this value must be the same as the healthy threshold\n      count.</p>"
+            "smithy.api#documentation": "<p>The number of consecutive health check failures required before considering the target\n      unhealthy. For target groups with a protocol of TCP or TLS, this value must be the same as \n      the healthy threshold count.</p>"
           }
         },
         "Matcher": {
           "target": "com.amazonaws.elasticloadbalancingv2#Matcher",
           "traits": {
-            "smithy.api#documentation": "<p>[HTTP/HTTPS health checks] The HTTP codes to use when checking for a successful\n      response from a target. The possible values are from 200 to 499. You can specify multiple\n      values (for example, \"200,202\") or a range of values (for example, \"200-299\"). The default\n      is 200.</p>\n         <p>With Network Load Balancers, you can't modify this setting.</p>"
+            "smithy.api#documentation": "<p>[HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a successful\n      response from a target.</p>\n         <p>With Network Load Balancers, you can't modify this setting.</p>"
           }
         }
       }
@@ -3406,6 +3420,9 @@
           }
         ]
       }
+    },
+    "com.amazonaws.elasticloadbalancingv2#ProtocolVersion": {
+      "type": "string"
     },
     "com.amazonaws.elasticloadbalancingv2#QueryStringConditionConfig": {
       "type": "structure",
@@ -3575,7 +3592,7 @@
         "Targets": {
           "target": "com.amazonaws.elasticloadbalancingv2#TargetDescriptions",
           "traits": {
-            "smithy.api#documentation": "<p>The targets.</p>\n         <p>To register a target by instance ID, specify the instance ID. \n      To register a target by IP address, specify the IP address. \n      To register a Lambda function, specify the ARN of the Lambda function.</p>",
+            "smithy.api#documentation": "<p>The targets.</p>",
             "smithy.api#required": {}
           }
         },
@@ -4430,13 +4447,19 @@
         "HealthCheckPath": {
           "target": "com.amazonaws.elasticloadbalancingv2#Path",
           "traits": {
-            "smithy.api#documentation": "<p>The destination for the health check request.</p>"
+            "smithy.api#documentation": "<p>The destination for health checks on the targets.</p>"
           }
         },
         "Port": {
           "target": "com.amazonaws.elasticloadbalancingv2#Port",
           "traits": {
             "smithy.api#documentation": "<p>The port on which the targets are listening. Not used if the target is a Lambda function.</p>"
+          }
+        },
+        "ProtocolVersion": {
+          "target": "com.amazonaws.elasticloadbalancingv2#ProtocolVersion",
+          "traits": {
+            "smithy.api#documentation": "<p>[HTTP/HTTPS protocol] The protocol version. The possible values are <code>GRPC</code>,\n      <code>HTTP1</code>, and <code>HTTP2</code>.</p>"
           }
         },
         "UnhealthyThresholdCount": {
@@ -4454,7 +4477,7 @@
         "Matcher": {
           "target": "com.amazonaws.elasticloadbalancingv2#Matcher",
           "traits": {
-            "smithy.api#documentation": "<p>The HTTP codes to use when checking for a successful response from a target.</p>"
+            "smithy.api#documentation": "<p>The HTTP or gRPC codes to use when checking for a successful response from a target.</p>"
           }
         }
       },

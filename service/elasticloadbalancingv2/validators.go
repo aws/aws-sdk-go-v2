@@ -797,21 +797,6 @@ func validateFixedResponseActionConfig(v *types.FixedResponseActionConfig) error
 	}
 }
 
-func validateMatcher(v *types.Matcher) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "Matcher"}
-	if v.HttpCode == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("HttpCode"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateRedirectActionConfig(v *types.RedirectActionConfig) error {
 	if v == nil {
 		return nil
@@ -1024,11 +1009,6 @@ func validateOpCreateTargetGroupInput(v *CreateTargetGroupInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateTargetGroupInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.Matcher != nil {
-		if err := validateMatcher(v.Matcher); err != nil {
-			invalidParams.AddNested("Matcher", err.(smithy.InvalidParamsError))
-		}
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
@@ -1287,11 +1267,6 @@ func validateOpModifyTargetGroupInput(v *ModifyTargetGroupInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyTargetGroupInput"}
 	if v.TargetGroupArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetGroupArn"))
-	}
-	if v.Matcher != nil {
-		if err := validateMatcher(v.Matcher); err != nil {
-			invalidParams.AddNested("Matcher", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

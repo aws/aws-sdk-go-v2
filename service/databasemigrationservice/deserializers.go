@@ -7552,6 +7552,126 @@ func awsAwsjson11_deserializeDocumentDmsTransferSettings(v **types.DmsTransferSe
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentDocDbSettings(v **types.DocDbSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DocDbSettings
+	if *v == nil {
+		sv = &types.DocDbSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DatabaseName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.DatabaseName = &jtv
+			}
+
+		case "DocsToInvestigate":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DocsToInvestigate = ptr.Int32(int32(i64))
+			}
+
+		case "ExtractDocId":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
+				}
+				sv.ExtractDocId = &jtv
+			}
+
+		case "KmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyId = &jtv
+			}
+
+		case "NestingLevel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NestingLevelValue to be of type string, got %T instead", value)
+				}
+				sv.NestingLevel = types.NestingLevelValue(jtv)
+			}
+
+		case "Password":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretString to be of type string, got %T instead", value)
+				}
+				sv.Password = &jtv
+			}
+
+		case "Port":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Port = ptr.Int32(int32(i64))
+			}
+
+		case "ServerName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ServerName = &jtv
+			}
+
+		case "Username":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Username = &jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentDynamoDbSettings(v **types.DynamoDbSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7709,6 +7829,11 @@ func awsAwsjson11_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 
 		case "DmsTransferSettings":
 			if err := awsAwsjson11_deserializeDocumentDmsTransferSettings(&sv.DmsTransferSettings, value); err != nil {
+				return err
+			}
+
+		case "DocDbSettings":
+			if err := awsAwsjson11_deserializeDocumentDocDbSettings(&sv.DocDbSettings, value); err != nil {
 				return err
 			}
 

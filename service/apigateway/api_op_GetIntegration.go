@@ -44,14 +44,6 @@ type GetIntegrationInput struct {
 	//
 	// This member is required.
 	RestApiId *string
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // Represents an HTTP, HTTP_PROXY, AWS, AWS_PROXY, or Mock integration. In the API

@@ -85,14 +85,6 @@ type GetGatewayResponseInput struct {
 	//
 	// This member is required.
 	RestApiId *string
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // A gateway response of a given response type and status code, with optional

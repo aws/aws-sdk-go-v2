@@ -37,14 +37,6 @@ type GetStagesInput struct {
 
 	// The stages' deployment identifiers.
 	DeploymentId *string
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // A list of Stage resources that are associated with the ApiKey resource.

@@ -33,14 +33,6 @@ type GetSdkTypeInput struct {
 	//
 	// This member is required.
 	Id *string
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // A type of SDK that API Gateway can generate.

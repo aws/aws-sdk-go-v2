@@ -42,14 +42,6 @@ type ImportDocumentationPartsInput struct {
 	// DocumentationParts definition or to merge (MERGE) the new definition into the
 	// existing one. The default value is MERGE.
 	Mode types.PutMode
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // A collection of the imported DocumentationPart identifiers. This is used to

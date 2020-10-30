@@ -131,6 +131,20 @@ type GenerateDataSetInput struct {
 	// us_sales_and_use_tax_records From 2017-09-15 to present: Available monthly on
 	// the 15th day of the month by 24:00 UTC.
 	//
+	// *
+	// disbursed_amount_by_product_with_uncollected_funds This data set is deprecated.
+	// Download related reports from AMMP instead!
+	//
+	// * customer_profile_by_industry This
+	// data set is deprecated. Download related reports from AMMP instead!
+	//
+	// *
+	// customer_profile_by_revenue This data set is deprecated. Download related
+	// reports from AMMP instead!
+	//
+	// * customer_profile_by_geography This data set is
+	// deprecated. Download related reports from AMMP instead!
+	//
 	// This member is required.
 	DataSetType types.DataSetType
 

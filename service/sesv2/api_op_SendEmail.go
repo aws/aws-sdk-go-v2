@@ -100,6 +100,10 @@ type SendEmailInput struct {
 	// content.
 	FromEmailAddressIdentityArn *string
 
+	// An object used to specify a list or topic to which an email belongs, which will
+	// be used when a contact chooses to unsubscribe.
+	ListManagementOptions *types.ListManagementOptions
+
 	// The "Reply-to" email addresses for the message. When the recipient replies to
 	// the message, each Reply-to address receives the reply.
 	ReplyToAddresses []*string

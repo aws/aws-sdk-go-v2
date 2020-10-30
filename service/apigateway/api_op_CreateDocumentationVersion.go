@@ -42,16 +42,8 @@ type CreateDocumentationVersionInput struct {
 	// A description about the new documentation snapshot.
 	Description *string
 
-	Name *string
-
 	// The stage name to be associated with the new documentation snapshot.
 	StageName *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // A snapshot of the documentation of an API. Publishing API documentation involves

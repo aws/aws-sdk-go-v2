@@ -14,16 +14,13 @@ import (
 // Deletes the assets in package versions and sets the package versions' status to
 // Disposed. A disposed package version cannot be restored in your repository
 // because its assets are deleted. To view all disposed package versions in a
-// repository, use ListackageVersions
+// repository, use ListPackageVersions
 // (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html)
 // and set the status
 // (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html#API_ListPackageVersions_RequestSyntax)
 // parameter to Disposed. To view information about a disposed package version, use
-// ListPackageVersions
-// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html)
-// and set the status
-// (https://docs.aws.amazon.com/API_ListPackageVersions.html#codeartifact-ListPackageVersions-response-status)
-// parameter to Disposed.
+// DescribePackageVersion
+// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DescribePackageVersion.html)..
 func (c *Client) DisposePackageVersions(ctx context.Context, params *DisposePackageVersionsInput, optFns ...func(*Options)) (*DisposePackageVersionsOutput, error) {
 	if params == nil {
 		params = &DisposePackageVersionsInput{}

@@ -80,6 +80,24 @@ func (ContactLanguage) Values() []ContactLanguage {
 	}
 }
 
+type ContactListImportAction string
+
+// Enum values for ContactListImportAction
+const (
+	ContactListImportActionDelete ContactListImportAction = "DELETE"
+	ContactListImportActionPut    ContactListImportAction = "PUT"
+)
+
+// Values returns all known values for ContactListImportAction. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ContactListImportAction) Values() []ContactListImportAction {
+	return []ContactListImportAction{
+		"DELETE",
+		"PUT",
+	}
+}
+
 type DataFormat string
 
 // Enum values for DataFormat
@@ -212,6 +230,7 @@ const (
 	EventTypeClick            EventType = "CLICK"
 	EventTypeRenderingFailure EventType = "RENDERING_FAILURE"
 	EventTypeDeliveryDelay    EventType = "DELIVERY_DELAY"
+	EventTypeSubscription     EventType = "SUBSCRIPTION"
 )
 
 // Values returns all known values for EventType. Note that this can be expanded in
@@ -228,6 +247,7 @@ func (EventType) Values() []EventType {
 		"CLICK",
 		"RENDERING_FAILURE",
 		"DELIVERY_DELAY",
+		"SUBSCRIPTION",
 	}
 }
 
@@ -256,6 +276,7 @@ type ImportDestinationType string
 // Enum values for ImportDestinationType
 const (
 	ImportDestinationTypeSuppressionList ImportDestinationType = "SUPPRESSION_LIST"
+	ImportDestinationTypeContactList     ImportDestinationType = "CONTACT_LIST"
 )
 
 // Values returns all known values for ImportDestinationType. Note that this can be
@@ -264,6 +285,7 @@ const (
 func (ImportDestinationType) Values() []ImportDestinationType {
 	return []ImportDestinationType{
 		"SUPPRESSION_LIST",
+		"CONTACT_LIST",
 	}
 }
 
@@ -348,6 +370,24 @@ func (ReviewStatus) Values() []ReviewStatus {
 		"FAILED",
 		"GRANTED",
 		"DENIED",
+	}
+}
+
+type SubscriptionStatus string
+
+// Enum values for SubscriptionStatus
+const (
+	SubscriptionStatusOptIn  SubscriptionStatus = "OPT_IN"
+	SubscriptionStatusOptOut SubscriptionStatus = "OPT_OUT"
+)
+
+// Values returns all known values for SubscriptionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SubscriptionStatus) Values() []SubscriptionStatus {
+	return []SubscriptionStatus{
+		"OPT_IN",
+		"OPT_OUT",
 	}
 }
 

@@ -38,14 +38,6 @@ type UntagResourceInput struct {
 	//
 	// This member is required.
 	TagKeys []*string
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 type UntagResourceOutput struct {

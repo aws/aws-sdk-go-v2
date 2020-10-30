@@ -4365,7 +4365,7 @@ func awsRestjson1_deserializeOpDocumentListComponentBuildVersionsOutput(v **List
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
 				}
 				sv.NextToken = &jtv
 			}
@@ -4548,7 +4548,7 @@ func awsRestjson1_deserializeOpDocumentListComponentsOutput(v **ListComponentsOu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
 				}
 				sv.NextToken = &jtv
 			}
@@ -4731,7 +4731,7 @@ func awsRestjson1_deserializeOpDocumentListDistributionConfigurationsOutput(v **
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
 				}
 				sv.NextToken = &jtv
 			}
@@ -4914,7 +4914,7 @@ func awsRestjson1_deserializeOpDocumentListImageBuildVersionsOutput(v **ListImag
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
 				}
 				sv.NextToken = &jtv
 			}
@@ -5100,7 +5100,7 @@ func awsRestjson1_deserializeOpDocumentListImagePipelineImagesOutput(v **ListIma
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
 				}
 				sv.NextToken = &jtv
 			}
@@ -5283,7 +5283,7 @@ func awsRestjson1_deserializeOpDocumentListImagePipelinesOutput(v **ListImagePip
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
 				}
 				sv.NextToken = &jtv
 			}
@@ -5466,7 +5466,7 @@ func awsRestjson1_deserializeOpDocumentListImageRecipesOutput(v **ListImageRecip
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
 				}
 				sv.NextToken = &jtv
 			}
@@ -5649,7 +5649,7 @@ func awsRestjson1_deserializeOpDocumentListImagesOutput(v **ListImagesOutput, va
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
 				}
 				sv.NextToken = &jtv
 			}
@@ -5832,7 +5832,7 @@ func awsRestjson1_deserializeOpDocumentListInfrastructureConfigurationsOutput(v 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
 				}
 				sv.NextToken = &jtv
 			}

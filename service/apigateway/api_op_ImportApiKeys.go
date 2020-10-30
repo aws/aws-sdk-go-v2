@@ -40,14 +40,6 @@ type ImportApiKeysInput struct {
 	// A query parameter to indicate whether to rollback ApiKey importation (true) or
 	// not (false) when error is encountered.
 	FailOnWarnings *bool
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // The identifier of an ApiKey used in a UsagePlan.

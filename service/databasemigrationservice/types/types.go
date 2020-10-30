@@ -114,6 +114,46 @@ type DmsTransferSettings struct {
 	ServiceAccessRoleArn *string
 }
 
+// Provides information that defines a DocumentDB endpoint.
+type DocDbSettings struct {
+
+	// The database name on the DocumentDB source endpoint.
+	DatabaseName *string
+
+	// Indicates the number of documents to preview to determine the document
+	// organization. Use this setting when NestingLevel is set to "one". Must be a
+	// positive value greater than 0. Default value is 1000.
+	DocsToInvestigate *int32
+
+	// Specifies the document ID. Use this setting when NestingLevel is set to "none".
+	// Default value is "false".
+	ExtractDocId *bool
+
+	// The AWS KMS key identifier that is used to encrypt the content on the
+	// replication instance. If you don't specify a value for the KmsKeyId parameter,
+	// then AWS DMS uses your default encryption key. AWS KMS creates the default
+	// encryption key for your AWS account. Your AWS account has a different default
+	// encryption key for each AWS Region.
+	KmsKeyId *string
+
+	// Specifies either document or table mode. Default value is "none". Specify "none"
+	// to use document mode. Specify "one" to use table mode.
+	NestingLevel NestingLevelValue
+
+	// The password for the user account you use to access the DocumentDB source
+	// endpoint.
+	Password *string
+
+	// The port value for the DocumentDB source endpoint.
+	Port *int32
+
+	// The name of the server on the DocumentDB source endpoint.
+	ServerName *string
+
+	// The user name you use to access the DocumentDB source endpoint.
+	Username *string
+}
+
 // Provides the Amazon Resource Name (ARN) of the AWS Identity and Access
 // Management (IAM) role used to define an Amazon DynamoDB target endpoint.
 type DynamoDbSettings struct {
@@ -188,6 +228,9 @@ type Endpoint struct {
 	// for these settings is as follows: { "ServiceAccessRoleArn": "string",
 	// "BucketName": "string", "CompressionType": "none"|"gzip" }
 	DmsTransferSettings *DmsTransferSettings
+
+	// Provides information that defines a DocumentDB endpoint.
+	DocDbSettings *DocDbSettings
 
 	// The settings for the DynamoDB target endpoint. For more information, see the
 	// DynamoDBSettings structure.
@@ -1793,7 +1836,7 @@ type S3Settings struct {
 	// When set to true, this parameter partitions S3 bucket folders based on
 	// transaction commit dates. The default value is false. For more information about
 	// date-based folder partitoning, see Using date-based folder partitioning
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.ConnectionAttrib)
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.DatePartitioning).
 	DatePartitionEnabled *bool
 
 	// Identifies the sequence of the date format to use during folder partitioning.

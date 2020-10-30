@@ -46,6 +46,10 @@ type DomainDescription struct {
 	// The number of repositories in the domain.
 	RepositoryCount *int32
 
+	// The Amazon Resource Name (ARN) of the Amazon S3 bucket that is used to store
+	// package assets in the domain.
+	S3BucketArn *string
+
 	// The current status of a domain. The valid values are
 	//
 	// * Active
@@ -407,6 +411,21 @@ type SuccessfulPackageVersionInfo struct {
 	//
 	// * Disposed
 	Status PackageVersionStatus
+}
+
+// A tag is a key-value pair that can be used to manage, search for, or filter
+// resources in AWS CodeArtifact.
+type Tag struct {
+
+	// The tag's key.
+	//
+	// This member is required.
+	Key *string
+
+	// The tag's value.
+	//
+	// This member is required.
+	Value *string
 }
 
 // Information about an upstream repository. A list of UpstreamRepository objects

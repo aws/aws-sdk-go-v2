@@ -19,8 +19,11 @@ type Endpoint struct {
 // value must not be empty or null. In addition, the message body should not be
 // empty or null. All parts of the message attribute, including name, type, and
 // value, are included in the message size restriction, which is currently 256 KB
-// (262,144 bytes). For more information, see Using Amazon SNS Message Attributes
-// (https://docs.aws.amazon.com/sns/latest/dg/SNSMessageAttributes.html).
+// (262,144 bytes). For more information, see Amazon SNS message attributes
+// (https://docs.aws.amazon.com/sns/latest/dg/SNSMessageAttributes.html) and
+// Publishing to a mobile phone
+// (https://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html) in the
+// Amazon SNS Developer Guide.
 type MessageAttributeValue struct {
 
 	// Amazon SNS supports the following logical data types: String, String.Array,

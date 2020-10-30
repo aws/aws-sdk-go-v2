@@ -50,17 +50,9 @@ type UpdateMethodResponseInput struct {
 	// This member is required.
 	StatusCode *string
 
-	Name *string
-
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []*types.PatchOperation
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // Represents a method response of a given HTTP status code returned to the client.

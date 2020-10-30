@@ -60,6 +60,65 @@ func (e *DBClusterAlreadyExistsFault) ErrorMessage() string {
 func (e *DBClusterAlreadyExistsFault) ErrorCode() string             { return "DBClusterAlreadyExistsFault" }
 func (e *DBClusterAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified custom endpoint cannot be created because it already exists.
+type DBClusterEndpointAlreadyExistsFault struct {
+	Message *string
+}
+
+func (e *DBClusterEndpointAlreadyExistsFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DBClusterEndpointAlreadyExistsFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DBClusterEndpointAlreadyExistsFault) ErrorCode() string {
+	return "DBClusterEndpointAlreadyExistsFault"
+}
+func (e *DBClusterEndpointAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The specified custom endpoint doesn't exist.
+type DBClusterEndpointNotFoundFault struct {
+	Message *string
+}
+
+func (e *DBClusterEndpointNotFoundFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DBClusterEndpointNotFoundFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DBClusterEndpointNotFoundFault) ErrorCode() string             { return "DBClusterEndpointNotFoundFault" }
+func (e *DBClusterEndpointNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The cluster already has the maximum number of custom endpoints.
+type DBClusterEndpointQuotaExceededFault struct {
+	Message *string
+}
+
+func (e *DBClusterEndpointQuotaExceededFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DBClusterEndpointQuotaExceededFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DBClusterEndpointQuotaExceededFault) ErrorCode() string {
+	return "DBClusterEndpointQuotaExceededFault"
+}
+func (e *DBClusterEndpointQuotaExceededFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // DBClusterIdentifier does not refer to an existing DB cluster.
 type DBClusterNotFoundFault struct {
 	Message *string
@@ -590,6 +649,28 @@ func (e *InsufficientStorageClusterCapacityFault) ErrorCode() string {
 	return "InsufficientStorageClusterCapacityFault"
 }
 func (e *InsufficientStorageClusterCapacityFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The requested operation cannot be performed on the endpoint while the endpoint
+// is in this state.
+type InvalidDBClusterEndpointStateFault struct {
+	Message *string
+}
+
+func (e *InvalidDBClusterEndpointStateFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidDBClusterEndpointStateFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidDBClusterEndpointStateFault) ErrorCode() string {
+	return "InvalidDBClusterEndpointStateFault"
+}
+func (e *InvalidDBClusterEndpointStateFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 

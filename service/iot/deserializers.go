@@ -39122,6 +39122,15 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				sv.LastUpdatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
+		case "namespaceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NamespaceId to be of type string, got %T instead", value)
+				}
+				sv.NamespaceId = &jtv
+			}
+
 		case "presignedUrlConfig":
 			if err := awsRestjson1_deserializeDocumentPresignedUrlConfig(&sv.PresignedUrlConfig, value); err != nil {
 				return err

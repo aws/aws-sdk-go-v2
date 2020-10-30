@@ -36,19 +36,19 @@ import (
 // * Replication group message: Test Failover
 // API called for node group
 //
-// * Cache cluster message: Failover from master node to
-// replica node completed
-//
-// * Replication group message: Failover from master node
+// * Cache cluster message: Failover from primary node
 // to replica node completed
 //
-// * Cache cluster message: Recovering cache nodes
+// * Replication group message: Failover from primary
+// node to replica node completed
 //
-// *
-// Cache cluster message: Finished recovery for cache nodes
+// * Cache cluster message: Recovering cache
+// nodes
 //
-// For more information
-// see:
+// * Cache cluster message: Finished recovery for cache nodes
+//
+// For more
+// information see:
 //
 // * Viewing ElastiCache Events
 // (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ECEvents.Viewing.html)

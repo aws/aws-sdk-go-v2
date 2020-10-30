@@ -53,7 +53,7 @@ type DescribeAppInput struct {
 
 type DescribeAppOutput struct {
 
-	// The app's Amazon Resource Name (ARN).
+	// The Amazon Resource Name (ARN) of the app.
 	AppArn *string
 
 	// The name of the app.

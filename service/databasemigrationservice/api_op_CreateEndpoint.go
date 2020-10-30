@@ -77,6 +77,9 @@ type CreateEndpointInput struct {
 	// "BucketName": "string", "CompressionType": "none"|"gzip" }
 	DmsTransferSettings *types.DmsTransferSettings
 
+	// Provides information that defines a DocumentDB endpoint.
+	DocDbSettings *types.DocDbSettings
+
 	// Settings in JSON format for the target Amazon DynamoDB endpoint. For information
 	// about other available settings, see Using Object Mapping to Migrate Data to
 	// DynamoDB

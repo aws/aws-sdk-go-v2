@@ -38,14 +38,6 @@ type GetDocumentationVersionInput struct {
 	//
 	// This member is required.
 	RestApiId *string
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // A snapshot of the documentation of an API. Publishing API documentation involves

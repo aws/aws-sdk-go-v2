@@ -55,6 +55,12 @@ var defaultPartitions = endpoints.Partitions{
 					Region: "us-east-1",
 				},
 			},
+			"fips-aws-global": endpoints.Endpoint{
+				Hostname: "route53-fips.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
 		},
 	},
 	{
@@ -117,6 +123,12 @@ var defaultPartitions = endpoints.Partitions{
 		PartitionEndpoint: "aws-us-gov-global",
 		Endpoints: endpoints.Endpoints{
 			"aws-us-gov-global": endpoints.Endpoint{
+				Hostname: "route53.us-gov.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+			},
+			"fips-aws-us-gov-global": endpoints.Endpoint{
 				Hostname: "route53.us-gov.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-gov-west-1",

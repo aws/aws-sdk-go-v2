@@ -1538,27 +1538,27 @@
         "AverageLength": {
           "target": "com.amazonaws.glue#NonNegativeDouble",
           "traits": {
-            "smithy.api#documentation": "<p>Average length of the column.</p>",
+            "smithy.api#documentation": "<p>The average bit sequence length in the column.</p>",
             "smithy.api#required": {}
           }
         },
         "NumberOfNulls": {
           "target": "com.amazonaws.glue#NonNegativeLong",
           "traits": {
-            "smithy.api#documentation": "<p>Number of nulls.</p>",
+            "smithy.api#documentation": "<p>The number of null values in the column.</p>",
             "smithy.api#required": {}
           }
         },
         "MaximumLength": {
           "target": "com.amazonaws.glue#NonNegativeLong",
           "traits": {
-            "smithy.api#documentation": "<p>Maximum length of the column.</p>",
+            "smithy.api#documentation": "<p>The size of the longest bit sequence in the column.</p>",
             "smithy.api#required": {}
           }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Defines a binary column statistics data.</p>"
+        "smithy.api#documentation": "<p>Defines column statistics supported for bit sequence data values.</p>"
       }
     },
     "com.amazonaws.glue#Blob": {
@@ -1573,27 +1573,27 @@
         "NumberOfFalses": {
           "target": "com.amazonaws.glue#NonNegativeLong",
           "traits": {
-            "smithy.api#documentation": "<p>Number of false value.</p>",
+            "smithy.api#documentation": "<p>The number of false values in the column.</p>",
             "smithy.api#required": {}
           }
         },
         "NumberOfTrues": {
           "target": "com.amazonaws.glue#NonNegativeLong",
           "traits": {
-            "smithy.api#documentation": "<p>Number of true value.</p>",
+            "smithy.api#documentation": "<p>The number of true values in the column.</p>",
             "smithy.api#required": {}
           }
         },
         "NumberOfNulls": {
           "target": "com.amazonaws.glue#NonNegativeLong",
           "traits": {
-            "smithy.api#documentation": "<p>Number of nulls.</p>",
+            "smithy.api#documentation": "<p>The number of null values in the column.</p>",
             "smithy.api#required": {}
           }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Defines a boolean column statistics.</p>"
+        "smithy.api#documentation": "<p>Defines column statistics supported for Boolean data columns.</p>"
       }
     },
     "com.amazonaws.glue#BooleanNullable": {
@@ -2046,18 +2046,18 @@
         "ColumnName": {
           "target": "com.amazonaws.glue#NameString",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the column.</p>"
+            "smithy.api#documentation": "<p>The name of the column that failed.</p>"
           }
         },
         "Error": {
           "target": "com.amazonaws.glue#ErrorDetail",
           "traits": {
-            "smithy.api#documentation": "<p>The error message occurred during operation.</p>"
+            "smithy.api#documentation": "<p>An error message with the reason for the failure of an operation.</p>"
           }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Defines a column containing error.</p>"
+        "smithy.api#documentation": "<p>Encapsulates a column name that failed and the reason for failure.</p>"
       }
     },
     "com.amazonaws.glue#ColumnErrors": {
@@ -2088,34 +2088,34 @@
         "ColumnName": {
           "target": "com.amazonaws.glue#NameString",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the column.</p>",
+            "smithy.api#documentation": "<p>Name of column which statistics belong to.</p>",
             "smithy.api#required": {}
           }
         },
         "StatisticsData": {
           "target": "com.amazonaws.glue#ColumnStatisticsData",
           "traits": {
-            "smithy.api#documentation": "<p>The statistics of the column.</p>",
+            "smithy.api#documentation": "<p>A <code>ColumnStatisticData</code> object that contains the statistics data values.</p>",
             "smithy.api#required": {}
           }
         },
         "AnalyzedTime": {
           "target": "com.amazonaws.glue#Timestamp",
           "traits": {
-            "smithy.api#documentation": "<p>The analyzed time of the column statistics.</p>",
+            "smithy.api#documentation": "<p>The timestamp of when column statistics were generated.</p>",
             "smithy.api#required": {}
           }
         },
         "ColumnType": {
           "target": "com.amazonaws.glue#TypeString",
           "traits": {
-            "smithy.api#documentation": "<p>The type of the column.</p>",
+            "smithy.api#documentation": "<p>The data type of the column.</p>",
             "smithy.api#required": {}
           }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Defines a column statistics.</p>"
+        "smithy.api#documentation": "<p>Represents the generated column-level statistics for a table or partition.</p>"
       }
     },
     "com.amazonaws.glue#ColumnStatisticsData": {
@@ -2124,55 +2124,55 @@
         "BooleanColumnStatisticsData": {
           "target": "com.amazonaws.glue#BooleanColumnStatisticsData",
           "traits": {
-            "smithy.api#documentation": "<p>Boolean Column Statistics Data.</p>"
+            "smithy.api#documentation": "<p>Boolean column statistics data.</p>"
           }
         },
         "DecimalColumnStatisticsData": {
           "target": "com.amazonaws.glue#DecimalColumnStatisticsData",
           "traits": {
-            "smithy.api#documentation": "<p>Decimal Column Statistics Data.</p>"
+            "smithy.api#documentation": "<p>Decimal column statistics data.</p>"
           }
         },
         "BinaryColumnStatisticsData": {
           "target": "com.amazonaws.glue#BinaryColumnStatisticsData",
           "traits": {
-            "smithy.api#documentation": "<p>Binary Column Statistics Data.</p>"
+            "smithy.api#documentation": "<p>Binary column statistics data.</p>"
           }
         },
         "DoubleColumnStatisticsData": {
           "target": "com.amazonaws.glue#DoubleColumnStatisticsData",
           "traits": {
-            "smithy.api#documentation": "<p>Double Column Statistics Data.</p>"
+            "smithy.api#documentation": "<p>Double column statistics data.</p>"
           }
         },
         "LongColumnStatisticsData": {
           "target": "com.amazonaws.glue#LongColumnStatisticsData",
           "traits": {
-            "smithy.api#documentation": "<p>Long Column Statistics Data.</p>"
+            "smithy.api#documentation": "<p>Long column statistics data.</p>"
           }
         },
         "Type": {
           "target": "com.amazonaws.glue#ColumnStatisticsType",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the column.</p>",
+            "smithy.api#documentation": "<p>The type of column statistics data.</p>",
             "smithy.api#required": {}
           }
         },
         "StringColumnStatisticsData": {
           "target": "com.amazonaws.glue#StringColumnStatisticsData",
           "traits": {
-            "smithy.api#documentation": "<p>String Column Statistics Data.</p>"
+            "smithy.api#documentation": "<p>String column statistics data.</p>"
           }
         },
         "DateColumnStatisticsData": {
           "target": "com.amazonaws.glue#DateColumnStatisticsData",
           "traits": {
-            "smithy.api#documentation": "<p>Date Column Statistics Data.</p>"
+            "smithy.api#documentation": "<p>Date column statistics data.</p>"
           }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Defines a column statistics data.</p>"
+        "smithy.api#documentation": "<p>Contains the individual types of column statistics data. Only one data object should be set and indicated by the <code>Type</code> attribute.</p>"
       }
     },
     "com.amazonaws.glue#ColumnStatisticsError": {
@@ -2181,18 +2181,18 @@
         "Error": {
           "target": "com.amazonaws.glue#ErrorDetail",
           "traits": {
-            "smithy.api#documentation": "<p>The error message occurred during operation.</p>"
+            "smithy.api#documentation": "<p>An error message with the reason for the failure of an operation.</p>"
           }
         },
         "ColumnStatistics": {
           "target": "com.amazonaws.glue#ColumnStatistics",
           "traits": {
-            "smithy.api#documentation": "<p>The ColumnStatistics of the column.</p>"
+            "smithy.api#documentation": "<p>The <code>ColumnStatistics</code> of the column.</p>"
           }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Defines a column containing error.</p>"
+        "smithy.api#documentation": "<p>Encapsulates a <code>ColumnStatistics</code> object that failed and the reason for failure.</p>"
       }
     },
     "com.amazonaws.glue#ColumnStatisticsErrors": {
@@ -3969,29 +3969,11 @@
     "com.amazonaws.glue#CreateMLTransformRequest": {
       "type": "structure",
       "members": {
-        "Timeout": {
-          "target": "com.amazonaws.glue#Timeout",
-          "traits": {
-            "smithy.api#documentation": "<p>The timeout of the task run for this transform in minutes. This is the maximum time that a task run for this transform can consume resources before it is terminated and enters <code>TIMEOUT</code> status. The default is 2,880 minutes (48 hours).</p>"
-          }
-        },
         "Name": {
           "target": "com.amazonaws.glue#NameString",
           "traits": {
             "smithy.api#documentation": "<p>The unique name that you give the transform when you create it.</p>",
             "smithy.api#required": {}
-          }
-        },
-        "MaxCapacity": {
-          "target": "com.amazonaws.glue#NullableDouble",
-          "traits": {
-            "smithy.api#documentation": "<p>The number of AWS Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of\n      processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more\n      information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue pricing\n        page</a>. </p>\n\t\t\n\t\t\t      <p>\n            <code>MaxCapacity</code> is a mutually exclusive option with <code>NumberOfWorkers</code> and <code>WorkerType</code>.</p>\n        <ul>\n            <li>\n               <p>If either <code>NumberOfWorkers</code> or <code>WorkerType</code> is set, then <code>MaxCapacity</code> cannot be set.</p>\n            </li>\n            <li>\n               <p>If <code>MaxCapacity</code> is set then neither <code>NumberOfWorkers</code> or <code>WorkerType</code> can be set.</p>\n            </li>\n            <li>\n               <p>If <code>WorkerType</code> is set, then <code>NumberOfWorkers</code> is required (and vice versa).</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaxCapacity</code> and <code>NumberOfWorkers</code> must both be at least 1.</p>\n            </li>\n         </ul>\n\t\t\n\t        <p>When the <code>WorkerType</code> field is set to a value other than <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically and becomes read-only.</p>\t  \n   \n\t\t\n         <p>When the <code>WorkerType</code> field is set to a value other than <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically and becomes read-only.</p>"
-          }
-        },
-        "Description": {
-          "target": "com.amazonaws.glue#DescriptionString",
-          "traits": {
-            "smithy.api#documentation": "<p>A description of the machine learning transform that is being defined. The default is an\n      empty string.</p>"
           }
         },
         "Role": {
@@ -4007,6 +3989,43 @@
             "smithy.api#documentation": "<p>The number of workers of a defined <code>workerType</code> that are allocated when this task runs.</p>\n\t\n\t\t       <p>If <code>WorkerType</code> is set, then <code>NumberOfWorkers</code> is required (and vice versa).</p>"
           }
         },
+        "TransformEncryption": {
+          "target": "com.amazonaws.glue#TransformEncryption",
+          "traits": {
+            "smithy.api#documentation": "<p>The encryption-at-rest settings of the transform that apply to accessing user data. Machine learning transforms can access user data encrypted in Amazon S3 using KMS.</p>"
+          }
+        },
+        "Parameters": {
+          "target": "com.amazonaws.glue#TransformParameters",
+          "traits": {
+            "smithy.api#documentation": "<p>The algorithmic parameters that are specific to the transform type used. Conditionally\n      dependent on the transform type.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "GlueVersion": {
+          "target": "com.amazonaws.glue#GlueVersionString",
+          "traits": {
+            "smithy.api#documentation": "<p>This value determines which version of AWS Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9.  For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions\">AWS Glue Versions</a> in the developer guide.</p>"
+          }
+        },
+        "Timeout": {
+          "target": "com.amazonaws.glue#Timeout",
+          "traits": {
+            "smithy.api#documentation": "<p>The timeout of the task run for this transform in minutes. This is the maximum time that a task run for this transform can consume resources before it is terminated and enters <code>TIMEOUT</code> status. The default is 2,880 minutes (48 hours).</p>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.glue#DescriptionString",
+          "traits": {
+            "smithy.api#documentation": "<p>A description of the machine learning transform that is being defined. The default is an\n      empty string.</p>"
+          }
+        },
+        "MaxCapacity": {
+          "target": "com.amazonaws.glue#NullableDouble",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of AWS Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of\n      processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more\n      information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue pricing\n        page</a>. </p>\n\t\t\n\t\t\t      <p>\n            <code>MaxCapacity</code> is a mutually exclusive option with <code>NumberOfWorkers</code> and <code>WorkerType</code>.</p>\n        <ul>\n            <li>\n               <p>If either <code>NumberOfWorkers</code> or <code>WorkerType</code> is set, then <code>MaxCapacity</code> cannot be set.</p>\n            </li>\n            <li>\n               <p>If <code>MaxCapacity</code> is set then neither <code>NumberOfWorkers</code> or <code>WorkerType</code> can be set.</p>\n            </li>\n            <li>\n               <p>If <code>WorkerType</code> is set, then <code>NumberOfWorkers</code> is required (and vice versa).</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaxCapacity</code> and <code>NumberOfWorkers</code> must both be at least 1.</p>\n            </li>\n         </ul>\n\t\t\n\t        <p>When the <code>WorkerType</code> field is set to a value other than <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically and becomes read-only.</p>\t  \n   \n\t\t\n         <p>When the <code>WorkerType</code> field is set to a value other than <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically and becomes read-only.</p>"
+          }
+        },
         "Tags": {
           "target": "com.amazonaws.glue#TagsMap",
           "traits": {
@@ -4020,23 +4039,10 @@
             "smithy.api#required": {}
           }
         },
-        "Parameters": {
-          "target": "com.amazonaws.glue#TransformParameters",
-          "traits": {
-            "smithy.api#documentation": "<p>The algorithmic parameters that are specific to the transform type used. Conditionally\n      dependent on the transform type.</p>",
-            "smithy.api#required": {}
-          }
-        },
         "WorkerType": {
           "target": "com.amazonaws.glue#WorkerType",
           "traits": {
             "smithy.api#documentation": "<p>The type of predefined worker that is allocated when this task runs. Accepts a value of Standard, G.1X, or G.2X.</p>\n\t        <ul>\n            <li>\n               <p>For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.</p>\n            </li>\n            <li>\n               <p>For the <code>G.1X</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 64GB disk, and 1 executor per worker.</p>\n            </li>\n            <li>\n               <p>For the <code>G.2X</code> worker type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per worker.</p>\n            </li>\n         </ul>\n\t\n\t        <p>\n            <code>MaxCapacity</code> is a mutually exclusive option with <code>NumberOfWorkers</code> and <code>WorkerType</code>.</p>\n        <ul>\n            <li>\n               <p>If either <code>NumberOfWorkers</code> or <code>WorkerType</code> is set, then <code>MaxCapacity</code> cannot be set.</p>\n            </li>\n            <li>\n               <p>If <code>MaxCapacity</code> is set then neither <code>NumberOfWorkers</code> or <code>WorkerType</code> can be set.</p>\n            </li>\n            <li>\n               <p>If <code>WorkerType</code> is set, then <code>NumberOfWorkers</code> is required (and vice versa).</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaxCapacity</code> and <code>NumberOfWorkers</code> must both be at least 1.</p>\n            </li>\n         </ul>"
-          }
-        },
-        "GlueVersion": {
-          "target": "com.amazonaws.glue#GlueVersionString",
-          "traits": {
-            "smithy.api#documentation": "<p>This value determines which version of AWS Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9.  For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions\">AWS Glue Versions</a> in the developer guide.</p>"
           }
         },
         "MaxRetries": {
@@ -4928,32 +4934,32 @@
         "NumberOfDistinctValues": {
           "target": "com.amazonaws.glue#NonNegativeLong",
           "traits": {
-            "smithy.api#documentation": "<p>Number of distinct values.</p>",
+            "smithy.api#documentation": "<p>The number of distinct values in a column.</p>",
             "smithy.api#required": {}
           }
         },
         "MinimumValue": {
           "target": "com.amazonaws.glue#Timestamp",
           "traits": {
-            "smithy.api#documentation": "<p>Minimum value of the column.</p>"
+            "smithy.api#documentation": "<p>The lowest value in the column.</p>"
           }
         },
         "MaximumValue": {
           "target": "com.amazonaws.glue#Timestamp",
           "traits": {
-            "smithy.api#documentation": "<p>Maximum value of the column.</p>"
+            "smithy.api#documentation": "<p>The highest value in the column.</p>"
           }
         },
         "NumberOfNulls": {
           "target": "com.amazonaws.glue#NonNegativeLong",
           "traits": {
-            "smithy.api#documentation": "<p>Number of nulls.</p>",
+            "smithy.api#documentation": "<p>The number of null values in the column.</p>",
             "smithy.api#required": {}
           }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Defines a date column statistics data.</p>"
+        "smithy.api#documentation": "<p>Defines column statistics supported for timestamp data columns.</p>"
       }
     },
     "com.amazonaws.glue#DecimalColumnStatisticsData": {
@@ -4962,32 +4968,32 @@
         "MaximumValue": {
           "target": "com.amazonaws.glue#DecimalNumber",
           "traits": {
-            "smithy.api#documentation": "<p>Maximum value of the column.</p>"
+            "smithy.api#documentation": "<p>The highest value in the column.</p>"
           }
         },
         "MinimumValue": {
           "target": "com.amazonaws.glue#DecimalNumber",
           "traits": {
-            "smithy.api#documentation": "<p>Minimum value of the column.</p>"
+            "smithy.api#documentation": "<p>The lowest value in the column.</p>"
           }
         },
         "NumberOfNulls": {
           "target": "com.amazonaws.glue#NonNegativeLong",
           "traits": {
-            "smithy.api#documentation": "<p>Number of nulls.</p>",
+            "smithy.api#documentation": "<p>The number of null values in the column.</p>",
             "smithy.api#required": {}
           }
         },
         "NumberOfDistinctValues": {
           "target": "com.amazonaws.glue#NonNegativeLong",
           "traits": {
-            "smithy.api#documentation": "<p>Number of distinct values.</p>",
+            "smithy.api#documentation": "<p>The number of distinct values in a column.</p>",
             "smithy.api#required": {}
           }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Defines a decimal column statistics data.</p>"
+        "smithy.api#documentation": "<p>Defines column statistics supported for fixed-point number data columns.</p>"
       }
     },
     "com.amazonaws.glue#DecimalNumber": {
@@ -5093,7 +5099,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Delete the partition column statistics of a column.</p>"
+        "smithy.api#documentation": "<p>Delete the partition column statistics of a column.</p>\n\t\n\t        <p>The Identity and Access Management (IAM) permission required for this operation is <code>DeletePartition</code>.</p>"
       }
     },
     "com.amazonaws.glue#DeleteColumnStatisticsForPartitionRequest": {
@@ -5165,7 +5171,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Retrieves table statistics of columns.</p>"
+        "smithy.api#documentation": "<p>Retrieves table statistics of columns.</p>\n\t\n\t        <p>The Identity and Access Management (IAM) permission required for this operation is <code>DeleteTable</code>.</p>"
       }
     },
     "com.amazonaws.glue#DeleteColumnStatisticsForTableRequest": {
@@ -6140,32 +6146,32 @@
         "NumberOfDistinctValues": {
           "target": "com.amazonaws.glue#NonNegativeLong",
           "traits": {
-            "smithy.api#documentation": "<p>Number of distinct values.</p>",
+            "smithy.api#documentation": "<p>The number of distinct values in a column.</p>",
             "smithy.api#required": {}
           }
         },
         "NumberOfNulls": {
           "target": "com.amazonaws.glue#NonNegativeLong",
           "traits": {
-            "smithy.api#documentation": "<p>Number of nulls.</p>",
+            "smithy.api#documentation": "<p>The number of null values in the column.</p>",
             "smithy.api#required": {}
           }
         },
         "MaximumValue": {
           "target": "com.amazonaws.glue#Double",
           "traits": {
-            "smithy.api#documentation": "<p>Maximum value of the column.</p>"
+            "smithy.api#documentation": "<p>The highest value in the column.</p>"
           }
         },
         "MinimumValue": {
           "target": "com.amazonaws.glue#Double",
           "traits": {
-            "smithy.api#documentation": "<p>Minimum value of the column.</p>"
+            "smithy.api#documentation": "<p>The lowest value in the column.</p>"
           }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Defines a double column statistics data.</p>"
+        "smithy.api#documentation": "<p>Defines column statistics supported for floating-point number data columns.</p>"
       }
     },
     "com.amazonaws.glue#DynamoDBTarget": {
@@ -6726,7 +6732,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Retrieves partition statistics of columns.</p>"
+        "smithy.api#documentation": "<p>Retrieves partition statistics of columns.</p>\n\t\n\t        <p>The Identity and Access Management (IAM) permission required for this operation is <code>GetPartition</code>.</p>"
       }
     },
     "com.amazonaws.glue#GetColumnStatisticsForPartitionRequest": {
@@ -6811,7 +6817,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Retrieves table statistics of columns.</p>"
+        "smithy.api#documentation": "<p>Retrieves table statistics of columns.</p>\n\t\n         <p>The Identity and Access Management (IAM) permission required for this operation is <code>GetTable</code>.</p>"
       }
     },
     "com.amazonaws.glue#GetColumnStatisticsForTableRequest": {
@@ -8181,6 +8187,12 @@
           "target": "com.amazonaws.glue#DescriptionString",
           "traits": {
             "smithy.api#documentation": "<p>A description of the transform.</p>"
+          }
+        },
+        "TransformEncryption": {
+          "target": "com.amazonaws.glue#TransformEncryption",
+          "traits": {
+            "smithy.api#documentation": "<p>The encryption-at-rest settings of the transform that apply to accessing user data. Machine learning transforms can access user data encrypted in Amazon S3 using KMS.</p>"
           }
         }
       }
@@ -11452,32 +11464,32 @@
         "NumberOfDistinctValues": {
           "target": "com.amazonaws.glue#NonNegativeLong",
           "traits": {
-            "smithy.api#documentation": "<p>Number of distinct values.</p>",
+            "smithy.api#documentation": "<p>The number of distinct values in a column.</p>",
             "smithy.api#required": {}
           }
         },
         "MaximumValue": {
           "target": "com.amazonaws.glue#Long",
           "traits": {
-            "smithy.api#documentation": "<p>Maximum value of the column.</p>"
+            "smithy.api#documentation": "<p>The highest value in the column.</p>"
           }
         },
         "NumberOfNulls": {
           "target": "com.amazonaws.glue#NonNegativeLong",
           "traits": {
-            "smithy.api#documentation": "<p>Number of nulls.</p>",
+            "smithy.api#documentation": "<p>The number of null values in the column.</p>",
             "smithy.api#required": {}
           }
         },
         "MinimumValue": {
           "target": "com.amazonaws.glue#Long",
           "traits": {
-            "smithy.api#documentation": "<p>Minimum value of the column.</p>"
+            "smithy.api#documentation": "<p>The lowest value in the column.</p>"
           }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Defines a long column statistics data.</p>"
+        "smithy.api#documentation": "<p>Defines column statistics supported for integer data columns.</p>"
       }
     },
     "com.amazonaws.glue#MLTransform": {
@@ -11487,6 +11499,12 @@
           "target": "com.amazonaws.glue#GlueTables",
           "traits": {
             "smithy.api#documentation": "<p>A list of AWS Glue table definitions used by the transform.</p>"
+          }
+        },
+        "TransformEncryption": {
+          "target": "com.amazonaws.glue#TransformEncryption",
+          "traits": {
+            "smithy.api#documentation": "<p>The encryption-at-rest settings of the transform that apply to accessing user data. Machine learning transforms can access user data encrypted in Amazon S3 using KMS.</p>"
           }
         },
         "Parameters": {
@@ -11609,6 +11627,42 @@
       "traits": {
         "smithy.api#documentation": "<p>The machine learning transform is not ready to run.</p>",
         "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.glue#MLUserDataEncryption": {
+      "type": "structure",
+      "members": {
+        "KmsKeyId": {
+          "target": "com.amazonaws.glue#NameString",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID for the customer-provided KMS key.</p>"
+          }
+        },
+        "MlUserDataEncryptionMode": {
+          "target": "com.amazonaws.glue#MLUserDataEncryptionModeString",
+          "traits": {
+            "smithy.api#documentation": "<p>The encryption mode applied to user data. Valid values are:</p>\n\t\n\t        <ul>\n            <li>\n               <p>DISABLED: encryption is disabled</p>\n            </li>\n            <li>\n               <p>SSEKMS: use of server-side encryption with AWS Key Management Service (SSE-KMS) for user data stored in Amazon S3.</p>\n            </li>\n         </ul>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The encryption-at-rest settings of the transform that apply to accessing user data.</p>"
+      }
+    },
+    "com.amazonaws.glue#MLUserDataEncryptionModeString": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "DISABLED",
+            "name": "DISABLED"
+          },
+          {
+            "value": "SSE-KMS",
+            "name": "SSEKMS"
+          }
+        ]
       }
     },
     "com.amazonaws.glue#MapValue": {
@@ -14229,34 +14283,34 @@
         "NumberOfDistinctValues": {
           "target": "com.amazonaws.glue#NonNegativeLong",
           "traits": {
-            "smithy.api#documentation": "<p>Number of distinct values.</p>",
+            "smithy.api#documentation": "<p>The number of distinct values in a column.</p>",
             "smithy.api#required": {}
           }
         },
         "MaximumLength": {
           "target": "com.amazonaws.glue#NonNegativeLong",
           "traits": {
-            "smithy.api#documentation": "<p>Maximum value of the column.</p>",
+            "smithy.api#documentation": "<p>The size of the longest string in the column.</p>",
             "smithy.api#required": {}
           }
         },
         "AverageLength": {
           "target": "com.amazonaws.glue#NonNegativeDouble",
           "traits": {
-            "smithy.api#documentation": "<p>Average value of the column.</p>",
+            "smithy.api#documentation": "<p>The average string length in the column.</p>",
             "smithy.api#required": {}
           }
         },
         "NumberOfNulls": {
           "target": "com.amazonaws.glue#NonNegativeLong",
           "traits": {
-            "smithy.api#documentation": "<p>Number of nulls.</p>",
+            "smithy.api#documentation": "<p>The number of null values in the column.</p>",
             "smithy.api#required": {}
           }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Defines a string column statistics data.</p>"
+        "smithy.api#documentation": "<p>Defines column statistics supported for character sequence data values.</p>"
       }
     },
     "com.amazonaws.glue#StringList": {
@@ -14974,6 +15028,26 @@
         }
       }
     },
+    "com.amazonaws.glue#TransformEncryption": {
+      "type": "structure",
+      "members": {
+        "TaskRunSecurityConfigurationName": {
+          "target": "com.amazonaws.glue#NameString",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the security configuration.</p>"
+          }
+        },
+        "MlUserDataEncryption": {
+          "target": "com.amazonaws.glue#MLUserDataEncryption",
+          "traits": {
+            "smithy.api#documentation": "<p>An <code>MLUserDataEncryption</code> object containing the encryption mode and customer-provided KMS key ID.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The encryption-at-rest settings of the transform that apply to accessing user data. Machine learning transforms can access user data encrypted in Amazon S3 using KMS.</p>\n    \n\t        <p>Additionally, imported labels and trained transforms can now be encrypted using a customer provided KMS key.</p>"
+      }
+    },
     "com.amazonaws.glue#TransformFilterCriteria": {
       "type": "structure",
       "members": {
@@ -15054,7 +15128,7 @@
         "TransformType": {
           "target": "com.amazonaws.glue#TransformType",
           "traits": {
-            "smithy.api#documentation": "<p>The type of machine learning transform.</p>\n\t        <p>For information about the types of machine learning transforms, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/add-job-machine-learning-transform.html\">Creating Machine Learning Transforms</a>.</p>",
+            "smithy.api#documentation": "<p>The type of machine learning transform.</p>\n\t        <p>For information about the types of machine learning transforms, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-job-machine-learning-transform.html\">Creating Machine Learning Transforms</a>.</p>",
             "smithy.api#required": {}
           }
         },
@@ -15513,7 +15587,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Creates or updates partition statistics of columns.</p>"
+        "smithy.api#documentation": "<p>Creates or updates partition statistics of columns.</p>\n\t\n         <p>The Identity and Access Management (IAM) permission required for this operation is <code>UpdatePartition</code>.</p>"
       }
     },
     "com.amazonaws.glue#UpdateColumnStatisticsForPartitionRequest": {
@@ -15592,7 +15666,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Creates or updates table statistics of columns.</p>"
+        "smithy.api#documentation": "<p>Creates or updates table statistics of columns.</p>\n\t\n\t        <p>The Identity and Access Management (IAM) permission required for this operation is <code>UpdateTable</code>.</p>"
       }
     },
     "com.amazonaws.glue#UpdateColumnStatisticsForTableRequest": {

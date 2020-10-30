@@ -61,6 +61,13 @@ type ModifyEndpointInput struct {
 	// "BucketName": "string", "CompressionType": "none"|"gzip" }
 	DmsTransferSettings *types.DmsTransferSettings
 
+	// Settings in JSON format for the source DocumentDB endpoint. For more information
+	// about the available settings, see the configuration properties section in  Using
+	// DocumentDB as a Target for AWS Database Migration Service
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DocumentDB.html)
+	// in the AWS Database Migration Service User Guide.
+	DocDbSettings *types.DocDbSettings
+
 	// Settings in JSON format for the target Amazon DynamoDB endpoint. For information
 	// about other available settings, see Using Object Mapping to Migrate Data to
 	// DynamoDB

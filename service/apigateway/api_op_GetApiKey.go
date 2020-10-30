@@ -38,14 +38,6 @@ type GetApiKeyInput struct {
 	// A boolean flag to specify whether (true) or not (false) the result contains the
 	// key value.
 	IncludeValue *bool
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // A resource that can be distributed to callers for executing Method resources

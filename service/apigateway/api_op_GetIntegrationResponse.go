@@ -49,14 +49,6 @@ type GetIntegrationResponseInput struct {
 	//
 	// This member is required.
 	StatusCode *string
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // Represents an integration response. The status code must map to an existing

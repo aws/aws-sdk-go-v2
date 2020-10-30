@@ -33,14 +33,6 @@ type DeleteApiKeyInput struct {
 	//
 	// This member is required.
 	ApiKey *string
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 type DeleteApiKeyOutput struct {

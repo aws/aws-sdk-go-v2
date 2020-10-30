@@ -40,14 +40,6 @@ type GetAuthorizerInput struct {
 	//
 	// This member is required.
 	RestApiId *string
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // Represents an authorization layer for methods. If enabled on a method, API

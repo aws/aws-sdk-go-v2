@@ -71,8 +71,9 @@ type CreateEndpointInput struct {
 	// This member is required.
 	EndpointConfigName *string
 
-	// The name of the endpoint. The name must be unique within an AWS Region in your
-	// AWS account.
+	// The name of the endpoint.The name must be unique within an AWS Region in your
+	// AWS account. The name is case-insensitive in CreateEndpoint, but the case is
+	// preserved and must be matched in .
 	//
 	// This member is required.
 	EndpointName *string

@@ -39,16 +39,8 @@ type GetRequestValidatorsInput struct {
 	// maximum value is 500.
 	Limit *int32
 
-	Name *string
-
 	// The current pagination position in the paged result set.
 	Position *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // A collection of RequestValidator resources of a given RestApi. In OpenAPI, the

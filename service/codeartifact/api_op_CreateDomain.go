@@ -59,6 +59,9 @@ type CreateDomainInput struct {
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
 	// in the AWS Key Management Service Developer Guide.
 	EncryptionKey *string
+
+	// One or more tag key-value pairs for the domain.
+	Tags []*types.Tag
 }
 
 type CreateDomainOutput struct {

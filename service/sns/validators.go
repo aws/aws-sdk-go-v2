@@ -719,11 +719,11 @@ func validateTag(v *types.Tag) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
-	if v.Key == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Key"))
-	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -754,6 +754,9 @@ func validateOpAddPermissionInput(v *AddPermissionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddPermissionInput"}
+	if v.Label == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Label"))
+	}
 	if v.ActionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActionName"))
 	}
@@ -762,9 +765,6 @@ func validateOpAddPermissionInput(v *AddPermissionInput) error {
 	}
 	if v.AWSAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AWSAccountId"))
-	}
-	if v.Label == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Label"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -793,11 +793,11 @@ func validateOpConfirmSubscriptionInput(v *ConfirmSubscriptionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ConfirmSubscriptionInput"}
-	if v.Token == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Token"))
-	}
 	if v.TopicArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TopicArn"))
+	}
+	if v.Token == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Token"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -811,14 +811,14 @@ func validateOpCreatePlatformApplicationInput(v *CreatePlatformApplicationInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreatePlatformApplicationInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.Platform == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Platform"))
 	}
 	if v.Attributes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Attributes"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -832,11 +832,11 @@ func validateOpCreatePlatformEndpointInput(v *CreatePlatformEndpointInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreatePlatformEndpointInput"}
-	if v.Token == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Token"))
-	}
 	if v.PlatformApplicationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PlatformApplicationArn"))
+	}
+	if v.Token == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Token"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -850,13 +850,13 @@ func validateOpCreateTopicInput(v *CreateTopicInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateTopicInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1035,13 +1035,13 @@ func validateOpPublishInput(v *PublishInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PublishInput"}
-	if v.Message == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Message"))
-	}
 	if v.MessageAttributes != nil {
 		if err := validateMessageAttributeMap(v.MessageAttributes); err != nil {
 			invalidParams.AddNested("MessageAttributes", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Message == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Message"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1073,11 +1073,11 @@ func validateOpSetEndpointAttributesInput(v *SetEndpointAttributesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SetEndpointAttributesInput"}
-	if v.EndpointArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EndpointArn"))
-	}
 	if v.Attributes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Attributes"))
+	}
+	if v.EndpointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1091,11 +1091,11 @@ func validateOpSetPlatformApplicationAttributesInput(v *SetPlatformApplicationAt
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SetPlatformApplicationAttributesInput"}
-	if v.Attributes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Attributes"))
-	}
 	if v.PlatformApplicationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PlatformApplicationArn"))
+	}
+	if v.Attributes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Attributes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1215,11 +1215,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Delete the partition column statistics of a column.
+// Delete the partition column statistics of a column. The Identity and Access
+// Management (IAM) permission required for this operation is DeletePartition.
 func (c *Client) DeleteColumnStatisticsForPartition(ctx context.Context, params *DeleteColumnStatisticsForPartitionInput, optFns ...func(*Options)) (*DeleteColumnStatisticsForPartitionOutput, error) {
 	if params == nil {
 		params = &DeleteColumnStatisticsForPartitionInput{}

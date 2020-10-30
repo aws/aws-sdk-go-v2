@@ -687,11 +687,11 @@ func validateAccountDetail(v *types.AccountDetail) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AccountDetail"}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
-	}
 	if v.Email == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Email"))
+	}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -722,11 +722,11 @@ func validateS3Destination(v *types.S3Destination) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "S3Destination"}
-	if v.KmsKeyArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyArn"))
-	}
 	if v.BucketName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
+	}
+	if v.KmsKeyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -758,17 +758,17 @@ func validateOpCreateClassificationJobInput(v *CreateClassificationJobInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateClassificationJobInput"}
-	if len(v.JobType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("JobType"))
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.S3JobDefinition == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3JobDefinition"))
 	}
 	if v.ClientToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if len(v.JobType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("JobType"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -782,14 +782,14 @@ func validateOpCreateFindingsFilterInput(v *CreateFindingsFilterInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateFindingsFilterInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if len(v.Action) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Action"))
 	}
 	if v.FindingCriteria == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FindingCriteria"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1081,11 +1081,11 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
-	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1099,11 +1099,11 @@ func validateOpTestCustomDataIdentifierInput(v *TestCustomDataIdentifierInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TestCustomDataIdentifierInput"}
-	if v.SampleText == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SampleText"))
-	}
 	if v.Regex == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Regex"))
+	}
+	if v.SampleText == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SampleText"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1117,11 +1117,11 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
-	if v.TagKeys == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
-	}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1168,11 +1168,11 @@ func validateOpUpdateMemberSessionInput(v *UpdateMemberSessionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateMemberSessionInput"}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
 	if len(v.Status) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

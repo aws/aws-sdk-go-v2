@@ -8,7 +8,7 @@ type Ami struct {
 	// The account ID of the owner of the AMI.
 	AccountId *string
 
-	// The description of the EC2 AMI.
+	// The description of the EC2 AMI. Minimum and maximum length are in characters.
 	Description *string
 
 	// The AMI ID of the EC2 AMI.
@@ -30,7 +30,8 @@ type AmiDistributionConfiguration struct {
 	// The tags to apply to AMIs distributed to this Region.
 	AmiTags map[string]*string
 
-	// The description of the distribution configuration.
+	// The description of the distribution configuration. Minimum and maximum length
+	// are in characters.
 	Description *string
 
 	// The KMS key identifier used to encrypt the distributed image.

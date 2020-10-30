@@ -226,6 +226,204 @@ func awsRestjson1_serializeOpDocumentCreateConfigurationSetEventDestinationInput
 	return nil
 }
 
+type awsRestjson1_serializeOpCreateContact struct {
+}
+
+func (*awsRestjson1_serializeOpCreateContact) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateContact) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateContactInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v2/email/contact-lists/{ContactListName}/contacts")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCreateContactInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateContactInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateContactInput(v *CreateContactInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ContactListName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ContactListName must not be empty")}
+	}
+	if v.ContactListName != nil {
+		if len(*v.ContactListName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ContactListName must not be empty")}
+		}
+		if err := encoder.SetURI("ContactListName").String(*v.ContactListName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateContactInput(v *CreateContactInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AttributesData != nil {
+		ok := object.Key("AttributesData")
+		ok.String(*v.AttributesData)
+	}
+
+	if v.EmailAddress != nil {
+		ok := object.Key("EmailAddress")
+		ok.String(*v.EmailAddress)
+	}
+
+	if v.TopicPreferences != nil {
+		ok := object.Key("TopicPreferences")
+		if err := awsRestjson1_serializeDocumentTopicPreferenceList(v.TopicPreferences, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.UnsubscribeAll != nil {
+		ok := object.Key("UnsubscribeAll")
+		ok.Boolean(*v.UnsubscribeAll)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpCreateContactList struct {
+}
+
+func (*awsRestjson1_serializeOpCreateContactList) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateContactList) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateContactListInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v2/email/contact-lists")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateContactListInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateContactListInput(v *CreateContactListInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateContactListInput(v *CreateContactListInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ContactListName != nil {
+		ok := object.Key("ContactListName")
+		ok.String(*v.ContactListName)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Topics != nil {
+		ok := object.Key("Topics")
+		if err := awsRestjson1_serializeDocumentTopics(v.Topics, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateCustomVerificationEmailTemplate struct {
 }
 
@@ -990,6 +1188,150 @@ func awsRestjson1_serializeOpHttpBindingsDeleteConfigurationSetEventDestinationI
 	return nil
 }
 
+type awsRestjson1_serializeOpDeleteContact struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteContact) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteContact) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteContactInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v2/email/contact-lists/{ContactListName}/contacts/{EmailAddress}")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteContactInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteContactInput(v *DeleteContactInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ContactListName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ContactListName must not be empty")}
+	}
+	if v.ContactListName != nil {
+		if len(*v.ContactListName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ContactListName must not be empty")}
+		}
+		if err := encoder.SetURI("ContactListName").String(*v.ContactListName); err != nil {
+			return err
+		}
+	}
+
+	if v.EmailAddress == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member EmailAddress must not be empty")}
+	}
+	if v.EmailAddress != nil {
+		if len(*v.EmailAddress) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member EmailAddress must not be empty")}
+		}
+		if err := encoder.SetURI("EmailAddress").String(*v.EmailAddress); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteContactList struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteContactList) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteContactList) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteContactListInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v2/email/contact-lists/{ContactListName}")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteContactListInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteContactListInput(v *DeleteContactListInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ContactListName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ContactListName must not be empty")}
+	}
+	if v.ContactListName != nil {
+		if len(*v.ContactListName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ContactListName must not be empty")}
+		}
+		if err := encoder.SetURI("ContactListName").String(*v.ContactListName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDeleteCustomVerificationEmailTemplate struct {
 }
 
@@ -1636,6 +1978,150 @@ func awsRestjson1_serializeOpHttpBindingsGetConfigurationSetEventDestinationsInp
 			return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationSetName must not be empty")}
 		}
 		if err := encoder.SetURI("ConfigurationSetName").String(*v.ConfigurationSetName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetContact struct {
+}
+
+func (*awsRestjson1_serializeOpGetContact) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetContact) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetContactInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v2/email/contact-lists/{ContactListName}/contacts/{EmailAddress}")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetContactInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetContactInput(v *GetContactInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ContactListName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ContactListName must not be empty")}
+	}
+	if v.ContactListName != nil {
+		if len(*v.ContactListName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ContactListName must not be empty")}
+		}
+		if err := encoder.SetURI("ContactListName").String(*v.ContactListName); err != nil {
+			return err
+		}
+	}
+
+	if v.EmailAddress == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member EmailAddress must not be empty")}
+	}
+	if v.EmailAddress != nil {
+		if len(*v.EmailAddress) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member EmailAddress must not be empty")}
+		}
+		if err := encoder.SetURI("EmailAddress").String(*v.EmailAddress); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetContactList struct {
+}
+
+func (*awsRestjson1_serializeOpGetContactList) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetContactList) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetContactListInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v2/email/contact-lists/{ContactListName}")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetContactListInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetContactListInput(v *GetContactListInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ContactListName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ContactListName must not be empty")}
+	}
+	if v.ContactListName != nil {
+		if len(*v.ContactListName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ContactListName must not be empty")}
+		}
+		if err := encoder.SetURI("ContactListName").String(*v.ContactListName); err != nil {
 			return err
 		}
 	}
@@ -2484,6 +2970,167 @@ func awsRestjson1_serializeOpHttpBindingsListConfigurationSetsInput(v *ListConfi
 
 	if v.PageSize != nil {
 		encoder.SetQuery("PageSize").Integer(*v.PageSize)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListContactLists struct {
+}
+
+func (*awsRestjson1_serializeOpListContactLists) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListContactLists) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListContactListsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v2/email/contact-lists")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListContactListsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListContactListsInput(v *ListContactListsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("NextToken").String(*v.NextToken)
+	}
+
+	if v.PageSize != nil {
+		encoder.SetQuery("PageSize").Integer(*v.PageSize)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListContacts struct {
+}
+
+func (*awsRestjson1_serializeOpListContacts) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListContacts) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListContactsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v2/email/contact-lists/{ContactListName}/contacts")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListContactsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentListContactsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListContactsInput(v *ListContactsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ContactListName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ContactListName must not be empty")}
+	}
+	if v.ContactListName != nil {
+		if len(*v.ContactListName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ContactListName must not be empty")}
+		}
+		if err := encoder.SetURI("ContactListName").String(*v.ContactListName); err != nil {
+			return err
+		}
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("NextToken").String(*v.NextToken)
+	}
+
+	if v.PageSize != nil {
+		encoder.SetQuery("PageSize").Integer(*v.PageSize)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentListContactsInput(v *ListContactsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filter != nil {
+		ok := object.Key("Filter")
+		if err := awsRestjson1_serializeDocumentListContactsFilter(v.Filter, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -4892,6 +5539,13 @@ func awsRestjson1_serializeOpDocumentSendEmailInput(v *SendEmailInput, value smi
 		ok.String(*v.FromEmailAddressIdentityArn)
 	}
 
+	if v.ListManagementOptions != nil {
+		ok := object.Key("ListManagementOptions")
+		if err := awsRestjson1_serializeDocumentListManagementOptions(v.ListManagementOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ReplyToAddresses != nil {
 		ok := object.Key("ReplyToAddresses")
 		if err := awsRestjson1_serializeDocumentEmailAddressList(v.ReplyToAddresses, ok); err != nil {
@@ -5234,6 +5888,215 @@ func awsRestjson1_serializeOpDocumentUpdateConfigurationSetEventDestinationInput
 	if v.EventDestination != nil {
 		ok := object.Key("EventDestination")
 		if err := awsRestjson1_serializeDocumentEventDestinationDefinition(v.EventDestination, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpUpdateContact struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateContact) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateContact) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateContactInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v2/email/contact-lists/{ContactListName}/contacts/{EmailAddress}")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateContactInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateContactInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateContactInput(v *UpdateContactInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ContactListName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ContactListName must not be empty")}
+	}
+	if v.ContactListName != nil {
+		if len(*v.ContactListName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ContactListName must not be empty")}
+		}
+		if err := encoder.SetURI("ContactListName").String(*v.ContactListName); err != nil {
+			return err
+		}
+	}
+
+	if v.EmailAddress == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member EmailAddress must not be empty")}
+	}
+	if v.EmailAddress != nil {
+		if len(*v.EmailAddress) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member EmailAddress must not be empty")}
+		}
+		if err := encoder.SetURI("EmailAddress").String(*v.EmailAddress); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateContactInput(v *UpdateContactInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AttributesData != nil {
+		ok := object.Key("AttributesData")
+		ok.String(*v.AttributesData)
+	}
+
+	if v.TopicPreferences != nil {
+		ok := object.Key("TopicPreferences")
+		if err := awsRestjson1_serializeDocumentTopicPreferenceList(v.TopicPreferences, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.UnsubscribeAll != nil {
+		ok := object.Key("UnsubscribeAll")
+		ok.Boolean(*v.UnsubscribeAll)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpUpdateContactList struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateContactList) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateContactList) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateContactListInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v2/email/contact-lists/{ContactListName}")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateContactListInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateContactListInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateContactListInput(v *UpdateContactListInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ContactListName == nil {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ContactListName must not be empty")}
+	}
+	if v.ContactListName != nil {
+		if len(*v.ContactListName) == 0 {
+			return &smithy.SerializationError{Err: fmt.Errorf("input member ContactListName must not be empty")}
+		}
+		if err := encoder.SetURI("ContactListName").String(*v.ContactListName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateContactListInput(v *UpdateContactListInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.Topics != nil {
+		ok := object.Key("Topics")
+		if err := awsRestjson1_serializeDocumentTopics(v.Topics, ok); err != nil {
 			return err
 		}
 	}
@@ -5690,6 +6553,23 @@ func awsRestjson1_serializeDocumentCloudWatchDimensionConfigurations(v []*types.
 	return nil
 }
 
+func awsRestjson1_serializeDocumentContactListDestination(v *types.ContactListDestination, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ContactListImportAction) > 0 {
+		ok := object.Key("ContactListImportAction")
+		ok.String(string(v.ContactListImportAction))
+	}
+
+	if v.ContactListName != nil {
+		ok := object.Key("ContactListName")
+		ok.String(*v.ContactListName)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentContent(v *types.Content, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5954,6 +6834,13 @@ func awsRestjson1_serializeDocumentImportDestination(v *types.ImportDestination,
 	object := value.Object()
 	defer object.Close()
 
+	if v.ContactListDestination != nil {
+		ok := object.Key("ContactListDestination")
+		if err := awsRestjson1_serializeDocumentContactListDestination(v.ContactListDestination, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SuppressionListDestination != nil {
 		ok := object.Key("SuppressionListDestination")
 		if err := awsRestjson1_serializeDocumentSuppressionListDestination(v.SuppressionListDestination, ok); err != nil {
@@ -6010,6 +6897,42 @@ func awsRestjson1_serializeDocumentKinesisFirehoseDestination(v *types.KinesisFi
 	if v.IamRoleArn != nil {
 		ok := object.Key("IamRoleArn")
 		ok.String(*v.IamRoleArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentListContactsFilter(v *types.ListContactsFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.FilteredStatus) > 0 {
+		ok := object.Key("FilteredStatus")
+		ok.String(string(v.FilteredStatus))
+	}
+
+	if v.TopicFilter != nil {
+		ok := object.Key("TopicFilter")
+		if err := awsRestjson1_serializeDocumentTopicFilter(v.TopicFilter, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentListManagementOptions(v *types.ListManagementOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ContactListName != nil {
+		ok := object.Key("ContactListName")
+		ok.String(*v.ContactListName)
+	}
+
+	if v.TopicName != nil {
+		ok := object.Key("TopicName")
+		ok.String(*v.TopicName)
 	}
 
 	return nil
@@ -6251,6 +7174,101 @@ func awsRestjson1_serializeDocumentTemplate(v *types.Template, value smithyjson.
 		ok.String(*v.TemplateName)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTopic(v *types.Topic, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DefaultSubscriptionStatus) > 0 {
+		ok := object.Key("DefaultSubscriptionStatus")
+		ok.String(string(v.DefaultSubscriptionStatus))
+	}
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.DisplayName != nil {
+		ok := object.Key("DisplayName")
+		ok.String(*v.DisplayName)
+	}
+
+	if v.TopicName != nil {
+		ok := object.Key("TopicName")
+		ok.String(*v.TopicName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTopicFilter(v *types.TopicFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TopicName != nil {
+		ok := object.Key("TopicName")
+		ok.String(*v.TopicName)
+	}
+
+	if v.UseDefaultIfPreferenceUnavailable != nil {
+		ok := object.Key("UseDefaultIfPreferenceUnavailable")
+		ok.Boolean(*v.UseDefaultIfPreferenceUnavailable)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTopicPreference(v *types.TopicPreference, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.SubscriptionStatus) > 0 {
+		ok := object.Key("SubscriptionStatus")
+		ok.String(string(v.SubscriptionStatus))
+	}
+
+	if v.TopicName != nil {
+		ok := object.Key("TopicName")
+		ok.String(*v.TopicName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTopicPreferenceList(v []*types.TopicPreference, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			av.Null()
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentTopicPreference(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTopics(v []*types.Topic, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			av.Null()
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentTopic(v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

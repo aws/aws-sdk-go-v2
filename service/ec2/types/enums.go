@@ -124,6 +124,24 @@ func (AllowsMultipleInstanceTypes) Values() []AllowsMultipleInstanceTypes {
 	}
 }
 
+type ApplianceModeSupportValue string
+
+// Enum values for ApplianceModeSupportValue
+const (
+	ApplianceModeSupportValueEnable  ApplianceModeSupportValue = "enable"
+	ApplianceModeSupportValueDisable ApplianceModeSupportValue = "disable"
+)
+
+// Values returns all known values for ApplianceModeSupportValue. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ApplianceModeSupportValue) Values() []ApplianceModeSupportValue {
+	return []ApplianceModeSupportValue{
+		"enable",
+		"disable",
+	}
+}
+
 type ArchitectureType string
 
 // Enum values for ArchitectureType
@@ -1715,6 +1733,7 @@ const (
 	InstanceAttributeNameEbsoptimized                      InstanceAttributeName = "ebsOptimized"
 	InstanceAttributeNameSriovnetsupport                   InstanceAttributeName = "sriovNetSupport"
 	InstanceAttributeNameEnasupport                        InstanceAttributeName = "enaSupport"
+	InstanceAttributeNameEnclaveoptions                    InstanceAttributeName = "enclaveOptions"
 )
 
 // Values returns all known values for InstanceAttributeName. Note that this can be
@@ -1736,6 +1755,7 @@ func (InstanceAttributeName) Values() []InstanceAttributeName {
 		"ebsOptimized",
 		"sriovNetSupport",
 		"enaSupport",
+		"enclaveOptions",
 	}
 }
 
@@ -3767,6 +3787,24 @@ func (Scope) Values() []Scope {
 	return []Scope{
 		"Availability Zone",
 		"Region",
+	}
+}
+
+type SelfServicePortal string
+
+// Enum values for SelfServicePortal
+const (
+	SelfServicePortalEnabled  SelfServicePortal = "enabled"
+	SelfServicePortalDisabled SelfServicePortal = "disabled"
+)
+
+// Values returns all known values for SelfServicePortal. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SelfServicePortal) Values() []SelfServicePortal {
+	return []SelfServicePortal{
+		"enabled",
+		"disabled",
 	}
 }
 

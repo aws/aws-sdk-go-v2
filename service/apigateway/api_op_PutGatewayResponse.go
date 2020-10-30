@@ -88,8 +88,6 @@ type PutGatewayResponseInput struct {
 	// This member is required.
 	RestApiId *string
 
-	Name *string
-
 	// Response parameters (paths, query strings and headers) of the GatewayResponse as
 	// a string-to-string map of key-value pairs.
 	ResponseParameters map[string]*string
@@ -100,12 +98,6 @@ type PutGatewayResponseInput struct {
 
 	// The HTTP status code of the GatewayResponse.
 	StatusCode *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // A gateway response of a given response type and status code, with optional

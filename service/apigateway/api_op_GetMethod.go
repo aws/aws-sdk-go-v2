@@ -44,14 +44,6 @@ type GetMethodInput struct {
 	//
 	// This member is required.
 	RestApiId *string
-
-	Name *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
 }
 
 // Represents a client-facing interface by which the client calls the API to access

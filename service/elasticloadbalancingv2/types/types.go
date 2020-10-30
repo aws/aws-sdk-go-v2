@@ -498,15 +498,19 @@ type LoadBalancerState struct {
 	Reason *string
 }
 
-// Information to use when checking for a successful response from a target.
+// The codes to use when checking for a successful response from a target. If the
+// protocol version is gRPC, these are gRPC codes. Otherwise, these are HTTP codes.
 type Matcher struct {
 
-	// The HTTP codes. For Application Load Balancers, you can specify values between
-	// 200 and 499, and the default value is 200. You can specify multiple values (for
-	// example, "200,202") or a range of values (for example, "200-299"). For Network
-	// Load Balancers, this is 200–399.
-	//
-	// This member is required.
+	// You can specify values between 0 and 99. You can specify multiple values (for
+	// example, "0,1") or a range of values (for example, "0-5"). The default value is
+	// 12.
+	GrpcCode *string
+
+	// For Application Load Balancers, you can specify values between 200 and 499, and
+	// the default value is 200. You can specify multiple values (for example,
+	// "200,202") or a range of values (for example, "200-299"). For Network Load
+	// Balancers, this is "200–399".
 	HttpCode *string
 }
 
@@ -815,7 +819,7 @@ type TargetGroup struct {
 	// individual target.
 	HealthCheckIntervalSeconds *int32
 
-	// The destination for the health check request.
+	// The destination for health checks on the targets.
 	HealthCheckPath *string
 
 	// The port to use to connect with the target.
@@ -836,7 +840,8 @@ type TargetGroup struct {
 	// target group.
 	LoadBalancerArns []*string
 
-	// The HTTP codes to use when checking for a successful response from a target.
+	// The HTTP or gRPC codes to use when checking for a successful response from a
+	// target.
 	Matcher *Matcher
 
 	// The port on which the targets are listening. Not used if the target is a Lambda
@@ -845,6 +850,10 @@ type TargetGroup struct {
 
 	// The protocol to use for routing traffic to the targets.
 	Protocol ProtocolEnum
+
+	// [HTTP/HTTPS protocol] The protocol version. The possible values are GRPC, HTTP1,
+	// and HTTP2.
+	ProtocolVersion *string
 
 	// The Amazon Resource Name (ARN) of the target group.
 	TargetGroupArn *string
