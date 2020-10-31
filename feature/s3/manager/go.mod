@@ -3,11 +3,15 @@ module github.com/aws/aws-sdk-go-v2/feature/s3/manager
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go-v2 v0.28.1-0.20201027184009-8eb8fc303e7c
-	github.com/aws/aws-sdk-go-v2/config v0.2.1
-	github.com/aws/aws-sdk-go-v2/service/s3 v0.28.1-0.20201027190912-8f6733991e52
+	github.com/aws/aws-sdk-go-v2 v0.29.0
+	github.com/aws/aws-sdk-go-v2/config v0.2.2
+	github.com/aws/aws-sdk-go-v2/service/s3 v0.29.0
 	github.com/awslabs/smithy-go v0.3.0
 	github.com/google/go-cmp v0.4.1
+	github.com/aws/aws-sdk-go-v2/service/sts v0.29.0
+	github.com/aws/aws-sdk-go-v2/credentials v0.1.4
+	github.com/aws/aws-sdk-go-v2/ec2imds v0.1.4
+	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v0.3.1
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../

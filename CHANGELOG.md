@@ -1,3 +1,23 @@
+# Release 2020-10-30
+
+## New Features
+* Adds HostnameImmutable flag on aws.Endpoint to direct SDK if the associated endpoint is modifiable.([#848](https://github.com/aws/aws-sdk-go-v2/pull/848))
+
+## Bug Fixes
+* Fix SDK handling of xml based services - xml namespaces ([#858](https://github.com/aws/aws-sdk-go-v2/pull/858))
+  * Fixes ([#850](https://github.com/aws/aws-sdk-go-v2/issues/850))
+
+## Service Client Highlights
+* API Clients have been bumped to version `v0.29.0`
+    * Regenerate API Clients from update API models.
+* Improve client doc generation.
+
+## Core SDK Highlights
+* Dependency Update: Updated SDK dependencies to their latest versions.
+
+## Migrating from v2 preview SDK's v0.28.0 to v0.29.0
+* API Clients ResolverOptions type renamed to EndpointResolverOptions 
+
 # Release 2020-10-26
 
 ## New Features
