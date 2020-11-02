@@ -51,6 +51,8 @@ public class AwsRetryMiddlewareHelper implements GoIntegration {
                     writer.openBlock("mo := $T{", "}", addOptions, () -> {
                         writer.write("$L: o.$L,", AddAwsConfigFields.RETRYER_CONFIG_NAME,
                                 AddAwsConfigFields.RETRYER_CONFIG_NAME);
+                        writer.write("LogRetryAttempts: o.$L.IsRetries(),",
+                                AddAwsConfigFields.LOG_MODE_CONFIG_NAME);
                     });
 
                     writer.write("return $T(stack, mo)", addRetryMiddlewares);

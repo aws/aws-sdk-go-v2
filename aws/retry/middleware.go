@@ -10,6 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddle "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
+	"github.com/awslabs/smithy-go/logging"
 	smithymiddle "github.com/awslabs/smithy-go/middleware"
 	"github.com/awslabs/smithy-go/transport/http"
 )
@@ -30,13 +31,20 @@ type retryMetadataKey struct{}
 // Attempt is a Smithy FinalizeMiddleware that handles retry attempts using the provided
 // Retryer implementation
 type Attempt struct {
+	// Enable logging of retry attempts and nonretryable errors
+	LogAttempts bool
+
 	retryer       Retryer
 	requestCloner RequestCloner
 }
 
 // NewAttemptMiddleware returns a new Attempt
-func NewAttemptMiddleware(retryer Retryer, requestCloner RequestCloner) *Attempt {
-	return &Attempt{retryer: retryer, requestCloner: requestCloner}
+func NewAttemptMiddleware(retryer Retryer, requestCloner RequestCloner, optFns ...func(*Attempt)) *Attempt {
+	m := &Attempt{retryer: retryer, requestCloner: requestCloner}
+	for _, fn := range optFns {
+		fn(&m)
+	}
+	return m
 }
 
 // ID returns the middleware identifier
@@ -54,6 +62,9 @@ func (r Attempt) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeInp
 	maxAttempts := r.retryer.MaxAttempts()
 
 	relRetryToken := r.retryer.GetInitialToken()
+
+	logger := smithymiddle.GetLogger(ctx)
+	service, operation := awsmiddle.GetServiceID(ctx), awsmiddle.GetOperationName(ctx)
 
 	for {
 		attemptNum++
@@ -73,6 +84,10 @@ func (r Attempt) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeInp
 				if err := rewindable.RewindStream(); err != nil {
 					return out, metadata, fmt.Errorf("failed to rewind transport stream for retry, %w", err)
 				}
+			}
+
+			if r.LogAttempts {
+				logger.Logf(logging.Debug, "retrying request %s/%s, attempt %d", service, operation, attemptNum)
 			}
 		}
 
@@ -178,12 +193,16 @@ func setRetryMetadata(ctx context.Context, metadata retryMetadata) context.Conte
 // AddRetryMiddlewaresOptions is the set of options that can be passed to AddRetryMiddlewares for configuring retry
 // associated middleware.
 type AddRetryMiddlewaresOptions struct {
-	Retryer Retryer
+	Retryer          Retryer
+	LogRetryAttempts bool
 }
 
 // AddRetryMiddlewares adds retry middleware to operation middleware stack
 func AddRetryMiddlewares(stack *smithymiddle.Stack, options AddRetryMiddlewaresOptions) error {
-	attempt := NewAttemptMiddleware(options.Retryer, http.RequestCloner)
+	attempt := NewAttemptMiddleware(options.Retryer, http.RequestCloner, func(middleware *AttemptMiddleware) {
+		middleware.LogAttempts = options.LogRetryAttempts
+	})
+
 	if err := stack.Finalize.Add(attempt, smithymiddle.After); err != nil {
 		return err
 	}
