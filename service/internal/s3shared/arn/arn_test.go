@@ -94,7 +94,7 @@ func TestParseResource(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			var parsed Resource
 			arn, err := arn.Parse(c.Input)
-			if err != nil {
+			if err == nil {
 				parsed, err = ParseResource(arn, mappedResourceParser(c.MappedResources))
 			}
 
