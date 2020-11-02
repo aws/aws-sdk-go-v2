@@ -14,6 +14,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/awslabs/smithy-go/logging"
 )
 
 const userAgentKey = "S3Manager"
@@ -54,6 +55,12 @@ type Downloader struct {
 
 	// PartBodyMaxRetries is the number of retry attempts to make for failed part uploads
 	PartBodyMaxRetries int
+
+	// Logger to send logging messages to
+	Logger logging.Logger
+
+	// Enable Logging of part download retry attempts
+	LogInterruptedDownloads bool
 
 	// The number of goroutines to spin up in parallel when sending parts.
 	// If this is set to zero, the DefaultDownloadConcurrency value will be used.
@@ -164,6 +171,13 @@ func (d Downloader) Download(ctx context.Context, w io.WriterAt, input *s3.GetOb
 
 	for _, option := range options {
 		option(&impl.cfg)
+	}
+
+	// Ensures we don't need nil checks later on
+	if impl.cfg.Logger == nil {
+		impl.cfg.Logger = logging.Noop{}
+	} else {
+		impl.cfg.Logger = logging.WithContext(ctx, impl.cfg.Logger)
 	}
 
 	impl.partBodyMaxRetries = d.PartBodyMaxRetries
@@ -347,10 +361,8 @@ func (d *downloader) downloadChunk(chunk dlchunk) error {
 
 		chunk.cur = 0
 
-		// TODO: Add Logging
-		//logMessage(d.cfg.S3, aws.LogDebugWithRequestRetries,
-		//	fmt.Sprintf("DEBUG: object part body download interrupted %s, err, %v, retrying attempt %d",
-		//		aws.StringValue(in.Key), err, retry))
+		d.cfg.Logger.Logf(logging.Debug, "object part body download interrupted %s, err, %v, retrying attempt %d",
+			aws.ToString(in.Key), err, retry)
 	}
 
 	d.incrWritten(n)
