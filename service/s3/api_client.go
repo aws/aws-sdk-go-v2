@@ -77,6 +77,9 @@ type Options struct {
 	// failures. When nil the API client will use a default retryer.
 	Retryer retry.Retryer
 
+	// Allows you to enable arn region support for the service.
+	UseARNRegion bool
+
 	// Allows you to enable S3 Accelerate feature. All operations compatible with S3
 	// Accelerate will use the accelerate endpoint for requests. Requests not
 	// compatible will fall back to normal S3 requests. The bucket must be enabled for
@@ -212,12 +215,14 @@ func addMetadataRetrieverMiddleware(stack *middleware.Stack) {
 
 func addUpdateEndpointMiddleware(stack *middleware.Stack, options Options) {
 	s3cust.UpdateEndpoint(stack, s3cust.UpdateEndpointOptions{
-		Region:             options.Region,
-		GetBucketFromInput: getBucketFromInput,
-		UsePathStyle:       options.UsePathStyle,
-		UseAccelerate:      options.UseAccelerate,
-		SupportsAccelerate: supportAccelerate,
-		UseDualstack:       options.UseDualstack,
+		GetBucketFromInput:      getBucketFromInput,
+		UsePathStyle:            options.UsePathStyle,
+		UseAccelerate:           options.UseAccelerate,
+		SupportsAccelerate:      supportAccelerate,
+		EndpointResolver:        options.EndpointResolver,
+		EndpointResolverOptions: options.EndpointOptions,
+		UseDualstack:            options.UseDualstack,
+		UseARNRegion:            options.UseARNRegion,
 	})
 }
 

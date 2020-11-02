@@ -92,7 +92,7 @@ func (*endpointPrefix_opDeletePublicAccessBlockMiddleware) ID() string {
 func (m *endpointPrefix_opDeletePublicAccessBlockMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
-	if smithyhttp.GetHostnameImmutable(ctx) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
 		return next.HandleSerialize(ctx, in)
 	}
 
@@ -119,8 +119,16 @@ func (m *endpointPrefix_opDeletePublicAccessBlockMiddleware) HandleSerialize(ctx
 
 	return next.HandleSerialize(ctx, in)
 }
-func addEndpointPrefix_opDeletePublicAccessBlockMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opDeletePublicAccessBlockMiddleware{}, `OperationSerializer`, middleware.Before)
+func addEndpointPrefix_opDeletePublicAccessBlockMiddleware(stack *middleware.Stack) (err error) {
+	err = stack.Serialize.Insert(&endpointPrefix_opDeletePublicAccessBlockMiddleware{}, `OperationSerializer`, middleware.Before)
+	if err != nil {
+		return err
+	}
+	err = stack.Build.Add(&smithyhttp.HostPrefixMiddleware{}, middleware.Before)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func newServiceMetadataMiddleware_opDeletePublicAccessBlock(region string) awsmiddleware.RegisterServiceMetadata {
@@ -130,4 +138,15 @@ func newServiceMetadataMiddleware_opDeletePublicAccessBlock(region string) awsmi
 		SigningName:   "s3",
 		OperationName: "DeletePublicAccessBlock",
 	}
+}
+
+func (in DeletePublicAccessBlockInput) backfillAccountID(v string) (interface{}, error) {
+	if in.AccountId != nil {
+		if !strings.EqualFold(*in.AccountId, v) {
+			return &in, fmt.Errorf("error backfilling account id")
+		}
+		return &in, nil
+	}
+	in.AccountId = &v
+	return &in, nil
 }

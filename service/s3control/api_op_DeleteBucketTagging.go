@@ -115,7 +115,7 @@ func (*endpointPrefix_opDeleteBucketTaggingMiddleware) ID() string {
 func (m *endpointPrefix_opDeleteBucketTaggingMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
-	if smithyhttp.GetHostnameImmutable(ctx) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
 		return next.HandleSerialize(ctx, in)
 	}
 
@@ -142,8 +142,16 @@ func (m *endpointPrefix_opDeleteBucketTaggingMiddleware) HandleSerialize(ctx con
 
 	return next.HandleSerialize(ctx, in)
 }
-func addEndpointPrefix_opDeleteBucketTaggingMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opDeleteBucketTaggingMiddleware{}, `OperationSerializer`, middleware.Before)
+func addEndpointPrefix_opDeleteBucketTaggingMiddleware(stack *middleware.Stack) (err error) {
+	err = stack.Serialize.Insert(&endpointPrefix_opDeleteBucketTaggingMiddleware{}, `OperationSerializer`, middleware.Before)
+	if err != nil {
+		return err
+	}
+	err = stack.Build.Add(&smithyhttp.HostPrefixMiddleware{}, middleware.Before)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func newServiceMetadataMiddleware_opDeleteBucketTagging(region string) awsmiddleware.RegisterServiceMetadata {
@@ -153,4 +161,25 @@ func newServiceMetadataMiddleware_opDeleteBucketTagging(region string) awsmiddle
 		SigningName:   "s3",
 		OperationName: "DeleteBucketTagging",
 	}
+}
+
+func (in DeleteBucketTaggingInput) getARNMemberValue() (*string, bool) {
+	if in.Bucket == nil {
+		return nil, false
+	}
+	return in.Bucket, true
+}
+func (in DeleteBucketTaggingInput) updateARNMemberValue(v string) interface{} {
+	in.Bucket = &v
+	return &in
+}
+func (in DeleteBucketTaggingInput) backfillAccountID(v string) (interface{}, error) {
+	if in.AccountId != nil {
+		if !strings.EqualFold(*in.AccountId, v) {
+			return &in, fmt.Errorf("error backfilling account id")
+		}
+		return &in, nil
+	}
+	in.AccountId = &v
+	return &in, nil
 }

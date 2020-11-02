@@ -144,7 +144,7 @@ func (*endpointPrefix_opGetAccessPointMiddleware) ID() string {
 func (m *endpointPrefix_opGetAccessPointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
-	if smithyhttp.GetHostnameImmutable(ctx) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
 		return next.HandleSerialize(ctx, in)
 	}
 
@@ -171,8 +171,16 @@ func (m *endpointPrefix_opGetAccessPointMiddleware) HandleSerialize(ctx context.
 
 	return next.HandleSerialize(ctx, in)
 }
-func addEndpointPrefix_opGetAccessPointMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opGetAccessPointMiddleware{}, `OperationSerializer`, middleware.Before)
+func addEndpointPrefix_opGetAccessPointMiddleware(stack *middleware.Stack) (err error) {
+	err = stack.Serialize.Insert(&endpointPrefix_opGetAccessPointMiddleware{}, `OperationSerializer`, middleware.Before)
+	if err != nil {
+		return err
+	}
+	err = stack.Build.Add(&smithyhttp.HostPrefixMiddleware{}, middleware.Before)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func newServiceMetadataMiddleware_opGetAccessPoint(region string) awsmiddleware.RegisterServiceMetadata {
@@ -182,4 +190,25 @@ func newServiceMetadataMiddleware_opGetAccessPoint(region string) awsmiddleware.
 		SigningName:   "s3",
 		OperationName: "GetAccessPoint",
 	}
+}
+
+func (in GetAccessPointInput) getARNMemberValue() (*string, bool) {
+	if in.Name == nil {
+		return nil, false
+	}
+	return in.Name, true
+}
+func (in GetAccessPointInput) updateARNMemberValue(v string) interface{} {
+	in.Name = &v
+	return &in
+}
+func (in GetAccessPointInput) backfillAccountID(v string) (interface{}, error) {
+	if in.AccountId != nil {
+		if !strings.EqualFold(*in.AccountId, v) {
+			return &in, fmt.Errorf("error backfilling account id")
+		}
+		return &in, nil
+	}
+	in.AccountId = &v
+	return &in, nil
 }

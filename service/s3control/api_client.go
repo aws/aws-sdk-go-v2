@@ -83,6 +83,9 @@ type Options struct {
 	// failures. When nil the API client will use a default retryer.
 	Retryer retry.Retryer
 
+	// Allows you to enable arn region support for the service.
+	UseARNRegion bool
+
 	// Allows you to enable Dualstack endpoint support for the service.
 	UseDualstack bool
 
@@ -215,7 +218,53 @@ func addMetadataRetrieverMiddleware(stack *middleware.Stack) {
 }
 
 func addUpdateEndpointMiddleware(stack *middleware.Stack, options Options) {
-	s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{UseDualstack: options.UseDualstack})
+	s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{
+		GetARNInput:             getARNMemberValue,
+		BackfillAccountID:       backfillAccountID,
+		GetOutpostIDInput:       getOutpostIDFromInput,
+		UpdateARNField:          updateARNMemberValue,
+		EndpointResolver:        options.EndpointResolver,
+		EndpointResolverOptions: options.EndpointOptions,
+		UseDualstack:            options.UseDualstack,
+		UseARNRegion:            options.UseARNRegion,
+	})
+}
+
+func getARNMemberValue(in interface{}) (*string, bool) {
+	iv, ok := in.(interface{ getARNMemberValue() (*string, bool) })
+	if !ok {
+		return nil, false
+	}
+	return iv.getARNMemberValue()
+}
+func updateARNMemberValue(in interface{}, v string) (interface{}, bool) {
+	iv, ok := in.(interface{ updateARNMemberValue(string) interface{} })
+	if !ok {
+		return &in, false
+	}
+	return iv.updateARNMemberValue(v), true
+}
+
+// getOutpostIDFromInput returns a boolean indicating if the input has a modeled
+// outpost-id, and a pointer to string denoting a provided outpost-id member value
+func getOutpostIDFromInput(input interface{}) (*string, bool) {
+	switch i := input.(type) {
+	case *CreateBucketInput:
+		return i.OutpostId, true
+	case *ListRegionalBucketsInput:
+		return i.OutpostId, true
+	default:
+		return nil, false
+	}
+}
+func backfillAccountID(in interface{}, v string) (interface{}, error) {
+	iv, ok := in.(interface {
+		backfillAccountID(string) (interface{}, error)
+	})
+	if !ok {
+		return in, nil
+	} // as account id is not even supported
+	return iv.backfillAccountID(v)
 }
 
 func addResponseErrorMiddleware(stack *middleware.Stack) {

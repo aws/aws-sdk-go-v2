@@ -155,7 +155,7 @@ func (*endpointPrefix_opCreateAccessPointMiddleware) ID() string {
 func (m *endpointPrefix_opCreateAccessPointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
-	if smithyhttp.GetHostnameImmutable(ctx) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
 		return next.HandleSerialize(ctx, in)
 	}
 
@@ -182,8 +182,16 @@ func (m *endpointPrefix_opCreateAccessPointMiddleware) HandleSerialize(ctx conte
 
 	return next.HandleSerialize(ctx, in)
 }
-func addEndpointPrefix_opCreateAccessPointMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opCreateAccessPointMiddleware{}, `OperationSerializer`, middleware.Before)
+func addEndpointPrefix_opCreateAccessPointMiddleware(stack *middleware.Stack) (err error) {
+	err = stack.Serialize.Insert(&endpointPrefix_opCreateAccessPointMiddleware{}, `OperationSerializer`, middleware.Before)
+	if err != nil {
+		return err
+	}
+	err = stack.Build.Add(&smithyhttp.HostPrefixMiddleware{}, middleware.Before)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func newServiceMetadataMiddleware_opCreateAccessPoint(region string) awsmiddleware.RegisterServiceMetadata {
@@ -193,4 +201,25 @@ func newServiceMetadataMiddleware_opCreateAccessPoint(region string) awsmiddlewa
 		SigningName:   "s3",
 		OperationName: "CreateAccessPoint",
 	}
+}
+
+func (in CreateAccessPointInput) getARNMemberValue() (*string, bool) {
+	if in.Bucket == nil {
+		return nil, false
+	}
+	return in.Bucket, true
+}
+func (in CreateAccessPointInput) updateARNMemberValue(v string) interface{} {
+	in.Bucket = &v
+	return &in
+}
+func (in CreateAccessPointInput) backfillAccountID(v string) (interface{}, error) {
+	if in.AccountId != nil {
+		if !strings.EqualFold(*in.AccountId, v) {
+			return &in, fmt.Errorf("error backfilling account id")
+		}
+		return &in, nil
+	}
+	in.AccountId = &v
+	return &in, nil
 }

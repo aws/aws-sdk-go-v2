@@ -156,7 +156,7 @@ func (*endpointPrefix_opCreateJobMiddleware) ID() string {
 func (m *endpointPrefix_opCreateJobMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
-	if smithyhttp.GetHostnameImmutable(ctx) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
 		return next.HandleSerialize(ctx, in)
 	}
 
@@ -183,8 +183,16 @@ func (m *endpointPrefix_opCreateJobMiddleware) HandleSerialize(ctx context.Conte
 
 	return next.HandleSerialize(ctx, in)
 }
-func addEndpointPrefix_opCreateJobMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opCreateJobMiddleware{}, `OperationSerializer`, middleware.Before)
+func addEndpointPrefix_opCreateJobMiddleware(stack *middleware.Stack) (err error) {
+	err = stack.Serialize.Insert(&endpointPrefix_opCreateJobMiddleware{}, `OperationSerializer`, middleware.Before)
+	if err != nil {
+		return err
+	}
+	err = stack.Build.Add(&smithyhttp.HostPrefixMiddleware{}, middleware.Before)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 type idempotencyToken_initializeOpCreateJob struct {
@@ -227,4 +235,15 @@ func newServiceMetadataMiddleware_opCreateJob(region string) awsmiddleware.Regis
 		SigningName:   "s3",
 		OperationName: "CreateJob",
 	}
+}
+
+func (in CreateJobInput) backfillAccountID(v string) (interface{}, error) {
+	if in.AccountId != nil {
+		if !strings.EqualFold(*in.AccountId, v) {
+			return &in, fmt.Errorf("error backfilling account id")
+		}
+		return &in, nil
+	}
+	in.AccountId = &v
+	return &in, nil
 }
