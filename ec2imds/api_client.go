@@ -13,6 +13,7 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/awslabs/smithy-go"
+	"github.com/awslabs/smithy-go/logging"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -140,6 +141,12 @@ type Options struct {
 	//
 	//    AWS_EC2_METADATA_DISABLED=true
 	ClientEnableState ClientEnableState
+
+	// Configures the events that will be sent to the configured logger.
+	ClientLogMode aws.ClientLogMode
+
+	// The logger writer interface to write logging messages to.
+	Logger logging.Logger
 
 	// provides the caching of API tokens used for operation calls. If unset,
 	// the API token will not be retrieved for the operation.

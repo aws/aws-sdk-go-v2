@@ -86,7 +86,7 @@ func addRequestMiddleware(stack *middleware.Stack,
 	// Retry support
 	return retry.AddRetryMiddlewares(stack, retry.AddRetryMiddlewaresOptions{
 		Retryer:          options.Retryer,
-		LogRetryAttempts: options.LogMode.IsRetries(),
+		LogRetryAttempts: options.ClientLogMode.IsRetries(),
 	})
 }
 
