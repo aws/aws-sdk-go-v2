@@ -43,7 +43,7 @@ import software.amazon.smithy.utils.ListUtils;
  * Writes out a file that resolves endpoints using endpoints.json, but the
  * created resolver resolves endpoints for a single service.
  */
-final class EndpointGenerator implements Runnable {
+public class EndpointGenerator implements Runnable {
     public static final String MIDDLEWARE_NAME = "ResolveEndpoint";
     public static final String ADD_MIDDLEWARE_HELPER_NAME = String.format("add%sMiddleware", MIDDLEWARE_NAME);
     public static final String RESOLVER_INTERFACE_NAME = "EndpointResolver";
@@ -73,8 +73,11 @@ final class EndpointGenerator implements Runnable {
     private final ObjectNode endpointData;
     private final String endpointPrefix;
     private final Map<String, Partition> partitions = new TreeMap<>();
+    private final Boolean isInternalOnly;
+    private final String resolvedSdkID;
 
-    EndpointGenerator(
+
+    public EndpointGenerator(
             GoSettings settings,
             Model model,
             TriConsumer<String, String, Consumer<GoWriter>> writerFactory
@@ -87,6 +90,28 @@ final class EndpointGenerator implements Runnable {
         this.endpointData = Node.parse(IoUtils.readUtf8Resource(getClass(), "endpoints.json")).expectObjectNode();
         validateVersion();
         loadPartitions();
+        this.isInternalOnly = false;
+        this.resolvedSdkID = serviceShape.expectTrait(ServiceTrait.class).getSdkId();
+    }
+
+    public EndpointGenerator(
+            GoSettings settings,
+            Model model,
+            TriConsumer<String, String, Consumer<GoWriter>> writerFactory,
+            String sdkID,
+            String arnNamespace,
+            Boolean internalOnly
+    ) {
+        this.settings = settings;
+        this.model = model;
+        this.writerFactory = writerFactory;
+        serviceShape = settings.getService(model);
+        this.endpointPrefix = getEndpointPrefix(sdkID, arnNamespace);
+        this.endpointData = Node.parse(IoUtils.readUtf8Resource(getClass(), "endpoints.json")).expectObjectNode();
+        validateVersion();
+        loadPartitions();
+        this.isInternalOnly = internalOnly;
+        this.resolvedSdkID = sdkID;
     }
 
     private void validateVersion() {
@@ -105,6 +130,12 @@ final class EndpointGenerator implements Runnable {
         return endpointPrefixData.getStringMemberOrDefault(serviceTrait.getSdkId(), serviceTrait.getArnNamespace());
     }
 
+    private String getEndpointPrefix(String sdkId, String arnNamespace){
+        ObjectNode endpointPrefixData = Node.parse(IoUtils.readUtf8Resource(getClass(), "endpoint-prefix.json"))
+                .expectObjectNode();
+        return endpointPrefixData.getStringMemberOrDefault(sdkId, arnNamespace);
+    }
+
     private void loadPartitions() {
         List<ObjectNode> partitionObjects = endpointData
                 .expectArrayMember("partitions")
@@ -118,22 +149,30 @@ final class EndpointGenerator implements Runnable {
 
     @Override
     public void run() {
-        writerFactory.accept("endpoints.go", settings.getModuleName(), writer -> {
-            generatePublicResolverTypes(writer);
-            generateMiddleware(writer);
-            generateAwsEndpointResolverWrapper(writer);
-        });
-        writerFactory.accept(INTERNAL_ENDPOINT_PACKAGE + "/endpoints.go", getInternalEndpointImportPath(), (writer) -> {
+        if (!this.isInternalOnly) {
+            writerFactory.accept("endpoints.go", settings.getModuleName(), writer -> {
+                generatePublicResolverTypes(writer);
+                generateMiddleware(writer);
+                generateAwsEndpointResolverWrapper(writer);
+            });
+        }
+
+        String pkgName = isInternalOnly? INTERNAL_ENDPOINT_PACKAGE + "/"+this.endpointPrefix :INTERNAL_ENDPOINT_PACKAGE;
+        writerFactory.accept(pkgName + "/endpoints.go", getInternalEndpointImportPath(), (writer) -> {
             generateInternalResolverImplementation(writer);
             generateInternalEndpointsModel(writer);
         });
-        writerFactory.accept(INTERNAL_ENDPOINT_PACKAGE + "/endpoints_test.go",
-                getInternalEndpointImportPath(), (writer) -> {
-                    writer.addUseImports(SmithyGoDependency.TESTING);
-                    writer.openBlock("func TestRegexCompile(t *testing.T) {", "}", () -> {
-                        writer.write("_ = $T", getInternalEndpointsSymbol(INTERNAL_ENDPOINTS_DATA_NAME, false).build());
-                    });
-                });
+
+        if (!this.isInternalOnly) {
+            writerFactory.accept(INTERNAL_ENDPOINT_PACKAGE + "/endpoints_test.go",
+                    getInternalEndpointImportPath(), (writer) -> {
+                        writer.addUseImports(SmithyGoDependency.TESTING);
+                        writer.openBlock("func TestRegexCompile(t *testing.T) {", "}", () -> {
+                            writer.write("_ = $T", getInternalEndpointsSymbol(INTERNAL_ENDPOINTS_DATA_NAME, false).build());
+                        });
+            });
+        }
+
     }
 
     private void generateAwsEndpointResolverWrapper(GoWriter writer) {
@@ -252,12 +291,13 @@ final class EndpointGenerator implements Runnable {
             });
             w.write("ctx = awsmiddleware.SetSigningName(ctx, signingName)");
         });
-        w.write("");
-
-        w.write("ctx = awsmiddleware.SetSigningRegion(ctx, endpoint.SigningRegion)");
         w.write("ctx = smithyhttp.SetHostnameImmutable(ctx, endpoint.HostnameImmutable)");
-        w.write("");
+        // set signing region on context
+        w.write("ctx = awsmiddleware.SetSigningRegion(ctx, endpoint.SigningRegion)");
+        // set partition id on context
+        w.write("ctx = awsmiddleware.SetPartitionID(ctx, endpoint.PartitionID)");
 
+        w.insertTrailingNewline();
         w.write("return next.HandleSerialize(ctx, in)");
     }
 
@@ -387,8 +427,10 @@ final class EndpointGenerator implements Runnable {
 
         // Resolver
         Symbol resolverImplSymbol = SymbolUtils.createPointableSymbolBuilder(INTERNAL_RESOLVER_NAME).build();
+
+
         writer.writeDocs(String.format("%s %s endpoint resolver", resolverImplSymbol.getName(),
-                serviceShape.expectTrait(ServiceTrait.class).getSdkId()));
+                this.resolvedSdkID));
         writer.openBlock("type $T struct {", "}", resolverImplSymbol, () -> {
             writer.write("partitions $T", SymbolUtils.createValueSymbolBuilder("Partitions",
                     AwsGoDependency.AWS_ENDPOINTS).build());
