@@ -19,10 +19,12 @@ type InitARNLookupMiddleware struct {
 	GetARNValue func(interface{}) (*string, bool)
 }
 
+// ID for the middleware
 func (m *InitARNLookupMiddleware) ID() string {
 	return "S3Shared:InitARNLookupMiddleware"
 }
 
+// HandleInitialize handles the behavior of this initialize step
 func (m *InitARNLookupMiddleware) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {

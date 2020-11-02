@@ -180,6 +180,7 @@ func NewClientConfiguredForDualStackError(resource arn.Resource, clientPartition
 	}
 }
 
+// SprintError returns a formatted error message string
 func SprintError(code, message, extra string, origErr error) string {
 	msg := code + " : " + message
 	if extra != "" {

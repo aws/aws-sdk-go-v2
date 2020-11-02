@@ -7,7 +7,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared/arn"
 )
 
-// Used by shapes with members decorated as endpoint ARN.
+// ParseEndpointARN parses a given generic aws ARN into a s3 arn resource.
 func ParseEndpointARN(v awsarn.ARN) (arn.Resource, error) {
 	return arn.ParseResource(v, accessPointResourceParser)
 }

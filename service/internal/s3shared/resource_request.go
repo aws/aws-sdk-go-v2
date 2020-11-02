@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared/arn"
 )
 
+// ResourceRequest represents an ARN resource and api request metadata
 type ResourceRequest struct {
 	Resource arn.Resource
 	// RequestRegion is the region configured on the request config
@@ -28,7 +29,7 @@ func (r ResourceRequest) ARN() awsarn.ARN {
 	return r.Resource.GetARN()
 }
 
-// UseFIPS returns true if request config region is FIPS region.
+// UseFips returns true if request config region is FIPS region.
 func (r ResourceRequest) UseFips() bool {
 	return IsFIPS(r.RequestRegion)
 }
@@ -66,7 +67,6 @@ func (r ResourceRequest) IsCrossRegion() bool {
 	return !strings.EqualFold(v, r.Resource.GetARN().Region)
 }
 
-// TODO: should this be moved in aws endpoints package
 // IsFIPS returns true if region is a fips region
 func IsFIPS(clientRegion string) bool {
 	return (strings.HasPrefix(clientRegion, "fips-") ||
