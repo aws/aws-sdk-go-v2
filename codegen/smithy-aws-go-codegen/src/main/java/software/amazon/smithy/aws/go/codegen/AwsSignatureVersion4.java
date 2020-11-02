@@ -66,8 +66,7 @@ public final class AwsSignatureVersion4 implements GoIntegration {
             goDelegator.useShapeWriter(serviceShape, writer -> {
                 writeMiddlewareRegister(model, writer, serviceShape);
                 writerSignerInterface(writer);
-                writeConfigureSigner(writer, serviceShape);
-                writerConfigFieldResolver(writer);
+                writerConfigFieldResolver(writer, serviceShape);
             });
         }
     }
@@ -83,25 +82,23 @@ public final class AwsSignatureVersion4 implements GoIntegration {
         });
     }
 
-    private void writerConfigFieldResolver(GoWriter writer) {
-        Symbol signerSymbol = SymbolUtils.createValueSymbolBuilder("NewSigner", AwsGoDependency.AWS_SIGNER_V4).build();
+    private void writerConfigFieldResolver(GoWriter writer, ServiceShape serviceShape) {
+        Symbol newSignerSymbol = SymbolUtils.createValueSymbolBuilder("NewSigner",
+                AwsGoDependency.AWS_SIGNER_V4).build();
+        Symbol signerSymbol = SymbolUtils.createPointableSymbolBuilder("Signer",
+                AwsGoDependency.AWS_SIGNER_V4).build();
 
         writer.openBlock("func $L(o *Options) {", "}", SIGNER_RESOLVER, () -> {
             writer.openBlock("if o.$L != nil {", "}", SIGNER_CONFIG_FIELD_NAME, () -> writer.write("return"));
-            writer.openBlock("o.$L = $T(", ")", SIGNER_CONFIG_FIELD_NAME, signerSymbol, () -> {
-                writer.write("$L,", CONFIGURE_SIGNER_FUNCTION);
+            writer.openBlock("o.$L = $T(", ")", SIGNER_CONFIG_FIELD_NAME, newSignerSymbol, () -> {
+                writer.openBlock("func (s $P) {", "},", signerSymbol, () -> {
+                    writer.write("s.Logger = o.$L", AddAwsConfigFields.LOGGER_CONFIG_NAME);
+                    writer.write("s.LogSigning = o.$L.IsSigning()", AddAwsConfigFields.LOG_MODE_CONFIG_NAME);
+                    if (DISABLE_URI_PATH_ESCAPE.contains(serviceShape.getId().toString())) {
+                        writer.write("s.DisableURIPathEscaping = true");
+                    }
+                });
             });
-        });
-        writer.write("");
-    }
-
-    private void writeConfigureSigner(GoWriter writer, ServiceShape serviceShape) {
-        Symbol signerSymbol = SymbolUtils.createPointableSymbolBuilder("Signer", AwsGoDependency.AWS_SIGNER_V4).build();
-
-        writer.openBlock("func $L(s $P) {", "}", CONFIGURE_SIGNER_FUNCTION, signerSymbol, () -> {
-            if (DISABLE_URI_PATH_ESCAPE.contains(serviceShape.getId().toString())) {
-                writer.write("s.DisableURIPathEscaping = true");
-            }
         });
         writer.write("");
     }
