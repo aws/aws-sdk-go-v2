@@ -7,16 +7,26 @@ import (
 	"net/url"
 	"strings"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 
+	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared"
+
+	internalendpoints "github.com/aws/aws-sdk-go-v2/service/s3/internal/endpoints"
 )
+
+// EndpointResolver interface for resolving service endpoints.
+type EndpointResolver interface {
+	ResolveEndpoint(region string, options EndpointResolverOptions) (aws.Endpoint, error)
+}
+
+// EndpointResolverOptions is the service endpoint resolver options
+type EndpointResolverOptions = internalendpoints.Options
 
 // UpdateEndpointOptions provides the options for the UpdateEndpoint middleware setup.
 type UpdateEndpointOptions struct {
-	// region used
-	Region string
 
 	// functional pointer to fetch bucket name from provided input.
 	// The function is intended to take an input value, and
@@ -37,20 +47,44 @@ type UpdateEndpointOptions struct {
 
 	// use dualstack
 	UseDualstack bool
+
+	// use ARN region
+	UseARNRegion bool
+
+	// EndpointResolver used to resolve endpoints. This may be a custom endpoint resolver
+	EndpointResolver EndpointResolver
+
+	// EndpointResolverOptions used by endpoint resolver
+	EndpointResolverOptions EndpointResolverOptions
 }
 
 // UpdateEndpoint adds the middleware to the middleware stack based on the UpdateEndpointOptions.
 func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) {
+	// initial arn look up middleware
+	stack.Initialize.Insert(&s3shared.InitARNLookupMiddleware{
+		GetARNValue: options.GetBucketFromInput,
+	}, "OperationInputValidation", middleware.Before)
+
+	// process arn
+	stack.Serialize.Insert(&processARNResourceMiddleware{
+		UseARNRegion:            options.UseARNRegion,
+		UseAccelerate:           options.UseAccelerate,
+		UseDualstack:            options.UseDualstack,
+		EndpointResolver:        options.EndpointResolver,
+		EndpointResolverOptions: options.EndpointResolverOptions,
+	}, "OperationSerializer", middleware.Before)
+
+	// remove bucket arn middleware
+	stack.Serialize.Insert(&removeBucketFromPathMiddleware{}, "OperationSerializer", middleware.After)
 
 	// enable dual stack support
 	stack.Serialize.Insert(&s3shared.EnableDualstackMiddleware{
-		UseDualstack: options.UseDualstack,
-		ServiceID:    "s3",
+		UseDualstack:     options.UseDualstack,
+		DefaultServiceID: "s3",
 	}, "OperationSerializer", middleware.After)
 
 	// update endpoint to use options for path style and accelerate
 	stack.Serialize.Insert(&updateEndpointMiddleware{
-		region:             options.Region,
 		usePathStyle:       options.UsePathStyle,
 		getBucketFromInput: options.GetBucketFromInput,
 		useAccelerate:      options.UseAccelerate,
@@ -59,8 +93,6 @@ func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) {
 }
 
 type updateEndpointMiddleware struct {
-	region string
-
 	// path style options
 	usePathStyle       bool
 	getBucketFromInput func(interface{}) (*string, bool)
@@ -78,6 +110,12 @@ func (u *updateEndpointMiddleware) HandleSerialize(
 ) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	// if arn was processed, skip this middleware
+	if _, ok := s3shared.GetARNResourceFromContext(ctx); ok {
+		return next.HandleSerialize(ctx, in)
+	}
+
+	// skip this customization if host name is set as immutable
 	if smithyhttp.GetHostnameImmutable(ctx) {
 		return next.HandleSerialize(ctx, in)
 	}
@@ -104,7 +142,8 @@ func (u *updateEndpointMiddleware) HandleSerialize(
 		// Below customization only apply if bucket name is provided
 		bucket, ok := u.getBucketFromInput(in.Parameters)
 		if ok && bucket != nil {
-			if err := u.updateEndpointFromConfig(req, *bucket); err != nil {
+			region := awsmiddleware.GetRegion(ctx)
+			if err := u.updateEndpointFromConfig(req, *bucket, region); err != nil {
 				return out, metadata, err
 			}
 		}
@@ -113,7 +152,7 @@ func (u *updateEndpointMiddleware) HandleSerialize(
 	return next.HandleSerialize(ctx, in)
 }
 
-func (u updateEndpointMiddleware) updateEndpointFromConfig(req *smithyhttp.Request, bucket string) error {
+func (u updateEndpointMiddleware) updateEndpointFromConfig(req *smithyhttp.Request, bucket string, region string) error {
 	// do nothing if path style is enforced
 	if u.usePathStyle {
 		return nil
@@ -144,7 +183,7 @@ func (u updateEndpointMiddleware) updateEndpointFromConfig(req *smithyhttp.Reque
 		}
 
 		for i := 1; i+1 < len(parts); i++ {
-			if strings.EqualFold(parts[i], u.region) {
+			if strings.EqualFold(parts[i], region) {
 				parts = append(parts[:i], parts[i+1:]...)
 				break
 			}
