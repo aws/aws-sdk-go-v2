@@ -1,6 +1,9 @@
 package integrationtest
 
 import (
+	"crypto/rand"
+	"io"
+	"fmt"
 	"log"
 	"os"
 	"strings"
@@ -43,4 +46,12 @@ type logger struct{}
 
 func (logger) Logf(format string, args ...interface{}) {
 	log.Printf(format, args...)
+}
+
+// UniqueID returns a unique UUID-like identifier for use in generating
+// resources for integration tests.
+func UniqueID() string {
+	uuid := make([]byte, 16)
+	io.ReadFull(rand.Reader, uuid)
+	return fmt.Sprintf("%x", uuid)
 }
