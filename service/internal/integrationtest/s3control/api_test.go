@@ -5,7 +5,6 @@ package s3control
 import (
 	"context"
 	"errors"
-	"fmt"
 	"testing"
 
 	"github.com/awslabs/smithy-go/ptr"
@@ -25,8 +24,6 @@ func TestInteg_PublicAccessBlock(t *testing.T) {
 			t.Fatalf("expect no error for GetPublicAccessBlock, got %v", err)
 		}
 	}
-
-	fmt.Println(accountID)
 
 	_, err = svc.PutPublicAccessBlock(ctx, &s3control.PutPublicAccessBlockInput{
 		AccountId: ptr.String(accountID),

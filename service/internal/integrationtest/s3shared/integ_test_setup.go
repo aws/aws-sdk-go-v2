@@ -33,7 +33,7 @@ func SetupBucket(ctx context.Context, svc *s3.Client, bucketName string) (err er
 
 	// TODO: change this to use waiter to wait until BucketExists instead of sleep timer
 	// 	svc.WaitUntilBucketExists(HeadBucketInput)
-	time.Sleep(1 * time.Minute)
+	time.Sleep(20 * time.Second)
 
 	// HeadBucket to determine if bucket exists
 	_, err = svc.HeadBucket(ctx, &s3.HeadBucketInput{
