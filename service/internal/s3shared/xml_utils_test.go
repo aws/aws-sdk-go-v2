@@ -14,6 +14,15 @@ func TestGetResponseErrorCode(t *testing.T) {
     <RequestId>foo-id</RequestId>
 </Error>`
 
+	const wrappedXmlErrorResponse = `<ErrorResponse><Error>
+    <Type>Sender</Type>
+    <Code>InvalidGreeting</Code>
+    <Message>Hi</Message>
+</Error>
+    <HostId>bar-id</HostId>
+    <RequestId>foo-id</RequestId>
+</ErrorResponse>`
+
 	cases := map[string]struct {
 		getErr                 func() (ErrorComponents, error)
 		expectedErrorCode      string
@@ -24,7 +33,11 @@ func TestGetResponseErrorCode(t *testing.T) {
 		"standard xml error": {
 			getErr: func() (ErrorComponents, error) {
 				errResp := strings.NewReader(xmlErrorResponse)
-				return GetErrorResponseComponents(errResp)
+				return GetErrorResponseComponents(errResp, ErrorResponseDeserializerOptions{
+					UseStatusCode:         false,
+					StatusCode:            0,
+					IsWrappedWithErrorTag: false,
+				})
 			},
 			expectedErrorCode:      "InvalidGreeting",
 			expectedErrorMessage:   "Hi",
@@ -35,7 +48,10 @@ func TestGetResponseErrorCode(t *testing.T) {
 		"s3 no response body": {
 			getErr: func() (ErrorComponents, error) {
 				errResp := strings.NewReader("")
-				return GetS3ErrorResponseComponents(errResp, 400)
+				return GetErrorResponseComponents(errResp, ErrorResponseDeserializerOptions{
+					UseStatusCode: true,
+					StatusCode:    400,
+				})
 			},
 			expectedErrorCode:    "BadRequest",
 			expectedErrorMessage: "Bad Request",
@@ -43,8 +59,22 @@ func TestGetResponseErrorCode(t *testing.T) {
 		"s3control no response body": {
 			getErr: func() (ErrorComponents, error) {
 				errResp := strings.NewReader("")
-				return GetErrorResponseComponents(errResp)
+				return GetErrorResponseComponents(errResp, ErrorResponseDeserializerOptions{
+					IsWrappedWithErrorTag: true,
+				})
 			},
+		},
+		"s3control standard response body": {
+			getErr: func() (ErrorComponents, error) {
+				errResp := strings.NewReader(wrappedXmlErrorResponse)
+				return GetErrorResponseComponents(errResp, ErrorResponseDeserializerOptions{
+					IsWrappedWithErrorTag: true,
+				})
+			},
+			expectedErrorCode:      "InvalidGreeting",
+			expectedErrorMessage:   "Hi",
+			expectedErrorRequestID: "foo-id",
+			expectedErrorHostID:    "bar-id",
 		},
 	}
 

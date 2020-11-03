@@ -10,6 +10,7 @@ import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
+import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.SyntheticClone;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.model.Model;
@@ -274,12 +275,28 @@ final class XmlProtocolUtils {
         ServiceShape service = context.getService();
 
         if (requiresS3Customization(service)) {
-            writer.addUseImports(AwsCustomGoDependency.S3_SHARED_CUSTOMIZATION);
+            Symbol getErrorComponentFunction = SymbolUtils.createValueSymbolBuilder(
+                    "GetErrorResponseComponents",
+                    AwsCustomGoDependency.S3_SHARED_CUSTOMIZATION
+            ).build();
+
+            Symbol errorOptions = SymbolUtils.createValueSymbolBuilder(
+                    "ErrorResponseDeserializerOptions",
+                    AwsCustomGoDependency.S3_SHARED_CUSTOMIZATION
+            ).build();
+
             if (isS3Service(service)){
-                writer.write("errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)");
+                // s3 service
+                writer.openBlock("errorComponents, err := $T(errorBody, $T{",
+                        "})", getErrorComponentFunction, errorOptions, () -> {
+                    writer.write("UseStatusCode : true, StatusCode : response.StatusCode,");
+                });
             } else {
                 // s3 control
-                writer.write("errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)");
+                writer.openBlock("errorComponents, err := $T(errorBody, $T{",
+                        "})", getErrorComponentFunction, errorOptions, () -> {
+                            writer.write("IsWrappedWithErrorTag: true,");
+                        });
             }
 
             writer.write("if err != nil { return err }");
