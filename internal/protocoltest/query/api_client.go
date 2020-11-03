@@ -10,6 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	smithy "github.com/awslabs/smithy-go"
+	"github.com/awslabs/smithy-go/logging"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyrand "github.com/awslabs/smithy-go/rand"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -29,6 +30,8 @@ type Client struct {
 // such as changing the client's endpoint or adding custom middleware behavior.
 func New(options Options, optFns ...func(*Options)) *Client {
 	options = options.Copy()
+
+	resolveDefaultLogger(&options)
 
 	resolveRetryer(&options)
 
@@ -55,6 +58,9 @@ type Options struct {
 	// modify this list for per operation behavior.
 	APIOptions []func(*middleware.Stack) error
 
+	// Configures the events that will be sent to the configured logger.
+	ClientLogMode aws.ClientLogMode
+
 	// The endpoint options to be used when attempting to resolve an endpoint.
 	EndpointOptions EndpointResolverOptions
 
@@ -64,6 +70,9 @@ type Options struct {
 	// Provides idempotency tokens values that will be automatically populated into
 	// idempotent API operations.
 	IdempotencyTokenProvider IdempotencyTokenProvider
+
+	// The logger writer interface to write logging messages to.
+	Logger logging.Logger
 
 	// The region to send requests to. (Required)
 	Region string
@@ -119,13 +128,19 @@ func (c *Client) invokeOperation(ctx context.Context, opID string, params interf
 	return result, metadata, err
 }
 
+func resolveDefaultLogger(o *Options) {
+	o.Logger = logging.Noop{}
+}
+
 // NewFromConfig returns a new client from the provided config.
 func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 	opts := Options{
-		Region:     cfg.Region,
-		Retryer:    cfg.Retryer,
-		HTTPClient: cfg.HTTPClient,
-		APIOptions: cfg.APIOptions,
+		Region:        cfg.Region,
+		Retryer:       cfg.Retryer,
+		HTTPClient:    cfg.HTTPClient,
+		APIOptions:    cfg.APIOptions,
+		Logger:        cfg.Logger,
+		ClientLogMode: cfg.ClientLogMode,
 	}
 	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
@@ -165,7 +180,8 @@ func resolveIdempotencyTokenProvider(o *Options) {
 
 func addRetryMiddlewares(stack *middleware.Stack, o Options) error {
 	mo := retry.AddRetryMiddlewaresOptions{
-		Retryer: o.Retryer,
+		Retryer:          o.Retryer,
+		LogRetryAttempts: o.ClientLogMode.IsRetries(),
 	}
 	return retry.AddRetryMiddlewares(stack, mo)
 }
@@ -181,4 +197,13 @@ func addRequestIDRetrieverMiddleware(stack *middleware.Stack) error {
 
 func addResponseErrorMiddleware(stack *middleware.Stack) error {
 	return awshttp.AddResponseErrorMiddleware(stack)
+}
+
+func addRequestResponseLogging(stack *middleware.Stack, o Options) error {
+	return stack.Deserialize.Add(&smithyhttp.RequestResponseLogger{
+		LogRequest:          o.ClientLogMode.IsRequest(),
+		LogRequestWithBody:  o.ClientLogMode.IsRequestWithBody(),
+		LogResponse:         o.ClientLogMode.IsResponse(),
+		LogResponseWithBody: o.ClientLogMode.IsResponseWithBody(),
+	}, middleware.After)
 }

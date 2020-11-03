@@ -13,6 +13,7 @@ import (
 	ddbcust "github.com/aws/aws-sdk-go-v2/service/dynamodb/internal/customizations"
 	acceptencodingcust "github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding"
 	smithy "github.com/awslabs/smithy-go"
+	"github.com/awslabs/smithy-go/logging"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyrand "github.com/awslabs/smithy-go/rand"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -33,6 +34,8 @@ type Client struct {
 // such as changing the client's endpoint or adding custom middleware behavior.
 func New(options Options, optFns ...func(*Options)) *Client {
 	options = options.Copy()
+
+	resolveDefaultLogger(&options)
 
 	resolveRetryer(&options)
 
@@ -61,6 +64,9 @@ type Options struct {
 	// modify this list for per operation behavior.
 	APIOptions []func(*middleware.Stack) error
 
+	// Configures the events that will be sent to the configured logger.
+	ClientLogMode aws.ClientLogMode
+
 	// The credentials object to use when signing requests.
 	Credentials aws.CredentialsProvider
 
@@ -84,6 +90,9 @@ type Options struct {
 	// Provides idempotency tokens values that will be automatically populated into
 	// idempotent API operations.
 	IdempotencyTokenProvider IdempotencyTokenProvider
+
+	// The logger writer interface to write logging messages to.
+	Logger logging.Logger
 
 	// The region to send requests to. (Required)
 	Region string
@@ -139,14 +148,20 @@ func (c *Client) invokeOperation(ctx context.Context, opID string, params interf
 	return result, metadata, err
 }
 
+func resolveDefaultLogger(o *Options) {
+	o.Logger = logging.Noop{}
+}
+
 // NewFromConfig returns a new client from the provided config.
 func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 	opts := Options{
-		Region:      cfg.Region,
-		Retryer:     cfg.Retryer,
-		HTTPClient:  cfg.HTTPClient,
-		Credentials: cfg.Credentials,
-		APIOptions:  cfg.APIOptions,
+		Region:        cfg.Region,
+		Retryer:       cfg.Retryer,
+		HTTPClient:    cfg.HTTPClient,
+		Credentials:   cfg.Credentials,
+		APIOptions:    cfg.APIOptions,
+		Logger:        cfg.Logger,
+		ClientLogMode: cfg.ClientLogMode,
 	}
 	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
@@ -185,15 +200,15 @@ type HTTPSignerV4 interface {
 	SignHTTP(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error
 }
 
-func configureSignerV4(s *v4.Signer) {
-}
-
 func resolveHTTPSignerV4(o *Options) {
 	if o.HTTPSignerV4 != nil {
 		return
 	}
 	o.HTTPSignerV4 = v4.NewSigner(
-		configureSignerV4,
+		func(s *v4.Signer) {
+			s.Logger = o.Logger
+			s.LogSigning = o.ClientLogMode.IsSigning()
+		},
 	)
 }
 
@@ -206,7 +221,8 @@ func resolveIdempotencyTokenProvider(o *Options) {
 
 func addRetryMiddlewares(stack *middleware.Stack, o Options) error {
 	mo := retry.AddRetryMiddlewaresOptions{
-		Retryer: o.Retryer,
+		Retryer:          o.Retryer,
+		LogRetryAttempts: o.ClientLogMode.IsRetries(),
 	}
 	return retry.AddRetryMiddlewares(stack, mo)
 }
@@ -230,4 +246,13 @@ func addValidateResponseChecksum(stack *middleware.Stack, options Options) error
 
 func addAcceptEncodingGzip(stack *middleware.Stack, options Options) error {
 	return acceptencodingcust.AddAcceptEncodingGzip(stack, acceptencodingcust.AddAcceptEncodingGzipOptions{Enable: options.EnableAcceptEncodingGzip})
+}
+
+func addRequestResponseLogging(stack *middleware.Stack, o Options) error {
+	return stack.Deserialize.Add(&smithyhttp.RequestResponseLogger{
+		LogRequest:          o.ClientLogMode.IsRequest(),
+		LogRequestWithBody:  o.ClientLogMode.IsRequestWithBody(),
+		LogResponse:         o.ClientLogMode.IsResponse(),
+		LogResponseWithBody: o.ClientLogMode.IsResponseWithBody(),
+	}, middleware.After)
 }
