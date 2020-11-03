@@ -3,6 +3,8 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 require (
 	github.com/aws/aws-sdk-go-v2 v0.29.0
 	github.com/aws/aws-sdk-go-v2/config v0.2.2
+	github.com/aws/aws-sdk-go-v2/credentials v0.1.4
+	github.com/aws/aws-sdk-go-v2/ec2imds v0.1.4
 	github.com/aws/aws-sdk-go-v2/service/acm v0.29.0
 	github.com/aws/aws-sdk-go-v2/service/apigateway v0.29.0
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v0.29.0
@@ -69,6 +71,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53domains v0.29.0
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v0.29.0
 	github.com/aws/aws-sdk-go-v2/service/s3 v0.29.0
+	github.com/aws/aws-sdk-go-v2/service/s3control v0.29.0
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v0.29.0
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v0.29.0
 	github.com/aws/aws-sdk-go-v2/service/ses v0.29.0
@@ -221,6 +224,8 @@ replace github.com/aws/aws-sdk-go-v2/service/route53domains => ../../../service/
 replace github.com/aws/aws-sdk-go-v2/service/route53resolver => ../../../service/route53resolver/
 
 replace github.com/aws/aws-sdk-go-v2/service/s3 => ../../../service/s3/
+
+replace github.com/aws/aws-sdk-go-v2/service/s3control => ../../../service/s3control/
 
 replace github.com/aws/aws-sdk-go-v2/service/secretsmanager => ../../../service/secretsmanager/
 
