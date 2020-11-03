@@ -92,7 +92,6 @@ func awsRestxml_deserializeOpErrorCreateAccessPoint(response *smithyhttp.Respons
 	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
 		IsWrappedWithErrorTag: true,
 	})
-	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
 	}
@@ -243,7 +242,6 @@ func awsRestxml_deserializeOpErrorCreateBucket(response *smithyhttp.Response, me
 	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
 		IsWrappedWithErrorTag: true,
 	})
-	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
 	}
@@ -407,7 +405,6 @@ func awsRestxml_deserializeOpErrorCreateJob(response *smithyhttp.Response, metad
 	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
 		IsWrappedWithErrorTag: true,
 	})
-	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
 	}
@@ -537,7 +534,6 @@ func awsRestxml_deserializeOpErrorDeleteAccessPoint(response *smithyhttp.Respons
 	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
 		IsWrappedWithErrorTag: true,
 	})
-	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
 	}
@@ -607,7 +603,6 @@ func awsRestxml_deserializeOpErrorDeleteAccessPointPolicy(response *smithyhttp.R
 	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
 		IsWrappedWithErrorTag: true,
 	})
-	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
 	}
@@ -677,7 +672,6 @@ func awsRestxml_deserializeOpErrorDeleteBucket(response *smithyhttp.Response, me
 	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
 		IsWrappedWithErrorTag: true,
 	})
-	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
 	}
@@ -747,7 +741,6 @@ func awsRestxml_deserializeOpErrorDeleteBucketLifecycleConfiguration(response *s
 	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
 		IsWrappedWithErrorTag: true,
 	})
-	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
 	}
@@ -817,7 +810,6 @@ func awsRestxml_deserializeOpErrorDeleteBucketPolicy(response *smithyhttp.Respon
 	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
 		IsWrappedWithErrorTag: true,
 	})
-	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
 	}
@@ -887,7 +879,6 @@ func awsRestxml_deserializeOpErrorDeleteBucketTagging(response *smithyhttp.Respo
 	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
 		IsWrappedWithErrorTag: true,
 	})
-	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
 	}
@@ -957,7 +948,6 @@ func awsRestxml_deserializeOpErrorDeleteJobTagging(response *smithyhttp.Response
 	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
 		IsWrappedWithErrorTag: true,
 	})
-	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
 	}
@@ -1036,7 +1026,6 @@ func awsRestxml_deserializeOpErrorDeletePublicAccessBlock(response *smithyhttp.R
 	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
 		IsWrappedWithErrorTag: true,
 	})
-	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
 	}
@@ -1134,7 +1123,6 @@ func awsRestxml_deserializeOpErrorDescribeJob(response *smithyhttp.Response, met
 	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
 		IsWrappedWithErrorTag: true,
 	})
-	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
 	}
@@ -1282,7 +1270,6 @@ func awsRestxml_deserializeOpErrorGetAccessPoint(response *smithyhttp.Response, 
 	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
 		IsWrappedWithErrorTag: true,
 	})
-	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
 	}
@@ -1486,7 +1473,6 @@ func awsRestxml_deserializeOpErrorGetAccessPointPolicy(response *smithyhttp.Resp
 	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
 		IsWrappedWithErrorTag: true,
 	})
-	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
 	}
@@ -1632,7 +1618,6 @@ func awsRestxml_deserializeOpErrorGetAccessPointPolicyStatus(response *smithyhtt
 	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
 		IsWrappedWithErrorTag: true,
 	})
-	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
 	}
@@ -1768,7 +1753,6 @@ func awsRestxml_deserializeOpErrorGetBucket(response *smithyhttp.Response, metad
 	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
 		IsWrappedWithErrorTag: true,
 	})
-	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
 	}
@@ -1947,7 +1931,6 @@ func awsRestxml_deserializeOpErrorGetBucketLifecycleConfiguration(response *smit
 	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
 		IsWrappedWithErrorTag: true,
 	})
-	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
 	}
@@ -2083,7 +2066,6 @@ func awsRestxml_deserializeOpErrorGetBucketPolicy(response *smithyhttp.Response,
 	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
 		IsWrappedWithErrorTag: true,
 	})
-	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
 	}
@@ -2229,7 +2211,6 @@ func awsRestxml_deserializeOpErrorGetBucketTagging(response *smithyhttp.Response
 	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
 		IsWrappedWithErrorTag: true,
 	})
-	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
 	}
@@ -2365,7 +2346,6 @@ func awsRestxml_deserializeOpErrorGetJobTagging(response *smithyhttp.Response, m
 	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
 		IsWrappedWithErrorTag: true,
 	})
-	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
 	}
@@ -2510,7 +2490,6 @@ func awsRestxml_deserializeOpErrorGetPublicAccessBlock(response *smithyhttp.Resp
 	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
 		IsWrappedWithErrorTag: true,
 	})
-	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
 	}
@@ -2649,7 +2628,6 @@ func awsRestxml_deserializeOpErrorListAccessPoints(response *smithyhttp.Response
 	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
 		IsWrappedWithErrorTag: true,
 	})
-	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
 	}
@@ -2801,7 +2779,6 @@ func awsRestxml_deserializeOpErrorListJobs(response *smithyhttp.Response, metada
 	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
 		IsWrappedWithErrorTag: true,
 	})
-	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
 	}
@@ -2962,7 +2939,6 @@ func awsRestxml_deserializeOpErrorListRegionalBuckets(response *smithyhttp.Respo
 	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
 		IsWrappedWithErrorTag: true,
 	})
-	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
 	}
@@ -3086,7 +3062,6 @@ func awsRestxml_deserializeOpErrorPutAccessPointPolicy(response *smithyhttp.Resp
 	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
 		IsWrappedWithErrorTag: true,
 	})
-	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
 	}
@@ -3156,7 +3131,6 @@ func awsRestxml_deserializeOpErrorPutBucketLifecycleConfiguration(response *smit
 	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
 		IsWrappedWithErrorTag: true,
 	})
-	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
 	}
@@ -3226,7 +3200,6 @@ func awsRestxml_deserializeOpErrorPutBucketPolicy(response *smithyhttp.Response,
 	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
 		IsWrappedWithErrorTag: true,
 	})
-	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
 	}
@@ -3296,7 +3269,6 @@ func awsRestxml_deserializeOpErrorPutBucketTagging(response *smithyhttp.Response
 	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
 		IsWrappedWithErrorTag: true,
 	})
-	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
 	}
@@ -3366,7 +3338,6 @@ func awsRestxml_deserializeOpErrorPutJobTagging(response *smithyhttp.Response, m
 	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
 		IsWrappedWithErrorTag: true,
 	})
-	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
 	}
@@ -3448,7 +3419,6 @@ func awsRestxml_deserializeOpErrorPutPublicAccessBlock(response *smithyhttp.Resp
 	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
 		IsWrappedWithErrorTag: true,
 	})
-	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
 	}
@@ -3546,7 +3516,6 @@ func awsRestxml_deserializeOpErrorUpdateJobPriority(response *smithyhttp.Respons
 	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
 		IsWrappedWithErrorTag: true,
 	})
-	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
 	}
@@ -3721,7 +3690,6 @@ func awsRestxml_deserializeOpErrorUpdateJobStatus(response *smithyhttp.Response,
 	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
 		IsWrappedWithErrorTag: true,
 	})
-	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
 	}

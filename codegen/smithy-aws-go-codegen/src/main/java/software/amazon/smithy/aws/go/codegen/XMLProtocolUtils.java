@@ -297,7 +297,6 @@ final class XmlProtocolUtils {
                         "})", getErrorComponentFunction, errorOptions, () -> {
                             writer.write("IsWrappedWithErrorTag: true,");
                         });
-                writer.write("errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)");
             }
 
             writer.write("if err != nil { return err }");
