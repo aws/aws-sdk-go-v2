@@ -48,8 +48,8 @@ public class AWSRequestIDRetriever implements GoIntegration {
     }
 
     private void writeMiddlewareHelper(GoWriter writer) {
-        writer.openBlock("func $L(stack *middleware.Stack) {", "}", ADD_REQUEST_ID_RETRIEVER, () -> {
-            writer.write("$T(stack)",
+        writer.openBlock("func $L(stack *middleware.Stack) error {", "}", ADD_REQUEST_ID_RETRIEVER, () -> {
+            writer.write("return $T(stack)",
                     SymbolUtils.createValueSymbolBuilder(ADD_REQUEST_ID_RETRIEVER_INTERNAL,
                             AwsGoDependency.AWS_MIDDLEWARE).build()
             );

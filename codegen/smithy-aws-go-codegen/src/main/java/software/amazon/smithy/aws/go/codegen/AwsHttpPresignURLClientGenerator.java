@@ -122,11 +122,11 @@ public class AwsHttpPresignURLClientGenerator {
 
                     writer.write("ctx = $T(ctx)", withIsPresigning);
                     writer.openBlock("result, _, err := c.client.invokeOperation(ctx, $S, params, optFns,", ")",
-                            operationSymbol.getName(),
-                            () -> {
-                        writer.write("$L,", OperationGenerator.getAddOperationMiddlewareFuncName(operationSymbol));
-                        writer.write("c.$L,", CONVERT_TO_PRESIGN_MIDDLEWARE_NAME);
-                    });
+                            operationSymbol.getName(), () -> {
+                                writer.write("$L,", OperationGenerator
+                                        .getAddOperationMiddlewareFuncName(operationSymbol));
+                                writer.write("c.$L,", CONVERT_TO_PRESIGN_MIDDLEWARE_NAME);
+                            });
                     writer.write("if err != nil { return ``, nil, err }");
                     writer.write("");
 
@@ -147,8 +147,8 @@ public class AwsHttpPresignURLClientGenerator {
                             .build();
 
                     // Middleware to remove
-                    Symbol requestInvocationIDMiddleware = SymbolUtils.createValueSymbolBuilder(
-                            "RequestInvocationIDMiddleware",
+                    Symbol requestInvocationID = SymbolUtils.createPointableSymbolBuilder(
+                            "ClientRequestID",
                             AwsGoDependency.AWS_MIDDLEWARE)
                             .build();
 
@@ -160,10 +160,10 @@ public class AwsHttpPresignURLClientGenerator {
                     // Middleware to add
                     writer.write("stack.Finalize.Clear()");
                     writer.write("stack.Deserialize.Clear()");
-                    writer.write("stack.Build.Remove($T{}.ID())", requestInvocationIDMiddleware);
+                    writer.write("stack.Build.Remove(($P)(nil).ID())", requestInvocationID);
 
-                    writer.write("err = stack.Finalize.Add($T(options.Credentials, c.presigner), $T)", presignMiddleware,
-                            smithyAfter);
+                    writer.write("err = stack.Finalize.Add($T(options.Credentials, c.presigner), $T)",
+                            presignMiddleware, smithyAfter);
                     writer.write("if err != nil { return err }");
 
                     convertToPresignMiddlewareHelpers.forEach((symbol) -> {
@@ -218,6 +218,7 @@ public class AwsHttpPresignURLClientGenerator {
 
         /**
          * Sets the model for the builder
+         *
          * @param model API model
          * @return builder
          */
@@ -228,6 +229,7 @@ public class AwsHttpPresignURLClientGenerator {
 
         /**
          * Sets the symbol provider for the builder
+         *
          * @param symbolProvider the symbol provider
          * @return buidler
          */
@@ -238,6 +240,7 @@ public class AwsHttpPresignURLClientGenerator {
 
         /**
          * Sets the operation for the builder
+         *
          * @param operation api operation
          * @return builder
          */
@@ -248,6 +251,7 @@ public class AwsHttpPresignURLClientGenerator {
 
         /**
          * Sets that the generated client type should be exported, defaults to false.
+         *
          * @return builder
          */
         public Builder exported() {
@@ -256,6 +260,7 @@ public class AwsHttpPresignURLClientGenerator {
 
         /**
          * Sets if the generate client type should be exported or not.
+         *
          * @param exported if exported
          * @return builder
          */
@@ -267,6 +272,7 @@ public class AwsHttpPresignURLClientGenerator {
         /**
          * Sets additional middleware mutator that will be generated into the client's convert to presign URL operation.
          * Used by the client to convert a API operation to a presign URL.
+         *
          * @param middlewareHelpers list of middleware helpers to set
          * @return builder
          */
@@ -279,6 +285,7 @@ public class AwsHttpPresignURLClientGenerator {
         /**
          * Adds a single middleware mutator that will be generated into the client's convert to presign URL operation.
          * Used by the client to convert API operation to a presigned URL.
+         *
          * @param middlewareHelper the middleware helper to add
          * @return builder
          */

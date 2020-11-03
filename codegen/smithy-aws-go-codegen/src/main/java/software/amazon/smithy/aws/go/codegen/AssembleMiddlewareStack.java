@@ -29,7 +29,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
                 RuntimeClientPlugin.builder()
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
-                                        "AddRequestInvocationIDMiddleware", AwsGoDependency.AWS_MIDDLEWARE)
+                                        "AddClientRequestIDMiddleware", AwsGoDependency.AWS_MIDDLEWARE)
                                         .build())
                                 .build()
                         )
@@ -39,7 +39,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
                 RuntimeClientPlugin.builder()
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
-                                        "AddContentLengthMiddleware", SmithyGoDependency.SMITHY_HTTP_TRANSPORT)
+                                        "AddComputeContentLengthMiddleware", SmithyGoDependency.SMITHY_HTTP_TRANSPORT)
                                         .build())
                                 .build()
                         )

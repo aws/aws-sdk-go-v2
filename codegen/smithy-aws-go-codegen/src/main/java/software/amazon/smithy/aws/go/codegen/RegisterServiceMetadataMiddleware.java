@@ -13,6 +13,7 @@ import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
+import software.amazon.smithy.go.codegen.integration.MiddlewareStackStep;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.knowledge.ServiceIndex;
@@ -38,7 +39,7 @@ public final class RegisterServiceMetadataMiddleware implements GoIntegration {
             GoDelegator goDelegator
     ) {
         ServiceShape service = settings.getService(model);
-        Symbol serviceMetadataProvider = SymbolUtils.createValueSymbolBuilder(
+        Symbol serviceMetadataProvider = SymbolUtils.createPointableSymbolBuilder(
                 "RegisterServiceMetadata", AwsGoDependency.AWS_MIDDLEWARE).build();
         ServiceIndex serviceIndex = ServiceIndex.of(model);
 
@@ -46,17 +47,12 @@ public final class RegisterServiceMetadataMiddleware implements GoIntegration {
             String middlewareName = getServiceMetadataMiddlewareName(operationId);
             OperationShape operation = model.expectShape(operationId, OperationShape.class);
             goDelegator.useShapeWriter(operation, writer -> {
-                Optional<ServiceTrait> serviceTrait = service.getTrait(ServiceTrait.class);
-                writer.openBlock("func $L(region string) $T {", "}",
+                writer.openBlock("func $L(region string) $P {", "}",
                         middlewareName, serviceMetadataProvider, () -> {
                     StringBuilder builder = new StringBuilder();
-                    builder.append(" return $T{\n");
+                    builder.append(" return &$T{\n");
                     builder.append("Region: region,\n");
-
-                    if (serviceTrait.isPresent()) {
-                        ServiceTrait trait = serviceTrait.get();
-                        builder.append("ServiceID: ServiceID,\n");
-                    }
+                    builder.append("ServiceID: ServiceID,\n");
 
                     Map<ShapeId, Trait> authSchemes = serviceIndex.getEffectiveAuthSchemes(service, operation);
                     if (authSchemes.containsKey(SigV4Trait.ID)) {
@@ -89,7 +85,7 @@ public final class RegisterServiceMetadataMiddleware implements GoIntegration {
                     .registerMiddleware(MiddlewareRegistrar.builder()
                             .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
                                     middlewareName).build())
-                            .registerBefore(MiddlewareRegistrar.StackStep.INITIALIZE)
+                            .registerBefore(MiddlewareStackStep.INITIALIZE)
                             .functionArguments(ListUtils.of(
                                     SymbolUtils.createValueSymbolBuilder("options.Region").build()
                             ))

@@ -153,8 +153,8 @@ public class S3UpdateEndpoint implements GoIntegration {
         writer.addUseImports(SmithyGoDependency.SMITHY_MIDDLEWARE);
         writer.addUseImports(AwsCustomGoDependency.S3CONTROL_CUSTOMIZATION);
 
-        writer.openBlock("func $L(stack *middleware.Stack, options Options) {", "}", UPDATE_ENDPOINT_ADDER, () -> {
-            writer.write("$T(stack, $T{UseDualstack: options.$L})",
+        writer.openBlock("func $L(stack *middleware.Stack, options Options) error {", "}", UPDATE_ENDPOINT_ADDER, () -> {
+            writer.write("return $T(stack, $T{UseDualstack: options.$L})",
                     SymbolUtils.createValueSymbolBuilder(UPDATE_ENDPOINT_INTERNAL_ADDER,
                             AwsCustomGoDependency.S3CONTROL_CUSTOMIZATION).build(),
                     SymbolUtils.createValueSymbolBuilder(UPDATE_ENDPOINT_INTERNAL_ADDER + "Options",
@@ -169,8 +169,8 @@ public class S3UpdateEndpoint implements GoIntegration {
         writer.addUseImports(SmithyGoDependency.SMITHY_MIDDLEWARE);
         writer.addUseImports(AwsCustomGoDependency.S3_CUSTOMIZATION);
 
-        writer.openBlock("func $L(stack *middleware.Stack, options Options) {", "}", UPDATE_ENDPOINT_ADDER, () -> {
-            writer.write("$T(stack, $T{ \n"
+        writer.openBlock("func $L(stack *middleware.Stack, options Options) error {", "}", UPDATE_ENDPOINT_ADDER, () -> {
+            writer.write("return $T(stack, $T{ \n"
                             + "Region: options.Region,\n GetBucketFromInput: $L,\n UsePathStyle: options.$L,\n "
                             + "UseAccelerate: options.$L,\n SupportsAccelerate: $L,\n UseDualstack: options.$L, \n})",
                     SymbolUtils.createValueSymbolBuilder(UPDATE_ENDPOINT_INTERNAL_ADDER,

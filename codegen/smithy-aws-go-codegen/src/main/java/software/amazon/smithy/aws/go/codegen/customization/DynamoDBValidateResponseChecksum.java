@@ -18,7 +18,6 @@
 package software.amazon.smithy.aws.go.codegen.customization;
 
 import java.util.List;
-import software.amazon.smithy.aws.go.codegen.AddAwsConfigFields.AwsConfigField;
 import software.amazon.smithy.aws.traits.ServiceTrait;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
@@ -68,8 +67,8 @@ public class DynamoDBValidateResponseChecksum implements GoIntegration {
     }
 
     private void writeMiddlewareHelper(GoWriter writer) {
-        writer.openBlock("func $L(stack *middleware.Stack, options Options) {", "}", CHECKSUM_ADDER, () -> {
-            writer.write("$T(stack, $T{Disable: options.$L})",
+        writer.openBlock("func $L(stack *middleware.Stack, options Options) error {", "}", CHECKSUM_ADDER, () -> {
+            writer.write("return $T(stack, $T{Disable: options.$L})",
                     SymbolUtils.createValueSymbolBuilder(CHECKSUM_INTERNAL_ADDER,
                             AwsCustomGoDependency.DYNAMODB_CUSTOMIZATION).build(),
                     SymbolUtils.createValueSymbolBuilder(CHECKSUM_INTERNAL_ADDER + "Options",
@@ -79,8 +78,8 @@ public class DynamoDBValidateResponseChecksum implements GoIntegration {
         });
         writer.write("");
 
-        writer.openBlock("func $L(stack *middleware.Stack, options Options) {", "}", GZIP_ADDER, () -> {
-            writer.write("$T(stack, $T{Enable: options.$L})",
+        writer.openBlock("func $L(stack *middleware.Stack, options Options) error {", "}", GZIP_ADDER, () -> {
+            writer.write("return $T(stack, $T{Enable: options.$L})",
                     SymbolUtils.createValueSymbolBuilder(GZIP_INTERNAL_ADDER,
                             AwsCustomGoDependency.ACCEPT_ENCODING_CUSTOMIZATION).build(),
                     SymbolUtils.createValueSymbolBuilder(GZIP_INTERNAL_ADDER + "Options",

@@ -40,10 +40,10 @@ public class AwsClientUserAgent implements GoIntegration {
         ServiceTrait serviceTrait = settings.getService(model).expectTrait(ServiceTrait.class);
 
         goDelegator.useShapeWriter(settings.getService(model), writer -> {
-            writer.openBlock("func $L(stack $P) {", "}", MIDDLEWARE_RESOLVER, SymbolUtils.createPointableSymbolBuilder("Stack",
+            writer.openBlock("func $L(stack $P) error {", "}", MIDDLEWARE_RESOLVER, SymbolUtils.createPointableSymbolBuilder("Stack",
                     SmithyGoDependency.SMITHY_MIDDLEWARE).build(), () -> {
                 // TODO: This should include the module version
-                writer.write("$T($S)(stack)", SymbolUtils.createValueSymbolBuilder("AddUserAgentKey",
+                writer.write("return $T($S)(stack)", SymbolUtils.createValueSymbolBuilder("AddUserAgentKey",
                         AwsGoDependency.AWS_MIDDLEWARE).build(), CodegenUtils.getDefaultPackageImportName(
                                 settings.getModuleName()));
             });
