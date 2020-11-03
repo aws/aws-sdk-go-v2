@@ -115,7 +115,7 @@ func (*endpointPrefix_opPutBucketLifecycleConfigurationMiddleware) ID() string {
 func (m *endpointPrefix_opPutBucketLifecycleConfigurationMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
-	if smithyhttp.GetHostnameImmutable(ctx) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
 		return next.HandleSerialize(ctx, in)
 	}
 
@@ -142,8 +142,16 @@ func (m *endpointPrefix_opPutBucketLifecycleConfigurationMiddleware) HandleSeria
 
 	return next.HandleSerialize(ctx, in)
 }
-func addEndpointPrefix_opPutBucketLifecycleConfigurationMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opPutBucketLifecycleConfigurationMiddleware{}, `OperationSerializer`, middleware.Before)
+func addEndpointPrefix_opPutBucketLifecycleConfigurationMiddleware(stack *middleware.Stack) (err error) {
+	err = stack.Serialize.Insert(&endpointPrefix_opPutBucketLifecycleConfigurationMiddleware{}, `OperationSerializer`, middleware.Before)
+	if err != nil {
+		return err
+	}
+	err = stack.Build.Add(&smithyhttp.HostPrefixMiddleware{}, middleware.Before)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func newServiceMetadataMiddleware_opPutBucketLifecycleConfiguration(region string) awsmiddleware.RegisterServiceMetadata {
