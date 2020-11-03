@@ -63,6 +63,8 @@ var stsClient *sts.Client
 // http client setting to use for integ testing
 var httpClient *http.Client
 
+var region = "us-east-1"
+
 // TestMain executes at start of package tests
 func TestMain(m *testing.M) {
 	var result int
@@ -94,9 +96,9 @@ func TestMain(m *testing.M) {
 		},
 	}
 
-	cfg, err := integrationtest.LoadConfigWithDefaultRegion("us-west-2")
+	cfg, err := integrationtest.LoadConfigWithDefaultRegion(region)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error occurred while loading config with region us-west-2, %v", err)
+		fmt.Fprintf(os.Stderr, "Error occurred while loading config with region %v, %v", region, err)
 		result = 1
 		return
 	}
@@ -112,7 +114,7 @@ func TestMain(m *testing.M) {
 				URL:           s3Endpoint,
 				PartitionID:   "aws",
 				SigningName:   "s3",
-				SigningRegion: s3cfg.Region,
+				SigningRegion:  region,
 				SigningMethod: "s3v4",
 			}, nil
 		})
@@ -129,7 +131,7 @@ func TestMain(m *testing.M) {
 				URL:           s3ControlEndpoint,
 				PartitionID:   "aws",
 				SigningName:   "s3-control",
-				SigningRegion: s3ControlCfg.Region,
+				SigningRegion: region,
 			}, nil
 		})
 	}
@@ -142,11 +144,6 @@ func TestMain(m *testing.M) {
 
 	// context
 	ctx := context.Background()
-
-	// fmt.Fprintf(os.Stderr, "exit %v", "over nothing")
-	// result = 1
-	// return
-
 
 	setupMetadata.AccountID, err = getAccountID(ctx)
 	if err != nil {
@@ -214,7 +211,7 @@ func setupBuckets(ctx context.Context) (func(), error) {
 		bARN := arn.ARN{
 			Partition: "aws",
 			Service:   "s3",
-			Region:    setupMetadata.Region,
+			Region:    region,
 			AccountID: setupMetadata.AccountID,
 			Resource:  fmt.Sprintf("bucket_name:%s", *bucket.name),
 		}.String()
@@ -263,7 +260,7 @@ func setupAccessPoints(ctx context.Context) (func(), error) {
 		apARN := arn.ARN{
 			Partition: "aws",
 			Service:   "s3",
-			Region:    setupMetadata.Region,
+			Region:    region,
 			AccountID: setupMetadata.AccountID,
 			Resource:  fmt.Sprintf("accesspoint/%s", *ap.name),
 		}.String()

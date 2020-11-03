@@ -1,5 +1,9 @@
+github.com/aws/aws-sdk-go-v2/service/s3control v0.29.0 h1:HoBuapEhyRHRLP8GKDA1wkviRwXNr2XCkJIKAQYq2lE=
+github.com/aws/aws-sdk-go-v2/service/s3control v0.29.0/go.mod h1:bZnbGAXqsX6onMeCzLA/L8jOwf0PU5qI8EIdBiLuGgY=
 github.com/awslabs/smithy-go v0.3.0 h1:I1EQ1P+VtxpuNnGYymATewaKrlnaYQwFvO8lNTsafbs=
 github.com/awslabs/smithy-go v0.3.0/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=
+github.com/awslabs/smithy-go v0.3.1-0.20201101195432-cbb8576f0e03 h1:NaBKM5xuWjas0FjvVEW5gCzeV8DQY0XRf7jDjPYm/9w=
+github.com/awslabs/smithy-go v0.3.1-0.20201101195432-cbb8576f0e03/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/google/go-cmp v0.4.1 h1:/exdXoGamhu5ONeUJH0deniYLWYvQwW66yvlfiiKTu0=
 github.com/google/go-cmp v0.4.1/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/gNBxE=
