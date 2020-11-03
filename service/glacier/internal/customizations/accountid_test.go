@@ -11,7 +11,7 @@ type accountIDBearer struct {
 }
 
 func TestDefaultAccountIDMiddleware(t *testing.T) {
-	m := &DefaultAccountIDMiddleware{
+	m := &DefaultAccountID{
 		setDefaultAccountID: func(input interface{}, defaultAccountID string) interface{} {
 			if bearer, ok := input.(accountIDBearer); ok && bearer.AccountID == nil {
 				bearer.AccountID = &defaultAccountID

@@ -27,25 +27,25 @@ type retryMetadata struct {
 
 type retryMetadataKey struct{}
 
-// AttemptMiddleware is a Smithy FinalizeMiddleware that handles retry attempts using the provided
+// Attempt is a Smithy FinalizeMiddleware that handles retry attempts using the provided
 // Retryer implementation
-type AttemptMiddleware struct {
+type Attempt struct {
 	retryer       Retryer
 	requestCloner RequestCloner
 }
 
-// NewAttemptMiddleware returns a new AttemptMiddleware
-func NewAttemptMiddleware(retryer Retryer, requestCloner RequestCloner) AttemptMiddleware {
-	return AttemptMiddleware{retryer: retryer, requestCloner: requestCloner}
+// NewAttemptMiddleware returns a new Attempt
+func NewAttemptMiddleware(retryer Retryer, requestCloner RequestCloner) Attempt {
+	return Attempt{retryer: retryer, requestCloner: requestCloner}
 }
 
 // ID returns the middleware identifier
-func (r AttemptMiddleware) ID() string {
-	return "RetryAttemptMiddleware"
+func (r *Attempt) ID() string {
+	return "Retry"
 }
 
 // HandleFinalize utilizes the provider Retryer implementation to attempt retries over the next handler
-func (r AttemptMiddleware) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeInput, next smithymiddle.FinalizeHandler) (
+func (r Attempt) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeInput, next smithymiddle.FinalizeHandler) (
 	out smithymiddle.FinalizeOutput, metadata smithymiddle.Metadata, err error,
 ) {
 	var attemptNum, retryCount int
@@ -118,16 +118,16 @@ func (r AttemptMiddleware) HandleFinalize(ctx context.Context, in smithymiddle.F
 	}
 }
 
-// MetricsHeaderMiddleware attaches SDK request metric header for retries to the transport
-type MetricsHeaderMiddleware struct{}
+// MetricsHeader attaches SDK request metric header for retries to the transport
+type MetricsHeader struct{}
 
 // ID returns the middleware identifier
-func (r MetricsHeaderMiddleware) ID() string {
-	return "MetricsHeaderMiddleware"
+func (r MetricsHeader) ID() string {
+	return "RetryMetricsHeader"
 }
 
 // HandleFinalize attaches the sdk request metric header to the transport layer
-func (r MetricsHeaderMiddleware) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeInput, next smithymiddle.FinalizeHandler) (
+func (r MetricsHeader) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeInput, next smithymiddle.FinalizeHandler) (
 	out smithymiddle.FinalizeOutput, metadata smithymiddle.Metadata, err error,
 ) {
 	retryMetadata, ok := getRetryMetadata(ctx)
@@ -183,11 +183,11 @@ type AddRetryMiddlewaresOptions struct {
 
 // AddRetryMiddlewares adds retry middleware to operation middleware stack
 func AddRetryMiddlewares(stack *smithymiddle.Stack, options AddRetryMiddlewaresOptions) error {
-	attemptMiddleware := NewAttemptMiddleware(options.Retryer, http.RequestCloner)
-	if err := stack.Finalize.Add(&attemptMiddleware, smithymiddle.After); err != nil {
+	attempt := NewAttemptMiddleware(options.Retryer, http.RequestCloner)
+	if err := stack.Finalize.Add(&attempt, smithymiddle.After); err != nil {
 		return err
 	}
-	if err := stack.Finalize.Add(&MetricsHeaderMiddleware{}, smithymiddle.After); err != nil {
+	if err := stack.Finalize.Add(&MetricsHeader{}, smithymiddle.After); err != nil {
 		return err
 	}
 	return nil

@@ -22,26 +22,28 @@ type AddSanitizeURLMiddlewareOptions struct {
 }
 
 // AddSanitizeURLMiddleware add the middleware necessary to modify Route53 input before op serialization.
-func AddSanitizeURLMiddleware(stack *middleware.Stack, options AddSanitizeURLMiddlewareOptions) {
-	stack.Serialize.Insert(&sanitizeURLMiddleware{
+func AddSanitizeURLMiddleware(stack *middleware.Stack, options AddSanitizeURLMiddlewareOptions) error {
+	return stack.Serialize.Insert(&sanitizeURL{
 		sanitizeHostedZoneIDInput: options.SanitizeHostedZoneIDInput,
 	}, "OperationSerializer", middleware.Before)
 }
 
-// sanitizeURLMiddleware cleans up potential formatting issues in the Route53 path.
+// sanitizeURL cleans up potential formatting issues in the Route53 path.
 //
 // Notably it will strip out an excess `/hostedzone/` prefix that can be present in
 // the hosted zone id input member. That excess prefix is there because some route53 apis return
 // the id in that format, so this middleware enables round-tripping those values.
-type sanitizeURLMiddleware struct {
+type sanitizeURL struct {
 	sanitizeHostedZoneIDInput func(interface{}) error
 }
 
 // ID returns the id for the middleware.
-func (*sanitizeURLMiddleware) ID() string { return "Route53:SanitizeURL" }
+func (*sanitizeURL) ID() string {
+	return "Route53:SanitizeURL"
+}
 
 // HandleSerialize implements the SerializeMiddleware interface.
-func (m *sanitizeURLMiddleware) HandleSerialize(
+func (m *sanitizeURL) HandleSerialize(
 	ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler,
 ) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,

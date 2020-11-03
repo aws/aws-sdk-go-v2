@@ -16,7 +16,7 @@ type RegisterServiceMetadata struct {
 }
 
 // ID returns the middleware identifier.
-func (s RegisterServiceMetadata) ID() string {
+func (s *RegisterServiceMetadata) ID() string {
 	return "RegisterServiceMetadata"
 }
 

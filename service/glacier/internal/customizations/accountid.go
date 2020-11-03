@@ -2,29 +2,32 @@ package customizations
 
 import (
 	"context"
+
 	"github.com/awslabs/smithy-go/middleware"
 )
 
 type setDefaultAccountID func(input interface{}, accountID string) interface{}
 
-// AddDefaultAccountIDMiddleware adds the DefaultAccountIDMiddleware to the stack using
+// AddDefaultAccountIDMiddleware adds the DefaultAccountID to the stack using
 // the given options.
-func AddDefaultAccountIDMiddleware(stack *middleware.Stack, setDefaultAccountID setDefaultAccountID) {
-	stack.Initialize.Add(&DefaultAccountIDMiddleware{
+func AddDefaultAccountIDMiddleware(stack *middleware.Stack, setDefaultAccountID setDefaultAccountID) error {
+	return stack.Initialize.Add(&DefaultAccountID{
 		setDefaultAccountID: setDefaultAccountID,
 	}, middleware.Before)
 }
 
-// DefaultAccountIDMiddleware sets the account ID to "-" if it isn't already set
-type DefaultAccountIDMiddleware struct {
+// DefaultAccountID sets the account ID to "-" if it isn't already set
+type DefaultAccountID struct {
 	setDefaultAccountID setDefaultAccountID
 }
 
 // ID returns the id of the middleware
-func (*DefaultAccountIDMiddleware) ID() string { return "Glacier:DefaultAccountID" }
+func (*DefaultAccountID) ID() string {
+	return "Glacier:DefaultAccountID"
+}
 
 // HandleInitialize implements the InitializeMiddleware interface
-func (m *DefaultAccountIDMiddleware) HandleInitialize(
+func (m *DefaultAccountID) HandleInitialize(
 	ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler,
 ) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,

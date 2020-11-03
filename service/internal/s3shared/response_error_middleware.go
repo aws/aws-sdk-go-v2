@@ -10,21 +10,21 @@ import (
 )
 
 // AddResponseErrorMiddleware adds response error wrapper middleware
-func AddResponseErrorMiddleware(stack *middleware.Stack) {
+func AddResponseErrorMiddleware(stack *middleware.Stack) error {
 	// add error wrapper middleware before request id retriever middleware so that it can wrap the error response
 	// returned by operation deserializers
-	stack.Deserialize.Insert(&errorWrapperMiddleware{}, "S3MetadataRetrieverMiddleware", middleware.Before)
+	return stack.Deserialize.Insert(&errorWrapper{}, metadataRetrieverID, middleware.Before)
 }
 
-type errorWrapperMiddleware struct {
+type errorWrapper struct {
 }
 
 // ID returns the middleware identifier
-func (m *errorWrapperMiddleware) ID() string {
-	return "S3ResponseErrorWrapperMiddleware"
+func (m *errorWrapper) ID() string {
+	return "ResponseErrorWrapper"
 }
 
-func (m *errorWrapperMiddleware) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+func (m *errorWrapper) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)

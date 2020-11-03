@@ -40,19 +40,19 @@ func TestAddRequestMiddleware(t *testing.T) {
 				)
 			},
 			ExpectInitialize: []string{
-				(*operationTimeoutMiddleware)(nil).ID(),
+				(*operationTimeout)(nil).ID(),
 			},
 			ExpectSerialize: []string{
-				"EndpointResolver",
+				"ResolveEndpoint",
 				"OperationSerializer",
 			},
 			ExpectBuild: []string{
-				"requestUserAgent",
+				"UserAgent",
 			},
 			ExpectFinalize: []string{
-				"RetryAttemptMiddleware",
+				"Retry",
 				"APITokenProvider",
-				"MetricsHeaderMiddleware",
+				"RetryMetricsHeader",
 			},
 			ExpectDeserialize: []string{
 				"APITokenProvider",
@@ -72,18 +72,18 @@ func TestAddRequestMiddleware(t *testing.T) {
 				)
 			},
 			ExpectInitialize: []string{
-				(*operationTimeoutMiddleware)(nil).ID(),
+				(*operationTimeout)(nil).ID(),
 			},
 			ExpectSerialize: []string{
-				"EndpointResolver",
+				"ResolveEndpoint",
 				"OperationSerializer",
 			},
 			ExpectBuild: []string{
-				"requestUserAgent",
+				"UserAgent",
 			},
 			ExpectFinalize: []string{
-				"RetryAttemptMiddleware",
-				"MetricsHeaderMiddleware",
+				"Retry",
+				"RetryMetricsHeader",
 			},
 			ExpectDeserialize: []string{
 				"OperationDeserializer",
@@ -125,7 +125,7 @@ func TestAddRequestMiddleware(t *testing.T) {
 }
 
 func TestOperationTimeoutMiddleware(t *testing.T) {
-	m := &operationTimeoutMiddleware{
+	m := &operationTimeout{
 		Timeout: time.Nanosecond,
 	}
 

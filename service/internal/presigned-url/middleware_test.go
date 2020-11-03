@@ -57,12 +57,11 @@ func TestPresignMiddleware(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			stack := middleware.NewStack(name, smithyhttp.NewStackRequest)
 
-			stack.Initialize.Add(awsmiddleware.RegisterServiceMetadata{
+			stack.Initialize.Add(&awsmiddleware.RegisterServiceMetadata{
 				Region: "mock-region",
 			}, middleware.After)
 
-			stack.Initialize.Add(&presignMiddleware{options: getURLPresignMiddlewareOptions()},
-				middleware.After)
+			stack.Initialize.Add(&presign{options: getURLPresignMiddlewareOptions()}, middleware.After)
 
 			stack.Initialize.Add(middleware.InitializeMiddlewareFunc(name+"_verifyParams",
 				func(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (

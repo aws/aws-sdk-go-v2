@@ -22,17 +22,19 @@ import (
 // HandleCustomErrorDeserialization check if Route53 response is an error and needs
 // custom error deserialization.
 //
-func HandleCustomErrorDeserialization(stack *middleware.Stack) {
-	stack.Deserialize.Insert(&processResponseMiddleware{}, "OperationDeserializer", middleware.After)
+func HandleCustomErrorDeserialization(stack *middleware.Stack) error {
+	return stack.Deserialize.Insert(&processResponse{}, "OperationDeserializer", middleware.After)
 }
 
 // middleware to process raw response and look for error response with InvalidChangeBatch error tag
-type processResponseMiddleware struct{}
+type processResponse struct{}
 
 // ID returns the middleware ID.
-func (*processResponseMiddleware) ID() string { return "Route53:ProcessResponseForCustomErrorResponse" }
+func (*processResponse) ID() string {
+	return "Route53:ProcessResponseForCustomErrorResponse"
+}
 
-func (m *processResponseMiddleware) HandleDeserialize(
+func (m *processResponse) HandleDeserialize(
 	ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {

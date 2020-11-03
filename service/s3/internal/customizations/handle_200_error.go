@@ -18,15 +18,17 @@ import (
 // HandleResponseErrorWith200Status check for S3 200 error response.
 // If an s3 200 error is found, status code for the response is modified temporarily to
 // 5xx response status code.
-func HandleResponseErrorWith200Status(stack *middleware.Stack) {
-	stack.Deserialize.Insert(&processResponseFor200ErrorMiddleware{}, "OperationDeserializer", middleware.After)
+func HandleResponseErrorWith200Status(stack *middleware.Stack) error {
+	return stack.Deserialize.Insert(&processResponseFor200ErrorMiddleware{}, "OperationDeserializer", middleware.After)
 }
 
 // middleware to process raw response and look for error response with 200 status code
 type processResponseFor200ErrorMiddleware struct{}
 
 // ID returns the middleware ID.
-func (*processResponseFor200ErrorMiddleware) ID() string { return "S3:ProcessResponseFor200Error" }
+func (*processResponseFor200ErrorMiddleware) ID() string {
+	return "S3:ProcessResponseFor200Error"
+}
 
 func (m *processResponseFor200ErrorMiddleware) HandleDeserialize(
 	ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (

@@ -42,23 +42,23 @@ func TestAddAcceptEncodingGzip(t *testing.T) {
 			}
 
 			if c.Enable {
-				id = (*EnableGzipMiddleware)(nil).ID()
+				id = (*EnableGzip)(nil).ID()
 				if m, ok := stack.Finalize.Get(id); !ok || m == nil {
 					t.Fatalf("expect %s to be present.", id)
 				}
 
-				id = (*DecompressGzipMiddleware)(nil).ID()
+				id = (*DecompressGzip)(nil).ID()
 				if m, ok := stack.Deserialize.Get(id); !ok || m == nil {
 					t.Fatalf("expect %s to be present.", id)
 				}
 				return
 			}
-			id = (*EnableGzipMiddleware)(nil).ID()
+			id = (*EnableGzip)(nil).ID()
 			if m, ok := stack.Finalize.Get(id); ok || m != nil {
 				t.Fatalf("expect %s not to be present.", id)
 			}
 
-			id = (*DecompressGzipMiddleware)(nil).ID()
+			id = (*DecompressGzip)(nil).ID()
 			if m, ok := stack.Deserialize.Get(id); ok || m != nil {
 				t.Fatalf("expect %s not to be present.", id)
 			}
@@ -67,7 +67,7 @@ func TestAddAcceptEncodingGzip(t *testing.T) {
 }
 
 func TestAcceptEncodingGzipMiddleware(t *testing.T) {
-	m := &EnableGzipMiddleware{}
+	m := &EnableGzip{}
 
 	_, _, err := m.HandleFinalize(context.Background(),
 		middleware.FinalizeInput{
@@ -140,7 +140,7 @@ func TestDecompressGzipMiddleware(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			m := &DecompressGzipMiddleware{}
+			m := &DecompressGzip{}
 
 			var origRespBody io.Reader
 			output, _, err := m.HandleDeserialize(context.Background(),

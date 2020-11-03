@@ -16,14 +16,14 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-func TestRequestInvocationIDMiddleware(t *testing.T) {
+func TestClientRequestID(t *testing.T) {
 	oReader := rand.Reader
 	defer func() {
 		rand.Reader = oReader
 	}()
 	rand.Reader = bytes.NewReader(make([]byte, 16))
 
-	mid := middleware.RequestInvocationIDMiddleware{}
+	mid := middleware.ClientRequestID{}
 
 	in := smithymiddleware.BuildInput{Request: &smithyhttp.Request{Request: &http.Request{Header: make(http.Header)}}}
 	ctx := context.Background()
@@ -163,7 +163,7 @@ func TestAttemptClockSkewHandler(t *testing.T) {
 				}()
 				sdk.NowTime = c.ResponseAt
 			}
-			mw := middleware.AttemptClockSkewMiddleware{}
+			mw := middleware.AttemptClockSkew{}
 			_, metadata, err := mw.HandleDeserialize(context.Background(), smithymiddleware.DeserializeInput{}, c.Next)
 			if err != nil {
 				t.Errorf("expect no error, got %v", err)

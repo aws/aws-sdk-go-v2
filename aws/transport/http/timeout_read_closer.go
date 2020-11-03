@@ -3,11 +3,12 @@ package http
 import (
 	"context"
 	"fmt"
+	"io"
+	"time"
+
 	"github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
-	"io"
-	"time"
 )
 
 type readResult struct {
@@ -63,22 +64,22 @@ func (r *timeoutReadCloser) Close() error {
 
 // AddResponseReadTimeoutMiddleware adds a middleware to the stack that wraps the
 // response body so that a read that takes too long will return an error.
-func AddResponseReadTimeoutMiddleware(stack *middleware.Stack, duration time.Duration) {
-	stack.Deserialize.Add(&readTimeoutMiddleware{duration: duration}, middleware.After)
+func AddResponseReadTimeoutMiddleware(stack *middleware.Stack, duration time.Duration) error {
+	return stack.Deserialize.Add(&readTimeout{duration: duration}, middleware.After)
 }
 
-// readTimeoutMiddleware wraps the response body with a timeoutReadCloser
-type readTimeoutMiddleware struct {
+// readTimeout wraps the response body with a timeoutReadCloser
+type readTimeout struct {
 	duration time.Duration
 }
 
 // ID returns the id of the middleware
-func (*readTimeoutMiddleware) ID() string {
-	return "AWSReadTimeoutMiddleware"
+func (*readTimeout) ID() string {
+	return "ReadResponseTimeout"
 }
 
 // HandleDeserialize implements the DeserializeMiddleware interface
-func (m *readTimeoutMiddleware) HandleDeserialize(
+func (m *readTimeout) HandleDeserialize(
 	ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler,
 ) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,

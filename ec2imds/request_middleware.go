@@ -25,14 +25,12 @@ func addAPIRequestMiddleware(stack *middleware.Stack,
 
 	// Token Serializer build and state management.
 	if !options.disableAPIToken {
-		err = stack.Finalize.Insert(options.tokenProvider,
-			retry.AttemptMiddleware{}.ID(), middleware.After)
+		err = stack.Finalize.Insert(options.tokenProvider, (*retry.Attempt)(nil).ID(), middleware.After)
 		if err != nil {
 			return err
 		}
 
-		err = stack.Deserialize.Insert(options.tokenProvider,
-			"OperationDeserializer", middleware.Before)
+		err = stack.Deserialize.Insert(options.tokenProvider, "OperationDeserializer", middleware.Before)
 		if err != nil {
 			return err
 		}
@@ -53,7 +51,7 @@ func addRequestMiddleware(stack *middleware.Stack,
 	}
 
 	// Operation timeout
-	err = stack.Initialize.Add(&operationTimeoutMiddleware{
+	err = stack.Initialize.Add(&operationTimeout{
 		Timeout: defaultOperationTimeout,
 	}, middleware.Before)
 	if err != nil {
@@ -86,9 +84,7 @@ func addRequestMiddleware(stack *middleware.Stack,
 	}
 
 	// Retry support
-	retry.AddRetryMiddlewares(stack, retry.AddRetryMiddlewaresOptions{Retryer: options.Retryer})
-
-	return nil
+	return retry.AddRetryMiddlewares(stack, retry.AddRetryMiddlewaresOptions{Retryer: options.Retryer})
 }
 
 type serializeRequest struct {
@@ -170,7 +166,7 @@ type resolveEndpoint struct {
 }
 
 func (*resolveEndpoint) ID() string {
-	return "EndpointResolver"
+	return "ResolveEndpoint"
 }
 
 func (m *resolveEndpoint) HandleSerialize(
@@ -196,13 +192,13 @@ const (
 	defaultOperationTimeout = 5 * time.Second
 )
 
-type operationTimeoutMiddleware struct {
+type operationTimeout struct {
 	Timeout time.Duration
 }
 
-func (*operationTimeoutMiddleware) ID() string { return "operationTimeoutMiddleware" }
+func (*operationTimeout) ID() string { return "OperationTimeout" }
 
-func (m *operationTimeoutMiddleware) HandleInitialize(
+func (m *operationTimeout) HandleInitialize(
 	ctx context.Context, input middleware.InitializeInput, next middleware.InitializeHandler,
 ) (
 	output middleware.InitializeOutput, metadata middleware.Metadata, err error,

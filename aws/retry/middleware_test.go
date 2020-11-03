@@ -57,7 +57,7 @@ func TestMetricsHeaderMiddleware(t *testing.T) {
 		},
 	}
 
-	retryMiddleware := MetricsHeaderMiddleware{}
+	retryMiddleware := MetricsHeader{}
 	for i, tt := range cases {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
 			ctx := tt.ctx
