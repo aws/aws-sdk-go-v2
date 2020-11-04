@@ -35,8 +35,8 @@ type Attempt struct {
 }
 
 // NewAttemptMiddleware returns a new Attempt
-func NewAttemptMiddleware(retryer Retryer, requestCloner RequestCloner) Attempt {
-	return Attempt{retryer: retryer, requestCloner: requestCloner}
+func NewAttemptMiddleware(retryer Retryer, requestCloner RequestCloner) *Attempt {
+	return &Attempt{retryer: retryer, requestCloner: requestCloner}
 }
 
 // ID returns the middleware identifier
@@ -122,7 +122,7 @@ func (r Attempt) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeInp
 type MetricsHeader struct{}
 
 // ID returns the middleware identifier
-func (r MetricsHeader) ID() string {
+func (r *MetricsHeader) ID() string {
 	return "RetryMetricsHeader"
 }
 
@@ -184,7 +184,7 @@ type AddRetryMiddlewaresOptions struct {
 // AddRetryMiddlewares adds retry middleware to operation middleware stack
 func AddRetryMiddlewares(stack *smithymiddle.Stack, options AddRetryMiddlewaresOptions) error {
 	attempt := NewAttemptMiddleware(options.Retryer, http.RequestCloner)
-	if err := stack.Finalize.Add(&attempt, smithymiddle.After); err != nil {
+	if err := stack.Finalize.Add(attempt, smithymiddle.After); err != nil {
 		return err
 	}
 	if err := stack.Finalize.Add(&MetricsHeader{}, smithymiddle.After); err != nil {
