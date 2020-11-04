@@ -174,11 +174,7 @@ func (d Downloader) Download(ctx context.Context, w io.WriterAt, input *s3.GetOb
 	}
 
 	// Ensures we don't need nil checks later on
-	if impl.cfg.Logger == nil {
-		impl.cfg.Logger = logging.Noop{}
-	} else {
-		impl.cfg.Logger = logging.WithContext(ctx, impl.cfg.Logger)
-	}
+	impl.cfg.Logger = logging.WithContext(ctx, impl.cfg.Logger)
 
 	impl.partBodyMaxRetries = d.PartBodyMaxRetries
 

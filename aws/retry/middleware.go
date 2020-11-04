@@ -30,8 +30,9 @@ type retryMetadataKey struct{}
 
 // Attempt is a Smithy FinalizeMiddleware that handles retry attempts using the provided
 // Retryer implementation
-type Attempt struct {
-	// Enable logging of retry attempts and nonretryable errors
+type AttemptMiddleware struct {
+	// Enable the logging of retry attempts performed by the SDK.
+	// This will include logging retry attempts, unretryable errors, and when max attempts are reached.
 	LogAttempts bool
 
 	retryer       Retryer
@@ -50,6 +51,13 @@ func NewAttemptMiddleware(retryer Retryer, requestCloner RequestCloner, optFns .
 // ID returns the middleware identifier
 func (r *Attempt) ID() string {
 	return "Retry"
+}
+
+func (r AttemptMiddleware) logf(logger logging.Logger, classification logging.Classification, format string, v ...interface{}) {
+	if !r.LogAttempts {
+		return
+	}
+	logger.Logf(classification, format, v...)
 }
 
 // HandleFinalize utilizes the provider Retryer implementation to attempt retries over the next handler
@@ -86,24 +94,27 @@ func (r Attempt) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeInp
 				}
 			}
 
-			if r.LogAttempts {
-				logger.Logf(logging.Debug, "retrying request %s/%s, attempt %d", service, operation, attemptNum)
-			}
+			r.logf(logger, logging.Debug, "retrying request %s/%s, attempt %d", service, operation, attemptNum)
 		}
 
 		out, metadata, reqErr := next.HandleFinalize(attemptCtx, attemptInput)
 
-		relRetryToken(reqErr)
+		if releaseError := relRetryToken(reqErr); releaseError != nil && reqErr != nil {
+			return out, metadata, fmt.Errorf("failed to release token after request error, %v", reqErr)
+		}
+
 		if reqErr == nil {
 			return out, metadata, nil
 		}
 
 		retryable := r.retryer.IsErrorRetryable(reqErr)
 		if !retryable {
+			r.logf(logger, logging.Debug, "request failed with unretryable error %v", reqErr)
 			return out, metadata, reqErr
 		}
 
 		if maxAttempts > 0 && attemptNum >= maxAttempts {
+			r.logf(logger, logging.Debug, "max retry attempts exhausted, max %d", maxAttempts)
 			err = &MaxAttemptsError{
 				Attempt: attemptNum,
 				Err:     reqErr,
@@ -193,7 +204,10 @@ func setRetryMetadata(ctx context.Context, metadata retryMetadata) context.Conte
 // AddRetryMiddlewaresOptions is the set of options that can be passed to AddRetryMiddlewares for configuring retry
 // associated middleware.
 type AddRetryMiddlewaresOptions struct {
-	Retryer          Retryer
+	Retryer Retryer
+
+	// Enable the logging of retry attempts performed by the SDK.
+	// This will include logging retry attempts, unretryable errors, and when max attempts are reached.
 	LogRetryAttempts bool
 }
 

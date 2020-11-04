@@ -94,10 +94,12 @@ type Signer struct {
 	// http://docs.aws.amazon.com/general/latest/gr/sigv4-create-canonical-request.html
 	DisableURIPathEscaping bool
 
-	// The logger to send log message to
+	// The logger to send log messages to.
 	Logger logging.Logger
 
-	// Enable logging of signed requests
+	// Enable logging of signed requests.
+	// This will enable logging of the canonical request, the string to sign, and for presigning the subsequent
+	// presigned URL.
 	LogSigning bool
 
 	keyDerivator keyDerivator
@@ -238,13 +240,8 @@ func buildAuthorizationHeader(credentialStr, signedHeadersStr, signingSignature 
 	return parts.String()
 }
 
-func (v4 Signer) getLogger(ctx context.Context) (logger logging.Logger) {
-	if v4.Logger == nil {
-		logger = logging.Noop{}
-	} else {
-		logger = logging.WithContext(ctx, v4.Logger)
-	}
-	return logger
+func (v4 Signer) getLogger(ctx context.Context) logging.Logger {
+	return logging.WithContext(ctx, v4.Logger)
 }
 
 // SignHTTP signs AWS v4 requests with the provided payload hash, service name, region the

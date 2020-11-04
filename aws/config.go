@@ -52,6 +52,11 @@ type Config struct {
 	Logger logging.Logger
 
 	// Configures the events that will be sent to the configured logger.
+	// This can be used to configure the logging of signing, retries, request, and responses
+	// of the SDK clients.
+	//
+	// See the ClientLogMode type documentation for the complete set of logging modes and available
+	// configuration.
 	ClientLogMode ClientLogMode
 }
 

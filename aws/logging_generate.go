@@ -11,7 +11,7 @@ import (
 var config = struct {
 	ModeBits []string
 }{
-	// Items should be appended only to keep bit-flag positions table
+	// Items should be appended only to keep bit-flag positions stable
 	ModeBits: []string{
 		"Signing",
 		"Retries",
@@ -33,8 +33,11 @@ package aws
 // each bit is a flag that describes the logging behavior for one or more client components.
 // The entire 64-bit group is reserved for later expansion by the SDK.
 //
-// Example
+// Example: Setting ClientLogMode to enable logging of retries and requests
 //  clientLogMode := aws.LogRetries | aws.LogRequest
+//
+// Example: Adding an additional log mode to an existing ClientLogMode value
+//  clientLogMode |= aws.LogResponse
 type ClientLogMode uint64
 
 // Supported ClientLogMode bits that can be configured to toggle logging of specific SDK events.
@@ -45,12 +48,14 @@ const (
 )
 
 {{ range $_, $field := .ModeBits }}
+// Is{{- $field }} returns whether the {{ $field }} logging mode bit is set
 func (m ClientLogMode) Is{{- $field }}() bool {
 	return m&{{- (symbolName $field) }} != 0
 }
 {{ end }}
 
 {{ range $_, $field := .ModeBits }}
+// Clear{{- $field }} clears the {{ $field }} logging mode bit
 func (m *ClientLogMode) Clear{{- $field }}() {
 	*m &^= {{- (symbolName $field) }}
 }

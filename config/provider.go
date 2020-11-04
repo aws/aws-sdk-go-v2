@@ -580,24 +580,24 @@ func getClientLogMode(configs configs) (m aws.ClientLogMode, found bool, err err
 	return m, found, err
 }
 
-// LogConfigurationErrorsProvider is an interface for retrieving a boolean indicating whether configuration issues should
+// LogConfigurationWarningsProvider is an interface for retrieving a boolean indicating whether configuration issues should
 // be logged when encountered when loading from config sources.
-type LogConfigurationErrorsProvider interface {
-	GetLogConfigurationErrors() (bool, bool, error)
+type LogConfigurationWarningsProvider interface {
+	GetLogConfigurationWarnings() (bool, bool, error)
 }
 
-// WithLogConfigurationErrors implements a LogConfigurationErrorsProvider and returns the wrapped boolean value.
-type WithLogConfigurationErrors bool
+// WithLogConfigurationWarnings implements a LogConfigurationWarningsProvider and returns the wrapped boolean value.
+type WithLogConfigurationWarnings bool
 
-// GetLogConfigurationErrors returns the wrapped boolean.
-func (w WithLogConfigurationErrors) GetLogConfigurationErrors() (bool, bool, error) {
+// GetLogConfigurationWarnings returns the wrapped boolean.
+func (w WithLogConfigurationWarnings) GetLogConfigurationWarnings() (bool, bool, error) {
 	return bool(w), true, nil
 }
 
-func getLogConfigurationErrors(configs configs) (v bool, found bool, err error) {
+func getLogConfigurationWarnings(configs configs) (v bool, found bool, err error) {
 	for _, c := range configs {
-		if p, ok := c.(LogConfigurationErrorsProvider); ok {
-			v, found, err = p.GetLogConfigurationErrors()
+		if p, ok := c.(LogConfigurationWarningsProvider); ok {
+			v, found, err = p.GetLogConfigurationWarnings()
 			if err != nil {
 				return false, false, err
 			}

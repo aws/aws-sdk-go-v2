@@ -184,7 +184,7 @@ func TestDefaultRegion(t *testing.T) {
 
 func TestResolveLogger(t *testing.T) {
 	configs := configs{
-		WithLogger(logging.Noop{}),
+		WithLogger(logging.Nop{}),
 	}
 
 	cfg := unit.Config()
@@ -194,7 +194,7 @@ func TestResolveLogger(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	_, ok := cfg.Logger.(logging.Noop)
+	_, ok := cfg.Logger.(logging.Nop)
 	if !ok {
 		t.Error("unexpected logger type")
 	}
