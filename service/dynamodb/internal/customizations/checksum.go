@@ -20,26 +20,26 @@ type AddValidateResponseChecksumOptions struct {
 	Disable bool
 }
 
-// AddValidateResponseChecksum adds the ChecksumMiddleware to the middleware
+// AddValidateResponseChecksum adds the Checksum to the middleware
 // stack if checksum is not disabled.
-func AddValidateResponseChecksum(stack *middleware.Stack, options AddValidateResponseChecksumOptions) {
+func AddValidateResponseChecksum(stack *middleware.Stack, options AddValidateResponseChecksumOptions) error {
 	if options.Disable {
-		return
+		return nil
 	}
 
-	stack.Deserialize.Add(&ChecksumMiddleware{}, middleware.After)
+	return stack.Deserialize.Add(&Checksum{}, middleware.After)
 }
 
-// ChecksumMiddleware provides a middleware to validate the DynamoDB response
+// Checksum provides a middleware to validate the DynamoDB response
 // body's integrity by comparing the computed CRC32 checksum with the value
 // provided in the HTTP response header.
-type ChecksumMiddleware struct{}
+type Checksum struct{}
 
 // ID returns the middleware ID.
-func (*ChecksumMiddleware) ID() string { return "DynamoDB:ResponseChecksumValidation" }
+func (*Checksum) ID() string { return "DynamoDB:ResponseChecksumValidation" }
 
 // HandleDeserialize implements the Deserialize middleware handle method.
-func (m *ChecksumMiddleware) HandleDeserialize(
+func (m *Checksum) HandleDeserialize(
 	ctx context.Context, input middleware.DeserializeInput, next middleware.DeserializeHandler,
 ) (
 	output middleware.DeserializeOutput, metadata middleware.Metadata, err error,

@@ -167,12 +167,12 @@ func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
 	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
-func addClientUserAgent(stack *middleware.Stack) {
-	awsmiddleware.AddUserAgentKey("s3control")(stack)
+func addClientUserAgent(stack *middleware.Stack) error {
+	return awsmiddleware.AddUserAgentKey("s3control")(stack)
 }
 
-func addHTTPSignerV4Middleware(stack *middleware.Stack, o Options) {
-	stack.Finalize.Add(v4.NewSignHTTPRequestMiddleware(o.Credentials, o.HTTPSignerV4), middleware.After)
+func addHTTPSignerV4Middleware(stack *middleware.Stack, o Options) error {
+	return stack.Finalize.Add(v4.NewSignHTTPRequestMiddleware(o.Credentials, o.HTTPSignerV4), middleware.After)
 }
 
 type HTTPSignerV4 interface {
@@ -210,14 +210,14 @@ type IdempotencyTokenProvider interface {
 	GetIdempotencyToken() (string, error)
 }
 
-func addMetadataRetrieverMiddleware(stack *middleware.Stack) {
-	s3shared.AddMetadataRetrieverMiddleware(stack)
+func addMetadataRetrieverMiddleware(stack *middleware.Stack) error {
+	return s3shared.AddMetadataRetrieverMiddleware(stack)
 }
 
-func addUpdateEndpointMiddleware(stack *middleware.Stack, options Options) {
-	s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{UseDualstack: options.UseDualstack})
+func addUpdateEndpointMiddleware(stack *middleware.Stack, options Options) error {
+	return s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{UseDualstack: options.UseDualstack})
 }
 
-func addResponseErrorMiddleware(stack *middleware.Stack) {
-	s3shared.AddResponseErrorMiddleware(stack)
+func addResponseErrorMiddleware(stack *middleware.Stack) error {
+	return s3shared.AddResponseErrorMiddleware(stack)
 }

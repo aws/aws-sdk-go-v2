@@ -24,7 +24,6 @@ import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SymbolUtils;
-import software.amazon.smithy.go.codegen.integration.ConfigField;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
@@ -66,8 +65,8 @@ public class APIGatewayAcceptHeader implements GoIntegration {
     }
 
     private void writeMiddlewareHelper(GoWriter writer) {
-        writer.openBlock("func $L(stack *middleware.Stack) {", "}", ADD_ACCEPT_HEADER, () -> {
-            writer.write("$T(stack)",
+        writer.openBlock("func $L(stack *middleware.Stack) error {", "}", ADD_ACCEPT_HEADER, () -> {
+            writer.write("return $T(stack)",
                     SymbolUtils.createValueSymbolBuilder(ACCEPT_HEADER_INTERNAL_ADDER,
                             AwsCustomGoDependency.APIGATEWAY_CUSTOMIZATION).build()
             );

@@ -13,9 +13,9 @@ type UpdateEndpointOptions struct {
 }
 
 // UpdateEndpoint adds the middleware to the middleware stack based on the UpdateEndpointOptions.
-func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) {
+func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) error {
 	// enable dual stack support
-	stack.Serialize.Insert(&s3shared.EnableDualstackMiddleware{
+	return stack.Serialize.Insert(&s3shared.EnableDualstack{
 		UseDualstack: options.UseDualstack,
 		ServiceID:    "s3-control",
 	}, "OperationSerializer", middleware.After)

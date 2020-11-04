@@ -90,7 +90,7 @@ func (u *requestUserAgent) AddKeyValue(key, value string) {
 
 // ID the name of the middleware.
 func (u *requestUserAgent) ID() string {
-	return "requestUserAgent"
+	return "UserAgent"
 }
 
 // HandleBuild adds or appends the constructed user agent to the request.

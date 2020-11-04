@@ -9,7 +9,7 @@ import (
 
 func TestGlacierAPIVersionMiddleware(t *testing.T) {
 	apiVersion := "2012-06-01"
-	m := &GlacierAPIVersionMiddleware{apiVersion: apiVersion}
+	m := &GlacierAPIVersion{apiVersion: apiVersion}
 
 	_, _, err := m.HandleSerialize(context.Background(),
 		middleware.SerializeInput{

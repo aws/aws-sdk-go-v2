@@ -103,24 +103,60 @@ func addOperationPutBucketPolicyMiddlewares(stack *middleware.Stack, options Opt
 	if err != nil {
 		return err
 	}
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addEndpointPrefix_opPutBucketPolicyMiddleware(stack)
-	addOpPutBucketPolicyValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opPutBucketPolicy(options.Region), middleware.Before)
-	addMetadataRetrieverMiddleware(stack)
-	addUpdateEndpointMiddleware(stack, options)
-	addResponseErrorMiddleware(stack)
-	v4.AddContentSHA256HeaderMiddleware(stack)
-	smithyhttp.AddChecksumMiddleware(stack)
+	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+		return err
+	}
+	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addResolveEndpointMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+		return err
+	}
+	if err = addRetryMiddlewares(stack, options); err != nil {
+		return err
+	}
+	if err = addHTTPSignerV4Middleware(stack, options); err != nil {
+		return err
+	}
+	if err = awsmiddleware.AddAttemptClockSkewMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addClientUserAgent(stack); err != nil {
+		return err
+	}
+	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addEndpointPrefix_opPutBucketPolicyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addOpPutBucketPolicyValidationMiddleware(stack); err != nil {
+		return err
+	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutBucketPolicy(options.Region), middleware.Before); err != nil {
+		return err
+	}
+	if err = addMetadataRetrieverMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addUpdateEndpointMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addResponseErrorMiddleware(stack); err != nil {
+		return err
+	}
+	if err = v4.AddContentSHA256HeaderMiddleware(stack); err != nil {
+		return err
+	}
+	if err = smithyhttp.AddContentChecksumMiddleware(stack); err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -165,8 +201,8 @@ func addEndpointPrefix_opPutBucketPolicyMiddleware(stack *middleware.Stack) erro
 	return stack.Serialize.Insert(&endpointPrefix_opPutBucketPolicyMiddleware{}, `OperationSerializer`, middleware.Before)
 }
 
-func newServiceMetadataMiddleware_opPutBucketPolicy(region string) awsmiddleware.RegisterServiceMetadata {
-	return awsmiddleware.RegisterServiceMetadata{
+func newServiceMetadataMiddleware_opPutBucketPolicy(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "s3",

@@ -82,7 +82,7 @@ func TestClientCopyDBSnapshot_presignURLCustomization(t *testing.T) {
 			_, err := client.CopyDBSnapshot(context.Background(), c.Input,
 				func(o *Options) {
 					o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) (err error) {
-						err = stack.Initialize.Remove("OperationInputValidation")
+						_, err = stack.Initialize.Remove("OperationInputValidation")
 						if err != nil {
 							return err
 						}

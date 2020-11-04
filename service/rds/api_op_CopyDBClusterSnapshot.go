@@ -232,21 +232,51 @@ func addOperationCopyDBClusterSnapshotMiddlewares(stack *middleware.Stack, optio
 	if err != nil {
 		return err
 	}
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addCopyDBClusterSnapshotPresignURLMiddleware(stack, options)
-	addOpCopyDBClusterSnapshotValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opCopyDBClusterSnapshot(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
+	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+		return err
+	}
+	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addResolveEndpointMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+		return err
+	}
+	if err = addRetryMiddlewares(stack, options); err != nil {
+		return err
+	}
+	if err = addHTTPSignerV4Middleware(stack, options); err != nil {
+		return err
+	}
+	if err = awsmiddleware.AddAttemptClockSkewMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addClientUserAgent(stack); err != nil {
+		return err
+	}
+	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addCopyDBClusterSnapshotPresignURLMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addOpCopyDBClusterSnapshotValidationMiddleware(stack); err != nil {
+		return err
+	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCopyDBClusterSnapshot(options.Region), middleware.Before); err != nil {
+		return err
+	}
+	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addResponseErrorMiddleware(stack); err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -330,7 +360,7 @@ func (c *copyDBClusterSnapshotHTTPPresignURLClient) PresignCopyDBClusterSnapshot
 func (c *copyDBClusterSnapshotHTTPPresignURLClient) convertToPresignMiddleware(stack *middleware.Stack, options Options) (err error) {
 	stack.Finalize.Clear()
 	stack.Deserialize.Clear()
-	stack.Build.Remove(awsmiddleware.RequestInvocationIDMiddleware{}.ID())
+	stack.Build.Remove((*awsmiddleware.ClientRequestID)(nil).ID())
 	err = stack.Finalize.Add(v4.NewPresignHTTPRequestMiddleware(options.Credentials, c.presigner), middleware.After)
 	if err != nil {
 		return err
@@ -370,8 +400,8 @@ func (c *presignAutoFillCopyDBClusterSnapshotClient) PresignURL(ctx context.Cont
 	return c.client.PresignCopyDBClusterSnapshot(ctx, input, optFn)
 }
 
-func newServiceMetadataMiddleware_opCopyDBClusterSnapshot(region string) awsmiddleware.RegisterServiceMetadata {
-	return awsmiddleware.RegisterServiceMetadata{
+func newServiceMetadataMiddleware_opCopyDBClusterSnapshot(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "rds",

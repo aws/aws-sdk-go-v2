@@ -101,7 +101,7 @@ func TestAsGetRequestMiddleware(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			m := &asGetRequestMiddleware{}
+			m := &asGetRequest{}
 
 			_, _, err := m.HandleSerialize(context.Background(), middleware.SerializeInput{
 				Parameters: struct{}{},

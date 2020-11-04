@@ -65,7 +65,7 @@ func TestResponseReadTimeoutMiddleware(t *testing.T) {
 		count:    0,
 	}
 
-	m := &readTimeoutMiddleware{duration: time.Millisecond}
+	m := &readTimeout{duration: time.Millisecond}
 
 	out, _, err := m.HandleDeserialize(context.Background(),
 		middleware.DeserializeInput{},

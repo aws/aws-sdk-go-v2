@@ -152,8 +152,8 @@ func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
 	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
-func addClientUserAgent(stack *middleware.Stack) {
-	awsmiddleware.AddUserAgentKey("query")(stack)
+func addClientUserAgent(stack *middleware.Stack) error {
+	return awsmiddleware.AddUserAgentKey("query")(stack)
 }
 
 func resolveIdempotencyTokenProvider(o *Options) {
@@ -175,10 +175,10 @@ type IdempotencyTokenProvider interface {
 	GetIdempotencyToken() (string, error)
 }
 
-func addRequestIDRetrieverMiddleware(stack *middleware.Stack) {
-	awsmiddleware.AddRequestIDRetrieverMiddleware(stack)
+func addRequestIDRetrieverMiddleware(stack *middleware.Stack) error {
+	return awsmiddleware.AddRequestIDRetrieverMiddleware(stack)
 }
 
-func addResponseErrorMiddleware(stack *middleware.Stack) {
-	awshttp.AddResponseErrorMiddleware(stack)
+func addResponseErrorMiddleware(stack *middleware.Stack) error {
+	return awshttp.AddResponseErrorMiddleware(stack)
 }

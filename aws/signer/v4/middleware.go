@@ -15,6 +15,8 @@ import (
 	smithyHTTP "github.com/awslabs/smithy-go/transport/http"
 )
 
+const computePayloadHashMiddlewareID = "ComputePayloadHash"
+
 // HashComputationError indicates an error occurred while computing the signing hash
 type HashComputationError struct {
 	Err error
@@ -44,7 +46,7 @@ func (e *SigningError) Unwrap() error {
 	return e.Err
 }
 
-// unsignedPayloadMiddleware sets the SigV4 request payload hash to unsigned.
+// unsignedPayload sets the SigV4 request payload hash to unsigned.
 //
 // Will not set the Unsigned Payload magic SHA value, if a SHA has already been
 // stored in the context. (e.g. application pre-computed SHA256 before making
@@ -52,21 +54,21 @@ func (e *SigningError) Unwrap() error {
 //
 // This middleware does not check the X-Amz-Content-Sha256 header, if that
 // header is serialized a middleware must translate it into the context.
-type unsignedPayloadMiddleware struct{}
+type unsignedPayload struct{}
 
-// AddUnsignedPayloadMiddleware adds unsignedPayloadMiddleware to the operation
+// AddUnsignedPayloadMiddleware adds unsignedPayload to the operation
 // middleware stack
-func AddUnsignedPayloadMiddleware(stack *middleware.Stack) {
-	stack.Build.Add(&unsignedPayloadMiddleware{}, middleware.After)
+func AddUnsignedPayloadMiddleware(stack *middleware.Stack) error {
+	return stack.Build.Add(&unsignedPayload{}, middleware.After)
 }
 
-// ID returns the unsignedPayloadMiddleware identifier
-func (m *unsignedPayloadMiddleware) ID() string {
-	return "SigV4UnsignedPayloadMiddleware"
+// ID returns the unsignedPayload identifier
+func (m *unsignedPayload) ID() string {
+	return computePayloadHashMiddlewareID
 }
 
 // HandleBuild sets the payload hash to be an unsigned payload
-func (m *unsignedPayloadMiddleware) HandleBuild(
+func (m *unsignedPayload) HandleBuild(
 	ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler,
 ) (
 	out middleware.BuildOutput, metadata middleware.Metadata, err error,
@@ -84,7 +86,7 @@ func (m *unsignedPayloadMiddleware) HandleBuild(
 	return next.HandleBuild(ctx, in)
 }
 
-// computePayloadSHA256Middleware computes SHA256 payload hash to sign.
+// computePayloadSHA256 computes SHA256 payload hash to sign.
 //
 // Will not set the Unsigned Payload magic SHA value, if a SHA has already been
 // stored in the context. (e.g. application pre-computed SHA256 before making
@@ -92,21 +94,21 @@ func (m *unsignedPayloadMiddleware) HandleBuild(
 //
 // This middleware does not check the X-Amz-Content-Sha256 header, if that
 // header is serialized a middleware must translate it into the context.
-type computePayloadSHA256Middleware struct{}
+type computePayloadSHA256 struct{}
 
-// AddComputePayloadSHA256Middleware adds computePayloadSHA256Middleware to the
+// AddComputePayloadSHA256Middleware adds computePayloadSHA256 to the
 // operation middleware stack
-func AddComputePayloadSHA256Middleware(stack *middleware.Stack) {
-	stack.Build.Add(&computePayloadSHA256Middleware{}, middleware.After)
+func AddComputePayloadSHA256Middleware(stack *middleware.Stack) error {
+	return stack.Build.Add(&computePayloadSHA256{}, middleware.After)
 }
 
 // ID is the middleware name
-func (m *computePayloadSHA256Middleware) ID() string {
-	return "ComputePayloadSHA256Middleware"
+func (m *computePayloadSHA256) ID() string {
+	return computePayloadHashMiddlewareID
 }
 
 // HandleBuild compute the payload hash for the request payload
-func (m *computePayloadSHA256Middleware) HandleBuild(
+func (m *computePayloadSHA256) HandleBuild(
 	ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler,
 ) (
 	out middleware.BuildOutput, metadata middleware.Metadata, err error,
@@ -147,24 +149,24 @@ func (m *computePayloadSHA256Middleware) HandleBuild(
 	return next.HandleBuild(ctx, in)
 }
 
-// contentSHA256HeaderMiddleware sets the X-Amz-Content-Sha256 header value to
+// contentSHA256Header sets the X-Amz-Content-Sha256 header value to
 // the Payload hash stored in the context.
-type contentSHA256HeaderMiddleware struct{}
+type contentSHA256Header struct{}
 
-// AddContentSHA256HeaderMiddleware adds ContentSHA256HeaderMiddleware to the
+// AddContentSHA256HeaderMiddleware adds ContentSHA256Header to the
 // operation middleware stack
-func AddContentSHA256HeaderMiddleware(stack *middleware.Stack) {
-	stack.Build.Add(&contentSHA256HeaderMiddleware{}, middleware.After)
+func AddContentSHA256HeaderMiddleware(stack *middleware.Stack) error {
+	return stack.Build.Insert(&contentSHA256Header{}, computePayloadHashMiddlewareID, middleware.After)
 }
 
 // ID returns the ContentSHA256HeaderMiddleware identifier
-func (m *contentSHA256HeaderMiddleware) ID() string {
-	return "SigV4ContentSHA256HeaderMiddleware"
+func (m *contentSHA256Header) ID() string {
+	return "SigV4ContentSHA256Header"
 }
 
 // HandleBuild sets the X-Amz-Content-Sha256 header value to the Payload hash
 // stored in the context.
-func (m *contentSHA256HeaderMiddleware) HandleBuild(
+func (m *contentSHA256Header) HandleBuild(
 	ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler,
 ) (
 	out middleware.BuildOutput, metadata middleware.Metadata, err error,
@@ -179,24 +181,24 @@ func (m *contentSHA256HeaderMiddleware) HandleBuild(
 	return next.HandleBuild(ctx, in)
 }
 
-// SignHTTPRequestMiddleware is a `FinalizeMiddleware` implementation for SigV4 HTTP Signing
-type SignHTTPRequestMiddleware struct {
+// SignHTTPRequest is a `FinalizeMiddleware` implementation for SigV4 HTTP Signing
+type SignHTTPRequest struct {
 	credentialsProvider aws.CredentialsProvider
 	signer              HTTPSigner
 }
 
-// NewSignHTTPRequestMiddleware constructs a SignHTTPRequestMiddleware using the given Signer for signing requests
-func NewSignHTTPRequestMiddleware(credentialsProvider aws.CredentialsProvider, signer HTTPSigner) *SignHTTPRequestMiddleware {
-	return &SignHTTPRequestMiddleware{credentialsProvider: credentialsProvider, signer: signer}
+// NewSignHTTPRequestMiddleware constructs a SignHTTPRequest using the given Signer for signing requests
+func NewSignHTTPRequestMiddleware(credentialsProvider aws.CredentialsProvider, signer HTTPSigner) *SignHTTPRequest {
+	return &SignHTTPRequest{credentialsProvider: credentialsProvider, signer: signer}
 }
 
-// ID is the SignHTTPRequestMiddleware identifier
-func (s *SignHTTPRequestMiddleware) ID() string {
-	return "SigV4SignHTTPRequestMiddleware"
+// ID is the SignHTTPRequest identifier
+func (s *SignHTTPRequest) ID() string {
+	return "Signing"
 }
 
 // HandleFinalize will take the provided input and sign the request using the SigV4 authentication scheme
-func (s *SignHTTPRequestMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+func (s *SignHTTPRequest) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
 	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
 ) {
 	if !haveCredentialProvider(s.credentialsProvider) {

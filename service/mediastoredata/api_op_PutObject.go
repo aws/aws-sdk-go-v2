@@ -95,26 +95,56 @@ func addOperationPutObjectMiddlewares(stack *middleware.Stack, options Options) 
 	if err != nil {
 		return err
 	}
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddUnsignedPayloadMiddleware(stack)
-	v4.AddContentSHA256HeaderMiddleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addOpPutObjectValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opPutObject(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
+	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+		return err
+	}
+	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addResolveEndpointMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = v4.AddUnsignedPayloadMiddleware(stack); err != nil {
+		return err
+	}
+	if err = v4.AddContentSHA256HeaderMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addRetryMiddlewares(stack, options); err != nil {
+		return err
+	}
+	if err = addHTTPSignerV4Middleware(stack, options); err != nil {
+		return err
+	}
+	if err = awsmiddleware.AddAttemptClockSkewMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addClientUserAgent(stack); err != nil {
+		return err
+	}
+	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addOpPutObjectValidationMiddleware(stack); err != nil {
+		return err
+	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutObject(options.Region), middleware.Before); err != nil {
+		return err
+	}
+	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addResponseErrorMiddleware(stack); err != nil {
+		return err
+	}
 	return nil
 }
 
-func newServiceMetadataMiddleware_opPutObject(region string) awsmiddleware.RegisterServiceMetadata {
-	return awsmiddleware.RegisterServiceMetadata{
+func newServiceMetadataMiddleware_opPutObject(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "mediastore",

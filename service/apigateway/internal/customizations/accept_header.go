@@ -9,17 +9,19 @@ import (
 )
 
 // AddAcceptHeader is the helper function used to add middleware to the stack
-func AddAcceptHeader(stack *middleware.Stack) {
-	stack.Build.Add(&acceptHeaderMiddleware{}, middleware.After)
+func AddAcceptHeader(stack *middleware.Stack) error {
+	return stack.Build.Add(&acceptHeader{}, middleware.After)
 }
 
-type acceptHeaderMiddleware struct{}
+type acceptHeader struct{}
 
 // ID returns the middleware ID.
-func (*acceptHeaderMiddleware) ID() string { return "APIGATEWAY:AcceptHeaderMiddleware" }
+func (*acceptHeader) ID() string {
+	return "APIGATEWAY:AcceptHeader"
+}
 
 // HandleBuild handles the associated build step of middleware stack
-func (m *acceptHeaderMiddleware) HandleBuild(
+func (m *acceptHeader) HandleBuild(
 	ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler) (
 	out middleware.BuildOutput, metadata middleware.Metadata, err error,
 ) {

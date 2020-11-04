@@ -56,22 +56,54 @@ func addOperationDeleteAccessPolicyMiddlewares(stack *middleware.Stack, options 
 	if err != nil {
 		return err
 	}
-	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
-	smithyhttp.AddContentLengthMiddleware(stack)
-	addResolveEndpointMiddleware(stack, options)
-	v4.AddComputePayloadSHA256Middleware(stack)
-	addRetryMiddlewares(stack, options)
-	addHTTPSignerV4Middleware(stack, options)
-	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addClientUserAgent(stack)
-	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
-	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	addEndpointPrefix_opDeleteAccessPolicyMiddleware(stack)
-	addIdempotencyToken_opDeleteAccessPolicyMiddleware(stack, options)
-	addOpDeleteAccessPolicyValidationMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAccessPolicy(options.Region), middleware.Before)
-	addRequestIDRetrieverMiddleware(stack)
-	addResponseErrorMiddleware(stack)
+	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+		return err
+	}
+	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addResolveEndpointMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+		return err
+	}
+	if err = addRetryMiddlewares(stack, options); err != nil {
+		return err
+	}
+	if err = addHTTPSignerV4Middleware(stack, options); err != nil {
+		return err
+	}
+	if err = awsmiddleware.AddAttemptClockSkewMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addClientUserAgent(stack); err != nil {
+		return err
+	}
+	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addEndpointPrefix_opDeleteAccessPolicyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addIdempotencyToken_opDeleteAccessPolicyMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addOpDeleteAccessPolicyValidationMiddleware(stack); err != nil {
+		return err
+	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAccessPolicy(options.Region), middleware.Before); err != nil {
+		return err
+	}
+	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addResponseErrorMiddleware(stack); err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -131,12 +163,12 @@ func (m *idempotencyToken_initializeOpDeleteAccessPolicy) HandleInitialize(ctx c
 	}
 	return next.HandleInitialize(ctx, in)
 }
-func addIdempotencyToken_opDeleteAccessPolicyMiddleware(stack *middleware.Stack, cfg Options) {
-	stack.Initialize.Add(&idempotencyToken_initializeOpDeleteAccessPolicy{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
+func addIdempotencyToken_opDeleteAccessPolicyMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpDeleteAccessPolicy{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
-func newServiceMetadataMiddleware_opDeleteAccessPolicy(region string) awsmiddleware.RegisterServiceMetadata {
-	return awsmiddleware.RegisterServiceMetadata{
+func newServiceMetadataMiddleware_opDeleteAccessPolicy(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "iotsitewise",

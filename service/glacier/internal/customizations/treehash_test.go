@@ -11,7 +11,7 @@ import (
 )
 
 func TestTreeHashMiddleware(t *testing.T) {
-	m := TreeHashMiddleware{}
+	m := TreeHash{}
 
 	cases := map[string]struct {
 		Body       io.Reader

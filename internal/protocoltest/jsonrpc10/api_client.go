@@ -144,8 +144,8 @@ func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
 	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
-func addClientUserAgent(stack *middleware.Stack) {
-	awsmiddleware.AddUserAgentKey("jsonrpc10")(stack)
+func addClientUserAgent(stack *middleware.Stack) error {
+	return awsmiddleware.AddUserAgentKey("jsonrpc10")(stack)
 }
 
 func addRetryMiddlewares(stack *middleware.Stack, o Options) error {
@@ -155,10 +155,10 @@ func addRetryMiddlewares(stack *middleware.Stack, o Options) error {
 	return retry.AddRetryMiddlewares(stack, mo)
 }
 
-func addRequestIDRetrieverMiddleware(stack *middleware.Stack) {
-	awsmiddleware.AddRequestIDRetrieverMiddleware(stack)
+func addRequestIDRetrieverMiddleware(stack *middleware.Stack) error {
+	return awsmiddleware.AddRequestIDRetrieverMiddleware(stack)
 }
 
-func addResponseErrorMiddleware(stack *middleware.Stack) {
-	awshttp.AddResponseErrorMiddleware(stack)
+func addResponseErrorMiddleware(stack *middleware.Stack) error {
+	return awshttp.AddResponseErrorMiddleware(stack)
 }

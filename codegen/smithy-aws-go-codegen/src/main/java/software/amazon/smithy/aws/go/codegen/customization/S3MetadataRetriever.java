@@ -49,8 +49,8 @@ public class S3MetadataRetriever implements GoIntegration {
     }
 
     private void writeMiddlewareHelper(GoWriter writer) {
-        writer.openBlock("func $L(stack *middleware.Stack) {", "}", ADD_METADATA_RETRIEVER, () -> {
-            writer.write("$T(stack)",
+        writer.openBlock("func $L(stack *middleware.Stack) error {", "}", ADD_METADATA_RETRIEVER, () -> {
+            writer.write("return $T(stack)",
                     SymbolUtils.createValueSymbolBuilder(ADD_METADATA_RETRIEVER_INTERNAL,
                             AwsCustomGoDependency.S3_SHARED_CUSTOMIZATION).build()
             );

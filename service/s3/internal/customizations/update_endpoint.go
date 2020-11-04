@@ -40,25 +40,26 @@ type UpdateEndpointOptions struct {
 }
 
 // UpdateEndpoint adds the middleware to the middleware stack based on the UpdateEndpointOptions.
-func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) {
-
+func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) error {
 	// enable dual stack support
-	stack.Serialize.Insert(&s3shared.EnableDualstackMiddleware{
+	if err := stack.Serialize.Insert(&s3shared.EnableDualstack{
 		UseDualstack: options.UseDualstack,
 		ServiceID:    "s3",
-	}, "OperationSerializer", middleware.After)
+	}, "OperationSerializer", middleware.After); err != nil {
+		return err
+	}
 
 	// update endpoint to use options for path style and accelerate
-	stack.Serialize.Insert(&updateEndpointMiddleware{
+	return stack.Serialize.Insert(&updateEndpoint{
 		region:             options.Region,
 		usePathStyle:       options.UsePathStyle,
 		getBucketFromInput: options.GetBucketFromInput,
 		useAccelerate:      options.UseAccelerate,
 		supportsAccelerate: options.SupportsAccelerate,
-	}, (&s3shared.EnableDualstackMiddleware{}).ID(), middleware.After)
+	}, (*s3shared.EnableDualstack)(nil).ID(), middleware.After)
 }
 
-type updateEndpointMiddleware struct {
+type updateEndpoint struct {
 	region string
 
 	// path style options
@@ -71,9 +72,11 @@ type updateEndpointMiddleware struct {
 }
 
 // ID returns the middleware ID.
-func (*updateEndpointMiddleware) ID() string { return "S3:UpdateEndpointMiddleware" }
+func (*updateEndpoint) ID() string {
+	return "S3:UpdateEndpoint"
+}
 
-func (u *updateEndpointMiddleware) HandleSerialize(
+func (u *updateEndpoint) HandleSerialize(
 	ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler,
 ) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
@@ -113,7 +116,7 @@ func (u *updateEndpointMiddleware) HandleSerialize(
 	return next.HandleSerialize(ctx, in)
 }
 
-func (u updateEndpointMiddleware) updateEndpointFromConfig(req *smithyhttp.Request, bucket string) error {
+func (u updateEndpoint) updateEndpointFromConfig(req *smithyhttp.Request, bucket string) error {
 	// do nothing if path style is enforced
 	if u.usePathStyle {
 		return nil

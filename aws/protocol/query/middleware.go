@@ -13,15 +13,14 @@ import (
 // operation serializer that will convert the query request body to a GET
 // operation with the query message in the HTTP request querystring.
 func AddAsGetRequestMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&asGetRequestMiddleware{},
-		"OperationSerializer", middleware.After)
+	return stack.Serialize.Insert(&asGetRequest{}, "OperationSerializer", middleware.After)
 }
 
-type asGetRequestMiddleware struct{}
+type asGetRequest struct{}
 
-func (*asGetRequestMiddleware) ID() string { return "Query:AsGetRequestMiddleware" }
+func (*asGetRequest) ID() string { return "Query:AsGetRequest" }
 
-func (m *asGetRequestMiddleware) HandleSerialize(
+func (m *asGetRequest) HandleSerialize(
 	ctx context.Context, input middleware.SerializeInput, next middleware.SerializeHandler,
 ) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,

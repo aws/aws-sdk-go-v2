@@ -36,21 +36,22 @@ type Options struct {
 
 // AddMiddleware adds the Presign URL middleware to the middleware stack.
 func AddMiddleware(stack *middleware.Stack, opts Options) error {
-	return stack.Initialize.Add(&presignMiddleware{options: opts}, middleware.Before)
+	return stack.Initialize.Add(&presign{options: opts}, middleware.Before)
 }
 
 // RemoveMiddleware removes the Presign URL middleware from the stack.
 func RemoveMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Remove((*presignMiddleware)(nil).ID())
+	_, err := stack.Initialize.Remove((*presign)(nil).ID())
+	return err
 }
 
-type presignMiddleware struct {
+type presign struct {
 	options Options
 }
 
-func (m *presignMiddleware) ID() string { return "PresignURLCustomization" }
+func (m *presign) ID() string { return "Presign" }
 
-func (m *presignMiddleware) HandleInitialize(
+func (m *presign) HandleInitialize(
 	ctx context.Context, input middleware.InitializeInput, next middleware.InitializeHandler,
 ) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,

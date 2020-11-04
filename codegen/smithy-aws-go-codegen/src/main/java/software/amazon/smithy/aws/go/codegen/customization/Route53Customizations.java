@@ -74,8 +74,8 @@ public class Route53Customizations implements GoIntegration {
     }
 
     private void writeMiddlewareHelper(GoWriter writer) {
-        writer.openBlock("func $L(stack *middleware.Stack) {", "}", URL_SANITIZE_ADDER, () -> {
-            writer.write("$T(stack, $T{SanitizeHostedZoneIDInput: $L})",
+        writer.openBlock("func $L(stack *middleware.Stack) error {", "}", URL_SANITIZE_ADDER, () -> {
+            writer.write("return $T(stack, $T{SanitizeHostedZoneIDInput: $L})",
                     SymbolUtils.createValueSymbolBuilder(URL_SANITIZE_INTERNAL_ADDER,
                             AwsCustomGoDependency.ROUTE53_CUSTOMIZATION).build(),
                     SymbolUtils.createValueSymbolBuilder(URL_SANITIZE_INTERNAL_ADDER + "Options",

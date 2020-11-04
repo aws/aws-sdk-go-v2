@@ -31,7 +31,7 @@ func TestPredictEndpointMiddleware(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			m := &predictEndpointMiddleware{
+			m := &predictEndpoint{
 				fetchPredictEndpoint: func(i interface{}) (*string, error) {
 					return c.PredictEndpoint, nil
 				},
