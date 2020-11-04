@@ -7,24 +7,21 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
-	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
 // LoadConfigWithDefaultRegion loads the default configuration for the SDK, and
 // falls back to a default region if one is not specified.
 func LoadConfigWithDefaultRegion(defaultRegion string) (cfg aws.Config, err error) {
-	var opts []config.Config
+	var lm aws.ClientLogMode
 
 	if strings.EqualFold(os.Getenv("AWS_DEBUG_REQUEST"), "true") {
-		opts = append(opts, config.WithHTTPClient(smithyhttp.WrapLogClient(
-			logger{}, aws.NewBuildableHTTPClient(), false)))
+		lm |= aws.LogRequest
 
 	} else if strings.EqualFold(os.Getenv("AWS_DEBUG_REQUEST_BODY"), "true") {
-		opts = append(opts, config.WithHTTPClient(smithyhttp.WrapLogClient(
-			logger{}, aws.NewBuildableHTTPClient(), true)))
+		lm |= aws.LogRequestWithBody
 	}
 
-	cfg, err = config.LoadDefaultConfig(opts...)
+	cfg, err = config.LoadDefaultConfig(config.WithClientLogMode(lm))
 	if err != nil {
 		return cfg, err
 	}

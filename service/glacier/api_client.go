@@ -131,7 +131,14 @@ func (c *Client) invokeOperation(ctx context.Context, opID string, params interf
 }
 
 func resolveDefaultLogger(o *Options) {
-	o.Logger = logging.Noop{}
+	if o.Logger != nil {
+		return
+	}
+	o.Logger = logging.Nop{}
+}
+
+func addSetLoggerMiddleware(stack *middleware.Stack, o Options) error {
+	return middleware.AddSetLoggerMiddleware(stack, o.Logger)
 }
 
 // NewFromConfig returns a new client from the provided config.
