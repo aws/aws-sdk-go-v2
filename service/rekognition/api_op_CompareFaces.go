@@ -148,6 +148,9 @@ func addOperationCompareFacesMiddlewares(stack *middleware.Stack, options Option
 	if err != nil {
 		return err
 	}
+	if err = addSetLoggerMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
 		return err
 	}
@@ -188,6 +191,9 @@ func addOperationCompareFacesMiddlewares(stack *middleware.Stack, options Option
 		return err
 	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
 	return nil

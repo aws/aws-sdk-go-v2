@@ -30,7 +30,7 @@ type retryMetadataKey struct{}
 
 // Attempt is a Smithy FinalizeMiddleware that handles retry attempts using the provided
 // Retryer implementation
-type AttemptMiddleware struct {
+type Attempt struct {
 	// Enable the logging of retry attempts performed by the SDK.
 	// This will include logging retry attempts, unretryable errors, and when max attempts are reached.
 	LogAttempts bool
@@ -43,7 +43,7 @@ type AttemptMiddleware struct {
 func NewAttemptMiddleware(retryer Retryer, requestCloner RequestCloner, optFns ...func(*Attempt)) *Attempt {
 	m := &Attempt{retryer: retryer, requestCloner: requestCloner}
 	for _, fn := range optFns {
-		fn(&m)
+		fn(m)
 	}
 	return m
 }
@@ -53,7 +53,7 @@ func (r *Attempt) ID() string {
 	return "Retry"
 }
 
-func (r AttemptMiddleware) logf(logger logging.Logger, classification logging.Classification, format string, v ...interface{}) {
+func (r Attempt) logf(logger logging.Logger, classification logging.Classification, format string, v ...interface{}) {
 	if !r.LogAttempts {
 		return
 	}
@@ -213,7 +213,7 @@ type AddRetryMiddlewaresOptions struct {
 
 // AddRetryMiddlewares adds retry middleware to operation middleware stack
 func AddRetryMiddlewares(stack *smithymiddle.Stack, options AddRetryMiddlewaresOptions) error {
-	attempt := NewAttemptMiddleware(options.Retryer, http.RequestCloner, func(middleware *AttemptMiddleware) {
+	attempt := NewAttemptMiddleware(options.Retryer, http.RequestCloner, func(middleware *Attempt) {
 		middleware.LogAttempts = options.LogRetryAttempts
 	})
 

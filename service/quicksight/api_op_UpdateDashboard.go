@@ -123,6 +123,9 @@ func addOperationUpdateDashboardMiddlewares(stack *middleware.Stack, options Opt
 	if err != nil {
 		return err
 	}
+	if err = addSetLoggerMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
 		return err
 	}
@@ -163,6 +166,9 @@ func addOperationUpdateDashboardMiddlewares(stack *middleware.Stack, options Opt
 		return err
 	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
 	return nil

@@ -81,6 +81,9 @@ func addOperationDescribeJobMiddlewares(stack *middleware.Stack, options Options
 	if err != nil {
 		return err
 	}
+	if err = addSetLoggerMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
 		return err
 	}
@@ -130,6 +133,9 @@ func addOperationDescribeJobMiddlewares(stack *middleware.Stack, options Options
 		return err
 	}
 	if err = v4.AddContentSHA256HeaderMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
 	return nil

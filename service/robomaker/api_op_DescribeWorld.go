@@ -66,6 +66,9 @@ func addOperationDescribeWorldMiddlewares(stack *middleware.Stack, options Optio
 	if err != nil {
 		return err
 	}
+	if err = addSetLoggerMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
 		return err
 	}
@@ -106,6 +109,9 @@ func addOperationDescribeWorldMiddlewares(stack *middleware.Stack, options Optio
 		return err
 	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
 	return nil

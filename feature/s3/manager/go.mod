@@ -7,7 +7,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/config v0.2.2
 	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v0.3.1 // indirect
 	github.com/aws/aws-sdk-go-v2/service/s3 v0.29.0
-	github.com/awslabs/smithy-go v0.3.1-0.20201103180816-d4c6ec013e15
+	github.com/awslabs/smithy-go v0.3.1-0.20201104233911-38864709e183
 	github.com/google/go-cmp v0.4.1
 )
 

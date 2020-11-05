@@ -125,6 +125,9 @@ func addOperationDescribePortalMiddlewares(stack *middleware.Stack, options Opti
 	if err != nil {
 		return err
 	}
+	if err = addSetLoggerMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
 		return err
 	}
@@ -168,6 +171,9 @@ func addOperationDescribePortalMiddlewares(stack *middleware.Stack, options Opti
 		return err
 	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
 	return nil

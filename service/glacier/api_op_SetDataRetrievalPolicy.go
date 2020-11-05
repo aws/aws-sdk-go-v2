@@ -65,6 +65,9 @@ func addOperationSetDataRetrievalPolicyMiddlewares(stack *middleware.Stack, opti
 	if err != nil {
 		return err
 	}
+	if err = addSetLoggerMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
 		return err
 	}
@@ -114,6 +117,9 @@ func addOperationSetDataRetrievalPolicyMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = glaciercust.AddDefaultAccountIDMiddleware(stack, setDefaultAccountID); err != nil {
+		return err
+	}
+	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
 	return nil

@@ -81,6 +81,9 @@ func addOperationGetDocumentationPartsMiddlewares(stack *middleware.Stack, optio
 	if err != nil {
 		return err
 	}
+	if err = addSetLoggerMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
 		return err
 	}
@@ -124,6 +127,9 @@ func addOperationGetDocumentationPartsMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addAcceptHeader(stack); err != nil {
+		return err
+	}
+	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
 	return nil
