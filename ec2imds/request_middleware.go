@@ -84,7 +84,10 @@ func addRequestMiddleware(stack *middleware.Stack,
 	}
 
 	// Retry support
-	return retry.AddRetryMiddlewares(stack, retry.AddRetryMiddlewaresOptions{Retryer: options.Retryer})
+	return retry.AddRetryMiddlewares(stack, retry.AddRetryMiddlewaresOptions{
+		Retryer:          options.Retryer,
+		LogRetryAttempts: options.ClientLogMode.IsRetries(),
+	})
 }
 
 type serializeRequest struct {

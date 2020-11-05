@@ -124,6 +124,9 @@ func addOperationRestoreTableToPointInTimeMiddlewares(stack *middleware.Stack, o
 	if err != nil {
 		return err
 	}
+	if err = addSetLoggerMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
 		return err
 	}
@@ -170,6 +173,9 @@ func addOperationRestoreTableToPointInTimeMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addAcceptEncodingGzip(stack, options); err != nil {
+		return err
+	}
+	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
 	return nil

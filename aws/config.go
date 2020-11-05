@@ -1,6 +1,9 @@
 package aws
 
-import "github.com/awslabs/smithy-go/middleware"
+import (
+	"github.com/awslabs/smithy-go/logging"
+	"github.com/awslabs/smithy-go/middleware"
+)
 
 // A Config provides service configuration for service clients.
 type Config struct {
@@ -43,6 +46,18 @@ type Config struct {
 	// client requests will be handled. This is useful for adding additional
 	// tracing data to a request, or changing behavior of the SDK's client.
 	APIOptions []func(*middleware.Stack) error
+
+	// The logger writer interface to write logging messages to. Defaults to
+	// standard error.
+	Logger logging.Logger
+
+	// Configures the events that will be sent to the configured logger.
+	// This can be used to configure the logging of signing, retries, request, and responses
+	// of the SDK clients.
+	//
+	// See the ClientLogMode type documentation for the complete set of logging modes and available
+	// configuration.
+	ClientLogMode ClientLogMode
 }
 
 // NewConfig returns a new Config pointer that can be chained with builder

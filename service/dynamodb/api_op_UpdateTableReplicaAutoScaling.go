@@ -68,6 +68,9 @@ func addOperationUpdateTableReplicaAutoScalingMiddlewares(stack *middleware.Stac
 	if err != nil {
 		return err
 	}
+	if err = addSetLoggerMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
 		return err
 	}
@@ -114,6 +117,9 @@ func addOperationUpdateTableReplicaAutoScalingMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addAcceptEncodingGzip(stack, options); err != nil {
+		return err
+	}
+	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
 	return nil

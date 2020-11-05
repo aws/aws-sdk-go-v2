@@ -111,6 +111,9 @@ func addOperationDescribeGameSessionDetailsMiddlewares(stack *middleware.Stack, 
 	if err != nil {
 		return err
 	}
+	if err = addSetLoggerMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
 		return err
 	}
@@ -148,6 +151,9 @@ func addOperationDescribeGameSessionDetailsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
 	return nil

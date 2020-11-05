@@ -76,6 +76,9 @@ func addOperationPutBucketRequestPaymentMiddlewares(stack *middleware.Stack, opt
 	if err != nil {
 		return err
 	}
+	if err = addSetLoggerMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
 		return err
 	}
@@ -125,6 +128,9 @@ func addOperationPutBucketRequestPaymentMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = disableAcceptEncodingGzip(stack); err != nil {
+		return err
+	}
+	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
 	if err = smithyhttp.AddContentChecksumMiddleware(stack); err != nil {

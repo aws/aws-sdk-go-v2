@@ -11,6 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/credentials/processcreds"
 	"github.com/aws/aws-sdk-go-v2/credentials/stscreds"
 	"github.com/aws/aws-sdk-go-v2/ec2imds"
+	"github.com/awslabs/smithy-go/logging"
 	"github.com/awslabs/smithy-go/middleware"
 )
 
@@ -508,7 +509,102 @@ func getEndpointResolver(configs configs) (f aws.EndpointResolver, found bool, e
 			if err != nil {
 				return nil, false, err
 			}
+			if found {
+				break
+			}
 		}
 	}
 	return f, found, err
+}
+
+// LoggerProvider is an interface for retrieving a logging.Logger from a configuration source.
+type LoggerProvider interface {
+	GetLogger() (logging.Logger, bool, error)
+}
+
+type withLogger struct {
+	logging.Logger
+}
+
+// WithLogger wraps a logging.Logger value to satisfy the LoggerProvider interface.
+func WithLogger(logger logging.Logger) LoggerProvider {
+	return withLogger{Logger: logger}
+}
+
+func (w withLogger) GetLogger() (logging.Logger, bool, error) {
+	return w.Logger, true, nil
+}
+
+// getLogger searches the provided config sources for a logging.Logger that can be used
+// to configure the aws.Config.Logger value.
+func getLogger(configs configs) (l logging.Logger, found bool, err error) {
+	for _, c := range configs {
+		if p, ok := c.(LoggerProvider); ok {
+			l, found, err = p.GetLogger()
+			if err != nil {
+				return nil, false, err
+			}
+			if found {
+				break
+			}
+		}
+	}
+	return l, found, err
+}
+
+// ClientLogModeProvider is an interface for retrieving the aws.ClientLogMode from a configuration source.
+type ClientLogModeProvider interface {
+	GetClientLogMode() (aws.ClientLogMode, bool, error)
+}
+
+// WithClientLogMode is a ClientLogModeProvider implementation that wraps a aws.ClientLogMode value.
+type WithClientLogMode aws.ClientLogMode
+
+// GetClientLogMode returns the wrapped aws.ClientLogMode
+func (w WithClientLogMode) GetClientLogMode() (aws.ClientLogMode, bool, error) {
+	return aws.ClientLogMode(w), true, nil
+}
+
+func getClientLogMode(configs configs) (m aws.ClientLogMode, found bool, err error) {
+	for _, c := range configs {
+		if p, ok := c.(ClientLogModeProvider); ok {
+			m, found, err = p.GetClientLogMode()
+			if err != nil {
+				return 0, false, err
+			}
+			if found {
+				break
+			}
+		}
+	}
+	return m, found, err
+}
+
+// LogConfigurationWarningsProvider is an interface for retrieving a boolean indicating whether configuration issues should
+// be logged when encountered when loading from config sources.
+type LogConfigurationWarningsProvider interface {
+	GetLogConfigurationWarnings() (bool, bool, error)
+}
+
+// WithLogConfigurationWarnings implements a LogConfigurationWarningsProvider and returns the wrapped boolean value.
+type WithLogConfigurationWarnings bool
+
+// GetLogConfigurationWarnings returns the wrapped boolean.
+func (w WithLogConfigurationWarnings) GetLogConfigurationWarnings() (bool, bool, error) {
+	return bool(w), true, nil
+}
+
+func getLogConfigurationWarnings(configs configs) (v bool, found bool, err error) {
+	for _, c := range configs {
+		if p, ok := c.(LogConfigurationWarningsProvider); ok {
+			v, found, err = p.GetLogConfigurationWarnings()
+			if err != nil {
+				return false, false, err
+			}
+			if found {
+				break
+			}
+		}
+	}
+	return v, found, err
 }

@@ -10,6 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/credentials"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
+	"github.com/awslabs/smithy-go/logging"
 )
 
 func TestResolveCustomCABundle(t *testing.T) {
@@ -178,5 +179,23 @@ func TestDefaultRegion(t *testing.T) {
 
 	if e, a := "foo-region", cfg.Region; e != a {
 		t.Errorf("expected %v, got %v", e, a)
+	}
+}
+
+func TestResolveLogger(t *testing.T) {
+	configs := configs{
+		WithLogger(logging.Nop{}),
+	}
+
+	cfg := unit.Config()
+
+	err := resolveLogger(&cfg, configs)
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	_, ok := cfg.Logger.(logging.Nop)
+	if !ok {
+		t.Error("unexpected logger type")
 	}
 }

@@ -18,6 +18,8 @@ var defaultLoaders = []loader{
 // This will setup the AWS configuration's Region,
 var defaultAWSConfigResolvers = []awsConfigResolver{
 	resolveDefaultAWSConfig,
+	resolveLogger,
+	resolveClientLogMode,
 	resolveCustomCABundle,
 	resolveHTTPClient,
 	resolveEndpointResolver,
