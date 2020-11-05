@@ -5,14 +5,14 @@ package rds
 import (
 	"context"
 	"fmt"
+
+	"github.com/awslabs/smithy-go/middleware"
+	smithyhttp "github.com/awslabs/smithy-go/transport/http"
+
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/protocol/query"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	presignedurlcust "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
-	"github.com/awslabs/smithy-go/middleware"
-	smithyhttp "github.com/awslabs/smithy-go/transport/http"
-	"net/http"
 )
 
 // Copies a snapshot of a DB cluster. To copy a DB cluster snapshot from a shared
@@ -295,52 +295,24 @@ func setCopyDBClusterSnapshotdestinationRegion(params interface{}, value string)
 	return nil
 }
 
-type copyDBClusterSnapshotHTTPPresignURLClient struct {
-	client    *Client
-	presigner *v4.Signer
-}
-
-func newCopyDBClusterSnapshotHTTPPresignURLClient(options Options, optFns ...func(*Options)) *copyDBClusterSnapshotHTTPPresignURLClient {
-	return &copyDBClusterSnapshotHTTPPresignURLClient{
-		client:    New(options, optFns...),
-		presigner: v4.NewSigner(),
+// accessor function required for Autofill customization
+func (c *PresignClient) getPresignedURL(ctx context.Context, region string, params interface{}) (result v4.PresignedHTTPRequest, err error) {
+	// validate params to be operation specific
+	input, ok := params.(*CopyDBClusterSnapshotInput)
+	if !ok {
+		return result, fmt.Errorf("expect *CopyDBClusterSnapshotInput type, got %T", params)
 	}
-}
-func (c *copyDBClusterSnapshotHTTPPresignURLClient) PresignCopyDBClusterSnapshot(ctx context.Context, params *CopyDBClusterSnapshotInput, optFns ...func(*Options)) (string, http.Header, error) {
-	if params == nil {
-		params = &CopyDBClusterSnapshotInput{}
+	optFn := func(o *Options) {
+		o.Region = region
+		o.APIOptions = append(o.APIOptions, presignedurlcust.RemoveMiddleware)
 	}
 
-	optFns = append(optFns, func(o *Options) {
-		o.HTTPClient = &smithyhttp.NopClient{}
-	})
-
-	ctx = presignedurlcust.WithIsPresigning(ctx)
-	result, _, err := c.client.invokeOperation(ctx, "CopyDBClusterSnapshot", params, optFns,
-		addOperationCopyDBClusterSnapshotMiddlewares,
-		c.convertToPresignMiddleware,
-	)
-	if err != nil {
-		return ``, nil, err
-	}
-
-	out := result.(*v4.PresignedHTTPRequest)
-	return out.URL, out.SignedHeader, nil
+	// perform operation presigning
+	result, err = c.PresignCopyDBClusterSnapshot(ctx, input, optFn)
+	// return presigned http request
+	return result, err
 }
-func (c *copyDBClusterSnapshotHTTPPresignURLClient) convertToPresignMiddleware(stack *middleware.Stack, options Options) (err error) {
-	stack.Finalize.Clear()
-	stack.Deserialize.Clear()
-	stack.Build.Remove(awsmiddleware.RequestInvocationIDMiddleware{}.ID())
-	err = stack.Finalize.Add(v4.NewPresignHTTPRequestMiddleware(options.Credentials, c.presigner), middleware.After)
-	if err != nil {
-		return err
-	}
-	err = query.AddAsGetRequestMiddleware(stack)
-	if err != nil {
-		return err
-	}
-	return nil
-}
+
 func addCopyDBClusterSnapshotPresignURLMiddleware(stack *middleware.Stack, options Options) error {
 	return presignedurlcust.AddMiddleware(stack, presignedurlcust.Options{
 		Accessor: presignedurlcust.ParameterAccessor{
@@ -349,25 +321,9 @@ func addCopyDBClusterSnapshotPresignURLMiddleware(stack *middleware.Stack, optio
 			CopyInput:            copyCopyDBClusterSnapshotInputForPresign,
 			SetDestinationRegion: setCopyDBClusterSnapshotdestinationRegion,
 			SetPresignedURL:      setCopyDBClusterSnapshotPreSignedUrl,
+			GetPresigner:         NewPresignClient(options).getPresignedURL,
 		},
-		Presigner: &presignAutoFillCopyDBClusterSnapshotClient{client: newCopyDBClusterSnapshotHTTPPresignURLClient(options)},
 	})
-}
-
-type presignAutoFillCopyDBClusterSnapshotClient struct {
-	client *copyDBClusterSnapshotHTTPPresignURLClient
-}
-
-func (c *presignAutoFillCopyDBClusterSnapshotClient) PresignURL(ctx context.Context, region string, params interface{}) (string, http.Header, error) {
-	input, ok := params.(*CopyDBClusterSnapshotInput)
-	if !ok {
-		return ``, nil, fmt.Errorf("expect *CopyDBClusterSnapshotInput type, got %T", params)
-	}
-	optFn := func(o *Options) {
-		o.Region = region
-		o.APIOptions = append(o.APIOptions, presignedurlcust.RemoveMiddleware)
-	}
-	return c.client.PresignCopyDBClusterSnapshot(ctx, input, optFn)
 }
 
 func newServiceMetadataMiddleware_opCopyDBClusterSnapshot(region string) awsmiddleware.RegisterServiceMetadata {
@@ -377,4 +333,29 @@ func newServiceMetadataMiddleware_opCopyDBClusterSnapshot(region string) awsmidd
 		SigningName:   "rds",
 		OperationName: "CopyDBClusterSnapshot",
 	}
+}
+
+// PresignCopyDBClusterSnapshot returns a Presigned HTTP request structure containing Request URL, method and SignedHeaders along with an error
+func (c *PresignClient) PresignCopyDBClusterSnapshot(ctx context.Context, input *CopyDBClusterSnapshotInput, optFns ...func(*Options)) (v4.PresignedHTTPRequest, error) {
+	if input == nil {
+		input = &CopyDBClusterSnapshotInput{}
+	}
+
+	optFns = append(optFns, func(o *Options) {
+		o.HTTPClient = &smithyhttp.NopClient{}
+	})
+
+	ctx = presignedurlcust.WithIsPresigning(ctx)
+	// TODO: metadata is lost here. Is it required? how to propogate it upwards if needed.
+	//  alternatively should the metadata be logged in case of error?
+	result, _, err := c.client.invokeOperation(ctx, "CopyDBClusterSnapshot", input, optFns,
+		addOperationCopyDBClusterSnapshotMiddlewares,
+		c.convertToPresignMiddleware,
+	)
+	if err != nil {
+		return v4.PresignedHTTPRequest{}, err
+	}
+
+	out := result.(*v4.PresignedHTTPRequest)
+	return *out, nil
 }

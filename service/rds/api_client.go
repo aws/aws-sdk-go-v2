@@ -6,6 +6,7 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/aws/protocol/query"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
@@ -193,4 +194,57 @@ func addRequestIDRetrieverMiddleware(stack *middleware.Stack) {
 
 func addResponseErrorMiddleware(stack *middleware.Stack) {
 	awshttp.AddResponseErrorMiddleware(stack)
+}
+
+/*
+ Handwritten code
+*/
+
+// PresignClient is a presigner client
+type PresignClient struct {
+	// no need to export these members
+	// client used by presigner
+	client *Client
+	// signer used for presigning
+	presigner *v4.Signer
+}
+
+// NewPresignClient returns a pre-signed client
+func NewPresignClient(options Options, optFns ...func(*Options)) *PresignClient {
+	client := New(options, optFns...)
+	presigner := v4.NewSigner()
+	return &PresignClient{
+		client:    client,
+		presigner: presigner,
+	}
+}
+
+// WithPresigner returns a pre-signed client that uses an existing client and signer options
+// to configure the signer used for presigning
+// TODO: this util can be added later if need be. This util exposes a way to configure with v4 signer options.
+// TODO: should this method be on Client.
+func WithPresigner(c *Client, optsFn ...func(signer *v4.Signer)) *PresignClient {
+	return &PresignClient{client: c, presigner: v4.NewSigner(optsFn...)}
+}
+
+func (c *PresignClient) convertToPresignMiddleware(stack *middleware.Stack, options Options) (err error) {
+	// remove middlewares not needed by presigner step
+	stack.Finalize.Clear()
+	stack.Deserialize.Clear()
+
+	// remove request invocation id middleware as it conflicts with the presigned url usage
+	stack.Build.Remove(awsmiddleware.RequestInvocationIDMiddleware{}.ID())
+
+	// add presign middleware in Finalize step, this if failed should be retried
+	err = stack.Finalize.Add(v4.NewPresignHTTPRequestMiddleware(options.Credentials, c.presigner), middleware.After)
+	if err != nil {
+		return err
+	}
+
+	// we convert all request to a GET request, this is required for generating presigned url
+	err = query.AddAsGetRequestMiddleware(stack)
+	if err != nil {
+		return err
+	}
+	return nil
 }

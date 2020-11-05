@@ -3,9 +3,10 @@ package presignedurl
 import (
 	"context"
 	"fmt"
-	"net/http"
 
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+
 	"github.com/awslabs/smithy-go/middleware"
 )
 
@@ -18,20 +19,16 @@ type ParameterAccessor struct {
 	CopyInput            func(interface{}) (interface{}, error)
 	SetDestinationRegion func(interface{}, string) error
 	SetPresignedURL      func(interface{}, string) error
-}
 
-// URLPresigner provides the interface to presign the input parameters in to a
-// presigned URL.
-type URLPresigner interface {
-	PresignURL(ctx context.Context, srcRegion string, params interface{}) (
-		presignedURL string, signedHeader http.Header, err error,
-	)
+	// GetPresigner fetches a request presigner
+	// The function should be of format:
+	// func $name (ctx context.Context, srcRegion string, params interface{}) (v4.HTTPRequest, error)
+	GetPresigner func(context.Context, string, interface{}) (v4.PresignedHTTPRequest, error)
 }
 
 // Options provides the set of options needed by the presigned URL middleware.
 type Options struct {
-	Accessor  ParameterAccessor
-	Presigner URLPresigner
+	Accessor ParameterAccessor
 }
 
 // AddMiddleware adds the Presign URL middleware to the middleware stack.
@@ -84,13 +81,13 @@ func (m *presignMiddleware) HandleInitialize(
 		return out, metadata, fmt.Errorf("presign middleware failed, %w", err)
 	}
 
-	presignedURL, _, err := m.options.Presigner.PresignURL(ctx, srcRegion, paramCpy)
+	presignedReq, err := m.options.Accessor.GetPresigner(ctx, srcRegion, paramCpy)
 	if err != nil {
 		return out, metadata, fmt.Errorf("unable to create presigned URL, %w", err)
 	}
 
 	// Update the original input with the presigned URL value.
-	if err = m.options.Accessor.SetPresignedURL(input.Parameters, presignedURL); err != nil {
+	if err = m.options.Accessor.SetPresignedURL(input.Parameters, presignedReq.URL); err != nil {
 		return out, metadata, fmt.Errorf("presign middleware failed, %w", err)
 	}
 
