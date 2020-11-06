@@ -152,11 +152,11 @@ func (*endpointPrefix_opDeleteBucketTaggingMiddleware) ID() string {
 	return "EndpointHostPrefix"
 }
 
-func (m *endpointPrefix_opDeleteBucketTaggingMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+func (m *endpointPrefix_opDeleteBucketTaggingMiddleware) HandleBuild(ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler) (
+	out middleware.BuildOutput, metadata middleware.Metadata, err error,
 ) {
-	if smithyhttp.GetHostnameImmutable(ctx) {
-		return next.HandleSerialize(ctx, in)
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleBuild(ctx, in)
 	}
 
 	req, ok := in.Request.(*smithyhttp.Request)
@@ -178,12 +178,12 @@ func (m *endpointPrefix_opDeleteBucketTaggingMiddleware) HandleSerialize(ctx con
 		prefix.WriteString(*input.AccountId)
 	}
 	prefix.WriteString(".")
-	req.HostPrefix = prefix.String()
+	req.URL.Host = prefix.String() + req.URL.Host
 
-	return next.HandleSerialize(ctx, in)
+	return next.HandleBuild(ctx, in)
 }
-func addEndpointPrefix_opDeleteBucketTaggingMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opDeleteBucketTaggingMiddleware{}, `OperationSerializer`, middleware.Before)
+func addEndpointPrefix_opDeleteBucketTaggingMiddleware(stack *middleware.Stack) (err error) {
+	return stack.Build.Add(&endpointPrefix_opDeleteBucketTaggingMiddleware{}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opDeleteBucketTagging(region string) *awsmiddleware.RegisterServiceMetadata {
