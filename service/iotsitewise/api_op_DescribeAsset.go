@@ -162,11 +162,11 @@ func (*endpointPrefix_opDescribeAssetMiddleware) ID() string {
 	return "EndpointHostPrefix"
 }
 
-func (m *endpointPrefix_opDescribeAssetMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+func (m *endpointPrefix_opDescribeAssetMiddleware) HandleBuild(ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler) (
+	out middleware.BuildOutput, metadata middleware.Metadata, err error,
 ) {
-	if smithyhttp.GetHostnameImmutable(ctx) {
-		return next.HandleSerialize(ctx, in)
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleBuild(ctx, in)
 	}
 
 	req, ok := in.Request.(*smithyhttp.Request)
@@ -174,12 +174,12 @@ func (m *endpointPrefix_opDescribeAssetMiddleware) HandleSerialize(ctx context.C
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
 	}
 
-	req.HostPrefix = "model."
+	req.URL.Host = "model." + req.URL.Host
 
-	return next.HandleSerialize(ctx, in)
+	return next.HandleBuild(ctx, in)
 }
-func addEndpointPrefix_opDescribeAssetMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opDescribeAssetMiddleware{}, `OperationSerializer`, middleware.Before)
+func addEndpointPrefix_opDescribeAssetMiddleware(stack *middleware.Stack) (err error) {
+	return stack.Build.Add(&endpointPrefix_opDescribeAssetMiddleware{}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opDescribeAsset(region string) *awsmiddleware.RegisterServiceMetadata {

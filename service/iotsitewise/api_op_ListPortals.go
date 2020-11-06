@@ -117,11 +117,11 @@ func (*endpointPrefix_opListPortalsMiddleware) ID() string {
 	return "EndpointHostPrefix"
 }
 
-func (m *endpointPrefix_opListPortalsMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+func (m *endpointPrefix_opListPortalsMiddleware) HandleBuild(ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler) (
+	out middleware.BuildOutput, metadata middleware.Metadata, err error,
 ) {
-	if smithyhttp.GetHostnameImmutable(ctx) {
-		return next.HandleSerialize(ctx, in)
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleBuild(ctx, in)
 	}
 
 	req, ok := in.Request.(*smithyhttp.Request)
@@ -129,12 +129,12 @@ func (m *endpointPrefix_opListPortalsMiddleware) HandleSerialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
 	}
 
-	req.HostPrefix = "monitor."
+	req.URL.Host = "monitor." + req.URL.Host
 
-	return next.HandleSerialize(ctx, in)
+	return next.HandleBuild(ctx, in)
 }
-func addEndpointPrefix_opListPortalsMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opListPortalsMiddleware{}, `OperationSerializer`, middleware.Before)
+func addEndpointPrefix_opListPortalsMiddleware(stack *middleware.Stack) (err error) {
+	return stack.Build.Add(&endpointPrefix_opListPortalsMiddleware{}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opListPortals(region string) *awsmiddleware.RegisterServiceMetadata {
