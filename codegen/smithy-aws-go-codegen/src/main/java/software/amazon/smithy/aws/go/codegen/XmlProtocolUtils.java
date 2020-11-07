@@ -1,18 +1,18 @@
 package software.amazon.smithy.aws.go.codegen;
 
-import static software.amazon.smithy.go.codegen.integration.ProtocolUtils.writeSafeMemberAccessor;
-
 import java.util.Optional;
 import software.amazon.smithy.aws.go.codegen.customization.AwsCustomGoDependency;
 import software.amazon.smithy.aws.traits.ServiceTrait;
 import software.amazon.smithy.codegen.core.CodegenException;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
+import software.amazon.smithy.go.codegen.GoValueAccessUtils;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.SyntheticClone;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
+import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
@@ -55,7 +55,7 @@ final class XmlProtocolUtils {
         // Traverse member shapes to get attributes
         shape.members().stream().forEach(memberShape -> {
             if (memberShape.hasTrait(XmlAttributeTrait.class)) {
-                writeSafeMemberAccessor(context, memberShape, inputSrc, (operand) -> {
+                GoValueAccessUtils.writeIfNonZeroValueMember(context, writer, memberShape, inputSrc, (operand) -> {
                     // xml attributes should always be string
                     String dest = "av";
                     formatXmlAttributeValueAsString(context, memberShape, operand, dest);
@@ -85,8 +85,15 @@ final class XmlProtocolUtils {
         // declare destination variable
         writer.write("var $L string", dest);
 
+        // Pointable value references need to be dereferenced before being used.
+        String derefSource = src;
+        if (context.getPointableIndex().isPointable(member)) {
+            derefSource = "*" + src;
+        }
+
         if (target.isStringShape()) {
-            writer.write("$L = *$L", dest, src);
+            // create dereferenced copy of pointed to value.
+            writer.write("$L = $L", dest, derefSource);
             return;
         }
 
@@ -96,15 +103,15 @@ final class XmlProtocolUtils {
             writer.addUseImports(SmithyGoDependency.SMITHY_TIME);
             switch (format) {
                 case DATE_TIME:
-                    writer.write("$L = smithytime.FormatDateTime(*$L)", dest, src);
+                    writer.write("$L = smithytime.FormatDateTime($L)", dest, derefSource);
                     break;
                 case HTTP_DATE:
-                    writer.write("$L = smithytime.FormatHTTPDate(*$L)", dest, src);
+                    writer.write("$L = smithytime.FormatHTTPDate($L)", dest, derefSource);
                     break;
                 case EPOCH_SECONDS:
                     writer.addUseImports(SmithyGoDependency.STRCONV);
-                    writer.write("$L = strconv.FormatFloat(smithytime.FormatEpochSeconds(*$L), 'f', -1, 64)", dest,
-                            src);
+                    writer.write("$L = strconv.FormatFloat(smithytime.FormatEpochSeconds($L), 'f', -1, 64)",
+                            dest, derefSource);
                     break;
                 case UNKNOWN:
                     throw new CodegenException("Unknown timestamp format");
@@ -114,25 +121,25 @@ final class XmlProtocolUtils {
 
         if (target.isBooleanShape()) {
             writer.write(SmithyGoDependency.STRCONV);
-            writer.write("$L = strconv.FormatBool(*$L)", dest, src);
+            writer.write("$L = strconv.FormatBool($L)", dest, derefSource);
             return;
         }
 
         if (target.isByteShape() || target.isShortShape() || target.isIntegerShape() || target.isLongShape()) {
             writer.write(SmithyGoDependency.STRCONV);
-            writer.write("$L = strconv.FormatInt(int64(*$L), 10)", dest, src);
+            writer.write("$L = strconv.FormatInt(int64($L), 10)", dest, derefSource);
             return;
         }
 
         if (target.isFloatShape()) {
             writer.write(SmithyGoDependency.STRCONV);
-            writer.write("$L = strconv.FormatFloat(float64(*$L),'f', -1, 32)", dest, src);
+            writer.write("$L = strconv.FormatFloat(float64($L),'f', -1, 32)", dest, derefSource);
             return;
         }
 
         if (target.isDoubleShape()) {
             writer.write(SmithyGoDependency.STRCONV);
-            writer.write("$L = strconv.FormatFloat(*$L,'f', -1, 64)", dest, src);
+            writer.write("$L = strconv.FormatFloat($L,'f', -1, 64)", dest, derefSource);
             return;
         }
 

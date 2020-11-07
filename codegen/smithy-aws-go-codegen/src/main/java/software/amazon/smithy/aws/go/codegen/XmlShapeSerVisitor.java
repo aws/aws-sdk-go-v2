@@ -1,7 +1,5 @@
 package software.amazon.smithy.aws.go.codegen;
 
-import static software.amazon.smithy.go.codegen.integration.ProtocolUtils.writeSafeMemberAccessor;
-
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
@@ -10,6 +8,7 @@ import java.util.function.Predicate;
 import java.util.logging.Logger;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
+import software.amazon.smithy.go.codegen.GoValueAccessUtils;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.integration.DocumentShapeSerVisitor;
@@ -22,7 +21,6 @@ import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.Shape;
 import software.amazon.smithy.model.shapes.StructureShape;
 import software.amazon.smithy.model.shapes.UnionShape;
-import software.amazon.smithy.model.traits.EnumTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait;
 import software.amazon.smithy.model.traits.XmlFlattenedTrait;
 import software.amazon.smithy.model.traits.XmlNameTrait;
@@ -51,7 +49,6 @@ final class XmlShapeSerVisitor extends DocumentShapeSerVisitor {
         return new DocumentMemberSerVisitor(getContext(), member, source, dest, format);
     }
 
-
     @Override
     protected Map<String, String> getAdditionalSerArguments() {
         return Collections.singletonMap("value", "smithyxml.Value");
@@ -76,14 +73,12 @@ final class XmlShapeSerVisitor extends DocumentShapeSerVisitor {
         writer.insertTrailingNewline();
 
         writer.openBlock("for i := range v {", "}", () -> {
-            // Null values in lists should be serialized as such. Enums can't be null
-            if (!target.hasTrait(EnumTrait.class)) {
-                writer.openBlock("if vv := v[i]; vv == nil {", "}", () -> {
-                    writer.write("am := array.Member()");
-                    writer.write("am.Close()");
-                    writer.write("continue");
-                });
-            }
+            // Serialize zero members as empty values.
+            GoValueAccessUtils.writeIfZeroValue(context, writer, member, "v[i]", () -> {
+                writer.write("am := array.Member()");
+                writer.write("am.Close()");
+                writer.write("continue");
+            });
 
             writer.write("am := array.Member()");
             target.accept(getMemberSerVisitor(shape.getMember(), "v[i]", "am"));
@@ -109,17 +104,15 @@ final class XmlShapeSerVisitor extends DocumentShapeSerVisitor {
             writer.write("entry := m.Entry()");
             writer.insertTrailingNewline();
 
-            // Null values in maps should be serialized as such. Enums can't be null
-            if (!targetValue.hasTrait(EnumTrait.class)) {
-                writer.openBlock("if vv := v[key]; vv == nil {", "}", () -> {
-                    writer.write("entry.Close()");
-                    writer.write("continue");
-                });
-            }
+            // Serialize zero values as empty values.
+            GoValueAccessUtils.writeIfZeroValue(context, writer, shape.getValue(), "v[i]", () -> {
+                writer.write("entry.Close()");
+                writer.write("continue");
+            });
 
             // map entry key
             XmlProtocolUtils.generateXMLStartElement(context, shape.getKey(), "keyElement", "v");
-            targetKey.accept(getMemberSerVisitor(shape.getKey(), "&key", "entry.MemberElement(keyElement)"));
+            targetKey.accept(getMemberSerVisitor(shape.getKey(), "key", "entry.MemberElement(keyElement)"));
             writer.insertTrailingNewline();
 
             // map entry value
@@ -155,7 +148,8 @@ final class XmlShapeSerVisitor extends DocumentShapeSerVisitor {
             Shape target = context.getModel().expectShape(member.getTarget());
 
             writer.addUseImports(SmithyGoDependency.SMITHY_XML);
-            writeSafeMemberAccessor(context, member, "v", (operand) -> {
+
+            GoValueAccessUtils.writeIfNonZeroValueMember(context, writer, member, "v", (operand) -> {
                 XmlProtocolUtils.generateXMLStartElement(context, member, "root", "v");
 
                 // check if member shape has flattened trait

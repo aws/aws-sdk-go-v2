@@ -22,6 +22,7 @@ import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator.GenerationContext;
+import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
 import software.amazon.smithy.model.shapes.BigDecimalShape;
 import software.amazon.smithy.model.shapes.BigIntegerShape;
 import software.amazon.smithy.model.shapes.BlobShape;
@@ -55,11 +56,13 @@ import software.amazon.smithy.model.traits.TimestampFormatTrait.Format;
  */
 public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
     private final GenerationContext context;
+    private final MemberShape member;
     private final String dataDest;
     private final Format timestampFormat;
 
-    public JsonMemberDeserVisitor(GenerationContext context, String dataDest, Format timestampFormat) {
+    public JsonMemberDeserVisitor(GenerationContext context, MemberShape member, String dataDest, Format timestampFormat) {
         this.context = context;
+        this.member = member;
         this.dataDest = dataDest;
         this.timestampFormat = timestampFormat;
     }
@@ -70,13 +73,20 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
         writer.addUseImports(SmithyGoDependency.FMT);
         writer.addUseImports(SmithyGoDependency.BASE64);
         final String typeError = "return fmt.Errorf(\"expected $L to be []byte, got %T instead\", value)";
+
         writer.openBlock("if value != nil {", "}", () -> {
             writer.write("jtv, ok := value.(string)");
-            writer.openBlock("if !ok {", "}", () -> writer.write(typeError, shape.getId().getName()));
+            writer.openBlock("if !ok {", "}", () -> {
+                writer.write(typeError, shape.getId().getName());
+            });
+
             writer.write("dv, err := base64.StdEncoding.DecodeString(jtv)");
-            writer.openBlock("if err != nil {", "}", () -> writer.write("return fmt.Errorf(\"failed to base64 decode "
-                    + "$L, %w\", err)", shape.getId().getName()));
-            writer.write("$L = dv", dataDest);
+            writer.openBlock("if err != nil {", "}", () -> {
+                writer.write("return fmt.Errorf(\"failed to base64 decode $L, %w\", err)", shape.getId().getName());
+            });
+
+            writer.write("$L = $L", dataDest, CodegenUtils.getAsPointerIfPointable(context.getModel(),
+                    context.getWriter(), context.getPointableIndex(), member, "dv"));
         });
         return null;
     }
@@ -91,7 +101,8 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
                 writer.write("return fmt.Errorf(\"expected $L to be of type *bool, got %T instead\", value)",
                         shape.getId().getName());
             });
-            writer.write("$L = &jtv", dataDest);
+            writer.write("$L = $L", dataDest, CodegenUtils.getAsPointerIfPointable(context.getModel(),
+                    context.getWriter(), context.getPointableIndex(), member, "jtv"));
         });
         return null;
     }
@@ -100,27 +111,31 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
     public Void byteShape(ByteShape shape) {
         GoWriter writer = context.getWriter();
         // Smithy's byte shape represents a signed 8-bit int, which doesn't line up with Go's unsigned byte
-        handleInteger(shape, CodegenUtils.generatePointerValueIfPointable(writer, shape, "int8(i64)"));
+        handleInteger(shape, CodegenUtils.getAsPointerIfPointable(context.getModel(), writer,
+                context.getPointableIndex(), member, "int8(i64)"));
         return null;
     }
 
     @Override
     public Void shortShape(ShortShape shape) {
         GoWriter writer = context.getWriter();
-        handleInteger(shape, CodegenUtils.generatePointerValueIfPointable(writer, shape, "int16(i64)"));
+        handleInteger(shape, CodegenUtils.getAsPointerIfPointable(context.getModel(), writer,
+                context.getPointableIndex(), member, "int16(i64)"));
         return null;
     }
 
     @Override
     public Void integerShape(IntegerShape shape) {
         GoWriter writer = context.getWriter();
-        handleInteger(shape, CodegenUtils.generatePointerValueIfPointable(writer, shape, "int32(i64)"));
+        handleInteger(shape, CodegenUtils.getAsPointerIfPointable(context.getModel(), writer,
+                context.getPointableIndex(), member, "int32(i64)"));
         return null;
     }
 
     @Override
     public Void longShape(LongShape shape) {
-        handleInteger(shape, "&i64");
+        handleInteger(shape, CodegenUtils.getAsPointerIfPointable(context.getModel(), context.getWriter(),
+                context.getPointableIndex(), member, "i64"));
         return null;
     }
 
@@ -165,14 +180,15 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
 
     @Override
     public Void floatShape(FloatShape shape) {
-        GoWriter writer = context.getWriter();
-        handleFloat(shape, CodegenUtils.generatePointerValueIfPointable(writer, shape, "float32(f64)"));
+        handleFloat(shape, CodegenUtils.getAsPointerIfPointable(context.getModel(), context.getWriter(),
+                context.getPointableIndex(), member, "float32(f64)"));
         return null;
     }
 
     @Override
     public Void doubleShape(DoubleShape shape) {
-        handleFloat(shape, "&f64");
+        handleFloat(shape, CodegenUtils.getAsPointerIfPointable(context.getModel(), context.getWriter(),
+                context.getPointableIndex(), member, "f64"));
         return null;
     }
 
@@ -201,7 +217,8 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
         if (shape.hasTrait(EnumTrait.class)) {
             handleString(shape, () -> writer.write("$L = $P(jtv)", dataDest, symbol));
         } else {
-            handleString(shape, () -> writer.write("$L = &jtv", dataDest));
+            handleString(shape, () -> writer.write("$L = $L", dataDest, CodegenUtils.getAsPointerIfPointable(
+                    context.getModel(), context.getWriter(), context.getPointableIndex(), member, "jtv")));
         }
 
         return null;
@@ -239,19 +256,22 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
                 handleString(shape, () -> {
                     writer.write("t, err := smithytime.ParseDateTime(jtv)");
                     writer.write("if err != nil { return err }");
-                    writer.write("$L = &t", dataDest);
+                    writer.write("$L = $L", dataDest, CodegenUtils.getAsPointerIfPointable(context.getModel(),
+                            context.getWriter(), context.getPointableIndex(), member, "t"));
                 });
                 break;
             case HTTP_DATE:
                 handleString(shape, () -> {
                     writer.write("t, err := smithytime.ParseHTTPDate(jtv)");
                     writer.write("if err != nil { return err }");
-                    writer.write("$L = &t", dataDest);
+                    writer.write("$L = $L", dataDest, CodegenUtils.getAsPointerIfPointable(context.getModel(),
+                            context.getWriter(), context.getPointableIndex(), member, "t"));
                 });
                 break;
             case EPOCH_SECONDS:
                 writer.addUseImports(SmithyGoDependency.SMITHY_PTR);
-                handleFloat(shape, "ptr.Time(smithytime.ParseEpochSeconds(f64))");
+                handleFloat(shape, CodegenUtils.getAsPointerIfPointable(context.getModel(), context.getWriter(),
+                        context.getPointableIndex(), member, "smithytime.ParseEpochSeconds(f64)"));
                 break;
             default:
                 throw new CodegenException(String.format("Unknown timestamp format %s", timestampFormat));
@@ -340,8 +360,11 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
     private void writeDelegateFunction(Shape shape) {
         String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(shape, context.getProtocolName());
         GoWriter writer = context.getWriter();
-        writer.openBlock("if err := $L(&$L, value); err != nil {", "}", functionName, dataDest, () -> {
-            writer.write("return err");
+
+        ProtocolUtils.writeDeserDelegateFunction(context, writer, member, dataDest, (destVar) -> {
+            writer.openBlock("if err := $L(&$L, value); err != nil {", "}", functionName, destVar, () -> {
+                writer.write("return err");
+            });
         });
     }
 }

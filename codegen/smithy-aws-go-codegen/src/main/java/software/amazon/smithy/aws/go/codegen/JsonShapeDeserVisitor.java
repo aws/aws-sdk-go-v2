@@ -31,7 +31,6 @@ import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.UnionGenerator;
 import software.amazon.smithy.go.codegen.integration.DocumentShapeDeserVisitor;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator.GenerationContext;
-import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
 import software.amazon.smithy.model.shapes.CollectionShape;
 import software.amazon.smithy.model.shapes.DocumentShape;
 import software.amazon.smithy.model.shapes.MapShape;
@@ -80,7 +79,7 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
         // Get the timestamp format to be used, defaulting to epoch seconds.
         Format format = member.getMemberTrait(getContext().getModel(), TimestampFormatTrait.class)
                 .map(TimestampFormatTrait::getFormat).orElse(DEFAULT_TIMESTAMP_FORMAT);
-        return new JsonMemberDeserVisitor(getContext(), dataDest, format);
+        return new JsonMemberDeserVisitor(getContext(), member, dataDest, format);
     }
 
     @Override
@@ -109,7 +108,7 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
         writer.openBlock("for _, value := range shape {", "}", () -> {
             // We need to write out an intermediate variable to assign the value of the
             // member to so that we can use it in the append function later.
-            writer.write("var col $P", context.getSymbolProvider().toSymbol(target));
+            writer.write("var col $P", context.getSymbolProvider().toSymbol(member));
             target.accept(getMemberDeserVisitor(member, "col"));
             writer.write("cv = append(cv, col)");
             writer.write("");
@@ -150,7 +149,7 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
         writer.openBlock("for key, value := range shape {", "}", () -> {
             // Deserialize the value. We need to write out an intermediate variable here
             // since we can't just pass in &mv[key]
-            writer.write("var parsedVal $P", targetSymbol);
+            writer.write("var parsedVal $P", context.getSymbolProvider().toSymbol(member));
             context.getModel().expectShape(member.getTarget()).accept(getMemberDeserVisitor(member, "parsedVal"));
             writer.write("mv[key] = parsedVal");
             writer.write("");
@@ -232,11 +231,8 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
                         writer.write("var mv $P", targetSymbol);
                         target.accept(getMemberDeserVisitor(member, "mv"));
 
-                        if (!ProtocolUtils.usesScalarWhenUnionValue(target)) {
-                            writer.write("uv = &$T{Value: *mv}", memberSymbol);
-                        } else {
-                            writer.write("uv = &$T{Value: mv}", memberSymbol);
-                        }
+                        // Union member types are never pointer types.
+                        writer.write("uv = &$T{Value: mv}", memberSymbol);
                         writer.write("break loop");
                     });
                 }

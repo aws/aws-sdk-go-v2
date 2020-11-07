@@ -1,7 +1,5 @@
 package software.amazon.smithy.aws.go.codegen;
 
-import static software.amazon.smithy.go.codegen.integration.ProtocolUtils.writeSafeMemberAccessor;
-
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
@@ -11,10 +9,12 @@ import java.util.logging.Logger;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDependency;
+import software.amazon.smithy.go.codegen.GoValueAccessUtils;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.integration.DocumentShapeSerVisitor;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator.GenerationContext;
+import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
 import software.amazon.smithy.go.codegen.trait.NoSerializeTrait;
 import software.amazon.smithy.model.shapes.CollectionShape;
 import software.amazon.smithy.model.shapes.DocumentShape;
@@ -81,7 +81,7 @@ class QueryShapeSerVisitor extends DocumentShapeSerVisitor {
 
         writer.openBlock("for i := range v {", "}", () -> {
             // Null values should be omitted for query.
-            if (!target.hasTrait(EnumTrait.class)) {
+            if (context.getPointableIndex().isNillable(shape.getMember())) {
                 writer.openBlock("if vv := v[i]; vv == nil {", "}", () -> {
                     writer.write("continue");
                 });
@@ -125,7 +125,7 @@ class QueryShapeSerVisitor extends DocumentShapeSerVisitor {
         writer.addUseImports(SmithyGoDependency.FMT);
         writer.openBlock("for _, key := range keys {", "}", () -> {
             // Null values should be omitted for query.
-            if (!target.hasTrait(EnumTrait.class)) {
+            if (context.getPointableIndex().isNillable(shape.getValue())) {
                 writer.openBlock("if vv := v[key]; vv == nil {", "}", () -> {
                     writer.write("continue");
                 });
@@ -152,7 +152,8 @@ class QueryShapeSerVisitor extends DocumentShapeSerVisitor {
                 continue;
             }
             Shape target = context.getModel().expectShape(member.getTarget());
-            writeSafeMemberAccessor(context, member, "v", (operand) -> {
+
+            GoValueAccessUtils.writeIfNonZeroValueMember(context, writer, member, "v", (operand) -> {
                 String locationName = getSerializedLocationName(member, member.getMemberName());
                 if (isFlattened(context, member)) {
                     writer.write("objectKey := object.FlatKey($S)", locationName);

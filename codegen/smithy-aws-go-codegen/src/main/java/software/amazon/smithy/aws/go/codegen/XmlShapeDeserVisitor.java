@@ -9,6 +9,7 @@ import java.util.function.Predicate;
 import java.util.logging.Logger;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
+import software.amazon.smithy.go.codegen.CodegenUtils;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.integration.DocumentShapeDeserVisitor;
@@ -22,6 +23,7 @@ import software.amazon.smithy.model.shapes.MapShape;
 import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.SetShape;
 import software.amazon.smithy.model.shapes.Shape;
+import software.amazon.smithy.model.shapes.ShapeType;
 import software.amazon.smithy.model.shapes.SimpleShape;
 import software.amazon.smithy.model.shapes.StructureShape;
 import software.amazon.smithy.model.shapes.UnionShape;
@@ -69,21 +71,21 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
         return Collections.singletonMap("decoder", "smithyxml.NodeDecoder");
     }
 
-    private XmlMemberDeserVisitor getMemberDeserVisitor(MemberShape member, String dataDest, boolean isXmlAttibuteMember) {
+    private XmlMemberDeserVisitor getMemberDeserVisitor(MemberShape member, String dataDest, boolean isXmlAttributeMember) {
         // Get the timestamp format to be used, defaulting to rfc 3339 date-time format.
         TimestampFormatTrait.Format format = member.getMemberTrait(getContext().getModel(), TimestampFormatTrait.class)
                 .map(TimestampFormatTrait::getFormat).orElse(DEFAULT_TIMESTAMP_FORMAT);
-        // Check if FlattenedTrait  is applied
-        boolean isFlattened = member.hasTrait(XmlFlattenedTrait.ID);
-        return new XmlMemberDeserVisitor(getContext(), dataDest, format, isXmlAttibuteMember, isFlattened);
+        return new XmlMemberDeserVisitor(getContext(), member, dataDest, format, isXmlAttributeMember);
     }
 
     // generates code to define and initialize output variable for an aggregate shape
-    private void generatesIntializerForOutputVariable(GenerationContext context, Shape shape) {
+    private void generatesInitializerForOutputVariable(GenerationContext context, Shape shape) {
         GoWriter writer = context.getWriter();
         Symbol shapeSymbol = context.getSymbolProvider().toSymbol(shape);
 
         writer.write("var sv $P", shapeSymbol);
+        // TODO [denseListMap] need to reference if pointable type. Assumes containers are always double pointers.
+        // TODO this probably isn't true for union types.
         writer.openBlock("if *v == nil {", "", () -> {
             if (shape.isStructureShape()) {
                 writer.write("sv = &$T{}", shapeSymbol);
@@ -137,7 +139,7 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
         GoWriter writer = context.getWriter();
 
         // initialize the output member variable
-        generatesIntializerForOutputVariable(context, shape);
+        generatesInitializerForOutputVariable(context, shape);
 
         writer.write("originalDecoder := decoder");
         // Iterate through the decoder. The member visitor will handle popping xml tokens
@@ -161,7 +163,7 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
             writer.openBlock("for {", "}", () -> {
                 writer.addUseImports(SmithyGoDependency.STRINGS);
                 writer.openBlock("if strings.EqualFold($S, t.Name.Local) {", "} else {", serializedMemberName, () -> {
-                    writer.write("var col $P", context.getSymbolProvider().toSymbol(target));
+                    writer.write("var col $P", context.getSymbolProvider().toSymbol(member));
                     target.accept(getMemberDeserVisitor(member, "col", false));
                     writer.write("sv = append(sv, col)");
 
@@ -193,7 +195,7 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
         writer.openBlock("func $L(v *$P, decoder smithyxml.NodeDecoder) error {", "}",
                 getUnwrappedMapDelegateFunctionName(context, shape), symbol, () -> {
                     // initialize the output member variable
-                    generatesIntializerForOutputVariable(context, shape);
+                    generatesInitializerForOutputVariable(context, shape);
                     writer.openBlock(" switch { default: ", "}", () -> {
                         writer.write("var mv $P", memberSymbol);
                         writer.write("t := decoder.StartEl");
@@ -212,7 +214,7 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
         GoWriter writer = context.getWriter();
 
         // initialize the output member variable
-        generatesIntializerForOutputVariable(context, shape);
+        generatesInitializerForOutputVariable(context, shape);
 
         // Iterate through the decoder. The member visitor will handle popping xml tokens
         // enclosed within a xml start and end element.
@@ -232,6 +234,7 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
                         });
             });
         });
+
         writer.write("*v = sv");
         writer.write("return nil");
     }
@@ -246,7 +249,7 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
         writer.openBlock("func $L(v *$P, decoder smithyxml.NodeDecoder) error {", "}",
                 getUnwrappedMapDelegateFunctionName(context, shape), symbol, () -> {
                     // initialize the output member variable
-                    generatesIntializerForOutputVariable(context, shape);
+                    generatesInitializerForOutputVariable(context, shape);
                     MemberShape valueShape = shape.getValue();
                     MemberShape keyShape = shape.getKey();
 
@@ -269,7 +272,7 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
                             if (keyShape.hasTrait(EnumTrait.class) || targetKey.hasTrait(EnumTrait.class)) {
                                 writer.write("sv[string(ek)] = ev");
                             } else {
-                                writer.write("sv[*ek] = ev");
+                                writer.write("sv[ek] = ev");
                             }
                             writer.write("break");
                         });
@@ -282,7 +285,6 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
                                         getMemberDeserVisitor(keyShape, dest, false));
                             });
 
-//                            MemberShape valueShape = shape.getValue();
                             writer.openBlock("case strings.EqualFold($S, t.Name.Local):", "", getSerializedMemberName(valueShape), () -> {
                                 String dest = "ev";
                                 context.getModel().expectShape(valueShape.getTarget()).accept(
@@ -310,7 +312,7 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
         Model model = context.getModel();
 
         // initialize the output member variable
-        generatesIntializerForOutputVariable(context, shape);
+        generatesInitializerForOutputVariable(context, shape);
         // Deserialize member shapes modeled with xml attribute trait
         if (hasXmlAttributeTraitMember(shape)) {
             writer.openBlock("for _, attr := range decoder.StartEl.Attr {", "}", () -> {
