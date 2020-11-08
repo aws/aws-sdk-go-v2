@@ -66,7 +66,7 @@ func TestGetResponseErrorCode(t *testing.T) {
 		},
 		"s3control standard response body": {
 			getErr: func() (ErrorComponents, error) {
-				errResp := strings.NewReader(wrappedXmlErrorResponse)
+				errResp := strings.NewReader(wrappedXMLErrorResponse)
 				return GetErrorResponseComponents(errResp, ErrorResponseDeserializerOptions{
 					IsWrappedWithErrorTag: true,
 				})
