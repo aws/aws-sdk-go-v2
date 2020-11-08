@@ -198,7 +198,7 @@ func (*endpointPrefix_opCreateJobMiddleware) ID() string {
 func (m *endpointPrefix_opCreateJobMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
-	if smithyhttp.GetHostnameImmutable(ctx) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
 		return next.HandleSerialize(ctx, in)
 	}
 
@@ -221,12 +221,12 @@ func (m *endpointPrefix_opCreateJobMiddleware) HandleSerialize(ctx context.Conte
 		prefix.WriteString(*input.AccountId)
 	}
 	prefix.WriteString(".")
-	req.HostPrefix = prefix.String()
+	req.URL.Host = prefix.String() + req.URL.Host
 
 	return next.HandleSerialize(ctx, in)
 }
 func addEndpointPrefix_opCreateJobMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opCreateJobMiddleware{}, `OperationSerializer`, middleware.Before)
+	return stack.Serialize.Insert(&endpointPrefix_opCreateJobMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
 type idempotencyToken_initializeOpCreateJob struct {
