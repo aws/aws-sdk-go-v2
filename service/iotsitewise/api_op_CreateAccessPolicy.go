@@ -157,7 +157,7 @@ func (*endpointPrefix_opCreateAccessPolicyMiddleware) ID() string {
 func (m *endpointPrefix_opCreateAccessPolicyMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
-	if smithyhttp.GetHostnameImmutable(ctx) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
 		return next.HandleSerialize(ctx, in)
 	}
 
@@ -166,12 +166,12 @@ func (m *endpointPrefix_opCreateAccessPolicyMiddleware) HandleSerialize(ctx cont
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
 	}
 
-	req.HostPrefix = "monitor."
+	req.URL.Host = "monitor." + req.URL.Host
 
 	return next.HandleSerialize(ctx, in)
 }
 func addEndpointPrefix_opCreateAccessPolicyMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opCreateAccessPolicyMiddleware{}, `OperationSerializer`, middleware.Before)
+	return stack.Serialize.Insert(&endpointPrefix_opCreateAccessPolicyMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
 type idempotencyToken_initializeOpCreateAccessPolicy struct {
