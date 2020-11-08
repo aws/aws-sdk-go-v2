@@ -14,7 +14,7 @@ func TestGetResponseErrorCode(t *testing.T) {
     <RequestId>foo-id</RequestId>
 </Error>`
 
-	const wrappedXmlErrorResponse = `<ErrorResponse><Error>
+	const wrappedXMLErrorResponse = `<ErrorResponse><Error>
     <Type>Sender</Type>
     <Code>InvalidGreeting</Code>
     <Message>Hi</Message>

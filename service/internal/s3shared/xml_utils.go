@@ -26,7 +26,7 @@ func GetUnwrappedErrorResponseComponents(r io.Reader) (ErrorComponents, error) {
 	return errComponents, nil
 }
 
-// GetErrorResponseComponents returns the error fields from an xml error response body
+// GetWrappedErrorResponseComponents returns the error fields from an xml error response body
 // in which error code, and message are wrapped by a <Error> tag
 func GetWrappedErrorResponseComponents(r io.Reader) (ErrorComponents, error) {
 	var errComponents struct {
@@ -75,6 +75,7 @@ func GetErrorResponseComponents(r io.Reader, options ErrorResponseDeserializerOp
 	return errComponents, nil
 }
 
+// ErrorResponseDeserializerOptions represents error response deserializer options for s3 and s3-control service
 type ErrorResponseDeserializerOptions struct {
 	// UseStatusCode denotes if status code should be used to retrieve error code, msg
 	UseStatusCode bool
