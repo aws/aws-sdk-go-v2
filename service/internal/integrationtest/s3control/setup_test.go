@@ -27,6 +27,17 @@ var (
 var region = "us-west-2"
 
 func TestMain(m *testing.M) {
+	flag.Parse()
+	flag.CommandLine.Visit(func(f *flag.Flag) {
+		if !(f.Name == "run" || f.Name == "test.run") {
+			return
+		}
+		value := f.Value.String()
+		if value == `NONE` {
+			os.Exit(0)
+		}
+	})
+
 	var result int
 	defer func() {
 		if r := recover(); r != nil {
