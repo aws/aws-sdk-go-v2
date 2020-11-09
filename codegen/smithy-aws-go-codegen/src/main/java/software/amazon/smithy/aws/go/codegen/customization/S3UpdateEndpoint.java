@@ -145,7 +145,7 @@ public class S3UpdateEndpoint implements GoIntegration {
             );
 
             runtimeClientPlugins.add(RuntimeClientPlugin.builder()
-                    .servicePredicate((m, s) -> s.equals(service))
+                    .servicePredicate(S3UpdateEndpoint::isS3SharedService)
                     .operationPredicate((m, s, o) -> o.equals(operation))
                     .registerMiddleware(MiddlewareRegistrar.builder()
                             .resolvedFunction(SymbolUtils.createValueSymbolBuilder(helperFuncName)
