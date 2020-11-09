@@ -5,10 +5,10 @@ package s3shared
 import (
 	"context"
 	"fmt"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/service/internal/integrationtest"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 	"github.com/aws/aws-sdk-go-v2/service/s3control"
 )
 
@@ -26,20 +26,33 @@ func SetupBucket(ctx context.Context, svc *s3.Client, bucketName string) (err er
 	fmt.Println("Setup: Creating test bucket,", bucketName)
 	_, err = svc.CreateBucket(ctx, &s3.CreateBucketInput{
 		Bucket: &bucketName,
+		CreateBucketConfiguration: &types.CreateBucketConfiguration{
+			LocationConstraint: types.BucketLocationConstraintUsWest2,
+		},
 	})
 	if err != nil {
 		fmt.Errorf("failed to create bucket %s, %v", bucketName, err)
 	}
 
-	// TODO: change this to use waiter to wait until BucketExists instead of sleep timer
+	// TODO: change this to use waiter to wait until BucketExists instead of loop
 	// 	svc.WaitUntilBucketExists(HeadBucketInput)
-	time.Sleep(1 * time.Minute)
 
 	// HeadBucket to determine if bucket exists
-	_, err = svc.HeadBucket(ctx, &s3.HeadBucketInput{
+	var attempt = 0
+	params := &s3.HeadBucketInput{
 		Bucket: &bucketName,
-	})
+	}
+pt:
+	_, err = svc.HeadBucket(ctx, params)
+	// increment an attempt
+	attempt++
+
+	// retry till 10 attempt
 	if err != nil {
+		if attempt < 10 {
+			goto pt
+		}
+		// fail if not succeed after 10 attempts
 		fmt.Errorf("failed to determine if a bucket %s exists and you have permission to access it", bucketName)
 	}
 

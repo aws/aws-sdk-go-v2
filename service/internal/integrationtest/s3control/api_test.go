@@ -7,8 +7,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/awslabs/smithy-go/ptr"
-
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/s3control"
 	"github.com/aws/aws-sdk-go-v2/service/s3control/types"
 )
@@ -16,7 +15,7 @@ import (
 func TestInteg_PublicAccessBlock(t *testing.T) {
 	ctx := context.Background()
 	_, err := svc.GetPublicAccessBlock(ctx, &s3control.GetPublicAccessBlockInput{
-		AccountId: ptr.String(accountID),
+		AccountId: aws.String(accountID),
 	})
 	if err != nil {
 		var e *types.NoSuchPublicAccessBlockConfiguration
@@ -26,9 +25,9 @@ func TestInteg_PublicAccessBlock(t *testing.T) {
 	}
 
 	_, err = svc.PutPublicAccessBlock(ctx, &s3control.PutPublicAccessBlockInput{
-		AccountId: ptr.String(accountID),
+		AccountId: aws.String(accountID),
 		PublicAccessBlockConfiguration: &types.PublicAccessBlockConfiguration{
-			IgnorePublicAcls: ptr.Bool(true),
+			IgnorePublicAcls: aws.Bool(true),
 		},
 	})
 	if err != nil {
@@ -36,7 +35,7 @@ func TestInteg_PublicAccessBlock(t *testing.T) {
 	}
 
 	_, err = svc.DeletePublicAccessBlock(ctx, &s3control.DeletePublicAccessBlockInput{
-		AccountId: ptr.String(accountID),
+		AccountId: aws.String(accountID),
 	})
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)

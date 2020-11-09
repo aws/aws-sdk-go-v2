@@ -24,7 +24,7 @@ var (
 	insecureTLS, useDualstack      bool
 )
 
-var region = "us-east-1"
+var region = "us-west-2"
 
 func TestMain(m *testing.M) {
 	var result int

@@ -14,8 +14,6 @@ import (
 	"os"
 	"testing"
 
-	"github.com/awslabs/smithy-go/ptr"
-
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/arn"
 	"github.com/aws/aws-sdk-go-v2/service/internal/integrationtest"
@@ -63,7 +61,7 @@ var stsClient *sts.Client
 // http client setting to use for integ testing
 var httpClient *http.Client
 
-var region = "us-east-1"
+var region = "us-west-2"
 
 // TestMain executes at start of package tests
 func TestMain(m *testing.M) {
@@ -114,7 +112,7 @@ func TestMain(m *testing.M) {
 				URL:           s3Endpoint,
 				PartitionID:   "aws",
 				SigningName:   "s3",
-				SigningRegion:  region,
+				SigningRegion: region,
 				SigningMethod: "s3v4",
 			}, nil
 		})
@@ -351,7 +349,7 @@ func testCopyObject(t *testing.T, sourceBucket, targetBucket string, opts func(o
 		&s3.CopyObjectInput{
 			Bucket:     &targetBucket,
 			Key:        &key,
-			CopySource: ptr.String("/" + sourceBucket + "/" + key),
+			CopySource: aws.String("/" + sourceBucket + "/" + key),
 		}, opts)
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
