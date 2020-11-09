@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	s3cust "github.com/aws/aws-sdk-go-v2/service/s3/internal/customizations"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -106,7 +107,7 @@ func addOperationDeleteBucketCorsMiddlewares(stack *middleware.Stack, options Op
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addUpdateEndpointMiddleware(stack, options); err != nil {
+	if err = addDeleteBucketCorsUpdateEndpoint(stack, options); err != nil {
 		return err
 	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
@@ -131,4 +132,18 @@ func newServiceMetadataMiddleware_opDeleteBucketCors(region string) *awsmiddlewa
 		SigningName:   "s3",
 		OperationName: "DeleteBucketCors",
 	}
+}
+
+func addDeleteBucketCorsUpdateEndpoint(stack *middleware.Stack, options Options) error {
+	return s3cust.UpdateEndpoint(stack, s3cust.UpdateEndpointOptions{
+		Accessor: s3cust.UpdateEndpointParameterAccessor{GetBucketFromInput: getBucketFromInput,
+			SupportsAccelerate: supportAccelerate,
+		},
+		UsePathStyle:            options.UsePathStyle,
+		UseAccelerate:           options.UseAccelerate,
+		EndpointResolver:        options.EndpointResolver,
+		EndpointResolverOptions: options.EndpointOptions,
+		UseDualstack:            options.UseDualstack,
+		UseARNRegion:            options.UseARNRegion,
+	})
 }

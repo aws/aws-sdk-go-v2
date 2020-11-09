@@ -7,6 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	s3controlcust "github.com/aws/aws-sdk-go-v2/service/s3control/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/s3control/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
@@ -159,7 +160,7 @@ func addOperationGetAccessPointMiddlewares(stack *middleware.Stack, options Opti
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addUpdateEndpointMiddleware(stack, options); err != nil {
+	if err = addGetAccessPointUpdateEndpoint(stack, options); err != nil {
 		return err
 	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
@@ -222,4 +223,50 @@ func newServiceMetadataMiddleware_opGetAccessPoint(region string) *awsmiddleware
 		SigningName:   "s3",
 		OperationName: "GetAccessPoint",
 	}
+}
+
+func copyGetAccessPointInputForUpdateEndpoint(params interface{}) (interface{}, error) {
+	input, ok := params.(*GetAccessPointInput)
+	if !ok {
+		return nil, fmt.Errorf("expect *GetAccessPointInput type, got %T", params)
+	}
+	cpy := *input
+	return &cpy, nil
+}
+func getGetAccessPointARNMember(input interface{}) (*string, bool) {
+	in := input.(*GetAccessPointInput)
+	if in.Name == nil {
+		return nil, false
+	}
+	return in.Name, true
+}
+func setGetAccessPointARNMember(input interface{}, v string) error {
+	in := input.(*GetAccessPointInput)
+	in.Name = &v
+	return nil
+}
+func backFillGetAccessPointAccountID(input interface{}, v string) error {
+	in := input.(*GetAccessPointInput)
+	if in.AccountId != nil {
+		if !strings.EqualFold(*in.AccountId, v) {
+			return fmt.Errorf("error backfilling account id")
+		}
+		return nil
+	}
+	in.AccountId = &v
+	return nil
+}
+func addGetAccessPointUpdateEndpoint(stack *middleware.Stack, options Options) error {
+	return s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{
+		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: getGetAccessPointARNMember,
+			BackfillAccountID: backFillGetAccessPointAccountID,
+			GetOutpostIDInput: getOutpostIDFromInput,
+			UpdateARNField:    setGetAccessPointARNMember,
+			CopyInput:         copyGetAccessPointInputForUpdateEndpoint,
+		},
+		EndpointResolver:        options.EndpointResolver,
+		EndpointResolverOptions: options.EndpointOptions,
+		UseDualstack:            options.UseDualstack,
+		UseARNRegion:            options.UseARNRegion,
+	})
 }

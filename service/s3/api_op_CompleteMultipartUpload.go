@@ -256,7 +256,7 @@ func addOperationCompleteMultipartUploadMiddlewares(stack *middleware.Stack, opt
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addUpdateEndpointMiddleware(stack, options); err != nil {
+	if err = addCompleteMultipartUploadUpdateEndpoint(stack, options); err != nil {
 		return err
 	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
@@ -284,4 +284,18 @@ func newServiceMetadataMiddleware_opCompleteMultipartUpload(region string) *awsm
 		SigningName:   "s3",
 		OperationName: "CompleteMultipartUpload",
 	}
+}
+
+func addCompleteMultipartUploadUpdateEndpoint(stack *middleware.Stack, options Options) error {
+	return s3cust.UpdateEndpoint(stack, s3cust.UpdateEndpointOptions{
+		Accessor: s3cust.UpdateEndpointParameterAccessor{GetBucketFromInput: getBucketFromInput,
+			SupportsAccelerate: supportAccelerate,
+		},
+		UsePathStyle:            options.UsePathStyle,
+		UseAccelerate:           options.UseAccelerate,
+		EndpointResolver:        options.EndpointResolver,
+		EndpointResolverOptions: options.EndpointOptions,
+		UseDualstack:            options.UseDualstack,
+		UseARNRegion:            options.UseARNRegion,
+	})
 }

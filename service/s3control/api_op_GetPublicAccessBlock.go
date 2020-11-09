@@ -7,6 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	s3controlcust "github.com/aws/aws-sdk-go-v2/service/s3control/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/s3control/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
@@ -112,7 +113,7 @@ func addOperationGetPublicAccessBlockMiddlewares(stack *middleware.Stack, option
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addUpdateEndpointMiddleware(stack, options); err != nil {
+	if err = addGetPublicAccessBlockUpdateEndpoint(stack, options); err != nil {
 		return err
 	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
@@ -175,4 +176,44 @@ func newServiceMetadataMiddleware_opGetPublicAccessBlock(region string) *awsmidd
 		SigningName:   "s3",
 		OperationName: "GetPublicAccessBlock",
 	}
+}
+
+func copyGetPublicAccessBlockInputForUpdateEndpoint(params interface{}) (interface{}, error) {
+	input, ok := params.(*GetPublicAccessBlockInput)
+	if !ok {
+		return nil, fmt.Errorf("expect *GetPublicAccessBlockInput type, got %T", params)
+	}
+	cpy := *input
+	return &cpy, nil
+}
+func getGetPublicAccessBlockARNMember(input interface{}) (*string, bool) {
+	return nil, false
+}
+func setGetPublicAccessBlockARNMember(input interface{}, v string) error {
+	return nil
+}
+func backFillGetPublicAccessBlockAccountID(input interface{}, v string) error {
+	in := input.(*GetPublicAccessBlockInput)
+	if in.AccountId != nil {
+		if !strings.EqualFold(*in.AccountId, v) {
+			return fmt.Errorf("error backfilling account id")
+		}
+		return nil
+	}
+	in.AccountId = &v
+	return nil
+}
+func addGetPublicAccessBlockUpdateEndpoint(stack *middleware.Stack, options Options) error {
+	return s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{
+		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: getGetPublicAccessBlockARNMember,
+			BackfillAccountID: backFillGetPublicAccessBlockAccountID,
+			GetOutpostIDInput: getOutpostIDFromInput,
+			UpdateARNField:    setGetPublicAccessBlockARNMember,
+			CopyInput:         copyGetPublicAccessBlockInputForUpdateEndpoint,
+		},
+		EndpointResolver:        options.EndpointResolver,
+		EndpointResolverOptions: options.EndpointOptions,
+		UseDualstack:            options.UseDualstack,
+		UseARNRegion:            options.UseARNRegion,
+	})
 }

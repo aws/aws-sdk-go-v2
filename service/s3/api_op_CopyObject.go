@@ -479,7 +479,7 @@ func addOperationCopyObjectMiddlewares(stack *middleware.Stack, options Options)
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addUpdateEndpointMiddleware(stack, options); err != nil {
+	if err = addCopyObjectUpdateEndpoint(stack, options); err != nil {
 		return err
 	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
@@ -507,4 +507,18 @@ func newServiceMetadataMiddleware_opCopyObject(region string) *awsmiddleware.Reg
 		SigningName:   "s3",
 		OperationName: "CopyObject",
 	}
+}
+
+func addCopyObjectUpdateEndpoint(stack *middleware.Stack, options Options) error {
+	return s3cust.UpdateEndpoint(stack, s3cust.UpdateEndpointOptions{
+		Accessor: s3cust.UpdateEndpointParameterAccessor{GetBucketFromInput: getBucketFromInput,
+			SupportsAccelerate: supportAccelerate,
+		},
+		UsePathStyle:            options.UsePathStyle,
+		UseAccelerate:           options.UseAccelerate,
+		EndpointResolver:        options.EndpointResolver,
+		EndpointResolverOptions: options.EndpointOptions,
+		UseDualstack:            options.UseDualstack,
+		UseARNRegion:            options.UseARNRegion,
+	})
 }

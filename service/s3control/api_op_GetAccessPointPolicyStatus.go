@@ -7,6 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	s3controlcust "github.com/aws/aws-sdk-go-v2/service/s3control/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/s3control/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
@@ -110,7 +111,7 @@ func addOperationGetAccessPointPolicyStatusMiddlewares(stack *middleware.Stack, 
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addUpdateEndpointMiddleware(stack, options); err != nil {
+	if err = addGetAccessPointPolicyStatusUpdateEndpoint(stack, options); err != nil {
 		return err
 	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
@@ -173,4 +174,44 @@ func newServiceMetadataMiddleware_opGetAccessPointPolicyStatus(region string) *a
 		SigningName:   "s3",
 		OperationName: "GetAccessPointPolicyStatus",
 	}
+}
+
+func copyGetAccessPointPolicyStatusInputForUpdateEndpoint(params interface{}) (interface{}, error) {
+	input, ok := params.(*GetAccessPointPolicyStatusInput)
+	if !ok {
+		return nil, fmt.Errorf("expect *GetAccessPointPolicyStatusInput type, got %T", params)
+	}
+	cpy := *input
+	return &cpy, nil
+}
+func getGetAccessPointPolicyStatusARNMember(input interface{}) (*string, bool) {
+	return nil, false
+}
+func setGetAccessPointPolicyStatusARNMember(input interface{}, v string) error {
+	return nil
+}
+func backFillGetAccessPointPolicyStatusAccountID(input interface{}, v string) error {
+	in := input.(*GetAccessPointPolicyStatusInput)
+	if in.AccountId != nil {
+		if !strings.EqualFold(*in.AccountId, v) {
+			return fmt.Errorf("error backfilling account id")
+		}
+		return nil
+	}
+	in.AccountId = &v
+	return nil
+}
+func addGetAccessPointPolicyStatusUpdateEndpoint(stack *middleware.Stack, options Options) error {
+	return s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{
+		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: getGetAccessPointPolicyStatusARNMember,
+			BackfillAccountID: backFillGetAccessPointPolicyStatusAccountID,
+			GetOutpostIDInput: getOutpostIDFromInput,
+			UpdateARNField:    setGetAccessPointPolicyStatusARNMember,
+			CopyInput:         copyGetAccessPointPolicyStatusInputForUpdateEndpoint,
+		},
+		EndpointResolver:        options.EndpointResolver,
+		EndpointResolverOptions: options.EndpointOptions,
+		UseDualstack:            options.UseDualstack,
+		UseARNRegion:            options.UseARNRegion,
+	})
 }

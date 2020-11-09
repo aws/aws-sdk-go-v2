@@ -4,8 +4,10 @@ package s3control
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	s3controlcust "github.com/aws/aws-sdk-go-v2/service/s3control/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/s3control/types"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -187,7 +189,7 @@ func addOperationCreateBucketMiddlewares(stack *middleware.Stack, options Option
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addUpdateEndpointMiddleware(stack, options); err != nil {
+	if err = addCreateBucketUpdateEndpoint(stack, options); err != nil {
 		return err
 	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
@@ -212,4 +214,30 @@ func newServiceMetadataMiddleware_opCreateBucket(region string) *awsmiddleware.R
 		SigningName:   "s3",
 		OperationName: "CreateBucket",
 	}
+}
+
+func copyCreateBucketInputForUpdateEndpoint(params interface{}) (interface{}, error) {
+	input, ok := params.(*CreateBucketInput)
+	if !ok {
+		return nil, fmt.Errorf("expect *CreateBucketInput type, got %T", params)
+	}
+	cpy := *input
+	return &cpy, nil
+}
+func backFillCreateBucketAccountID(input interface{}, v string) error {
+	return nil
+}
+func addCreateBucketUpdateEndpoint(stack *middleware.Stack, options Options) error {
+	return s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{
+		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: nil,
+			BackfillAccountID: nil,
+			GetOutpostIDInput: getOutpostIDFromInput,
+			UpdateARNField:    nil,
+			CopyInput:         copyCreateBucketInputForUpdateEndpoint,
+		},
+		EndpointResolver:        options.EndpointResolver,
+		EndpointResolverOptions: options.EndpointOptions,
+		UseDualstack:            options.UseDualstack,
+		UseARNRegion:            options.UseARNRegion,
+	})
 }

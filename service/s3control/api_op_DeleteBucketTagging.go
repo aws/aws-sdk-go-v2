@@ -7,6 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	s3controlcust "github.com/aws/aws-sdk-go-v2/service/s3control/internal/customizations"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -130,7 +131,7 @@ func addOperationDeleteBucketTaggingMiddlewares(stack *middleware.Stack, options
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addUpdateEndpointMiddleware(stack, options); err != nil {
+	if err = addDeleteBucketTaggingUpdateEndpoint(stack, options); err != nil {
 		return err
 	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
@@ -193,4 +194,50 @@ func newServiceMetadataMiddleware_opDeleteBucketTagging(region string) *awsmiddl
 		SigningName:   "s3",
 		OperationName: "DeleteBucketTagging",
 	}
+}
+
+func copyDeleteBucketTaggingInputForUpdateEndpoint(params interface{}) (interface{}, error) {
+	input, ok := params.(*DeleteBucketTaggingInput)
+	if !ok {
+		return nil, fmt.Errorf("expect *DeleteBucketTaggingInput type, got %T", params)
+	}
+	cpy := *input
+	return &cpy, nil
+}
+func getDeleteBucketTaggingARNMember(input interface{}) (*string, bool) {
+	in := input.(*DeleteBucketTaggingInput)
+	if in.Bucket == nil {
+		return nil, false
+	}
+	return in.Bucket, true
+}
+func setDeleteBucketTaggingARNMember(input interface{}, v string) error {
+	in := input.(*DeleteBucketTaggingInput)
+	in.Bucket = &v
+	return nil
+}
+func backFillDeleteBucketTaggingAccountID(input interface{}, v string) error {
+	in := input.(*DeleteBucketTaggingInput)
+	if in.AccountId != nil {
+		if !strings.EqualFold(*in.AccountId, v) {
+			return fmt.Errorf("error backfilling account id")
+		}
+		return nil
+	}
+	in.AccountId = &v
+	return nil
+}
+func addDeleteBucketTaggingUpdateEndpoint(stack *middleware.Stack, options Options) error {
+	return s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{
+		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: getDeleteBucketTaggingARNMember,
+			BackfillAccountID: backFillDeleteBucketTaggingAccountID,
+			GetOutpostIDInput: getOutpostIDFromInput,
+			UpdateARNField:    setDeleteBucketTaggingARNMember,
+			CopyInput:         copyDeleteBucketTaggingInputForUpdateEndpoint,
+		},
+		EndpointResolver:        options.EndpointResolver,
+		EndpointResolverOptions: options.EndpointOptions,
+		UseDualstack:            options.UseDualstack,
+		UseARNRegion:            options.UseARNRegion,
+	})
 }

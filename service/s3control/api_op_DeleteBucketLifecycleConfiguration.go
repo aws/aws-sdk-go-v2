@@ -7,6 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	s3controlcust "github.com/aws/aws-sdk-go-v2/service/s3control/internal/customizations"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -137,7 +138,7 @@ func addOperationDeleteBucketLifecycleConfigurationMiddlewares(stack *middleware
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addUpdateEndpointMiddleware(stack, options); err != nil {
+	if err = addDeleteBucketLifecycleConfigurationUpdateEndpoint(stack, options); err != nil {
 		return err
 	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
@@ -200,4 +201,50 @@ func newServiceMetadataMiddleware_opDeleteBucketLifecycleConfiguration(region st
 		SigningName:   "s3",
 		OperationName: "DeleteBucketLifecycleConfiguration",
 	}
+}
+
+func copyDeleteBucketLifecycleConfigurationInputForUpdateEndpoint(params interface{}) (interface{}, error) {
+	input, ok := params.(*DeleteBucketLifecycleConfigurationInput)
+	if !ok {
+		return nil, fmt.Errorf("expect *DeleteBucketLifecycleConfigurationInput type, got %T", params)
+	}
+	cpy := *input
+	return &cpy, nil
+}
+func getDeleteBucketLifecycleConfigurationARNMember(input interface{}) (*string, bool) {
+	in := input.(*DeleteBucketLifecycleConfigurationInput)
+	if in.Bucket == nil {
+		return nil, false
+	}
+	return in.Bucket, true
+}
+func setDeleteBucketLifecycleConfigurationARNMember(input interface{}, v string) error {
+	in := input.(*DeleteBucketLifecycleConfigurationInput)
+	in.Bucket = &v
+	return nil
+}
+func backFillDeleteBucketLifecycleConfigurationAccountID(input interface{}, v string) error {
+	in := input.(*DeleteBucketLifecycleConfigurationInput)
+	if in.AccountId != nil {
+		if !strings.EqualFold(*in.AccountId, v) {
+			return fmt.Errorf("error backfilling account id")
+		}
+		return nil
+	}
+	in.AccountId = &v
+	return nil
+}
+func addDeleteBucketLifecycleConfigurationUpdateEndpoint(stack *middleware.Stack, options Options) error {
+	return s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{
+		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: getDeleteBucketLifecycleConfigurationARNMember,
+			BackfillAccountID: backFillDeleteBucketLifecycleConfigurationAccountID,
+			GetOutpostIDInput: getOutpostIDFromInput,
+			UpdateARNField:    setDeleteBucketLifecycleConfigurationARNMember,
+			CopyInput:         copyDeleteBucketLifecycleConfigurationInputForUpdateEndpoint,
+		},
+		EndpointResolver:        options.EndpointResolver,
+		EndpointResolverOptions: options.EndpointOptions,
+		UseDualstack:            options.UseDualstack,
+		UseARNRegion:            options.UseARNRegion,
+	})
 }

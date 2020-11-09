@@ -7,6 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	s3controlcust "github.com/aws/aws-sdk-go-v2/service/s3control/internal/customizations"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -119,7 +120,7 @@ func addOperationGetAccessPointPolicyMiddlewares(stack *middleware.Stack, option
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addUpdateEndpointMiddleware(stack, options); err != nil {
+	if err = addGetAccessPointPolicyUpdateEndpoint(stack, options); err != nil {
 		return err
 	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
@@ -182,4 +183,50 @@ func newServiceMetadataMiddleware_opGetAccessPointPolicy(region string) *awsmidd
 		SigningName:   "s3",
 		OperationName: "GetAccessPointPolicy",
 	}
+}
+
+func copyGetAccessPointPolicyInputForUpdateEndpoint(params interface{}) (interface{}, error) {
+	input, ok := params.(*GetAccessPointPolicyInput)
+	if !ok {
+		return nil, fmt.Errorf("expect *GetAccessPointPolicyInput type, got %T", params)
+	}
+	cpy := *input
+	return &cpy, nil
+}
+func getGetAccessPointPolicyARNMember(input interface{}) (*string, bool) {
+	in := input.(*GetAccessPointPolicyInput)
+	if in.Name == nil {
+		return nil, false
+	}
+	return in.Name, true
+}
+func setGetAccessPointPolicyARNMember(input interface{}, v string) error {
+	in := input.(*GetAccessPointPolicyInput)
+	in.Name = &v
+	return nil
+}
+func backFillGetAccessPointPolicyAccountID(input interface{}, v string) error {
+	in := input.(*GetAccessPointPolicyInput)
+	if in.AccountId != nil {
+		if !strings.EqualFold(*in.AccountId, v) {
+			return fmt.Errorf("error backfilling account id")
+		}
+		return nil
+	}
+	in.AccountId = &v
+	return nil
+}
+func addGetAccessPointPolicyUpdateEndpoint(stack *middleware.Stack, options Options) error {
+	return s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{
+		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: getGetAccessPointPolicyARNMember,
+			BackfillAccountID: backFillGetAccessPointPolicyAccountID,
+			GetOutpostIDInput: getOutpostIDFromInput,
+			UpdateARNField:    setGetAccessPointPolicyARNMember,
+			CopyInput:         copyGetAccessPointPolicyInputForUpdateEndpoint,
+		},
+		EndpointResolver:        options.EndpointResolver,
+		EndpointResolverOptions: options.EndpointOptions,
+		UseDualstack:            options.UseDualstack,
+		UseARNRegion:            options.UseARNRegion,
+	})
 }

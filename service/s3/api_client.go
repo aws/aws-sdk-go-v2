@@ -11,7 +11,6 @@ import (
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	acceptencodingcust "github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding"
 	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared"
-	s3cust "github.com/aws/aws-sdk-go-v2/service/s3/internal/customizations"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/logging"
 	"github.com/awslabs/smithy-go/middleware"
@@ -86,6 +85,9 @@ type Options struct {
 	// Retryer guides how HTTP requests should be retried in case of recoverable
 	// failures. When nil the API client will use a default retryer.
 	Retryer retry.Retryer
+
+	// Allows you to enable arn region support for the service.
+	UseARNRegion bool
 
 	// Allows you to enable S3 Accelerate feature. All operations compatible with S3
 	// Accelerate will use the accelerate endpoint for requests. Requests not
@@ -232,17 +234,6 @@ func addRetryMiddlewares(stack *middleware.Stack, o Options) error {
 
 func addMetadataRetrieverMiddleware(stack *middleware.Stack) error {
 	return s3shared.AddMetadataRetrieverMiddleware(stack)
-}
-
-func addUpdateEndpointMiddleware(stack *middleware.Stack, options Options) error {
-	return s3cust.UpdateEndpoint(stack, s3cust.UpdateEndpointOptions{
-		Region:             options.Region,
-		GetBucketFromInput: getBucketFromInput,
-		UsePathStyle:       options.UsePathStyle,
-		UseAccelerate:      options.UseAccelerate,
-		SupportsAccelerate: supportAccelerate,
-		UseDualstack:       options.UseDualstack,
-	})
 }
 
 // getBucketFromInput returns a boolean indicating if the input has a modeled

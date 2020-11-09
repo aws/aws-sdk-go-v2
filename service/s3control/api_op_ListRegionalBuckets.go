@@ -7,6 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	s3controlcust "github.com/aws/aws-sdk-go-v2/service/s3control/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/s3control/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
@@ -122,7 +123,7 @@ func addOperationListRegionalBucketsMiddlewares(stack *middleware.Stack, options
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addUpdateEndpointMiddleware(stack, options); err != nil {
+	if err = addListRegionalBucketsUpdateEndpoint(stack, options); err != nil {
 		return err
 	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
@@ -185,4 +186,38 @@ func newServiceMetadataMiddleware_opListRegionalBuckets(region string) *awsmiddl
 		SigningName:   "s3",
 		OperationName: "ListRegionalBuckets",
 	}
+}
+
+func copyListRegionalBucketsInputForUpdateEndpoint(params interface{}) (interface{}, error) {
+	input, ok := params.(*ListRegionalBucketsInput)
+	if !ok {
+		return nil, fmt.Errorf("expect *ListRegionalBucketsInput type, got %T", params)
+	}
+	cpy := *input
+	return &cpy, nil
+}
+func backFillListRegionalBucketsAccountID(input interface{}, v string) error {
+	in := input.(*ListRegionalBucketsInput)
+	if in.AccountId != nil {
+		if !strings.EqualFold(*in.AccountId, v) {
+			return fmt.Errorf("error backfilling account id")
+		}
+		return nil
+	}
+	in.AccountId = &v
+	return nil
+}
+func addListRegionalBucketsUpdateEndpoint(stack *middleware.Stack, options Options) error {
+	return s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{
+		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: nil,
+			BackfillAccountID: nil,
+			GetOutpostIDInput: getOutpostIDFromInput,
+			UpdateARNField:    nil,
+			CopyInput:         copyListRegionalBucketsInputForUpdateEndpoint,
+		},
+		EndpointResolver:        options.EndpointResolver,
+		EndpointResolverOptions: options.EndpointOptions,
+		UseDualstack:            options.UseDualstack,
+		UseARNRegion:            options.UseARNRegion,
+	})
 }

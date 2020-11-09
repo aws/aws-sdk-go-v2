@@ -7,6 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	s3controlcust "github.com/aws/aws-sdk-go-v2/service/s3control/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/s3control/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
@@ -126,7 +127,7 @@ func addOperationDescribeJobMiddlewares(stack *middleware.Stack, options Options
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addUpdateEndpointMiddleware(stack, options); err != nil {
+	if err = addDescribeJobUpdateEndpoint(stack, options); err != nil {
 		return err
 	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
@@ -189,4 +190,44 @@ func newServiceMetadataMiddleware_opDescribeJob(region string) *awsmiddleware.Re
 		SigningName:   "s3",
 		OperationName: "DescribeJob",
 	}
+}
+
+func copyDescribeJobInputForUpdateEndpoint(params interface{}) (interface{}, error) {
+	input, ok := params.(*DescribeJobInput)
+	if !ok {
+		return nil, fmt.Errorf("expect *DescribeJobInput type, got %T", params)
+	}
+	cpy := *input
+	return &cpy, nil
+}
+func getDescribeJobARNMember(input interface{}) (*string, bool) {
+	return nil, false
+}
+func setDescribeJobARNMember(input interface{}, v string) error {
+	return nil
+}
+func backFillDescribeJobAccountID(input interface{}, v string) error {
+	in := input.(*DescribeJobInput)
+	if in.AccountId != nil {
+		if !strings.EqualFold(*in.AccountId, v) {
+			return fmt.Errorf("error backfilling account id")
+		}
+		return nil
+	}
+	in.AccountId = &v
+	return nil
+}
+func addDescribeJobUpdateEndpoint(stack *middleware.Stack, options Options) error {
+	return s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{
+		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: getDescribeJobARNMember,
+			BackfillAccountID: backFillDescribeJobAccountID,
+			GetOutpostIDInput: getOutpostIDFromInput,
+			UpdateARNField:    setDescribeJobARNMember,
+			CopyInput:         copyDescribeJobInputForUpdateEndpoint,
+		},
+		EndpointResolver:        options.EndpointResolver,
+		EndpointResolverOptions: options.EndpointOptions,
+		UseDualstack:            options.UseDualstack,
+		UseARNRegion:            options.UseARNRegion,
+	})
 }

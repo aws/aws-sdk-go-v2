@@ -7,6 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	s3controlcust "github.com/aws/aws-sdk-go-v2/service/s3control/internal/customizations"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -122,7 +123,7 @@ func addOperationDeleteAccessPointPolicyMiddlewares(stack *middleware.Stack, opt
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addUpdateEndpointMiddleware(stack, options); err != nil {
+	if err = addDeleteAccessPointPolicyUpdateEndpoint(stack, options); err != nil {
 		return err
 	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
@@ -185,4 +186,50 @@ func newServiceMetadataMiddleware_opDeleteAccessPointPolicy(region string) *awsm
 		SigningName:   "s3",
 		OperationName: "DeleteAccessPointPolicy",
 	}
+}
+
+func copyDeleteAccessPointPolicyInputForUpdateEndpoint(params interface{}) (interface{}, error) {
+	input, ok := params.(*DeleteAccessPointPolicyInput)
+	if !ok {
+		return nil, fmt.Errorf("expect *DeleteAccessPointPolicyInput type, got %T", params)
+	}
+	cpy := *input
+	return &cpy, nil
+}
+func getDeleteAccessPointPolicyARNMember(input interface{}) (*string, bool) {
+	in := input.(*DeleteAccessPointPolicyInput)
+	if in.Name == nil {
+		return nil, false
+	}
+	return in.Name, true
+}
+func setDeleteAccessPointPolicyARNMember(input interface{}, v string) error {
+	in := input.(*DeleteAccessPointPolicyInput)
+	in.Name = &v
+	return nil
+}
+func backFillDeleteAccessPointPolicyAccountID(input interface{}, v string) error {
+	in := input.(*DeleteAccessPointPolicyInput)
+	if in.AccountId != nil {
+		if !strings.EqualFold(*in.AccountId, v) {
+			return fmt.Errorf("error backfilling account id")
+		}
+		return nil
+	}
+	in.AccountId = &v
+	return nil
+}
+func addDeleteAccessPointPolicyUpdateEndpoint(stack *middleware.Stack, options Options) error {
+	return s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{
+		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: getDeleteAccessPointPolicyARNMember,
+			BackfillAccountID: backFillDeleteAccessPointPolicyAccountID,
+			GetOutpostIDInput: getOutpostIDFromInput,
+			UpdateARNField:    setDeleteAccessPointPolicyARNMember,
+			CopyInput:         copyDeleteAccessPointPolicyInputForUpdateEndpoint,
+		},
+		EndpointResolver:        options.EndpointResolver,
+		EndpointResolverOptions: options.EndpointOptions,
+		UseDualstack:            options.UseDualstack,
+		UseARNRegion:            options.UseARNRegion,
+	})
 }

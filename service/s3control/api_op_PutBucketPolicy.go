@@ -7,6 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	s3controlcust "github.com/aws/aws-sdk-go-v2/service/s3control/internal/customizations"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -148,7 +149,7 @@ func addOperationPutBucketPolicyMiddlewares(stack *middleware.Stack, options Opt
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addUpdateEndpointMiddleware(stack, options); err != nil {
+	if err = addPutBucketPolicyUpdateEndpoint(stack, options); err != nil {
 		return err
 	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
@@ -214,4 +215,50 @@ func newServiceMetadataMiddleware_opPutBucketPolicy(region string) *awsmiddlewar
 		SigningName:   "s3",
 		OperationName: "PutBucketPolicy",
 	}
+}
+
+func copyPutBucketPolicyInputForUpdateEndpoint(params interface{}) (interface{}, error) {
+	input, ok := params.(*PutBucketPolicyInput)
+	if !ok {
+		return nil, fmt.Errorf("expect *PutBucketPolicyInput type, got %T", params)
+	}
+	cpy := *input
+	return &cpy, nil
+}
+func getPutBucketPolicyARNMember(input interface{}) (*string, bool) {
+	in := input.(*PutBucketPolicyInput)
+	if in.Bucket == nil {
+		return nil, false
+	}
+	return in.Bucket, true
+}
+func setPutBucketPolicyARNMember(input interface{}, v string) error {
+	in := input.(*PutBucketPolicyInput)
+	in.Bucket = &v
+	return nil
+}
+func backFillPutBucketPolicyAccountID(input interface{}, v string) error {
+	in := input.(*PutBucketPolicyInput)
+	if in.AccountId != nil {
+		if !strings.EqualFold(*in.AccountId, v) {
+			return fmt.Errorf("error backfilling account id")
+		}
+		return nil
+	}
+	in.AccountId = &v
+	return nil
+}
+func addPutBucketPolicyUpdateEndpoint(stack *middleware.Stack, options Options) error {
+	return s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{
+		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: getPutBucketPolicyARNMember,
+			BackfillAccountID: backFillPutBucketPolicyAccountID,
+			GetOutpostIDInput: getOutpostIDFromInput,
+			UpdateARNField:    setPutBucketPolicyARNMember,
+			CopyInput:         copyPutBucketPolicyInputForUpdateEndpoint,
+		},
+		EndpointResolver:        options.EndpointResolver,
+		EndpointResolverOptions: options.EndpointOptions,
+		UseDualstack:            options.UseDualstack,
+		UseARNRegion:            options.UseARNRegion,
+	})
 }

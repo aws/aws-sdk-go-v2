@@ -7,6 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	s3controlcust "github.com/aws/aws-sdk-go-v2/service/s3control/internal/customizations"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -126,7 +127,7 @@ func addOperationDeleteAccessPointMiddlewares(stack *middleware.Stack, options O
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addUpdateEndpointMiddleware(stack, options); err != nil {
+	if err = addDeleteAccessPointUpdateEndpoint(stack, options); err != nil {
 		return err
 	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
@@ -189,4 +190,50 @@ func newServiceMetadataMiddleware_opDeleteAccessPoint(region string) *awsmiddlew
 		SigningName:   "s3",
 		OperationName: "DeleteAccessPoint",
 	}
+}
+
+func copyDeleteAccessPointInputForUpdateEndpoint(params interface{}) (interface{}, error) {
+	input, ok := params.(*DeleteAccessPointInput)
+	if !ok {
+		return nil, fmt.Errorf("expect *DeleteAccessPointInput type, got %T", params)
+	}
+	cpy := *input
+	return &cpy, nil
+}
+func getDeleteAccessPointARNMember(input interface{}) (*string, bool) {
+	in := input.(*DeleteAccessPointInput)
+	if in.Name == nil {
+		return nil, false
+	}
+	return in.Name, true
+}
+func setDeleteAccessPointARNMember(input interface{}, v string) error {
+	in := input.(*DeleteAccessPointInput)
+	in.Name = &v
+	return nil
+}
+func backFillDeleteAccessPointAccountID(input interface{}, v string) error {
+	in := input.(*DeleteAccessPointInput)
+	if in.AccountId != nil {
+		if !strings.EqualFold(*in.AccountId, v) {
+			return fmt.Errorf("error backfilling account id")
+		}
+		return nil
+	}
+	in.AccountId = &v
+	return nil
+}
+func addDeleteAccessPointUpdateEndpoint(stack *middleware.Stack, options Options) error {
+	return s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{
+		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: getDeleteAccessPointARNMember,
+			BackfillAccountID: backFillDeleteAccessPointAccountID,
+			GetOutpostIDInput: getOutpostIDFromInput,
+			UpdateARNField:    setDeleteAccessPointARNMember,
+			CopyInput:         copyDeleteAccessPointInputForUpdateEndpoint,
+		},
+		EndpointResolver:        options.EndpointResolver,
+		EndpointResolverOptions: options.EndpointOptions,
+		UseDualstack:            options.UseDualstack,
+		UseARNRegion:            options.UseARNRegion,
+	})
 }

@@ -7,6 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	s3controlcust "github.com/aws/aws-sdk-go-v2/service/s3control/internal/customizations"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -136,7 +137,7 @@ func addOperationUpdateJobPriorityMiddlewares(stack *middleware.Stack, options O
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addUpdateEndpointMiddleware(stack, options); err != nil {
+	if err = addUpdateJobPriorityUpdateEndpoint(stack, options); err != nil {
 		return err
 	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
@@ -199,4 +200,44 @@ func newServiceMetadataMiddleware_opUpdateJobPriority(region string) *awsmiddlew
 		SigningName:   "s3",
 		OperationName: "UpdateJobPriority",
 	}
+}
+
+func copyUpdateJobPriorityInputForUpdateEndpoint(params interface{}) (interface{}, error) {
+	input, ok := params.(*UpdateJobPriorityInput)
+	if !ok {
+		return nil, fmt.Errorf("expect *UpdateJobPriorityInput type, got %T", params)
+	}
+	cpy := *input
+	return &cpy, nil
+}
+func getUpdateJobPriorityARNMember(input interface{}) (*string, bool) {
+	return nil, false
+}
+func setUpdateJobPriorityARNMember(input interface{}, v string) error {
+	return nil
+}
+func backFillUpdateJobPriorityAccountID(input interface{}, v string) error {
+	in := input.(*UpdateJobPriorityInput)
+	if in.AccountId != nil {
+		if !strings.EqualFold(*in.AccountId, v) {
+			return fmt.Errorf("error backfilling account id")
+		}
+		return nil
+	}
+	in.AccountId = &v
+	return nil
+}
+func addUpdateJobPriorityUpdateEndpoint(stack *middleware.Stack, options Options) error {
+	return s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{
+		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: getUpdateJobPriorityARNMember,
+			BackfillAccountID: backFillUpdateJobPriorityAccountID,
+			GetOutpostIDInput: getOutpostIDFromInput,
+			UpdateARNField:    setUpdateJobPriorityARNMember,
+			CopyInput:         copyUpdateJobPriorityInputForUpdateEndpoint,
+		},
+		EndpointResolver:        options.EndpointResolver,
+		EndpointResolverOptions: options.EndpointOptions,
+		UseDualstack:            options.UseDualstack,
+		UseARNRegion:            options.UseARNRegion,
+	})
 }

@@ -7,6 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	s3controlcust "github.com/aws/aws-sdk-go-v2/service/s3control/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/s3control/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
@@ -165,7 +166,7 @@ func addOperationPutJobTaggingMiddlewares(stack *middleware.Stack, options Optio
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addUpdateEndpointMiddleware(stack, options); err != nil {
+	if err = addPutJobTaggingUpdateEndpoint(stack, options); err != nil {
 		return err
 	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
@@ -228,4 +229,44 @@ func newServiceMetadataMiddleware_opPutJobTagging(region string) *awsmiddleware.
 		SigningName:   "s3",
 		OperationName: "PutJobTagging",
 	}
+}
+
+func copyPutJobTaggingInputForUpdateEndpoint(params interface{}) (interface{}, error) {
+	input, ok := params.(*PutJobTaggingInput)
+	if !ok {
+		return nil, fmt.Errorf("expect *PutJobTaggingInput type, got %T", params)
+	}
+	cpy := *input
+	return &cpy, nil
+}
+func getPutJobTaggingARNMember(input interface{}) (*string, bool) {
+	return nil, false
+}
+func setPutJobTaggingARNMember(input interface{}, v string) error {
+	return nil
+}
+func backFillPutJobTaggingAccountID(input interface{}, v string) error {
+	in := input.(*PutJobTaggingInput)
+	if in.AccountId != nil {
+		if !strings.EqualFold(*in.AccountId, v) {
+			return fmt.Errorf("error backfilling account id")
+		}
+		return nil
+	}
+	in.AccountId = &v
+	return nil
+}
+func addPutJobTaggingUpdateEndpoint(stack *middleware.Stack, options Options) error {
+	return s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{
+		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: getPutJobTaggingARNMember,
+			BackfillAccountID: backFillPutJobTaggingAccountID,
+			GetOutpostIDInput: getOutpostIDFromInput,
+			UpdateARNField:    setPutJobTaggingARNMember,
+			CopyInput:         copyPutJobTaggingInputForUpdateEndpoint,
+		},
+		EndpointResolver:        options.EndpointResolver,
+		EndpointResolverOptions: options.EndpointOptions,
+		UseDualstack:            options.UseDualstack,
+		UseARNRegion:            options.UseARNRegion,
+	})
 }
