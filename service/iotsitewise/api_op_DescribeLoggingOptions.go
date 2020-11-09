@@ -112,7 +112,7 @@ func (*endpointPrefix_opDescribeLoggingOptionsMiddleware) ID() string {
 func (m *endpointPrefix_opDescribeLoggingOptionsMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
-	if smithyhttp.GetHostnameImmutable(ctx) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
 		return next.HandleSerialize(ctx, in)
 	}
 
@@ -121,12 +121,12 @@ func (m *endpointPrefix_opDescribeLoggingOptionsMiddleware) HandleSerialize(ctx 
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
 	}
 
-	req.HostPrefix = "model."
+	req.URL.Host = "model." + req.URL.Host
 
 	return next.HandleSerialize(ctx, in)
 }
 func addEndpointPrefix_opDescribeLoggingOptionsMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opDescribeLoggingOptionsMiddleware{}, `OperationSerializer`, middleware.Before)
+	return stack.Serialize.Insert(&endpointPrefix_opDescribeLoggingOptionsMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opDescribeLoggingOptions(region string) *awsmiddleware.RegisterServiceMetadata {

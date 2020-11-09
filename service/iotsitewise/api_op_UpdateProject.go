@@ -129,7 +129,7 @@ func (*endpointPrefix_opUpdateProjectMiddleware) ID() string {
 func (m *endpointPrefix_opUpdateProjectMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
-	if smithyhttp.GetHostnameImmutable(ctx) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
 		return next.HandleSerialize(ctx, in)
 	}
 
@@ -138,12 +138,12 @@ func (m *endpointPrefix_opUpdateProjectMiddleware) HandleSerialize(ctx context.C
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
 	}
 
-	req.HostPrefix = "monitor."
+	req.URL.Host = "monitor." + req.URL.Host
 
 	return next.HandleSerialize(ctx, in)
 }
 func addEndpointPrefix_opUpdateProjectMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opUpdateProjectMiddleware{}, `OperationSerializer`, middleware.Before)
+	return stack.Serialize.Insert(&endpointPrefix_opUpdateProjectMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
 type idempotencyToken_initializeOpUpdateProject struct {

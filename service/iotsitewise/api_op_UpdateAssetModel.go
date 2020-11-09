@@ -168,7 +168,7 @@ func (*endpointPrefix_opUpdateAssetModelMiddleware) ID() string {
 func (m *endpointPrefix_opUpdateAssetModelMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
-	if smithyhttp.GetHostnameImmutable(ctx) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
 		return next.HandleSerialize(ctx, in)
 	}
 
@@ -177,12 +177,12 @@ func (m *endpointPrefix_opUpdateAssetModelMiddleware) HandleSerialize(ctx contex
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
 	}
 
-	req.HostPrefix = "model."
+	req.URL.Host = "model." + req.URL.Host
 
 	return next.HandleSerialize(ctx, in)
 }
 func addEndpointPrefix_opUpdateAssetModelMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opUpdateAssetModelMiddleware{}, `OperationSerializer`, middleware.Before)
+	return stack.Serialize.Insert(&endpointPrefix_opUpdateAssetModelMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
 type idempotencyToken_initializeOpUpdateAssetModel struct {

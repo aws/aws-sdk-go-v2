@@ -131,7 +131,7 @@ func (*endpointPrefix_opListDashboardsMiddleware) ID() string {
 func (m *endpointPrefix_opListDashboardsMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
-	if smithyhttp.GetHostnameImmutable(ctx) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
 		return next.HandleSerialize(ctx, in)
 	}
 
@@ -140,12 +140,12 @@ func (m *endpointPrefix_opListDashboardsMiddleware) HandleSerialize(ctx context.
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
 	}
 
-	req.HostPrefix = "monitor."
+	req.URL.Host = "monitor." + req.URL.Host
 
 	return next.HandleSerialize(ctx, in)
 }
 func addEndpointPrefix_opListDashboardsMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opListDashboardsMiddleware{}, `OperationSerializer`, middleware.Before)
+	return stack.Serialize.Insert(&endpointPrefix_opListDashboardsMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opListDashboards(region string) *awsmiddleware.RegisterServiceMetadata {

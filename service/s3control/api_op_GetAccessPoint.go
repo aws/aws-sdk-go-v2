@@ -184,7 +184,7 @@ func (*endpointPrefix_opGetAccessPointMiddleware) ID() string {
 func (m *endpointPrefix_opGetAccessPointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
-	if smithyhttp.GetHostnameImmutable(ctx) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
 		return next.HandleSerialize(ctx, in)
 	}
 
@@ -207,12 +207,12 @@ func (m *endpointPrefix_opGetAccessPointMiddleware) HandleSerialize(ctx context.
 		prefix.WriteString(*input.AccountId)
 	}
 	prefix.WriteString(".")
-	req.HostPrefix = prefix.String()
+	req.URL.Host = prefix.String() + req.URL.Host
 
 	return next.HandleSerialize(ctx, in)
 }
 func addEndpointPrefix_opGetAccessPointMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opGetAccessPointMiddleware{}, `OperationSerializer`, middleware.Before)
+	return stack.Serialize.Insert(&endpointPrefix_opGetAccessPointMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opGetAccessPoint(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -157,7 +157,7 @@ func (*endpointPrefix_opDeleteBucketMiddleware) ID() string {
 func (m *endpointPrefix_opDeleteBucketMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
-	if smithyhttp.GetHostnameImmutable(ctx) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
 		return next.HandleSerialize(ctx, in)
 	}
 
@@ -180,12 +180,12 @@ func (m *endpointPrefix_opDeleteBucketMiddleware) HandleSerialize(ctx context.Co
 		prefix.WriteString(*input.AccountId)
 	}
 	prefix.WriteString(".")
-	req.HostPrefix = prefix.String()
+	req.URL.Host = prefix.String() + req.URL.Host
 
 	return next.HandleSerialize(ctx, in)
 }
 func addEndpointPrefix_opDeleteBucketMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opDeleteBucketMiddleware{}, `OperationSerializer`, middleware.Before)
+	return stack.Serialize.Insert(&endpointPrefix_opDeleteBucketMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opDeleteBucket(region string) *awsmiddleware.RegisterServiceMetadata {

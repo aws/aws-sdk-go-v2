@@ -147,7 +147,7 @@ func (*endpointPrefix_opListRegionalBucketsMiddleware) ID() string {
 func (m *endpointPrefix_opListRegionalBucketsMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
-	if smithyhttp.GetHostnameImmutable(ctx) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
 		return next.HandleSerialize(ctx, in)
 	}
 
@@ -170,12 +170,12 @@ func (m *endpointPrefix_opListRegionalBucketsMiddleware) HandleSerialize(ctx con
 		prefix.WriteString(*input.AccountId)
 	}
 	prefix.WriteString(".")
-	req.HostPrefix = prefix.String()
+	req.URL.Host = prefix.String() + req.URL.Host
 
 	return next.HandleSerialize(ctx, in)
 }
 func addEndpointPrefix_opListRegionalBucketsMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opListRegionalBucketsMiddleware{}, `OperationSerializer`, middleware.Before)
+	return stack.Serialize.Insert(&endpointPrefix_opListRegionalBucketsMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opListRegionalBuckets(region string) *awsmiddleware.RegisterServiceMetadata {

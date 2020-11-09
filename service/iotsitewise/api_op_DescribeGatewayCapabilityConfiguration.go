@@ -162,7 +162,7 @@ func (*endpointPrefix_opDescribeGatewayCapabilityConfigurationMiddleware) ID() s
 func (m *endpointPrefix_opDescribeGatewayCapabilityConfigurationMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
-	if smithyhttp.GetHostnameImmutable(ctx) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
 		return next.HandleSerialize(ctx, in)
 	}
 
@@ -171,12 +171,12 @@ func (m *endpointPrefix_opDescribeGatewayCapabilityConfigurationMiddleware) Hand
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
 	}
 
-	req.HostPrefix = "edge."
+	req.URL.Host = "edge." + req.URL.Host
 
 	return next.HandleSerialize(ctx, in)
 }
 func addEndpointPrefix_opDescribeGatewayCapabilityConfigurationMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opDescribeGatewayCapabilityConfigurationMiddleware{}, `OperationSerializer`, middleware.Before)
+	return stack.Serialize.Insert(&endpointPrefix_opDescribeGatewayCapabilityConfigurationMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opDescribeGatewayCapabilityConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
