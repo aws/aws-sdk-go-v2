@@ -62,7 +62,7 @@ public class S3UpdateEndpoint implements GoIntegration {
     private static final String USE_ARNREGION_OPTION = "UseARNRegion";
 
     // list of runtime-client plugins
-    private static final List<RuntimeClientPlugin> runtimeClientPlugins = new ArrayList<>();
+    private final List<RuntimeClientPlugin> runtimeClientPlugins = new ArrayList<>();
 
     private static boolean isS3Service(Model model, ServiceShape service) {
         return service.expectTrait(ServiceTrait.class).getSdkId().equalsIgnoreCase("S3");
@@ -145,7 +145,12 @@ public class S3UpdateEndpoint implements GoIntegration {
             );
 
             runtimeClientPlugins.add(RuntimeClientPlugin.builder()
-                    .servicePredicate(S3UpdateEndpoint::isS3SharedService)
+                    .operationPredicate((m,s,o)-> {
+                        if (!isS3SharedService(m, s)) {
+                            return false;
+                        }
+                        return o.equals(operation);
+                    })
                     .registerMiddleware(MiddlewareRegistrar.builder()
                             .resolvedFunction(SymbolUtils.createValueSymbolBuilder(helperFuncName)
                                     .build())
