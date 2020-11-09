@@ -7,22 +7,43 @@ import (
 	"net/url"
 	"strings"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 
+	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared"
+
+	internalendpoints "github.com/aws/aws-sdk-go-v2/service/s3/internal/endpoints"
 )
 
-// UpdateEndpointOptions provides the options for the UpdateEndpoint middleware setup.
-type UpdateEndpointOptions struct {
-	// region used
-	Region string
+// EndpointResolver interface for resolving service endpoints.
+type EndpointResolver interface {
+	ResolveEndpoint(region string, options EndpointResolverOptions) (aws.Endpoint, error)
+}
 
+// EndpointResolverOptions is the service endpoint resolver options
+type EndpointResolverOptions = internalendpoints.Options
+
+// UpdateEndpointParameterAccessor represents accessor functions used by the middleware
+type UpdateEndpointParameterAccessor struct {
 	// functional pointer to fetch bucket name from provided input.
 	// The function is intended to take an input value, and
 	// return a string pointer to value of string, and bool if
 	// input has no bucket member.
 	GetBucketFromInput func(interface{}) (*string, bool)
+
+	// functional pointer to indicate support for accelerate.
+	// The function is intended to take an input value, and
+	// return if the operation supports accelerate.
+	SupportsAccelerate func(interface{}) bool
+}
+
+// UpdateEndpointOptions provides the options for the UpdateEndpoint middleware setup.
+type UpdateEndpointOptions struct {
+
+	// Accessor are parameter accessors used by the middleware
+	Accessor UpdateEndpointParameterAccessor
 
 	// use path style
 	UsePathStyle bool
@@ -30,38 +51,71 @@ type UpdateEndpointOptions struct {
 	// use transfer acceleration
 	UseAccelerate bool
 
-	// functional pointer to indicate support for accelerate.
-	// The function is intended to take an input value, and
-	// return if the operation supports accelerate.
-	SupportsAccelerate func(interface{}) bool
-
 	// use dualstack
 	UseDualstack bool
+
+	// use ARN region
+	UseARNRegion bool
+
+	// EndpointResolver used to resolve endpoints. This may be a custom endpoint resolver
+	EndpointResolver EndpointResolver
+
+	// EndpointResolverOptions used by endpoint resolver
+	EndpointResolverOptions EndpointResolverOptions
 }
 
 // UpdateEndpoint adds the middleware to the middleware stack based on the UpdateEndpointOptions.
-func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) error {
+func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) (err error) {
+	// initial arn look up middleware
+	err = stack.Initialize.Insert(&s3shared.ARNLookup{
+		GetARNValue: options.Accessor.GetBucketFromInput,
+	}, "OperationInputValidation", middleware.Before)
+	if err != nil {
+		return err
+	}
+
+	// process arn
+	err = stack.Serialize.Insert(&processARNResource{
+		UseARNRegion:            options.UseARNRegion,
+		UseAccelerate:           options.UseAccelerate,
+		UseDualstack:            options.UseDualstack,
+		EndpointResolver:        options.EndpointResolver,
+		EndpointResolverOptions: options.EndpointResolverOptions,
+	}, "OperationSerializer", middleware.Before)
+	if err != nil {
+		return err
+	}
+
+	// remove bucket arn middleware
+	err = stack.Serialize.Insert(&removeBucketFromPathMiddleware{}, "OperationSerializer", middleware.After)
+	if err != nil {
+		return err
+	}
+
 	// enable dual stack support
-	if err := stack.Serialize.Insert(&s3shared.EnableDualstack{
-		UseDualstack: options.UseDualstack,
-		ServiceID:    "s3",
-	}, "OperationSerializer", middleware.After); err != nil {
+	err = stack.Serialize.Insert(&s3shared.EnableDualstack{
+		UseDualstack:     options.UseDualstack,
+		DefaultServiceID: "s3",
+	}, "OperationSerializer", middleware.After)
+	if err != nil {
 		return err
 	}
 
 	// update endpoint to use options for path style and accelerate
-	return stack.Serialize.Insert(&updateEndpoint{
-		region:             options.Region,
+	err = stack.Serialize.Insert(&updateEndpoint{
 		usePathStyle:       options.UsePathStyle,
-		getBucketFromInput: options.GetBucketFromInput,
+		getBucketFromInput: options.Accessor.GetBucketFromInput,
 		useAccelerate:      options.UseAccelerate,
-		supportsAccelerate: options.SupportsAccelerate,
+		supportsAccelerate: options.Accessor.SupportsAccelerate,
 	}, (*s3shared.EnableDualstack)(nil).ID(), middleware.After)
+	if err != nil {
+		return err
+	}
+
+	return err
 }
 
 type updateEndpoint struct {
-	region string
-
 	// path style options
 	usePathStyle       bool
 	getBucketFromInput func(interface{}) (*string, bool)
@@ -81,6 +135,12 @@ func (u *updateEndpoint) HandleSerialize(
 ) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	// if arn was processed, skip this middleware
+	if _, ok := s3shared.GetARNResourceFromContext(ctx); ok {
+		return next.HandleSerialize(ctx, in)
+	}
+
+	// skip this customization if host name is set as immutable
 	if smithyhttp.GetHostnameImmutable(ctx) {
 		return next.HandleSerialize(ctx, in)
 	}
@@ -107,7 +167,8 @@ func (u *updateEndpoint) HandleSerialize(
 		// Below customization only apply if bucket name is provided
 		bucket, ok := u.getBucketFromInput(in.Parameters)
 		if ok && bucket != nil {
-			if err := u.updateEndpointFromConfig(req, *bucket); err != nil {
+			region := awsmiddleware.GetRegion(ctx)
+			if err := u.updateEndpointFromConfig(req, *bucket, region); err != nil {
 				return out, metadata, err
 			}
 		}
@@ -116,7 +177,7 @@ func (u *updateEndpoint) HandleSerialize(
 	return next.HandleSerialize(ctx, in)
 }
 
-func (u updateEndpoint) updateEndpointFromConfig(req *smithyhttp.Request, bucket string) error {
+func (u updateEndpoint) updateEndpointFromConfig(req *smithyhttp.Request, bucket string, region string) error {
 	// do nothing if path style is enforced
 	if u.usePathStyle {
 		return nil
@@ -147,7 +208,7 @@ func (u updateEndpoint) updateEndpointFromConfig(req *smithyhttp.Request, bucket
 		}
 
 		for i := 1; i+1 < len(parts); i++ {
-			if strings.EqualFold(parts[i], u.region) {
+			if strings.EqualFold(parts[i], region) {
 				parts = append(parts[:i], parts[i+1:]...)
 				break
 			}
