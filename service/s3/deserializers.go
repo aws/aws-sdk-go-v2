@@ -66,7 +66,9 @@ func awsRestxml_deserializeOpErrorAbortMultipartUpload(response *smithyhttp.Resp
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -182,7 +184,9 @@ func awsRestxml_deserializeOpErrorCompleteMultipartUpload(response *smithyhttp.R
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -410,7 +414,9 @@ func awsRestxml_deserializeOpErrorCopyObject(response *smithyhttp.Response, meta
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -575,7 +581,9 @@ func awsRestxml_deserializeOpErrorCreateBucket(response *smithyhttp.Response, me
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -694,7 +702,9 @@ func awsRestxml_deserializeOpErrorCreateMultipartUpload(response *smithyhttp.Res
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -892,7 +902,9 @@ func awsRestxml_deserializeOpErrorDeleteBucket(response *smithyhttp.Response, me
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -959,7 +971,9 @@ func awsRestxml_deserializeOpErrorDeleteBucketAnalyticsConfiguration(response *s
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -1026,7 +1040,9 @@ func awsRestxml_deserializeOpErrorDeleteBucketCors(response *smithyhttp.Response
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -1093,7 +1109,9 @@ func awsRestxml_deserializeOpErrorDeleteBucketEncryption(response *smithyhttp.Re
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -1160,7 +1178,9 @@ func awsRestxml_deserializeOpErrorDeleteBucketInventoryConfiguration(response *s
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -1227,7 +1247,9 @@ func awsRestxml_deserializeOpErrorDeleteBucketLifecycle(response *smithyhttp.Res
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -1294,7 +1316,9 @@ func awsRestxml_deserializeOpErrorDeleteBucketMetricsConfiguration(response *smi
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -1361,7 +1385,9 @@ func awsRestxml_deserializeOpErrorDeleteBucketOwnershipControls(response *smithy
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -1428,7 +1454,9 @@ func awsRestxml_deserializeOpErrorDeleteBucketPolicy(response *smithyhttp.Respon
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -1495,7 +1523,9 @@ func awsRestxml_deserializeOpErrorDeleteBucketReplication(response *smithyhttp.R
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -1562,7 +1592,9 @@ func awsRestxml_deserializeOpErrorDeleteBucketTagging(response *smithyhttp.Respo
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -1629,7 +1661,9 @@ func awsRestxml_deserializeOpErrorDeleteBucketWebsite(response *smithyhttp.Respo
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -1701,7 +1735,9 @@ func awsRestxml_deserializeOpErrorDeleteObject(response *smithyhttp.Response, me
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -1828,7 +1864,9 @@ func awsRestxml_deserializeOpErrorDeleteObjects(response *smithyhttp.Response, m
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -1956,7 +1994,9 @@ func awsRestxml_deserializeOpErrorDeleteObjectTagging(response *smithyhttp.Respo
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -2036,7 +2076,9 @@ func awsRestxml_deserializeOpErrorDeletePublicAccessBlock(response *smithyhttp.R
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -2131,7 +2173,9 @@ func awsRestxml_deserializeOpErrorGetBucketAccelerateConfiguration(response *smi
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -2271,7 +2315,9 @@ func awsRestxml_deserializeOpErrorGetBucketAcl(response *smithyhttp.Response, me
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -2410,7 +2456,9 @@ func awsRestxml_deserializeOpErrorGetBucketAnalyticsConfiguration(response *smit
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -2543,7 +2591,9 @@ func awsRestxml_deserializeOpErrorGetBucketCors(response *smithyhttp.Response, m
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -2676,7 +2726,9 @@ func awsRestxml_deserializeOpErrorGetBucketEncryption(response *smithyhttp.Respo
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -2809,7 +2861,9 @@ func awsRestxml_deserializeOpErrorGetBucketInventoryConfiguration(response *smit
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -2942,7 +2996,9 @@ func awsRestxml_deserializeOpErrorGetBucketLifecycleConfiguration(response *smit
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -3075,7 +3131,9 @@ func awsRestxml_deserializeOpErrorGetBucketLocation(response *smithyhttp.Respons
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -3215,7 +3273,9 @@ func awsRestxml_deserializeOpErrorGetBucketLogging(response *smithyhttp.Response
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -3348,7 +3408,9 @@ func awsRestxml_deserializeOpErrorGetBucketMetricsConfiguration(response *smithy
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -3481,7 +3543,9 @@ func awsRestxml_deserializeOpErrorGetBucketNotificationConfiguration(response *s
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -3626,7 +3690,9 @@ func awsRestxml_deserializeOpErrorGetBucketOwnershipControls(response *smithyhtt
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -3759,7 +3825,9 @@ func awsRestxml_deserializeOpErrorGetBucketPolicy(response *smithyhttp.Response,
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -3902,7 +3970,9 @@ func awsRestxml_deserializeOpErrorGetBucketPolicyStatus(response *smithyhttp.Res
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -4035,7 +4105,9 @@ func awsRestxml_deserializeOpErrorGetBucketReplication(response *smithyhttp.Resp
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -4168,7 +4240,9 @@ func awsRestxml_deserializeOpErrorGetBucketRequestPayment(response *smithyhttp.R
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -4308,7 +4382,9 @@ func awsRestxml_deserializeOpErrorGetBucketTagging(response *smithyhttp.Response
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -4441,7 +4517,9 @@ func awsRestxml_deserializeOpErrorGetBucketVersioning(response *smithyhttp.Respo
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -4594,7 +4672,9 @@ func awsRestxml_deserializeOpErrorGetBucketWebsite(response *smithyhttp.Response
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -4727,7 +4807,9 @@ func awsRestxml_deserializeOpErrorGetObject(response *smithyhttp.Response, metad
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -5032,7 +5114,9 @@ func awsRestxml_deserializeOpErrorGetObjectAcl(response *smithyhttp.Response, me
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -5186,7 +5270,9 @@ func awsRestxml_deserializeOpErrorGetObjectLegalHold(response *smithyhttp.Respon
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -5319,7 +5405,9 @@ func awsRestxml_deserializeOpErrorGetObjectLockConfiguration(response *smithyhtt
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -5452,7 +5540,9 @@ func awsRestxml_deserializeOpErrorGetObjectRetention(response *smithyhttp.Respon
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -5590,7 +5680,9 @@ func awsRestxml_deserializeOpErrorGetObjectTagging(response *smithyhttp.Response
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -5717,7 +5809,9 @@ func awsRestxml_deserializeOpErrorGetObjectTorrent(response *smithyhttp.Response
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -5832,7 +5926,9 @@ func awsRestxml_deserializeOpErrorGetPublicAccessBlock(response *smithyhttp.Resp
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -5937,7 +6033,9 @@ func awsRestxml_deserializeOpErrorHeadBucket(response *smithyhttp.Response, meta
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -6012,7 +6110,9 @@ func awsRestxml_deserializeOpErrorHeadObject(response *smithyhttp.Response, meta
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -6288,7 +6388,9 @@ func awsRestxml_deserializeOpErrorListBucketAnalyticsConfigurations(response *sm
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -6469,7 +6571,9 @@ func awsRestxml_deserializeOpErrorListBucketInventoryConfigurations(response *sm
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -6650,7 +6754,9 @@ func awsRestxml_deserializeOpErrorListBucketMetricsConfigurations(response *smit
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -6831,7 +6937,9 @@ func awsRestxml_deserializeOpErrorListBuckets(response *smithyhttp.Response, met
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -6970,7 +7078,9 @@ func awsRestxml_deserializeOpErrorListMultipartUploads(response *smithyhttp.Resp
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -7267,7 +7377,9 @@ func awsRestxml_deserializeOpErrorListObjects(response *smithyhttp.Response, met
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -7535,7 +7647,9 @@ func awsRestxml_deserializeOpErrorListObjectsV2(response *smithyhttp.Response, m
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -7836,7 +7950,9 @@ func awsRestxml_deserializeOpErrorListObjectVersions(response *smithyhttp.Respon
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -8144,7 +8260,9 @@ func awsRestxml_deserializeOpErrorListParts(response *smithyhttp.Response, metad
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -8415,7 +8533,9 @@ func awsRestxml_deserializeOpErrorPutBucketAccelerateConfiguration(response *smi
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -8482,7 +8602,9 @@ func awsRestxml_deserializeOpErrorPutBucketAcl(response *smithyhttp.Response, me
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -8549,7 +8671,9 @@ func awsRestxml_deserializeOpErrorPutBucketAnalyticsConfiguration(response *smit
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -8616,7 +8740,9 @@ func awsRestxml_deserializeOpErrorPutBucketCors(response *smithyhttp.Response, m
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -8683,7 +8809,9 @@ func awsRestxml_deserializeOpErrorPutBucketEncryption(response *smithyhttp.Respo
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -8750,7 +8878,9 @@ func awsRestxml_deserializeOpErrorPutBucketInventoryConfiguration(response *smit
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -8817,7 +8947,9 @@ func awsRestxml_deserializeOpErrorPutBucketLifecycleConfiguration(response *smit
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -8884,7 +9016,9 @@ func awsRestxml_deserializeOpErrorPutBucketLogging(response *smithyhttp.Response
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -8951,7 +9085,9 @@ func awsRestxml_deserializeOpErrorPutBucketMetricsConfiguration(response *smithy
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -9018,7 +9154,9 @@ func awsRestxml_deserializeOpErrorPutBucketNotificationConfiguration(response *s
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -9085,7 +9223,9 @@ func awsRestxml_deserializeOpErrorPutBucketOwnershipControls(response *smithyhtt
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -9152,7 +9292,9 @@ func awsRestxml_deserializeOpErrorPutBucketPolicy(response *smithyhttp.Response,
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -9219,7 +9361,9 @@ func awsRestxml_deserializeOpErrorPutBucketReplication(response *smithyhttp.Resp
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -9286,7 +9430,9 @@ func awsRestxml_deserializeOpErrorPutBucketRequestPayment(response *smithyhttp.R
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -9353,7 +9499,9 @@ func awsRestxml_deserializeOpErrorPutBucketTagging(response *smithyhttp.Response
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -9420,7 +9568,9 @@ func awsRestxml_deserializeOpErrorPutBucketVersioning(response *smithyhttp.Respo
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -9487,7 +9637,9 @@ func awsRestxml_deserializeOpErrorPutBucketWebsite(response *smithyhttp.Response
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -9559,7 +9711,9 @@ func awsRestxml_deserializeOpErrorPutObject(response *smithyhttp.Response, metad
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -9684,7 +9838,9 @@ func awsRestxml_deserializeOpErrorPutObjectAcl(response *smithyhttp.Response, me
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -9772,7 +9928,9 @@ func awsRestxml_deserializeOpErrorPutObjectLegalHold(response *smithyhttp.Respon
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -9857,7 +10015,9 @@ func awsRestxml_deserializeOpErrorPutObjectLockConfiguration(response *smithyhtt
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -9942,7 +10102,9 @@ func awsRestxml_deserializeOpErrorPutObjectRetention(response *smithyhttp.Respon
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -10027,7 +10189,9 @@ func awsRestxml_deserializeOpErrorPutObjectTagging(response *smithyhttp.Response
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -10107,7 +10271,9 @@ func awsRestxml_deserializeOpErrorPutPublicAccessBlock(response *smithyhttp.Resp
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -10179,7 +10345,9 @@ func awsRestxml_deserializeOpErrorRestoreObject(response *smithyhttp.Response, m
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -10272,7 +10440,9 @@ func awsRestxml_deserializeOpErrorUploadPart(response *smithyhttp.Response, meta
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
@@ -10410,7 +10580,9 @@ func awsRestxml_deserializeOpErrorUploadPartCopy(response *smithyhttp.Response, 
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorComponents, err := s3shared.GetS3ErrorResponseComponents(errorBody, response.StatusCode)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		UseStatusCode: true, StatusCode: response.StatusCode,
+	})
 	if err != nil {
 		return err
 	}
