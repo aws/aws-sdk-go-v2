@@ -31,7 +31,7 @@ func SetupBucket(ctx context.Context, svc *s3.Client, bucketName string) (err er
 		},
 	})
 	if err != nil {
-		fmt.Errorf("failed to create bucket %s, %v", bucketName, err)
+		return fmt.Errorf("failed to create bucket %s, %v", bucketName, err)
 	}
 
 	// TODO: change this to use waiter to wait until BucketExists instead of loop
@@ -53,7 +53,7 @@ pt:
 			goto pt
 		}
 		// fail if not succeed after 10 attempts
-		fmt.Errorf("failed to determine if a bucket %s exists and you have permission to access it", bucketName)
+		return fmt.Errorf("failed to determine if a bucket %s exists and you have permission to access it", bucketName)
 	}
 
 	return nil
