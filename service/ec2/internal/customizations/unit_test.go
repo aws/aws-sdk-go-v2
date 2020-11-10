@@ -12,7 +12,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/ec2"
 
 	"github.com/awslabs/smithy-go"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 func Test_EmptyResponse(t *testing.T) {
@@ -58,8 +57,8 @@ func Test_EmptyResponse(t *testing.T) {
 			client := ec2.NewFromConfig(cfg)
 
 			params := &ec2.DeleteFleetsInput{
-				FleetIds:           ptr.StringSlice([]string{"mockid"}),
-				TerminateInstances: aws.Bool(true),
+				FleetIds:           []string{"mockid"},
+				TerminateInstances: true,
 			}
 			_, err := client.DeleteFleets(ctx, params)
 			if c.expectError {

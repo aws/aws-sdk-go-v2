@@ -26,7 +26,7 @@ func TestInteg_00_ListRules(t *testing.T) {
 
 	client := waf.NewFromConfig(cfg)
 	params := &waf.ListRulesInput{
-		Limit: aws.Int32(20),
+		Limit: 20,
 	}
 	_, err = client.ListRules(ctx, params)
 	if err != nil {

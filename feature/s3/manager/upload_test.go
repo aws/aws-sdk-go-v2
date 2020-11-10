@@ -86,7 +86,7 @@ func TestUploadOrderMulti(t *testing.T) {
 	parts := (*args)[4].(*s3.CompleteMultipartUploadInput).MultipartUpload.Parts
 
 	for i := 0; i < 3; i++ {
-		num := aws.ToInt32(parts[i].PartNumber)
+		num := parts[i].PartNumber
 		etag := aws.ToString(parts[i].ETag)
 
 		if int32(i+1) != num {

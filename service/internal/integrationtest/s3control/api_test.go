@@ -27,7 +27,7 @@ func TestInteg_PublicAccessBlock(t *testing.T) {
 	_, err = svc.PutPublicAccessBlock(ctx, &s3control.PutPublicAccessBlockInput{
 		AccountId: aws.String(accountID),
 		PublicAccessBlockConfiguration: &types.PublicAccessBlockConfiguration{
-			IgnorePublicAcls: aws.Bool(true),
+			IgnorePublicAcls: true,
 		},
 	})
 	if err != nil {

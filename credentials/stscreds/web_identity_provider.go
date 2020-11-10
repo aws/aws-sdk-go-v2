@@ -57,9 +57,10 @@ type WebIdentityRoleOptions struct {
 	// If ExpiryWindow is 0 or less it will be ignored.
 	ExpiryWindow time.Duration
 
-	// The Amazon Resource Names (ARNs) of the IAM managed policies that you want to use as managed session policies.
-	// The policies must exist in the same account as the role.
-	PolicyARNs []*types.PolicyDescriptorType
+	// The Amazon Resource Names (ARNs) of the IAM managed policies that you
+	// want to use as managed session policies.  The policies must exist in the
+	// same account as the role.
+	PolicyARNs []types.PolicyDescriptorType
 }
 
 // IdentityTokenRetriever is an interface for retrieving a JWT

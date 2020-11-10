@@ -467,11 +467,11 @@ type chunk struct {
 
 // completedParts is a wrapper to make parts sortable by their part number,
 // since S3 required this list to be sent in sorted order.
-type completedParts []*types.CompletedPart
+type completedParts []types.CompletedPart
 
 func (a completedParts) Len() int           { return len(a) }
 func (a completedParts) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
-func (a completedParts) Less(i, j int) bool { return *a[i].PartNumber < *a[j].PartNumber }
+func (a completedParts) Less(i, j int) bool { return a[i].PartNumber < a[j].PartNumber }
 
 // upload will perform a multipart upload using the firstBuf buffer containing
 // the first chunk of data.
@@ -601,7 +601,7 @@ func (u *multiuploader) send(c chunk) error {
 		UploadId:             &u.uploadID,
 		SSECustomerAlgorithm: u.in.SSECustomerAlgorithm,
 		SSECustomerKey:       u.in.SSECustomerKey,
-		PartNumber:           &c.num,
+		PartNumber:           c.num,
 	}
 
 	resp, err := u.cfg.S3.UploadPart(u.ctx, params, u.cfg.ClientOptions...)
@@ -610,7 +610,7 @@ func (u *multiuploader) send(c chunk) error {
 	}
 
 	n := c.num
-	completed := &types.CompletedPart{ETag: resp.ETag, PartNumber: &n}
+	completed := types.CompletedPart{ETag: resp.ETag, PartNumber: n}
 
 	u.m.Lock()
 	u.parts = append(u.parts, completed)

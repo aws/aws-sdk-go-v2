@@ -8,7 +8,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/ec2"
 	"github.com/awslabs/smithy-go"
 
@@ -43,8 +42,8 @@ func TestInteg_01_DescribeInstances(t *testing.T) {
 
 	client := ec2.NewFromConfig(cfg)
 	params := &ec2.DescribeInstancesInput{
-		InstanceIds: []*string{
-			aws.String("i-12345678"),
+		InstanceIds: []string{
+			"i-12345678",
 		},
 	}
 	_, err = client.DescribeInstances(ctx, params)

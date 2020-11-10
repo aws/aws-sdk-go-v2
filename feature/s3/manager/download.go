@@ -412,8 +412,8 @@ func (d *downloader) setTotalBytes(resp *s3.GetObjectOutput) {
 	if resp.ContentRange == nil {
 		// ContentRange is nil when the full file contents is provided, and
 		// is not chunked. Use ContentLength instead.
-		if resp.ContentLength != nil {
-			d.totalBytes = *resp.ContentLength
+		if resp.ContentLength > 0 {
+			d.totalBytes = resp.ContentLength
 			return
 		}
 	} else {

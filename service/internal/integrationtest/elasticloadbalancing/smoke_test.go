@@ -8,7 +8,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
 	elb "github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing"
 	"github.com/awslabs/smithy-go"
 
@@ -43,8 +42,8 @@ func TestInteg_01_DescribeLoadBalancers(t *testing.T) {
 
 	client := elb.NewFromConfig(cfg)
 	params := &elb.DescribeLoadBalancersInput{
-		LoadBalancerNames: []*string{
-			aws.String("fake_load_balancer"),
+		LoadBalancerNames: []string{
+			"fake_load_balancer",
 		},
 	}
 	_, err = client.DescribeLoadBalancers(ctx, params)

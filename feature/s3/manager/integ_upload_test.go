@@ -11,7 +11,6 @@ import (
 	"regexp"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
 	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/feature/s3/manager"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
@@ -58,7 +57,7 @@ func (b *invalidateHash) RegisterMiddleware(stack *middleware.Stack) error {
 func (b *invalidateHash) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
-	if input, ok := in.Parameters.(*s3.UploadPartInput); ok && aws.ToInt32(input.PartNumber) == 2 {
+	if input, ok := in.Parameters.(*s3.UploadPartInput); ok && input.PartNumber == 2 {
 		ctx = v4.SetPayloadHash(ctx, "000")
 	}
 
