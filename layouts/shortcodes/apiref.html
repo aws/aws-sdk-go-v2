@@ -1,0 +1,7 @@
+<a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/{{ .Get 0 }}" target="_blank">
+    {{- if gt (len .Inner) 0 -}}
+        {{ .Inner }}
+    {{- else -}}
+        {{ .Get 0 }}
+    {{- end -}}
+</a>

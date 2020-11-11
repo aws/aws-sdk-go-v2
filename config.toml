@@ -88,7 +88,7 @@ url_latest_version = "https://aws.github.io/aws-sdk-go-v2"
 
 # Repository configuration (URLs for in-page links to opening issues and suggesting changes)
 github_repo = "https://github.com/aws/aws-sdk-go-v2"
-github_branch = "gh-pages"
+github_branch = "documentation"
 # An optional link to a related project repo. For example, the sibling repository where your product code lives.
 github_project_repo = "https://github.com/aws/aws-sdk-go-v2"
 
@@ -129,6 +129,17 @@ no = 'Sorry to hear that. Please <a href="https://github.com/aws/aws-sdk-go-v2/i
 # add "hide_readingtime: true" to the page's front matter
 [params.ui.readingtime]
 enable = false
+
+[[menu.main]]
+identifier = "APIRef"
+name = "API"
+url = "https://pkg.go.dev/github.com/aws/aws-sdk-go-v2"
+
+[[menu.main]]
+identifier = "GitHubRepo"
+name = "GitHub"
+url = "https://github.com/aws/aws-sdk-go-v2"
+
 
 [params.links]
 # End user relevant links. These will show up on left side of footer and in the community page if you have one.
