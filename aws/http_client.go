@@ -1,6 +1,7 @@
 package aws
 
 import (
+	"crypto/tls"
 	"net"
 	"net/http"
 	"reflect"
@@ -10,12 +11,17 @@ import (
 
 // Defaults for the HTTPTransportBuilder.
 var (
+	// Default connection pool options
 	DefaultHTTPTransportMaxIdleConns        = 100
 	DefaultHTTPTransportMaxIdleConnsPerHost = 10
 
+	// Default connection timeouts
 	DefaultHTTPTransportIdleConnTimeout       = 90 * time.Second
 	DefaultHTTPTransportTLSHandleshakeTimeout = 10 * time.Second
 	DefaultHTTPTransportExpectContinueTimeout = 1 * time.Second
+
+	// Default to TLS 1.2 for all HTTPS requests.
+	DefaultHTTPTransportTLSMinVersion uint16 = tls.VersionTLS12
 )
 
 // Timeouts for net.Dialer's network connection.
@@ -178,6 +184,9 @@ func defaultHTTPTransport() *http.Transport {
 		IdleConnTimeout:       DefaultHTTPTransportIdleConnTimeout,
 		ExpectContinueTimeout: DefaultHTTPTransportExpectContinueTimeout,
 		ForceAttemptHTTP2:     true,
+		TLSClientConfig: &tls.Config{
+			MinVersion: DefaultHTTPTransportTLSMinVersion,
+		},
 	}
 
 	return tr
