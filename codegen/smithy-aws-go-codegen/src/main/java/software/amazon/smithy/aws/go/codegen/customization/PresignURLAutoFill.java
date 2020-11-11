@@ -150,7 +150,7 @@ public class PresignURLAutoFill implements GoIntegration {
 
                     // generate client options
                     writer.openBlock("optFn := func(o *Options) {", "}", () -> {
-                       writer.write("o.Region = region");
+                        writer.write("o.Region = region");
                         writer.write("o.APIOptions = append(o.APIOptions, $T)", removeMiddleware);
                     });
 
@@ -158,7 +158,8 @@ public class PresignURLAutoFill implements GoIntegration {
                     writer.write("presignOptFn := WithPresignClientFromClientOptions(optFn)");
 
                     // call the exported function
-                    writer.write("return c.$L(ctx, input, presignOptFn)", presignFuncName(operationSymbol.getName(), true));
+                    writer.write("return c.$L(ctx, input, presignOptFn)",
+                            presignFuncName(operationSymbol.getName(), true));
                 });
     }
 
