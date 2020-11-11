@@ -7,6 +7,8 @@ import (
 	"testing"
 
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"github.com/google/go-cmp/cmp"
@@ -123,8 +125,9 @@ func getURLPresignMiddlewareOptions() Options {
 				c.(*mockURLPresignInput).PresignedURL = v
 				return nil
 			},
+			PresignOperation: presignURL,
 		},
-		Presigner: mockURLPresigner{},
+		PresignClient: mockURLPresigner{},
 	}
 }
 
@@ -136,11 +139,14 @@ type mockURLPresignInput struct {
 
 type mockURLPresigner struct{}
 
-func (mockURLPresigner) PresignURL(ctx context.Context, srcRegion string, params interface{}) (
-	presignedURL string, signedHeader http.Header, err error,
+func presignURL(ctx context.Context, client interface{}, srcRegion string, params interface{}) (
+	req *v4.PresignedHTTPRequest, err error,
 ) {
 	in := params.(*mockURLPresignInput)
 
-	return "https://example." + srcRegion + ".amazonaws.com/?DestinationRegion=" + in.DestinationRegion,
-		http.Header{}, nil
+	return &v4.PresignedHTTPRequest{
+		URL:          "https://example." + srcRegion + ".amazonaws.com/?DestinationRegion=" + in.DestinationRegion,
+		Method:       "POST",
+		SignedHeader: http.Header{},
+	}, nil
 }

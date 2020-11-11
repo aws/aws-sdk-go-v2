@@ -3,35 +3,43 @@ package presignedurl
 import (
 	"context"
 	"fmt"
-	"net/http"
 
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+
 	"github.com/awslabs/smithy-go/middleware"
 )
 
 // ParameterAccessor provides an collection of accessor to for retrieving and
 // setting the values needed to PresignedURL generation
 type ParameterAccessor struct {
+	// GetPresignedURL accessor points to a function that retrieves a presigned url if present
 	GetPresignedURL func(interface{}) (string, bool, error)
+
+	// GetSourceRegion accessor points to a function that retrieves source region for presigned url
 	GetSourceRegion func(interface{}) (string, bool, error)
 
-	CopyInput            func(interface{}) (interface{}, error)
-	SetDestinationRegion func(interface{}, string) error
-	SetPresignedURL      func(interface{}, string) error
-}
+	// CopyInput accessor points to a function that takes in an input, and returns a copy.
+	CopyInput func(interface{}) (interface{}, error)
 
-// URLPresigner provides the interface to presign the input parameters in to a
-// presigned URL.
-type URLPresigner interface {
-	PresignURL(ctx context.Context, srcRegion string, params interface{}) (
-		presignedURL string, signedHeader http.Header, err error,
-	)
+	// SetDestinationRegion accessor points to a function that sets destination region on api input struct
+	SetDestinationRegion func(interface{}, string) error
+
+	// SetPresignedURL accessor points to a function that sets presigned url on api input struct
+	SetPresignedURL func(interface{}, string) error
+
+	// PresignOperation is the presign function accessor
+	PresignOperation func(ctx context.Context, client interface{},
+		srcRegion string, params interface{}) (*v4.PresignedHTTPRequest, error)
 }
 
 // Options provides the set of options needed by the presigned URL middleware.
 type Options struct {
-	Accessor  ParameterAccessor
-	Presigner URLPresigner
+	// Accessor are the parameter accessors used by this middleware
+	Accessor ParameterAccessor
+
+	// PresignClient is the presigner client used to presign an operation request.
+	PresignClient interface{}
 }
 
 // AddMiddleware adds the Presign URL middleware to the middleware stack.
@@ -85,13 +93,13 @@ func (m *presign) HandleInitialize(
 		return out, metadata, fmt.Errorf("presign middleware failed, %w", err)
 	}
 
-	presignedURL, _, err := m.options.Presigner.PresignURL(ctx, srcRegion, paramCpy)
+	presignedReq, err := m.options.Accessor.PresignOperation(ctx, m.options.PresignClient, srcRegion, paramCpy)
 	if err != nil {
 		return out, metadata, fmt.Errorf("unable to create presigned URL, %w", err)
 	}
 
 	// Update the original input with the presigned URL value.
-	if err = m.options.Accessor.SetPresignedURL(input.Parameters, presignedURL); err != nil {
+	if err = m.options.Accessor.SetPresignedURL(input.Parameters, presignedReq.URL); err != nil {
 		return out, metadata, fmt.Errorf("presign middleware failed, %w", err)
 	}
 
