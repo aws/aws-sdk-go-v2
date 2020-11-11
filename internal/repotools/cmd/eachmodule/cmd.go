@@ -20,11 +20,11 @@ type Work struct {
 type WorkLog struct {
 	Path, Cmd string
 	Err       error
-	Output    *bytes.Buffer
+	Output    io.Reader
 }
 
 // CommandWorker provides a consumer of work jobs and posts results to the worklog
-func CommandWorker(ctx context.Context, jobs <-chan Work, results chan<- WorkLog) {
+func CommandWorker(ctx context.Context, jobs <-chan Work, results chan<- WorkLog, outWriter io.ReadWriter) {
 	for {
 		var result WorkLog
 
@@ -35,12 +35,15 @@ func CommandWorker(ctx context.Context, jobs <-chan Work, results chan<- WorkLog
 			if !ok {
 				return
 			}
-			output := bytes.NewBuffer(nil)
+			if outWriter == nil {
+				outWriter = bytes.NewBuffer(nil)
+				result.Output = outWriter
+			}
+
 			result.Path = w.Path
 			result.Cmd = w.Cmd
-			result.Output = output
 
-			cmd, err := NewCommand(ctx, output, output, w.Path, w.Cmd)
+			cmd, err := NewCommand(ctx, outWriter, outWriter, w.Path, w.Cmd)
 			if err != nil {
 				result.Err = fmt.Errorf("failed to build command, %w", err)
 				break
