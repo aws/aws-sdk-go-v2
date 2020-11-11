@@ -7,6 +7,7 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	s3cust "github.com/aws/aws-sdk-go-v2/service/s3/internal/customizations"
+	presignedurlcust "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url"
 	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -423,4 +424,31 @@ func addPutObjectUpdateEndpoint(stack *middleware.Stack, options Options) error 
 		UseDualstack:            options.UseDualstack,
 		UseARNRegion:            options.UseARNRegion,
 	})
+}
+
+func (c *PresignClient) PresignPutObject(ctx context.Context, params *PutObjectInput, optFns ...func(*PresignOptions)) (req *v4.PresignedHTTPRequest, err error) {
+	if params == nil {
+		params = &PutObjectInput{}
+	}
+	var presignOptions PresignOptions
+	for _, fn := range optFns {
+		fn(&presignOptions)
+	}
+	if presignOptions.Presigner != nil {
+		c = NewPresignClientWrapper(c.client, func(o *PresignOptions) { o.Presigner = presignOptions.Presigner })
+	}
+	clientOptFns := presignOptions.ClientOptions
+	clientOptFns = append(clientOptFns, func(o *Options) {
+		o.HTTPClient = &smithyhttp.NopClient{}
+	})
+	ctx = presignedurlcust.WithIsPresigning(ctx)
+	result, _, err := c.client.invokeOperation(ctx, "PutObject", params, clientOptFns,
+		addOperationPutObjectMiddlewares,
+		c.convertToPresignMiddleware,
+	)
+	if err != nil {
+		return req, err
+	}
+	out := result.(*v4.PresignedHTTPRequest)
+	return out, nil
 }

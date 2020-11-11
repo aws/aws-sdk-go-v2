@@ -6,13 +6,11 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/protocol/query"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	presignedurlcust "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
-	"net/http"
 )
 
 // Copies a point-in-time snapshot of an EBS volume and stores it in Amazon S3. You
@@ -240,52 +238,21 @@ func setCopySnapshotdestinationRegion(params interface{}, value string) error {
 	input.destinationRegion = &value
 	return nil
 }
-
-type copySnapshotHTTPPresignURLClient struct {
-	client    *Client
-	presigner *v4.Signer
-}
-
-func newCopySnapshotHTTPPresignURLClient(options Options, optFns ...func(*Options)) *copySnapshotHTTPPresignURLClient {
-	return &copySnapshotHTTPPresignURLClient{
-		client:    New(options, optFns...),
-		presigner: v4.NewSigner(),
+func presignCopySnapshot(ctx context.Context, client interface{}, region string, params interface{}) (req *v4.PresignedHTTPRequest, err error) {
+	input, ok := params.(*CopySnapshotInput)
+	if !ok {
+		return req, fmt.Errorf("expect *CopySnapshotInput type, got %T", params)
 	}
-}
-func (c *copySnapshotHTTPPresignURLClient) PresignCopySnapshot(ctx context.Context, params *CopySnapshotInput, optFns ...func(*Options)) (string, http.Header, error) {
-	if params == nil {
-		params = &CopySnapshotInput{}
+	c, ok := client.(*PresignClient)
+	if !ok {
+		return req, fmt.Errorf("expect *PresignClient type, got %T", client)
 	}
-
-	optFns = append(optFns, func(o *Options) {
-		o.HTTPClient = &smithyhttp.NopClient{}
-	})
-
-	ctx = presignedurlcust.WithIsPresigning(ctx)
-	result, _, err := c.client.invokeOperation(ctx, "CopySnapshot", params, optFns,
-		addOperationCopySnapshotMiddlewares,
-		c.convertToPresignMiddleware,
-	)
-	if err != nil {
-		return ``, nil, err
+	optFn := func(o *Options) {
+		o.Region = region
+		o.APIOptions = append(o.APIOptions, presignedurlcust.RemoveMiddleware)
 	}
-
-	out := result.(*v4.PresignedHTTPRequest)
-	return out.URL, out.SignedHeader, nil
-}
-func (c *copySnapshotHTTPPresignURLClient) convertToPresignMiddleware(stack *middleware.Stack, options Options) (err error) {
-	stack.Finalize.Clear()
-	stack.Deserialize.Clear()
-	stack.Build.Remove((*awsmiddleware.ClientRequestID)(nil).ID())
-	err = stack.Finalize.Add(v4.NewPresignHTTPRequestMiddleware(options.Credentials, c.presigner), middleware.After)
-	if err != nil {
-		return err
-	}
-	err = query.AddAsGetRequestMiddleware(stack)
-	if err != nil {
-		return err
-	}
-	return nil
+	presignOptFn := WithPresignClientFromClientOptions(optFn)
+	return c.PresignCopySnapshot(ctx, input, presignOptFn)
 }
 func addCopySnapshotPresignURLMiddleware(stack *middleware.Stack, options Options) error {
 	return presignedurlcust.AddMiddleware(stack, presignedurlcust.Options{
@@ -295,25 +262,10 @@ func addCopySnapshotPresignURLMiddleware(stack *middleware.Stack, options Option
 			CopyInput:            copyCopySnapshotInputForPresign,
 			SetDestinationRegion: setCopySnapshotdestinationRegion,
 			SetPresignedURL:      setCopySnapshotPresignedUrl,
+			PresignOperation:     presignCopySnapshot,
 		},
-		Presigner: &presignAutoFillCopySnapshotClient{client: newCopySnapshotHTTPPresignURLClient(options)},
+		PresignClient: NewPresignClient(options),
 	})
-}
-
-type presignAutoFillCopySnapshotClient struct {
-	client *copySnapshotHTTPPresignURLClient
-}
-
-func (c *presignAutoFillCopySnapshotClient) PresignURL(ctx context.Context, region string, params interface{}) (string, http.Header, error) {
-	input, ok := params.(*CopySnapshotInput)
-	if !ok {
-		return ``, nil, fmt.Errorf("expect *CopySnapshotInput type, got %T", params)
-	}
-	optFn := func(o *Options) {
-		o.Region = region
-		o.APIOptions = append(o.APIOptions, presignedurlcust.RemoveMiddleware)
-	}
-	return c.client.PresignCopySnapshot(ctx, input, optFn)
 }
 
 func newServiceMetadataMiddleware_opCopySnapshot(region string) *awsmiddleware.RegisterServiceMetadata {
@@ -323,4 +275,31 @@ func newServiceMetadataMiddleware_opCopySnapshot(region string) *awsmiddleware.R
 		SigningName:   "ec2",
 		OperationName: "CopySnapshot",
 	}
+}
+
+func (c *PresignClient) PresignCopySnapshot(ctx context.Context, params *CopySnapshotInput, optFns ...func(*PresignOptions)) (req *v4.PresignedHTTPRequest, err error) {
+	if params == nil {
+		params = &CopySnapshotInput{}
+	}
+	var presignOptions PresignOptions
+	for _, fn := range optFns {
+		fn(&presignOptions)
+	}
+	if presignOptions.Presigner != nil {
+		c = NewPresignClientWrapper(c.client, func(o *PresignOptions) { o.Presigner = presignOptions.Presigner })
+	}
+	clientOptFns := presignOptions.ClientOptions
+	clientOptFns = append(clientOptFns, func(o *Options) {
+		o.HTTPClient = &smithyhttp.NopClient{}
+	})
+	ctx = presignedurlcust.WithIsPresigning(ctx)
+	result, _, err := c.client.invokeOperation(ctx, "CopySnapshot", params, clientOptFns,
+		addOperationCopySnapshotMiddlewares,
+		c.convertToPresignMiddleware,
+	)
+	if err != nil {
+		return req, err
+	}
+	out := result.(*v4.PresignedHTTPRequest)
+	return out, nil
 }

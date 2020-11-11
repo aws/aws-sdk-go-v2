@@ -258,3 +258,125 @@ func addRequestResponseLogging(stack *middleware.Stack, o Options) error {
 		LogResponseWithBody: o.ClientLogMode.IsResponseWithBody(),
 	}, middleware.After)
 }
+
+// PresignOptions represents the presign client options
+type PresignOptions struct {
+	// ClientOptions are list of functional options to mutate client options used by
+	// presign client
+	ClientOptions []func(*Options)
+	// Presigner is the presigner used by the presign url client
+	Presigner v4.HTTPPresigner
+	// Expires sets the expiration duration for the generated presign url
+	Expires time.Duration
+}
+
+// WithPresignClientFromClientOptions is a helper utility to retrieve a function
+// that takes PresignOption as input
+func WithPresignClientFromClientOptions(optFns ...func(*Options)) func(*PresignOptions) {
+	return withPresignClientFromClientOptions(optFns).options
+}
+
+type withPresignClientFromClientOptions []func(*Options)
+
+func (w withPresignClientFromClientOptions) options(o *PresignOptions) {
+	o.ClientOptions = append(o.ClientOptions, w...)
+}
+
+// WithPresignExpires is a helper utility to append Expires value on presign
+// options optional function
+func WithPresignExpires(dur time.Duration) func(*PresignOptions) {
+	return withPresignExpires(dur).options
+}
+
+type withPresignExpires time.Duration
+
+func (w withPresignExpires) options(o *PresignOptions) {
+	o.Expires = time.Duration(w)
+}
+
+// PresignClient represents the presign url client
+type PresignClient struct {
+	client    *Client
+	presigner v4.HTTPPresigner
+	expires   time.Duration
+}
+
+// NewPresignClient generates a presign client using provided Client options and
+// presign options
+func NewPresignClient(options Options, optFns ...func(*PresignOptions)) *PresignClient {
+	var presignOptions PresignOptions
+	for _, fn := range optFns {
+		fn(&presignOptions)
+	}
+	client := New(options, presignOptions.ClientOptions...)
+	var presigner v4.HTTPPresigner
+	if presignOptions.Presigner != nil {
+		presigner = presignOptions.Presigner
+	} else {
+		presigner = v4.NewSigner()
+	}
+	return &PresignClient{
+		client: client, presigner: presigner,
+		expires: presignOptions.Expires,
+	}
+}
+
+// NewPresignClientWrapper generates a presign client using provided API Client and
+// presign options
+func NewPresignClientWrapper(c *Client, optFns ...func(*PresignOptions)) *PresignClient {
+	var presignOptions PresignOptions
+	for _, fn := range optFns {
+		fn(&presignOptions)
+	}
+	client := copyAPIClient(c, presignOptions.ClientOptions...)
+	var presigner v4.HTTPPresigner
+	if presignOptions.Presigner != nil {
+		presigner = presignOptions.Presigner
+	} else {
+		presigner = v4.NewSigner()
+	}
+	return &PresignClient{
+		client: client, presigner: presigner,
+		expires: presignOptions.Expires,
+	}
+}
+
+// NewPresignClientFromConfig generates a presign client using provided AWS config
+// and presign options
+func NewPresignClientFromConfig(cfg aws.Config, optFns ...func(*PresignOptions)) *PresignClient {
+	var presignOptions PresignOptions
+	for _, fn := range optFns {
+		fn(&presignOptions)
+	}
+	client := NewFromConfig(cfg, presignOptions.ClientOptions...)
+	var presigner v4.HTTPPresigner
+	if presignOptions.Presigner != nil {
+		presigner = presignOptions.Presigner
+	} else {
+		presigner = v4.NewSigner()
+	}
+	return &PresignClient{
+		client: client, presigner: presigner,
+		expires: presignOptions.Expires,
+	}
+}
+func copyAPIClient(c *Client, optFns ...func(*Options)) *Client {
+	return New(c.options, optFns...)
+}
+func (c *PresignClient) convertToPresignMiddleware(stack *middleware.Stack, options Options) (err error) {
+	stack.Finalize.Clear()
+	stack.Deserialize.Clear()
+	stack.Build.Remove((*awsmiddleware.ClientRequestID)(nil).ID())
+	err = stack.Finalize.Add(v4.NewPresignHTTPRequestMiddleware(options.Credentials, c.presigner), middleware.After)
+	if err != nil {
+		return err
+	}
+	if c.expires != 0 {
+		// add middleware to set expiration for s3 presigned url
+		err = stack.Build.Add(&s3cust.AddExpiresOnPresignedURL{Expires: c.expires}, middleware.After)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}

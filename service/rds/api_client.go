@@ -6,6 +6,7 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/aws/protocol/query"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
@@ -225,4 +226,106 @@ func addRequestResponseLogging(stack *middleware.Stack, o Options) error {
 		LogResponse:         o.ClientLogMode.IsResponse(),
 		LogResponseWithBody: o.ClientLogMode.IsResponseWithBody(),
 	}, middleware.After)
+}
+
+// PresignOptions represents the presign client options
+type PresignOptions struct {
+	// ClientOptions are list of functional options to mutate client options used by
+	// presign client
+	ClientOptions []func(*Options)
+	// Presigner is the presigner used by the presign url client
+	Presigner v4.HTTPPresigner
+}
+
+// WithPresignClientFromClientOptions is a helper utility to retrieve a function
+// that takes PresignOption as input
+func WithPresignClientFromClientOptions(optFns ...func(*Options)) func(*PresignOptions) {
+	return withPresignClientFromClientOptions(optFns).options
+}
+
+type withPresignClientFromClientOptions []func(*Options)
+
+func (w withPresignClientFromClientOptions) options(o *PresignOptions) {
+	o.ClientOptions = append(o.ClientOptions, w...)
+}
+
+// PresignClient represents the presign url client
+type PresignClient struct {
+	client    *Client
+	presigner v4.HTTPPresigner
+}
+
+// NewPresignClient generates a presign client using provided Client options and
+// presign options
+func NewPresignClient(options Options, optFns ...func(*PresignOptions)) *PresignClient {
+	var presignOptions PresignOptions
+	for _, fn := range optFns {
+		fn(&presignOptions)
+	}
+	client := New(options, presignOptions.ClientOptions...)
+	var presigner v4.HTTPPresigner
+	if presignOptions.Presigner != nil {
+		presigner = presignOptions.Presigner
+	} else {
+		presigner = v4.NewSigner()
+	}
+	return &PresignClient{
+		client: client, presigner: presigner,
+	}
+}
+
+// NewPresignClientWrapper generates a presign client using provided API Client and
+// presign options
+func NewPresignClientWrapper(c *Client, optFns ...func(*PresignOptions)) *PresignClient {
+	var presignOptions PresignOptions
+	for _, fn := range optFns {
+		fn(&presignOptions)
+	}
+	client := copyAPIClient(c, presignOptions.ClientOptions...)
+	var presigner v4.HTTPPresigner
+	if presignOptions.Presigner != nil {
+		presigner = presignOptions.Presigner
+	} else {
+		presigner = v4.NewSigner()
+	}
+	return &PresignClient{
+		client: client, presigner: presigner,
+	}
+}
+
+// NewPresignClientFromConfig generates a presign client using provided AWS config
+// and presign options
+func NewPresignClientFromConfig(cfg aws.Config, optFns ...func(*PresignOptions)) *PresignClient {
+	var presignOptions PresignOptions
+	for _, fn := range optFns {
+		fn(&presignOptions)
+	}
+	client := NewFromConfig(cfg, presignOptions.ClientOptions...)
+	var presigner v4.HTTPPresigner
+	if presignOptions.Presigner != nil {
+		presigner = presignOptions.Presigner
+	} else {
+		presigner = v4.NewSigner()
+	}
+	return &PresignClient{
+		client: client, presigner: presigner,
+	}
+}
+func copyAPIClient(c *Client, optFns ...func(*Options)) *Client {
+	return New(c.options, optFns...)
+}
+func (c *PresignClient) convertToPresignMiddleware(stack *middleware.Stack, options Options) (err error) {
+	stack.Finalize.Clear()
+	stack.Deserialize.Clear()
+	stack.Build.Remove((*awsmiddleware.ClientRequestID)(nil).ID())
+	err = stack.Finalize.Add(v4.NewPresignHTTPRequestMiddleware(options.Credentials, c.presigner), middleware.After)
+	if err != nil {
+		return err
+	}
+	// convert request to a GET request
+	err = query.AddAsGetRequestMiddleware(stack)
+	if err != nil {
+		return err
+	}
+	return nil
 }

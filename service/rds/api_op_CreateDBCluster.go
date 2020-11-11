@@ -6,13 +6,11 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/protocol/query"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	presignedurlcust "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
-	"net/http"
 )
 
 // Creates a new Amazon Aurora DB cluster. You can use the
@@ -467,52 +465,21 @@ func setCreateDBClusterdestinationRegion(params interface{}, value string) error
 	input.destinationRegion = &value
 	return nil
 }
-
-type createDBClusterHTTPPresignURLClient struct {
-	client    *Client
-	presigner *v4.Signer
-}
-
-func newCreateDBClusterHTTPPresignURLClient(options Options, optFns ...func(*Options)) *createDBClusterHTTPPresignURLClient {
-	return &createDBClusterHTTPPresignURLClient{
-		client:    New(options, optFns...),
-		presigner: v4.NewSigner(),
+func presignCreateDBCluster(ctx context.Context, client interface{}, region string, params interface{}) (req *v4.PresignedHTTPRequest, err error) {
+	input, ok := params.(*CreateDBClusterInput)
+	if !ok {
+		return req, fmt.Errorf("expect *CreateDBClusterInput type, got %T", params)
 	}
-}
-func (c *createDBClusterHTTPPresignURLClient) PresignCreateDBCluster(ctx context.Context, params *CreateDBClusterInput, optFns ...func(*Options)) (string, http.Header, error) {
-	if params == nil {
-		params = &CreateDBClusterInput{}
+	c, ok := client.(*PresignClient)
+	if !ok {
+		return req, fmt.Errorf("expect *PresignClient type, got %T", client)
 	}
-
-	optFns = append(optFns, func(o *Options) {
-		o.HTTPClient = &smithyhttp.NopClient{}
-	})
-
-	ctx = presignedurlcust.WithIsPresigning(ctx)
-	result, _, err := c.client.invokeOperation(ctx, "CreateDBCluster", params, optFns,
-		addOperationCreateDBClusterMiddlewares,
-		c.convertToPresignMiddleware,
-	)
-	if err != nil {
-		return ``, nil, err
+	optFn := func(o *Options) {
+		o.Region = region
+		o.APIOptions = append(o.APIOptions, presignedurlcust.RemoveMiddleware)
 	}
-
-	out := result.(*v4.PresignedHTTPRequest)
-	return out.URL, out.SignedHeader, nil
-}
-func (c *createDBClusterHTTPPresignURLClient) convertToPresignMiddleware(stack *middleware.Stack, options Options) (err error) {
-	stack.Finalize.Clear()
-	stack.Deserialize.Clear()
-	stack.Build.Remove((*awsmiddleware.ClientRequestID)(nil).ID())
-	err = stack.Finalize.Add(v4.NewPresignHTTPRequestMiddleware(options.Credentials, c.presigner), middleware.After)
-	if err != nil {
-		return err
-	}
-	err = query.AddAsGetRequestMiddleware(stack)
-	if err != nil {
-		return err
-	}
-	return nil
+	presignOptFn := WithPresignClientFromClientOptions(optFn)
+	return c.PresignCreateDBCluster(ctx, input, presignOptFn)
 }
 func addCreateDBClusterPresignURLMiddleware(stack *middleware.Stack, options Options) error {
 	return presignedurlcust.AddMiddleware(stack, presignedurlcust.Options{
@@ -522,25 +489,10 @@ func addCreateDBClusterPresignURLMiddleware(stack *middleware.Stack, options Opt
 			CopyInput:            copyCreateDBClusterInputForPresign,
 			SetDestinationRegion: setCreateDBClusterdestinationRegion,
 			SetPresignedURL:      setCreateDBClusterPreSignedUrl,
+			PresignOperation:     presignCreateDBCluster,
 		},
-		Presigner: &presignAutoFillCreateDBClusterClient{client: newCreateDBClusterHTTPPresignURLClient(options)},
+		PresignClient: NewPresignClient(options),
 	})
-}
-
-type presignAutoFillCreateDBClusterClient struct {
-	client *createDBClusterHTTPPresignURLClient
-}
-
-func (c *presignAutoFillCreateDBClusterClient) PresignURL(ctx context.Context, region string, params interface{}) (string, http.Header, error) {
-	input, ok := params.(*CreateDBClusterInput)
-	if !ok {
-		return ``, nil, fmt.Errorf("expect *CreateDBClusterInput type, got %T", params)
-	}
-	optFn := func(o *Options) {
-		o.Region = region
-		o.APIOptions = append(o.APIOptions, presignedurlcust.RemoveMiddleware)
-	}
-	return c.client.PresignCreateDBCluster(ctx, input, optFn)
 }
 
 func newServiceMetadataMiddleware_opCreateDBCluster(region string) *awsmiddleware.RegisterServiceMetadata {
@@ -550,4 +502,31 @@ func newServiceMetadataMiddleware_opCreateDBCluster(region string) *awsmiddlewar
 		SigningName:   "rds",
 		OperationName: "CreateDBCluster",
 	}
+}
+
+func (c *PresignClient) PresignCreateDBCluster(ctx context.Context, params *CreateDBClusterInput, optFns ...func(*PresignOptions)) (req *v4.PresignedHTTPRequest, err error) {
+	if params == nil {
+		params = &CreateDBClusterInput{}
+	}
+	var presignOptions PresignOptions
+	for _, fn := range optFns {
+		fn(&presignOptions)
+	}
+	if presignOptions.Presigner != nil {
+		c = NewPresignClientWrapper(c.client, func(o *PresignOptions) { o.Presigner = presignOptions.Presigner })
+	}
+	clientOptFns := presignOptions.ClientOptions
+	clientOptFns = append(clientOptFns, func(o *Options) {
+		o.HTTPClient = &smithyhttp.NopClient{}
+	})
+	ctx = presignedurlcust.WithIsPresigning(ctx)
+	result, _, err := c.client.invokeOperation(ctx, "CreateDBCluster", params, clientOptFns,
+		addOperationCreateDBClusterMiddlewares,
+		c.convertToPresignMiddleware,
+	)
+	if err != nil {
+		return req, err
+	}
+	out := result.(*v4.PresignedHTTPRequest)
+	return out, nil
 }
