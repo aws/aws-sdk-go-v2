@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/credentials"
 	"github.com/aws/aws-sdk-go-v2/credentials/stscreds"
@@ -87,9 +88,11 @@ func ExampleWithEndpointResolver() {
 
 func ExampleWithHTTPClient() {
 	cfg, err := config.LoadDefaultConfig(config.WithHTTPClient(
-		aws.NewBuildableHTTPClient().WithTransportOptions(func(tr *http.Transport) {
-			tr.MaxIdleConns = 60
-		})))
+		awshttp.NewBuildableClient().
+			WithTransportOptions(func(tr *http.Transport) {
+				tr.MaxIdleConns = 60
+			}),
+	))
 	if err != nil {
 		log.Fatal(err)
 	}

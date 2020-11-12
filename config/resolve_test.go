@@ -7,6 +7,7 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	"github.com/aws/aws-sdk-go-v2/credentials"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
@@ -19,7 +20,7 @@ func TestResolveCustomCABundle(t *testing.T) {
 	}
 
 	cfg := aws.Config{
-		HTTPClient: aws.NewBuildableHTTPClient(),
+		HTTPClient: awshttp.NewBuildableClient(),
 	}
 	if err := resolveCustomCABundle(&cfg, configs); err != nil {
 		t.Fatalf("expect no error, got %v", err)
@@ -60,7 +61,7 @@ func TestResolveCustomCABundle_ValidCA(t *testing.T) {
 	}
 
 	cfg := aws.Config{
-		HTTPClient: aws.NewBuildableHTTPClient(),
+		HTTPClient: awshttp.NewBuildableClient(),
 	}
 	if err := resolveCustomCABundle(&cfg, configs); err != nil {
 		t.Fatalf("expect no error, got %v", err)

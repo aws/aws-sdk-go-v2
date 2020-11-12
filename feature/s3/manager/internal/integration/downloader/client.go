@@ -8,10 +8,11 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 )
 
 func NewHTTPClient(cfg ClientConfig) aws.HTTPClient {
-	return aws.NewBuildableHTTPClient().WithTransportOptions(func(tr *http.Transport) {
+	return awshttp.NewBuildableClient().WithTransportOptions(func(tr *http.Transport) {
 		*tr = http.Transport{
 			Proxy: http.ProxyFromEnvironment,
 			DialContext: (&net.Dialer{
