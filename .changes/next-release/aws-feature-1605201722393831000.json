@@ -1,0 +1,9 @@
+{
+ "ID": "aws-feature-1605201722393831000",
+ "SchemaVersion": 1,
+ "Module": "aws",
+ "Type": "feature",
+ "Description": "Default to TLS 1.2 for HTTPS requests #892 * Updates the SDK's default HTTP client to use TLS 1.2 as the minimum TLS version for all HTTPS requests by default.",
+ "MinVersion": "",
+ "AffectedModules": null
+}
