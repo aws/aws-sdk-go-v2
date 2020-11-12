@@ -1,4 +1,4 @@
-package aws_test
+package http
 
 import (
 	"net/http"
@@ -10,7 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 )
 
-func TestBuildableHTTPClient_NoFollowRedirect(t *testing.T) {
+func TestBuildableClient_NoFollowRedirect(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(
 		func(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "Moved Permanently", http.StatusMovedPermanently)
@@ -19,7 +19,7 @@ func TestBuildableHTTPClient_NoFollowRedirect(t *testing.T) {
 
 	req, _ := http.NewRequest("GET", server.URL, nil)
 
-	client := aws.NewBuildableHTTPClient()
+	client := NewBuildableClient()
 	resp, err := client.Do(req)
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
@@ -30,11 +30,11 @@ func TestBuildableHTTPClient_NoFollowRedirect(t *testing.T) {
 	}
 }
 
-func TestBuildableHTTPClient_WithTimeout(t *testing.T) {
-	client := &aws.BuildableHTTPClient{}
+func TestBuildableClient_WithTimeout(t *testing.T) {
+	client := &BuildableClient{}
 
 	expect := 10 * time.Millisecond
-	client2 := client.WithTimeout(expect).(*aws.BuildableHTTPClient)
+	client2 := client.WithTimeout(expect)
 
 	if e, a := time.Duration(0), client.GetTimeout(); e != a {
 		t.Errorf("expect %v initial timeout, got %v", e, a)
@@ -45,14 +45,14 @@ func TestBuildableHTTPClient_WithTimeout(t *testing.T) {
 	}
 }
 
-func TestBuildableHTTPClient_concurrent(t *testing.T) {
+func TestBuildableClient_concurrent(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(
 		func(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(200)
 		}))
 	defer server.Close()
 
-	var client aws.HTTPClient = aws.NewBuildableHTTPClient()
+	var client aws.HTTPClient = NewBuildableClient()
 
 	atOnce := 100
 	var wg sync.WaitGroup

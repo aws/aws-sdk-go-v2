@@ -1,9 +1,18 @@
 package aws
 
 import (
+	"net/http"
+
 	"github.com/awslabs/smithy-go/logging"
 	"github.com/awslabs/smithy-go/middleware"
 )
+
+// HTTPClient provides the interface to provide custom HTTPClients. Generally
+// *http.Client is sufficient for most use cases. The HTTPClient should not
+// follow redirects.
+type HTTPClient interface {
+	Do(*http.Request) (*http.Response, error)
+}
 
 // A Config provides service configuration for service clients.
 type Config struct {

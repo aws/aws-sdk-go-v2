@@ -1,4 +1,4 @@
-package aws
+package http
 
 import (
 	"crypto/tls"
@@ -30,20 +30,13 @@ var (
 	DefaultDialKeepAliveTimeout = 30 * time.Second
 )
 
-// HTTPClient provides the interface to provide custom HTTPClients. Generally
-// *http.Client is sufficient for most use cases. The HTTPClient should not
-// follow redirects.
-type HTTPClient interface {
-	Do(*http.Request) (*http.Response, error)
-}
-
-// BuildableHTTPClient provides a HTTPClient implementation with options to
+// BuildableClient provides a HTTPClient implementation with options to
 // create copies of the HTTPClient when additional configuration is provided.
 //
 // The client's methods will not share the http.Transport value between copies
-// of the BuildableHTTPClient. Only exported member values of the Transport and
-// optional Dialer will be copied between copies of BuildableHTTPClient.
-type BuildableHTTPClient struct {
+// of the BuildableClient. Only exported member values of the Transport and
+// optional Dialer will be copied between copies of BuildableClient.
+type BuildableClient struct {
 	transport *http.Transport
 	dialer    *net.Dialer
 
@@ -53,37 +46,37 @@ type BuildableHTTPClient struct {
 	client        *http.Client
 }
 
-// NewBuildableHTTPClient returns an initialized client for invoking HTTP
+// NewBuildableClient returns an initialized client for invoking HTTP
 // requests.
-func NewBuildableHTTPClient() *BuildableHTTPClient {
-	return &BuildableHTTPClient{}
+func NewBuildableClient() *BuildableClient {
+	return &BuildableClient{}
 }
 
 // Do implements the HTTPClient interface's Do method to invoke a HTTP request,
-// and receive the response. Uses the BuildableHTTPClient's current
+// and receive the response. Uses the BuildableClient's current
 // configuration to invoke the http.Request.
 //
 // If connection pooling is enabled (aka HTTP KeepAlive) the client will only
 // share pooled connections with its own instance. Copies of the
-// BuildableHTTPClient will have their own connection pools.
+// BuildableClient will have their own connection pools.
 //
 // Redirect (3xx) responses will not be followed, the HTTP response received
 // will returned instead.
-func (b *BuildableHTTPClient) Do(req *http.Request) (*http.Response, error) {
+func (b *BuildableClient) Do(req *http.Request) (*http.Response, error) {
 	b.initOnce.Do(b.build)
 
 	return b.client.Do(req)
 }
 
-func (b *BuildableHTTPClient) build() {
+func (b *BuildableClient) build() {
 	b.client = wrapWithoutRedirect(&http.Client{
 		Timeout:   b.clientTimeout,
 		Transport: b.GetTransport(),
 	})
 }
 
-func (b *BuildableHTTPClient) clone() *BuildableHTTPClient {
-	cpy := NewBuildableHTTPClient()
+func (b *BuildableClient) clone() *BuildableClient {
+	cpy := NewBuildableClient()
 	cpy.transport = b.GetTransport()
 	cpy.dialer = b.GetDialer()
 	cpy.clientTimeout = b.clientTimeout
@@ -91,13 +84,13 @@ func (b *BuildableHTTPClient) clone() *BuildableHTTPClient {
 	return cpy
 }
 
-// WithTransportOptions copies the BuildableHTTPClient and returns it with the
+// WithTransportOptions copies the BuildableClient and returns it with the
 // http.Transport options applied.
 //
 // If a non (*http.Transport) was set as the round tripper, the round tripper
 // will be replaced with a default Transport value before invoking the option
 // functions.
-func (b *BuildableHTTPClient) WithTransportOptions(opts ...func(*http.Transport)) HTTPClient {
+func (b *BuildableClient) WithTransportOptions(opts ...func(*http.Transport)) *BuildableClient {
 	cpy := b.clone()
 
 	tr := cpy.GetTransport()
@@ -109,10 +102,10 @@ func (b *BuildableHTTPClient) WithTransportOptions(opts ...func(*http.Transport)
 	return cpy
 }
 
-// WithDialerOptions copies the BuildableHTTPClient and returns it with the
+// WithDialerOptions copies the BuildableClient and returns it with the
 // net.Dialer options applied. Will set the client's http.Transport DialContext
 // member.
-func (b *BuildableHTTPClient) WithDialerOptions(opts ...func(*net.Dialer)) HTTPClient {
+func (b *BuildableClient) WithDialerOptions(opts ...func(*net.Dialer)) *BuildableClient {
 	cpy := b.clone()
 
 	dialer := cpy.GetDialer()
@@ -129,14 +122,14 @@ func (b *BuildableHTTPClient) WithDialerOptions(opts ...func(*net.Dialer)) HTTPC
 }
 
 // WithTimeout Sets the timeout used by the client for all requests.
-func (b *BuildableHTTPClient) WithTimeout(timeout time.Duration) HTTPClient {
+func (b *BuildableClient) WithTimeout(timeout time.Duration) *BuildableClient {
 	cpy := b.clone()
 	cpy.clientTimeout = timeout
 	return cpy
 }
 
 // GetTransport returns a copy of the client's HTTP Transport.
-func (b *BuildableHTTPClient) GetTransport() *http.Transport {
+func (b *BuildableClient) GetTransport() *http.Transport {
 	var tr *http.Transport
 	if b.transport != nil {
 		tr = b.transport.Clone()
@@ -148,7 +141,7 @@ func (b *BuildableHTTPClient) GetTransport() *http.Transport {
 }
 
 // GetDialer returns a copy of the client's network dialer.
-func (b *BuildableHTTPClient) GetDialer() *net.Dialer {
+func (b *BuildableClient) GetDialer() *net.Dialer {
 	var dialer *net.Dialer
 	if b.dialer != nil {
 		dialer = shallowCopyStruct(b.dialer).(*net.Dialer)
@@ -160,7 +153,7 @@ func (b *BuildableHTTPClient) GetDialer() *net.Dialer {
 }
 
 // GetTimeout returns a copy of the client's timeout to cancel requests with.
-func (b *BuildableHTTPClient) GetTimeout() time.Duration {
+func (b *BuildableClient) GetTimeout() time.Duration {
 	return b.clientTimeout
 }
 
@@ -221,4 +214,61 @@ func shallowCopyStruct(src interface{}) interface{} {
 	}
 
 	return dstVal.Interface()
+}
+
+func wrapWithoutRedirect(c *http.Client) *http.Client {
+	tr := c.Transport
+	if tr == nil {
+		tr = http.DefaultTransport
+	}
+
+	cc := *c
+	cc.CheckRedirect = limitedRedirect
+	cc.Transport = stubBadHTTPRedirectTransport{
+		tr: tr,
+	}
+
+	return &cc
+}
+
+func limitedRedirect(r *http.Request, via []*http.Request) error {
+	// Request.Response, in CheckRedirect is the response that is triggering
+	// the redirect.
+	resp := r.Response
+	if r.URL.String() == stubBadHTTPRedirectLocation {
+		resp.Header.Del(stubBadHTTPRedirectLocation)
+		return http.ErrUseLastResponse
+	}
+
+	switch resp.StatusCode {
+	case 307, 308:
+		// Only allow 307 and 308 redirects as they preserve the method.
+		return nil
+	}
+
+	return http.ErrUseLastResponse
+}
+
+type stubBadHTTPRedirectTransport struct {
+	tr http.RoundTripper
+}
+
+const stubBadHTTPRedirectLocation = `https://amazonaws.com/badhttpredirectlocation`
+
+func (t stubBadHTTPRedirectTransport) RoundTrip(r *http.Request) (*http.Response, error) {
+	resp, err := t.tr.RoundTrip(r)
+	if err != nil {
+		return resp, err
+	}
+
+	// TODO S3 is the only known service to return 301 without location header.
+	// consider moving this to a S3 customization.
+	switch resp.StatusCode {
+	case 301, 302:
+		if v := resp.Header.Get("Location"); len(v) == 0 {
+			resp.Header.Set("Location", stubBadHTTPRedirectLocation)
+		}
+	}
+
+	return resp, err
 }
