@@ -170,7 +170,7 @@ public class AddAwsConfigFields implements GoIntegration {
         writer.openBlock("func $L(o *Options) {", "}", RESOLVE_HTTP_CLIENT, () -> {
             writer.openBlock("if o.$L != nil {", "}", HTTP_CLIENT_CONFIG_NAME, () -> writer.write("return"));
             writer.write("o.$L = $T()", HTTP_CLIENT_CONFIG_NAME,
-                    SymbolUtils.createValueSymbolBuilder("NewBuildableHTTPClient", AwsGoDependency.AWS_CORE).build());
+                    SymbolUtils.createValueSymbolBuilder("NewBuildableClient", AwsGoDependency.AWS_HTTP_TRANSPORT).build());
         });
         writer.write("");
     }
