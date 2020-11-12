@@ -8,6 +8,7 @@ import (
 	"os"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	"github.com/awslabs/smithy-go/logging"
 )
 
@@ -41,11 +42,7 @@ func resolveCustomCABundle(cfg *aws.Config, cfgs configs) error {
 		return nil
 	}
 
-	type withTransportOptions interface {
-		WithTransportOptions(...func(*http.Transport)) aws.HTTPClient
-	}
-
-	trOpts, ok := cfg.HTTPClient.(withTransportOptions)
+	trOpts, ok := cfg.HTTPClient.(*awshttp.BuildableClient)
 	if !ok {
 		return fmt.Errorf("unable to add custom RootCAs HTTPClient, "+
 			"has no WithTransportOptions, %T", cfg.HTTPClient)
