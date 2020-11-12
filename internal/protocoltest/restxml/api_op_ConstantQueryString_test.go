@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"context"
 	"github.com/aws/aws-sdk-go-v2/aws"
+	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	"github.com/awslabs/smithy-go/middleware"
 	"github.com/awslabs/smithy-go/ptr"
 	smithyrand "github.com/awslabs/smithy-go/rand"
@@ -81,7 +82,7 @@ func TestClient_ConstantQueryString_awsRestxmlSerialize(t *testing.T) {
 					e.SigningRegion = "us-west-2"
 					return e, err
 				}),
-				HTTPClient:               aws.NewBuildableHTTPClient(),
+				HTTPClient:               awshttp.NewBuildableClient(),
 				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
 				Region:                   "us-west-2",
 			})

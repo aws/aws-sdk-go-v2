@@ -3,7 +3,7 @@ module github.com/aws/aws-sdk-go-v2/feature/s3/manager
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go-v2 v0.29.0
+	github.com/aws/aws-sdk-go-v2 v0.29.1-0.20201112231730-2d786000ccee
 	github.com/aws/aws-sdk-go-v2/config v0.2.2
 	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v0.3.1 // indirect
 	github.com/aws/aws-sdk-go-v2/service/s3 v0.29.0

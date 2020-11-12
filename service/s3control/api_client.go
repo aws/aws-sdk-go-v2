@@ -9,6 +9,7 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared"
 	s3controlcust "github.com/aws/aws-sdk-go-v2/service/s3control/internal/customizations"
 	smithy "github.com/awslabs/smithy-go"
@@ -172,7 +173,7 @@ func resolveHTTPClient(o *Options) {
 	if o.HTTPClient != nil {
 		return
 	}
-	o.HTTPClient = aws.NewBuildableHTTPClient()
+	o.HTTPClient = awshttp.NewBuildableClient()
 }
 
 func resolveRetryer(o *Options) {

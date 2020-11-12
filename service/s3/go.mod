@@ -3,9 +3,9 @@ module github.com/aws/aws-sdk-go-v2/service/s3
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go-v2 v0.29.0
+	github.com/aws/aws-sdk-go-v2 v0.29.1-0.20201112231636-9ae467d8157d
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v0.3.0
-	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v0.3.1-0.20201027184009-8eb8fc303e7c
+	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v0.3.1-0.20201112231636-9ae467d8157d
 	github.com/awslabs/smithy-go v0.3.1-0.20201108010311-62c2a93810b4
 )
 
