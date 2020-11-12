@@ -23,6 +23,7 @@ import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator.GenerationContext;
 import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
+import software.amazon.smithy.go.codegen.knowledge.GoPointableIndex;
 import software.amazon.smithy.model.shapes.BigDecimalShape;
 import software.amazon.smithy.model.shapes.BigIntegerShape;
 import software.amazon.smithy.model.shapes.BlobShape;
@@ -59,12 +60,14 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
     private final MemberShape member;
     private final String dataDest;
     private final Format timestampFormat;
+    private final GoPointableIndex pointableIndex;
 
     public JsonMemberDeserVisitor(GenerationContext context, MemberShape member, String dataDest, Format timestampFormat) {
         this.context = context;
         this.member = member;
         this.dataDest = dataDest;
         this.timestampFormat = timestampFormat;
+        this.pointableIndex = GoPointableIndex.of(context.getModel());
     }
 
     @Override
@@ -86,7 +89,7 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
             });
 
             writer.write("$L = $L", dataDest, CodegenUtils.getAsPointerIfPointable(context.getModel(),
-                    context.getWriter(), context.getPointableIndex(), member, "dv"));
+                    context.getWriter(), pointableIndex, member, "dv"));
         });
         return null;
     }
@@ -102,7 +105,7 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
                         shape.getId().getName());
             });
             writer.write("$L = $L", dataDest, CodegenUtils.getAsPointerIfPointable(context.getModel(),
-                    context.getWriter(), context.getPointableIndex(), member, "jtv"));
+                    context.getWriter(), pointableIndex, member, "jtv"));
         });
         return null;
     }
@@ -112,7 +115,7 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
         GoWriter writer = context.getWriter();
         // Smithy's byte shape represents a signed 8-bit int, which doesn't line up with Go's unsigned byte
         handleInteger(shape, CodegenUtils.getAsPointerIfPointable(context.getModel(), writer,
-                context.getPointableIndex(), member, "int8(i64)"));
+                pointableIndex, member, "int8(i64)"));
         return null;
     }
 
@@ -120,7 +123,7 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
     public Void shortShape(ShortShape shape) {
         GoWriter writer = context.getWriter();
         handleInteger(shape, CodegenUtils.getAsPointerIfPointable(context.getModel(), writer,
-                context.getPointableIndex(), member, "int16(i64)"));
+                pointableIndex, member, "int16(i64)"));
         return null;
     }
 
@@ -128,14 +131,14 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
     public Void integerShape(IntegerShape shape) {
         GoWriter writer = context.getWriter();
         handleInteger(shape, CodegenUtils.getAsPointerIfPointable(context.getModel(), writer,
-                context.getPointableIndex(), member, "int32(i64)"));
+                pointableIndex, member, "int32(i64)"));
         return null;
     }
 
     @Override
     public Void longShape(LongShape shape) {
         handleInteger(shape, CodegenUtils.getAsPointerIfPointable(context.getModel(), context.getWriter(),
-                context.getPointableIndex(), member, "i64"));
+                pointableIndex, member, "i64"));
         return null;
     }
 
@@ -181,14 +184,14 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
     @Override
     public Void floatShape(FloatShape shape) {
         handleFloat(shape, CodegenUtils.getAsPointerIfPointable(context.getModel(), context.getWriter(),
-                context.getPointableIndex(), member, "float32(f64)"));
+                pointableIndex, member, "float32(f64)"));
         return null;
     }
 
     @Override
     public Void doubleShape(DoubleShape shape) {
         handleFloat(shape, CodegenUtils.getAsPointerIfPointable(context.getModel(), context.getWriter(),
-                context.getPointableIndex(), member, "f64"));
+                pointableIndex, member, "f64"));
         return null;
     }
 
@@ -218,7 +221,7 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
             handleString(shape, () -> writer.write("$L = $P(jtv)", dataDest, symbol));
         } else {
             handleString(shape, () -> writer.write("$L = $L", dataDest, CodegenUtils.getAsPointerIfPointable(
-                    context.getModel(), context.getWriter(), context.getPointableIndex(), member, "jtv")));
+                    context.getModel(), context.getWriter(), pointableIndex, member, "jtv")));
         }
 
         return null;
@@ -257,7 +260,7 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
                     writer.write("t, err := smithytime.ParseDateTime(jtv)");
                     writer.write("if err != nil { return err }");
                     writer.write("$L = $L", dataDest, CodegenUtils.getAsPointerIfPointable(context.getModel(),
-                            context.getWriter(), context.getPointableIndex(), member, "t"));
+                            context.getWriter(), pointableIndex, member, "t"));
                 });
                 break;
             case HTTP_DATE:
@@ -265,13 +268,13 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
                     writer.write("t, err := smithytime.ParseHTTPDate(jtv)");
                     writer.write("if err != nil { return err }");
                     writer.write("$L = $L", dataDest, CodegenUtils.getAsPointerIfPointable(context.getModel(),
-                            context.getWriter(), context.getPointableIndex(), member, "t"));
+                            context.getWriter(), pointableIndex, member, "t"));
                 });
                 break;
             case EPOCH_SECONDS:
                 writer.addUseImports(SmithyGoDependency.SMITHY_PTR);
                 handleFloat(shape, CodegenUtils.getAsPointerIfPointable(context.getModel(), context.getWriter(),
-                        context.getPointableIndex(), member, "smithytime.ParseEpochSeconds(f64)"));
+                        pointableIndex, member, "smithytime.ParseEpochSeconds(f64)"));
                 break;
             default:
                 throw new CodegenException(String.format("Unknown timestamp format %s", timestampFormat));

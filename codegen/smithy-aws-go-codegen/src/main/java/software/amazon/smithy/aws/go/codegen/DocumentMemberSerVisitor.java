@@ -15,7 +15,6 @@
 
 package software.amazon.smithy.aws.go.codegen;
 
-import java.util.function.Consumer;
 import software.amazon.smithy.codegen.core.CodegenException;
 import software.amazon.smithy.go.codegen.CodegenUtils;
 import software.amazon.smithy.go.codegen.GoWriter;
@@ -24,7 +23,6 @@ import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator.GenerationContext;
 import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
 import software.amazon.smithy.go.codegen.knowledge.GoPointableIndex;
-import software.amazon.smithy.model.knowledge.NullableIndex;
 import software.amazon.smithy.model.shapes.BigDecimalShape;
 import software.amazon.smithy.model.shapes.BigIntegerShape;
 import software.amazon.smithy.model.shapes.BlobShape;
@@ -43,7 +41,6 @@ import software.amazon.smithy.model.shapes.ResourceShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.model.shapes.SetShape;
 import software.amazon.smithy.model.shapes.Shape;
-import software.amazon.smithy.model.shapes.ShapeType;
 import software.amazon.smithy.model.shapes.ShapeVisitor;
 import software.amazon.smithy.model.shapes.ShortShape;
 import software.amazon.smithy.model.shapes.StringShape;
@@ -62,6 +59,7 @@ public class DocumentMemberSerVisitor implements ShapeVisitor<Void> {
     private final String dataDest;
     private final Format timestampFormat;
     private final MemberShape member;
+    private final GoPointableIndex pointableIndex;
 
     public DocumentMemberSerVisitor(
             GenerationContext context,
@@ -75,67 +73,68 @@ public class DocumentMemberSerVisitor implements ShapeVisitor<Void> {
         this.dataSource = dataSource;
         this.dataDest = dataDest;
         this.timestampFormat = timestampFormat;
+        this.pointableIndex = GoPointableIndex.of(context.getModel());
     }
 
     @Override
     public Void blobShape(BlobShape shape) {
-        String source = CodegenUtils.getAsValueIfDereferencable(context.getPointableIndex(), member, dataSource);
+        String source = CodegenUtils.getAsValueIfDereferencable(pointableIndex, member, dataSource);
         context.getWriter().write("$L.Base64EncodeBytes($L)", dataDest, source);
         return null;
     }
 
     @Override
     public Void booleanShape(BooleanShape shape) {
-        String source = CodegenUtils.getAsValueIfDereferencable(context.getPointableIndex(), member, dataSource);
+        String source = CodegenUtils.getAsValueIfDereferencable(pointableIndex, member, dataSource);
         context.getWriter().write("$L.Boolean($L)", dataDest, source);
         return null;
     }
 
     @Override
     public Void byteShape(ByteShape shape) {
-        String source = CodegenUtils.getAsValueIfDereferencable(context.getPointableIndex(), member, dataSource);
+        String source = CodegenUtils.getAsValueIfDereferencable(pointableIndex, member, dataSource);
         context.getWriter().write("$L.Byte($L)", dataDest, source);
         return null;
     }
 
     @Override
     public Void shortShape(ShortShape shape) {
-        String source = CodegenUtils.getAsValueIfDereferencable(context.getPointableIndex(), member, dataSource);
+        String source = CodegenUtils.getAsValueIfDereferencable(pointableIndex, member, dataSource);
         context.getWriter().write("$L.Short($L)", dataDest, source);
         return null;
     }
 
     @Override
     public Void integerShape(IntegerShape shape) {
-        String source = CodegenUtils.getAsValueIfDereferencable(context.getPointableIndex(), member, dataSource);
+        String source = CodegenUtils.getAsValueIfDereferencable(pointableIndex, member, dataSource);
         context.getWriter().write("$L.Integer($L)", dataDest, source);
         return null;
     }
 
     @Override
     public Void longShape(LongShape shape) {
-        String source = CodegenUtils.getAsValueIfDereferencable(context.getPointableIndex(), member, dataSource);
+        String source = CodegenUtils.getAsValueIfDereferencable(pointableIndex, member, dataSource);
         context.getWriter().write("$L.Long($L)", dataDest, source);
         return null;
     }
 
     @Override
     public Void floatShape(FloatShape shape) {
-        String source = CodegenUtils.getAsValueIfDereferencable(context.getPointableIndex(), member, dataSource);
+        String source = CodegenUtils.getAsValueIfDereferencable(pointableIndex, member, dataSource);
         context.getWriter().write("$L.Float($L)", dataDest, source);
         return null;
     }
 
     @Override
     public Void doubleShape(DoubleShape shape) {
-        String source = CodegenUtils.getAsValueIfDereferencable(context.getPointableIndex(), member, dataSource);
+        String source = CodegenUtils.getAsValueIfDereferencable(pointableIndex, member, dataSource);
         context.getWriter().write("$L.Double($L)", dataDest, source);
         return null;
     }
 
     @Override
     public Void timestampShape(TimestampShape shape) {
-        String source = CodegenUtils.getAsValueIfDereferencable(context.getPointableIndex(), member, dataSource);
+        String source = CodegenUtils.getAsValueIfDereferencable(pointableIndex, member, dataSource);
         GoWriter writer = context.getWriter();
         writer.addUseImports(SmithyGoDependency.SMITHY_TIME);
 
@@ -157,7 +156,7 @@ public class DocumentMemberSerVisitor implements ShapeVisitor<Void> {
 
     @Override
     public Void stringShape(StringShape shape) {
-        String source = CodegenUtils.getAsValueIfDereferencable(context.getPointableIndex(), member, dataSource);
+        String source = CodegenUtils.getAsValueIfDereferencable(pointableIndex, member, dataSource);
         if (shape.hasTrait(EnumTrait.class)) {
             source = String.format("string(%s)", source);
         }

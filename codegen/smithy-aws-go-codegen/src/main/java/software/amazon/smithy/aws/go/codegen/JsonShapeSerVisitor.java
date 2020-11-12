@@ -79,8 +79,8 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
     public JsonShapeSerVisitor(GenerationContext context, Predicate<MemberShape> memberFilter) {
         super(context);
         this.memberFilter = NoSerializeTrait.excludeNoSerializeMembers().and(memberFilter);
-        this.pointableIndex = new GoPointableIndex(context.getModel());
-        this.nullableIndex = new NullableIndex(context.getModel());
+        this.pointableIndex = GoPointableIndex.of(context.getModel());
+        this.nullableIndex = NullableIndex.of(context.getModel());
     }
 
     private DocumentMemberSerVisitor getMemberSerVisitor(MemberShape member, String source, String dest) {
@@ -109,9 +109,9 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
 
             // Null values in lists should be serialized as such. Enums can't be null, so we don't bother
             // putting this in for their case.
-            if (context.getPointableIndex().isNillable(shape.getMember())) {
+            if (pointableIndex.isNillable(shape.getMember())) {
                 writer.openBlock("if vv := v[i]; vv == nil {", "}", () -> {
-                    if (context.getNullableIndex().isNullable(shape.getMember())) {
+                    if (nullableIndex.isNullable(shape.getMember())) {
                         writer.write("av.Null()");
                     }
                     writer.write("continue");
@@ -147,9 +147,9 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
 
             // Null values in maps should be serialized as such. Enums can't be null, so we don't bother
             // putting this in for their case.
-            if (context.getPointableIndex().isNillable(shape.getValue())) {
+            if (pointableIndex.isNillable(shape.getValue())) {
                 writer.openBlock("if vv := v[key]; vv == nil {", "}", () -> {
-                    if (context.getNullableIndex().isNullable(shape.getValue())) {
+                    if (nullableIndex.isNullable(shape.getValue())) {
                         writer.write("om.Null()");
                     }
                     writer.write("continue");

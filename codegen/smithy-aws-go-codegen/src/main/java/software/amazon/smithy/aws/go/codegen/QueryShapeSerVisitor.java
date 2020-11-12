@@ -15,6 +15,7 @@ import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.integration.DocumentShapeSerVisitor;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator.GenerationContext;
 import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
+import software.amazon.smithy.go.codegen.knowledge.GoPointableIndex;
 import software.amazon.smithy.go.codegen.trait.NoSerializeTrait;
 import software.amazon.smithy.model.shapes.CollectionShape;
 import software.amazon.smithy.model.shapes.DocumentShape;
@@ -81,7 +82,7 @@ class QueryShapeSerVisitor extends DocumentShapeSerVisitor {
 
         writer.openBlock("for i := range v {", "}", () -> {
             // Null values should be omitted for query.
-            if (context.getPointableIndex().isNillable(shape.getMember())) {
+            if (GoPointableIndex.of(context.getModel()).isNillable(shape.getMember())) {
                 writer.openBlock("if vv := v[i]; vv == nil {", "}", () -> {
                     writer.write("continue");
                 });
@@ -125,7 +126,7 @@ class QueryShapeSerVisitor extends DocumentShapeSerVisitor {
         writer.addUseImports(SmithyGoDependency.FMT);
         writer.openBlock("for _, key := range keys {", "}", () -> {
             // Null values should be omitted for query.
-            if (context.getPointableIndex().isNillable(shape.getValue())) {
+            if (GoPointableIndex.of(context.getModel()).isNillable(shape.getValue())) {
                 writer.openBlock("if vv := v[key]; vv == nil {", "}", () -> {
                     writer.write("continue");
                 });

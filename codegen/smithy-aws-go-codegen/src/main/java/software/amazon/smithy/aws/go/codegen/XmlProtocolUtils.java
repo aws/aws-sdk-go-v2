@@ -13,6 +13,7 @@ import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.SyntheticClone;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
+import software.amazon.smithy.go.codegen.knowledge.GoPointableIndex;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
@@ -87,7 +88,7 @@ final class XmlProtocolUtils {
 
         // Pointable value references need to be dereferenced before being used.
         String derefSource = src;
-        if (context.getPointableIndex().isPointable(member)) {
+        if (GoPointableIndex.of(context.getModel()).isPointable(member)) {
             derefSource = "*" + src;
         }
 
