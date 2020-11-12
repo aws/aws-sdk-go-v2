@@ -29,6 +29,7 @@ var implAsserts = map[string][]string{
 	"HTTPClientProvider":                       {`WithHTTPClient(nil)`},
 	"AssumeRoleCredentialOptionsProvider":      {`WithAssumeRoleCredentialOptions(nil)`},
 	"WebIdentityRoleCredentialOptionsProvider": {`WithWebIdentityRoleCredentialOptions(nil)`},
+	"RetryProvider":                            {`WithRetryer(nil)`},
 }
 
 var tplProviderTests = template.Must(template.New("tplProviderTests").Funcs(map[string]interface{}{

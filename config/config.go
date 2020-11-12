@@ -24,6 +24,7 @@ var defaultAWSConfigResolvers = []awsConfigResolver{
 	resolveHTTPClient,
 	resolveEndpointResolver,
 	resolveAPIOptions,
+	resolveRetryer,
 
 	resolveRegion,
 	// TODO: Add back EC2 Region Resolver Support

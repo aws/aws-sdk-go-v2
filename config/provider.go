@@ -608,3 +608,36 @@ func getLogConfigurationWarnings(configs configs) (v bool, found bool, err error
 	}
 	return v, found, err
 }
+
+// RetryProvider is an configuration provider for custom Retryer.
+type RetryProvider interface {
+	GetRetryer() (aws.Retryer, bool, error)
+}
+
+// WithRetryer returns a RetryProvider for the SDK retryer provided.
+func WithRetryer(retryer aws.Retryer) RetryProvider {
+	return retryProvider{retryer: retryer}
+}
+
+type retryProvider struct {
+	retryer aws.Retryer
+}
+
+func (p retryProvider) GetRetryer() (aws.Retryer, bool, error) {
+	return p.retryer, true, nil
+}
+
+func getRetryer(configs configs) (v aws.Retryer, found bool, err error) {
+	for _, c := range configs {
+		if p, ok := c.(RetryProvider); ok {
+			v, found, err = p.GetRetryer()
+			if err != nil {
+				return nil, false, err
+			}
+			if found {
+				break
+			}
+		}
+	}
+	return v, found, err
+}
