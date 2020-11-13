@@ -85,10 +85,10 @@ type RegisterImageInput struct {
 	// The billing product codes. Your account must be authorized to specify billing
 	// product codes. Otherwise, you can use the AWS Marketplace to bill for the use of
 	// an AMI.
-	BillingProducts []*string
+	BillingProducts []string
 
 	// The block device mapping entries.
-	BlockDeviceMappings []*types.BlockDeviceMapping
+	BlockDeviceMappings []types.BlockDeviceMapping
 
 	// A description for your AMI.
 	Description *string
@@ -97,13 +97,13 @@ type RegisterImageInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// Set to true to enable enhanced networking with ENA for the AMI and any instances
 	// that you launch from the AMI. This option is supported only for HVM AMIs.
 	// Specifying this option with a PV AMI can make instances launched from the AMI
 	// unreachable.
-	EnaSupport *bool
+	EnaSupport bool
 
 	// The full path to your AMI manifest in Amazon S3 storage. The specified bucket
 	// must have the aws-exec-read canned access control list (ACL) to ensure that it

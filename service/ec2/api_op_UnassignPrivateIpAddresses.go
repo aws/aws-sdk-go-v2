@@ -38,7 +38,7 @@ type UnassignPrivateIpAddressesInput struct {
 	// can specify this option multiple times to unassign more than one IP address.
 	//
 	// This member is required.
-	PrivateIpAddresses []*string
+	PrivateIpAddresses []string
 }
 
 type UnassignPrivateIpAddressesOutput struct {

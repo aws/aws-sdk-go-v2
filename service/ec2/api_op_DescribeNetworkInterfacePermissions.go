@@ -47,15 +47,15 @@ type DescribeNetworkInterfacePermissionsInput struct {
 	// *
 	// network-interface-permission.permission - The type of permission
 	// (INSTANCE-ATTACH | EIP-ASSOCIATE).
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned NextToken value. If this
 	// parameter is not specified, up to 50 results are returned by default.
-	MaxResults *int32
+	MaxResults int32
 
 	// One or more network interface permission IDs.
-	NetworkInterfacePermissionIds []*string
+	NetworkInterfacePermissionIds []string
 
 	// The token to request the next page of results.
 	NextToken *string
@@ -65,7 +65,7 @@ type DescribeNetworkInterfacePermissionsInput struct {
 type DescribeNetworkInterfacePermissionsOutput struct {
 
 	// The network interface permissions.
-	NetworkInterfacePermissions []*types.NetworkInterfacePermission
+	NetworkInterfacePermissions []types.NetworkInterfacePermission
 
 	// The token to use to retrieve the next page of results.
 	NextToken *string

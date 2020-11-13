@@ -34,7 +34,7 @@ type DescribeManagedPrefixListsInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// One or more filters.
 	//
@@ -45,17 +45,17 @@ type DescribeManagedPrefixListsInput struct {
 	//
 	// * prefix-list-name - The name of
 	// the prefix list.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next page of results.
 	NextToken *string
 
 	// One or more prefix list IDs.
-	PrefixListIds []*string
+	PrefixListIds []string
 }
 
 type DescribeManagedPrefixListsOutput struct {
@@ -65,7 +65,7 @@ type DescribeManagedPrefixListsOutput struct {
 	NextToken *string
 
 	// Information about the prefix lists.
-	PrefixLists []*types.ManagedPrefixList
+	PrefixLists []types.ManagedPrefixList
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

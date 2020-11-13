@@ -33,7 +33,7 @@ type DescribeTransitGatewayPeeringAttachmentsInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// One or more filters. The possible values are:
 	//
@@ -52,17 +52,17 @@ type DescribeTransitGatewayPeeringAttachmentsInput struct {
 	// rejected | rejecting).
 	//
 	// * transit-gateway-id - The ID of the transit gateway.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next page of results.
 	NextToken *string
 
 	// One or more IDs of the transit gateway peering attachments.
-	TransitGatewayAttachmentIds []*string
+	TransitGatewayAttachmentIds []string
 }
 
 type DescribeTransitGatewayPeeringAttachmentsOutput struct {
@@ -72,7 +72,7 @@ type DescribeTransitGatewayPeeringAttachmentsOutput struct {
 	NextToken *string
 
 	// The transit gateway peering attachments.
-	TransitGatewayPeeringAttachments []*types.TransitGatewayPeeringAttachment
+	TransitGatewayPeeringAttachments []types.TransitGatewayPeeringAttachment
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -41,7 +41,7 @@ type DescribeVolumesInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The filters.
 	//
@@ -100,7 +100,7 @@ type DescribeVolumesInput struct {
 	// * volume-type - The Amazon EBS volume type. This can be gp2 for
 	// General Purpose SSD, io1 or io2 for Provisioned IOPS SSD, st1 for Throughput
 	// Optimized HDD, sc1 for Cold HDD, or standard for Magnetic volumes.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of volume results returned by DescribeVolumes in paginated
 	// output. When this parameter is used, DescribeVolumes only returns MaxResults
@@ -110,7 +110,7 @@ type DescribeVolumesInput struct {
 	// if MaxResults is given a value larger than 500, only 500 results are returned.
 	// If this parameter is not used, then DescribeVolumes returns all results. You
 	// cannot specify this parameter and the volume IDs parameter in the same request.
-	MaxResults *int32
+	MaxResults int32
 
 	// The NextToken value returned from a previous paginated DescribeVolumes request
 	// where MaxResults was used and the results exceeded the value of that parameter.
@@ -119,7 +119,7 @@ type DescribeVolumesInput struct {
 	NextToken *string
 
 	// The volume IDs.
-	VolumeIds []*string
+	VolumeIds []string
 }
 
 type DescribeVolumesOutput struct {
@@ -131,7 +131,7 @@ type DescribeVolumesOutput struct {
 	NextToken *string
 
 	// Information about the volumes.
-	Volumes []*types.Volume
+	Volumes []types.Volume
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

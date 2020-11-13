@@ -47,10 +47,10 @@ type CreateKeyPairInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The tags to apply to the new key pair.
-	TagSpecifications []*types.TagSpecification
+	TagSpecifications []types.TagSpecification
 }
 
 // Describes a key pair.
@@ -69,7 +69,7 @@ type CreateKeyPairOutput struct {
 	KeyPairId *string
 
 	// Any tags applied to the key pair.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -44,7 +44,7 @@ type CreateVpcPeeringConnectionInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The AWS account ID of the owner of the accepter VPC. Default: Your AWS account
 	// ID
@@ -60,7 +60,7 @@ type CreateVpcPeeringConnectionInput struct {
 	PeerVpcId *string
 
 	// The tags to assign to the peering connection.
-	TagSpecifications []*types.TagSpecification
+	TagSpecifications []types.TagSpecification
 
 	// The ID of the requester VPC. You must specify this parameter in the request.
 	VpcId *string

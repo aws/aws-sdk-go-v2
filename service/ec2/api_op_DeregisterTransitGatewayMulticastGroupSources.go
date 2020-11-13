@@ -34,13 +34,13 @@ type DeregisterTransitGatewayMulticastGroupSourcesInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The IP address assigned to the transit gateway multicast group.
 	GroupIpAddress *string
 
 	// The IDs of the group sources' network interfaces.
-	NetworkInterfaceIds []*string
+	NetworkInterfaceIds []string
 
 	// The ID of the transit gateway multicast domain.
 	TransitGatewayMulticastDomainId *string

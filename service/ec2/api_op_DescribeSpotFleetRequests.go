@@ -35,18 +35,18 @@ type DescribeSpotFleetRequestsInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The maximum number of results to return in a single call. Specify a value
 	// between 1 and 1000. The default value is 1000. To retrieve the remaining
 	// results, make another call with the returned NextToken value.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next set of results.
 	NextToken *string
 
 	// The IDs of the Spot Fleet requests.
-	SpotFleetRequestIds []*string
+	SpotFleetRequestIds []string
 }
 
 // Contains the output of DescribeSpotFleetRequests.
@@ -57,7 +57,7 @@ type DescribeSpotFleetRequestsOutput struct {
 	NextToken *string
 
 	// Information about the configuration of your Spot Fleet.
-	SpotFleetRequestConfigs []*types.SpotFleetRequestConfig
+	SpotFleetRequestConfigs []types.SpotFleetRequestConfig
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -36,19 +36,19 @@ type ModifyTransitGatewayVpcAttachmentInput struct {
 
 	// The IDs of one or more subnets to add. You can specify at most one subnet per
 	// Availability Zone.
-	AddSubnetIds []*string
+	AddSubnetIds []string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The new VPC attachment options. You cannot modify the IPv6 options.
 	Options *types.ModifyTransitGatewayVpcAttachmentRequestOptions
 
 	// The IDs of one or more subnets to remove.
-	RemoveSubnetIds []*string
+	RemoveSubnetIds []string
 }
 
 type ModifyTransitGatewayVpcAttachmentOutput struct {

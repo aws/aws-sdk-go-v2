@@ -42,7 +42,7 @@ type DescribeVolumesModificationsInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The filters.
 	//
@@ -77,17 +77,17 @@ type DescribeVolumesModificationsInput struct {
 	// enabled (true | false).
 	//
 	// * volume-id - The ID of the volume.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of results (up to a limit of 500) to be returned in a
 	// paginated request.
-	MaxResults *int32
+	MaxResults int32
 
 	// The nextToken value returned by a previous paginated request.
 	NextToken *string
 
 	// The IDs of the volumes.
-	VolumeIds []*string
+	VolumeIds []string
 }
 
 type DescribeVolumesModificationsOutput struct {
@@ -96,7 +96,7 @@ type DescribeVolumesModificationsOutput struct {
 	NextToken *string
 
 	// Information about the volume modifications.
-	VolumesModifications []*types.VolumeModification
+	VolumesModifications []types.VolumeModification
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

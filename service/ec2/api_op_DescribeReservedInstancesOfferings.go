@@ -46,7 +46,7 @@ type DescribeReservedInstancesOfferingsInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// One or more filters.
 	//
@@ -86,10 +86,10 @@ type DescribeReservedInstancesOfferingsInput struct {
 	//
 	// * usage-price
 	// - The usage price of the Reserved Instance, per hour (for example, 0.84).
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// Include Reserved Instance Marketplace offerings in the response.
-	IncludeMarketplace *bool
+	IncludeMarketplace bool
 
 	// The tenancy of the instances covered by the reservation. A Reserved Instance
 	// with a tenancy of dedicated is applied to instances that run in a VPC on
@@ -106,20 +106,20 @@ type DescribeReservedInstancesOfferingsInput struct {
 
 	// The maximum duration (in seconds) to filter when searching for offerings.
 	// Default: 94608000 (3 years)
-	MaxDuration *int64
+	MaxDuration int64
 
 	// The maximum number of instances to filter when searching for offerings. Default:
 	// 20
-	MaxInstanceCount *int32
+	MaxInstanceCount int32
 
 	// The maximum number of results to return for the request in a single page. The
 	// remaining results of the initial request can be seen by sending another request
 	// with the returned NextToken value. The maximum is 100. Default: 100
-	MaxResults *int32
+	MaxResults int32
 
 	// The minimum duration (in seconds) to filter when searching for offerings.
 	// Default: 2592000 (1 month)
-	MinDuration *int64
+	MinDuration int64
 
 	// The token to retrieve the next page of results.
 	NextToken *string
@@ -137,7 +137,7 @@ type DescribeReservedInstancesOfferingsInput struct {
 	ProductDescription types.RIProductDescription
 
 	// One or more Reserved Instances offering IDs.
-	ReservedInstancesOfferingIds []*string
+	ReservedInstancesOfferingIds []string
 }
 
 // Contains the output of DescribeReservedInstancesOfferings.
@@ -148,7 +148,7 @@ type DescribeReservedInstancesOfferingsOutput struct {
 	NextToken *string
 
 	// A list of Reserved Instances offerings.
-	ReservedInstancesOfferings []*types.ReservedInstancesOffering
+	ReservedInstancesOfferings []types.ReservedInstancesOffering
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

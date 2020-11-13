@@ -35,17 +35,17 @@ type AcceptReservedInstancesExchangeQuoteInput struct {
 	// Convertible Reserved Instance of the same or higher value.
 	//
 	// This member is required.
-	ReservedInstanceIds []*string
+	ReservedInstanceIds []string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The configuration of the target Convertible Reserved Instance to exchange for
 	// your current Convertible Reserved Instances.
-	TargetConfigurations []*types.TargetConfigurationRequest
+	TargetConfigurations []types.TargetConfigurationRequest
 }
 
 // The result of the exchange and whether it was successful.

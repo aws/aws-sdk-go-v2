@@ -34,7 +34,7 @@ type SearchTransitGatewayMulticastGroupsInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// One or more filters. The possible values are:
 	//
@@ -67,11 +67,11 @@ type SearchTransitGatewayMulticastGroupsInput struct {
 	//
 	// * transit-gateway-attachment-id - The id of
 	// the transit gateway attachment.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next page of results.
 	NextToken *string
@@ -83,7 +83,7 @@ type SearchTransitGatewayMulticastGroupsInput struct {
 type SearchTransitGatewayMulticastGroupsOutput struct {
 
 	// Information about the transit gateway multicast group.
-	MulticastGroups []*types.TransitGatewayMulticastGroup
+	MulticastGroups []types.TransitGatewayMulticastGroup
 
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.

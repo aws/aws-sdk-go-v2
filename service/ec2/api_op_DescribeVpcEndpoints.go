@@ -34,7 +34,7 @@ type DescribeVpcEndpointsInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// One or more filters.
 	//
@@ -58,19 +58,19 @@ type DescribeVpcEndpointsInput struct {
 	// * tag-key - The
 	// key of a tag assigned to the resource. Use this filter to find all resources
 	// assigned a tag with a specific key, regardless of the tag value.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of items to return for this request. The request returns a
 	// token that you can specify in a subsequent call to get the next set of results.
 	// Constraint: If the value is greater than 1,000, we return only 1,000 items.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next set of items to return. (You received this token from a
 	// prior call.)
 	NextToken *string
 
 	// One or more endpoint IDs.
-	VpcEndpointIds []*string
+	VpcEndpointIds []string
 }
 
 // Contains the output of DescribeVpcEndpoints.
@@ -81,7 +81,7 @@ type DescribeVpcEndpointsOutput struct {
 	NextToken *string
 
 	// Information about the endpoints.
-	VpcEndpoints []*types.VpcEndpoint
+	VpcEndpoints []types.VpcEndpoint
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

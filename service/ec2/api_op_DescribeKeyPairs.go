@@ -36,7 +36,7 @@ type DescribeKeyPairsInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The filters.
 	//
@@ -56,19 +56,19 @@ type DescribeKeyPairsInput struct {
 	// key in the filter name and the tag value as the filter value. For example, to
 	// find all resources that have a tag with the key Owner and the value TeamA,
 	// specify tag:Owner for the filter name and TeamA for the filter value.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The key pair names. Default: Describes all your key pairs.
-	KeyNames []*string
+	KeyNames []string
 
 	// The IDs of the key pairs.
-	KeyPairIds []*string
+	KeyPairIds []string
 }
 
 type DescribeKeyPairsOutput struct {
 
 	// Information about the key pairs.
-	KeyPairs []*types.KeyPairInfo
+	KeyPairs []types.KeyPairInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

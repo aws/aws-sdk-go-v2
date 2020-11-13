@@ -38,7 +38,7 @@ type ReportInstanceStatusInput struct {
 	// The instances.
 	//
 	// This member is required.
-	Instances []*string
+	Instances []string
 
 	// The reason codes that describe the health state of your instance.
 	//
@@ -85,7 +85,7 @@ type ReportInstanceStatusInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The time at which the reported instance health state ended.
 	EndTime *time.Time

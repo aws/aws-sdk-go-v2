@@ -35,7 +35,7 @@ type PurchaseHostReservationInput struct {
 	// The IDs of the Dedicated Hosts with which the reservation will be associated.
 	//
 	// This member is required.
-	HostIdSet []*string
+	HostIdSet []string
 
 	// The ID of the offering.
 	//
@@ -60,7 +60,7 @@ type PurchaseHostReservationInput struct {
 	LimitPrice *string
 
 	// The tags to apply to the Dedicated Host Reservation during purchase.
-	TagSpecifications []*types.TagSpecification
+	TagSpecifications []types.TagSpecification
 }
 
 type PurchaseHostReservationOutput struct {
@@ -75,7 +75,7 @@ type PurchaseHostReservationOutput struct {
 	CurrencyCode types.CurrencyCodeValues
 
 	// Describes the details of the purchase.
-	Purchase []*types.Purchase
+	Purchase []types.Purchase
 
 	// The total hourly price of the reservation calculated per hour.
 	TotalHourlyPrice *string

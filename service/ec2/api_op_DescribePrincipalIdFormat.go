@@ -45,11 +45,11 @@ type DescribePrincipalIdFormatInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned NextToken value.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token to request the next page of results.
 	NextToken *string
@@ -62,7 +62,7 @@ type DescribePrincipalIdFormatInput struct {
 	// security-group | snapshot | subnet | subnet-cidr-block-association | volume |
 	// vpc | vpc-cidr-block-association | vpc-endpoint | vpc-peering-connection |
 	// vpn-connection | vpn-gateway
-	Resources []*string
+	Resources []string
 }
 
 type DescribePrincipalIdFormatOutput struct {
@@ -72,7 +72,7 @@ type DescribePrincipalIdFormatOutput struct {
 	NextToken *string
 
 	// Information about the ID format settings for the ARN.
-	Principals []*types.PrincipalIdFormat
+	Principals []types.PrincipalIdFormat
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -57,7 +57,7 @@ type DescribeInstanceStatusInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The filters.
 	//
@@ -108,21 +108,21 @@ type DescribeInstanceStatusInput struct {
 	// *
 	// system-status.status - The system status of the instance (ok | impaired |
 	// initializing | insufficient-data | not-applicable).
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// When true, includes the health status for all instances. When false, includes
 	// the health status for running instances only. Default: false
-	IncludeAllInstances *bool
+	IncludeAllInstances bool
 
 	// The instance IDs. Default: Describes all your instances. Constraints: Maximum
 	// 100 explicitly specified instance IDs.
-	InstanceIds []*string
+	InstanceIds []string
 
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned NextToken value. This
 	// value can be between 5 and 1000. You cannot specify this parameter and the
 	// instance IDs parameter in the same call.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token to retrieve the next page of results.
 	NextToken *string
@@ -131,7 +131,7 @@ type DescribeInstanceStatusInput struct {
 type DescribeInstanceStatusOutput struct {
 
 	// Information about the status of the instances.
-	InstanceStatuses []*types.InstanceStatus
+	InstanceStatuses []types.InstanceStatus
 
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.

@@ -37,7 +37,7 @@ type DescribeReservedInstancesInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// One or more filters.
 	//
@@ -92,7 +92,7 @@ type DescribeReservedInstancesInput struct {
 	// *
 	// usage-price - The usage price of the Reserved Instance, per hour (for example,
 	// 0.84).
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// Describes whether the Reserved Instance is Standard or Convertible.
 	OfferingClass types.OfferingClassType
@@ -104,14 +104,14 @@ type DescribeReservedInstancesInput struct {
 
 	// One or more Reserved Instance IDs. Default: Describes all your Reserved
 	// Instances, or only those otherwise specified.
-	ReservedInstancesIds []*string
+	ReservedInstancesIds []string
 }
 
 // Contains the output for DescribeReservedInstances.
 type DescribeReservedInstancesOutput struct {
 
 	// A list of Reserved Instances.
-	ReservedInstances []*types.ReservedInstances
+	ReservedInstances []types.ReservedInstances
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

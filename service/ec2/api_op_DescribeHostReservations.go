@@ -49,16 +49,16 @@ type DescribeHostReservationsInput struct {
 	// * tag-key - The key of a tag assigned to the resource.
 	// Use this filter to find all resources assigned a tag with a specific key,
 	// regardless of the tag value.
-	Filter []*types.Filter
+	Filter []types.Filter
 
 	// The host reservation IDs.
-	HostReservationIdSet []*string
+	HostReservationIdSet []string
 
 	// The maximum number of results to return for the request in a single page. The
 	// remaining results can be seen by sending another request with the returned
 	// nextToken value. This value can be between 5 and 500. If maxResults is given a
 	// larger value than 500, you receive an error.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token to use to retrieve the next page of results.
 	NextToken *string
@@ -67,7 +67,7 @@ type DescribeHostReservationsInput struct {
 type DescribeHostReservationsOutput struct {
 
 	// Details about the reservation's configuration.
-	HostReservationSet []*types.HostReservation
+	HostReservationSet []types.HostReservation
 
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.

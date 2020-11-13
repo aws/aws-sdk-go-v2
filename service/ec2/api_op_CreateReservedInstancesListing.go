@@ -62,13 +62,13 @@ type CreateReservedInstancesListingInput struct {
 	// in this call.
 	//
 	// This member is required.
-	InstanceCount *int32
+	InstanceCount int32
 
 	// A list specifying the price of the Standard Reserved Instance for each month
 	// remaining in the Reserved Instance term.
 	//
 	// This member is required.
-	PriceSchedules []*types.PriceScheduleSpecification
+	PriceSchedules []types.PriceScheduleSpecification
 
 	// The ID of the active Standard Reserved Instance.
 	//
@@ -80,7 +80,7 @@ type CreateReservedInstancesListingInput struct {
 type CreateReservedInstancesListingOutput struct {
 
 	// Information about the Standard Reserved Instance listing.
-	ReservedInstancesListings []*types.ReservedInstancesListing
+	ReservedInstancesListings []types.ReservedInstancesListing
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

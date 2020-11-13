@@ -48,13 +48,13 @@ type ModifyNetworkInterfaceAttributeInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// Changes the security groups for the network interface. The new set of groups you
 	// specify replaces the current set. You must specify at least one group, even if
 	// it's just the default security group in the VPC. You must specify the ID of the
 	// security group, not the name.
-	Groups []*string
+	Groups []string
 
 	// Indicates whether source/destination checking is enabled. A value of true means
 	// checking is enabled, and false means checking is disabled. This value must be

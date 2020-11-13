@@ -39,7 +39,7 @@ type DescribeVpcEndpointServicePermissionsInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// One or more filters.
 	//
@@ -47,13 +47,13 @@ type DescribeVpcEndpointServicePermissionsInput struct {
 	//
 	// * principal-type
 	// - The principal type (All | Service | OrganizationUnit | Account | User | Role).
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of results to return for the request in a single page. The
 	// remaining results of the initial request can be seen by sending another request
 	// with the returned NextToken value. This value can be between 5 and 1,000; if
 	// MaxResults is given a value larger than 1,000, only 1,000 results are returned.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token to retrieve the next page of results.
 	NextToken *string
@@ -62,7 +62,7 @@ type DescribeVpcEndpointServicePermissionsInput struct {
 type DescribeVpcEndpointServicePermissionsOutput struct {
 
 	// Information about one or more allowed principals.
-	AllowedPrincipals []*types.AllowedPrincipal
+	AllowedPrincipals []types.AllowedPrincipal
 
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.

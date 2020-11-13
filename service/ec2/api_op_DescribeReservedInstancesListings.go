@@ -57,7 +57,7 @@ type DescribeReservedInstancesListingsInput struct {
 	// active | cancelled | closed).
 	//
 	// * status-message - The reason for the status.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// One or more Reserved Instance IDs.
 	ReservedInstancesId *string
@@ -70,7 +70,7 @@ type DescribeReservedInstancesListingsInput struct {
 type DescribeReservedInstancesListingsOutput struct {
 
 	// Information about the Reserved Instance listing.
-	ReservedInstancesListings []*types.ReservedInstancesListing
+	ReservedInstancesListings []types.ReservedInstancesListing
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

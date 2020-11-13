@@ -39,7 +39,7 @@ type AllocateHostsInput struct {
 	// The number of Dedicated Hosts to allocate to your account with these parameters.
 	//
 	// This member is required.
-	Quantity *int32
+	Quantity int32
 
 	// Indicates whether the host accepts any untargeted instance launches that match
 	// its instance type configuration, or if it only accepts Host tenancy instance
@@ -76,7 +76,7 @@ type AllocateHostsInput struct {
 	InstanceType *string
 
 	// The tags to apply to the Dedicated Host during creation.
-	TagSpecifications []*types.TagSpecification
+	TagSpecifications []types.TagSpecification
 }
 
 // Contains the output of AllocateHosts.
@@ -84,7 +84,7 @@ type AllocateHostsOutput struct {
 
 	// The ID of the allocated Dedicated Host. This is used to launch an instance onto
 	// a specific host.
-	HostIds []*string
+	HostIds []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

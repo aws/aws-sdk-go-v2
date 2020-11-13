@@ -34,7 +34,7 @@ type DescribeLocalGatewayRouteTableVpcAssociationsInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// One or more filters.
 	//
@@ -50,14 +50,14 @@ type DescribeLocalGatewayRouteTableVpcAssociationsInput struct {
 	// state - The state of the association.
 	//
 	// * vpc-id - The ID of the VPC.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The IDs of the associations.
-	LocalGatewayRouteTableVpcAssociationIds []*string
+	LocalGatewayRouteTableVpcAssociationIds []string
 
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next page of results.
 	NextToken *string
@@ -66,7 +66,7 @@ type DescribeLocalGatewayRouteTableVpcAssociationsInput struct {
 type DescribeLocalGatewayRouteTableVpcAssociationsOutput struct {
 
 	// Information about the associations.
-	LocalGatewayRouteTableVpcAssociations []*types.LocalGatewayRouteTableVpcAssociation
+	LocalGatewayRouteTableVpcAssociations []types.LocalGatewayRouteTableVpcAssociation
 
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.

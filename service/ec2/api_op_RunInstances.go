@@ -97,7 +97,7 @@ type RunInstancesInput struct {
 	// the Amazon EC2 FAQ.
 	//
 	// This member is required.
-	MaxCount *int32
+	MaxCount int32
 
 	// The minimum number of instances to launch. If you specify a minimum that is more
 	// instances than Amazon EC2 can launch in the target Availability Zone, Amazon EC2
@@ -109,13 +109,13 @@ type RunInstancesInput struct {
 	// the Amazon EC2 General FAQ.
 	//
 	// This member is required.
-	MinCount *int32
+	MinCount int32
 
 	// Reserved.
 	AdditionalInfo *string
 
 	// The block device mapping entries.
-	BlockDeviceMappings []*types.BlockDeviceMapping
+	BlockDeviceMappings []types.BlockDeviceMapping
 
 	// Information about the Capacity Reservation targeting option. If you do not
 	// specify this parameter, the instance's Capacity Reservation preference defaults
@@ -154,20 +154,20 @@ type RunInstancesInput struct {
 	// Alternatively, if you set InstanceInitiatedShutdownBehavior to terminate, you
 	// can terminate the instance by running the shutdown command from the instance.
 	// Default: false
-	DisableApiTermination *bool
+	DisableApiTermination bool
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// Indicates whether the instance is optimized for Amazon EBS I/O. This
 	// optimization provides dedicated throughput to Amazon EBS and an optimized
 	// configuration stack to provide optimal Amazon EBS I/O performance. This
 	// optimization isn't available with all instance types. Additional usage charges
 	// apply when using an EBS-optimized instance. Default: false
-	EbsOptimized *bool
+	EbsOptimized bool
 
 	// An elastic GPU to associate with the instance. An Elastic GPU is a GPU resource
 	// that you can attach to your Windows instance to accelerate the graphics
@@ -175,13 +175,13 @@ type RunInstancesInput struct {
 	// GPUs
 	// (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-graphics.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
-	ElasticGpuSpecification []*types.ElasticGpuSpecification
+	ElasticGpuSpecification []types.ElasticGpuSpecification
 
 	// An elastic inference accelerator to associate with the instance. Elastic
 	// inference accelerators are a resource you can attach to your Amazon EC2
 	// instances to accelerate your Deep Learning (DL) inference workloads. You cannot
 	// specify accelerators from different generations in the same request.
-	ElasticInferenceAccelerators []*types.ElasticInferenceAccelerator
+	ElasticInferenceAccelerators []types.ElasticInferenceAccelerator
 
 	// Indicates whether the instance is enabled for AWS Nitro Enclaves. For more
 	// information, see  AWS Nitro Enclaves
@@ -228,14 +228,14 @@ type RunInstancesInput struct {
 	// in the same request. You can specify this option if you've specified a minimum
 	// number of instances to launch. You cannot specify this option and the network
 	// interfaces option in the same request.
-	Ipv6AddressCount *int32
+	Ipv6AddressCount int32
 
 	// [EC2-VPC] The IPv6 addresses from the range of the subnet to associate with the
 	// primary network interface. You cannot specify this option and the option to
 	// assign a number of IPv6 addresses in the same request. You cannot specify this
 	// option if you've specified a minimum number of instances to launch. You cannot
 	// specify this option and the network interfaces option in the same request.
-	Ipv6Addresses []*types.InstanceIpv6Address
+	Ipv6Addresses []types.InstanceIpv6Address
 
 	// The ID of the kernel. We recommend that you use PV-GRUB instead of kernels and
 	// RAM disks. For more information, see  PV-GRUB
@@ -257,7 +257,7 @@ type RunInstancesInput struct {
 	LaunchTemplate *types.LaunchTemplateSpecification
 
 	// The license configurations.
-	LicenseSpecifications []*types.LicenseConfigurationRequest
+	LicenseSpecifications []types.LicenseConfigurationRequest
 
 	// The metadata options for the instance. For more information, see Instance
 	// metadata and user data
@@ -270,7 +270,7 @@ type RunInstancesInput struct {
 	// The network interfaces to associate with the instance. If you specify a network
 	// interface, you must specify any security groups and subnets as part of the
 	// network interface.
-	NetworkInterfaces []*types.InstanceNetworkInterfaceSpecification
+	NetworkInterfaces []types.InstanceNetworkInterfaceSpecification
 
 	// The placement for the instance.
 	Placement *types.Placement
@@ -298,13 +298,13 @@ type RunInstancesInput struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSecurityGroup.html).
 	// If you specify a network interface, you must specify any security groups as part
 	// of the network interface.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// [EC2-Classic, default VPC] The names of the security groups. For a nondefault
 	// VPC, you must use security group IDs instead. If you specify a network
 	// interface, you must specify any security groups as part of the network
 	// interface. Default: Amazon EC2 uses the default security group.
-	SecurityGroups []*string
+	SecurityGroups []string
 
 	// [EC2-VPC] The ID of the subnet to launch the instance into. If you specify a
 	// network interface, you must specify any subnets as part of the network
@@ -316,7 +316,7 @@ type RunInstancesInput struct {
 	// that are created during launch. To tag a resource after it has been created, see
 	// CreateTags
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).
-	TagSpecifications []*types.TagSpecification
+	TagSpecifications []types.TagSpecification
 
 	// The user data to make available to the instance. For more information, see
 	// Running commands on your Linux instance at launch
@@ -335,10 +335,10 @@ type RunInstancesInput struct {
 type RunInstancesOutput struct {
 
 	// [EC2-Classic only] The security groups.
-	Groups []*types.GroupIdentifier
+	Groups []types.GroupIdentifier
 
 	// The instances.
-	Instances []*types.Instance
+	Instances []types.Instance
 
 	// The ID of the AWS account that owns the reservation.
 	OwnerId *string

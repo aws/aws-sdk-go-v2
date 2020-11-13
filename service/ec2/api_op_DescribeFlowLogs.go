@@ -35,7 +35,7 @@ type DescribeFlowLogsInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// One or more filters.
 	//
@@ -65,14 +65,14 @@ type DescribeFlowLogsInput struct {
 	// * tag-key
 	// - The key of a tag assigned to the resource. Use this filter to find all
 	// resources assigned a tag with a specific key, regardless of the tag value.
-	Filter []*types.Filter
+	Filter []types.Filter
 
 	// One or more flow log IDs. Constraint: Maximum of 1000 flow log IDs.
-	FlowLogIds []*string
+	FlowLogIds []string
 
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next page of results.
 	NextToken *string
@@ -81,7 +81,7 @@ type DescribeFlowLogsInput struct {
 type DescribeFlowLogsOutput struct {
 
 	// Information about the flow logs.
-	FlowLogs []*types.FlowLog
+	FlowLogs []types.FlowLog
 
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.

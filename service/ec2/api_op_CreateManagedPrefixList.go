@@ -41,7 +41,7 @@ type CreateManagedPrefixListInput struct {
 	// The maximum number of entries for the prefix list.
 	//
 	// This member is required.
-	MaxEntries *int32
+	MaxEntries int32
 
 	// A name for the prefix list. Constraints: Up to 255 characters in length. The
 	// name cannot start with com.amazonaws.
@@ -59,13 +59,13 @@ type CreateManagedPrefixListInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// One or more entries for the prefix list.
-	Entries []*types.AddPrefixListEntry
+	Entries []types.AddPrefixListEntry
 
 	// The tags to apply to the prefix list during creation.
-	TagSpecifications []*types.TagSpecification
+	TagSpecifications []types.TagSpecification
 }
 
 type CreateManagedPrefixListOutput struct {

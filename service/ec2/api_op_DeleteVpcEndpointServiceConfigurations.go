@@ -35,20 +35,20 @@ type DeleteVpcEndpointServiceConfigurationsInput struct {
 	// The IDs of one or more services.
 	//
 	// This member is required.
-	ServiceIds []*string
+	ServiceIds []string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 }
 
 type DeleteVpcEndpointServiceConfigurationsOutput struct {
 
 	// Information about the service configurations that were not deleted, if
 	// applicable.
-	Unsuccessful []*types.UnsuccessfulItem
+	Unsuccessful []types.UnsuccessfulItem
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

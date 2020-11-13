@@ -31,13 +31,13 @@ func (c *Client) DescribeCapacityReservations(ctx context.Context, params *Descr
 type DescribeCapacityReservationsInput struct {
 
 	// The ID of the Capacity Reservation.
-	CapacityReservationIds []*string
+	CapacityReservationIds []string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// One or more filters.
 	//
@@ -119,13 +119,13 @@ type DescribeCapacityReservationsInput struct {
 	// have matching attributes (instance type, platform, and Availability Zone), and
 	// explicitly target the Capacity Reservation. This ensures that only permitted
 	// instances can use the reserved capacity.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of results to return for the request in a single page. The
 	// remaining results can be seen by sending another request with the returned
 	// nextToken value. This value can be between 5 and 500. If maxResults is given a
 	// larger value than 500, you receive an error.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token to use to retrieve the next page of results.
 	NextToken *string
@@ -134,7 +134,7 @@ type DescribeCapacityReservationsInput struct {
 type DescribeCapacityReservationsOutput struct {
 
 	// Information about the Capacity Reservations.
-	CapacityReservations []*types.CapacityReservation
+	CapacityReservations []types.CapacityReservation
 
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.

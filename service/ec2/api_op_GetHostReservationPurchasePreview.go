@@ -35,7 +35,7 @@ type GetHostReservationPurchasePreviewInput struct {
 	// The IDs of the Dedicated Hosts with which the reservation is associated.
 	//
 	// This member is required.
-	HostIdSet []*string
+	HostIdSet []string
 
 	// The offering ID of the reservation.
 	//
@@ -51,7 +51,7 @@ type GetHostReservationPurchasePreviewOutput struct {
 
 	// The purchase information of the Dedicated Host reservation and the Dedicated
 	// Hosts associated with it.
-	Purchase []*types.Purchase
+	Purchase []types.Purchase
 
 	// The potential total hourly price of the reservation per hour.
 	TotalHourlyPrice *string

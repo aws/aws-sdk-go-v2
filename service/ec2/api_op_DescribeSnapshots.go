@@ -74,7 +74,7 @@ type DescribeSnapshotsInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The filters.
 	//
@@ -117,7 +117,7 @@ type DescribeSnapshotsInput struct {
 	//
 	// * volume-size -
 	// The size of the volume, in GiB.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of snapshot results returned by DescribeSnapshots in
 	// paginated output. When this parameter is used, DescribeSnapshots only returns
@@ -128,7 +128,7 @@ type DescribeSnapshotsInput struct {
 	// results are returned. If this parameter is not used, then DescribeSnapshots
 	// returns all results. You cannot specify this parameter and the snapshot IDs
 	// parameter in the same request.
-	MaxResults *int32
+	MaxResults int32
 
 	// The NextToken value returned from a previous paginated DescribeSnapshots request
 	// where MaxResults was used and the results exceeded the value of that parameter.
@@ -138,14 +138,14 @@ type DescribeSnapshotsInput struct {
 
 	// Scopes the results to snapshots with the specified owners. You can specify a
 	// combination of AWS account IDs, self, and amazon.
-	OwnerIds []*string
+	OwnerIds []string
 
 	// The IDs of the AWS accounts that can create volumes from the snapshot.
-	RestorableByUserIds []*string
+	RestorableByUserIds []string
 
 	// The snapshot IDs. Default: Describes the snapshots for which you have create
 	// volume permissions.
-	SnapshotIds []*string
+	SnapshotIds []string
 }
 
 type DescribeSnapshotsOutput struct {
@@ -157,7 +157,7 @@ type DescribeSnapshotsOutput struct {
 	NextToken *string
 
 	// Information about the snapshots.
-	Snapshots []*types.Snapshot
+	Snapshots []types.Snapshot
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

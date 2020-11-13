@@ -37,17 +37,17 @@ type GetReservedInstancesExchangeQuoteInput struct {
 	// The IDs of the Convertible Reserved Instances to exchange.
 	//
 	// This member is required.
-	ReservedInstanceIds []*string
+	ReservedInstanceIds []string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The configuration of the target Convertible Reserved Instance to exchange for
 	// your current Convertible Reserved Instances.
-	TargetConfigurations []*types.TargetConfigurationRequest
+	TargetConfigurations []types.TargetConfigurationRequest
 }
 
 // Contains the output of GetReservedInstancesExchangeQuote.
@@ -57,7 +57,7 @@ type GetReservedInstancesExchangeQuoteOutput struct {
 	CurrencyCode *string
 
 	// If true, the exchange is valid. If false, the exchange cannot be completed.
-	IsValidExchange *bool
+	IsValidExchange bool
 
 	// The new end date of the reservation term.
 	OutputReservedInstancesWillExpireAt *time.Time
@@ -69,13 +69,13 @@ type GetReservedInstancesExchangeQuoteOutput struct {
 	ReservedInstanceValueRollup *types.ReservationValue
 
 	// The configuration of your Convertible Reserved Instances.
-	ReservedInstanceValueSet []*types.ReservedInstanceReservationValue
+	ReservedInstanceValueSet []types.ReservedInstanceReservationValue
 
 	// The cost associated with the Reserved Instance.
 	TargetConfigurationValueRollup *types.ReservationValue
 
 	// The values of the target Convertible Reserved Instances.
-	TargetConfigurationValueSet []*types.TargetReservationValue
+	TargetConfigurationValueSet []types.TargetReservationValue
 
 	// Describes the reason why the exchange cannot be completed.
 	ValidationFailureReason *string

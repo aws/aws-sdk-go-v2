@@ -40,7 +40,7 @@ type ModifyHostsInput struct {
 	// The IDs of the Dedicated Hosts to modify.
 	//
 	// This member is required.
-	HostIds []*string
+	HostIds []string
 
 	// Specify whether to enable or disable auto-placement.
 	AutoPlacement types.AutoPlacement
@@ -70,11 +70,11 @@ type ModifyHostsInput struct {
 type ModifyHostsOutput struct {
 
 	// The IDs of the Dedicated Hosts that were successfully modified.
-	Successful []*string
+	Successful []string
 
 	// The IDs of the Dedicated Hosts that could not be modified. Check whether the
 	// setting you requested can be used.
-	Unsuccessful []*types.UnsuccessfulItem
+	Unsuccessful []types.UnsuccessfulItem
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -72,21 +72,21 @@ type ModifyVolumeInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The target IOPS rate of the volume. This is only valid for Provisioned IOPS SSD
 	// (io1 and io2) volumes. For moreinformation, see  Provisioned IOPS SSD (io1 and
 	// io2) volumes
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html#EBSVolumeTypes_piops).
 	// Default: If no IOPS value is specified, the existing value is retained.
-	Iops *int32
+	Iops int32
 
 	// The target size of the volume, in GiB. The target volume size must be greater
 	// than or equal to than the existing size of the volume. For information about
 	// available EBS volume sizes, see Amazon EBS Volume Types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html).
 	// Default: If no size is specified, the existing size is retained.
-	Size *int32
+	Size int32
 
 	// The target EBS volume type of the volume. Default: If no type is specified, the
 	// existing type is retained.

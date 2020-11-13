@@ -34,7 +34,7 @@ type DescribeCoipPoolsInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The filters. The following are the possible values:
 	//
@@ -42,23 +42,23 @@ type DescribeCoipPoolsInput struct {
 	//
 	// *
 	// coip-pool.local-gateway-route-table-id
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next page of results.
 	NextToken *string
 
 	// The IDs of the address pools.
-	PoolIds []*string
+	PoolIds []string
 }
 
 type DescribeCoipPoolsOutput struct {
 
 	// Information about the address pools.
-	CoipPools []*types.CoipPool
+	CoipPools []types.CoipPool
 
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.

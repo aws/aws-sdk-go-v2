@@ -36,7 +36,7 @@ type DescribeTagsInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The filters.
 	//
@@ -58,12 +58,12 @@ type DescribeTagsInput struct {
 	// value to find resources with the tag "Owner=TeamA".
 	//
 	// * value - The tag value.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of results to return in a single call. This value can be
 	// between 5 and 1000. To retrieve the remaining results, make another call with
 	// the returned NextToken value.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token to retrieve the next page of results.
 	NextToken *string
@@ -76,7 +76,7 @@ type DescribeTagsOutput struct {
 	NextToken *string
 
 	// The tags.
-	Tags []*types.TagDescription
+	Tags []types.TagDescription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

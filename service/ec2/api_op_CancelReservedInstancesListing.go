@@ -43,7 +43,7 @@ type CancelReservedInstancesListingInput struct {
 type CancelReservedInstancesListingOutput struct {
 
 	// The Reserved Instance listing.
-	ReservedInstancesListings []*types.ReservedInstancesListing
+	ReservedInstancesListings []types.ReservedInstancesListing
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

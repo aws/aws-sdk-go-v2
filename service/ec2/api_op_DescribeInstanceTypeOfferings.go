@@ -35,7 +35,7 @@ type DescribeInstanceTypeOfferingsInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// One or more filters. Filter names and values are case-sensitive.
 	//
@@ -45,7 +45,7 @@ type DescribeInstanceTypeOfferingsInput struct {
 	//
 	// *
 	// instance-type - The instance type.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The location type.
 	LocationType types.LocationType
@@ -62,7 +62,7 @@ type DescribeInstanceTypeOfferingsInput struct {
 type DescribeInstanceTypeOfferingsOutput struct {
 
 	// The instance types offered.
-	InstanceTypeOfferings []*types.InstanceTypeOffering
+	InstanceTypeOfferings []types.InstanceTypeOffering
 
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.

@@ -37,7 +37,7 @@ type CreateFleetInput struct {
 	// The configuration for the EC2 Fleet.
 	//
 	// This member is required.
-	LaunchTemplateConfigs []*types.FleetLaunchTemplateConfigRequest
+	LaunchTemplateConfigs []types.FleetLaunchTemplateConfigRequest
 
 	// The number of units to request.
 	//
@@ -53,7 +53,7 @@ type CreateFleetInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// Indicates whether running instances should be terminated if the total target
 	// capacity of the EC2 Fleet is decreased below the current size of the EC2 Fleet.
@@ -63,7 +63,7 @@ type CreateFleetInput struct {
 	OnDemandOptions *types.OnDemandOptionsRequest
 
 	// Indicates whether EC2 Fleet should replace unhealthy instances.
-	ReplaceUnhealthyInstances *bool
+	ReplaceUnhealthyInstances bool
 
 	// Describes the configuration of Spot Instances in an EC2 Fleet.
 	SpotOptions *types.SpotOptionsRequest
@@ -74,11 +74,11 @@ type CreateFleetInput struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#create-launch-template).
 	// For information about tagging after launch, see Tagging Your Resources
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources).
-	TagSpecifications []*types.TagSpecification
+	TagSpecifications []types.TagSpecification
 
 	// Indicates whether running instances should be terminated when the EC2 Fleet
 	// expires.
-	TerminateInstancesWithExpiration *bool
+	TerminateInstancesWithExpiration bool
 
 	// The type of the request. By default, the EC2 Fleet places an asynchronous
 	// request for your desired capacity, and maintains it by replenishing interrupted
@@ -107,14 +107,14 @@ type CreateFleetOutput struct {
 
 	// Information about the instances that could not be launched by the fleet. Valid
 	// only when Type is set to instant.
-	Errors []*types.CreateFleetError
+	Errors []types.CreateFleetError
 
 	// The ID of the EC2 Fleet.
 	FleetId *string
 
 	// Information about the instances that were launched by the fleet. Valid only when
 	// Type is set to instant.
-	Instances []*types.CreateFleetInstance
+	Instances []types.CreateFleetInstance
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -67,10 +67,10 @@ type CreateSnapshotInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The tags to apply to the snapshot during creation.
-	TagSpecifications []*types.TagSpecification
+	TagSpecifications []types.TagSpecification
 }
 
 // Describes a snapshot.
@@ -88,7 +88,7 @@ type CreateSnapshotOutput struct {
 	Description *string
 
 	// Indicates whether the snapshot is encrypted.
-	Encrypted *bool
+	Encrypted bool
 
 	// The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS)
 	// customer master key (CMK) that was used to protect the volume encryption key for
@@ -125,7 +125,7 @@ type CreateSnapshotOutput struct {
 	StateMessage *string
 
 	// Any tags assigned to the snapshot.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The ID of the volume that was used to create the snapshot. Snapshots created by
 	// the CopySnapshot action have an arbitrary volume ID that should not be used for
@@ -133,7 +133,7 @@ type CreateSnapshotOutput struct {
 	VolumeId *string
 
 	// The size of the volume, in GiB.
-	VolumeSize *int32
+	VolumeSize int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

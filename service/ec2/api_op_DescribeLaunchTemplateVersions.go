@@ -36,7 +36,7 @@ type DescribeLaunchTemplateVersionsInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// One or more filters.
 	//
@@ -61,7 +61,7 @@ type DescribeLaunchTemplateVersionsInput struct {
 	//
 	// *
 	// ram-disk-id - The RAM disk ID.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The ID of the launch template. To describe one or more versions of a specified
 	// launch template, you must specify either the launch template ID or the launch
@@ -78,7 +78,7 @@ type DescribeLaunchTemplateVersionsInput struct {
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned NextToken value. This
 	// value can be between 1 and 200.
-	MaxResults *int32
+	MaxResults int32
 
 	// The version number up to which to describe launch template versions.
 	MaxVersion *string
@@ -97,13 +97,13 @@ type DescribeLaunchTemplateVersionsInput struct {
 	// valid value is $Latest. To describe all launch templates in your account that
 	// are defined as the default version, the valid value is $Default. You can specify
 	// $Latest and $Default in the same call. You cannot specify numbers.
-	Versions []*string
+	Versions []string
 }
 
 type DescribeLaunchTemplateVersionsOutput struct {
 
 	// Information about the launch template versions.
-	LaunchTemplateVersions []*types.LaunchTemplateVersion
+	LaunchTemplateVersions []types.LaunchTemplateVersion
 
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.

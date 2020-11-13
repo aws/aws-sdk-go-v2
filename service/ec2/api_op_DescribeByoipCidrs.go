@@ -36,13 +36,13 @@ type DescribeByoipCidrsInput struct {
 	// remaining results, make another call with the returned nextToken value.
 	//
 	// This member is required.
-	MaxResults *int32
+	MaxResults int32
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The token for the next page of results.
 	NextToken *string
@@ -51,7 +51,7 @@ type DescribeByoipCidrsInput struct {
 type DescribeByoipCidrsOutput struct {
 
 	// Information about your address ranges.
-	ByoipCidrs []*types.ByoipCidr
+	ByoipCidrs []types.ByoipCidr
 
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.

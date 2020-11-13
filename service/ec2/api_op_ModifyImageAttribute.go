@@ -52,7 +52,7 @@ type ModifyImageAttributeInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// A new launch permission for the AMI.
 	LaunchPermission *types.LaunchPermissionModifications
@@ -63,15 +63,15 @@ type ModifyImageAttributeInput struct {
 
 	// The DevPay product codes. After you add a product code to an AMI, it can't be
 	// removed.
-	ProductCodes []*string
+	ProductCodes []string
 
 	// The user groups. This parameter can be used only when the Attribute parameter is
 	// launchPermission.
-	UserGroups []*string
+	UserGroups []string
 
 	// The AWS account IDs. This parameter can be used only when the Attribute
 	// parameter is launchPermission.
-	UserIds []*string
+	UserIds []string
 
 	// The value of the attribute being modified. This parameter can be used only when
 	// the Attribute parameter is description or productCodes.

@@ -46,7 +46,7 @@ type CreateFlowLogsInput struct {
 	// flow log. Constraints: Maximum of 1000 resources
 	//
 	// This member is required.
-	ResourceIds []*string
+	ResourceIds []string
 
 	// The type of resource for which to create the flow log. For example, if you
 	// specified a VPC ID for the ResourceId property, specify VPC for this property.
@@ -74,7 +74,7 @@ type CreateFlowLogsInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// Specifies the destination to which the flow log data is to be published. Flow
 	// log data can be published to a CloudWatch Logs log group or an Amazon S3 bucket.
@@ -120,10 +120,10 @@ type CreateFlowLogsInput struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances),
 	// the aggregation interval is always 60 seconds or less, regardless of the value
 	// that you specify. Default: 600
-	MaxAggregationInterval *int32
+	MaxAggregationInterval int32
 
 	// The tags to apply to the flow logs.
-	TagSpecifications []*types.TagSpecification
+	TagSpecifications []types.TagSpecification
 }
 
 type CreateFlowLogsOutput struct {
@@ -133,10 +133,10 @@ type CreateFlowLogsOutput struct {
 	ClientToken *string
 
 	// The IDs of the flow logs.
-	FlowLogIds []*string
+	FlowLogIds []string
 
 	// Information about the flow logs that could not be created successfully.
-	Unsuccessful []*types.UnsuccessfulItem
+	Unsuccessful []types.UnsuccessfulItem
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

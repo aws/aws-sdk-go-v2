@@ -54,7 +54,7 @@ type ModifyInstanceAttributeInput struct {
 	// see Updating the block device mapping when launching an instance
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html#Using_OverridingAMIBDM)
 	// in the Amazon Elastic Compute Cloud User Guide.
-	BlockDeviceMappings []*types.InstanceBlockDeviceMappingSpecification
+	BlockDeviceMappings []types.InstanceBlockDeviceMappingSpecification
 
 	// If the value is true, you can't terminate the instance using the Amazon EC2
 	// console, CLI, or API; otherwise, you can. You cannot use this parameter for Spot
@@ -65,7 +65,7 @@ type ModifyInstanceAttributeInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// Specifies whether the instance is optimized for Amazon EBS I/O. This
 	// optimization provides dedicated throughput to Amazon EBS and an optimized
@@ -82,7 +82,7 @@ type ModifyInstanceAttributeInput struct {
 	// [EC2-VPC] Changes the security groups of the instance. You must specify at least
 	// one security group, even if it's just the default security group for the VPC.
 	// You must specify the security group ID, not the security group name.
-	Groups []*string
+	Groups []string
 
 	// Specifies whether an instance stops or terminates when you initiate shutdown
 	// from the instance (using the operating system command for system shutdown).

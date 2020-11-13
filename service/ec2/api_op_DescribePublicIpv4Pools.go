@@ -40,17 +40,17 @@ type DescribePublicIpv4PoolsInput struct {
 	// * tag-key - The key of a tag assigned to the resource. Use this filter
 	// to find all resources assigned a tag with a specific key, regardless of the tag
 	// value.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next page of results.
 	NextToken *string
 
 	// The IDs of the address pools.
-	PoolIds []*string
+	PoolIds []string
 }
 
 type DescribePublicIpv4PoolsOutput struct {
@@ -60,7 +60,7 @@ type DescribePublicIpv4PoolsOutput struct {
 	NextToken *string
 
 	// Information about the address pools.
-	PublicIpv4Pools []*types.PublicIpv4Pool
+	PublicIpv4Pools []types.PublicIpv4Pool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

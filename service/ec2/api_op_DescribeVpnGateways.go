@@ -37,7 +37,7 @@ type DescribeVpnGatewaysInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// One or more filters.
 	//
@@ -72,18 +72,18 @@ type DescribeVpnGatewaysInput struct {
 	//
 	// * vpn-gateway-id - The ID of the
 	// virtual private gateway.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// One or more virtual private gateway IDs. Default: Describes all your virtual
 	// private gateways.
-	VpnGatewayIds []*string
+	VpnGatewayIds []string
 }
 
 // Contains the output of DescribeVpnGateways.
 type DescribeVpnGatewaysOutput struct {
 
 	// Information about one or more virtual private gateways.
-	VpnGateways []*types.VpnGateway
+	VpnGateways []types.VpnGateway
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

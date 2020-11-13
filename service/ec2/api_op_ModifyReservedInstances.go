@@ -39,12 +39,12 @@ type ModifyReservedInstancesInput struct {
 	// The IDs of the Reserved Instances to modify.
 	//
 	// This member is required.
-	ReservedInstancesIds []*string
+	ReservedInstancesIds []string
 
 	// The configuration settings for the Reserved Instances to modify.
 	//
 	// This member is required.
-	TargetConfigurations []*types.ReservedInstancesConfiguration
+	TargetConfigurations []types.ReservedInstancesConfiguration
 
 	// A unique, case-sensitive token you provide to ensure idempotency of your
 	// modification request. For more information, see Ensuring Idempotency

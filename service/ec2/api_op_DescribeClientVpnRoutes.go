@@ -38,7 +38,7 @@ type DescribeClientVpnRoutesInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// One or more filters. Filter names and values are case-sensitive.
 	//
@@ -50,12 +50,12 @@ type DescribeClientVpnRoutesInput struct {
 	//
 	// *
 	// target-subnet - The ID of the subnet through which traffic is routed.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of results to return for the request in a single page. The
 	// remaining results can be seen by sending another request with the nextToken
 	// value.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token to retrieve the next page of results.
 	NextToken *string
@@ -68,7 +68,7 @@ type DescribeClientVpnRoutesOutput struct {
 	NextToken *string
 
 	// Information about the Client VPN endpoint routes.
-	Routes []*types.ClientVpnRoute
+	Routes []types.ClientVpnRoute
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

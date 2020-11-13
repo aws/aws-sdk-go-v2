@@ -38,19 +38,19 @@ type AcceptVpcEndpointConnectionsInput struct {
 	// The IDs of one or more interface VPC endpoints.
 	//
 	// This member is required.
-	VpcEndpointIds []*string
+	VpcEndpointIds []string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 }
 
 type AcceptVpcEndpointConnectionsOutput struct {
 
 	// Information about the interface endpoints that were not accepted, if applicable.
-	Unsuccessful []*types.UnsuccessfulItem
+	Unsuccessful []types.UnsuccessfulItem
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

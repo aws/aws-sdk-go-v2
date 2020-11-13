@@ -34,7 +34,7 @@ type DescribeTransitGatewayVpcAttachmentsInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// One or more filters. The possible values are:
 	//
@@ -50,17 +50,17 @@ type DescribeTransitGatewayVpcAttachmentsInput struct {
 	//
 	// * vpc-id -
 	// The ID of the VPC.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next page of results.
 	NextToken *string
 
 	// The IDs of the attachments.
-	TransitGatewayAttachmentIds []*string
+	TransitGatewayAttachmentIds []string
 }
 
 type DescribeTransitGatewayVpcAttachmentsOutput struct {
@@ -70,7 +70,7 @@ type DescribeTransitGatewayVpcAttachmentsOutput struct {
 	NextToken *string
 
 	// Information about the VPC attachments.
-	TransitGatewayVpcAttachments []*types.TransitGatewayVpcAttachment
+	TransitGatewayVpcAttachments []types.TransitGatewayVpcAttachment
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

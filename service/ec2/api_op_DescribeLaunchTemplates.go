@@ -33,7 +33,7 @@ type DescribeLaunchTemplatesInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// One or more filters.
 	//
@@ -51,18 +51,18 @@ type DescribeLaunchTemplatesInput struct {
 	// * tag-key - The
 	// key of a tag assigned to the resource. Use this filter to find all resources
 	// assigned a tag with a specific key, regardless of the tag value.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// One or more launch template IDs.
-	LaunchTemplateIds []*string
+	LaunchTemplateIds []string
 
 	// One or more launch template names.
-	LaunchTemplateNames []*string
+	LaunchTemplateNames []string
 
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned NextToken value. This
 	// value can be between 1 and 200.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token to request the next page of results.
 	NextToken *string
@@ -71,7 +71,7 @@ type DescribeLaunchTemplatesInput struct {
 type DescribeLaunchTemplatesOutput struct {
 
 	// Information about the launch templates.
-	LaunchTemplates []*types.LaunchTemplate
+	LaunchTemplates []types.LaunchTemplate
 
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.

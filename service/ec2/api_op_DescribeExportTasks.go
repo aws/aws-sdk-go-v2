@@ -31,16 +31,16 @@ func (c *Client) DescribeExportTasks(ctx context.Context, params *DescribeExport
 type DescribeExportTasksInput struct {
 
 	// The export task IDs.
-	ExportTaskIds []*string
+	ExportTaskIds []string
 
 	// the filters for the export tasks.
-	Filters []*types.Filter
+	Filters []types.Filter
 }
 
 type DescribeExportTasksOutput struct {
 
 	// Information about the export tasks.
-	ExportTasks []*types.ExportTask
+	ExportTasks []types.ExportTask
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

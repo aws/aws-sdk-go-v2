@@ -40,11 +40,11 @@ type DescribeImagesInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// Scopes the images by users with explicit launch permissions. Specify an AWS
 	// account ID, self (the sender of the request), or all (public AMIs).
-	ExecutableUsers []*string
+	ExecutableUsers []string
 
 	// The filters.
 	//
@@ -145,22 +145,22 @@ type DescribeImagesInput struct {
 	// value.
 	//
 	// * virtualization-type - The virtualization type (paravirtual | hvm).
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The image IDs. Default: Describes all images available to you.
-	ImageIds []*string
+	ImageIds []string
 
 	// Scopes the results to images with the specified owners. You can specify a
 	// combination of AWS account IDs, self, amazon, and aws-marketplace. If you omit
 	// this parameter, the results include all images for which you have launch
 	// permissions, regardless of ownership.
-	Owners []*string
+	Owners []string
 }
 
 type DescribeImagesOutput struct {
 
 	// Information about the images.
-	Images []*types.Image
+	Images []types.Image
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

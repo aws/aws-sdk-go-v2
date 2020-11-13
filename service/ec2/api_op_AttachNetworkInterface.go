@@ -32,7 +32,7 @@ type AttachNetworkInterfaceInput struct {
 	// The index of the device for the network interface attachment.
 	//
 	// This member is required.
-	DeviceIndex *int32
+	DeviceIndex int32
 
 	// The ID of the instance.
 	//
@@ -48,7 +48,7 @@ type AttachNetworkInterfaceInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 }
 
 // Contains the output of AttachNetworkInterface.

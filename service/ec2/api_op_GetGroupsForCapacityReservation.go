@@ -38,13 +38,13 @@ type GetGroupsForCapacityReservationInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun *bool
+	DryRun bool
 
 	// The maximum number of results to return for the request in a single page. The
 	// remaining results can be seen by sending another request with the returned
 	// nextToken value. This value can be between 5 and 500. If maxResults is given a
 	// larger value than 500, you receive an error.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token to use to retrieve the next page of results.
 	NextToken *string
@@ -54,7 +54,7 @@ type GetGroupsForCapacityReservationOutput struct {
 
 	// Information about the resource groups to which the Capacity Reservation has been
 	// added.
-	CapacityReservationGroups []*types.CapacityReservationGroup
+	CapacityReservationGroups []types.CapacityReservationGroup
 
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
