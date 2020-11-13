@@ -271,7 +271,7 @@ func addCreateAccessPointUpdateEndpoint(stack *middleware.Stack, options Options
 	return s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{
 		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: getCreateAccessPointARNMember,
 			BackfillAccountID: backFillCreateAccessPointAccountID,
-			GetOutpostIDInput: getOutpostIDFromInput,
+			GetOutpostIDInput: nopGetOutpostIDFromInput,
 			UpdateARNField:    setCreateAccessPointARNMember,
 			CopyInput:         copyCreateAccessPointInputForUpdateEndpoint,
 		},

@@ -131,10 +131,21 @@ func newServiceMetadataMiddleware_opDeleteBucket(region string) *awsmiddleware.R
 	}
 }
 
+// getDeleteBucketBucketMember returns a pointer to string denoting a provided
+// bucket member valueand a boolean indicating if the input has a modeled bucket
+// name,
+func getDeleteBucketBucketMember(input interface{}) (*string, bool) {
+	in := input.(*DeleteBucketInput)
+	if in.Bucket == nil {
+		return nil, false
+	}
+	return in.Bucket, true
+}
 func addDeleteBucketUpdateEndpoint(stack *middleware.Stack, options Options) error {
 	return s3cust.UpdateEndpoint(stack, s3cust.UpdateEndpointOptions{
-		Accessor: s3cust.UpdateEndpointParameterAccessor{GetBucketFromInput: getBucketFromInput,
-			SupportsAccelerate: supportAccelerate,
+		Accessor: s3cust.UpdateEndpointParameterAccessor{
+			GetBucketFromInput: getDeleteBucketBucketMember,
+			SupportsAccelerate: false,
 		},
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,

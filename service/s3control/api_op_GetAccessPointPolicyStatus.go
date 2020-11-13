@@ -184,12 +184,6 @@ func copyGetAccessPointPolicyStatusInputForUpdateEndpoint(params interface{}) (i
 	cpy := *input
 	return &cpy, nil
 }
-func getGetAccessPointPolicyStatusARNMember(input interface{}) (*string, bool) {
-	return nil, false
-}
-func setGetAccessPointPolicyStatusARNMember(input interface{}, v string) error {
-	return nil
-}
 func backFillGetAccessPointPolicyStatusAccountID(input interface{}, v string) error {
 	in := input.(*GetAccessPointPolicyStatusInput)
 	if in.AccountId != nil {
@@ -203,10 +197,10 @@ func backFillGetAccessPointPolicyStatusAccountID(input interface{}, v string) er
 }
 func addGetAccessPointPolicyStatusUpdateEndpoint(stack *middleware.Stack, options Options) error {
 	return s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{
-		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: getGetAccessPointPolicyStatusARNMember,
-			BackfillAccountID: backFillGetAccessPointPolicyStatusAccountID,
-			GetOutpostIDInput: getOutpostIDFromInput,
-			UpdateARNField:    setGetAccessPointPolicyStatusARNMember,
+		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: nopGetARNAccessor,
+			BackfillAccountID: nopBackfillAccountIDAccessor,
+			GetOutpostIDInput: nopGetOutpostIDFromInput,
+			UpdateARNField:    nopSetARNAccessor,
 			CopyInput:         copyGetAccessPointPolicyStatusInputForUpdateEndpoint,
 		},
 		EndpointResolver:        options.EndpointResolver,

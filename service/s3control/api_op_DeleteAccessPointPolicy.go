@@ -223,7 +223,7 @@ func addDeleteAccessPointPolicyUpdateEndpoint(stack *middleware.Stack, options O
 	return s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{
 		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: getDeleteAccessPointPolicyARNMember,
 			BackfillAccountID: backFillDeleteAccessPointPolicyAccountID,
-			GetOutpostIDInput: getOutpostIDFromInput,
+			GetOutpostIDInput: nopGetOutpostIDFromInput,
 			UpdateARNField:    setDeleteAccessPointPolicyARNMember,
 			CopyInput:         copyDeleteAccessPointPolicyInputForUpdateEndpoint,
 		},

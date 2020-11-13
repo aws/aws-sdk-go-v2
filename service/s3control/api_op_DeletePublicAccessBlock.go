@@ -181,12 +181,6 @@ func copyDeletePublicAccessBlockInputForUpdateEndpoint(params interface{}) (inte
 	cpy := *input
 	return &cpy, nil
 }
-func getDeletePublicAccessBlockARNMember(input interface{}) (*string, bool) {
-	return nil, false
-}
-func setDeletePublicAccessBlockARNMember(input interface{}, v string) error {
-	return nil
-}
 func backFillDeletePublicAccessBlockAccountID(input interface{}, v string) error {
 	in := input.(*DeletePublicAccessBlockInput)
 	if in.AccountId != nil {
@@ -200,10 +194,10 @@ func backFillDeletePublicAccessBlockAccountID(input interface{}, v string) error
 }
 func addDeletePublicAccessBlockUpdateEndpoint(stack *middleware.Stack, options Options) error {
 	return s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{
-		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: getDeletePublicAccessBlockARNMember,
-			BackfillAccountID: backFillDeletePublicAccessBlockAccountID,
-			GetOutpostIDInput: getOutpostIDFromInput,
-			UpdateARNField:    setDeletePublicAccessBlockARNMember,
+		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: nopGetARNAccessor,
+			BackfillAccountID: nopBackfillAccountIDAccessor,
+			GetOutpostIDInput: nopGetOutpostIDFromInput,
+			UpdateARNField:    nopSetARNAccessor,
 			CopyInput:         copyDeletePublicAccessBlockInputForUpdateEndpoint,
 		},
 		EndpointResolver:        options.EndpointResolver,

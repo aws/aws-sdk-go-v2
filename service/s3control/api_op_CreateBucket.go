@@ -224,15 +224,23 @@ func copyCreateBucketInputForUpdateEndpoint(params interface{}) (interface{}, er
 	cpy := *input
 	return &cpy, nil
 }
-func backFillCreateBucketAccountID(input interface{}, v string) error {
-	return nil
+
+// getCreateBucketOutpostIDMember returns a pointer to string denoting a provided
+// outpost-id member value and a boolean indicating if the input has a modeled
+// outpost-id,
+func getCreateBucketOutpostIDMember(input interface{}) (*string, bool) {
+	in := input.(*CreateBucketInput)
+	if in.OutpostId == nil {
+		return nil, false
+	}
+	return in.OutpostId, true
 }
 func addCreateBucketUpdateEndpoint(stack *middleware.Stack, options Options) error {
 	return s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{
-		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: nil,
-			BackfillAccountID: nil,
-			GetOutpostIDInput: getOutpostIDFromInput,
-			UpdateARNField:    nil,
+		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: nopGetARNAccessor,
+			BackfillAccountID: nopBackfillAccountIDAccessor,
+			GetOutpostIDInput: getCreateBucketOutpostIDMember,
+			UpdateARNField:    nopSetARNAccessor,
 			CopyInput:         copyCreateBucketInputForUpdateEndpoint,
 		},
 		EndpointResolver:        options.EndpointResolver,

@@ -120,8 +120,9 @@ func newServiceMetadataMiddleware_opListBuckets(region string) *awsmiddleware.Re
 
 func addListBucketsUpdateEndpoint(stack *middleware.Stack, options Options) error {
 	return s3cust.UpdateEndpoint(stack, s3cust.UpdateEndpointOptions{
-		Accessor: s3cust.UpdateEndpointParameterAccessor{GetBucketFromInput: getBucketFromInput,
-			SupportsAccelerate: supportAccelerate,
+		Accessor: s3cust.UpdateEndpointParameterAccessor{
+			GetBucketFromInput: nopGetBucketAccessor,
+			SupportsAccelerate: false,
 		},
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,

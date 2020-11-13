@@ -399,10 +399,21 @@ func newServiceMetadataMiddleware_opUploadPartCopy(region string) *awsmiddleware
 	}
 }
 
+// getUploadPartCopyBucketMember returns a pointer to string denoting a provided
+// bucket member valueand a boolean indicating if the input has a modeled bucket
+// name,
+func getUploadPartCopyBucketMember(input interface{}) (*string, bool) {
+	in := input.(*UploadPartCopyInput)
+	if in.Bucket == nil {
+		return nil, false
+	}
+	return in.Bucket, true
+}
 func addUploadPartCopyUpdateEndpoint(stack *middleware.Stack, options Options) error {
 	return s3cust.UpdateEndpoint(stack, s3cust.UpdateEndpointOptions{
-		Accessor: s3cust.UpdateEndpointParameterAccessor{GetBucketFromInput: getBucketFromInput,
-			SupportsAccelerate: supportAccelerate,
+		Accessor: s3cust.UpdateEndpointParameterAccessor{
+			GetBucketFromInput: getUploadPartCopyBucketMember,
+			SupportsAccelerate: true,
 		},
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,

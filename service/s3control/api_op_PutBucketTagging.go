@@ -288,7 +288,7 @@ func addPutBucketTaggingUpdateEndpoint(stack *middleware.Stack, options Options)
 	return s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{
 		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: getPutBucketTaggingARNMember,
 			BackfillAccountID: backFillPutBucketTaggingAccountID,
-			GetOutpostIDInput: getOutpostIDFromInput,
+			GetOutpostIDInput: nopGetOutpostIDFromInput,
 			UpdateARNField:    setPutBucketTaggingARNMember,
 			CopyInput:         copyPutBucketTaggingInputForUpdateEndpoint,
 		},

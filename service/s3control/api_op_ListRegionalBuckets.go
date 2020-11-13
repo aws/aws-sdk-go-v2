@@ -196,6 +196,17 @@ func copyListRegionalBucketsInputForUpdateEndpoint(params interface{}) (interfac
 	cpy := *input
 	return &cpy, nil
 }
+
+// getListRegionalBucketsOutpostIDMember returns a pointer to string denoting a
+// provided outpost-id member value and a boolean indicating if the input has a
+// modeled outpost-id,
+func getListRegionalBucketsOutpostIDMember(input interface{}) (*string, bool) {
+	in := input.(*ListRegionalBucketsInput)
+	if in.OutpostId == nil {
+		return nil, false
+	}
+	return in.OutpostId, true
+}
 func backFillListRegionalBucketsAccountID(input interface{}, v string) error {
 	in := input.(*ListRegionalBucketsInput)
 	if in.AccountId != nil {
@@ -209,10 +220,10 @@ func backFillListRegionalBucketsAccountID(input interface{}, v string) error {
 }
 func addListRegionalBucketsUpdateEndpoint(stack *middleware.Stack, options Options) error {
 	return s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{
-		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: nil,
-			BackfillAccountID: nil,
-			GetOutpostIDInput: getOutpostIDFromInput,
-			UpdateARNField:    nil,
+		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: nopGetARNAccessor,
+			BackfillAccountID: nopBackfillAccountIDAccessor,
+			GetOutpostIDInput: getListRegionalBucketsOutpostIDMember,
+			UpdateARNField:    nopSetARNAccessor,
 			CopyInput:         copyListRegionalBucketsInputForUpdateEndpoint,
 		},
 		EndpointResolver:        options.EndpointResolver,

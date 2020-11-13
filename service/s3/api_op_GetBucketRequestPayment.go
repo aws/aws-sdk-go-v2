@@ -134,10 +134,21 @@ func newServiceMetadataMiddleware_opGetBucketRequestPayment(region string) *awsm
 	}
 }
 
+// getGetBucketRequestPaymentBucketMember returns a pointer to string denoting a
+// provided bucket member valueand a boolean indicating if the input has a modeled
+// bucket name,
+func getGetBucketRequestPaymentBucketMember(input interface{}) (*string, bool) {
+	in := input.(*GetBucketRequestPaymentInput)
+	if in.Bucket == nil {
+		return nil, false
+	}
+	return in.Bucket, true
+}
 func addGetBucketRequestPaymentUpdateEndpoint(stack *middleware.Stack, options Options) error {
 	return s3cust.UpdateEndpoint(stack, s3cust.UpdateEndpointOptions{
-		Accessor: s3cust.UpdateEndpointParameterAccessor{GetBucketFromInput: getBucketFromInput,
-			SupportsAccelerate: supportAccelerate,
+		Accessor: s3cust.UpdateEndpointParameterAccessor{
+			GetBucketFromInput: getGetBucketRequestPaymentBucketMember,
+			SupportsAccelerate: true,
 		},
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,

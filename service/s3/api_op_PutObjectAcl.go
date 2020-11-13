@@ -330,10 +330,21 @@ func newServiceMetadataMiddleware_opPutObjectAcl(region string) *awsmiddleware.R
 	}
 }
 
+// getPutObjectAclBucketMember returns a pointer to string denoting a provided
+// bucket member valueand a boolean indicating if the input has a modeled bucket
+// name,
+func getPutObjectAclBucketMember(input interface{}) (*string, bool) {
+	in := input.(*PutObjectAclInput)
+	if in.Bucket == nil {
+		return nil, false
+	}
+	return in.Bucket, true
+}
 func addPutObjectAclUpdateEndpoint(stack *middleware.Stack, options Options) error {
 	return s3cust.UpdateEndpoint(stack, s3cust.UpdateEndpointOptions{
-		Accessor: s3cust.UpdateEndpointParameterAccessor{GetBucketFromInput: getBucketFromInput,
-			SupportsAccelerate: supportAccelerate,
+		Accessor: s3cust.UpdateEndpointParameterAccessor{
+			GetBucketFromInput: getPutObjectAclBucketMember,
+			SupportsAccelerate: true,
 		},
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,

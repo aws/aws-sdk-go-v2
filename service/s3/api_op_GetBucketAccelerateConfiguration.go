@@ -151,10 +151,21 @@ func newServiceMetadataMiddleware_opGetBucketAccelerateConfiguration(region stri
 	}
 }
 
+// getGetBucketAccelerateConfigurationBucketMember returns a pointer to string
+// denoting a provided bucket member valueand a boolean indicating if the input has
+// a modeled bucket name,
+func getGetBucketAccelerateConfigurationBucketMember(input interface{}) (*string, bool) {
+	in := input.(*GetBucketAccelerateConfigurationInput)
+	if in.Bucket == nil {
+		return nil, false
+	}
+	return in.Bucket, true
+}
 func addGetBucketAccelerateConfigurationUpdateEndpoint(stack *middleware.Stack, options Options) error {
 	return s3cust.UpdateEndpoint(stack, s3cust.UpdateEndpointOptions{
-		Accessor: s3cust.UpdateEndpointParameterAccessor{GetBucketFromInput: getBucketFromInput,
-			SupportsAccelerate: supportAccelerate,
+		Accessor: s3cust.UpdateEndpointParameterAccessor{
+			GetBucketFromInput: getGetBucketAccelerateConfigurationBucketMember,
+			SupportsAccelerate: true,
 		},
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,

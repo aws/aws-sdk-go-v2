@@ -207,10 +207,21 @@ func newServiceMetadataMiddleware_opPutBucketWebsite(region string) *awsmiddlewa
 	}
 }
 
+// getPutBucketWebsiteBucketMember returns a pointer to string denoting a provided
+// bucket member valueand a boolean indicating if the input has a modeled bucket
+// name,
+func getPutBucketWebsiteBucketMember(input interface{}) (*string, bool) {
+	in := input.(*PutBucketWebsiteInput)
+	if in.Bucket == nil {
+		return nil, false
+	}
+	return in.Bucket, true
+}
 func addPutBucketWebsiteUpdateEndpoint(stack *middleware.Stack, options Options) error {
 	return s3cust.UpdateEndpoint(stack, s3cust.UpdateEndpointOptions{
-		Accessor: s3cust.UpdateEndpointParameterAccessor{GetBucketFromInput: getBucketFromInput,
-			SupportsAccelerate: supportAccelerate,
+		Accessor: s3cust.UpdateEndpointParameterAccessor{
+			GetBucketFromInput: getPutBucketWebsiteBucketMember,
+			SupportsAccelerate: true,
 		},
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,

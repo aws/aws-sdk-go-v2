@@ -137,10 +137,21 @@ func newServiceMetadataMiddleware_opGetBucketOwnershipControls(region string) *a
 	}
 }
 
+// getGetBucketOwnershipControlsBucketMember returns a pointer to string denoting a
+// provided bucket member valueand a boolean indicating if the input has a modeled
+// bucket name,
+func getGetBucketOwnershipControlsBucketMember(input interface{}) (*string, bool) {
+	in := input.(*GetBucketOwnershipControlsInput)
+	if in.Bucket == nil {
+		return nil, false
+	}
+	return in.Bucket, true
+}
 func addGetBucketOwnershipControlsUpdateEndpoint(stack *middleware.Stack, options Options) error {
 	return s3cust.UpdateEndpoint(stack, s3cust.UpdateEndpointOptions{
-		Accessor: s3cust.UpdateEndpointParameterAccessor{GetBucketFromInput: getBucketFromInput,
-			SupportsAccelerate: supportAccelerate,
+		Accessor: s3cust.UpdateEndpointParameterAccessor{
+			GetBucketFromInput: getGetBucketOwnershipControlsBucketMember,
+			SupportsAccelerate: true,
 		},
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,

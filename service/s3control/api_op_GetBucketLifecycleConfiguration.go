@@ -258,7 +258,7 @@ func addGetBucketLifecycleConfigurationUpdateEndpoint(stack *middleware.Stack, o
 	return s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{
 		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: getGetBucketLifecycleConfigurationARNMember,
 			BackfillAccountID: backFillGetBucketLifecycleConfigurationAccountID,
-			GetOutpostIDInput: getOutpostIDFromInput,
+			GetOutpostIDInput: nopGetOutpostIDFromInput,
 			UpdateARNField:    setGetBucketLifecycleConfigurationARNMember,
 			CopyInput:         copyGetBucketLifecycleConfigurationInputForUpdateEndpoint,
 		},

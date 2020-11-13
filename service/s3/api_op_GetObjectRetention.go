@@ -153,10 +153,21 @@ func newServiceMetadataMiddleware_opGetObjectRetention(region string) *awsmiddle
 	}
 }
 
+// getGetObjectRetentionBucketMember returns a pointer to string denoting a
+// provided bucket member valueand a boolean indicating if the input has a modeled
+// bucket name,
+func getGetObjectRetentionBucketMember(input interface{}) (*string, bool) {
+	in := input.(*GetObjectRetentionInput)
+	if in.Bucket == nil {
+		return nil, false
+	}
+	return in.Bucket, true
+}
 func addGetObjectRetentionUpdateEndpoint(stack *middleware.Stack, options Options) error {
 	return s3cust.UpdateEndpoint(stack, s3cust.UpdateEndpointOptions{
-		Accessor: s3cust.UpdateEndpointParameterAccessor{GetBucketFromInput: getBucketFromInput,
-			SupportsAccelerate: supportAccelerate,
+		Accessor: s3cust.UpdateEndpointParameterAccessor{
+			GetBucketFromInput: getGetObjectRetentionBucketMember,
+			SupportsAccelerate: true,
 		},
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,

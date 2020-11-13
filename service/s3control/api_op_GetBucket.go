@@ -232,7 +232,7 @@ func addGetBucketUpdateEndpoint(stack *middleware.Stack, options Options) error 
 	return s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{
 		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: getGetBucketARNMember,
 			BackfillAccountID: backFillGetBucketAccountID,
-			GetOutpostIDInput: getOutpostIDFromInput,
+			GetOutpostIDInput: nopGetOutpostIDFromInput,
 			UpdateARNField:    setGetBucketARNMember,
 			CopyInput:         copyGetBucketInputForUpdateEndpoint,
 		},

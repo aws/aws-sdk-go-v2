@@ -247,7 +247,7 @@ func addGetBucketPolicyUpdateEndpoint(stack *middleware.Stack, options Options) 
 	return s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{
 		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: getGetBucketPolicyARNMember,
 			BackfillAccountID: backFillGetBucketPolicyAccountID,
-			GetOutpostIDInput: getOutpostIDFromInput,
+			GetOutpostIDInput: nopGetOutpostIDFromInput,
 			UpdateARNField:    setGetBucketPolicyARNMember,
 			CopyInput:         copyGetBucketPolicyInputForUpdateEndpoint,
 		},

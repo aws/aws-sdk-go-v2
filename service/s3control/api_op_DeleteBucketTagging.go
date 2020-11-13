@@ -231,7 +231,7 @@ func addDeleteBucketTaggingUpdateEndpoint(stack *middleware.Stack, options Optio
 	return s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{
 		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: getDeleteBucketTaggingARNMember,
 			BackfillAccountID: backFillDeleteBucketTaggingAccountID,
-			GetOutpostIDInput: getOutpostIDFromInput,
+			GetOutpostIDInput: nopGetOutpostIDFromInput,
 			UpdateARNField:    setDeleteBucketTaggingARNMember,
 			CopyInput:         copyDeleteBucketTaggingInputForUpdateEndpoint,
 		},

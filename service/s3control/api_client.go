@@ -240,17 +240,29 @@ func addMetadataRetrieverMiddleware(stack *middleware.Stack) error {
 	return s3shared.AddMetadataRetrieverMiddleware(stack)
 }
 
-// getOutpostIDFromInput returns a boolean indicating if the input has a modeled
-// outpost-id, and a pointer to string denoting a provided outpost-id member value
-func getOutpostIDFromInput(input interface{}) (*string, bool) {
-	switch i := input.(type) {
-	case *CreateBucketInput:
-		return i.OutpostId, true
-	case *ListRegionalBucketsInput:
-		return i.OutpostId, true
-	default:
-		return nil, false
-	}
+// nopGetOutpostIDFromInput provides a nop accessor function to be used when
+// endpoint customization behavior is not based on presence of outpost id member if
+// any
+func nopGetOutpostIDFromInput(input interface{}) (*string, bool) {
+	return nil, false
+}
+
+// nopGetARNAccessor provides a nop get accessor function to be used when a certain
+// operation does not support ARNs
+func nopGetARNAccessor(input interface{}) (*string, bool) {
+	return nil, false
+}
+
+// nopSetARNAccessor provides a nop set accessor function to be used when a certain
+// operation does not support ARNs
+func nopSetARNAccessor(input interface{}, v string) error {
+	return nil
+}
+
+// nopBackfillAccountIDAccessor provides a nop accessor function to be used when a
+// certain operation does not need to validate and backfill account id
+func nopBackfillAccountIDAccessor(input interface{}, v string) error {
+	return nil
 }
 
 func addResponseErrorMiddleware(stack *middleware.Stack) error {

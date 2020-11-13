@@ -150,10 +150,21 @@ func newServiceMetadataMiddleware_opDeleteBucketInventoryConfiguration(region st
 	}
 }
 
+// getDeleteBucketInventoryConfigurationBucketMember returns a pointer to string
+// denoting a provided bucket member valueand a boolean indicating if the input has
+// a modeled bucket name,
+func getDeleteBucketInventoryConfigurationBucketMember(input interface{}) (*string, bool) {
+	in := input.(*DeleteBucketInventoryConfigurationInput)
+	if in.Bucket == nil {
+		return nil, false
+	}
+	return in.Bucket, true
+}
 func addDeleteBucketInventoryConfigurationUpdateEndpoint(stack *middleware.Stack, options Options) error {
 	return s3cust.UpdateEndpoint(stack, s3cust.UpdateEndpointOptions{
-		Accessor: s3cust.UpdateEndpointParameterAccessor{GetBucketFromInput: getBucketFromInput,
-			SupportsAccelerate: supportAccelerate,
+		Accessor: s3cust.UpdateEndpointParameterAccessor{
+			GetBucketFromInput: getDeleteBucketInventoryConfigurationBucketMember,
+			SupportsAccelerate: true,
 		},
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,

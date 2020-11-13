@@ -147,10 +147,20 @@ func newServiceMetadataMiddleware_opHeadBucket(region string) *awsmiddleware.Reg
 	}
 }
 
+// getHeadBucketBucketMember returns a pointer to string denoting a provided bucket
+// member valueand a boolean indicating if the input has a modeled bucket name,
+func getHeadBucketBucketMember(input interface{}) (*string, bool) {
+	in := input.(*HeadBucketInput)
+	if in.Bucket == nil {
+		return nil, false
+	}
+	return in.Bucket, true
+}
 func addHeadBucketUpdateEndpoint(stack *middleware.Stack, options Options) error {
 	return s3cust.UpdateEndpoint(stack, s3cust.UpdateEndpointOptions{
-		Accessor: s3cust.UpdateEndpointParameterAccessor{GetBucketFromInput: getBucketFromInput,
-			SupportsAccelerate: supportAccelerate,
+		Accessor: s3cust.UpdateEndpointParameterAccessor{
+			GetBucketFromInput: getHeadBucketBucketMember,
+			SupportsAccelerate: true,
 		},
 		UsePathStyle:            options.UsePathStyle,
 		UseAccelerate:           options.UseAccelerate,

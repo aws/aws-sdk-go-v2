@@ -235,7 +235,7 @@ func addPutAccessPointPolicyUpdateEndpoint(stack *middleware.Stack, options Opti
 	return s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{
 		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: getPutAccessPointPolicyARNMember,
 			BackfillAccountID: backFillPutAccessPointPolicyAccountID,
-			GetOutpostIDInput: getOutpostIDFromInput,
+			GetOutpostIDInput: nopGetOutpostIDFromInput,
 			UpdateARNField:    setPutAccessPointPolicyARNMember,
 			CopyInput:         copyPutAccessPointPolicyInputForUpdateEndpoint,
 		},

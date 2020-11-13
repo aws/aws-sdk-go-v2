@@ -186,12 +186,6 @@ func copyGetPublicAccessBlockInputForUpdateEndpoint(params interface{}) (interfa
 	cpy := *input
 	return &cpy, nil
 }
-func getGetPublicAccessBlockARNMember(input interface{}) (*string, bool) {
-	return nil, false
-}
-func setGetPublicAccessBlockARNMember(input interface{}, v string) error {
-	return nil
-}
 func backFillGetPublicAccessBlockAccountID(input interface{}, v string) error {
 	in := input.(*GetPublicAccessBlockInput)
 	if in.AccountId != nil {
@@ -205,10 +199,10 @@ func backFillGetPublicAccessBlockAccountID(input interface{}, v string) error {
 }
 func addGetPublicAccessBlockUpdateEndpoint(stack *middleware.Stack, options Options) error {
 	return s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{
-		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: getGetPublicAccessBlockARNMember,
-			BackfillAccountID: backFillGetPublicAccessBlockAccountID,
-			GetOutpostIDInput: getOutpostIDFromInput,
-			UpdateARNField:    setGetPublicAccessBlockARNMember,
+		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: nopGetARNAccessor,
+			BackfillAccountID: nopBackfillAccountIDAccessor,
+			GetOutpostIDInput: nopGetOutpostIDFromInput,
+			UpdateARNField:    nopSetARNAccessor,
 			CopyInput:         copyGetPublicAccessBlockInputForUpdateEndpoint,
 		},
 		EndpointResolver:        options.EndpointResolver,

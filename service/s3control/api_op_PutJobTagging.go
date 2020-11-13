@@ -239,12 +239,6 @@ func copyPutJobTaggingInputForUpdateEndpoint(params interface{}) (interface{}, e
 	cpy := *input
 	return &cpy, nil
 }
-func getPutJobTaggingARNMember(input interface{}) (*string, bool) {
-	return nil, false
-}
-func setPutJobTaggingARNMember(input interface{}, v string) error {
-	return nil
-}
 func backFillPutJobTaggingAccountID(input interface{}, v string) error {
 	in := input.(*PutJobTaggingInput)
 	if in.AccountId != nil {
@@ -258,10 +252,10 @@ func backFillPutJobTaggingAccountID(input interface{}, v string) error {
 }
 func addPutJobTaggingUpdateEndpoint(stack *middleware.Stack, options Options) error {
 	return s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{
-		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: getPutJobTaggingARNMember,
-			BackfillAccountID: backFillPutJobTaggingAccountID,
-			GetOutpostIDInput: getOutpostIDFromInput,
-			UpdateARNField:    setPutJobTaggingARNMember,
+		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: nopGetARNAccessor,
+			BackfillAccountID: nopBackfillAccountIDAccessor,
+			GetOutpostIDInput: nopGetOutpostIDFromInput,
+			UpdateARNField:    nopSetARNAccessor,
 			CopyInput:         copyPutJobTaggingInputForUpdateEndpoint,
 		},
 		EndpointResolver:        options.EndpointResolver,

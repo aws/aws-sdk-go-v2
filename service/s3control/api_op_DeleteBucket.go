@@ -233,7 +233,7 @@ func addDeleteBucketUpdateEndpoint(stack *middleware.Stack, options Options) err
 	return s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{
 		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: getDeleteBucketARNMember,
 			BackfillAccountID: backFillDeleteBucketAccountID,
-			GetOutpostIDInput: getOutpostIDFromInput,
+			GetOutpostIDInput: nopGetOutpostIDFromInput,
 			UpdateARNField:    setDeleteBucketARNMember,
 			CopyInput:         copyDeleteBucketInputForUpdateEndpoint,
 		},

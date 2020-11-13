@@ -210,12 +210,6 @@ func copyUpdateJobPriorityInputForUpdateEndpoint(params interface{}) (interface{
 	cpy := *input
 	return &cpy, nil
 }
-func getUpdateJobPriorityARNMember(input interface{}) (*string, bool) {
-	return nil, false
-}
-func setUpdateJobPriorityARNMember(input interface{}, v string) error {
-	return nil
-}
 func backFillUpdateJobPriorityAccountID(input interface{}, v string) error {
 	in := input.(*UpdateJobPriorityInput)
 	if in.AccountId != nil {
@@ -229,10 +223,10 @@ func backFillUpdateJobPriorityAccountID(input interface{}, v string) error {
 }
 func addUpdateJobPriorityUpdateEndpoint(stack *middleware.Stack, options Options) error {
 	return s3controlcust.UpdateEndpoint(stack, s3controlcust.UpdateEndpointOptions{
-		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: getUpdateJobPriorityARNMember,
-			BackfillAccountID: backFillUpdateJobPriorityAccountID,
-			GetOutpostIDInput: getOutpostIDFromInput,
-			UpdateARNField:    setUpdateJobPriorityARNMember,
+		Accessor: s3controlcust.UpdateEndpointParameterAccessor{GetARNInput: nopGetARNAccessor,
+			BackfillAccountID: nopBackfillAccountIDAccessor,
+			GetOutpostIDInput: nopGetOutpostIDFromInput,
+			UpdateARNField:    nopSetARNAccessor,
 			CopyInput:         copyUpdateJobPriorityInputForUpdateEndpoint,
 		},
 		EndpointResolver:        options.EndpointResolver,
