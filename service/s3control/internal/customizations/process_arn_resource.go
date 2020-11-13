@@ -28,6 +28,9 @@ const (
 // processARNResource is used to process an ARN resource.
 type processARNResource struct {
 
+	// CopyInput creates a copy of input to be modified, this ensures the original input is not modified.
+	CopyInput func(interface{}) (interface{}, error)
+
 	// UpdateARNField points to a function that takes in a copy of input, updates the ARN field with
 	// the provided value and returns the input
 	UpdateARNField func(interface{}, string) error
@@ -53,14 +56,14 @@ func (m *processARNResource) HandleSerialize(
 ) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
-	// check if arn was provided, if not skip this middleware
-	arnValue, ok := s3shared.GetARNResourceFromContext(ctx)
-	if !ok {
+	// if arn region resolves to custom endpoint that is mutable
+	if smithyhttp.GetHostnameImmutable(ctx) {
 		return next.HandleSerialize(ctx, in)
 	}
 
-	// if arn region resolves to custom endpoint that is mutable
-	if smithyhttp.GetHostnameImmutable(ctx) {
+	// check if arn was provided, if not skip this middleware
+	arnValue, ok := s3shared.GetARNResourceFromContext(ctx)
+	if !ok {
 		return next.HandleSerialize(ctx, in)
 	}
 
@@ -110,6 +113,15 @@ func (m *processARNResource) HandleSerialize(
 			return out, metadata, fmt.Errorf("error updating arnable field while serializing")
 		}
 
+		if !s3shared.IsClonedInput(ctx) {
+			in.Parameters, err = m.CopyInput(in.Parameters)
+			if err != nil {
+				return out, metadata, fmt.Errorf("error creating a copy of input while processing arn")
+			}
+			// set copy input key on context
+			ctx = s3shared.SetClonedInputKey(ctx, true)
+		}
+
 		// update the arnable field with access point name
 		err = m.UpdateARNField(in.Parameters, tv.AccessPointName)
 		if err != nil {
@@ -155,6 +167,16 @@ func (m *processARNResource) HandleSerialize(
 		if m.UpdateARNField == nil {
 			return out, metadata, fmt.Errorf("error updating arnable field while serializing")
 		}
+
+		if !s3shared.IsClonedInput(ctx) {
+			in.Parameters, err = m.CopyInput(in.Parameters)
+			if err != nil {
+				return out, metadata, fmt.Errorf("error creating a copy of input while processing arn")
+			}
+			// set copy input key on context
+			ctx = s3shared.SetClonedInputKey(ctx, true)
+		}
+
 		// update the arnable field with bucket name
 		err = m.UpdateARNField(in.Parameters, tv.BucketName)
 		if err != nil {

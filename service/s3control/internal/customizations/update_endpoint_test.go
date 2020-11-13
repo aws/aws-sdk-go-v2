@@ -155,143 +155,142 @@ func TestEndpointWithARN(t *testing.T) {
 		expectedHeaderForOutpostID string
 		expectedHeaderForAccountID bool
 	}{
-		// "Outpost AccessPoint with no S3UseARNRegion flag set": {
-		// 	bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-		// 	options: s3control.Options{
-		// 		Region: "us-west-2",
-		// 	},
-		// 	expectedReqURL:             "https://s3-outposts.us-west-2.amazonaws.com/v20180820/bucket/myaccesspoint",
-		// 	expectedSigningName:        "s3-outposts",
-		// 	expectedSigningRegion:      "us-west-2",
-		// 	expectedHeaderForAccountID: true,
-		// 	expectedHeaderForOutpostID: "op-01234567890123456",
-		// },
-		// "Outpost AccessPoint Cross-Region Enabled": {
-		// 	bucket: "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-		// 	options: s3control.Options{
-		// 		Region:       "us-west-2",
-		// 		UseARNRegion: true,
-		// 	},
-		// 	expectedReqURL:             "https://s3-outposts.us-east-1.amazonaws.com/v20180820/bucket/myaccesspoint",
-		// 	expectedSigningName:        "s3-outposts",
-		// 	expectedSigningRegion:      "us-east-1",
-		// 	expectedHeaderForAccountID: true,
-		// 	expectedHeaderForOutpostID: "op-01234567890123456",
-		// },
-		// "Outpost AccessPoint Cross-Region Disabled": {
-		// 	bucket: "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-		// 	options: s3control.Options{
-		// 		Region: "us-west-2",
-		// 	},
-		// 	expectedErr: "client region does not match provided ARN region",
-		// },
-		// "Outpost AccessPoint other partition": {
-		// 	bucket: "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-		// 	options: s3control.Options{
-		// 		Region:       "us-west-2",
-		// 		UseARNRegion: true,
-		// 	},
-		// 	expectedErr: "ConfigurationError : client partition does not match provided ARN partition",
-		// },
-		// "Outpost AccessPoint us-gov region": {
-		// 	bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-		// 	options: s3control.Options{
-		// 		Region:       "us-gov-east-1",
-		// 		UseARNRegion: true,
-		// 	},
-		// 	expectedReqURL:             "https://s3-outposts.us-gov-east-1.amazonaws.com/v20180820/bucket/myaccesspoint",
-		// 	expectedSigningName:        "s3-outposts",
-		// 	expectedSigningRegion:      "us-gov-east-1",
-		// 	expectedHeaderForAccountID: true,
-		// 	expectedHeaderForOutpostID: "op-01234567890123456",
-		// },
-		// "Outpost AccessPoint with client region as Fips": {
-		// 	bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-		// 	options: s3control.Options{
-		// 		Region: "us-gov-east-1-fips",
-		// 	},
-		// 	expectedErr: "InvalidARNError : resource ARN not supported for FIPS region",
-		// },
-		// "Outpost AccessPoint with client Fips region and use arn region enabled": {
-		// 	bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-		// 	options: s3control.Options{
-		// 		Region:       "us-gov-east-1-fips",
-		// 		UseARNRegion: true,
-		// 	},
-		// 	expectedSigningName:        "s3-outposts",
-		// 	expectedSigningRegion:      "us-gov-east-1",
-		// 	expectedReqURL:             "https://s3-outposts.us-gov-east-1.amazonaws.com/v20180820/bucket/myaccesspoint",
-		// 	expectedHeaderForAccountID: true,
-		// 	expectedHeaderForOutpostID: "op-01234567890123456",
-		// },
-		// "Outpost AccessPoint Fips region in Arn": {
-		// 	bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1-fips:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-		// 	options: s3control.Options{
-		// 		Region:       "us-gov-east-1-fips",
-		// 		UseARNRegion: true,
-		// 	},
-		// 	expectedErr: "InvalidARNError : resource ARN not supported for FIPS region",
-		// },
-		// "Outpost AccessPoint Fips region with valid ARN region": {
-		// 	bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-		// 	options: s3control.Options{
-		// 		Region:       "us-gov-east-1-fips",
-		// 		UseARNRegion: true,
-		// 	},
-		// 	expectedReqURL:             "https://s3-outposts.us-gov-east-1.amazonaws.com/v20180820/bucket/myaccesspoint",
-		// 	expectedSigningName:        "s3-outposts",
-		// 	expectedSigningRegion:      "us-gov-east-1",
-		// 	expectedHeaderForAccountID: true,
-		// 	expectedHeaderForOutpostID: "op-01234567890123456",
-		// },
-		// "Outpost AccessPoint with DualStack": {
-		// 	bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-		// 	options: s3control.Options{
-		// 		Region:       "us-west-2",
-		// 		UseARNRegion: true,
-		// 		UseDualstack: true,
-		// 	},
-		// 	expectedErr: "ConfigurationError : client configured for S3 Dual-stack but is not supported with resource ARN",
-		// },
-		// "Invalid outpost resource format": {
-		// 	bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost",
-		// 	options: s3control.Options{
-		// 		Region: "us-west-2",
-		// 	},
-		// 	expectedErr: "outpost resource-id not set",
-		// },
-		// "Missing access point for outpost resource": {
-		// 	bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456",
-		// 	options: s3control.Options{
-		// 		Region: "us-west-2",
-		// 	},
-		// 	expectedErr: "incomplete outpost resource type",
-		// },
-		// "access point": {
-		// 	bucket: "myaccesspoint",
-		// 	options: s3control.Options{
-		// 		Region: "us-west-2",
-		// 	},
-		// 	expectedReqURL:             "https://123456789012.s3-control.us-west-2.amazonaws.com/v20180820/bucket/myaccesspoint",
-		// 	expectedHeaderForAccountID: true,
-		// 	expectedSigningRegion:      "us-west-2",
-		// 	expectedSigningName:        "s3",
-		// },
-		// "outpost access point with unsupported sub-resource": {
-		// 	bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:mybucket:object:foo",
-		// 	options: s3control.Options{
-		// 		Region: "us-west-2",
-		// 	},
-		// 	expectedErr: "sub resource not supported",
-		// },
-		// "Missing outpost identifiers in outpost access point arn": {
-		// 	bucket: "arn:aws:s3-outposts:us-west-2:123456789012:accesspoint:myendpoint",
-		// 	options: s3control.Options{
-		// 		Region: "us-west-2",
-		// 	},
-		// 	expectedErr: "invalid Amazon s3-outposts ARN",
-		// },
-		// Outpost Bucket
+		"Outpost AccessPoint with no S3UseARNRegion flag set": {
+			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			options: s3control.Options{
+				Region: "us-west-2",
+			},
+			expectedReqURL:             "https://s3-outposts.us-west-2.amazonaws.com/v20180820/bucket/myaccesspoint",
+			expectedSigningName:        "s3-outposts",
+			expectedSigningRegion:      "us-west-2",
+			expectedHeaderForAccountID: true,
+			expectedHeaderForOutpostID: "op-01234567890123456",
+		},
+		"Outpost AccessPoint Cross-Region Enabled": {
+			bucket: "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			options: s3control.Options{
+				Region:       "us-west-2",
+				UseARNRegion: true,
+			},
+			expectedReqURL:             "https://s3-outposts.us-east-1.amazonaws.com/v20180820/bucket/myaccesspoint",
+			expectedSigningName:        "s3-outposts",
+			expectedSigningRegion:      "us-east-1",
+			expectedHeaderForAccountID: true,
+			expectedHeaderForOutpostID: "op-01234567890123456",
+		},
+		"Outpost AccessPoint Cross-Region Disabled": {
+			bucket: "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			options: s3control.Options{
+				Region: "us-west-2",
+			},
+			expectedErr: "client region does not match provided ARN region",
+		},
+		"Outpost AccessPoint other partition": {
+			bucket: "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			options: s3control.Options{
+				Region:       "us-west-2",
+				UseARNRegion: true,
+			},
+			expectedErr: "ConfigurationError : client partition does not match provided ARN partition",
+		},
+		"Outpost AccessPoint us-gov region": {
+			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			options: s3control.Options{
+				Region:       "us-gov-east-1",
+				UseARNRegion: true,
+			},
+			expectedReqURL:             "https://s3-outposts.us-gov-east-1.amazonaws.com/v20180820/bucket/myaccesspoint",
+			expectedSigningName:        "s3-outposts",
+			expectedSigningRegion:      "us-gov-east-1",
+			expectedHeaderForAccountID: true,
+			expectedHeaderForOutpostID: "op-01234567890123456",
+		},
+		"Outpost AccessPoint with client region as Fips": {
+			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			options: s3control.Options{
+				Region: "us-gov-east-1-fips",
+			},
+			expectedErr: "InvalidARNError : resource ARN not supported for FIPS region",
+		},
+		"Outpost AccessPoint with client Fips region and use arn region enabled": {
+			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			options: s3control.Options{
+				Region:       "us-gov-east-1-fips",
+				UseARNRegion: true,
+			},
+			expectedSigningName:        "s3-outposts",
+			expectedSigningRegion:      "us-gov-east-1",
+			expectedReqURL:             "https://s3-outposts.us-gov-east-1.amazonaws.com/v20180820/bucket/myaccesspoint",
+			expectedHeaderForAccountID: true,
+			expectedHeaderForOutpostID: "op-01234567890123456",
+		},
+		"Outpost AccessPoint Fips region in Arn": {
+			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1-fips:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			options: s3control.Options{
+				Region:       "us-gov-east-1-fips",
+				UseARNRegion: true,
+			},
+			expectedErr: "InvalidARNError : resource ARN not supported for FIPS region",
+		},
+		"Outpost AccessPoint Fips region with valid ARN region": {
+			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			options: s3control.Options{
+				Region:       "us-gov-east-1-fips",
+				UseARNRegion: true,
+			},
+			expectedReqURL:             "https://s3-outposts.us-gov-east-1.amazonaws.com/v20180820/bucket/myaccesspoint",
+			expectedSigningName:        "s3-outposts",
+			expectedSigningRegion:      "us-gov-east-1",
+			expectedHeaderForAccountID: true,
+			expectedHeaderForOutpostID: "op-01234567890123456",
+		},
+		"Outpost AccessPoint with DualStack": {
+			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			options: s3control.Options{
+				Region:       "us-west-2",
+				UseARNRegion: true,
+				UseDualstack: true,
+			},
+			expectedErr: "ConfigurationError : client configured for S3 Dual-stack but is not supported with resource ARN",
+		},
+		"Invalid outpost resource format": {
+			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost",
+			options: s3control.Options{
+				Region: "us-west-2",
+			},
+			expectedErr: "outpost resource-id not set",
+		},
+		"Missing access point for outpost resource": {
+			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456",
+			options: s3control.Options{
+				Region: "us-west-2",
+			},
+			expectedErr: "incomplete outpost resource type",
+		},
+		"access point": {
+			bucket: "myaccesspoint",
+			options: s3control.Options{
+				Region: "us-west-2",
+			},
+			expectedReqURL:             "https://123456789012.s3-control.us-west-2.amazonaws.com/v20180820/bucket/myaccesspoint",
+			expectedHeaderForAccountID: true,
+			expectedSigningRegion:      "us-west-2",
+			expectedSigningName:        "s3",
+		},
+		"outpost access point with unsupported sub-resource": {
+			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:mybucket:object:foo",
+			options: s3control.Options{
+				Region: "us-west-2",
+			},
+			expectedErr: "sub resource not supported",
+		},
+		"Missing outpost identifiers in outpost access point arn": {
+			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:accesspoint:myendpoint",
+			options: s3control.Options{
+				Region: "us-west-2",
+			},
+			expectedErr: "invalid Amazon s3-outposts ARN",
+		},
 		"Outpost Bucket with no S3UseARNRegion flag set": {
 			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket",
 			options: s3control.Options{
@@ -303,94 +302,94 @@ func TestEndpointWithARN(t *testing.T) {
 			expectedHeaderForOutpostID: "op-01234567890123456",
 			expectedHeaderForAccountID: true,
 		},
-		// "Outpost Bucket Cross-Region Enabled": {
-		// 	bucket: "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
-		// 	options: s3control.Options{
-		// 		Region:       "us-west-2",
-		// 		UseARNRegion: true,
-		// 	},
-		// 	expectedReqURL:             "https://s3-outposts.us-east-1.amazonaws.com/v20180820/bucket/mybucket",
-		// 	expectedSigningName:        "s3-outposts",
-		// 	expectedSigningRegion:      "us-east-1",
-		// 	expectedHeaderForOutpostID: "op-01234567890123456",
-		// 	expectedHeaderForAccountID: true,
-		// },
-		// "Outpost Bucket Cross-Region Disabled": {
-		// 	bucket: "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
-		// 	options: s3control.Options{
-		// 		Region: "us-west-2",
-		// 	},
-		// 	expectedErr: "client region does not match provided ARN region",
-		// },
-		// "Outpost Bucket other partition": {
-		// 	bucket: "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
-		// 	options: s3control.Options{
-		// 		Region:       "us-west-2",
-		// 		UseARNRegion: true,
-		// 	},
-		// 	expectedErr: "ConfigurationError : client partition does not match provided ARN partition",
-		// },
-		// "Outpost Bucket us-gov region": {
-		// 	bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
-		// 	options: s3control.Options{
-		// 		Region:       "us-gov-east-1",
-		// 		UseARNRegion: true,
-		// 	},
-		// 	expectedReqURL:             "https://s3-outposts.us-gov-east-1.amazonaws.com/v20180820/bucket/mybucket",
-		// 	expectedSigningName:        "s3-outposts",
-		// 	expectedSigningRegion:      "us-gov-east-1",
-		// 	expectedHeaderForOutpostID: "op-01234567890123456",
-		// 	expectedHeaderForAccountID: true,
-		// },
-		// "Outpost Bucket Fips region": {
-		// 	bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
-		// 	options: s3control.Options{
-		// 		Region: "us-gov-west-1-fips",
-		// 	},
-		// 	expectedErr: "ConfigurationError : client region does not match provided ARN region",
-		// },
-		// "Outpost Bucket Fips region in Arn": {
-		// 	bucket: "arn:aws-us-gov:s3-outposts:fips-us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
-		// 	options: s3control.Options{
-		// 		Region:       "us-gov-east-1-fips",
-		// 		UseARNRegion: true,
-		// 	},
-		// 	expectedErr: "InvalidARNError : resource ARN not supported for FIPS region",
-		// },
-		// "Outpost Bucket Fips region with valid ARN region": {
-		// 	bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
-		// 	options: s3control.Options{
-		// 		Region:       "us-gov-east-1-fips",
-		// 		UseARNRegion: true,
-		// 	},
-		// 	expectedReqURL:             "https://s3-outposts.us-gov-east-1.amazonaws.com/v20180820/bucket/mybucket",
-		// 	expectedSigningName:        "s3-outposts",
-		// 	expectedSigningRegion:      "us-gov-east-1",
-		// 	expectedHeaderForOutpostID: "op-01234567890123456",
-		// 	expectedHeaderForAccountID: true,
-		// },
-		// "Outpost Bucket with DualStack": {
-		// 	bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket",
-		// 	options: s3control.Options{
-		// 		Region:       "us-west-2",
-		// 		UseDualstack: true,
-		// 	},
-		// 	expectedErr: "ConfigurationError : client configured for S3 Dual-stack but is not supported with resource ARN",
-		// },
-		// "Missing bucket id": {
-		// 	bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket",
-		// 	options: s3control.Options{
-		// 		Region: "us-west-2",
-		// 	},
-		// 	expectedErr: "invalid Amazon s3-outposts ARN",
-		// },
-		// "Invalid ARN": {
-		// 	bucket: "arn:aws:s3-outposts:us-west-2:123456789012:bucket:mybucket",
-		// 	options: s3control.Options{
-		// 		Region: "us-west-2",
-		// 	},
-		// 	expectedErr: "invalid Amazon s3-outposts ARN, unknown resource type",
-		// },
+		"Outpost Bucket Cross-Region Enabled": {
+			bucket: "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+			options: s3control.Options{
+				Region:       "us-west-2",
+				UseARNRegion: true,
+			},
+			expectedReqURL:             "https://s3-outposts.us-east-1.amazonaws.com/v20180820/bucket/mybucket",
+			expectedSigningName:        "s3-outposts",
+			expectedSigningRegion:      "us-east-1",
+			expectedHeaderForOutpostID: "op-01234567890123456",
+			expectedHeaderForAccountID: true,
+		},
+		"Outpost Bucket Cross-Region Disabled": {
+			bucket: "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+			options: s3control.Options{
+				Region: "us-west-2",
+			},
+			expectedErr: "client region does not match provided ARN region",
+		},
+		"Outpost Bucket other partition": {
+			bucket: "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+			options: s3control.Options{
+				Region:       "us-west-2",
+				UseARNRegion: true,
+			},
+			expectedErr: "ConfigurationError : client partition does not match provided ARN partition",
+		},
+		"Outpost Bucket us-gov region": {
+			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+			options: s3control.Options{
+				Region:       "us-gov-east-1",
+				UseARNRegion: true,
+			},
+			expectedReqURL:             "https://s3-outposts.us-gov-east-1.amazonaws.com/v20180820/bucket/mybucket",
+			expectedSigningName:        "s3-outposts",
+			expectedSigningRegion:      "us-gov-east-1",
+			expectedHeaderForOutpostID: "op-01234567890123456",
+			expectedHeaderForAccountID: true,
+		},
+		"Outpost Bucket Fips region": {
+			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+			options: s3control.Options{
+				Region: "us-gov-west-1-fips",
+			},
+			expectedErr: "ConfigurationError : client region does not match provided ARN region",
+		},
+		"Outpost Bucket Fips region in Arn": {
+			bucket: "arn:aws-us-gov:s3-outposts:fips-us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+			options: s3control.Options{
+				Region:       "us-gov-east-1-fips",
+				UseARNRegion: true,
+			},
+			expectedErr: "InvalidARNError : resource ARN not supported for FIPS region",
+		},
+		"Outpost Bucket Fips region with valid ARN region": {
+			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+			options: s3control.Options{
+				Region:       "us-gov-east-1-fips",
+				UseARNRegion: true,
+			},
+			expectedReqURL:             "https://s3-outposts.us-gov-east-1.amazonaws.com/v20180820/bucket/mybucket",
+			expectedSigningName:        "s3-outposts",
+			expectedSigningRegion:      "us-gov-east-1",
+			expectedHeaderForOutpostID: "op-01234567890123456",
+			expectedHeaderForAccountID: true,
+		},
+		"Outpost Bucket with DualStack": {
+			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+			options: s3control.Options{
+				Region:       "us-west-2",
+				UseDualstack: true,
+			},
+			expectedErr: "ConfigurationError : client configured for S3 Dual-stack but is not supported with resource ARN",
+		},
+		"Missing bucket id": {
+			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket",
+			options: s3control.Options{
+				Region: "us-west-2",
+			},
+			expectedErr: "invalid Amazon s3-outposts ARN",
+		},
+		"Invalid ARN": {
+			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:bucket:mybucket",
+			options: s3control.Options{
+				Region: "us-west-2",
+			},
+			expectedErr: "invalid Amazon s3-outposts ARN, unknown resource type",
+		},
 	}
 
 	for name, c := range cases {

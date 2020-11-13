@@ -61,24 +61,25 @@ type UpdateEndpointOptions struct {
 // UpdateEndpoint adds the middleware to the middleware stack based on the UpdateEndpointOptions.
 func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) (err error) {
 	// validate and backfill account id from ARN
-	err = stack.Initialize.Insert(&BackfillInputMiddleware{
+	err = stack.Initialize.Add(&BackfillInput{
 		CopyInput:         options.Accessor.CopyInput,
 		BackfillAccountID: options.Accessor.BackfillAccountID,
-	}, "OperationInputValidation", middleware.Before)
+	}, middleware.Before)
 	if err != nil {
 		return err
 	}
 
-	// initial arn look up middleware should be before BackfillInputMiddleware
+	// initial arn look up middleware should be before BackfillInput
 	err = stack.Initialize.Insert(&s3shared.ARNLookup{
 		GetARNValue: options.Accessor.GetARNInput,
-	}, (*BackfillInputMiddleware)(nil).ID(), middleware.Before)
+	}, (*BackfillInput)(nil).ID(), middleware.Before)
 	if err != nil {
 		return err
 	}
 
 	// process arn
 	err = stack.Serialize.Insert(&processARNResource{
+		CopyInput:               options.Accessor.CopyInput,
 		UpdateARNField:          options.Accessor.UpdateARNField,
 		UseARNRegion:            options.UseARNRegion,
 		UseDualstack:            options.UseDualstack,
@@ -93,7 +94,7 @@ func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) (err
 	err = stack.Serialize.Insert(&processOutpostIDMiddleware{
 		GetOutpostID: options.Accessor.GetOutpostIDInput,
 		UseDualstack: options.UseDualstack,
-	}, (&processARNResource{}).ID(), middleware.Before)
+	}, (*processARNResource)(nil).ID(), middleware.Before)
 	if err != nil {
 		return err
 	}
