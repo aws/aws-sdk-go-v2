@@ -54,8 +54,8 @@ other interfaces to get more information about an error.
 ## Specific Error Interfaces
 
 Other packages might provide their own error interfaces. For example,
-the {{< apiref "feature/s3/manager" >}}feature/s3/manager{{< /apiref >}} package
-provides a {{< apiref "feature/s3/manager#MultiUploadFailure" >}}MultiUploadFailure{{< /apiref >}}
+the [feature/s3/manager]({{< apiref "feature/s3/manager" >}}) package
+provides a [MultiUploadFailure]({{< apiref "feature/s3/manager#MultiUploadFailure" >}})
 interface to retrieve the upload ID. This is helpful when you must
 manually clean up a failed multi-part upload.
 
@@ -72,5 +72,5 @@ output, err := s3manager.Upload(svc, input, opts)
  }
 ```
 
-For more information, see the {{< apiref "feature/s3/manager#MultiUploadFailure" >}}MultiUploadFailure{{< /apiref >}}
+For more information, see the [MultiUploadFailure]({{< apiref "feature/s3/manager#MultiUploadFailure" >}})MultiUploadFailure
 interface in the {{% alias sdk-api %}}.
