@@ -37,7 +37,7 @@ type DisassociateIpGroupsInput struct {
 	// The identifiers of one or more IP access control groups.
 	//
 	// This member is required.
-	GroupIds []*string
+	GroupIds []string
 }
 
 type DisassociateIpGroupsOutput struct {

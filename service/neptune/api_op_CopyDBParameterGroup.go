@@ -66,7 +66,7 @@ type CopyDBParameterGroupInput struct {
 	TargetDBParameterGroupIdentifier *string
 
 	// The tags to be assigned to the copied DB parameter group.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CopyDBParameterGroupOutput struct {

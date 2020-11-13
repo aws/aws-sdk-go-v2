@@ -43,7 +43,7 @@ type ListProvisionedProductPlansInput struct {
 	AccessLevelFilter *types.AccessLevelFilter
 
 	// The maximum number of items to return with this call.
-	PageSize *int32
+	PageSize int32
 
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
@@ -60,7 +60,7 @@ type ListProvisionedProductPlansOutput struct {
 	NextPageToken *string
 
 	// Information about the plans.
-	ProvisionedProductPlans []*types.ProvisionedProductPlanSummary
+	ProvisionedProductPlans []types.ProvisionedProductPlanSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

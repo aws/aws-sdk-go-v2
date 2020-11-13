@@ -149,13 +149,10 @@ func awsRestjson1_serializeOpHttpBindingsCreateConfigurationSetEventDestinationI
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ConfigurationSetName == nil {
+	if v.ConfigurationSetName == nil || len(*v.ConfigurationSetName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationSetName must not be empty")}
 	}
 	if v.ConfigurationSetName != nil {
-		if len(*v.ConfigurationSetName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationSetName must not be empty")}
-		}
 		if err := encoder.SetURI("ConfigurationSetName").String(*v.ConfigurationSetName); err != nil {
 			return err
 		}
@@ -234,13 +231,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteConfigurationSetInput(v *DeleteCo
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ConfigurationSetName == nil {
+	if v.ConfigurationSetName == nil || len(*v.ConfigurationSetName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationSetName must not be empty")}
 	}
 	if v.ConfigurationSetName != nil {
-		if len(*v.ConfigurationSetName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationSetName must not be empty")}
-		}
 		if err := encoder.SetURI("ConfigurationSetName").String(*v.ConfigurationSetName); err != nil {
 			return err
 		}
@@ -300,25 +294,19 @@ func awsRestjson1_serializeOpHttpBindingsDeleteConfigurationSetEventDestinationI
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ConfigurationSetName == nil {
+	if v.ConfigurationSetName == nil || len(*v.ConfigurationSetName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationSetName must not be empty")}
 	}
 	if v.ConfigurationSetName != nil {
-		if len(*v.ConfigurationSetName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationSetName must not be empty")}
-		}
 		if err := encoder.SetURI("ConfigurationSetName").String(*v.ConfigurationSetName); err != nil {
 			return err
 		}
 	}
 
-	if v.EventDestinationName == nil {
+	if v.EventDestinationName == nil || len(*v.EventDestinationName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member EventDestinationName must not be empty")}
 	}
 	if v.EventDestinationName != nil {
-		if len(*v.EventDestinationName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member EventDestinationName must not be empty")}
-		}
 		if err := encoder.SetURI("EventDestinationName").String(*v.EventDestinationName); err != nil {
 			return err
 		}
@@ -378,13 +366,10 @@ func awsRestjson1_serializeOpHttpBindingsGetConfigurationSetEventDestinationsInp
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ConfigurationSetName == nil {
+	if v.ConfigurationSetName == nil || len(*v.ConfigurationSetName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationSetName must not be empty")}
 	}
 	if v.ConfigurationSetName != nil {
-		if len(*v.ConfigurationSetName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationSetName must not be empty")}
-		}
 		if err := encoder.SetURI("ConfigurationSetName").String(*v.ConfigurationSetName); err != nil {
 			return err
 		}
@@ -612,25 +597,19 @@ func awsRestjson1_serializeOpHttpBindingsUpdateConfigurationSetEventDestinationI
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ConfigurationSetName == nil {
+	if v.ConfigurationSetName == nil || len(*v.ConfigurationSetName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationSetName must not be empty")}
 	}
 	if v.ConfigurationSetName != nil {
-		if len(*v.ConfigurationSetName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationSetName must not be empty")}
-		}
 		if err := encoder.SetURI("ConfigurationSetName").String(*v.ConfigurationSetName); err != nil {
 			return err
 		}
 	}
 
-	if v.EventDestinationName == nil {
+	if v.EventDestinationName == nil || len(*v.EventDestinationName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member EventDestinationName must not be empty")}
 	}
 	if v.EventDestinationName != nil {
-		if len(*v.EventDestinationName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member EventDestinationName must not be empty")}
-		}
 		if err := encoder.SetURI("EventDestinationName").String(*v.EventDestinationName); err != nil {
 			return err
 		}
@@ -693,9 +672,9 @@ func awsRestjson1_serializeDocumentEventDestinationDefinition(v *types.EventDest
 		}
 	}
 
-	if v.Enabled != nil {
+	if v.Enabled {
 		ok := object.Key("Enabled")
-		ok.Boolean(*v.Enabled)
+		ok.Boolean(v.Enabled)
 	}
 
 	if v.KinesisFirehoseDestination != nil {

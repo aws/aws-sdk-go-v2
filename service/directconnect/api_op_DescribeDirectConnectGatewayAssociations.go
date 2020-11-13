@@ -60,7 +60,7 @@ type DescribeDirectConnectGatewayAssociationsInput struct {
 type DescribeDirectConnectGatewayAssociationsOutput struct {
 
 	// Information about the associations.
-	DirectConnectGatewayAssociations []*types.DirectConnectGatewayAssociation
+	DirectConnectGatewayAssociations []types.DirectConnectGatewayAssociation
 
 	// The token to retrieve the next page.
 	NextToken *string

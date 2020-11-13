@@ -51,7 +51,7 @@ type DescribeVpcPeeringAuthorizationsOutput struct {
 
 	// A collection of objects that describe all valid VPC peering operations for the
 	// current AWS account.
-	VpcPeeringAuthorizations []*types.VpcPeeringAuthorization
+	VpcPeeringAuthorizations []types.VpcPeeringAuthorization
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

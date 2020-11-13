@@ -45,7 +45,7 @@ type GetPullRequestApprovalStatesInput struct {
 type GetPullRequestApprovalStatesOutput struct {
 
 	// Information about users who have approved the pull request.
-	Approvals []*types.Approval
+	Approvals []types.Approval
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

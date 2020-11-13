@@ -58,7 +58,7 @@ type ListDelegatedServicesForAccountInput struct {
 type ListDelegatedServicesForAccountOutput struct {
 
 	// The services for which the account is a delegated administrator.
-	DelegatedServices []*types.DelegatedService
+	DelegatedServices []types.DelegatedService
 
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a

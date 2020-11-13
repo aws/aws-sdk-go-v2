@@ -33,7 +33,7 @@ type RebootBrokerInput struct {
 	// rebooting one broker at a time.
 	//
 	// This member is required.
-	BrokerIds []*string
+	BrokerIds []string
 
 	// The Amazon Resource Name (ARN) of the cluster to be updated.
 	//

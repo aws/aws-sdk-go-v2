@@ -40,7 +40,7 @@ type SearchSchemasInput struct {
 	// This member is required.
 	RegistryName *string
 
-	Limit *int32
+	Limit int32
 
 	// The token that specifies the next page of results to return. To request the
 	// first page, leave NextToken empty. The token will expire in 24 hours, and cannot
@@ -56,7 +56,7 @@ type SearchSchemasOutput struct {
 	NextToken *string
 
 	// An array of SearchSchemaSummary information.
-	Schemas []*types.SearchSchemaSummary
+	Schemas []types.SearchSchemaSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -72,7 +72,7 @@ type SubmitJobInput struct {
 	// index 0. You can also specify an N_TO_N type dependency with a job ID for array
 	// jobs. In that case, each index child of this job must wait for the corresponding
 	// index child of each dependency to complete before it can begin.
-	DependsOn []*types.JobDependency
+	DependsOn []types.JobDependency
 
 	// A list of node overrides in JSON format that specify the node range to target
 	// and the container overrides for that node range.
@@ -82,7 +82,7 @@ type SubmitJobInput struct {
 	// placeholders that are set in the job definition. Parameters are specified as a
 	// key and value pair mapping. Parameters in a SubmitJob request override any
 	// corresponding parameter defaults from the job definition.
-	Parameters map[string]*string
+	Parameters map[string]string
 
 	// The retry strategy to use for failed jobs from this SubmitJob operation. When a
 	// retry strategy is specified here, it overrides the retry strategy defined in the
@@ -94,7 +94,7 @@ type SubmitJobInput struct {
 	// information, see Tagging AWS Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in AWS General
 	// Reference.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The timeout configuration for this SubmitJob operation. You can specify a
 	// timeout duration after which AWS Batch terminates your jobs if they have not

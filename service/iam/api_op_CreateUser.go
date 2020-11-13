@@ -61,7 +61,7 @@ type CreateUserInput struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
 	// Guide. If any one of the tags is invalid or if you exceed the allowed number of
 	// tags per user, then the entire request fails and the user is not created.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // Contains the response to a successful CreateUser request.

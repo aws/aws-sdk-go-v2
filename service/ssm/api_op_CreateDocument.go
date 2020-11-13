@@ -68,7 +68,7 @@ type CreateDocumentInput struct {
 
 	// A list of key and value pairs that describe attachments to a version of a
 	// document.
-	Attachments []*types.AttachmentsSource
+	Attachments []types.AttachmentsSource
 
 	// Specify the document format for the request. The document format can be JSON,
 	// YAML, or TEXT. JSON is the default format.
@@ -85,7 +85,7 @@ type CreateDocumentInput struct {
 	// information, see AWS AppConfig
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/appconfig.html) in
 	// the AWS Systems Manager User Guide.
-	Requires []*types.DocumentRequires
+	Requires []types.DocumentRequires
 
 	// Optional metadata that you assign to a resource. Tags enable you to categorize a
 	// resource in different ways, such as by purpose, owner, or environment. For
@@ -100,7 +100,7 @@ type CreateDocumentInput struct {
 	//
 	// To add tags to an existing SSM document, use
 	// the AddTagsToResource action.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Specify a target type to define the kinds of resources the document can run on.
 	// For example, to run a document on EC2 instances, specify the following value:

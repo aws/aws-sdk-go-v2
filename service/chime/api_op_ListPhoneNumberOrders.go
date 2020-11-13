@@ -42,7 +42,7 @@ type ListPhoneNumberOrdersOutput struct {
 	NextToken *string
 
 	// The phone number order details.
-	PhoneNumberOrders []*types.PhoneNumberOrder
+	PhoneNumberOrders []types.PhoneNumberOrder
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -1681,13 +1681,13 @@ func validateDeleteClusterSnapshotMessage(v *types.DeleteClusterSnapshotMessage)
 	}
 }
 
-func validateDeleteClusterSnapshotMessageList(v []*types.DeleteClusterSnapshotMessage) error {
+func validateDeleteClusterSnapshotMessageList(v []types.DeleteClusterSnapshotMessage) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteClusterSnapshotMessageList"}
 	for i := range v {
-		if err := validateDeleteClusterSnapshotMessage(v[i]); err != nil {
+		if err := validateDeleteClusterSnapshotMessage(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1761,13 +1761,13 @@ func validateScheduledActionFilter(v *types.ScheduledActionFilter) error {
 	}
 }
 
-func validateScheduledActionFilterList(v []*types.ScheduledActionFilter) error {
+func validateScheduledActionFilterList(v []types.ScheduledActionFilter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ScheduledActionFilterList"}
 	for i := range v {
-		if err := validateScheduledActionFilter(v[i]); err != nil {
+		if err := validateScheduledActionFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1820,13 +1820,13 @@ func validateSnapshotSortingEntity(v *types.SnapshotSortingEntity) error {
 	}
 }
 
-func validateSnapshotSortingEntityList(v []*types.SnapshotSortingEntity) error {
+func validateSnapshotSortingEntityList(v []types.SnapshotSortingEntity) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SnapshotSortingEntityList"}
 	for i := range v {
-		if err := validateSnapshotSortingEntity(v[i]); err != nil {
+		if err := validateSnapshotSortingEntity(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2186,9 +2186,6 @@ func validateOpCreateUsageLimitInput(v *CreateUsageLimitInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateUsageLimitInput"}
-	if v.Amount == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Amount"))
-	}
 	if len(v.FeatureType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("FeatureType"))
 	}
@@ -2780,9 +2777,6 @@ func validateOpModifySnapshotCopyRetentionPeriodInput(v *ModifySnapshotCopyReten
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ModifySnapshotCopyRetentionPeriodInput"}
-	if v.RetentionPeriod == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RetentionPeriod"))
-	}
 	if v.ClusterIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
 	}

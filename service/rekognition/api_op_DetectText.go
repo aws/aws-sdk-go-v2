@@ -66,7 +66,7 @@ type DetectTextInput struct {
 type DetectTextOutput struct {
 
 	// An array of text that was detected in the input image.
-	TextDetections []*types.TextDetection
+	TextDetections []types.TextDetection
 
 	// The model version used to detect text.
 	TextModelVersion *string

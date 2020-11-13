@@ -72,7 +72,7 @@ type SendBulkTemplatedEmailInput struct {
 	// objects within a Destinations array.
 	//
 	// This member is required.
-	Destinations []*types.BulkEmailDestination
+	Destinations []types.BulkEmailDestination
 
 	// The email address that is sending the email. This email address must be either
 	// individually verified with Amazon SES, or from a domain that has been verified
@@ -111,7 +111,7 @@ type SendBulkTemplatedEmailInput struct {
 
 	// A list of tags, in the form of name/value pairs, to apply to an email that you
 	// send to a destination using SendBulkTemplatedEmail.
-	DefaultTags []*types.MessageTag
+	DefaultTags []types.MessageTag
 
 	// A list of replacement values to apply to the template when replacement data is
 	// not specified in a Destination object. These values act as a default or fallback
@@ -122,7 +122,7 @@ type SendBulkTemplatedEmailInput struct {
 
 	// The reply-to email address(es) for the message. If the recipient replies to the
 	// message, each reply-to address will receive the reply.
-	ReplyToAddresses []*string
+	ReplyToAddresses []string
 
 	// The email address that bounces and complaints will be forwarded to when feedback
 	// forwarding is enabled. If the message cannot be delivered to the recipient, then
@@ -166,7 +166,7 @@ type SendBulkTemplatedEmailOutput struct {
 	// The unique message identifier returned from the SendBulkTemplatedEmail action.
 	//
 	// This member is required.
-	Status []*types.BulkEmailDestinationStatus
+	Status []types.BulkEmailDestinationStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

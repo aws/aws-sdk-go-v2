@@ -89,7 +89,7 @@ type UpdateXssMatchSetInput struct {
 	// * FieldToMatch: Contains Data and Type
 	//
 	// This member is required.
-	Updates []*types.XssMatchSetUpdate
+	Updates []types.XssMatchSetUpdate
 
 	// The XssMatchSetId of the XssMatchSet that you want to update. XssMatchSetId is
 	// returned by CreateXssMatchSet and by ListXssMatchSets.

@@ -45,7 +45,7 @@ type RegisterThingInput struct {
 	// The parameters for provisioning a thing. See Provisioning Templates
 	// (https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html)
 	// for more information.
-	Parameters map[string]*string
+	Parameters map[string]string
 }
 
 type RegisterThingOutput struct {
@@ -54,7 +54,7 @@ type RegisterThingOutput struct {
 	CertificatePem *string
 
 	// ARNs for the generated resources.
-	ResourceArns map[string]*string
+	ResourceArns map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

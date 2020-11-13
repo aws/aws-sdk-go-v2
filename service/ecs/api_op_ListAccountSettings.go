@@ -33,7 +33,7 @@ type ListAccountSettingsInput struct {
 	// settings for the root user or the default setting for the principalArn are
 	// returned. If false, the account settings for the principalArn are returned if
 	// they are set. Otherwise, no account settings are returned.
-	EffectiveSettings *bool
+	EffectiveSettings bool
 
 	// The maximum number of account setting results returned by ListAccountSettings in
 	// paginated output. When this parameter is used, ListAccountSettings only returns
@@ -42,7 +42,7 @@ type ListAccountSettingsInput struct {
 	// ListAccountSettings request with the returned nextToken value. This value can be
 	// between 1 and 10. If this parameter is not used, then ListAccountSettings
 	// returns up to 10 results and a nextToken value if applicable.
-	MaxResults *int32
+	MaxResults int32
 
 	// The name of the account setting you want to list the settings for.
 	Name types.SettingName
@@ -74,7 +74,7 @@ type ListAccountSettingsOutput struct {
 	NextToken *string
 
 	// The account settings for the resource.
-	Settings []*types.Setting
+	Settings []types.Setting
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

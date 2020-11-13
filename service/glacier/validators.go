@@ -802,13 +802,13 @@ func addOpUploadMultipartPartValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpUploadMultipartPart{}, middleware.After)
 }
 
-func validateAccessControlPolicyList(v []*types.Grant) error {
+func validateAccessControlPolicyList(v []types.Grant) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AccessControlPolicyList"}
 	for i := range v {
-		if err := validateGrant(v[i]); err != nil {
+		if err := validateGrant(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

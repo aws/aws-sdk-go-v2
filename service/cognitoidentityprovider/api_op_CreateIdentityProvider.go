@@ -99,7 +99,7 @@ type CreateIdentityProviderInput struct {
 	// * IDPSignout optional
 	//
 	// This member is required.
-	ProviderDetails map[string]*string
+	ProviderDetails map[string]string
 
 	// The identity provider name.
 	//
@@ -118,10 +118,10 @@ type CreateIdentityProviderInput struct {
 
 	// A mapping of identity provider attributes to standard and custom user pool
 	// attributes.
-	AttributeMapping map[string]*string
+	AttributeMapping map[string]string
 
 	// A list of identity provider identifiers.
-	IdpIdentifiers []*string
+	IdpIdentifiers []string
 }
 
 type CreateIdentityProviderOutput struct {

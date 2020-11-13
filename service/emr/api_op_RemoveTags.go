@@ -42,7 +42,7 @@ type RemoveTagsInput struct {
 	// A list of tag keys to remove from a resource.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 // This output indicates the result of removing tags from a resource.

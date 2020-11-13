@@ -35,7 +35,7 @@ type ListApplicationDependenciesInput struct {
 	ApplicationId *string
 
 	// The total number of items to return.
-	MaxItems *int32
+	MaxItems int32
 
 	// A token to specify where to start paginating.
 	NextToken *string
@@ -47,7 +47,7 @@ type ListApplicationDependenciesInput struct {
 type ListApplicationDependenciesOutput struct {
 
 	// An array of application summaries nested in the application.
-	Dependencies []*types.ApplicationDependencySummary
+	Dependencies []types.ApplicationDependencySummary
 
 	// The token to request the next page of results.
 	NextToken *string

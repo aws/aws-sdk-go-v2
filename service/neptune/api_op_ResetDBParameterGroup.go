@@ -47,11 +47,11 @@ type ResetDBParameterGroupInput struct {
 	// ResetAllParameters parameters. To reset specific parameters, provide a list of
 	// the following: ParameterName and ApplyMethod. A maximum of 20 parameters can be
 	// modified in a single request. Valid Values (for Apply method): pending-reboot
-	Parameters []*types.Parameter
+	Parameters []types.Parameter
 
 	// Specifies whether (true) or not (false) to reset all parameters in the DB
 	// parameter group to default values. Default: true
-	ResetAllParameters *bool
+	ResetAllParameters bool
 }
 
 type ResetDBParameterGroupOutput struct {

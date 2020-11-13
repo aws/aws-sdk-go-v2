@@ -27,7 +27,7 @@ type Address struct {
 
 	// If the address you are creating is a primary address, then set this option to
 	// true. This field is not supported in most regions.
-	IsRestricted *bool
+	IsRestricted bool
 
 	// This field is no longer used and the value is ignored.
 	Landmark *string
@@ -170,20 +170,20 @@ type CompatibleImage struct {
 type DataTransfer struct {
 
 	// The number of bytes transferred between a Snow device and Amazon S3.
-	BytesTransferred *int64
+	BytesTransferred int64
 
 	// The number of objects transferred between a Snow device and Amazon S3.
-	ObjectsTransferred *int64
+	ObjectsTransferred int64
 
 	// The total bytes of data for a transfer between a Snow device and Amazon S3. This
 	// value is set to 0 (zero) until all the keys that will be transferred have been
 	// listed.
-	TotalBytes *int64
+	TotalBytes int64
 
 	// The total number of objects for a transfer between a Snow device and Amazon S3.
 	// This value is set to 0 (zero) until all the keys that will be transferred have
 	// been listed.
-	TotalObjects *int64
+	TotalObjects int64
 }
 
 // The container for SnowconeDeviceConfiguration.
@@ -239,7 +239,7 @@ type JobListEntry struct {
 	// part is associated with a Snowball. It might take some time before the job parts
 	// associated with a particular main job are listed, because they are created after
 	// the main job is created.
-	IsMaster *bool
+	IsMaster bool
 
 	// The automatically generated ID for a job, for example
 	// JID123e4567-e89b-12d3-a456-426655440000.
@@ -370,13 +370,13 @@ type JobMetadata struct {
 type JobResource struct {
 
 	// The Amazon Machine Images (AMIs) associated with this job.
-	Ec2AmiResources []*Ec2AmiResource
+	Ec2AmiResources []Ec2AmiResource
 
 	// The Python-language Lambda functions for this job.
-	LambdaResources []*LambdaResource
+	LambdaResources []LambdaResource
 
 	// An array of S3Resource objects.
-	S3Resources []*S3Resource
+	S3Resources []S3Resource
 }
 
 // Contains a key range. For export jobs, a S3Resource object can have an optional
@@ -399,7 +399,7 @@ type LambdaResource struct {
 
 	// The array of ARNs for S3Resource objects to trigger the LambdaResource objects
 	// associated with this job.
-	EventTriggers []*EventTriggerDefinition
+	EventTriggers []EventTriggerDefinition
 
 	// An Amazon Resource Name (ARN) that represents an AWS Lambda function to be
 	// triggered by PUT object actions on the associated local Amazon S3 resource.
@@ -419,7 +419,7 @@ type Notification struct {
 	JobStatesToNotify []JobState
 
 	// Any change in job state will trigger a notification for this job.
-	NotifyAll *bool
+	NotifyAll bool
 
 	// The new SNS TopicArn that you want to associate with this job. You can create
 	// Amazon Resource Names (ARNs) for topics by using the CreateTopic
@@ -513,5 +513,5 @@ type TaxDocuments struct {
 type WirelessConnection struct {
 
 	// Enables the Wi-Fi adapter on an AWS Snowcone device.
-	IsWifiEnabled *bool
+	IsWifiEnabled bool
 }

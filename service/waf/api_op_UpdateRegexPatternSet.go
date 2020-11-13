@@ -88,7 +88,7 @@ type UpdateRegexPatternSetInput struct {
 	// from a RegexPatternSet.
 	//
 	// This member is required.
-	Updates []*types.RegexPatternSetUpdate
+	Updates []types.RegexPatternSetUpdate
 }
 
 type UpdateRegexPatternSetOutput struct {

@@ -58,14 +58,14 @@ type DescribeSnapshotCopyGrantsInput struct {
 	// resources tagged with keys called owner and environment. If you specify both of
 	// these tag keys in the request, Amazon Redshift returns a response with all
 	// resources that have either or both of these tag keys associated with them.
-	TagKeys []*string
+	TagKeys []string
 
 	// A tag value or values for which you want to return all matching resources that
 	// are associated with the specified value or values. For example, suppose that you
 	// have resources tagged with values called admin and test. If you specify both of
 	// these tag values in the request, Amazon Redshift returns a response with all
 	// resources that have either or both of these tag values associated with them.
-	TagValues []*string
+	TagValues []string
 }
 
 //
@@ -81,7 +81,7 @@ type DescribeSnapshotCopyGrantsOutput struct {
 	Marker *string
 
 	// The list of SnapshotCopyGrant objects.
-	SnapshotCopyGrants []*types.SnapshotCopyGrant
+	SnapshotCopyGrants []types.SnapshotCopyGrant
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

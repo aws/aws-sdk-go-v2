@@ -44,7 +44,7 @@ type ListContactFlowsInput struct {
 	ContactFlowTypes []types.ContactFlowType
 
 	// The maximimum number of results to return per page.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
@@ -54,7 +54,7 @@ type ListContactFlowsInput struct {
 type ListContactFlowsOutput struct {
 
 	// Information about the contact flows.
-	ContactFlowSummaryList []*types.ContactFlowSummary
+	ContactFlowSummaryList []types.ContactFlowSummary
 
 	// If there are additional results, this is the token for the next set of results.
 	NextToken *string

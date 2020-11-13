@@ -50,7 +50,7 @@ type ListTopicRulesOutput struct {
 	NextToken *string
 
 	// The rules.
-	Rules []*types.TopicRuleListItem
+	Rules []types.TopicRuleListItem
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

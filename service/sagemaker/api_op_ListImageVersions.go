@@ -66,7 +66,7 @@ type ListImageVersionsInput struct {
 type ListImageVersionsOutput struct {
 
 	// A list of versions and their properties.
-	ImageVersions []*types.ImageVersion
+	ImageVersions []types.ImageVersion
 
 	// A token for getting the next set of versions, if there are any.
 	NextToken *string

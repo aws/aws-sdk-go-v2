@@ -47,7 +47,7 @@ type CreateSoftwareUpdateJobInput struct {
 	// be applied to.
 	//
 	// This member is required.
-	UpdateTargets []*string
+	UpdateTargets []string
 
 	// The architecture of the cores which are the targets of an update.
 	//

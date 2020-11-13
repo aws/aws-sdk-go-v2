@@ -55,7 +55,7 @@ type GetUtterancesViewInput struct {
 	// limit is 5 versions per request.
 	//
 	// This member is required.
-	BotVersions []*string
+	BotVersions []string
 
 	// To return utterances that were recognized and handled, use Detected. To return
 	// utterances that were not recognized, use Missed.
@@ -73,7 +73,7 @@ type GetUtterancesViewOutput struct {
 	// objects describing the utterances that were processed by your bot. The response
 	// contains a maximum of 100 UtteranceData objects for each version. Amazon Lex
 	// returns the most frequent utterances received by the bot in the last 15 days.
-	Utterances []*types.UtteranceList
+	Utterances []types.UtteranceList
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

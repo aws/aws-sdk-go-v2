@@ -37,7 +37,7 @@ type OpenTunnelInput struct {
 	DestinationConfig *types.DestinationConfig
 
 	// A collection of tag metadata.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Timeout configuration for a tunnel.
 	TimeoutConfig *types.TimeoutConfig

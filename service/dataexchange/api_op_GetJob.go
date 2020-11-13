@@ -48,7 +48,7 @@ type GetJobOutput struct {
 	Details *types.ResponseDetails
 
 	// The errors associated with jobs.
-	Errors []*types.JobError
+	Errors []types.JobError
 
 	// The unique identifier for the job.
 	Id *string

@@ -215,7 +215,7 @@ func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return sm
 type UnsupportedAvailabilityZoneException struct {
 	Message *string
 
-	ValidZones    []*string
+	ValidZones    []string
 	ClusterName   *string
 	NodegroupName *string
 }

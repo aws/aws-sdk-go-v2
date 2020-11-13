@@ -32,10 +32,10 @@ type GetUsageStatisticsInput struct {
 	// An array of objects, one for each condition to use to filter the query results.
 	// If the array contains more than one object, Amazon Macie uses an AND operator to
 	// join the conditions specified by the objects.
-	FilterBy []*types.UsageStatisticsFilter
+	FilterBy []types.UsageStatisticsFilter
 
 	// The maximum number of items to include in each page of the response.
-	MaxResults *int32
+	MaxResults int32
 
 	// The nextToken string that specifies which page of results to return in a
 	// paginated response.
@@ -53,7 +53,7 @@ type GetUsageStatisticsOutput struct {
 
 	// An array of objects that contains the results of the query. Each object contains
 	// the data for an account that meets the filter criteria specified in the request.
-	Records []*types.UsageRecord
+	Records []types.UsageRecord
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

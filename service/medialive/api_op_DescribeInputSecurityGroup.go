@@ -46,16 +46,16 @@ type DescribeInputSecurityGroupOutput struct {
 	Id *string
 
 	// The list of inputs currently using this Input Security Group.
-	Inputs []*string
+	Inputs []string
 
 	// The current state of the Input Security Group.
 	State types.InputSecurityGroupState
 
 	// A collection of key-value pairs.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Whitelist rules and their sync status
-	WhitelistRules []*types.InputWhitelistRule
+	WhitelistRules []types.InputWhitelistRule
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

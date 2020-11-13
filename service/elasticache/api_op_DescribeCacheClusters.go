@@ -75,7 +75,7 @@ type DescribeCacheClustersOutput struct {
 
 	// A list of clusters. Each item in the list contains detailed information about
 	// one cluster.
-	CacheClusters []*types.CacheCluster
+	CacheClusters []types.CacheCluster
 
 	// Provides an identifier to allow retrieval of paginated results.
 	Marker *string

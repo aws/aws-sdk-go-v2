@@ -32,16 +32,16 @@ type BatchDeleteBuildsInput struct {
 	// The IDs of the builds to delete.
 	//
 	// This member is required.
-	Ids []*string
+	Ids []string
 }
 
 type BatchDeleteBuildsOutput struct {
 
 	// The IDs of the builds that were successfully deleted.
-	BuildsDeleted []*string
+	BuildsDeleted []string
 
 	// Information about any builds that could not be successfully deleted.
-	BuildsNotDeleted []*types.BuildNotDeleted
+	BuildsNotDeleted []types.BuildNotDeleted
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

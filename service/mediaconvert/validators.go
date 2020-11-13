@@ -510,9 +510,6 @@ func validateReservationPlanSettings(v *types.ReservationPlanSettings) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ReservationPlanSettings"}
-	if v.ReservedSlots == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ReservedSlots"))
-	}
 	if len(v.Commitment) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Commitment"))
 	}

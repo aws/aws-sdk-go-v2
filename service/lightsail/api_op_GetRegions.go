@@ -45,7 +45,7 @@ type GetRegionsOutput struct {
 
 	// An array of key-value pairs containing information about your get regions
 	// request.
-	Regions []*types.Region
+	Regions []types.Region
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

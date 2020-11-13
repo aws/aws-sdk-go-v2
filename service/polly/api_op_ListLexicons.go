@@ -39,7 +39,7 @@ type ListLexiconsInput struct {
 type ListLexiconsOutput struct {
 
 	// A list of lexicon names and attributes.
-	Lexicons []*types.LexiconDescription
+	Lexicons []types.LexiconDescription
 
 	// The pagination token to use in the next request to continue the listing of
 	// lexicons. NextToken is returned only if the response is truncated.

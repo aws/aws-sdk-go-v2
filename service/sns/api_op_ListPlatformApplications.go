@@ -52,7 +52,7 @@ type ListPlatformApplicationsOutput struct {
 	NextToken *string
 
 	// Platform applications returned when calling ListPlatformApplications action.
-	PlatformApplications []*types.PlatformApplication
+	PlatformApplications []types.PlatformApplication
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -76,10 +76,10 @@ type DescribeWorldExportJobOutput struct {
 
 	// A map that contains tag keys and tag values that are attached to the world
 	// export job.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// A list of Amazon Resource Names (arns) that correspond to worlds to be exported.
-	Worlds []*string
+	Worlds []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

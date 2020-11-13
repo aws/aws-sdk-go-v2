@@ -32,11 +32,11 @@ func (c *Client) DescribeActivations(ctx context.Context, params *DescribeActiva
 type DescribeActivationsInput struct {
 
 	// A filter to view information about your activations.
-	Filters []*types.DescribeActivationsFilter
+	Filters []types.DescribeActivationsFilter
 
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
-	MaxResults *int32
+	MaxResults int32
 
 	// A token to start the list. Use this token to get the next set of results.
 	NextToken *string
@@ -45,7 +45,7 @@ type DescribeActivationsInput struct {
 type DescribeActivationsOutput struct {
 
 	// A list of activations for your AWS account.
-	ActivationList []*types.Activation
+	ActivationList []types.Activation
 
 	// The token for the next set of items to return. Use this token to get the next
 	// set of results.

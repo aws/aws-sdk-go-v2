@@ -133,13 +133,13 @@ type CreateIntegrationInput struct {
 	// variables, or context variables that are evaluated at runtime. To learn more,
 	// see Working with AWS service integrations for HTTP APIs
 	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html).
-	RequestParameters map[string]*string
+	RequestParameters map[string]string
 
 	// Represents a map of Velocity templates that are applied on the request payload
 	// based on the value of the Content-Type header sent by the client. The content
 	// type value is the key in this map, and the template (as a String) is the value.
 	// Supported only for WebSocket APIs.
-	RequestTemplates map[string]*string
+	RequestTemplates map[string]string
 
 	// The template selection expression for the integration.
 	TemplateSelectionExpression *string
@@ -147,7 +147,7 @@ type CreateIntegrationInput struct {
 	// Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between
 	// 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for
 	// WebSocket APIs and 30 seconds for HTTP APIs.
-	TimeoutInMillis *int32
+	TimeoutInMillis int32
 
 	// The TLS configuration for a private integration. If you specify a TLS
 	// configuration, private integration traffic uses the HTTPS protocol. Supported
@@ -160,7 +160,7 @@ type CreateIntegrationOutput struct {
 	// Specifies whether an integration is managed by API Gateway. If you created an
 	// API using using quick create, the resulting integration is managed by API
 	// Gateway. You can update a managed integration, but you can't delete it.
-	ApiGatewayManaged *bool
+	ApiGatewayManaged bool
 
 	// The ID of the VPC link for a private integration. Supported only for HTTP APIs.
 	ConnectionId *string
@@ -265,13 +265,13 @@ type CreateIntegrationOutput struct {
 	// variables, or context variables that are evaluated at runtime. To learn more,
 	// see Working with AWS service integrations for HTTP APIs
 	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html).
-	RequestParameters map[string]*string
+	RequestParameters map[string]string
 
 	// Represents a map of Velocity templates that are applied on the request payload
 	// based on the value of the Content-Type header sent by the client. The content
 	// type value is the key in this map, and the template (as a String) is the value.
 	// Supported only for WebSocket APIs.
-	RequestTemplates map[string]*string
+	RequestTemplates map[string]string
 
 	// The template selection expression for the integration. Supported only for
 	// WebSocket APIs.
@@ -280,7 +280,7 @@ type CreateIntegrationOutput struct {
 	// Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between
 	// 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for
 	// WebSocket APIs and 30 seconds for HTTP APIs.
-	TimeoutInMillis *int32
+	TimeoutInMillis int32
 
 	// The TLS configuration for a private integration. If you specify a TLS
 	// configuration, private integration traffic uses the HTTPS protocol. Supported

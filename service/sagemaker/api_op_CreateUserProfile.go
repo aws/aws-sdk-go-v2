@@ -59,7 +59,7 @@ type CreateUserProfileInput struct {
 
 	// Each tag consists of a key and an optional value. Tag keys must be unique per
 	// resource.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// A collection of settings.
 	UserSettings *types.UserSettings

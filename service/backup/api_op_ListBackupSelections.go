@@ -49,7 +49,7 @@ type ListBackupSelectionsOutput struct {
 
 	// An array of backup selection list items containing metadata about each resource
 	// in the list.
-	BackupSelectionsList []*types.BackupSelectionsListMember
+	BackupSelectionsList []types.BackupSelectionsListMember
 
 	// The next item following a partial list of returned items. For example, if a
 	// request is made to return maxResults number of items, NextToken allows you to

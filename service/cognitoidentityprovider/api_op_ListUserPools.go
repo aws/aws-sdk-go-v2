@@ -34,7 +34,7 @@ type ListUserPoolsInput struct {
 	// user pools.
 	//
 	// This member is required.
-	MaxResults *int32
+	MaxResults int32
 
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
@@ -49,7 +49,7 @@ type ListUserPoolsOutput struct {
 	NextToken *string
 
 	// The user pools from the response to list users.
-	UserPools []*types.UserPoolDescriptionType
+	UserPools []types.UserPoolDescriptionType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

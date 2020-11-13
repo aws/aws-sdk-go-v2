@@ -80,7 +80,7 @@ type GetSubscriptionAttributesOutput struct {
 	//
 	// * TopicArn – The topic ARN that the subscription is
 	// associated with.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

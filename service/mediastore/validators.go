@@ -466,13 +466,13 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
-func validateCorsPolicy(v []*types.CorsRule) error {
+func validateCorsPolicy(v []types.CorsRule) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CorsPolicy"}
 	for i := range v {
-		if err := validateCorsRule(v[i]); err != nil {
+		if err := validateCorsRule(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -539,13 +539,13 @@ func validateMetricPolicyRule(v *types.MetricPolicyRule) error {
 	}
 }
 
-func validateMetricPolicyRules(v []*types.MetricPolicyRule) error {
+func validateMetricPolicyRules(v []types.MetricPolicyRule) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MetricPolicyRules"}
 	for i := range v {
-		if err := validateMetricPolicyRule(v[i]); err != nil {
+		if err := validateMetricPolicyRule(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -571,13 +571,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagList(v []*types.Tag) error {
+func validateTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

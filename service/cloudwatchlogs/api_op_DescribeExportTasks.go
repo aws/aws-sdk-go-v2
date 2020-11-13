@@ -50,7 +50,7 @@ type DescribeExportTasksInput struct {
 type DescribeExportTasksOutput struct {
 
 	// The export tasks.
-	ExportTasks []*types.ExportTask
+	ExportTasks []types.ExportTask
 
 	// The token for the next set of items to return. The token expires after 24 hours.
 	NextToken *string

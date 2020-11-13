@@ -62,7 +62,7 @@ type GetFunctionConfigurationOutput struct {
 	CodeSha256 *string
 
 	// The size of the function's deployment package, in bytes.
-	CodeSize *int64
+	CodeSize int64
 
 	// The function's dead letter queue.
 	DeadLetterConfig *types.DeadLetterConfig
@@ -74,7 +74,7 @@ type GetFunctionConfigurationOutput struct {
 	Environment *types.EnvironmentResponse
 
 	// Connection settings for an Amazon EFS file system.
-	FileSystemConfigs []*types.FileSystemConfig
+	FileSystemConfigs []types.FileSystemConfig
 
 	// The function's Amazon Resource Name (ARN).
 	FunctionArn *string
@@ -105,7 +105,7 @@ type GetFunctionConfigurationOutput struct {
 
 	// The function's  layers
 	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
-	Layers []*types.Layer
+	Layers []types.Layer
 
 	// For Lambda@Edge functions, the ARN of the master function.
 	MasterArn *string

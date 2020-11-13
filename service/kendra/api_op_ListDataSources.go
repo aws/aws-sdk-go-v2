@@ -51,7 +51,7 @@ type ListDataSourcesOutput struct {
 	NextToken *string
 
 	// An array of summary information for one or more data sources.
-	SummaryItems []*types.DataSourceSummary
+	SummaryItems []types.DataSourceSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -76,7 +76,7 @@ type ListHostedZonesByVPCOutput struct {
 	// the hosted zone name and ID, and information about who owns the hosted zone.
 	//
 	// This member is required.
-	HostedZoneSummaries []*types.HostedZoneSummary
+	HostedZoneSummaries []types.HostedZoneSummary
 
 	// The value that you specified for MaxItems in the most recent
 	// ListHostedZonesByVPC request.

@@ -40,7 +40,7 @@ type GetVpcLinksInput struct {
 type GetVpcLinksOutput struct {
 
 	// A collection of VPC links.
-	Items []*types.VpcLink
+	Items []types.VpcLink
 
 	// The next page of elements from this collection. Not valid for the last element
 	// of the collection.

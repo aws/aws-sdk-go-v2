@@ -63,13 +63,13 @@ type GetTimeSeriesServiceStatisticsOutput struct {
 	// A flag indicating whether or not a group's filter expression has been
 	// consistent, or if a returned aggregation might show statistics from an older
 	// version of the group's filter expression.
-	ContainsOldGroupVersions *bool
+	ContainsOldGroupVersions bool
 
 	// Pagination token.
 	NextToken *string
 
 	// The collection of statistics.
-	TimeSeriesServiceStatistics []*types.TimeSeriesServiceStatistics
+	TimeSeriesServiceStatistics []types.TimeSeriesServiceStatistics
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -35,7 +35,7 @@ type ListRobotsInput struct {
 	// You can use up to three filters, but they must be for the same named item. For
 	// example, if you are looking for items with the status Registered or the status
 	// Available.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// When this parameter is used, ListRobots only returns maxResults results in a
 	// single page along with a nextToken response element. The remaining results of
@@ -63,7 +63,7 @@ type ListRobotsOutput struct {
 	NextToken *string
 
 	// A list of robots that meet the criteria of the request.
-	Robots []*types.Robot
+	Robots []types.Robot
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

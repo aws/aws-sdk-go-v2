@@ -48,7 +48,7 @@ type ListTextTranslationJobsOutput struct {
 	NextToken *string
 
 	// A list containing the properties of each job that is returned.
-	TextTranslationJobPropertiesList []*types.TextTranslationJobProperties
+	TextTranslationJobPropertiesList []types.TextTranslationJobProperties
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

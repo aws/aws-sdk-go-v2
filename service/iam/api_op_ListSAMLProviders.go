@@ -36,7 +36,7 @@ type ListSAMLProvidersInput struct {
 type ListSAMLProvidersOutput struct {
 
 	// The list of SAML provider resource objects defined in IAM for this AWS account.
-	SAMLProviderList []*types.SAMLProviderListEntry
+	SAMLProviderList []types.SAMLProviderListEntry
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

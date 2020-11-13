@@ -572,12 +572,12 @@ type ProposalActions struct {
 
 	// The actions to perform for an APPROVED proposal to invite an AWS account to
 	// create a member and join the network.
-	Invitations []*InviteAction
+	Invitations []InviteAction
 
 	// The actions to perform for an APPROVED proposal to remove a member from the
 	// network, which deletes the member and all associated member resources from the
 	// network.
-	Removals []*RemoveAction
+	Removals []RemoveAction
 }
 
 // Properties of a proposal.

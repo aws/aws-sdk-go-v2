@@ -63,7 +63,7 @@ type DescribeEventSubscriptionsInput struct {
 	// environment. If you specify both of these tag keys in the request, Amazon
 	// Redshift returns a response with the subscriptions that have either or both of
 	// these tag keys associated with them.
-	TagKeys []*string
+	TagKeys []string
 
 	// A tag value or values for which you want to return all matching event
 	// notification subscriptions that are associated with the specified tag value or
@@ -71,14 +71,14 @@ type DescribeEventSubscriptionsInput struct {
 	// values called admin and test. If you specify both of these tag values in the
 	// request, Amazon Redshift returns a response with the subscriptions that have
 	// either or both of these tag values associated with them.
-	TagValues []*string
+	TagValues []string
 }
 
 //
 type DescribeEventSubscriptionsOutput struct {
 
 	// A list of event subscriptions.
-	EventSubscriptionsList []*types.EventSubscription
+	EventSubscriptionsList []types.EventSubscription
 
 	// A value that indicates the starting point for the next set of response records
 	// in a subsequent request. If a value is returned in a response, you can retrieve

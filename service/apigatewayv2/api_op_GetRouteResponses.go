@@ -50,7 +50,7 @@ type GetRouteResponsesInput struct {
 type GetRouteResponsesOutput struct {
 
 	// The elements from this collection.
-	Items []*types.RouteResponse
+	Items []types.RouteResponse
 
 	// The next page of elements from this collection. Not valid for the last element
 	// of the collection.

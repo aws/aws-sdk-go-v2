@@ -34,7 +34,7 @@ type GetDiscoveredSchemaInput struct {
 	// has a maximum size of 10 events.
 	//
 	// This member is required.
-	Events []*string
+	Events []string
 
 	// The type of event.
 	//

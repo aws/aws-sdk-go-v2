@@ -34,7 +34,7 @@ type DescribeReplicationInstancesInput struct {
 	// Filters applied to replication instances. Valid filter names:
 	// replication-instance-arn | replication-instance-id | replication-instance-class
 	// | engine-version
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
@@ -57,7 +57,7 @@ type DescribeReplicationInstancesOutput struct {
 	Marker *string
 
 	// The replication instances described.
-	ReplicationInstances []*types.ReplicationInstance
+	ReplicationInstances []types.ReplicationInstance
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

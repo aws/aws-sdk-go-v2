@@ -1033,13 +1033,13 @@ func validateBlockDeviceMapping(v *types.BlockDeviceMapping) error {
 	}
 }
 
-func validateBlockDeviceMappings(v []*types.BlockDeviceMapping) error {
+func validateBlockDeviceMappings(v []types.BlockDeviceMapping) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BlockDeviceMappings"}
 	for i := range v {
-		if err := validateBlockDeviceMapping(v[i]); err != nil {
+		if err := validateBlockDeviceMapping(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1094,13 +1094,13 @@ func validateLifecycleHookSpecification(v *types.LifecycleHookSpecification) err
 	}
 }
 
-func validateLifecycleHookSpecifications(v []*types.LifecycleHookSpecification) error {
+func validateLifecycleHookSpecifications(v []types.LifecycleHookSpecification) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LifecycleHookSpecifications"}
 	for i := range v {
-		if err := validateLifecycleHookSpecification(v[i]); err != nil {
+		if err := validateLifecycleHookSpecification(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1129,13 +1129,13 @@ func validateMetricDimension(v *types.MetricDimension) error {
 	}
 }
 
-func validateMetricDimensions(v []*types.MetricDimension) error {
+func validateMetricDimensions(v []types.MetricDimension) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MetricDimensions"}
 	for i := range v {
-		if err := validateMetricDimension(v[i]); err != nil {
+		if err := validateMetricDimension(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1176,13 +1176,13 @@ func validateScheduledUpdateGroupActionRequest(v *types.ScheduledUpdateGroupActi
 	}
 }
 
-func validateScheduledUpdateGroupActionRequests(v []*types.ScheduledUpdateGroupActionRequest) error {
+func validateScheduledUpdateGroupActionRequests(v []types.ScheduledUpdateGroupActionRequest) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ScheduledUpdateGroupActionRequests"}
 	for i := range v {
-		if err := validateScheduledUpdateGroupActionRequest(v[i]); err != nil {
+		if err := validateScheduledUpdateGroupActionRequest(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1208,13 +1208,13 @@ func validateStepAdjustment(v *types.StepAdjustment) error {
 	}
 }
 
-func validateStepAdjustments(v []*types.StepAdjustment) error {
+func validateStepAdjustments(v []types.StepAdjustment) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StepAdjustments"}
 	for i := range v {
-		if err := validateStepAdjustment(v[i]); err != nil {
+		if err := validateStepAdjustment(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1240,13 +1240,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTags(v []*types.Tag) error {
+func validateTags(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tags"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

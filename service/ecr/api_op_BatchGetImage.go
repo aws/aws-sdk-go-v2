@@ -35,7 +35,7 @@ type BatchGetImageInput struct {
 	// of the imageIds reference is imageTag=tag or imageDigest=digest.
 	//
 	// This member is required.
-	ImageIds []*types.ImageIdentifier
+	ImageIds []types.ImageIdentifier
 
 	// The repository that contains the images to describe.
 	//
@@ -46,7 +46,7 @@ type BatchGetImageInput struct {
 	// application/vnd.docker.distribution.manifest.v1+json |
 	// application/vnd.docker.distribution.manifest.v2+json |
 	// application/vnd.oci.image.manifest.v1+json
-	AcceptedMediaTypes []*string
+	AcceptedMediaTypes []string
 
 	// The AWS account ID associated with the registry that contains the images to
 	// describe. If you do not specify a registry, the default registry is assumed.
@@ -56,10 +56,10 @@ type BatchGetImageInput struct {
 type BatchGetImageOutput struct {
 
 	// Any failures associated with the call.
-	Failures []*types.ImageFailure
+	Failures []types.ImageFailure
 
 	// A list of image objects corresponding to the image references in the request.
-	Images []*types.Image
+	Images []types.Image
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

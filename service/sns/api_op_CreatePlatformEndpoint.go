@@ -59,7 +59,7 @@ type CreatePlatformEndpointInput struct {
 
 	// For a list of attributes, see SetEndpointAttributes
 	// (https://docs.aws.amazon.com/sns/latest/api/API_SetEndpointAttributes.html).
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// Arbitrary user data to associate with the endpoint. Amazon SNS does not use this
 	// data. The data must be in UTF-8 format and less than 2KB.

@@ -1347,17 +1347,13 @@ func (m *awsAwsjson11_serializeOpUploadLayerPart) HandleSerialize(ctx context.Co
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsAwsjson11_serializeDocumentBatchedOperationLayerDigestList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentBatchedOperationLayerDigestList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1391,17 +1387,13 @@ func awsAwsjson11_serializeDocumentEncryptionConfiguration(v *types.EncryptionCo
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetAuthorizationTokenRegistryIdList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentGetAuthorizationTokenRegistryIdList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1423,17 +1415,13 @@ func awsAwsjson11_serializeDocumentImageIdentifier(v *types.ImageIdentifier, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentImageIdentifierList(v []*types.ImageIdentifier, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentImageIdentifierList(v []types.ImageIdentifier, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentImageIdentifier(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentImageIdentifier(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1444,25 +1432,21 @@ func awsAwsjson11_serializeDocumentImageScanningConfiguration(v *types.ImageScan
 	object := value.Object()
 	defer object.Close()
 
-	if v.ScanOnPush != nil {
+	if v.ScanOnPush {
 		ok := object.Key("scanOnPush")
-		ok.Boolean(*v.ScanOnPush)
+		ok.Boolean(v.ScanOnPush)
 	}
 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentLayerDigestList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentLayerDigestList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1491,32 +1475,24 @@ func awsAwsjson11_serializeDocumentListImagesFilter(v *types.ListImagesFilter, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentMediaTypeList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentMediaTypeList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRepositoryNameList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentRepositoryNameList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1538,32 +1514,24 @@ func awsAwsjson11_serializeDocumentTag(v *types.Tag, value smithyjson.Value) err
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagKeyList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagKeyList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagList(v []*types.Tag, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagList(v []types.Tag, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentTag(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1737,9 +1705,9 @@ func awsAwsjson11_serializeOpDocumentDeleteRepositoryInput(v *DeleteRepositoryIn
 	object := value.Object()
 	defer object.Close()
 
-	if v.Force != nil {
+	if v.Force {
 		ok := object.Key("force")
-		ok.Boolean(*v.Force)
+		ok.Boolean(v.Force)
 	}
 
 	if v.RegistryId != nil {
@@ -2159,9 +2127,9 @@ func awsAwsjson11_serializeOpDocumentSetRepositoryPolicyInput(v *SetRepositoryPo
 	object := value.Object()
 	defer object.Close()
 
-	if v.Force != nil {
+	if v.Force {
 		ok := object.Key("force")
-		ok.Boolean(*v.Force)
+		ok.Boolean(v.Force)
 	}
 
 	if v.PolicyText != nil {

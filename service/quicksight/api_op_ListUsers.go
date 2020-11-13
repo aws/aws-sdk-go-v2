@@ -41,7 +41,7 @@ type ListUsersInput struct {
 	Namespace *string
 
 	// The maximum number of results to return from this request.
-	MaxResults *int32
+	MaxResults int32
 
 	// A pagination token that can be used in a subsequent request.
 	NextToken *string
@@ -56,10 +56,10 @@ type ListUsersOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// The list of users.
-	UserList []*types.User
+	UserList []types.User
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

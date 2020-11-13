@@ -52,7 +52,7 @@ type ListAnalyzedResourcesOutput struct {
 	// A list of resources that were analyzed.
 	//
 	// This member is required.
-	AnalyzedResources []*types.AnalyzedResourceSummary
+	AnalyzedResources []types.AnalyzedResourceSummary
 
 	// A token used for pagination of results returned.
 	NextToken *string

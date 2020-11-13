@@ -34,14 +34,14 @@ type GetSMSAttributesInput struct {
 	// you want values. For all attribute names, see SetSMSAttributes
 	// (https://docs.aws.amazon.com/sns/latest/api/API_SetSMSAttributes.html). If you
 	// don't use this parameter, Amazon SNS returns all SMS attributes.
-	Attributes []*string
+	Attributes []string
 }
 
 // The response from the GetSMSAttributes request.
 type GetSMSAttributesOutput struct {
 
 	// The SMS attribute names and their values.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

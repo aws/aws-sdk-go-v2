@@ -50,7 +50,7 @@ type DescribeTagsOutput struct {
 	ResourceType types.TaggableResourceType
 
 	// A list of tags associated with the ML object.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

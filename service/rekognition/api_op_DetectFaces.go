@@ -65,7 +65,7 @@ type DetectFacesInput struct {
 type DetectFacesOutput struct {
 
 	// Details of each face found in the image.
-	FaceDetails []*types.FaceDetail
+	FaceDetails []types.FaceDetail
 
 	// The value of OrientationCorrection is always null. If the input image is in
 	// .jpeg format, it might contain exchangeable image file format (Exif) metadata

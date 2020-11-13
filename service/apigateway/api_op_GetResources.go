@@ -41,7 +41,7 @@ type GetResourcesInput struct {
 	// of the embedded Method resources this way. The query parameter value must be a
 	// single-valued list and contain the "methods" string. For example, GET
 	// /restapis/{restapi_id}/resources?embed=methods.
-	Embed []*string
+	Embed []string
 
 	// The maximum number of returned results per page. The default value is 25 and the
 	// maximum value is 500.
@@ -56,7 +56,7 @@ type GetResourcesInput struct {
 type GetResourcesOutput struct {
 
 	// The current page of elements from this collection.
-	Items []*types.Resource
+	Items []types.Resource
 
 	// The current pagination position in the paged result set.
 	Position *string

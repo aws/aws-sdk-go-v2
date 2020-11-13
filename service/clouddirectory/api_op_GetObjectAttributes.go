@@ -32,7 +32,7 @@ type GetObjectAttributesInput struct {
 	// List of attribute names whose values will be retrieved.
 	//
 	// This member is required.
-	AttributeNames []*string
+	AttributeNames []string
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory where the
 	// object resides.
@@ -58,7 +58,7 @@ type GetObjectAttributesInput struct {
 type GetObjectAttributesOutput struct {
 
 	// The attributes that are associated with the object.
-	Attributes []*types.AttributeKeyAndValue
+	Attributes []types.AttributeKeyAndValue
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

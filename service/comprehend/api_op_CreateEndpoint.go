@@ -58,7 +58,7 @@ type CreateEndpointInput struct {
 	// Tags associated with the endpoint being created. A tag is a key-value pair that
 	// adds metadata to the endpoint. For example, a tag with "Sales" as the key might
 	// be added to an endpoint to indicate its use by the sales department.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateEndpointOutput struct {

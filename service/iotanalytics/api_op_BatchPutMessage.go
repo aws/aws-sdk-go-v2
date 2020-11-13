@@ -61,13 +61,13 @@ type BatchPutMessageInput struct {
 	// {"__temp_01": 29} are invalid in message payloads.
 	//
 	// This member is required.
-	Messages []*types.Message
+	Messages []types.Message
 }
 
 type BatchPutMessageOutput struct {
 
 	// A list of any errors encountered when sending the messages to the channel.
-	BatchPutMessageErrorEntries []*types.BatchPutMessageErrorEntry
+	BatchPutMessageErrorEntries []types.BatchPutMessageErrorEntry
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

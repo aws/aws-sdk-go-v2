@@ -32,7 +32,7 @@ type SearchDevicesInput struct {
 	// The filter values to use to search for a device.
 	//
 	// This member is required.
-	Filters []*types.SearchDevicesFilter
+	Filters []types.SearchDevicesFilter
 
 	// The maximum number of results to return in the response.
 	MaxResults *int32
@@ -49,7 +49,7 @@ type SearchDevicesOutput struct {
 	// values.
 	//
 	// This member is required.
-	Devices []*types.DeviceSummary
+	Devices []types.DeviceSummary
 
 	// A token used for pagination of results, or null if there are no additional
 	// results. Use the token value in a subsequent request to continue results where

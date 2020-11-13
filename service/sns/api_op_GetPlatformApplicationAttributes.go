@@ -56,7 +56,7 @@ type GetPlatformApplicationAttributesOutput struct {
 	// * EventDeliveryFailure – Topic ARN to which DeliveryFailure
 	// event notifications should be sent upon Direct Publish delivery failure
 	// (permanent) to one of the application's endpoints.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

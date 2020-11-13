@@ -34,14 +34,14 @@ type Cluster struct {
 	IamRoleArn *string
 
 	// A list of nodes to be removed from the cluster.
-	NodeIdsToRemove []*string
+	NodeIdsToRemove []string
 
 	// The node type for the nodes in the cluster. (All nodes in a DAX cluster are of
 	// the same type.)
 	NodeType *string
 
 	// A list of nodes that are currently in the cluster.
-	Nodes []*Node
+	Nodes []Node
 
 	// Describes a notification topic and its status. Notification topics are used for
 	// publishing DAX events to subscribers using Amazon Simple Notification Service
@@ -61,7 +61,7 @@ type Cluster struct {
 	SSEDescription *SSEDescription
 
 	// A list of security groups, and the status of each, for the nodes in the cluster.
-	SecurityGroups []*SecurityGroupMembership
+	SecurityGroups []SecurityGroupMembership
 
 	// The current status of the cluster.
 	Status *string
@@ -82,7 +82,7 @@ type Endpoint struct {
 	Address *string
 
 	// The port number that applications should use to connect to the endpoint.
-	Port *int32
+	Port int32
 }
 
 // Represents a single occurrence of something interesting within the system. Some
@@ -174,7 +174,7 @@ type Parameter struct {
 	IsModifiable IsModifiable
 
 	// A list of node types, and specific parameter values for each node.
-	NodeTypeSpecificValues []*NodeTypeSpecificValue
+	NodeTypeSpecificValues []NodeTypeSpecificValue
 
 	// The name of the parameter.
 	ParameterName *string
@@ -205,7 +205,7 @@ type ParameterGroup struct {
 type ParameterGroupStatus struct {
 
 	// The node IDs of one or more nodes to be rebooted.
-	NodeIdsToReboot []*string
+	NodeIdsToReboot []string
 
 	// The status of parameter updates.
 	ParameterApplyStatus *string
@@ -289,7 +289,7 @@ type SubnetGroup struct {
 	SubnetGroupName *string
 
 	// A list of subnets associated with the subnet group.
-	Subnets []*Subnet
+	Subnets []Subnet
 
 	// The Amazon Virtual Private Cloud identifier (VPC ID) of the subnet group.
 	VpcId *string

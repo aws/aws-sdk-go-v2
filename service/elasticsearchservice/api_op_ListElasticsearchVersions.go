@@ -35,7 +35,7 @@ type ListElasticsearchVersionsInput struct {
 
 	// Set this value to limit the number of results returned. Value provided must be
 	// greater than 10 else it wont be honored.
-	MaxResults *int32
+	MaxResults int32
 
 	// Paginated APIs accepts NextToken input to returns next page results and provides
 	// a NextToken output in the response which can be used by the client to retrieve
@@ -48,7 +48,7 @@ type ListElasticsearchVersionsInput struct {
 type ListElasticsearchVersionsOutput struct {
 
 	// List of supported elastic search versions.
-	ElasticsearchVersions []*string
+	ElasticsearchVersions []string
 
 	// Paginated APIs accepts NextToken input to returns next page results and provides
 	// a NextToken output in the response which can be used by the client to retrieve

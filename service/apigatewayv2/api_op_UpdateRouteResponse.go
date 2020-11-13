@@ -50,10 +50,10 @@ type UpdateRouteResponseInput struct {
 	ModelSelectionExpression *string
 
 	// The response models for the route response.
-	ResponseModels map[string]*string
+	ResponseModels map[string]string
 
 	// The route response parameters.
-	ResponseParameters map[string]*types.ParameterConstraints
+	ResponseParameters map[string]types.ParameterConstraints
 
 	// The route response key.
 	RouteResponseKey *string
@@ -66,10 +66,10 @@ type UpdateRouteResponseOutput struct {
 	ModelSelectionExpression *string
 
 	// Represents the response models of a route response.
-	ResponseModels map[string]*string
+	ResponseModels map[string]string
 
 	// Represents the response parameters of a route response.
-	ResponseParameters map[string]*types.ParameterConstraints
+	ResponseParameters map[string]types.ParameterConstraints
 
 	// Represents the identifier of a route response.
 	RouteResponseId *string

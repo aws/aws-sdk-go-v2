@@ -80,7 +80,7 @@ type CreateProfileInput struct {
 	SetupModeDisabled *bool
 
 	// The tags for the profile.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateProfileOutput struct {

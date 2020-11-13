@@ -53,7 +53,7 @@ type ListServiceSpecificCredentialsOutput struct {
 
 	// A list of structures that each contain details about a service-specific
 	// credential.
-	ServiceSpecificCredentials []*types.ServiceSpecificCredentialMetadata
+	ServiceSpecificCredentials []types.ServiceSpecificCredentialMetadata
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

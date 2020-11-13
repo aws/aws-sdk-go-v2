@@ -42,7 +42,7 @@ type ListConfigsInput struct {
 type ListConfigsOutput struct {
 
 	// List of Config items.
-	ConfigList []*types.ConfigListItem
+	ConfigList []types.ConfigListItem
 
 	// Next token returned in the response of a previous ListConfigs call. Used to get
 	// the next page of results.

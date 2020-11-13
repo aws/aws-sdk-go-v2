@@ -46,7 +46,7 @@ type GetBuiltinIntentOutput struct {
 
 	// An array of BuiltinIntentSlot objects, one entry for each slot type in the
 	// intent.
-	Slots []*types.BuiltinIntentSlot
+	Slots []types.BuiltinIntentSlot
 
 	// A list of locales that the intent supports.
 	SupportedLocales []types.Locale

@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	"github.com/awslabs/smithy-go/ptr"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
 	"strings"
@@ -1001,7 +1002,7 @@ func awsAwsjson11_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				if !ok {
 					return fmt.Errorf("expected ExceptionMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		case "resourceType":
@@ -1010,7 +1011,7 @@ func awsAwsjson11_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				if !ok {
 					return fmt.Errorf("expected ResourceType to be of type string, got %T instead", value)
 				}
-				sv.ResourceType = &jtv
+				sv.ResourceType = ptr.String(jtv)
 			}
 
 		default:
@@ -1099,7 +1100,7 @@ func awsAwsjson11_deserializeDocumentFailedS3Resource(v **types.FailedS3Resource
 				if !ok {
 					return fmt.Errorf("expected ErrorCode to be of type string, got %T instead", value)
 				}
-				sv.ErrorCode = &jtv
+				sv.ErrorCode = ptr.String(jtv)
 			}
 
 		case "errorMessage":
@@ -1108,7 +1109,7 @@ func awsAwsjson11_deserializeDocumentFailedS3Resource(v **types.FailedS3Resource
 				if !ok {
 					return fmt.Errorf("expected ExceptionMessage to be of type string, got %T instead", value)
 				}
-				sv.ErrorMessage = &jtv
+				sv.ErrorMessage = ptr.String(jtv)
 			}
 
 		case "failedItem":
@@ -1125,7 +1126,7 @@ func awsAwsjson11_deserializeDocumentFailedS3Resource(v **types.FailedS3Resource
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentFailedS3Resources(v *[]*types.FailedS3Resource, value interface{}) error {
+func awsAwsjson11_deserializeDocumentFailedS3Resources(v *[]types.FailedS3Resource, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1138,18 +1139,20 @@ func awsAwsjson11_deserializeDocumentFailedS3Resources(v *[]*types.FailedS3Resou
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.FailedS3Resource
+	var cv []types.FailedS3Resource
 	if *v == nil {
-		cv = []*types.FailedS3Resource{}
+		cv = []types.FailedS3Resource{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.FailedS3Resource
-		if err := awsAwsjson11_deserializeDocumentFailedS3Resource(&col, value); err != nil {
+		var col types.FailedS3Resource
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentFailedS3Resource(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -1185,7 +1188,7 @@ func awsAwsjson11_deserializeDocumentInternalException(v **types.InternalExcepti
 				if !ok {
 					return fmt.Errorf("expected ErrorCode to be of type string, got %T instead", value)
 				}
-				sv.ErrorCode_ = &jtv
+				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
 		case "message":
@@ -1194,7 +1197,7 @@ func awsAwsjson11_deserializeDocumentInternalException(v **types.InternalExcepti
 				if !ok {
 					return fmt.Errorf("expected ExceptionMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1234,7 +1237,7 @@ func awsAwsjson11_deserializeDocumentInvalidInputException(v **types.InvalidInpu
 				if !ok {
 					return fmt.Errorf("expected ErrorCode to be of type string, got %T instead", value)
 				}
-				sv.ErrorCode_ = &jtv
+				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
 		case "fieldName":
@@ -1243,7 +1246,7 @@ func awsAwsjson11_deserializeDocumentInvalidInputException(v **types.InvalidInpu
 				if !ok {
 					return fmt.Errorf("expected FieldName to be of type string, got %T instead", value)
 				}
-				sv.FieldName = &jtv
+				sv.FieldName = ptr.String(jtv)
 			}
 
 		case "message":
@@ -1252,7 +1255,7 @@ func awsAwsjson11_deserializeDocumentInvalidInputException(v **types.InvalidInpu
 				if !ok {
 					return fmt.Errorf("expected ExceptionMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1292,7 +1295,7 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				if !ok {
 					return fmt.Errorf("expected ErrorCode to be of type string, got %T instead", value)
 				}
-				sv.ErrorCode_ = &jtv
+				sv.ErrorCode_ = ptr.String(jtv)
 			}
 
 		case "message":
@@ -1301,7 +1304,7 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				if !ok {
 					return fmt.Errorf("expected ExceptionMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		case "resourceType":
@@ -1310,7 +1313,7 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				if !ok {
 					return fmt.Errorf("expected ResourceType to be of type string, got %T instead", value)
 				}
-				sv.ResourceType = &jtv
+				sv.ResourceType = ptr.String(jtv)
 			}
 
 		default:
@@ -1350,7 +1353,7 @@ func awsAwsjson11_deserializeDocumentMemberAccount(v **types.MemberAccount, valu
 				if !ok {
 					return fmt.Errorf("expected AWSAccountId to be of type string, got %T instead", value)
 				}
-				sv.AccountId = &jtv
+				sv.AccountId = ptr.String(jtv)
 			}
 
 		default:
@@ -1362,7 +1365,7 @@ func awsAwsjson11_deserializeDocumentMemberAccount(v **types.MemberAccount, valu
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentMemberAccounts(v *[]*types.MemberAccount, value interface{}) error {
+func awsAwsjson11_deserializeDocumentMemberAccounts(v *[]types.MemberAccount, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1375,18 +1378,20 @@ func awsAwsjson11_deserializeDocumentMemberAccounts(v *[]*types.MemberAccount, v
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.MemberAccount
+	var cv []types.MemberAccount
 	if *v == nil {
-		cv = []*types.MemberAccount{}
+		cv = []types.MemberAccount{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.MemberAccount
-		if err := awsAwsjson11_deserializeDocumentMemberAccount(&col, value); err != nil {
+		var col types.MemberAccount
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentMemberAccount(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -1422,7 +1427,7 @@ func awsAwsjson11_deserializeDocumentS3Resource(v **types.S3Resource, value inte
 				if !ok {
 					return fmt.Errorf("expected BucketName to be of type string, got %T instead", value)
 				}
-				sv.BucketName = &jtv
+				sv.BucketName = ptr.String(jtv)
 			}
 
 		case "prefix":
@@ -1431,7 +1436,7 @@ func awsAwsjson11_deserializeDocumentS3Resource(v **types.S3Resource, value inte
 				if !ok {
 					return fmt.Errorf("expected Prefix to be of type string, got %T instead", value)
 				}
-				sv.Prefix = &jtv
+				sv.Prefix = ptr.String(jtv)
 			}
 
 		default:
@@ -1471,7 +1476,7 @@ func awsAwsjson11_deserializeDocumentS3ResourceClassification(v **types.S3Resour
 				if !ok {
 					return fmt.Errorf("expected BucketName to be of type string, got %T instead", value)
 				}
-				sv.BucketName = &jtv
+				sv.BucketName = ptr.String(jtv)
 			}
 
 		case "classificationType":
@@ -1485,7 +1490,7 @@ func awsAwsjson11_deserializeDocumentS3ResourceClassification(v **types.S3Resour
 				if !ok {
 					return fmt.Errorf("expected Prefix to be of type string, got %T instead", value)
 				}
-				sv.Prefix = &jtv
+				sv.Prefix = ptr.String(jtv)
 			}
 
 		default:
@@ -1497,7 +1502,7 @@ func awsAwsjson11_deserializeDocumentS3ResourceClassification(v **types.S3Resour
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentS3ResourcesClassification(v *[]*types.S3ResourceClassification, value interface{}) error {
+func awsAwsjson11_deserializeDocumentS3ResourcesClassification(v *[]types.S3ResourceClassification, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1510,18 +1515,20 @@ func awsAwsjson11_deserializeDocumentS3ResourcesClassification(v *[]*types.S3Res
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.S3ResourceClassification
+	var cv []types.S3ResourceClassification
 	if *v == nil {
-		cv = []*types.S3ResourceClassification{}
+		cv = []types.S3ResourceClassification{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.S3ResourceClassification
-		if err := awsAwsjson11_deserializeDocumentS3ResourceClassification(&col, value); err != nil {
+		var col types.S3ResourceClassification
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentS3ResourceClassification(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -1696,7 +1703,7 @@ func awsAwsjson11_deserializeOpDocumentListMemberAccountsOutput(v **ListMemberAc
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -1736,7 +1743,7 @@ func awsAwsjson11_deserializeOpDocumentListS3ResourcesOutput(v **ListS3Resources
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "s3Resources":

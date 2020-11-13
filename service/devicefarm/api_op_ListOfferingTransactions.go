@@ -49,7 +49,7 @@ type ListOfferingTransactionsOutput struct {
 
 	// The audit log of subscriptions you have purchased and modified through AWS
 	// Device Farm.
-	OfferingTransactions []*types.OfferingTransaction
+	OfferingTransactions []types.OfferingTransaction
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

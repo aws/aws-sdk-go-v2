@@ -45,7 +45,7 @@ type GetEffectivePoliciesInput struct {
 type GetEffectivePoliciesOutput struct {
 
 	// The effective policies.
-	EffectivePolicies []*types.EffectivePolicy
+	EffectivePolicies []types.EffectivePolicy
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

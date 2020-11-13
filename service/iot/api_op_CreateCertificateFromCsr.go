@@ -57,7 +57,7 @@ type CreateCertificateFromCsrInput struct {
 	CertificateSigningRequest *string
 
 	// Specifies whether the certificate is active.
-	SetAsActive *bool
+	SetAsActive bool
 }
 
 // The output from the CreateCertificateFromCsr operation.

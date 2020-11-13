@@ -48,7 +48,7 @@ type ListCampaignsInput struct {
 type ListCampaignsOutput struct {
 
 	// A list of the campaigns.
-	Campaigns []*types.CampaignSummary
+	Campaigns []types.CampaignSummary
 
 	// A token for getting the next set of campaigns (if they exist).
 	NextToken *string

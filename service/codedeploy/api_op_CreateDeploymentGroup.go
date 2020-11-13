@@ -56,7 +56,7 @@ type CreateDeploymentGroupInput struct {
 	AutoRollbackConfiguration *types.AutoRollbackConfiguration
 
 	// A list of associated Amazon EC2 Auto Scaling groups.
-	AutoScalingGroups []*string
+	AutoScalingGroups []string
 
 	// Information about blue/green deployment options for a deployment group.
 	BlueGreenDeploymentConfiguration *types.BlueGreenDeploymentConfiguration
@@ -79,7 +79,7 @@ type CreateDeploymentGroupInput struct {
 	// The Amazon EC2 tags on which to filter. The deployment group includes EC2
 	// instances with any of the specified tags. Cannot be used in the same call as
 	// ec2TagSet.
-	Ec2TagFilters []*types.EC2TagFilter
+	Ec2TagFilters []types.EC2TagFilter
 
 	// Information about groups of tags applied to EC2 instances. The deployment group
 	// includes only EC2 instances identified by all the tag groups. Cannot be used in
@@ -90,7 +90,7 @@ type CreateDeploymentGroupInput struct {
 	// deployment groups that use the Amazon ECS compute platform. A target Amazon ECS
 	// service is specified as an Amazon ECS cluster and service name pair using the
 	// format :.
-	EcsServices []*types.ECSService
+	EcsServices []types.ECSService
 
 	// Information about the load balancer used in a deployment.
 	LoadBalancerInfo *types.LoadBalancerInfo
@@ -98,7 +98,7 @@ type CreateDeploymentGroupInput struct {
 	// The on-premises instance tags on which to filter. The deployment group includes
 	// on-premises instances with any of the specified tags. Cannot be used in the same
 	// call as OnPremisesTagSet.
-	OnPremisesInstanceTagFilters []*types.TagFilter
+	OnPremisesInstanceTagFilters []types.TagFilter
 
 	// Information about groups of tags applied to on-premises instances. The
 	// deployment group includes only on-premises instances identified by all of the
@@ -108,13 +108,13 @@ type CreateDeploymentGroupInput struct {
 	// The metadata that you apply to CodeDeploy deployment groups to help you organize
 	// and categorize them. Each tag consists of a key and an optional value, both of
 	// which you define.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Information about triggers to create when the deployment group is created. For
 	// examples, see Create a Trigger for an AWS CodeDeploy Event
 	// (https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-sns.html)
 	// in the AWS CodeDeploy User Guide.
-	TriggerConfigurations []*types.TriggerConfig
+	TriggerConfigurations []types.TriggerConfig
 }
 
 // Represents the output of a CreateDeploymentGroup operation.

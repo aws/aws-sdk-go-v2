@@ -84,19 +84,19 @@ type CreateFargateProfileInput struct {
 	// The selectors to match for pods to use this Fargate profile. Each selector must
 	// have an associated namespace. Optionally, you can also specify labels for a
 	// namespace. You may specify up to five selectors in a Fargate profile.
-	Selectors []*types.FargateProfileSelector
+	Selectors []types.FargateProfileSelector
 
 	// The IDs of subnets to launch your pods into. At this time, pods running on
 	// Fargate are not assigned public IP addresses, so only private subnets (with no
 	// direct route to an Internet Gateway) are accepted for this parameter.
-	Subnets []*string
+	Subnets []string
 
 	// The metadata to apply to the Fargate profile to assist with categorization and
 	// organization. Each tag consists of a key and an optional value, both of which
 	// you define. Fargate profile tags do not propagate to any other resources
 	// associated with the Fargate profile, such as the pods that are scheduled with
 	// it.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateFargateProfileOutput struct {

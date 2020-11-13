@@ -31,7 +31,7 @@ func (c *Client) DeleteAccountAuditConfiguration(ctx context.Context, params *De
 type DeleteAccountAuditConfigurationInput struct {
 
 	// If true, all scheduled audits are deleted.
-	DeleteScheduledAudits *bool
+	DeleteScheduledAudits bool
 }
 
 type DeleteAccountAuditConfigurationOutput struct {

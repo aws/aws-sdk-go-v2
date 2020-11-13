@@ -71,7 +71,7 @@ type ListTaskDefinitionFamiliesOutput struct {
 
 	// The list of task definition family names that match the
 	// ListTaskDefinitionFamilies request.
-	Families []*string
+	Families []string
 
 	// The nextToken value to include in a future ListTaskDefinitionFamilies request.
 	// When the results of a ListTaskDefinitionFamilies request exceed maxResults, this

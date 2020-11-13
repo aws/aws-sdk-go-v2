@@ -89,7 +89,7 @@ type CreateApplicationVersionInput struct {
 	// Specifies the tags applied to the application version. Elastic Beanstalk applies
 	// these tags only to the application version. Environments that use the
 	// application version don't inherit the tags.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // Result message wrapping a single description of an application version.

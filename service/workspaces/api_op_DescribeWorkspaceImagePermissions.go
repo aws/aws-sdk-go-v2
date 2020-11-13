@@ -49,7 +49,7 @@ type DescribeWorkspaceImagePermissionsOutput struct {
 	ImageId *string
 
 	// The identifiers of the AWS accounts that the image has been shared with.
-	ImagePermissions []*types.ImagePermission
+	ImagePermissions []types.ImagePermission
 
 	// The token to use to retrieve the next set of results, or null if no more results
 	// are available.

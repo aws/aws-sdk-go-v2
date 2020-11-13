@@ -567,17 +567,13 @@ func awsRestjson1_serializeDocumentDASHTimestampRange(v *types.DASHTimestampRang
 	return nil
 }
 
-func awsRestjson1_serializeDocumentFragmentNumberList(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentFragmentNumberList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }

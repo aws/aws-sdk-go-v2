@@ -61,7 +61,7 @@ type GetSlotTypeVersionsOutput struct {
 
 	// An array of SlotTypeMetadata objects, one for each numbered version of the slot
 	// type plus one for the $LATEST version.
-	SlotTypes []*types.SlotTypeMetadata
+	SlotTypes []types.SlotTypeMetadata
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

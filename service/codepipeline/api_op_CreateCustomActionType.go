@@ -64,13 +64,13 @@ type CreateCustomActionTypeInput struct {
 	// both required and not secret. For more information, see Create a Custom Action
 	// for a Pipeline
 	// (https://docs.aws.amazon.com/codepipeline/latest/userguide/how-to-create-custom-action.html).
-	ConfigurationProperties []*types.ActionConfigurationProperty
+	ConfigurationProperties []types.ActionConfigurationProperty
 
 	// URLs that provide users information about this custom action.
 	Settings *types.ActionTypeSettings
 
 	// The tags for the custom action.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // Represents the output of a CreateCustomActionType operation.
@@ -82,7 +82,7 @@ type CreateCustomActionTypeOutput struct {
 	ActionType *types.ActionType
 
 	// Specifies the tags applied to the custom action.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

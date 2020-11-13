@@ -64,7 +64,7 @@ type DescribeTapeRecoveryPointsOutput struct {
 	Marker *string
 
 	// An array of TapeRecoveryPointInfos that are available for the specified gateway.
-	TapeRecoveryPointInfos []*types.TapeRecoveryPointInfo
+	TapeRecoveryPointInfos []types.TapeRecoveryPointInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -76,7 +76,7 @@ type RestoreDBClusterFromSnapshotInput struct {
 
 	// Provides the list of Availability Zones (AZs) where instances in the restored DB
 	// cluster can be created.
-	AvailabilityZones []*string
+	AvailabilityZones []string
 
 	// The target backtrack window, in seconds. To disable backtracking, set this value
 	// to 0. Currently, Backtrack is only supported for Aurora MySQL DB clusters.
@@ -136,7 +136,7 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// information, see Publishing Database Logs to Amazon CloudWatch Logs
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
 	// in the Amazon Aurora User Guide.
-	EnableCloudwatchLogsExports []*string
+	EnableCloudwatchLogsExports []string
 
 	// A value that indicates whether to enable mapping of AWS Identity and Access
 	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
@@ -196,10 +196,10 @@ type RestoreDBClusterFromSnapshotInput struct {
 	ScalingConfiguration *types.ScalingConfiguration
 
 	// The tags to be assigned to the restored DB cluster.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// A list of VPC security groups that the new DB cluster will belong to.
-	VpcSecurityGroupIds []*string
+	VpcSecurityGroupIds []string
 }
 
 type RestoreDBClusterFromSnapshotOutput struct {

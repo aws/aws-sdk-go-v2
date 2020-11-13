@@ -31,7 +31,7 @@ func (c *Client) ListTunnels(ctx context.Context, params *ListTunnelsInput, optF
 type ListTunnelsInput struct {
 
 	// The maximum number of results to return at once.
-	MaxResults *int32
+	MaxResults int32
 
 	// A token to retrieve the next set of results.
 	NextToken *string
@@ -46,7 +46,7 @@ type ListTunnelsOutput struct {
 	NextToken *string
 
 	// A short description of the tunnels in an AWS account.
-	TunnelSummaries []*types.TunnelSummary
+	TunnelSummaries []types.TunnelSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

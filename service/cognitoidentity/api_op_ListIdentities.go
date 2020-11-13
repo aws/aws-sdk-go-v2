@@ -39,12 +39,12 @@ type ListIdentitiesInput struct {
 	// The maximum number of identities to return.
 	//
 	// This member is required.
-	MaxResults *int32
+	MaxResults int32
 
 	// An optional boolean parameter that allows you to hide disabled identities. If
 	// omitted, the ListIdentities API will include disabled identities in the
 	// response.
-	HideDisabled *bool
+	HideDisabled bool
 
 	// A pagination token.
 	NextToken *string
@@ -54,7 +54,7 @@ type ListIdentitiesInput struct {
 type ListIdentitiesOutput struct {
 
 	// An object containing a set of identities and associated mappings.
-	Identities []*types.IdentityDescription
+	Identities []types.IdentityDescription
 
 	// An identity pool ID in the format REGION:GUID.
 	IdentityPoolId *string

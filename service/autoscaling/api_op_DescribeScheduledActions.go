@@ -50,7 +50,7 @@ type DescribeScheduledActionsInput struct {
 	// The names of one or more scheduled actions. You can specify up to 50 actions. If
 	// you omit this parameter, all scheduled actions are described. If you specify an
 	// unknown scheduled action, it is ignored with no error.
-	ScheduledActionNames []*string
+	ScheduledActionNames []string
 
 	// The earliest scheduled start time to return. If scheduled action names are
 	// provided, this parameter is ignored.
@@ -66,7 +66,7 @@ type DescribeScheduledActionsOutput struct {
 	NextToken *string
 
 	// The scheduled actions.
-	ScheduledUpdateGroupActions []*types.ScheduledUpdateGroupAction
+	ScheduledUpdateGroupActions []types.ScheduledUpdateGroupAction
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

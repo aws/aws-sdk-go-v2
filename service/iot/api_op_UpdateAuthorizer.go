@@ -44,7 +44,7 @@ type UpdateAuthorizerInput struct {
 	TokenKeyName *string
 
 	// The public keys used to verify the token signature.
-	TokenSigningPublicKeys map[string]*string
+	TokenSigningPublicKeys map[string]string
 }
 
 type UpdateAuthorizerOutput struct {

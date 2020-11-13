@@ -54,7 +54,7 @@ type ListFacesOutput struct {
 	FaceModelVersion *string
 
 	// An array of Face objects.
-	Faces []*types.Face
+	Faces []types.Face
 
 	// If the response is truncated, Amazon Rekognition returns this token that you can
 	// use in the subsequent request to retrieve the next set of faces.

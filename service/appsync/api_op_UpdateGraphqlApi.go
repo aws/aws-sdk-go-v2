@@ -40,7 +40,7 @@ type UpdateGraphqlApiInput struct {
 	Name *string
 
 	// A list of additional authentication providers for the GraphqlApi API.
-	AdditionalAuthenticationProviders []*types.AdditionalAuthenticationProvider
+	AdditionalAuthenticationProviders []types.AdditionalAuthenticationProvider
 
 	// The new authentication type for the GraphqlApi object.
 	AuthenticationType types.AuthenticationType
@@ -55,7 +55,7 @@ type UpdateGraphqlApiInput struct {
 	UserPoolConfig *types.UserPoolConfig
 
 	// A flag indicating whether to enable X-Ray tracing for the GraphqlApi.
-	XrayEnabled *bool
+	XrayEnabled bool
 }
 
 type UpdateGraphqlApiOutput struct {

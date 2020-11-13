@@ -33,7 +33,7 @@ type BatchAssociateServiceActionWithProvisioningArtifactInput struct {
 	// the Provisioning Artifact ID.
 	//
 	// This member is required.
-	ServiceActionAssociations []*types.ServiceActionAssociation
+	ServiceActionAssociations []types.ServiceActionAssociation
 
 	// The language code.
 	//
@@ -49,7 +49,7 @@ type BatchAssociateServiceActionWithProvisioningArtifactOutput struct {
 
 	// An object that contains a list of errors, along with information to help you
 	// identify the self-service action.
-	FailedServiceActionAssociations []*types.FailedServiceActionAssociation
+	FailedServiceActionAssociations []types.FailedServiceActionAssociation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

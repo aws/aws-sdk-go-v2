@@ -42,7 +42,7 @@ type ListRecordHistoryInput struct {
 	AccessLevelFilter *types.AccessLevelFilter
 
 	// The maximum number of items to return with this call.
-	PageSize *int32
+	PageSize int32
 
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
@@ -59,7 +59,7 @@ type ListRecordHistoryOutput struct {
 	NextPageToken *string
 
 	// The records, in reverse chronological order.
-	RecordDetails []*types.RecordDetail
+	RecordDetails []types.RecordDetail
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

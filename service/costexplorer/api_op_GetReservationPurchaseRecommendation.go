@@ -67,7 +67,7 @@ type GetReservationPurchaseRecommendationInput struct {
 
 	// The number of recommendations that you want returned in a single response
 	// object.
-	PageSize *int32
+	PageSize int32
 
 	// The reservation purchase option that you want recommendations for.
 	PaymentOption types.PaymentOption
@@ -90,7 +90,7 @@ type GetReservationPurchaseRecommendationOutput struct {
 	NextPageToken *string
 
 	// Recommendations for reservations to purchase.
-	Recommendations []*types.ReservationPurchaseRecommendation
+	Recommendations []types.ReservationPurchaseRecommendation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -50,7 +50,7 @@ type UpdateAssociationInput struct {
 	// you update the association from the command line. This parameter forces the
 	// association to run immediately after updating it and according to the interval
 	// specified.
-	ApplyOnlyAtCronInterval *bool
+	ApplyOnlyAtCronInterval bool
 
 	// The name of the association that you want to update.
 	AssociationName *string
@@ -112,7 +112,7 @@ type UpdateAssociationInput struct {
 	// The parameters you want to update for the association. If you create a parameter
 	// using Parameter Store, you can reference the parameter using
 	// {{ssm:parameter-name}}
-	Parameters map[string][]*string
+	Parameters map[string][]string
 
 	// The cron expression used to schedule the association that you want to update.
 	ScheduleExpression *string
@@ -129,7 +129,7 @@ type UpdateAssociationInput struct {
 	SyncCompliance types.AssociationSyncCompliance
 
 	// The targets of the association.
-	Targets []*types.Target
+	Targets []types.Target
 }
 
 type UpdateAssociationOutput struct {

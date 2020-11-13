@@ -62,7 +62,7 @@ type ImportWorkspaceImageInput struct {
 	Applications []types.Application
 
 	// The tags. Each WorkSpaces resource can have a maximum of 50 tags.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type ImportWorkspaceImageOutput struct {

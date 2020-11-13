@@ -36,7 +36,7 @@ type DisassociateConfigurationItemsFromApplicationInput struct {
 	// Configuration ID of each item to be disassociated from an application.
 	//
 	// This member is required.
-	ConfigurationIds []*string
+	ConfigurationIds []string
 }
 
 type DisassociateConfigurationItemsFromApplicationOutput struct {

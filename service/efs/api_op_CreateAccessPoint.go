@@ -64,7 +64,7 @@ type CreateAccessPointInput struct {
 	RootDirectory *types.RootDirectory
 
 	// Creates tags associated with the access point. Each tag is a key-value pair.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // Provides a description of an EFS file system access point.
@@ -101,7 +101,7 @@ type CreateAccessPointOutput struct {
 	RootDirectory *types.RootDirectory
 
 	// The tags associated with the access point, presented as an array of Tag objects.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

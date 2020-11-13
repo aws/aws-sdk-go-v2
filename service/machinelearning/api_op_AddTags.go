@@ -46,7 +46,7 @@ type AddTagsInput struct {
 	// of null.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // Amazon ML returns the following elements.

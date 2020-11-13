@@ -6,7 +6,7 @@ package types
 type Bucket struct {
 
 	// The number of hits that contain the facet value in the specified facet field.
-	Count *int64
+	Count int64
 
 	// The facet value being counted.
 	Value *string
@@ -16,7 +16,7 @@ type Bucket struct {
 type BucketInfo struct {
 
 	// A list of the calculated facet values and counts.
-	Buckets []*Bucket
+	Buckets []Bucket
 }
 
 // A warning returned by the document service when an issue is discovered while
@@ -32,7 +32,7 @@ type FieldStats struct {
 
 	// The number of documents that contain a value in the specified field in the
 	// result set.
-	Count *int64
+	Count int64
 
 	// The maximum value found in the specified field in the result set. If the field
 	// is numeric (int, int-array, double, or double-array), max is the string
@@ -60,30 +60,30 @@ type FieldStats struct {
 
 	// The number of documents that do not contain a value in the specified field in
 	// the result set.
-	Missing *int64
+	Missing int64
 
 	// The standard deviation of the values in the specified field in the result set.
-	Stddev *float64
+	Stddev float64
 
 	// The sum of the field values across the documents in the result set. null for
 	// date fields.
-	Sum *float64
+	Sum float64
 
 	// The sum of all field values in the result set squared.
-	SumOfSquares *float64
+	SumOfSquares float64
 }
 
 // Information about a document that matches the search request.
 type Hit struct {
 
 	// The expressions returned from a document that matches the search request.
-	Exprs map[string]*string
+	Exprs map[string]string
 
 	// The fields returned from a document that matches the search request.
-	Fields map[string][]*string
+	Fields map[string][]string
 
 	// The highlights returned from a document that matches the search request.
-	Highlights map[string]*string
+	Highlights map[string]string
 
 	// The document ID of a document that matches the search request.
 	Id *string
@@ -97,13 +97,13 @@ type Hits struct {
 	Cursor *string
 
 	// The total number of documents that match the search request.
-	Found *int64
+	Found int64
 
 	// A document that matches the search request.
-	Hit []*Hit
+	Hit []Hit
 
 	// The index of the first matching document.
-	Start *int64
+	Start int64
 }
 
 // Contains the resource id (rid) and the time it took to process the request
@@ -114,7 +114,7 @@ type SearchStatus struct {
 	Rid *string
 
 	// How long it took to process the request, in milliseconds.
-	Timems *int64
+	Timems int64
 }
 
 // An autocomplete suggestion that matches the query string specified in a
@@ -125,7 +125,7 @@ type SuggestionMatch struct {
 	Id *string
 
 	// The relevance score of a suggested match.
-	Score *int64
+	Score int64
 
 	// The string that matches the query string specified in the SuggestRequest.
 	Suggestion *string
@@ -135,13 +135,13 @@ type SuggestionMatch struct {
 type SuggestModel struct {
 
 	// The number of documents that were found to match the query string.
-	Found *int64
+	Found int64
 
 	// The query string specified in the suggest request.
 	Query *string
 
 	// The documents that match the query string.
-	Suggestions []*SuggestionMatch
+	Suggestions []SuggestionMatch
 }
 
 // Contains the resource id (rid) and the time it took to process the request
@@ -152,5 +152,5 @@ type SuggestStatus struct {
 	Rid *string
 
 	// How long it took to process the request, in milliseconds.
-	Timems *int64
+	Timems int64
 }

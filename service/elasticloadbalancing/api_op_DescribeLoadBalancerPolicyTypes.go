@@ -39,14 +39,14 @@ type DescribeLoadBalancerPolicyTypesInput struct {
 
 	// The names of the policy types. If no names are specified, describes all policy
 	// types defined by Elastic Load Balancing.
-	PolicyTypeNames []*string
+	PolicyTypeNames []string
 }
 
 // Contains the output of DescribeLoadBalancerPolicyTypes.
 type DescribeLoadBalancerPolicyTypesOutput struct {
 
 	// Information about the policy types.
-	PolicyTypeDescriptions []*types.PolicyTypeDescription
+	PolicyTypeDescriptions []types.PolicyTypeDescription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

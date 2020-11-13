@@ -36,13 +36,13 @@ type DescribeLifecycleHooksInput struct {
 
 	// The names of one or more lifecycle hooks. If you omit this parameter, all
 	// lifecycle hooks are described.
-	LifecycleHookNames []*string
+	LifecycleHookNames []string
 }
 
 type DescribeLifecycleHooksOutput struct {
 
 	// The lifecycle hooks for the specified group.
-	LifecycleHooks []*types.LifecycleHook
+	LifecycleHooks []types.LifecycleHook
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

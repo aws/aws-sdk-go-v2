@@ -113,7 +113,7 @@ type DescribeScalableTargetsInput struct {
 	// * Amazon MSK cluster - The resource type and
 	// unique identifier are specified using the cluster ARN. Example:
 	// arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5.
-	ResourceIds []*string
+	ResourceIds []string
 
 	// The scalable dimension associated with the scalable target. This string consists
 	// of the service namespace, resource type, and scaling property. If you specify a
@@ -188,7 +188,7 @@ type DescribeScalableTargetsOutput struct {
 	NextToken *string
 
 	// The scalable targets that match the request parameters.
-	ScalableTargets []*types.ScalableTarget
+	ScalableTargets []types.ScalableTarget
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

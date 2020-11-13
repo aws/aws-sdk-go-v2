@@ -47,7 +47,7 @@ type GetTagsInput struct {
 type GetTagsOutput struct {
 
 	// The collection of tags. Each tag element is associated with a given resource.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

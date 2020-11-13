@@ -30,7 +30,7 @@ func (c *Client) GetCrawlerMetrics(ctx context.Context, params *GetCrawlerMetric
 type GetCrawlerMetricsInput struct {
 
 	// A list of the names of crawlers about which to retrieve metrics.
-	CrawlerNameList []*string
+	CrawlerNameList []string
 
 	// The maximum size of a list to return.
 	MaxResults *int32
@@ -42,7 +42,7 @@ type GetCrawlerMetricsInput struct {
 type GetCrawlerMetricsOutput struct {
 
 	// A list of metrics for the specified crawler.
-	CrawlerMetricsList []*types.CrawlerMetrics
+	CrawlerMetricsList []types.CrawlerMetrics
 
 	// A continuation token, if the returned list does not contain the last metric
 	// available.

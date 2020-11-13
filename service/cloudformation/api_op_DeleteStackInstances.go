@@ -33,7 +33,7 @@ type DeleteStackInstancesInput struct {
 	// The Regions where you want to delete stack set instances.
 	//
 	// This member is required.
-	Regions []*string
+	Regions []string
 
 	// Removes the stack instances from the specified stack set, but doesn't delete the
 	// stacks. You can't reassociate a retained stack or add an existing, saved stack
@@ -41,7 +41,7 @@ type DeleteStackInstancesInput struct {
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options).
 	//
 	// This member is required.
-	RetainStacks *bool
+	RetainStacks bool
 
 	// The name or unique ID of the stack set that you want to delete stack instances
 	// for.
@@ -52,7 +52,7 @@ type DeleteStackInstancesInput struct {
 	// [Self-managed permissions] The names of the AWS accounts that you want to delete
 	// stack instances for. You can specify Accounts or DeploymentTargets, but not
 	// both.
-	Accounts []*string
+	Accounts []string
 
 	// [Service-managed permissions] The AWS Organizations accounts from which to
 	// delete stack instances. You can specify Accounts or DeploymentTargets, but not

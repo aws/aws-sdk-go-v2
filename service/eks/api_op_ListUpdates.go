@@ -62,7 +62,7 @@ type ListUpdatesOutput struct {
 	NextToken *string
 
 	// A list of all the updates for the specified cluster and Region.
-	UpdateIds []*string
+	UpdateIds []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

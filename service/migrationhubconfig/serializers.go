@@ -165,9 +165,9 @@ func awsAwsjson11_serializeOpDocumentCreateHomeRegionControlInput(v *CreateHomeR
 	object := value.Object()
 	defer object.Close()
 
-	if v.DryRun != nil {
+	if v.DryRun {
 		ok := object.Key("DryRun")
-		ok.Boolean(*v.DryRun)
+		ok.Boolean(v.DryRun)
 	}
 
 	if v.HomeRegion != nil {

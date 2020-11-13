@@ -53,7 +53,7 @@ type ModifyCacheClusterInput struct {
 	// reboot, whichever occurs first. If you perform a ModifyCacheCluster before a
 	// pending modification is applied, the pending modification is replaced by the
 	// newer modification. Valid values: true | false Default: false
-	ApplyImmediately *bool
+	ApplyImmediately bool
 
 	// Reserved parameter. The password used to access a password protected server.
 	// This parameter must be specified with the auth-token-update parameter. Password
@@ -94,7 +94,7 @@ type ModifyCacheClusterInput struct {
 	// NumCacheNodes in the request. For example: If you have 3 active cache nodes, 7
 	// pending cache nodes, and the number of cache nodes in this ModifyCacheCluster
 	// call is 5, you must list 2 (7 - 5) cache node IDs to remove.
-	CacheNodeIdsToRemove []*string
+	CacheNodeIdsToRemove []string
 
 	// A valid cache node type that you want to scale this cluster up to.
 	CacheNodeType *string
@@ -109,7 +109,7 @@ type ModifyCacheClusterInput struct {
 	// with clusters that are created outside of an Amazon Virtual Private Cloud
 	// (Amazon VPC). Constraints: Must contain no more than 255 alphanumeric
 	// characters. Must not be "Default".
-	CacheSecurityGroupNames []*string
+	CacheSecurityGroupNames []string
 
 	// The upgraded version of the cache engine to be run on the cache nodes.
 	// Important: You can upgrade to a newer engine version (see Selecting a Cache
@@ -192,7 +192,7 @@ type ModifyCacheClusterInput struct {
 	// the new create request is Apply Immediately - Yes, all creates are performed
 	// immediately. If the new create request is Apply Immediately - No, all creates
 	// are pending.
-	NewAvailabilityZones []*string
+	NewAvailabilityZones []string
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic to which notifications
 	// are sent. The Amazon SNS topic owner must be same as the cluster owner.
@@ -255,7 +255,7 @@ type ModifyCacheClusterInput struct {
 	// Specifies the VPC Security Groups associated with the cluster. This parameter
 	// can be used only with clusters that are created in an Amazon Virtual Private
 	// Cloud (Amazon VPC).
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// The number of days for which ElastiCache retains automatic cluster snapshots
 	// before deleting them. For example, if you set SnapshotRetentionLimit to 5, a

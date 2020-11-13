@@ -43,7 +43,7 @@ type ListGitHubAccountTokenNamesOutput struct {
 	NextToken *string
 
 	// A list of names of connections to GitHub accounts.
-	TokenNameList []*string
+	TokenNameList []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

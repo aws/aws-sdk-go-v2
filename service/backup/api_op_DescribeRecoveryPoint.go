@@ -93,7 +93,7 @@ type DescribeRecoveryPointOutput struct {
 
 	// A Boolean value that is returned as TRUE if the specified recovery point is
 	// encrypted, or FALSE if the recovery point is not encrypted.
-	IsEncrypted *bool
+	IsEncrypted bool
 
 	// The date and time that a recovery point was last restored, in Unix format and
 	// Coordinated Universal Time (UTC). The value of LastRestoreTime is accurate to

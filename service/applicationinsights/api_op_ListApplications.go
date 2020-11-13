@@ -40,7 +40,7 @@ type ListApplicationsInput struct {
 type ListApplicationsOutput struct {
 
 	// The list of applications.
-	ApplicationInfoList []*types.ApplicationInfo
+	ApplicationInfoList []types.ApplicationInfo
 
 	// The token used to retrieve the next page of results. This value is null when
 	// there are no more results to return.

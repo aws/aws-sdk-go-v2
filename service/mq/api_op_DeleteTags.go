@@ -36,7 +36,7 @@ type DeleteTagsInput struct {
 	// An array of tag keys to delete
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 type DeleteTagsOutput struct {

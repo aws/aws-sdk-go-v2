@@ -47,7 +47,7 @@ type ListAssociationsForLicenseConfigurationInput struct {
 type ListAssociationsForLicenseConfigurationOutput struct {
 
 	// Information about the associations for the license configuration.
-	LicenseConfigurationAssociations []*types.LicenseConfigurationAssociation
+	LicenseConfigurationAssociations []types.LicenseConfigurationAssociation
 
 	// Token for the next set of results.
 	NextToken *string

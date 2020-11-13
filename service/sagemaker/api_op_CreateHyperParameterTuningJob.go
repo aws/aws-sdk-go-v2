@@ -57,7 +57,7 @@ type CreateHyperParameterTuningJobInput struct {
 	// (https://aws.amazon.com/answers/account-management/aws-tagging-strategies/).
 	// Tags that you specify for the tuning job are also added to all training jobs
 	// that the tuning job launches.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The HyperParameterTrainingJobDefinition object that describes the training jobs
 	// that this tuning job launches, including static hyperparameters, input data
@@ -67,7 +67,7 @@ type CreateHyperParameterTuningJobInput struct {
 
 	// A list of the HyperParameterTrainingJobDefinition objects launched for this
 	// tuning job.
-	TrainingJobDefinitions []*types.HyperParameterTrainingJobDefinition
+	TrainingJobDefinitions []types.HyperParameterTrainingJobDefinition
 
 	// Specifies the configuration for starting the hyperparameter tuning job using one
 	// or more previous tuning jobs as a starting point. The results of previous tuning

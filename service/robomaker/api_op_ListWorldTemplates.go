@@ -55,7 +55,7 @@ type ListWorldTemplatesOutput struct {
 	NextToken *string
 
 	// Summary information for templates.
-	TemplateSummaries []*types.TemplateSummary
+	TemplateSummaries []types.TemplateSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

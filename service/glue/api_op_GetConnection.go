@@ -43,7 +43,7 @@ type GetConnectionInput struct {
 	// and does not display the password. Set this parameter when the caller might not
 	// have permission to use the AWS KMS key to decrypt the password, but it does have
 	// permission to access the rest of the connection properties.
-	HidePassword *bool
+	HidePassword bool
 }
 
 type GetConnectionOutput struct {

@@ -36,7 +36,7 @@ type UpdateUserSecurityProfilesInput struct {
 	// The identifiers of the security profiles for the user.
 	//
 	// This member is required.
-	SecurityProfileIds []*string
+	SecurityProfileIds []string
 
 	// The identifier of the user account.
 	//

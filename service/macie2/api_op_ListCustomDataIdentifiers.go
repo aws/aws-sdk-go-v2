@@ -31,7 +31,7 @@ func (c *Client) ListCustomDataIdentifiers(ctx context.Context, params *ListCust
 type ListCustomDataIdentifiersInput struct {
 
 	// The maximum number of items to include in each page of the response.
-	MaxResults *int32
+	MaxResults int32
 
 	// The nextToken string that specifies which page of results to return in a
 	// paginated response.
@@ -41,7 +41,7 @@ type ListCustomDataIdentifiersInput struct {
 type ListCustomDataIdentifiersOutput struct {
 
 	// An array of objects, one for each custom data identifier.
-	Items []*types.CustomDataIdentifierSummary
+	Items []types.CustomDataIdentifierSummary
 
 	// The string to use in a subsequent request to get the next page of results in a
 	// paginated response. This value is null if there are no additional pages.

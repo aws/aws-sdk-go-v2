@@ -51,7 +51,7 @@ type UpdateNetworkProfileInput struct {
 	DownlinkJitterMs *int64
 
 	// Proportion of received packets that fail to arrive from 0 to 100 percent.
-	DownlinkLossPercent *int32
+	DownlinkLossPercent int32
 
 	// The name of the network profile about which you are returning information.
 	Name *string
@@ -72,7 +72,7 @@ type UpdateNetworkProfileInput struct {
 	UplinkJitterMs *int64
 
 	// Proportion of transmitted packets that fail to arrive from 0 to 100 percent.
-	UplinkLossPercent *int32
+	UplinkLossPercent int32
 }
 
 type UpdateNetworkProfileOutput struct {

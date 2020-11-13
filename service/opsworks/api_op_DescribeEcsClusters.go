@@ -38,7 +38,7 @@ func (c *Client) DescribeEcsClusters(ctx context.Context, params *DescribeEcsClu
 type DescribeEcsClustersInput struct {
 
 	// A list of ARNs, one for each cluster to be described.
-	EcsClusterArns []*string
+	EcsClusterArns []string
 
 	// To receive a paginated response, use this parameter to specify the maximum
 	// number of results to be returned with a single call. If the number of available
@@ -62,7 +62,7 @@ type DescribeEcsClustersInput struct {
 type DescribeEcsClustersOutput struct {
 
 	// A list of EcsCluster objects containing the cluster descriptions.
-	EcsClusters []*types.EcsCluster
+	EcsClusters []types.EcsCluster
 
 	// If a paginated request does not return all of the remaining results, this
 	// parameter is set to a token that you can assign to the request object's

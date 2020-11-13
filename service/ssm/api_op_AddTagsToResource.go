@@ -68,7 +68,7 @@ type AddTagsToResourceInput struct {
 	// empty string. Do not enter personally identifiable information in this field.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type AddTagsToResourceOutput struct {

@@ -216,7 +216,7 @@ type Comment struct {
 
 	// The emoji reactions to a comment, if any, submitted by the user whose
 	// credentials are associated with the call to the API.
-	CallerReactions []*string
+	CallerReactions []string
 
 	// A unique, client-generated idempotency token that, when provided in a request,
 	// ensures the request cannot be repeated with a changed parameter. If a request is
@@ -234,7 +234,7 @@ type Comment struct {
 	CreationDate *time.Time
 
 	// A Boolean value indicating whether the comment has been deleted.
-	Deleted *bool
+	Deleted bool
 
 	// The ID of the comment for which this comment is a reply, if any.
 	InReplyTo *string
@@ -244,7 +244,7 @@ type Comment struct {
 
 	// A string to integer map that represents the number of individual users who have
 	// responded to a comment with the specified reactions.
-	ReactionCounts map[string]*int32
+	ReactionCounts map[string]int32
 }
 
 // Returns information about comments on the comparison between two commits.
@@ -264,7 +264,7 @@ type CommentsForComparedCommit struct {
 
 	// An array of comment objects. Each comment object contains information about a
 	// comment on the comparison between commits.
-	Comments []*Comment
+	Comments []Comment
 
 	// Location information about the comment on the comparison, including the file
 	// name, line number, and whether the version of the file where the comment was
@@ -297,7 +297,7 @@ type CommentsForPullRequest struct {
 
 	// An array of comment objects. Each comment object contains information about a
 	// comment on the pull request.
-	Comments []*Comment
+	Comments []Comment
 
 	// Location information about the comment on the pull request, including the file
 	// name, line number, and whether the version of the file where the comment was
@@ -338,7 +338,7 @@ type Commit struct {
 
 	// A list of parent commits for the specified commit. Each parent commit ID is the
 	// full commit ID.
-	Parents []*string
+	Parents []string
 
 	// Tree information for the specified commit.
 	TreeId *string
@@ -352,18 +352,18 @@ type Conflict struct {
 
 	// A list of hunks that contain the differences between files or lines causing the
 	// conflict.
-	MergeHunks []*MergeHunk
+	MergeHunks []MergeHunk
 }
 
 // Information about the metadata for a conflict in a merge operation.
 type ConflictMetadata struct {
 
 	// A boolean value indicating whether there are conflicts in the content of a file.
-	ContentConflict *bool
+	ContentConflict bool
 
 	// A boolean value indicating whether there are conflicts in the file mode of a
 	// file.
-	FileModeConflict *bool
+	FileModeConflict bool
 
 	// The file modes of the file in the source, destination, and base of the merge.
 	FileModes *FileModes
@@ -383,11 +383,11 @@ type ConflictMetadata struct {
 	MergeOperations *MergeOperations
 
 	// The number of conflicts, including both hunk conflicts and metadata conflicts.
-	NumberOfConflicts *int32
+	NumberOfConflicts int32
 
 	// A boolean value (true or false) indicating whether there are conflicts between
 	// the branches in the object type of a file, folder, or submodule.
-	ObjectTypeConflict *bool
+	ObjectTypeConflict bool
 
 	// Information about any object type conflicts in a merge operation.
 	ObjectTypes *ObjectTypes
@@ -398,13 +398,13 @@ type ConflictMetadata struct {
 type ConflictResolution struct {
 
 	// Files to be deleted as part of the merge conflict resolution.
-	DeleteFiles []*DeleteFileEntry
+	DeleteFiles []DeleteFileEntry
 
 	// Files to have content replaced as part of the merge conflict resolution.
-	ReplaceContents []*ReplaceContentEntry
+	ReplaceContents []ReplaceContentEntry
 
 	// File modes that are set as part of the merge conflict resolution.
-	SetFileModes []*SetFileModeEntry
+	SetFileModes []SetFileModeEntry
 }
 
 // A file that is deleted as part of a commit.
@@ -437,17 +437,17 @@ type Difference struct {
 type Evaluation struct {
 
 	// The names of the approval rules that have not had their conditions met.
-	ApprovalRulesNotSatisfied []*string
+	ApprovalRulesNotSatisfied []string
 
 	// The names of the approval rules that have had their conditions met.
-	ApprovalRulesSatisfied []*string
+	ApprovalRulesSatisfied []string
 
 	// Whether the state of the pull request is approved.
-	Approved *bool
+	Approved bool
 
 	// Whether the approval rule requirements for the pull request have been overridden
 	// and no longer need to be met.
-	Overridden *bool
+	Overridden bool
 }
 
 // Returns information about a file in a repository.
@@ -499,13 +499,13 @@ type FileModes struct {
 type FileSizes struct {
 
 	// The size of a file in the base of a merge or pull request.
-	Base *int64
+	Base int64
 
 	// The size of a file in the destination of a merge or pull request.
-	Destination *int64
+	Destination int64
 
 	// The size of a file in the source of a merge or pull request.
-	Source *int64
+	Source int64
 }
 
 // Returns information about a folder in a repository.
@@ -571,7 +571,7 @@ type MergeHunk struct {
 	// true, false, and null. True when the hunk represents a conflict and one or more
 	// files contains a line conflict. File mode conflicts in a merge do not set this
 	// to true.
-	IsConflict *bool
+	IsConflict bool
 
 	// Information about the merge hunk in the source of a merge or pull request.
 	Source *MergeHunkDetail
@@ -597,7 +597,7 @@ type MergeHunkDetail struct {
 type MergeMetadata struct {
 
 	// A Boolean value indicating whether the merge has been made.
-	IsMerged *bool
+	IsMerged bool
 
 	// The commit ID for the merge commit, if any.
 	MergeCommitId *string
@@ -648,7 +648,7 @@ type OriginApprovalRuleTemplate struct {
 type PullRequest struct {
 
 	// The approval rules applied to the pull request.
-	ApprovalRules []*ApprovalRule
+	ApprovalRules []ApprovalRule
 
 	// The Amazon Resource Name (ARN) of the user who created the pull request.
 	AuthorArn *string
@@ -679,7 +679,7 @@ type PullRequest struct {
 
 	// The targets of the pull request, including the source branch and destination
 	// branch for the pull request.
-	PullRequestTargets []*PullRequestTarget
+	PullRequestTargets []PullRequestTarget
 
 	// The system-generated revision ID for the pull request.
 	RevisionId *string
@@ -850,7 +850,7 @@ type ReactionForComment struct {
 
 	// The Amazon Resource Names (ARNs) of users who have provided reactions to the
 	// comment.
-	ReactionUsers []*string
+	ReactionUsers []string
 
 	// A numerical count of users who reacted with the specified emoji whose identities
 	// have been subsequently deleted from IAM. While these IAM users or roles no
@@ -963,7 +963,7 @@ type RepositoryTrigger struct {
 	// The branches to be included in the trigger configuration. If you specify an
 	// empty array, the trigger applies to all branches. Although no content is
 	// required in the array, you must include the array itself.
-	Branches []*string
+	Branches []string
 
 	// Any custom data associated with the trigger to be included in the information
 	// sent to the target of the trigger.
@@ -1003,7 +1003,7 @@ type SourceFileSpecifier struct {
 	FilePath *string
 
 	// Whether to remove the source file from the parent commit.
-	IsMove *bool
+	IsMove bool
 }
 
 // Returns information about a submodule reference in a repository folder.

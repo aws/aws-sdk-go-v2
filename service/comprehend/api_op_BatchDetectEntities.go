@@ -43,7 +43,7 @@ type BatchDetectEntitiesInput struct {
 	// UTF-8 encoded characters.
 	//
 	// This member is required.
-	TextList []*string
+	TextList []string
 }
 
 type BatchDetectEntitiesOutput struct {
@@ -54,7 +54,7 @@ type BatchDetectEntitiesOutput struct {
 	// ErrorList is empty.
 	//
 	// This member is required.
-	ErrorList []*types.BatchItemError
+	ErrorList []types.BatchItemError
 
 	// A list of objects containing the results of the operation. The results are
 	// sorted in ascending order by the Index field and match the order of the
@@ -62,7 +62,7 @@ type BatchDetectEntitiesOutput struct {
 	// ResultList is empty.
 	//
 	// This member is required.
-	ResultList []*types.BatchDetectEntitiesItemResult
+	ResultList []types.BatchDetectEntitiesItemResult
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

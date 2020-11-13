@@ -178,7 +178,7 @@ type SigningPlatform struct {
 	DisplayName *string
 
 	// The maximum size (in MB) of code that can be signed by a code signing platform.
-	MaxSizeInMB *int32
+	MaxSizeInMB int32
 
 	// Any partner entities linked to a code signing platform.
 	Partner *string
@@ -230,13 +230,13 @@ type SigningProfile struct {
 	SigningMaterial *SigningMaterial
 
 	// The parameters that are available for use by a code signing user.
-	SigningParameters map[string]*string
+	SigningParameters map[string]string
 
 	// The status of a code signing profile.
 	Status SigningProfileStatus
 
 	// A list of tags associated with the signing profile.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // An S3Source object that contains information about the S3 bucket where you saved

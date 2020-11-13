@@ -42,7 +42,7 @@ type CancelJobInput struct {
 	// which is executing the job to be unable to update the job execution status. Use
 	// caution and ensure that each device executing a job which is canceled is able to
 	// recover to a valid state.
-	Force *bool
+	Force bool
 
 	// (Optional)A reason code string that explains why the job was canceled.
 	ReasonCode *string

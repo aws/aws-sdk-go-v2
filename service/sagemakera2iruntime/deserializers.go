@@ -272,7 +272,7 @@ func awsRestjson1_deserializeOpDocumentDescribeHumanLoopOutput(v **DescribeHuman
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.FailureCode = &jtv
+				sv.FailureCode = ptr.String(jtv)
 			}
 
 		case "FailureReason":
@@ -281,7 +281,7 @@ func awsRestjson1_deserializeOpDocumentDescribeHumanLoopOutput(v **DescribeHuman
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.FailureReason = &jtv
+				sv.FailureReason = ptr.String(jtv)
 			}
 
 		case "FlowDefinitionArn":
@@ -290,7 +290,7 @@ func awsRestjson1_deserializeOpDocumentDescribeHumanLoopOutput(v **DescribeHuman
 				if !ok {
 					return fmt.Errorf("expected FlowDefinitionArn to be of type string, got %T instead", value)
 				}
-				sv.FlowDefinitionArn = &jtv
+				sv.FlowDefinitionArn = ptr.String(jtv)
 			}
 
 		case "HumanLoopArn":
@@ -299,7 +299,7 @@ func awsRestjson1_deserializeOpDocumentDescribeHumanLoopOutput(v **DescribeHuman
 				if !ok {
 					return fmt.Errorf("expected HumanLoopArn to be of type string, got %T instead", value)
 				}
-				sv.HumanLoopArn = &jtv
+				sv.HumanLoopArn = ptr.String(jtv)
 			}
 
 		case "HumanLoopName":
@@ -308,7 +308,7 @@ func awsRestjson1_deserializeOpDocumentDescribeHumanLoopOutput(v **DescribeHuman
 				if !ok {
 					return fmt.Errorf("expected HumanLoopName to be of type string, got %T instead", value)
 				}
-				sv.HumanLoopName = &jtv
+				sv.HumanLoopName = ptr.String(jtv)
 			}
 
 		case "HumanLoopOutput":
@@ -487,7 +487,7 @@ func awsRestjson1_deserializeOpDocumentListHumanLoopsOutput(v **ListHumanLoopsOu
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -650,7 +650,7 @@ func awsRestjson1_deserializeOpDocumentStartHumanLoopOutput(v **StartHumanLoopOu
 				if !ok {
 					return fmt.Errorf("expected HumanLoopArn to be of type string, got %T instead", value)
 				}
-				sv.HumanLoopArn = &jtv
+				sv.HumanLoopArn = ptr.String(jtv)
 			}
 
 		default:
@@ -998,7 +998,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				if !ok {
 					return fmt.Errorf("expected FailureReason to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1038,7 +1038,7 @@ func awsRestjson1_deserializeDocumentHumanLoopOutput(v **types.HumanLoopOutput, 
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.OutputS3Uri = &jtv
+				sv.OutputS3Uri = ptr.String(jtv)
 			}
 
 		default:
@@ -1050,7 +1050,7 @@ func awsRestjson1_deserializeDocumentHumanLoopOutput(v **types.HumanLoopOutput, 
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentHumanLoopSummaries(v *[]*types.HumanLoopSummary, value interface{}) error {
+func awsRestjson1_deserializeDocumentHumanLoopSummaries(v *[]types.HumanLoopSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1063,18 +1063,20 @@ func awsRestjson1_deserializeDocumentHumanLoopSummaries(v *[]*types.HumanLoopSum
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.HumanLoopSummary
+	var cv []types.HumanLoopSummary
 	if *v == nil {
-		cv = []*types.HumanLoopSummary{}
+		cv = []types.HumanLoopSummary{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.HumanLoopSummary
-		if err := awsRestjson1_deserializeDocumentHumanLoopSummary(&col, value); err != nil {
+		var col types.HumanLoopSummary
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentHumanLoopSummary(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -1123,7 +1125,7 @@ func awsRestjson1_deserializeDocumentHumanLoopSummary(v **types.HumanLoopSummary
 				if !ok {
 					return fmt.Errorf("expected FailureReason to be of type string, got %T instead", value)
 				}
-				sv.FailureReason = &jtv
+				sv.FailureReason = ptr.String(jtv)
 			}
 
 		case "FlowDefinitionArn":
@@ -1132,7 +1134,7 @@ func awsRestjson1_deserializeDocumentHumanLoopSummary(v **types.HumanLoopSummary
 				if !ok {
 					return fmt.Errorf("expected FlowDefinitionArn to be of type string, got %T instead", value)
 				}
-				sv.FlowDefinitionArn = &jtv
+				sv.FlowDefinitionArn = ptr.String(jtv)
 			}
 
 		case "HumanLoopName":
@@ -1141,7 +1143,7 @@ func awsRestjson1_deserializeDocumentHumanLoopSummary(v **types.HumanLoopSummary
 				if !ok {
 					return fmt.Errorf("expected HumanLoopName to be of type string, got %T instead", value)
 				}
-				sv.HumanLoopName = &jtv
+				sv.HumanLoopName = ptr.String(jtv)
 			}
 
 		case "HumanLoopStatus":
@@ -1190,7 +1192,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				if !ok {
 					return fmt.Errorf("expected FailureReason to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1230,7 +1232,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				if !ok {
 					return fmt.Errorf("expected FailureReason to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1270,7 +1272,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				if !ok {
 					return fmt.Errorf("expected FailureReason to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1310,7 +1312,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				if !ok {
 					return fmt.Errorf("expected FailureReason to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1350,7 +1352,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				if !ok {
 					return fmt.Errorf("expected FailureReason to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:

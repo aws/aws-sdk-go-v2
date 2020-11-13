@@ -173,17 +173,13 @@ func awsAwsjson11_serializeDocumentFilter(v *types.Filter, value smithyjson.Valu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentFilters(v []*types.Filter, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentFilters(v []types.Filter, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentFilter(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentFilter(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -199,9 +195,9 @@ func awsAwsjson11_serializeOpDocumentDescribeServicesInput(v *DescribeServicesIn
 		ok.String(*v.FormatVersion)
 	}
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -226,9 +222,9 @@ func awsAwsjson11_serializeOpDocumentGetAttributeValuesInput(v *GetAttributeValu
 		ok.String(*v.AttributeName)
 	}
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -260,9 +256,9 @@ func awsAwsjson11_serializeOpDocumentGetProductsInput(v *GetProductsInput, value
 		ok.String(*v.FormatVersion)
 	}
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {

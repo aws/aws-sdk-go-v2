@@ -55,7 +55,7 @@ type DataRetrievalPolicy struct {
 
 	// The policy rule. Although this is a list type, currently there must be only one
 	// rule, which contains a Strategy field and optionally a BytesPerHour field.
-	Rules []*DataRetrievalRule
+	Rules []DataRetrievalRule
 }
 
 // Data retrieval policy rule.
@@ -88,12 +88,12 @@ type DescribeVaultOutput struct {
 	// The number of archives in the vault as of the last inventory date. This field
 	// will return null if an inventory has not yet run on the vault, for example if
 	// you just created the vault.
-	NumberOfArchives *int64
+	NumberOfArchives int64
 
 	// Total size, in bytes, of the archives in the vault as of the last inventory
 	// date. This field will return null if an inventory has not yet run on the vault,
 	// for example if you just created the vault.
-	SizeInBytes *int64
+	SizeInBytes int64
 
 	// The Amazon Resource Name (ARN) of the vault.
 	VaultARN *string
@@ -142,7 +142,7 @@ type GlacierJobDescription struct {
 
 	// The job status. When a job is completed, you get the job's output using Get Job
 	// Output (GET output).
-	Completed *bool
+	Completed bool
 
 	// The UTC time that the job request completed. While the job is in progress, the
 	// value is null.
@@ -412,7 +412,7 @@ type ProvisionedCapacityDescription struct {
 type S3Location struct {
 
 	// A list of grants that control access to the staged results.
-	AccessControlList []*Grant
+	AccessControlList []Grant
 
 	// The name of the Amazon S3 bucket where the job results are stored.
 	BucketName *string
@@ -431,10 +431,10 @@ type S3Location struct {
 	StorageClass StorageClass
 
 	// The tag-set that is applied to the job results.
-	Tagging map[string]*string
+	Tagging map[string]string
 
 	// A map of metadata to store with the job results in Amazon S3.
-	UserMetadata map[string]*string
+	UserMetadata map[string]string
 }
 
 // Contains information about the parameters used for a select.
@@ -469,7 +469,7 @@ type UploadListElement struct {
 	// The part size, in bytes, specified in the Initiate Multipart Upload request.
 	// This is the size of all the parts in the upload except the last part, which may
 	// be smaller than this size.
-	PartSizeInBytes *int64
+	PartSizeInBytes int64
 
 	// The Amazon Resource Name (ARN) of the vault that contains the archive.
 	VaultARN *string
@@ -494,7 +494,7 @@ type VaultNotificationConfig struct {
 
 	// A list of one or more events for which Amazon S3 Glacier will send a
 	// notification to the specified Amazon SNS topic.
-	Events []*string
+	Events []string
 
 	// The Amazon Simple Notification Service (Amazon SNS) topic Amazon Resource Name
 	// (ARN).

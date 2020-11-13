@@ -39,7 +39,7 @@ type PutInventoryInput struct {
 	// The inventory items that you want to add or update on instances.
 	//
 	// This member is required.
-	Items []*types.InventoryItem
+	Items []types.InventoryItem
 }
 
 type PutInventoryOutput struct {

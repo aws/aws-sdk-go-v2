@@ -54,7 +54,7 @@ type DescribeEnvironmentHealthOutput struct {
 
 	// Descriptions of the data that contributed to the environment's current health
 	// status.
-	Causes []*string
+	Causes []string
 
 	// The health color
 	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html)

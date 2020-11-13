@@ -150,7 +150,7 @@ func (e *EntityAlreadyExistsException) ErrorFault() smithy.ErrorFault { return s
 type EntityNotExistsException struct {
 	Message *string
 
-	EntityIds []*string
+	EntityIds []string
 }
 
 func (e *EntityNotExistsException) Error() string {

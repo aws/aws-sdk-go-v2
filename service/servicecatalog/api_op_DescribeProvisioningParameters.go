@@ -72,24 +72,24 @@ type DescribeProvisioningParametersInput struct {
 type DescribeProvisioningParametersOutput struct {
 
 	// Information about the constraints used to provision the product.
-	ConstraintSummaries []*types.ConstraintSummary
+	ConstraintSummaries []types.ConstraintSummary
 
 	// The output of the provisioning artifact.
-	ProvisioningArtifactOutputs []*types.ProvisioningArtifactOutput
+	ProvisioningArtifactOutputs []types.ProvisioningArtifactOutput
 
 	// Information about the parameters used to provision the product.
-	ProvisioningArtifactParameters []*types.ProvisioningArtifactParameter
+	ProvisioningArtifactParameters []types.ProvisioningArtifactParameter
 
 	// An object that contains information about preferences, such as regions and
 	// accounts, for the provisioning artifact.
 	ProvisioningArtifactPreferences *types.ProvisioningArtifactPreferences
 
 	// Information about the TagOptions associated with the resource.
-	TagOptions []*types.TagOptionSummary
+	TagOptions []types.TagOptionSummary
 
 	// Any additional metadata specifically related to the provisioning of the product.
 	// For example, see the Version field of the CloudFormation template.
-	UsageInstructions []*types.UsageInstruction
+	UsageInstructions []types.UsageInstruction
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

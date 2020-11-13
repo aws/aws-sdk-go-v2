@@ -38,11 +38,11 @@ type DescribeCompanyNetworkConfigurationInput struct {
 type DescribeCompanyNetworkConfigurationOutput struct {
 
 	// The security groups associated with access to the provided subnets.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// The subnets used for X-ENI connections from Amazon WorkLink rendering
 	// containers.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// The VPC with connectivity to associated websites.
 	VpcId *string

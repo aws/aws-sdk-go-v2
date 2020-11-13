@@ -56,7 +56,7 @@ type ListAccountRolesOutput struct {
 
 	// A paginated response with the list of roles and the next token if more results
 	// are available.
-	RoleList []*types.RoleInfo
+	RoleList []types.RoleInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

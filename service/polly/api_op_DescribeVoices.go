@@ -49,7 +49,7 @@ type DescribeVoicesInput struct {
 	// languages that use US English (es-US), and there is an Italian voice that speaks
 	// both Italian (it-IT) and US English, that voice will be included if you specify
 	// yes but not if you specify no.
-	IncludeAdditionalLanguageCodes *bool
+	IncludeAdditionalLanguageCodes bool
 
 	// The language identification tag (ISO 639 code for the language name-ISO 3166
 	// country code) for filtering the list of voices returned. If you don't specify
@@ -68,7 +68,7 @@ type DescribeVoicesOutput struct {
 	NextToken *string
 
 	// A list of voices with their properties.
-	Voices []*types.Voice
+	Voices []types.Voice
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

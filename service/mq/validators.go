@@ -423,9 +423,6 @@ func validateEncryptionOptions(v *types.EncryptionOptions) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EncryptionOptions"}
-	if v.UseAwsOwnedKey == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UseAwsOwnedKey"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

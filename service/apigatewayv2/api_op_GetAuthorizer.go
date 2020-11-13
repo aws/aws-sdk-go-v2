@@ -61,7 +61,7 @@ type GetAuthorizerOutput struct {
 	// 0, authorization caching is disabled. If it is greater than 0, API Gateway
 	// caches authorizer responses. The maximum value is 3600, or 1 hour. Supported
 	// only for HTTP API Lambda authorizers.
-	AuthorizerResultTtlInSeconds *int32
+	AuthorizerResultTtlInSeconds int32
 
 	// The authorizer type. Specify REQUEST for a Lambda function using incoming
 	// request parameters. Specify JWT to use JSON Web Tokens (supported only for HTTP
@@ -85,7 +85,7 @@ type GetAuthorizerOutput struct {
 	// policy. Supported only for HTTP APIs. To learn more, see Working with AWS Lambda
 	// authorizers for HTTP APIs
 	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html)
-	EnableSimpleResponses *bool
+	EnableSimpleResponses bool
 
 	// The identity source for which authorization is requested. For a REQUEST
 	// authorizer, this is optional. The value is a set of one or more mapping
@@ -107,7 +107,7 @@ type GetAuthorizerOutput struct {
 	// For JWT, a single entry that specifies where to extract the JSON Web Token (JWT)
 	// from inbound requests. Currently only header-based and query parameter-based
 	// selections are supported, for example $request.header.Authorization.
-	IdentitySource []*string
+	IdentitySource []string
 
 	// The validation expression does not apply to the REQUEST authorizer.
 	IdentityValidationExpression *string

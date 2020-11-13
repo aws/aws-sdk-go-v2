@@ -53,7 +53,7 @@ type DescribeUserGroupsOutput struct {
 	Marker *string
 
 	// Returns a list of user groups.
-	UserGroups []*types.UserGroup
+	UserGroups []types.UserGroup
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

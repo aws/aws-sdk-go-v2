@@ -47,7 +47,7 @@ type UpdateThingGroupInput struct {
 type UpdateThingGroupOutput struct {
 
 	// The version of the updated thing group.
-	Version *int64
+	Version int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

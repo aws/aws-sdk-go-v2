@@ -36,7 +36,7 @@ type ListPlatformVersionsInput struct {
 
 	// Criteria for restricting the resulting list of platform versions. The filter is
 	// interpreted as a logical conjunction (AND) of the separate PlatformFilter terms.
-	Filters []*types.PlatformFilter
+	Filters []types.PlatformFilter
 
 	// The maximum number of platform version values returned in one call.
 	MaxRecords *int32
@@ -55,7 +55,7 @@ type ListPlatformVersionsOutput struct {
 	NextToken *string
 
 	// Summary information about the platform versions.
-	PlatformSummaryList []*types.PlatformSummary
+	PlatformSummaryList []types.PlatformSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

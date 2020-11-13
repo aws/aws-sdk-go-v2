@@ -30,7 +30,7 @@ func (c *Client) ListWorlds(ctx context.Context, params *ListWorldsInput, optFns
 type ListWorldsInput struct {
 
 	// Optional filters to limit results. You can use status.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// When this parameter is used, ListWorlds only returns maxResults results in a
 	// single page along with a nextToken response element. The remaining results of
@@ -58,7 +58,7 @@ type ListWorldsOutput struct {
 	NextToken *string
 
 	// Summary information for worlds.
-	WorldSummaries []*types.WorldSummary
+	WorldSummaries []types.WorldSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

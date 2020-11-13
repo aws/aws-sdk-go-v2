@@ -46,7 +46,7 @@ type ListDevicesInput struct {
 type ListDevicesOutput struct {
 
 	// The devices returned in the list devices response.
-	Devices []*types.DeviceType
+	Devices []types.DeviceType
 
 	// The pagination token for the list device response.
 	PaginationToken *string

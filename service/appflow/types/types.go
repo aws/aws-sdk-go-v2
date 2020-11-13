@@ -51,20 +51,20 @@ type AmplitudeSourceProperties struct {
 type ConnectorConfiguration struct {
 
 	// Specifies whether the connector can be used as a destination.
-	CanUseAsDestination *bool
+	CanUseAsDestination bool
 
 	// Specifies whether the connector can be used as a source.
-	CanUseAsSource *bool
+	CanUseAsSource bool
 
 	// Specifies connector-specific metadata such as oAuthScopes, supportedRegions,
 	// privateLinkServiceUrl, and so on.
 	ConnectorMetadata *ConnectorMetadata
 
 	// Specifies if PrivateLink is enabled for that connector.
-	IsPrivateLinkEnabled *bool
+	IsPrivateLinkEnabled bool
 
 	// Specifies if a PrivateLink endpoint URL is required.
-	IsPrivateLinkEndpointUrlRequired *bool
+	IsPrivateLinkEndpointUrlRequired bool
 
 	// Lists the connectors that are available for use as destinations.
 	SupportedDestinationConnectors []ConnectorType
@@ -91,7 +91,7 @@ type ConnectorEntity struct {
 	// "the_current_entity_name_with_hasNestedEntities_true", then it returns the
 	// nested entities underneath it. This provides a way to retrieve all supported
 	// entities in a recursive fashion.
-	HasNestedEntities *bool
+	HasNestedEntities bool
 
 	// The label applied to the connector entity.
 	Label *string
@@ -450,18 +450,18 @@ type DestinationConnectorProperties struct {
 type DestinationFieldProperties struct {
 
 	// Specifies if the destination field can be created by the current user.
-	IsCreatable *bool
+	IsCreatable bool
 
 	// Specifies if the destination field can have a null value.
-	IsNullable *bool
+	IsNullable bool
 
 	// Specifies whether the field can be updated during an UPDATE or UPSERT write
 	// operation.
-	IsUpdatable *bool
+	IsUpdatable bool
 
 	// Specifies if the flow run can either insert new rows in the destination field if
 	// they do not already exist, or update them if they do.
-	IsUpsertable *bool
+	IsUpsertable bool
 
 	// A list of supported write operations. For each write operation listed, this
 	// field can be used in idFieldNames when that write operation is present as a
@@ -534,7 +534,7 @@ type ErrorHandlingConfig struct {
 
 	// Specifies if the flow should fail after the first instance of a failure when
 	// attempting to place data in the destination.
-	FailOnFirstDestinationError *bool
+	FailOnFirstDestinationError bool
 }
 
 // Provides details in the event of a failed flow, including the failure count and
@@ -635,7 +635,7 @@ type FieldTypeDetails struct {
 
 	// The list of values that a field can contain. For example, a Boolean fieldType
 	// can have two values: "true" and "false".
-	SupportedValues []*string
+	SupportedValues []string
 }
 
 // The properties of the flow, such as its source, destination, trigger type, and
@@ -679,7 +679,7 @@ type FlowDefinition struct {
 	SourceConnectorType ConnectorType
 
 	// The tags used to organize, track, or control access for your flow.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Specifies the type of flow trigger. This can be OnDemand, Scheduled, or Event.
 	TriggerType TriggerType
@@ -719,7 +719,7 @@ type GoogleAnalyticsConnectorProfileProperties struct {
 type GoogleAnalyticsMetadata struct {
 
 	// The desired authorization scope for the Google Analytics account.
-	OAuthScopes []*string
+	OAuthScopes []string
 }
 
 // The properties that are applied when Google Analytics is being used as a source.
@@ -986,7 +986,7 @@ type SalesforceConnectorProfileProperties struct {
 
 	// Indicates whether the connector profile applies to a sandbox or production
 	// environment.
-	IsSandboxEnvironment *bool
+	IsSandboxEnvironment bool
 }
 
 // The properties that are applied when Salesforce is being used as a destination.
@@ -1006,7 +1006,7 @@ type SalesforceDestinationProperties struct {
 
 	// The name of the field that Amazon AppFlow uses as an ID when performing a write
 	// operation such as update or delete.
-	IdFieldNames []*string
+	IdFieldNames []string
 
 	// This specifies the type of write operation to be performed in Salesforce. When
 	// the value is UPSERT, then idFieldNames is required.
@@ -1017,7 +1017,7 @@ type SalesforceDestinationProperties struct {
 type SalesforceMetadata struct {
 
 	// The desired authorization scope for the Salesforce account.
-	OAuthScopes []*string
+	OAuthScopes []string
 }
 
 // The properties that are applied when Salesforce is being used as a source.
@@ -1030,10 +1030,10 @@ type SalesforceSourceProperties struct {
 
 	// The flag that enables dynamic fetching of new (recently added) fields in the
 	// Salesforce objects while running a flow.
-	EnableDynamicFieldUpdate *bool
+	EnableDynamicFieldUpdate bool
 
 	// Indicates whether Amazon AppFlow includes deleted files in the flow run.
-	IncludeDeletedRecords *bool
+	IncludeDeletedRecords bool
 }
 
 // Specifies the configuration details of a schedule-triggered flow as defined by
@@ -1158,7 +1158,7 @@ type SlackConnectorProfileProperties struct {
 type SlackMetadata struct {
 
 	// The desired authorization scope for the Slack account.
-	OAuthScopes []*string
+	OAuthScopes []string
 }
 
 // The properties that are applied when Slack is being used as a source.
@@ -1247,7 +1247,7 @@ type SnowflakeDestinationProperties struct {
 type SnowflakeMetadata struct {
 
 	// Specifies the supported AWS Regions when using Snowflake.
-	SupportedRegions []*string
+	SupportedRegions []string
 }
 
 // Specifies the information that is required to query a particular connector.
@@ -1301,10 +1301,10 @@ type SourceConnectorProperties struct {
 type SourceFieldProperties struct {
 
 	// Indicates if the field can be queried.
-	IsQueryable *bool
+	IsQueryable bool
 
 	// Indicates whether the field can be returned in a search result.
-	IsRetrievable *bool
+	IsRetrievable bool
 }
 
 // Contains information about the configuration of the source connector used in the
@@ -1350,7 +1350,7 @@ type Task struct {
 	// The source fields to which a particular task is applied.
 	//
 	// This member is required.
-	SourceFields []*string
+	SourceFields []string
 
 	// Specifies the particular task implementation that Amazon AppFlow performs.
 	//
@@ -1366,7 +1366,7 @@ type Task struct {
 
 	// A map used to store task-related information. The execution service looks for
 	// particular information based on the TaskType.
-	TaskProperties map[string]*string
+	TaskProperties map[string]string
 }
 
 // The connector-specific profile credentials required when using Trend Micro.
@@ -1489,7 +1489,7 @@ type ZendeskConnectorProfileProperties struct {
 type ZendeskMetadata struct {
 
 	// The desired authorization scope for the Zendesk account.
-	OAuthScopes []*string
+	OAuthScopes []string
 }
 
 // The properties that are applied when using Zendesk as a flow source.

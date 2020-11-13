@@ -44,7 +44,7 @@ type CreateSignalingChannelInput struct {
 	SingleMasterConfiguration *types.SingleMasterConfiguration
 
 	// A set of tags (key-value pairs) that you want to associate with this channel.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateSignalingChannelOutput struct {

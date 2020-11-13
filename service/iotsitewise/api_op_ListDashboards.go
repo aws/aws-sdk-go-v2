@@ -48,7 +48,7 @@ type ListDashboardsOutput struct {
 	// A list that summarizes each dashboard in the project.
 	//
 	// This member is required.
-	DashboardSummaries []*types.DashboardSummary
+	DashboardSummaries []types.DashboardSummary
 
 	// The token for the next set of results, or null if there are no additional
 	// results.

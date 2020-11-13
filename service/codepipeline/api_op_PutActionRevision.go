@@ -56,7 +56,7 @@ type PutActionRevisionOutput struct {
 
 	// Indicates whether the artifact revision was previously used in an execution of
 	// the specified pipeline.
-	NewRevision *bool
+	NewRevision bool
 
 	// The ID of the current workflow state of the pipeline.
 	PipelineExecutionId *string

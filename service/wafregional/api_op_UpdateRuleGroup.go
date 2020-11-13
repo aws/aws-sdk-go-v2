@@ -74,7 +74,7 @@ type UpdateRuleGroupInput struct {
 	// requests, ActivatedRule|Action is used instead of ActivatedRule|OverrideAction.
 	//
 	// This member is required.
-	Updates []*types.RuleGroupUpdate
+	Updates []types.RuleGroupUpdate
 }
 
 type UpdateRuleGroupOutput struct {

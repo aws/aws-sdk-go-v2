@@ -44,7 +44,7 @@ type ListResourceTypesOutput struct {
 	NextToken *string
 
 	// The shareable resource types supported by AWS RAM.
-	ResourceTypes []*types.ServiceNameAndResourceType
+	ResourceTypes []types.ServiceNameAndResourceType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

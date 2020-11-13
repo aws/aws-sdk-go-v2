@@ -71,7 +71,7 @@ type CopyDBClusterParameterGroupInput struct {
 	TargetDBClusterParameterGroupIdentifier *string
 
 	// The tags that are to be assigned to the parameter group.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CopyDBClusterParameterGroupOutput struct {

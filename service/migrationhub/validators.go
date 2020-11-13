@@ -394,13 +394,13 @@ func validateResourceAttribute(v *types.ResourceAttribute) error {
 	}
 }
 
-func validateResourceAttributeList(v []*types.ResourceAttribute) error {
+func validateResourceAttributeList(v []types.ResourceAttribute) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResourceAttributeList"}
 	for i := range v {
-		if err := validateResourceAttribute(v[i]); err != nil {
+		if err := validateResourceAttribute(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -670,9 +670,6 @@ func validateOpNotifyMigrationTaskStateInput(v *NotifyMigrationTaskStateInput) e
 		if err := validateTask(v.Task); err != nil {
 			invalidParams.AddNested("Task", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.NextUpdateSeconds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NextUpdateSeconds"))
 	}
 	if v.MigrationTaskName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MigrationTaskName"))

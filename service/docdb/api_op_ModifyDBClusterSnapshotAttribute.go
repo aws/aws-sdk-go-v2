@@ -58,7 +58,7 @@ type ModifyDBClusterSnapshotAttributeInput struct {
 	// the manual cluster snapshot restorable by any AWS account, set it to all. Do not
 	// add the all value for any manual cluster snapshots that contain private
 	// information that you don't want to be available to all AWS accounts.
-	ValuesToAdd []*string
+	ValuesToAdd []string
 
 	// A list of cluster snapshot attributes to remove from the attribute specified by
 	// AttributeName. To remove authorization for other AWS accounts to copy or restore
@@ -67,7 +67,7 @@ type ModifyDBClusterSnapshotAttributeInput struct {
 	// cluster snapshot, set it to all . If you specify all, an AWS account whose
 	// account ID is explicitly added to the restore attribute can still copy or
 	// restore a manual cluster snapshot.
-	ValuesToRemove []*string
+	ValuesToRemove []string
 }
 
 type ModifyDBClusterSnapshotAttributeOutput struct {

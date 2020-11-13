@@ -51,7 +51,7 @@ type ListDiscoveredResourcesInput struct {
 type ListDiscoveredResourcesOutput struct {
 
 	// Returned list of discovered resources associated with the given MigrationTask.
-	DiscoveredResourceList []*types.DiscoveredResource
+	DiscoveredResourceList []types.DiscoveredResource
 
 	// If there are more discovered resources than the max result, return the next
 	// token to be passed to the next call as a bookmark of where to start from.

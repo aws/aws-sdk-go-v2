@@ -82,7 +82,7 @@ type GetReservationUtilizationInput struct {
 	Granularity types.Granularity
 
 	// Groups only by SUBSCRIPTION_ID. Metadata is included.
-	GroupBy []*types.GroupDefinition
+	GroupBy []types.GroupDefinition
 
 	// The token to retrieve the next set of results. AWS provides the token when the
 	// response from a previous call has more results than the maximum page size.
@@ -94,7 +94,7 @@ type GetReservationUtilizationOutput struct {
 	// The amount of time that you used your RIs.
 	//
 	// This member is required.
-	UtilizationsByTime []*types.UtilizationByTime
+	UtilizationsByTime []types.UtilizationByTime
 
 	// The token for the next set of retrievable results. AWS provides the token when
 	// the response from a previous call has more results than the maximum page size.

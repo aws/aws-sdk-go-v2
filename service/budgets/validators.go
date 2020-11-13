@@ -543,9 +543,6 @@ func validateActionThreshold(v *types.ActionThreshold) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ActionThreshold"}
-	if v.ActionThresholdValue == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ActionThresholdValue"))
-	}
 	if len(v.ActionThresholdType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ActionThresholdType"))
 	}
@@ -666,9 +663,6 @@ func validateNotification(v *types.Notification) error {
 	if len(v.NotificationType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("NotificationType"))
 	}
-	if v.Threshold == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Threshold"))
-	}
 	if len(v.ComparisonOperator) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ComparisonOperator"))
 	}
@@ -705,13 +699,13 @@ func validateNotificationWithSubscribers(v *types.NotificationWithSubscribers) e
 	}
 }
 
-func validateNotificationWithSubscribersList(v []*types.NotificationWithSubscribers) error {
+func validateNotificationWithSubscribersList(v []types.NotificationWithSubscribers) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "NotificationWithSubscribersList"}
 	for i := range v {
-		if err := validateNotificationWithSubscribers(v[i]); err != nil {
+		if err := validateNotificationWithSubscribers(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -722,13 +716,14 @@ func validateNotificationWithSubscribersList(v []*types.NotificationWithSubscrib
 	}
 }
 
-func validatePlannedBudgetLimits(v map[string]*types.Spend) error {
+func validatePlannedBudgetLimits(v map[string]types.Spend) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PlannedBudgetLimits"}
 	for key := range v {
-		if err := validateSpend(v[key]); err != nil {
+		value := v[key]
+		if err := validateSpend(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -814,13 +809,13 @@ func validateSubscriber(v *types.Subscriber) error {
 	}
 }
 
-func validateSubscribers(v []*types.Subscriber) error {
+func validateSubscribers(v []types.Subscriber) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Subscribers"}
 	for i := range v {
-		if err := validateSubscriber(v[i]); err != nil {
+		if err := validateSubscriber(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

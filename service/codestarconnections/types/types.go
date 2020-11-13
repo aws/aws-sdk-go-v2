@@ -88,13 +88,13 @@ type VpcConfiguration struct {
 	// connected to the infrastructure where your provider type is installed.
 	//
 	// This member is required.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// The ID of the subnet or subnets associated with the Amazon VPC connected to the
 	// infrastructure where your provider type is installed.
 	//
 	// This member is required.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// The ID of the Amazon VPC connected to the infrastructure where your provider
 	// type is installed.

@@ -43,7 +43,7 @@ type UpdateBrokerCountInput struct {
 	// operation completes successfully.
 	//
 	// This member is required.
-	TargetNumberOfBrokerNodes *int32
+	TargetNumberOfBrokerNodes int32
 }
 
 type UpdateBrokerCountOutput struct {

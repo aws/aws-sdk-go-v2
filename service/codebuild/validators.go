@@ -787,13 +787,13 @@ func validateEnvironmentVariable(v *types.EnvironmentVariable) error {
 	}
 }
 
-func validateEnvironmentVariables(v []*types.EnvironmentVariable) error {
+func validateEnvironmentVariables(v []types.EnvironmentVariable) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EnvironmentVariables"}
 	for i := range v {
-		if err := validateEnvironmentVariable(v[i]); err != nil {
+		if err := validateEnvironmentVariable(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -804,13 +804,13 @@ func validateEnvironmentVariables(v []*types.EnvironmentVariable) error {
 	}
 }
 
-func validateFilterGroup(v []*types.WebhookFilter) error {
+func validateFilterGroup(v []types.WebhookFilter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FilterGroup"}
 	for i := range v {
-		if err := validateWebhookFilter(v[i]); err != nil {
+		if err := validateWebhookFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -821,7 +821,7 @@ func validateFilterGroup(v []*types.WebhookFilter) error {
 	}
 }
 
-func validateFilterGroups(v [][]*types.WebhookFilter) error {
+func validateFilterGroups(v [][]types.WebhookFilter) error {
 	if v == nil {
 		return nil
 	}
@@ -890,13 +890,13 @@ func validateProjectArtifacts(v *types.ProjectArtifacts) error {
 	}
 }
 
-func validateProjectArtifactsList(v []*types.ProjectArtifacts) error {
+func validateProjectArtifactsList(v []types.ProjectArtifacts) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ProjectArtifactsList"}
 	for i := range v {
-		if err := validateProjectArtifacts(v[i]); err != nil {
+		if err := validateProjectArtifacts(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -953,13 +953,13 @@ func validateProjectEnvironment(v *types.ProjectEnvironment) error {
 	}
 }
 
-func validateProjectSecondarySourceVersions(v []*types.ProjectSourceVersion) error {
+func validateProjectSecondarySourceVersions(v []types.ProjectSourceVersion) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ProjectSecondarySourceVersions"}
 	for i := range v {
-		if err := validateProjectSourceVersion(v[i]); err != nil {
+		if err := validateProjectSourceVersion(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -995,13 +995,13 @@ func validateProjectSource(v *types.ProjectSource) error {
 	}
 }
 
-func validateProjectSources(v []*types.ProjectSource) error {
+func validateProjectSources(v []types.ProjectSource) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ProjectSources"}
 	for i := range v {
-		if err := validateProjectSource(v[i]); err != nil {
+		if err := validateProjectSource(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

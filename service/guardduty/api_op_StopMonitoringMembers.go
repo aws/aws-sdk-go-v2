@@ -33,7 +33,7 @@ type StopMonitoringMembersInput struct {
 	// A list of account IDs for the member accounts to stop monitoring.
 	//
 	// This member is required.
-	AccountIds []*string
+	AccountIds []string
 
 	// The unique ID of the detector associated with the GuardDuty master account that
 	// is monitoring member accounts.
@@ -48,7 +48,7 @@ type StopMonitoringMembersOutput struct {
 	// processed, and a result string that indicates why the account was not processed.
 	//
 	// This member is required.
-	UnprocessedAccounts []*types.UnprocessedAccount
+	UnprocessedAccounts []types.UnprocessedAccount
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -67,7 +67,7 @@ type UpdateDataCatalogInput struct {
 	// Lambda function. function=lambda_arn
 	//
 	// * The GLUE type has no parameters.
-	Parameters map[string]*string
+	Parameters map[string]string
 }
 
 type UpdateDataCatalogOutput struct {

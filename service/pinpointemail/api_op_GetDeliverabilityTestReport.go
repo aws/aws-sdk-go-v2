@@ -48,7 +48,7 @@ type GetDeliverabilityTestReportOutput struct {
 	// providers, including Gmail, Hotmail, Yahoo, AOL, and others.
 	//
 	// This member is required.
-	IspPlacements []*types.IspPlacement
+	IspPlacements []types.IspPlacement
 
 	// An object that specifies how many test messages that were sent during the
 	// predictive inbox placement test were delivered to recipients' inboxes, how many
@@ -63,7 +63,7 @@ type GetDeliverabilityTestReportOutput struct {
 
 	// An array of objects that define the tags (keys and values) that are associated
 	// with the predictive inbox placement test.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

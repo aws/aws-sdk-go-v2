@@ -95,7 +95,7 @@ type ListApplicationRevisionsOutput struct {
 	NextToken *string
 
 	// A list of locations that contain the matching revisions.
-	Revisions []*types.RevisionLocation
+	Revisions []types.RevisionLocation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -60,7 +60,7 @@ type DescribeCodeCoveragesInput struct {
 type DescribeCodeCoveragesOutput struct {
 
 	// An array of CodeCoverage objects that contain the results.
-	CodeCoverages []*types.CodeCoverage
+	CodeCoverages []types.CodeCoverage
 
 	// If there are more items to return, this contains a token that is passed to a
 	// subsequent call to DescribeCodeCoverages to retrieve the next set of items.

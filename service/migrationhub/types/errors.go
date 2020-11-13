@@ -156,7 +156,7 @@ func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return sm
 type ThrottlingException struct {
 	Message *string
 
-	RetryAfterSeconds *int32
+	RetryAfterSeconds int32
 }
 
 func (e *ThrottlingException) Error() string {

@@ -106,7 +106,7 @@ type CreateTransformJobInput struct {
 
 	// The environment variables to set in the Docker container. We support up to 16
 	// key and values entries in the map.
-	Environment map[string]*string
+	Environment map[string]string
 
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
@@ -149,7 +149,7 @@ type CreateTransformJobInput struct {
 	// Allocation Tags
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
 	// in the AWS Billing and Cost Management User Guide.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateTransformJobOutput struct {

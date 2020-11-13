@@ -39,7 +39,7 @@ type DeleteTagsInput struct {
 	// The tag key that you want to delete.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 type DeleteTagsOutput struct {

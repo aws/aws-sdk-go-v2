@@ -49,10 +49,10 @@ type UpdateContactInput struct {
 	PhoneNumber *string
 
 	// The list of phone numbers for the contact.
-	PhoneNumbers []*types.PhoneNumber
+	PhoneNumbers []types.PhoneNumber
 
 	// The list of SIP addresses for the contact.
-	SipAddresses []*types.SipAddress
+	SipAddresses []types.SipAddress
 }
 
 type UpdateContactOutput struct {

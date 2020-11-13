@@ -56,13 +56,13 @@ type DescribeHapgOutput struct {
 	HapgSerial *string
 
 	//
-	HsmsLastActionFailed []*string
+	HsmsLastActionFailed []string
 
 	//
-	HsmsPendingDeletion []*string
+	HsmsPendingDeletion []string
 
 	//
-	HsmsPendingRegistration []*string
+	HsmsPendingRegistration []string
 
 	// The label for the high-availability partition group.
 	Label *string
@@ -72,7 +72,7 @@ type DescribeHapgOutput struct {
 
 	// The list of partition serial numbers that belong to the high-availability
 	// partition group.
-	PartitionSerialList []*string
+	PartitionSerialList []string
 
 	// The state of the high-availability partition group.
 	State types.CloudHsmObjectState

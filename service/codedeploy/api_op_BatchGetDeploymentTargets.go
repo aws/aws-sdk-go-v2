@@ -67,7 +67,7 @@ type BatchGetDeploymentTargetsInput struct {
 	// *
 	// For deployments that are deployed with AWS CloudFormation, the target IDs are
 	// CloudFormation stack IDs. Their target type is cloudFormationTarget.
-	TargetIds []*string
+	TargetIds []string
 }
 
 type BatchGetDeploymentTargetsOutput struct {
@@ -87,7 +87,7 @@ type BatchGetDeploymentTargetsOutput struct {
 	//
 	// * CloudFormation: The target object is
 	// an AWS CloudFormation blue/green deployment.
-	DeploymentTargets []*types.DeploymentTarget
+	DeploymentTargets []types.DeploymentTarget
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

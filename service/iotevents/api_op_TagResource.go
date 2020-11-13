@@ -38,7 +38,7 @@ type TagResourceInput struct {
 	// The new or modified tags for the resource.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type TagResourceOutput struct {

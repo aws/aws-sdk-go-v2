@@ -47,7 +47,7 @@ type UpdateMethodInput struct {
 
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
-	PatchOperations []*types.PatchOperation
+	PatchOperations []types.PatchOperation
 }
 
 // Represents a client-facing interface by which the client calls the API to access
@@ -154,7 +154,7 @@ type UpdateMethodOutput struct {
 	// invocation is not authorized. When the method scope is configured, the client
 	// must provide an access token instead of an identity token for authorization
 	// purposes.
-	AuthorizationScopes []*string
+	AuthorizationScopes []string
 
 	// The method's authorization type. Valid values are NONE for open access, AWS_IAM
 	// for using AWS IAM permissions, CUSTOM for using a custom authorizer, or
@@ -256,7 +256,7 @@ type UpdateMethodOutput struct {
 	// "method.response.header.operator": false, "method.response.header.operand_2":
 	// false, "method.response.header.operand_1": false }, "statusCode": "200" }AWS CLI
 	// (https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-method-response.html)
-	MethodResponses map[string]*types.MethodResponse
+	MethodResponses map[string]types.MethodResponse
 
 	// A human-friendly operation identifier for the method. For example, you can
 	// assign the operationName of ListPets for the GET /pets method in the PetStore
@@ -266,7 +266,7 @@ type UpdateMethodOutput struct {
 	// A key-value map specifying data schemas, represented by Model resources, (as the
 	// mapped value) of the request payloads of given content types (as the mapping
 	// key).
-	RequestModels map[string]*string
+	RequestModels map[string]string
 
 	// A key-value map defining required or optional method request parameters that can
 	// be accepted by API Gateway. A key is a method request parameter name matching
@@ -276,7 +276,7 @@ type UpdateMethodOutput struct {
 	// required (true) or optional (false). The method request parameter names defined
 	// here are available in Integration to be mapped to integration request parameters
 	// or templates.
-	RequestParameters map[string]*bool
+	RequestParameters map[string]bool
 
 	// The identifier of a RequestValidator for request validation.
 	RequestValidatorId *string

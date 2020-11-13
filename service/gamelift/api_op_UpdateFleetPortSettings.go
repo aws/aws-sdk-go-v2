@@ -67,10 +67,10 @@ type UpdateFleetPortSettingsInput struct {
 	FleetId *string
 
 	// A collection of port settings to be added to the fleet resource.
-	InboundPermissionAuthorizations []*types.IpPermission
+	InboundPermissionAuthorizations []types.IpPermission
 
 	// A collection of port settings to be removed from the fleet resource.
-	InboundPermissionRevocations []*types.IpPermission
+	InboundPermissionRevocations []types.IpPermission
 }
 
 // Represents the returned data in response to a request operation.

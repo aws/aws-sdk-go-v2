@@ -56,7 +56,7 @@ type GetUploadStatusOutput struct {
 	UploadStatus types.UploadStatus
 
 	// The reason for an upload failure.
-	FailureReason []*string
+	FailureReason []string
 
 	// The ARN of the upload.
 	NamespaceArn *string

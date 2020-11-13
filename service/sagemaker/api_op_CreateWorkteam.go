@@ -55,7 +55,7 @@ type CreateWorkteamInput struct {
 	// those groups in Groups.
 	//
 	// This member is required.
-	MemberDefinitions []*types.MemberDefinition
+	MemberDefinitions []types.MemberDefinition
 
 	// The name of the work team. Use this name to identify the work team.
 	//
@@ -70,7 +70,7 @@ type CreateWorkteamInput struct {
 	// and Using Cost Allocation Tags
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
 	// in the AWS Billing and Cost Management User Guide.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The name of the workforce.
 	WorkforceName *string

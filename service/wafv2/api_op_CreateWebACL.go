@@ -80,10 +80,10 @@ type CreateWebACLInput struct {
 	// block, or count. Each rule includes one top-level statement that AWS WAF uses to
 	// identify matching web requests, and parameters that govern how AWS WAF handles
 	// them.
-	Rules []*types.Rule
+	Rules []types.Rule
 
 	// An array of key:value pairs to associate with the resource.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateWebACLOutput struct {

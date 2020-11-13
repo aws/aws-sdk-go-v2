@@ -37,13 +37,13 @@ type PutRemediationConfigurationsInput struct {
 	// A list of remediation configuration objects.
 	//
 	// This member is required.
-	RemediationConfigurations []*types.RemediationConfiguration
+	RemediationConfigurations []types.RemediationConfiguration
 }
 
 type PutRemediationConfigurationsOutput struct {
 
 	// Returns a list of failed remediation batch objects.
-	FailedBatches []*types.FailedRemediationBatch
+	FailedBatches []types.FailedRemediationBatch
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

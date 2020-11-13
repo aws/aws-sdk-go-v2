@@ -49,7 +49,7 @@ type ListSecurityProfilesOutput struct {
 	NextToken *string
 
 	// A list of security profile identifiers (names and ARNs).
-	SecurityProfileIdentifiers []*types.SecurityProfileIdentifier
+	SecurityProfileIdentifiers []types.SecurityProfileIdentifier
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

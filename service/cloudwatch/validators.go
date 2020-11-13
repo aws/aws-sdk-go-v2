@@ -651,13 +651,13 @@ func validateAnomalyDetectorConfiguration(v *types.AnomalyDetectorConfiguration)
 	}
 }
 
-func validateAnomalyDetectorExcludedTimeRanges(v []*types.Range) error {
+func validateAnomalyDetectorExcludedTimeRanges(v []types.Range) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AnomalyDetectorExcludedTimeRanges"}
 	for i := range v {
-		if err := validateRange(v[i]); err != nil {
+		if err := validateRange(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -701,13 +701,13 @@ func validateDimensionFilter(v *types.DimensionFilter) error {
 	}
 }
 
-func validateDimensionFilters(v []*types.DimensionFilter) error {
+func validateDimensionFilters(v []types.DimensionFilter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DimensionFilters"}
 	for i := range v {
-		if err := validateDimensionFilter(v[i]); err != nil {
+		if err := validateDimensionFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -718,13 +718,13 @@ func validateDimensionFilters(v []*types.DimensionFilter) error {
 	}
 }
 
-func validateDimensions(v []*types.Dimension) error {
+func validateDimensions(v []types.Dimension) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Dimensions"}
 	for i := range v {
-		if err := validateDimension(v[i]); err != nil {
+		if err := validateDimension(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -752,13 +752,13 @@ func validateMetric(v *types.Metric) error {
 	}
 }
 
-func validateMetricData(v []*types.MetricDatum) error {
+func validateMetricData(v []types.MetricDatum) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MetricData"}
 	for i := range v {
-		if err := validateMetricDatum(v[i]); err != nil {
+		if err := validateMetricDatum(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -769,13 +769,13 @@ func validateMetricData(v []*types.MetricDatum) error {
 	}
 }
 
-func validateMetricDataQueries(v []*types.MetricDataQuery) error {
+func validateMetricDataQueries(v []types.MetricDataQuery) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MetricDataQueries"}
 	for i := range v {
-		if err := validateMetricDataQuery(v[i]); err != nil {
+		if err := validateMetricDataQuery(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -916,13 +916,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagList(v []*types.Tag) error {
+func validateTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

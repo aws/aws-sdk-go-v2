@@ -43,11 +43,11 @@ type UpdateAnalysisPermissionsInput struct {
 
 	// A structure that describes the permissions to add and the principal to add them
 	// to.
-	GrantPermissions []*types.ResourcePermission
+	GrantPermissions []types.ResourcePermission
 
 	// A structure that describes the permissions to remove and the principal to remove
 	// them from.
-	RevokePermissions []*types.ResourcePermission
+	RevokePermissions []types.ResourcePermission
 }
 
 type UpdateAnalysisPermissionsOutput struct {
@@ -60,13 +60,13 @@ type UpdateAnalysisPermissionsOutput struct {
 
 	// A structure that describes the principals and the resource-level permissions on
 	// an analysis.
-	Permissions []*types.ResourcePermission
+	Permissions []types.ResourcePermission
 
 	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

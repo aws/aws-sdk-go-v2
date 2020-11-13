@@ -43,7 +43,7 @@ type UpdateComponentInput struct {
 	NewComponentName *string
 
 	// The list of resource ARNs that belong to the component.
-	ResourceList []*string
+	ResourceList []string
 }
 
 type UpdateComponentOutput struct {

@@ -42,7 +42,7 @@ type CreateConfigInput struct {
 	Name *string
 
 	// Tags assigned to a Config.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 //

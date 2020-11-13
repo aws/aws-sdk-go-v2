@@ -63,7 +63,7 @@ type ListTrafficPolicyVersionsOutput struct {
 	// NextMarker in the marker parameter.
 	//
 	// This member is required.
-	IsTruncated *bool
+	IsTruncated bool
 
 	// The value that you specified for the maxitems parameter in the
 	// ListTrafficPolicyVersions request that produced the current response.
@@ -75,7 +75,7 @@ type ListTrafficPolicyVersionsOutput struct {
 	// that is associated with the specified traffic policy.
 	//
 	// This member is required.
-	TrafficPolicies []*types.TrafficPolicy
+	TrafficPolicies []types.TrafficPolicy
 
 	// If IsTruncated is true, the value of TrafficPolicyVersionMarker identifies the
 	// first traffic policy that Amazon Route 53 will return if you submit another

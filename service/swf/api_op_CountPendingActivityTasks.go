@@ -68,11 +68,11 @@ type CountPendingActivityTasksOutput struct {
 	// The number of tasks in the task list.
 	//
 	// This member is required.
-	Count *int32
+	Count int32
 
 	// If set to true, indicates that the actual count was more than the maximum
 	// supported by this API and the count returned is the truncated value.
-	Truncated *bool
+	Truncated bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

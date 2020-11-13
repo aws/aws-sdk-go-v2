@@ -55,7 +55,7 @@ type ListProtectionsOutput struct {
 	NextToken *string
 
 	// The array of enabled Protection objects.
-	Protections []*types.Protection
+	Protections []types.Protection
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

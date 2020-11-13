@@ -46,7 +46,7 @@ type TagDeliveryStreamInput struct {
 	// A set of key-value pairs to use to create the tags.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type TagDeliveryStreamOutput struct {

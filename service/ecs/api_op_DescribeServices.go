@@ -33,7 +33,7 @@ type DescribeServicesInput struct {
 	// a single operation.
 	//
 	// This member is required.
-	Services []*string
+	Services []string
 
 	// The short name or full Amazon Resource Name (ARN)the cluster that hosts the
 	// service to describe. If you do not specify a cluster, the default cluster is
@@ -50,10 +50,10 @@ type DescribeServicesInput struct {
 type DescribeServicesOutput struct {
 
 	// Any failures associated with the call.
-	Failures []*types.Failure
+	Failures []types.Failure
 
 	// The list of services described.
-	Services []*types.Service
+	Services []types.Service
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

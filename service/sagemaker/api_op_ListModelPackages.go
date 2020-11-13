@@ -62,7 +62,7 @@ type ListModelPackagesOutput struct {
 	// An array of ModelPackageSummary objects, each of which lists a model package.
 	//
 	// This member is required.
-	ModelPackageSummaryList []*types.ModelPackageSummary
+	ModelPackageSummaryList []types.ModelPackageSummary
 
 	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
 	// the next set of model packages, use it in the subsequent request.

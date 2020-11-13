@@ -44,7 +44,7 @@ type GetOutpostInstanceTypesInput struct {
 type GetOutpostInstanceTypesOutput struct {
 
 	// Information about the instance types.
-	InstanceTypes []*types.InstanceTypeItem
+	InstanceTypes []types.InstanceTypeItem
 
 	// The pagination token.
 	NextToken *string

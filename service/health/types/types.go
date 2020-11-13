@@ -38,7 +38,7 @@ type AffectedEntity struct {
 
 	// A map of entity tags attached to the affected entity. Currently, the tags
 	// property isn't supported.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // A range of dates and times that is used by the EventFilter
@@ -66,7 +66,7 @@ type DateTimeRange struct {
 type EntityAggregate struct {
 
 	// The number of entities that match the criteria for the specified events.
-	Count *int32
+	Count int32
 
 	// The unique identifier for the event. Format:
 	// arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID .
@@ -85,23 +85,23 @@ type EntityFilter struct {
 	// "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"
 	//
 	// This member is required.
-	EventArns []*string
+	EventArns []string
 
 	// A list of entity ARNs (unique identifiers).
-	EntityArns []*string
+	EntityArns []string
 
 	// A list of IDs for affected entities.
-	EntityValues []*string
+	EntityValues []string
 
 	// A list of the most recent dates and times that the entity was updated.
-	LastUpdatedTimes []*DateTimeRange
+	LastUpdatedTimes []DateTimeRange
 
 	// A list of entity status codes (IMPAIRED, UNIMPAIRED, or UNKNOWN).
 	StatusCodes []EntityStatusCode
 
 	// A map of entity tags attached to the affected entity. Currently, the tags
 	// property isn't supported.
-	Tags []map[string]*string
+	Tags []map[string]string
 }
 
 // Summary information about an AWS Health event. AWS Health events can be public
@@ -205,7 +205,7 @@ type EventAggregate struct {
 	AggregateValue *string
 
 	// The number of events of the associated issue type.
-	Count *int32
+	Count int32
 }
 
 // The detailed description of the event. Included in the information returned by
@@ -235,7 +235,7 @@ type EventDetails struct {
 	EventDescription *EventDescription
 
 	// Additional metadata about the event.
-	EventMetadata map[string]*string
+	EventMetadata map[string]string
 }
 
 // Error information returned when a DescribeEventDetails
@@ -264,22 +264,22 @@ type EventDetailsErrorItem struct {
 type EventFilter struct {
 
 	// A list of AWS availability zones.
-	AvailabilityZones []*string
+	AvailabilityZones []string
 
 	// A list of dates and times that the event ended.
-	EndTimes []*DateTimeRange
+	EndTimes []DateTimeRange
 
 	// A list of entity ARNs (unique identifiers).
-	EntityArns []*string
+	EntityArns []string
 
 	// A list of entity identifiers, such as EC2 instance IDs (i-34ab692e) or EBS
 	// volumes (vol-426ab23e).
-	EntityValues []*string
+	EntityValues []string
 
 	// A list of event ARNs (unique identifiers). For example:
 	// "arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456",
 	// "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"
-	EventArns []*string
+	EventArns []string
 
 	// A list of event status codes.
 	EventStatusCodes []EventStatusCode
@@ -290,23 +290,23 @@ type EventFilter struct {
 
 	// A list of unique identifiers for event types. For example,
 	// "AWS_EC2_SYSTEM_MAINTENANCE_EVENT","AWS_RDS_MAINTENANCE_SCHEDULED".
-	EventTypeCodes []*string
+	EventTypeCodes []string
 
 	// A list of dates and times that the event was last updated.
-	LastUpdatedTimes []*DateTimeRange
+	LastUpdatedTimes []DateTimeRange
 
 	// A list of AWS regions.
-	Regions []*string
+	Regions []string
 
 	// The AWS services associated with the event. For example, EC2, RDS.
-	Services []*string
+	Services []string
 
 	// A list of dates and times that the event began.
-	StartTimes []*DateTimeRange
+	StartTimes []DateTimeRange
 
 	// A map of entity tags attached to the affected entity. Currently, the tags
 	// property isn't supported.
-	Tags []map[string]*string
+	Tags []map[string]string
 }
 
 // Metadata about a type of event that is reported by AWS Health. Data consists of
@@ -336,10 +336,10 @@ type EventTypeFilter struct {
 	EventTypeCategories []EventTypeCategory
 
 	// A list of event type codes.
-	EventTypeCodes []*string
+	EventTypeCodes []string
 
 	// The AWS services associated with the event. For example, EC2, RDS.
-	Services []*string
+	Services []string
 }
 
 // Error information returned when a DescribeAffectedEntitiesForOrganization
@@ -459,7 +459,7 @@ type OrganizationEventDetails struct {
 	EventDescription *EventDescription
 
 	// Additional metadata about the event.
-	EventMetadata map[string]*string
+	EventMetadata map[string]string
 }
 
 // Error information returned when a DescribeEventDetailsForOrganization
@@ -491,7 +491,7 @@ type OrganizationEventDetailsErrorItem struct {
 type OrganizationEventFilter struct {
 
 	// A list of 12-digit AWS account numbers that contains the affected entities.
-	AwsAccountIds []*string
+	AwsAccountIds []string
 
 	// A range of dates and times that is used by the EventFilter
 	// (https://docs.aws.amazon.com/health/latest/APIReference/API_EventFilter.html)
@@ -505,11 +505,11 @@ type OrganizationEventFilter struct {
 	EndTime *DateTimeRange
 
 	// A list of entity ARNs (unique identifiers).
-	EntityArns []*string
+	EntityArns []string
 
 	// A list of entity identifiers, such as EC2 instance IDs (i-34ab692e) or EBS
 	// volumes (vol-426ab23e).
-	EntityValues []*string
+	EntityValues []string
 
 	// A list of event status codes.
 	EventStatusCodes []EventStatusCode
@@ -520,7 +520,7 @@ type OrganizationEventFilter struct {
 
 	// A list of unique identifiers for event types. For example,
 	// "AWS_EC2_SYSTEM_MAINTENANCE_EVENT","AWS_RDS_MAINTENANCE_SCHEDULED".
-	EventTypeCodes []*string
+	EventTypeCodes []string
 
 	// A range of dates and times that is used by the EventFilter
 	// (https://docs.aws.amazon.com/health/latest/APIReference/API_EventFilter.html)
@@ -534,10 +534,10 @@ type OrganizationEventFilter struct {
 	LastUpdatedTime *DateTimeRange
 
 	// A list of AWS Regions.
-	Regions []*string
+	Regions []string
 
 	// The AWS services associated with the event. For example, EC2, RDS.
-	Services []*string
+	Services []string
 
 	// A range of dates and times that is used by the EventFilter
 	// (https://docs.aws.amazon.com/health/latest/APIReference/API_EventFilter.html)

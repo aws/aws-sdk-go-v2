@@ -50,7 +50,7 @@ type GetCostAndUsageInput struct {
 	// UsageTypeGroups. Metrics is required for GetCostAndUsage requests.
 	//
 	// This member is required.
-	Metrics []*string
+	Metrics []string
 
 	// Sets the start and end dates for retrieving AWS costs. The start date is
 	// inclusive, but the end date is exclusive. For example, if start is 2017-01-01
@@ -77,7 +77,7 @@ type GetCostAndUsageInput struct {
 	// get all tag values, including empty strings. Valid values are AZ, INSTANCE_TYPE,
 	// LEGAL_ENTITY_NAME, LINKED_ACCOUNT, OPERATION, PLATFORM, PURCHASE_TYPE, SERVICE,
 	// TAGS, TENANCY, RECORD_TYPE, and USAGE_TYPE.
-	GroupBy []*types.GroupDefinition
+	GroupBy []types.GroupDefinition
 
 	// The token to retrieve the next set of results. AWS provides the token when the
 	// response from a previous call has more results than the maximum page size.
@@ -88,14 +88,14 @@ type GetCostAndUsageOutput struct {
 
 	// The groups that are specified by the Filter or GroupBy parameters in the
 	// request.
-	GroupDefinitions []*types.GroupDefinition
+	GroupDefinitions []types.GroupDefinition
 
 	// The token for the next set of retrievable results. AWS provides the token when
 	// the response from a previous call has more results than the maximum page size.
 	NextPageToken *string
 
 	// The time period that is covered by the results in the response.
-	ResultsByTime []*types.ResultByTime
+	ResultsByTime []types.ResultByTime
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

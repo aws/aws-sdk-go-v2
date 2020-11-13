@@ -47,7 +47,7 @@ type SendAnnouncementInput struct {
 	// send to all rooms, specify an empty RoomFilters list.
 	//
 	// This member is required.
-	RoomFilters []*types.Filter
+	RoomFilters []types.Filter
 
 	// The time to live for an announcement. Default is 300. If delivery doesn't occur
 	// within this time, the announcement is not delivered.

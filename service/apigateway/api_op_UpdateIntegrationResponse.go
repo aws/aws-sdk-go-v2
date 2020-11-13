@@ -53,7 +53,7 @@ type UpdateIntegrationResponseInput struct {
 
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
-	PatchOperations []*types.PatchOperation
+	PatchOperations []types.PatchOperation
 }
 
 // Represents an integration response. The status code must map to an existing
@@ -88,12 +88,12 @@ type UpdateIntegrationResponseOutput struct {
 	// integration.response.body.{JSON-expression}, where name is a valid and unique
 	// response header name and JSON-expression is a valid JSON expression without the
 	// $ prefix.
-	ResponseParameters map[string]*string
+	ResponseParameters map[string]string
 
 	// Specifies the templates used to transform the integration response body.
 	// Response templates are represented as a key/value map, with a content-type as
 	// the key and a template as the value.
-	ResponseTemplates map[string]*string
+	ResponseTemplates map[string]string
 
 	// Specifies the regular expression (regex) pattern used to choose an integration
 	// response based on the response from the back end. For example, if the success

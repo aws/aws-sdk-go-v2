@@ -62,7 +62,7 @@ type GetScreenDataInput struct {
 	// variable as defined on the screen. The value is an object which currently has
 	// only one property, rawValue, which holds the value of the variable to be passed
 	// to the screen.
-	Variables map[string]*types.VariableValue
+	Variables map[string]types.VariableValue
 }
 
 type GetScreenDataOutput struct {
@@ -70,14 +70,14 @@ type GetScreenDataOutput struct {
 	// A map of all the rows on the screen keyed by block name.
 	//
 	// This member is required.
-	Results map[string]*types.ResultSet
+	Results map[string]types.ResultSet
 
 	// Indicates the cursor of the workbook at which the data returned by this workbook
 	// is read. Workbook cursor keeps increasing with every update and the increments
 	// are not sequential.
 	//
 	// This member is required.
-	WorkbookCursor *int64
+	WorkbookCursor int64
 
 	// Provides the pagination token to load the next page if there are more results
 	// matching the request. If a pagination token is not present in the response, it

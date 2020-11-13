@@ -57,7 +57,7 @@ type ListPoliciesInput struct {
 	// true, the returned list contains only the policies that are attached to an IAM
 	// user, group, or role. When OnlyAttached is false, or when the parameter is not
 	// included, all policies are returned.
-	OnlyAttached *bool
+	OnlyAttached bool
 
 	// The path prefix for filtering the results. This parameter is optional. If it is
 	// not included, it defaults to a slash (/), listing all policies. This parameter
@@ -91,14 +91,14 @@ type ListPoliciesOutput struct {
 	// the MaxItems number of results even when there are more results available. We
 	// recommend that you check IsTruncated after every call to ensure that you receive
 	// all your results.
-	IsTruncated *bool
+	IsTruncated bool
 
 	// When IsTruncated is true, this element is present and contains the value to use
 	// for the Marker parameter in a subsequent pagination request.
 	Marker *string
 
 	// A list of policies.
-	Policies []*types.Policy
+	Policies []types.Policy
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

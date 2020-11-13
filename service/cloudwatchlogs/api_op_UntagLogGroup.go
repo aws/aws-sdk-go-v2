@@ -40,7 +40,7 @@ type UntagLogGroupInput struct {
 	// The tag keys. The corresponding tags are removed from the log group.
 	//
 	// This member is required.
-	Tags []*string
+	Tags []string
 }
 
 type UntagLogGroupOutput struct {

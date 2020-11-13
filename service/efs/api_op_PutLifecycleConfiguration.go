@@ -64,14 +64,14 @@ type PutLifecycleConfigurationInput struct {
 	// Infrequent Access storage class.
 	//
 	// This member is required.
-	LifecyclePolicies []*types.LifecyclePolicy
+	LifecyclePolicies []types.LifecyclePolicy
 }
 
 type PutLifecycleConfigurationOutput struct {
 
 	// An array of lifecycle management policies. Currently, EFS supports a maximum of
 	// one policy per file system.
-	LifecyclePolicies []*types.LifecyclePolicy
+	LifecyclePolicies []types.LifecyclePolicy
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

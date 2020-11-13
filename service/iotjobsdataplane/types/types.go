@@ -21,10 +21,10 @@ type JobExecution struct {
 
 	// The time, in milliseconds since the epoch, when the job execution was last
 	// updated.
-	LastUpdatedAt *int64
+	LastUpdatedAt int64
 
 	// The time, in milliseconds since the epoch, when the job execution was enqueued.
-	QueuedAt *int64
+	QueuedAt int64
 
 	// The time, in milliseconds since the epoch, when the job execution was started.
 	StartedAt *int64
@@ -34,14 +34,14 @@ type JobExecution struct {
 	Status JobExecutionStatus
 
 	// A collection of name/value pairs that describe the status of the job execution.
-	StatusDetails map[string]*string
+	StatusDetails map[string]string
 
 	// The name of the thing that is executing the job.
 	ThingName *string
 
 	// The version of the job execution. Job execution versions are incremented each
 	// time they are updated by a device.
-	VersionNumber *int64
+	VersionNumber int64
 }
 
 // Contains data about the state of a job execution.
@@ -52,11 +52,11 @@ type JobExecutionState struct {
 	Status JobExecutionStatus
 
 	// A collection of name/value pairs that describe the status of the job execution.
-	StatusDetails map[string]*string
+	StatusDetails map[string]string
 
 	// The version of the job execution. Job execution versions are incremented each
 	// time they are updated by a device.
-	VersionNumber *int64
+	VersionNumber int64
 }
 
 // Contains a subset of information about a job execution.
@@ -70,15 +70,15 @@ type JobExecutionSummary struct {
 
 	// The time, in milliseconds since the epoch, when the job execution was last
 	// updated.
-	LastUpdatedAt *int64
+	LastUpdatedAt int64
 
 	// The time, in milliseconds since the epoch, when the job execution was enqueued.
-	QueuedAt *int64
+	QueuedAt int64
 
 	// The time, in milliseconds since the epoch, when the job execution started.
 	StartedAt *int64
 
 	// The version of the job execution. Job execution versions are incremented each
 	// time AWS IoT Jobs receives an update from a device.
-	VersionNumber *int64
+	VersionNumber int64
 }

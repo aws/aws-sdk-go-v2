@@ -85,7 +85,7 @@ type AnalyzeDocumentOutput struct {
 	AnalyzeDocumentModelVersion *string
 
 	// The items that are detected and analyzed by AnalyzeDocument.
-	Blocks []*types.Block
+	Blocks []types.Block
 
 	// Metadata about the analyzed document. An example is the number of pages.
 	DocumentMetadata *types.DocumentMetadata

@@ -35,10 +35,10 @@ type ListAvailableSolutionStacksInput struct {
 type ListAvailableSolutionStacksOutput struct {
 
 	// A list of available solution stacks and their SolutionStackDescription.
-	SolutionStackDetails []*types.SolutionStackDescription
+	SolutionStackDetails []types.SolutionStackDescription
 
 	// A list of available solution stacks.
-	SolutionStacks []*string
+	SolutionStacks []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

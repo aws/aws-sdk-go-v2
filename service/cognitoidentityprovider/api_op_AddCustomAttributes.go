@@ -33,7 +33,7 @@ type AddCustomAttributesInput struct {
 	// An array of custom attributes, such as Mutable and Name.
 	//
 	// This member is required.
-	CustomAttributes []*types.SchemaAttributeType
+	CustomAttributes []types.SchemaAttributeType
 
 	// The user pool ID for the user pool where you want to add custom attributes.
 	//

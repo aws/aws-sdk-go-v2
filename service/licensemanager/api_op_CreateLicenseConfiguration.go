@@ -75,13 +75,13 @@ type CreateLicenseConfigurationInput struct {
 	// licenseAffinityToHost is days and the range is 1 to 180. The possible values for
 	// allowedTenancy are EC2-Default, EC2-DedicatedHost, and EC2-DedicatedInstance.
 	// The possible values for honorVcpuOptimization are True and False.
-	LicenseRules []*string
+	LicenseRules []string
 
 	// Product information.
-	ProductInformationList []*types.ProductInformation
+	ProductInformationList []types.ProductInformation
 
 	// Tags to add to the license configuration.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateLicenseConfigurationOutput struct {

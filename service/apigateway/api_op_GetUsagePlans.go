@@ -47,7 +47,7 @@ type GetUsagePlansInput struct {
 type GetUsagePlansOutput struct {
 
 	// The current page of elements from this collection.
-	Items []*types.UsagePlan
+	Items []types.UsagePlan
 
 	// The current pagination position in the paged result set.
 	Position *string

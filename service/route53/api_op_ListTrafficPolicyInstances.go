@@ -84,7 +84,7 @@ type ListTrafficPolicyInstancesOutput struct {
 	// TrafficPolicyInstanceTypeMarker in the corresponding request parameters.
 	//
 	// This member is required.
-	IsTruncated *bool
+	IsTruncated bool
 
 	// The value that you specified for the MaxItems parameter in the call to
 	// ListTrafficPolicyInstances that produced the current response.
@@ -96,7 +96,7 @@ type ListTrafficPolicyInstancesOutput struct {
 	// instance that matches the elements in the request.
 	//
 	// This member is required.
-	TrafficPolicyInstances []*types.TrafficPolicyInstance
+	TrafficPolicyInstances []types.TrafficPolicyInstance
 
 	// If IsTruncated is true, HostedZoneIdMarker is the ID of the hosted zone of the
 	// first traffic policy instance that Route 53 will return if you submit another

@@ -457,13 +457,13 @@ func validateInviteAction(v *types.InviteAction) error {
 	}
 }
 
-func validateInviteActionList(v []*types.InviteAction) error {
+func validateInviteActionList(v []types.InviteAction) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InviteActionList"}
 	for i := range v {
-		if err := validateInviteAction(v[i]); err != nil {
+		if err := validateInviteAction(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -618,13 +618,13 @@ func validateRemoveAction(v *types.RemoveAction) error {
 	}
 }
 
-func validateRemoveActionList(v []*types.RemoveAction) error {
+func validateRemoveActionList(v []types.RemoveAction) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RemoveActionList"}
 	for i := range v {
-		if err := validateRemoveAction(v[i]); err != nil {
+		if err := validateRemoveAction(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

@@ -52,13 +52,13 @@ type DescribeProvisioningArtifactInput struct {
 	ProvisioningArtifactName *string
 
 	// Indicates whether a verbose level of detail is enabled.
-	Verbose *bool
+	Verbose bool
 }
 
 type DescribeProvisioningArtifactOutput struct {
 
 	// The URL of the CloudFormation template in Amazon S3.
-	Info map[string]*string
+	Info map[string]string
 
 	// Information about the provisioning artifact.
 	ProvisioningArtifactDetail *types.ProvisioningArtifactDetail

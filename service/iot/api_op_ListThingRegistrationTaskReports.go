@@ -56,7 +56,7 @@ type ListThingRegistrationTaskReportsOutput struct {
 	ReportType types.ReportType
 
 	// Links to the task resources.
-	ResourceLinks []*string
+	ResourceLinks []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

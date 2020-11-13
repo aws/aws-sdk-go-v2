@@ -1301,17 +1301,13 @@ func (m *awsAwsjson11_serializeOpUpdateMLModel) HandleSerialize(ctx context.Cont
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsAwsjson11_serializeDocumentEDPSecurityGroupIds(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentEDPSecurityGroupIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1418,17 +1414,13 @@ func awsAwsjson11_serializeDocumentRDSDataSpec(v *types.RDSDataSpec, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRecord(v map[string]*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentRecord(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
@@ -1557,49 +1549,37 @@ func awsAwsjson11_serializeDocumentTag(v *types.Tag, value smithyjson.Value) err
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagKeyList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagKeyList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagList(v []*types.Tag, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagList(v []types.Tag, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentTag(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTrainingParameters(v map[string]*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTrainingParameters(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
@@ -1664,9 +1644,9 @@ func awsAwsjson11_serializeOpDocumentCreateDataSourceFromRDSInput(v *CreateDataS
 	object := value.Object()
 	defer object.Close()
 
-	if v.ComputeStatistics != nil {
+	if v.ComputeStatistics {
 		ok := object.Key("ComputeStatistics")
-		ok.Boolean(*v.ComputeStatistics)
+		ok.Boolean(v.ComputeStatistics)
 	}
 
 	if v.DataSourceId != nil {
@@ -1698,9 +1678,9 @@ func awsAwsjson11_serializeOpDocumentCreateDataSourceFromRedshiftInput(v *Create
 	object := value.Object()
 	defer object.Close()
 
-	if v.ComputeStatistics != nil {
+	if v.ComputeStatistics {
 		ok := object.Key("ComputeStatistics")
-		ok.Boolean(*v.ComputeStatistics)
+		ok.Boolean(v.ComputeStatistics)
 	}
 
 	if v.DataSourceId != nil {
@@ -1732,9 +1712,9 @@ func awsAwsjson11_serializeOpDocumentCreateDataSourceFromS3Input(v *CreateDataSo
 	object := value.Object()
 	defer object.Close()
 
-	if v.ComputeStatistics != nil {
+	if v.ComputeStatistics {
 		ok := object.Key("ComputeStatistics")
-		ok.Boolean(*v.ComputeStatistics)
+		ok.Boolean(v.ComputeStatistics)
 	}
 
 	if v.DataSourceId != nil {
@@ -2210,9 +2190,9 @@ func awsAwsjson11_serializeOpDocumentGetDataSourceInput(v *GetDataSourceInput, v
 		ok.String(*v.DataSourceId)
 	}
 
-	if v.Verbose != nil {
+	if v.Verbose {
 		ok := object.Key("Verbose")
-		ok.Boolean(*v.Verbose)
+		ok.Boolean(v.Verbose)
 	}
 
 	return nil
@@ -2239,9 +2219,9 @@ func awsAwsjson11_serializeOpDocumentGetMLModelInput(v *GetMLModelInput, value s
 		ok.String(*v.MLModelId)
 	}
 
-	if v.Verbose != nil {
+	if v.Verbose {
 		ok := object.Key("Verbose")
-		ok.Boolean(*v.Verbose)
+		ok.Boolean(v.Verbose)
 	}
 
 	return nil

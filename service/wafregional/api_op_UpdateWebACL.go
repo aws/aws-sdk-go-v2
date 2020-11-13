@@ -123,7 +123,7 @@ type UpdateWebACLInput struct {
 	// ActivatedRule|OverrideAction.
 	//
 	// * WafAction: Contains Type
-	Updates []*types.WebACLUpdate
+	Updates []types.WebACLUpdate
 }
 
 type UpdateWebACLOutput struct {

@@ -52,7 +52,7 @@ type ListConfigurationSetsOutput struct {
 
 	// An array that contains all of the configuration sets in your Amazon Pinpoint
 	// account in the current AWS Region.
-	ConfigurationSets []*string
+	ConfigurationSets []string
 
 	// A token that indicates that there are additional configuration sets to list. To
 	// view additional configuration sets, issue another request to

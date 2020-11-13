@@ -63,11 +63,11 @@ type CreateThemeInput struct {
 	ThemeId *string
 
 	// A valid grouping of resource permissions to apply to the new theme.
-	Permissions []*types.ResourcePermission
+	Permissions []types.ResourcePermission
 
 	// A map of the key-value pairs for the resource tag or tags that you want to add
 	// to the resource.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// A description of the first version of the theme that you're creating. Every time
 	// UpdateTheme is called, a new version is created. Each version of the theme has a
@@ -87,7 +87,7 @@ type CreateThemeOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// The ID of the theme.
 	ThemeId *string

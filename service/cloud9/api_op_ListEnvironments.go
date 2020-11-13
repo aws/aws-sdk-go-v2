@@ -43,7 +43,7 @@ type ListEnvironmentsInput struct {
 type ListEnvironmentsOutput struct {
 
 	// The list of environment identifiers.
-	EnvironmentIds []*string
+	EnvironmentIds []string
 
 	// If there are more than 25 items in the list, only the first 25 items are
 	// returned, along with a unique string called a next token. To get the next batch

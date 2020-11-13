@@ -49,7 +49,7 @@ type ListClustersInput struct {
 type ListClustersOutput struct {
 
 	// A list of all of the clusters for your account in the specified Region.
-	Clusters []*string
+	Clusters []string
 
 	// The nextToken value to include in a future ListClusters request. When the
 	// results of a ListClusters request exceed maxResults, you can use this value to

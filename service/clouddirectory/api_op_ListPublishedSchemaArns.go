@@ -47,7 +47,7 @@ type ListPublishedSchemaArnsOutput struct {
 	NextToken *string
 
 	// The ARNs of published schemas.
-	SchemaArns []*string
+	SchemaArns []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -146,7 +146,7 @@ type UpdateServiceInput struct {
 	// with a cluster to be used. The PutClusterCapacityProviders API operation is used
 	// to update the list of available capacity providers for a cluster after the
 	// cluster is created.
-	CapacityProviderStrategy []*types.CapacityProviderStrategyItem
+	CapacityProviderStrategy []types.CapacityProviderStrategyItem
 
 	// The short name or full Amazon Resource Name (ARN) of the cluster that your
 	// service is running on. If you do not specify a cluster, the default cluster is
@@ -166,7 +166,7 @@ type UpdateServiceInput struct {
 	// definition changes. For example, you can update a service's tasks to use a newer
 	// Docker image with the same image/tag combination (my_image:latest) or to roll
 	// Fargate tasks onto a newer platform version.
-	ForceNewDeployment *bool
+	ForceNewDeployment bool
 
 	// The period of time, in seconds, that the Amazon ECS service scheduler should
 	// ignore unhealthy Elastic Load Balancing target health checks after a task has
@@ -189,7 +189,7 @@ type UpdateServiceInput struct {
 	// constraints, specify an empty array. You can specify a maximum of 10 constraints
 	// per task (this limit includes constraints in the task definition and those
 	// specified at runtime).
-	PlacementConstraints []*types.PlacementConstraint
+	PlacementConstraints []types.PlacementConstraint
 
 	// The task placement strategy objects to update the service to use. If no value is
 	// specified, the existing placement strategy for the service will remain
@@ -197,7 +197,7 @@ type UpdateServiceInput struct {
 	// strategy defined for the service. To remove an existing placement strategy,
 	// specify an empty object. You can specify a maximum of five strategy rules per
 	// service.
-	PlacementStrategy []*types.PlacementStrategy
+	PlacementStrategy []types.PlacementStrategy
 
 	// The platform version on which your tasks in the service are running. A platform
 	// version is only specified for tasks using the Fargate launch type. If a platform

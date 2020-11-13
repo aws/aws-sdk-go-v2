@@ -56,7 +56,7 @@ type GetReservedNodeExchangeOfferingsOutput struct {
 	Marker *string
 
 	// Returns an array of ReservedNodeOffering objects.
-	ReservedNodeOfferings []*types.ReservedNodeOffering
+	ReservedNodeOfferings []types.ReservedNodeOffering
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

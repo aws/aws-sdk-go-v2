@@ -2324,34 +2324,28 @@ func (m *awsAwsquery_serializeOpStopDBCluster) HandleSerialize(ctx context.Conte
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsAwsquery_serializeDocumentAttributeValueList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentAttributeValueList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("AttributeValue")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentAvailabilityZones(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentAvailabilityZones(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("AvailabilityZone")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2377,18 +2371,15 @@ func awsAwsquery_serializeDocumentCloudwatchLogsExportConfiguration(v *types.Clo
 	return nil
 }
 
-func awsAwsquery_serializeDocumentEventCategoriesList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentEventCategoriesList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("EventCategory")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2412,68 +2403,56 @@ func awsAwsquery_serializeDocumentFilter(v *types.Filter, value query.Value) err
 	return nil
 }
 
-func awsAwsquery_serializeDocumentFilterList(v []*types.Filter, value query.Value) error {
+func awsAwsquery_serializeDocumentFilterList(v []types.Filter, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("Filter")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentFilter(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentFilter(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentFilterValueList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentFilterValueList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("Value")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentKeyList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentKeyList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentLogTypeList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentLogTypeList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2507,9 +2486,9 @@ func awsAwsquery_serializeDocumentParameter(v *types.Parameter, value query.Valu
 		objectKey.String(*v.Description)
 	}
 
-	if v.IsModifiable != nil {
+	if v.IsModifiable {
 		objectKey := object.Key("IsModifiable")
-		objectKey.Boolean(*v.IsModifiable)
+		objectKey.Boolean(v.IsModifiable)
 	}
 
 	if v.MinimumEngineVersion != nil {
@@ -2535,36 +2514,30 @@ func awsAwsquery_serializeDocumentParameter(v *types.Parameter, value query.Valu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentParametersList(v []*types.Parameter, value query.Value) error {
+func awsAwsquery_serializeDocumentParametersList(v []types.Parameter, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("Parameter")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentParameter(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentParameter(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSubnetIdentifierList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentSubnetIdentifierList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("SubnetIdentifier")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2586,36 +2559,30 @@ func awsAwsquery_serializeDocumentTag(v *types.Tag, value query.Value) error {
 	return nil
 }
 
-func awsAwsquery_serializeDocumentTagList(v []*types.Tag, value query.Value) error {
+func awsAwsquery_serializeDocumentTagList(v []types.Tag, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("Tag")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentTag(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentVpcSecurityGroupIdList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentVpcSecurityGroupIdList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("VpcSecurityGroupId")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2991,9 +2958,9 @@ func awsAwsquery_serializeOpDocumentDeleteDBClusterInput(v *DeleteDBClusterInput
 		objectKey.String(*v.FinalDBSnapshotIdentifier)
 	}
 
-	if v.SkipFinalSnapshot != nil {
+	if v.SkipFinalSnapshot {
 		objectKey := object.Key("SkipFinalSnapshot")
-		objectKey.Boolean(*v.SkipFinalSnapshot)
+		objectKey.Boolean(v.SkipFinalSnapshot)
 	}
 
 	return nil
@@ -3201,14 +3168,14 @@ func awsAwsquery_serializeOpDocumentDescribeDBClusterSnapshotsInput(v *DescribeD
 		}
 	}
 
-	if v.IncludePublic != nil {
+	if v.IncludePublic {
 		objectKey := object.Key("IncludePublic")
-		objectKey.Boolean(*v.IncludePublic)
+		objectKey.Boolean(v.IncludePublic)
 	}
 
-	if v.IncludeShared != nil {
+	if v.IncludeShared {
 		objectKey := object.Key("IncludeShared")
-		objectKey.Boolean(*v.IncludeShared)
+		objectKey.Boolean(v.IncludeShared)
 	}
 
 	if v.Marker != nil {
@@ -3238,9 +3205,9 @@ func awsAwsquery_serializeOpDocumentDescribeDBEngineVersionsInput(v *DescribeDBE
 		objectKey.String(*v.DBParameterGroupFamily)
 	}
 
-	if v.DefaultOnly != nil {
+	if v.DefaultOnly {
 		objectKey := object.Key("DefaultOnly")
-		objectKey.Boolean(*v.DefaultOnly)
+		objectKey.Boolean(v.DefaultOnly)
 	}
 
 	if v.Engine != nil {
@@ -3563,9 +3530,9 @@ func awsAwsquery_serializeOpDocumentModifyDBClusterInput(v *ModifyDBClusterInput
 	object := value.Object()
 	_ = object
 
-	if v.ApplyImmediately != nil {
+	if v.ApplyImmediately {
 		objectKey := object.Key("ApplyImmediately")
-		objectKey.Boolean(*v.ApplyImmediately)
+		objectKey.Boolean(v.ApplyImmediately)
 	}
 
 	if v.BackupRetentionPeriod != nil {
@@ -3689,9 +3656,9 @@ func awsAwsquery_serializeOpDocumentModifyDBInstanceInput(v *ModifyDBInstanceInp
 	object := value.Object()
 	_ = object
 
-	if v.ApplyImmediately != nil {
+	if v.ApplyImmediately {
 		objectKey := object.Key("ApplyImmediately")
-		objectKey.Boolean(*v.ApplyImmediately)
+		objectKey.Boolean(v.ApplyImmediately)
 	}
 
 	if v.AutoMinorVersionUpgrade != nil {
@@ -3808,9 +3775,9 @@ func awsAwsquery_serializeOpDocumentResetDBClusterParameterGroupInput(v *ResetDB
 		}
 	}
 
-	if v.ResetAllParameters != nil {
+	if v.ResetAllParameters {
 		objectKey := object.Key("ResetAllParameters")
-		objectKey.Boolean(*v.ResetAllParameters)
+		objectKey.Boolean(v.ResetAllParameters)
 	}
 
 	return nil
@@ -3944,9 +3911,9 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterToPointInTimeInput(v *Restor
 		}
 	}
 
-	if v.UseLatestRestorableTime != nil {
+	if v.UseLatestRestorableTime {
 		objectKey := object.Key("UseLatestRestorableTime")
-		objectKey.Boolean(*v.UseLatestRestorableTime)
+		objectKey.Boolean(v.UseLatestRestorableTime)
 	}
 
 	if v.VpcSecurityGroupIds != nil {

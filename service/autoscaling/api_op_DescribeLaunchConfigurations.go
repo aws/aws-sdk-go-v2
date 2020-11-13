@@ -31,7 +31,7 @@ type DescribeLaunchConfigurationsInput struct {
 
 	// The launch configuration names. If you omit this parameter, all launch
 	// configurations are described.
-	LaunchConfigurationNames []*string
+	LaunchConfigurationNames []string
 
 	// The maximum number of items to return with this call. The default value is 50
 	// and the maximum value is 100.
@@ -47,7 +47,7 @@ type DescribeLaunchConfigurationsOutput struct {
 	// The launch configurations.
 	//
 	// This member is required.
-	LaunchConfigurations []*types.LaunchConfiguration
+	LaunchConfigurations []types.LaunchConfiguration
 
 	// A string that indicates that the response contains more items than can be
 	// returned in a single response. To receive additional items, specify this string

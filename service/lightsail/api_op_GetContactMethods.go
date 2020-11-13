@@ -45,7 +45,7 @@ type GetContactMethodsInput struct {
 type GetContactMethodsOutput struct {
 
 	// An array of objects that describe the contact methods.
-	ContactMethods []*types.ContactMethod
+	ContactMethods []types.ContactMethod
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

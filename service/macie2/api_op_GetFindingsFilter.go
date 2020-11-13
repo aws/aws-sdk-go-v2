@@ -61,11 +61,11 @@ type GetFindingsFilterOutput struct {
 	// The position of the filter in the list of saved filters on the Amazon Macie
 	// console. This value also determines the order in which the filter is applied to
 	// findings, relative to other filters that are also applied to the findings.
-	Position *int32
+	Position int32
 
 	// A map of key-value pairs that identifies the tags (keys and values) that are
 	// associated with the filter.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

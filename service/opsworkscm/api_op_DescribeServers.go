@@ -57,7 +57,7 @@ type DescribeServersOutput struct {
 	// PUPPET_API_CA_CERT. This is the PEM-encoded CA certificate that is used by the
 	// Puppet API over TCP port number 8140. The CA certificate is also used to sign
 	// node certificates.
-	Servers []*types.Server
+	Servers []types.Server
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

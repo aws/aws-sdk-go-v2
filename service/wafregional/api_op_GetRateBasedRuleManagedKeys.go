@@ -51,7 +51,7 @@ type GetRateBasedRuleManagedKeysOutput struct {
 
 	// An array of IP addresses that currently are blocked by the specified
 	// RateBasedRule.
-	ManagedKeys []*string
+	ManagedKeys []string
 
 	// A null value and not currently used.
 	NextMarker *string

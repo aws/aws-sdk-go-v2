@@ -60,7 +60,7 @@ type GetDomainStatisticsReportOutput struct {
 	// ending on the EndDate.
 	//
 	// This member is required.
-	DailyVolumes []*types.DailyVolume
+	DailyVolumes []types.DailyVolume
 
 	// An object that contains deliverability metrics for the domain that you
 	// specified. The data in this object is a summary of all of the data that was

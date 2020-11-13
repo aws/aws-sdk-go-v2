@@ -36,16 +36,16 @@ type BatchGetDevEndpointsInput struct {
 	// ListDevEndpoint operation.
 	//
 	// This member is required.
-	DevEndpointNames []*string
+	DevEndpointNames []string
 }
 
 type BatchGetDevEndpointsOutput struct {
 
 	// A list of DevEndpoint definitions.
-	DevEndpoints []*types.DevEndpoint
+	DevEndpoints []types.DevEndpoint
 
 	// A list of DevEndpoints not found.
-	DevEndpointsNotFound []*string
+	DevEndpointsNotFound []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

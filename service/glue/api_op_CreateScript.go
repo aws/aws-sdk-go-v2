@@ -30,10 +30,10 @@ func (c *Client) CreateScript(ctx context.Context, params *CreateScriptInput, op
 type CreateScriptInput struct {
 
 	// A list of the edges in the DAG.
-	DagEdges []*types.CodeGenEdge
+	DagEdges []types.CodeGenEdge
 
 	// A list of the nodes in the DAG.
-	DagNodes []*types.CodeGenNode
+	DagNodes []types.CodeGenNode
 
 	// The programming language of the resulting code from the DAG.
 	Language types.Language

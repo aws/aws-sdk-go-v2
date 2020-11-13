@@ -68,7 +68,7 @@ type ListContactsInput struct {
 type ListContactsOutput struct {
 
 	// List of contacts.
-	ContactList []*types.ContactData
+	ContactList []types.ContactData
 
 	// Next token returned in the response of a previous ListContacts call. Used to get
 	// the next page of results.

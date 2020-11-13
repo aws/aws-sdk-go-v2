@@ -33,7 +33,7 @@ type DeleteMembersInput struct {
 	// A list of account IDs of the GuardDuty member accounts that you want to delete.
 	//
 	// This member is required.
-	AccountIds []*string
+	AccountIds []string
 
 	// The unique ID of the detector of the GuardDuty account whose members you want to
 	// delete.
@@ -47,7 +47,7 @@ type DeleteMembersOutput struct {
 	// The accounts that could not be processed.
 	//
 	// This member is required.
-	UnprocessedAccounts []*types.UnprocessedAccount
+	UnprocessedAccounts []types.UnprocessedAccount
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

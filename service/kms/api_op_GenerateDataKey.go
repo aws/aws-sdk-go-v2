@@ -116,12 +116,12 @@ type GenerateDataKeyInput struct {
 	// information, see Encryption Context
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
 	// in the AWS Key Management Service Developer Guide.
-	EncryptionContext map[string]*string
+	EncryptionContext map[string]string
 
 	// A list of grant tokens. For more information, see Grant Tokens
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
 	// in the AWS Key Management Service Developer Guide.
-	GrantTokens []*string
+	GrantTokens []string
 
 	// Specifies the length of the data key. Use AES_128 to generate a 128-bit
 	// symmetric key, or AES_256 to generate a 256-bit symmetric key. You must specify

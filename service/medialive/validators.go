@@ -1066,13 +1066,13 @@ func addOpUpdateReservationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateReservation{}, middleware.After)
 }
 
-func validate__listOfAudioChannelMapping(v []*types.AudioChannelMapping) error {
+func validate__listOfAudioChannelMapping(v []types.AudioChannelMapping) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfAudioChannelMapping"}
 	for i := range v {
-		if err := validateAudioChannelMapping(v[i]); err != nil {
+		if err := validateAudioChannelMapping(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1083,13 +1083,13 @@ func validate__listOfAudioChannelMapping(v []*types.AudioChannelMapping) error {
 	}
 }
 
-func validate__listOfAudioDescription(v []*types.AudioDescription) error {
+func validate__listOfAudioDescription(v []types.AudioDescription) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfAudioDescription"}
 	for i := range v {
-		if err := validateAudioDescription(v[i]); err != nil {
+		if err := validateAudioDescription(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1100,13 +1100,13 @@ func validate__listOfAudioDescription(v []*types.AudioDescription) error {
 	}
 }
 
-func validate__listOfAudioSelector(v []*types.AudioSelector) error {
+func validate__listOfAudioSelector(v []types.AudioSelector) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfAudioSelector"}
 	for i := range v {
-		if err := validateAudioSelector(v[i]); err != nil {
+		if err := validateAudioSelector(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1117,13 +1117,13 @@ func validate__listOfAudioSelector(v []*types.AudioSelector) error {
 	}
 }
 
-func validate__listOfAudioTrack(v []*types.AudioTrack) error {
+func validate__listOfAudioTrack(v []types.AudioTrack) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfAudioTrack"}
 	for i := range v {
-		if err := validateAudioTrack(v[i]); err != nil {
+		if err := validateAudioTrack(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1134,13 +1134,13 @@ func validate__listOfAudioTrack(v []*types.AudioTrack) error {
 	}
 }
 
-func validate__listOfCaptionDescription(v []*types.CaptionDescription) error {
+func validate__listOfCaptionDescription(v []types.CaptionDescription) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfCaptionDescription"}
 	for i := range v {
-		if err := validateCaptionDescription(v[i]); err != nil {
+		if err := validateCaptionDescription(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1151,13 +1151,13 @@ func validate__listOfCaptionDescription(v []*types.CaptionDescription) error {
 	}
 }
 
-func validate__listOfCaptionLanguageMapping(v []*types.CaptionLanguageMapping) error {
+func validate__listOfCaptionLanguageMapping(v []types.CaptionLanguageMapping) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfCaptionLanguageMapping"}
 	for i := range v {
-		if err := validateCaptionLanguageMapping(v[i]); err != nil {
+		if err := validateCaptionLanguageMapping(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1168,13 +1168,13 @@ func validate__listOfCaptionLanguageMapping(v []*types.CaptionLanguageMapping) e
 	}
 }
 
-func validate__listOfCaptionSelector(v []*types.CaptionSelector) error {
+func validate__listOfCaptionSelector(v []types.CaptionSelector) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfCaptionSelector"}
 	for i := range v {
-		if err := validateCaptionSelector(v[i]); err != nil {
+		if err := validateCaptionSelector(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1185,13 +1185,13 @@ func validate__listOfCaptionSelector(v []*types.CaptionSelector) error {
 	}
 }
 
-func validate__listOfInputAttachment(v []*types.InputAttachment) error {
+func validate__listOfInputAttachment(v []types.InputAttachment) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfInputAttachment"}
 	for i := range v {
-		if err := validateInputAttachment(v[i]); err != nil {
+		if err := validateInputAttachment(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1202,13 +1202,13 @@ func validate__listOfInputAttachment(v []*types.InputAttachment) error {
 	}
 }
 
-func validate__listOfInputChannelLevel(v []*types.InputChannelLevel) error {
+func validate__listOfInputChannelLevel(v []types.InputChannelLevel) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfInputChannelLevel"}
 	for i := range v {
-		if err := validateInputChannelLevel(v[i]); err != nil {
+		if err := validateInputChannelLevel(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1219,13 +1219,13 @@ func validate__listOfInputChannelLevel(v []*types.InputChannelLevel) error {
 	}
 }
 
-func validate__listOfOutput(v []*types.Output) error {
+func validate__listOfOutput(v []types.Output) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfOutput"}
 	for i := range v {
-		if err := validateOutput(v[i]); err != nil {
+		if err := validateOutput(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1236,13 +1236,13 @@ func validate__listOfOutput(v []*types.Output) error {
 	}
 }
 
-func validate__listOfOutputGroup(v []*types.OutputGroup) error {
+func validate__listOfOutputGroup(v []types.OutputGroup) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfOutputGroup"}
 	for i := range v {
-		if err := validateOutputGroup(v[i]); err != nil {
+		if err := validateOutputGroup(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1253,13 +1253,13 @@ func validate__listOfOutputGroup(v []*types.OutputGroup) error {
 	}
 }
 
-func validate__listOfPipelinePauseStateSettings(v []*types.PipelinePauseStateSettings) error {
+func validate__listOfPipelinePauseStateSettings(v []types.PipelinePauseStateSettings) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfPipelinePauseStateSettings"}
 	for i := range v {
-		if err := validatePipelinePauseStateSettings(v[i]); err != nil {
+		if err := validatePipelinePauseStateSettings(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1270,13 +1270,13 @@ func validate__listOfPipelinePauseStateSettings(v []*types.PipelinePauseStateSet
 	}
 }
 
-func validate__listOfScheduleAction(v []*types.ScheduleAction) error {
+func validate__listOfScheduleAction(v []types.ScheduleAction) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfScheduleAction"}
 	for i := range v {
-		if err := validateScheduleAction(v[i]); err != nil {
+		if err := validateScheduleAction(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1287,13 +1287,13 @@ func validate__listOfScheduleAction(v []*types.ScheduleAction) error {
 	}
 }
 
-func validate__listOfScte35Descriptor(v []*types.Scte35Descriptor) error {
+func validate__listOfScte35Descriptor(v []types.Scte35Descriptor) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfScte35Descriptor"}
 	for i := range v {
-		if err := validateScte35Descriptor(v[i]); err != nil {
+		if err := validateScte35Descriptor(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1304,13 +1304,13 @@ func validate__listOfScte35Descriptor(v []*types.Scte35Descriptor) error {
 	}
 }
 
-func validate__listOfVideoDescription(v []*types.VideoDescription) error {
+func validate__listOfVideoDescription(v []types.VideoDescription) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfVideoDescription"}
 	for i := range v {
-		if err := validateVideoDescription(v[i]); err != nil {
+		if err := validateVideoDescription(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1384,9 +1384,6 @@ func validateAudioChannelMapping(v *types.AudioChannelMapping) error {
 			invalidParams.AddNested("InputChannelLevels", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.OutputChannel == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OutputChannel"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1454,9 +1451,6 @@ func validateAudioPidSelection(v *types.AudioPidSelection) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AudioPidSelection"}
-	if v.Pid == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Pid"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1516,9 +1510,6 @@ func validateAudioTrack(v *types.AudioTrack) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AudioTrack"}
-	if v.Track == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Track"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1700,9 +1691,6 @@ func validateCaptionLanguageMapping(v *types.CaptionLanguageMapping) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CaptionLanguageMapping"}
-	if v.CaptionChannel == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CaptionChannel"))
-	}
 	if v.LanguageCode == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
 	}
@@ -1736,9 +1724,6 @@ func validateDvbNitSettings(v *types.DvbNitSettings) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DvbNitSettings"}
-	if v.NetworkId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NetworkId"))
-	}
 	if v.NetworkName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NetworkName"))
 	}
@@ -1879,9 +1864,6 @@ func validateFrameCaptureSettings(v *types.FrameCaptureSettings) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FrameCaptureSettings"}
-	if v.CaptureInterval == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CaptureInterval"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1911,12 +1893,6 @@ func validateH265Settings(v *types.H265Settings) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "H265Settings"}
-	if v.FramerateNumerator == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FramerateNumerator"))
-	}
-	if v.FramerateDenominator == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FramerateDenominator"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2047,12 +2023,6 @@ func validateInputChannelLevel(v *types.InputChannelLevel) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InputChannelLevel"}
-	if v.Gain == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Gain"))
-	}
-	if v.InputChannel == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InputChannel"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2235,12 +2205,6 @@ func validateMpeg2Settings(v *types.Mpeg2Settings) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Mpeg2Settings"}
-	if v.FramerateDenominator == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FramerateDenominator"))
-	}
-	if v.FramerateNumerator == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FramerateNumerator"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2306,9 +2270,6 @@ func validateMultiplexProgramSettings(v *types.MultiplexProgramSettings) error {
 			invalidParams.AddNested("ServiceDescriptor", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ProgramNumber == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProgramNumber"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2321,12 +2282,6 @@ func validateMultiplexSettings(v *types.MultiplexSettings) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MultiplexSettings"}
-	if v.TransportStreamId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TransportStreamId"))
-	}
-	if v.TransportStreamBitrate == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TransportStreamBitrate"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2694,9 +2649,6 @@ func validateScte35ReturnToNetworkScheduleActionSettings(v *types.Scte35ReturnTo
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Scte35ReturnToNetworkScheduleActionSettings"}
-	if v.SpliceEventId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SpliceEventId"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2717,9 +2669,6 @@ func validateScte35SegmentationDescriptor(v *types.Scte35SegmentationDescriptor)
 	if len(v.SegmentationCancelIndicator) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SegmentationCancelIndicator"))
 	}
-	if v.SegmentationEventId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SegmentationEventId"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2732,9 +2681,6 @@ func validateScte35SpliceInsertScheduleActionSettings(v *types.Scte35SpliceInser
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Scte35SpliceInsertScheduleActionSettings"}
-	if v.SpliceEventId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SpliceEventId"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3413,9 +3359,6 @@ func validateOpPurchaseOfferingInput(v *PurchaseOfferingInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PurchaseOfferingInput"}
-	if v.Count == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Count"))
-	}
 	if v.OfferingId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OfferingId"))
 	}

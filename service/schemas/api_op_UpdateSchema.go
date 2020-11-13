@@ -72,7 +72,7 @@ type UpdateSchemaOutput struct {
 	SchemaVersion *string
 
 	// Key-value pairs associated with a resource.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The type of the schema.
 	Type *string

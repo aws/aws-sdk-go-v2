@@ -538,13 +538,13 @@ func validateMappingRule(v *types.MappingRule) error {
 	}
 }
 
-func validateMappingRulesList(v []*types.MappingRule) error {
+func validateMappingRulesList(v []types.MappingRule) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MappingRulesList"}
 	for i := range v {
-		if err := validateMappingRule(v[i]); err != nil {
+		if err := validateMappingRule(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -575,13 +575,14 @@ func validateRoleMapping(v *types.RoleMapping) error {
 	}
 }
 
-func validateRoleMappingMap(v map[string]*types.RoleMapping) error {
+func validateRoleMappingMap(v map[string]types.RoleMapping) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RoleMappingMap"}
 	for key := range v {
-		if err := validateRoleMapping(v[key]); err != nil {
+		value := v[key]
+		if err := validateRoleMapping(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -616,9 +617,6 @@ func validateOpCreateIdentityPoolInput(v *CreateIdentityPoolInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateIdentityPoolInput"}
-	if v.AllowUnauthenticatedIdentities == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AllowUnauthenticatedIdentities"))
-	}
 	if v.IdentityPoolName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolName"))
 	}
@@ -775,9 +773,6 @@ func validateOpListIdentitiesInput(v *ListIdentitiesInput) error {
 	if v.IdentityPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolId"))
 	}
-	if v.MaxResults == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MaxResults"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -790,9 +785,6 @@ func validateOpListIdentityPoolsInput(v *ListIdentityPoolsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListIdentityPoolsInput"}
-	if v.MaxResults == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MaxResults"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -965,9 +957,6 @@ func validateOpUpdateIdentityPoolInput(v *UpdateIdentityPoolInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateIdentityPoolInput"}
 	if v.IdentityPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolId"))
-	}
-	if v.AllowUnauthenticatedIdentities == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AllowUnauthenticatedIdentities"))
 	}
 	if v.IdentityPoolName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityPoolName"))

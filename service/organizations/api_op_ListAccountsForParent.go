@@ -66,7 +66,7 @@ type ListAccountsForParentInput struct {
 type ListAccountsForParentOutput struct {
 
 	// A list of the accounts in the specified root or OU.
-	Accounts []*types.Account
+	Accounts []types.Account
 
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a

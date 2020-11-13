@@ -52,7 +52,7 @@ type NotifyMigrationTaskStateInput struct {
 	// specified interval, then the migration task will be considered stale.
 	//
 	// This member is required.
-	NextUpdateSeconds *int32
+	NextUpdateSeconds int32
 
 	// The name of the ProgressUpdateStream.
 	//
@@ -71,7 +71,7 @@ type NotifyMigrationTaskStateInput struct {
 
 	// Optional boolean flag to indicate whether any effect should take place. Used to
 	// test if the caller has permission to make the call.
-	DryRun *bool
+	DryRun bool
 }
 
 type NotifyMigrationTaskStateOutput struct {

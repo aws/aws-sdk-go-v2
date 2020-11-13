@@ -385,47 +385,35 @@ func awsAwsjson11_serializeDocumentGroupBy(v []types.GroupByAttribute, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRegionFilterList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentRegionFilterList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentResourceARNList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentResourceARNList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentResourceTypeFilterList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentResourceTypeFilterList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -449,94 +437,70 @@ func awsAwsjson11_serializeDocumentTagFilter(v *types.TagFilter, value smithyjso
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagFilterList(v []*types.TagFilter, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagFilterList(v []types.TagFilter, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentTagFilter(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentTagFilter(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagKeyFilterList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagKeyFilterList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagKeyListForUntag(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagKeyListForUntag(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagMap(v map[string]*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagValueList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagValueList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTargetIdFilterList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTargetIdFilterList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }

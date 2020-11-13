@@ -39,7 +39,7 @@ type CreateConnectorDefinitionVersionInput struct {
 
 	// A list of references to connectors in this version, with their corresponding
 	// configuration settings.
-	Connectors []*types.Connector
+	Connectors []types.Connector
 }
 
 type CreateConnectorDefinitionVersionOutput struct {

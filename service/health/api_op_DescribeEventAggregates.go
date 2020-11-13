@@ -55,7 +55,7 @@ type DescribeEventAggregatesInput struct {
 type DescribeEventAggregatesOutput struct {
 
 	// The number of events in each category that meet the optional filter criteria.
-	EventAggregates []*types.EventAggregate
+	EventAggregates []types.EventAggregate
 
 	// If the results of a search are large, only a portion of the results are
 	// returned, and a nextToken pagination token is returned in the response. To

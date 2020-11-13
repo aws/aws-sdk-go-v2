@@ -62,7 +62,7 @@ type CustomizedMetricSpecification struct {
 
 	// The dimensions of the metric. Conditional: If you published your metric with
 	// dimensions, you must specify the same dimensions in your scaling policy.
-	Dimensions []*MetricDimension
+	Dimensions []MetricDimension
 
 	// The unit of the metric.
 	Unit *string
@@ -662,7 +662,7 @@ type ScalingPolicy struct {
 	ServiceNamespace ServiceNamespace
 
 	// The CloudWatch alarms associated with the scaling policy.
-	Alarms []*Alarm
+	Alarms []Alarm
 
 	// A step scaling policy.
 	StepScalingPolicyConfiguration *StepScalingPolicyConfiguration
@@ -1007,7 +1007,7 @@ type StepScalingPolicyConfiguration struct {
 	// A set of adjustments that enable you to scale based on the size of the alarm
 	// breach. At least one step adjustment is required if you are adding a new step
 	// scaling policy configuration.
-	StepAdjustments []*StepAdjustment
+	StepAdjustments []StepAdjustment
 }
 
 // Specifies whether the scaling activities for a scalable target are in a

@@ -63,16 +63,16 @@ type AwsApiGatewayCanarySettings struct {
 	DeploymentId *string
 
 	// The percentage of traffic that is diverted to a canary deployment.
-	PercentTraffic *float64
+	PercentTraffic float64
 
 	// Stage variables that are overridden in the canary release deployment. The
 	// variables include new stage variables that are introduced in the canary. Each
 	// variable is represented as a string-to-string map between the stage variable
 	// name and the variable value.
-	StageVariableOverrides map[string]*string
+	StageVariableOverrides map[string]string
 
 	// Indicates whether the canary deployment uses the stage cache.
-	UseStageCache *bool
+	UseStageCache bool
 }
 
 // Contains information about the endpoints for the API.
@@ -81,26 +81,26 @@ type AwsApiGatewayEndpointConfiguration struct {
 	// A list of endpoint types for the REST API. For an edge-optimized API, the
 	// endpoint type is EDGE. For a Regional API, the endpoint type is REGIONAL. For a
 	// private API, the endpoint type is PRIVATE.
-	Types []*string
+	Types []string
 }
 
 // Defines settings for a method for the stage.
 type AwsApiGatewayMethodSettings struct {
 
 	// Indicates whether the cached responses are encrypted.
-	CacheDataEncrypted *bool
+	CacheDataEncrypted bool
 
 	// Specifies the time to live (TTL), in seconds, for cached responses. The higher
 	// the TTL, the longer the response is cached.
-	CacheTtlInSeconds *int32
+	CacheTtlInSeconds int32
 
 	// Indicates whether responses are cached and returned for requests. For responses
 	// to be cached, a cache cluster must be enabled on the stage.
-	CachingEnabled *bool
+	CachingEnabled bool
 
 	// Indicates whether data trace logging is enabled for the method. Data trace
 	// logging affects the log entries that are pushed to CloudWatch Logs.
-	DataTraceEnabled *bool
+	DataTraceEnabled bool
 
 	// The HTTP method. You can use an asterisk (*) as a wildcard to apply method
 	// settings to multiple methods.
@@ -114,10 +114,10 @@ type AwsApiGatewayMethodSettings struct {
 	LoggingLevel *string
 
 	// Indicates whether CloudWatch metrics are enabled for the method.
-	MetricsEnabled *bool
+	MetricsEnabled bool
 
 	// Indicates whether authorization is required for a cache invalidation request.
-	RequireAuthorizationForCacheControl *bool
+	RequireAuthorizationForCacheControl bool
 
 	// The resource path for this method. Forward slashes (/) are encoded as ~1 . The
 	// initial slash must include a forward slash. For example, the path value
@@ -127,10 +127,10 @@ type AwsApiGatewayMethodSettings struct {
 	ResourcePath *string
 
 	// The throttling burst limit for the method.
-	ThrottlingBurstLimit *int32
+	ThrottlingBurstLimit int32
 
 	// The throttling rate limit for the method.
-	ThrottlingRateLimit *float64
+	ThrottlingRateLimit float64
 
 	// Indicates how to handle unauthorized requests for cache invalidation. Valid
 	// values: FAIL_WITH_403 | SUCCEED_WITH_RESPONSE_HEADER |
@@ -148,7 +148,7 @@ type AwsApiGatewayRestApiDetails struct {
 	ApiKeySource *string
 
 	// The list of binary media types supported by the REST API.
-	BinaryMediaTypes []*string
+	BinaryMediaTypes []string
 
 	// Indicates when the API was created. Uses the date-time format specified in RFC
 	// 3339 section 5.6, Internet Date/Time Format
@@ -167,7 +167,7 @@ type AwsApiGatewayRestApiDetails struct {
 
 	// The minimum size in bytes of a payload before compression is enabled. If null,
 	// then compression is disabled. If 0, then all payloads are compressed.
-	MinimumCompressionSize *int32
+	MinimumCompressionSize int32
 
 	// The name of the REST API.
 	Name *string
@@ -183,7 +183,7 @@ type AwsApiGatewayStageDetails struct {
 	AccessLogSettings *AwsApiGatewayAccessLogSettings
 
 	// Indicates whether a cache cluster is enabled for the stage.
-	CacheClusterEnabled *bool
+	CacheClusterEnabled bool
 
 	// If a cache cluster is enabled, the size of the cache cluster.
 	CacheClusterSize *string
@@ -219,13 +219,13 @@ type AwsApiGatewayStageDetails struct {
 	LastUpdatedDate *string
 
 	// Defines the method settings for the stage.
-	MethodSettings []*AwsApiGatewayMethodSettings
+	MethodSettings []AwsApiGatewayMethodSettings
 
 	// The name of the stage.
 	StageName *string
 
 	// Indicates whether active tracing with AWS X-Ray is enabled for the stage.
-	TracingEnabled *bool
+	TracingEnabled bool
 
 	// A map that defines the stage variables for the stage. Variable names can have
 	// alphanumeric and underscore characters. Variable values can contain the
@@ -237,7 +237,7 @@ type AwsApiGatewayStageDetails struct {
 	//
 	// * Special
 	// characters -._~:/?#&=,
-	Variables map[string]*string
+	Variables map[string]string
 
 	// The ARN of the web ACL associated with the stage.
 	WebAclArn *string
@@ -291,10 +291,10 @@ type AwsApiGatewayV2RouteSettings struct {
 	// Indicates whether data trace logging is enabled. Data trace logging affects the
 	// log entries that are pushed to CloudWatch Logs. Supported only for WebSocket
 	// APIs.
-	DataTraceEnabled *bool
+	DataTraceEnabled bool
 
 	// Indicates whether detailed metrics are enabled.
-	DetailedMetricsEnabled *bool
+	DetailedMetricsEnabled bool
 
 	// The logging level. The logging level affects the log entries that are pushed to
 	// CloudWatch Logs. Supported only for WebSocket APIs. If the logging level is
@@ -304,10 +304,10 @@ type AwsApiGatewayV2RouteSettings struct {
 	LoggingLevel *string
 
 	// The throttling burst limit.
-	ThrottlingBurstLimit *int32
+	ThrottlingBurstLimit int32
 
 	// The throttling rate limit.
-	ThrottlingRateLimit *float64
+	ThrottlingRateLimit float64
 }
 
 // Contains information about a version 2 stage for Amazon API Gateway.
@@ -317,10 +317,10 @@ type AwsApiGatewayV2StageDetails struct {
 	AccessLogSettings *AwsApiGatewayAccessLogSettings
 
 	// Indicates whether the stage is managed by API Gateway.
-	ApiGatewayManaged *bool
+	ApiGatewayManaged bool
 
 	// Indicates whether updates to an API automatically trigger a new deployment.
-	AutoDeploy *bool
+	AutoDeploy bool
 
 	// Indicates when the stage was created. Uses the date-time format specified in RFC
 	// 3339 section 5.6, Internet Date/Time Format
@@ -363,7 +363,7 @@ type AwsApiGatewayV2StageDetails struct {
 	//
 	// * Special
 	// characters -._~:/?#&=,
-	StageVariables map[string]*string
+	StageVariables map[string]string
 }
 
 // Provides details about an auto scaling group.
@@ -377,7 +377,7 @@ type AwsAutoScalingAutoScalingGroupDetails struct {
 
 	// The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before it
 	// checks the health status of an EC2 instance that has come into service.
-	HealthCheckGracePeriod *int32
+	HealthCheckGracePeriod int32
 
 	// The service to use for the health checks.
 	HealthCheckType *string
@@ -386,7 +386,7 @@ type AwsAutoScalingAutoScalingGroupDetails struct {
 	LaunchConfigurationName *string
 
 	// The list of load balancers associated with the group.
-	LoadBalancerNames []*string
+	LoadBalancerNames []string
 }
 
 // Provides details about an AWS Certificate Manager certificate.
@@ -409,12 +409,12 @@ type AwsCertificateManagerCertificateDetails struct {
 	// Contains information about the initial validation of each domain name that
 	// occurs as a result of the RequestCertificate request. Only provided if the
 	// certificate type is AMAZON_ISSUED.
-	DomainValidationOptions []*AwsCertificateManagerCertificateDomainValidationOption
+	DomainValidationOptions []AwsCertificateManagerCertificateDomainValidationOption
 
 	// Contains a list of Extended Key Usage X.509 v3 extension objects. Each object
 	// specifies a purpose for which the certificate public key can be used and
 	// consists of a name and an object identifier (OID).
-	ExtendedKeyUsages []*AwsCertificateManagerCertificateExtendedKeyUsage
+	ExtendedKeyUsages []AwsCertificateManagerCertificateExtendedKeyUsage
 
 	// For a failed certificate request, the reason for the failure. Valid values:
 	// NO_AVAILABLE_CONTACTS | ADDITIONAL_VERIFICATION_REQUIRED | DOMAIN_NOT_ALLOWED |
@@ -431,7 +431,7 @@ type AwsCertificateManagerCertificateDetails struct {
 	ImportedAt *string
 
 	// The list of ARNs for the AWS resources that use the certificate.
-	InUseBy []*string
+	InUseBy []string
 
 	// Indicates when the certificate was issued. Provided if the certificate type is
 	// AMAZON_ISSUED. Uses the date-time format specified in RFC 3339 section 5.6,
@@ -448,7 +448,7 @@ type AwsCertificateManagerCertificateDetails struct {
 	KeyAlgorithm *string
 
 	// A list of key usage X.509 v3 extension objects.
-	KeyUsages []*AwsCertificateManagerCertificateKeyUsage
+	KeyUsages []AwsCertificateManagerCertificateKeyUsage
 
 	// The time after which the certificate becomes invalid. Uses the date-time format
 	// specified in RFC 3339 section 5.6, Internet Date/Time Format
@@ -493,7 +493,7 @@ type AwsCertificateManagerCertificateDetails struct {
 	// key that is contained in the certificate. The subject alternative names include
 	// the canonical domain name (CN) of the certificate and additional domain names
 	// that can be used to connect to the website.
-	SubjectAlternativeNames []*string
+	SubjectAlternativeNames []string
 
 	// The source of the certificate. For certificates that AWS Certificate Manager
 	// provides, Type is AMAZON_ISSUED. For certificates that are imported with
@@ -524,7 +524,7 @@ type AwsCertificateManagerCertificateDomainValidationOption struct {
 
 	// A list of email addresses that AWS Certificate Manager uses to send domain
 	// validation emails.
-	ValidationEmails []*string
+	ValidationEmails []string
 
 	// The method used to validate the domain name.
 	ValidationMethod *string
@@ -567,7 +567,7 @@ type AwsCertificateManagerCertificateRenewalSummary struct {
 	// Information about the validation of each domain name in the certificate, as it
 	// pertains to AWS Certificate Manager managed renewal. Provided only when the
 	// certificate type is AMAZON_ISSUED.
-	DomainValidationOptions []*AwsCertificateManagerCertificateDomainValidationOption
+	DomainValidationOptions []AwsCertificateManagerCertificateDomainValidationOption
 
 	// The status of the AWS Certificate Manager managed renewal of the certificate.
 	// Valid values: PENDING_AUTO_RENEWAL | PENDING_VALIDATION | SUCCESS | FAILED
@@ -624,7 +624,7 @@ type AwsCloudFrontDistributionCacheBehavior struct {
 type AwsCloudFrontDistributionCacheBehaviors struct {
 
 	// The cache behaviors for the distribution.
-	Items []*AwsCloudFrontDistributionCacheBehavior
+	Items []AwsCloudFrontDistributionCacheBehavior
 }
 
 // Contains information about the default cache configuration for the distribution.
@@ -698,10 +698,10 @@ type AwsCloudFrontDistributionLogging struct {
 	Bucket *string
 
 	// With this field, you can enable or disable the selected distribution.
-	Enabled *bool
+	Enabled bool
 
 	// Specifies whether you want CloudFront to include cookies in access logs.
-	IncludeCookies *bool
+	IncludeCookies bool
 
 	// An optional string that you want CloudFront to use as a prefix to the access log
 	// filenames for this distribution.
@@ -726,10 +726,10 @@ type AwsCloudFrontDistributionOriginGroupFailover struct {
 type AwsCloudFrontDistributionOriginGroupFailoverStatusCodes struct {
 
 	// The list of status code values that can cause a failover to the next origin.
-	Items []*int32
+	Items []int32
 
 	// The number of status codes that can cause a failover.
-	Quantity *int32
+	Quantity int32
 }
 
 // Provides information about origin groups that are associated with the
@@ -737,7 +737,7 @@ type AwsCloudFrontDistributionOriginGroupFailoverStatusCodes struct {
 type AwsCloudFrontDistributionOriginGroups struct {
 
 	// The list of origin groups.
-	Items []*AwsCloudFrontDistributionOriginGroup
+	Items []AwsCloudFrontDistributionOriginGroup
 }
 
 // A complex type that describes the Amazon S3 bucket, HTTP server (for example, a
@@ -766,7 +766,7 @@ type AwsCloudFrontDistributionOriginItem struct {
 type AwsCloudFrontDistributionOrigins struct {
 
 	// A complex type that contains origins or origin groups for this distribution.
-	Items []*AwsCloudFrontDistributionOriginItem
+	Items []AwsCloudFrontDistributionOriginItem
 }
 
 // Information about an origin that is an S3 bucket that is not configured with
@@ -788,28 +788,28 @@ type AwsCloudTrailTrailDetails struct {
 	CloudWatchLogsRoleArn *string
 
 	// Indicates whether the trail has custom event selectors.
-	HasCustomEventSelectors *bool
+	HasCustomEventSelectors bool
 
 	// The Region where the trail was created.
 	HomeRegion *string
 
 	// Indicates whether the trail publishes events from global services such as IAM to
 	// the log files.
-	IncludeGlobalServiceEvents *bool
+	IncludeGlobalServiceEvents bool
 
 	// Indicates whether the trail applies only to the current Region or to all
 	// Regions.
-	IsMultiRegionTrail *bool
+	IsMultiRegionTrail bool
 
 	// Whether the trail is created for all accounts in an organization in AWS
 	// Organizations, or only for the current AWS account.
-	IsOrganizationTrail *bool
+	IsOrganizationTrail bool
 
 	// The AWS KMS key ID to use to encrypt the logs.
 	KmsKeyId *string
 
 	// Indicates whether CloudTrail log file validation is enabled.
-	LogFileValidationEnabled *bool
+	LogFileValidationEnabled bool
 
 	// The name of the trail.
 	Name *string
@@ -916,10 +916,10 @@ type AwsCodeBuildProjectEnvironmentRegistryCredential struct {
 type AwsCodeBuildProjectSource struct {
 
 	// Information about the Git clone depth for the build project.
-	GitCloneDepth *int32
+	GitCloneDepth int32
 
 	// Whether to ignore SSL warnings while connecting to the project source code.
-	InsecureSsl *bool
+	InsecureSsl bool
 
 	// Information about the location of the source code to be built. Valid values
 	// include:
@@ -982,10 +982,10 @@ type AwsCodeBuildProjectSource struct {
 type AwsCodeBuildProjectVpcConfig struct {
 
 	// A list of one or more security group IDs in your Amazon VPC.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// A list of one or more subnet IDs in your Amazon VPC.
-	Subnets []*string
+	Subnets []string
 
 	// The ID of the VPC.
 	VpcId *string
@@ -996,22 +996,22 @@ type AwsCodeBuildProjectVpcConfig struct {
 type AwsCorsConfiguration struct {
 
 	// Indicates whether the CORS request includes credentials.
-	AllowCredentials *bool
+	AllowCredentials bool
 
 	// The allowed headers for CORS requests.
-	AllowHeaders []*string
+	AllowHeaders []string
 
 	// The allowed methods for CORS requests.
-	AllowMethods []*string
+	AllowMethods []string
 
 	// The allowed origins for CORS requests.
-	AllowOrigins []*string
+	AllowOrigins []string
 
 	// The exposed headers for CORS requests.
-	ExposeHeaders []*string
+	ExposeHeaders []string
 
 	// The number of seconds for which the browser caches preflight request results.
-	MaxAge *int32
+	MaxAge int32
 }
 
 // Contains a definition of an attribute for the table.
@@ -1041,7 +1041,7 @@ type AwsDynamoDbTableBillingModeSummary struct {
 type AwsDynamoDbTableDetails struct {
 
 	// A list of attribute definitions for the table.
-	AttributeDefinitions []*AwsDynamoDbTableAttributeDefinition
+	AttributeDefinitions []AwsDynamoDbTableAttributeDefinition
 
 	// Information about the billing for read/write capacity on the table.
 	BillingModeSummary *AwsDynamoDbTableBillingModeSummary
@@ -1053,16 +1053,16 @@ type AwsDynamoDbTableDetails struct {
 	CreationDateTime *string
 
 	// List of global secondary indexes for the table.
-	GlobalSecondaryIndexes []*AwsDynamoDbTableGlobalSecondaryIndex
+	GlobalSecondaryIndexes []AwsDynamoDbTableGlobalSecondaryIndex
 
 	// The version of global tables being used.
 	GlobalTableVersion *string
 
 	// The number of items in the table.
-	ItemCount *int32
+	ItemCount int32
 
 	// The primary key structure for the table.
-	KeySchema []*AwsDynamoDbTableKeySchema
+	KeySchema []AwsDynamoDbTableKeySchema
 
 	// The ARN of the latest stream for the table.
 	LatestStreamArn *string
@@ -1071,13 +1071,13 @@ type AwsDynamoDbTableDetails struct {
 	LatestStreamLabel *string
 
 	// The list of local secondary indexes for the table.
-	LocalSecondaryIndexes []*AwsDynamoDbTableLocalSecondaryIndex
+	LocalSecondaryIndexes []AwsDynamoDbTableLocalSecondaryIndex
 
 	// Information about the provisioned throughput for the table.
 	ProvisionedThroughput *AwsDynamoDbTableProvisionedThroughput
 
 	// The list of replicas of this table.
-	Replicas []*AwsDynamoDbTableReplica
+	Replicas []AwsDynamoDbTableReplica
 
 	// Information about the restore for the table.
 	RestoreSummary *AwsDynamoDbTableRestoreSummary
@@ -1095,7 +1095,7 @@ type AwsDynamoDbTableDetails struct {
 	TableName *string
 
 	// The total size of the table in bytes.
-	TableSizeBytes *int64
+	TableSizeBytes int64
 
 	// The current status of the table.
 	TableStatus *string
@@ -1105,7 +1105,7 @@ type AwsDynamoDbTableDetails struct {
 type AwsDynamoDbTableGlobalSecondaryIndex struct {
 
 	// Whether the index is currently backfilling.
-	Backfilling *bool
+	Backfilling bool
 
 	// The ARN of the index.
 	IndexArn *string
@@ -1114,16 +1114,16 @@ type AwsDynamoDbTableGlobalSecondaryIndex struct {
 	IndexName *string
 
 	// The total size in bytes of the index.
-	IndexSizeBytes *int64
+	IndexSizeBytes int64
 
 	// The current status of the index.
 	IndexStatus *string
 
 	// The number of items in the index.
-	ItemCount *int32
+	ItemCount int32
 
 	// The key schema for the index.
-	KeySchema []*AwsDynamoDbTableKeySchema
+	KeySchema []AwsDynamoDbTableKeySchema
 
 	// Attributes that are copied from the table into an index.
 	Projection *AwsDynamoDbTableProjection
@@ -1153,7 +1153,7 @@ type AwsDynamoDbTableLocalSecondaryIndex struct {
 	IndexName *string
 
 	// The complete key schema for the index.
-	KeySchema []*AwsDynamoDbTableKeySchema
+	KeySchema []AwsDynamoDbTableKeySchema
 
 	// Attributes that are copied from the table into the index. These are in addition
 	// to the primary key attributes and index key attributes, which are automatically
@@ -1167,7 +1167,7 @@ type AwsDynamoDbTableProjection struct {
 
 	// The nonkey attributes that are projected into the index. For each attribute,
 	// provide the attribute name.
-	NonKeyAttributes []*string
+	NonKeyAttributes []string
 
 	// The types of attributes that are projected into the index.
 	ProjectionType *string
@@ -1191,29 +1191,29 @@ type AwsDynamoDbTableProvisionedThroughput struct {
 
 	// The number of times during the current UTC calendar day that the provisioned
 	// throughput was decreased.
-	NumberOfDecreasesToday *int32
+	NumberOfDecreasesToday int32
 
 	// The maximum number of strongly consistent reads consumed per second before
 	// DynamoDB returns a ThrottlingException.
-	ReadCapacityUnits *int32
+	ReadCapacityUnits int32
 
 	// The maximum number of writes consumed per second before DynamoDB returns a
 	// ThrottlingException.
-	WriteCapacityUnits *int32
+	WriteCapacityUnits int32
 }
 
 // Replica-specific configuration for the provisioned throughput.
 type AwsDynamoDbTableProvisionedThroughputOverride struct {
 
 	// The read capacity units for the replica.
-	ReadCapacityUnits *int32
+	ReadCapacityUnits int32
 }
 
 // Information about a replica of a DynamoDB table.
 type AwsDynamoDbTableReplica struct {
 
 	// List of global secondary indexes for the replica.
-	GlobalSecondaryIndexes []*AwsDynamoDbTableReplicaGlobalSecondaryIndex
+	GlobalSecondaryIndexes []AwsDynamoDbTableReplicaGlobalSecondaryIndex
 
 	// The identifier of the AWS KMS customer master key (CMK) that will be used for
 	// AWS KMS encryption for the replica.
@@ -1252,7 +1252,7 @@ type AwsDynamoDbTableRestoreSummary struct {
 	RestoreDateTime *string
 
 	// Whether a restore is currently in progress.
-	RestoreInProgress *bool
+	RestoreInProgress bool
 
 	// The ARN of the source backup from which the table was restored.
 	SourceBackupArn *string
@@ -1286,7 +1286,7 @@ type AwsDynamoDbTableSseDescription struct {
 type AwsDynamoDbTableStreamSpecification struct {
 
 	// Indicates whether DynamoDB Streams is enabled on the table.
-	StreamEnabled *bool
+	StreamEnabled bool
 
 	// Determines the information that is written to the table.
 	StreamViewType *string
@@ -1340,10 +1340,10 @@ type AwsEc2InstanceDetails struct {
 	ImageId *string
 
 	// The IPv4 addresses associated with the instance.
-	IpV4Addresses []*string
+	IpV4Addresses []string
 
 	// The IPv6 addresses associated with the instance.
-	IpV6Addresses []*string
+	IpV6Addresses []string
 
 	// The key name associated with the instance.
 	KeyName *string
@@ -1378,10 +1378,10 @@ type AwsEc2NetworkInterfaceAttachment struct {
 
 	// Indicates whether the network interface is deleted when the instance is
 	// terminated.
-	DeleteOnTermination *bool
+	DeleteOnTermination bool
 
 	// The device index of the network interface attachment on the instance.
-	DeviceIndex *int32
+	DeviceIndex int32
 
 	// The ID of the instance.
 	InstanceId *string
@@ -1403,10 +1403,10 @@ type AwsEc2NetworkInterfaceDetails struct {
 	NetworkInterfaceId *string
 
 	// Security groups for the network interface.
-	SecurityGroups []*AwsEc2NetworkInterfaceSecurityGroup
+	SecurityGroups []AwsEc2NetworkInterfaceSecurityGroup
 
 	// Indicates whether traffic to or from the instance is validated.
-	SourceDestCheck *bool
+	SourceDestCheck bool
 }
 
 // A security group associated with the network interface.
@@ -1429,10 +1429,10 @@ type AwsEc2SecurityGroupDetails struct {
 	GroupName *string
 
 	// The inbound rules associated with the security group.
-	IpPermissions []*AwsEc2SecurityGroupIpPermission
+	IpPermissions []AwsEc2SecurityGroupIpPermission
 
 	// [VPC only] The outbound rules associated with the security group.
-	IpPermissionsEgress []*AwsEc2SecurityGroupIpPermission
+	IpPermissionsEgress []AwsEc2SecurityGroupIpPermission
 
 	// The AWS account ID of the owner of the security group.
 	OwnerId *string
@@ -1447,7 +1447,7 @@ type AwsEc2SecurityGroupIpPermission struct {
 	// The start of the port range for the TCP and UDP protocols, or an ICMP/ICMPv6
 	// type number. A value of -1 indicates all ICMP/ICMPv6 types. If you specify all
 	// ICMP/ICMPv6 types, you must specify all codes.
-	FromPort *int32
+	FromPort int32
 
 	// The IP protocol name (tcp, udp, icmp, icmpv6) or number. [VPC only] Use -1 to
 	// specify all protocols. When authorizing security group rules, specifying -1 or a
@@ -1458,23 +1458,23 @@ type AwsEc2SecurityGroupIpPermission struct {
 	IpProtocol *string
 
 	// The IPv4 ranges.
-	IpRanges []*AwsEc2SecurityGroupIpRange
+	IpRanges []AwsEc2SecurityGroupIpRange
 
 	// The IPv6 ranges.
-	Ipv6Ranges []*AwsEc2SecurityGroupIpv6Range
+	Ipv6Ranges []AwsEc2SecurityGroupIpv6Range
 
 	// [VPC only] The prefix list IDs for an AWS service. With outbound rules, this is
 	// the AWS service to access through a VPC endpoint from instances associated with
 	// the security group.
-	PrefixListIds []*AwsEc2SecurityGroupPrefixListId
+	PrefixListIds []AwsEc2SecurityGroupPrefixListId
 
 	// The end of the port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code.
 	// A value of -1 indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6
 	// types, you must specify all codes.
-	ToPort *int32
+	ToPort int32
 
 	// The security group and AWS account ID pairs.
-	UserIdGroupPairs []*AwsEc2SecurityGroupUserIdGroupPair
+	UserIdGroupPairs []AwsEc2SecurityGroupUserIdGroupPair
 }
 
 // A range of IPv4 addresses.
@@ -1535,7 +1535,7 @@ type AwsEc2VolumeAttachment struct {
 	AttachTime *string
 
 	// Whether the EBS volume is deleted when the EC2 instance is terminated.
-	DeleteOnTermination *bool
+	DeleteOnTermination bool
 
 	// The identifier of the EC2 instance.
 	InstanceId *string
@@ -1548,7 +1548,7 @@ type AwsEc2VolumeAttachment struct {
 type AwsEc2VolumeDetails struct {
 
 	// The volume attachments.
-	Attachments []*AwsEc2VolumeAttachment
+	Attachments []AwsEc2VolumeAttachment
 
 	// Indicates when the volume was created. Uses the date-time format specified in
 	// RFC 3339 section 5.6, Internet Date/Time Format
@@ -1557,14 +1557,14 @@ type AwsEc2VolumeDetails struct {
 	CreateTime *string
 
 	// Whether the volume is encrypted.
-	Encrypted *bool
+	Encrypted bool
 
 	// The ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK)
 	// that was used to protect the volume encryption key for the volume.
 	KmsKeyId *string
 
 	// The size of the volume, in GiBs.
-	Size *int32
+	Size int32
 
 	// The snapshot from which the volume was created.
 	SnapshotId *string
@@ -1577,7 +1577,7 @@ type AwsEc2VolumeDetails struct {
 type AwsEc2VpcDetails struct {
 
 	// Information about the IPv4 CIDR blocks associated with the VPC.
-	CidrBlockAssociationSet []*CidrBlockAssociation
+	CidrBlockAssociationSet []CidrBlockAssociation
 
 	// The identifier of the set of Dynamic Host Configuration Protocol (DHCP) options
 	// that are associated with the VPC. If the default options are associated with the
@@ -1585,7 +1585,7 @@ type AwsEc2VpcDetails struct {
 	DhcpOptionsId *string
 
 	// Information about the IPv6 CIDR blocks associated with the VPC.
-	Ipv6CidrBlockAssociationSet []*Ipv6CidrBlockAssociation
+	Ipv6CidrBlockAssociationSet []Ipv6CidrBlockAssociation
 
 	// The current state of the VPC.
 	State *string
@@ -1620,7 +1620,7 @@ type AwsElasticsearchDomainDetails struct {
 	Endpoint *string
 
 	// The key-value pair that exists if the Amazon ES domain uses VPC endpoints.
-	Endpoints map[string]*string
+	Endpoints map[string]string
 
 	// Details about the configuration for node-to-node encryption.
 	NodeToNodeEncryptionOptions *AwsElasticsearchDomainNodeToNodeEncryptionOptions
@@ -1634,7 +1634,7 @@ type AwsElasticsearchDomainDetails struct {
 type AwsElasticsearchDomainDomainEndpointOptions struct {
 
 	// Whether to require that all traffic to the domain arrive over HTTPS.
-	EnforceHTTPS *bool
+	EnforceHTTPS bool
 
 	// The TLS security policy to apply to the HTTPS endpoint of the Elasticsearch
 	// domain. Valid values:
@@ -1650,7 +1650,7 @@ type AwsElasticsearchDomainDomainEndpointOptions struct {
 type AwsElasticsearchDomainEncryptionAtRestOptions struct {
 
 	// Whether encryption at rest is enabled.
-	Enabled *bool
+	Enabled bool
 
 	// The KMS key ID. Takes the form 1a2a3a4-1a2a-3a4a-5a6a-1a2a3a4a5a6a.
 	KmsKeyId *string
@@ -1660,20 +1660,20 @@ type AwsElasticsearchDomainEncryptionAtRestOptions struct {
 type AwsElasticsearchDomainNodeToNodeEncryptionOptions struct {
 
 	// Whether node-to-node encryption is enabled.
-	Enabled *bool
+	Enabled bool
 }
 
 // Information that Amazon ES derives based on VPCOptions for the domain.
 type AwsElasticsearchDomainVPCOptions struct {
 
 	// The list of Availability Zones associated with the VPC subnets.
-	AvailabilityZones []*string
+	AvailabilityZones []string
 
 	// The list of security group IDs associated with the VPC endpoints for the domain.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// A list of subnet IDs associated with the VPC endpoints for the domain.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// ID for the VPC.
 	VPCId *string
@@ -1698,7 +1698,7 @@ type AwsElbLbCookieStickinessPolicy struct {
 	// The amount of time, in seconds, after which the cookie is considered stale. If
 	// an expiration period is not specified, the stickiness session lasts for the
 	// duration of the browser session.
-	CookieExpirationPeriod *int64
+	CookieExpirationPeriod int64
 
 	// The name of the policy. The name must be unique within the set of policies for
 	// the load balancer.
@@ -1710,10 +1710,10 @@ type AwsElbLoadBalancerAccessLog struct {
 
 	// The interval in minutes for publishing the access logs. You can publish access
 	// logs either every 5 minutes or every 60 minutes.
-	EmitInterval *int32
+	EmitInterval int32
 
 	// Indicates whether access logs are enabled for the load balancer.
-	Enabled *bool
+	Enabled bool
 
 	// The name of the S3 bucket where the access logs are stored.
 	S3BucketName *string
@@ -1753,10 +1753,10 @@ type AwsElbLoadBalancerAttributes struct {
 type AwsElbLoadBalancerBackendServerDescription struct {
 
 	// The port on which the EC2 instance is listening.
-	InstancePort *int32
+	InstancePort int32
 
 	// The names of the policies that are enabled for the EC2 instance.
-	PolicyNames []*string
+	PolicyNames []string
 }
 
 // Contains information about the connection draining configuration for the load
@@ -1764,11 +1764,11 @@ type AwsElbLoadBalancerBackendServerDescription struct {
 type AwsElbLoadBalancerConnectionDraining struct {
 
 	// Indicates whether connection draining is enabled for the load balancer.
-	Enabled *bool
+	Enabled bool
 
 	// The maximum time, in seconds, to keep the existing connections open before
 	// deregistering the instances.
-	Timeout *int32
+	Timeout int32
 }
 
 // Contains connection settings for the load balancer.
@@ -1776,24 +1776,24 @@ type AwsElbLoadBalancerConnectionSettings struct {
 
 	// The time, in seconds, that the connection can be idle (no data is sent over the
 	// connection) before it is closed by the load balancer.
-	IdleTimeout *int32
+	IdleTimeout int32
 }
 
 // Contains cross-zone load balancing settings for the load balancer.
 type AwsElbLoadBalancerCrossZoneLoadBalancing struct {
 
 	// Indicates whether cross-zone load balancing is enabled for the load balancer.
-	Enabled *bool
+	Enabled bool
 }
 
 // Contains details about a Classic Load Balancer.
 type AwsElbLoadBalancerDetails struct {
 
 	// The list of Availability Zones for the load balancer.
-	AvailabilityZones []*string
+	AvailabilityZones []string
 
 	// Information about the configuration of the EC2 instances.
-	BackendServerDescriptions []*AwsElbLoadBalancerBackendServerDescription
+	BackendServerDescriptions []AwsElbLoadBalancerBackendServerDescription
 
 	// The name of the Amazon Route 53 hosted zone for the load balancer.
 	CanonicalHostedZoneName *string
@@ -1814,10 +1814,10 @@ type AwsElbLoadBalancerDetails struct {
 	HealthCheck *AwsElbLoadBalancerHealthCheck
 
 	// List of EC2 instances for the load balancer.
-	Instances []*AwsElbLoadBalancerInstance
+	Instances []AwsElbLoadBalancerInstance
 
 	// The policies that are enabled for the load balancer listeners.
-	ListenerDescriptions []*AwsElbLoadBalancerListenerDescription
+	ListenerDescriptions []AwsElbLoadBalancerListenerDescription
 
 	// The attributes for a load balancer.
 	LoadBalancerAttributes *AwsElbLoadBalancerAttributes
@@ -1836,14 +1836,14 @@ type AwsElbLoadBalancerDetails struct {
 
 	// The security groups for the load balancer. Only provided if the load balancer is
 	// in a VPC.
-	SecurityGroups []*string
+	SecurityGroups []string
 
 	// Information about the security group for the load balancer. This is the security
 	// group that is used for inbound rules.
 	SourceSecurityGroup *AwsElbLoadBalancerSourceSecurityGroup
 
 	// The list of subnet identifiers for the load balancer.
-	Subnets []*string
+	Subnets []string
 
 	// The identifier of the VPC for the load balancer.
 	VpcId *string
@@ -1855,11 +1855,11 @@ type AwsElbLoadBalancerHealthCheck struct {
 
 	// The number of consecutive health check successes required before the instance is
 	// moved to the Healthy state.
-	HealthyThreshold *int32
+	HealthyThreshold int32
 
 	// The approximate interval, in seconds, between health checks of an individual
 	// instance.
-	Interval *int32
+	Interval int32
 
 	// The instance that is being checked. The target specifies the protocol and port.
 	// The available protocols are TCP, SSL, HTTP, and HTTPS. The range of valid ports
@@ -1871,11 +1871,11 @@ type AwsElbLoadBalancerHealthCheck struct {
 
 	// The amount of time, in seconds, during which no response means a failed health
 	// check.
-	Timeout *int32
+	Timeout int32
 
 	// The number of consecutive health check failures that must occur before the
 	// instance is moved to the Unhealthy state.
-	UnhealthyThreshold *int32
+	UnhealthyThreshold int32
 }
 
 // Provides information about an EC2 instance for a load balancer.
@@ -1889,7 +1889,7 @@ type AwsElbLoadBalancerInstance struct {
 type AwsElbLoadBalancerListener struct {
 
 	// The port on which the instance is listening.
-	InstancePort *int32
+	InstancePort int32
 
 	// The protocol to use to route traffic to instances. Valid values: HTTP | HTTPS |
 	// TCP | SSL
@@ -1898,7 +1898,7 @@ type AwsElbLoadBalancerListener struct {
 	// The port on which the load balancer is listening. On EC2-VPC, you can specify
 	// any port from the range 1-65535. On EC2-Classic, you can specify any port from
 	// the following list: 25, 80, 443, 465, 587, 1024-65535.
-	LoadBalancerPort *int32
+	LoadBalancerPort int32
 
 	// The load balancer transport protocol to use for routing. Valid values: HTTP |
 	// HTTPS | TCP | SSL
@@ -1915,20 +1915,20 @@ type AwsElbLoadBalancerListenerDescription struct {
 	Listener *AwsElbLoadBalancerListener
 
 	// The policies enabled for the listener.
-	PolicyNames []*string
+	PolicyNames []string
 }
 
 // Contains information about the policies for a load balancer.
 type AwsElbLoadBalancerPolicies struct {
 
 	// The stickiness policies that are created using CreateAppCookieStickinessPolicy.
-	AppCookieStickinessPolicies []*AwsElbAppCookieStickinessPolicy
+	AppCookieStickinessPolicies []AwsElbAppCookieStickinessPolicy
 
 	// The stickiness policies that are created using CreateLBCookieStickinessPolicy.
-	LbCookieStickinessPolicies []*AwsElbLbCookieStickinessPolicy
+	LbCookieStickinessPolicies []AwsElbLbCookieStickinessPolicy
 
 	// The policies other than the stickiness policies.
-	OtherPolicies []*string
+	OtherPolicies []string
 }
 
 // Contains information about the security group for the load balancer.
@@ -1945,7 +1945,7 @@ type AwsElbLoadBalancerSourceSecurityGroup struct {
 type AwsElbv2LoadBalancerDetails struct {
 
 	// The Availability Zones for the load balancer.
-	AvailabilityZones []*AvailabilityZone
+	AvailabilityZones []AvailabilityZone
 
 	// The ID of the Amazon Route 53 hosted zone associated with the load balancer.
 	CanonicalHostedZoneId *string
@@ -1968,7 +1968,7 @@ type AwsElbv2LoadBalancerDetails struct {
 	Scheme *string
 
 	// The IDs of the security groups for the load balancer.
-	SecurityGroups []*string
+	SecurityGroups []string
 
 	// The state of the load balancer.
 	State *LoadBalancerState
@@ -2036,7 +2036,7 @@ type AwsIamAccessKeySessionContextAttributes struct {
 	CreationDate *string
 
 	// Indicates whether the session used multi-factor authentication (MFA).
-	MfaAuthenticated *bool
+	MfaAuthenticated bool
 }
 
 // Information about the entity that created the session.
@@ -2073,7 +2073,7 @@ type AwsIamAttachedManagedPolicy struct {
 type AwsIamGroupDetails struct {
 
 	// A list of the managed policies that are attached to the IAM group.
-	AttachedManagedPolicies []*AwsIamAttachedManagedPolicy
+	AttachedManagedPolicies []AwsIamAttachedManagedPolicy
 
 	// Indicates when the IAM group was created. Uses the date-time format specified in
 	// RFC 3339 section 5.6, Internet Date/Time Format
@@ -2088,7 +2088,7 @@ type AwsIamGroupDetails struct {
 	GroupName *string
 
 	// The list of inline policies that are embedded in the group.
-	GroupPolicyList []*AwsIamGroupPolicy
+	GroupPolicyList []AwsIamGroupPolicy
 
 	// The path to the group.
 	Path *string
@@ -2123,7 +2123,7 @@ type AwsIamInstanceProfile struct {
 	Path *string
 
 	// The roles associated with the instance profile.
-	Roles []*AwsIamInstanceProfileRole
+	Roles []AwsIamInstanceProfileRole
 }
 
 // Information about a role associated with an instance profile.
@@ -2166,7 +2166,7 @@ type AwsIamPermissionsBoundary struct {
 type AwsIamPolicyDetails struct {
 
 	// The number of users, groups, and roles that the policy is attached to.
-	AttachmentCount *int32
+	AttachmentCount int32
 
 	// When the policy was created. Uses the date-time format specified in RFC 3339
 	// section 5.6, Internet Date/Time Format
@@ -2181,14 +2181,14 @@ type AwsIamPolicyDetails struct {
 	Description *string
 
 	// Whether the policy can be attached to a user, group, or role.
-	IsAttachable *bool
+	IsAttachable bool
 
 	// The path to the policy.
 	Path *string
 
 	// The number of users and roles that use the policy to set the permissions
 	// boundary.
-	PermissionsBoundaryUsageCount *int32
+	PermissionsBoundaryUsageCount int32
 
 	// The unique identifier of the policy.
 	PolicyId *string
@@ -2197,7 +2197,7 @@ type AwsIamPolicyDetails struct {
 	PolicyName *string
 
 	// List of versions of the policy.
-	PolicyVersionList []*AwsIamPolicyVersion
+	PolicyVersionList []AwsIamPolicyVersion
 
 	// When the policy was most recently updated. Uses the date-time format specified
 	// in RFC 3339 section 5.6, Internet Date/Time Format
@@ -2216,7 +2216,7 @@ type AwsIamPolicyVersion struct {
 	CreateDate *string
 
 	// Whether the version is the default version.
-	IsDefaultVersion *bool
+	IsDefaultVersion bool
 
 	// The identifier of the policy version.
 	VersionId *string
@@ -2229,7 +2229,7 @@ type AwsIamRoleDetails struct {
 	AssumeRolePolicyDocument *string
 
 	// The list of the managed policies that are attached to the role.
-	AttachedManagedPolicies []*AwsIamAttachedManagedPolicy
+	AttachedManagedPolicies []AwsIamAttachedManagedPolicy
 
 	// Indicates when the role was created. Uses the date-time format specified in RFC
 	// 3339 section 5.6, Internet Date/Time Format
@@ -2238,11 +2238,11 @@ type AwsIamRoleDetails struct {
 	CreateDate *string
 
 	// The list of instance profiles that contain this role.
-	InstanceProfileList []*AwsIamInstanceProfile
+	InstanceProfileList []AwsIamInstanceProfile
 
 	// The maximum session duration (in seconds) that you want to set for the specified
 	// role.
-	MaxSessionDuration *int32
+	MaxSessionDuration int32
 
 	// The path to the role.
 	Path *string
@@ -2258,7 +2258,7 @@ type AwsIamRoleDetails struct {
 	RoleName *string
 
 	// The list of inline policies that are embedded in the role.
-	RolePolicyList []*AwsIamRolePolicy
+	RolePolicyList []AwsIamRolePolicy
 }
 
 // An inline policy that is embedded in the role.
@@ -2272,7 +2272,7 @@ type AwsIamRolePolicy struct {
 type AwsIamUserDetails struct {
 
 	// A list of the managed policies that are attached to the user.
-	AttachedManagedPolicies []*AwsIamAttachedManagedPolicy
+	AttachedManagedPolicies []AwsIamAttachedManagedPolicy
 
 	// Indicates when the user was created. Uses the date-time format specified in RFC
 	// 3339 section 5.6, Internet Date/Time Format
@@ -2281,7 +2281,7 @@ type AwsIamUserDetails struct {
 	CreateDate *string
 
 	// A list of IAM groups that the user belongs to.
-	GroupList []*string
+	GroupList []string
 
 	// The path to the user.
 	Path *string
@@ -2296,7 +2296,7 @@ type AwsIamUserDetails struct {
 	UserName *string
 
 	// The list of inline policies that are embedded in the user.
-	UserPolicyList []*AwsIamUserPolicy
+	UserPolicyList []AwsIamUserPolicy
 }
 
 // Information about an inline policy that is embedded in the user.
@@ -2316,7 +2316,7 @@ type AwsKmsKeyDetails struct {
 	// 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
 	// spaces. For example, 2020-03-22T13:22:13.933Z.
-	CreationDate *float64
+	CreationDate float64
 
 	// A description of the key.
 	Description *string
@@ -2397,13 +2397,13 @@ type AwsLambdaFunctionDetails struct {
 	LastModified *string
 
 	// The function's layers.
-	Layers []*AwsLambdaFunctionLayer
+	Layers []AwsLambdaFunctionLayer
 
 	// For Lambda@Edge functions, the ARN of the master function.
 	MasterArn *string
 
 	// The memory that's allocated to the function.
-	MemorySize *int32
+	MemorySize int32
 
 	// The latest updated revision of the function or alias.
 	RevisionId *string
@@ -2415,7 +2415,7 @@ type AwsLambdaFunctionDetails struct {
 	Runtime *string
 
 	// The amount of time that Lambda allows a function to run before stopping it.
-	Timeout *int32
+	Timeout int32
 
 	// The function's AWS X-Ray tracing configuration.
 	TracingConfig *AwsLambdaFunctionTracingConfig
@@ -2434,7 +2434,7 @@ type AwsLambdaFunctionEnvironment struct {
 	Error *AwsLambdaFunctionEnvironmentError
 
 	// Environment variable key-value pairs.
-	Variables map[string]*string
+	Variables map[string]string
 }
 
 // Error messages for environment variables that couldn't be applied.
@@ -2454,7 +2454,7 @@ type AwsLambdaFunctionLayer struct {
 	Arn *string
 
 	// The size of the layer archive in bytes.
-	CodeSize *int32
+	CodeSize int32
 }
 
 // The function's AWS X-Ray tracing configuration.
@@ -2469,10 +2469,10 @@ type AwsLambdaFunctionTracingConfig struct {
 type AwsLambdaFunctionVpcConfig struct {
 
 	// A list of VPC security groups IDs.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// A list of VPC subnet IDs.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// The ID of the VPC.
 	VpcId *string
@@ -2484,7 +2484,7 @@ type AwsLambdaLayerVersionDetails struct {
 	// The layer's compatible runtimes. Maximum number of five items. Valid values:
 	// nodejs10.x | nodejs12.x | java8 | java11 | python2.7 | python3.6 | python3.7 |
 	// python3.8 | dotnetcore1.0 | dotnetcore2.1 | go1.x | ruby2.5 | provided
-	CompatibleRuntimes []*string
+	CompatibleRuntimes []string
 
 	// Indicates when the version was created. Uses the date-time format specified in
 	// RFC 3339 section 5.6, Internet Date/Time Format
@@ -2493,7 +2493,7 @@ type AwsLambdaLayerVersionDetails struct {
 	CreatedDate *string
 
 	// The version number.
-	Version *int64
+	Version int64
 }
 
 // An IAM role that is associated with the Amazon RDS DB cluster.
@@ -2514,17 +2514,17 @@ type AwsRdsDbClusterDetails struct {
 
 	// For all database engines except Aurora, specifies the allocated storage size in
 	// gibibytes (GiB).
-	AllocatedStorage *int32
+	AllocatedStorage int32
 
 	// A list of the IAM roles that are associated with the DB cluster.
-	AssociatedRoles []*AwsRdsDbClusterAssociatedRole
+	AssociatedRoles []AwsRdsDbClusterAssociatedRole
 
 	// A list of Availability Zones (AZs) where instances in the DB cluster can be
 	// created.
-	AvailabilityZones []*string
+	AvailabilityZones []string
 
 	// The number of days for which automated backups are retained.
-	BackupRetentionPeriod *int32
+	BackupRetentionPeriod int32
 
 	// Indicates when the DB cluster was created, in Universal Coordinated Time (UTC).
 	// Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time
@@ -2533,14 +2533,14 @@ type AwsRdsDbClusterDetails struct {
 	ClusterCreateTime *string
 
 	// Whether tags are copied from the DB cluster to snapshots of the DB cluster.
-	CopyTagsToSnapshot *bool
+	CopyTagsToSnapshot bool
 
 	// Whether the DB cluster is a clone of a DB cluster owned by a different AWS
 	// account.
-	CrossAccountClone *bool
+	CrossAccountClone bool
 
 	// A list of custom endpoints for the DB cluster.
-	CustomEndpoints []*string
+	CustomEndpoints []string
 
 	// The name of the database.
 	DatabaseName *string
@@ -2550,10 +2550,10 @@ type AwsRdsDbClusterDetails struct {
 	DbClusterIdentifier *string
 
 	// The list of instances that make up the DB cluster.
-	DbClusterMembers []*AwsRdsDbClusterMember
+	DbClusterMembers []AwsRdsDbClusterMember
 
 	// The list of option group memberships for this DB cluster.
-	DbClusterOptionGroupMemberships []*AwsRdsDbClusterOptionGroupMembership
+	DbClusterOptionGroupMemberships []AwsRdsDbClusterOptionGroupMembership
 
 	// The name of the DB cluster parameter group for the DB cluster.
 	DbClusterParameterGroup *string
@@ -2567,15 +2567,15 @@ type AwsRdsDbClusterDetails struct {
 	DbSubnetGroup *string
 
 	// Whether the DB cluster has deletion protection enabled.
-	DeletionProtection *bool
+	DeletionProtection bool
 
 	// The Active Directory domain membership records that are associated with the DB
 	// cluster.
-	DomainMemberships []*AwsRdsDbDomainMembership
+	DomainMemberships []AwsRdsDbDomainMembership
 
 	// A list of log types that this DB cluster is configured to export to CloudWatch
 	// Logs.
-	EnabledCloudWatchLogsExports []*string
+	EnabledCloudWatchLogsExports []string
 
 	// The connection endpoint for the primary instance of the DB cluster.
 	Endpoint *string
@@ -2594,10 +2594,10 @@ type AwsRdsDbClusterDetails struct {
 	HostedZoneId *string
 
 	// Whether the HTTP endpoint for an Aurora Serverless DB cluster is enabled.
-	HttpEndpointEnabled *bool
+	HttpEndpointEnabled bool
 
 	// Whether the mapping of IAM accounts to database accounts is enabled.
-	IamDatabaseAuthenticationEnabled *bool
+	IamDatabaseAuthenticationEnabled bool
 
 	// The ARN of the AWS KMS master key that is used to encrypt the database instances
 	// in the DB cluster.
@@ -2607,10 +2607,10 @@ type AwsRdsDbClusterDetails struct {
 	MasterUsername *string
 
 	// Whether the DB cluster has instances in multiple Availability Zones.
-	MultiAz *bool
+	MultiAz bool
 
 	// The port number on which the DB instances in the DB cluster accept connections.
-	Port *int32
+	Port int32
 
 	// The range of time each day when automated backups are created, if automated
 	// backups are enabled. Uses the format HH:MM-HH:MM. For example, 04:52-05:22.
@@ -2622,7 +2622,7 @@ type AwsRdsDbClusterDetails struct {
 	PreferredMaintenanceWindow *string
 
 	// The identifiers of the read replicas that are associated with this DB cluster.
-	ReadReplicaIdentifiers []*string
+	ReadReplicaIdentifiers []string
 
 	// The reader endpoint for the DB cluster.
 	ReaderEndpoint *string
@@ -2631,10 +2631,10 @@ type AwsRdsDbClusterDetails struct {
 	Status *string
 
 	// Whether the DB cluster is encrypted.
-	StorageEncrypted *bool
+	StorageEncrypted bool
 
 	// A list of VPC security groups that the DB cluster belongs to.
-	VpcSecurityGroups []*AwsRdsDbInstanceVpcSecurityGroup
+	VpcSecurityGroups []AwsRdsDbInstanceVpcSecurityGroup
 }
 
 // Information about an instance in the DB cluster.
@@ -2647,11 +2647,11 @@ type AwsRdsDbClusterMember struct {
 	DbInstanceIdentifier *string
 
 	// Whether the cluster member is the primary instance for the DB cluster.
-	IsClusterWriter *bool
+	IsClusterWriter bool
 
 	// Specifies the order in which an Aurora replica is promoted to the primary
 	// instance when the existing primary instance fails.
-	PromotionTier *int32
+	PromotionTier int32
 }
 
 // Information about an option group membership for a DB cluster.
@@ -2668,10 +2668,10 @@ type AwsRdsDbClusterOptionGroupMembership struct {
 type AwsRdsDbClusterSnapshotDetails struct {
 
 	// Specifies the allocated storage size in gibibytes (GiB).
-	AllocatedStorage *int32
+	AllocatedStorage int32
 
 	// A list of Availability Zones where instances in the DB cluster can be created.
-	AvailabilityZones []*string
+	AvailabilityZones []string
 
 	// Indicates when the DB cluster was created, in Universal Coordinated Time (UTC).
 	// Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time
@@ -2692,7 +2692,7 @@ type AwsRdsDbClusterSnapshotDetails struct {
 	EngineVersion *string
 
 	// Whether mapping of IAM accounts to database accounts is enabled.
-	IamDatabaseAuthenticationEnabled *bool
+	IamDatabaseAuthenticationEnabled bool
 
 	// The ARN of the AWS KMS master key that is used to encrypt the database instances
 	// in the DB cluster.
@@ -2705,10 +2705,10 @@ type AwsRdsDbClusterSnapshotDetails struct {
 	MasterUsername *string
 
 	// Specifies the percentage of the estimated data that has been transferred.
-	PercentProgress *int32
+	PercentProgress int32
 
 	// The port number on which the DB instances in the DB cluster accept connections.
-	Port *int32
+	Port int32
 
 	// Indicates when the snapshot was taken. Uses the date-time format specified in
 	// RFC 3339 section 5.6, Internet Date/Time Format
@@ -2723,7 +2723,7 @@ type AwsRdsDbClusterSnapshotDetails struct {
 	Status *string
 
 	// Whether the DB cluster is encrypted.
-	StorageEncrypted *bool
+	StorageEncrypted bool
 
 	// The VPC ID that is associated with the DB cluster snapshot.
 	VpcId *string
@@ -2777,20 +2777,20 @@ type AwsRdsDbInstanceAssociatedRole struct {
 type AwsRdsDbInstanceDetails struct {
 
 	// The amount of storage (in gigabytes) to initially allocate for the DB instance.
-	AllocatedStorage *int32
+	AllocatedStorage int32
 
 	// The AWS Identity and Access Management (IAM) roles associated with the DB
 	// instance.
-	AssociatedRoles []*AwsRdsDbInstanceAssociatedRole
+	AssociatedRoles []AwsRdsDbInstanceAssociatedRole
 
 	// Indicates whether minor version patches are applied automatically.
-	AutoMinorVersionUpgrade *bool
+	AutoMinorVersionUpgrade bool
 
 	// The Availability Zone where the DB instance will be created.
 	AvailabilityZone *string
 
 	// The number of days for which to retain automated backups.
-	BackupRetentionPeriod *int32
+	BackupRetentionPeriod int32
 
 	// The identifier of the CA certificate for this DB instance.
 	CACertificateIdentifier *string
@@ -2799,7 +2799,7 @@ type AwsRdsDbInstanceDetails struct {
 	CharacterSetName *string
 
 	// Whether to copy resource tags to snapshots of the DB instance.
-	CopyTagsToSnapshot *bool
+	CopyTagsToSnapshot bool
 
 	// If the DB instance is a member of a DB cluster, contains the name of the DB
 	// cluster that the DB instance is a member of.
@@ -2822,16 +2822,16 @@ type AwsRdsDbInstanceDetails struct {
 
 	// Specifies the port that the DB instance listens on. If the DB instance is part
 	// of a DB cluster, this can be a different port than the DB cluster port.
-	DbInstancePort *int32
+	DbInstancePort int32
 
 	// The current status of the DB instance.
 	DbInstanceStatus *string
 
 	// A list of the DB parameter groups to assign to the DB instance.
-	DbParameterGroups []*AwsRdsDbParameterGroup
+	DbParameterGroups []AwsRdsDbParameterGroup
 
 	// A list of the DB security groups to assign to the DB instance.
-	DbSecurityGroups []*string
+	DbSecurityGroups []string
 
 	// Information about the subnet group that is associated with the DB instance.
 	DbSubnetGroup *AwsRdsDbSubnetGroup
@@ -2843,14 +2843,14 @@ type AwsRdsDbInstanceDetails struct {
 
 	// Indicates whether the DB instance has deletion protection enabled. When deletion
 	// protection is enabled, the database cannot be deleted.
-	DeletionProtection *bool
+	DeletionProtection bool
 
 	// The Active Directory domain membership records associated with the DB instance.
-	DomainMemberships []*AwsRdsDbDomainMembership
+	DomainMemberships []AwsRdsDbDomainMembership
 
 	// A list of log types that this DB instance is configured to export to CloudWatch
 	// Logs.
-	EnabledCloudWatchLogsExports []*string
+	EnabledCloudWatchLogsExports []string
 
 	// Specifies the connection endpoint.
 	Endpoint *AwsRdsDbInstanceEndpoint
@@ -2876,7 +2876,7 @@ type AwsRdsDbInstanceDetails struct {
 	//
 	// * Aurora 5.6
 	// or higher
-	IAMDatabaseAuthenticationEnabled *bool
+	IAMDatabaseAuthenticationEnabled bool
 
 	// Indicates when the DB instance was created. Uses the date-time format specified
 	// in RFC 3339 section 5.6, Internet Date/Time Format
@@ -2885,7 +2885,7 @@ type AwsRdsDbInstanceDetails struct {
 	InstanceCreateTime *string
 
 	// Specifies the provisioned IOPS (I/O operations per second) for this DB instance.
-	Iops *int32
+	Iops int32
 
 	// If StorageEncrypted is true, the AWS KMS key identifier for the encrypted DB
 	// instance.
@@ -2908,33 +2908,33 @@ type AwsRdsDbInstanceDetails struct {
 
 	// The upper limit to which Amazon RDS can automatically scale the storage of the
 	// DB instance.
-	MaxAllocatedStorage *int32
+	MaxAllocatedStorage int32
 
 	// The interval, in seconds, between points when enhanced monitoring metrics are
 	// collected for the DB instance.
-	MonitoringInterval *int32
+	MonitoringInterval int32
 
 	// The ARN for the IAM role that permits Amazon RDS to send enhanced monitoring
 	// metrics to CloudWatch Logs.
 	MonitoringRoleArn *string
 
 	// Whether the DB instance is a multiple Availability Zone deployment.
-	MultiAz *bool
+	MultiAz bool
 
 	// The list of option group memberships for this DB instance.
-	OptionGroupMemberships []*AwsRdsDbOptionGroupMembership
+	OptionGroupMemberships []AwsRdsDbOptionGroupMembership
 
 	// Changes to the DB instance that are currently pending.
 	PendingModifiedValues *AwsRdsDbPendingModifiedValues
 
 	// Indicates whether Performance Insights is enabled for the DB instance.
-	PerformanceInsightsEnabled *bool
+	PerformanceInsightsEnabled bool
 
 	// The identifier of the AWS KMS key used to encrypt the Performance Insights data.
 	PerformanceInsightsKmsKeyId *string
 
 	// The number of days to retain Performance Insights data.
-	PerformanceInsightsRetentionPeriod *int32
+	PerformanceInsightsRetentionPeriod int32
 
 	// The range of time each day when automated backups are created, if automated
 	// backups are enabled. Uses the format HH:MM-HH:MM. For example, 04:52-05:22.
@@ -2947,24 +2947,24 @@ type AwsRdsDbInstanceDetails struct {
 
 	// The number of CPU cores and the number of threads per core for the DB instance
 	// class of the DB instance.
-	ProcessorFeatures []*AwsRdsDbProcessorFeature
+	ProcessorFeatures []AwsRdsDbProcessorFeature
 
 	// The order in which to promote an Aurora replica to the primary instance after a
 	// failure of the existing primary instance.
-	PromotionTier *int32
+	PromotionTier int32
 
 	// Specifies the accessibility options for the DB instance. A value of true
 	// specifies an Internet-facing instance with a publicly resolvable DNS name, which
 	// resolves to a public IP address. A value of false specifies an internal instance
 	// with a DNS name that resolves to a private IP address.
-	PubliclyAccessible *bool
+	PubliclyAccessible bool
 
 	// List of identifiers of Aurora DB clusters to which the RDS DB instance is
 	// replicated as a read replica.
-	ReadReplicaDBClusterIdentifiers []*string
+	ReadReplicaDBClusterIdentifiers []string
 
 	// List of identifiers of the read replicas associated with this DB instance.
-	ReadReplicaDBInstanceIdentifiers []*string
+	ReadReplicaDBInstanceIdentifiers []string
 
 	// If this DB instance is a read replica, contains the identifier of the source DB
 	// instance.
@@ -2976,10 +2976,10 @@ type AwsRdsDbInstanceDetails struct {
 
 	// The status of a read replica. If the instance isn't a read replica, this is
 	// empty.
-	StatusInfos []*AwsRdsDbStatusInfo
+	StatusInfos []AwsRdsDbStatusInfo
 
 	// Specifies whether the DB instance is encrypted.
-	StorageEncrypted *bool
+	StorageEncrypted bool
 
 	// The storage type for the DB instance.
 	StorageType *string
@@ -2992,7 +2992,7 @@ type AwsRdsDbInstanceDetails struct {
 	Timezone *string
 
 	// A list of VPC security groups that the DB instance belongs to.
-	VpcSecurityGroups []*AwsRdsDbInstanceVpcSecurityGroup
+	VpcSecurityGroups []AwsRdsDbInstanceVpcSecurityGroup
 }
 
 // Specifies the connection endpoint.
@@ -3005,7 +3005,7 @@ type AwsRdsDbInstanceEndpoint struct {
 	HostedZoneId *string
 
 	// Specifies the port that the database engine is listening on.
-	Port *int32
+	Port int32
 }
 
 // A VPC security groups that the DB instance belongs to.
@@ -3042,10 +3042,10 @@ type AwsRdsDbParameterGroup struct {
 type AwsRdsDbPendingModifiedValues struct {
 
 	//
-	AllocatedStorage *int32
+	AllocatedStorage int32
 
 	//
-	BackupRetentionPeriod *int32
+	BackupRetentionPeriod int32
 
 	//
 	CaCertificateIdentifier *string
@@ -3063,7 +3063,7 @@ type AwsRdsDbPendingModifiedValues struct {
 	EngineVersion *string
 
 	//
-	Iops *int32
+	Iops int32
 
 	//
 	LicenseModel *string
@@ -3072,16 +3072,16 @@ type AwsRdsDbPendingModifiedValues struct {
 	MasterUserPassword *string
 
 	//
-	MultiAZ *bool
+	MultiAZ bool
 
 	//
 	PendingCloudWatchLogsExports *AwsRdsPendingCloudWatchLogsExports
 
 	//
-	Port *int32
+	Port int32
 
 	//
-	ProcessorFeatures []*AwsRdsDbProcessorFeature
+	ProcessorFeatures []AwsRdsDbProcessorFeature
 
 	//
 	StorageType *string
@@ -3101,7 +3101,7 @@ type AwsRdsDbProcessorFeature struct {
 type AwsRdsDbSnapshotDetails struct {
 
 	//
-	AllocatedStorage *int32
+	AllocatedStorage int32
 
 	//
 	AvailabilityZone *string
@@ -3116,7 +3116,7 @@ type AwsRdsDbSnapshotDetails struct {
 	DbiResourceId *string
 
 	//
-	Encrypted *bool
+	Encrypted bool
 
 	//
 	Engine *string
@@ -3125,13 +3125,13 @@ type AwsRdsDbSnapshotDetails struct {
 	EngineVersion *string
 
 	//
-	IamDatabaseAuthenticationEnabled *bool
+	IamDatabaseAuthenticationEnabled bool
 
 	//
 	InstanceCreateTime *string
 
 	//
-	Iops *int32
+	Iops int32
 
 	//
 	KmsKeyId *string
@@ -3146,13 +3146,13 @@ type AwsRdsDbSnapshotDetails struct {
 	OptionGroupName *string
 
 	//
-	PercentProgress *int32
+	PercentProgress int32
 
 	//
-	Port *int32
+	Port int32
 
 	//
-	ProcessorFeatures []*AwsRdsDbProcessorFeature
+	ProcessorFeatures []AwsRdsDbProcessorFeature
 
 	//
 	SnapshotCreateTime *string
@@ -3189,7 +3189,7 @@ type AwsRdsDbStatusInfo struct {
 	Message *string
 
 	// Whether the read replica instance is operating normally.
-	Normal *bool
+	Normal bool
 
 	// The status of the read replica instance.
 	Status *string
@@ -3214,7 +3214,7 @@ type AwsRdsDbSubnetGroup struct {
 	SubnetGroupStatus *string
 
 	// A list of subnets in the subnet group.
-	Subnets []*AwsRdsDbSubnetGroupSubnet
+	Subnets []AwsRdsDbSubnetGroupSubnet
 
 	// The VPC ID of the subnet group.
 	VpcId *string
@@ -3244,10 +3244,10 @@ type AwsRdsDbSubnetGroupSubnetAvailabilityZone struct {
 type AwsRdsPendingCloudWatchLogsExports struct {
 
 	// A list of log types that are being disabled.
-	LogTypesToDisable []*string
+	LogTypesToDisable []string
 
 	// A list of log types that are being enabled.
-	LogTypesToEnable []*string
+	LogTypesToEnable []string
 }
 
 // A node in an Amazon Redshift cluster.
@@ -3267,7 +3267,7 @@ type AwsRedshiftClusterClusterNode struct {
 type AwsRedshiftClusterClusterParameterGroup struct {
 
 	// The list of parameter statuses.
-	ClusterParameterStatusList []*AwsRedshiftClusterClusterParameterStatus
+	ClusterParameterStatusList []AwsRedshiftClusterClusterParameterStatus
 
 	// The status of updates to the parameters.
 	ParameterApplyStatus *string
@@ -3314,11 +3314,11 @@ type AwsRedshiftClusterClusterSnapshotCopyStatus struct {
 	// after they are copied from a source region. If the value is -1, then the manual
 	// snapshot is retained indefinitely. Valid values: Either -1 or an integer between
 	// 1 and 3,653
-	ManualSnapshotRetentionPeriod *int32
+	ManualSnapshotRetentionPeriod int32
 
 	// The number of days to retain automated snapshots in the destination Region after
 	// they are copied from a source Region.
-	RetentionPeriod *int32
+	RetentionPeriod int32
 
 	// The name of the snapshot copy grant.
 	SnapshotCopyGrantName *string
@@ -3349,10 +3349,10 @@ type AwsRedshiftClusterDetails struct {
 
 	// Indicates whether major version upgrades are applied automatically to the
 	// cluster during the maintenance window.
-	AllowVersionUpgrade *bool
+	AllowVersionUpgrade bool
 
 	// The number of days that automatic cluster snapshots are retained.
-	AutomatedSnapshotRetentionPeriod *int32
+	AutomatedSnapshotRetentionPeriod int32
 
 	// The name of the Availability Zone in which the cluster is located.
 	AvailabilityZone *string
@@ -3385,10 +3385,10 @@ type AwsRedshiftClusterDetails struct {
 	ClusterIdentifier *string
 
 	// The nodes in the cluster.
-	ClusterNodes []*AwsRedshiftClusterClusterNode
+	ClusterNodes []AwsRedshiftClusterClusterNode
 
 	// The list of cluster parameter groups that are associated with this cluster.
-	ClusterParameterGroups []*AwsRedshiftClusterClusterParameterGroup
+	ClusterParameterGroups []AwsRedshiftClusterClusterParameterGroup
 
 	// The public key for the cluster.
 	ClusterPublicKey *string
@@ -3397,7 +3397,7 @@ type AwsRedshiftClusterDetails struct {
 	ClusterRevisionNumber *string
 
 	// A list of cluster security groups that are associated with the cluster.
-	ClusterSecurityGroups []*AwsRedshiftClusterClusterSecurityGroup
+	ClusterSecurityGroups []AwsRedshiftClusterClusterSecurityGroup
 
 	// Information about the destination Region and retention period for the
 	// cross-Region snapshot copy.
@@ -3424,7 +3424,7 @@ type AwsRedshiftClusterDetails struct {
 	DBName *string
 
 	// List of time windows during which maintenance was deferred.
-	DeferredMaintenanceWindows []*AwsRedshiftClusterDeferredMaintenanceWindow
+	DeferredMaintenanceWindows []AwsRedshiftClusterDeferredMaintenanceWindow
 
 	// Information about the status of the Elastic IP (EIP) address.
 	ElasticIpStatus *AwsRedshiftClusterElasticIpStatus
@@ -3434,13 +3434,13 @@ type AwsRedshiftClusterDetails struct {
 	ElasticResizeNumberOfNodeOptions *string
 
 	// Indicates whether the data in the cluster is encrypted at rest.
-	Encrypted *bool
+	Encrypted bool
 
 	// The connection endpoint.
 	Endpoint *AwsRedshiftClusterEndpoint
 
 	// Indicates whether to create the cluster with enhanced VPC routing enabled.
-	EnhancedVpcRouting *bool
+	EnhancedVpcRouting bool
 
 	// Indicates when the next snapshot is expected to be taken. The cluster must have
 	// a valid snapshot schedule and have backups enabled. Uses the date-time format
@@ -3458,7 +3458,7 @@ type AwsRedshiftClusterDetails struct {
 	HsmStatus *AwsRedshiftClusterHsmStatus
 
 	// A list of IAM roles that the cluster can use to access other AWS services.
-	IamRoles []*AwsRedshiftClusterIamRole
+	IamRoles []AwsRedshiftClusterIamRole
 
 	// The identifier of the AWS KMS encryption key that is used to encrypt data in the
 	// cluster.
@@ -3471,7 +3471,7 @@ type AwsRedshiftClusterDetails struct {
 	// snapshot is retained indefinitely. This setting doesn't change the retention
 	// period of existing snapshots. Valid values: Either -1 or an integer between 1
 	// and 3,653
-	ManualSnapshotRetentionPeriod *int32
+	ManualSnapshotRetentionPeriod int32
 
 	// The master user name for the cluster. This name is used to connect to the
 	// database that is specified in as the value of DBName.
@@ -3487,10 +3487,10 @@ type AwsRedshiftClusterDetails struct {
 	NodeType *string
 
 	// The number of compute nodes in the cluster.
-	NumberOfNodes *int32
+	NumberOfNodes int32
 
 	// A list of cluster operations that are waiting to start.
-	PendingActions []*string
+	PendingActions []string
 
 	// A list of changes to the cluster that are currently pending.
 	PendingModifiedValues *AwsRedshiftClusterPendingModifiedValues
@@ -3501,7 +3501,7 @@ type AwsRedshiftClusterDetails struct {
 	PreferredMaintenanceWindow *string
 
 	// Whether the cluster can be accessed from a public network.
-	PubliclyAccessible *bool
+	PubliclyAccessible bool
 
 	// Information about the resize operation for the cluster.
 	ResizeInfo *AwsRedshiftClusterResizeInfo
@@ -3522,7 +3522,7 @@ type AwsRedshiftClusterDetails struct {
 
 	// The list of VPC security groups that the cluster belongs to, if the cluster is
 	// in a VPC.
-	VpcSecurityGroups []*AwsRedshiftClusterVpcSecurityGroup
+	VpcSecurityGroups []AwsRedshiftClusterVpcSecurityGroup
 }
 
 // The status of the elastic IP (EIP) address for an Amazon Redshift cluster.
@@ -3542,7 +3542,7 @@ type AwsRedshiftClusterEndpoint struct {
 	Address *string
 
 	// The port that the database engine listens on.
-	Port *int32
+	Port int32
 }
 
 // Information about whether an Amazon Redshift cluster finished applying any
@@ -3579,7 +3579,7 @@ type AwsRedshiftClusterIamRole struct {
 type AwsRedshiftClusterPendingModifiedValues struct {
 
 	// The pending or in-progress change to the automated snapshot retention period.
-	AutomatedSnapshotRetentionPeriod *int32
+	AutomatedSnapshotRetentionPeriod int32
 
 	// The pending or in-progress change to the identifier for the cluster.
 	ClusterIdentifier *string
@@ -3594,7 +3594,7 @@ type AwsRedshiftClusterPendingModifiedValues struct {
 	EncryptionType *string
 
 	// Indicates whether to create the cluster with enhanced VPC routing enabled.
-	EnhancedVpcRouting *bool
+	EnhancedVpcRouting bool
 
 	// The name of the maintenance track that the cluster changes to during the next
 	// maintenance window.
@@ -3607,18 +3607,18 @@ type AwsRedshiftClusterPendingModifiedValues struct {
 	NodeType *string
 
 	// The pending or in-progress change to the number of nodes in the cluster.
-	NumberOfNodes *int32
+	NumberOfNodes int32
 
 	// The pending or in-progress change to whether the cluster can be connected to
 	// from the public network.
-	PubliclyAccessible *bool
+	PubliclyAccessible bool
 }
 
 // Information about the resize operation for the cluster.
 type AwsRedshiftClusterResizeInfo struct {
 
 	// Indicates whether the resize operation can be canceled.
-	AllowCancelResize *bool
+	AllowCancelResize bool
 
 	// The type of resize operation. Valid values: ClassicResize
 	ResizeType *string
@@ -3631,25 +3631,25 @@ type AwsRedshiftClusterRestoreStatus struct {
 	// The number of megabytes per second being transferred from the backup storage.
 	// Returns the average rate for a completed backup. This field is only updated when
 	// you restore to DC2 and DS2 node types.
-	CurrentRestoreRateInMegaBytesPerSecond *float64
+	CurrentRestoreRateInMegaBytesPerSecond float64
 
 	// The amount of time an in-progress restore has been running, or the amount of
 	// time it took a completed restore to finish. This field is only updated when you
 	// restore to DC2 and DS2 node types.
-	ElapsedTimeInSeconds *int64
+	ElapsedTimeInSeconds int64
 
 	// The estimate of the time remaining before the restore is complete. Returns 0 for
 	// a completed restore. This field is only updated when you restore to DC2 and DS2
 	// node types.
-	EstimatedTimeToCompletionInSeconds *int64
+	EstimatedTimeToCompletionInSeconds int64
 
 	// The number of megabytes that were transferred from snapshot storage. This field
 	// is only updated when you restore to DC2 and DS2 node types.
-	ProgressInMegaBytes *int64
+	ProgressInMegaBytes int64
 
 	// The size of the set of snapshot data that was used to restore the cluster. This
 	// field is only updated when you restore to DC2 and DS2 node types.
-	SnapshotSizeInMegaBytes *int64
+	SnapshotSizeInMegaBytes int64
 
 	// The status of the restore action. Valid values: starting | restoring | completed
 	// | failed
@@ -3700,7 +3700,7 @@ type AwsS3BucketServerSideEncryptionByDefault struct {
 type AwsS3BucketServerSideEncryptionConfiguration struct {
 
 	// The encryption rules that are applied to the S3 bucket.
-	Rules []*AwsS3BucketServerSideEncryptionRule
+	Rules []AwsS3BucketServerSideEncryptionRule
 }
 
 // An encryption rule to apply to the S3 bucket.
@@ -3744,7 +3744,7 @@ type AwsS3ObjectDetails struct {
 type AwsSecretsManagerSecretDetails struct {
 
 	// Whether the secret is deleted.
-	Deleted *bool
+	Deleted bool
 
 	// The user-provided description of the secret.
 	Description *string
@@ -3757,13 +3757,13 @@ type AwsSecretsManagerSecretDetails struct {
 	Name *string
 
 	// Whether rotation is enabled.
-	RotationEnabled *bool
+	RotationEnabled bool
 
 	// The ARN of the Lambda function that rotates the secret.
 	RotationLambdaArn *string
 
 	// Whether the rotation occurred within the specified rotation frequency.
-	RotationOccurredWithinFrequency *bool
+	RotationOccurredWithinFrequency bool
 
 	// Defines the rotation schedule for the secret.
 	RotationRules *AwsSecretsManagerSecretRotationRules
@@ -3773,7 +3773,7 @@ type AwsSecretsManagerSecretDetails struct {
 type AwsSecretsManagerSecretRotationRules struct {
 
 	// The number of days after the previous rotation to rotate the secret.
-	AutomaticallyAfterDays *int32
+	AutomaticallyAfterDays int32
 }
 
 // Provides consistent format for the contents of the Security Hub-aggregated
@@ -3826,7 +3826,7 @@ type AwsSecurityFinding struct {
 	// to.
 	//
 	// This member is required.
-	Resources []*Resource
+	Resources []Resource
 
 	// The schema version that a finding is formatted for.
 	//
@@ -3848,7 +3848,7 @@ type AwsSecurityFinding struct {
 	// Checks | TTPs | Effects | Unusual Behaviors | Sensitive Data Identifications
 	//
 	// This member is required.
-	Types []*string
+	Types []string
 
 	// Indicates when the security-findings provider last updated the finding record.
 	// Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time
@@ -3867,12 +3867,12 @@ type AwsSecurityFinding struct {
 	// accurately identifies the behavior or issue that it was intended to identify.
 	// Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero
 	// percent confidence and 100 means 100 percent confidence.
-	Confidence *int32
+	Confidence int32
 
 	// The level of importance assigned to the resources associated with the finding. A
 	// score of 0 means that the underlying resources have no criticality, and a score
 	// of 100 is reserved for the most critical resources.
-	Criticality *int32
+	Criticality int32
 
 	// Indicates when the security-findings provider first observed the potential
 	// security issue that a finding captured. Uses the date-time format specified in
@@ -3889,14 +3889,14 @@ type AwsSecurityFinding struct {
 	LastObservedAt *string
 
 	// A list of malware related to a finding.
-	Malware []*Malware
+	Malware []Malware
 
 	// The details of network-related information about a finding.
 	Network *Network
 
 	// Provides information about a network path that is relevant to a finding. Each
 	// entry under NetworkPath represents a component of that path.
-	NetworkPath []*NetworkPathComponent
+	NetworkPath []NetworkPathComponent
 
 	// A user-defined note added to a finding.
 	Note *Note
@@ -3911,13 +3911,13 @@ type AwsSecurityFinding struct {
 	// A data type where security-findings providers can include additional
 	// solution-specific details that aren't part of the defined AwsSecurityFinding
 	// format.
-	ProductFields map[string]*string
+	ProductFields map[string]string
 
 	// The record state of a finding.
 	RecordState RecordState
 
 	// A list of related findings.
-	RelatedFindings []*RelatedFinding
+	RelatedFindings []RelatedFinding
 
 	// A data type that describes the remediation options for a finding.
 	Remediation *Remediation
@@ -3927,17 +3927,17 @@ type AwsSecurityFinding struct {
 	SourceUrl *string
 
 	// Threat intelligence details related to a finding.
-	ThreatIntelIndicators []*ThreatIntelIndicator
+	ThreatIntelIndicators []ThreatIntelIndicator
 
 	// A list of name/value string pairs associated with the finding. These are custom,
 	// user-defined fields added to a finding.
-	UserDefinedFields map[string]*string
+	UserDefinedFields map[string]string
 
 	// Indicates the veracity of a finding.
 	VerificationState VerificationState
 
 	// Provides a list of vulnerabilities associated with the findings.
-	Vulnerabilities []*Vulnerability
+	Vulnerabilities []Vulnerability
 
 	// Provides information about the status of the investigation into a finding.
 	Workflow *Workflow
@@ -3953,280 +3953,280 @@ type AwsSecurityFinding struct {
 type AwsSecurityFindingFilters struct {
 
 	// The AWS account ID that a finding is generated in.
-	AwsAccountId []*StringFilter
+	AwsAccountId []StringFilter
 
 	// The name of the findings provider (company) that owns the solution (product)
 	// that generates findings.
-	CompanyName []*StringFilter
+	CompanyName []StringFilter
 
 	// Exclusive to findings that are generated as the result of a check run against a
 	// specific rule in a supported standard, such as CIS AWS Foundations. Contains
 	// security standard-related finding details.
-	ComplianceStatus []*StringFilter
+	ComplianceStatus []StringFilter
 
 	// A finding's confidence. Confidence is defined as the likelihood that a finding
 	// accurately identifies the behavior or issue that it was intended to identify.
 	// Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero
 	// percent confidence and 100 means 100 percent confidence.
-	Confidence []*NumberFilter
+	Confidence []NumberFilter
 
 	// An ISO8601-formatted timestamp that indicates when the security-findings
 	// provider captured the potential security issue that a finding captured.
-	CreatedAt []*DateFilter
+	CreatedAt []DateFilter
 
 	// The level of importance assigned to the resources associated with the finding. A
 	// score of 0 means that the underlying resources have no criticality, and a score
 	// of 100 is reserved for the most critical resources.
-	Criticality []*NumberFilter
+	Criticality []NumberFilter
 
 	// A finding's description.
-	Description []*StringFilter
+	Description []StringFilter
 
 	// An ISO8601-formatted timestamp that indicates when the security-findings
 	// provider first observed the potential security issue that a finding captured.
-	FirstObservedAt []*DateFilter
+	FirstObservedAt []DateFilter
 
 	// The identifier for the solution-specific component (a discrete unit of logic)
 	// that generated a finding. In various security-findings providers' solutions,
 	// this generator can be called a rule, a check, a detector, a plugin, etc.
-	GeneratorId []*StringFilter
+	GeneratorId []StringFilter
 
 	// The security findings provider-specific identifier for a finding.
-	Id []*StringFilter
+	Id []StringFilter
 
 	// A keyword for a finding.
-	Keyword []*KeywordFilter
+	Keyword []KeywordFilter
 
 	// An ISO8601-formatted timestamp that indicates when the security-findings
 	// provider most recently observed the potential security issue that a finding
 	// captured.
-	LastObservedAt []*DateFilter
+	LastObservedAt []DateFilter
 
 	// The name of the malware that was observed.
-	MalwareName []*StringFilter
+	MalwareName []StringFilter
 
 	// The filesystem path of the malware that was observed.
-	MalwarePath []*StringFilter
+	MalwarePath []StringFilter
 
 	// The state of the malware that was observed.
-	MalwareState []*StringFilter
+	MalwareState []StringFilter
 
 	// The type of the malware that was observed.
-	MalwareType []*StringFilter
+	MalwareType []StringFilter
 
 	// The destination domain of network-related information about a finding.
-	NetworkDestinationDomain []*StringFilter
+	NetworkDestinationDomain []StringFilter
 
 	// The destination IPv4 address of network-related information about a finding.
-	NetworkDestinationIpV4 []*IpFilter
+	NetworkDestinationIpV4 []IpFilter
 
 	// The destination IPv6 address of network-related information about a finding.
-	NetworkDestinationIpV6 []*IpFilter
+	NetworkDestinationIpV6 []IpFilter
 
 	// The destination port of network-related information about a finding.
-	NetworkDestinationPort []*NumberFilter
+	NetworkDestinationPort []NumberFilter
 
 	// Indicates the direction of network traffic associated with a finding.
-	NetworkDirection []*StringFilter
+	NetworkDirection []StringFilter
 
 	// The protocol of network-related information about a finding.
-	NetworkProtocol []*StringFilter
+	NetworkProtocol []StringFilter
 
 	// The source domain of network-related information about a finding.
-	NetworkSourceDomain []*StringFilter
+	NetworkSourceDomain []StringFilter
 
 	// The source IPv4 address of network-related information about a finding.
-	NetworkSourceIpV4 []*IpFilter
+	NetworkSourceIpV4 []IpFilter
 
 	// The source IPv6 address of network-related information about a finding.
-	NetworkSourceIpV6 []*IpFilter
+	NetworkSourceIpV6 []IpFilter
 
 	// The source media access control (MAC) address of network-related information
 	// about a finding.
-	NetworkSourceMac []*StringFilter
+	NetworkSourceMac []StringFilter
 
 	// The source port of network-related information about a finding.
-	NetworkSourcePort []*NumberFilter
+	NetworkSourcePort []NumberFilter
 
 	// The text of a note.
-	NoteText []*StringFilter
+	NoteText []StringFilter
 
 	// The timestamp of when the note was updated.
-	NoteUpdatedAt []*DateFilter
+	NoteUpdatedAt []DateFilter
 
 	// The principal that created a note.
-	NoteUpdatedBy []*StringFilter
+	NoteUpdatedBy []StringFilter
 
 	// The date/time that the process was launched.
-	ProcessLaunchedAt []*DateFilter
+	ProcessLaunchedAt []DateFilter
 
 	// The name of the process.
-	ProcessName []*StringFilter
+	ProcessName []StringFilter
 
 	// The parent process ID.
-	ProcessParentPid []*NumberFilter
+	ProcessParentPid []NumberFilter
 
 	// The path to the process executable.
-	ProcessPath []*StringFilter
+	ProcessPath []StringFilter
 
 	// The process ID.
-	ProcessPid []*NumberFilter
+	ProcessPid []NumberFilter
 
 	// The date/time that the process was terminated.
-	ProcessTerminatedAt []*DateFilter
+	ProcessTerminatedAt []DateFilter
 
 	// The ARN generated by Security Hub that uniquely identifies a third-party company
 	// (security findings provider) after this provider's product (solution that
 	// generates findings) is registered with Security Hub.
-	ProductArn []*StringFilter
+	ProductArn []StringFilter
 
 	// A data type where security-findings providers can include additional
 	// solution-specific details that aren't part of the defined AwsSecurityFinding
 	// format.
-	ProductFields []*MapFilter
+	ProductFields []MapFilter
 
 	// The name of the solution (product) that generates findings.
-	ProductName []*StringFilter
+	ProductName []StringFilter
 
 	// The recommendation of what to do about the issue described in a finding.
-	RecommendationText []*StringFilter
+	RecommendationText []StringFilter
 
 	// The updated record state for the finding.
-	RecordState []*StringFilter
+	RecordState []StringFilter
 
 	// The solution-generated identifier for a related finding.
-	RelatedFindingsId []*StringFilter
+	RelatedFindingsId []StringFilter
 
 	// The ARN of the solution that generated a related finding.
-	RelatedFindingsProductArn []*StringFilter
+	RelatedFindingsProductArn []StringFilter
 
 	// The IAM profile ARN of the instance.
-	ResourceAwsEc2InstanceIamInstanceProfileArn []*StringFilter
+	ResourceAwsEc2InstanceIamInstanceProfileArn []StringFilter
 
 	// The Amazon Machine Image (AMI) ID of the instance.
-	ResourceAwsEc2InstanceImageId []*StringFilter
+	ResourceAwsEc2InstanceImageId []StringFilter
 
 	// The IPv4 addresses associated with the instance.
-	ResourceAwsEc2InstanceIpV4Addresses []*IpFilter
+	ResourceAwsEc2InstanceIpV4Addresses []IpFilter
 
 	// The IPv6 addresses associated with the instance.
-	ResourceAwsEc2InstanceIpV6Addresses []*IpFilter
+	ResourceAwsEc2InstanceIpV6Addresses []IpFilter
 
 	// The key name associated with the instance.
-	ResourceAwsEc2InstanceKeyName []*StringFilter
+	ResourceAwsEc2InstanceKeyName []StringFilter
 
 	// The date and time the instance was launched.
-	ResourceAwsEc2InstanceLaunchedAt []*DateFilter
+	ResourceAwsEc2InstanceLaunchedAt []DateFilter
 
 	// The identifier of the subnet that the instance was launched in.
-	ResourceAwsEc2InstanceSubnetId []*StringFilter
+	ResourceAwsEc2InstanceSubnetId []StringFilter
 
 	// The instance type of the instance.
-	ResourceAwsEc2InstanceType []*StringFilter
+	ResourceAwsEc2InstanceType []StringFilter
 
 	// The identifier of the VPC that the instance was launched in.
-	ResourceAwsEc2InstanceVpcId []*StringFilter
+	ResourceAwsEc2InstanceVpcId []StringFilter
 
 	// The creation date/time of the IAM access key related to a finding.
-	ResourceAwsIamAccessKeyCreatedAt []*DateFilter
+	ResourceAwsIamAccessKeyCreatedAt []DateFilter
 
 	// The status of the IAM access key related to a finding.
-	ResourceAwsIamAccessKeyStatus []*StringFilter
+	ResourceAwsIamAccessKeyStatus []StringFilter
 
 	// The user associated with the IAM access key related to a finding.
-	ResourceAwsIamAccessKeyUserName []*StringFilter
+	ResourceAwsIamAccessKeyUserName []StringFilter
 
 	// The canonical user ID of the owner of the S3 bucket.
-	ResourceAwsS3BucketOwnerId []*StringFilter
+	ResourceAwsS3BucketOwnerId []StringFilter
 
 	// The display name of the owner of the S3 bucket.
-	ResourceAwsS3BucketOwnerName []*StringFilter
+	ResourceAwsS3BucketOwnerName []StringFilter
 
 	// The identifier of the image related to a finding.
-	ResourceContainerImageId []*StringFilter
+	ResourceContainerImageId []StringFilter
 
 	// The name of the image related to a finding.
-	ResourceContainerImageName []*StringFilter
+	ResourceContainerImageName []StringFilter
 
 	// The date/time that the container was started.
-	ResourceContainerLaunchedAt []*DateFilter
+	ResourceContainerLaunchedAt []DateFilter
 
 	// The name of the container related to a finding.
-	ResourceContainerName []*StringFilter
+	ResourceContainerName []StringFilter
 
 	// The details of a resource that doesn't have a specific subfield for the resource
 	// type defined.
-	ResourceDetailsOther []*MapFilter
+	ResourceDetailsOther []MapFilter
 
 	// The canonical identifier for the given resource type.
-	ResourceId []*StringFilter
+	ResourceId []StringFilter
 
 	// The canonical AWS partition name that the Region is assigned to.
-	ResourcePartition []*StringFilter
+	ResourcePartition []StringFilter
 
 	// The canonical AWS external Region name where this resource is located.
-	ResourceRegion []*StringFilter
+	ResourceRegion []StringFilter
 
 	// A list of AWS tags associated with a resource at the time the finding was
 	// processed.
-	ResourceTags []*MapFilter
+	ResourceTags []MapFilter
 
 	// Specifies the type of the resource that details are provided for.
-	ResourceType []*StringFilter
+	ResourceType []StringFilter
 
 	// The label of a finding's severity.
-	SeverityLabel []*StringFilter
+	SeverityLabel []StringFilter
 
 	// The normalized severity of a finding.
-	SeverityNormalized []*NumberFilter
+	SeverityNormalized []NumberFilter
 
 	// The native severity as defined by the security-findings provider's solution that
 	// generated the finding.
-	SeverityProduct []*NumberFilter
+	SeverityProduct []NumberFilter
 
 	// A URL that links to a page about the current finding in the security-findings
 	// provider's solution.
-	SourceUrl []*StringFilter
+	SourceUrl []StringFilter
 
 	// The category of a threat intelligence indicator.
-	ThreatIntelIndicatorCategory []*StringFilter
+	ThreatIntelIndicatorCategory []StringFilter
 
 	// The date/time of the last observation of a threat intelligence indicator.
-	ThreatIntelIndicatorLastObservedAt []*DateFilter
+	ThreatIntelIndicatorLastObservedAt []DateFilter
 
 	// The source of the threat intelligence.
-	ThreatIntelIndicatorSource []*StringFilter
+	ThreatIntelIndicatorSource []StringFilter
 
 	// The URL for more details from the source of the threat intelligence.
-	ThreatIntelIndicatorSourceUrl []*StringFilter
+	ThreatIntelIndicatorSourceUrl []StringFilter
 
 	// The type of a threat intelligence indicator.
-	ThreatIntelIndicatorType []*StringFilter
+	ThreatIntelIndicatorType []StringFilter
 
 	// The value of a threat intelligence indicator.
-	ThreatIntelIndicatorValue []*StringFilter
+	ThreatIntelIndicatorValue []StringFilter
 
 	// A finding's title.
-	Title []*StringFilter
+	Title []StringFilter
 
 	// A finding type in the format of namespace/category/classifier that classifies a
 	// finding.
-	Type []*StringFilter
+	Type []StringFilter
 
 	// An ISO8601-formatted timestamp that indicates when the security-findings
 	// provider last updated the finding record.
-	UpdatedAt []*DateFilter
+	UpdatedAt []DateFilter
 
 	// A list of name/value string pairs associated with the finding. These are custom,
 	// user-defined fields added to a finding.
-	UserDefinedFields []*MapFilter
+	UserDefinedFields []MapFilter
 
 	// The veracity of a finding.
-	VerificationState []*StringFilter
+	VerificationState []StringFilter
 
 	// The workflow state of a finding. Note that this field is deprecated. To search
 	// for a finding based on its workflow status, use WorkflowStatus.
-	WorkflowState []*StringFilter
+	WorkflowState []StringFilter
 
 	// The status of the investigation into a finding. Allowed values are the
 	// following.
@@ -4243,7 +4243,7 @@ type AwsSecurityFindingFilters struct {
 	//
 	// * RESOLVED - The finding was
 	// reviewed and remediated and is now considered resolved.
-	WorkflowStatus []*StringFilter
+	WorkflowStatus []StringFilter
 }
 
 // Identifies a finding to update using BatchUpdateFindings.
@@ -4274,7 +4274,7 @@ type AwsSnsTopicDetails struct {
 
 	// Subscription is an embedded property that describes the subscription endpoints
 	// of an Amazon SNS topic.
-	Subscription []*AwsSnsTopicSubscription
+	Subscription []AwsSnsTopicSubscription
 
 	// The name of the topic.
 	TopicName *string
@@ -4299,7 +4299,7 @@ type AwsSqsQueueDetails struct {
 
 	// The length of time, in seconds, for which Amazon SQS can reuse a data key to
 	// encrypt or decrypt messages before calling AWS KMS again.
-	KmsDataKeyReusePeriodSeconds *int32
+	KmsDataKeyReusePeriodSeconds int32
 
 	// The ID of an AWS managed customer master key (CMK) for Amazon SQS or a custom
 	// CMK.
@@ -4321,7 +4321,7 @@ type AwsWafWebAclDetails struct {
 
 	// An array that contains the action for each rule in a WebACL, the priority of the
 	// rule, and the ID of the rule.
-	Rules []*AwsWafWebAclRule
+	Rules []AwsWafWebAclRule
 
 	// A unique identifier for a WebACL.
 	WebAclId *string
@@ -4335,7 +4335,7 @@ type AwsWafWebAclRule struct {
 	Action *WafAction
 
 	// Rules to exclude from a rule group.
-	ExcludedRules []*WafExcludedRule
+	ExcludedRules []WafExcludedRule
 
 	// Use the OverrideAction to test your RuleGroup. Any rule in a RuleGroup can
 	// potentially block a request. If you set the OverrideAction to None, the
@@ -4353,7 +4353,7 @@ type AwsWafWebAclRule struct {
 	// lower value for Priority are evaluated before rules with a higher value. The
 	// value must be a unique integer. If you add multiple rules to a WebACL, the
 	// values do not need to be consecutive.
-	Priority *int32
+	Priority int32
 
 	// The identifier for a rule.
 	RuleId *string
@@ -4403,7 +4403,7 @@ type Compliance struct {
 	// For a control, the industry or regulatory framework requirements that are
 	// related to the control. The check for that control is aligned with these
 	// requirements.
-	RelatedRequirements []*string
+	RelatedRequirements []string
 
 	// The result of a standards check. The valid values for Status are as follows.
 	//
@@ -4428,7 +4428,7 @@ type Compliance struct {
 	// Standards-related information in the ASFF
 	// (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-results.html#securityhub-standards-results-asff)
 	// in the AWS Security Hub User Guide.
-	StatusReasons []*StatusReason
+	StatusReasons []StatusReason
 }
 
 // Container details related to a finding.
@@ -4454,7 +4454,7 @@ type ContainerDetails struct {
 type Cvss struct {
 
 	// The base CVSS score.
-	BaseScore *float64
+	BaseScore float64
 
 	// The base scoring vector for the CVSS score.
 	BaseVector *string
@@ -4483,7 +4483,7 @@ type DateRange struct {
 	Unit DateRangeUnit
 
 	// A date range value for the date filter.
-	Value *int32
+	Value int32
 }
 
 // The list of the findings that cannot be imported. For each finding, the list
@@ -4552,7 +4552,7 @@ type InsightResults struct {
 	// The list of insight result values returned by the GetInsightResults operation.
 	//
 	// This member is required.
-	ResultValues []*InsightResultValue
+	ResultValues []InsightResultValue
 }
 
 // The insight result values returned by the GetInsightResults operation.
@@ -4561,7 +4561,7 @@ type InsightResultValue struct {
 	// The number of findings returned for each GroupByAttributeValue.
 	//
 	// This member is required.
-	Count *int32
+	Count int32
 
 	// The value of the attribute that the findings are grouped by for the insight
 	// whose results are returned by the GetInsightResults operation.
@@ -4729,7 +4729,7 @@ type Network struct {
 	DestinationIpV6 *string
 
 	// The destination port of network-related information about a finding.
-	DestinationPort *int32
+	DestinationPort int32
 
 	// The direction of network traffic associated with a finding.
 	Direction NetworkDirection
@@ -4754,7 +4754,7 @@ type Network struct {
 	SourceMac *string
 
 	// The source port of network-related information about a finding.
-	SourcePort *int32
+	SourcePort int32
 }
 
 // Details about a network path component that occurs before or after the current
@@ -4793,10 +4793,10 @@ type NetworkPathComponent struct {
 type NetworkPathComponentDetails struct {
 
 	// The IP addresses of the destination.
-	Address []*string
+	Address []string
 
 	// A list of port ranges for the destination.
-	PortRanges []*PortRange
+	PortRanges []PortRange
 }
 
 // A user-defined note added to a finding.
@@ -4840,15 +4840,15 @@ type NumberFilter struct {
 
 	// The equal-to condition to be applied to a single field when querying for
 	// findings.
-	Eq *float64
+	Eq float64
 
 	// The greater-than-equal condition to be applied to a single field when querying
 	// for findings.
-	Gte *float64
+	Gte float64
 
 	// The less-than-equal condition to be applied to a single field when querying for
 	// findings.
-	Lte *float64
+	Lte float64
 }
 
 // Provides an overview of the patch compliance status for an instance against a
@@ -4862,26 +4862,26 @@ type PatchSummary struct {
 	Id *string
 
 	// The number of patches from the compliance standard that failed to install.
-	FailedCount *int32
+	FailedCount int32
 
 	// The number of patches from the compliance standard that were installed
 	// successfully.
-	InstalledCount *int32
+	InstalledCount int32
 
 	// The number of installed patches that are not part of the compliance standard.
-	InstalledOtherCount *int32
+	InstalledOtherCount int32
 
 	// The number of patches that were applied, but that require the instance to be
 	// rebooted in order to be marked as installed.
-	InstalledPendingReboot *int32
+	InstalledPendingReboot int32
 
 	// The number of patches that are installed but are also on a list of patches that
 	// the customer rejected.
-	InstalledRejectedCount *int32
+	InstalledRejectedCount int32
 
 	// The number of patches that are part of the compliance standard but are not
 	// installed. The count includes patches that failed to install.
-	MissingCount *int32
+	MissingCount int32
 
 	// The type of patch operation performed. For Patch Manager, the values are SCAN
 	// and INSTALL.
@@ -4907,10 +4907,10 @@ type PatchSummary struct {
 type PortRange struct {
 
 	// The first port in the port range.
-	Begin *int32
+	Begin int32
 
 	// The last port in the port range.
-	End *int32
+	End int32
 }
 
 // The details of process-related information about a finding.
@@ -4926,13 +4926,13 @@ type ProcessDetails struct {
 	Name *string
 
 	// The parent process ID.
-	ParentPid *int32
+	ParentPid int32
 
 	// The path to the process executable.
 	Path *string
 
 	// The process ID.
-	Pid *int32
+	Pid int32
 
 	// Indicates when the process was terminated. Uses the date-time format specified
 	// in RFC 3339 section 5.6, Internet Date/Time Format
@@ -4953,7 +4953,7 @@ type Product struct {
 	ActivationUrl *string
 
 	// The categories assigned to the product.
-	Categories []*string
+	Categories []string
 
 	// The name of the company that provides the product.
 	CompanyName *string
@@ -5045,7 +5045,7 @@ type Resource struct {
 
 	// A list of AWS tags associated with a resource at the time the finding was
 	// processed.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // Additional details about a resource related to a finding. To provide the
@@ -5185,7 +5185,7 @@ type ResourceDetails struct {
 	// *
 	// The resource type does not have a corresponding object. This includes resources
 	// for which the type is Other.
-	Other map[string]*string
+	Other map[string]string
 }
 
 // Details about the account that was not processed.
@@ -5254,7 +5254,7 @@ type Severity struct {
 	//
 	// * CRITICAL
 	// - 90
-	Normalized *int32
+	Normalized int32
 
 	// The native severity from the finding product that generated the finding.
 	Original *string
@@ -5262,7 +5262,7 @@ type Severity struct {
 	// Deprecated. This attribute is being deprecated. Instead of providing Product,
 	// provide Original. The native severity as defined by the AWS service or
 	// integrated partner product that generated the finding.
-	Product *float64
+	Product float64
 }
 
 // Updates to the severity information for a finding.
@@ -5299,11 +5299,11 @@ type SeverityUpdate struct {
 	// * 70–89 - HIGH
 	//
 	// * 90–100 - CRITICAL
-	Normalized *int32
+	Normalized int32
 
 	// The native severity as defined by the AWS service or integrated partner product
 	// that generated the finding.
-	Product *float64
+	Product float64
 }
 
 // Information about a software package.
@@ -5346,7 +5346,7 @@ type Standard struct {
 	// standard is selected by default. When Security Hub is enabled using the
 	// EnableSecurityHub API operation, the standard is enabled by default unless
 	// EnableDefaultStandards is set to false.
-	EnabledByDefault *bool
+	EnabledByDefault bool
 
 	// The name of the standard.
 	Name *string
@@ -5378,7 +5378,7 @@ type StandardsControl struct {
 	DisabledReason *string
 
 	// The list of requirements that are related to this control.
-	RelatedRequirements []*string
+	RelatedRequirements []string
 
 	// A link to remediation information for the control in the Security Hub user
 	// documentation.
@@ -5407,7 +5407,7 @@ type StandardsSubscription struct {
 	// A key-value pair of input for the standard.
 	//
 	// This member is required.
-	StandardsInput map[string]*string
+	StandardsInput map[string]string
 
 	// The status of the standards subscription.
 	//
@@ -5430,7 +5430,7 @@ type StandardsSubscriptionRequest struct {
 	StandardsArn *string
 
 	// A key-value pair of input for the standard.
-	StandardsInput map[string]*string
+	StandardsInput map[string]string
 }
 
 // Provides additional context for the value of Compliance.Status.
@@ -5546,19 +5546,19 @@ type Vulnerability struct {
 	Id *string
 
 	// CVSS scores from the advisory related to the vulnerability.
-	Cvss []*Cvss
+	Cvss []Cvss
 
 	// A list of URLs that provide additional information about the vulnerability.
-	ReferenceUrls []*string
+	ReferenceUrls []string
 
 	// List of vulnerabilities that are related to this vulnerability.
-	RelatedVulnerabilities []*string
+	RelatedVulnerabilities []string
 
 	// Information about the vendor that generates the vulnerability report.
 	Vendor *VulnerabilityVendor
 
 	// List of software packages that have the vulnerability.
-	VulnerablePackages []*SoftwarePackage
+	VulnerablePackages []SoftwarePackage
 }
 
 // A vendor that generates a vulnerability report.

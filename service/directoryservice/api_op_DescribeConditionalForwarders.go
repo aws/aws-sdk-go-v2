@@ -40,14 +40,14 @@ type DescribeConditionalForwardersInput struct {
 	// The fully qualified domain names (FQDN) of the remote domains for which to get
 	// the list of associated conditional forwarders. If this member is null, all
 	// conditional forwarders are returned.
-	RemoteDomainNames []*string
+	RemoteDomainNames []string
 }
 
 // The result of a DescribeConditionalForwarder request.
 type DescribeConditionalForwardersOutput struct {
 
 	// The list of conditional forwarders that have been created.
-	ConditionalForwarders []*types.ConditionalForwarder
+	ConditionalForwarders []types.ConditionalForwarder
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

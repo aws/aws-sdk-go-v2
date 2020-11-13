@@ -189,7 +189,7 @@ type SearchInput struct {
 	// than displaying no results, you could display the partial results and a message
 	// indicating that the results might be incomplete due to a temporary system
 	// outage.
-	Partial *bool
+	Partial bool
 
 	// Configures options for the query parser specified in the queryParser parameter.
 	// You specify the options in JSON using the following form
@@ -328,7 +328,7 @@ type SearchInput struct {
 	Return *string
 
 	// Specifies the maximum number of search hits to include in the response.
-	Size *int64
+	Size int64
 
 	// Specifies the fields or custom expressions to use to sort the search results.
 	// Multiple fields or expressions are specified as a comma-separated list. You must
@@ -348,7 +348,7 @@ type SearchInput struct {
 	// more information, see Paginating Results
 	// (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/paginating-results.html)
 	// in the Amazon CloudSearch Developer Guide.
-	Start *int64
+	Start int64
 
 	// Specifies one or more fields for which to get statistics information. Each
 	// specified field must be facet-enabled in the domain configuration. The fields
@@ -362,13 +362,13 @@ type SearchInput struct {
 type SearchOutput struct {
 
 	// The requested facet information.
-	Facets map[string]*types.BucketInfo
+	Facets map[string]types.BucketInfo
 
 	// The documents that match the search criteria.
 	Hits *types.Hits
 
 	// The requested field statistics information.
-	Stats map[string]*types.FieldStats
+	Stats map[string]types.FieldStats
 
 	// The status information returned for the search request.
 	Status *types.SearchStatus

@@ -65,7 +65,7 @@ type BatchExecuteStatementInput struct {
 	// BatchExecuteStatement operation.
 	//
 	// Array parameters are not supported.
-	ParameterSets [][]*types.SqlParameter
+	ParameterSets [][]types.SqlParameter
 
 	// The name of the database schema.
 	Schema *string
@@ -82,7 +82,7 @@ type BatchExecuteStatementInput struct {
 type BatchExecuteStatementOutput struct {
 
 	// The execution results of each batch entry.
-	UpdateResults []*types.UpdateResult
+	UpdateResults []types.UpdateResult
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

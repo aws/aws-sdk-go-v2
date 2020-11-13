@@ -45,7 +45,7 @@ type ListEndpointsOutput struct {
 
 	// Displays a list of endpoint properties being retrieved by the service in
 	// response to the request.
-	EndpointPropertiesList []*types.EndpointProperties
+	EndpointPropertiesList []types.EndpointProperties
 
 	// Identifies the next page of results to return.
 	NextToken *string

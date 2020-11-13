@@ -52,7 +52,7 @@ type UpdateStackInstancesInput struct {
 	// stack instances in the specified accounts and Regions.
 	//
 	// This member is required.
-	Regions []*string
+	Regions []string
 
 	// The name or unique ID of the stack set associated with the stack instances.
 	//
@@ -63,7 +63,7 @@ type UpdateStackInstancesInput struct {
 	// want to update parameter values for stack instances. The overridden parameter
 	// values will be applied to all stack instances in the specified accounts and
 	// Regions. You can specify Accounts or DeploymentTargets, but not both.
-	Accounts []*string
+	Accounts []string
 
 	// [Service-managed permissions] The AWS Organizations accounts for which you want
 	// to update parameter values for stack instances. If your update targets OUs, the
@@ -120,7 +120,7 @@ type UpdateStackInstancesInput struct {
 	// to update all stack instances with the updated template and parameter value
 	// specified in the stack set. Once a stack instance has been updated with the new
 	// parameter, you can then override the parameter value using UpdateStackInstances.
-	ParameterOverrides []*types.Parameter
+	ParameterOverrides []types.Parameter
 }
 
 type UpdateStackInstancesOutput struct {

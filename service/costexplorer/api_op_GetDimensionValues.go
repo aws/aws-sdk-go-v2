@@ -280,7 +280,7 @@ type GetDimensionValuesOutput struct {
 	// for your Savings Plan
 	//
 	// This member is required.
-	DimensionValues []*types.DimensionValuesWithAttributes
+	DimensionValues []types.DimensionValuesWithAttributes
 
 	// The number of results that AWS returned at one time.
 	//

@@ -35,7 +35,7 @@ type DescribeLocationsInput struct {
 type DescribeLocationsOutput struct {
 
 	// The locations.
-	Locations []*types.Location
+	Locations []types.Location
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

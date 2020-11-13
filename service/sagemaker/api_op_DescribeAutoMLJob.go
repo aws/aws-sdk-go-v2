@@ -66,7 +66,7 @@ type DescribeAutoMLJobOutput struct {
 	// Returns the job's input data config.
 	//
 	// This member is required.
-	InputDataConfig []*types.AutoMLChannel
+	InputDataConfig []types.AutoMLChannel
 
 	// Returns the job's last modified time.
 	//
@@ -104,7 +104,7 @@ type DescribeAutoMLJobOutput struct {
 	FailureReason *string
 
 	// Returns the job's output from GenerateCandidateDefinitionsOnly.
-	GenerateCandidateDefinitionsOnly *bool
+	GenerateCandidateDefinitionsOnly bool
 
 	// Returns the job's problem type.
 	ProblemType types.ProblemType

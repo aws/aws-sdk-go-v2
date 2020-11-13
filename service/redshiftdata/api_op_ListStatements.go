@@ -33,7 +33,7 @@ type ListStatementsInput struct {
 	// The maximum number of SQL statements to return in the response. If more SQL
 	// statements exist than fit in one response, then NextToken is returned to page
 	// through the results.
-	MaxResults *int32
+	MaxResults int32
 
 	// A value that indicates the starting point for the next set of response records
 	// in a subsequent request. If a value is returned in a response, you can retrieve
@@ -78,7 +78,7 @@ type ListStatementsOutput struct {
 	// The SQL statements.
 	//
 	// This member is required.
-	Statements []*types.StatementData
+	Statements []types.StatementData
 
 	// A value that indicates the starting point for the next set of response records
 	// in a subsequent request. If a value is returned in a response, you can retrieve

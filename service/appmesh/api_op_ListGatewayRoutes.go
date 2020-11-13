@@ -68,7 +68,7 @@ type ListGatewayRoutesOutput struct {
 	// gateway.
 	//
 	// This member is required.
-	GatewayRoutes []*types.GatewayRouteRef
+	GatewayRoutes []types.GatewayRouteRef
 
 	// The nextToken value to include in a future ListGatewayRoutes request. When the
 	// results of a ListGatewayRoutes request exceed limit, you can use this value to

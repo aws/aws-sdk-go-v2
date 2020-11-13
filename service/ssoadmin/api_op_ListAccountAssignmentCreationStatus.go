@@ -51,7 +51,7 @@ type ListAccountAssignmentCreationStatusInput struct {
 type ListAccountAssignmentCreationStatusOutput struct {
 
 	// The status object for the account assignment creation operation.
-	AccountAssignmentsCreationStatus []*types.AccountAssignmentOperationStatusMetadata
+	AccountAssignmentsCreationStatus []types.AccountAssignmentOperationStatusMetadata
 
 	// The pagination token for the list API. Initially the value is null. Use the
 	// output of previous API calls to make subsequent calls.

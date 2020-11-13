@@ -56,7 +56,7 @@ type GetDatabasesOutput struct {
 	// A list of Database objects from the specified catalog.
 	//
 	// This member is required.
-	DatabaseList []*types.Database
+	DatabaseList []types.Database
 
 	// A continuation token for paginating the returned list of tokens, returned if the
 	// current segment of the list is not the last.

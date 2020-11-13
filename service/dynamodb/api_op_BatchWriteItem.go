@@ -119,7 +119,7 @@ type BatchWriteItemInput struct {
 	// of the schema in the table's attribute definition.
 	//
 	// This member is required.
-	RequestItems map[string][]*types.WriteRequest
+	RequestItems map[string][]types.WriteRequest
 
 	// Determines the level of detail about provisioned throughput consumption that is
 	// returned in the response:
@@ -155,7 +155,7 @@ type BatchWriteItemOutput struct {
 	// throughput.
 	//
 	// * CapacityUnits - The total number of capacity units consumed.
-	ConsumedCapacity []*types.ConsumedCapacity
+	ConsumedCapacity []types.ConsumedCapacity
 
 	// A list of tables that were processed by BatchWriteItem and, for each table,
 	// information about any item collections that were affected by individual
@@ -173,7 +173,7 @@ type BatchWriteItemOutput struct {
 	// table. Use this estimate to measure whether a local secondary index is
 	// approaching its size limit. The estimate is subject to change over time;
 	// therefore, do not rely on the precision or accuracy of the estimate.
-	ItemCollectionMetrics map[string][]*types.ItemCollectionMetrics
+	ItemCollectionMetrics map[string][]types.ItemCollectionMetrics
 
 	// A map of tables and requests against those tables that were not processed. The
 	// UnprocessedItems value is in the same form as RequestItems, so you can provide
@@ -205,7 +205,7 @@ type BatchWriteItemOutput struct {
 	// If there are no
 	// unprocessed items remaining, the response contains an empty UnprocessedItems
 	// map.
-	UnprocessedItems map[string][]*types.WriteRequest
+	UnprocessedItems map[string][]types.WriteRequest
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

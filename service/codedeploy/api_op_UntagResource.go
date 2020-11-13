@@ -40,7 +40,7 @@ type UntagResourceInput struct {
 	// disassociated from the resource specified by the ResourceArn input parameter.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 type UntagResourceOutput struct {

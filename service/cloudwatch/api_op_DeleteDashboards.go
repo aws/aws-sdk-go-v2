@@ -32,7 +32,7 @@ type DeleteDashboardsInput struct {
 	// The dashboards to be deleted. This parameter is required.
 	//
 	// This member is required.
-	DashboardNames []*string
+	DashboardNames []string
 }
 
 type DeleteDashboardsOutput struct {

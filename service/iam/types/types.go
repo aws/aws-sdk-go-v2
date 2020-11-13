@@ -221,7 +221,7 @@ type ContextEntry struct {
 	// The value (or values, if the condition context key supports multiple values) to
 	// provide to the simulation when the key is referenced by a Condition element in
 	// an input policy.
-	ContextKeyValues []*string
+	ContextKeyValues []string
 }
 
 // The reason that the service-linked role deletion failed. This data type is used
@@ -237,7 +237,7 @@ type DeletionTaskFailureReasonType struct {
 	// been deleted from the linked service, the role can't be deleted. This parameter
 	// includes a list of the resources that are associated with the role and the
 	// Region in which the resources are being used.
-	RoleUsageList []*RoleUsageType
+	RoleUsageList []RoleUsageType
 }
 
 // An object that contains details about when the IAM entities (users or roles)
@@ -350,7 +350,7 @@ type EvaluationResult struct {
 	// the resource, if only one statement denies that operation, then the explicit
 	// deny overrides any allow. In addition, the deny statement is the only entry
 	// included in the result.
-	MatchedStatements []*Statement
+	MatchedStatements []Statement
 
 	// A list of context keys that are required by the included input policies but that
 	// were not provided by one of the input parameters. This list is used when the
@@ -359,7 +359,7 @@ type EvaluationResult struct {
 	// values are instead included under the ResourceSpecificResults section. To
 	// discover the context keys used by a set of policies, you can call
 	// GetContextKeysForCustomPolicy or GetContextKeysForPrincipalPolicy.
-	MissingContextValues []*string
+	MissingContextValues []string
 
 	// A structure that details how Organizations and its service control policies
 	// affect the results of the simulation. Only applies if the simulated user's
@@ -372,7 +372,7 @@ type EvaluationResult struct {
 
 	// The individual results of the simulation of the API operation specified in
 	// EvalActionName on each resource.
-	ResourceSpecificResults []*ResourceSpecificResult
+	ResourceSpecificResults []ResourceSpecificResult
 }
 
 // Contains information about an IAM group entity. This data type is used as a
@@ -434,7 +434,7 @@ type GroupDetail struct {
 	Arn *string
 
 	// A list of the managed policies attached to the group.
-	AttachedManagedPolicies []*AttachedPolicy
+	AttachedManagedPolicies []AttachedPolicy
 
 	// The date and time, in ISO 8601 date-time format
 	// (http://www.iso.org/iso/iso8601), when the group was created.
@@ -450,7 +450,7 @@ type GroupDetail struct {
 	GroupName *string
 
 	// A list of the inline policies embedded in the group.
-	GroupPolicyList []*PolicyDetail
+	GroupPolicyList []PolicyDetail
 
 	// The path to the group. For more information about paths, see IAM Identifiers
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html) in the
@@ -508,7 +508,7 @@ type InstanceProfile struct {
 	// The role associated with the instance profile.
 	//
 	// This member is required.
-	Roles []*Role
+	Roles []Role
 }
 
 // Contains details about the permissions policies that are attached to the
@@ -517,7 +517,7 @@ type InstanceProfile struct {
 type ListPoliciesGrantingServiceAccessEntry struct {
 
 	// The PoliciesGrantingServiceAccess object that contains details about the policy.
-	Policies []*PolicyGrantingServiceAccess
+	Policies []PolicyGrantingServiceAccess
 
 	// The namespace of the service that was accessed. To learn the service namespace
 	// of a service, go to Actions, Resources, and Condition Keys for AWS Services
@@ -548,7 +548,7 @@ type LoginProfile struct {
 	UserName *string
 
 	// Specifies whether the user is required to set a new password on next sign-in.
-	PasswordResetRequired *bool
+	PasswordResetRequired bool
 }
 
 // Contains information about a managed policy, including the policy's ARN,
@@ -586,7 +586,7 @@ type ManagedPolicyDetail struct {
 	Description *string
 
 	// Specifies whether the policy can be attached to an IAM user, group, or role.
-	IsAttachable *bool
+	IsAttachable bool
 
 	// The path to the policy. For more information about paths, see IAM Identifiers
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html) in the
@@ -610,7 +610,7 @@ type ManagedPolicyDetail struct {
 	PolicyName *string
 
 	// A list containing information about the versions of the policy.
-	PolicyVersionList []*PolicyVersion
+	PolicyVersionList []PolicyVersion
 
 	// The date and time, in ISO 8601 date-time format
 	// (http://www.iso.org/iso/iso8601), when the policy was last updated. When a
@@ -658,7 +658,7 @@ type OrganizationsDecisionDetail struct {
 
 	// Specifies whether the simulated operation is allowed by the Organizations
 	// service control policies that impact the simulated user's account.
-	AllowedByOrganizations *bool
+	AllowedByOrganizations bool
 }
 
 // Contains information about the account password policy. This data type is used
@@ -666,12 +666,12 @@ type OrganizationsDecisionDetail struct {
 type PasswordPolicy struct {
 
 	// Specifies whether IAM users are allowed to change their own password.
-	AllowUsersToChangePassword *bool
+	AllowUsersToChangePassword bool
 
 	// Indicates whether passwords in the account expire. Returns true if
 	// MaxPasswordAge contains a value greater than 0. Returns false if MaxPasswordAge
 	// is 0 or not present.
-	ExpirePasswords *bool
+	ExpirePasswords bool
 
 	// Specifies whether IAM users are prevented from setting a new password after
 	// their password has expired.
@@ -688,16 +688,16 @@ type PasswordPolicy struct {
 	PasswordReusePrevention *int32
 
 	// Specifies whether to require lowercase characters for IAM user passwords.
-	RequireLowercaseCharacters *bool
+	RequireLowercaseCharacters bool
 
 	// Specifies whether to require numbers for IAM user passwords.
-	RequireNumbers *bool
+	RequireNumbers bool
 
 	// Specifies whether to require symbols for IAM user passwords.
-	RequireSymbols *bool
+	RequireSymbols bool
 
 	// Specifies whether to require uppercase characters for IAM user passwords.
-	RequireUppercaseCharacters *bool
+	RequireUppercaseCharacters bool
 }
 
 // Contains information about the effect that a permissions boundary has on a
@@ -712,7 +712,7 @@ type PermissionsBoundaryDecisionDetail struct {
 	// either the requested action is not allowed (implicitly denied) or that the
 	// action is explicitly denied by the permissions boundary. In both of these cases,
 	// the action is not allowed, regardless of the identity-based policy.
-	AllowedByPermissionsBoundary *bool
+	AllowedByPermissionsBoundary bool
 }
 
 // Contains information about a managed policy. This data type is used as a
@@ -747,7 +747,7 @@ type Policy struct {
 	Description *string
 
 	// Specifies whether the policy can be attached to an IAM user, group, or role.
-	IsAttachable *bool
+	IsAttachable bool
 
 	// The path to the policy. For more information about paths, see IAM Identifiers
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html) in the
@@ -909,7 +909,7 @@ type PolicyVersion struct {
 	Document *string
 
 	// Specifies whether the policy version is set as the policy's default version.
-	IsDefaultVersion *bool
+	IsDefaultVersion bool
 
 	// The identifier for the policy version. Policy version identifiers always begin
 	// with v (always lowercase). When a policy is created, the first policy version is
@@ -922,10 +922,10 @@ type PolicyVersion struct {
 type Position struct {
 
 	// The column in the line containing the specified position in the document.
-	Column *int32
+	Column int32
 
 	// The line containing the specified position in the document.
-	Line *int32
+	Line int32
 }
 
 // Contains the result of the simulation of a single API operation call on a single
@@ -954,7 +954,7 @@ type ResourceSpecificResult struct {
 	// operation on the resource, if any statement denies that operation, then the
 	// explicit deny overrides any allow. In addition, the deny statement is the only
 	// entry included in the result.
-	MatchedStatements []*Statement
+	MatchedStatements []Statement
 
 	// A list of context keys that are required by the included input policies but that
 	// were not provided by one of the input parameters. This list is used when a list
@@ -964,7 +964,7 @@ type ResourceSpecificResult struct {
 	// under the EvaluationResults section. To discover the context keys used by a set
 	// of policies, you can call GetContextKeysForCustomPolicy or
 	// GetContextKeysForPrincipalPolicy.
-	MissingContextValues []*string
+	MissingContextValues []string
 
 	// Contains information about the effect that a permissions boundary has on a
 	// policy simulation when that boundary is applied to an IAM entity.
@@ -1041,7 +1041,7 @@ type Role struct {
 	// about tagging, see Tagging IAM Identities
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
 	// Guide.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Contains information about an IAM role, including all of the role's policies.
@@ -1061,14 +1061,14 @@ type RoleDetail struct {
 
 	// A list of managed policies attached to the role. These policies are the role's
 	// access (permissions) policies.
-	AttachedManagedPolicies []*AttachedPolicy
+	AttachedManagedPolicies []AttachedPolicy
 
 	// The date and time, in ISO 8601 date-time format
 	// (http://www.iso.org/iso/iso8601), when the role was created.
 	CreateDate *time.Time
 
 	// A list of instance profiles that contain this role.
-	InstanceProfileList []*InstanceProfile
+	InstanceProfileList []InstanceProfile
 
 	// The path to the role. For more information about paths, see IAM Identifiers
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html) in the
@@ -1103,13 +1103,13 @@ type RoleDetail struct {
 
 	// A list of inline policies embedded in the role. These policies are the role's
 	// access (permissions) policies.
-	RolePolicyList []*PolicyDetail
+	RolePolicyList []PolicyDetail
 
 	// A list of tags that are attached to the specified role. For more information
 	// about tagging, see Tagging IAM Identities
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
 	// Guide.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Contains information about the last time that an IAM role was used. This
@@ -1144,7 +1144,7 @@ type RoleUsageType struct {
 	Region *string
 
 	// The name of the resource that is using the service-linked role.
-	Resources []*string
+	Resources []string
 }
 
 // Contains the list of SAML providers for this account.
@@ -1279,7 +1279,7 @@ type ServiceLastAccessed struct {
 	// This field is also null if the report was generated at the service level and not
 	// the action level. For more information, see the Granularity field in
 	// GenerateServiceLastAccessedDetails.
-	TrackedActionsLastAccessed []*TrackedActionLastAccessed
+	TrackedActionsLastAccessed []TrackedActionLastAccessed
 }
 
 // Contains the details of a service-specific credential.
@@ -1613,7 +1613,7 @@ type User struct {
 	// about tagging, see Tagging IAM Identities
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
 	// Guide.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Contains information about an IAM user, including all the user's policies and
@@ -1629,14 +1629,14 @@ type UserDetail struct {
 	Arn *string
 
 	// A list of the managed policies attached to the user.
-	AttachedManagedPolicies []*AttachedPolicy
+	AttachedManagedPolicies []AttachedPolicy
 
 	// The date and time, in ISO 8601 date-time format
 	// (http://www.iso.org/iso/iso8601), when the user was created.
 	CreateDate *time.Time
 
 	// A list of IAM groups that the user is in.
-	GroupList []*string
+	GroupList []string
 
 	// The path to the user. For more information about paths, see IAM Identifiers
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html) in the
@@ -1654,7 +1654,7 @@ type UserDetail struct {
 	// about tagging, see Tagging IAM Identities
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
 	// Guide.
-	Tags []*Tag
+	Tags []Tag
 
 	// The stable and unique string identifying the user. For more information about
 	// IDs, see IAM Identifiers
@@ -1666,7 +1666,7 @@ type UserDetail struct {
 	UserName *string
 
 	// A list of the inline policies embedded in the user.
-	UserPolicyList []*PolicyDetail
+	UserPolicyList []PolicyDetail
 }
 
 // Contains information about a virtual MFA device.

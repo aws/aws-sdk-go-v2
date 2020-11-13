@@ -66,7 +66,7 @@ type CreateOpenIDConnectProviderInput struct {
 	// in the IAM User Guide.
 	//
 	// This member is required.
-	ThumbprintList []*string
+	ThumbprintList []string
 
 	// The URL of the identity provider. The URL must begin with https:// and should
 	// correspond to the iss claim in the provider's OpenID Connect ID tokens. Per the
@@ -88,7 +88,7 @@ type CreateOpenIDConnectProviderInput struct {
 	// OIDC provider. There is no defined format for a client ID. The
 	// CreateOpenIDConnectProviderRequest operation accepts client IDs up to 255
 	// characters long.
-	ClientIDList []*string
+	ClientIDList []string
 }
 
 // Contains the response to a successful CreateOpenIDConnectProvider request.

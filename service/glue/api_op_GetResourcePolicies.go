@@ -44,7 +44,7 @@ type GetResourcePoliciesOutput struct {
 
 	// A list of the individual resource policies and the account-level resource
 	// policy.
-	GetResourcePoliciesResponseList []*types.GluePolicy
+	GetResourcePoliciesResponseList []types.GluePolicy
 
 	// A continuation token, if the returned list does not contain the last resource
 	// policy available.

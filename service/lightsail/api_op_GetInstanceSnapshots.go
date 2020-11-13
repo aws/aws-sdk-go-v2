@@ -40,7 +40,7 @@ type GetInstanceSnapshotsOutput struct {
 
 	// An array of key-value pairs containing information about the results of your get
 	// instance snapshots request.
-	InstanceSnapshots []*types.InstanceSnapshot
+	InstanceSnapshots []types.InstanceSnapshot
 
 	// The token to advance to the next page of resutls from your request. A next page
 	// token is not returned if there are no more results to display. To get the next

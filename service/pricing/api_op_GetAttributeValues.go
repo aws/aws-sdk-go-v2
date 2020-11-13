@@ -47,7 +47,7 @@ type GetAttributeValuesInput struct {
 	ServiceCode *string
 
 	// The maximum number of results to return in response.
-	MaxResults *int32
+	MaxResults int32
 
 	// The pagination token that indicates the next set of results that you want to
 	// retrieve.
@@ -58,7 +58,7 @@ type GetAttributeValuesOutput struct {
 
 	// The list of values for an attribute. For example, Throughput Optimized HDD and
 	// Provisioned IOPS are two available values for the AmazonEC2volumeType.
-	AttributeValues []*types.AttributeValue
+	AttributeValues []types.AttributeValue
 
 	// The pagination token that indicates the next set of results to retrieve.
 	NextToken *string

@@ -57,7 +57,7 @@ type DescribeNotificationRuleOutput struct {
 	DetailType types.DetailType
 
 	// A list of the event types associated with the notification rule.
-	EventTypes []*types.EventTypeSummary
+	EventTypes []types.EventTypeSummary
 
 	// The date and time the notification rule was most recently updated, in timestamp
 	// format.
@@ -75,10 +75,10 @@ type DescribeNotificationRuleOutput struct {
 	Status types.NotificationRuleStatus
 
 	// The tags associated with the notification rule.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// A list of the SNS topics associated with the notification rule.
-	Targets []*types.TargetSummary
+	Targets []types.TargetSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

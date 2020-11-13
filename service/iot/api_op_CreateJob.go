@@ -38,7 +38,7 @@ type CreateJobInput struct {
 	// A list of things and thing groups to which the job should be sent.
 	//
 	// This member is required.
-	Targets []*string
+	Targets []string
 
 	// Allows you to create criteria to abort a job.
 	AbortConfig *types.AbortConfig
@@ -70,7 +70,7 @@ type CreateJobInput struct {
 	PresignedUrlConfig *types.PresignedUrlConfig
 
 	// Metadata which can be used to manage the job.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Specifies whether the job will continue to run (CONTINUOUS), or will be complete
 	// after all those things specified as targets have completed the job (SNAPSHOT).

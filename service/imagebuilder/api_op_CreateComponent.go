@@ -71,10 +71,10 @@ type CreateComponentInput struct {
 	// The operating system (OS) version supported by the component. If the OS
 	// information is available, a prefix match is performed against the parent image
 	// OS version during image recipe creation.
-	SupportedOsVersions []*string
+	SupportedOsVersions []string
 
 	// The tags of the component.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The uri of the component. Must be an S3 URL and the requester must have
 	// permission to access the S3 bucket. If you use S3, you can specify component

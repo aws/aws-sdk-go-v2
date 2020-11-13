@@ -67,7 +67,7 @@ type RespondToAuthChallengeInput struct {
 	// *
 	// DEVICE_PASSWORD_VERIFIER requires everything that PASSWORD_VERIFIER requires
 	// plus DEVICE_KEY.
-	ChallengeResponses map[string]*string
+	ChallengeResponses map[string]string
 
 	// A map of custom key-value pairs that you can provide as input for any custom
 	// workflows that this action triggers. You create custom workflows by assigning
@@ -97,7 +97,7 @@ type RespondToAuthChallengeInput struct {
 	//
 	// * Amazon Cognito does not encrypt the the ClientMetadata value, so don't
 	// use it to provide sensitive information.
-	ClientMetadata map[string]*string
+	ClientMetadata map[string]string
 
 	// The session which should be passed both ways in challenge-response calls to the
 	// service. If InitiateAuth or RespondToAuthChallenge API call determines that the
@@ -125,7 +125,7 @@ type RespondToAuthChallengeOutput struct {
 
 	// The challenge parameters. For more information, see InitiateAuth
 	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_InitiateAuth.html).
-	ChallengeParameters map[string]*string
+	ChallengeParameters map[string]string
 
 	// The session which should be passed both ways in challenge-response calls to the
 	// service. If the caller needs to go through another challenge, they return a

@@ -59,7 +59,7 @@ type ListPublicKeysOutput struct {
 
 	// Contains an array of PublicKey objects. The returned public keys may have
 	// validity time ranges that overlap.
-	PublicKeyList []*types.PublicKey
+	PublicKeyList []types.PublicKey
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

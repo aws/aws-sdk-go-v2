@@ -60,7 +60,7 @@ type ListApplicationsOutput struct {
 	// List of ApplicationSummary objects.
 	//
 	// This member is required.
-	ApplicationSummaries []*types.ApplicationSummary
+	ApplicationSummaries []types.ApplicationSummary
 
 	// Returns true if there are more applications to retrieve.
 	//

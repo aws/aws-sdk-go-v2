@@ -50,7 +50,7 @@ type ListTagsOutput struct {
 	NextToken *string
 
 	// An array of Tag objects, each with a tag key and a value.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

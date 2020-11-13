@@ -54,23 +54,23 @@ type PutAccessControlRuleInput struct {
 
 	// Access protocol actions to include in the rule. Valid values include ActiveSync,
 	// AutoDiscover, EWS, IMAP, SMTP, WindowsOutlook, and WebMail.
-	Actions []*string
+	Actions []string
 
 	// IPv4 CIDR ranges to include in the rule.
-	IpRanges []*string
+	IpRanges []string
 
 	// Access protocol actions to exclude from the rule. Valid values include
 	// ActiveSync, AutoDiscover, EWS, IMAP, SMTP, WindowsOutlook, and WebMail.
-	NotActions []*string
+	NotActions []string
 
 	// IPv4 CIDR ranges to exclude from the rule.
-	NotIpRanges []*string
+	NotIpRanges []string
 
 	// User IDs to exclude from the rule.
-	NotUserIds []*string
+	NotUserIds []string
 
 	// User IDs to include in the rule.
-	UserIds []*string
+	UserIds []string
 }
 
 type PutAccessControlRuleOutput struct {

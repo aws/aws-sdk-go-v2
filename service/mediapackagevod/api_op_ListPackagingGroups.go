@@ -30,7 +30,7 @@ func (c *Client) ListPackagingGroups(ctx context.Context, params *ListPackagingG
 type ListPackagingGroupsInput struct {
 
 	// Upper bound on number of records to return.
-	MaxResults *int32
+	MaxResults int32
 
 	// A token used to resume pagination from the end of a previous request.
 	NextToken *string
@@ -42,7 +42,7 @@ type ListPackagingGroupsOutput struct {
 	NextToken *string
 
 	// A list of MediaPackage VOD PackagingGroup resources.
-	PackagingGroups []*types.PackagingGroup
+	PackagingGroups []types.PackagingGroup
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

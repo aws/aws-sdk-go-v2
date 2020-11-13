@@ -45,7 +45,7 @@ type ListLedgersOutput struct {
 
 	// The array of ledger summaries that are associated with the current AWS account
 	// and Region.
-	Ledgers []*types.LedgerSummary
+	Ledgers []types.LedgerSummary
 
 	// A pagination token, indicating whether there are more results available:
 	//

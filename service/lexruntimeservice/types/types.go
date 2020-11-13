@@ -84,7 +84,7 @@ type DialogAction struct {
 	SlotToElicit *string
 
 	// Map of the slots that have been gathered and their values.
-	Slots map[string]*string
+	Slots map[string]string
 }
 
 // Represents an option rendered to the user when a prompt is shown. It could be an
@@ -95,7 +95,7 @@ type GenericAttachment struct {
 	AttachmentLinkUrl *string
 
 	// The list of options to show to the user.
-	Buttons []*Button
+	Buttons []Button
 
 	// The URL of an image that is displayed to the user.
 	ImageUrl *string
@@ -114,7 +114,7 @@ type IntentConfidence struct {
 	// A score that indicates how confident Amazon Lex is that an intent satisfies the
 	// user's intent. Ranges between 0.00 and 1.00. Higher scores indicate higher
 	// confidence.
-	Score *float64
+	Score float64
 }
 
 // Provides information about the state of an intent. You can use this information
@@ -185,7 +185,7 @@ type IntentSummary struct {
 	SlotToElicit *string
 
 	// Map of the slots that have been gathered and their values.
-	Slots map[string]*string
+	Slots map[string]string
 }
 
 // An intent that Amazon Lex suggests satisfies the user's intent. Includes the
@@ -201,7 +201,7 @@ type PredictedIntent struct {
 	NluIntentConfidence *IntentConfidence
 
 	// The slot and slot values associated with the predicted intent.
-	Slots map[string]*string
+	Slots map[string]string
 }
 
 // If you configure a response card when creating your bots, Amazon Lex substitutes
@@ -214,7 +214,7 @@ type ResponseCard struct {
 	ContentType ContentType
 
 	// An array of attachment objects representing options.
-	GenericAttachments []*GenericAttachment
+	GenericAttachments []GenericAttachment
 
 	// The version of the response card format.
 	Version *string

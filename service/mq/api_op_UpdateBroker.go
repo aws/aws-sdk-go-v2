@@ -41,7 +41,7 @@ type UpdateBrokerInput struct {
 	// Enables automatic upgrades to new minor versions for brokers, as Apache releases
 	// the versions. The automatic upgrades occur during the maintenance window of the
 	// broker or after a manual broker reboot.
-	AutoMinorVersionUpgrade *bool
+	AutoMinorVersionUpgrade bool
 
 	// A list of information about the configuration.
 	Configuration *types.ConfigurationId
@@ -64,7 +64,7 @@ type UpdateBrokerInput struct {
 
 	// The list of security groups (1 minimum, 5 maximum) that authorizes connections
 	// to brokers.
-	SecurityGroups []*string
+	SecurityGroups []string
 }
 
 type UpdateBrokerOutput struct {
@@ -73,7 +73,7 @@ type UpdateBrokerOutput struct {
 	AuthenticationStrategy types.AuthenticationStrategy
 
 	// The new value of automatic upgrades to new minor version for brokers.
-	AutoMinorVersionUpgrade *bool
+	AutoMinorVersionUpgrade bool
 
 	// Required. The unique ID that Amazon MQ generates for the broker.
 	BrokerId *string
@@ -100,7 +100,7 @@ type UpdateBrokerOutput struct {
 
 	// The list of security groups (1 minimum, 5 maximum) that authorizes connections
 	// to brokers.
-	SecurityGroups []*string
+	SecurityGroups []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

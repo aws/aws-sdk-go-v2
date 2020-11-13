@@ -48,7 +48,7 @@ type ModifyMountTargetSecurityGroupsInput struct {
 	MountTargetId *string
 
 	// An array of up to five VPC security group IDs.
-	SecurityGroups []*string
+	SecurityGroups []string
 }
 
 type ModifyMountTargetSecurityGroupsOutput struct {

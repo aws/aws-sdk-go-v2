@@ -87,7 +87,7 @@ type GetRelationalDatabaseLogEventsOutput struct {
 
 	// An object describing the result of your get relational database log events
 	// request.
-	ResourceLogEvents []*types.LogEvent
+	ResourceLogEvents []types.LogEvent
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

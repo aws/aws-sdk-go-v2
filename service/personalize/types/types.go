@@ -24,11 +24,11 @@ type Algorithm struct {
 	DefaultHyperParameterRanges *DefaultHyperParameterRanges
 
 	// Specifies the default hyperparameters.
-	DefaultHyperParameters map[string]*string
+	DefaultHyperParameters map[string]string
 
 	// Specifies the default maximum number of training jobs and parallel training
 	// jobs.
-	DefaultResourceConfig map[string]*string
+	DefaultResourceConfig map[string]string
 
 	// The date and time (in Unix time) that the algorithm was last updated.
 	LastUpdatedDateTime *time.Time
@@ -64,7 +64,7 @@ type AutoMLConfig struct {
 	MetricName *string
 
 	// The list of candidate recipes.
-	RecipeList []*string
+	RecipeList []string
 }
 
 // When the solution performs AutoML (performAutoML is true in CreateSolution),
@@ -137,7 +137,7 @@ type BatchInferenceJobConfig struct {
 
 	// A string to string map specifying the inference hyperparameters you wish to use
 	// for hyperparameter optimization. See customizing-solution-config-hpo.
-	ItemExplorationConfig map[string]*string
+	ItemExplorationConfig map[string]string
 }
 
 // The input configuration of a batch inference job.
@@ -244,7 +244,7 @@ type CampaignConfig struct {
 
 	// A string to string map specifying the inference hyperparameters you wish to use
 	// for hyperparameter optimization. See customizing-solution-config-hpo.
-	ItemExplorationConfig map[string]*string
+	ItemExplorationConfig map[string]string
 }
 
 // Provides a summary of the properties of a campaign. For a complete listing, call
@@ -316,17 +316,17 @@ type CategoricalHyperParameterRange struct {
 	Name *string
 
 	// A list of the categories for the hyperparameter.
-	Values []*string
+	Values []string
 }
 
 // Provides the name and range of a continuous hyperparameter.
 type ContinuousHyperParameterRange struct {
 
 	// The maximum allowable value for the hyperparameter.
-	MaxValue *float64
+	MaxValue float64
 
 	// The minimum allowable value for the hyperparameter.
-	MinValue *float64
+	MinValue float64
 
 	// The name of the hyperparameter.
 	Name *string
@@ -597,13 +597,13 @@ type DataSource struct {
 type DefaultCategoricalHyperParameterRange struct {
 
 	// Whether the hyperparameter is tunable.
-	IsTunable *bool
+	IsTunable bool
 
 	// The name of the hyperparameter.
 	Name *string
 
 	// A list of the categories for the hyperparameter.
-	Values []*string
+	Values []string
 }
 
 // Provides the name and default range of a continuous hyperparameter and whether
@@ -612,13 +612,13 @@ type DefaultCategoricalHyperParameterRange struct {
 type DefaultContinuousHyperParameterRange struct {
 
 	// Whether the hyperparameter is tunable.
-	IsTunable *bool
+	IsTunable bool
 
 	// The maximum allowable value for the hyperparameter.
-	MaxValue *float64
+	MaxValue float64
 
 	// The minimum allowable value for the hyperparameter.
-	MinValue *float64
+	MinValue float64
 
 	// The name of the hyperparameter.
 	Name *string
@@ -629,13 +629,13 @@ type DefaultContinuousHyperParameterRange struct {
 type DefaultHyperParameterRanges struct {
 
 	// The categorical hyperparameters and their default ranges.
-	CategoricalHyperParameterRanges []*DefaultCategoricalHyperParameterRange
+	CategoricalHyperParameterRanges []DefaultCategoricalHyperParameterRange
 
 	// The continuous hyperparameters and their default ranges.
-	ContinuousHyperParameterRanges []*DefaultContinuousHyperParameterRange
+	ContinuousHyperParameterRanges []DefaultContinuousHyperParameterRange
 
 	// The integer-valued hyperparameters and their default ranges.
-	IntegerHyperParameterRanges []*DefaultIntegerHyperParameterRange
+	IntegerHyperParameterRanges []DefaultIntegerHyperParameterRange
 }
 
 // Provides the name and default range of a integer-valued hyperparameter and
@@ -644,13 +644,13 @@ type DefaultHyperParameterRanges struct {
 type DefaultIntegerHyperParameterRange struct {
 
 	// Indicates whether the hyperparameter is tunable.
-	IsTunable *bool
+	IsTunable bool
 
 	// The maximum allowable value for the hyperparameter.
-	MaxValue *int32
+	MaxValue int32
 
 	// The minimum allowable value for the hyperparameter.
-	MinValue *int32
+	MinValue int32
 
 	// The name of the hyperparameter.
 	Name *string
@@ -727,7 +727,7 @@ type FeatureTransformation struct {
 	CreationDateTime *time.Time
 
 	// Provides the default parameters for feature transformation.
-	DefaultParameters map[string]*string
+	DefaultParameters map[string]string
 
 	// The Amazon Resource Name (ARN) of the FeatureTransformation object.
 	FeatureTransformationArn *string
@@ -848,23 +848,23 @@ type HPOResourceConfig struct {
 type HyperParameterRanges struct {
 
 	// The categorical hyperparameters and their ranges.
-	CategoricalHyperParameterRanges []*CategoricalHyperParameterRange
+	CategoricalHyperParameterRanges []CategoricalHyperParameterRange
 
 	// The continuous hyperparameters and their ranges.
-	ContinuousHyperParameterRanges []*ContinuousHyperParameterRange
+	ContinuousHyperParameterRanges []ContinuousHyperParameterRange
 
 	// The integer-valued hyperparameters and their ranges.
-	IntegerHyperParameterRanges []*IntegerHyperParameterRange
+	IntegerHyperParameterRanges []IntegerHyperParameterRange
 }
 
 // Provides the name and range of an integer-valued hyperparameter.
 type IntegerHyperParameterRange struct {
 
 	// The maximum allowable value for the hyperparameter.
-	MaxValue *int32
+	MaxValue int32
 
 	// The minimum allowable value for the hyperparameter.
-	MinValue *int32
+	MinValue int32
 
 	// The name of the hyperparameter.
 	Name *string
@@ -976,11 +976,11 @@ type Solution struct {
 	// USER_PERSONALIZATION recipe from the list specified in the solution
 	// configuration (recipeArn must not be specified). When false (the default),
 	// Amazon Personalize uses recipeArn for training.
-	PerformAutoML *bool
+	PerformAutoML bool
 
 	// Whether to perform hyperparameter optimization (HPO) on the chosen recipe. The
 	// default is false.
-	PerformHPO *bool
+	PerformHPO bool
 
 	// The ARN of the recipe used to create the solution.
 	RecipeArn *string
@@ -1005,7 +1005,7 @@ type Solution struct {
 type SolutionConfig struct {
 
 	// Lists the hyperparameter names and ranges.
-	AlgorithmHyperParameters map[string]*string
+	AlgorithmHyperParameters map[string]string
 
 	// The AutoMLConfig object containing a list of recipes to search when AutoML is
 	// performed.
@@ -1016,7 +1016,7 @@ type SolutionConfig struct {
 	EventValueThreshold *string
 
 	// Lists the feature transformation parameters.
-	FeatureTransformationParameters map[string]*string
+	FeatureTransformationParameters map[string]string
 
 	// Describes the properties for hyperparameter optimization (HPO).
 	HpoConfig *HPOConfig
@@ -1070,11 +1070,11 @@ type SolutionVersion struct {
 	// When true, Amazon Personalize searches for the most optimal recipe according to
 	// the solution configuration. When false (the default), Amazon Personalize uses
 	// recipeArn.
-	PerformAutoML *bool
+	PerformAutoML bool
 
 	// Whether to perform hyperparameter optimization (HPO) on the chosen recipe. The
 	// default is false.
-	PerformHPO *bool
+	PerformHPO bool
 
 	// The ARN of the recipe used in the solution.
 	RecipeArn *string
@@ -1150,5 +1150,5 @@ type SolutionVersionSummary struct {
 type TunedHPOParams struct {
 
 	// A list of the hyperparameter values of the best performing model.
-	AlgorithmHyperParameters map[string]*string
+	AlgorithmHyperParameters map[string]string
 }

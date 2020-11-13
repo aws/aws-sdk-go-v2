@@ -76,7 +76,7 @@ type SynthesizeSpeechInput struct {
 	// the same as the language of the voice. For information about storing lexicons,
 	// see PutLexicon
 	// (https://docs.aws.amazon.com/polly/latest/dg/API_PutLexicon.html).
-	LexiconNames []*string
+	LexiconNames []string
 
 	// The audio frequency specified in Hz. The valid values for mp3 and ogg_vorbis are
 	// "8000", "16000", "22050", and "24000". The default value for standard voices is
@@ -116,7 +116,7 @@ type SynthesizeSpeechOutput struct {
 	ContentType *string
 
 	// Number of characters synthesized.
-	RequestCharacters *int32
+	RequestCharacters int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

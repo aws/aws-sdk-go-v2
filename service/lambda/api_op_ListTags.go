@@ -39,7 +39,7 @@ type ListTagsInput struct {
 type ListTagsOutput struct {
 
 	// The function's tags.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

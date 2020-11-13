@@ -127,11 +127,11 @@ type CreateReplicationInstanceInput struct {
 	ResourceIdentifier *string
 
 	// One or more tags to be assigned to the replication instance.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Specifies the VPC security group to be used with the replication instance. The
 	// VPC security group must work with the VPC containing the replication instance.
-	VpcSecurityGroupIds []*string
+	VpcSecurityGroupIds []string
 }
 
 //

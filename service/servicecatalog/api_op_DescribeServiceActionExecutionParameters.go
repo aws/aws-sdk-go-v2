@@ -53,7 +53,7 @@ type DescribeServiceActionExecutionParametersInput struct {
 type DescribeServiceActionExecutionParametersOutput struct {
 
 	// The parameters of the self-service action.
-	ServiceActionParameters []*types.ExecutionParameter
+	ServiceActionParameters []types.ExecutionParameter
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

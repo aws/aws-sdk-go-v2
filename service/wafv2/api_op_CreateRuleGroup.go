@@ -50,7 +50,7 @@ type CreateRuleGroupInput struct {
 	// ACLs is 1,500.
 	//
 	// This member is required.
-	Capacity *int64
+	Capacity int64
 
 	// The name of the rule group. You cannot change the name of a rule group after you
 	// create it.
@@ -86,10 +86,10 @@ type CreateRuleGroupInput struct {
 	// block, or count. Each rule includes one top-level statement that AWS WAF uses to
 	// identify matching web requests, and parameters that govern how AWS WAF handles
 	// them.
-	Rules []*types.Rule
+	Rules []types.Rule
 
 	// An array of key:value pairs to associate with the resource.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateRuleGroupOutput struct {

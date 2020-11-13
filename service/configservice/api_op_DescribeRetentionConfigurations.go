@@ -40,7 +40,7 @@ type DescribeRetentionConfigurationsInput struct {
 	// do not specify a name, AWS Config returns details for all the retention
 	// configurations for that account. Currently, AWS Config supports only one
 	// retention configuration per region in your account.
-	RetentionConfigurationNames []*string
+	RetentionConfigurationNames []string
 }
 
 type DescribeRetentionConfigurationsOutput struct {
@@ -50,7 +50,7 @@ type DescribeRetentionConfigurationsOutput struct {
 	NextToken *string
 
 	// Returns a retention configuration object.
-	RetentionConfigurations []*types.RetentionConfiguration
+	RetentionConfigurations []types.RetentionConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

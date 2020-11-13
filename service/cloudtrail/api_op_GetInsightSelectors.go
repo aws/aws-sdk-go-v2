@@ -65,7 +65,7 @@ type GetInsightSelectorsOutput struct {
 
 	// A JSON string that contains the insight types you want to log on a trail. In
 	// this release, only ApiCallRateInsight is supported as an insight type.
-	InsightSelectors []*types.InsightSelector
+	InsightSelectors []types.InsightSelector
 
 	// The Amazon Resource Name (ARN) of a trail for which you want to get Insights
 	// selectors.

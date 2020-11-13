@@ -39,10 +39,10 @@ type DeleteCustomMetadataInput struct {
 
 	// Flag to indicate removal of all custom metadata properties from the specified
 	// resource.
-	DeleteAll *bool
+	DeleteAll bool
 
 	// List of properties to remove.
-	Keys []*string
+	Keys []string
 
 	// The ID of the version, if the custom metadata is being deleted from a document
 	// version.

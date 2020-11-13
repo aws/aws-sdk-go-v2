@@ -45,7 +45,7 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	// targets using the following format: Key=WindowTargetIds;,Values=,
 	//
 	// This member is required.
-	Targets []*types.Target
+	Targets []types.Target
 
 	// The ARN of the task to run.
 	//
@@ -82,7 +82,7 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	// The priority of the task in the maintenance window, the lower the number the
 	// higher the priority. Tasks in a maintenance window are scheduled in priority
 	// order with tasks that have the same priority scheduled in parallel.
-	Priority *int32
+	Priority int32
 
 	// The ARN of the IAM service role for Systems Manager to assume when running a
 	// maintenance window task. If you do not specify a service role ARN, Systems
@@ -110,7 +110,7 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	// instead use the Parameters option in the TaskInvocationParameters structure. For
 	// information about how Systems Manager handles these options for the supported
 	// maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
-	TaskParameters map[string]*types.MaintenanceWindowTaskParameterValueExpression
+	TaskParameters map[string]types.MaintenanceWindowTaskParameterValueExpression
 }
 
 type RegisterTaskWithMaintenanceWindowOutput struct {

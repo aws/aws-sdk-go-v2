@@ -992,13 +992,13 @@ func validateAdditionalAuthenticationProvider(v *types.AdditionalAuthenticationP
 	}
 }
 
-func validateAdditionalAuthenticationProviders(v []*types.AdditionalAuthenticationProvider) error {
+func validateAdditionalAuthenticationProviders(v []types.AdditionalAuthenticationProvider) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AdditionalAuthenticationProviders"}
 	for i := range v {
-		if err := validateAdditionalAuthenticationProvider(v[i]); err != nil {
+		if err := validateAdditionalAuthenticationProvider(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1171,9 +1171,6 @@ func validateOpCreateApiCacheInput(v *CreateApiCacheInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateApiCacheInput"}
 	if v.ApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
-	}
-	if v.Ttl == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Ttl"))
 	}
 	if len(v.ApiCachingBehavior) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiCachingBehavior"))
@@ -1808,9 +1805,6 @@ func validateOpUpdateApiCacheInput(v *UpdateApiCacheInput) error {
 	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
-	}
-	if v.Ttl == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Ttl"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

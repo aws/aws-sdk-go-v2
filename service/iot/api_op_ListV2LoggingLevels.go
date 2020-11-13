@@ -43,7 +43,7 @@ type ListV2LoggingLevelsInput struct {
 type ListV2LoggingLevelsOutput struct {
 
 	// The logging configuration for a target.
-	LogTargetConfigurations []*types.LogTargetConfiguration
+	LogTargetConfigurations []types.LogTargetConfiguration
 
 	// The token used to get the next set of results, or null if there are no
 	// additional results.

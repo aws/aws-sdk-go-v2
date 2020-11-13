@@ -53,25 +53,25 @@ type CreateDataSetInput struct {
 	// Declares the physical tables that are available in the underlying data sources.
 	//
 	// This member is required.
-	PhysicalTableMap map[string]*types.PhysicalTable
+	PhysicalTableMap map[string]types.PhysicalTable
 
 	// Groupings of columns that work together in certain QuickSight features.
 	// Currently, only geospatial hierarchy is supported.
-	ColumnGroups []*types.ColumnGroup
+	ColumnGroups []types.ColumnGroup
 
 	// Configures the combination and transformation of the data from the physical
 	// tables.
-	LogicalTableMap map[string]*types.LogicalTable
+	LogicalTableMap map[string]types.LogicalTable
 
 	// A list of resource permissions on the dataset.
-	Permissions []*types.ResourcePermission
+	Permissions []types.ResourcePermission
 
 	// The row-level security configuration for the data that you want to create.
 	RowLevelPermissionDataSet *types.RowLevelPermissionDataSet
 
 	// Contains a map of the key-value pairs for the resource tag or tags assigned to
 	// the dataset.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateDataSetOutput struct {
@@ -95,7 +95,7 @@ type CreateDataSetOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

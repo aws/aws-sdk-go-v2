@@ -40,11 +40,11 @@ type DeleteProjectInput struct {
 type DeleteProjectOutput struct {
 
 	// Resources which were deleted.
-	DeletedResources []*types.Resource
+	DeletedResources []types.Resource
 
 	// Resources which were not deleted, due to a risk of losing potentially important
 	// data or files.
-	OrphanedResources []*types.Resource
+	OrphanedResources []types.Resource
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

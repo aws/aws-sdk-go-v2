@@ -39,7 +39,7 @@ type CreateStreamKeyInput struct {
 	ChannelArn *string
 
 	// See Channel$tags.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateStreamKeyOutput struct {

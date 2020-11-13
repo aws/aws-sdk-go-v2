@@ -31,7 +31,7 @@ type DescribeCapacityProvidersInput struct {
 
 	// The short name or full Amazon Resource Name (ARN) of one or more capacity
 	// providers. Up to 100 capacity providers can be described in an action.
-	CapacityProviders []*string
+	CapacityProviders []string
 
 	// Specifies whether or not you want to see the resource tags for the capacity
 	// provider. If TAGS is specified, the tags are included in the response. If this
@@ -60,10 +60,10 @@ type DescribeCapacityProvidersInput struct {
 type DescribeCapacityProvidersOutput struct {
 
 	// The list of capacity providers.
-	CapacityProviders []*types.CapacityProvider
+	CapacityProviders []types.CapacityProvider
 
 	// Any failures associated with the call.
-	Failures []*types.Failure
+	Failures []types.Failure
 
 	// The nextToken value to include in a future DescribeCapacityProviders request.
 	// When the results of a DescribeCapacityProviders request exceed maxResults, this

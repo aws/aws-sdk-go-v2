@@ -56,7 +56,7 @@ type ListAccountsForProvisionedPermissionSetInput struct {
 type ListAccountsForProvisionedPermissionSetOutput struct {
 
 	// The list of AWS AccountIds.
-	AccountIds []*string
+	AccountIds []string
 
 	// The pagination token for the list API. Initially the value is null. Use the
 	// output of previous API calls to make subsequent calls.

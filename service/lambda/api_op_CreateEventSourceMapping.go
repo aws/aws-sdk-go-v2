@@ -155,7 +155,7 @@ type CreateEventSourceMappingInput struct {
 	StartingPositionTimestamp *time.Time
 
 	// (MSK) The name of the Kafka topic.
-	Topics []*string
+	Topics []string
 }
 
 // A mapping between an AWS resource and an AWS Lambda function. See
@@ -208,7 +208,7 @@ type CreateEventSourceMappingOutput struct {
 	StateTransitionReason *string
 
 	// (MSK) The name of the Kafka topic.
-	Topics []*string
+	Topics []string
 
 	// The identifier of the event source mapping.
 	UUID *string

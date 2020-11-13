@@ -38,7 +38,7 @@ type DescribeProjectInput struct {
 	// If set to true, causes AWS Mobile Hub to synchronize information from other
 	// services, e.g., update state of AWS CloudFormation stacks in the AWS Mobile Hub
 	// project.
-	SyncFromResources *bool
+	SyncFromResources bool
 }
 
 // Result structure used for requests of project details.

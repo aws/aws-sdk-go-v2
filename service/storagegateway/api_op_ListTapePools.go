@@ -46,7 +46,7 @@ type ListTapePoolsInput struct {
 	// The Amazon Resource Name (ARN) of each of the custom tape pools you want to
 	// list. If you don't specify a custom tape pool ARN, the response lists all custom
 	// tape pools.
-	PoolARNs []*string
+	PoolARNs []string
 }
 
 type ListTapePoolsOutput struct {
@@ -59,7 +59,7 @@ type ListTapePoolsOutput struct {
 
 	// An array of PoolInfo objects, where each object describes a single custom tape
 	// pool. If there are no custom tape pools, the PoolInfos is an empty array.
-	PoolInfos []*types.PoolInfo
+	PoolInfos []types.PoolInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

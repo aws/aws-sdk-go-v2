@@ -44,7 +44,7 @@ type UpdateConfigurationSetSendingEnabledInput struct {
 	// set.
 	//
 	// This member is required.
-	Enabled *bool
+	Enabled bool
 }
 
 type UpdateConfigurationSetSendingEnabledOutput struct {

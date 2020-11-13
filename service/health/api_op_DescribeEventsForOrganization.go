@@ -80,7 +80,7 @@ type DescribeEventsForOrganizationInput struct {
 type DescribeEventsForOrganizationOutput struct {
 
 	// The events that match the specified filter criteria.
-	Events []*types.OrganizationEvent
+	Events []types.OrganizationEvent
 
 	// If the results of a search are large, only a portion of the results are
 	// returned, and a nextToken pagination token is returned in the response. To

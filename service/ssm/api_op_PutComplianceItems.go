@@ -96,7 +96,7 @@ type PutComplianceItemsInput struct {
 	// Classification, and so on.
 	//
 	// This member is required.
-	Items []*types.ComplianceItemEntry
+	Items []types.ComplianceItemEntry
 
 	// Specify an ID for this resource. For a managed instance, this is the instance
 	// ID.

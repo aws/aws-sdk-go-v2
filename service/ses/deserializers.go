@@ -8100,7 +8100,7 @@ func awsAwsquery_deserializeDocumentAccountSendingPausedException(v **types.Acco
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -8148,7 +8148,7 @@ func awsAwsquery_deserializeDocumentAddHeaderAction(v **types.AddHeaderAction, d
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.HeaderName = &xtv
+				sv.HeaderName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("HeaderValue", t.Name.Local):
@@ -8164,7 +8164,7 @@ func awsAwsquery_deserializeDocumentAddHeaderAction(v **types.AddHeaderAction, d
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.HeaderValue = &xtv
+				sv.HeaderValue = ptr.String(xtv)
 			}
 
 		default:
@@ -8177,13 +8177,13 @@ func awsAwsquery_deserializeDocumentAddHeaderAction(v **types.AddHeaderAction, d
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentAddressList(v *[]*string, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeDocumentAddressList(v *[]string, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*string
+	var sv []string
 	if *v == nil {
-		sv = make([]*string, 0)
+		sv = make([]string, 0)
 	} else {
 		sv = *v
 	}
@@ -8201,20 +8201,17 @@ func awsAwsquery_deserializeDocumentAddressList(v *[]*string, decoder smithyxml.
 		decoder = memberDecoder
 		for {
 			if strings.EqualFold("member", t.Name.Local) {
-				var col *string
+				var col string
 				val, done, err := decoder.Value()
 				if err != nil {
 					return err
 				}
 				if done {
-					if val == nil {
-						col = ptr.String("")
-					}
 					break
 				}
 				if val != nil {
 					xtv := string(val)
-					col = &xtv
+					col = xtv
 				}
 				sv = append(sv, col)
 			} else {
@@ -8227,17 +8224,17 @@ func awsAwsquery_deserializeDocumentAddressList(v *[]*string, decoder smithyxml.
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentAddressListUnwrapped(v *[]*string, decoder smithyxml.NodeDecoder) error {
-	var sv []*string
+func awsAwsquery_deserializeDocumentAddressListUnwrapped(v *[]string, decoder smithyxml.NodeDecoder) error {
+	var sv []string
 	if *v == nil {
-		sv = make([]*string, 0)
+		sv = make([]string, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *string
+		var mv string
 		t := decoder.StartEl
 		_ = t
 		val, done, err := decoder.Value()
@@ -8245,14 +8242,11 @@ func awsAwsquery_deserializeDocumentAddressListUnwrapped(v *[]*string, decoder s
 			return err
 		}
 		if done {
-			if val == nil {
-				mv = ptr.String("")
-			}
 			break
 		}
 		if val != nil {
 			xtv := string(val)
-			mv = &xtv
+			mv = xtv
 		}
 		sv = append(sv, mv)
 	}
@@ -8294,7 +8288,7 @@ func awsAwsquery_deserializeDocumentAlreadyExistsException(v **types.AlreadyExis
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Name", t.Name.Local):
@@ -8310,7 +8304,7 @@ func awsAwsquery_deserializeDocumentAlreadyExistsException(v **types.AlreadyExis
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Name = &xtv
+				sv.Name = ptr.String(xtv)
 			}
 
 		default:
@@ -8358,7 +8352,7 @@ func awsAwsquery_deserializeDocumentBounceAction(v **types.BounceAction, decoder
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Sender", t.Name.Local):
@@ -8374,7 +8368,7 @@ func awsAwsquery_deserializeDocumentBounceAction(v **types.BounceAction, decoder
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Sender = &xtv
+				sv.Sender = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("SmtpReplyCode", t.Name.Local):
@@ -8390,7 +8384,7 @@ func awsAwsquery_deserializeDocumentBounceAction(v **types.BounceAction, decoder
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.SmtpReplyCode = &xtv
+				sv.SmtpReplyCode = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("StatusCode", t.Name.Local):
@@ -8406,7 +8400,7 @@ func awsAwsquery_deserializeDocumentBounceAction(v **types.BounceAction, decoder
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.StatusCode = &xtv
+				sv.StatusCode = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("TopicArn", t.Name.Local):
@@ -8422,7 +8416,7 @@ func awsAwsquery_deserializeDocumentBounceAction(v **types.BounceAction, decoder
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.TopicArn = &xtv
+				sv.TopicArn = ptr.String(xtv)
 			}
 
 		default:
@@ -8470,7 +8464,7 @@ func awsAwsquery_deserializeDocumentBulkEmailDestinationStatus(v **types.BulkEma
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Error = &xtv
+				sv.Error = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("MessageId", t.Name.Local):
@@ -8486,7 +8480,7 @@ func awsAwsquery_deserializeDocumentBulkEmailDestinationStatus(v **types.BulkEma
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.MessageId = &xtv
+				sv.MessageId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Status", t.Name.Local):
@@ -8512,13 +8506,13 @@ func awsAwsquery_deserializeDocumentBulkEmailDestinationStatus(v **types.BulkEma
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentBulkEmailDestinationStatusList(v *[]*types.BulkEmailDestinationStatus, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeDocumentBulkEmailDestinationStatusList(v *[]types.BulkEmailDestinationStatus, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*types.BulkEmailDestinationStatus
+	var sv []types.BulkEmailDestinationStatus
 	if *v == nil {
-		sv = make([]*types.BulkEmailDestinationStatus, 0)
+		sv = make([]types.BulkEmailDestinationStatus, 0)
 	} else {
 		sv = *v
 	}
@@ -8534,11 +8528,13 @@ func awsAwsquery_deserializeDocumentBulkEmailDestinationStatusList(v *[]*types.B
 		}
 		for {
 			if strings.EqualFold("member", t.Name.Local) {
-				var col *types.BulkEmailDestinationStatus
+				var col types.BulkEmailDestinationStatus
 				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				if err := awsAwsquery_deserializeDocumentBulkEmailDestinationStatus(&col, nodeDecoder); err != nil {
+				destAddr := &col
+				if err := awsAwsquery_deserializeDocumentBulkEmailDestinationStatus(&destAddr, nodeDecoder); err != nil {
 					return err
 				}
+				col = *destAddr
 				sv = append(sv, col)
 				break
 			} else {
@@ -8551,23 +8547,25 @@ func awsAwsquery_deserializeDocumentBulkEmailDestinationStatusList(v *[]*types.B
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentBulkEmailDestinationStatusListUnwrapped(v *[]*types.BulkEmailDestinationStatus, decoder smithyxml.NodeDecoder) error {
-	var sv []*types.BulkEmailDestinationStatus
+func awsAwsquery_deserializeDocumentBulkEmailDestinationStatusListUnwrapped(v *[]types.BulkEmailDestinationStatus, decoder smithyxml.NodeDecoder) error {
+	var sv []types.BulkEmailDestinationStatus
 	if *v == nil {
-		sv = make([]*types.BulkEmailDestinationStatus, 0)
+		sv = make([]types.BulkEmailDestinationStatus, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *types.BulkEmailDestinationStatus
+		var mv types.BulkEmailDestinationStatus
 		t := decoder.StartEl
 		_ = t
 		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-		if err := awsAwsquery_deserializeDocumentBulkEmailDestinationStatus(&mv, nodeDecoder); err != nil {
+		destAddr := &mv
+		if err := awsAwsquery_deserializeDocumentBulkEmailDestinationStatus(&destAddr, nodeDecoder); err != nil {
 			return err
 		}
+		mv = *destAddr
 		sv = append(sv, mv)
 	}
 	*v = sv
@@ -8608,7 +8606,7 @@ func awsAwsquery_deserializeDocumentCannotDeleteException(v **types.CannotDelete
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Name", t.Name.Local):
@@ -8624,7 +8622,7 @@ func awsAwsquery_deserializeDocumentCannotDeleteException(v **types.CannotDelete
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Name = &xtv
+				sv.Name = ptr.String(xtv)
 			}
 
 		default:
@@ -8710,7 +8708,7 @@ func awsAwsquery_deserializeDocumentCloudWatchDimensionConfiguration(v **types.C
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.DefaultDimensionValue = &xtv
+				sv.DefaultDimensionValue = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("DimensionName", t.Name.Local):
@@ -8726,7 +8724,7 @@ func awsAwsquery_deserializeDocumentCloudWatchDimensionConfiguration(v **types.C
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.DimensionName = &xtv
+				sv.DimensionName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("DimensionValueSource", t.Name.Local):
@@ -8752,13 +8750,13 @@ func awsAwsquery_deserializeDocumentCloudWatchDimensionConfiguration(v **types.C
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCloudWatchDimensionConfigurations(v *[]*types.CloudWatchDimensionConfiguration, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeDocumentCloudWatchDimensionConfigurations(v *[]types.CloudWatchDimensionConfiguration, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*types.CloudWatchDimensionConfiguration
+	var sv []types.CloudWatchDimensionConfiguration
 	if *v == nil {
-		sv = make([]*types.CloudWatchDimensionConfiguration, 0)
+		sv = make([]types.CloudWatchDimensionConfiguration, 0)
 	} else {
 		sv = *v
 	}
@@ -8774,11 +8772,13 @@ func awsAwsquery_deserializeDocumentCloudWatchDimensionConfigurations(v *[]*type
 		}
 		for {
 			if strings.EqualFold("member", t.Name.Local) {
-				var col *types.CloudWatchDimensionConfiguration
+				var col types.CloudWatchDimensionConfiguration
 				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				if err := awsAwsquery_deserializeDocumentCloudWatchDimensionConfiguration(&col, nodeDecoder); err != nil {
+				destAddr := &col
+				if err := awsAwsquery_deserializeDocumentCloudWatchDimensionConfiguration(&destAddr, nodeDecoder); err != nil {
 					return err
 				}
+				col = *destAddr
 				sv = append(sv, col)
 				break
 			} else {
@@ -8791,23 +8791,25 @@ func awsAwsquery_deserializeDocumentCloudWatchDimensionConfigurations(v *[]*type
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCloudWatchDimensionConfigurationsUnwrapped(v *[]*types.CloudWatchDimensionConfiguration, decoder smithyxml.NodeDecoder) error {
-	var sv []*types.CloudWatchDimensionConfiguration
+func awsAwsquery_deserializeDocumentCloudWatchDimensionConfigurationsUnwrapped(v *[]types.CloudWatchDimensionConfiguration, decoder smithyxml.NodeDecoder) error {
+	var sv []types.CloudWatchDimensionConfiguration
 	if *v == nil {
-		sv = make([]*types.CloudWatchDimensionConfiguration, 0)
+		sv = make([]types.CloudWatchDimensionConfiguration, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *types.CloudWatchDimensionConfiguration
+		var mv types.CloudWatchDimensionConfiguration
 		t := decoder.StartEl
 		_ = t
 		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-		if err := awsAwsquery_deserializeDocumentCloudWatchDimensionConfiguration(&mv, nodeDecoder); err != nil {
+		destAddr := &mv
+		if err := awsAwsquery_deserializeDocumentCloudWatchDimensionConfiguration(&destAddr, nodeDecoder); err != nil {
 			return err
 		}
+		mv = *destAddr
 		sv = append(sv, mv)
 	}
 	*v = sv
@@ -8848,7 +8850,7 @@ func awsAwsquery_deserializeDocumentConfigurationSet(v **types.ConfigurationSet,
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Name = &xtv
+				sv.Name = ptr.String(xtv)
 			}
 
 		default:
@@ -8896,7 +8898,7 @@ func awsAwsquery_deserializeDocumentConfigurationSetAlreadyExistsException(v **t
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.ConfigurationSetName = &xtv
+				sv.ConfigurationSetName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("message", t.Name.Local):
@@ -8912,7 +8914,7 @@ func awsAwsquery_deserializeDocumentConfigurationSetAlreadyExistsException(v **t
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -8960,7 +8962,7 @@ func awsAwsquery_deserializeDocumentConfigurationSetDoesNotExistException(v **ty
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.ConfigurationSetName = &xtv
+				sv.ConfigurationSetName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("message", t.Name.Local):
@@ -8976,7 +8978,7 @@ func awsAwsquery_deserializeDocumentConfigurationSetDoesNotExistException(v **ty
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -8989,13 +8991,13 @@ func awsAwsquery_deserializeDocumentConfigurationSetDoesNotExistException(v **ty
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentConfigurationSets(v *[]*types.ConfigurationSet, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeDocumentConfigurationSets(v *[]types.ConfigurationSet, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*types.ConfigurationSet
+	var sv []types.ConfigurationSet
 	if *v == nil {
-		sv = make([]*types.ConfigurationSet, 0)
+		sv = make([]types.ConfigurationSet, 0)
 	} else {
 		sv = *v
 	}
@@ -9011,11 +9013,13 @@ func awsAwsquery_deserializeDocumentConfigurationSets(v *[]*types.ConfigurationS
 		}
 		for {
 			if strings.EqualFold("member", t.Name.Local) {
-				var col *types.ConfigurationSet
+				var col types.ConfigurationSet
 				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				if err := awsAwsquery_deserializeDocumentConfigurationSet(&col, nodeDecoder); err != nil {
+				destAddr := &col
+				if err := awsAwsquery_deserializeDocumentConfigurationSet(&destAddr, nodeDecoder); err != nil {
 					return err
 				}
+				col = *destAddr
 				sv = append(sv, col)
 				break
 			} else {
@@ -9028,23 +9032,25 @@ func awsAwsquery_deserializeDocumentConfigurationSets(v *[]*types.ConfigurationS
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentConfigurationSetsUnwrapped(v *[]*types.ConfigurationSet, decoder smithyxml.NodeDecoder) error {
-	var sv []*types.ConfigurationSet
+func awsAwsquery_deserializeDocumentConfigurationSetsUnwrapped(v *[]types.ConfigurationSet, decoder smithyxml.NodeDecoder) error {
+	var sv []types.ConfigurationSet
 	if *v == nil {
-		sv = make([]*types.ConfigurationSet, 0)
+		sv = make([]types.ConfigurationSet, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *types.ConfigurationSet
+		var mv types.ConfigurationSet
 		t := decoder.StartEl
 		_ = t
 		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-		if err := awsAwsquery_deserializeDocumentConfigurationSet(&mv, nodeDecoder); err != nil {
+		destAddr := &mv
+		if err := awsAwsquery_deserializeDocumentConfigurationSet(&destAddr, nodeDecoder); err != nil {
 			return err
 		}
+		mv = *destAddr
 		sv = append(sv, mv)
 	}
 	*v = sv
@@ -9085,7 +9091,7 @@ func awsAwsquery_deserializeDocumentConfigurationSetSendingPausedException(v **t
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.ConfigurationSetName = &xtv
+				sv.ConfigurationSetName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("message", t.Name.Local):
@@ -9101,7 +9107,7 @@ func awsAwsquery_deserializeDocumentConfigurationSetSendingPausedException(v **t
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -9149,7 +9155,7 @@ func awsAwsquery_deserializeDocumentCustomVerificationEmailInvalidContentExcepti
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -9197,7 +9203,7 @@ func awsAwsquery_deserializeDocumentCustomVerificationEmailTemplate(v **types.Cu
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.FailureRedirectionURL = &xtv
+				sv.FailureRedirectionURL = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("FromEmailAddress", t.Name.Local):
@@ -9213,7 +9219,7 @@ func awsAwsquery_deserializeDocumentCustomVerificationEmailTemplate(v **types.Cu
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.FromEmailAddress = &xtv
+				sv.FromEmailAddress = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("SuccessRedirectionURL", t.Name.Local):
@@ -9229,7 +9235,7 @@ func awsAwsquery_deserializeDocumentCustomVerificationEmailTemplate(v **types.Cu
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.SuccessRedirectionURL = &xtv
+				sv.SuccessRedirectionURL = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("TemplateName", t.Name.Local):
@@ -9245,7 +9251,7 @@ func awsAwsquery_deserializeDocumentCustomVerificationEmailTemplate(v **types.Cu
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.TemplateName = &xtv
+				sv.TemplateName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("TemplateSubject", t.Name.Local):
@@ -9261,7 +9267,7 @@ func awsAwsquery_deserializeDocumentCustomVerificationEmailTemplate(v **types.Cu
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.TemplateSubject = &xtv
+				sv.TemplateSubject = ptr.String(xtv)
 			}
 
 		default:
@@ -9309,7 +9315,7 @@ func awsAwsquery_deserializeDocumentCustomVerificationEmailTemplateAlreadyExists
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.CustomVerificationEmailTemplateName = &xtv
+				sv.CustomVerificationEmailTemplateName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("message", t.Name.Local):
@@ -9325,7 +9331,7 @@ func awsAwsquery_deserializeDocumentCustomVerificationEmailTemplateAlreadyExists
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -9373,7 +9379,7 @@ func awsAwsquery_deserializeDocumentCustomVerificationEmailTemplateDoesNotExistE
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.CustomVerificationEmailTemplateName = &xtv
+				sv.CustomVerificationEmailTemplateName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("message", t.Name.Local):
@@ -9389,7 +9395,7 @@ func awsAwsquery_deserializeDocumentCustomVerificationEmailTemplateDoesNotExistE
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -9402,13 +9408,13 @@ func awsAwsquery_deserializeDocumentCustomVerificationEmailTemplateDoesNotExistE
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCustomVerificationEmailTemplates(v *[]*types.CustomVerificationEmailTemplate, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeDocumentCustomVerificationEmailTemplates(v *[]types.CustomVerificationEmailTemplate, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*types.CustomVerificationEmailTemplate
+	var sv []types.CustomVerificationEmailTemplate
 	if *v == nil {
-		sv = make([]*types.CustomVerificationEmailTemplate, 0)
+		sv = make([]types.CustomVerificationEmailTemplate, 0)
 	} else {
 		sv = *v
 	}
@@ -9424,11 +9430,13 @@ func awsAwsquery_deserializeDocumentCustomVerificationEmailTemplates(v *[]*types
 		}
 		for {
 			if strings.EqualFold("member", t.Name.Local) {
-				var col *types.CustomVerificationEmailTemplate
+				var col types.CustomVerificationEmailTemplate
 				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				if err := awsAwsquery_deserializeDocumentCustomVerificationEmailTemplate(&col, nodeDecoder); err != nil {
+				destAddr := &col
+				if err := awsAwsquery_deserializeDocumentCustomVerificationEmailTemplate(&destAddr, nodeDecoder); err != nil {
 					return err
 				}
+				col = *destAddr
 				sv = append(sv, col)
 				break
 			} else {
@@ -9441,23 +9449,25 @@ func awsAwsquery_deserializeDocumentCustomVerificationEmailTemplates(v *[]*types
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCustomVerificationEmailTemplatesUnwrapped(v *[]*types.CustomVerificationEmailTemplate, decoder smithyxml.NodeDecoder) error {
-	var sv []*types.CustomVerificationEmailTemplate
+func awsAwsquery_deserializeDocumentCustomVerificationEmailTemplatesUnwrapped(v *[]types.CustomVerificationEmailTemplate, decoder smithyxml.NodeDecoder) error {
+	var sv []types.CustomVerificationEmailTemplate
 	if *v == nil {
-		sv = make([]*types.CustomVerificationEmailTemplate, 0)
+		sv = make([]types.CustomVerificationEmailTemplate, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *types.CustomVerificationEmailTemplate
+		var mv types.CustomVerificationEmailTemplate
 		t := decoder.StartEl
 		_ = t
 		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-		if err := awsAwsquery_deserializeDocumentCustomVerificationEmailTemplate(&mv, nodeDecoder); err != nil {
+		destAddr := &mv
+		if err := awsAwsquery_deserializeDocumentCustomVerificationEmailTemplate(&destAddr, nodeDecoder); err != nil {
 			return err
 		}
+		mv = *destAddr
 		sv = append(sv, mv)
 	}
 	*v = sv
@@ -9508,13 +9518,13 @@ func awsAwsquery_deserializeDocumentDeliveryOptions(v **types.DeliveryOptions, d
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDkimAttributes(v *map[string]*types.IdentityDkimAttributes, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeDocumentDkimAttributes(v *map[string]types.IdentityDkimAttributes, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv map[string]*types.IdentityDkimAttributes
+	var sv map[string]types.IdentityDkimAttributes
 	if *v == nil {
-		sv = make(map[string]*types.IdentityDkimAttributes, 0)
+		sv = make(map[string]types.IdentityDkimAttributes, 0)
 	} else {
 		sv = *v
 	}
@@ -9538,23 +9548,23 @@ func awsAwsquery_deserializeDocumentDkimAttributes(v *map[string]*types.Identity
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDkimAttributesUnwrapped(v *map[string]*types.IdentityDkimAttributes, decoder smithyxml.NodeDecoder) error {
-	var sv map[string]*types.IdentityDkimAttributes
+func awsAwsquery_deserializeDocumentDkimAttributesUnwrapped(v *map[string]types.IdentityDkimAttributes, decoder smithyxml.NodeDecoder) error {
+	var sv map[string]types.IdentityDkimAttributes
 	if *v == nil {
-		sv = make(map[string]*types.IdentityDkimAttributes, 0)
+		sv = make(map[string]types.IdentityDkimAttributes, 0)
 	} else {
 		sv = *v
 	}
 
-	var ek *string
-	var ev *types.IdentityDkimAttributes
+	var ek string
+	var ev types.IdentityDkimAttributes
 	for {
 		t, done, err := decoder.Token()
 		if err != nil {
 			return err
 		}
 		if done {
-			sv[*ek] = ev
+			sv[ek] = ev
 			break
 		}
 		switch {
@@ -9564,21 +9574,21 @@ func awsAwsquery_deserializeDocumentDkimAttributesUnwrapped(v *map[string]*types
 				return err
 			}
 			if done {
-				if val == nil {
-					ek = ptr.String("")
-				}
 				break
 			}
 			if val != nil {
 				xtv := string(val)
-				ek = &xtv
+				ek = xtv
 			}
 
 		case strings.EqualFold("value", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-			if err := awsAwsquery_deserializeDocumentIdentityDkimAttributes(&ev, nodeDecoder); err != nil {
+			mapVar := ev
+			destAddr := &mapVar
+			if err := awsAwsquery_deserializeDocumentIdentityDkimAttributes(&destAddr, nodeDecoder); err != nil {
 				return err
 			}
+			ev = *destAddr
 
 		default:
 			// Do nothing and ignore the unexpected tag element
@@ -9629,7 +9639,7 @@ func awsAwsquery_deserializeDocumentEventDestination(v **types.EventDestination,
 				if err != nil {
 					return fmt.Errorf("expected Enabled to be of type *bool, got %T instead", val)
 				}
-				sv.Enabled = &xtv
+				sv.Enabled = xtv
 			}
 
 		case strings.EqualFold("KinesisFirehoseDestination", t.Name.Local):
@@ -9657,7 +9667,7 @@ func awsAwsquery_deserializeDocumentEventDestination(v **types.EventDestination,
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Name = &xtv
+				sv.Name = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("SNSDestination", t.Name.Local):
@@ -9711,7 +9721,7 @@ func awsAwsquery_deserializeDocumentEventDestinationAlreadyExistsException(v **t
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.ConfigurationSetName = &xtv
+				sv.ConfigurationSetName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("EventDestinationName", t.Name.Local):
@@ -9727,7 +9737,7 @@ func awsAwsquery_deserializeDocumentEventDestinationAlreadyExistsException(v **t
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.EventDestinationName = &xtv
+				sv.EventDestinationName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("message", t.Name.Local):
@@ -9743,7 +9753,7 @@ func awsAwsquery_deserializeDocumentEventDestinationAlreadyExistsException(v **t
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -9791,7 +9801,7 @@ func awsAwsquery_deserializeDocumentEventDestinationDoesNotExistException(v **ty
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.ConfigurationSetName = &xtv
+				sv.ConfigurationSetName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("EventDestinationName", t.Name.Local):
@@ -9807,7 +9817,7 @@ func awsAwsquery_deserializeDocumentEventDestinationDoesNotExistException(v **ty
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.EventDestinationName = &xtv
+				sv.EventDestinationName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("message", t.Name.Local):
@@ -9823,7 +9833,7 @@ func awsAwsquery_deserializeDocumentEventDestinationDoesNotExistException(v **ty
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -9836,13 +9846,13 @@ func awsAwsquery_deserializeDocumentEventDestinationDoesNotExistException(v **ty
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentEventDestinations(v *[]*types.EventDestination, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeDocumentEventDestinations(v *[]types.EventDestination, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*types.EventDestination
+	var sv []types.EventDestination
 	if *v == nil {
-		sv = make([]*types.EventDestination, 0)
+		sv = make([]types.EventDestination, 0)
 	} else {
 		sv = *v
 	}
@@ -9858,11 +9868,13 @@ func awsAwsquery_deserializeDocumentEventDestinations(v *[]*types.EventDestinati
 		}
 		for {
 			if strings.EqualFold("member", t.Name.Local) {
-				var col *types.EventDestination
+				var col types.EventDestination
 				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				if err := awsAwsquery_deserializeDocumentEventDestination(&col, nodeDecoder); err != nil {
+				destAddr := &col
+				if err := awsAwsquery_deserializeDocumentEventDestination(&destAddr, nodeDecoder); err != nil {
 					return err
 				}
+				col = *destAddr
 				sv = append(sv, col)
 				break
 			} else {
@@ -9875,23 +9887,25 @@ func awsAwsquery_deserializeDocumentEventDestinations(v *[]*types.EventDestinati
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentEventDestinationsUnwrapped(v *[]*types.EventDestination, decoder smithyxml.NodeDecoder) error {
-	var sv []*types.EventDestination
+func awsAwsquery_deserializeDocumentEventDestinationsUnwrapped(v *[]types.EventDestination, decoder smithyxml.NodeDecoder) error {
+	var sv []types.EventDestination
 	if *v == nil {
-		sv = make([]*types.EventDestination, 0)
+		sv = make([]types.EventDestination, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *types.EventDestination
+		var mv types.EventDestination
 		t := decoder.StartEl
 		_ = t
 		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-		if err := awsAwsquery_deserializeDocumentEventDestination(&mv, nodeDecoder); err != nil {
+		destAddr := &mv
+		if err := awsAwsquery_deserializeDocumentEventDestination(&destAddr, nodeDecoder); err != nil {
 			return err
 		}
+		mv = *destAddr
 		sv = append(sv, mv)
 	}
 	*v = sv
@@ -10008,7 +10022,7 @@ func awsAwsquery_deserializeDocumentFromEmailAddressNotVerifiedException(v **typ
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.FromEmailAddress = &xtv
+				sv.FromEmailAddress = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("message", t.Name.Local):
@@ -10024,7 +10038,7 @@ func awsAwsquery_deserializeDocumentFromEmailAddressNotVerifiedException(v **typ
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -10072,7 +10086,7 @@ func awsAwsquery_deserializeDocumentIdentityDkimAttributes(v **types.IdentityDki
 				if err != nil {
 					return fmt.Errorf("expected Enabled to be of type *bool, got %T instead", val)
 				}
-				sv.DkimEnabled = &xtv
+				sv.DkimEnabled = xtv
 			}
 
 		case strings.EqualFold("DkimTokens", t.Name.Local):
@@ -10104,13 +10118,13 @@ func awsAwsquery_deserializeDocumentIdentityDkimAttributes(v **types.IdentityDki
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentIdentityList(v *[]*string, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeDocumentIdentityList(v *[]string, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*string
+	var sv []string
 	if *v == nil {
-		sv = make([]*string, 0)
+		sv = make([]string, 0)
 	} else {
 		sv = *v
 	}
@@ -10128,20 +10142,17 @@ func awsAwsquery_deserializeDocumentIdentityList(v *[]*string, decoder smithyxml
 		decoder = memberDecoder
 		for {
 			if strings.EqualFold("member", t.Name.Local) {
-				var col *string
+				var col string
 				val, done, err := decoder.Value()
 				if err != nil {
 					return err
 				}
 				if done {
-					if val == nil {
-						col = ptr.String("")
-					}
 					break
 				}
 				if val != nil {
 					xtv := string(val)
-					col = &xtv
+					col = xtv
 				}
 				sv = append(sv, col)
 			} else {
@@ -10154,17 +10165,17 @@ func awsAwsquery_deserializeDocumentIdentityList(v *[]*string, decoder smithyxml
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentIdentityListUnwrapped(v *[]*string, decoder smithyxml.NodeDecoder) error {
-	var sv []*string
+func awsAwsquery_deserializeDocumentIdentityListUnwrapped(v *[]string, decoder smithyxml.NodeDecoder) error {
+	var sv []string
 	if *v == nil {
-		sv = make([]*string, 0)
+		sv = make([]string, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *string
+		var mv string
 		t := decoder.StartEl
 		_ = t
 		val, done, err := decoder.Value()
@@ -10172,14 +10183,11 @@ func awsAwsquery_deserializeDocumentIdentityListUnwrapped(v *[]*string, decoder 
 			return err
 		}
 		if done {
-			if val == nil {
-				mv = ptr.String("")
-			}
 			break
 		}
 		if val != nil {
 			xtv := string(val)
-			mv = &xtv
+			mv = xtv
 		}
 		sv = append(sv, mv)
 	}
@@ -10234,7 +10242,7 @@ func awsAwsquery_deserializeDocumentIdentityMailFromDomainAttributes(v **types.I
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.MailFromDomain = &xtv
+				sv.MailFromDomain = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("MailFromDomainStatus", t.Name.Local):
@@ -10295,7 +10303,7 @@ func awsAwsquery_deserializeDocumentIdentityNotificationAttributes(v **types.Ide
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.BounceTopic = &xtv
+				sv.BounceTopic = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("ComplaintTopic", t.Name.Local):
@@ -10311,7 +10319,7 @@ func awsAwsquery_deserializeDocumentIdentityNotificationAttributes(v **types.Ide
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.ComplaintTopic = &xtv
+				sv.ComplaintTopic = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("DeliveryTopic", t.Name.Local):
@@ -10327,7 +10335,7 @@ func awsAwsquery_deserializeDocumentIdentityNotificationAttributes(v **types.Ide
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.DeliveryTopic = &xtv
+				sv.DeliveryTopic = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("ForwardingEnabled", t.Name.Local):
@@ -10343,7 +10351,7 @@ func awsAwsquery_deserializeDocumentIdentityNotificationAttributes(v **types.Ide
 				if err != nil {
 					return fmt.Errorf("expected Enabled to be of type *bool, got %T instead", val)
 				}
-				sv.ForwardingEnabled = &xtv
+				sv.ForwardingEnabled = xtv
 			}
 
 		case strings.EqualFold("HeadersInBounceNotificationsEnabled", t.Name.Local):
@@ -10359,7 +10367,7 @@ func awsAwsquery_deserializeDocumentIdentityNotificationAttributes(v **types.Ide
 				if err != nil {
 					return fmt.Errorf("expected Enabled to be of type *bool, got %T instead", val)
 				}
-				sv.HeadersInBounceNotificationsEnabled = &xtv
+				sv.HeadersInBounceNotificationsEnabled = xtv
 			}
 
 		case strings.EqualFold("HeadersInComplaintNotificationsEnabled", t.Name.Local):
@@ -10375,7 +10383,7 @@ func awsAwsquery_deserializeDocumentIdentityNotificationAttributes(v **types.Ide
 				if err != nil {
 					return fmt.Errorf("expected Enabled to be of type *bool, got %T instead", val)
 				}
-				sv.HeadersInComplaintNotificationsEnabled = &xtv
+				sv.HeadersInComplaintNotificationsEnabled = xtv
 			}
 
 		case strings.EqualFold("HeadersInDeliveryNotificationsEnabled", t.Name.Local):
@@ -10391,7 +10399,7 @@ func awsAwsquery_deserializeDocumentIdentityNotificationAttributes(v **types.Ide
 				if err != nil {
 					return fmt.Errorf("expected Enabled to be of type *bool, got %T instead", val)
 				}
-				sv.HeadersInDeliveryNotificationsEnabled = &xtv
+				sv.HeadersInDeliveryNotificationsEnabled = xtv
 			}
 
 		default:
@@ -10452,7 +10460,7 @@ func awsAwsquery_deserializeDocumentIdentityVerificationAttributes(v **types.Ide
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.VerificationToken = &xtv
+				sv.VerificationToken = ptr.String(xtv)
 			}
 
 		default:
@@ -10500,7 +10508,7 @@ func awsAwsquery_deserializeDocumentInvalidCloudWatchDestinationException(v **ty
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.ConfigurationSetName = &xtv
+				sv.ConfigurationSetName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("EventDestinationName", t.Name.Local):
@@ -10516,7 +10524,7 @@ func awsAwsquery_deserializeDocumentInvalidCloudWatchDestinationException(v **ty
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.EventDestinationName = &xtv
+				sv.EventDestinationName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("message", t.Name.Local):
@@ -10532,7 +10540,7 @@ func awsAwsquery_deserializeDocumentInvalidCloudWatchDestinationException(v **ty
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -10580,7 +10588,7 @@ func awsAwsquery_deserializeDocumentInvalidConfigurationSetException(v **types.I
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -10628,7 +10636,7 @@ func awsAwsquery_deserializeDocumentInvalidDeliveryOptionsException(v **types.In
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -10676,7 +10684,7 @@ func awsAwsquery_deserializeDocumentInvalidFirehoseDestinationException(v **type
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.ConfigurationSetName = &xtv
+				sv.ConfigurationSetName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("EventDestinationName", t.Name.Local):
@@ -10692,7 +10700,7 @@ func awsAwsquery_deserializeDocumentInvalidFirehoseDestinationException(v **type
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.EventDestinationName = &xtv
+				sv.EventDestinationName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("message", t.Name.Local):
@@ -10708,7 +10716,7 @@ func awsAwsquery_deserializeDocumentInvalidFirehoseDestinationException(v **type
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -10756,7 +10764,7 @@ func awsAwsquery_deserializeDocumentInvalidLambdaFunctionException(v **types.Inv
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.FunctionArn = &xtv
+				sv.FunctionArn = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("message", t.Name.Local):
@@ -10772,7 +10780,7 @@ func awsAwsquery_deserializeDocumentInvalidLambdaFunctionException(v **types.Inv
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -10820,7 +10828,7 @@ func awsAwsquery_deserializeDocumentInvalidPolicyException(v **types.InvalidPoli
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -10868,7 +10876,7 @@ func awsAwsquery_deserializeDocumentInvalidRenderingParameterException(v **types
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("TemplateName", t.Name.Local):
@@ -10884,7 +10892,7 @@ func awsAwsquery_deserializeDocumentInvalidRenderingParameterException(v **types
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.TemplateName = &xtv
+				sv.TemplateName = ptr.String(xtv)
 			}
 
 		default:
@@ -10932,7 +10940,7 @@ func awsAwsquery_deserializeDocumentInvalidS3ConfigurationException(v **types.In
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Bucket = &xtv
+				sv.Bucket = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("message", t.Name.Local):
@@ -10948,7 +10956,7 @@ func awsAwsquery_deserializeDocumentInvalidS3ConfigurationException(v **types.In
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -10996,7 +11004,7 @@ func awsAwsquery_deserializeDocumentInvalidSNSDestinationException(v **types.Inv
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.ConfigurationSetName = &xtv
+				sv.ConfigurationSetName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("EventDestinationName", t.Name.Local):
@@ -11012,7 +11020,7 @@ func awsAwsquery_deserializeDocumentInvalidSNSDestinationException(v **types.Inv
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.EventDestinationName = &xtv
+				sv.EventDestinationName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("message", t.Name.Local):
@@ -11028,7 +11036,7 @@ func awsAwsquery_deserializeDocumentInvalidSNSDestinationException(v **types.Inv
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -11076,7 +11084,7 @@ func awsAwsquery_deserializeDocumentInvalidSnsTopicException(v **types.InvalidSn
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Topic", t.Name.Local):
@@ -11092,7 +11100,7 @@ func awsAwsquery_deserializeDocumentInvalidSnsTopicException(v **types.InvalidSn
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Topic = &xtv
+				sv.Topic = ptr.String(xtv)
 			}
 
 		default:
@@ -11140,7 +11148,7 @@ func awsAwsquery_deserializeDocumentInvalidTemplateException(v **types.InvalidTe
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("TemplateName", t.Name.Local):
@@ -11156,7 +11164,7 @@ func awsAwsquery_deserializeDocumentInvalidTemplateException(v **types.InvalidTe
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.TemplateName = &xtv
+				sv.TemplateName = ptr.String(xtv)
 			}
 
 		default:
@@ -11204,7 +11212,7 @@ func awsAwsquery_deserializeDocumentInvalidTrackingOptionsException(v **types.In
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -11252,7 +11260,7 @@ func awsAwsquery_deserializeDocumentKinesisFirehoseDestination(v **types.Kinesis
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.DeliveryStreamARN = &xtv
+				sv.DeliveryStreamARN = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("IAMRoleARN", t.Name.Local):
@@ -11268,7 +11276,7 @@ func awsAwsquery_deserializeDocumentKinesisFirehoseDestination(v **types.Kinesis
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.IAMRoleARN = &xtv
+				sv.IAMRoleARN = ptr.String(xtv)
 			}
 
 		default:
@@ -11316,7 +11324,7 @@ func awsAwsquery_deserializeDocumentLambdaAction(v **types.LambdaAction, decoder
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.FunctionArn = &xtv
+				sv.FunctionArn = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("InvocationType", t.Name.Local):
@@ -11345,7 +11353,7 @@ func awsAwsquery_deserializeDocumentLambdaAction(v **types.LambdaAction, decoder
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.TopicArn = &xtv
+				sv.TopicArn = ptr.String(xtv)
 			}
 
 		default:
@@ -11393,7 +11401,7 @@ func awsAwsquery_deserializeDocumentLimitExceededException(v **types.LimitExceed
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -11406,13 +11414,13 @@ func awsAwsquery_deserializeDocumentLimitExceededException(v **types.LimitExceed
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentMailFromDomainAttributes(v *map[string]*types.IdentityMailFromDomainAttributes, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeDocumentMailFromDomainAttributes(v *map[string]types.IdentityMailFromDomainAttributes, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv map[string]*types.IdentityMailFromDomainAttributes
+	var sv map[string]types.IdentityMailFromDomainAttributes
 	if *v == nil {
-		sv = make(map[string]*types.IdentityMailFromDomainAttributes, 0)
+		sv = make(map[string]types.IdentityMailFromDomainAttributes, 0)
 	} else {
 		sv = *v
 	}
@@ -11436,23 +11444,23 @@ func awsAwsquery_deserializeDocumentMailFromDomainAttributes(v *map[string]*type
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentMailFromDomainAttributesUnwrapped(v *map[string]*types.IdentityMailFromDomainAttributes, decoder smithyxml.NodeDecoder) error {
-	var sv map[string]*types.IdentityMailFromDomainAttributes
+func awsAwsquery_deserializeDocumentMailFromDomainAttributesUnwrapped(v *map[string]types.IdentityMailFromDomainAttributes, decoder smithyxml.NodeDecoder) error {
+	var sv map[string]types.IdentityMailFromDomainAttributes
 	if *v == nil {
-		sv = make(map[string]*types.IdentityMailFromDomainAttributes, 0)
+		sv = make(map[string]types.IdentityMailFromDomainAttributes, 0)
 	} else {
 		sv = *v
 	}
 
-	var ek *string
-	var ev *types.IdentityMailFromDomainAttributes
+	var ek string
+	var ev types.IdentityMailFromDomainAttributes
 	for {
 		t, done, err := decoder.Token()
 		if err != nil {
 			return err
 		}
 		if done {
-			sv[*ek] = ev
+			sv[ek] = ev
 			break
 		}
 		switch {
@@ -11462,21 +11470,21 @@ func awsAwsquery_deserializeDocumentMailFromDomainAttributesUnwrapped(v *map[str
 				return err
 			}
 			if done {
-				if val == nil {
-					ek = ptr.String("")
-				}
 				break
 			}
 			if val != nil {
 				xtv := string(val)
-				ek = &xtv
+				ek = xtv
 			}
 
 		case strings.EqualFold("value", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-			if err := awsAwsquery_deserializeDocumentIdentityMailFromDomainAttributes(&ev, nodeDecoder); err != nil {
+			mapVar := ev
+			destAddr := &mapVar
+			if err := awsAwsquery_deserializeDocumentIdentityMailFromDomainAttributes(&destAddr, nodeDecoder); err != nil {
 				return err
 			}
+			ev = *destAddr
 
 		default:
 			// Do nothing and ignore the unexpected tag element
@@ -11521,7 +11529,7 @@ func awsAwsquery_deserializeDocumentMailFromDomainNotVerifiedException(v **types
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -11569,7 +11577,7 @@ func awsAwsquery_deserializeDocumentMessageRejected(v **types.MessageRejected, d
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -11617,7 +11625,7 @@ func awsAwsquery_deserializeDocumentMissingRenderingAttributeException(v **types
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("TemplateName", t.Name.Local):
@@ -11633,7 +11641,7 @@ func awsAwsquery_deserializeDocumentMissingRenderingAttributeException(v **types
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.TemplateName = &xtv
+				sv.TemplateName = ptr.String(xtv)
 			}
 
 		default:
@@ -11646,13 +11654,13 @@ func awsAwsquery_deserializeDocumentMissingRenderingAttributeException(v **types
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentNotificationAttributes(v *map[string]*types.IdentityNotificationAttributes, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeDocumentNotificationAttributes(v *map[string]types.IdentityNotificationAttributes, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv map[string]*types.IdentityNotificationAttributes
+	var sv map[string]types.IdentityNotificationAttributes
 	if *v == nil {
-		sv = make(map[string]*types.IdentityNotificationAttributes, 0)
+		sv = make(map[string]types.IdentityNotificationAttributes, 0)
 	} else {
 		sv = *v
 	}
@@ -11676,23 +11684,23 @@ func awsAwsquery_deserializeDocumentNotificationAttributes(v *map[string]*types.
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentNotificationAttributesUnwrapped(v *map[string]*types.IdentityNotificationAttributes, decoder smithyxml.NodeDecoder) error {
-	var sv map[string]*types.IdentityNotificationAttributes
+func awsAwsquery_deserializeDocumentNotificationAttributesUnwrapped(v *map[string]types.IdentityNotificationAttributes, decoder smithyxml.NodeDecoder) error {
+	var sv map[string]types.IdentityNotificationAttributes
 	if *v == nil {
-		sv = make(map[string]*types.IdentityNotificationAttributes, 0)
+		sv = make(map[string]types.IdentityNotificationAttributes, 0)
 	} else {
 		sv = *v
 	}
 
-	var ek *string
-	var ev *types.IdentityNotificationAttributes
+	var ek string
+	var ev types.IdentityNotificationAttributes
 	for {
 		t, done, err := decoder.Token()
 		if err != nil {
 			return err
 		}
 		if done {
-			sv[*ek] = ev
+			sv[ek] = ev
 			break
 		}
 		switch {
@@ -11702,21 +11710,21 @@ func awsAwsquery_deserializeDocumentNotificationAttributesUnwrapped(v *map[strin
 				return err
 			}
 			if done {
-				if val == nil {
-					ek = ptr.String("")
-				}
 				break
 			}
 			if val != nil {
 				xtv := string(val)
-				ek = &xtv
+				ek = xtv
 			}
 
 		case strings.EqualFold("value", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-			if err := awsAwsquery_deserializeDocumentIdentityNotificationAttributes(&ev, nodeDecoder); err != nil {
+			mapVar := ev
+			destAddr := &mapVar
+			if err := awsAwsquery_deserializeDocumentIdentityNotificationAttributes(&destAddr, nodeDecoder); err != nil {
 				return err
 			}
+			ev = *destAddr
 
 		default:
 			// Do nothing and ignore the unexpected tag element
@@ -11726,13 +11734,13 @@ func awsAwsquery_deserializeDocumentNotificationAttributesUnwrapped(v *map[strin
 	*v = sv
 	return nil
 }
-func awsAwsquery_deserializeDocumentPolicyMap(v *map[string]*string, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeDocumentPolicyMap(v *map[string]string, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv map[string]*string
+	var sv map[string]string
 	if *v == nil {
-		sv = make(map[string]*string, 0)
+		sv = make(map[string]string, 0)
 	} else {
 		sv = *v
 	}
@@ -11756,23 +11764,23 @@ func awsAwsquery_deserializeDocumentPolicyMap(v *map[string]*string, decoder smi
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentPolicyMapUnwrapped(v *map[string]*string, decoder smithyxml.NodeDecoder) error {
-	var sv map[string]*string
+func awsAwsquery_deserializeDocumentPolicyMapUnwrapped(v *map[string]string, decoder smithyxml.NodeDecoder) error {
+	var sv map[string]string
 	if *v == nil {
-		sv = make(map[string]*string, 0)
+		sv = make(map[string]string, 0)
 	} else {
 		sv = *v
 	}
 
-	var ek *string
-	var ev *string
+	var ek string
+	var ev string
 	for {
 		t, done, err := decoder.Token()
 		if err != nil {
 			return err
 		}
 		if done {
-			sv[*ek] = ev
+			sv[ek] = ev
 			break
 		}
 		switch {
@@ -11782,14 +11790,11 @@ func awsAwsquery_deserializeDocumentPolicyMapUnwrapped(v *map[string]*string, de
 				return err
 			}
 			if done {
-				if val == nil {
-					ek = ptr.String("")
-				}
 				break
 			}
 			if val != nil {
 				xtv := string(val)
-				ek = &xtv
+				ek = xtv
 			}
 
 		case strings.EqualFold("value", t.Name.Local):
@@ -11798,14 +11803,11 @@ func awsAwsquery_deserializeDocumentPolicyMapUnwrapped(v *map[string]*string, de
 				return err
 			}
 			if done {
-				if val == nil {
-					ev = ptr.String("")
-				}
 				break
 			}
 			if val != nil {
 				xtv := string(val)
-				ev = &xtv
+				ev = xtv
 			}
 
 		default:
@@ -11816,13 +11818,13 @@ func awsAwsquery_deserializeDocumentPolicyMapUnwrapped(v *map[string]*string, de
 	*v = sv
 	return nil
 }
-func awsAwsquery_deserializeDocumentPolicyNameList(v *[]*string, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeDocumentPolicyNameList(v *[]string, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*string
+	var sv []string
 	if *v == nil {
-		sv = make([]*string, 0)
+		sv = make([]string, 0)
 	} else {
 		sv = *v
 	}
@@ -11840,20 +11842,17 @@ func awsAwsquery_deserializeDocumentPolicyNameList(v *[]*string, decoder smithyx
 		decoder = memberDecoder
 		for {
 			if strings.EqualFold("member", t.Name.Local) {
-				var col *string
+				var col string
 				val, done, err := decoder.Value()
 				if err != nil {
 					return err
 				}
 				if done {
-					if val == nil {
-						col = ptr.String("")
-					}
 					break
 				}
 				if val != nil {
 					xtv := string(val)
-					col = &xtv
+					col = xtv
 				}
 				sv = append(sv, col)
 			} else {
@@ -11866,17 +11865,17 @@ func awsAwsquery_deserializeDocumentPolicyNameList(v *[]*string, decoder smithyx
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentPolicyNameListUnwrapped(v *[]*string, decoder smithyxml.NodeDecoder) error {
-	var sv []*string
+func awsAwsquery_deserializeDocumentPolicyNameListUnwrapped(v *[]string, decoder smithyxml.NodeDecoder) error {
+	var sv []string
 	if *v == nil {
-		sv = make([]*string, 0)
+		sv = make([]string, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *string
+		var mv string
 		t := decoder.StartEl
 		_ = t
 		val, done, err := decoder.Value()
@@ -11884,14 +11883,11 @@ func awsAwsquery_deserializeDocumentPolicyNameListUnwrapped(v *[]*string, decode
 			return err
 		}
 		if done {
-			if val == nil {
-				mv = ptr.String("")
-			}
 			break
 		}
 		if val != nil {
 			xtv := string(val)
-			mv = &xtv
+			mv = xtv
 		}
 		sv = append(sv, mv)
 	}
@@ -11933,7 +11929,7 @@ func awsAwsquery_deserializeDocumentProductionAccessNotGrantedException(v **type
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -12020,13 +12016,13 @@ func awsAwsquery_deserializeDocumentReceiptAction(v **types.ReceiptAction, decod
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentReceiptActionsList(v *[]*types.ReceiptAction, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeDocumentReceiptActionsList(v *[]types.ReceiptAction, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*types.ReceiptAction
+	var sv []types.ReceiptAction
 	if *v == nil {
-		sv = make([]*types.ReceiptAction, 0)
+		sv = make([]types.ReceiptAction, 0)
 	} else {
 		sv = *v
 	}
@@ -12042,11 +12038,13 @@ func awsAwsquery_deserializeDocumentReceiptActionsList(v *[]*types.ReceiptAction
 		}
 		for {
 			if strings.EqualFold("member", t.Name.Local) {
-				var col *types.ReceiptAction
+				var col types.ReceiptAction
 				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				if err := awsAwsquery_deserializeDocumentReceiptAction(&col, nodeDecoder); err != nil {
+				destAddr := &col
+				if err := awsAwsquery_deserializeDocumentReceiptAction(&destAddr, nodeDecoder); err != nil {
 					return err
 				}
+				col = *destAddr
 				sv = append(sv, col)
 				break
 			} else {
@@ -12059,23 +12057,25 @@ func awsAwsquery_deserializeDocumentReceiptActionsList(v *[]*types.ReceiptAction
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentReceiptActionsListUnwrapped(v *[]*types.ReceiptAction, decoder smithyxml.NodeDecoder) error {
-	var sv []*types.ReceiptAction
+func awsAwsquery_deserializeDocumentReceiptActionsListUnwrapped(v *[]types.ReceiptAction, decoder smithyxml.NodeDecoder) error {
+	var sv []types.ReceiptAction
 	if *v == nil {
-		sv = make([]*types.ReceiptAction, 0)
+		sv = make([]types.ReceiptAction, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *types.ReceiptAction
+		var mv types.ReceiptAction
 		t := decoder.StartEl
 		_ = t
 		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-		if err := awsAwsquery_deserializeDocumentReceiptAction(&mv, nodeDecoder); err != nil {
+		destAddr := &mv
+		if err := awsAwsquery_deserializeDocumentReceiptAction(&destAddr, nodeDecoder); err != nil {
 			return err
 		}
+		mv = *destAddr
 		sv = append(sv, mv)
 	}
 	*v = sv
@@ -12122,7 +12122,7 @@ func awsAwsquery_deserializeDocumentReceiptFilter(v **types.ReceiptFilter, decod
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Name = &xtv
+				sv.Name = ptr.String(xtv)
 			}
 
 		default:
@@ -12135,13 +12135,13 @@ func awsAwsquery_deserializeDocumentReceiptFilter(v **types.ReceiptFilter, decod
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentReceiptFilterList(v *[]*types.ReceiptFilter, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeDocumentReceiptFilterList(v *[]types.ReceiptFilter, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*types.ReceiptFilter
+	var sv []types.ReceiptFilter
 	if *v == nil {
-		sv = make([]*types.ReceiptFilter, 0)
+		sv = make([]types.ReceiptFilter, 0)
 	} else {
 		sv = *v
 	}
@@ -12157,11 +12157,13 @@ func awsAwsquery_deserializeDocumentReceiptFilterList(v *[]*types.ReceiptFilter,
 		}
 		for {
 			if strings.EqualFold("member", t.Name.Local) {
-				var col *types.ReceiptFilter
+				var col types.ReceiptFilter
 				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				if err := awsAwsquery_deserializeDocumentReceiptFilter(&col, nodeDecoder); err != nil {
+				destAddr := &col
+				if err := awsAwsquery_deserializeDocumentReceiptFilter(&destAddr, nodeDecoder); err != nil {
 					return err
 				}
+				col = *destAddr
 				sv = append(sv, col)
 				break
 			} else {
@@ -12174,23 +12176,25 @@ func awsAwsquery_deserializeDocumentReceiptFilterList(v *[]*types.ReceiptFilter,
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentReceiptFilterListUnwrapped(v *[]*types.ReceiptFilter, decoder smithyxml.NodeDecoder) error {
-	var sv []*types.ReceiptFilter
+func awsAwsquery_deserializeDocumentReceiptFilterListUnwrapped(v *[]types.ReceiptFilter, decoder smithyxml.NodeDecoder) error {
+	var sv []types.ReceiptFilter
 	if *v == nil {
-		sv = make([]*types.ReceiptFilter, 0)
+		sv = make([]types.ReceiptFilter, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *types.ReceiptFilter
+		var mv types.ReceiptFilter
 		t := decoder.StartEl
 		_ = t
 		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-		if err := awsAwsquery_deserializeDocumentReceiptFilter(&mv, nodeDecoder); err != nil {
+		destAddr := &mv
+		if err := awsAwsquery_deserializeDocumentReceiptFilter(&destAddr, nodeDecoder); err != nil {
 			return err
 		}
+		mv = *destAddr
 		sv = append(sv, mv)
 	}
 	*v = sv
@@ -12231,7 +12235,7 @@ func awsAwsquery_deserializeDocumentReceiptIpFilter(v **types.ReceiptIpFilter, d
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Cidr = &xtv
+				sv.Cidr = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Policy", t.Name.Local):
@@ -12298,7 +12302,7 @@ func awsAwsquery_deserializeDocumentReceiptRule(v **types.ReceiptRule, decoder s
 				if err != nil {
 					return fmt.Errorf("expected Enabled to be of type *bool, got %T instead", val)
 				}
-				sv.Enabled = &xtv
+				sv.Enabled = xtv
 			}
 
 		case strings.EqualFold("Name", t.Name.Local):
@@ -12314,7 +12318,7 @@ func awsAwsquery_deserializeDocumentReceiptRule(v **types.ReceiptRule, decoder s
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Name = &xtv
+				sv.Name = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Recipients", t.Name.Local):
@@ -12336,7 +12340,7 @@ func awsAwsquery_deserializeDocumentReceiptRule(v **types.ReceiptRule, decoder s
 				if err != nil {
 					return fmt.Errorf("expected Enabled to be of type *bool, got %T instead", val)
 				}
-				sv.ScanEnabled = &xtv
+				sv.ScanEnabled = xtv
 			}
 
 		case strings.EqualFold("TlsPolicy", t.Name.Local):
@@ -12398,7 +12402,7 @@ func awsAwsquery_deserializeDocumentReceiptRuleSetMetadata(v **types.ReceiptRule
 				if err != nil {
 					return err
 				}
-				sv.CreatedTimestamp = &t
+				sv.CreatedTimestamp = ptr.Time(t)
 			}
 
 		case strings.EqualFold("Name", t.Name.Local):
@@ -12414,7 +12418,7 @@ func awsAwsquery_deserializeDocumentReceiptRuleSetMetadata(v **types.ReceiptRule
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Name = &xtv
+				sv.Name = ptr.String(xtv)
 			}
 
 		default:
@@ -12427,13 +12431,13 @@ func awsAwsquery_deserializeDocumentReceiptRuleSetMetadata(v **types.ReceiptRule
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentReceiptRuleSetsLists(v *[]*types.ReceiptRuleSetMetadata, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeDocumentReceiptRuleSetsLists(v *[]types.ReceiptRuleSetMetadata, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*types.ReceiptRuleSetMetadata
+	var sv []types.ReceiptRuleSetMetadata
 	if *v == nil {
-		sv = make([]*types.ReceiptRuleSetMetadata, 0)
+		sv = make([]types.ReceiptRuleSetMetadata, 0)
 	} else {
 		sv = *v
 	}
@@ -12449,11 +12453,13 @@ func awsAwsquery_deserializeDocumentReceiptRuleSetsLists(v *[]*types.ReceiptRule
 		}
 		for {
 			if strings.EqualFold("member", t.Name.Local) {
-				var col *types.ReceiptRuleSetMetadata
+				var col types.ReceiptRuleSetMetadata
 				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				if err := awsAwsquery_deserializeDocumentReceiptRuleSetMetadata(&col, nodeDecoder); err != nil {
+				destAddr := &col
+				if err := awsAwsquery_deserializeDocumentReceiptRuleSetMetadata(&destAddr, nodeDecoder); err != nil {
 					return err
 				}
+				col = *destAddr
 				sv = append(sv, col)
 				break
 			} else {
@@ -12466,35 +12472,37 @@ func awsAwsquery_deserializeDocumentReceiptRuleSetsLists(v *[]*types.ReceiptRule
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentReceiptRuleSetsListsUnwrapped(v *[]*types.ReceiptRuleSetMetadata, decoder smithyxml.NodeDecoder) error {
-	var sv []*types.ReceiptRuleSetMetadata
+func awsAwsquery_deserializeDocumentReceiptRuleSetsListsUnwrapped(v *[]types.ReceiptRuleSetMetadata, decoder smithyxml.NodeDecoder) error {
+	var sv []types.ReceiptRuleSetMetadata
 	if *v == nil {
-		sv = make([]*types.ReceiptRuleSetMetadata, 0)
+		sv = make([]types.ReceiptRuleSetMetadata, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *types.ReceiptRuleSetMetadata
+		var mv types.ReceiptRuleSetMetadata
 		t := decoder.StartEl
 		_ = t
 		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-		if err := awsAwsquery_deserializeDocumentReceiptRuleSetMetadata(&mv, nodeDecoder); err != nil {
+		destAddr := &mv
+		if err := awsAwsquery_deserializeDocumentReceiptRuleSetMetadata(&destAddr, nodeDecoder); err != nil {
 			return err
 		}
+		mv = *destAddr
 		sv = append(sv, mv)
 	}
 	*v = sv
 	return nil
 }
-func awsAwsquery_deserializeDocumentReceiptRulesList(v *[]*types.ReceiptRule, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeDocumentReceiptRulesList(v *[]types.ReceiptRule, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*types.ReceiptRule
+	var sv []types.ReceiptRule
 	if *v == nil {
-		sv = make([]*types.ReceiptRule, 0)
+		sv = make([]types.ReceiptRule, 0)
 	} else {
 		sv = *v
 	}
@@ -12510,11 +12518,13 @@ func awsAwsquery_deserializeDocumentReceiptRulesList(v *[]*types.ReceiptRule, de
 		}
 		for {
 			if strings.EqualFold("member", t.Name.Local) {
-				var col *types.ReceiptRule
+				var col types.ReceiptRule
 				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				if err := awsAwsquery_deserializeDocumentReceiptRule(&col, nodeDecoder); err != nil {
+				destAddr := &col
+				if err := awsAwsquery_deserializeDocumentReceiptRule(&destAddr, nodeDecoder); err != nil {
 					return err
 				}
+				col = *destAddr
 				sv = append(sv, col)
 				break
 			} else {
@@ -12527,35 +12537,37 @@ func awsAwsquery_deserializeDocumentReceiptRulesList(v *[]*types.ReceiptRule, de
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentReceiptRulesListUnwrapped(v *[]*types.ReceiptRule, decoder smithyxml.NodeDecoder) error {
-	var sv []*types.ReceiptRule
+func awsAwsquery_deserializeDocumentReceiptRulesListUnwrapped(v *[]types.ReceiptRule, decoder smithyxml.NodeDecoder) error {
+	var sv []types.ReceiptRule
 	if *v == nil {
-		sv = make([]*types.ReceiptRule, 0)
+		sv = make([]types.ReceiptRule, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *types.ReceiptRule
+		var mv types.ReceiptRule
 		t := decoder.StartEl
 		_ = t
 		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-		if err := awsAwsquery_deserializeDocumentReceiptRule(&mv, nodeDecoder); err != nil {
+		destAddr := &mv
+		if err := awsAwsquery_deserializeDocumentReceiptRule(&destAddr, nodeDecoder); err != nil {
 			return err
 		}
+		mv = *destAddr
 		sv = append(sv, mv)
 	}
 	*v = sv
 	return nil
 }
-func awsAwsquery_deserializeDocumentRecipientsList(v *[]*string, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeDocumentRecipientsList(v *[]string, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*string
+	var sv []string
 	if *v == nil {
-		sv = make([]*string, 0)
+		sv = make([]string, 0)
 	} else {
 		sv = *v
 	}
@@ -12573,20 +12585,17 @@ func awsAwsquery_deserializeDocumentRecipientsList(v *[]*string, decoder smithyx
 		decoder = memberDecoder
 		for {
 			if strings.EqualFold("member", t.Name.Local) {
-				var col *string
+				var col string
 				val, done, err := decoder.Value()
 				if err != nil {
 					return err
 				}
 				if done {
-					if val == nil {
-						col = ptr.String("")
-					}
 					break
 				}
 				if val != nil {
 					xtv := string(val)
-					col = &xtv
+					col = xtv
 				}
 				sv = append(sv, col)
 			} else {
@@ -12599,17 +12608,17 @@ func awsAwsquery_deserializeDocumentRecipientsList(v *[]*string, decoder smithyx
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentRecipientsListUnwrapped(v *[]*string, decoder smithyxml.NodeDecoder) error {
-	var sv []*string
+func awsAwsquery_deserializeDocumentRecipientsListUnwrapped(v *[]string, decoder smithyxml.NodeDecoder) error {
+	var sv []string
 	if *v == nil {
-		sv = make([]*string, 0)
+		sv = make([]string, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *string
+		var mv string
 		t := decoder.StartEl
 		_ = t
 		val, done, err := decoder.Value()
@@ -12617,14 +12626,11 @@ func awsAwsquery_deserializeDocumentRecipientsListUnwrapped(v *[]*string, decode
 			return err
 		}
 		if done {
-			if val == nil {
-				mv = ptr.String("")
-			}
 			break
 		}
 		if val != nil {
 			xtv := string(val)
-			mv = &xtv
+			mv = xtv
 		}
 		sv = append(sv, mv)
 	}
@@ -12667,7 +12673,7 @@ func awsAwsquery_deserializeDocumentReputationOptions(v **types.ReputationOption
 				if err != nil {
 					return err
 				}
-				sv.LastFreshStart = &t
+				sv.LastFreshStart = ptr.Time(t)
 			}
 
 		case strings.EqualFold("ReputationMetricsEnabled", t.Name.Local):
@@ -12683,7 +12689,7 @@ func awsAwsquery_deserializeDocumentReputationOptions(v **types.ReputationOption
 				if err != nil {
 					return fmt.Errorf("expected Enabled to be of type *bool, got %T instead", val)
 				}
-				sv.ReputationMetricsEnabled = &xtv
+				sv.ReputationMetricsEnabled = xtv
 			}
 
 		case strings.EqualFold("SendingEnabled", t.Name.Local):
@@ -12699,7 +12705,7 @@ func awsAwsquery_deserializeDocumentReputationOptions(v **types.ReputationOption
 				if err != nil {
 					return fmt.Errorf("expected Enabled to be of type *bool, got %T instead", val)
 				}
-				sv.SendingEnabled = &xtv
+				sv.SendingEnabled = xtv
 			}
 
 		default:
@@ -12747,7 +12753,7 @@ func awsAwsquery_deserializeDocumentRuleDoesNotExistException(v **types.RuleDoes
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Name", t.Name.Local):
@@ -12763,7 +12769,7 @@ func awsAwsquery_deserializeDocumentRuleDoesNotExistException(v **types.RuleDoes
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Name = &xtv
+				sv.Name = ptr.String(xtv)
 			}
 
 		default:
@@ -12811,7 +12817,7 @@ func awsAwsquery_deserializeDocumentRuleSetDoesNotExistException(v **types.RuleS
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Name", t.Name.Local):
@@ -12827,7 +12833,7 @@ func awsAwsquery_deserializeDocumentRuleSetDoesNotExistException(v **types.RuleS
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Name = &xtv
+				sv.Name = ptr.String(xtv)
 			}
 
 		default:
@@ -12875,7 +12881,7 @@ func awsAwsquery_deserializeDocumentS3Action(v **types.S3Action, decoder smithyx
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.BucketName = &xtv
+				sv.BucketName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("KmsKeyArn", t.Name.Local):
@@ -12891,7 +12897,7 @@ func awsAwsquery_deserializeDocumentS3Action(v **types.S3Action, decoder smithyx
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.KmsKeyArn = &xtv
+				sv.KmsKeyArn = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("ObjectKeyPrefix", t.Name.Local):
@@ -12907,7 +12913,7 @@ func awsAwsquery_deserializeDocumentS3Action(v **types.S3Action, decoder smithyx
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.ObjectKeyPrefix = &xtv
+				sv.ObjectKeyPrefix = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("TopicArn", t.Name.Local):
@@ -12923,7 +12929,7 @@ func awsAwsquery_deserializeDocumentS3Action(v **types.S3Action, decoder smithyx
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.TopicArn = &xtv
+				sv.TopicArn = ptr.String(xtv)
 			}
 
 		default:
@@ -12972,7 +12978,7 @@ func awsAwsquery_deserializeDocumentSendDataPoint(v **types.SendDataPoint, decod
 				if err != nil {
 					return err
 				}
-				sv.Bounces = &i64
+				sv.Bounces = i64
 			}
 
 		case strings.EqualFold("Complaints", t.Name.Local):
@@ -12989,7 +12995,7 @@ func awsAwsquery_deserializeDocumentSendDataPoint(v **types.SendDataPoint, decod
 				if err != nil {
 					return err
 				}
-				sv.Complaints = &i64
+				sv.Complaints = i64
 			}
 
 		case strings.EqualFold("DeliveryAttempts", t.Name.Local):
@@ -13006,7 +13012,7 @@ func awsAwsquery_deserializeDocumentSendDataPoint(v **types.SendDataPoint, decod
 				if err != nil {
 					return err
 				}
-				sv.DeliveryAttempts = &i64
+				sv.DeliveryAttempts = i64
 			}
 
 		case strings.EqualFold("Rejects", t.Name.Local):
@@ -13023,7 +13029,7 @@ func awsAwsquery_deserializeDocumentSendDataPoint(v **types.SendDataPoint, decod
 				if err != nil {
 					return err
 				}
-				sv.Rejects = &i64
+				sv.Rejects = i64
 			}
 
 		case strings.EqualFold("Timestamp", t.Name.Local):
@@ -13040,7 +13046,7 @@ func awsAwsquery_deserializeDocumentSendDataPoint(v **types.SendDataPoint, decod
 				if err != nil {
 					return err
 				}
-				sv.Timestamp = &t
+				sv.Timestamp = ptr.Time(t)
 			}
 
 		default:
@@ -13053,13 +13059,13 @@ func awsAwsquery_deserializeDocumentSendDataPoint(v **types.SendDataPoint, decod
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentSendDataPointList(v *[]*types.SendDataPoint, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeDocumentSendDataPointList(v *[]types.SendDataPoint, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*types.SendDataPoint
+	var sv []types.SendDataPoint
 	if *v == nil {
-		sv = make([]*types.SendDataPoint, 0)
+		sv = make([]types.SendDataPoint, 0)
 	} else {
 		sv = *v
 	}
@@ -13075,11 +13081,13 @@ func awsAwsquery_deserializeDocumentSendDataPointList(v *[]*types.SendDataPoint,
 		}
 		for {
 			if strings.EqualFold("member", t.Name.Local) {
-				var col *types.SendDataPoint
+				var col types.SendDataPoint
 				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				if err := awsAwsquery_deserializeDocumentSendDataPoint(&col, nodeDecoder); err != nil {
+				destAddr := &col
+				if err := awsAwsquery_deserializeDocumentSendDataPoint(&destAddr, nodeDecoder); err != nil {
 					return err
 				}
+				col = *destAddr
 				sv = append(sv, col)
 				break
 			} else {
@@ -13092,23 +13100,25 @@ func awsAwsquery_deserializeDocumentSendDataPointList(v *[]*types.SendDataPoint,
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentSendDataPointListUnwrapped(v *[]*types.SendDataPoint, decoder smithyxml.NodeDecoder) error {
-	var sv []*types.SendDataPoint
+func awsAwsquery_deserializeDocumentSendDataPointListUnwrapped(v *[]types.SendDataPoint, decoder smithyxml.NodeDecoder) error {
+	var sv []types.SendDataPoint
 	if *v == nil {
-		sv = make([]*types.SendDataPoint, 0)
+		sv = make([]types.SendDataPoint, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *types.SendDataPoint
+		var mv types.SendDataPoint
 		t := decoder.StartEl
 		_ = t
 		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-		if err := awsAwsquery_deserializeDocumentSendDataPoint(&mv, nodeDecoder); err != nil {
+		destAddr := &mv
+		if err := awsAwsquery_deserializeDocumentSendDataPoint(&destAddr, nodeDecoder); err != nil {
 			return err
 		}
+		mv = *destAddr
 		sv = append(sv, mv)
 	}
 	*v = sv
@@ -13162,7 +13172,7 @@ func awsAwsquery_deserializeDocumentSNSAction(v **types.SNSAction, decoder smith
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.TopicArn = &xtv
+				sv.TopicArn = ptr.String(xtv)
 			}
 
 		default:
@@ -13210,7 +13220,7 @@ func awsAwsquery_deserializeDocumentSNSDestination(v **types.SNSDestination, dec
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.TopicARN = &xtv
+				sv.TopicARN = ptr.String(xtv)
 			}
 
 		default:
@@ -13271,7 +13281,7 @@ func awsAwsquery_deserializeDocumentStopAction(v **types.StopAction, decoder smi
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.TopicArn = &xtv
+				sv.TopicArn = ptr.String(xtv)
 			}
 
 		default:
@@ -13319,7 +13329,7 @@ func awsAwsquery_deserializeDocumentTemplate(v **types.Template, decoder smithyx
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.HtmlPart = &xtv
+				sv.HtmlPart = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("SubjectPart", t.Name.Local):
@@ -13335,7 +13345,7 @@ func awsAwsquery_deserializeDocumentTemplate(v **types.Template, decoder smithyx
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.SubjectPart = &xtv
+				sv.SubjectPart = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("TemplateName", t.Name.Local):
@@ -13351,7 +13361,7 @@ func awsAwsquery_deserializeDocumentTemplate(v **types.Template, decoder smithyx
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.TemplateName = &xtv
+				sv.TemplateName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("TextPart", t.Name.Local):
@@ -13367,7 +13377,7 @@ func awsAwsquery_deserializeDocumentTemplate(v **types.Template, decoder smithyx
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.TextPart = &xtv
+				sv.TextPart = ptr.String(xtv)
 			}
 
 		default:
@@ -13415,7 +13425,7 @@ func awsAwsquery_deserializeDocumentTemplateDoesNotExistException(v **types.Temp
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("TemplateName", t.Name.Local):
@@ -13431,7 +13441,7 @@ func awsAwsquery_deserializeDocumentTemplateDoesNotExistException(v **types.Temp
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.TemplateName = &xtv
+				sv.TemplateName = ptr.String(xtv)
 			}
 
 		default:
@@ -13480,7 +13490,7 @@ func awsAwsquery_deserializeDocumentTemplateMetadata(v **types.TemplateMetadata,
 				if err != nil {
 					return err
 				}
-				sv.CreatedTimestamp = &t
+				sv.CreatedTimestamp = ptr.Time(t)
 			}
 
 		case strings.EqualFold("Name", t.Name.Local):
@@ -13496,7 +13506,7 @@ func awsAwsquery_deserializeDocumentTemplateMetadata(v **types.TemplateMetadata,
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Name = &xtv
+				sv.Name = ptr.String(xtv)
 			}
 
 		default:
@@ -13509,13 +13519,13 @@ func awsAwsquery_deserializeDocumentTemplateMetadata(v **types.TemplateMetadata,
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentTemplateMetadataList(v *[]*types.TemplateMetadata, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeDocumentTemplateMetadataList(v *[]types.TemplateMetadata, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*types.TemplateMetadata
+	var sv []types.TemplateMetadata
 	if *v == nil {
-		sv = make([]*types.TemplateMetadata, 0)
+		sv = make([]types.TemplateMetadata, 0)
 	} else {
 		sv = *v
 	}
@@ -13531,11 +13541,13 @@ func awsAwsquery_deserializeDocumentTemplateMetadataList(v *[]*types.TemplateMet
 		}
 		for {
 			if strings.EqualFold("member", t.Name.Local) {
-				var col *types.TemplateMetadata
+				var col types.TemplateMetadata
 				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				if err := awsAwsquery_deserializeDocumentTemplateMetadata(&col, nodeDecoder); err != nil {
+				destAddr := &col
+				if err := awsAwsquery_deserializeDocumentTemplateMetadata(&destAddr, nodeDecoder); err != nil {
 					return err
 				}
+				col = *destAddr
 				sv = append(sv, col)
 				break
 			} else {
@@ -13548,23 +13560,25 @@ func awsAwsquery_deserializeDocumentTemplateMetadataList(v *[]*types.TemplateMet
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentTemplateMetadataListUnwrapped(v *[]*types.TemplateMetadata, decoder smithyxml.NodeDecoder) error {
-	var sv []*types.TemplateMetadata
+func awsAwsquery_deserializeDocumentTemplateMetadataListUnwrapped(v *[]types.TemplateMetadata, decoder smithyxml.NodeDecoder) error {
+	var sv []types.TemplateMetadata
 	if *v == nil {
-		sv = make([]*types.TemplateMetadata, 0)
+		sv = make([]types.TemplateMetadata, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *types.TemplateMetadata
+		var mv types.TemplateMetadata
 		t := decoder.StartEl
 		_ = t
 		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-		if err := awsAwsquery_deserializeDocumentTemplateMetadata(&mv, nodeDecoder); err != nil {
+		destAddr := &mv
+		if err := awsAwsquery_deserializeDocumentTemplateMetadata(&destAddr, nodeDecoder); err != nil {
 			return err
 		}
+		mv = *destAddr
 		sv = append(sv, mv)
 	}
 	*v = sv
@@ -13605,7 +13619,7 @@ func awsAwsquery_deserializeDocumentTrackingOptions(v **types.TrackingOptions, d
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.CustomRedirectDomain = &xtv
+				sv.CustomRedirectDomain = ptr.String(xtv)
 			}
 
 		default:
@@ -13653,7 +13667,7 @@ func awsAwsquery_deserializeDocumentTrackingOptionsAlreadyExistsException(v **ty
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.ConfigurationSetName = &xtv
+				sv.ConfigurationSetName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("message", t.Name.Local):
@@ -13669,7 +13683,7 @@ func awsAwsquery_deserializeDocumentTrackingOptionsAlreadyExistsException(v **ty
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -13717,7 +13731,7 @@ func awsAwsquery_deserializeDocumentTrackingOptionsDoesNotExistException(v **typ
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.ConfigurationSetName = &xtv
+				sv.ConfigurationSetName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("message", t.Name.Local):
@@ -13733,7 +13747,7 @@ func awsAwsquery_deserializeDocumentTrackingOptionsDoesNotExistException(v **typ
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -13746,13 +13760,13 @@ func awsAwsquery_deserializeDocumentTrackingOptionsDoesNotExistException(v **typ
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentVerificationAttributes(v *map[string]*types.IdentityVerificationAttributes, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeDocumentVerificationAttributes(v *map[string]types.IdentityVerificationAttributes, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv map[string]*types.IdentityVerificationAttributes
+	var sv map[string]types.IdentityVerificationAttributes
 	if *v == nil {
-		sv = make(map[string]*types.IdentityVerificationAttributes, 0)
+		sv = make(map[string]types.IdentityVerificationAttributes, 0)
 	} else {
 		sv = *v
 	}
@@ -13776,23 +13790,23 @@ func awsAwsquery_deserializeDocumentVerificationAttributes(v *map[string]*types.
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentVerificationAttributesUnwrapped(v *map[string]*types.IdentityVerificationAttributes, decoder smithyxml.NodeDecoder) error {
-	var sv map[string]*types.IdentityVerificationAttributes
+func awsAwsquery_deserializeDocumentVerificationAttributesUnwrapped(v *map[string]types.IdentityVerificationAttributes, decoder smithyxml.NodeDecoder) error {
+	var sv map[string]types.IdentityVerificationAttributes
 	if *v == nil {
-		sv = make(map[string]*types.IdentityVerificationAttributes, 0)
+		sv = make(map[string]types.IdentityVerificationAttributes, 0)
 	} else {
 		sv = *v
 	}
 
-	var ek *string
-	var ev *types.IdentityVerificationAttributes
+	var ek string
+	var ev types.IdentityVerificationAttributes
 	for {
 		t, done, err := decoder.Token()
 		if err != nil {
 			return err
 		}
 		if done {
-			sv[*ek] = ev
+			sv[ek] = ev
 			break
 		}
 		switch {
@@ -13802,21 +13816,21 @@ func awsAwsquery_deserializeDocumentVerificationAttributesUnwrapped(v *map[strin
 				return err
 			}
 			if done {
-				if val == nil {
-					ek = ptr.String("")
-				}
 				break
 			}
 			if val != nil {
 				xtv := string(val)
-				ek = &xtv
+				ek = xtv
 			}
 
 		case strings.EqualFold("value", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-			if err := awsAwsquery_deserializeDocumentIdentityVerificationAttributes(&ev, nodeDecoder); err != nil {
+			mapVar := ev
+			destAddr := &mapVar
+			if err := awsAwsquery_deserializeDocumentIdentityVerificationAttributes(&destAddr, nodeDecoder); err != nil {
 				return err
 			}
+			ev = *destAddr
 
 		default:
 			// Do nothing and ignore the unexpected tag element
@@ -13826,13 +13840,13 @@ func awsAwsquery_deserializeDocumentVerificationAttributesUnwrapped(v *map[strin
 	*v = sv
 	return nil
 }
-func awsAwsquery_deserializeDocumentVerificationTokenList(v *[]*string, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeDocumentVerificationTokenList(v *[]string, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*string
+	var sv []string
 	if *v == nil {
-		sv = make([]*string, 0)
+		sv = make([]string, 0)
 	} else {
 		sv = *v
 	}
@@ -13850,20 +13864,17 @@ func awsAwsquery_deserializeDocumentVerificationTokenList(v *[]*string, decoder 
 		decoder = memberDecoder
 		for {
 			if strings.EqualFold("member", t.Name.Local) {
-				var col *string
+				var col string
 				val, done, err := decoder.Value()
 				if err != nil {
 					return err
 				}
 				if done {
-					if val == nil {
-						col = ptr.String("")
-					}
 					break
 				}
 				if val != nil {
 					xtv := string(val)
-					col = &xtv
+					col = xtv
 				}
 				sv = append(sv, col)
 			} else {
@@ -13876,17 +13887,17 @@ func awsAwsquery_deserializeDocumentVerificationTokenList(v *[]*string, decoder 
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentVerificationTokenListUnwrapped(v *[]*string, decoder smithyxml.NodeDecoder) error {
-	var sv []*string
+func awsAwsquery_deserializeDocumentVerificationTokenListUnwrapped(v *[]string, decoder smithyxml.NodeDecoder) error {
+	var sv []string
 	if *v == nil {
-		sv = make([]*string, 0)
+		sv = make([]string, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *string
+		var mv string
 		t := decoder.StartEl
 		_ = t
 		val, done, err := decoder.Value()
@@ -13894,14 +13905,11 @@ func awsAwsquery_deserializeDocumentVerificationTokenListUnwrapped(v *[]*string,
 			return err
 		}
 		if done {
-			if val == nil {
-				mv = ptr.String("")
-			}
 			break
 		}
 		if val != nil {
 			xtv := string(val)
-			mv = &xtv
+			mv = xtv
 		}
 		sv = append(sv, mv)
 	}
@@ -13943,7 +13951,7 @@ func awsAwsquery_deserializeDocumentWorkmailAction(v **types.WorkmailAction, dec
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.OrganizationArn = &xtv
+				sv.OrganizationArn = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("TopicArn", t.Name.Local):
@@ -13959,7 +13967,7 @@ func awsAwsquery_deserializeDocumentWorkmailAction(v **types.WorkmailAction, dec
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.TopicArn = &xtv
+				sv.TopicArn = ptr.String(xtv)
 			}
 
 		default:
@@ -14835,7 +14843,7 @@ func awsAwsquery_deserializeOpDocumentGetAccountSendingEnabledOutput(v **GetAcco
 				if err != nil {
 					return fmt.Errorf("expected Enabled to be of type *bool, got %T instead", val)
 				}
-				sv.Enabled = &xtv
+				sv.Enabled = xtv
 			}
 
 		default:
@@ -14883,7 +14891,7 @@ func awsAwsquery_deserializeOpDocumentGetCustomVerificationEmailTemplateOutput(v
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.FailureRedirectionURL = &xtv
+				sv.FailureRedirectionURL = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("FromEmailAddress", t.Name.Local):
@@ -14899,7 +14907,7 @@ func awsAwsquery_deserializeOpDocumentGetCustomVerificationEmailTemplateOutput(v
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.FromEmailAddress = &xtv
+				sv.FromEmailAddress = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("SuccessRedirectionURL", t.Name.Local):
@@ -14915,7 +14923,7 @@ func awsAwsquery_deserializeOpDocumentGetCustomVerificationEmailTemplateOutput(v
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.SuccessRedirectionURL = &xtv
+				sv.SuccessRedirectionURL = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("TemplateContent", t.Name.Local):
@@ -14931,7 +14939,7 @@ func awsAwsquery_deserializeOpDocumentGetCustomVerificationEmailTemplateOutput(v
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.TemplateContent = &xtv
+				sv.TemplateContent = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("TemplateName", t.Name.Local):
@@ -14947,7 +14955,7 @@ func awsAwsquery_deserializeOpDocumentGetCustomVerificationEmailTemplateOutput(v
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.TemplateName = &xtv
+				sv.TemplateName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("TemplateSubject", t.Name.Local):
@@ -14963,7 +14971,7 @@ func awsAwsquery_deserializeOpDocumentGetCustomVerificationEmailTemplateOutput(v
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.TemplateSubject = &xtv
+				sv.TemplateSubject = ptr.String(xtv)
 			}
 
 		default:
@@ -15202,7 +15210,7 @@ func awsAwsquery_deserializeOpDocumentGetSendQuotaOutput(v **GetSendQuotaOutput,
 				if err != nil {
 					return err
 				}
-				sv.Max24HourSend = &f64
+				sv.Max24HourSend = f64
 			}
 
 		case strings.EqualFold("MaxSendRate", t.Name.Local):
@@ -15219,7 +15227,7 @@ func awsAwsquery_deserializeOpDocumentGetSendQuotaOutput(v **GetSendQuotaOutput,
 				if err != nil {
 					return err
 				}
-				sv.MaxSendRate = &f64
+				sv.MaxSendRate = f64
 			}
 
 		case strings.EqualFold("SentLast24Hours", t.Name.Local):
@@ -15236,7 +15244,7 @@ func awsAwsquery_deserializeOpDocumentGetSendQuotaOutput(v **GetSendQuotaOutput,
 				if err != nil {
 					return err
 				}
-				sv.SentLast24Hours = &f64
+				sv.SentLast24Hours = f64
 			}
 
 		default:
@@ -15366,7 +15374,7 @@ func awsAwsquery_deserializeOpDocumentListConfigurationSetsOutput(v **ListConfig
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.NextToken = &xtv
+				sv.NextToken = ptr.String(xtv)
 			}
 
 		default:
@@ -15420,7 +15428,7 @@ func awsAwsquery_deserializeOpDocumentListCustomVerificationEmailTemplatesOutput
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.NextToken = &xtv
+				sv.NextToken = ptr.String(xtv)
 			}
 
 		default:
@@ -15474,7 +15482,7 @@ func awsAwsquery_deserializeOpDocumentListIdentitiesOutput(v **ListIdentitiesOut
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.NextToken = &xtv
+				sv.NextToken = ptr.String(xtv)
 			}
 
 		default:
@@ -15598,7 +15606,7 @@ func awsAwsquery_deserializeOpDocumentListReceiptRuleSetsOutput(v **ListReceiptR
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.NextToken = &xtv
+				sv.NextToken = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("RuleSets", t.Name.Local):
@@ -15652,7 +15660,7 @@ func awsAwsquery_deserializeOpDocumentListTemplatesOutput(v **ListTemplatesOutpu
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.NextToken = &xtv
+				sv.NextToken = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("TemplatesMetadata", t.Name.Local):
@@ -15840,7 +15848,7 @@ func awsAwsquery_deserializeOpDocumentSendBounceOutput(v **SendBounceOutput, dec
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.MessageId = &xtv
+				sv.MessageId = ptr.String(xtv)
 			}
 
 		default:
@@ -15926,7 +15934,7 @@ func awsAwsquery_deserializeOpDocumentSendCustomVerificationEmailOutput(v **Send
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.MessageId = &xtv
+				sv.MessageId = ptr.String(xtv)
 			}
 
 		default:
@@ -15974,7 +15982,7 @@ func awsAwsquery_deserializeOpDocumentSendEmailOutput(v **SendEmailOutput, decod
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.MessageId = &xtv
+				sv.MessageId = ptr.String(xtv)
 			}
 
 		default:
@@ -16022,7 +16030,7 @@ func awsAwsquery_deserializeOpDocumentSendRawEmailOutput(v **SendRawEmailOutput,
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.MessageId = &xtv
+				sv.MessageId = ptr.String(xtv)
 			}
 
 		default:
@@ -16070,7 +16078,7 @@ func awsAwsquery_deserializeOpDocumentSendTemplatedEmailOutput(v **SendTemplated
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.MessageId = &xtv
+				sv.MessageId = ptr.String(xtv)
 			}
 
 		default:
@@ -16342,7 +16350,7 @@ func awsAwsquery_deserializeOpDocumentTestRenderTemplateOutput(v **TestRenderTem
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.RenderedTemplate = &xtv
+				sv.RenderedTemplate = ptr.String(xtv)
 			}
 
 		default:
@@ -16684,7 +16692,7 @@ func awsAwsquery_deserializeOpDocumentVerifyDomainIdentityOutput(v **VerifyDomai
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.VerificationToken = &xtv
+				sv.VerificationToken = ptr.String(xtv)
 			}
 
 		default:

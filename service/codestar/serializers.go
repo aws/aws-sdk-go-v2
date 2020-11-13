@@ -918,9 +918,9 @@ func awsAwsjson11_serializeDocumentGitHubCodeDestination(v *types.GitHubCodeDest
 		ok.String(*v.Description)
 	}
 
-	if v.IssuesEnabled != nil {
+	if v.IssuesEnabled {
 		ok := object.Key("issuesEnabled")
-		ok.Boolean(*v.IssuesEnabled)
+		ok.Boolean(v.IssuesEnabled)
 	}
 
 	if v.Name != nil {
@@ -933,9 +933,9 @@ func awsAwsjson11_serializeDocumentGitHubCodeDestination(v *types.GitHubCodeDest
 		ok.String(*v.Owner)
 	}
 
-	if v.PrivateRepository != nil {
+	if v.PrivateRepository {
 		ok := object.Key("privateRepository")
-		ok.Boolean(*v.PrivateRepository)
+		ok.Boolean(v.PrivateRepository)
 	}
 
 	if v.Token != nil {
@@ -968,64 +968,48 @@ func awsAwsjson11_serializeDocumentS3Location(v *types.S3Location, value smithyj
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSourceCode(v []*types.Code, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentSourceCode(v []types.Code, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentCode(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentCode(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagKeys(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagKeys(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTags(v map[string]*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTags(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTemplateParameterMap(v map[string]*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTemplateParameterMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
@@ -1089,9 +1073,9 @@ func awsAwsjson11_serializeOpDocumentAssociateTeamMemberInput(v *AssociateTeamMe
 		ok.String(*v.ProjectRole)
 	}
 
-	if v.RemoteAccessAllowed != nil {
+	if v.RemoteAccessAllowed {
 		ok := object.Key("remoteAccessAllowed")
-		ok.Boolean(*v.RemoteAccessAllowed)
+		ok.Boolean(v.RemoteAccessAllowed)
 	}
 
 	if v.UserArn != nil {
@@ -1186,9 +1170,9 @@ func awsAwsjson11_serializeOpDocumentDeleteProjectInput(v *DeleteProjectInput, v
 		ok.String(*v.ClientRequestToken)
 	}
 
-	if v.DeleteStack != nil {
+	if v.DeleteStack {
 		ok := object.Key("deleteStack")
-		ok.Boolean(*v.DeleteStack)
+		ok.Boolean(v.DeleteStack)
 	}
 
 	if v.Id != nil {
@@ -1256,9 +1240,9 @@ func awsAwsjson11_serializeOpDocumentListProjectsInput(v *ListProjectsInput, val
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("maxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1273,9 +1257,9 @@ func awsAwsjson11_serializeOpDocumentListResourcesInput(v *ListResourcesInput, v
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("maxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1300,9 +1284,9 @@ func awsAwsjson11_serializeOpDocumentListTagsForProjectInput(v *ListTagsForProje
 		ok.String(*v.Id)
 	}
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("maxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1317,9 +1301,9 @@ func awsAwsjson11_serializeOpDocumentListTeamMembersInput(v *ListTeamMembersInpu
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("maxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1339,9 +1323,9 @@ func awsAwsjson11_serializeOpDocumentListUserProfilesInput(v *ListUserProfilesIn
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("maxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1426,9 +1410,9 @@ func awsAwsjson11_serializeOpDocumentUpdateTeamMemberInput(v *UpdateTeamMemberIn
 		ok.String(*v.ProjectRole)
 	}
 
-	if v.RemoteAccessAllowed != nil {
+	if v.RemoteAccessAllowed {
 		ok := object.Key("remoteAccessAllowed")
-		ok.Boolean(*v.RemoteAccessAllowed)
+		ok.Boolean(v.RemoteAccessAllowed)
 	}
 
 	if v.UserArn != nil {

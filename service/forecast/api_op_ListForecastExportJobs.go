@@ -53,7 +53,7 @@ type ListForecastExportJobsInput struct {
 	// named electricityforecast, specify the following filter: "Filters": [ {
 	// "Condition": "IS", "Key": "ForecastArn", "Value":
 	// "arn:aws:forecast:us-west-2::forecast/electricityforecast" } ]
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The number of items to return in the response.
 	MaxResults *int32
@@ -67,7 +67,7 @@ type ListForecastExportJobsInput struct {
 type ListForecastExportJobsOutput struct {
 
 	// An array of objects that summarize each export job's properties.
-	ForecastExportJobs []*types.ForecastExportJobSummary
+	ForecastExportJobs []types.ForecastExportJobSummary
 
 	// If the response is truncated, Amazon Forecast returns this token. To retrieve
 	// the next set of results, use the token in the next request.

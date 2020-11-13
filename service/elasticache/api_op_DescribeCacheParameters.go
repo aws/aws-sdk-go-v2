@@ -56,13 +56,13 @@ type DescribeCacheParametersOutput struct {
 
 	// A list of parameters specific to a particular cache node type. Each element in
 	// the list contains detailed information about one parameter.
-	CacheNodeTypeSpecificParameters []*types.CacheNodeTypeSpecificParameter
+	CacheNodeTypeSpecificParameters []types.CacheNodeTypeSpecificParameter
 
 	// Provides an identifier to allow retrieval of paginated results.
 	Marker *string
 
 	// A list of Parameter instances.
-	Parameters []*types.Parameter
+	Parameters []types.Parameter
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

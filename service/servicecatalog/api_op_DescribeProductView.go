@@ -50,7 +50,7 @@ type DescribeProductViewOutput struct {
 	ProductViewSummary *types.ProductViewSummary
 
 	// Information about the provisioning artifacts for the product.
-	ProvisioningArtifacts []*types.ProvisioningArtifact
+	ProvisioningArtifacts []types.ProvisioningArtifact
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

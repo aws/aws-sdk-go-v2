@@ -40,7 +40,7 @@ type ListProtocolsListsInput struct {
 
 	// Specifies whether the lists to retrieve are default lists owned by AWS Firewall
 	// Manager.
-	DefaultLists *bool
+	DefaultLists bool
 
 	// If you specify a value for MaxResults in your list request, and you have more
 	// objects than the maximum, AWS Firewall Manager returns this token in the
@@ -58,7 +58,7 @@ type ListProtocolsListsOutput struct {
 	NextToken *string
 
 	// An array of ProtocolsListDataSummary objects.
-	ProtocolsLists []*types.ProtocolsListDataSummary
+	ProtocolsLists []types.ProtocolsListDataSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

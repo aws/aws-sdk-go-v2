@@ -868,13 +868,13 @@ func validateAttributeDefinition(v *types.AttributeDefinition) error {
 	}
 }
 
-func validateAttributeDefinitions(v []*types.AttributeDefinition) error {
+func validateAttributeDefinitions(v []types.AttributeDefinition) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AttributeDefinitions"}
 	for i := range v {
-		if err := validateAttributeDefinition(v[i]); err != nil {
+		if err := validateAttributeDefinition(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -936,13 +936,14 @@ func validateAutoScalingTargetTrackingScalingPolicyConfigurationUpdate(v *types.
 	}
 }
 
-func validateBatchGetRequestMap(v map[string]*types.KeysAndAttributes) error {
+func validateBatchGetRequestMap(v map[string]types.KeysAndAttributes) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchGetRequestMap"}
 	for key := range v {
-		if err := validateKeysAndAttributes(v[key]); err != nil {
+		value := v[key]
+		if err := validateKeysAndAttributes(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -953,7 +954,7 @@ func validateBatchGetRequestMap(v map[string]*types.KeysAndAttributes) error {
 	}
 }
 
-func validateBatchWriteItemRequestMap(v map[string][]*types.WriteRequest) error {
+func validateBatchWriteItemRequestMap(v map[string][]types.WriteRequest) error {
 	if v == nil {
 		return nil
 	}
@@ -1149,13 +1150,14 @@ func validateDeleteRequest(v *types.DeleteRequest) error {
 	}
 }
 
-func validateFilterConditionMap(v map[string]*types.Condition) error {
+func validateFilterConditionMap(v map[string]types.Condition) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FilterConditionMap"}
 	for key := range v {
-		if err := validateCondition(v[key]); err != nil {
+		value := v[key]
+		if err := validateCondition(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1231,13 +1233,13 @@ func validateGlobalSecondaryIndexAutoScalingUpdate(v *types.GlobalSecondaryIndex
 	}
 }
 
-func validateGlobalSecondaryIndexAutoScalingUpdateList(v []*types.GlobalSecondaryIndexAutoScalingUpdate) error {
+func validateGlobalSecondaryIndexAutoScalingUpdateList(v []types.GlobalSecondaryIndexAutoScalingUpdate) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GlobalSecondaryIndexAutoScalingUpdateList"}
 	for i := range v {
-		if err := validateGlobalSecondaryIndexAutoScalingUpdate(v[i]); err != nil {
+		if err := validateGlobalSecondaryIndexAutoScalingUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1248,13 +1250,13 @@ func validateGlobalSecondaryIndexAutoScalingUpdateList(v []*types.GlobalSecondar
 	}
 }
 
-func validateGlobalSecondaryIndexList(v []*types.GlobalSecondaryIndex) error {
+func validateGlobalSecondaryIndexList(v []types.GlobalSecondaryIndex) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GlobalSecondaryIndexList"}
 	for i := range v {
-		if err := validateGlobalSecondaryIndex(v[i]); err != nil {
+		if err := validateGlobalSecondaryIndex(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1292,13 +1294,13 @@ func validateGlobalSecondaryIndexUpdate(v *types.GlobalSecondaryIndexUpdate) err
 	}
 }
 
-func validateGlobalSecondaryIndexUpdateList(v []*types.GlobalSecondaryIndexUpdate) error {
+func validateGlobalSecondaryIndexUpdateList(v []types.GlobalSecondaryIndexUpdate) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GlobalSecondaryIndexUpdateList"}
 	for i := range v {
-		if err := validateGlobalSecondaryIndexUpdate(v[i]); err != nil {
+		if err := validateGlobalSecondaryIndexUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1329,13 +1331,13 @@ func validateGlobalTableGlobalSecondaryIndexSettingsUpdate(v *types.GlobalTableG
 	}
 }
 
-func validateGlobalTableGlobalSecondaryIndexSettingsUpdateList(v []*types.GlobalTableGlobalSecondaryIndexSettingsUpdate) error {
+func validateGlobalTableGlobalSecondaryIndexSettingsUpdateList(v []types.GlobalTableGlobalSecondaryIndexSettingsUpdate) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GlobalTableGlobalSecondaryIndexSettingsUpdateList"}
 	for i := range v {
-		if err := validateGlobalTableGlobalSecondaryIndexSettingsUpdate(v[i]); err != nil {
+		if err := validateGlobalTableGlobalSecondaryIndexSettingsUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1346,13 +1348,14 @@ func validateGlobalTableGlobalSecondaryIndexSettingsUpdateList(v []*types.Global
 	}
 }
 
-func validateKeyConditions(v map[string]*types.Condition) error {
+func validateKeyConditions(v map[string]types.Condition) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "KeyConditions"}
 	for key := range v {
-		if err := validateCondition(v[key]); err != nil {
+		value := v[key]
+		if err := validateCondition(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1378,13 +1381,13 @@ func validateKeysAndAttributes(v *types.KeysAndAttributes) error {
 	}
 }
 
-func validateKeySchema(v []*types.KeySchemaElement) error {
+func validateKeySchema(v []types.KeySchemaElement) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "KeySchema"}
 	for i := range v {
-		if err := validateKeySchemaElement(v[i]); err != nil {
+		if err := validateKeySchemaElement(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1438,13 +1441,13 @@ func validateLocalSecondaryIndex(v *types.LocalSecondaryIndex) error {
 	}
 }
 
-func validateLocalSecondaryIndexList(v []*types.LocalSecondaryIndex) error {
+func validateLocalSecondaryIndexList(v []types.LocalSecondaryIndex) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LocalSecondaryIndexList"}
 	for i := range v {
-		if err := validateLocalSecondaryIndex(v[i]); err != nil {
+		if err := validateLocalSecondaryIndex(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1546,13 +1549,13 @@ func validateReplicaAutoScalingUpdate(v *types.ReplicaAutoScalingUpdate) error {
 	}
 }
 
-func validateReplicaAutoScalingUpdateList(v []*types.ReplicaAutoScalingUpdate) error {
+func validateReplicaAutoScalingUpdateList(v []types.ReplicaAutoScalingUpdate) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ReplicaAutoScalingUpdateList"}
 	for i := range v {
-		if err := validateReplicaAutoScalingUpdate(v[i]); err != nil {
+		if err := validateReplicaAutoScalingUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1595,13 +1598,13 @@ func validateReplicaGlobalSecondaryIndexAutoScalingUpdate(v *types.ReplicaGlobal
 	}
 }
 
-func validateReplicaGlobalSecondaryIndexAutoScalingUpdateList(v []*types.ReplicaGlobalSecondaryIndexAutoScalingUpdate) error {
+func validateReplicaGlobalSecondaryIndexAutoScalingUpdateList(v []types.ReplicaGlobalSecondaryIndexAutoScalingUpdate) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ReplicaGlobalSecondaryIndexAutoScalingUpdateList"}
 	for i := range v {
-		if err := validateReplicaGlobalSecondaryIndexAutoScalingUpdate(v[i]); err != nil {
+		if err := validateReplicaGlobalSecondaryIndexAutoScalingUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1612,13 +1615,13 @@ func validateReplicaGlobalSecondaryIndexAutoScalingUpdateList(v []*types.Replica
 	}
 }
 
-func validateReplicaGlobalSecondaryIndexList(v []*types.ReplicaGlobalSecondaryIndex) error {
+func validateReplicaGlobalSecondaryIndexList(v []types.ReplicaGlobalSecondaryIndex) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ReplicaGlobalSecondaryIndexList"}
 	for i := range v {
-		if err := validateReplicaGlobalSecondaryIndex(v[i]); err != nil {
+		if err := validateReplicaGlobalSecondaryIndex(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1649,13 +1652,13 @@ func validateReplicaGlobalSecondaryIndexSettingsUpdate(v *types.ReplicaGlobalSec
 	}
 }
 
-func validateReplicaGlobalSecondaryIndexSettingsUpdateList(v []*types.ReplicaGlobalSecondaryIndexSettingsUpdate) error {
+func validateReplicaGlobalSecondaryIndexSettingsUpdateList(v []types.ReplicaGlobalSecondaryIndexSettingsUpdate) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ReplicaGlobalSecondaryIndexSettingsUpdateList"}
 	for i := range v {
-		if err := validateReplicaGlobalSecondaryIndexSettingsUpdate(v[i]); err != nil {
+		if err := validateReplicaGlobalSecondaryIndexSettingsUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1691,13 +1694,13 @@ func validateReplicaSettingsUpdate(v *types.ReplicaSettingsUpdate) error {
 	}
 }
 
-func validateReplicaSettingsUpdateList(v []*types.ReplicaSettingsUpdate) error {
+func validateReplicaSettingsUpdateList(v []types.ReplicaSettingsUpdate) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ReplicaSettingsUpdateList"}
 	for i := range v {
-		if err := validateReplicaSettingsUpdate(v[i]); err != nil {
+		if err := validateReplicaSettingsUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1735,13 +1738,13 @@ func validateReplicationGroupUpdate(v *types.ReplicationGroupUpdate) error {
 	}
 }
 
-func validateReplicationGroupUpdateList(v []*types.ReplicationGroupUpdate) error {
+func validateReplicationGroupUpdateList(v []types.ReplicationGroupUpdate) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ReplicationGroupUpdateList"}
 	for i := range v {
-		if err := validateReplicationGroupUpdate(v[i]); err != nil {
+		if err := validateReplicationGroupUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1774,13 +1777,13 @@ func validateReplicaUpdate(v *types.ReplicaUpdate) error {
 	}
 }
 
-func validateReplicaUpdateList(v []*types.ReplicaUpdate) error {
+func validateReplicaUpdateList(v []types.ReplicaUpdate) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ReplicaUpdateList"}
 	for i := range v {
-		if err := validateReplicaUpdate(v[i]); err != nil {
+		if err := validateReplicaUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1824,13 +1827,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagList(v []*types.Tag) error {
+func validateTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1878,13 +1881,13 @@ func validateTransactGetItem(v *types.TransactGetItem) error {
 	}
 }
 
-func validateTransactGetItemList(v []*types.TransactGetItem) error {
+func validateTransactGetItemList(v []types.TransactGetItem) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TransactGetItemList"}
 	for i := range v {
-		if err := validateTransactGetItem(v[i]); err != nil {
+		if err := validateTransactGetItem(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1927,13 +1930,13 @@ func validateTransactWriteItem(v *types.TransactWriteItem) error {
 	}
 }
 
-func validateTransactWriteItemList(v []*types.TransactWriteItem) error {
+func validateTransactWriteItemList(v []types.TransactWriteItem) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TransactWriteItemList"}
 	for i := range v {
-		if err := validateTransactWriteItem(v[i]); err != nil {
+		if err := validateTransactWriteItem(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2029,13 +2032,13 @@ func validateWriteRequest(v *types.WriteRequest) error {
 	}
 }
 
-func validateWriteRequests(v []*types.WriteRequest) error {
+func validateWriteRequests(v []types.WriteRequest) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "WriteRequests"}
 	for i := range v {
-		if err := validateWriteRequest(v[i]); err != nil {
+		if err := validateWriteRequest(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

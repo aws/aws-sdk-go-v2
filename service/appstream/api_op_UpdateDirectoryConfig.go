@@ -37,7 +37,7 @@ type UpdateDirectoryConfigInput struct {
 	DirectoryName *string
 
 	// The distinguished names of the organizational units for computer accounts.
-	OrganizationalUnitDistinguishedNames []*string
+	OrganizationalUnitDistinguishedNames []string
 
 	// The credentials for the service account used by the fleet or image builder to
 	// connect to the directory.

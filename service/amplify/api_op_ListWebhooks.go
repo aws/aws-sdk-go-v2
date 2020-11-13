@@ -36,7 +36,7 @@ type ListWebhooksInput struct {
 	AppId *string
 
 	// The maximum number of records to list in a single response.
-	MaxResults *int32
+	MaxResults int32
 
 	// A pagination token. Set to null to start listing webhooks from the start. If
 	// non-null,the pagination token is returned in a result. Pass its value in here to
@@ -50,7 +50,7 @@ type ListWebhooksOutput struct {
 	// A list of webhooks.
 	//
 	// This member is required.
-	Webhooks []*types.Webhook
+	Webhooks []types.Webhook
 
 	// A pagination token. If non-null, the pagination token is returned in a result.
 	// Pass its value in another request to retrieve more entries.

@@ -44,10 +44,10 @@ type DescribeEventsInput struct {
 
 	// A list of event categories that trigger notifications for an event notification
 	// subscription.
-	EventCategories []*string
+	EventCategories []string
 
 	// This parameter is not currently supported.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
@@ -95,7 +95,7 @@ type DescribeEventsInput struct {
 type DescribeEventsOutput struct {
 
 	// Detailed information about one or more events.
-	Events []*types.Event
+	Events []types.Event
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the

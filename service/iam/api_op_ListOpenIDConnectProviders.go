@@ -35,7 +35,7 @@ type ListOpenIDConnectProvidersInput struct {
 type ListOpenIDConnectProvidersOutput struct {
 
 	// The list of IAM OIDC provider resource objects defined in the AWS account.
-	OpenIDConnectProviderList []*types.OpenIDConnectProviderListEntry
+	OpenIDConnectProviderList []types.OpenIDConnectProviderListEntry
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

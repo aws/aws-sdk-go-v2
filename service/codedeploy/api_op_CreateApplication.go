@@ -42,7 +42,7 @@ type CreateApplicationInput struct {
 	// The metadata that you apply to CodeDeploy applications to help you organize and
 	// categorize them. Each tag consists of a key and an optional value, both of which
 	// you define.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // Represents the output of a CreateApplication operation.

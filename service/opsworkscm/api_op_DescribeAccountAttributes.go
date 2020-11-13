@@ -33,7 +33,7 @@ type DescribeAccountAttributesInput struct {
 type DescribeAccountAttributesOutput struct {
 
 	// The attributes that are currently set for the account.
-	Attributes []*types.AccountAttribute
+	Attributes []types.AccountAttribute
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -69,7 +69,7 @@ type SearchOutput struct {
 	NextToken *string
 
 	// A list of SearchRecord objects.
-	Results []*types.SearchRecord
+	Results []types.SearchRecord
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

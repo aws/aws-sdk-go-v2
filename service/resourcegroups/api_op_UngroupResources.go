@@ -37,16 +37,16 @@ type UngroupResourcesInput struct {
 	// The ARNs of the resources to be removed from the group.
 	//
 	// This member is required.
-	ResourceArns []*string
+	ResourceArns []string
 }
 
 type UngroupResourcesOutput struct {
 
 	// The resources that failed to be removed from the group.
-	Failed []*types.FailedResource
+	Failed []types.FailedResource
 
 	// The ARNs of the resources that were successfully removed from the group.
-	Succeeded []*string
+	Succeeded []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

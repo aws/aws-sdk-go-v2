@@ -46,7 +46,7 @@ type UpdatePatchBaselineInput struct {
 	// package name formats for approved and rejected patch lists
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html)
 	// in the AWS Systems Manager User Guide.
-	ApprovedPatches []*string
+	ApprovedPatches []string
 
 	// Assigns a new compliance severity level to an existing patch baseline.
 	ApprovedPatchesComplianceLevel types.PatchComplianceLevel
@@ -54,7 +54,7 @@ type UpdatePatchBaselineInput struct {
 	// Indicates whether the list of approved patches includes non-security updates
 	// that should be applied to the instances. The default value is 'false'. Applies
 	// to Linux instances only.
-	ApprovedPatchesEnableNonSecurity *bool
+	ApprovedPatchesEnableNonSecurity bool
 
 	// A description of the patch baseline.
 	Description *string
@@ -70,7 +70,7 @@ type UpdatePatchBaselineInput struct {
 	// package name formats for approved and rejected patch lists
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html)
 	// in the AWS Systems Manager User Guide.
-	RejectedPatches []*string
+	RejectedPatches []string
 
 	// The action for Patch Manager to take on patches included in the RejectedPackages
 	// list.
@@ -90,11 +90,11 @@ type UpdatePatchBaselineInput struct {
 	// If True, then all fields that are required by the CreatePatchBaseline action are
 	// also required for this API request. Optional fields that are not specified are
 	// set to null.
-	Replace *bool
+	Replace bool
 
 	// Information about the patches to use to update the instances, including target
 	// operating systems and source repositories. Applies to Linux instances only.
-	Sources []*types.PatchSource
+	Sources []types.PatchSource
 }
 
 type UpdatePatchBaselineOutput struct {
@@ -103,7 +103,7 @@ type UpdatePatchBaselineOutput struct {
 	ApprovalRules *types.PatchRuleGroup
 
 	// A list of explicitly approved patches for the baseline.
-	ApprovedPatches []*string
+	ApprovedPatches []string
 
 	// The compliance severity level assigned to the patch baseline after the update
 	// completed.
@@ -112,7 +112,7 @@ type UpdatePatchBaselineOutput struct {
 	// Indicates whether the list of approved patches includes non-security updates
 	// that should be applied to the instances. The default value is 'false'. Applies
 	// to Linux instances only.
-	ApprovedPatchesEnableNonSecurity *bool
+	ApprovedPatchesEnableNonSecurity bool
 
 	// The ID of the deleted patch baseline.
 	BaselineId *string
@@ -136,7 +136,7 @@ type UpdatePatchBaselineOutput struct {
 	OperatingSystem types.OperatingSystem
 
 	// A list of explicitly rejected patches for the baseline.
-	RejectedPatches []*string
+	RejectedPatches []string
 
 	// The action specified to take on patches included in the RejectedPatches list. A
 	// patch can be allowed only if it is a dependency of another package, or blocked
@@ -145,7 +145,7 @@ type UpdatePatchBaselineOutput struct {
 
 	// Information about the patches to use to update the instances, including target
 	// operating systems and source repositories. Applies to Linux instances only.
-	Sources []*types.PatchSource
+	Sources []types.PatchSource
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

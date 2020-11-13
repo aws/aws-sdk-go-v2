@@ -35,7 +35,7 @@ type DescribeOptionGroupsInput struct {
 	EngineName *string
 
 	// This parameter isn't currently supported.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// Filters the list of option groups to only include groups associated with a
 	// specific database engine version. If specified, then EngineName must also be
@@ -67,7 +67,7 @@ type DescribeOptionGroupsOutput struct {
 	Marker *string
 
 	// List of option groups.
-	OptionGroupsList []*types.OptionGroup
+	OptionGroupsList []types.OptionGroup
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

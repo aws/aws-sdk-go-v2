@@ -39,7 +39,7 @@ type Activation struct {
 	ExpirationDate *time.Time
 
 	// Whether or not the activation is expired.
-	Expired *bool
+	Expired bool
 
 	// The Amazon Identity and Access Management (IAM) role to assign to the managed
 	// instance.
@@ -47,13 +47,13 @@ type Activation struct {
 
 	// The maximum number of managed instances that can be registered using this
 	// activation.
-	RegistrationLimit *int32
+	RegistrationLimit int32
 
 	// The number of managed instances already registered with this activation.
-	RegistrationsCount *int32
+	RegistrationsCount int32
 
 	// Tags assigned to the activation.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes an association of a Systems Manager document and an instance.
@@ -88,7 +88,7 @@ type Association struct {
 	ScheduleExpression *string
 
 	// The instances targeted by the request to create an association.
-	Targets []*Target
+	Targets []Target
 }
 
 // Describes the parameters for a document.
@@ -98,7 +98,7 @@ type AssociationDescription struct {
 	// after it is created and then according to the schedule you specified. Specify
 	// this option if you don't want an association to run immediately after you create
 	// it.
-	ApplyOnlyAtCronInterval *bool
+	ApplyOnlyAtCronInterval bool
 
 	// The association ID.
 	AssociationId *string
@@ -168,7 +168,7 @@ type AssociationDescription struct {
 	Overview *AssociationOverview
 
 	// A description of the parameters for a document.
-	Parameters map[string][]*string
+	Parameters map[string][]string
 
 	// A cron expression that specifies a schedule when the association runs.
 	ScheduleExpression *string
@@ -188,7 +188,7 @@ type AssociationDescription struct {
 	SyncCompliance AssociationSyncCompliance
 
 	// The instances targeted by the request.
-	Targets []*Target
+	Targets []Target
 }
 
 // Includes information about the specified association.
@@ -303,7 +303,7 @@ type AssociationOverview struct {
 	// Returns the number of targets for the association status. For example, if you
 	// created an association with two instances, and one of them was successful, this
 	// would return the count of instances by status.
-	AssociationStatusAggregatedCount map[string]*int32
+	AssociationStatusAggregatedCount map[string]int32
 
 	// A detailed status of the association.
 	DetailedStatus *string
@@ -341,7 +341,7 @@ type AssociationVersionInfo struct {
 	// after it is created and then according to the schedule you specified. Specify
 	// this option if you don't want an association to run immediately after you create
 	// it.
-	ApplyOnlyAtCronInterval *bool
+	ApplyOnlyAtCronInterval bool
 
 	// The ID created by the system when the association was created.
 	AssociationId *string
@@ -395,7 +395,7 @@ type AssociationVersionInfo struct {
 	OutputLocation *InstanceAssociationOutputLocation
 
 	// Parameters specified when the association version was created.
-	Parameters map[string][]*string
+	Parameters map[string][]string
 
 	// The cron or rate schedule specified for the association when the association
 	// version was created.
@@ -414,7 +414,7 @@ type AssociationVersionInfo struct {
 
 	// The targets specified for the association when the association version was
 	// created.
-	Targets []*Target
+	Targets []Target
 }
 
 // A structure that includes attributes that describe a document attachment.
@@ -430,7 +430,7 @@ type AttachmentContent struct {
 	Name *string
 
 	// The size of an attachment in bytes.
-	Size *int64
+	Size int64
 
 	// The URL location of the attachment content.
 	Url *string
@@ -474,7 +474,7 @@ type AttachmentsSource struct {
 	// instead of the document name only. For example: "Values": [
 	// "arn:aws:ssm:us-east-2:111122223333:document/OtherAccountDocument/3/their-file.py"
 	// ]
-	Values []*string
+	Values []string
 }
 
 // Detailed information about the current state of an individual Automation
@@ -522,11 +522,11 @@ type AutomationExecution struct {
 	Mode ExecutionMode
 
 	// The list of execution outputs as defined in the automation document.
-	Outputs map[string][]*string
+	Outputs map[string][]string
 
 	// The key-value map of execution parameters, which were supplied when calling
 	// StartAutomationExecution.
-	Parameters map[string][]*string
+	Parameters map[string][]string
 
 	// The AutomationExecutionId of the parent automation.
 	ParentAutomationExecutionId *string
@@ -541,28 +541,28 @@ type AutomationExecution struct {
 	// A list of details about the current state of all steps that comprise an
 	// execution. An Automation document contains a list of steps that are run in
 	// order.
-	StepExecutions []*StepExecution
+	StepExecutions []StepExecution
 
 	// A boolean value that indicates if the response contains the full list of the
 	// Automation step executions. If true, use the DescribeAutomationStepExecutions
 	// API action to get the full list of step executions.
-	StepExecutionsTruncated *bool
+	StepExecutionsTruncated bool
 
 	// The target of the execution.
 	Target *string
 
 	// The combination of AWS Regions and/or AWS accounts where you want to run the
 	// Automation.
-	TargetLocations []*TargetLocation
+	TargetLocations []TargetLocation
 
 	// The specified key-value mapping of document parameters to target resources.
-	TargetMaps []map[string][]*string
+	TargetMaps []map[string][]string
 
 	// The parameter name.
 	TargetParameterName *string
 
 	// The specified targets.
-	Targets []*Target
+	Targets []Target
 }
 
 // A filter used to match specific automation executions. This is used to limit the
@@ -580,7 +580,7 @@ type AutomationExecutionFilter struct {
 	// key.
 	//
 	// This member is required.
-	Values []*string
+	Values []string
 }
 
 // Details about a specific Automation execution.
@@ -638,7 +638,7 @@ type AutomationExecutionMetadata struct {
 	Mode ExecutionMode
 
 	// The list of execution outputs as defined in the Automation document.
-	Outputs map[string][]*string
+	Outputs map[string][]string
 
 	// The ExecutionId of the parent Automation.
 	ParentAutomationExecutionId *string
@@ -650,13 +650,13 @@ type AutomationExecutionMetadata struct {
 	Target *string
 
 	// The specified key-value mapping of document parameters to target resources.
-	TargetMaps []map[string][]*string
+	TargetMaps []map[string][]string
 
 	// The list of execution outputs as defined in the Automation document.
 	TargetParameterName *string
 
 	// The targets defined by the user when starting the Automation.
-	Targets []*Target
+	Targets []Target
 }
 
 // Configuration options for sending command output to CloudWatch Logs.
@@ -669,7 +669,7 @@ type CloudWatchOutputConfig struct {
 	CloudWatchLogGroupName *string
 
 	// Enables Systems Manager to send command output to CloudWatch Logs.
-	CloudWatchOutputEnabled *bool
+	CloudWatchOutputEnabled bool
 }
 
 // Describes a command request.
@@ -689,10 +689,10 @@ type Command struct {
 	// The number of targets for which the command invocation reached a terminal state.
 	// Terminal states include the following: Success, Failed, Execution Timed Out,
 	// Delivery Timed Out, Canceled, Terminated, or Undeliverable.
-	CompletedCount *int32
+	CompletedCount int32
 
 	// The number of targets for which the status is Delivery Timed Out.
-	DeliveryTimedOutCount *int32
+	DeliveryTimedOutCount int32
 
 	// The name of the document requested for execution.
 	DocumentName *string
@@ -701,7 +701,7 @@ type Command struct {
 	DocumentVersion *string
 
 	// The number of targets for which the status is Failed or Execution Timed Out.
-	ErrorCount *int32
+	ErrorCount int32
 
 	// If this time is reached and the command has not already started running, it will
 	// not run. Calculated based on the ExpiresAfter user input provided as part of the
@@ -709,7 +709,7 @@ type Command struct {
 	ExpiresAfter *time.Time
 
 	// The instance IDs against which this command was requested.
-	InstanceIds []*string
+	InstanceIds []string
 
 	// The maximum number of instances that are allowed to run the command at the same
 	// time. You can specify a number of instances, such as 10, or a percentage of
@@ -744,7 +744,7 @@ type Command struct {
 	OutputS3Region *string
 
 	// The parameter values to be inserted in the document when running the command.
-	Parameters map[string][]*string
+	Parameters map[string][]string
 
 	// The date and time the command was requested.
 	RequestedDateTime *time.Time
@@ -800,15 +800,15 @@ type Command struct {
 	StatusDetails *string
 
 	// The number of targets for the command.
-	TargetCount *int32
+	TargetCount int32
 
 	// An array of search criteria that targets instances using a Key,Value combination
 	// that you specify. Targets is required if you don't provide one or more instance
 	// IDs in the call.
-	Targets []*Target
+	Targets []Target
 
 	// The TimeoutSeconds value specified for a command.
-	TimeoutSeconds *int32
+	TimeoutSeconds int32
 }
 
 // Describes a command filter. An instance ID can't be specified when a command
@@ -882,7 +882,7 @@ type CommandInvocation struct {
 	// The command against which this invocation was requested.
 	CommandId *string
 
-	CommandPlugins []*CommandPlugin
+	CommandPlugins []CommandPlugin
 
 	// User-specified information about the command, such as a brief description of
 	// what the command should do.
@@ -1017,7 +1017,7 @@ type CommandPlugin struct {
 	OutputS3Region *string
 
 	// A numeric response code generated after running the plugin.
-	ResponseCode *int32
+	ResponseCode int32
 
 	// The time the plugin stopped running. Could stop prematurely if, for example, a
 	// cancel command was sent.
@@ -1117,7 +1117,7 @@ type ComplianceItem struct {
 	ComplianceType *string
 
 	// A "Key": "Value" tag combination for the compliance item.
-	Details map[string]*string
+	Details map[string]string
 
 	// A summary for the compliance item. The summary includes an execution ID, the
 	// execution type (for example, command), and the execution time.
@@ -1163,7 +1163,7 @@ type ComplianceItemEntry struct {
 	Status ComplianceStatus
 
 	// A "Key": "Value" tag combination for the compliance item.
-	Details map[string]*string
+	Details map[string]string
 
 	// The compliance item ID. For example, if the compliance item is a Windows patch,
 	// the ID could be the number of the KB article.
@@ -1186,7 +1186,7 @@ type ComplianceStringFilter struct {
 	Type ComplianceQueryOperatorType
 
 	// The value for which to search.
-	Values []*string
+	Values []string
 }
 
 // A summary of compliance information by compliance type.
@@ -1208,7 +1208,7 @@ type ComplianceSummaryItem struct {
 type CompliantSummary struct {
 
 	// The total number of resources that are compliant.
-	CompliantCount *int32
+	CompliantCount int32
 
 	// A summary of the compliance severity by compliance type.
 	SeveritySummary *SeveritySummary
@@ -1235,7 +1235,7 @@ type CreateAssociationBatchRequestEntry struct {
 	// after it is created and then according to the schedule you specified. Specify
 	// this option if you don't want an association to run immediately after you create
 	// it.
-	ApplyOnlyAtCronInterval *bool
+	ApplyOnlyAtCronInterval bool
 
 	// Specify a descriptive name for the association.
 	AssociationName *string
@@ -1281,7 +1281,7 @@ type CreateAssociationBatchRequestEntry struct {
 	OutputLocation *InstanceAssociationOutputLocation
 
 	// A description of the parameters for a document.
-	Parameters map[string][]*string
+	Parameters map[string][]string
 
 	// A cron expression that specifies a schedule when the association runs.
 	ScheduleExpression *string
@@ -1298,7 +1298,7 @@ type CreateAssociationBatchRequestEntry struct {
 	SyncCompliance AssociationSyncCompliance
 
 	// The instances targeted by the request.
-	Targets []*Target
+	Targets []Target
 }
 
 // Filter for the DescribeActivation API.
@@ -1308,7 +1308,7 @@ type DescribeActivationsFilter struct {
 	FilterKey DescribeActivationsFilterKeys
 
 	// The filter values.
-	FilterValues []*string
+	FilterValues []string
 }
 
 // A default version of a document.
@@ -1329,7 +1329,7 @@ type DocumentDescription struct {
 
 	// Details about the document attachments, including names, locations, sizes, and
 	// so on.
-	AttachmentsInformation []*AttachmentInformation
+	AttachmentsInformation []AttachmentInformation
 
 	// The date when the document was created.
 	CreatedDate *time.Time
@@ -1367,7 +1367,7 @@ type DocumentDescription struct {
 	Owner *string
 
 	// A description of the parameters for a document.
-	Parameters []*DocumentParameter
+	Parameters []DocumentParameter
 
 	// The list of OS platforms compatible with this Systems Manager document.
 	PlatformTypes []PlatformType
@@ -1375,7 +1375,7 @@ type DocumentDescription struct {
 	// A list of SSM documents required by a document. For example, an
 	// ApplicationConfiguration document requires an ApplicationConfigurationSchema
 	// document.
-	Requires []*DocumentRequires
+	Requires []DocumentRequires
 
 	// The schema version.
 	SchemaVersion *string
@@ -1393,7 +1393,7 @@ type DocumentDescription struct {
 	StatusInformation *string
 
 	// The tags, or metadata, that have been applied to the document.
-	Tags []*Tag
+	Tags []Tag
 
 	// The target type which defines the kinds of resources the document can run on.
 	// For example, /AWS::EC2::Instance. For a list of valid resource types, see AWS
@@ -1444,13 +1444,13 @@ type DocumentIdentifier struct {
 	// A list of SSM documents required by a document. For example, an
 	// ApplicationConfiguration document requires an ApplicationConfigurationSchema
 	// document.
-	Requires []*DocumentRequires
+	Requires []DocumentRequires
 
 	// The schema version.
 	SchemaVersion *string
 
 	// The tags, or metadata, that have been applied to the document.
-	Tags []*Tag
+	Tags []Tag
 
 	// The target type which defines the kinds of resources the document can run on.
 	// For example, /AWS::EC2::Instance. For a list of valid resource types, see AWS
@@ -1533,7 +1533,7 @@ type DocumentKeyValuesFilter struct {
 	Key *string
 
 	// The value for the filter key.
-	Values []*string
+	Values []string
 }
 
 // Parameters specified in a System Manager document that run on the server when
@@ -1581,7 +1581,7 @@ type DocumentVersionInfo struct {
 	DocumentVersion *string
 
 	// An identifier for the default version of the document.
-	IsDefaultVersion *bool
+	IsDefaultVersion bool
 
 	// The document name.
 	Name *string
@@ -1638,7 +1638,7 @@ type FailedCreateAssociation struct {
 type FailureDetails struct {
 
 	// Detailed information about the Automation step failure.
-	Details map[string][]*string
+	Details map[string][]string
 
 	// The stage of the Automation execution when the failure occurred. The stages
 	// include the following: InputValidation, PreVerification, Invocation,
@@ -1657,7 +1657,7 @@ type InstanceAggregatedAssociationOverview struct {
 	DetailedStatus *string
 
 	// The number of associations for the instance(s).
-	InstanceAssociationStatusAggregatedCount map[string]*int32
+	InstanceAssociationStatusAggregatedCount map[string]int32
 }
 
 // One or more association documents on the instance.
@@ -1769,7 +1769,7 @@ type InstanceInformation struct {
 	// Managed Instance. This field does not indicate whether or not the latest version
 	// is installed on Windows managed instances, because some older versions of
 	// Windows Server use the EC2Config service to process SSM requests.
-	IsLatestVersion *bool
+	IsLatestVersion bool
 
 	// The date the association was last run.
 	LastAssociationExecutionDate *time.Time
@@ -1833,7 +1833,7 @@ type InstanceInformationFilter struct {
 	// The filter values.
 	//
 	// This member is required.
-	ValueSet []*string
+	ValueSet []string
 }
 
 // The filters to describe or get information about your managed instances.
@@ -1849,7 +1849,7 @@ type InstanceInformationStringFilter struct {
 	// The filter values.
 	//
 	// This member is required.
-	Values []*string
+	Values []string
 }
 
 // Defines the high-level patch compliance state for a managed instance, providing
@@ -1892,7 +1892,7 @@ type InstancePatchState struct {
 
 	// The number of patches from the patch baseline that were attempted to be
 	// installed during the last patching operation, but failed to install.
-	FailedCount *int32
+	FailedCount int32
 
 	// An https URL or an Amazon S3 path-style URL to a list of patches to be
 	// installed. This patch installation list, which you maintain in an S3 bucket in
@@ -1905,22 +1905,22 @@ type InstancePatchState struct {
 
 	// The number of patches from the patch baseline that are installed on the
 	// instance.
-	InstalledCount *int32
+	InstalledCount int32
 
 	// The number of patches not specified in the patch baseline that are installed on
 	// the instance.
-	InstalledOtherCount *int32
+	InstalledOtherCount int32
 
 	// The number of patches installed by Patch Manager since the last time the
 	// instance was rebooted.
-	InstalledPendingRebootCount *int32
+	InstalledPendingRebootCount int32
 
 	// The number of patches installed on an instance that are specified in a
 	// RejectedPatches list. Patches with a status of InstalledRejected were typically
 	// installed before they were added to a RejectedPatches list. If
 	// ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction, the value
 	// of InstalledRejectedCount will always be 0 (zero).
-	InstalledRejectedCount *int32
+	InstalledRejectedCount int32
 
 	// The time of the last attempt to patch the instance with NoReboot specified as
 	// the reboot option.
@@ -1928,13 +1928,13 @@ type InstancePatchState struct {
 
 	// The number of patches from the patch baseline that are applicable for the
 	// instance but aren't currently installed.
-	MissingCount *int32
+	MissingCount int32
 
 	// The number of patches from the patch baseline that aren't applicable for the
 	// instance and therefore aren't installed on the instance. This number may be
 	// truncated if the list of patch names is very large. The number of patches beyond
 	// this limit are reported in UnreportedNotApplicableCount.
-	NotApplicableCount *int32
+	NotApplicableCount int32
 
 	// Placeholder information. This field will always be empty in the current release
 	// of the service.
@@ -1960,7 +1960,7 @@ type InstancePatchState struct {
 
 	// The number of patches beyond the supported limit of NotApplicableCount that are
 	// not reported by name to Systems Manager Inventory.
-	UnreportedNotApplicableCount *int32
+	UnreportedNotApplicableCount int32
 }
 
 // Defines a filter used in DescribeInstancePatchStatesForPatchGroup used to scope
@@ -1982,14 +1982,14 @@ type InstancePatchStateFilter struct {
 	// The value for the filter, must be an integer greater than or equal to 0.
 	//
 	// This member is required.
-	Values []*string
+	Values []string
 }
 
 // Specifies the inventory type and attribute for the aggregation execution.
 type InventoryAggregator struct {
 
 	// Nested aggregators to further refine aggregation for an inventory type.
-	Aggregators []*InventoryAggregator
+	Aggregators []InventoryAggregator
 
 	// The inventory type and attribute name for aggregation.
 	Expression *string
@@ -1997,7 +1997,7 @@ type InventoryAggregator struct {
 	// A user-defined set of one or more filters on which to aggregate inventory data.
 	// Groups return a count of resources that match and don't match the specified
 	// criteria.
-	Groups []*InventoryGroup
+	Groups []InventoryGroup
 }
 
 // Status information returned by the DeleteInventory action.
@@ -2032,14 +2032,14 @@ type InventoryDeletionStatusItem struct {
 type InventoryDeletionSummary struct {
 
 	// Remaining number of items to delete.
-	RemainingCount *int32
+	RemainingCount int32
 
 	// A list of counts and versions for deleted items.
-	SummaryItems []*InventoryDeletionSummaryItem
+	SummaryItems []InventoryDeletionSummaryItem
 
 	// The total number of items to delete. This count does not change during the
 	// delete operation.
-	TotalCount *int32
+	TotalCount int32
 }
 
 // Either a count, remaining count, or a version number in a delete inventory
@@ -2047,10 +2047,10 @@ type InventoryDeletionSummary struct {
 type InventoryDeletionSummaryItem struct {
 
 	// A count of the number of deleted items.
-	Count *int32
+	Count int32
 
 	// The remaining number of items to delete.
-	RemainingCount *int32
+	RemainingCount int32
 
 	// The inventory type version.
 	Version *string
@@ -2069,7 +2069,7 @@ type InventoryFilter struct {
 	// i-a12b3c4d5e6g, i-1a2b3c4d5e6,Type=Equal
 	//
 	// This member is required.
-	Values []*string
+	Values []string
 
 	// The type of filter. The Exists filter must be used with aggregators. For more
 	// information, see Aggregating inventory data
@@ -2088,7 +2088,7 @@ type InventoryGroup struct {
 	// the number of resources that don't match the criteria.
 	//
 	// This member is required.
-	Filters []*InventoryFilter
+	Filters []InventoryFilter
 
 	// The name of the group.
 	//
@@ -2119,7 +2119,7 @@ type InventoryItem struct {
 	TypeName *string
 
 	// The inventory data of the inventory type.
-	Content []map[string]*string
+	Content []map[string]string
 
 	// MD5 hash of the inventory item type contents. The content hash is used to
 	// determine whether to update inventory information. The PutInventory API does not
@@ -2130,7 +2130,7 @@ type InventoryItem struct {
 	// A map of associated properties for a specified inventory type. For example, with
 	// this attribute, you can specify the ExecutionId, ExecutionType, ComplianceType
 	// properties of the AWS:ComplianceItem type.
-	Context map[string]*string
+	Context map[string]string
 }
 
 // Attributes are the entries within the inventory item content. It contains name
@@ -2155,7 +2155,7 @@ type InventoryItemSchema struct {
 	// The schema attributes for inventory. This contains data type and attribute name.
 	//
 	// This member is required.
-	Attributes []*InventoryItemAttribute
+	Attributes []InventoryItemAttribute
 
 	// The name of the inventory type. Default inventory item type names start with
 	// AWS. Custom inventory type names will start with Custom. Default inventory item
@@ -2177,7 +2177,7 @@ type InventoryItemSchema struct {
 type InventoryResultEntity struct {
 
 	// The data section in the inventory result entity JSON.
-	Data map[string]*InventoryResultItem
+	Data map[string]InventoryResultItem
 
 	// ID of the inventory result entity. For example, for managed instance inventory
 	// the result will be the managed instance ID. For EC2 instance inventory, the
@@ -2192,7 +2192,7 @@ type InventoryResultItem struct {
 	// names and values.
 	//
 	// This member is required.
-	Content []map[string]*string
+	Content []map[string]string
 
 	// The schema version for the inventory result item/
 	//
@@ -2254,7 +2254,7 @@ type MaintenanceWindowAutomationParameters struct {
 	// about how Systems Manager handles these options for the supported maintenance
 	// window task types, see MaintenanceWindowTaskInvocationParameters. For AUTOMATION
 	// task types, Systems Manager ignores any values specified for these parameters.
-	Parameters map[string][]*string
+	Parameters map[string][]string
 }
 
 // Describes the information about an execution of a maintenance window.
@@ -2362,7 +2362,7 @@ type MaintenanceWindowFilter struct {
 	Key *string
 
 	// The filter values.
-	Values []*string
+	Values []string
 }
 
 // Information about the maintenance window.
@@ -2370,16 +2370,16 @@ type MaintenanceWindowIdentity struct {
 
 	// The number of hours before the end of the maintenance window that Systems
 	// Manager stops scheduling new tasks for execution.
-	Cutoff *int32
+	Cutoff int32
 
 	// A description of the maintenance window.
 	Description *string
 
 	// The duration of the maintenance window in hours.
-	Duration *int32
+	Duration int32
 
 	// Indicates whether the maintenance window is enabled.
-	Enabled *bool
+	Enabled bool
 
 	// The date and time, in ISO-8601 Extended format, for when the maintenance window
 	// is scheduled to become inactive.
@@ -2397,7 +2397,7 @@ type MaintenanceWindowIdentity struct {
 
 	// The number of days to wait to run a maintenance window after the scheduled CRON
 	// expression date and time.
-	ScheduleOffset *int32
+	ScheduleOffset int32
 
 	// The time zone that the scheduled maintenance window executions are based on, in
 	// Internet Assigned Numbers Authority (IANA) format.
@@ -2498,7 +2498,7 @@ type MaintenanceWindowRunCommandParameters struct {
 	OutputS3KeyPrefix *string
 
 	// The parameters for the RUN_COMMAND task execution.
-	Parameters map[string][]*string
+	Parameters map[string][]string
 
 	// The ARN of the IAM service role to use to publish Amazon Simple Notification
 	// Service (Amazon SNS) notifications for maintenance window Run Command tasks.
@@ -2506,7 +2506,7 @@ type MaintenanceWindowRunCommandParameters struct {
 
 	// If this time is reached and the command has not already started running, it
 	// doesn't run.
-	TimeoutSeconds *int32
+	TimeoutSeconds int32
 }
 
 // The parameters for a STEP_FUNCTIONS task. For information about specifying and
@@ -2550,7 +2550,7 @@ type MaintenanceWindowTarget struct {
 	// The targets, either instances or tags. Specify instances using the following
 	// format: Key=instanceids,Values=, Tags are specified using the following format:
 	// Key=,Values=.
-	Targets []*Target
+	Targets []Target
 
 	// The ID of the maintenance window to register the target with.
 	WindowId *string
@@ -2585,7 +2585,7 @@ type MaintenanceWindowTask struct {
 	// The priority of the task in the maintenance window. The lower the number, the
 	// higher the priority. Tasks that have the same priority are scheduled in
 	// parallel.
-	Priority *int32
+	Priority int32
 
 	// The ARN of the IAM service role to use to publish Amazon Simple Notification
 	// Service (Amazon SNS) notifications for maintenance window Run Command tasks.
@@ -2593,7 +2593,7 @@ type MaintenanceWindowTask struct {
 
 	// The targets (either instances or tags). Instances are specified using
 	// Key=instanceids,Values=,. Tags are specified using Key=,Values=.
-	Targets []*Target
+	Targets []Target
 
 	// The resource that the task uses during execution. For RUN_COMMAND and AUTOMATION
 	// task types, TaskArn is the Systems Manager document name or ARN. For LAMBDA
@@ -2606,7 +2606,7 @@ type MaintenanceWindowTask struct {
 	// instead use the Parameters option in the TaskInvocationParameters structure. For
 	// information about how Systems Manager handles these options for the supported
 	// maintenance window task types, see MaintenanceWindowTaskInvocationParameters.
-	TaskParameters map[string]*MaintenanceWindowTaskParameterValueExpression
+	TaskParameters map[string]MaintenanceWindowTaskParameterValueExpression
 
 	// The type of task. The type can be one of the following: RUN_COMMAND, AUTOMATION,
 	// LAMBDA, or STEP_FUNCTIONS.
@@ -2640,7 +2640,7 @@ type MaintenanceWindowTaskParameterValueExpression struct {
 
 	// This field contains an array of 0 or more strings, each 1 to 255 characters in
 	// length.
-	Values []*string
+	Values []string
 }
 
 // A summary of resources that are not compliant. The summary is organized
@@ -2648,7 +2648,7 @@ type MaintenanceWindowTaskParameterValueExpression struct {
 type NonCompliantSummary struct {
 
 	// The total number of compliance items that are not compliant.
-	NonCompliantCount *int32
+	NonCompliantCount int32
 
 	// A summary of the non-compliance severity by compliance type
 	SeveritySummary *SeveritySummary
@@ -2685,26 +2685,26 @@ type OpsAggregator struct {
 	AggregatorType *string
 
 	// A nested aggregator for viewing counts of OpsItems.
-	Aggregators []*OpsAggregator
+	Aggregators []OpsAggregator
 
 	// The name of an OpsItem attribute on which to limit the count of OpsItems.
 	AttributeName *string
 
 	// The aggregator filters.
-	Filters []*OpsFilter
+	Filters []OpsFilter
 
 	// The data type name to use for viewing counts of OpsItems.
 	TypeName *string
 
 	// The aggregator value.
-	Values map[string]*string
+	Values map[string]string
 }
 
 // The result of the query.
 type OpsEntity struct {
 
 	// The data returned by the query.
-	Data map[string]*OpsEntityItem
+	Data map[string]OpsEntityItem
 
 	// The query ID.
 	Id *string
@@ -2717,7 +2717,7 @@ type OpsEntityItem struct {
 	CaptureTime *string
 
 	// The detailed data content for an OpsItem summaries result item.
-	Content []map[string]*string
+	Content []map[string]string
 }
 
 // A filter for viewing OpsItem summaries.
@@ -2731,7 +2731,7 @@ type OpsFilter struct {
 	// The filter value.
 	//
 	// This member is required.
-	Values []*string
+	Values []string
 
 	// The type of filter.
 	Type OpsFilterOperatorType
@@ -2765,7 +2765,7 @@ type OpsItem struct {
 
 	// The Amazon Resource Name (ARN) of an SNS topic where notifications are sent when
 	// this OpsItem is edited or changed.
-	Notifications []*OpsItemNotification
+	Notifications []OpsItemNotification
 
 	// Operational data is custom data that provides useful reference details about the
 	// OpsItem. For example, you can specify log files, error strings, license keys,
@@ -2784,7 +2784,7 @@ type OpsItem struct {
 	// these keys, see Creating OpsItems manually
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems)
 	// in the AWS Systems Manager User Guide.
-	OperationalData map[string]*OpsItemDataValue
+	OperationalData map[string]OpsItemDataValue
 
 	// The ID of the OpsItem.
 	OpsItemId *string
@@ -2795,7 +2795,7 @@ type OpsItem struct {
 	// One or more OpsItems that share something in common with the current OpsItem.
 	// For example, related OpsItems can include OpsItems with similar error messages,
 	// impacted resources, or statuses for the impacted resource.
-	RelatedOpsItems []*RelatedOpsItem
+	RelatedOpsItems []RelatedOpsItem
 
 	// The severity of the OpsItem. Severity options range from 1 to 4.
 	Severity *string
@@ -2846,7 +2846,7 @@ type OpsItemFilter struct {
 	// The filter value.
 	//
 	// This member is required.
-	Values []*string
+	Values []string
 }
 
 // A notification about the OpsItem.
@@ -2877,7 +2877,7 @@ type OpsItemSummary struct {
 
 	// Operational data is custom data that provides useful reference details about the
 	// OpsItem.
-	OperationalData map[string]*OpsItemDataValue
+	OperationalData map[string]OpsItemDataValue
 
 	// The ID of the OpsItem.
 	OpsItemId *string
@@ -2954,7 +2954,7 @@ type Parameter struct {
 	Value *string
 
 	// The parameter version.
-	Version *int64
+	Version int64
 }
 
 // Information about parameter usage.
@@ -2974,7 +2974,7 @@ type ParameterHistory struct {
 	KeyId *string
 
 	// Labels assigned to the parameter version.
-	Labels []*string
+	Labels []string
 
 	// Date the parameter was last changed or updated.
 	LastModifiedDate *time.Time
@@ -2989,7 +2989,7 @@ type ParameterHistory struct {
 	// policies
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html)
 	// in the AWS Systems Manager User Guide.
-	Policies []*ParameterInlinePolicy
+	Policies []ParameterInlinePolicy
 
 	// The parameter tier.
 	Tier ParameterTier
@@ -3001,7 +3001,7 @@ type ParameterHistory struct {
 	Value *string
 
 	// The parameter version.
-	Version *int64
+	Version int64
 }
 
 // One or more policies assigned to a parameter.
@@ -3049,7 +3049,7 @@ type ParameterMetadata struct {
 	Name *string
 
 	// A list of policies associated with a parameter.
-	Policies []*ParameterInlinePolicy
+	Policies []ParameterInlinePolicy
 
 	// The parameter tier.
 	Tier ParameterTier
@@ -3059,7 +3059,7 @@ type ParameterMetadata struct {
 	Type ParameterType
 
 	// The parameter version.
-	Version *int64
+	Version int64
 }
 
 // This data type is deprecated. Instead, use ParameterStringFilter.
@@ -3073,7 +3073,7 @@ type ParametersFilter struct {
 	// The filter values.
 	//
 	// This member is required.
-	Values []*string
+	Values []string
 }
 
 // One or more filters. Use a filter to return a more specific list of results.
@@ -3102,7 +3102,7 @@ type ParameterStringFilter struct {
 	Option *string
 
 	// The value you want to search for.
-	Values []*string
+	Values []string
 }
 
 // Represents metadata about a patch.
@@ -3110,7 +3110,7 @@ type Patch struct {
 
 	// The Advisory ID of the patch. For example, RHSA-2020:3779. Applies to
 	// Linux-based instances only.
-	AdvisoryIds []*string
+	AdvisoryIds []string
 
 	// The architecture of the patch. For example, in
 	// example-pkg-0.710.10-2.7.abcd.x86_64, the architecture is indicated by x86_64.
@@ -3119,11 +3119,11 @@ type Patch struct {
 
 	// The Bugzilla ID of the patch. For example, 1600646. Applies to Linux-based
 	// instances only.
-	BugzillaIds []*string
+	BugzillaIds []string
 
 	// The Common Vulnerabilities and Exposures (CVE) ID of the patch. For example,
 	// CVE-1999-0067. Applies to Linux-based instances only.
-	CVEIds []*string
+	CVEIds []string
 
 	// The classification of the patch. For example, SecurityUpdates, Updates, or
 	// CriticalUpdates.
@@ -3137,7 +3137,7 @@ type Patch struct {
 
 	// The epoch of the patch. For example in pkg-example-EE-20180914-2.2.amzn1.noarch,
 	// the epoch value is 20180914-2. Applies to Linux-based instances only.
-	Epoch *int32
+	Epoch int32
 
 	// The ID of the patch. Applies to Windows patches only. This ID is not the same as
 	// the Microsoft Knowledge Base ID.
@@ -3211,7 +3211,7 @@ type PatchBaselineIdentity struct {
 	// Whether this is the default baseline. Note that Systems Manager supports
 	// creating multiple default patch baselines. For example, you can create a default
 	// patch baseline for each operating system.
-	DefaultBaseline *bool
+	DefaultBaseline bool
 
 	// Defines the operating system the patch baseline applies to. The Default value is
 	// WINDOWS.
@@ -3286,7 +3286,7 @@ type PatchFilter struct {
 	// lists of valid values for each key based on operating system type.
 	//
 	// This member is required.
-	Values []*string
+	Values []string
 }
 
 // A set of patch filters, typically used for approval rules.
@@ -3295,7 +3295,7 @@ type PatchFilterGroup struct {
 	// The set of patch filters that make up the group.
 	//
 	// This member is required.
-	PatchFilters []*PatchFilter
+	PatchFilters []PatchFilter
 }
 
 // The mapping between a patch group and the patch baseline the patch group is
@@ -3316,7 +3316,7 @@ type PatchOrchestratorFilter struct {
 	Key *string
 
 	// The value for the filter.
-	Values []*string
+	Values []string
 }
 
 // Defines an approval rule for a patch baseline.
@@ -3331,7 +3331,7 @@ type PatchRule struct {
 	// the patch is marked as approved in the patch baseline. For example, a value of 7
 	// means that patches are approved seven days after they are released. Not
 	// supported on Ubuntu Server.
-	ApproveAfterDays *int32
+	ApproveAfterDays int32
 
 	// The cutoff date for auto approval of released patches. Any patches released on
 	// or before this date are installed automatically. Not supported on Ubuntu Server.
@@ -3344,7 +3344,7 @@ type PatchRule struct {
 	// For instances identified by the approval rule filters, enables a patch baseline
 	// to apply non-security updates available in the specified repository. The default
 	// value is 'false'. Applies to Linux instances only.
-	EnableNonSecurity *bool
+	EnableNonSecurity bool
 }
 
 // A set of rules defining the approval rules for a patch baseline.
@@ -3353,7 +3353,7 @@ type PatchRuleGroup struct {
 	// The rules that make up the rule group.
 	//
 	// This member is required.
-	PatchRules []*PatchRule
+	PatchRules []PatchRule
 }
 
 // Information about the patches to use to update the instances, including target
@@ -3382,7 +3382,7 @@ type PatchSource struct {
 	// For lists of supported product values, see PatchFilter.
 	//
 	// This member is required.
-	Products []*string
+	Products []string
 }
 
 // Information about the approval status of a patch.
@@ -3406,23 +3406,23 @@ type ProgressCounters struct {
 
 	// The total number of steps that the system cancelled in all specified AWS Regions
 	// and accounts for the current Automation execution.
-	CancelledSteps *int32
+	CancelledSteps int32
 
 	// The total number of steps that failed to run in all specified AWS Regions and
 	// accounts for the current Automation execution.
-	FailedSteps *int32
+	FailedSteps int32
 
 	// The total number of steps that successfully completed in all specified AWS
 	// Regions and accounts for the current Automation execution.
-	SuccessSteps *int32
+	SuccessSteps int32
 
 	// The total number of steps that timed out in all specified AWS Regions and
 	// accounts for the current Automation execution.
-	TimedOutSteps *int32
+	TimedOutSteps int32
 
 	// The total number of steps run in all specified AWS Regions and accounts for the
 	// current Automation execution.
-	TotalSteps *int32
+	TotalSteps int32
 }
 
 // An OpsItems that shares something in common with the current OpsItem. For
@@ -3441,10 +3441,10 @@ type ResolvedTargets struct {
 
 	// A list of parameter values sent to targets that resolved during the Automation
 	// execution.
-	ParameterValues []*string
+	ParameterValues []string
 
 	// A boolean value indicating whether the resolved target list is truncated.
-	Truncated *bool
+	Truncated bool
 }
 
 // Compliance summary information for a specific resource.
@@ -3490,7 +3490,7 @@ type ResourceDataSyncAwsOrganizationsSource struct {
 	OrganizationSourceType *string
 
 	// The AWS Organizations organization units included in the sync.
-	OrganizationalUnits []*ResourceDataSyncOrganizationalUnit
+	OrganizationalUnits []ResourceDataSyncOrganizationalUnit
 }
 
 // Synchronize Systems Manager Inventory data from multiple AWS accounts defined in
@@ -3583,7 +3583,7 @@ type ResourceDataSyncSource struct {
 	// The SyncSource AWS Regions included in the resource data sync.
 	//
 	// This member is required.
-	SourceRegions []*string
+	SourceRegions []string
 
 	// The type of data source for the resource data sync. SourceType is either
 	// AwsOrganizations (if an organization is present in AWS Organizations) or
@@ -3598,7 +3598,7 @@ type ResourceDataSyncSource struct {
 
 	// Whether to automatically synchronize and aggregate data from new AWS Regions
 	// when those Regions come online.
-	IncludeFutureRegions *bool
+	IncludeFutureRegions bool
 }
 
 // The data type name for including resource data sync state. There are four sync
@@ -3616,10 +3616,10 @@ type ResourceDataSyncSourceWithState struct {
 
 	// Whether to automatically synchronize and aggregate data from new AWS Regions
 	// when those Regions come online.
-	IncludeFutureRegions *bool
+	IncludeFutureRegions bool
 
 	// The SyncSource AWS Regions included in the resource data sync.
-	SourceRegions []*string
+	SourceRegions []string
 
 	// The type of data source for the resource data sync. SourceType is either
 	// AwsOrganizations (if an organization is present in AWS Organizations) or
@@ -3820,32 +3820,32 @@ type SeveritySummary struct {
 	// The total number of resources or compliance items that have a severity level of
 	// critical. Critical severity is determined by the organization that published the
 	// compliance items.
-	CriticalCount *int32
+	CriticalCount int32
 
 	// The total number of resources or compliance items that have a severity level of
 	// high. High severity is determined by the organization that published the
 	// compliance items.
-	HighCount *int32
+	HighCount int32
 
 	// The total number of resources or compliance items that have a severity level of
 	// informational. Informational severity is determined by the organization that
 	// published the compliance items.
-	InformationalCount *int32
+	InformationalCount int32
 
 	// The total number of resources or compliance items that have a severity level of
 	// low. Low severity is determined by the organization that published the
 	// compliance items.
-	LowCount *int32
+	LowCount int32
 
 	// The total number of resources or compliance items that have a severity level of
 	// medium. Medium severity is determined by the organization that published the
 	// compliance items.
-	MediumCount *int32
+	MediumCount int32
 
 	// The total number of resources or compliance items that have a severity level of
 	// unspecified. Unspecified severity is determined by the organization that
 	// published the compliance items.
-	UnspecifiedCount *int32
+	UnspecifiedCount int32
 }
 
 // Detailed information about an the execution state of an Automation step.
@@ -3869,19 +3869,19 @@ type StepExecution struct {
 	FailureMessage *string
 
 	// Fully-resolved values passed into the step before execution.
-	Inputs map[string]*string
+	Inputs map[string]string
 
 	// The flag which can be used to help decide whether the failure of current step
 	// leads to the Automation failure.
-	IsCritical *bool
+	IsCritical bool
 
 	// The flag which can be used to end automation no matter whether the step succeeds
 	// or fails.
-	IsEnd *bool
+	IsEnd bool
 
 	// The maximum number of tries to run the action of the step. The default value is
 	// 1.
-	MaxAttempts *int32
+	MaxAttempts int32
 
 	// The next step after the step succeeds.
 	NextStep *string
@@ -3890,10 +3890,10 @@ type StepExecution struct {
 	OnFailure *string
 
 	// Returned values from the execution of the step.
-	Outputs map[string][]*string
+	Outputs map[string][]string
 
 	// A user-specified list of parameters to override when running a step.
-	OverriddenParameters map[string][]*string
+	OverriddenParameters map[string][]string
 
 	// A message associated with the response code for an execution.
 	Response *string
@@ -3915,16 +3915,16 @@ type StepExecution struct {
 	TargetLocation *TargetLocation
 
 	// The targets for the step execution.
-	Targets []*Target
+	Targets []Target
 
 	// The timeout seconds of the step.
-	TimeoutSeconds *int64
+	TimeoutSeconds int64
 
 	// Strategies used when step fails, we support Continue and Abort. Abort will fail
 	// the automation when the step fails. Continue will ignore the failure of current
 	// step and allow automation to run the next step. With conditional branching, we
 	// add step:stepName to support the automation to go to another specific step.
-	ValidNextSteps []*string
+	ValidNextSteps []string
 }
 
 // A filter to limit the amount of step execution information returned by the call.
@@ -3940,7 +3940,7 @@ type StepExecutionFilter struct {
 	// The values of the filter key.
 	//
 	// This member is required.
-	Values []*string
+	Values []string
 }
 
 // Metadata that you assign to your AWS resources. Tags enable you to categorize
@@ -4026,7 +4026,7 @@ type Target struct {
 	// User-defined criteria that maps to Key. For example, if you specified
 	// tag:ServerRole, you could specify value:WebServer to run a command on instances
 	// that include EC2 tags of ServerRole,WebServer.
-	Values []*string
+	Values []string
 }
 
 // The combination of AWS Regions and accounts targeted by the current Automation
@@ -4034,13 +4034,13 @@ type Target struct {
 type TargetLocation struct {
 
 	// The AWS accounts targeted by the current Automation execution.
-	Accounts []*string
+	Accounts []string
 
 	// The Automation execution role used by the currently running Automation.
 	ExecutionRoleName *string
 
 	// The AWS Regions targeted by the current Automation execution.
-	Regions []*string
+	Regions []string
 
 	// The maximum number of AWS accounts and AWS regions allowed to run the Automation
 	// concurrently

@@ -29,7 +29,7 @@ func (c *Client) DisassociateMembers(ctx context.Context, params *DisassociateMe
 type DisassociateMembersInput struct {
 
 	// The account IDs of the member accounts to disassociate from the master account.
-	AccountIds []*string
+	AccountIds []string
 }
 
 type DisassociateMembersOutput struct {

@@ -56,7 +56,7 @@ type DescribeRepositoriesInput struct {
 
 	// A list of repositories to describe. If this parameter is omitted, then all
 	// repositories in a registry are described.
-	RepositoryNames []*string
+	RepositoryNames []string
 }
 
 type DescribeRepositoriesOutput struct {
@@ -68,7 +68,7 @@ type DescribeRepositoriesOutput struct {
 	NextToken *string
 
 	// A list of repository objects corresponding to valid repositories.
-	Repositories []*types.Repository
+	Repositories []types.Repository
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

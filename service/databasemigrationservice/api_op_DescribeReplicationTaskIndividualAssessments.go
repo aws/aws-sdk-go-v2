@@ -35,7 +35,7 @@ type DescribeReplicationTaskIndividualAssessmentsInput struct {
 	// Filters applied to the individual assessments described in the form of key-value
 	// pairs. Valid filter names: replication-task-assessment-run-arn,
 	// replication-task-arn, status
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
@@ -58,7 +58,7 @@ type DescribeReplicationTaskIndividualAssessmentsOutput struct {
 	Marker *string
 
 	// One or more individual assessments as specified by Filters.
-	ReplicationTaskIndividualAssessments []*types.ReplicationTaskIndividualAssessment
+	ReplicationTaskIndividualAssessments []types.ReplicationTaskIndividualAssessment
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

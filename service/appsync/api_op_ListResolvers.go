@@ -40,7 +40,7 @@ type ListResolversInput struct {
 	TypeName *string
 
 	// The maximum number of results you want the request to return.
-	MaxResults *int32
+	MaxResults int32
 
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
@@ -54,7 +54,7 @@ type ListResolversOutput struct {
 	NextToken *string
 
 	// The Resolver objects.
-	Resolvers []*types.Resolver
+	Resolvers []types.Resolver
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

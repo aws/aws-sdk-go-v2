@@ -49,7 +49,7 @@ type GetHealthCheckLastFailureReasonOutput struct {
 	// checker that is reporting a last failure reason.
 	//
 	// This member is required.
-	HealthCheckObservations []*types.HealthCheckObservation
+	HealthCheckObservations []types.HealthCheckObservation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

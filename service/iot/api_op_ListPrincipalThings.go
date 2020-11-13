@@ -51,7 +51,7 @@ type ListPrincipalThingsOutput struct {
 	NextToken *string
 
 	// The things.
-	Things []*string
+	Things []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

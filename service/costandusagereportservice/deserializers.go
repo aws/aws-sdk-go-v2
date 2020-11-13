@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	"github.com/awslabs/smithy-go/ptr"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
 	"strings"
@@ -680,7 +681,7 @@ func awsAwsjson11_deserializeDocumentDuplicateReportNameException(v **types.Dupl
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -720,7 +721,7 @@ func awsAwsjson11_deserializeDocumentInternalErrorException(v **types.InternalEr
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -788,7 +789,7 @@ func awsAwsjson11_deserializeDocumentReportDefinition(v **types.ReportDefinition
 				if !ok {
 					return fmt.Errorf("expected RefreshClosedReports to be of type *bool, got %T instead", value)
 				}
-				sv.RefreshClosedReports = &jtv
+				sv.RefreshClosedReports = ptr.Bool(jtv)
 			}
 
 		case "ReportName":
@@ -797,7 +798,7 @@ func awsAwsjson11_deserializeDocumentReportDefinition(v **types.ReportDefinition
 				if !ok {
 					return fmt.Errorf("expected ReportName to be of type string, got %T instead", value)
 				}
-				sv.ReportName = &jtv
+				sv.ReportName = ptr.String(jtv)
 			}
 
 		case "ReportVersioning":
@@ -815,7 +816,7 @@ func awsAwsjson11_deserializeDocumentReportDefinition(v **types.ReportDefinition
 				if !ok {
 					return fmt.Errorf("expected S3Bucket to be of type string, got %T instead", value)
 				}
-				sv.S3Bucket = &jtv
+				sv.S3Bucket = ptr.String(jtv)
 			}
 
 		case "S3Prefix":
@@ -824,7 +825,7 @@ func awsAwsjson11_deserializeDocumentReportDefinition(v **types.ReportDefinition
 				if !ok {
 					return fmt.Errorf("expected S3Prefix to be of type string, got %T instead", value)
 				}
-				sv.S3Prefix = &jtv
+				sv.S3Prefix = ptr.String(jtv)
 			}
 
 		case "S3Region":
@@ -854,7 +855,7 @@ func awsAwsjson11_deserializeDocumentReportDefinition(v **types.ReportDefinition
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentReportDefinitionList(v *[]*types.ReportDefinition, value interface{}) error {
+func awsAwsjson11_deserializeDocumentReportDefinitionList(v *[]types.ReportDefinition, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -867,18 +868,20 @@ func awsAwsjson11_deserializeDocumentReportDefinitionList(v *[]*types.ReportDefi
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.ReportDefinition
+	var cv []types.ReportDefinition
 	if *v == nil {
-		cv = []*types.ReportDefinition{}
+		cv = []types.ReportDefinition{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.ReportDefinition
-		if err := awsAwsjson11_deserializeDocumentReportDefinition(&col, value); err != nil {
+		var col types.ReportDefinition
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentReportDefinition(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -914,7 +917,7 @@ func awsAwsjson11_deserializeDocumentReportLimitReachedException(v **types.Repor
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -990,7 +993,7 @@ func awsAwsjson11_deserializeDocumentValidationException(v **types.ValidationExc
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1030,7 +1033,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteReportDefinitionOutput(v **DeleteRe
 				if !ok {
 					return fmt.Errorf("expected DeleteResponseMessage to be of type string, got %T instead", value)
 				}
-				sv.ResponseMessage = &jtv
+				sv.ResponseMessage = ptr.String(jtv)
 			}
 
 		default:
@@ -1070,7 +1073,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeReportDefinitionsOutput(v **Descr
 				if !ok {
 					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "ReportDefinitions":

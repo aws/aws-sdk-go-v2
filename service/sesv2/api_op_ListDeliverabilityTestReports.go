@@ -54,7 +54,7 @@ type ListDeliverabilityTestReportsOutput struct {
 	// performed.
 	//
 	// This member is required.
-	DeliverabilityTestReports []*types.DeliverabilityTestReport
+	DeliverabilityTestReports []types.DeliverabilityTestReport
 
 	// A token that indicates that there are additional predictive inbox placement
 	// tests to list. To view additional predictive inbox placement tests, issue

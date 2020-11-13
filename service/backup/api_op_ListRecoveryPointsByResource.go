@@ -56,7 +56,7 @@ type ListRecoveryPointsByResourceOutput struct {
 
 	// An array of objects that contain detailed information about recovery points of
 	// the specified resource type.
-	RecoveryPoints []*types.RecoveryPointByResource
+	RecoveryPoints []types.RecoveryPointByResource
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

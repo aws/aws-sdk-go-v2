@@ -66,7 +66,7 @@ type CreateActivationInput struct {
 
 	// Specify the maximum number of managed instances you want to register. The
 	// default value is 1 instance.
-	RegistrationLimit *int32
+	RegistrationLimit int32
 
 	// Optional metadata that you assign to a resource. Tags enable you to categorize a
 	// resource in different ways, such as by purpose, owner, or environment. For
@@ -90,7 +90,7 @@ type CreateActivationInput struct {
 	// information about how to add tags to your managed instances, see
 	// AddTagsToResource. For information about how to remove tags from your managed
 	// instances, see RemoveTagsFromResource.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateActivationOutput struct {

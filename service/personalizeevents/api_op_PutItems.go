@@ -39,7 +39,7 @@ type PutItemsInput struct {
 	// A list of item data.
 	//
 	// This member is required.
-	Items []*types.Item
+	Items []types.Item
 }
 
 type PutItemsOutput struct {

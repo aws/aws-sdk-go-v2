@@ -85,7 +85,7 @@ type ListBackupJobsOutput struct {
 
 	// An array of structures containing metadata about your backup jobs returned in
 	// JSON format.
-	BackupJobs []*types.BackupJob
+	BackupJobs []types.BackupJob
 
 	// The next item following a partial list of returned items. For example, if a
 	// request is made to return maxResults number of items, NextToken allows you to

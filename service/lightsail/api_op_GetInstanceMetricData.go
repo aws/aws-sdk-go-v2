@@ -120,7 +120,7 @@ type GetInstanceMetricDataInput struct {
 	// is available in 5-minute (300 seconds) granularity.
 	//
 	// This member is required.
-	Period *int32
+	Period int32
 
 	// The start time of the time period.
 	//
@@ -164,7 +164,7 @@ type GetInstanceMetricDataInput struct {
 type GetInstanceMetricDataOutput struct {
 
 	// An array of objects that describe the metric data returned.
-	MetricData []*types.MetricDatapoint
+	MetricData []types.MetricDatapoint
 
 	// The name of the metric returned.
 	MetricName types.InstanceMetricName

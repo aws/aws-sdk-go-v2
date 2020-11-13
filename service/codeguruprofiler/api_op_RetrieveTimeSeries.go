@@ -32,7 +32,7 @@ type RetrieveTimeSeriesInput struct {
 
 	EndTime *time.Time
 
-	FrameMetrics []*types.FrameMetric
+	FrameMetrics []types.FrameMetric
 
 	Period *string
 
@@ -42,19 +42,19 @@ type RetrieveTimeSeriesInput struct {
 }
 
 type RetrieveTimeSeriesOutput struct {
-	Data [][]*float64
+	Data [][]float64
 
 	EndTime *time.Time
 
-	EndTimes []*time.Time
+	EndTimes []time.Time
 
-	FrameMetrics []*types.FrameMetric
+	FrameMetrics []types.FrameMetric
 
 	Resolution types.AggregationPeriod
 
 	StartTime *time.Time
 
-	UnprocessedEndTimes map[string][]*time.Time
+	UnprocessedEndTimes map[string][]time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -511,13 +511,13 @@ func validateApp(v *types.App) error {
 	}
 }
 
-func validateAppsList(v []*types.App) error {
+func validateAppsList(v []types.App) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AppsList"}
 	for i := range v {
-		if err := validateApp(v[i]); err != nil {
+		if err := validateApp(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -560,9 +560,6 @@ func validatePolicy(v *types.Policy) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Policy"}
-	if v.ExcludeResourceTags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ExcludeResourceTags"))
-	}
 	if v.ResourceTags != nil {
 		if err := validateResourceTags(v.ResourceTags); err != nil {
 			invalidParams.AddNested("ResourceTags", err.(smithy.InvalidParamsError))
@@ -581,9 +578,6 @@ func validatePolicy(v *types.Policy) error {
 			invalidParams.AddNested("SecurityServicePolicyData", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.RemediationEnabled == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RemediationEnabled"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -591,7 +585,7 @@ func validatePolicy(v *types.Policy) error {
 	}
 }
 
-func validatePreviousAppsList(v map[string][]*types.App) error {
+func validatePreviousAppsList(v map[string][]types.App) error {
 	if v == nil {
 		return nil
 	}
@@ -641,13 +635,13 @@ func validateResourceTag(v *types.ResourceTag) error {
 	}
 }
 
-func validateResourceTags(v []*types.ResourceTag) error {
+func validateResourceTags(v []types.ResourceTag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResourceTags"}
 	for i := range v {
-		if err := validateResourceTag(v[i]); err != nil {
+		if err := validateResourceTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -691,13 +685,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagList(v []*types.Tag) error {
+func validateTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

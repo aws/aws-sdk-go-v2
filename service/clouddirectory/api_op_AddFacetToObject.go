@@ -48,7 +48,7 @@ type AddFacetToObjectInput struct {
 	SchemaFacet *types.SchemaFacet
 
 	// Attributes on the facet that you are adding to the object.
-	ObjectAttributeList []*types.AttributeKeyAndValue
+	ObjectAttributeList []types.AttributeKeyAndValue
 }
 
 type AddFacetToObjectOutput struct {

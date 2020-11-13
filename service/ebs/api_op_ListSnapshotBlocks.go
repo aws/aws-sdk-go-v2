@@ -52,7 +52,7 @@ type ListSnapshotBlocksOutput struct {
 	BlockSize *int32
 
 	// An array of objects containing information about the blocks.
-	Blocks []*types.Block
+	Blocks []types.Block
 
 	// The time when the BlockToken expires.
 	ExpiryTime *time.Time

@@ -52,7 +52,7 @@ type GetFlowTemplateRevisionsOutput struct {
 	NextToken *string
 
 	// An array of objects that provide summary data about each revision.
-	Summaries []*types.FlowTemplateSummary
+	Summaries []types.FlowTemplateSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

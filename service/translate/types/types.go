@@ -20,7 +20,7 @@ type AppliedTerminology struct {
 	// Translate for the translated text response. A maximum of 250 terms will be
 	// returned, and the specific terms applied will be the first 250 terms in the
 	// source text.
-	Terms []*Term
+	Terms []Term
 }
 
 // The encryption key used to encrypt the custom terminologies used by Amazon
@@ -177,7 +177,7 @@ type TerminologyProperties struct {
 
 	// The language codes for the target languages available with the custom
 	// terminology file. All possible target languages are returned in array.
-	TargetLanguageCodes []*string
+	TargetLanguageCodes []string
 
 	// The number of terms included in the custom terminology.
 	TermCount *int32
@@ -247,10 +247,10 @@ type TextTranslationJobProperties struct {
 
 	// The language code of the language of the target text. The language must be a
 	// language supported by Amazon Translate.
-	TargetLanguageCodes []*string
+	TargetLanguageCodes []string
 
 	// A list containing the names of the terminologies applied to a translation job.
 	// Only one terminology can be applied per StartTextTranslationJob request at this
 	// time.
-	TerminologyNames []*string
+	TerminologyNames []string
 }

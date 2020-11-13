@@ -72,7 +72,7 @@ type DescribeHsmOutput struct {
 	IamRoleArn *string
 
 	// The list of partitions on the HSM.
-	Partitions []*string
+	Partitions []string
 
 	// The serial number of the HSM.
 	SerialNumber *string

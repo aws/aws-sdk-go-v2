@@ -1813,13 +1813,13 @@ func validateConflictResolution(v *types.ConflictResolution) error {
 	}
 }
 
-func validateDeleteFileEntries(v []*types.DeleteFileEntry) error {
+func validateDeleteFileEntries(v []types.DeleteFileEntry) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteFileEntries"}
 	for i := range v {
-		if err := validateDeleteFileEntry(v[i]); err != nil {
+		if err := validateDeleteFileEntry(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1845,13 +1845,13 @@ func validateDeleteFileEntry(v *types.DeleteFileEntry) error {
 	}
 }
 
-func validatePutFileEntries(v []*types.PutFileEntry) error {
+func validatePutFileEntries(v []types.PutFileEntry) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutFileEntries"}
 	for i := range v {
-		if err := validatePutFileEntry(v[i]); err != nil {
+		if err := validatePutFileEntry(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1882,13 +1882,13 @@ func validatePutFileEntry(v *types.PutFileEntry) error {
 	}
 }
 
-func validateReplaceContentEntries(v []*types.ReplaceContentEntry) error {
+func validateReplaceContentEntries(v []types.ReplaceContentEntry) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ReplaceContentEntries"}
 	for i := range v {
-		if err := validateReplaceContentEntry(v[i]); err != nil {
+		if err := validateReplaceContentEntry(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1938,13 +1938,13 @@ func validateRepositoryTrigger(v *types.RepositoryTrigger) error {
 	}
 }
 
-func validateRepositoryTriggersList(v []*types.RepositoryTrigger) error {
+func validateRepositoryTriggersList(v []types.RepositoryTrigger) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RepositoryTriggersList"}
 	for i := range v {
-		if err := validateRepositoryTrigger(v[i]); err != nil {
+		if err := validateRepositoryTrigger(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1955,13 +1955,13 @@ func validateRepositoryTriggersList(v []*types.RepositoryTrigger) error {
 	}
 }
 
-func validateSetFileModeEntries(v []*types.SetFileModeEntry) error {
+func validateSetFileModeEntries(v []types.SetFileModeEntry) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SetFileModeEntries"}
 	for i := range v {
-		if err := validateSetFileModeEntry(v[i]); err != nil {
+		if err := validateSetFileModeEntry(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2023,13 +2023,13 @@ func validateTarget(v *types.Target) error {
 	}
 }
 
-func validateTargetList(v []*types.Target) error {
+func validateTargetList(v []types.Target) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TargetList"}
 	for i := range v {
-		if err := validateTarget(v[i]); err != nil {
+		if err := validateTarget(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

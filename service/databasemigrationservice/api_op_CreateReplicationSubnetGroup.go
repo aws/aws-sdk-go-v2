@@ -46,10 +46,10 @@ type CreateReplicationSubnetGroupInput struct {
 	// One or more subnet IDs to be assigned to the subnet group.
 	//
 	// This member is required.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// One or more tags to be assigned to the subnet group.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 //

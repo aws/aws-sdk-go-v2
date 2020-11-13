@@ -71,7 +71,7 @@ type GetCostAndUsageWithResourcesInput struct {
 
 	// You can group Amazon Web Services costs using up to two different groups:
 	// DIMENSION, TAG, COST_CATEGORY.
-	GroupBy []*types.GroupDefinition
+	GroupBy []types.GroupDefinition
 
 	// Which metrics are returned in the query. For more information about blended and
 	// unblended rates, see Why does the "blended" annotation appear on some line items
@@ -85,7 +85,7 @@ type GetCostAndUsageWithResourcesInput struct {
 	// and data transfer are measured in different units (for example, hours vs. GB).
 	// To get more meaningful UsageQuantity metrics, filter by UsageType or
 	// UsageTypeGroups. Metrics is required for GetCostAndUsageWithResources requests.
-	Metrics []*string
+	Metrics []string
 
 	// The token to retrieve the next set of results. AWS provides the token when the
 	// response from a previous call has more results than the maximum page size.
@@ -96,14 +96,14 @@ type GetCostAndUsageWithResourcesOutput struct {
 
 	// The groups that are specified by the Filter or GroupBy parameters in the
 	// request.
-	GroupDefinitions []*types.GroupDefinition
+	GroupDefinitions []types.GroupDefinition
 
 	// The token for the next set of retrievable results. AWS provides the token when
 	// the response from a previous call has more results than the maximum page size.
 	NextPageToken *string
 
 	// The time period that is covered by the results in the response.
-	ResultsByTime []*types.ResultByTime
+	ResultsByTime []types.ResultByTime
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

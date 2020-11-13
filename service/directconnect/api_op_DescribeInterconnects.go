@@ -37,7 +37,7 @@ type DescribeInterconnectsInput struct {
 type DescribeInterconnectsOutput struct {
 
 	// The interconnects.
-	Interconnects []*types.Interconnect
+	Interconnects []types.Interconnect
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -674,79 +674,59 @@ func awsAwsjson11_serializeDocumentAttachment(v *types.Attachment, value smithyj
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAttachments(v []*types.Attachment, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentAttachments(v []types.Attachment, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentAttachment(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentAttachment(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCaseIdList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentCaseIdList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCcEmailAddressList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentCcEmailAddressList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentServiceCodeList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentServiceCodeList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStringList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentStringList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -896,9 +876,9 @@ func awsAwsjson11_serializeOpDocumentDescribeCasesInput(v *DescribeCasesInput, v
 		ok.Boolean(*v.IncludeCommunications)
 	}
 
-	if v.IncludeResolvedCases != nil {
+	if v.IncludeResolvedCases {
 		ok := object.Key("includeResolvedCases")
-		ok.Boolean(*v.IncludeResolvedCases)
+		ok.Boolean(v.IncludeResolvedCases)
 	}
 
 	if v.Language != nil {

@@ -456,13 +456,13 @@ func validateHttpEndpointCommonAttribute(v *types.HttpEndpointCommonAttribute) e
 	}
 }
 
-func validateHttpEndpointCommonAttributesList(v []*types.HttpEndpointCommonAttribute) error {
+func validateHttpEndpointCommonAttributesList(v []types.HttpEndpointCommonAttribute) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "HttpEndpointCommonAttributesList"}
 	for i := range v {
-		if err := validateHttpEndpointCommonAttribute(v[i]); err != nil {
+		if err := validateHttpEndpointCommonAttribute(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -643,13 +643,13 @@ func validateProcessor(v *types.Processor) error {
 	}
 }
 
-func validateProcessorList(v []*types.Processor) error {
+func validateProcessorList(v []types.Processor) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ProcessorList"}
 	for i := range v {
-		if err := validateProcessor(v[i]); err != nil {
+		if err := validateProcessor(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -678,13 +678,13 @@ func validateProcessorParameter(v *types.ProcessorParameter) error {
 	}
 }
 
-func validateProcessorParameterList(v []*types.ProcessorParameter) error {
+func validateProcessorParameterList(v []types.ProcessorParameter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ProcessorParameterList"}
 	for i := range v {
-		if err := validateProcessorParameter(v[i]); err != nil {
+		if err := validateProcessorParameter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -695,13 +695,13 @@ func validateProcessorParameterList(v []*types.ProcessorParameter) error {
 	}
 }
 
-func validatePutRecordBatchRequestEntryList(v []*types.Record) error {
+func validatePutRecordBatchRequestEntryList(v []types.Record) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutRecordBatchRequestEntryList"}
 	for i := range v {
-		if err := validateRecord(v[i]); err != nil {
+		if err := validateRecord(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -917,13 +917,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagDeliveryStreamInputTagList(v []*types.Tag) error {
+func validateTagDeliveryStreamInputTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagDeliveryStreamInputTagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

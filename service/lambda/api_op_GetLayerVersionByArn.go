@@ -62,7 +62,7 @@ type GetLayerVersionByArnOutput struct {
 	LicenseInfo *string
 
 	// The version number.
-	Version *int64
+	Version int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

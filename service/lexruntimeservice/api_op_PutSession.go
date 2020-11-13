@@ -100,12 +100,12 @@ type PutSessionInput struct {
 	// the old summary view. For example, if a GetSession request returns three intents
 	// in the summary view and you call PutSession with one intent in the summary view,
 	// the next call to GetSession will only return one intent.
-	RecentIntentSummaryView []*types.IntentSummary
+	RecentIntentSummaryView []types.IntentSummary
 
 	// Map of key/value pairs representing the session-specific context information. It
 	// contains application information passed between Amazon Lex and a client
 	// application.
-	SessionAttributes map[string]*string
+	SessionAttributes map[string]string
 }
 
 type PutSessionOutput struct {

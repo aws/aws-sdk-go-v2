@@ -35,13 +35,13 @@ type DescribeTargetHealthInput struct {
 	TargetGroupArn *string
 
 	// The targets.
-	Targets []*types.TargetDescription
+	Targets []types.TargetDescription
 }
 
 type DescribeTargetHealthOutput struct {
 
 	// Information about the health of the targets.
-	TargetHealthDescriptions []*types.TargetHealthDescription
+	TargetHealthDescriptions []types.TargetHealthDescription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

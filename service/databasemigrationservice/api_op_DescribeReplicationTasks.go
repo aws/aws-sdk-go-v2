@@ -33,7 +33,7 @@ type DescribeReplicationTasksInput struct {
 
 	// Filters applied to replication tasks. Valid filter names: replication-task-arn |
 	// replication-task-id | migration-type | endpoint-arn | replication-instance-arn
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
@@ -61,7 +61,7 @@ type DescribeReplicationTasksOutput struct {
 	Marker *string
 
 	// A description of the replication tasks.
-	ReplicationTasks []*types.ReplicationTask
+	ReplicationTasks []types.ReplicationTask
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -43,7 +43,7 @@ type ListIAMPolicyAssignmentsInput struct {
 	AssignmentStatus types.AssignmentStatus
 
 	// The maximum number of results to be returned per request.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
@@ -52,7 +52,7 @@ type ListIAMPolicyAssignmentsInput struct {
 type ListIAMPolicyAssignmentsOutput struct {
 
 	// Information describing the IAM policy assignments.
-	IAMPolicyAssignments []*types.IAMPolicyAssignmentSummary
+	IAMPolicyAssignments []types.IAMPolicyAssignmentSummary
 
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
@@ -61,7 +61,7 @@ type ListIAMPolicyAssignmentsOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

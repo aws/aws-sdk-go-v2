@@ -115,7 +115,7 @@ type CreateFunctionInput struct {
 	Environment *types.Environment
 
 	// Connection settings for an Amazon EFS file system.
-	FileSystemConfigs []*types.FileSystemConfig
+	FileSystemConfigs []types.FileSystemConfig
 
 	// The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt
 	// your function's environment variables. If it's not provided, AWS Lambda uses a
@@ -126,7 +126,7 @@ type CreateFunctionInput struct {
 	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) to add
 	// to the function's execution environment. Specify each layer by its ARN,
 	// including the version.
-	Layers []*string
+	Layers []string
 
 	// The amount of memory that your function has access to. Increasing the function's
 	// memory also increases its CPU allocation. The default value is 128 MB. The value
@@ -134,11 +134,11 @@ type CreateFunctionInput struct {
 	MemorySize *int32
 
 	// Set to true to publish the first version of the function during creation.
-	Publish *bool
+	Publish bool
 
 	// A list of tags (https://docs.aws.amazon.com/lambda/latest/dg/tagging.html) to
 	// apply to the function.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The amount of time that Lambda allows a function to run before stopping it. The
 	// default is 3 seconds. The maximum allowed value is 900 seconds.
@@ -163,7 +163,7 @@ type CreateFunctionOutput struct {
 	CodeSha256 *string
 
 	// The size of the function's deployment package, in bytes.
-	CodeSize *int64
+	CodeSize int64
 
 	// The function's dead letter queue.
 	DeadLetterConfig *types.DeadLetterConfig
@@ -175,7 +175,7 @@ type CreateFunctionOutput struct {
 	Environment *types.EnvironmentResponse
 
 	// Connection settings for an Amazon EFS file system.
-	FileSystemConfigs []*types.FileSystemConfig
+	FileSystemConfigs []types.FileSystemConfig
 
 	// The function's Amazon Resource Name (ARN).
 	FunctionArn *string
@@ -206,7 +206,7 @@ type CreateFunctionOutput struct {
 
 	// The function's  layers
 	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
-	Layers []*types.Layer
+	Layers []types.Layer
 
 	// For Lambda@Edge functions, the ARN of the master function.
 	MasterArn *string

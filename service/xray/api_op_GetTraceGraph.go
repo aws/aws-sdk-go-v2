@@ -32,7 +32,7 @@ type GetTraceGraphInput struct {
 	// Trace IDs of requests for which to generate a service graph.
 	//
 	// This member is required.
-	TraceIds []*string
+	TraceIds []string
 
 	// Pagination token.
 	NextToken *string
@@ -44,7 +44,7 @@ type GetTraceGraphOutput struct {
 	NextToken *string
 
 	// The services that have processed one of the specified requests.
-	Services []*types.Service
+	Services []types.Service
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

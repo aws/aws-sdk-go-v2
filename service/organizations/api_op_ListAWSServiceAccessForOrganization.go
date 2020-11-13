@@ -61,7 +61,7 @@ type ListAWSServiceAccessForOrganizationOutput struct {
 	// A list of the service principals for the services that are enabled to integrate
 	// with your organization. Each principal is a structure that includes the name and
 	// the date that it was enabled for integration with AWS Organizations.
-	EnabledServicePrincipals []*types.EnabledServicePrincipal
+	EnabledServicePrincipals []types.EnabledServicePrincipal
 
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a

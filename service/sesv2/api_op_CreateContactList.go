@@ -38,11 +38,11 @@ type CreateContactListInput struct {
 	Description *string
 
 	// The tags associated with a contact list.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// An interest group, theme, or label within a list. A contact list can have
 	// multiple topics.
-	Topics []*types.Topic
+	Topics []types.Topic
 }
 
 type CreateContactListOutput struct {

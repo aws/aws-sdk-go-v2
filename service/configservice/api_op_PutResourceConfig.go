@@ -66,7 +66,7 @@ type PutResourceConfigInput struct {
 	ResourceName *string
 
 	// Tags associated with the resource.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type PutResourceConfigOutput struct {

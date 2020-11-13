@@ -41,7 +41,7 @@ type DescribeServiceErrorsInput struct {
 	// An array of service error IDs. If you use this parameter, DescribeServiceErrors
 	// returns descriptions of the specified errors. Otherwise, it returns a
 	// description of every error.
-	ServiceErrorIds []*string
+	ServiceErrorIds []string
 
 	// The stack ID. If you use this parameter, DescribeServiceErrors returns
 	// descriptions of the errors associated with the specified stack.
@@ -52,7 +52,7 @@ type DescribeServiceErrorsInput struct {
 type DescribeServiceErrorsOutput struct {
 
 	// An array of ServiceError objects that describe the specified service errors.
-	ServiceErrors []*types.ServiceError
+	ServiceErrors []types.ServiceError
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

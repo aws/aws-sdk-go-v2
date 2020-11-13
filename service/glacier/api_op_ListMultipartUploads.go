@@ -92,7 +92,7 @@ type ListMultipartUploadsOutput struct {
 	Marker *string
 
 	// A list of in-progress multipart uploads.
-	UploadsList []*types.UploadListElement
+	UploadsList []types.UploadListElement
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

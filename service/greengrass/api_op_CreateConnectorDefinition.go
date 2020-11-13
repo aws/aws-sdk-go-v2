@@ -41,7 +41,7 @@ type CreateConnectorDefinitionInput struct {
 	Name *string
 
 	// Tag(s) to add to the new resource.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateConnectorDefinitionOutput struct {

@@ -32,7 +32,7 @@ type UpdateMemberDetectorsInput struct {
 	// A list of member account IDs to be updated.
 	//
 	// This member is required.
-	AccountIds []*string
+	AccountIds []string
 
 	// The detector ID of the master account.
 	//
@@ -49,7 +49,7 @@ type UpdateMemberDetectorsOutput struct {
 	// explanation for why they were not processed.
 	//
 	// This member is required.
-	UnprocessedAccounts []*types.UnprocessedAccount
+	UnprocessedAccounts []types.UnprocessedAccount
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

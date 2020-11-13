@@ -39,7 +39,7 @@ type ListDimensionsOutput struct {
 
 	// A list of the names of the defined dimensions. Use DescribeDimension to get
 	// details for a dimension.
-	DimensionNames []*string
+	DimensionNames []string
 
 	// A token that can be used to retrieve the next set of results, or null if there
 	// are no additional results.

@@ -54,7 +54,7 @@ type GetContextKeysForCustomPolicyInput struct {
 	// (\u000A), and carriage return (\u000D)
 	//
 	// This member is required.
-	PolicyInputList []*string
+	PolicyInputList []string
 }
 
 // Contains the response to a successful GetContextKeysForPrincipalPolicy or
@@ -62,7 +62,7 @@ type GetContextKeysForCustomPolicyInput struct {
 type GetContextKeysForCustomPolicyOutput struct {
 
 	// The list of context keys that are referenced in the input policies.
-	ContextKeyNames []*string
+	ContextKeyNames []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

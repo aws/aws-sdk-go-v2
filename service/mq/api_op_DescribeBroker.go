@@ -47,7 +47,7 @@ type DescribeBrokerOutput struct {
 	// Required. Enables automatic upgrades to new minor versions for brokers, as
 	// Apache releases the versions. The automatic upgrades occur during the
 	// maintenance window of the broker or after a manual broker reboot.
-	AutoMinorVersionUpgrade *bool
+	AutoMinorVersionUpgrade bool
 
 	// The Amazon Resource Name (ARN) of the broker.
 	BrokerArn *string
@@ -56,7 +56,7 @@ type DescribeBrokerOutput struct {
 	BrokerId *string
 
 	// A list of information about allocated brokers.
-	BrokerInstances []*types.BrokerInstance
+	BrokerInstances []types.BrokerInstance
 
 	// The name of the broker. This value must be unique in your AWS account, 1-50
 	// characters long, must contain only letters, numbers, dashes, and underscores,
@@ -119,15 +119,15 @@ type DescribeBrokerOutput struct {
 	PendingLdapServerMetadata *types.LdapServerMetadataOutput
 
 	// The list of pending security groups to authorize connections to brokers.
-	PendingSecurityGroups []*string
+	PendingSecurityGroups []string
 
 	// Required. Enables connections from applications outside of the VPC that hosts
 	// the broker's subnets.
-	PubliclyAccessible *bool
+	PubliclyAccessible bool
 
 	// The list of security groups (1 minimum, 5 maximum) that authorizes connections
 	// to brokers.
-	SecurityGroups []*string
+	SecurityGroups []string
 
 	// The broker's storage type.
 	StorageType types.BrokerStorageType
@@ -136,13 +136,13 @@ type DescribeBrokerOutput struct {
 	// broker can use from different Availability Zones. A SINGLE_INSTANCE deployment
 	// requires one subnet (for example, the default subnet). An
 	// ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// The list of all tags associated with this broker.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The list of all ActiveMQ usernames for the specified broker.
-	Users []*types.UserSummary
+	Users []types.UserSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

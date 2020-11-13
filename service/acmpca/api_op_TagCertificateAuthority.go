@@ -52,7 +52,7 @@ type TagCertificateAuthorityInput struct {
 	// List of tags to be associated with the CA.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type TagCertificateAuthorityOutput struct {

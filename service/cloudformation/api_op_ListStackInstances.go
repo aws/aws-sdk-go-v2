@@ -38,7 +38,7 @@ type ListStackInstancesInput struct {
 	StackSetName *string
 
 	// The status that stack instances are filtered by.
-	Filters []*types.StackInstanceFilter
+	Filters []types.StackInstanceFilter
 
 	// The maximum number of results to be returned with a single call. If the number
 	// of available results exceeds this maximum, the response includes a NextToken
@@ -70,7 +70,7 @@ type ListStackInstancesOutput struct {
 
 	// A list of StackInstanceSummary structures that contain information about the
 	// specified stack instances.
-	Summaries []*types.StackInstanceSummary
+	Summaries []types.StackInstanceSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

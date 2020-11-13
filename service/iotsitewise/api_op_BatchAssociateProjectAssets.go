@@ -33,7 +33,7 @@ type BatchAssociateProjectAssetsInput struct {
 	// The IDs of the assets to be associated to the project.
 	//
 	// This member is required.
-	AssetIds []*string
+	AssetIds []string
 
 	// The ID of the project to which to associate the assets.
 	//
@@ -49,7 +49,7 @@ type BatchAssociateProjectAssetsInput struct {
 type BatchAssociateProjectAssetsOutput struct {
 
 	// A list of associated error information, if any.
-	Errors []*types.AssetErrorDetails
+	Errors []types.AssetErrorDetails
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

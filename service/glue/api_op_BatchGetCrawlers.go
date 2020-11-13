@@ -36,16 +36,16 @@ type BatchGetCrawlersInput struct {
 	// operation.
 	//
 	// This member is required.
-	CrawlerNames []*string
+	CrawlerNames []string
 }
 
 type BatchGetCrawlersOutput struct {
 
 	// A list of crawler definitions.
-	Crawlers []*types.Crawler
+	Crawlers []types.Crawler
 
 	// A list of names of crawlers that were not found.
-	CrawlersNotFound []*string
+	CrawlersNotFound []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

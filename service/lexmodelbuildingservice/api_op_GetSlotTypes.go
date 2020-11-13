@@ -62,7 +62,7 @@ type GetSlotTypesOutput struct {
 
 	// An array of objects, one for each slot type, that provides information such as
 	// the name of the slot type, the version, and a description.
-	SlotTypes []*types.SlotTypeMetadata
+	SlotTypes []types.SlotTypeMetadata
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

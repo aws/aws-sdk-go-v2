@@ -116,7 +116,7 @@ type DescribeSecretOutput struct {
 	// Specifies whether automatic rotation is enabled for this secret. To enable
 	// rotation, use RotateSecret with AutomaticallyRotateAfterDays set to a value
 	// greater than 0. To disable rotation, use CancelRotateSecret.
-	RotationEnabled *bool
+	RotationEnabled bool
 
 	// The ARN of a Lambda function that's invoked by Secrets Manager to rotate the
 	// secret either automatically per the schedule or manually by a call to
@@ -128,14 +128,14 @@ type DescribeSecretOutput struct {
 
 	// The list of user-defined tags that are associated with the secret. To add tags
 	// to a secret, use TagResource. To remove tags, use UntagResource.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// A list of all of the currently assigned VersionStage staging labels and the
 	// VersionId that each is attached to. Staging labels are used to keep track of the
 	// different versions during the rotation process. A version that does not have any
 	// staging labels attached is considered deprecated and subject to deletion. Such
 	// versions are not included in this list.
-	VersionIdsToStages map[string][]*string
+	VersionIdsToStages map[string][]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

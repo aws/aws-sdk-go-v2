@@ -51,7 +51,7 @@ type ListResourceDelegatesInput struct {
 type ListResourceDelegatesOutput struct {
 
 	// One page of the resource's delegates.
-	Delegates []*types.Delegate
+	Delegates []types.Delegate
 
 	// The token used to paginate through the delegates associated with a resource.
 	// While results are still available, it has an associated value. When the last

@@ -43,7 +43,7 @@ type UpdateStageInput struct {
 
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
-	PatchOperations []*types.PatchOperation
+	PatchOperations []types.PatchOperation
 }
 
 // Represents a unique identifier for a version of a deployed RestApi that is
@@ -55,7 +55,7 @@ type UpdateStageOutput struct {
 	AccessLogSettings *types.AccessLogSettings
 
 	// Specifies whether a cache cluster is enabled for the stage.
-	CacheClusterEnabled *bool
+	CacheClusterEnabled bool
 
 	// The size of the cache cluster for the stage, if enabled.
 	CacheClusterSize types.CacheClusterSize
@@ -88,7 +88,7 @@ type UpdateStageOutput struct {
 	// /{method_setting_key below) are method paths defined as
 	// {resource_path}/{http_method} for an individual method override, or /\*/\* for
 	// overriding all methods in the stage.
-	MethodSettings map[string]*types.MethodSetting
+	MethodSettings map[string]types.MethodSetting
 
 	// The name of the stage is the first path segment in the Uniform Resource
 	// Identifier (URI) of a call to API Gateway. Stage names can only contain
@@ -97,15 +97,15 @@ type UpdateStageOutput struct {
 	StageName *string
 
 	// The collection of tags. Each tag element is associated with a given resource.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Specifies whether active tracing with X-ray is enabled for the Stage.
-	TracingEnabled *bool
+	TracingEnabled bool
 
 	// A map that defines the stage variables for a Stage resource. Variable names can
 	// have alphanumeric and underscore characters, and the values must match
 	// [A-Za-z0-9-._~:/?#&=,]+.
-	Variables map[string]*string
+	Variables map[string]string
 
 	// The ARN of the WebAcl associated with the Stage.
 	WebAclArn *string

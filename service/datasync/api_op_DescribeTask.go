@@ -56,7 +56,7 @@ type DescribeTaskOutput struct {
 
 	// The Amazon Resource Name (ARN) of the destination ENIs (Elastic Network
 	// Interface) that was created for your subnet.
-	DestinationNetworkInterfaceArns []*string
+	DestinationNetworkInterfaceArns []string
 
 	// Errors that AWS DataSync encountered during execution of the task. You can use
 	// this error code to help troubleshoot issues.
@@ -70,7 +70,7 @@ type DescribeTaskOutput struct {
 	// list should contain a single filter string that consists of the patterns to
 	// exclude. The patterns are delimited by "|" (that is, a pipe), for example:
 	// "/folder1|/folder2"
-	Excludes []*types.FilterRule
+	Excludes []types.FilterRule
 
 	// The name of the task that was described.
 	Name *string
@@ -92,7 +92,7 @@ type DescribeTaskOutput struct {
 
 	// The Amazon Resource Name (ARN) of the source ENIs (Elastic Network Interface)
 	// that was created for your subnet.
-	SourceNetworkInterfaceArns []*string
+	SourceNetworkInterfaceArns []string
 
 	// The status of the task that was described. For detailed information about task
 	// execution statuses, see Understanding Task Statuses in the AWS DataSync User

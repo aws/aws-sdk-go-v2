@@ -34,7 +34,7 @@ func (c *Client) DescribeEventSubscriptions(ctx context.Context, params *Describ
 type DescribeEventSubscriptionsInput struct {
 
 	// Filters applied to event subscriptions.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
@@ -55,7 +55,7 @@ type DescribeEventSubscriptionsInput struct {
 type DescribeEventSubscriptionsOutput struct {
 
 	// A list of event subscriptions.
-	EventSubscriptionsList []*types.EventSubscription
+	EventSubscriptionsList []types.EventSubscription
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the

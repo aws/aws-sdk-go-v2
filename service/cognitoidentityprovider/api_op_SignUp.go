@@ -74,7 +74,7 @@ type SignUpInput struct {
 	//
 	// * Amazon Cognito does not encrypt the the ClientMetadata value, so don't
 	// use it to provide sensitive information.
-	ClientMetadata map[string]*string
+	ClientMetadata map[string]string
 
 	// A keyed-hash message authentication code (HMAC) calculated using the secret key
 	// of a user pool client and username plus the client ID in the message.
@@ -82,7 +82,7 @@ type SignUpInput struct {
 
 	// An array of name-value pairs representing user attributes. For custom
 	// attributes, you must prepend the custom: prefix to the attribute name.
-	UserAttributes []*types.AttributeType
+	UserAttributes []types.AttributeType
 
 	// Contextual data such as the user's device fingerprint, IP address, or location
 	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
@@ -90,7 +90,7 @@ type SignUpInput struct {
 	UserContextData *types.UserContextDataType
 
 	// The validation data in the request to register a user.
-	ValidationData []*types.AttributeType
+	ValidationData []types.AttributeType
 }
 
 // The response from the server for a registration request.
@@ -100,7 +100,7 @@ type SignUpOutput struct {
 	// confirmed.
 	//
 	// This member is required.
-	UserConfirmed *bool
+	UserConfirmed bool
 
 	// The UUID of the authenticated user. This is not the same as username.
 	//

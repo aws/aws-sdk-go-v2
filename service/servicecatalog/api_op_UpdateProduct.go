@@ -44,7 +44,7 @@ type UpdateProductInput struct {
 	AcceptLanguage *string
 
 	// The tags to add to the product.
-	AddTags []*types.Tag
+	AddTags []types.Tag
 
 	// The updated description of the product.
 	Description *string
@@ -59,7 +59,7 @@ type UpdateProductInput struct {
 	Owner *string
 
 	// The tags to remove from the product.
-	RemoveTags []*string
+	RemoveTags []string
 
 	// The updated support description for the product.
 	SupportDescription *string
@@ -77,7 +77,7 @@ type UpdateProductOutput struct {
 	ProductViewDetail *types.ProductViewDetail
 
 	// Information about the tags associated with the product.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

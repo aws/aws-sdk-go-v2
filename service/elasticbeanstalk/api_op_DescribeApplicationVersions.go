@@ -46,14 +46,14 @@ type DescribeApplicationVersionsInput struct {
 	NextToken *string
 
 	// Specify a version label to show a specific application version.
-	VersionLabels []*string
+	VersionLabels []string
 }
 
 // Result message wrapping a list of application version descriptions.
 type DescribeApplicationVersionsOutput struct {
 
 	// List of ApplicationVersionDescription objects sorted in order of creation.
-	ApplicationVersions []*types.ApplicationVersionDescription
+	ApplicationVersions []types.ApplicationVersionDescription
 
 	// In a paginated request, the token that you can pass in a subsequent request to
 	// get the next response page.

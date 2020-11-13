@@ -48,7 +48,7 @@ type UpdateBillingGroupInput struct {
 type UpdateBillingGroupOutput struct {
 
 	// The latest version of the billing group.
-	Version *int64
+	Version int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

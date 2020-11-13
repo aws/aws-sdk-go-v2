@@ -102,7 +102,7 @@ type TagResourceInput struct {
 	// Key="Key1",Value="Value1",Key="Key2",Value="Value2"[,…]
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type TagResourceOutput struct {

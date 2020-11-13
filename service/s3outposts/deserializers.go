@@ -170,7 +170,7 @@ func awsRestjson1_deserializeOpDocumentCreateEndpointOutput(v **CreateEndpointOu
 				if !ok {
 					return fmt.Errorf("expected EndpointArn to be of type string, got %T instead", value)
 				}
-				sv.EndpointArn = &jtv
+				sv.EndpointArn = ptr.String(jtv)
 			}
 
 		default:
@@ -427,7 +427,7 @@ func awsRestjson1_deserializeOpDocumentListEndpointsOutput(v **ListEndpointsOutp
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -647,7 +647,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -687,7 +687,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -727,7 +727,7 @@ func awsRestjson1_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 				if !ok {
 					return fmt.Errorf("expected CidrBlock to be of type string, got %T instead", value)
 				}
-				sv.CidrBlock = &jtv
+				sv.CidrBlock = ptr.String(jtv)
 			}
 
 		case "CreationTime":
@@ -749,7 +749,7 @@ func awsRestjson1_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 				if !ok {
 					return fmt.Errorf("expected EndpointArn to be of type string, got %T instead", value)
 				}
-				sv.EndpointArn = &jtv
+				sv.EndpointArn = ptr.String(jtv)
 			}
 
 		case "NetworkInterfaces":
@@ -763,7 +763,7 @@ func awsRestjson1_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 				if !ok {
 					return fmt.Errorf("expected OutpostId to be of type string, got %T instead", value)
 				}
-				sv.OutpostsId = &jtv
+				sv.OutpostsId = ptr.String(jtv)
 			}
 
 		case "Status":
@@ -784,7 +784,7 @@ func awsRestjson1_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentEndpoints(v *[]*types.Endpoint, value interface{}) error {
+func awsRestjson1_deserializeDocumentEndpoints(v *[]types.Endpoint, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -797,18 +797,20 @@ func awsRestjson1_deserializeDocumentEndpoints(v *[]*types.Endpoint, value inter
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Endpoint
+	var cv []types.Endpoint
 	if *v == nil {
-		cv = []*types.Endpoint{}
+		cv = []types.Endpoint{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Endpoint
-		if err := awsRestjson1_deserializeDocumentEndpoint(&col, value); err != nil {
+		var col types.Endpoint
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentEndpoint(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -844,7 +846,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -884,7 +886,7 @@ func awsRestjson1_deserializeDocumentNetworkInterface(v **types.NetworkInterface
 				if !ok {
 					return fmt.Errorf("expected NetworkInterfaceId to be of type string, got %T instead", value)
 				}
-				sv.NetworkInterfaceId = &jtv
+				sv.NetworkInterfaceId = ptr.String(jtv)
 			}
 
 		default:
@@ -896,7 +898,7 @@ func awsRestjson1_deserializeDocumentNetworkInterface(v **types.NetworkInterface
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentNetworkInterfaces(v *[]*types.NetworkInterface, value interface{}) error {
+func awsRestjson1_deserializeDocumentNetworkInterfaces(v *[]types.NetworkInterface, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -909,18 +911,20 @@ func awsRestjson1_deserializeDocumentNetworkInterfaces(v *[]*types.NetworkInterf
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.NetworkInterface
+	var cv []types.NetworkInterface
 	if *v == nil {
-		cv = []*types.NetworkInterface{}
+		cv = []types.NetworkInterface{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.NetworkInterface
-		if err := awsRestjson1_deserializeDocumentNetworkInterface(&col, value); err != nil {
+		var col types.NetworkInterface
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentNetworkInterface(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -956,7 +960,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -996,7 +1000,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:

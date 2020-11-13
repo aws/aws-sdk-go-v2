@@ -63,7 +63,7 @@ type CreateFlowDefinitionInput struct {
 	// An array of key-value pairs that contain metadata to help you categorize and
 	// organize a flow definition. Each tag consists of a key and a value, both of
 	// which you define.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateFlowDefinitionOutput struct {

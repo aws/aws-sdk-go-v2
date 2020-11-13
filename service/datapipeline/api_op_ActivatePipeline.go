@@ -43,7 +43,7 @@ type ActivatePipelineInput struct {
 	PipelineId *string
 
 	// A list of parameter values to pass to the pipeline at activation.
-	ParameterValues []*types.ParameterValue
+	ParameterValues []types.ParameterValue
 
 	// The date and time to resume the pipeline. By default, the pipeline resumes from
 	// the last completed execution.

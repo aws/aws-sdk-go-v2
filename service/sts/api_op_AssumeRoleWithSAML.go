@@ -212,7 +212,7 @@ type AssumeRoleWithSAMLInput struct {
 	// For more information, see Session Policies
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session)
 	// in the IAM User Guide.
-	PolicyArns []*types.PolicyDescriptorType
+	PolicyArns []types.PolicyDescriptorType
 }
 
 // Contains the response to a successful AssumeRoleWithSAML request, including

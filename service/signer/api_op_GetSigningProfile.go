@@ -55,13 +55,13 @@ type GetSigningProfileOutput struct {
 
 	// A map of key-value pairs for signing operations that is attached to the target
 	// signing profile.
-	SigningParameters map[string]*string
+	SigningParameters map[string]string
 
 	// The status of the target signing profile.
 	Status types.SigningProfileStatus
 
 	// A list of tags associated with the signing profile.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

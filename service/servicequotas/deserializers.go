@@ -2639,7 +2639,7 @@ func awsAwsjson11_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				if !ok {
 					return fmt.Errorf("expected ExceptionMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2679,7 +2679,7 @@ func awsAwsjson11_deserializeDocumentAWSServiceAccessNotEnabledException(v **typ
 				if !ok {
 					return fmt.Errorf("expected ExceptionMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2719,7 +2719,7 @@ func awsAwsjson11_deserializeDocumentDependencyAccessDeniedException(v **types.D
 				if !ok {
 					return fmt.Errorf("expected ExceptionMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2768,7 +2768,7 @@ func awsAwsjson11_deserializeDocumentErrorReason(v **types.ErrorReason, value in
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.ErrorMessage = &jtv
+				sv.ErrorMessage = ptr.String(jtv)
 			}
 
 		default:
@@ -2808,7 +2808,7 @@ func awsAwsjson11_deserializeDocumentIllegalArgumentException(v **types.IllegalA
 				if !ok {
 					return fmt.Errorf("expected ExceptionMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2848,7 +2848,7 @@ func awsAwsjson11_deserializeDocumentInvalidPaginationTokenException(v **types.I
 				if !ok {
 					return fmt.Errorf("expected ExceptionMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2888,7 +2888,7 @@ func awsAwsjson11_deserializeDocumentInvalidResourceStateException(v **types.Inv
 				if !ok {
 					return fmt.Errorf("expected ExceptionMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2900,7 +2900,7 @@ func awsAwsjson11_deserializeDocumentInvalidResourceStateException(v **types.Inv
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentMetricDimensionsMapDefinition(v *map[string]*string, value interface{}) error {
+func awsAwsjson11_deserializeDocumentMetricDimensionsMapDefinition(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2913,21 +2913,21 @@ func awsAwsjson11_deserializeDocumentMetricDimensionsMapDefinition(v *map[string
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var mv map[string]*string
+	var mv map[string]string
 	if *v == nil {
-		mv = map[string]*string{}
+		mv = map[string]string{}
 	} else {
 		mv = *v
 	}
 
 	for key, value := range shape {
-		var parsedVal *string
+		var parsedVal string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected MetricDimensionValue to be of type string, got %T instead", value)
 			}
-			parsedVal = &jtv
+			parsedVal = jtv
 		}
 		mv[key] = parsedVal
 
@@ -2969,7 +2969,7 @@ func awsAwsjson11_deserializeDocumentMetricInfo(v **types.MetricInfo, value inte
 				if !ok {
 					return fmt.Errorf("expected QuotaMetricName to be of type string, got %T instead", value)
 				}
-				sv.MetricName = &jtv
+				sv.MetricName = ptr.String(jtv)
 			}
 
 		case "MetricNamespace":
@@ -2978,7 +2978,7 @@ func awsAwsjson11_deserializeDocumentMetricInfo(v **types.MetricInfo, value inte
 				if !ok {
 					return fmt.Errorf("expected QuotaMetricNamespace to be of type string, got %T instead", value)
 				}
-				sv.MetricNamespace = &jtv
+				sv.MetricNamespace = ptr.String(jtv)
 			}
 
 		case "MetricStatisticRecommendation":
@@ -2987,7 +2987,7 @@ func awsAwsjson11_deserializeDocumentMetricInfo(v **types.MetricInfo, value inte
 				if !ok {
 					return fmt.Errorf("expected Statistic to be of type string, got %T instead", value)
 				}
-				sv.MetricStatisticRecommendation = &jtv
+				sv.MetricStatisticRecommendation = ptr.String(jtv)
 			}
 
 		default:
@@ -3027,7 +3027,7 @@ func awsAwsjson11_deserializeDocumentNoAvailableOrganizationException(v **types.
 				if !ok {
 					return fmt.Errorf("expected ExceptionMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -3067,7 +3067,7 @@ func awsAwsjson11_deserializeDocumentNoSuchResourceException(v **types.NoSuchRes
 				if !ok {
 					return fmt.Errorf("expected ExceptionMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -3107,7 +3107,7 @@ func awsAwsjson11_deserializeDocumentOrganizationNotInAllFeaturesModeException(v
 				if !ok {
 					return fmt.Errorf("expected ExceptionMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -3147,7 +3147,7 @@ func awsAwsjson11_deserializeDocumentQuotaExceededException(v **types.QuotaExcee
 				if !ok {
 					return fmt.Errorf("expected ExceptionMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -3240,7 +3240,7 @@ func awsAwsjson11_deserializeDocumentRequestedServiceQuotaChange(v **types.Reque
 				if !ok {
 					return fmt.Errorf("expected CustomerServiceEngagementId to be of type string, got %T instead", value)
 				}
-				sv.CaseId = &jtv
+				sv.CaseId = ptr.String(jtv)
 			}
 
 		case "Created":
@@ -3266,7 +3266,7 @@ func awsAwsjson11_deserializeDocumentRequestedServiceQuotaChange(v **types.Reque
 				if err != nil {
 					return err
 				}
-				sv.DesiredValue = &f64
+				sv.DesiredValue = ptr.Float64(f64)
 			}
 
 		case "GlobalQuota":
@@ -3275,7 +3275,7 @@ func awsAwsjson11_deserializeDocumentRequestedServiceQuotaChange(v **types.Reque
 				if !ok {
 					return fmt.Errorf("expected GlobalQuota to be of type *bool, got %T instead", value)
 				}
-				sv.GlobalQuota = &jtv
+				sv.GlobalQuota = jtv
 			}
 
 		case "Id":
@@ -3284,7 +3284,7 @@ func awsAwsjson11_deserializeDocumentRequestedServiceQuotaChange(v **types.Reque
 				if !ok {
 					return fmt.Errorf("expected RequestId to be of type string, got %T instead", value)
 				}
-				sv.Id = &jtv
+				sv.Id = ptr.String(jtv)
 			}
 
 		case "LastUpdated":
@@ -3306,7 +3306,7 @@ func awsAwsjson11_deserializeDocumentRequestedServiceQuotaChange(v **types.Reque
 				if !ok {
 					return fmt.Errorf("expected QuotaArn to be of type string, got %T instead", value)
 				}
-				sv.QuotaArn = &jtv
+				sv.QuotaArn = ptr.String(jtv)
 			}
 
 		case "QuotaCode":
@@ -3315,7 +3315,7 @@ func awsAwsjson11_deserializeDocumentRequestedServiceQuotaChange(v **types.Reque
 				if !ok {
 					return fmt.Errorf("expected QuotaCode to be of type string, got %T instead", value)
 				}
-				sv.QuotaCode = &jtv
+				sv.QuotaCode = ptr.String(jtv)
 			}
 
 		case "QuotaName":
@@ -3324,7 +3324,7 @@ func awsAwsjson11_deserializeDocumentRequestedServiceQuotaChange(v **types.Reque
 				if !ok {
 					return fmt.Errorf("expected QuotaName to be of type string, got %T instead", value)
 				}
-				sv.QuotaName = &jtv
+				sv.QuotaName = ptr.String(jtv)
 			}
 
 		case "Requester":
@@ -3333,7 +3333,7 @@ func awsAwsjson11_deserializeDocumentRequestedServiceQuotaChange(v **types.Reque
 				if !ok {
 					return fmt.Errorf("expected Requester to be of type string, got %T instead", value)
 				}
-				sv.Requester = &jtv
+				sv.Requester = ptr.String(jtv)
 			}
 
 		case "ServiceCode":
@@ -3342,7 +3342,7 @@ func awsAwsjson11_deserializeDocumentRequestedServiceQuotaChange(v **types.Reque
 				if !ok {
 					return fmt.Errorf("expected ServiceCode to be of type string, got %T instead", value)
 				}
-				sv.ServiceCode = &jtv
+				sv.ServiceCode = ptr.String(jtv)
 			}
 
 		case "ServiceName":
@@ -3351,7 +3351,7 @@ func awsAwsjson11_deserializeDocumentRequestedServiceQuotaChange(v **types.Reque
 				if !ok {
 					return fmt.Errorf("expected ServiceName to be of type string, got %T instead", value)
 				}
-				sv.ServiceName = &jtv
+				sv.ServiceName = ptr.String(jtv)
 			}
 
 		case "Status":
@@ -3369,7 +3369,7 @@ func awsAwsjson11_deserializeDocumentRequestedServiceQuotaChange(v **types.Reque
 				if !ok {
 					return fmt.Errorf("expected QuotaUnit to be of type string, got %T instead", value)
 				}
-				sv.Unit = &jtv
+				sv.Unit = ptr.String(jtv)
 			}
 
 		default:
@@ -3381,7 +3381,7 @@ func awsAwsjson11_deserializeDocumentRequestedServiceQuotaChange(v **types.Reque
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentRequestedServiceQuotaChangeHistoryListDefinition(v *[]*types.RequestedServiceQuotaChange, value interface{}) error {
+func awsAwsjson11_deserializeDocumentRequestedServiceQuotaChangeHistoryListDefinition(v *[]types.RequestedServiceQuotaChange, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3394,18 +3394,20 @@ func awsAwsjson11_deserializeDocumentRequestedServiceQuotaChangeHistoryListDefin
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.RequestedServiceQuotaChange
+	var cv []types.RequestedServiceQuotaChange
 	if *v == nil {
-		cv = []*types.RequestedServiceQuotaChange{}
+		cv = []types.RequestedServiceQuotaChange{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.RequestedServiceQuotaChange
-		if err := awsAwsjson11_deserializeDocumentRequestedServiceQuotaChange(&col, value); err != nil {
+		var col types.RequestedServiceQuotaChange
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentRequestedServiceQuotaChange(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -3441,7 +3443,7 @@ func awsAwsjson11_deserializeDocumentResourceAlreadyExistsException(v **types.Re
 				if !ok {
 					return fmt.Errorf("expected ExceptionMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -3481,7 +3483,7 @@ func awsAwsjson11_deserializeDocumentServiceException(v **types.ServiceException
 				if !ok {
 					return fmt.Errorf("expected ExceptionMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -3521,7 +3523,7 @@ func awsAwsjson11_deserializeDocumentServiceInfo(v **types.ServiceInfo, value in
 				if !ok {
 					return fmt.Errorf("expected ServiceCode to be of type string, got %T instead", value)
 				}
-				sv.ServiceCode = &jtv
+				sv.ServiceCode = ptr.String(jtv)
 			}
 
 		case "ServiceName":
@@ -3530,7 +3532,7 @@ func awsAwsjson11_deserializeDocumentServiceInfo(v **types.ServiceInfo, value in
 				if !ok {
 					return fmt.Errorf("expected ServiceName to be of type string, got %T instead", value)
 				}
-				sv.ServiceName = &jtv
+				sv.ServiceName = ptr.String(jtv)
 			}
 
 		default:
@@ -3542,7 +3544,7 @@ func awsAwsjson11_deserializeDocumentServiceInfo(v **types.ServiceInfo, value in
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentServiceInfoListDefinition(v *[]*types.ServiceInfo, value interface{}) error {
+func awsAwsjson11_deserializeDocumentServiceInfoListDefinition(v *[]types.ServiceInfo, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3555,18 +3557,20 @@ func awsAwsjson11_deserializeDocumentServiceInfoListDefinition(v *[]*types.Servi
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.ServiceInfo
+	var cv []types.ServiceInfo
 	if *v == nil {
-		cv = []*types.ServiceInfo{}
+		cv = []types.ServiceInfo{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.ServiceInfo
-		if err := awsAwsjson11_deserializeDocumentServiceInfo(&col, value); err != nil {
+		var col types.ServiceInfo
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentServiceInfo(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -3602,7 +3606,7 @@ func awsAwsjson11_deserializeDocumentServiceQuota(v **types.ServiceQuota, value 
 				if !ok {
 					return fmt.Errorf("expected QuotaAdjustable to be of type *bool, got %T instead", value)
 				}
-				sv.Adjustable = &jtv
+				sv.Adjustable = jtv
 			}
 
 		case "ErrorReason":
@@ -3616,7 +3620,7 @@ func awsAwsjson11_deserializeDocumentServiceQuota(v **types.ServiceQuota, value 
 				if !ok {
 					return fmt.Errorf("expected GlobalQuota to be of type *bool, got %T instead", value)
 				}
-				sv.GlobalQuota = &jtv
+				sv.GlobalQuota = jtv
 			}
 
 		case "Period":
@@ -3630,7 +3634,7 @@ func awsAwsjson11_deserializeDocumentServiceQuota(v **types.ServiceQuota, value 
 				if !ok {
 					return fmt.Errorf("expected QuotaArn to be of type string, got %T instead", value)
 				}
-				sv.QuotaArn = &jtv
+				sv.QuotaArn = ptr.String(jtv)
 			}
 
 		case "QuotaCode":
@@ -3639,7 +3643,7 @@ func awsAwsjson11_deserializeDocumentServiceQuota(v **types.ServiceQuota, value 
 				if !ok {
 					return fmt.Errorf("expected QuotaCode to be of type string, got %T instead", value)
 				}
-				sv.QuotaCode = &jtv
+				sv.QuotaCode = ptr.String(jtv)
 			}
 
 		case "QuotaName":
@@ -3648,7 +3652,7 @@ func awsAwsjson11_deserializeDocumentServiceQuota(v **types.ServiceQuota, value 
 				if !ok {
 					return fmt.Errorf("expected QuotaName to be of type string, got %T instead", value)
 				}
-				sv.QuotaName = &jtv
+				sv.QuotaName = ptr.String(jtv)
 			}
 
 		case "ServiceCode":
@@ -3657,7 +3661,7 @@ func awsAwsjson11_deserializeDocumentServiceQuota(v **types.ServiceQuota, value 
 				if !ok {
 					return fmt.Errorf("expected ServiceCode to be of type string, got %T instead", value)
 				}
-				sv.ServiceCode = &jtv
+				sv.ServiceCode = ptr.String(jtv)
 			}
 
 		case "ServiceName":
@@ -3666,7 +3670,7 @@ func awsAwsjson11_deserializeDocumentServiceQuota(v **types.ServiceQuota, value 
 				if !ok {
 					return fmt.Errorf("expected ServiceName to be of type string, got %T instead", value)
 				}
-				sv.ServiceName = &jtv
+				sv.ServiceName = ptr.String(jtv)
 			}
 
 		case "Unit":
@@ -3675,7 +3679,7 @@ func awsAwsjson11_deserializeDocumentServiceQuota(v **types.ServiceQuota, value 
 				if !ok {
 					return fmt.Errorf("expected QuotaUnit to be of type string, got %T instead", value)
 				}
-				sv.Unit = &jtv
+				sv.Unit = ptr.String(jtv)
 			}
 
 		case "UsageMetric":
@@ -3693,7 +3697,7 @@ func awsAwsjson11_deserializeDocumentServiceQuota(v **types.ServiceQuota, value 
 				if err != nil {
 					return err
 				}
-				sv.Value = &f64
+				sv.Value = ptr.Float64(f64)
 			}
 
 		default:
@@ -3733,7 +3737,7 @@ func awsAwsjson11_deserializeDocumentServiceQuotaIncreaseRequestInTemplate(v **t
 				if !ok {
 					return fmt.Errorf("expected AwsRegion to be of type string, got %T instead", value)
 				}
-				sv.AwsRegion = &jtv
+				sv.AwsRegion = ptr.String(jtv)
 			}
 
 		case "DesiredValue":
@@ -3746,7 +3750,7 @@ func awsAwsjson11_deserializeDocumentServiceQuotaIncreaseRequestInTemplate(v **t
 				if err != nil {
 					return err
 				}
-				sv.DesiredValue = &f64
+				sv.DesiredValue = ptr.Float64(f64)
 			}
 
 		case "GlobalQuota":
@@ -3755,7 +3759,7 @@ func awsAwsjson11_deserializeDocumentServiceQuotaIncreaseRequestInTemplate(v **t
 				if !ok {
 					return fmt.Errorf("expected GlobalQuota to be of type *bool, got %T instead", value)
 				}
-				sv.GlobalQuota = &jtv
+				sv.GlobalQuota = jtv
 			}
 
 		case "QuotaCode":
@@ -3764,7 +3768,7 @@ func awsAwsjson11_deserializeDocumentServiceQuotaIncreaseRequestInTemplate(v **t
 				if !ok {
 					return fmt.Errorf("expected QuotaCode to be of type string, got %T instead", value)
 				}
-				sv.QuotaCode = &jtv
+				sv.QuotaCode = ptr.String(jtv)
 			}
 
 		case "QuotaName":
@@ -3773,7 +3777,7 @@ func awsAwsjson11_deserializeDocumentServiceQuotaIncreaseRequestInTemplate(v **t
 				if !ok {
 					return fmt.Errorf("expected QuotaName to be of type string, got %T instead", value)
 				}
-				sv.QuotaName = &jtv
+				sv.QuotaName = ptr.String(jtv)
 			}
 
 		case "ServiceCode":
@@ -3782,7 +3786,7 @@ func awsAwsjson11_deserializeDocumentServiceQuotaIncreaseRequestInTemplate(v **t
 				if !ok {
 					return fmt.Errorf("expected ServiceCode to be of type string, got %T instead", value)
 				}
-				sv.ServiceCode = &jtv
+				sv.ServiceCode = ptr.String(jtv)
 			}
 
 		case "ServiceName":
@@ -3791,7 +3795,7 @@ func awsAwsjson11_deserializeDocumentServiceQuotaIncreaseRequestInTemplate(v **t
 				if !ok {
 					return fmt.Errorf("expected ServiceName to be of type string, got %T instead", value)
 				}
-				sv.ServiceName = &jtv
+				sv.ServiceName = ptr.String(jtv)
 			}
 
 		case "Unit":
@@ -3800,7 +3804,7 @@ func awsAwsjson11_deserializeDocumentServiceQuotaIncreaseRequestInTemplate(v **t
 				if !ok {
 					return fmt.Errorf("expected QuotaUnit to be of type string, got %T instead", value)
 				}
-				sv.Unit = &jtv
+				sv.Unit = ptr.String(jtv)
 			}
 
 		default:
@@ -3812,7 +3816,7 @@ func awsAwsjson11_deserializeDocumentServiceQuotaIncreaseRequestInTemplate(v **t
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentServiceQuotaIncreaseRequestInTemplateList(v *[]*types.ServiceQuotaIncreaseRequestInTemplate, value interface{}) error {
+func awsAwsjson11_deserializeDocumentServiceQuotaIncreaseRequestInTemplateList(v *[]types.ServiceQuotaIncreaseRequestInTemplate, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3825,18 +3829,20 @@ func awsAwsjson11_deserializeDocumentServiceQuotaIncreaseRequestInTemplateList(v
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.ServiceQuotaIncreaseRequestInTemplate
+	var cv []types.ServiceQuotaIncreaseRequestInTemplate
 	if *v == nil {
-		cv = []*types.ServiceQuotaIncreaseRequestInTemplate{}
+		cv = []types.ServiceQuotaIncreaseRequestInTemplate{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.ServiceQuotaIncreaseRequestInTemplate
-		if err := awsAwsjson11_deserializeDocumentServiceQuotaIncreaseRequestInTemplate(&col, value); err != nil {
+		var col types.ServiceQuotaIncreaseRequestInTemplate
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentServiceQuotaIncreaseRequestInTemplate(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -3844,7 +3850,7 @@ func awsAwsjson11_deserializeDocumentServiceQuotaIncreaseRequestInTemplateList(v
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentServiceQuotaListDefinition(v *[]*types.ServiceQuota, value interface{}) error {
+func awsAwsjson11_deserializeDocumentServiceQuotaListDefinition(v *[]types.ServiceQuota, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3857,18 +3863,20 @@ func awsAwsjson11_deserializeDocumentServiceQuotaListDefinition(v *[]*types.Serv
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.ServiceQuota
+	var cv []types.ServiceQuota
 	if *v == nil {
-		cv = []*types.ServiceQuota{}
+		cv = []types.ServiceQuota{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.ServiceQuota
-		if err := awsAwsjson11_deserializeDocumentServiceQuota(&col, value); err != nil {
+		var col types.ServiceQuota
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentServiceQuota(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -3904,7 +3912,7 @@ func awsAwsjson11_deserializeDocumentServiceQuotaTemplateNotInUseException(v **t
 				if !ok {
 					return fmt.Errorf("expected ExceptionMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -3944,7 +3952,7 @@ func awsAwsjson11_deserializeDocumentTemplatesNotAvailableInRegionException(v **
 				if !ok {
 					return fmt.Errorf("expected ExceptionMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -3984,7 +3992,7 @@ func awsAwsjson11_deserializeDocumentTooManyRequestsException(v **types.TooManyR
 				if !ok {
 					return fmt.Errorf("expected ExceptionMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -4301,7 +4309,7 @@ func awsAwsjson11_deserializeOpDocumentListAWSDefaultServiceQuotasOutput(v **Lis
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "Quotas":
@@ -4346,7 +4354,7 @@ func awsAwsjson11_deserializeOpDocumentListRequestedServiceQuotaChangeHistoryByQ
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "RequestedQuotas":
@@ -4391,7 +4399,7 @@ func awsAwsjson11_deserializeOpDocumentListRequestedServiceQuotaChangeHistoryOut
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "RequestedQuotas":
@@ -4436,7 +4444,7 @@ func awsAwsjson11_deserializeOpDocumentListServiceQuotaIncreaseRequestsInTemplat
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "ServiceQuotaIncreaseRequestInTemplateList":
@@ -4481,7 +4489,7 @@ func awsAwsjson11_deserializeOpDocumentListServiceQuotasOutput(v **ListServiceQu
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "Quotas":
@@ -4526,7 +4534,7 @@ func awsAwsjson11_deserializeOpDocumentListServicesOutput(v **ListServicesOutput
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "Services":

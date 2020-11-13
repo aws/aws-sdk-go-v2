@@ -42,7 +42,7 @@ type TagInput struct {
 	// of key-value pairs.
 	//
 	// This member is required.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type TagOutput struct {
@@ -51,7 +51,7 @@ type TagOutput struct {
 	Arn *string
 
 	// The tags that have been added to the specified resource group.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -39,7 +39,7 @@ type ListChangeSetsInput struct {
 	Catalog *string
 
 	// An array of filter objects.
-	FilterList []*types.Filter
+	FilterList []types.Filter
 
 	// The maximum number of results returned by a single call. This value must be
 	// provided in the next call to retrieve the next set of results. By default, this
@@ -57,7 +57,7 @@ type ListChangeSetsInput struct {
 type ListChangeSetsOutput struct {
 
 	// Array of ChangeSetSummaryListItem objects.
-	ChangeSetSummaryList []*types.ChangeSetSummaryListItem
+	ChangeSetSummaryList []types.ChangeSetSummaryListItem
 
 	// The value of the next token, if it exists. Null if there are no more results.
 	NextToken *string

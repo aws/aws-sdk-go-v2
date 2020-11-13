@@ -50,7 +50,7 @@ type ListWebsiteCertificateAuthoritiesOutput struct {
 	NextToken *string
 
 	// Information about the certificates.
-	WebsiteCertificateAuthorities []*types.WebsiteCaSummary
+	WebsiteCertificateAuthorities []types.WebsiteCaSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

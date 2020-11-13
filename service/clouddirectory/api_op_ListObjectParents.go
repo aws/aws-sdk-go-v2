@@ -48,7 +48,7 @@ type ListObjectParentsInput struct {
 
 	// When set to True, returns all ListObjectParentsResponse$ParentLinks. There could
 	// be multiple links between a parent-child pair.
-	IncludeAllLinksToEachParent *bool
+	IncludeAllLinksToEachParent bool
 
 	// The maximum number of items to be retrieved in a single call. This is an
 	// approximate number.
@@ -64,11 +64,11 @@ type ListObjectParentsOutput struct {
 	NextToken *string
 
 	// Returns a list of parent reference and LinkName Tuples.
-	ParentLinks []*types.ObjectIdentifierAndLinkNameTuple
+	ParentLinks []types.ObjectIdentifierAndLinkNameTuple
 
 	// The parent structure, which is a map with key as the ObjectIdentifier and
 	// LinkName as the value.
-	Parents map[string]*string
+	Parents map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

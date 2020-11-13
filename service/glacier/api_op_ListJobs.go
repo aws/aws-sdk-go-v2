@@ -95,7 +95,7 @@ type ListJobsInput struct {
 type ListJobsOutput struct {
 
 	// A list of job objects. Each job object contains metadata describing the job.
-	JobList []*types.GlacierJobDescription
+	JobList []types.GlacierJobDescription
 
 	// An opaque string used for pagination that specifies the job at which the listing
 	// of jobs should begin. You get the marker value from a previous List Jobs

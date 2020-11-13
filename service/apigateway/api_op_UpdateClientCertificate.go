@@ -38,7 +38,7 @@ type UpdateClientCertificateInput struct {
 
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
-	PatchOperations []*types.PatchOperation
+	PatchOperations []types.PatchOperation
 }
 
 // Represents a client certificate used to configure client-side SSL authentication
@@ -66,7 +66,7 @@ type UpdateClientCertificateOutput struct {
 	PemEncodedCertificate *string
 
 	// The collection of tags. Each tag element is associated with a given resource.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

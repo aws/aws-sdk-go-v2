@@ -46,7 +46,7 @@ type ListDatabasesInput struct {
 type ListDatabasesOutput struct {
 
 	// A list of database names.
-	Databases []*types.Database
+	Databases []types.Database
 
 	// The pagination token. This parameter is returned when the response is truncated.
 	NextToken *string

@@ -1131,7 +1131,7 @@ func awsAwsquery_deserializeDocumentAssumedRoleUser(v **types.AssumedRoleUser, d
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Arn = &xtv
+				sv.Arn = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("AssumedRoleId", t.Name.Local):
@@ -1147,7 +1147,7 @@ func awsAwsquery_deserializeDocumentAssumedRoleUser(v **types.AssumedRoleUser, d
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.AssumedRoleId = &xtv
+				sv.AssumedRoleId = ptr.String(xtv)
 			}
 
 		default:
@@ -1195,7 +1195,7 @@ func awsAwsquery_deserializeDocumentCredentials(v **types.Credentials, decoder s
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.AccessKeyId = &xtv
+				sv.AccessKeyId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Expiration", t.Name.Local):
@@ -1212,7 +1212,7 @@ func awsAwsquery_deserializeDocumentCredentials(v **types.Credentials, decoder s
 				if err != nil {
 					return err
 				}
-				sv.Expiration = &t
+				sv.Expiration = ptr.Time(t)
 			}
 
 		case strings.EqualFold("SecretAccessKey", t.Name.Local):
@@ -1228,7 +1228,7 @@ func awsAwsquery_deserializeDocumentCredentials(v **types.Credentials, decoder s
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.SecretAccessKey = &xtv
+				sv.SecretAccessKey = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("SessionToken", t.Name.Local):
@@ -1244,7 +1244,7 @@ func awsAwsquery_deserializeDocumentCredentials(v **types.Credentials, decoder s
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.SessionToken = &xtv
+				sv.SessionToken = ptr.String(xtv)
 			}
 
 		default:
@@ -1292,7 +1292,7 @@ func awsAwsquery_deserializeDocumentExpiredTokenException(v **types.ExpiredToken
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -1340,7 +1340,7 @@ func awsAwsquery_deserializeDocumentFederatedUser(v **types.FederatedUser, decod
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Arn = &xtv
+				sv.Arn = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("FederatedUserId", t.Name.Local):
@@ -1356,7 +1356,7 @@ func awsAwsquery_deserializeDocumentFederatedUser(v **types.FederatedUser, decod
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.FederatedUserId = &xtv
+				sv.FederatedUserId = ptr.String(xtv)
 			}
 
 		default:
@@ -1404,7 +1404,7 @@ func awsAwsquery_deserializeDocumentIDPCommunicationErrorException(v **types.IDP
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -1452,7 +1452,7 @@ func awsAwsquery_deserializeDocumentIDPRejectedClaimException(v **types.IDPRejec
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -1500,7 +1500,7 @@ func awsAwsquery_deserializeDocumentInvalidAuthorizationMessageException(v **typ
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -1548,7 +1548,7 @@ func awsAwsquery_deserializeDocumentInvalidIdentityTokenException(v **types.Inva
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -1596,7 +1596,7 @@ func awsAwsquery_deserializeDocumentMalformedPolicyDocumentException(v **types.M
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -1644,7 +1644,7 @@ func awsAwsquery_deserializeDocumentPackedPolicyTooLargeException(v **types.Pack
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -1692,7 +1692,7 @@ func awsAwsquery_deserializeDocumentRegionDisabledException(v **types.RegionDisa
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -1807,7 +1807,7 @@ func awsAwsquery_deserializeOpDocumentAssumeRoleWithSAMLOutput(v **AssumeRoleWit
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Audience = &xtv
+				sv.Audience = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Credentials", t.Name.Local):
@@ -1829,7 +1829,7 @@ func awsAwsquery_deserializeOpDocumentAssumeRoleWithSAMLOutput(v **AssumeRoleWit
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Issuer = &xtv
+				sv.Issuer = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("NameQualifier", t.Name.Local):
@@ -1845,7 +1845,7 @@ func awsAwsquery_deserializeOpDocumentAssumeRoleWithSAMLOutput(v **AssumeRoleWit
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.NameQualifier = &xtv
+				sv.NameQualifier = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("PackedPolicySize", t.Name.Local):
@@ -1878,7 +1878,7 @@ func awsAwsquery_deserializeOpDocumentAssumeRoleWithSAMLOutput(v **AssumeRoleWit
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Subject = &xtv
+				sv.Subject = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("SubjectType", t.Name.Local):
@@ -1894,7 +1894,7 @@ func awsAwsquery_deserializeOpDocumentAssumeRoleWithSAMLOutput(v **AssumeRoleWit
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.SubjectType = &xtv
+				sv.SubjectType = ptr.String(xtv)
 			}
 
 		default:
@@ -1948,7 +1948,7 @@ func awsAwsquery_deserializeOpDocumentAssumeRoleWithWebIdentityOutput(v **Assume
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Audience = &xtv
+				sv.Audience = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Credentials", t.Name.Local):
@@ -1987,7 +1987,7 @@ func awsAwsquery_deserializeOpDocumentAssumeRoleWithWebIdentityOutput(v **Assume
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Provider = &xtv
+				sv.Provider = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("SubjectFromWebIdentityToken", t.Name.Local):
@@ -2003,7 +2003,7 @@ func awsAwsquery_deserializeOpDocumentAssumeRoleWithWebIdentityOutput(v **Assume
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.SubjectFromWebIdentityToken = &xtv
+				sv.SubjectFromWebIdentityToken = ptr.String(xtv)
 			}
 
 		default:
@@ -2051,7 +2051,7 @@ func awsAwsquery_deserializeOpDocumentDecodeAuthorizationMessageOutput(v **Decod
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.DecodedMessage = &xtv
+				sv.DecodedMessage = ptr.String(xtv)
 			}
 
 		default:
@@ -2099,7 +2099,7 @@ func awsAwsquery_deserializeOpDocumentGetAccessKeyInfoOutput(v **GetAccessKeyInf
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Account = &xtv
+				sv.Account = ptr.String(xtv)
 			}
 
 		default:
@@ -2147,7 +2147,7 @@ func awsAwsquery_deserializeOpDocumentGetCallerIdentityOutput(v **GetCallerIdent
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Account = &xtv
+				sv.Account = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Arn", t.Name.Local):
@@ -2163,7 +2163,7 @@ func awsAwsquery_deserializeOpDocumentGetCallerIdentityOutput(v **GetCallerIdent
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Arn = &xtv
+				sv.Arn = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("UserId", t.Name.Local):
@@ -2179,7 +2179,7 @@ func awsAwsquery_deserializeOpDocumentGetCallerIdentityOutput(v **GetCallerIdent
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.UserId = &xtv
+				sv.UserId = ptr.String(xtv)
 			}
 
 		default:

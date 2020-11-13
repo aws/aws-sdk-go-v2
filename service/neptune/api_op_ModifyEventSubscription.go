@@ -44,7 +44,7 @@ type ModifyEventSubscriptionInput struct {
 	// A list of event categories for a SourceType that you want to subscribe to. You
 	// can see a list of the categories for a given SourceType by using the
 	// DescribeEventCategories action.
-	EventCategories []*string
+	EventCategories []string
 
 	// The Amazon Resource Name (ARN) of the SNS topic created for event notification.
 	// The ARN is created by Amazon SNS when you create a topic and subscribe to it.

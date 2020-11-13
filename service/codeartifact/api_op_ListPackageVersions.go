@@ -148,7 +148,7 @@ type ListPackageVersionsOutput struct {
 	// The returned list of PackageVersionSummary
 	// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionSummary.html)
 	// objects.
-	Versions []*types.PackageVersionSummary
+	Versions []types.PackageVersionSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

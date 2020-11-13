@@ -83,7 +83,7 @@ type DescribeDBClusterBacktracksInput struct {
 	//
 	// The results list includes information about only the backtracks
 	// identified by these values.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous DescribeDBClusterBacktracks
 	// request. If this parameter is specified, the response includes only records
@@ -102,7 +102,7 @@ type DescribeDBClusterBacktracksInput struct {
 type DescribeDBClusterBacktracksOutput struct {
 
 	// Contains a list of backtracks for the user.
-	DBClusterBacktracks []*types.DBClusterBacktrack
+	DBClusterBacktracks []types.DBClusterBacktrack
 
 	// A pagination token that can be used in a later DescribeDBClusterBacktracks
 	// request.

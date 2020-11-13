@@ -38,7 +38,7 @@ type GetConnectivityInfoInput struct {
 type GetConnectivityInfoOutput struct {
 
 	// Connectivity info list.
-	ConnectivityInfo []*types.ConnectivityInfo
+	ConnectivityInfo []types.ConnectivityInfo
 
 	// A message about the connectivity info request.
 	Message *string

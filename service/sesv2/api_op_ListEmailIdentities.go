@@ -55,7 +55,7 @@ type ListEmailIdentitiesOutput struct {
 
 	// An array that includes all of the email identities associated with your AWS
 	// account.
-	EmailIdentities []*types.IdentityInfo
+	EmailIdentities []types.IdentityInfo
 
 	// A token that indicates that there are additional configuration sets to list. To
 	// view additional configuration sets, issue another request to

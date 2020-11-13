@@ -41,7 +41,7 @@ type CreateLoadBalancerInput struct {
 	// The instance port where you're creating your load balancer.
 	//
 	// This member is required.
-	InstancePort *int32
+	InstancePort int32
 
 	// The name of your load balancer.
 	//
@@ -51,7 +51,7 @@ type CreateLoadBalancerInput struct {
 	// The optional alternative domains and subdomains to use with your SSL/TLS
 	// certificate (e.g., www.example.com, example.com, m.example.com,
 	// blog.example.com).
-	CertificateAlternativeNames []*string
+	CertificateAlternativeNames []string
 
 	// The domain name with which your certificate is associated (e.g., example.com).
 	// If you specify certificateDomainName, then certificateName is required (and
@@ -71,7 +71,7 @@ type CreateLoadBalancerInput struct {
 
 	// The tag keys and optional values to add to the resource during create. Use the
 	// TagResource action to tag a resource after it's created.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateLoadBalancerOutput struct {
@@ -79,7 +79,7 @@ type CreateLoadBalancerOutput struct {
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.
-	Operations []*types.Operation
+	Operations []types.Operation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

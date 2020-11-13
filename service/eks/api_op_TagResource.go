@@ -43,7 +43,7 @@ type TagResourceInput struct {
 	// The tags to add to the resource. A tag is an array of key-value pairs.
 	//
 	// This member is required.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type TagResourceOutput struct {

@@ -49,12 +49,12 @@ type CreateEnvironmentInput struct {
 	Description *string
 
 	// Amazon CloudWatch alarms to monitor during the deployment process.
-	Monitors []*types.Monitor
+	Monitors []types.Monitor
 
 	// Metadata to assign to the environment. Tags help organize and categorize your
 	// AppConfig resources. Each tag consists of a key and an optional value, both of
 	// which you define.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateEnvironmentOutput struct {
@@ -69,7 +69,7 @@ type CreateEnvironmentOutput struct {
 	Id *string
 
 	// Amazon CloudWatch alarms monitored during the deployment.
-	Monitors []*types.Monitor
+	Monitors []types.Monitor
 
 	// The name of the environment.
 	Name *string

@@ -73,7 +73,7 @@ type ListEndpointsOutput struct {
 	// An array or endpoint objects.
 	//
 	// This member is required.
-	Endpoints []*types.EndpointSummary
+	Endpoints []types.EndpointSummary
 
 	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
 	// the next set of training jobs, use it in the subsequent request.

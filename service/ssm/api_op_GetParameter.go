@@ -37,7 +37,7 @@ type GetParameterInput struct {
 
 	// Return decrypted values for secure string parameters. This flag is ignored for
 	// String and StringList parameter types.
-	WithDecryption *bool
+	WithDecryption bool
 }
 
 type GetParameterOutput struct {

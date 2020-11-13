@@ -42,7 +42,7 @@ type CreateJobQueueInput struct {
 	// to three compute environments with a job queue.
 	//
 	// This member is required.
-	ComputeEnvironmentOrder []*types.ComputeEnvironmentOrder
+	ComputeEnvironmentOrder []types.ComputeEnvironmentOrder
 
 	// The name of the job queue.
 	//
@@ -56,7 +56,7 @@ type CreateJobQueueInput struct {
 	// preference over a job queue with a priority value of 1.
 	//
 	// This member is required.
-	Priority *int32
+	Priority int32
 
 	// The state of the job queue. If the job queue state is ENABLED, it is able to
 	// accept jobs. If the job queue state is DISABLED, new jobs cannot be added to the
@@ -68,7 +68,7 @@ type CreateJobQueueInput struct {
 	// information, see Tagging AWS Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in AWS General
 	// Reference.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateJobQueueOutput struct {

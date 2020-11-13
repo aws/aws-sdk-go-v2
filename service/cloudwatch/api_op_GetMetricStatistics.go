@@ -160,13 +160,13 @@ type GetMetricStatisticsInput struct {
 	// dimensions, see Publishing Metrics
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html)
 	// in the Amazon CloudWatch User Guide.
-	Dimensions []*types.Dimension
+	Dimensions []types.Dimension
 
 	// The percentile statistics. Specify values between p0.0 and p100. When calling
 	// GetMetricStatistics, you must specify either Statistics or ExtendedStatistics,
 	// but not both. Percentile statistics are not available for metrics when any of
 	// the metric values are negative numbers.
-	ExtendedStatistics []*string
+	ExtendedStatistics []string
 
 	// The metric statistics, other than percentile. For percentile statistics, use
 	// ExtendedStatistics. When calling GetMetricStatistics, you must specify either
@@ -185,7 +185,7 @@ type GetMetricStatisticsInput struct {
 type GetMetricStatisticsOutput struct {
 
 	// The data points for the specified metric.
-	Datapoints []*types.Datapoint
+	Datapoints []types.Datapoint
 
 	// A label for the specified metric.
 	Label *string

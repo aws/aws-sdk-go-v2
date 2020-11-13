@@ -101,7 +101,7 @@ type CompareFacesOutput struct {
 	// CompareFacesMatch object provides the bounding box, the confidence level that
 	// the bounding box contains a face, and the similarity score for the face in the
 	// bounding box and the face in the source image.
-	FaceMatches []*types.CompareFacesMatch
+	FaceMatches []types.CompareFacesMatch
 
 	// The face in the source image that was used for comparison.
 	SourceImageFace *types.ComparedSourceImageFace
@@ -133,7 +133,7 @@ type CompareFacesOutput struct {
 	TargetImageOrientationCorrection types.OrientationCorrection
 
 	// An array of faces in the target image that did not match the source image face.
-	UnmatchedFaces []*types.ComparedFace
+	UnmatchedFaces []types.ComparedFace
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

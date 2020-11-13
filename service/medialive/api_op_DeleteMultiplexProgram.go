@@ -57,7 +57,7 @@ type DeleteMultiplexProgramOutput struct {
 	// specified multiplex. Keep in mind that each multiplex pipeline connects to both
 	// pipelines in a given source channel (the channel identified by the program). But
 	// only one of those channel pipelines is ever active at one time.
-	PipelineDetails []*types.MultiplexProgramPipelineDetail
+	PipelineDetails []types.MultiplexProgramPipelineDetail
 
 	// The name of the multiplex program.
 	ProgramName *string

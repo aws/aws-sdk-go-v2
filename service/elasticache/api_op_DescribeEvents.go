@@ -72,7 +72,7 @@ type DescribeEventsOutput struct {
 
 	// A list of events. Each element in the list contains detailed information about
 	// one event.
-	Events []*types.Event
+	Events []types.Event
 
 	// Provides an identifier to allow retrieval of paginated results.
 	Marker *string

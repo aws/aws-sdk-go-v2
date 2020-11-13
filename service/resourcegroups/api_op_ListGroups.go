@@ -42,7 +42,7 @@ type ListGroupsInput struct {
 	// supported values are:
 	//
 	// * AWS:EC2::CapacityReservationPool
-	Filters []*types.GroupFilter
+	Filters []types.GroupFilter
 
 	// The total number of results that you want included on each page of the response.
 	// If you do not include this parameter, it defaults to a value that is specific to
@@ -66,11 +66,11 @@ type ListGroupsOutput struct {
 
 	// A list of GroupIdentifier objects. Each identifier is an object that contains
 	// both the Name and the GroupArn.
-	GroupIdentifiers []*types.GroupIdentifier
+	GroupIdentifiers []types.GroupIdentifier
 
 	// This output element is deprecated and shouldn't be used. Refer to
 	// GroupIdentifiers instead.
-	Groups []*types.Group
+	Groups []types.Group
 
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a

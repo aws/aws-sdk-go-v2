@@ -39,7 +39,7 @@ type ListTagsForResourceInput struct {
 	// The maximum number of tags returned on each page. The limit maximum is 50. You
 	// cannot specify a number greater than 50. If you specify 0, AWS Config uses the
 	// default.
-	Limit *int32
+	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
@@ -53,7 +53,7 @@ type ListTagsForResourceOutput struct {
 	NextToken *string
 
 	// The tags for the resource.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

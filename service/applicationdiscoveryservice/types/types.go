@@ -20,7 +20,7 @@ type AgentConfigurationStatus struct {
 	// Information about the status of the StartDataCollection and StopDataCollection
 	// operations. The system has recorded the data collection operation. The
 	// agent/connector receives this command the next time it polls for a new command.
-	OperationSucceeded *bool
+	OperationSucceeded bool
 }
 
 // Information about agents or connectors associated with the user’s AWS account.
@@ -33,7 +33,7 @@ type AgentInfo struct {
 	AgentId *string
 
 	// Network details about the host where the agent or connector resides.
-	AgentNetworkInfoList []*AgentNetworkInfo
+	AgentNetworkInfoList []AgentNetworkInfo
 
 	// Type of agent.
 	AgentType *string
@@ -123,7 +123,7 @@ type ContinuousExportDescription struct {
 	//
 	// * databaseName - the name of
 	// the Glue database used to store the schema.
-	SchemaStorageConfig map[string]*string
+	SchemaStorageConfig map[string]string
 
 	// The timestamp representing when the continuous export was started.
 	StartTime *time.Time
@@ -210,37 +210,37 @@ type CustomerAgentInfo struct {
 	// Number of active discovery agents.
 	//
 	// This member is required.
-	ActiveAgents *int32
+	ActiveAgents int32
 
 	// Number of blacklisted discovery agents.
 	//
 	// This member is required.
-	BlackListedAgents *int32
+	BlackListedAgents int32
 
 	// Number of healthy discovery agents
 	//
 	// This member is required.
-	HealthyAgents *int32
+	HealthyAgents int32
 
 	// Number of discovery agents with status SHUTDOWN.
 	//
 	// This member is required.
-	ShutdownAgents *int32
+	ShutdownAgents int32
 
 	// Total number of discovery agents.
 	//
 	// This member is required.
-	TotalAgents *int32
+	TotalAgents int32
 
 	// Number of unhealthy discovery agents.
 	//
 	// This member is required.
-	UnhealthyAgents *int32
+	UnhealthyAgents int32
 
 	// Number of unknown discovery agents.
 	//
 	// This member is required.
-	UnknownAgents *int32
+	UnknownAgents int32
 }
 
 // Inventory data for installed discovery connectors.
@@ -249,37 +249,37 @@ type CustomerConnectorInfo struct {
 	// Number of active discovery connectors.
 	//
 	// This member is required.
-	ActiveConnectors *int32
+	ActiveConnectors int32
 
 	// Number of blacklisted discovery connectors.
 	//
 	// This member is required.
-	BlackListedConnectors *int32
+	BlackListedConnectors int32
 
 	// Number of healthy discovery connectors.
 	//
 	// This member is required.
-	HealthyConnectors *int32
+	HealthyConnectors int32
 
 	// Number of discovery connectors with status SHUTDOWN,
 	//
 	// This member is required.
-	ShutdownConnectors *int32
+	ShutdownConnectors int32
 
 	// Total number of discovery connectors.
 	//
 	// This member is required.
-	TotalConnectors *int32
+	TotalConnectors int32
 
 	// Number of unhealthy discovery connectors.
 	//
 	// This member is required.
-	UnhealthyConnectors *int32
+	UnhealthyConnectors int32
 
 	// Number of unknown discovery connectors.
 	//
 	// This member is required.
-	UnknownConnectors *int32
+	UnknownConnectors int32
 }
 
 // Used to select which agent's data is to be exported. A single agent ID may be
@@ -304,7 +304,7 @@ type ExportFilter struct {
 	// action. Typically an ADS agentId is in the form o-0123456789abcdef0.
 	//
 	// This member is required.
-	Values []*string
+	Values []string
 }
 
 // Information regarding the export status of discovered data. The value is an
@@ -339,7 +339,7 @@ type ExportInfo struct {
 	// export and the exported data is incomplete for the requested time range. To
 	// address this, select a smaller time range for the export by using startDate and
 	// endDate.
-	IsTruncated *bool
+	IsTruncated bool
 
 	// The endTime used in the StartExportTask request. If no endTime was requested,
 	// this result does not appear in ExportInfo.
@@ -375,7 +375,7 @@ type Filter struct {
 	// destinationServer.osVersion filter name, you could specify Ubuntu for the value.
 	//
 	// This member is required.
-	Values []*string
+	Values []string
 }
 
 // An array of information related to the import task request that includes status
@@ -384,11 +384,11 @@ type ImportTask struct {
 
 	// The total number of application records in the import file that failed to be
 	// imported.
-	ApplicationImportFailure *int32
+	ApplicationImportFailure int32
 
 	// The total number of application records in the import file that were
 	// successfully imported.
-	ApplicationImportSuccess *int32
+	ApplicationImportSuccess int32
 
 	// A unique token used to prevent the same import request from occurring more than
 	// once. If you didn't provide a token, a token was automatically generated when
@@ -434,11 +434,11 @@ type ImportTask struct {
 
 	// The total number of server records in the import file that failed to be
 	// imported.
-	ServerImportFailure *int32
+	ServerImportFailure int32
 
 	// The total number of server records in the import file that were successfully
 	// imported.
-	ServerImportSuccess *int32
+	ServerImportSuccess int32
 
 	// The status of the import task. An import can have the status of IMPORT_COMPLETE
 	// and still have some records fail to import from the overall request. More
@@ -457,7 +457,7 @@ type ImportTaskFilter struct {
 
 	// An array of strings that you can provide to match against a specific name,
 	// status, or import task ID to filter the results for your import task queries.
-	Values []*string
+	Values []string
 }
 
 // Details about neighboring servers.
@@ -466,7 +466,7 @@ type NeighborConnectionDetail struct {
 	// The number of open network connections with the neighboring server.
 	//
 	// This member is required.
-	ConnectionsCount *int64
+	ConnectionsCount int64
 
 	// The ID of the server that accepted the network connection.
 	//
@@ -522,5 +522,5 @@ type TagFilter struct {
 	// Values for the tag filter.
 	//
 	// This member is required.
-	Values []*string
+	Values []string
 }

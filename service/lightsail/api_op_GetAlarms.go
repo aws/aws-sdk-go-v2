@@ -55,7 +55,7 @@ type GetAlarmsInput struct {
 type GetAlarmsOutput struct {
 
 	// An array of objects that describe the alarms.
-	Alarms []*types.Alarm
+	Alarms []types.Alarm
 
 	// The token to advance to the next page of resutls from your request. A next page
 	// token is not returned if there are no more results to display. To get the next

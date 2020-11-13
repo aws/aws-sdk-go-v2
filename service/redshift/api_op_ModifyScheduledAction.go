@@ -83,7 +83,7 @@ type ModifyScheduledActionOutput struct {
 	IamRole *string
 
 	// List of times when the scheduled action will run.
-	NextInvocations []*time.Time
+	NextInvocations []time.Time
 
 	// The schedule for a one-time (at format) or recurring (cron format) scheduled
 	// action. Schedule invocations must be separated by at least one hour. Format of

@@ -43,7 +43,7 @@ type TagResourceInput struct {
 	// define.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type TagResourceOutput struct {

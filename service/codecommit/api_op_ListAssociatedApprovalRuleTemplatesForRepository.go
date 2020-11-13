@@ -46,7 +46,7 @@ type ListAssociatedApprovalRuleTemplatesForRepositoryInput struct {
 type ListAssociatedApprovalRuleTemplatesForRepositoryOutput struct {
 
 	// The names of all approval rule templates associated with the repository.
-	ApprovalRuleTemplateNames []*string
+	ApprovalRuleTemplateNames []string
 
 	// An enumeration token that allows the operation to batch the next results of the
 	// operation.

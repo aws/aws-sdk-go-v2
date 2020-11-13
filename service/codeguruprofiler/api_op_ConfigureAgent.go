@@ -38,7 +38,7 @@ type ConfigureAgentInput struct {
 	//
 	FleetInstanceId *string
 
-	Metadata map[string]*string
+	Metadata map[string]string
 }
 
 // The structure representing the configureAgentResponse.

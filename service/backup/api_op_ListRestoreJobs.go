@@ -64,7 +64,7 @@ type ListRestoreJobsOutput struct {
 
 	// An array of objects that contain detailed information about jobs to restore
 	// saved resources.
-	RestoreJobs []*types.RestoreJobsListMember
+	RestoreJobs []types.RestoreJobsListMember
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

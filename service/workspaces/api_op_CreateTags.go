@@ -39,7 +39,7 @@ type CreateTagsInput struct {
 	// The tags. Each WorkSpaces resource can have a maximum of 50 tags.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateTagsOutput struct {

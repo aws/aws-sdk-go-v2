@@ -43,7 +43,7 @@ type ListVoiceConnectorGroupsOutput struct {
 	NextToken *string
 
 	// The details of the Amazon Chime Voice Connector groups.
-	VoiceConnectorGroups []*types.VoiceConnectorGroup
+	VoiceConnectorGroups []types.VoiceConnectorGroup
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

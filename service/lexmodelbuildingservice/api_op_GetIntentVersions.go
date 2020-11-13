@@ -55,7 +55,7 @@ type GetIntentVersionsOutput struct {
 
 	// An array of IntentMetadata objects, one for each numbered version of the intent
 	// plus one for the $LATEST version.
-	Intents []*types.IntentMetadata
+	Intents []types.IntentMetadata
 
 	// A pagination token for fetching the next page of intent versions. If the
 	// response to this call is truncated, Amazon Lex returns a pagination token in the

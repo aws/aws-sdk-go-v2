@@ -65,10 +65,10 @@ type DescribeFolderContentsInput struct {
 type DescribeFolderContentsOutput struct {
 
 	// The documents in the specified folder.
-	Documents []*types.DocumentMetadata
+	Documents []types.DocumentMetadata
 
 	// The subfolders in the specified folder.
-	Folders []*types.FolderMetadata
+	Folders []types.FolderMetadata
 
 	// The marker to use when requesting the next set of results. If there are no
 	// additional results, the string is empty.

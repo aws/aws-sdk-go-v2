@@ -41,7 +41,7 @@ type ListWorkflowsOutput struct {
 	NextToken *string
 
 	// List of names of workflows in the account.
-	Workflows []*string
+	Workflows []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

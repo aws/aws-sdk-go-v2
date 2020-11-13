@@ -40,7 +40,7 @@ type ListActivitiesInput struct {
 	// page size is 1000. A value of 0 uses the default. This is only an upper limit.
 	// The actual number of results returned per call might be fewer than the specified
 	// maximum.
-	MaxResults *int32
+	MaxResults int32
 
 	// If nextToken is returned, there are more results available. The value of
 	// nextToken is a unique pagination token for each page. Make the call again using
@@ -55,7 +55,7 @@ type ListActivitiesOutput struct {
 	// The list of activities.
 	//
 	// This member is required.
-	Activities []*types.ActivityListItem
+	Activities []types.ActivityListItem
 
 	// If nextToken is returned, there are more results available. The value of
 	// nextToken is a unique pagination token for each page. Make the call again using

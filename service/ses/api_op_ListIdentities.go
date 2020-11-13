@@ -52,7 +52,7 @@ type ListIdentitiesOutput struct {
 	// A list of identities.
 	//
 	// This member is required.
-	Identities []*string
+	Identities []string
 
 	// The token used for pagination.
 	NextToken *string

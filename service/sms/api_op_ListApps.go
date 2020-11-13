@@ -30,7 +30,7 @@ func (c *Client) ListApps(ctx context.Context, params *ListAppsInput, optFns ...
 type ListAppsInput struct {
 
 	// The unique application IDs.
-	AppIds []*string
+	AppIds []string
 
 	// The maximum number of results to return in a single call. The default value is
 	// 100. To retrieve the remaining results, make another call with the returned
@@ -44,7 +44,7 @@ type ListAppsInput struct {
 type ListAppsOutput struct {
 
 	// The application summaries.
-	Apps []*types.AppSummary
+	Apps []types.AppSummary
 
 	// The token required to retrieve the next set of results. This value is null when
 	// there are no more results to return.

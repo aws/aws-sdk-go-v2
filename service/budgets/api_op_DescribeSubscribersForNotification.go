@@ -63,7 +63,7 @@ type DescribeSubscribersForNotificationOutput struct {
 	NextToken *string
 
 	// A list of subscribers that are associated with a notification.
-	Subscribers []*types.Subscriber
+	Subscribers []types.Subscriber
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

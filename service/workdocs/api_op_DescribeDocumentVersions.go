@@ -58,7 +58,7 @@ type DescribeDocumentVersionsInput struct {
 type DescribeDocumentVersionsOutput struct {
 
 	// The document versions.
-	DocumentVersions []*types.DocumentVersionMetadata
+	DocumentVersions []types.DocumentVersionMetadata
 
 	// The marker to use when requesting the next set of results. If there are no
 	// additional results, the string is empty.

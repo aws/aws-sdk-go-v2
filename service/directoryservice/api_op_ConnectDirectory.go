@@ -63,7 +63,7 @@ type ConnectDirectoryInput struct {
 	ShortName *string
 
 	// The tags to be assigned to AD Connector.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // Contains the results of the ConnectDirectory operation.

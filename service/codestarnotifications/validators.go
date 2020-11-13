@@ -340,13 +340,13 @@ func validateListEventTypesFilter(v *types.ListEventTypesFilter) error {
 	}
 }
 
-func validateListEventTypesFilters(v []*types.ListEventTypesFilter) error {
+func validateListEventTypesFilters(v []types.ListEventTypesFilter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListEventTypesFilters"}
 	for i := range v {
-		if err := validateListEventTypesFilter(v[i]); err != nil {
+		if err := validateListEventTypesFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -375,13 +375,13 @@ func validateListNotificationRulesFilter(v *types.ListNotificationRulesFilter) e
 	}
 }
 
-func validateListNotificationRulesFilters(v []*types.ListNotificationRulesFilter) error {
+func validateListNotificationRulesFilters(v []types.ListNotificationRulesFilter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListNotificationRulesFilters"}
 	for i := range v {
-		if err := validateListNotificationRulesFilter(v[i]); err != nil {
+		if err := validateListNotificationRulesFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -410,13 +410,13 @@ func validateListTargetsFilter(v *types.ListTargetsFilter) error {
 	}
 }
 
-func validateListTargetsFilters(v []*types.ListTargetsFilter) error {
+func validateListTargetsFilters(v []types.ListTargetsFilter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListTargetsFilters"}
 	for i := range v {
-		if err := validateListTargetsFilter(v[i]); err != nil {
+		if err := validateListTargetsFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

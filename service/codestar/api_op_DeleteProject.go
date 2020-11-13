@@ -43,7 +43,7 @@ type DeleteProjectInput struct {
 	// originally used to generate the project and its resources. This option will
 	// delete all AWS resources for the project (except for any buckets in Amazon S3)
 	// as well as deleting the project itself. Recommended for most use cases.
-	DeleteStack *bool
+	DeleteStack bool
 }
 
 type DeleteProjectOutput struct {

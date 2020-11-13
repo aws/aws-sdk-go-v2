@@ -37,7 +37,7 @@ type UpdateAccountSendingEnabledInput struct {
 
 	// Describes whether email sending is enabled or disabled for your Amazon SES
 	// account in the current AWS Region.
-	Enabled *bool
+	Enabled bool
 }
 
 type UpdateAccountSendingEnabledOutput struct {

@@ -234,7 +234,7 @@ func awsRestjson1_deserializeOpDocumentGetPlaybackConfigurationOutput(v **GetPla
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.AdDecisionServerUrl = &jtv
+				sv.AdDecisionServerUrl = ptr.String(jtv)
 			}
 
 		case "AvailSuppression":
@@ -278,7 +278,7 @@ func awsRestjson1_deserializeOpDocumentGetPlaybackConfigurationOutput(v **GetPla
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "PersonalizationThresholdSeconds":
@@ -291,7 +291,7 @@ func awsRestjson1_deserializeOpDocumentGetPlaybackConfigurationOutput(v **GetPla
 				if err != nil {
 					return err
 				}
-				sv.PersonalizationThresholdSeconds = ptr.Int32(int32(i64))
+				sv.PersonalizationThresholdSeconds = int32(i64)
 			}
 
 		case "PlaybackConfigurationArn":
@@ -300,7 +300,7 @@ func awsRestjson1_deserializeOpDocumentGetPlaybackConfigurationOutput(v **GetPla
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.PlaybackConfigurationArn = &jtv
+				sv.PlaybackConfigurationArn = ptr.String(jtv)
 			}
 
 		case "PlaybackEndpointPrefix":
@@ -309,7 +309,7 @@ func awsRestjson1_deserializeOpDocumentGetPlaybackConfigurationOutput(v **GetPla
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.PlaybackEndpointPrefix = &jtv
+				sv.PlaybackEndpointPrefix = ptr.String(jtv)
 			}
 
 		case "SessionInitializationEndpointPrefix":
@@ -318,7 +318,7 @@ func awsRestjson1_deserializeOpDocumentGetPlaybackConfigurationOutput(v **GetPla
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.SessionInitializationEndpointPrefix = &jtv
+				sv.SessionInitializationEndpointPrefix = ptr.String(jtv)
 			}
 
 		case "SlateAdUrl":
@@ -327,7 +327,7 @@ func awsRestjson1_deserializeOpDocumentGetPlaybackConfigurationOutput(v **GetPla
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.SlateAdUrl = &jtv
+				sv.SlateAdUrl = ptr.String(jtv)
 			}
 
 		case "tags":
@@ -341,7 +341,7 @@ func awsRestjson1_deserializeOpDocumentGetPlaybackConfigurationOutput(v **GetPla
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.TranscodeProfileName = &jtv
+				sv.TranscodeProfileName = ptr.String(jtv)
 			}
 
 		case "VideoContentSourceUrl":
@@ -350,7 +350,7 @@ func awsRestjson1_deserializeOpDocumentGetPlaybackConfigurationOutput(v **GetPla
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.VideoContentSourceUrl = &jtv
+				sv.VideoContentSourceUrl = ptr.String(jtv)
 			}
 
 		default:
@@ -503,7 +503,7 @@ func awsRestjson1_deserializeOpDocumentListPlaybackConfigurationsOutput(v **List
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -798,7 +798,7 @@ func awsRestjson1_deserializeOpDocumentPutPlaybackConfigurationOutput(v **PutPla
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.AdDecisionServerUrl = &jtv
+				sv.AdDecisionServerUrl = ptr.String(jtv)
 			}
 
 		case "AvailSuppression":
@@ -842,7 +842,7 @@ func awsRestjson1_deserializeOpDocumentPutPlaybackConfigurationOutput(v **PutPla
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "PersonalizationThresholdSeconds":
@@ -855,7 +855,7 @@ func awsRestjson1_deserializeOpDocumentPutPlaybackConfigurationOutput(v **PutPla
 				if err != nil {
 					return err
 				}
-				sv.PersonalizationThresholdSeconds = ptr.Int32(int32(i64))
+				sv.PersonalizationThresholdSeconds = int32(i64)
 			}
 
 		case "PlaybackConfigurationArn":
@@ -864,7 +864,7 @@ func awsRestjson1_deserializeOpDocumentPutPlaybackConfigurationOutput(v **PutPla
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.PlaybackConfigurationArn = &jtv
+				sv.PlaybackConfigurationArn = ptr.String(jtv)
 			}
 
 		case "PlaybackEndpointPrefix":
@@ -873,7 +873,7 @@ func awsRestjson1_deserializeOpDocumentPutPlaybackConfigurationOutput(v **PutPla
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.PlaybackEndpointPrefix = &jtv
+				sv.PlaybackEndpointPrefix = ptr.String(jtv)
 			}
 
 		case "SessionInitializationEndpointPrefix":
@@ -882,7 +882,7 @@ func awsRestjson1_deserializeOpDocumentPutPlaybackConfigurationOutput(v **PutPla
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.SessionInitializationEndpointPrefix = &jtv
+				sv.SessionInitializationEndpointPrefix = ptr.String(jtv)
 			}
 
 		case "SlateAdUrl":
@@ -891,7 +891,7 @@ func awsRestjson1_deserializeOpDocumentPutPlaybackConfigurationOutput(v **PutPla
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.SlateAdUrl = &jtv
+				sv.SlateAdUrl = ptr.String(jtv)
 			}
 
 		case "tags":
@@ -905,7 +905,7 @@ func awsRestjson1_deserializeOpDocumentPutPlaybackConfigurationOutput(v **PutPla
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.TranscodeProfileName = &jtv
+				sv.TranscodeProfileName = ptr.String(jtv)
 			}
 
 		case "VideoContentSourceUrl":
@@ -914,7 +914,7 @@ func awsRestjson1_deserializeOpDocumentPutPlaybackConfigurationOutput(v **PutPla
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.VideoContentSourceUrl = &jtv
+				sv.VideoContentSourceUrl = ptr.String(jtv)
 			}
 
 		default:
@@ -1128,7 +1128,7 @@ func awsRestjson1_deserializeErrorBadRequestException(response *smithyhttp.Respo
 	return output
 }
 
-func awsRestjson1_deserializeDocument__listOfPlaybackConfigurations(v *[]*types.PlaybackConfiguration, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOfPlaybackConfigurations(v *[]types.PlaybackConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1141,18 +1141,20 @@ func awsRestjson1_deserializeDocument__listOfPlaybackConfigurations(v *[]*types.
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.PlaybackConfiguration
+	var cv []types.PlaybackConfiguration
 	if *v == nil {
-		cv = []*types.PlaybackConfiguration{}
+		cv = []types.PlaybackConfiguration{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.PlaybackConfiguration
-		if err := awsRestjson1_deserializeDocumentPlaybackConfiguration(&col, value); err != nil {
+		var col types.PlaybackConfiguration
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentPlaybackConfiguration(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -1160,7 +1162,7 @@ func awsRestjson1_deserializeDocument__listOfPlaybackConfigurations(v *[]*types.
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__mapOf__string(v *map[string]*string, value interface{}) error {
+func awsRestjson1_deserializeDocument__mapOf__string(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1173,21 +1175,21 @@ func awsRestjson1_deserializeDocument__mapOf__string(v *map[string]*string, valu
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var mv map[string]*string
+	var mv map[string]string
 	if *v == nil {
-		mv = map[string]*string{}
+		mv = map[string]string{}
 	} else {
 		mv = *v
 	}
 
 	for key, value := range shape {
-		var parsedVal *string
+		var parsedVal string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 			}
-			parsedVal = &jtv
+			parsedVal = jtv
 		}
 		mv[key] = parsedVal
 
@@ -1224,7 +1226,7 @@ func awsRestjson1_deserializeDocumentAdMarkerPassthrough(v **types.AdMarkerPasst
 				if !ok {
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = &jtv
+				sv.Enabled = jtv
 			}
 
 		default:
@@ -1273,7 +1275,7 @@ func awsRestjson1_deserializeDocumentAvailSuppression(v **types.AvailSuppression
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Value = &jtv
+				sv.Value = ptr.String(jtv)
 			}
 
 		default:
@@ -1313,7 +1315,7 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1353,7 +1355,7 @@ func awsRestjson1_deserializeDocumentBumper(v **types.Bumper, value interface{})
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.EndUrl = &jtv
+				sv.EndUrl = ptr.String(jtv)
 			}
 
 		case "StartUrl":
@@ -1362,7 +1364,7 @@ func awsRestjson1_deserializeDocumentBumper(v **types.Bumper, value interface{})
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.StartUrl = &jtv
+				sv.StartUrl = ptr.String(jtv)
 			}
 
 		default:
@@ -1402,7 +1404,7 @@ func awsRestjson1_deserializeDocumentCdnConfiguration(v **types.CdnConfiguration
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.AdSegmentUrlPrefix = &jtv
+				sv.AdSegmentUrlPrefix = ptr.String(jtv)
 			}
 
 		case "ContentSegmentUrlPrefix":
@@ -1411,7 +1413,7 @@ func awsRestjson1_deserializeDocumentCdnConfiguration(v **types.CdnConfiguration
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.ContentSegmentUrlPrefix = &jtv
+				sv.ContentSegmentUrlPrefix = ptr.String(jtv)
 			}
 
 		default:
@@ -1451,7 +1453,7 @@ func awsRestjson1_deserializeDocumentDashConfiguration(v **types.DashConfigurati
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.ManifestEndpointPrefix = &jtv
+				sv.ManifestEndpointPrefix = ptr.String(jtv)
 			}
 
 		case "MpdLocation":
@@ -1460,7 +1462,7 @@ func awsRestjson1_deserializeDocumentDashConfiguration(v **types.DashConfigurati
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.MpdLocation = &jtv
+				sv.MpdLocation = ptr.String(jtv)
 			}
 
 		case "OriginManifestType":
@@ -1509,7 +1511,7 @@ func awsRestjson1_deserializeDocumentHlsConfiguration(v **types.HlsConfiguration
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.ManifestEndpointPrefix = &jtv
+				sv.ManifestEndpointPrefix = ptr.String(jtv)
 			}
 
 		default:
@@ -1549,7 +1551,7 @@ func awsRestjson1_deserializeDocumentLivePreRollConfiguration(v **types.LivePreR
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.AdDecisionServerUrl = &jtv
+				sv.AdDecisionServerUrl = ptr.String(jtv)
 			}
 
 		case "MaxDurationSeconds":
@@ -1562,7 +1564,7 @@ func awsRestjson1_deserializeDocumentLivePreRollConfiguration(v **types.LivePreR
 				if err != nil {
 					return err
 				}
-				sv.MaxDurationSeconds = ptr.Int32(int32(i64))
+				sv.MaxDurationSeconds = int32(i64)
 			}
 
 		default:
@@ -1638,7 +1640,7 @@ func awsRestjson1_deserializeDocumentPlaybackConfiguration(v **types.PlaybackCon
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.AdDecisionServerUrl = &jtv
+				sv.AdDecisionServerUrl = ptr.String(jtv)
 			}
 
 		case "AvailSuppression":
@@ -1677,7 +1679,7 @@ func awsRestjson1_deserializeDocumentPlaybackConfiguration(v **types.PlaybackCon
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "PersonalizationThresholdSeconds":
@@ -1690,7 +1692,7 @@ func awsRestjson1_deserializeDocumentPlaybackConfiguration(v **types.PlaybackCon
 				if err != nil {
 					return err
 				}
-				sv.PersonalizationThresholdSeconds = ptr.Int32(int32(i64))
+				sv.PersonalizationThresholdSeconds = int32(i64)
 			}
 
 		case "PlaybackConfigurationArn":
@@ -1699,7 +1701,7 @@ func awsRestjson1_deserializeDocumentPlaybackConfiguration(v **types.PlaybackCon
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.PlaybackConfigurationArn = &jtv
+				sv.PlaybackConfigurationArn = ptr.String(jtv)
 			}
 
 		case "PlaybackEndpointPrefix":
@@ -1708,7 +1710,7 @@ func awsRestjson1_deserializeDocumentPlaybackConfiguration(v **types.PlaybackCon
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.PlaybackEndpointPrefix = &jtv
+				sv.PlaybackEndpointPrefix = ptr.String(jtv)
 			}
 
 		case "SessionInitializationEndpointPrefix":
@@ -1717,7 +1719,7 @@ func awsRestjson1_deserializeDocumentPlaybackConfiguration(v **types.PlaybackCon
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.SessionInitializationEndpointPrefix = &jtv
+				sv.SessionInitializationEndpointPrefix = ptr.String(jtv)
 			}
 
 		case "SlateAdUrl":
@@ -1726,7 +1728,7 @@ func awsRestjson1_deserializeDocumentPlaybackConfiguration(v **types.PlaybackCon
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.SlateAdUrl = &jtv
+				sv.SlateAdUrl = ptr.String(jtv)
 			}
 
 		case "tags":
@@ -1740,7 +1742,7 @@ func awsRestjson1_deserializeDocumentPlaybackConfiguration(v **types.PlaybackCon
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.TranscodeProfileName = &jtv
+				sv.TranscodeProfileName = ptr.String(jtv)
 			}
 
 		case "VideoContentSourceUrl":
@@ -1749,7 +1751,7 @@ func awsRestjson1_deserializeDocumentPlaybackConfiguration(v **types.PlaybackCon
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.VideoContentSourceUrl = &jtv
+				sv.VideoContentSourceUrl = ptr.String(jtv)
 			}
 
 		default:

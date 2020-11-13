@@ -33,13 +33,13 @@ type DescribeRemediationConfigurationsInput struct {
 	// details.
 	//
 	// This member is required.
-	ConfigRuleNames []*string
+	ConfigRuleNames []string
 }
 
 type DescribeRemediationConfigurationsOutput struct {
 
 	// Returns a remediation configuration object.
-	RemediationConfigurations []*types.RemediationConfiguration
+	RemediationConfigurations []types.RemediationConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -103,7 +103,7 @@ type CreateGameServerGroupInput struct {
 	// in the Amazon EC2 Auto Scaling User Guide.
 	//
 	// This member is required.
-	InstanceDefinitions []*types.InstanceDefinition
+	InstanceDefinitions []types.InstanceDefinition
 
 	// The EC2 launch template that contains configuration settings and game server
 	// code to be deployed to all instances in the game server group. You can specify
@@ -190,7 +190,7 @@ type CreateGameServerGroupInput struct {
 	// UntagResource, and ListTagsForResource to add, remove, and view tags,
 	// respectively. The maximum tag limit may be lower than stated. See the AWS
 	// General Reference for actual tagging limits.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// A list of virtual private cloud (VPC) subnets to use with instances in the game
 	// server group. By default, all GameLift FleetIQ-supported Availability Zones are
@@ -198,7 +198,7 @@ type CreateGameServerGroupInput struct {
 	// property cannot be updated after the game server group is created, and the
 	// corresponding Auto Scaling group will always use the property value that is set
 	// with this request, even if the Auto Scaling group is updated directly
-	VpcSubnets []*string
+	VpcSubnets []string
 }
 
 type CreateGameServerGroupOutput struct {

@@ -53,7 +53,7 @@ type ListCertificatesInput struct {
 type ListCertificatesOutput struct {
 
 	// A list of ACM certificates.
-	CertificateSummaryList []*types.CertificateSummary
+	CertificateSummaryList []types.CertificateSummary
 
 	// When the list is truncated, this value is present and contains the value to use
 	// for the NextToken parameter in a subsequent pagination request.

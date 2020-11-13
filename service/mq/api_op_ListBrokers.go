@@ -31,7 +31,7 @@ type ListBrokersInput struct {
 
 	// The maximum number of brokers that Amazon MQ can return per page (20 by
 	// default). This value must be an integer from 5 to 100.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token that specifies the next page of results Amazon MQ should return. To
 	// request the first page, leave nextToken empty.
@@ -41,7 +41,7 @@ type ListBrokersInput struct {
 type ListBrokersOutput struct {
 
 	// A list of information about all brokers.
-	BrokerSummaries []*types.BrokerSummary
+	BrokerSummaries []types.BrokerSummary
 
 	// The token that specifies the next page of results Amazon MQ should return. To
 	// request the first page, leave nextToken empty.

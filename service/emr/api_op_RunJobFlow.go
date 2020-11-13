@@ -73,7 +73,7 @@ type RunJobFlowInput struct {
 	// For a list of applications available for each Amazon EMR release version, see
 	// the Amazon EMR Release Guide
 	// (https://docs.aws.amazon.com/emr/latest/ReleaseGuide/).
-	Applications []*types.Application
+	Applications []types.Application
 
 	// An IAM role for automatic scaling policies. The default role is
 	// EMR_AutoScaling_DefaultRole. The IAM role provides permissions that the
@@ -82,11 +82,11 @@ type RunJobFlowInput struct {
 	AutoScalingRole *string
 
 	// A list of bootstrap actions to run before Hadoop starts on the cluster nodes.
-	BootstrapActions []*types.BootstrapActionConfig
+	BootstrapActions []types.BootstrapActionConfig
 
 	// For Amazon EMR releases 4.0 and later. The list of configurations supplied for
 	// the EMR cluster you are creating.
-	Configurations []*types.Configuration
+	Configurations []types.Configuration
 
 	// Available only in Amazon EMR version 5.7.0 and later. The ID of a custom Amazon
 	// EBS-backed Linux AMI. If specified, Amazon EMR uses this AMI when it launches
@@ -163,10 +163,10 @@ type RunJobFlowInput struct {
 	//
 	// * "ganglia" - launch the
 	// cluster with the Ganglia Monitoring System installed.
-	NewSupportedProducts []*types.SupportedProductConfig
+	NewSupportedProducts []types.SupportedProductConfig
 
 	// The specified placement group configuration for an Amazon EMR cluster.
-	PlacementGroupConfigs []*types.PlacementGroupConfig
+	PlacementGroupConfigs []types.PlacementGroupConfig
 
 	// The Amazon EMR release label, which determines the version of open-source
 	// application packages installed on the cluster. Release labels are in the form
@@ -212,7 +212,7 @@ type RunJobFlowInput struct {
 	StepConcurrencyLevel *int32
 
 	// A list of steps to run.
-	Steps []*types.StepConfig
+	Steps []types.StepConfig
 
 	// For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and later, use
 	// Applications. A list of strings that indicates third-party software to use. For
@@ -224,17 +224,17 @@ type RunJobFlowInput struct {
 	// Edition.
 	//
 	// * "mapr-m5" - launch the job flow using MapR M5 Edition.
-	SupportedProducts []*string
+	SupportedProducts []string
 
 	// A list of tags to associate with a cluster and propagate to Amazon EC2
 	// instances.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// A value of true indicates that all IAM users in the AWS account can perform
 	// cluster actions if they have the proper IAM policy permissions. This is the
 	// default. A value of false indicates that only the IAM user who created the
 	// cluster can perform actions.
-	VisibleToAllUsers *bool
+	VisibleToAllUsers bool
 }
 
 // The result of the RunJobFlow operation.

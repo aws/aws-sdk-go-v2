@@ -49,7 +49,7 @@ type DetectKeyPhrasesOutput struct {
 	// For each key phrase, the response provides the text of the key phrase, where the
 	// key phrase begins and ends, and the level of confidence that Amazon Comprehend
 	// has in the accuracy of the detection.
-	KeyPhrases []*types.KeyPhrase
+	KeyPhrases []types.KeyPhrase
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

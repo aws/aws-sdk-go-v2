@@ -35,7 +35,7 @@ type ListClustersInput struct {
 
 	// The maximum number of results to return in the response. If there are more
 	// results, the response includes a NextToken parameter.
-	MaxResults *int32
+	MaxResults int32
 
 	// The paginated results marker. When the result of the operation is truncated, the
 	// call returns NextToken in the response. To get the next batch, provide this
@@ -46,7 +46,7 @@ type ListClustersInput struct {
 type ListClustersOutput struct {
 
 	// Information on each of the MSK clusters in the response.
-	ClusterInfoList []*types.ClusterInfo
+	ClusterInfoList []types.ClusterInfo
 
 	// The paginated results marker. When the result of a ListClusters operation is
 	// truncated, the call returns NextToken in the response. To get another batch of

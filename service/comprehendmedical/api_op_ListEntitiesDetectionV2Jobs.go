@@ -44,7 +44,7 @@ type ListEntitiesDetectionV2JobsInput struct {
 type ListEntitiesDetectionV2JobsOutput struct {
 
 	// A list containing the properties of each job returned.
-	ComprehendMedicalAsyncJobPropertiesList []*types.ComprehendMedicalAsyncJobProperties
+	ComprehendMedicalAsyncJobPropertiesList []types.ComprehendMedicalAsyncJobProperties
 
 	// Identifies the next page of results to return.
 	NextToken *string

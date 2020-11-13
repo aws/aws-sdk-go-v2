@@ -93,7 +93,7 @@ type PollForActivityTaskOutput struct {
 	// The ID of the ActivityTaskStarted event recorded in the history.
 	//
 	// This member is required.
-	StartedEventId *int64
+	StartedEventId int64
 
 	// The opaque string used as a handle on the task. This token is used by workers to
 	// communicate progress and response information back to the system about the task.

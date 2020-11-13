@@ -46,7 +46,7 @@ type GetDistributionsInput struct {
 type GetDistributionsOutput struct {
 
 	// An array of objects that describe your distributions.
-	Distributions []*types.LightsailDistribution
+	Distributions []types.LightsailDistribution
 
 	// The token to advance to the next page of results from your request. A next page
 	// token is not returned if there are no more results to display. To get the next

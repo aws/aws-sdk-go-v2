@@ -59,7 +59,7 @@ type ListStreamsOutput struct {
 	// ListStreams request.
 	//
 	// This member is required.
-	StreamNames []*string
+	StreamNames []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

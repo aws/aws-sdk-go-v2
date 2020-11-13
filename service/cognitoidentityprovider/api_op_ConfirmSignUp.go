@@ -75,7 +75,7 @@ type ConfirmSignUpInput struct {
 	//
 	// * Amazon Cognito does not encrypt the the ClientMetadata value, so don't
 	// use it to provide sensitive information.
-	ClientMetadata map[string]*string
+	ClientMetadata map[string]string
 
 	// Boolean to be specified to force user confirmation irrespective of existing
 	// alias. By default set to False. If this parameter is set to True and the phone
@@ -83,7 +83,7 @@ type ConfirmSignUpInput struct {
 	// different user, the API call will migrate the alias from the previous user to
 	// the newly created user being confirmed. If set to False, the API will throw an
 	// AliasExistsException error.
-	ForceAliasCreation *bool
+	ForceAliasCreation bool
 
 	// A keyed-hash message authentication code (HMAC) calculated using the secret key
 	// of a user pool client and username plus the client ID in the message.

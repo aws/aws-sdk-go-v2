@@ -51,7 +51,7 @@ type GetDedicatedIpsOutput struct {
 
 	// A list of dedicated IP addresses that are reserved for use by your Amazon
 	// Pinpoint account.
-	DedicatedIps []*types.DedicatedIp
+	DedicatedIps []types.DedicatedIp
 
 	// A token that indicates that there are additional dedicated IP addresses to list.
 	// To view additional addresses, issue another request to GetDedicatedIps, passing

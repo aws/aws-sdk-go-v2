@@ -50,7 +50,7 @@ type ProjectDetails struct {
 	Region *string
 
 	// List of AWS resources associated with a project.
-	Resources []*Resource
+	Resources []Resource
 
 	// Synchronization state for a project.
 	State ProjectState
@@ -73,7 +73,7 @@ type Resource struct {
 	Arn *string
 
 	// Key-value attribute pairs.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// Identifies which feature in AWS Mobile Hub is associated with this AWS resource.
 	Feature *string

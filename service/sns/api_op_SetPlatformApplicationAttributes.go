@@ -74,7 +74,7 @@ type SetPlatformApplicationAttributesInput struct {
 	// delivered messages.
 	//
 	// This member is required.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// PlatformApplicationArn for SetPlatformApplicationAttributes action.
 	//

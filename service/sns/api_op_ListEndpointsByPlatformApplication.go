@@ -54,7 +54,7 @@ type ListEndpointsByPlatformApplicationInput struct {
 type ListEndpointsByPlatformApplicationOutput struct {
 
 	// Endpoints returned for ListEndpointsByPlatformApplication action.
-	Endpoints []*types.Endpoint
+	Endpoints []types.Endpoint
 
 	// NextToken string is returned when calling ListEndpointsByPlatformApplication
 	// action if additional records are available after the first page results.

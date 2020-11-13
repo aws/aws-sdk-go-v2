@@ -71,7 +71,7 @@ type PutMetricDataInput struct {
 	// The data for the metric. The array can include no more than 20 metrics per call.
 	//
 	// This member is required.
-	MetricData []*types.MetricDatum
+	MetricData []types.MetricDatum
 
 	// The namespace for the metric data. To avoid conflicts with AWS service
 	// namespaces, you should not specify a namespace that begins with AWS/

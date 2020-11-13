@@ -56,7 +56,7 @@ type CreateClusterSecurityGroupInput struct {
 	Description *string
 
 	// A list of tag instances.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateClusterSecurityGroupOutput struct {

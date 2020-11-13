@@ -43,7 +43,7 @@ type ListByoipCidrsInput struct {
 type ListByoipCidrsOutput struct {
 
 	// Information about your address ranges.
-	ByoipCidrs []*types.ByoipCidr
+	ByoipCidrs []types.ByoipCidr
 
 	// The token for the next page of results.
 	NextToken *string

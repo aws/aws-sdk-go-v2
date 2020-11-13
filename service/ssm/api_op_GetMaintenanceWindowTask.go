@@ -64,14 +64,14 @@ type GetMaintenanceWindowTaskOutput struct {
 
 	// The priority of the task when it runs. The lower the number, the higher the
 	// priority. Tasks that have the same priority are scheduled in parallel.
-	Priority *int32
+	Priority int32
 
 	// The ARN of the IAM service role to use to publish Amazon Simple Notification
 	// Service (Amazon SNS) notifications for maintenance window Run Command tasks.
 	ServiceRoleArn *string
 
 	// The targets where the task should run.
-	Targets []*types.Target
+	Targets []types.Target
 
 	// The resource that the task used during execution. For RUN_COMMAND and AUTOMATION
 	// task types, the TaskArn is the Systems Manager Document name/ARN. For LAMBDA
@@ -87,7 +87,7 @@ type GetMaintenanceWindowTaskOutput struct {
 	// the Parameters option in the TaskInvocationParameters structure. For information
 	// about how Systems Manager handles these options for the supported maintenance
 	// window task types, see MaintenanceWindowTaskInvocationParameters.
-	TaskParameters map[string]*types.MaintenanceWindowTaskParameterValueExpression
+	TaskParameters map[string]types.MaintenanceWindowTaskParameterValueExpression
 
 	// The type of task to run.
 	TaskType types.MaintenanceWindowTaskType

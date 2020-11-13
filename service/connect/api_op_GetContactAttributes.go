@@ -42,7 +42,7 @@ type GetContactAttributesInput struct {
 type GetContactAttributesOutput struct {
 
 	// Information about the attributes.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

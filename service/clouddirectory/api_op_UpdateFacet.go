@@ -51,7 +51,7 @@ type UpdateFacetInput struct {
 	// List of attributes that need to be updated in a given schema Facet. Each
 	// attribute is followed by AttributeAction, which specifies the type of update
 	// operation to perform.
-	AttributeUpdates []*types.FacetAttributeUpdate
+	AttributeUpdates []types.FacetAttributeUpdate
 
 	// The object type that is associated with the facet. See
 	// CreateFacetRequest$ObjectType for more details.

@@ -38,7 +38,7 @@ type UpdateDetectorInput struct {
 	DataSources *types.DataSourceConfigurations
 
 	// Specifies whether the detector is enabled or not enabled.
-	Enable *bool
+	Enable bool
 
 	// An enum value that specifies how frequently findings are exported, such as to
 	// CloudWatch Events.

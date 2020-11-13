@@ -34,7 +34,7 @@ type Event struct {
 
 	// A list of item IDs that represents the sequence of items you have shown the
 	// user. For example, ["itemId1", "itemId2", "itemId3"].
-	Impression []*string
+	Impression []string
 
 	// The item ID key that corresponds to the ITEM_ID field of the Interactions
 	// schema.

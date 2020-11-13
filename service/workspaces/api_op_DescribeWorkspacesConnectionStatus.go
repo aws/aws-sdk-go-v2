@@ -34,7 +34,7 @@ type DescribeWorkspacesConnectionStatusInput struct {
 	NextToken *string
 
 	// The identifiers of the WorkSpaces. You can specify up to 25 WorkSpaces.
-	WorkspaceIds []*string
+	WorkspaceIds []string
 }
 
 type DescribeWorkspacesConnectionStatusOutput struct {
@@ -44,7 +44,7 @@ type DescribeWorkspacesConnectionStatusOutput struct {
 	NextToken *string
 
 	// Information about the connection status of the WorkSpace.
-	WorkspacesConnectionStatus []*types.WorkspaceConnectionStatus
+	WorkspacesConnectionStatus []types.WorkspaceConnectionStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -70,7 +70,7 @@ type CreateStreamInput struct {
 
 	// A list of tags to associate with the specified stream. Each tag is a key-value
 	// pair (the value is optional).
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateStreamOutput struct {

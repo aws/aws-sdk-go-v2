@@ -52,13 +52,13 @@ type CreateInstancesFromSnapshotInput struct {
 	// The names for your new instances.
 	//
 	// This member is required.
-	InstanceNames []*string
+	InstanceNames []string
 
 	// An array of objects representing the add-ons to enable for the new instance.
-	AddOns []*types.AddOnRequest
+	AddOns []types.AddOnRequest
 
 	// An object containing information about one or more disk mappings.
-	AttachedDiskMapping map[string][]*types.DiskMap
+	AttachedDiskMapping map[string][]types.DiskMap
 
 	// The name of the instance snapshot on which you are basing your new instances.
 	// Use the get instance snapshots operation to return information about your
@@ -103,7 +103,7 @@ type CreateInstancesFromSnapshotInput struct {
 
 	// The tag keys and optional values to add to the resource during create. Use the
 	// TagResource action to tag a resource after it's created.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// A Boolean value to indicate whether to use the latest available automatic
 	// snapshot. Constraints:
@@ -132,7 +132,7 @@ type CreateInstancesFromSnapshotOutput struct {
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.
-	Operations []*types.Operation
+	Operations []types.Operation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

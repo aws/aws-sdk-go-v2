@@ -38,7 +38,7 @@ type UntagResourceInput struct {
 	// the tag keys, not the tag values.
 	//
 	// This member is required.
-	TagKeyList []*string
+	TagKeyList []string
 }
 
 type UntagResourceOutput struct {

@@ -126,7 +126,7 @@ type BulkEmailDestination struct {
 	// A list of tags, in the form of name/value pairs, to apply to an email that you
 	// send using SendBulkTemplatedEmail. Tags correspond to characteristics of the
 	// email that you define, so that you can publish email sending events.
-	ReplacementTags []*MessageTag
+	ReplacementTags []MessageTag
 
 	// A list of replacement values to apply to the template. This parameter is a JSON
 	// object, typically consisting of key-value pairs in which the keys correspond to
@@ -210,7 +210,7 @@ type CloudWatchDestination struct {
 	// sending events to Amazon CloudWatch.
 	//
 	// This member is required.
-	DimensionConfigurations []*CloudWatchDimensionConfiguration
+	DimensionConfigurations []CloudWatchDimensionConfiguration
 }
 
 // Contains the dimension configuration to use when you publish email sending
@@ -334,13 +334,13 @@ type DeliveryOptions struct {
 type Destination struct {
 
 	// The recipients to place on the BCC: line of the message.
-	BccAddresses []*string
+	BccAddresses []string
 
 	// The recipients to place on the CC: line of the message.
-	CcAddresses []*string
+	CcAddresses []string
 
 	// The recipients to place on the To: line of the message.
-	ToAddresses []*string
+	ToAddresses []string
 }
 
 // Contains information about the event destination that the specified email
@@ -378,7 +378,7 @@ type EventDestination struct {
 	// email with the associated configuration set. Set to true to enable publishing to
 	// this destination; set to false to prevent publishing to this destination. The
 	// default value is false.
-	Enabled *bool
+	Enabled bool
 
 	// An object that contains the delivery stream ARN and the IAM role ARN associated
 	// with an Amazon Kinesis Firehose event destination.
@@ -415,7 +415,7 @@ type IdentityDkimAttributes struct {
 	// otherwise. The default value is true.
 	//
 	// This member is required.
-	DkimEnabled *bool
+	DkimEnabled bool
 
 	// Describes whether Amazon SES has successfully verified the DKIM DNS records
 	// (tokens) published in the domain name's DNS. (This only applies to domain
@@ -433,7 +433,7 @@ type IdentityDkimAttributes struct {
 	// identities.) For more information about creating DNS records using DKIM tokens,
 	// see the Amazon SES Developer Guide
 	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html).
-	DkimTokens []*string
+	DkimTokens []string
 }
 
 // Represents the custom MAIL FROM domain attributes of a verified identity (email
@@ -498,25 +498,25 @@ type IdentityNotificationAttributes struct {
 	// Amazon SNS topics.
 	//
 	// This member is required.
-	ForwardingEnabled *bool
+	ForwardingEnabled bool
 
 	// Describes whether Amazon SES includes the original email headers in Amazon SNS
 	// notifications of type Bounce. A value of true specifies that Amazon SES will
 	// include headers in bounce notifications, and a value of false specifies that
 	// Amazon SES will not include headers in bounce notifications.
-	HeadersInBounceNotificationsEnabled *bool
+	HeadersInBounceNotificationsEnabled bool
 
 	// Describes whether Amazon SES includes the original email headers in Amazon SNS
 	// notifications of type Complaint. A value of true specifies that Amazon SES will
 	// include headers in complaint notifications, and a value of false specifies that
 	// Amazon SES will not include headers in complaint notifications.
-	HeadersInComplaintNotificationsEnabled *bool
+	HeadersInComplaintNotificationsEnabled bool
 
 	// Describes whether Amazon SES includes the original email headers in Amazon SNS
 	// notifications of type Delivery. A value of true specifies that Amazon SES will
 	// include headers in delivery notifications, and a value of false specifies that
 	// Amazon SES will not include headers in delivery notifications.
-	HeadersInDeliveryNotificationsEnabled *bool
+	HeadersInDeliveryNotificationsEnabled bool
 }
 
 // Represents the verification attributes of a single identity.
@@ -625,7 +625,7 @@ type MessageDsn struct {
 	ArrivalDate *time.Time
 
 	// Additional X-headers to include in the DSN.
-	ExtensionFields []*ExtensionField
+	ExtensionFields []ExtensionField
 }
 
 // Contains the name and value of a tag that you can provide to SendEmail or
@@ -787,19 +787,19 @@ type ReceiptRule struct {
 
 	// An ordered list of actions to perform on messages that match at least one of the
 	// recipient email addresses or domains specified in the receipt rule.
-	Actions []*ReceiptAction
+	Actions []ReceiptAction
 
 	// If true, the receipt rule is active. The default value is false.
-	Enabled *bool
+	Enabled bool
 
 	// The recipient domains and email addresses that the receipt rule applies to. If
 	// this field is not specified, this rule will match all recipients under all
 	// verified domains.
-	Recipients []*string
+	Recipients []string
 
 	// If true, then messages that this receipt rule applies to are scanned for spam
 	// and viruses. The default value is false.
-	ScanEnabled *bool
+	ScanEnabled bool
 
 	// Specifies whether Amazon SES should require that incoming email is delivered
 	// over a connection encrypted with Transport Layer Security (TLS). If this
@@ -856,7 +856,7 @@ type RecipientDsnFields struct {
 	DiagnosticCode *string
 
 	// Additional X-headers to include in the DSN.
-	ExtensionFields []*ExtensionField
+	ExtensionFields []ExtensionField
 
 	// The email address that the message was ultimately delivered to. This corresponds
 	// to the Final-Recipient in the DSN. If not specified, FinalRecipient will be set
@@ -893,14 +893,14 @@ type ReputationOptions struct {
 	// configuration set, such as bounce and complaint rates, to Amazon CloudWatch. If
 	// the value is true, reputation metrics are published. If the value is false,
 	// reputation metrics are not published. The default value is false.
-	ReputationMetricsEnabled *bool
+	ReputationMetricsEnabled bool
 
 	// Describes whether email sending is enabled or disabled for the configuration
 	// set. If the value is true, then Amazon SES will send emails that use the
 	// configuration set. If the value is false, Amazon SES will not send emails that
 	// use the configuration set. The default value is true. You can change this
 	// setting using UpdateConfigurationSetSendingEnabled.
-	SendingEnabled *bool
+	SendingEnabled bool
 }
 
 // When included in a receipt rule, this action saves the received message to an
@@ -977,16 +977,16 @@ type S3Action struct {
 type SendDataPoint struct {
 
 	// Number of emails that have bounced.
-	Bounces *int64
+	Bounces int64
 
 	// Number of unwanted emails that were rejected by recipients.
-	Complaints *int64
+	Complaints int64
 
 	// Number of emails that have been sent.
-	DeliveryAttempts *int64
+	DeliveryAttempts int64
 
 	// Number of emails rejected by Amazon SES.
-	Rejects *int64
+	Rejects int64
 
 	// Time of the data point.
 	Timestamp *time.Time

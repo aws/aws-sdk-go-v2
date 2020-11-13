@@ -46,7 +46,7 @@ type ListTagsForResourceOutput struct {
 	// key-value pair that adds as a metadata to a resource used by Amazon Comprehend.
 	// For example, a tag with "Sales" as the key might be added to a resource to
 	// indicate its use by the sales department.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

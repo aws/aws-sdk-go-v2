@@ -374,7 +374,7 @@ func (e *InvalidArgument) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 type InvalidChangeBatch struct {
 	Message *string
 
-	Messages []*string
+	Messages []string
 }
 
 func (e *InvalidChangeBatch) Error() string {

@@ -80,11 +80,11 @@ type PutResourceAttributesInput struct {
 	// ResourceAttributeList parameter to maximize the chances of matching.
 	//
 	// This member is required.
-	ResourceAttributeList []*types.ResourceAttribute
+	ResourceAttributeList []types.ResourceAttribute
 
 	// Optional boolean flag to indicate whether any effect should take place. Used to
 	// test if the caller has permission to make the call.
-	DryRun *bool
+	DryRun bool
 }
 
 type PutResourceAttributesOutput struct {

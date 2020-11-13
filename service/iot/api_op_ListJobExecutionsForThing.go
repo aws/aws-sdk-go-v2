@@ -54,7 +54,7 @@ type ListJobExecutionsForThingInput struct {
 type ListJobExecutionsForThingOutput struct {
 
 	// A list of job execution summaries.
-	ExecutionSummaries []*types.JobExecutionSummaryForThing
+	ExecutionSummaries []types.JobExecutionSummaryForThing
 
 	// The token for the next set of results, or null if there are no additional
 	// results.

@@ -85,7 +85,7 @@ type GetMetricDataInput struct {
 	// either a metric to retrieve, or a math expression to perform on retrieved data.
 	//
 	// This member is required.
-	MetricDataQueries []*types.MetricDataQuery
+	MetricDataQueries []types.MetricDataQuery
 
 	// The time stamp indicating the earliest data to be returned. The value specified
 	// is inclusive; results include data points with the specified time stamp.
@@ -142,11 +142,11 @@ type GetMetricDataOutput struct {
 	// related to the global GetMetricData operation. Any message about a specific
 	// metric returned by the operation appears in the MetricDataResult object returned
 	// for that metric.
-	Messages []*types.MessageData
+	Messages []types.MessageData
 
 	// The metrics that are returned, including the metric name, namespace, and
 	// dimensions.
-	MetricDataResults []*types.MetricDataResult
+	MetricDataResults []types.MetricDataResult
 
 	// A token that marks the next batch of returned results.
 	NextToken *string

@@ -62,7 +62,7 @@ type CreateDirectoryInput struct {
 	ShortName *string
 
 	// The tags to be assigned to the Simple AD directory.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// A DirectoryVpcSettings object that contains additional information for the
 	// operation.

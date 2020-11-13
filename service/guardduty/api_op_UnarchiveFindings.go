@@ -36,7 +36,7 @@ type UnarchiveFindingsInput struct {
 	// The IDs of the findings to unarchive.
 	//
 	// This member is required.
-	FindingIds []*string
+	FindingIds []string
 }
 
 type UnarchiveFindingsOutput struct {

@@ -31,7 +31,7 @@ type ListVirtualInterfaceTestHistoryInput struct {
 
 	// The BGP peers that were placed in the DOWN state during the virtual interface
 	// failover test.
-	BgpPeers []*string
+	BgpPeers []string
 
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value. If
@@ -58,7 +58,7 @@ type ListVirtualInterfaceTestHistoryOutput struct {
 	NextToken *string
 
 	// The ID of the tested virtual interface.
-	VirtualInterfaceTestHistory []*types.VirtualInterfaceTestHistory
+	VirtualInterfaceTestHistory []types.VirtualInterfaceTestHistory
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

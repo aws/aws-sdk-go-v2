@@ -44,7 +44,7 @@ type ListTopicsOutput struct {
 	NextToken *string
 
 	// A list of topic ARNs.
-	Topics []*types.Topic
+	Topics []types.Topic
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

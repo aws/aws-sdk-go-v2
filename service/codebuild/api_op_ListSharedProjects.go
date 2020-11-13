@@ -73,7 +73,7 @@ type ListSharedProjectsOutput struct {
 
 	// The list of ARNs for the build projects shared with the current AWS account or
 	// user.
-	Projects []*string
+	Projects []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

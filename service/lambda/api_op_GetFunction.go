@@ -67,7 +67,7 @@ type GetFunctionOutput struct {
 	Configuration *types.FunctionConfiguration
 
 	// The function's tags (https://docs.aws.amazon.com/lambda/latest/dg/tagging.html).
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -43,7 +43,7 @@ type ListProvisionedCapacityInput struct {
 type ListProvisionedCapacityOutput struct {
 
 	// The response body contains the following JSON fields.
-	ProvisionedCapacityList []*types.ProvisionedCapacityDescription
+	ProvisionedCapacityList []types.ProvisionedCapacityDescription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

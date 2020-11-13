@@ -3795,17 +3795,13 @@ func awsAwsjson11_serializeDocumentByteMatchSetUpdate(v *types.ByteMatchSetUpdat
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentByteMatchSetUpdates(v []*types.ByteMatchSetUpdate, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentByteMatchSetUpdates(v []types.ByteMatchSetUpdate, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentByteMatchSetUpdate(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentByteMatchSetUpdate(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -3853,17 +3849,13 @@ func awsAwsjson11_serializeDocumentExcludedRule(v *types.ExcludedRule, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentExcludedRules(v []*types.ExcludedRule, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentExcludedRules(v []types.ExcludedRule, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentExcludedRule(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentExcludedRule(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -3923,17 +3915,13 @@ func awsAwsjson11_serializeDocumentGeoMatchSetUpdate(v *types.GeoMatchSetUpdate,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGeoMatchSetUpdates(v []*types.GeoMatchSetUpdate, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentGeoMatchSetUpdates(v []types.GeoMatchSetUpdate, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentGeoMatchSetUpdate(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentGeoMatchSetUpdate(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -3976,34 +3964,26 @@ func awsAwsjson11_serializeDocumentIPSetUpdate(v *types.IPSetUpdate, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentIPSetUpdates(v []*types.IPSetUpdate, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentIPSetUpdates(v []types.IPSetUpdate, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentIPSetUpdate(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentIPSetUpdate(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentLogDestinationConfigs(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentLogDestinationConfigs(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -4056,17 +4036,13 @@ func awsAwsjson11_serializeDocumentPredicate(v *types.Predicate, value smithyjso
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRedactedFields(v []*types.FieldToMatch, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentRedactedFields(v []types.FieldToMatch, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentFieldToMatch(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentFieldToMatch(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -4092,17 +4068,13 @@ func awsAwsjson11_serializeDocumentRegexMatchSetUpdate(v *types.RegexMatchSetUpd
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRegexMatchSetUpdates(v []*types.RegexMatchSetUpdate, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentRegexMatchSetUpdates(v []types.RegexMatchSetUpdate, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentRegexMatchSetUpdate(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentRegexMatchSetUpdate(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -4150,17 +4122,13 @@ func awsAwsjson11_serializeDocumentRegexPatternSetUpdate(v *types.RegexPatternSe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRegexPatternSetUpdates(v []*types.RegexPatternSetUpdate, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentRegexPatternSetUpdates(v []types.RegexPatternSetUpdate, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentRegexPatternSetUpdate(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentRegexPatternSetUpdate(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -4186,17 +4154,13 @@ func awsAwsjson11_serializeDocumentRuleGroupUpdate(v *types.RuleGroupUpdate, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRuleGroupUpdates(v []*types.RuleGroupUpdate, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentRuleGroupUpdates(v []types.RuleGroupUpdate, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentRuleGroupUpdate(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentRuleGroupUpdate(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -4222,17 +4186,13 @@ func awsAwsjson11_serializeDocumentRuleUpdate(v *types.RuleUpdate, value smithyj
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRuleUpdates(v []*types.RuleUpdate, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentRuleUpdates(v []types.RuleUpdate, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentRuleUpdate(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentRuleUpdate(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -4255,9 +4215,9 @@ func awsAwsjson11_serializeDocumentSizeConstraint(v *types.SizeConstraint, value
 		}
 	}
 
-	if v.Size != nil {
+	if v.Size != 0 {
 		ok := object.Key("Size")
-		ok.Long(*v.Size)
+		ok.Long(v.Size)
 	}
 
 	if len(v.TextTransformation) > 0 {
@@ -4287,17 +4247,13 @@ func awsAwsjson11_serializeDocumentSizeConstraintSetUpdate(v *types.SizeConstrai
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSizeConstraintSetUpdates(v []*types.SizeConstraintSetUpdate, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentSizeConstraintSetUpdates(v []types.SizeConstraintSetUpdate, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentSizeConstraintSetUpdate(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentSizeConstraintSetUpdate(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -4323,17 +4279,13 @@ func awsAwsjson11_serializeDocumentSqlInjectionMatchSetUpdate(v *types.SqlInject
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSqlInjectionMatchSetUpdates(v []*types.SqlInjectionMatchSetUpdate, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentSqlInjectionMatchSetUpdates(v []types.SqlInjectionMatchSetUpdate, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentSqlInjectionMatchSetUpdate(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentSqlInjectionMatchSetUpdate(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -4376,32 +4328,24 @@ func awsAwsjson11_serializeDocumentTag(v *types.Tag, value smithyjson.Value) err
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagKeyList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagKeyList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagList(v []*types.Tag, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagList(v []types.Tag, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentTag(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -4468,17 +4412,13 @@ func awsAwsjson11_serializeDocumentWebACLUpdate(v *types.WebACLUpdate, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentWebACLUpdates(v []*types.WebACLUpdate, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentWebACLUpdates(v []types.WebACLUpdate, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentWebACLUpdate(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentWebACLUpdate(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -4504,17 +4444,13 @@ func awsAwsjson11_serializeDocumentXssMatchSetUpdate(v *types.XssMatchSetUpdate,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentXssMatchSetUpdates(v []*types.XssMatchSetUpdate, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentXssMatchSetUpdates(v []types.XssMatchSetUpdate, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentXssMatchSetUpdate(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentXssMatchSetUpdate(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -4632,9 +4568,9 @@ func awsAwsjson11_serializeOpDocumentCreateRateBasedRuleInput(v *CreateRateBased
 		ok.String(string(v.RateKey))
 	}
 
-	if v.RateLimit != nil {
+	if v.RateLimit != 0 {
 		ok := object.Key("RateLimit")
-		ok.Long(*v.RateLimit)
+		ok.Long(v.RateLimit)
 	}
 
 	if v.Tags != nil {
@@ -5248,9 +5184,9 @@ func awsAwsjson11_serializeOpDocumentGetSampledRequestsInput(v *GetSampledReques
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxItems != nil {
+	if v.MaxItems != 0 {
 		ok := object.Key("MaxItems")
-		ok.Long(*v.MaxItems)
+		ok.Long(v.MaxItems)
 	}
 
 	if v.RuleId != nil {
@@ -5337,9 +5273,9 @@ func awsAwsjson11_serializeOpDocumentListActivatedRulesInRuleGroupInput(v *ListA
 	object := value.Object()
 	defer object.Close()
 
-	if v.Limit != nil {
+	if v.Limit != 0 {
 		ok := object.Key("Limit")
-		ok.Integer(*v.Limit)
+		ok.Integer(v.Limit)
 	}
 
 	if v.NextMarker != nil {
@@ -5359,9 +5295,9 @@ func awsAwsjson11_serializeOpDocumentListByteMatchSetsInput(v *ListByteMatchSets
 	object := value.Object()
 	defer object.Close()
 
-	if v.Limit != nil {
+	if v.Limit != 0 {
 		ok := object.Key("Limit")
-		ok.Integer(*v.Limit)
+		ok.Integer(v.Limit)
 	}
 
 	if v.NextMarker != nil {
@@ -5376,9 +5312,9 @@ func awsAwsjson11_serializeOpDocumentListGeoMatchSetsInput(v *ListGeoMatchSetsIn
 	object := value.Object()
 	defer object.Close()
 
-	if v.Limit != nil {
+	if v.Limit != 0 {
 		ok := object.Key("Limit")
-		ok.Integer(*v.Limit)
+		ok.Integer(v.Limit)
 	}
 
 	if v.NextMarker != nil {
@@ -5393,9 +5329,9 @@ func awsAwsjson11_serializeOpDocumentListIPSetsInput(v *ListIPSetsInput, value s
 	object := value.Object()
 	defer object.Close()
 
-	if v.Limit != nil {
+	if v.Limit != 0 {
 		ok := object.Key("Limit")
-		ok.Integer(*v.Limit)
+		ok.Integer(v.Limit)
 	}
 
 	if v.NextMarker != nil {
@@ -5410,9 +5346,9 @@ func awsAwsjson11_serializeOpDocumentListLoggingConfigurationsInput(v *ListLoggi
 	object := value.Object()
 	defer object.Close()
 
-	if v.Limit != nil {
+	if v.Limit != 0 {
 		ok := object.Key("Limit")
-		ok.Integer(*v.Limit)
+		ok.Integer(v.Limit)
 	}
 
 	if v.NextMarker != nil {
@@ -5427,9 +5363,9 @@ func awsAwsjson11_serializeOpDocumentListRateBasedRulesInput(v *ListRateBasedRul
 	object := value.Object()
 	defer object.Close()
 
-	if v.Limit != nil {
+	if v.Limit != 0 {
 		ok := object.Key("Limit")
-		ok.Integer(*v.Limit)
+		ok.Integer(v.Limit)
 	}
 
 	if v.NextMarker != nil {
@@ -5444,9 +5380,9 @@ func awsAwsjson11_serializeOpDocumentListRegexMatchSetsInput(v *ListRegexMatchSe
 	object := value.Object()
 	defer object.Close()
 
-	if v.Limit != nil {
+	if v.Limit != 0 {
 		ok := object.Key("Limit")
-		ok.Integer(*v.Limit)
+		ok.Integer(v.Limit)
 	}
 
 	if v.NextMarker != nil {
@@ -5461,9 +5397,9 @@ func awsAwsjson11_serializeOpDocumentListRegexPatternSetsInput(v *ListRegexPatte
 	object := value.Object()
 	defer object.Close()
 
-	if v.Limit != nil {
+	if v.Limit != 0 {
 		ok := object.Key("Limit")
-		ok.Integer(*v.Limit)
+		ok.Integer(v.Limit)
 	}
 
 	if v.NextMarker != nil {
@@ -5495,9 +5431,9 @@ func awsAwsjson11_serializeOpDocumentListRuleGroupsInput(v *ListRuleGroupsInput,
 	object := value.Object()
 	defer object.Close()
 
-	if v.Limit != nil {
+	if v.Limit != 0 {
 		ok := object.Key("Limit")
-		ok.Integer(*v.Limit)
+		ok.Integer(v.Limit)
 	}
 
 	if v.NextMarker != nil {
@@ -5512,9 +5448,9 @@ func awsAwsjson11_serializeOpDocumentListRulesInput(v *ListRulesInput, value smi
 	object := value.Object()
 	defer object.Close()
 
-	if v.Limit != nil {
+	if v.Limit != 0 {
 		ok := object.Key("Limit")
-		ok.Integer(*v.Limit)
+		ok.Integer(v.Limit)
 	}
 
 	if v.NextMarker != nil {
@@ -5529,9 +5465,9 @@ func awsAwsjson11_serializeOpDocumentListSizeConstraintSetsInput(v *ListSizeCons
 	object := value.Object()
 	defer object.Close()
 
-	if v.Limit != nil {
+	if v.Limit != 0 {
 		ok := object.Key("Limit")
-		ok.Integer(*v.Limit)
+		ok.Integer(v.Limit)
 	}
 
 	if v.NextMarker != nil {
@@ -5546,9 +5482,9 @@ func awsAwsjson11_serializeOpDocumentListSqlInjectionMatchSetsInput(v *ListSqlIn
 	object := value.Object()
 	defer object.Close()
 
-	if v.Limit != nil {
+	if v.Limit != 0 {
 		ok := object.Key("Limit")
-		ok.Integer(*v.Limit)
+		ok.Integer(v.Limit)
 	}
 
 	if v.NextMarker != nil {
@@ -5563,9 +5499,9 @@ func awsAwsjson11_serializeOpDocumentListSubscribedRuleGroupsInput(v *ListSubscr
 	object := value.Object()
 	defer object.Close()
 
-	if v.Limit != nil {
+	if v.Limit != 0 {
 		ok := object.Key("Limit")
-		ok.Integer(*v.Limit)
+		ok.Integer(v.Limit)
 	}
 
 	if v.NextMarker != nil {
@@ -5580,9 +5516,9 @@ func awsAwsjson11_serializeOpDocumentListTagsForResourceInput(v *ListTagsForReso
 	object := value.Object()
 	defer object.Close()
 
-	if v.Limit != nil {
+	if v.Limit != 0 {
 		ok := object.Key("Limit")
-		ok.Integer(*v.Limit)
+		ok.Integer(v.Limit)
 	}
 
 	if v.NextMarker != nil {
@@ -5602,9 +5538,9 @@ func awsAwsjson11_serializeOpDocumentListWebACLsInput(v *ListWebACLsInput, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.Limit != nil {
+	if v.Limit != 0 {
 		ok := object.Key("Limit")
-		ok.Integer(*v.Limit)
+		ok.Integer(v.Limit)
 	}
 
 	if v.NextMarker != nil {
@@ -5619,9 +5555,9 @@ func awsAwsjson11_serializeOpDocumentListXssMatchSetsInput(v *ListXssMatchSetsIn
 	object := value.Object()
 	defer object.Close()
 
-	if v.Limit != nil {
+	if v.Limit != 0 {
 		ok := object.Key("Limit")
-		ok.Integer(*v.Limit)
+		ok.Integer(v.Limit)
 	}
 
 	if v.NextMarker != nil {
@@ -5782,9 +5718,9 @@ func awsAwsjson11_serializeOpDocumentUpdateRateBasedRuleInput(v *UpdateRateBased
 		ok.String(*v.ChangeToken)
 	}
 
-	if v.RateLimit != nil {
+	if v.RateLimit != 0 {
 		ok := object.Key("RateLimit")
-		ok.Long(*v.RateLimit)
+		ok.Long(v.RateLimit)
 	}
 
 	if v.RuleId != nil {

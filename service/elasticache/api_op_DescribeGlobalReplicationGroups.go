@@ -51,7 +51,7 @@ type DescribeGlobalReplicationGroupsInput struct {
 type DescribeGlobalReplicationGroupsOutput struct {
 
 	// Indicates the slot configuration and global identifier for each slice group.
-	GlobalReplicationGroups []*types.GlobalReplicationGroup
+	GlobalReplicationGroups []types.GlobalReplicationGroup
 
 	// An optional marker returned from a prior request. Use this marker for pagination
 	// of results from this operation. If this parameter is specified, the response

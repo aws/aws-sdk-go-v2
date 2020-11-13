@@ -45,7 +45,7 @@ type PutWebhookInput struct {
 	Webhook *types.WebhookDefinition
 
 	// The tags for the webhook.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type PutWebhookOutput struct {

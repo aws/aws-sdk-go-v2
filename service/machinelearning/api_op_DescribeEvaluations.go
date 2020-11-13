@@ -122,7 +122,7 @@ type DescribeEvaluationsOutput struct {
 	NextToken *string
 
 	// A list of Evaluation that meet the search criteria.
-	Results []*types.Evaluation
+	Results []types.Evaluation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

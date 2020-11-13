@@ -38,7 +38,7 @@ type UpdateApiKeyInput struct {
 
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
-	PatchOperations []*types.PatchOperation
+	PatchOperations []types.PatchOperation
 }
 
 // A resource that can be distributed to callers for executing Method resources
@@ -59,7 +59,7 @@ type UpdateApiKeyOutput struct {
 	Description *string
 
 	// Specifies whether the API Key can be used by callers.
-	Enabled *bool
+	Enabled bool
 
 	// The identifier of the API Key.
 	Id *string
@@ -71,10 +71,10 @@ type UpdateApiKeyOutput struct {
 	Name *string
 
 	// A list of Stage resources that are associated with the ApiKey resource.
-	StageKeys []*string
+	StageKeys []string
 
 	// The collection of tags. Each tag element is associated with a given resource.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The value of the API Key.
 	Value *string

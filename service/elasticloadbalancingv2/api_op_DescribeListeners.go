@@ -34,7 +34,7 @@ func (c *Client) DescribeListeners(ctx context.Context, params *DescribeListener
 type DescribeListenersInput struct {
 
 	// The Amazon Resource Names (ARN) of the listeners.
-	ListenerArns []*string
+	ListenerArns []string
 
 	// The Amazon Resource Name (ARN) of the load balancer.
 	LoadBalancerArn *string
@@ -50,7 +50,7 @@ type DescribeListenersInput struct {
 type DescribeListenersOutput struct {
 
 	// Information about the listeners.
-	Listeners []*types.Listener
+	Listeners []types.Listener
 
 	// If there are additional results, this is the marker for the next set of results.
 	// Otherwise, this is null.

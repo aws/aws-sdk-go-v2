@@ -87,7 +87,7 @@ type GetOrganizationsAccessReportOutput struct {
 
 	// An object that contains details about the most recent attempt to access the
 	// service.
-	AccessDetails []*types.AccessDetail
+	AccessDetails []types.AccessDetail
 
 	// Contains information about the reason that the operation failed. This data type
 	// is used as a response element in the GetOrganizationsAccessReport,
@@ -101,7 +101,7 @@ type GetOrganizationsAccessReportOutput struct {
 	// the MaxItems number of results even when there are more results available. We
 	// recommend that you check IsTruncated after every call to ensure that you receive
 	// all your results.
-	IsTruncated *bool
+	IsTruncated bool
 
 	// The date and time, in ISO 8601 date-time format
 	// (http://www.iso.org/iso/iso8601), when the generated report job was completed or

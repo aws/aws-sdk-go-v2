@@ -39,7 +39,7 @@ type DescribeRemediationExecutionStatusInput struct {
 
 	// The maximum number of RemediationExecutionStatuses returned on each page. The
 	// default is maximum. If you specify 0, AWS Config uses the default.
-	Limit *int32
+	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
@@ -47,7 +47,7 @@ type DescribeRemediationExecutionStatusInput struct {
 
 	// A list of resource keys to be processed with the current request. Each element
 	// in the list consists of the resource type and resource ID.
-	ResourceKeys []*types.ResourceKey
+	ResourceKeys []types.ResourceKey
 }
 
 type DescribeRemediationExecutionStatusOutput struct {
@@ -57,7 +57,7 @@ type DescribeRemediationExecutionStatusOutput struct {
 	NextToken *string
 
 	// Returns a list of remediation execution statuses objects.
-	RemediationExecutionStatuses []*types.RemediationExecutionStatus
+	RemediationExecutionStatuses []types.RemediationExecutionStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

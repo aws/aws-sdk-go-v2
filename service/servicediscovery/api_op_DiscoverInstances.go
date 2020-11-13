@@ -56,19 +56,19 @@ type DiscoverInstancesInput struct {
 	// parameter and this parameter, they are returned. Otherwise, these filters are
 	// ignored and only instances that match the filters specified in the
 	// QueryParameters parameter are returned.
-	OptionalParameters map[string]*string
+	OptionalParameters map[string]string
 
 	// Filters to scope the results based on custom attributes for the instance. For
 	// example, {version=v1, az=1a}. Only instances that match all the specified
 	// key-value pairs will be returned.
-	QueryParameters map[string]*string
+	QueryParameters map[string]string
 }
 
 type DiscoverInstancesOutput struct {
 
 	// A complex type that contains one HttpInstanceSummary for each registered
 	// instance.
-	Instances []*types.HttpInstanceSummary
+	Instances []types.HttpInstanceSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

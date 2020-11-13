@@ -50,7 +50,7 @@ type GetDocumentationVersionsInput struct {
 type GetDocumentationVersionsOutput struct {
 
 	// The current page of elements from this collection.
-	Items []*types.DocumentationVersion
+	Items []types.DocumentationVersion
 
 	// The current pagination position in the paged result set.
 	Position *string

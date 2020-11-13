@@ -53,7 +53,7 @@ type DescribeDiscovererOutput struct {
 	State types.DiscovererState
 
 	// Tags associated with the resource.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

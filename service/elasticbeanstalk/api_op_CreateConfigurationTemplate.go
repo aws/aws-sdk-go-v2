@@ -70,7 +70,7 @@ type CreateConfigurationTemplateInput struct {
 	// Beanstalk configuration options, see Option Values
 	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options.html) in
 	// the AWS Elastic Beanstalk Developer Guide.
-	OptionSettings []*types.ConfigurationOptionSetting
+	OptionSettings []types.ConfigurationOptionSetting
 
 	// The Amazon Resource Name (ARN) of the custom platform. For more information, see
 	// Custom Platforms
@@ -104,7 +104,7 @@ type CreateConfigurationTemplateInput struct {
 	SourceConfiguration *types.SourceConfiguration
 
 	// Specifies the tags applied to the configuration template.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // Describes the settings for a configuration set.
@@ -144,7 +144,7 @@ type CreateConfigurationTemplateOutput struct {
 	EnvironmentName *string
 
 	// A list of the configuration options and their values in this configuration set.
-	OptionSettings []*types.ConfigurationOptionSetting
+	OptionSettings []types.ConfigurationOptionSetting
 
 	// The ARN of the platform version.
 	PlatformArn *string

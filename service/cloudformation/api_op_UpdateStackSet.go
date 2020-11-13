@@ -51,7 +51,7 @@ type UpdateStackSetInput struct {
 	// CloudFormation updates the stack instances in the specified accounts and
 	// Regions, while leaving all other stack instances with their existing stack
 	// instance status.
-	Accounts []*string
+	Accounts []string
 
 	// The Amazon Resource Number (ARN) of the IAM role to use to update this stack
 	// set. Specify an IAM role only if you are using customized administrator roles to
@@ -184,7 +184,7 @@ type UpdateStackSetInput struct {
 	OperationPreferences *types.StackSetOperationPreferences
 
 	// A list of input parameters for the stack set template.
-	Parameters []*types.Parameter
+	Parameters []types.Parameter
 
 	// Describes how the IAM roles required for stack set operations are created. You
 	// cannot modify PermissionModel if there are stack instances associated with your
@@ -213,7 +213,7 @@ type UpdateStackSetInput struct {
 	// to the template or parameters, AWS CloudFormation updates the stack instances in
 	// the specified accounts and Regions, while leaving all other stack instances with
 	// their existing stack instance status.
-	Regions []*string
+	Regions []string
 
 	// The key-value pairs to associate with this stack set and the stacks created from
 	// it. AWS CloudFormation also propagates these tags to supported resources that
@@ -243,7 +243,7 @@ type UpdateStackSetInput struct {
 	// to untag resources. If you don't have the necessary permission(s), the entire
 	// UpdateStackSet action fails with an access denied error, and the stack set is
 	// not updated.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The structure that contains the template body, with a minimum length of 1 byte
 	// and a maximum length of 51,200 bytes. For more information, see Template Anatomy

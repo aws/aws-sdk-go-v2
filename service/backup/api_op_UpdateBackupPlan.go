@@ -46,7 +46,7 @@ type UpdateBackupPlanInput struct {
 type UpdateBackupPlanOutput struct {
 
 	// Contains a list of BackupOptions for each resource type.
-	AdvancedBackupSettings []*types.AdvancedBackupSetting
+	AdvancedBackupSettings []types.AdvancedBackupSetting
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a backup plan; for
 	// example,

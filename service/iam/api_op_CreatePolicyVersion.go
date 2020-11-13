@@ -75,7 +75,7 @@ type CreatePolicyVersionInput struct {
 	// versions, see Versioning for Managed Policies
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html)
 	// in the IAM User Guide.
-	SetAsDefault *bool
+	SetAsDefault bool
 }
 
 // Contains the response to a successful CreatePolicyVersion request.

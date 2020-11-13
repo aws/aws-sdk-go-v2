@@ -37,7 +37,7 @@ type DeprecateThingTypeInput struct {
 
 	// Whether to undeprecate a deprecated thing type. If true, the thing type will not
 	// be deprecated anymore and you can associate it with things.
-	UndoDeprecate *bool
+	UndoDeprecate bool
 }
 
 // The output for the DeprecateThingType operation.

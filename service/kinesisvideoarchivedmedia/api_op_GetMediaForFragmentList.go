@@ -65,7 +65,7 @@ type GetMediaForFragmentListInput struct {
 	// these values with ListFragments.
 	//
 	// This member is required.
-	Fragments []*string
+	Fragments []string
 
 	// The name of the stream from which to retrieve fragment media.
 	//

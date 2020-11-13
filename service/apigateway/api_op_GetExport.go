@@ -57,7 +57,7 @@ type GetExportInput struct {
 	// x-amazon-apigateway-integration extensions. extensions='authorizers' will export
 	// the API with x-amazon-apigateway-authorizer extensions. postman will export the
 	// API with Postman extensions, allowing for import to the Postman tool
-	Parameters map[string]*string
+	Parameters map[string]string
 }
 
 // The binary blob response to GetExport, which contains the generated SDK.

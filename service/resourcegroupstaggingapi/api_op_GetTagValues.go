@@ -51,7 +51,7 @@ type GetTagValuesOutput struct {
 	PaginationToken *string
 
 	// A list of all tag values for the specified key in the AWS account.
-	TagValues []*string
+	TagValues []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

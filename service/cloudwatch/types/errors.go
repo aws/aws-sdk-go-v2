@@ -30,7 +30,7 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 type DashboardInvalidInputError struct {
 	Message *string
 
-	DashboardValidationMessages []*DashboardValidationMessage
+	DashboardValidationMessages []DashboardValidationMessage
 }
 
 func (e *DashboardInvalidInputError) Error() string {

@@ -50,7 +50,7 @@ type DescribeDBInstancesInput struct {
 	// db-instance-id - Accepts instance identifiers and instance ARNs. The results
 	// list includes only the information about the instances that are identified by
 	// these ARNs.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
@@ -68,7 +68,7 @@ type DescribeDBInstancesInput struct {
 type DescribeDBInstancesOutput struct {
 
 	// Detailed information about one or more instances.
-	DBInstances []*types.DBInstance
+	DBInstances []types.DBInstance
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the

@@ -55,7 +55,7 @@ type CreateDatasetGroupInput struct {
 
 	// An array of Amazon Resource Names (ARNs) of the datasets that you want to
 	// include in the dataset group.
-	DatasetArns []*string
+	DatasetArns []string
 
 	// The optional metadata that you apply to the dataset group to help you categorize
 	// and organize them. Each tag consists of a key and an optional value, both of
@@ -87,7 +87,7 @@ type CreateDatasetGroupInput struct {
 	// has aws as its prefix but the key does not, then Forecast considers it to be a
 	// user tag and will count against the limit of 50 tags. Tags with only the key
 	// prefix of aws do not count against your tags per resource limit.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateDatasetGroupOutput struct {

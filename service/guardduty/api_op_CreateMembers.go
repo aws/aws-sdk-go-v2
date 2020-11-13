@@ -41,7 +41,7 @@ type CreateMembersInput struct {
 	// associate with the master GuardDuty account.
 	//
 	// This member is required.
-	AccountDetails []*types.AccountDetail
+	AccountDetails []types.AccountDetail
 
 	// The unique ID of the detector of the GuardDuty account that you want to
 	// associate member accounts with.
@@ -56,7 +56,7 @@ type CreateMembersOutput struct {
 	// result string that explains why each was unprocessed.
 	//
 	// This member is required.
-	UnprocessedAccounts []*types.UnprocessedAccount
+	UnprocessedAccounts []types.UnprocessedAccount
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

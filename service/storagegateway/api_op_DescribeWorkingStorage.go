@@ -49,7 +49,7 @@ type DescribeWorkingStorageOutput struct {
 	// Each local disk ID is specified as a string (minimum length of 1 and maximum
 	// length of 300). If no local disks are configured as working storage, then the
 	// DiskIds array is empty.
-	DiskIds []*string
+	DiskIds []string
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
 	// return a list of gateways for your account and AWS Region.
@@ -57,11 +57,11 @@ type DescribeWorkingStorageOutput struct {
 
 	// The total working storage in bytes allocated for the gateway. If no working
 	// storage is configured for the gateway, this field returns 0.
-	WorkingStorageAllocatedInBytes *int64
+	WorkingStorageAllocatedInBytes int64
 
 	// The total working storage in bytes in use by the gateway. If no working storage
 	// is configured for the gateway, this field returns 0.
-	WorkingStorageUsedInBytes *int64
+	WorkingStorageUsedInBytes int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

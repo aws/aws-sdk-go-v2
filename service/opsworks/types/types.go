@@ -22,20 +22,20 @@ type App struct {
 	AppSource *Source
 
 	// The stack attributes.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// When the app was created.
 	CreatedAt *string
 
 	// The app's data sources.
-	DataSources []*DataSource
+	DataSources []DataSource
 
 	// A description of the app.
 	Description *string
 
 	// The app vhost settings with multiple domains separated by commas. For example:
 	// 'www.example.com, example.com'
-	Domains []*string
+	Domains []string
 
 	// Whether to enable SSL for the app.
 	EnableSsl *bool
@@ -51,7 +51,7 @@ type App struct {
 	// accommodate most if not all use cases, but if you do exceed it, you will cause
 	// an exception (API) with an "Environment: is too large (maximum is 20 KB)"
 	// message.
-	Environment []*EnvironmentVariable
+	Environment []EnvironmentVariable
 
 	// The app name.
 	Name *string
@@ -82,7 +82,7 @@ type AutoScalingThresholds struct {
 	// manually. For more information, see Allowing AWS OpsWorks Stacks to Act on Your
 	// Behalf
 	// (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-servicerole.html).
-	Alarms []*string
+	Alarms []string
 
 	// The CPU utilization threshold, as a percent of the available CPU. A value of -1
 	// disables the threshold.
@@ -155,7 +155,7 @@ type CloudWatchLogsConfiguration struct {
 	Enabled *bool
 
 	// A list of configuration options for CloudWatch Logs.
-	LogStreams []*CloudWatchLogsLogStream
+	LogStreams []CloudWatchLogsLogStream
 }
 
 // Describes the Amazon CloudWatch logs configuration for a layer. For detailed
@@ -341,7 +341,7 @@ type Deployment struct {
 	IamUserArn *string
 
 	// The IDs of the target instances.
-	InstanceIds []*string
+	InstanceIds []string
 
 	// The stack ID.
 	StackId *string
@@ -420,7 +420,7 @@ type DeploymentCommand struct {
 	// For example, to upgrade an instance to
 	// Amazon Linux 2016.09, set Args to the following.  { "upgrade_os_to":["Amazon
 	// Linux 2016.09"], "allow_reboot":["true"] }
-	Args map[string][]*string
+	Args map[string][]string
 }
 
 // Describes an Amazon EBS volume. This data type maps directly to the Amazon EC2
@@ -494,14 +494,14 @@ type ElasticIp struct {
 type ElasticLoadBalancer struct {
 
 	// A list of Availability Zones.
-	AvailabilityZones []*string
+	AvailabilityZones []string
 
 	// The instance's public DNS name.
 	DnsName *string
 
 	// A list of the EC2 instances that the Elastic Load Balancing instance is managing
 	// traffic for.
-	Ec2InstanceIds []*string
+	Ec2InstanceIds []string
 
 	// The Elastic Load Balancing instance's name.
 	ElasticLoadBalancerName *string
@@ -516,7 +516,7 @@ type ElasticLoadBalancer struct {
 	StackId *string
 
 	// A list of subnet IDs, if the stack is running in a VPC.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// The VPC ID.
 	VpcId *string
@@ -574,7 +574,7 @@ type Instance struct {
 
 	// An array of BlockDeviceMapping objects that specify the instance's block device
 	// mappings.
-	BlockDeviceMappings []*BlockDeviceMapping
+	BlockDeviceMappings []BlockDeviceMapping
 
 	// The time that the instance was created.
 	CreatedAt *string
@@ -625,7 +625,7 @@ type Instance struct {
 	LastServiceErrorId *string
 
 	// An array containing the instance layer IDs.
-	LayerIds []*string
+	LayerIds []string
 
 	// The instance's operating system.
 	Os *string
@@ -663,7 +663,7 @@ type Instance struct {
 	RootDeviceVolumeId *string
 
 	// An array containing the instance security group IDs.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// The SSH key's Deep Security Agent (DSA) fingerprint.
 	SshHostDsaKeyFingerprint *string
@@ -808,7 +808,7 @@ type Layer struct {
 	// GangliaPassword attributes, AWS OpsWorks Stacks returns *****FILTERED*****
 	// instead of the actual value For an ECS Cluster layer, AWS OpsWorks Stacks the
 	// EcsClusterArn attribute is set to the cluster's ARN.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// Whether to automatically assign an Elastic IP address
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
@@ -841,7 +841,7 @@ type Layer struct {
 	CustomRecipes *Recipes
 
 	// An array containing the layer's custom security group IDs.
-	CustomSecurityGroupIds []*string
+	CustomSecurityGroupIds []string
 
 	// AWS OpsWorks Stacks supports five lifecycle events: setup, configuration,
 	// deploy, undeploy, and shutdown. For each layer, AWS OpsWorks Stacks runs a set
@@ -856,7 +856,7 @@ type Layer struct {
 	DefaultRecipes *Recipes
 
 	// An array containing the layer's security group names.
-	DefaultSecurityGroupNames []*string
+	DefaultSecurityGroupNames []string
 
 	// Whether auto healing is disabled for the layer.
 	EnableAutoHealing *bool
@@ -880,7 +880,7 @@ type Layer struct {
 	Name *string
 
 	// An array of Package objects that describe the layer's packages.
-	Packages []*string
+	Packages []string
 
 	// The layer short name.
 	Shortname *string
@@ -895,7 +895,7 @@ type Layer struct {
 	UseEbsOptimizedInstances *bool
 
 	// A VolumeConfigurations object that describes the layer's Amazon EBS volumes.
-	VolumeConfigurations []*VolumeConfiguration
+	VolumeConfigurations []VolumeConfiguration
 }
 
 // Specifies the lifecycle event configuration
@@ -930,7 +930,7 @@ type OperatingSystem struct {
 
 	// Supported configuration manager name and versions for an AWS OpsWorks Stacks
 	// operating system.
-	ConfigurationManagers []*OperatingSystemConfigurationManager
+	ConfigurationManagers []OperatingSystemConfigurationManager
 
 	// The ID of a supported operating system, such as Amazon Linux 2018.03.
 	Id *string
@@ -1092,19 +1092,19 @@ type RdsDbInstance struct {
 type Recipes struct {
 
 	// An array of custom recipe names to be run following a configure event.
-	Configure []*string
+	Configure []string
 
 	// An array of custom recipe names to be run following a deploy event.
-	Deploy []*string
+	Deploy []string
 
 	// An array of custom recipe names to be run following a setup event.
-	Setup []*string
+	Setup []string
 
 	// An array of custom recipe names to be run following a shutdown event.
-	Shutdown []*string
+	Shutdown []string
 
 	// An array of custom recipe names to be run following a undeploy event.
-	Undeploy []*string
+	Undeploy []string
 }
 
 // A registered instance's reported operating system.
@@ -1250,7 +1250,7 @@ type Stack struct {
 	Arn *string
 
 	// The stack's attributes.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// A ChefConfiguration object that specifies whether to enable Berkshelf and the
 	// Berkshelf version. For more information, see Create a New Stack
@@ -1558,23 +1558,23 @@ type VolumeConfiguration struct {
 type WeeklyAutoScalingSchedule struct {
 
 	// The schedule for Friday.
-	Friday map[string]*string
+	Friday map[string]string
 
 	// The schedule for Monday.
-	Monday map[string]*string
+	Monday map[string]string
 
 	// The schedule for Saturday.
-	Saturday map[string]*string
+	Saturday map[string]string
 
 	// The schedule for Sunday.
-	Sunday map[string]*string
+	Sunday map[string]string
 
 	// The schedule for Thursday.
-	Thursday map[string]*string
+	Thursday map[string]string
 
 	// The schedule for Tuesday.
-	Tuesday map[string]*string
+	Tuesday map[string]string
 
 	// The schedule for Wednesday.
-	Wednesday map[string]*string
+	Wednesday map[string]string
 }

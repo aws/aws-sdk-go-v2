@@ -44,7 +44,7 @@ type DeleteAlarmsInput struct {
 	// The alarms to be deleted.
 	//
 	// This member is required.
-	AlarmNames []*string
+	AlarmNames []string
 }
 
 type DeleteAlarmsOutput struct {

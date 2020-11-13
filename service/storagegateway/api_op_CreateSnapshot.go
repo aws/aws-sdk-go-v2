@@ -77,7 +77,7 @@ type CreateSnapshotInput struct {
 	// numbers representable in UTF-8 format, and the following special characters: + -
 	// = . _ : / @. The maximum length of a tag's key is 128 characters, and the
 	// maximum length for a tag's value is 256.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // A JSON object containing the following fields:

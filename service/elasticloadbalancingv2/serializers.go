@@ -1941,41 +1941,35 @@ func awsAwsquery_serializeDocumentAction(v *types.Action, value query.Value) err
 	return nil
 }
 
-func awsAwsquery_serializeDocumentActions(v []*types.Action, value query.Value) error {
+func awsAwsquery_serializeDocumentActions(v []types.Action, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentAction(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentAction(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentAlpnPolicyName(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentAlpnPolicyName(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentAuthenticateCognitoActionAuthenticationRequestExtraParams(v map[string]*string, value query.Value) error {
+func awsAwsquery_serializeDocumentAuthenticateCognitoActionAuthenticationRequestExtraParams(v map[string]string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
@@ -1988,11 +1982,8 @@ func awsAwsquery_serializeDocumentAuthenticateCognitoActionAuthenticationRequest
 	sort.Strings(keys)
 
 	for _, key := range keys {
-		if vv := v[key]; vv == nil {
-			continue
-		}
 		om := object.Key(key)
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
@@ -2046,7 +2037,7 @@ func awsAwsquery_serializeDocumentAuthenticateCognitoActionConfig(v *types.Authe
 	return nil
 }
 
-func awsAwsquery_serializeDocumentAuthenticateOidcActionAuthenticationRequestExtraParams(v map[string]*string, value query.Value) error {
+func awsAwsquery_serializeDocumentAuthenticateOidcActionAuthenticationRequestExtraParams(v map[string]string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
@@ -2059,11 +2050,8 @@ func awsAwsquery_serializeDocumentAuthenticateOidcActionAuthenticationRequestExt
 	sort.Strings(keys)
 
 	for _, key := range keys {
-		if vv := v[key]; vv == nil {
-			continue
-		}
 		om := object.Key(key)
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
@@ -2154,18 +2142,15 @@ func awsAwsquery_serializeDocumentCertificate(v *types.Certificate, value query.
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCertificateList(v []*types.Certificate, value query.Value) error {
+func awsAwsquery_serializeDocumentCertificateList(v []types.Certificate, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentCertificate(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentCertificate(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -2262,50 +2247,41 @@ func awsAwsquery_serializeDocumentHttpRequestMethodConditionConfig(v *types.Http
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListenerArns(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentListenerArns(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListOfString(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentListOfString(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentLoadBalancerArns(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentLoadBalancerArns(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2327,36 +2303,30 @@ func awsAwsquery_serializeDocumentLoadBalancerAttribute(v *types.LoadBalancerAtt
 	return nil
 }
 
-func awsAwsquery_serializeDocumentLoadBalancerAttributes(v []*types.LoadBalancerAttribute, value query.Value) error {
+func awsAwsquery_serializeDocumentLoadBalancerAttributes(v []types.LoadBalancerAttribute, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentLoadBalancerAttribute(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentLoadBalancerAttribute(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentLoadBalancerNames(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentLoadBalancerNames(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2423,18 +2393,15 @@ func awsAwsquery_serializeDocumentQueryStringKeyValuePair(v *types.QueryStringKe
 	return nil
 }
 
-func awsAwsquery_serializeDocumentQueryStringKeyValuePairList(v []*types.QueryStringKeyValuePair, value query.Value) error {
+func awsAwsquery_serializeDocumentQueryStringKeyValuePairList(v []types.QueryStringKeyValuePair, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentQueryStringKeyValuePair(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentQueryStringKeyValuePair(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -2478,34 +2445,28 @@ func awsAwsquery_serializeDocumentRedirectActionConfig(v *types.RedirectActionCo
 	return nil
 }
 
-func awsAwsquery_serializeDocumentResourceArns(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentResourceArns(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentRuleArns(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentRuleArns(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2571,36 +2532,30 @@ func awsAwsquery_serializeDocumentRuleCondition(v *types.RuleCondition, value qu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentRuleConditionList(v []*types.RuleCondition, value query.Value) error {
+func awsAwsquery_serializeDocumentRuleConditionList(v []types.RuleCondition, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentRuleCondition(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentRuleCondition(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentRulePriorityList(v []*types.RulePriorityPair, value query.Value) error {
+func awsAwsquery_serializeDocumentRulePriorityList(v []types.RulePriorityPair, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentRulePriorityPair(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentRulePriorityPair(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -2624,18 +2579,15 @@ func awsAwsquery_serializeDocumentRulePriorityPair(v *types.RulePriorityPair, va
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSecurityGroups(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentSecurityGroups(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2654,18 +2606,15 @@ func awsAwsquery_serializeDocumentSourceIpConditionConfig(v *types.SourceIpCondi
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSslPolicyNames(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentSslPolicyNames(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2692,36 +2641,30 @@ func awsAwsquery_serializeDocumentSubnetMapping(v *types.SubnetMapping, value qu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSubnetMappings(v []*types.SubnetMapping, value query.Value) error {
+func awsAwsquery_serializeDocumentSubnetMappings(v []types.SubnetMapping, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentSubnetMapping(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentSubnetMapping(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSubnets(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentSubnets(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2743,34 +2686,28 @@ func awsAwsquery_serializeDocumentTag(v *types.Tag, value query.Value) error {
 	return nil
 }
 
-func awsAwsquery_serializeDocumentTagKeys(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentTagKeys(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentTagList(v []*types.Tag, value query.Value) error {
+func awsAwsquery_serializeDocumentTagList(v []types.Tag, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentTag(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -2799,36 +2736,30 @@ func awsAwsquery_serializeDocumentTargetDescription(v *types.TargetDescription, 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentTargetDescriptions(v []*types.TargetDescription, value query.Value) error {
+func awsAwsquery_serializeDocumentTargetDescriptions(v []types.TargetDescription, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentTargetDescription(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentTargetDescription(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentTargetGroupArns(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentTargetGroupArns(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2850,54 +2781,45 @@ func awsAwsquery_serializeDocumentTargetGroupAttribute(v *types.TargetGroupAttri
 	return nil
 }
 
-func awsAwsquery_serializeDocumentTargetGroupAttributes(v []*types.TargetGroupAttribute, value query.Value) error {
+func awsAwsquery_serializeDocumentTargetGroupAttributes(v []types.TargetGroupAttribute, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentTargetGroupAttribute(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentTargetGroupAttribute(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentTargetGroupList(v []*types.TargetGroupTuple, value query.Value) error {
+func awsAwsquery_serializeDocumentTargetGroupList(v []types.TargetGroupTuple, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentTargetGroupTuple(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentTargetGroupTuple(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentTargetGroupNames(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentTargetGroupNames(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }

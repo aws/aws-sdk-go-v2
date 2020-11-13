@@ -43,7 +43,7 @@ type UpdateEnvironmentInput struct {
 	Description *string
 
 	// Amazon CloudWatch alarms to monitor during the deployment process.
-	Monitors []*types.Monitor
+	Monitors []types.Monitor
 
 	// The name of the environment.
 	Name *string
@@ -61,7 +61,7 @@ type UpdateEnvironmentOutput struct {
 	Id *string
 
 	// Amazon CloudWatch alarms monitored during the deployment.
-	Monitors []*types.Monitor
+	Monitors []types.Monitor
 
 	// The name of the environment.
 	Name *string

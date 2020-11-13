@@ -39,7 +39,7 @@ type CreateAppImageConfigInput struct {
 	KernelGatewayImageConfig *types.KernelGatewayImageConfig
 
 	// A list of tags to apply to the AppImageConfig.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateAppImageConfigOutput struct {

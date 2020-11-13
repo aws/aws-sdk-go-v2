@@ -104,7 +104,7 @@ type SetSMSAttributesInput struct {
 	// Developer Guide.
 	//
 	// This member is required.
-	Attributes map[string]*string
+	Attributes map[string]string
 }
 
 // The response for the SetSMSAttributes action.

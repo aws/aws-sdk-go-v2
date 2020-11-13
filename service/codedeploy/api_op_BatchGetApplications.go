@@ -35,14 +35,14 @@ type BatchGetApplicationsInput struct {
 	// application names you can specify is 100.
 	//
 	// This member is required.
-	ApplicationNames []*string
+	ApplicationNames []string
 }
 
 // Represents the output of a BatchGetApplications operation.
 type BatchGetApplicationsOutput struct {
 
 	// Information about the applications.
-	ApplicationsInfo []*types.ApplicationInfo
+	ApplicationsInfo []types.ApplicationInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

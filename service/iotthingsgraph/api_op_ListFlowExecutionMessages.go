@@ -47,7 +47,7 @@ type ListFlowExecutionMessagesOutput struct {
 
 	// A list of objects that contain information about events in the specified flow
 	// execution.
-	Messages []*types.FlowExecutionMessage
+	Messages []types.FlowExecutionMessage
 
 	// The string to specify as nextToken when you request the next page of results.
 	NextToken *string

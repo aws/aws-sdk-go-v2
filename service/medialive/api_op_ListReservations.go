@@ -37,7 +37,7 @@ type ListReservationsInput struct {
 	Codec *string
 
 	// Placeholder documentation for MaxResults
-	MaxResults *int32
+	MaxResults int32
 
 	// Filter by bitrate, 'MAX_10_MBPS', 'MAX_20_MBPS', or 'MAX_50_MBPS'
 	MaximumBitrate *string
@@ -68,7 +68,7 @@ type ListReservationsOutput struct {
 	NextToken *string
 
 	// List of reservations
-	Reservations []*types.Reservation
+	Reservations []types.Reservation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

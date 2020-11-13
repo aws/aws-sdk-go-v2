@@ -42,7 +42,7 @@ type ListMeetingsInput struct {
 type ListMeetingsOutput struct {
 
 	// The Amazon Chime SDK meeting information.
-	Meetings []*types.Meeting
+	Meetings []types.Meeting
 
 	// The token to use to retrieve the next page of results.
 	NextToken *string

@@ -11,10 +11,10 @@ type ComplianceDetails struct {
 
 	// These are keys defined in the effective policy that are on the resource with
 	// either incorrect case treatment or noncompliant values.
-	KeysWithNoncompliantValues []*string
+	KeysWithNoncompliantValues []string
 
 	// These tag keys on the resource are noncompliant with the effective tag policy.
-	NoncompliantKeys []*string
+	NoncompliantKeys []string
 }
 
 // Information about the errors that are returned for each failed resource. This
@@ -53,7 +53,7 @@ type FailureInfo struct {
 	ErrorMessage *string
 
 	// The HTTP status code of the common error.
-	StatusCode *int32
+	StatusCode int32
 }
 
 // A list of resource ARNs and the tags (keys and values) that are associated with
@@ -68,7 +68,7 @@ type ResourceTagMapping struct {
 	ResourceARN *string
 
 	// The tags that have been applied to one or more AWS resources.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // A count of noncompliant resources.
@@ -78,7 +78,7 @@ type Summary struct {
 	LastUpdated *string
 
 	// The count of noncompliant resources.
-	NonCompliantResources *int64
+	NonCompliantResources int64
 
 	// The AWS Region that the summary applies to.
 	Region *string
@@ -126,5 +126,5 @@ type TagFilter struct {
 
 	// One part of a key-value pair that make up a tag. A value acts as a descriptor
 	// within a tag category (key). The value can be empty or null.
-	Values []*string
+	Values []string
 }

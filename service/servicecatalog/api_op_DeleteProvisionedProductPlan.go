@@ -44,7 +44,7 @@ type DeleteProvisionedProductPlanInput struct {
 
 	// If set to true, AWS Service Catalog stops managing the specified provisioned
 	// product even if it cannot delete the underlying resources.
-	IgnoreErrors *bool
+	IgnoreErrors bool
 }
 
 type DeleteProvisionedProductPlanOutput struct {

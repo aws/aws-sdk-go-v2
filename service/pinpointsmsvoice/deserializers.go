@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	"github.com/awslabs/smithy-go/ptr"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
 	"strings"
@@ -700,7 +701,7 @@ func awsRestjson1_deserializeOpDocumentListConfigurationSetsOutput(v **ListConfi
 				if !ok {
 					return fmt.Errorf("expected NextTokenString to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -857,7 +858,7 @@ func awsRestjson1_deserializeOpDocumentSendVoiceMessageOutput(v **SendVoiceMessa
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.MessageId = &jtv
+				sv.MessageId = ptr.String(jtv)
 			}
 
 		default:
@@ -1205,7 +1206,7 @@ func awsRestjson1_deserializeDocumentAlreadyExistsException(v **types.AlreadyExi
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1245,7 +1246,7 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1285,7 +1286,7 @@ func awsRestjson1_deserializeDocumentCloudWatchLogsDestination(v **types.CloudWa
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.IamRoleArn = &jtv
+				sv.IamRoleArn = ptr.String(jtv)
 			}
 
 		case "LogGroupArn":
@@ -1294,7 +1295,7 @@ func awsRestjson1_deserializeDocumentCloudWatchLogsDestination(v **types.CloudWa
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.LogGroupArn = &jtv
+				sv.LogGroupArn = ptr.String(jtv)
 			}
 
 		default:
@@ -1306,7 +1307,7 @@ func awsRestjson1_deserializeDocumentCloudWatchLogsDestination(v **types.CloudWa
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentConfigurationSets(v *[]*string, value interface{}) error {
+func awsRestjson1_deserializeDocumentConfigurationSets(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1319,21 +1320,21 @@ func awsRestjson1_deserializeDocumentConfigurationSets(v *[]*string, value inter
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*string
+	var cv []string
 	if *v == nil {
-		cv = []*string{}
+		cv = []string{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *string
+		var col string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected WordCharactersWithDelimiters to be of type string, got %T instead", value)
 			}
-			col = &jtv
+			col = jtv
 		}
 		cv = append(cv, col)
 
@@ -1375,7 +1376,7 @@ func awsRestjson1_deserializeDocumentEventDestination(v **types.EventDestination
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Enabled = &jtv
+				sv.Enabled = jtv
 			}
 
 		case "KinesisFirehoseDestination":
@@ -1394,7 +1395,7 @@ func awsRestjson1_deserializeDocumentEventDestination(v **types.EventDestination
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "SnsDestination":
@@ -1411,7 +1412,7 @@ func awsRestjson1_deserializeDocumentEventDestination(v **types.EventDestination
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentEventDestinations(v *[]*types.EventDestination, value interface{}) error {
+func awsRestjson1_deserializeDocumentEventDestinations(v *[]types.EventDestination, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1424,18 +1425,20 @@ func awsRestjson1_deserializeDocumentEventDestinations(v *[]*types.EventDestinat
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.EventDestination
+	var cv []types.EventDestination
 	if *v == nil {
-		cv = []*types.EventDestination{}
+		cv = []types.EventDestination{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.EventDestination
-		if err := awsRestjson1_deserializeDocumentEventDestination(&col, value); err != nil {
+		var col types.EventDestination
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentEventDestination(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -1507,7 +1510,7 @@ func awsRestjson1_deserializeDocumentInternalServiceErrorException(v **types.Int
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1547,7 +1550,7 @@ func awsRestjson1_deserializeDocumentKinesisFirehoseDestination(v **types.Kinesi
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.DeliveryStreamArn = &jtv
+				sv.DeliveryStreamArn = ptr.String(jtv)
 			}
 
 		case "IamRoleArn":
@@ -1556,7 +1559,7 @@ func awsRestjson1_deserializeDocumentKinesisFirehoseDestination(v **types.Kinesi
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.IamRoleArn = &jtv
+				sv.IamRoleArn = ptr.String(jtv)
 			}
 
 		default:
@@ -1596,7 +1599,7 @@ func awsRestjson1_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1636,7 +1639,7 @@ func awsRestjson1_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1676,7 +1679,7 @@ func awsRestjson1_deserializeDocumentSnsDestination(v **types.SnsDestination, va
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.TopicArn = &jtv
+				sv.TopicArn = ptr.String(jtv)
 			}
 
 		default:
@@ -1716,7 +1719,7 @@ func awsRestjson1_deserializeDocumentTooManyRequestsException(v **types.TooManyR
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:

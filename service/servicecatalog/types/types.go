@@ -93,7 +93,7 @@ type ConstraintSummary struct {
 type ExecutionParameter struct {
 
 	// The default values for the execution parameter.
-	DefaultValues []*string
+	DefaultValues []string
 
 	// The name of the execution parameter.
 	Name *string
@@ -136,7 +136,7 @@ type LaunchPath struct {
 type LaunchPathSummary struct {
 
 	// The constraints on the portfolio-product relationship.
-	ConstraintSummaries []*ConstraintSummary
+	ConstraintSummaries []ConstraintSummary
 
 	// The identifier of the product path.
 	Id *string
@@ -145,7 +145,7 @@ type LaunchPathSummary struct {
 	Name *string
 
 	// The tags associated with this product path.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // The search filter to use when listing history records.
@@ -191,7 +191,7 @@ type OrganizationNode struct {
 type ParameterConstraints struct {
 
 	// The values that the administrator has allowed for the parameter.
-	AllowedValues []*string
+	AllowedValues []string
 }
 
 // Information about a portfolio.
@@ -231,7 +231,7 @@ type Principal struct {
 type ProductViewAggregationValue struct {
 
 	// An approximate count of the products that match the value.
-	ApproximateCount *int32
+	ApproximateCount int32
 
 	// The value of the product view aggregation.
 	Value *string
@@ -272,7 +272,7 @@ type ProductViewSummary struct {
 	// default path, call ListLaunchPaths to disambiguate between paths. Otherwise,
 	// ListLaunchPaths is not required, and the output of ProductViewSummary can be
 	// used directly with DescribeProvisioningParameters.
-	HasDefaultPath *bool
+	HasDefaultPath bool
 
 	// The product view identifier.
 	Id *string
@@ -400,7 +400,7 @@ type ProvisionedProductAttribute struct {
 	StatusMessage *string
 
 	// One or more tags.
-	Tags []*Tag
+	Tags []Tag
 
 	// The type of provisioned product. The supported values are CFN_STACK and
 	// CFN_STACKSET.
@@ -514,7 +514,7 @@ type ProvisionedProductPlanDetails struct {
 
 	// Passed to CloudFormation. The SNS topic ARNs to which to publish stack-related
 	// events.
-	NotificationArns []*string
+	NotificationArns []string
 
 	// The path identifier of the product. This value is optional if the product has a
 	// default path, and required if the product has more than one path. To list the
@@ -544,7 +544,7 @@ type ProvisionedProductPlanDetails struct {
 
 	// Parameters specified by the administrator that are required for provisioning the
 	// product.
-	ProvisioningParameters []*UpdateProvisioningParameter
+	ProvisioningParameters []UpdateProvisioningParameter
 
 	// The status.
 	Status ProvisionedProductPlanStatus
@@ -553,7 +553,7 @@ type ProvisionedProductPlanDetails struct {
 	StatusMessage *string
 
 	// One or more tags.
-	Tags []*Tag
+	Tags []Tag
 
 	// The time when the plan was last updated.
 	UpdatedTime *time.Time
@@ -659,7 +659,7 @@ type ProvisioningArtifactParameter struct {
 	// If this value is true, the value for this parameter is obfuscated from view when
 	// the parameter is retrieved. This parameter is used to hide sensitive
 	// information.
-	IsNoEcho *bool
+	IsNoEcho bool
 
 	// Constraints that the administrator has put on a parameter.
 	ParameterConstraints *ParameterConstraints
@@ -683,13 +683,13 @@ type ProvisioningArtifactPreferences struct {
 	// These accounts can be scoped in ProvisioningPreferences$StackSetAccounts and
 	// UpdateProvisioningPreferences$StackSetAccounts. Applicable only to a
 	// CFN_STACKSET provisioned product type.
-	StackSetAccounts []*string
+	StackSetAccounts []string
 
 	// One or more AWS Regions where stack instances are deployed from the stack set.
 	// These regions can be scoped in ProvisioningPreferences$StackSetRegions and
 	// UpdateProvisioningPreferences$StackSetRegions. Applicable only to a CFN_STACKSET
 	// provisioned product type.
-	StackSetRegions []*string
+	StackSetRegions []string
 }
 
 // Information about a provisioning artifact (also known as a version) for a
@@ -701,7 +701,7 @@ type ProvisioningArtifactProperties struct {
 	// "https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/..."
 	//
 	// This member is required.
-	Info map[string]*string
+	Info map[string]string
 
 	// The description of the provisioning artifact, including how it differs from the
 	// previous provisioning artifact.
@@ -709,7 +709,7 @@ type ProvisioningArtifactProperties struct {
 
 	// If set to true, AWS Service Catalog stops validating the specified provisioning
 	// artifact even if it is invalid.
-	DisableTemplateValidation *bool
+	DisableTemplateValidation bool
 
 	// The name of the provisioning artifact (for example, v1 v2beta). No spaces are
 	// allowed.
@@ -745,7 +745,7 @@ type ProvisioningArtifactSummary struct {
 
 	// The metadata for the provisioning artifact. This is used with AWS Marketplace
 	// products.
-	ProvisioningArtifactMetadata map[string]*string
+	ProvisioningArtifactMetadata map[string]string
 }
 
 // An object that contains summary information about a product view and a
@@ -780,7 +780,7 @@ type ProvisioningPreferences struct {
 	// get the list of accounts in the STACKSET constraint, use the
 	// DescribeProvisioningParameters operation. If no values are specified, the
 	// default value is all accounts from the STACKSET constraint.
-	StackSetAccounts []*string
+	StackSetAccounts []string
 
 	// The number of accounts, per region, for which this operation can fail before AWS
 	// Service Catalog stops the operation in that region. If the operation is stopped
@@ -830,7 +830,7 @@ type ProvisioningPreferences struct {
 	// get the list of regions in the STACKSET constraint, use the
 	// DescribeProvisioningParameters operation. If no values are specified, the
 	// default value is all regions from the STACKSET constraint.
-	StackSetRegions []*string
+	StackSetRegions []string
 }
 
 // Information about a request operation.
@@ -862,13 +862,13 @@ type RecordDetail struct {
 	ProvisioningArtifactId *string
 
 	// The errors that occurred.
-	RecordErrors []*RecordError
+	RecordErrors []RecordError
 
 	// The identifier of the record.
 	RecordId *string
 
 	// One or more tags.
-	RecordTags []*RecordTag
+	RecordTags []RecordTag
 
 	// The record type.
 	//
@@ -945,7 +945,7 @@ type ResourceChange struct {
 	Action ChangeAction
 
 	// Information about the resource changes.
-	Details []*ResourceChangeDetail
+	Details []ResourceChangeDetail
 
 	// The ID of the resource, as defined in the CloudFormation template.
 	LogicalResourceId *string
@@ -1037,7 +1037,7 @@ type ServiceActionAssociation struct {
 type ServiceActionDetail struct {
 
 	// A map that defines the self-service action.
-	Definition map[string]*string
+	Definition map[string]string
 
 	// Summary information about the self-service action.
 	ServiceActionSummary *ServiceActionSummary
@@ -1063,17 +1063,17 @@ type ServiceActionSummary struct {
 type ShareDetails struct {
 
 	// List of errors.
-	ShareErrors []*ShareError
+	ShareErrors []ShareError
 
 	// List of accounts for whom the operation succeeded.
-	SuccessfulShares []*string
+	SuccessfulShares []string
 }
 
 // Errors that occurred during the portfolio share operation.
 type ShareError struct {
 
 	// List of accounts impacted by the error.
-	Accounts []*string
+	Accounts []string
 
 	// Error type that happened when processing the operation.
 	Error *string
@@ -1155,7 +1155,7 @@ type TagOptionSummary struct {
 	Key *string
 
 	// The TagOption value.
-	Values []*string
+	Values []string
 }
 
 // The parameter key-value pair used to update a provisioned product.
@@ -1165,7 +1165,7 @@ type UpdateProvisioningParameter struct {
 	Key *string
 
 	// If set to true, Value is ignored and the previous parameter value is kept.
-	UsePreviousValue *bool
+	UsePreviousValue bool
 
 	// The parameter value.
 	Value *string
@@ -1181,7 +1181,7 @@ type UpdateProvisioningPreferences struct {
 	// get the list of accounts in the STACKSET constraint, use the
 	// DescribeProvisioningParameters operation. If no values are specified, the
 	// default value is all accounts from the STACKSET constraint.
-	StackSetAccounts []*string
+	StackSetAccounts []string
 
 	// The number of accounts, per region, for which this operation can fail before AWS
 	// Service Catalog stops the operation in that region. If the operation is stopped
@@ -1242,7 +1242,7 @@ type UpdateProvisioningPreferences struct {
 	// get the list of regions in the STACKSET constraint, use the
 	// DescribeProvisioningParameters operation. If no values are specified, the
 	// default value is all regions from the STACKSET constraint.
-	StackSetRegions []*string
+	StackSetRegions []string
 }
 
 // Additional information provided by the administrator.

@@ -71,7 +71,7 @@ type ListLabelingJobsInput struct {
 type ListLabelingJobsOutput struct {
 
 	// An array of LabelingJobSummary objects, each describing a labeling job.
-	LabelingJobSummaryList []*types.LabelingJobSummary
+	LabelingJobSummaryList []types.LabelingJobSummary
 
 	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
 	// the next set of labeling jobs, use it in the subsequent request.

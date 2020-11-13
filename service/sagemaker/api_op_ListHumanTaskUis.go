@@ -56,7 +56,7 @@ type ListHumanTaskUisOutput struct {
 	// An array of objects describing the human task user interfaces.
 	//
 	// This member is required.
-	HumanTaskUiSummaries []*types.HumanTaskUiSummary
+	HumanTaskUiSummaries []types.HumanTaskUiSummary
 
 	// A token to resume pagination.
 	NextToken *string

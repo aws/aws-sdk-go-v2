@@ -39,7 +39,7 @@ type DeregisterInstancesFromLoadBalancerInput struct {
 	// The IDs of the instances.
 	//
 	// This member is required.
-	Instances []*types.Instance
+	Instances []types.Instance
 
 	// The name of the load balancer.
 	//
@@ -51,7 +51,7 @@ type DeregisterInstancesFromLoadBalancerInput struct {
 type DeregisterInstancesFromLoadBalancerOutput struct {
 
 	// The remaining instances registered with the load balancer.
-	Instances []*types.Instance
+	Instances []types.Instance
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

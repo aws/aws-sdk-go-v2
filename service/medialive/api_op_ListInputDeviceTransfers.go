@@ -38,7 +38,7 @@ type ListInputDeviceTransfersInput struct {
 	TransferType *string
 
 	// Placeholder documentation for MaxResults
-	MaxResults *int32
+	MaxResults int32
 
 	// Placeholder documentation for __string
 	NextToken *string
@@ -48,7 +48,7 @@ type ListInputDeviceTransfersInput struct {
 type ListInputDeviceTransfersOutput struct {
 
 	// The list of devices that you are transferring or are being transferred to you.
-	InputDeviceTransfers []*types.TransferringInputDeviceSummary
+	InputDeviceTransfers []types.TransferringInputDeviceSummary
 
 	// A token to get additional list results.
 	NextToken *string

@@ -56,7 +56,7 @@ type ListTablesOutput struct {
 	// appears in the output, you can use this value as the ExclusiveStartTableName
 	// parameter in a subsequent ListTables request and obtain the next page of
 	// results.
-	TableNames []*string
+	TableNames []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

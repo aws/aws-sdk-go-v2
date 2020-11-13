@@ -59,7 +59,7 @@ type ListServicesOutput struct {
 	NextToken *string
 
 	// Returns a list of services.
-	Services []*types.ServiceInfo
+	Services []types.ServiceInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

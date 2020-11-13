@@ -46,7 +46,7 @@ type AttachLoadBalancerTargetGroupsInput struct {
 	// target groups.
 	//
 	// This member is required.
-	TargetGroupARNs []*string
+	TargetGroupARNs []string
 }
 
 type AttachLoadBalancerTargetGroupsOutput struct {

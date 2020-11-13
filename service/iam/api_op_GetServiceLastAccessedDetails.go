@@ -122,7 +122,7 @@ type GetServiceLastAccessedDetailsOutput struct {
 	// to access the service.
 	//
 	// This member is required.
-	ServicesLastAccessed []*types.ServiceLastAccessed
+	ServicesLastAccessed []types.ServiceLastAccessed
 
 	// An object that contains details about the reason the operation failed.
 	Error *types.ErrorDetails
@@ -133,7 +133,7 @@ type GetServiceLastAccessedDetailsOutput struct {
 	// the MaxItems number of results even when there are more results available. We
 	// recommend that you check IsTruncated after every call to ensure that you receive
 	// all your results.
-	IsTruncated *bool
+	IsTruncated bool
 
 	// The type of job. Service jobs return information about when each service was
 	// last accessed. Action jobs also include information about when tracked actions

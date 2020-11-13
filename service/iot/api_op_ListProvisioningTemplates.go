@@ -42,7 +42,7 @@ type ListProvisioningTemplatesOutput struct {
 	NextToken *string
 
 	// A list of fleet provisioning templates
-	Templates []*types.ProvisioningTemplateSummary
+	Templates []types.ProvisioningTemplateSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

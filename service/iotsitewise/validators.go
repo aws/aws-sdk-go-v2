@@ -1138,13 +1138,13 @@ func addOpUpdateProjectValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateProject{}, middleware.After)
 }
 
-func validateAssetModelHierarchies(v []*types.AssetModelHierarchy) error {
+func validateAssetModelHierarchies(v []types.AssetModelHierarchy) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssetModelHierarchies"}
 	for i := range v {
-		if err := validateAssetModelHierarchy(v[i]); err != nil {
+		if err := validateAssetModelHierarchy(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1191,13 +1191,13 @@ func validateAssetModelHierarchyDefinition(v *types.AssetModelHierarchyDefinitio
 	}
 }
 
-func validateAssetModelHierarchyDefinitions(v []*types.AssetModelHierarchyDefinition) error {
+func validateAssetModelHierarchyDefinitions(v []types.AssetModelHierarchyDefinition) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssetModelHierarchyDefinitions"}
 	for i := range v {
-		if err := validateAssetModelHierarchyDefinition(v[i]); err != nil {
+		if err := validateAssetModelHierarchyDefinition(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1208,13 +1208,13 @@ func validateAssetModelHierarchyDefinitions(v []*types.AssetModelHierarchyDefini
 	}
 }
 
-func validateAssetModelProperties(v []*types.AssetModelProperty) error {
+func validateAssetModelProperties(v []types.AssetModelProperty) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssetModelProperties"}
 	for i := range v {
-		if err := validateAssetModelProperty(v[i]); err != nil {
+		if err := validateAssetModelProperty(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1275,13 +1275,13 @@ func validateAssetModelPropertyDefinition(v *types.AssetModelPropertyDefinition)
 	}
 }
 
-func validateAssetModelPropertyDefinitions(v []*types.AssetModelPropertyDefinition) error {
+func validateAssetModelPropertyDefinitions(v []types.AssetModelPropertyDefinition) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssetModelPropertyDefinitions"}
 	for i := range v {
-		if err := validateAssetModelPropertyDefinition(v[i]); err != nil {
+		if err := validateAssetModelPropertyDefinition(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1314,13 +1314,13 @@ func validateAssetPropertyValue(v *types.AssetPropertyValue) error {
 	}
 }
 
-func validateAssetPropertyValues(v []*types.AssetPropertyValue) error {
+func validateAssetPropertyValues(v []types.AssetPropertyValue) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssetPropertyValues"}
 	for i := range v {
-		if err := validateAssetPropertyValue(v[i]); err != nil {
+		if err := validateAssetPropertyValue(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1353,13 +1353,13 @@ func validateExpressionVariable(v *types.ExpressionVariable) error {
 	}
 }
 
-func validateExpressionVariables(v []*types.ExpressionVariable) error {
+func validateExpressionVariables(v []types.ExpressionVariable) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ExpressionVariables"}
 	for i := range v {
-		if err := validateExpressionVariable(v[i]); err != nil {
+		if err := validateExpressionVariable(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1609,13 +1609,13 @@ func validatePropertyType(v *types.PropertyType) error {
 	}
 }
 
-func validatePutAssetPropertyValueEntries(v []*types.PutAssetPropertyValueEntry) error {
+func validatePutAssetPropertyValueEntries(v []types.PutAssetPropertyValueEntry) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutAssetPropertyValueEntries"}
 	for i := range v {
-		if err := validatePutAssetPropertyValueEntry(v[i]); err != nil {
+		if err := validatePutAssetPropertyValueEntry(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

@@ -64,7 +64,7 @@ type ListImagesInput struct {
 type ListImagesOutput struct {
 
 	// A list of images and their properties.
-	Images []*types.Image
+	Images []types.Image
 
 	// A token for getting the next set of images, if there are any.
 	NextToken *string

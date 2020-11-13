@@ -59,7 +59,7 @@ type ListSigningPlatformsOutput struct {
 	NextToken *string
 
 	// A list of all platforms that match the request parameters.
-	Platforms []*types.SigningPlatform
+	Platforms []types.SigningPlatform
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

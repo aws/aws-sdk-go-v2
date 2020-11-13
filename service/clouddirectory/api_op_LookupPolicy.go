@@ -62,7 +62,7 @@ type LookupPolicyOutput struct {
 	// Provides list of path to policies. Policies contain PolicyId, ObjectIdentifier,
 	// and PolicyType. For more information, see Policies
 	// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies).
-	PolicyToPathList []*types.PolicyToPath
+	PolicyToPathList []types.PolicyToPath
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

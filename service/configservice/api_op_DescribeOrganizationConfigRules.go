@@ -37,7 +37,7 @@ type DescribeOrganizationConfigRulesInput struct {
 
 	// The maximum number of organization config rules returned on each page. If you do
 	// no specify a number, AWS Config uses the default. The default is 100.
-	Limit *int32
+	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
@@ -46,7 +46,7 @@ type DescribeOrganizationConfigRulesInput struct {
 	// The names of organization config rules for which you want details. If you do not
 	// specify any names, AWS Config returns details for all your organization config
 	// rules.
-	OrganizationConfigRuleNames []*string
+	OrganizationConfigRuleNames []string
 }
 
 type DescribeOrganizationConfigRulesOutput struct {
@@ -56,7 +56,7 @@ type DescribeOrganizationConfigRulesOutput struct {
 	NextToken *string
 
 	// Returns a list of OrganizationConfigRule objects.
-	OrganizationConfigRules []*types.OrganizationConfigRule
+	OrganizationConfigRules []types.OrganizationConfigRule
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

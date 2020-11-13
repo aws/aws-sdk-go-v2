@@ -56,14 +56,14 @@ type CreateTrialComponentInput struct {
 
 	// The input artifacts for the component. Examples of input artifacts are datasets,
 	// algorithms, hyperparameters, source code, and instance types.
-	InputArtifacts map[string]*types.TrialComponentArtifact
+	InputArtifacts map[string]types.TrialComponentArtifact
 
 	// The output artifacts for the component. Examples of output artifacts are
 	// metrics, snapshots, logs, and images.
-	OutputArtifacts map[string]*types.TrialComponentArtifact
+	OutputArtifacts map[string]types.TrialComponentArtifact
 
 	// The hyperparameters for the component.
-	Parameters map[string]*types.TrialComponentParameterValue
+	Parameters map[string]types.TrialComponentParameterValue
 
 	// When the component started.
 	StartTime *time.Time
@@ -80,7 +80,7 @@ type CreateTrialComponentInput struct {
 
 	// A list of tags to associate with the component. You can use Search API to search
 	// on the tags.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateTrialComponentOutput struct {

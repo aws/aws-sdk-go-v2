@@ -45,7 +45,7 @@ type DescribeDirectConnectGatewaysInput struct {
 type DescribeDirectConnectGatewaysOutput struct {
 
 	// The Direct Connect gateways.
-	DirectConnectGateways []*types.DirectConnectGateway
+	DirectConnectGateways []types.DirectConnectGateway
 
 	// The token to retrieve the next page.
 	NextToken *string

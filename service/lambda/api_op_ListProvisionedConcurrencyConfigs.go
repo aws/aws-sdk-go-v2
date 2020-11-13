@@ -60,7 +60,7 @@ type ListProvisionedConcurrencyConfigsOutput struct {
 	NextMarker *string
 
 	// A list of provisioned concurrency configurations.
-	ProvisionedConcurrencyConfigs []*types.ProvisionedConcurrencyConfigListItem
+	ProvisionedConcurrencyConfigs []types.ProvisionedConcurrencyConfigListItem
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

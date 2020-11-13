@@ -41,7 +41,7 @@ type PutAggregationAuthorizationInput struct {
 	AuthorizedAwsRegion *string
 
 	// An array of tag object.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type PutAggregationAuthorizationOutput struct {

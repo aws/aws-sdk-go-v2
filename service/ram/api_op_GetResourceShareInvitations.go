@@ -37,10 +37,10 @@ type GetResourceShareInvitationsInput struct {
 	NextToken *string
 
 	// The Amazon Resource Names (ARN) of the resource shares.
-	ResourceShareArns []*string
+	ResourceShareArns []string
 
 	// The Amazon Resource Names (ARN) of the invitations.
-	ResourceShareInvitationArns []*string
+	ResourceShareInvitationArns []string
 }
 
 type GetResourceShareInvitationsOutput struct {
@@ -50,7 +50,7 @@ type GetResourceShareInvitationsOutput struct {
 	NextToken *string
 
 	// Information about the invitations.
-	ResourceShareInvitations []*types.ResourceShareInvitation
+	ResourceShareInvitations []types.ResourceShareInvitation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

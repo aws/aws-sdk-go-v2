@@ -56,7 +56,7 @@ type GetIdInput struct {
 	//
 	// *
 	// Digits: www.digits.com
-	Logins map[string]*string
+	Logins map[string]string
 }
 
 // Returned in response to a GetId request.

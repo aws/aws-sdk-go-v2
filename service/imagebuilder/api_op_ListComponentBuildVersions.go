@@ -36,7 +36,7 @@ type ListComponentBuildVersionsInput struct {
 	ComponentVersionArn *string
 
 	// The maximum items to return in a request.
-	MaxResults *int32
+	MaxResults int32
 
 	// A token to specify where to start paginating. This is the NextToken from a
 	// previously truncated response.
@@ -46,7 +46,7 @@ type ListComponentBuildVersionsInput struct {
 type ListComponentBuildVersionsOutput struct {
 
 	// The list of component summaries for the specified semantic version.
-	ComponentSummaryList []*types.ComponentSummary
+	ComponentSummaryList []types.ComponentSummary
 
 	// The next token used for paginated responses. When this is not empty, there are
 	// additional elements that the service has not included in this request. Use this

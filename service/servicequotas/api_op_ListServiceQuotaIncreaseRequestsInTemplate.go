@@ -64,7 +64,7 @@ type ListServiceQuotaIncreaseRequestsInTemplateOutput struct {
 	NextToken *string
 
 	// Returns the list of values of the quota increase request in the template.
-	ServiceQuotaIncreaseRequestInTemplateList []*types.ServiceQuotaIncreaseRequestInTemplate
+	ServiceQuotaIncreaseRequestInTemplateList []types.ServiceQuotaIncreaseRequestInTemplate
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

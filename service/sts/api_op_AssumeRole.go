@@ -224,7 +224,7 @@ type AssumeRoleInput struct {
 	// For more information, see Session Policies
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session)
 	// in the IAM User Guide.
-	PolicyArns []*types.PolicyDescriptorType
+	PolicyArns []types.PolicyDescriptorType
 
 	// The identification number of the MFA device that is associated with the user who
 	// is making the AssumeRole call. Specify this value if the trust policy of the
@@ -265,7 +265,7 @@ type AssumeRoleInput struct {
 	// For more information, see Viewing Session Tags in CloudTrail
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/session-tags.html#id_session-tags_ctlogs)
 	// in the IAM User Guide.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The value provided by the MFA device, if the trust policy of the role being
 	// assumed requires MFA (that is, if the policy includes a condition that tests for
@@ -284,7 +284,7 @@ type AssumeRoleInput struct {
 	// transitive, the session policy and session tags packed binary limit is not
 	// affected. If you choose not to specify a transitive tag key, then no tags are
 	// passed from this session to any subsequent sessions.
-	TransitiveTagKeys []*string
+	TransitiveTagKeys []string
 }
 
 // Contains the response to a successful AssumeRole request, including temporary

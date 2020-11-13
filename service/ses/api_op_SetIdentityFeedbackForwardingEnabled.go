@@ -48,7 +48,7 @@ type SetIdentityFeedbackForwardingEnabledInput struct {
 	// Amazon SNS topics are set for both Bounce and Complaint notification types.
 	//
 	// This member is required.
-	ForwardingEnabled *bool
+	ForwardingEnabled bool
 
 	// The identity for which to set bounce and complaint notification forwarding.
 	// Examples: user@example.com, example.com.

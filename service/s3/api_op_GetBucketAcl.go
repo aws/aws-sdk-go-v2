@@ -49,7 +49,7 @@ type GetBucketAclInput struct {
 type GetBucketAclOutput struct {
 
 	// A list of grants.
-	Grants []*types.Grant
+	Grants []types.Grant
 
 	// Container for the bucket owner's display name and ID.
 	Owner *types.Owner

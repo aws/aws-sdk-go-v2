@@ -48,7 +48,7 @@ type GetConfigurationSetEventDestinationsOutput struct {
 
 	// An array that includes all of the events destinations that have been configured
 	// for the configuration set.
-	EventDestinations []*types.EventDestination
+	EventDestinations []types.EventDestination
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

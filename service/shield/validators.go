@@ -265,13 +265,13 @@ func validateEmergencyContact(v *types.EmergencyContact) error {
 	}
 }
 
-func validateEmergencyContactList(v []*types.EmergencyContact) error {
+func validateEmergencyContactList(v []types.EmergencyContact) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EmergencyContactList"}
 	for i := range v {
-		if err := validateEmergencyContact(v[i]); err != nil {
+		if err := validateEmergencyContact(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

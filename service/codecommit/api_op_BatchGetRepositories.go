@@ -39,17 +39,17 @@ type BatchGetRepositoriesInput struct {
 	// limit is for each string in the array. The array itself can be empty.
 	//
 	// This member is required.
-	RepositoryNames []*string
+	RepositoryNames []string
 }
 
 // Represents the output of a batch get repositories operation.
 type BatchGetRepositoriesOutput struct {
 
 	// A list of repositories returned by the batch get repositories operation.
-	Repositories []*types.RepositoryMetadata
+	Repositories []types.RepositoryMetadata
 
 	// Returns a list of repository names for which information could not be found.
-	RepositoriesNotFound []*string
+	RepositoriesNotFound []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

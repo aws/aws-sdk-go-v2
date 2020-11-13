@@ -36,7 +36,7 @@ type ListNodesInput struct {
 
 	// The maximum number of results to return in the response. If there are more
 	// results, the response includes a NextToken parameter.
-	MaxResults *int32
+	MaxResults int32
 
 	// The paginated results marker. When the result of the operation is truncated, the
 	// call returns NextToken in the response. To get the next batch, provide this
@@ -52,7 +52,7 @@ type ListNodesOutput struct {
 	NextToken *string
 
 	// List containing a NodeInfo object.
-	NodeInfoList []*types.NodeInfo
+	NodeInfoList []types.NodeInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

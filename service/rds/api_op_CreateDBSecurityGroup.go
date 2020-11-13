@@ -56,7 +56,7 @@ type CreateDBSecurityGroupInput struct {
 	DBSecurityGroupName *string
 
 	// Tags to assign to the DB security group.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateDBSecurityGroupOutput struct {

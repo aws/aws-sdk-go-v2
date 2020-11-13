@@ -35,7 +35,7 @@ type ModifyDBProxyInput struct {
 	DBProxyName *string
 
 	// The new authentication settings for the DBProxy.
-	Auth []*types.UserAuthConfig
+	Auth []types.UserAuthConfig
 
 	// Whether the proxy includes detailed information about SQL statements in its
 	// logs. This information helps you to debug issues involving SQL behavior or the
@@ -66,7 +66,7 @@ type ModifyDBProxyInput struct {
 	RoleArn *string
 
 	// The new list of security groups for the DBProxy.
-	SecurityGroups []*string
+	SecurityGroups []string
 }
 
 type ModifyDBProxyOutput struct {

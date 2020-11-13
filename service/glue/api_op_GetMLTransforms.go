@@ -51,7 +51,7 @@ type GetMLTransformsOutput struct {
 	// A list of machine learning transforms.
 	//
 	// This member is required.
-	Transforms []*types.MLTransform
+	Transforms []types.MLTransform
 
 	// A pagination token, if more results are available.
 	NextToken *string

@@ -57,7 +57,7 @@ type ListBuildsForProjectOutput struct {
 
 	// A list of build IDs for the specified build project, with each build ID
 	// representing a single build.
-	Ids []*string
+	Ids []string
 
 	// If there are more than 100 items in the list, only the first 100 items are
 	// returned, along with a unique string called a nextToken. To get the next batch

@@ -47,7 +47,7 @@ type CreateScheduledAuditInput struct {
 	// to select which checks are enabled.)
 	//
 	// This member is required.
-	TargetCheckNames []*string
+	TargetCheckNames []string
 
 	// The day of the month on which the scheduled audit takes place. Can be "1"
 	// through "31" or "LAST". This field is required if the "frequency" parameter is
@@ -61,7 +61,7 @@ type CreateScheduledAuditInput struct {
 	DayOfWeek types.DayOfWeek
 
 	// Metadata that can be used to manage the scheduled audit.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateScheduledAuditOutput struct {

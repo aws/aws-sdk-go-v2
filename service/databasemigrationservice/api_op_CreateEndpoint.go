@@ -233,7 +233,7 @@ type CreateEndpointInput struct {
 	SybaseSettings *types.SybaseSettings
 
 	// One or more tags to be assigned to the endpoint.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The user name to be used to log in to the endpoint database.
 	Username *string

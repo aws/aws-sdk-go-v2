@@ -44,7 +44,7 @@ type CreateAttendeeInput struct {
 	MeetingId *string
 
 	// The tag key-value pairs.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateAttendeeOutput struct {

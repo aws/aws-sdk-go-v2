@@ -53,7 +53,7 @@ type CreateVariableInput struct {
 	Description *string
 
 	// A collection of key and value pairs.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The variable type. For more information see Variable types
 	// (https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types).

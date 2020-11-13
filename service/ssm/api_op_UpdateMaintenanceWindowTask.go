@@ -92,12 +92,12 @@ type UpdateMaintenanceWindowTaskInput struct {
 
 	// The new task priority to specify. The lower the number, the higher the priority.
 	// Tasks that have the same priority are scheduled in parallel.
-	Priority *int32
+	Priority int32
 
 	// If True, then all fields that are required by the
 	// RegisterTaskWithMaintenanceWindow action are also required for this API request.
 	// Optional fields that are not specified are set to null.
-	Replace *bool
+	Replace bool
 
 	// The ARN of the IAM service role for Systems Manager to assume when running a
 	// maintenance window task. If you do not specify a service role ARN, Systems
@@ -119,7 +119,7 @@ type UpdateMaintenanceWindowTaskInput struct {
 	// The targets (either instances or tags) to modify. Instances are specified using
 	// Key=instanceids,Values=instanceID_1,instanceID_2. Tags are specified using
 	// Key=tag_name,Values=tag_value.
-	Targets []*types.Target
+	Targets []types.Target
 
 	// The task ARN to modify.
 	TaskArn *string
@@ -143,7 +143,7 @@ type UpdateMaintenanceWindowTaskInput struct {
 	// see MaintenanceWindowTaskInvocationParameters. The map has the following format:
 	// Key: string, between 1 and 255 characters Value: an array of strings, each
 	// string is between 1 and 255 characters
-	TaskParameters map[string]*types.MaintenanceWindowTaskParameterValueExpression
+	TaskParameters map[string]types.MaintenanceWindowTaskParameterValueExpression
 }
 
 type UpdateMaintenanceWindowTaskOutput struct {
@@ -168,14 +168,14 @@ type UpdateMaintenanceWindowTaskOutput struct {
 	Name *string
 
 	// The updated priority value.
-	Priority *int32
+	Priority int32
 
 	// The ARN of the IAM service role to use to publish Amazon Simple Notification
 	// Service (Amazon SNS) notifications for maintenance window Run Command tasks.
 	ServiceRoleArn *string
 
 	// The updated target values.
-	Targets []*types.Target
+	Targets []types.Target
 
 	// The updated task ARN value.
 	TaskArn *string
@@ -188,7 +188,7 @@ type UpdateMaintenanceWindowTaskOutput struct {
 	// the TaskInvocationParameters structure. For information about how Systems
 	// Manager handles these options for the supported maintenance window task types,
 	// see MaintenanceWindowTaskInvocationParameters.
-	TaskParameters map[string]*types.MaintenanceWindowTaskParameterValueExpression
+	TaskParameters map[string]types.MaintenanceWindowTaskParameterValueExpression
 
 	// The ID of the maintenance window that was updated.
 	WindowId *string

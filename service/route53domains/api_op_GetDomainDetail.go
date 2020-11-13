@@ -55,7 +55,7 @@ type GetDomainDetailOutput struct {
 	// The name of the domain.
 	//
 	// This member is required.
-	Nameservers []*types.Nameserver
+	Nameservers []types.Nameserver
 
 	// Provides details about the domain registrant.
 	//
@@ -130,7 +130,7 @@ type GetDomainDetailOutput struct {
 	// explanation of what each code means, go to the ICANN website
 	// (https://www.icann.org/) and search for epp status codes. (Search on the ICANN
 	// website; web searches sometimes return an old version of the document.)
-	StatusList []*string
+	StatusList []string
 
 	// Specifies whether contact information is concealed from WHOIS queries. If the
 	// value is true, WHOIS ("who is") queries return contact information either for

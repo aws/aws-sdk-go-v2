@@ -1829,55 +1829,46 @@ func (m *awsAwsquery_serializeOpUntagResource) HandleSerialize(ctx context.Conte
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsAwsquery_serializeDocumentActionsList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentActionsList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDelegatesList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentDelegatesList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListString(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentListString(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentMapStringToString(v map[string]*string, value query.Value) error {
+func awsAwsquery_serializeDocumentMapStringToString(v map[string]string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
@@ -1890,16 +1881,13 @@ func awsAwsquery_serializeDocumentMapStringToString(v map[string]*string, value 
 	sort.Strings(keys)
 
 	for _, key := range keys {
-		if vv := v[key]; vv == nil {
-			continue
-		}
 		om := object.Key(key)
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentMessageAttributeMap(v map[string]*types.MessageAttributeValue, value query.Value) error {
+func awsAwsquery_serializeDocumentMessageAttributeMap(v map[string]types.MessageAttributeValue, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
@@ -1912,11 +1900,9 @@ func awsAwsquery_serializeDocumentMessageAttributeMap(v map[string]*types.Messag
 	sort.Strings(keys)
 
 	for _, key := range keys {
-		if vv := v[key]; vv == nil {
-			continue
-		}
 		om := object.Key(key)
-		if err := awsAwsquery_serializeDocumentMessageAttributeValue(v[key], om); err != nil {
+		mapVar := v[key]
+		if err := awsAwsquery_serializeDocumentMessageAttributeValue(&mapVar, om); err != nil {
 			return err
 		}
 	}
@@ -1945,7 +1931,7 @@ func awsAwsquery_serializeDocumentMessageAttributeValue(v *types.MessageAttribut
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSubscriptionAttributesMap(v map[string]*string, value query.Value) error {
+func awsAwsquery_serializeDocumentSubscriptionAttributesMap(v map[string]string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
@@ -1958,11 +1944,8 @@ func awsAwsquery_serializeDocumentSubscriptionAttributesMap(v map[string]*string
 	sort.Strings(keys)
 
 	for _, key := range keys {
-		if vv := v[key]; vv == nil {
-			continue
-		}
 		om := object.Key(key)
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
@@ -1984,41 +1967,35 @@ func awsAwsquery_serializeDocumentTag(v *types.Tag, value query.Value) error {
 	return nil
 }
 
-func awsAwsquery_serializeDocumentTagKeyList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentTagKeyList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentTagList(v []*types.Tag, value query.Value) error {
+func awsAwsquery_serializeDocumentTagList(v []types.Tag, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentTag(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentTopicAttributesMap(v map[string]*string, value query.Value) error {
+func awsAwsquery_serializeDocumentTopicAttributesMap(v map[string]string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
@@ -2031,11 +2008,8 @@ func awsAwsquery_serializeDocumentTopicAttributesMap(v map[string]*string, value
 	sort.Strings(keys)
 
 	for _, key := range keys {
-		if vv := v[key]; vv == nil {
-			continue
-		}
 		om := object.Key(key)
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
@@ -2576,9 +2550,9 @@ func awsAwsquery_serializeOpDocumentSubscribeInput(v *SubscribeInput, value quer
 		objectKey.String(*v.Protocol)
 	}
 
-	if v.ReturnSubscriptionArn != nil {
+	if v.ReturnSubscriptionArn {
 		objectKey := object.Key("ReturnSubscriptionArn")
-		objectKey.Boolean(*v.ReturnSubscriptionArn)
+		objectKey.Boolean(v.ReturnSubscriptionArn)
 	}
 
 	if v.TopicArn != nil {

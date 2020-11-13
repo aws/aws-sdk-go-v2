@@ -97,7 +97,7 @@ type DescribeTransformJobOutput struct {
 
 	// The environment variables to set in the Docker container. We support up to 16
 	// key and values entries in the map.
-	Environment map[string]*string
+	Environment map[string]string
 
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:

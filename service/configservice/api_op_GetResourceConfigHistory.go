@@ -68,7 +68,7 @@ type GetResourceConfigHistoryInput struct {
 	// The maximum number of configuration items returned on each page. The default is
 	// 10. You cannot specify a number greater than 100. If you specify 0, AWS Config
 	// uses the default.
-	Limit *int32
+	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
@@ -79,7 +79,7 @@ type GetResourceConfigHistoryInput struct {
 type GetResourceConfigHistoryOutput struct {
 
 	// A list that contains the configuration history of one or more resources.
-	ConfigurationItems []*types.ConfigurationItem
+	ConfigurationItems []types.ConfigurationItem
 
 	// The string that you use in a subsequent request to get the next page of results
 	// in a paginated response.

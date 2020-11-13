@@ -147,7 +147,7 @@ type CreateClusterInput struct {
 
 	// A list of security groups to be associated with this cluster. Default: The
 	// default cluster security group for Amazon Redshift.
-	ClusterSecurityGroups []*string
+	ClusterSecurityGroups []string
 
 	// The name of a cluster subnet group to be associated with this cluster. If this
 	// parameter is not provided the resulting cluster will be deployed outside virtual
@@ -221,7 +221,7 @@ type CreateClusterInput struct {
 	// cluster to access other AWS services. You must supply the IAM roles in their
 	// Amazon Resource Name (ARN) format. You can supply up to 10 IAM roles in a single
 	// request. A cluster can have up to 10 IAM roles associated with it at any time.
-	IamRoles []*string
+	IamRoles []string
 
 	// The AWS Key Management Service (KMS) key ID of the encryption key that you want
 	// to use to encrypt data in the cluster.
@@ -271,11 +271,11 @@ type CreateClusterInput struct {
 	SnapshotScheduleIdentifier *string
 
 	// A list of tag instances.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// A list of Virtual Private Cloud (VPC) security groups to be associated with the
 	// cluster. Default: The default VPC security group is associated with the cluster.
-	VpcSecurityGroupIds []*string
+	VpcSecurityGroupIds []string
 }
 
 type CreateClusterOutput struct {

@@ -69,7 +69,7 @@ type TagResourceInput struct {
 	// the account is not created.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type TagResourceOutput struct {

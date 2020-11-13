@@ -87,7 +87,7 @@ type CreateUnreferencedMergeCommitInput struct {
 	// If the commit contains deletions, whether to keep a folder or folder structure
 	// if the changes leave the folders empty. If this is specified as true, a .gitkeep
 	// file is created for empty folders. The default is false.
-	KeepEmptyFolders *bool
+	KeepEmptyFolders bool
 }
 
 type CreateUnreferencedMergeCommitOutput struct {

@@ -49,7 +49,7 @@ type ListTagsForResourceOutput struct {
 
 	// A list of tags, as key and value pairs, that is associated with the specified
 	// X-Ray group or sampling rule.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

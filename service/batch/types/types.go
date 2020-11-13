@@ -6,7 +6,7 @@ package types
 type ArrayProperties struct {
 
 	// The size of the array job.
-	Size *int32
+	Size int32
 }
 
 // An object representing the array properties of a job.
@@ -14,14 +14,14 @@ type ArrayPropertiesDetail struct {
 
 	// The job index within the array that is associated with this job. This parameter
 	// is returned for array job children.
-	Index *int32
+	Index int32
 
 	// The size of the array job. This parameter is returned for parent array jobs.
-	Size *int32
+	Size int32
 
 	// A summary of the number of array job children in each available job status. This
 	// parameter is returned for parent array jobs.
-	StatusSummary map[string]*int32
+	StatusSummary map[string]int32
 }
 
 // An object representing the array properties of a job.
@@ -29,10 +29,10 @@ type ArrayPropertiesSummary struct {
 
 	// The job index within the array that is associated with this job. This parameter
 	// is returned for children of array jobs.
-	Index *int32
+	Index int32
 
 	// The size of the array job. This parameter is returned for parent array jobs.
-	Size *int32
+	Size int32
 }
 
 // An object representing the details of a container that is part of a job attempt.
@@ -43,7 +43,7 @@ type AttemptContainerDetail struct {
 	ContainerInstanceArn *string
 
 	// The exit code for the job attempt. A non-zero exit code is considered a failure.
-	ExitCode *int32
+	ExitCode int32
 
 	// The name of the CloudWatch Logs log stream associated with the container. The
 	// log group for AWS Batch jobs is /aws/batch/job. Each container attempt receives
@@ -51,7 +51,7 @@ type AttemptContainerDetail struct {
 	LogStreamName *string
 
 	// The network interfaces associated with the job attempt.
-	NetworkInterfaces []*NetworkInterface
+	NetworkInterfaces []NetworkInterface
 
 	// A short (255 max characters) human-readable string to provide additional details
 	// about a running or stopped container.
@@ -71,7 +71,7 @@ type AttemptDetail struct {
 
 	// The Unix timestamp (in milliseconds) for when the attempt was started (when the
 	// attempt transitioned from the STARTING state to the RUNNING state).
-	StartedAt *int64
+	StartedAt int64
 
 	// A short, human-readable string to provide additional details about the current
 	// status of the job attempt.
@@ -80,7 +80,7 @@ type AttemptDetail struct {
 	// The Unix timestamp (in milliseconds) for when the attempt was stopped (when the
 	// attempt transitioned from the RUNNING state to a terminal state, such as
 	// SUCCEEDED or FAILED).
-	StoppedAt *int64
+	StoppedAt int64
 }
 
 // An object representing an AWS Batch compute environment.
@@ -128,7 +128,7 @@ type ComputeEnvironmentDetail struct {
 	StatusReason *string
 
 	// The tags applied to the compute environment.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The type of the compute environment.
 	Type CEType
@@ -148,7 +148,7 @@ type ComputeEnvironmentOrder struct {
 	// The order of the compute environment.
 	//
 	// This member is required.
-	Order *int32
+	Order int32
 }
 
 // An object representing an AWS Batch compute resource.
@@ -172,18 +172,18 @@ type ComputeResource struct {
 	// on the fly that match the demand of your job queues.
 	//
 	// This member is required.
-	InstanceTypes []*string
+	InstanceTypes []string
 
 	// The maximum number of Amazon EC2 vCPUs that an environment can reach.
 	//
 	// This member is required.
-	MaxvCpus *int32
+	MaxvCpus int32
 
 	// The minimum number of Amazon EC2 vCPUs that an environment should maintain (even
 	// if the compute environment is DISABLED).
 	//
 	// This member is required.
-	MinvCpus *int32
+	MinvCpus int32
 
 	// The VPC subnets into which the compute resources are launched. For more
 	// information, see VPCs and Subnets
@@ -191,7 +191,7 @@ type ComputeResource struct {
 	// Amazon VPC User Guide.
 	//
 	// This member is required.
-	Subnets []*string
+	Subnets []string
 
 	// The type of compute environment: EC2 or SPOT.
 	//
@@ -223,10 +223,10 @@ type ComputeResource struct {
 	// 20% of the current On-Demand price for that Amazon EC2 instance. You always pay
 	// the lowest (market) price and never more than your maximum percentage. If you
 	// leave this field empty, the default value is 100% of the On-Demand price.
-	BidPercentage *int32
+	BidPercentage int32
 
 	// The desired number of Amazon EC2 vCPUS in the compute environment.
-	DesiredvCpus *int32
+	DesiredvCpus int32
 
 	// The Amazon EC2 key pair that is used for instances launched in the compute
 	// environment.
@@ -260,7 +260,7 @@ type ComputeResource struct {
 	// securityGroupIds or using a launch template referenced in launchTemplate. If
 	// security groups are specified using both securityGroupIds and launchTemplate,
 	// the values in securityGroupIds will be used.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// The Amazon Resource Name (ARN) of the Amazon EC2 Spot Fleet IAM role applied to
 	// a SPOT compute environment. This role is required if the allocation strategy set
@@ -277,7 +277,7 @@ type ComputeResource struct {
 	// the compute environment has been created; any changes require creating a new
 	// compute environment and removing the old compute environment. These tags are not
 	// seen when using the AWS Batch ListTagsForResource API operation.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // An object representing the attributes of a compute environment that can be
@@ -285,20 +285,20 @@ type ComputeResource struct {
 type ComputeResourceUpdate struct {
 
 	// The desired number of Amazon EC2 vCPUS in the compute environment.
-	DesiredvCpus *int32
+	DesiredvCpus int32
 
 	// The maximum number of Amazon EC2 vCPUs that an environment can reach.
-	MaxvCpus *int32
+	MaxvCpus int32
 
 	// The minimum number of Amazon EC2 vCPUs that an environment should maintain.
-	MinvCpus *int32
+	MinvCpus int32
 }
 
 // An object representing the details of a container that is part of a job.
 type ContainerDetail struct {
 
 	// The command that is passed to the container.
-	Command []*string
+	Command []string
 
 	// The Amazon Resource Name (ARN) of the container instance on which the container
 	// is running.
@@ -307,7 +307,7 @@ type ContainerDetail struct {
 	// The environment variables to pass to a container. Environment variables must not
 	// start with AWS_BATCH; this naming convention is reserved for variables that are
 	// set by the AWS Batch service.
-	Environment []*KeyValuePair
+	Environment []KeyValuePair
 
 	// The Amazon Resource Name (ARN) of the execution role that AWS Batch can assume.
 	// For more information, see AWS Batch execution IAM role
@@ -315,7 +315,7 @@ type ContainerDetail struct {
 	ExecutionRoleArn *string
 
 	// The exit code to return upon completion.
-	ExitCode *int32
+	ExitCode int32
 
 	// The image used to start the container.
 	Image *string
@@ -366,21 +366,21 @@ type ContainerDetail struct {
 	LogStreamName *string
 
 	// The number of MiB of memory reserved for the job. This is a required parameter.
-	Memory *int32
+	Memory int32
 
 	// The mount points for data volumes in your container.
-	MountPoints []*MountPoint
+	MountPoints []MountPoint
 
 	// The network interfaces associated with the job.
-	NetworkInterfaces []*NetworkInterface
+	NetworkInterfaces []NetworkInterface
 
 	// When this parameter is true, the container is given elevated privileges on the
 	// host container instance (similar to the root user).
-	Privileged *bool
+	Privileged bool
 
 	// When this parameter is true, the container is given read-only access to its root
 	// file system.
-	ReadonlyRootFilesystem *bool
+	ReadonlyRootFilesystem bool
 
 	// A short (255 max characters) human-readable string to provide additional details
 	// about a running or stopped container.
@@ -388,13 +388,13 @@ type ContainerDetail struct {
 
 	// The type and amount of a resource to assign to a container. Currently, the only
 	// supported resource is GPU.
-	ResourceRequirements []*ResourceRequirement
+	ResourceRequirements []ResourceRequirement
 
 	// The secrets to pass to the container. For more information, see Specifying
 	// Sensitive Data
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html)
 	// in the Amazon Elastic Container Service Developer Guide.
-	Secrets []*Secret
+	Secrets []Secret
 
 	// The Amazon Resource Name (ARN) of the Amazon ECS task that is associated with
 	// the container job. Each container attempt receives a task ARN when they reach
@@ -402,16 +402,16 @@ type ContainerDetail struct {
 	TaskArn *string
 
 	// A list of ulimit values to set in the container.
-	Ulimits []*Ulimit
+	Ulimits []Ulimit
 
 	// The user name to use inside the container.
 	User *string
 
 	// The number of VCPUs allocated for the job. This is a required parameter.
-	Vcpus *int32
+	Vcpus int32
 
 	// A list of volumes associated with the job.
-	Volumes []*Volume
+	Volumes []Volume
 }
 
 // The overrides that should be sent to a container.
@@ -419,14 +419,14 @@ type ContainerOverrides struct {
 
 	// The command to send to the container that overrides the default command from the
 	// Docker image or the job definition.
-	Command []*string
+	Command []string
 
 	// The environment variables to send to the container. You can add new environment
 	// variables, which are added to the container at launch, or you can override the
 	// existing environment variables from the Docker image or the job definition.
 	// Environment variables must not start with AWS_BATCH; this naming convention is
 	// reserved for variables that are set by the AWS Batch service.
-	Environment []*KeyValuePair
+	Environment []KeyValuePair
 
 	// The instance type to use for a multi-node parallel job. This parameter is not
 	// valid for single-node container jobs.
@@ -434,16 +434,16 @@ type ContainerOverrides struct {
 
 	// The number of MiB of memory reserved for the job. This value overrides the value
 	// set in the job definition.
-	Memory *int32
+	Memory int32
 
 	// The type and amount of a resource to assign to a container. This value overrides
 	// the value set in the job definition. Currently, the only supported resource is
 	// GPU.
-	ResourceRequirements []*ResourceRequirement
+	ResourceRequirements []ResourceRequirement
 
 	// The number of vCPUs to reserve for the container. This value overrides the value
 	// set in the job definition.
-	Vcpus *int32
+	Vcpus int32
 }
 
 // Container properties are used in job definitions to describe the container that
@@ -457,7 +457,7 @@ type ContainerProperties struct {
 	// parameter to docker run (https://docs.docker.com/engine/reference/run/). For
 	// more information, see https://docs.docker.com/engine/reference/builder/#cmd
 	// (https://docs.docker.com/engine/reference/builder/#cmd).
-	Command []*string
+	Command []string
 
 	// The environment variables to pass to a container. This parameter maps to Env in
 	// the Create a container
@@ -468,7 +468,7 @@ type ContainerProperties struct {
 	// as credential data. Environment variables must not start with AWS_BATCH; this
 	// naming convention is reserved for variables that are set by the AWS Batch
 	// service.
-	Environment []*KeyValuePair
+	Environment []KeyValuePair
 
 	// The Amazon Resource Name (ARN) of the execution role that AWS Batch can assume.
 	// For more information, see AWS Batch execution IAM role
@@ -555,14 +555,14 @@ type ContainerProperties struct {
 	// particular instance type, see Memory Management
 	// (https://docs.aws.amazon.com/batch/latest/userguide/memory-management.html) in
 	// the AWS Batch User Guide.
-	Memory *int32
+	Memory int32
 
 	// The mount points for data volumes in your container. This parameter maps to
 	// Volumes in the Create a container
 	// (https://docs.docker.com/engine/api/v1.23/#create-a-container) section of the
 	// Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the --volume
 	// option to docker run (https://docs.docker.com/engine/reference/run/).
-	MountPoints []*MountPoint
+	MountPoints []MountPoint
 
 	// When this parameter is true, the container is given elevated privileges on the
 	// host container instance (similar to the root user). This parameter maps to
@@ -571,31 +571,31 @@ type ContainerProperties struct {
 	// Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the
 	// --privileged option to docker run
 	// (https://docs.docker.com/engine/reference/run/).
-	Privileged *bool
+	Privileged bool
 
 	// When this parameter is true, the container is given read-only access to its root
 	// file system. This parameter maps to ReadonlyRootfs in the Create a container
 	// (https://docs.docker.com/engine/api/v1.23/#create-a-container) section of the
 	// Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the
 	// --read-only option to docker run.
-	ReadonlyRootFilesystem *bool
+	ReadonlyRootFilesystem bool
 
 	// The type and amount of a resource to assign to a container. Currently, the only
 	// supported resource is GPU.
-	ResourceRequirements []*ResourceRequirement
+	ResourceRequirements []ResourceRequirement
 
 	// The secrets for the container. For more information, see Specifying Sensitive
 	// Data
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html)
 	// in the Amazon Elastic Container Service Developer Guide.
-	Secrets []*Secret
+	Secrets []Secret
 
 	// A list of ulimits to set in the container. This parameter maps to Ulimits in the
 	// Create a container
 	// (https://docs.docker.com/engine/api/v1.23/#create-a-container) section of the
 	// Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the --ulimit
 	// option to docker run (https://docs.docker.com/engine/reference/run/).
-	Ulimits []*Ulimit
+	Ulimits []Ulimit
 
 	// The user name to use inside the container. This parameter maps to User in the
 	// Create a container
@@ -613,17 +613,17 @@ type ContainerProperties struct {
 	// 1,024 CPU shares. You must specify at least one vCPU. This is required but can
 	// be specified in several places for multi-node parallel (MNP) jobs; it must be
 	// specified for each node at least once.
-	Vcpus *int32
+	Vcpus int32
 
 	// A list of data volumes used in a job.
-	Volumes []*Volume
+	Volumes []Volume
 }
 
 // An object representing summary details of a container within a job.
 type ContainerSummary struct {
 
 	// The exit code to return upon completion.
-	ExitCode *int32
+	ExitCode int32
 
 	// A short (255 max characters) human-readable string to provide additional details
 	// about a running or stopped container.
@@ -709,7 +709,7 @@ type JobDefinition struct {
 	// The revision of the job definition.
 	//
 	// This member is required.
-	Revision *int32
+	Revision int32
 
 	// The type of job definition.
 	//
@@ -729,7 +729,7 @@ type JobDefinition struct {
 	// Definition Parameters
 	// (https://docs.aws.amazon.com/batch/latest/userguide/job_definition_parameters.html)
 	// in the AWS Batch User Guide.
-	Parameters map[string]*string
+	Parameters map[string]string
 
 	// The retry strategy to use for failed jobs that are submitted with this job
 	// definition.
@@ -739,7 +739,7 @@ type JobDefinition struct {
 	Status *string
 
 	// The tags applied to the job definition.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The timeout configuration for jobs that are submitted with this job definition.
 	// You can specify a timeout duration after which AWS Batch terminates your jobs if
@@ -786,7 +786,7 @@ type JobDetail struct {
 	// not provided for child jobs of array jobs or multi-node parallel jobs.
 	//
 	// This member is required.
-	StartedAt *int64
+	StartedAt int64
 
 	// The current status for the job. If your jobs do not progress to STARTING, see
 	// Jobs Stuck in RUNNABLE Status
@@ -800,7 +800,7 @@ type JobDetail struct {
 	ArrayProperties *ArrayPropertiesDetail
 
 	// A list of job attempts associated with this job.
-	Attempts []*AttemptDetail
+	Attempts []AttemptDetail
 
 	// An object representing the details of the container that is associated with the
 	// job.
@@ -810,10 +810,10 @@ type JobDetail struct {
 	// jobs and parent array jobs, this is when the job entered the SUBMITTED state (at
 	// the time SubmitJob was called). For array child jobs, this is when the child job
 	// was spawned by its parent and entered the PENDING state.
-	CreatedAt *int64
+	CreatedAt int64
 
 	// A list of job IDs on which this job depends.
-	DependsOn []*JobDependency
+	DependsOn []JobDependency
 
 	// The Amazon Resource Name (ARN) of the job.
 	JobArn *string
@@ -828,7 +828,7 @@ type JobDetail struct {
 	// Additional parameters passed to the job that replace parameter substitution
 	// placeholders or override any corresponding parameter defaults from the job
 	// definition.
-	Parameters map[string]*string
+	Parameters map[string]string
 
 	// The retry strategy to use for this job if an attempt fails.
 	RetryStrategy *RetryStrategy
@@ -840,10 +840,10 @@ type JobDetail struct {
 	// The Unix timestamp (in milliseconds) for when the job was stopped (when the job
 	// transitioned from the RUNNING state to a terminal state, such as SUCCEEDED or
 	// FAILED).
-	StoppedAt *int64
+	StoppedAt int64
 
 	// The tags applied to the job.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The timeout configuration for the job.
 	Timeout *JobTimeout
@@ -857,7 +857,7 @@ type JobQueueDetail struct {
 	// placement in ascending order.
 	//
 	// This member is required.
-	ComputeEnvironmentOrder []*ComputeEnvironmentOrder
+	ComputeEnvironmentOrder []ComputeEnvironmentOrder
 
 	// The Amazon Resource Name (ARN) of the job queue.
 	//
@@ -872,7 +872,7 @@ type JobQueueDetail struct {
 	// The priority of the job queue.
 	//
 	// This member is required.
-	Priority *int32
+	Priority int32
 
 	// Describes the ability of the queue to accept new jobs. If the job queue state is
 	// ENABLED, it is able to accept jobs. If the job queue state is DISABLED, new jobs
@@ -889,7 +889,7 @@ type JobQueueDetail struct {
 	StatusReason *string
 
 	// The tags applied to the job queue.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // An object representing summary details of a job.
@@ -916,7 +916,7 @@ type JobSummary struct {
 	// array jobs, this is when the job entered the SUBMITTED state (at the time
 	// SubmitJob was called). For array child jobs, this is when the child job was
 	// spawned by its parent and entered the PENDING state.
-	CreatedAt *int64
+	CreatedAt int64
 
 	// The Amazon Resource Name (ARN) of the job.
 	JobArn *string
@@ -926,7 +926,7 @@ type JobSummary struct {
 
 	// The Unix timestamp for when the job was started (when the job transitioned from
 	// the STARTING state to the RUNNING state).
-	StartedAt *int64
+	StartedAt int64
 
 	// The current status for the job.
 	Status JobStatus
@@ -937,7 +937,7 @@ type JobSummary struct {
 
 	// The Unix timestamp for when the job was stopped (when the job transitioned from
 	// the RUNNING state to a terminal state, such as SUCCEEDED or FAILED).
-	StoppedAt *int64
+	StoppedAt int64
 }
 
 // An object representing a job timeout configuration.
@@ -945,7 +945,7 @@ type JobTimeout struct {
 
 	// The time duration in seconds (measured from the job attempt's startedAt
 	// timestamp) after which AWS Batch terminates your jobs if they have not finished.
-	AttemptDurationSeconds *int32
+	AttemptDurationSeconds int32
 }
 
 // A key-value pair object.
@@ -986,7 +986,7 @@ type LinuxParameters struct {
 	// (https://docs.docker.com/engine/api/v1.23/#create-a-container) section of the
 	// Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the --device
 	// option to docker run (https://docs.docker.com/engine/reference/run/).
-	Devices []*Device
+	Devices []Device
 
 	// If true, run an init process inside the container that forwards signals and
 	// reaps processes. This parameter maps to the --init option to docker run
@@ -995,7 +995,7 @@ type LinuxParameters struct {
 	// the Docker Remote API version on your container instance, log into your
 	// container instance and run the following command: sudo docker version | grep
 	// "Server API version"
-	InitProcessEnabled *bool
+	InitProcessEnabled bool
 
 	// The total amount of swap memory (in MiB) a container can use. This parameter
 	// will be translated to the --memory-swap option to docker run
@@ -1008,12 +1008,12 @@ type LinuxParameters struct {
 	// parameter is omitted, the container will use the swap configuration for the
 	// container instance it is running on. A maxSwap value must be set for the
 	// swappiness parameter to be used.
-	MaxSwap *int32
+	MaxSwap int32
 
 	// The value for the size (in MiB) of the /dev/shm volume. This parameter maps to
 	// the --shm-size option to docker run
 	// (https://docs.docker.com/engine/reference/run/).
-	SharedMemorySize *int32
+	SharedMemorySize int32
 
 	// This allows you to tune a container's memory swappiness behavior. A swappiness
 	// value of 0 will cause swapping to not happen unless absolutely necessary. A
@@ -1023,12 +1023,12 @@ type LinuxParameters struct {
 	// maxSwap then this parameter is ignored. This parameter maps to the
 	// --memory-swappiness option to docker run
 	// (https://docs.docker.com/engine/reference/run/).
-	Swappiness *int32
+	Swappiness int32
 
 	// The container path, mount options, and size (in MiB) of the tmpfs mount. This
 	// parameter maps to the --tmpfs option to docker run
 	// (https://docs.docker.com/engine/reference/run/).
-	Tmpfs []*Tmpfs
+	Tmpfs []Tmpfs
 }
 
 // Log configuration options to send to a custom log driver for the container.
@@ -1081,13 +1081,13 @@ type LogConfiguration struct {
 	// check the Docker Remote API version on your container instance, log into your
 	// container instance and run the following command: sudo docker version | grep
 	// "Server API version"
-	Options map[string]*string
+	Options map[string]string
 
 	// The secrets to pass to the log configuration. For more information, see
 	// Specifying Sensitive Data
 	// (https://docs.aws.amazon.com/batch/latest/userguide/specifying-sensitive-data.html)
 	// in the AWS Batch User Guide.
-	SecretOptions []*Secret
+	SecretOptions []Secret
 }
 
 // Details on a Docker volume mount point that is used in a job's container
@@ -1101,7 +1101,7 @@ type MountPoint struct {
 
 	// If this value is true, the container has read-only access to the volume;
 	// otherwise, the container can write to the volume. The default value is false.
-	ReadOnly *bool
+	ReadOnly bool
 
 	// The name of the volume to mount.
 	SourceVolume *string
@@ -1126,12 +1126,12 @@ type NodeDetails struct {
 
 	// Specifies whether the current node is the main node for a multi-node parallel
 	// job.
-	IsMainNode *bool
+	IsMainNode bool
 
 	// The node index for the node. Node index numbering begins at zero. This index is
 	// also available on the node with the AWS_BATCH_JOB_NODE_INDEX environment
 	// variable.
-	NodeIndex *int32
+	NodeIndex int32
 }
 
 // Object representing any node overrides to a job definition that is used in a
@@ -1139,7 +1139,7 @@ type NodeDetails struct {
 type NodeOverrides struct {
 
 	// The node property overrides for the job.
-	NodePropertyOverrides []*NodePropertyOverride
+	NodePropertyOverrides []NodePropertyOverride
 
 	// The number of nodes to use with a multi-node parallel job. This value overrides
 	// the number of nodes that are specified in the job definition. To use this
@@ -1154,7 +1154,7 @@ type NodeOverrides struct {
 	//
 	// * The main node index specified in the job
 	// definition must be fewer than the number of nodes specified in the override.
-	NumNodes *int32
+	NumNodes int32
 }
 
 // An object representing the node properties of a multi-node parallel job.
@@ -1164,18 +1164,18 @@ type NodeProperties struct {
 	// node index value must be fewer than the number of nodes.
 	//
 	// This member is required.
-	MainNode *int32
+	MainNode int32
 
 	// A list of node ranges and their properties associated with a multi-node parallel
 	// job.
 	//
 	// This member is required.
-	NodeRangeProperties []*NodeRangeProperty
+	NodeRangeProperties []NodeRangeProperty
 
 	// The number of nodes associated with a multi-node parallel job.
 	//
 	// This member is required.
-	NumNodes *int32
+	NumNodes int32
 }
 
 // An object representing the properties of a node that is associated with a
@@ -1184,15 +1184,15 @@ type NodePropertiesSummary struct {
 
 	// Specifies whether the current node is the main node for a multi-node parallel
 	// job.
-	IsMainNode *bool
+	IsMainNode bool
 
 	// The node index for the node. Node index numbering begins at zero. This index is
 	// also available on the node with the AWS_BATCH_JOB_NODE_INDEX environment
 	// variable.
-	NodeIndex *int32
+	NodeIndex int32
 
 	// The number of nodes associated with a multi-node parallel job.
-	NumNodes *int32
+	NumNodes int32
 }
 
 // Object representing any node overrides to a job definition that is used in a
@@ -1255,12 +1255,12 @@ type RetryStrategy struct {
 	// The number of times to move a job to the RUNNABLE status. You may specify
 	// between 1 and 10 attempts. If the value of attempts is greater than one, the job
 	// is retried on failure the same number of attempts as the value.
-	Attempts *int32
+	Attempts int32
 
 	// Array of up to 5 objects that specify conditions under which the job should be
 	// retried or failed. If this parameter is specified, then the attempts parameter
 	// must also be specified.
-	EvaluateOnExit []*EvaluateOnExit
+	EvaluateOnExit []EvaluateOnExit
 }
 
 // An object representing the secret to expose to your container. Secrets can be
@@ -1306,7 +1306,7 @@ type Tmpfs struct {
 	// The size (in MiB) of the tmpfs volume.
 	//
 	// This member is required.
-	Size *int32
+	Size int32
 
 	// The list of tmpfs volume mount options. Valid values: "defaults" | "ro" | "rw" |
 	// "suid" | "nosuid" | "dev" | "nodev" | "exec" | "noexec" | "sync" | "async" |
@@ -1315,7 +1315,7 @@ type Tmpfs struct {
 	// "rprivate" | "shared" | "rshared" | "slave" | "rslave" | "relatime" |
 	// "norelatime" | "strictatime" | "nostrictatime" | "mode" | "uid" | "gid" |
 	// "nr_inodes" | "nr_blocks" | "mpol"
-	MountOptions []*string
+	MountOptions []string
 }
 
 // The ulimit settings to pass to the container.
@@ -1324,7 +1324,7 @@ type Ulimit struct {
 	// The hard limit for the ulimit type.
 	//
 	// This member is required.
-	HardLimit *int32
+	HardLimit int32
 
 	// The type of the ulimit.
 	//
@@ -1334,7 +1334,7 @@ type Ulimit struct {
 	// The soft limit for the ulimit type.
 	//
 	// This member is required.
-	SoftLimit *int32
+	SoftLimit int32
 }
 
 // A data volume used in a job's container properties.

@@ -47,12 +47,12 @@ type ListDiscoveredResourcesInput struct {
 
 	// Specifies whether AWS Config includes deleted resources in the results. By
 	// default, deleted resources are not included.
-	IncludeDeletedResources *bool
+	IncludeDeletedResources bool
 
 	// The maximum number of resource identifiers returned on each page. The default is
 	// 100. You cannot specify a number greater than 100. If you specify 0, AWS Config
 	// uses the default.
-	Limit *int32
+	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
@@ -61,7 +61,7 @@ type ListDiscoveredResourcesInput struct {
 	// The IDs of only those resources that you want AWS Config to list in the
 	// response. If you do not specify this parameter, AWS Config lists all resources
 	// of the specified type that it has discovered.
-	ResourceIds []*string
+	ResourceIds []string
 
 	// The custom name of only those resources that you want AWS Config to list in the
 	// response. If you do not specify this parameter, AWS Config lists all resources
@@ -78,7 +78,7 @@ type ListDiscoveredResourcesOutput struct {
 
 	// The details that identify a resource that is discovered by AWS Config, including
 	// the resource type, ID, and (if available) the custom resource name.
-	ResourceIdentifiers []*types.ResourceIdentifier
+	ResourceIdentifiers []types.ResourceIdentifier
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

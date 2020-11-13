@@ -47,7 +47,7 @@ type PredictInput struct {
 	// A map of variable name-value pairs that represent an observation.
 	//
 	// This member is required.
-	Record map[string]*string
+	Record map[string]string
 }
 
 type PredictOutput struct {

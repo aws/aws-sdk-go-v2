@@ -40,22 +40,22 @@ type UpdateTemplatePermissionsInput struct {
 	TemplateId *string
 
 	// A list of resource permissions to be granted on the template.
-	GrantPermissions []*types.ResourcePermission
+	GrantPermissions []types.ResourcePermission
 
 	// A list of resource permissions to be revoked from the template.
-	RevokePermissions []*types.ResourcePermission
+	RevokePermissions []types.ResourcePermission
 }
 
 type UpdateTemplatePermissionsOutput struct {
 
 	// A list of resource permissions to be set on the template.
-	Permissions []*types.ResourcePermission
+	Permissions []types.ResourcePermission
 
 	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// The Amazon Resource Name (ARN) of the template.
 	TemplateArn *string

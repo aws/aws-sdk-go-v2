@@ -71,14 +71,14 @@ type DownloadDBLogFilePortionInput struct {
 	// parameter in your first request. Include the Marker value returned in the
 	// response as the Marker value for the next request, continuing until the
 	// AdditionalDataPending response element returns false.
-	NumberOfLines *int32
+	NumberOfLines int32
 }
 
 // This data type is used as a response element to DownloadDBLogFilePortion.
 type DownloadDBLogFilePortionOutput struct {
 
 	// Boolean value that if true, indicates there is more data to be downloaded.
-	AdditionalDataPending *bool
+	AdditionalDataPending bool
 
 	// Entries from the specified log file.
 	LogFileData *string

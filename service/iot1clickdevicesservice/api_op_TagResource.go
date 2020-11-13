@@ -42,7 +42,7 @@ type TagResourceInput struct {
 	// (https://aws.amazon.com/answers/account-management/aws-tagging-strategies/).
 	//
 	// This member is required.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type TagResourceOutput struct {

@@ -43,7 +43,7 @@ type DescribeTargetGroupAttributesInput struct {
 type DescribeTargetGroupAttributesOutput struct {
 
 	// Information about the target group attributes
-	Attributes []*types.TargetGroupAttribute
+	Attributes []types.TargetGroupAttribute
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

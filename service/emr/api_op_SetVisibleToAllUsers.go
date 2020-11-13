@@ -40,7 +40,7 @@ type SetVisibleToAllUsersInput struct {
 	// The unique identifier of the job flow (cluster).
 	//
 	// This member is required.
-	JobFlowIds []*string
+	JobFlowIds []string
 
 	// A value of true indicates that all IAM users in the AWS account can perform
 	// cluster actions if they have the proper IAM policy permissions. This is the
@@ -48,7 +48,7 @@ type SetVisibleToAllUsersInput struct {
 	// cluster can perform actions.
 	//
 	// This member is required.
-	VisibleToAllUsers *bool
+	VisibleToAllUsers bool
 }
 
 type SetVisibleToAllUsersOutput struct {

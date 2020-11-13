@@ -59,7 +59,7 @@ type GetCommentsForComparedCommitInput struct {
 type GetCommentsForComparedCommitOutput struct {
 
 	// A list of comment objects on the compared commit.
-	CommentsForComparedCommitData []*types.CommentsForComparedCommit
+	CommentsForComparedCommitData []types.CommentsForComparedCommit
 
 	// An enumeration token that can be used in a request to return the next batch of
 	// the results.

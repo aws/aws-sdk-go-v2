@@ -66,11 +66,11 @@ type GetVpcLinkOutput struct {
 	StatusMessage *string
 
 	// The collection of tags. Each tag element is associated with a given resource.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The ARN of the network load balancer of the VPC targeted by the VPC link. The
 	// network load balancer must be owned by the same AWS account of the API owner.
-	TargetArns []*string
+	TargetArns []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

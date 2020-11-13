@@ -34,7 +34,7 @@ type ListCommandsInput struct {
 
 	// (Optional) One or more filters. Use a filter to return a more specific list of
 	// results.
-	Filters []*types.CommandFilter
+	Filters []types.CommandFilter
 
 	// (Optional) Lists commands issued against this instance ID. You can't specify an
 	// instance ID in the same command that you specify Status = Pending. This is
@@ -44,7 +44,7 @@ type ListCommandsInput struct {
 	// (Optional) The maximum number of items to return for this call. The call also
 	// returns a token that you can specify in a subsequent call to get the next set of
 	// results.
-	MaxResults *int32
+	MaxResults int32
 
 	// (Optional) The token for the next set of items to return. (You received this
 	// token from a previous call.)
@@ -54,7 +54,7 @@ type ListCommandsInput struct {
 type ListCommandsOutput struct {
 
 	// (Optional) The list of commands requested by the user.
-	Commands []*types.Command
+	Commands []types.Command
 
 	// (Optional) The token for the next set of items to return. (You received this
 	// token from a previous call.)

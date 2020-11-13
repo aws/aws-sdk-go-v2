@@ -44,7 +44,7 @@ type DeleteTagsInput struct {
 	// One or more tags to delete.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 // Amazon ML returns the following elements.

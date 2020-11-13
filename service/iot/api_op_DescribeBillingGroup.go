@@ -53,7 +53,7 @@ type DescribeBillingGroupOutput struct {
 	BillingGroupProperties *types.BillingGroupProperties
 
 	// The version of the billing group.
-	Version *int64
+	Version int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

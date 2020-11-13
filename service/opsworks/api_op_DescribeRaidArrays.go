@@ -41,7 +41,7 @@ type DescribeRaidArraysInput struct {
 	// An array of RAID array IDs. If you use this parameter, DescribeRaidArrays
 	// returns descriptions of the specified arrays. Otherwise, it returns a
 	// description of every array.
-	RaidArrayIds []*string
+	RaidArrayIds []string
 
 	// The stack ID.
 	StackId *string
@@ -51,7 +51,7 @@ type DescribeRaidArraysInput struct {
 type DescribeRaidArraysOutput struct {
 
 	// A RaidArrays object that describes the specified RAID arrays.
-	RaidArrays []*types.RaidArray
+	RaidArrays []types.RaidArray
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

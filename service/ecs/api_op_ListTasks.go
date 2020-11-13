@@ -94,7 +94,7 @@ type ListTasksOutput struct {
 	NextToken *string
 
 	// The list of task ARN entries for the ListTasks request.
-	TaskArns []*string
+	TaskArns []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

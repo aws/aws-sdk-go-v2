@@ -2235,17 +2235,13 @@ func awsAwsjson11_serializeDocumentAsset(v *types.Asset, value smithyjson.Value)
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAssets(v []*types.Asset, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentAssets(v []types.Asset, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentAsset(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentAsset(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -2344,17 +2340,13 @@ func awsAwsjson11_serializeDocumentDetectTextFilters(v *types.DetectTextFilters,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentFaceIdList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentFaceIdList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2549,17 +2541,13 @@ func awsAwsjson11_serializeDocumentRegionOfInterest(v *types.RegionOfInterest, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRegionsOfInterest(v []*types.RegionOfInterest, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentRegionsOfInterest(v []types.RegionOfInterest, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentRegionOfInterest(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentRegionOfInterest(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -2718,9 +2706,9 @@ func awsAwsjson11_serializeDocumentTestingData(v *types.TestingData, value smith
 		}
 	}
 
-	if v.AutoCreate != nil {
+	if v.AutoCreate {
 		ok := object.Key("AutoCreate")
-		ok.Boolean(*v.AutoCreate)
+		ok.Boolean(v.AutoCreate)
 	}
 
 	return nil
@@ -2740,17 +2728,13 @@ func awsAwsjson11_serializeDocumentTrainingData(v *types.TrainingData, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentVersionNames(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentVersionNames(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }

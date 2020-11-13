@@ -34,7 +34,7 @@ type UpdateLinkAttributesInput struct {
 	// The attributes update structure.
 	//
 	// This member is required.
-	AttributeUpdates []*types.LinkAttributeUpdate
+	AttributeUpdates []types.LinkAttributeUpdate
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory where the
 	// updated typed link resides. For more information, see arns or Typed Links

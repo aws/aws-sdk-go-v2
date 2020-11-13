@@ -36,7 +36,7 @@ type UntagProjectInput struct {
 	// The tags to remove from the project.
 	//
 	// This member is required.
-	Tags []*string
+	Tags []string
 }
 
 type UntagProjectOutput struct {

@@ -33,7 +33,7 @@ type ListFleetsInput struct {
 	// Optional filters to limit results. The filter name name is supported. When
 	// filtering, you must use the complete value of the filtered item. You can use up
 	// to three filters.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// When this parameter is used, ListFleets only returns maxResults results in a
 	// single page along with a nextToken response element. The remaining results of
@@ -56,7 +56,7 @@ type ListFleetsInput struct {
 type ListFleetsOutput struct {
 
 	// A list of fleet details meeting the request criteria.
-	FleetDetails []*types.Fleet
+	FleetDetails []types.Fleet
 
 	// If the previous paginated request did not return all of the remaining results,
 	// the response object's nextToken parameter value is set to a token. To retrieve

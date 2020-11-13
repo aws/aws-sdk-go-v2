@@ -66,12 +66,12 @@ type AttributeValue struct {
 
 	// For a map of up to 10 data type:value pairs. Maximum length for each string
 	// value is 100 characters.
-	SDM map[string]*float64
+	SDM map[string]float64
 
 	// For a list of up to 10 strings. Maximum length for each string is 100
 	// characters. Duplicate values are not recognized; all occurrences of the repeated
 	// value after the first of a repeated value are ignored.
-	SL []*string
+	SL []string
 }
 
 // Temporary access credentials used for uploading game build files to Amazon
@@ -452,13 +452,13 @@ type FleetAttributes struct {
 	// uploads logs that are stored on each instance at C:\game\logs (for Windows) or
 	// /local/game/logs (for Linux). Use the Amazon GameLift console to access stored
 	// logs.
-	LogPaths []*string
+	LogPaths []string
 
 	// Names of metric groups that this fleet is included in. In Amazon CloudWatch, you
 	// can view metrics for an individual fleet or aggregated metrics for fleets that
 	// are in a fleet metric group. A fleet can be included in only one metric group at
 	// a time.
-	MetricGroups []*string
+	MetricGroups []string
 
 	// A descriptive label that is associated with a fleet. Fleet names do not need to
 	// be unique.
@@ -787,7 +787,7 @@ type GameServerGroup struct {
 
 	// The set of EC2 instance types that GameLift FleetIQ can use when balancing and
 	// automatically scaling instances in the corresponding Auto Scaling group.
-	InstanceDefinitions []*InstanceDefinition
+	InstanceDefinitions []InstanceDefinition
 
 	// A timestamp that indicates when this game server group was last updated.
 	LastUpdatedTime *time.Time
@@ -987,7 +987,7 @@ type GameSession struct {
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
 	// You can search for active game sessions based on this custom data with
 	// SearchGameSessions.
-	GameProperties []*GameProperty
+	GameProperties []GameProperty
 
 	// Set of custom game session properties, formatted as a single string value. This
 	// data is passed to a game server process in the GameSession object with a request
@@ -1079,7 +1079,7 @@ type GameSessionConnectionInfo struct {
 
 	// A collection of player session IDs, one for each player ID that was included in
 	// the original matchmaking request.
-	MatchedPlayerSessions []*MatchedPlayerSession
+	MatchedPlayerSessions []MatchedPlayerSession
 
 	// Port number for the game session. To connect to a Amazon GameLift game server,
 	// an app needs both the IP address and port number.
@@ -1138,7 +1138,7 @@ type GameSessionPlacement struct {
 	// properties are passed to a game server process in the GameSession object with a
 	// request to start a new game session (see Start a Game Session
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
-	GameProperties []*GameProperty
+	GameProperties []GameProperty
 
 	// Identifier for the game session created by this placement request. This value is
 	// set once the new game session is placed (placement status is FULFILLED). This
@@ -1193,14 +1193,14 @@ type GameSessionPlacement struct {
 	// information includes the player ID (as provided in the placement request) and
 	// the corresponding player session ID. Retrieve full player sessions by calling
 	// DescribePlayerSessions with the player session ID.
-	PlacedPlayerSessions []*PlacedPlayerSession
+	PlacedPlayerSessions []PlacedPlayerSession
 
 	// A unique identifier for a game session placement.
 	PlacementId *string
 
 	// Set of values, expressed in milliseconds, indicating the amount of latency that
 	// a player experiences when connected to AWS Regions.
-	PlayerLatencies []*PlayerLatency
+	PlayerLatencies []PlayerLatency
 
 	// Port number for the game session. To connect to a Amazon GameLift game server,
 	// an app needs both the IP address and port number. This value is set once the new
@@ -1266,7 +1266,7 @@ type GameSessionQueue struct {
 	// A list of fleets that can be used to fulfill game session placement requests in
 	// the queue. Fleets are identified by either a fleet ARN or a fleet alias ARN.
 	// Destinations are listed in default preference order.
-	Destinations []*GameSessionQueueDestination
+	Destinations []GameSessionQueueDestination
 
 	// Amazon Resource Name (ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
@@ -1287,7 +1287,7 @@ type GameSessionQueue struct {
 	// policy is enforced consecutively for its duration period. For example, a queue
 	// might enforce a 60-second policy followed by a 120-second policy, and then no
 	// policy for the remainder of the placement.
-	PlayerLatencyPolicies []*PlayerLatencyPolicy
+	PlayerLatencyPolicies []PlayerLatencyPolicy
 
 	// The maximum time, in seconds, that a new game session placement request remains
 	// in the queue. When a request exceeds this time, the game session placement
@@ -1544,7 +1544,7 @@ type MatchmakingConfiguration struct {
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
 	// This information is added to the new GameSession object that is created for a
 	// successful match.
-	GameProperties []*GameProperty
+	GameProperties []GameProperty
 
 	// A set of custom game session properties, formatted as a single string value.
 	// This data is passed to a game server process in the GameSession object with a
@@ -1560,7 +1560,7 @@ type MatchmakingConfiguration struct {
 	// identifies it. ARNs are unique across all Regions. GameLift uses the listed
 	// queues when placing game sessions for matches that are created with this
 	// matchmaking configuration. Queues can be located in any Region.
-	GameSessionQueueArns []*string
+	GameSessionQueueArns []string
 
 	// A unique identifier for a matchmaking configuration. This name is used to
 	// identify the configuration associated with a matchmaking request or ticket.
@@ -1678,7 +1678,7 @@ type MatchmakingTicket struct {
 	// are identified by a unique player ID and may include latency data for use during
 	// matchmaking. If the ticket is in status COMPLETED, the Player objects include
 	// the team the players were assigned to in the resulting match.
-	Players []*Player
+	Players []Player
 
 	// Time stamp indicating when this matchmaking request was received. Format is a
 	// number expressed in Unix time as milliseconds (for example "1469498468.057").
@@ -1774,13 +1774,13 @@ type Player struct {
 	// report latency in order to be matched. If no latency is reported in this
 	// scenario, FlexMatch assumes that no Regions are available to the player and the
 	// ticket is not matchable.
-	LatencyInMs map[string]*int32
+	LatencyInMs map[string]int32
 
 	// A collection of key:value pairs containing player information for use in
 	// matchmaking. Player attribute keys must match the playerAttributes used in a
 	// matchmaking rule set. Example: "PlayerAttributes": {"skill": {"N": "23"},
 	// "gameMode": {"S": "deathmatch"}}.
-	PlayerAttributes map[string]*AttributeValue
+	PlayerAttributes map[string]AttributeValue
 
 	// A unique identifier for a player
 	PlayerId *string
@@ -1800,7 +1800,7 @@ type PlayerLatency struct {
 
 	// Amount of time that represents the time lag experienced by the player when
 	// connected to the specified Region.
-	LatencyInMilliseconds *float32
+	LatencyInMilliseconds float32
 
 	// A unique identifier for a player associated with the latency data.
 	PlayerId *string
@@ -2030,7 +2030,7 @@ type RuntimeConfiguration struct {
 
 	// A collection of server process configurations that describe which server
 	// processes to run on each instance in a fleet.
-	ServerProcesses []*ServerProcess
+	ServerProcesses []ServerProcess
 }
 
 // The location in S3 where build or script files are stored for access by Amazon
@@ -2153,7 +2153,7 @@ type ScalingPolicy struct {
 	PolicyType PolicyType
 
 	// Amount of adjustment to make, based on the scaling adjustment type.
-	ScalingAdjustment *int32
+	ScalingAdjustment int32
 
 	// The type of adjustment to make to a fleet's instance count (see
 	// FleetCapacity):
@@ -2201,7 +2201,7 @@ type ScalingPolicy struct {
 	TargetConfiguration *TargetConfiguration
 
 	// Metric value used to trigger a scaling event.
-	Threshold *float64
+	Threshold float64
 }
 
 // Properties describing a Realtime script. Related operations
@@ -2346,7 +2346,7 @@ type TargetConfiguration struct {
 	// idle and ready for new game sessions).
 	//
 	// This member is required.
-	TargetValue *float64
+	TargetValue float64
 }
 
 // This data type is used with the Amazon GameLift FleetIQ and game server groups.

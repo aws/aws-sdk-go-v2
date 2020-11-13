@@ -32,7 +32,7 @@ type SearchSystemInstancesInput struct {
 	// Optional filter to apply to the search. Valid filters are SYSTEM_TEMPLATE_ID,
 	// STATUS, and GREENGRASS_GROUP_NAME. Multiple filters function as OR criteria in
 	// the query. Multiple values passed inside the filter function as AND criteria.
-	Filters []*types.SystemInstanceFilter
+	Filters []types.SystemInstanceFilter
 
 	// The maximum number of results to return in the response.
 	MaxResults *int32
@@ -49,7 +49,7 @@ type SearchSystemInstancesOutput struct {
 
 	// An array of objects that contain summary data abour the system instances in the
 	// result set.
-	Summaries []*types.SystemInstanceSummary
+	Summaries []types.SystemInstanceSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

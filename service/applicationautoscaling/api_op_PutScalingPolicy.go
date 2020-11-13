@@ -232,7 +232,7 @@ type PutScalingPolicyOutput struct {
 	PolicyARN *string
 
 	// The CloudWatch alarms created for the target tracking scaling policy.
-	Alarms []*types.Alarm
+	Alarms []types.Alarm
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

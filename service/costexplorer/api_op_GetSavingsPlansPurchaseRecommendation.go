@@ -74,7 +74,7 @@ type GetSavingsPlansPurchaseRecommendationInput struct {
 
 	// The number of recommendations that you want returned in a single response
 	// object.
-	PageSize *int32
+	PageSize int32
 }
 
 type GetSavingsPlansPurchaseRecommendationOutput struct {

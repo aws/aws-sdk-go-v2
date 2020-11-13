@@ -50,7 +50,7 @@ type CreateCrawlerInput struct {
 	// A list of custom classifiers that the user has registered. By default, all
 	// built-in classifiers are included in a crawl, but these custom classifiers
 	// always override the default classifiers for a given classification.
-	Classifiers []*string
+	Classifiers []string
 
 	// Crawler configuration information. This versioned JSON string allows users to
 	// specify aspects of a crawler's behavior. For more information, see Configuring a
@@ -88,7 +88,7 @@ type CreateCrawlerInput struct {
 	// the crawler. For more information about tags in AWS Glue, see AWS Tags in AWS
 	// Glue (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the
 	// developer guide.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateCrawlerOutput struct {

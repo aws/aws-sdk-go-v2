@@ -264,13 +264,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteDetectorModelInput(v *DeleteDetec
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DetectorModelName == nil {
+	if v.DetectorModelName == nil || len(*v.DetectorModelName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member detectorModelName must not be empty")}
 	}
 	if v.DetectorModelName != nil {
-		if len(*v.DetectorModelName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member detectorModelName must not be empty")}
-		}
 		if err := encoder.SetURI("detectorModelName").String(*v.DetectorModelName); err != nil {
 			return err
 		}
@@ -330,13 +327,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteInputInput(v *DeleteInputInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.InputName == nil {
+	if v.InputName == nil || len(*v.InputName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member inputName must not be empty")}
 	}
 	if v.InputName != nil {
-		if len(*v.InputName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member inputName must not be empty")}
-		}
 		if err := encoder.SetURI("inputName").String(*v.InputName); err != nil {
 			return err
 		}
@@ -396,13 +390,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeDetectorModelInput(v *DescribeD
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DetectorModelName == nil {
+	if v.DetectorModelName == nil || len(*v.DetectorModelName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member detectorModelName must not be empty")}
 	}
 	if v.DetectorModelName != nil {
-		if len(*v.DetectorModelName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member detectorModelName must not be empty")}
-		}
 		if err := encoder.SetURI("detectorModelName").String(*v.DetectorModelName); err != nil {
 			return err
 		}
@@ -466,13 +457,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeInputInput(v *DescribeInputInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.InputName == nil {
+	if v.InputName == nil || len(*v.InputName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member inputName must not be empty")}
 	}
 	if v.InputName != nil {
-		if len(*v.InputName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member inputName must not be empty")}
-		}
 		if err := encoder.SetURI("inputName").String(*v.InputName); err != nil {
 			return err
 		}
@@ -644,13 +632,10 @@ func awsRestjson1_serializeOpHttpBindingsListDetectorModelVersionsInput(v *ListD
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DetectorModelName == nil {
+	if v.DetectorModelName == nil || len(*v.DetectorModelName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member detectorModelName must not be empty")}
 	}
 	if v.DetectorModelName != nil {
-		if len(*v.DetectorModelName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member detectorModelName must not be empty")}
-		}
 		if err := encoder.SetURI("detectorModelName").String(*v.DetectorModelName); err != nil {
 			return err
 		}
@@ -1002,10 +987,7 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 
 	if v.TagKeys != nil {
 		for i := range v.TagKeys {
-			if v.TagKeys[i] == nil {
-				continue
-			}
-			encoder.AddQuery("tagKeys").String(*v.TagKeys[i])
+			encoder.AddQuery("tagKeys").String(v.TagKeys[i])
 		}
 	}
 
@@ -1074,13 +1056,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateDetectorModelInput(v *UpdateDetec
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DetectorModelName == nil {
+	if v.DetectorModelName == nil || len(*v.DetectorModelName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member detectorModelName must not be empty")}
 	}
 	if v.DetectorModelName != nil {
-		if len(*v.DetectorModelName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member detectorModelName must not be empty")}
-		}
 		if err := encoder.SetURI("detectorModelName").String(*v.DetectorModelName); err != nil {
 			return err
 		}
@@ -1180,13 +1159,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateInputInput(v *UpdateInputInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.InputName == nil {
+	if v.InputName == nil || len(*v.InputName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member inputName must not be empty")}
 	}
 	if v.InputName != nil {
-		if len(*v.InputName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member inputName must not be empty")}
-		}
 		if err := encoder.SetURI("inputName").String(*v.InputName); err != nil {
 			return err
 		}
@@ -1312,17 +1288,13 @@ func awsRestjson1_serializeDocumentAction(v *types.Action, value smithyjson.Valu
 	return nil
 }
 
-func awsRestjson1_serializeDocumentActions(v []*types.Action, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentActions(v []types.Action, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentAction(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentAction(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1411,17 +1383,13 @@ func awsRestjson1_serializeDocumentAttribute(v *types.Attribute, value smithyjso
 	return nil
 }
 
-func awsRestjson1_serializeDocumentAttributes(v []*types.Attribute, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentAttributes(v []types.Attribute, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentAttribute(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentAttribute(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1457,17 +1425,13 @@ func awsRestjson1_serializeDocumentDetectorDebugOption(v *types.DetectorDebugOpt
 	return nil
 }
 
-func awsRestjson1_serializeDocumentDetectorDebugOptions(v []*types.DetectorDebugOption, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentDetectorDebugOptions(v []types.DetectorDebugOption, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentDetectorDebugOption(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentDetectorDebugOption(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1595,17 +1559,13 @@ func awsRestjson1_serializeDocumentEvent(v *types.Event, value smithyjson.Value)
 	return nil
 }
 
-func awsRestjson1_serializeDocumentEvents(v []*types.Event, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentEvents(v []types.Event, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentEvent(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentEvent(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1752,9 +1712,9 @@ func awsRestjson1_serializeDocumentLoggingOptions(v *types.LoggingOptions, value
 		}
 	}
 
-	if v.Enabled != nil {
+	if v.Enabled {
 		ok := object.Key("enabled")
-		ok.Boolean(*v.Enabled)
+		ok.Boolean(v.Enabled)
 	}
 
 	if len(v.Level) > 0 {
@@ -1963,17 +1923,13 @@ func awsRestjson1_serializeDocumentState(v *types.State, value smithyjson.Value)
 	return nil
 }
 
-func awsRestjson1_serializeDocumentStates(v []*types.State, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentStates(v []types.State, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentState(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentState(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1997,17 +1953,13 @@ func awsRestjson1_serializeDocumentTag(v *types.Tag, value smithyjson.Value) err
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTags(v []*types.Tag, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTags(v []types.Tag, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentTag(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -2043,17 +1995,13 @@ func awsRestjson1_serializeDocumentTransitionEvent(v *types.TransitionEvent, val
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTransitionEvents(v []*types.TransitionEvent, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTransitionEvents(v []types.TransitionEvent, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentTransitionEvent(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentTransitionEvent(&v[i], av); err != nil {
 			return err
 		}
 	}

@@ -52,7 +52,7 @@ type ListTargetsByRuleOutput struct {
 	NextToken *string
 
 	// The targets assigned to the rule.
-	Targets []*types.Target
+	Targets []types.Target
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -52,7 +52,7 @@ type DescribeOrderableReplicationInstancesOutput struct {
 	Marker *string
 
 	// The order-able replication instances available.
-	OrderableReplicationInstances []*types.OrderableReplicationInstance
+	OrderableReplicationInstances []types.OrderableReplicationInstance
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

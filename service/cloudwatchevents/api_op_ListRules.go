@@ -53,7 +53,7 @@ type ListRulesOutput struct {
 	NextToken *string
 
 	// The rules that match the specified criteria.
-	Rules []*types.Rule
+	Rules []types.Rule
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

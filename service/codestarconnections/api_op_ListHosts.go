@@ -31,7 +31,7 @@ type ListHostsInput struct {
 
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token that was returned from the previous ListHosts call, which can be used
 	// to return the next set of hosts in the list.
@@ -42,7 +42,7 @@ type ListHostsOutput struct {
 
 	// A list of hosts and the details for each host, such as status, endpoint, and
 	// provider type.
-	Hosts []*types.Host
+	Hosts []types.Host
 
 	// A token that can be used in the next ListHosts call. To view all items in the
 	// list, continue to call this operation with each subsequent token until no more

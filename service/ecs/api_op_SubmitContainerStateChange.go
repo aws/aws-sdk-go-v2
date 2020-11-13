@@ -40,7 +40,7 @@ type SubmitContainerStateChangeInput struct {
 	ExitCode *int32
 
 	// The network bindings of the container.
-	NetworkBindings []*types.NetworkBinding
+	NetworkBindings []types.NetworkBinding
 
 	// The reason for the state change request.
 	Reason *string

@@ -69,11 +69,11 @@ type AttributeValue struct {
 
 	// An attribute of type List. For example: "L": [ {"S": "Cookies"} , {"S":
 	// "Coffee"}, {"N", "3.14159"}]
-	L []*AttributeValue
+	L []AttributeValue
 
 	// An attribute of type Map. For example: "M": {"Name": {"S": "Joe"}, "Age": {"N":
 	// "35"}}
-	M map[string]*AttributeValue
+	M map[string]AttributeValue
 
 	// An attribute of type Number. For example: "N": "123.45" Numbers are sent across
 	// the network to DynamoDB as strings, to maximize compatibility across languages
@@ -85,7 +85,7 @@ type AttributeValue struct {
 	// "3.14"] Numbers are sent across the network to DynamoDB as strings, to maximize
 	// compatibility across languages and libraries. However, DynamoDB treats them as
 	// number type attributes for mathematical operations.
-	NS []*string
+	NS []string
 
 	// An attribute of type Null. For example: "NULL": true
 	NULL *bool
@@ -95,7 +95,7 @@ type AttributeValue struct {
 
 	// An attribute of type String Set. For example: "SS": ["Giraffe", "Hippo"
 	// ,"Zebra"]
-	SS []*string
+	SS []string
 }
 
 // For the UpdateItem operation, represents the attributes to be modified, the
@@ -218,7 +218,7 @@ type AutoScalingSettingsDescription struct {
 	MinimumUnits *int64
 
 	// Information about the scaling policies.
-	ScalingPolicies []*AutoScalingPolicyDescription
+	ScalingPolicies []AutoScalingPolicyDescription
 }
 
 // Represents the auto scaling settings to be modified for a global table or global
@@ -446,7 +446,7 @@ type CancellationReason struct {
 	Code *string
 
 	// Item in the request which caused the transaction to get cancelled.
-	Item map[string]*AttributeValue
+	Item map[string]AttributeValue
 
 	// Cancellation reason message description.
 	Message *string
@@ -604,7 +604,7 @@ type Condition struct {
 	// (http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters). For Binary,
 	// DynamoDB treats each byte of the binary data as unsigned when it compares binary
 	// values.
-	AttributeValueList []*AttributeValue
+	AttributeValueList []AttributeValue
 }
 
 // Represents a request to perform a check that an item exists or to check the
@@ -620,7 +620,7 @@ type ConditionCheck struct {
 	// name and a value for that attribute.
 	//
 	// This member is required.
-	Key map[string]*AttributeValue
+	Key map[string]AttributeValue
 
 	// Name of the table for the check item request.
 	//
@@ -628,10 +628,10 @@ type ConditionCheck struct {
 	TableName *string
 
 	// One or more substitution tokens for attribute names in an expression.
-	ExpressionAttributeNames map[string]*string
+	ExpressionAttributeNames map[string]string
 
 	// One or more values that can be substituted in an expression.
-	ExpressionAttributeValues map[string]*AttributeValue
+	ExpressionAttributeValues map[string]AttributeValue
 
 	// Use ReturnValuesOnConditionCheckFailure to get the item attributes if the
 	// ConditionCheck condition fails. For ReturnValuesOnConditionCheckFailure, the
@@ -652,10 +652,10 @@ type ConsumedCapacity struct {
 
 	// The amount of throughput consumed on each global index affected by the
 	// operation.
-	GlobalSecondaryIndexes map[string]*Capacity
+	GlobalSecondaryIndexes map[string]Capacity
 
 	// The amount of throughput consumed on each local index affected by the operation.
-	LocalSecondaryIndexes map[string]*Capacity
+	LocalSecondaryIndexes map[string]Capacity
 
 	// The total number of read capacity units consumed by the operation.
 	ReadCapacityUnits *float64
@@ -708,7 +708,7 @@ type CreateGlobalSecondaryIndexAction struct {
 	// The key schema for the global secondary index.
 	//
 	// This member is required.
-	KeySchema []*KeySchemaElement
+	KeySchema []KeySchemaElement
 
 	// Represents attributes that are copied (projected) from the table into an index.
 	// These are in addition to the primary key attributes and index key attributes,
@@ -743,7 +743,7 @@ type CreateReplicationGroupMemberAction struct {
 	RegionName *string
 
 	// Replica-specific global secondary index settings.
-	GlobalSecondaryIndexes []*ReplicaGlobalSecondaryIndex
+	GlobalSecondaryIndexes []ReplicaGlobalSecondaryIndex
 
 	// The AWS KMS customer master key (CMK) that should be used for AWS KMS encryption
 	// in the new replica. To specify a CMK, use its key ID, Amazon Resource Name
@@ -764,7 +764,7 @@ type Delete struct {
 	// name and a value for that attribute.
 	//
 	// This member is required.
-	Key map[string]*AttributeValue
+	Key map[string]AttributeValue
 
 	// Name of the table in which the item to be deleted resides.
 	//
@@ -775,10 +775,10 @@ type Delete struct {
 	ConditionExpression *string
 
 	// One or more substitution tokens for attribute names in an expression.
-	ExpressionAttributeNames map[string]*string
+	ExpressionAttributeNames map[string]string
 
 	// One or more values that can be substituted in an expression.
-	ExpressionAttributeValues map[string]*AttributeValue
+	ExpressionAttributeValues map[string]AttributeValue
 
 	// Use ReturnValuesOnConditionCheckFailure to get the item attributes if the Delete
 	// condition fails. For ReturnValuesOnConditionCheckFailure, the valid values are:
@@ -821,7 +821,7 @@ type DeleteRequest struct {
 	// their data types must match those of the table's key schema.
 	//
 	// This member is required.
-	Key map[string]*AttributeValue
+	Key map[string]AttributeValue
 }
 
 // An endpoint information details.
@@ -835,7 +835,7 @@ type Endpoint struct {
 	// Endpoint cache time to live (TTL) value.
 	//
 	// This member is required.
-	CachePeriodInMinutes *int64
+	CachePeriodInMinutes int64
 }
 
 // Represents a condition to be compared with an attribute value. This condition
@@ -872,7 +872,7 @@ type ExpectedAttributeValue struct {
 	// values. For information on specifying data types in JSON, see JSON Data Format
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataFormat.html)
 	// in the Amazon DynamoDB Developer Guide.
-	AttributeValueList []*AttributeValue
+	AttributeValueList []AttributeValue
 
 	// A comparator for evaluating attributes in the AttributeValueList. For example,
 	// equals, greater than, less than, etc. The following comparison operators are
@@ -1036,7 +1036,7 @@ type Get struct {
 	// key of the item to retrieve.
 	//
 	// This member is required.
-	Key map[string]*AttributeValue
+	Key map[string]AttributeValue
 
 	// The name of the table from which to retrieve the specified item.
 	//
@@ -1045,7 +1045,7 @@ type Get struct {
 
 	// One or more substitution tokens for attribute names in the ProjectionExpression
 	// parameter.
-	ExpressionAttributeNames map[string]*string
+	ExpressionAttributeNames map[string]string
 
 	// A string that identifies one or more attributes of the specified item to
 	// retrieve from the table. The attributes in the expression must be separated by
@@ -1080,7 +1080,7 @@ type GlobalSecondaryIndex struct {
 	// partition key physically close together, in sorted order by the sort key value.
 	//
 	// This member is required.
-	KeySchema []*KeySchemaElement
+	KeySchema []KeySchemaElement
 
 	// Represents attributes that are copied (projected) from the table into the global
 	// secondary index. These are in addition to the primary key attributes and index
@@ -1134,7 +1134,7 @@ type GlobalSecondaryIndexDescription struct {
 	// The total size of the specified index, in bytes. DynamoDB updates this value
 	// approximately every six hours. Recent changes might not be reflected in this
 	// value.
-	IndexSizeBytes *int64
+	IndexSizeBytes int64
 
 	// The current state of the global secondary index:
 	//
@@ -1152,7 +1152,7 @@ type GlobalSecondaryIndexDescription struct {
 	// The number of items in the specified index. DynamoDB updates this value
 	// approximately every six hours. Recent changes might not be reflected in this
 	// value.
-	ItemCount *int64
+	ItemCount int64
 
 	// The complete key schema for a global secondary index, which consists of one or
 	// more pairs of attribute names and key types:
@@ -1168,7 +1168,7 @@ type GlobalSecondaryIndexDescription struct {
 	// values. The sort key of an item is also known as its range attribute. The term
 	// "range attribute" derives from the way DynamoDB stores items with the same
 	// partition key physically close together, in sorted order by the sort key value.
-	KeySchema []*KeySchemaElement
+	KeySchema []KeySchemaElement
 
 	// Represents attributes that are copied (projected) from the table into the global
 	// secondary index. These are in addition to the primary key attributes and index
@@ -1204,7 +1204,7 @@ type GlobalSecondaryIndexInfo struct {
 	// values. The sort key of an item is also known as its range attribute. The term
 	// "range attribute" derives from the way DynamoDB stores items with the same
 	// partition key physically close together, in sorted order by the sort key value.
-	KeySchema []*KeySchemaElement
+	KeySchema []KeySchemaElement
 
 	// Represents attributes that are copied (projected) from the table into the global
 	// secondary index. These are in addition to the primary key attributes and index
@@ -1258,7 +1258,7 @@ type GlobalTable struct {
 	GlobalTableName *string
 
 	// The Regions where the global table has replicas.
-	ReplicationGroup []*Replica
+	ReplicationGroup []Replica
 }
 
 // Contains details about the global table.
@@ -1287,7 +1287,7 @@ type GlobalTableDescription struct {
 	GlobalTableStatus GlobalTableStatus
 
 	// The Regions where the global table has replicas.
-	ReplicationGroup []*ReplicaDescription
+	ReplicationGroup []ReplicaDescription
 }
 
 // Represents the settings of a global secondary index for a global table that will
@@ -1317,7 +1317,7 @@ type ItemCollectionMetrics struct {
 
 	// The partition key value of the item collection. This value is the same as the
 	// partition key value of the item.
-	ItemCollectionKey map[string]*AttributeValue
+	ItemCollectionKey map[string]AttributeValue
 
 	// An estimate of item collection size, in gigabytes. This value is a two-element
 	// array containing a lower bound and an upper bound for the estimate. The estimate
@@ -1326,14 +1326,14 @@ type ItemCollectionMetrics struct {
 	// estimate to measure whether a local secondary index is approaching its size
 	// limit. The estimate is subject to change over time; therefore, do not rely on
 	// the precision or accuracy of the estimate.
-	SizeEstimateRangeGB []*float64
+	SizeEstimateRangeGB []float64
 }
 
 // Details for the requested item.
 type ItemResponse struct {
 
 	// Map of attribute data consisting of the data type and attribute value.
-	Item map[string]*AttributeValue
+	Item map[string]AttributeValue
 }
 
 // Represents a set of primary keys and, for each key, the attributes to retrieve
@@ -1347,13 +1347,13 @@ type KeysAndAttributes struct {
 	// associated with the items.
 	//
 	// This member is required.
-	Keys []map[string]*AttributeValue
+	Keys []map[string]AttributeValue
 
 	// This is a legacy parameter. Use ProjectionExpression instead. For more
 	// information, see Legacy Conditional Parameters
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.html)
 	// in the Amazon DynamoDB Developer Guide.
-	AttributesToGet []*string
+	AttributesToGet []string
 
 	// The consistency of a read operation. If set to true, then a strongly consistent
 	// read is used; otherwise, an eventually consistent read is used.
@@ -1398,7 +1398,7 @@ type KeysAndAttributes struct {
 	// expression attribute names, see Accessing Item Attributes
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
 	// in the Amazon DynamoDB Developer Guide.
-	ExpressionAttributeNames map[string]*string
+	ExpressionAttributeNames map[string]string
 
 	// A string that identifies one or more attributes to retrieve from the table.
 	// These attributes can include scalars, sets, or elements of a JSON document. The
@@ -1470,7 +1470,7 @@ type LocalSecondaryIndex struct {
 	// partition key physically close together, in sorted order by the sort key value.
 	//
 	// This member is required.
-	KeySchema []*KeySchemaElement
+	KeySchema []KeySchemaElement
 
 	// Represents attributes that are copied (projected) from the table into the local
 	// secondary index. These are in addition to the primary key attributes and index
@@ -1492,12 +1492,12 @@ type LocalSecondaryIndexDescription struct {
 	// The total size of the specified index, in bytes. DynamoDB updates this value
 	// approximately every six hours. Recent changes might not be reflected in this
 	// value.
-	IndexSizeBytes *int64
+	IndexSizeBytes int64
 
 	// The number of items in the specified index. DynamoDB updates this value
 	// approximately every six hours. Recent changes might not be reflected in this
 	// value.
-	ItemCount *int64
+	ItemCount int64
 
 	// The complete key schema for the local secondary index, consisting of one or more
 	// pairs of attribute names and key types:
@@ -1513,7 +1513,7 @@ type LocalSecondaryIndexDescription struct {
 	// values. The sort key of an item is also known as its range attribute. The term
 	// "range attribute" derives from the way DynamoDB stores items with the same
 	// partition key physically close together, in sorted order by the sort key value.
-	KeySchema []*KeySchemaElement
+	KeySchema []KeySchemaElement
 
 	// Represents attributes that are copied (projected) from the table into the global
 	// secondary index. These are in addition to the primary key attributes and index
@@ -1542,7 +1542,7 @@ type LocalSecondaryIndexInfo struct {
 	// values. The sort key of an item is also known as its range attribute. The term
 	// "range attribute" derives from the way DynamoDB stores items with the same
 	// partition key physically close together, in sorted order by the sort key value.
-	KeySchema []*KeySchemaElement
+	KeySchema []KeySchemaElement
 
 	// Represents attributes that are copied (projected) from the table into the global
 	// secondary index. These are in addition to the primary key attributes and index
@@ -1592,7 +1592,7 @@ type Projection struct {
 	// all of the local secondary indexes, must not exceed 20. If you project the same
 	// attribute into two different indexes, this counts as two distinct attributes
 	// when determining the total.
-	NonKeyAttributes []*string
+	NonKeyAttributes []string
 
 	// The set of attributes that are projected into the index:
 	//
@@ -1684,7 +1684,7 @@ type Put struct {
 	// the table, their types must match the index key schema.
 	//
 	// This member is required.
-	Item map[string]*AttributeValue
+	Item map[string]AttributeValue
 
 	// Name of the table in which to write the item.
 	//
@@ -1695,10 +1695,10 @@ type Put struct {
 	ConditionExpression *string
 
 	// One or more substitution tokens for attribute names in an expression.
-	ExpressionAttributeNames map[string]*string
+	ExpressionAttributeNames map[string]string
 
 	// One or more values that can be substituted in an expression.
-	ExpressionAttributeValues map[string]*AttributeValue
+	ExpressionAttributeValues map[string]AttributeValue
 
 	// Use ReturnValuesOnConditionCheckFailure to get the item attributes if the Put
 	// condition fails. For ReturnValuesOnConditionCheckFailure, the valid values are:
@@ -1716,7 +1716,7 @@ type PutRequest struct {
 	// for the table, their types must match the index key schema.
 	//
 	// This member is required.
-	Item map[string]*AttributeValue
+	Item map[string]AttributeValue
 }
 
 // Represents the properties of a replica.
@@ -1730,7 +1730,7 @@ type Replica struct {
 type ReplicaAutoScalingDescription struct {
 
 	// Replica-specific global secondary index auto scaling settings.
-	GlobalSecondaryIndexes []*ReplicaGlobalSecondaryIndexAutoScalingDescription
+	GlobalSecondaryIndexes []ReplicaGlobalSecondaryIndexAutoScalingDescription
 
 	// The Region where the replica exists.
 	RegionName *string
@@ -1767,7 +1767,7 @@ type ReplicaAutoScalingUpdate struct {
 
 	// Represents the auto scaling settings of global secondary indexes that will be
 	// modified.
-	ReplicaGlobalSecondaryIndexUpdates []*ReplicaGlobalSecondaryIndexAutoScalingUpdate
+	ReplicaGlobalSecondaryIndexUpdates []ReplicaGlobalSecondaryIndexAutoScalingUpdate
 
 	// Represents the auto scaling settings to be modified for a global table or global
 	// secondary index.
@@ -1778,7 +1778,7 @@ type ReplicaAutoScalingUpdate struct {
 type ReplicaDescription struct {
 
 	// Replica-specific global secondary index settings.
-	GlobalSecondaryIndexes []*ReplicaGlobalSecondaryIndexDescription
+	GlobalSecondaryIndexes []ReplicaGlobalSecondaryIndexDescription
 
 	// The AWS KMS customer master key (CMK) of the replica that will be used for AWS
 	// KMS encryption.
@@ -1956,7 +1956,7 @@ type ReplicaSettingsDescription struct {
 	ReplicaBillingModeSummary *BillingModeSummary
 
 	// Replica global secondary index settings for the global table.
-	ReplicaGlobalSecondaryIndexSettings []*ReplicaGlobalSecondaryIndexSettingsDescription
+	ReplicaGlobalSecondaryIndexSettings []ReplicaGlobalSecondaryIndexSettingsDescription
 
 	// Auto scaling settings for a global table replica's read capacity units.
 	ReplicaProvisionedReadCapacityAutoScalingSettings *AutoScalingSettingsDescription
@@ -2002,7 +2002,7 @@ type ReplicaSettingsUpdate struct {
 
 	// Represents the settings of a global secondary index for a global table that will
 	// be modified.
-	ReplicaGlobalSecondaryIndexSettingsUpdate []*ReplicaGlobalSecondaryIndexSettingsUpdate
+	ReplicaGlobalSecondaryIndexSettingsUpdate []ReplicaGlobalSecondaryIndexSettingsUpdate
 
 	// Auto scaling settings for managing a global table replica's read capacity units.
 	ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate *AutoScalingSettingsUpdate
@@ -2084,7 +2084,7 @@ type SourceTableDetails struct {
 	// Schema of the table.
 	//
 	// This member is required.
-	KeySchema []*KeySchemaElement
+	KeySchema []KeySchemaElement
 
 	// Read IOPs and Write IOPS on the table when the backup was created.
 	//
@@ -2124,7 +2124,7 @@ type SourceTableDetails struct {
 	TableArn *string
 
 	// Size of the table in bytes. Note that this is an approximate value.
-	TableSizeBytes *int64
+	TableSizeBytes int64
 }
 
 // Contains the details of the features enabled on the table when the backup was
@@ -2134,12 +2134,12 @@ type SourceTableFeatureDetails struct {
 	// Represents the GSI properties for the table when the backup was created. It
 	// includes the IndexName, KeySchema, Projection, and ProvisionedThroughput for the
 	// GSIs on the table at the time of backup.
-	GlobalSecondaryIndexes []*GlobalSecondaryIndexInfo
+	GlobalSecondaryIndexes []GlobalSecondaryIndexInfo
 
 	// Represents the LSI properties for the table when the backup was created. It
 	// includes the IndexName, KeySchema and Projection for the LSIs on the table at
 	// the time of backup.
-	LocalSecondaryIndexes []*LocalSecondaryIndexInfo
+	LocalSecondaryIndexes []LocalSecondaryIndexInfo
 
 	// The description of the server-side encryption status on the table when the
 	// backup was created.
@@ -2236,7 +2236,7 @@ type StreamSpecification struct {
 type TableAutoScalingDescription struct {
 
 	// Represents replicas of the global table.
-	Replicas []*ReplicaAutoScalingDescription
+	Replicas []ReplicaAutoScalingDescription
 
 	// The name of the table.
 	TableName *string
@@ -2269,7 +2269,7 @@ type TableDescription struct {
 	//
 	// *
 	// AttributeType - The data type for the attribute.
-	AttributeDefinitions []*AttributeDefinition
+	AttributeDefinitions []AttributeDefinition
 
 	// Contains the details for the read/write capacity mode.
 	BillingModeSummary *BillingModeSummary
@@ -2352,7 +2352,7 @@ type TableDescription struct {
 	//
 	// If the table is in the DELETING state, no
 	// information about indexes will be returned.
-	GlobalSecondaryIndexes []*GlobalSecondaryIndexDescription
+	GlobalSecondaryIndexes []GlobalSecondaryIndexDescription
 
 	// Represents the version of global tables
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html)
@@ -2362,7 +2362,7 @@ type TableDescription struct {
 	// The number of items in the specified table. DynamoDB updates this value
 	// approximately every six hours. Recent changes might not be reflected in this
 	// value.
-	ItemCount *int64
+	ItemCount int64
 
 	// The primary key structure for the table. Each KeySchemaElement consists of:
 	//
@@ -2388,7 +2388,7 @@ type TableDescription struct {
 	// primary keys, see Primary Key
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html#DataModelPrimaryKey)
 	// in the Amazon DynamoDB Developer Guide.
-	KeySchema []*KeySchemaElement
+	KeySchema []KeySchemaElement
 
 	// The Amazon Resource Name (ARN) that uniquely identifies the latest stream for
 	// this table.
@@ -2455,14 +2455,14 @@ type TableDescription struct {
 	//
 	// If the table is in the DELETING state, no information about indexes will
 	// be returned.
-	LocalSecondaryIndexes []*LocalSecondaryIndexDescription
+	LocalSecondaryIndexes []LocalSecondaryIndexDescription
 
 	// The provisioned throughput settings for the table, consisting of read and write
 	// capacity units, along with data about increases and decreases.
 	ProvisionedThroughput *ProvisionedThroughputDescription
 
 	// Represents replicas of the table.
-	Replicas []*ReplicaDescription
+	Replicas []ReplicaDescription
 
 	// Contains details for the restore.
 	RestoreSummary *RestoreSummary
@@ -2485,7 +2485,7 @@ type TableDescription struct {
 	// The total size of the specified table, in bytes. DynamoDB updates this value
 	// approximately every six hours. Recent changes might not be reflected in this
 	// value.
-	TableSizeBytes *int64
+	TableSizeBytes int64
 
 	// The current state of the table:
 	//
@@ -2599,7 +2599,7 @@ type Update struct {
 	// name and a value for that attribute.
 	//
 	// This member is required.
-	Key map[string]*AttributeValue
+	Key map[string]AttributeValue
 
 	// Name of the table for the UpdateItem request.
 	//
@@ -2616,10 +2616,10 @@ type Update struct {
 	ConditionExpression *string
 
 	// One or more substitution tokens for attribute names in an expression.
-	ExpressionAttributeNames map[string]*string
+	ExpressionAttributeNames map[string]string
 
 	// One or more values that can be substituted in an expression.
-	ExpressionAttributeValues map[string]*AttributeValue
+	ExpressionAttributeValues map[string]AttributeValue
 
 	// Use ReturnValuesOnConditionCheckFailure to get the item attributes if the Update
 	// condition fails. For ReturnValuesOnConditionCheckFailure, the valid values are:
@@ -2655,7 +2655,7 @@ type UpdateReplicationGroupMemberAction struct {
 	RegionName *string
 
 	// Replica-specific global secondary index settings.
-	GlobalSecondaryIndexes []*ReplicaGlobalSecondaryIndex
+	GlobalSecondaryIndexes []ReplicaGlobalSecondaryIndex
 
 	// The AWS KMS customer master key (CMK) of the replica that should be used for AWS
 	// KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN),

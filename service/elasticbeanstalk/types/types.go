@@ -16,7 +16,7 @@ type ApplicationDescription struct {
 	ApplicationName *string
 
 	// The names of the configuration templates associated with this application.
-	ConfigurationTemplates []*string
+	ConfigurationTemplates []string
 
 	// The date when the application was created.
 	DateCreated *time.Time
@@ -31,7 +31,7 @@ type ApplicationDescription struct {
 	ResourceLifecycleConfig *ApplicationResourceLifecycleConfig
 
 	// The names of the versions for this application.
-	Versions []*string
+	Versions []string
 }
 
 // Application request metrics for an AWS Elastic Beanstalk environment.
@@ -48,7 +48,7 @@ type ApplicationMetrics struct {
 
 	// Average number of requests handled by the web server per second over the last 10
 	// seconds.
-	RequestCount *int32
+	RequestCount int32
 
 	// Represents the percentage of requests over the last 10 seconds that resulted in
 	// each type of status code response.
@@ -260,7 +260,7 @@ type ConfigurationOptionDescription struct {
 	UserDefined *bool
 
 	// If specified, values for the configuration option are selected from this list.
-	ValueOptions []*string
+	ValueOptions []string
 
 	// An indication of which type of values this option has and whether it is
 	// allowable to select one or more than one of the possible values:
@@ -339,7 +339,7 @@ type ConfigurationSettingsDescription struct {
 	EnvironmentName *string
 
 	// A list of the configuration options and their values in this configuration set.
-	OptionSettings []*ConfigurationOptionSetting
+	OptionSettings []ConfigurationOptionSetting
 
 	// The ARN of the platform version.
 	PlatformArn *string
@@ -457,7 +457,7 @@ type EnvironmentDescription struct {
 	EnvironmentId *string
 
 	// A list of links to other environments in the same group.
-	EnvironmentLinks []*EnvironmentLink
+	EnvironmentLinks []EnvironmentLink
 
 	// The name of this environment.
 	EnvironmentName *string
@@ -569,28 +569,28 @@ type EnvironmentLink struct {
 type EnvironmentResourceDescription struct {
 
 	// The AutoScalingGroups used by this environment.
-	AutoScalingGroups []*AutoScalingGroup
+	AutoScalingGroups []AutoScalingGroup
 
 	// The name of the environment.
 	EnvironmentName *string
 
 	// The Amazon EC2 instances used by this environment.
-	Instances []*Instance
+	Instances []Instance
 
 	// The Auto Scaling launch configurations in use by this environment.
-	LaunchConfigurations []*LaunchConfiguration
+	LaunchConfigurations []LaunchConfiguration
 
 	// The Amazon EC2 launch templates in use by this environment.
-	LaunchTemplates []*LaunchTemplate
+	LaunchTemplates []LaunchTemplate
 
 	// The LoadBalancers in use by this environment.
-	LoadBalancers []*LoadBalancer
+	LoadBalancers []LoadBalancer
 
 	// The queues used by this environment.
-	Queues []*Queue
+	Queues []Queue
 
 	// The AutoScaling triggers in use by this environment.
-	Triggers []*Trigger
+	Triggers []Trigger
 }
 
 // Describes the AWS resources in use by this environment. This data is not live
@@ -756,7 +756,7 @@ type LaunchTemplate struct {
 type Listener struct {
 
 	// The port that is used by the Listener.
-	Port *int32
+	Port int32
 
 	// The protocol that is used by the Listener.
 	Protocol *string
@@ -776,7 +776,7 @@ type LoadBalancerDescription struct {
 	Domain *string
 
 	// A list of Listeners used by the LoadBalancer.
-	Listeners []*Listener
+	Listeners []Listener
 
 	// The name of the LoadBalancer.
 	LoadBalancerName *string
@@ -900,7 +900,7 @@ type PlatformBranchSummary struct {
 	// added to a platform. This can be helpful, for example, if your code calls the
 	// ListPlatformBranches action and then displays a list of platform branches. A
 	// larger BranchOrder value designates a newer platform branch within the platform.
-	BranchOrder *int32
+	BranchOrder int32
 
 	// The support life cycle state of the platform branch. Possible values: beta |
 	// supported | deprecated | retired
@@ -911,14 +911,14 @@ type PlatformBranchSummary struct {
 
 	// The environment tiers that platform versions in this branch support. Possible
 	// values: WebServer/Standard | Worker/SQS/HTTP
-	SupportedTierList []*string
+	SupportedTierList []string
 }
 
 // Detailed information about a platform version.
 type PlatformDescription struct {
 
 	// The custom AMIs supported by the platform version.
-	CustomAmiList []*CustomAmi
+	CustomAmiList []CustomAmi
 
 	// The date when the platform version was created.
 	DateCreated *time.Time
@@ -930,7 +930,7 @@ type PlatformDescription struct {
 	Description *string
 
 	// The frameworks supported by the platform version.
-	Frameworks []*PlatformFramework
+	Frameworks []PlatformFramework
 
 	// Information about the maintainer of the platform version.
 	Maintainer *string
@@ -973,16 +973,16 @@ type PlatformDescription struct {
 	PlatformVersion *string
 
 	// The programming languages supported by the platform version.
-	ProgrammingLanguages []*PlatformProgrammingLanguage
+	ProgrammingLanguages []PlatformProgrammingLanguage
 
 	// The name of the solution stack used by the platform version.
 	SolutionStackName *string
 
 	// The additions supported by the platform version.
-	SupportedAddonList []*string
+	SupportedAddonList []string
 
 	// The tiers supported by the platform version.
-	SupportedTierList []*string
+	SupportedTierList []string
 }
 
 // Describes criteria to restrict the results when listing platform versions. The
@@ -1013,7 +1013,7 @@ type PlatformFilter struct {
 	//
 	// * SupportedAddon: Log/S3 |
 	// Monitoring/Healthd | WorkerDaemon/SQSD
-	Values []*string
+	Values []string
 }
 
 // A framework supported by the platform.
@@ -1074,10 +1074,10 @@ type PlatformSummary struct {
 	PlatformVersion *string
 
 	// The additions associated with the platform version.
-	SupportedAddonList []*string
+	SupportedAddonList []string
 
 	// The tiers in which the platform version runs.
-	SupportedTierList []*string
+	SupportedTierList []string
 }
 
 // Describes a queue.
@@ -1150,7 +1150,7 @@ type SearchFilter struct {
 
 	// The list of values applied to the Attribute and Operator attributes. Number of
 	// values and valid values vary by Attribute.
-	Values []*string
+	Values []string
 }
 
 // Detailed health information about an Amazon EC2 instance in your Elastic
@@ -1165,7 +1165,7 @@ type SingleInstanceHealth struct {
 
 	// Represents the causes, which provide more information about the current health
 	// status.
-	Causes []*string
+	Causes []string
 
 	// Represents the color indicator that gives you information about the health of
 	// the EC2 instance. For more information, see Health Colors and Statuses
@@ -1197,7 +1197,7 @@ type SingleInstanceHealth struct {
 type SolutionStackDescription struct {
 
 	// The permitted file types allowed for a solution stack.
-	PermittedFileTypes []*string
+	PermittedFileTypes []string
 
 	// The name of the solution stack.
 	SolutionStackName *string
@@ -1280,7 +1280,7 @@ type SystemStatus struct {
 	// Load average in the last 1-minute, 5-minute, and 15-minute periods. For more
 	// information, see Operating System Metrics
 	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-metrics.html#health-enhanced-metrics-os).
-	LoadAverage []*float64
+	LoadAverage []float64
 }
 
 // Describes a tag applied to a resource in an environment.

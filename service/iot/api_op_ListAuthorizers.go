@@ -30,7 +30,7 @@ func (c *Client) ListAuthorizers(ctx context.Context, params *ListAuthorizersInp
 type ListAuthorizersInput struct {
 
 	// Return the list of authorizers in ascending alphabetical order.
-	AscendingOrder *bool
+	AscendingOrder bool
 
 	// A marker used to get the next set of results.
 	Marker *string
@@ -45,7 +45,7 @@ type ListAuthorizersInput struct {
 type ListAuthorizersOutput struct {
 
 	// The authorizers.
-	Authorizers []*types.AuthorizerSummary
+	Authorizers []types.AuthorizerSummary
 
 	// A marker used to get the next set of results.
 	NextMarker *string

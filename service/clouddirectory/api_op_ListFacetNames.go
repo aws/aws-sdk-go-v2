@@ -43,7 +43,7 @@ type ListFacetNamesInput struct {
 type ListFacetNamesOutput struct {
 
 	// The names of facets that exist within the schema.
-	FacetNames []*string
+	FacetNames []string
 
 	// The pagination token.
 	NextToken *string

@@ -38,7 +38,7 @@ type CreateLoadBalancerListenersInput struct {
 	// The listeners.
 	//
 	// This member is required.
-	Listeners []*types.Listener
+	Listeners []types.Listener
 
 	// The name of the load balancer.
 	//

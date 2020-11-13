@@ -2445,9 +2445,6 @@ func validateAuroraParameters(v *types.AuroraParameters) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AuroraParameters"}
-	if v.Port == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Port"))
-	}
 	if v.Database == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Database"))
 	}
@@ -2471,9 +2468,6 @@ func validateAuroraPostgreSqlParameters(v *types.AuroraPostgreSqlParameters) err
 	}
 	if v.Database == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Database"))
-	}
-	if v.Port == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Port"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2518,13 +2512,13 @@ func validateCalculatedColumn(v *types.CalculatedColumn) error {
 	}
 }
 
-func validateCalculatedColumnList(v []*types.CalculatedColumn) error {
+func validateCalculatedColumnList(v []types.CalculatedColumn) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CalculatedColumnList"}
 	for i := range v {
-		if err := validateCalculatedColumn(v[i]); err != nil {
+		if err := validateCalculatedColumn(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2570,13 +2564,13 @@ func validateColumnGroup(v *types.ColumnGroup) error {
 	}
 }
 
-func validateColumnGroupList(v []*types.ColumnGroup) error {
+func validateColumnGroupList(v []types.ColumnGroup) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ColumnGroupList"}
 	for i := range v {
-		if err := validateColumnGroup(v[i]); err != nil {
+		if err := validateColumnGroup(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2670,13 +2664,13 @@ func validateDashboardSearchFilter(v *types.DashboardSearchFilter) error {
 	}
 }
 
-func validateDashboardSearchFilterList(v []*types.DashboardSearchFilter) error {
+func validateDashboardSearchFilterList(v []types.DashboardSearchFilter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DashboardSearchFilterList"}
 	for i := range v {
-		if err := validateDashboardSearchFilter(v[i]); err != nil {
+		if err := validateDashboardSearchFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2744,13 +2738,13 @@ func validateDataSetReference(v *types.DataSetReference) error {
 	}
 }
 
-func validateDataSetReferenceList(v []*types.DataSetReference) error {
+func validateDataSetReferenceList(v []types.DataSetReference) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DataSetReferenceList"}
 	for i := range v {
-		if err := validateDataSetReference(v[i]); err != nil {
+		if err := validateDataSetReference(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2880,13 +2874,13 @@ func validateDataSourceParameters(v *types.DataSourceParameters) error {
 	}
 }
 
-func validateDataSourceParametersList(v []*types.DataSourceParameters) error {
+func validateDataSourceParametersList(v []types.DataSourceParameters) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DataSourceParametersList"}
 	for i := range v {
-		if err := validateDataSourceParameters(v[i]); err != nil {
+		if err := validateDataSourceParameters(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2915,13 +2909,13 @@ func validateDateTimeParameter(v *types.DateTimeParameter) error {
 	}
 }
 
-func validateDateTimeParameterList(v []*types.DateTimeParameter) error {
+func validateDateTimeParameterList(v []types.DateTimeParameter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DateTimeParameterList"}
 	for i := range v {
-		if err := validateDateTimeParameter(v[i]); err != nil {
+		if err := validateDateTimeParameter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2950,13 +2944,13 @@ func validateDecimalParameter(v *types.DecimalParameter) error {
 	}
 }
 
-func validateDecimalParameterList(v []*types.DecimalParameter) error {
+func validateDecimalParameterList(v []types.DecimalParameter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DecimalParameterList"}
 	for i := range v {
-		if err := validateDecimalParameter(v[i]); err != nil {
+		if err := validateDecimalParameter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3021,13 +3015,13 @@ func validateInputColumn(v *types.InputColumn) error {
 	}
 }
 
-func validateInputColumnList(v []*types.InputColumn) error {
+func validateInputColumnList(v []types.InputColumn) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InputColumnList"}
 	for i := range v {
-		if err := validateInputColumn(v[i]); err != nil {
+		if err := validateInputColumn(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3056,13 +3050,13 @@ func validateIntegerParameter(v *types.IntegerParameter) error {
 	}
 }
 
-func validateIntegerParameterList(v []*types.IntegerParameter) error {
+func validateIntegerParameterList(v []types.IntegerParameter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "IntegerParameterList"}
 	for i := range v {
-		if err := validateIntegerParameter(v[i]); err != nil {
+		if err := validateIntegerParameter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3139,13 +3133,14 @@ func validateLogicalTable(v *types.LogicalTable) error {
 	}
 }
 
-func validateLogicalTableMap(v map[string]*types.LogicalTable) error {
+func validateLogicalTableMap(v map[string]types.LogicalTable) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LogicalTableMap"}
 	for key := range v {
-		if err := validateLogicalTable(v[key]); err != nil {
+		value := v[key]
+		if err := validateLogicalTable(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3202,9 +3197,6 @@ func validateMariaDbParameters(v *types.MariaDbParameters) error {
 	if v.Host == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Host"))
 	}
-	if v.Port == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Port"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3217,9 +3209,6 @@ func validateMySqlParameters(v *types.MySqlParameters) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MySqlParameters"}
-	if v.Port == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Port"))
-	}
 	if v.Host == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Host"))
 	}
@@ -3292,13 +3281,14 @@ func validatePhysicalTable(v *types.PhysicalTable) error {
 	}
 }
 
-func validatePhysicalTableMap(v map[string]*types.PhysicalTable) error {
+func validatePhysicalTableMap(v map[string]types.PhysicalTable) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PhysicalTableMap"}
 	for key := range v {
-		if err := validatePhysicalTable(v[key]); err != nil {
+		value := v[key]
+		if err := validatePhysicalTable(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3320,9 +3310,6 @@ func validatePostgreSqlParameters(v *types.PostgreSqlParameters) error {
 	if v.Host == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Host"))
 	}
-	if v.Port == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Port"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3335,9 +3322,6 @@ func validatePrestoParameters(v *types.PrestoParameters) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PrestoParameters"}
-	if v.Port == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Port"))
-	}
 	if v.Catalog == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
 	}
@@ -3460,13 +3444,13 @@ func validateResourcePermission(v *types.ResourcePermission) error {
 	}
 }
 
-func validateResourcePermissionList(v []*types.ResourcePermission) error {
+func validateResourcePermissionList(v []types.ResourcePermission) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResourcePermissionList"}
 	for i := range v {
-		if err := validateResourcePermission(v[i]); err != nil {
+		if err := validateResourcePermission(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3577,9 +3561,6 @@ func validateSparkParameters(v *types.SparkParameters) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SparkParameters"}
-	if v.Port == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Port"))
-	}
 	if v.Host == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Host"))
 	}
@@ -3600,9 +3581,6 @@ func validateSqlServerParameters(v *types.SqlServerParameters) error {
 	}
 	if v.Database == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Database"))
-	}
-	if v.Port == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Port"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3629,13 +3607,13 @@ func validateStringParameter(v *types.StringParameter) error {
 	}
 }
 
-func validateStringParameterList(v []*types.StringParameter) error {
+func validateStringParameterList(v []types.StringParameter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StringParameterList"}
 	for i := range v {
-		if err := validateStringParameter(v[i]); err != nil {
+		if err := validateStringParameter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3682,13 +3660,13 @@ func validateTagColumnOperation(v *types.TagColumnOperation) error {
 	}
 }
 
-func validateTagList(v []*types.Tag) error {
+func validateTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3766,9 +3744,6 @@ func validateTeradataParameters(v *types.TeradataParameters) error {
 	if v.Database == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Database"))
 	}
-	if v.Port == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Port"))
-	}
 	if v.Host == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Host"))
 	}
@@ -3821,13 +3796,13 @@ func validateTransformOperation(v *types.TransformOperation) error {
 	}
 }
 
-func validateTransformOperationList(v []*types.TransformOperation) error {
+func validateTransformOperationList(v []types.TransformOperation) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TransformOperationList"}
 	for i := range v {
-		if err := validateTransformOperation(v[i]); err != nil {
+		if err := validateTransformOperation(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3846,9 +3821,6 @@ func validateTwitterParameters(v *types.TwitterParameters) error {
 	if v.Query == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Query"))
 	}
-	if v.MaxRows == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MaxRows"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3856,13 +3828,13 @@ func validateTwitterParameters(v *types.TwitterParameters) error {
 	}
 }
 
-func validateUpdateResourcePermissionList(v []*types.ResourcePermission) error {
+func validateUpdateResourcePermissionList(v []types.ResourcePermission) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateResourcePermissionList"}
 	for i := range v {
-		if err := validateResourcePermission(v[i]); err != nil {
+		if err := validateResourcePermission(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

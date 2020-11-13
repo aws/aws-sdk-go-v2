@@ -51,7 +51,7 @@ type GetMaintenanceWindowExecutionOutput struct {
 	StatusDetails *string
 
 	// The ID of the task executions from the maintenance window execution.
-	TaskIds []*string
+	TaskIds []string
 
 	// The ID of the maintenance window execution.
 	WindowExecutionId *string

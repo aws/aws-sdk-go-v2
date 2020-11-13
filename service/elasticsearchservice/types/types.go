@@ -47,7 +47,7 @@ type AdditionalLimit struct {
 	LimitName *string
 
 	// Value for given AdditionalLimit$LimitName .
-	LimitValues []*string
+	LimitValues []string
 }
 
 // Status of the advanced options for the specified Elasticsearch domain.
@@ -71,7 +71,7 @@ type AdvancedOptionsStatus struct {
 	// Specifies the status of advanced options for the specified Elasticsearch domain.
 	//
 	// This member is required.
-	Options map[string]*string
+	Options map[string]string
 
 	// Specifies the status of OptionStatus for advanced options for the specified
 	// Elasticsearch domain.
@@ -165,7 +165,7 @@ type CompatibleVersionsMap struct {
 	SourceVersion *string
 
 	// List of supported elastic search versions.
-	TargetVersions []*string
+	TargetVersions []string
 }
 
 // Filter to apply in DescribePackage response.
@@ -175,7 +175,7 @@ type DescribePackagesFilter struct {
 	Name DescribePackagesFilterName
 
 	// A list of values for the specified field.
-	Value []*string
+	Value []string
 }
 
 // Options to configure endpoint for the Elasticsearch domain.
@@ -436,7 +436,7 @@ type ElasticsearchDomainStatus struct {
 	AccessPolicies *string
 
 	// Specifies the status of the AdvancedOptions
-	AdvancedOptions map[string]*string
+	AdvancedOptions map[string]string
 
 	// The current status of the Elasticsearch domain's advanced security options.
 	AdvancedSecurityOptions *AdvancedSecurityOptions
@@ -476,10 +476,10 @@ type ElasticsearchDomainStatus struct {
 	// Map containing the Elasticsearch domain endpoints used to submit index and
 	// search requests. Example key, value:
 	// 'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com'.
-	Endpoints map[string]*string
+	Endpoints map[string]string
 
 	// Log publishing options for the given domain.
-	LogPublishingOptions map[string]*LogPublishingOption
+	LogPublishingOptions map[string]LogPublishingOption
 
 	// Specifies the status of the NodeToNodeEncryptionOptions.
 	NodeToNodeEncryptionOptions *NodeToNodeEncryptionOptions
@@ -563,7 +563,7 @@ type Filter struct {
 	Name *string
 
 	// Contains one or more values for the filter.
-	Values []*string
+	Values []string
 }
 
 // Specifies details of an inbound connection.
@@ -616,10 +616,10 @@ type InboundCrossClusterSearchConnectionStatus struct {
 type InstanceCountLimits struct {
 
 	// Maximum number of Instances that can be instantiated for given InstanceType.
-	MaximumInstanceCount *int32
+	MaximumInstanceCount int32
 
 	// Minimum number of Instances that can be instantiated for given InstanceType.
-	MinimumInstanceCount *int32
+	MinimumInstanceCount int32
 }
 
 // InstanceLimits represents the list of instance related attributes that are
@@ -639,7 +639,7 @@ type Limits struct {
 
 	// List of additional limits that are specific to a given InstanceType and for each
 	// of it's InstanceRole .
-	AdditionalLimits []*AdditionalLimit
+	AdditionalLimits []AdditionalLimit
 
 	// InstanceLimits represents the list of instance related attributes that are
 	// available for given InstanceType.
@@ -647,7 +647,7 @@ type Limits struct {
 
 	// StorageType represents the list of storage related types and attributes that are
 	// available for given InstanceType.
-	StorageTypes []*StorageType
+	StorageTypes []StorageType
 }
 
 // Log Publishing option that is set for given domain.
@@ -673,7 +673,7 @@ type LogPublishingOption struct {
 type LogPublishingOptionsStatus struct {
 
 	// The log publishing options configured for the Elasticsearch domain.
-	Options map[string]*LogPublishingOption
+	Options map[string]LogPublishingOption
 
 	// The status of the log publishing options for the Elasticsearch domain. See
 	// OptionStatus for the status information that's included.
@@ -741,7 +741,7 @@ type OptionStatus struct {
 	PendingDeletion *bool
 
 	// Specifies the latest version for the entity.
-	UpdateVersion *int32
+	UpdateVersion int32
 }
 
 // Specifies details of an outbound connection.
@@ -852,10 +852,10 @@ type ReservedElasticsearchInstance struct {
 	CurrencyCode *string
 
 	// The duration, in seconds, for which the Elasticsearch instance is reserved.
-	Duration *int32
+	Duration int32
 
 	// The number of Elasticsearch instances that have been reserved.
-	ElasticsearchInstanceCount *int32
+	ElasticsearchInstanceCount int32
 
 	// The Elasticsearch instance type offered by the reserved instance offering.
 	ElasticsearchInstanceType ESPartitionInstanceType
@@ -869,7 +869,7 @@ type ReservedElasticsearchInstance struct {
 
 	// The charge to your account regardless of whether you are creating any domains
 	// using the instance offering.
-	RecurringCharges []*RecurringCharge
+	RecurringCharges []RecurringCharge
 
 	// The customer-specified identifier to track this reservation.
 	ReservationName *string
@@ -899,7 +899,7 @@ type ReservedElasticsearchInstanceOffering struct {
 
 	// The duration, in seconds, for which the offering will reserve the Elasticsearch
 	// instance.
-	Duration *int32
+	Duration int32
 
 	// The Elasticsearch instance type offered by the reserved instance offering.
 	ElasticsearchInstanceType ESPartitionInstanceType
@@ -913,7 +913,7 @@ type ReservedElasticsearchInstanceOffering struct {
 
 	// The charge to your account regardless of whether you are creating any domains
 	// using the instance offering.
-	RecurringCharges []*RecurringCharge
+	RecurringCharges []RecurringCharge
 
 	// The Elasticsearch reserved instance offering identifier.
 	ReservedElasticsearchInstanceOfferingId *string
@@ -998,7 +998,7 @@ type StorageType struct {
 	StorageSubTypeName *string
 
 	// List of limits that are applicable for given storage type.
-	StorageTypeLimits []*StorageTypeLimit
+	StorageTypeLimits []StorageTypeLimit
 
 	// Type of the storage. List of available storage options:
 	//
@@ -1035,7 +1035,7 @@ type StorageTypeLimit struct {
 	LimitName *string
 
 	// Values for the StorageTypeLimit$LimitName .
-	LimitValues []*string
+	LimitValues []string
 }
 
 // Specifies a key value pair for a resource tag.
@@ -1065,7 +1065,7 @@ type UpgradeHistory struct {
 
 	// A list of UpgradeStepItem s representing information about each step performed
 	// as pard of a specific Upgrade or Upgrade Eligibility Check.
-	StepsList []*UpgradeStepItem
+	StepsList []UpgradeStepItem
 
 	// A string that describes the update briefly
 	UpgradeName *string
@@ -1088,7 +1088,7 @@ type UpgradeStepItem struct {
 
 	// A list of strings containing detailed information about the errors encountered
 	// in a particular step.
-	Issues []*string
+	Issues []string
 
 	// The Floating point value representing progress percentage of a particular step.
 	ProgressPercent *float64
@@ -1124,13 +1124,13 @@ type VPCDerivedInfo struct {
 
 	// The availability zones for the Elasticsearch domain. Exists only if the domain
 	// was created with VPCOptions.
-	AvailabilityZones []*string
+	AvailabilityZones []string
 
 	// Specifies the security groups for VPC endpoint.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// Specifies the subnets for VPC endpoint.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// The VPC Id for the Elasticsearch domain. Exists only if the domain was created
 	// with VPCOptions.
@@ -1157,10 +1157,10 @@ type VPCDerivedInfoStatus struct {
 type VPCOptions struct {
 
 	// Specifies the security groups for VPC endpoint.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// Specifies the subnets for VPC endpoint.
-	SubnetIds []*string
+	SubnetIds []string
 }
 
 // Specifies the zone awareness configuration for the domain cluster, such as the

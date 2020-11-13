@@ -65,13 +65,13 @@ type CreateClusterInput struct {
 	// recommends that you have at least two read replicas per cluster.
 	//
 	// This member is required.
-	ReplicationFactor *int32
+	ReplicationFactor int32
 
 	// The Availability Zones (AZs) in which the cluster nodes will reside after the
 	// cluster has been created or updated. If provided, the length of this list must
 	// equal the ReplicationFactor parameter. If you omit this parameter, DAX will
 	// spread the nodes across Availability Zones for the highest availability.
-	AvailabilityZones []*string
+	AvailabilityZones []string
 
 	// A description of the cluster.
 	Description *string
@@ -114,7 +114,7 @@ type CreateClusterInput struct {
 	// A list of security group IDs to be assigned to each node in the DAX cluster.
 	// (Each of the security group ID is system-generated.) If this parameter is not
 	// specified, DAX assigns the default VPC security group to each node.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// The name of the subnet group to be used for the replication group. DAX clusters
 	// can only run in an Amazon VPC environment. All of the subnets that you specify
@@ -122,7 +122,7 @@ type CreateClusterInput struct {
 	SubnetGroupName *string
 
 	// A set of tags to associate with the DAX cluster.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateClusterOutput struct {

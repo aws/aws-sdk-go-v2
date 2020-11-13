@@ -19,7 +19,7 @@ type BatchResultErrorEntry struct {
 	// Specifies whether the error happened due to the caller of the batch API action.
 	//
 	// This member is required.
-	SenderFault *bool
+	SenderFault bool
 
 	// A message explaining why the action failed on this entry.
 	Message *string
@@ -52,7 +52,7 @@ type ChangeMessageVisibilityBatchRequestEntry struct {
 	ReceiptHandle *string
 
 	// The new value (in seconds) for the message's visibility timeout.
-	VisibilityTimeout *int32
+	VisibilityTimeout int32
 }
 
 // Encloses the Id of an entry in ChangeMessageVisibilityBatch.
@@ -115,7 +115,7 @@ type Message struct {
 	// ApproximateFirstReceiveTimestamp
 	// and SentTimestamp are each returned as an integer representing the epoch time
 	// (http://en.wikipedia.org/wiki/Unix_time) in milliseconds.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// The message's contents (not URL-encoded).
 	Body *string
@@ -133,7 +133,7 @@ type Message struct {
 	// information, see Amazon SQS Message Attributes
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes)
 	// in the Amazon Simple Queue Service Developer Guide.
-	MessageAttributes map[string]*MessageAttributeValue
+	MessageAttributes map[string]MessageAttributeValue
 
 	// A unique identifier for the message. A MessageIdis considered unique across all
 	// AWS accounts for an extended period of time.
@@ -169,7 +169,7 @@ type MessageAttributeValue struct {
 	BinaryValue []byte
 
 	// Not implemented. Reserved for future use.
-	StringListValues []*string
+	StringListValues []string
 
 	// Strings are Unicode with UTF-8 binary encoding. For a list of code values, see
 	// ASCII Printable Characters
@@ -200,7 +200,7 @@ type MessageSystemAttributeValue struct {
 	BinaryValue []byte
 
 	// Not implemented. Reserved for future use.
-	StringListValues []*string
+	StringListValues []string
 
 	// Strings are Unicode with UTF-8 binary encoding. For a list of code values, see
 	// ASCII Printable Characters
@@ -230,13 +230,13 @@ type SendMessageBatchRequestEntry struct {
 	// don't specify a value, the default value for the queue is applied. When you set
 	// FifoQueue, you can't set DelaySeconds per message. You can set this parameter
 	// only on a queue level.
-	DelaySeconds *int32
+	DelaySeconds int32
 
 	// Each message attribute consists of a Name, Type, and Value. For more
 	// information, see Amazon SQS Message Attributes
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes)
 	// in the Amazon Simple Queue Service Developer Guide.
-	MessageAttributes map[string]*MessageAttributeValue
+	MessageAttributes map[string]MessageAttributeValue
 
 	// This parameter applies only to FIFO (first-in-first-out) queues. The token used
 	// for deduplication of messages within a 5-minute minimum deduplication interval.
@@ -325,7 +325,7 @@ type SendMessageBatchRequestEntry struct {
 	//
 	// * The size of a message system
 	// attribute doesn't count towards the total size of a message.
-	MessageSystemAttributes map[string]*MessageSystemAttributeValue
+	MessageSystemAttributes map[string]MessageSystemAttributeValue
 }
 
 // Encloses a MessageId for a successfully-enqueued message in a SendMessageBatch.

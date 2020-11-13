@@ -42,7 +42,7 @@ type CreateFacetInput struct {
 	SchemaArn *string
 
 	// The attributes that are associated with the Facet.
-	Attributes []*types.FacetAttribute
+	Attributes []types.FacetAttribute
 
 	// There are two different styles that you can define on any given facet, Static
 	// and Dynamic. For static facets, all attributes must be defined in the schema.

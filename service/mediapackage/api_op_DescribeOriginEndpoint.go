@@ -76,21 +76,21 @@ type DescribeOriginEndpointOutput struct {
 
 	// Maximum duration (seconds) of content to retain for startover playback. If not
 	// specified, startover playback will be disabled for the OriginEndpoint.
-	StartoverWindowSeconds *int32
+	StartoverWindowSeconds int32
 
 	// A collection of tags associated with a resource
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Amount of delay (seconds) to enforce on the playback of live content. If not
 	// specified, there will be no time delay in effect for the OriginEndpoint.
-	TimeDelaySeconds *int32
+	TimeDelaySeconds int32
 
 	// The URL of the packaged OriginEndpoint for consumption.
 	Url *string
 
 	// A list of source IP CIDR blocks that will be allowed to access the
 	// OriginEndpoint.
-	Whitelist []*string
+	Whitelist []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

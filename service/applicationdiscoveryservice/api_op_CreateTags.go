@@ -34,14 +34,14 @@ type CreateTagsInput struct {
 	// A list of configuration items that you want to tag.
 	//
 	// This member is required.
-	ConfigurationIds []*string
+	ConfigurationIds []string
 
 	// Tags that you want to associate with one or more configuration items. Specify
 	// the tags that you want to create in a key-value format. For example: {"key":
 	// "serverType", "value": "webServer"}
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateTagsOutput struct {

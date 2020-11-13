@@ -61,7 +61,7 @@ type CreateDataSourceInput struct {
 	DataSourceParameters *types.DataSourceParameters
 
 	// A list of resource permissions on the data source.
-	Permissions []*types.ResourcePermission
+	Permissions []types.ResourcePermission
 
 	// Secure Socket Layer (SSL) properties that apply when QuickSight connects to your
 	// underlying source.
@@ -69,7 +69,7 @@ type CreateDataSourceInput struct {
 
 	// Contains a map of the key-value pairs for the resource tag or tags assigned to
 	// the data source.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Use this parameter only when you want QuickSight to use a VPC connection when
 	// connecting to your underlying source.
@@ -92,7 +92,7 @@ type CreateDataSourceOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -78,7 +78,7 @@ type ListChildrenInput struct {
 type ListChildrenOutput struct {
 
 	// The list of children of the specified parent container.
-	Children []*types.Child
+	Children []types.Child
 
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a

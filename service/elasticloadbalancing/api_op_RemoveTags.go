@@ -34,12 +34,12 @@ type RemoveTagsInput struct {
 	// name.
 	//
 	// This member is required.
-	LoadBalancerNames []*string
+	LoadBalancerNames []string
 
 	// The list of tag keys to remove.
 	//
 	// This member is required.
-	Tags []*types.TagKeyOnly
+	Tags []types.TagKeyOnly
 }
 
 // Contains the output of RemoveTags.

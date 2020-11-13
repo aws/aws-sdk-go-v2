@@ -32,7 +32,7 @@ type CreateCustomMetadataInput struct {
 	// Custom metadata in the form of name-value pairs.
 	//
 	// This member is required.
-	CustomMetadata map[string]*string
+	CustomMetadata map[string]string
 
 	// The ID of the resource.
 	//

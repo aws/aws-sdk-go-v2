@@ -58,7 +58,7 @@ type ListAccountAssignmentsInput struct {
 type ListAccountAssignmentsOutput struct {
 
 	// The list of assignments that match the input AWS account and permission set.
-	AccountAssignments []*types.AccountAssignment
+	AccountAssignments []types.AccountAssignment
 
 	// The pagination token for the list API. Initially the value is null. Use the
 	// output of previous API calls to make subsequent calls.

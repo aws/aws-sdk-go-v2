@@ -69,7 +69,7 @@ type DescribeSigningJobOutput struct {
 
 	// Map of user-assigned key-value pairs used during signing. These values contain
 	// any information that you specified for use in your signing job.
-	SigningParameters map[string]*string
+	SigningParameters map[string]string
 
 	// The object that contains the name of your S3 bucket or your raw code.
 	Source *types.Source

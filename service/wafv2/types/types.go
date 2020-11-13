@@ -37,7 +37,7 @@ type AndStatement struct {
 	// nested.
 	//
 	// This member is required.
-	Statements []*Statement
+	Statements []Statement
 }
 
 // This is the latest version of AWS WAF, named AWS WAFV2, released in November,
@@ -138,7 +138,7 @@ type ByteMatchStatement struct {
 	// lowest priority setting, before inspecting the content for a match.
 	//
 	// This member is required.
-	TextTransformations []*TextTransformation
+	TextTransformations []TextTransformation
 }
 
 // This is the latest version of AWS WAF, named AWS WAFV2, released in November,
@@ -270,7 +270,7 @@ type FirewallManagerRuleGroup struct {
 	// consecutive, but they must all be different.
 	//
 	// This member is required.
-	Priority *int32
+	Priority int32
 
 	// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
 	// 2019. For information, including how to migrate your AWS WAF resources from the
@@ -408,7 +408,7 @@ type HTTPRequest struct {
 
 	// A complex type that contains the name and value for each header in the sampled
 	// web request.
-	Headers []*HTTPHeader
+	Headers []HTTPHeader
 
 	// The HTTP method specified in the sampled web request.
 	Method *string
@@ -463,7 +463,7 @@ type IPSet struct {
 	// (https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing).
 	//
 	// This member is required.
-	Addresses []*string
+	Addresses []string
 
 	// Specify IPV4 or IPV6.
 	//
@@ -613,7 +613,7 @@ type LoggingConfiguration struct {
 	// associate with the web ACL.
 	//
 	// This member is required.
-	LogDestinationConfigs []*string
+	LogDestinationConfigs []string
 
 	// The Amazon Resource Name (ARN) of the web ACL that you want to associate with
 	// LogDestinationConfigs.
@@ -624,12 +624,12 @@ type LoggingConfiguration struct {
 	// Indicates whether the logging configuration was created by AWS Firewall Manager,
 	// as part of an AWS WAF policy configuration. If true, only Firewall Manager can
 	// modify or delete the configuration.
-	ManagedByFirewallManager *bool
+	ManagedByFirewallManager bool
 
 	// The parts of the request that you want to keep out of the logs. For example, if
 	// you redact the HEADER field, the HEADER field in the firehose will be xxx. You
 	// must use one of the following values: URI, QUERY_STRING, HEADER, or METHOD.
-	RedactedFields []*FieldToMatch
+	RedactedFields []FieldToMatch
 }
 
 // This is the latest version of AWS WAF, named AWS WAFV2, released in November,
@@ -659,7 +659,7 @@ type ManagedRuleGroupStatement struct {
 	// The rules whose actions are set to COUNT by the web ACL, regardless of the
 	// action that is set on the rule. This effectively excludes the rule from acting
 	// on web requests.
-	ExcludedRules []*ExcludedRule
+	ExcludedRules []ExcludedRule
 }
 
 // This is the latest version of AWS WAF, named AWS WAFV2, released in November,
@@ -734,7 +734,7 @@ type OrStatement struct {
 	// nested.
 	//
 	// This member is required.
-	Statements []*Statement
+	Statements []Statement
 }
 
 // The override action to apply to the rules in a rule group. Used only for rule
@@ -819,7 +819,7 @@ type RateBasedStatement struct {
 	// the requests that match the statement.
 	//
 	// This member is required.
-	Limit *int64
+	Limit int64
 
 	// The configuration for inspecting IP addresses in an HTTP header that you
 	// specify, instead of using the IP address that's reported by the web request
@@ -843,7 +843,7 @@ type RateBasedStatement struct {
 type RateBasedStatementManagedKeysIPSet struct {
 
 	// The IP addresses that are currently blocked.
-	Addresses []*string
+	Addresses []string
 
 	IPAddressVersion IPAddressVersion
 }
@@ -883,7 +883,7 @@ type RegexPatternSet struct {
 	Name *string
 
 	// The regular expression patterns in the set.
-	RegularExpressionList []*Regex
+	RegularExpressionList []Regex
 }
 
 // This is the latest version of AWS WAF, named AWS WAFV2, released in November,
@@ -920,7 +920,7 @@ type RegexPatternSetReferenceStatement struct {
 	// lowest priority setting, before inspecting the content for a match.
 	//
 	// This member is required.
-	TextTransformations []*TextTransformation
+	TextTransformations []TextTransformation
 }
 
 // This is the latest version of AWS WAF, named AWS WAFV2, released in November,
@@ -979,7 +979,7 @@ type Rule struct {
 	// but they must all be different.
 	//
 	// This member is required.
-	Priority *int32
+	Priority int32
 
 	// The AWS WAF processing statement for the rule, for example ByteMatchStatement or
 	// SizeConstraintStatement.
@@ -1070,7 +1070,7 @@ type RuleGroup struct {
 	// ACLs is 1,500.
 	//
 	// This member is required.
-	Capacity *int64
+	Capacity int64
 
 	// A unique identifier for the rule group. This ID is returned in the responses to
 	// create and list commands. You provide it to operations like update and delete.
@@ -1097,7 +1097,7 @@ type RuleGroup struct {
 	// block, or count. Each rule includes one top-level statement that AWS WAF uses to
 	// identify matching web requests, and parameters that govern how AWS WAF handles
 	// them.
-	Rules []*Rule
+	Rules []Rule
 }
 
 // This is the latest version of AWS WAF, named AWS WAFV2, released in November,
@@ -1118,7 +1118,7 @@ type RuleGroupReferenceStatement struct {
 
 	// The names of rules that are in the referenced rule group, but that you want AWS
 	// WAF to exclude from processing for this rule statement.
-	ExcludedRules []*ExcludedRule
+	ExcludedRules []ExcludedRule
 }
 
 // This is the latest version of AWS WAF, named AWS WAFV2, released in November,
@@ -1199,7 +1199,7 @@ type SampledHTTPRequest struct {
 	// 1.
 	//
 	// This member is required.
-	Weight *int64
+	Weight int64
 
 	// The action for the Rule that the request matched: ALLOW, BLOCK, or COUNT.
 	Action *string
@@ -1273,7 +1273,7 @@ type SizeConstraintStatement struct {
 	// The size, in byte, to compare to the request part, after any transformations.
 	//
 	// This member is required.
-	Size *int64
+	Size int64
 
 	// Text transformations eliminate some of the unusual formatting that attackers use
 	// in web requests in an effort to bypass detection. If you specify one or more
@@ -1282,7 +1282,7 @@ type SizeConstraintStatement struct {
 	// lowest priority setting, before inspecting the content for a match.
 	//
 	// This member is required.
-	TextTransformations []*TextTransformation
+	TextTransformations []TextTransformation
 }
 
 // This is the latest version of AWS WAF, named AWS WAFV2, released in November,
@@ -1311,7 +1311,7 @@ type SqliMatchStatement struct {
 	// lowest priority setting, before inspecting the content for a match.
 	//
 	// This member is required.
-	TextTransformations []*TextTransformation
+	TextTransformations []TextTransformation
 }
 
 // This is the latest version of AWS WAF, named AWS WAFV2, released in November,
@@ -1489,7 +1489,7 @@ type TagInfoForResource struct {
 	ResourceARN *string
 
 	// The array of Tag objects defined for the resource.
-	TagList []*Tag
+	TagList []Tag
 }
 
 // This is the latest version of AWS WAF, named AWS WAFV2, released in November,
@@ -1506,7 +1506,7 @@ type TextTransformation struct {
 	// don't need to be consecutive, but they must all be different.
 	//
 	// This member is required.
-	Priority *int32
+	Priority int32
 
 	// You can specify the following transformation types: CMD_LINE When you're
 	// concerned that attackers are injecting an operating system command line command
@@ -1636,7 +1636,7 @@ type VisibilityConfig struct {
 	// (https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#waf-metrics).
 	//
 	// This member is required.
-	CloudWatchMetricsEnabled *bool
+	CloudWatchMetricsEnabled bool
 
 	// A name of the CloudWatch metric. The name can contain only the characters: A-Z,
 	// a-z, 0-9, - (hyphen), and _ (underscore). The name can be from one to 128
@@ -1651,7 +1651,7 @@ type VisibilityConfig struct {
 	// console.
 	//
 	// This member is required.
-	SampledRequestsEnabled *bool
+	SampledRequestsEnabled bool
 }
 
 // This is the latest version of AWS WAF, named AWS WAFV2, released in November,
@@ -1705,7 +1705,7 @@ type WebACL struct {
 	// processing power. Rule group capacity is fixed at creation, which helps users
 	// plan their web ACL WCU usage when they use a rule group. The WCU limit for web
 	// ACLs is 1,500.
-	Capacity *int64
+	Capacity int64
 
 	// A description of the Web ACL that helps with identification. You cannot change
 	// the description of a Web ACL after you create it.
@@ -1714,7 +1714,7 @@ type WebACL struct {
 	// Indicates whether this web ACL is managed by AWS Firewall Manager. If true, then
 	// only AWS Firewall Manager can delete the web ACL or any Firewall Manager rule
 	// groups in the web ACL.
-	ManagedByFirewallManager *bool
+	ManagedByFirewallManager bool
 
 	// The last set of rules for AWS WAF to process in the web ACL. This is defined in
 	// an AWS Firewall Manager WAF policy and contains only rule group references. You
@@ -1723,7 +1723,7 @@ type WebACL struct {
 	// Manager administrator can define a set of rule groups to run first in the web
 	// ACL and a set of rule groups to run last. Within each set, the administrator
 	// prioritizes the rule groups, to determine their relative processing order.
-	PostProcessFirewallManagerRuleGroups []*FirewallManagerRuleGroup
+	PostProcessFirewallManagerRuleGroups []FirewallManagerRuleGroup
 
 	// The first set of rules for AWS WAF to process in the web ACL. This is defined in
 	// an AWS Firewall Manager WAF policy and contains only rule group references. You
@@ -1732,13 +1732,13 @@ type WebACL struct {
 	// Manager administrator can define a set of rule groups to run first in the web
 	// ACL and a set of rule groups to run last. Within each set, the administrator
 	// prioritizes the rule groups, to determine their relative processing order.
-	PreProcessFirewallManagerRuleGroups []*FirewallManagerRuleGroup
+	PreProcessFirewallManagerRuleGroups []FirewallManagerRuleGroup
 
 	// The Rule statements used to identify the web requests that you want to allow,
 	// block, or count. Each rule includes one top-level statement that AWS WAF uses to
 	// identify matching web requests, and parameters that govern how AWS WAF handles
 	// them.
-	Rules []*Rule
+	Rules []Rule
 }
 
 // This is the latest version of AWS WAF, named AWS WAFV2, released in November,
@@ -1802,5 +1802,5 @@ type XssMatchStatement struct {
 	// lowest priority setting, before inspecting the content for a match.
 	//
 	// This member is required.
-	TextTransformations []*TextTransformation
+	TextTransformations []TextTransformation
 }

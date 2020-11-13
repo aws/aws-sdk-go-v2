@@ -651,17 +651,13 @@ func awsAwsjson11_serializeDocumentBatchPermissionsRequestEntry(v *types.BatchPe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchPermissionsRequestEntryList(v []*types.BatchPermissionsRequestEntry, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentBatchPermissionsRequestEntryList(v []types.BatchPermissionsRequestEntry, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentBatchPermissionsRequestEntry(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentBatchPermissionsRequestEntry(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -675,17 +671,13 @@ func awsAwsjson11_serializeDocumentCatalogResource(v *types.CatalogResource, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentColumnNames(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentColumnNames(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -733,17 +725,13 @@ func awsAwsjson11_serializeDocumentDataLakePrincipal(v *types.DataLakePrincipal,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDataLakePrincipalList(v []*types.DataLakePrincipal, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentDataLakePrincipalList(v []types.DataLakePrincipal, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentDataLakePrincipal(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentDataLakePrincipal(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -826,17 +814,13 @@ func awsAwsjson11_serializeDocumentFilterCondition(v *types.FilterCondition, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentFilterConditionList(v []*types.FilterCondition, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentFilterConditionList(v []types.FilterCondition, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentFilterCondition(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentFilterCondition(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -875,17 +859,13 @@ func awsAwsjson11_serializeDocumentPrincipalPermissions(v *types.PrincipalPermis
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPrincipalPermissionsList(v []*types.PrincipalPermissions, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentPrincipalPermissionsList(v []types.PrincipalPermissions, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentPrincipalPermissions(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentPrincipalPermissions(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -934,17 +914,13 @@ func awsAwsjson11_serializeDocumentResource(v *types.Resource, value smithyjson.
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStringValueList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentStringValueList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1021,17 +997,13 @@ func awsAwsjson11_serializeDocumentTableWithColumnsResource(v *types.TableWithCo
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTrustedResourceOwners(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTrustedResourceOwners(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }

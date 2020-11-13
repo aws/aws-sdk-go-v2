@@ -32,7 +32,7 @@ type CreateOTAUpdateInput struct {
 	// The files to be streamed by the OTA update.
 	//
 	// This member is required.
-	Files []*types.OTAUpdateFile
+	Files []types.OTAUpdateFile
 
 	// The ID of the OTA update to be created.
 	//
@@ -48,10 +48,10 @@ type CreateOTAUpdateInput struct {
 	// The devices targeted to receive OTA updates.
 	//
 	// This member is required.
-	Targets []*string
+	Targets []string
 
 	// A list of additional OTA update parameters which are name-value pairs.
-	AdditionalParameters map[string]*string
+	AdditionalParameters map[string]string
 
 	// The criteria that determine when and how a job abort takes place.
 	AwsJobAbortConfig *types.AwsJobAbortConfig
@@ -77,7 +77,7 @@ type CreateOTAUpdateInput struct {
 	Protocols []types.Protocol
 
 	// Metadata which can be used to manage updates.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Specifies whether the update will continue to run (CONTINUOUS), or will be
 	// complete after all the things specified as targets have completed the update

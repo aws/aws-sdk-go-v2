@@ -57,7 +57,7 @@ type CreateAssociationInput struct {
 	// after it is created and then according to the schedule you specified. Specify
 	// this option if you don't want an association to run immediately after you create
 	// it.
-	ApplyOnlyAtCronInterval *bool
+	ApplyOnlyAtCronInterval bool
 
 	// Specify a descriptive name for the association.
 	AssociationName *string
@@ -109,7 +109,7 @@ type CreateAssociationInput struct {
 	OutputLocation *types.InstanceAssociationOutputLocation
 
 	// The parameters for the runtime configuration of the document.
-	Parameters map[string][]*string
+	Parameters map[string][]string
 
 	// A cron expression when the association will be applied to the target(s).
 	ScheduleExpression *string
@@ -131,7 +131,7 @@ type CreateAssociationInput struct {
 	// targets and rate controls with State Manager associations
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-state-manager-targets-and-rate-controls.html)
 	// in the AWS Systems Manager User Guide.
-	Targets []*types.Target
+	Targets []types.Target
 }
 
 type CreateAssociationOutput struct {

@@ -57,7 +57,7 @@ type PutPolicyInput struct {
 	Policy *types.Policy
 
 	// The tags to add to the AWS resource.
-	TagList []*types.Tag
+	TagList []types.Tag
 }
 
 type PutPolicyOutput struct {

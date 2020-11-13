@@ -73,7 +73,7 @@ type UpdateProvisioningArtifactInput struct {
 type UpdateProvisioningArtifactOutput struct {
 
 	// The URL of the CloudFormation template in Amazon S3.
-	Info map[string]*string
+	Info map[string]string
 
 	// Information about the provisioning artifact.
 	ProvisioningArtifactDetail *types.ProvisioningArtifactDetail

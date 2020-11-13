@@ -79,7 +79,7 @@ type ListVaultsOutput struct {
 	Marker *string
 
 	// List of vaults.
-	VaultList []*types.DescribeVaultOutput
+	VaultList []types.DescribeVaultOutput
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

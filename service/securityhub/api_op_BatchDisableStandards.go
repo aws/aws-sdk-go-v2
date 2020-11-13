@@ -35,13 +35,13 @@ type BatchDisableStandardsInput struct {
 	// The ARNs of the standards subscriptions to disable.
 	//
 	// This member is required.
-	StandardsSubscriptionArns []*string
+	StandardsSubscriptionArns []string
 }
 
 type BatchDisableStandardsOutput struct {
 
 	// The details of the standards subscriptions that were disabled.
-	StandardsSubscriptions []*types.StandardsSubscription
+	StandardsSubscriptions []types.StandardsSubscription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

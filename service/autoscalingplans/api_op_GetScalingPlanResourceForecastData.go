@@ -123,7 +123,7 @@ type GetScalingPlanResourceForecastDataOutput struct {
 	// The data points to return.
 	//
 	// This member is required.
-	Datapoints []*types.Datapoint
+	Datapoints []types.Datapoint
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

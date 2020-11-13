@@ -42,7 +42,7 @@ type ListBranchesInput struct {
 type ListBranchesOutput struct {
 
 	// The list of branch names.
-	Branches []*string
+	Branches []string
 
 	// An enumeration token that returns the batch of the results.
 	NextToken *string

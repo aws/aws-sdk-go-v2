@@ -519,32 +519,24 @@ func (m *awsAwsjson10_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsAwsjson10_serializeDocumentSecurityGroupIds(v []*string, value smithyjson.Value) error {
+func awsAwsjson10_serializeDocumentSecurityGroupIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentSubnetIds(v []*string, value smithyjson.Value) error {
+func awsAwsjson10_serializeDocumentSubnetIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -566,32 +558,24 @@ func awsAwsjson10_serializeDocumentTag(v *types.Tag, value smithyjson.Value) err
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentTagKeyList(v []*string, value smithyjson.Value) error {
+func awsAwsjson10_serializeDocumentTagKeyList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentTagList(v []*types.Tag, value smithyjson.Value) error {
+func awsAwsjson10_serializeDocumentTagList(v []types.Tag, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson10_serializeDocumentTag(v[i], av); err != nil {
+		if err := awsAwsjson10_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -744,9 +728,9 @@ func awsAwsjson10_serializeOpDocumentListConnectionsInput(v *ListConnectionsInpu
 		ok.String(*v.HostArnFilter)
 	}
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -766,9 +750,9 @@ func awsAwsjson10_serializeOpDocumentListHostsInput(v *ListHostsInput, value smi
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {

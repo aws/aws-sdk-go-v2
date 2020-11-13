@@ -89,7 +89,7 @@ type CreateSolutionInput struct {
 	// determines the optimal recipe by running tests with different values for the
 	// hyperparameters. AutoML lengthens the training process as compared to selecting
 	// a specific recipe.
-	PerformAutoML *bool
+	PerformAutoML bool
 
 	// Whether to perform hyperparameter optimization (HPO) on the specified or
 	// selected recipe. The default is false. When performing AutoML, this parameter is

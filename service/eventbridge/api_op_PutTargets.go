@@ -143,7 +143,7 @@ type PutTargetsInput struct {
 	// The targets to update or add to the rule.
 	//
 	// This member is required.
-	Targets []*types.Target
+	Targets []types.Target
 
 	// The name of the event bus associated with the rule. If you omit this, the
 	// default event bus is used.
@@ -153,10 +153,10 @@ type PutTargetsInput struct {
 type PutTargetsOutput struct {
 
 	// The failed target entries.
-	FailedEntries []*types.PutTargetsResultEntry
+	FailedEntries []types.PutTargetsResultEntry
 
 	// The number of failed entries.
-	FailedEntryCount *int32
+	FailedEntryCount int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

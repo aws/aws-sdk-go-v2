@@ -150,17 +150,13 @@ func awsAwsjson10_serializeDocumentStartTransactionRequest(v *types.StartTransac
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentStatementParameters(v []*types.ValueHolder, value smithyjson.Value) error {
+func awsAwsjson10_serializeDocumentStatementParameters(v []types.ValueHolder, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson10_serializeDocumentValueHolder(v[i], av); err != nil {
+		if err := awsAwsjson10_serializeDocumentValueHolder(&v[i], av); err != nil {
 			return err
 		}
 	}

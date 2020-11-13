@@ -33,7 +33,7 @@ type GetColumnStatisticsForTableInput struct {
 	// A list of the column names.
 	//
 	// This member is required.
-	ColumnNames []*string
+	ColumnNames []string
 
 	// The name of the catalog database where the partitions reside.
 	//
@@ -53,10 +53,10 @@ type GetColumnStatisticsForTableInput struct {
 type GetColumnStatisticsForTableOutput struct {
 
 	// List of ColumnStatistics that failed to be retrieved.
-	ColumnStatisticsList []*types.ColumnStatistics
+	ColumnStatisticsList []types.ColumnStatistics
 
 	// List of ColumnStatistics that failed to be retrieved.
-	Errors []*types.ColumnError
+	Errors []types.ColumnError
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -44,7 +44,7 @@ type ListSecurityConfigurationsOutput struct {
 	Marker *string
 
 	// The creation date and time, and name, of each security configuration.
-	SecurityConfigurations []*types.SecurityConfigurationSummary
+	SecurityConfigurations []types.SecurityConfigurationSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

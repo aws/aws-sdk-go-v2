@@ -39,7 +39,7 @@ type ListFlowsInput struct {
 type ListFlowsOutput struct {
 
 	// The list of flows associated with your account.
-	Flows []*types.FlowDefinition
+	Flows []types.FlowDefinition
 
 	// The pagination token for next page of data.
 	NextToken *string

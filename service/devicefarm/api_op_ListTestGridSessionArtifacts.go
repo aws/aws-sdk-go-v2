@@ -47,7 +47,7 @@ type ListTestGridSessionArtifactsInput struct {
 type ListTestGridSessionArtifactsOutput struct {
 
 	// A list of test grid session artifacts for a TestGridSession.
-	Artifacts []*types.TestGridSessionArtifact
+	Artifacts []types.TestGridSessionArtifact
 
 	// Pagination token.
 	NextToken *string

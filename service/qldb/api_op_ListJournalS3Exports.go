@@ -49,7 +49,7 @@ type ListJournalS3ExportsOutput struct {
 
 	// The array of journal export job descriptions for all ledgers that are associated
 	// with the current AWS account and Region.
-	JournalS3Exports []*types.JournalS3ExportDescription
+	JournalS3Exports []types.JournalS3ExportDescription
 
 	// * If NextToken is empty, then the last page of results has been processed and
 	// there are no more results to be retrieved.

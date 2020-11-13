@@ -65,13 +65,10 @@ func awsRestjson1_serializeOpHttpBindingsCancelJobInput(v *CancelJobInput, encod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Id == nil {
+	if v.Id == nil || len(*v.Id) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
 	}
 	if v.Id != nil {
-		if len(*v.Id) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
-		}
 		if err := encoder.SetURI("Id").String(*v.Id); err != nil {
 			return err
 		}
@@ -469,13 +466,10 @@ func awsRestjson1_serializeOpHttpBindingsDeletePipelineInput(v *DeletePipelineIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Id == nil {
+	if v.Id == nil || len(*v.Id) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
 	}
 	if v.Id != nil {
-		if len(*v.Id) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
-		}
 		if err := encoder.SetURI("Id").String(*v.Id); err != nil {
 			return err
 		}
@@ -535,13 +529,10 @@ func awsRestjson1_serializeOpHttpBindingsDeletePresetInput(v *DeletePresetInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Id == nil {
+	if v.Id == nil || len(*v.Id) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
 	}
 	if v.Id != nil {
-		if len(*v.Id) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
-		}
 		if err := encoder.SetURI("Id").String(*v.Id); err != nil {
 			return err
 		}
@@ -609,13 +600,10 @@ func awsRestjson1_serializeOpHttpBindingsListJobsByPipelineInput(v *ListJobsByPi
 		encoder.SetQuery("PageToken").String(*v.PageToken)
 	}
 
-	if v.PipelineId == nil {
+	if v.PipelineId == nil || len(*v.PipelineId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member PipelineId must not be empty")}
 	}
 	if v.PipelineId != nil {
-		if len(*v.PipelineId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member PipelineId must not be empty")}
-		}
 		if err := encoder.SetURI("PipelineId").String(*v.PipelineId); err != nil {
 			return err
 		}
@@ -683,13 +671,10 @@ func awsRestjson1_serializeOpHttpBindingsListJobsByStatusInput(v *ListJobsByStat
 		encoder.SetQuery("PageToken").String(*v.PageToken)
 	}
 
-	if v.Status == nil {
+	if v.Status == nil || len(*v.Status) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Status must not be empty")}
 	}
 	if v.Status != nil {
-		if len(*v.Status) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Status must not be empty")}
-		}
 		if err := encoder.SetURI("Status").String(*v.Status); err != nil {
 			return err
 		}
@@ -873,13 +858,10 @@ func awsRestjson1_serializeOpHttpBindingsReadJobInput(v *ReadJobInput, encoder *
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Id == nil {
+	if v.Id == nil || len(*v.Id) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
 	}
 	if v.Id != nil {
-		if len(*v.Id) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
-		}
 		if err := encoder.SetURI("Id").String(*v.Id); err != nil {
 			return err
 		}
@@ -939,13 +921,10 @@ func awsRestjson1_serializeOpHttpBindingsReadPipelineInput(v *ReadPipelineInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Id == nil {
+	if v.Id == nil || len(*v.Id) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
 	}
 	if v.Id != nil {
-		if len(*v.Id) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
-		}
 		if err := encoder.SetURI("Id").String(*v.Id); err != nil {
 			return err
 		}
@@ -1005,13 +984,10 @@ func awsRestjson1_serializeOpHttpBindingsReadPresetInput(v *ReadPresetInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Id == nil {
+	if v.Id == nil || len(*v.Id) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
 	}
 	if v.Id != nil {
-		if len(*v.Id) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
-		}
 		if err := encoder.SetURI("Id").String(*v.Id); err != nil {
 			return err
 		}
@@ -1172,13 +1148,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdatePipelineInput(v *UpdatePipelineIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Id == nil {
+	if v.Id == nil || len(*v.Id) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
 	}
 	if v.Id != nil {
-		if len(*v.Id) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
-		}
 		if err := encoder.SetURI("Id").String(*v.Id); err != nil {
 			return err
 		}
@@ -1297,13 +1270,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdatePipelineNotificationsInput(v *Upd
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Id == nil {
+	if v.Id == nil || len(*v.Id) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
 	}
 	if v.Id != nil {
-		if len(*v.Id) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
-		}
 		if err := encoder.SetURI("Id").String(*v.Id); err != nil {
 			return err
 		}
@@ -1388,13 +1358,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdatePipelineStatusInput(v *UpdatePipe
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Id == nil {
+	if v.Id == nil || len(*v.Id) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
 	}
 	if v.Id != nil {
-		if len(*v.Id) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
-		}
 		if err := encoder.SetURI("Id").String(*v.Id); err != nil {
 			return err
 		}
@@ -1415,17 +1382,13 @@ func awsRestjson1_serializeOpDocumentUpdatePipelineStatusInput(v *UpdatePipeline
 	return nil
 }
 
-func awsRestjson1_serializeDocumentAccessControls(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentAccessControls(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1474,17 +1437,13 @@ func awsRestjson1_serializeDocumentArtwork(v *types.Artwork, value smithyjson.Va
 	return nil
 }
 
-func awsRestjson1_serializeDocumentArtworks(v []*types.Artwork, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentArtworks(v []types.Artwork, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentArtwork(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentArtwork(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1581,17 +1540,13 @@ func awsRestjson1_serializeDocumentCaptionFormat(v *types.CaptionFormat, value s
 	return nil
 }
 
-func awsRestjson1_serializeDocumentCaptionFormats(v []*types.CaptionFormat, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentCaptionFormats(v []types.CaptionFormat, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentCaptionFormat(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentCaptionFormat(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1658,17 +1613,13 @@ func awsRestjson1_serializeDocumentCaptionSource(v *types.CaptionSource, value s
 	return nil
 }
 
-func awsRestjson1_serializeDocumentCaptionSources(v []*types.CaptionSource, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentCaptionSources(v []types.CaptionSource, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentCaptionSource(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentCaptionSource(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1689,32 +1640,24 @@ func awsRestjson1_serializeDocumentClip(v *types.Clip, value smithyjson.Value) e
 	return nil
 }
 
-func awsRestjson1_serializeDocumentCodecOptions(v map[string]*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentCodecOptions(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentComposition(v []*types.Clip, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentComposition(v []types.Clip, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentClip(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentClip(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1795,17 +1738,13 @@ func awsRestjson1_serializeDocumentCreateJobOutput(v *types.CreateJobOutput, val
 	return nil
 }
 
-func awsRestjson1_serializeDocumentCreateJobOutputs(v []*types.CreateJobOutput, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentCreateJobOutputs(v []types.CreateJobOutput, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentCreateJobOutput(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentCreateJobOutput(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1850,17 +1789,13 @@ func awsRestjson1_serializeDocumentCreateJobPlaylist(v *types.CreateJobPlaylist,
 	return nil
 }
 
-func awsRestjson1_serializeDocumentCreateJobPlaylists(v []*types.CreateJobPlaylist, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentCreateJobPlaylists(v []types.CreateJobPlaylist, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentCreateJobPlaylist(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentCreateJobPlaylist(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -2066,17 +2001,13 @@ func awsRestjson1_serializeDocumentJobInput(v *types.JobInput, value smithyjson.
 	return nil
 }
 
-func awsRestjson1_serializeDocumentJobInputs(v []*types.JobInput, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentJobInputs(v []types.JobInput, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentJobInput(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentJobInput(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -2107,17 +2038,13 @@ func awsRestjson1_serializeDocumentJobWatermark(v *types.JobWatermark, value smi
 	return nil
 }
 
-func awsRestjson1_serializeDocumentJobWatermarks(v []*types.JobWatermark, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentJobWatermarks(v []types.JobWatermark, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentJobWatermark(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentJobWatermark(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -2151,17 +2078,13 @@ func awsRestjson1_serializeDocumentNotifications(v *types.Notifications, value s
 	return nil
 }
 
-func awsRestjson1_serializeDocumentOutputKeys(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentOutputKeys(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2190,17 +2113,13 @@ func awsRestjson1_serializeDocumentPermission(v *types.Permission, value smithyj
 	return nil
 }
 
-func awsRestjson1_serializeDocumentPermissions(v []*types.Permission, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentPermissions(v []types.Permission, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentPermission(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentPermission(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -2325,34 +2244,26 @@ func awsRestjson1_serializeDocumentPresetWatermark(v *types.PresetWatermark, val
 	return nil
 }
 
-func awsRestjson1_serializeDocumentPresetWatermarks(v []*types.PresetWatermark, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentPresetWatermarks(v []types.PresetWatermark, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentPresetWatermark(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentPresetWatermark(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentSnsTopics(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentSnsTopics(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2421,17 +2332,13 @@ func awsRestjson1_serializeDocumentTimeSpan(v *types.TimeSpan, value smithyjson.
 	return nil
 }
 
-func awsRestjson1_serializeDocumentUserMetadata(v map[string]*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentUserMetadata(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }

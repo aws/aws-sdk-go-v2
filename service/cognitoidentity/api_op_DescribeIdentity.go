@@ -51,7 +51,7 @@ type DescribeIdentityOutput struct {
 	LastModifiedDate *time.Time
 
 	// The provider names.
-	Logins []*string
+	Logins []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

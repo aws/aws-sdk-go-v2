@@ -42,7 +42,7 @@ type PutAppLaunchConfigurationInput struct {
 
 	// Information about the launch configurations for server groups in the
 	// application.
-	ServerGroupLaunchConfigurations []*types.ServerGroupLaunchConfiguration
+	ServerGroupLaunchConfigurations []types.ServerGroupLaunchConfiguration
 }
 
 type PutAppLaunchConfigurationOutput struct {

@@ -40,7 +40,7 @@ type ListLoggerDefinitionsInput struct {
 type ListLoggerDefinitionsOutput struct {
 
 	// Information about a definition.
-	Definitions []*types.DefinitionInformation
+	Definitions []types.DefinitionInformation
 
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.

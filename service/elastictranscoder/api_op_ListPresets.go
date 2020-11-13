@@ -50,7 +50,7 @@ type ListPresetsOutput struct {
 	NextPageToken *string
 
 	// An array of Preset objects.
-	Presets []*types.Preset
+	Presets []types.Preset
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

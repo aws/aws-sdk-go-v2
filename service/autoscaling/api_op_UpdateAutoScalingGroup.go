@@ -70,7 +70,7 @@ type UpdateAutoScalingGroupInput struct {
 	AutoScalingGroupName *string
 
 	// One or more Availability Zones for the group.
-	AvailabilityZones []*string
+	AvailabilityZones []string
 
 	// The amount of time, in seconds, after a scaling activity completes before
 	// another scaling activity can start. The default value is 300. This setting
@@ -171,7 +171,7 @@ type UpdateAutoScalingGroupInput struct {
 	// Terminates During Scale In
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
-	TerminationPolicies []*string
+	TerminationPolicies []string
 
 	// A comma-separated list of subnet IDs for virtual private cloud (VPC). If you
 	// specify VPCZoneIdentifier with AvailabilityZones, the subnets that you specify

@@ -75,7 +75,7 @@ type FilterLogEventsInput struct {
 	// Filters the results to only logs from the log streams in this list. If you
 	// specify a value for both logStreamNamePrefix and logStreamNames, the action
 	// returns an InvalidParameterException error.
-	LogStreamNames []*string
+	LogStreamNames []string
 
 	// The token for the next set of events to return. (You received this token from a
 	// previous call.)
@@ -91,7 +91,7 @@ type FilterLogEventsInput struct {
 type FilterLogEventsOutput struct {
 
 	// The matched events.
-	Events []*types.FilteredLogEvent
+	Events []types.FilteredLogEvent
 
 	// The token to use when requesting the next set of items. The token expires after
 	// 24 hours.
@@ -100,7 +100,7 @@ type FilterLogEventsOutput struct {
 	// IMPORTANT Starting on May 15, 2020, this parameter will be deprecated. This
 	// parameter will be an empty list after the deprecation occurs. Indicates which
 	// log streams have been searched and whether each has been searched completely.
-	SearchedLogStreams []*types.SearchedLogStream
+	SearchedLogStreams []types.SearchedLogStream
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

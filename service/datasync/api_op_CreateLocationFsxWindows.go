@@ -44,7 +44,7 @@ type CreateLocationFsxWindowsInput struct {
 	// configure the FSx for Windows file system.
 	//
 	// This member is required.
-	SecurityGroupArns []*string
+	SecurityGroupArns []string
 
 	// The user who has the permissions to access files and folders in the FSx for
 	// Windows file system.
@@ -64,7 +64,7 @@ type CreateLocationFsxWindowsInput struct {
 	// The value can be an empty string. This value helps you manage, filter, and
 	// search for your resources. We recommend that you create a name tag for your
 	// location.
-	Tags []*types.TagListEntry
+	Tags []types.TagListEntry
 }
 
 type CreateLocationFsxWindowsOutput struct {

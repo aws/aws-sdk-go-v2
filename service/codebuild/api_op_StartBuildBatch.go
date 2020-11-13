@@ -83,7 +83,7 @@ type StartBuildBatchInput struct {
 
 	// An array of EnvironmentVariable objects that override, or add to, the
 	// environment variables defined in the batch build project.
-	EnvironmentVariablesOverride []*types.EnvironmentVariable
+	EnvironmentVariablesOverride []types.EnvironmentVariable
 
 	// The user-defined depth of history, with a minimum value of 0, that overrides,
 	// for this batch build only, any previous depth of history defined in the batch
@@ -143,15 +143,15 @@ type StartBuildBatchInput struct {
 
 	// An array of ProjectArtifacts objects that override the secondary artifacts
 	// defined in the batch build project.
-	SecondaryArtifactsOverride []*types.ProjectArtifacts
+	SecondaryArtifactsOverride []types.ProjectArtifacts
 
 	// An array of ProjectSource objects that override the secondary sources defined in
 	// the batch build project.
-	SecondarySourcesOverride []*types.ProjectSource
+	SecondarySourcesOverride []types.ProjectSource
 
 	// An array of ProjectSourceVersion objects that override the secondary source
 	// versions in the batch build project.
-	SecondarySourcesVersionOverride []*types.ProjectSourceVersion
+	SecondarySourcesVersionOverride []types.ProjectSourceVersion
 
 	// The name of a service role for this batch build that overrides the one specified
 	// in the batch build project.

@@ -35,7 +35,7 @@ type ListDashboardsInput struct {
 	AwsAccountId *string
 
 	// The maximum number of results to be returned per request.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
@@ -45,7 +45,7 @@ type ListDashboardsOutput struct {
 
 	// A structure that contains all of the dashboards in your AWS account. This
 	// structure provides basic information about the dashboards.
-	DashboardSummaryList []*types.DashboardSummary
+	DashboardSummaryList []types.DashboardSummary
 
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
@@ -54,7 +54,7 @@ type ListDashboardsOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

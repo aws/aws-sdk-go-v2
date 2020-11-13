@@ -47,7 +47,7 @@ type ListEndpointGroupsInput struct {
 type ListEndpointGroupsOutput struct {
 
 	// The list of the endpoint groups associated with a listener.
-	EndpointGroups []*types.EndpointGroup
+	EndpointGroups []types.EndpointGroup
 
 	// The token for the next set of results. You receive this token from a previous
 	// call.

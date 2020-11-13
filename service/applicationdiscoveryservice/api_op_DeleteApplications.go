@@ -31,7 +31,7 @@ type DeleteApplicationsInput struct {
 	// Configuration ID of an application to be deleted.
 	//
 	// This member is required.
-	ConfigurationIds []*string
+	ConfigurationIds []string
 }
 
 type DeleteApplicationsOutput struct {

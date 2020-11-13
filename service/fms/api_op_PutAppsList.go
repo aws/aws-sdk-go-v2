@@ -35,7 +35,7 @@ type PutAppsListInput struct {
 	AppsList *types.AppsListData
 
 	// The tags associated with the resource.
-	TagList []*types.Tag
+	TagList []types.Tag
 }
 
 type PutAppsListOutput struct {

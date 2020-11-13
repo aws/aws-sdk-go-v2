@@ -59,7 +59,7 @@ type UpdateStackInput struct {
 	AgentVersion *string
 
 	// One or more user-defined key-value pairs to be added to the stack attributes.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// A ChefConfiguration object that specifies whether to enable Berkshelf and the
 	// Berkshelf version on Chef 11.10 stacks. For more information, see Create a New

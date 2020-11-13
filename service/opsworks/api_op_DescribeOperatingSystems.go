@@ -34,7 +34,7 @@ type DescribeOperatingSystemsInput struct {
 type DescribeOperatingSystemsOutput struct {
 
 	// Contains information in response to a DescribeOperatingSystems request.
-	OperatingSystems []*types.OperatingSystem
+	OperatingSystems []types.OperatingSystem
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

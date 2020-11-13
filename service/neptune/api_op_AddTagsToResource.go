@@ -42,7 +42,7 @@ type AddTagsToResourceInput struct {
 	// The tags to be assigned to the Amazon Neptune resource.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type AddTagsToResourceOutput struct {

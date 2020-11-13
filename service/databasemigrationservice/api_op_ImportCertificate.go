@@ -43,7 +43,7 @@ type ImportCertificateInput struct {
 	CertificateWallet []byte
 
 	// The tags associated with the certificate.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type ImportCertificateOutput struct {

@@ -67,7 +67,7 @@ type GitHubCodeDestination struct {
 	// Whether to enable issues for the GitHub repository.
 	//
 	// This member is required.
-	IssuesEnabled *bool
+	IssuesEnabled bool
 
 	// Name of the GitHub repository to be created in AWS CodeStar.
 	//
@@ -84,7 +84,7 @@ type GitHubCodeDestination struct {
 	// Whether the GitHub repository is to be a private repository.
 	//
 	// This member is required.
-	PrivateRepository *bool
+	PrivateRepository bool
 
 	// The GitHub user's personal access token for the GitHub repository.
 	//
@@ -164,7 +164,7 @@ type TeamMember struct {
 
 	// Whether the user is allowed to remotely access project resources using an SSH
 	// public/private key pair.
-	RemoteAccessAllowed *bool
+	RemoteAccessAllowed bool
 }
 
 // The toolchain template file provided with the project request. AWS CodeStar uses
@@ -184,7 +184,7 @@ type Toolchain struct {
 
 	// The list of parameter overrides to be passed into the toolchain template during
 	// stack provisioning, if any.
-	StackParameters map[string]*string
+	StackParameters map[string]string
 }
 
 // The Amazon S3 location where the toolchain template file provided with the

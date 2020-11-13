@@ -55,14 +55,14 @@ type AddJobFlowStepsInput struct {
 	// A list of StepConfig to be executed by the job flow.
 	//
 	// This member is required.
-	Steps []*types.StepConfig
+	Steps []types.StepConfig
 }
 
 // The output for the AddJobFlowSteps operation.
 type AddJobFlowStepsOutput struct {
 
 	// The identifiers of the list of steps added to the job flow.
-	StepIds []*string
+	StepIds []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

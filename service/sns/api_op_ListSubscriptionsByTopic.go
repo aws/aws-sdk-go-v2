@@ -51,7 +51,7 @@ type ListSubscriptionsByTopicOutput struct {
 	NextToken *string
 
 	// A list of subscriptions.
-	Subscriptions []*types.Subscription
+	Subscriptions []types.Subscription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

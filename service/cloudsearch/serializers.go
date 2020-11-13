@@ -1605,18 +1605,15 @@ func awsAwsquery_serializeDocumentDomainEndpointOptions(v *types.DomainEndpointO
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDomainNameList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentDomainNameList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1690,18 +1687,15 @@ func awsAwsquery_serializeDocumentDoubleOptions(v *types.DoubleOptions, value qu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDynamicFieldNameList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentDynamicFieldNameList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2001,31 +1995,28 @@ func awsAwsquery_serializeDocumentScalingParameters(v *types.ScalingParameters, 
 		objectKey.String(string(v.DesiredInstanceType))
 	}
 
-	if v.DesiredPartitionCount != nil {
+	if v.DesiredPartitionCount != 0 {
 		objectKey := object.Key("DesiredPartitionCount")
-		objectKey.Integer(*v.DesiredPartitionCount)
+		objectKey.Integer(v.DesiredPartitionCount)
 	}
 
-	if v.DesiredReplicationCount != nil {
+	if v.DesiredReplicationCount != 0 {
 		objectKey := object.Key("DesiredReplicationCount")
-		objectKey.Integer(*v.DesiredReplicationCount)
+		objectKey.Integer(v.DesiredReplicationCount)
 	}
 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentStandardNameList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentStandardNameList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }

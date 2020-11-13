@@ -39,13 +39,13 @@ type UpdateChannelInput struct {
 	CdiInputSpecification *types.CdiInputSpecification
 
 	// A list of output destinations for this channel.
-	Destinations []*types.OutputDestination
+	Destinations []types.OutputDestination
 
 	// The encoder settings for this channel.
 	EncoderSettings *types.EncoderSettings
 
 	// Placeholder documentation for __listOfInputAttachment
-	InputAttachments []*types.InputAttachment
+	InputAttachments []types.InputAttachment
 
 	// Specification of network and file inputs for this channel
 	InputSpecification *types.InputSpecification

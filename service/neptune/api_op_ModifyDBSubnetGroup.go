@@ -40,7 +40,7 @@ type ModifyDBSubnetGroupInput struct {
 	// The EC2 subnet IDs for the DB subnet group.
 	//
 	// This member is required.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// The description for the DB subnet group.
 	DBSubnetGroupDescription *string

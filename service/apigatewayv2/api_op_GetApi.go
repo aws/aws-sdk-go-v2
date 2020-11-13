@@ -46,7 +46,7 @@ type GetApiOutput struct {
 	// Specifies whether an API is managed by API Gateway. You can't update or delete a
 	// managed API by using API Gateway. A managed API can be deleted only through the
 	// tooling or service that created it.
-	ApiGatewayManaged *bool
+	ApiGatewayManaged bool
 
 	// The API ID.
 	ApiId *string
@@ -70,16 +70,16 @@ type GetApiOutput struct {
 	// https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that
 	// clients use a custom domain name to invoke your API, disable the default
 	// endpoint.
-	DisableExecuteApiEndpoint *bool
+	DisableExecuteApiEndpoint bool
 
 	// Avoid validating models when creating a deployment. Supported only for WebSocket
 	// APIs.
-	DisableSchemaValidation *bool
+	DisableSchemaValidation bool
 
 	// The validation information during API import. This may include particular
 	// properties of your OpenAPI definition which are ignored during import. Supported
 	// only for HTTP APIs.
-	ImportInfo []*string
+	ImportInfo []string
 
 	// The name of the API.
 	Name *string
@@ -94,14 +94,14 @@ type GetApiOutput struct {
 	RouteSelectionExpression *string
 
 	// A collection of tags associated with the API.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// A version identifier for the API.
 	Version *string
 
 	// The warning messages reported when failonwarnings is turned on during API
 	// import.
-	Warnings []*string
+	Warnings []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

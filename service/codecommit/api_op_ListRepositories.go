@@ -53,7 +53,7 @@ type ListRepositoriesOutput struct {
 	NextToken *string
 
 	// Lists the repositories called by the list repositories operation.
-	Repositories []*types.RepositoryNameIdPair
+	Repositories []types.RepositoryNameIdPair
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

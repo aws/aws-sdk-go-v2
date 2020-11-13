@@ -50,14 +50,14 @@ type CreateAuthorizerInput struct {
 	// parameters use format: ...key1=value1&key2=value2... For the CLI command-line
 	// parameter use format: &&tags "key1=value1&key2=value2..." For the cli-input-json
 	// file use format: "tags": "key1=value1&key2=value2..."
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The name of the token key used to extract the token from the HTTP headers.
 	TokenKeyName *string
 
 	// The public keys used to verify the digital signature returned by your custom
 	// authentication service.
-	TokenSigningPublicKeys map[string]*string
+	TokenSigningPublicKeys map[string]string
 }
 
 type CreateAuthorizerOutput struct {

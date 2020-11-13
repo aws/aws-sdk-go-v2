@@ -56,7 +56,7 @@ type StartApplicationInput struct {
 	// Kinesis Analytics to start reading.
 	//
 	// This member is required.
-	InputConfigurations []*types.InputConfiguration
+	InputConfigurations []types.InputConfiguration
 }
 
 //

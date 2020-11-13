@@ -47,7 +47,7 @@ type GetEmailIdentityPoliciesInput struct {
 type GetEmailIdentityPoliciesOutput struct {
 
 	// A map of policy names to policies.
-	Policies map[string]*string
+	Policies map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

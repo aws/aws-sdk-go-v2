@@ -38,7 +38,7 @@ type UpdateCrawlerInput struct {
 	// A list of custom classifiers that the user has registered. By default, all
 	// built-in classifiers are included in a crawl, but these custom classifiers
 	// always override the default classifiers for a given classification.
-	Classifiers []*string
+	Classifiers []string
 
 	// Crawler configuration information. This versioned JSON string allows users to
 	// specify aspects of a crawler's behavior. For more information, see Configuring a

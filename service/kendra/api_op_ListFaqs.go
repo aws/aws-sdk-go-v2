@@ -46,7 +46,7 @@ type ListFaqsInput struct {
 type ListFaqsOutput struct {
 
 	// information about the FAQs associated with the specified index.
-	FaqSummaryItems []*types.FaqSummary
+	FaqSummaryItems []types.FaqSummary
 
 	// The ListFaqs operation returns a page of FAQs at a time. The maximum size of the
 	// page is set by the MaxResults parameter. If there are more jobs in the list than

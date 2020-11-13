@@ -124,7 +124,7 @@ type ListResourceRecordSetsOutput struct {
 	// using the NextRecordName element.
 	//
 	// This member is required.
-	IsTruncated *bool
+	IsTruncated bool
 
 	// The maximum number of records you requested.
 	//
@@ -134,7 +134,7 @@ type ListResourceRecordSetsOutput struct {
 	// Information about multiple resource record sets.
 	//
 	// This member is required.
-	ResourceRecordSets []*types.ResourceRecordSet
+	ResourceRecordSets []types.ResourceRecordSet
 
 	// Resource record sets that have a routing policy other than simple: If results
 	// were truncated for a given DNS name and type, the value of SetIdentifier for the

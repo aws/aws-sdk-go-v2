@@ -201,10 +201,10 @@ type CreateFilterInput struct {
 
 	// Specifies the position of the filter in the list of current filters. Also
 	// specifies the order in which this filter is applied to the findings.
-	Rank *int32
+	Rank int32
 
 	// The tags to be added to a new filter resource.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateFilterOutput struct {

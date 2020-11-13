@@ -157,7 +157,7 @@ type LogGroupField struct {
 	Name *string
 
 	// The percentage of log events queried that contained the field.
-	Percent *int32
+	Percent int32
 }
 
 // Represents a log stream, which is a sequence of log events from a single emitter
@@ -220,7 +220,7 @@ type MetricFilter struct {
 	LogGroupName *string
 
 	// The metric transformations.
-	MetricTransformations []*MetricTransformation
+	MetricTransformations []MetricTransformation
 }
 
 // Represents a matched event.
@@ -230,10 +230,10 @@ type MetricFilterMatchRecord struct {
 	EventMessage *string
 
 	// The event number.
-	EventNumber *int64
+	EventNumber int64
 
 	// The values extracted from the event data by the filter.
-	ExtractedValues map[string]*string
+	ExtractedValues map[string]string
 }
 
 // Indicates how to transform ingested log events to metric data in a CloudWatch
@@ -307,7 +307,7 @@ type QueryDefinition struct {
 
 	// If this query definition contains a list of log groups that it is limited to,
 	// that list appears here.
-	LogGroupNames []*string
+	LogGroupNames []string
 
 	// The name of the query definition.
 	Name *string
@@ -348,13 +348,13 @@ type QueryInfo struct {
 type QueryStatistics struct {
 
 	// The total number of bytes in the log events scanned during the query.
-	BytesScanned *float64
+	BytesScanned float64
 
 	// The number of log events that matched the query string.
-	RecordsMatched *float64
+	RecordsMatched float64
 
 	// The total number of log events scanned during the query.
-	RecordsScanned *float64
+	RecordsScanned float64
 }
 
 // Represents the rejected events.

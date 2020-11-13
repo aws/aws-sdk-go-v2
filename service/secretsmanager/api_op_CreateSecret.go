@@ -233,7 +233,7 @@ type CreateSecretInput struct {
 	// resources, remember other services might have restrictions on allowed
 	// characters. Generally allowed characters: letters, spaces, and numbers
 	// representable in UTF-8, plus the following special characters: + - = . _ : / @.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateSecretOutput struct {

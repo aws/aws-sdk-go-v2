@@ -69,7 +69,7 @@ type DescribeFileSystemsInput struct {
 type DescribeFileSystemsOutput struct {
 
 	// An array of file system descriptions.
-	FileSystems []*types.FileSystemDescription
+	FileSystems []types.FileSystemDescription
 
 	// Present if provided by caller in the request (String).
 	Marker *string

@@ -40,10 +40,10 @@ type SearchProductsInput struct {
 
 	// The search filters. If no search filters are specified, the output includes all
 	// products to which the caller has access.
-	Filters map[string][]*string
+	Filters map[string][]string
 
 	// The maximum number of items to return with this call.
-	PageSize *int32
+	PageSize int32
 
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
@@ -63,10 +63,10 @@ type SearchProductsOutput struct {
 	NextPageToken *string
 
 	// The product view aggregations.
-	ProductViewAggregations map[string][]*types.ProductViewAggregationValue
+	ProductViewAggregations map[string][]types.ProductViewAggregationValue
 
 	// Information about the product views.
-	ProductViewSummaries []*types.ProductViewSummary
+	ProductViewSummaries []types.ProductViewSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -62,7 +62,7 @@ type DescribeTestCasesOutput struct {
 	NextToken *string
 
 	// The returned list of test cases.
-	TestCases []*types.TestCase
+	TestCases []types.TestCase
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

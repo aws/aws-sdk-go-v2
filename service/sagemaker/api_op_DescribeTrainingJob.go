@@ -183,28 +183,28 @@ type DescribeTrainingJobOutput struct {
 	DebugHookConfig *types.DebugHookConfig
 
 	// Configuration information for debugging rules.
-	DebugRuleConfigurations []*types.DebugRuleConfiguration
+	DebugRuleConfigurations []types.DebugRuleConfiguration
 
 	// Status about the debug rule evaluation.
-	DebugRuleEvaluationStatuses []*types.DebugRuleEvaluationStatus
+	DebugRuleEvaluationStatuses []types.DebugRuleEvaluationStatus
 
 	// To encrypt all communications between ML compute instances in distributed
 	// training, choose True. Encryption provides greater security for distributed
 	// training, but training might take longer. How long it takes depends on the
 	// amount of communication between compute instances, especially if you use a deep
 	// learning algorithms in distributed training.
-	EnableInterContainerTrafficEncryption *bool
+	EnableInterContainerTrafficEncryption bool
 
 	// A Boolean indicating whether managed spot training is enabled (True) or not
 	// (False).
-	EnableManagedSpotTraining *bool
+	EnableManagedSpotTraining bool
 
 	// If you want to allow inbound or outbound network calls, except for calls between
 	// peers within a training cluster for distributed training, choose True. If you
 	// enable network isolation for training jobs that are configured to use a VPC,
 	// Amazon SageMaker downloads and uploads customer data and model artifacts through
 	// the specified VPC, but the training container does not have network access.
-	EnableNetworkIsolation *bool
+	EnableNetworkIsolation bool
 
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
@@ -222,13 +222,13 @@ type DescribeTrainingJobOutput struct {
 
 	// A collection of MetricData objects that specify the names, values, and dates and
 	// times that the training algorithm emitted to Amazon CloudWatch.
-	FinalMetricDataList []*types.MetricData
+	FinalMetricDataList []types.MetricData
 
 	// Algorithm-specific parameters.
-	HyperParameters map[string]*string
+	HyperParameters map[string]string
 
 	// An array of Channel objects that describes each data input channel.
-	InputDataConfig []*types.Channel
+	InputDataConfig []types.Channel
 
 	// The Amazon Resource Name (ARN) of the Amazon SageMaker Ground Truth labeling job
 	// that created the transform or training job.
@@ -248,7 +248,7 @@ type DescribeTrainingJobOutput struct {
 
 	// A history of all of the secondary statuses that the training job has
 	// transitioned through.
-	SecondaryStatusTransitions []*types.SecondaryStatusTransition
+	SecondaryStatusTransitions []types.SecondaryStatusTransition
 
 	// Configuration of storage locations for TensorBoard output.
 	TensorBoardOutputConfig *types.TensorBoardOutputConfig

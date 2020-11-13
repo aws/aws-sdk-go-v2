@@ -47,7 +47,7 @@ type ListThingsInBillingGroupOutput struct {
 	NextToken *string
 
 	// A list of things in the billing group.
-	Things []*string
+	Things []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

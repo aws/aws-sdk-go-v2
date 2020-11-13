@@ -32,7 +32,7 @@ type StopDataCollectionByAgentIdsInput struct {
 	// The IDs of the agents or connectors from which to stop collecting data.
 	//
 	// This member is required.
-	AgentIds []*string
+	AgentIds []string
 }
 
 type StopDataCollectionByAgentIdsOutput struct {
@@ -41,7 +41,7 @@ type StopDataCollectionByAgentIdsOutput struct {
 	// collecting data. Information includes the agent/connector ID, a description of
 	// the operation performed, and whether the agent/connector configuration was
 	// updated.
-	AgentsConfigurationStatus []*types.AgentConfigurationStatus
+	AgentsConfigurationStatus []types.AgentConfigurationStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

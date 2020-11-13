@@ -317,7 +317,7 @@ func awsRestjson1_deserializeOpDocumentGetDASHStreamingSessionURLOutput(v **GetD
 				if !ok {
 					return fmt.Errorf("expected DASHStreamingSessionURL to be of type string, got %T instead", value)
 				}
-				sv.DASHStreamingSessionURL = &jtv
+				sv.DASHStreamingSessionURL = ptr.String(jtv)
 			}
 
 		default:
@@ -489,7 +489,7 @@ func awsRestjson1_deserializeOpDocumentGetHLSStreamingSessionURLOutput(v **GetHL
 				if !ok {
 					return fmt.Errorf("expected HLSStreamingSessionURL to be of type string, got %T instead", value)
 				}
-				sv.HLSStreamingSessionURL = &jtv
+				sv.HLSStreamingSessionURL = ptr.String(jtv)
 			}
 
 		default:
@@ -777,7 +777,7 @@ func awsRestjson1_deserializeOpDocumentListFragmentsOutput(v **ListFragmentsOutp
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -1141,7 +1141,7 @@ func awsRestjson1_deserializeDocumentClientLimitExceededException(v **types.Clie
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1185,7 +1185,7 @@ func awsRestjson1_deserializeDocumentFragment(v **types.Fragment, value interfac
 				if err != nil {
 					return err
 				}
-				sv.FragmentLengthInMilliseconds = &i64
+				sv.FragmentLengthInMilliseconds = i64
 			}
 
 		case "FragmentNumber":
@@ -1194,7 +1194,7 @@ func awsRestjson1_deserializeDocumentFragment(v **types.Fragment, value interfac
 				if !ok {
 					return fmt.Errorf("expected FragmentNumberString to be of type string, got %T instead", value)
 				}
-				sv.FragmentNumber = &jtv
+				sv.FragmentNumber = ptr.String(jtv)
 			}
 
 		case "FragmentSizeInBytes":
@@ -1207,7 +1207,7 @@ func awsRestjson1_deserializeDocumentFragment(v **types.Fragment, value interfac
 				if err != nil {
 					return err
 				}
-				sv.FragmentSizeInBytes = &i64
+				sv.FragmentSizeInBytes = i64
 			}
 
 		case "ProducerTimestamp":
@@ -1245,7 +1245,7 @@ func awsRestjson1_deserializeDocumentFragment(v **types.Fragment, value interfac
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentFragmentList(v *[]*types.Fragment, value interface{}) error {
+func awsRestjson1_deserializeDocumentFragmentList(v *[]types.Fragment, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1258,18 +1258,20 @@ func awsRestjson1_deserializeDocumentFragmentList(v *[]*types.Fragment, value in
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Fragment
+	var cv []types.Fragment
 	if *v == nil {
-		cv = []*types.Fragment{}
+		cv = []types.Fragment{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Fragment
-		if err := awsRestjson1_deserializeDocumentFragment(&col, value); err != nil {
+		var col types.Fragment
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentFragment(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -1305,7 +1307,7 @@ func awsRestjson1_deserializeDocumentInvalidArgumentException(v **types.InvalidA
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1345,7 +1347,7 @@ func awsRestjson1_deserializeDocumentInvalidCodecPrivateDataException(v **types.
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1385,7 +1387,7 @@ func awsRestjson1_deserializeDocumentInvalidMediaFrameException(v **types.Invali
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1425,7 +1427,7 @@ func awsRestjson1_deserializeDocumentMissingCodecPrivateDataException(v **types.
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1465,7 +1467,7 @@ func awsRestjson1_deserializeDocumentNoDataRetentionException(v **types.NoDataRe
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1505,7 +1507,7 @@ func awsRestjson1_deserializeDocumentNotAuthorizedException(v **types.NotAuthori
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1545,7 +1547,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1585,7 +1587,7 @@ func awsRestjson1_deserializeDocumentUnsupportedStreamMediaTypeException(v **typ
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:

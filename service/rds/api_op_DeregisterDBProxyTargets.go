@@ -35,10 +35,10 @@ type DeregisterDBProxyTargetsInput struct {
 	DBProxyName *string
 
 	// One or more DB cluster identifiers.
-	DBClusterIdentifiers []*string
+	DBClusterIdentifiers []string
 
 	// One or more DB instance identifiers.
-	DBInstanceIdentifiers []*string
+	DBInstanceIdentifiers []string
 
 	// The identifier of the DBProxyTargetGroup.
 	TargetGroupName *string

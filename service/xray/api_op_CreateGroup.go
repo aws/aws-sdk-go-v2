@@ -70,7 +70,7 @@ type CreateGroupInput struct {
 	//
 	// * Don't use aws: as a
 	// prefix for keys; it's reserved for AWS use.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateGroupOutput struct {

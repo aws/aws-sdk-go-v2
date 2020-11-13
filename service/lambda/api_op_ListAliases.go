@@ -62,7 +62,7 @@ type ListAliasesInput struct {
 type ListAliasesOutput struct {
 
 	// A list of aliases.
-	Aliases []*types.AliasConfiguration
+	Aliases []types.AliasConfiguration
 
 	// The pagination token that's included if more results are available.
 	NextMarker *string

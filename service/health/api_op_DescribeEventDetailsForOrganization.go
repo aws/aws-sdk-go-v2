@@ -61,7 +61,7 @@ type DescribeEventDetailsForOrganizationInput struct {
 	// A set of JSON elements that includes the awsAccountId and the eventArn.
 	//
 	// This member is required.
-	OrganizationEventDetailFilters []*types.EventAccountFilter
+	OrganizationEventDetailFilters []types.EventAccountFilter
 
 	// The locale (language) to return information in. English (en) is the default and
 	// the only supported value at this time.
@@ -71,10 +71,10 @@ type DescribeEventDetailsForOrganizationInput struct {
 type DescribeEventDetailsForOrganizationOutput struct {
 
 	// Error messages for any events that could not be retrieved.
-	FailedSet []*types.OrganizationEventDetailsErrorItem
+	FailedSet []types.OrganizationEventDetailsErrorItem
 
 	// Information about the events that could be retrieved.
-	SuccessfulSet []*types.OrganizationEventDetails
+	SuccessfulSet []types.OrganizationEventDetails
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

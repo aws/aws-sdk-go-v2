@@ -37,7 +37,7 @@ type DescribeTimeBasedAutoScalingInput struct {
 	// An array of instance IDs.
 	//
 	// This member is required.
-	InstanceIds []*string
+	InstanceIds []string
 }
 
 // Contains the response to a DescribeTimeBasedAutoScaling request.
@@ -45,7 +45,7 @@ type DescribeTimeBasedAutoScalingOutput struct {
 
 	// An array of TimeBasedAutoScalingConfiguration objects that describe the
 	// configuration for the specified instances.
-	TimeBasedAutoScalingConfigurations []*types.TimeBasedAutoScalingConfiguration
+	TimeBasedAutoScalingConfigurations []types.TimeBasedAutoScalingConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

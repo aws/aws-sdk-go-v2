@@ -40,7 +40,7 @@ type ListGatewayGroupsInput struct {
 type ListGatewayGroupsOutput struct {
 
 	// The gateway groups in the list.
-	GatewayGroups []*types.GatewayGroupSummary
+	GatewayGroups []types.GatewayGroupSummary
 
 	// The token used to paginate though multiple pages of gateway group summaries.
 	NextToken *string

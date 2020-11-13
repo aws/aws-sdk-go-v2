@@ -70,7 +70,7 @@ type DescribeEC2InstanceLimitsInput struct {
 type DescribeEC2InstanceLimitsOutput struct {
 
 	// The maximum number of instances for the specified instance type.
-	EC2InstanceLimits []*types.EC2InstanceLimit
+	EC2InstanceLimits []types.EC2InstanceLimit
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -38,7 +38,7 @@ type ListApplicationsInput struct {
 type ListApplicationsOutput struct {
 
 	// A list of application names.
-	Applications []*string
+	Applications []string
 
 	// If a large amount of information is returned, an identifier is also returned. It
 	// can be used in a subsequent list applications call to return the next set of

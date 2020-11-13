@@ -82,12 +82,12 @@ type DescribeVaultOutput struct {
 	// The number of archives in the vault as of the last inventory date. This field
 	// will return null if an inventory has not yet run on the vault, for example if
 	// you just created the vault.
-	NumberOfArchives *int64
+	NumberOfArchives int64
 
 	// Total size, in bytes, of the archives in the vault as of the last inventory
 	// date. This field will return null if an inventory has not yet run on the vault,
 	// for example if you just created the vault.
-	SizeInBytes *int64
+	SizeInBytes int64
 
 	// The Amazon Resource Name (ARN) of the vault.
 	VaultARN *string

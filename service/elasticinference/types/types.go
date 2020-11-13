@@ -12,7 +12,7 @@ type AcceleratorType struct {
 	MemoryInfo *MemoryInfo
 
 	// The throughput information of the Elastic Inference Accelerator type.
-	ThroughputInfo []*KeyValuePair
+	ThroughputInfo []KeyValuePair
 }
 
 // The offering for an Elastic Inference Accelerator type.
@@ -69,7 +69,7 @@ type Filter struct {
 	Name *string
 
 	// The values for the filter of the Elastic Inference Accelerator list.
-	Values []*string
+	Values []string
 }
 
 // A throughput entry for an Elastic Inference Accelerator type.
@@ -81,12 +81,12 @@ type KeyValuePair struct {
 	Key *string
 
 	// The throughput value of the Elastic Inference Accelerator type.
-	Value *int32
+	Value int32
 }
 
 // The memory information of an Elastic Inference Accelerator type.
 type MemoryInfo struct {
 
 	// The size in mebibytes of the Elastic Inference Accelerator type.
-	SizeInMiB *int32
+	SizeInMiB int32
 }

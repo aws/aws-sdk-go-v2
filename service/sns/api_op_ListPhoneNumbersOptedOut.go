@@ -49,7 +49,7 @@ type ListPhoneNumbersOptedOutOutput struct {
 
 	// A list of phone numbers that are opted out of receiving SMS messages. The list
 	// is paginated, and each page can contain up to 100 phone numbers.
-	PhoneNumbers []*string
+	PhoneNumbers []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

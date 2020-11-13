@@ -123,7 +123,7 @@ type GetSecretValueOutput struct {
 
 	// A list of all of the staging labels currently attached to this version of the
 	// secret.
-	VersionStages []*string
+	VersionStages []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

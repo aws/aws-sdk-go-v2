@@ -40,7 +40,7 @@ type ListPolicyVersionsInput struct {
 type ListPolicyVersionsOutput struct {
 
 	// The policy versions.
-	PolicyVersions []*types.PolicyVersion
+	PolicyVersions []types.PolicyVersion
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

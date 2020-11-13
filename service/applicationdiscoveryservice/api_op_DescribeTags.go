@@ -45,11 +45,11 @@ type DescribeTagsInput struct {
 	// You can filter the list using a key-value format. You can separate these items
 	// by using logical operators. Allowed filters include tagKey, tagValue, and
 	// configurationId.
-	Filters []*types.TagFilter
+	Filters []types.TagFilter
 
 	// The total number of items to return in a single page of output. The maximum
 	// value is 100.
-	MaxResults *int32
+	MaxResults int32
 
 	// A token to start the list. Use this token to get the next set of results.
 	NextToken *string
@@ -62,7 +62,7 @@ type DescribeTagsOutput struct {
 
 	// Depending on the input, this is a list of configuration items tagged with a
 	// specific tag, or a list of tags for a specific configuration item.
-	Tags []*types.ConfigurationTag
+	Tags []types.ConfigurationTag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

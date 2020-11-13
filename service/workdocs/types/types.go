@@ -20,7 +20,7 @@ type Activity struct {
 	// results from a direct activity performed on a parent resource. For example,
 	// sharing a parent folder (the direct activity) shares all of the subfolders and
 	// documents within the parent folder (the indirect activity).
-	IsIndirectActivity *bool
+	IsIndirectActivity bool
 
 	// The ID of the organization.
 	OrganizationId *string
@@ -112,7 +112,7 @@ type DocumentMetadata struct {
 	Id *string
 
 	// List of labels on the document.
-	Labels []*string
+	Labels []string
 
 	// The latest version of the document.
 	LatestVersionMetadata *DocumentVersionMetadata
@@ -161,13 +161,13 @@ type DocumentVersionMetadata struct {
 	Size *int64
 
 	// The source of the document.
-	Source map[string]*string
+	Source map[string]string
 
 	// The status of the document.
 	Status DocumentStatusType
 
 	// The thumbnail of the document.
-	Thumbnail map[string]*string
+	Thumbnail map[string]string
 }
 
 // Describes a folder.
@@ -183,7 +183,7 @@ type FolderMetadata struct {
 	Id *string
 
 	// List of labels on the folder.
-	Labels []*string
+	Labels []string
 
 	// The size of the latest version of the folder metadata.
 	LatestVersionSize *int64
@@ -225,17 +225,17 @@ type NotificationOptions struct {
 
 	// Boolean value to indicate an email notification should be sent to the
 	// receipients.
-	SendEmail *bool
+	SendEmail bool
 }
 
 // Describes the users or user groups.
 type Participants struct {
 
 	// The list of user groups.
-	Groups []*GroupMetadata
+	Groups []GroupMetadata
 
 	// The list of users.
-	Users []*UserMetadata
+	Users []UserMetadata
 }
 
 // Describes the permissions.
@@ -255,7 +255,7 @@ type Principal struct {
 	Id *string
 
 	// The permission information for the resource.
-	Roles []*PermissionInfo
+	Roles []PermissionInfo
 
 	// The type of resource.
 	Type PrincipalType
@@ -291,7 +291,7 @@ type ResourceMetadata struct {
 type ResourcePath struct {
 
 	// The components of the resource path.
-	Components []*ResourcePathComponent
+	Components []ResourcePathComponent
 }
 
 // Describes the resource path.
@@ -372,7 +372,7 @@ type Subscription struct {
 type UploadMetadata struct {
 
 	// The signed headers.
-	SignedHeaders map[string]*string
+	SignedHeaders map[string]string
 
 	// The URL of the upload.
 	UploadUrl *string

@@ -892,13 +892,13 @@ func validateCustomRule(v *types.CustomRule) error {
 	}
 }
 
-func validateCustomRules(v []*types.CustomRule) error {
+func validateCustomRules(v []types.CustomRule) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CustomRules"}
 	for i := range v {
-		if err := validateCustomRule(v[i]); err != nil {
+		if err := validateCustomRule(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -927,13 +927,13 @@ func validateSubDomainSetting(v *types.SubDomainSetting) error {
 	}
 }
 
-func validateSubDomainSettings(v []*types.SubDomainSetting) error {
+func validateSubDomainSettings(v []types.SubDomainSetting) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SubDomainSettings"}
 	for i := range v {
-		if err := validateSubDomainSetting(v[i]); err != nil {
+		if err := validateSubDomainSetting(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

@@ -10,7 +10,7 @@ import (
 type AccountRecoverySettingType struct {
 
 	// The list of RecoveryOptionTypes.
-	RecoveryMechanisms []*RecoveryOptionType
+	RecoveryMechanisms []RecoveryOptionType
 }
 
 // Account takeover actions type.
@@ -48,7 +48,7 @@ type AccountTakeoverActionType struct {
 	// Flag specifying whether to send a notification.
 	//
 	// This member is required.
-	Notify *bool
+	Notify bool
 }
 
 // Configuration for mitigation actions and notification for different levels of
@@ -69,7 +69,7 @@ type AdminCreateUserConfigType struct {
 
 	// Set to True if only the administrator is allowed to create user profiles. Set to
 	// False if users can sign themselves up via an app.
-	AllowAdminCreateUserOnly *bool
+	AllowAdminCreateUserOnly bool
 
 	// The message template to be used for the welcome message to new users. See also
 	// Customizing User Invitation Messages
@@ -82,7 +82,7 @@ type AdminCreateUserConfigType struct {
 	// default value for this parameter is 7. If you set a value for
 	// TemporaryPasswordValidityDays in PasswordPolicy, that value will be used and
 	// UnusedAccountValidityDays will be deprecated for that user pool.
-	UnusedAccountValidityDays *int32
+	UnusedAccountValidityDays int32
 }
 
 // The Amazon Pinpoint analytics configuration for collecting metrics for a user
@@ -110,7 +110,7 @@ type AnalyticsConfigurationType struct {
 
 	// If UserDataShared is true, Amazon Cognito will include user data in the events
 	// it publishes to Amazon Pinpoint analytics.
-	UserDataShared *bool
+	UserDataShared bool
 }
 
 // An Amazon Pinpoint analytics endpoint. An endpoint uniquely identifies a mobile
@@ -143,7 +143,7 @@ type AuthenticationResultType struct {
 	AccessToken *string
 
 	// The expiration period of the authentication result in seconds.
-	ExpiresIn *int32
+	ExpiresIn int32
 
 	// The ID token.
 	IdToken *string
@@ -162,7 +162,7 @@ type AuthenticationResultType struct {
 type AuthEventType struct {
 
 	// The challenge responses.
-	ChallengeResponses []*ChallengeResponseType
+	ChallengeResponses []ChallengeResponseType
 
 	// The creation date
 	CreationDate *time.Time
@@ -241,7 +241,7 @@ type ContextDataType struct {
 	// HttpHeaders received on your server in same order.
 	//
 	// This member is required.
-	HttpHeaders []*HttpHeader
+	HttpHeaders []HttpHeader
 
 	// Source IP address of your user.
 	//
@@ -279,10 +279,10 @@ type DeviceConfigurationType struct {
 
 	// Indicates whether a challenge is required on a new device. Only applicable to a
 	// new device.
-	ChallengeRequiredOnNewDevice *bool
+	ChallengeRequiredOnNewDevice bool
 
 	// If true, a device is only remembered on user prompt.
-	DeviceOnlyRememberedOnUserPrompt *bool
+	DeviceOnlyRememberedOnUserPrompt bool
 }
 
 // The device verifier against which it will be authenticated.
@@ -299,7 +299,7 @@ type DeviceSecretVerifierConfigType struct {
 type DeviceType struct {
 
 	// The device attributes.
-	DeviceAttributes []*AttributeType
+	DeviceAttributes []AttributeType
 
 	// The creation date of the device.
 	DeviceCreateDate *time.Time
@@ -515,13 +515,13 @@ type IdentityProviderType struct {
 
 	// A mapping of identity provider attributes to standard and custom user pool
 	// attributes.
-	AttributeMapping map[string]*string
+	AttributeMapping map[string]string
 
 	// The date the identity provider was created.
 	CreationDate *time.Time
 
 	// A list of identity provider identifiers.
-	IdpIdentifiers []*string
+	IdpIdentifiers []string
 
 	// The date the identity provider was last modified.
 	LastModifiedDate *time.Time
@@ -596,7 +596,7 @@ type IdentityProviderType struct {
 	// * MetadataFile OR MetadataURL
 	//
 	// * IDPSignOut optional
-	ProviderDetails map[string]*string
+	ProviderDetails map[string]string
 
 	// The identity provider name.
 	ProviderName *string
@@ -735,30 +735,30 @@ type PasswordPolicyType struct {
 
 	// The minimum length of the password policy that you have set. Cannot be less than
 	// 6.
-	MinimumLength *int32
+	MinimumLength int32
 
 	// In the password policy that you have set, refers to whether you have required
 	// users to use at least one lowercase letter in their password.
-	RequireLowercase *bool
+	RequireLowercase bool
 
 	// In the password policy that you have set, refers to whether you have required
 	// users to use at least one number in their password.
-	RequireNumbers *bool
+	RequireNumbers bool
 
 	// In the password policy that you have set, refers to whether you have required
 	// users to use at least one symbol in their password.
-	RequireSymbols *bool
+	RequireSymbols bool
 
 	// In the password policy that you have set, refers to whether you have required
 	// users to use at least one uppercase letter in their password.
-	RequireUppercase *bool
+	RequireUppercase bool
 
 	// In the password policy you have set, refers to the number of days a temporary
 	// password is valid. If the user does not sign-in during this time, their password
 	// will need to be reset by an administrator. When you set
 	// TemporaryPasswordValidityDays for a user pool, you will no longer be able to set
 	// the deprecated UnusedAccountValidityDays value for that user pool.
-	TemporaryPasswordValidityDays *int32
+	TemporaryPasswordValidityDays int32
 }
 
 // A container for identity provider details.
@@ -802,7 +802,7 @@ type RecoveryOptionType struct {
 	// priority.
 	//
 	// This member is required.
-	Priority *int32
+	Priority int32
 }
 
 // A resource server scope.
@@ -829,7 +829,7 @@ type ResourceServerType struct {
 	Name *string
 
 	// A list of scopes that are defined for the resource server.
-	Scopes []*ResourceServerScopeType
+	Scopes []ResourceServerScopeType
 
 	// The user pool ID for the user pool that hosts the resource server.
 	UserPoolId *string
@@ -865,11 +865,11 @@ type RiskExceptionConfigurationType struct {
 	// Overrides the risk decision to always block the pre-authentication requests. The
 	// IP range is in CIDR notation: a compact representation of an IP address and its
 	// associated routing prefix.
-	BlockedIPRangeList []*string
+	BlockedIPRangeList []string
 
 	// Risk detection is not performed on the IP addresses in the range list. The IP
 	// range is in CIDR notation.
-	SkippedIPRangeList []*string
+	SkippedIPRangeList []string
 }
 
 // Contains information about the schema attribute.
@@ -886,7 +886,7 @@ type SchemaAttributeType struct {
 	// Users will not be able to modify this attribute using their access token. For
 	// example, DeveloperOnlyAttribute can be modified using AdminUpdateUserAttributes
 	// but cannot be updated using UpdateUserAttributes.
-	DeveloperOnlyAttribute *bool
+	DeveloperOnlyAttribute bool
 
 	// Specifies whether the value of the attribute can be changed. For any user pool
 	// attribute that's mapped to an identity provider attribute, you must set this
@@ -896,7 +896,7 @@ type SchemaAttributeType struct {
 	// more information, see Specifying Identity Provider Attribute Mappings for Your
 	// User Pool
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html).
-	Mutable *bool
+	Mutable bool
 
 	// A schema attribute of the name type.
 	Name *string
@@ -907,7 +907,7 @@ type SchemaAttributeType struct {
 	// Specifies whether a user pool attribute is required. If the attribute is
 	// required and the user does not provide a value, registration or sign-in will
 	// fail.
-	Required *bool
+	Required bool
 
 	// Specifies the constraints for an attribute of the string type.
 	StringAttributeConstraints *StringAttributeConstraintsType
@@ -953,27 +953,27 @@ type SmsMfaConfigType struct {
 type SMSMfaSettingsType struct {
 
 	// Specifies whether SMS text message MFA is enabled.
-	Enabled *bool
+	Enabled bool
 
 	// Specifies whether SMS is the preferred MFA method.
-	PreferredMfa *bool
+	PreferredMfa bool
 }
 
 // The type used for enabling software token MFA at the user pool level.
 type SoftwareTokenMfaConfigType struct {
 
 	// Specifies whether software token MFA is enabled.
-	Enabled *bool
+	Enabled bool
 }
 
 // The type used for enabling software token MFA at the user level.
 type SoftwareTokenMfaSettingsType struct {
 
 	// Specifies whether software token MFA is enabled.
-	Enabled *bool
+	Enabled bool
 
 	// Specifies whether software token MFA is the preferred MFA method.
-	PreferredMfa *bool
+	PreferredMfa bool
 }
 
 // The constraints associated with a string attribute.
@@ -1058,10 +1058,10 @@ type UserImportJobType struct {
 	CreationDate *time.Time
 
 	// The number of users that could not be imported.
-	FailedUsers *int64
+	FailedUsers int64
 
 	// The number of users that were successfully imported.
-	ImportedUsers *int64
+	ImportedUsers int64
 
 	// The job ID for the user import job.
 	JobId *string
@@ -1073,7 +1073,7 @@ type UserImportJobType struct {
 	PreSignedUrl *string
 
 	// The number of users that were skipped.
-	SkippedUsers *int64
+	SkippedUsers int64
 
 	// The date when the user import job was started.
 	StartDate *time.Time
@@ -1171,13 +1171,13 @@ type UserPoolClientType struct {
 
 	// Set to true if the client is allowed to follow the OAuth protocol when
 	// interacting with Cognito user pools.
-	AllowedOAuthFlowsUserPoolClient *bool
+	AllowedOAuthFlowsUserPoolClient bool
 
 	// The allowed OAuth scopes. Possible values provided by OAuth are: phone, email,
 	// openid, and profile. Possible values provided by AWS are:
 	// aws.cognito.signin.user.admin. Custom scopes created in Resource Servers are
 	// also supported.
-	AllowedOAuthScopes []*string
+	AllowedOAuthScopes []string
 
 	// The Amazon Pinpoint analytics configuration for the user pool client. Cognito
 	// User Pools only supports sending events to Amazon Pinpoint projects in the US
@@ -1199,7 +1199,7 @@ type UserPoolClientType struct {
 	// Redirection Endpoint (https://tools.ietf.org/html/rfc6749#section-3.1.2). Amazon
 	// Cognito requires HTTPS over HTTP except for http://localhost for testing
 	// purposes only. App callback URLs such as myapp://example are also supported.
-	CallbackURLs []*string
+	CallbackURLs []string
 
 	// The ID of the client associated with the user pool.
 	ClientId *string
@@ -1262,7 +1262,7 @@ type UserPoolClientType struct {
 	LastModifiedDate *time.Time
 
 	// A list of allowed logout URLs for the identity providers.
-	LogoutURLs []*string
+	LogoutURLs []string
 
 	// Use this setting to choose which errors and responses are returned by Cognito
 	// APIs during authentication, account confirmation, and password recovery when the
@@ -1286,15 +1286,15 @@ type UserPoolClientType struct {
 	PreventUserExistenceErrors PreventUserExistenceErrorTypes
 
 	// The Read-only attributes.
-	ReadAttributes []*string
+	ReadAttributes []string
 
 	// The time limit, in days, after which the refresh token is no longer valid and
 	// cannot be used.
-	RefreshTokenValidity *int32
+	RefreshTokenValidity int32
 
 	// A list of provider names for the identity providers that are supported on this
 	// client.
-	SupportedIdentityProviders []*string
+	SupportedIdentityProviders []string
 
 	// The time units used to specify the token validity times of their respective
 	// token.
@@ -1304,7 +1304,7 @@ type UserPoolClientType struct {
 	UserPoolId *string
 
 	// The writeable attributes.
-	WriteAttributes []*string
+	WriteAttributes []string
 }
 
 // A user pool description.
@@ -1389,7 +1389,7 @@ type UserPoolType struct {
 	EmailVerificationSubject *string
 
 	// A number estimating the size of the user pool.
-	EstimatedNumberOfUsers *int32
+	EstimatedNumberOfUsers int32
 
 	// The ID of the user pool.
 	Id *string
@@ -1420,7 +1420,7 @@ type UserPoolType struct {
 	Policies *UserPoolPolicyType
 
 	// A container with the schema attributes of a user pool.
-	SchemaAttributes []*SchemaAttributeType
+	SchemaAttributes []SchemaAttributeType
 
 	// The contents of the SMS authentication message.
 	SmsAuthenticationMessage *string
@@ -1443,7 +1443,7 @@ type UserPoolType struct {
 	// The tags that are assigned to the user pool. A tag is a label that you can apply
 	// to user pools to categorize and manage them in different ways, such as by
 	// purpose, owner, environment, or other criteria.
-	UserPoolTags map[string]*string
+	UserPoolTags map[string]string
 
 	// Specifies whether email addresses or phone numbers can be specified as usernames
 	// when a user signs up.
@@ -1464,13 +1464,13 @@ type UserPoolType struct {
 type UserType struct {
 
 	// A container with information about the user type attributes.
-	Attributes []*AttributeType
+	Attributes []AttributeType
 
 	// Specifies whether the user is enabled.
-	Enabled *bool
+	Enabled bool
 
 	// The MFA options for the user.
-	MFAOptions []*MFAOptionType
+	MFAOptions []MFAOptionType
 
 	// The creation date of the user.
 	UserCreateDate *time.Time

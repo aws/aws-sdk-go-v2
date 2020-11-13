@@ -78,7 +78,7 @@ type ListMonitoringExecutionsOutput struct {
 	// A JSON array in which each element is a summary for a monitoring execution.
 	//
 	// This member is required.
-	MonitoringExecutionSummaries []*types.MonitoringExecutionSummary
+	MonitoringExecutionSummaries []types.MonitoringExecutionSummary
 
 	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
 	// the next set of jobs, use it in the subsequent reques

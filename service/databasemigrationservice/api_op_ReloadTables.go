@@ -37,7 +37,7 @@ type ReloadTablesInput struct {
 	// The name and schema of the table to be reloaded.
 	//
 	// This member is required.
-	TablesToReload []*types.TableToReload
+	TablesToReload []types.TableToReload
 
 	// Options for reload. Specify data-reload to reload the data and re-validate it if
 	// validation is enabled. Specify validate-only to re-validate the table. This

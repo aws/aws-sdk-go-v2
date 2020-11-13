@@ -46,7 +46,7 @@ type GetParametersByPathInput struct {
 
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
-	MaxResults *int32
+	MaxResults int32
 
 	// A token to start the list. Use this token to get the next set of results.
 	NextToken *string
@@ -54,17 +54,17 @@ type GetParametersByPathInput struct {
 	// Filters to limit the request results. For GetParametersByPath, the following
 	// filter Key names are supported: Type, KeyId, Label, and DataType. The following
 	// Key values are not supported for GetParametersByPath: tag, Name, Path, and Tier.
-	ParameterFilters []*types.ParameterStringFilter
+	ParameterFilters []types.ParameterStringFilter
 
 	// Retrieve all parameters within a hierarchy. If a user has access to a path, then
 	// the user can access all levels of that path. For example, if a user has
 	// permission to access path /a, then the user can also access /a/b. Even if a user
 	// has explicitly been denied access in IAM for parameter /a/b, they can still call
 	// the GetParametersByPath API action recursively for /a and view /a/b.
-	Recursive *bool
+	Recursive bool
 
 	// Retrieve all parameters in a hierarchy with their value decrypted.
-	WithDecryption *bool
+	WithDecryption bool
 }
 
 type GetParametersByPathOutput struct {
@@ -74,7 +74,7 @@ type GetParametersByPathOutput struct {
 	NextToken *string
 
 	// A list of parameters found in the specified hierarchy.
-	Parameters []*types.Parameter
+	Parameters []types.Parameter
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

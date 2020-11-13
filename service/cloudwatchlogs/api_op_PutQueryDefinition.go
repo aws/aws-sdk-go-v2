@@ -57,7 +57,7 @@ type PutQueryDefinitionInput struct {
 	// Use this parameter to include specific log groups as part of your query
 	// definition. If you are updating a query definition and you omit this parameter,
 	// then the updated definition will contain no log groups.
-	LogGroupNames []*string
+	LogGroupNames []string
 
 	// If you are updating a query definition, use this parameter to specify the ID of
 	// the query definition that you want to update. You can use

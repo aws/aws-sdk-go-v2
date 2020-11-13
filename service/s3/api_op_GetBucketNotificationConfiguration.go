@@ -60,15 +60,15 @@ type GetBucketNotificationConfigurationOutput struct {
 
 	// Describes the AWS Lambda functions to invoke and the events for which to invoke
 	// them.
-	LambdaFunctionConfigurations []*types.LambdaFunctionConfiguration
+	LambdaFunctionConfigurations []types.LambdaFunctionConfiguration
 
 	// The Amazon Simple Queue Service queues to publish messages to and the events for
 	// which to publish messages.
-	QueueConfigurations []*types.QueueConfiguration
+	QueueConfigurations []types.QueueConfiguration
 
 	// The topic to which notifications are sent and the events for which notifications
 	// are generated.
-	TopicConfigurations []*types.TopicConfiguration
+	TopicConfigurations []types.TopicConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

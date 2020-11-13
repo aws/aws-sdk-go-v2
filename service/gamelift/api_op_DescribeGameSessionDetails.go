@@ -92,7 +92,7 @@ type DescribeGameSessionDetailsOutput struct {
 
 	// A collection of objects containing game session properties and the protection
 	// policy currently in force for each session matching the request.
-	GameSessionDetails []*types.GameSessionDetail
+	GameSessionDetails []types.GameSessionDetail
 
 	// Token that indicates where to resume retrieving results on the next call to this
 	// operation. If no token is returned, these results represent the end of the list.

@@ -71,7 +71,7 @@ type CreateHsmConfigurationInput struct {
 	HsmServerPublicCertificate *string
 
 	// A list of tag instances.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateHsmConfigurationOutput struct {

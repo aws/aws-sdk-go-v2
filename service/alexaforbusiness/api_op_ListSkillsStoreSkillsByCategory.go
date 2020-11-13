@@ -47,7 +47,7 @@ type ListSkillsStoreSkillsByCategoryOutput struct {
 	NextToken *string
 
 	// The skill store skills.
-	SkillsStoreSkills []*types.SkillsStoreSkill
+	SkillsStoreSkills []types.SkillsStoreSkill
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

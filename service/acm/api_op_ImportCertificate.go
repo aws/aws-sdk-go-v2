@@ -111,7 +111,7 @@ type ImportCertificateInput struct {
 
 	// One or more resource tags to associate with the imported certificate. Note: You
 	// cannot apply tags when reimporting a certificate.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type ImportCertificateOutput struct {

@@ -64,7 +64,7 @@ type CreateHITWithHITTypeInput struct {
 	// If the HITLayoutId is provided, any placeholder values must be filled in with
 	// values using the HITLayoutParameter structure. For more information, see
 	// HITLayout.
-	HITLayoutParameters []*types.HITLayoutParameter
+	HITLayoutParameters []types.HITLayoutParameter
 
 	// The HIT-level Review Policy applies to the HIT. You can specify for Mechanical
 	// Turk to take various actions based on the policy.

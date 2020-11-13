@@ -49,7 +49,7 @@ type ListBackupPlanVersionsInput struct {
 type ListBackupPlanVersionsOutput struct {
 
 	// An array of version list items containing metadata about your backup plans.
-	BackupPlanVersionsList []*types.BackupPlansListMember
+	BackupPlanVersionsList []types.BackupPlansListMember
 
 	// The next item following a partial list of returned items. For example, if a
 	// request is made to return maxResults number of items, NextToken allows you to

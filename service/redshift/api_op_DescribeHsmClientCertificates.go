@@ -65,7 +65,7 @@ type DescribeHsmClientCertificatesInput struct {
 	// owner and environment. If you specify both of these tag keys in the request,
 	// Amazon Redshift returns a response with the HSM client certificates that have
 	// either or both of these tag keys associated with them.
-	TagKeys []*string
+	TagKeys []string
 
 	// A tag value or values for which you want to return all matching HSM client
 	// certificates that are associated with the specified tag value or values. For
@@ -73,7 +73,7 @@ type DescribeHsmClientCertificatesInput struct {
 	// values called admin and test. If you specify both of these tag values in the
 	// request, Amazon Redshift returns a response with the HSM client certificates
 	// that have either or both of these tag values associated with them.
-	TagValues []*string
+	TagValues []string
 }
 
 //
@@ -81,7 +81,7 @@ type DescribeHsmClientCertificatesOutput struct {
 
 	// A list of the identifiers for one or more HSM client certificates used by Amazon
 	// Redshift clusters to store and retrieve database encryption keys in an HSM.
-	HsmClientCertificates []*types.HsmClientCertificate
+	HsmClientCertificates []types.HsmClientCertificate
 
 	// A value that indicates the starting point for the next set of response records
 	// in a subsequent request. If a value is returned in a response, you can retrieve

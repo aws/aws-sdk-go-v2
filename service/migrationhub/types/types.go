@@ -61,7 +61,7 @@ type MigrationTask struct {
 
 	// Information about the resource that is being migrated. This data will be used to
 	// map the task to a resource in the Application Discovery Service repository.
-	ResourceAttributeList []*ResourceAttribute
+	ResourceAttributeList []ResourceAttribute
 
 	// Task object encapsulating task information.
 	Task *Task

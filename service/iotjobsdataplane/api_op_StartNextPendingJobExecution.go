@@ -37,7 +37,7 @@ type StartNextPendingJobExecutionInput struct {
 
 	// A collection of name/value pairs that describe the status of the job execution.
 	// If not specified, the statusDetails are unchanged.
-	StatusDetails map[string]*string
+	StatusDetails map[string]string
 
 	// Specifies the amount of time this device has to finish execution of this job. If
 	// the job execution status is not set to a terminal state before this timer

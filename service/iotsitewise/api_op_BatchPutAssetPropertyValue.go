@@ -60,7 +60,7 @@ type BatchPutAssetPropertyValueInput struct {
 	// specify up to 10 entries per request.
 	//
 	// This member is required.
-	Entries []*types.PutAssetPropertyValueEntry
+	Entries []types.PutAssetPropertyValueEntry
 }
 
 type BatchPutAssetPropertyValueOutput struct {
@@ -69,7 +69,7 @@ type BatchPutAssetPropertyValueOutput struct {
 	// entry contains the entryId of the entry that failed.
 	//
 	// This member is required.
-	ErrorEntries []*types.BatchPutAssetPropertyErrorEntry
+	ErrorEntries []types.BatchPutAssetPropertyErrorEntry
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

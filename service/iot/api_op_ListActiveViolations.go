@@ -46,7 +46,7 @@ type ListActiveViolationsInput struct {
 type ListActiveViolationsOutput struct {
 
 	// The list of active violations.
-	ActiveViolations []*types.ActiveViolation
+	ActiveViolations []types.ActiveViolation
 
 	// A token that can be used to retrieve the next set of results, or null if there
 	// are no additional results.

@@ -23,17 +23,17 @@ type BulkDeploymentMetrics struct {
 	// this can occur if a group record from the input file uses an invalid format or
 	// specifies a nonexistent group version, or if the execution role doesn't grant
 	// permission to deploy a group or group version.
-	InvalidInputRecords *int32
+	InvalidInputRecords int32
 
 	// The total number of group records from the input file that have been processed
 	// so far, or attempted.
-	RecordsProcessed *int32
+	RecordsProcessed int32
 
 	// The total number of deployment attempts that returned a retryable error. For
 	// example, a retry is triggered if the attempt to deploy a group returns a
 	// throttling error. ''StartBulkDeployment'' retries a group deployment up to five
 	// times.
-	RetryAttempts *int32
+	RetryAttempts int32
 }
 
 // Information about an individual group deployment in a bulk deployment operation.
@@ -56,7 +56,7 @@ type BulkDeploymentResult struct {
 	DeploymentType DeploymentType
 
 	// Details about the error.
-	ErrorDetails []*ErrorDetail
+	ErrorDetails []ErrorDetail
 
 	// The error message for a failed deployment
 	ErrorMessage *string
@@ -78,7 +78,7 @@ type ConnectivityInfo struct {
 	Metadata *string
 
 	// The port of the Greengrass core. Usually 8883.
-	PortNumber *int32
+	PortNumber int32
 }
 
 // Information about a connector. Connectors run on the Greengrass core and contain
@@ -99,7 +99,7 @@ type Connector struct {
 	Id *string
 
 	// The parameters or configuration that the connector uses.
-	Parameters map[string]*string
+	Parameters map[string]string
 }
 
 // Information about the connector definition version, which is a container for
@@ -108,7 +108,7 @@ type ConnectorDefinitionVersion struct {
 
 	// A list of references to connectors in this version, with their corresponding
 	// configuration settings.
-	Connectors []*Connector
+	Connectors []Connector
 }
 
 // Information about a core.
@@ -132,14 +132,14 @@ type Core struct {
 	ThingArn *string
 
 	// If true, the core's local shadow is automatically synced with the cloud.
-	SyncShadow *bool
+	SyncShadow bool
 }
 
 // Information about a core definition version.
 type CoreDefinitionVersion struct {
 
 	// A list of cores in the core definition version.
-	Cores []*Core
+	Cores []Core
 }
 
 // Information about a definition.
@@ -167,7 +167,7 @@ type DefinitionInformation struct {
 	Name *string
 
 	// Tag(s) attached to the resource arn.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // Information about a deployment.
@@ -210,14 +210,14 @@ type Device struct {
 	ThingArn *string
 
 	// If true, the device's local shadow will be automatically synced with the cloud.
-	SyncShadow *bool
+	SyncShadow bool
 }
 
 // Information about a device definition version.
 type DeviceDefinitionVersion struct {
 
 	// A list of devices in the definition version.
-	Devices []*Device
+	Devices []Device
 }
 
 // Details about the error.
@@ -266,16 +266,16 @@ type FunctionConfiguration struct {
 	// The memory size, in KB, which the function requires. This setting is not
 	// applicable and should be cleared when you run the Lambda function without
 	// containerization.
-	MemorySize *int32
+	MemorySize int32
 
 	// True if the function is pinned. Pinned means the function is long-lived and
 	// starts when the core starts.
-	Pinned *bool
+	Pinned bool
 
 	// The allowed function execution time, after which Lambda should terminate the
 	// function. This timeout still applies to pinned Lambda functions for each
 	// request.
-	Timeout *int32
+	Timeout int32
 }
 
 // The environment configuration of the function.
@@ -284,7 +284,7 @@ type FunctionConfigurationEnvironment struct {
 	// If true, the Lambda function is allowed to access the host's /sys folder. Use
 	// this when the Lambda function needs to read device information from /sys. This
 	// setting applies only when you run the Lambda function in a Greengrass container.
-	AccessSysfs *bool
+	AccessSysfs bool
 
 	// Configuration related to executing the Lambda function
 	Execution *FunctionExecutionConfig
@@ -293,10 +293,10 @@ type FunctionConfigurationEnvironment struct {
 	// will be granted access. A Lambda function can have at most 10 resources.
 	// ResourceAccessPolicies apply only when you run the Lambda function in a
 	// Greengrass container.
-	ResourceAccessPolicies []*ResourceAccessPolicy
+	ResourceAccessPolicies []ResourceAccessPolicy
 
 	// Environment variables for the Lambda function's configuration.
-	Variables map[string]*string
+	Variables map[string]string
 }
 
 // The default configuration that applies to all Lambda functions in the group.
@@ -334,7 +334,7 @@ type FunctionDefinitionVersion struct {
 	DefaultConfig *FunctionDefaultConfig
 
 	// A list of Lambda functions in this function definition version.
-	Functions []*Function
+	Functions []Function
 }
 
 // Configuration information that specifies how a Lambda function runs.
@@ -365,10 +365,10 @@ type FunctionExecutionConfig struct {
 type FunctionRunAsConfig struct {
 
 	// The group ID whose permissions are used to run a Lambda function.
-	Gid *int32
+	Gid int32
 
 	// The user ID whose permissions are used to run a Lambda function.
-	Uid *int32
+	Uid int32
 }
 
 // Information about a certificate authority for a group.
@@ -412,7 +412,7 @@ type GroupOwnerSetting struct {
 	// If true, AWS IoT Greengrass automatically adds the specified Linux OS group
 	// owner of the resource to the Lambda process privileges. Thus the Lambda process
 	// will have the file access permissions of the added Linux group.
-	AutoAddGroupOwner *bool
+	AutoAddGroupOwner bool
 
 	// The name of the Linux OS group whose privileges will be added to the Lambda
 	// process. This field is optional.
@@ -497,14 +497,14 @@ type Logger struct {
 
 	// The amount of file space, in KB, to use if the local file system is used for
 	// logging purposes.
-	Space *int32
+	Space int32
 }
 
 // Information about a logger definition version.
 type LoggerDefinitionVersion struct {
 
 	// A list of loggers.
-	Loggers []*Logger
+	Loggers []Logger
 }
 
 // Information about a resource.
@@ -571,7 +571,7 @@ type ResourceDataContainer struct {
 type ResourceDefinitionVersion struct {
 
 	// A list of resources.
-	Resources []*Resource
+	Resources []Resource
 }
 
 // The owner setting for downloaded machine learning resources.
@@ -637,7 +637,7 @@ type SecretsManagerSecretResourceData struct {
 
 	// Optional. The staging labels whose values you want to make available on the
 	// core, in addition to ''AWSCURRENT''.
-	AdditionalStagingLabelsToDownload []*string
+	AdditionalStagingLabelsToDownload []string
 }
 
 // Information about a subscription.
@@ -674,7 +674,7 @@ type Subscription struct {
 type SubscriptionDefinitionVersion struct {
 
 	// A list of subscriptions.
-	Subscriptions []*Subscription
+	Subscriptions []Subscription
 }
 
 // Configuration settings for running telemetry.

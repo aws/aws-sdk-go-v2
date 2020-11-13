@@ -42,11 +42,11 @@ type SubmitFeedbackInput struct {
 	QueryId *string
 
 	// Tells Amazon Kendra that a particular search result link was chosen by the user.
-	ClickFeedbackItems []*types.ClickFeedback
+	ClickFeedbackItems []types.ClickFeedback
 
 	// Provides Amazon Kendra with relevant or not relevant feedback for whether a
 	// particular item was relevant to the search.
-	RelevanceFeedbackItems []*types.RelevanceFeedback
+	RelevanceFeedbackItems []types.RelevanceFeedback
 }
 
 type SubmitFeedbackOutput struct {

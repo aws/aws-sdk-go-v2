@@ -282,7 +282,7 @@ func awsRestjson1_deserializeOpDocumentDescribeSigningJobOutput(v **DescribeSign
 				if !ok {
 					return fmt.Errorf("expected JobId to be of type string, got %T instead", value)
 				}
-				sv.JobId = &jtv
+				sv.JobId = ptr.String(jtv)
 			}
 
 		case "overrides":
@@ -296,7 +296,7 @@ func awsRestjson1_deserializeOpDocumentDescribeSigningJobOutput(v **DescribeSign
 				if !ok {
 					return fmt.Errorf("expected PlatformId to be of type string, got %T instead", value)
 				}
-				sv.PlatformId = &jtv
+				sv.PlatformId = ptr.String(jtv)
 			}
 
 		case "profileName":
@@ -305,7 +305,7 @@ func awsRestjson1_deserializeOpDocumentDescribeSigningJobOutput(v **DescribeSign
 				if !ok {
 					return fmt.Errorf("expected ProfileName to be of type string, got %T instead", value)
 				}
-				sv.ProfileName = &jtv
+				sv.ProfileName = ptr.String(jtv)
 			}
 
 		case "requestedBy":
@@ -314,7 +314,7 @@ func awsRestjson1_deserializeOpDocumentDescribeSigningJobOutput(v **DescribeSign
 				if !ok {
 					return fmt.Errorf("expected RequestedBy to be of type string, got %T instead", value)
 				}
-				sv.RequestedBy = &jtv
+				sv.RequestedBy = ptr.String(jtv)
 			}
 
 		case "signedObject":
@@ -352,7 +352,7 @@ func awsRestjson1_deserializeOpDocumentDescribeSigningJobOutput(v **DescribeSign
 				if !ok {
 					return fmt.Errorf("expected StatusReason to be of type string, got %T instead", value)
 				}
-				sv.StatusReason = &jtv
+				sv.StatusReason = ptr.String(jtv)
 			}
 
 		default:
@@ -518,7 +518,7 @@ func awsRestjson1_deserializeOpDocumentGetSigningPlatformOutput(v **GetSigningPl
 				if !ok {
 					return fmt.Errorf("expected DisplayName to be of type string, got %T instead", value)
 				}
-				sv.DisplayName = &jtv
+				sv.DisplayName = ptr.String(jtv)
 			}
 
 		case "maxSizeInMB":
@@ -531,7 +531,7 @@ func awsRestjson1_deserializeOpDocumentGetSigningPlatformOutput(v **GetSigningPl
 				if err != nil {
 					return err
 				}
-				sv.MaxSizeInMB = ptr.Int32(int32(i64))
+				sv.MaxSizeInMB = int32(i64)
 			}
 
 		case "partner":
@@ -540,7 +540,7 @@ func awsRestjson1_deserializeOpDocumentGetSigningPlatformOutput(v **GetSigningPl
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Partner = &jtv
+				sv.Partner = ptr.String(jtv)
 			}
 
 		case "platformId":
@@ -549,7 +549,7 @@ func awsRestjson1_deserializeOpDocumentGetSigningPlatformOutput(v **GetSigningPl
 				if !ok {
 					return fmt.Errorf("expected PlatformId to be of type string, got %T instead", value)
 				}
-				sv.PlatformId = &jtv
+				sv.PlatformId = ptr.String(jtv)
 			}
 
 		case "signingConfiguration":
@@ -568,7 +568,7 @@ func awsRestjson1_deserializeOpDocumentGetSigningPlatformOutput(v **GetSigningPl
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Target = &jtv
+				sv.Target = ptr.String(jtv)
 			}
 
 		default:
@@ -728,7 +728,7 @@ func awsRestjson1_deserializeOpDocumentGetSigningProfileOutput(v **GetSigningPro
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Arn = &jtv
+				sv.Arn = ptr.String(jtv)
 			}
 
 		case "overrides":
@@ -742,7 +742,7 @@ func awsRestjson1_deserializeOpDocumentGetSigningProfileOutput(v **GetSigningPro
 				if !ok {
 					return fmt.Errorf("expected PlatformId to be of type string, got %T instead", value)
 				}
-				sv.PlatformId = &jtv
+				sv.PlatformId = ptr.String(jtv)
 			}
 
 		case "profileName":
@@ -751,7 +751,7 @@ func awsRestjson1_deserializeOpDocumentGetSigningProfileOutput(v **GetSigningPro
 				if !ok {
 					return fmt.Errorf("expected ProfileName to be of type string, got %T instead", value)
 				}
-				sv.ProfileName = &jtv
+				sv.ProfileName = ptr.String(jtv)
 			}
 
 		case "signingMaterial":
@@ -940,7 +940,7 @@ func awsRestjson1_deserializeOpDocumentListSigningJobsOutput(v **ListSigningJobs
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -1100,7 +1100,7 @@ func awsRestjson1_deserializeOpDocumentListSigningPlatformsOutput(v **ListSignin
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "platforms":
@@ -1262,7 +1262,7 @@ func awsRestjson1_deserializeOpDocumentListSigningProfilesOutput(v **ListSigning
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "profiles":
@@ -1583,7 +1583,7 @@ func awsRestjson1_deserializeOpDocumentPutSigningProfileOutput(v **PutSigningPro
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Arn = &jtv
+				sv.Arn = ptr.String(jtv)
 			}
 
 		default:
@@ -1746,7 +1746,7 @@ func awsRestjson1_deserializeOpDocumentStartSigningJobOutput(v **StartSigningJob
 				if !ok {
 					return fmt.Errorf("expected JobId to be of type string, got %T instead", value)
 				}
-				sv.JobId = &jtv
+				sv.JobId = ptr.String(jtv)
 			}
 
 		default:
@@ -2216,7 +2216,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2256,7 +2256,7 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2494,7 +2494,7 @@ func awsRestjson1_deserializeDocumentInternalServiceErrorException(v **types.Int
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2534,7 +2534,7 @@ func awsRestjson1_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2574,7 +2574,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2614,7 +2614,7 @@ func awsRestjson1_deserializeDocumentS3SignedObject(v **types.S3SignedObject, va
 				if !ok {
 					return fmt.Errorf("expected BucketName to be of type string, got %T instead", value)
 				}
-				sv.BucketName = &jtv
+				sv.BucketName = ptr.String(jtv)
 			}
 
 		case "key":
@@ -2623,7 +2623,7 @@ func awsRestjson1_deserializeDocumentS3SignedObject(v **types.S3SignedObject, va
 				if !ok {
 					return fmt.Errorf("expected Key to be of type string, got %T instead", value)
 				}
-				sv.Key = &jtv
+				sv.Key = ptr.String(jtv)
 			}
 
 		default:
@@ -2663,7 +2663,7 @@ func awsRestjson1_deserializeDocumentS3Source(v **types.S3Source, value interfac
 				if !ok {
 					return fmt.Errorf("expected BucketName to be of type string, got %T instead", value)
 				}
-				sv.BucketName = &jtv
+				sv.BucketName = ptr.String(jtv)
 			}
 
 		case "key":
@@ -2672,7 +2672,7 @@ func awsRestjson1_deserializeDocumentS3Source(v **types.S3Source, value interfac
 				if !ok {
 					return fmt.Errorf("expected Key to be of type string, got %T instead", value)
 				}
-				sv.Key = &jtv
+				sv.Key = ptr.String(jtv)
 			}
 
 		case "version":
@@ -2681,7 +2681,7 @@ func awsRestjson1_deserializeDocumentS3Source(v **types.S3Source, value interfac
 				if !ok {
 					return fmt.Errorf("expected Version to be of type string, got %T instead", value)
 				}
-				sv.Version = &jtv
+				sv.Version = ptr.String(jtv)
 			}
 
 		default:
@@ -2905,7 +2905,7 @@ func awsRestjson1_deserializeDocumentSigningJob(v **types.SigningJob, value inte
 				if !ok {
 					return fmt.Errorf("expected JobId to be of type string, got %T instead", value)
 				}
-				sv.JobId = &jtv
+				sv.JobId = ptr.String(jtv)
 			}
 
 		case "signedObject":
@@ -2941,7 +2941,7 @@ func awsRestjson1_deserializeDocumentSigningJob(v **types.SigningJob, value inte
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentSigningJobs(v *[]*types.SigningJob, value interface{}) error {
+func awsRestjson1_deserializeDocumentSigningJobs(v *[]types.SigningJob, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2954,18 +2954,20 @@ func awsRestjson1_deserializeDocumentSigningJobs(v *[]*types.SigningJob, value i
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.SigningJob
+	var cv []types.SigningJob
 	if *v == nil {
-		cv = []*types.SigningJob{}
+		cv = []types.SigningJob{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.SigningJob
-		if err := awsRestjson1_deserializeDocumentSigningJob(&col, value); err != nil {
+		var col types.SigningJob
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSigningJob(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -3001,7 +3003,7 @@ func awsRestjson1_deserializeDocumentSigningMaterial(v **types.SigningMaterial, 
 				if !ok {
 					return fmt.Errorf("expected CertificateArn to be of type string, got %T instead", value)
 				}
-				sv.CertificateArn = &jtv
+				sv.CertificateArn = ptr.String(jtv)
 			}
 
 		default:
@@ -3013,7 +3015,7 @@ func awsRestjson1_deserializeDocumentSigningMaterial(v **types.SigningMaterial, 
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentSigningParameters(v *map[string]*string, value interface{}) error {
+func awsRestjson1_deserializeDocumentSigningParameters(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3026,21 +3028,21 @@ func awsRestjson1_deserializeDocumentSigningParameters(v *map[string]*string, va
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var mv map[string]*string
+	var mv map[string]string
 	if *v == nil {
-		mv = map[string]*string{}
+		mv = map[string]string{}
 	} else {
 		mv = *v
 	}
 
 	for key, value := range shape {
-		var parsedVal *string
+		var parsedVal string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected SigningParameterValue to be of type string, got %T instead", value)
 			}
-			parsedVal = &jtv
+			parsedVal = jtv
 		}
 		mv[key] = parsedVal
 
@@ -3086,7 +3088,7 @@ func awsRestjson1_deserializeDocumentSigningPlatform(v **types.SigningPlatform, 
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.DisplayName = &jtv
+				sv.DisplayName = ptr.String(jtv)
 			}
 
 		case "maxSizeInMB":
@@ -3099,7 +3101,7 @@ func awsRestjson1_deserializeDocumentSigningPlatform(v **types.SigningPlatform, 
 				if err != nil {
 					return err
 				}
-				sv.MaxSizeInMB = ptr.Int32(int32(i64))
+				sv.MaxSizeInMB = int32(i64)
 			}
 
 		case "partner":
@@ -3108,7 +3110,7 @@ func awsRestjson1_deserializeDocumentSigningPlatform(v **types.SigningPlatform, 
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Partner = &jtv
+				sv.Partner = ptr.String(jtv)
 			}
 
 		case "platformId":
@@ -3117,7 +3119,7 @@ func awsRestjson1_deserializeDocumentSigningPlatform(v **types.SigningPlatform, 
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.PlatformId = &jtv
+				sv.PlatformId = ptr.String(jtv)
 			}
 
 		case "signingConfiguration":
@@ -3136,7 +3138,7 @@ func awsRestjson1_deserializeDocumentSigningPlatform(v **types.SigningPlatform, 
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Target = &jtv
+				sv.Target = ptr.String(jtv)
 			}
 
 		default:
@@ -3193,7 +3195,7 @@ func awsRestjson1_deserializeDocumentSigningPlatformOverrides(v **types.SigningP
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentSigningPlatforms(v *[]*types.SigningPlatform, value interface{}) error {
+func awsRestjson1_deserializeDocumentSigningPlatforms(v *[]types.SigningPlatform, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3206,18 +3208,20 @@ func awsRestjson1_deserializeDocumentSigningPlatforms(v *[]*types.SigningPlatfor
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.SigningPlatform
+	var cv []types.SigningPlatform
 	if *v == nil {
-		cv = []*types.SigningPlatform{}
+		cv = []types.SigningPlatform{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.SigningPlatform
-		if err := awsRestjson1_deserializeDocumentSigningPlatform(&col, value); err != nil {
+		var col types.SigningPlatform
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSigningPlatform(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -3253,7 +3257,7 @@ func awsRestjson1_deserializeDocumentSigningProfile(v **types.SigningProfile, va
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Arn = &jtv
+				sv.Arn = ptr.String(jtv)
 			}
 
 		case "platformId":
@@ -3262,7 +3266,7 @@ func awsRestjson1_deserializeDocumentSigningProfile(v **types.SigningProfile, va
 				if !ok {
 					return fmt.Errorf("expected PlatformId to be of type string, got %T instead", value)
 				}
-				sv.PlatformId = &jtv
+				sv.PlatformId = ptr.String(jtv)
 			}
 
 		case "profileName":
@@ -3271,7 +3275,7 @@ func awsRestjson1_deserializeDocumentSigningProfile(v **types.SigningProfile, va
 				if !ok {
 					return fmt.Errorf("expected ProfileName to be of type string, got %T instead", value)
 				}
-				sv.ProfileName = &jtv
+				sv.ProfileName = ptr.String(jtv)
 			}
 
 		case "signingMaterial":
@@ -3307,7 +3311,7 @@ func awsRestjson1_deserializeDocumentSigningProfile(v **types.SigningProfile, va
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentSigningProfiles(v *[]*types.SigningProfile, value interface{}) error {
+func awsRestjson1_deserializeDocumentSigningProfiles(v *[]types.SigningProfile, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3320,18 +3324,20 @@ func awsRestjson1_deserializeDocumentSigningProfiles(v *[]*types.SigningProfile,
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.SigningProfile
+	var cv []types.SigningProfile
 	if *v == nil {
-		cv = []*types.SigningProfile{}
+		cv = []types.SigningProfile{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.SigningProfile
-		if err := awsRestjson1_deserializeDocumentSigningProfile(&col, value); err != nil {
+		var col types.SigningProfile
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSigningProfile(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -3375,7 +3381,7 @@ func awsRestjson1_deserializeDocumentSource(v **types.Source, value interface{})
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentTagMap(v *map[string]*string, value interface{}) error {
+func awsRestjson1_deserializeDocumentTagMap(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3388,21 +3394,21 @@ func awsRestjson1_deserializeDocumentTagMap(v *map[string]*string, value interfa
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var mv map[string]*string
+	var mv map[string]string
 	if *v == nil {
-		mv = map[string]*string{}
+		mv = map[string]string{}
 	} else {
 		mv = *v
 	}
 
 	for key, value := range shape {
-		var parsedVal *string
+		var parsedVal string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected TagValue to be of type string, got %T instead", value)
 			}
-			parsedVal = &jtv
+			parsedVal = jtv
 		}
 		mv[key] = parsedVal
 
@@ -3439,7 +3445,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -3479,7 +3485,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:

@@ -105,7 +105,7 @@ type PutItemInput struct {
 	// AttributeValue object.
 	//
 	// This member is required.
-	Item map[string]*types.AttributeValue
+	Item map[string]types.AttributeValue
 
 	// The name of the table to contain the item.
 	//
@@ -141,7 +141,7 @@ type PutItemInput struct {
 	// information, see Expected
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html)
 	// in the Amazon DynamoDB Developer Guide.
-	Expected map[string]*types.ExpectedAttributeValue
+	Expected map[string]types.ExpectedAttributeValue
 
 	// One or more substitution tokens for attribute names in an expression. The
 	// following are some use cases for using ExpressionAttributeNames:
@@ -182,7 +182,7 @@ type PutItemInput struct {
 	// expression attribute names, see Specifying Item Attributes
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
 	// in the Amazon DynamoDB Developer Guide.
-	ExpressionAttributeNames map[string]*string
+	ExpressionAttributeNames map[string]string
 
 	// One or more values that can be substituted in an expression. Use the : (colon)
 	// character in an expression to dereference an attribute value. For example,
@@ -195,7 +195,7 @@ type PutItemInput struct {
 	// expression attribute values, see Condition Expressions
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html)
 	// in the Amazon DynamoDB Developer Guide.
-	ExpressionAttributeValues map[string]*types.AttributeValue
+	ExpressionAttributeValues map[string]types.AttributeValue
 
 	// Determines the level of detail about provisioned throughput consumption that is
 	// returned in the response:
@@ -243,7 +243,7 @@ type PutItemOutput struct {
 	// The attribute values as they appeared before the PutItem operation, but only if
 	// ReturnValues is specified as ALL_OLD in the request. Each element consists of an
 	// attribute name and an attribute value.
-	Attributes map[string]*types.AttributeValue
+	Attributes map[string]types.AttributeValue
 
 	// The capacity units consumed by the PutItem operation. The data returned includes
 	// the total provisioned throughput consumed, along with statistics for the table

@@ -40,13 +40,13 @@ type CreateTokenInput struct {
 
 	RefreshToken *string
 
-	Scope []*string
+	Scope []string
 }
 
 type CreateTokenOutput struct {
 	AccessToken *string
 
-	ExpiresIn *int32
+	ExpiresIn int32
 
 	IdToken *string
 

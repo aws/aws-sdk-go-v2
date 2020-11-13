@@ -36,7 +36,7 @@ type CloseTunnelInput struct {
 	TunnelId *string
 
 	// When set to true, AWS IoT Secure Tunneling deletes the tunnel data immediately.
-	Delete *bool
+	Delete bool
 }
 
 type CloseTunnelOutput struct {

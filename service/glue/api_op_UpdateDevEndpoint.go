@@ -48,27 +48,27 @@ type UpdateDevEndpointInput struct {
 	// version of Python support for development endpoints by using the Arguments
 	// parameter in the CreateDevEndpoint or UpdateDevEndpoint APIs. If no arguments
 	// are provided, the version defaults to Python 2.
-	AddArguments map[string]*string
+	AddArguments map[string]string
 
 	// The list of public keys for the DevEndpoint to use.
-	AddPublicKeys []*string
+	AddPublicKeys []string
 
 	// Custom Python or Java libraries to be loaded in the DevEndpoint.
 	CustomLibraries *types.DevEndpointCustomLibraries
 
 	// The list of argument keys to be deleted from the map of arguments used to
 	// configure the DevEndpoint.
-	DeleteArguments []*string
+	DeleteArguments []string
 
 	// The list of public keys to be deleted from the DevEndpoint.
-	DeletePublicKeys []*string
+	DeletePublicKeys []string
 
 	// The public key for the DevEndpoint to use.
 	PublicKey *string
 
 	// True if the list of custom libraries to be loaded in the development endpoint
 	// needs to be updated, or False if otherwise.
-	UpdateEtlLibraries *bool
+	UpdateEtlLibraries bool
 }
 
 type UpdateDevEndpointOutput struct {

@@ -63,7 +63,7 @@ type DescribeBudgetActionHistoriesOutput struct {
 	// The historical record of the budget action resource.
 	//
 	// This member is required.
-	ActionHistories []*types.ActionHistory
+	ActionHistories []types.ActionHistory
 
 	// A generic string.
 	NextToken *string

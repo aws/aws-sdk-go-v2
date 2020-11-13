@@ -43,7 +43,7 @@ type UpdateBasePathMappingInput struct {
 
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
-	PatchOperations []*types.PatchOperation
+	PatchOperations []types.PatchOperation
 }
 
 // Represents the base path that callers of the API must provide as part of the URL

@@ -88,11 +88,11 @@ type CreateDashboardInput struct {
 	// A structure that contains the permissions of the dashboard. You can use this
 	// structure for granting permissions by providing a list of IAM action information
 	// for each principal ARN. To specify no permissions, omit the permissions list.
-	Permissions []*types.ResourcePermission
+	Permissions []types.ResourcePermission
 
 	// Contains a map of the key-value pairs for the resource tag or tags assigned to
 	// the dashboard.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The Amazon Resource Name (ARN) of the theme that is being used for this
 	// dashboard. If you add a value for this field, it overrides the value that is
@@ -119,7 +119,7 @@ type CreateDashboardOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// The ARN of the dashboard, including the version number of the first version that
 	// is created.

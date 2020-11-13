@@ -42,7 +42,7 @@ type DescribeDataRepositoryTasksInput struct {
 	// (Optional) You can use filters to narrow the DescribeDataRepositoryTasks
 	// response to include just tasks for specific file systems, or tasks in a specific
 	// lifecycle state.
-	Filters []*types.DataRepositoryTaskFilter
+	Filters []types.DataRepositoryTaskFilter
 
 	// The maximum number of resources to return in the response. This value must be an
 	// integer greater than zero.
@@ -54,13 +54,13 @@ type DescribeDataRepositoryTasksInput struct {
 	NextToken *string
 
 	// (Optional) IDs of the tasks whose descriptions you want to retrieve (String).
-	TaskIds []*string
+	TaskIds []string
 }
 
 type DescribeDataRepositoryTasksOutput struct {
 
 	// The collection of data repository task descriptions returned.
-	DataRepositoryTasks []*types.DataRepositoryTask
+	DataRepositoryTasks []types.DataRepositoryTask
 
 	// (Optional) Opaque pagination token returned from a previous operation (String).
 	// If present, this token indicates from what point you can continue processing the

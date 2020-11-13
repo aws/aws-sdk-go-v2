@@ -35,7 +35,7 @@ type TestAuthorizationInput struct {
 	// response for each authInfo object in the list.
 	//
 	// This member is required.
-	AuthInfos []*types.AuthInfo
+	AuthInfos []types.AuthInfo
 
 	// The MQTT client ID.
 	ClientId *string
@@ -45,11 +45,11 @@ type TestAuthorizationInput struct {
 
 	// When testing custom authorization, the policies specified here are treated as if
 	// they are attached to the principal being authorized.
-	PolicyNamesToAdd []*string
+	PolicyNamesToAdd []string
 
 	// When testing custom authorization, the policies specified here are treated as if
 	// they are not attached to the principal being authorized.
-	PolicyNamesToSkip []*string
+	PolicyNamesToSkip []string
 
 	// The principal. Valid principals are CertificateArn
 	// (arn:aws:iot:region:accountId:cert/certificateId), thingGroupArn
@@ -60,7 +60,7 @@ type TestAuthorizationInput struct {
 type TestAuthorizationOutput struct {
 
 	// The authentication results.
-	AuthResults []*types.AuthResult
+	AuthResults []types.AuthResult
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -40,7 +40,7 @@ type GetServersInput struct {
 	NextToken *string
 
 	// The server addresses.
-	VmServerAddressList []*types.VmServerAddress
+	VmServerAddressList []types.VmServerAddress
 }
 
 type GetServersOutput struct {
@@ -56,7 +56,7 @@ type GetServersOutput struct {
 	ServerCatalogStatus types.ServerCatalogStatus
 
 	// Information about the servers.
-	ServerList []*types.Server
+	ServerList []types.Server
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

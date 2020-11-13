@@ -41,10 +41,10 @@ type UpdateDataSourcePermissionsInput struct {
 	DataSourceId *string
 
 	// A list of resource permissions that you want to grant on the data source.
-	GrantPermissions []*types.ResourcePermission
+	GrantPermissions []types.ResourcePermission
 
 	// A list of resource permissions that you want to revoke on the data source.
-	RevokePermissions []*types.ResourcePermission
+	RevokePermissions []types.ResourcePermission
 }
 
 type UpdateDataSourcePermissionsOutput struct {
@@ -60,7 +60,7 @@ type UpdateDataSourcePermissionsOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

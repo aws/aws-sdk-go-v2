@@ -57,7 +57,7 @@ type GetDeploymentsInput struct {
 type GetDeploymentsOutput struct {
 
 	// The current page of elements from this collection.
-	Items []*types.Deployment
+	Items []types.Deployment
 
 	// The current pagination position in the paged result set.
 	Position *string

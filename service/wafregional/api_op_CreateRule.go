@@ -96,7 +96,7 @@ type CreateRuleInput struct {
 	Name *string
 
 	//
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateRuleOutput struct {

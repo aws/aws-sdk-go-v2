@@ -31,7 +31,7 @@ type DescribeJobQueuesInput struct {
 
 	// A list of up to 100 queue names or full queue Amazon Resource Name (ARN)
 	// entries.
-	JobQueues []*string
+	JobQueues []string
 
 	// The maximum number of results returned by DescribeJobQueues in paginated output.
 	// When this parameter is used, DescribeJobQueues only returns maxResults results
@@ -40,7 +40,7 @@ type DescribeJobQueuesInput struct {
 	// with the returned nextToken value. This value can be between 1 and 100. If this
 	// parameter is not used, then DescribeJobQueues returns up to 100 results and a
 	// nextToken value if applicable.
-	MaxResults *int32
+	MaxResults int32
 
 	// The nextToken value returned from a previous paginated DescribeJobQueues request
 	// where maxResults was used and the results exceeded the value of that parameter.
@@ -54,7 +54,7 @@ type DescribeJobQueuesInput struct {
 type DescribeJobQueuesOutput struct {
 
 	// The list of job queues.
-	JobQueues []*types.JobQueueDetail
+	JobQueues []types.JobQueueDetail
 
 	// The nextToken value to include in a future DescribeJobQueues request. When the
 	// results of a DescribeJobQueues request exceed maxResults, this value can be used

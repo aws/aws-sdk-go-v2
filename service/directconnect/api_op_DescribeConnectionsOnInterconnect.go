@@ -40,7 +40,7 @@ type DescribeConnectionsOnInterconnectInput struct {
 type DescribeConnectionsOnInterconnectOutput struct {
 
 	// The connections.
-	Connections []*types.Connection
+	Connections []types.Connection
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

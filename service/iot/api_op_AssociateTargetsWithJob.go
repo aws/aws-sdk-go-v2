@@ -45,7 +45,7 @@ type AssociateTargetsWithJobInput struct {
 	// A list of thing group ARNs that define the targets of the job.
 	//
 	// This member is required.
-	Targets []*string
+	Targets []string
 
 	// An optional comment string describing why the job was associated with the
 	// targets.

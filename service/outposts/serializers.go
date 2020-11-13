@@ -157,13 +157,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteOutpostInput(v *DeleteOutpostInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.OutpostId == nil {
+	if v.OutpostId == nil || len(*v.OutpostId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member OutpostId must not be empty")}
 	}
 	if v.OutpostId != nil {
-		if len(*v.OutpostId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member OutpostId must not be empty")}
-		}
 		if err := encoder.SetURI("OutpostId").String(*v.OutpostId); err != nil {
 			return err
 		}
@@ -223,13 +220,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteSiteInput(v *DeleteSiteInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SiteId == nil {
+	if v.SiteId == nil || len(*v.SiteId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member SiteId must not be empty")}
 	}
 	if v.SiteId != nil {
-		if len(*v.SiteId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member SiteId must not be empty")}
-		}
 		if err := encoder.SetURI("SiteId").String(*v.SiteId); err != nil {
 			return err
 		}
@@ -289,13 +283,10 @@ func awsRestjson1_serializeOpHttpBindingsGetOutpostInput(v *GetOutpostInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.OutpostId == nil {
+	if v.OutpostId == nil || len(*v.OutpostId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member OutpostId must not be empty")}
 	}
 	if v.OutpostId != nil {
-		if len(*v.OutpostId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member OutpostId must not be empty")}
-		}
 		if err := encoder.SetURI("OutpostId").String(*v.OutpostId); err != nil {
 			return err
 		}
@@ -363,13 +354,10 @@ func awsRestjson1_serializeOpHttpBindingsGetOutpostInstanceTypesInput(v *GetOutp
 		encoder.SetQuery("NextToken").String(*v.NextToken)
 	}
 
-	if v.OutpostId == nil {
+	if v.OutpostId == nil || len(*v.OutpostId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member OutpostId must not be empty")}
 	}
 	if v.OutpostId != nil {
-		if len(*v.OutpostId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member OutpostId must not be empty")}
-		}
 		if err := encoder.SetURI("OutpostId").String(*v.OutpostId); err != nil {
 			return err
 		}

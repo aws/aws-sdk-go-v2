@@ -71,7 +71,7 @@ type DescribeGameServerInstancesInput struct {
 	// The EC2 instance IDs that you want to retrieve status on. EC2 instance IDs use a
 	// 17-character format, for example: i-1234567890abcdef0. To retrieve all instances
 	// in the game server group, leave this parameter empty.
-	InstanceIds []*string
+	InstanceIds []string
 
 	// The maximum number of results to return. Use this parameter with NextToken to
 	// get results as a set of sequential segments.
@@ -86,7 +86,7 @@ type DescribeGameServerInstancesInput struct {
 type DescribeGameServerInstancesOutput struct {
 
 	// The collection of requested game server instances.
-	GameServerInstances []*types.GameServerInstance
+	GameServerInstances []types.GameServerInstance
 
 	// A token that indicates where to resume retrieving results on the next call to
 	// this operation. If no token is returned, these results represent the end of the

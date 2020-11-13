@@ -48,7 +48,7 @@ type UpdateLogPatternInput struct {
 	Pattern *string
 
 	// Rank of the log pattern.
-	Rank *int32
+	Rank int32
 }
 
 type UpdateLogPatternOutput struct {

@@ -69,12 +69,12 @@ type UpdateIntegrationResponseInput struct {
 	// integration.response.body.{JSON-expression} , where {name} is a valid and unique
 	// response header name and {JSON-expression} is a valid JSON expression without
 	// the $ prefix.
-	ResponseParameters map[string]*string
+	ResponseParameters map[string]string
 
 	// The collection of response templates for the integration response as a
 	// string-to-string map of key-value pairs. Response templates are represented as a
 	// key/value map, with a content-type as the key and a template as the value.
-	ResponseTemplates map[string]*string
+	ResponseTemplates map[string]string
 
 	// The template selection expression for the integration response. Supported only
 	// for WebSocket APIs.
@@ -110,12 +110,12 @@ type UpdateIntegrationResponseOutput struct {
 	// integration.response.body.{JSON-expression}, where name is a valid and unique
 	// response header name and JSON-expression is a valid JSON expression without the
 	// $ prefix.
-	ResponseParameters map[string]*string
+	ResponseParameters map[string]string
 
 	// The collection of response templates for the integration response as a
 	// string-to-string map of key-value pairs. Response templates are represented as a
 	// key/value map, with a content-type as the key and a template as the value.
-	ResponseTemplates map[string]*string
+	ResponseTemplates map[string]string
 
 	// The template selection expressions for the integration response.
 	TemplateSelectionExpression *string

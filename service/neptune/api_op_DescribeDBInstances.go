@@ -53,7 +53,7 @@ type DescribeDBInstancesInput struct {
 	// For example, to invoke this API from the AWS
 	// CLI and filter so that only Neptune DB instances are returned, you could use the
 	// following command:
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous DescribeDBInstances request.
 	// If this parameter is specified, the response includes only records beyond the
@@ -70,7 +70,7 @@ type DescribeDBInstancesInput struct {
 type DescribeDBInstancesOutput struct {
 
 	// A list of DBInstance instances.
-	DBInstances []*types.DBInstance
+	DBInstances []types.DBInstance
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the

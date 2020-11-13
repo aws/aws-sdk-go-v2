@@ -52,7 +52,7 @@ type ListTagsForVaultInput struct {
 type ListTagsForVaultOutput struct {
 
 	// The tags attached to the vault. Each tag is composed of a key and a value.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

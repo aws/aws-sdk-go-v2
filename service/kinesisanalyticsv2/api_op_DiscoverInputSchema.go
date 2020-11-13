@@ -65,14 +65,14 @@ type DiscoverInputSchemaOutput struct {
 
 	// An array of elements, where each element corresponds to a row in a stream record
 	// (a stream record can have more than one row).
-	ParsedInputRecords [][]*string
+	ParsedInputRecords [][]string
 
 	// The stream data that was modified by the processor specified in the
 	// InputProcessingConfiguration parameter.
-	ProcessedInputRecords []*string
+	ProcessedInputRecords []string
 
 	// The raw stream data that was sampled to infer the schema.
-	RawInputRecords []*string
+	RawInputRecords []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

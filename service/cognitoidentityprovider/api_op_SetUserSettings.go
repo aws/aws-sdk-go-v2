@@ -42,7 +42,7 @@ type SetUserSettingsInput struct {
 	// delivery.
 	//
 	// This member is required.
-	MFAOptions []*types.MFAOptionType
+	MFAOptions []types.MFAOptionType
 }
 
 // The response from the server for a set user settings request.

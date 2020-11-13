@@ -15,7 +15,7 @@ type AddAttributesActivity struct {
 	// to remove the originals, use "RemoveAttributeActivity".
 	//
 	// This member is required.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// The name of the 'addAttributes' activity.
 	//
@@ -166,7 +166,7 @@ type ContainerDatasetAction struct {
 	// containerized application (basically, parameters passed to the application).
 	// Each variable must have a name and a value given by one of "stringValue",
 	// "datasetContentVersionValue", or "outputFileUriValue".
-	Variables []*Variable
+	Variables []Variable
 }
 
 // Use this to store channel data in an S3 bucket that you manage. If customer
@@ -255,14 +255,14 @@ type CustomerManagedDatastoreS3StorageSummary struct {
 type Dataset struct {
 
 	// The "DatasetAction" objects that automatically create the data set contents.
-	Actions []*DatasetAction
+	Actions []DatasetAction
 
 	// The ARN of the data set.
 	Arn *string
 
 	// When data set contents are created they are delivered to destinations specified
 	// here.
-	ContentDeliveryRules []*DatasetContentDeliveryRule
+	ContentDeliveryRules []DatasetContentDeliveryRule
 
 	// When the data set was created.
 	CreationTime *time.Time
@@ -281,7 +281,7 @@ type Dataset struct {
 
 	// The "DatasetTrigger" objects that specify when the data set is automatically
 	// updated.
-	Triggers []*DatasetTrigger
+	Triggers []DatasetTrigger
 
 	// [Optional] How many versions of data set contents are kept. If not specified or
 	// set to null, only the latest version plus the latest succeeded version (if they
@@ -398,7 +398,7 @@ type DatasetEntry struct {
 type DatasetSummary struct {
 
 	// A list of "DataActionSummary" objects.
-	Actions []*DatasetActionSummary
+	Actions []DatasetActionSummary
 
 	// The time the data set was created.
 	CreationTime *time.Time
@@ -415,7 +415,7 @@ type DatasetSummary struct {
 	// A list of triggers. A trigger causes data set content to be populated at a
 	// specified time interval or when another data set is populated. The list of
 	// triggers can be empty or contain up to five DataSetTrigger objects
-	Triggers []*DatasetTrigger
+	Triggers []DatasetTrigger
 }
 
 // The "DatasetTrigger" that specifies when the data set is automatically updated.
@@ -697,7 +697,7 @@ type LoggingOptions struct {
 	// If true, logging is enabled for AWS IoT Analytics.
 	//
 	// This member is required.
-	Enabled *bool
+	Enabled bool
 
 	// The logging level. Currently, only "ERROR" is supported.
 	//
@@ -766,7 +766,7 @@ type OutputFileUriValue struct {
 type Pipeline struct {
 
 	// The activities that perform transformations on the messages.
-	Activities []*PipelineActivity
+	Activities []PipelineActivity
 
 	// The ARN of the pipeline.
 	Arn *string
@@ -781,7 +781,7 @@ type Pipeline struct {
 	Name *string
 
 	// A summary of information about the pipeline reprocessing.
-	ReprocessingSummaries []*ReprocessingSummary
+	ReprocessingSummaries []ReprocessingSummary
 }
 
 // An activity that performs a transformation on a message.
@@ -833,7 +833,7 @@ type PipelineSummary struct {
 	PipelineName *string
 
 	// A summary of information about the pipeline reprocessing.
-	ReprocessingSummaries []*ReprocessingSummary
+	ReprocessingSummaries []ReprocessingSummary
 }
 
 // Information which is used to filter message data, to segregate it according to
@@ -851,7 +851,7 @@ type RemoveAttributesActivity struct {
 	// A list of 1-50 attributes to remove from the message.
 	//
 	// This member is required.
-	Attributes []*string
+	Attributes []string
 
 	// The name of the 'removeAttributes' activity.
 	//
@@ -888,7 +888,7 @@ type ResourceConfiguration struct {
 	// used to execute the "containerAction" (min: 1, max: 50).
 	//
 	// This member is required.
-	VolumeSizeInGB *int32
+	VolumeSizeInGB int32
 }
 
 // How long, in days, message data is kept.
@@ -899,7 +899,7 @@ type RetentionPeriod struct {
 	NumberOfDays *int32
 
 	// If true, message data is kept indefinitely.
-	Unlimited *bool
+	Unlimited bool
 }
 
 // Configuration information for delivery of data set contents to Amazon S3.
@@ -949,7 +949,7 @@ type SelectAttributesActivity struct {
 	// A list of the attributes to select from the message.
 	//
 	// This member is required.
-	Attributes []*string
+	Attributes []string
 
 	// The name of the 'selectAttributes' activity.
 	//
@@ -991,7 +991,7 @@ type SqlQueryDatasetAction struct {
 	SqlQuery *string
 
 	// Pre-filters applied to message data.
-	Filters []*QueryFilter
+	Filters []QueryFilter
 }
 
 // A set of key/value pairs which are used to manage the resource.
@@ -1034,7 +1034,7 @@ type Variable struct {
 	DatasetContentVersionValue *DatasetContentVersionValue
 
 	// The value of the variable as a double (numeric).
-	DoubleValue *float64
+	DoubleValue float64
 
 	// The value of the variable as a structure that specifies an output file URI.
 	OutputFileUriValue *OutputFileUriValue
@@ -1051,5 +1051,5 @@ type VersioningConfiguration struct {
 	MaxVersions *int32
 
 	// If true, unlimited versions of data set contents will be kept.
-	Unlimited *bool
+	Unlimited bool
 }

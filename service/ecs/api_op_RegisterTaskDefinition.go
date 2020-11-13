@@ -54,7 +54,7 @@ type RegisterTaskDefinitionInput struct {
 	// containers that make up your task.
 	//
 	// This member is required.
-	ContainerDefinitions []*types.ContainerDefinition
+	ContainerDefinitions []types.ContainerDefinition
 
 	// You must specify a family for a task definition, which allows you to track
 	// multiple versions of the same task definition. The family is used as a name for
@@ -102,7 +102,7 @@ type RegisterTaskDefinitionInput struct {
 	ExecutionRoleArn *string
 
 	// The Elastic Inference accelerators to use for the containers in the task.
-	InferenceAccelerators []*types.InferenceAccelerator
+	InferenceAccelerators []types.InferenceAccelerator
 
 	// The IPC resource namespace to use for the containers in the task. The valid
 	// values are host, task, or none. If host is specified, then all containers within
@@ -208,7 +208,7 @@ type RegisterTaskDefinitionInput struct {
 	// An array of placement constraint objects to use for the task. You can specify a
 	// maximum of 10 constraints per task (this limit includes constraints in the task
 	// definition and those specified at runtime).
-	PlacementConstraints []*types.TaskDefinitionPlacementConstraint
+	PlacementConstraints []types.TaskDefinitionPlacementConstraint
 
 	// The configuration details for the App Mesh proxy. For tasks using the EC2 launch
 	// type, the container instances require at least version 1.26.0 of the container
@@ -255,7 +255,7 @@ type RegisterTaskDefinitionInput struct {
 	// of such as a prefix for either keys or values as it is reserved for AWS use. You
 	// cannot edit or delete tag keys or values with this prefix. Tags with this prefix
 	// do not count against your tags per resource limit.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The short name or full Amazon Resource Name (ARN) of the IAM role that
 	// containers in this task can assume. All containers in this task are granted the
@@ -267,13 +267,13 @@ type RegisterTaskDefinitionInput struct {
 
 	// A list of volume definitions in JSON format that containers in your task may
 	// use.
-	Volumes []*types.Volume
+	Volumes []types.Volume
 }
 
 type RegisterTaskDefinitionOutput struct {
 
 	// The list of tags associated with the task definition.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The full description of the registered task definition.
 	TaskDefinition *types.TaskDefinition

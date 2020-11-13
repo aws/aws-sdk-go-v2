@@ -52,7 +52,7 @@ type ListProtectedResourcesOutput struct {
 	// An array of resources successfully backed up by AWS Backup including the time
 	// the resource was saved, an Amazon Resource Name (ARN) of the resource, and a
 	// resource type.
-	Results []*types.ProtectedResource
+	Results []types.ProtectedResource
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

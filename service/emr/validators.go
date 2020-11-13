@@ -809,9 +809,6 @@ func validateBlockPublicAccessConfiguration(v *types.BlockPublicAccessConfigurat
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BlockPublicAccessConfiguration"}
-	if v.BlockPublicSecurityGroupRules == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BlockPublicSecurityGroupRules"))
-	}
 	if v.PermittedPublicSecurityGroupRuleRanges != nil {
 		if err := validatePortRanges(v.PermittedPublicSecurityGroupRuleRanges); err != nil {
 			invalidParams.AddNested("PermittedPublicSecurityGroupRuleRanges", err.(smithy.InvalidParamsError))
@@ -846,13 +843,13 @@ func validateBootstrapActionConfig(v *types.BootstrapActionConfig) error {
 	}
 }
 
-func validateBootstrapActionConfigList(v []*types.BootstrapActionConfig) error {
+func validateBootstrapActionConfigList(v []types.BootstrapActionConfig) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BootstrapActionConfigList"}
 	for i := range v {
-		if err := validateBootstrapActionConfig(v[i]); err != nil {
+		if err := validateBootstrapActionConfig(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -927,13 +924,13 @@ func validateEbsBlockDeviceConfig(v *types.EbsBlockDeviceConfig) error {
 	}
 }
 
-func validateEbsBlockDeviceConfigList(v []*types.EbsBlockDeviceConfig) error {
+func validateEbsBlockDeviceConfigList(v []types.EbsBlockDeviceConfig) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EbsBlockDeviceConfigList"}
 	for i := range v {
-		if err := validateEbsBlockDeviceConfig(v[i]); err != nil {
+		if err := validateEbsBlockDeviceConfig(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1016,13 +1013,13 @@ func validateInstanceFleetConfig(v *types.InstanceFleetConfig) error {
 	}
 }
 
-func validateInstanceFleetConfigList(v []*types.InstanceFleetConfig) error {
+func validateInstanceFleetConfigList(v []types.InstanceFleetConfig) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InstanceFleetConfigList"}
 	for i := range v {
-		if err := validateInstanceFleetConfig(v[i]); err != nil {
+		if err := validateInstanceFleetConfig(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1101,13 +1098,13 @@ func validateInstanceGroupConfig(v *types.InstanceGroupConfig) error {
 	}
 }
 
-func validateInstanceGroupConfigList(v []*types.InstanceGroupConfig) error {
+func validateInstanceGroupConfigList(v []types.InstanceGroupConfig) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InstanceGroupConfigList"}
 	for i := range v {
-		if err := validateInstanceGroupConfig(v[i]); err != nil {
+		if err := validateInstanceGroupConfig(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1133,13 +1130,13 @@ func validateInstanceGroupModifyConfig(v *types.InstanceGroupModifyConfig) error
 	}
 }
 
-func validateInstanceGroupModifyConfigList(v []*types.InstanceGroupModifyConfig) error {
+func validateInstanceGroupModifyConfigList(v []types.InstanceGroupModifyConfig) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InstanceGroupModifyConfigList"}
 	for i := range v {
-		if err := validateInstanceGroupModifyConfig(v[i]); err != nil {
+		if err := validateInstanceGroupModifyConfig(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1170,13 +1167,13 @@ func validateInstanceTypeConfig(v *types.InstanceTypeConfig) error {
 	}
 }
 
-func validateInstanceTypeConfigList(v []*types.InstanceTypeConfig) error {
+func validateInstanceTypeConfigList(v []types.InstanceTypeConfig) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InstanceTypeConfigList"}
 	for i := range v {
-		if err := validateInstanceTypeConfig(v[i]); err != nil {
+		if err := validateInstanceTypeConfig(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1274,13 +1271,13 @@ func validatePlacementGroupConfig(v *types.PlacementGroupConfig) error {
 	}
 }
 
-func validatePlacementGroupConfigList(v []*types.PlacementGroupConfig) error {
+func validatePlacementGroupConfigList(v []types.PlacementGroupConfig) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PlacementGroupConfigList"}
 	for i := range v {
-		if err := validatePlacementGroupConfig(v[i]); err != nil {
+		if err := validatePlacementGroupConfig(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1306,13 +1303,13 @@ func validatePortRange(v *types.PortRange) error {
 	}
 }
 
-func validatePortRanges(v []*types.PortRange) error {
+func validatePortRanges(v []types.PortRange) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PortRanges"}
 	for i := range v {
-		if err := validatePortRange(v[i]); err != nil {
+		if err := validatePortRange(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1389,13 +1386,13 @@ func validateScalingRule(v *types.ScalingRule) error {
 	}
 }
 
-func validateScalingRuleList(v []*types.ScalingRule) error {
+func validateScalingRuleList(v []types.ScalingRule) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ScalingRuleList"}
 	for i := range v {
-		if err := validateScalingRule(v[i]); err != nil {
+		if err := validateScalingRule(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1495,13 +1492,13 @@ func validateStepConfig(v *types.StepConfig) error {
 	}
 }
 
-func validateStepConfigList(v []*types.StepConfig) error {
+func validateStepConfigList(v []types.StepConfig) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StepConfigList"}
 	for i := range v {
-		if err := validateStepConfig(v[i]); err != nil {
+		if err := validateStepConfig(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2041,9 +2038,6 @@ func validateOpSetTerminationProtectionInput(v *SetTerminationProtectionInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SetTerminationProtectionInput"}
-	if v.TerminationProtected == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TerminationProtected"))
-	}
 	if v.JobFlowIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobFlowIds"))
 	}
@@ -2061,9 +2055,6 @@ func validateOpSetVisibleToAllUsersInput(v *SetVisibleToAllUsersInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "SetVisibleToAllUsersInput"}
 	if v.JobFlowIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobFlowIds"))
-	}
-	if v.VisibleToAllUsers == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VisibleToAllUsers"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

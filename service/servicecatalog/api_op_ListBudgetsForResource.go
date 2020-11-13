@@ -44,7 +44,7 @@ type ListBudgetsForResourceInput struct {
 	AcceptLanguage *string
 
 	// The maximum number of items to return with this call.
-	PageSize *int32
+	PageSize int32
 
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
@@ -54,7 +54,7 @@ type ListBudgetsForResourceInput struct {
 type ListBudgetsForResourceOutput struct {
 
 	// Information about the associated budgets.
-	Budgets []*types.BudgetDetail
+	Budgets []types.BudgetDetail
 
 	// The page token to use to retrieve the next set of results. If there are no
 	// additional results, this value is null.

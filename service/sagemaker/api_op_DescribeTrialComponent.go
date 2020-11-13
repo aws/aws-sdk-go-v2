@@ -52,7 +52,7 @@ type DescribeTrialComponentOutput struct {
 	EndTime *time.Time
 
 	// The input artifacts of the component.
-	InputArtifacts map[string]*types.TrialComponentArtifact
+	InputArtifacts map[string]types.TrialComponentArtifact
 
 	// Who last modified the component.
 	LastModifiedBy *types.UserContext
@@ -61,13 +61,13 @@ type DescribeTrialComponentOutput struct {
 	LastModifiedTime *time.Time
 
 	// The metrics for the component.
-	Metrics []*types.TrialComponentMetricSummary
+	Metrics []types.TrialComponentMetricSummary
 
 	// The output artifacts of the component.
-	OutputArtifacts map[string]*types.TrialComponentArtifact
+	OutputArtifacts map[string]types.TrialComponentArtifact
 
 	// The hyperparameters of the component.
-	Parameters map[string]*types.TrialComponentParameterValue
+	Parameters map[string]types.TrialComponentParameterValue
 
 	// The Amazon Resource Name (ARN) of the source and, optionally, the job type.
 	Source *types.TrialComponentSource

@@ -48,7 +48,7 @@ type ListEntityRecognizersInput struct {
 type ListEntityRecognizersOutput struct {
 
 	// The list of properties of an entity recognizer.
-	EntityRecognizerPropertiesList []*types.EntityRecognizerProperties
+	EntityRecognizerPropertiesList []types.EntityRecognizerProperties
 
 	// Identifies the next page of results to return.
 	NextToken *string

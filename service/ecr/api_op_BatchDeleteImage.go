@@ -39,7 +39,7 @@ type BatchDeleteImageInput struct {
 	// the imageIds reference is imageTag=tag or imageDigest=digest.
 	//
 	// This member is required.
-	ImageIds []*types.ImageIdentifier
+	ImageIds []types.ImageIdentifier
 
 	// The repository that contains the image to delete.
 	//
@@ -54,10 +54,10 @@ type BatchDeleteImageInput struct {
 type BatchDeleteImageOutput struct {
 
 	// Any failures associated with the call.
-	Failures []*types.ImageFailure
+	Failures []types.ImageFailure
 
 	// The image IDs of the deleted images.
-	ImageIds []*types.ImageIdentifier
+	ImageIds []types.ImageIdentifier
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

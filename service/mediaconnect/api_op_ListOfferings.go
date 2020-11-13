@@ -39,7 +39,7 @@ type ListOfferingsInput struct {
 	// The service might return fewer results than the MaxResults value. If MaxResults
 	// is not included in the request, the service defaults to pagination with a
 	// maximum of 10 results per page.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token that identifies which batch of results that you want to see. For
 	// example, you submit a ListOfferings request with MaxResults set at 5. The
@@ -60,7 +60,7 @@ type ListOfferingsOutput struct {
 
 	// A list of offerings that are available to this account in the current AWS
 	// Region.
-	Offerings []*types.Offering
+	Offerings []types.Offering
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

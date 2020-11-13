@@ -38,7 +38,7 @@ type PutAttributesInput struct {
 	// attributes per resource. You can specify up to 10 attributes in a single call.
 	//
 	// This member is required.
-	Attributes []*types.Attribute
+	Attributes []types.Attribute
 
 	// The short name or full Amazon Resource Name (ARN) of the cluster that contains
 	// the resource to apply attributes. If you do not specify a cluster, the default
@@ -49,7 +49,7 @@ type PutAttributesInput struct {
 type PutAttributesOutput struct {
 
 	// The attributes applied to your resource.
-	Attributes []*types.Attribute
+	Attributes []types.Attribute
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

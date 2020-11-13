@@ -27,7 +27,7 @@ type AssetShallow struct {
 	SourceRoleArn *string
 
 	// A collection of tags associated with a resource
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // CDN Authorization credentials
@@ -62,14 +62,14 @@ type CmafPackage struct {
 	// A list of HLS manifest configurations.
 	//
 	// This member is required.
-	HlsManifests []*HlsManifest
+	HlsManifests []HlsManifest
 
 	// A CMAF encryption configuration.
 	Encryption *CmafEncryption
 
 	// Duration (in seconds) of each fragment. Actual fragments will be rounded to the
 	// nearest multiple of the source fragment duration.
-	SegmentDurationSeconds *int32
+	SegmentDurationSeconds int32
 }
 
 // A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.
@@ -96,7 +96,7 @@ type DashManifest struct {
 
 	// Minimum duration (in seconds) that a player will buffer media before starting
 	// the presentation.
-	MinBufferTimeSeconds *int32
+	MinBufferTimeSeconds int32
 
 	// The Dynamic Adaptive Streaming over HTTP (DASH) profile type. When set to
 	// "HBBTV_1_5", HbbTV 1.5 compliant output is enabled.
@@ -112,7 +112,7 @@ type DashPackage struct {
 	// A list of DASH manifest configurations.
 	//
 	// This member is required.
-	DashManifests []*DashManifest
+	DashManifests []DashManifest
 
 	// A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.
 	Encryption *DashEncryption
@@ -126,7 +126,7 @@ type DashPackage struct {
 
 	// Duration (in seconds) of each segment. Actual segments will be rounded to the
 	// nearest multiple of the source segment duration.
-	SegmentDurationSeconds *int32
+	SegmentDurationSeconds int32
 
 	// Determines the type of SegmentTemplate included in the Media Presentation
 	// Description (MPD). When set to NUMBER_WITH_TIMELINE, a full timeline is
@@ -176,7 +176,7 @@ type HlsManifest struct {
 	AdMarkers AdMarkers
 
 	// When enabled, an I-Frame only stream will be included in the output.
-	IncludeIframeOnlyStream *bool
+	IncludeIframeOnlyStream bool
 
 	// An optional string to include in the name of the manifest.
 	ManifestName *string
@@ -189,10 +189,10 @@ type HlsManifest struct {
 	// generated. Note that irrespective of this parameter, if any ID3 Timed Metadata
 	// is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS
 	// output.
-	ProgramDateTimeIntervalSeconds *int32
+	ProgramDateTimeIntervalSeconds int32
 
 	// When enabled, the EXT-X-KEY tag will be repeated in output manifests.
-	RepeatExtXKey *bool
+	RepeatExtXKey bool
 
 	// A StreamSelection configuration.
 	StreamSelection *StreamSelection
@@ -204,17 +204,17 @@ type HlsPackage struct {
 	// A list of HLS manifest configurations.
 	//
 	// This member is required.
-	HlsManifests []*HlsManifest
+	HlsManifests []HlsManifest
 
 	// An HTTP Live Streaming (HLS) encryption configuration.
 	Encryption *HlsEncryption
 
 	// Duration (in seconds) of each fragment. Actual fragments will be rounded to the
 	// nearest multiple of the source fragment duration.
-	SegmentDurationSeconds *int32
+	SegmentDurationSeconds int32
 
 	// When enabled, audio streams will be placed in rendition groups in the output.
-	UseAudioRenditionGroup *bool
+	UseAudioRenditionGroup bool
 }
 
 // A Microsoft Smooth Streaming (MSS) encryption configuration.
@@ -243,13 +243,13 @@ type MssPackage struct {
 	// A list of MSS manifest configurations.
 	//
 	// This member is required.
-	MssManifests []*MssManifest
+	MssManifests []MssManifest
 
 	// A Microsoft Smooth Streaming (MSS) encryption configuration.
 	Encryption *MssEncryption
 
 	// The duration (in seconds) of each segment.
-	SegmentDurationSeconds *int32
+	SegmentDurationSeconds int32
 }
 
 // A MediaPackage VOD PackagingConfiguration resource.
@@ -277,7 +277,7 @@ type PackagingConfiguration struct {
 	PackagingGroupId *string
 
 	// A collection of tags associated with a resource
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // A MediaPackage VOD PackagingGroup resource.
@@ -296,7 +296,7 @@ type PackagingGroup struct {
 	Id *string
 
 	// A collection of tags associated with a resource
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // A configuration for accessing an external Secure Packager and Encoder Key
@@ -312,7 +312,7 @@ type SpekeKeyProvider struct {
 	// The system IDs to include in key requests.
 	//
 	// This member is required.
-	SystemIds []*string
+	SystemIds []string
 
 	// The URL of the external key provider service.
 	//
@@ -324,10 +324,10 @@ type SpekeKeyProvider struct {
 type StreamSelection struct {
 
 	// The maximum video bitrate (bps) to include in output.
-	MaxVideoBitsPerSecond *int32
+	MaxVideoBitsPerSecond int32
 
 	// The minimum video bitrate (bps) to include in output.
-	MinVideoBitsPerSecond *int32
+	MinVideoBitsPerSecond int32
 
 	// A directive that determines the order of streams in the output.
 	StreamOrder StreamOrder

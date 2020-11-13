@@ -53,7 +53,7 @@ type GetIdentityVerificationAttributesInput struct {
 	// A list of identities.
 	//
 	// This member is required.
-	Identities []*string
+	Identities []string
 }
 
 // The Amazon SES verification status of a list of identities. For domain
@@ -63,7 +63,7 @@ type GetIdentityVerificationAttributesOutput struct {
 	// A map of Identities to IdentityVerificationAttributes objects.
 	//
 	// This member is required.
-	VerificationAttributes map[string]*types.IdentityVerificationAttributes
+	VerificationAttributes map[string]types.IdentityVerificationAttributes
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

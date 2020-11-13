@@ -45,18 +45,18 @@ type CreateResourceShareInput struct {
 	// The ARNs of the permissions to associate with the resource share. If you do not
 	// specify an ARN for the permission, AWS RAM automatically attaches the default
 	// version of the permission for each resource type.
-	PermissionArns []*string
+	PermissionArns []string
 
 	// The principals to associate with the resource share. The possible values are IDs
 	// of AWS accounts, the ARN of an OU or organization from AWS Organizations.
-	Principals []*string
+	Principals []string
 
 	// The Amazon Resource Names (ARN) of the resources to associate with the resource
 	// share.
-	ResourceArns []*string
+	ResourceArns []string
 
 	// One or more tags.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateResourceShareOutput struct {

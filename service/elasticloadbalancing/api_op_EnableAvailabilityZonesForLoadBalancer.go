@@ -38,7 +38,7 @@ type EnableAvailabilityZonesForLoadBalancerInput struct {
 	// The Availability Zones. These must be in the same region as the load balancer.
 	//
 	// This member is required.
-	AvailabilityZones []*string
+	AvailabilityZones []string
 
 	// The name of the load balancer.
 	//
@@ -50,7 +50,7 @@ type EnableAvailabilityZonesForLoadBalancerInput struct {
 type EnableAvailabilityZonesForLoadBalancerOutput struct {
 
 	// The updated list of Availability Zones for the load balancer.
-	AvailabilityZones []*string
+	AvailabilityZones []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

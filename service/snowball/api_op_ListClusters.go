@@ -44,7 +44,7 @@ type ListClustersOutput struct {
 
 	// Each ClusterListEntry object contains a cluster's state, a cluster's ID, and
 	// other important status information.
-	ClusterListEntries []*types.ClusterListEntry
+	ClusterListEntries []types.ClusterListEntry
 
 	// HTTP requests are stateless. If you use the automatically generated NextToken
 	// value in your next ClusterListEntry call, your list of returned clusters will

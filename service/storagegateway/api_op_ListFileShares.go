@@ -51,7 +51,7 @@ type ListFileSharesInput struct {
 type ListFileSharesOutput struct {
 
 	// An array of information about the file gateway's file shares.
-	FileShareInfoList []*types.FileShareInfo
+	FileShareInfoList []types.FileShareInfo
 
 	// If the request includes Marker, the response returns that value in this field.
 	Marker *string

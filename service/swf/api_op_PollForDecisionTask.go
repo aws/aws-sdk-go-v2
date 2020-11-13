@@ -86,7 +86,7 @@ type PollForDecisionTaskInput struct {
 	// The maximum number of results that are returned per call. Use nextPageToken to
 	// obtain further pages of results. This is an upper limit only; the actual number
 	// of results returned per call may be fewer than the specified maximum.
-	MaximumPageSize *int32
+	MaximumPageSize int32
 
 	// If NextPageToken is returned there are more results available. The value of
 	// NextPageToken is a unique pagination token for each page. Make the call again
@@ -103,7 +103,7 @@ type PollForDecisionTaskInput struct {
 
 	// When set to true, returns the events in reverse order. By default the results
 	// are returned in ascending order of the eventTimestamp of the events.
-	ReverseOrder *bool
+	ReverseOrder bool
 }
 
 // A structure that represents a decision task. Decision tasks are sent to deciders
@@ -114,12 +114,12 @@ type PollForDecisionTaskOutput struct {
 	// this during the processing of the decision task.
 	//
 	// This member is required.
-	Events []*types.HistoryEvent
+	Events []types.HistoryEvent
 
 	// The ID of the DecisionTaskStarted event recorded in the history.
 	//
 	// This member is required.
-	StartedEventId *int64
+	StartedEventId int64
 
 	// The opaque string used as a handle on the task. This token is used by workers to
 	// communicate progress and response information back to the system about the task.
@@ -148,7 +148,7 @@ type PollForDecisionTaskOutput struct {
 	// workflow execution that was processed by the decider. This can be used to
 	// determine the events in the history new since the last decision task received by
 	// the decider.
-	PreviousStartedEventId *int64
+	PreviousStartedEventId int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -62,17 +62,17 @@ type GetFolderOutput struct {
 	FolderPath *string
 
 	// The list of files in the specified folder, if any.
-	Files []*types.File
+	Files []types.File
 
 	// The list of folders that exist under the specified folder, if any.
-	SubFolders []*types.Folder
+	SubFolders []types.Folder
 
 	// The list of submodules in the specified folder, if any.
-	SubModules []*types.SubModule
+	SubModules []types.SubModule
 
 	// The list of symbolic links to other files and folders in the specified folder,
 	// if any.
-	SymbolicLinks []*types.SymbolicLink
+	SymbolicLinks []types.SymbolicLink
 
 	// The full SHA-1 pointer of the tree information for the commit that contains the
 	// folder.

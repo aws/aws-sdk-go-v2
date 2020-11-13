@@ -36,7 +36,7 @@ type ListMultiplexProgramsInput struct {
 	MultiplexId *string
 
 	// The maximum number of items to return.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token to retrieve the next page of results.
 	NextToken *string
@@ -46,7 +46,7 @@ type ListMultiplexProgramsInput struct {
 type ListMultiplexProgramsOutput struct {
 
 	// List of multiplex programs.
-	MultiplexPrograms []*types.MultiplexProgramSummary
+	MultiplexPrograms []types.MultiplexProgramSummary
 
 	// Token for the next ListMultiplexProgram request.
 	NextToken *string

@@ -65,7 +65,7 @@ type PutBotAliasInput struct {
 	// A list of tags to add to the bot alias. You can only add tags when you create an
 	// alias, you can't use the PutBotAlias operation to update the tags on a bot
 	// alias. To update tags, use the TagResource operation.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type PutBotAliasOutput struct {
@@ -96,7 +96,7 @@ type PutBotAliasOutput struct {
 	Name *string
 
 	// A list of tags associated with a bot.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

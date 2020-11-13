@@ -31,10 +31,10 @@ func (c *Client) DescribeConformancePackStatus(ctx context.Context, params *Desc
 type DescribeConformancePackStatusInput struct {
 
 	// Comma-separated list of conformance pack names.
-	ConformancePackNames []*string
+	ConformancePackNames []string
 
 	// The maximum number of conformance packs status returned on each page.
-	Limit *int32
+	Limit int32
 
 	// The nextToken string returned in a previous request that you use to request the
 	// next page of results in a paginated response.
@@ -44,7 +44,7 @@ type DescribeConformancePackStatusInput struct {
 type DescribeConformancePackStatusOutput struct {
 
 	// A list of ConformancePackStatusDetail objects.
-	ConformancePackStatusDetails []*types.ConformancePackStatusDetail
+	ConformancePackStatusDetails []types.ConformancePackStatusDetail
 
 	// The nextToken string returned in a previous request that you use to request the
 	// next page of results in a paginated response.

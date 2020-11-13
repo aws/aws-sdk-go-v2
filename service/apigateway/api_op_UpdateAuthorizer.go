@@ -43,7 +43,7 @@ type UpdateAuthorizerInput struct {
 
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
-	PatchOperations []*types.PatchOperation
+	PatchOperations []types.PatchOperation
 }
 
 // Represents an authorization layer for methods. If enabled on a method, API
@@ -125,7 +125,7 @@ type UpdateAuthorizerOutput struct {
 	// authorizer. Each element is of this format:
 	// arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}. For a TOKEN
 	// or REQUEST authorizer, this is not defined.
-	ProviderARNs []*string
+	ProviderARNs []string
 
 	// The authorizer type. Valid values are TOKEN for a Lambda function using a single
 	// authorization token submitted in a custom header, REQUEST for a Lambda function

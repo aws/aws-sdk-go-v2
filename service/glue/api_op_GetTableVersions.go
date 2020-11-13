@@ -59,7 +59,7 @@ type GetTableVersionsOutput struct {
 	NextToken *string
 
 	// A list of strings identifying available versions of the specified table.
-	TableVersions []*types.TableVersion
+	TableVersions []types.TableVersion
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

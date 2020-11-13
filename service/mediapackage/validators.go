@@ -394,13 +394,13 @@ func addOpUpdateOriginEndpointValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpUpdateOriginEndpoint{}, middleware.After)
 }
 
-func validate__listOfHlsManifestCreateOrUpdateParameters(v []*types.HlsManifestCreateOrUpdateParameters) error {
+func validate__listOfHlsManifestCreateOrUpdateParameters(v []types.HlsManifestCreateOrUpdateParameters) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfHlsManifestCreateOrUpdateParameters"}
 	for i := range v {
-		if err := validateHlsManifestCreateOrUpdateParameters(v[i]); err != nil {
+		if err := validateHlsManifestCreateOrUpdateParameters(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

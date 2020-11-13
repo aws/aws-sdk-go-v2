@@ -46,7 +46,7 @@ type GetTriggersOutput struct {
 	NextToken *string
 
 	// A list of triggers for the specified job.
-	Triggers []*types.Trigger
+	Triggers []types.Trigger
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

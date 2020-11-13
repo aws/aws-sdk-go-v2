@@ -53,7 +53,7 @@ type UpdateSMBFileShareInput struct {
 	// to the file share. A group must be prefixed with the @ character. Acceptable
 	// formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be
 	// set if Authentication is set to ActiveDirectory.
-	AdminUserList []*string
+	AdminUserList []string
 
 	// The Amazon Resource Name (ARN) of the storage used for the audit logs.
 	AuditDestinationARN *string
@@ -84,7 +84,7 @@ type UpdateSMBFileShareInput struct {
 	// the file share. A group must be prefixed with the @ character. Acceptable
 	// formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be
 	// set if Authentication is set to ActiveDirectory.
-	InvalidUserList []*string
+	InvalidUserList []string
 
 	// Set to true to use Amazon S3 server-side encryption with your own AWS KMS key,
 	// or false to use a key managed by Amazon S3. Optional. Valid Values: true | false
@@ -128,7 +128,7 @@ type UpdateSMBFileShareInput struct {
 	// file share. A group must be prefixed with the @ character. Acceptable formats
 	// include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be set if
 	// Authentication is set to ActiveDirectory.
-	ValidUserList []*string
+	ValidUserList []string
 }
 
 // UpdateSMBFileShareOutput

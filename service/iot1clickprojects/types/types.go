@@ -12,7 +12,7 @@ type DeviceTemplate struct {
 
 	// An optional Lambda function to invoke instead of the default Lambda function
 	// provided by the placement template.
-	CallbackOverrides map[string]*string
+	CallbackOverrides map[string]string
 
 	// The device type, which currently must be "button".
 	DeviceType *string
@@ -24,7 +24,7 @@ type PlacementDescription struct {
 	// The user-defined attributes associated with the placement.
 	//
 	// This member is required.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// The date when the placement was initially created, in UNIX epoch time format.
 	//
@@ -78,11 +78,11 @@ type PlacementTemplate struct {
 
 	// The default attributes (key/value pairs) to be applied to all placements using
 	// this template.
-	DefaultAttributes map[string]*string
+	DefaultAttributes map[string]string
 
 	// An object specifying the DeviceTemplate for all placements using this
 	// (PlacementTemplate) template.
-	DeviceTemplates map[string]*DeviceTemplate
+	DeviceTemplates map[string]DeviceTemplate
 }
 
 // An object providing detailed information for a particular project associated
@@ -115,7 +115,7 @@ type ProjectDescription struct {
 	PlacementTemplate *PlacementTemplate
 
 	// The tags (metadata key/value pairs) associated with the project.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // An object providing summary information for a particular project for an
@@ -142,5 +142,5 @@ type ProjectSummary struct {
 	Arn *string
 
 	// The tags (metadata key/value pairs) associated with the project.
-	Tags map[string]*string
+	Tags map[string]string
 }

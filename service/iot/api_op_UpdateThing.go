@@ -48,7 +48,7 @@ type UpdateThingInput struct {
 	ExpectedVersion *int64
 
 	// Remove a thing type association. If true, the association is removed.
-	RemoveThingType *bool
+	RemoveThingType bool
 
 	// The name of the thing type.
 	ThingTypeName *string

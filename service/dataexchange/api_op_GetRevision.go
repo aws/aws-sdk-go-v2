@@ -61,7 +61,7 @@ type GetRevisionOutput struct {
 	// through the AWS Data Exchange console or the AWS Marketplace Catalog API, using
 	// the StartChangeSet AWS Marketplace Catalog API action. When using the API,
 	// revisions are uniquely identified by their ARN.
-	Finalized *bool
+	Finalized bool
 
 	// The unique identifier for the revision.
 	Id *string
@@ -72,7 +72,7 @@ type GetRevisionOutput struct {
 	SourceId *string
 
 	// The tags for the revision.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The date and time that the revision was last updated, in ISO 8601 format.
 	UpdatedAt *time.Time

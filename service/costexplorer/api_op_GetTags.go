@@ -59,7 +59,7 @@ type GetTagsOutput struct {
 	// The tags that match your request.
 	//
 	// This member is required.
-	Tags []*string
+	Tags []string
 
 	// The total number of query results.
 	//

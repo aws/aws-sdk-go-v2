@@ -61,7 +61,7 @@ type ListSigningJobsInput struct {
 type ListSigningJobsOutput struct {
 
 	// A list of your signing jobs.
-	Jobs []*types.SigningJob
+	Jobs []types.SigningJob
 
 	// String for specifying the next set of paginated results.
 	NextToken *string

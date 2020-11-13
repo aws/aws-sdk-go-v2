@@ -12,7 +12,7 @@ type AccessLog struct {
 	// Specifies whether access logs are enabled for the load balancer.
 	//
 	// This member is required.
-	Enabled *bool
+	Enabled bool
 
 	// The interval for publishing the access logs. You can specify an interval of
 	// either 5 minutes or 60 minutes. Default: 60 minutes
@@ -57,10 +57,10 @@ type AppCookieStickinessPolicy struct {
 type BackendServerDescription struct {
 
 	// The port on which the EC2 instance is listening.
-	InstancePort *int32
+	InstancePort int32
 
 	// The names of the policies enabled for the EC2 instance.
-	PolicyNames []*string
+	PolicyNames []string
 }
 
 // Information about the ConnectionDraining attribute.
@@ -69,7 +69,7 @@ type ConnectionDraining struct {
 	// Specifies whether connection draining is enabled for the load balancer.
 	//
 	// This member is required.
-	Enabled *bool
+	Enabled bool
 
 	// The maximum time, in seconds, to keep the existing connections open before
 	// deregistering the instances.
@@ -92,7 +92,7 @@ type CrossZoneLoadBalancing struct {
 	// Specifies whether cross-zone load balancing is enabled for the load balancer.
 	//
 	// This member is required.
-	Enabled *bool
+	Enabled bool
 }
 
 // Information about a health check.
@@ -102,13 +102,13 @@ type HealthCheck struct {
 	// instance to the Healthy state.
 	//
 	// This member is required.
-	HealthyThreshold *int32
+	HealthyThreshold int32
 
 	// The approximate interval, in seconds, between health checks of an individual
 	// instance.
 	//
 	// This member is required.
-	Interval *int32
+	Interval int32
 
 	// The instance being checked. The protocol is either TCP, HTTP, HTTPS, or SSL. The
 	// range of valid ports is one (1) through 65535. TCP is the default, specified as
@@ -130,13 +130,13 @@ type HealthCheck struct {
 	// check. This value must be less than the Interval value.
 	//
 	// This member is required.
-	Timeout *int32
+	Timeout int32
 
 	// The number of consecutive health check failures required before moving the
 	// instance to the Unhealthy state.
 	//
 	// This member is required.
-	UnhealthyThreshold *int32
+	UnhealthyThreshold int32
 }
 
 // The ID of an EC2 instance.
@@ -238,14 +238,14 @@ type Listener struct {
 	// The port on which the instance is listening.
 	//
 	// This member is required.
-	InstancePort *int32
+	InstancePort int32
 
 	// The port on which the load balancer is listening. On EC2-VPC, you can specify
 	// any port from the range 1-65535. On EC2-Classic, you can specify any port from
 	// the following list: 25, 80, 443, 465, 587, 1024-65535.
 	//
 	// This member is required.
-	LoadBalancerPort *int32
+	LoadBalancerPort int32
 
 	// The load balancer transport protocol to use for routing: HTTP, HTTPS, TCP, or
 	// SSL.
@@ -274,7 +274,7 @@ type ListenerDescription struct {
 	Listener *Listener
 
 	// The policies. If there are no policies enabled, the list is empty.
-	PolicyNames []*string
+	PolicyNames []string
 }
 
 // The attributes for a load balancer.
@@ -288,7 +288,7 @@ type LoadBalancerAttributes struct {
 	AccessLog *AccessLog
 
 	// Any additional attributes.
-	AdditionalAttributes []*AdditionalAttribute
+	AdditionalAttributes []AdditionalAttribute
 
 	// If enabled, the load balancer allows existing requests to complete before the
 	// load balancer shifts traffic away from a deregistered or unhealthy instance. For
@@ -318,10 +318,10 @@ type LoadBalancerAttributes struct {
 type LoadBalancerDescription struct {
 
 	// The Availability Zones for the load balancer.
-	AvailabilityZones []*string
+	AvailabilityZones []string
 
 	// Information about your EC2 instances.
-	BackendServerDescriptions []*BackendServerDescription
+	BackendServerDescriptions []BackendServerDescription
 
 	// The DNS name of the load balancer. For more information, see Configure a Custom
 	// Domain Name
@@ -342,10 +342,10 @@ type LoadBalancerDescription struct {
 	HealthCheck *HealthCheck
 
 	// The IDs of the instances for the load balancer.
-	Instances []*Instance
+	Instances []Instance
 
 	// The listeners for the load balancer.
-	ListenerDescriptions []*ListenerDescription
+	ListenerDescriptions []ListenerDescription
 
 	// The name of the load balancer.
 	LoadBalancerName *string
@@ -361,7 +361,7 @@ type LoadBalancerDescription struct {
 
 	// The security groups for the load balancer. Valid only for load balancers in a
 	// VPC.
-	SecurityGroups []*string
+	SecurityGroups []string
 
 	// The security group for the load balancer, which you can use as part of your
 	// inbound rules for your registered instances. To only allow traffic from load
@@ -370,7 +370,7 @@ type LoadBalancerDescription struct {
 	SourceSecurityGroup *SourceSecurityGroup
 
 	// The IDs of the subnets for the load balancer.
-	Subnets []*string
+	Subnets []string
 
 	// The ID of the VPC for the load balancer.
 	VPCId *string
@@ -380,13 +380,13 @@ type LoadBalancerDescription struct {
 type Policies struct {
 
 	// The stickiness policies created using CreateAppCookieStickinessPolicy.
-	AppCookieStickinessPolicies []*AppCookieStickinessPolicy
+	AppCookieStickinessPolicies []AppCookieStickinessPolicy
 
 	// The stickiness policies created using CreateLBCookieStickinessPolicy.
-	LBCookieStickinessPolicies []*LBCookieStickinessPolicy
+	LBCookieStickinessPolicies []LBCookieStickinessPolicy
 
 	// The policies other than the stickiness policies.
-	OtherPolicies []*string
+	OtherPolicies []string
 }
 
 // Information about a policy attribute.
@@ -443,7 +443,7 @@ type PolicyAttributeTypeDescription struct {
 type PolicyDescription struct {
 
 	// The policy attributes.
-	PolicyAttributeDescriptions []*PolicyAttributeDescription
+	PolicyAttributeDescriptions []PolicyAttributeDescription
 
 	// The name of the policy.
 	PolicyName *string
@@ -460,7 +460,7 @@ type PolicyTypeDescription struct {
 
 	// The description of the policy attributes associated with the policies defined by
 	// Elastic Load Balancing.
-	PolicyAttributeTypeDescriptions []*PolicyAttributeTypeDescription
+	PolicyAttributeTypeDescriptions []PolicyAttributeTypeDescription
 
 	// The name of the policy type.
 	PolicyTypeName *string
@@ -495,7 +495,7 @@ type TagDescription struct {
 	LoadBalancerName *string
 
 	// The tags.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // The key of a tag.

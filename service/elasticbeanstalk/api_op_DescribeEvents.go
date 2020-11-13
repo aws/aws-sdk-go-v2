@@ -85,7 +85,7 @@ type DescribeEventsInput struct {
 type DescribeEventsOutput struct {
 
 	// A list of EventDescription.
-	Events []*types.EventDescription
+	Events []types.EventDescription
 
 	// If returned, this indicates that there are more results to obtain. Use this
 	// token in the next DescribeEvents call to get the next batch of events.

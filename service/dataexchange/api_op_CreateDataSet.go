@@ -51,7 +51,7 @@ type CreateDataSetInput struct {
 	// create it. Each tag consists of a key and an optional value, both of which you
 	// define. When you use tagging, you can also use tag-based access control in IAM
 	// policies to control access to these data sets and revisions.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateDataSetOutput struct {
@@ -89,7 +89,7 @@ type CreateDataSetOutput struct {
 	SourceId *string
 
 	// The tags for the data set.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The date and time that the data set was last updated, in ISO 8601 format.
 	UpdatedAt *time.Time

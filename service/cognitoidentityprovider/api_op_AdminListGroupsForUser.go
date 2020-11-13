@@ -51,7 +51,7 @@ type AdminListGroupsForUserInput struct {
 type AdminListGroupsForUserOutput struct {
 
 	// The groups that the user belongs to.
-	Groups []*types.GroupType
+	Groups []types.GroupType
 
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.

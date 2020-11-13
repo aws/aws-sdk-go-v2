@@ -45,7 +45,7 @@ type ListDomainsOutput struct {
 	// The returned list of DomainSummary
 	// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DomainSummary.html)
 	// objects.
-	Domains []*types.DomainSummary
+	Domains []types.DomainSummary
 
 	// The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.

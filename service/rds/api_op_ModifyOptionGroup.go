@@ -40,14 +40,14 @@ type ModifyOptionGroupInput struct {
 
 	// A value that indicates whether to apply the change immediately or during the
 	// next maintenance window for each instance associated with the option group.
-	ApplyImmediately *bool
+	ApplyImmediately bool
 
 	// Options in this list are added to the option group or, if already present, the
 	// specified configuration is used to update the existing configuration.
-	OptionsToInclude []*types.OptionConfiguration
+	OptionsToInclude []types.OptionConfiguration
 
 	// Options in this list are removed from the option group.
-	OptionsToRemove []*string
+	OptionsToRemove []string
 }
 
 type ModifyOptionGroupOutput struct {

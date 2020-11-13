@@ -37,11 +37,11 @@ type DescribeEnvironmentsInput struct {
 
 	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
 	// include only those that have the specified IDs.
-	EnvironmentIds []*string
+	EnvironmentIds []string
 
 	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
 	// include only those that have the specified names.
-	EnvironmentNames []*string
+	EnvironmentNames []string
 
 	// Indicates whether to include deleted environments: true: Environments that have
 	// been deleted after IncludedDeletedBackTo are displayed. false: Do not include
@@ -72,7 +72,7 @@ type DescribeEnvironmentsInput struct {
 type DescribeEnvironmentsOutput struct {
 
 	// Returns an EnvironmentDescription list.
-	Environments []*types.EnvironmentDescription
+	Environments []types.EnvironmentDescription
 
 	// In a paginated request, the token that you can pass in a subsequent request to
 	// get the next response page.

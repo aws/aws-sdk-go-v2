@@ -52,7 +52,7 @@ type ListPredictorsInput struct {
 	// For example, to list all predictors whose status is ACTIVE, you would
 	// specify: "Filters": [ { "Condition": "IS", "Key": "Status", "Value": "ACTIVE" }
 	// ]
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The number of items to return in the response.
 	MaxResults *int32
@@ -70,7 +70,7 @@ type ListPredictorsOutput struct {
 	NextToken *string
 
 	// An array of objects that summarize each predictor's properties.
-	Predictors []*types.PredictorSummary
+	Predictors []types.PredictorSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

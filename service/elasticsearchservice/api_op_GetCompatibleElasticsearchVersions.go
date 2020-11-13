@@ -45,7 +45,7 @@ type GetCompatibleElasticsearchVersionsOutput struct {
 
 	// A map of compatible Elasticsearch versions returned as part of the
 	// GetCompatibleElasticsearchVersions operation.
-	CompatibleElasticsearchVersions []*types.CompatibleVersionsMap
+	CompatibleElasticsearchVersions []types.CompatibleVersionsMap
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -37,7 +37,7 @@ type ListQueuesInput struct {
 	ListBy types.QueueListBy
 
 	// Optional. Number of queues, up to twenty, that will be returned at one time.
-	MaxResults *int32
+	MaxResults int32
 
 	// Use this string, provided with the response to a previous request, to request
 	// the next batch of queues.
@@ -54,7 +54,7 @@ type ListQueuesOutput struct {
 	NextToken *string
 
 	// List of queues.
-	Queues []*types.Queue
+	Queues []types.Queue
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

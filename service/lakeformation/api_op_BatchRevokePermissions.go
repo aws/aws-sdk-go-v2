@@ -33,7 +33,7 @@ type BatchRevokePermissionsInput struct {
 	// operation to the principal.
 	//
 	// This member is required.
-	Entries []*types.BatchPermissionsRequestEntry
+	Entries []types.BatchPermissionsRequestEntry
 
 	// The identifier for the Data Catalog. By default, the account ID. The Data
 	// Catalog is the persistent metadata store. It contains database definitions,
@@ -45,7 +45,7 @@ type BatchRevokePermissionsInput struct {
 type BatchRevokePermissionsOutput struct {
 
 	// A list of failures to revoke permissions to the resources.
-	Failures []*types.BatchPermissionsFailureEntry
+	Failures []types.BatchPermissionsFailureEntry
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

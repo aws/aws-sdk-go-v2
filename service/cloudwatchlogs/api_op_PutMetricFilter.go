@@ -52,7 +52,7 @@ type PutMetricFilterInput struct {
 	// A collection of information that defines how metric data gets emitted.
 	//
 	// This member is required.
-	MetricTransformations []*types.MetricTransformation
+	MetricTransformations []types.MetricTransformation
 }
 
 type PutMetricFilterOutput struct {

@@ -137,7 +137,7 @@ type DescribeReservedCacheNodesOfferingsOutput struct {
 
 	// A list of reserved cache node offerings. Each element in the list contains
 	// detailed information about one offering.
-	ReservedCacheNodesOfferings []*types.ReservedCacheNodesOffering
+	ReservedCacheNodesOfferings []types.ReservedCacheNodesOffering
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

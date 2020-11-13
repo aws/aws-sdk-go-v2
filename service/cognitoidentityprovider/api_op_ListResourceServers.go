@@ -35,7 +35,7 @@ type ListResourceServersInput struct {
 	UserPoolId *string
 
 	// The maximum number of resource servers to return.
-	MaxResults *int32
+	MaxResults int32
 
 	// A pagination token.
 	NextToken *string
@@ -46,7 +46,7 @@ type ListResourceServersOutput struct {
 	// The resource servers.
 	//
 	// This member is required.
-	ResourceServers []*types.ResourceServerType
+	ResourceServers []types.ResourceServerType
 
 	// A pagination token.
 	NextToken *string

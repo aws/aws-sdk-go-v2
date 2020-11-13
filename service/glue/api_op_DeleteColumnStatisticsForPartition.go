@@ -42,7 +42,7 @@ type DeleteColumnStatisticsForPartitionInput struct {
 	// A list of partition values identifying the partition.
 	//
 	// This member is required.
-	PartitionValues []*string
+	PartitionValues []string
 
 	// The name of the partitions' table.
 	//

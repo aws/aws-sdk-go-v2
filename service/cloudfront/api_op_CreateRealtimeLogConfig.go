@@ -38,7 +38,7 @@ type CreateRealtimeLogConfigInput struct {
 	// real-time log data.
 	//
 	// This member is required.
-	EndPoints []*types.EndPoint
+	EndPoints []types.EndPoint
 
 	// A list of fields to include in each real-time log record. For more information
 	// about fields, see Real-time log configuration fields
@@ -46,7 +46,7 @@ type CreateRealtimeLogConfigInput struct {
 	// in the Amazon CloudFront Developer Guide.
 	//
 	// This member is required.
-	Fields []*string
+	Fields []string
 
 	// A unique name to identify this real-time log configuration.
 	//

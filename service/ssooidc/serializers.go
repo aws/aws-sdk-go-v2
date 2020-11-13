@@ -291,17 +291,13 @@ func awsRestjson1_serializeOpDocumentStartDeviceAuthorizationInput(v *StartDevic
 	return nil
 }
 
-func awsRestjson1_serializeDocumentScopes(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentScopes(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }

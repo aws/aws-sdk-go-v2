@@ -35,7 +35,7 @@ type CreateWorkflowInput struct {
 	Name *string
 
 	// A collection of properties to be used as part of each execution of the workflow.
-	DefaultRunProperties map[string]*string
+	DefaultRunProperties map[string]string
 
 	// A description of the workflow.
 	Description *string
@@ -47,7 +47,7 @@ type CreateWorkflowInput struct {
 	MaxConcurrentRuns *int32
 
 	// The tags to be used with this workflow.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateWorkflowOutput struct {

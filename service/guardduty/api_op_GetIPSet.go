@@ -64,7 +64,7 @@ type GetIPSetOutput struct {
 	Status types.IpSetStatus
 
 	// The tags of the IPSet resource.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

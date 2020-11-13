@@ -80,7 +80,7 @@ type CreateApplicationInput struct {
 	// configuration errors. For more information, see Working with Amazon CloudWatch
 	// Logs
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html).
-	CloudWatchLoggingOptions []*types.CloudWatchLoggingOption
+	CloudWatchLoggingOptions []types.CloudWatchLoggingOption
 
 	// Use this parameter to configure the application input. You can configure your
 	// application to receive input from a single streaming source. In this
@@ -94,7 +94,7 @@ type CreateApplicationInput struct {
 	// data into a schematized version used in SQL. In the schema, you provide the
 	// necessary mapping of the data elements in the streaming source to record columns
 	// in the in-app stream.
-	Inputs []*types.Input
+	Inputs []types.Input
 
 	// You can configure application output to write data from any of the
 	// in-application streams to up to three destinations. These destinations can be
@@ -108,14 +108,14 @@ type CreateApplicationInput struct {
 	// stream destinations, you provide the format of data in the stream (for example,
 	// JSON, CSV). You also must provide an IAM role that Amazon Kinesis Analytics can
 	// assume to write to the stream or Lambda function on your behalf.
-	Outputs []*types.Output
+	Outputs []types.Output
 
 	// A list of one or more tags to assign to the application. A tag is a key-value
 	// pair that identifies an application. Note that the maximum number of application
 	// tags includes system tags. The maximum number of user-defined application tags
 	// is 50. For more information, see Using Tagging
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-tagging.html).
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // TBD

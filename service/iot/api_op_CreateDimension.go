@@ -52,7 +52,7 @@ type CreateDimensionInput struct {
 	// "admin/#").
 	//
 	// This member is required.
-	StringValues []*string
+	StringValues []string
 
 	// Specifies the type of dimension. Supported types: TOPIC_FILTER.
 	//
@@ -60,7 +60,7 @@ type CreateDimensionInput struct {
 	Type types.DimensionType
 
 	// Metadata that can be used to manage the dimension.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateDimensionOutput struct {

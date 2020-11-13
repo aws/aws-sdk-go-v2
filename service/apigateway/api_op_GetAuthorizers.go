@@ -52,7 +52,7 @@ type GetAuthorizersInput struct {
 type GetAuthorizersOutput struct {
 
 	// The current page of elements from this collection.
-	Items []*types.Authorizer
+	Items []types.Authorizer
 
 	// The current pagination position in the paged result set.
 	Position *string

@@ -35,14 +35,14 @@ type DescribeNFSFileSharesInput struct {
 	// described.
 	//
 	// This member is required.
-	FileShareARNList []*string
+	FileShareARNList []string
 }
 
 // DescribeNFSFileSharesOutput
 type DescribeNFSFileSharesOutput struct {
 
 	// An array containing a description for each requested file share.
-	NFSFileShareInfoList []*types.NFSFileShareInfo
+	NFSFileShareInfoList []types.NFSFileShareInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -74,7 +74,7 @@ type ListMonitoringSchedulesOutput struct {
 	// A JSON array in which each element is a summary for a monitoring schedule.
 	//
 	// This member is required.
-	MonitoringScheduleSummaries []*types.MonitoringScheduleSummary
+	MonitoringScheduleSummaries []types.MonitoringScheduleSummary
 
 	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
 	// the next set of jobs, use it in the subsequent reques

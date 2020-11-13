@@ -169,11 +169,11 @@ type CreateChangeSetInput struct {
 	// The Amazon Resource Names (ARNs) of Amazon Simple Notification Service (Amazon
 	// SNS) topics that AWS CloudFormation associates with the stack. To remove all
 	// associated notification topics, specify an empty list.
-	NotificationARNs []*string
+	NotificationARNs []string
 
 	// A list of Parameter structures that specify input parameters for the change set.
 	// For more information, see the Parameter data type.
-	Parameters []*types.Parameter
+	Parameters []types.Parameter
 
 	// The template resource types that you have permissions to work with if you
 	// execute this change set, such as AWS::EC2::Instance, AWS::EC2::*, or
@@ -185,10 +185,10 @@ type CreateChangeSetInput struct {
 	// and Access Management
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html)
 	// in the AWS CloudFormation User Guide.
-	ResourceTypes []*string
+	ResourceTypes []string
 
 	// The resources to import into your stack.
-	ResourcesToImport []*types.ResourceToImport
+	ResourcesToImport []types.ResourceToImport
 
 	// The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM)
 	// role that AWS CloudFormation assumes when executing the change set. AWS
@@ -208,7 +208,7 @@ type CreateChangeSetInput struct {
 
 	// Key-value pairs to associate with this stack. AWS CloudFormation also propagates
 	// these tags to resources in the stack. You can specify a maximum of 50 tags.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// A structure that contains the body of the revised template, with a minimum
 	// length of 1 byte and a maximum length of 51,200 bytes. AWS CloudFormation

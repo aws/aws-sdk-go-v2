@@ -133,10 +133,10 @@ type CreateRateBasedRuleInput struct {
 	// are also met, AWS WAF triggers the action that is specified for this rule.
 	//
 	// This member is required.
-	RateLimit *int64
+	RateLimit int64
 
 	//
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateRateBasedRuleOutput struct {

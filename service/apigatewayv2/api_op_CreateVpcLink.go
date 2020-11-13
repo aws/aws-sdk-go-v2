@@ -39,13 +39,13 @@ type CreateVpcLinkInput struct {
 	// A list of subnet IDs to include in the VPC link.
 	//
 	// This member is required.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// A list of security group IDs for the VPC link.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// A list of tags.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateVpcLinkOutput struct {
@@ -57,13 +57,13 @@ type CreateVpcLinkOutput struct {
 	Name *string
 
 	// A list of security group IDs for the VPC link.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// A list of subnet IDs to include in the VPC link.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// Tags for the VPC link.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The ID of the VPC link.
 	VpcLinkId *string

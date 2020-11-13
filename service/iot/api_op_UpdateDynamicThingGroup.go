@@ -58,7 +58,7 @@ type UpdateDynamicThingGroupInput struct {
 type UpdateDynamicThingGroupOutput struct {
 
 	// The dynamic thing group version.
-	Version *int64
+	Version int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

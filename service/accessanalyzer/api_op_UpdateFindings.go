@@ -47,7 +47,7 @@ type UpdateFindingsInput struct {
 	ClientToken *string
 
 	// The IDs of the findings to update.
-	Ids []*string
+	Ids []string
 
 	// The ARN of the resource identified in the finding.
 	ResourceArn *string

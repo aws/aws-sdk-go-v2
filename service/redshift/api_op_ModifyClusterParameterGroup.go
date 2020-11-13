@@ -45,7 +45,7 @@ type ModifyClusterParameterGroupInput struct {
 	// must supply all the name-value pairs in the wlm_json_configuration parameter.
 	//
 	// This member is required.
-	Parameters []*types.Parameter
+	Parameters []types.Parameter
 }
 
 //

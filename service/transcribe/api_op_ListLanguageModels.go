@@ -53,7 +53,7 @@ type ListLanguageModelsInput struct {
 type ListLanguageModelsOutput struct {
 
 	// A list of objects containing information about custom language models.
-	Models []*types.LanguageModel
+	Models []types.LanguageModel
 
 	// The operation returns a page of jobs at a time. The maximum size of the list is
 	// set by the MaxResults parameter. If there are more language models in the list

@@ -53,7 +53,7 @@ type GetBotAliasesInput struct {
 type GetBotAliasesOutput struct {
 
 	// An array of BotAliasMetadata objects, each describing a bot alias.
-	BotAliases []*types.BotAliasMetadata
+	BotAliases []types.BotAliasMetadata
 
 	// A pagination token for fetching next page of aliases. If the response to this
 	// call is truncated, Amazon Lex returns a pagination token in the response. To

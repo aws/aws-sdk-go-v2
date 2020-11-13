@@ -48,7 +48,7 @@ type DescribeComponentOutput struct {
 	ApplicationComponent *types.ApplicationComponent
 
 	// The list of resource ARNs that belong to the component.
-	ResourceList []*string
+	ResourceList []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -436,13 +436,13 @@ func validateInlineArchiveRule(v *types.InlineArchiveRule) error {
 	}
 }
 
-func validateInlineArchiveRulesList(v []*types.InlineArchiveRule) error {
+func validateInlineArchiveRulesList(v []types.InlineArchiveRule) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InlineArchiveRulesList"}
 	for i := range v {
-		if err := validateInlineArchiveRule(v[i]); err != nil {
+		if err := validateInlineArchiveRule(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

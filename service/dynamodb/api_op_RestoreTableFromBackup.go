@@ -62,12 +62,12 @@ type RestoreTableFromBackupInput struct {
 	// List of global secondary indexes for the restored table. The indexes provided
 	// should match existing secondary indexes. You can choose to exclude some or all
 	// of the indexes at the time of restore.
-	GlobalSecondaryIndexOverride []*types.GlobalSecondaryIndex
+	GlobalSecondaryIndexOverride []types.GlobalSecondaryIndex
 
 	// List of local secondary indexes for the restored table. The indexes provided
 	// should match existing secondary indexes. You can choose to exclude some or all
 	// of the indexes at the time of restore.
-	LocalSecondaryIndexOverride []*types.LocalSecondaryIndex
+	LocalSecondaryIndexOverride []types.LocalSecondaryIndex
 
 	// Provisioned throughput settings for the restored table.
 	ProvisionedThroughputOverride *types.ProvisionedThroughput

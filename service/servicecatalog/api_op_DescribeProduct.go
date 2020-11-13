@@ -48,16 +48,16 @@ type DescribeProductInput struct {
 type DescribeProductOutput struct {
 
 	// Information about the associated budgets.
-	Budgets []*types.BudgetDetail
+	Budgets []types.BudgetDetail
 
 	// Information about the associated launch paths.
-	LaunchPaths []*types.LaunchPath
+	LaunchPaths []types.LaunchPath
 
 	// Summary information about the product view.
 	ProductViewSummary *types.ProductViewSummary
 
 	// Information about the provisioning artifacts for the specified product.
-	ProvisioningArtifacts []*types.ProvisioningArtifact
+	ProvisioningArtifacts []types.ProvisioningArtifact
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

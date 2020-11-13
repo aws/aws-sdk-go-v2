@@ -62,7 +62,7 @@ type UpdateBudgetActionInput struct {
 	NotificationType types.NotificationType
 
 	// A list of subscribers.
-	Subscribers []*types.Subscriber
+	Subscribers []types.Subscriber
 }
 
 type UpdateBudgetActionOutput struct {

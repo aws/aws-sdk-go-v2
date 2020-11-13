@@ -142,13 +142,13 @@ type UpdateStackInput struct {
 	// Amazon Simple Notification Service topic Amazon Resource Names (ARNs) that AWS
 	// CloudFormation associates with the stack. Specify an empty list to remove all
 	// notification topics.
-	NotificationARNs []*string
+	NotificationARNs []string
 
 	// A list of Parameter structures that specify input parameters for the stack. For
 	// more information, see the Parameter
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html)
 	// data type.
-	Parameters []*types.Parameter
+	Parameters []types.Parameter
 
 	// The template resource types that you have permissions to work with for this
 	// update stack action, such as AWS::EC2::Instance, AWS::EC2::*, or
@@ -159,7 +159,7 @@ type UpdateStackInput struct {
 	// keys in IAM policies. For more information, see Controlling Access with AWS
 	// Identity and Access Management
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html).
-	ResourceTypes []*string
+	ResourceTypes []string
 
 	// The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM)
 	// role that AWS CloudFormation assumes to update the stack. AWS CloudFormation
@@ -213,7 +213,7 @@ type UpdateStackInput struct {
 	// of 50 tags. If you don't specify this parameter, AWS CloudFormation doesn't
 	// modify the stack's tags. If you specify an empty value, AWS CloudFormation
 	// removes all associated tags.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Structure containing the template body with a minimum length of 1 byte and a
 	// maximum length of 51,200 bytes. (For more information, go to Template Anatomy

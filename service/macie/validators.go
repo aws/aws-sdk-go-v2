@@ -203,13 +203,13 @@ func validateS3ResourceClassificationUpdate(v *types.S3ResourceClassificationUpd
 	}
 }
 
-func validateS3Resources(v []*types.S3Resource) error {
+func validateS3Resources(v []types.S3Resource) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "S3Resources"}
 	for i := range v {
-		if err := validateS3Resource(v[i]); err != nil {
+		if err := validateS3Resource(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -220,13 +220,13 @@ func validateS3Resources(v []*types.S3Resource) error {
 	}
 }
 
-func validateS3ResourcesClassification(v []*types.S3ResourceClassification) error {
+func validateS3ResourcesClassification(v []types.S3ResourceClassification) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "S3ResourcesClassification"}
 	for i := range v {
-		if err := validateS3ResourceClassification(v[i]); err != nil {
+		if err := validateS3ResourceClassification(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -237,13 +237,13 @@ func validateS3ResourcesClassification(v []*types.S3ResourceClassification) erro
 	}
 }
 
-func validateS3ResourcesClassificationUpdate(v []*types.S3ResourceClassificationUpdate) error {
+func validateS3ResourcesClassificationUpdate(v []types.S3ResourceClassificationUpdate) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "S3ResourcesClassificationUpdate"}
 	for i := range v {
-		if err := validateS3ResourceClassificationUpdate(v[i]); err != nil {
+		if err := validateS3ResourceClassificationUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

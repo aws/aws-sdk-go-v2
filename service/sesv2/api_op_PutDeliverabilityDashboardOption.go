@@ -49,11 +49,11 @@ type PutDeliverabilityDashboardOptionInput struct {
 	// dashboard, set this value to true.
 	//
 	// This member is required.
-	DashboardEnabled *bool
+	DashboardEnabled bool
 
 	// An array of objects, one for each verified domain that you use to send email and
 	// enabled the Deliverability dashboard for.
-	SubscribedDomains []*types.DomainDeliverabilityTrackingOption
+	SubscribedDomains []types.DomainDeliverabilityTrackingOption
 }
 
 // A response that indicates whether the Deliverability dashboard is enabled.

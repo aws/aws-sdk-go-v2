@@ -59,7 +59,7 @@ type CreateResolverEndpointInput struct {
 	// The subnet ID uniquely identifies a VPC.
 	//
 	// This member is required.
-	IpAddresses []*types.IpAddressRequest
+	IpAddresses []types.IpAddressRequest
 
 	// The ID of one or more security groups that you want to use to control access to
 	// this VPC. The security group that you specify must include one or more inbound
@@ -69,14 +69,14 @@ type CreateResolverEndpointInput struct {
 	// using for DNS queries on your network.
 	//
 	// This member is required.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// A friendly name that lets you easily find a configuration in the Resolver
 	// dashboard in the Route 53 console.
 	Name *string
 
 	// A list of the tag keys and values that you want to associate with the endpoint.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateResolverEndpointOutput struct {

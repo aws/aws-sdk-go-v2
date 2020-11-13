@@ -64,7 +64,7 @@ type PutResolverQueryLogConfigPolicyInput struct {
 type PutResolverQueryLogConfigPolicyOutput struct {
 
 	// Whether the PutResolverQueryLogConfigPolicy request was successful.
-	ReturnValue *bool
+	ReturnValue bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

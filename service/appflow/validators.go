@@ -656,13 +656,13 @@ func validateDestinationFlowConfig(v *types.DestinationFlowConfig) error {
 	}
 }
 
-func validateDestinationFlowConfigList(v []*types.DestinationFlowConfig) error {
+func validateDestinationFlowConfigList(v []types.DestinationFlowConfig) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DestinationFlowConfigList"}
 	for i := range v {
-		if err := validateDestinationFlowConfig(v[i]); err != nil {
+		if err := validateDestinationFlowConfig(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1305,13 +1305,13 @@ func validateTask(v *types.Task) error {
 	}
 }
 
-func validateTasks(v []*types.Task) error {
+func validateTasks(v []types.Task) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tasks"}
 	for i := range v {
-		if err := validateTask(v[i]); err != nil {
+		if err := validateTask(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

@@ -188,7 +188,7 @@ type SearchGameSessionsOutput struct {
 
 	// A collection of objects containing game session properties for each session
 	// matching the request.
-	GameSessions []*types.GameSession
+	GameSessions []types.GameSession
 
 	// Token that indicates where to resume retrieving results on the next call to this
 	// operation. If no token is returned, these results represent the end of the list.

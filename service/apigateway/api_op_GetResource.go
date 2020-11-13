@@ -46,7 +46,7 @@ type GetResourceInput struct {
 	// embedded Method resources this way. The query parameter value must be a
 	// single-valued list and contain the "methods" string. For example, GET
 	// /restapis/{restapi_id}/resources/{resource_id}?embed=methods.
-	Embed []*string
+	Embed []string
 }
 
 // Represents an API resource. Create an API
@@ -144,7 +144,7 @@ type GetResourceOutput struct {
 	// OPTIONS is enabled on the resource, you can follow the example here to get that
 	// method. Just replace the GET of the last path segment in the request URL with
 	// OPTIONS.
-	ResourceMethods map[string]*types.Method
+	ResourceMethods map[string]types.Method
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

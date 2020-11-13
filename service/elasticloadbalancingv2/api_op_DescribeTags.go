@@ -35,13 +35,13 @@ type DescribeTagsInput struct {
 	// resources in a single call.
 	//
 	// This member is required.
-	ResourceArns []*string
+	ResourceArns []string
 }
 
 type DescribeTagsOutput struct {
 
 	// Information about the tags.
-	TagDescriptions []*types.TagDescription
+	TagDescriptions []types.TagDescription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

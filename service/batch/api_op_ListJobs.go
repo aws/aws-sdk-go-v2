@@ -61,7 +61,7 @@ type ListJobsInput struct {
 	// returned nextToken value. This value can be between 1 and 100. If this parameter
 	// is not used, then ListJobs returns up to 100 results and a nextToken value if
 	// applicable.
-	MaxResults *int32
+	MaxResults int32
 
 	// The job ID for a multi-node parallel job. Specifying a multi-node parallel job
 	// ID with this parameter lists all nodes that are associated with the specified
@@ -82,7 +82,7 @@ type ListJobsOutput struct {
 	// A list of job summaries that match the request.
 	//
 	// This member is required.
-	JobSummaryList []*types.JobSummary
+	JobSummaryList []types.JobSummary
 
 	// The nextToken value to include in a future ListJobs request. When the results of
 	// a ListJobs request exceed maxResults, this value can be used to retrieve the

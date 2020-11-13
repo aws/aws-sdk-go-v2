@@ -85,7 +85,7 @@ type StartSnapshotInput struct {
 	ParentSnapshotId *string
 
 	// The tags to apply to the snapshot.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The amount of time (in minutes) after which the snapshot is automatically
 	// cancelled if:
@@ -131,7 +131,7 @@ type StartSnapshotOutput struct {
 	// For more information, see  Tagging your Amazon EC2 resources
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html) in the
 	// Amazon Elastic Compute Cloud User Guide.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The size of the volume, in GiB.
 	VolumeSize *int64

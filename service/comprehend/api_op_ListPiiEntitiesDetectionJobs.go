@@ -47,7 +47,7 @@ type ListPiiEntitiesDetectionJobsOutput struct {
 	NextToken *string
 
 	// A list containing the properties of each job that is returned.
-	PiiEntitiesDetectionJobPropertiesList []*types.PiiEntitiesDetectionJobProperties
+	PiiEntitiesDetectionJobPropertiesList []types.PiiEntitiesDetectionJobProperties
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

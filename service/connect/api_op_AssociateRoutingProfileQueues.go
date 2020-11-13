@@ -37,7 +37,7 @@ type AssociateRoutingProfileQueuesInput struct {
 	// The queues to associate with this routing profile.
 	//
 	// This member is required.
-	QueueConfigs []*types.RoutingProfileQueueConfig
+	QueueConfigs []types.RoutingProfileQueueConfig
 
 	// The identifier of the routing profile.
 	//

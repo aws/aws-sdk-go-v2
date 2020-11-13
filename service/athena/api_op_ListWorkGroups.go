@@ -47,7 +47,7 @@ type ListWorkGroupsOutput struct {
 
 	// The list of workgroups, including their names, descriptions, creation times, and
 	// states.
-	WorkGroups []*types.WorkGroupSummary
+	WorkGroups []types.WorkGroupSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

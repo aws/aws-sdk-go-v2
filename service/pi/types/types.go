@@ -80,7 +80,7 @@ type DimensionGroup struct {
 	//
 	// *
 	// db.wait_event_type.name
-	Dimensions []*string
+	Dimensions []string
 
 	// The maximum number of items to fetch for this dimension group.
 	Limit *int32
@@ -91,10 +91,10 @@ type DimensionGroup struct {
 type DimensionKeyDescription struct {
 
 	// A map of name-value pairs for the dimensions in the group.
-	Dimensions map[string]*string
+	Dimensions map[string]string
 
 	// If PartitionBy was specified, PartitionKeys contains the dimensions that were.
-	Partitions []*float64
+	Partitions []float64
 
 	// The aggregated metric value for the dimension(s), over the requested time range.
 	Total *float64
@@ -106,7 +106,7 @@ type MetricKeyDataPoints struct {
 
 	// An array of timestamp-value pairs, representing measurements over a period of
 	// time.
-	DataPoints []*DataPoint
+	DataPoints []DataPoint
 
 	// The dimension(s) to which the data points apply.
 	Key *ResponseResourceMetricKey
@@ -138,7 +138,7 @@ type MetricQuery struct {
 	//
 	// * A
 	// single filter for any other dimension in this dimension group.
-	Filter map[string]*string
+	Filter map[string]string
 
 	// A specification for how to aggregate the data points from a query result. You
 	// must specify a valid dimension group. Performance Insights will return all of
@@ -155,7 +155,7 @@ type ResponsePartitionKey struct {
 	// A dimension map that contains the dimension(s) for this partition.
 	//
 	// This member is required.
-	Dimensions map[string]*string
+	Dimensions map[string]string
 }
 
 // An object describing a Performance Insights metric and one or more dimensions
@@ -175,5 +175,5 @@ type ResponseResourceMetricKey struct {
 	Metric *string
 
 	// The valid dimensions for the metric.
-	Dimensions map[string]*string
+	Dimensions map[string]string
 }

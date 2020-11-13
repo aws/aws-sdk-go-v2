@@ -1012,13 +1012,13 @@ func validateExcludedRule(v *types.ExcludedRule) error {
 	}
 }
 
-func validateExcludedRules(v []*types.ExcludedRule) error {
+func validateExcludedRules(v []types.ExcludedRule) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ExcludedRules"}
 	for i := range v {
-		if err := validateExcludedRule(v[i]); err != nil {
+		if err := validateExcludedRule(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1216,9 +1216,6 @@ func validateRateBasedStatement(v *types.RateBasedStatement) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RateBasedStatement"}
-	if v.Limit == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Limit"))
-	}
 	if v.ScopeDownStatement != nil {
 		if err := validateStatement(v.ScopeDownStatement); err != nil {
 			invalidParams.AddNested("ScopeDownStatement", err.(smithy.InvalidParamsError))
@@ -1239,13 +1236,13 @@ func validateRateBasedStatement(v *types.RateBasedStatement) error {
 	}
 }
 
-func validateRedactedFields(v []*types.FieldToMatch) error {
+func validateRedactedFields(v []types.FieldToMatch) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RedactedFields"}
 	for i := range v {
-		if err := validateFieldToMatch(v[i]); err != nil {
+		if err := validateFieldToMatch(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1290,9 +1287,6 @@ func validateRule(v *types.Rule) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Rule"}
-	if v.Priority == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
-	}
 	if v.Statement == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Statement"))
 	} else if v.Statement != nil {
@@ -1337,13 +1331,13 @@ func validateRuleGroupReferenceStatement(v *types.RuleGroupReferenceStatement) e
 	}
 }
 
-func validateRules(v []*types.Rule) error {
+func validateRules(v []types.Rule) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Rules"}
 	for i := range v {
-		if err := validateRule(v[i]); err != nil {
+		if err := validateRule(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1389,9 +1383,6 @@ func validateSizeConstraintStatement(v *types.SizeConstraintStatement) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SizeConstraintStatement"}
-	if v.Size == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Size"))
-	}
 	if len(v.ComparisonOperator) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ComparisonOperator"))
 	}
@@ -1519,13 +1510,13 @@ func validateStatement(v *types.Statement) error {
 	}
 }
 
-func validateStatements(v []*types.Statement) error {
+func validateStatements(v []types.Statement) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Statements"}
 	for i := range v {
-		if err := validateStatement(v[i]); err != nil {
+		if err := validateStatement(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1554,13 +1545,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagList(v []*types.Tag) error {
+func validateTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1579,9 +1570,6 @@ func validateTextTransformation(v *types.TextTransformation) error {
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
-	if v.Priority == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1589,13 +1577,13 @@ func validateTextTransformation(v *types.TextTransformation) error {
 	}
 }
 
-func validateTextTransformations(v []*types.TextTransformation) error {
+func validateTextTransformations(v []types.TextTransformation) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TextTransformations"}
 	for i := range v {
-		if err := validateTextTransformation(v[i]); err != nil {
+		if err := validateTextTransformation(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1629,12 +1617,6 @@ func validateVisibilityConfig(v *types.VisibilityConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VisibilityConfig"}
-	if v.SampledRequestsEnabled == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SampledRequestsEnabled"))
-	}
-	if v.CloudWatchMetricsEnabled == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CloudWatchMetricsEnabled"))
-	}
 	if v.MetricName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
 	}
@@ -1793,9 +1775,6 @@ func validateOpCreateRuleGroupInput(v *CreateRuleGroupInput) error {
 		if err := validateRules(v.Rules); err != nil {
 			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Capacity == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Capacity"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2149,9 +2128,6 @@ func validateOpGetSampledRequestsInput(v *GetSampledRequestsInput) error {
 	}
 	if len(v.Scope) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
-	}
-	if v.MaxItems == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MaxItems"))
 	}
 	if v.RuleMetricName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RuleMetricName"))

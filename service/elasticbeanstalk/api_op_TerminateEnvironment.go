@@ -97,7 +97,7 @@ type TerminateEnvironmentOutput struct {
 	EnvironmentId *string
 
 	// A list of links to other environments in the same group.
-	EnvironmentLinks []*types.EnvironmentLink
+	EnvironmentLinks []types.EnvironmentLink
 
 	// The name of this environment.
 	EnvironmentName *string

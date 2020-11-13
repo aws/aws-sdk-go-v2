@@ -31,7 +31,7 @@ type ListPlaybackKeyPairsInput struct {
 
 	// The first key pair to retrieve. This is used for pagination; see the nextToken
 	// response field.
-	MaxResults *int32
+	MaxResults int32
 
 	// Maximum number of key pairs to return.
 	NextToken *string
@@ -42,7 +42,7 @@ type ListPlaybackKeyPairsOutput struct {
 	// List of key pairs.
 	//
 	// This member is required.
-	KeyPairs []*types.PlaybackKeyPairSummary
+	KeyPairs []types.PlaybackKeyPairSummary
 
 	// If there are more key pairs than maxResults, use nextToken in the request to get
 	// the next set.

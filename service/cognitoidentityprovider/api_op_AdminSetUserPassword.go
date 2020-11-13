@@ -51,7 +51,7 @@ type AdminSetUserPasswordInput struct {
 	Username *string
 
 	// True if the password is permanent, False if it is temporary.
-	Permanent *bool
+	Permanent bool
 }
 
 type AdminSetUserPasswordOutput struct {

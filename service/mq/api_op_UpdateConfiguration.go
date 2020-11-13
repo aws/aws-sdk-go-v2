@@ -64,7 +64,7 @@ type UpdateConfigurationOutput struct {
 
 	// The list of the first 20 warnings about the configuration XML elements or
 	// attributes that were sanitized.
-	Warnings []*types.SanitizationWarning
+	Warnings []types.SanitizationWarning
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

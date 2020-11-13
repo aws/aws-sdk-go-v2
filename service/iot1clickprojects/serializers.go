@@ -76,37 +76,28 @@ func awsRestjson1_serializeOpHttpBindingsAssociateDeviceWithPlacementInput(v *As
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DeviceTemplateName == nil {
+	if v.DeviceTemplateName == nil || len(*v.DeviceTemplateName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member deviceTemplateName must not be empty")}
 	}
 	if v.DeviceTemplateName != nil {
-		if len(*v.DeviceTemplateName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member deviceTemplateName must not be empty")}
-		}
 		if err := encoder.SetURI("deviceTemplateName").String(*v.DeviceTemplateName); err != nil {
 			return err
 		}
 	}
 
-	if v.PlacementName == nil {
+	if v.PlacementName == nil || len(*v.PlacementName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member placementName must not be empty")}
 	}
 	if v.PlacementName != nil {
-		if len(*v.PlacementName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member placementName must not be empty")}
-		}
 		if err := encoder.SetURI("placementName").String(*v.PlacementName); err != nil {
 			return err
 		}
 	}
 
-	if v.ProjectName == nil {
+	if v.ProjectName == nil || len(*v.ProjectName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member projectName must not be empty")}
 	}
 	if v.ProjectName != nil {
-		if len(*v.ProjectName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member projectName must not be empty")}
-		}
 		if err := encoder.SetURI("projectName").String(*v.ProjectName); err != nil {
 			return err
 		}
@@ -189,13 +180,10 @@ func awsRestjson1_serializeOpHttpBindingsCreatePlacementInput(v *CreatePlacement
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ProjectName == nil {
+	if v.ProjectName == nil || len(*v.ProjectName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member projectName must not be empty")}
 	}
 	if v.ProjectName != nil {
-		if len(*v.ProjectName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member projectName must not be empty")}
-		}
 		if err := encoder.SetURI("projectName").String(*v.ProjectName); err != nil {
 			return err
 		}
@@ -366,25 +354,19 @@ func awsRestjson1_serializeOpHttpBindingsDeletePlacementInput(v *DeletePlacement
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.PlacementName == nil {
+	if v.PlacementName == nil || len(*v.PlacementName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member placementName must not be empty")}
 	}
 	if v.PlacementName != nil {
-		if len(*v.PlacementName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member placementName must not be empty")}
-		}
 		if err := encoder.SetURI("placementName").String(*v.PlacementName); err != nil {
 			return err
 		}
 	}
 
-	if v.ProjectName == nil {
+	if v.ProjectName == nil || len(*v.ProjectName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member projectName must not be empty")}
 	}
 	if v.ProjectName != nil {
-		if len(*v.ProjectName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member projectName must not be empty")}
-		}
 		if err := encoder.SetURI("projectName").String(*v.ProjectName); err != nil {
 			return err
 		}
@@ -444,13 +426,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteProjectInput(v *DeleteProjectInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ProjectName == nil {
+	if v.ProjectName == nil || len(*v.ProjectName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member projectName must not be empty")}
 	}
 	if v.ProjectName != nil {
-		if len(*v.ProjectName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member projectName must not be empty")}
-		}
 		if err := encoder.SetURI("projectName").String(*v.ProjectName); err != nil {
 			return err
 		}
@@ -510,25 +489,19 @@ func awsRestjson1_serializeOpHttpBindingsDescribePlacementInput(v *DescribePlace
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.PlacementName == nil {
+	if v.PlacementName == nil || len(*v.PlacementName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member placementName must not be empty")}
 	}
 	if v.PlacementName != nil {
-		if len(*v.PlacementName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member placementName must not be empty")}
-		}
 		if err := encoder.SetURI("placementName").String(*v.PlacementName); err != nil {
 			return err
 		}
 	}
 
-	if v.ProjectName == nil {
+	if v.ProjectName == nil || len(*v.ProjectName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member projectName must not be empty")}
 	}
 	if v.ProjectName != nil {
-		if len(*v.ProjectName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member projectName must not be empty")}
-		}
 		if err := encoder.SetURI("projectName").String(*v.ProjectName); err != nil {
 			return err
 		}
@@ -588,13 +561,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeProjectInput(v *DescribeProject
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ProjectName == nil {
+	if v.ProjectName == nil || len(*v.ProjectName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member projectName must not be empty")}
 	}
 	if v.ProjectName != nil {
-		if len(*v.ProjectName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member projectName must not be empty")}
-		}
 		if err := encoder.SetURI("projectName").String(*v.ProjectName); err != nil {
 			return err
 		}
@@ -654,37 +624,28 @@ func awsRestjson1_serializeOpHttpBindingsDisassociateDeviceFromPlacementInput(v 
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DeviceTemplateName == nil {
+	if v.DeviceTemplateName == nil || len(*v.DeviceTemplateName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member deviceTemplateName must not be empty")}
 	}
 	if v.DeviceTemplateName != nil {
-		if len(*v.DeviceTemplateName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member deviceTemplateName must not be empty")}
-		}
 		if err := encoder.SetURI("deviceTemplateName").String(*v.DeviceTemplateName); err != nil {
 			return err
 		}
 	}
 
-	if v.PlacementName == nil {
+	if v.PlacementName == nil || len(*v.PlacementName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member placementName must not be empty")}
 	}
 	if v.PlacementName != nil {
-		if len(*v.PlacementName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member placementName must not be empty")}
-		}
 		if err := encoder.SetURI("placementName").String(*v.PlacementName); err != nil {
 			return err
 		}
 	}
 
-	if v.ProjectName == nil {
+	if v.ProjectName == nil || len(*v.ProjectName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member projectName must not be empty")}
 	}
 	if v.ProjectName != nil {
-		if len(*v.ProjectName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member projectName must not be empty")}
-		}
 		if err := encoder.SetURI("projectName").String(*v.ProjectName); err != nil {
 			return err
 		}
@@ -744,25 +705,19 @@ func awsRestjson1_serializeOpHttpBindingsGetDevicesInPlacementInput(v *GetDevice
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.PlacementName == nil {
+	if v.PlacementName == nil || len(*v.PlacementName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member placementName must not be empty")}
 	}
 	if v.PlacementName != nil {
-		if len(*v.PlacementName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member placementName must not be empty")}
-		}
 		if err := encoder.SetURI("placementName").String(*v.PlacementName); err != nil {
 			return err
 		}
 	}
 
-	if v.ProjectName == nil {
+	if v.ProjectName == nil || len(*v.ProjectName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member projectName must not be empty")}
 	}
 	if v.ProjectName != nil {
-		if len(*v.ProjectName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member projectName must not be empty")}
-		}
 		if err := encoder.SetURI("projectName").String(*v.ProjectName); err != nil {
 			return err
 		}
@@ -830,13 +785,10 @@ func awsRestjson1_serializeOpHttpBindingsListPlacementsInput(v *ListPlacementsIn
 		encoder.SetQuery("nextToken").String(*v.NextToken)
 	}
 
-	if v.ProjectName == nil {
+	if v.ProjectName == nil || len(*v.ProjectName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member projectName must not be empty")}
 	}
 	if v.ProjectName != nil {
-		if len(*v.ProjectName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member projectName must not be empty")}
-		}
 		if err := encoder.SetURI("projectName").String(*v.ProjectName); err != nil {
 			return err
 		}
@@ -958,13 +910,10 @@ func awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsFor
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ResourceArn == nil {
+	if v.ResourceArn == nil || len(*v.ResourceArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
 	}
 	if v.ResourceArn != nil {
-		if len(*v.ResourceArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
-		}
 		if err := encoder.SetURI("resourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -1035,13 +984,10 @@ func awsRestjson1_serializeOpHttpBindingsTagResourceInput(v *TagResourceInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ResourceArn == nil {
+	if v.ResourceArn == nil || len(*v.ResourceArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
 	}
 	if v.ResourceArn != nil {
-		if len(*v.ResourceArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
-		}
 		if err := encoder.SetURI("resourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -1115,13 +1061,10 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ResourceArn == nil {
+	if v.ResourceArn == nil || len(*v.ResourceArn) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
 	}
 	if v.ResourceArn != nil {
-		if len(*v.ResourceArn) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member resourceArn must not be empty")}
-		}
 		if err := encoder.SetURI("resourceArn").String(*v.ResourceArn); err != nil {
 			return err
 		}
@@ -1129,10 +1072,7 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 
 	if v.TagKeys != nil {
 		for i := range v.TagKeys {
-			if v.TagKeys[i] == nil {
-				continue
-			}
-			encoder.AddQuery("tagKeys").String(*v.TagKeys[i])
+			encoder.AddQuery("tagKeys").String(v.TagKeys[i])
 		}
 	}
 
@@ -1201,25 +1141,19 @@ func awsRestjson1_serializeOpHttpBindingsUpdatePlacementInput(v *UpdatePlacement
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.PlacementName == nil {
+	if v.PlacementName == nil || len(*v.PlacementName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member placementName must not be empty")}
 	}
 	if v.PlacementName != nil {
-		if len(*v.PlacementName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member placementName must not be empty")}
-		}
 		if err := encoder.SetURI("placementName").String(*v.PlacementName); err != nil {
 			return err
 		}
 	}
 
-	if v.ProjectName == nil {
+	if v.ProjectName == nil || len(*v.ProjectName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member projectName must not be empty")}
 	}
 	if v.ProjectName != nil {
-		if len(*v.ProjectName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member projectName must not be empty")}
-		}
 		if err := encoder.SetURI("projectName").String(*v.ProjectName); err != nil {
 			return err
 		}
@@ -1304,13 +1238,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateProjectInput(v *UpdateProjectInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ProjectName == nil {
+	if v.ProjectName == nil || len(*v.ProjectName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member projectName must not be empty")}
 	}
 	if v.ProjectName != nil {
-		if len(*v.ProjectName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member projectName must not be empty")}
-		}
 		if err := encoder.SetURI("projectName").String(*v.ProjectName); err != nil {
 			return err
 		}
@@ -1338,32 +1269,24 @@ func awsRestjson1_serializeOpDocumentUpdateProjectInput(v *UpdateProjectInput, v
 	return nil
 }
 
-func awsRestjson1_serializeDocumentDefaultPlacementAttributeMap(v map[string]*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentDefaultPlacementAttributeMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentDeviceCallbackOverrideMap(v map[string]*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentDeviceCallbackOverrideMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
@@ -1387,34 +1310,27 @@ func awsRestjson1_serializeDocumentDeviceTemplate(v *types.DeviceTemplate, value
 	return nil
 }
 
-func awsRestjson1_serializeDocumentDeviceTemplateMap(v map[string]*types.DeviceTemplate, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentDeviceTemplateMap(v map[string]types.DeviceTemplate, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentDeviceTemplate(v[key], om); err != nil {
+		mapVar := v[key]
+		if err := awsRestjson1_serializeDocumentDeviceTemplate(&mapVar, om); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentPlacementAttributeMap(v map[string]*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentPlacementAttributeMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
@@ -1440,17 +1356,13 @@ func awsRestjson1_serializeDocumentPlacementTemplate(v *types.PlacementTemplate,
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTagMap(v map[string]*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTagMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }

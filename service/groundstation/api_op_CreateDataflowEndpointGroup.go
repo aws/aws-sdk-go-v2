@@ -37,10 +37,10 @@ type CreateDataflowEndpointGroupInput struct {
 	// Endpoint details of each endpoint in the dataflow endpoint group.
 	//
 	// This member is required.
-	EndpointDetails []*types.EndpointDetails
+	EndpointDetails []types.EndpointDetails
 
 	// Tags of a dataflow endpoint group.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 //

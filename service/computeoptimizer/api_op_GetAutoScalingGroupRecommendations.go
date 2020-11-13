@@ -37,15 +37,15 @@ type GetAutoScalingGroupRecommendationsInput struct {
 	// recommendations. If your account is the master account of an organization, use
 	// this parameter to specify the member accounts for which you want to return Auto
 	// Scaling group recommendations. Only one account ID can be specified per request.
-	AccountIds []*string
+	AccountIds []string
 
 	// The Amazon Resource Name (ARN) of the Auto Scaling groups for which to return
 	// recommendations.
-	AutoScalingGroupArns []*string
+	AutoScalingGroupArns []string
 
 	// An array of objects that describe a filter that returns a more specific list of
 	// Auto Scaling group recommendations.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of Auto Scaling group recommendations to return with a single
 	// request. To retrieve the remaining results, make another request with the
@@ -59,12 +59,12 @@ type GetAutoScalingGroupRecommendationsInput struct {
 type GetAutoScalingGroupRecommendationsOutput struct {
 
 	// An array of objects that describe Auto Scaling group recommendations.
-	AutoScalingGroupRecommendations []*types.AutoScalingGroupRecommendation
+	AutoScalingGroupRecommendations []types.AutoScalingGroupRecommendation
 
 	// An array of objects that describe errors of the request. For example, an error
 	// is returned if you request recommendations for an unsupported Auto Scaling
 	// group.
-	Errors []*types.GetRecommendationError
+	Errors []types.GetRecommendationError
 
 	// The token to use to advance to the next page of Auto Scaling group
 	// recommendations. This value is null when there are no more pages of Auto Scaling

@@ -993,117 +993,89 @@ func awsAwsjson11_serializeDocumentCognitoIdentityProvider(v *types.CognitoIdent
 		ok.String(*v.ProviderName)
 	}
 
-	if v.ServerSideTokenCheck != nil {
+	if v.ServerSideTokenCheck {
 		ok := object.Key("ServerSideTokenCheck")
-		ok.Boolean(*v.ServerSideTokenCheck)
+		ok.Boolean(v.ServerSideTokenCheck)
 	}
 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCognitoIdentityProviderList(v []*types.CognitoIdentityProvider, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentCognitoIdentityProviderList(v []types.CognitoIdentityProvider, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentCognitoIdentityProvider(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentCognitoIdentityProvider(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentIdentityIdList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentIdentityIdList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentIdentityPoolTagsListType(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentIdentityPoolTagsListType(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentIdentityPoolTagsType(v map[string]*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentIdentityPoolTagsType(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentIdentityProviders(v map[string]*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentIdentityProviders(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentLoginsList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentLoginsList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentLoginsMap(v map[string]*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentLoginsMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
@@ -1135,34 +1107,26 @@ func awsAwsjson11_serializeDocumentMappingRule(v *types.MappingRule, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentMappingRulesList(v []*types.MappingRule, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentMappingRulesList(v []types.MappingRule, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentMappingRule(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentMappingRule(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentOIDCProviderList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentOIDCProviderList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1191,34 +1155,27 @@ func awsAwsjson11_serializeDocumentRoleMapping(v *types.RoleMapping, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRoleMappingMap(v map[string]*types.RoleMapping, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentRoleMappingMap(v map[string]types.RoleMapping, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentRoleMapping(v[key], om); err != nil {
+		mapVar := v[key]
+		if err := awsAwsjson11_serializeDocumentRoleMapping(&mapVar, om); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRolesMap(v map[string]*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentRolesMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
@@ -1237,17 +1194,13 @@ func awsAwsjson11_serializeDocumentRulesConfigurationType(v *types.RulesConfigur
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSAMLProviderList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentSAMLProviderList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1261,9 +1214,9 @@ func awsAwsjson11_serializeOpDocumentCreateIdentityPoolInput(v *CreateIdentityPo
 		ok.Boolean(*v.AllowClassicFlow)
 	}
 
-	if v.AllowUnauthenticatedIdentities != nil {
+	if v.AllowUnauthenticatedIdentities {
 		ok := object.Key("AllowUnauthenticatedIdentities")
-		ok.Boolean(*v.AllowUnauthenticatedIdentities)
+		ok.Boolean(v.AllowUnauthenticatedIdentities)
 	}
 
 	if v.CognitoIdentityProviders != nil {
@@ -1476,9 +1429,9 @@ func awsAwsjson11_serializeOpDocumentListIdentitiesInput(v *ListIdentitiesInput,
 	object := value.Object()
 	defer object.Close()
 
-	if v.HideDisabled != nil {
+	if v.HideDisabled {
 		ok := object.Key("HideDisabled")
-		ok.Boolean(*v.HideDisabled)
+		ok.Boolean(v.HideDisabled)
 	}
 
 	if v.IdentityPoolId != nil {
@@ -1486,9 +1439,9 @@ func awsAwsjson11_serializeOpDocumentListIdentitiesInput(v *ListIdentitiesInput,
 		ok.String(*v.IdentityPoolId)
 	}
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1503,9 +1456,9 @@ func awsAwsjson11_serializeOpDocumentListIdentityPoolsInput(v *ListIdentityPools
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1547,9 +1500,9 @@ func awsAwsjson11_serializeOpDocumentLookupDeveloperIdentityInput(v *LookupDevel
 		ok.String(*v.IdentityPoolId)
 	}
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1713,9 +1666,9 @@ func awsAwsjson11_serializeOpDocumentUpdateIdentityPoolInput(v *UpdateIdentityPo
 		ok.Boolean(*v.AllowClassicFlow)
 	}
 
-	if v.AllowUnauthenticatedIdentities != nil {
+	if v.AllowUnauthenticatedIdentities {
 		ok := object.Key("AllowUnauthenticatedIdentities")
-		ok.Boolean(*v.AllowUnauthenticatedIdentities)
+		ok.Boolean(v.AllowUnauthenticatedIdentities)
 	}
 
 	if v.CognitoIdentityProviders != nil {

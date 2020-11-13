@@ -38,7 +38,7 @@ type CreateScalingPlanInput struct {
 	// The scaling instructions.
 	//
 	// This member is required.
-	ScalingInstructions []*types.ScalingInstruction
+	ScalingInstructions []types.ScalingInstruction
 
 	// The name of the scaling plan. Names cannot contain vertical bars, colons, or
 	// forward slashes.

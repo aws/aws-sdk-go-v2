@@ -61,7 +61,7 @@ type ListScriptsOutput struct {
 	NextToken *string
 
 	// A set of properties describing the requested script.
-	Scripts []*types.Script
+	Scripts []types.Script
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

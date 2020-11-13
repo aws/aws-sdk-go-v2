@@ -114,7 +114,7 @@ type AvailabilityOptionsStatus struct {
 	// The availability options configured for the domain.
 	//
 	// This member is required.
-	Options *bool
+	Options bool
 
 	// The status of domain configuration option.
 	//
@@ -275,13 +275,13 @@ type DomainStatus struct {
 	Processing *bool
 
 	// The number of search instances that are available to process search requests.
-	SearchInstanceCount *int32
+	SearchInstanceCount int32
 
 	// The instance type that is being used to process search requests.
 	SearchInstanceType *string
 
 	// The number of partitions across which the search index is spread.
-	SearchPartitionCount *int32
+	SearchPartitionCount int32
 
 	// The service endpoint for requesting search results from a search domain.
 	SearchService *ServiceEndpoint
@@ -545,9 +545,9 @@ type LatLonOptions struct {
 }
 
 type Limits struct {
-	MaximumPartitionCount *int32
+	MaximumPartitionCount int32
 
-	MaximumReplicationCount *int32
+	MaximumReplicationCount int32
 }
 
 // Options for a field that contains an array of literal strings. Present if
@@ -641,7 +641,7 @@ type OptionStatus struct {
 	PendingDeletion *bool
 
 	// A unique integer that indicates when this option was last updated.
-	UpdateVersion *int32
+	UpdateVersion int32
 }
 
 // The desired instance type and desired number of replicas of each index
@@ -654,10 +654,10 @@ type ScalingParameters struct {
 
 	// The number of partitions you want to preconfigure for your domain. Only valid
 	// when you select m2.2xlarge as the desired instance type.
-	DesiredPartitionCount *int32
+	DesiredPartitionCount int32
 
 	// The number of replicas you want to preconfigure for each index partition.
-	DesiredReplicationCount *int32
+	DesiredReplicationCount int32
 }
 
 // The status and configuration of a search domain's scaling parameters.

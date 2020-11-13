@@ -267,7 +267,7 @@ type GetGatewayResponsesInput struct {
 type GetGatewayResponsesOutput struct {
 
 	// Returns the entire collection, because of no pagination support.
-	Items []*types.GatewayResponse
+	Items []types.GatewayResponse
 
 	// The current pagination position in the paged result set. The GatewayResponse
 	// collection does not support pagination and the position does not apply here.

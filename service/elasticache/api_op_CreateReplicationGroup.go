@@ -185,7 +185,7 @@ type CreateReplicationGroupInput struct {
 	CacheParameterGroupName *string
 
 	// A list of cache security group names to associate with this replication group.
-	CacheSecurityGroupNames []*string
+	CacheSecurityGroupNames []string
 
 	// The name of the cache subnet group to be used for the replication group. If
 	// you're going to launch your cluster in an Amazon VPC, you need to create a
@@ -229,7 +229,7 @@ type CreateReplicationGroupInput struct {
 	// mode enabled) cluster from a S3 rdb file. You must configure each node group
 	// (shard) using this parameter because you must specify the slots for each node
 	// group.
-	NodeGroupConfiguration []*types.NodeGroupConfiguration
+	NodeGroupConfiguration []types.NodeGroupConfiguration
 
 	// The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS)
 	// topic to which notifications are sent. The Amazon SNS topic owner must be the
@@ -263,7 +263,7 @@ type CreateReplicationGroupInput struct {
 	// in Availability Zones associated with the subnets in the selected subnet group.
 	// The number of Availability Zones listed must equal the value of
 	// NumCacheClusters. Default: system chosen Availability Zones.
-	PreferredCacheClusterAZs []*string
+	PreferredCacheClusterAZs []string
 
 	// Specifies the weekly time range during which maintenance on the cluster is
 	// performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H
@@ -304,7 +304,7 @@ type CreateReplicationGroupInput struct {
 	// One or more Amazon VPC security groups associated with this replication group.
 	// Use this parameter only when you are creating a replication group in an Amazon
 	// Virtual Private Cloud (Amazon VPC).
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// A list of Amazon Resource Names (ARN) that uniquely identify the Redis RDB
 	// snapshot files stored in Amazon S3. The snapshot files are used to populate the
@@ -313,7 +313,7 @@ type CreateReplicationGroupInput struct {
 	// shards) specified by the parameter NumNodeGroups or the number of node groups
 	// configured by NodeGroupConfiguration regardless of the number of ARNs specified
 	// here. Example of an Amazon S3 ARN: arn:aws:s3:::my_bucket/snapshot1.rdb
-	SnapshotArns []*string
+	SnapshotArns []string
 
 	// The name of a snapshot from which to restore data into the new replication
 	// group. The snapshot status changes to restoring while the new replication group
@@ -335,7 +335,7 @@ type CreateReplicationGroupInput struct {
 	// comma-separated key,value pairs (e.g. Key=myKey, Value=myKeyValue. You can
 	// include multiple tags as shown following: Key=myKey, Value=myKeyValue
 	// Key=mySecondKey, Value=mySecondKeyValue.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// A flag that enables in-transit encryption when set to true. You cannot modify
 	// the value of TransitEncryptionEnabled after the cluster is created. To enable
@@ -350,7 +350,7 @@ type CreateReplicationGroupInput struct {
 	TransitEncryptionEnabled *bool
 
 	// The list of user groups to associate with the replication group.
-	UserGroupIds []*string
+	UserGroupIds []string
 }
 
 type CreateReplicationGroupOutput struct {

@@ -32,7 +32,7 @@ type ListAssessmentRunsInput struct {
 
 	// The ARNs that specify the assessment templates whose assessment runs you want to
 	// list.
-	AssessmentTemplateArns []*string
+	AssessmentTemplateArns []string
 
 	// You can use this parameter to specify a subset of data to be included in the
 	// action's response. For a record to match a filter, all specified filter
@@ -57,7 +57,7 @@ type ListAssessmentRunsOutput struct {
 	// action.
 	//
 	// This member is required.
-	AssessmentRunArns []*string
+	AssessmentRunArns []string
 
 	// When a response is generated, if there is more data to be listed, this parameter
 	// is present in the response and contains the value to use for the nextToken

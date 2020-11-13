@@ -34,13 +34,13 @@ type SetRulePrioritiesInput struct {
 	// The rule priorities.
 	//
 	// This member is required.
-	RulePriorities []*types.RulePriorityPair
+	RulePriorities []types.RulePriorityPair
 }
 
 type SetRulePrioritiesOutput struct {
 
 	// Information about the rules.
-	Rules []*types.Rule
+	Rules []types.Rule
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

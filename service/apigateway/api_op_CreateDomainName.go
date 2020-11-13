@@ -88,7 +88,7 @@ type CreateDomainNameInput struct {
 	// The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The
 	// tag key can be up to 128 characters and must not start with aws:. The tag value
 	// can be up to 256 characters.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // Represents a custom domain name as a user-friendly host name of an API
@@ -180,7 +180,7 @@ type CreateDomainNameOutput struct {
 	SecurityPolicy types.SecurityPolicy
 
 	// The collection of tags. Each tag element is associated with a given resource.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -34,7 +34,7 @@ type ListTasksInput struct {
 	// ListTasks. For example, to retrieve all tasks on a specific source location, you
 	// can use ListTasks with filter name LocationId and Operator Equals with the ARN
 	// for the location.
-	Filters []*types.TaskFilter
+	Filters []types.TaskFilter
 
 	// The maximum number of tasks to return.
 	MaxResults *int32
@@ -52,7 +52,7 @@ type ListTasksOutput struct {
 	NextToken *string
 
 	// A list of all the tasks that are returned.
-	Tasks []*types.TaskListEntry
+	Tasks []types.TaskListEntry
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

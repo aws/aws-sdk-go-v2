@@ -50,7 +50,7 @@ type ModifyDBClusterInput struct {
 	// values are applied during the next maintenance window. All other changes are
 	// applied immediately, regardless of the value of the ApplyImmediately parameter.
 	// Default: false
-	ApplyImmediately *bool
+	ApplyImmediately bool
 
 	// The number of days for which automated backups are retained. You must specify a
 	// minimum value of 1. Default: 1 Constraints:
@@ -134,7 +134,7 @@ type ModifyDBClusterInput struct {
 	PreferredMaintenanceWindow *string
 
 	// A list of VPC security groups that the DB cluster will belong to.
-	VpcSecurityGroupIds []*string
+	VpcSecurityGroupIds []string
 }
 
 type ModifyDBClusterOutput struct {

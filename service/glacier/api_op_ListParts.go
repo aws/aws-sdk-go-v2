@@ -105,11 +105,11 @@ type ListPartsOutput struct {
 
 	// The part size in bytes. This is the same value that you specified in the
 	// Initiate Multipart Upload request.
-	PartSizeInBytes *int64
+	PartSizeInBytes int64
 
 	// A list of the part sizes of the multipart upload. Each object in the array
 	// contains a RangeBytes and sha256-tree-hash name/value pair.
-	Parts []*types.PartListElement
+	Parts []types.PartListElement
 
 	// The Amazon Resource Name (ARN) of the vault to which the multipart upload was
 	// initiated.

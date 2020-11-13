@@ -41,7 +41,7 @@ type CreateComponentInput struct {
 	// The list of resource ARNs that belong to the component.
 	//
 	// This member is required.
-	ResourceList []*string
+	ResourceList []string
 }
 
 type CreateComponentOutput struct {

@@ -38,7 +38,7 @@ type DescribeGlobalClustersInput struct {
 	// * db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
 	// Resource Names (ARNs). The results list will only include information about the
 	// DB clusters identified by these ARNs.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The user-supplied DB cluster identifier. If this parameter is specified,
 	// information from only the specific DB cluster is returned. This parameter isn't
@@ -63,7 +63,7 @@ type DescribeGlobalClustersInput struct {
 type DescribeGlobalClustersOutput struct {
 
 	// The list of global clusters returned by this request.
-	GlobalClusters []*types.GlobalCluster
+	GlobalClusters []types.GlobalCluster
 
 	// An optional pagination token provided by a previous DescribeGlobalClusters
 	// request. If this parameter is specified, the response includes only records

@@ -70,7 +70,7 @@ type GetContextKeysForPrincipalPolicyInput struct {
 	//
 	// * The special characters tab (\u0009), line feed (\u000A), and carriage
 	// return (\u000D)
-	PolicyInputList []*string
+	PolicyInputList []string
 }
 
 // Contains the response to a successful GetContextKeysForPrincipalPolicy or
@@ -78,7 +78,7 @@ type GetContextKeysForPrincipalPolicyInput struct {
 type GetContextKeysForPrincipalPolicyOutput struct {
 
 	// The list of context keys that are referenced in the input policies.
-	ContextKeyNames []*string
+	ContextKeyNames []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

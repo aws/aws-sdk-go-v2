@@ -47,7 +47,7 @@ type ListTagsForResourceOutput struct {
 	ResourceArn *string
 
 	// A list of tag key-value pairs.
-	ResourceTags []*types.Tag
+	ResourceTags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

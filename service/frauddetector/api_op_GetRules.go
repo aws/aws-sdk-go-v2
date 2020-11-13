@@ -60,7 +60,7 @@ type GetRulesOutput struct {
 	NextToken *string
 
 	// The details of the requested rule.
-	RuleDetails []*types.RuleDetail
+	RuleDetails []types.RuleDetail
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -37,7 +37,7 @@ type ModifyInstanceGroupsInput struct {
 	ClusterId *string
 
 	// Instance groups to change.
-	InstanceGroups []*types.InstanceGroupModifyConfig
+	InstanceGroups []types.InstanceGroupModifyConfig
 }
 
 type ModifyInstanceGroupsOutput struct {

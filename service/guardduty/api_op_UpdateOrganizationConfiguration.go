@@ -32,7 +32,7 @@ type UpdateOrganizationConfigurationInput struct {
 	// Indicates whether to automatically enable member accounts in the organization.
 	//
 	// This member is required.
-	AutoEnable *bool
+	AutoEnable bool
 
 	// The ID of the detector to update the delegated administrator for.
 	//

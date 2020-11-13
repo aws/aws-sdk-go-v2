@@ -36,7 +36,7 @@ type UpdateImageInput struct {
 
 	// A list of properties to delete. Only the Description and DisplayName properties
 	// can be deleted.
-	DeleteProperties []*string
+	DeleteProperties []string
 
 	// The new description for the image.
 	Description *string

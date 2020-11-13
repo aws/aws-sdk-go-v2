@@ -68,7 +68,7 @@ type ListTypeRegistrationsOutput struct {
 
 	// A list of type registration tokens. Use DescribeTypeRegistration to return
 	// detailed information about a type registration request.
-	RegistrationTokenList []*string
+	RegistrationTokenList []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

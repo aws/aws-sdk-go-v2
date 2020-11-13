@@ -43,7 +43,7 @@ type CreateDevicePoolInput struct {
 	// The device pool's rules.
 	//
 	// This member is required.
-	Rules []*types.Rule
+	Rules []types.Rule
 
 	// The device pool's description.
 	Description *string

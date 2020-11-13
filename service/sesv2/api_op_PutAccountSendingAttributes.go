@@ -33,7 +33,7 @@ type PutAccountSendingAttributesInput struct {
 	// email sending, or set to false to disable email sending. If AWS paused your
 	// account's ability to send email, you can't use this operation to resume your
 	// account's ability to send email.
-	SendingEnabled *bool
+	SendingEnabled bool
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request

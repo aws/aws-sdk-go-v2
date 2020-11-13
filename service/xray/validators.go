@@ -375,9 +375,6 @@ func validateSamplingRule(v *types.SamplingRule) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SamplingRule"}
-	if v.Priority == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
-	}
 	if v.URLPath == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("URLPath"))
 	}
@@ -387,17 +384,8 @@ func validateSamplingRule(v *types.SamplingRule) error {
 	if v.ServiceName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceName"))
 	}
-	if v.FixedRate == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FixedRate"))
-	}
 	if v.ResourceARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
-	}
-	if v.Version == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Version"))
-	}
-	if v.ReservoirSize == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ReservoirSize"))
 	}
 	if v.ServiceType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceType"))
@@ -417,14 +405,8 @@ func validateSamplingStatisticsDocument(v *types.SamplingStatisticsDocument) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SamplingStatisticsDocument"}
-	if v.RequestCount == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RequestCount"))
-	}
 	if v.ClientID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientID"))
-	}
-	if v.SampledCount == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SampledCount"))
 	}
 	if v.Timestamp == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Timestamp"))
@@ -439,13 +421,13 @@ func validateSamplingStatisticsDocument(v *types.SamplingStatisticsDocument) err
 	}
 }
 
-func validateSamplingStatisticsDocumentList(v []*types.SamplingStatisticsDocument) error {
+func validateSamplingStatisticsDocumentList(v []types.SamplingStatisticsDocument) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SamplingStatisticsDocumentList"}
 	for i := range v {
-		if err := validateSamplingStatisticsDocument(v[i]); err != nil {
+		if err := validateSamplingStatisticsDocument(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -474,13 +456,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagList(v []*types.Tag) error {
+func validateTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -506,13 +488,13 @@ func validateTelemetryRecord(v *types.TelemetryRecord) error {
 	}
 }
 
-func validateTelemetryRecordList(v []*types.TelemetryRecord) error {
+func validateTelemetryRecordList(v []types.TelemetryRecord) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TelemetryRecordList"}
 	for i := range v {
-		if err := validateTelemetryRecord(v[i]); err != nil {
+		if err := validateTelemetryRecord(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

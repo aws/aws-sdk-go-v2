@@ -34,7 +34,7 @@ type DisassociateMembersInput struct {
 	// disassociate from the master account.
 	//
 	// This member is required.
-	AccountIds []*string
+	AccountIds []string
 
 	// The unique ID of the detector of the GuardDuty account whose members you want to
 	// disassociate from the master account.
@@ -49,7 +49,7 @@ type DisassociateMembersOutput struct {
 	// explains why it was unprocessed.
 	//
 	// This member is required.
-	UnprocessedAccounts []*types.UnprocessedAccount
+	UnprocessedAccounts []types.UnprocessedAccount
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -7535,7 +7535,7 @@ func awsRestjson1_deserializeOpDocumentGetPhoneNumberSettingsOutput(v **GetPhone
 				if !ok {
 					return fmt.Errorf("expected CallingName to be of type string, got %T instead", value)
 				}
-				sv.CallingName = &jtv
+				sv.CallingName = ptr.String(jtv)
 			}
 
 		case "CallingNameUpdatedTimestamp":
@@ -7548,7 +7548,7 @@ func awsRestjson1_deserializeOpDocumentGetPhoneNumberSettingsOutput(v **GetPhone
 				if err != nil {
 					return err
 				}
-				sv.CallingNameUpdatedTimestamp = &t
+				sv.CallingNameUpdatedTimestamp = ptr.Time(t)
 			}
 
 		default:
@@ -7886,7 +7886,7 @@ func awsRestjson1_deserializeOpDocumentGetRetentionSettingsOutput(v **GetRetenti
 				if err != nil {
 					return err
 				}
-				sv.InitiateDeletionTimestamp = &t
+				sv.InitiateDeletionTimestamp = ptr.Time(t)
 			}
 
 		case "RetentionSettings":
@@ -10210,7 +10210,7 @@ func awsRestjson1_deserializeOpDocumentListAccountsOutput(v **ListAccountsOutput
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -10384,7 +10384,7 @@ func awsRestjson1_deserializeOpDocumentListAttendeesOutput(v **ListAttendeesOutp
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -10723,7 +10723,7 @@ func awsRestjson1_deserializeOpDocumentListBotsOutput(v **ListBotsOutput, value 
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -10894,7 +10894,7 @@ func awsRestjson1_deserializeOpDocumentListMeetingsOutput(v **ListMeetingsOutput
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -11225,7 +11225,7 @@ func awsRestjson1_deserializeOpDocumentListPhoneNumberOrdersOutput(v **ListPhone
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "PhoneNumberOrders":
@@ -11396,7 +11396,7 @@ func awsRestjson1_deserializeOpDocumentListPhoneNumbersOutput(v **ListPhoneNumbe
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "PhoneNumbers":
@@ -11570,7 +11570,7 @@ func awsRestjson1_deserializeOpDocumentListProxySessionsOutput(v **ListProxySess
 				if !ok {
 					return fmt.Errorf("expected NextTokenString to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "ProxySessions":
@@ -11744,7 +11744,7 @@ func awsRestjson1_deserializeOpDocumentListRoomMembershipsOutput(v **ListRoomMem
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "RoomMemberships":
@@ -11918,7 +11918,7 @@ func awsRestjson1_deserializeOpDocumentListRoomsOutput(v **ListRoomsOutput, valu
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "Rooms":
@@ -12254,7 +12254,7 @@ func awsRestjson1_deserializeOpDocumentListUsersOutput(v **ListUsersOutput, valu
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "Users":
@@ -12425,7 +12425,7 @@ func awsRestjson1_deserializeOpDocumentListVoiceConnectorGroupsOutput(v **ListVo
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "VoiceConnectorGroups":
@@ -12596,7 +12596,7 @@ func awsRestjson1_deserializeOpDocumentListVoiceConnectorsOutput(v **ListVoiceCo
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "VoiceConnectors":
@@ -13208,7 +13208,7 @@ func awsRestjson1_deserializeOpDocumentPutRetentionSettingsOutput(v **PutRetenti
 				if err != nil {
 					return err
 				}
-				sv.InitiateDeletionTimestamp = &t
+				sv.InitiateDeletionTimestamp = ptr.Time(t)
 			}
 
 		case "RetentionSettings":
@@ -18115,7 +18115,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -18155,7 +18155,7 @@ func awsRestjson1_deserializeDocumentAccount(v **types.Account, value interface{
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.AccountId = &jtv
+				sv.AccountId = ptr.String(jtv)
 			}
 
 		case "AccountType":
@@ -18173,7 +18173,7 @@ func awsRestjson1_deserializeDocumentAccount(v **types.Account, value interface{
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.AwsAccountId = &jtv
+				sv.AwsAccountId = ptr.String(jtv)
 			}
 
 		case "CreatedTimestamp":
@@ -18186,7 +18186,7 @@ func awsRestjson1_deserializeDocumentAccount(v **types.Account, value interface{
 				if err != nil {
 					return err
 				}
-				sv.CreatedTimestamp = &t
+				sv.CreatedTimestamp = ptr.Time(t)
 			}
 
 		case "DefaultLicense":
@@ -18204,7 +18204,7 @@ func awsRestjson1_deserializeDocumentAccount(v **types.Account, value interface{
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "SigninDelegateGroups":
@@ -18226,7 +18226,7 @@ func awsRestjson1_deserializeDocumentAccount(v **types.Account, value interface{
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentAccountList(v *[]*types.Account, value interface{}) error {
+func awsRestjson1_deserializeDocumentAccountList(v *[]types.Account, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -18239,18 +18239,20 @@ func awsRestjson1_deserializeDocumentAccountList(v *[]*types.Account, value inte
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Account
+	var cv []types.Account
 	if *v == nil {
-		cv = []*types.Account{}
+		cv = []types.Account{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Account
-		if err := awsRestjson1_deserializeDocumentAccount(&col, value); err != nil {
+		var col types.Account
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAccount(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -18286,7 +18288,7 @@ func awsRestjson1_deserializeDocumentAccountSettings(v **types.AccountSettings, 
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.DisableRemoteControl = &jtv
+				sv.DisableRemoteControl = ptr.Bool(jtv)
 			}
 
 		case "EnableDialOut":
@@ -18295,7 +18297,7 @@ func awsRestjson1_deserializeDocumentAccountSettings(v **types.AccountSettings, 
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.EnableDialOut = &jtv
+				sv.EnableDialOut = ptr.Bool(jtv)
 			}
 
 		default:
@@ -18335,7 +18337,7 @@ func awsRestjson1_deserializeDocumentAlexaForBusinessMetadata(v **types.AlexaFor
 				if !ok {
 					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
-				sv.AlexaForBusinessRoomArn = &jtv
+				sv.AlexaForBusinessRoomArn = ptr.String(jtv)
 			}
 
 		case "IsAlexaForBusinessEnabled":
@@ -18344,7 +18346,7 @@ func awsRestjson1_deserializeDocumentAlexaForBusinessMetadata(v **types.AlexaFor
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.IsAlexaForBusinessEnabled = &jtv
+				sv.IsAlexaForBusinessEnabled = ptr.Bool(jtv)
 			}
 
 		default:
@@ -18384,7 +18386,7 @@ func awsRestjson1_deserializeDocumentAttendee(v **types.Attendee, value interfac
 				if !ok {
 					return fmt.Errorf("expected GuidString to be of type string, got %T instead", value)
 				}
-				sv.AttendeeId = &jtv
+				sv.AttendeeId = ptr.String(jtv)
 			}
 
 		case "ExternalUserId":
@@ -18393,7 +18395,7 @@ func awsRestjson1_deserializeDocumentAttendee(v **types.Attendee, value interfac
 				if !ok {
 					return fmt.Errorf("expected ExternalUserIdType to be of type string, got %T instead", value)
 				}
-				sv.ExternalUserId = &jtv
+				sv.ExternalUserId = ptr.String(jtv)
 			}
 
 		case "JoinToken":
@@ -18402,7 +18404,7 @@ func awsRestjson1_deserializeDocumentAttendee(v **types.Attendee, value interfac
 				if !ok {
 					return fmt.Errorf("expected JoinTokenString to be of type string, got %T instead", value)
 				}
-				sv.JoinToken = &jtv
+				sv.JoinToken = ptr.String(jtv)
 			}
 
 		default:
@@ -18414,7 +18416,7 @@ func awsRestjson1_deserializeDocumentAttendee(v **types.Attendee, value interfac
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentAttendeeList(v *[]*types.Attendee, value interface{}) error {
+func awsRestjson1_deserializeDocumentAttendeeList(v *[]types.Attendee, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -18427,18 +18429,20 @@ func awsRestjson1_deserializeDocumentAttendeeList(v *[]*types.Attendee, value in
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Attendee
+	var cv []types.Attendee
 	if *v == nil {
-		cv = []*types.Attendee{}
+		cv = []types.Attendee{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Attendee
-		if err := awsRestjson1_deserializeDocumentAttendee(&col, value); err != nil {
+		var col types.Attendee
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAttendee(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -18483,7 +18487,7 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -18495,7 +18499,7 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentBatchCreateAttendeeErrorList(v *[]*types.CreateAttendeeError, value interface{}) error {
+func awsRestjson1_deserializeDocumentBatchCreateAttendeeErrorList(v *[]types.CreateAttendeeError, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -18508,18 +18512,20 @@ func awsRestjson1_deserializeDocumentBatchCreateAttendeeErrorList(v *[]*types.Cr
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.CreateAttendeeError
+	var cv []types.CreateAttendeeError
 	if *v == nil {
-		cv = []*types.CreateAttendeeError{}
+		cv = []types.CreateAttendeeError{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.CreateAttendeeError
-		if err := awsRestjson1_deserializeDocumentCreateAttendeeError(&col, value); err != nil {
+		var col types.CreateAttendeeError
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentCreateAttendeeError(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -18555,7 +18561,7 @@ func awsRestjson1_deserializeDocumentBot(v **types.Bot, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
-				sv.BotEmail = &jtv
+				sv.BotEmail = ptr.String(jtv)
 			}
 
 		case "BotId":
@@ -18564,7 +18570,7 @@ func awsRestjson1_deserializeDocumentBot(v **types.Bot, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.BotId = &jtv
+				sv.BotId = ptr.String(jtv)
 			}
 
 		case "BotType":
@@ -18586,7 +18592,7 @@ func awsRestjson1_deserializeDocumentBot(v **types.Bot, value interface{}) error
 				if err != nil {
 					return err
 				}
-				sv.CreatedTimestamp = &t
+				sv.CreatedTimestamp = ptr.Time(t)
 			}
 
 		case "Disabled":
@@ -18595,7 +18601,7 @@ func awsRestjson1_deserializeDocumentBot(v **types.Bot, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
 				}
-				sv.Disabled = &jtv
+				sv.Disabled = ptr.Bool(jtv)
 			}
 
 		case "DisplayName":
@@ -18604,7 +18610,7 @@ func awsRestjson1_deserializeDocumentBot(v **types.Bot, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
-				sv.DisplayName = &jtv
+				sv.DisplayName = ptr.String(jtv)
 			}
 
 		case "SecurityToken":
@@ -18613,7 +18619,7 @@ func awsRestjson1_deserializeDocumentBot(v **types.Bot, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
-				sv.SecurityToken = &jtv
+				sv.SecurityToken = ptr.String(jtv)
 			}
 
 		case "UpdatedTimestamp":
@@ -18626,7 +18632,7 @@ func awsRestjson1_deserializeDocumentBot(v **types.Bot, value interface{}) error
 				if err != nil {
 					return err
 				}
-				sv.UpdatedTimestamp = &t
+				sv.UpdatedTimestamp = ptr.Time(t)
 			}
 
 		case "UserId":
@@ -18635,7 +18641,7 @@ func awsRestjson1_deserializeDocumentBot(v **types.Bot, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.UserId = &jtv
+				sv.UserId = ptr.String(jtv)
 			}
 
 		default:
@@ -18647,7 +18653,7 @@ func awsRestjson1_deserializeDocumentBot(v **types.Bot, value interface{}) error
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentBotList(v *[]*types.Bot, value interface{}) error {
+func awsRestjson1_deserializeDocumentBotList(v *[]types.Bot, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -18660,18 +18666,20 @@ func awsRestjson1_deserializeDocumentBotList(v *[]*types.Bot, value interface{})
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Bot
+	var cv []types.Bot
 	if *v == nil {
-		cv = []*types.Bot{}
+		cv = []types.Bot{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Bot
-		if err := awsRestjson1_deserializeDocumentBot(&col, value); err != nil {
+		var col types.Bot
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentBot(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -18707,7 +18715,7 @@ func awsRestjson1_deserializeDocumentBusinessCallingSettings(v **types.BusinessC
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.CdrBucket = &jtv
+				sv.CdrBucket = ptr.String(jtv)
 			}
 
 		default:
@@ -18719,7 +18727,7 @@ func awsRestjson1_deserializeDocumentBusinessCallingSettings(v **types.BusinessC
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentCallingRegionList(v *[]*string, value interface{}) error {
+func awsRestjson1_deserializeDocumentCallingRegionList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -18732,21 +18740,21 @@ func awsRestjson1_deserializeDocumentCallingRegionList(v *[]*string, value inter
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*string
+	var cv []string
 	if *v == nil {
-		cv = []*string{}
+		cv = []string{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *string
+		var col string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected CallingRegion to be of type string, got %T instead", value)
 			}
-			col = &jtv
+			col = jtv
 		}
 		cv = append(cv, col)
 
@@ -18828,7 +18836,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -18912,7 +18920,7 @@ func awsRestjson1_deserializeDocumentCreateAttendeeError(v **types.CreateAttende
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.ErrorCode = &jtv
+				sv.ErrorCode = ptr.String(jtv)
 			}
 
 		case "ErrorMessage":
@@ -18921,7 +18929,7 @@ func awsRestjson1_deserializeDocumentCreateAttendeeError(v **types.CreateAttende
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.ErrorMessage = &jtv
+				sv.ErrorMessage = ptr.String(jtv)
 			}
 
 		case "ExternalUserId":
@@ -18930,7 +18938,7 @@ func awsRestjson1_deserializeDocumentCreateAttendeeError(v **types.CreateAttende
 				if !ok {
 					return fmt.Errorf("expected ExternalUserIdType to be of type string, got %T instead", value)
 				}
-				sv.ExternalUserId = &jtv
+				sv.ExternalUserId = ptr.String(jtv)
 			}
 
 		default:
@@ -18970,7 +18978,7 @@ func awsRestjson1_deserializeDocumentDNISEmergencyCallingConfiguration(v **types
 				if !ok {
 					return fmt.Errorf("expected Alpha2CountryCode to be of type string, got %T instead", value)
 				}
-				sv.CallingCountry = &jtv
+				sv.CallingCountry = ptr.String(jtv)
 			}
 
 		case "EmergencyPhoneNumber":
@@ -18979,7 +18987,7 @@ func awsRestjson1_deserializeDocumentDNISEmergencyCallingConfiguration(v **types
 				if !ok {
 					return fmt.Errorf("expected E164PhoneNumber to be of type string, got %T instead", value)
 				}
-				sv.EmergencyPhoneNumber = &jtv
+				sv.EmergencyPhoneNumber = ptr.String(jtv)
 			}
 
 		case "TestPhoneNumber":
@@ -18988,7 +18996,7 @@ func awsRestjson1_deserializeDocumentDNISEmergencyCallingConfiguration(v **types
 				if !ok {
 					return fmt.Errorf("expected E164PhoneNumber to be of type string, got %T instead", value)
 				}
-				sv.TestPhoneNumber = &jtv
+				sv.TestPhoneNumber = ptr.String(jtv)
 			}
 
 		default:
@@ -19000,7 +19008,7 @@ func awsRestjson1_deserializeDocumentDNISEmergencyCallingConfiguration(v **types
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentDNISEmergencyCallingConfigurationList(v *[]*types.DNISEmergencyCallingConfiguration, value interface{}) error {
+func awsRestjson1_deserializeDocumentDNISEmergencyCallingConfigurationList(v *[]types.DNISEmergencyCallingConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -19013,18 +19021,20 @@ func awsRestjson1_deserializeDocumentDNISEmergencyCallingConfigurationList(v *[]
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.DNISEmergencyCallingConfiguration
+	var cv []types.DNISEmergencyCallingConfiguration
 	if *v == nil {
-		cv = []*types.DNISEmergencyCallingConfiguration{}
+		cv = []types.DNISEmergencyCallingConfiguration{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.DNISEmergencyCallingConfiguration
-		if err := awsRestjson1_deserializeDocumentDNISEmergencyCallingConfiguration(&col, value); err != nil {
+		var col types.DNISEmergencyCallingConfiguration
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentDNISEmergencyCallingConfiguration(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -19032,7 +19042,7 @@ func awsRestjson1_deserializeDocumentDNISEmergencyCallingConfigurationList(v *[]
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentE164PhoneNumberList(v *[]*string, value interface{}) error {
+func awsRestjson1_deserializeDocumentE164PhoneNumberList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -19045,21 +19055,21 @@ func awsRestjson1_deserializeDocumentE164PhoneNumberList(v *[]*string, value int
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*string
+	var cv []string
 	if *v == nil {
-		cv = []*string{}
+		cv = []string{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *string
+		var col string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected E164PhoneNumber to be of type string, got %T instead", value)
 			}
-			col = &jtv
+			col = jtv
 		}
 		cv = append(cv, col)
 
@@ -19132,7 +19142,7 @@ func awsRestjson1_deserializeDocumentEventsConfiguration(v **types.EventsConfigu
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.BotId = &jtv
+				sv.BotId = ptr.String(jtv)
 			}
 
 		case "LambdaFunctionArn":
@@ -19141,7 +19151,7 @@ func awsRestjson1_deserializeDocumentEventsConfiguration(v **types.EventsConfigu
 				if !ok {
 					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
-				sv.LambdaFunctionArn = &jtv
+				sv.LambdaFunctionArn = ptr.String(jtv)
 			}
 
 		case "OutboundEventsHTTPSEndpoint":
@@ -19150,7 +19160,7 @@ func awsRestjson1_deserializeDocumentEventsConfiguration(v **types.EventsConfigu
 				if !ok {
 					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
-				sv.OutboundEventsHTTPSEndpoint = &jtv
+				sv.OutboundEventsHTTPSEndpoint = ptr.String(jtv)
 			}
 
 		default:
@@ -19199,7 +19209,7 @@ func awsRestjson1_deserializeDocumentForbiddenException(v **types.ForbiddenExcep
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -19239,7 +19249,7 @@ func awsRestjson1_deserializeDocumentGeoMatchParams(v **types.GeoMatchParams, va
 				if !ok {
 					return fmt.Errorf("expected AreaCode to be of type string, got %T instead", value)
 				}
-				sv.AreaCode = &jtv
+				sv.AreaCode = ptr.String(jtv)
 			}
 
 		case "Country":
@@ -19248,7 +19258,7 @@ func awsRestjson1_deserializeDocumentGeoMatchParams(v **types.GeoMatchParams, va
 				if !ok {
 					return fmt.Errorf("expected Country to be of type string, got %T instead", value)
 				}
-				sv.Country = &jtv
+				sv.Country = ptr.String(jtv)
 			}
 
 		default:
@@ -19288,7 +19298,7 @@ func awsRestjson1_deserializeDocumentInvite(v **types.Invite, value interface{})
 				if !ok {
 					return fmt.Errorf("expected EmailAddress to be of type string, got %T instead", value)
 				}
-				sv.EmailAddress = &jtv
+				sv.EmailAddress = ptr.String(jtv)
 			}
 
 		case "EmailStatus":
@@ -19306,7 +19316,7 @@ func awsRestjson1_deserializeDocumentInvite(v **types.Invite, value interface{})
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.InviteId = &jtv
+				sv.InviteId = ptr.String(jtv)
 			}
 
 		case "Status":
@@ -19327,7 +19337,7 @@ func awsRestjson1_deserializeDocumentInvite(v **types.Invite, value interface{})
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentInviteList(v *[]*types.Invite, value interface{}) error {
+func awsRestjson1_deserializeDocumentInviteList(v *[]types.Invite, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -19340,18 +19350,20 @@ func awsRestjson1_deserializeDocumentInviteList(v *[]*types.Invite, value interf
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Invite
+	var cv []types.Invite
 	if *v == nil {
-		cv = []*types.Invite{}
+		cv = []types.Invite{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Invite
-		if err := awsRestjson1_deserializeDocumentInvite(&col, value); err != nil {
+		var col types.Invite
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentInvite(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -19423,7 +19435,7 @@ func awsRestjson1_deserializeDocumentLoggingConfiguration(v **types.LoggingConfi
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.EnableSIPLogs = &jtv
+				sv.EnableSIPLogs = ptr.Bool(jtv)
 			}
 
 		default:
@@ -19463,7 +19475,7 @@ func awsRestjson1_deserializeDocumentMediaPlacement(v **types.MediaPlacement, va
 				if !ok {
 					return fmt.Errorf("expected UriType to be of type string, got %T instead", value)
 				}
-				sv.AudioFallbackUrl = &jtv
+				sv.AudioFallbackUrl = ptr.String(jtv)
 			}
 
 		case "AudioHostUrl":
@@ -19472,7 +19484,7 @@ func awsRestjson1_deserializeDocumentMediaPlacement(v **types.MediaPlacement, va
 				if !ok {
 					return fmt.Errorf("expected UriType to be of type string, got %T instead", value)
 				}
-				sv.AudioHostUrl = &jtv
+				sv.AudioHostUrl = ptr.String(jtv)
 			}
 
 		case "ScreenDataUrl":
@@ -19481,7 +19493,7 @@ func awsRestjson1_deserializeDocumentMediaPlacement(v **types.MediaPlacement, va
 				if !ok {
 					return fmt.Errorf("expected UriType to be of type string, got %T instead", value)
 				}
-				sv.ScreenDataUrl = &jtv
+				sv.ScreenDataUrl = ptr.String(jtv)
 			}
 
 		case "ScreenSharingUrl":
@@ -19490,7 +19502,7 @@ func awsRestjson1_deserializeDocumentMediaPlacement(v **types.MediaPlacement, va
 				if !ok {
 					return fmt.Errorf("expected UriType to be of type string, got %T instead", value)
 				}
-				sv.ScreenSharingUrl = &jtv
+				sv.ScreenSharingUrl = ptr.String(jtv)
 			}
 
 		case "ScreenViewingUrl":
@@ -19499,7 +19511,7 @@ func awsRestjson1_deserializeDocumentMediaPlacement(v **types.MediaPlacement, va
 				if !ok {
 					return fmt.Errorf("expected UriType to be of type string, got %T instead", value)
 				}
-				sv.ScreenViewingUrl = &jtv
+				sv.ScreenViewingUrl = ptr.String(jtv)
 			}
 
 		case "SignalingUrl":
@@ -19508,7 +19520,7 @@ func awsRestjson1_deserializeDocumentMediaPlacement(v **types.MediaPlacement, va
 				if !ok {
 					return fmt.Errorf("expected UriType to be of type string, got %T instead", value)
 				}
-				sv.SignalingUrl = &jtv
+				sv.SignalingUrl = ptr.String(jtv)
 			}
 
 		case "TurnControlUrl":
@@ -19517,7 +19529,7 @@ func awsRestjson1_deserializeDocumentMediaPlacement(v **types.MediaPlacement, va
 				if !ok {
 					return fmt.Errorf("expected UriType to be of type string, got %T instead", value)
 				}
-				sv.TurnControlUrl = &jtv
+				sv.TurnControlUrl = ptr.String(jtv)
 			}
 
 		default:
@@ -19557,7 +19569,7 @@ func awsRestjson1_deserializeDocumentMeeting(v **types.Meeting, value interface{
 				if !ok {
 					return fmt.Errorf("expected ExternalMeetingIdType to be of type string, got %T instead", value)
 				}
-				sv.ExternalMeetingId = &jtv
+				sv.ExternalMeetingId = ptr.String(jtv)
 			}
 
 		case "MediaPlacement":
@@ -19571,7 +19583,7 @@ func awsRestjson1_deserializeDocumentMeeting(v **types.Meeting, value interface{
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.MediaRegion = &jtv
+				sv.MediaRegion = ptr.String(jtv)
 			}
 
 		case "MeetingId":
@@ -19580,7 +19592,7 @@ func awsRestjson1_deserializeDocumentMeeting(v **types.Meeting, value interface{
 				if !ok {
 					return fmt.Errorf("expected GuidString to be of type string, got %T instead", value)
 				}
-				sv.MeetingId = &jtv
+				sv.MeetingId = ptr.String(jtv)
 			}
 
 		default:
@@ -19592,7 +19604,7 @@ func awsRestjson1_deserializeDocumentMeeting(v **types.Meeting, value interface{
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentMeetingList(v *[]*types.Meeting, value interface{}) error {
+func awsRestjson1_deserializeDocumentMeetingList(v *[]types.Meeting, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -19605,18 +19617,20 @@ func awsRestjson1_deserializeDocumentMeetingList(v *[]*types.Meeting, value inte
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Meeting
+	var cv []types.Meeting
 	if *v == nil {
-		cv = []*types.Meeting{}
+		cv = []types.Meeting{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Meeting
-		if err := awsRestjson1_deserializeDocumentMeeting(&col, value); err != nil {
+		var col types.Meeting
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentMeeting(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -19652,7 +19666,7 @@ func awsRestjson1_deserializeDocumentMember(v **types.Member, value interface{})
 				if !ok {
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
-				sv.AccountId = &jtv
+				sv.AccountId = ptr.String(jtv)
 			}
 
 		case "Email":
@@ -19661,7 +19675,7 @@ func awsRestjson1_deserializeDocumentMember(v **types.Member, value interface{})
 				if !ok {
 					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
-				sv.Email = &jtv
+				sv.Email = ptr.String(jtv)
 			}
 
 		case "FullName":
@@ -19670,7 +19684,7 @@ func awsRestjson1_deserializeDocumentMember(v **types.Member, value interface{})
 				if !ok {
 					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
-				sv.FullName = &jtv
+				sv.FullName = ptr.String(jtv)
 			}
 
 		case "MemberId":
@@ -19679,7 +19693,7 @@ func awsRestjson1_deserializeDocumentMember(v **types.Member, value interface{})
 				if !ok {
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
-				sv.MemberId = &jtv
+				sv.MemberId = ptr.String(jtv)
 			}
 
 		case "MemberType":
@@ -19737,7 +19751,7 @@ func awsRestjson1_deserializeDocumentMemberError(v **types.MemberError, value in
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.ErrorMessage = &jtv
+				sv.ErrorMessage = ptr.String(jtv)
 			}
 
 		case "MemberId":
@@ -19746,7 +19760,7 @@ func awsRestjson1_deserializeDocumentMemberError(v **types.MemberError, value in
 				if !ok {
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
-				sv.MemberId = &jtv
+				sv.MemberId = ptr.String(jtv)
 			}
 
 		default:
@@ -19758,7 +19772,7 @@ func awsRestjson1_deserializeDocumentMemberError(v **types.MemberError, value in
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentMemberErrorList(v *[]*types.MemberError, value interface{}) error {
+func awsRestjson1_deserializeDocumentMemberErrorList(v *[]types.MemberError, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -19771,18 +19785,20 @@ func awsRestjson1_deserializeDocumentMemberErrorList(v *[]*types.MemberError, va
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.MemberError
+	var cv []types.MemberError
 	if *v == nil {
-		cv = []*types.MemberError{}
+		cv = []types.MemberError{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.MemberError
-		if err := awsRestjson1_deserializeDocumentMemberError(&col, value); err != nil {
+		var col types.MemberError
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentMemberError(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -19827,7 +19843,7 @@ func awsRestjson1_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -19867,7 +19883,7 @@ func awsRestjson1_deserializeDocumentOrderedPhoneNumber(v **types.OrderedPhoneNu
 				if !ok {
 					return fmt.Errorf("expected E164PhoneNumber to be of type string, got %T instead", value)
 				}
-				sv.E164PhoneNumber = &jtv
+				sv.E164PhoneNumber = ptr.String(jtv)
 			}
 
 		case "Status":
@@ -19888,7 +19904,7 @@ func awsRestjson1_deserializeDocumentOrderedPhoneNumber(v **types.OrderedPhoneNu
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentOrderedPhoneNumberList(v *[]*types.OrderedPhoneNumber, value interface{}) error {
+func awsRestjson1_deserializeDocumentOrderedPhoneNumberList(v *[]types.OrderedPhoneNumber, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -19901,18 +19917,20 @@ func awsRestjson1_deserializeDocumentOrderedPhoneNumberList(v *[]*types.OrderedP
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.OrderedPhoneNumber
+	var cv []types.OrderedPhoneNumber
 	if *v == nil {
-		cv = []*types.OrderedPhoneNumber{}
+		cv = []types.OrderedPhoneNumber{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.OrderedPhoneNumber
-		if err := awsRestjson1_deserializeDocumentOrderedPhoneNumber(&col, value); err != nil {
+		var col types.OrderedPhoneNumber
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentOrderedPhoneNumber(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -19948,7 +19966,7 @@ func awsRestjson1_deserializeDocumentOrigination(v **types.Origination, value in
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Disabled = &jtv
+				sv.Disabled = ptr.Bool(jtv)
 			}
 
 		case "Routes":
@@ -19993,7 +20011,7 @@ func awsRestjson1_deserializeDocumentOriginationRoute(v **types.OriginationRoute
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Host = &jtv
+				sv.Host = ptr.String(jtv)
 			}
 
 		case "Port":
@@ -20053,7 +20071,7 @@ func awsRestjson1_deserializeDocumentOriginationRoute(v **types.OriginationRoute
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentOriginationRouteList(v *[]*types.OriginationRoute, value interface{}) error {
+func awsRestjson1_deserializeDocumentOriginationRouteList(v *[]types.OriginationRoute, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -20066,18 +20084,20 @@ func awsRestjson1_deserializeDocumentOriginationRouteList(v *[]*types.Originatio
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.OriginationRoute
+	var cv []types.OriginationRoute
 	if *v == nil {
-		cv = []*types.OriginationRoute{}
+		cv = []types.OriginationRoute{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.OriginationRoute
-		if err := awsRestjson1_deserializeDocumentOriginationRoute(&col, value); err != nil {
+		var col types.OriginationRoute
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentOriginationRoute(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -20113,7 +20133,7 @@ func awsRestjson1_deserializeDocumentParticipant(v **types.Participant, value in
 				if !ok {
 					return fmt.Errorf("expected E164PhoneNumber to be of type string, got %T instead", value)
 				}
-				sv.PhoneNumber = &jtv
+				sv.PhoneNumber = ptr.String(jtv)
 			}
 
 		case "ProxyPhoneNumber":
@@ -20122,7 +20142,7 @@ func awsRestjson1_deserializeDocumentParticipant(v **types.Participant, value in
 				if !ok {
 					return fmt.Errorf("expected E164PhoneNumber to be of type string, got %T instead", value)
 				}
-				sv.ProxyPhoneNumber = &jtv
+				sv.ProxyPhoneNumber = ptr.String(jtv)
 			}
 
 		default:
@@ -20134,7 +20154,7 @@ func awsRestjson1_deserializeDocumentParticipant(v **types.Participant, value in
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentParticipants(v *[]*types.Participant, value interface{}) error {
+func awsRestjson1_deserializeDocumentParticipants(v *[]types.Participant, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -20147,18 +20167,20 @@ func awsRestjson1_deserializeDocumentParticipants(v *[]*types.Participant, value
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Participant
+	var cv []types.Participant
 	if *v == nil {
-		cv = []*types.Participant{}
+		cv = []types.Participant{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Participant
-		if err := awsRestjson1_deserializeDocumentParticipant(&col, value); err != nil {
+		var col types.Participant
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentParticipant(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -20199,7 +20221,7 @@ func awsRestjson1_deserializeDocumentPhoneNumber(v **types.PhoneNumber, value in
 				if !ok {
 					return fmt.Errorf("expected CallingName to be of type string, got %T instead", value)
 				}
-				sv.CallingName = &jtv
+				sv.CallingName = ptr.String(jtv)
 			}
 
 		case "CallingNameStatus":
@@ -20226,7 +20248,7 @@ func awsRestjson1_deserializeDocumentPhoneNumber(v **types.PhoneNumber, value in
 				if err != nil {
 					return err
 				}
-				sv.CreatedTimestamp = &t
+				sv.CreatedTimestamp = ptr.Time(t)
 			}
 
 		case "DeletionTimestamp":
@@ -20239,7 +20261,7 @@ func awsRestjson1_deserializeDocumentPhoneNumber(v **types.PhoneNumber, value in
 				if err != nil {
 					return err
 				}
-				sv.DeletionTimestamp = &t
+				sv.DeletionTimestamp = ptr.Time(t)
 			}
 
 		case "E164PhoneNumber":
@@ -20248,7 +20270,7 @@ func awsRestjson1_deserializeDocumentPhoneNumber(v **types.PhoneNumber, value in
 				if !ok {
 					return fmt.Errorf("expected E164PhoneNumber to be of type string, got %T instead", value)
 				}
-				sv.E164PhoneNumber = &jtv
+				sv.E164PhoneNumber = ptr.String(jtv)
 			}
 
 		case "PhoneNumberId":
@@ -20257,7 +20279,7 @@ func awsRestjson1_deserializeDocumentPhoneNumber(v **types.PhoneNumber, value in
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.PhoneNumberId = &jtv
+				sv.PhoneNumberId = ptr.String(jtv)
 			}
 
 		case "ProductType":
@@ -20297,7 +20319,7 @@ func awsRestjson1_deserializeDocumentPhoneNumber(v **types.PhoneNumber, value in
 				if err != nil {
 					return err
 				}
-				sv.UpdatedTimestamp = &t
+				sv.UpdatedTimestamp = ptr.Time(t)
 			}
 
 		default:
@@ -20341,7 +20363,7 @@ func awsRestjson1_deserializeDocumentPhoneNumberAssociation(v **types.PhoneNumbe
 				if err != nil {
 					return err
 				}
-				sv.AssociatedTimestamp = &t
+				sv.AssociatedTimestamp = ptr.Time(t)
 			}
 
 		case "Name":
@@ -20359,7 +20381,7 @@ func awsRestjson1_deserializeDocumentPhoneNumberAssociation(v **types.PhoneNumbe
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Value = &jtv
+				sv.Value = ptr.String(jtv)
 			}
 
 		default:
@@ -20371,7 +20393,7 @@ func awsRestjson1_deserializeDocumentPhoneNumberAssociation(v **types.PhoneNumbe
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentPhoneNumberAssociationList(v *[]*types.PhoneNumberAssociation, value interface{}) error {
+func awsRestjson1_deserializeDocumentPhoneNumberAssociationList(v *[]types.PhoneNumberAssociation, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -20384,18 +20406,20 @@ func awsRestjson1_deserializeDocumentPhoneNumberAssociationList(v *[]*types.Phon
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.PhoneNumberAssociation
+	var cv []types.PhoneNumberAssociation
 	if *v == nil {
-		cv = []*types.PhoneNumberAssociation{}
+		cv = []types.PhoneNumberAssociation{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.PhoneNumberAssociation
-		if err := awsRestjson1_deserializeDocumentPhoneNumberAssociation(&col, value); err != nil {
+		var col types.PhoneNumberAssociation
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentPhoneNumberAssociation(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -20431,7 +20455,7 @@ func awsRestjson1_deserializeDocumentPhoneNumberCapabilities(v **types.PhoneNumb
 				if !ok {
 					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
 				}
-				sv.InboundCall = &jtv
+				sv.InboundCall = ptr.Bool(jtv)
 			}
 
 		case "InboundMMS":
@@ -20440,7 +20464,7 @@ func awsRestjson1_deserializeDocumentPhoneNumberCapabilities(v **types.PhoneNumb
 				if !ok {
 					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
 				}
-				sv.InboundMMS = &jtv
+				sv.InboundMMS = ptr.Bool(jtv)
 			}
 
 		case "InboundSMS":
@@ -20449,7 +20473,7 @@ func awsRestjson1_deserializeDocumentPhoneNumberCapabilities(v **types.PhoneNumb
 				if !ok {
 					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
 				}
-				sv.InboundSMS = &jtv
+				sv.InboundSMS = ptr.Bool(jtv)
 			}
 
 		case "OutboundCall":
@@ -20458,7 +20482,7 @@ func awsRestjson1_deserializeDocumentPhoneNumberCapabilities(v **types.PhoneNumb
 				if !ok {
 					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
 				}
-				sv.OutboundCall = &jtv
+				sv.OutboundCall = ptr.Bool(jtv)
 			}
 
 		case "OutboundMMS":
@@ -20467,7 +20491,7 @@ func awsRestjson1_deserializeDocumentPhoneNumberCapabilities(v **types.PhoneNumb
 				if !ok {
 					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
 				}
-				sv.OutboundMMS = &jtv
+				sv.OutboundMMS = ptr.Bool(jtv)
 			}
 
 		case "OutboundSMS":
@@ -20476,7 +20500,7 @@ func awsRestjson1_deserializeDocumentPhoneNumberCapabilities(v **types.PhoneNumb
 				if !ok {
 					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
 				}
-				sv.OutboundSMS = &jtv
+				sv.OutboundSMS = ptr.Bool(jtv)
 			}
 
 		default:
@@ -20525,7 +20549,7 @@ func awsRestjson1_deserializeDocumentPhoneNumberError(v **types.PhoneNumberError
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.ErrorMessage = &jtv
+				sv.ErrorMessage = ptr.String(jtv)
 			}
 
 		case "PhoneNumberId":
@@ -20534,7 +20558,7 @@ func awsRestjson1_deserializeDocumentPhoneNumberError(v **types.PhoneNumberError
 				if !ok {
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
-				sv.PhoneNumberId = &jtv
+				sv.PhoneNumberId = ptr.String(jtv)
 			}
 
 		default:
@@ -20546,7 +20570,7 @@ func awsRestjson1_deserializeDocumentPhoneNumberError(v **types.PhoneNumberError
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentPhoneNumberErrorList(v *[]*types.PhoneNumberError, value interface{}) error {
+func awsRestjson1_deserializeDocumentPhoneNumberErrorList(v *[]types.PhoneNumberError, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -20559,18 +20583,20 @@ func awsRestjson1_deserializeDocumentPhoneNumberErrorList(v *[]*types.PhoneNumbe
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.PhoneNumberError
+	var cv []types.PhoneNumberError
 	if *v == nil {
-		cv = []*types.PhoneNumberError{}
+		cv = []types.PhoneNumberError{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.PhoneNumberError
-		if err := awsRestjson1_deserializeDocumentPhoneNumberError(&col, value); err != nil {
+		var col types.PhoneNumberError
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentPhoneNumberError(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -20578,7 +20604,7 @@ func awsRestjson1_deserializeDocumentPhoneNumberErrorList(v *[]*types.PhoneNumbe
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentPhoneNumberList(v *[]*types.PhoneNumber, value interface{}) error {
+func awsRestjson1_deserializeDocumentPhoneNumberList(v *[]types.PhoneNumber, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -20591,18 +20617,20 @@ func awsRestjson1_deserializeDocumentPhoneNumberList(v *[]*types.PhoneNumber, va
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.PhoneNumber
+	var cv []types.PhoneNumber
 	if *v == nil {
-		cv = []*types.PhoneNumber{}
+		cv = []types.PhoneNumber{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.PhoneNumber
-		if err := awsRestjson1_deserializeDocumentPhoneNumber(&col, value); err != nil {
+		var col types.PhoneNumber
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentPhoneNumber(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -20642,7 +20670,7 @@ func awsRestjson1_deserializeDocumentPhoneNumberOrder(v **types.PhoneNumberOrder
 				if err != nil {
 					return err
 				}
-				sv.CreatedTimestamp = &t
+				sv.CreatedTimestamp = ptr.Time(t)
 			}
 
 		case "OrderedPhoneNumbers":
@@ -20656,7 +20684,7 @@ func awsRestjson1_deserializeDocumentPhoneNumberOrder(v **types.PhoneNumberOrder
 				if !ok {
 					return fmt.Errorf("expected GuidString to be of type string, got %T instead", value)
 				}
-				sv.PhoneNumberOrderId = &jtv
+				sv.PhoneNumberOrderId = ptr.String(jtv)
 			}
 
 		case "ProductType":
@@ -20687,7 +20715,7 @@ func awsRestjson1_deserializeDocumentPhoneNumberOrder(v **types.PhoneNumberOrder
 				if err != nil {
 					return err
 				}
-				sv.UpdatedTimestamp = &t
+				sv.UpdatedTimestamp = ptr.Time(t)
 			}
 
 		default:
@@ -20699,7 +20727,7 @@ func awsRestjson1_deserializeDocumentPhoneNumberOrder(v **types.PhoneNumberOrder
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentPhoneNumberOrderList(v *[]*types.PhoneNumberOrder, value interface{}) error {
+func awsRestjson1_deserializeDocumentPhoneNumberOrderList(v *[]types.PhoneNumberOrder, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -20712,18 +20740,20 @@ func awsRestjson1_deserializeDocumentPhoneNumberOrderList(v *[]*types.PhoneNumbe
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.PhoneNumberOrder
+	var cv []types.PhoneNumberOrder
 	if *v == nil {
-		cv = []*types.PhoneNumberOrder{}
+		cv = []types.PhoneNumberOrder{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.PhoneNumberOrder
-		if err := awsRestjson1_deserializeDocumentPhoneNumberOrder(&col, value); err != nil {
+		var col types.PhoneNumberOrder
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentPhoneNumberOrder(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -20772,7 +20802,7 @@ func awsRestjson1_deserializeDocumentProxy(v **types.Proxy, value interface{}) e
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Disabled = &jtv
+				sv.Disabled = ptr.Bool(jtv)
 			}
 
 		case "FallBackPhoneNumber":
@@ -20781,7 +20811,7 @@ func awsRestjson1_deserializeDocumentProxy(v **types.Proxy, value interface{}) e
 				if !ok {
 					return fmt.Errorf("expected E164PhoneNumber to be of type string, got %T instead", value)
 				}
-				sv.FallBackPhoneNumber = &jtv
+				sv.FallBackPhoneNumber = ptr.String(jtv)
 			}
 
 		case "PhoneNumberCountries":
@@ -20835,7 +20865,7 @@ func awsRestjson1_deserializeDocumentProxySession(v **types.ProxySession, value 
 				if err != nil {
 					return err
 				}
-				sv.CreatedTimestamp = &t
+				sv.CreatedTimestamp = ptr.Time(t)
 			}
 
 		case "EndedTimestamp":
@@ -20848,7 +20878,7 @@ func awsRestjson1_deserializeDocumentProxySession(v **types.ProxySession, value 
 				if err != nil {
 					return err
 				}
-				sv.EndedTimestamp = &t
+				sv.EndedTimestamp = ptr.Time(t)
 			}
 
 		case "ExpiryMinutes":
@@ -20884,7 +20914,7 @@ func awsRestjson1_deserializeDocumentProxySession(v **types.ProxySession, value 
 				if !ok {
 					return fmt.Errorf("expected String128 to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "NumberSelectionBehavior":
@@ -20907,7 +20937,7 @@ func awsRestjson1_deserializeDocumentProxySession(v **types.ProxySession, value 
 				if !ok {
 					return fmt.Errorf("expected NonEmptyString128 to be of type string, got %T instead", value)
 				}
-				sv.ProxySessionId = &jtv
+				sv.ProxySessionId = ptr.String(jtv)
 			}
 
 		case "Status":
@@ -20929,7 +20959,7 @@ func awsRestjson1_deserializeDocumentProxySession(v **types.ProxySession, value 
 				if err != nil {
 					return err
 				}
-				sv.UpdatedTimestamp = &t
+				sv.UpdatedTimestamp = ptr.Time(t)
 			}
 
 		case "VoiceConnectorId":
@@ -20938,7 +20968,7 @@ func awsRestjson1_deserializeDocumentProxySession(v **types.ProxySession, value 
 				if !ok {
 					return fmt.Errorf("expected NonEmptyString128 to be of type string, got %T instead", value)
 				}
-				sv.VoiceConnectorId = &jtv
+				sv.VoiceConnectorId = ptr.String(jtv)
 			}
 
 		default:
@@ -20950,7 +20980,7 @@ func awsRestjson1_deserializeDocumentProxySession(v **types.ProxySession, value 
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentProxySessions(v *[]*types.ProxySession, value interface{}) error {
+func awsRestjson1_deserializeDocumentProxySessions(v *[]types.ProxySession, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -20963,18 +20993,20 @@ func awsRestjson1_deserializeDocumentProxySessions(v *[]*types.ProxySession, val
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.ProxySession
+	var cv []types.ProxySession
 	if *v == nil {
-		cv = []*types.ProxySession{}
+		cv = []types.ProxySession{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.ProxySession
-		if err := awsRestjson1_deserializeDocumentProxySession(&col, value); err != nil {
+		var col types.ProxySession
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentProxySession(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -21019,7 +21051,7 @@ func awsRestjson1_deserializeDocumentResourceLimitExceededException(v **types.Re
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -21100,7 +21132,7 @@ func awsRestjson1_deserializeDocumentRoom(v **types.Room, value interface{}) err
 				if !ok {
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
-				sv.AccountId = &jtv
+				sv.AccountId = ptr.String(jtv)
 			}
 
 		case "CreatedBy":
@@ -21109,7 +21141,7 @@ func awsRestjson1_deserializeDocumentRoom(v **types.Room, value interface{}) err
 				if !ok {
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
-				sv.CreatedBy = &jtv
+				sv.CreatedBy = ptr.String(jtv)
 			}
 
 		case "CreatedTimestamp":
@@ -21122,7 +21154,7 @@ func awsRestjson1_deserializeDocumentRoom(v **types.Room, value interface{}) err
 				if err != nil {
 					return err
 				}
-				sv.CreatedTimestamp = &t
+				sv.CreatedTimestamp = ptr.Time(t)
 			}
 
 		case "Name":
@@ -21131,7 +21163,7 @@ func awsRestjson1_deserializeDocumentRoom(v **types.Room, value interface{}) err
 				if !ok {
 					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "RoomId":
@@ -21140,7 +21172,7 @@ func awsRestjson1_deserializeDocumentRoom(v **types.Room, value interface{}) err
 				if !ok {
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
-				sv.RoomId = &jtv
+				sv.RoomId = ptr.String(jtv)
 			}
 
 		case "UpdatedTimestamp":
@@ -21153,7 +21185,7 @@ func awsRestjson1_deserializeDocumentRoom(v **types.Room, value interface{}) err
 				if err != nil {
 					return err
 				}
-				sv.UpdatedTimestamp = &t
+				sv.UpdatedTimestamp = ptr.Time(t)
 			}
 
 		default:
@@ -21165,7 +21197,7 @@ func awsRestjson1_deserializeDocumentRoom(v **types.Room, value interface{}) err
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentRoomList(v *[]*types.Room, value interface{}) error {
+func awsRestjson1_deserializeDocumentRoomList(v *[]types.Room, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -21178,18 +21210,20 @@ func awsRestjson1_deserializeDocumentRoomList(v *[]*types.Room, value interface{
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Room
+	var cv []types.Room
 	if *v == nil {
-		cv = []*types.Room{}
+		cv = []types.Room{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Room
-		if err := awsRestjson1_deserializeDocumentRoom(&col, value); err != nil {
+		var col types.Room
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRoom(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -21225,7 +21259,7 @@ func awsRestjson1_deserializeDocumentRoomMembership(v **types.RoomMembership, va
 				if !ok {
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
-				sv.InvitedBy = &jtv
+				sv.InvitedBy = ptr.String(jtv)
 			}
 
 		case "Member":
@@ -21248,7 +21282,7 @@ func awsRestjson1_deserializeDocumentRoomMembership(v **types.RoomMembership, va
 				if !ok {
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
-				sv.RoomId = &jtv
+				sv.RoomId = ptr.String(jtv)
 			}
 
 		case "UpdatedTimestamp":
@@ -21261,7 +21295,7 @@ func awsRestjson1_deserializeDocumentRoomMembership(v **types.RoomMembership, va
 				if err != nil {
 					return err
 				}
-				sv.UpdatedTimestamp = &t
+				sv.UpdatedTimestamp = ptr.Time(t)
 			}
 
 		default:
@@ -21273,7 +21307,7 @@ func awsRestjson1_deserializeDocumentRoomMembership(v **types.RoomMembership, va
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentRoomMembershipList(v *[]*types.RoomMembership, value interface{}) error {
+func awsRestjson1_deserializeDocumentRoomMembershipList(v *[]types.RoomMembership, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -21286,18 +21320,20 @@ func awsRestjson1_deserializeDocumentRoomMembershipList(v *[]*types.RoomMembersh
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.RoomMembership
+	var cv []types.RoomMembership
 	if *v == nil {
-		cv = []*types.RoomMembership{}
+		cv = []types.RoomMembership{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.RoomMembership
-		if err := awsRestjson1_deserializeDocumentRoomMembership(&col, value); err != nil {
+		var col types.RoomMembership
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRoomMembership(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -21349,7 +21385,7 @@ func awsRestjson1_deserializeDocumentRoomRetentionSettings(v **types.RoomRetenti
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentSensitiveStringList(v *[]*string, value interface{}) error {
+func awsRestjson1_deserializeDocumentSensitiveStringList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -21362,21 +21398,21 @@ func awsRestjson1_deserializeDocumentSensitiveStringList(v *[]*string, value int
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*string
+	var cv []string
 	if *v == nil {
-		cv = []*string{}
+		cv = []string{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *string
+		var col string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 			}
-			col = &jtv
+			col = jtv
 		}
 		cv = append(cv, col)
 
@@ -21422,7 +21458,7 @@ func awsRestjson1_deserializeDocumentServiceFailureException(v **types.ServiceFa
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -21471,7 +21507,7 @@ func awsRestjson1_deserializeDocumentServiceUnavailableException(v **types.Servi
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -21511,7 +21547,7 @@ func awsRestjson1_deserializeDocumentSigninDelegateGroup(v **types.SigninDelegat
 				if !ok {
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
-				sv.GroupName = &jtv
+				sv.GroupName = ptr.String(jtv)
 			}
 
 		default:
@@ -21523,7 +21559,7 @@ func awsRestjson1_deserializeDocumentSigninDelegateGroup(v **types.SigninDelegat
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentSigninDelegateGroupList(v *[]*types.SigninDelegateGroup, value interface{}) error {
+func awsRestjson1_deserializeDocumentSigninDelegateGroupList(v *[]types.SigninDelegateGroup, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -21536,18 +21572,20 @@ func awsRestjson1_deserializeDocumentSigninDelegateGroupList(v *[]*types.SigninD
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.SigninDelegateGroup
+	var cv []types.SigninDelegateGroup
 	if *v == nil {
-		cv = []*types.SigninDelegateGroup{}
+		cv = []types.SigninDelegateGroup{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.SigninDelegateGroup
-		if err := awsRestjson1_deserializeDocumentSigninDelegateGroup(&col, value); err != nil {
+		var col types.SigninDelegateGroup
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSigninDelegateGroup(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -21596,7 +21634,7 @@ func awsRestjson1_deserializeDocumentStreamingConfiguration(v **types.StreamingC
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Disabled = &jtv
+				sv.Disabled = ptr.Bool(jtv)
 			}
 
 		case "StreamingNotificationTargets":
@@ -21653,7 +21691,7 @@ func awsRestjson1_deserializeDocumentStreamingNotificationTarget(v **types.Strea
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentStreamingNotificationTargetList(v *[]*types.StreamingNotificationTarget, value interface{}) error {
+func awsRestjson1_deserializeDocumentStreamingNotificationTargetList(v *[]types.StreamingNotificationTarget, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -21666,18 +21704,20 @@ func awsRestjson1_deserializeDocumentStreamingNotificationTargetList(v *[]*types
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.StreamingNotificationTarget
+	var cv []types.StreamingNotificationTarget
 	if *v == nil {
-		cv = []*types.StreamingNotificationTarget{}
+		cv = []types.StreamingNotificationTarget{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.StreamingNotificationTarget
-		if err := awsRestjson1_deserializeDocumentStreamingNotificationTarget(&col, value); err != nil {
+		var col types.StreamingNotificationTarget
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentStreamingNotificationTarget(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -21685,7 +21725,7 @@ func awsRestjson1_deserializeDocumentStreamingNotificationTargetList(v *[]*types
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentStringList(v *[]*string, value interface{}) error {
+func awsRestjson1_deserializeDocumentStringList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -21698,21 +21738,21 @@ func awsRestjson1_deserializeDocumentStringList(v *[]*string, value interface{})
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*string
+	var cv []string
 	if *v == nil {
-		cv = []*string{}
+		cv = []string{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *string
+		var col string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected String to be of type string, got %T instead", value)
 			}
-			col = &jtv
+			col = jtv
 		}
 		cv = append(cv, col)
 
@@ -21749,7 +21789,7 @@ func awsRestjson1_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected TagKey to be of type string, got %T instead", value)
 				}
-				sv.Key = &jtv
+				sv.Key = ptr.String(jtv)
 			}
 
 		case "Value":
@@ -21758,7 +21798,7 @@ func awsRestjson1_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected TagValue to be of type string, got %T instead", value)
 				}
-				sv.Value = &jtv
+				sv.Value = ptr.String(jtv)
 			}
 
 		default:
@@ -21770,7 +21810,7 @@ func awsRestjson1_deserializeDocumentTag(v **types.Tag, value interface{}) error
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentTagList(v *[]*types.Tag, value interface{}) error {
+func awsRestjson1_deserializeDocumentTagList(v *[]types.Tag, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -21783,18 +21823,20 @@ func awsRestjson1_deserializeDocumentTagList(v *[]*types.Tag, value interface{})
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Tag
+	var cv []types.Tag
 	if *v == nil {
-		cv = []*types.Tag{}
+		cv = []types.Tag{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Tag
-		if err := awsRestjson1_deserializeDocumentTag(&col, value); err != nil {
+		var col types.Tag
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentTag(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -21830,7 +21872,7 @@ func awsRestjson1_deserializeDocumentTelephonySettings(v **types.TelephonySettin
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.InboundCalling = &jtv
+				sv.InboundCalling = ptr.Bool(jtv)
 			}
 
 		case "OutboundCalling":
@@ -21839,7 +21881,7 @@ func awsRestjson1_deserializeDocumentTelephonySettings(v **types.TelephonySettin
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.OutboundCalling = &jtv
+				sv.OutboundCalling = ptr.Bool(jtv)
 			}
 
 		case "SMS":
@@ -21848,7 +21890,7 @@ func awsRestjson1_deserializeDocumentTelephonySettings(v **types.TelephonySettin
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.SMS = &jtv
+				sv.SMS = ptr.Bool(jtv)
 			}
 
 		default:
@@ -21911,7 +21953,7 @@ func awsRestjson1_deserializeDocumentTermination(v **types.Termination, value in
 				if !ok {
 					return fmt.Errorf("expected E164PhoneNumber to be of type string, got %T instead", value)
 				}
-				sv.DefaultPhoneNumber = &jtv
+				sv.DefaultPhoneNumber = ptr.String(jtv)
 			}
 
 		case "Disabled":
@@ -21920,7 +21962,7 @@ func awsRestjson1_deserializeDocumentTermination(v **types.Termination, value in
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Disabled = &jtv
+				sv.Disabled = ptr.Bool(jtv)
 			}
 
 		default:
@@ -21960,7 +22002,7 @@ func awsRestjson1_deserializeDocumentTerminationHealth(v **types.TerminationHeal
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Source = &jtv
+				sv.Source = ptr.String(jtv)
 			}
 
 		case "Timestamp":
@@ -21973,7 +22015,7 @@ func awsRestjson1_deserializeDocumentTerminationHealth(v **types.TerminationHeal
 				if err != nil {
 					return err
 				}
-				sv.Timestamp = &t
+				sv.Timestamp = ptr.Time(t)
 			}
 
 		default:
@@ -22022,7 +22064,7 @@ func awsRestjson1_deserializeDocumentThrottledClientException(v **types.Throttle
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -22071,7 +22113,7 @@ func awsRestjson1_deserializeDocumentUnauthorizedClientException(v **types.Unaut
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -22120,7 +22162,7 @@ func awsRestjson1_deserializeDocumentUnprocessableEntityException(v **types.Unpr
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -22160,7 +22202,7 @@ func awsRestjson1_deserializeDocumentUser(v **types.User, value interface{}) err
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.AccountId = &jtv
+				sv.AccountId = ptr.String(jtv)
 			}
 
 		case "AlexaForBusinessMetadata":
@@ -22174,7 +22216,7 @@ func awsRestjson1_deserializeDocumentUser(v **types.User, value interface{}) err
 				if !ok {
 					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
-				sv.DisplayName = &jtv
+				sv.DisplayName = ptr.String(jtv)
 			}
 
 		case "InvitedOn":
@@ -22187,7 +22229,7 @@ func awsRestjson1_deserializeDocumentUser(v **types.User, value interface{}) err
 				if err != nil {
 					return err
 				}
-				sv.InvitedOn = &t
+				sv.InvitedOn = ptr.Time(t)
 			}
 
 		case "LicenseType":
@@ -22205,7 +22247,7 @@ func awsRestjson1_deserializeDocumentUser(v **types.User, value interface{}) err
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.PersonalPIN = &jtv
+				sv.PersonalPIN = ptr.String(jtv)
 			}
 
 		case "PrimaryEmail":
@@ -22214,7 +22256,7 @@ func awsRestjson1_deserializeDocumentUser(v **types.User, value interface{}) err
 				if !ok {
 					return fmt.Errorf("expected EmailAddress to be of type string, got %T instead", value)
 				}
-				sv.PrimaryEmail = &jtv
+				sv.PrimaryEmail = ptr.String(jtv)
 			}
 
 		case "PrimaryProvisionedNumber":
@@ -22223,7 +22265,7 @@ func awsRestjson1_deserializeDocumentUser(v **types.User, value interface{}) err
 				if !ok {
 					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
-				sv.PrimaryProvisionedNumber = &jtv
+				sv.PrimaryProvisionedNumber = ptr.String(jtv)
 			}
 
 		case "RegisteredOn":
@@ -22236,7 +22278,7 @@ func awsRestjson1_deserializeDocumentUser(v **types.User, value interface{}) err
 				if err != nil {
 					return err
 				}
-				sv.RegisteredOn = &t
+				sv.RegisteredOn = ptr.Time(t)
 			}
 
 		case "UserId":
@@ -22245,7 +22287,7 @@ func awsRestjson1_deserializeDocumentUser(v **types.User, value interface{}) err
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.UserId = &jtv
+				sv.UserId = ptr.String(jtv)
 			}
 
 		case "UserInvitationStatus":
@@ -22321,7 +22363,7 @@ func awsRestjson1_deserializeDocumentUserError(v **types.UserError, value interf
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.ErrorMessage = &jtv
+				sv.ErrorMessage = ptr.String(jtv)
 			}
 
 		case "UserId":
@@ -22330,7 +22372,7 @@ func awsRestjson1_deserializeDocumentUserError(v **types.UserError, value interf
 				if !ok {
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
-				sv.UserId = &jtv
+				sv.UserId = ptr.String(jtv)
 			}
 
 		default:
@@ -22342,7 +22384,7 @@ func awsRestjson1_deserializeDocumentUserError(v **types.UserError, value interf
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentUserErrorList(v *[]*types.UserError, value interface{}) error {
+func awsRestjson1_deserializeDocumentUserErrorList(v *[]types.UserError, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -22355,18 +22397,20 @@ func awsRestjson1_deserializeDocumentUserErrorList(v *[]*types.UserError, value 
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.UserError
+	var cv []types.UserError
 	if *v == nil {
-		cv = []*types.UserError{}
+		cv = []types.UserError{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.UserError
-		if err := awsRestjson1_deserializeDocumentUserError(&col, value); err != nil {
+		var col types.UserError
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentUserError(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -22374,7 +22418,7 @@ func awsRestjson1_deserializeDocumentUserErrorList(v *[]*types.UserError, value 
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentUserList(v *[]*types.User, value interface{}) error {
+func awsRestjson1_deserializeDocumentUserList(v *[]types.User, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -22387,18 +22431,20 @@ func awsRestjson1_deserializeDocumentUserList(v *[]*types.User, value interface{
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.User
+	var cv []types.User
 	if *v == nil {
-		cv = []*types.User{}
+		cv = []types.User{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.User
-		if err := awsRestjson1_deserializeDocumentUser(&col, value); err != nil {
+		var col types.User
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentUser(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -22483,7 +22529,7 @@ func awsRestjson1_deserializeDocumentVoiceConnector(v **types.VoiceConnector, va
 				if err != nil {
 					return err
 				}
-				sv.CreatedTimestamp = &t
+				sv.CreatedTimestamp = ptr.Time(t)
 			}
 
 		case "Name":
@@ -22492,7 +22538,7 @@ func awsRestjson1_deserializeDocumentVoiceConnector(v **types.VoiceConnector, va
 				if !ok {
 					return fmt.Errorf("expected VoiceConnectorName to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "OutboundHostName":
@@ -22501,7 +22547,7 @@ func awsRestjson1_deserializeDocumentVoiceConnector(v **types.VoiceConnector, va
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.OutboundHostName = &jtv
+				sv.OutboundHostName = ptr.String(jtv)
 			}
 
 		case "RequireEncryption":
@@ -22510,7 +22556,7 @@ func awsRestjson1_deserializeDocumentVoiceConnector(v **types.VoiceConnector, va
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.RequireEncryption = &jtv
+				sv.RequireEncryption = ptr.Bool(jtv)
 			}
 
 		case "UpdatedTimestamp":
@@ -22523,7 +22569,7 @@ func awsRestjson1_deserializeDocumentVoiceConnector(v **types.VoiceConnector, va
 				if err != nil {
 					return err
 				}
-				sv.UpdatedTimestamp = &t
+				sv.UpdatedTimestamp = ptr.Time(t)
 			}
 
 		case "VoiceConnectorId":
@@ -22532,7 +22578,7 @@ func awsRestjson1_deserializeDocumentVoiceConnector(v **types.VoiceConnector, va
 				if !ok {
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
-				sv.VoiceConnectorId = &jtv
+				sv.VoiceConnectorId = ptr.String(jtv)
 			}
 
 		default:
@@ -22576,7 +22622,7 @@ func awsRestjson1_deserializeDocumentVoiceConnectorGroup(v **types.VoiceConnecto
 				if err != nil {
 					return err
 				}
-				sv.CreatedTimestamp = &t
+				sv.CreatedTimestamp = ptr.Time(t)
 			}
 
 		case "Name":
@@ -22585,7 +22631,7 @@ func awsRestjson1_deserializeDocumentVoiceConnectorGroup(v **types.VoiceConnecto
 				if !ok {
 					return fmt.Errorf("expected VoiceConnectorGroupName to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "UpdatedTimestamp":
@@ -22598,7 +22644,7 @@ func awsRestjson1_deserializeDocumentVoiceConnectorGroup(v **types.VoiceConnecto
 				if err != nil {
 					return err
 				}
-				sv.UpdatedTimestamp = &t
+				sv.UpdatedTimestamp = ptr.Time(t)
 			}
 
 		case "VoiceConnectorGroupId":
@@ -22607,7 +22653,7 @@ func awsRestjson1_deserializeDocumentVoiceConnectorGroup(v **types.VoiceConnecto
 				if !ok {
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
-				sv.VoiceConnectorGroupId = &jtv
+				sv.VoiceConnectorGroupId = ptr.String(jtv)
 			}
 
 		case "VoiceConnectorItems":
@@ -22624,7 +22670,7 @@ func awsRestjson1_deserializeDocumentVoiceConnectorGroup(v **types.VoiceConnecto
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentVoiceConnectorGroupList(v *[]*types.VoiceConnectorGroup, value interface{}) error {
+func awsRestjson1_deserializeDocumentVoiceConnectorGroupList(v *[]types.VoiceConnectorGroup, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -22637,18 +22683,20 @@ func awsRestjson1_deserializeDocumentVoiceConnectorGroupList(v *[]*types.VoiceCo
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.VoiceConnectorGroup
+	var cv []types.VoiceConnectorGroup
 	if *v == nil {
-		cv = []*types.VoiceConnectorGroup{}
+		cv = []types.VoiceConnectorGroup{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.VoiceConnectorGroup
-		if err := awsRestjson1_deserializeDocumentVoiceConnectorGroup(&col, value); err != nil {
+		var col types.VoiceConnectorGroup
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentVoiceConnectorGroup(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -22697,7 +22745,7 @@ func awsRestjson1_deserializeDocumentVoiceConnectorItem(v **types.VoiceConnector
 				if !ok {
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
-				sv.VoiceConnectorId = &jtv
+				sv.VoiceConnectorId = ptr.String(jtv)
 			}
 
 		default:
@@ -22709,7 +22757,7 @@ func awsRestjson1_deserializeDocumentVoiceConnectorItem(v **types.VoiceConnector
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentVoiceConnectorItemList(v *[]*types.VoiceConnectorItem, value interface{}) error {
+func awsRestjson1_deserializeDocumentVoiceConnectorItemList(v *[]types.VoiceConnectorItem, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -22722,18 +22770,20 @@ func awsRestjson1_deserializeDocumentVoiceConnectorItemList(v *[]*types.VoiceCon
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.VoiceConnectorItem
+	var cv []types.VoiceConnectorItem
 	if *v == nil {
-		cv = []*types.VoiceConnectorItem{}
+		cv = []types.VoiceConnectorItem{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.VoiceConnectorItem
-		if err := awsRestjson1_deserializeDocumentVoiceConnectorItem(&col, value); err != nil {
+		var col types.VoiceConnectorItem
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentVoiceConnectorItem(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -22741,7 +22791,7 @@ func awsRestjson1_deserializeDocumentVoiceConnectorItemList(v *[]*types.VoiceCon
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentVoiceConnectorList(v *[]*types.VoiceConnector, value interface{}) error {
+func awsRestjson1_deserializeDocumentVoiceConnectorList(v *[]types.VoiceConnector, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -22754,18 +22804,20 @@ func awsRestjson1_deserializeDocumentVoiceConnectorList(v *[]*types.VoiceConnect
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.VoiceConnector
+	var cv []types.VoiceConnector
 	if *v == nil {
-		cv = []*types.VoiceConnector{}
+		cv = []types.VoiceConnector{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.VoiceConnector
-		if err := awsRestjson1_deserializeDocumentVoiceConnector(&col, value); err != nil {
+		var col types.VoiceConnector
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentVoiceConnector(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -22801,7 +22853,7 @@ func awsRestjson1_deserializeDocumentVoiceConnectorSettings(v **types.VoiceConne
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.CdrBucket = &jtv
+				sv.CdrBucket = ptr.String(jtv)
 			}
 
 		default:

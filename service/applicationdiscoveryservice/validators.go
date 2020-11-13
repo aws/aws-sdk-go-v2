@@ -487,13 +487,13 @@ func validateExportFilter(v *types.ExportFilter) error {
 	}
 }
 
-func validateExportFilters(v []*types.ExportFilter) error {
+func validateExportFilters(v []types.ExportFilter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ExportFilters"}
 	for i := range v {
-		if err := validateExportFilter(v[i]); err != nil {
+		if err := validateExportFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -525,13 +525,13 @@ func validateFilter(v *types.Filter) error {
 	}
 }
 
-func validateFilters(v []*types.Filter) error {
+func validateFilters(v []types.Filter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Filters"}
 	for i := range v {
-		if err := validateFilter(v[i]); err != nil {
+		if err := validateFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -557,13 +557,13 @@ func validateOrderByElement(v *types.OrderByElement) error {
 	}
 }
 
-func validateOrderByList(v []*types.OrderByElement) error {
+func validateOrderByList(v []types.OrderByElement) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "OrderByList"}
 	for i := range v {
-		if err := validateOrderByElement(v[i]); err != nil {
+		if err := validateOrderByElement(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -610,13 +610,13 @@ func validateTagFilter(v *types.TagFilter) error {
 	}
 }
 
-func validateTagFilters(v []*types.TagFilter) error {
+func validateTagFilters(v []types.TagFilter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagFilters"}
 	for i := range v {
-		if err := validateTagFilter(v[i]); err != nil {
+		if err := validateTagFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -627,13 +627,13 @@ func validateTagFilters(v []*types.TagFilter) error {
 	}
 }
 
-func validateTagSet(v []*types.Tag) error {
+func validateTagSet(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagSet"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

@@ -40,7 +40,7 @@ type StartJobRunInput struct {
 	// that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more
 	// information, see the AWS Glue pricing page
 	// (https://docs.aws.amazon.com/https:/aws.amazon.com/glue/pricing/).
-	AllocatedCapacity *int32
+	AllocatedCapacity int32
 
 	// The job arguments specifically for this run. For this job run, they replace the
 	// default arguments set in the job definition itself. You can specify arguments
@@ -52,7 +52,7 @@ type StartJobRunInput struct {
 	// Glue consumes to set up your job, see the Special Parameters Used by AWS Glue
 	// (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
 	// topic in the developer guide.
-	Arguments map[string]*string
+	Arguments map[string]string
 
 	// The ID of a previous JobRun to retry.
 	JobRunId *string

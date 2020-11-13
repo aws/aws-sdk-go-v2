@@ -43,7 +43,7 @@ type ListAvailableZonesInput struct {
 type ListAvailableZonesOutput struct {
 
 	// The list of Availability Zones that have available AWS CloudHSM capacity.
-	AZList []*string
+	AZList []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

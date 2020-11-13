@@ -60,7 +60,7 @@ type CreateOpsItemInput struct {
 
 	// The Amazon Resource Name (ARN) of an SNS topic where notifications are sent when
 	// this OpsItem is edited or changed.
-	Notifications []*types.OpsItemNotification
+	Notifications []types.OpsItemNotification
 
 	// Operational data is custom data that provides useful reference details about the
 	// OpsItem. For example, you can specify log files, error strings, license keys,
@@ -79,7 +79,7 @@ type CreateOpsItemInput struct {
 	// these keys, see Creating OpsItems manually
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems)
 	// in the AWS Systems Manager User Guide.
-	OperationalData map[string]*types.OpsItemDataValue
+	OperationalData map[string]types.OpsItemDataValue
 
 	// The importance of this OpsItem in relation to other OpsItems in the system.
 	Priority *int32
@@ -87,7 +87,7 @@ type CreateOpsItemInput struct {
 	// One or more OpsItems that share something in common with the current OpsItems.
 	// For example, related OpsItems can include OpsItems with similar error messages,
 	// impacted resources, or statuses for the impacted resource.
-	RelatedOpsItems []*types.RelatedOpsItem
+	RelatedOpsItems []types.RelatedOpsItem
 
 	// Specify a severity to assign to an OpsItem.
 	Severity *string
@@ -99,7 +99,7 @@ type CreateOpsItemInput struct {
 	// in the AWS Systems Manager User Guide. Tags use a key-value pair. For example:
 	// Key=Department,Value=Finance To add tags to an existing OpsItem, use the
 	// AddTagsToResource action.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateOpsItemOutput struct {

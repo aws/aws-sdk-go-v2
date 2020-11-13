@@ -43,7 +43,7 @@ type GetRepositoryTriggersOutput struct {
 	ConfigurationId *string
 
 	// The JSON block of configuration information for each trigger.
-	Triggers []*types.RepositoryTrigger
+	Triggers []types.RepositoryTrigger
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

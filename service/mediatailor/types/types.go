@@ -11,7 +11,7 @@ type AdMarkerPassthrough struct {
 	// to the MediaTailor personalized manifest.No logic is applied to these ad
 	// markers. For example, if EXT-X-CUE-OUT has a value of 60, but no ads are filled
 	// for that ad break, MediaTailor will not set the value to 0.
-	Enabled *bool
+	Enabled bool
 }
 
 // The configuration for Avail Suppression. Ad suppression can be used to turn off
@@ -124,7 +124,7 @@ type LivePreRollConfiguration struct {
 	// The maximum allowed duration for the pre-roll ad avail. AWS Elemental
 	// MediaTailor won't play pre-roll ads to exceed this duration, regardless of the
 	// total duration of ads that the ADS returns.
-	MaxDurationSeconds *int32
+	MaxDurationSeconds int32
 }
 
 // The configuration for manifest processing rules. Manifest processing rules
@@ -172,7 +172,7 @@ type PlaybackConfiguration struct {
 	Name *string
 
 	// The maximum duration of underfilled ad time (in seconds) allowed in an ad break.
-	PersonalizationThresholdSeconds *int32
+	PersonalizationThresholdSeconds int32
 
 	// The Amazon Resource Name (ARN) for the playback configuration.
 	PlaybackConfigurationArn *string
@@ -194,7 +194,7 @@ type PlaybackConfiguration struct {
 	SlateAdUrl *string
 
 	// The tags assigned to the playback configuration.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The name that is used to associate this playback configuration with a custom
 	// transcode profile. This overrides the dynamic transcoding defaults of

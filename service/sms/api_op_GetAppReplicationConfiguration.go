@@ -38,7 +38,7 @@ type GetAppReplicationConfigurationOutput struct {
 
 	// The replication configurations associated with server groups in this
 	// application.
-	ServerGroupReplicationConfigurations []*types.ServerGroupReplicationConfiguration
+	ServerGroupReplicationConfigurations []types.ServerGroupReplicationConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

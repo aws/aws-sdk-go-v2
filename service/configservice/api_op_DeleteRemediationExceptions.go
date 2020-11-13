@@ -43,14 +43,14 @@ type DeleteRemediationExceptionsInput struct {
 	// Config adds 3 exceptions for 3 resource keys.
 	//
 	// This member is required.
-	ResourceKeys []*types.RemediationExceptionResourceKey
+	ResourceKeys []types.RemediationExceptionResourceKey
 }
 
 type DeleteRemediationExceptionsOutput struct {
 
 	// Returns a list of failed delete remediation exceptions batch objects. Each
 	// object in the batch consists of a list of failed items and failure messages.
-	FailedBatches []*types.FailedDeleteRemediationExceptionsBatch
+	FailedBatches []types.FailedDeleteRemediationExceptionsBatch
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

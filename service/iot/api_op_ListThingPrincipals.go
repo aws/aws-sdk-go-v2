@@ -41,7 +41,7 @@ type ListThingPrincipalsInput struct {
 type ListThingPrincipalsOutput struct {
 
 	// The principals associated with the thing.
-	Principals []*string
+	Principals []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

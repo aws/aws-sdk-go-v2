@@ -41,7 +41,7 @@ type ReorderReceiptRuleSetInput struct {
 	// want to put them.
 	//
 	// This member is required.
-	RuleNames []*string
+	RuleNames []string
 
 	// The name of the receipt rule set to reorder.
 	//

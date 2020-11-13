@@ -46,7 +46,7 @@ type UpdateCostCategoryDefinitionInput struct {
 	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html).
 	//
 	// This member is required.
-	Rules []*types.CostCategoryRule
+	Rules []types.CostCategoryRule
 }
 
 type UpdateCostCategoryDefinitionOutput struct {

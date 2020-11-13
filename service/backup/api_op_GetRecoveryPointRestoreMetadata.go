@@ -57,7 +57,7 @@ type GetRecoveryPointRestoreMetadataOutput struct {
 	// The set of metadata key-value pairs that describe the original configuration of
 	// the backed-up resource. These values vary depending on the service that is being
 	// restored.
-	RestoreMetadata map[string]*string
+	RestoreMetadata map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

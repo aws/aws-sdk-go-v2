@@ -33,14 +33,14 @@ type DescribeLoadBalancersInput struct {
 
 	// The Amazon Resource Names (ARN) of the load balancers. You can specify up to 20
 	// load balancers in a single call.
-	LoadBalancerArns []*string
+	LoadBalancerArns []string
 
 	// The marker for the next set of results. (You received this marker from a
 	// previous call.)
 	Marker *string
 
 	// The names of the load balancers.
-	Names []*string
+	Names []string
 
 	// The maximum number of results to return with this call.
 	PageSize *int32
@@ -49,7 +49,7 @@ type DescribeLoadBalancersInput struct {
 type DescribeLoadBalancersOutput struct {
 
 	// Information about the load balancers.
-	LoadBalancers []*types.LoadBalancer
+	LoadBalancers []types.LoadBalancer
 
 	// If there are additional results, this is the marker for the next set of results.
 	// Otherwise, this is null.

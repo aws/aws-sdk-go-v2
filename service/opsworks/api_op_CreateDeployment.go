@@ -66,10 +66,10 @@ type CreateDeploymentInput struct {
 	CustomJson *string
 
 	// The instance IDs for the deployment targets.
-	InstanceIds []*string
+	InstanceIds []string
 
 	// The layer IDs for the deployment targets.
-	LayerIds []*string
+	LayerIds []string
 }
 
 // Contains the response to a CreateDeployment request.

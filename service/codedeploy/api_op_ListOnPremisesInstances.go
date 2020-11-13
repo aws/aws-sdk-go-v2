@@ -48,14 +48,14 @@ type ListOnPremisesInstancesInput struct {
 
 	// The on-premises instance tags that are used to restrict the on-premises instance
 	// names returned.
-	TagFilters []*types.TagFilter
+	TagFilters []types.TagFilter
 }
 
 // Represents the output of the list on-premises instances operation.
 type ListOnPremisesInstancesOutput struct {
 
 	// The list of matching on-premises instance names.
-	InstanceNames []*string
+	InstanceNames []string
 
 	// If a large amount of information is returned, an identifier is also returned. It
 	// can be used in a subsequent list on-premises instances call to return the next

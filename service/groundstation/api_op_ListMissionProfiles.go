@@ -42,7 +42,7 @@ type ListMissionProfilesInput struct {
 type ListMissionProfilesOutput struct {
 
 	// List of mission profiles.
-	MissionProfileList []*types.MissionProfileListItem
+	MissionProfileList []types.MissionProfileListItem
 
 	// Next token returned in the response of a previous ListMissionProfiles call. Used
 	// to get the next page of results.

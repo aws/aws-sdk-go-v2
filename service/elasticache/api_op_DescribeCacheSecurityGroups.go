@@ -53,7 +53,7 @@ type DescribeCacheSecurityGroupsOutput struct {
 
 	// A list of cache security groups. Each element in the list contains detailed
 	// information about one group.
-	CacheSecurityGroups []*types.CacheSecurityGroup
+	CacheSecurityGroups []types.CacheSecurityGroup
 
 	// Provides an identifier to allow retrieval of paginated results.
 	Marker *string

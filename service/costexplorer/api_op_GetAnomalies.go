@@ -61,7 +61,7 @@ type GetAnomaliesOutput struct {
 	// A list of cost anomalies.
 	//
 	// This member is required.
-	Anomalies []*types.Anomaly
+	Anomalies []types.Anomaly
 
 	// The token to retrieve the next set of results. AWS provides the token when the
 	// response from a previous call has more results than the maximum page size.

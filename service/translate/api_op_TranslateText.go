@@ -56,7 +56,7 @@ type TranslateTextInput struct {
 	// The name of the terminology list file to be used in the TranslateText request.
 	// You can use 1 terminology list at most in a TranslateText request. Terminology
 	// lists can contain a maximum of 256 terms.
-	TerminologyNames []*string
+	TerminologyNames []string
 }
 
 type TranslateTextOutput struct {
@@ -78,7 +78,7 @@ type TranslateTextOutput struct {
 
 	// The names of the custom terminologies applied to the input text by Amazon
 	// Translate for the translated text response.
-	AppliedTerminologies []*types.AppliedTerminology
+	AppliedTerminologies []types.AppliedTerminology
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

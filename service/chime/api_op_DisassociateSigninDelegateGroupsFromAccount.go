@@ -37,7 +37,7 @@ type DisassociateSigninDelegateGroupsFromAccountInput struct {
 	// The sign-in delegate group names.
 	//
 	// This member is required.
-	GroupNames []*string
+	GroupNames []string
 }
 
 type DisassociateSigninDelegateGroupsFromAccountOutput struct {

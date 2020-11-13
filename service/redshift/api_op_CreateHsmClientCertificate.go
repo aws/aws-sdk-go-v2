@@ -45,7 +45,7 @@ type CreateHsmClientCertificateInput struct {
 	HsmClientCertificateIdentifier *string
 
 	// A list of tag instances.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateHsmClientCertificateOutput struct {

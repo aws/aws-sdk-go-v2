@@ -101,7 +101,7 @@ type UpdateByteMatchSetInput struct {
 	// * FieldToMatch: Contains Data and Type
 	//
 	// This member is required.
-	Updates []*types.ByteMatchSetUpdate
+	Updates []types.ByteMatchSetUpdate
 }
 
 type UpdateByteMatchSetOutput struct {

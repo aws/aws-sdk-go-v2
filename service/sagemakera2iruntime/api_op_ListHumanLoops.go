@@ -47,7 +47,7 @@ type ListHumanLoopsInput struct {
 	// The total number of items to return. If the total number of available items is
 	// more than the value specified in MaxResults, then a NextToken is returned in the
 	// output. You can use this token to display the next page of results.
-	MaxResults *int32
+	MaxResults int32
 
 	// A token to display the next page of results.
 	NextToken *string
@@ -62,7 +62,7 @@ type ListHumanLoopsOutput struct {
 	// An array of objects that contain information about the human loops.
 	//
 	// This member is required.
-	HumanLoopSummaries []*types.HumanLoopSummary
+	HumanLoopSummaries []types.HumanLoopSummary
 
 	// A token to display the next page of results.
 	NextToken *string

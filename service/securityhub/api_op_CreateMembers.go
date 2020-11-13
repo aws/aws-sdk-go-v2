@@ -44,14 +44,14 @@ type CreateMembersInput struct {
 
 	// The list of accounts to associate with the Security Hub master account. For each
 	// account, the list includes the account ID and the email address.
-	AccountDetails []*types.AccountDetails
+	AccountDetails []types.AccountDetails
 }
 
 type CreateMembersOutput struct {
 
 	// The list of AWS accounts that were not processed. For each account, the list
 	// includes the account ID and the email address.
-	UnprocessedAccounts []*types.Result
+	UnprocessedAccounts []types.Result
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

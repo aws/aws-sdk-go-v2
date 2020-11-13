@@ -42,7 +42,7 @@ type DeleteReportGroupInput struct {
 	// (https://docs.aws.amazon.com/codebuild/latest/APIReference/API_DeleteReport.html)
 	// to delete the reports. If you call DeleteReportGroup for a report group that
 	// contains one or more reports, an exception is thrown.
-	DeleteReports *bool
+	DeleteReports bool
 }
 
 type DeleteReportGroupOutput struct {

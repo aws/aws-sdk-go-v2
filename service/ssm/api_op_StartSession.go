@@ -50,7 +50,7 @@ type StartSessionInput struct {
 	DocumentName *string
 
 	// Reserved for future use.
-	Parameters map[string][]*string
+	Parameters map[string][]string
 }
 
 type StartSessionOutput struct {

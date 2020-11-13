@@ -39,7 +39,7 @@ type TagResourceInput struct {
 	// exists, the existing value is replaced with the new value.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type TagResourceOutput struct {

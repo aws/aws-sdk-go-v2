@@ -52,7 +52,7 @@ type DetectDocumentTextInput struct {
 type DetectDocumentTextOutput struct {
 
 	// An array of Block objects that contain the text that's detected in the document.
-	Blocks []*types.Block
+	Blocks []types.Block
 
 	//
 	DetectDocumentTextModelVersion *string

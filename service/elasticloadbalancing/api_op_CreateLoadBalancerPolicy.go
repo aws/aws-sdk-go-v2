@@ -50,7 +50,7 @@ type CreateLoadBalancerPolicyInput struct {
 	PolicyTypeName *string
 
 	// The policy attributes.
-	PolicyAttributes []*types.PolicyAttribute
+	PolicyAttributes []types.PolicyAttribute
 }
 
 // Contains the output of CreateLoadBalancerPolicy.

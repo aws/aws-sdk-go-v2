@@ -55,7 +55,7 @@ type CreateNetworkProfileInput struct {
 	DownlinkJitterMs *int64
 
 	// Proportion of received packets that fail to arrive from 0 to 100 percent.
-	DownlinkLossPercent *int32
+	DownlinkLossPercent int32
 
 	// The type of network profile to create. Valid values are listed here.
 	Type types.NetworkProfileType
@@ -72,7 +72,7 @@ type CreateNetworkProfileInput struct {
 	UplinkJitterMs *int64
 
 	// Proportion of transmitted packets that fail to arrive from 0 to 100 percent.
-	UplinkLossPercent *int32
+	UplinkLossPercent int32
 }
 
 type CreateNetworkProfileOutput struct {

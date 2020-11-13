@@ -41,14 +41,14 @@ type DescribeRdsDbInstancesInput struct {
 	StackId *string
 
 	// An array containing the ARNs of the instances to be described.
-	RdsDbInstanceArns []*string
+	RdsDbInstanceArns []string
 }
 
 // Contains the response to a DescribeRdsDbInstances request.
 type DescribeRdsDbInstancesOutput struct {
 
 	// An a array of RdsDbInstance objects that describe the instances.
-	RdsDbInstances []*types.RdsDbInstance
+	RdsDbInstances []types.RdsDbInstance
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

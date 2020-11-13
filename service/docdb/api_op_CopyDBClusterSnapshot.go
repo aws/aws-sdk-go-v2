@@ -120,7 +120,7 @@ type CopyDBClusterSnapshotInput struct {
 	PreSignedUrl *string
 
 	// The tags to be assigned to the cluster snapshot.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CopyDBClusterSnapshotOutput struct {

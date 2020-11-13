@@ -45,7 +45,7 @@ type GetBundlesOutput struct {
 
 	// An array of key-value pairs that contains information about the available
 	// bundles.
-	Bundles []*types.Bundle
+	Bundles []types.Bundle
 
 	// The token to advance to the next page of resutls from your request. A next page
 	// token is not returned if there are no more results to display. To get the next

@@ -46,7 +46,7 @@ type RegisterTargetsInput struct {
 	// The targets.
 	//
 	// This member is required.
-	Targets []*types.TargetDescription
+	Targets []types.TargetDescription
 }
 
 type RegisterTargetsOutput struct {

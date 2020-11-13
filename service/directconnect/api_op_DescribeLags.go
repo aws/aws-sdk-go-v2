@@ -36,7 +36,7 @@ type DescribeLagsInput struct {
 type DescribeLagsOutput struct {
 
 	// The LAGs.
-	Lags []*types.Lag
+	Lags []types.Lag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

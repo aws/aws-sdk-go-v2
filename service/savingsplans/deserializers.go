@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	"github.com/awslabs/smithy-go/ptr"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
 	"strings"
@@ -165,7 +166,7 @@ func awsRestjson1_deserializeOpDocumentCreateSavingsPlanOutput(v **CreateSavings
 				if !ok {
 					return fmt.Errorf("expected SavingsPlanId to be of type string, got %T instead", value)
 				}
-				sv.SavingsPlanId = &jtv
+				sv.SavingsPlanId = ptr.String(jtv)
 			}
 
 		default:
@@ -411,7 +412,7 @@ func awsRestjson1_deserializeOpDocumentDescribeSavingsPlanRatesOutput(v **Descri
 				if !ok {
 					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "savingsPlanId":
@@ -420,7 +421,7 @@ func awsRestjson1_deserializeOpDocumentDescribeSavingsPlanRatesOutput(v **Descri
 				if !ok {
 					return fmt.Errorf("expected SavingsPlanId to be of type string, got %T instead", value)
 				}
-				sv.SavingsPlanId = &jtv
+				sv.SavingsPlanId = ptr.String(jtv)
 			}
 
 		case "searchResults":
@@ -579,7 +580,7 @@ func awsRestjson1_deserializeOpDocumentDescribeSavingsPlansOutput(v **DescribeSa
 				if !ok {
 					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "savingsPlans":
@@ -738,7 +739,7 @@ func awsRestjson1_deserializeOpDocumentDescribeSavingsPlansOfferingRatesOutput(v
 				if !ok {
 					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "searchResults":
@@ -897,7 +898,7 @@ func awsRestjson1_deserializeOpDocumentDescribeSavingsPlansOfferingsOutput(v **D
 				if !ok {
 					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "searchResults":
@@ -1420,7 +1421,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1473,7 +1474,7 @@ func awsRestjson1_deserializeDocumentParentSavingsPlanOffering(v **types.ParentS
 				if err != nil {
 					return err
 				}
-				sv.DurationSeconds = &i64
+				sv.DurationSeconds = i64
 			}
 
 		case "offeringId":
@@ -1482,7 +1483,7 @@ func awsRestjson1_deserializeDocumentParentSavingsPlanOffering(v **types.ParentS
 				if !ok {
 					return fmt.Errorf("expected UUID to be of type string, got %T instead", value)
 				}
-				sv.OfferingId = &jtv
+				sv.OfferingId = ptr.String(jtv)
 			}
 
 		case "paymentOption":
@@ -1500,7 +1501,7 @@ func awsRestjson1_deserializeDocumentParentSavingsPlanOffering(v **types.ParentS
 				if !ok {
 					return fmt.Errorf("expected SavingsPlanDescription to be of type string, got %T instead", value)
 				}
-				sv.PlanDescription = &jtv
+				sv.PlanDescription = ptr.String(jtv)
 			}
 
 		case "planType":
@@ -1549,7 +1550,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1589,7 +1590,7 @@ func awsRestjson1_deserializeDocumentSavingsPlan(v **types.SavingsPlan, value in
 				if !ok {
 					return fmt.Errorf("expected Amount to be of type string, got %T instead", value)
 				}
-				sv.Commitment = &jtv
+				sv.Commitment = ptr.String(jtv)
 			}
 
 		case "currency":
@@ -1607,7 +1608,7 @@ func awsRestjson1_deserializeDocumentSavingsPlan(v **types.SavingsPlan, value in
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Description = &jtv
+				sv.Description = ptr.String(jtv)
 			}
 
 		case "ec2InstanceFamily":
@@ -1616,7 +1617,7 @@ func awsRestjson1_deserializeDocumentSavingsPlan(v **types.SavingsPlan, value in
 				if !ok {
 					return fmt.Errorf("expected EC2InstanceFamily to be of type string, got %T instead", value)
 				}
-				sv.Ec2InstanceFamily = &jtv
+				sv.Ec2InstanceFamily = ptr.String(jtv)
 			}
 
 		case "end":
@@ -1625,7 +1626,7 @@ func awsRestjson1_deserializeDocumentSavingsPlan(v **types.SavingsPlan, value in
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.End = &jtv
+				sv.End = ptr.String(jtv)
 			}
 
 		case "offeringId":
@@ -1634,7 +1635,7 @@ func awsRestjson1_deserializeDocumentSavingsPlan(v **types.SavingsPlan, value in
 				if !ok {
 					return fmt.Errorf("expected SavingsPlanOfferingId to be of type string, got %T instead", value)
 				}
-				sv.OfferingId = &jtv
+				sv.OfferingId = ptr.String(jtv)
 			}
 
 		case "paymentOption":
@@ -1657,7 +1658,7 @@ func awsRestjson1_deserializeDocumentSavingsPlan(v **types.SavingsPlan, value in
 				if !ok {
 					return fmt.Errorf("expected Amount to be of type string, got %T instead", value)
 				}
-				sv.RecurringPaymentAmount = &jtv
+				sv.RecurringPaymentAmount = ptr.String(jtv)
 			}
 
 		case "region":
@@ -1666,7 +1667,7 @@ func awsRestjson1_deserializeDocumentSavingsPlan(v **types.SavingsPlan, value in
 				if !ok {
 					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
 				}
-				sv.Region = &jtv
+				sv.Region = ptr.String(jtv)
 			}
 
 		case "savingsPlanArn":
@@ -1675,7 +1676,7 @@ func awsRestjson1_deserializeDocumentSavingsPlan(v **types.SavingsPlan, value in
 				if !ok {
 					return fmt.Errorf("expected SavingsPlanArn to be of type string, got %T instead", value)
 				}
-				sv.SavingsPlanArn = &jtv
+				sv.SavingsPlanArn = ptr.String(jtv)
 			}
 
 		case "savingsPlanId":
@@ -1684,7 +1685,7 @@ func awsRestjson1_deserializeDocumentSavingsPlan(v **types.SavingsPlan, value in
 				if !ok {
 					return fmt.Errorf("expected SavingsPlanId to be of type string, got %T instead", value)
 				}
-				sv.SavingsPlanId = &jtv
+				sv.SavingsPlanId = ptr.String(jtv)
 			}
 
 		case "savingsPlanType":
@@ -1702,7 +1703,7 @@ func awsRestjson1_deserializeDocumentSavingsPlan(v **types.SavingsPlan, value in
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Start = &jtv
+				sv.Start = ptr.String(jtv)
 			}
 
 		case "state":
@@ -1729,7 +1730,7 @@ func awsRestjson1_deserializeDocumentSavingsPlan(v **types.SavingsPlan, value in
 				if err != nil {
 					return err
 				}
-				sv.TermDurationInSeconds = &i64
+				sv.TermDurationInSeconds = i64
 			}
 
 		case "upfrontPaymentAmount":
@@ -1738,7 +1739,7 @@ func awsRestjson1_deserializeDocumentSavingsPlan(v **types.SavingsPlan, value in
 				if !ok {
 					return fmt.Errorf("expected Amount to be of type string, got %T instead", value)
 				}
-				sv.UpfrontPaymentAmount = &jtv
+				sv.UpfrontPaymentAmount = ptr.String(jtv)
 			}
 
 		default:
@@ -1750,7 +1751,7 @@ func awsRestjson1_deserializeDocumentSavingsPlan(v **types.SavingsPlan, value in
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentSavingsPlanList(v *[]*types.SavingsPlan, value interface{}) error {
+func awsRestjson1_deserializeDocumentSavingsPlanList(v *[]types.SavingsPlan, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1763,18 +1764,20 @@ func awsRestjson1_deserializeDocumentSavingsPlanList(v *[]*types.SavingsPlan, va
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.SavingsPlan
+	var cv []types.SavingsPlan
 	if *v == nil {
-		cv = []*types.SavingsPlan{}
+		cv = []types.SavingsPlan{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.SavingsPlan
-		if err := awsRestjson1_deserializeDocumentSavingsPlan(&col, value); err != nil {
+		var col types.SavingsPlan
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSavingsPlan(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -1819,7 +1822,7 @@ func awsRestjson1_deserializeDocumentSavingsPlanOffering(v **types.SavingsPlanOf
 				if !ok {
 					return fmt.Errorf("expected SavingsPlanDescription to be of type string, got %T instead", value)
 				}
-				sv.Description = &jtv
+				sv.Description = ptr.String(jtv)
 			}
 
 		case "durationSeconds":
@@ -1832,7 +1835,7 @@ func awsRestjson1_deserializeDocumentSavingsPlanOffering(v **types.SavingsPlanOf
 				if err != nil {
 					return err
 				}
-				sv.DurationSeconds = &i64
+				sv.DurationSeconds = i64
 			}
 
 		case "offeringId":
@@ -1841,7 +1844,7 @@ func awsRestjson1_deserializeDocumentSavingsPlanOffering(v **types.SavingsPlanOf
 				if !ok {
 					return fmt.Errorf("expected UUID to be of type string, got %T instead", value)
 				}
-				sv.OfferingId = &jtv
+				sv.OfferingId = ptr.String(jtv)
 			}
 
 		case "operation":
@@ -1850,7 +1853,7 @@ func awsRestjson1_deserializeDocumentSavingsPlanOffering(v **types.SavingsPlanOf
 				if !ok {
 					return fmt.Errorf("expected SavingsPlanOperation to be of type string, got %T instead", value)
 				}
-				sv.Operation = &jtv
+				sv.Operation = ptr.String(jtv)
 			}
 
 		case "paymentOption":
@@ -1887,7 +1890,7 @@ func awsRestjson1_deserializeDocumentSavingsPlanOffering(v **types.SavingsPlanOf
 				if !ok {
 					return fmt.Errorf("expected SavingsPlanServiceCode to be of type string, got %T instead", value)
 				}
-				sv.ServiceCode = &jtv
+				sv.ServiceCode = ptr.String(jtv)
 			}
 
 		case "usageType":
@@ -1896,7 +1899,7 @@ func awsRestjson1_deserializeDocumentSavingsPlanOffering(v **types.SavingsPlanOf
 				if !ok {
 					return fmt.Errorf("expected SavingsPlanUsageType to be of type string, got %T instead", value)
 				}
-				sv.UsageType = &jtv
+				sv.UsageType = ptr.String(jtv)
 			}
 
 		default:
@@ -1945,7 +1948,7 @@ func awsRestjson1_deserializeDocumentSavingsPlanOfferingProperty(v **types.Savin
 				if !ok {
 					return fmt.Errorf("expected JsonSafeFilterValueString to be of type string, got %T instead", value)
 				}
-				sv.Value = &jtv
+				sv.Value = ptr.String(jtv)
 			}
 
 		default:
@@ -1957,7 +1960,7 @@ func awsRestjson1_deserializeDocumentSavingsPlanOfferingProperty(v **types.Savin
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentSavingsPlanOfferingPropertyList(v *[]*types.SavingsPlanOfferingProperty, value interface{}) error {
+func awsRestjson1_deserializeDocumentSavingsPlanOfferingPropertyList(v *[]types.SavingsPlanOfferingProperty, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1970,18 +1973,20 @@ func awsRestjson1_deserializeDocumentSavingsPlanOfferingPropertyList(v *[]*types
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.SavingsPlanOfferingProperty
+	var cv []types.SavingsPlanOfferingProperty
 	if *v == nil {
-		cv = []*types.SavingsPlanOfferingProperty{}
+		cv = []types.SavingsPlanOfferingProperty{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.SavingsPlanOfferingProperty
-		if err := awsRestjson1_deserializeDocumentSavingsPlanOfferingProperty(&col, value); err != nil {
+		var col types.SavingsPlanOfferingProperty
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSavingsPlanOfferingProperty(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -2017,7 +2022,7 @@ func awsRestjson1_deserializeDocumentSavingsPlanOfferingRate(v **types.SavingsPl
 				if !ok {
 					return fmt.Errorf("expected SavingsPlanRateOperation to be of type string, got %T instead", value)
 				}
-				sv.Operation = &jtv
+				sv.Operation = ptr.String(jtv)
 			}
 
 		case "productType":
@@ -2040,7 +2045,7 @@ func awsRestjson1_deserializeDocumentSavingsPlanOfferingRate(v **types.SavingsPl
 				if !ok {
 					return fmt.Errorf("expected SavingsPlanRatePricePerUnit to be of type string, got %T instead", value)
 				}
-				sv.Rate = &jtv
+				sv.Rate = ptr.String(jtv)
 			}
 
 		case "savingsPlanOffering":
@@ -2072,7 +2077,7 @@ func awsRestjson1_deserializeDocumentSavingsPlanOfferingRate(v **types.SavingsPl
 				if !ok {
 					return fmt.Errorf("expected SavingsPlanRateUsageType to be of type string, got %T instead", value)
 				}
-				sv.UsageType = &jtv
+				sv.UsageType = ptr.String(jtv)
 			}
 
 		default:
@@ -2112,7 +2117,7 @@ func awsRestjson1_deserializeDocumentSavingsPlanOfferingRateProperty(v **types.S
 				if !ok {
 					return fmt.Errorf("expected JsonSafeFilterValueString to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "value":
@@ -2121,7 +2126,7 @@ func awsRestjson1_deserializeDocumentSavingsPlanOfferingRateProperty(v **types.S
 				if !ok {
 					return fmt.Errorf("expected JsonSafeFilterValueString to be of type string, got %T instead", value)
 				}
-				sv.Value = &jtv
+				sv.Value = ptr.String(jtv)
 			}
 
 		default:
@@ -2133,7 +2138,7 @@ func awsRestjson1_deserializeDocumentSavingsPlanOfferingRateProperty(v **types.S
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentSavingsPlanOfferingRatePropertyList(v *[]*types.SavingsPlanOfferingRateProperty, value interface{}) error {
+func awsRestjson1_deserializeDocumentSavingsPlanOfferingRatePropertyList(v *[]types.SavingsPlanOfferingRateProperty, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2146,18 +2151,20 @@ func awsRestjson1_deserializeDocumentSavingsPlanOfferingRatePropertyList(v *[]*t
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.SavingsPlanOfferingRateProperty
+	var cv []types.SavingsPlanOfferingRateProperty
 	if *v == nil {
-		cv = []*types.SavingsPlanOfferingRateProperty{}
+		cv = []types.SavingsPlanOfferingRateProperty{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.SavingsPlanOfferingRateProperty
-		if err := awsRestjson1_deserializeDocumentSavingsPlanOfferingRateProperty(&col, value); err != nil {
+		var col types.SavingsPlanOfferingRateProperty
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSavingsPlanOfferingRateProperty(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -2165,7 +2172,7 @@ func awsRestjson1_deserializeDocumentSavingsPlanOfferingRatePropertyList(v *[]*t
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentSavingsPlanOfferingRatesList(v *[]*types.SavingsPlanOfferingRate, value interface{}) error {
+func awsRestjson1_deserializeDocumentSavingsPlanOfferingRatesList(v *[]types.SavingsPlanOfferingRate, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2178,18 +2185,20 @@ func awsRestjson1_deserializeDocumentSavingsPlanOfferingRatesList(v *[]*types.Sa
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.SavingsPlanOfferingRate
+	var cv []types.SavingsPlanOfferingRate
 	if *v == nil {
-		cv = []*types.SavingsPlanOfferingRate{}
+		cv = []types.SavingsPlanOfferingRate{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.SavingsPlanOfferingRate
-		if err := awsRestjson1_deserializeDocumentSavingsPlanOfferingRate(&col, value); err != nil {
+		var col types.SavingsPlanOfferingRate
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSavingsPlanOfferingRate(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -2197,7 +2206,7 @@ func awsRestjson1_deserializeDocumentSavingsPlanOfferingRatesList(v *[]*types.Sa
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentSavingsPlanOfferingsList(v *[]*types.SavingsPlanOffering, value interface{}) error {
+func awsRestjson1_deserializeDocumentSavingsPlanOfferingsList(v *[]types.SavingsPlanOffering, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2210,18 +2219,20 @@ func awsRestjson1_deserializeDocumentSavingsPlanOfferingsList(v *[]*types.Saving
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.SavingsPlanOffering
+	var cv []types.SavingsPlanOffering
 	if *v == nil {
-		cv = []*types.SavingsPlanOffering{}
+		cv = []types.SavingsPlanOffering{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.SavingsPlanOffering
-		if err := awsRestjson1_deserializeDocumentSavingsPlanOffering(&col, value); err != nil {
+		var col types.SavingsPlanOffering
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSavingsPlanOffering(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -2302,7 +2313,7 @@ func awsRestjson1_deserializeDocumentSavingsPlanRate(v **types.SavingsPlanRate, 
 				if !ok {
 					return fmt.Errorf("expected SavingsPlanRateOperation to be of type string, got %T instead", value)
 				}
-				sv.Operation = &jtv
+				sv.Operation = ptr.String(jtv)
 			}
 
 		case "productType":
@@ -2325,7 +2336,7 @@ func awsRestjson1_deserializeDocumentSavingsPlanRate(v **types.SavingsPlanRate, 
 				if !ok {
 					return fmt.Errorf("expected Amount to be of type string, got %T instead", value)
 				}
-				sv.Rate = &jtv
+				sv.Rate = ptr.String(jtv)
 			}
 
 		case "serviceCode":
@@ -2352,7 +2363,7 @@ func awsRestjson1_deserializeDocumentSavingsPlanRate(v **types.SavingsPlanRate, 
 				if !ok {
 					return fmt.Errorf("expected SavingsPlanRateUsageType to be of type string, got %T instead", value)
 				}
-				sv.UsageType = &jtv
+				sv.UsageType = ptr.String(jtv)
 			}
 
 		default:
@@ -2364,7 +2375,7 @@ func awsRestjson1_deserializeDocumentSavingsPlanRate(v **types.SavingsPlanRate, 
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentSavingsPlanRateList(v *[]*types.SavingsPlanRate, value interface{}) error {
+func awsRestjson1_deserializeDocumentSavingsPlanRateList(v *[]types.SavingsPlanRate, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2377,18 +2388,20 @@ func awsRestjson1_deserializeDocumentSavingsPlanRateList(v *[]*types.SavingsPlan
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.SavingsPlanRate
+	var cv []types.SavingsPlanRate
 	if *v == nil {
-		cv = []*types.SavingsPlanRate{}
+		cv = []types.SavingsPlanRate{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.SavingsPlanRate
-		if err := awsRestjson1_deserializeDocumentSavingsPlanRate(&col, value); err != nil {
+		var col types.SavingsPlanRate
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSavingsPlanRate(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -2433,7 +2446,7 @@ func awsRestjson1_deserializeDocumentSavingsPlanRateProperty(v **types.SavingsPl
 				if !ok {
 					return fmt.Errorf("expected JsonSafeFilterValueString to be of type string, got %T instead", value)
 				}
-				sv.Value = &jtv
+				sv.Value = ptr.String(jtv)
 			}
 
 		default:
@@ -2445,7 +2458,7 @@ func awsRestjson1_deserializeDocumentSavingsPlanRateProperty(v **types.SavingsPl
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentSavingsPlanRatePropertyList(v *[]*types.SavingsPlanRateProperty, value interface{}) error {
+func awsRestjson1_deserializeDocumentSavingsPlanRatePropertyList(v *[]types.SavingsPlanRateProperty, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2458,18 +2471,20 @@ func awsRestjson1_deserializeDocumentSavingsPlanRatePropertyList(v *[]*types.Sav
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.SavingsPlanRateProperty
+	var cv []types.SavingsPlanRateProperty
 	if *v == nil {
-		cv = []*types.SavingsPlanRateProperty{}
+		cv = []types.SavingsPlanRateProperty{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.SavingsPlanRateProperty
-		if err := awsRestjson1_deserializeDocumentSavingsPlanRateProperty(&col, value); err != nil {
+		var col types.SavingsPlanRateProperty
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSavingsPlanRateProperty(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -2505,7 +2520,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2517,7 +2532,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentTagMap(v *map[string]*string, value interface{}) error {
+func awsRestjson1_deserializeDocumentTagMap(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2530,21 +2545,21 @@ func awsRestjson1_deserializeDocumentTagMap(v *map[string]*string, value interfa
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var mv map[string]*string
+	var mv map[string]string
 	if *v == nil {
-		mv = map[string]*string{}
+		mv = map[string]string{}
 	} else {
 		mv = *v
 	}
 
 	for key, value := range shape {
-		var parsedVal *string
+		var parsedVal string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected TagValue to be of type string, got %T instead", value)
 			}
-			parsedVal = &jtv
+			parsedVal = jtv
 		}
 		mv[key] = parsedVal
 
@@ -2581,7 +2596,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:

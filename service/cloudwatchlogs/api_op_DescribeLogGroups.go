@@ -46,7 +46,7 @@ type DescribeLogGroupsOutput struct {
 
 	// The log groups. If the retentionInDays value if not included for a log group,
 	// then that log group is set to have its events never expire.
-	LogGroups []*types.LogGroup
+	LogGroups []types.LogGroup
 
 	// The token for the next set of items to return. The token expires after 24 hours.
 	NextToken *string

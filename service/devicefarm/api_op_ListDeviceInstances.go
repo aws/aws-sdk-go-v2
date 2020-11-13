@@ -42,7 +42,7 @@ type ListDeviceInstancesInput struct {
 type ListDeviceInstancesOutput struct {
 
 	// An object that contains information about your device instances.
-	DeviceInstances []*types.DeviceInstance
+	DeviceInstances []types.DeviceInstance
 
 	// An identifier that can be used in the next call to this operation to return the
 	// next set of items in the list.

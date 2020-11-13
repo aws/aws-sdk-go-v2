@@ -59,7 +59,7 @@ type UpdateIAMPolicyAssignmentInput struct {
 	AssignmentStatus types.AssignmentStatus
 
 	// The QuickSight users, groups, or both that you want to assign the policy to.
-	Identities map[string][]*string
+	Identities map[string][]string
 
 	// The ARN for the IAM policy to apply to the QuickSight users and groups specified
 	// in this assignment.
@@ -88,7 +88,7 @@ type UpdateIAMPolicyAssignmentOutput struct {
 	AssignmentStatus types.AssignmentStatus
 
 	// The QuickSight users, groups, or both that the IAM policy is assigned to.
-	Identities map[string][]*string
+	Identities map[string][]string
 
 	// The ARN for the IAM policy applied to the QuickSight users and groups specified
 	// in this assignment.
@@ -98,7 +98,7 @@ type UpdateIAMPolicyAssignmentOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

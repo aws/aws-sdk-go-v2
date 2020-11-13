@@ -103,7 +103,7 @@ type UpdateUserPoolInput struct {
 	// The tag keys and values to assign to the user pool. A tag is a label that you
 	// can use to categorize and manage user pools in different ways, such as by
 	// purpose, owner, environment, or other criteria.
-	UserPoolTags map[string]*string
+	UserPoolTags map[string]string
 
 	// The template for verification messages.
 	VerificationMessageTemplate *types.VerificationMessageTemplateType

@@ -321,7 +321,7 @@ func awsRestjson1_deserializeOpDocumentDescribeAcceleratorsOutput(v **DescribeAc
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -947,7 +947,7 @@ func awsRestjson1_deserializeDocumentAcceleratorType(v **types.AcceleratorType, 
 				if !ok {
 					return fmt.Errorf("expected AcceleratorTypeName to be of type string, got %T instead", value)
 				}
-				sv.AcceleratorTypeName = &jtv
+				sv.AcceleratorTypeName = ptr.String(jtv)
 			}
 
 		case "memoryInfo":
@@ -969,7 +969,7 @@ func awsRestjson1_deserializeDocumentAcceleratorType(v **types.AcceleratorType, 
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentAcceleratorTypeList(v *[]*types.AcceleratorType, value interface{}) error {
+func awsRestjson1_deserializeDocumentAcceleratorTypeList(v *[]types.AcceleratorType, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -982,18 +982,20 @@ func awsRestjson1_deserializeDocumentAcceleratorTypeList(v *[]*types.Accelerator
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.AcceleratorType
+	var cv []types.AcceleratorType
 	if *v == nil {
-		cv = []*types.AcceleratorType{}
+		cv = []types.AcceleratorType{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.AcceleratorType
-		if err := awsRestjson1_deserializeDocumentAcceleratorType(&col, value); err != nil {
+		var col types.AcceleratorType
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAcceleratorType(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -1029,7 +1031,7 @@ func awsRestjson1_deserializeDocumentAcceleratorTypeOffering(v **types.Accelerat
 				if !ok {
 					return fmt.Errorf("expected AcceleratorTypeName to be of type string, got %T instead", value)
 				}
-				sv.AcceleratorType = &jtv
+				sv.AcceleratorType = ptr.String(jtv)
 			}
 
 		case "location":
@@ -1038,7 +1040,7 @@ func awsRestjson1_deserializeDocumentAcceleratorTypeOffering(v **types.Accelerat
 				if !ok {
 					return fmt.Errorf("expected Location to be of type string, got %T instead", value)
 				}
-				sv.Location = &jtv
+				sv.Location = ptr.String(jtv)
 			}
 
 		case "locationType":
@@ -1059,7 +1061,7 @@ func awsRestjson1_deserializeDocumentAcceleratorTypeOffering(v **types.Accelerat
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentAcceleratorTypeOfferingList(v *[]*types.AcceleratorTypeOffering, value interface{}) error {
+func awsRestjson1_deserializeDocumentAcceleratorTypeOfferingList(v *[]types.AcceleratorTypeOffering, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1072,18 +1074,20 @@ func awsRestjson1_deserializeDocumentAcceleratorTypeOfferingList(v *[]*types.Acc
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.AcceleratorTypeOffering
+	var cv []types.AcceleratorTypeOffering
 	if *v == nil {
-		cv = []*types.AcceleratorTypeOffering{}
+		cv = []types.AcceleratorTypeOffering{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.AcceleratorTypeOffering
-		if err := awsRestjson1_deserializeDocumentAcceleratorTypeOffering(&col, value); err != nil {
+		var col types.AcceleratorTypeOffering
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAcceleratorTypeOffering(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -1119,7 +1123,7 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1164,7 +1168,7 @@ func awsRestjson1_deserializeDocumentElasticInferenceAccelerator(v **types.Elast
 				if !ok {
 					return fmt.Errorf("expected AcceleratorId to be of type string, got %T instead", value)
 				}
-				sv.AcceleratorId = &jtv
+				sv.AcceleratorId = ptr.String(jtv)
 			}
 
 		case "acceleratorType":
@@ -1173,7 +1177,7 @@ func awsRestjson1_deserializeDocumentElasticInferenceAccelerator(v **types.Elast
 				if !ok {
 					return fmt.Errorf("expected AcceleratorTypeName to be of type string, got %T instead", value)
 				}
-				sv.AcceleratorType = &jtv
+				sv.AcceleratorType = ptr.String(jtv)
 			}
 
 		case "attachedResource":
@@ -1182,7 +1186,7 @@ func awsRestjson1_deserializeDocumentElasticInferenceAccelerator(v **types.Elast
 				if !ok {
 					return fmt.Errorf("expected ResourceARN2 to be of type string, got %T instead", value)
 				}
-				sv.AttachedResource = &jtv
+				sv.AttachedResource = ptr.String(jtv)
 			}
 
 		case "availabilityZone":
@@ -1191,7 +1195,7 @@ func awsRestjson1_deserializeDocumentElasticInferenceAccelerator(v **types.Elast
 				if !ok {
 					return fmt.Errorf("expected AvailabilityZone to be of type string, got %T instead", value)
 				}
-				sv.AvailabilityZone = &jtv
+				sv.AvailabilityZone = ptr.String(jtv)
 			}
 
 		default:
@@ -1231,7 +1235,7 @@ func awsRestjson1_deserializeDocumentElasticInferenceAcceleratorHealth(v **types
 				if !ok {
 					return fmt.Errorf("expected AcceleratorHealthStatus to be of type string, got %T instead", value)
 				}
-				sv.Status = &jtv
+				sv.Status = ptr.String(jtv)
 			}
 
 		default:
@@ -1243,7 +1247,7 @@ func awsRestjson1_deserializeDocumentElasticInferenceAcceleratorHealth(v **types
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentElasticInferenceAcceleratorSet(v *[]*types.ElasticInferenceAccelerator, value interface{}) error {
+func awsRestjson1_deserializeDocumentElasticInferenceAcceleratorSet(v *[]types.ElasticInferenceAccelerator, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1256,18 +1260,20 @@ func awsRestjson1_deserializeDocumentElasticInferenceAcceleratorSet(v *[]*types.
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.ElasticInferenceAccelerator
+	var cv []types.ElasticInferenceAccelerator
 	if *v == nil {
-		cv = []*types.ElasticInferenceAccelerator{}
+		cv = []types.ElasticInferenceAccelerator{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.ElasticInferenceAccelerator
-		if err := awsRestjson1_deserializeDocumentElasticInferenceAccelerator(&col, value); err != nil {
+		var col types.ElasticInferenceAccelerator
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentElasticInferenceAccelerator(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -1303,7 +1309,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1343,7 +1349,7 @@ func awsRestjson1_deserializeDocumentKeyValuePair(v **types.KeyValuePair, value 
 				if !ok {
 					return fmt.Errorf("expected Key to be of type string, got %T instead", value)
 				}
-				sv.Key = &jtv
+				sv.Key = ptr.String(jtv)
 			}
 
 		case "value":
@@ -1356,7 +1362,7 @@ func awsRestjson1_deserializeDocumentKeyValuePair(v **types.KeyValuePair, value 
 				if err != nil {
 					return err
 				}
-				sv.Value = ptr.Int32(int32(i64))
+				sv.Value = int32(i64)
 			}
 
 		default:
@@ -1400,7 +1406,7 @@ func awsRestjson1_deserializeDocumentMemoryInfo(v **types.MemoryInfo, value inte
 				if err != nil {
 					return err
 				}
-				sv.SizeInMiB = ptr.Int32(int32(i64))
+				sv.SizeInMiB = int32(i64)
 			}
 
 		default:
@@ -1440,7 +1446,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1452,7 +1458,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentTagMap(v *map[string]*string, value interface{}) error {
+func awsRestjson1_deserializeDocumentTagMap(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1465,21 +1471,21 @@ func awsRestjson1_deserializeDocumentTagMap(v *map[string]*string, value interfa
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var mv map[string]*string
+	var mv map[string]string
 	if *v == nil {
-		mv = map[string]*string{}
+		mv = map[string]string{}
 	} else {
 		mv = *v
 	}
 
 	for key, value := range shape {
-		var parsedVal *string
+		var parsedVal string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected TagValue to be of type string, got %T instead", value)
 			}
-			parsedVal = &jtv
+			parsedVal = jtv
 		}
 		mv[key] = parsedVal
 
@@ -1488,7 +1494,7 @@ func awsRestjson1_deserializeDocumentTagMap(v *map[string]*string, value interfa
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentThroughputInfoList(v *[]*types.KeyValuePair, value interface{}) error {
+func awsRestjson1_deserializeDocumentThroughputInfoList(v *[]types.KeyValuePair, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1501,18 +1507,20 @@ func awsRestjson1_deserializeDocumentThroughputInfoList(v *[]*types.KeyValuePair
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.KeyValuePair
+	var cv []types.KeyValuePair
 	if *v == nil {
-		cv = []*types.KeyValuePair{}
+		cv = []types.KeyValuePair{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.KeyValuePair
-		if err := awsRestjson1_deserializeDocumentKeyValuePair(&col, value); err != nil {
+		var col types.KeyValuePair
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentKeyValuePair(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}

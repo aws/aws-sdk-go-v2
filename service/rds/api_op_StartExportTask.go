@@ -101,7 +101,7 @@ type StartExportTaskInput struct {
 	// * database.schema.table table-name - Export a
 	// table of the database schema. This format is valid only for RDS for PostgreSQL
 	// and Aurora PostgreSQL.
-	ExportOnly []*string
+	ExportOnly []string
 
 	// The Amazon S3 bucket prefix to use as the file name and path of the exported
 	// snapshot.
@@ -128,7 +128,7 @@ type StartExportTaskOutput struct {
 	// * database.schema.table table-name - Export a
 	// table of the database schema. This format is valid only for RDS for PostgreSQL
 	// and Aurora PostgreSQL.
-	ExportOnly []*string
+	ExportOnly []string
 
 	// A unique identifier for the snapshot export task. This ID isn't an identifier
 	// for the Amazon S3 bucket where the snapshot is exported to.
@@ -149,7 +149,7 @@ type StartExportTaskOutput struct {
 	KmsKeyId *string
 
 	// The progress of the snapshot export task as a percentage.
-	PercentProgress *int32
+	PercentProgress int32
 
 	// The Amazon S3 bucket that the snapshot is exported to.
 	S3Bucket *string
@@ -174,7 +174,7 @@ type StartExportTaskOutput struct {
 	TaskStartTime *time.Time
 
 	// The total amount of data exported, in gigabytes.
-	TotalExtractedDataInGB *int32
+	TotalExtractedDataInGB int32
 
 	// A warning about the snapshot export task.
 	WarningMessage *string

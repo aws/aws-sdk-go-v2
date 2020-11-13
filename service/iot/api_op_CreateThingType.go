@@ -36,7 +36,7 @@ type CreateThingTypeInput struct {
 	ThingTypeName *string
 
 	// Metadata which can be used to manage the thing type.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The ThingTypeProperties for the thing type to create. It contains information
 	// about the new thing type including a description, and a list of searchable thing

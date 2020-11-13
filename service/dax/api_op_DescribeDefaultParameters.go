@@ -47,7 +47,7 @@ type DescribeDefaultParametersOutput struct {
 	NextToken *string
 
 	// A list of parameters. Each element in the list represents one parameter.
-	Parameters []*types.Parameter
+	Parameters []types.Parameter
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

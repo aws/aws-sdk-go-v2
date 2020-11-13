@@ -39,7 +39,7 @@ type AccountLimit struct {
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_AccountLimit.html#Route53-Type-AccountLimit-Type).
 	//
 	// This member is required.
-	Value *int64
+	Value int64
 }
 
 // A complex type that identifies the CloudWatch alarm that you want Amazon Route
@@ -280,7 +280,7 @@ type AliasTarget struct {
 	// the Amazon Route 53 Developer Guide.
 	//
 	// This member is required.
-	EvaluateTargetHealth *bool
+	EvaluateTargetHealth bool
 
 	// Alias resource records sets only: The value used depends on where you want to
 	// route traffic: Amazon API Gateway custom regional APIs and edge-optimized APIs
@@ -397,7 +397,7 @@ type ChangeBatch struct {
 	// Information about the changes to make to the record sets.
 	//
 	// This member is required.
-	Changes []*Change
+	Changes []Change
 
 	// Optional: Any comments you want to include about a change batch request.
 	Comment *string
@@ -486,7 +486,7 @@ type CloudWatchAlarmConfiguration struct {
 	// Amazon CloudWatch Namespaces, Dimensions, and Metrics Reference
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CW_Support_For_AWS.html)
 	// in the Amazon CloudWatch User Guide.
-	Dimensions []*Dimension
+	Dimensions []Dimension
 }
 
 // A complex type that lists the name servers in a delegation set, as well as the
@@ -497,7 +497,7 @@ type DelegationSet struct {
 	// hosted zone or for a reusable delegation set.
 	//
 	// This member is required.
-	NameServers []*string
+	NameServers []string
 
 	// The value that you specified for CallerReference when you created the reusable
 	// delegation set.
@@ -685,7 +685,7 @@ type HealthCheckConfig struct {
 	// (CALCULATED Health Checks Only) A complex type that contains one
 	// ChildHealthCheck element for each health check that you want to associate with a
 	// CALCULATED health check.
-	ChildHealthChecks []*string
+	ChildHealthChecks []string
 
 	// Stops Route 53 from performing health checks. When you disable a health check,
 	// here's what happens:
@@ -968,7 +968,7 @@ type HostedZoneConfig struct {
 	Comment *string
 
 	// A value that indicates whether this is a private hosted zone.
-	PrivateZone *bool
+	PrivateZone bool
 }
 
 // A complex type that contains the type of limit that you specified in the request
@@ -990,7 +990,7 @@ type HostedZoneLimit struct {
 	// The current value for the limit that is specified by Type.
 	//
 	// This member is required.
-	Value *int64
+	Value int64
 }
 
 // A complex type that identifies a hosted zone that a specified Amazon VPC is
@@ -1442,7 +1442,7 @@ type ResourceRecordSet struct {
 
 	// Information about the resource records to act upon. If you're creating an alias
 	// resource record set, omit ResourceRecords.
-	ResourceRecords []*ResourceRecord
+	ResourceRecords []ResourceRecord
 
 	// Resource record sets that have a routing policy other than simple: An identifier
 	// that differentiates among multiple resource record sets that have the same
@@ -1539,7 +1539,7 @@ type ResourceTagSet struct {
 	ResourceType TagResourceType
 
 	// The tags associated with the specified resource.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // A complex type that contains the type of limit that you specified in the request
@@ -1556,7 +1556,7 @@ type ReusableDelegationSetLimit struct {
 	// The current value for the MAX_ZONES_BY_REUSABLE_DELEGATION_SET limit.
 	//
 	// This member is required.
-	Value *int64
+	Value int64
 }
 
 // A complex type that contains the status that one Amazon Route 53 health checker

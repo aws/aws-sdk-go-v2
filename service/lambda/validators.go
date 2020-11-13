@@ -1108,13 +1108,13 @@ func validateFileSystemConfig(v *types.FileSystemConfig) error {
 	}
 }
 
-func validateFileSystemConfigList(v []*types.FileSystemConfig) error {
+func validateFileSystemConfigList(v []types.FileSystemConfig) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FileSystemConfigList"}
 	for i := range v {
-		if err := validateFileSystemConfig(v[i]); err != nil {
+		if err := validateFileSystemConfig(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1138,9 +1138,6 @@ func validateOpAddLayerVersionPermissionInput(v *AddLayerVersionPermissionInput)
 	}
 	if v.LayerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LayerName"))
-	}
-	if v.VersionNumber == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VersionNumber"))
 	}
 	if v.Action == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Action"))
@@ -1330,9 +1327,6 @@ func validateOpDeleteLayerVersionInput(v *DeleteLayerVersionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteLayerVersionInput"}
-	if v.VersionNumber == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VersionNumber"))
-	}
 	if v.LayerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LayerName"))
 	}
@@ -1474,9 +1468,6 @@ func validateOpGetLayerVersionInput(v *GetLayerVersionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetLayerVersionInput"}
-	if v.VersionNumber == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VersionNumber"))
-	}
 	if v.LayerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LayerName"))
 	}
@@ -1492,9 +1483,6 @@ func validateOpGetLayerVersionPolicyInput(v *GetLayerVersionPolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetLayerVersionPolicyInput"}
-	if v.VersionNumber == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VersionNumber"))
-	}
 	if v.LayerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LayerName"))
 	}
@@ -1753,9 +1741,6 @@ func validateOpRemoveLayerVersionPermissionInput(v *RemoveLayerVersionPermission
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RemoveLayerVersionPermissionInput"}
-	if v.VersionNumber == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VersionNumber"))
-	}
 	if v.StatementId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StatementId"))
 	}

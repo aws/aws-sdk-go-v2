@@ -58,7 +58,7 @@ type GetBotChannelAssociationOutput struct {
 
 	// Provides information that the messaging platform needs to communicate with the
 	// Amazon Lex bot.
-	BotConfiguration map[string]*string
+	BotConfiguration map[string]string
 
 	// The name of the Amazon Lex bot.
 	BotName *string

@@ -39,13 +39,13 @@ type GetFolderInput struct {
 	AuthenticationToken *string
 
 	// Set to TRUE to include custom metadata in the response.
-	IncludeCustomMetadata *bool
+	IncludeCustomMetadata bool
 }
 
 type GetFolderOutput struct {
 
 	// The custom metadata on the folder.
-	CustomMetadata map[string]*string
+	CustomMetadata map[string]string
 
 	// The metadata of the folder.
 	Metadata *types.FolderMetadata

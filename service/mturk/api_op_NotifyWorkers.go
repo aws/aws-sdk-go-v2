@@ -47,14 +47,14 @@ type NotifyWorkersInput struct {
 	// time.
 	//
 	// This member is required.
-	WorkerIds []*string
+	WorkerIds []string
 }
 
 type NotifyWorkersOutput struct {
 
 	// When MTurk sends notifications to the list of Workers, it returns back any
 	// failures it encounters in this list of NotifyWorkersFailureStatus objects.
-	NotifyWorkersFailureStatuses []*types.NotifyWorkersFailureStatus
+	NotifyWorkersFailureStatuses []types.NotifyWorkersFailureStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

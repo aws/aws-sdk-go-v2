@@ -75,7 +75,7 @@ type DescribeOrderableClusterOptionsOutput struct {
 
 	// An OrderableClusterOption structure containing information about orderable
 	// options for the cluster.
-	OrderableClusterOptions []*types.OrderableClusterOption
+	OrderableClusterOptions []types.OrderableClusterOption
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

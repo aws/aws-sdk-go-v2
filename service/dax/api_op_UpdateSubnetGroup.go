@@ -38,7 +38,7 @@ type UpdateSubnetGroupInput struct {
 	Description *string
 
 	// A list of subnet IDs in the subnet group.
-	SubnetIds []*string
+	SubnetIds []string
 }
 
 type UpdateSubnetGroupOutput struct {

@@ -36,16 +36,16 @@ type BatchGetJobsInput struct {
 	// operation.
 	//
 	// This member is required.
-	JobNames []*string
+	JobNames []string
 }
 
 type BatchGetJobsOutput struct {
 
 	// A list of job definitions.
-	Jobs []*types.Job
+	Jobs []types.Job
 
 	// A list of names of jobs not found.
-	JobsNotFound []*string
+	JobsNotFound []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

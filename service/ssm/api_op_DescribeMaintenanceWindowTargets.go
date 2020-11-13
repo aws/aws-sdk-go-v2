@@ -37,11 +37,11 @@ type DescribeMaintenanceWindowTargetsInput struct {
 	// Optional filters that can be used to narrow down the scope of the returned
 	// window targets. The supported filter keys are Type, WindowTargetId and
 	// OwnerInformation.
-	Filters []*types.MaintenanceWindowFilter
+	Filters []types.MaintenanceWindowFilter
 
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
@@ -55,7 +55,7 @@ type DescribeMaintenanceWindowTargetsOutput struct {
 	NextToken *string
 
 	// Information about the targets in the maintenance window.
-	Targets []*types.MaintenanceWindowTarget
+	Targets []types.MaintenanceWindowTarget
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -42,7 +42,7 @@ type GetPatchBaselineOutput struct {
 	ApprovalRules *types.PatchRuleGroup
 
 	// A list of explicitly approved patches for the baseline.
-	ApprovedPatches []*string
+	ApprovedPatches []string
 
 	// Returns the specified compliance severity level for approved patches in the
 	// patch baseline.
@@ -51,7 +51,7 @@ type GetPatchBaselineOutput struct {
 	// Indicates whether the list of approved patches includes non-security updates
 	// that should be applied to the instances. The default value is 'false'. Applies
 	// to Linux instances only.
-	ApprovedPatchesEnableNonSecurity *bool
+	ApprovedPatchesEnableNonSecurity bool
 
 	// The ID of the retrieved patch baseline.
 	BaselineId *string
@@ -75,10 +75,10 @@ type GetPatchBaselineOutput struct {
 	OperatingSystem types.OperatingSystem
 
 	// Patch groups included in the patch baseline.
-	PatchGroups []*string
+	PatchGroups []string
 
 	// A list of explicitly rejected patches for the baseline.
-	RejectedPatches []*string
+	RejectedPatches []string
 
 	// The action specified to take on patches included in the RejectedPatches list. A
 	// patch can be allowed only if it is a dependency of another package, or blocked
@@ -87,7 +87,7 @@ type GetPatchBaselineOutput struct {
 
 	// Information about the patches to use to update the instances, including target
 	// operating systems and source repositories. Applies to Linux instances only.
-	Sources []*types.PatchSource
+	Sources []types.PatchSource
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

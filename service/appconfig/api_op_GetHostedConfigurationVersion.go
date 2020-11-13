@@ -41,7 +41,7 @@ type GetHostedConfigurationVersionInput struct {
 	// The version.
 	//
 	// This member is required.
-	VersionNumber *int32
+	VersionNumber int32
 }
 
 type GetHostedConfigurationVersionOutput struct {
@@ -64,7 +64,7 @@ type GetHostedConfigurationVersionOutput struct {
 	Description *string
 
 	// The configuration version.
-	VersionNumber *int32
+	VersionNumber int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

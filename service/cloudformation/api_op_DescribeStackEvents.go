@@ -59,7 +59,7 @@ type DescribeStackEventsOutput struct {
 	NextToken *string
 
 	// A list of StackEvents structures.
-	StackEvents []*types.StackEvent
+	StackEvents []types.StackEvent
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

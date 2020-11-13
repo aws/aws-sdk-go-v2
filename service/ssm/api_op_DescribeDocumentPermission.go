@@ -46,11 +46,11 @@ type DescribeDocumentPermissionOutput struct {
 
 	// The account IDs that have permission to use this document. The ID can be either
 	// an AWS account or All.
-	AccountIds []*string
+	AccountIds []string
 
 	// A list of AWS accounts where the current document is shared and the version
 	// shared with each account.
-	AccountSharingInfoList []*types.AccountSharingInfo
+	AccountSharingInfoList []types.AccountSharingInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

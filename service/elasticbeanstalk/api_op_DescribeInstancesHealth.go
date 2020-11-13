@@ -54,7 +54,7 @@ type DescribeInstancesHealthOutput struct {
 	// Detailed health information about each instance. The output differs slightly
 	// between Linux and Windows environments. There is a difference in the members
 	// that are supported under the  type.
-	InstanceHealthList []*types.SingleInstanceHealth
+	InstanceHealthList []types.SingleInstanceHealth
 
 	// Pagination token for the next page of results, if available.
 	NextToken *string

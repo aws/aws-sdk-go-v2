@@ -41,7 +41,7 @@ type CreateDevEndpointInput struct {
 	RoleArn *string
 
 	// A map of arguments used to configure the DevEndpoint.
-	Arguments map[string]*string
+	Arguments map[string]string
 
 	// The path to one or more Java .jar files in an S3 bucket that should be loaded in
 	// your DevEndpoint.
@@ -68,7 +68,7 @@ type CreateDevEndpointInput struct {
 
 	// The number of AWS Glue Data Processing Units (DPUs) to allocate to this
 	// DevEndpoint.
-	NumberOfNodes *int32
+	NumberOfNodes int32
 
 	// The number of workers of a defined workerType that are allocated to the
 	// development endpoint. The maximum number of workers you can define are 299 for
@@ -87,14 +87,14 @@ type CreateDevEndpointInput struct {
 	// to be able to set a list of public keys. Call the UpdateDevEndpoint API with the
 	// public key content in the deletePublicKeys attribute, and the list of new keys
 	// in the addPublicKeys attribute.
-	PublicKeys []*string
+	PublicKeys []string
 
 	// The name of the SecurityConfiguration structure to be used with this
 	// DevEndpoint.
 	SecurityConfiguration *string
 
 	// Security group IDs for the security groups to be used by the new DevEndpoint.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// The subnet ID for the new DevEndpoint to use.
 	SubnetId *string
@@ -103,7 +103,7 @@ type CreateDevEndpointInput struct {
 	// DevEndpoint. For more information about tags in AWS Glue, see AWS Tags in AWS
 	// Glue (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the
 	// developer guide.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The type of predefined worker that is allocated to the development endpoint.
 	// Accepts a value of Standard, G.1X, or G.2X.
@@ -143,7 +143,7 @@ type CreateDevEndpointOutput struct {
 	// development endpoints by using the Arguments parameter in the CreateDevEndpoint
 	// or UpdateDevEndpoint APIs. If no arguments are provided, the version defaults to
 	// Python 2.
-	Arguments map[string]*string
+	Arguments map[string]string
 
 	// The AWS Availability Zone where this DevEndpoint is located.
 	AvailabilityZone *string
@@ -172,7 +172,7 @@ type CreateDevEndpointOutput struct {
 
 	// The number of AWS Glue Data Processing Units (DPUs) allocated to this
 	// DevEndpoint.
-	NumberOfNodes *int32
+	NumberOfNodes int32
 
 	// The number of workers of a defined workerType that are allocated to the
 	// development endpoint.
@@ -186,7 +186,7 @@ type CreateDevEndpointOutput struct {
 	SecurityConfiguration *string
 
 	// The security groups assigned to the new DevEndpoint.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// The current status of the new DevEndpoint.
 	Status *string
@@ -205,7 +205,7 @@ type CreateDevEndpointOutput struct {
 	YarnEndpointAddress *string
 
 	// The Apache Zeppelin port for the remote Apache Spark interpreter.
-	ZeppelinRemoteSparkInterpreterPort *int32
+	ZeppelinRemoteSparkInterpreterPort int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

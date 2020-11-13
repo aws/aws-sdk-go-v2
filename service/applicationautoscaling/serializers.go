@@ -525,17 +525,13 @@ func awsAwsjson11_serializeDocumentMetricDimension(v *types.MetricDimension, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentMetricDimensions(v []*types.MetricDimension, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentMetricDimensions(v []types.MetricDimension, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentMetricDimension(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentMetricDimension(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -559,17 +555,13 @@ func awsAwsjson11_serializeDocumentPredefinedMetricSpecification(v *types.Predef
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentResourceIdsMaxLen1600(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentResourceIdsMaxLen1600(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -613,17 +605,13 @@ func awsAwsjson11_serializeDocumentStepAdjustment(v *types.StepAdjustment, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStepAdjustments(v []*types.StepAdjustment, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentStepAdjustments(v []types.StepAdjustment, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentStepAdjustment(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentStepAdjustment(&v[i], av); err != nil {
 			return err
 		}
 	}

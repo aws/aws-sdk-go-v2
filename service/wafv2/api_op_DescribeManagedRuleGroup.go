@@ -70,10 +70,10 @@ type DescribeManagedRuleGroupOutput struct {
 	// capacity differently for each rule type, to reflect each rule's relative cost.
 	// Rule group capacity is fixed at creation, so users can plan their web ACL WCU
 	// usage when they use a rule group. The WCU limit for web ACLs is 1,500.
-	Capacity *int64
+	Capacity int64
 
 	//
-	Rules []*types.RuleSummary
+	Rules []types.RuleSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

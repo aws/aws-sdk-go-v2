@@ -45,7 +45,7 @@ type UpdateNotificationRuleInput struct {
 	DetailType types.DetailType
 
 	// A list of event types associated with this notification rule.
-	EventTypeIds []*string
+	EventTypeIds []string
 
 	// The name of the notification rule.
 	Name *string
@@ -56,7 +56,7 @@ type UpdateNotificationRuleInput struct {
 
 	// The address and type of the targets to receive notifications from this
 	// notification rule.
-	Targets []*types.Target
+	Targets []types.Target
 }
 
 type UpdateNotificationRuleOutput struct {

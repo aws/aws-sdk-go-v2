@@ -56,7 +56,7 @@ type CreateQueueInput struct {
 
 	// The tags that you want to add to the resource. You can tag resources with a
 	// key-value pair or with only a key.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateQueueOutput struct {

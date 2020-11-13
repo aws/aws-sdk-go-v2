@@ -31,7 +31,7 @@ type GetResourcePoliciesInput struct {
 	// The Amazon Resource Names (ARN) of the resources.
 	//
 	// This member is required.
-	ResourceArns []*string
+	ResourceArns []string
 
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
@@ -51,7 +51,7 @@ type GetResourcePoliciesOutput struct {
 	NextToken *string
 
 	// A key policy document, in JSON format.
-	Policies []*string
+	Policies []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

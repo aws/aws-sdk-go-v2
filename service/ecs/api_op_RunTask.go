@@ -77,7 +77,7 @@ type RunTaskInput struct {
 	// with a cluster to be used. The PutClusterCapacityProviders API operation is used
 	// to update the list of available capacity providers for a cluster after the
 	// cluster is created.
-	CapacityProviderStrategy []*types.CapacityProviderStrategyItem
+	CapacityProviderStrategy []types.CapacityProviderStrategyItem
 
 	// The short name or full Amazon Resource Name (ARN) of the cluster on which to run
 	// your task. If you do not specify a cluster, the default cluster is assumed.
@@ -91,7 +91,7 @@ type RunTaskInput struct {
 	// information, see Tagging Your Amazon ECS Resources
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
 	// in the Amazon Elastic Container Service Developer Guide.
-	EnableECSManagedTags *bool
+	EnableECSManagedTags bool
 
 	// The name of the task group to associate with the task. The default value is the
 	// family name of the task definition (for example, family:my-family-name).
@@ -125,11 +125,11 @@ type RunTaskInput struct {
 	// An array of placement constraint objects to use for the task. You can specify up
 	// to 10 constraints per task (including constraints in the task definition and
 	// those specified at runtime).
-	PlacementConstraints []*types.PlacementConstraint
+	PlacementConstraints []types.PlacementConstraint
 
 	// The placement strategy objects to use for the task. You can specify a maximum of
 	// five strategy rules per task.
-	PlacementStrategy []*types.PlacementStrategy
+	PlacementStrategy []types.PlacementStrategy
 
 	// The platform version the task should run. A platform version is only specified
 	// for tasks using the Fargate launch type. If one is not specified, the LATEST
@@ -187,17 +187,17 @@ type RunTaskInput struct {
 	// of such as a prefix for either keys or values as it is reserved for AWS use. You
 	// cannot edit or delete tag keys or values with this prefix. Tags with this prefix
 	// do not count against your tags per resource limit.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type RunTaskOutput struct {
 
 	// Any failures associated with the call.
-	Failures []*types.Failure
+	Failures []types.Failure
 
 	// A full description of the tasks that were run. The tasks that were successfully
 	// placed on your cluster are described here.
-	Tasks []*types.Task
+	Tasks []types.Task
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

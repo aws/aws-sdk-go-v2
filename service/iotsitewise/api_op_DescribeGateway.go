@@ -59,7 +59,7 @@ type DescribeGatewayOutput struct {
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeGatewayCapabilityConfiguration.html).
 	//
 	// This member is required.
-	GatewayCapabilitySummaries []*types.GatewayCapabilitySummary
+	GatewayCapabilitySummaries []types.GatewayCapabilitySummary
 
 	// The ID of the gateway device.
 	//

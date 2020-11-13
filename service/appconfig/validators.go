@@ -772,13 +772,13 @@ func validateValidator(v *types.Validator) error {
 	}
 }
 
-func validateValidatorList(v []*types.Validator) error {
+func validateValidatorList(v []types.Validator) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ValidatorList"}
 	for i := range v {
-		if err := validateValidator(v[i]); err != nil {
+		if err := validateValidator(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -835,17 +835,11 @@ func validateOpCreateDeploymentStrategyInput(v *CreateDeploymentStrategyInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDeploymentStrategyInput"}
-	if v.GrowthFactor == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GrowthFactor"))
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if len(v.ReplicateTo) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ReplicateTo"))
-	}
-	if v.DeploymentDurationInMinutes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeploymentDurationInMinutes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -970,9 +964,6 @@ func validateOpDeleteHostedConfigurationVersionInput(v *DeleteHostedConfiguratio
 	if v.ConfigurationProfileId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationProfileId"))
 	}
-	if v.VersionNumber == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VersionNumber"))
-	}
 	if v.ApplicationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
 	}
@@ -1051,9 +1042,6 @@ func validateOpGetDeploymentInput(v *GetDeploymentInput) error {
 	if v.ApplicationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
 	}
-	if v.DeploymentNumber == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeploymentNumber"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1101,9 +1089,6 @@ func validateOpGetHostedConfigurationVersionInput(v *GetHostedConfigurationVersi
 	invalidParams := smithy.InvalidParamsError{Context: "GetHostedConfigurationVersionInput"}
 	if v.ConfigurationProfileId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationProfileId"))
-	}
-	if v.VersionNumber == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VersionNumber"))
 	}
 	if v.ApplicationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
@@ -1230,9 +1215,6 @@ func validateOpStopDeploymentInput(v *StopDeploymentInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StopDeploymentInput"}
 	if v.EnvironmentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
-	}
-	if v.DeploymentNumber == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeploymentNumber"))
 	}
 	if v.ApplicationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))

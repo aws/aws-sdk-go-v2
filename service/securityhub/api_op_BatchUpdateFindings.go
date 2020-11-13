@@ -66,26 +66,26 @@ type BatchUpdateFindingsInput struct {
 	// identifier and the ARN of the finding provider.
 	//
 	// This member is required.
-	FindingIdentifiers []*types.AwsSecurityFindingIdentifier
+	FindingIdentifiers []types.AwsSecurityFindingIdentifier
 
 	// The updated value for the finding confidence. Confidence is defined as the
 	// likelihood that a finding accurately identifies the behavior or issue that it
 	// was intended to identify. Confidence is scored on a 0-100 basis using a ratio
 	// scale, where 0 means zero percent confidence and 100 means 100 percent
 	// confidence.
-	Confidence *int32
+	Confidence int32
 
 	// The updated value for the level of importance assigned to the resources
 	// associated with the findings. A score of 0 means that the underlying resources
 	// have no criticality, and a score of 100 is reserved for the most critical
 	// resources.
-	Criticality *int32
+	Criticality int32
 
 	// The updated note.
 	Note *types.NoteUpdate
 
 	// A list of findings that are related to the updated findings.
-	RelatedFindings []*types.RelatedFinding
+	RelatedFindings []types.RelatedFinding
 
 	// Used to update the finding severity.
 	Severity *types.SeverityUpdate
@@ -104,11 +104,11 @@ type BatchUpdateFindingsInput struct {
 	//
 	// * Sensitive Data
 	// Identifications
-	Types []*string
+	Types []string
 
 	// A list of name/value string pairs associated with the finding. These are custom,
 	// user-defined fields added to a finding.
-	UserDefinedFields map[string]*string
+	UserDefinedFields map[string]string
 
 	// Indicates the veracity of a finding. The available values for VerificationState
 	// are as follows.
@@ -136,12 +136,12 @@ type BatchUpdateFindingsOutput struct {
 	// The list of findings that were updated successfully.
 	//
 	// This member is required.
-	ProcessedFindings []*types.AwsSecurityFindingIdentifier
+	ProcessedFindings []types.AwsSecurityFindingIdentifier
 
 	// The list of findings that were not updated.
 	//
 	// This member is required.
-	UnprocessedFindings []*types.BatchUpdateFindingsUnprocessedFinding
+	UnprocessedFindings []types.BatchUpdateFindingsUnprocessedFinding
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

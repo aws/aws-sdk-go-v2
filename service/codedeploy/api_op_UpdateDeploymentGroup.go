@@ -51,7 +51,7 @@ type UpdateDeploymentGroupInput struct {
 	// The replacement list of Auto Scaling groups to be included in the deployment
 	// group, if you want to change them. To keep the Auto Scaling groups, enter their
 	// names. To remove Auto Scaling groups, do not enter any Auto Scaling group names.
-	AutoScalingGroups []*string
+	AutoScalingGroups []string
 
 	// Information about blue/green deployment options for a deployment group.
 	BlueGreenDeploymentConfiguration *types.BlueGreenDeploymentConfiguration
@@ -66,7 +66,7 @@ type UpdateDeploymentGroupInput struct {
 	// The replacement set of Amazon EC2 tags on which to filter, if you want to change
 	// them. To keep the existing tags, enter their names. To remove tags, do not enter
 	// any tag names.
-	Ec2TagFilters []*types.EC2TagFilter
+	Ec2TagFilters []types.EC2TagFilter
 
 	// Information about groups of tags applied to on-premises instances. The
 	// deployment group includes only EC2 instances identified by all the tag groups.
@@ -76,7 +76,7 @@ type UpdateDeploymentGroupInput struct {
 	// deployment groups that use the Amazon ECS compute platform. A target Amazon ECS
 	// service is specified as an Amazon ECS cluster and service name pair using the
 	// format :.
-	EcsServices []*types.ECSService
+	EcsServices []types.ECSService
 
 	// Information about the load balancer used in a deployment.
 	LoadBalancerInfo *types.LoadBalancerInfo
@@ -87,7 +87,7 @@ type UpdateDeploymentGroupInput struct {
 	// The replacement set of on-premises instance tags on which to filter, if you want
 	// to change them. To keep the existing tags, enter their names. To remove tags, do
 	// not enter any tag names.
-	OnPremisesInstanceTagFilters []*types.TagFilter
+	OnPremisesInstanceTagFilters []types.TagFilter
 
 	// Information about an on-premises instance tag set. The deployment group includes
 	// only on-premises instances identified by all the tag groups.
@@ -100,7 +100,7 @@ type UpdateDeploymentGroupInput struct {
 	// examples, see Edit a Trigger in a CodeDeploy Deployment Group
 	// (https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-edit.html)
 	// in the AWS CodeDeploy User Guide.
-	TriggerConfigurations []*types.TriggerConfig
+	TriggerConfigurations []types.TriggerConfig
 }
 
 // Represents the output of an UpdateDeploymentGroup operation.
@@ -111,7 +111,7 @@ type UpdateDeploymentGroupOutput struct {
 	// corresponding Auto Scaling lifecycle event hooks from the AWS account. If the
 	// output contains data, AWS CodeDeploy could not remove some Auto Scaling
 	// lifecycle event hooks from the AWS account.
-	HooksNotCleanedUp []*types.AutoScalingGroup
+	HooksNotCleanedUp []types.AutoScalingGroup
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -59,7 +59,7 @@ type ListStreamsOutput struct {
 	LastEvaluatedStreamArn *string
 
 	// A list of stream descriptors associated with the current account and endpoint.
-	Streams []*types.Stream
+	Streams []types.Stream
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

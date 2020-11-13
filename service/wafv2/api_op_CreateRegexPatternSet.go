@@ -43,7 +43,7 @@ type CreateRegexPatternSetInput struct {
 	// Array of regular expression strings.
 	//
 	// This member is required.
-	RegularExpressionList []*types.Regex
+	RegularExpressionList []types.Regex
 
 	// Specifies whether this is for an AWS CloudFront distribution or for a regional
 	// application. A regional application can be an Application Load Balancer (ALB),
@@ -65,7 +65,7 @@ type CreateRegexPatternSetInput struct {
 	Description *string
 
 	// An array of key:value pairs to associate with the resource.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateRegexPatternSetOutput struct {

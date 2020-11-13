@@ -42,12 +42,12 @@ type ResetCacheParameterGroupInput struct {
 	// ResetAllParameters is true, do not use ParameterNameValues. If
 	// ResetAllParameters is false, you must specify the name of at least one parameter
 	// to reset.
-	ParameterNameValues []*types.ParameterNameValue
+	ParameterNameValues []types.ParameterNameValue
 
 	// If true, all parameters in the cache parameter group are reset to their default
 	// values. If false, only the parameters listed by ParameterNameValues are reset to
 	// their default values. Valid values: true | false
-	ResetAllParameters *bool
+	ResetAllParameters bool
 }
 
 // Represents the output of one of the following operations:

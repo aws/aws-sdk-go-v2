@@ -129,7 +129,7 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 type ValidationException struct {
 	Message *string
 
-	Fields []*ValidationExceptionField
+	Fields []ValidationExceptionField
 	Reason ValidationExceptionReason
 }
 

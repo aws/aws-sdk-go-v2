@@ -889,13 +889,13 @@ func validateComponentConfiguration(v *types.ComponentConfiguration) error {
 	}
 }
 
-func validateComponentConfigurationList(v []*types.ComponentConfiguration) error {
+func validateComponentConfigurationList(v []types.ComponentConfiguration) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ComponentConfigurationList"}
 	for i := range v {
-		if err := validateComponentConfiguration(v[i]); err != nil {
+		if err := validateComponentConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -921,13 +921,13 @@ func validateDistribution(v *types.Distribution) error {
 	}
 }
 
-func validateDistributionList(v []*types.Distribution) error {
+func validateDistributionList(v []types.Distribution) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DistributionList"}
 	for i := range v {
-		if err := validateDistribution(v[i]); err != nil {
+		if err := validateDistribution(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

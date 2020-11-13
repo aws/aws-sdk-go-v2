@@ -45,7 +45,7 @@ type GetAggregateConfigRuleComplianceSummaryInput struct {
 	// The maximum number of evaluation results returned on each page. The default is
 	// 1000. You cannot specify a number greater than 1000. If you specify 0, AWS
 	// Config uses the default.
-	Limit *int32
+	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
@@ -55,7 +55,7 @@ type GetAggregateConfigRuleComplianceSummaryInput struct {
 type GetAggregateConfigRuleComplianceSummaryOutput struct {
 
 	// Returns a list of AggregateComplianceCounts object.
-	AggregateComplianceCounts []*types.AggregateComplianceCount
+	AggregateComplianceCounts []types.AggregateComplianceCount
 
 	// Groups the result based on ACCOUNT_ID or AWS_REGION.
 	GroupByKey *string

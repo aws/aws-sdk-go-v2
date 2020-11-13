@@ -56,7 +56,7 @@ type AddTagsToCertificateInput struct {
 	// The key-value pair that defines the tag. The tag value is optional.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type AddTagsToCertificateOutput struct {

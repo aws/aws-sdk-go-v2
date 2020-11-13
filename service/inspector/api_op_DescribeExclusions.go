@@ -32,7 +32,7 @@ type DescribeExclusionsInput struct {
 	// The list of ARNs that specify the exclusions that you want to describe.
 	//
 	// This member is required.
-	ExclusionArns []*string
+	ExclusionArns []string
 
 	// The locale into which you want to translate the exclusion's title, description,
 	// and recommendation.
@@ -44,13 +44,13 @@ type DescribeExclusionsOutput struct {
 	// Information about the exclusions.
 	//
 	// This member is required.
-	Exclusions map[string]*types.Exclusion
+	Exclusions map[string]types.Exclusion
 
 	// Exclusion details that cannot be described. An error code is provided for each
 	// failed item.
 	//
 	// This member is required.
-	FailedItems map[string]*types.FailedItemDetails
+	FailedItems map[string]types.FailedItemDetails
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

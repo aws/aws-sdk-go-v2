@@ -70,11 +70,9 @@ func awsRestjson1_serializeOpHttpBindingsCompleteSnapshotInput(v *CompleteSnapsh
 		encoder.SetHeader(locationName).Integer(*v.ChangedBlocksCount)
 	}
 
-	if v.Checksum != nil {
+	if v.Checksum != nil && len(*v.Checksum) > 0 {
 		locationName := "X-Amz-Checksum"
-		if len(*v.Checksum) > 0 {
-			encoder.SetHeader(locationName).String(*v.Checksum)
-		}
+		encoder.SetHeader(locationName).String(*v.Checksum)
 	}
 
 	if len(v.ChecksumAggregationMethod) > 0 {
@@ -87,13 +85,10 @@ func awsRestjson1_serializeOpHttpBindingsCompleteSnapshotInput(v *CompleteSnapsh
 		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
 	}
 
-	if v.SnapshotId == nil {
+	if v.SnapshotId == nil || len(*v.SnapshotId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member SnapshotId must not be empty")}
 	}
 	if v.SnapshotId != nil {
-		if len(*v.SnapshotId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member SnapshotId must not be empty")}
-		}
 		if err := encoder.SetURI("SnapshotId").String(*v.SnapshotId); err != nil {
 			return err
 		}
@@ -166,13 +161,10 @@ func awsRestjson1_serializeOpHttpBindingsGetSnapshotBlockInput(v *GetSnapshotBlo
 		encoder.SetQuery("blockToken").String(*v.BlockToken)
 	}
 
-	if v.SnapshotId == nil {
+	if v.SnapshotId == nil || len(*v.SnapshotId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member SnapshotId must not be empty")}
 	}
 	if v.SnapshotId != nil {
-		if len(*v.SnapshotId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member SnapshotId must not be empty")}
-		}
 		if err := encoder.SetURI("SnapshotId").String(*v.SnapshotId); err != nil {
 			return err
 		}
@@ -244,13 +236,10 @@ func awsRestjson1_serializeOpHttpBindingsListChangedBlocksInput(v *ListChangedBl
 		encoder.SetQuery("pageToken").String(*v.NextToken)
 	}
 
-	if v.SecondSnapshotId == nil {
+	if v.SecondSnapshotId == nil || len(*v.SecondSnapshotId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member SecondSnapshotId must not be empty")}
 	}
 	if v.SecondSnapshotId != nil {
-		if len(*v.SecondSnapshotId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member SecondSnapshotId must not be empty")}
-		}
 		if err := encoder.SetURI("SecondSnapshotId").String(*v.SecondSnapshotId); err != nil {
 			return err
 		}
@@ -322,13 +311,10 @@ func awsRestjson1_serializeOpHttpBindingsListSnapshotBlocksInput(v *ListSnapshot
 		encoder.SetQuery("pageToken").String(*v.NextToken)
 	}
 
-	if v.SnapshotId == nil {
+	if v.SnapshotId == nil || len(*v.SnapshotId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member SnapshotId must not be empty")}
 	}
 	if v.SnapshotId != nil {
-		if len(*v.SnapshotId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member SnapshotId must not be empty")}
-		}
 		if err := encoder.SetURI("SnapshotId").String(*v.SnapshotId); err != nil {
 			return err
 		}
@@ -412,11 +398,9 @@ func awsRestjson1_serializeOpHttpBindingsPutSnapshotBlockInput(v *PutSnapshotBlo
 		}
 	}
 
-	if v.Checksum != nil {
+	if v.Checksum != nil && len(*v.Checksum) > 0 {
 		locationName := "X-Amz-Checksum"
-		if len(*v.Checksum) > 0 {
-			encoder.SetHeader(locationName).String(*v.Checksum)
-		}
+		encoder.SetHeader(locationName).String(*v.Checksum)
 	}
 
 	if len(v.ChecksumAlgorithm) > 0 {
@@ -434,13 +418,10 @@ func awsRestjson1_serializeOpHttpBindingsPutSnapshotBlockInput(v *PutSnapshotBlo
 		encoder.SetHeader(locationName).Integer(*v.Progress)
 	}
 
-	if v.SnapshotId == nil {
+	if v.SnapshotId == nil || len(*v.SnapshotId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member SnapshotId must not be empty")}
 	}
 	if v.SnapshotId != nil {
-		if len(*v.SnapshotId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member SnapshotId must not be empty")}
-		}
 		if err := encoder.SetURI("SnapshotId").String(*v.SnapshotId); err != nil {
 			return err
 		}
@@ -576,17 +557,13 @@ func awsRestjson1_serializeDocumentTag(v *types.Tag, value smithyjson.Value) err
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTags(v []*types.Tag, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTags(v []types.Tag, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentTag(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
 	}

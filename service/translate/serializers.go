@@ -474,32 +474,24 @@ func awsAwsjson11_serializeDocumentOutputDataConfig(v *types.OutputDataConfig, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentResourceNameList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentResourceNameList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTargetLanguageCodeStringList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTargetLanguageCodeStringList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }

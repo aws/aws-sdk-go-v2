@@ -54,7 +54,7 @@ type ListHealthChecksOutput struct {
 	// is associated with the current AWS account.
 	//
 	// This member is required.
-	HealthChecks []*types.HealthCheck
+	HealthChecks []types.HealthCheck
 
 	// A flag that indicates whether there are more health checks to be listed. If the
 	// response was truncated, you can get the next group of health checks by
@@ -62,7 +62,7 @@ type ListHealthChecksOutput struct {
 	// NextMarker in the marker parameter.
 	//
 	// This member is required.
-	IsTruncated *bool
+	IsTruncated bool
 
 	// For the second and subsequent calls to ListHealthChecks, Marker is the value
 	// that you specified for the marker parameter in the previous request.

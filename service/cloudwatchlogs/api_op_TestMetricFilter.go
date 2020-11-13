@@ -42,13 +42,13 @@ type TestMetricFilterInput struct {
 	// The log event messages to test.
 	//
 	// This member is required.
-	LogEventMessages []*string
+	LogEventMessages []string
 }
 
 type TestMetricFilterOutput struct {
 
 	// The matched events.
-	Matches []*types.MetricFilterMatchRecord
+	Matches []types.MetricFilterMatchRecord
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

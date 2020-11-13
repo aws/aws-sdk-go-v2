@@ -32,10 +32,10 @@ type DescribePatchBaselinesInput struct {
 	// Each element in the array is a structure containing: Key: (string, "NAME_PREFIX"
 	// or "OWNER") Value: (array of strings, exactly 1 entry, between 1 and 255
 	// characters)
-	Filters []*types.PatchOrchestratorFilter
+	Filters []types.PatchOrchestratorFilter
 
 	// The maximum number of patch baselines to return (per page).
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
@@ -45,7 +45,7 @@ type DescribePatchBaselinesInput struct {
 type DescribePatchBaselinesOutput struct {
 
 	// An array of PatchBaselineIdentity elements.
-	BaselineIdentities []*types.PatchBaselineIdentity
+	BaselineIdentities []types.PatchBaselineIdentity
 
 	// The token to use when requesting the next set of items. If there are no
 	// additional items to return, the string is empty.

@@ -50,7 +50,7 @@ type CreateMitigationActionInput struct {
 	RoleArn *string
 
 	// Metadata that can be used to manage the mitigation action.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateMitigationActionOutput struct {

@@ -39,13 +39,13 @@ type ValidatePipelineDefinitionInput struct {
 	// The objects that define the pipeline changes to validate against the pipeline.
 	//
 	// This member is required.
-	PipelineObjects []*types.PipelineObject
+	PipelineObjects []types.PipelineObject
 
 	// The parameter objects used with the pipeline.
-	ParameterObjects []*types.ParameterObject
+	ParameterObjects []types.ParameterObject
 
 	// The parameter values used with the pipeline.
-	ParameterValues []*types.ParameterValue
+	ParameterValues []types.ParameterValue
 }
 
 // Contains the output of ValidatePipelineDefinition.
@@ -54,13 +54,13 @@ type ValidatePipelineDefinitionOutput struct {
 	// Indicates whether there were validation errors.
 	//
 	// This member is required.
-	Errored *bool
+	Errored bool
 
 	// Any validation errors that were found.
-	ValidationErrors []*types.ValidationError
+	ValidationErrors []types.ValidationError
 
 	// Any validation warnings that were found.
-	ValidationWarnings []*types.ValidationWarning
+	ValidationWarnings []types.ValidationWarning
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

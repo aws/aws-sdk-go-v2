@@ -36,7 +36,7 @@ func (c *Client) CreateKeysAndCertificate(ctx context.Context, params *CreateKey
 type CreateKeysAndCertificateInput struct {
 
 	// Specifies whether the certificate is active.
-	SetAsActive *bool
+	SetAsActive bool
 }
 
 // The output of the CreateKeysAndCertificate operation.

@@ -58,7 +58,7 @@ type ListTagsForResourceOutput struct {
 	// The tags for the resource.
 	//
 	// This member is required.
-	Tags []*types.TagRef
+	Tags []types.TagRef
 
 	// The nextToken value to include in a future ListTagsForResource request. When the
 	// results of a ListTagsForResource request exceed limit, you can use this value to

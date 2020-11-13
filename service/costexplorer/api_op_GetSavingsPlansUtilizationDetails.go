@@ -64,7 +64,7 @@ type GetSavingsPlansUtilizationDetailsInput struct {
 
 	// The number of items to be returned in a response. The default is 20, with a
 	// minimum value of 1.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token to retrieve the next set of results. Amazon Web Services provides the
 	// token when the response from a previous call has more results than the maximum
@@ -78,7 +78,7 @@ type GetSavingsPlansUtilizationDetailsOutput struct {
 	// for your account.
 	//
 	// This member is required.
-	SavingsPlansUtilizationDetails []*types.SavingsPlansUtilizationDetail
+	SavingsPlansUtilizationDetails []types.SavingsPlansUtilizationDetail
 
 	// The time period that you want the usage and costs for.
 	//

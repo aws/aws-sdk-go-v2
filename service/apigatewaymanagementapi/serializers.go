@@ -63,13 +63,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteConnectionInput(v *DeleteConnecti
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ConnectionId == nil {
+	if v.ConnectionId == nil || len(*v.ConnectionId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ConnectionId must not be empty")}
 	}
 	if v.ConnectionId != nil {
-		if len(*v.ConnectionId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ConnectionId must not be empty")}
-		}
 		if err := encoder.SetURI("ConnectionId").String(*v.ConnectionId); err != nil {
 			return err
 		}
@@ -129,13 +126,10 @@ func awsRestjson1_serializeOpHttpBindingsGetConnectionInput(v *GetConnectionInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ConnectionId == nil {
+	if v.ConnectionId == nil || len(*v.ConnectionId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ConnectionId must not be empty")}
 	}
 	if v.ConnectionId != nil {
-		if len(*v.ConnectionId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ConnectionId must not be empty")}
-		}
 		if err := encoder.SetURI("ConnectionId").String(*v.ConnectionId); err != nil {
 			return err
 		}
@@ -206,13 +200,10 @@ func awsRestjson1_serializeOpHttpBindingsPostToConnectionInput(v *PostToConnecti
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ConnectionId == nil {
+	if v.ConnectionId == nil || len(*v.ConnectionId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ConnectionId must not be empty")}
 	}
 	if v.ConnectionId != nil {
-		if len(*v.ConnectionId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ConnectionId must not be empty")}
-		}
 		if err := encoder.SetURI("ConnectionId").String(*v.ConnectionId); err != nil {
 			return err
 		}

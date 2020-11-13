@@ -42,14 +42,14 @@ type CreateObjectInput struct {
 	// version components. See SchemaFacet for details.
 	//
 	// This member is required.
-	SchemaFacets []*types.SchemaFacet
+	SchemaFacets []types.SchemaFacet
 
 	// The name of link that is used to attach this object to a parent.
 	LinkName *string
 
 	// The attribute map whose attribute ARN contains the key and attribute value as
 	// the map value.
-	ObjectAttributeList []*types.AttributeKeyAndValue
+	ObjectAttributeList []types.AttributeKeyAndValue
 
 	// If specified, the parent reference to which this object will be attached.
 	ParentReference *types.ObjectReference

@@ -40,7 +40,7 @@ type ListGroupsInput struct {
 type ListGroupsOutput struct {
 
 	// Information about a group.
-	Groups []*types.GroupInformation
+	Groups []types.GroupInformation
 
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.

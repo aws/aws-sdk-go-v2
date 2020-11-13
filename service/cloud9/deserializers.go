@@ -1974,7 +1974,7 @@ func awsAwsjson11_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.ClassName = &jtv
+				sv.ClassName = ptr.String(jtv)
 			}
 
 		case "code":
@@ -1987,7 +1987,7 @@ func awsAwsjson11_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				if err != nil {
 					return err
 				}
-				sv.Code = ptr.Int32(int32(i64))
+				sv.Code = int32(i64)
 			}
 
 		case "message":
@@ -1996,7 +1996,7 @@ func awsAwsjson11_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2036,7 +2036,7 @@ func awsAwsjson11_deserializeDocumentConcurrentAccessException(v **types.Concurr
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.ClassName = &jtv
+				sv.ClassName = ptr.String(jtv)
 			}
 
 		case "code":
@@ -2049,7 +2049,7 @@ func awsAwsjson11_deserializeDocumentConcurrentAccessException(v **types.Concurr
 				if err != nil {
 					return err
 				}
-				sv.Code = ptr.Int32(int32(i64))
+				sv.Code = int32(i64)
 			}
 
 		case "message":
@@ -2058,7 +2058,7 @@ func awsAwsjson11_deserializeDocumentConcurrentAccessException(v **types.Concurr
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2098,7 +2098,7 @@ func awsAwsjson11_deserializeDocumentConflictException(v **types.ConflictExcepti
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.ClassName = &jtv
+				sv.ClassName = ptr.String(jtv)
 			}
 
 		case "code":
@@ -2111,7 +2111,7 @@ func awsAwsjson11_deserializeDocumentConflictException(v **types.ConflictExcepti
 				if err != nil {
 					return err
 				}
-				sv.Code = ptr.Int32(int32(i64))
+				sv.Code = int32(i64)
 			}
 
 		case "message":
@@ -2120,7 +2120,7 @@ func awsAwsjson11_deserializeDocumentConflictException(v **types.ConflictExcepti
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2160,7 +2160,7 @@ func awsAwsjson11_deserializeDocumentEnvironment(v **types.Environment, value in
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Arn = &jtv
+				sv.Arn = ptr.String(jtv)
 			}
 
 		case "connectionType":
@@ -2178,7 +2178,7 @@ func awsAwsjson11_deserializeDocumentEnvironment(v **types.Environment, value in
 				if !ok {
 					return fmt.Errorf("expected EnvironmentDescription to be of type string, got %T instead", value)
 				}
-				sv.Description = &jtv
+				sv.Description = ptr.String(jtv)
 			}
 
 		case "id":
@@ -2187,7 +2187,7 @@ func awsAwsjson11_deserializeDocumentEnvironment(v **types.Environment, value in
 				if !ok {
 					return fmt.Errorf("expected EnvironmentId to be of type string, got %T instead", value)
 				}
-				sv.Id = &jtv
+				sv.Id = ptr.String(jtv)
 			}
 
 		case "lifecycle":
@@ -2201,7 +2201,7 @@ func awsAwsjson11_deserializeDocumentEnvironment(v **types.Environment, value in
 				if !ok {
 					return fmt.Errorf("expected EnvironmentName to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "ownerArn":
@@ -2210,7 +2210,7 @@ func awsAwsjson11_deserializeDocumentEnvironment(v **types.Environment, value in
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.OwnerArn = &jtv
+				sv.OwnerArn = ptr.String(jtv)
 			}
 
 		case "type":
@@ -2231,7 +2231,7 @@ func awsAwsjson11_deserializeDocumentEnvironment(v **types.Environment, value in
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentEnvironmentIdList(v *[]*string, value interface{}) error {
+func awsAwsjson11_deserializeDocumentEnvironmentIdList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2244,21 +2244,21 @@ func awsAwsjson11_deserializeDocumentEnvironmentIdList(v *[]*string, value inter
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*string
+	var cv []string
 	if *v == nil {
-		cv = []*string{}
+		cv = []string{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *string
+		var col string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected EnvironmentId to be of type string, got %T instead", value)
 			}
-			col = &jtv
+			col = jtv
 		}
 		cv = append(cv, col)
 
@@ -2295,7 +2295,7 @@ func awsAwsjson11_deserializeDocumentEnvironmentLifecycle(v **types.EnvironmentL
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.FailureResource = &jtv
+				sv.FailureResource = ptr.String(jtv)
 			}
 
 		case "reason":
@@ -2304,7 +2304,7 @@ func awsAwsjson11_deserializeDocumentEnvironmentLifecycle(v **types.EnvironmentL
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Reason = &jtv
+				sv.Reason = ptr.String(jtv)
 			}
 
 		case "status":
@@ -2325,7 +2325,7 @@ func awsAwsjson11_deserializeDocumentEnvironmentLifecycle(v **types.EnvironmentL
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentEnvironmentList(v *[]*types.Environment, value interface{}) error {
+func awsAwsjson11_deserializeDocumentEnvironmentList(v *[]types.Environment, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2338,18 +2338,20 @@ func awsAwsjson11_deserializeDocumentEnvironmentList(v *[]*types.Environment, va
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Environment
+	var cv []types.Environment
 	if *v == nil {
-		cv = []*types.Environment{}
+		cv = []types.Environment{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Environment
-		if err := awsAwsjson11_deserializeDocumentEnvironment(&col, value); err != nil {
+		var col types.Environment
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentEnvironment(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -2385,7 +2387,7 @@ func awsAwsjson11_deserializeDocumentEnvironmentMember(v **types.EnvironmentMemb
 				if !ok {
 					return fmt.Errorf("expected EnvironmentId to be of type string, got %T instead", value)
 				}
-				sv.EnvironmentId = &jtv
+				sv.EnvironmentId = ptr.String(jtv)
 			}
 
 		case "lastAccess":
@@ -2416,7 +2418,7 @@ func awsAwsjson11_deserializeDocumentEnvironmentMember(v **types.EnvironmentMemb
 				if !ok {
 					return fmt.Errorf("expected UserArn to be of type string, got %T instead", value)
 				}
-				sv.UserArn = &jtv
+				sv.UserArn = ptr.String(jtv)
 			}
 
 		case "userId":
@@ -2425,7 +2427,7 @@ func awsAwsjson11_deserializeDocumentEnvironmentMember(v **types.EnvironmentMemb
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.UserId = &jtv
+				sv.UserId = ptr.String(jtv)
 			}
 
 		default:
@@ -2437,7 +2439,7 @@ func awsAwsjson11_deserializeDocumentEnvironmentMember(v **types.EnvironmentMemb
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentEnvironmentMembersList(v *[]*types.EnvironmentMember, value interface{}) error {
+func awsAwsjson11_deserializeDocumentEnvironmentMembersList(v *[]types.EnvironmentMember, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2450,18 +2452,20 @@ func awsAwsjson11_deserializeDocumentEnvironmentMembersList(v *[]*types.Environm
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.EnvironmentMember
+	var cv []types.EnvironmentMember
 	if *v == nil {
-		cv = []*types.EnvironmentMember{}
+		cv = []types.EnvironmentMember{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.EnvironmentMember
-		if err := awsAwsjson11_deserializeDocumentEnvironmentMember(&col, value); err != nil {
+		var col types.EnvironmentMember
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentEnvironmentMember(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -2497,7 +2501,7 @@ func awsAwsjson11_deserializeDocumentForbiddenException(v **types.ForbiddenExcep
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.ClassName = &jtv
+				sv.ClassName = ptr.String(jtv)
 			}
 
 		case "code":
@@ -2510,7 +2514,7 @@ func awsAwsjson11_deserializeDocumentForbiddenException(v **types.ForbiddenExcep
 				if err != nil {
 					return err
 				}
-				sv.Code = ptr.Int32(int32(i64))
+				sv.Code = int32(i64)
 			}
 
 		case "message":
@@ -2519,7 +2523,7 @@ func awsAwsjson11_deserializeDocumentForbiddenException(v **types.ForbiddenExcep
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2559,7 +2563,7 @@ func awsAwsjson11_deserializeDocumentInternalServerErrorException(v **types.Inte
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.ClassName = &jtv
+				sv.ClassName = ptr.String(jtv)
 			}
 
 		case "code":
@@ -2572,7 +2576,7 @@ func awsAwsjson11_deserializeDocumentInternalServerErrorException(v **types.Inte
 				if err != nil {
 					return err
 				}
-				sv.Code = ptr.Int32(int32(i64))
+				sv.Code = int32(i64)
 			}
 
 		case "message":
@@ -2581,7 +2585,7 @@ func awsAwsjson11_deserializeDocumentInternalServerErrorException(v **types.Inte
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2621,7 +2625,7 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.ClassName = &jtv
+				sv.ClassName = ptr.String(jtv)
 			}
 
 		case "code":
@@ -2634,7 +2638,7 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				if err != nil {
 					return err
 				}
-				sv.Code = ptr.Int32(int32(i64))
+				sv.Code = int32(i64)
 			}
 
 		case "message":
@@ -2643,7 +2647,7 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2683,7 +2687,7 @@ func awsAwsjson11_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.ClassName = &jtv
+				sv.ClassName = ptr.String(jtv)
 			}
 
 		case "code":
@@ -2696,7 +2700,7 @@ func awsAwsjson11_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 				if err != nil {
 					return err
 				}
-				sv.Code = ptr.Int32(int32(i64))
+				sv.Code = int32(i64)
 			}
 
 		case "message":
@@ -2705,7 +2709,7 @@ func awsAwsjson11_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2745,7 +2749,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected TagKey to be of type string, got %T instead", value)
 				}
-				sv.Key = &jtv
+				sv.Key = ptr.String(jtv)
 			}
 
 		case "Value":
@@ -2754,7 +2758,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected TagValue to be of type string, got %T instead", value)
 				}
-				sv.Value = &jtv
+				sv.Value = ptr.String(jtv)
 			}
 
 		default:
@@ -2766,7 +2770,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentTagList(v *[]*types.Tag, value interface{}) error {
+func awsAwsjson11_deserializeDocumentTagList(v *[]types.Tag, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2779,18 +2783,20 @@ func awsAwsjson11_deserializeDocumentTagList(v *[]*types.Tag, value interface{})
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Tag
+	var cv []types.Tag
 	if *v == nil {
-		cv = []*types.Tag{}
+		cv = []types.Tag{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Tag
-		if err := awsAwsjson11_deserializeDocumentTag(&col, value); err != nil {
+		var col types.Tag
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentTag(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -2826,7 +2832,7 @@ func awsAwsjson11_deserializeDocumentTooManyRequestsException(v **types.TooManyR
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.ClassName = &jtv
+				sv.ClassName = ptr.String(jtv)
 			}
 
 		case "code":
@@ -2839,7 +2845,7 @@ func awsAwsjson11_deserializeDocumentTooManyRequestsException(v **types.TooManyR
 				if err != nil {
 					return err
 				}
-				sv.Code = ptr.Int32(int32(i64))
+				sv.Code = int32(i64)
 			}
 
 		case "message":
@@ -2848,7 +2854,7 @@ func awsAwsjson11_deserializeDocumentTooManyRequestsException(v **types.TooManyR
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2888,7 +2894,7 @@ func awsAwsjson11_deserializeOpDocumentCreateEnvironmentEC2Output(v **CreateEnvi
 				if !ok {
 					return fmt.Errorf("expected EnvironmentId to be of type string, got %T instead", value)
 				}
-				sv.EnvironmentId = &jtv
+				sv.EnvironmentId = ptr.String(jtv)
 			}
 
 		default:
@@ -3031,7 +3037,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeEnvironmentMembershipsOutput(v **
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -3107,7 +3113,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeEnvironmentStatusOutput(v **Descr
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		case "status":
@@ -3161,7 +3167,7 @@ func awsAwsjson11_deserializeOpDocumentListEnvironmentsOutput(v **ListEnvironmen
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:

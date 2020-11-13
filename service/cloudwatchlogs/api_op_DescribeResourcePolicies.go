@@ -43,7 +43,7 @@ type DescribeResourcePoliciesOutput struct {
 	NextToken *string
 
 	// The resource policies that exist in this account.
-	ResourcePolicies []*types.ResourcePolicy
+	ResourcePolicies []types.ResourcePolicy
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

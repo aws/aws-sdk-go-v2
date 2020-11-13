@@ -35,11 +35,11 @@ type DeleteOTAUpdateInput struct {
 
 	// Specifies if the stream associated with an OTA update should be deleted when the
 	// OTA update is deleted.
-	DeleteStream *bool
+	DeleteStream bool
 
 	// Specifies if the AWS Job associated with the OTA update should be deleted when
 	// the OTA update is deleted.
-	ForceDeleteAWSJob *bool
+	ForceDeleteAWSJob bool
 }
 
 type DeleteOTAUpdateOutput struct {

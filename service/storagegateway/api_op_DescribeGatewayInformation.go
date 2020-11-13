@@ -74,7 +74,7 @@ type DescribeGatewayInformationOutput struct {
 
 	// A NetworkInterface array that contains descriptions of the gateway network
 	// interfaces.
-	GatewayNetworkInterfaces []*types.NetworkInterface
+	GatewayNetworkInterfaces []types.NetworkInterface
 
 	// A value that indicates the operating state of the gateway.
 	GatewayState *string
@@ -105,7 +105,7 @@ type DescribeGatewayInformationOutput struct {
 	// A list of up to 50 tags assigned to the gateway, sorted alphabetically by key
 	// name. Each tag is a key-value pair. For a gateway with more than 10 tags
 	// assigned, you can view all tags using the ListTagsForResource API operation.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The configuration settings for the virtual private cloud (VPC) endpoint for your
 	// gateway.

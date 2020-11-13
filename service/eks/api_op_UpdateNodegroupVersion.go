@@ -67,7 +67,7 @@ type UpdateNodegroupVersionInput struct {
 	// to a pod disruption budget issue. If an update fails because pods could not be
 	// drained, you can force the update after it fails to terminate the old node
 	// whether or not any pods are running on the node.
-	Force *bool
+	Force bool
 
 	// An object representing a node group's launch template specification. You can
 	// only update a node group using a launch template if the node group was

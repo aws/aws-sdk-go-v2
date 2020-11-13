@@ -717,13 +717,13 @@ func validateAction(v *types.Action) error {
 	}
 }
 
-func validateActions(v []*types.Action) error {
+func validateActions(v []types.Action) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Actions"}
 	for i := range v {
-		if err := validateAction(v[i]); err != nil {
+		if err := validateAction(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -827,13 +827,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagList(v []*types.Tag) error {
+func validateTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -859,13 +859,13 @@ func validateTargetDescription(v *types.TargetDescription) error {
 	}
 }
 
-func validateTargetDescriptions(v []*types.TargetDescription) error {
+func validateTargetDescriptions(v []types.TargetDescription) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TargetDescriptions"}
 	for i := range v {
-		if err := validateTargetDescription(v[i]); err != nil {
+		if err := validateTargetDescription(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

@@ -58,7 +58,7 @@ func (c *Client) StartConfigRulesEvaluation(ctx context.Context, params *StartCo
 type StartConfigRulesEvaluationInput struct {
 
 	// The list of names of AWS Config rules that you want to run evaluations for.
-	ConfigRuleNames []*string
+	ConfigRuleNames []string
 }
 
 // The output when you start the evaluation for the specified AWS Config rule.

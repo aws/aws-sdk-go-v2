@@ -46,7 +46,7 @@ type ListTypedLinkFacetNamesInput struct {
 type ListTypedLinkFacetNamesOutput struct {
 
 	// The names of typed link facets that exist within the schema.
-	FacetNames []*string
+	FacetNames []string
 
 	// The pagination token.
 	NextToken *string

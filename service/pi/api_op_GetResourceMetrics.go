@@ -53,7 +53,7 @@ type GetResourceMetricsInput struct {
 	// filtering criteria.
 	//
 	// This member is required.
-	MetricQueries []*types.MetricQuery
+	MetricQueries []types.MetricQuery
 
 	// The AWS service for which Performance Insights will return metrics. The only
 	// valid value for ServiceType is: RDS
@@ -120,7 +120,7 @@ type GetResourceMetricsOutput struct {
 
 	// An array of metric results,, where each array element contains all of the data
 	// points for a particular dimension.
-	MetricList []*types.MetricKeyDataPoints
+	MetricList []types.MetricKeyDataPoints
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the token, up to the

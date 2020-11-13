@@ -32,7 +32,7 @@ type Filter struct {
 	Name *string
 
 	// Filter values. Filter values are case-sensitive.
-	Values []*string
+	Values []string
 }
 
 // An inventory filter.
@@ -64,7 +64,7 @@ type LicenseConfiguration struct {
 	AutomatedDiscoveryInformation *AutomatedDiscoveryInformation
 
 	// Summaries for licenses consumed by various resources.
-	ConsumedLicenseSummaryList []*ConsumedLicenseSummary
+	ConsumedLicenseSummaryList []ConsumedLicenseSummary
 
 	// Number of licenses consumed.
 	ConsumedLicenses *int64
@@ -88,10 +88,10 @@ type LicenseConfiguration struct {
 	LicenseCountingType LicenseCountingType
 
 	// License rules.
-	LicenseRules []*string
+	LicenseRules []string
 
 	// Summaries for managed resources.
-	ManagedResourceSummaryList []*ManagedResourceSummary
+	ManagedResourceSummaryList []ManagedResourceSummary
 
 	// Name of the license configuration.
 	Name *string
@@ -100,7 +100,7 @@ type LicenseConfiguration struct {
 	OwnerAccountId *string
 
 	// Product information.
-	ProductInformationList []*ProductInformation
+	ProductInformationList []ProductInformation
 
 	// Status of the license configuration.
 	Status *string
@@ -154,7 +154,7 @@ type LicenseOperationFailure struct {
 	FailureTime *time.Time
 
 	// Reserved.
-	MetadataList []*Metadata
+	MetadataList []Metadata
 
 	// Name of the operation.
 	OperationName *string
@@ -207,7 +207,7 @@ type OrganizationConfiguration struct {
 	// Enables AWS Organization integration.
 	//
 	// This member is required.
-	EnableIntegration *bool
+	EnableIntegration bool
 }
 
 // Describes product information for a license configuration.
@@ -248,7 +248,7 @@ type ProductInformation struct {
 	// tuning pack sqlt | ols | olap.
 	//
 	// This member is required.
-	ProductInformationFilterList []*ProductInformationFilter
+	ProductInformationFilterList []ProductInformationFilter
 
 	// Resource type. The possible values are SSM_MANAGED | RDS.
 	//
@@ -272,7 +272,7 @@ type ProductInformationFilter struct {
 	// Filter value.
 	//
 	// This member is required.
-	ProductInformationFilterValue []*string
+	ProductInformationFilterValue []string
 }
 
 // Details about a resource.

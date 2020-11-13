@@ -66,7 +66,7 @@ type ListVPCAssociationAuthorizationsOutput struct {
 	// zone.
 	//
 	// This member is required.
-	VPCs []*types.VPC
+	VPCs []types.VPC
 
 	// When the response includes a NextToken element, there are more VPCs that can be
 	// associated with the specified hosted zone. To get the next page of VPCs, submit

@@ -33,7 +33,7 @@ type DescribeResourceGroupsInput struct {
 	// The ARN that specifies the resource group that you want to describe.
 	//
 	// This member is required.
-	ResourceGroupArns []*string
+	ResourceGroupArns []string
 }
 
 type DescribeResourceGroupsOutput struct {
@@ -42,12 +42,12 @@ type DescribeResourceGroupsOutput struct {
 	// each failed item.
 	//
 	// This member is required.
-	FailedItems map[string]*types.FailedItemDetails
+	FailedItems map[string]types.FailedItemDetails
 
 	// Information about a resource group.
 	//
 	// This member is required.
-	ResourceGroups []*types.ResourceGroup
+	ResourceGroups []types.ResourceGroup
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

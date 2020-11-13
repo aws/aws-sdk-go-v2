@@ -1204,17 +1204,13 @@ func awsAwsjson11_serializeDocumentApp(v *types.App, value smithyjson.Value) err
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAppsList(v []*types.App, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentAppsList(v []types.App, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentApp(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentApp(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1267,29 +1263,24 @@ func awsAwsjson11_serializeDocumentAppsListData(v *types.AppsListData, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCustomerPolicyScopeIdList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentCustomerPolicyScopeIdList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCustomerPolicyScopeMap(v map[string][]*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentCustomerPolicyScopeMap(v map[string][]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
 		if vv := v[key]; vv == nil {
-			om.Null()
 			continue
 		}
 		if err := awsAwsjson11_serializeDocumentCustomerPolicyScopeIdList(v[key], om); err != nil {
@@ -1310,9 +1301,9 @@ func awsAwsjson11_serializeDocumentPolicy(v *types.Policy, value smithyjson.Valu
 		}
 	}
 
-	if v.ExcludeResourceTags != nil {
+	if v.ExcludeResourceTags {
 		ok := object.Key("ExcludeResourceTags")
-		ok.Boolean(*v.ExcludeResourceTags)
+		ok.Boolean(v.ExcludeResourceTags)
 	}
 
 	if v.IncludeMap != nil {
@@ -1337,9 +1328,9 @@ func awsAwsjson11_serializeDocumentPolicy(v *types.Policy, value smithyjson.Valu
 		ok.String(*v.PolicyUpdateToken)
 	}
 
-	if v.RemediationEnabled != nil {
+	if v.RemediationEnabled {
 		ok := object.Key("RemediationEnabled")
-		ok.Boolean(*v.RemediationEnabled)
+		ok.Boolean(v.RemediationEnabled)
 	}
 
 	if v.ResourceTags != nil {
@@ -1371,14 +1362,13 @@ func awsAwsjson11_serializeDocumentPolicy(v *types.Policy, value smithyjson.Valu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPreviousAppsList(v map[string][]*types.App, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentPreviousAppsList(v map[string][]types.App, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
 		if vv := v[key]; vv == nil {
-			om.Null()
 			continue
 		}
 		if err := awsAwsjson11_serializeDocumentAppsList(v[key], om); err != nil {
@@ -1388,14 +1378,13 @@ func awsAwsjson11_serializeDocumentPreviousAppsList(v map[string][]*types.App, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPreviousProtocolsList(v map[string][]*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentPreviousProtocolsList(v map[string][]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
 		if vv := v[key]; vv == nil {
-			om.Null()
 			continue
 		}
 		if err := awsAwsjson11_serializeDocumentProtocolsList(v[key], om); err != nil {
@@ -1405,17 +1394,13 @@ func awsAwsjson11_serializeDocumentPreviousProtocolsList(v map[string][]*string,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentProtocolsList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentProtocolsList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1483,34 +1468,26 @@ func awsAwsjson11_serializeDocumentResourceTag(v *types.ResourceTag, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentResourceTags(v []*types.ResourceTag, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentResourceTags(v []types.ResourceTag, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentResourceTag(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentResourceTag(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentResourceTypeList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentResourceTypeList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1549,32 +1526,24 @@ func awsAwsjson11_serializeDocumentTag(v *types.Tag, value smithyjson.Value) err
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagKeyList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagKeyList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagList(v []*types.Tag, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagList(v []types.Tag, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentTag(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1616,9 +1585,9 @@ func awsAwsjson11_serializeOpDocumentDeletePolicyInput(v *DeletePolicyInput, val
 	object := value.Object()
 	defer object.Close()
 
-	if v.DeleteAllPolicyResources != nil {
+	if v.DeleteAllPolicyResources {
 		ok := object.Key("DeleteAllPolicyResources")
-		ok.Boolean(*v.DeleteAllPolicyResources)
+		ok.Boolean(v.DeleteAllPolicyResources)
 	}
 
 	if v.PolicyId != nil {
@@ -1659,9 +1628,9 @@ func awsAwsjson11_serializeOpDocumentGetAppsListInput(v *GetAppsListInput, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.DefaultList != nil {
+	if v.DefaultList {
 		ok := object.Key("DefaultList")
-		ok.Boolean(*v.DefaultList)
+		ok.Boolean(v.DefaultList)
 	}
 
 	if v.ListId != nil {
@@ -1749,9 +1718,9 @@ func awsAwsjson11_serializeOpDocumentGetProtocolsListInput(v *GetProtocolsListIn
 	object := value.Object()
 	defer object.Close()
 
-	if v.DefaultList != nil {
+	if v.DefaultList {
 		ok := object.Key("DefaultList")
-		ok.Boolean(*v.DefaultList)
+		ok.Boolean(v.DefaultList)
 	}
 
 	if v.ListId != nil {
@@ -1793,9 +1762,9 @@ func awsAwsjson11_serializeOpDocumentListAppsListsInput(v *ListAppsListsInput, v
 	object := value.Object()
 	defer object.Close()
 
-	if v.DefaultLists != nil {
+	if v.DefaultLists {
 		ok := object.Key("DefaultLists")
-		ok.Boolean(*v.DefaultLists)
+		ok.Boolean(v.DefaultLists)
 	}
 
 	if v.MaxResults != nil {
@@ -1871,9 +1840,9 @@ func awsAwsjson11_serializeOpDocumentListProtocolsListsInput(v *ListProtocolsLis
 	object := value.Object()
 	defer object.Close()
 
-	if v.DefaultLists != nil {
+	if v.DefaultLists {
 		ok := object.Key("DefaultLists")
-		ok.Boolean(*v.DefaultLists)
+		ok.Boolean(v.DefaultLists)
 	}
 
 	if v.MaxResults != nil {

@@ -37,7 +37,7 @@ type ListThreatIntelSetsInput struct {
 
 	// You can use this parameter to indicate the maximum number of items that you want
 	// in the response. The default value is 50. The maximum value is 50.
-	MaxResults *int32
+	MaxResults int32
 
 	// You can use this parameter to paginate results in the response. Set the value of
 	// this parameter to null on your first call to the list action. For subsequent
@@ -51,7 +51,7 @@ type ListThreatIntelSetsOutput struct {
 	// The IDs of the ThreatIntelSet resources.
 	//
 	// This member is required.
-	ThreatIntelSetIds []*string
+	ThreatIntelSetIds []string
 
 	// The pagination parameter to be used on the next list operation to retrieve more
 	// items.

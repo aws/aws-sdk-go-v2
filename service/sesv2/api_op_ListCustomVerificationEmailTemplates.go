@@ -52,7 +52,7 @@ type ListCustomVerificationEmailTemplatesInput struct {
 type ListCustomVerificationEmailTemplatesOutput struct {
 
 	// A list of the custom verification email templates that exist in your account.
-	CustomVerificationEmailTemplates []*types.CustomVerificationEmailTemplateMetadata
+	CustomVerificationEmailTemplates []types.CustomVerificationEmailTemplateMetadata
 
 	// A token indicating that there are additional custom verification email templates
 	// available to be listed. Pass this token to a subsequent call to

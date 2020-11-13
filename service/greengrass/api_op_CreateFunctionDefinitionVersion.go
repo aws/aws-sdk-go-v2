@@ -43,7 +43,7 @@ type CreateFunctionDefinitionVersionInput struct {
 	DefaultConfig *types.FunctionDefaultConfig
 
 	// A list of Lambda functions in this function definition version.
-	Functions []*types.Function
+	Functions []types.Function
 }
 
 type CreateFunctionDefinitionVersionOutput struct {

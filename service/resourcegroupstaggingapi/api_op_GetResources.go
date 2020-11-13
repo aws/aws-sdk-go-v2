@@ -86,7 +86,7 @@ type GetResourcesInput struct {
 	// can specify multiple resource types by using an array. The array can include up
 	// to 100 items. Note that the length constraint requirement applies to each
 	// resource type filter.
-	ResourceTypeFilters []*string
+	ResourceTypeFilters []string
 
 	// A limit that restricts the number of resources returned by GetResources in
 	// paginated output. You can set ResourcesPerPage to a minimum of 1 item and the
@@ -132,7 +132,7 @@ type GetResourcesInput struct {
 	// * GetResources( {filter1,filter2,filter3} ) returns
 	// resources tagged with ( key1=value1) and ( key2=value2 or key2=value3 or
 	// key2=value4) and (key3, irrespective of the value)
-	TagFilters []*types.TagFilter
+	TagFilters []types.TagFilter
 
 	// AWS recommends using ResourcesPerPage instead of this parameter. A limit that
 	// restricts the number of tags (key and value pairs) returned by GetResources in
@@ -158,7 +158,7 @@ type GetResourcesOutput struct {
 	PaginationToken *string
 
 	// A list of resource ARNs and the tags (keys and values) associated with each.
-	ResourceTagMappingList []*types.ResourceTagMapping
+	ResourceTagMappingList []types.ResourceTagMapping
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

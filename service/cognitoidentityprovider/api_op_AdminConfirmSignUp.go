@@ -65,7 +65,7 @@ type AdminConfirmSignUpInput struct {
 	//
 	// * Amazon Cognito does not encrypt the the ClientMetadata value, so don't
 	// use it to provide sensitive information.
-	ClientMetadata map[string]*string
+	ClientMetadata map[string]string
 }
 
 // Represents the response from the server for the request to confirm registration.

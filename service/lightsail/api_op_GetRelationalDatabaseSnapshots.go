@@ -46,7 +46,7 @@ type GetRelationalDatabaseSnapshotsOutput struct {
 
 	// An object describing the result of your get relational database snapshots
 	// request.
-	RelationalDatabaseSnapshots []*types.RelationalDatabaseSnapshot
+	RelationalDatabaseSnapshots []types.RelationalDatabaseSnapshot
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

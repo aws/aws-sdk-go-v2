@@ -68,7 +68,7 @@ type DescribeEventsInput struct {
 type DescribeEventsOutput struct {
 
 	// An array of events. Each element in the array represents one event.
-	Events []*types.Event
+	Events []types.Event
 
 	// Provides an identifier to allow retrieval of paginated results.
 	NextToken *string

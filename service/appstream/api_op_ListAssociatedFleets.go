@@ -41,7 +41,7 @@ type ListAssociatedFleetsInput struct {
 type ListAssociatedFleetsOutput struct {
 
 	// The name of the fleet.
-	Names []*string
+	Names []string
 
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If there are no more pages, this value is null.

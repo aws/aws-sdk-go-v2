@@ -141,7 +141,7 @@ type BatchGetItemInput struct {
 	// in the Amazon DynamoDB Developer Guide.
 	//
 	// This member is required.
-	RequestItems map[string]*types.KeysAndAttributes
+	RequestItems map[string]types.KeysAndAttributes
 
 	// Determines the level of detail about provisioned throughput consumption that is
 	// returned in the response:
@@ -171,12 +171,12 @@ type BatchGetItemOutput struct {
 	// throughput.
 	//
 	// * CapacityUnits - The total number of capacity units consumed.
-	ConsumedCapacity []*types.ConsumedCapacity
+	ConsumedCapacity []types.ConsumedCapacity
 
 	// A map of table name to a list of items. Each object in Responses consists of a
 	// table name, along with a map of attribute data consisting of the data type and
 	// attribute value.
-	Responses map[string][]map[string]*types.AttributeValue
+	Responses map[string][]map[string]types.AttributeValue
 
 	// A map of tables and their respective keys that were not processed with the
 	// current response. The UnprocessedKeys value is in the same form as RequestItems,
@@ -198,7 +198,7 @@ type BatchGetItemOutput struct {
 	//
 	// If there are no unprocessed keys remaining, the response contains
 	// an empty UnprocessedKeys map.
-	UnprocessedKeys map[string]*types.KeysAndAttributes
+	UnprocessedKeys map[string]types.KeysAndAttributes
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

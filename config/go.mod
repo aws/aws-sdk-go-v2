@@ -3,7 +3,7 @@ module github.com/aws/aws-sdk-go-v2/config
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go-v2 v0.29.1-0.20201112231730-2d786000ccee
+	github.com/aws/aws-sdk-go-v2 v0.29.1-0.20201113222241-726e4a15683d
 	github.com/aws/aws-sdk-go-v2/credentials v0.1.4
 	github.com/aws/aws-sdk-go-v2/ec2imds v0.1.4
 	github.com/aws/aws-sdk-go-v2/service/sts v0.29.0

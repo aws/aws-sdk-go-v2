@@ -36,13 +36,13 @@ type TagProjectInput struct {
 	// The tags you want to add to the project.
 	//
 	// This member is required.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type TagProjectOutput struct {
 
 	// The tags for the project.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

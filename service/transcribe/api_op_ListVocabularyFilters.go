@@ -55,7 +55,7 @@ type ListVocabularyFiltersOutput struct {
 	// filters. If there are more filters, call the ListVocabularyFilters operation
 	// again with the NextToken parameter in the request set to the value of the
 	// NextToken field in the response.
-	VocabularyFilters []*types.VocabularyFilterInfo
+	VocabularyFilters []types.VocabularyFilterInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

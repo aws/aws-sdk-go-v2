@@ -49,7 +49,7 @@ type CreateBudgetInput struct {
 	// five notifications, and each notification can have one SNS subscriber and up to
 	// 10 email subscribers. If you include notifications and subscribers in your
 	// CreateBudget call, AWS creates the notifications and subscribers for you.
-	NotificationsWithSubscribers []*types.NotificationWithSubscribers
+	NotificationsWithSubscribers []types.NotificationWithSubscribers
 }
 
 // Response of CreateBudget

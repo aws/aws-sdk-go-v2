@@ -40,7 +40,7 @@ type ListInstancesInput struct {
 type ListInstancesOutput struct {
 
 	// Lists the SSO instances that the caller has access to.
-	Instances []*types.InstanceMetadata
+	Instances []types.InstanceMetadata
 
 	// The pagination token for the list API. Initially the value is null. Use the
 	// output of previous API calls to make subsequent calls.

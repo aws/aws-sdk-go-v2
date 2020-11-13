@@ -78,7 +78,7 @@ type GetMergeConflictsOutput struct {
 	// FAST_FORWARD_MERGE, this list is always empty.
 	//
 	// This member is required.
-	ConflictMetadataList []*types.ConflictMetadata
+	ConflictMetadataList []types.ConflictMetadata
 
 	// The commit ID of the destination commit specifier that was used in the merge
 	// evaluation.
@@ -90,7 +90,7 @@ type GetMergeConflictsOutput struct {
 	// merge option.
 	//
 	// This member is required.
-	Mergeable *bool
+	Mergeable bool
 
 	// The commit ID of the source commit specifier that was used in the merge
 	// evaluation.

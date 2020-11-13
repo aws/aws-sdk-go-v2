@@ -50,7 +50,7 @@ type ListSolutionVersionsOutput struct {
 	NextToken *string
 
 	// A list of solution versions describing the version properties.
-	SolutionVersions []*types.SolutionVersionSummary
+	SolutionVersions []types.SolutionVersionSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

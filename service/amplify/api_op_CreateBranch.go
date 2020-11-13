@@ -75,7 +75,7 @@ type CreateBranchInput struct {
 	EnablePullRequestPreview *bool
 
 	// The environment variables for the branch.
-	EnvironmentVariables map[string]*string
+	EnvironmentVariables map[string]string
 
 	// The framework for the branch.
 	Framework *string
@@ -87,7 +87,7 @@ type CreateBranchInput struct {
 	Stage types.Stage
 
 	// The tag for the branch.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The content Time To Live (TTL) for the website in seconds.
 	Ttl *string

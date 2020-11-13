@@ -54,16 +54,16 @@ type ExecuteStatementInput struct {
 	// DDL statements, we recommend continuing to run the statement after the call
 	// times out. When a DDL statement terminates before it is finished running, it can
 	// result in errors and possibly corrupted data structures.
-	ContinueAfterTimeout *bool
+	ContinueAfterTimeout bool
 
 	// The name of the database.
 	Database *string
 
 	// A value that indicates whether to include metadata in the results.
-	IncludeResultMetadata *bool
+	IncludeResultMetadata bool
 
 	// The parameters for the SQL statement. Array parameters are not supported.
-	Parameters []*types.SqlParameter
+	Parameters []types.SqlParameter
 
 	// Options that control how the result set is returned.
 	ResultSetOptions *types.ResultSetOptions
@@ -84,7 +84,7 @@ type ExecuteStatementInput struct {
 type ExecuteStatementOutput struct {
 
 	// Metadata for the columns included in the results.
-	ColumnMetadata []*types.ColumnMetadata
+	ColumnMetadata []types.ColumnMetadata
 
 	// Values for fields generated during the request. The generatedFields data isn't
 	// supported by Aurora PostgreSQL. To get the values of generated fields, use the
@@ -94,7 +94,7 @@ type ExecuteStatementOutput struct {
 	GeneratedFields []types.Field
 
 	// The number of records updated by the request.
-	NumberOfRecordsUpdated *int64
+	NumberOfRecordsUpdated int64
 
 	// The records returned by the SQL statement.
 	Records [][]types.Field

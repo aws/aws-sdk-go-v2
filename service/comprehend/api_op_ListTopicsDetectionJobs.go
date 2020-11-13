@@ -47,7 +47,7 @@ type ListTopicsDetectionJobsOutput struct {
 	NextToken *string
 
 	// A list containing the properties of each job that is returned.
-	TopicsDetectionJobPropertiesList []*types.TopicsDetectionJobProperties
+	TopicsDetectionJobPropertiesList []types.TopicsDetectionJobProperties
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

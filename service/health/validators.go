@@ -184,13 +184,13 @@ func validateEventAccountFilter(v *types.EventAccountFilter) error {
 	}
 }
 
-func validateOrganizationEntityFiltersList(v []*types.EventAccountFilter) error {
+func validateOrganizationEntityFiltersList(v []types.EventAccountFilter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "OrganizationEntityFiltersList"}
 	for i := range v {
-		if err := validateEventAccountFilter(v[i]); err != nil {
+		if err := validateEventAccountFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -201,13 +201,13 @@ func validateOrganizationEntityFiltersList(v []*types.EventAccountFilter) error 
 	}
 }
 
-func validateOrganizationEventDetailFiltersList(v []*types.EventAccountFilter) error {
+func validateOrganizationEventDetailFiltersList(v []types.EventAccountFilter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "OrganizationEventDetailFiltersList"}
 	for i := range v {
-		if err := validateEventAccountFilter(v[i]); err != nil {
+		if err := validateEventAccountFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

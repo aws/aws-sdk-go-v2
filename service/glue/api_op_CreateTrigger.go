@@ -32,7 +32,7 @@ type CreateTriggerInput struct {
 	// The actions initiated by this trigger when it fires.
 	//
 	// This member is required.
-	Actions []*types.Action
+	Actions []types.Action
 
 	// The name of the trigger.
 	//
@@ -60,13 +60,13 @@ type CreateTriggerInput struct {
 
 	// Set to true to start SCHEDULED and CONDITIONAL triggers when created. True is
 	// not supported for ON_DEMAND triggers.
-	StartOnCreation *bool
+	StartOnCreation bool
 
 	// The tags to use with this trigger. You may use tags to limit access to the
 	// trigger. For more information about tags in AWS Glue, see AWS Tags in AWS Glue
 	// (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the developer
 	// guide.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The name of the workflow associated with the trigger.
 	WorkflowName *string

@@ -57,7 +57,7 @@ type GetRecordsOutput struct {
 
 	// The stream records from the shard, which were retrieved using the shard
 	// iterator.
-	Records []*types.Record
+	Records []types.Record
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

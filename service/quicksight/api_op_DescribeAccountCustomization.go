@@ -90,7 +90,7 @@ type DescribeAccountCustomizationInput struct {
 	// use the same view that QuickSight uses to identify which customizations to apply
 	// to the console. Omit this flag, or set it to no-resolved, to reveal
 	// customizations that are configured at different levels.
-	Resolved *bool
+	Resolved bool
 }
 
 type DescribeAccountCustomizationOutput struct {
@@ -112,7 +112,7 @@ type DescribeAccountCustomizationOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

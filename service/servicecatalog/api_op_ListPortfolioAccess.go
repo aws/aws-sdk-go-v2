@@ -50,7 +50,7 @@ type ListPortfolioAccessInput struct {
 	OrganizationParentId *string
 
 	// The maximum number of items to return with this call.
-	PageSize *int32
+	PageSize int32
 
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
@@ -60,7 +60,7 @@ type ListPortfolioAccessInput struct {
 type ListPortfolioAccessOutput struct {
 
 	// Information about the AWS accounts with access to the portfolio.
-	AccountIds []*string
+	AccountIds []string
 
 	// The page token to use to retrieve the next set of results. If there are no
 	// additional results, this value is null.

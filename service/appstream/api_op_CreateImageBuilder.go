@@ -122,7 +122,7 @@ type CreateImageBuilderInput struct {
 
 	// The list of interface VPC endpoint (interface endpoint) objects. Administrators
 	// can connect to the image builder only through the specified endpoints.
-	AccessEndpoints []*types.AccessEndpoint
+	AccessEndpoints []types.AccessEndpoint
 
 	// The version of the AppStream 2.0 agent to use for this image builder. To use the
 	// latest version of the AppStream 2.0 agent, specify [LATEST].
@@ -167,7 +167,7 @@ type CreateImageBuilderInput struct {
 	// information about tags, see Tagging Your Resources
 	// (https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html)
 	// in the Amazon AppStream 2.0 Administration Guide.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The VPC configuration for the image builder. You can specify only one subnet.
 	VpcConfig *types.VpcConfig

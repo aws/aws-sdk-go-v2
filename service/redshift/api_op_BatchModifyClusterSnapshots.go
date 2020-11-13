@@ -32,11 +32,11 @@ type BatchModifyClusterSnapshotsInput struct {
 	// A list of snapshot identifiers you want to modify.
 	//
 	// This member is required.
-	SnapshotIdentifierList []*string
+	SnapshotIdentifierList []string
 
 	// A boolean value indicating whether to override an exception if the retention
 	// period has passed.
-	Force *bool
+	Force bool
 
 	// The number of days that a manual snapshot is retained. If you specify the value
 	// -1, the manual snapshot is retained indefinitely. The number must be either -1
@@ -50,10 +50,10 @@ type BatchModifyClusterSnapshotsInput struct {
 type BatchModifyClusterSnapshotsOutput struct {
 
 	// A list of any errors returned.
-	Errors []*types.SnapshotErrorMessage
+	Errors []types.SnapshotErrorMessage
 
 	// A list of the snapshots that were modified.
-	Resources []*string
+	Resources []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -49,7 +49,7 @@ type ListSamplesOutput struct {
 	NextToken *string
 
 	// Information about the samples.
-	Samples []*types.Sample
+	Samples []types.Sample
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -32,7 +32,7 @@ type UpdateObjectAttributesInput struct {
 	// The attributes update structure.
 	//
 	// This member is required.
-	AttributeUpdates []*types.ObjectAttributeUpdate
+	AttributeUpdates []types.ObjectAttributeUpdate
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory where the
 	// object resides. For more information, see arns.

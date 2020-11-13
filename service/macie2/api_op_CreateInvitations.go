@@ -33,13 +33,13 @@ type CreateInvitationsInput struct {
 	// to.
 	//
 	// This member is required.
-	AccountIds []*string
+	AccountIds []string
 
 	// Specifies whether to send an email notification to the root user of each account
 	// that the invitation will be sent to. This notification is in addition to an
 	// alert that the root user receives in AWS Personal Health Dashboard. To send an
 	// email notification to the root user of each account, set this value to true.
-	DisableEmailNotification *bool
+	DisableEmailNotification bool
 
 	// A custom message to include in the invitation. Amazon Macie adds this message to
 	// the standard content that it sends for an invitation.
@@ -51,7 +51,7 @@ type CreateInvitationsOutput struct {
 	// An array of objects, one for each account whose invitation hasn't been
 	// processed. Each object identifies the account and explains why the invitation
 	// hasn't been processed for the account.
-	UnprocessedAccounts []*types.UnprocessedAccount
+	UnprocessedAccounts []types.UnprocessedAccount
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -96,7 +96,7 @@ type DescribeMergeConflictsOutput struct {
 	// A list of merge hunks of the differences between the files or lines.
 	//
 	// This member is required.
-	MergeHunks []*types.MergeHunk
+	MergeHunks []types.MergeHunk
 
 	// The commit ID of the source commit specifier that was used in the merge
 	// evaluation.

@@ -62,7 +62,7 @@ type ListOrganizationPortfolioAccessInput struct {
 	AcceptLanguage *string
 
 	// The maximum number of items to return with this call.
-	PageSize *int32
+	PageSize int32
 
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
@@ -76,7 +76,7 @@ type ListOrganizationPortfolioAccessOutput struct {
 	NextPageToken *string
 
 	// Displays information about the organization nodes.
-	OrganizationNodes []*types.OrganizationNode
+	OrganizationNodes []types.OrganizationNode
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

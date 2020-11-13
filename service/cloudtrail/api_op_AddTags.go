@@ -44,7 +44,7 @@ type AddTagsInput struct {
 	ResourceId *string
 
 	// Contains a list of CloudTrail tags, up to a limit of 50
-	TagsList []*types.Tag
+	TagsList []types.Tag
 }
 
 // Returns the objects or data listed below if successful. Otherwise, returns an

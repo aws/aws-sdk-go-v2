@@ -1316,7 +1316,7 @@ func awsRestjson1_deserializeOpDocumentDescribeEndpointsOutput(v **DescribeEndpo
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -2233,7 +2233,7 @@ func awsRestjson1_deserializeOpDocumentListJobsOutput(v **ListJobsOutput, value 
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -2404,7 +2404,7 @@ func awsRestjson1_deserializeOpDocumentListJobTemplatesOutput(v **ListJobTemplat
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -2570,7 +2570,7 @@ func awsRestjson1_deserializeOpDocumentListPresetsOutput(v **ListPresetsOutput, 
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "presets":
@@ -2741,7 +2741,7 @@ func awsRestjson1_deserializeOpDocumentListQueuesOutput(v **ListQueuesOutput, va
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "queues":
@@ -3818,7 +3818,7 @@ func awsRestjson1_deserializeErrorTooManyRequestsException(response *smithyhttp.
 	return output
 }
 
-func awsRestjson1_deserializeDocument__listOf__integerMin1Max2147483647(v *[]*int32, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOf__integerMin1Max2147483647(v *[]int32, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3831,15 +3831,15 @@ func awsRestjson1_deserializeDocument__listOf__integerMin1Max2147483647(v *[]*in
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*int32
+	var cv []int32
 	if *v == nil {
-		cv = []*int32{}
+		cv = []int32{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *int32
+		var col int32
 		if value != nil {
 			jtv, ok := value.(json.Number)
 			if !ok {
@@ -3849,7 +3849,7 @@ func awsRestjson1_deserializeDocument__listOf__integerMin1Max2147483647(v *[]*in
 			if err != nil {
 				return err
 			}
-			col = ptr.Int32(int32(i64))
+			col = int32(i64)
 		}
 		cv = append(cv, col)
 
@@ -3858,7 +3858,7 @@ func awsRestjson1_deserializeDocument__listOf__integerMin1Max2147483647(v *[]*in
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__listOf__integerMin32Max8182(v *[]*int32, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOf__integerMin32Max8182(v *[]int32, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3871,15 +3871,15 @@ func awsRestjson1_deserializeDocument__listOf__integerMin32Max8182(v *[]*int32, 
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*int32
+	var cv []int32
 	if *v == nil {
-		cv = []*int32{}
+		cv = []int32{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *int32
+		var col int32
 		if value != nil {
 			jtv, ok := value.(json.Number)
 			if !ok {
@@ -3889,7 +3889,7 @@ func awsRestjson1_deserializeDocument__listOf__integerMin32Max8182(v *[]*int32, 
 			if err != nil {
 				return err
 			}
-			col = ptr.Int32(int32(i64))
+			col = int32(i64)
 		}
 		cv = append(cv, col)
 
@@ -3898,7 +3898,7 @@ func awsRestjson1_deserializeDocument__listOf__integerMin32Max8182(v *[]*int32, 
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__listOf__integerMinNegative60Max6(v *[]*int32, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOf__integerMinNegative60Max6(v *[]int32, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3911,15 +3911,15 @@ func awsRestjson1_deserializeDocument__listOf__integerMinNegative60Max6(v *[]*in
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*int32
+	var cv []int32
 	if *v == nil {
-		cv = []*int32{}
+		cv = []int32{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *int32
+		var col int32
 		if value != nil {
 			jtv, ok := value.(json.Number)
 			if !ok {
@@ -3929,7 +3929,7 @@ func awsRestjson1_deserializeDocument__listOf__integerMinNegative60Max6(v *[]*in
 			if err != nil {
 				return err
 			}
-			col = ptr.Int32(int32(i64))
+			col = int32(i64)
 		}
 		cv = append(cv, col)
 
@@ -3938,7 +3938,7 @@ func awsRestjson1_deserializeDocument__listOf__integerMinNegative60Max6(v *[]*in
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__listOf__string(v *[]*string, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOf__string(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3951,21 +3951,21 @@ func awsRestjson1_deserializeDocument__listOf__string(v *[]*string, value interf
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*string
+	var cv []string
 	if *v == nil {
-		cv = []*string{}
+		cv = []string{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *string
+		var col string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 			}
-			col = &jtv
+			col = jtv
 		}
 		cv = append(cv, col)
 
@@ -3974,7 +3974,7 @@ func awsRestjson1_deserializeDocument__listOf__string(v *[]*string, value interf
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__listOf__stringMin1(v *[]*string, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOf__stringMin1(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3987,21 +3987,21 @@ func awsRestjson1_deserializeDocument__listOf__stringMin1(v *[]*string, value in
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*string
+	var cv []string
 	if *v == nil {
-		cv = []*string{}
+		cv = []string{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *string
+		var col string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected __stringMin1 to be of type string, got %T instead", value)
 			}
-			col = &jtv
+			col = jtv
 		}
 		cv = append(cv, col)
 
@@ -4010,7 +4010,7 @@ func awsRestjson1_deserializeDocument__listOf__stringMin1(v *[]*string, value in
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__listOf__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12(v *[]*string, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOf__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4023,21 +4023,21 @@ func awsRestjson1_deserializeDocument__listOf__stringMin36Max36Pattern09aFAF809a
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*string
+	var cv []string
 	if *v == nil {
-		cv = []*string{}
+		cv = []string{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *string
+		var col string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected __stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12 to be of type string, got %T instead", value)
 			}
-			col = &jtv
+			col = jtv
 		}
 		cv = append(cv, col)
 
@@ -4046,7 +4046,7 @@ func awsRestjson1_deserializeDocument__listOf__stringMin36Max36Pattern09aFAF809a
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__listOf__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12(v *[]*string, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOf__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4059,21 +4059,21 @@ func awsRestjson1_deserializeDocument__listOf__stringPattern09aFAF809aFAF409aFAF
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*string
+	var cv []string
 	if *v == nil {
-		cv = []*string{}
+		cv = []string{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *string
+		var col string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected __stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12 to be of type string, got %T instead", value)
 			}
-			col = &jtv
+			col = jtv
 		}
 		cv = append(cv, col)
 
@@ -4082,7 +4082,7 @@ func awsRestjson1_deserializeDocument__listOf__stringPattern09aFAF809aFAF409aFAF
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__listOf__stringPatternS3ASSETMAPXml(v *[]*string, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOf__stringPatternS3ASSETMAPXml(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4095,21 +4095,21 @@ func awsRestjson1_deserializeDocument__listOf__stringPatternS3ASSETMAPXml(v *[]*
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*string
+	var cv []string
 	if *v == nil {
-		cv = []*string{}
+		cv = []string{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *string
+		var col string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected __stringPatternS3ASSETMAPXml to be of type string, got %T instead", value)
 			}
-			col = &jtv
+			col = jtv
 		}
 		cv = append(cv, col)
 
@@ -4118,7 +4118,7 @@ func awsRestjson1_deserializeDocument__listOf__stringPatternS3ASSETMAPXml(v *[]*
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__listOfAudioDescription(v *[]*types.AudioDescription, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOfAudioDescription(v *[]types.AudioDescription, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4131,18 +4131,20 @@ func awsRestjson1_deserializeDocument__listOfAudioDescription(v *[]*types.AudioD
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.AudioDescription
+	var cv []types.AudioDescription
 	if *v == nil {
-		cv = []*types.AudioDescription{}
+		cv = []types.AudioDescription{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.AudioDescription
-		if err := awsRestjson1_deserializeDocumentAudioDescription(&col, value); err != nil {
+		var col types.AudioDescription
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAudioDescription(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4150,7 +4152,7 @@ func awsRestjson1_deserializeDocument__listOfAudioDescription(v *[]*types.AudioD
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__listOfCaptionDescription(v *[]*types.CaptionDescription, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOfCaptionDescription(v *[]types.CaptionDescription, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4163,18 +4165,20 @@ func awsRestjson1_deserializeDocument__listOfCaptionDescription(v *[]*types.Capt
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.CaptionDescription
+	var cv []types.CaptionDescription
 	if *v == nil {
-		cv = []*types.CaptionDescription{}
+		cv = []types.CaptionDescription{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.CaptionDescription
-		if err := awsRestjson1_deserializeDocumentCaptionDescription(&col, value); err != nil {
+		var col types.CaptionDescription
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentCaptionDescription(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4182,7 +4186,7 @@ func awsRestjson1_deserializeDocument__listOfCaptionDescription(v *[]*types.Capt
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__listOfCaptionDescriptionPreset(v *[]*types.CaptionDescriptionPreset, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOfCaptionDescriptionPreset(v *[]types.CaptionDescriptionPreset, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4195,18 +4199,20 @@ func awsRestjson1_deserializeDocument__listOfCaptionDescriptionPreset(v *[]*type
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.CaptionDescriptionPreset
+	var cv []types.CaptionDescriptionPreset
 	if *v == nil {
-		cv = []*types.CaptionDescriptionPreset{}
+		cv = []types.CaptionDescriptionPreset{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.CaptionDescriptionPreset
-		if err := awsRestjson1_deserializeDocumentCaptionDescriptionPreset(&col, value); err != nil {
+		var col types.CaptionDescriptionPreset
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentCaptionDescriptionPreset(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4214,7 +4220,7 @@ func awsRestjson1_deserializeDocument__listOfCaptionDescriptionPreset(v *[]*type
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__listOfCmafAdditionalManifest(v *[]*types.CmafAdditionalManifest, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOfCmafAdditionalManifest(v *[]types.CmafAdditionalManifest, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4227,18 +4233,20 @@ func awsRestjson1_deserializeDocument__listOfCmafAdditionalManifest(v *[]*types.
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.CmafAdditionalManifest
+	var cv []types.CmafAdditionalManifest
 	if *v == nil {
-		cv = []*types.CmafAdditionalManifest{}
+		cv = []types.CmafAdditionalManifest{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.CmafAdditionalManifest
-		if err := awsRestjson1_deserializeDocumentCmafAdditionalManifest(&col, value); err != nil {
+		var col types.CmafAdditionalManifest
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentCmafAdditionalManifest(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4246,7 +4254,7 @@ func awsRestjson1_deserializeDocument__listOfCmafAdditionalManifest(v *[]*types.
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__listOfDashAdditionalManifest(v *[]*types.DashAdditionalManifest, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOfDashAdditionalManifest(v *[]types.DashAdditionalManifest, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4259,18 +4267,20 @@ func awsRestjson1_deserializeDocument__listOfDashAdditionalManifest(v *[]*types.
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.DashAdditionalManifest
+	var cv []types.DashAdditionalManifest
 	if *v == nil {
-		cv = []*types.DashAdditionalManifest{}
+		cv = []types.DashAdditionalManifest{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.DashAdditionalManifest
-		if err := awsRestjson1_deserializeDocumentDashAdditionalManifest(&col, value); err != nil {
+		var col types.DashAdditionalManifest
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentDashAdditionalManifest(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4278,7 +4288,7 @@ func awsRestjson1_deserializeDocument__listOfDashAdditionalManifest(v *[]*types.
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__listOfEndpoint(v *[]*types.Endpoint, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOfEndpoint(v *[]types.Endpoint, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4291,18 +4301,20 @@ func awsRestjson1_deserializeDocument__listOfEndpoint(v *[]*types.Endpoint, valu
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Endpoint
+	var cv []types.Endpoint
 	if *v == nil {
-		cv = []*types.Endpoint{}
+		cv = []types.Endpoint{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Endpoint
-		if err := awsRestjson1_deserializeDocumentEndpoint(&col, value); err != nil {
+		var col types.Endpoint
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentEndpoint(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4310,7 +4322,7 @@ func awsRestjson1_deserializeDocument__listOfEndpoint(v *[]*types.Endpoint, valu
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__listOfHlsAdditionalManifest(v *[]*types.HlsAdditionalManifest, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOfHlsAdditionalManifest(v *[]types.HlsAdditionalManifest, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4323,18 +4335,20 @@ func awsRestjson1_deserializeDocument__listOfHlsAdditionalManifest(v *[]*types.H
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.HlsAdditionalManifest
+	var cv []types.HlsAdditionalManifest
 	if *v == nil {
-		cv = []*types.HlsAdditionalManifest{}
+		cv = []types.HlsAdditionalManifest{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.HlsAdditionalManifest
-		if err := awsRestjson1_deserializeDocumentHlsAdditionalManifest(&col, value); err != nil {
+		var col types.HlsAdditionalManifest
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentHlsAdditionalManifest(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4378,7 +4392,7 @@ func awsRestjson1_deserializeDocument__listOfHlsAdMarkers(v *[]types.HlsAdMarker
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__listOfHlsCaptionLanguageMapping(v *[]*types.HlsCaptionLanguageMapping, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOfHlsCaptionLanguageMapping(v *[]types.HlsCaptionLanguageMapping, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4391,18 +4405,20 @@ func awsRestjson1_deserializeDocument__listOfHlsCaptionLanguageMapping(v *[]*typ
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.HlsCaptionLanguageMapping
+	var cv []types.HlsCaptionLanguageMapping
 	if *v == nil {
-		cv = []*types.HlsCaptionLanguageMapping{}
+		cv = []types.HlsCaptionLanguageMapping{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.HlsCaptionLanguageMapping
-		if err := awsRestjson1_deserializeDocumentHlsCaptionLanguageMapping(&col, value); err != nil {
+		var col types.HlsCaptionLanguageMapping
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentHlsCaptionLanguageMapping(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4410,7 +4426,7 @@ func awsRestjson1_deserializeDocument__listOfHlsCaptionLanguageMapping(v *[]*typ
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__listOfHopDestination(v *[]*types.HopDestination, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOfHopDestination(v *[]types.HopDestination, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4423,18 +4439,20 @@ func awsRestjson1_deserializeDocument__listOfHopDestination(v *[]*types.HopDesti
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.HopDestination
+	var cv []types.HopDestination
 	if *v == nil {
-		cv = []*types.HopDestination{}
+		cv = []types.HopDestination{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.HopDestination
-		if err := awsRestjson1_deserializeDocumentHopDestination(&col, value); err != nil {
+		var col types.HopDestination
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentHopDestination(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4442,7 +4460,7 @@ func awsRestjson1_deserializeDocument__listOfHopDestination(v *[]*types.HopDesti
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__listOfId3Insertion(v *[]*types.Id3Insertion, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOfId3Insertion(v *[]types.Id3Insertion, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4455,18 +4473,20 @@ func awsRestjson1_deserializeDocument__listOfId3Insertion(v *[]*types.Id3Inserti
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Id3Insertion
+	var cv []types.Id3Insertion
 	if *v == nil {
-		cv = []*types.Id3Insertion{}
+		cv = []types.Id3Insertion{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Id3Insertion
-		if err := awsRestjson1_deserializeDocumentId3Insertion(&col, value); err != nil {
+		var col types.Id3Insertion
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentId3Insertion(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4474,7 +4494,7 @@ func awsRestjson1_deserializeDocument__listOfId3Insertion(v *[]*types.Id3Inserti
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__listOfInput(v *[]*types.Input, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOfInput(v *[]types.Input, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4487,18 +4507,20 @@ func awsRestjson1_deserializeDocument__listOfInput(v *[]*types.Input, value inte
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Input
+	var cv []types.Input
 	if *v == nil {
-		cv = []*types.Input{}
+		cv = []types.Input{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Input
-		if err := awsRestjson1_deserializeDocumentInput(&col, value); err != nil {
+		var col types.Input
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentInput(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4506,7 +4528,7 @@ func awsRestjson1_deserializeDocument__listOfInput(v *[]*types.Input, value inte
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__listOfInputClipping(v *[]*types.InputClipping, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOfInputClipping(v *[]types.InputClipping, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4519,18 +4541,20 @@ func awsRestjson1_deserializeDocument__listOfInputClipping(v *[]*types.InputClip
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.InputClipping
+	var cv []types.InputClipping
 	if *v == nil {
-		cv = []*types.InputClipping{}
+		cv = []types.InputClipping{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.InputClipping
-		if err := awsRestjson1_deserializeDocumentInputClipping(&col, value); err != nil {
+		var col types.InputClipping
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentInputClipping(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4538,7 +4562,7 @@ func awsRestjson1_deserializeDocument__listOfInputClipping(v *[]*types.InputClip
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__listOfInputTemplate(v *[]*types.InputTemplate, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOfInputTemplate(v *[]types.InputTemplate, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4551,18 +4575,20 @@ func awsRestjson1_deserializeDocument__listOfInputTemplate(v *[]*types.InputTemp
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.InputTemplate
+	var cv []types.InputTemplate
 	if *v == nil {
-		cv = []*types.InputTemplate{}
+		cv = []types.InputTemplate{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.InputTemplate
-		if err := awsRestjson1_deserializeDocumentInputTemplate(&col, value); err != nil {
+		var col types.InputTemplate
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentInputTemplate(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4570,7 +4596,7 @@ func awsRestjson1_deserializeDocument__listOfInputTemplate(v *[]*types.InputTemp
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__listOfInsertableImage(v *[]*types.InsertableImage, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOfInsertableImage(v *[]types.InsertableImage, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4583,18 +4609,20 @@ func awsRestjson1_deserializeDocument__listOfInsertableImage(v *[]*types.Inserta
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.InsertableImage
+	var cv []types.InsertableImage
 	if *v == nil {
-		cv = []*types.InsertableImage{}
+		cv = []types.InsertableImage{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.InsertableImage
-		if err := awsRestjson1_deserializeDocumentInsertableImage(&col, value); err != nil {
+		var col types.InsertableImage
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentInsertableImage(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4602,7 +4630,7 @@ func awsRestjson1_deserializeDocument__listOfInsertableImage(v *[]*types.Inserta
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__listOfJob(v *[]*types.Job, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOfJob(v *[]types.Job, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4615,18 +4643,20 @@ func awsRestjson1_deserializeDocument__listOfJob(v *[]*types.Job, value interfac
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Job
+	var cv []types.Job
 	if *v == nil {
-		cv = []*types.Job{}
+		cv = []types.Job{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Job
-		if err := awsRestjson1_deserializeDocumentJob(&col, value); err != nil {
+		var col types.Job
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentJob(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4634,7 +4664,7 @@ func awsRestjson1_deserializeDocument__listOfJob(v *[]*types.Job, value interfac
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__listOfJobTemplate(v *[]*types.JobTemplate, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOfJobTemplate(v *[]types.JobTemplate, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4647,18 +4677,20 @@ func awsRestjson1_deserializeDocument__listOfJobTemplate(v *[]*types.JobTemplate
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.JobTemplate
+	var cv []types.JobTemplate
 	if *v == nil {
-		cv = []*types.JobTemplate{}
+		cv = []types.JobTemplate{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.JobTemplate
-		if err := awsRestjson1_deserializeDocumentJobTemplate(&col, value); err != nil {
+		var col types.JobTemplate
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentJobTemplate(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4666,7 +4698,7 @@ func awsRestjson1_deserializeDocument__listOfJobTemplate(v *[]*types.JobTemplate
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__listOfMsSmoothAdditionalManifest(v *[]*types.MsSmoothAdditionalManifest, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOfMsSmoothAdditionalManifest(v *[]types.MsSmoothAdditionalManifest, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4679,18 +4711,20 @@ func awsRestjson1_deserializeDocument__listOfMsSmoothAdditionalManifest(v *[]*ty
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.MsSmoothAdditionalManifest
+	var cv []types.MsSmoothAdditionalManifest
 	if *v == nil {
-		cv = []*types.MsSmoothAdditionalManifest{}
+		cv = []types.MsSmoothAdditionalManifest{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.MsSmoothAdditionalManifest
-		if err := awsRestjson1_deserializeDocumentMsSmoothAdditionalManifest(&col, value); err != nil {
+		var col types.MsSmoothAdditionalManifest
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentMsSmoothAdditionalManifest(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4698,7 +4732,7 @@ func awsRestjson1_deserializeDocument__listOfMsSmoothAdditionalManifest(v *[]*ty
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__listOfOutput(v *[]*types.Output, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOfOutput(v *[]types.Output, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4711,18 +4745,20 @@ func awsRestjson1_deserializeDocument__listOfOutput(v *[]*types.Output, value in
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Output
+	var cv []types.Output
 	if *v == nil {
-		cv = []*types.Output{}
+		cv = []types.Output{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Output
-		if err := awsRestjson1_deserializeDocumentOutput(&col, value); err != nil {
+		var col types.Output
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentOutput(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4730,7 +4766,7 @@ func awsRestjson1_deserializeDocument__listOfOutput(v *[]*types.Output, value in
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__listOfOutputChannelMapping(v *[]*types.OutputChannelMapping, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOfOutputChannelMapping(v *[]types.OutputChannelMapping, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4743,18 +4779,20 @@ func awsRestjson1_deserializeDocument__listOfOutputChannelMapping(v *[]*types.Ou
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.OutputChannelMapping
+	var cv []types.OutputChannelMapping
 	if *v == nil {
-		cv = []*types.OutputChannelMapping{}
+		cv = []types.OutputChannelMapping{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.OutputChannelMapping
-		if err := awsRestjson1_deserializeDocumentOutputChannelMapping(&col, value); err != nil {
+		var col types.OutputChannelMapping
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentOutputChannelMapping(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4762,7 +4800,7 @@ func awsRestjson1_deserializeDocument__listOfOutputChannelMapping(v *[]*types.Ou
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__listOfOutputDetail(v *[]*types.OutputDetail, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOfOutputDetail(v *[]types.OutputDetail, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4775,18 +4813,20 @@ func awsRestjson1_deserializeDocument__listOfOutputDetail(v *[]*types.OutputDeta
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.OutputDetail
+	var cv []types.OutputDetail
 	if *v == nil {
-		cv = []*types.OutputDetail{}
+		cv = []types.OutputDetail{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.OutputDetail
-		if err := awsRestjson1_deserializeDocumentOutputDetail(&col, value); err != nil {
+		var col types.OutputDetail
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentOutputDetail(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4794,7 +4834,7 @@ func awsRestjson1_deserializeDocument__listOfOutputDetail(v *[]*types.OutputDeta
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__listOfOutputGroup(v *[]*types.OutputGroup, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOfOutputGroup(v *[]types.OutputGroup, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4807,18 +4847,20 @@ func awsRestjson1_deserializeDocument__listOfOutputGroup(v *[]*types.OutputGroup
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.OutputGroup
+	var cv []types.OutputGroup
 	if *v == nil {
-		cv = []*types.OutputGroup{}
+		cv = []types.OutputGroup{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.OutputGroup
-		if err := awsRestjson1_deserializeDocumentOutputGroup(&col, value); err != nil {
+		var col types.OutputGroup
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentOutputGroup(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4826,7 +4868,7 @@ func awsRestjson1_deserializeDocument__listOfOutputGroup(v *[]*types.OutputGroup
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__listOfOutputGroupDetail(v *[]*types.OutputGroupDetail, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOfOutputGroupDetail(v *[]types.OutputGroupDetail, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4839,18 +4881,20 @@ func awsRestjson1_deserializeDocument__listOfOutputGroupDetail(v *[]*types.Outpu
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.OutputGroupDetail
+	var cv []types.OutputGroupDetail
 	if *v == nil {
-		cv = []*types.OutputGroupDetail{}
+		cv = []types.OutputGroupDetail{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.OutputGroupDetail
-		if err := awsRestjson1_deserializeDocumentOutputGroupDetail(&col, value); err != nil {
+		var col types.OutputGroupDetail
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentOutputGroupDetail(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4858,7 +4902,7 @@ func awsRestjson1_deserializeDocument__listOfOutputGroupDetail(v *[]*types.Outpu
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__listOfPreset(v *[]*types.Preset, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOfPreset(v *[]types.Preset, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4871,18 +4915,20 @@ func awsRestjson1_deserializeDocument__listOfPreset(v *[]*types.Preset, value in
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Preset
+	var cv []types.Preset
 	if *v == nil {
-		cv = []*types.Preset{}
+		cv = []types.Preset{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Preset
-		if err := awsRestjson1_deserializeDocumentPreset(&col, value); err != nil {
+		var col types.Preset
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentPreset(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4890,7 +4936,7 @@ func awsRestjson1_deserializeDocument__listOfPreset(v *[]*types.Preset, value in
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__listOfQueue(v *[]*types.Queue, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOfQueue(v *[]types.Queue, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4903,18 +4949,20 @@ func awsRestjson1_deserializeDocument__listOfQueue(v *[]*types.Queue, value inte
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Queue
+	var cv []types.Queue
 	if *v == nil {
-		cv = []*types.Queue{}
+		cv = []types.Queue{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Queue
-		if err := awsRestjson1_deserializeDocumentQueue(&col, value); err != nil {
+		var col types.Queue
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentQueue(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4922,7 +4970,7 @@ func awsRestjson1_deserializeDocument__listOfQueue(v *[]*types.Queue, value inte
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__listOfQueueTransition(v *[]*types.QueueTransition, value interface{}) error {
+func awsRestjson1_deserializeDocument__listOfQueueTransition(v *[]types.QueueTransition, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4935,18 +4983,20 @@ func awsRestjson1_deserializeDocument__listOfQueueTransition(v *[]*types.QueueTr
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.QueueTransition
+	var cv []types.QueueTransition
 	if *v == nil {
-		cv = []*types.QueueTransition{}
+		cv = []types.QueueTransition{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.QueueTransition
-		if err := awsRestjson1_deserializeDocumentQueueTransition(&col, value); err != nil {
+		var col types.QueueTransition
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentQueueTransition(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -4990,7 +5040,7 @@ func awsRestjson1_deserializeDocument__listOfTeletextPageType(v *[]types.Teletex
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__mapOf__string(v *map[string]*string, value interface{}) error {
+func awsRestjson1_deserializeDocument__mapOf__string(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5003,21 +5053,21 @@ func awsRestjson1_deserializeDocument__mapOf__string(v *map[string]*string, valu
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var mv map[string]*string
+	var mv map[string]string
 	if *v == nil {
-		mv = map[string]*string{}
+		mv = map[string]string{}
 	} else {
 		mv = *v
 	}
 
 	for key, value := range shape {
-		var parsedVal *string
+		var parsedVal string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 			}
-			parsedVal = &jtv
+			parsedVal = jtv
 		}
 		mv[key] = parsedVal
 
@@ -5026,7 +5076,7 @@ func awsRestjson1_deserializeDocument__mapOf__string(v *map[string]*string, valu
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__mapOfAudioSelector(v *map[string]*types.AudioSelector, value interface{}) error {
+func awsRestjson1_deserializeDocument__mapOfAudioSelector(v *map[string]types.AudioSelector, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5039,18 +5089,21 @@ func awsRestjson1_deserializeDocument__mapOfAudioSelector(v *map[string]*types.A
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var mv map[string]*types.AudioSelector
+	var mv map[string]types.AudioSelector
 	if *v == nil {
-		mv = map[string]*types.AudioSelector{}
+		mv = map[string]types.AudioSelector{}
 	} else {
 		mv = *v
 	}
 
 	for key, value := range shape {
-		var parsedVal *types.AudioSelector
-		if err := awsRestjson1_deserializeDocumentAudioSelector(&parsedVal, value); err != nil {
+		var parsedVal types.AudioSelector
+		mapVar := parsedVal
+		destAddr := &mapVar
+		if err := awsRestjson1_deserializeDocumentAudioSelector(&destAddr, value); err != nil {
 			return err
 		}
+		parsedVal = *destAddr
 		mv[key] = parsedVal
 
 	}
@@ -5058,7 +5111,7 @@ func awsRestjson1_deserializeDocument__mapOfAudioSelector(v *map[string]*types.A
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__mapOfAudioSelectorGroup(v *map[string]*types.AudioSelectorGroup, value interface{}) error {
+func awsRestjson1_deserializeDocument__mapOfAudioSelectorGroup(v *map[string]types.AudioSelectorGroup, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5071,18 +5124,21 @@ func awsRestjson1_deserializeDocument__mapOfAudioSelectorGroup(v *map[string]*ty
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var mv map[string]*types.AudioSelectorGroup
+	var mv map[string]types.AudioSelectorGroup
 	if *v == nil {
-		mv = map[string]*types.AudioSelectorGroup{}
+		mv = map[string]types.AudioSelectorGroup{}
 	} else {
 		mv = *v
 	}
 
 	for key, value := range shape {
-		var parsedVal *types.AudioSelectorGroup
-		if err := awsRestjson1_deserializeDocumentAudioSelectorGroup(&parsedVal, value); err != nil {
+		var parsedVal types.AudioSelectorGroup
+		mapVar := parsedVal
+		destAddr := &mapVar
+		if err := awsRestjson1_deserializeDocumentAudioSelectorGroup(&destAddr, value); err != nil {
 			return err
 		}
+		parsedVal = *destAddr
 		mv[key] = parsedVal
 
 	}
@@ -5090,7 +5146,7 @@ func awsRestjson1_deserializeDocument__mapOfAudioSelectorGroup(v *map[string]*ty
 	return nil
 }
 
-func awsRestjson1_deserializeDocument__mapOfCaptionSelector(v *map[string]*types.CaptionSelector, value interface{}) error {
+func awsRestjson1_deserializeDocument__mapOfCaptionSelector(v *map[string]types.CaptionSelector, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5103,18 +5159,21 @@ func awsRestjson1_deserializeDocument__mapOfCaptionSelector(v *map[string]*types
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var mv map[string]*types.CaptionSelector
+	var mv map[string]types.CaptionSelector
 	if *v == nil {
-		mv = map[string]*types.CaptionSelector{}
+		mv = map[string]types.CaptionSelector{}
 	} else {
 		mv = *v
 	}
 
 	for key, value := range shape {
-		var parsedVal *types.CaptionSelector
-		if err := awsRestjson1_deserializeDocumentCaptionSelector(&parsedVal, value); err != nil {
+		var parsedVal types.CaptionSelector
+		mapVar := parsedVal
+		destAddr := &mapVar
+		if err := awsRestjson1_deserializeDocumentCaptionSelector(&destAddr, value); err != nil {
 			return err
 		}
+		parsedVal = *destAddr
 		mv[key] = parsedVal
 
 	}
@@ -5163,7 +5222,7 @@ func awsRestjson1_deserializeDocumentAacSettings(v **types.AacSettings, value in
 				if err != nil {
 					return err
 				}
-				sv.Bitrate = ptr.Int32(int32(i64))
+				sv.Bitrate = int32(i64)
 			}
 
 		case "codecProfile":
@@ -5212,7 +5271,7 @@ func awsRestjson1_deserializeDocumentAacSettings(v **types.AacSettings, value in
 				if err != nil {
 					return err
 				}
-				sv.SampleRate = ptr.Int32(int32(i64))
+				sv.SampleRate = int32(i64)
 			}
 
 		case "specification":
@@ -5274,7 +5333,7 @@ func awsRestjson1_deserializeDocumentAc3Settings(v **types.Ac3Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.Bitrate = ptr.Int32(int32(i64))
+				sv.Bitrate = int32(i64)
 			}
 
 		case "bitstreamMode":
@@ -5305,7 +5364,7 @@ func awsRestjson1_deserializeDocumentAc3Settings(v **types.Ac3Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.Dialnorm = ptr.Int32(int32(i64))
+				sv.Dialnorm = int32(i64)
 			}
 
 		case "dynamicRangeCompressionProfile":
@@ -5345,7 +5404,7 @@ func awsRestjson1_deserializeDocumentAc3Settings(v **types.Ac3Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.SampleRate = ptr.Int32(int32(i64))
+				sv.SampleRate = int32(i64)
 			}
 
 		default:
@@ -5429,7 +5488,7 @@ func awsRestjson1_deserializeDocumentAiffSettings(v **types.AiffSettings, value 
 				if err != nil {
 					return err
 				}
-				sv.BitDepth = ptr.Int32(int32(i64))
+				sv.BitDepth = int32(i64)
 			}
 
 		case "channels":
@@ -5442,7 +5501,7 @@ func awsRestjson1_deserializeDocumentAiffSettings(v **types.AiffSettings, value 
 				if err != nil {
 					return err
 				}
-				sv.Channels = ptr.Int32(int32(i64))
+				sv.Channels = int32(i64)
 			}
 
 		case "sampleRate":
@@ -5455,7 +5514,7 @@ func awsRestjson1_deserializeDocumentAiffSettings(v **types.AiffSettings, value 
 				if err != nil {
 					return err
 				}
-				sv.SampleRate = ptr.Int32(int32(i64))
+				sv.SampleRate = int32(i64)
 			}
 
 		default:
@@ -5508,7 +5567,7 @@ func awsRestjson1_deserializeDocumentAncillarySourceSettings(v **types.Ancillary
 				if err != nil {
 					return err
 				}
-				sv.SourceAncillaryChannelNumber = ptr.Int32(int32(i64))
+				sv.SourceAncillaryChannelNumber = int32(i64)
 			}
 
 		case "terminateCaptions":
@@ -5697,7 +5756,7 @@ func awsRestjson1_deserializeDocumentAudioDescription(v **types.AudioDescription
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.AudioSourceName = &jtv
+				sv.AudioSourceName = ptr.String(jtv)
 			}
 
 		case "audioType":
@@ -5710,7 +5769,7 @@ func awsRestjson1_deserializeDocumentAudioDescription(v **types.AudioDescription
 				if err != nil {
 					return err
 				}
-				sv.AudioType = ptr.Int32(int32(i64))
+				sv.AudioType = int32(i64)
 			}
 
 		case "audioTypeControl":
@@ -5733,7 +5792,7 @@ func awsRestjson1_deserializeDocumentAudioDescription(v **types.AudioDescription
 				if !ok {
 					return fmt.Errorf("expected __stringPatternAZaZ23AZaZ to be of type string, got %T instead", value)
 				}
-				sv.CustomLanguageCode = &jtv
+				sv.CustomLanguageCode = ptr.String(jtv)
 			}
 
 		case "languageCode":
@@ -5765,7 +5824,7 @@ func awsRestjson1_deserializeDocumentAudioDescription(v **types.AudioDescription
 				if !ok {
 					return fmt.Errorf("expected __stringPatternWS to be of type string, got %T instead", value)
 				}
-				sv.StreamName = &jtv
+				sv.StreamName = ptr.String(jtv)
 			}
 
 		default:
@@ -5827,7 +5886,7 @@ func awsRestjson1_deserializeDocumentAudioNormalizationSettings(v **types.AudioN
 				if err != nil {
 					return err
 				}
-				sv.CorrectionGateLevel = ptr.Int32(int32(i64))
+				sv.CorrectionGateLevel = int32(i64)
 			}
 
 		case "loudnessLogging":
@@ -5858,7 +5917,7 @@ func awsRestjson1_deserializeDocumentAudioNormalizationSettings(v **types.AudioN
 				if err != nil {
 					return err
 				}
-				sv.TargetLkfs = &f64
+				sv.TargetLkfs = f64
 			}
 
 		default:
@@ -5898,7 +5957,7 @@ func awsRestjson1_deserializeDocumentAudioSelector(v **types.AudioSelector, valu
 				if !ok {
 					return fmt.Errorf("expected __stringMin3Max3PatternAZaZ3 to be of type string, got %T instead", value)
 				}
-				sv.CustomLanguageCode = &jtv
+				sv.CustomLanguageCode = ptr.String(jtv)
 			}
 
 		case "defaultSelection":
@@ -5916,7 +5975,7 @@ func awsRestjson1_deserializeDocumentAudioSelector(v **types.AudioSelector, valu
 				if !ok {
 					return fmt.Errorf("expected __stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE to be of type string, got %T instead", value)
 				}
-				sv.ExternalAudioFileInput = &jtv
+				sv.ExternalAudioFileInput = ptr.String(jtv)
 			}
 
 		case "languageCode":
@@ -5938,7 +5997,7 @@ func awsRestjson1_deserializeDocumentAudioSelector(v **types.AudioSelector, valu
 				if err != nil {
 					return err
 				}
-				sv.Offset = ptr.Int32(int32(i64))
+				sv.Offset = int32(i64)
 			}
 
 		case "pids":
@@ -5956,7 +6015,7 @@ func awsRestjson1_deserializeDocumentAudioSelector(v **types.AudioSelector, valu
 				if err != nil {
 					return err
 				}
-				sv.ProgramSelection = ptr.Int32(int32(i64))
+				sv.ProgramSelection = int32(i64)
 			}
 
 		case "remixSettings":
@@ -6055,7 +6114,7 @@ func awsRestjson1_deserializeDocumentAv1QvbrSettings(v **types.Av1QvbrSettings, 
 				if err != nil {
 					return err
 				}
-				sv.QvbrQualityLevel = ptr.Int32(int32(i64))
+				sv.QvbrQualityLevel = int32(i64)
 			}
 
 		case "qvbrQualityLevelFineTune":
@@ -6068,7 +6127,7 @@ func awsRestjson1_deserializeDocumentAv1QvbrSettings(v **types.Av1QvbrSettings, 
 				if err != nil {
 					return err
 				}
-				sv.QvbrQualityLevelFineTune = &f64
+				sv.QvbrQualityLevelFineTune = f64
 			}
 
 		default:
@@ -6139,7 +6198,7 @@ func awsRestjson1_deserializeDocumentAv1Settings(v **types.Av1Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.FramerateDenominator = ptr.Int32(int32(i64))
+				sv.FramerateDenominator = int32(i64)
 			}
 
 		case "framerateNumerator":
@@ -6152,7 +6211,7 @@ func awsRestjson1_deserializeDocumentAv1Settings(v **types.Av1Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.FramerateNumerator = ptr.Int32(int32(i64))
+				sv.FramerateNumerator = int32(i64)
 			}
 
 		case "gopSize":
@@ -6165,7 +6224,7 @@ func awsRestjson1_deserializeDocumentAv1Settings(v **types.Av1Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.GopSize = &f64
+				sv.GopSize = f64
 			}
 
 		case "maxBitrate":
@@ -6178,7 +6237,7 @@ func awsRestjson1_deserializeDocumentAv1Settings(v **types.Av1Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.MaxBitrate = ptr.Int32(int32(i64))
+				sv.MaxBitrate = int32(i64)
 			}
 
 		case "numberBFramesBetweenReferenceFrames":
@@ -6191,7 +6250,7 @@ func awsRestjson1_deserializeDocumentAv1Settings(v **types.Av1Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.NumberBFramesBetweenReferenceFrames = ptr.Int32(int32(i64))
+				sv.NumberBFramesBetweenReferenceFrames = int32(i64)
 			}
 
 		case "qvbrSettings":
@@ -6218,7 +6277,7 @@ func awsRestjson1_deserializeDocumentAv1Settings(v **types.Av1Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.Slices = ptr.Int32(int32(i64))
+				sv.Slices = int32(i64)
 			}
 
 		case "spatialAdaptiveQuantization":
@@ -6267,7 +6326,7 @@ func awsRestjson1_deserializeDocumentAvailBlanking(v **types.AvailBlanking, valu
 				if !ok {
 					return fmt.Errorf("expected __stringMin14PatternS3BmpBMPPngPNGHttpsBmpBMPPngPNG to be of type string, got %T instead", value)
 				}
-				sv.AvailBlankingImage = &jtv
+				sv.AvailBlankingImage = ptr.String(jtv)
 			}
 
 		default:
@@ -6338,7 +6397,7 @@ func awsRestjson1_deserializeDocumentAvcIntraSettings(v **types.AvcIntraSettings
 				if err != nil {
 					return err
 				}
-				sv.FramerateDenominator = ptr.Int32(int32(i64))
+				sv.FramerateDenominator = int32(i64)
 			}
 
 		case "framerateNumerator":
@@ -6351,7 +6410,7 @@ func awsRestjson1_deserializeDocumentAvcIntraSettings(v **types.AvcIntraSettings
 				if err != nil {
 					return err
 				}
-				sv.FramerateNumerator = ptr.Int32(int32(i64))
+				sv.FramerateNumerator = int32(i64)
 			}
 
 		case "interlaceMode":
@@ -6418,7 +6477,7 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -6480,7 +6539,7 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				if err != nil {
 					return err
 				}
-				sv.BackgroundOpacity = ptr.Int32(int32(i64))
+				sv.BackgroundOpacity = int32(i64)
 			}
 
 		case "fontColor":
@@ -6502,7 +6561,7 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				if err != nil {
 					return err
 				}
-				sv.FontOpacity = ptr.Int32(int32(i64))
+				sv.FontOpacity = int32(i64)
 			}
 
 		case "fontResolution":
@@ -6515,7 +6574,7 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				if err != nil {
 					return err
 				}
-				sv.FontResolution = ptr.Int32(int32(i64))
+				sv.FontResolution = int32(i64)
 			}
 
 		case "fontScript":
@@ -6537,7 +6596,7 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				if err != nil {
 					return err
 				}
-				sv.FontSize = ptr.Int32(int32(i64))
+				sv.FontSize = int32(i64)
 			}
 
 		case "outlineColor":
@@ -6559,7 +6618,7 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				if err != nil {
 					return err
 				}
-				sv.OutlineSize = ptr.Int32(int32(i64))
+				sv.OutlineSize = int32(i64)
 			}
 
 		case "shadowColor":
@@ -6581,7 +6640,7 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				if err != nil {
 					return err
 				}
-				sv.ShadowOpacity = ptr.Int32(int32(i64))
+				sv.ShadowOpacity = int32(i64)
 			}
 
 		case "shadowXOffset":
@@ -6594,7 +6653,7 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				if err != nil {
 					return err
 				}
-				sv.ShadowXOffset = ptr.Int32(int32(i64))
+				sv.ShadowXOffset = int32(i64)
 			}
 
 		case "shadowYOffset":
@@ -6607,7 +6666,7 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				if err != nil {
 					return err
 				}
-				sv.ShadowYOffset = ptr.Int32(int32(i64))
+				sv.ShadowYOffset = int32(i64)
 			}
 
 		case "teletextSpacing":
@@ -6629,7 +6688,7 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				if err != nil {
 					return err
 				}
-				sv.XPosition = ptr.Int32(int32(i64))
+				sv.XPosition = int32(i64)
 			}
 
 		case "yPosition":
@@ -6642,7 +6701,7 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				if err != nil {
 					return err
 				}
-				sv.YPosition = ptr.Int32(int32(i64))
+				sv.YPosition = int32(i64)
 			}
 
 		default:
@@ -6682,7 +6741,7 @@ func awsRestjson1_deserializeDocumentCaptionDescription(v **types.CaptionDescrip
 				if !ok {
 					return fmt.Errorf("expected __stringMin1 to be of type string, got %T instead", value)
 				}
-				sv.CaptionSelectorName = &jtv
+				sv.CaptionSelectorName = ptr.String(jtv)
 			}
 
 		case "customLanguageCode":
@@ -6691,7 +6750,7 @@ func awsRestjson1_deserializeDocumentCaptionDescription(v **types.CaptionDescrip
 				if !ok {
 					return fmt.Errorf("expected __stringPatternAZaZ23AZaZ to be of type string, got %T instead", value)
 				}
-				sv.CustomLanguageCode = &jtv
+				sv.CustomLanguageCode = ptr.String(jtv)
 			}
 
 		case "destinationSettings":
@@ -6714,7 +6773,7 @@ func awsRestjson1_deserializeDocumentCaptionDescription(v **types.CaptionDescrip
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.LanguageDescription = &jtv
+				sv.LanguageDescription = ptr.String(jtv)
 			}
 
 		default:
@@ -6754,7 +6813,7 @@ func awsRestjson1_deserializeDocumentCaptionDescriptionPreset(v **types.CaptionD
 				if !ok {
 					return fmt.Errorf("expected __stringPatternAZaZ23AZaZ to be of type string, got %T instead", value)
 				}
-				sv.CustomLanguageCode = &jtv
+				sv.CustomLanguageCode = ptr.String(jtv)
 			}
 
 		case "destinationSettings":
@@ -6777,7 +6836,7 @@ func awsRestjson1_deserializeDocumentCaptionDescriptionPreset(v **types.CaptionD
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.LanguageDescription = &jtv
+				sv.LanguageDescription = ptr.String(jtv)
 			}
 
 		default:
@@ -6892,7 +6951,7 @@ func awsRestjson1_deserializeDocumentCaptionSelector(v **types.CaptionSelector, 
 				if !ok {
 					return fmt.Errorf("expected __stringMin3Max3PatternAZaZ3 to be of type string, got %T instead", value)
 				}
-				sv.CustomLanguageCode = &jtv
+				sv.CustomLanguageCode = ptr.String(jtv)
 			}
 
 		case "languageCode":
@@ -6950,7 +7009,7 @@ func awsRestjson1_deserializeDocumentCaptionSourceFramerate(v **types.CaptionSou
 				if err != nil {
 					return err
 				}
-				sv.FramerateDenominator = ptr.Int32(int32(i64))
+				sv.FramerateDenominator = int32(i64)
 			}
 
 		case "framerateNumerator":
@@ -6963,7 +7022,7 @@ func awsRestjson1_deserializeDocumentCaptionSourceFramerate(v **types.CaptionSou
 				if err != nil {
 					return err
 				}
-				sv.FramerateNumerator = ptr.Int32(int32(i64))
+				sv.FramerateNumerator = int32(i64)
 			}
 
 		default:
@@ -7109,7 +7168,7 @@ func awsRestjson1_deserializeDocumentCmafAdditionalManifest(v **types.CmafAdditi
 				if !ok {
 					return fmt.Errorf("expected __stringMin1 to be of type string, got %T instead", value)
 				}
-				sv.ManifestNameModifier = &jtv
+				sv.ManifestNameModifier = ptr.String(jtv)
 			}
 
 		case "selectedOutputs":
@@ -7154,7 +7213,7 @@ func awsRestjson1_deserializeDocumentCmafEncryptionSettings(v **types.CmafEncryp
 				if !ok {
 					return fmt.Errorf("expected __stringMin32Max32Pattern09aFAF32 to be of type string, got %T instead", value)
 				}
-				sv.ConstantInitializationVector = &jtv
+				sv.ConstantInitializationVector = ptr.String(jtv)
 			}
 
 		case "encryptionMethod":
@@ -7236,7 +7295,7 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.BaseUrl = &jtv
+				sv.BaseUrl = ptr.String(jtv)
 			}
 
 		case "clientCache":
@@ -7263,7 +7322,7 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				if !ok {
 					return fmt.Errorf("expected __stringPatternS3 to be of type string, got %T instead", value)
 				}
-				sv.Destination = &jtv
+				sv.Destination = ptr.String(jtv)
 			}
 
 		case "destinationSettings":
@@ -7286,7 +7345,7 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				if err != nil {
 					return err
 				}
-				sv.FragmentLength = ptr.Int32(int32(i64))
+				sv.FragmentLength = int32(i64)
 			}
 
 		case "manifestCompression":
@@ -7317,7 +7376,7 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				if err != nil {
 					return err
 				}
-				sv.MinBufferTime = ptr.Int32(int32(i64))
+				sv.MinBufferTime = int32(i64)
 			}
 
 		case "minFinalSegmentLength":
@@ -7330,7 +7389,7 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				if err != nil {
 					return err
 				}
-				sv.MinFinalSegmentLength = &f64
+				sv.MinFinalSegmentLength = f64
 			}
 
 		case "mpdProfile":
@@ -7361,7 +7420,7 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				if err != nil {
 					return err
 				}
-				sv.SegmentLength = ptr.Int32(int32(i64))
+				sv.SegmentLength = int32(i64)
 			}
 
 		case "streamInfResolution":
@@ -7490,7 +7549,7 @@ func awsRestjson1_deserializeDocumentColorCorrector(v **types.ColorCorrector, va
 				if err != nil {
 					return err
 				}
-				sv.Brightness = ptr.Int32(int32(i64))
+				sv.Brightness = int32(i64)
 			}
 
 		case "colorSpaceConversion":
@@ -7512,7 +7571,7 @@ func awsRestjson1_deserializeDocumentColorCorrector(v **types.ColorCorrector, va
 				if err != nil {
 					return err
 				}
-				sv.Contrast = ptr.Int32(int32(i64))
+				sv.Contrast = int32(i64)
 			}
 
 		case "hdr10Metadata":
@@ -7530,7 +7589,7 @@ func awsRestjson1_deserializeDocumentColorCorrector(v **types.ColorCorrector, va
 				if err != nil {
 					return err
 				}
-				sv.Hue = ptr.Int32(int32(i64))
+				sv.Hue = int32(i64)
 			}
 
 		case "saturation":
@@ -7543,7 +7602,7 @@ func awsRestjson1_deserializeDocumentColorCorrector(v **types.ColorCorrector, va
 				if err != nil {
 					return err
 				}
-				sv.Saturation = ptr.Int32(int32(i64))
+				sv.Saturation = int32(i64)
 			}
 
 		default:
@@ -7583,7 +7642,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -7703,7 +7762,7 @@ func awsRestjson1_deserializeDocumentDashAdditionalManifest(v **types.DashAdditi
 				if !ok {
 					return fmt.Errorf("expected __stringMin1 to be of type string, got %T instead", value)
 				}
-				sv.ManifestNameModifier = &jtv
+				sv.ManifestNameModifier = ptr.String(jtv)
 			}
 
 		case "selectedOutputs":
@@ -7798,7 +7857,7 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.BaseUrl = &jtv
+				sv.BaseUrl = ptr.String(jtv)
 			}
 
 		case "destination":
@@ -7807,7 +7866,7 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 				if !ok {
 					return fmt.Errorf("expected __stringPatternS3 to be of type string, got %T instead", value)
 				}
-				sv.Destination = &jtv
+				sv.Destination = ptr.String(jtv)
 			}
 
 		case "destinationSettings":
@@ -7830,7 +7889,7 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 				if err != nil {
 					return err
 				}
-				sv.FragmentLength = ptr.Int32(int32(i64))
+				sv.FragmentLength = int32(i64)
 			}
 
 		case "hbbtvCompliance":
@@ -7852,7 +7911,7 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 				if err != nil {
 					return err
 				}
-				sv.MinBufferTime = ptr.Int32(int32(i64))
+				sv.MinBufferTime = int32(i64)
 			}
 
 		case "mpdProfile":
@@ -7883,7 +7942,7 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 				if err != nil {
 					return err
 				}
-				sv.SegmentLength = ptr.Int32(int32(i64))
+				sv.SegmentLength = int32(i64)
 			}
 
 		case "writeSegmentTimelineInRepresentation":
@@ -8084,7 +8143,7 @@ func awsRestjson1_deserializeDocumentDolbyVisionLevel6Metadata(v **types.DolbyVi
 				if err != nil {
 					return err
 				}
-				sv.MaxCll = ptr.Int32(int32(i64))
+				sv.MaxCll = int32(i64)
 			}
 
 		case "maxFall":
@@ -8097,7 +8156,7 @@ func awsRestjson1_deserializeDocumentDolbyVisionLevel6Metadata(v **types.DolbyVi
 				if err != nil {
 					return err
 				}
-				sv.MaxFall = ptr.Int32(int32(i64))
+				sv.MaxFall = int32(i64)
 			}
 
 		default:
@@ -8141,7 +8200,7 @@ func awsRestjson1_deserializeDocumentDvbNitSettings(v **types.DvbNitSettings, va
 				if err != nil {
 					return err
 				}
-				sv.NetworkId = ptr.Int32(int32(i64))
+				sv.NetworkId = int32(i64)
 			}
 
 		case "networkName":
@@ -8150,7 +8209,7 @@ func awsRestjson1_deserializeDocumentDvbNitSettings(v **types.DvbNitSettings, va
 				if !ok {
 					return fmt.Errorf("expected __stringMin1Max256 to be of type string, got %T instead", value)
 				}
-				sv.NetworkName = &jtv
+				sv.NetworkName = ptr.String(jtv)
 			}
 
 		case "nitInterval":
@@ -8163,7 +8222,7 @@ func awsRestjson1_deserializeDocumentDvbNitSettings(v **types.DvbNitSettings, va
 				if err != nil {
 					return err
 				}
-				sv.NitInterval = ptr.Int32(int32(i64))
+				sv.NitInterval = int32(i64)
 			}
 
 		default:
@@ -8216,7 +8275,7 @@ func awsRestjson1_deserializeDocumentDvbSdtSettings(v **types.DvbSdtSettings, va
 				if err != nil {
 					return err
 				}
-				sv.SdtInterval = ptr.Int32(int32(i64))
+				sv.SdtInterval = int32(i64)
 			}
 
 		case "serviceName":
@@ -8225,7 +8284,7 @@ func awsRestjson1_deserializeDocumentDvbSdtSettings(v **types.DvbSdtSettings, va
 				if !ok {
 					return fmt.Errorf("expected __stringMin1Max256 to be of type string, got %T instead", value)
 				}
-				sv.ServiceName = &jtv
+				sv.ServiceName = ptr.String(jtv)
 			}
 
 		case "serviceProviderName":
@@ -8234,7 +8293,7 @@ func awsRestjson1_deserializeDocumentDvbSdtSettings(v **types.DvbSdtSettings, va
 				if !ok {
 					return fmt.Errorf("expected __stringMin1Max256 to be of type string, got %T instead", value)
 				}
-				sv.ServiceProviderName = &jtv
+				sv.ServiceProviderName = ptr.String(jtv)
 			}
 
 		default:
@@ -8296,7 +8355,7 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				if err != nil {
 					return err
 				}
-				sv.BackgroundOpacity = ptr.Int32(int32(i64))
+				sv.BackgroundOpacity = int32(i64)
 			}
 
 		case "fontColor":
@@ -8318,7 +8377,7 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				if err != nil {
 					return err
 				}
-				sv.FontOpacity = ptr.Int32(int32(i64))
+				sv.FontOpacity = int32(i64)
 			}
 
 		case "fontResolution":
@@ -8331,7 +8390,7 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				if err != nil {
 					return err
 				}
-				sv.FontResolution = ptr.Int32(int32(i64))
+				sv.FontResolution = int32(i64)
 			}
 
 		case "fontScript":
@@ -8353,7 +8412,7 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				if err != nil {
 					return err
 				}
-				sv.FontSize = ptr.Int32(int32(i64))
+				sv.FontSize = int32(i64)
 			}
 
 		case "outlineColor":
@@ -8375,7 +8434,7 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				if err != nil {
 					return err
 				}
-				sv.OutlineSize = ptr.Int32(int32(i64))
+				sv.OutlineSize = int32(i64)
 			}
 
 		case "shadowColor":
@@ -8397,7 +8456,7 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				if err != nil {
 					return err
 				}
-				sv.ShadowOpacity = ptr.Int32(int32(i64))
+				sv.ShadowOpacity = int32(i64)
 			}
 
 		case "shadowXOffset":
@@ -8410,7 +8469,7 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				if err != nil {
 					return err
 				}
-				sv.ShadowXOffset = ptr.Int32(int32(i64))
+				sv.ShadowXOffset = int32(i64)
 			}
 
 		case "shadowYOffset":
@@ -8423,7 +8482,7 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				if err != nil {
 					return err
 				}
-				sv.ShadowYOffset = ptr.Int32(int32(i64))
+				sv.ShadowYOffset = int32(i64)
 			}
 
 		case "subtitlingType":
@@ -8454,7 +8513,7 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				if err != nil {
 					return err
 				}
-				sv.XPosition = ptr.Int32(int32(i64))
+				sv.XPosition = int32(i64)
 			}
 
 		case "yPosition":
@@ -8467,7 +8526,7 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				if err != nil {
 					return err
 				}
-				sv.YPosition = ptr.Int32(int32(i64))
+				sv.YPosition = int32(i64)
 			}
 
 		default:
@@ -8511,7 +8570,7 @@ func awsRestjson1_deserializeDocumentDvbSubSourceSettings(v **types.DvbSubSource
 				if err != nil {
 					return err
 				}
-				sv.Pid = ptr.Int32(int32(i64))
+				sv.Pid = int32(i64)
 			}
 
 		default:
@@ -8555,7 +8614,7 @@ func awsRestjson1_deserializeDocumentDvbTdtSettings(v **types.DvbTdtSettings, va
 				if err != nil {
 					return err
 				}
-				sv.TdtInterval = ptr.Int32(int32(i64))
+				sv.TdtInterval = int32(i64)
 			}
 
 		default:
@@ -8599,7 +8658,7 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 				if err != nil {
 					return err
 				}
-				sv.Bitrate = ptr.Int32(int32(i64))
+				sv.Bitrate = int32(i64)
 			}
 
 		case "bitstreamMode":
@@ -8657,7 +8716,7 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 				if err != nil {
 					return err
 				}
-				sv.LoRoCenterMixLevel = &f64
+				sv.LoRoCenterMixLevel = f64
 			}
 
 		case "loRoSurroundMixLevel":
@@ -8670,7 +8729,7 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 				if err != nil {
 					return err
 				}
-				sv.LoRoSurroundMixLevel = &f64
+				sv.LoRoSurroundMixLevel = f64
 			}
 
 		case "ltRtCenterMixLevel":
@@ -8683,7 +8742,7 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 				if err != nil {
 					return err
 				}
-				sv.LtRtCenterMixLevel = &f64
+				sv.LtRtCenterMixLevel = f64
 			}
 
 		case "ltRtSurroundMixLevel":
@@ -8696,7 +8755,7 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 				if err != nil {
 					return err
 				}
-				sv.LtRtSurroundMixLevel = &f64
+				sv.LtRtSurroundMixLevel = f64
 			}
 
 		case "meteringMode":
@@ -8718,7 +8777,7 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 				if err != nil {
 					return err
 				}
-				sv.SampleRate = ptr.Int32(int32(i64))
+				sv.SampleRate = int32(i64)
 			}
 
 		case "speechThreshold":
@@ -8731,7 +8790,7 @@ func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettin
 				if err != nil {
 					return err
 				}
-				sv.SpeechThreshold = ptr.Int32(int32(i64))
+				sv.SpeechThreshold = int32(i64)
 			}
 
 		case "stereoDownmix":
@@ -8802,7 +8861,7 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.Bitrate = ptr.Int32(int32(i64))
+				sv.Bitrate = int32(i64)
 			}
 
 		case "bitstreamMode":
@@ -8842,7 +8901,7 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.Dialnorm = ptr.Int32(int32(i64))
+				sv.Dialnorm = int32(i64)
 			}
 
 		case "dynamicRangeCompressionLine":
@@ -8891,7 +8950,7 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.LoRoCenterMixLevel = &f64
+				sv.LoRoCenterMixLevel = f64
 			}
 
 		case "loRoSurroundMixLevel":
@@ -8904,7 +8963,7 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.LoRoSurroundMixLevel = &f64
+				sv.LoRoSurroundMixLevel = f64
 			}
 
 		case "ltRtCenterMixLevel":
@@ -8917,7 +8976,7 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.LtRtCenterMixLevel = &f64
+				sv.LtRtCenterMixLevel = f64
 			}
 
 		case "ltRtSurroundMixLevel":
@@ -8930,7 +8989,7 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.LtRtSurroundMixLevel = &f64
+				sv.LtRtSurroundMixLevel = f64
 			}
 
 		case "metadataControl":
@@ -8970,7 +9029,7 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.SampleRate = ptr.Int32(int32(i64))
+				sv.SampleRate = int32(i64)
 			}
 
 		case "stereoDownmix":
@@ -9041,7 +9100,7 @@ func awsRestjson1_deserializeDocumentEmbeddedDestinationSettings(v **types.Embed
 				if err != nil {
 					return err
 				}
-				sv.Destination608ChannelNumber = ptr.Int32(int32(i64))
+				sv.Destination608ChannelNumber = int32(i64)
 			}
 
 		case "destination708ServiceNumber":
@@ -9054,7 +9113,7 @@ func awsRestjson1_deserializeDocumentEmbeddedDestinationSettings(v **types.Embed
 				if err != nil {
 					return err
 				}
-				sv.Destination708ServiceNumber = ptr.Int32(int32(i64))
+				sv.Destination708ServiceNumber = int32(i64)
 			}
 
 		default:
@@ -9107,7 +9166,7 @@ func awsRestjson1_deserializeDocumentEmbeddedSourceSettings(v **types.EmbeddedSo
 				if err != nil {
 					return err
 				}
-				sv.Source608ChannelNumber = ptr.Int32(int32(i64))
+				sv.Source608ChannelNumber = int32(i64)
 			}
 
 		case "source608TrackNumber":
@@ -9120,7 +9179,7 @@ func awsRestjson1_deserializeDocumentEmbeddedSourceSettings(v **types.EmbeddedSo
 				if err != nil {
 					return err
 				}
-				sv.Source608TrackNumber = ptr.Int32(int32(i64))
+				sv.Source608TrackNumber = int32(i64)
 			}
 
 		case "terminateCaptions":
@@ -9169,7 +9228,7 @@ func awsRestjson1_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Url = &jtv
+				sv.Url = ptr.String(jtv)
 			}
 
 		default:
@@ -9209,7 +9268,7 @@ func awsRestjson1_deserializeDocumentEsamManifestConfirmConditionNotification(v 
 				if !ok {
 					return fmt.Errorf("expected __stringPatternSNManifestConfirmConditionNotificationNS to be of type string, got %T instead", value)
 				}
-				sv.MccXml = &jtv
+				sv.MccXml = ptr.String(jtv)
 			}
 
 		default:
@@ -9258,7 +9317,7 @@ func awsRestjson1_deserializeDocumentEsamSettings(v **types.EsamSettings, value 
 				if err != nil {
 					return err
 				}
-				sv.ResponseSignalPreroll = ptr.Int32(int32(i64))
+				sv.ResponseSignalPreroll = int32(i64)
 			}
 
 		case "signalProcessingNotification":
@@ -9303,7 +9362,7 @@ func awsRestjson1_deserializeDocumentEsamSignalProcessingNotification(v **types.
 				if !ok {
 					return fmt.Errorf("expected __stringPatternSNSignalProcessingNotificationNS to be of type string, got %T instead", value)
 				}
-				sv.SccXml = &jtv
+				sv.SccXml = ptr.String(jtv)
 			}
 
 		default:
@@ -9383,7 +9442,7 @@ func awsRestjson1_deserializeDocumentFileGroupSettings(v **types.FileGroupSettin
 				if !ok {
 					return fmt.Errorf("expected __stringPatternS3 to be of type string, got %T instead", value)
 				}
-				sv.Destination = &jtv
+				sv.Destination = ptr.String(jtv)
 			}
 
 		case "destinationSettings":
@@ -9442,7 +9501,7 @@ func awsRestjson1_deserializeDocumentFileSourceSettings(v **types.FileSourceSett
 				if !ok {
 					return fmt.Errorf("expected __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI to be of type string, got %T instead", value)
 				}
-				sv.SourceFile = &jtv
+				sv.SourceFile = ptr.String(jtv)
 			}
 
 		case "timeDelta":
@@ -9455,7 +9514,7 @@ func awsRestjson1_deserializeDocumentFileSourceSettings(v **types.FileSourceSett
 				if err != nil {
 					return err
 				}
-				sv.TimeDelta = ptr.Int32(int32(i64))
+				sv.TimeDelta = int32(i64)
 			}
 
 		default:
@@ -9495,7 +9554,7 @@ func awsRestjson1_deserializeDocumentForbiddenException(v **types.ForbiddenExcep
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -9539,7 +9598,7 @@ func awsRestjson1_deserializeDocumentFrameCaptureSettings(v **types.FrameCapture
 				if err != nil {
 					return err
 				}
-				sv.FramerateDenominator = ptr.Int32(int32(i64))
+				sv.FramerateDenominator = int32(i64)
 			}
 
 		case "framerateNumerator":
@@ -9552,7 +9611,7 @@ func awsRestjson1_deserializeDocumentFrameCaptureSettings(v **types.FrameCapture
 				if err != nil {
 					return err
 				}
-				sv.FramerateNumerator = ptr.Int32(int32(i64))
+				sv.FramerateNumerator = int32(i64)
 			}
 
 		case "maxCaptures":
@@ -9565,7 +9624,7 @@ func awsRestjson1_deserializeDocumentFrameCaptureSettings(v **types.FrameCapture
 				if err != nil {
 					return err
 				}
-				sv.MaxCaptures = ptr.Int32(int32(i64))
+				sv.MaxCaptures = int32(i64)
 			}
 
 		case "quality":
@@ -9578,7 +9637,7 @@ func awsRestjson1_deserializeDocumentFrameCaptureSettings(v **types.FrameCapture
 				if err != nil {
 					return err
 				}
-				sv.Quality = ptr.Int32(int32(i64))
+				sv.Quality = int32(i64)
 			}
 
 		default:
@@ -9622,7 +9681,7 @@ func awsRestjson1_deserializeDocumentH264QvbrSettings(v **types.H264QvbrSettings
 				if err != nil {
 					return err
 				}
-				sv.MaxAverageBitrate = ptr.Int32(int32(i64))
+				sv.MaxAverageBitrate = int32(i64)
 			}
 
 		case "qvbrQualityLevel":
@@ -9635,7 +9694,7 @@ func awsRestjson1_deserializeDocumentH264QvbrSettings(v **types.H264QvbrSettings
 				if err != nil {
 					return err
 				}
-				sv.QvbrQualityLevel = ptr.Int32(int32(i64))
+				sv.QvbrQualityLevel = int32(i64)
 			}
 
 		case "qvbrQualityLevelFineTune":
@@ -9648,7 +9707,7 @@ func awsRestjson1_deserializeDocumentH264QvbrSettings(v **types.H264QvbrSettings
 				if err != nil {
 					return err
 				}
-				sv.QvbrQualityLevelFineTune = &f64
+				sv.QvbrQualityLevelFineTune = f64
 			}
 
 		default:
@@ -9701,7 +9760,7 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.Bitrate = ptr.Int32(int32(i64))
+				sv.Bitrate = int32(i64)
 			}
 
 		case "codecLevel":
@@ -9786,7 +9845,7 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.FramerateDenominator = ptr.Int32(int32(i64))
+				sv.FramerateDenominator = int32(i64)
 			}
 
 		case "framerateNumerator":
@@ -9799,7 +9858,7 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.FramerateNumerator = ptr.Int32(int32(i64))
+				sv.FramerateNumerator = int32(i64)
 			}
 
 		case "gopBReference":
@@ -9821,7 +9880,7 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.GopClosedCadence = ptr.Int32(int32(i64))
+				sv.GopClosedCadence = int32(i64)
 			}
 
 		case "gopSize":
@@ -9834,7 +9893,7 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.GopSize = &f64
+				sv.GopSize = f64
 			}
 
 		case "gopSizeUnits":
@@ -9856,7 +9915,7 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.HrdBufferInitialFillPercentage = ptr.Int32(int32(i64))
+				sv.HrdBufferInitialFillPercentage = int32(i64)
 			}
 
 		case "hrdBufferSize":
@@ -9869,7 +9928,7 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.HrdBufferSize = ptr.Int32(int32(i64))
+				sv.HrdBufferSize = int32(i64)
 			}
 
 		case "interlaceMode":
@@ -9891,7 +9950,7 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.MaxBitrate = ptr.Int32(int32(i64))
+				sv.MaxBitrate = int32(i64)
 			}
 
 		case "minIInterval":
@@ -9904,7 +9963,7 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.MinIInterval = ptr.Int32(int32(i64))
+				sv.MinIInterval = int32(i64)
 			}
 
 		case "numberBFramesBetweenReferenceFrames":
@@ -9917,7 +9976,7 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.NumberBFramesBetweenReferenceFrames = ptr.Int32(int32(i64))
+				sv.NumberBFramesBetweenReferenceFrames = int32(i64)
 			}
 
 		case "numberReferenceFrames":
@@ -9930,7 +9989,7 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.NumberReferenceFrames = ptr.Int32(int32(i64))
+				sv.NumberReferenceFrames = int32(i64)
 			}
 
 		case "parControl":
@@ -9952,7 +10011,7 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.ParDenominator = ptr.Int32(int32(i64))
+				sv.ParDenominator = int32(i64)
 			}
 
 		case "parNumerator":
@@ -9965,7 +10024,7 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.ParNumerator = ptr.Int32(int32(i64))
+				sv.ParNumerator = int32(i64)
 			}
 
 		case "qualityTuningLevel":
@@ -10019,7 +10078,7 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.Slices = ptr.Int32(int32(i64))
+				sv.Slices = int32(i64)
 			}
 
 		case "slowPal":
@@ -10041,7 +10100,7 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.Softness = ptr.Int32(int32(i64))
+				sv.Softness = int32(i64)
 			}
 
 		case "spatialAdaptiveQuantization":
@@ -10130,7 +10189,7 @@ func awsRestjson1_deserializeDocumentH265QvbrSettings(v **types.H265QvbrSettings
 				if err != nil {
 					return err
 				}
-				sv.MaxAverageBitrate = ptr.Int32(int32(i64))
+				sv.MaxAverageBitrate = int32(i64)
 			}
 
 		case "qvbrQualityLevel":
@@ -10143,7 +10202,7 @@ func awsRestjson1_deserializeDocumentH265QvbrSettings(v **types.H265QvbrSettings
 				if err != nil {
 					return err
 				}
-				sv.QvbrQualityLevel = ptr.Int32(int32(i64))
+				sv.QvbrQualityLevel = int32(i64)
 			}
 
 		case "qvbrQualityLevelFineTune":
@@ -10156,7 +10215,7 @@ func awsRestjson1_deserializeDocumentH265QvbrSettings(v **types.H265QvbrSettings
 				if err != nil {
 					return err
 				}
-				sv.QvbrQualityLevelFineTune = &f64
+				sv.QvbrQualityLevelFineTune = f64
 			}
 
 		default:
@@ -10218,7 +10277,7 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.Bitrate = ptr.Int32(int32(i64))
+				sv.Bitrate = int32(i64)
 			}
 
 		case "codecLevel":
@@ -10285,7 +10344,7 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.FramerateDenominator = ptr.Int32(int32(i64))
+				sv.FramerateDenominator = int32(i64)
 			}
 
 		case "framerateNumerator":
@@ -10298,7 +10357,7 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.FramerateNumerator = ptr.Int32(int32(i64))
+				sv.FramerateNumerator = int32(i64)
 			}
 
 		case "gopBReference":
@@ -10320,7 +10379,7 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.GopClosedCadence = ptr.Int32(int32(i64))
+				sv.GopClosedCadence = int32(i64)
 			}
 
 		case "gopSize":
@@ -10333,7 +10392,7 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.GopSize = &f64
+				sv.GopSize = f64
 			}
 
 		case "gopSizeUnits":
@@ -10355,7 +10414,7 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.HrdBufferInitialFillPercentage = ptr.Int32(int32(i64))
+				sv.HrdBufferInitialFillPercentage = int32(i64)
 			}
 
 		case "hrdBufferSize":
@@ -10368,7 +10427,7 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.HrdBufferSize = ptr.Int32(int32(i64))
+				sv.HrdBufferSize = int32(i64)
 			}
 
 		case "interlaceMode":
@@ -10390,7 +10449,7 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.MaxBitrate = ptr.Int32(int32(i64))
+				sv.MaxBitrate = int32(i64)
 			}
 
 		case "minIInterval":
@@ -10403,7 +10462,7 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.MinIInterval = ptr.Int32(int32(i64))
+				sv.MinIInterval = int32(i64)
 			}
 
 		case "numberBFramesBetweenReferenceFrames":
@@ -10416,7 +10475,7 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.NumberBFramesBetweenReferenceFrames = ptr.Int32(int32(i64))
+				sv.NumberBFramesBetweenReferenceFrames = int32(i64)
 			}
 
 		case "numberReferenceFrames":
@@ -10429,7 +10488,7 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.NumberReferenceFrames = ptr.Int32(int32(i64))
+				sv.NumberReferenceFrames = int32(i64)
 			}
 
 		case "parControl":
@@ -10451,7 +10510,7 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.ParDenominator = ptr.Int32(int32(i64))
+				sv.ParDenominator = int32(i64)
 			}
 
 		case "parNumerator":
@@ -10464,7 +10523,7 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.ParNumerator = ptr.Int32(int32(i64))
+				sv.ParNumerator = int32(i64)
 			}
 
 		case "qualityTuningLevel":
@@ -10518,7 +10577,7 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.Slices = ptr.Int32(int32(i64))
+				sv.Slices = int32(i64)
 			}
 
 		case "slowPal":
@@ -10634,7 +10693,7 @@ func awsRestjson1_deserializeDocumentHdr10Metadata(v **types.Hdr10Metadata, valu
 				if err != nil {
 					return err
 				}
-				sv.BluePrimaryX = ptr.Int32(int32(i64))
+				sv.BluePrimaryX = int32(i64)
 			}
 
 		case "bluePrimaryY":
@@ -10647,7 +10706,7 @@ func awsRestjson1_deserializeDocumentHdr10Metadata(v **types.Hdr10Metadata, valu
 				if err != nil {
 					return err
 				}
-				sv.BluePrimaryY = ptr.Int32(int32(i64))
+				sv.BluePrimaryY = int32(i64)
 			}
 
 		case "greenPrimaryX":
@@ -10660,7 +10719,7 @@ func awsRestjson1_deserializeDocumentHdr10Metadata(v **types.Hdr10Metadata, valu
 				if err != nil {
 					return err
 				}
-				sv.GreenPrimaryX = ptr.Int32(int32(i64))
+				sv.GreenPrimaryX = int32(i64)
 			}
 
 		case "greenPrimaryY":
@@ -10673,7 +10732,7 @@ func awsRestjson1_deserializeDocumentHdr10Metadata(v **types.Hdr10Metadata, valu
 				if err != nil {
 					return err
 				}
-				sv.GreenPrimaryY = ptr.Int32(int32(i64))
+				sv.GreenPrimaryY = int32(i64)
 			}
 
 		case "maxContentLightLevel":
@@ -10686,7 +10745,7 @@ func awsRestjson1_deserializeDocumentHdr10Metadata(v **types.Hdr10Metadata, valu
 				if err != nil {
 					return err
 				}
-				sv.MaxContentLightLevel = ptr.Int32(int32(i64))
+				sv.MaxContentLightLevel = int32(i64)
 			}
 
 		case "maxFrameAverageLightLevel":
@@ -10699,7 +10758,7 @@ func awsRestjson1_deserializeDocumentHdr10Metadata(v **types.Hdr10Metadata, valu
 				if err != nil {
 					return err
 				}
-				sv.MaxFrameAverageLightLevel = ptr.Int32(int32(i64))
+				sv.MaxFrameAverageLightLevel = int32(i64)
 			}
 
 		case "maxLuminance":
@@ -10712,7 +10771,7 @@ func awsRestjson1_deserializeDocumentHdr10Metadata(v **types.Hdr10Metadata, valu
 				if err != nil {
 					return err
 				}
-				sv.MaxLuminance = ptr.Int32(int32(i64))
+				sv.MaxLuminance = int32(i64)
 			}
 
 		case "minLuminance":
@@ -10725,7 +10784,7 @@ func awsRestjson1_deserializeDocumentHdr10Metadata(v **types.Hdr10Metadata, valu
 				if err != nil {
 					return err
 				}
-				sv.MinLuminance = ptr.Int32(int32(i64))
+				sv.MinLuminance = int32(i64)
 			}
 
 		case "redPrimaryX":
@@ -10738,7 +10797,7 @@ func awsRestjson1_deserializeDocumentHdr10Metadata(v **types.Hdr10Metadata, valu
 				if err != nil {
 					return err
 				}
-				sv.RedPrimaryX = ptr.Int32(int32(i64))
+				sv.RedPrimaryX = int32(i64)
 			}
 
 		case "redPrimaryY":
@@ -10751,7 +10810,7 @@ func awsRestjson1_deserializeDocumentHdr10Metadata(v **types.Hdr10Metadata, valu
 				if err != nil {
 					return err
 				}
-				sv.RedPrimaryY = ptr.Int32(int32(i64))
+				sv.RedPrimaryY = int32(i64)
 			}
 
 		case "whitePointX":
@@ -10764,7 +10823,7 @@ func awsRestjson1_deserializeDocumentHdr10Metadata(v **types.Hdr10Metadata, valu
 				if err != nil {
 					return err
 				}
-				sv.WhitePointX = ptr.Int32(int32(i64))
+				sv.WhitePointX = int32(i64)
 			}
 
 		case "whitePointY":
@@ -10777,7 +10836,7 @@ func awsRestjson1_deserializeDocumentHdr10Metadata(v **types.Hdr10Metadata, valu
 				if err != nil {
 					return err
 				}
-				sv.WhitePointY = ptr.Int32(int32(i64))
+				sv.WhitePointY = int32(i64)
 			}
 
 		default:
@@ -10817,7 +10876,7 @@ func awsRestjson1_deserializeDocumentHlsAdditionalManifest(v **types.HlsAddition
 				if !ok {
 					return fmt.Errorf("expected __stringMin1 to be of type string, got %T instead", value)
 				}
-				sv.ManifestNameModifier = &jtv
+				sv.ManifestNameModifier = ptr.String(jtv)
 			}
 
 		case "selectedOutputs":
@@ -10866,7 +10925,7 @@ func awsRestjson1_deserializeDocumentHlsCaptionLanguageMapping(v **types.HlsCapt
 				if err != nil {
 					return err
 				}
-				sv.CaptionChannel = ptr.Int32(int32(i64))
+				sv.CaptionChannel = int32(i64)
 			}
 
 		case "customLanguageCode":
@@ -10875,7 +10934,7 @@ func awsRestjson1_deserializeDocumentHlsCaptionLanguageMapping(v **types.HlsCapt
 				if !ok {
 					return fmt.Errorf("expected __stringMin3Max3PatternAZaZ3 to be of type string, got %T instead", value)
 				}
-				sv.CustomLanguageCode = &jtv
+				sv.CustomLanguageCode = ptr.String(jtv)
 			}
 
 		case "languageCode":
@@ -10893,7 +10952,7 @@ func awsRestjson1_deserializeDocumentHlsCaptionLanguageMapping(v **types.HlsCapt
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.LanguageDescription = &jtv
+				sv.LanguageDescription = ptr.String(jtv)
 			}
 
 		default:
@@ -10933,7 +10992,7 @@ func awsRestjson1_deserializeDocumentHlsEncryptionSettings(v **types.HlsEncrypti
 				if !ok {
 					return fmt.Errorf("expected __stringMin32Max32Pattern09aFAF32 to be of type string, got %T instead", value)
 				}
-				sv.ConstantInitializationVector = &jtv
+				sv.ConstantInitializationVector = ptr.String(jtv)
 			}
 
 		case "encryptionMethod":
@@ -11038,7 +11097,7 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.BaseUrl = &jtv
+				sv.BaseUrl = ptr.String(jtv)
 			}
 
 		case "captionLanguageMappings":
@@ -11079,7 +11138,7 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				if !ok {
 					return fmt.Errorf("expected __stringPatternS3 to be of type string, got %T instead", value)
 				}
-				sv.Destination = &jtv
+				sv.Destination = ptr.String(jtv)
 			}
 
 		case "destinationSettings":
@@ -11129,7 +11188,7 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				if err != nil {
 					return err
 				}
-				sv.MinFinalSegmentLength = &f64
+				sv.MinFinalSegmentLength = f64
 			}
 
 		case "minSegmentLength":
@@ -11142,7 +11201,7 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				if err != nil {
 					return err
 				}
-				sv.MinSegmentLength = ptr.Int32(int32(i64))
+				sv.MinSegmentLength = int32(i64)
 			}
 
 		case "outputSelection":
@@ -11173,7 +11232,7 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				if err != nil {
 					return err
 				}
-				sv.ProgramDateTimePeriod = ptr.Int32(int32(i64))
+				sv.ProgramDateTimePeriod = int32(i64)
 			}
 
 		case "segmentControl":
@@ -11195,7 +11254,7 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				if err != nil {
 					return err
 				}
-				sv.SegmentLength = ptr.Int32(int32(i64))
+				sv.SegmentLength = int32(i64)
 			}
 
 		case "segmentsPerSubdirectory":
@@ -11208,7 +11267,7 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				if err != nil {
 					return err
 				}
-				sv.SegmentsPerSubdirectory = ptr.Int32(int32(i64))
+				sv.SegmentsPerSubdirectory = int32(i64)
 			}
 
 		case "streamInfResolution":
@@ -11239,7 +11298,7 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				if err != nil {
 					return err
 				}
-				sv.TimedMetadataId3Period = ptr.Int32(int32(i64))
+				sv.TimedMetadataId3Period = int32(i64)
 			}
 
 		case "timestampDeltaMilliseconds":
@@ -11252,7 +11311,7 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				if err != nil {
 					return err
 				}
-				sv.TimestampDeltaMilliseconds = ptr.Int32(int32(i64))
+				sv.TimestampDeltaMilliseconds = int32(i64)
 			}
 
 		default:
@@ -11292,7 +11351,7 @@ func awsRestjson1_deserializeDocumentHlsSettings(v **types.HlsSettings, value in
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.AudioGroupId = &jtv
+				sv.AudioGroupId = ptr.String(jtv)
 			}
 
 		case "audioOnlyContainer":
@@ -11310,7 +11369,7 @@ func awsRestjson1_deserializeDocumentHlsSettings(v **types.HlsSettings, value in
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.AudioRenditionSets = &jtv
+				sv.AudioRenditionSets = ptr.String(jtv)
 			}
 
 		case "audioTrackType":
@@ -11337,7 +11396,7 @@ func awsRestjson1_deserializeDocumentHlsSettings(v **types.HlsSettings, value in
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.SegmentModifier = &jtv
+				sv.SegmentModifier = ptr.String(jtv)
 			}
 
 		default:
@@ -11381,7 +11440,7 @@ func awsRestjson1_deserializeDocumentHopDestination(v **types.HopDestination, va
 				if err != nil {
 					return err
 				}
-				sv.Priority = ptr.Int32(int32(i64))
+				sv.Priority = int32(i64)
 			}
 
 		case "queue":
@@ -11390,7 +11449,7 @@ func awsRestjson1_deserializeDocumentHopDestination(v **types.HopDestination, va
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Queue = &jtv
+				sv.Queue = ptr.String(jtv)
 			}
 
 		case "waitMinutes":
@@ -11403,7 +11462,7 @@ func awsRestjson1_deserializeDocumentHopDestination(v **types.HopDestination, va
 				if err != nil {
 					return err
 				}
-				sv.WaitMinutes = ptr.Int32(int32(i64))
+				sv.WaitMinutes = int32(i64)
 			}
 
 		default:
@@ -11443,7 +11502,7 @@ func awsRestjson1_deserializeDocumentId3Insertion(v **types.Id3Insertion, value 
 				if !ok {
 					return fmt.Errorf("expected __stringPatternAZaZ0902 to be of type string, got %T instead", value)
 				}
-				sv.Id3 = &jtv
+				sv.Id3 = ptr.String(jtv)
 			}
 
 		case "timecode":
@@ -11452,7 +11511,7 @@ func awsRestjson1_deserializeDocumentId3Insertion(v **types.Id3Insertion, value 
 				if !ok {
 					return fmt.Errorf("expected __stringPattern010920405090509092 to be of type string, got %T instead", value)
 				}
-				sv.Timecode = &jtv
+				sv.Timecode = ptr.String(jtv)
 			}
 
 		default:
@@ -11611,7 +11670,7 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 				if !ok {
 					return fmt.Errorf("expected __stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL to be of type string, got %T instead", value)
 				}
-				sv.FileInput = &jtv
+				sv.FileInput = ptr.String(jtv)
 			}
 
 		case "filterEnable":
@@ -11633,7 +11692,7 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 				if err != nil {
 					return err
 				}
-				sv.FilterStrength = ptr.Int32(int32(i64))
+				sv.FilterStrength = int32(i64)
 			}
 
 		case "imageInserter":
@@ -11670,7 +11729,7 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 				if err != nil {
 					return err
 				}
-				sv.ProgramNumber = ptr.Int32(int32(i64))
+				sv.ProgramNumber = int32(i64)
 			}
 
 		case "psiControl":
@@ -11702,7 +11761,7 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 				if !ok {
 					return fmt.Errorf("expected __stringMin11Max11Pattern01D20305D205D to be of type string, got %T instead", value)
 				}
-				sv.TimecodeStart = &jtv
+				sv.TimecodeStart = ptr.String(jtv)
 			}
 
 		case "videoSelector":
@@ -11747,7 +11806,7 @@ func awsRestjson1_deserializeDocumentInputClipping(v **types.InputClipping, valu
 				if !ok {
 					return fmt.Errorf("expected __stringPattern010920405090509092 to be of type string, got %T instead", value)
 				}
-				sv.EndTimecode = &jtv
+				sv.EndTimecode = ptr.String(jtv)
 			}
 
 		case "startTimecode":
@@ -11756,7 +11815,7 @@ func awsRestjson1_deserializeDocumentInputClipping(v **types.InputClipping, valu
 				if !ok {
 					return fmt.Errorf("expected __stringPattern010920405090509092 to be of type string, got %T instead", value)
 				}
-				sv.StartTimecode = &jtv
+				sv.StartTimecode = ptr.String(jtv)
 			}
 
 		default:
@@ -11805,7 +11864,7 @@ func awsRestjson1_deserializeDocumentInputDecryptionSettings(v **types.InputDecr
 				if !ok {
 					return fmt.Errorf("expected __stringMin24Max512PatternAZaZ0902 to be of type string, got %T instead", value)
 				}
-				sv.EncryptedDecryptionKey = &jtv
+				sv.EncryptedDecryptionKey = ptr.String(jtv)
 			}
 
 		case "initializationVector":
@@ -11814,7 +11873,7 @@ func awsRestjson1_deserializeDocumentInputDecryptionSettings(v **types.InputDecr
 				if !ok {
 					return fmt.Errorf("expected __stringMin16Max24PatternAZaZ0922AZaZ0916 to be of type string, got %T instead", value)
 				}
-				sv.InitializationVector = &jtv
+				sv.InitializationVector = ptr.String(jtv)
 			}
 
 		case "kmsKeyRegion":
@@ -11823,7 +11882,7 @@ func awsRestjson1_deserializeDocumentInputDecryptionSettings(v **types.InputDecr
 				if !ok {
 					return fmt.Errorf("expected __stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912 to be of type string, got %T instead", value)
 				}
-				sv.KmsKeyRegion = &jtv
+				sv.KmsKeyRegion = ptr.String(jtv)
 			}
 
 		default:
@@ -11914,7 +11973,7 @@ func awsRestjson1_deserializeDocumentInputTemplate(v **types.InputTemplate, valu
 				if err != nil {
 					return err
 				}
-				sv.FilterStrength = ptr.Int32(int32(i64))
+				sv.FilterStrength = int32(i64)
 			}
 
 		case "imageInserter":
@@ -11951,7 +12010,7 @@ func awsRestjson1_deserializeDocumentInputTemplate(v **types.InputTemplate, valu
 				if err != nil {
 					return err
 				}
-				sv.ProgramNumber = ptr.Int32(int32(i64))
+				sv.ProgramNumber = int32(i64)
 			}
 
 		case "psiControl":
@@ -11978,7 +12037,7 @@ func awsRestjson1_deserializeDocumentInputTemplate(v **types.InputTemplate, valu
 				if !ok {
 					return fmt.Errorf("expected __stringMin11Max11Pattern01D20305D205D to be of type string, got %T instead", value)
 				}
-				sv.TimecodeStart = &jtv
+				sv.TimecodeStart = ptr.String(jtv)
 			}
 
 		case "videoSelector":
@@ -12027,7 +12086,7 @@ func awsRestjson1_deserializeDocumentInsertableImage(v **types.InsertableImage, 
 				if err != nil {
 					return err
 				}
-				sv.Duration = ptr.Int32(int32(i64))
+				sv.Duration = int32(i64)
 			}
 
 		case "fadeIn":
@@ -12040,7 +12099,7 @@ func awsRestjson1_deserializeDocumentInsertableImage(v **types.InsertableImage, 
 				if err != nil {
 					return err
 				}
-				sv.FadeIn = ptr.Int32(int32(i64))
+				sv.FadeIn = int32(i64)
 			}
 
 		case "fadeOut":
@@ -12053,7 +12112,7 @@ func awsRestjson1_deserializeDocumentInsertableImage(v **types.InsertableImage, 
 				if err != nil {
 					return err
 				}
-				sv.FadeOut = ptr.Int32(int32(i64))
+				sv.FadeOut = int32(i64)
 			}
 
 		case "height":
@@ -12066,7 +12125,7 @@ func awsRestjson1_deserializeDocumentInsertableImage(v **types.InsertableImage, 
 				if err != nil {
 					return err
 				}
-				sv.Height = ptr.Int32(int32(i64))
+				sv.Height = int32(i64)
 			}
 
 		case "imageInserterInput":
@@ -12075,7 +12134,7 @@ func awsRestjson1_deserializeDocumentInsertableImage(v **types.InsertableImage, 
 				if !ok {
 					return fmt.Errorf("expected __stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA to be of type string, got %T instead", value)
 				}
-				sv.ImageInserterInput = &jtv
+				sv.ImageInserterInput = ptr.String(jtv)
 			}
 
 		case "imageX":
@@ -12088,7 +12147,7 @@ func awsRestjson1_deserializeDocumentInsertableImage(v **types.InsertableImage, 
 				if err != nil {
 					return err
 				}
-				sv.ImageX = ptr.Int32(int32(i64))
+				sv.ImageX = int32(i64)
 			}
 
 		case "imageY":
@@ -12101,7 +12160,7 @@ func awsRestjson1_deserializeDocumentInsertableImage(v **types.InsertableImage, 
 				if err != nil {
 					return err
 				}
-				sv.ImageY = ptr.Int32(int32(i64))
+				sv.ImageY = int32(i64)
 			}
 
 		case "layer":
@@ -12114,7 +12173,7 @@ func awsRestjson1_deserializeDocumentInsertableImage(v **types.InsertableImage, 
 				if err != nil {
 					return err
 				}
-				sv.Layer = ptr.Int32(int32(i64))
+				sv.Layer = int32(i64)
 			}
 
 		case "opacity":
@@ -12127,7 +12186,7 @@ func awsRestjson1_deserializeDocumentInsertableImage(v **types.InsertableImage, 
 				if err != nil {
 					return err
 				}
-				sv.Opacity = ptr.Int32(int32(i64))
+				sv.Opacity = int32(i64)
 			}
 
 		case "startTime":
@@ -12136,7 +12195,7 @@ func awsRestjson1_deserializeDocumentInsertableImage(v **types.InsertableImage, 
 				if !ok {
 					return fmt.Errorf("expected __stringPattern01D20305D205D to be of type string, got %T instead", value)
 				}
-				sv.StartTime = &jtv
+				sv.StartTime = ptr.String(jtv)
 			}
 
 		case "width":
@@ -12149,7 +12208,7 @@ func awsRestjson1_deserializeDocumentInsertableImage(v **types.InsertableImage, 
 				if err != nil {
 					return err
 				}
-				sv.Width = ptr.Int32(int32(i64))
+				sv.Width = int32(i64)
 			}
 
 		default:
@@ -12189,7 +12248,7 @@ func awsRestjson1_deserializeDocumentInternalServerErrorException(v **types.Inte
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -12243,7 +12302,7 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Arn = &jtv
+				sv.Arn = ptr.String(jtv)
 			}
 
 		case "billingTagsSource":
@@ -12287,7 +12346,7 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				if err != nil {
 					return err
 				}
-				sv.ErrorCode = ptr.Int32(int32(i64))
+				sv.ErrorCode = int32(i64)
 			}
 
 		case "errorMessage":
@@ -12296,7 +12355,7 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.ErrorMessage = &jtv
+				sv.ErrorMessage = ptr.String(jtv)
 			}
 
 		case "hopDestinations":
@@ -12310,7 +12369,7 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Id = &jtv
+				sv.Id = ptr.String(jtv)
 			}
 
 		case "jobPercentComplete":
@@ -12323,7 +12382,7 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				if err != nil {
 					return err
 				}
-				sv.JobPercentComplete = ptr.Int32(int32(i64))
+				sv.JobPercentComplete = int32(i64)
 			}
 
 		case "jobTemplate":
@@ -12332,7 +12391,7 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.JobTemplate = &jtv
+				sv.JobTemplate = ptr.String(jtv)
 			}
 
 		case "messages":
@@ -12355,7 +12414,7 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				if err != nil {
 					return err
 				}
-				sv.Priority = ptr.Int32(int32(i64))
+				sv.Priority = int32(i64)
 			}
 
 		case "queue":
@@ -12364,7 +12423,7 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Queue = &jtv
+				sv.Queue = ptr.String(jtv)
 			}
 
 		case "queueTransitions":
@@ -12382,7 +12441,7 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				if err != nil {
 					return err
 				}
-				sv.RetryCount = ptr.Int32(int32(i64))
+				sv.RetryCount = int32(i64)
 			}
 
 		case "role":
@@ -12391,7 +12450,7 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Role = &jtv
+				sv.Role = ptr.String(jtv)
 			}
 
 		case "settings":
@@ -12518,7 +12577,7 @@ func awsRestjson1_deserializeDocumentJobSettings(v **types.JobSettings, value in
 				if err != nil {
 					return err
 				}
-				sv.AdAvailOffset = ptr.Int32(int32(i64))
+				sv.AdAvailOffset = int32(i64)
 			}
 
 		case "availBlanking":
@@ -12608,7 +12667,7 @@ func awsRestjson1_deserializeDocumentJobTemplate(v **types.JobTemplate, value in
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Arn = &jtv
+				sv.Arn = ptr.String(jtv)
 			}
 
 		case "category":
@@ -12617,7 +12676,7 @@ func awsRestjson1_deserializeDocumentJobTemplate(v **types.JobTemplate, value in
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Category = &jtv
+				sv.Category = ptr.String(jtv)
 			}
 
 		case "createdAt":
@@ -12639,7 +12698,7 @@ func awsRestjson1_deserializeDocumentJobTemplate(v **types.JobTemplate, value in
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Description = &jtv
+				sv.Description = ptr.String(jtv)
 			}
 
 		case "hopDestinations":
@@ -12666,7 +12725,7 @@ func awsRestjson1_deserializeDocumentJobTemplate(v **types.JobTemplate, value in
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "priority":
@@ -12679,7 +12738,7 @@ func awsRestjson1_deserializeDocumentJobTemplate(v **types.JobTemplate, value in
 				if err != nil {
 					return err
 				}
-				sv.Priority = ptr.Int32(int32(i64))
+				sv.Priority = int32(i64)
 			}
 
 		case "queue":
@@ -12688,7 +12747,7 @@ func awsRestjson1_deserializeDocumentJobTemplate(v **types.JobTemplate, value in
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Queue = &jtv
+				sv.Queue = ptr.String(jtv)
 			}
 
 		case "settings":
@@ -12755,7 +12814,7 @@ func awsRestjson1_deserializeDocumentJobTemplateSettings(v **types.JobTemplateSe
 				if err != nil {
 					return err
 				}
-				sv.AdAvailOffset = ptr.Int32(int32(i64))
+				sv.AdAvailOffset = int32(i64)
 			}
 
 		case "availBlanking":
@@ -12844,7 +12903,7 @@ func awsRestjson1_deserializeDocumentM2tsScte35Esam(v **types.M2tsScte35Esam, va
 				if err != nil {
 					return err
 				}
-				sv.Scte35EsamPid = ptr.Int32(int32(i64))
+				sv.Scte35EsamPid = int32(i64)
 			}
 
 		default:
@@ -12897,7 +12956,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				if err != nil {
 					return err
 				}
-				sv.AudioFramesPerPes = ptr.Int32(int32(i64))
+				sv.AudioFramesPerPes = int32(i64)
 			}
 
 		case "audioPids":
@@ -12915,7 +12974,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				if err != nil {
 					return err
 				}
-				sv.Bitrate = ptr.Int32(int32(i64))
+				sv.Bitrate = int32(i64)
 			}
 
 		case "bufferModel":
@@ -12957,7 +13016,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				if err != nil {
 					return err
 				}
-				sv.DvbTeletextPid = ptr.Int32(int32(i64))
+				sv.DvbTeletextPid = int32(i64)
 			}
 
 		case "ebpAudioInterval":
@@ -13006,7 +13065,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				if err != nil {
 					return err
 				}
-				sv.FragmentTime = &f64
+				sv.FragmentTime = f64
 			}
 
 		case "maxPcrInterval":
@@ -13019,7 +13078,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				if err != nil {
 					return err
 				}
-				sv.MaxPcrInterval = ptr.Int32(int32(i64))
+				sv.MaxPcrInterval = int32(i64)
 			}
 
 		case "minEbpInterval":
@@ -13032,7 +13091,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				if err != nil {
 					return err
 				}
-				sv.MinEbpInterval = ptr.Int32(int32(i64))
+				sv.MinEbpInterval = int32(i64)
 			}
 
 		case "nielsenId3":
@@ -13054,7 +13113,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				if err != nil {
 					return err
 				}
-				sv.NullPacketBitrate = &f64
+				sv.NullPacketBitrate = f64
 			}
 
 		case "patInterval":
@@ -13067,7 +13126,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				if err != nil {
 					return err
 				}
-				sv.PatInterval = ptr.Int32(int32(i64))
+				sv.PatInterval = int32(i64)
 			}
 
 		case "pcrControl":
@@ -13089,7 +13148,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				if err != nil {
 					return err
 				}
-				sv.PcrPid = ptr.Int32(int32(i64))
+				sv.PcrPid = int32(i64)
 			}
 
 		case "pmtInterval":
@@ -13102,7 +13161,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				if err != nil {
 					return err
 				}
-				sv.PmtInterval = ptr.Int32(int32(i64))
+				sv.PmtInterval = int32(i64)
 			}
 
 		case "pmtPid":
@@ -13115,7 +13174,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				if err != nil {
 					return err
 				}
-				sv.PmtPid = ptr.Int32(int32(i64))
+				sv.PmtPid = int32(i64)
 			}
 
 		case "privateMetadataPid":
@@ -13128,7 +13187,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				if err != nil {
 					return err
 				}
-				sv.PrivateMetadataPid = ptr.Int32(int32(i64))
+				sv.PrivateMetadataPid = int32(i64)
 			}
 
 		case "programNumber":
@@ -13141,7 +13200,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				if err != nil {
 					return err
 				}
-				sv.ProgramNumber = ptr.Int32(int32(i64))
+				sv.ProgramNumber = int32(i64)
 			}
 
 		case "rateMode":
@@ -13168,7 +13227,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				if err != nil {
 					return err
 				}
-				sv.Scte35Pid = ptr.Int32(int32(i64))
+				sv.Scte35Pid = int32(i64)
 			}
 
 		case "scte35Source":
@@ -13208,7 +13267,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				if err != nil {
 					return err
 				}
-				sv.SegmentationTime = &f64
+				sv.SegmentationTime = f64
 			}
 
 		case "timedMetadataPid":
@@ -13221,7 +13280,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				if err != nil {
 					return err
 				}
-				sv.TimedMetadataPid = ptr.Int32(int32(i64))
+				sv.TimedMetadataPid = int32(i64)
 			}
 
 		case "transportStreamId":
@@ -13234,7 +13293,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				if err != nil {
 					return err
 				}
-				sv.TransportStreamId = ptr.Int32(int32(i64))
+				sv.TransportStreamId = int32(i64)
 			}
 
 		case "videoPid":
@@ -13247,7 +13306,7 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				if err != nil {
 					return err
 				}
-				sv.VideoPid = ptr.Int32(int32(i64))
+				sv.VideoPid = int32(i64)
 			}
 
 		default:
@@ -13291,7 +13350,7 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.AudioFramesPerPes = ptr.Int32(int32(i64))
+				sv.AudioFramesPerPes = int32(i64)
 			}
 
 		case "audioPids":
@@ -13318,7 +13377,7 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.PatInterval = ptr.Int32(int32(i64))
+				sv.PatInterval = int32(i64)
 			}
 
 		case "pcrControl":
@@ -13340,7 +13399,7 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.PcrPid = ptr.Int32(int32(i64))
+				sv.PcrPid = int32(i64)
 			}
 
 		case "pmtInterval":
@@ -13353,7 +13412,7 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.PmtInterval = ptr.Int32(int32(i64))
+				sv.PmtInterval = int32(i64)
 			}
 
 		case "pmtPid":
@@ -13366,7 +13425,7 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.PmtPid = ptr.Int32(int32(i64))
+				sv.PmtPid = int32(i64)
 			}
 
 		case "privateMetadataPid":
@@ -13379,7 +13438,7 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.PrivateMetadataPid = ptr.Int32(int32(i64))
+				sv.PrivateMetadataPid = int32(i64)
 			}
 
 		case "programNumber":
@@ -13392,7 +13451,7 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.ProgramNumber = ptr.Int32(int32(i64))
+				sv.ProgramNumber = int32(i64)
 			}
 
 		case "scte35Pid":
@@ -13405,7 +13464,7 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.Scte35Pid = ptr.Int32(int32(i64))
+				sv.Scte35Pid = int32(i64)
 			}
 
 		case "scte35Source":
@@ -13436,7 +13495,7 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.TimedMetadataPid = ptr.Int32(int32(i64))
+				sv.TimedMetadataPid = int32(i64)
 			}
 
 		case "transportStreamId":
@@ -13449,7 +13508,7 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.TransportStreamId = ptr.Int32(int32(i64))
+				sv.TransportStreamId = int32(i64)
 			}
 
 		case "videoPid":
@@ -13462,7 +13521,7 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 				if err != nil {
 					return err
 				}
-				sv.VideoPid = ptr.Int32(int32(i64))
+				sv.VideoPid = int32(i64)
 			}
 
 		default:
@@ -13507,7 +13566,7 @@ func awsRestjson1_deserializeDocumentMotionImageInserter(v **types.MotionImageIn
 				if !ok {
 					return fmt.Errorf("expected __stringMin14Max1285PatternS3Mov09PngHttpsMov09Png to be of type string, got %T instead", value)
 				}
-				sv.Input = &jtv
+				sv.Input = ptr.String(jtv)
 			}
 
 		case "insertionMode":
@@ -13539,7 +13598,7 @@ func awsRestjson1_deserializeDocumentMotionImageInserter(v **types.MotionImageIn
 				if !ok {
 					return fmt.Errorf("expected __stringMin11Max11Pattern01D20305D205D to be of type string, got %T instead", value)
 				}
-				sv.StartTime = &jtv
+				sv.StartTime = ptr.String(jtv)
 			}
 
 		default:
@@ -13583,7 +13642,7 @@ func awsRestjson1_deserializeDocumentMotionImageInsertionFramerate(v **types.Mot
 				if err != nil {
 					return err
 				}
-				sv.FramerateDenominator = ptr.Int32(int32(i64))
+				sv.FramerateDenominator = int32(i64)
 			}
 
 		case "framerateNumerator":
@@ -13596,7 +13655,7 @@ func awsRestjson1_deserializeDocumentMotionImageInsertionFramerate(v **types.Mot
 				if err != nil {
 					return err
 				}
-				sv.FramerateNumerator = ptr.Int32(int32(i64))
+				sv.FramerateNumerator = int32(i64)
 			}
 
 		default:
@@ -13640,7 +13699,7 @@ func awsRestjson1_deserializeDocumentMotionImageInsertionOffset(v **types.Motion
 				if err != nil {
 					return err
 				}
-				sv.ImageX = ptr.Int32(int32(i64))
+				sv.ImageX = int32(i64)
 			}
 
 		case "imageY":
@@ -13653,7 +13712,7 @@ func awsRestjson1_deserializeDocumentMotionImageInsertionOffset(v **types.Motion
 				if err != nil {
 					return err
 				}
-				sv.ImageY = ptr.Int32(int32(i64))
+				sv.ImageY = int32(i64)
 			}
 
 		default:
@@ -13773,7 +13832,7 @@ func awsRestjson1_deserializeDocumentMp2Settings(v **types.Mp2Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.Bitrate = ptr.Int32(int32(i64))
+				sv.Bitrate = int32(i64)
 			}
 
 		case "channels":
@@ -13786,7 +13845,7 @@ func awsRestjson1_deserializeDocumentMp2Settings(v **types.Mp2Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.Channels = ptr.Int32(int32(i64))
+				sv.Channels = int32(i64)
 			}
 
 		case "sampleRate":
@@ -13799,7 +13858,7 @@ func awsRestjson1_deserializeDocumentMp2Settings(v **types.Mp2Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.SampleRate = ptr.Int32(int32(i64))
+				sv.SampleRate = int32(i64)
 			}
 
 		default:
@@ -13843,7 +13902,7 @@ func awsRestjson1_deserializeDocumentMp3Settings(v **types.Mp3Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.Bitrate = ptr.Int32(int32(i64))
+				sv.Bitrate = int32(i64)
 			}
 
 		case "channels":
@@ -13856,7 +13915,7 @@ func awsRestjson1_deserializeDocumentMp3Settings(v **types.Mp3Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.Channels = ptr.Int32(int32(i64))
+				sv.Channels = int32(i64)
 			}
 
 		case "rateControlMode":
@@ -13878,7 +13937,7 @@ func awsRestjson1_deserializeDocumentMp3Settings(v **types.Mp3Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.SampleRate = ptr.Int32(int32(i64))
+				sv.SampleRate = int32(i64)
 			}
 
 		case "vbrQuality":
@@ -13891,7 +13950,7 @@ func awsRestjson1_deserializeDocumentMp3Settings(v **types.Mp3Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.VbrQuality = ptr.Int32(int32(i64))
+				sv.VbrQuality = int32(i64)
 			}
 
 		default:
@@ -13944,7 +14003,7 @@ func awsRestjson1_deserializeDocumentMp4Settings(v **types.Mp4Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.CttsVersion = ptr.Int32(int32(i64))
+				sv.CttsVersion = int32(i64)
 			}
 
 		case "freeSpaceBox":
@@ -13971,7 +14030,7 @@ func awsRestjson1_deserializeDocumentMp4Settings(v **types.Mp4Settings, value in
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Mp4MajorBrand = &jtv
+				sv.Mp4MajorBrand = ptr.String(jtv)
 			}
 
 		default:
@@ -14082,7 +14141,7 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				if err != nil {
 					return err
 				}
-				sv.Bitrate = ptr.Int32(int32(i64))
+				sv.Bitrate = int32(i64)
 			}
 
 		case "codecLevel":
@@ -14140,7 +14199,7 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				if err != nil {
 					return err
 				}
-				sv.FramerateDenominator = ptr.Int32(int32(i64))
+				sv.FramerateDenominator = int32(i64)
 			}
 
 		case "framerateNumerator":
@@ -14153,7 +14212,7 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				if err != nil {
 					return err
 				}
-				sv.FramerateNumerator = ptr.Int32(int32(i64))
+				sv.FramerateNumerator = int32(i64)
 			}
 
 		case "gopClosedCadence":
@@ -14166,7 +14225,7 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				if err != nil {
 					return err
 				}
-				sv.GopClosedCadence = ptr.Int32(int32(i64))
+				sv.GopClosedCadence = int32(i64)
 			}
 
 		case "gopSize":
@@ -14179,7 +14238,7 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				if err != nil {
 					return err
 				}
-				sv.GopSize = &f64
+				sv.GopSize = f64
 			}
 
 		case "gopSizeUnits":
@@ -14201,7 +14260,7 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				if err != nil {
 					return err
 				}
-				sv.HrdBufferInitialFillPercentage = ptr.Int32(int32(i64))
+				sv.HrdBufferInitialFillPercentage = int32(i64)
 			}
 
 		case "hrdBufferSize":
@@ -14214,7 +14273,7 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				if err != nil {
 					return err
 				}
-				sv.HrdBufferSize = ptr.Int32(int32(i64))
+				sv.HrdBufferSize = int32(i64)
 			}
 
 		case "interlaceMode":
@@ -14245,7 +14304,7 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				if err != nil {
 					return err
 				}
-				sv.MaxBitrate = ptr.Int32(int32(i64))
+				sv.MaxBitrate = int32(i64)
 			}
 
 		case "minIInterval":
@@ -14258,7 +14317,7 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				if err != nil {
 					return err
 				}
-				sv.MinIInterval = ptr.Int32(int32(i64))
+				sv.MinIInterval = int32(i64)
 			}
 
 		case "numberBFramesBetweenReferenceFrames":
@@ -14271,7 +14330,7 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				if err != nil {
 					return err
 				}
-				sv.NumberBFramesBetweenReferenceFrames = ptr.Int32(int32(i64))
+				sv.NumberBFramesBetweenReferenceFrames = int32(i64)
 			}
 
 		case "parControl":
@@ -14293,7 +14352,7 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				if err != nil {
 					return err
 				}
-				sv.ParDenominator = ptr.Int32(int32(i64))
+				sv.ParDenominator = int32(i64)
 			}
 
 		case "parNumerator":
@@ -14306,7 +14365,7 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				if err != nil {
 					return err
 				}
-				sv.ParNumerator = ptr.Int32(int32(i64))
+				sv.ParNumerator = int32(i64)
 			}
 
 		case "qualityTuningLevel":
@@ -14355,7 +14414,7 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 				if err != nil {
 					return err
 				}
-				sv.Softness = ptr.Int32(int32(i64))
+				sv.Softness = int32(i64)
 			}
 
 		case "spatialAdaptiveQuantization":
@@ -14431,7 +14490,7 @@ func awsRestjson1_deserializeDocumentMsSmoothAdditionalManifest(v **types.MsSmoo
 				if !ok {
 					return fmt.Errorf("expected __stringMin1 to be of type string, got %T instead", value)
 				}
-				sv.ManifestNameModifier = &jtv
+				sv.ManifestNameModifier = ptr.String(jtv)
 			}
 
 		case "selectedOutputs":
@@ -14526,7 +14585,7 @@ func awsRestjson1_deserializeDocumentMsSmoothGroupSettings(v **types.MsSmoothGro
 				if !ok {
 					return fmt.Errorf("expected __stringPatternS3 to be of type string, got %T instead", value)
 				}
-				sv.Destination = &jtv
+				sv.Destination = ptr.String(jtv)
 			}
 
 		case "destinationSettings":
@@ -14549,7 +14608,7 @@ func awsRestjson1_deserializeDocumentMsSmoothGroupSettings(v **types.MsSmoothGro
 				if err != nil {
 					return err
 				}
-				sv.FragmentLength = ptr.Int32(int32(i64))
+				sv.FragmentLength = int32(i64)
 			}
 
 		case "manifestEncoding":
@@ -14647,7 +14706,7 @@ func awsRestjson1_deserializeDocumentNexGuardFileMarkerSettings(v **types.NexGua
 				if !ok {
 					return fmt.Errorf("expected __stringMin1Max100000 to be of type string, got %T instead", value)
 				}
-				sv.License = &jtv
+				sv.License = ptr.String(jtv)
 			}
 
 		case "payload":
@@ -14660,7 +14719,7 @@ func awsRestjson1_deserializeDocumentNexGuardFileMarkerSettings(v **types.NexGua
 				if err != nil {
 					return err
 				}
-				sv.Payload = ptr.Int32(int32(i64))
+				sv.Payload = int32(i64)
 			}
 
 		case "preset":
@@ -14669,7 +14728,7 @@ func awsRestjson1_deserializeDocumentNexGuardFileMarkerSettings(v **types.NexGua
 				if !ok {
 					return fmt.Errorf("expected __stringMin1Max256 to be of type string, got %T instead", value)
 				}
-				sv.Preset = &jtv
+				sv.Preset = ptr.String(jtv)
 			}
 
 		case "strength":
@@ -14722,7 +14781,7 @@ func awsRestjson1_deserializeDocumentNielsenConfiguration(v **types.NielsenConfi
 				if err != nil {
 					return err
 				}
-				sv.BreakoutCode = ptr.Int32(int32(i64))
+				sv.BreakoutCode = int32(i64)
 			}
 
 		case "distributorId":
@@ -14731,7 +14790,7 @@ func awsRestjson1_deserializeDocumentNielsenConfiguration(v **types.NielsenConfi
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.DistributorId = &jtv
+				sv.DistributorId = ptr.String(jtv)
 			}
 
 		default:
@@ -14780,7 +14839,7 @@ func awsRestjson1_deserializeDocumentNielsenNonLinearWatermarkSettings(v **types
 				if !ok {
 					return fmt.Errorf("expected __stringPatternS3 to be of type string, got %T instead", value)
 				}
-				sv.AdiFilename = &jtv
+				sv.AdiFilename = ptr.String(jtv)
 			}
 
 		case "assetId":
@@ -14789,7 +14848,7 @@ func awsRestjson1_deserializeDocumentNielsenNonLinearWatermarkSettings(v **types
 				if !ok {
 					return fmt.Errorf("expected __stringMin1Max20 to be of type string, got %T instead", value)
 				}
-				sv.AssetId = &jtv
+				sv.AssetId = ptr.String(jtv)
 			}
 
 		case "assetName":
@@ -14798,7 +14857,7 @@ func awsRestjson1_deserializeDocumentNielsenNonLinearWatermarkSettings(v **types
 				if !ok {
 					return fmt.Errorf("expected __stringMin1Max50 to be of type string, got %T instead", value)
 				}
-				sv.AssetName = &jtv
+				sv.AssetName = ptr.String(jtv)
 			}
 
 		case "cbetSourceId":
@@ -14807,7 +14866,7 @@ func awsRestjson1_deserializeDocumentNielsenNonLinearWatermarkSettings(v **types
 				if !ok {
 					return fmt.Errorf("expected __stringPattern0xAFaF0908190908 to be of type string, got %T instead", value)
 				}
-				sv.CbetSourceId = &jtv
+				sv.CbetSourceId = ptr.String(jtv)
 			}
 
 		case "episodeId":
@@ -14816,7 +14875,7 @@ func awsRestjson1_deserializeDocumentNielsenNonLinearWatermarkSettings(v **types
 				if !ok {
 					return fmt.Errorf("expected __stringMin1Max20 to be of type string, got %T instead", value)
 				}
-				sv.EpisodeId = &jtv
+				sv.EpisodeId = ptr.String(jtv)
 			}
 
 		case "metadataDestination":
@@ -14825,7 +14884,7 @@ func awsRestjson1_deserializeDocumentNielsenNonLinearWatermarkSettings(v **types
 				if !ok {
 					return fmt.Errorf("expected __stringPatternS3 to be of type string, got %T instead", value)
 				}
-				sv.MetadataDestination = &jtv
+				sv.MetadataDestination = ptr.String(jtv)
 			}
 
 		case "sourceId":
@@ -14838,7 +14897,7 @@ func awsRestjson1_deserializeDocumentNielsenNonLinearWatermarkSettings(v **types
 				if err != nil {
 					return err
 				}
-				sv.SourceId = ptr.Int32(int32(i64))
+				sv.SourceId = int32(i64)
 			}
 
 		case "sourceWatermarkStatus":
@@ -14856,7 +14915,7 @@ func awsRestjson1_deserializeDocumentNielsenNonLinearWatermarkSettings(v **types
 				if !ok {
 					return fmt.Errorf("expected __stringPatternHttps to be of type string, got %T instead", value)
 				}
-				sv.TicServerUrl = &jtv
+				sv.TicServerUrl = ptr.String(jtv)
 			}
 
 		case "uniqueTicPerAudioTrack":
@@ -14964,7 +15023,7 @@ func awsRestjson1_deserializeDocumentNoiseReducerFilterSettings(v **types.NoiseR
 				if err != nil {
 					return err
 				}
-				sv.Strength = ptr.Int32(int32(i64))
+				sv.Strength = int32(i64)
 			}
 
 		default:
@@ -15008,7 +15067,7 @@ func awsRestjson1_deserializeDocumentNoiseReducerSpatialFilterSettings(v **types
 				if err != nil {
 					return err
 				}
-				sv.PostFilterSharpenStrength = ptr.Int32(int32(i64))
+				sv.PostFilterSharpenStrength = int32(i64)
 			}
 
 		case "speed":
@@ -15021,7 +15080,7 @@ func awsRestjson1_deserializeDocumentNoiseReducerSpatialFilterSettings(v **types
 				if err != nil {
 					return err
 				}
-				sv.Speed = ptr.Int32(int32(i64))
+				sv.Speed = int32(i64)
 			}
 
 		case "strength":
@@ -15034,7 +15093,7 @@ func awsRestjson1_deserializeDocumentNoiseReducerSpatialFilterSettings(v **types
 				if err != nil {
 					return err
 				}
-				sv.Strength = ptr.Int32(int32(i64))
+				sv.Strength = int32(i64)
 			}
 
 		default:
@@ -15078,7 +15137,7 @@ func awsRestjson1_deserializeDocumentNoiseReducerTemporalFilterSettings(v **type
 				if err != nil {
 					return err
 				}
-				sv.AggressiveMode = ptr.Int32(int32(i64))
+				sv.AggressiveMode = int32(i64)
 			}
 
 		case "postTemporalSharpening":
@@ -15100,7 +15159,7 @@ func awsRestjson1_deserializeDocumentNoiseReducerTemporalFilterSettings(v **type
 				if err != nil {
 					return err
 				}
-				sv.Speed = ptr.Int32(int32(i64))
+				sv.Speed = int32(i64)
 			}
 
 		case "strength":
@@ -15113,7 +15172,7 @@ func awsRestjson1_deserializeDocumentNoiseReducerTemporalFilterSettings(v **type
 				if err != nil {
 					return err
 				}
-				sv.Strength = ptr.Int32(int32(i64))
+				sv.Strength = int32(i64)
 			}
 
 		default:
@@ -15153,7 +15212,7 @@ func awsRestjson1_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -15197,7 +15256,7 @@ func awsRestjson1_deserializeDocumentOpusSettings(v **types.OpusSettings, value 
 				if err != nil {
 					return err
 				}
-				sv.Bitrate = ptr.Int32(int32(i64))
+				sv.Bitrate = int32(i64)
 			}
 
 		case "channels":
@@ -15210,7 +15269,7 @@ func awsRestjson1_deserializeDocumentOpusSettings(v **types.OpusSettings, value 
 				if err != nil {
 					return err
 				}
-				sv.Channels = ptr.Int32(int32(i64))
+				sv.Channels = int32(i64)
 			}
 
 		case "sampleRate":
@@ -15223,7 +15282,7 @@ func awsRestjson1_deserializeDocumentOpusSettings(v **types.OpusSettings, value 
 				if err != nil {
 					return err
 				}
-				sv.SampleRate = ptr.Int32(int32(i64))
+				sv.SampleRate = int32(i64)
 			}
 
 		default:
@@ -15278,7 +15337,7 @@ func awsRestjson1_deserializeDocumentOutput(v **types.Output, value interface{})
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Extension = &jtv
+				sv.Extension = ptr.String(jtv)
 			}
 
 		case "nameModifier":
@@ -15287,7 +15346,7 @@ func awsRestjson1_deserializeDocumentOutput(v **types.Output, value interface{})
 				if !ok {
 					return fmt.Errorf("expected __stringMin1 to be of type string, got %T instead", value)
 				}
-				sv.NameModifier = &jtv
+				sv.NameModifier = ptr.String(jtv)
 			}
 
 		case "outputSettings":
@@ -15301,7 +15360,7 @@ func awsRestjson1_deserializeDocumentOutput(v **types.Output, value interface{})
 				if !ok {
 					return fmt.Errorf("expected __stringMin0 to be of type string, got %T instead", value)
 				}
-				sv.Preset = &jtv
+				sv.Preset = ptr.String(jtv)
 			}
 
 		case "videoDescription":
@@ -15386,7 +15445,7 @@ func awsRestjson1_deserializeDocumentOutputDetail(v **types.OutputDetail, value 
 				if err != nil {
 					return err
 				}
-				sv.DurationInMs = ptr.Int32(int32(i64))
+				sv.DurationInMs = int32(i64)
 			}
 
 		case "videoDetails":
@@ -15431,7 +15490,7 @@ func awsRestjson1_deserializeDocumentOutputGroup(v **types.OutputGroup, value in
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.CustomName = &jtv
+				sv.CustomName = ptr.String(jtv)
 			}
 
 		case "name":
@@ -15440,7 +15499,7 @@ func awsRestjson1_deserializeDocumentOutputGroup(v **types.OutputGroup, value in
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "outputGroupSettings":
@@ -15663,7 +15722,7 @@ func awsRestjson1_deserializeDocumentPreset(v **types.Preset, value interface{})
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Arn = &jtv
+				sv.Arn = ptr.String(jtv)
 			}
 
 		case "category":
@@ -15672,7 +15731,7 @@ func awsRestjson1_deserializeDocumentPreset(v **types.Preset, value interface{})
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Category = &jtv
+				sv.Category = ptr.String(jtv)
 			}
 
 		case "createdAt":
@@ -15694,7 +15753,7 @@ func awsRestjson1_deserializeDocumentPreset(v **types.Preset, value interface{})
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Description = &jtv
+				sv.Description = ptr.String(jtv)
 			}
 
 		case "lastUpdated":
@@ -15716,7 +15775,7 @@ func awsRestjson1_deserializeDocumentPreset(v **types.Preset, value interface{})
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "settings":
@@ -15852,7 +15911,7 @@ func awsRestjson1_deserializeDocumentProresSettings(v **types.ProresSettings, va
 				if err != nil {
 					return err
 				}
-				sv.FramerateDenominator = ptr.Int32(int32(i64))
+				sv.FramerateDenominator = int32(i64)
 			}
 
 		case "framerateNumerator":
@@ -15865,7 +15924,7 @@ func awsRestjson1_deserializeDocumentProresSettings(v **types.ProresSettings, va
 				if err != nil {
 					return err
 				}
-				sv.FramerateNumerator = ptr.Int32(int32(i64))
+				sv.FramerateNumerator = int32(i64)
 			}
 
 		case "interlaceMode":
@@ -15896,7 +15955,7 @@ func awsRestjson1_deserializeDocumentProresSettings(v **types.ProresSettings, va
 				if err != nil {
 					return err
 				}
-				sv.ParDenominator = ptr.Int32(int32(i64))
+				sv.ParDenominator = int32(i64)
 			}
 
 		case "parNumerator":
@@ -15909,7 +15968,7 @@ func awsRestjson1_deserializeDocumentProresSettings(v **types.ProresSettings, va
 				if err != nil {
 					return err
 				}
-				sv.ParNumerator = ptr.Int32(int32(i64))
+				sv.ParNumerator = int32(i64)
 			}
 
 		case "slowPal":
@@ -15967,7 +16026,7 @@ func awsRestjson1_deserializeDocumentQueue(v **types.Queue, value interface{}) e
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Arn = &jtv
+				sv.Arn = ptr.String(jtv)
 			}
 
 		case "createdAt":
@@ -15989,7 +16048,7 @@ func awsRestjson1_deserializeDocumentQueue(v **types.Queue, value interface{}) e
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Description = &jtv
+				sv.Description = ptr.String(jtv)
 			}
 
 		case "lastUpdated":
@@ -16011,7 +16070,7 @@ func awsRestjson1_deserializeDocumentQueue(v **types.Queue, value interface{}) e
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "pricingPlan":
@@ -16033,7 +16092,7 @@ func awsRestjson1_deserializeDocumentQueue(v **types.Queue, value interface{}) e
 				if err != nil {
 					return err
 				}
-				sv.ProgressingJobsCount = ptr.Int32(int32(i64))
+				sv.ProgressingJobsCount = int32(i64)
 			}
 
 		case "reservationPlan":
@@ -16060,7 +16119,7 @@ func awsRestjson1_deserializeDocumentQueue(v **types.Queue, value interface{}) e
 				if err != nil {
 					return err
 				}
-				sv.SubmittedJobsCount = ptr.Int32(int32(i64))
+				sv.SubmittedJobsCount = int32(i64)
 			}
 
 		case "type":
@@ -16109,7 +16168,7 @@ func awsRestjson1_deserializeDocumentQueueTransition(v **types.QueueTransition, 
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.DestinationQueue = &jtv
+				sv.DestinationQueue = ptr.String(jtv)
 			}
 
 		case "sourceQueue":
@@ -16118,7 +16177,7 @@ func awsRestjson1_deserializeDocumentQueueTransition(v **types.QueueTransition, 
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.SourceQueue = &jtv
+				sv.SourceQueue = ptr.String(jtv)
 			}
 
 		case "timestamp":
@@ -16175,7 +16234,7 @@ func awsRestjson1_deserializeDocumentRectangle(v **types.Rectangle, value interf
 				if err != nil {
 					return err
 				}
-				sv.Height = ptr.Int32(int32(i64))
+				sv.Height = int32(i64)
 			}
 
 		case "width":
@@ -16188,7 +16247,7 @@ func awsRestjson1_deserializeDocumentRectangle(v **types.Rectangle, value interf
 				if err != nil {
 					return err
 				}
-				sv.Width = ptr.Int32(int32(i64))
+				sv.Width = int32(i64)
 			}
 
 		case "x":
@@ -16201,7 +16260,7 @@ func awsRestjson1_deserializeDocumentRectangle(v **types.Rectangle, value interf
 				if err != nil {
 					return err
 				}
-				sv.X = ptr.Int32(int32(i64))
+				sv.X = int32(i64)
 			}
 
 		case "y":
@@ -16214,7 +16273,7 @@ func awsRestjson1_deserializeDocumentRectangle(v **types.Rectangle, value interf
 				if err != nil {
 					return err
 				}
-				sv.Y = ptr.Int32(int32(i64))
+				sv.Y = int32(i64)
 			}
 
 		default:
@@ -16263,7 +16322,7 @@ func awsRestjson1_deserializeDocumentRemixSettings(v **types.RemixSettings, valu
 				if err != nil {
 					return err
 				}
-				sv.ChannelsIn = ptr.Int32(int32(i64))
+				sv.ChannelsIn = int32(i64)
 			}
 
 		case "channelsOut":
@@ -16276,7 +16335,7 @@ func awsRestjson1_deserializeDocumentRemixSettings(v **types.RemixSettings, valu
 				if err != nil {
 					return err
 				}
-				sv.ChannelsOut = ptr.Int32(int32(i64))
+				sv.ChannelsOut = int32(i64)
 			}
 
 		default:
@@ -16364,7 +16423,7 @@ func awsRestjson1_deserializeDocumentReservationPlan(v **types.ReservationPlan, 
 				if err != nil {
 					return err
 				}
-				sv.ReservedSlots = ptr.Int32(int32(i64))
+				sv.ReservedSlots = int32(i64)
 			}
 
 		case "status":
@@ -16413,7 +16472,7 @@ func awsRestjson1_deserializeDocumentResourceTags(v **types.ResourceTags, value 
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Arn = &jtv
+				sv.Arn = ptr.String(jtv)
 			}
 
 		case "tags":
@@ -16548,7 +16607,7 @@ func awsRestjson1_deserializeDocumentS3EncryptionSettings(v **types.S3Encryption
 				if !ok {
 					return fmt.Errorf("expected __stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912 to be of type string, got %T instead", value)
 				}
-				sv.KmsKeyArn = &jtv
+				sv.KmsKeyArn = ptr.String(jtv)
 			}
 
 		default:
@@ -16628,7 +16687,7 @@ func awsRestjson1_deserializeDocumentSpekeKeyProvider(v **types.SpekeKeyProvider
 				if !ok {
 					return fmt.Errorf("expected __stringPatternArnAwsUsGovAcm to be of type string, got %T instead", value)
 				}
-				sv.CertificateArn = &jtv
+				sv.CertificateArn = ptr.String(jtv)
 			}
 
 		case "resourceId":
@@ -16637,7 +16696,7 @@ func awsRestjson1_deserializeDocumentSpekeKeyProvider(v **types.SpekeKeyProvider
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.ResourceId = &jtv
+				sv.ResourceId = ptr.String(jtv)
 			}
 
 		case "systemIds":
@@ -16651,7 +16710,7 @@ func awsRestjson1_deserializeDocumentSpekeKeyProvider(v **types.SpekeKeyProvider
 				if !ok {
 					return fmt.Errorf("expected __stringPatternHttps to be of type string, got %T instead", value)
 				}
-				sv.Url = &jtv
+				sv.Url = ptr.String(jtv)
 			}
 
 		default:
@@ -16691,7 +16750,7 @@ func awsRestjson1_deserializeDocumentSpekeKeyProviderCmaf(v **types.SpekeKeyProv
 				if !ok {
 					return fmt.Errorf("expected __stringPatternArnAwsUsGovAcm to be of type string, got %T instead", value)
 				}
-				sv.CertificateArn = &jtv
+				sv.CertificateArn = ptr.String(jtv)
 			}
 
 		case "dashSignaledSystemIds":
@@ -16710,7 +16769,7 @@ func awsRestjson1_deserializeDocumentSpekeKeyProviderCmaf(v **types.SpekeKeyProv
 				if !ok {
 					return fmt.Errorf("expected __stringPatternW to be of type string, got %T instead", value)
 				}
-				sv.ResourceId = &jtv
+				sv.ResourceId = ptr.String(jtv)
 			}
 
 		case "url":
@@ -16719,7 +16778,7 @@ func awsRestjson1_deserializeDocumentSpekeKeyProviderCmaf(v **types.SpekeKeyProv
 				if !ok {
 					return fmt.Errorf("expected __stringPatternHttps to be of type string, got %T instead", value)
 				}
-				sv.Url = &jtv
+				sv.Url = ptr.String(jtv)
 			}
 
 		default:
@@ -16759,7 +16818,7 @@ func awsRestjson1_deserializeDocumentStaticKeyProvider(v **types.StaticKeyProvid
 				if !ok {
 					return fmt.Errorf("expected __stringPatternIdentityAZaZ26AZaZ09163 to be of type string, got %T instead", value)
 				}
-				sv.KeyFormat = &jtv
+				sv.KeyFormat = ptr.String(jtv)
 			}
 
 		case "keyFormatVersions":
@@ -16768,7 +16827,7 @@ func awsRestjson1_deserializeDocumentStaticKeyProvider(v **types.StaticKeyProvid
 				if !ok {
 					return fmt.Errorf("expected __stringPatternDD to be of type string, got %T instead", value)
 				}
-				sv.KeyFormatVersions = &jtv
+				sv.KeyFormatVersions = ptr.String(jtv)
 			}
 
 		case "staticKeyValue":
@@ -16777,7 +16836,7 @@ func awsRestjson1_deserializeDocumentStaticKeyProvider(v **types.StaticKeyProvid
 				if !ok {
 					return fmt.Errorf("expected __stringPatternAZaZ0932 to be of type string, got %T instead", value)
 				}
-				sv.StaticKeyValue = &jtv
+				sv.StaticKeyValue = ptr.String(jtv)
 			}
 
 		case "url":
@@ -16786,7 +16845,7 @@ func awsRestjson1_deserializeDocumentStaticKeyProvider(v **types.StaticKeyProvid
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Url = &jtv
+				sv.Url = ptr.String(jtv)
 			}
 
 		default:
@@ -16826,7 +16885,7 @@ func awsRestjson1_deserializeDocumentTeletextDestinationSettings(v **types.Telet
 				if !ok {
 					return fmt.Errorf("expected __stringMin3Max3Pattern1809aFAF09aEAE to be of type string, got %T instead", value)
 				}
-				sv.PageNumber = &jtv
+				sv.PageNumber = ptr.String(jtv)
 			}
 
 		case "pageTypes":
@@ -16871,7 +16930,7 @@ func awsRestjson1_deserializeDocumentTeletextSourceSettings(v **types.TeletextSo
 				if !ok {
 					return fmt.Errorf("expected __stringMin3Max3Pattern1809aFAF09aEAE to be of type string, got %T instead", value)
 				}
-				sv.PageNumber = &jtv
+				sv.PageNumber = ptr.String(jtv)
 			}
 
 		default:
@@ -16915,7 +16974,7 @@ func awsRestjson1_deserializeDocumentTimecodeBurnin(v **types.TimecodeBurnin, va
 				if err != nil {
 					return err
 				}
-				sv.FontSize = ptr.Int32(int32(i64))
+				sv.FontSize = int32(i64)
 			}
 
 		case "position":
@@ -16933,7 +16992,7 @@ func awsRestjson1_deserializeDocumentTimecodeBurnin(v **types.TimecodeBurnin, va
 				if !ok {
 					return fmt.Errorf("expected __stringPattern to be of type string, got %T instead", value)
 				}
-				sv.Prefix = &jtv
+				sv.Prefix = ptr.String(jtv)
 			}
 
 		default:
@@ -16973,7 +17032,7 @@ func awsRestjson1_deserializeDocumentTimecodeConfig(v **types.TimecodeConfig, va
 				if !ok {
 					return fmt.Errorf("expected __stringPattern010920405090509092 to be of type string, got %T instead", value)
 				}
-				sv.Anchor = &jtv
+				sv.Anchor = ptr.String(jtv)
 			}
 
 		case "source":
@@ -16991,7 +17050,7 @@ func awsRestjson1_deserializeDocumentTimecodeConfig(v **types.TimecodeConfig, va
 				if !ok {
 					return fmt.Errorf("expected __stringPattern010920405090509092 to be of type string, got %T instead", value)
 				}
-				sv.Start = &jtv
+				sv.Start = ptr.String(jtv)
 			}
 
 		case "timestampOffset":
@@ -17000,7 +17059,7 @@ func awsRestjson1_deserializeDocumentTimecodeConfig(v **types.TimecodeConfig, va
 				if !ok {
 					return fmt.Errorf("expected __stringPattern0940191020191209301 to be of type string, got %T instead", value)
 				}
-				sv.TimestampOffset = &jtv
+				sv.TimestampOffset = ptr.String(jtv)
 			}
 
 		default:
@@ -17146,7 +17205,7 @@ func awsRestjson1_deserializeDocumentTooManyRequestsException(v **types.TooManyR
 				if !ok {
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -17190,7 +17249,7 @@ func awsRestjson1_deserializeDocumentTrackSourceSettings(v **types.TrackSourceSe
 				if err != nil {
 					return err
 				}
-				sv.TrackNumber = ptr.Int32(int32(i64))
+				sv.TrackNumber = int32(i64)
 			}
 
 		default:
@@ -17292,7 +17351,7 @@ func awsRestjson1_deserializeDocumentVc3Settings(v **types.Vc3Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.FramerateDenominator = ptr.Int32(int32(i64))
+				sv.FramerateDenominator = int32(i64)
 			}
 
 		case "framerateNumerator":
@@ -17305,7 +17364,7 @@ func awsRestjson1_deserializeDocumentVc3Settings(v **types.Vc3Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.FramerateNumerator = ptr.Int32(int32(i64))
+				sv.FramerateNumerator = int32(i64)
 			}
 
 		case "interlaceMode":
@@ -17521,7 +17580,7 @@ func awsRestjson1_deserializeDocumentVideoDescription(v **types.VideoDescription
 				if err != nil {
 					return err
 				}
-				sv.FixedAfd = ptr.Int32(int32(i64))
+				sv.FixedAfd = int32(i64)
 			}
 
 		case "height":
@@ -17534,7 +17593,7 @@ func awsRestjson1_deserializeDocumentVideoDescription(v **types.VideoDescription
 				if err != nil {
 					return err
 				}
-				sv.Height = ptr.Int32(int32(i64))
+				sv.Height = int32(i64)
 			}
 
 		case "position":
@@ -17570,7 +17629,7 @@ func awsRestjson1_deserializeDocumentVideoDescription(v **types.VideoDescription
 				if err != nil {
 					return err
 				}
-				sv.Sharpness = ptr.Int32(int32(i64))
+				sv.Sharpness = int32(i64)
 			}
 
 		case "timecodeInsertion":
@@ -17597,7 +17656,7 @@ func awsRestjson1_deserializeDocumentVideoDescription(v **types.VideoDescription
 				if err != nil {
 					return err
 				}
-				sv.Width = ptr.Int32(int32(i64))
+				sv.Width = int32(i64)
 			}
 
 		default:
@@ -17641,7 +17700,7 @@ func awsRestjson1_deserializeDocumentVideoDetail(v **types.VideoDetail, value in
 				if err != nil {
 					return err
 				}
-				sv.HeightInPx = ptr.Int32(int32(i64))
+				sv.HeightInPx = int32(i64)
 			}
 
 		case "widthInPx":
@@ -17654,7 +17713,7 @@ func awsRestjson1_deserializeDocumentVideoDetail(v **types.VideoDetail, value in
 				if err != nil {
 					return err
 				}
-				sv.WidthInPx = ptr.Int32(int32(i64))
+				sv.WidthInPx = int32(i64)
 			}
 
 		default:
@@ -17796,7 +17855,7 @@ func awsRestjson1_deserializeDocumentVideoSelector(v **types.VideoSelector, valu
 				if err != nil {
 					return err
 				}
-				sv.Pid = ptr.Int32(int32(i64))
+				sv.Pid = int32(i64)
 			}
 
 		case "programNumber":
@@ -17809,7 +17868,7 @@ func awsRestjson1_deserializeDocumentVideoSelector(v **types.VideoSelector, valu
 				if err != nil {
 					return err
 				}
-				sv.ProgramNumber = ptr.Int32(int32(i64))
+				sv.ProgramNumber = int32(i64)
 			}
 
 		case "rotate":
@@ -17862,7 +17921,7 @@ func awsRestjson1_deserializeDocumentVorbisSettings(v **types.VorbisSettings, va
 				if err != nil {
 					return err
 				}
-				sv.Channels = ptr.Int32(int32(i64))
+				sv.Channels = int32(i64)
 			}
 
 		case "sampleRate":
@@ -17875,7 +17934,7 @@ func awsRestjson1_deserializeDocumentVorbisSettings(v **types.VorbisSettings, va
 				if err != nil {
 					return err
 				}
-				sv.SampleRate = ptr.Int32(int32(i64))
+				sv.SampleRate = int32(i64)
 			}
 
 		case "vbrQuality":
@@ -17888,7 +17947,7 @@ func awsRestjson1_deserializeDocumentVorbisSettings(v **types.VorbisSettings, va
 				if err != nil {
 					return err
 				}
-				sv.VbrQuality = ptr.Int32(int32(i64))
+				sv.VbrQuality = int32(i64)
 			}
 
 		default:
@@ -17932,7 +17991,7 @@ func awsRestjson1_deserializeDocumentVp8Settings(v **types.Vp8Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.Bitrate = ptr.Int32(int32(i64))
+				sv.Bitrate = int32(i64)
 			}
 
 		case "framerateControl":
@@ -17963,7 +18022,7 @@ func awsRestjson1_deserializeDocumentVp8Settings(v **types.Vp8Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.FramerateDenominator = ptr.Int32(int32(i64))
+				sv.FramerateDenominator = int32(i64)
 			}
 
 		case "framerateNumerator":
@@ -17976,7 +18035,7 @@ func awsRestjson1_deserializeDocumentVp8Settings(v **types.Vp8Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.FramerateNumerator = ptr.Int32(int32(i64))
+				sv.FramerateNumerator = int32(i64)
 			}
 
 		case "gopSize":
@@ -17989,7 +18048,7 @@ func awsRestjson1_deserializeDocumentVp8Settings(v **types.Vp8Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.GopSize = &f64
+				sv.GopSize = f64
 			}
 
 		case "hrdBufferSize":
@@ -18002,7 +18061,7 @@ func awsRestjson1_deserializeDocumentVp8Settings(v **types.Vp8Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.HrdBufferSize = ptr.Int32(int32(i64))
+				sv.HrdBufferSize = int32(i64)
 			}
 
 		case "maxBitrate":
@@ -18015,7 +18074,7 @@ func awsRestjson1_deserializeDocumentVp8Settings(v **types.Vp8Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.MaxBitrate = ptr.Int32(int32(i64))
+				sv.MaxBitrate = int32(i64)
 			}
 
 		case "parControl":
@@ -18037,7 +18096,7 @@ func awsRestjson1_deserializeDocumentVp8Settings(v **types.Vp8Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.ParDenominator = ptr.Int32(int32(i64))
+				sv.ParDenominator = int32(i64)
 			}
 
 		case "parNumerator":
@@ -18050,7 +18109,7 @@ func awsRestjson1_deserializeDocumentVp8Settings(v **types.Vp8Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.ParNumerator = ptr.Int32(int32(i64))
+				sv.ParNumerator = int32(i64)
 			}
 
 		case "qualityTuningLevel":
@@ -18112,7 +18171,7 @@ func awsRestjson1_deserializeDocumentVp9Settings(v **types.Vp9Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.Bitrate = ptr.Int32(int32(i64))
+				sv.Bitrate = int32(i64)
 			}
 
 		case "framerateControl":
@@ -18143,7 +18202,7 @@ func awsRestjson1_deserializeDocumentVp9Settings(v **types.Vp9Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.FramerateDenominator = ptr.Int32(int32(i64))
+				sv.FramerateDenominator = int32(i64)
 			}
 
 		case "framerateNumerator":
@@ -18156,7 +18215,7 @@ func awsRestjson1_deserializeDocumentVp9Settings(v **types.Vp9Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.FramerateNumerator = ptr.Int32(int32(i64))
+				sv.FramerateNumerator = int32(i64)
 			}
 
 		case "gopSize":
@@ -18169,7 +18228,7 @@ func awsRestjson1_deserializeDocumentVp9Settings(v **types.Vp9Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.GopSize = &f64
+				sv.GopSize = f64
 			}
 
 		case "hrdBufferSize":
@@ -18182,7 +18241,7 @@ func awsRestjson1_deserializeDocumentVp9Settings(v **types.Vp9Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.HrdBufferSize = ptr.Int32(int32(i64))
+				sv.HrdBufferSize = int32(i64)
 			}
 
 		case "maxBitrate":
@@ -18195,7 +18254,7 @@ func awsRestjson1_deserializeDocumentVp9Settings(v **types.Vp9Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.MaxBitrate = ptr.Int32(int32(i64))
+				sv.MaxBitrate = int32(i64)
 			}
 
 		case "parControl":
@@ -18217,7 +18276,7 @@ func awsRestjson1_deserializeDocumentVp9Settings(v **types.Vp9Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.ParDenominator = ptr.Int32(int32(i64))
+				sv.ParDenominator = int32(i64)
 			}
 
 		case "parNumerator":
@@ -18230,7 +18289,7 @@ func awsRestjson1_deserializeDocumentVp9Settings(v **types.Vp9Settings, value in
 				if err != nil {
 					return err
 				}
-				sv.ParNumerator = ptr.Int32(int32(i64))
+				sv.ParNumerator = int32(i64)
 			}
 
 		case "qualityTuningLevel":
@@ -18292,7 +18351,7 @@ func awsRestjson1_deserializeDocumentWavSettings(v **types.WavSettings, value in
 				if err != nil {
 					return err
 				}
-				sv.BitDepth = ptr.Int32(int32(i64))
+				sv.BitDepth = int32(i64)
 			}
 
 		case "channels":
@@ -18305,7 +18364,7 @@ func awsRestjson1_deserializeDocumentWavSettings(v **types.WavSettings, value in
 				if err != nil {
 					return err
 				}
-				sv.Channels = ptr.Int32(int32(i64))
+				sv.Channels = int32(i64)
 			}
 
 		case "format":
@@ -18327,7 +18386,7 @@ func awsRestjson1_deserializeDocumentWavSettings(v **types.WavSettings, value in
 				if err != nil {
 					return err
 				}
-				sv.SampleRate = ptr.Int32(int32(i64))
+				sv.SampleRate = int32(i64)
 			}
 
 		default:

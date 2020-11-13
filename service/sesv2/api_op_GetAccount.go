@@ -39,7 +39,7 @@ type GetAccountOutput struct {
 
 	// Indicates whether or not the automatic warm-up feature is enabled for dedicated
 	// IP addresses that are associated with your account.
-	DedicatedIpAutoWarmupEnabled *bool
+	DedicatedIpAutoWarmupEnabled bool
 
 	// An object that defines your account details.
 	Details *types.AccountDetails
@@ -69,7 +69,7 @@ type GetAccountOutput struct {
 	// has production access. When your account has production access, you can send
 	// email to any address. The sending quota and maximum sending rate for your
 	// account vary based on your specific use case.
-	ProductionAccessEnabled *bool
+	ProductionAccessEnabled bool
 
 	// An object that contains information about the per-day and per-second sending
 	// limits for your Amazon SES account in the current AWS Region.
@@ -77,7 +77,7 @@ type GetAccountOutput struct {
 
 	// Indicates whether or not email sending is enabled for your Amazon SES account in
 	// the current AWS Region.
-	SendingEnabled *bool
+	SendingEnabled bool
 
 	// An object that contains information about the email address suppression
 	// preferences for your account in the current AWS Region.

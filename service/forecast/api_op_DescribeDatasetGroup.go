@@ -54,7 +54,7 @@ type DescribeDatasetGroupOutput struct {
 
 	// An array of Amazon Resource Names (ARNs) of the datasets contained in the
 	// dataset group.
-	DatasetArns []*string
+	DatasetArns []string
 
 	// The ARN of the dataset group.
 	DatasetGroupArn *string

@@ -109,7 +109,7 @@ type ActivateGatewayInput struct {
 	// numbers that can be represented in UTF-8 format, and the following special
 	// characters: + - = . _ : / @. The maximum length of a tag's key is 128
 	// characters, and the maximum length for a tag's value is 256 characters.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The value that indicates the type of tape drive to use for tape gateway. This
 	// field is optional. Valid Values: IBM-ULT3580-TD5

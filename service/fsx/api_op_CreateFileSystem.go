@@ -96,7 +96,7 @@ type CreateFileSystemInput struct {
 	// Zone.
 	//
 	// This member is required.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent
 	// creation. This string is automatically filled on your behalf when you use the
@@ -119,7 +119,7 @@ type CreateFileSystemInput struct {
 	// A list of IDs specifying the security groups to apply to all network interfaces
 	// created for file system access. This list isn't returned in later requests to
 	// describe the file system.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// Sets the storage type for the file system you're creating. Valid values are SSD
 	// and HDD.
@@ -141,7 +141,7 @@ type CreateFileSystemInput struct {
 
 	// The tags to apply to the file system being created. The key value of the Name
 	// tag appears in the console as the file system name.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The Microsoft Windows configuration for the file system being created.
 	WindowsConfiguration *types.CreateFileSystemWindowsConfiguration

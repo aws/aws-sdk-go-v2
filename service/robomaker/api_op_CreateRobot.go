@@ -46,7 +46,7 @@ type CreateRobotInput struct {
 	Name *string
 
 	// A map that contains tag keys and tag values that are attached to the robot.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateRobotOutput struct {
@@ -68,7 +68,7 @@ type CreateRobotOutput struct {
 	Name *string
 
 	// The list of all tags added to the robot.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

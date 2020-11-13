@@ -39,7 +39,7 @@ type ListIndicesInput struct {
 type ListIndicesOutput struct {
 
 	// The index names.
-	IndexNames []*string
+	IndexNames []string
 
 	// The token used to get the next set of results, or null if there are no
 	// additional results.

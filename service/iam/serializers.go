@@ -7699,34 +7699,28 @@ func (m *awsAwsquery_serializeOpUploadSSHPublicKey) HandleSerialize(ctx context.
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsAwsquery_serializeDocumentActionNameListType(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentActionNameListType(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentClientIDListType(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentClientIDListType(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -7755,36 +7749,30 @@ func awsAwsquery_serializeDocumentContextEntry(v *types.ContextEntry, value quer
 	return nil
 }
 
-func awsAwsquery_serializeDocumentContextEntryListType(v []*types.ContextEntry, value query.Value) error {
+func awsAwsquery_serializeDocumentContextEntryListType(v []types.ContextEntry, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentContextEntry(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentContextEntry(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentContextKeyValueListType(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentContextKeyValueListType(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -7802,50 +7790,41 @@ func awsAwsquery_serializeDocumentEntityListType(v []types.EntityType, value que
 	return nil
 }
 
-func awsAwsquery_serializeDocumentResourceNameListType(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentResourceNameListType(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentServiceNamespaceListType(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentServiceNamespaceListType(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSimulationPolicyListType(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentSimulationPolicyListType(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -7867,52 +7846,43 @@ func awsAwsquery_serializeDocumentTag(v *types.Tag, value query.Value) error {
 	return nil
 }
 
-func awsAwsquery_serializeDocumentTagKeyListType(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentTagKeyListType(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentTagListType(v []*types.Tag, value query.Value) error {
+func awsAwsquery_serializeDocumentTagListType(v []types.Tag, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentTag(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentThumbprintListType(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentThumbprintListType(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -8103,9 +8073,9 @@ func awsAwsquery_serializeOpDocumentCreateLoginProfileInput(v *CreateLoginProfil
 		objectKey.String(*v.Password)
 	}
 
-	if v.PasswordResetRequired != nil {
+	if v.PasswordResetRequired {
 		objectKey := object.Key("PasswordResetRequired")
-		objectKey.Boolean(*v.PasswordResetRequired)
+		objectKey.Boolean(v.PasswordResetRequired)
 	}
 
 	if v.UserName != nil {
@@ -8183,9 +8153,9 @@ func awsAwsquery_serializeOpDocumentCreatePolicyVersionInput(v *CreatePolicyVers
 		objectKey.String(*v.PolicyDocument)
 	}
 
-	if v.SetAsDefault != nil {
+	if v.SetAsDefault {
 		objectKey := object.Key("SetAsDefault")
-		objectKey.Boolean(*v.SetAsDefault)
+		objectKey.Boolean(v.SetAsDefault)
 	}
 
 	return nil
@@ -9504,9 +9474,9 @@ func awsAwsquery_serializeOpDocumentListPoliciesInput(v *ListPoliciesInput, valu
 		objectKey.Integer(*v.MaxItems)
 	}
 
-	if v.OnlyAttached != nil {
+	if v.OnlyAttached {
 		objectKey := object.Key("OnlyAttached")
-		objectKey.Boolean(*v.OnlyAttached)
+		objectKey.Boolean(v.OnlyAttached)
 	}
 
 	if v.PathPrefix != nil {
@@ -10268,9 +10238,9 @@ func awsAwsquery_serializeOpDocumentUpdateAccountPasswordPolicyInput(v *UpdateAc
 	object := value.Object()
 	_ = object
 
-	if v.AllowUsersToChangePassword != nil {
+	if v.AllowUsersToChangePassword {
 		objectKey := object.Key("AllowUsersToChangePassword")
-		objectKey.Boolean(*v.AllowUsersToChangePassword)
+		objectKey.Boolean(v.AllowUsersToChangePassword)
 	}
 
 	if v.HardExpiry != nil {
@@ -10293,24 +10263,24 @@ func awsAwsquery_serializeOpDocumentUpdateAccountPasswordPolicyInput(v *UpdateAc
 		objectKey.Integer(*v.PasswordReusePrevention)
 	}
 
-	if v.RequireLowercaseCharacters != nil {
+	if v.RequireLowercaseCharacters {
 		objectKey := object.Key("RequireLowercaseCharacters")
-		objectKey.Boolean(*v.RequireLowercaseCharacters)
+		objectKey.Boolean(v.RequireLowercaseCharacters)
 	}
 
-	if v.RequireNumbers != nil {
+	if v.RequireNumbers {
 		objectKey := object.Key("RequireNumbers")
-		objectKey.Boolean(*v.RequireNumbers)
+		objectKey.Boolean(v.RequireNumbers)
 	}
 
-	if v.RequireSymbols != nil {
+	if v.RequireSymbols {
 		objectKey := object.Key("RequireSymbols")
-		objectKey.Boolean(*v.RequireSymbols)
+		objectKey.Boolean(v.RequireSymbols)
 	}
 
-	if v.RequireUppercaseCharacters != nil {
+	if v.RequireUppercaseCharacters {
 		objectKey := object.Key("RequireUppercaseCharacters")
-		objectKey.Boolean(*v.RequireUppercaseCharacters)
+		objectKey.Boolean(v.RequireUppercaseCharacters)
 	}
 
 	return nil

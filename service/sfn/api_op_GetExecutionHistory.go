@@ -51,7 +51,7 @@ type GetExecutionHistoryInput struct {
 	// page size is 1000. A value of 0 uses the default. This is only an upper limit.
 	// The actual number of results returned per call might be fewer than the specified
 	// maximum.
-	MaxResults *int32
+	MaxResults int32
 
 	// If nextToken is returned, there are more results available. The value of
 	// nextToken is a unique pagination token for each page. Make the call again using
@@ -61,7 +61,7 @@ type GetExecutionHistoryInput struct {
 	NextToken *string
 
 	// Lists events in descending order of their timeStamp.
-	ReverseOrder *bool
+	ReverseOrder bool
 }
 
 type GetExecutionHistoryOutput struct {
@@ -69,7 +69,7 @@ type GetExecutionHistoryOutput struct {
 	// The list of events that occurred in the execution.
 	//
 	// This member is required.
-	Events []*types.HistoryEvent
+	Events []types.HistoryEvent
 
 	// If nextToken is returned, there are more results available. The value of
 	// nextToken is a unique pagination token for each page. Make the call again using

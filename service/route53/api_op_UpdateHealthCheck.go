@@ -49,7 +49,7 @@ type UpdateHealthCheckInput struct {
 
 	// A complex type that contains one ChildHealthCheck element for each health check
 	// that you want to associate with a CALCULATED health check.
-	ChildHealthChecks []*string
+	ChildHealthChecks []string
 
 	// Stops Route 53 from performing health checks. When you disable a health check,
 	// here's what happens:

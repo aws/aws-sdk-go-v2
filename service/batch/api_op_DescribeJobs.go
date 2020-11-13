@@ -32,13 +32,13 @@ type DescribeJobsInput struct {
 	// A list of up to 100 job IDs.
 	//
 	// This member is required.
-	Jobs []*string
+	Jobs []string
 }
 
 type DescribeJobsOutput struct {
 
 	// The list of jobs.
-	Jobs []*types.JobDetail
+	Jobs []types.JobDetail
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

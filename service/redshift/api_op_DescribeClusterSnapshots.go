@@ -99,7 +99,7 @@ type DescribeClusterSnapshotsInput struct {
 	SnapshotType *string
 
 	//
-	SortingEntities []*types.SnapshotSortingEntity
+	SortingEntities []types.SnapshotSortingEntity
 
 	// A value that requests only snapshots created at or after the specified time. The
 	// time value is specified in ISO 8601 format. For more information about ISO 8601,
@@ -113,7 +113,7 @@ type DescribeClusterSnapshotsInput struct {
 	// you specify both of these tag keys in the request, Amazon Redshift returns a
 	// response with the snapshots that have either or both of these tag keys
 	// associated with them.
-	TagKeys []*string
+	TagKeys []string
 
 	// A tag value or values for which you want to return all matching cluster
 	// snapshots that are associated with the specified tag value or values. For
@@ -121,7 +121,7 @@ type DescribeClusterSnapshotsInput struct {
 	// admin and test. If you specify both of these tag values in the request, Amazon
 	// Redshift returns a response with the snapshots that have either or both of these
 	// tag values associated with them.
-	TagValues []*string
+	TagValues []string
 }
 
 // Contains the output from the DescribeClusterSnapshots action.
@@ -135,7 +135,7 @@ type DescribeClusterSnapshotsOutput struct {
 	Marker *string
 
 	// A list of Snapshot instances.
-	Snapshots []*types.Snapshot
+	Snapshots []types.Snapshot
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

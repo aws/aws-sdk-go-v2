@@ -57,7 +57,7 @@ type ListNodesOutput struct {
 
 	// An array of NodeSummary objects that contain configuration properties for each
 	// node.
-	Nodes []*types.NodeSummary
+	Nodes []types.NodeSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

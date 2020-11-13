@@ -50,7 +50,7 @@ type UpdateGlobalTableSettingsInput struct {
 
 	// Represents the settings of a global secondary index for a global table that will
 	// be modified.
-	GlobalTableGlobalSecondaryIndexSettingsUpdate []*types.GlobalTableGlobalSecondaryIndexSettingsUpdate
+	GlobalTableGlobalSecondaryIndexSettingsUpdate []types.GlobalTableGlobalSecondaryIndexSettingsUpdate
 
 	// Auto scaling settings for managing provisioned write capacity for the global
 	// table.
@@ -61,7 +61,7 @@ type UpdateGlobalTableSettingsInput struct {
 	GlobalTableProvisionedWriteCapacityUnits *int64
 
 	// Represents the settings for a global table in a Region that will be modified.
-	ReplicaSettingsUpdate []*types.ReplicaSettingsUpdate
+	ReplicaSettingsUpdate []types.ReplicaSettingsUpdate
 }
 
 type UpdateGlobalTableSettingsOutput struct {
@@ -70,7 +70,7 @@ type UpdateGlobalTableSettingsOutput struct {
 	GlobalTableName *string
 
 	// The Region-specific settings for the global table.
-	ReplicaSettings []*types.ReplicaSettingsDescription
+	ReplicaSettings []types.ReplicaSettingsDescription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

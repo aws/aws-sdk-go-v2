@@ -110,7 +110,7 @@ type SendEmailInput struct {
 
 	// The reply-to email address(es) for the message. If the recipient replies to the
 	// message, each reply-to address will receive the reply.
-	ReplyToAddresses []*string
+	ReplyToAddresses []string
 
 	// The email address that bounces and complaints will be forwarded to when feedback
 	// forwarding is enabled. If the message cannot be delivered to the recipient, then
@@ -148,7 +148,7 @@ type SendEmailInput struct {
 	// A list of tags, in the form of name/value pairs, to apply to an email that you
 	// send using SendEmail. Tags correspond to characteristics of the email that you
 	// define, so that you can publish email sending events.
-	Tags []*types.MessageTag
+	Tags []types.MessageTag
 }
 
 // Represents a unique message ID.

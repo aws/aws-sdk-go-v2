@@ -52,7 +52,7 @@ type ListRepositoriesOutput struct {
 	// The returned list of RepositorySummary
 	// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html)
 	// objects.
-	Repositories []*types.RepositorySummary
+	Repositories []types.RepositorySummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

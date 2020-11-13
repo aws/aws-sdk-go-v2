@@ -49,7 +49,7 @@ type ListTagsForStreamOutput struct {
 	NextToken *string
 
 	// A map of tag keys and values associated with the specified stream.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

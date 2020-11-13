@@ -71,10 +71,10 @@ type CreateDataRepositoryTaskInput struct {
 	// file system. If the mount point is /mnt/fsx and /mnt/fsx/path1 is a directory or
 	// file on the file system you want to export, then the path to provide is path1.
 	// If a path that you provide isn't valid, the task fails.
-	Paths []*string
+	Paths []string
 
 	// A list of Tag values, with a maximum of 50 elements.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateDataRepositoryTaskOutput struct {

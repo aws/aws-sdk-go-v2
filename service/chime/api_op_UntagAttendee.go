@@ -41,7 +41,7 @@ type UntagAttendeeInput struct {
 	// The tag keys.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 type UntagAttendeeOutput struct {

@@ -59,7 +59,7 @@ type CreateSnapshotCopyGrantInput struct {
 	KmsKeyId *string
 
 	// A list of tag instances.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateSnapshotCopyGrantOutput struct {

@@ -615,9 +615,6 @@ func validateAccessLog(v *types.AccessLog) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AccessLog"}
-	if v.Enabled == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -630,9 +627,6 @@ func validateConnectionDraining(v *types.ConnectionDraining) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ConnectionDraining"}
-	if v.Enabled == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -660,9 +654,6 @@ func validateCrossZoneLoadBalancing(v *types.CrossZoneLoadBalancing) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CrossZoneLoadBalancing"}
-	if v.Enabled == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -675,20 +666,8 @@ func validateHealthCheck(v *types.HealthCheck) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "HealthCheck"}
-	if v.HealthyThreshold == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("HealthyThreshold"))
-	}
-	if v.UnhealthyThreshold == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UnhealthyThreshold"))
-	}
 	if v.Target == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Target"))
-	}
-	if v.Interval == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Interval"))
-	}
-	if v.Timeout == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Timeout"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -702,12 +681,6 @@ func validateListener(v *types.Listener) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Listener"}
-	if v.LoadBalancerPort == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerPort"))
-	}
-	if v.InstancePort == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InstancePort"))
-	}
 	if v.Protocol == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
 	}
@@ -718,13 +691,13 @@ func validateListener(v *types.Listener) error {
 	}
 }
 
-func validateListeners(v []*types.Listener) error {
+func validateListeners(v []types.Listener) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Listeners"}
 	for i := range v {
-		if err := validateListener(v[i]); err != nil {
+		if err := validateListener(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -782,13 +755,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagList(v []*types.Tag) error {
+func validateTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1219,9 +1192,6 @@ func validateOpSetLoadBalancerListenerSSLCertificateInput(v *SetLoadBalancerList
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SetLoadBalancerListenerSSLCertificateInput"}
-	if v.LoadBalancerPort == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerPort"))
-	}
 	if v.SSLCertificateId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SSLCertificateId"))
 	}
@@ -1266,9 +1236,6 @@ func validateOpSetLoadBalancerPoliciesOfListenerInput(v *SetLoadBalancerPolicies
 	}
 	if v.LoadBalancerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerName"))
-	}
-	if v.LoadBalancerPort == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LoadBalancerPort"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

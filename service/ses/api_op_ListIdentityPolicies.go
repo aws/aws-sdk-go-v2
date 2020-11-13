@@ -57,7 +57,7 @@ type ListIdentityPoliciesOutput struct {
 	// A list of names of policies that apply to the specified identity.
 	//
 	// This member is required.
-	PolicyNames []*string
+	PolicyNames []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

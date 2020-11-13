@@ -69,7 +69,7 @@ type Device struct {
 	State DeviceState
 
 	// The tags for the device.
-	Tags []*Tag
+	Tags []Tag
 
 	// The device type.
 	Type *string
@@ -97,7 +97,7 @@ type GlobalNetwork struct {
 	State GlobalNetworkState
 
 	// The tags for the global network.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes a link.
@@ -131,7 +131,7 @@ type Link struct {
 	State LinkState
 
 	// The tags for the link.
-	Tags []*Tag
+	Tags []Tag
 
 	// The type of the link.
 	Type *string
@@ -191,7 +191,7 @@ type Site struct {
 	State SiteState
 
 	// The tags for the site.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes a tag.

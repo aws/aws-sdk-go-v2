@@ -48,14 +48,14 @@ type CreateSimulationApplicationInput struct {
 	// The sources of the simulation application.
 	//
 	// This member is required.
-	Sources []*types.SourceConfig
+	Sources []types.SourceConfig
 
 	// The rendering engine for the simulation application.
 	RenderingEngine *types.RenderingEngine
 
 	// A map that contains tag keys and tag values that are attached to the simulation
 	// application.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateSimulationApplicationOutput struct {
@@ -83,10 +83,10 @@ type CreateSimulationApplicationOutput struct {
 	SimulationSoftwareSuite *types.SimulationSoftwareSuite
 
 	// The sources of the simulation application.
-	Sources []*types.Source
+	Sources []types.Source
 
 	// The list of all tags added to the simulation application.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The version of the simulation application.
 	Version *string

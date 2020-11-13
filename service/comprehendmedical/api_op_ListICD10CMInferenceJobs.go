@@ -44,7 +44,7 @@ type ListICD10CMInferenceJobsInput struct {
 type ListICD10CMInferenceJobsOutput struct {
 
 	// A list containing the properties of each job that is returned.
-	ComprehendMedicalAsyncJobPropertiesList []*types.ComprehendMedicalAsyncJobProperties
+	ComprehendMedicalAsyncJobPropertiesList []types.ComprehendMedicalAsyncJobProperties
 
 	// Identifies the next page of results to return.
 	NextToken *string

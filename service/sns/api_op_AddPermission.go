@@ -34,13 +34,13 @@ type AddPermissionInput struct {
 	// signed up for this service.
 	//
 	// This member is required.
-	AWSAccountId []*string
+	AWSAccountId []string
 
 	// The action you want to allow for the specified principal(s). Valid values: Any
 	// Amazon SNS action name, for example Publish.
 	//
 	// This member is required.
-	ActionName []*string
+	ActionName []string
 
 	// A unique identifier for the new policy statement.
 	//

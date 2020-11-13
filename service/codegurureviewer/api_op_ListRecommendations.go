@@ -49,7 +49,7 @@ type ListRecommendationsOutput struct {
 	NextToken *string
 
 	// List of recommendations for the requested code review.
-	RecommendationSummaries []*types.RecommendationSummary
+	RecommendationSummaries []types.RecommendationSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

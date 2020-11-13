@@ -84,20 +84,15 @@ func awsRestxml_serializeOpHttpBindingsCreateAccessPointInput(v *CreateAccessPoi
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AccountId != nil {
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
 		locationName := "X-Amz-Account-Id"
-		if len(*v.AccountId) > 0 {
-			encoder.SetHeader(locationName).String(*v.AccountId)
-		}
+		encoder.SetHeader(locationName).String(*v.AccountId)
 	}
 
-	if v.Name == nil {
+	if v.Name == nil || len(*v.Name) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
 	}
 	if v.Name != nil {
-		if len(*v.Name) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
-		}
 		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
 			return err
 		}
@@ -227,63 +222,48 @@ func awsRestxml_serializeOpHttpBindingsCreateBucketInput(v *CreateBucketInput, e
 		encoder.SetHeader(locationName).String(string(v.ACL))
 	}
 
-	if v.Bucket == nil {
+	if v.Bucket == nil || len(*v.Bucket) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
 	}
 	if v.Bucket != nil {
-		if len(*v.Bucket) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
 	}
 
-	if v.GrantFullControl != nil {
+	if v.GrantFullControl != nil && len(*v.GrantFullControl) > 0 {
 		locationName := "X-Amz-Grant-Full-Control"
-		if len(*v.GrantFullControl) > 0 {
-			encoder.SetHeader(locationName).String(*v.GrantFullControl)
-		}
+		encoder.SetHeader(locationName).String(*v.GrantFullControl)
 	}
 
-	if v.GrantRead != nil {
+	if v.GrantRead != nil && len(*v.GrantRead) > 0 {
 		locationName := "X-Amz-Grant-Read"
-		if len(*v.GrantRead) > 0 {
-			encoder.SetHeader(locationName).String(*v.GrantRead)
-		}
+		encoder.SetHeader(locationName).String(*v.GrantRead)
 	}
 
-	if v.GrantReadACP != nil {
+	if v.GrantReadACP != nil && len(*v.GrantReadACP) > 0 {
 		locationName := "X-Amz-Grant-Read-Acp"
-		if len(*v.GrantReadACP) > 0 {
-			encoder.SetHeader(locationName).String(*v.GrantReadACP)
-		}
+		encoder.SetHeader(locationName).String(*v.GrantReadACP)
 	}
 
-	if v.GrantWrite != nil {
+	if v.GrantWrite != nil && len(*v.GrantWrite) > 0 {
 		locationName := "X-Amz-Grant-Write"
-		if len(*v.GrantWrite) > 0 {
-			encoder.SetHeader(locationName).String(*v.GrantWrite)
-		}
+		encoder.SetHeader(locationName).String(*v.GrantWrite)
 	}
 
-	if v.GrantWriteACP != nil {
+	if v.GrantWriteACP != nil && len(*v.GrantWriteACP) > 0 {
 		locationName := "X-Amz-Grant-Write-Acp"
-		if len(*v.GrantWriteACP) > 0 {
-			encoder.SetHeader(locationName).String(*v.GrantWriteACP)
-		}
+		encoder.SetHeader(locationName).String(*v.GrantWriteACP)
 	}
 
-	if v.ObjectLockEnabledForBucket != nil {
+	if v.ObjectLockEnabledForBucket {
 		locationName := "X-Amz-Bucket-Object-Lock-Enabled"
-		encoder.SetHeader(locationName).Boolean(*v.ObjectLockEnabledForBucket)
+		encoder.SetHeader(locationName).Boolean(v.ObjectLockEnabledForBucket)
 	}
 
-	if v.OutpostId != nil {
+	if v.OutpostId != nil && len(*v.OutpostId) > 0 {
 		locationName := "X-Amz-Outpost-Id"
-		if len(*v.OutpostId) > 0 {
-			encoder.SetHeader(locationName).String(*v.OutpostId)
-		}
+		encoder.SetHeader(locationName).String(*v.OutpostId)
 	}
 
 	return nil
@@ -358,11 +338,9 @@ func awsRestxml_serializeOpHttpBindingsCreateJobInput(v *CreateJobInput, encoder
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AccountId != nil {
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
 		locationName := "X-Amz-Account-Id"
-		if len(*v.AccountId) > 0 {
-			encoder.SetHeader(locationName).String(*v.AccountId)
-		}
+		encoder.SetHeader(locationName).String(*v.AccountId)
 	}
 
 	return nil
@@ -381,7 +359,7 @@ func awsRestxml_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smith
 		el := value.MemberElement(root)
 		el.String(*v.ClientRequestToken)
 	}
-	if v.ConfirmationRequired != nil {
+	if v.ConfirmationRequired {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -390,7 +368,7 @@ func awsRestxml_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smith
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Boolean(*v.ConfirmationRequired)
+		el.Boolean(v.ConfirmationRequired)
 	}
 	if v.Description != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -429,7 +407,7 @@ func awsRestxml_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smith
 			return err
 		}
 	}
-	if v.Priority != nil {
+	if v.Priority != 0 {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -438,7 +416,7 @@ func awsRestxml_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smith
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Integer(*v.Priority)
+		el.Integer(v.Priority)
 	}
 	if v.Report != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -531,20 +509,15 @@ func awsRestxml_serializeOpHttpBindingsDeleteAccessPointInput(v *DeleteAccessPoi
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AccountId != nil {
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
 		locationName := "X-Amz-Account-Id"
-		if len(*v.AccountId) > 0 {
-			encoder.SetHeader(locationName).String(*v.AccountId)
-		}
+		encoder.SetHeader(locationName).String(*v.AccountId)
 	}
 
-	if v.Name == nil {
+	if v.Name == nil || len(*v.Name) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
 	}
 	if v.Name != nil {
-		if len(*v.Name) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
-		}
 		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
 			return err
 		}
@@ -604,20 +577,15 @@ func awsRestxml_serializeOpHttpBindingsDeleteAccessPointPolicyInput(v *DeleteAcc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AccountId != nil {
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
 		locationName := "X-Amz-Account-Id"
-		if len(*v.AccountId) > 0 {
-			encoder.SetHeader(locationName).String(*v.AccountId)
-		}
+		encoder.SetHeader(locationName).String(*v.AccountId)
 	}
 
-	if v.Name == nil {
+	if v.Name == nil || len(*v.Name) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
 	}
 	if v.Name != nil {
-		if len(*v.Name) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
-		}
 		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
 			return err
 		}
@@ -677,20 +645,15 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketInput(v *DeleteBucketInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AccountId != nil {
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
 		locationName := "X-Amz-Account-Id"
-		if len(*v.AccountId) > 0 {
-			encoder.SetHeader(locationName).String(*v.AccountId)
-		}
+		encoder.SetHeader(locationName).String(*v.AccountId)
 	}
 
-	if v.Bucket == nil {
+	if v.Bucket == nil || len(*v.Bucket) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
 	}
 	if v.Bucket != nil {
-		if len(*v.Bucket) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -750,20 +713,15 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketLifecycleConfigurationInput(v
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AccountId != nil {
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
 		locationName := "X-Amz-Account-Id"
-		if len(*v.AccountId) > 0 {
-			encoder.SetHeader(locationName).String(*v.AccountId)
-		}
+		encoder.SetHeader(locationName).String(*v.AccountId)
 	}
 
-	if v.Bucket == nil {
+	if v.Bucket == nil || len(*v.Bucket) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
 	}
 	if v.Bucket != nil {
-		if len(*v.Bucket) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -823,20 +781,15 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketPolicyInput(v *DeleteBucketPo
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AccountId != nil {
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
 		locationName := "X-Amz-Account-Id"
-		if len(*v.AccountId) > 0 {
-			encoder.SetHeader(locationName).String(*v.AccountId)
-		}
+		encoder.SetHeader(locationName).String(*v.AccountId)
 	}
 
-	if v.Bucket == nil {
+	if v.Bucket == nil || len(*v.Bucket) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
 	}
 	if v.Bucket != nil {
-		if len(*v.Bucket) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -896,20 +849,15 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketTaggingInput(v *DeleteBucketT
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AccountId != nil {
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
 		locationName := "X-Amz-Account-Id"
-		if len(*v.AccountId) > 0 {
-			encoder.SetHeader(locationName).String(*v.AccountId)
-		}
+		encoder.SetHeader(locationName).String(*v.AccountId)
 	}
 
-	if v.Bucket == nil {
+	if v.Bucket == nil || len(*v.Bucket) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
 	}
 	if v.Bucket != nil {
-		if len(*v.Bucket) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -969,20 +917,15 @@ func awsRestxml_serializeOpHttpBindingsDeleteJobTaggingInput(v *DeleteJobTagging
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AccountId != nil {
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
 		locationName := "X-Amz-Account-Id"
-		if len(*v.AccountId) > 0 {
-			encoder.SetHeader(locationName).String(*v.AccountId)
-		}
+		encoder.SetHeader(locationName).String(*v.AccountId)
 	}
 
-	if v.JobId == nil {
+	if v.JobId == nil || len(*v.JobId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member JobId must not be empty")}
 	}
 	if v.JobId != nil {
-		if len(*v.JobId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member JobId must not be empty")}
-		}
 		if err := encoder.SetURI("JobId").String(*v.JobId); err != nil {
 			return err
 		}
@@ -1042,11 +985,9 @@ func awsRestxml_serializeOpHttpBindingsDeletePublicAccessBlockInput(v *DeletePub
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AccountId != nil {
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
 		locationName := "X-Amz-Account-Id"
-		if len(*v.AccountId) > 0 {
-			encoder.SetHeader(locationName).String(*v.AccountId)
-		}
+		encoder.SetHeader(locationName).String(*v.AccountId)
 	}
 
 	return nil
@@ -1103,20 +1044,15 @@ func awsRestxml_serializeOpHttpBindingsDescribeJobInput(v *DescribeJobInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AccountId != nil {
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
 		locationName := "X-Amz-Account-Id"
-		if len(*v.AccountId) > 0 {
-			encoder.SetHeader(locationName).String(*v.AccountId)
-		}
+		encoder.SetHeader(locationName).String(*v.AccountId)
 	}
 
-	if v.JobId == nil {
+	if v.JobId == nil || len(*v.JobId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member JobId must not be empty")}
 	}
 	if v.JobId != nil {
-		if len(*v.JobId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member JobId must not be empty")}
-		}
 		if err := encoder.SetURI("JobId").String(*v.JobId); err != nil {
 			return err
 		}
@@ -1176,20 +1112,15 @@ func awsRestxml_serializeOpHttpBindingsGetAccessPointInput(v *GetAccessPointInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AccountId != nil {
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
 		locationName := "X-Amz-Account-Id"
-		if len(*v.AccountId) > 0 {
-			encoder.SetHeader(locationName).String(*v.AccountId)
-		}
+		encoder.SetHeader(locationName).String(*v.AccountId)
 	}
 
-	if v.Name == nil {
+	if v.Name == nil || len(*v.Name) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
 	}
 	if v.Name != nil {
-		if len(*v.Name) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
-		}
 		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
 			return err
 		}
@@ -1249,20 +1180,15 @@ func awsRestxml_serializeOpHttpBindingsGetAccessPointPolicyInput(v *GetAccessPoi
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AccountId != nil {
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
 		locationName := "X-Amz-Account-Id"
-		if len(*v.AccountId) > 0 {
-			encoder.SetHeader(locationName).String(*v.AccountId)
-		}
+		encoder.SetHeader(locationName).String(*v.AccountId)
 	}
 
-	if v.Name == nil {
+	if v.Name == nil || len(*v.Name) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
 	}
 	if v.Name != nil {
-		if len(*v.Name) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
-		}
 		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
 			return err
 		}
@@ -1322,20 +1248,15 @@ func awsRestxml_serializeOpHttpBindingsGetAccessPointPolicyStatusInput(v *GetAcc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AccountId != nil {
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
 		locationName := "X-Amz-Account-Id"
-		if len(*v.AccountId) > 0 {
-			encoder.SetHeader(locationName).String(*v.AccountId)
-		}
+		encoder.SetHeader(locationName).String(*v.AccountId)
 	}
 
-	if v.Name == nil {
+	if v.Name == nil || len(*v.Name) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
 	}
 	if v.Name != nil {
-		if len(*v.Name) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
-		}
 		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
 			return err
 		}
@@ -1395,20 +1316,15 @@ func awsRestxml_serializeOpHttpBindingsGetBucketInput(v *GetBucketInput, encoder
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AccountId != nil {
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
 		locationName := "X-Amz-Account-Id"
-		if len(*v.AccountId) > 0 {
-			encoder.SetHeader(locationName).String(*v.AccountId)
-		}
+		encoder.SetHeader(locationName).String(*v.AccountId)
 	}
 
-	if v.Bucket == nil {
+	if v.Bucket == nil || len(*v.Bucket) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
 	}
 	if v.Bucket != nil {
-		if len(*v.Bucket) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -1468,20 +1384,15 @@ func awsRestxml_serializeOpHttpBindingsGetBucketLifecycleConfigurationInput(v *G
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AccountId != nil {
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
 		locationName := "X-Amz-Account-Id"
-		if len(*v.AccountId) > 0 {
-			encoder.SetHeader(locationName).String(*v.AccountId)
-		}
+		encoder.SetHeader(locationName).String(*v.AccountId)
 	}
 
-	if v.Bucket == nil {
+	if v.Bucket == nil || len(*v.Bucket) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
 	}
 	if v.Bucket != nil {
-		if len(*v.Bucket) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -1541,20 +1452,15 @@ func awsRestxml_serializeOpHttpBindingsGetBucketPolicyInput(v *GetBucketPolicyIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AccountId != nil {
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
 		locationName := "X-Amz-Account-Id"
-		if len(*v.AccountId) > 0 {
-			encoder.SetHeader(locationName).String(*v.AccountId)
-		}
+		encoder.SetHeader(locationName).String(*v.AccountId)
 	}
 
-	if v.Bucket == nil {
+	if v.Bucket == nil || len(*v.Bucket) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
 	}
 	if v.Bucket != nil {
-		if len(*v.Bucket) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -1614,20 +1520,15 @@ func awsRestxml_serializeOpHttpBindingsGetBucketTaggingInput(v *GetBucketTagging
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AccountId != nil {
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
 		locationName := "X-Amz-Account-Id"
-		if len(*v.AccountId) > 0 {
-			encoder.SetHeader(locationName).String(*v.AccountId)
-		}
+		encoder.SetHeader(locationName).String(*v.AccountId)
 	}
 
-	if v.Bucket == nil {
+	if v.Bucket == nil || len(*v.Bucket) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
 	}
 	if v.Bucket != nil {
-		if len(*v.Bucket) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -1687,20 +1588,15 @@ func awsRestxml_serializeOpHttpBindingsGetJobTaggingInput(v *GetJobTaggingInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AccountId != nil {
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
 		locationName := "X-Amz-Account-Id"
-		if len(*v.AccountId) > 0 {
-			encoder.SetHeader(locationName).String(*v.AccountId)
-		}
+		encoder.SetHeader(locationName).String(*v.AccountId)
 	}
 
-	if v.JobId == nil {
+	if v.JobId == nil || len(*v.JobId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member JobId must not be empty")}
 	}
 	if v.JobId != nil {
-		if len(*v.JobId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member JobId must not be empty")}
-		}
 		if err := encoder.SetURI("JobId").String(*v.JobId); err != nil {
 			return err
 		}
@@ -1760,11 +1656,9 @@ func awsRestxml_serializeOpHttpBindingsGetPublicAccessBlockInput(v *GetPublicAcc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AccountId != nil {
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
 		locationName := "X-Amz-Account-Id"
-		if len(*v.AccountId) > 0 {
-			encoder.SetHeader(locationName).String(*v.AccountId)
-		}
+		encoder.SetHeader(locationName).String(*v.AccountId)
 	}
 
 	return nil
@@ -1821,19 +1715,17 @@ func awsRestxml_serializeOpHttpBindingsListAccessPointsInput(v *ListAccessPoints
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AccountId != nil {
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
 		locationName := "X-Amz-Account-Id"
-		if len(*v.AccountId) > 0 {
-			encoder.SetHeader(locationName).String(*v.AccountId)
-		}
+		encoder.SetHeader(locationName).String(*v.AccountId)
 	}
 
 	if v.Bucket != nil {
 		encoder.SetQuery("bucket").String(*v.Bucket)
 	}
 
-	if v.MaxResults != nil {
-		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	if v.MaxResults != 0 {
+		encoder.SetQuery("maxResults").Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1894,11 +1786,9 @@ func awsRestxml_serializeOpHttpBindingsListJobsInput(v *ListJobsInput, encoder *
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AccountId != nil {
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
 		locationName := "X-Amz-Account-Id"
-		if len(*v.AccountId) > 0 {
-			encoder.SetHeader(locationName).String(*v.AccountId)
-		}
+		encoder.SetHeader(locationName).String(*v.AccountId)
 	}
 
 	if v.JobStatuses != nil {
@@ -1907,8 +1797,8 @@ func awsRestxml_serializeOpHttpBindingsListJobsInput(v *ListJobsInput, encoder *
 		}
 	}
 
-	if v.MaxResults != nil {
-		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	if v.MaxResults != 0 {
+		encoder.SetQuery("maxResults").Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1969,26 +1859,22 @@ func awsRestxml_serializeOpHttpBindingsListRegionalBucketsInput(v *ListRegionalB
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AccountId != nil {
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
 		locationName := "X-Amz-Account-Id"
-		if len(*v.AccountId) > 0 {
-			encoder.SetHeader(locationName).String(*v.AccountId)
-		}
+		encoder.SetHeader(locationName).String(*v.AccountId)
 	}
 
-	if v.MaxResults != nil {
-		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	if v.MaxResults != 0 {
+		encoder.SetQuery("maxResults").Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
 		encoder.SetQuery("nextToken").String(*v.NextToken)
 	}
 
-	if v.OutpostId != nil {
+	if v.OutpostId != nil && len(*v.OutpostId) > 0 {
 		locationName := "X-Amz-Outpost-Id"
-		if len(*v.OutpostId) > 0 {
-			encoder.SetHeader(locationName).String(*v.OutpostId)
-		}
+		encoder.SetHeader(locationName).String(*v.OutpostId)
 	}
 
 	return nil
@@ -2063,20 +1949,15 @@ func awsRestxml_serializeOpHttpBindingsPutAccessPointPolicyInput(v *PutAccessPoi
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AccountId != nil {
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
 		locationName := "X-Amz-Account-Id"
-		if len(*v.AccountId) > 0 {
-			encoder.SetHeader(locationName).String(*v.AccountId)
-		}
+		encoder.SetHeader(locationName).String(*v.AccountId)
 	}
 
-	if v.Name == nil {
+	if v.Name == nil || len(*v.Name) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
 	}
 	if v.Name != nil {
-		if len(*v.Name) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
-		}
 		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
 			return err
 		}
@@ -2175,20 +2056,15 @@ func awsRestxml_serializeOpHttpBindingsPutBucketLifecycleConfigurationInput(v *P
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AccountId != nil {
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
 		locationName := "X-Amz-Account-Id"
-		if len(*v.AccountId) > 0 {
-			encoder.SetHeader(locationName).String(*v.AccountId)
-		}
+		encoder.SetHeader(locationName).String(*v.AccountId)
 	}
 
-	if v.Bucket == nil {
+	if v.Bucket == nil || len(*v.Bucket) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
 	}
 	if v.Bucket != nil {
-		if len(*v.Bucket) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -2266,28 +2142,23 @@ func awsRestxml_serializeOpHttpBindingsPutBucketPolicyInput(v *PutBucketPolicyIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AccountId != nil {
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
 		locationName := "X-Amz-Account-Id"
-		if len(*v.AccountId) > 0 {
-			encoder.SetHeader(locationName).String(*v.AccountId)
-		}
+		encoder.SetHeader(locationName).String(*v.AccountId)
 	}
 
-	if v.Bucket == nil {
+	if v.Bucket == nil || len(*v.Bucket) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
 	}
 	if v.Bucket != nil {
-		if len(*v.Bucket) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
 	}
 
-	if v.ConfirmRemoveSelfBucketAccess != nil {
+	if v.ConfirmRemoveSelfBucketAccess {
 		locationName := "X-Amz-Confirm-Remove-Self-Bucket-Access"
-		encoder.SetHeader(locationName).Boolean(*v.ConfirmRemoveSelfBucketAccess)
+		encoder.SetHeader(locationName).Boolean(v.ConfirmRemoveSelfBucketAccess)
 	}
 
 	return nil
@@ -2383,20 +2254,15 @@ func awsRestxml_serializeOpHttpBindingsPutBucketTaggingInput(v *PutBucketTagging
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AccountId != nil {
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
 		locationName := "X-Amz-Account-Id"
-		if len(*v.AccountId) > 0 {
-			encoder.SetHeader(locationName).String(*v.AccountId)
-		}
+		encoder.SetHeader(locationName).String(*v.AccountId)
 	}
 
-	if v.Bucket == nil {
+	if v.Bucket == nil || len(*v.Bucket) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
 	}
 	if v.Bucket != nil {
-		if len(*v.Bucket) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-		}
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
@@ -2474,20 +2340,15 @@ func awsRestxml_serializeOpHttpBindingsPutJobTaggingInput(v *PutJobTaggingInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AccountId != nil {
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
 		locationName := "X-Amz-Account-Id"
-		if len(*v.AccountId) > 0 {
-			encoder.SetHeader(locationName).String(*v.AccountId)
-		}
+		encoder.SetHeader(locationName).String(*v.AccountId)
 	}
 
-	if v.JobId == nil {
+	if v.JobId == nil || len(*v.JobId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member JobId must not be empty")}
 	}
 	if v.JobId != nil {
-		if len(*v.JobId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member JobId must not be empty")}
-		}
 		if err := encoder.SetURI("JobId").String(*v.JobId); err != nil {
 			return err
 		}
@@ -2588,11 +2449,9 @@ func awsRestxml_serializeOpHttpBindingsPutPublicAccessBlockInput(v *PutPublicAcc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AccountId != nil {
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
 		locationName := "X-Amz-Account-Id"
-		if len(*v.AccountId) > 0 {
-			encoder.SetHeader(locationName).String(*v.AccountId)
-		}
+		encoder.SetHeader(locationName).String(*v.AccountId)
 	}
 
 	return nil
@@ -2649,27 +2508,22 @@ func awsRestxml_serializeOpHttpBindingsUpdateJobPriorityInput(v *UpdateJobPriori
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AccountId != nil {
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
 		locationName := "X-Amz-Account-Id"
-		if len(*v.AccountId) > 0 {
-			encoder.SetHeader(locationName).String(*v.AccountId)
-		}
+		encoder.SetHeader(locationName).String(*v.AccountId)
 	}
 
-	if v.JobId == nil {
+	if v.JobId == nil || len(*v.JobId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member JobId must not be empty")}
 	}
 	if v.JobId != nil {
-		if len(*v.JobId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member JobId must not be empty")}
-		}
 		if err := encoder.SetURI("JobId").String(*v.JobId); err != nil {
 			return err
 		}
 	}
 
-	if v.Priority != nil {
-		encoder.SetQuery("priority").Integer(*v.Priority)
+	if v.Priority != 0 {
+		encoder.SetQuery("priority").Integer(v.Priority)
 	}
 
 	return nil
@@ -2726,20 +2580,15 @@ func awsRestxml_serializeOpHttpBindingsUpdateJobStatusInput(v *UpdateJobStatusIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AccountId != nil {
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
 		locationName := "X-Amz-Account-Id"
-		if len(*v.AccountId) > 0 {
-			encoder.SetHeader(locationName).String(*v.AccountId)
-		}
+		encoder.SetHeader(locationName).String(*v.AccountId)
 	}
 
-	if v.JobId == nil {
+	if v.JobId == nil || len(*v.JobId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member JobId must not be empty")}
 	}
 	if v.JobId != nil {
-		if len(*v.JobId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member JobId must not be empty")}
-		}
 		if err := encoder.SetURI("JobId").String(*v.JobId); err != nil {
 			return err
 		}
@@ -2758,7 +2607,7 @@ func awsRestxml_serializeOpHttpBindingsUpdateJobStatusInput(v *UpdateJobStatusIn
 
 func awsRestxml_serializeDocumentAbortIncompleteMultipartUpload(v *types.AbortIncompleteMultipartUpload, value smithyxml.Value) error {
 	defer value.Close()
-	if v.DaysAfterInitiation != nil {
+	if v.DaysAfterInitiation != 0 {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -2767,7 +2616,7 @@ func awsRestxml_serializeDocumentAbortIncompleteMultipartUpload(v *types.AbortIn
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Integer(*v.DaysAfterInitiation)
+		el.Integer(v.DaysAfterInitiation)
 	}
 	return nil
 }
@@ -3008,7 +2857,7 @@ func awsRestxml_serializeDocumentJobReport(v *types.JobReport, value smithyxml.V
 		el := value.MemberElement(root)
 		el.String(*v.Bucket)
 	}
-	if v.Enabled != nil {
+	if v.Enabled {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -3017,7 +2866,7 @@ func awsRestxml_serializeDocumentJobReport(v *types.JobReport, value smithyxml.V
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Boolean(*v.Enabled)
+		el.Boolean(v.Enabled)
 	}
 	if len(v.Format) > 0 {
 		rootAttr := []smithyxml.Attr{}
@@ -3102,7 +2951,7 @@ func awsRestxml_serializeDocumentLifecycleExpiration(v *types.LifecycleExpiratio
 		el := value.MemberElement(root)
 		el.String(smithytime.FormatDateTime(*v.Date))
 	}
-	if v.Days != nil {
+	if v.Days != 0 {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -3111,9 +2960,9 @@ func awsRestxml_serializeDocumentLifecycleExpiration(v *types.LifecycleExpiratio
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Integer(*v.Days)
+		el.Integer(v.Days)
 	}
-	if v.ExpiredObjectDeleteMarker != nil {
+	if v.ExpiredObjectDeleteMarker {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -3122,7 +2971,7 @@ func awsRestxml_serializeDocumentLifecycleExpiration(v *types.LifecycleExpiratio
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Boolean(*v.ExpiredObjectDeleteMarker)
+		el.Boolean(v.ExpiredObjectDeleteMarker)
 	}
 	return nil
 }
@@ -3303,7 +3152,7 @@ func awsRestxml_serializeDocumentLifecycleRuleFilter(v *types.LifecycleRuleFilte
 	return nil
 }
 
-func awsRestxml_serializeDocumentLifecycleRules(v []*types.LifecycleRule, value smithyxml.Value) error {
+func awsRestxml_serializeDocumentLifecycleRules(v []types.LifecycleRule, value smithyxml.Value) error {
 	var array *smithyxml.Array
 	if !value.IsFlattened() {
 		defer value.Close()
@@ -3317,13 +3166,8 @@ func awsRestxml_serializeDocumentLifecycleRules(v []*types.LifecycleRule, value 
 	}
 	array = value.ArrayWithCustomName(customMemberName)
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			am := array.Member()
-			am.Close()
-			continue
-		}
 		am := array.Member()
-		if err := awsRestxml_serializeDocumentLifecycleRule(v[i], am); err != nil {
+		if err := awsRestxml_serializeDocumentLifecycleRule(&v[i], am); err != nil {
 			return err
 		}
 	}
@@ -3332,7 +3176,7 @@ func awsRestxml_serializeDocumentLifecycleRules(v []*types.LifecycleRule, value 
 
 func awsRestxml_serializeDocumentNoncurrentVersionExpiration(v *types.NoncurrentVersionExpiration, value smithyxml.Value) error {
 	defer value.Close()
-	if v.NoncurrentDays != nil {
+	if v.NoncurrentDays != 0 {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -3341,14 +3185,14 @@ func awsRestxml_serializeDocumentNoncurrentVersionExpiration(v *types.Noncurrent
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Integer(*v.NoncurrentDays)
+		el.Integer(v.NoncurrentDays)
 	}
 	return nil
 }
 
 func awsRestxml_serializeDocumentNoncurrentVersionTransition(v *types.NoncurrentVersionTransition, value smithyxml.Value) error {
 	defer value.Close()
-	if v.NoncurrentDays != nil {
+	if v.NoncurrentDays != 0 {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -3357,7 +3201,7 @@ func awsRestxml_serializeDocumentNoncurrentVersionTransition(v *types.Noncurrent
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Integer(*v.NoncurrentDays)
+		el.Integer(v.NoncurrentDays)
 	}
 	if len(v.StorageClass) > 0 {
 		rootAttr := []smithyxml.Attr{}
@@ -3373,7 +3217,7 @@ func awsRestxml_serializeDocumentNoncurrentVersionTransition(v *types.Noncurrent
 	return nil
 }
 
-func awsRestxml_serializeDocumentNoncurrentVersionTransitionList(v []*types.NoncurrentVersionTransition, value smithyxml.Value) error {
+func awsRestxml_serializeDocumentNoncurrentVersionTransitionList(v []types.NoncurrentVersionTransition, value smithyxml.Value) error {
 	var array *smithyxml.Array
 	if !value.IsFlattened() {
 		defer value.Close()
@@ -3387,13 +3231,8 @@ func awsRestxml_serializeDocumentNoncurrentVersionTransitionList(v []*types.Nonc
 	}
 	array = value.ArrayWithCustomName(customMemberName)
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			am := array.Member()
-			am.Close()
-			continue
-		}
 		am := array.Member()
-		if err := awsRestxml_serializeDocumentNoncurrentVersionTransition(v[i], am); err != nil {
+		if err := awsRestxml_serializeDocumentNoncurrentVersionTransition(&v[i], am); err != nil {
 			return err
 		}
 	}
@@ -3402,7 +3241,7 @@ func awsRestxml_serializeDocumentNoncurrentVersionTransitionList(v []*types.Nonc
 
 func awsRestxml_serializeDocumentPublicAccessBlockConfiguration(v *types.PublicAccessBlockConfiguration, value smithyxml.Value) error {
 	defer value.Close()
-	if v.BlockPublicAcls != nil {
+	if v.BlockPublicAcls {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -3411,9 +3250,9 @@ func awsRestxml_serializeDocumentPublicAccessBlockConfiguration(v *types.PublicA
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Boolean(*v.BlockPublicAcls)
+		el.Boolean(v.BlockPublicAcls)
 	}
-	if v.BlockPublicPolicy != nil {
+	if v.BlockPublicPolicy {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -3422,9 +3261,9 @@ func awsRestxml_serializeDocumentPublicAccessBlockConfiguration(v *types.PublicA
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Boolean(*v.BlockPublicPolicy)
+		el.Boolean(v.BlockPublicPolicy)
 	}
-	if v.IgnorePublicAcls != nil {
+	if v.IgnorePublicAcls {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -3433,9 +3272,9 @@ func awsRestxml_serializeDocumentPublicAccessBlockConfiguration(v *types.PublicA
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Boolean(*v.IgnorePublicAcls)
+		el.Boolean(v.IgnorePublicAcls)
 	}
-	if v.RestrictPublicBuckets != nil {
+	if v.RestrictPublicBuckets {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -3444,7 +3283,7 @@ func awsRestxml_serializeDocumentPublicAccessBlockConfiguration(v *types.PublicA
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Boolean(*v.RestrictPublicBuckets)
+		el.Boolean(v.RestrictPublicBuckets)
 	}
 	return nil
 }
@@ -3627,7 +3466,7 @@ func awsRestxml_serializeDocumentS3CopyObjectOperation(v *types.S3CopyObjectOper
 		el := value.MemberElement(root)
 		el.String(*v.RedirectLocation)
 	}
-	if v.RequesterPays != nil {
+	if v.RequesterPays {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -3636,7 +3475,7 @@ func awsRestxml_serializeDocumentS3CopyObjectOperation(v *types.S3CopyObjectOper
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Boolean(*v.RequesterPays)
+		el.Boolean(v.RequesterPays)
 	}
 	if v.SSEAwsKmsKeyId != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -3763,20 +3602,15 @@ func awsRestxml_serializeDocumentS3Grantee(v *types.S3Grantee, value smithyxml.V
 	return nil
 }
 
-func awsRestxml_serializeDocumentS3GrantList(v []*types.S3Grant, value smithyxml.Value) error {
+func awsRestxml_serializeDocumentS3GrantList(v []types.S3Grant, value smithyxml.Value) error {
 	var array *smithyxml.Array
 	if !value.IsFlattened() {
 		defer value.Close()
 	}
 	array = value.Array()
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			am := array.Member()
-			am.Close()
-			continue
-		}
 		am := array.Member()
-		if err := awsRestxml_serializeDocumentS3Grant(v[i], am); err != nil {
+		if err := awsRestxml_serializeDocumentS3Grant(&v[i], am); err != nil {
 			return err
 		}
 	}
@@ -3785,7 +3619,7 @@ func awsRestxml_serializeDocumentS3GrantList(v []*types.S3Grant, value smithyxml
 
 func awsRestxml_serializeDocumentS3InitiateRestoreObjectOperation(v *types.S3InitiateRestoreObjectOperation, value smithyxml.Value) error {
 	defer value.Close()
-	if v.ExpirationInDays != nil {
+	if v.ExpirationInDays != 0 {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -3794,7 +3628,7 @@ func awsRestxml_serializeDocumentS3InitiateRestoreObjectOperation(v *types.S3Ini
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Integer(*v.ExpirationInDays)
+		el.Integer(v.ExpirationInDays)
 	}
 	if len(v.GlacierJobTier) > 0 {
 		rootAttr := []smithyxml.Attr{}
@@ -3872,7 +3706,7 @@ func awsRestxml_serializeDocumentS3ObjectMetadata(v *types.S3ObjectMetadata, val
 		el := value.MemberElement(root)
 		el.String(*v.ContentLanguage)
 	}
-	if v.ContentLength != nil {
+	if v.ContentLength != 0 {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -3881,7 +3715,7 @@ func awsRestxml_serializeDocumentS3ObjectMetadata(v *types.S3ObjectMetadata, val
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Long(*v.ContentLength)
+		el.Long(v.ContentLength)
 	}
 	if v.ContentMD5 != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -3916,7 +3750,7 @@ func awsRestxml_serializeDocumentS3ObjectMetadata(v *types.S3ObjectMetadata, val
 		el := value.MemberElement(root)
 		el.String(smithytime.FormatDateTime(*v.HttpExpiresDate))
 	}
-	if v.RequesterCharged != nil {
+	if v.RequesterCharged {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -3925,7 +3759,7 @@ func awsRestxml_serializeDocumentS3ObjectMetadata(v *types.S3ObjectMetadata, val
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Boolean(*v.RequesterCharged)
+		el.Boolean(v.RequesterCharged)
 	}
 	if len(v.SSEAlgorithm) > 0 {
 		rootAttr := []smithyxml.Attr{}
@@ -4046,7 +3880,7 @@ func awsRestxml_serializeDocumentS3SetObjectLegalHoldOperation(v *types.S3SetObj
 
 func awsRestxml_serializeDocumentS3SetObjectRetentionOperation(v *types.S3SetObjectRetentionOperation, value smithyxml.Value) error {
 	defer value.Close()
-	if v.BypassGovernanceRetention != nil {
+	if v.BypassGovernanceRetention {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -4055,7 +3889,7 @@ func awsRestxml_serializeDocumentS3SetObjectRetentionOperation(v *types.S3SetObj
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Boolean(*v.BypassGovernanceRetention)
+		el.Boolean(v.BypassGovernanceRetention)
 	}
 	if v.Retention != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -4118,37 +3952,28 @@ func awsRestxml_serializeDocumentS3Tag(v *types.S3Tag, value smithyxml.Value) er
 	return nil
 }
 
-func awsRestxml_serializeDocumentS3TagSet(v []*types.S3Tag, value smithyxml.Value) error {
+func awsRestxml_serializeDocumentS3TagSet(v []types.S3Tag, value smithyxml.Value) error {
 	var array *smithyxml.Array
 	if !value.IsFlattened() {
 		defer value.Close()
 	}
 	array = value.Array()
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			am := array.Member()
-			am.Close()
-			continue
-		}
 		am := array.Member()
-		if err := awsRestxml_serializeDocumentS3Tag(v[i], am); err != nil {
+		if err := awsRestxml_serializeDocumentS3Tag(&v[i], am); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsRestxml_serializeDocumentS3UserMetadata(v map[string]*string, value smithyxml.Value) error {
+func awsRestxml_serializeDocumentS3UserMetadata(v map[string]string, value smithyxml.Value) error {
 	if !value.IsFlattened() {
 		defer value.Close()
 	}
 	m := value.Map()
 	for key := range v {
 		entry := m.Entry()
-		if vv := v[key]; vv == nil {
-			entry.Close()
-			continue
-		}
 		keyElementAttr := []smithyxml.Attr{}
 		keyElement := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -4156,7 +3981,7 @@ func awsRestxml_serializeDocumentS3UserMetadata(v map[string]*string, value smit
 			},
 			Attr: keyElementAttr,
 		}
-		entry.MemberElement(keyElement).String(*&key)
+		entry.MemberElement(keyElement).String(key)
 		valueElementAttr := []smithyxml.Attr{}
 		valueElement := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -4164,7 +3989,7 @@ func awsRestxml_serializeDocumentS3UserMetadata(v map[string]*string, value smit
 			},
 			Attr: valueElementAttr,
 		}
-		entry.MemberElement(valueElement).String(*v[key])
+		entry.MemberElement(valueElement).String(v[key])
 		entry.Close()
 	}
 	return nil
@@ -4201,7 +4026,7 @@ func awsRestxml_serializeDocumentTransition(v *types.Transition, value smithyxml
 		el := value.MemberElement(root)
 		el.String(smithytime.FormatDateTime(*v.Date))
 	}
-	if v.Days != nil {
+	if v.Days != 0 {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -4210,7 +4035,7 @@ func awsRestxml_serializeDocumentTransition(v *types.Transition, value smithyxml
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Integer(*v.Days)
+		el.Integer(v.Days)
 	}
 	if len(v.StorageClass) > 0 {
 		rootAttr := []smithyxml.Attr{}
@@ -4226,7 +4051,7 @@ func awsRestxml_serializeDocumentTransition(v *types.Transition, value smithyxml
 	return nil
 }
 
-func awsRestxml_serializeDocumentTransitionList(v []*types.Transition, value smithyxml.Value) error {
+func awsRestxml_serializeDocumentTransitionList(v []types.Transition, value smithyxml.Value) error {
 	var array *smithyxml.Array
 	if !value.IsFlattened() {
 		defer value.Close()
@@ -4240,13 +4065,8 @@ func awsRestxml_serializeDocumentTransitionList(v []*types.Transition, value smi
 	}
 	array = value.ArrayWithCustomName(customMemberName)
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			am := array.Member()
-			am.Close()
-			continue
-		}
 		am := array.Member()
-		if err := awsRestxml_serializeDocumentTransition(v[i], am); err != nil {
+		if err := awsRestxml_serializeDocumentTransition(&v[i], am); err != nil {
 			return err
 		}
 	}

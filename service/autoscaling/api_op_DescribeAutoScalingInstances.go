@@ -32,7 +32,7 @@ type DescribeAutoScalingInstancesInput struct {
 	// The IDs of the instances. You can specify up to MaxRecords IDs. If you omit this
 	// parameter, all Auto Scaling instances are described. If you specify an ID that
 	// does not exist, it is ignored with no error.
-	InstanceIds []*string
+	InstanceIds []string
 
 	// The maximum number of items to return with this call. The default value is 50
 	// and the maximum value is 50.
@@ -46,7 +46,7 @@ type DescribeAutoScalingInstancesInput struct {
 type DescribeAutoScalingInstancesOutput struct {
 
 	// The instances.
-	AutoScalingInstances []*types.AutoScalingInstanceDetails
+	AutoScalingInstances []types.AutoScalingInstanceDetails
 
 	// A string that indicates that the response contains more items than can be
 	// returned in a single response. To receive additional items, specify this string

@@ -42,10 +42,10 @@ type CreateFlowInput struct {
 	AvailabilityZone *string
 
 	// The entitlements that you want to grant on a flow.
-	Entitlements []*types.GrantEntitlementRequest
+	Entitlements []types.GrantEntitlementRequest
 
 	// The outputs that you want to add to this flow.
-	Outputs []*types.AddOutputRequest
+	Outputs []types.AddOutputRequest
 
 	// The settings for the source of the flow.
 	Source *types.SetSourceRequest
@@ -53,10 +53,10 @@ type CreateFlowInput struct {
 	// The settings for source failover
 	SourceFailoverConfig *types.FailoverConfig
 
-	Sources []*types.SetSourceRequest
+	Sources []types.SetSourceRequest
 
 	// The VPC interfaces you want on the flow.
-	VpcInterfaces []*types.VpcInterfaceRequest
+	VpcInterfaces []types.VpcInterfaceRequest
 }
 
 type CreateFlowOutput struct {

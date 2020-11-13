@@ -47,7 +47,7 @@ type StartChangeSetInput struct {
 	// Array of change object.
 	//
 	// This member is required.
-	ChangeSet []*types.Change
+	ChangeSet []types.Change
 
 	// Optional case sensitive string of up to 100 ASCII characters. The change set
 	// name can be used to filter the list of change sets.

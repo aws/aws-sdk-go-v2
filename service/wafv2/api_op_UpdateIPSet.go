@@ -60,7 +60,7 @@ type UpdateIPSetInput struct {
 	// (https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing).
 	//
 	// This member is required.
-	Addresses []*string
+	Addresses []string
 
 	// A unique identifier for the set. This ID is returned in the responses to create
 	// and list commands. You provide it to operations like update and delete.

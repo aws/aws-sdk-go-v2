@@ -62,18 +62,18 @@ type DeploymentEvent struct {
 type DeploymentStrategy struct {
 
 	// Total amount of time the deployment lasted.
-	DeploymentDurationInMinutes *int32
+	DeploymentDurationInMinutes int32
 
 	// The description of the deployment strategy.
 	Description *string
 
 	// The amount of time AppConfig monitored for alarms before considering the
 	// deployment to be complete and no longer eligible for automatic roll back.
-	FinalBakeTimeInMinutes *int32
+	FinalBakeTimeInMinutes int32
 
 	// The percentage of targets that received a deployed configuration during each
 	// interval.
-	GrowthFactor *float32
+	GrowthFactor float32
 
 	// The algorithm used to define how percentage grew over time.
 	GrowthType GrowthType
@@ -101,24 +101,24 @@ type DeploymentSummary struct {
 	ConfigurationVersion *string
 
 	// Total amount of time the deployment lasted.
-	DeploymentDurationInMinutes *int32
+	DeploymentDurationInMinutes int32
 
 	// The sequence number of the deployment.
-	DeploymentNumber *int32
+	DeploymentNumber int32
 
 	// The amount of time AppConfig monitors for alarms before considering the
 	// deployment to be complete and no longer eligible for automatic roll back.
-	FinalBakeTimeInMinutes *int32
+	FinalBakeTimeInMinutes int32
 
 	// The percentage of targets to receive a deployed configuration during each
 	// interval.
-	GrowthFactor *float32
+	GrowthFactor float32
 
 	// The algorithm used to define how percentage grows over time.
 	GrowthType GrowthType
 
 	// The percentage of targets for which the deployment is available.
-	PercentageComplete *float32
+	PercentageComplete float32
 
 	// Time the deployment started.
 	StartedAt *time.Time
@@ -139,7 +139,7 @@ type Environment struct {
 	Id *string
 
 	// Amazon CloudWatch alarms monitored during the deployment.
-	Monitors []*Monitor
+	Monitors []Monitor
 
 	// The name of the environment.
 	Name *string
@@ -167,7 +167,7 @@ type HostedConfigurationVersionSummary struct {
 	Description *string
 
 	// The configuration version.
-	VersionNumber *int32
+	VersionNumber int32
 }
 
 // Amazon CloudWatch alarms to monitor during the deployment process.

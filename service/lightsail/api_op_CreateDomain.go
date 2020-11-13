@@ -42,7 +42,7 @@ type CreateDomainInput struct {
 
 	// The tag keys and optional values to add to the resource during create. Use the
 	// TagResource action to tag a resource after it's created.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateDomainOutput struct {

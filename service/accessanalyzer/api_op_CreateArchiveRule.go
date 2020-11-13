@@ -39,7 +39,7 @@ type CreateArchiveRuleInput struct {
 	// The criteria for the rule.
 	//
 	// This member is required.
-	Filter map[string]*types.Criterion
+	Filter map[string]types.Criterion
 
 	// The name of the rule to create.
 	//

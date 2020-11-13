@@ -33,7 +33,7 @@ func (c *Client) DescribeGlobalNetworks(ctx context.Context, params *DescribeGlo
 type DescribeGlobalNetworksInput struct {
 
 	// The IDs of one or more global networks. The maximum is 10.
-	GlobalNetworkIds []*string
+	GlobalNetworkIds []string
 
 	// The maximum number of results to return.
 	MaxResults *int32
@@ -45,7 +45,7 @@ type DescribeGlobalNetworksInput struct {
 type DescribeGlobalNetworksOutput struct {
 
 	// Information about the global networks.
-	GlobalNetworks []*types.GlobalNetwork
+	GlobalNetworks []types.GlobalNetwork
 
 	// The token for the next page of results.
 	NextToken *string

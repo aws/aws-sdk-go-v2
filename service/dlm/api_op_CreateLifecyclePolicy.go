@@ -53,7 +53,7 @@ type CreateLifecyclePolicyInput struct {
 	State types.SettablePolicyStateValues
 
 	// The tags to apply to the lifecycle policy during creation.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateLifecyclePolicyOutput struct {

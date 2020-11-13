@@ -52,7 +52,7 @@ type ListAttachedIndicesInput struct {
 type ListAttachedIndicesOutput struct {
 
 	// The indices attached to the specified object.
-	IndexAttachments []*types.IndexAttachment
+	IndexAttachments []types.IndexAttachment
 
 	// The pagination token.
 	NextToken *string

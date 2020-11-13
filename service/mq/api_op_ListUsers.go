@@ -36,7 +36,7 @@ type ListUsersInput struct {
 
 	// The maximum number of ActiveMQ users that can be returned per page (20 by
 	// default). This value must be an integer from 5 to 100.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token that specifies the next page of results Amazon MQ should return. To
 	// request the first page, leave nextToken empty.
@@ -50,14 +50,14 @@ type ListUsersOutput struct {
 
 	// Required. The maximum number of ActiveMQ users that can be returned per page (20
 	// by default). This value must be an integer from 5 to 100.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token that specifies the next page of results Amazon MQ should return. To
 	// request the first page, leave nextToken empty.
 	NextToken *string
 
 	// Required. The list of all ActiveMQ usernames for the specified broker.
-	Users []*types.UserSummary
+	Users []types.UserSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

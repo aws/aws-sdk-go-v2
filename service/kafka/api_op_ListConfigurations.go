@@ -31,7 +31,7 @@ type ListConfigurationsInput struct {
 
 	// The maximum number of results to return in the response. If there are more
 	// results, the response includes a NextToken parameter.
-	MaxResults *int32
+	MaxResults int32
 
 	// The paginated results marker. When the result of the operation is truncated, the
 	// call returns NextToken in the response. To get the next batch, provide this
@@ -42,7 +42,7 @@ type ListConfigurationsInput struct {
 type ListConfigurationsOutput struct {
 
 	// An array of MSK configurations.
-	Configurations []*types.Configuration
+	Configurations []types.Configuration
 
 	// The paginated results marker. When the result of a ListConfigurations operation
 	// is truncated, the call returns NextToken in the response. To get another batch

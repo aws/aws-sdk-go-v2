@@ -49,7 +49,7 @@ type ListLocalDisksOutput struct {
 	// A JSON object containing the following fields:
 	//
 	// * ListLocalDisksOutput$Disks
-	Disks []*types.Disk
+	Disks []types.Disk
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
 	// return a list of gateways for your account and AWS Region.

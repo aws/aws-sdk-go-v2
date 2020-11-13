@@ -76,13 +76,10 @@ func awsRestjson1_serializeOpHttpBindingsCreateGatewayRouteInput(v *CreateGatewa
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MeshName == nil {
+	if v.MeshName == nil || len(*v.MeshName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
 	}
 	if v.MeshName != nil {
-		if len(*v.MeshName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
-		}
 		if err := encoder.SetURI("meshName").String(*v.MeshName); err != nil {
 			return err
 		}
@@ -92,13 +89,10 @@ func awsRestjson1_serializeOpHttpBindingsCreateGatewayRouteInput(v *CreateGatewa
 		encoder.SetQuery("meshOwner").String(*v.MeshOwner)
 	}
 
-	if v.VirtualGatewayName == nil {
+	if v.VirtualGatewayName == nil || len(*v.VirtualGatewayName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member virtualGatewayName must not be empty")}
 	}
 	if v.VirtualGatewayName != nil {
-		if len(*v.VirtualGatewayName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member virtualGatewayName must not be empty")}
-		}
 		if err := encoder.SetURI("virtualGatewayName").String(*v.VirtualGatewayName); err != nil {
 			return err
 		}
@@ -292,13 +286,10 @@ func awsRestjson1_serializeOpHttpBindingsCreateRouteInput(v *CreateRouteInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MeshName == nil {
+	if v.MeshName == nil || len(*v.MeshName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
 	}
 	if v.MeshName != nil {
-		if len(*v.MeshName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
-		}
 		if err := encoder.SetURI("meshName").String(*v.MeshName); err != nil {
 			return err
 		}
@@ -308,13 +299,10 @@ func awsRestjson1_serializeOpHttpBindingsCreateRouteInput(v *CreateRouteInput, e
 		encoder.SetQuery("meshOwner").String(*v.MeshOwner)
 	}
 
-	if v.VirtualRouterName == nil {
+	if v.VirtualRouterName == nil || len(*v.VirtualRouterName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member virtualRouterName must not be empty")}
 	}
 	if v.VirtualRouterName != nil {
-		if len(*v.VirtualRouterName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member virtualRouterName must not be empty")}
-		}
 		if err := encoder.SetURI("virtualRouterName").String(*v.VirtualRouterName); err != nil {
 			return err
 		}
@@ -416,13 +404,10 @@ func awsRestjson1_serializeOpHttpBindingsCreateVirtualGatewayInput(v *CreateVirt
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MeshName == nil {
+	if v.MeshName == nil || len(*v.MeshName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
 	}
 	if v.MeshName != nil {
-		if len(*v.MeshName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
-		}
 		if err := encoder.SetURI("meshName").String(*v.MeshName); err != nil {
 			return err
 		}
@@ -528,13 +513,10 @@ func awsRestjson1_serializeOpHttpBindingsCreateVirtualNodeInput(v *CreateVirtual
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MeshName == nil {
+	if v.MeshName == nil || len(*v.MeshName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
 	}
 	if v.MeshName != nil {
-		if len(*v.MeshName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
-		}
 		if err := encoder.SetURI("meshName").String(*v.MeshName); err != nil {
 			return err
 		}
@@ -640,13 +622,10 @@ func awsRestjson1_serializeOpHttpBindingsCreateVirtualRouterInput(v *CreateVirtu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MeshName == nil {
+	if v.MeshName == nil || len(*v.MeshName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
 	}
 	if v.MeshName != nil {
-		if len(*v.MeshName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
-		}
 		if err := encoder.SetURI("meshName").String(*v.MeshName); err != nil {
 			return err
 		}
@@ -752,13 +731,10 @@ func awsRestjson1_serializeOpHttpBindingsCreateVirtualServiceInput(v *CreateVirt
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MeshName == nil {
+	if v.MeshName == nil || len(*v.MeshName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
 	}
 	if v.MeshName != nil {
-		if len(*v.MeshName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
-		}
 		if err := encoder.SetURI("meshName").String(*v.MeshName); err != nil {
 			return err
 		}
@@ -853,25 +829,19 @@ func awsRestjson1_serializeOpHttpBindingsDeleteGatewayRouteInput(v *DeleteGatewa
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.GatewayRouteName == nil {
+	if v.GatewayRouteName == nil || len(*v.GatewayRouteName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member gatewayRouteName must not be empty")}
 	}
 	if v.GatewayRouteName != nil {
-		if len(*v.GatewayRouteName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member gatewayRouteName must not be empty")}
-		}
 		if err := encoder.SetURI("gatewayRouteName").String(*v.GatewayRouteName); err != nil {
 			return err
 		}
 	}
 
-	if v.MeshName == nil {
+	if v.MeshName == nil || len(*v.MeshName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
 	}
 	if v.MeshName != nil {
-		if len(*v.MeshName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
-		}
 		if err := encoder.SetURI("meshName").String(*v.MeshName); err != nil {
 			return err
 		}
@@ -881,13 +851,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteGatewayRouteInput(v *DeleteGatewa
 		encoder.SetQuery("meshOwner").String(*v.MeshOwner)
 	}
 
-	if v.VirtualGatewayName == nil {
+	if v.VirtualGatewayName == nil || len(*v.VirtualGatewayName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member virtualGatewayName must not be empty")}
 	}
 	if v.VirtualGatewayName != nil {
-		if len(*v.VirtualGatewayName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member virtualGatewayName must not be empty")}
-		}
 		if err := encoder.SetURI("virtualGatewayName").String(*v.VirtualGatewayName); err != nil {
 			return err
 		}
@@ -947,13 +914,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteMeshInput(v *DeleteMeshInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MeshName == nil {
+	if v.MeshName == nil || len(*v.MeshName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
 	}
 	if v.MeshName != nil {
-		if len(*v.MeshName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
-		}
 		if err := encoder.SetURI("meshName").String(*v.MeshName); err != nil {
 			return err
 		}
@@ -1013,13 +977,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteRouteInput(v *DeleteRouteInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MeshName == nil {
+	if v.MeshName == nil || len(*v.MeshName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
 	}
 	if v.MeshName != nil {
-		if len(*v.MeshName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
-		}
 		if err := encoder.SetURI("meshName").String(*v.MeshName); err != nil {
 			return err
 		}
@@ -1029,25 +990,19 @@ func awsRestjson1_serializeOpHttpBindingsDeleteRouteInput(v *DeleteRouteInput, e
 		encoder.SetQuery("meshOwner").String(*v.MeshOwner)
 	}
 
-	if v.RouteName == nil {
+	if v.RouteName == nil || len(*v.RouteName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member routeName must not be empty")}
 	}
 	if v.RouteName != nil {
-		if len(*v.RouteName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member routeName must not be empty")}
-		}
 		if err := encoder.SetURI("routeName").String(*v.RouteName); err != nil {
 			return err
 		}
 	}
 
-	if v.VirtualRouterName == nil {
+	if v.VirtualRouterName == nil || len(*v.VirtualRouterName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member virtualRouterName must not be empty")}
 	}
 	if v.VirtualRouterName != nil {
-		if len(*v.VirtualRouterName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member virtualRouterName must not be empty")}
-		}
 		if err := encoder.SetURI("virtualRouterName").String(*v.VirtualRouterName); err != nil {
 			return err
 		}
@@ -1107,13 +1062,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteVirtualGatewayInput(v *DeleteVirt
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MeshName == nil {
+	if v.MeshName == nil || len(*v.MeshName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
 	}
 	if v.MeshName != nil {
-		if len(*v.MeshName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
-		}
 		if err := encoder.SetURI("meshName").String(*v.MeshName); err != nil {
 			return err
 		}
@@ -1123,13 +1075,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteVirtualGatewayInput(v *DeleteVirt
 		encoder.SetQuery("meshOwner").String(*v.MeshOwner)
 	}
 
-	if v.VirtualGatewayName == nil {
+	if v.VirtualGatewayName == nil || len(*v.VirtualGatewayName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member virtualGatewayName must not be empty")}
 	}
 	if v.VirtualGatewayName != nil {
-		if len(*v.VirtualGatewayName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member virtualGatewayName must not be empty")}
-		}
 		if err := encoder.SetURI("virtualGatewayName").String(*v.VirtualGatewayName); err != nil {
 			return err
 		}
@@ -1189,13 +1138,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteVirtualNodeInput(v *DeleteVirtual
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MeshName == nil {
+	if v.MeshName == nil || len(*v.MeshName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
 	}
 	if v.MeshName != nil {
-		if len(*v.MeshName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
-		}
 		if err := encoder.SetURI("meshName").String(*v.MeshName); err != nil {
 			return err
 		}
@@ -1205,13 +1151,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteVirtualNodeInput(v *DeleteVirtual
 		encoder.SetQuery("meshOwner").String(*v.MeshOwner)
 	}
 
-	if v.VirtualNodeName == nil {
+	if v.VirtualNodeName == nil || len(*v.VirtualNodeName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member virtualNodeName must not be empty")}
 	}
 	if v.VirtualNodeName != nil {
-		if len(*v.VirtualNodeName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member virtualNodeName must not be empty")}
-		}
 		if err := encoder.SetURI("virtualNodeName").String(*v.VirtualNodeName); err != nil {
 			return err
 		}
@@ -1271,13 +1214,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteVirtualRouterInput(v *DeleteVirtu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MeshName == nil {
+	if v.MeshName == nil || len(*v.MeshName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
 	}
 	if v.MeshName != nil {
-		if len(*v.MeshName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
-		}
 		if err := encoder.SetURI("meshName").String(*v.MeshName); err != nil {
 			return err
 		}
@@ -1287,13 +1227,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteVirtualRouterInput(v *DeleteVirtu
 		encoder.SetQuery("meshOwner").String(*v.MeshOwner)
 	}
 
-	if v.VirtualRouterName == nil {
+	if v.VirtualRouterName == nil || len(*v.VirtualRouterName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member virtualRouterName must not be empty")}
 	}
 	if v.VirtualRouterName != nil {
-		if len(*v.VirtualRouterName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member virtualRouterName must not be empty")}
-		}
 		if err := encoder.SetURI("virtualRouterName").String(*v.VirtualRouterName); err != nil {
 			return err
 		}
@@ -1353,13 +1290,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteVirtualServiceInput(v *DeleteVirt
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MeshName == nil {
+	if v.MeshName == nil || len(*v.MeshName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
 	}
 	if v.MeshName != nil {
-		if len(*v.MeshName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
-		}
 		if err := encoder.SetURI("meshName").String(*v.MeshName); err != nil {
 			return err
 		}
@@ -1369,13 +1303,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteVirtualServiceInput(v *DeleteVirt
 		encoder.SetQuery("meshOwner").String(*v.MeshOwner)
 	}
 
-	if v.VirtualServiceName == nil {
+	if v.VirtualServiceName == nil || len(*v.VirtualServiceName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member virtualServiceName must not be empty")}
 	}
 	if v.VirtualServiceName != nil {
-		if len(*v.VirtualServiceName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member virtualServiceName must not be empty")}
-		}
 		if err := encoder.SetURI("virtualServiceName").String(*v.VirtualServiceName); err != nil {
 			return err
 		}
@@ -1435,25 +1366,19 @@ func awsRestjson1_serializeOpHttpBindingsDescribeGatewayRouteInput(v *DescribeGa
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.GatewayRouteName == nil {
+	if v.GatewayRouteName == nil || len(*v.GatewayRouteName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member gatewayRouteName must not be empty")}
 	}
 	if v.GatewayRouteName != nil {
-		if len(*v.GatewayRouteName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member gatewayRouteName must not be empty")}
-		}
 		if err := encoder.SetURI("gatewayRouteName").String(*v.GatewayRouteName); err != nil {
 			return err
 		}
 	}
 
-	if v.MeshName == nil {
+	if v.MeshName == nil || len(*v.MeshName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
 	}
 	if v.MeshName != nil {
-		if len(*v.MeshName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
-		}
 		if err := encoder.SetURI("meshName").String(*v.MeshName); err != nil {
 			return err
 		}
@@ -1463,13 +1388,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeGatewayRouteInput(v *DescribeGa
 		encoder.SetQuery("meshOwner").String(*v.MeshOwner)
 	}
 
-	if v.VirtualGatewayName == nil {
+	if v.VirtualGatewayName == nil || len(*v.VirtualGatewayName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member virtualGatewayName must not be empty")}
 	}
 	if v.VirtualGatewayName != nil {
-		if len(*v.VirtualGatewayName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member virtualGatewayName must not be empty")}
-		}
 		if err := encoder.SetURI("virtualGatewayName").String(*v.VirtualGatewayName); err != nil {
 			return err
 		}
@@ -1529,13 +1451,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeMeshInput(v *DescribeMeshInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MeshName == nil {
+	if v.MeshName == nil || len(*v.MeshName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
 	}
 	if v.MeshName != nil {
-		if len(*v.MeshName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
-		}
 		if err := encoder.SetURI("meshName").String(*v.MeshName); err != nil {
 			return err
 		}
@@ -1599,13 +1518,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeRouteInput(v *DescribeRouteInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MeshName == nil {
+	if v.MeshName == nil || len(*v.MeshName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
 	}
 	if v.MeshName != nil {
-		if len(*v.MeshName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
-		}
 		if err := encoder.SetURI("meshName").String(*v.MeshName); err != nil {
 			return err
 		}
@@ -1615,25 +1531,19 @@ func awsRestjson1_serializeOpHttpBindingsDescribeRouteInput(v *DescribeRouteInpu
 		encoder.SetQuery("meshOwner").String(*v.MeshOwner)
 	}
 
-	if v.RouteName == nil {
+	if v.RouteName == nil || len(*v.RouteName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member routeName must not be empty")}
 	}
 	if v.RouteName != nil {
-		if len(*v.RouteName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member routeName must not be empty")}
-		}
 		if err := encoder.SetURI("routeName").String(*v.RouteName); err != nil {
 			return err
 		}
 	}
 
-	if v.VirtualRouterName == nil {
+	if v.VirtualRouterName == nil || len(*v.VirtualRouterName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member virtualRouterName must not be empty")}
 	}
 	if v.VirtualRouterName != nil {
-		if len(*v.VirtualRouterName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member virtualRouterName must not be empty")}
-		}
 		if err := encoder.SetURI("virtualRouterName").String(*v.VirtualRouterName); err != nil {
 			return err
 		}
@@ -1693,13 +1603,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeVirtualGatewayInput(v *Describe
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MeshName == nil {
+	if v.MeshName == nil || len(*v.MeshName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
 	}
 	if v.MeshName != nil {
-		if len(*v.MeshName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
-		}
 		if err := encoder.SetURI("meshName").String(*v.MeshName); err != nil {
 			return err
 		}
@@ -1709,13 +1616,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeVirtualGatewayInput(v *Describe
 		encoder.SetQuery("meshOwner").String(*v.MeshOwner)
 	}
 
-	if v.VirtualGatewayName == nil {
+	if v.VirtualGatewayName == nil || len(*v.VirtualGatewayName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member virtualGatewayName must not be empty")}
 	}
 	if v.VirtualGatewayName != nil {
-		if len(*v.VirtualGatewayName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member virtualGatewayName must not be empty")}
-		}
 		if err := encoder.SetURI("virtualGatewayName").String(*v.VirtualGatewayName); err != nil {
 			return err
 		}
@@ -1775,13 +1679,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeVirtualNodeInput(v *DescribeVir
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MeshName == nil {
+	if v.MeshName == nil || len(*v.MeshName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
 	}
 	if v.MeshName != nil {
-		if len(*v.MeshName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
-		}
 		if err := encoder.SetURI("meshName").String(*v.MeshName); err != nil {
 			return err
 		}
@@ -1791,13 +1692,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeVirtualNodeInput(v *DescribeVir
 		encoder.SetQuery("meshOwner").String(*v.MeshOwner)
 	}
 
-	if v.VirtualNodeName == nil {
+	if v.VirtualNodeName == nil || len(*v.VirtualNodeName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member virtualNodeName must not be empty")}
 	}
 	if v.VirtualNodeName != nil {
-		if len(*v.VirtualNodeName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member virtualNodeName must not be empty")}
-		}
 		if err := encoder.SetURI("virtualNodeName").String(*v.VirtualNodeName); err != nil {
 			return err
 		}
@@ -1857,13 +1755,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeVirtualRouterInput(v *DescribeV
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MeshName == nil {
+	if v.MeshName == nil || len(*v.MeshName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
 	}
 	if v.MeshName != nil {
-		if len(*v.MeshName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
-		}
 		if err := encoder.SetURI("meshName").String(*v.MeshName); err != nil {
 			return err
 		}
@@ -1873,13 +1768,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeVirtualRouterInput(v *DescribeV
 		encoder.SetQuery("meshOwner").String(*v.MeshOwner)
 	}
 
-	if v.VirtualRouterName == nil {
+	if v.VirtualRouterName == nil || len(*v.VirtualRouterName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member virtualRouterName must not be empty")}
 	}
 	if v.VirtualRouterName != nil {
-		if len(*v.VirtualRouterName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member virtualRouterName must not be empty")}
-		}
 		if err := encoder.SetURI("virtualRouterName").String(*v.VirtualRouterName); err != nil {
 			return err
 		}
@@ -1939,13 +1831,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeVirtualServiceInput(v *Describe
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MeshName == nil {
+	if v.MeshName == nil || len(*v.MeshName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
 	}
 	if v.MeshName != nil {
-		if len(*v.MeshName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
-		}
 		if err := encoder.SetURI("meshName").String(*v.MeshName); err != nil {
 			return err
 		}
@@ -1955,13 +1844,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeVirtualServiceInput(v *Describe
 		encoder.SetQuery("meshOwner").String(*v.MeshOwner)
 	}
 
-	if v.VirtualServiceName == nil {
+	if v.VirtualServiceName == nil || len(*v.VirtualServiceName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member virtualServiceName must not be empty")}
 	}
 	if v.VirtualServiceName != nil {
-		if len(*v.VirtualServiceName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member virtualServiceName must not be empty")}
-		}
 		if err := encoder.SetURI("virtualServiceName").String(*v.VirtualServiceName); err != nil {
 			return err
 		}
@@ -2025,13 +1911,10 @@ func awsRestjson1_serializeOpHttpBindingsListGatewayRoutesInput(v *ListGatewayRo
 		encoder.SetQuery("limit").Integer(*v.Limit)
 	}
 
-	if v.MeshName == nil {
+	if v.MeshName == nil || len(*v.MeshName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
 	}
 	if v.MeshName != nil {
-		if len(*v.MeshName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
-		}
 		if err := encoder.SetURI("meshName").String(*v.MeshName); err != nil {
 			return err
 		}
@@ -2045,13 +1928,10 @@ func awsRestjson1_serializeOpHttpBindingsListGatewayRoutesInput(v *ListGatewayRo
 		encoder.SetQuery("nextToken").String(*v.NextToken)
 	}
 
-	if v.VirtualGatewayName == nil {
+	if v.VirtualGatewayName == nil || len(*v.VirtualGatewayName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member virtualGatewayName must not be empty")}
 	}
 	if v.VirtualGatewayName != nil {
-		if len(*v.VirtualGatewayName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member virtualGatewayName must not be empty")}
-		}
 		if err := encoder.SetURI("virtualGatewayName").String(*v.VirtualGatewayName); err != nil {
 			return err
 		}
@@ -2177,13 +2057,10 @@ func awsRestjson1_serializeOpHttpBindingsListRoutesInput(v *ListRoutesInput, enc
 		encoder.SetQuery("limit").Integer(*v.Limit)
 	}
 
-	if v.MeshName == nil {
+	if v.MeshName == nil || len(*v.MeshName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
 	}
 	if v.MeshName != nil {
-		if len(*v.MeshName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
-		}
 		if err := encoder.SetURI("meshName").String(*v.MeshName); err != nil {
 			return err
 		}
@@ -2197,13 +2074,10 @@ func awsRestjson1_serializeOpHttpBindingsListRoutesInput(v *ListRoutesInput, enc
 		encoder.SetQuery("nextToken").String(*v.NextToken)
 	}
 
-	if v.VirtualRouterName == nil {
+	if v.VirtualRouterName == nil || len(*v.VirtualRouterName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member virtualRouterName must not be empty")}
 	}
 	if v.VirtualRouterName != nil {
-		if len(*v.VirtualRouterName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member virtualRouterName must not be empty")}
-		}
 		if err := encoder.SetURI("virtualRouterName").String(*v.VirtualRouterName); err != nil {
 			return err
 		}
@@ -2333,13 +2207,10 @@ func awsRestjson1_serializeOpHttpBindingsListVirtualGatewaysInput(v *ListVirtual
 		encoder.SetQuery("limit").Integer(*v.Limit)
 	}
 
-	if v.MeshName == nil {
+	if v.MeshName == nil || len(*v.MeshName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
 	}
 	if v.MeshName != nil {
-		if len(*v.MeshName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
-		}
 		if err := encoder.SetURI("meshName").String(*v.MeshName); err != nil {
 			return err
 		}
@@ -2411,13 +2282,10 @@ func awsRestjson1_serializeOpHttpBindingsListVirtualNodesInput(v *ListVirtualNod
 		encoder.SetQuery("limit").Integer(*v.Limit)
 	}
 
-	if v.MeshName == nil {
+	if v.MeshName == nil || len(*v.MeshName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
 	}
 	if v.MeshName != nil {
-		if len(*v.MeshName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
-		}
 		if err := encoder.SetURI("meshName").String(*v.MeshName); err != nil {
 			return err
 		}
@@ -2489,13 +2357,10 @@ func awsRestjson1_serializeOpHttpBindingsListVirtualRoutersInput(v *ListVirtualR
 		encoder.SetQuery("limit").Integer(*v.Limit)
 	}
 
-	if v.MeshName == nil {
+	if v.MeshName == nil || len(*v.MeshName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
 	}
 	if v.MeshName != nil {
-		if len(*v.MeshName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
-		}
 		if err := encoder.SetURI("meshName").String(*v.MeshName); err != nil {
 			return err
 		}
@@ -2567,13 +2432,10 @@ func awsRestjson1_serializeOpHttpBindingsListVirtualServicesInput(v *ListVirtual
 		encoder.SetQuery("limit").Integer(*v.Limit)
 	}
 
-	if v.MeshName == nil {
+	if v.MeshName == nil || len(*v.MeshName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
 	}
 	if v.MeshName != nil {
-		if len(*v.MeshName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
-		}
 		if err := encoder.SetURI("meshName").String(*v.MeshName); err != nil {
 			return err
 		}
@@ -2818,25 +2680,19 @@ func awsRestjson1_serializeOpHttpBindingsUpdateGatewayRouteInput(v *UpdateGatewa
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.GatewayRouteName == nil {
+	if v.GatewayRouteName == nil || len(*v.GatewayRouteName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member gatewayRouteName must not be empty")}
 	}
 	if v.GatewayRouteName != nil {
-		if len(*v.GatewayRouteName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member gatewayRouteName must not be empty")}
-		}
 		if err := encoder.SetURI("gatewayRouteName").String(*v.GatewayRouteName); err != nil {
 			return err
 		}
 	}
 
-	if v.MeshName == nil {
+	if v.MeshName == nil || len(*v.MeshName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
 	}
 	if v.MeshName != nil {
-		if len(*v.MeshName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
-		}
 		if err := encoder.SetURI("meshName").String(*v.MeshName); err != nil {
 			return err
 		}
@@ -2846,13 +2702,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateGatewayRouteInput(v *UpdateGatewa
 		encoder.SetQuery("meshOwner").String(*v.MeshOwner)
 	}
 
-	if v.VirtualGatewayName == nil {
+	if v.VirtualGatewayName == nil || len(*v.VirtualGatewayName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member virtualGatewayName must not be empty")}
 	}
 	if v.VirtualGatewayName != nil {
-		if len(*v.VirtualGatewayName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member virtualGatewayName must not be empty")}
-		}
 		if err := encoder.SetURI("virtualGatewayName").String(*v.VirtualGatewayName); err != nil {
 			return err
 		}
@@ -2942,13 +2795,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateMeshInput(v *UpdateMeshInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MeshName == nil {
+	if v.MeshName == nil || len(*v.MeshName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
 	}
 	if v.MeshName != nil {
-		if len(*v.MeshName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
-		}
 		if err := encoder.SetURI("meshName").String(*v.MeshName); err != nil {
 			return err
 		}
@@ -3038,13 +2888,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateRouteInput(v *UpdateRouteInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MeshName == nil {
+	if v.MeshName == nil || len(*v.MeshName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
 	}
 	if v.MeshName != nil {
-		if len(*v.MeshName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
-		}
 		if err := encoder.SetURI("meshName").String(*v.MeshName); err != nil {
 			return err
 		}
@@ -3054,25 +2901,19 @@ func awsRestjson1_serializeOpHttpBindingsUpdateRouteInput(v *UpdateRouteInput, e
 		encoder.SetQuery("meshOwner").String(*v.MeshOwner)
 	}
 
-	if v.RouteName == nil {
+	if v.RouteName == nil || len(*v.RouteName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member routeName must not be empty")}
 	}
 	if v.RouteName != nil {
-		if len(*v.RouteName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member routeName must not be empty")}
-		}
 		if err := encoder.SetURI("routeName").String(*v.RouteName); err != nil {
 			return err
 		}
 	}
 
-	if v.VirtualRouterName == nil {
+	if v.VirtualRouterName == nil || len(*v.VirtualRouterName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member virtualRouterName must not be empty")}
 	}
 	if v.VirtualRouterName != nil {
-		if len(*v.VirtualRouterName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member virtualRouterName must not be empty")}
-		}
 		if err := encoder.SetURI("virtualRouterName").String(*v.VirtualRouterName); err != nil {
 			return err
 		}
@@ -3162,13 +3003,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateVirtualGatewayInput(v *UpdateVirt
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MeshName == nil {
+	if v.MeshName == nil || len(*v.MeshName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
 	}
 	if v.MeshName != nil {
-		if len(*v.MeshName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
-		}
 		if err := encoder.SetURI("meshName").String(*v.MeshName); err != nil {
 			return err
 		}
@@ -3178,13 +3016,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateVirtualGatewayInput(v *UpdateVirt
 		encoder.SetQuery("meshOwner").String(*v.MeshOwner)
 	}
 
-	if v.VirtualGatewayName == nil {
+	if v.VirtualGatewayName == nil || len(*v.VirtualGatewayName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member virtualGatewayName must not be empty")}
 	}
 	if v.VirtualGatewayName != nil {
-		if len(*v.VirtualGatewayName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member virtualGatewayName must not be empty")}
-		}
 		if err := encoder.SetURI("virtualGatewayName").String(*v.VirtualGatewayName); err != nil {
 			return err
 		}
@@ -3274,13 +3109,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateVirtualNodeInput(v *UpdateVirtual
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MeshName == nil {
+	if v.MeshName == nil || len(*v.MeshName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
 	}
 	if v.MeshName != nil {
-		if len(*v.MeshName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
-		}
 		if err := encoder.SetURI("meshName").String(*v.MeshName); err != nil {
 			return err
 		}
@@ -3290,13 +3122,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateVirtualNodeInput(v *UpdateVirtual
 		encoder.SetQuery("meshOwner").String(*v.MeshOwner)
 	}
 
-	if v.VirtualNodeName == nil {
+	if v.VirtualNodeName == nil || len(*v.VirtualNodeName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member virtualNodeName must not be empty")}
 	}
 	if v.VirtualNodeName != nil {
-		if len(*v.VirtualNodeName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member virtualNodeName must not be empty")}
-		}
 		if err := encoder.SetURI("virtualNodeName").String(*v.VirtualNodeName); err != nil {
 			return err
 		}
@@ -3386,13 +3215,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateVirtualRouterInput(v *UpdateVirtu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MeshName == nil {
+	if v.MeshName == nil || len(*v.MeshName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
 	}
 	if v.MeshName != nil {
-		if len(*v.MeshName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
-		}
 		if err := encoder.SetURI("meshName").String(*v.MeshName); err != nil {
 			return err
 		}
@@ -3402,13 +3228,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateVirtualRouterInput(v *UpdateVirtu
 		encoder.SetQuery("meshOwner").String(*v.MeshOwner)
 	}
 
-	if v.VirtualRouterName == nil {
+	if v.VirtualRouterName == nil || len(*v.VirtualRouterName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member virtualRouterName must not be empty")}
 	}
 	if v.VirtualRouterName != nil {
-		if len(*v.VirtualRouterName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member virtualRouterName must not be empty")}
-		}
 		if err := encoder.SetURI("virtualRouterName").String(*v.VirtualRouterName); err != nil {
 			return err
 		}
@@ -3498,13 +3321,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateVirtualServiceInput(v *UpdateVirt
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MeshName == nil {
+	if v.MeshName == nil || len(*v.MeshName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
 	}
 	if v.MeshName != nil {
-		if len(*v.MeshName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member meshName must not be empty")}
-		}
 		if err := encoder.SetURI("meshName").String(*v.MeshName); err != nil {
 			return err
 		}
@@ -3514,13 +3334,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateVirtualServiceInput(v *UpdateVirt
 		encoder.SetQuery("meshOwner").String(*v.MeshOwner)
 	}
 
-	if v.VirtualServiceName == nil {
+	if v.VirtualServiceName == nil || len(*v.VirtualServiceName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member virtualServiceName must not be empty")}
 	}
 	if v.VirtualServiceName != nil {
-		if len(*v.VirtualServiceName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member virtualServiceName must not be empty")}
-		}
 		if err := encoder.SetURI("virtualServiceName").String(*v.VirtualServiceName); err != nil {
 			return err
 		}
@@ -3555,7 +3372,7 @@ func awsRestjson1_serializeDocumentAccessLog(v types.AccessLog, value smithyjson
 	switch uv := v.(type) {
 	case *types.AccessLogMemberFile:
 		av := object.Key("file")
-		if err := awsRestjson1_serializeDocumentFileAccessLog(uv.Value, av); err != nil {
+		if err := awsRestjson1_serializeDocumentFileAccessLog(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -3583,17 +3400,13 @@ func awsRestjson1_serializeDocumentAwsCloudMapInstanceAttribute(v *types.AwsClou
 	return nil
 }
 
-func awsRestjson1_serializeDocumentAwsCloudMapInstanceAttributes(v []*types.AwsCloudMapInstanceAttribute, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentAwsCloudMapInstanceAttributes(v []types.AwsCloudMapInstanceAttribute, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentAwsCloudMapInstanceAttribute(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentAwsCloudMapInstanceAttribute(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -3631,7 +3444,7 @@ func awsRestjson1_serializeDocumentBackend(v types.Backend, value smithyjson.Val
 	switch uv := v.(type) {
 	case *types.BackendMemberVirtualService:
 		av := object.Key("virtualService")
-		if err := awsRestjson1_serializeDocumentVirtualServiceBackend(uv.Value, av); err != nil {
+		if err := awsRestjson1_serializeDocumentVirtualServiceBackend(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -3663,7 +3476,6 @@ func awsRestjson1_serializeDocumentBackends(v []types.Backend, value smithyjson.
 	for i := range v {
 		av := array.Value()
 		if vv := v[i]; vv == nil {
-			av.Null()
 			continue
 		}
 		if err := awsRestjson1_serializeDocumentBackend(v[i], av); err != nil {
@@ -3673,17 +3485,13 @@ func awsRestjson1_serializeDocumentBackends(v []types.Backend, value smithyjson.
 	return nil
 }
 
-func awsRestjson1_serializeDocumentCertificateAuthorityArns(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentCertificateAuthorityArns(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -4030,17 +3838,13 @@ func awsRestjson1_serializeDocumentGrpcRouteMetadata(v *types.GrpcRouteMetadata,
 	return nil
 }
 
-func awsRestjson1_serializeDocumentGrpcRouteMetadataList(v []*types.GrpcRouteMetadata, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentGrpcRouteMetadataList(v []types.GrpcRouteMetadata, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentGrpcRouteMetadata(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentGrpcRouteMetadata(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -4062,7 +3866,7 @@ func awsRestjson1_serializeDocumentGrpcRouteMetadataMatchMethod(v types.GrpcRout
 
 	case *types.GrpcRouteMetadataMatchMethodMemberRange:
 		av := object.Key("range")
-		if err := awsRestjson1_serializeDocumentMatchRange(uv.Value, av); err != nil {
+		if err := awsRestjson1_serializeDocumentMatchRange(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -4117,7 +3921,7 @@ func awsRestjson1_serializeDocumentHeaderMatchMethod(v types.HeaderMatchMethod, 
 
 	case *types.HeaderMatchMethodMemberRange:
 		av := object.Key("range")
-		if err := awsRestjson1_serializeDocumentMatchRange(uv.Value, av); err != nil {
+		if err := awsRestjson1_serializeDocumentMatchRange(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -4140,9 +3944,9 @@ func awsRestjson1_serializeDocumentHealthCheckPolicy(v *types.HealthCheckPolicy,
 	object := value.Object()
 	defer object.Close()
 
-	if v.HealthyThreshold != nil {
+	if v.HealthyThreshold != 0 {
 		ok := object.Key("healthyThreshold")
-		ok.Integer(*v.HealthyThreshold)
+		ok.Integer(v.HealthyThreshold)
 	}
 
 	if v.IntervalMillis != nil {
@@ -4155,9 +3959,9 @@ func awsRestjson1_serializeDocumentHealthCheckPolicy(v *types.HealthCheckPolicy,
 		ok.String(*v.Path)
 	}
 
-	if v.Port != nil {
+	if v.Port != 0 {
 		ok := object.Key("port")
-		ok.Integer(*v.Port)
+		ok.Integer(v.Port)
 	}
 
 	if len(v.Protocol) > 0 {
@@ -4170,9 +3974,9 @@ func awsRestjson1_serializeDocumentHealthCheckPolicy(v *types.HealthCheckPolicy,
 		ok.Long(*v.TimeoutMillis)
 	}
 
-	if v.UnhealthyThreshold != nil {
+	if v.UnhealthyThreshold != 0 {
 		ok := object.Key("unhealthyThreshold")
-		ok.Integer(*v.UnhealthyThreshold)
+		ok.Integer(v.UnhealthyThreshold)
 	}
 
 	return nil
@@ -4258,17 +4062,13 @@ func awsRestjson1_serializeDocumentHttpRetryPolicy(v *types.HttpRetryPolicy, val
 	return nil
 }
 
-func awsRestjson1_serializeDocumentHttpRetryPolicyEvents(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentHttpRetryPolicyEvents(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -4346,17 +4146,13 @@ func awsRestjson1_serializeDocumentHttpRouteHeader(v *types.HttpRouteHeader, val
 	return nil
 }
 
-func awsRestjson1_serializeDocumentHttpRouteHeaders(v []*types.HttpRouteHeader, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentHttpRouteHeaders(v []types.HttpRouteHeader, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentHttpRouteHeader(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentHttpRouteHeader(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -4448,17 +4244,13 @@ func awsRestjson1_serializeDocumentListener(v *types.Listener, value smithyjson.
 	return nil
 }
 
-func awsRestjson1_serializeDocumentListeners(v []*types.Listener, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentListeners(v []types.Listener, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentListener(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentListener(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -4472,25 +4264,25 @@ func awsRestjson1_serializeDocumentListenerTimeout(v types.ListenerTimeout, valu
 	switch uv := v.(type) {
 	case *types.ListenerTimeoutMemberGrpc:
 		av := object.Key("grpc")
-		if err := awsRestjson1_serializeDocumentGrpcTimeout(uv.Value, av); err != nil {
+		if err := awsRestjson1_serializeDocumentGrpcTimeout(&uv.Value, av); err != nil {
 			return err
 		}
 
 	case *types.ListenerTimeoutMemberHttp:
 		av := object.Key("http")
-		if err := awsRestjson1_serializeDocumentHttpTimeout(uv.Value, av); err != nil {
+		if err := awsRestjson1_serializeDocumentHttpTimeout(&uv.Value, av); err != nil {
 			return err
 		}
 
 	case *types.ListenerTimeoutMemberHttp2:
 		av := object.Key("http2")
-		if err := awsRestjson1_serializeDocumentHttpTimeout(uv.Value, av); err != nil {
+		if err := awsRestjson1_serializeDocumentHttpTimeout(&uv.Value, av); err != nil {
 			return err
 		}
 
 	case *types.ListenerTimeoutMemberTcp:
 		av := object.Key("tcp")
-		if err := awsRestjson1_serializeDocumentTcpTimeout(uv.Value, av); err != nil {
+		if err := awsRestjson1_serializeDocumentTcpTimeout(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -4539,13 +4331,13 @@ func awsRestjson1_serializeDocumentListenerTlsCertificate(v types.ListenerTlsCer
 	switch uv := v.(type) {
 	case *types.ListenerTlsCertificateMemberAcm:
 		av := object.Key("acm")
-		if err := awsRestjson1_serializeDocumentListenerTlsAcmCertificate(uv.Value, av); err != nil {
+		if err := awsRestjson1_serializeDocumentListenerTlsAcmCertificate(&uv.Value, av); err != nil {
 			return err
 		}
 
 	case *types.ListenerTlsCertificateMemberFile:
 		av := object.Key("file")
-		if err := awsRestjson1_serializeDocumentListenerTlsFileCertificate(uv.Value, av); err != nil {
+		if err := awsRestjson1_serializeDocumentListenerTlsFileCertificate(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -4622,9 +4414,9 @@ func awsRestjson1_serializeDocumentPortMapping(v *types.PortMapping, value smith
 	object := value.Object()
 	defer object.Close()
 
-	if v.Port != nil {
+	if v.Port != 0 {
 		ok := object.Key("port")
-		ok.Integer(*v.Port)
+		ok.Integer(v.Port)
 	}
 
 	if len(v.Protocol) > 0 {
@@ -4635,17 +4427,13 @@ func awsRestjson1_serializeDocumentPortMapping(v *types.PortMapping, value smith
 	return nil
 }
 
-func awsRestjson1_serializeDocumentPortSet(v []*int32, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentPortSet(v []int32, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.Integer(*v[i])
+		av.Integer(v[i])
 	}
 	return nil
 }
@@ -4697,13 +4485,13 @@ func awsRestjson1_serializeDocumentServiceDiscovery(v types.ServiceDiscovery, va
 	switch uv := v.(type) {
 	case *types.ServiceDiscoveryMemberAwsCloudMap:
 		av := object.Key("awsCloudMap")
-		if err := awsRestjson1_serializeDocumentAwsCloudMapServiceDiscovery(uv.Value, av); err != nil {
+		if err := awsRestjson1_serializeDocumentAwsCloudMapServiceDiscovery(&uv.Value, av); err != nil {
 			return err
 		}
 
 	case *types.ServiceDiscoveryMemberDns:
 		av := object.Key("dns")
-		if err := awsRestjson1_serializeDocumentDnsServiceDiscovery(uv.Value, av); err != nil {
+		if err := awsRestjson1_serializeDocumentDnsServiceDiscovery(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -4714,32 +4502,24 @@ func awsRestjson1_serializeDocumentServiceDiscovery(v types.ServiceDiscovery, va
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTagKeyList(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTagKeyList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTagList(v []*types.TagRef, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTagList(v []types.TagRef, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentTagRef(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentTagRef(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -4870,13 +4650,13 @@ func awsRestjson1_serializeDocumentTlsValidationContextTrust(v types.TlsValidati
 	switch uv := v.(type) {
 	case *types.TlsValidationContextTrustMemberAcm:
 		av := object.Key("acm")
-		if err := awsRestjson1_serializeDocumentTlsValidationContextAcmTrust(uv.Value, av); err != nil {
+		if err := awsRestjson1_serializeDocumentTlsValidationContextAcmTrust(&uv.Value, av); err != nil {
 			return err
 		}
 
 	case *types.TlsValidationContextTrustMemberFile:
 		av := object.Key("file")
-		if err := awsRestjson1_serializeDocumentTlsValidationContextFileTrust(uv.Value, av); err != nil {
+		if err := awsRestjson1_serializeDocumentTlsValidationContextFileTrust(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -4894,7 +4674,7 @@ func awsRestjson1_serializeDocumentVirtualGatewayAccessLog(v types.VirtualGatewa
 	switch uv := v.(type) {
 	case *types.VirtualGatewayAccessLogMemberFile:
 		av := object.Key("file")
-		if err := awsRestjson1_serializeDocumentVirtualGatewayFileAccessLog(uv.Value, av); err != nil {
+		if err := awsRestjson1_serializeDocumentVirtualGatewayFileAccessLog(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -4919,17 +4699,13 @@ func awsRestjson1_serializeDocumentVirtualGatewayBackendDefaults(v *types.Virtua
 	return nil
 }
 
-func awsRestjson1_serializeDocumentVirtualGatewayCertificateAuthorityArns(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentVirtualGatewayCertificateAuthorityArns(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -4990,9 +4766,9 @@ func awsRestjson1_serializeDocumentVirtualGatewayHealthCheckPolicy(v *types.Virt
 	object := value.Object()
 	defer object.Close()
 
-	if v.HealthyThreshold != nil {
+	if v.HealthyThreshold != 0 {
 		ok := object.Key("healthyThreshold")
-		ok.Integer(*v.HealthyThreshold)
+		ok.Integer(v.HealthyThreshold)
 	}
 
 	if v.IntervalMillis != nil {
@@ -5005,9 +4781,9 @@ func awsRestjson1_serializeDocumentVirtualGatewayHealthCheckPolicy(v *types.Virt
 		ok.String(*v.Path)
 	}
 
-	if v.Port != nil {
+	if v.Port != 0 {
 		ok := object.Key("port")
-		ok.Integer(*v.Port)
+		ok.Integer(v.Port)
 	}
 
 	if len(v.Protocol) > 0 {
@@ -5020,9 +4796,9 @@ func awsRestjson1_serializeDocumentVirtualGatewayHealthCheckPolicy(v *types.Virt
 		ok.Long(*v.TimeoutMillis)
 	}
 
-	if v.UnhealthyThreshold != nil {
+	if v.UnhealthyThreshold != 0 {
 		ok := object.Key("unhealthyThreshold")
-		ok.Integer(*v.UnhealthyThreshold)
+		ok.Integer(v.UnhealthyThreshold)
 	}
 
 	return nil
@@ -5056,17 +4832,13 @@ func awsRestjson1_serializeDocumentVirtualGatewayListener(v *types.VirtualGatewa
 	return nil
 }
 
-func awsRestjson1_serializeDocumentVirtualGatewayListeners(v []*types.VirtualGatewayListener, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentVirtualGatewayListeners(v []types.VirtualGatewayListener, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentVirtualGatewayListener(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentVirtualGatewayListener(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -5111,13 +4883,13 @@ func awsRestjson1_serializeDocumentVirtualGatewayListenerTlsCertificate(v types.
 	switch uv := v.(type) {
 	case *types.VirtualGatewayListenerTlsCertificateMemberAcm:
 		av := object.Key("acm")
-		if err := awsRestjson1_serializeDocumentVirtualGatewayListenerTlsAcmCertificate(uv.Value, av); err != nil {
+		if err := awsRestjson1_serializeDocumentVirtualGatewayListenerTlsAcmCertificate(&uv.Value, av); err != nil {
 			return err
 		}
 
 	case *types.VirtualGatewayListenerTlsCertificateMemberFile:
 		av := object.Key("file")
-		if err := awsRestjson1_serializeDocumentVirtualGatewayListenerTlsFileCertificate(uv.Value, av); err != nil {
+		if err := awsRestjson1_serializeDocumentVirtualGatewayListenerTlsFileCertificate(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -5163,9 +4935,9 @@ func awsRestjson1_serializeDocumentVirtualGatewayPortMapping(v *types.VirtualGat
 	object := value.Object()
 	defer object.Close()
 
-	if v.Port != nil {
+	if v.Port != 0 {
 		ok := object.Key("port")
-		ok.Integer(*v.Port)
+		ok.Integer(v.Port)
 	}
 
 	if len(v.Protocol) > 0 {
@@ -5251,13 +5023,13 @@ func awsRestjson1_serializeDocumentVirtualGatewayTlsValidationContextTrust(v typ
 	switch uv := v.(type) {
 	case *types.VirtualGatewayTlsValidationContextTrustMemberAcm:
 		av := object.Key("acm")
-		if err := awsRestjson1_serializeDocumentVirtualGatewayTlsValidationContextAcmTrust(uv.Value, av); err != nil {
+		if err := awsRestjson1_serializeDocumentVirtualGatewayTlsValidationContextAcmTrust(&uv.Value, av); err != nil {
 			return err
 		}
 
 	case *types.VirtualGatewayTlsValidationContextTrustMemberFile:
 		av := object.Key("file")
-		if err := awsRestjson1_serializeDocumentVirtualGatewayTlsValidationContextFileTrust(uv.Value, av); err != nil {
+		if err := awsRestjson1_serializeDocumentVirtualGatewayTlsValidationContextFileTrust(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -5336,17 +5108,13 @@ func awsRestjson1_serializeDocumentVirtualRouterListener(v *types.VirtualRouterL
 	return nil
 }
 
-func awsRestjson1_serializeDocumentVirtualRouterListeners(v []*types.VirtualRouterListener, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentVirtualRouterListeners(v []types.VirtualRouterListener, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentVirtualRouterListener(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentVirtualRouterListener(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -5405,13 +5173,13 @@ func awsRestjson1_serializeDocumentVirtualServiceProvider(v types.VirtualService
 	switch uv := v.(type) {
 	case *types.VirtualServiceProviderMemberVirtualNode:
 		av := object.Key("virtualNode")
-		if err := awsRestjson1_serializeDocumentVirtualNodeServiceProvider(uv.Value, av); err != nil {
+		if err := awsRestjson1_serializeDocumentVirtualNodeServiceProvider(&uv.Value, av); err != nil {
 			return err
 		}
 
 	case *types.VirtualServiceProviderMemberVirtualRouter:
 		av := object.Key("virtualRouter")
-		if err := awsRestjson1_serializeDocumentVirtualRouterServiceProvider(uv.Value, av); err != nil {
+		if err := awsRestjson1_serializeDocumentVirtualRouterServiceProvider(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -5445,25 +5213,21 @@ func awsRestjson1_serializeDocumentWeightedTarget(v *types.WeightedTarget, value
 		ok.String(*v.VirtualNode)
 	}
 
-	if v.Weight != nil {
+	if v.Weight != 0 {
 		ok := object.Key("weight")
-		ok.Integer(*v.Weight)
+		ok.Integer(v.Weight)
 	}
 
 	return nil
 }
 
-func awsRestjson1_serializeDocumentWeightedTargets(v []*types.WeightedTarget, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentWeightedTargets(v []types.WeightedTarget, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentWeightedTarget(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentWeightedTarget(&v[i], av); err != nil {
 			return err
 		}
 	}

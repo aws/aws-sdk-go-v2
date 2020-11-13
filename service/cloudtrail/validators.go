@@ -388,13 +388,13 @@ func validateLookupAttribute(v *types.LookupAttribute) error {
 	}
 }
 
-func validateLookupAttributesList(v []*types.LookupAttribute) error {
+func validateLookupAttributesList(v []types.LookupAttribute) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LookupAttributesList"}
 	for i := range v {
-		if err := validateLookupAttribute(v[i]); err != nil {
+		if err := validateLookupAttribute(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -420,13 +420,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagsList(v []*types.Tag) error {
+func validateTagsList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagsList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

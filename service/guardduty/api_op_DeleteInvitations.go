@@ -34,7 +34,7 @@ type DeleteInvitationsInput struct {
 	// member account that you want to delete invitations from.
 	//
 	// This member is required.
-	AccountIds []*string
+	AccountIds []string
 }
 
 type DeleteInvitationsOutput struct {
@@ -43,7 +43,7 @@ type DeleteInvitationsOutput struct {
 	// explains why it was unprocessed.
 	//
 	// This member is required.
-	UnprocessedAccounts []*types.UnprocessedAccount
+	UnprocessedAccounts []types.UnprocessedAccount
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

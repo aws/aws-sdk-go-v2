@@ -47,7 +47,7 @@ type ListApplicationsOutput struct {
 	// A list of ApplicationSummary objects.
 	//
 	// This member is required.
-	ApplicationSummaries []*types.ApplicationSummary
+	ApplicationSummaries []types.ApplicationSummary
 
 	// The pagination token for the next set of results, or null if there are no
 	// additional results. Pass this token into a subsequent command to retrieve the

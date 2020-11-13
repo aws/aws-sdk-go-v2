@@ -38,7 +38,7 @@ type DescribeServicesInput struct {
 	FormatVersion *string
 
 	// The maximum number of results that you want returned in the response.
-	MaxResults *int32
+	MaxResults int32
 
 	// The pagination token that indicates the next set of results that you want to
 	// retrieve.
@@ -59,7 +59,7 @@ type DescribeServicesOutput struct {
 	NextToken *string
 
 	// The service metadata for the service or services in the response.
-	Services []*types.Service
+	Services []types.Service
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

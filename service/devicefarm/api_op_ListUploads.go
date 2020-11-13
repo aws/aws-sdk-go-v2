@@ -130,7 +130,7 @@ type ListUploadsOutput struct {
 	NextToken *string
 
 	// Information about the uploads.
-	Uploads []*types.Upload
+	Uploads []types.Upload
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

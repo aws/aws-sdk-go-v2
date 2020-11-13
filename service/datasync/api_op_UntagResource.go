@@ -32,7 +32,7 @@ type UntagResourceInput struct {
 	// The keys in the key-value pair in the tag to remove.
 	//
 	// This member is required.
-	Keys []*string
+	Keys []string
 
 	// The Amazon Resource Name (ARN) of the resource to remove the tag from.
 	//

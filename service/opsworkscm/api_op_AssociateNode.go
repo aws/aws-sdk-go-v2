@@ -60,7 +60,7 @@ type AssociateNodeInput struct {
 	// certificate-signing request (CSR) that is created by the node.
 	//
 	// This member is required.
-	EngineAttributes []*types.EngineAttribute
+	EngineAttributes []types.EngineAttribute
 
 	// The name of the node.
 	//

@@ -270,13 +270,13 @@ func validateGroupConfigurationItem(v *types.GroupConfigurationItem) error {
 	}
 }
 
-func validateGroupConfigurationList(v []*types.GroupConfigurationItem) error {
+func validateGroupConfigurationList(v []types.GroupConfigurationItem) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GroupConfigurationList"}
 	for i := range v {
-		if err := validateGroupConfigurationItem(v[i]); err != nil {
+		if err := validateGroupConfigurationItem(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -320,13 +320,13 @@ func validateGroupFilter(v *types.GroupFilter) error {
 	}
 }
 
-func validateGroupFilterList(v []*types.GroupFilter) error {
+func validateGroupFilterList(v []types.GroupFilter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GroupFilterList"}
 	for i := range v {
-		if err := validateGroupFilter(v[i]); err != nil {
+		if err := validateGroupFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -337,13 +337,13 @@ func validateGroupFilterList(v []*types.GroupFilter) error {
 	}
 }
 
-func validateGroupParameterList(v []*types.GroupConfigurationParameter) error {
+func validateGroupParameterList(v []types.GroupConfigurationParameter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GroupParameterList"}
 	for i := range v {
-		if err := validateGroupConfigurationParameter(v[i]); err != nil {
+		if err := validateGroupConfigurationParameter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -372,13 +372,13 @@ func validateResourceFilter(v *types.ResourceFilter) error {
 	}
 }
 
-func validateResourceFilterList(v []*types.ResourceFilter) error {
+func validateResourceFilterList(v []types.ResourceFilter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResourceFilterList"}
 	for i := range v {
-		if err := validateResourceFilter(v[i]); err != nil {
+		if err := validateResourceFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

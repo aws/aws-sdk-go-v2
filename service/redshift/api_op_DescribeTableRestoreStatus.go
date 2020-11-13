@@ -62,7 +62,7 @@ type DescribeTableRestoreStatusOutput struct {
 	Marker *string
 
 	// A list of status details for one or more table restore requests.
-	TableRestoreStatusDetails []*types.TableRestoreStatus
+	TableRestoreStatusDetails []types.TableRestoreStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

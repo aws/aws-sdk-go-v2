@@ -39,7 +39,7 @@ type AdminSetUserSettingsInput struct {
 	// delivery.
 	//
 	// This member is required.
-	MFAOptions []*types.MFAOptionType
+	MFAOptions []types.MFAOptionType
 
 	// The ID of the user pool that contains the user that you are setting options for.
 	//

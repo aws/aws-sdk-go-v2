@@ -42,7 +42,7 @@ type GetExportSnapshotRecordsInput struct {
 type GetExportSnapshotRecordsOutput struct {
 
 	// A list of objects describing the export snapshot records.
-	ExportSnapshotRecords []*types.ExportSnapshotRecord
+	ExportSnapshotRecords []types.ExportSnapshotRecord
 
 	// The token to advance to the next page of resutls from your request. A next page
 	// token is not returned if there are no more results to display. To get the next

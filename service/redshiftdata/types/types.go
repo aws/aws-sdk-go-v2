@@ -13,31 +13,31 @@ type ColumnMetadata struct {
 	ColumnDefault *string
 
 	// A value that indicates whether the column is case-sensitive.
-	IsCaseSensitive *bool
+	IsCaseSensitive bool
 
 	// A value that indicates whether the column contains currency values.
-	IsCurrency *bool
+	IsCurrency bool
 
 	// A value that indicates whether an integer column is signed.
-	IsSigned *bool
+	IsSigned bool
 
 	// The label for the column.
 	Label *string
 
 	// The length of the column.
-	Length *int32
+	Length int32
 
 	// The name of the column.
 	Name *string
 
 	// A value that indicates whether the column is nullable.
-	Nullable *int32
+	Nullable int32
 
 	// The precision value of a decimal number column.
-	Precision *int32
+	Precision int32
 
 	// The scale value of a decimal number column.
-	Scale *int32
+	Scale int32
 
 	// The name of the schema that contains the table that includes the column.
 	SchemaName *string

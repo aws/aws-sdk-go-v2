@@ -178,12 +178,12 @@ type CreatePredictorInput struct {
 	// has aws as its prefix but the key does not, then Forecast considers it to be a
 	// user tag and will count against the limit of 50 tags. Tags with only the key
 	// prefix of aws do not count against your tags per resource limit.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The hyperparameters to override for model training. The hyperparameters that you
 	// can override are listed in the individual algorithms. For the list of supported
 	// algorithms, see aws-forecast-choosing-recipes.
-	TrainingParameters map[string]*string
+	TrainingParameters map[string]string
 }
 
 type CreatePredictorOutput struct {

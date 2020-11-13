@@ -44,7 +44,7 @@ type CreateMeetingWithAttendeesInput struct {
 	ClientRequestToken *string
 
 	// The request containing the attendees to create.
-	Attendees []*types.CreateAttendeeRequestItem
+	Attendees []types.CreateAttendeeRequestItem
 
 	// The external meeting ID.
 	ExternalMeetingId *string
@@ -64,17 +64,17 @@ type CreateMeetingWithAttendeesInput struct {
 	NotificationsConfiguration *types.MeetingNotificationConfiguration
 
 	// The tag key-value pairs.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateMeetingWithAttendeesOutput struct {
 
 	// The attendee information, including attendees IDs and join tokens.
-	Attendees []*types.Attendee
+	Attendees []types.Attendee
 
 	// If the action fails for one or more of the attendees in the request, a list of
 	// the attendees is returned, along with error codes and error messages.
-	Errors []*types.CreateAttendeeError
+	Errors []types.CreateAttendeeError
 
 	// A meeting created using the Amazon Chime SDK.
 	Meeting *types.Meeting

@@ -215,13 +215,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeDetectorInput(v *DescribeDetect
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DetectorModelName == nil {
+	if v.DetectorModelName == nil || len(*v.DetectorModelName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member detectorModelName must not be empty")}
 	}
 	if v.DetectorModelName != nil {
-		if len(*v.DetectorModelName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member detectorModelName must not be empty")}
-		}
 		if err := encoder.SetURI("detectorModelName").String(*v.DetectorModelName); err != nil {
 			return err
 		}
@@ -285,13 +282,10 @@ func awsRestjson1_serializeOpHttpBindingsListDetectorsInput(v *ListDetectorsInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DetectorModelName == nil {
+	if v.DetectorModelName == nil || len(*v.DetectorModelName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member detectorModelName must not be empty")}
 	}
 	if v.DetectorModelName != nil {
-		if len(*v.DetectorModelName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member detectorModelName must not be empty")}
-		}
 		if err := encoder.SetURI("detectorModelName").String(*v.DetectorModelName); err != nil {
 			return err
 		}
@@ -360,17 +354,13 @@ func awsRestjson1_serializeDocumentMessage(v *types.Message, value smithyjson.Va
 	return nil
 }
 
-func awsRestjson1_serializeDocumentMessages(v []*types.Message, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentMessages(v []types.Message, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentMessage(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentMessage(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -394,17 +384,13 @@ func awsRestjson1_serializeDocumentTimerDefinition(v *types.TimerDefinition, val
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTimerDefinitions(v []*types.TimerDefinition, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTimerDefinitions(v []types.TimerDefinition, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentTimerDefinition(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentTimerDefinition(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -440,17 +426,13 @@ func awsRestjson1_serializeDocumentUpdateDetectorRequest(v *types.UpdateDetector
 	return nil
 }
 
-func awsRestjson1_serializeDocumentUpdateDetectorRequests(v []*types.UpdateDetectorRequest, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentUpdateDetectorRequests(v []types.UpdateDetectorRequest, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentUpdateDetectorRequest(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentUpdateDetectorRequest(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -474,17 +456,13 @@ func awsRestjson1_serializeDocumentVariableDefinition(v *types.VariableDefinitio
 	return nil
 }
 
-func awsRestjson1_serializeDocumentVariableDefinitions(v []*types.VariableDefinition, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentVariableDefinitions(v []types.VariableDefinition, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentVariableDefinition(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentVariableDefinition(&v[i], av); err != nil {
 			return err
 		}
 	}

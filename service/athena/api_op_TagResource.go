@@ -51,7 +51,7 @@ type TagResourceInput struct {
 	// workgroup or data catalog resource.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type TagResourceOutput struct {

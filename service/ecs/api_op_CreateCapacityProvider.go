@@ -74,7 +74,7 @@ type CreateCapacityProviderInput struct {
 	// of such as a prefix for either keys or values as it is reserved for AWS use. You
 	// cannot edit or delete tag keys or values with this prefix. Tags with this prefix
 	// do not count against your tags per resource limit.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateCapacityProviderOutput struct {

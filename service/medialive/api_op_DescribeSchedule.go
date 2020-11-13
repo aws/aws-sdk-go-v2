@@ -36,7 +36,7 @@ type DescribeScheduleInput struct {
 	ChannelId *string
 
 	// Placeholder documentation for MaxResults
-	MaxResults *int32
+	MaxResults int32
 
 	// Placeholder documentation for __string
 	NextToken *string
@@ -49,7 +49,7 @@ type DescribeScheduleOutput struct {
 	NextToken *string
 
 	// The list of actions in the schedule.
-	ScheduleActions []*types.ScheduleAction
+	ScheduleActions []types.ScheduleAction
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

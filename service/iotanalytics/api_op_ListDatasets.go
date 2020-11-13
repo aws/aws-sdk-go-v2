@@ -40,7 +40,7 @@ type ListDatasetsInput struct {
 type ListDatasetsOutput struct {
 
 	// A list of "DatasetSummary" objects.
-	DatasetSummaries []*types.DatasetSummary
+	DatasetSummaries []types.DatasetSummary
 
 	// The token to retrieve the next set of results, or null if there are no more
 	// results.

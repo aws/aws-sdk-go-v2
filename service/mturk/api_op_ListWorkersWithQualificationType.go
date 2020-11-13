@@ -57,7 +57,7 @@ type ListWorkersWithQualificationTypeOutput struct {
 	NumResults *int32
 
 	// The list of Qualification elements returned by this call.
-	Qualifications []*types.Qualification
+	Qualifications []types.Qualification
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

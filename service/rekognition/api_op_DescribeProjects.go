@@ -51,7 +51,7 @@ type DescribeProjectsOutput struct {
 
 	// A list of project descriptions. The list is sorted by the date and time the
 	// projects are created.
-	ProjectDescriptions []*types.ProjectDescription
+	ProjectDescriptions []types.ProjectDescription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

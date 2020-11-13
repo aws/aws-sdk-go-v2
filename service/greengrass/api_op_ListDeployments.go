@@ -45,7 +45,7 @@ type ListDeploymentsInput struct {
 type ListDeploymentsOutput struct {
 
 	// A list of deployments for the requested groups.
-	Deployments []*types.Deployment
+	Deployments []types.Deployment
 
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.

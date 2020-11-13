@@ -67,7 +67,7 @@ type UpdatePackageVersionsStatusInput struct {
 	// to update.
 	//
 	// This member is required.
-	Versions []*string
+	Versions []string
 
 	// The 12-digit account number of the AWS account that owns the domain. It does not
 	// include dashes or spaces.
@@ -94,18 +94,18 @@ type UpdatePackageVersionsStatusInput struct {
 	// A map of package versions and package version revisions. The map key is the
 	// package version (for example, 3.5.2), and the map value is the package version
 	// revision.
-	VersionRevisions map[string]*string
+	VersionRevisions map[string]string
 }
 
 type UpdatePackageVersionsStatusOutput struct {
 
 	// A list of SuccessfulPackageVersionInfo objects, one for each package version
 	// with a status that successfully updated.
-	FailedVersions map[string]*types.PackageVersionError
+	FailedVersions map[string]types.PackageVersionError
 
 	// A list of PackageVersionError objects, one for each package version with a
 	// status that failed to update.
-	SuccessfulVersions map[string]*types.SuccessfulPackageVersionInfo
+	SuccessfulVersions map[string]types.SuccessfulPackageVersionInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

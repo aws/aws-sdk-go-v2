@@ -322,13 +322,13 @@ func addOpUpdateApplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateApplication{}, middleware.After)
 }
 
-func validate__listOfApplicationPolicyStatement(v []*types.ApplicationPolicyStatement) error {
+func validate__listOfApplicationPolicyStatement(v []types.ApplicationPolicyStatement) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfApplicationPolicyStatement"}
 	for i := range v {
-		if err := validateApplicationPolicyStatement(v[i]); err != nil {
+		if err := validateApplicationPolicyStatement(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -339,13 +339,13 @@ func validate__listOfApplicationPolicyStatement(v []*types.ApplicationPolicyStat
 	}
 }
 
-func validate__listOfParameterValue(v []*types.ParameterValue) error {
+func validate__listOfParameterValue(v []types.ParameterValue) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfParameterValue"}
 	for i := range v {
-		if err := validateParameterValue(v[i]); err != nil {
+		if err := validateParameterValue(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -356,13 +356,13 @@ func validate__listOfParameterValue(v []*types.ParameterValue) error {
 	}
 }
 
-func validate__listOfRollbackTrigger(v []*types.RollbackTrigger) error {
+func validate__listOfRollbackTrigger(v []types.RollbackTrigger) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfRollbackTrigger"}
 	for i := range v {
-		if err := validateRollbackTrigger(v[i]); err != nil {
+		if err := validateRollbackTrigger(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -373,13 +373,13 @@ func validate__listOfRollbackTrigger(v []*types.RollbackTrigger) error {
 	}
 }
 
-func validate__listOfTag(v []*types.Tag) error {
+func validate__listOfTag(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfTag"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

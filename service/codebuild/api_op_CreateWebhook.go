@@ -57,7 +57,7 @@ type CreateWebhookInput struct {
 	// triggered. At least one WebhookFilter in the array must specify EVENT as its
 	// type. For a build to be triggered, at least one filter group in the filterGroups
 	// array must pass. For a filter group to pass, each of its filters must pass.
-	FilterGroups [][]*types.WebhookFilter
+	FilterGroups [][]types.WebhookFilter
 }
 
 type CreateWebhookOutput struct {

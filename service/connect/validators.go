@@ -1156,13 +1156,13 @@ func validateChatMessage(v *types.ChatMessage) error {
 	}
 }
 
-func validateMediaConcurrencies(v []*types.MediaConcurrency) error {
+func validateMediaConcurrencies(v []types.MediaConcurrency) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MediaConcurrencies"}
 	for i := range v {
-		if err := validateMediaConcurrency(v[i]); err != nil {
+		if err := validateMediaConcurrency(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1178,9 +1178,6 @@ func validateMediaConcurrency(v *types.MediaConcurrency) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MediaConcurrency"}
-	if v.Concurrency == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Concurrency"))
-	}
 	if len(v.Channel) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Channel"))
 	}
@@ -1211,12 +1208,6 @@ func validateRoutingProfileQueueConfig(v *types.RoutingProfileQueueConfig) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RoutingProfileQueueConfig"}
-	if v.Priority == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
-	}
-	if v.Delay == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Delay"))
-	}
 	if v.QueueReference == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueueReference"))
 	} else if v.QueueReference != nil {
@@ -1231,13 +1222,13 @@ func validateRoutingProfileQueueConfig(v *types.RoutingProfileQueueConfig) error
 	}
 }
 
-func validateRoutingProfileQueueConfigList(v []*types.RoutingProfileQueueConfig) error {
+func validateRoutingProfileQueueConfigList(v []types.RoutingProfileQueueConfig) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RoutingProfileQueueConfigList"}
 	for i := range v {
-		if err := validateRoutingProfileQueueConfig(v[i]); err != nil {
+		if err := validateRoutingProfileQueueConfig(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1266,13 +1257,13 @@ func validateRoutingProfileQueueReference(v *types.RoutingProfileQueueReference)
 	}
 }
 
-func validateRoutingProfileQueueReferenceList(v []*types.RoutingProfileQueueReference) error {
+func validateRoutingProfileQueueReferenceList(v []types.RoutingProfileQueueReference) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RoutingProfileQueueReferenceList"}
 	for i := range v {
-		if err := validateRoutingProfileQueueReference(v[i]); err != nil {
+		if err := validateRoutingProfileQueueReference(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

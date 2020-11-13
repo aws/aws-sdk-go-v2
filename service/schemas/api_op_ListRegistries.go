@@ -28,7 +28,7 @@ func (c *Client) ListRegistries(ctx context.Context, params *ListRegistriesInput
 }
 
 type ListRegistriesInput struct {
-	Limit *int32
+	Limit int32
 
 	// The token that specifies the next page of results to return. To request the
 	// first page, leave NextToken empty. The token will expire in 24 hours, and cannot
@@ -52,7 +52,7 @@ type ListRegistriesOutput struct {
 	NextToken *string
 
 	// An array of registry summaries.
-	Registries []*types.RegistrySummary
+	Registries []types.RegistrySummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

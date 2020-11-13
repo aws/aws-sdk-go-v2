@@ -41,7 +41,7 @@ type Channel struct {
 	IngressAccessLogs *IngressAccessLogs
 
 	// A collection of tags associated with a resource
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // A Common Media Application Format (CMAF) encryption configuration.
@@ -54,7 +54,7 @@ type CmafEncryption struct {
 	SpekeKeyProvider *SpekeKeyProvider
 
 	// Time (in seconds) between each encryption key rotation.
-	KeyRotationIntervalSeconds *int32
+	KeyRotationIntervalSeconds int32
 }
 
 // A Common Media Application Format (CMAF) packaging configuration.
@@ -64,11 +64,11 @@ type CmafPackage struct {
 	Encryption *CmafEncryption
 
 	// A list of HLS manifest configurations
-	HlsManifests []*HlsManifest
+	HlsManifests []HlsManifest
 
 	// Duration (in seconds) of each segment. Actual segments will be rounded to the
 	// nearest multiple of the source segment duration.
-	SegmentDurationSeconds *int32
+	SegmentDurationSeconds int32
 
 	// An optional custom string that is prepended to the name of each segment. If not
 	// specified, it defaults to the ChannelId.
@@ -85,11 +85,11 @@ type CmafPackageCreateOrUpdateParameters struct {
 	Encryption *CmafEncryption
 
 	// A list of HLS manifest configurations
-	HlsManifests []*HlsManifestCreateOrUpdateParameters
+	HlsManifests []HlsManifestCreateOrUpdateParameters
 
 	// Duration (in seconds) of each segment. Actual segments will be rounded to the
 	// nearest multiple of the source segment duration.
-	SegmentDurationSeconds *int32
+	SegmentDurationSeconds int32
 
 	// An optional custom string that is prepended to the name of each segment. If not
 	// specified, it defaults to the ChannelId.
@@ -109,7 +109,7 @@ type DashEncryption struct {
 	SpekeKeyProvider *SpekeKeyProvider
 
 	// Time (in seconds) between each encryption key rotation.
-	KeyRotationIntervalSeconds *int32
+	KeyRotationIntervalSeconds int32
 }
 
 // A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
@@ -142,15 +142,15 @@ type DashPackage struct {
 	ManifestLayout ManifestLayout
 
 	// Time window (in seconds) contained in each manifest.
-	ManifestWindowSeconds *int32
+	ManifestWindowSeconds int32
 
 	// Minimum duration (in seconds) that a player will buffer media before starting
 	// the presentation.
-	MinBufferTimeSeconds *int32
+	MinBufferTimeSeconds int32
 
 	// Minimum duration (in seconds) between potential changes to the Dynamic Adaptive
 	// Streaming over HTTP (DASH) Media Presentation Description (MPD).
-	MinUpdatePeriodSeconds *int32
+	MinUpdatePeriodSeconds int32
 
 	// A list of triggers that controls when the outgoing Dynamic Adaptive Streaming
 	// over HTTP (DASH) Media Presentation Description (MPD) will be partitioned into
@@ -165,7 +165,7 @@ type DashPackage struct {
 
 	// Duration (in seconds) of each segment. Actual segments will be rounded to the
 	// nearest multiple of the source segment duration.
-	SegmentDurationSeconds *int32
+	SegmentDurationSeconds int32
 
 	// Determines the type of SegmentTemplate included in the Media Presentation
 	// Description (MPD). When set to NUMBER_WITH_TIMELINE, a full timeline is
@@ -179,7 +179,7 @@ type DashPackage struct {
 	StreamSelection *StreamSelection
 
 	// Duration (in seconds) to delay live content before presentation.
-	SuggestedPresentationDelaySeconds *int32
+	SuggestedPresentationDelaySeconds int32
 
 	// Determines the type of UTCTiming included in the Media Presentation Description
 	// (MPD)
@@ -250,17 +250,17 @@ type HlsEncryption struct {
 	EncryptionMethod EncryptionMethod
 
 	// Interval (in seconds) between each encryption key rotation.
-	KeyRotationIntervalSeconds *int32
+	KeyRotationIntervalSeconds int32
 
 	// When enabled, the EXT-X-KEY tag will be repeated in output manifests.
-	RepeatExtXKey *bool
+	RepeatExtXKey bool
 }
 
 // An HTTP Live Streaming (HLS) ingest resource configuration.
 type HlsIngest struct {
 
 	// A list of endpoints to which the source stream should be sent.
-	IngestEndpoints []*IngestEndpoint
+	IngestEndpoints []IngestEndpoint
 }
 
 // A HTTP Live Streaming (HLS) manifest configuration.
@@ -283,7 +283,7 @@ type HlsManifest struct {
 	AdMarkers AdMarkers
 
 	// When enabled, an I-Frame only stream will be included in the output.
-	IncludeIframeOnlyStream *bool
+	IncludeIframeOnlyStream bool
 
 	// An optional short string appended to the end of the OriginEndpoint URL. If not
 	// specified, defaults to the manifestName for the OriginEndpoint.
@@ -295,7 +295,7 @@ type HlsManifest struct {
 	PlaylistType PlaylistType
 
 	// Time window (in seconds) contained in each parent manifest.
-	PlaylistWindowSeconds *int32
+	PlaylistWindowSeconds int32
 
 	// The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into
 	// manifests. Additionally, when an interval is specified ID3Timed Metadata
@@ -305,7 +305,7 @@ type HlsManifest struct {
 	// generated. Note that irrespective of this parameter, if any ID3 Timed Metadata
 	// is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS
 	// output.
-	ProgramDateTimeIntervalSeconds *int32
+	ProgramDateTimeIntervalSeconds int32
 
 	// The URL of the packaged OriginEndpoint for consumption.
 	Url *string
@@ -348,7 +348,7 @@ type HlsManifestCreateOrUpdateParameters struct {
 	AdsOnDeliveryRestrictions AdsOnDeliveryRestrictions
 
 	// When enabled, an I-Frame only stream will be included in the output.
-	IncludeIframeOnlyStream *bool
+	IncludeIframeOnlyStream bool
 
 	// An optional short string appended to the end of the OriginEndpoint URL. If not
 	// specified, defaults to the manifestName for the OriginEndpoint.
@@ -360,7 +360,7 @@ type HlsManifestCreateOrUpdateParameters struct {
 	PlaylistType PlaylistType
 
 	// Time window (in seconds) contained in each parent manifest.
-	PlaylistWindowSeconds *int32
+	PlaylistWindowSeconds int32
 
 	// The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into
 	// manifests. Additionally, when an interval is specified ID3Timed Metadata
@@ -370,7 +370,7 @@ type HlsManifestCreateOrUpdateParameters struct {
 	// generated. Note that irrespective of this parameter, if any ID3 Timed Metadata
 	// is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS
 	// output.
-	ProgramDateTimeIntervalSeconds *int32
+	ProgramDateTimeIntervalSeconds int32
 }
 
 // An HTTP Live Streaming (HLS) packaging configuration.
@@ -407,7 +407,7 @@ type HlsPackage struct {
 	Encryption *HlsEncryption
 
 	// When enabled, an I-Frame only stream will be included in the output.
-	IncludeIframeOnlyStream *bool
+	IncludeIframeOnlyStream bool
 
 	// The HTTP Live Streaming (HLS) playlist type. When either "EVENT" or "VOD" is
 	// specified, a corresponding EXT-X-PLAYLIST-TYPE entry will be included in the
@@ -415,7 +415,7 @@ type HlsPackage struct {
 	PlaylistType PlaylistType
 
 	// Time window (in seconds) contained in each parent manifest.
-	PlaylistWindowSeconds *int32
+	PlaylistWindowSeconds int32
 
 	// The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into
 	// manifests. Additionally, when an interval is specified ID3Timed Metadata
@@ -425,17 +425,17 @@ type HlsPackage struct {
 	// generated. Note that irrespective of this parameter, if any ID3 Timed Metadata
 	// is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS
 	// output.
-	ProgramDateTimeIntervalSeconds *int32
+	ProgramDateTimeIntervalSeconds int32
 
 	// Duration (in seconds) of each fragment. Actual fragments will be rounded to the
 	// nearest multiple of the source fragment duration.
-	SegmentDurationSeconds *int32
+	SegmentDurationSeconds int32
 
 	// A StreamSelection configuration.
 	StreamSelection *StreamSelection
 
 	// When enabled, audio streams will be placed in rendition groups in the output.
-	UseAudioRenditionGroup *bool
+	UseAudioRenditionGroup bool
 }
 
 // An endpoint for ingesting source content for a Channel.
@@ -478,10 +478,10 @@ type MssPackage struct {
 	Encryption *MssEncryption
 
 	// The time window (in seconds) contained in each manifest.
-	ManifestWindowSeconds *int32
+	ManifestWindowSeconds int32
 
 	// The duration (in seconds) of each segment.
-	SegmentDurationSeconds *int32
+	SegmentDurationSeconds int32
 
 	// A StreamSelection configuration.
 	StreamSelection *StreamSelection
@@ -529,21 +529,21 @@ type OriginEndpoint struct {
 
 	// Maximum duration (seconds) of content to retain for startover playback. If not
 	// specified, startover playback will be disabled for the OriginEndpoint.
-	StartoverWindowSeconds *int32
+	StartoverWindowSeconds int32
 
 	// A collection of tags associated with a resource
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Amount of delay (seconds) to enforce on the playback of live content. If not
 	// specified, there will be no time delay in effect for the OriginEndpoint.
-	TimeDelaySeconds *int32
+	TimeDelaySeconds int32
 
 	// The URL of the packaged OriginEndpoint for consumption.
 	Url *string
 
 	// A list of source IP CIDR blocks that will be allowed to access the
 	// OriginEndpoint.
-	Whitelist []*string
+	Whitelist []string
 }
 
 // Configuration parameters for where in an S3 bucket to place the harvested
@@ -585,7 +585,7 @@ type SpekeKeyProvider struct {
 	// The system IDs to include in key requests.
 	//
 	// This member is required.
-	SystemIds []*string
+	SystemIds []string
 
 	// The URL of the external key provider service.
 	//
@@ -602,10 +602,10 @@ type SpekeKeyProvider struct {
 type StreamSelection struct {
 
 	// The maximum video bitrate (bps) to include in output.
-	MaxVideoBitsPerSecond *int32
+	MaxVideoBitsPerSecond int32
 
 	// The minimum video bitrate (bps) to include in output.
-	MinVideoBitsPerSecond *int32
+	MinVideoBitsPerSecond int32
 
 	// A directive that determines the order of streams in the output.
 	StreamOrder StreamOrder

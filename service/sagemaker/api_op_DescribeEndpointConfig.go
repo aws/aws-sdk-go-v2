@@ -58,7 +58,7 @@ type DescribeEndpointConfigOutput struct {
 	// at this endpoint.
 	//
 	// This member is required.
-	ProductionVariants []*types.ProductionVariant
+	ProductionVariants []types.ProductionVariant
 
 	//
 	DataCaptureConfig *types.DataCaptureConfig

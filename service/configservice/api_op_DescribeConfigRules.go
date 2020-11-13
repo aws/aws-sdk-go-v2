@@ -32,7 +32,7 @@ type DescribeConfigRulesInput struct {
 
 	// The names of the AWS Config rules for which you want details. If you do not
 	// specify any names, AWS Config returns details for all your rules.
-	ConfigRuleNames []*string
+	ConfigRuleNames []string
 
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
@@ -43,7 +43,7 @@ type DescribeConfigRulesInput struct {
 type DescribeConfigRulesOutput struct {
 
 	// The details about your AWS Config rules.
-	ConfigRules []*types.ConfigRule
+	ConfigRules []types.ConfigRule
 
 	// The string that you use in a subsequent request to get the next page of results
 	// in a paginated response.

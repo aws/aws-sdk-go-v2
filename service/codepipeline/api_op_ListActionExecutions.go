@@ -52,7 +52,7 @@ type ListActionExecutionsInput struct {
 type ListActionExecutionsOutput struct {
 
 	// The details for a list of recent executions, such as action execution ID.
-	ActionExecutionDetails []*types.ActionExecutionDetail
+	ActionExecutionDetails []types.ActionExecutionDetail
 
 	// If the amount of returned information is significantly large, an identifier is
 	// also returned and can be used in a subsequent ListActionExecutions call to

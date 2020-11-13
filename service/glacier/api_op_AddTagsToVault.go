@@ -52,7 +52,7 @@ type AddTagsToVaultInput struct {
 
 	// The tags to add to the vault. Each tag is composed of a key and a value. The
 	// value can be an empty string.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type AddTagsToVaultOutput struct {

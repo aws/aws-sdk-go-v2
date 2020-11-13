@@ -38,7 +38,7 @@ type UpdateConnectivityInfoInput struct {
 	ThingName *string
 
 	// A list of connectivity info.
-	ConnectivityInfo []*types.ConnectivityInfo
+	ConnectivityInfo []types.ConnectivityInfo
 }
 
 type UpdateConnectivityInfoOutput struct {

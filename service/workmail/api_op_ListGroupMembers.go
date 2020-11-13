@@ -52,7 +52,7 @@ type ListGroupMembersInput struct {
 type ListGroupMembersOutput struct {
 
 	// The members associated to the group.
-	Members []*types.Member
+	Members []types.Member
 
 	// The token to use to retrieve the next page of results. The first call does not
 	// contain any tokens.

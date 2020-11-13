@@ -50,14 +50,14 @@ type ComposeEnvironmentsInput struct {
 	// belong to the target application. Each source bundle must include an environment
 	// manifest that specifies the name of the environment and the name of the solution
 	// stack to use, and optionally can specify environment links to create.
-	VersionLabels []*string
+	VersionLabels []string
 }
 
 // Result message containing a list of environment descriptions.
 type ComposeEnvironmentsOutput struct {
 
 	// Returns an EnvironmentDescription list.
-	Environments []*types.EnvironmentDescription
+	Environments []types.EnvironmentDescription
 
 	// In a paginated request, the token that you can pass in a subsequent request to
 	// get the next response page.

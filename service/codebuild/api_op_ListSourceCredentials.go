@@ -35,7 +35,7 @@ type ListSourceCredentialsOutput struct {
 	// A list of SourceCredentialsInfo objects. Each SourceCredentialsInfo object
 	// includes the authentication type, token ARN, and type of source provider for one
 	// set of credentials.
-	SourceCredentialsInfos []*types.SourceCredentialsInfo
+	SourceCredentialsInfos []types.SourceCredentialsInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -46,10 +46,10 @@ type GetDataflowEndpointGroupOutput struct {
 	DataflowEndpointGroupId *string
 
 	// Details of a dataflow endpoint.
-	EndpointsDetails []*types.EndpointDetails
+	EndpointsDetails []types.EndpointDetails
 
 	// Tags assigned to a dataflow endpoint group.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

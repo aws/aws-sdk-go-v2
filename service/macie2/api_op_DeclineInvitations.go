@@ -34,7 +34,7 @@ type DeclineInvitationsInput struct {
 	// invitation to decline.
 	//
 	// This member is required.
-	AccountIds []*string
+	AccountIds []string
 }
 
 type DeclineInvitationsOutput struct {
@@ -42,7 +42,7 @@ type DeclineInvitationsOutput struct {
 	// An array of objects, one for each account whose invitation hasn't been declined.
 	// Each object identifies the account and explains why the request hasn't been
 	// processed for that account.
-	UnprocessedAccounts []*types.UnprocessedAccount
+	UnprocessedAccounts []types.UnprocessedAccount
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -52,7 +52,7 @@ type ListImportJobsInput struct {
 type ListImportJobsOutput struct {
 
 	// A list of the import job summaries.
-	ImportJobs []*types.ImportJobSummary
+	ImportJobs []types.ImportJobSummary
 
 	// A string token indicating that there might be additional import jobs available
 	// to be listed. Copy this token to a subsequent call to ListImportJobs with the

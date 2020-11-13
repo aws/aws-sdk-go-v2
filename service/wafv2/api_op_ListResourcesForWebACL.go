@@ -50,7 +50,7 @@ type ListResourcesForWebACLInput struct {
 type ListResourcesForWebACLOutput struct {
 
 	// The array of Amazon Resource Names (ARNs) of the associated resources.
-	ResourceArns []*string
+	ResourceArns []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

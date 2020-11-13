@@ -46,7 +46,7 @@ type ListSignalingChannelsInput struct {
 type ListSignalingChannelsOutput struct {
 
 	// An array of ChannelInfo objects.
-	ChannelInfoList []*types.ChannelInfo
+	ChannelInfoList []types.ChannelInfo
 
 	// If the response is truncated, the call returns this element with a token. To get
 	// the next batch of streams, use this token in your next request.

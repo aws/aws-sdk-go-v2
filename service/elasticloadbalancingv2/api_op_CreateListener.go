@@ -44,7 +44,7 @@ type CreateListenerInput struct {
 	// The actions for the default rule.
 	//
 	// This member is required.
-	DefaultActions []*types.Action
+	DefaultActions []types.Action
 
 	// The Amazon Resource Name (ARN) of the load balancer.
 	//
@@ -81,13 +81,13 @@ type CreateListenerInput struct {
 	// For more information, see ALPN Policies
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies)
 	// in the Network Load Balancers Guide.
-	AlpnPolicy []*string
+	AlpnPolicy []string
 
 	// [HTTPS and TLS listeners] The default certificate for the listener. You must
 	// provide exactly one certificate. Set CertificateArn to the certificate ARN but
 	// do not set IsDefault. To create a certificate list for the listener, use
 	// AddListenerCertificates.
-	Certificates []*types.Certificate
+	Certificates []types.Certificate
 
 	// [HTTPS and TLS listeners] The security policy that defines which protocols and
 	// ciphers are supported. The following are the possible values:
@@ -124,13 +124,13 @@ type CreateListenerInput struct {
 	SslPolicy *string
 
 	// The tags to assign to the listener.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateListenerOutput struct {
 
 	// Information about the listener.
-	Listeners []*types.Listener
+	Listeners []types.Listener
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

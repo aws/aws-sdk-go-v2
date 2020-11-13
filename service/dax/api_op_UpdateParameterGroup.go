@@ -39,7 +39,7 @@ type UpdateParameterGroupInput struct {
 	// the array represents a single parameter.
 	//
 	// This member is required.
-	ParameterNameValues []*types.ParameterNameValue
+	ParameterNameValues []types.ParameterNameValue
 }
 
 type UpdateParameterGroupOutput struct {

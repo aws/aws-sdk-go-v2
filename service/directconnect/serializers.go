@@ -2575,17 +2575,13 @@ func (m *awsAwsjson11_serializeOpUpdateVirtualInterfaceAttributes) HandleSeriali
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsAwsjson11_serializeDocumentBGPPeerIdList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentBGPPeerIdList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2604,9 +2600,9 @@ func awsAwsjson11_serializeDocumentNewBGPPeer(v *types.NewBGPPeer, value smithyj
 		ok.String(*v.AmazonAddress)
 	}
 
-	if v.Asn != nil {
+	if v.Asn != 0 {
 		ok := object.Key("asn")
-		ok.Integer(*v.Asn)
+		ok.Integer(v.Asn)
 	}
 
 	if v.AuthKey != nil {
@@ -2636,9 +2632,9 @@ func awsAwsjson11_serializeDocumentNewPrivateVirtualInterface(v *types.NewPrivat
 		ok.String(*v.AmazonAddress)
 	}
 
-	if v.Asn != nil {
+	if v.Asn != 0 {
 		ok := object.Key("asn")
-		ok.Integer(*v.Asn)
+		ok.Integer(v.Asn)
 	}
 
 	if v.AuthKey != nil {
@@ -2678,9 +2674,9 @@ func awsAwsjson11_serializeDocumentNewPrivateVirtualInterface(v *types.NewPrivat
 		ok.String(*v.VirtualInterfaceName)
 	}
 
-	if v.Vlan != nil {
+	if v.Vlan != 0 {
 		ok := object.Key("vlan")
-		ok.Integer(*v.Vlan)
+		ok.Integer(v.Vlan)
 	}
 
 	return nil
@@ -2700,9 +2696,9 @@ func awsAwsjson11_serializeDocumentNewPrivateVirtualInterfaceAllocation(v *types
 		ok.String(*v.AmazonAddress)
 	}
 
-	if v.Asn != nil {
+	if v.Asn != 0 {
 		ok := object.Key("asn")
-		ok.Integer(*v.Asn)
+		ok.Integer(v.Asn)
 	}
 
 	if v.AuthKey != nil {
@@ -2732,9 +2728,9 @@ func awsAwsjson11_serializeDocumentNewPrivateVirtualInterfaceAllocation(v *types
 		ok.String(*v.VirtualInterfaceName)
 	}
 
-	if v.Vlan != nil {
+	if v.Vlan != 0 {
 		ok := object.Key("vlan")
-		ok.Integer(*v.Vlan)
+		ok.Integer(v.Vlan)
 	}
 
 	return nil
@@ -2754,9 +2750,9 @@ func awsAwsjson11_serializeDocumentNewPublicVirtualInterface(v *types.NewPublicV
 		ok.String(*v.AmazonAddress)
 	}
 
-	if v.Asn != nil {
+	if v.Asn != 0 {
 		ok := object.Key("asn")
-		ok.Integer(*v.Asn)
+		ok.Integer(v.Asn)
 	}
 
 	if v.AuthKey != nil {
@@ -2788,9 +2784,9 @@ func awsAwsjson11_serializeDocumentNewPublicVirtualInterface(v *types.NewPublicV
 		ok.String(*v.VirtualInterfaceName)
 	}
 
-	if v.Vlan != nil {
+	if v.Vlan != 0 {
 		ok := object.Key("vlan")
-		ok.Integer(*v.Vlan)
+		ok.Integer(v.Vlan)
 	}
 
 	return nil
@@ -2810,9 +2806,9 @@ func awsAwsjson11_serializeDocumentNewPublicVirtualInterfaceAllocation(v *types.
 		ok.String(*v.AmazonAddress)
 	}
 
-	if v.Asn != nil {
+	if v.Asn != 0 {
 		ok := object.Key("asn")
-		ok.Integer(*v.Asn)
+		ok.Integer(v.Asn)
 	}
 
 	if v.AuthKey != nil {
@@ -2844,9 +2840,9 @@ func awsAwsjson11_serializeDocumentNewPublicVirtualInterfaceAllocation(v *types.
 		ok.String(*v.VirtualInterfaceName)
 	}
 
-	if v.Vlan != nil {
+	if v.Vlan != 0 {
 		ok := object.Key("vlan")
-		ok.Integer(*v.Vlan)
+		ok.Integer(v.Vlan)
 	}
 
 	return nil
@@ -2866,9 +2862,9 @@ func awsAwsjson11_serializeDocumentNewTransitVirtualInterface(v *types.NewTransi
 		ok.String(*v.AmazonAddress)
 	}
 
-	if v.Asn != nil {
+	if v.Asn != 0 {
 		ok := object.Key("asn")
-		ok.Integer(*v.Asn)
+		ok.Integer(v.Asn)
 	}
 
 	if v.AuthKey != nil {
@@ -2903,9 +2899,9 @@ func awsAwsjson11_serializeDocumentNewTransitVirtualInterface(v *types.NewTransi
 		ok.String(*v.VirtualInterfaceName)
 	}
 
-	if v.Vlan != nil {
+	if v.Vlan != 0 {
 		ok := object.Key("vlan")
-		ok.Integer(*v.Vlan)
+		ok.Integer(v.Vlan)
 	}
 
 	return nil
@@ -2925,9 +2921,9 @@ func awsAwsjson11_serializeDocumentNewTransitVirtualInterfaceAllocation(v *types
 		ok.String(*v.AmazonAddress)
 	}
 
-	if v.Asn != nil {
+	if v.Asn != 0 {
 		ok := object.Key("asn")
-		ok.Integer(*v.Asn)
+		ok.Integer(v.Asn)
 	}
 
 	if v.AuthKey != nil {
@@ -2957,25 +2953,21 @@ func awsAwsjson11_serializeDocumentNewTransitVirtualInterfaceAllocation(v *types
 		ok.String(*v.VirtualInterfaceName)
 	}
 
-	if v.Vlan != nil {
+	if v.Vlan != 0 {
 		ok := object.Key("vlan")
-		ok.Integer(*v.Vlan)
+		ok.Integer(v.Vlan)
 	}
 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentResourceArnList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentResourceArnList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2992,17 +2984,13 @@ func awsAwsjson11_serializeDocumentRouteFilterPrefix(v *types.RouteFilterPrefix,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRouteFilterPrefixList(v []*types.RouteFilterPrefix, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentRouteFilterPrefixList(v []types.RouteFilterPrefix, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentRouteFilterPrefix(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentRouteFilterPrefix(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -3026,32 +3014,24 @@ func awsAwsjson11_serializeDocumentTag(v *types.Tag, value smithyjson.Value) err
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagKeyList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagKeyList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagList(v []*types.Tag, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagList(v []types.Tag, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentTag(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -3111,9 +3091,9 @@ func awsAwsjson11_serializeOpDocumentAllocateConnectionOnInterconnectInput(v *Al
 		ok.String(*v.OwnerAccount)
 	}
 
-	if v.Vlan != nil {
+	if v.Vlan != 0 {
 		ok := object.Key("vlan")
-		ok.Integer(*v.Vlan)
+		ok.Integer(v.Vlan)
 	}
 
 	return nil
@@ -3150,9 +3130,9 @@ func awsAwsjson11_serializeOpDocumentAllocateHostedConnectionInput(v *AllocateHo
 		}
 	}
 
-	if v.Vlan != nil {
+	if v.Vlan != 0 {
 		ok := object.Key("vlan")
-		ok.Integer(*v.Vlan)
+		ok.Integer(v.Vlan)
 	}
 
 	return nil
@@ -3554,9 +3534,9 @@ func awsAwsjson11_serializeOpDocumentCreateLagInput(v *CreateLagInput, value smi
 		ok.String(*v.Location)
 	}
 
-	if v.NumberOfConnections != nil {
+	if v.NumberOfConnections != 0 {
 		ok := object.Key("numberOfConnections")
-		ok.Integer(*v.NumberOfConnections)
+		ok.Integer(v.NumberOfConnections)
 	}
 
 	if v.ProviderName != nil {
@@ -3635,9 +3615,9 @@ func awsAwsjson11_serializeOpDocumentDeleteBGPPeerInput(v *DeleteBGPPeerInput, v
 	object := value.Object()
 	defer object.Close()
 
-	if v.Asn != nil {
+	if v.Asn != 0 {
 		ok := object.Key("asn")
-		ok.Integer(*v.Asn)
+		ok.Integer(v.Asn)
 	}
 
 	if v.BgpPeerId != nil {
@@ -4211,9 +4191,9 @@ func awsAwsjson11_serializeOpDocumentUpdateLagInput(v *UpdateLagInput, value smi
 		ok.String(*v.LagName)
 	}
 
-	if v.MinimumLinks != nil {
+	if v.MinimumLinks != 0 {
 		ok := object.Key("minimumLinks")
-		ok.Integer(*v.MinimumLinks)
+		ok.Integer(v.MinimumLinks)
 	}
 
 	return nil

@@ -46,7 +46,7 @@ type Backup struct {
 	SourceRegion *string
 
 	// The list of tags for the backup.
-	TagList []*Tag
+	TagList []Tag
 }
 
 // Contains one or more certificates or a certificate signing request (CSR).
@@ -89,7 +89,7 @@ type Cluster struct {
 	HsmType *string
 
 	// Contains information about the HSMs in the cluster.
-	Hsms []*Hsm
+	Hsms []Hsm
 
 	// The default password for the cluster's Pre-Crypto Officer (PRECO) user.
 	PreCoPassword *string
@@ -108,10 +108,10 @@ type Cluster struct {
 	StateMessage *string
 
 	// A map from availability zone to the cluster’s subnet in that availability zone.
-	SubnetMapping map[string]*string
+	SubnetMapping map[string]string
 
 	// The list of tags for the cluster.
-	TagList []*Tag
+	TagList []Tag
 
 	// The identifier (ID) of the virtual private cloud (VPC) that contains the
 	// cluster.

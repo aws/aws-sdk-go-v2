@@ -42,7 +42,7 @@ type ListSecurityProfilesForTargetInput struct {
 	NextToken *string
 
 	// If true, return child groups too.
-	Recursive *bool
+	Recursive bool
 }
 
 type ListSecurityProfilesForTargetOutput struct {
@@ -52,7 +52,7 @@ type ListSecurityProfilesForTargetOutput struct {
 	NextToken *string
 
 	// A list of security profiles and their associated targets.
-	SecurityProfileTargetMappings []*types.SecurityProfileTargetMapping
+	SecurityProfileTargetMappings []types.SecurityProfileTargetMapping
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

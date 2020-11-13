@@ -50,7 +50,7 @@ type RegisterInstancesWithLoadBalancerInput struct {
 	// The IDs of the instances.
 	//
 	// This member is required.
-	Instances []*types.Instance
+	Instances []types.Instance
 
 	// The name of the load balancer.
 	//
@@ -62,7 +62,7 @@ type RegisterInstancesWithLoadBalancerInput struct {
 type RegisterInstancesWithLoadBalancerOutput struct {
 
 	// The updated list of instances for the load balancer.
-	Instances []*types.Instance
+	Instances []types.Instance
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

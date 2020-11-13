@@ -80,7 +80,7 @@ type UpdateRateBasedRuleInput struct {
 	// are also met, AWS WAF triggers the action that is specified for this rule.
 	//
 	// This member is required.
-	RateLimit *int64
+	RateLimit int64
 
 	// The RuleId of the RateBasedRule that you want to update. RuleId is returned by
 	// CreateRateBasedRule and by ListRateBasedRules.
@@ -92,7 +92,7 @@ type UpdateRateBasedRuleInput struct {
 	// RateBasedRule.
 	//
 	// This member is required.
-	Updates []*types.RuleUpdate
+	Updates []types.RuleUpdate
 }
 
 type UpdateRateBasedRuleOutput struct {

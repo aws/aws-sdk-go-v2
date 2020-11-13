@@ -19,7 +19,7 @@ type CreateRule struct {
 
 	// The interval between snapshots. The supported values are 1, 2, 3, 4, 6, 8, 12,
 	// and 24.
-	Interval *int32
+	Interval int32
 
 	// The interval unit.
 	IntervalUnit IntervalUnitValues
@@ -27,7 +27,7 @@ type CreateRule struct {
 	// The time, in UTC, to start the operation. The supported format is hh:mm. The
 	// operation occurs within a one-hour window following the specified time. If you
 	// do not specify a time, Amazon DLM selects a time within the next 24 hours.
-	Times []*string
+	Times []string
 }
 
 // Specifies the retention rule for cross-Region snapshot copies.
@@ -35,7 +35,7 @@ type CrossRegionCopyRetainRule struct {
 
 	// The amount of time to retain each snapshot. The maximum is 100 years. This is
 	// equivalent to 1200 months, 5200 weeks, or 36500 days.
-	Interval *int32
+	Interval int32
 
 	// The unit of time for time-based retention.
 	IntervalUnit RetentionIntervalUnitValues
@@ -76,14 +76,14 @@ type FastRestoreRule struct {
 	// The Availability Zones in which to enable fast snapshot restore.
 	//
 	// This member is required.
-	AvailabilityZones []*string
+	AvailabilityZones []string
 
 	// The number of snapshots to be enabled with fast snapshot restore.
-	Count *int32
+	Count int32
 
 	// The amount of time to enable fast snapshot restore. The maximum is 100 years.
 	// This is equivalent to 1200 months, 5200 weeks, or 36500 days.
-	Interval *int32
+	Interval int32
 
 	// The unit of time for enabling fast snapshot restore.
 	IntervalUnit RetentionIntervalUnitValues
@@ -121,7 +121,7 @@ type LifecyclePolicy struct {
 	StatusMessage *string
 
 	// The tags.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // Summary information about a lifecycle policy.
@@ -137,7 +137,7 @@ type LifecyclePolicySummary struct {
 	State GettablePolicyStateValues
 
 	// The tags.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // Specifies optional parameters to add to a policy. The set of valid parameters
@@ -167,10 +167,10 @@ type PolicyDetails struct {
 
 	// The schedules of policy-defined actions. A policy can have up to four schedules
 	// - one mandatory schedule and up to three optional schedules.
-	Schedules []*Schedule
+	Schedules []Schedule
 
 	// The single tag that identifies targeted resources for this policy.
-	TargetTags []*Tag
+	TargetTags []Tag
 }
 
 // Specifies the retention rule for a lifecycle policy. You can retain snapshots
@@ -178,11 +178,11 @@ type PolicyDetails struct {
 type RetainRule struct {
 
 	// The number of snapshots to retain for each volume, up to a maximum of 1000.
-	Count *int32
+	Count int32
 
 	// The amount of time to retain each snapshot. The maximum is 100 years. This is
 	// equivalent to 1200 months, 5200 weeks, or 36500 days.
-	Interval *int32
+	Interval int32
 
 	// The unit of time for time-based retention.
 	IntervalUnit RetentionIntervalUnitValues
@@ -193,13 +193,13 @@ type Schedule struct {
 
 	// Copy all user-defined tags on a source volume to snapshots of the volume created
 	// by this policy.
-	CopyTags *bool
+	CopyTags bool
 
 	// The creation rule.
 	CreateRule *CreateRule
 
 	// The rule for cross-Region snapshot copies.
-	CrossRegionCopyRules []*CrossRegionCopyRule
+	CrossRegionCopyRules []CrossRegionCopyRule
 
 	// The rule for enabling fast snapshot restore.
 	FastRestoreRule *FastRestoreRule
@@ -212,13 +212,13 @@ type Schedule struct {
 
 	// The tags to apply to policy-created resources. These user-defined tags are in
 	// addition to the AWS-added lifecycle tags.
-	TagsToAdd []*Tag
+	TagsToAdd []Tag
 
 	// A collection of key/value pairs with values determined dynamically when the
 	// policy is executed. Keys may be any valid Amazon EC2 tag key. Values must be in
 	// one of the two following formats: $(instance-id) or $(timestamp). Variable tags
 	// are only valid for EBS Snapshot Management – Instance policies.
-	VariableTags []*Tag
+	VariableTags []Tag
 }
 
 // Specifies a tag for a resource.

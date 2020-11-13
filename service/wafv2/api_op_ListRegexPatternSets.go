@@ -70,7 +70,7 @@ type ListRegexPatternSetsOutput struct {
 	NextMarker *string
 
 	//
-	RegexPatternSets []*types.RegexPatternSetSummary
+	RegexPatternSets []types.RegexPatternSetSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

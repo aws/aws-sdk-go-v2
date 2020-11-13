@@ -42,7 +42,7 @@ type ListIndicesInput struct {
 type ListIndicesOutput struct {
 
 	// An array of summary information for one or more indexes.
-	IndexConfigurationSummaryItems []*types.IndexConfigurationSummary
+	IndexConfigurationSummaryItems []types.IndexConfigurationSummary
 
 	// If the response is truncated, Amazon Kendra returns this token that you can use
 	// in the subsequent request to retrieve the next set of indexes.

@@ -49,7 +49,7 @@ type DeleteRuleInput struct {
 	// that are not managed rules. You can check whether a rule is a managed rule by
 	// using DescribeRule or ListRules and checking the ManagedBy field of the
 	// response.
-	Force *bool
+	Force bool
 }
 
 type DeleteRuleOutput struct {

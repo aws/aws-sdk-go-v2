@@ -9,7 +9,7 @@ type ParentSavingsPlanOffering struct {
 	Currency CurrencyCode
 
 	// The duration, in seconds.
-	DurationSeconds *int64
+	DurationSeconds int64
 
 	// The ID of the offering.
 	OfferingId *string
@@ -73,10 +73,10 @@ type SavingsPlan struct {
 	State SavingsPlanState
 
 	// One or more tags.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The duration of the term, in seconds.
-	TermDurationInSeconds *int64
+	TermDurationInSeconds int64
 
 	// The up-front payment amount.
 	UpfrontPaymentAmount *string
@@ -89,7 +89,7 @@ type SavingsPlanFilter struct {
 	Name SavingsPlansFilterName
 
 	// The filter value.
-	Values []*string
+	Values []string
 }
 
 // Information about a Savings Plan offering.
@@ -102,7 +102,7 @@ type SavingsPlanOffering struct {
 	Description *string
 
 	// The duration, in seconds.
-	DurationSeconds *int64
+	DurationSeconds int64
 
 	// The ID of the offering.
 	OfferingId *string
@@ -120,7 +120,7 @@ type SavingsPlanOffering struct {
 	ProductTypes []SavingsPlanProductType
 
 	// The properties.
-	Properties []*SavingsPlanOfferingProperty
+	Properties []SavingsPlanOfferingProperty
 
 	// The service.
 	ServiceCode *string
@@ -136,7 +136,7 @@ type SavingsPlanOfferingFilterElement struct {
 	Name SavingsPlanOfferingFilterAttribute
 
 	// The filter values.
-	Values []*string
+	Values []string
 }
 
 // Information about a property.
@@ -159,7 +159,7 @@ type SavingsPlanOfferingRate struct {
 	ProductType SavingsPlanProductType
 
 	// The properties.
-	Properties []*SavingsPlanOfferingRateProperty
+	Properties []SavingsPlanOfferingRateProperty
 
 	// The Savings Plan rate.
 	Rate *string
@@ -184,7 +184,7 @@ type SavingsPlanOfferingRateFilterElement struct {
 	Name SavingsPlanRateFilterAttribute
 
 	// The filter values.
-	Values []*string
+	Values []string
 }
 
 // Information about a property.
@@ -210,7 +210,7 @@ type SavingsPlanRate struct {
 	ProductType SavingsPlanProductType
 
 	// The properties.
-	Properties []*SavingsPlanRateProperty
+	Properties []SavingsPlanRateProperty
 
 	// The rate.
 	Rate *string
@@ -232,7 +232,7 @@ type SavingsPlanRateFilter struct {
 	Name SavingsPlanRateFilterName
 
 	// The filter values.
-	Values []*string
+	Values []string
 }
 
 // Information about a property.

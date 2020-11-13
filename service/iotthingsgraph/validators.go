@@ -718,13 +718,13 @@ func validateFlowTemplateFilter(v *types.FlowTemplateFilter) error {
 	}
 }
 
-func validateFlowTemplateFilters(v []*types.FlowTemplateFilter) error {
+func validateFlowTemplateFilters(v []types.FlowTemplateFilter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FlowTemplateFilters"}
 	for i := range v {
-		if err := validateFlowTemplateFilter(v[i]); err != nil {
+		if err := validateFlowTemplateFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -753,13 +753,13 @@ func validateSystemTemplateFilter(v *types.SystemTemplateFilter) error {
 	}
 }
 
-func validateSystemTemplateFilters(v []*types.SystemTemplateFilter) error {
+func validateSystemTemplateFilters(v []types.SystemTemplateFilter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SystemTemplateFilters"}
 	for i := range v {
-		if err := validateSystemTemplateFilter(v[i]); err != nil {
+		if err := validateSystemTemplateFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -788,13 +788,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagList(v []*types.Tag) error {
+func validateTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

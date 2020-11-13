@@ -33,7 +33,7 @@ type StartMigrationInput struct {
 	// disabled), list should have only one element.
 	//
 	// This member is required.
-	CustomerNodeEndpointList []*types.CustomerNodeEndpoint
+	CustomerNodeEndpointList []types.CustomerNodeEndpoint
 
 	// The ID of the replication group to which data should be migrated.
 	//

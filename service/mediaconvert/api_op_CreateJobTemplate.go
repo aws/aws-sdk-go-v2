@@ -57,13 +57,13 @@ type CreateJobTemplateInput struct {
 	// queue that you submit your job to. Specify an alternate queue and the maximum
 	// time that your job will wait in the initial queue before hopping. For more
 	// information about this feature, see the AWS Elemental MediaConvert User Guide.
-	HopDestinations []*types.HopDestination
+	HopDestinations []types.HopDestination
 
 	// Specify the relative priority for this job. In any given queue, the service
 	// begins processing the job with the highest value first. When more than one job
 	// has the same priority, the service begins processing the job that you submitted
 	// first. If you don't specify a priority, the service uses the default value 0.
-	Priority *int32
+	Priority int32
 
 	// Optional. The queue that jobs created from this template are assigned to. If you
 	// don't specify this, jobs will go to the default queue.
@@ -77,7 +77,7 @@ type CreateJobTemplateInput struct {
 
 	// The tags that you want to add to the resource. You can tag resources with a
 	// key-value pair or with only a key.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateJobTemplateOutput struct {

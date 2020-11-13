@@ -39,13 +39,13 @@ type BatchWriteInput struct {
 	// A list of operations that are part of the batch.
 	//
 	// This member is required.
-	Operations []*types.BatchWriteOperation
+	Operations []types.BatchWriteOperation
 }
 
 type BatchWriteOutput struct {
 
 	// A list of all the responses for each batch write.
-	Responses []*types.BatchWriteOperationResponse
+	Responses []types.BatchWriteOperationResponse
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

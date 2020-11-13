@@ -60,7 +60,7 @@ type ListThingsOutput struct {
 	NextToken *string
 
 	// The things.
-	Things []*types.ThingAttribute
+	Things []types.ThingAttribute
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

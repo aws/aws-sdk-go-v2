@@ -61,7 +61,7 @@ type ListTranscriptionJobsOutput struct {
 	Status types.TranscriptionJobStatus
 
 	// A list of objects containing summary information for a transcription job.
-	TranscriptionJobSummaries []*types.TranscriptionJobSummary
+	TranscriptionJobSummaries []types.TranscriptionJobSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

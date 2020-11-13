@@ -76,7 +76,7 @@ type DescribeUsersOutput struct {
 	TotalNumberOfUsers *int64
 
 	// The users.
-	Users []*types.User
+	Users []types.User
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

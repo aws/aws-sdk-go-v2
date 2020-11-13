@@ -52,7 +52,7 @@ type ModifyReplicationGroupInput struct {
 	// changes to the nodes in the replication group are applied on the next
 	// maintenance reboot, or the next failure reboot, whichever occurs first. Valid
 	// values: true | false Default: false
-	ApplyImmediately *bool
+	ApplyImmediately bool
 
 	// Reserved parameter. The password used to access a password protected server.
 	// This parameter must be specified with the auth-token-update-strategy  parameter.
@@ -103,7 +103,7 @@ type ModifyReplicationGroupInput struct {
 	// This parameter can be used only with replication group containing clusters
 	// running outside of an Amazon Virtual Private Cloud (Amazon VPC). Constraints:
 	// Must contain no more than 255 alphanumeric characters. Must not be Default.
-	CacheSecurityGroupNames []*string
+	CacheSecurityGroupNames []string
 
 	// The upgraded version of the cache engine to be run on the clusters in the
 	// replication group. Important: You can upgrade to a newer engine version (see
@@ -170,7 +170,7 @@ type ModifyReplicationGroupInput struct {
 	// Specifies the VPC Security Groups associated with the clusters in the
 	// replication group. This parameter can be used only with replication group
 	// containing clusters running in an Amazon Virtual Private Cloud (Amazon VPC).
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// The number of days for which ElastiCache retains automatic node group (shard)
 	// snapshots before deleting them. For example, if you set SnapshotRetentionLimit
@@ -191,11 +191,11 @@ type ModifyReplicationGroupInput struct {
 	SnapshottingClusterId *string
 
 	// A list of user group IDs.
-	UserGroupIdsToAdd []*string
+	UserGroupIdsToAdd []string
 
 	// A list of users groups to remove, meaning the users in the group no longer can
 	// access thereplication group.
-	UserGroupIdsToRemove []*string
+	UserGroupIdsToRemove []string
 }
 
 type ModifyReplicationGroupOutput struct {

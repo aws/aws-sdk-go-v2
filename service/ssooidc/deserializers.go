@@ -187,7 +187,7 @@ func awsRestjson1_deserializeOpDocumentCreateTokenOutput(v **CreateTokenOutput, 
 				if !ok {
 					return fmt.Errorf("expected AccessToken to be of type string, got %T instead", value)
 				}
-				sv.AccessToken = &jtv
+				sv.AccessToken = ptr.String(jtv)
 			}
 
 		case "expiresIn":
@@ -200,7 +200,7 @@ func awsRestjson1_deserializeOpDocumentCreateTokenOutput(v **CreateTokenOutput, 
 				if err != nil {
 					return err
 				}
-				sv.ExpiresIn = ptr.Int32(int32(i64))
+				sv.ExpiresIn = int32(i64)
 			}
 
 		case "idToken":
@@ -209,7 +209,7 @@ func awsRestjson1_deserializeOpDocumentCreateTokenOutput(v **CreateTokenOutput, 
 				if !ok {
 					return fmt.Errorf("expected IdToken to be of type string, got %T instead", value)
 				}
-				sv.IdToken = &jtv
+				sv.IdToken = ptr.String(jtv)
 			}
 
 		case "refreshToken":
@@ -218,7 +218,7 @@ func awsRestjson1_deserializeOpDocumentCreateTokenOutput(v **CreateTokenOutput, 
 				if !ok {
 					return fmt.Errorf("expected RefreshToken to be of type string, got %T instead", value)
 				}
-				sv.RefreshToken = &jtv
+				sv.RefreshToken = ptr.String(jtv)
 			}
 
 		case "tokenType":
@@ -227,7 +227,7 @@ func awsRestjson1_deserializeOpDocumentCreateTokenOutput(v **CreateTokenOutput, 
 				if !ok {
 					return fmt.Errorf("expected TokenType to be of type string, got %T instead", value)
 				}
-				sv.TokenType = &jtv
+				sv.TokenType = ptr.String(jtv)
 			}
 
 		default:
@@ -387,7 +387,7 @@ func awsRestjson1_deserializeOpDocumentRegisterClientOutput(v **RegisterClientOu
 				if !ok {
 					return fmt.Errorf("expected URI to be of type string, got %T instead", value)
 				}
-				sv.AuthorizationEndpoint = &jtv
+				sv.AuthorizationEndpoint = ptr.String(jtv)
 			}
 
 		case "clientId":
@@ -396,7 +396,7 @@ func awsRestjson1_deserializeOpDocumentRegisterClientOutput(v **RegisterClientOu
 				if !ok {
 					return fmt.Errorf("expected ClientId to be of type string, got %T instead", value)
 				}
-				sv.ClientId = &jtv
+				sv.ClientId = ptr.String(jtv)
 			}
 
 		case "clientIdIssuedAt":
@@ -409,7 +409,7 @@ func awsRestjson1_deserializeOpDocumentRegisterClientOutput(v **RegisterClientOu
 				if err != nil {
 					return err
 				}
-				sv.ClientIdIssuedAt = &i64
+				sv.ClientIdIssuedAt = i64
 			}
 
 		case "clientSecret":
@@ -418,7 +418,7 @@ func awsRestjson1_deserializeOpDocumentRegisterClientOutput(v **RegisterClientOu
 				if !ok {
 					return fmt.Errorf("expected ClientSecret to be of type string, got %T instead", value)
 				}
-				sv.ClientSecret = &jtv
+				sv.ClientSecret = ptr.String(jtv)
 			}
 
 		case "clientSecretExpiresAt":
@@ -431,7 +431,7 @@ func awsRestjson1_deserializeOpDocumentRegisterClientOutput(v **RegisterClientOu
 				if err != nil {
 					return err
 				}
-				sv.ClientSecretExpiresAt = &i64
+				sv.ClientSecretExpiresAt = i64
 			}
 
 		case "tokenEndpoint":
@@ -440,7 +440,7 @@ func awsRestjson1_deserializeOpDocumentRegisterClientOutput(v **RegisterClientOu
 				if !ok {
 					return fmt.Errorf("expected URI to be of type string, got %T instead", value)
 				}
-				sv.TokenEndpoint = &jtv
+				sv.TokenEndpoint = ptr.String(jtv)
 			}
 
 		default:
@@ -603,7 +603,7 @@ func awsRestjson1_deserializeOpDocumentStartDeviceAuthorizationOutput(v **StartD
 				if !ok {
 					return fmt.Errorf("expected DeviceCode to be of type string, got %T instead", value)
 				}
-				sv.DeviceCode = &jtv
+				sv.DeviceCode = ptr.String(jtv)
 			}
 
 		case "expiresIn":
@@ -616,7 +616,7 @@ func awsRestjson1_deserializeOpDocumentStartDeviceAuthorizationOutput(v **StartD
 				if err != nil {
 					return err
 				}
-				sv.ExpiresIn = ptr.Int32(int32(i64))
+				sv.ExpiresIn = int32(i64)
 			}
 
 		case "interval":
@@ -629,7 +629,7 @@ func awsRestjson1_deserializeOpDocumentStartDeviceAuthorizationOutput(v **StartD
 				if err != nil {
 					return err
 				}
-				sv.Interval = ptr.Int32(int32(i64))
+				sv.Interval = int32(i64)
 			}
 
 		case "userCode":
@@ -638,7 +638,7 @@ func awsRestjson1_deserializeOpDocumentStartDeviceAuthorizationOutput(v **StartD
 				if !ok {
 					return fmt.Errorf("expected UserCode to be of type string, got %T instead", value)
 				}
-				sv.UserCode = &jtv
+				sv.UserCode = ptr.String(jtv)
 			}
 
 		case "verificationUri":
@@ -647,7 +647,7 @@ func awsRestjson1_deserializeOpDocumentStartDeviceAuthorizationOutput(v **StartD
 				if !ok {
 					return fmt.Errorf("expected URI to be of type string, got %T instead", value)
 				}
-				sv.VerificationUri = &jtv
+				sv.VerificationUri = ptr.String(jtv)
 			}
 
 		case "verificationUriComplete":
@@ -656,7 +656,7 @@ func awsRestjson1_deserializeOpDocumentStartDeviceAuthorizationOutput(v **StartD
 				if !ok {
 					return fmt.Errorf("expected URI to be of type string, got %T instead", value)
 				}
-				sv.VerificationUriComplete = &jtv
+				sv.VerificationUriComplete = ptr.String(jtv)
 			}
 
 		default:
@@ -1128,7 +1128,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				if !ok {
 					return fmt.Errorf("expected Error to be of type string, got %T instead", value)
 				}
-				sv.Error_ = &jtv
+				sv.Error_ = ptr.String(jtv)
 			}
 
 		case "error_description":
@@ -1137,7 +1137,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				if !ok {
 					return fmt.Errorf("expected ErrorDescription to be of type string, got %T instead", value)
 				}
-				sv.Error_description = &jtv
+				sv.Error_description = ptr.String(jtv)
 			}
 
 		default:
@@ -1177,7 +1177,7 @@ func awsRestjson1_deserializeDocumentAuthorizationPendingException(v **types.Aut
 				if !ok {
 					return fmt.Errorf("expected Error to be of type string, got %T instead", value)
 				}
-				sv.Error_ = &jtv
+				sv.Error_ = ptr.String(jtv)
 			}
 
 		case "error_description":
@@ -1186,7 +1186,7 @@ func awsRestjson1_deserializeDocumentAuthorizationPendingException(v **types.Aut
 				if !ok {
 					return fmt.Errorf("expected ErrorDescription to be of type string, got %T instead", value)
 				}
-				sv.Error_description = &jtv
+				sv.Error_description = ptr.String(jtv)
 			}
 
 		default:
@@ -1226,7 +1226,7 @@ func awsRestjson1_deserializeDocumentExpiredTokenException(v **types.ExpiredToke
 				if !ok {
 					return fmt.Errorf("expected Error to be of type string, got %T instead", value)
 				}
-				sv.Error_ = &jtv
+				sv.Error_ = ptr.String(jtv)
 			}
 
 		case "error_description":
@@ -1235,7 +1235,7 @@ func awsRestjson1_deserializeDocumentExpiredTokenException(v **types.ExpiredToke
 				if !ok {
 					return fmt.Errorf("expected ErrorDescription to be of type string, got %T instead", value)
 				}
-				sv.Error_description = &jtv
+				sv.Error_description = ptr.String(jtv)
 			}
 
 		default:
@@ -1275,7 +1275,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				if !ok {
 					return fmt.Errorf("expected Error to be of type string, got %T instead", value)
 				}
-				sv.Error_ = &jtv
+				sv.Error_ = ptr.String(jtv)
 			}
 
 		case "error_description":
@@ -1284,7 +1284,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				if !ok {
 					return fmt.Errorf("expected ErrorDescription to be of type string, got %T instead", value)
 				}
-				sv.Error_description = &jtv
+				sv.Error_description = ptr.String(jtv)
 			}
 
 		default:
@@ -1324,7 +1324,7 @@ func awsRestjson1_deserializeDocumentInvalidClientException(v **types.InvalidCli
 				if !ok {
 					return fmt.Errorf("expected Error to be of type string, got %T instead", value)
 				}
-				sv.Error_ = &jtv
+				sv.Error_ = ptr.String(jtv)
 			}
 
 		case "error_description":
@@ -1333,7 +1333,7 @@ func awsRestjson1_deserializeDocumentInvalidClientException(v **types.InvalidCli
 				if !ok {
 					return fmt.Errorf("expected ErrorDescription to be of type string, got %T instead", value)
 				}
-				sv.Error_description = &jtv
+				sv.Error_description = ptr.String(jtv)
 			}
 
 		default:
@@ -1373,7 +1373,7 @@ func awsRestjson1_deserializeDocumentInvalidClientMetadataException(v **types.In
 				if !ok {
 					return fmt.Errorf("expected Error to be of type string, got %T instead", value)
 				}
-				sv.Error_ = &jtv
+				sv.Error_ = ptr.String(jtv)
 			}
 
 		case "error_description":
@@ -1382,7 +1382,7 @@ func awsRestjson1_deserializeDocumentInvalidClientMetadataException(v **types.In
 				if !ok {
 					return fmt.Errorf("expected ErrorDescription to be of type string, got %T instead", value)
 				}
-				sv.Error_description = &jtv
+				sv.Error_description = ptr.String(jtv)
 			}
 
 		default:
@@ -1422,7 +1422,7 @@ func awsRestjson1_deserializeDocumentInvalidGrantException(v **types.InvalidGran
 				if !ok {
 					return fmt.Errorf("expected Error to be of type string, got %T instead", value)
 				}
-				sv.Error_ = &jtv
+				sv.Error_ = ptr.String(jtv)
 			}
 
 		case "error_description":
@@ -1431,7 +1431,7 @@ func awsRestjson1_deserializeDocumentInvalidGrantException(v **types.InvalidGran
 				if !ok {
 					return fmt.Errorf("expected ErrorDescription to be of type string, got %T instead", value)
 				}
-				sv.Error_description = &jtv
+				sv.Error_description = ptr.String(jtv)
 			}
 
 		default:
@@ -1471,7 +1471,7 @@ func awsRestjson1_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 				if !ok {
 					return fmt.Errorf("expected Error to be of type string, got %T instead", value)
 				}
-				sv.Error_ = &jtv
+				sv.Error_ = ptr.String(jtv)
 			}
 
 		case "error_description":
@@ -1480,7 +1480,7 @@ func awsRestjson1_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 				if !ok {
 					return fmt.Errorf("expected ErrorDescription to be of type string, got %T instead", value)
 				}
-				sv.Error_description = &jtv
+				sv.Error_description = ptr.String(jtv)
 			}
 
 		default:
@@ -1520,7 +1520,7 @@ func awsRestjson1_deserializeDocumentInvalidScopeException(v **types.InvalidScop
 				if !ok {
 					return fmt.Errorf("expected Error to be of type string, got %T instead", value)
 				}
-				sv.Error_ = &jtv
+				sv.Error_ = ptr.String(jtv)
 			}
 
 		case "error_description":
@@ -1529,7 +1529,7 @@ func awsRestjson1_deserializeDocumentInvalidScopeException(v **types.InvalidScop
 				if !ok {
 					return fmt.Errorf("expected ErrorDescription to be of type string, got %T instead", value)
 				}
-				sv.Error_description = &jtv
+				sv.Error_description = ptr.String(jtv)
 			}
 
 		default:
@@ -1569,7 +1569,7 @@ func awsRestjson1_deserializeDocumentSlowDownException(v **types.SlowDownExcepti
 				if !ok {
 					return fmt.Errorf("expected Error to be of type string, got %T instead", value)
 				}
-				sv.Error_ = &jtv
+				sv.Error_ = ptr.String(jtv)
 			}
 
 		case "error_description":
@@ -1578,7 +1578,7 @@ func awsRestjson1_deserializeDocumentSlowDownException(v **types.SlowDownExcepti
 				if !ok {
 					return fmt.Errorf("expected ErrorDescription to be of type string, got %T instead", value)
 				}
-				sv.Error_description = &jtv
+				sv.Error_description = ptr.String(jtv)
 			}
 
 		default:
@@ -1618,7 +1618,7 @@ func awsRestjson1_deserializeDocumentUnauthorizedClientException(v **types.Unaut
 				if !ok {
 					return fmt.Errorf("expected Error to be of type string, got %T instead", value)
 				}
-				sv.Error_ = &jtv
+				sv.Error_ = ptr.String(jtv)
 			}
 
 		case "error_description":
@@ -1627,7 +1627,7 @@ func awsRestjson1_deserializeDocumentUnauthorizedClientException(v **types.Unaut
 				if !ok {
 					return fmt.Errorf("expected ErrorDescription to be of type string, got %T instead", value)
 				}
-				sv.Error_description = &jtv
+				sv.Error_description = ptr.String(jtv)
 			}
 
 		default:
@@ -1667,7 +1667,7 @@ func awsRestjson1_deserializeDocumentUnsupportedGrantTypeException(v **types.Uns
 				if !ok {
 					return fmt.Errorf("expected Error to be of type string, got %T instead", value)
 				}
-				sv.Error_ = &jtv
+				sv.Error_ = ptr.String(jtv)
 			}
 
 		case "error_description":
@@ -1676,7 +1676,7 @@ func awsRestjson1_deserializeDocumentUnsupportedGrantTypeException(v **types.Uns
 				if !ok {
 					return fmt.Errorf("expected ErrorDescription to be of type string, got %T instead", value)
 				}
-				sv.Error_description = &jtv
+				sv.Error_description = ptr.String(jtv)
 			}
 
 		default:

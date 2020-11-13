@@ -43,7 +43,7 @@ type DescribeNodeConfigurationOptionsInput struct {
 	ClusterIdentifier *string
 
 	// A set of name, operator, and value items to filter the results.
-	Filters []*types.NodeConfigurationOptionsFilter
+	Filters []types.NodeConfigurationOptionsFilter
 
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeNodeConfigurationOptions request
@@ -78,7 +78,7 @@ type DescribeNodeConfigurationOptionsOutput struct {
 	Marker *string
 
 	// A list of valid node configurations.
-	NodeConfigurationOptionList []*types.NodeConfigurationOption
+	NodeConfigurationOptionList []types.NodeConfigurationOption
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

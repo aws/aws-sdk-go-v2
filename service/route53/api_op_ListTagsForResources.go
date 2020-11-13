@@ -38,7 +38,7 @@ type ListTagsForResourcesInput struct {
 	// you want to get a list of tags.
 	//
 	// This member is required.
-	ResourceIds []*string
+	ResourceIds []string
 
 	// The type of the resources.
 	//
@@ -58,7 +58,7 @@ type ListTagsForResourcesOutput struct {
 	// resources.
 	//
 	// This member is required.
-	ResourceTagSets []*types.ResourceTagSet
+	ResourceTagSets []types.ResourceTagSet
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

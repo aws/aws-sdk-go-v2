@@ -37,17 +37,17 @@ type BatchStopJobRunInput struct {
 	// A list of the JobRunIds that should be stopped for that job definition.
 	//
 	// This member is required.
-	JobRunIds []*string
+	JobRunIds []string
 }
 
 type BatchStopJobRunOutput struct {
 
 	// A list of the errors that were encountered in trying to stop JobRuns, including
 	// the JobRunId for which each error was encountered and details about the error.
-	Errors []*types.BatchStopJobRunError
+	Errors []types.BatchStopJobRunError
 
 	// A list of the JobRuns that were successfully submitted for stopping.
-	SuccessfulSubmissions []*types.BatchStopJobRunSuccessfulSubmission
+	SuccessfulSubmissions []types.BatchStopJobRunSuccessfulSubmission
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

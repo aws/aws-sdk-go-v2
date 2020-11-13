@@ -32,7 +32,7 @@ type SearchNetworkProfilesInput struct {
 
 	// The filters to use to list a specified set of network profiles. Valid filters
 	// are NetworkProfileName, Ssid, and SecurityType.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of results to include in the response. If more results exist
 	// than the specified MaxResults value, a token is included in the response so that
@@ -46,14 +46,14 @@ type SearchNetworkProfilesInput struct {
 
 	// The sort order to use to list the specified set of network profiles. Valid sort
 	// criteria includes NetworkProfileName, Ssid, and SecurityType.
-	SortCriteria []*types.Sort
+	SortCriteria []types.Sort
 }
 
 type SearchNetworkProfilesOutput struct {
 
 	// The network profiles that meet the specified set of filter criteria, in sort
 	// order. It is a list of NetworkProfileData objects.
-	NetworkProfiles []*types.NetworkProfileData
+	NetworkProfiles []types.NetworkProfileData
 
 	// An optional token returned from a prior request. Use this token for pagination
 	// of results from this action. If this parameter is specified, the response

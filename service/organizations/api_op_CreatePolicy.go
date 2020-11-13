@@ -82,7 +82,7 @@ type CreatePolicyInput struct {
 	// in the AWS Organizations User Guide. If any one of the tags is invalid or if you
 	// exceed the allowed number of tags for a policy, then the entire request fails
 	// and the policy is not created.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreatePolicyOutput struct {

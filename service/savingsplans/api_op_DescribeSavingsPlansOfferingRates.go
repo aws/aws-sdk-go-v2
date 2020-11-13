@@ -30,23 +30,23 @@ func (c *Client) DescribeSavingsPlansOfferingRates(ctx context.Context, params *
 type DescribeSavingsPlansOfferingRatesInput struct {
 
 	// The filters.
-	Filters []*types.SavingsPlanOfferingRateFilterElement
+	Filters []types.SavingsPlanOfferingRateFilterElement
 
 	// The maximum number of results to return with a single call. To retrieve
 	// additional results, make another call with the returned token value.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next page of results.
 	NextToken *string
 
 	// The specific AWS operation for the line item in the billing report.
-	Operations []*string
+	Operations []string
 
 	// The AWS products.
 	Products []types.SavingsPlanProductType
 
 	// The IDs of the offerings.
-	SavingsPlanOfferingIds []*string
+	SavingsPlanOfferingIds []string
 
 	// The payment options.
 	SavingsPlanPaymentOptions []types.SavingsPlanPaymentOption
@@ -58,7 +58,7 @@ type DescribeSavingsPlansOfferingRatesInput struct {
 	ServiceCodes []types.SavingsPlanRateServiceCode
 
 	// The usage details of the line item in the billing report.
-	UsageTypes []*string
+	UsageTypes []string
 }
 
 type DescribeSavingsPlansOfferingRatesOutput struct {
@@ -68,7 +68,7 @@ type DescribeSavingsPlansOfferingRatesOutput struct {
 	NextToken *string
 
 	// Information about the Savings Plans offering rates.
-	SearchResults []*types.SavingsPlanOfferingRate
+	SearchResults []types.SavingsPlanOfferingRate
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

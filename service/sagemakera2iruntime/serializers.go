@@ -66,13 +66,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteHumanLoopInput(v *DeleteHumanLoop
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.HumanLoopName == nil {
+	if v.HumanLoopName == nil || len(*v.HumanLoopName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member HumanLoopName must not be empty")}
 	}
 	if v.HumanLoopName != nil {
-		if len(*v.HumanLoopName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member HumanLoopName must not be empty")}
-		}
 		if err := encoder.SetURI("HumanLoopName").String(*v.HumanLoopName); err != nil {
 			return err
 		}
@@ -132,13 +129,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeHumanLoopInput(v *DescribeHuman
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.HumanLoopName == nil {
+	if v.HumanLoopName == nil || len(*v.HumanLoopName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member HumanLoopName must not be empty")}
 	}
 	if v.HumanLoopName != nil {
-		if len(*v.HumanLoopName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member HumanLoopName must not be empty")}
-		}
 		if err := encoder.SetURI("HumanLoopName").String(*v.HumanLoopName); err != nil {
 			return err
 		}
@@ -210,8 +204,8 @@ func awsRestjson1_serializeOpHttpBindingsListHumanLoopsInput(v *ListHumanLoopsIn
 		encoder.SetQuery("FlowDefinitionArn").String(*v.FlowDefinitionArn)
 	}
 
-	if v.MaxResults != nil {
-		encoder.SetQuery("MaxResults").Integer(*v.MaxResults)
+	if v.MaxResults != 0 {
+		encoder.SetQuery("MaxResults").Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {

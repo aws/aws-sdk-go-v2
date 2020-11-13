@@ -106,7 +106,7 @@ type AdminInitiateAuthInput struct {
 	// CUSTOM_AUTH: USERNAME (required), SECRET_HASH (if app client is configured with
 	// client secret), DEVICE_KEY. To start the authentication flow with password
 	// verification, include ChallengeName: SRP_A and SRP_A: (The SRP_A Value).
-	AuthParameters map[string]*string
+	AuthParameters map[string]string
 
 	// A map of custom key-value pairs that you can provide as input for certain custom
 	// workflows that this action triggers. You create custom workflows by assigning
@@ -162,7 +162,7 @@ type AdminInitiateAuthInput struct {
 	//
 	// * Amazon Cognito does not encrypt the the ClientMetadata value, so don't
 	// use it to provide sensitive information.
-	ClientMetadata map[string]*string
+	ClientMetadata map[string]string
 
 	// Contextual data such as the user's device fingerprint, IP address, or location
 	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
@@ -228,7 +228,7 @@ type AdminInitiateAuthOutput struct {
 	// (such as email address or phone number), even if you specified an alias in your
 	// call to AdminInitiateAuth. This is because, in the AdminRespondToAuthChallenge
 	// API ChallengeResponses, the USERNAME attribute cannot be an alias.
-	ChallengeParameters map[string]*string
+	ChallengeParameters map[string]string
 
 	// The session which should be passed both ways in challenge-response calls to the
 	// service. If AdminInitiateAuth or AdminRespondToAuthChallenge API call determines

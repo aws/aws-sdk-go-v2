@@ -72,7 +72,7 @@ type CreateFileSystemFromBackupInput struct {
 	// ID. The file server is launched in that subnet's Availability Zone.
 	//
 	// This member is required.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent
 	// creation. This string is automatically filled on your behalf when you use the
@@ -86,7 +86,7 @@ type CreateFileSystemFromBackupInput struct {
 	// interfaces created for file system access. These security groups apply to all
 	// network interfaces. This value isn't returned in later DescribeFileSystem
 	// requests.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// Sets the storage type for the Windows file system you're creating from a backup.
 	// Valid values are SSD and HDD.
@@ -107,7 +107,7 @@ type CreateFileSystemFromBackupInput struct {
 
 	// The tags to be applied to the file system at file system creation. The key value
 	// of the Name tag appears in the console as the file system name.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The configuration for this Microsoft Windows file system.
 	WindowsConfiguration *types.CreateFileSystemWindowsConfiguration

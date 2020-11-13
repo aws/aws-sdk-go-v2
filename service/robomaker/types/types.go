@@ -54,7 +54,7 @@ type DataSource struct {
 	S3Bucket *string
 
 	// The list of S3 keys identifying the data source files.
-	S3Keys []*S3KeyOutput
+	S3Keys []S3KeyOutput
 }
 
 // Information about a data source.
@@ -73,7 +73,7 @@ type DataSourceConfig struct {
 	// The list of S3 keys identifying the data source files.
 	//
 	// This member is required.
-	S3Keys []*string
+	S3Keys []string
 }
 
 // Information about a deployment application configuration.
@@ -122,7 +122,7 @@ type DeploymentJob struct {
 	CreatedAt *time.Time
 
 	// The deployment application configuration.
-	DeploymentApplicationConfigs []*DeploymentApplicationConfig
+	DeploymentApplicationConfigs []DeploymentApplicationConfig
 
 	// The deployment configuration.
 	DeploymentConfig *DeploymentConfig
@@ -155,7 +155,7 @@ type DeploymentLaunchConfig struct {
 
 	// An array of key/value pairs specifying environment variables for the robot
 	// application
-	EnvironmentVariables map[string]*string
+	EnvironmentVariables map[string]string
 
 	// The deployment post-launch file. This file will be executed after the launch
 	// file.
@@ -186,10 +186,10 @@ type FailedCreateSimulationJobRequest struct {
 type FailureSummary struct {
 
 	// The worlds that failed.
-	Failures []*WorldFailure
+	Failures []WorldFailure
 
 	// The total number of failures.
-	TotalFailureCount *int32
+	TotalFailureCount int32
 }
 
 // Information about a filter.
@@ -199,7 +199,7 @@ type Filter struct {
 	Name *string
 
 	// A list of values.
-	Values []*string
+	Values []string
 }
 
 // Information about worlds that finished.
@@ -209,10 +209,10 @@ type FinishedWorldsSummary struct {
 	FailureSummary *FailureSummary
 
 	// The total number of finished worlds.
-	FinishedCount *int32
+	FinishedCount int32
 
 	// A list of worlds that succeeded.
-	SucceededWorlds []*string
+	SucceededWorlds []string
 }
 
 // Information about a fleet.
@@ -251,7 +251,7 @@ type LaunchConfig struct {
 	PackageName *string
 
 	// The environment variables for the application launch.
-	EnvironmentVariables map[string]*string
+	EnvironmentVariables map[string]string
 
 	// The port forwarding configuration.
 	PortForwardingConfig *PortForwardingConfig
@@ -260,7 +260,7 @@ type LaunchConfig struct {
 	// application. If True, AWS RoboMaker will configure a connection so you can
 	// interact with your application as it is running in the simulation. You must
 	// configure and luanch the component. It must have a graphical user interface.
-	StreamUI *bool
+	StreamUI bool
 }
 
 // The logging configuration.
@@ -299,7 +299,7 @@ type OutputLocation struct {
 type PortForwardingConfig struct {
 
 	// The port mappings for the configuration.
-	PortMappings []*PortMapping
+	PortMappings []PortMapping
 }
 
 // An object representing a port mapping.
@@ -308,16 +308,16 @@ type PortMapping struct {
 	// The port number on the application.
 	//
 	// This member is required.
-	ApplicationPort *int32
+	ApplicationPort int32
 
 	// The port number on the simulation job instance to use as a remote connection
 	// point.
 	//
 	// This member is required.
-	JobPort *int32
+	JobPort int32
 
 	// A Boolean indicating whether to enable this port mapping on public IP.
-	EnableOnPublicIp *bool
+	EnableOnPublicIp bool
 }
 
 // Information about the progress of a deployment job.
@@ -500,7 +500,7 @@ type SimulationApplicationConfig struct {
 	ApplicationVersion *string
 
 	// A list of world configurations.
-	WorldConfigs []*WorldConfig
+	WorldConfigs []WorldConfig
 }
 
 // Summary information for a simulation application.
@@ -539,7 +539,7 @@ type SimulationJob struct {
 	Compute *ComputeResponse
 
 	// The data sources for the simulation job.
-	DataSources []*DataSource
+	DataSources []DataSource
 
 	// The failure behavior the simulation job. Continue Restart the simulation job in
 	// the same host instance. Fail Stop the simulation job and terminate the instance.
@@ -569,7 +569,7 @@ type SimulationJob struct {
 
 	// The maximum simulation job duration in seconds. The value must be 8 days
 	// (691,200 seconds) or less.
-	MaxJobDurationInSeconds *int64
+	MaxJobDurationInSeconds int64
 
 	// The name of the simulation job.
 	Name *string
@@ -581,20 +581,20 @@ type SimulationJob struct {
 	OutputLocation *OutputLocation
 
 	// A list of robot applications.
-	RobotApplications []*RobotApplicationConfig
+	RobotApplications []RobotApplicationConfig
 
 	// A list of simulation applications.
-	SimulationApplications []*SimulationApplicationConfig
+	SimulationApplications []SimulationApplicationConfig
 
 	// The simulation job execution duration in milliseconds.
-	SimulationTimeMillis *int64
+	SimulationTimeMillis int64
 
 	// Status of the simulation job.
 	Status SimulationJobStatus
 
 	// A map that contains tag keys and tag values that are attached to the simulation
 	// job.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// VPC configuration information.
 	VpcConfig *VPCConfigResponse
@@ -611,17 +611,17 @@ type SimulationJobBatchSummary struct {
 	CreatedAt *time.Time
 
 	// The number of created simulation job requests.
-	CreatedRequestCount *int32
+	CreatedRequestCount int32
 
 	// The number of failed simulation job requests.
-	FailedRequestCount *int32
+	FailedRequestCount int32
 
 	// The time, in milliseconds since the epoch, when the simulation job batch was
 	// last updated.
 	LastUpdatedAt *time.Time
 
 	// The number of pending simulation job requests.
-	PendingRequestCount *int32
+	PendingRequestCount int32
 
 	// The status of the simulation job batch. Pending The simulation job batch request
 	// is pending. InProgress The simulation job batch is in progress. Failed The
@@ -649,7 +649,7 @@ type SimulationJobRequest struct {
 	// (691,200 seconds) or less.
 	//
 	// This member is required.
-	MaxJobDurationInSeconds *int64
+	MaxJobDurationInSeconds int64
 
 	// Compute information for the simulation job
 	Compute *Compute
@@ -658,7 +658,7 @@ type SimulationJobRequest struct {
 	// These files are available under /opt/robomaker/datasources/data_source_name.
 	// There is a limit of 100 files and a combined size of 25GB for all
 	// DataSourceConfig objects.
-	DataSources []*DataSourceConfig
+	DataSources []DataSourceConfig
 
 	// The failure behavior the simulation job. Continue Restart the simulation job in
 	// the same host instance. Fail Stop the simulation job and terminate the instance.
@@ -676,14 +676,14 @@ type SimulationJobRequest struct {
 	OutputLocation *OutputLocation
 
 	// The robot applications to use in the simulation job.
-	RobotApplications []*RobotApplicationConfig
+	RobotApplications []RobotApplicationConfig
 
 	// The simulation applications to use in the simulation job.
-	SimulationApplications []*SimulationApplicationConfig
+	SimulationApplications []SimulationApplicationConfig
 
 	// A map that contains tag keys and tag values that are attached to the simulation
 	// job request.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Boolean indicating whether to use default simulation tool applications.
 	UseDefaultApplications *bool
@@ -701,7 +701,7 @@ type SimulationJobSummary struct {
 	Arn *string
 
 	// The names of the data sources.
-	DataSourceNames []*string
+	DataSourceNames []string
 
 	// The time, in milliseconds since the epoch, when the simulation job was last
 	// updated.
@@ -711,10 +711,10 @@ type SimulationJobSummary struct {
 	Name *string
 
 	// A list of simulation job robot application names.
-	RobotApplicationNames []*string
+	RobotApplicationNames []string
 
 	// A list of simulation job simulation application names.
-	SimulationApplicationNames []*string
+	SimulationApplicationNames []string
 
 	// The status of the simulation job.
 	Status SimulationJobStatus
@@ -797,26 +797,26 @@ type VPCConfig struct {
 	// A list of one or more subnet IDs in your VPC.
 	//
 	// This member is required.
-	Subnets []*string
+	Subnets []string
 
 	// A boolean indicating whether to assign a public IP address.
-	AssignPublicIp *bool
+	AssignPublicIp bool
 
 	// A list of one or more security groups IDs in your VPC.
-	SecurityGroups []*string
+	SecurityGroups []string
 }
 
 // VPC configuration associated with your simulation job.
 type VPCConfigResponse struct {
 
 	// A boolean indicating if a public IP was assigned.
-	AssignPublicIp *bool
+	AssignPublicIp bool
 
 	// A list of security group IDs associated with the simulation job.
-	SecurityGroups []*string
+	SecurityGroups []string
 
 	// A list of subnet IDs associated with the simulation job.
-	Subnets []*string
+	Subnets []string
 
 	// The VPC ID associated with your simulation job.
 	VpcId *string
@@ -863,7 +863,7 @@ type WorldExportJobSummary struct {
 	Status WorldExportJobStatus
 
 	// A list of worlds.
-	Worlds []*string
+	Worlds []string
 }
 
 // Information about a failed world.
@@ -878,7 +878,7 @@ type WorldFailure struct {
 	FailureCode WorldGenerationJobErrorCode
 
 	// The number of failed worlds.
-	FailureCount *int32
+	FailureCount int32
 
 	// The sample reason why the world failed. World errors are aggregated. A sample is
 	// used as the sampleFailureReason.
@@ -896,7 +896,7 @@ type WorldGenerationJobSummary struct {
 	CreatedAt *time.Time
 
 	// The number of worlds that failed.
-	FailedWorldCount *int32
+	FailedWorldCount int32
 
 	// The status of the world generator job: Pending The world generator job request
 	// is pending. Running The world generator job is running. Completed The world
@@ -907,7 +907,7 @@ type WorldGenerationJobSummary struct {
 	Status WorldGenerationJobStatus
 
 	// The number of worlds that were generated.
-	SucceededWorldCount *int32
+	SucceededWorldCount int32
 
 	// The Amazon Resource Name (arn) of the world template.
 	Template *string

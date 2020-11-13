@@ -49,7 +49,7 @@ type SearchTablesInput struct {
 	// into tokens. Then each token is exact-match compared with the Value member of
 	// PropertyPredicate. For example, if Key=Name and Value=link, tables named
 	// customer-link and xx-link-yy are returned, but xxlinkyy is not returned.
-	Filters []*types.PropertyPredicate
+	Filters []types.PropertyPredicate
 
 	// The maximum number of tables to return in a single response.
 	MaxResults *int32
@@ -73,7 +73,7 @@ type SearchTablesInput struct {
 
 	// A list of criteria for sorting the results by a field name, in an ascending or
 	// descending order.
-	SortCriteria []*types.SortCriterion
+	SortCriteria []types.SortCriterion
 }
 
 type SearchTablesOutput struct {
@@ -83,7 +83,7 @@ type SearchTablesOutput struct {
 
 	// A list of the requested Table objects. The SearchTables response returns only
 	// the tables that you have access to.
-	TableList []*types.Table
+	TableList []types.Table
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

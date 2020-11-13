@@ -53,7 +53,7 @@ type ListMedicalTranscriptionJobsInput struct {
 type ListMedicalTranscriptionJobsOutput struct {
 
 	// A list of objects containing summary information for a transcription job.
-	MedicalTranscriptionJobSummaries []*types.MedicalTranscriptionJobSummary
+	MedicalTranscriptionJobSummaries []types.MedicalTranscriptionJobSummary
 
 	// The ListMedicalTranscriptionJobs operation returns a page of jobs at a time. The
 	// maximum size of the page is set by the MaxResults parameter. If the number of

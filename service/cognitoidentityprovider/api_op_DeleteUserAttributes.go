@@ -38,7 +38,7 @@ type DeleteUserAttributesInput struct {
 	// name.
 	//
 	// This member is required.
-	UserAttributeNames []*string
+	UserAttributeNames []string
 }
 
 // Represents the response from the server to delete user attributes.

@@ -39,7 +39,7 @@ type CreateCoreDefinitionVersionInput struct {
 	AmznClientToken *string
 
 	// A list of cores in the core definition version.
-	Cores []*types.Core
+	Cores []types.Core
 }
 
 type CreateCoreDefinitionVersionOutput struct {

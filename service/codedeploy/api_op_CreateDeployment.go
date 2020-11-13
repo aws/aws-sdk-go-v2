@@ -87,7 +87,7 @@ type CreateDeploymentInput struct {
 	// new deployment and use ignoreApplicationStopFailures to specify that the
 	// ApplicationStop, BeforeBlockTraffic, and AfterBlockTraffic failures should be
 	// ignored.
-	IgnoreApplicationStopFailures *bool
+	IgnoreApplicationStopFailures bool
 
 	// The type and location of the revision to deploy.
 	Revision *types.RevisionLocation
@@ -98,7 +98,7 @@ type CreateDeploymentInput struct {
 
 	// Indicates whether to deploy to all instances or only to instances that are not
 	// running the latest application revision.
-	UpdateOutdatedInstancesOnly *bool
+	UpdateOutdatedInstancesOnly bool
 }
 
 // Represents the output of a CreateDeployment operation.

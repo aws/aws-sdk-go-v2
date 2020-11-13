@@ -40,14 +40,14 @@ type UpdateIdentityProviderInput struct {
 	UserPoolId *string
 
 	// The identity provider attribute mapping to be changed.
-	AttributeMapping map[string]*string
+	AttributeMapping map[string]string
 
 	// A list of identity provider identifiers.
-	IdpIdentifiers []*string
+	IdpIdentifiers []string
 
 	// The identity provider details to be updated, such as MetadataURL and
 	// MetadataFile.
-	ProviderDetails map[string]*string
+	ProviderDetails map[string]string
 }
 
 type UpdateIdentityProviderOutput struct {

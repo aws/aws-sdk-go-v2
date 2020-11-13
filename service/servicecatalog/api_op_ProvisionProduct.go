@@ -58,7 +58,7 @@ type ProvisionProductInput struct {
 
 	// Passed to CloudFormation. The SNS topic ARNs to which to publish stack-related
 	// events.
-	NotificationArns []*string
+	NotificationArns []string
 
 	// The path identifier of the product. This value is optional if the product has a
 	// default path, and required if the product has more than one path. To list the
@@ -85,14 +85,14 @@ type ProvisionProductInput struct {
 
 	// Parameters specified by the administrator that are required for provisioning the
 	// product.
-	ProvisioningParameters []*types.ProvisioningParameter
+	ProvisioningParameters []types.ProvisioningParameter
 
 	// An object that contains information about the provisioning preferences for a
 	// stack set.
 	ProvisioningPreferences *types.ProvisioningPreferences
 
 	// One or more tags.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type ProvisionProductOutput struct {

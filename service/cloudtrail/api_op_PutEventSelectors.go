@@ -65,7 +65,7 @@ type PutEventSelectorsInput struct {
 	// event selectors for a trail.
 	//
 	// This member is required.
-	EventSelectors []*types.EventSelector
+	EventSelectors []types.EventSelector
 
 	// Specifies the name of the trail or trail ARN. If you specify a trail name, the
 	// string must meet the following requirements:
@@ -95,7 +95,7 @@ type PutEventSelectorsInput struct {
 type PutEventSelectorsOutput struct {
 
 	// Specifies the event selectors configured for your trail.
-	EventSelectors []*types.EventSelector
+	EventSelectors []types.EventSelector
 
 	// Specifies the ARN of the trail that was updated with event selectors. The format
 	// of a trail ARN is: arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail

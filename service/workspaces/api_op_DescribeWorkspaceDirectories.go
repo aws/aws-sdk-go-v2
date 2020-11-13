@@ -31,7 +31,7 @@ type DescribeWorkspaceDirectoriesInput struct {
 
 	// The identifiers of the directories. If the value is null, all directories are
 	// retrieved.
-	DirectoryIds []*string
+	DirectoryIds []string
 
 	// The maximum number of directories to return.
 	Limit *int32
@@ -44,7 +44,7 @@ type DescribeWorkspaceDirectoriesInput struct {
 type DescribeWorkspaceDirectoriesOutput struct {
 
 	// Information about the directories.
-	Directories []*types.WorkspaceDirectory
+	Directories []types.WorkspaceDirectory
 
 	// The token to use to retrieve the next set of results, or null if no more results
 	// are available.

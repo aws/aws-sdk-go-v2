@@ -117,7 +117,7 @@ type CreateReplicationTaskInput struct {
 	ResourceIdentifier *string
 
 	// One or more tags to be assigned to the replication task.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Supplemental information that the task requires to migrate the data for certain
 	// source and target endpoints. For more information, see Specifying Supplemental

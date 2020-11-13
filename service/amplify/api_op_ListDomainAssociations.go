@@ -36,7 +36,7 @@ type ListDomainAssociationsInput struct {
 	AppId *string
 
 	// The maximum number of records to list in a single response.
-	MaxResults *int32
+	MaxResults int32
 
 	// A pagination token. Set to null to start listing apps from the start. If
 	// non-null, a pagination token is returned in a result. Pass its value in here to
@@ -50,7 +50,7 @@ type ListDomainAssociationsOutput struct {
 	// A list of domain associations.
 	//
 	// This member is required.
-	DomainAssociations []*types.DomainAssociation
+	DomainAssociations []types.DomainAssociation
 
 	// A pagination token. If non-null, a pagination token is returned in a result.
 	// Pass its value in another request to retrieve more entries.

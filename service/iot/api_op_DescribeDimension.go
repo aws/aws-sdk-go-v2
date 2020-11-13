@@ -52,7 +52,7 @@ type DescribeDimensionOutput struct {
 
 	// The value or list of values used to scope the dimension. For example, for topic
 	// filters, this is the pattern used to match the MQTT topic name.
-	StringValues []*string
+	StringValues []string
 
 	// The type of the dimension.
 	Type types.DimensionType

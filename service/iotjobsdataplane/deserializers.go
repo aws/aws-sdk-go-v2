@@ -13,6 +13,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	"github.com/awslabs/smithy-go/ptr"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
 	"strings"
@@ -662,7 +663,7 @@ func awsRestjson1_deserializeOpDocumentUpdateJobExecutionOutput(v **UpdateJobExe
 				if !ok {
 					return fmt.Errorf("expected JobDocument to be of type string, got %T instead", value)
 				}
-				sv.JobDocument = &jtv
+				sv.JobDocument = ptr.String(jtv)
 			}
 
 		default:
@@ -954,7 +955,7 @@ func awsRestjson1_deserializeDocumentCertificateValidationException(v **types.Ce
 				if !ok {
 					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -966,7 +967,7 @@ func awsRestjson1_deserializeDocumentCertificateValidationException(v **types.Ce
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentDetailsMap(v *map[string]*string, value interface{}) error {
+func awsRestjson1_deserializeDocumentDetailsMap(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -979,21 +980,21 @@ func awsRestjson1_deserializeDocumentDetailsMap(v *map[string]*string, value int
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var mv map[string]*string
+	var mv map[string]string
 	if *v == nil {
-		mv = map[string]*string{}
+		mv = map[string]string{}
 	} else {
 		mv = *v
 	}
 
 	for key, value := range shape {
-		var parsedVal *string
+		var parsedVal string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected DetailsValue to be of type string, got %T instead", value)
 			}
-			parsedVal = &jtv
+			parsedVal = jtv
 		}
 		mv[key] = parsedVal
 
@@ -1030,7 +1031,7 @@ func awsRestjson1_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 				if !ok {
 					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1070,7 +1071,7 @@ func awsRestjson1_deserializeDocumentInvalidStateTransitionException(v **types.I
 				if !ok {
 					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1114,7 +1115,7 @@ func awsRestjson1_deserializeDocumentJobExecution(v **types.JobExecution, value 
 				if err != nil {
 					return err
 				}
-				sv.ApproximateSecondsBeforeTimedOut = &i64
+				sv.ApproximateSecondsBeforeTimedOut = ptr.Int64(i64)
 			}
 
 		case "executionNumber":
@@ -1127,7 +1128,7 @@ func awsRestjson1_deserializeDocumentJobExecution(v **types.JobExecution, value 
 				if err != nil {
 					return err
 				}
-				sv.ExecutionNumber = &i64
+				sv.ExecutionNumber = ptr.Int64(i64)
 			}
 
 		case "jobDocument":
@@ -1136,7 +1137,7 @@ func awsRestjson1_deserializeDocumentJobExecution(v **types.JobExecution, value 
 				if !ok {
 					return fmt.Errorf("expected JobDocument to be of type string, got %T instead", value)
 				}
-				sv.JobDocument = &jtv
+				sv.JobDocument = ptr.String(jtv)
 			}
 
 		case "jobId":
@@ -1145,7 +1146,7 @@ func awsRestjson1_deserializeDocumentJobExecution(v **types.JobExecution, value 
 				if !ok {
 					return fmt.Errorf("expected JobId to be of type string, got %T instead", value)
 				}
-				sv.JobId = &jtv
+				sv.JobId = ptr.String(jtv)
 			}
 
 		case "lastUpdatedAt":
@@ -1158,7 +1159,7 @@ func awsRestjson1_deserializeDocumentJobExecution(v **types.JobExecution, value 
 				if err != nil {
 					return err
 				}
-				sv.LastUpdatedAt = &i64
+				sv.LastUpdatedAt = i64
 			}
 
 		case "queuedAt":
@@ -1171,7 +1172,7 @@ func awsRestjson1_deserializeDocumentJobExecution(v **types.JobExecution, value 
 				if err != nil {
 					return err
 				}
-				sv.QueuedAt = &i64
+				sv.QueuedAt = i64
 			}
 
 		case "startedAt":
@@ -1184,7 +1185,7 @@ func awsRestjson1_deserializeDocumentJobExecution(v **types.JobExecution, value 
 				if err != nil {
 					return err
 				}
-				sv.StartedAt = &i64
+				sv.StartedAt = ptr.Int64(i64)
 			}
 
 		case "status":
@@ -1207,7 +1208,7 @@ func awsRestjson1_deserializeDocumentJobExecution(v **types.JobExecution, value 
 				if !ok {
 					return fmt.Errorf("expected ThingName to be of type string, got %T instead", value)
 				}
-				sv.ThingName = &jtv
+				sv.ThingName = ptr.String(jtv)
 			}
 
 		case "versionNumber":
@@ -1220,7 +1221,7 @@ func awsRestjson1_deserializeDocumentJobExecution(v **types.JobExecution, value 
 				if err != nil {
 					return err
 				}
-				sv.VersionNumber = &i64
+				sv.VersionNumber = i64
 			}
 
 		default:
@@ -1278,7 +1279,7 @@ func awsRestjson1_deserializeDocumentJobExecutionState(v **types.JobExecutionSta
 				if err != nil {
 					return err
 				}
-				sv.VersionNumber = &i64
+				sv.VersionNumber = i64
 			}
 
 		default:
@@ -1322,7 +1323,7 @@ func awsRestjson1_deserializeDocumentJobExecutionSummary(v **types.JobExecutionS
 				if err != nil {
 					return err
 				}
-				sv.ExecutionNumber = &i64
+				sv.ExecutionNumber = ptr.Int64(i64)
 			}
 
 		case "jobId":
@@ -1331,7 +1332,7 @@ func awsRestjson1_deserializeDocumentJobExecutionSummary(v **types.JobExecutionS
 				if !ok {
 					return fmt.Errorf("expected JobId to be of type string, got %T instead", value)
 				}
-				sv.JobId = &jtv
+				sv.JobId = ptr.String(jtv)
 			}
 
 		case "lastUpdatedAt":
@@ -1344,7 +1345,7 @@ func awsRestjson1_deserializeDocumentJobExecutionSummary(v **types.JobExecutionS
 				if err != nil {
 					return err
 				}
-				sv.LastUpdatedAt = &i64
+				sv.LastUpdatedAt = i64
 			}
 
 		case "queuedAt":
@@ -1357,7 +1358,7 @@ func awsRestjson1_deserializeDocumentJobExecutionSummary(v **types.JobExecutionS
 				if err != nil {
 					return err
 				}
-				sv.QueuedAt = &i64
+				sv.QueuedAt = i64
 			}
 
 		case "startedAt":
@@ -1370,7 +1371,7 @@ func awsRestjson1_deserializeDocumentJobExecutionSummary(v **types.JobExecutionS
 				if err != nil {
 					return err
 				}
-				sv.StartedAt = &i64
+				sv.StartedAt = ptr.Int64(i64)
 			}
 
 		case "versionNumber":
@@ -1383,7 +1384,7 @@ func awsRestjson1_deserializeDocumentJobExecutionSummary(v **types.JobExecutionS
 				if err != nil {
 					return err
 				}
-				sv.VersionNumber = &i64
+				sv.VersionNumber = i64
 			}
 
 		default:
@@ -1395,7 +1396,7 @@ func awsRestjson1_deserializeDocumentJobExecutionSummary(v **types.JobExecutionS
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentJobExecutionSummaryList(v *[]*types.JobExecutionSummary, value interface{}) error {
+func awsRestjson1_deserializeDocumentJobExecutionSummaryList(v *[]types.JobExecutionSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1408,18 +1409,20 @@ func awsRestjson1_deserializeDocumentJobExecutionSummaryList(v *[]*types.JobExec
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.JobExecutionSummary
+	var cv []types.JobExecutionSummary
 	if *v == nil {
-		cv = []*types.JobExecutionSummary{}
+		cv = []types.JobExecutionSummary{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.JobExecutionSummary
-		if err := awsRestjson1_deserializeDocumentJobExecutionSummary(&col, value); err != nil {
+		var col types.JobExecutionSummary
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentJobExecutionSummary(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -1455,7 +1458,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				if !ok {
 					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1495,7 +1498,7 @@ func awsRestjson1_deserializeDocumentServiceUnavailableException(v **types.Servi
 				if !ok {
 					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1535,7 +1538,7 @@ func awsRestjson1_deserializeDocumentTerminalStateException(v **types.TerminalSt
 				if !ok {
 					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1575,7 +1578,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				if !ok {
 					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		case "payload":

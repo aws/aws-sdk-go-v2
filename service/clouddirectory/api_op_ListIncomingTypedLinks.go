@@ -49,7 +49,7 @@ type ListIncomingTypedLinksInput struct {
 	// Provides range filters for multiple attributes. When providing ranges to typed
 	// link selection, any inexact ranges must be specified at the end. Any attributes
 	// that do not have a range specified are presumed to match the entire range.
-	FilterAttributeRanges []*types.TypedLinkAttributeRange
+	FilterAttributeRanges []types.TypedLinkAttributeRange
 
 	// Filters are interpreted in the order of the attributes on the typed link facet,
 	// not the order in which they are supplied to any API calls.
@@ -65,7 +65,7 @@ type ListIncomingTypedLinksInput struct {
 type ListIncomingTypedLinksOutput struct {
 
 	// Returns one or more typed link specifiers as output.
-	LinkSpecifiers []*types.TypedLinkSpecifier
+	LinkSpecifiers []types.TypedLinkSpecifier
 
 	// The pagination token.
 	NextToken *string

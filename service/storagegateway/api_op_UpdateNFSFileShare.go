@@ -55,7 +55,7 @@ type UpdateNFSFileShareInput struct {
 
 	// The list of clients that are allowed to access the file gateway. The list must
 	// contain either valid IP addresses or valid CIDR blocks.
-	ClientList []*string
+	ClientList []string
 
 	// The default storage class for objects put into an Amazon S3 bucket by the file
 	// gateway. The default value is S3_INTELLIGENT_TIERING. Optional. Valid Values:

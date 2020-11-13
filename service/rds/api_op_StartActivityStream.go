@@ -60,7 +60,7 @@ type StartActivityStreamOutput struct {
 
 	// Indicates whether or not the database activity stream will start as soon as
 	// possible, regardless of the maintenance window for the database.
-	ApplyImmediately *bool
+	ApplyImmediately bool
 
 	// The name of the Amazon Kinesis data stream to be used for the database activity
 	// stream.

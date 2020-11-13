@@ -40,7 +40,7 @@ type UntagResourceInput struct {
 	// cannot be duplicated for a particular resource.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 type UntagResourceOutput struct {

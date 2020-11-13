@@ -1237,13 +1237,13 @@ func validateFilter(v *types.Filter) error {
 	}
 }
 
-func validateFilterList(v []*types.Filter) error {
+func validateFilterList(v []types.Filter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FilterList"}
 	for i := range v {
-		if err := validateFilter(v[i]); err != nil {
+		if err := validateFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1272,13 +1272,13 @@ func validateNeptuneSettings(v *types.NeptuneSettings) error {
 	}
 }
 
-func validateTableListToReload(v []*types.TableToReload) error {
+func validateTableListToReload(v []types.TableToReload) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TableListToReload"}
 	for i := range v {
-		if err := validateTableToReload(v[i]); err != nil {
+		if err := validateTableToReload(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

@@ -44,7 +44,7 @@ type CreateSimulationJobInput struct {
 	// will transition to Completed.
 	//
 	// This member is required.
-	MaxJobDurationInSeconds *int64
+	MaxJobDurationInSeconds int64
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
@@ -57,7 +57,7 @@ type CreateSimulationJobInput struct {
 	// These files are available under /opt/robomaker/datasources/data_source_name.
 	// There is a limit of 100 files and a combined size of 25GB for all
 	// DataSourceConfig objects.
-	DataSources []*types.DataSourceConfig
+	DataSources []types.DataSourceConfig
 
 	// The failure behavior the simulation job. Continue Restart the simulation job in
 	// the same host instance. Fail Stop the simulation job and terminate the instance.
@@ -70,14 +70,14 @@ type CreateSimulationJobInput struct {
 	OutputLocation *types.OutputLocation
 
 	// The robot application to use in the simulation job.
-	RobotApplications []*types.RobotApplicationConfig
+	RobotApplications []types.RobotApplicationConfig
 
 	// The simulation application to use in the simulation job.
-	SimulationApplications []*types.SimulationApplicationConfig
+	SimulationApplications []types.SimulationApplicationConfig
 
 	// A map that contains tag keys and tag values that are attached to the simulation
 	// job.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// If your simulation job accesses resources in a VPC, you provide this parameter
 	// identifying the list of security group IDs and subnet IDs. These must belong to
@@ -98,7 +98,7 @@ type CreateSimulationJobOutput struct {
 	Compute *types.ComputeResponse
 
 	// The data sources for the simulation job.
-	DataSources []*types.DataSource
+	DataSources []types.DataSource
 
 	// the failure behavior for the simulation job.
 	FailureBehavior types.FailureBehavior
@@ -137,25 +137,25 @@ type CreateSimulationJobOutput struct {
 	LoggingConfig *types.LoggingConfig
 
 	// The maximum simulation job duration in seconds.
-	MaxJobDurationInSeconds *int64
+	MaxJobDurationInSeconds int64
 
 	// Simulation job output files location.
 	OutputLocation *types.OutputLocation
 
 	// The robot application used by the simulation job.
-	RobotApplications []*types.RobotApplicationConfig
+	RobotApplications []types.RobotApplicationConfig
 
 	// The simulation application used by the simulation job.
-	SimulationApplications []*types.SimulationApplicationConfig
+	SimulationApplications []types.SimulationApplicationConfig
 
 	// The simulation job execution duration in milliseconds.
-	SimulationTimeMillis *int64
+	SimulationTimeMillis int64
 
 	// The status of the simulation job.
 	Status types.SimulationJobStatus
 
 	// The list of all tags added to the simulation job.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Information about the vpc configuration.
 	VpcConfig *types.VPCConfigResponse

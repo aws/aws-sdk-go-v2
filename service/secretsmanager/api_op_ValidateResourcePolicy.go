@@ -60,10 +60,10 @@ type ValidateResourcePolicyInput struct {
 type ValidateResourcePolicyOutput struct {
 
 	// Returns a message stating that your Reource Policy passed validation.
-	PolicyValidationPassed *bool
+	PolicyValidationPassed bool
 
 	// Returns an error message if your policy doesn't pass validatation.
-	ValidationErrors []*types.ValidationErrorsEntry
+	ValidationErrors []types.ValidationErrorsEntry
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

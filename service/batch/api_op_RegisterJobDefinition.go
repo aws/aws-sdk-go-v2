@@ -56,7 +56,7 @@ type RegisterJobDefinitionInput struct {
 	// Default parameter substitution placeholders to set in the job definition.
 	// Parameters are specified as a key-value pair mapping. Parameters in a SubmitJob
 	// request override any corresponding parameter defaults from the job definition.
-	Parameters map[string]*string
+	Parameters map[string]string
 
 	// The retry strategy to use for failed jobs that are submitted with this job
 	// definition. Any retry strategy that is specified during a SubmitJob operation
@@ -69,7 +69,7 @@ type RegisterJobDefinitionInput struct {
 	// more information, see Tagging AWS Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in AWS General
 	// Reference.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The timeout configuration for jobs that are submitted with this job definition,
 	// after which AWS Batch terminates your jobs if they have not finished. If a job
@@ -97,7 +97,7 @@ type RegisterJobDefinitionOutput struct {
 	// The revision of the job definition.
 	//
 	// This member is required.
-	Revision *int32
+	Revision int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

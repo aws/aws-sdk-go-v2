@@ -39,7 +39,7 @@ type ResumeWorkflowRunInput struct {
 	// be restarted must have a run attempt in the original run.
 	//
 	// This member is required.
-	NodeIds []*string
+	NodeIds []string
 
 	// The ID of the workflow run to resume.
 	//
@@ -50,7 +50,7 @@ type ResumeWorkflowRunInput struct {
 type ResumeWorkflowRunOutput struct {
 
 	// A list of the node IDs for the nodes that were actually restarted.
-	NodeIds []*string
+	NodeIds []string
 
 	// The new ID assigned to the resumed workflow run. Each resume of a workflow run
 	// will have a new run ID.

@@ -45,7 +45,7 @@ type ListDetectorModelVersionsInput struct {
 type ListDetectorModelVersionsOutput struct {
 
 	// Summary information about the detector model versions.
-	DetectorModelVersionSummaries []*types.DetectorModelVersionSummary
+	DetectorModelVersionSummaries []types.DetectorModelVersionSummary
 
 	// A token to retrieve the next set of results, or null if there are no additional
 	// results.

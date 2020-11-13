@@ -47,7 +47,7 @@ type UpdateStageInput struct {
 
 	// Specifies whether updates to an API automatically trigger a new deployment. The
 	// default value is false.
-	AutoDeploy *bool
+	AutoDeploy bool
 
 	// The identifier of a client certificate for a Stage.
 	ClientCertificateId *string
@@ -63,12 +63,12 @@ type UpdateStageInput struct {
 	Description *string
 
 	// Route settings for the stage.
-	RouteSettings map[string]*types.RouteSettings
+	RouteSettings map[string]types.RouteSettings
 
 	// A map that defines the stage variables for a Stage. Variable names can have
 	// alphanumeric and underscore characters, and the values must match
 	// [A-Za-z0-9-._~:/?#&=,]+.
-	StageVariables map[string]*string
+	StageVariables map[string]string
 }
 
 type UpdateStageOutput struct {
@@ -79,11 +79,11 @@ type UpdateStageOutput struct {
 	// Specifies whether a stage is managed by API Gateway. If you created an API using
 	// quick create, the $default stage is managed by API Gateway. You can't modify the
 	// $default stage.
-	ApiGatewayManaged *bool
+	ApiGatewayManaged bool
 
 	// Specifies whether updates to an API automatically trigger a new deployment. The
 	// default value is false.
-	AutoDeploy *bool
+	AutoDeploy bool
 
 	// The identifier of a client certificate for a Stage. Supported only for WebSocket
 	// APIs.
@@ -110,7 +110,7 @@ type UpdateStageOutput struct {
 	LastUpdatedDate *time.Time
 
 	// Route settings for the stage, by routeKey.
-	RouteSettings map[string]*types.RouteSettings
+	RouteSettings map[string]types.RouteSettings
 
 	// The name of the stage.
 	StageName *string
@@ -118,10 +118,10 @@ type UpdateStageOutput struct {
 	// A map that defines the stage variables for a stage resource. Variable names can
 	// have alphanumeric and underscore characters, and the values must match
 	// [A-Za-z0-9-._~:/?#&=,]+.
-	StageVariables map[string]*string
+	StageVariables map[string]string
 
 	// The collection of tags. Each tag element is associated with a given resource.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

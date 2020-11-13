@@ -36,7 +36,7 @@ type UpdateEndpointWeightsAndCapacitiesInput struct {
 	// An object that provides new capacity and weight values for a variant.
 	//
 	// This member is required.
-	DesiredWeightsAndCapacities []*types.DesiredWeightAndCapacity
+	DesiredWeightsAndCapacities []types.DesiredWeightAndCapacity
 
 	// The name of an existing Amazon SageMaker endpoint.
 	//

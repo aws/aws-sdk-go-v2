@@ -71,7 +71,7 @@ type CreateRuleGroupInput struct {
 	Name *string
 
 	//
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateRuleGroupOutput struct {

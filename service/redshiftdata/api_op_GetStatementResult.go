@@ -53,7 +53,7 @@ type GetStatementResultOutput struct {
 	Records [][]types.Field
 
 	// The properties (metadata) of a column.
-	ColumnMetadata []*types.ColumnMetadata
+	ColumnMetadata []types.ColumnMetadata
 
 	// A value that indicates the starting point for the next set of response records
 	// in a subsequent request. If a value is returned in a response, you can retrieve
@@ -65,7 +65,7 @@ type GetStatementResultOutput struct {
 	// The total number of rows in the result set returned from a query. You can use
 	// this number to estimate the number of calls to the GetStatementResult operation
 	// needed to page through the results.
-	TotalNumRows *int64
+	TotalNumRows int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -152,7 +152,7 @@ type CreateServiceInput struct {
 	// with a cluster to be used. The PutClusterCapacityProviders API operation is used
 	// to update the list of available capacity providers for a cluster after the
 	// cluster is created.
-	CapacityProviderStrategy []*types.CapacityProviderStrategyItem
+	CapacityProviderStrategy []types.CapacityProviderStrategyItem
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. Up to 32 ASCII characters are allowed.
@@ -178,7 +178,7 @@ type CreateServiceInput struct {
 	// service. For more information, see Tagging Your Amazon ECS Resources
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
 	// in the Amazon Elastic Container Service Developer Guide.
-	EnableECSManagedTags *bool
+	EnableECSManagedTags bool
 
 	// The period of time, in seconds, that the Amazon ECS service scheduler should
 	// ignore unhealthy Elastic Load Balancing target health checks after a task has
@@ -240,7 +240,7 @@ type CreateServiceInput struct {
 	// you must choose ip as the target type, not instance, because tasks that use the
 	// awsvpc network mode are associated with an elastic network interface, not an
 	// Amazon EC2 instance.
-	LoadBalancers []*types.LoadBalancer
+	LoadBalancers []types.LoadBalancer
 
 	// The network configuration for the service. This parameter is required for task
 	// definitions that use the awsvpc network mode to receive their own elastic
@@ -253,11 +253,11 @@ type CreateServiceInput struct {
 	// An array of placement constraint objects to use for tasks in your service. You
 	// can specify a maximum of 10 constraints per task (this limit includes
 	// constraints in the task definition and those specified at runtime).
-	PlacementConstraints []*types.PlacementConstraint
+	PlacementConstraints []types.PlacementConstraint
 
 	// The placement strategy objects to use for tasks in your service. You can specify
 	// a maximum of five strategy rules per service.
-	PlacementStrategy []*types.PlacementStrategy
+	PlacementStrategy []types.PlacementStrategy
 
 	// The platform version that your tasks in the service are running on. A platform
 	// version is specified only for tasks using the Fargate launch type. If one isn't
@@ -325,7 +325,7 @@ type CreateServiceInput struct {
 	// Service discovery is supported for Fargate tasks if you are using platform
 	// version v1.1.0 or later. For more information, see AWS Fargate Platform Versions
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html).
-	ServiceRegistries []*types.ServiceRegistry
+	ServiceRegistries []types.ServiceRegistry
 
 	// The metadata that you apply to the service to help you categorize and organize
 	// them. Each tag consists of a key and an optional value, both of which you
@@ -356,7 +356,7 @@ type CreateServiceInput struct {
 	// values as it is reserved for AWS use. You cannot edit or delete tag keys or
 	// values with this prefix. Tags with this prefix do not count against your tags
 	// per resource limit.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The family and revision (family:revision) or full ARN of the task definition to
 	// run in your service. If a revision is not specified, the latest ACTIVE revision

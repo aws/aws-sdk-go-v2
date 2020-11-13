@@ -52,7 +52,7 @@ type DescribeRootFoldersInput struct {
 type DescribeRootFoldersOutput struct {
 
 	// The user's special folders.
-	Folders []*types.FolderMetadata
+	Folders []types.FolderMetadata
 
 	// The marker for the next set of results.
 	Marker *string

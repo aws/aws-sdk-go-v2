@@ -66,7 +66,7 @@ type TagUserInput struct {
 	// name and an associated value.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The name of the user that you want to add tags to. This parameter accepts
 	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of

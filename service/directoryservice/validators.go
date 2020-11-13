@@ -1312,13 +1312,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTags(v []*types.Tag) error {
+func validateTags(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tags"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2153,9 +2153,6 @@ func validateOpStartSchemaExtensionInput(v *StartSchemaExtensionInput) error {
 	if v.Description == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Description"))
 	}
-	if v.CreateSnapshotBeforeSchemaExtension == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CreateSnapshotBeforeSchemaExtension"))
-	}
 	if v.LdifContent == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LdifContent"))
 	}
@@ -2217,9 +2214,6 @@ func validateOpUpdateNumberOfDomainControllersInput(v *UpdateNumberOfDomainContr
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateNumberOfDomainControllersInput"}
-	if v.DesiredNumber == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DesiredNumber"))
-	}
 	if v.DirectoryId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
 	}

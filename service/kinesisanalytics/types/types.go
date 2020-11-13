@@ -45,7 +45,7 @@ type ApplicationDetail struct {
 	// messages. For more information about using CloudWatch log streams with Amazon
 	// Kinesis Analytics applications, see Working with Amazon CloudWatch Logs
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html).
-	CloudWatchLoggingOptionDescriptions []*CloudWatchLoggingOptionDescription
+	CloudWatchLoggingOptionDescriptions []CloudWatchLoggingOptionDescription
 
 	// Time stamp when the application version was created.
 	CreateTimestamp *time.Time
@@ -53,7 +53,7 @@ type ApplicationDetail struct {
 	// Describes the application input configuration. For more information, see
 	// Configuring Application Input
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
-	InputDescriptions []*InputDescription
+	InputDescriptions []InputDescription
 
 	// Time stamp when the application was last updated.
 	LastUpdateTimestamp *time.Time
@@ -61,12 +61,12 @@ type ApplicationDetail struct {
 	// Describes the application output configuration. For more information, see
 	// Configuring Application Output
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html).
-	OutputDescriptions []*OutputDescription
+	OutputDescriptions []OutputDescription
 
 	// Describes reference data sources configured for the application. For more
 	// information, see Configuring Application Input
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html).
-	ReferenceDataSourceDescriptions []*ReferenceDataSourceDescription
+	ReferenceDataSourceDescriptions []ReferenceDataSourceDescription
 }
 
 // This documentation is for version 1 of the Amazon Kinesis Data Analytics API,
@@ -99,16 +99,16 @@ type ApplicationUpdate struct {
 	ApplicationCodeUpdate *string
 
 	// Describes application CloudWatch logging option updates.
-	CloudWatchLoggingOptionUpdates []*CloudWatchLoggingOptionUpdate
+	CloudWatchLoggingOptionUpdates []CloudWatchLoggingOptionUpdate
 
 	// Describes application input configuration updates.
-	InputUpdates []*InputUpdate
+	InputUpdates []InputUpdate
 
 	// Describes application output configuration updates.
-	OutputUpdates []*OutputUpdate
+	OutputUpdates []OutputUpdate
 
 	// Describes application reference data source updates.
-	ReferenceDataSourceUpdates []*ReferenceDataSourceUpdate
+	ReferenceDataSourceUpdates []ReferenceDataSourceUpdate
 }
 
 // Provides a description of CloudWatch logging options, including the log stream
@@ -268,7 +268,7 @@ type InputConfiguration struct {
 type InputDescription struct {
 
 	// Returns the in-application stream names that are mapped to the stream source.
-	InAppStreamNames []*string
+	InAppStreamNames []string
 
 	// Input ID associated with the application input. This is the ID that Amazon
 	// Kinesis Analytics assigns to each input configuration you add to your
@@ -414,7 +414,7 @@ type InputSchemaUpdate struct {
 	// A list of RecordColumn objects. Each object describes the mapping of the
 	// streaming source element to the corresponding column in the in-application
 	// stream.
-	RecordColumnUpdates []*RecordColumn
+	RecordColumnUpdates []RecordColumn
 
 	// Specifies the encoding of the records in the streaming source. For example,
 	// UTF-8.
@@ -1028,7 +1028,7 @@ type SourceSchema struct {
 	// A list of RecordColumn objects.
 	//
 	// This member is required.
-	RecordColumns []*RecordColumn
+	RecordColumns []RecordColumn
 
 	// Specifies the format of the records on the streaming source.
 	//

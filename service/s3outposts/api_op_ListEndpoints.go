@@ -41,7 +41,7 @@ func (c *Client) ListEndpoints(ctx context.Context, params *ListEndpointsInput, 
 type ListEndpointsInput struct {
 
 	// The max number of endpoints that can be returned on the request.
-	MaxResults *int32
+	MaxResults int32
 
 	// The next endpoint requested in the list.
 	NextToken *string
@@ -50,7 +50,7 @@ type ListEndpointsInput struct {
 type ListEndpointsOutput struct {
 
 	// Returns an array of endpoints associated with AWS Outpost.
-	Endpoints []*types.Endpoint
+	Endpoints []types.Endpoint
 
 	// The next endpoint returned in the list.
 	NextToken *string

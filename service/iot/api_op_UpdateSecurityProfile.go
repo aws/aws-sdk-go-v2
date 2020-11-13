@@ -39,31 +39,31 @@ type UpdateSecurityProfileInput struct {
 	// list of metrics whose data is retained (stored). By default, data is retained
 	// for any metric used in the profile's behaviors, but it is also retained for any
 	// metric specified here.
-	AdditionalMetricsToRetain []*string
+	AdditionalMetricsToRetain []string
 
 	// A list of metrics whose data is retained (stored). By default, data is retained
 	// for any metric used in the profile's behaviors, but it is also retained for any
 	// metric specified here.
-	AdditionalMetricsToRetainV2 []*types.MetricToRetain
+	AdditionalMetricsToRetainV2 []types.MetricToRetain
 
 	// Where the alerts are sent. (Alerts are always sent to the console.)
-	AlertTargets map[string]*types.AlertTarget
+	AlertTargets map[string]types.AlertTarget
 
 	// Specifies the behaviors that, when violated by a device (thing), cause an alert.
-	Behaviors []*types.Behavior
+	Behaviors []types.Behavior
 
 	// If true, delete all additionalMetricsToRetain defined for this security profile.
 	// If any additionalMetricsToRetain are defined in the current invocation, an
 	// exception occurs.
-	DeleteAdditionalMetricsToRetain *bool
+	DeleteAdditionalMetricsToRetain bool
 
 	// If true, delete all alertTargets defined for this security profile. If any
 	// alertTargets are defined in the current invocation, an exception occurs.
-	DeleteAlertTargets *bool
+	DeleteAlertTargets bool
 
 	// If true, delete all behaviors defined for this security profile. If any
 	// behaviors are defined in the current invocation, an exception occurs.
-	DeleteBehaviors *bool
+	DeleteBehaviors bool
 
 	// The expected version of the security profile. A new version is generated
 	// whenever the security profile is updated. If you specify a value that is
@@ -80,18 +80,18 @@ type UpdateSecurityProfileOutput struct {
 	// list of metrics whose data is retained (stored). By default, data is retained
 	// for any metric used in the security profile's behaviors, but it is also retained
 	// for any metric specified here.
-	AdditionalMetricsToRetain []*string
+	AdditionalMetricsToRetain []string
 
 	// A list of metrics whose data is retained (stored). By default, data is retained
 	// for any metric used in the profile's behaviors, but it is also retained for any
 	// metric specified here.
-	AdditionalMetricsToRetainV2 []*types.MetricToRetain
+	AdditionalMetricsToRetainV2 []types.MetricToRetain
 
 	// Where the alerts are sent. (Alerts are always sent to the console.)
-	AlertTargets map[string]*types.AlertTarget
+	AlertTargets map[string]types.AlertTarget
 
 	// Specifies the behaviors that, when violated by a device (thing), cause an alert.
-	Behaviors []*types.Behavior
+	Behaviors []types.Behavior
 
 	// The time the security profile was created.
 	CreationDate *time.Time
@@ -109,7 +109,7 @@ type UpdateSecurityProfileOutput struct {
 	SecurityProfileName *string
 
 	// The updated version of the security profile.
-	Version *int64
+	Version int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

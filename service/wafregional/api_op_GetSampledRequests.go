@@ -50,7 +50,7 @@ type GetSampledRequestsInput struct {
 	// returns information about all of them.
 	//
 	// This member is required.
-	MaxItems *int64
+	MaxItems int64
 
 	// RuleId is one of three values:
 	//
@@ -85,11 +85,11 @@ type GetSampledRequestsOutput struct {
 	// The total number of requests from which GetSampledRequests got a sample of
 	// MaxItems requests. If PopulationSize is less than MaxItems, the sample includes
 	// every request that your AWS resource received during the specified time range.
-	PopulationSize *int64
+	PopulationSize int64
 
 	// A complex type that contains detailed information about each of the requests in
 	// the sample.
-	SampledRequests []*types.SampledHTTPRequest
+	SampledRequests []types.SampledHTTPRequest
 
 	// Usually, TimeWindow is the time range that you specified in the
 	// GetSampledRequests request. However, if your AWS resource received more than

@@ -50,7 +50,7 @@ type SetEndpointAttributesInput struct {
 	// notification service.
 	//
 	// This member is required.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// EndpointArn used for SetEndpointAttributes action.
 	//

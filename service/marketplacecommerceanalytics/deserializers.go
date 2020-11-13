@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	"github.com/awslabs/smithy-go/ptr"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
 	"strings"
@@ -302,7 +303,7 @@ func awsAwsjson11_deserializeDocumentMarketplaceCommerceAnalyticsException(v **t
 				if !ok {
 					return fmt.Errorf("expected ExceptionMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -342,7 +343,7 @@ func awsAwsjson11_deserializeOpDocumentGenerateDataSetOutput(v **GenerateDataSet
 				if !ok {
 					return fmt.Errorf("expected DataSetRequestId to be of type string, got %T instead", value)
 				}
-				sv.DataSetRequestId = &jtv
+				sv.DataSetRequestId = ptr.String(jtv)
 			}
 
 		default:
@@ -382,7 +383,7 @@ func awsAwsjson11_deserializeOpDocumentStartSupportDataExportOutput(v **StartSup
 				if !ok {
 					return fmt.Errorf("expected DataSetRequestId to be of type string, got %T instead", value)
 				}
-				sv.DataSetRequestId = &jtv
+				sv.DataSetRequestId = ptr.String(jtv)
 			}
 
 		default:

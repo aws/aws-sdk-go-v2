@@ -53,7 +53,7 @@ type ListMeshesOutput struct {
 	// The list of existing service meshes.
 	//
 	// This member is required.
-	Meshes []*types.MeshRef
+	Meshes []types.MeshRef
 
 	// The nextToken value to include in a future ListMeshes request. When the results
 	// of a ListMeshes request exceed limit, you can use this value to retrieve the

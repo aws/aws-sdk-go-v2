@@ -62,7 +62,7 @@ type DescribeFleetMetadataOutput struct {
 	OptimizeForEndUserLocation *bool
 
 	// The tags attached to the resource. A tag is a key-value pair.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

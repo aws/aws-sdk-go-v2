@@ -55,10 +55,10 @@ type SearchIndexOutput struct {
 	NextToken *string
 
 	// The thing groups that match the search query.
-	ThingGroups []*types.ThingGroupDocument
+	ThingGroups []types.ThingGroupDocument
 
 	// The things that match the search query.
-	Things []*types.ThingDocument
+	Things []types.ThingDocument
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

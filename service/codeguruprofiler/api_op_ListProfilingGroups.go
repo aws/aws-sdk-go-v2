@@ -55,7 +55,7 @@ type ListProfilingGroupsOutput struct {
 	// Information about profiling group names.
 	//
 	// This member is required.
-	ProfilingGroupNames []*string
+	ProfilingGroupNames []string
 
 	// The nextToken value to include in a future ListProfilingGroups request. When the
 	// results of a ListProfilingGroups request exceed maxResults, this value can be
@@ -64,7 +64,7 @@ type ListProfilingGroupsOutput struct {
 	NextToken *string
 
 	// Information about profiling groups.
-	ProfilingGroups []*types.ProfilingGroupDescription
+	ProfilingGroups []types.ProfilingGroupDescription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -65,11 +65,11 @@ type CreateTemplateInput struct {
 	Name *string
 
 	// A list of resource permissions to be set on the template.
-	Permissions []*types.ResourcePermission
+	Permissions []types.ResourcePermission
 
 	// Contains a map of the key-value pairs for the resource tag or tags assigned to
 	// the resource.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// A description of the current template version being created. This API operation
 	// creates the first version of the template. Every time UpdateTemplate is called,
@@ -90,7 +90,7 @@ type CreateTemplateOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// The ID of the template.
 	TemplateId *string

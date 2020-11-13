@@ -40,7 +40,7 @@ type ListAppsListsInput struct {
 
 	// Specifies whether the lists to retrieve are default lists owned by AWS Firewall
 	// Manager.
-	DefaultLists *bool
+	DefaultLists bool
 
 	// If you specify a value for MaxResults in your list request, and you have more
 	// objects than the maximum, AWS Firewall Manager returns this token in the
@@ -52,7 +52,7 @@ type ListAppsListsInput struct {
 type ListAppsListsOutput struct {
 
 	// An array of AppsListDataSummary objects.
-	AppsLists []*types.AppsListDataSummary
+	AppsLists []types.AppsListDataSummary
 
 	// If you specify a value for MaxResults in your list request, and you have more
 	// objects than the maximum, AWS Firewall Manager returns this token in the

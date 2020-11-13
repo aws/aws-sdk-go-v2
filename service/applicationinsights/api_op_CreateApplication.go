@@ -49,7 +49,7 @@ type CreateApplicationInput struct {
 	// List of tags to add to the application. tag key (Key) and an associated tag
 	// value (Value). The maximum length of a tag key is 128 characters. The maximum
 	// length of a tag value is 256 characters.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateApplicationOutput struct {

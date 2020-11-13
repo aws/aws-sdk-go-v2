@@ -33,7 +33,7 @@ type DeleteVoiceConnectorTerminationCredentialsInput struct {
 	// format.
 	//
 	// This member is required.
-	Usernames []*string
+	Usernames []string
 
 	// The Amazon Chime Voice Connector ID.
 	//

@@ -49,20 +49,20 @@ type DescribeProductAsAdminInput struct {
 type DescribeProductAsAdminOutput struct {
 
 	// Information about the associated budgets.
-	Budgets []*types.BudgetDetail
+	Budgets []types.BudgetDetail
 
 	// Information about the product view.
 	ProductViewDetail *types.ProductViewDetail
 
 	// Information about the provisioning artifacts (also known as versions) for the
 	// specified product.
-	ProvisioningArtifactSummaries []*types.ProvisioningArtifactSummary
+	ProvisioningArtifactSummaries []types.ProvisioningArtifactSummary
 
 	// Information about the TagOptions associated with the product.
-	TagOptions []*types.TagOptionDetail
+	TagOptions []types.TagOptionDetail
 
 	// Information about the tags associated with the product.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

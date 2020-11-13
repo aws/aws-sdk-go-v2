@@ -51,7 +51,7 @@ type DescribeRuntimeVersionsOutput struct {
 
 	// An array of objects that display the details about each Synthetics canary
 	// runtime version.
-	RuntimeVersions []*types.RuntimeVersion
+	RuntimeVersions []types.RuntimeVersion
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

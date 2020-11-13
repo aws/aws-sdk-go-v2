@@ -31,7 +31,7 @@ func (c *Client) DescribeStandards(ctx context.Context, params *DescribeStandard
 type DescribeStandardsInput struct {
 
 	// The maximum number of standards to return.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token that is required for pagination. On your first call to the
 	// DescribeStandards operation, set the value of this parameter to NULL. For
@@ -46,7 +46,7 @@ type DescribeStandardsOutput struct {
 	NextToken *string
 
 	// A list of available standards.
-	Standards []*types.Standard
+	Standards []types.Standard
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

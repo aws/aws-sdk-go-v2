@@ -97,7 +97,7 @@ type UpdateWebACLInput struct {
 	// block, or count. Each rule includes one top-level statement that AWS WAF uses to
 	// identify matching web requests, and parameters that govern how AWS WAF handles
 	// them.
-	Rules []*types.Rule
+	Rules []types.Rule
 }
 
 type UpdateWebACLOutput struct {

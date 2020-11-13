@@ -59,7 +59,7 @@ type JoinDomainInput struct {
 	// List of IPv4 addresses, NetBIOS names, or host names of your domain server. If
 	// you need to specify the port number include it after the colon (“:”). For
 	// example, mydc.mydomain.com:389.
-	DomainControllers []*string
+	DomainControllers []string
 
 	// The organizational unit (OU) is a container in an Active Directory that can hold
 	// users, groups, computers, and other OUs and this parameter specifies the OU that

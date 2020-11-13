@@ -63,7 +63,7 @@ type ListVirtualRoutersOutput struct {
 	// The list of existing virtual routers for the specified service mesh.
 	//
 	// This member is required.
-	VirtualRouters []*types.VirtualRouterRef
+	VirtualRouters []types.VirtualRouterRef
 
 	// The nextToken value to include in a future ListVirtualRouters request. When the
 	// results of a ListVirtualRouters request exceed limit, you can use this value to

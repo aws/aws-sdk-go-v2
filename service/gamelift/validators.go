@@ -1771,13 +1771,13 @@ func validateGameProperty(v *types.GameProperty) error {
 	}
 }
 
-func validateGamePropertyList(v []*types.GameProperty) error {
+func validateGamePropertyList(v []types.GameProperty) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GamePropertyList"}
 	for i := range v {
-		if err := validateGameProperty(v[i]); err != nil {
+		if err := validateGameProperty(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1822,13 +1822,13 @@ func validateInstanceDefinition(v *types.InstanceDefinition) error {
 	}
 }
 
-func validateInstanceDefinitions(v []*types.InstanceDefinition) error {
+func validateInstanceDefinitions(v []types.InstanceDefinition) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InstanceDefinitions"}
 	for i := range v {
-		if err := validateInstanceDefinition(v[i]); err != nil {
+		if err := validateInstanceDefinition(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1863,13 +1863,13 @@ func validateIpPermission(v *types.IpPermission) error {
 	}
 }
 
-func validateIpPermissionsList(v []*types.IpPermission) error {
+func validateIpPermissionsList(v []types.IpPermission) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "IpPermissionsList"}
 	for i := range v {
-		if err := validateIpPermission(v[i]); err != nil {
+		if err := validateIpPermission(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1915,13 +1915,13 @@ func validateServerProcess(v *types.ServerProcess) error {
 	}
 }
 
-func validateServerProcessList(v []*types.ServerProcess) error {
+func validateServerProcessList(v []types.ServerProcess) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ServerProcessList"}
 	for i := range v {
-		if err := validateServerProcess(v[i]); err != nil {
+		if err := validateServerProcess(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1950,13 +1950,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagList(v []*types.Tag) error {
+func validateTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1972,9 +1972,6 @@ func validateTargetConfiguration(v *types.TargetConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TargetConfiguration"}
-	if v.TargetValue == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetValue"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

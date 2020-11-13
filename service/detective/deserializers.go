@@ -256,7 +256,7 @@ func awsRestjson1_deserializeOpDocumentCreateGraphOutput(v **CreateGraphOutput, 
 				if !ok {
 					return fmt.Errorf("expected GraphArn to be of type string, got %T instead", value)
 				}
-				sv.GraphArn = &jtv
+				sv.GraphArn = ptr.String(jtv)
 			}
 
 		default:
@@ -1076,7 +1076,7 @@ func awsRestjson1_deserializeOpDocumentListGraphsOutput(v **ListGraphsOutput, va
 				if !ok {
 					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -1235,7 +1235,7 @@ func awsRestjson1_deserializeOpDocumentListInvitationsOutput(v **ListInvitations
 				if !ok {
 					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -1397,7 +1397,7 @@ func awsRestjson1_deserializeOpDocumentListMembersOutput(v **ListMembersOutput, 
 				if !ok {
 					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -1776,7 +1776,7 @@ func awsRestjson1_deserializeErrorValidationException(response *smithyhttp.Respo
 	return output
 }
 
-func awsRestjson1_deserializeDocumentAccountIdList(v *[]*string, value interface{}) error {
+func awsRestjson1_deserializeDocumentAccountIdList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1789,21 +1789,21 @@ func awsRestjson1_deserializeDocumentAccountIdList(v *[]*string, value interface
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*string
+	var cv []string
 	if *v == nil {
-		cv = []*string{}
+		cv = []string{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *string
+		var col string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
 			}
-			col = &jtv
+			col = jtv
 		}
 		cv = append(cv, col)
 
@@ -1840,7 +1840,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1880,7 +1880,7 @@ func awsRestjson1_deserializeDocumentGraph(v **types.Graph, value interface{}) e
 				if !ok {
 					return fmt.Errorf("expected GraphArn to be of type string, got %T instead", value)
 				}
-				sv.Arn = &jtv
+				sv.Arn = ptr.String(jtv)
 			}
 
 		case "CreatedTime":
@@ -1905,7 +1905,7 @@ func awsRestjson1_deserializeDocumentGraph(v **types.Graph, value interface{}) e
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentGraphList(v *[]*types.Graph, value interface{}) error {
+func awsRestjson1_deserializeDocumentGraphList(v *[]types.Graph, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1918,18 +1918,20 @@ func awsRestjson1_deserializeDocumentGraphList(v *[]*types.Graph, value interfac
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Graph
+	var cv []types.Graph
 	if *v == nil {
-		cv = []*types.Graph{}
+		cv = []types.Graph{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Graph
-		if err := awsRestjson1_deserializeDocumentGraph(&col, value); err != nil {
+		var col types.Graph
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentGraph(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -1965,7 +1967,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2005,7 +2007,7 @@ func awsRestjson1_deserializeDocumentMemberDetail(v **types.MemberDetail, value 
 				if !ok {
 					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
 				}
-				sv.AccountId = &jtv
+				sv.AccountId = ptr.String(jtv)
 			}
 
 		case "DisabledReason":
@@ -2023,7 +2025,7 @@ func awsRestjson1_deserializeDocumentMemberDetail(v **types.MemberDetail, value 
 				if !ok {
 					return fmt.Errorf("expected EmailAddress to be of type string, got %T instead", value)
 				}
-				sv.EmailAddress = &jtv
+				sv.EmailAddress = ptr.String(jtv)
 			}
 
 		case "GraphArn":
@@ -2032,7 +2034,7 @@ func awsRestjson1_deserializeDocumentMemberDetail(v **types.MemberDetail, value 
 				if !ok {
 					return fmt.Errorf("expected GraphArn to be of type string, got %T instead", value)
 				}
-				sv.GraphArn = &jtv
+				sv.GraphArn = ptr.String(jtv)
 			}
 
 		case "InvitedTime":
@@ -2054,7 +2056,7 @@ func awsRestjson1_deserializeDocumentMemberDetail(v **types.MemberDetail, value 
 				if !ok {
 					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
 				}
-				sv.MasterId = &jtv
+				sv.MasterId = ptr.String(jtv)
 			}
 
 		case "PercentOfGraphUtilization":
@@ -2067,7 +2069,7 @@ func awsRestjson1_deserializeDocumentMemberDetail(v **types.MemberDetail, value 
 				if err != nil {
 					return err
 				}
-				sv.PercentOfGraphUtilization = &f64
+				sv.PercentOfGraphUtilization = ptr.Float64(f64)
 			}
 
 		case "PercentOfGraphUtilizationUpdatedTime":
@@ -2114,7 +2116,7 @@ func awsRestjson1_deserializeDocumentMemberDetail(v **types.MemberDetail, value 
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentMemberDetailList(v *[]*types.MemberDetail, value interface{}) error {
+func awsRestjson1_deserializeDocumentMemberDetailList(v *[]types.MemberDetail, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2127,18 +2129,20 @@ func awsRestjson1_deserializeDocumentMemberDetailList(v *[]*types.MemberDetail, 
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.MemberDetail
+	var cv []types.MemberDetail
 	if *v == nil {
-		cv = []*types.MemberDetail{}
+		cv = []types.MemberDetail{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.MemberDetail
-		if err := awsRestjson1_deserializeDocumentMemberDetail(&col, value); err != nil {
+		var col types.MemberDetail
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentMemberDetail(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -2174,7 +2178,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2214,7 +2218,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2254,7 +2258,7 @@ func awsRestjson1_deserializeDocumentUnprocessedAccount(v **types.UnprocessedAcc
 				if !ok {
 					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
 				}
-				sv.AccountId = &jtv
+				sv.AccountId = ptr.String(jtv)
 			}
 
 		case "Reason":
@@ -2263,7 +2267,7 @@ func awsRestjson1_deserializeDocumentUnprocessedAccount(v **types.UnprocessedAcc
 				if !ok {
 					return fmt.Errorf("expected UnprocessedReason to be of type string, got %T instead", value)
 				}
-				sv.Reason = &jtv
+				sv.Reason = ptr.String(jtv)
 			}
 
 		default:
@@ -2275,7 +2279,7 @@ func awsRestjson1_deserializeDocumentUnprocessedAccount(v **types.UnprocessedAcc
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentUnprocessedAccountList(v *[]*types.UnprocessedAccount, value interface{}) error {
+func awsRestjson1_deserializeDocumentUnprocessedAccountList(v *[]types.UnprocessedAccount, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2288,18 +2292,20 @@ func awsRestjson1_deserializeDocumentUnprocessedAccountList(v *[]*types.Unproces
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.UnprocessedAccount
+	var cv []types.UnprocessedAccount
 	if *v == nil {
-		cv = []*types.UnprocessedAccount{}
+		cv = []types.UnprocessedAccount{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.UnprocessedAccount
-		if err := awsRestjson1_deserializeDocumentUnprocessedAccount(&col, value); err != nil {
+		var col types.UnprocessedAccount
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentUnprocessedAccount(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -2335,7 +2341,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:

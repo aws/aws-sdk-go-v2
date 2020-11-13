@@ -48,7 +48,7 @@ type CreateElasticsearchDomainInput struct {
 	// true. See Configuration Advanced Options
 	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options)
 	// for more information.
-	AdvancedOptions map[string]*string
+	AdvancedOptions map[string]string
 
 	// Specifies advanced security options.
 	AdvancedSecurityOptions *types.AdvancedSecurityOptionsInput
@@ -80,7 +80,7 @@ type CreateElasticsearchDomainInput struct {
 
 	// Map of LogType and LogPublishingOption, each containing options to publish a
 	// given type of Elasticsearch log.
-	LogPublishingOptions map[string]*types.LogPublishingOption
+	LogPublishingOptions map[string]types.LogPublishingOption
 
 	// Specifies the NodeToNodeEncryptionOptions.
 	NodeToNodeEncryptionOptions *types.NodeToNodeEncryptionOptions

@@ -311,7 +311,7 @@ type CreateMultipartUploadInput struct {
 	GrantWriteACP *string
 
 	// A map of metadata to store with the object in S3.
-	Metadata map[string]*string
+	Metadata map[string]string
 
 	// Specifies whether you want to apply a Legal Hold to the uploaded object.
 	ObjectLockLegalHoldStatus types.ObjectLockLegalHoldStatus

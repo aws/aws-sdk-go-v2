@@ -901,13 +901,13 @@ func validateLabelSchema(v *types.LabelSchema) error {
 	}
 }
 
-func validateListOfEntities(v []*types.Entity) error {
+func validateListOfEntities(v []types.Entity) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfEntities"}
 	for i := range v {
-		if err := validateEntity(v[i]); err != nil {
+		if err := validateEntity(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -918,13 +918,13 @@ func validateListOfEntities(v []*types.Entity) error {
 	}
 }
 
-func validateListOfModelVersions(v []*types.ModelVersion) error {
+func validateListOfModelVersions(v []types.ModelVersion) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfModelVersions"}
 	for i := range v {
-		if err := validateModelVersion(v[i]); err != nil {
+		if err := validateModelVersion(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1007,13 +1007,13 @@ func validateRule(v *types.Rule) error {
 	}
 }
 
-func validateRuleList(v []*types.Rule) error {
+func validateRuleList(v []types.Rule) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RuleList"}
 	for i := range v {
-		if err := validateRule(v[i]); err != nil {
+		if err := validateRule(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1042,13 +1042,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagList(v []*types.Tag) error {
+func validateTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

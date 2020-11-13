@@ -39,7 +39,7 @@ type GetCrawlersInput struct {
 type GetCrawlersOutput struct {
 
 	// A list of crawler metadata.
-	Crawlers []*types.Crawler
+	Crawlers []types.Crawler
 
 	// A continuation token, if the returned list has not reached the end of those
 	// defined in this customer account.

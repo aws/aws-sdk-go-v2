@@ -32,7 +32,7 @@ type DescribeFindingsInput struct {
 	// The ARN that specifies the finding that you want to describe.
 	//
 	// This member is required.
-	FindingArns []*string
+	FindingArns []string
 
 	// The locale into which you want to translate a finding description,
 	// recommendation, and the short description that identifies the finding.
@@ -45,12 +45,12 @@ type DescribeFindingsOutput struct {
 	// failed item.
 	//
 	// This member is required.
-	FailedItems map[string]*types.FailedItemDetails
+	FailedItems map[string]types.FailedItemDetails
 
 	// Information about the finding.
 	//
 	// This member is required.
-	Findings []*types.Finding
+	Findings []types.Finding
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

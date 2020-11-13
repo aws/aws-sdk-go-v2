@@ -37,7 +37,7 @@ type DeleteLoadBalancerListenersInput struct {
 	// The client port numbers of the listeners.
 	//
 	// This member is required.
-	LoadBalancerPorts []*int32
+	LoadBalancerPorts []int32
 }
 
 // Contains the output of DeleteLoadBalancerListeners.

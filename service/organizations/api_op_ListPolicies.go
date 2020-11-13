@@ -85,7 +85,7 @@ type ListPoliciesOutput struct {
 	// A list of policies that match the filter criteria in the request. The output
 	// list doesn't include the policy contents. To see the content for a policy, see
 	// DescribePolicy.
-	Policies []*types.PolicySummary
+	Policies []types.PolicySummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

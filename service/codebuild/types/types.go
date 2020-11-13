@@ -13,7 +13,7 @@ type BatchRestrictions struct {
 	// batch build. See Build environment compute types
 	// (https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html)
 	// in the AWS CodeBuild User Guide for these values.
-	ComputeTypesAllowed []*string
+	ComputeTypesAllowed []string
 
 	// Specifies the maximum number of builds allowed.
 	MaximumBuildsAllowed *int32
@@ -32,7 +32,7 @@ type Build struct {
 	BuildBatchArn *string
 
 	// Whether the build is complete. True if complete; otherwise, false.
-	BuildComplete *bool
+	BuildComplete bool
 
 	// The number of the build. For each project, the buildNumber of its first build is
 	// 1. The buildNumber of each subsequent build is incremented by 1. If a build is
@@ -80,13 +80,13 @@ type Build struct {
 	Environment *ProjectEnvironment
 
 	// A list of exported environment variables for this build.
-	ExportedEnvironmentVariables []*ExportedEnvironmentVariable
+	ExportedEnvironmentVariables []ExportedEnvironmentVariable
 
 	// An array of ProjectFileSystemLocation objects for a CodeBuild build project. A
 	// ProjectFileSystemLocation object specifies the identifier, location,
 	// mountOptions, mountPoint, and type of a file system created using Amazon Elastic
 	// File System.
-	FileSystemLocations []*ProjectFileSystemLocation
+	FileSystemLocations []ProjectFileSystemLocation
 
 	// The unique ID for the build.
 	Id *string
@@ -113,7 +113,7 @@ type Build struct {
 
 	// Information about all previous build phases that are complete and information
 	// about any current build phase that is not yet complete.
-	Phases []*BuildPhase
+	Phases []BuildPhase
 
 	// The name of the AWS CodeBuild project.
 	ProjectName *string
@@ -122,7 +122,7 @@ type Build struct {
 	QueuedTimeoutInMinutes *int32
 
 	// An array of the ARNs associated with this build's reports.
-	ReportArns []*string
+	ReportArns []string
 
 	// An identifier for the version of this build's source code.
 	//
@@ -137,7 +137,7 @@ type Build struct {
 	ResolvedSourceVersion *string
 
 	// An array of ProjectArtifacts objects.
-	SecondaryArtifacts []*BuildArtifacts
+	SecondaryArtifacts []BuildArtifacts
 
 	// An array of ProjectSourceVersion objects. Each ProjectSourceVersion must be one
 	// of:
@@ -159,10 +159,10 @@ type Build struct {
 	//
 	// * For Amazon Simple Storage Service (Amazon S3): the version ID of the
 	// object that represents the build input ZIP file to use.
-	SecondarySourceVersions []*ProjectSourceVersion
+	SecondarySourceVersions []ProjectSourceVersion
 
 	// An array of ProjectSource objects.
-	SecondarySources []*ProjectSource
+	SecondarySources []ProjectSource
 
 	// The name of a service role used for this build.
 	ServiceRole *string
@@ -243,7 +243,7 @@ type BuildBatch struct {
 	BuildBatchStatus StatusType
 
 	// An array of BuildGroup objects that define the build groups for the batch build.
-	BuildGroups []*BuildGroup
+	BuildGroups []BuildGroup
 
 	// Specifies the maximum amount of time, in minutes, that the build in a batch must
 	// be completed in.
@@ -253,7 +253,7 @@ type BuildBatch struct {
 	Cache *ProjectCache
 
 	// Indicates if the batch build is complete.
-	Complete *bool
+	Complete bool
 
 	// The current phase of the batch build.
 	CurrentPhase *string
@@ -275,7 +275,7 @@ type BuildBatch struct {
 	// ProjectFileSystemLocation object specifies the identifier, location,
 	// mountOptions, mountPoint, and type of a file system created using Amazon Elastic
 	// File System.
-	FileSystemLocations []*ProjectFileSystemLocation
+	FileSystemLocations []ProjectFileSystemLocation
 
 	// The identifier of the batch build.
 	Id *string
@@ -298,7 +298,7 @@ type BuildBatch struct {
 	LogConfig *LogsConfig
 
 	// An array of BuildBatchPhase objects the specify the phases of the batch build.
-	Phases []*BuildBatchPhase
+	Phases []BuildBatchPhase
 
 	// The name of the batch build project.
 	ProjectName *string
@@ -321,7 +321,7 @@ type BuildBatch struct {
 
 	// An array of BuildArtifacts objects the define the build artifacts for this batch
 	// build.
-	SecondaryArtifacts []*BuildArtifacts
+	SecondaryArtifacts []BuildArtifacts
 
 	// An array of ProjectSourceVersion objects. Each ProjectSourceVersion must be one
 	// of:
@@ -343,10 +343,10 @@ type BuildBatch struct {
 	//
 	// * For Amazon Simple Storage Service (Amazon S3): the version ID of the
 	// object that represents the build input ZIP file to use.
-	SecondarySourceVersions []*ProjectSourceVersion
+	SecondarySourceVersions []ProjectSourceVersion
 
 	// An array of ProjectSource objects that define the sources for the batch build.
-	SecondarySources []*ProjectSource
+	SecondarySources []ProjectSource
 
 	// The name of a service role used for builds in the batch.
 	ServiceRole *string
@@ -377,7 +377,7 @@ type BuildBatchPhase struct {
 
 	// Additional information about the batch build phase. Especially to help
 	// troubleshoot a failed btach build.
-	Contexts []*PhaseContext
+	Contexts []PhaseContext
 
 	// How long, in seconds, between the starting and ending times of the batch build's
 	// phase.
@@ -415,17 +415,17 @@ type BuildGroup struct {
 
 	// An array of strings that contain the identifiers of the build groups that this
 	// build group depends on.
-	DependsOn []*string
+	DependsOn []string
 
 	// Contains the identifier of the build group.
 	Identifier *string
 
 	// Specifies if failures in this build group can be ignored.
-	IgnoreFailure *bool
+	IgnoreFailure bool
 
 	// An array of BuildSummary objects that contain summaries of previous build
 	// groups.
-	PriorBuildSummaryList []*BuildSummary
+	PriorBuildSummaryList []BuildSummary
 }
 
 // Information about a build that could not be successfully deleted.
@@ -443,7 +443,7 @@ type BuildPhase struct {
 
 	// Additional information about a build phase, especially to help troubleshoot a
 	// failed build.
-	Contexts []*PhaseContext
+	Contexts []PhaseContext
 
 	// How long, in seconds, between the starting and ending times of the build's
 	// phase.
@@ -548,7 +548,7 @@ type BuildSummary struct {
 
 	// An array of ResolvedArtifact objects that represents the secondary build
 	// artifacts for the build group.
-	SecondaryArtifacts []*ResolvedArtifact
+	SecondaryArtifacts []ResolvedArtifact
 }
 
 // Information about Amazon CloudWatch Logs for a build project.
@@ -663,7 +663,7 @@ type EnvironmentImage struct {
 	Name *string
 
 	// A list of environment image versions.
-	Versions []*string
+	Versions []string
 }
 
 // A set of Docker images that are related by programming language and are managed
@@ -672,7 +672,7 @@ type EnvironmentLanguage struct {
 
 	// The list of Docker images that are related by the specified programming
 	// language.
-	Images []*EnvironmentImage
+	Images []EnvironmentImage
 
 	// The programming language for the Docker images.
 	Language LanguageType
@@ -683,7 +683,7 @@ type EnvironmentLanguage struct {
 type EnvironmentPlatform struct {
 
 	// The list of programming languages that are available for the specified platform.
-	Languages []*EnvironmentLanguage
+	Languages []EnvironmentLanguage
 
 	// The platform's name.
 	Platform PlatformType
@@ -859,7 +859,7 @@ type Project struct {
 	// ProjectFileSystemLocation object specifies the identifier, location,
 	// mountOptions, mountPoint, and type of a file system created using Amazon Elastic
 	// File System.
-	FileSystemLocations []*ProjectFileSystemLocation
+	FileSystemLocations []ProjectFileSystemLocation
 
 	// When the build project's settings were last modified, expressed in Unix time
 	// format.
@@ -876,15 +876,15 @@ type Project struct {
 	QueuedTimeoutInMinutes *int32
 
 	// An array of ProjectArtifacts objects.
-	SecondaryArtifacts []*ProjectArtifacts
+	SecondaryArtifacts []ProjectArtifacts
 
 	// An array of ProjectSourceVersion objects. If secondarySourceVersions is
 	// specified at the build level, then they take over these secondarySourceVersions
 	// (at the project level).
-	SecondarySourceVersions []*ProjectSourceVersion
+	SecondarySourceVersions []ProjectSourceVersion
 
 	// An array of ProjectSource objects.
-	SecondarySources []*ProjectSource
+	SecondarySources []ProjectSource
 
 	// The ARN of the AWS Identity and Access Management (IAM) role that enables AWS
 	// CodeBuild to interact with dependent AWS services on behalf of the AWS account.
@@ -925,7 +925,7 @@ type Project struct {
 	// A list of tag key and value pairs associated with this build project. These tags
 	// are available for use by AWS services that support AWS CodeBuild build project
 	// tags.
-	Tags []*Tag
+	Tags []Tag
 
 	// How long, in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait before
 	// timing out any related build that did not get marked as completed. The default
@@ -1088,7 +1088,7 @@ type ProjectBadge struct {
 
 	// Set this to true to generate a publicly accessible URL for your project's build
 	// badge.
-	BadgeEnabled *bool
+	BadgeEnabled bool
 
 	// The publicly-accessible URL through which you can access the build badge for
 	// your project. The publicly accessible URL through which you can access the build
@@ -1265,7 +1265,7 @@ type ProjectEnvironment struct {
 
 	// A set of environment variables to make available to builds for this build
 	// project.
-	EnvironmentVariables []*EnvironmentVariable
+	EnvironmentVariables []EnvironmentVariable
 
 	// The type of credentials AWS CodeBuild uses to pull images in your build. There
 	// are two valid values:
@@ -1620,7 +1620,7 @@ type ReportGroup struct {
 	// A list of tag key and value pairs associated with this report group. These tags
 	// are available for use by AWS services that support AWS CodeBuild report group
 	// tags.
-	Tags []*Tag
+	Tags []Tag
 
 	// The type of the ReportGroup. The one valid value is TEST.
 	Type ReportType
@@ -1803,7 +1803,7 @@ type TestReportSummary struct {
 	// results in this TestReportSummary.
 	//
 	// This member is required.
-	StatusCounts map[string]*int32
+	StatusCounts map[string]int32
 
 	// The number of test cases in this TestReportSummary. The total includes truncated
 	// test cases.
@@ -1816,10 +1816,10 @@ type TestReportSummary struct {
 type VpcConfig struct {
 
 	// A list of one or more security groups IDs in your Amazon VPC.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// A list of one or more subnet IDs in your Amazon VPC.
-	Subnets []*string
+	Subnets []string
 
 	// The ID of the Amazon VPC.
 	VpcId *string
@@ -1842,7 +1842,7 @@ type Webhook struct {
 	// triggered. At least one WebhookFilter in the array must specify EVENT as its
 	// type. For a build to be triggered, at least one filter group in the filterGroups
 	// array must pass. For a filter group to pass, each of its filters must pass.
-	FilterGroups [][]*WebhookFilter
+	FilterGroups [][]WebhookFilter
 
 	// A timestamp that indicates the last time a repository's secret token was
 	// modified.

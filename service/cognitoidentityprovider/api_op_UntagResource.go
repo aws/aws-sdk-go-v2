@@ -37,7 +37,7 @@ type UntagResourceInput struct {
 	// The keys of the tags to remove from the user pool.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 type UntagResourceOutput struct {

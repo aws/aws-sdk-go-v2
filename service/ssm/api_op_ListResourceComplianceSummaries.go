@@ -32,11 +32,11 @@ func (c *Client) ListResourceComplianceSummaries(ctx context.Context, params *Li
 type ListResourceComplianceSummariesInput struct {
 
 	// One or more filters. Use a filter to return a more specific list of results.
-	Filters []*types.ComplianceStringFilter
+	Filters []types.ComplianceStringFilter
 
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
-	MaxResults *int32
+	MaxResults int32
 
 	// A token to start the list. Use this token to get the next set of results.
 	NextToken *string
@@ -52,7 +52,7 @@ type ListResourceComplianceSummariesOutput struct {
 	// includes information about compliant and non-compliant State Manager
 	// associations, patch status, or custom items according to the filter criteria
 	// that you specify.
-	ResourceComplianceSummaryItems []*types.ResourceComplianceSummaryItem
+	ResourceComplianceSummaryItems []types.ResourceComplianceSummaryItem
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

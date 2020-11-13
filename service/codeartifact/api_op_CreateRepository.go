@@ -47,14 +47,14 @@ type CreateRepositoryInput struct {
 	DomainOwner *string
 
 	// One or more tag key-value pairs for the repository.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// A list of upstream repositories to associate with the repository. The order of
 	// the upstream repositories in the list determines their priority order when AWS
 	// CodeArtifact looks for a requested package version. For more information, see
 	// Working with upstream repositories
 	// (https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html).
-	Upstreams []*types.UpstreamRepository
+	Upstreams []types.UpstreamRepository
 }
 
 type CreateRepositoryOutput struct {

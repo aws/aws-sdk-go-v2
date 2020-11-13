@@ -32,16 +32,16 @@ type ValidateSecurityProfileBehaviorsInput struct {
 	// Specifies the behaviors that, when violated by a device (thing), cause an alert.
 	//
 	// This member is required.
-	Behaviors []*types.Behavior
+	Behaviors []types.Behavior
 }
 
 type ValidateSecurityProfileBehaviorsOutput struct {
 
 	// True if the behaviors were valid.
-	Valid *bool
+	Valid bool
 
 	// The list of any errors found in the behaviors.
-	ValidationErrors []*types.ValidationError
+	ValidationErrors []types.ValidationError
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -31,7 +31,7 @@ type RemoveIpRoutesInput struct {
 	// IP address blocks that you want to remove.
 	//
 	// This member is required.
-	CidrIps []*string
+	CidrIps []string
 
 	// Identifier (ID) of the directory from which you want to remove the IP addresses.
 	//

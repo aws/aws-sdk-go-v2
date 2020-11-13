@@ -42,7 +42,7 @@ type ListSitesOutput struct {
 	NextToken *string
 
 	// Information about the sites.
-	Sites []*types.Site
+	Sites []types.Site
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

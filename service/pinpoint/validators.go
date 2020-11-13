@@ -3026,12 +3026,6 @@ func validateGPSCoordinates(v *types.GPSCoordinates) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GPSCoordinates"}
-	if v.Longitude == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Longitude"))
-	}
-	if v.Latitude == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Latitude"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3063,9 +3057,6 @@ func validateHoldoutActivity(v *types.HoldoutActivity) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "HoldoutActivity"}
-	if v.Percentage == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Percentage"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3094,13 +3085,13 @@ func validateImportJobRequest(v *types.ImportJobRequest) error {
 	}
 }
 
-func validateListOfMultiConditionalBranch(v []*types.MultiConditionalBranch) error {
+func validateListOfMultiConditionalBranch(v []types.MultiConditionalBranch) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfMultiConditionalBranch"}
 	for i := range v {
-		if err := validateMultiConditionalBranch(v[i]); err != nil {
+		if err := validateMultiConditionalBranch(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3111,13 +3102,13 @@ func validateListOfMultiConditionalBranch(v []*types.MultiConditionalBranch) err
 	}
 }
 
-func validateListOfSegmentDimensions(v []*types.SegmentDimensions) error {
+func validateListOfSegmentDimensions(v []types.SegmentDimensions) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfSegmentDimensions"}
 	for i := range v {
-		if err := validateSegmentDimensions(v[i]); err != nil {
+		if err := validateSegmentDimensions(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3128,13 +3119,13 @@ func validateListOfSegmentDimensions(v []*types.SegmentDimensions) error {
 	}
 }
 
-func validateListOfSegmentGroup(v []*types.SegmentGroup) error {
+func validateListOfSegmentGroup(v []types.SegmentGroup) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfSegmentGroup"}
 	for i := range v {
-		if err := validateSegmentGroup(v[i]); err != nil {
+		if err := validateSegmentGroup(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3145,13 +3136,13 @@ func validateListOfSegmentGroup(v []*types.SegmentGroup) error {
 	}
 }
 
-func validateListOfSegmentReference(v []*types.SegmentReference) error {
+func validateListOfSegmentReference(v []types.SegmentReference) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfSegmentReference"}
 	for i := range v {
-		if err := validateSegmentReference(v[i]); err != nil {
+		if err := validateSegmentReference(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3162,13 +3153,13 @@ func validateListOfSegmentReference(v []*types.SegmentReference) error {
 	}
 }
 
-func validateListOfSimpleCondition(v []*types.SimpleCondition) error {
+func validateListOfSimpleCondition(v []types.SimpleCondition) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfSimpleCondition"}
 	for i := range v {
-		if err := validateSimpleCondition(v[i]); err != nil {
+		if err := validateSimpleCondition(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3179,13 +3170,13 @@ func validateListOfSimpleCondition(v []*types.SimpleCondition) error {
 	}
 }
 
-func validateListOfWriteTreatmentResource(v []*types.WriteTreatmentResource) error {
+func validateListOfWriteTreatmentResource(v []types.WriteTreatmentResource) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfWriteTreatmentResource"}
 	for i := range v {
-		if err := validateWriteTreatmentResource(v[i]); err != nil {
+		if err := validateWriteTreatmentResource(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3196,13 +3187,14 @@ func validateListOfWriteTreatmentResource(v []*types.WriteTreatmentResource) err
 	}
 }
 
-func validateMapOfActivity(v map[string]*types.Activity) error {
+func validateMapOfActivity(v map[string]types.Activity) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MapOfActivity"}
 	for key := range v {
-		if err := validateActivity(v[key]); err != nil {
+		value := v[key]
+		if err := validateActivity(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3213,13 +3205,14 @@ func validateMapOfActivity(v map[string]*types.Activity) error {
 	}
 }
 
-func validateMapOfAttributeDimension(v map[string]*types.AttributeDimension) error {
+func validateMapOfAttributeDimension(v map[string]types.AttributeDimension) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MapOfAttributeDimension"}
 	for key := range v {
-		if err := validateAttributeDimension(v[key]); err != nil {
+		value := v[key]
+		if err := validateAttributeDimension(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3230,13 +3223,14 @@ func validateMapOfAttributeDimension(v map[string]*types.AttributeDimension) err
 	}
 }
 
-func validateMapOfEvent(v map[string]*types.Event) error {
+func validateMapOfEvent(v map[string]types.Event) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MapOfEvent"}
 	for key := range v {
-		if err := validateEvent(v[key]); err != nil {
+		value := v[key]
+		if err := validateEvent(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3247,13 +3241,14 @@ func validateMapOfEvent(v map[string]*types.Event) error {
 	}
 }
 
-func validateMapOfEventsBatch(v map[string]*types.EventsBatch) error {
+func validateMapOfEventsBatch(v map[string]types.EventsBatch) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MapOfEventsBatch"}
 	for key := range v {
-		if err := validateEventsBatch(v[key]); err != nil {
+		value := v[key]
+		if err := validateEventsBatch(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3264,13 +3259,14 @@ func validateMapOfEventsBatch(v map[string]*types.EventsBatch) error {
 	}
 }
 
-func validateMapOfMetricDimension(v map[string]*types.MetricDimension) error {
+func validateMapOfMetricDimension(v map[string]types.MetricDimension) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MapOfMetricDimension"}
 	for key := range v {
-		if err := validateMetricDimension(v[key]); err != nil {
+		value := v[key]
+		if err := validateMetricDimension(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3301,9 +3297,6 @@ func validateMetricDimension(v *types.MetricDimension) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MetricDimension"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if v.ComparisonOperator == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ComparisonOperator"))
 	}
@@ -3812,9 +3805,6 @@ func validateWriteTreatmentResource(v *types.WriteTreatmentResource) error {
 		if err := validateSchedule(v.Schedule); err != nil {
 			invalidParams.AddNested("Schedule", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.SizePercent == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SizePercent"))
 	}
 	if v.CustomDeliveryConfiguration != nil {
 		if err := validateCustomDeliveryConfiguration(v.CustomDeliveryConfiguration); err != nil {

@@ -50,7 +50,7 @@ type DescribeReceiptRuleSetOutput struct {
 	Metadata *types.ReceiptRuleSetMetadata
 
 	// A list of the receipt rules that belong to the specified receipt rule set.
-	Rules []*types.ReceiptRule
+	Rules []types.ReceiptRule
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

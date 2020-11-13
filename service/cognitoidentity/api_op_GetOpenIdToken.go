@@ -42,7 +42,7 @@ type GetOpenIdTokenInput struct {
 	// returned from the provider's authflow. For accounts.google.com, an Amazon
 	// Cognito user pool provider, or any other OpenId Connect provider, always include
 	// the id_token.
-	Logins map[string]*string
+	Logins map[string]string
 }
 
 // Returned in response to a successful GetOpenIdToken request.

@@ -58,7 +58,7 @@ type DescribeReplicationInstanceTaskLogsOutput struct {
 
 	// An array of replication task log metadata. Each member of the array contains the
 	// replication task name, ARN, and task log size (in bytes).
-	ReplicationInstanceTaskLogs []*types.ReplicationInstanceTaskLog
+	ReplicationInstanceTaskLogs []types.ReplicationInstanceTaskLog
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

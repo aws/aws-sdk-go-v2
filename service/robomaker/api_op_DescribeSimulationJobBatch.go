@@ -53,11 +53,11 @@ type DescribeSimulationJobBatchOutput struct {
 	CreatedAt *time.Time
 
 	// A list of created simulation job summaries.
-	CreatedRequests []*types.SimulationJobSummary
+	CreatedRequests []types.SimulationJobSummary
 
 	// A list of failed create simulation job requests. The request failed to be
 	// created into a simulation job. Failed requests do not have a simulation job ID.
-	FailedRequests []*types.FailedCreateSimulationJobRequest
+	FailedRequests []types.FailedCreateSimulationJobRequest
 
 	// The failure code of the simulation job batch.
 	FailureCode types.SimulationJobBatchErrorCode
@@ -71,7 +71,7 @@ type DescribeSimulationJobBatchOutput struct {
 
 	// A list of pending simulation job requests. These requests have not yet been
 	// created into simulation jobs.
-	PendingRequests []*types.SimulationJobRequest
+	PendingRequests []types.SimulationJobRequest
 
 	// The status of the batch. Pending The simulation job batch request is pending.
 	// InProgress The simulation job batch is in progress. Failed The simulation job
@@ -92,7 +92,7 @@ type DescribeSimulationJobBatchOutput struct {
 
 	// A map that contains tag keys and tag values that are attached to the simulation
 	// job batch.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

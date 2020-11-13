@@ -39,7 +39,7 @@ type ListServiceActionsInput struct {
 	AcceptLanguage *string
 
 	// The maximum number of items to return with this call.
-	PageSize *int32
+	PageSize int32
 
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
@@ -54,7 +54,7 @@ type ListServiceActionsOutput struct {
 
 	// An object containing information about the service actions associated with the
 	// provisioning artifact.
-	ServiceActionSummaries []*types.ServiceActionSummary
+	ServiceActionSummaries []types.ServiceActionSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

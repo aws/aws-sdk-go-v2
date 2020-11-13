@@ -39,7 +39,7 @@ type ListWebACLsInput struct {
 	// request. If you have more WebACL objects than the number that you specify for
 	// Limit, the response includes a NextMarker value that you can use to get another
 	// batch of WebACL objects.
-	Limit *int32
+	Limit int32
 
 	// If you specify a value for Limit and you have more WebACL objects than the
 	// number that you specify for Limit, AWS WAF returns a NextMarker value in the
@@ -58,7 +58,7 @@ type ListWebACLsOutput struct {
 	NextMarker *string
 
 	// An array of WebACLSummary objects.
-	WebACLs []*types.WebACLSummary
+	WebACLs []types.WebACLSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

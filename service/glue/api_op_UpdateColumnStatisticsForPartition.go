@@ -33,7 +33,7 @@ type UpdateColumnStatisticsForPartitionInput struct {
 	// A list of the column statistics.
 	//
 	// This member is required.
-	ColumnStatisticsList []*types.ColumnStatistics
+	ColumnStatisticsList []types.ColumnStatistics
 
 	// The name of the catalog database where the partitions reside.
 	//
@@ -43,7 +43,7 @@ type UpdateColumnStatisticsForPartitionInput struct {
 	// A list of partition values identifying the partition.
 	//
 	// This member is required.
-	PartitionValues []*string
+	PartitionValues []string
 
 	// The name of the partitions' table.
 	//
@@ -58,7 +58,7 @@ type UpdateColumnStatisticsForPartitionInput struct {
 type UpdateColumnStatisticsForPartitionOutput struct {
 
 	// Error occurred during updating column statistics data.
-	Errors []*types.ColumnStatisticsError
+	Errors []types.ColumnStatisticsError
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

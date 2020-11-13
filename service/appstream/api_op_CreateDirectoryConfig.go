@@ -39,7 +39,7 @@ type CreateDirectoryConfigInput struct {
 	// The distinguished names of the organizational units for computer accounts.
 	//
 	// This member is required.
-	OrganizationalUnitDistinguishedNames []*string
+	OrganizationalUnitDistinguishedNames []string
 
 	// The credentials for the service account used by the fleet or image builder to
 	// connect to the directory.

@@ -48,7 +48,7 @@ type ListPermissionsOutput struct {
 	NextToken *string
 
 	// Information about the permissions.
-	Permissions []*types.ResourceSharePermissionSummary
+	Permissions []types.ResourceSharePermissionSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

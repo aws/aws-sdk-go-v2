@@ -13,7 +13,7 @@ type Alias struct {
 	Name *string
 
 	// A list of names for the alias, including the canonical name.
-	Names []*string
+	Names []string
 
 	// The type of the alias.
 	Type *string
@@ -66,7 +66,7 @@ type BackendConnectionErrors struct {
 type Edge struct {
 
 	// Aliases for the edge.
-	Aliases []*Alias
+	Aliases []Alias
 
 	// The end time of the last segment on the edge.
 	EndTime *time.Time
@@ -75,7 +75,7 @@ type Edge struct {
 	ReferenceId *int32
 
 	// A histogram that maps the spread of client response times on an edge.
-	ResponseTimeHistogram []*HistogramEntry
+	ResponseTimeHistogram []HistogramEntry
 
 	// The start time of the first segment on the edge.
 	StartTime *time.Time
@@ -126,7 +126,7 @@ type ErrorRootCause struct {
 
 	// A list of services corresponding to an error. A service identifies a segment and
 	// it contains a name, account ID, type, and inferred flag.
-	Services []*ErrorRootCauseService
+	Services []ErrorRootCauseService
 }
 
 // A collection of segments and corresponding subsegments associated to a trace
@@ -134,7 +134,7 @@ type ErrorRootCause struct {
 type ErrorRootCauseEntity struct {
 
 	// The types and messages of the exceptions.
-	Exceptions []*RootCauseException
+	Exceptions []RootCauseException
 
 	// The name of the entity.
 	Name *string
@@ -150,7 +150,7 @@ type ErrorRootCauseService struct {
 	AccountId *string
 
 	// The path of root cause entities found on the service.
-	EntityPath []*ErrorRootCauseEntity
+	EntityPath []ErrorRootCauseEntity
 
 	// A Boolean value indicating if the service is inferred from the trace.
 	Inferred *bool
@@ -159,7 +159,7 @@ type ErrorRootCauseService struct {
 	Name *string
 
 	// A collection of associated service names.
-	Names []*string
+	Names []string
 
 	// The type associated to the service.
 	Type *string
@@ -186,7 +186,7 @@ type FaultRootCause struct {
 
 	// A list of corresponding services. A service identifies a segment and it contains
 	// a name, account ID, type, and inferred flag.
-	Services []*FaultRootCauseService
+	Services []FaultRootCauseService
 }
 
 // A collection of segments and corresponding subsegments associated to a trace
@@ -194,7 +194,7 @@ type FaultRootCause struct {
 type FaultRootCauseEntity struct {
 
 	// The types and messages of the exceptions.
-	Exceptions []*RootCauseException
+	Exceptions []RootCauseException
 
 	// The name of the entity.
 	Name *string
@@ -210,7 +210,7 @@ type FaultRootCauseService struct {
 	AccountId *string
 
 	// The path of root cause entities found on the service.
-	EntityPath []*FaultRootCauseEntity
+	EntityPath []FaultRootCauseEntity
 
 	// A Boolean value indicating if the service is inferred from the trace.
 	Inferred *bool
@@ -219,7 +219,7 @@ type FaultRootCauseService struct {
 	Name *string
 
 	// A collection of associated service names.
-	Names []*string
+	Names []string
 
 	// The type associated to the service.
 	Type *string
@@ -288,10 +288,10 @@ type GroupSummary struct {
 type HistogramEntry struct {
 
 	// The prevalence of the entry.
-	Count *int32
+	Count int32
 
 	// The value of the entry.
-	Value *float64
+	Value float64
 }
 
 // Information about an HTTP request.
@@ -347,7 +347,7 @@ type ResponseTimeRootCause struct {
 
 	// A list of corresponding services. A service identifies a segment and contains a
 	// name, account ID, type, and inferred flag.
-	Services []*ResponseTimeRootCauseService
+	Services []ResponseTimeRootCauseService
 }
 
 // A collection of segments and corresponding subsegments associated to a response
@@ -371,7 +371,7 @@ type ResponseTimeRootCauseService struct {
 	AccountId *string
 
 	// The path of root cause entities found on the service.
-	EntityPath []*ResponseTimeRootCauseEntity
+	EntityPath []ResponseTimeRootCauseEntity
 
 	// A Boolean value indicating if the service is inferred from the trace.
 	Inferred *bool
@@ -380,7 +380,7 @@ type ResponseTimeRootCauseService struct {
 	Name *string
 
 	// A collection of associated service names.
-	Names []*string
+	Names []string
 
 	// The type associated to the service.
 	Type *string
@@ -405,7 +405,7 @@ type SamplingRule struct {
 	// exhausted.
 	//
 	// This member is required.
-	FixedRate *float64
+	FixedRate float64
 
 	// Matches the HTTP method of a request.
 	//
@@ -420,14 +420,14 @@ type SamplingRule struct {
 	// The priority of the sampling rule.
 	//
 	// This member is required.
-	Priority *int32
+	Priority int32
 
 	// A fixed number of matching requests to instrument per second, prior to applying
 	// the fixed rate. The reservoir is not used directly by services, but applies to
 	// all services using the rule collectively.
 	//
 	// This member is required.
-	ReservoirSize *int32
+	ReservoirSize int32
 
 	// Matches the ARN of the AWS resource on which the service runs.
 	//
@@ -452,10 +452,10 @@ type SamplingRule struct {
 	// The version of the sampling rule format (1).
 	//
 	// This member is required.
-	Version *int32
+	Version int32
 
 	// Matches attributes derived from the request.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// The ARN of the sampling rule. Specify a rule by either name or ARN, but not
 	// both.
@@ -483,7 +483,7 @@ type SamplingRuleRecord struct {
 type SamplingRuleUpdate struct {
 
 	// Matches attributes derived from the request.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// The percentage of matching requests to instrument, after the reservoir is
 	// exhausted.
@@ -537,7 +537,7 @@ type SamplingStatisticsDocument struct {
 	// The number of requests that matched the rule.
 	//
 	// This member is required.
-	RequestCount *int32
+	RequestCount int32
 
 	// The name of the sampling rule.
 	//
@@ -547,7 +547,7 @@ type SamplingStatisticsDocument struct {
 	// The number of requests recorded.
 	//
 	// This member is required.
-	SampledCount *int32
+	SampledCount int32
 
 	// The current time.
 	//
@@ -555,7 +555,7 @@ type SamplingStatisticsDocument struct {
 	Timestamp *time.Time
 
 	// The number of requests recorded with borrowed reservoir quota.
-	BorrowCount *int32
+	BorrowCount int32
 }
 
 // Aggregated request sampling data for a sampling rule across all services for a
@@ -563,16 +563,16 @@ type SamplingStatisticsDocument struct {
 type SamplingStatisticSummary struct {
 
 	// The number of requests recorded with borrowed reservoir quota.
-	BorrowCount *int32
+	BorrowCount int32
 
 	// The number of requests that matched the rule.
-	RequestCount *int32
+	RequestCount int32
 
 	// The name of the sampling rule.
 	RuleName *string
 
 	// The number of requests recorded.
-	SampledCount *int32
+	SampledCount int32
 
 	// The start time of the reporting window.
 	Timestamp *time.Time
@@ -595,7 +595,7 @@ type SamplingTargetDocument struct {
 
 	// The percentage of matching requests to instrument, after the reservoir is
 	// exhausted.
-	FixedRate *float64
+	FixedRate float64
 
 	// The number of seconds for the service to wait before getting sampling targets
 	// again.
@@ -636,10 +636,10 @@ type Service struct {
 	AccountId *string
 
 	// A histogram that maps the spread of service durations.
-	DurationHistogram []*HistogramEntry
+	DurationHistogram []HistogramEntry
 
 	// Connections to downstream services.
-	Edges []*Edge
+	Edges []Edge
 
 	// The end time of the last segment that the service generated.
 	EndTime *time.Time
@@ -648,13 +648,13 @@ type Service struct {
 	Name *string
 
 	// A list of names for the service, including the canonical name.
-	Names []*string
+	Names []string
 
 	// Identifier for the service. Unique within the service map.
 	ReferenceId *int32
 
 	// A histogram that maps the spread of service response times.
-	ResponseTimeHistogram []*HistogramEntry
+	ResponseTimeHistogram []HistogramEntry
 
 	// Indicates that the service was the first service to process a request.
 	Root *bool
@@ -696,7 +696,7 @@ type ServiceId struct {
 	Name *string
 
 	//
-	Names []*string
+	Names []string
 
 	//
 	Type *string
@@ -782,7 +782,7 @@ type TimeSeriesServiceStatistics struct {
 	EdgeSummaryStatistics *EdgeStatistics
 
 	// The response time histogram for the selected entities.
-	ResponseTimeHistogram []*HistogramEntry
+	ResponseTimeHistogram []HistogramEntry
 
 	// Response statistics for a service.
 	ServiceSummaryStatistics *ServiceStatistics
@@ -808,17 +808,17 @@ type Trace struct {
 	LimitExceeded *bool
 
 	// Segment documents for the segments and subsegments that comprise the trace.
-	Segments []*Segment
+	Segments []Segment
 }
 
 // Metadata generated from the segment documents in a trace.
 type TraceSummary struct {
 
 	// Annotations from the trace's segment documents.
-	Annotations map[string][]*ValueWithServiceIds
+	Annotations map[string][]ValueWithServiceIds
 
 	// A list of Availability Zones for any zone corresponding to the trace segments.
-	AvailabilityZones []*AvailabilityZoneDetail
+	AvailabilityZones []AvailabilityZoneDetail
 
 	// The length of time in seconds between the start time of the root segment and the
 	// end time of the last segment that completed.
@@ -828,10 +828,10 @@ type TraceSummary struct {
 	EntryPoint *ServiceId
 
 	// A collection of ErrorRootCause structures corresponding to the trace segments.
-	ErrorRootCauses []*ErrorRootCause
+	ErrorRootCauses []ErrorRootCause
 
 	// A collection of FaultRootCause structures corresponding to the trace segments.
-	FaultRootCauses []*FaultRootCause
+	FaultRootCauses []FaultRootCause
 
 	// The root segment document has a 400 series error.
 	HasError *bool
@@ -850,7 +850,7 @@ type TraceSummary struct {
 	Id *string
 
 	// A list of EC2 instance IDs for any instance corresponding to the trace segments.
-	InstanceIds []*InstanceIdDetail
+	InstanceIds []InstanceIdDetail
 
 	// One or more of the segment documents is in progress.
 	IsPartial *bool
@@ -859,7 +859,7 @@ type TraceSummary struct {
 	MatchedEventTime *time.Time
 
 	// A list of resource ARNs for any resource corresponding to the trace segments.
-	ResourceARNs []*ResourceARNDetail
+	ResourceARNs []ResourceARNDetail
 
 	// The length of time in seconds between the start and end times of the root
 	// segment. If the service performs work asynchronously, the response time measures
@@ -869,23 +869,23 @@ type TraceSummary struct {
 
 	// A collection of ResponseTimeRootCause structures corresponding to the trace
 	// segments.
-	ResponseTimeRootCauses []*ResponseTimeRootCause
+	ResponseTimeRootCauses []ResponseTimeRootCause
 
 	// The revision number of a trace.
-	Revision *int32
+	Revision int32
 
 	// Service IDs from the trace's segment documents.
-	ServiceIds []*ServiceId
+	ServiceIds []ServiceId
 
 	// Users from the trace's segment documents.
-	Users []*TraceUser
+	Users []TraceUser
 }
 
 // Information about a user recorded in segment documents.
 type TraceUser struct {
 
 	// Services that the user's request hit.
-	ServiceIds []*ServiceId
+	ServiceIds []ServiceId
 
 	// The user's name.
 	UserName *string
@@ -925,5 +925,5 @@ type ValueWithServiceIds struct {
 	AnnotationValue *AnnotationValue
 
 	// Services to which the annotation applies.
-	ServiceIds []*ServiceId
+	ServiceIds []ServiceId
 }

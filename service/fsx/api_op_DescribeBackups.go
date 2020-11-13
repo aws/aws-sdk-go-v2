@@ -51,10 +51,10 @@ type DescribeBackupsInput struct {
 
 	// IDs of the backups you want to retrieve (String). This overrides any filters. If
 	// any IDs are not found, BackupNotFound will be thrown.
-	BackupIds []*string
+	BackupIds []string
 
 	// Filters structure. Supported names are file-system-id and backup-type.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// Maximum number of backups to return in the response (integer). This parameter
 	// value must be greater than 0. The number of items that Amazon FSx returns is the
@@ -72,7 +72,7 @@ type DescribeBackupsInput struct {
 type DescribeBackupsOutput struct {
 
 	// Any array of backups.
-	Backups []*types.Backup
+	Backups []types.Backup
 
 	// This is present if there are more backups than returned in the response
 	// (String). You can use the NextToken value in the later request to fetch the

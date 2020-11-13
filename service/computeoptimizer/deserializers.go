@@ -1536,7 +1536,7 @@ func awsAwsjson10_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1580,7 +1580,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupConfiguration(v **types.Aut
 				if err != nil {
 					return err
 				}
-				sv.DesiredCapacity = ptr.Int32(int32(i64))
+				sv.DesiredCapacity = int32(i64)
 			}
 
 		case "instanceType":
@@ -1589,7 +1589,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupConfiguration(v **types.Aut
 				if !ok {
 					return fmt.Errorf("expected InstanceType to be of type string, got %T instead", value)
 				}
-				sv.InstanceType = &jtv
+				sv.InstanceType = ptr.String(jtv)
 			}
 
 		case "maxSize":
@@ -1602,7 +1602,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupConfiguration(v **types.Aut
 				if err != nil {
 					return err
 				}
-				sv.MaxSize = ptr.Int32(int32(i64))
+				sv.MaxSize = int32(i64)
 			}
 
 		case "minSize":
@@ -1615,7 +1615,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupConfiguration(v **types.Aut
 				if err != nil {
 					return err
 				}
-				sv.MinSize = ptr.Int32(int32(i64))
+				sv.MinSize = int32(i64)
 			}
 
 		default:
@@ -1655,7 +1655,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendation(v **types.Au
 				if !ok {
 					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
 				}
-				sv.AccountId = &jtv
+				sv.AccountId = ptr.String(jtv)
 			}
 
 		case "autoScalingGroupArn":
@@ -1664,7 +1664,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendation(v **types.Au
 				if !ok {
 					return fmt.Errorf("expected AutoScalingGroupArn to be of type string, got %T instead", value)
 				}
-				sv.AutoScalingGroupArn = &jtv
+				sv.AutoScalingGroupArn = ptr.String(jtv)
 			}
 
 		case "autoScalingGroupName":
@@ -1673,7 +1673,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendation(v **types.Au
 				if !ok {
 					return fmt.Errorf("expected AutoScalingGroupName to be of type string, got %T instead", value)
 				}
-				sv.AutoScalingGroupName = &jtv
+				sv.AutoScalingGroupName = ptr.String(jtv)
 			}
 
 		case "currentConfiguration":
@@ -1713,7 +1713,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendation(v **types.Au
 				if err != nil {
 					return err
 				}
-				sv.LookBackPeriodInDays = &f64
+				sv.LookBackPeriodInDays = f64
 			}
 
 		case "recommendationOptions":
@@ -1772,7 +1772,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendationOption(v **ty
 				if err != nil {
 					return err
 				}
-				sv.PerformanceRisk = &f64
+				sv.PerformanceRisk = f64
 			}
 
 		case "projectedUtilizationMetrics":
@@ -1790,7 +1790,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendationOption(v **ty
 				if err != nil {
 					return err
 				}
-				sv.Rank = ptr.Int32(int32(i64))
+				sv.Rank = int32(i64)
 			}
 
 		default:
@@ -1802,7 +1802,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendationOption(v **ty
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendationOptions(v *[]*types.AutoScalingGroupRecommendationOption, value interface{}) error {
+func awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendationOptions(v *[]types.AutoScalingGroupRecommendationOption, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1815,18 +1815,20 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendationOptions(v *[]
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.AutoScalingGroupRecommendationOption
+	var cv []types.AutoScalingGroupRecommendationOption
 	if *v == nil {
-		cv = []*types.AutoScalingGroupRecommendationOption{}
+		cv = []types.AutoScalingGroupRecommendationOption{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.AutoScalingGroupRecommendationOption
-		if err := awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendationOption(&col, value); err != nil {
+		var col types.AutoScalingGroupRecommendationOption
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendationOption(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -1834,7 +1836,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendationOptions(v *[]
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendations(v *[]*types.AutoScalingGroupRecommendation, value interface{}) error {
+func awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendations(v *[]types.AutoScalingGroupRecommendation, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1847,18 +1849,20 @@ func awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendations(v *[]*types
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.AutoScalingGroupRecommendation
+	var cv []types.AutoScalingGroupRecommendation
 	if *v == nil {
-		cv = []*types.AutoScalingGroupRecommendation{}
+		cv = []types.AutoScalingGroupRecommendation{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.AutoScalingGroupRecommendation
-		if err := awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendation(&col, value); err != nil {
+		var col types.AutoScalingGroupRecommendation
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentAutoScalingGroupRecommendation(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -1930,7 +1934,7 @@ func awsAwsjson10_deserializeDocumentGetRecommendationError(v **types.GetRecomme
 				if !ok {
 					return fmt.Errorf("expected Code to be of type string, got %T instead", value)
 				}
-				sv.Code = &jtv
+				sv.Code = ptr.String(jtv)
 			}
 
 		case "identifier":
@@ -1939,7 +1943,7 @@ func awsAwsjson10_deserializeDocumentGetRecommendationError(v **types.GetRecomme
 				if !ok {
 					return fmt.Errorf("expected Identifier to be of type string, got %T instead", value)
 				}
-				sv.Identifier = &jtv
+				sv.Identifier = ptr.String(jtv)
 			}
 
 		case "message":
@@ -1948,7 +1952,7 @@ func awsAwsjson10_deserializeDocumentGetRecommendationError(v **types.GetRecomme
 				if !ok {
 					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1960,7 +1964,7 @@ func awsAwsjson10_deserializeDocumentGetRecommendationError(v **types.GetRecomme
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentGetRecommendationErrors(v *[]*types.GetRecommendationError, value interface{}) error {
+func awsAwsjson10_deserializeDocumentGetRecommendationErrors(v *[]types.GetRecommendationError, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1973,18 +1977,20 @@ func awsAwsjson10_deserializeDocumentGetRecommendationErrors(v *[]*types.GetReco
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.GetRecommendationError
+	var cv []types.GetRecommendationError
 	if *v == nil {
-		cv = []*types.GetRecommendationError{}
+		cv = []types.GetRecommendationError{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.GetRecommendationError
-		if err := awsAwsjson10_deserializeDocumentGetRecommendationError(&col, value); err != nil {
+		var col types.GetRecommendationError
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentGetRecommendationError(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -2020,7 +2026,7 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendation(v **types.InstanceRe
 				if !ok {
 					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
 				}
-				sv.AccountId = &jtv
+				sv.AccountId = ptr.String(jtv)
 			}
 
 		case "currentInstanceType":
@@ -2029,7 +2035,7 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendation(v **types.InstanceRe
 				if !ok {
 					return fmt.Errorf("expected CurrentInstanceType to be of type string, got %T instead", value)
 				}
-				sv.CurrentInstanceType = &jtv
+				sv.CurrentInstanceType = ptr.String(jtv)
 			}
 
 		case "finding":
@@ -2047,7 +2053,7 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendation(v **types.InstanceRe
 				if !ok {
 					return fmt.Errorf("expected InstanceArn to be of type string, got %T instead", value)
 				}
-				sv.InstanceArn = &jtv
+				sv.InstanceArn = ptr.String(jtv)
 			}
 
 		case "instanceName":
@@ -2056,7 +2062,7 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendation(v **types.InstanceRe
 				if !ok {
 					return fmt.Errorf("expected InstanceName to be of type string, got %T instead", value)
 				}
-				sv.InstanceName = &jtv
+				sv.InstanceName = ptr.String(jtv)
 			}
 
 		case "lastRefreshTimestamp":
@@ -2082,7 +2088,7 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendation(v **types.InstanceRe
 				if err != nil {
 					return err
 				}
-				sv.LookBackPeriodInDays = &f64
+				sv.LookBackPeriodInDays = f64
 			}
 
 		case "recommendationOptions":
@@ -2137,7 +2143,7 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendationOption(v **types.Inst
 				if !ok {
 					return fmt.Errorf("expected InstanceType to be of type string, got %T instead", value)
 				}
-				sv.InstanceType = &jtv
+				sv.InstanceType = ptr.String(jtv)
 			}
 
 		case "performanceRisk":
@@ -2150,7 +2156,7 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendationOption(v **types.Inst
 				if err != nil {
 					return err
 				}
-				sv.PerformanceRisk = &f64
+				sv.PerformanceRisk = f64
 			}
 
 		case "projectedUtilizationMetrics":
@@ -2168,7 +2174,7 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendationOption(v **types.Inst
 				if err != nil {
 					return err
 				}
-				sv.Rank = ptr.Int32(int32(i64))
+				sv.Rank = int32(i64)
 			}
 
 		default:
@@ -2180,7 +2186,7 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendationOption(v **types.Inst
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentInstanceRecommendations(v *[]*types.InstanceRecommendation, value interface{}) error {
+func awsAwsjson10_deserializeDocumentInstanceRecommendations(v *[]types.InstanceRecommendation, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2193,18 +2199,20 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendations(v *[]*types.Instanc
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.InstanceRecommendation
+	var cv []types.InstanceRecommendation
 	if *v == nil {
-		cv = []*types.InstanceRecommendation{}
+		cv = []types.InstanceRecommendation{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.InstanceRecommendation
-		if err := awsAwsjson10_deserializeDocumentInstanceRecommendation(&col, value); err != nil {
+		var col types.InstanceRecommendation
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentInstanceRecommendation(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -2240,7 +2248,7 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2280,7 +2288,7 @@ func awsAwsjson10_deserializeDocumentInvalidParameterValueException(v **types.In
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2320,7 +2328,7 @@ func awsAwsjson10_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2332,7 +2340,7 @@ func awsAwsjson10_deserializeDocumentLimitExceededException(v **types.LimitExcee
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentMetricValues(v *[]*float64, value interface{}) error {
+func awsAwsjson10_deserializeDocumentMetricValues(v *[]float64, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2345,15 +2353,15 @@ func awsAwsjson10_deserializeDocumentMetricValues(v *[]*float64, value interface
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*float64
+	var cv []float64
 	if *v == nil {
-		cv = []*float64{}
+		cv = []float64{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *float64
+		var col float64
 		if value != nil {
 			jtv, ok := value.(json.Number)
 			if !ok {
@@ -2363,7 +2371,7 @@ func awsAwsjson10_deserializeDocumentMetricValues(v *[]*float64, value interface
 			if err != nil {
 				return err
 			}
-			col = &f64
+			col = f64
 		}
 		cv = append(cv, col)
 
@@ -2400,7 +2408,7 @@ func awsAwsjson10_deserializeDocumentMissingAuthenticationToken(v **types.Missin
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2440,7 +2448,7 @@ func awsAwsjson10_deserializeDocumentOptInRequiredException(v **types.OptInRequi
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2502,7 +2510,7 @@ func awsAwsjson10_deserializeDocumentProjectedMetric(v **types.ProjectedMetric, 
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentProjectedMetrics(v *[]*types.ProjectedMetric, value interface{}) error {
+func awsAwsjson10_deserializeDocumentProjectedMetrics(v *[]types.ProjectedMetric, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2515,18 +2523,20 @@ func awsAwsjson10_deserializeDocumentProjectedMetrics(v *[]*types.ProjectedMetri
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.ProjectedMetric
+	var cv []types.ProjectedMetric
 	if *v == nil {
-		cv = []*types.ProjectedMetric{}
+		cv = []types.ProjectedMetric{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.ProjectedMetric
-		if err := awsAwsjson10_deserializeDocumentProjectedMetric(&col, value); err != nil {
+		var col types.ProjectedMetric
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentProjectedMetric(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -2534,7 +2544,7 @@ func awsAwsjson10_deserializeDocumentProjectedMetrics(v *[]*types.ProjectedMetri
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentProjectedUtilizationMetrics(v *[]*types.UtilizationMetric, value interface{}) error {
+func awsAwsjson10_deserializeDocumentProjectedUtilizationMetrics(v *[]types.UtilizationMetric, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2547,18 +2557,20 @@ func awsAwsjson10_deserializeDocumentProjectedUtilizationMetrics(v *[]*types.Uti
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.UtilizationMetric
+	var cv []types.UtilizationMetric
 	if *v == nil {
-		cv = []*types.UtilizationMetric{}
+		cv = []types.UtilizationMetric{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.UtilizationMetric
-		if err := awsAwsjson10_deserializeDocumentUtilizationMetric(&col, value); err != nil {
+		var col types.UtilizationMetric
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentUtilizationMetric(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -2612,7 +2624,7 @@ func awsAwsjson10_deserializeDocumentRecommendationExportJob(v **types.Recommend
 				if !ok {
 					return fmt.Errorf("expected FailureReason to be of type string, got %T instead", value)
 				}
-				sv.FailureReason = &jtv
+				sv.FailureReason = ptr.String(jtv)
 			}
 
 		case "jobId":
@@ -2621,7 +2633,7 @@ func awsAwsjson10_deserializeDocumentRecommendationExportJob(v **types.Recommend
 				if !ok {
 					return fmt.Errorf("expected JobId to be of type string, got %T instead", value)
 				}
-				sv.JobId = &jtv
+				sv.JobId = ptr.String(jtv)
 			}
 
 		case "lastUpdatedTimestamp":
@@ -2664,7 +2676,7 @@ func awsAwsjson10_deserializeDocumentRecommendationExportJob(v **types.Recommend
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentRecommendationExportJobs(v *[]*types.RecommendationExportJob, value interface{}) error {
+func awsAwsjson10_deserializeDocumentRecommendationExportJobs(v *[]types.RecommendationExportJob, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2677,18 +2689,20 @@ func awsAwsjson10_deserializeDocumentRecommendationExportJobs(v *[]*types.Recomm
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.RecommendationExportJob
+	var cv []types.RecommendationExportJob
 	if *v == nil {
-		cv = []*types.RecommendationExportJob{}
+		cv = []types.RecommendationExportJob{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.RecommendationExportJob
-		if err := awsAwsjson10_deserializeDocumentRecommendationExportJob(&col, value); err != nil {
+		var col types.RecommendationExportJob
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentRecommendationExportJob(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -2696,7 +2710,7 @@ func awsAwsjson10_deserializeDocumentRecommendationExportJobs(v *[]*types.Recomm
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentRecommendationOptions(v *[]*types.InstanceRecommendationOption, value interface{}) error {
+func awsAwsjson10_deserializeDocumentRecommendationOptions(v *[]types.InstanceRecommendationOption, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2709,18 +2723,20 @@ func awsAwsjson10_deserializeDocumentRecommendationOptions(v *[]*types.InstanceR
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.InstanceRecommendationOption
+	var cv []types.InstanceRecommendationOption
 	if *v == nil {
-		cv = []*types.InstanceRecommendationOption{}
+		cv = []types.InstanceRecommendationOption{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.InstanceRecommendationOption
-		if err := awsAwsjson10_deserializeDocumentInstanceRecommendationOption(&col, value); err != nil {
+		var col types.InstanceRecommendationOption
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentInstanceRecommendationOption(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -2756,7 +2772,7 @@ func awsAwsjson10_deserializeDocumentRecommendationSource(v **types.Recommendati
 				if !ok {
 					return fmt.Errorf("expected RecommendationSourceArn to be of type string, got %T instead", value)
 				}
-				sv.RecommendationSourceArn = &jtv
+				sv.RecommendationSourceArn = ptr.String(jtv)
 			}
 
 		case "recommendationSourceType":
@@ -2777,7 +2793,7 @@ func awsAwsjson10_deserializeDocumentRecommendationSource(v **types.Recommendati
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentRecommendationSources(v *[]*types.RecommendationSource, value interface{}) error {
+func awsAwsjson10_deserializeDocumentRecommendationSources(v *[]types.RecommendationSource, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2790,18 +2806,20 @@ func awsAwsjson10_deserializeDocumentRecommendationSources(v *[]*types.Recommend
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.RecommendationSource
+	var cv []types.RecommendationSource
 	if *v == nil {
-		cv = []*types.RecommendationSource{}
+		cv = []types.RecommendationSource{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.RecommendationSource
-		if err := awsAwsjson10_deserializeDocumentRecommendationSource(&col, value); err != nil {
+		var col types.RecommendationSource
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentRecommendationSource(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -2809,7 +2827,7 @@ func awsAwsjson10_deserializeDocumentRecommendationSources(v *[]*types.Recommend
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentRecommendationSummaries(v *[]*types.RecommendationSummary, value interface{}) error {
+func awsAwsjson10_deserializeDocumentRecommendationSummaries(v *[]types.RecommendationSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2822,18 +2840,20 @@ func awsAwsjson10_deserializeDocumentRecommendationSummaries(v *[]*types.Recomme
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.RecommendationSummary
+	var cv []types.RecommendationSummary
 	if *v == nil {
-		cv = []*types.RecommendationSummary{}
+		cv = []types.RecommendationSummary{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.RecommendationSummary
-		if err := awsAwsjson10_deserializeDocumentRecommendationSummary(&col, value); err != nil {
+		var col types.RecommendationSummary
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentRecommendationSummary(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -2869,7 +2889,7 @@ func awsAwsjson10_deserializeDocumentRecommendationSummary(v **types.Recommendat
 				if !ok {
 					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
 				}
-				sv.AccountId = &jtv
+				sv.AccountId = ptr.String(jtv)
 			}
 
 		case "recommendationResourceType":
@@ -2932,7 +2952,7 @@ func awsAwsjson10_deserializeDocumentRecommendedOptionProjectedMetric(v **types.
 				if err != nil {
 					return err
 				}
-				sv.Rank = ptr.Int32(int32(i64))
+				sv.Rank = int32(i64)
 			}
 
 		case "recommendedInstanceType":
@@ -2941,7 +2961,7 @@ func awsAwsjson10_deserializeDocumentRecommendedOptionProjectedMetric(v **types.
 				if !ok {
 					return fmt.Errorf("expected RecommendedInstanceType to be of type string, got %T instead", value)
 				}
-				sv.RecommendedInstanceType = &jtv
+				sv.RecommendedInstanceType = ptr.String(jtv)
 			}
 
 		default:
@@ -2953,7 +2973,7 @@ func awsAwsjson10_deserializeDocumentRecommendedOptionProjectedMetric(v **types.
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentRecommendedOptionProjectedMetrics(v *[]*types.RecommendedOptionProjectedMetric, value interface{}) error {
+func awsAwsjson10_deserializeDocumentRecommendedOptionProjectedMetrics(v *[]types.RecommendedOptionProjectedMetric, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2966,18 +2986,20 @@ func awsAwsjson10_deserializeDocumentRecommendedOptionProjectedMetrics(v *[]*typ
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.RecommendedOptionProjectedMetric
+	var cv []types.RecommendedOptionProjectedMetric
 	if *v == nil {
-		cv = []*types.RecommendedOptionProjectedMetric{}
+		cv = []types.RecommendedOptionProjectedMetric{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.RecommendedOptionProjectedMetric
-		if err := awsAwsjson10_deserializeDocumentRecommendedOptionProjectedMetric(&col, value); err != nil {
+		var col types.RecommendedOptionProjectedMetric
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentRecommendedOptionProjectedMetric(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -3013,7 +3035,7 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -3053,7 +3075,7 @@ func awsAwsjson10_deserializeDocumentS3Destination(v **types.S3Destination, valu
 				if !ok {
 					return fmt.Errorf("expected DestinationBucket to be of type string, got %T instead", value)
 				}
-				sv.Bucket = &jtv
+				sv.Bucket = ptr.String(jtv)
 			}
 
 		case "key":
@@ -3062,7 +3084,7 @@ func awsAwsjson10_deserializeDocumentS3Destination(v **types.S3Destination, valu
 				if !ok {
 					return fmt.Errorf("expected DestinationKey to be of type string, got %T instead", value)
 				}
-				sv.Key = &jtv
+				sv.Key = ptr.String(jtv)
 			}
 
 		case "metadataKey":
@@ -3071,7 +3093,7 @@ func awsAwsjson10_deserializeDocumentS3Destination(v **types.S3Destination, valu
 				if !ok {
 					return fmt.Errorf("expected MetadataKey to be of type string, got %T instead", value)
 				}
-				sv.MetadataKey = &jtv
+				sv.MetadataKey = ptr.String(jtv)
 			}
 
 		default:
@@ -3111,7 +3133,7 @@ func awsAwsjson10_deserializeDocumentServiceUnavailableException(v **types.Servi
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -3123,7 +3145,7 @@ func awsAwsjson10_deserializeDocumentServiceUnavailableException(v **types.Servi
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentSummaries(v *[]*types.Summary, value interface{}) error {
+func awsAwsjson10_deserializeDocumentSummaries(v *[]types.Summary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3136,18 +3158,20 @@ func awsAwsjson10_deserializeDocumentSummaries(v *[]*types.Summary, value interf
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Summary
+	var cv []types.Summary
 	if *v == nil {
-		cv = []*types.Summary{}
+		cv = []types.Summary{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Summary
-		if err := awsAwsjson10_deserializeDocumentSummary(&col, value); err != nil {
+		var col types.Summary
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentSummary(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -3196,7 +3220,7 @@ func awsAwsjson10_deserializeDocumentSummary(v **types.Summary, value interface{
 				if err != nil {
 					return err
 				}
-				sv.Value = &f64
+				sv.Value = f64
 			}
 
 		default:
@@ -3236,7 +3260,7 @@ func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -3248,7 +3272,7 @@ func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentTimestamps(v *[]*time.Time, value interface{}) error {
+func awsAwsjson10_deserializeDocumentTimestamps(v *[]time.Time, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3261,15 +3285,15 @@ func awsAwsjson10_deserializeDocumentTimestamps(v *[]*time.Time, value interface
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*time.Time
+	var cv []time.Time
 	if *v == nil {
-		cv = []*time.Time{}
+		cv = []time.Time{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *time.Time
+		var col time.Time
 		if value != nil {
 			jtv, ok := value.(json.Number)
 			if !ok {
@@ -3279,7 +3303,7 @@ func awsAwsjson10_deserializeDocumentTimestamps(v *[]*time.Time, value interface
 			if err != nil {
 				return err
 			}
-			col = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			col = smithytime.ParseEpochSeconds(f64)
 		}
 		cv = append(cv, col)
 
@@ -3338,7 +3362,7 @@ func awsAwsjson10_deserializeDocumentUtilizationMetric(v **types.UtilizationMetr
 				if err != nil {
 					return err
 				}
-				sv.Value = &f64
+				sv.Value = f64
 			}
 
 		default:
@@ -3350,7 +3374,7 @@ func awsAwsjson10_deserializeDocumentUtilizationMetric(v **types.UtilizationMetr
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentUtilizationMetrics(v *[]*types.UtilizationMetric, value interface{}) error {
+func awsAwsjson10_deserializeDocumentUtilizationMetrics(v *[]types.UtilizationMetric, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3363,18 +3387,20 @@ func awsAwsjson10_deserializeDocumentUtilizationMetrics(v *[]*types.UtilizationM
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.UtilizationMetric
+	var cv []types.UtilizationMetric
 	if *v == nil {
-		cv = []*types.UtilizationMetric{}
+		cv = []types.UtilizationMetric{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.UtilizationMetric
-		if err := awsAwsjson10_deserializeDocumentUtilizationMetric(&col, value); err != nil {
+		var col types.UtilizationMetric
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentUtilizationMetric(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -3410,7 +3436,7 @@ func awsAwsjson10_deserializeOpDocumentDescribeRecommendationExportJobsOutput(v 
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "recommendationExportJobs":
@@ -3455,7 +3481,7 @@ func awsAwsjson10_deserializeOpDocumentExportAutoScalingGroupRecommendationsOutp
 				if !ok {
 					return fmt.Errorf("expected JobId to be of type string, got %T instead", value)
 				}
-				sv.JobId = &jtv
+				sv.JobId = ptr.String(jtv)
 			}
 
 		case "s3Destination":
@@ -3500,7 +3526,7 @@ func awsAwsjson10_deserializeOpDocumentExportEC2InstanceRecommendationsOutput(v 
 				if !ok {
 					return fmt.Errorf("expected JobId to be of type string, got %T instead", value)
 				}
-				sv.JobId = &jtv
+				sv.JobId = ptr.String(jtv)
 			}
 
 		case "s3Destination":
@@ -3555,7 +3581,7 @@ func awsAwsjson10_deserializeOpDocumentGetAutoScalingGroupRecommendationsOutput(
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -3605,7 +3631,7 @@ func awsAwsjson10_deserializeOpDocumentGetEC2InstanceRecommendationsOutput(v **G
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -3681,7 +3707,7 @@ func awsAwsjson10_deserializeOpDocumentGetEnrollmentStatusOutput(v **GetEnrollme
 				if !ok {
 					return fmt.Errorf("expected MemberAccountsEnrolled to be of type *bool, got %T instead", value)
 				}
-				sv.MemberAccountsEnrolled = &jtv
+				sv.MemberAccountsEnrolled = jtv
 			}
 
 		case "status":
@@ -3699,7 +3725,7 @@ func awsAwsjson10_deserializeOpDocumentGetEnrollmentStatusOutput(v **GetEnrollme
 				if !ok {
 					return fmt.Errorf("expected StatusReason to be of type string, got %T instead", value)
 				}
-				sv.StatusReason = &jtv
+				sv.StatusReason = ptr.String(jtv)
 			}
 
 		default:
@@ -3739,7 +3765,7 @@ func awsAwsjson10_deserializeOpDocumentGetRecommendationSummariesOutput(v **GetR
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "recommendationSummaries":
@@ -3793,7 +3819,7 @@ func awsAwsjson10_deserializeOpDocumentUpdateEnrollmentStatusOutput(v **UpdateEn
 				if !ok {
 					return fmt.Errorf("expected StatusReason to be of type string, got %T instead", value)
 				}
-				sv.StatusReason = &jtv
+				sv.StatusReason = ptr.String(jtv)
 			}
 
 		default:

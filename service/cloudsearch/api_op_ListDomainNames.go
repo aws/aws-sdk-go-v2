@@ -34,7 +34,7 @@ type ListDomainNamesInput struct {
 type ListDomainNamesOutput struct {
 
 	// The names of the search domains owned by an account.
-	DomainNames map[string]*string
+	DomainNames map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

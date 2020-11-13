@@ -34,7 +34,7 @@ type CreatePhoneNumberOrderInput struct {
 	// List of phone numbers, in E.164 format.
 	//
 	// This member is required.
-	E164PhoneNumbers []*string
+	E164PhoneNumbers []string
 
 	// The phone number product type.
 	//

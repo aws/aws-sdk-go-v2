@@ -36,7 +36,7 @@ type DescribeConfigRuleEvaluationStatusInput struct {
 	// The name of the AWS managed Config rules for which you want status information.
 	// If you do not specify any names, AWS Config returns status information for all
 	// AWS managed Config rules that you use.
-	ConfigRuleNames []*string
+	ConfigRuleNames []string
 
 	// The number of rule evaluation results that you want returned. This parameter is
 	// required if the rule limit for your account is more than the default of 150
@@ -44,7 +44,7 @@ type DescribeConfigRuleEvaluationStatusInput struct {
 	// Limits
 	// (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_config)
 	// in the AWS General Reference Guide.
-	Limit *int32
+	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
@@ -55,7 +55,7 @@ type DescribeConfigRuleEvaluationStatusInput struct {
 type DescribeConfigRuleEvaluationStatusOutput struct {
 
 	// Status information about your AWS managed Config rules.
-	ConfigRulesEvaluationStatus []*types.ConfigRuleEvaluationStatus
+	ConfigRulesEvaluationStatus []types.ConfigRuleEvaluationStatus
 
 	// The string that you use in a subsequent request to get the next page of results
 	// in a paginated response.

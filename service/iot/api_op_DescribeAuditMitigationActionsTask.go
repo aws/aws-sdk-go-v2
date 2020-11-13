@@ -43,11 +43,11 @@ type DescribeAuditMitigationActionsTaskOutput struct {
 
 	// Specifies the mitigation actions and their parameters that are applied as part
 	// of this task.
-	ActionsDefinition []*types.MitigationAction
+	ActionsDefinition []types.MitigationAction
 
 	// Specifies the mitigation actions that should be applied to specific audit
 	// checks.
-	AuditCheckToActionsMapping map[string][]*string
+	AuditCheckToActionsMapping map[string][]string
 
 	// The date and time when the task was completed or canceled.
 	EndTime *time.Time
@@ -61,7 +61,7 @@ type DescribeAuditMitigationActionsTaskOutput struct {
 
 	// Aggregate counts of the results when the mitigation tasks were applied to the
 	// findings for this audit mitigation actions task.
-	TaskStatistics map[string]*types.TaskStatisticsForAuditCheck
+	TaskStatistics map[string]types.TaskStatisticsForAuditCheck
 
 	// The current status of the task.
 	TaskStatus types.AuditMitigationActionsTaskStatus

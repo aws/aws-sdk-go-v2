@@ -39,7 +39,7 @@ type ListByteMatchSetsInput struct {
 	// this request. If you have more ByteMatchSets objects than the number you specify
 	// for Limit, the response includes a NextMarker value that you can use to get
 	// another batch of ByteMatchSet objects.
-	Limit *int32
+	Limit int32
 
 	// If you specify a value for Limit and you have more ByteMatchSets than the value
 	// of Limit, AWS WAF returns a NextMarker value in the response that allows you to
@@ -52,7 +52,7 @@ type ListByteMatchSetsInput struct {
 type ListByteMatchSetsOutput struct {
 
 	// An array of ByteMatchSetSummary objects.
-	ByteMatchSets []*types.ByteMatchSetSummary
+	ByteMatchSets []types.ByteMatchSetSummary
 
 	// If you have more ByteMatchSet objects than the number that you specified for
 	// Limit in the request, the response includes a NextMarker value. To list more

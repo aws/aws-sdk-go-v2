@@ -49,7 +49,7 @@ type ListProjectsOutput struct {
 	NextToken *string
 
 	// Information about the projects.
-	Projects []*types.Project
+	Projects []types.Project
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -12,18 +12,18 @@ type AccountLimit struct {
 
 	// The maximum size of a function's deployment package and layers when they're
 	// extracted.
-	CodeSizeUnzipped *int64
+	CodeSizeUnzipped int64
 
 	// The maximum size of a deployment package when it's uploaded directly to AWS
 	// Lambda. Use Amazon S3 for larger files.
-	CodeSizeZipped *int64
+	CodeSizeZipped int64
 
 	// The maximum number of simultaneous function executions.
-	ConcurrentExecutions *int32
+	ConcurrentExecutions int32
 
 	// The amount of storage space that you can use for all deployment packages and
 	// layer archives.
-	TotalCodeSize *int64
+	TotalCodeSize int64
 
 	// The maximum number of simultaneous function executions, minus the capacity
 	// that's reserved for individual functions with PutFunctionConcurrency.
@@ -34,11 +34,11 @@ type AccountLimit struct {
 type AccountUsage struct {
 
 	// The number of Lambda functions.
-	FunctionCount *int64
+	FunctionCount int64
 
 	// The amount of storage space, in bytes, that's being used by deployment packages
 	// and layer archives.
-	TotalCodeSize *int64
+	TotalCodeSize int64
 }
 
 // Provides configuration information about a Lambda function alias
@@ -72,7 +72,7 @@ type AliasConfiguration struct {
 type AliasRoutingConfiguration struct {
 
 	// The second version, and the percentage of traffic that's routed to it.
-	AdditionalVersionWeights map[string]*float64
+	AdditionalVersionWeights map[string]float64
 }
 
 type Concurrency struct {
@@ -107,7 +107,7 @@ type DestinationConfig struct {
 type Environment struct {
 
 	// Environment variable key-value pairs.
-	Variables map[string]*string
+	Variables map[string]string
 }
 
 // Error messages for environment variables that couldn't be applied.
@@ -129,7 +129,7 @@ type EnvironmentResponse struct {
 	Error *EnvironmentError
 
 	// Environment variable key-value pairs.
-	Variables map[string]*string
+	Variables map[string]string
 }
 
 // A mapping between an AWS resource and an AWS Lambda function. See
@@ -182,7 +182,7 @@ type EventSourceMappingConfiguration struct {
 	StateTransitionReason *string
 
 	// (MSK) The name of the Kafka topic.
-	Topics []*string
+	Topics []string
 
 	// The identifier of the event source mapping.
 	UUID *string
@@ -240,7 +240,7 @@ type FunctionConfiguration struct {
 	CodeSha256 *string
 
 	// The size of the function's deployment package, in bytes.
-	CodeSize *int64
+	CodeSize int64
 
 	// The function's dead letter queue.
 	DeadLetterConfig *DeadLetterConfig
@@ -252,7 +252,7 @@ type FunctionConfiguration struct {
 	Environment *EnvironmentResponse
 
 	// Connection settings for an Amazon EFS file system.
-	FileSystemConfigs []*FileSystemConfig
+	FileSystemConfigs []FileSystemConfig
 
 	// The function's Amazon Resource Name (ARN).
 	FunctionArn *string
@@ -283,7 +283,7 @@ type FunctionConfiguration struct {
 
 	// The function's  layers
 	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
-	Layers []*Layer
+	Layers []Layer
 
 	// For Lambda@Edge functions, the ARN of the master function.
 	MasterArn *string
@@ -362,7 +362,7 @@ type Layer struct {
 	Arn *string
 
 	// The size of the layer archive in bytes.
-	CodeSize *int64
+	CodeSize int64
 }
 
 // Details about an AWS Lambda layer
@@ -406,7 +406,7 @@ type LayerVersionContentOutput struct {
 	CodeSha256 *string
 
 	// The size of the layer archive in bytes.
-	CodeSize *int64
+	CodeSize int64
 
 	// A link to the layer archive in Amazon S3 that is valid for 10 minutes.
 	Location *string
@@ -433,7 +433,7 @@ type LayerVersionsListItem struct {
 	LicenseInfo *string
 
 	// The version number.
-	Version *int64
+	Version int64
 }
 
 // A destination for events that failed processing.
@@ -499,20 +499,20 @@ type TracingConfigResponse struct {
 type VpcConfig struct {
 
 	// A list of VPC security groups IDs.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// A list of VPC subnet IDs.
-	SubnetIds []*string
+	SubnetIds []string
 }
 
 // The VPC security groups and subnets that are attached to a Lambda function.
 type VpcConfigResponse struct {
 
 	// A list of VPC security groups IDs.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// A list of VPC subnet IDs.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// The ID of the VPC.
 	VpcId *string

@@ -43,7 +43,7 @@ type UntagRoleInput struct {
 	// are removed from the specified role.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 type UntagRoleOutput struct {

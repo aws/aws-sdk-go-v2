@@ -21,7 +21,7 @@ type AugmentedManifestsListItem struct {
 	// LabelAttributeName key provides the annotations from an individual job.
 	//
 	// This member is required.
-	AttributeNames []*string
+	AttributeNames []string
 
 	// The Amazon S3 location of the augmented manifest file.
 	//
@@ -38,7 +38,7 @@ type BatchDetectDominantLanguageItemResult struct {
 
 	// One or more DominantLanguage objects describing the dominant languages in the
 	// document.
-	Languages []*DominantLanguage
+	Languages []DominantLanguage
 }
 
 // The result of calling the operation. The operation returns one object for each
@@ -46,7 +46,7 @@ type BatchDetectDominantLanguageItemResult struct {
 type BatchDetectEntitiesItemResult struct {
 
 	// One or more Entity objects, one for each entity detected in the document.
-	Entities []*Entity
+	Entities []Entity
 
 	// The zero-based index of the document in the input list.
 	Index *int32
@@ -60,7 +60,7 @@ type BatchDetectKeyPhrasesItemResult struct {
 	Index *int32
 
 	// One or more KeyPhrase objects, one for each key phrase detected in the document.
-	KeyPhrases []*KeyPhrase
+	KeyPhrases []KeyPhrase
 }
 
 // The result of calling the operation. The operation returns one object for each
@@ -86,7 +86,7 @@ type BatchDetectSyntaxItemResult struct {
 	Index *int32
 
 	// The syntax tokens for the words in the document, one token for each word.
-	SyntaxTokens []*SyntaxToken
+	SyntaxTokens []SyntaxToken
 }
 
 // Describes an error that occurred while processing a document in a batch. The
@@ -291,7 +291,7 @@ type DocumentClassifierInputDataConfig struct {
 	// model. An augmented manifest file is a labeled dataset that is produced by
 	// Amazon SageMaker Ground Truth. This parameter is required if you set DataFormat
 	// to AUGMENTED_MANIFEST.
-	AugmentedManifests []*AugmentedManifestsListItem
+	AugmentedManifests []AugmentedManifestsListItem
 
 	// The format of your training data:
 	//
@@ -773,7 +773,7 @@ type EntityRecognizerInputDataConfig struct {
 	// carriage return), \t (tab), \\t (escaped tab), space, and , (comma).
 	//
 	// This member is required.
-	EntityTypes []*EntityTypesListItem
+	EntityTypes []EntityTypesListItem
 
 	// The S3 location of the CSV file that annotates your training documents.
 	Annotations *EntityRecognizerAnnotations
@@ -782,7 +782,7 @@ type EntityRecognizerInputDataConfig struct {
 	// model. An augmented manifest file is a labeled dataset that is produced by
 	// Amazon SageMaker Ground Truth. This parameter is required if you set DataFormat
 	// to AUGMENTED_MANIFEST.
-	AugmentedManifests []*AugmentedManifestsListItem
+	AugmentedManifests []AugmentedManifestsListItem
 
 	// The format of your training data:
 	//
@@ -818,7 +818,7 @@ type EntityRecognizerInputDataConfig struct {
 type EntityRecognizerMetadata struct {
 
 	// Entity types from the metadata of an entity recognizer.
-	EntityTypes []*EntityRecognizerMetadataEntityTypesListItem
+	EntityTypes []EntityRecognizerMetadataEntityTypesListItem
 
 	// Detailed information about the accuracy of an entity recognizer.
 	EvaluationMetrics *EntityRecognizerEvaluationMetrics
@@ -1469,7 +1469,7 @@ type VpcConfig struct {
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html).
 	//
 	// This member is required.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// The ID for each subnet being used in your private VPC. This subnet is a subset
 	// of the a range of IPv4 addresses used by the VPC and is specific to a given
@@ -1478,5 +1478,5 @@ type VpcConfig struct {
 	// Subnets (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html).
 	//
 	// This member is required.
-	Subnets []*string
+	Subnets []string
 }

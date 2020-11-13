@@ -403,7 +403,7 @@ func awsAwsjson11_deserializeDocumentDataPoint(v **types.DataPoint, value interf
 				if err != nil {
 					return err
 				}
-				sv.Value = &f64
+				sv.Value = ptr.Float64(f64)
 			}
 
 		default:
@@ -415,7 +415,7 @@ func awsAwsjson11_deserializeDocumentDataPoint(v **types.DataPoint, value interf
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDataPointsList(v *[]*types.DataPoint, value interface{}) error {
+func awsAwsjson11_deserializeDocumentDataPointsList(v *[]types.DataPoint, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -428,18 +428,20 @@ func awsAwsjson11_deserializeDocumentDataPointsList(v *[]*types.DataPoint, value
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.DataPoint
+	var cv []types.DataPoint
 	if *v == nil {
-		cv = []*types.DataPoint{}
+		cv = []types.DataPoint{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.DataPoint
-		if err := awsAwsjson11_deserializeDocumentDataPoint(&col, value); err != nil {
+		var col types.DataPoint
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentDataPoint(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -489,7 +491,7 @@ func awsAwsjson11_deserializeDocumentDimensionKeyDescription(v **types.Dimension
 				if err != nil {
 					return err
 				}
-				sv.Total = &f64
+				sv.Total = ptr.Float64(f64)
 			}
 
 		default:
@@ -501,7 +503,7 @@ func awsAwsjson11_deserializeDocumentDimensionKeyDescription(v **types.Dimension
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDimensionKeyDescriptionList(v *[]*types.DimensionKeyDescription, value interface{}) error {
+func awsAwsjson11_deserializeDocumentDimensionKeyDescriptionList(v *[]types.DimensionKeyDescription, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -514,18 +516,20 @@ func awsAwsjson11_deserializeDocumentDimensionKeyDescriptionList(v *[]*types.Dim
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.DimensionKeyDescription
+	var cv []types.DimensionKeyDescription
 	if *v == nil {
-		cv = []*types.DimensionKeyDescription{}
+		cv = []types.DimensionKeyDescription{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.DimensionKeyDescription
-		if err := awsAwsjson11_deserializeDocumentDimensionKeyDescription(&col, value); err != nil {
+		var col types.DimensionKeyDescription
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentDimensionKeyDescription(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -533,7 +537,7 @@ func awsAwsjson11_deserializeDocumentDimensionKeyDescriptionList(v *[]*types.Dim
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDimensionMap(v *map[string]*string, value interface{}) error {
+func awsAwsjson11_deserializeDocumentDimensionMap(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -546,21 +550,21 @@ func awsAwsjson11_deserializeDocumentDimensionMap(v *map[string]*string, value i
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var mv map[string]*string
+	var mv map[string]string
 	if *v == nil {
-		mv = map[string]*string{}
+		mv = map[string]string{}
 	} else {
 		mv = *v
 	}
 
 	for key, value := range shape {
-		var parsedVal *string
+		var parsedVal string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected String to be of type string, got %T instead", value)
 			}
-			parsedVal = &jtv
+			parsedVal = jtv
 		}
 		mv[key] = parsedVal
 
@@ -597,7 +601,7 @@ func awsAwsjson11_deserializeDocumentInternalServiceError(v **types.InternalServ
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -637,7 +641,7 @@ func awsAwsjson11_deserializeDocumentInvalidArgumentException(v **types.InvalidA
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -690,7 +694,7 @@ func awsAwsjson11_deserializeDocumentMetricKeyDataPoints(v **types.MetricKeyData
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentMetricKeyDataPointsList(v *[]*types.MetricKeyDataPoints, value interface{}) error {
+func awsAwsjson11_deserializeDocumentMetricKeyDataPointsList(v *[]types.MetricKeyDataPoints, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -703,18 +707,20 @@ func awsAwsjson11_deserializeDocumentMetricKeyDataPointsList(v *[]*types.MetricK
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.MetricKeyDataPoints
+	var cv []types.MetricKeyDataPoints
 	if *v == nil {
-		cv = []*types.MetricKeyDataPoints{}
+		cv = []types.MetricKeyDataPoints{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.MetricKeyDataPoints
-		if err := awsAwsjson11_deserializeDocumentMetricKeyDataPoints(&col, value); err != nil {
+		var col types.MetricKeyDataPoints
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentMetricKeyDataPoints(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -722,7 +728,7 @@ func awsAwsjson11_deserializeDocumentMetricKeyDataPointsList(v *[]*types.MetricK
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentMetricValuesList(v *[]*float64, value interface{}) error {
+func awsAwsjson11_deserializeDocumentMetricValuesList(v *[]float64, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -735,15 +741,15 @@ func awsAwsjson11_deserializeDocumentMetricValuesList(v *[]*float64, value inter
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*float64
+	var cv []float64
 	if *v == nil {
-		cv = []*float64{}
+		cv = []float64{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *float64
+		var col float64
 		if value != nil {
 			jtv, ok := value.(json.Number)
 			if !ok {
@@ -753,7 +759,7 @@ func awsAwsjson11_deserializeDocumentMetricValuesList(v *[]*float64, value inter
 			if err != nil {
 				return err
 			}
-			col = &f64
+			col = f64
 		}
 		cv = append(cv, col)
 
@@ -790,7 +796,7 @@ func awsAwsjson11_deserializeDocumentNotAuthorizedException(v **types.NotAuthori
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -838,7 +844,7 @@ func awsAwsjson11_deserializeDocumentResponsePartitionKey(v **types.ResponsePart
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentResponsePartitionKeyList(v *[]*types.ResponsePartitionKey, value interface{}) error {
+func awsAwsjson11_deserializeDocumentResponsePartitionKeyList(v *[]types.ResponsePartitionKey, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -851,18 +857,20 @@ func awsAwsjson11_deserializeDocumentResponsePartitionKeyList(v *[]*types.Respon
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.ResponsePartitionKey
+	var cv []types.ResponsePartitionKey
 	if *v == nil {
-		cv = []*types.ResponsePartitionKey{}
+		cv = []types.ResponsePartitionKey{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.ResponsePartitionKey
-		if err := awsAwsjson11_deserializeDocumentResponsePartitionKey(&col, value); err != nil {
+		var col types.ResponsePartitionKey
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentResponsePartitionKey(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -903,7 +911,7 @@ func awsAwsjson11_deserializeDocumentResponseResourceMetricKey(v **types.Respons
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Metric = &jtv
+				sv.Metric = ptr.String(jtv)
 			}
 
 		default:
@@ -974,7 +982,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeDimensionKeysOutput(v **DescribeD
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "PartitionKeys":
@@ -1045,7 +1053,7 @@ func awsAwsjson11_deserializeOpDocumentGetResourceMetricsOutput(v **GetResourceM
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.Identifier = &jtv
+				sv.Identifier = ptr.String(jtv)
 			}
 
 		case "MetricList":
@@ -1059,7 +1067,7 @@ func awsAwsjson11_deserializeOpDocumentGetResourceMetricsOutput(v **GetResourceM
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:

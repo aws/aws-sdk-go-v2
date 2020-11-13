@@ -44,7 +44,7 @@ type DescribeAgentVersionsOutput struct {
 	// The agent versions for the specified stack or configuration manager. Note that
 	// this value is the complete version number, not the abbreviated number used by
 	// the console.
-	AgentVersions []*types.AgentVersion
+	AgentVersions []types.AgentVersion
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

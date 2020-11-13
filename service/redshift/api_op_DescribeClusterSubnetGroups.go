@@ -63,7 +63,7 @@ type DescribeClusterSubnetGroupsInput struct {
 	// environment. If you specify both of these tag keys in the request, Amazon
 	// Redshift returns a response with the subnet groups that have either or both of
 	// these tag keys associated with them.
-	TagKeys []*string
+	TagKeys []string
 
 	// A tag value or values for which you want to return all matching cluster subnet
 	// groups that are associated with the specified tag value or values. For example,
@@ -71,14 +71,14 @@ type DescribeClusterSubnetGroupsInput struct {
 	// test. If you specify both of these tag values in the request, Amazon Redshift
 	// returns a response with the subnet groups that have either or both of these tag
 	// values associated with them.
-	TagValues []*string
+	TagValues []string
 }
 
 // Contains the output from the DescribeClusterSubnetGroups action.
 type DescribeClusterSubnetGroupsOutput struct {
 
 	// A list of ClusterSubnetGroup instances.
-	ClusterSubnetGroups []*types.ClusterSubnetGroup
+	ClusterSubnetGroups []types.ClusterSubnetGroup
 
 	// A value that indicates the starting point for the next set of response records
 	// in a subsequent request. If a value is returned in a response, you can retrieve

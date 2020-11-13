@@ -45,7 +45,7 @@ type ListDomainConfigurationsOutput struct {
 
 	// A list of objects that contain summary information about the user's domain
 	// configurations.
-	DomainConfigurations []*types.DomainConfigurationSummary
+	DomainConfigurations []types.DomainConfigurationSummary
 
 	// The marker for the next set of results.
 	NextMarker *string

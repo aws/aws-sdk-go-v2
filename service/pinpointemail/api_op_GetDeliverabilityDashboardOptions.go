@@ -56,7 +56,7 @@ type GetDeliverabilityDashboardOptionsOutput struct {
 	// Pinpoint account. If this value is true, the dashboard is enabled.
 	//
 	// This member is required.
-	DashboardEnabled *bool
+	DashboardEnabled bool
 
 	// The current status of your Deliverability dashboard subscription. If this value
 	// is PENDING_EXPIRATION, your subscription is scheduled to expire at the end of
@@ -66,12 +66,12 @@ type GetDeliverabilityDashboardOptionsOutput struct {
 	// An array of objects, one for each verified domain that you use to send email and
 	// currently has an active Deliverability dashboard subscription that isn’t
 	// scheduled to expire at the end of the current calendar month.
-	ActiveSubscribedDomains []*types.DomainDeliverabilityTrackingOption
+	ActiveSubscribedDomains []types.DomainDeliverabilityTrackingOption
 
 	// An array of objects, one for each verified domain that you use to send email and
 	// currently has an active Deliverability dashboard subscription that's scheduled
 	// to expire at the end of the current calendar month.
-	PendingExpirationSubscribedDomains []*types.DomainDeliverabilityTrackingOption
+	PendingExpirationSubscribedDomains []types.DomainDeliverabilityTrackingOption
 
 	// The date, in Unix time format, when your current subscription to the
 	// Deliverability dashboard is scheduled to expire, if your subscription is

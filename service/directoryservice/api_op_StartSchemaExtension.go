@@ -32,7 +32,7 @@ type StartSchemaExtensionInput struct {
 	// extension.
 	//
 	// This member is required.
-	CreateSnapshotBeforeSchemaExtension *bool
+	CreateSnapshotBeforeSchemaExtension bool
 
 	// A description of the schema extension.
 	//

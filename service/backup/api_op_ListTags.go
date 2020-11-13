@@ -57,7 +57,7 @@ type ListTagsOutput struct {
 
 	// To help organize your resources, you can assign your own metadata to the
 	// resources you create. Each tag is a key-value pair.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

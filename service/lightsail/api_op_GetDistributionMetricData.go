@@ -99,7 +99,7 @@ type GetDistributionMetricDataInput struct {
 	// The granularity, in seconds, for the metric data points that will be returned.
 	//
 	// This member is required.
-	Period *int32
+	Period int32
 
 	// The start of the time interval for which to get metric data. Constraints:
 	//
@@ -154,7 +154,7 @@ type GetDistributionMetricDataInput struct {
 type GetDistributionMetricDataOutput struct {
 
 	// An array of objects that describe the metric data returned.
-	MetricData []*types.MetricDatapoint
+	MetricData []types.MetricDatapoint
 
 	// The name of the metric returned.
 	MetricName types.DistributionMetricName

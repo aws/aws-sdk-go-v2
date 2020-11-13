@@ -46,11 +46,11 @@ type SelectAggregateResourceConfigInput struct {
 	Expression *string
 
 	// The maximum number of query results returned on each page.
-	Limit *int32
+	Limit int32
 
 	// The maximum number of query results returned on each page. AWS Config also
 	// allows the Limit request parameter.
-	MaxResults *int32
+	MaxResults int32
 
 	// The nextToken string returned in a previous request that you use to request the
 	// next page of results in a paginated response.
@@ -67,7 +67,7 @@ type SelectAggregateResourceConfigOutput struct {
 	QueryInfo *types.QueryInfo
 
 	// Returns the results for the SQL query.
-	Results []*string
+	Results []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

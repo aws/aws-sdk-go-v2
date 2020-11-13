@@ -36,7 +36,7 @@ type UpdateAutomaticTapeCreationPolicyInput struct {
 	// rules. The rules determine when and how to automatically create new tapes.
 	//
 	// This member is required.
-	AutomaticTapeCreationRules []*types.AutomaticTapeCreationRule
+	AutomaticTapeCreationRules []types.AutomaticTapeCreationRule
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
 	// return a list of gateways for your account and AWS Region.

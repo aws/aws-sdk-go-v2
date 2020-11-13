@@ -22,7 +22,7 @@ type Endpoint struct {
 	EndpointArn *string
 
 	// The network interface of the endpoint.
-	NetworkInterfaces []*NetworkInterface
+	NetworkInterfaces []NetworkInterface
 
 	// The ID of the AWS Outpost.
 	OutpostsId *string

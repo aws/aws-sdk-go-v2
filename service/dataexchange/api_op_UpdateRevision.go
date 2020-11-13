@@ -46,7 +46,7 @@ type UpdateRevisionInput struct {
 	// Finalizing a revision tells AWS Data Exchange that your changes to the assets in
 	// the revision are complete. After it's in this read-only state, you can publish
 	// the revision to your products.
-	Finalized *bool
+	Finalized bool
 }
 
 type UpdateRevisionOutput struct {
@@ -70,7 +70,7 @@ type UpdateRevisionOutput struct {
 	// through the AWS Data Exchange console or the AWS Marketplace Catalog API, using
 	// the StartChangeSet AWS Marketplace Catalog API action. When using the API,
 	// revisions are uniquely identified by their ARN.
-	Finalized *bool
+	Finalized bool
 
 	// The unique identifier for the revision.
 	Id *string

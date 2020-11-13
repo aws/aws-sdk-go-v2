@@ -54,7 +54,7 @@ type UpdateGameSessionQueueInput struct {
 	// the queue. Fleets are identified by either a fleet ARN or a fleet alias ARN.
 	// Destinations are listed in default preference order. When updating this list,
 	// provide a complete list of destinations.
-	Destinations []*types.GameSessionQueueDestination
+	Destinations []types.GameSessionQueueDestination
 
 	// A collection of latency policies to apply when processing game sessions
 	// placement requests with player latency information. Multiple policies are
@@ -65,7 +65,7 @@ type UpdateGameSessionQueueInput struct {
 	// might enforce a 60-second policy followed by a 120-second policy, and then no
 	// policy for the remainder of the placement. When updating policies, provide a
 	// complete collection of policies.
-	PlayerLatencyPolicies []*types.PlayerLatencyPolicy
+	PlayerLatencyPolicies []types.PlayerLatencyPolicy
 
 	// The maximum time, in seconds, that a new game session placement request remains
 	// in the queue. When a request exceeds this time, the game session placement

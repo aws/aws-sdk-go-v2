@@ -47,14 +47,14 @@ type DescribeClassificationJobOutput struct {
 	CreatedAt *time.Time
 
 	// The custom data identifiers that the job uses to analyze data.
-	CustomDataIdentifierIds []*string
+	CustomDataIdentifierIds []string
 
 	// The custom description of the job.
 	Description *string
 
 	// Specifies whether the job is configured to analyze all existing, eligible
 	// objects immediately after it's created.
-	InitialRun *bool
+	InitialRun bool
 
 	// The Amazon Resource Name (ARN) of the job.
 	JobArn *string
@@ -109,7 +109,7 @@ type DescribeClassificationJobOutput struct {
 
 	// The sampling depth, as a percentage, that determines the percentage of eligible
 	// objects that the job analyzes.
-	SamplingPercentage *int32
+	SamplingPercentage int32
 
 	// The recurrence pattern for running the job. If the job is configured to run only
 	// once, this value is null.
@@ -121,7 +121,7 @@ type DescribeClassificationJobOutput struct {
 
 	// A map of key-value pairs that specifies which tags (keys and values) are
 	// associated with the classification job.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// If the current status of the job is USER_PAUSED, specifies when the job was
 	// paused and when the job will expire and be cancelled if it isn't resumed. This

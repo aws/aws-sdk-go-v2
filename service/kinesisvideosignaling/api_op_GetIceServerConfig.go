@@ -61,7 +61,7 @@ type GetIceServerConfigInput struct {
 type GetIceServerConfigOutput struct {
 
 	// The list of ICE server information objects.
-	IceServerList []*types.IceServer
+	IceServerList []types.IceServer
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

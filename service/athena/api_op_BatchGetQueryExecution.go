@@ -37,16 +37,16 @@ type BatchGetQueryExecutionInput struct {
 	// An array of query execution IDs.
 	//
 	// This member is required.
-	QueryExecutionIds []*string
+	QueryExecutionIds []string
 }
 
 type BatchGetQueryExecutionOutput struct {
 
 	// Information about a query execution.
-	QueryExecutions []*types.QueryExecution
+	QueryExecutions []types.QueryExecution
 
 	// Information about the query executions that failed to run.
-	UnprocessedQueryExecutionIds []*types.UnprocessedQueryExecutionId
+	UnprocessedQueryExecutionIds []types.UnprocessedQueryExecutionId
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

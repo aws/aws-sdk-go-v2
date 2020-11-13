@@ -85,7 +85,7 @@ type PutRecordsInput struct {
 	// The records associated with the request.
 	//
 	// This member is required.
-	Records []*types.PutRecordsRequestEntry
+	Records []types.PutRecordsRequestEntry
 
 	// The stream name associated with the request.
 	//
@@ -102,7 +102,7 @@ type PutRecordsOutput struct {
 	// be added to a stream includes ErrorCode and ErrorMessage in the result.
 	//
 	// This member is required.
-	Records []*types.PutRecordsResultEntry
+	Records []types.PutRecordsResultEntry
 
 	// The encryption type used on the records. This parameter can be one of the
 	// following values:

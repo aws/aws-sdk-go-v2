@@ -52,10 +52,10 @@ type GetRouteResponseOutput struct {
 	ModelSelectionExpression *string
 
 	// Represents the response models of a route response.
-	ResponseModels map[string]*string
+	ResponseModels map[string]string
 
 	// Represents the response parameters of a route response.
-	ResponseParameters map[string]*types.ParameterConstraints
+	ResponseParameters map[string]types.ParameterConstraints
 
 	// Represents the identifier of a route response.
 	RouteResponseId *string

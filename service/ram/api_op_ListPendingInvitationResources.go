@@ -50,7 +50,7 @@ type ListPendingInvitationResourcesOutput struct {
 	NextToken *string
 
 	// Information about the resources included the resource share.
-	Resources []*types.Resource
+	Resources []types.Resource
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

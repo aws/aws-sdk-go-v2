@@ -54,7 +54,7 @@ type StartPosition struct {
 	Id *string
 
 	// The start position of the most recent message where you want to start.
-	MostRecent *int32
+	MostRecent int32
 }
 
 // The websocket for the participant's connection.

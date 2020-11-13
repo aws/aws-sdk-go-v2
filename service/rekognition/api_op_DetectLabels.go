@@ -104,7 +104,7 @@ type DetectLabelsOutput struct {
 	LabelModelVersion *string
 
 	// An array of labels for the real-world objects detected.
-	Labels []*types.Label
+	Labels []types.Label
 
 	// The value of OrientationCorrection is always null. If the input image is in
 	// .jpeg format, it might contain exchangeable image file format (Exif) metadata

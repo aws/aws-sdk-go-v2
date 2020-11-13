@@ -49,7 +49,7 @@ type DeleteJobInput struct {
 	// unable to access job information or update the job execution status. Use caution
 	// and ensure that each device executing a job which is deleted is able to recover
 	// to a valid state.
-	Force *bool
+	Force bool
 
 	// The namespace used to indicate that a job is a customer-managed job. When you
 	// specify a value for this parameter, AWS IoT Core sends jobs notifications to

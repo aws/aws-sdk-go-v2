@@ -45,7 +45,7 @@ type DeleteAnomalyDetectorInput struct {
 	Stat *string
 
 	// The metric dimensions associated with the anomaly detection model to delete.
-	Dimensions []*types.Dimension
+	Dimensions []types.Dimension
 }
 
 type DeleteAnomalyDetectorOutput struct {

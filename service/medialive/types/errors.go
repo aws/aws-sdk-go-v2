@@ -147,7 +147,7 @@ func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smith
 type UnprocessableEntityException struct {
 	Message *string
 
-	ValidationErrors []*ValidationError
+	ValidationErrors []ValidationError
 }
 
 func (e *UnprocessableEntityException) Error() string {

@@ -36,16 +36,16 @@ type BatchGetTriggersInput struct {
 	// operation.
 	//
 	// This member is required.
-	TriggerNames []*string
+	TriggerNames []string
 }
 
 type BatchGetTriggersOutput struct {
 
 	// A list of trigger definitions.
-	Triggers []*types.Trigger
+	Triggers []types.Trigger
 
 	// A list of names of triggers not found.
-	TriggersNotFound []*string
+	TriggersNotFound []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

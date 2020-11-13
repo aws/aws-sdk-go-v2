@@ -43,7 +43,7 @@ type DescribeConnectorsInput struct {
 type DescribeConnectorsOutput struct {
 
 	// The configuration that is applied to the connectors used in the flow.
-	ConnectorConfigurations map[string]*types.ConnectorConfiguration
+	ConnectorConfigurations map[string]types.ConnectorConfiguration
 
 	// The pagination token for the next page of data.
 	NextToken *string

@@ -54,7 +54,7 @@ type CreatePermissionSetInput struct {
 	SessionDuration *string
 
 	// The tags to attach to the new PermissionSet.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreatePermissionSetOutput struct {

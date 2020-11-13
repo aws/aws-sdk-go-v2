@@ -95,12 +95,12 @@ type ListObjectsV2Input struct {
 
 	// The owner field is not present in listV2 by default, if you want to return owner
 	// field with each key in the result then set the fetch owner field to true.
-	FetchOwner *bool
+	FetchOwner bool
 
 	// Sets the maximum number of keys returned in the response. By default the API
 	// returns up to 1,000 key names. The response might contain fewer keys but will
 	// never contain more.
-	MaxKeys *int32
+	MaxKeys int32
 
 	// Limits the response to keys that begin with the specified prefix.
 	Prefix *string
@@ -126,10 +126,10 @@ type ListObjectsV2Output struct {
 	// slash (/) as in notes/summer/july, the common prefix is notes/summer/. All of
 	// the keys that roll up into a common prefix count as a single return when
 	// calculating the number of returns.
-	CommonPrefixes []*types.CommonPrefix
+	CommonPrefixes []types.CommonPrefix
 
 	// Metadata about each object returned.
-	Contents []*types.Object
+	Contents []types.Object
 
 	// If ContinuationToken was sent with the request, it is included in the response.
 	ContinuationToken *string
@@ -150,17 +150,17 @@ type ListObjectsV2Output struct {
 	// Set to false if all of the results were returned. Set to true if more keys are
 	// available to return. If the number of results exceeds that specified by MaxKeys,
 	// all of the results might not be returned.
-	IsTruncated *bool
+	IsTruncated bool
 
 	// KeyCount is the number of keys returned with this request. KeyCount will always
 	// be less than equals to MaxKeys field. Say you ask for 50 keys, your result will
 	// include less than equals 50 keys
-	KeyCount *int32
+	KeyCount int32
 
 	// Sets the maximum number of keys returned in the response. By default the API
 	// returns up to 1,000 key names. The response might contain fewer keys but will
 	// never contain more.
-	MaxKeys *int32
+	MaxKeys int32
 
 	// The bucket name. When using this API with an access point, you must direct
 	// requests to the access point hostname. The access point hostname takes the form

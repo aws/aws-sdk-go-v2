@@ -108,7 +108,7 @@ type DescribeEndpointOutput struct {
 
 	// An array of ProductionVariantSummary objects, one for each model hosted behind
 	// this endpoint.
-	ProductionVariants []*types.ProductionVariantSummary
+	ProductionVariants []types.ProductionVariantSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

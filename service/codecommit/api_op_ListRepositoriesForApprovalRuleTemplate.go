@@ -50,7 +50,7 @@ type ListRepositoriesForApprovalRuleTemplateOutput struct {
 
 	// A list of repository names that are associated with the specified approval rule
 	// template.
-	RepositoryNames []*string
+	RepositoryNames []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

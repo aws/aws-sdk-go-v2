@@ -64,7 +64,7 @@ type ListIPSetsOutput struct {
 
 	// Array of IPSets. This may not be the full list of IPSets that you have defined.
 	// See the Limit specification for this request.
-	IPSets []*types.IPSetSummary
+	IPSets []types.IPSetSummary
 
 	// When you request a list of objects with a Limit setting, if the number of
 	// objects that are still available for retrieval exceeds the limit, AWS WAF

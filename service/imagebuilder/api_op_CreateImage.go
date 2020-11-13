@@ -61,7 +61,7 @@ type CreateImageInput struct {
 	ImageTestsConfiguration *types.ImageTestsConfiguration
 
 	// The tags of the image.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateImageOutput struct {

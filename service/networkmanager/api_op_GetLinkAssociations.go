@@ -51,7 +51,7 @@ type GetLinkAssociationsInput struct {
 type GetLinkAssociationsOutput struct {
 
 	// The link associations.
-	LinkAssociations []*types.LinkAssociation
+	LinkAssociations []types.LinkAssociation
 
 	// The token for the next page of results.
 	NextToken *string

@@ -53,7 +53,7 @@ type GetReplicationRunsOutput struct {
 	ReplicationJob *types.ReplicationJob
 
 	// Information about the replication runs.
-	ReplicationRunList []*types.ReplicationRun
+	ReplicationRunList []types.ReplicationRun
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

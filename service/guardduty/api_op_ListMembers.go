@@ -37,7 +37,7 @@ type ListMembersInput struct {
 
 	// You can use this parameter to indicate the maximum number of items you want in
 	// the response. The default value is 50. The maximum value is 50.
-	MaxResults *int32
+	MaxResults int32
 
 	// You can use this parameter when paginating results. Set the value of this
 	// parameter to null on your first call to the list action. For subsequent calls to
@@ -53,7 +53,7 @@ type ListMembersInput struct {
 type ListMembersOutput struct {
 
 	// A list of members.
-	Members []*types.Member
+	Members []types.Member
 
 	// The pagination parameter to be used on the next list operation to retrieve more
 	// items.

@@ -28,7 +28,7 @@ type Ami struct {
 type AmiDistributionConfiguration struct {
 
 	// The tags to apply to AMIs distributed to this Region.
-	AmiTags map[string]*string
+	AmiTags map[string]string
 
 	// The description of the distribution configuration. Minimum and maximum length
 	// are in characters.
@@ -45,7 +45,7 @@ type AmiDistributionConfiguration struct {
 	Name *string
 
 	// The ID of an account to which you want to distribute an image.
-	TargetAccountIds []*string
+	TargetAccountIds []string
 }
 
 // A detailed view of a component.
@@ -84,10 +84,10 @@ type Component struct {
 	// The operating system (OS) version supported by the component. If the OS
 	// information is available, a prefix match is performed against the parent image
 	// OS version during image recipe creation.
-	SupportedOsVersions []*string
+	SupportedOsVersions []string
 
 	// The tags associated with the component.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The type of the component denotes whether the component is used to build the
 	// image or only to test it.
@@ -133,10 +133,10 @@ type ComponentSummary struct {
 	// The operating system (OS) version supported by the component. If the OS
 	// information is available, a prefix match is performed against the parent image
 	// OS version during image recipe creation.
-	SupportedOsVersions []*string
+	SupportedOsVersions []string
 
 	// The tags associated with the component.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The type of the component denotes whether the component is used to build the
 	// image or only to test it.
@@ -170,7 +170,7 @@ type ComponentVersion struct {
 	// The operating system (OS) version supported by the component. If the OS
 	// information is available, a prefix match is performed against the parent image
 	// OS version during image recipe creation.
-	SupportedOsVersions []*string
+	SupportedOsVersions []string
 
 	// The type of the component denotes whether the component is used to build the
 	// image or only to test it.
@@ -193,7 +193,7 @@ type Distribution struct {
 
 	// The License Manager Configuration to associate with the AMI in the specified
 	// Region.
-	LicenseConfigurationArns []*string
+	LicenseConfigurationArns []string
 }
 
 // A distribution configuration.
@@ -217,13 +217,13 @@ type DistributionConfiguration struct {
 	Description *string
 
 	// The distributions of the distribution configuration.
-	Distributions []*Distribution
+	Distributions []Distribution
 
 	// The name of the distribution configuration.
 	Name *string
 
 	// The tags of the distribution configuration.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // A high-level overview of a distribution configuration.
@@ -245,7 +245,7 @@ type DistributionConfigurationSummary struct {
 	Name *string
 
 	// The tags associated with the distribution configuration.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // Amazon EBS-specific block device mapping specifications.
@@ -282,7 +282,7 @@ type Filter struct {
 	Name *string
 
 	// The filter values. Filter values are case-sensitive.
-	Values []*string
+	Values []string
 }
 
 // An image build version.
@@ -334,7 +334,7 @@ type Image struct {
 	State *ImageState
 
 	// The tags of the image.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The semantic version of the image.
 	Version *string
@@ -394,7 +394,7 @@ type ImagePipeline struct {
 	Status PipelineStatus
 
 	// The tags of this image pipeline.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // An image recipe.
@@ -404,10 +404,10 @@ type ImageRecipe struct {
 	Arn *string
 
 	// The block device mappings to apply when creating images from this recipe.
-	BlockDeviceMappings []*InstanceBlockDeviceMapping
+	BlockDeviceMappings []InstanceBlockDeviceMapping
 
 	// The components of the image recipe.
-	Components []*ComponentConfiguration
+	Components []ComponentConfiguration
 
 	// The date on which this image recipe was created.
 	DateCreated *string
@@ -428,7 +428,7 @@ type ImageRecipe struct {
 	Platform Platform
 
 	// The tags of the image recipe.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The version of the image recipe.
 	Version *string
@@ -459,7 +459,7 @@ type ImageRecipeSummary struct {
 	Platform Platform
 
 	// The tags of the image recipe.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // Image state shows the image status and the reason for that status.
@@ -501,7 +501,7 @@ type ImageSummary struct {
 	State *ImageState
 
 	// The tags of the image.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The version of the image.
 	Version *string
@@ -562,7 +562,7 @@ type InfrastructureConfiguration struct {
 	InstanceProfileName *string
 
 	// The instance types of the infrastructure configuration.
-	InstanceTypes []*string
+	InstanceTypes []string
 
 	// The EC2 key pair of the infrastructure configuration.
 	KeyPair *string
@@ -574,10 +574,10 @@ type InfrastructureConfiguration struct {
 	Name *string
 
 	// The tags attached to the resource created by Image Builder.
-	ResourceTags map[string]*string
+	ResourceTags map[string]string
 
 	// The security group IDs of the infrastructure configuration.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// The SNS topic Amazon Resource Name (ARN) of the infrastructure configuration.
 	SnsTopicArn *string
@@ -586,7 +586,7 @@ type InfrastructureConfiguration struct {
 	SubnetId *string
 
 	// The tags of the infrastructure configuration.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The terminate instance on failure configuration of the infrastructure
 	// configuration.
@@ -612,10 +612,10 @@ type InfrastructureConfigurationSummary struct {
 	Name *string
 
 	// The tags attached to the image created by Image Builder.
-	ResourceTags map[string]*string
+	ResourceTags map[string]string
 
 	// The tags of the infrastructure configuration.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // Defines block device mappings for the instance used to configure your image.
@@ -644,10 +644,10 @@ type InstanceBlockDeviceMapping struct {
 type LaunchPermissionConfiguration struct {
 
 	// The name of the group.
-	UserGroups []*string
+	UserGroups []string
 
 	// The AWS account ID.
-	UserIds []*string
+	UserIds []string
 }
 
 // Logging configuration defines where Image Builder uploads your logs.
@@ -661,7 +661,7 @@ type Logging struct {
 type OutputResources struct {
 
 	// The EC2 AMIs created by this image.
-	Amis []*Ami
+	Amis []Ami
 }
 
 // Amazon S3 logging configuration.

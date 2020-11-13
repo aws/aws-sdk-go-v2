@@ -42,7 +42,7 @@ type DescribeImagesInput struct {
 	Filter *types.DescribeImagesFilter
 
 	// The list of image IDs for the requested repository.
-	ImageIds []*types.ImageIdentifier
+	ImageIds []types.ImageIdentifier
 
 	// The maximum number of repository results returned by DescribeImages in paginated
 	// output. When this parameter is used, DescribeImages only returns maxResults
@@ -70,7 +70,7 @@ type DescribeImagesInput struct {
 type DescribeImagesOutput struct {
 
 	// A list of ImageDetail objects that contain data about the image.
-	ImageDetails []*types.ImageDetail
+	ImageDetails []types.ImageDetail
 
 	// The nextToken value to include in a future DescribeImages request. When the
 	// results of a DescribeImages request exceed maxResults, this value can be used to

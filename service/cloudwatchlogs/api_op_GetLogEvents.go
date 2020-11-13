@@ -75,7 +75,7 @@ type GetLogEventsInput struct {
 type GetLogEventsOutput struct {
 
 	// The events.
-	Events []*types.OutputLogEvent
+	Events []types.OutputLogEvent
 
 	// The token for the next set of items in the backward direction. The token expires
 	// after 24 hours. This token is never null. If you have reached the end of the

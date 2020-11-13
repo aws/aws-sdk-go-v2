@@ -68,7 +68,7 @@ type GetDiscoveredResourceCountsInput struct {
 	// The maximum number of ResourceCount objects returned on each page. The default
 	// is 100. You cannot specify a number greater than 100. If you specify 0, AWS
 	// Config uses the default.
-	Limit *int32
+	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
@@ -82,7 +82,7 @@ type GetDiscoveredResourceCountsInput struct {
 	// ResourceCount objects. If the configuration recorder is not recording a specific
 	// resource type (for example, S3 buckets), that resource type is not returned in
 	// the list of ResourceCount objects.
-	ResourceTypes []*string
+	ResourceTypes []string
 }
 
 type GetDiscoveredResourceCountsOutput struct {
@@ -93,7 +93,7 @@ type GetDiscoveredResourceCountsOutput struct {
 
 	// The list of ResourceCount objects. Each object is listed in descending order by
 	// the number of resources.
-	ResourceCounts []*types.ResourceCount
+	ResourceCounts []types.ResourceCount
 
 	// The total number of resources that AWS Config is recording in the region for
 	// your account. If you specify resource types in the request, AWS Config returns
@@ -109,7 +109,7 @@ type GetDiscoveredResourceCountsOutput struct {
 	//
 	// * AWS Config
 	// returns 25 for totalDiscoveredResources.
-	TotalDiscoveredResources *int64
+	TotalDiscoveredResources int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

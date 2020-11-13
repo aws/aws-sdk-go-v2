@@ -47,11 +47,11 @@ type GetIdentityPoolRolesOutput struct {
 	// String-to-RoleMapping object map. The string identifies the identity provider,
 	// for example, "graph.facebook.com" or
 	// "cognito-idp.us-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id".
-	RoleMappings map[string]*types.RoleMapping
+	RoleMappings map[string]types.RoleMapping
 
 	// The map of roles associated with this pool. Currently only authenticated and
 	// unauthenticated roles are supported.
-	Roles map[string]*string
+	Roles map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -46,7 +46,7 @@ type IndexDocumentsInput struct {
 type IndexDocumentsOutput struct {
 
 	// The names of the fields that are currently being indexed.
-	FieldNames []*string
+	FieldNames []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

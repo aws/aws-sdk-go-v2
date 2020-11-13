@@ -39,7 +39,7 @@ type AuthorizeIpRulesInput struct {
 	// The rules to add to the group.
 	//
 	// This member is required.
-	UserRules []*types.IpRuleItem
+	UserRules []types.IpRuleItem
 }
 
 type AuthorizeIpRulesOutput struct {

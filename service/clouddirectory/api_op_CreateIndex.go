@@ -39,13 +39,13 @@ type CreateIndexInput struct {
 	// Indicates whether the attribute that is being indexed has unique values or not.
 	//
 	// This member is required.
-	IsUnique *bool
+	IsUnique bool
 
 	// Specifies the attributes that should be indexed on. Currently only a single
 	// attribute is supported.
 	//
 	// This member is required.
-	OrderedIndexedAttributeList []*types.AttributeKey
+	OrderedIndexedAttributeList []types.AttributeKey
 
 	// The name of the link between the parent object and the index object.
 	LinkName *string

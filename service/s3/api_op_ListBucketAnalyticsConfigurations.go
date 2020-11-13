@@ -77,7 +77,7 @@ type ListBucketAnalyticsConfigurationsInput struct {
 type ListBucketAnalyticsConfigurationsOutput struct {
 
 	// The list of analytics configurations for a bucket.
-	AnalyticsConfigurationList []*types.AnalyticsConfiguration
+	AnalyticsConfigurationList []types.AnalyticsConfiguration
 
 	// The marker that is used as a starting point for this analytics configuration
 	// list response. This value is present if it was sent in the request.
@@ -86,7 +86,7 @@ type ListBucketAnalyticsConfigurationsOutput struct {
 	// Indicates whether the returned list of analytics configurations is complete. A
 	// value of true indicates that the list is not complete and the
 	// NextContinuationToken will be provided for a subsequent request.
-	IsTruncated *bool
+	IsTruncated bool
 
 	// NextContinuationToken is sent when isTruncated is true, which indicates that
 	// there are more analytics configurations to list. The next request must include

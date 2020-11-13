@@ -78,7 +78,7 @@ type CreateCertificateAuthorityInput struct {
 	// up to 50 tags with a private CA. For information using tags with IAM to manage
 	// permissions, see Controlling Access Using IAM Tags
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html).
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateCertificateAuthorityOutput struct {

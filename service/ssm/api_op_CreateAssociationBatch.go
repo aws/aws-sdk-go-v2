@@ -37,16 +37,16 @@ type CreateAssociationBatchInput struct {
 	// One or more associations.
 	//
 	// This member is required.
-	Entries []*types.CreateAssociationBatchRequestEntry
+	Entries []types.CreateAssociationBatchRequestEntry
 }
 
 type CreateAssociationBatchOutput struct {
 
 	// Information about the associations that failed.
-	Failed []*types.FailedCreateAssociation
+	Failed []types.FailedCreateAssociation
 
 	// Information about the associations that succeeded.
-	Successful []*types.AssociationDescription
+	Successful []types.AssociationDescription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

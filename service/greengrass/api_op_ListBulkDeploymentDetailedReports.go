@@ -46,7 +46,7 @@ type ListBulkDeploymentDetailedReportsInput struct {
 type ListBulkDeploymentDetailedReportsOutput struct {
 
 	// A list of the individual group deployments in the bulk deployment operation.
-	Deployments []*types.BulkDeploymentResult
+	Deployments []types.BulkDeploymentResult
 
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.

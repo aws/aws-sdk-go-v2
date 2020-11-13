@@ -36,7 +36,7 @@ type TagResourceInput struct {
 	// The tags used to organize, track, or control access for your flow.
 	//
 	// This member is required.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type TagResourceOutput struct {

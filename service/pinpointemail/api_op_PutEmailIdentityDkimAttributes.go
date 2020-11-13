@@ -39,7 +39,7 @@ type PutEmailIdentityDkimAttributesInput struct {
 	// true, then the messages that Amazon Pinpoint sends from the identity are
 	// DKIM-signed. When you set this value to false, then the messages that Amazon
 	// Pinpoint sends from the identity aren't DKIM-signed.
-	SigningEnabled *bool
+	SigningEnabled bool
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request

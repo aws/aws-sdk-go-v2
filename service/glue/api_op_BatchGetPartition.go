@@ -37,7 +37,7 @@ type BatchGetPartitionInput struct {
 	// A list of partition values identifying the partitions to retrieve.
 	//
 	// This member is required.
-	PartitionsToGet []*types.PartitionValueList
+	PartitionsToGet []types.PartitionValueList
 
 	// The name of the partitions' table.
 	//
@@ -52,11 +52,11 @@ type BatchGetPartitionInput struct {
 type BatchGetPartitionOutput struct {
 
 	// A list of the requested partitions.
-	Partitions []*types.Partition
+	Partitions []types.Partition
 
 	// A list of the partition values in the request for which partitions were not
 	// returned.
-	UnprocessedKeys []*types.PartitionValueList
+	UnprocessedKeys []types.PartitionValueList
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

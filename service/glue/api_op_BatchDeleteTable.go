@@ -44,7 +44,7 @@ type BatchDeleteTableInput struct {
 	// A list of the table to delete.
 	//
 	// This member is required.
-	TablesToDelete []*string
+	TablesToDelete []string
 
 	// The ID of the Data Catalog where the table resides. If none is provided, the AWS
 	// account ID is used by default.
@@ -54,7 +54,7 @@ type BatchDeleteTableInput struct {
 type BatchDeleteTableOutput struct {
 
 	// A list of errors encountered in attempting to delete the specified tables.
-	Errors []*types.TableError
+	Errors []types.TableError
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

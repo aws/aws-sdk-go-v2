@@ -50,7 +50,7 @@ type RemoveTagsFromResourceInput struct {
 	// Tag keys that you want to remove from the specified resource.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 type RemoveTagsFromResourceOutput struct {

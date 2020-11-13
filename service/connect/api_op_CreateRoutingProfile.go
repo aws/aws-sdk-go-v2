@@ -48,7 +48,7 @@ type CreateRoutingProfileInput struct {
 	// routing profile.
 	//
 	// This member is required.
-	MediaConcurrencies []*types.MediaConcurrency
+	MediaConcurrencies []types.MediaConcurrency
 
 	// The name of the routing profile. Must not be more than 127 characters.
 	//
@@ -57,10 +57,10 @@ type CreateRoutingProfileInput struct {
 
 	// The inbound queues associated with the routing profile. If no queue is added,
 	// the agent can only make outbound calls.
-	QueueConfigs []*types.RoutingProfileQueueConfig
+	QueueConfigs []types.RoutingProfileQueueConfig
 
 	// One or more tags.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateRoutingProfileOutput struct {

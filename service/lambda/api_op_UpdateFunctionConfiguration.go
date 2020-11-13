@@ -72,7 +72,7 @@ type UpdateFunctionConfigurationInput struct {
 	Environment *types.Environment
 
 	// Connection settings for an Amazon EFS file system.
-	FileSystemConfigs []*types.FileSystemConfig
+	FileSystemConfigs []types.FileSystemConfig
 
 	// The name of the method within your code that Lambda calls to execute your
 	// function. The format includes the file name. It can also include namespaces and
@@ -90,7 +90,7 @@ type UpdateFunctionConfigurationInput struct {
 	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) to add
 	// to the function's execution environment. Specify each layer by its ARN,
 	// including the version.
-	Layers []*string
+	Layers []string
 
 	// The amount of memory that your function has access to. Increasing the function's
 	// memory also increases its CPU allocation. The default value is 128 MB. The value
@@ -132,7 +132,7 @@ type UpdateFunctionConfigurationOutput struct {
 	CodeSha256 *string
 
 	// The size of the function's deployment package, in bytes.
-	CodeSize *int64
+	CodeSize int64
 
 	// The function's dead letter queue.
 	DeadLetterConfig *types.DeadLetterConfig
@@ -144,7 +144,7 @@ type UpdateFunctionConfigurationOutput struct {
 	Environment *types.EnvironmentResponse
 
 	// Connection settings for an Amazon EFS file system.
-	FileSystemConfigs []*types.FileSystemConfig
+	FileSystemConfigs []types.FileSystemConfig
 
 	// The function's Amazon Resource Name (ARN).
 	FunctionArn *string
@@ -175,7 +175,7 @@ type UpdateFunctionConfigurationOutput struct {
 
 	// The function's  layers
 	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
-	Layers []*types.Layer
+	Layers []types.Layer
 
 	// For Lambda@Edge functions, the ARN of the master function.
 	MasterArn *string

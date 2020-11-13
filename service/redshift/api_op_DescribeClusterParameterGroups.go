@@ -68,7 +68,7 @@ type DescribeClusterParameterGroupsInput struct {
 	// environment. If you specify both of these tag keys in the request, Amazon
 	// Redshift returns a response with the parameter groups that have either or both
 	// of these tag keys associated with them.
-	TagKeys []*string
+	TagKeys []string
 
 	// A tag value or values for which you want to return all matching cluster
 	// parameter groups that are associated with the specified tag value or values. For
@@ -76,7 +76,7 @@ type DescribeClusterParameterGroupsInput struct {
 	// called admin and test. If you specify both of these tag values in the request,
 	// Amazon Redshift returns a response with the parameter groups that have either or
 	// both of these tag values associated with them.
-	TagValues []*string
+	TagValues []string
 }
 
 // Contains the output from the DescribeClusterParameterGroups action.
@@ -91,7 +91,7 @@ type DescribeClusterParameterGroupsOutput struct {
 
 	// A list of ClusterParameterGroup instances. Each instance describes one cluster
 	// parameter group.
-	ParameterGroups []*types.ClusterParameterGroup
+	ParameterGroups []types.ClusterParameterGroup
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

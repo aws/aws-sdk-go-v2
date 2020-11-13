@@ -66,7 +66,7 @@ type DescribeMatchmakingConfigurationsInput struct {
 	// A unique identifier for a matchmaking configuration(s) to retrieve. You can use
 	// either the configuration name or ARN value. To request all existing
 	// configurations, leave this parameter empty.
-	Names []*string
+	Names []string
 
 	// A token that indicates the start of the next sequential page of results. Use the
 	// token that is returned with a previous call to this operation. To start at the
@@ -83,7 +83,7 @@ type DescribeMatchmakingConfigurationsInput struct {
 type DescribeMatchmakingConfigurationsOutput struct {
 
 	// A collection of requested matchmaking configurations.
-	Configurations []*types.MatchmakingConfiguration
+	Configurations []types.MatchmakingConfiguration
 
 	// A token that indicates where to resume retrieving results on the next call to
 	// this operation. If no token is returned, these results represent the end of the

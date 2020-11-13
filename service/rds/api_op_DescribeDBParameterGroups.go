@@ -39,7 +39,7 @@ type DescribeDBParameterGroupsInput struct {
 	DBParameterGroupName *string
 
 	// This parameter isn't currently supported.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous DescribeDBParameterGroups
 	// request. If this parameter is specified, the response includes only records
@@ -58,7 +58,7 @@ type DescribeDBParameterGroupsInput struct {
 type DescribeDBParameterGroupsOutput struct {
 
 	// A list of DBParameterGroup instances.
-	DBParameterGroups []*types.DBParameterGroup
+	DBParameterGroups []types.DBParameterGroup
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the

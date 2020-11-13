@@ -44,7 +44,7 @@ type GetInstancesHealthStatusInput struct {
 	// service, submit a ListInstances
 	// (https://docs.aws.amazon.com/cloud-map/latest/api/API_ListInstances.html)
 	// request.
-	Instances []*string
+	Instances []string
 
 	// The maximum number of instances that you want AWS Cloud Map to return in the
 	// response to a GetInstancesHealthStatus request. If you don't specify a value for

@@ -45,7 +45,7 @@ type ListComponentsInput struct {
 type ListComponentsOutput struct {
 
 	// The list of application components.
-	ApplicationComponentList []*types.ApplicationComponent
+	ApplicationComponentList []types.ApplicationComponent
 
 	// The token to request the next page of results.
 	NextToken *string

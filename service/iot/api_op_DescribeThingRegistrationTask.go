@@ -42,7 +42,7 @@ type DescribeThingRegistrationTaskOutput struct {
 	CreationDate *time.Time
 
 	// The number of things that failed to be provisioned.
-	FailureCount *int32
+	FailureCount int32
 
 	// The S3 bucket that contains the input file.
 	InputFileBucket *string
@@ -57,7 +57,7 @@ type DescribeThingRegistrationTaskOutput struct {
 	Message *string
 
 	// The progress of the bulk provisioning task expressed as a percentage.
-	PercentageProgress *int32
+	PercentageProgress int32
 
 	// The role ARN that grants access to the input file bucket.
 	RoleArn *string
@@ -66,7 +66,7 @@ type DescribeThingRegistrationTaskOutput struct {
 	Status types.Status
 
 	// The number of things successfully provisioned.
-	SuccessCount *int32
+	SuccessCount int32
 
 	// The task ID.
 	TaskId *string

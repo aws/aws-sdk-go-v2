@@ -47,7 +47,7 @@ type CreateClusterInput struct {
 	// are available to all accounts and only need to be associated with a cluster to
 	// be used. The PutClusterCapacityProviders API operation is used to update the
 	// list of available capacity providers for a cluster after the cluster is created.
-	CapacityProviders []*string
+	CapacityProviders []string
 
 	// The name of your cluster. If you do not specify a name for your cluster, you
 	// create a cluster named default. Up to 255 letters (uppercase and lowercase),
@@ -70,13 +70,13 @@ type CreateClusterInput struct {
 	// with a cluster to be used. If a default capacity provider strategy is not
 	// defined for a cluster during creation, it can be defined later with the
 	// PutClusterCapacityProviders API operation.
-	DefaultCapacityProviderStrategy []*types.CapacityProviderStrategyItem
+	DefaultCapacityProviderStrategy []types.CapacityProviderStrategyItem
 
 	// The setting to use when creating a cluster. This parameter is used to enable
 	// CloudWatch Container Insights for a cluster. If this value is specified, it will
 	// override the containerInsights value set with PutAccountSetting or
 	// PutAccountSettingDefault.
-	Settings []*types.ClusterSetting
+	Settings []types.ClusterSetting
 
 	// The metadata that you apply to the cluster to help you categorize and organize
 	// them. Each tag consists of a key and an optional value, both of which you
@@ -106,7 +106,7 @@ type CreateClusterInput struct {
 	// of such as a prefix for either keys or values as it is reserved for AWS use. You
 	// cannot edit or delete tag keys or values with this prefix. Tags with this prefix
 	// do not count against your tags per resource limit.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateClusterOutput struct {

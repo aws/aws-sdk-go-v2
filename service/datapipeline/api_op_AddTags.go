@@ -38,7 +38,7 @@ type AddTagsInput struct {
 	// The tags to add, as key/value pairs.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // Contains the output of AddTags.

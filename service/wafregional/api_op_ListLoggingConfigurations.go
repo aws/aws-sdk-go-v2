@@ -39,7 +39,7 @@ type ListLoggingConfigurationsInput struct {
 	// for this request. If you have more LoggingConfigurations than the number that
 	// you specify for Limit, the response includes a NextMarker value that you can use
 	// to get another batch of LoggingConfigurations.
-	Limit *int32
+	Limit int32
 
 	// If you specify a value for Limit and you have more LoggingConfigurations than
 	// the value of Limit, AWS WAF returns a NextMarker value in the response that
@@ -53,7 +53,7 @@ type ListLoggingConfigurationsInput struct {
 type ListLoggingConfigurationsOutput struct {
 
 	// An array of LoggingConfiguration objects.
-	LoggingConfigurations []*types.LoggingConfiguration
+	LoggingConfigurations []types.LoggingConfiguration
 
 	// If you have more LoggingConfigurations than the number that you specified for
 	// Limit in the request, the response includes a NextMarker value. To list more

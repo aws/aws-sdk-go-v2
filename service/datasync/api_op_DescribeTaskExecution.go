@@ -41,27 +41,27 @@ type DescribeTaskExecutionInput struct {
 type DescribeTaskExecutionOutput struct {
 
 	// The physical number of bytes transferred over the network.
-	BytesTransferred *int64
+	BytesTransferred int64
 
 	// The number of logical bytes written to the destination AWS storage resource.
-	BytesWritten *int64
+	BytesWritten int64
 
 	// The estimated physical number of bytes that is to be transferred over the
 	// network.
-	EstimatedBytesToTransfer *int64
+	EstimatedBytesToTransfer int64
 
 	// The expected number of files that is to be transferred over the network. This
 	// value is calculated during the PREPARING phase, before the TRANSFERRING phase.
 	// This value is the expected number of files to be transferred. It's calculated
 	// based on comparing the content of the source and destination locations and
 	// finding the delta that needs to be transferred.
-	EstimatedFilesToTransfer *int64
+	EstimatedFilesToTransfer int64
 
 	// A list of filter rules that determines which files to exclude from a task. The
 	// list should contain a single filter string that consists of the patterns to
 	// exclude. The patterns are delimited by "|" (that is, a pipe), for example:
 	// "/folder1|/folder2"
-	Excludes []*types.FilterRule
+	Excludes []types.FilterRule
 
 	// The actual number of files that was transferred over the network. This value is
 	// calculated and updated on an ongoing basis during the TRANSFERRING phase. It's
@@ -71,13 +71,13 @@ type DescribeTaskExecutionOutput struct {
 	// EstimatedFilesTransferred in some cases. This element is implementation-specific
 	// for some location types, so don't use it as an indicator for a correct file
 	// number or to monitor your task execution.
-	FilesTransferred *int64
+	FilesTransferred int64
 
 	// A list of filter rules that determines which files to include when running a
 	// task. The list should contain a single filter string that consists of the
 	// patterns to include. The patterns are delimited by "|" (that is, a pipe), for
 	// example: "/folder1|/folder2"
-	Includes []*types.FilterRule
+	Includes []types.FilterRule
 
 	// Represents the options that are available to control the behavior of a
 	// StartTaskExecution operation. Behavior includes preserving metadata such as user

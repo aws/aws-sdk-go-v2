@@ -74,7 +74,7 @@ type ListGameServersInput struct {
 type ListGameServersOutput struct {
 
 	// A collection of game server objects that match the request.
-	GameServers []*types.GameServer
+	GameServers []types.GameServer
 
 	// A token that indicates where to resume retrieving results on the next call to
 	// this operation. If no token is returned, these results represent the end of the

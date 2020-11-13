@@ -39,14 +39,14 @@ type CreateProvisioningTemplateVersionInput struct {
 	TemplateName *string
 
 	// Sets a fleet provision template version as the default version.
-	SetAsDefault *bool
+	SetAsDefault bool
 }
 
 type CreateProvisioningTemplateVersionOutput struct {
 
 	// True if the fleet provisioning template version is the default version,
 	// otherwise false.
-	IsDefaultVersion *bool
+	IsDefaultVersion bool
 
 	// The ARN that identifies the provisioning template.
 	TemplateArn *string

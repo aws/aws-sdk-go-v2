@@ -52,7 +52,7 @@ type DisassociateNodeInput struct {
 	//
 	// * CHEF_ORGANIZATION: The Chef organization with which the node was
 	// associated. By default only one organization named default can exist.
-	EngineAttributes []*types.EngineAttribute
+	EngineAttributes []types.EngineAttribute
 }
 
 type DisassociateNodeOutput struct {

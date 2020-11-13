@@ -33,7 +33,7 @@ type DescribeEndpointsInput struct {
 
 	// Optional. Max number of endpoints, up to twenty, that will be returned at one
 	// time.
-	MaxResults *int32
+	MaxResults int32
 
 	// Optional field, defaults to DEFAULT. Specify DEFAULT for this operation to
 	// return your endpoints if any exist, or to create an endpoint for you and return
@@ -49,7 +49,7 @@ type DescribeEndpointsInput struct {
 type DescribeEndpointsOutput struct {
 
 	// List of endpoints
-	Endpoints []*types.Endpoint
+	Endpoints []types.Endpoint
 
 	// Use this string to request the next batch of endpoints.
 	NextToken *string

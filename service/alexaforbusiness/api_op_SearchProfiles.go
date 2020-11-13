@@ -31,7 +31,7 @@ type SearchProfilesInput struct {
 
 	// The filters to use to list a specified set of room profiles. Supported filter
 	// keys are ProfileName and Address. Required.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of results to include in the response. If more results exist
 	// than the specified MaxResults value, a token is included in the response so that
@@ -45,7 +45,7 @@ type SearchProfilesInput struct {
 
 	// The sort order to use in listing the specified set of room profiles. Supported
 	// sort keys are ProfileName and Address.
-	SortCriteria []*types.Sort
+	SortCriteria []types.Sort
 }
 
 type SearchProfilesOutput struct {
@@ -54,7 +54,7 @@ type SearchProfilesOutput struct {
 	NextToken *string
 
 	// The profiles that meet the specified set of filter criteria, in sort order.
-	Profiles []*types.ProfileData
+	Profiles []types.ProfileData
 
 	// The total number of room profiles returned.
 	TotalCount *int32

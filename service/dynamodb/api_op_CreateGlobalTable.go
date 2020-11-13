@@ -81,7 +81,7 @@ type CreateGlobalTableInput struct {
 	// The Regions where the global table needs to be created.
 	//
 	// This member is required.
-	ReplicationGroup []*types.Replica
+	ReplicationGroup []types.Replica
 }
 
 type CreateGlobalTableOutput struct {

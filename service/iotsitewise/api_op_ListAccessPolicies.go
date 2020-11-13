@@ -65,7 +65,7 @@ type ListAccessPoliciesOutput struct {
 	// A list that summarizes each access policy.
 	//
 	// This member is required.
-	AccessPolicySummaries []*types.AccessPolicySummary
+	AccessPolicySummaries []types.AccessPolicySummary
 
 	// The token for the next set of results, or null if there are no additional
 	// results.

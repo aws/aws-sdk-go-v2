@@ -32,7 +32,7 @@ type SearchSkillGroupsInput struct {
 
 	// The filters to use to list a specified set of skill groups. The supported filter
 	// key is SkillGroupName.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of results to include in the response. If more results exist
 	// than the specified MaxResults value, a token is included in the response so that
@@ -47,7 +47,7 @@ type SearchSkillGroupsInput struct {
 
 	// The sort order to use in listing the specified set of skill groups. The
 	// supported sort key is SkillGroupName.
-	SortCriteria []*types.Sort
+	SortCriteria []types.Sort
 }
 
 type SearchSkillGroupsOutput struct {
@@ -56,7 +56,7 @@ type SearchSkillGroupsOutput struct {
 	NextToken *string
 
 	// The skill groups that meet the filter criteria, in sort order.
-	SkillGroups []*types.SkillGroupData
+	SkillGroups []types.SkillGroupData
 
 	// The total number of skill groups returned.
 	TotalCount *int32

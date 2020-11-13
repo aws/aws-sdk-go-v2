@@ -34,7 +34,7 @@ type ListDevicesInput struct {
 
 	// The maximum number of results to return per request. If not set, a default value
 	// of 100 is used.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token to retrieve the next set of results.
 	NextToken *string
@@ -43,7 +43,7 @@ type ListDevicesInput struct {
 type ListDevicesOutput struct {
 
 	// A list of devices.
-	Devices []*types.DeviceDescription
+	Devices []types.DeviceDescription
 
 	// The token to retrieve the next set of results.
 	NextToken *string

@@ -38,12 +38,12 @@ type AddTagsInput struct {
 	// The name of the load balancer. You can specify one load balancer only.
 	//
 	// This member is required.
-	LoadBalancerNames []*string
+	LoadBalancerNames []string
 
 	// The tags.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // Contains the output of AddTags.

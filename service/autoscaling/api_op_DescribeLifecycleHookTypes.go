@@ -38,7 +38,7 @@ type DescribeLifecycleHookTypesInput struct {
 type DescribeLifecycleHookTypesOutput struct {
 
 	// The lifecycle hook types.
-	LifecycleHookTypes []*string
+	LifecycleHookTypes []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

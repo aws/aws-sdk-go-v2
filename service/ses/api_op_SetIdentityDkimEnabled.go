@@ -47,7 +47,7 @@ type SetIdentityDkimEnabledInput struct {
 	// signing for this identity; false to disable it.
 	//
 	// This member is required.
-	DkimEnabled *bool
+	DkimEnabled bool
 
 	// The identity for which DKIM signing should be enabled or disabled.
 	//

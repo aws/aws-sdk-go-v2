@@ -64,7 +64,7 @@ type UpdateProvisionedProductPropertiesInput struct {
 	// provisioned product.
 	//
 	// This member is required.
-	ProvisionedProductProperties map[string]*string
+	ProvisionedProductProperties map[string]string
 
 	// The language code.
 	//
@@ -82,7 +82,7 @@ type UpdateProvisionedProductPropertiesOutput struct {
 	ProvisionedProductId *string
 
 	// A map that contains the properties updated.
-	ProvisionedProductProperties map[string]*string
+	ProvisionedProductProperties map[string]string
 
 	// The identifier of the record.
 	RecordId *string

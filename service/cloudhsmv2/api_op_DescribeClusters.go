@@ -40,7 +40,7 @@ type DescribeClustersInput struct {
 	// in the specified virtual private clouds (VPCs). Specify VPCs by their VPC
 	// identifier (ID). Use the states filter to return only clusters that match the
 	// specified state.
-	Filters map[string][]*string
+	Filters map[string][]string
 
 	// The maximum number of clusters to return in the response. When there are more
 	// clusters than the number you specify, the response contains a NextToken value.
@@ -54,7 +54,7 @@ type DescribeClustersInput struct {
 type DescribeClustersOutput struct {
 
 	// A list of clusters.
-	Clusters []*types.Cluster
+	Clusters []types.Cluster
 
 	// An opaque string that indicates that the response contains only a subset of
 	// clusters. Use this value in a subsequent DescribeClusters request to get more

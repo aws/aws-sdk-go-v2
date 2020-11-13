@@ -36,7 +36,7 @@ type UpdateStackInput struct {
 
 	// The list of interface VPC endpoint (interface endpoint) objects. Users of the
 	// stack can connect to AppStream 2.0 only through the specified endpoints.
-	AccessEndpoints []*types.AccessEndpoint
+	AccessEndpoints []types.AccessEndpoint
 
 	// The persistent application settings for users of a stack. When these settings
 	// are enabled, changes that users make to applications and Windows settings are
@@ -47,7 +47,7 @@ type UpdateStackInput struct {
 	AttributesToDelete []types.StackAttribute
 
 	// Deletes the storage connectors currently enabled for the stack.
-	DeleteStorageConnectors *bool
+	DeleteStorageConnectors bool
 
 	// The description to display.
 	Description *string
@@ -58,7 +58,7 @@ type UpdateStackInput struct {
 	// The domains where AppStream 2.0 streaming sessions can be embedded in an iframe.
 	// You must approve the domains that you want to host embedded AppStream 2.0
 	// streaming sessions.
-	EmbedHostDomains []*string
+	EmbedHostDomains []string
 
 	// The URL that users are redirected to after they choose the Send Feedback link.
 	// If no URL is specified, no Send Feedback link is displayed.
@@ -68,11 +68,11 @@ type UpdateStackInput struct {
 	RedirectURL *string
 
 	// The storage connectors to enable.
-	StorageConnectors []*types.StorageConnector
+	StorageConnectors []types.StorageConnector
 
 	// The actions that are enabled or disabled for users during their streaming
 	// sessions. By default, these actions are enabled.
-	UserSettings []*types.UserSetting
+	UserSettings []types.UserSetting
 }
 
 type UpdateStackOutput struct {

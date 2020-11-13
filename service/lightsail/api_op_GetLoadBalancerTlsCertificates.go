@@ -43,7 +43,7 @@ type GetLoadBalancerTlsCertificatesOutput struct {
 
 	// An array of LoadBalancerTlsCertificate objects describing your SSL/TLS
 	// certificates.
-	TlsCertificates []*types.LoadBalancerTlsCertificate
+	TlsCertificates []types.LoadBalancerTlsCertificate
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -37,7 +37,7 @@ type SetStatusInput struct {
 	// components, but not a mix of both types.
 	//
 	// This member is required.
-	ObjectIds []*string
+	ObjectIds []string
 
 	// The ID of the pipeline that contains the objects.
 	//

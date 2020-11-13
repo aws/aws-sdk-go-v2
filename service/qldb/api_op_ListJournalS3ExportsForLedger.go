@@ -56,7 +56,7 @@ type ListJournalS3ExportsForLedgerOutput struct {
 
 	// The array of journal export job descriptions that are associated with the
 	// specified ledger.
-	JournalS3Exports []*types.JournalS3ExportDescription
+	JournalS3Exports []types.JournalS3ExportDescription
 
 	// * If NextToken is empty, then the last page of results has been processed and
 	// there are no more results to be retrieved.

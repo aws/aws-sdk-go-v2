@@ -45,12 +45,12 @@ type ResetDBClusterParameterGroupInput struct {
 	// A list of parameter names in the DB cluster parameter group to reset to the
 	// default values. You can't use this parameter if the ResetAllParameters parameter
 	// is set to true.
-	Parameters []*types.Parameter
+	Parameters []types.Parameter
 
 	// A value that is set to true to reset all parameters in the DB cluster parameter
 	// group to their default values, and false otherwise. You can't use this parameter
 	// if there is a list of parameter names specified for the Parameters parameter.
-	ResetAllParameters *bool
+	ResetAllParameters bool
 }
 
 type ResetDBClusterParameterGroupOutput struct {

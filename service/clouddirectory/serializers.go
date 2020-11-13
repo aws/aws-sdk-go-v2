@@ -77,11 +77,9 @@ func awsRestjson1_serializeOpHttpBindingsAddFacetToObjectInput(v *AddFacetToObje
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -177,11 +175,9 @@ func awsRestjson1_serializeOpHttpBindingsApplySchemaInput(v *ApplySchemaInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -261,11 +257,9 @@ func awsRestjson1_serializeOpHttpBindingsAttachObjectInput(v *AttachObjectInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -359,11 +353,9 @@ func awsRestjson1_serializeOpHttpBindingsAttachPolicyInput(v *AttachPolicyInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -452,11 +444,9 @@ func awsRestjson1_serializeOpHttpBindingsAttachToIndexInput(v *AttachToIndexInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -545,11 +535,9 @@ func awsRestjson1_serializeOpHttpBindingsAttachTypedLinkInput(v *AttachTypedLink
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -657,11 +645,9 @@ func awsRestjson1_serializeOpHttpBindingsBatchReadInput(v *BatchReadInput, encod
 		encoder.SetHeader(locationName).String(string(v.ConsistencyLevel))
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -743,11 +729,9 @@ func awsRestjson1_serializeOpHttpBindingsBatchWriteInput(v *BatchWriteInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -829,11 +813,9 @@ func awsRestjson1_serializeOpHttpBindingsCreateDirectoryInput(v *CreateDirectory
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil {
+	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.SchemaArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.SchemaArn)
-		}
+		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}
 
 	return nil
@@ -913,11 +895,9 @@ func awsRestjson1_serializeOpHttpBindingsCreateFacetInput(v *CreateFacetInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil {
+	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.SchemaArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.SchemaArn)
-		}
+		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}
 
 	return nil
@@ -1014,11 +994,9 @@ func awsRestjson1_serializeOpHttpBindingsCreateIndexInput(v *CreateIndexInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -1028,9 +1006,9 @@ func awsRestjson1_serializeOpDocumentCreateIndexInput(v *CreateIndexInput, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.IsUnique != nil {
+	if v.IsUnique {
 		ok := object.Key("IsUnique")
-		ok.Boolean(*v.IsUnique)
+		ok.Boolean(v.IsUnique)
 	}
 
 	if v.LinkName != nil {
@@ -1117,11 +1095,9 @@ func awsRestjson1_serializeOpHttpBindingsCreateObjectInput(v *CreateObjectInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -1295,11 +1271,9 @@ func awsRestjson1_serializeOpHttpBindingsCreateTypedLinkFacetInput(v *CreateType
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil {
+	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.SchemaArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.SchemaArn)
-		}
+		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}
 
 	return nil
@@ -1370,11 +1344,9 @@ func awsRestjson1_serializeOpHttpBindingsDeleteDirectoryInput(v *DeleteDirectory
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -1442,11 +1414,9 @@ func awsRestjson1_serializeOpHttpBindingsDeleteFacetInput(v *DeleteFacetInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil {
+	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.SchemaArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.SchemaArn)
-		}
+		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}
 
 	return nil
@@ -1526,11 +1496,9 @@ func awsRestjson1_serializeOpHttpBindingsDeleteObjectInput(v *DeleteObjectInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -1601,11 +1569,9 @@ func awsRestjson1_serializeOpHttpBindingsDeleteSchemaInput(v *DeleteSchemaInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil {
+	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.SchemaArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.SchemaArn)
-		}
+		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}
 
 	return nil
@@ -1673,11 +1639,9 @@ func awsRestjson1_serializeOpHttpBindingsDeleteTypedLinkFacetInput(v *DeleteType
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil {
+	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.SchemaArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.SchemaArn)
-		}
+		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}
 
 	return nil
@@ -1757,11 +1721,9 @@ func awsRestjson1_serializeOpHttpBindingsDetachFromIndexInput(v *DetachFromIndex
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -1850,11 +1812,9 @@ func awsRestjson1_serializeOpHttpBindingsDetachObjectInput(v *DetachObjectInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -1941,11 +1901,9 @@ func awsRestjson1_serializeOpHttpBindingsDetachPolicyInput(v *DetachPolicyInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -2034,11 +1992,9 @@ func awsRestjson1_serializeOpHttpBindingsDetachTypedLinkInput(v *DetachTypedLink
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -2109,11 +2065,9 @@ func awsRestjson1_serializeOpHttpBindingsDisableDirectoryInput(v *DisableDirecto
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -2170,11 +2124,9 @@ func awsRestjson1_serializeOpHttpBindingsEnableDirectoryInput(v *EnableDirectory
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -2304,11 +2256,9 @@ func awsRestjson1_serializeOpHttpBindingsGetDirectoryInput(v *GetDirectoryInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -2376,11 +2326,9 @@ func awsRestjson1_serializeOpHttpBindingsGetFacetInput(v *GetFacetInput, encoder
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil {
+	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.SchemaArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.SchemaArn)
-		}
+		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}
 
 	return nil
@@ -2460,11 +2408,9 @@ func awsRestjson1_serializeOpHttpBindingsGetLinkAttributesInput(v *GetLinkAttrib
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -2563,11 +2509,9 @@ func awsRestjson1_serializeOpHttpBindingsGetObjectAttributesInput(v *GetObjectAt
 		encoder.SetHeader(locationName).String(string(v.ConsistencyLevel))
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -2668,11 +2612,9 @@ func awsRestjson1_serializeOpHttpBindingsGetObjectInformationInput(v *GetObjectI
 		encoder.SetHeader(locationName).String(string(v.ConsistencyLevel))
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -2743,11 +2685,9 @@ func awsRestjson1_serializeOpHttpBindingsGetSchemaAsJsonInput(v *GetSchemaAsJson
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil {
+	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.SchemaArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.SchemaArn)
-		}
+		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}
 
 	return nil
@@ -2815,11 +2755,9 @@ func awsRestjson1_serializeOpHttpBindingsGetTypedLinkFacetInformationInput(v *Ge
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil {
+	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.SchemaArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.SchemaArn)
-		}
+		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}
 
 	return nil
@@ -2992,11 +2930,9 @@ func awsRestjson1_serializeOpHttpBindingsListAttachedIndicesInput(v *ListAttache
 		encoder.SetHeader(locationName).String(string(v.ConsistencyLevel))
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -3249,11 +3185,9 @@ func awsRestjson1_serializeOpHttpBindingsListFacetAttributesInput(v *ListFacetAt
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil {
+	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.SchemaArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.SchemaArn)
-		}
+		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}
 
 	return nil
@@ -3343,11 +3277,9 @@ func awsRestjson1_serializeOpHttpBindingsListFacetNamesInput(v *ListFacetNamesIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil {
+	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.SchemaArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.SchemaArn)
-		}
+		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}
 
 	return nil
@@ -3432,11 +3364,9 @@ func awsRestjson1_serializeOpHttpBindingsListIncomingTypedLinksInput(v *ListInco
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -3552,11 +3482,9 @@ func awsRestjson1_serializeOpHttpBindingsListIndexInput(v *ListIndexInput, encod
 		encoder.SetHeader(locationName).String(string(v.ConsistencyLevel))
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -3743,11 +3671,9 @@ func awsRestjson1_serializeOpHttpBindingsListObjectAttributesInput(v *ListObject
 		encoder.SetHeader(locationName).String(string(v.ConsistencyLevel))
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -3851,11 +3777,9 @@ func awsRestjson1_serializeOpHttpBindingsListObjectChildrenInput(v *ListObjectCh
 		encoder.SetHeader(locationName).String(string(v.ConsistencyLevel))
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -3947,11 +3871,9 @@ func awsRestjson1_serializeOpHttpBindingsListObjectParentPathsInput(v *ListObjec
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -4048,11 +3970,9 @@ func awsRestjson1_serializeOpHttpBindingsListObjectParentsInput(v *ListObjectPar
 		encoder.SetHeader(locationName).String(string(v.ConsistencyLevel))
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -4062,9 +3982,9 @@ func awsRestjson1_serializeOpDocumentListObjectParentsInput(v *ListObjectParents
 	object := value.Object()
 	defer object.Close()
 
-	if v.IncludeAllLinksToEachParent != nil {
+	if v.IncludeAllLinksToEachParent {
 		ok := object.Key("IncludeAllLinksToEachParent")
-		ok.Boolean(*v.IncludeAllLinksToEachParent)
+		ok.Boolean(v.IncludeAllLinksToEachParent)
 	}
 
 	if v.MaxResults != nil {
@@ -4154,11 +4074,9 @@ func awsRestjson1_serializeOpHttpBindingsListObjectPoliciesInput(v *ListObjectPo
 		encoder.SetHeader(locationName).String(string(v.ConsistencyLevel))
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -4250,11 +4168,9 @@ func awsRestjson1_serializeOpHttpBindingsListOutgoingTypedLinksInput(v *ListOutg
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -4370,11 +4286,9 @@ func awsRestjson1_serializeOpHttpBindingsListPolicyAttachmentsInput(v *ListPolic
 		encoder.SetHeader(locationName).String(string(v.ConsistencyLevel))
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -4632,11 +4546,9 @@ func awsRestjson1_serializeOpHttpBindingsListTypedLinkFacetAttributesInput(v *Li
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil {
+	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.SchemaArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.SchemaArn)
-		}
+		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}
 
 	return nil
@@ -4726,11 +4638,9 @@ func awsRestjson1_serializeOpHttpBindingsListTypedLinkFacetNamesInput(v *ListTyp
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil {
+	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.SchemaArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.SchemaArn)
-		}
+		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}
 
 	return nil
@@ -4815,11 +4725,9 @@ func awsRestjson1_serializeOpHttpBindingsLookupPolicyInput(v *LookupPolicyInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -4911,11 +4819,9 @@ func awsRestjson1_serializeOpHttpBindingsPublishSchemaInput(v *PublishSchemaInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DevelopmentSchemaArn != nil {
+	if v.DevelopmentSchemaArn != nil && len(*v.DevelopmentSchemaArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DevelopmentSchemaArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DevelopmentSchemaArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DevelopmentSchemaArn)
 	}
 
 	return nil
@@ -5005,11 +4911,9 @@ func awsRestjson1_serializeOpHttpBindingsPutSchemaFromJsonInput(v *PutSchemaFrom
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil {
+	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.SchemaArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.SchemaArn)
-		}
+		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}
 
 	return nil
@@ -5089,11 +4993,9 @@ func awsRestjson1_serializeOpHttpBindingsRemoveFacetFromObjectInput(v *RemoveFac
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -5342,11 +5244,9 @@ func awsRestjson1_serializeOpHttpBindingsUpdateFacetInput(v *UpdateFacetInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil {
+	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.SchemaArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.SchemaArn)
-		}
+		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}
 
 	return nil
@@ -5438,11 +5338,9 @@ func awsRestjson1_serializeOpHttpBindingsUpdateLinkAttributesInput(v *UpdateLink
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -5531,11 +5429,9 @@ func awsRestjson1_serializeOpHttpBindingsUpdateObjectAttributesInput(v *UpdateOb
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil {
+	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.DirectoryArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.DirectoryArn)
-		}
+		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
 
 	return nil
@@ -5624,11 +5520,9 @@ func awsRestjson1_serializeOpHttpBindingsUpdateSchemaInput(v *UpdateSchemaInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil {
+	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.SchemaArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.SchemaArn)
-		}
+		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}
 
 	return nil
@@ -5708,11 +5602,9 @@ func awsRestjson1_serializeOpHttpBindingsUpdateTypedLinkFacetInput(v *UpdateType
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil {
+	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
 		locationName := "X-Amz-Data-Partition"
-		if len(*v.SchemaArn) > 0 {
-			encoder.SetHeader(locationName).String(*v.SchemaArn)
-		}
+		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}
 
 	return nil
@@ -5814,9 +5706,9 @@ func awsRestjson1_serializeOpDocumentUpgradeAppliedSchemaInput(v *UpgradeApplied
 		ok.String(*v.DirectoryArn)
 	}
 
-	if v.DryRun != nil {
+	if v.DryRun {
 		ok := object.Key("DryRun")
-		ok.Boolean(*v.DryRun)
+		ok.Boolean(v.DryRun)
 	}
 
 	if v.PublishedSchemaArn != nil {
@@ -5897,9 +5789,9 @@ func awsRestjson1_serializeOpDocumentUpgradePublishedSchemaInput(v *UpgradePubli
 		ok.String(*v.DevelopmentSchemaArn)
 	}
 
-	if v.DryRun != nil {
+	if v.DryRun {
 		ok := object.Key("DryRun")
-		ok.Boolean(*v.DryRun)
+		ok.Boolean(v.DryRun)
 	}
 
 	if v.MinorVersion != nil {
@@ -5958,34 +5850,26 @@ func awsRestjson1_serializeDocumentAttributeKeyAndValue(v *types.AttributeKeyAnd
 	return nil
 }
 
-func awsRestjson1_serializeDocumentAttributeKeyAndValueList(v []*types.AttributeKeyAndValue, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentAttributeKeyAndValueList(v []types.AttributeKeyAndValue, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentAttributeKeyAndValue(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentAttributeKeyAndValue(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentAttributeKeyList(v []*types.AttributeKey, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentAttributeKeyList(v []types.AttributeKey, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentAttributeKey(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentAttributeKey(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -6011,34 +5895,26 @@ func awsRestjson1_serializeDocumentAttributeNameAndValue(v *types.AttributeNameA
 	return nil
 }
 
-func awsRestjson1_serializeDocumentAttributeNameAndValueList(v []*types.AttributeNameAndValue, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentAttributeNameAndValueList(v []types.AttributeNameAndValue, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentAttributeNameAndValue(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentAttributeNameAndValue(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentAttributeNameList(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentAttributeNameList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -6183,9 +6059,9 @@ func awsRestjson1_serializeDocumentBatchCreateIndex(v *types.BatchCreateIndex, v
 		ok.String(*v.BatchReferenceName)
 	}
 
-	if v.IsUnique != nil {
+	if v.IsUnique {
 		ok := object.Key("IsUnique")
-		ok.Boolean(*v.IsUnique)
+		ok.Boolean(v.IsUnique)
 	}
 
 	if v.LinkName != nil {
@@ -6816,17 +6692,13 @@ func awsRestjson1_serializeDocumentBatchReadOperation(v *types.BatchReadOperatio
 	return nil
 }
 
-func awsRestjson1_serializeDocumentBatchReadOperationList(v []*types.BatchReadOperation, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentBatchReadOperationList(v []types.BatchReadOperation, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentBatchReadOperation(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentBatchReadOperation(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -7008,17 +6880,13 @@ func awsRestjson1_serializeDocumentBatchWriteOperation(v *types.BatchWriteOperat
 	return nil
 }
 
-func awsRestjson1_serializeDocumentBatchWriteOperationList(v []*types.BatchWriteOperation, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentBatchWriteOperationList(v []types.BatchWriteOperation, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentBatchWriteOperation(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentBatchWriteOperation(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -7067,9 +6935,9 @@ func awsRestjson1_serializeDocumentFacetAttributeDefinition(v *types.FacetAttrib
 		}
 	}
 
-	if v.IsImmutable != nil {
+	if v.IsImmutable {
 		ok := object.Key("IsImmutable")
-		ok.Boolean(*v.IsImmutable)
+		ok.Boolean(v.IsImmutable)
 	}
 
 	if v.Rules != nil {
@@ -7087,17 +6955,13 @@ func awsRestjson1_serializeDocumentFacetAttributeDefinition(v *types.FacetAttrib
 	return nil
 }
 
-func awsRestjson1_serializeDocumentFacetAttributeList(v []*types.FacetAttribute, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentFacetAttributeList(v []types.FacetAttribute, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentFacetAttribute(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentFacetAttribute(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -7140,17 +7004,13 @@ func awsRestjson1_serializeDocumentFacetAttributeUpdate(v *types.FacetAttributeU
 	return nil
 }
 
-func awsRestjson1_serializeDocumentFacetAttributeUpdateList(v []*types.FacetAttributeUpdate, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentFacetAttributeUpdateList(v []types.FacetAttributeUpdate, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentFacetAttributeUpdate(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentFacetAttributeUpdate(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -7197,17 +7057,13 @@ func awsRestjson1_serializeDocumentLinkAttributeUpdate(v *types.LinkAttributeUpd
 	return nil
 }
 
-func awsRestjson1_serializeDocumentLinkAttributeUpdateList(v []*types.LinkAttributeUpdate, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentLinkAttributeUpdateList(v []types.LinkAttributeUpdate, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentLinkAttributeUpdate(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentLinkAttributeUpdate(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -7254,17 +7110,13 @@ func awsRestjson1_serializeDocumentObjectAttributeRange(v *types.ObjectAttribute
 	return nil
 }
 
-func awsRestjson1_serializeDocumentObjectAttributeRangeList(v []*types.ObjectAttributeRange, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentObjectAttributeRangeList(v []types.ObjectAttributeRange, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentObjectAttributeRange(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentObjectAttributeRange(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -7292,17 +7144,13 @@ func awsRestjson1_serializeDocumentObjectAttributeUpdate(v *types.ObjectAttribut
 	return nil
 }
 
-func awsRestjson1_serializeDocumentObjectAttributeUpdateList(v []*types.ObjectAttributeUpdate, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentObjectAttributeUpdateList(v []types.ObjectAttributeUpdate, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentObjectAttributeUpdate(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentObjectAttributeUpdate(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -7340,34 +7188,27 @@ func awsRestjson1_serializeDocumentRule(v *types.Rule, value smithyjson.Value) e
 	return nil
 }
 
-func awsRestjson1_serializeDocumentRuleMap(v map[string]*types.Rule, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentRuleMap(v map[string]types.Rule, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentRule(v[key], om); err != nil {
+		mapVar := v[key]
+		if err := awsRestjson1_serializeDocumentRule(&mapVar, om); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentRuleParameterMap(v map[string]*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentRuleParameterMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
@@ -7389,17 +7230,13 @@ func awsRestjson1_serializeDocumentSchemaFacet(v *types.SchemaFacet, value smith
 	return nil
 }
 
-func awsRestjson1_serializeDocumentSchemaFacetList(v []*types.SchemaFacet, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentSchemaFacetList(v []types.SchemaFacet, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentSchemaFacet(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentSchemaFacet(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -7423,32 +7260,24 @@ func awsRestjson1_serializeDocumentTag(v *types.Tag, value smithyjson.Value) err
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTagKeyList(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTagKeyList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTagList(v []*types.Tag, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTagList(v []types.Tag, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentTag(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -7529,9 +7358,9 @@ func awsRestjson1_serializeDocumentTypedLinkAttributeDefinition(v *types.TypedLi
 		}
 	}
 
-	if v.IsImmutable != nil {
+	if v.IsImmutable {
 		ok := object.Key("IsImmutable")
-		ok.Boolean(*v.IsImmutable)
+		ok.Boolean(v.IsImmutable)
 	}
 
 	if v.Name != nil {
@@ -7559,17 +7388,13 @@ func awsRestjson1_serializeDocumentTypedLinkAttributeDefinition(v *types.TypedLi
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTypedLinkAttributeDefinitionList(v []*types.TypedLinkAttributeDefinition, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTypedLinkAttributeDefinitionList(v []types.TypedLinkAttributeDefinition, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentTypedLinkAttributeDefinition(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentTypedLinkAttributeDefinition(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -7595,17 +7420,13 @@ func awsRestjson1_serializeDocumentTypedLinkAttributeRange(v *types.TypedLinkAtt
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTypedLinkAttributeRangeList(v []*types.TypedLinkAttributeRange, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTypedLinkAttributeRangeList(v []types.TypedLinkAttributeRange, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentTypedLinkAttributeRange(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentTypedLinkAttributeRange(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -7657,17 +7478,13 @@ func awsRestjson1_serializeDocumentTypedLinkFacetAttributeUpdate(v *types.TypedL
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTypedLinkFacetAttributeUpdateList(v []*types.TypedLinkFacetAttributeUpdate, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTypedLinkFacetAttributeUpdateList(v []types.TypedLinkFacetAttributeUpdate, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentTypedLinkFacetAttributeUpdate(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentTypedLinkFacetAttributeUpdate(&v[i], av); err != nil {
 			return err
 		}
 	}

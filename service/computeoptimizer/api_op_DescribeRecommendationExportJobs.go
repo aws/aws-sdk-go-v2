@@ -34,14 +34,14 @@ type DescribeRecommendationExportJobsInput struct {
 
 	// An array of objects that describe a filter to return a more specific list of
 	// export jobs.
-	Filters []*types.JobFilter
+	Filters []types.JobFilter
 
 	// The identification numbers of the export jobs to return. An export job ID is
 	// returned when you create an export using the
 	// ExportAutoScalingGroupRecommendations or ExportEC2InstanceRecommendations
 	// actions. All export jobs created in the last seven days are returned if this
 	// parameter is omitted.
-	JobIds []*string
+	JobIds []string
 
 	// The maximum number of export jobs to return with a single request. To retrieve
 	// the remaining results, make another request with the returned NextToken value.
@@ -58,7 +58,7 @@ type DescribeRecommendationExportJobsOutput struct {
 	NextToken *string
 
 	// An array of objects that describe recommendation export jobs.
-	RecommendationExportJobs []*types.RecommendationExportJob
+	RecommendationExportJobs []types.RecommendationExportJob
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -38,7 +38,7 @@ type CreateDeviceDefinitionVersionInput struct {
 	AmznClientToken *string
 
 	// A list of devices in the definition version.
-	Devices []*types.Device
+	Devices []types.Device
 }
 
 type CreateDeviceDefinitionVersionOutput struct {

@@ -44,7 +44,7 @@ type ListKeyPhrasesDetectionJobsInput struct {
 type ListKeyPhrasesDetectionJobsOutput struct {
 
 	// A list containing the properties of each job that is returned.
-	KeyPhrasesDetectionJobPropertiesList []*types.KeyPhrasesDetectionJobProperties
+	KeyPhrasesDetectionJobPropertiesList []types.KeyPhrasesDetectionJobProperties
 
 	// Identifies the next page of results to return.
 	NextToken *string

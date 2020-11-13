@@ -127,13 +127,13 @@ func validateUsageRecord(v *types.UsageRecord) error {
 	}
 }
 
-func validateUsageRecordList(v []*types.UsageRecord) error {
+func validateUsageRecordList(v []types.UsageRecord) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UsageRecordList"}
 	for i := range v {
-		if err := validateUsageRecord(v[i]); err != nil {
+		if err := validateUsageRecord(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

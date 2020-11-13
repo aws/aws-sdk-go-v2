@@ -75,7 +75,7 @@ type RegisterDomainInput struct {
 
 	// Tags to be added when registering a domain. Tags may only contain unicode
 	// letters, digits, whitespace, or these symbols: _ . : / = + - @.
-	Tags []*types.ResourceTag
+	Tags []types.ResourceTag
 }
 
 type RegisterDomainOutput struct {

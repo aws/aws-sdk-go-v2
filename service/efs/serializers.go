@@ -370,13 +370,10 @@ func awsRestjson1_serializeOpHttpBindingsCreateTagsInput(v *CreateTagsInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FileSystemId == nil {
+	if v.FileSystemId == nil || len(*v.FileSystemId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FileSystemId must not be empty")}
 	}
 	if v.FileSystemId != nil {
-		if len(*v.FileSystemId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FileSystemId must not be empty")}
-		}
 		if err := encoder.SetURI("FileSystemId").String(*v.FileSystemId); err != nil {
 			return err
 		}
@@ -450,13 +447,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteAccessPointInput(v *DeleteAccessP
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AccessPointId == nil {
+	if v.AccessPointId == nil || len(*v.AccessPointId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member AccessPointId must not be empty")}
 	}
 	if v.AccessPointId != nil {
-		if len(*v.AccessPointId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member AccessPointId must not be empty")}
-		}
 		if err := encoder.SetURI("AccessPointId").String(*v.AccessPointId); err != nil {
 			return err
 		}
@@ -516,13 +510,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteFileSystemInput(v *DeleteFileSyst
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FileSystemId == nil {
+	if v.FileSystemId == nil || len(*v.FileSystemId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FileSystemId must not be empty")}
 	}
 	if v.FileSystemId != nil {
-		if len(*v.FileSystemId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FileSystemId must not be empty")}
-		}
 		if err := encoder.SetURI("FileSystemId").String(*v.FileSystemId); err != nil {
 			return err
 		}
@@ -582,13 +573,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteFileSystemPolicyInput(v *DeleteFi
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FileSystemId == nil {
+	if v.FileSystemId == nil || len(*v.FileSystemId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FileSystemId must not be empty")}
 	}
 	if v.FileSystemId != nil {
-		if len(*v.FileSystemId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FileSystemId must not be empty")}
-		}
 		if err := encoder.SetURI("FileSystemId").String(*v.FileSystemId); err != nil {
 			return err
 		}
@@ -648,13 +636,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteMountTargetInput(v *DeleteMountTa
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MountTargetId == nil {
+	if v.MountTargetId == nil || len(*v.MountTargetId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member MountTargetId must not be empty")}
 	}
 	if v.MountTargetId != nil {
-		if len(*v.MountTargetId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member MountTargetId must not be empty")}
-		}
 		if err := encoder.SetURI("MountTargetId").String(*v.MountTargetId); err != nil {
 			return err
 		}
@@ -725,13 +710,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteTagsInput(v *DeleteTagsInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FileSystemId == nil {
+	if v.FileSystemId == nil || len(*v.FileSystemId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FileSystemId must not be empty")}
 	}
 	if v.FileSystemId != nil {
-		if len(*v.FileSystemId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FileSystemId must not be empty")}
-		}
 		if err := encoder.SetURI("FileSystemId").String(*v.FileSystemId); err != nil {
 			return err
 		}
@@ -875,13 +857,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeBackupPolicyInput(v *DescribeBa
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FileSystemId == nil {
+	if v.FileSystemId == nil || len(*v.FileSystemId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FileSystemId must not be empty")}
 	}
 	if v.FileSystemId != nil {
-		if len(*v.FileSystemId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FileSystemId must not be empty")}
-		}
 		if err := encoder.SetURI("FileSystemId").String(*v.FileSystemId); err != nil {
 			return err
 		}
@@ -941,13 +920,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeFileSystemPolicyInput(v *Descri
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FileSystemId == nil {
+	if v.FileSystemId == nil || len(*v.FileSystemId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FileSystemId must not be empty")}
 	}
 	if v.FileSystemId != nil {
-		if len(*v.FileSystemId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FileSystemId must not be empty")}
-		}
 		if err := encoder.SetURI("FileSystemId").String(*v.FileSystemId); err != nil {
 			return err
 		}
@@ -1077,13 +1053,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeLifecycleConfigurationInput(v *
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FileSystemId == nil {
+	if v.FileSystemId == nil || len(*v.FileSystemId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FileSystemId must not be empty")}
 	}
 	if v.FileSystemId != nil {
-		if len(*v.FileSystemId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FileSystemId must not be empty")}
-		}
 		if err := encoder.SetURI("FileSystemId").String(*v.FileSystemId); err != nil {
 			return err
 		}
@@ -1217,13 +1190,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeMountTargetSecurityGroupsInput(
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MountTargetId == nil {
+	if v.MountTargetId == nil || len(*v.MountTargetId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member MountTargetId must not be empty")}
 	}
 	if v.MountTargetId != nil {
-		if len(*v.MountTargetId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member MountTargetId must not be empty")}
-		}
 		if err := encoder.SetURI("MountTargetId").String(*v.MountTargetId); err != nil {
 			return err
 		}
@@ -1283,13 +1253,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeTagsInput(v *DescribeTagsInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FileSystemId == nil {
+	if v.FileSystemId == nil || len(*v.FileSystemId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FileSystemId must not be empty")}
 	}
 	if v.FileSystemId != nil {
-		if len(*v.FileSystemId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FileSystemId must not be empty")}
-		}
 		if err := encoder.SetURI("FileSystemId").String(*v.FileSystemId); err != nil {
 			return err
 		}
@@ -1365,13 +1332,10 @@ func awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsFor
 		encoder.SetQuery("NextToken").String(*v.NextToken)
 	}
 
-	if v.ResourceId == nil {
+	if v.ResourceId == nil || len(*v.ResourceId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceId must not be empty")}
 	}
 	if v.ResourceId != nil {
-		if len(*v.ResourceId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceId must not be empty")}
-		}
 		if err := encoder.SetURI("ResourceId").String(*v.ResourceId); err != nil {
 			return err
 		}
@@ -1442,13 +1406,10 @@ func awsRestjson1_serializeOpHttpBindingsModifyMountTargetSecurityGroupsInput(v 
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MountTargetId == nil {
+	if v.MountTargetId == nil || len(*v.MountTargetId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member MountTargetId must not be empty")}
 	}
 	if v.MountTargetId != nil {
-		if len(*v.MountTargetId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member MountTargetId must not be empty")}
-		}
 		if err := encoder.SetURI("MountTargetId").String(*v.MountTargetId); err != nil {
 			return err
 		}
@@ -1533,13 +1494,10 @@ func awsRestjson1_serializeOpHttpBindingsPutBackupPolicyInput(v *PutBackupPolicy
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FileSystemId == nil {
+	if v.FileSystemId == nil || len(*v.FileSystemId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FileSystemId must not be empty")}
 	}
 	if v.FileSystemId != nil {
-		if len(*v.FileSystemId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FileSystemId must not be empty")}
-		}
 		if err := encoder.SetURI("FileSystemId").String(*v.FileSystemId); err != nil {
 			return err
 		}
@@ -1624,13 +1582,10 @@ func awsRestjson1_serializeOpHttpBindingsPutFileSystemPolicyInput(v *PutFileSyst
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FileSystemId == nil {
+	if v.FileSystemId == nil || len(*v.FileSystemId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FileSystemId must not be empty")}
 	}
 	if v.FileSystemId != nil {
-		if len(*v.FileSystemId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FileSystemId must not be empty")}
-		}
 		if err := encoder.SetURI("FileSystemId").String(*v.FileSystemId); err != nil {
 			return err
 		}
@@ -1643,9 +1598,9 @@ func awsRestjson1_serializeOpDocumentPutFileSystemPolicyInput(v *PutFileSystemPo
 	object := value.Object()
 	defer object.Close()
 
-	if v.BypassPolicyLockoutSafetyCheck != nil {
+	if v.BypassPolicyLockoutSafetyCheck {
 		ok := object.Key("BypassPolicyLockoutSafetyCheck")
-		ok.Boolean(*v.BypassPolicyLockoutSafetyCheck)
+		ok.Boolean(v.BypassPolicyLockoutSafetyCheck)
 	}
 
 	if v.Policy != nil {
@@ -1718,13 +1673,10 @@ func awsRestjson1_serializeOpHttpBindingsPutLifecycleConfigurationInput(v *PutLi
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FileSystemId == nil {
+	if v.FileSystemId == nil || len(*v.FileSystemId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FileSystemId must not be empty")}
 	}
 	if v.FileSystemId != nil {
-		if len(*v.FileSystemId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FileSystemId must not be empty")}
-		}
 		if err := encoder.SetURI("FileSystemId").String(*v.FileSystemId); err != nil {
 			return err
 		}
@@ -1809,13 +1761,10 @@ func awsRestjson1_serializeOpHttpBindingsTagResourceInput(v *TagResourceInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ResourceId == nil {
+	if v.ResourceId == nil || len(*v.ResourceId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceId must not be empty")}
 	}
 	if v.ResourceId != nil {
-		if len(*v.ResourceId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceId must not be empty")}
-		}
 		if err := encoder.SetURI("ResourceId").String(*v.ResourceId); err != nil {
 			return err
 		}
@@ -1889,13 +1838,10 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ResourceId == nil {
+	if v.ResourceId == nil || len(*v.ResourceId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceId must not be empty")}
 	}
 	if v.ResourceId != nil {
-		if len(*v.ResourceId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceId must not be empty")}
-		}
 		if err := encoder.SetURI("ResourceId").String(*v.ResourceId); err != nil {
 			return err
 		}
@@ -1903,10 +1849,7 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 
 	if v.TagKeys != nil {
 		for i := range v.TagKeys {
-			if v.TagKeys[i] == nil {
-				continue
-			}
-			encoder.AddQuery("tagKeys").String(*v.TagKeys[i])
+			encoder.AddQuery("tagKeys").String(v.TagKeys[i])
 		}
 	}
 
@@ -1975,13 +1918,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateFileSystemInput(v *UpdateFileSyst
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.FileSystemId == nil {
+	if v.FileSystemId == nil || len(*v.FileSystemId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FileSystemId must not be empty")}
 	}
 	if v.FileSystemId != nil {
-		if len(*v.FileSystemId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member FileSystemId must not be empty")}
-		}
 		if err := encoder.SetURI("FileSystemId").String(*v.FileSystemId); err != nil {
 			return err
 		}
@@ -2041,17 +1981,13 @@ func awsRestjson1_serializeDocumentCreationInfo(v *types.CreationInfo, value smi
 	return nil
 }
 
-func awsRestjson1_serializeDocumentLifecyclePolicies(v []*types.LifecyclePolicy, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentLifecyclePolicies(v []types.LifecyclePolicy, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentLifecyclePolicy(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentLifecyclePolicy(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -2113,32 +2049,24 @@ func awsRestjson1_serializeDocumentRootDirectory(v *types.RootDirectory, value s
 	return nil
 }
 
-func awsRestjson1_serializeDocumentSecondaryGids(v []*int64, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentSecondaryGids(v []int64, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.Long(*v[i])
+		av.Long(v[i])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentSecurityGroups(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentSecurityGroups(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2160,32 +2088,24 @@ func awsRestjson1_serializeDocumentTag(v *types.Tag, value smithyjson.Value) err
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTagKeys(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTagKeys(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTags(v []*types.Tag, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTags(v []types.Tag, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentTag(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
 	}

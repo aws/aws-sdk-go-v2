@@ -14,7 +14,7 @@ type ChildShard struct {
 	// This member is required.
 	HashKeyRange *HashKeyRange
 
-	ParentShards []*string
+	ParentShards []string
 
 	ShardId *string
 }
@@ -270,7 +270,7 @@ type StreamDescription struct {
 	// Represents the current enhanced monitoring settings of the stream.
 	//
 	// This member is required.
-	EnhancedMonitoring []*EnhancedMetrics
+	EnhancedMonitoring []EnhancedMetrics
 
 	// If set to true, more shards in the stream are available to describe.
 	//
@@ -286,7 +286,7 @@ type StreamDescription struct {
 	// The shards that comprise the stream.
 	//
 	// This member is required.
-	Shards []*Shard
+	Shards []Shard
 
 	// The Amazon Resource Name (ARN) for the stream being described.
 	//
@@ -362,7 +362,7 @@ type StreamDescriptionSummary struct {
 	// Represents the current enhanced monitoring settings of the stream.
 	//
 	// This member is required.
-	EnhancedMonitoring []*EnhancedMetrics
+	EnhancedMonitoring []EnhancedMetrics
 
 	// The number of open shards in the stream.
 	//

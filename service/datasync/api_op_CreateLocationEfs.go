@@ -67,7 +67,7 @@ type CreateLocationEfsInput struct {
 	// The value can be an empty string. This value helps you manage, filter, and
 	// search for your resources. We recommend that you create a name tag for your
 	// location.
-	Tags []*types.TagListEntry
+	Tags []types.TagListEntry
 }
 
 // CreateLocationEfs

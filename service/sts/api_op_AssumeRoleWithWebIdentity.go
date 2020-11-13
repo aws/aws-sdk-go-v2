@@ -236,7 +236,7 @@ type AssumeRoleWithWebIdentityInput struct {
 	// For more information, see Session Policies
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session)
 	// in the IAM User Guide.
-	PolicyArns []*types.PolicyDescriptorType
+	PolicyArns []types.PolicyDescriptorType
 
 	// The fully qualified host component of the domain name of the identity provider.
 	// Specify this value only for OAuth 2.0 access tokens. Currently www.amazon.com

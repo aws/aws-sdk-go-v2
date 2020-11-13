@@ -38,7 +38,7 @@ type UpdateRoutingProfileConcurrencyInput struct {
 	// The channels agents can handle in the Contact Control Panel (CCP).
 	//
 	// This member is required.
-	MediaConcurrencies []*types.MediaConcurrency
+	MediaConcurrencies []types.MediaConcurrency
 
 	// The identifier of the routing profile.
 	//

@@ -76,7 +76,7 @@ type GetAccountLimitOutput struct {
 	// have created using the current account.
 	//
 	// This member is required.
-	Count *int64
+	Count int64
 
 	// The current setting for the specified limit. For example, if you specified
 	// MAX_HEALTH_CHECKS_BY_OWNER for the value of Type in the request, the value of

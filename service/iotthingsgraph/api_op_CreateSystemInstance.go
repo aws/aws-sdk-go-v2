@@ -72,7 +72,7 @@ type CreateSystemInstanceInput struct {
 
 	// Metadata, consisting of key-value pairs, that can be used to categorize your
 	// system instances.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateSystemInstanceOutput struct {

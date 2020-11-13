@@ -46,7 +46,7 @@ type InferICD10CMOutput struct {
 	// the entities detected.
 	//
 	// This member is required.
-	Entities []*types.ICD10CMEntity
+	Entities []types.ICD10CMEntity
 
 	// The version of the model used to analyze the documents, in the format n.n.n You
 	// can use this information to track the model used for a particular batch of

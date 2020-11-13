@@ -47,7 +47,7 @@ type ListRecipesOutput struct {
 	NextToken *string
 
 	// The list of available recipes.
-	Recipes []*types.RecipeSummary
+	Recipes []types.RecipeSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

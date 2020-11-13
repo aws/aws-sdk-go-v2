@@ -46,7 +46,7 @@ type UpgradeAppliedSchemaInput struct {
 	// Used for testing whether the major version schemas are backward compatible or
 	// not. If schema compatibility fails, an exception would be thrown else the call
 	// would succeed but no changes will be saved. This parameter is optional.
-	DryRun *bool
+	DryRun bool
 }
 
 type UpgradeAppliedSchemaOutput struct {

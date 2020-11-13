@@ -32,7 +32,7 @@ type GetMemberDetectorsInput struct {
 	// The account ID of the member account.
 	//
 	// This member is required.
-	AccountIds []*string
+	AccountIds []string
 
 	// The detector ID for the master account.
 	//
@@ -45,13 +45,13 @@ type GetMemberDetectorsOutput struct {
 	// An object that describes which data sources are enabled for a member account.
 	//
 	// This member is required.
-	MemberDataSourceConfigurations []*types.MemberDataSourceConfiguration
+	MemberDataSourceConfigurations []types.MemberDataSourceConfiguration
 
 	// A list of member account IDs that were unable to be processed along with an
 	// explanation for why they were not processed.
 	//
 	// This member is required.
-	UnprocessedAccounts []*types.UnprocessedAccount
+	UnprocessedAccounts []types.UnprocessedAccount
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

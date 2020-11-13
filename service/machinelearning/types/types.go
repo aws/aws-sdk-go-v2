@@ -93,7 +93,7 @@ type DataSource struct {
 
 	// The parameter is true if statistics need to be generated from the observation
 	// data.
-	ComputeStatistics *bool
+	ComputeStatistics bool
 
 	// Long integer type that is a 64-bit signed number.
 	ComputeTime *int64
@@ -380,7 +380,7 @@ type MLModel struct {
 	// value is a double that ranges from 0 to MAX_DOUBLE. The default is to not use L2
 	// normalization. This parameter can't be used when L1 is specified. Use this
 	// parameter sparingly.
-	TrainingParameters map[string]*string
+	TrainingParameters map[string]string
 }
 
 // Measurements of how well the MLModel performed on known observations. One of the
@@ -404,7 +404,7 @@ type MLModel struct {
 type PerformanceMetrics struct {
 
 	// Specific performance metric information.
-	Properties map[string]*string
+	Properties map[string]string
 }
 
 // The output from a Predict operation:
@@ -424,13 +424,13 @@ type PerformanceMetrics struct {
 type Prediction struct {
 
 	// Provides any additional details regarding the prediction.
-	Details map[string]*string
+	Details map[string]string
 
 	// The prediction label for either a BINARY or MULTICLASSMLModel.
 	PredictedLabel *string
 
 	// Provides the raw classification score corresponding to each label.
-	PredictedScores map[string]*float32
+	PredictedScores map[string]float32
 
 	// The prediction value for REGRESSIONMLModel.
 	PredictedValue *float32
@@ -504,7 +504,7 @@ type RDSDataSpec struct {
 	// operation from Amazon RDS to an Amazon S3 task.
 	//
 	// This member is required.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// The query that is used to retrieve the observation data for the DataSource.
 	//
@@ -669,7 +669,7 @@ type RealtimeEndpointInfo struct {
 
 	// The maximum processing rate for the real-time endpoint for MLModel, measured in
 	// incoming requests per second.
-	PeakRequestsPerSecond *int32
+	PeakRequestsPerSecond int32
 }
 
 // Describes the database details required to connect to an Amazon Redshift

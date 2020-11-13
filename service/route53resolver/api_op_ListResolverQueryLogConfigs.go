@@ -35,7 +35,7 @@ type ListResolverQueryLogConfigsInput struct {
 	// you submit a second or subsequent ListResolverQueryLogConfigs request and
 	// specify the NextToken parameter, you must use the same values for Filters, if
 	// any, as in the previous request.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of query logging configurations that you want to return in
 	// the response to a ListResolverQueryLogConfigs request. If you don't specify a
@@ -123,21 +123,21 @@ type ListResolverQueryLogConfigsOutput struct {
 
 	// A list that contains one ResolverQueryLogConfig element for each query logging
 	// configuration that matches the values that you specified for Filter.
-	ResolverQueryLogConfigs []*types.ResolverQueryLogConfig
+	ResolverQueryLogConfigs []types.ResolverQueryLogConfig
 
 	// The total number of query logging configurations that were created by the
 	// current account in the specified Region. This count can differ from the number
 	// of query logging configurations that are returned in a
 	// ListResolverQueryLogConfigs response, depending on the values that you specify
 	// in the request.
-	TotalCount *int32
+	TotalCount int32
 
 	// The total number of query logging configurations that were created by the
 	// current account in the specified Region and that match the filters that were
 	// specified in the ListResolverQueryLogConfigs request. For the total number of
 	// query logging configurations that were created by the current account in the
 	// specified Region, see TotalCount.
-	TotalFilteredCount *int32
+	TotalFilteredCount int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

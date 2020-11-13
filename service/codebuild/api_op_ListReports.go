@@ -66,7 +66,7 @@ type ListReportsOutput struct {
 	NextToken *string
 
 	// The list of returned ARNs for the reports in the current AWS account.
-	Reports []*string
+	Reports []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

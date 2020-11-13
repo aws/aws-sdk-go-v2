@@ -62,7 +62,7 @@ type DescribeUserStackAssociationsOutput struct {
 	NextToken *string
 
 	// The UserStackAssociation objects.
-	UserStackAssociations []*types.UserStackAssociation
+	UserStackAssociations []types.UserStackAssociation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

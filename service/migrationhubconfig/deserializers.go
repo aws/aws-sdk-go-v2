@@ -629,7 +629,7 @@ func awsAwsjson11_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -669,7 +669,7 @@ func awsAwsjson11_deserializeDocumentDryRunOperation(v **types.DryRunOperation, 
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -709,7 +709,7 @@ func awsAwsjson11_deserializeDocumentHomeRegionControl(v **types.HomeRegionContr
 				if !ok {
 					return fmt.Errorf("expected ControlId to be of type string, got %T instead", value)
 				}
-				sv.ControlId = &jtv
+				sv.ControlId = ptr.String(jtv)
 			}
 
 		case "HomeRegion":
@@ -718,7 +718,7 @@ func awsAwsjson11_deserializeDocumentHomeRegionControl(v **types.HomeRegionContr
 				if !ok {
 					return fmt.Errorf("expected HomeRegion to be of type string, got %T instead", value)
 				}
-				sv.HomeRegion = &jtv
+				sv.HomeRegion = ptr.String(jtv)
 			}
 
 		case "RequestedTime":
@@ -748,7 +748,7 @@ func awsAwsjson11_deserializeDocumentHomeRegionControl(v **types.HomeRegionContr
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentHomeRegionControls(v *[]*types.HomeRegionControl, value interface{}) error {
+func awsAwsjson11_deserializeDocumentHomeRegionControls(v *[]types.HomeRegionControl, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -761,18 +761,20 @@ func awsAwsjson11_deserializeDocumentHomeRegionControls(v *[]*types.HomeRegionCo
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.HomeRegionControl
+	var cv []types.HomeRegionControl
 	if *v == nil {
-		cv = []*types.HomeRegionControl{}
+		cv = []types.HomeRegionControl{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.HomeRegionControl
-		if err := awsAwsjson11_deserializeDocumentHomeRegionControl(&col, value); err != nil {
+		var col types.HomeRegionControl
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentHomeRegionControl(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -808,7 +810,7 @@ func awsAwsjson11_deserializeDocumentInternalServerError(v **types.InternalServe
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -848,7 +850,7 @@ func awsAwsjson11_deserializeDocumentInvalidInputException(v **types.InvalidInpu
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -888,7 +890,7 @@ func awsAwsjson11_deserializeDocumentServiceUnavailableException(v **types.Servi
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -928,7 +930,7 @@ func awsAwsjson11_deserializeDocumentTarget(v **types.Target, value interface{})
 				if !ok {
 					return fmt.Errorf("expected TargetId to be of type string, got %T instead", value)
 				}
-				sv.Id = &jtv
+				sv.Id = ptr.String(jtv)
 			}
 
 		case "Type":
@@ -977,7 +979,7 @@ func awsAwsjson11_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		case "RetryAfterSeconds":
@@ -990,7 +992,7 @@ func awsAwsjson11_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				if err != nil {
 					return err
 				}
-				sv.RetryAfterSeconds = ptr.Int32(int32(i64))
+				sv.RetryAfterSeconds = int32(i64)
 			}
 
 		default:
@@ -1071,7 +1073,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeHomeRegionControlsOutput(v **Desc
 				if !ok {
 					return fmt.Errorf("expected Token to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -1111,7 +1113,7 @@ func awsAwsjson11_deserializeOpDocumentGetHomeRegionOutput(v **GetHomeRegionOutp
 				if !ok {
 					return fmt.Errorf("expected HomeRegion to be of type string, got %T instead", value)
 				}
-				sv.HomeRegion = &jtv
+				sv.HomeRegion = ptr.String(jtv)
 			}
 
 		default:

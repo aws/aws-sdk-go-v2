@@ -68,11 +68,11 @@ type UpdateEnvironmentInput struct {
 	// If specified, AWS Elastic Beanstalk updates the configuration set associated
 	// with the running environment and sets the specified configuration options to the
 	// requested value.
-	OptionSettings []*types.ConfigurationOptionSetting
+	OptionSettings []types.ConfigurationOptionSetting
 
 	// A list of custom user-defined configuration options to remove from the
 	// configuration set for this environment.
-	OptionsToRemove []*types.OptionSpecification
+	OptionsToRemove []types.OptionSpecification
 
 	// The ARN of the platform, if used.
 	PlatformArn *string
@@ -132,7 +132,7 @@ type UpdateEnvironmentOutput struct {
 	EnvironmentId *string
 
 	// A list of links to other environments in the same group.
-	EnvironmentLinks []*types.EnvironmentLink
+	EnvironmentLinks []types.EnvironmentLink
 
 	// The name of this environment.
 	EnvironmentName *string

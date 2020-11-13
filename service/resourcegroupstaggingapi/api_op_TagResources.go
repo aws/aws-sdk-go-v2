@@ -61,13 +61,13 @@ type TagResourcesInput struct {
 	// the AWS General Reference.
 	//
 	// This member is required.
-	ResourceARNList []*string
+	ResourceARNList []string
 
 	// The tags that you want to add to the specified resources. A tag consists of a
 	// key and a value that you define.
 	//
 	// This member is required.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type TagResourcesOutput struct {
@@ -76,7 +76,7 @@ type TagResourcesOutput struct {
 	// The key is the ARN of the failed resource. The value is a FailureInfo object
 	// that contains an error code, a status code, and an error message. If there are
 	// no errors, the FailedResourcesMap is empty.
-	FailedResourcesMap map[string]*types.FailureInfo
+	FailedResourcesMap map[string]types.FailureInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

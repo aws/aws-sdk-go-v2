@@ -13,7 +13,7 @@ type AccessLog interface {
 
 // The file object to send virtual node access logs to.
 type AccessLogMemberFile struct {
-	Value *FileAccessLog
+	Value FileAccessLog
 }
 
 func (*AccessLogMemberFile) isAccessLog() {}
@@ -53,7 +53,7 @@ type AwsCloudMapServiceDiscovery struct {
 	// instances by any custom attribute that you specified when you registered the
 	// instance. Only instances that match all of the specified key/value pairs will be
 	// returned.
-	Attributes []*AwsCloudMapInstanceAttribute
+	Attributes []AwsCloudMapInstanceAttribute
 }
 
 // An object that represents the backends that a virtual node is expected to send
@@ -64,7 +64,7 @@ type Backend interface {
 
 // Specifies a virtual service to use as a backend for a virtual node.
 type BackendMemberVirtualService struct {
-	Value *VirtualServiceBackend
+	Value VirtualServiceBackend
 }
 
 func (*BackendMemberVirtualService) isBackend() {}
@@ -96,7 +96,7 @@ type ClientPolicyTls struct {
 	Enforce *bool
 
 	// One or more ports that the policy is enforced for.
-	Ports []*int32
+	Ports []int32
 }
 
 // An object that represents the DNS service discovery information for your virtual
@@ -339,7 +339,7 @@ type GrpcRetryPolicy struct {
 	//
 	// *
 	// stream-error – Retry on refused stream
-	HttpRetryEvents []*string
+	HttpRetryEvents []string
 
 	// Specify a valid value.
 	TcpRetryEvents []TcpRetryPolicyEvent
@@ -372,14 +372,14 @@ type GrpcRouteAction struct {
 	// matches the route.
 	//
 	// This member is required.
-	WeightedTargets []*WeightedTarget
+	WeightedTargets []WeightedTarget
 }
 
 // An object that represents the criteria for determining a request match.
 type GrpcRouteMatch struct {
 
 	// An object that represents the data to match from the request.
-	Metadata []*GrpcRouteMetadata
+	Metadata []GrpcRouteMetadata
 
 	// The method name to match from the request. If you specify a name, you must also
 	// specify a serviceName.
@@ -426,7 +426,7 @@ func (*GrpcRouteMetadataMatchMethodMemberRegex) isGrpcRouteMetadataMatchMethod()
 
 // An object that represents the range of values to match on.
 type GrpcRouteMetadataMatchMethodMemberRange struct {
-	Value *MatchRange
+	Value MatchRange
 }
 
 func (*GrpcRouteMetadataMatchMethodMemberRange) isGrpcRouteMetadataMatchMethod() {}
@@ -483,7 +483,7 @@ func (*HeaderMatchMethodMemberRegex) isHeaderMatchMethod() {}
 
 // An object that represents the range of values to match on.
 type HeaderMatchMethodMemberRange struct {
-	Value *MatchRange
+	Value MatchRange
 }
 
 func (*HeaderMatchMethodMemberRange) isHeaderMatchMethod() {}
@@ -509,7 +509,7 @@ type HealthCheckPolicy struct {
 	// declaring listener healthy.
 	//
 	// This member is required.
-	HealthyThreshold *int32
+	HealthyThreshold int32
 
 	// The time period in milliseconds between each health check execution.
 	//
@@ -533,7 +533,7 @@ type HealthCheckPolicy struct {
 	// a virtual node unhealthy.
 	//
 	// This member is required.
-	UnhealthyThreshold *int32
+	UnhealthyThreshold int32
 
 	// The destination path for the health check request. This value is only used if
 	// the specified protocol is HTTP or HTTP/2. For any other protocol, this value is
@@ -542,7 +542,7 @@ type HealthCheckPolicy struct {
 
 	// The destination port for the health check request. This port must match the port
 	// defined in the PortMapping for the listener.
-	Port *int32
+	Port int32
 }
 
 // An object that represents an HTTP gateway route.
@@ -609,7 +609,7 @@ type HttpRetryPolicy struct {
 	//
 	// *
 	// stream-error – Retry on refused stream
-	HttpRetryEvents []*string
+	HttpRetryEvents []string
 
 	// Specify a valid value.
 	TcpRetryEvents []TcpRetryPolicyEvent
@@ -642,7 +642,7 @@ type HttpRouteAction struct {
 	// matches the route.
 	//
 	// This member is required.
-	WeightedTargets []*WeightedTarget
+	WeightedTargets []WeightedTarget
 }
 
 // An object that represents the HTTP header in the request.
@@ -675,7 +675,7 @@ type HttpRouteMatch struct {
 	Prefix *string
 
 	// An object that represents the client request headers to match on.
-	Headers []*HttpRouteHeader
+	Headers []HttpRouteHeader
 
 	// The client request method to match on. Specify only one.
 	Method HttpMethod
@@ -720,28 +720,28 @@ type ListenerTimeout interface {
 
 // An object that represents types of timeouts.
 type ListenerTimeoutMemberTcp struct {
-	Value *TcpTimeout
+	Value TcpTimeout
 }
 
 func (*ListenerTimeoutMemberTcp) isListenerTimeout() {}
 
 // An object that represents types of timeouts.
 type ListenerTimeoutMemberHttp struct {
-	Value *HttpTimeout
+	Value HttpTimeout
 }
 
 func (*ListenerTimeoutMemberHttp) isListenerTimeout() {}
 
 // An object that represents types of timeouts.
 type ListenerTimeoutMemberHttp2 struct {
-	Value *HttpTimeout
+	Value HttpTimeout
 }
 
 func (*ListenerTimeoutMemberHttp2) isListenerTimeout() {}
 
 // An object that represents types of timeouts.
 type ListenerTimeoutMemberGrpc struct {
-	Value *GrpcTimeout
+	Value GrpcTimeout
 }
 
 func (*ListenerTimeoutMemberGrpc) isListenerTimeout() {}
@@ -791,14 +791,14 @@ type ListenerTlsCertificate interface {
 // A reference to an object that represents an AWS Certicate Manager (ACM)
 // certificate.
 type ListenerTlsCertificateMemberAcm struct {
-	Value *ListenerTlsAcmCertificate
+	Value ListenerTlsAcmCertificate
 }
 
 func (*ListenerTlsCertificateMemberAcm) isListenerTlsCertificate() {}
 
 // A reference to an object that represents a local file certificate.
 type ListenerTlsCertificateMemberFile struct {
-	Value *ListenerTlsFileCertificate
+	Value ListenerTlsFileCertificate
 }
 
 func (*ListenerTlsCertificateMemberFile) isListenerTlsCertificate() {}
@@ -934,7 +934,7 @@ type PortMapping struct {
 	// The port used for the port mapping.
 	//
 	// This member is required.
-	Port *int32
+	Port int32
 
 	// The protocol used for the port mapping. Specify one protocol.
 	//
@@ -1114,14 +1114,14 @@ type ServiceDiscovery interface {
 
 // Specifies the DNS information for the virtual node.
 type ServiceDiscoveryMemberDns struct {
-	Value *DnsServiceDiscovery
+	Value DnsServiceDiscovery
 }
 
 func (*ServiceDiscoveryMemberDns) isServiceDiscovery() {}
 
 // Specifies any AWS Cloud Map information for the virtual node.
 type ServiceDiscoveryMemberAwsCloudMap struct {
-	Value *AwsCloudMapServiceDiscovery
+	Value AwsCloudMapServiceDiscovery
 }
 
 func (*ServiceDiscoveryMemberAwsCloudMap) isServiceDiscovery() {}
@@ -1162,7 +1162,7 @@ type TcpRouteAction struct {
 	// matches the route.
 	//
 	// This member is required.
-	WeightedTargets []*WeightedTarget
+	WeightedTargets []WeightedTarget
 }
 
 // An object that represents types of timeouts.
@@ -1188,7 +1188,7 @@ type TlsValidationContextAcmTrust struct {
 	// One or more ACM Amazon Resource Name (ARN)s.
 	//
 	// This member is required.
-	CertificateAuthorityArns []*string
+	CertificateAuthorityArns []string
 }
 
 // An object that represents a Transport Layer Security (TLS) validation context
@@ -1211,14 +1211,14 @@ type TlsValidationContextTrust interface {
 // A reference to an object that represents a TLS validation context trust for an
 // AWS Certicate Manager (ACM) certificate.
 type TlsValidationContextTrustMemberAcm struct {
-	Value *TlsValidationContextAcmTrust
+	Value TlsValidationContextAcmTrust
 }
 
 func (*TlsValidationContextTrustMemberAcm) isTlsValidationContextTrust() {}
 
 // An object that represents a TLS validation context trust for a local file.
 type TlsValidationContextTrustMemberFile struct {
-	Value *TlsValidationContextFileTrust
+	Value TlsValidationContextFileTrust
 }
 
 func (*TlsValidationContextTrustMemberFile) isTlsValidationContextTrust() {}
@@ -1230,7 +1230,7 @@ type VirtualGatewayAccessLog interface {
 
 // The file object to send virtual gateway access logs to.
 type VirtualGatewayAccessLogMemberFile struct {
-	Value *VirtualGatewayFileAccessLog
+	Value VirtualGatewayFileAccessLog
 }
 
 func (*VirtualGatewayAccessLogMemberFile) isVirtualGatewayAccessLog() {}
@@ -1262,7 +1262,7 @@ type VirtualGatewayClientPolicyTls struct {
 	Enforce *bool
 
 	// One or more ports that the policy is enforced for.
-	Ports []*int32
+	Ports []int32
 }
 
 // An object that represents a virtual gateway returned by a describe operation.
@@ -1315,7 +1315,7 @@ type VirtualGatewayHealthCheckPolicy struct {
 	// declaring the listener healthy.
 	//
 	// This member is required.
-	HealthyThreshold *int32
+	HealthyThreshold int32
 
 	// The time period in milliseconds between each health check execution.
 	//
@@ -1339,7 +1339,7 @@ type VirtualGatewayHealthCheckPolicy struct {
 	// a virtual gateway unhealthy.
 	//
 	// This member is required.
-	UnhealthyThreshold *int32
+	UnhealthyThreshold int32
 
 	// The destination path for the health check request. This value is only used if
 	// the specified protocol is HTTP or HTTP/2. For any other protocol, this value is
@@ -1348,7 +1348,7 @@ type VirtualGatewayHealthCheckPolicy struct {
 
 	// The destination port for the health check request. This port must match the port
 	// defined in the PortMapping for the listener.
-	Port *int32
+	Port int32
 }
 
 // An object that represents a listener for a virtual gateway.
@@ -1412,14 +1412,14 @@ type VirtualGatewayListenerTlsCertificate interface {
 // A reference to an object that represents an AWS Certicate Manager (ACM)
 // certificate.
 type VirtualGatewayListenerTlsCertificateMemberAcm struct {
-	Value *VirtualGatewayListenerTlsAcmCertificate
+	Value VirtualGatewayListenerTlsAcmCertificate
 }
 
 func (*VirtualGatewayListenerTlsCertificateMemberAcm) isVirtualGatewayListenerTlsCertificate() {}
 
 // A reference to an object that represents a local file certificate.
 type VirtualGatewayListenerTlsCertificateMemberFile struct {
-	Value *VirtualGatewayListenerTlsFileCertificate
+	Value VirtualGatewayListenerTlsFileCertificate
 }
 
 func (*VirtualGatewayListenerTlsCertificateMemberFile) isVirtualGatewayListenerTlsCertificate() {}
@@ -1455,7 +1455,7 @@ type VirtualGatewayPortMapping struct {
 	// The port used for the port mapping. Specify one protocol.
 	//
 	// This member is required.
-	Port *int32
+	Port int32
 
 	// The protocol used for the port mapping.
 	//
@@ -1521,7 +1521,7 @@ type VirtualGatewaySpec struct {
 	// from. You can specify one listener.
 	//
 	// This member is required.
-	Listeners []*VirtualGatewayListener
+	Listeners []VirtualGatewayListener
 
 	// A reference to an object that represents the defaults for backends.
 	BackendDefaults *VirtualGatewayBackendDefaults
@@ -1555,7 +1555,7 @@ type VirtualGatewayTlsValidationContextAcmTrust struct {
 	// One or more ACM Amazon Resource Name (ARN)s.
 	//
 	// This member is required.
-	CertificateAuthorityArns []*string
+	CertificateAuthorityArns []string
 }
 
 // An object that represents a Transport Layer Security (TLS) validation context
@@ -1578,7 +1578,7 @@ type VirtualGatewayTlsValidationContextTrust interface {
 // A reference to an object that represents a TLS validation context trust for an
 // AWS Certicate Manager (ACM) certificate.
 type VirtualGatewayTlsValidationContextTrustMemberAcm struct {
-	Value *VirtualGatewayTlsValidationContextAcmTrust
+	Value VirtualGatewayTlsValidationContextAcmTrust
 }
 
 func (*VirtualGatewayTlsValidationContextTrustMemberAcm) isVirtualGatewayTlsValidationContextTrust() {
@@ -1586,7 +1586,7 @@ func (*VirtualGatewayTlsValidationContextTrustMemberAcm) isVirtualGatewayTlsVali
 
 // An object that represents a TLS validation context trust for a local file.
 type VirtualGatewayTlsValidationContextTrustMemberFile struct {
-	Value *VirtualGatewayTlsValidationContextFileTrust
+	Value VirtualGatewayTlsValidationContextFileTrust
 }
 
 func (*VirtualGatewayTlsValidationContextTrustMemberFile) isVirtualGatewayTlsValidationContextTrust() {
@@ -1692,7 +1692,7 @@ type VirtualNodeSpec struct {
 
 	// The listener that the virtual node is expected to receive inbound traffic from.
 	// You can specify one listener.
-	Listeners []*Listener
+	Listeners []Listener
 
 	// The inbound and outbound access logging information for the virtual node.
 	Logging *Logging
@@ -1815,7 +1815,7 @@ type VirtualRouterSpec struct {
 
 	// The listeners that the virtual router is expected to receive inbound traffic
 	// from. You can specify one listener.
-	Listeners []*VirtualRouterListener
+	Listeners []VirtualRouterListener
 }
 
 // An object that represents the status of a virtual router.
@@ -1875,14 +1875,14 @@ type VirtualServiceProvider interface {
 
 // The virtual node associated with a virtual service.
 type VirtualServiceProviderMemberVirtualNode struct {
-	Value *VirtualNodeServiceProvider
+	Value VirtualNodeServiceProvider
 }
 
 func (*VirtualServiceProviderMemberVirtualNode) isVirtualServiceProvider() {}
 
 // The virtual router associated with a virtual service.
 type VirtualServiceProviderMemberVirtualRouter struct {
-	Value *VirtualRouterServiceProvider
+	Value VirtualRouterServiceProvider
 }
 
 func (*VirtualServiceProviderMemberVirtualRouter) isVirtualServiceProvider() {}
@@ -1970,7 +1970,7 @@ type WeightedTarget struct {
 	// The relative weight of the weighted target.
 	//
 	// This member is required.
-	Weight *int32
+	Weight int32
 }
 
 // UnknownUnionMember is returned when a union member is returned over the wire,

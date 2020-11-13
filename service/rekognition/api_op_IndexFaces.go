@@ -169,7 +169,7 @@ type IndexFacesOutput struct {
 
 	// An array of faces detected and added to the collection. For more information,
 	// see Searching Faces in a Collection in the Amazon Rekognition Developer Guide.
-	FaceRecords []*types.FaceRecord
+	FaceRecords []types.FaceRecord
 
 	// If your collection is associated with a face detection model that's later than
 	// version 3.0, the value of OrientationCorrection is always null and no
@@ -200,7 +200,7 @@ type IndexFacesOutput struct {
 	// weren't indexed because the quality filter identified them as low quality, or
 	// the MaxFaces request parameter filtered them out. To use the quality filter, you
 	// specify the QualityFilter request parameter.
-	UnindexedFaces []*types.UnindexedFace
+	UnindexedFaces []types.UnindexedFace
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

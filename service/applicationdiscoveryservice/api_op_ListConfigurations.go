@@ -42,10 +42,10 @@ type ListConfigurationsInput struct {
 	// the ListConfigurations Action
 	// (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations)
 	// in the AWS Application Discovery Service User Guide.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The total number of items to return. The maximum value is 100.
-	MaxResults *int32
+	MaxResults int32
 
 	// Token to retrieve the next set of results. For example, if a previous call to
 	// ListConfigurations returned 100 items, but you set
@@ -58,14 +58,14 @@ type ListConfigurationsInput struct {
 	// Using the ListConfigurations Action
 	// (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations)
 	// in the AWS Application Discovery Service User Guide.
-	OrderBy []*types.OrderByElement
+	OrderBy []types.OrderByElement
 }
 
 type ListConfigurationsOutput struct {
 
 	// Returns configuration details, including the configuration ID, attribute names,
 	// and attribute values.
-	Configurations []map[string]*string
+	Configurations []map[string]string
 
 	// Token to retrieve the next set of results. For example, if your call to
 	// ListConfigurations returned 100 items, but you set

@@ -33,7 +33,7 @@ type SearchSystemTemplatesInput struct {
 
 	// An array of filters that limit the result set. The only valid filter is
 	// FLOW_TEMPLATE_ID.
-	Filters []*types.SystemTemplateFilter
+	Filters []types.SystemTemplateFilter
 
 	// The maximum number of results to return in the response.
 	MaxResults *int32
@@ -50,7 +50,7 @@ type SearchSystemTemplatesOutput struct {
 
 	// An array of objects that contain summary information about each system
 	// deployment in the result set.
-	Summaries []*types.SystemTemplateSummary
+	Summaries []types.SystemTemplateSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

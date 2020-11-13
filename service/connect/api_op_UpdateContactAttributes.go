@@ -52,7 +52,7 @@ type UpdateContactAttributesInput struct {
 	// alphanumeric, dash, and underscore characters.
 	//
 	// This member is required.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// The identifier of the contact. This is the identifier of the contact associated
 	// with the first interaction with the contact center.

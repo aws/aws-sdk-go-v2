@@ -6638,7 +6638,7 @@ func awsAwsjson11_deserializeDocumentAssociatedGateway(v **types.AssociatedGatew
 				if !ok {
 					return fmt.Errorf("expected GatewayIdentifier to be of type string, got %T instead", value)
 				}
-				sv.Id = &jtv
+				sv.Id = ptr.String(jtv)
 			}
 
 		case "ownerAccount":
@@ -6647,7 +6647,7 @@ func awsAwsjson11_deserializeDocumentAssociatedGateway(v **types.AssociatedGatew
 				if !ok {
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
-				sv.OwnerAccount = &jtv
+				sv.OwnerAccount = ptr.String(jtv)
 			}
 
 		case "region":
@@ -6656,7 +6656,7 @@ func awsAwsjson11_deserializeDocumentAssociatedGateway(v **types.AssociatedGatew
 				if !ok {
 					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
 				}
-				sv.Region = &jtv
+				sv.Region = ptr.String(jtv)
 			}
 
 		case "type":
@@ -6677,7 +6677,7 @@ func awsAwsjson11_deserializeDocumentAssociatedGateway(v **types.AssociatedGatew
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentAvailablePortSpeeds(v *[]*string, value interface{}) error {
+func awsAwsjson11_deserializeDocumentAvailablePortSpeeds(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6690,21 +6690,21 @@ func awsAwsjson11_deserializeDocumentAvailablePortSpeeds(v *[]*string, value int
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*string
+	var cv []string
 	if *v == nil {
-		cv = []*string{}
+		cv = []string{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *string
+		var col string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected PortSpeed to be of type string, got %T instead", value)
 			}
-			col = &jtv
+			col = jtv
 		}
 		cv = append(cv, col)
 
@@ -6750,7 +6750,7 @@ func awsAwsjson11_deserializeDocumentBGPPeer(v **types.BGPPeer, value interface{
 				if !ok {
 					return fmt.Errorf("expected AmazonAddress to be of type string, got %T instead", value)
 				}
-				sv.AmazonAddress = &jtv
+				sv.AmazonAddress = ptr.String(jtv)
 			}
 
 		case "asn":
@@ -6763,7 +6763,7 @@ func awsAwsjson11_deserializeDocumentBGPPeer(v **types.BGPPeer, value interface{
 				if err != nil {
 					return err
 				}
-				sv.Asn = ptr.Int32(int32(i64))
+				sv.Asn = int32(i64)
 			}
 
 		case "authKey":
@@ -6772,7 +6772,7 @@ func awsAwsjson11_deserializeDocumentBGPPeer(v **types.BGPPeer, value interface{
 				if !ok {
 					return fmt.Errorf("expected BGPAuthKey to be of type string, got %T instead", value)
 				}
-				sv.AuthKey = &jtv
+				sv.AuthKey = ptr.String(jtv)
 			}
 
 		case "awsDeviceV2":
@@ -6781,7 +6781,7 @@ func awsAwsjson11_deserializeDocumentBGPPeer(v **types.BGPPeer, value interface{
 				if !ok {
 					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
 				}
-				sv.AwsDeviceV2 = &jtv
+				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
 		case "bgpPeerId":
@@ -6790,7 +6790,7 @@ func awsAwsjson11_deserializeDocumentBGPPeer(v **types.BGPPeer, value interface{
 				if !ok {
 					return fmt.Errorf("expected BGPPeerId to be of type string, got %T instead", value)
 				}
-				sv.BgpPeerId = &jtv
+				sv.BgpPeerId = ptr.String(jtv)
 			}
 
 		case "bgpPeerState":
@@ -6817,7 +6817,7 @@ func awsAwsjson11_deserializeDocumentBGPPeer(v **types.BGPPeer, value interface{
 				if !ok {
 					return fmt.Errorf("expected CustomerAddress to be of type string, got %T instead", value)
 				}
-				sv.CustomerAddress = &jtv
+				sv.CustomerAddress = ptr.String(jtv)
 			}
 
 		default:
@@ -6829,7 +6829,7 @@ func awsAwsjson11_deserializeDocumentBGPPeer(v **types.BGPPeer, value interface{
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentBGPPeerIdList(v *[]*string, value interface{}) error {
+func awsAwsjson11_deserializeDocumentBGPPeerIdList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6842,21 +6842,21 @@ func awsAwsjson11_deserializeDocumentBGPPeerIdList(v *[]*string, value interface
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*string
+	var cv []string
 	if *v == nil {
-		cv = []*string{}
+		cv = []string{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *string
+		var col string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected BGPPeerId to be of type string, got %T instead", value)
 			}
-			col = &jtv
+			col = jtv
 		}
 		cv = append(cv, col)
 
@@ -6865,7 +6865,7 @@ func awsAwsjson11_deserializeDocumentBGPPeerIdList(v *[]*string, value interface
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentBGPPeerList(v *[]*types.BGPPeer, value interface{}) error {
+func awsAwsjson11_deserializeDocumentBGPPeerList(v *[]types.BGPPeer, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6878,18 +6878,20 @@ func awsAwsjson11_deserializeDocumentBGPPeerList(v *[]*types.BGPPeer, value inte
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.BGPPeer
+	var cv []types.BGPPeer
 	if *v == nil {
-		cv = []*types.BGPPeer{}
+		cv = []types.BGPPeer{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.BGPPeer
-		if err := awsAwsjson11_deserializeDocumentBGPPeer(&col, value); err != nil {
+		var col types.BGPPeer
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentBGPPeer(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -6925,7 +6927,7 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				if !ok {
 					return fmt.Errorf("expected AwsDevice to be of type string, got %T instead", value)
 				}
-				sv.AwsDevice = &jtv
+				sv.AwsDevice = ptr.String(jtv)
 			}
 
 		case "awsDeviceV2":
@@ -6934,7 +6936,7 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				if !ok {
 					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
 				}
-				sv.AwsDeviceV2 = &jtv
+				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
 		case "bandwidth":
@@ -6943,7 +6945,7 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				if !ok {
 					return fmt.Errorf("expected Bandwidth to be of type string, got %T instead", value)
 				}
-				sv.Bandwidth = &jtv
+				sv.Bandwidth = ptr.String(jtv)
 			}
 
 		case "connectionId":
@@ -6952,7 +6954,7 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				if !ok {
 					return fmt.Errorf("expected ConnectionId to be of type string, got %T instead", value)
 				}
-				sv.ConnectionId = &jtv
+				sv.ConnectionId = ptr.String(jtv)
 			}
 
 		case "connectionName":
@@ -6961,7 +6963,7 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				if !ok {
 					return fmt.Errorf("expected ConnectionName to be of type string, got %T instead", value)
 				}
-				sv.ConnectionName = &jtv
+				sv.ConnectionName = ptr.String(jtv)
 			}
 
 		case "connectionState":
@@ -6988,7 +6990,7 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				if !ok {
 					return fmt.Errorf("expected JumboFrameCapable to be of type *bool, got %T instead", value)
 				}
-				sv.JumboFrameCapable = &jtv
+				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
 
 		case "lagId":
@@ -6997,7 +6999,7 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				if !ok {
 					return fmt.Errorf("expected LagId to be of type string, got %T instead", value)
 				}
-				sv.LagId = &jtv
+				sv.LagId = ptr.String(jtv)
 			}
 
 		case "loaIssueTime":
@@ -7019,7 +7021,7 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				if !ok {
 					return fmt.Errorf("expected LocationCode to be of type string, got %T instead", value)
 				}
-				sv.Location = &jtv
+				sv.Location = ptr.String(jtv)
 			}
 
 		case "ownerAccount":
@@ -7028,7 +7030,7 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				if !ok {
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
-				sv.OwnerAccount = &jtv
+				sv.OwnerAccount = ptr.String(jtv)
 			}
 
 		case "partnerName":
@@ -7037,7 +7039,7 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				if !ok {
 					return fmt.Errorf("expected PartnerName to be of type string, got %T instead", value)
 				}
-				sv.PartnerName = &jtv
+				sv.PartnerName = ptr.String(jtv)
 			}
 
 		case "providerName":
@@ -7046,7 +7048,7 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				if !ok {
 					return fmt.Errorf("expected ProviderName to be of type string, got %T instead", value)
 				}
-				sv.ProviderName = &jtv
+				sv.ProviderName = ptr.String(jtv)
 			}
 
 		case "region":
@@ -7055,7 +7057,7 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				if !ok {
 					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
 				}
-				sv.Region = &jtv
+				sv.Region = ptr.String(jtv)
 			}
 
 		case "tags":
@@ -7073,7 +7075,7 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				if err != nil {
 					return err
 				}
-				sv.Vlan = ptr.Int32(int32(i64))
+				sv.Vlan = int32(i64)
 			}
 
 		default:
@@ -7085,7 +7087,7 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentConnectionList(v *[]*types.Connection, value interface{}) error {
+func awsAwsjson11_deserializeDocumentConnectionList(v *[]types.Connection, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7098,18 +7100,20 @@ func awsAwsjson11_deserializeDocumentConnectionList(v *[]*types.Connection, valu
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Connection
+	var cv []types.Connection
 	if *v == nil {
-		cv = []*types.Connection{}
+		cv = []types.Connection{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Connection
-		if err := awsAwsjson11_deserializeDocumentConnection(&col, value); err != nil {
+		var col types.Connection
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentConnection(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -7145,7 +7149,7 @@ func awsAwsjson11_deserializeDocumentDirectConnectClientException(v **types.Dire
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -7189,7 +7193,7 @@ func awsAwsjson11_deserializeDocumentDirectConnectGateway(v **types.DirectConnec
 				if err != nil {
 					return err
 				}
-				sv.AmazonSideAsn = &i64
+				sv.AmazonSideAsn = ptr.Int64(i64)
 			}
 
 		case "directConnectGatewayId":
@@ -7198,7 +7202,7 @@ func awsAwsjson11_deserializeDocumentDirectConnectGateway(v **types.DirectConnec
 				if !ok {
 					return fmt.Errorf("expected DirectConnectGatewayId to be of type string, got %T instead", value)
 				}
-				sv.DirectConnectGatewayId = &jtv
+				sv.DirectConnectGatewayId = ptr.String(jtv)
 			}
 
 		case "directConnectGatewayName":
@@ -7207,7 +7211,7 @@ func awsAwsjson11_deserializeDocumentDirectConnectGateway(v **types.DirectConnec
 				if !ok {
 					return fmt.Errorf("expected DirectConnectGatewayName to be of type string, got %T instead", value)
 				}
-				sv.DirectConnectGatewayName = &jtv
+				sv.DirectConnectGatewayName = ptr.String(jtv)
 			}
 
 		case "directConnectGatewayState":
@@ -7225,7 +7229,7 @@ func awsAwsjson11_deserializeDocumentDirectConnectGateway(v **types.DirectConnec
 				if !ok {
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
-				sv.OwnerAccount = &jtv
+				sv.OwnerAccount = ptr.String(jtv)
 			}
 
 		case "stateChangeError":
@@ -7234,7 +7238,7 @@ func awsAwsjson11_deserializeDocumentDirectConnectGateway(v **types.DirectConnec
 				if !ok {
 					return fmt.Errorf("expected StateChangeError to be of type string, got %T instead", value)
 				}
-				sv.StateChangeError = &jtv
+				sv.StateChangeError = ptr.String(jtv)
 			}
 
 		default:
@@ -7284,7 +7288,7 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociation(v **types.D
 				if !ok {
 					return fmt.Errorf("expected DirectConnectGatewayAssociationId to be of type string, got %T instead", value)
 				}
-				sv.AssociationId = &jtv
+				sv.AssociationId = ptr.String(jtv)
 			}
 
 		case "associationState":
@@ -7302,7 +7306,7 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociation(v **types.D
 				if !ok {
 					return fmt.Errorf("expected DirectConnectGatewayId to be of type string, got %T instead", value)
 				}
-				sv.DirectConnectGatewayId = &jtv
+				sv.DirectConnectGatewayId = ptr.String(jtv)
 			}
 
 		case "directConnectGatewayOwnerAccount":
@@ -7311,7 +7315,7 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociation(v **types.D
 				if !ok {
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
-				sv.DirectConnectGatewayOwnerAccount = &jtv
+				sv.DirectConnectGatewayOwnerAccount = ptr.String(jtv)
 			}
 
 		case "stateChangeError":
@@ -7320,7 +7324,7 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociation(v **types.D
 				if !ok {
 					return fmt.Errorf("expected StateChangeError to be of type string, got %T instead", value)
 				}
-				sv.StateChangeError = &jtv
+				sv.StateChangeError = ptr.String(jtv)
 			}
 
 		case "virtualGatewayId":
@@ -7329,7 +7333,7 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociation(v **types.D
 				if !ok {
 					return fmt.Errorf("expected VirtualGatewayId to be of type string, got %T instead", value)
 				}
-				sv.VirtualGatewayId = &jtv
+				sv.VirtualGatewayId = ptr.String(jtv)
 			}
 
 		case "virtualGatewayOwnerAccount":
@@ -7338,7 +7342,7 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociation(v **types.D
 				if !ok {
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
-				sv.VirtualGatewayOwnerAccount = &jtv
+				sv.VirtualGatewayOwnerAccount = ptr.String(jtv)
 			}
 
 		case "virtualGatewayRegion":
@@ -7347,7 +7351,7 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociation(v **types.D
 				if !ok {
 					return fmt.Errorf("expected VirtualGatewayRegion to be of type string, got %T instead", value)
 				}
-				sv.VirtualGatewayRegion = &jtv
+				sv.VirtualGatewayRegion = ptr.String(jtv)
 			}
 
 		default:
@@ -7359,7 +7363,7 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociation(v **types.D
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociationList(v *[]*types.DirectConnectGatewayAssociation, value interface{}) error {
+func awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociationList(v *[]types.DirectConnectGatewayAssociation, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7372,18 +7376,20 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociationList(v *[]*t
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.DirectConnectGatewayAssociation
+	var cv []types.DirectConnectGatewayAssociation
 	if *v == nil {
-		cv = []*types.DirectConnectGatewayAssociation{}
+		cv = []types.DirectConnectGatewayAssociation{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.DirectConnectGatewayAssociation
-		if err := awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociation(&col, value); err != nil {
+		var col types.DirectConnectGatewayAssociation
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociation(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -7424,7 +7430,7 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociationProposal(v *
 				if !ok {
 					return fmt.Errorf("expected DirectConnectGatewayId to be of type string, got %T instead", value)
 				}
-				sv.DirectConnectGatewayId = &jtv
+				sv.DirectConnectGatewayId = ptr.String(jtv)
 			}
 
 		case "directConnectGatewayOwnerAccount":
@@ -7433,7 +7439,7 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociationProposal(v *
 				if !ok {
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
-				sv.DirectConnectGatewayOwnerAccount = &jtv
+				sv.DirectConnectGatewayOwnerAccount = ptr.String(jtv)
 			}
 
 		case "existingAllowedPrefixesToDirectConnectGateway":
@@ -7447,7 +7453,7 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociationProposal(v *
 				if !ok {
 					return fmt.Errorf("expected DirectConnectGatewayAssociationProposalId to be of type string, got %T instead", value)
 				}
-				sv.ProposalId = &jtv
+				sv.ProposalId = ptr.String(jtv)
 			}
 
 		case "proposalState":
@@ -7473,7 +7479,7 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociationProposal(v *
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociationProposalList(v *[]*types.DirectConnectGatewayAssociationProposal, value interface{}) error {
+func awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociationProposalList(v *[]types.DirectConnectGatewayAssociationProposal, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7486,18 +7492,20 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociationProposalList
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.DirectConnectGatewayAssociationProposal
+	var cv []types.DirectConnectGatewayAssociationProposal
 	if *v == nil {
-		cv = []*types.DirectConnectGatewayAssociationProposal{}
+		cv = []types.DirectConnectGatewayAssociationProposal{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.DirectConnectGatewayAssociationProposal
-		if err := awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociationProposal(&col, value); err != nil {
+		var col types.DirectConnectGatewayAssociationProposal
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentDirectConnectGatewayAssociationProposal(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -7551,7 +7559,7 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAttachment(v **types.Di
 				if !ok {
 					return fmt.Errorf("expected DirectConnectGatewayId to be of type string, got %T instead", value)
 				}
-				sv.DirectConnectGatewayId = &jtv
+				sv.DirectConnectGatewayId = ptr.String(jtv)
 			}
 
 		case "stateChangeError":
@@ -7560,7 +7568,7 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAttachment(v **types.Di
 				if !ok {
 					return fmt.Errorf("expected StateChangeError to be of type string, got %T instead", value)
 				}
-				sv.StateChangeError = &jtv
+				sv.StateChangeError = ptr.String(jtv)
 			}
 
 		case "virtualInterfaceId":
@@ -7569,7 +7577,7 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAttachment(v **types.Di
 				if !ok {
 					return fmt.Errorf("expected VirtualInterfaceId to be of type string, got %T instead", value)
 				}
-				sv.VirtualInterfaceId = &jtv
+				sv.VirtualInterfaceId = ptr.String(jtv)
 			}
 
 		case "virtualInterfaceOwnerAccount":
@@ -7578,7 +7586,7 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAttachment(v **types.Di
 				if !ok {
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
-				sv.VirtualInterfaceOwnerAccount = &jtv
+				sv.VirtualInterfaceOwnerAccount = ptr.String(jtv)
 			}
 
 		case "virtualInterfaceRegion":
@@ -7587,7 +7595,7 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAttachment(v **types.Di
 				if !ok {
 					return fmt.Errorf("expected VirtualInterfaceRegion to be of type string, got %T instead", value)
 				}
-				sv.VirtualInterfaceRegion = &jtv
+				sv.VirtualInterfaceRegion = ptr.String(jtv)
 			}
 
 		default:
@@ -7599,7 +7607,7 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAttachment(v **types.Di
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDirectConnectGatewayAttachmentList(v *[]*types.DirectConnectGatewayAttachment, value interface{}) error {
+func awsAwsjson11_deserializeDocumentDirectConnectGatewayAttachmentList(v *[]types.DirectConnectGatewayAttachment, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7612,18 +7620,20 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAttachmentList(v *[]*ty
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.DirectConnectGatewayAttachment
+	var cv []types.DirectConnectGatewayAttachment
 	if *v == nil {
-		cv = []*types.DirectConnectGatewayAttachment{}
+		cv = []types.DirectConnectGatewayAttachment{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.DirectConnectGatewayAttachment
-		if err := awsAwsjson11_deserializeDocumentDirectConnectGatewayAttachment(&col, value); err != nil {
+		var col types.DirectConnectGatewayAttachment
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentDirectConnectGatewayAttachment(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -7631,7 +7641,7 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayAttachmentList(v *[]*ty
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDirectConnectGatewayList(v *[]*types.DirectConnectGateway, value interface{}) error {
+func awsAwsjson11_deserializeDocumentDirectConnectGatewayList(v *[]types.DirectConnectGateway, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7644,18 +7654,20 @@ func awsAwsjson11_deserializeDocumentDirectConnectGatewayList(v *[]*types.Direct
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.DirectConnectGateway
+	var cv []types.DirectConnectGateway
 	if *v == nil {
-		cv = []*types.DirectConnectGateway{}
+		cv = []types.DirectConnectGateway{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.DirectConnectGateway
-		if err := awsAwsjson11_deserializeDocumentDirectConnectGateway(&col, value); err != nil {
+		var col types.DirectConnectGateway
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentDirectConnectGateway(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -7691,7 +7703,7 @@ func awsAwsjson11_deserializeDocumentDirectConnectServerException(v **types.Dire
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -7731,7 +7743,7 @@ func awsAwsjson11_deserializeDocumentDuplicateTagKeysException(v **types.Duplica
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -7771,7 +7783,7 @@ func awsAwsjson11_deserializeDocumentInterconnect(v **types.Interconnect, value 
 				if !ok {
 					return fmt.Errorf("expected AwsDevice to be of type string, got %T instead", value)
 				}
-				sv.AwsDevice = &jtv
+				sv.AwsDevice = ptr.String(jtv)
 			}
 
 		case "awsDeviceV2":
@@ -7780,7 +7792,7 @@ func awsAwsjson11_deserializeDocumentInterconnect(v **types.Interconnect, value 
 				if !ok {
 					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
 				}
-				sv.AwsDeviceV2 = &jtv
+				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
 		case "bandwidth":
@@ -7789,7 +7801,7 @@ func awsAwsjson11_deserializeDocumentInterconnect(v **types.Interconnect, value 
 				if !ok {
 					return fmt.Errorf("expected Bandwidth to be of type string, got %T instead", value)
 				}
-				sv.Bandwidth = &jtv
+				sv.Bandwidth = ptr.String(jtv)
 			}
 
 		case "hasLogicalRedundancy":
@@ -7807,7 +7819,7 @@ func awsAwsjson11_deserializeDocumentInterconnect(v **types.Interconnect, value 
 				if !ok {
 					return fmt.Errorf("expected InterconnectId to be of type string, got %T instead", value)
 				}
-				sv.InterconnectId = &jtv
+				sv.InterconnectId = ptr.String(jtv)
 			}
 
 		case "interconnectName":
@@ -7816,7 +7828,7 @@ func awsAwsjson11_deserializeDocumentInterconnect(v **types.Interconnect, value 
 				if !ok {
 					return fmt.Errorf("expected InterconnectName to be of type string, got %T instead", value)
 				}
-				sv.InterconnectName = &jtv
+				sv.InterconnectName = ptr.String(jtv)
 			}
 
 		case "interconnectState":
@@ -7834,7 +7846,7 @@ func awsAwsjson11_deserializeDocumentInterconnect(v **types.Interconnect, value 
 				if !ok {
 					return fmt.Errorf("expected JumboFrameCapable to be of type *bool, got %T instead", value)
 				}
-				sv.JumboFrameCapable = &jtv
+				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
 
 		case "lagId":
@@ -7843,7 +7855,7 @@ func awsAwsjson11_deserializeDocumentInterconnect(v **types.Interconnect, value 
 				if !ok {
 					return fmt.Errorf("expected LagId to be of type string, got %T instead", value)
 				}
-				sv.LagId = &jtv
+				sv.LagId = ptr.String(jtv)
 			}
 
 		case "loaIssueTime":
@@ -7865,7 +7877,7 @@ func awsAwsjson11_deserializeDocumentInterconnect(v **types.Interconnect, value 
 				if !ok {
 					return fmt.Errorf("expected LocationCode to be of type string, got %T instead", value)
 				}
-				sv.Location = &jtv
+				sv.Location = ptr.String(jtv)
 			}
 
 		case "providerName":
@@ -7874,7 +7886,7 @@ func awsAwsjson11_deserializeDocumentInterconnect(v **types.Interconnect, value 
 				if !ok {
 					return fmt.Errorf("expected ProviderName to be of type string, got %T instead", value)
 				}
-				sv.ProviderName = &jtv
+				sv.ProviderName = ptr.String(jtv)
 			}
 
 		case "region":
@@ -7883,7 +7895,7 @@ func awsAwsjson11_deserializeDocumentInterconnect(v **types.Interconnect, value 
 				if !ok {
 					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
 				}
-				sv.Region = &jtv
+				sv.Region = ptr.String(jtv)
 			}
 
 		case "tags":
@@ -7900,7 +7912,7 @@ func awsAwsjson11_deserializeDocumentInterconnect(v **types.Interconnect, value 
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentInterconnectList(v *[]*types.Interconnect, value interface{}) error {
+func awsAwsjson11_deserializeDocumentInterconnectList(v *[]types.Interconnect, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7913,18 +7925,20 @@ func awsAwsjson11_deserializeDocumentInterconnectList(v *[]*types.Interconnect, 
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Interconnect
+	var cv []types.Interconnect
 	if *v == nil {
-		cv = []*types.Interconnect{}
+		cv = []types.Interconnect{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Interconnect
-		if err := awsAwsjson11_deserializeDocumentInterconnect(&col, value); err != nil {
+		var col types.Interconnect
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentInterconnect(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -7960,7 +7974,7 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected BooleanFlag to be of type *bool, got %T instead", value)
 				}
-				sv.AllowsHostedConnections = &jtv
+				sv.AllowsHostedConnections = jtv
 			}
 
 		case "awsDevice":
@@ -7969,7 +7983,7 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected AwsDevice to be of type string, got %T instead", value)
 				}
-				sv.AwsDevice = &jtv
+				sv.AwsDevice = ptr.String(jtv)
 			}
 
 		case "awsDeviceV2":
@@ -7978,7 +7992,7 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
 				}
-				sv.AwsDeviceV2 = &jtv
+				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
 		case "connections":
@@ -7992,7 +8006,7 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected Bandwidth to be of type string, got %T instead", value)
 				}
-				sv.ConnectionsBandwidth = &jtv
+				sv.ConnectionsBandwidth = ptr.String(jtv)
 			}
 
 		case "hasLogicalRedundancy":
@@ -8010,7 +8024,7 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected JumboFrameCapable to be of type *bool, got %T instead", value)
 				}
-				sv.JumboFrameCapable = &jtv
+				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
 
 		case "lagId":
@@ -8019,7 +8033,7 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected LagId to be of type string, got %T instead", value)
 				}
-				sv.LagId = &jtv
+				sv.LagId = ptr.String(jtv)
 			}
 
 		case "lagName":
@@ -8028,7 +8042,7 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected LagName to be of type string, got %T instead", value)
 				}
-				sv.LagName = &jtv
+				sv.LagName = ptr.String(jtv)
 			}
 
 		case "lagState":
@@ -8046,7 +8060,7 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected LocationCode to be of type string, got %T instead", value)
 				}
-				sv.Location = &jtv
+				sv.Location = ptr.String(jtv)
 			}
 
 		case "minimumLinks":
@@ -8059,7 +8073,7 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 				if err != nil {
 					return err
 				}
-				sv.MinimumLinks = ptr.Int32(int32(i64))
+				sv.MinimumLinks = int32(i64)
 			}
 
 		case "numberOfConnections":
@@ -8072,7 +8086,7 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 				if err != nil {
 					return err
 				}
-				sv.NumberOfConnections = ptr.Int32(int32(i64))
+				sv.NumberOfConnections = int32(i64)
 			}
 
 		case "ownerAccount":
@@ -8081,7 +8095,7 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
-				sv.OwnerAccount = &jtv
+				sv.OwnerAccount = ptr.String(jtv)
 			}
 
 		case "providerName":
@@ -8090,7 +8104,7 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected ProviderName to be of type string, got %T instead", value)
 				}
-				sv.ProviderName = &jtv
+				sv.ProviderName = ptr.String(jtv)
 			}
 
 		case "region":
@@ -8099,7 +8113,7 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
 				}
-				sv.Region = &jtv
+				sv.Region = ptr.String(jtv)
 			}
 
 		case "tags":
@@ -8116,7 +8130,7 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentLagList(v *[]*types.Lag, value interface{}) error {
+func awsAwsjson11_deserializeDocumentLagList(v *[]types.Lag, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8129,18 +8143,20 @@ func awsAwsjson11_deserializeDocumentLagList(v *[]*types.Lag, value interface{})
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Lag
+	var cv []types.Lag
 	if *v == nil {
-		cv = []*types.Lag{}
+		cv = []types.Lag{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Lag
-		if err := awsAwsjson11_deserializeDocumentLag(&col, value); err != nil {
+		var col types.Lag
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentLag(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -8239,7 +8255,7 @@ func awsAwsjson11_deserializeDocumentLocation(v **types.Location, value interfac
 				if !ok {
 					return fmt.Errorf("expected LocationCode to be of type string, got %T instead", value)
 				}
-				sv.LocationCode = &jtv
+				sv.LocationCode = ptr.String(jtv)
 			}
 
 		case "locationName":
@@ -8248,7 +8264,7 @@ func awsAwsjson11_deserializeDocumentLocation(v **types.Location, value interfac
 				if !ok {
 					return fmt.Errorf("expected LocationName to be of type string, got %T instead", value)
 				}
-				sv.LocationName = &jtv
+				sv.LocationName = ptr.String(jtv)
 			}
 
 		case "region":
@@ -8257,7 +8273,7 @@ func awsAwsjson11_deserializeDocumentLocation(v **types.Location, value interfac
 				if !ok {
 					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
 				}
-				sv.Region = &jtv
+				sv.Region = ptr.String(jtv)
 			}
 
 		default:
@@ -8269,7 +8285,7 @@ func awsAwsjson11_deserializeDocumentLocation(v **types.Location, value interfac
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentLocationList(v *[]*types.Location, value interface{}) error {
+func awsAwsjson11_deserializeDocumentLocationList(v *[]types.Location, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8282,18 +8298,20 @@ func awsAwsjson11_deserializeDocumentLocationList(v *[]*types.Location, value in
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Location
+	var cv []types.Location
 	if *v == nil {
-		cv = []*types.Location{}
+		cv = []types.Location{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Location
-		if err := awsAwsjson11_deserializeDocumentLocation(&col, value); err != nil {
+		var col types.Location
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentLocation(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -8301,7 +8319,7 @@ func awsAwsjson11_deserializeDocumentLocationList(v *[]*types.Location, value in
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentProviderList(v *[]*string, value interface{}) error {
+func awsAwsjson11_deserializeDocumentProviderList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8314,21 +8332,21 @@ func awsAwsjson11_deserializeDocumentProviderList(v *[]*string, value interface{
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*string
+	var cv []string
 	if *v == nil {
-		cv = []*string{}
+		cv = []string{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *string
+		var col string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected ProviderName to be of type string, got %T instead", value)
 			}
-			col = &jtv
+			col = jtv
 		}
 		cv = append(cv, col)
 
@@ -8365,7 +8383,7 @@ func awsAwsjson11_deserializeDocumentResourceTag(v **types.ResourceTag, value in
 				if !ok {
 					return fmt.Errorf("expected ResourceArn to be of type string, got %T instead", value)
 				}
-				sv.ResourceArn = &jtv
+				sv.ResourceArn = ptr.String(jtv)
 			}
 
 		case "tags":
@@ -8382,7 +8400,7 @@ func awsAwsjson11_deserializeDocumentResourceTag(v **types.ResourceTag, value in
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentResourceTagList(v *[]*types.ResourceTag, value interface{}) error {
+func awsAwsjson11_deserializeDocumentResourceTagList(v *[]types.ResourceTag, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8395,18 +8413,20 @@ func awsAwsjson11_deserializeDocumentResourceTagList(v *[]*types.ResourceTag, va
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.ResourceTag
+	var cv []types.ResourceTag
 	if *v == nil {
-		cv = []*types.ResourceTag{}
+		cv = []types.ResourceTag{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.ResourceTag
-		if err := awsAwsjson11_deserializeDocumentResourceTag(&col, value); err != nil {
+		var col types.ResourceTag
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentResourceTag(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -8442,7 +8462,7 @@ func awsAwsjson11_deserializeDocumentRouteFilterPrefix(v **types.RouteFilterPref
 				if !ok {
 					return fmt.Errorf("expected CIDR to be of type string, got %T instead", value)
 				}
-				sv.Cidr = &jtv
+				sv.Cidr = ptr.String(jtv)
 			}
 
 		default:
@@ -8454,7 +8474,7 @@ func awsAwsjson11_deserializeDocumentRouteFilterPrefix(v **types.RouteFilterPref
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentRouteFilterPrefixList(v *[]*types.RouteFilterPrefix, value interface{}) error {
+func awsAwsjson11_deserializeDocumentRouteFilterPrefixList(v *[]types.RouteFilterPrefix, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8467,18 +8487,20 @@ func awsAwsjson11_deserializeDocumentRouteFilterPrefixList(v *[]*types.RouteFilt
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.RouteFilterPrefix
+	var cv []types.RouteFilterPrefix
 	if *v == nil {
-		cv = []*types.RouteFilterPrefix{}
+		cv = []types.RouteFilterPrefix{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.RouteFilterPrefix
-		if err := awsAwsjson11_deserializeDocumentRouteFilterPrefix(&col, value); err != nil {
+		var col types.RouteFilterPrefix
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentRouteFilterPrefix(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -8514,7 +8536,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected TagKey to be of type string, got %T instead", value)
 				}
-				sv.Key = &jtv
+				sv.Key = ptr.String(jtv)
 			}
 
 		case "value":
@@ -8523,7 +8545,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				if !ok {
 					return fmt.Errorf("expected TagValue to be of type string, got %T instead", value)
 				}
-				sv.Value = &jtv
+				sv.Value = ptr.String(jtv)
 			}
 
 		default:
@@ -8535,7 +8557,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentTagList(v *[]*types.Tag, value interface{}) error {
+func awsAwsjson11_deserializeDocumentTagList(v *[]types.Tag, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8548,18 +8570,20 @@ func awsAwsjson11_deserializeDocumentTagList(v *[]*types.Tag, value interface{})
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Tag
+	var cv []types.Tag
 	if *v == nil {
-		cv = []*types.Tag{}
+		cv = []types.Tag{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Tag
-		if err := awsAwsjson11_deserializeDocumentTag(&col, value); err != nil {
+		var col types.Tag
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentTag(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -8595,7 +8619,7 @@ func awsAwsjson11_deserializeDocumentTooManyTagsException(v **types.TooManyTagsE
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -8635,7 +8659,7 @@ func awsAwsjson11_deserializeDocumentVirtualGateway(v **types.VirtualGateway, va
 				if !ok {
 					return fmt.Errorf("expected VirtualGatewayId to be of type string, got %T instead", value)
 				}
-				sv.VirtualGatewayId = &jtv
+				sv.VirtualGatewayId = ptr.String(jtv)
 			}
 
 		case "virtualGatewayState":
@@ -8644,7 +8668,7 @@ func awsAwsjson11_deserializeDocumentVirtualGateway(v **types.VirtualGateway, va
 				if !ok {
 					return fmt.Errorf("expected VirtualGatewayState to be of type string, got %T instead", value)
 				}
-				sv.VirtualGatewayState = &jtv
+				sv.VirtualGatewayState = ptr.String(jtv)
 			}
 
 		default:
@@ -8656,7 +8680,7 @@ func awsAwsjson11_deserializeDocumentVirtualGateway(v **types.VirtualGateway, va
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentVirtualGatewayList(v *[]*types.VirtualGateway, value interface{}) error {
+func awsAwsjson11_deserializeDocumentVirtualGatewayList(v *[]types.VirtualGateway, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8669,18 +8693,20 @@ func awsAwsjson11_deserializeDocumentVirtualGatewayList(v *[]*types.VirtualGatew
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.VirtualGateway
+	var cv []types.VirtualGateway
 	if *v == nil {
-		cv = []*types.VirtualGateway{}
+		cv = []types.VirtualGateway{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.VirtualGateway
-		if err := awsAwsjson11_deserializeDocumentVirtualGateway(&col, value); err != nil {
+		var col types.VirtualGateway
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentVirtualGateway(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -8725,7 +8751,7 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				if !ok {
 					return fmt.Errorf("expected AmazonAddress to be of type string, got %T instead", value)
 				}
-				sv.AmazonAddress = &jtv
+				sv.AmazonAddress = ptr.String(jtv)
 			}
 
 		case "amazonSideAsn":
@@ -8738,7 +8764,7 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				if err != nil {
 					return err
 				}
-				sv.AmazonSideAsn = &i64
+				sv.AmazonSideAsn = ptr.Int64(i64)
 			}
 
 		case "asn":
@@ -8751,7 +8777,7 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				if err != nil {
 					return err
 				}
-				sv.Asn = ptr.Int32(int32(i64))
+				sv.Asn = int32(i64)
 			}
 
 		case "authKey":
@@ -8760,7 +8786,7 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				if !ok {
 					return fmt.Errorf("expected BGPAuthKey to be of type string, got %T instead", value)
 				}
-				sv.AuthKey = &jtv
+				sv.AuthKey = ptr.String(jtv)
 			}
 
 		case "awsDeviceV2":
@@ -8769,7 +8795,7 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				if !ok {
 					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
 				}
-				sv.AwsDeviceV2 = &jtv
+				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
 		case "bgpPeers":
@@ -8783,7 +8809,7 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				if !ok {
 					return fmt.Errorf("expected ConnectionId to be of type string, got %T instead", value)
 				}
-				sv.ConnectionId = &jtv
+				sv.ConnectionId = ptr.String(jtv)
 			}
 
 		case "customerAddress":
@@ -8792,7 +8818,7 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				if !ok {
 					return fmt.Errorf("expected CustomerAddress to be of type string, got %T instead", value)
 				}
-				sv.CustomerAddress = &jtv
+				sv.CustomerAddress = ptr.String(jtv)
 			}
 
 		case "customerRouterConfig":
@@ -8801,7 +8827,7 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				if !ok {
 					return fmt.Errorf("expected RouterConfig to be of type string, got %T instead", value)
 				}
-				sv.CustomerRouterConfig = &jtv
+				sv.CustomerRouterConfig = ptr.String(jtv)
 			}
 
 		case "directConnectGatewayId":
@@ -8810,7 +8836,7 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				if !ok {
 					return fmt.Errorf("expected DirectConnectGatewayId to be of type string, got %T instead", value)
 				}
-				sv.DirectConnectGatewayId = &jtv
+				sv.DirectConnectGatewayId = ptr.String(jtv)
 			}
 
 		case "jumboFrameCapable":
@@ -8819,7 +8845,7 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				if !ok {
 					return fmt.Errorf("expected JumboFrameCapable to be of type *bool, got %T instead", value)
 				}
-				sv.JumboFrameCapable = &jtv
+				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
 
 		case "location":
@@ -8828,7 +8854,7 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				if !ok {
 					return fmt.Errorf("expected LocationCode to be of type string, got %T instead", value)
 				}
-				sv.Location = &jtv
+				sv.Location = ptr.String(jtv)
 			}
 
 		case "mtu":
@@ -8850,7 +8876,7 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				if !ok {
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
-				sv.OwnerAccount = &jtv
+				sv.OwnerAccount = ptr.String(jtv)
 			}
 
 		case "region":
@@ -8859,7 +8885,7 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				if !ok {
 					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
 				}
-				sv.Region = &jtv
+				sv.Region = ptr.String(jtv)
 			}
 
 		case "routeFilterPrefixes":
@@ -8878,7 +8904,7 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				if !ok {
 					return fmt.Errorf("expected VirtualGatewayId to be of type string, got %T instead", value)
 				}
-				sv.VirtualGatewayId = &jtv
+				sv.VirtualGatewayId = ptr.String(jtv)
 			}
 
 		case "virtualInterfaceId":
@@ -8887,7 +8913,7 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				if !ok {
 					return fmt.Errorf("expected VirtualInterfaceId to be of type string, got %T instead", value)
 				}
-				sv.VirtualInterfaceId = &jtv
+				sv.VirtualInterfaceId = ptr.String(jtv)
 			}
 
 		case "virtualInterfaceName":
@@ -8896,7 +8922,7 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				if !ok {
 					return fmt.Errorf("expected VirtualInterfaceName to be of type string, got %T instead", value)
 				}
-				sv.VirtualInterfaceName = &jtv
+				sv.VirtualInterfaceName = ptr.String(jtv)
 			}
 
 		case "virtualInterfaceState":
@@ -8914,7 +8940,7 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				if !ok {
 					return fmt.Errorf("expected VirtualInterfaceType to be of type string, got %T instead", value)
 				}
-				sv.VirtualInterfaceType = &jtv
+				sv.VirtualInterfaceType = ptr.String(jtv)
 			}
 
 		case "vlan":
@@ -8927,7 +8953,7 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 				if err != nil {
 					return err
 				}
-				sv.Vlan = ptr.Int32(int32(i64))
+				sv.Vlan = int32(i64)
 			}
 
 		default:
@@ -8939,7 +8965,7 @@ func awsAwsjson11_deserializeDocumentVirtualInterface(v **types.VirtualInterface
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentVirtualInterfaceList(v *[]*types.VirtualInterface, value interface{}) error {
+func awsAwsjson11_deserializeDocumentVirtualInterfaceList(v *[]types.VirtualInterface, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8952,18 +8978,20 @@ func awsAwsjson11_deserializeDocumentVirtualInterfaceList(v *[]*types.VirtualInt
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.VirtualInterface
+	var cv []types.VirtualInterface
 	if *v == nil {
-		cv = []*types.VirtualInterface{}
+		cv = []types.VirtualInterface{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.VirtualInterface
-		if err := awsAwsjson11_deserializeDocumentVirtualInterface(&col, value); err != nil {
+		var col types.VirtualInterface
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentVirtualInterface(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -9017,7 +9045,7 @@ func awsAwsjson11_deserializeDocumentVirtualInterfaceTestHistory(v **types.Virtu
 				if !ok {
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
-				sv.OwnerAccount = &jtv
+				sv.OwnerAccount = ptr.String(jtv)
 			}
 
 		case "startTime":
@@ -9039,7 +9067,7 @@ func awsAwsjson11_deserializeDocumentVirtualInterfaceTestHistory(v **types.Virtu
 				if !ok {
 					return fmt.Errorf("expected FailureTestHistoryStatus to be of type string, got %T instead", value)
 				}
-				sv.Status = &jtv
+				sv.Status = ptr.String(jtv)
 			}
 
 		case "testDurationInMinutes":
@@ -9061,7 +9089,7 @@ func awsAwsjson11_deserializeDocumentVirtualInterfaceTestHistory(v **types.Virtu
 				if !ok {
 					return fmt.Errorf("expected TestId to be of type string, got %T instead", value)
 				}
-				sv.TestId = &jtv
+				sv.TestId = ptr.String(jtv)
 			}
 
 		case "virtualInterfaceId":
@@ -9070,7 +9098,7 @@ func awsAwsjson11_deserializeDocumentVirtualInterfaceTestHistory(v **types.Virtu
 				if !ok {
 					return fmt.Errorf("expected VirtualInterfaceId to be of type string, got %T instead", value)
 				}
-				sv.VirtualInterfaceId = &jtv
+				sv.VirtualInterfaceId = ptr.String(jtv)
 			}
 
 		default:
@@ -9082,7 +9110,7 @@ func awsAwsjson11_deserializeDocumentVirtualInterfaceTestHistory(v **types.Virtu
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentVirtualInterfaceTestHistoryList(v *[]*types.VirtualInterfaceTestHistory, value interface{}) error {
+func awsAwsjson11_deserializeDocumentVirtualInterfaceTestHistoryList(v *[]types.VirtualInterfaceTestHistory, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -9095,18 +9123,20 @@ func awsAwsjson11_deserializeDocumentVirtualInterfaceTestHistoryList(v *[]*types
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.VirtualInterfaceTestHistory
+	var cv []types.VirtualInterfaceTestHistory
 	if *v == nil {
-		cv = []*types.VirtualInterfaceTestHistory{}
+		cv = []types.VirtualInterfaceTestHistory{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.VirtualInterfaceTestHistory
-		if err := awsAwsjson11_deserializeDocumentVirtualInterfaceTestHistory(&col, value); err != nil {
+		var col types.VirtualInterfaceTestHistory
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentVirtualInterfaceTestHistory(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -9178,7 +9208,7 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				if !ok {
 					return fmt.Errorf("expected AwsDevice to be of type string, got %T instead", value)
 				}
-				sv.AwsDevice = &jtv
+				sv.AwsDevice = ptr.String(jtv)
 			}
 
 		case "awsDeviceV2":
@@ -9187,7 +9217,7 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				if !ok {
 					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
 				}
-				sv.AwsDeviceV2 = &jtv
+				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
 		case "bandwidth":
@@ -9196,7 +9226,7 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				if !ok {
 					return fmt.Errorf("expected Bandwidth to be of type string, got %T instead", value)
 				}
-				sv.Bandwidth = &jtv
+				sv.Bandwidth = ptr.String(jtv)
 			}
 
 		case "connectionId":
@@ -9205,7 +9235,7 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				if !ok {
 					return fmt.Errorf("expected ConnectionId to be of type string, got %T instead", value)
 				}
-				sv.ConnectionId = &jtv
+				sv.ConnectionId = ptr.String(jtv)
 			}
 
 		case "connectionName":
@@ -9214,7 +9244,7 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				if !ok {
 					return fmt.Errorf("expected ConnectionName to be of type string, got %T instead", value)
 				}
-				sv.ConnectionName = &jtv
+				sv.ConnectionName = ptr.String(jtv)
 			}
 
 		case "connectionState":
@@ -9241,7 +9271,7 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				if !ok {
 					return fmt.Errorf("expected JumboFrameCapable to be of type *bool, got %T instead", value)
 				}
-				sv.JumboFrameCapable = &jtv
+				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
 
 		case "lagId":
@@ -9250,7 +9280,7 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				if !ok {
 					return fmt.Errorf("expected LagId to be of type string, got %T instead", value)
 				}
-				sv.LagId = &jtv
+				sv.LagId = ptr.String(jtv)
 			}
 
 		case "loaIssueTime":
@@ -9272,7 +9302,7 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				if !ok {
 					return fmt.Errorf("expected LocationCode to be of type string, got %T instead", value)
 				}
-				sv.Location = &jtv
+				sv.Location = ptr.String(jtv)
 			}
 
 		case "ownerAccount":
@@ -9281,7 +9311,7 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				if !ok {
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
-				sv.OwnerAccount = &jtv
+				sv.OwnerAccount = ptr.String(jtv)
 			}
 
 		case "partnerName":
@@ -9290,7 +9320,7 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				if !ok {
 					return fmt.Errorf("expected PartnerName to be of type string, got %T instead", value)
 				}
-				sv.PartnerName = &jtv
+				sv.PartnerName = ptr.String(jtv)
 			}
 
 		case "providerName":
@@ -9299,7 +9329,7 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				if !ok {
 					return fmt.Errorf("expected ProviderName to be of type string, got %T instead", value)
 				}
-				sv.ProviderName = &jtv
+				sv.ProviderName = ptr.String(jtv)
 			}
 
 		case "region":
@@ -9308,7 +9338,7 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				if !ok {
 					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
 				}
-				sv.Region = &jtv
+				sv.Region = ptr.String(jtv)
 			}
 
 		case "tags":
@@ -9326,7 +9356,7 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				if err != nil {
 					return err
 				}
-				sv.Vlan = ptr.Int32(int32(i64))
+				sv.Vlan = int32(i64)
 			}
 
 		default:
@@ -9366,7 +9396,7 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				if !ok {
 					return fmt.Errorf("expected AwsDevice to be of type string, got %T instead", value)
 				}
-				sv.AwsDevice = &jtv
+				sv.AwsDevice = ptr.String(jtv)
 			}
 
 		case "awsDeviceV2":
@@ -9375,7 +9405,7 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				if !ok {
 					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
 				}
-				sv.AwsDeviceV2 = &jtv
+				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
 		case "bandwidth":
@@ -9384,7 +9414,7 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				if !ok {
 					return fmt.Errorf("expected Bandwidth to be of type string, got %T instead", value)
 				}
-				sv.Bandwidth = &jtv
+				sv.Bandwidth = ptr.String(jtv)
 			}
 
 		case "connectionId":
@@ -9393,7 +9423,7 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				if !ok {
 					return fmt.Errorf("expected ConnectionId to be of type string, got %T instead", value)
 				}
-				sv.ConnectionId = &jtv
+				sv.ConnectionId = ptr.String(jtv)
 			}
 
 		case "connectionName":
@@ -9402,7 +9432,7 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				if !ok {
 					return fmt.Errorf("expected ConnectionName to be of type string, got %T instead", value)
 				}
-				sv.ConnectionName = &jtv
+				sv.ConnectionName = ptr.String(jtv)
 			}
 
 		case "connectionState":
@@ -9429,7 +9459,7 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				if !ok {
 					return fmt.Errorf("expected JumboFrameCapable to be of type *bool, got %T instead", value)
 				}
-				sv.JumboFrameCapable = &jtv
+				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
 
 		case "lagId":
@@ -9438,7 +9468,7 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				if !ok {
 					return fmt.Errorf("expected LagId to be of type string, got %T instead", value)
 				}
-				sv.LagId = &jtv
+				sv.LagId = ptr.String(jtv)
 			}
 
 		case "loaIssueTime":
@@ -9460,7 +9490,7 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				if !ok {
 					return fmt.Errorf("expected LocationCode to be of type string, got %T instead", value)
 				}
-				sv.Location = &jtv
+				sv.Location = ptr.String(jtv)
 			}
 
 		case "ownerAccount":
@@ -9469,7 +9499,7 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				if !ok {
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
-				sv.OwnerAccount = &jtv
+				sv.OwnerAccount = ptr.String(jtv)
 			}
 
 		case "partnerName":
@@ -9478,7 +9508,7 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				if !ok {
 					return fmt.Errorf("expected PartnerName to be of type string, got %T instead", value)
 				}
-				sv.PartnerName = &jtv
+				sv.PartnerName = ptr.String(jtv)
 			}
 
 		case "providerName":
@@ -9487,7 +9517,7 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				if !ok {
 					return fmt.Errorf("expected ProviderName to be of type string, got %T instead", value)
 				}
-				sv.ProviderName = &jtv
+				sv.ProviderName = ptr.String(jtv)
 			}
 
 		case "region":
@@ -9496,7 +9526,7 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				if !ok {
 					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
 				}
-				sv.Region = &jtv
+				sv.Region = ptr.String(jtv)
 			}
 
 		case "tags":
@@ -9514,7 +9544,7 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				if err != nil {
 					return err
 				}
-				sv.Vlan = ptr.Int32(int32(i64))
+				sv.Vlan = int32(i64)
 			}
 
 		default:
@@ -9563,7 +9593,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				if !ok {
 					return fmt.Errorf("expected AmazonAddress to be of type string, got %T instead", value)
 				}
-				sv.AmazonAddress = &jtv
+				sv.AmazonAddress = ptr.String(jtv)
 			}
 
 		case "amazonSideAsn":
@@ -9576,7 +9606,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				if err != nil {
 					return err
 				}
-				sv.AmazonSideAsn = &i64
+				sv.AmazonSideAsn = ptr.Int64(i64)
 			}
 
 		case "asn":
@@ -9589,7 +9619,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				if err != nil {
 					return err
 				}
-				sv.Asn = ptr.Int32(int32(i64))
+				sv.Asn = int32(i64)
 			}
 
 		case "authKey":
@@ -9598,7 +9628,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				if !ok {
 					return fmt.Errorf("expected BGPAuthKey to be of type string, got %T instead", value)
 				}
-				sv.AuthKey = &jtv
+				sv.AuthKey = ptr.String(jtv)
 			}
 
 		case "awsDeviceV2":
@@ -9607,7 +9637,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				if !ok {
 					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
 				}
-				sv.AwsDeviceV2 = &jtv
+				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
 		case "bgpPeers":
@@ -9621,7 +9651,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				if !ok {
 					return fmt.Errorf("expected ConnectionId to be of type string, got %T instead", value)
 				}
-				sv.ConnectionId = &jtv
+				sv.ConnectionId = ptr.String(jtv)
 			}
 
 		case "customerAddress":
@@ -9630,7 +9660,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				if !ok {
 					return fmt.Errorf("expected CustomerAddress to be of type string, got %T instead", value)
 				}
-				sv.CustomerAddress = &jtv
+				sv.CustomerAddress = ptr.String(jtv)
 			}
 
 		case "customerRouterConfig":
@@ -9639,7 +9669,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				if !ok {
 					return fmt.Errorf("expected RouterConfig to be of type string, got %T instead", value)
 				}
-				sv.CustomerRouterConfig = &jtv
+				sv.CustomerRouterConfig = ptr.String(jtv)
 			}
 
 		case "directConnectGatewayId":
@@ -9648,7 +9678,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				if !ok {
 					return fmt.Errorf("expected DirectConnectGatewayId to be of type string, got %T instead", value)
 				}
-				sv.DirectConnectGatewayId = &jtv
+				sv.DirectConnectGatewayId = ptr.String(jtv)
 			}
 
 		case "jumboFrameCapable":
@@ -9657,7 +9687,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				if !ok {
 					return fmt.Errorf("expected JumboFrameCapable to be of type *bool, got %T instead", value)
 				}
-				sv.JumboFrameCapable = &jtv
+				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
 
 		case "location":
@@ -9666,7 +9696,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				if !ok {
 					return fmt.Errorf("expected LocationCode to be of type string, got %T instead", value)
 				}
-				sv.Location = &jtv
+				sv.Location = ptr.String(jtv)
 			}
 
 		case "mtu":
@@ -9688,7 +9718,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				if !ok {
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
-				sv.OwnerAccount = &jtv
+				sv.OwnerAccount = ptr.String(jtv)
 			}
 
 		case "region":
@@ -9697,7 +9727,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				if !ok {
 					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
 				}
-				sv.Region = &jtv
+				sv.Region = ptr.String(jtv)
 			}
 
 		case "routeFilterPrefixes":
@@ -9716,7 +9746,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				if !ok {
 					return fmt.Errorf("expected VirtualGatewayId to be of type string, got %T instead", value)
 				}
-				sv.VirtualGatewayId = &jtv
+				sv.VirtualGatewayId = ptr.String(jtv)
 			}
 
 		case "virtualInterfaceId":
@@ -9725,7 +9755,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				if !ok {
 					return fmt.Errorf("expected VirtualInterfaceId to be of type string, got %T instead", value)
 				}
-				sv.VirtualInterfaceId = &jtv
+				sv.VirtualInterfaceId = ptr.String(jtv)
 			}
 
 		case "virtualInterfaceName":
@@ -9734,7 +9764,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				if !ok {
 					return fmt.Errorf("expected VirtualInterfaceName to be of type string, got %T instead", value)
 				}
-				sv.VirtualInterfaceName = &jtv
+				sv.VirtualInterfaceName = ptr.String(jtv)
 			}
 
 		case "virtualInterfaceState":
@@ -9752,7 +9782,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				if !ok {
 					return fmt.Errorf("expected VirtualInterfaceType to be of type string, got %T instead", value)
 				}
-				sv.VirtualInterfaceType = &jtv
+				sv.VirtualInterfaceType = ptr.String(jtv)
 			}
 
 		case "vlan":
@@ -9765,7 +9795,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v *
 				if err != nil {
 					return err
 				}
-				sv.Vlan = ptr.Int32(int32(i64))
+				sv.Vlan = int32(i64)
 			}
 
 		default:
@@ -9814,7 +9844,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				if !ok {
 					return fmt.Errorf("expected AmazonAddress to be of type string, got %T instead", value)
 				}
-				sv.AmazonAddress = &jtv
+				sv.AmazonAddress = ptr.String(jtv)
 			}
 
 		case "amazonSideAsn":
@@ -9827,7 +9857,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				if err != nil {
 					return err
 				}
-				sv.AmazonSideAsn = &i64
+				sv.AmazonSideAsn = ptr.Int64(i64)
 			}
 
 		case "asn":
@@ -9840,7 +9870,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				if err != nil {
 					return err
 				}
-				sv.Asn = ptr.Int32(int32(i64))
+				sv.Asn = int32(i64)
 			}
 
 		case "authKey":
@@ -9849,7 +9879,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				if !ok {
 					return fmt.Errorf("expected BGPAuthKey to be of type string, got %T instead", value)
 				}
-				sv.AuthKey = &jtv
+				sv.AuthKey = ptr.String(jtv)
 			}
 
 		case "awsDeviceV2":
@@ -9858,7 +9888,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				if !ok {
 					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
 				}
-				sv.AwsDeviceV2 = &jtv
+				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
 		case "bgpPeers":
@@ -9872,7 +9902,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				if !ok {
 					return fmt.Errorf("expected ConnectionId to be of type string, got %T instead", value)
 				}
-				sv.ConnectionId = &jtv
+				sv.ConnectionId = ptr.String(jtv)
 			}
 
 		case "customerAddress":
@@ -9881,7 +9911,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				if !ok {
 					return fmt.Errorf("expected CustomerAddress to be of type string, got %T instead", value)
 				}
-				sv.CustomerAddress = &jtv
+				sv.CustomerAddress = ptr.String(jtv)
 			}
 
 		case "customerRouterConfig":
@@ -9890,7 +9920,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				if !ok {
 					return fmt.Errorf("expected RouterConfig to be of type string, got %T instead", value)
 				}
-				sv.CustomerRouterConfig = &jtv
+				sv.CustomerRouterConfig = ptr.String(jtv)
 			}
 
 		case "directConnectGatewayId":
@@ -9899,7 +9929,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				if !ok {
 					return fmt.Errorf("expected DirectConnectGatewayId to be of type string, got %T instead", value)
 				}
-				sv.DirectConnectGatewayId = &jtv
+				sv.DirectConnectGatewayId = ptr.String(jtv)
 			}
 
 		case "jumboFrameCapable":
@@ -9908,7 +9938,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				if !ok {
 					return fmt.Errorf("expected JumboFrameCapable to be of type *bool, got %T instead", value)
 				}
-				sv.JumboFrameCapable = &jtv
+				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
 
 		case "location":
@@ -9917,7 +9947,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				if !ok {
 					return fmt.Errorf("expected LocationCode to be of type string, got %T instead", value)
 				}
-				sv.Location = &jtv
+				sv.Location = ptr.String(jtv)
 			}
 
 		case "mtu":
@@ -9939,7 +9969,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				if !ok {
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
-				sv.OwnerAccount = &jtv
+				sv.OwnerAccount = ptr.String(jtv)
 			}
 
 		case "region":
@@ -9948,7 +9978,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				if !ok {
 					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
 				}
-				sv.Region = &jtv
+				sv.Region = ptr.String(jtv)
 			}
 
 		case "routeFilterPrefixes":
@@ -9967,7 +9997,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				if !ok {
 					return fmt.Errorf("expected VirtualGatewayId to be of type string, got %T instead", value)
 				}
-				sv.VirtualGatewayId = &jtv
+				sv.VirtualGatewayId = ptr.String(jtv)
 			}
 
 		case "virtualInterfaceId":
@@ -9976,7 +10006,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				if !ok {
 					return fmt.Errorf("expected VirtualInterfaceId to be of type string, got %T instead", value)
 				}
-				sv.VirtualInterfaceId = &jtv
+				sv.VirtualInterfaceId = ptr.String(jtv)
 			}
 
 		case "virtualInterfaceName":
@@ -9985,7 +10015,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				if !ok {
 					return fmt.Errorf("expected VirtualInterfaceName to be of type string, got %T instead", value)
 				}
-				sv.VirtualInterfaceName = &jtv
+				sv.VirtualInterfaceName = ptr.String(jtv)
 			}
 
 		case "virtualInterfaceState":
@@ -10003,7 +10033,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				if !ok {
 					return fmt.Errorf("expected VirtualInterfaceType to be of type string, got %T instead", value)
 				}
-				sv.VirtualInterfaceType = &jtv
+				sv.VirtualInterfaceType = ptr.String(jtv)
 			}
 
 		case "vlan":
@@ -10016,7 +10046,7 @@ func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **
 				if err != nil {
 					return err
 				}
-				sv.Vlan = ptr.Int32(int32(i64))
+				sv.Vlan = int32(i64)
 			}
 
 		default:
@@ -10092,7 +10122,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				if !ok {
 					return fmt.Errorf("expected AwsDevice to be of type string, got %T instead", value)
 				}
-				sv.AwsDevice = &jtv
+				sv.AwsDevice = ptr.String(jtv)
 			}
 
 		case "awsDeviceV2":
@@ -10101,7 +10131,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				if !ok {
 					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
 				}
-				sv.AwsDeviceV2 = &jtv
+				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
 		case "bandwidth":
@@ -10110,7 +10140,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				if !ok {
 					return fmt.Errorf("expected Bandwidth to be of type string, got %T instead", value)
 				}
-				sv.Bandwidth = &jtv
+				sv.Bandwidth = ptr.String(jtv)
 			}
 
 		case "connectionId":
@@ -10119,7 +10149,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				if !ok {
 					return fmt.Errorf("expected ConnectionId to be of type string, got %T instead", value)
 				}
-				sv.ConnectionId = &jtv
+				sv.ConnectionId = ptr.String(jtv)
 			}
 
 		case "connectionName":
@@ -10128,7 +10158,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				if !ok {
 					return fmt.Errorf("expected ConnectionName to be of type string, got %T instead", value)
 				}
-				sv.ConnectionName = &jtv
+				sv.ConnectionName = ptr.String(jtv)
 			}
 
 		case "connectionState":
@@ -10155,7 +10185,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				if !ok {
 					return fmt.Errorf("expected JumboFrameCapable to be of type *bool, got %T instead", value)
 				}
-				sv.JumboFrameCapable = &jtv
+				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
 
 		case "lagId":
@@ -10164,7 +10194,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				if !ok {
 					return fmt.Errorf("expected LagId to be of type string, got %T instead", value)
 				}
-				sv.LagId = &jtv
+				sv.LagId = ptr.String(jtv)
 			}
 
 		case "loaIssueTime":
@@ -10186,7 +10216,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				if !ok {
 					return fmt.Errorf("expected LocationCode to be of type string, got %T instead", value)
 				}
-				sv.Location = &jtv
+				sv.Location = ptr.String(jtv)
 			}
 
 		case "ownerAccount":
@@ -10195,7 +10225,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				if !ok {
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
-				sv.OwnerAccount = &jtv
+				sv.OwnerAccount = ptr.String(jtv)
 			}
 
 		case "partnerName":
@@ -10204,7 +10234,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				if !ok {
 					return fmt.Errorf("expected PartnerName to be of type string, got %T instead", value)
 				}
-				sv.PartnerName = &jtv
+				sv.PartnerName = ptr.String(jtv)
 			}
 
 		case "providerName":
@@ -10213,7 +10243,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				if !ok {
 					return fmt.Errorf("expected ProviderName to be of type string, got %T instead", value)
 				}
-				sv.ProviderName = &jtv
+				sv.ProviderName = ptr.String(jtv)
 			}
 
 		case "region":
@@ -10222,7 +10252,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				if !ok {
 					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
 				}
-				sv.Region = &jtv
+				sv.Region = ptr.String(jtv)
 			}
 
 		case "tags":
@@ -10240,7 +10270,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				if err != nil {
 					return err
 				}
-				sv.Vlan = ptr.Int32(int32(i64))
+				sv.Vlan = int32(i64)
 			}
 
 		default:
@@ -10280,7 +10310,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				if !ok {
 					return fmt.Errorf("expected AwsDevice to be of type string, got %T instead", value)
 				}
-				sv.AwsDevice = &jtv
+				sv.AwsDevice = ptr.String(jtv)
 			}
 
 		case "awsDeviceV2":
@@ -10289,7 +10319,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				if !ok {
 					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
 				}
-				sv.AwsDeviceV2 = &jtv
+				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
 		case "bandwidth":
@@ -10298,7 +10328,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				if !ok {
 					return fmt.Errorf("expected Bandwidth to be of type string, got %T instead", value)
 				}
-				sv.Bandwidth = &jtv
+				sv.Bandwidth = ptr.String(jtv)
 			}
 
 		case "connectionId":
@@ -10307,7 +10337,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				if !ok {
 					return fmt.Errorf("expected ConnectionId to be of type string, got %T instead", value)
 				}
-				sv.ConnectionId = &jtv
+				sv.ConnectionId = ptr.String(jtv)
 			}
 
 		case "connectionName":
@@ -10316,7 +10346,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				if !ok {
 					return fmt.Errorf("expected ConnectionName to be of type string, got %T instead", value)
 				}
-				sv.ConnectionName = &jtv
+				sv.ConnectionName = ptr.String(jtv)
 			}
 
 		case "connectionState":
@@ -10343,7 +10373,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				if !ok {
 					return fmt.Errorf("expected JumboFrameCapable to be of type *bool, got %T instead", value)
 				}
-				sv.JumboFrameCapable = &jtv
+				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
 
 		case "lagId":
@@ -10352,7 +10382,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				if !ok {
 					return fmt.Errorf("expected LagId to be of type string, got %T instead", value)
 				}
-				sv.LagId = &jtv
+				sv.LagId = ptr.String(jtv)
 			}
 
 		case "loaIssueTime":
@@ -10374,7 +10404,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				if !ok {
 					return fmt.Errorf("expected LocationCode to be of type string, got %T instead", value)
 				}
-				sv.Location = &jtv
+				sv.Location = ptr.String(jtv)
 			}
 
 		case "ownerAccount":
@@ -10383,7 +10413,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				if !ok {
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
-				sv.OwnerAccount = &jtv
+				sv.OwnerAccount = ptr.String(jtv)
 			}
 
 		case "partnerName":
@@ -10392,7 +10422,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				if !ok {
 					return fmt.Errorf("expected PartnerName to be of type string, got %T instead", value)
 				}
-				sv.PartnerName = &jtv
+				sv.PartnerName = ptr.String(jtv)
 			}
 
 		case "providerName":
@@ -10401,7 +10431,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				if !ok {
 					return fmt.Errorf("expected ProviderName to be of type string, got %T instead", value)
 				}
-				sv.ProviderName = &jtv
+				sv.ProviderName = ptr.String(jtv)
 			}
 
 		case "region":
@@ -10410,7 +10440,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				if !ok {
 					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
 				}
-				sv.Region = &jtv
+				sv.Region = ptr.String(jtv)
 			}
 
 		case "tags":
@@ -10428,7 +10458,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				if err != nil {
 					return err
 				}
-				sv.Vlan = ptr.Int32(int32(i64))
+				sv.Vlan = int32(i64)
 			}
 
 		default:
@@ -10477,7 +10507,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				if !ok {
 					return fmt.Errorf("expected AmazonAddress to be of type string, got %T instead", value)
 				}
-				sv.AmazonAddress = &jtv
+				sv.AmazonAddress = ptr.String(jtv)
 			}
 
 		case "amazonSideAsn":
@@ -10490,7 +10520,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				if err != nil {
 					return err
 				}
-				sv.AmazonSideAsn = &i64
+				sv.AmazonSideAsn = ptr.Int64(i64)
 			}
 
 		case "asn":
@@ -10503,7 +10533,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				if err != nil {
 					return err
 				}
-				sv.Asn = ptr.Int32(int32(i64))
+				sv.Asn = int32(i64)
 			}
 
 		case "authKey":
@@ -10512,7 +10542,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				if !ok {
 					return fmt.Errorf("expected BGPAuthKey to be of type string, got %T instead", value)
 				}
-				sv.AuthKey = &jtv
+				sv.AuthKey = ptr.String(jtv)
 			}
 
 		case "awsDeviceV2":
@@ -10521,7 +10551,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				if !ok {
 					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
 				}
-				sv.AwsDeviceV2 = &jtv
+				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
 		case "bgpPeers":
@@ -10535,7 +10565,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				if !ok {
 					return fmt.Errorf("expected ConnectionId to be of type string, got %T instead", value)
 				}
-				sv.ConnectionId = &jtv
+				sv.ConnectionId = ptr.String(jtv)
 			}
 
 		case "customerAddress":
@@ -10544,7 +10574,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				if !ok {
 					return fmt.Errorf("expected CustomerAddress to be of type string, got %T instead", value)
 				}
-				sv.CustomerAddress = &jtv
+				sv.CustomerAddress = ptr.String(jtv)
 			}
 
 		case "customerRouterConfig":
@@ -10553,7 +10583,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				if !ok {
 					return fmt.Errorf("expected RouterConfig to be of type string, got %T instead", value)
 				}
-				sv.CustomerRouterConfig = &jtv
+				sv.CustomerRouterConfig = ptr.String(jtv)
 			}
 
 		case "directConnectGatewayId":
@@ -10562,7 +10592,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				if !ok {
 					return fmt.Errorf("expected DirectConnectGatewayId to be of type string, got %T instead", value)
 				}
-				sv.DirectConnectGatewayId = &jtv
+				sv.DirectConnectGatewayId = ptr.String(jtv)
 			}
 
 		case "jumboFrameCapable":
@@ -10571,7 +10601,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				if !ok {
 					return fmt.Errorf("expected JumboFrameCapable to be of type *bool, got %T instead", value)
 				}
-				sv.JumboFrameCapable = &jtv
+				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
 
 		case "location":
@@ -10580,7 +10610,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				if !ok {
 					return fmt.Errorf("expected LocationCode to be of type string, got %T instead", value)
 				}
-				sv.Location = &jtv
+				sv.Location = ptr.String(jtv)
 			}
 
 		case "mtu":
@@ -10602,7 +10632,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				if !ok {
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
-				sv.OwnerAccount = &jtv
+				sv.OwnerAccount = ptr.String(jtv)
 			}
 
 		case "region":
@@ -10611,7 +10641,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				if !ok {
 					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
 				}
-				sv.Region = &jtv
+				sv.Region = ptr.String(jtv)
 			}
 
 		case "routeFilterPrefixes":
@@ -10630,7 +10660,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				if !ok {
 					return fmt.Errorf("expected VirtualGatewayId to be of type string, got %T instead", value)
 				}
-				sv.VirtualGatewayId = &jtv
+				sv.VirtualGatewayId = ptr.String(jtv)
 			}
 
 		case "virtualInterfaceId":
@@ -10639,7 +10669,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				if !ok {
 					return fmt.Errorf("expected VirtualInterfaceId to be of type string, got %T instead", value)
 				}
-				sv.VirtualInterfaceId = &jtv
+				sv.VirtualInterfaceId = ptr.String(jtv)
 			}
 
 		case "virtualInterfaceName":
@@ -10648,7 +10678,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				if !ok {
 					return fmt.Errorf("expected VirtualInterfaceName to be of type string, got %T instead", value)
 				}
-				sv.VirtualInterfaceName = &jtv
+				sv.VirtualInterfaceName = ptr.String(jtv)
 			}
 
 		case "virtualInterfaceState":
@@ -10666,7 +10696,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				if !ok {
 					return fmt.Errorf("expected VirtualInterfaceType to be of type string, got %T instead", value)
 				}
-				sv.VirtualInterfaceType = &jtv
+				sv.VirtualInterfaceType = ptr.String(jtv)
 			}
 
 		case "vlan":
@@ -10679,7 +10709,7 @@ func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **Assoc
 				if err != nil {
 					return err
 				}
-				sv.Vlan = ptr.Int32(int32(i64))
+				sv.Vlan = int32(i64)
 			}
 
 		default:
@@ -10915,7 +10945,7 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				if !ok {
 					return fmt.Errorf("expected AwsDevice to be of type string, got %T instead", value)
 				}
-				sv.AwsDevice = &jtv
+				sv.AwsDevice = ptr.String(jtv)
 			}
 
 		case "awsDeviceV2":
@@ -10924,7 +10954,7 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				if !ok {
 					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
 				}
-				sv.AwsDeviceV2 = &jtv
+				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
 		case "bandwidth":
@@ -10933,7 +10963,7 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				if !ok {
 					return fmt.Errorf("expected Bandwidth to be of type string, got %T instead", value)
 				}
-				sv.Bandwidth = &jtv
+				sv.Bandwidth = ptr.String(jtv)
 			}
 
 		case "connectionId":
@@ -10942,7 +10972,7 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				if !ok {
 					return fmt.Errorf("expected ConnectionId to be of type string, got %T instead", value)
 				}
-				sv.ConnectionId = &jtv
+				sv.ConnectionId = ptr.String(jtv)
 			}
 
 		case "connectionName":
@@ -10951,7 +10981,7 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				if !ok {
 					return fmt.Errorf("expected ConnectionName to be of type string, got %T instead", value)
 				}
-				sv.ConnectionName = &jtv
+				sv.ConnectionName = ptr.String(jtv)
 			}
 
 		case "connectionState":
@@ -10978,7 +11008,7 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				if !ok {
 					return fmt.Errorf("expected JumboFrameCapable to be of type *bool, got %T instead", value)
 				}
-				sv.JumboFrameCapable = &jtv
+				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
 
 		case "lagId":
@@ -10987,7 +11017,7 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				if !ok {
 					return fmt.Errorf("expected LagId to be of type string, got %T instead", value)
 				}
-				sv.LagId = &jtv
+				sv.LagId = ptr.String(jtv)
 			}
 
 		case "loaIssueTime":
@@ -11009,7 +11039,7 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				if !ok {
 					return fmt.Errorf("expected LocationCode to be of type string, got %T instead", value)
 				}
-				sv.Location = &jtv
+				sv.Location = ptr.String(jtv)
 			}
 
 		case "ownerAccount":
@@ -11018,7 +11048,7 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				if !ok {
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
-				sv.OwnerAccount = &jtv
+				sv.OwnerAccount = ptr.String(jtv)
 			}
 
 		case "partnerName":
@@ -11027,7 +11057,7 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				if !ok {
 					return fmt.Errorf("expected PartnerName to be of type string, got %T instead", value)
 				}
-				sv.PartnerName = &jtv
+				sv.PartnerName = ptr.String(jtv)
 			}
 
 		case "providerName":
@@ -11036,7 +11066,7 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				if !ok {
 					return fmt.Errorf("expected ProviderName to be of type string, got %T instead", value)
 				}
-				sv.ProviderName = &jtv
+				sv.ProviderName = ptr.String(jtv)
 			}
 
 		case "region":
@@ -11045,7 +11075,7 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				if !ok {
 					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
 				}
-				sv.Region = &jtv
+				sv.Region = ptr.String(jtv)
 			}
 
 		case "tags":
@@ -11063,7 +11093,7 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				if err != nil {
 					return err
 				}
-				sv.Vlan = ptr.Int32(int32(i64))
+				sv.Vlan = int32(i64)
 			}
 
 		default:
@@ -11211,7 +11241,7 @@ func awsAwsjson11_deserializeOpDocumentCreateInterconnectOutput(v **CreateInterc
 				if !ok {
 					return fmt.Errorf("expected AwsDevice to be of type string, got %T instead", value)
 				}
-				sv.AwsDevice = &jtv
+				sv.AwsDevice = ptr.String(jtv)
 			}
 
 		case "awsDeviceV2":
@@ -11220,7 +11250,7 @@ func awsAwsjson11_deserializeOpDocumentCreateInterconnectOutput(v **CreateInterc
 				if !ok {
 					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
 				}
-				sv.AwsDeviceV2 = &jtv
+				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
 		case "bandwidth":
@@ -11229,7 +11259,7 @@ func awsAwsjson11_deserializeOpDocumentCreateInterconnectOutput(v **CreateInterc
 				if !ok {
 					return fmt.Errorf("expected Bandwidth to be of type string, got %T instead", value)
 				}
-				sv.Bandwidth = &jtv
+				sv.Bandwidth = ptr.String(jtv)
 			}
 
 		case "hasLogicalRedundancy":
@@ -11247,7 +11277,7 @@ func awsAwsjson11_deserializeOpDocumentCreateInterconnectOutput(v **CreateInterc
 				if !ok {
 					return fmt.Errorf("expected InterconnectId to be of type string, got %T instead", value)
 				}
-				sv.InterconnectId = &jtv
+				sv.InterconnectId = ptr.String(jtv)
 			}
 
 		case "interconnectName":
@@ -11256,7 +11286,7 @@ func awsAwsjson11_deserializeOpDocumentCreateInterconnectOutput(v **CreateInterc
 				if !ok {
 					return fmt.Errorf("expected InterconnectName to be of type string, got %T instead", value)
 				}
-				sv.InterconnectName = &jtv
+				sv.InterconnectName = ptr.String(jtv)
 			}
 
 		case "interconnectState":
@@ -11274,7 +11304,7 @@ func awsAwsjson11_deserializeOpDocumentCreateInterconnectOutput(v **CreateInterc
 				if !ok {
 					return fmt.Errorf("expected JumboFrameCapable to be of type *bool, got %T instead", value)
 				}
-				sv.JumboFrameCapable = &jtv
+				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
 
 		case "lagId":
@@ -11283,7 +11313,7 @@ func awsAwsjson11_deserializeOpDocumentCreateInterconnectOutput(v **CreateInterc
 				if !ok {
 					return fmt.Errorf("expected LagId to be of type string, got %T instead", value)
 				}
-				sv.LagId = &jtv
+				sv.LagId = ptr.String(jtv)
 			}
 
 		case "loaIssueTime":
@@ -11305,7 +11335,7 @@ func awsAwsjson11_deserializeOpDocumentCreateInterconnectOutput(v **CreateInterc
 				if !ok {
 					return fmt.Errorf("expected LocationCode to be of type string, got %T instead", value)
 				}
-				sv.Location = &jtv
+				sv.Location = ptr.String(jtv)
 			}
 
 		case "providerName":
@@ -11314,7 +11344,7 @@ func awsAwsjson11_deserializeOpDocumentCreateInterconnectOutput(v **CreateInterc
 				if !ok {
 					return fmt.Errorf("expected ProviderName to be of type string, got %T instead", value)
 				}
-				sv.ProviderName = &jtv
+				sv.ProviderName = ptr.String(jtv)
 			}
 
 		case "region":
@@ -11323,7 +11353,7 @@ func awsAwsjson11_deserializeOpDocumentCreateInterconnectOutput(v **CreateInterc
 				if !ok {
 					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
 				}
-				sv.Region = &jtv
+				sv.Region = ptr.String(jtv)
 			}
 
 		case "tags":
@@ -11368,7 +11398,7 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				if !ok {
 					return fmt.Errorf("expected BooleanFlag to be of type *bool, got %T instead", value)
 				}
-				sv.AllowsHostedConnections = &jtv
+				sv.AllowsHostedConnections = jtv
 			}
 
 		case "awsDevice":
@@ -11377,7 +11407,7 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				if !ok {
 					return fmt.Errorf("expected AwsDevice to be of type string, got %T instead", value)
 				}
-				sv.AwsDevice = &jtv
+				sv.AwsDevice = ptr.String(jtv)
 			}
 
 		case "awsDeviceV2":
@@ -11386,7 +11416,7 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				if !ok {
 					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
 				}
-				sv.AwsDeviceV2 = &jtv
+				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
 		case "connections":
@@ -11400,7 +11430,7 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				if !ok {
 					return fmt.Errorf("expected Bandwidth to be of type string, got %T instead", value)
 				}
-				sv.ConnectionsBandwidth = &jtv
+				sv.ConnectionsBandwidth = ptr.String(jtv)
 			}
 
 		case "hasLogicalRedundancy":
@@ -11418,7 +11448,7 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				if !ok {
 					return fmt.Errorf("expected JumboFrameCapable to be of type *bool, got %T instead", value)
 				}
-				sv.JumboFrameCapable = &jtv
+				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
 
 		case "lagId":
@@ -11427,7 +11457,7 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				if !ok {
 					return fmt.Errorf("expected LagId to be of type string, got %T instead", value)
 				}
-				sv.LagId = &jtv
+				sv.LagId = ptr.String(jtv)
 			}
 
 		case "lagName":
@@ -11436,7 +11466,7 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				if !ok {
 					return fmt.Errorf("expected LagName to be of type string, got %T instead", value)
 				}
-				sv.LagName = &jtv
+				sv.LagName = ptr.String(jtv)
 			}
 
 		case "lagState":
@@ -11454,7 +11484,7 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				if !ok {
 					return fmt.Errorf("expected LocationCode to be of type string, got %T instead", value)
 				}
-				sv.Location = &jtv
+				sv.Location = ptr.String(jtv)
 			}
 
 		case "minimumLinks":
@@ -11467,7 +11497,7 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				if err != nil {
 					return err
 				}
-				sv.MinimumLinks = ptr.Int32(int32(i64))
+				sv.MinimumLinks = int32(i64)
 			}
 
 		case "numberOfConnections":
@@ -11480,7 +11510,7 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				if err != nil {
 					return err
 				}
-				sv.NumberOfConnections = ptr.Int32(int32(i64))
+				sv.NumberOfConnections = int32(i64)
 			}
 
 		case "ownerAccount":
@@ -11489,7 +11519,7 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				if !ok {
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
-				sv.OwnerAccount = &jtv
+				sv.OwnerAccount = ptr.String(jtv)
 			}
 
 		case "providerName":
@@ -11498,7 +11528,7 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				if !ok {
 					return fmt.Errorf("expected ProviderName to be of type string, got %T instead", value)
 				}
-				sv.ProviderName = &jtv
+				sv.ProviderName = ptr.String(jtv)
 			}
 
 		case "region":
@@ -11507,7 +11537,7 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				if !ok {
 					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
 				}
-				sv.Region = &jtv
+				sv.Region = ptr.String(jtv)
 			}
 
 		case "tags":
@@ -11561,7 +11591,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				if !ok {
 					return fmt.Errorf("expected AmazonAddress to be of type string, got %T instead", value)
 				}
-				sv.AmazonAddress = &jtv
+				sv.AmazonAddress = ptr.String(jtv)
 			}
 
 		case "amazonSideAsn":
@@ -11574,7 +11604,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				if err != nil {
 					return err
 				}
-				sv.AmazonSideAsn = &i64
+				sv.AmazonSideAsn = ptr.Int64(i64)
 			}
 
 		case "asn":
@@ -11587,7 +11617,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				if err != nil {
 					return err
 				}
-				sv.Asn = ptr.Int32(int32(i64))
+				sv.Asn = int32(i64)
 			}
 
 		case "authKey":
@@ -11596,7 +11626,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				if !ok {
 					return fmt.Errorf("expected BGPAuthKey to be of type string, got %T instead", value)
 				}
-				sv.AuthKey = &jtv
+				sv.AuthKey = ptr.String(jtv)
 			}
 
 		case "awsDeviceV2":
@@ -11605,7 +11635,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				if !ok {
 					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
 				}
-				sv.AwsDeviceV2 = &jtv
+				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
 		case "bgpPeers":
@@ -11619,7 +11649,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				if !ok {
 					return fmt.Errorf("expected ConnectionId to be of type string, got %T instead", value)
 				}
-				sv.ConnectionId = &jtv
+				sv.ConnectionId = ptr.String(jtv)
 			}
 
 		case "customerAddress":
@@ -11628,7 +11658,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				if !ok {
 					return fmt.Errorf("expected CustomerAddress to be of type string, got %T instead", value)
 				}
-				sv.CustomerAddress = &jtv
+				sv.CustomerAddress = ptr.String(jtv)
 			}
 
 		case "customerRouterConfig":
@@ -11637,7 +11667,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				if !ok {
 					return fmt.Errorf("expected RouterConfig to be of type string, got %T instead", value)
 				}
-				sv.CustomerRouterConfig = &jtv
+				sv.CustomerRouterConfig = ptr.String(jtv)
 			}
 
 		case "directConnectGatewayId":
@@ -11646,7 +11676,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				if !ok {
 					return fmt.Errorf("expected DirectConnectGatewayId to be of type string, got %T instead", value)
 				}
-				sv.DirectConnectGatewayId = &jtv
+				sv.DirectConnectGatewayId = ptr.String(jtv)
 			}
 
 		case "jumboFrameCapable":
@@ -11655,7 +11685,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				if !ok {
 					return fmt.Errorf("expected JumboFrameCapable to be of type *bool, got %T instead", value)
 				}
-				sv.JumboFrameCapable = &jtv
+				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
 
 		case "location":
@@ -11664,7 +11694,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				if !ok {
 					return fmt.Errorf("expected LocationCode to be of type string, got %T instead", value)
 				}
-				sv.Location = &jtv
+				sv.Location = ptr.String(jtv)
 			}
 
 		case "mtu":
@@ -11686,7 +11716,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				if !ok {
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
-				sv.OwnerAccount = &jtv
+				sv.OwnerAccount = ptr.String(jtv)
 			}
 
 		case "region":
@@ -11695,7 +11725,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				if !ok {
 					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
 				}
-				sv.Region = &jtv
+				sv.Region = ptr.String(jtv)
 			}
 
 		case "routeFilterPrefixes":
@@ -11714,7 +11744,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				if !ok {
 					return fmt.Errorf("expected VirtualGatewayId to be of type string, got %T instead", value)
 				}
-				sv.VirtualGatewayId = &jtv
+				sv.VirtualGatewayId = ptr.String(jtv)
 			}
 
 		case "virtualInterfaceId":
@@ -11723,7 +11753,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				if !ok {
 					return fmt.Errorf("expected VirtualInterfaceId to be of type string, got %T instead", value)
 				}
-				sv.VirtualInterfaceId = &jtv
+				sv.VirtualInterfaceId = ptr.String(jtv)
 			}
 
 		case "virtualInterfaceName":
@@ -11732,7 +11762,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				if !ok {
 					return fmt.Errorf("expected VirtualInterfaceName to be of type string, got %T instead", value)
 				}
-				sv.VirtualInterfaceName = &jtv
+				sv.VirtualInterfaceName = ptr.String(jtv)
 			}
 
 		case "virtualInterfaceState":
@@ -11750,7 +11780,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				if !ok {
 					return fmt.Errorf("expected VirtualInterfaceType to be of type string, got %T instead", value)
 				}
-				sv.VirtualInterfaceType = &jtv
+				sv.VirtualInterfaceType = ptr.String(jtv)
 			}
 
 		case "vlan":
@@ -11763,7 +11793,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **C
 				if err != nil {
 					return err
 				}
-				sv.Vlan = ptr.Int32(int32(i64))
+				sv.Vlan = int32(i64)
 			}
 
 		default:
@@ -11812,7 +11842,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				if !ok {
 					return fmt.Errorf("expected AmazonAddress to be of type string, got %T instead", value)
 				}
-				sv.AmazonAddress = &jtv
+				sv.AmazonAddress = ptr.String(jtv)
 			}
 
 		case "amazonSideAsn":
@@ -11825,7 +11855,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				if err != nil {
 					return err
 				}
-				sv.AmazonSideAsn = &i64
+				sv.AmazonSideAsn = ptr.Int64(i64)
 			}
 
 		case "asn":
@@ -11838,7 +11868,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				if err != nil {
 					return err
 				}
-				sv.Asn = ptr.Int32(int32(i64))
+				sv.Asn = int32(i64)
 			}
 
 		case "authKey":
@@ -11847,7 +11877,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				if !ok {
 					return fmt.Errorf("expected BGPAuthKey to be of type string, got %T instead", value)
 				}
-				sv.AuthKey = &jtv
+				sv.AuthKey = ptr.String(jtv)
 			}
 
 		case "awsDeviceV2":
@@ -11856,7 +11886,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				if !ok {
 					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
 				}
-				sv.AwsDeviceV2 = &jtv
+				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
 		case "bgpPeers":
@@ -11870,7 +11900,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				if !ok {
 					return fmt.Errorf("expected ConnectionId to be of type string, got %T instead", value)
 				}
-				sv.ConnectionId = &jtv
+				sv.ConnectionId = ptr.String(jtv)
 			}
 
 		case "customerAddress":
@@ -11879,7 +11909,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				if !ok {
 					return fmt.Errorf("expected CustomerAddress to be of type string, got %T instead", value)
 				}
-				sv.CustomerAddress = &jtv
+				sv.CustomerAddress = ptr.String(jtv)
 			}
 
 		case "customerRouterConfig":
@@ -11888,7 +11918,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				if !ok {
 					return fmt.Errorf("expected RouterConfig to be of type string, got %T instead", value)
 				}
-				sv.CustomerRouterConfig = &jtv
+				sv.CustomerRouterConfig = ptr.String(jtv)
 			}
 
 		case "directConnectGatewayId":
@@ -11897,7 +11927,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				if !ok {
 					return fmt.Errorf("expected DirectConnectGatewayId to be of type string, got %T instead", value)
 				}
-				sv.DirectConnectGatewayId = &jtv
+				sv.DirectConnectGatewayId = ptr.String(jtv)
 			}
 
 		case "jumboFrameCapable":
@@ -11906,7 +11936,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				if !ok {
 					return fmt.Errorf("expected JumboFrameCapable to be of type *bool, got %T instead", value)
 				}
-				sv.JumboFrameCapable = &jtv
+				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
 
 		case "location":
@@ -11915,7 +11945,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				if !ok {
 					return fmt.Errorf("expected LocationCode to be of type string, got %T instead", value)
 				}
-				sv.Location = &jtv
+				sv.Location = ptr.String(jtv)
 			}
 
 		case "mtu":
@@ -11937,7 +11967,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				if !ok {
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
-				sv.OwnerAccount = &jtv
+				sv.OwnerAccount = ptr.String(jtv)
 			}
 
 		case "region":
@@ -11946,7 +11976,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				if !ok {
 					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
 				}
-				sv.Region = &jtv
+				sv.Region = ptr.String(jtv)
 			}
 
 		case "routeFilterPrefixes":
@@ -11965,7 +11995,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				if !ok {
 					return fmt.Errorf("expected VirtualGatewayId to be of type string, got %T instead", value)
 				}
-				sv.VirtualGatewayId = &jtv
+				sv.VirtualGatewayId = ptr.String(jtv)
 			}
 
 		case "virtualInterfaceId":
@@ -11974,7 +12004,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				if !ok {
 					return fmt.Errorf("expected VirtualInterfaceId to be of type string, got %T instead", value)
 				}
-				sv.VirtualInterfaceId = &jtv
+				sv.VirtualInterfaceId = ptr.String(jtv)
 			}
 
 		case "virtualInterfaceName":
@@ -11983,7 +12013,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				if !ok {
 					return fmt.Errorf("expected VirtualInterfaceName to be of type string, got %T instead", value)
 				}
-				sv.VirtualInterfaceName = &jtv
+				sv.VirtualInterfaceName = ptr.String(jtv)
 			}
 
 		case "virtualInterfaceState":
@@ -12001,7 +12031,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				if !ok {
 					return fmt.Errorf("expected VirtualInterfaceType to be of type string, got %T instead", value)
 				}
-				sv.VirtualInterfaceType = &jtv
+				sv.VirtualInterfaceType = ptr.String(jtv)
 			}
 
 		case "vlan":
@@ -12014,7 +12044,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **Cr
 				if err != nil {
 					return err
 				}
-				sv.Vlan = ptr.Int32(int32(i64))
+				sv.Vlan = int32(i64)
 			}
 
 		default:
@@ -12126,7 +12156,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				if !ok {
 					return fmt.Errorf("expected AwsDevice to be of type string, got %T instead", value)
 				}
-				sv.AwsDevice = &jtv
+				sv.AwsDevice = ptr.String(jtv)
 			}
 
 		case "awsDeviceV2":
@@ -12135,7 +12165,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				if !ok {
 					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
 				}
-				sv.AwsDeviceV2 = &jtv
+				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
 		case "bandwidth":
@@ -12144,7 +12174,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				if !ok {
 					return fmt.Errorf("expected Bandwidth to be of type string, got %T instead", value)
 				}
-				sv.Bandwidth = &jtv
+				sv.Bandwidth = ptr.String(jtv)
 			}
 
 		case "connectionId":
@@ -12153,7 +12183,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				if !ok {
 					return fmt.Errorf("expected ConnectionId to be of type string, got %T instead", value)
 				}
-				sv.ConnectionId = &jtv
+				sv.ConnectionId = ptr.String(jtv)
 			}
 
 		case "connectionName":
@@ -12162,7 +12192,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				if !ok {
 					return fmt.Errorf("expected ConnectionName to be of type string, got %T instead", value)
 				}
-				sv.ConnectionName = &jtv
+				sv.ConnectionName = ptr.String(jtv)
 			}
 
 		case "connectionState":
@@ -12189,7 +12219,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				if !ok {
 					return fmt.Errorf("expected JumboFrameCapable to be of type *bool, got %T instead", value)
 				}
-				sv.JumboFrameCapable = &jtv
+				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
 
 		case "lagId":
@@ -12198,7 +12228,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				if !ok {
 					return fmt.Errorf("expected LagId to be of type string, got %T instead", value)
 				}
-				sv.LagId = &jtv
+				sv.LagId = ptr.String(jtv)
 			}
 
 		case "loaIssueTime":
@@ -12220,7 +12250,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				if !ok {
 					return fmt.Errorf("expected LocationCode to be of type string, got %T instead", value)
 				}
-				sv.Location = &jtv
+				sv.Location = ptr.String(jtv)
 			}
 
 		case "ownerAccount":
@@ -12229,7 +12259,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				if !ok {
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
-				sv.OwnerAccount = &jtv
+				sv.OwnerAccount = ptr.String(jtv)
 			}
 
 		case "partnerName":
@@ -12238,7 +12268,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				if !ok {
 					return fmt.Errorf("expected PartnerName to be of type string, got %T instead", value)
 				}
-				sv.PartnerName = &jtv
+				sv.PartnerName = ptr.String(jtv)
 			}
 
 		case "providerName":
@@ -12247,7 +12277,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				if !ok {
 					return fmt.Errorf("expected ProviderName to be of type string, got %T instead", value)
 				}
-				sv.ProviderName = &jtv
+				sv.ProviderName = ptr.String(jtv)
 			}
 
 		case "region":
@@ -12256,7 +12286,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				if !ok {
 					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
 				}
-				sv.Region = &jtv
+				sv.Region = ptr.String(jtv)
 			}
 
 		case "tags":
@@ -12274,7 +12304,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				if err != nil {
 					return err
 				}
-				sv.Vlan = ptr.Int32(int32(i64))
+				sv.Vlan = int32(i64)
 			}
 
 		default:
@@ -12462,7 +12492,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 				if !ok {
 					return fmt.Errorf("expected BooleanFlag to be of type *bool, got %T instead", value)
 				}
-				sv.AllowsHostedConnections = &jtv
+				sv.AllowsHostedConnections = jtv
 			}
 
 		case "awsDevice":
@@ -12471,7 +12501,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 				if !ok {
 					return fmt.Errorf("expected AwsDevice to be of type string, got %T instead", value)
 				}
-				sv.AwsDevice = &jtv
+				sv.AwsDevice = ptr.String(jtv)
 			}
 
 		case "awsDeviceV2":
@@ -12480,7 +12510,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 				if !ok {
 					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
 				}
-				sv.AwsDeviceV2 = &jtv
+				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
 		case "connections":
@@ -12494,7 +12524,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 				if !ok {
 					return fmt.Errorf("expected Bandwidth to be of type string, got %T instead", value)
 				}
-				sv.ConnectionsBandwidth = &jtv
+				sv.ConnectionsBandwidth = ptr.String(jtv)
 			}
 
 		case "hasLogicalRedundancy":
@@ -12512,7 +12542,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 				if !ok {
 					return fmt.Errorf("expected JumboFrameCapable to be of type *bool, got %T instead", value)
 				}
-				sv.JumboFrameCapable = &jtv
+				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
 
 		case "lagId":
@@ -12521,7 +12551,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 				if !ok {
 					return fmt.Errorf("expected LagId to be of type string, got %T instead", value)
 				}
-				sv.LagId = &jtv
+				sv.LagId = ptr.String(jtv)
 			}
 
 		case "lagName":
@@ -12530,7 +12560,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 				if !ok {
 					return fmt.Errorf("expected LagName to be of type string, got %T instead", value)
 				}
-				sv.LagName = &jtv
+				sv.LagName = ptr.String(jtv)
 			}
 
 		case "lagState":
@@ -12548,7 +12578,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 				if !ok {
 					return fmt.Errorf("expected LocationCode to be of type string, got %T instead", value)
 				}
-				sv.Location = &jtv
+				sv.Location = ptr.String(jtv)
 			}
 
 		case "minimumLinks":
@@ -12561,7 +12591,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 				if err != nil {
 					return err
 				}
-				sv.MinimumLinks = ptr.Int32(int32(i64))
+				sv.MinimumLinks = int32(i64)
 			}
 
 		case "numberOfConnections":
@@ -12574,7 +12604,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 				if err != nil {
 					return err
 				}
-				sv.NumberOfConnections = ptr.Int32(int32(i64))
+				sv.NumberOfConnections = int32(i64)
 			}
 
 		case "ownerAccount":
@@ -12583,7 +12613,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 				if !ok {
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
-				sv.OwnerAccount = &jtv
+				sv.OwnerAccount = ptr.String(jtv)
 			}
 
 		case "providerName":
@@ -12592,7 +12622,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 				if !ok {
 					return fmt.Errorf("expected ProviderName to be of type string, got %T instead", value)
 				}
-				sv.ProviderName = &jtv
+				sv.ProviderName = ptr.String(jtv)
 			}
 
 		case "region":
@@ -12601,7 +12631,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 				if !ok {
 					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
 				}
-				sv.Region = &jtv
+				sv.Region = ptr.String(jtv)
 			}
 
 		case "tags":
@@ -12799,7 +12829,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeDirectConnectGatewayAssociationPr
 				if !ok {
 					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -12844,7 +12874,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeDirectConnectGatewayAssociationsO
 				if !ok {
 					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -12889,7 +12919,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeDirectConnectGatewayAttachmentsOu
 				if !ok {
 					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -12934,7 +12964,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeDirectConnectGatewaysOutput(v **D
 				if !ok {
 					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -13315,7 +13345,7 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				if !ok {
 					return fmt.Errorf("expected AwsDevice to be of type string, got %T instead", value)
 				}
-				sv.AwsDevice = &jtv
+				sv.AwsDevice = ptr.String(jtv)
 			}
 
 		case "awsDeviceV2":
@@ -13324,7 +13354,7 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				if !ok {
 					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
 				}
-				sv.AwsDeviceV2 = &jtv
+				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
 		case "bandwidth":
@@ -13333,7 +13363,7 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				if !ok {
 					return fmt.Errorf("expected Bandwidth to be of type string, got %T instead", value)
 				}
-				sv.Bandwidth = &jtv
+				sv.Bandwidth = ptr.String(jtv)
 			}
 
 		case "connectionId":
@@ -13342,7 +13372,7 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				if !ok {
 					return fmt.Errorf("expected ConnectionId to be of type string, got %T instead", value)
 				}
-				sv.ConnectionId = &jtv
+				sv.ConnectionId = ptr.String(jtv)
 			}
 
 		case "connectionName":
@@ -13351,7 +13381,7 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				if !ok {
 					return fmt.Errorf("expected ConnectionName to be of type string, got %T instead", value)
 				}
-				sv.ConnectionName = &jtv
+				sv.ConnectionName = ptr.String(jtv)
 			}
 
 		case "connectionState":
@@ -13378,7 +13408,7 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				if !ok {
 					return fmt.Errorf("expected JumboFrameCapable to be of type *bool, got %T instead", value)
 				}
-				sv.JumboFrameCapable = &jtv
+				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
 
 		case "lagId":
@@ -13387,7 +13417,7 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				if !ok {
 					return fmt.Errorf("expected LagId to be of type string, got %T instead", value)
 				}
-				sv.LagId = &jtv
+				sv.LagId = ptr.String(jtv)
 			}
 
 		case "loaIssueTime":
@@ -13409,7 +13439,7 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				if !ok {
 					return fmt.Errorf("expected LocationCode to be of type string, got %T instead", value)
 				}
-				sv.Location = &jtv
+				sv.Location = ptr.String(jtv)
 			}
 
 		case "ownerAccount":
@@ -13418,7 +13448,7 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				if !ok {
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
-				sv.OwnerAccount = &jtv
+				sv.OwnerAccount = ptr.String(jtv)
 			}
 
 		case "partnerName":
@@ -13427,7 +13457,7 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				if !ok {
 					return fmt.Errorf("expected PartnerName to be of type string, got %T instead", value)
 				}
-				sv.PartnerName = &jtv
+				sv.PartnerName = ptr.String(jtv)
 			}
 
 		case "providerName":
@@ -13436,7 +13466,7 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				if !ok {
 					return fmt.Errorf("expected ProviderName to be of type string, got %T instead", value)
 				}
-				sv.ProviderName = &jtv
+				sv.ProviderName = ptr.String(jtv)
 			}
 
 		case "region":
@@ -13445,7 +13475,7 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				if !ok {
 					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
 				}
-				sv.Region = &jtv
+				sv.Region = ptr.String(jtv)
 			}
 
 		case "tags":
@@ -13463,7 +13493,7 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				if err != nil {
 					return err
 				}
-				sv.Vlan = ptr.Int32(int32(i64))
+				sv.Vlan = int32(i64)
 			}
 
 		default:
@@ -13503,7 +13533,7 @@ func awsAwsjson11_deserializeOpDocumentListVirtualInterfaceTestHistoryOutput(v *
 				if !ok {
 					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "virtualInterfaceTestHistory":
@@ -13718,7 +13748,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				if !ok {
 					return fmt.Errorf("expected BooleanFlag to be of type *bool, got %T instead", value)
 				}
-				sv.AllowsHostedConnections = &jtv
+				sv.AllowsHostedConnections = jtv
 			}
 
 		case "awsDevice":
@@ -13727,7 +13757,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				if !ok {
 					return fmt.Errorf("expected AwsDevice to be of type string, got %T instead", value)
 				}
-				sv.AwsDevice = &jtv
+				sv.AwsDevice = ptr.String(jtv)
 			}
 
 		case "awsDeviceV2":
@@ -13736,7 +13766,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				if !ok {
 					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
 				}
-				sv.AwsDeviceV2 = &jtv
+				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
 		case "connections":
@@ -13750,7 +13780,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				if !ok {
 					return fmt.Errorf("expected Bandwidth to be of type string, got %T instead", value)
 				}
-				sv.ConnectionsBandwidth = &jtv
+				sv.ConnectionsBandwidth = ptr.String(jtv)
 			}
 
 		case "hasLogicalRedundancy":
@@ -13768,7 +13798,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				if !ok {
 					return fmt.Errorf("expected JumboFrameCapable to be of type *bool, got %T instead", value)
 				}
-				sv.JumboFrameCapable = &jtv
+				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
 
 		case "lagId":
@@ -13777,7 +13807,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				if !ok {
 					return fmt.Errorf("expected LagId to be of type string, got %T instead", value)
 				}
-				sv.LagId = &jtv
+				sv.LagId = ptr.String(jtv)
 			}
 
 		case "lagName":
@@ -13786,7 +13816,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				if !ok {
 					return fmt.Errorf("expected LagName to be of type string, got %T instead", value)
 				}
-				sv.LagName = &jtv
+				sv.LagName = ptr.String(jtv)
 			}
 
 		case "lagState":
@@ -13804,7 +13834,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				if !ok {
 					return fmt.Errorf("expected LocationCode to be of type string, got %T instead", value)
 				}
-				sv.Location = &jtv
+				sv.Location = ptr.String(jtv)
 			}
 
 		case "minimumLinks":
@@ -13817,7 +13847,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				if err != nil {
 					return err
 				}
-				sv.MinimumLinks = ptr.Int32(int32(i64))
+				sv.MinimumLinks = int32(i64)
 			}
 
 		case "numberOfConnections":
@@ -13830,7 +13860,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				if err != nil {
 					return err
 				}
-				sv.NumberOfConnections = ptr.Int32(int32(i64))
+				sv.NumberOfConnections = int32(i64)
 			}
 
 		case "ownerAccount":
@@ -13839,7 +13869,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				if !ok {
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
-				sv.OwnerAccount = &jtv
+				sv.OwnerAccount = ptr.String(jtv)
 			}
 
 		case "providerName":
@@ -13848,7 +13878,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				if !ok {
 					return fmt.Errorf("expected ProviderName to be of type string, got %T instead", value)
 				}
-				sv.ProviderName = &jtv
+				sv.ProviderName = ptr.String(jtv)
 			}
 
 		case "region":
@@ -13857,7 +13887,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				if !ok {
 					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
 				}
-				sv.Region = &jtv
+				sv.Region = ptr.String(jtv)
 			}
 
 		case "tags":
@@ -13911,7 +13941,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				if !ok {
 					return fmt.Errorf("expected AmazonAddress to be of type string, got %T instead", value)
 				}
-				sv.AmazonAddress = &jtv
+				sv.AmazonAddress = ptr.String(jtv)
 			}
 
 		case "amazonSideAsn":
@@ -13924,7 +13954,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				if err != nil {
 					return err
 				}
-				sv.AmazonSideAsn = &i64
+				sv.AmazonSideAsn = ptr.Int64(i64)
 			}
 
 		case "asn":
@@ -13937,7 +13967,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				if err != nil {
 					return err
 				}
-				sv.Asn = ptr.Int32(int32(i64))
+				sv.Asn = int32(i64)
 			}
 
 		case "authKey":
@@ -13946,7 +13976,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				if !ok {
 					return fmt.Errorf("expected BGPAuthKey to be of type string, got %T instead", value)
 				}
-				sv.AuthKey = &jtv
+				sv.AuthKey = ptr.String(jtv)
 			}
 
 		case "awsDeviceV2":
@@ -13955,7 +13985,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				if !ok {
 					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
 				}
-				sv.AwsDeviceV2 = &jtv
+				sv.AwsDeviceV2 = ptr.String(jtv)
 			}
 
 		case "bgpPeers":
@@ -13969,7 +13999,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				if !ok {
 					return fmt.Errorf("expected ConnectionId to be of type string, got %T instead", value)
 				}
-				sv.ConnectionId = &jtv
+				sv.ConnectionId = ptr.String(jtv)
 			}
 
 		case "customerAddress":
@@ -13978,7 +14008,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				if !ok {
 					return fmt.Errorf("expected CustomerAddress to be of type string, got %T instead", value)
 				}
-				sv.CustomerAddress = &jtv
+				sv.CustomerAddress = ptr.String(jtv)
 			}
 
 		case "customerRouterConfig":
@@ -13987,7 +14017,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				if !ok {
 					return fmt.Errorf("expected RouterConfig to be of type string, got %T instead", value)
 				}
-				sv.CustomerRouterConfig = &jtv
+				sv.CustomerRouterConfig = ptr.String(jtv)
 			}
 
 		case "directConnectGatewayId":
@@ -13996,7 +14026,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				if !ok {
 					return fmt.Errorf("expected DirectConnectGatewayId to be of type string, got %T instead", value)
 				}
-				sv.DirectConnectGatewayId = &jtv
+				sv.DirectConnectGatewayId = ptr.String(jtv)
 			}
 
 		case "jumboFrameCapable":
@@ -14005,7 +14035,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				if !ok {
 					return fmt.Errorf("expected JumboFrameCapable to be of type *bool, got %T instead", value)
 				}
-				sv.JumboFrameCapable = &jtv
+				sv.JumboFrameCapable = ptr.Bool(jtv)
 			}
 
 		case "location":
@@ -14014,7 +14044,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				if !ok {
 					return fmt.Errorf("expected LocationCode to be of type string, got %T instead", value)
 				}
-				sv.Location = &jtv
+				sv.Location = ptr.String(jtv)
 			}
 
 		case "mtu":
@@ -14036,7 +14066,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				if !ok {
 					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
 				}
-				sv.OwnerAccount = &jtv
+				sv.OwnerAccount = ptr.String(jtv)
 			}
 
 		case "region":
@@ -14045,7 +14075,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				if !ok {
 					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
 				}
-				sv.Region = &jtv
+				sv.Region = ptr.String(jtv)
 			}
 
 		case "routeFilterPrefixes":
@@ -14064,7 +14094,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				if !ok {
 					return fmt.Errorf("expected VirtualGatewayId to be of type string, got %T instead", value)
 				}
-				sv.VirtualGatewayId = &jtv
+				sv.VirtualGatewayId = ptr.String(jtv)
 			}
 
 		case "virtualInterfaceId":
@@ -14073,7 +14103,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				if !ok {
 					return fmt.Errorf("expected VirtualInterfaceId to be of type string, got %T instead", value)
 				}
-				sv.VirtualInterfaceId = &jtv
+				sv.VirtualInterfaceId = ptr.String(jtv)
 			}
 
 		case "virtualInterfaceName":
@@ -14082,7 +14112,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				if !ok {
 					return fmt.Errorf("expected VirtualInterfaceName to be of type string, got %T instead", value)
 				}
-				sv.VirtualInterfaceName = &jtv
+				sv.VirtualInterfaceName = ptr.String(jtv)
 			}
 
 		case "virtualInterfaceState":
@@ -14100,7 +14130,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				if !ok {
 					return fmt.Errorf("expected VirtualInterfaceType to be of type string, got %T instead", value)
 				}
-				sv.VirtualInterfaceType = &jtv
+				sv.VirtualInterfaceType = ptr.String(jtv)
 			}
 
 		case "vlan":
@@ -14113,7 +14143,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v 
 				if err != nil {
 					return err
 				}
-				sv.Vlan = ptr.Int32(int32(i64))
+				sv.Vlan = int32(i64)
 			}
 
 		default:

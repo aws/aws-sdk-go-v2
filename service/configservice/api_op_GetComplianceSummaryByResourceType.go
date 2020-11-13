@@ -37,7 +37,7 @@ type GetComplianceSummaryByResourceTypeInput struct {
 	// request, you can specify an AWS resource type such as AWS::EC2::Instance. You
 	// can specify that the resource type is an AWS account by specifying
 	// AWS::::Account.
-	ResourceTypes []*string
+	ResourceTypes []string
 }
 
 //
@@ -46,7 +46,7 @@ type GetComplianceSummaryByResourceTypeOutput struct {
 	// The number of resources that are compliant and the number that are noncompliant.
 	// If one or more resource types were provided with the request, the numbers are
 	// returned for each resource type. The maximum number returned is 100.
-	ComplianceSummariesByResourceType []*types.ComplianceSummaryByResourceType
+	ComplianceSummariesByResourceType []types.ComplianceSummaryByResourceType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

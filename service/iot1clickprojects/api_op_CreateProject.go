@@ -48,7 +48,7 @@ type CreateProjectInput struct {
 	// example, { {"key1": "value1", "key2": "value2"} }. For more information, see AWS
 	// Tagging Strategies
 	// (https://aws.amazon.com/answers/account-management/aws-tagging-strategies/).
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateProjectOutput struct {

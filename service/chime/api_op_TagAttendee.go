@@ -42,7 +42,7 @@ type TagAttendeeInput struct {
 	// The tag key-value pairs.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type TagAttendeeOutput struct {

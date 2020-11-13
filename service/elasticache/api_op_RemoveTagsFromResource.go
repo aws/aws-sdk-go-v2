@@ -43,7 +43,7 @@ type RemoveTagsFromResourceInput struct {
 	// A list of TagKeys identifying the tags you want removed from the named resource.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 // Represents the output from the AddTagsToResource, ListTagsForResource, and
@@ -51,7 +51,7 @@ type RemoveTagsFromResourceInput struct {
 type RemoveTagsFromResourceOutput struct {
 
 	// A list of cost allocation tags as key-value pairs.
-	TagList []*types.Tag
+	TagList []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

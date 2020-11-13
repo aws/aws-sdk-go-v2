@@ -49,7 +49,7 @@ type DescribeNotificationSubscriptionsOutput struct {
 	Marker *string
 
 	// The subscriptions.
-	Subscriptions []*types.Subscription
+	Subscriptions []types.Subscription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

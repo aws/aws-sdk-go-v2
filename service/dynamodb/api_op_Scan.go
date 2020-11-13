@@ -62,7 +62,7 @@ type ScanInput struct {
 	// information, see AttributesToGet
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html)
 	// in the Amazon DynamoDB Developer Guide.
-	AttributesToGet []*string
+	AttributesToGet []string
 
 	// This is a legacy parameter. Use FilterExpression instead. For more information,
 	// see ConditionalOperator
@@ -93,7 +93,7 @@ type ScanInput struct {
 	// are allowed. In a parallel scan, a Scan request that includes ExclusiveStartKey
 	// must specify the same segment whose previous Scan returned the corresponding
 	// value of LastEvaluatedKey.
-	ExclusiveStartKey map[string]*types.AttributeValue
+	ExclusiveStartKey map[string]types.AttributeValue
 
 	// One or more substitution tokens for attribute names in an expression. The
 	// following are some use cases for using ExpressionAttributeNames:
@@ -134,7 +134,7 @@ type ScanInput struct {
 	// expression attribute names, see Specifying Item Attributes
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
 	// in the Amazon DynamoDB Developer Guide.
-	ExpressionAttributeNames map[string]*string
+	ExpressionAttributeNames map[string]string
 
 	// One or more values that can be substituted in an expression. Use the : (colon)
 	// character in an expression to dereference an attribute value. For example,
@@ -147,7 +147,7 @@ type ScanInput struct {
 	// expression attribute values, see Condition Expressions
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html)
 	// in the Amazon DynamoDB Developer Guide.
-	ExpressionAttributeValues map[string]*types.AttributeValue
+	ExpressionAttributeValues map[string]types.AttributeValue
 
 	// A string that contains conditions that DynamoDB applies after the Scan
 	// operation, but before the data is returned to you. Items that do not satisfy the
@@ -207,7 +207,7 @@ type ScanInput struct {
 	// see ScanFilter
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ScanFilter.html)
 	// in the Amazon DynamoDB Developer Guide.
-	ScanFilter map[string]*types.Condition
+	ScanFilter map[string]types.Condition
 
 	// For a parallel Scan request, Segment identifies an individual segment to be
 	// scanned by an application worker. Segment IDs are zero-based, so the first
@@ -289,11 +289,11 @@ type ScanOutput struct {
 	// Count is the number of items returned after the filter was applied, and
 	// ScannedCount is the number of matching items before the filter was applied. If
 	// you did not use a filter in the request, then Count is the same as ScannedCount.
-	Count *int32
+	Count int32
 
 	// An array of item attributes that match the scan criteria. Each element in this
 	// array consists of an attribute name and the value for that attribute.
-	Items []map[string]*types.AttributeValue
+	Items []map[string]types.AttributeValue
 
 	// The primary key of the item where the operation stopped, inclusive of the
 	// previous result set. Use this value to start a new operation, excluding this
@@ -302,7 +302,7 @@ type ScanOutput struct {
 	// LastEvaluatedKey is not empty, it does not necessarily mean that there is more
 	// data in the result set. The only way to know when you have reached the end of
 	// the result set is when LastEvaluatedKey is empty.
-	LastEvaluatedKey map[string]*types.AttributeValue
+	LastEvaluatedKey map[string]types.AttributeValue
 
 	// The number of items evaluated, before any ScanFilter is applied. A high
 	// ScannedCount value with few, or no, Count results indicates an inefficient Scan
@@ -310,7 +310,7 @@ type ScanOutput struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#Count)
 	// in the Amazon DynamoDB Developer Guide. If you did not use a filter in the
 	// request, then ScannedCount is the same as Count.
-	ScannedCount *int32
+	ScannedCount int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -45,7 +45,7 @@ type ListGroupsInput struct {
 type ListGroupsOutput struct {
 
 	// The overview of groups for an organization.
-	Groups []*types.Group
+	Groups []types.Group
 
 	// The token to use to retrieve the next page of results. The value is "null" when
 	// there are no more results to return.

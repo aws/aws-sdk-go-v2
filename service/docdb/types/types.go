@@ -46,10 +46,10 @@ type Certificate struct {
 type CloudwatchLogsExportConfiguration struct {
 
 	// The list of log types to disable.
-	DisableLogTypes []*string
+	DisableLogTypes []string
 
 	// The list of log types to enable.
-	EnableLogTypes []*string
+	EnableLogTypes []string
 }
 
 // Detailed information about a cluster.
@@ -58,11 +58,11 @@ type DBCluster struct {
 	// Provides a list of the AWS Identity and Access Management (IAM) roles that are
 	// associated with the cluster. IAM roles that are associated with a cluster grant
 	// permission for the cluster to access other AWS services on your behalf.
-	AssociatedRoles []*DBClusterRole
+	AssociatedRoles []DBClusterRole
 
 	// Provides the list of Amazon EC2 Availability Zones that instances in the cluster
 	// can be created in.
-	AvailabilityZones []*string
+	AvailabilityZones []string
 
 	// Specifies the number of days for which automatic snapshots are retained.
 	BackupRetentionPeriod *int32
@@ -79,7 +79,7 @@ type DBCluster struct {
 	DBClusterIdentifier *string
 
 	// Provides the list of instances that make up the cluster.
-	DBClusterMembers []*DBClusterMember
+	DBClusterMembers []DBClusterMember
 
 	// Specifies the name of the cluster parameter group for the cluster.
 	DBClusterParameterGroup *string
@@ -96,7 +96,7 @@ type DBCluster struct {
 	// Specifies whether this cluster can be deleted. If DeletionProtection is enabled,
 	// the cluster cannot be deleted unless it is modified and DeletionProtection is
 	// disabled. DeletionProtection protects clusters from being accidentally deleted.
-	DeletionProtection *bool
+	DeletionProtection bool
 
 	// The earliest time to which a database can be restored with point-in-time
 	// restore.
@@ -104,7 +104,7 @@ type DBCluster struct {
 
 	// A list of log types that this cluster is configured to export to Amazon
 	// CloudWatch Logs.
-	EnabledCloudwatchLogsExports []*string
+	EnabledCloudwatchLogsExports []string
 
 	// Specifies the connection endpoint for the primary instance of the cluster.
 	Endpoint *string
@@ -130,7 +130,7 @@ type DBCluster struct {
 	MasterUsername *string
 
 	// Specifies whether the cluster has instances in multiple Availability Zones.
-	MultiAZ *bool
+	MultiAZ bool
 
 	// Specifies the progress of the operation as a percentage.
 	PercentProgress *string
@@ -162,11 +162,11 @@ type DBCluster struct {
 	Status *string
 
 	// Specifies whether the cluster is encrypted.
-	StorageEncrypted *bool
+	StorageEncrypted bool
 
 	// Provides a list of virtual private cloud (VPC) security groups that the cluster
 	// belongs to.
-	VpcSecurityGroups []*VpcSecurityGroupMembership
+	VpcSecurityGroups []VpcSecurityGroupMembership
 }
 
 // Contains information about an instance that is part of a cluster.
@@ -181,7 +181,7 @@ type DBClusterMember struct {
 
 	// A value that is true if the cluster member is the primary instance for the
 	// cluster and false otherwise.
-	IsClusterWriter *bool
+	IsClusterWriter bool
 
 	// A value that specifies the order in which an Amazon DocumentDB replica is
 	// promoted to the primary instance after a failure of the existing primary
@@ -234,7 +234,7 @@ type DBClusterSnapshot struct {
 
 	// Provides the list of Amazon EC2 Availability Zones that instances in the cluster
 	// snapshot can be restored in.
-	AvailabilityZones []*string
+	AvailabilityZones []string
 
 	// Specifies the time when the cluster was created, in Universal Coordinated Time
 	// (UTC).
@@ -264,11 +264,11 @@ type DBClusterSnapshot struct {
 	MasterUsername *string
 
 	// Specifies the percentage of the estimated data that has been transferred.
-	PercentProgress *int32
+	PercentProgress int32
 
 	// Specifies the port that the cluster was listening on at the time of the
 	// snapshot.
-	Port *int32
+	Port int32
 
 	// Provides the time when the snapshot was taken, in UTC.
 	SnapshotCreateTime *time.Time
@@ -284,7 +284,7 @@ type DBClusterSnapshot struct {
 	Status *string
 
 	// Specifies whether the cluster snapshot is encrypted.
-	StorageEncrypted *bool
+	StorageEncrypted bool
 
 	// Provides the virtual private cloud (VPC) ID that is associated with the cluster
 	// snapshot.
@@ -306,7 +306,7 @@ type DBClusterSnapshotAttribute struct {
 	// that are authorized to copy or restore the manual cluster snapshot. If a value
 	// of all is in the list, then the manual cluster snapshot is public and available
 	// for any AWS account to copy or restore.
-	AttributeValues []*string
+	AttributeValues []string
 }
 
 // Detailed information about the attributes that are associated with a cluster
@@ -314,7 +314,7 @@ type DBClusterSnapshotAttribute struct {
 type DBClusterSnapshotAttributesResult struct {
 
 	// The list of attributes and values for the cluster snapshot.
-	DBClusterSnapshotAttributes []*DBClusterSnapshotAttribute
+	DBClusterSnapshotAttributes []DBClusterSnapshotAttribute
 
 	// The identifier of the cluster snapshot that the attributes apply to.
 	DBClusterSnapshotIdentifier *string
@@ -340,27 +340,27 @@ type DBEngineVersion struct {
 
 	// The types of logs that the database engine has available for export to Amazon
 	// CloudWatch Logs.
-	ExportableLogTypes []*string
+	ExportableLogTypes []string
 
 	// A value that indicates whether the engine version supports exporting the log
 	// types specified by ExportableLogTypes to CloudWatch Logs.
-	SupportsLogExportsToCloudwatchLogs *bool
+	SupportsLogExportsToCloudwatchLogs bool
 
 	// A list of engine versions that this database engine version can be upgraded to.
-	ValidUpgradeTarget []*UpgradeTarget
+	ValidUpgradeTarget []UpgradeTarget
 }
 
 // Detailed information about an instance.
 type DBInstance struct {
 
 	// Indicates that minor version patches are applied automatically.
-	AutoMinorVersionUpgrade *bool
+	AutoMinorVersionUpgrade bool
 
 	// Specifies the name of the Availability Zone that the instance is located in.
 	AvailabilityZone *string
 
 	// Specifies the number of days for which automatic snapshots are retained.
-	BackupRetentionPeriod *int32
+	BackupRetentionPeriod int32
 
 	// The identifier of the CA certificate for this DB instance.
 	CACertificateIdentifier *string
@@ -393,7 +393,7 @@ type DBInstance struct {
 
 	// A list of log types that this instance is configured to export to Amazon
 	// CloudWatch Logs.
-	EnabledCloudwatchLogsExports []*string
+	EnabledCloudwatchLogsExports []string
 
 	// Specifies the connection endpoint.
 	Endpoint *Endpoint
@@ -434,17 +434,17 @@ type DBInstance struct {
 
 	// Not supported. Amazon DocumentDB does not currently support public endpoints.
 	// The value of PubliclyAccessible is always false.
-	PubliclyAccessible *bool
+	PubliclyAccessible bool
 
 	// The status of a read replica. If the instance is not a read replica, this is
 	// blank.
-	StatusInfos []*DBInstanceStatusInfo
+	StatusInfos []DBInstanceStatusInfo
 
 	// Specifies whether or not the instance is encrypted.
-	StorageEncrypted *bool
+	StorageEncrypted bool
 
 	// Provides a list of VPC security group elements that the instance belongs to.
-	VpcSecurityGroups []*VpcSecurityGroupMembership
+	VpcSecurityGroups []VpcSecurityGroupMembership
 }
 
 // Provides a list of status information for an instance.
@@ -456,7 +456,7 @@ type DBInstanceStatusInfo struct {
 
 	// A Boolean value that is true if the instance is operating normally, or false if
 	// the instance is in an error state.
-	Normal *bool
+	Normal bool
 
 	// Status of the instance. For a StatusType of read replica, the values can be
 	// replicating, error, stopped, or terminated.
@@ -482,7 +482,7 @@ type DBSubnetGroup struct {
 	SubnetGroupStatus *string
 
 	// Detailed information about one or more subnets within a subnet group.
-	Subnets []*Subnet
+	Subnets []Subnet
 
 	// Provides the virtual private cloud (VPC) ID of the subnet group.
 	VpcId *string
@@ -499,7 +499,7 @@ type Endpoint struct {
 	HostedZoneId *string
 
 	// Specifies the port that the database engine is listening on.
-	Port *int32
+	Port int32
 }
 
 // Contains the result of a successful invocation of the
@@ -516,7 +516,7 @@ type EngineDefaults struct {
 	Marker *string
 
 	// The parameters of a particular cluster parameter group family.
-	Parameters []*Parameter
+	Parameters []Parameter
 }
 
 // Detailed information about an event.
@@ -526,7 +526,7 @@ type Event struct {
 	Date *time.Time
 
 	// Specifies the category for the event.
-	EventCategories []*string
+	EventCategories []string
 
 	// Provides the text of this event.
 	Message *string
@@ -545,7 +545,7 @@ type Event struct {
 type EventCategoriesMap struct {
 
 	// The event categories for the specified source type.
-	EventCategories []*string
+	EventCategories []string
 
 	// The source type that the returned categories belong to.
 	SourceType *string
@@ -564,14 +564,14 @@ type Filter struct {
 	// One or more filter values. Filter values are case sensitive.
 	//
 	// This member is required.
-	Values []*string
+	Values []string
 }
 
 // The options that are available for an instance.
 type OrderableDBInstanceOption struct {
 
 	// A list of Availability Zones for an instance.
-	AvailabilityZones []*AvailabilityZone
+	AvailabilityZones []AvailabilityZone
 
 	// The instance class for an instance.
 	DBInstanceClass *string
@@ -586,7 +586,7 @@ type OrderableDBInstanceOption struct {
 	LicenseModel *string
 
 	// Indicates whether an instance is in a virtual private cloud (VPC).
-	Vpc *bool
+	Vpc bool
 }
 
 // Detailed information about an individual parameter.
@@ -610,7 +610,7 @@ type Parameter struct {
 	// Indicates whether (true) or not (false) the parameter can be modified. Some
 	// parameters have security or operational implications that prevent them from
 	// being changed.
-	IsModifiable *bool
+	IsModifiable bool
 
 	// The earliest engine version to which the parameter can apply.
 	MinimumEngineVersion *string
@@ -631,11 +631,11 @@ type PendingCloudwatchLogsExports struct {
 
 	// Log types that are in the process of being enabled. After they are enabled,
 	// these log types are exported to Amazon CloudWatch Logs.
-	LogTypesToDisable []*string
+	LogTypesToDisable []string
 
 	// Log types that are in the process of being deactivated. After they are
 	// deactivated, these log types aren't exported to CloudWatch Logs.
-	LogTypesToEnable []*string
+	LogTypesToEnable []string
 }
 
 // Provides information about a pending maintenance action for a resource.
@@ -727,7 +727,7 @@ type ResourcePendingMaintenanceActions struct {
 
 	// A list that provides details about the pending maintenance actions for the
 	// resource.
-	PendingMaintenanceActionDetails []*PendingMaintenanceAction
+	PendingMaintenanceActionDetails []PendingMaintenanceAction
 
 	// The Amazon Resource Name (ARN) of the resource that has pending maintenance
 	// actions.
@@ -769,7 +769,7 @@ type UpgradeTarget struct {
 
 	// A value that indicates whether the target version is applied to any source DB
 	// instances that have AutoMinorVersionUpgrade set to true.
-	AutoUpgrade *bool
+	AutoUpgrade bool
 
 	// The version of the database engine that an instance can be upgraded to.
 	Description *string
@@ -781,7 +781,7 @@ type UpgradeTarget struct {
 	EngineVersion *string
 
 	// A value that indicates whether a database engine is upgraded to a major version.
-	IsMajorVersionUpgrade *bool
+	IsMajorVersionUpgrade bool
 }
 
 // Used as a response element for queries on virtual private cloud (VPC) security

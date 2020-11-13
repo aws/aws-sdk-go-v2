@@ -51,7 +51,7 @@ type GetAccuracyMetricsInput struct {
 type GetAccuracyMetricsOutput struct {
 
 	// An array of results from evaluating the predictor.
-	PredictorEvaluationResults []*types.EvaluationResult
+	PredictorEvaluationResults []types.EvaluationResult
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

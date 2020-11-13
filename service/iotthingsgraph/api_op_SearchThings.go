@@ -58,7 +58,7 @@ type SearchThingsOutput struct {
 	NextToken *string
 
 	// An array of things in the result set.
-	Things []*types.Thing
+	Things []types.Thing
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

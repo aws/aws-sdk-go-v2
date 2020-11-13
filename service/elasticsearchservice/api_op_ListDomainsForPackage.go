@@ -36,7 +36,7 @@ type ListDomainsForPackageInput struct {
 	PackageID *string
 
 	// Limits results to a maximum number of domains.
-	MaxResults *int32
+	MaxResults int32
 
 	// Used for pagination. Only necessary if a previous API call includes a non-null
 	// NextToken value. If provided, returns results for the next page.
@@ -47,7 +47,7 @@ type ListDomainsForPackageInput struct {
 type ListDomainsForPackageOutput struct {
 
 	// List of DomainPackageDetails objects.
-	DomainPackageDetailsList []*types.DomainPackageDetails
+	DomainPackageDetailsList []types.DomainPackageDetails
 
 	NextToken *string
 

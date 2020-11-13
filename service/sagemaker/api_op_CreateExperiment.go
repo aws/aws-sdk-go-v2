@@ -60,7 +60,7 @@ type CreateExperimentInput struct {
 
 	// A list of tags to associate with the experiment. You can use Search API to
 	// search on the tags.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateExperimentOutput struct {

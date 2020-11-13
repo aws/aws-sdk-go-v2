@@ -62,7 +62,7 @@ type DescribeDomainConfigurationOutput struct {
 
 	// A list containing summary information about the server certificate included in
 	// the domain configuration.
-	ServerCertificates []*types.ServerCertificateSummary
+	ServerCertificates []types.ServerCertificateSummary
 
 	// The type of service delivered by the endpoint.
 	ServiceType types.ServiceType

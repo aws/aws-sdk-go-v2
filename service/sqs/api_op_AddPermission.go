@@ -68,7 +68,7 @@ type AddPermissionInput struct {
 	// in the Amazon Simple Queue Service Developer Guide.
 	//
 	// This member is required.
-	AWSAccountIds []*string
+	AWSAccountIds []string
 
 	// The action the client wants to allow for the specified principal. Valid values:
 	// the name of any action or *. For more information about these actions, see
@@ -81,7 +81,7 @@ type AddPermissionInput struct {
 	// SendMessageBatch, DeleteMessageBatch, and ChangeMessageVisibilityBatch.
 	//
 	// This member is required.
-	Actions []*string
+	Actions []string
 
 	// The unique identification of the permission you're setting (for example,
 	// AliceSendMessage). Maximum 80 characters. Allowed characters include

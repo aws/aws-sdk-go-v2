@@ -19,7 +19,7 @@ type BrokerEBSVolumeInfo struct {
 	// Size of the EBS volume to update.
 	//
 	// This member is required.
-	VolumeSizeGB *int32
+	VolumeSizeGB int32
 }
 
 type BrokerLogs struct {
@@ -39,7 +39,7 @@ type BrokerNodeGroupInfo struct {
 	// in Availability Zone us-east-1e.
 	//
 	// This member is required.
-	ClientSubnets []*string
+	ClientSubnets []string
 
 	// The type of Amazon EC2 instances to use for Kafka brokers. The following
 	// instance types are allowed: kafka.m5.large, kafka.m5.xlarge, kafka.m5.2xlarge,
@@ -60,7 +60,7 @@ type BrokerNodeGroupInfo struct {
 	// order to specify who can connect to and communicate with the Amazon MSK cluster.
 	// If you don't specify a security group, Amazon MSK uses the default security
 	// group associated with the VPC.
-	SecurityGroups []*string
+	SecurityGroups []string
 
 	// Contains information about storage volumes attached to MSK broker nodes.
 	StorageInfo *StorageInfo
@@ -73,7 +73,7 @@ type BrokerNodeInfo struct {
 	AttachedENIId *string
 
 	// The ID of the broker.
-	BrokerId *float64
+	BrokerId float64
 
 	// The client subnet to which this broker node belongs.
 	ClientSubnet *string
@@ -86,7 +86,7 @@ type BrokerNodeInfo struct {
 	CurrentBrokerSoftwareInfo *BrokerSoftwareInfo
 
 	// Endpoints for accessing the broker.
-	Endpoints []*string
+	Endpoints []string
 }
 
 // Information about the current software installed on the cluster.
@@ -98,7 +98,7 @@ type BrokerSoftwareInfo struct {
 
 	// The revision of the configuration to use. This field isn't visible in this
 	// preview release.
-	ConfigurationRevision *int64
+	ConfigurationRevision int64
 
 	// The version of Apache Kafka.
 	KafkaVersion *string
@@ -115,7 +115,7 @@ type ClientAuthentication struct {
 }
 
 type CloudWatchLogs struct {
-	Enabled *bool
+	Enabled bool
 
 	LogGroup *string
 }
@@ -161,7 +161,7 @@ type ClusterInfo struct {
 	LoggingInfo *LoggingInfo
 
 	// The number of broker nodes in the cluster.
-	NumberOfBrokerNodes *int32
+	NumberOfBrokerNodes int32
 
 	// Settings for open monitoring using Prometheus.
 	OpenMonitoring *OpenMonitoring
@@ -172,7 +172,7 @@ type ClusterInfo struct {
 	StateInfo *StateInfo
 
 	// Tags attached to the cluster.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The connection string to use to connect to the Apache ZooKeeper cluster.
 	ZookeeperConnectString *string
@@ -206,7 +206,7 @@ type ClusterOperationInfo struct {
 	OperationState *string
 
 	// Steps completed during the operation.
-	OperationSteps []*ClusterOperationStep
+	OperationSteps []ClusterOperationStep
 
 	// Type of the cluster operation.
 	OperationType *string
@@ -242,7 +242,7 @@ type CompatibleKafkaVersion struct {
 	SourceVersion *string
 
 	// A list of Kafka versions.
-	TargetVersions []*string
+	TargetVersions []string
 }
 
 // Represents an MSK Configuration.
@@ -268,7 +268,7 @@ type Configuration struct {
 	// Apache Kafka version specified for the cluster appears in this array.
 	//
 	// This member is required.
-	KafkaVersions []*string
+	KafkaVersions []string
 
 	// Latest revision of the configuration.
 	//
@@ -298,7 +298,7 @@ type ConfigurationInfo struct {
 	// The revision of the configuration to use.
 	//
 	// This member is required.
-	Revision *int64
+	Revision int64
 }
 
 // Describes a configuration revision.
@@ -312,7 +312,7 @@ type ConfigurationRevision struct {
 	// The revision number.
 	//
 	// This member is required.
-	Revision *int64
+	Revision int64
 
 	// The description of the configuration revision.
 	Description *string
@@ -323,7 +323,7 @@ type ConfigurationRevision struct {
 type EBSStorageInfo struct {
 
 	// The size in GiB of the EBS volume for the data drive on each broker node.
-	VolumeSize *int32
+	VolumeSize int32
 }
 
 // The data-volume encryption details.
@@ -362,7 +362,7 @@ type EncryptionInTransit struct {
 	// When set to true, it indicates that data communication among the broker nodes of
 	// the cluster is encrypted. When set to false, the communication happens in
 	// plaintext. The default value is true.
-	InCluster *bool
+	InCluster bool
 }
 
 // Returns information about an error state of the cluster.
@@ -376,7 +376,7 @@ type ErrorInfo struct {
 }
 
 type Firehose struct {
-	Enabled *bool
+	Enabled bool
 
 	DeliveryStream *string
 }
@@ -387,7 +387,7 @@ type JmxExporter struct {
 	// Indicates whether you want to enable or disable the JMX Exporter.
 	//
 	// This member is required.
-	EnabledInBroker *bool
+	EnabledInBroker bool
 }
 
 // Indicates whether you want to enable or disable the JMX Exporter.
@@ -396,7 +396,7 @@ type JmxExporterInfo struct {
 	// Indicates whether you want to enable or disable the JMX Exporter.
 	//
 	// This member is required.
-	EnabledInBroker *bool
+	EnabledInBroker bool
 }
 
 type KafkaVersion struct {
@@ -413,7 +413,7 @@ type LoggingInfo struct {
 type MutableClusterInfo struct {
 
 	// Specifies the size of the EBS volume and the ID of the associated broker.
-	BrokerEBSVolumeInfo []*BrokerEBSVolumeInfo
+	BrokerEBSVolumeInfo []BrokerEBSVolumeInfo
 
 	// Information about the changes in the configuration of the brokers.
 	ConfigurationInfo *ConfigurationInfo
@@ -428,7 +428,7 @@ type MutableClusterInfo struct {
 	LoggingInfo *LoggingInfo
 
 	// The number of broker nodes in the cluster.
-	NumberOfBrokerNodes *int32
+	NumberOfBrokerNodes int32
 
 	// The settings for open monitoring.
 	OpenMonitoring *OpenMonitoring
@@ -440,7 +440,7 @@ type NodeExporter struct {
 	// Indicates whether you want to enable or disable the Node Exporter.
 	//
 	// This member is required.
-	EnabledInBroker *bool
+	EnabledInBroker bool
 }
 
 // Indicates whether you want to enable or disable the Node Exporter.
@@ -449,7 +449,7 @@ type NodeExporterInfo struct {
 	// Indicates whether you want to enable or disable the Node Exporter.
 	//
 	// This member is required.
-	EnabledInBroker *bool
+	EnabledInBroker bool
 }
 
 // The node information object.
@@ -513,7 +513,7 @@ type PrometheusInfo struct {
 }
 
 type S3 struct {
-	Enabled *bool
+	Enabled bool
 
 	Bucket *string
 
@@ -531,7 +531,7 @@ type Sasl struct {
 type Scram struct {
 
 	// SASL/SCRAM authentication is enabled or not.
-	Enabled *bool
+	Enabled bool
 }
 
 type StateInfo struct {
@@ -551,7 +551,7 @@ type StorageInfo struct {
 type Tls struct {
 
 	// List of ACM Certificate Authority ARNs.
-	CertificateAuthorityArnList []*string
+	CertificateAuthorityArnList []string
 }
 
 // Error info for scram secret associate/disassociate failure.
@@ -577,10 +577,10 @@ type ZookeeperNodeInfo struct {
 	ClientVpcIpAddress *string
 
 	// Endpoints for accessing the ZooKeeper.
-	Endpoints []*string
+	Endpoints []string
 
 	// The role-specific ID for Zookeeper.
-	ZookeeperId *float64
+	ZookeeperId float64
 
 	// The version of Zookeeper.
 	ZookeeperVersion *string

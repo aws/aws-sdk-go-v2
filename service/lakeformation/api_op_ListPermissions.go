@@ -67,7 +67,7 @@ type ListPermissionsOutput struct {
 
 	// A list of principals and their permissions on the resource for the specified
 	// principal and resource types.
-	PrincipalResourcePermissions []*types.PrincipalResourcePermissions
+	PrincipalResourcePermissions []types.PrincipalResourcePermissions
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

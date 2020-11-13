@@ -71,7 +71,7 @@ type DescribeCommunicationsInput struct {
 type DescribeCommunicationsOutput struct {
 
 	// The communications for the case.
-	Communications []*types.Communication
+	Communications []types.Communication
 
 	// A resumption point for pagination.
 	NextToken *string

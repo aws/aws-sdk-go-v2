@@ -33,7 +33,7 @@ type ListRobotApplicationsInput struct {
 	// Optional filters to limit results. The filter name name is supported. When
 	// filtering, you must use the complete value of the filtered item. You can use up
 	// to three filters.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// When this parameter is used, ListRobotApplications only returns maxResults
 	// results in a single page along with a nextToken response element. The remaining
@@ -64,7 +64,7 @@ type ListRobotApplicationsOutput struct {
 	NextToken *string
 
 	// A list of robot application summaries that meet the criteria of the request.
-	RobotApplicationSummaries []*types.RobotApplicationSummary
+	RobotApplicationSummaries []types.RobotApplicationSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

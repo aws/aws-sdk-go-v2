@@ -63,7 +63,7 @@ type ListTestGridSessionsOutput struct {
 	NextToken *string
 
 	// The sessions that match the criteria in a ListTestGridSessionsRequest.
-	TestGridSessions []*types.TestGridSession
+	TestGridSessions []types.TestGridSession
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

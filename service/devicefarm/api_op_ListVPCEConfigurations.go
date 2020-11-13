@@ -47,7 +47,7 @@ type ListVPCEConfigurationsOutput struct {
 
 	// An array of VPCEConfiguration objects that contain information about your VPC
 	// endpoint configuration.
-	VpceConfigurations []*types.VPCEConfiguration
+	VpceConfigurations []types.VPCEConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

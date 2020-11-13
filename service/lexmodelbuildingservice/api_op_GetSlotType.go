@@ -56,7 +56,7 @@ type GetSlotTypeOutput struct {
 
 	// A list of EnumerationValue objects that defines the values that the slot type
 	// can take.
-	EnumerationValues []*types.EnumerationValue
+	EnumerationValues []types.EnumerationValue
 
 	// The date that the slot type was updated. When you create a resource, the
 	// creation date and last update date are the same.
@@ -69,7 +69,7 @@ type GetSlotTypeOutput struct {
 	ParentSlotTypeSignature *string
 
 	// Configuration information that extends the parent built-in slot type.
-	SlotTypeConfigurations []*types.SlotTypeConfiguration
+	SlotTypeConfigurations []types.SlotTypeConfiguration
 
 	// The strategy that Amazon Lex uses to determine the value of the slot. For more
 	// information, see PutSlotType.

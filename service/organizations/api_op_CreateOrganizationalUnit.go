@@ -67,7 +67,7 @@ type CreateOrganizationalUnitInput struct {
 	// in the AWS Organizations User Guide. If any one of the tags is invalid or if you
 	// exceed the allowed number of tags for an OU, then the entire request fails and
 	// the OU is not created.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateOrganizationalUnitOutput struct {

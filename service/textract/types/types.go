@@ -111,7 +111,7 @@ type Block struct {
 	//
 	// * 1 - The block has child
 	// blocks.
-	Relationships []*Relationship
+	Relationships []Relationship
 
 	// The row in which a table cell is located. The first row position is 1. RowIndex
 	// isn't returned by DetectDocumentText and GetDocumentTextDetection.
@@ -144,18 +144,18 @@ type Block struct {
 type BoundingBox struct {
 
 	// The height of the bounding box as a ratio of the overall document page height.
-	Height *float32
+	Height float32
 
 	// The left coordinate of the bounding box as a ratio of overall document page
 	// width.
-	Left *float32
+	Left float32
 
 	// The top coordinate of the bounding box as a ratio of overall document page
 	// height.
-	Top *float32
+	Top float32
 
 	// The width of the bounding box as a ratio of the overall document page width.
-	Width *float32
+	Width float32
 }
 
 // The input document, either as bytes or as an S3 object. You pass image bytes to
@@ -211,7 +211,7 @@ type Geometry struct {
 	BoundingBox *BoundingBox
 
 	// Within the bounding box, a fine-grained polygon around the recognized item.
-	Polygon []*Point
+	Polygon []Point
 }
 
 // Shows the results of the human in the loop evaluation. If there is no
@@ -224,7 +224,7 @@ type HumanLoopActivationOutput struct {
 	HumanLoopActivationConditionsEvaluationResults *string
 
 	// Shows if and why human review was needed.
-	HumanLoopActivationReasons []*string
+	HumanLoopActivationReasons []string
 
 	// The Amazon Resource Name (ARN) of the HumanLoop created.
 	HumanLoopArn *string
@@ -300,10 +300,10 @@ type OutputConfig struct {
 type Point struct {
 
 	// The value of the X coordinate for a point on a Polygon.
-	X *float32
+	X float32
 
 	// The value of the Y coordinate for a point on a Polygon.
-	Y *float32
+	Y float32
 }
 
 // Information about how blocks are related to each other. A Block object contains
@@ -314,7 +314,7 @@ type Relationship struct {
 
 	// An array of IDs for related blocks. You can get the type of the relationship
 	// from the Type element.
-	Ids []*string
+	Ids []string
 
 	// The type of relationship that the blocks in the IDs array have with the current
 	// block. The relationship can be VALUE or CHILD. A relationship of type VALUE is a
@@ -352,5 +352,5 @@ type Warning struct {
 	ErrorCode *string
 
 	// A list of the pages that the warning applies to.
-	Pages []*int32
+	Pages []int32
 }

@@ -41,11 +41,11 @@ type ListTagsForResourceOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// Contains a map of the key-value pairs for the resource tag or tags assigned to
 	// the resource.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

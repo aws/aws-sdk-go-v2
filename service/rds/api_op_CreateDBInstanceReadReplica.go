@@ -180,7 +180,7 @@ type CreateDBInstanceReadReplicaInput struct {
 	// Publishing Database Logs to Amazon CloudWatch Logs
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
 	// in the Amazon RDS User Guide.
-	EnableCloudwatchLogsExports []*string
+	EnableCloudwatchLogsExports []string
 
 	// A value that indicates whether to enable mapping of AWS Identity and Access
 	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
@@ -307,7 +307,7 @@ type CreateDBInstanceReadReplicaInput struct {
 
 	// The number of CPU cores and the number of threads per core for the DB instance
 	// class of the DB instance.
-	ProcessorFeatures []*types.ProcessorFeature
+	ProcessorFeatures []types.ProcessorFeature
 
 	// A value that indicates whether the DB instance is publicly accessible. When the
 	// DB instance is publicly accessible, its DNS endpoint resolves to the private IP
@@ -345,7 +345,7 @@ type CreateDBInstanceReadReplicaInput struct {
 	// A list of tags. For more information, see Tagging Amazon RDS Resources
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
 	// the Amazon RDS User Guide.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// A value that indicates whether the DB instance class of the DB instance uses its
 	// default processor features.
@@ -353,7 +353,7 @@ type CreateDBInstanceReadReplicaInput struct {
 
 	// A list of EC2 VPC security groups to associate with the read replica. Default:
 	// The default EC2 VPC security group for the DB subnet group's VPC.
-	VpcSecurityGroupIds []*string
+	VpcSecurityGroupIds []string
 
 	// Used by the SDK's PresignURL autofill customization to specify the region the of
 	// the client's request.

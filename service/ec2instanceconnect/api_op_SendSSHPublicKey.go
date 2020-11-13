@@ -58,7 +58,7 @@ type SendSSHPublicKeyOutput struct {
 	RequestId *string
 
 	// Indicates request success.
-	Success *bool
+	Success bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -45,7 +45,7 @@ type DescribeLifecycleConfigurationOutput struct {
 
 	// An array of lifecycle management policies. Currently, EFS supports a maximum of
 	// one policy per file system.
-	LifecyclePolicies []*types.LifecyclePolicy
+	LifecyclePolicies []types.LifecyclePolicy
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

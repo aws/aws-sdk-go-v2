@@ -100,13 +100,13 @@ func validateEvent(v *types.Event) error {
 	}
 }
 
-func validateEventList(v []*types.Event) error {
+func validateEventList(v []types.Event) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EventList"}
 	for i := range v {
-		if err := validateEvent(v[i]); err != nil {
+		if err := validateEvent(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -132,13 +132,13 @@ func validateItem(v *types.Item) error {
 	}
 }
 
-func validateItemList(v []*types.Item) error {
+func validateItemList(v []types.Item) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ItemList"}
 	for i := range v {
-		if err := validateItem(v[i]); err != nil {
+		if err := validateItem(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -164,13 +164,13 @@ func validateUser(v *types.User) error {
 	}
 }
 
-func validateUserList(v []*types.User) error {
+func validateUserList(v []types.User) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UserList"}
 	for i := range v {
-		if err := validateUser(v[i]); err != nil {
+		if err := validateUser(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

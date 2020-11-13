@@ -63,7 +63,7 @@ type ListCreatedArtifactsOutput struct {
 
 	// List of created artifacts up to the maximum number of results specified in the
 	// request.
-	CreatedArtifactList []*types.CreatedArtifact
+	CreatedArtifactList []types.CreatedArtifact
 
 	// If there are more created artifacts than the max result, return the next token
 	// to be passed to the next call as a bookmark of where to start from.

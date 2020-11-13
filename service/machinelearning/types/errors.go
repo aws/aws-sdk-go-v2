@@ -13,7 +13,7 @@ import (
 type IdempotentParameterMismatchException struct {
 	Message *string
 
-	Code *int32
+	Code int32
 }
 
 func (e *IdempotentParameterMismatchException) Error() string {
@@ -36,7 +36,7 @@ func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 type InternalServerException struct {
 	Message *string
 
-	Code *int32
+	Code int32
 }
 
 func (e *InternalServerException) Error() string {
@@ -55,7 +55,7 @@ func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy
 type InvalidInputException struct {
 	Message *string
 
-	Code *int32
+	Code int32
 }
 
 func (e *InvalidInputException) Error() string {
@@ -92,7 +92,7 @@ func (e *InvalidTagException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 type LimitExceededException struct {
 	Message *string
 
-	Code *int32
+	Code int32
 }
 
 func (e *LimitExceededException) Error() string {
@@ -128,7 +128,7 @@ func (e *PredictorNotMountedException) ErrorFault() smithy.ErrorFault { return s
 type ResourceNotFoundException struct {
 	Message *string
 
-	Code *int32
+	Code int32
 }
 
 func (e *ResourceNotFoundException) Error() string {

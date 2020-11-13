@@ -92,11 +92,11 @@ type CreateTopicInput struct {
 	// attributes of the message). (Optional) To override the generated value, you can
 	// specify a value for the the MessageDeduplicationId parameter for the Publish
 	// action.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// The list of tags to add to a new topic. To be able to tag a topic on creation,
 	// you must have the sns:CreateTopic and sns:TagResource permissions.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // Response from CreateTopic action.

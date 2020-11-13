@@ -38,7 +38,7 @@ type ListCandidatesForAutoMLJobInput struct {
 	CandidateNameEquals *string
 
 	// List the job's Candidates up to a specified limit.
-	MaxResults *int32
+	MaxResults int32
 
 	// If the previous response was truncated, you receive this token. Use it in your
 	// next request to receive the next set of results.
@@ -59,7 +59,7 @@ type ListCandidatesForAutoMLJobOutput struct {
 	// Summaries about the Candidates.
 	//
 	// This member is required.
-	Candidates []*types.AutoMLCandidate
+	Candidates []types.AutoMLCandidate
 
 	// If the previous response was truncated, you receive this token. Use it in your
 	// next request to receive the next set of results.

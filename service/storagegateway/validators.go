@@ -1834,13 +1834,13 @@ func validateAutomaticTapeCreationRule(v *types.AutomaticTapeCreationRule) error
 	}
 }
 
-func validateAutomaticTapeCreationRules(v []*types.AutomaticTapeCreationRule) error {
+func validateAutomaticTapeCreationRules(v []types.AutomaticTapeCreationRule) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AutomaticTapeCreationRules"}
 	for i := range v {
-		if err := validateAutomaticTapeCreationRule(v[i]); err != nil {
+		if err := validateAutomaticTapeCreationRule(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1869,13 +1869,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTags(v []*types.Tag) error {
+func validateTags(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tags"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2088,9 +2088,6 @@ func validateOpCreateCachediSCSIVolumeInput(v *CreateCachediSCSIVolumeInput) err
 	if v.GatewayARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
 	}
-	if v.VolumeSizeInBytes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VolumeSizeInBytes"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2209,9 +2206,6 @@ func validateOpCreateStorediSCSIVolumeInput(v *CreateStorediSCSIVolumeInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "CreateStorediSCSIVolumeInput"}
 	if v.NetworkInterfaceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NetworkInterfaceId"))
-	}
-	if v.PreserveExistingData == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PreserveExistingData"))
 	}
 	if v.GatewayARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))

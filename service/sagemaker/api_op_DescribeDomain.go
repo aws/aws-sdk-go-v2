@@ -86,7 +86,7 @@ type DescribeDomainOutput struct {
 	Status types.DomainStatus
 
 	// The VPC subnets that Studio uses for communication.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// The domain's URL.
 	Url *string

@@ -78,7 +78,7 @@ type CreateDBParameterGroupInput struct {
 	Description *string
 
 	// Tags to assign to the DB parameter group.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateDBParameterGroupOutput struct {

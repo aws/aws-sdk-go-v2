@@ -63,7 +63,7 @@ type ListVirtualNodesOutput struct {
 	// The list of existing virtual nodes for the specified service mesh.
 	//
 	// This member is required.
-	VirtualNodes []*types.VirtualNodeRef
+	VirtualNodes []types.VirtualNodeRef
 
 	// The nextToken value to include in a future ListVirtualNodes request. When the
 	// results of a ListVirtualNodes request exceed limit, you can use this value to

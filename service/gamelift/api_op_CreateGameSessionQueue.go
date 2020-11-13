@@ -77,7 +77,7 @@ type CreateGameSessionQueueInput struct {
 	// A list of fleets that can be used to fulfill game session placement requests in
 	// the queue. Fleets are identified by either a fleet ARN or a fleet alias ARN.
 	// Destinations are listed in default preference order.
-	Destinations []*types.GameSessionQueueDestination
+	Destinations []types.GameSessionQueueDestination
 
 	// A collection of latency policies to apply when processing game sessions
 	// placement requests with player latency information. Multiple policies are
@@ -89,7 +89,7 @@ type CreateGameSessionQueueInput struct {
 	// policy for the remainder of the placement. A player latency policy must set a
 	// value for MaximumIndividualPlayerLatencyMilliseconds. If none is set, this API
 	// request fails.
-	PlayerLatencyPolicies []*types.PlayerLatencyPolicy
+	PlayerLatencyPolicies []types.PlayerLatencyPolicy
 
 	// A list of labels to assign to the new game session queue resource. Tags are
 	// developer-defined key-value pairs. Tagging AWS resources are useful for resource
@@ -100,7 +100,7 @@ type CreateGameSessionQueueInput struct {
 	// UntagResource, and ListTagsForResource to add, remove, and view tags. The
 	// maximum tag limit may be lower than stated. See the AWS General Reference for
 	// actual tagging limits.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The maximum time, in seconds, that a new game session placement request remains
 	// in the queue. When a request exceeds this time, the game session placement

@@ -46,7 +46,7 @@ type TagResourceInput struct {
 	// The list of key-value pairs to associate with the canary.
 	//
 	// This member is required.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type TagResourceOutput struct {

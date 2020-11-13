@@ -45,7 +45,7 @@ type ChangeSetSummaryListItem struct {
 	// This object is a list of entity IDs (string) that are a part of a change set.
 	// The entity ID list is a maximum of 20 entities. It must contain at least one
 	// entity.
-	EntityIdList []*string
+	EntityIdList []string
 
 	// Returned if the change set is in FAILED status. Can be either CLIENT_ERROR,
 	// which means that there are issues with the request (see the ErrorDetailList of
@@ -76,7 +76,7 @@ type ChangeSummary struct {
 	Entity *Entity
 
 	// An array of ErrorDetail objects associated with the change.
-	ErrorDetailList []*ErrorDetail
+	ErrorDetailList []ErrorDetail
 }
 
 // A product entity contains data that describes your product, its supported
@@ -164,7 +164,7 @@ type Filter struct {
 	// * AfterEndTime
 	// - The supported ValueList is a list of all change sets that ended after the
 	// filter value.
-	ValueList []*string
+	ValueList []string
 }
 
 // An object that contains two attributes, SortBy and SortOrder.

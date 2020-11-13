@@ -1324,13 +1324,13 @@ func validateAccountDetail(v *types.AccountDetail) error {
 	}
 }
 
-func validateAccountDetails(v []*types.AccountDetail) error {
+func validateAccountDetails(v []types.AccountDetail) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AccountDetails"}
 	for i := range v {
-		if err := validateAccountDetail(v[i]); err != nil {
+		if err := validateAccountDetail(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1380,9 +1380,6 @@ func validateOrganizationS3LogsConfiguration(v *types.OrganizationS3LogsConfigur
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "OrganizationS3LogsConfiguration"}
-	if v.AutoEnable == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AutoEnable"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1395,9 +1392,6 @@ func validateS3LogsConfiguration(v *types.S3LogsConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "S3LogsConfiguration"}
-	if v.Enable == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Enable"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1469,9 +1463,6 @@ func validateOpCreateDetectorInput(v *CreateDetectorInput) error {
 			invalidParams.AddNested("DataSources", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Enable == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Enable"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1513,9 +1504,6 @@ func validateOpCreateIPSetInput(v *CreateIPSetInput) error {
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.Activate == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Activate"))
 	}
 	if len(v.Format) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Format"))
@@ -1595,9 +1583,6 @@ func validateOpCreateThreatIntelSetInput(v *CreateThreatIntelSetInput) error {
 	}
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
-	}
-	if v.Activate == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Activate"))
 	}
 	if v.Location == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Location"))
@@ -2346,9 +2331,6 @@ func validateOpUpdateOrganizationConfigurationInput(v *UpdateOrganizationConfigu
 		if err := validateOrganizationDataSourceConfigurations(v.DataSources); err != nil {
 			invalidParams.AddNested("DataSources", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.AutoEnable == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AutoEnable"))
 	}
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))

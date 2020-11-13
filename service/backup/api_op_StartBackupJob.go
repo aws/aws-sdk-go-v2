@@ -55,7 +55,7 @@ type StartBackupJobInput struct {
 	// "WindowsVSS”:“enabled" to enable WindowsVSS backup option and create a VSS
 	// Windows backup. Set to “WindowsVSS”:”disabled” to create a regular backup. The
 	// WindowsVSS option is not enabled by default.
-	BackupOptions map[string]*string
+	BackupOptions map[string]string
 
 	// A value in minutes after a backup job is successfully started before it must be
 	// completed or it will be canceled by AWS Backup. This value is optional.
@@ -76,7 +76,7 @@ type StartBackupJobInput struct {
 
 	// To help organize your resources, you can assign your own metadata to the
 	// resources that you create. Each tag is a key-value pair.
-	RecoveryPointTags map[string]*string
+	RecoveryPointTags map[string]string
 
 	// A value in minutes after a backup is scheduled before a job will be canceled if
 	// it doesn't start successfully. This value is optional.

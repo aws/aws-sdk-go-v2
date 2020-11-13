@@ -55,7 +55,7 @@ type CreateTrialInput struct {
 
 	// A list of tags to associate with the trial. You can use Search API to search on
 	// the tags.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateTrialOutput struct {

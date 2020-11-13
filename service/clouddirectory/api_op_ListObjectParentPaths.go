@@ -63,7 +63,7 @@ type ListObjectParentPathsOutput struct {
 
 	// Returns the path to the ObjectIdentifiers that are associated with the
 	// directory.
-	PathToObjectIdentifiersList []*types.PathToObjectIdentifiers
+	PathToObjectIdentifiersList []types.PathToObjectIdentifiers
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -54,7 +54,7 @@ type TagResourceInput struct {
 	// The list of key-value pairs to associate with the alarm.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type TagResourceOutput struct {

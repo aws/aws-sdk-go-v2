@@ -39,17 +39,17 @@ type ImportApiKeysInput struct {
 
 	// A query parameter to indicate whether to rollback ApiKey importation (true) or
 	// not (false) when error is encountered.
-	FailOnWarnings *bool
+	FailOnWarnings bool
 }
 
 // The identifier of an ApiKey used in a UsagePlan.
 type ImportApiKeysOutput struct {
 
 	// A list of all the ApiKey identifiers.
-	Ids []*string
+	Ids []string
 
 	// A list of warning messages.
-	Warnings []*string
+	Warnings []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

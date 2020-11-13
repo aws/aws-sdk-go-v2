@@ -43,10 +43,10 @@ type UpdateDomainAssociationInput struct {
 	// Describes the settings for the subdomain.
 	//
 	// This member is required.
-	SubDomainSettings []*types.SubDomainSetting
+	SubDomainSettings []types.SubDomainSetting
 
 	// Sets the branch patterns for automatic subdomain creation.
-	AutoSubDomainCreationPatterns []*string
+	AutoSubDomainCreationPatterns []string
 
 	// The required AWS Identity and Access Management (IAM) service role for the
 	// Amazon Resource Name (ARN) for automatically creating subdomains.

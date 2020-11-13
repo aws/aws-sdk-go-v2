@@ -60,7 +60,7 @@ type Action struct {
 	// A list of subscribers.
 	//
 	// This member is required.
-	Subscribers []*Subscriber
+	Subscribers []Subscriber
 }
 
 // The historical records for a budget action.
@@ -113,7 +113,7 @@ type ActionThreshold struct {
 	// The threshold of a notification.
 	//
 	// This member is required.
-	ActionThresholdValue *float64
+	ActionThresholdValue float64
 }
 
 // Represents the output of the CreateBudget operation. The content consists of the
@@ -165,7 +165,7 @@ type Budget struct {
 	// * Amazon ElastiCache
 	//
 	// * Amazon Elasticsearch Service
-	CostFilters map[string][]*string
+	CostFilters map[string][]string
 
 	// The types of costs that are included in this COST budget. USAGE, RI_UTILIZATION,
 	// RI_COVERAGE, SAVINGS_PLANS_UTILIZATION, and SAVINGS_PLANS_COVERAGE budgets do
@@ -195,7 +195,7 @@ type Budget struct {
 	// This only applies to budgets created with PlannedBudgetLimits. Budgets created
 	// without PlannedBudgetLimits will only contain BudgetLimit, and no
 	// PlannedBudgetLimits.
-	PlannedBudgetLimits map[string]*Spend
+	PlannedBudgetLimits map[string]Spend
 
 	// The period of time that is covered by a budget. The period has a start date and
 	// an end date. The start date must come before the end date. The end date must
@@ -241,10 +241,10 @@ type BudgetPerformanceHistory struct {
 
 	// A list of amounts of cost or usage that you created budgets for, compared to
 	// your actual costs or usage.
-	BudgetedAndActualAmountsList []*BudgetedAndActualAmounts
+	BudgetedAndActualAmountsList []BudgetedAndActualAmounts
 
 	// The history of the cost filters for a budget during the specified time period.
-	CostFilters map[string][]*string
+	CostFilters map[string][]string
 
 	// The history of the cost types for a budget during the specified time period.
 	CostTypes *CostTypes
@@ -335,13 +335,13 @@ type IamActionDefinition struct {
 	PolicyArn *string
 
 	// A list of groups to be attached. There must be at least one group.
-	Groups []*string
+	Groups []string
 
 	// A list of roles to be attached. There must be at least one role.
-	Roles []*string
+	Roles []string
 
 	// A list of users to be attached. There must be at least one user.
-	Users []*string
+	Users []string
 }
 
 // A notification that is associated with a budget. A budget can have up to ten
@@ -379,7 +379,7 @@ type Notification struct {
 	// the budgeted amount.
 	//
 	// This member is required.
-	Threshold *float64
+	Threshold float64
 
 	// Whether this notification is in alarm. If a budget notification is in the ALARM
 	// state, you have passed the set threshold for the budget.
@@ -406,7 +406,7 @@ type NotificationWithSubscribers struct {
 	// A list of subscribers who are subscribed to this notification.
 	//
 	// This member is required.
-	Subscribers []*Subscriber
+	Subscribers []Subscriber
 }
 
 // The service control policies (SCP) action definition details.
@@ -420,7 +420,7 @@ type ScpActionDefinition struct {
 	// A list of target IDs.
 	//
 	// This member is required.
-	TargetIds []*string
+	TargetIds []string
 }
 
 // The amount of cost or usage that is measured for a budget. For example, a Spend
@@ -456,7 +456,7 @@ type SsmActionDefinition struct {
 	// The EC2 and RDS instance IDs.
 	//
 	// This member is required.
-	InstanceIds []*string
+	InstanceIds []string
 
 	// The Region to run the SSM document.
 	//

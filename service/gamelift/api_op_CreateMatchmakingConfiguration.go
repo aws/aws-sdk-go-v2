@@ -82,7 +82,7 @@ type CreateMatchmakingConfigurationInput struct {
 	// configuration. Queues can be located in any Region.
 	//
 	// This member is required.
-	GameSessionQueueArns []*string
+	GameSessionQueueArns []string
 
 	// A unique identifier for a matchmaking configuration. This name is used to
 	// identify the configuration associated with a matchmaking request or ticket.
@@ -136,7 +136,7 @@ type CreateMatchmakingConfigurationInput struct {
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
 	// This information is added to the new GameSession object that is created for a
 	// successful match.
-	GameProperties []*types.GameProperty
+	GameProperties []types.GameProperty
 
 	// A set of custom game session properties, formatted as a single string value.
 	// This data is passed to a game server process in the GameSession object with a
@@ -158,7 +158,7 @@ type CreateMatchmakingConfigurationInput struct {
 	// UntagResource, and ListTagsForResource to add, remove, and view tags. The
 	// maximum tag limit may be lower than stated. See the AWS General Reference for
 	// actual tagging limits.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // Represents the returned data in response to a request operation.

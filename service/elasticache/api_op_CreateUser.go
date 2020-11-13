@@ -56,7 +56,7 @@ type CreateUserInput struct {
 
 	// Passwords used for this user account. You can create up to two passwords for
 	// each user.
-	Passwords []*string
+	Passwords []string
 }
 
 type CreateUserOutput struct {
@@ -77,7 +77,7 @@ type CreateUserOutput struct {
 	Status *string
 
 	// Returns a list of the user group IDs the user belongs to.
-	UserGroupIds []*string
+	UserGroupIds []string
 
 	// The ID of the user.
 	UserId *string

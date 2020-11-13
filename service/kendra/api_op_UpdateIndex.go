@@ -44,7 +44,7 @@ type UpdateIndexInput struct {
 	Description *string
 
 	// The document metadata to update.
-	DocumentMetadataConfigurationUpdates []*types.DocumentMetadataConfiguration
+	DocumentMetadataConfigurationUpdates []types.DocumentMetadataConfiguration
 
 	// The name of the index to update.
 	Name *string

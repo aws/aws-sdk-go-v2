@@ -48,16 +48,16 @@ type DescribePortfolioInput struct {
 type DescribePortfolioOutput struct {
 
 	// Information about the associated budgets.
-	Budgets []*types.BudgetDetail
+	Budgets []types.BudgetDetail
 
 	// Information about the portfolio.
 	PortfolioDetail *types.PortfolioDetail
 
 	// Information about the TagOptions associated with the portfolio.
-	TagOptions []*types.TagOptionDetail
+	TagOptions []types.TagOptionDetail
 
 	// Information about the tags associated with the portfolio.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

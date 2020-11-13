@@ -61,12 +61,12 @@ type GetSessionOutput struct {
 	// session, the recentIntentSummaryView operation contains information about the
 	// last three intents used. If you set the checkpointLabelFilter parameter in the
 	// request, the array contains only the intents with the specified label.
-	RecentIntentSummaryView []*types.IntentSummary
+	RecentIntentSummaryView []types.IntentSummary
 
 	// Map of key/value pairs representing the session-specific context information. It
 	// contains application information passed between Amazon Lex and a client
 	// application.
-	SessionAttributes map[string]*string
+	SessionAttributes map[string]string
 
 	// A unique identifier for the session.
 	SessionId *string

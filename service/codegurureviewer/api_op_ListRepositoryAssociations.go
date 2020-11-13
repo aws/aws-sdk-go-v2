@@ -50,7 +50,7 @@ type ListRepositoryAssociationsInput struct {
 	MaxResults *int32
 
 	// List of repository names to use as a filter.
-	Names []*string
+	Names []string
 
 	// The nextToken value returned from a previous paginated
 	// ListRepositoryAssociations request where maxResults was used and the results
@@ -64,7 +64,7 @@ type ListRepositoryAssociationsInput struct {
 	// CodeCommit account that was used to associate the repository. For other
 	// repository source providers, such as Bitbucket and GitHub Enterprise Server,
 	// this is name of the account that was used to associate the repository.
-	Owners []*string
+	Owners []string
 
 	// List of provider types to use as a filter.
 	ProviderTypes []types.ProviderType
@@ -105,7 +105,7 @@ type ListRepositoryAssociationsOutput struct {
 	NextToken *string
 
 	// A list of repository associations that meet the criteria of the request.
-	RepositoryAssociationSummaries []*types.RepositoryAssociationSummary
+	RepositoryAssociationSummaries []types.RepositoryAssociationSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -37,7 +37,7 @@ type UntagResourceInput struct {
 	// The key for the tag to add.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 // The response to the request.

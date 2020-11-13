@@ -50,7 +50,7 @@ type GetWorkflowRunsOutput struct {
 	NextToken *string
 
 	// A list of workflow run metadata objects.
-	Runs []*types.WorkflowRun
+	Runs []types.WorkflowRun
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -43,7 +43,7 @@ type TagLogGroupInput struct {
 	// The key-value pairs to use for the tags.
 	//
 	// This member is required.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type TagLogGroupOutput struct {

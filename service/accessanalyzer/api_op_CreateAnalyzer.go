@@ -43,13 +43,13 @@ type CreateAnalyzerInput struct {
 
 	// Specifies the archive rules to add for the analyzer. Archive rules automatically
 	// archive findings that meet the criteria you define for the rule.
-	ArchiveRules []*types.InlineArchiveRule
+	ArchiveRules []types.InlineArchiveRule
 
 	// A client token.
 	ClientToken *string
 
 	// The tags to apply to the analyzer.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // The response to the request to create an analyzer.

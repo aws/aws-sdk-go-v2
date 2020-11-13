@@ -67,7 +67,7 @@ type ListQueryLoggingConfigsOutput struct {
 	// current AWS account.
 	//
 	// This member is required.
-	QueryLoggingConfigs []*types.QueryLoggingConfig
+	QueryLoggingConfigs []types.QueryLoggingConfig
 
 	// If a response includes the last of the query logging configurations that are
 	// associated with the current AWS account, NextToken doesn't appear in the

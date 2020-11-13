@@ -61,7 +61,7 @@ type ListModelsOutput struct {
 	// An array of ModelSummary objects, each of which lists a model.
 	//
 	// This member is required.
-	Models []*types.ModelSummary
+	Models []types.ModelSummary
 
 	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
 	// the next set of models, use it in the subsequent request.

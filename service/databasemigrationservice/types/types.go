@@ -14,10 +14,10 @@ type AccountQuota struct {
 	AccountQuotaName *string
 
 	// The maximum allowed value for the quota.
-	Max *int64
+	Max int64
 
 	// The amount currently used toward the quota maximum.
-	Used *int64
+	Used int64
 }
 
 // The name of an Availability Zone for use during database migration.
@@ -354,7 +354,7 @@ type Event struct {
 	Date *time.Time
 
 	// The event categories available for the specified source type.
-	EventCategories []*string
+	EventCategories []string
 
 	// The event message.
 	Message *string
@@ -375,7 +375,7 @@ type Event struct {
 type EventCategoryGroup struct {
 
 	// A list of event categories from a source type that you've chosen.
-	EventCategories []*string
+	EventCategories []string
 
 	// The type of AWS DMS resource that generates events. Valid values:
 	// replication-instance | replication-server | security-group | replication-task
@@ -394,16 +394,16 @@ type EventSubscription struct {
 	CustomerAwsId *string
 
 	// Boolean value that indicates if the event subscription is enabled.
-	Enabled *bool
+	Enabled bool
 
 	// A lists of event categories.
-	EventCategoriesList []*string
+	EventCategoriesList []string
 
 	// The topic ARN of the AWS DMS event notification subscription.
 	SnsTopicArn *string
 
 	// A list of source Ids for the event subscription.
-	SourceIdsList []*string
+	SourceIdsList []string
 
 	// The type of AWS DMS resource that generates events. Valid values:
 	// replication-instance | replication-server | security-group | replication-task
@@ -435,7 +435,7 @@ type Filter struct {
 	// returned results.
 	//
 	// This member is required.
-	Values []*string
+	Values []string
 }
 
 // Provides information that defines an IBM Db2 LUW endpoint.
@@ -951,26 +951,26 @@ type OracleSettings struct {
 type OrderableReplicationInstance struct {
 
 	// List of Availability Zones for this replication instance.
-	AvailabilityZones []*string
+	AvailabilityZones []string
 
 	// The default amount of storage (in gigabytes) that is allocated for the
 	// replication instance.
-	DefaultAllocatedStorage *int32
+	DefaultAllocatedStorage int32
 
 	// The version of the replication engine.
 	EngineVersion *string
 
 	// The amount of storage (in gigabytes) that is allocated for the replication
 	// instance.
-	IncludedAllocatedStorage *int32
+	IncludedAllocatedStorage int32
 
 	// The minimum amount of storage (in gigabytes) that can be allocated for the
 	// replication instance.
-	MaxAllocatedStorage *int32
+	MaxAllocatedStorage int32
 
 	// The minimum amount of storage (in gigabytes) that can be allocated for the
 	// replication instance.
-	MinAllocatedStorage *int32
+	MinAllocatedStorage int32
 
 	// The value returned when the specified EngineVersion of the replication instance
 	// is in Beta or test mode. This indicates some features might not work as
@@ -1255,11 +1255,11 @@ type ReplicationInstance struct {
 
 	// The amount of storage (in gigabytes) that is allocated for the replication
 	// instance.
-	AllocatedStorage *int32
+	AllocatedStorage int32
 
 	// Boolean value indicating if minor version upgrades will be automatically applied
 	// to the instance.
-	AutoMinorVersionUpgrade *bool
+	AutoMinorVersionUpgrade bool
 
 	// The Availability Zone for the instance.
 	AvailabilityZone *string
@@ -1290,7 +1290,7 @@ type ReplicationInstance struct {
 
 	// Specifies whether the replication instance is a Multi-AZ deployment. You can't
 	// set the AvailabilityZone parameter if the Multi-AZ parameter is set to true.
-	MultiAZ *bool
+	MultiAZ bool
 
 	// The pending modification values.
 	PendingModifiedValues *ReplicationPendingModifiedValues
@@ -1302,7 +1302,7 @@ type ReplicationInstance struct {
 	// Specifies the accessibility options for the replication instance. A value of
 	// true represents an instance with a public IP address. A value of false
 	// represents an instance with a private IP address. The default value is true.
-	PubliclyAccessible *bool
+	PubliclyAccessible bool
 
 	// The Amazon Resource Name (ARN) of the replication instance.
 	ReplicationInstanceArn *string
@@ -1333,13 +1333,13 @@ type ReplicationInstance struct {
 	ReplicationInstancePrivateIpAddress *string
 
 	// One or more private IP addresses for the replication instance.
-	ReplicationInstancePrivateIpAddresses []*string
+	ReplicationInstancePrivateIpAddresses []string
 
 	// The public IP address of the replication instance.
 	ReplicationInstancePublicIpAddress *string
 
 	// One or more public IP addresses for the replication instance.
-	ReplicationInstancePublicIpAddresses []*string
+	ReplicationInstancePublicIpAddresses []string
 
 	// The status of the replication instance. The possible return values include:
 	//
@@ -1382,14 +1382,14 @@ type ReplicationInstance struct {
 	SecondaryAvailabilityZone *string
 
 	// The VPC security group for the instance.
-	VpcSecurityGroups []*VpcSecurityGroupMembership
+	VpcSecurityGroups []VpcSecurityGroupMembership
 }
 
 // Contains metadata for a replication instance task log.
 type ReplicationInstanceTaskLog struct {
 
 	// The size, in bytes, of the replication task log.
-	ReplicationInstanceTaskLogSize *int64
+	ReplicationInstanceTaskLogSize int64
 
 	// The Amazon Resource Name (ARN) of the replication task.
 	ReplicationTaskArn *string
@@ -1437,7 +1437,7 @@ type ReplicationSubnetGroup struct {
 	SubnetGroupStatus *string
 
 	// The subnets that are in the subnet group.
-	Subnets []*Subnet
+	Subnets []Subnet
 
 	// The ID of the VPC.
 	VpcId *string
@@ -1650,10 +1650,10 @@ type ReplicationTaskAssessmentRun struct {
 type ReplicationTaskAssessmentRunProgress struct {
 
 	// The number of individual assessments that have completed, successfully or not.
-	IndividualAssessmentCompletedCount *int32
+	IndividualAssessmentCompletedCount int32
 
 	// The number of individual assessments that are specified to run.
-	IndividualAssessmentCount *int32
+	IndividualAssessmentCount int32
 }
 
 // Provides information that describes an individual assessment from a premigration
@@ -1697,7 +1697,7 @@ type ReplicationTaskIndividualAssessment struct {
 type ReplicationTaskStats struct {
 
 	// The elapsed time of the task, in milliseconds.
-	ElapsedTimeMillis *int64
+	ElapsedTimeMillis int64
 
 	// The date the replication task was started either with a fresh start or a target
 	// reload.
@@ -1707,7 +1707,7 @@ type ReplicationTaskStats struct {
 	FullLoadFinishDate *time.Time
 
 	// The percent complete for the full load migration task.
-	FullLoadProgressPercent *int32
+	FullLoadProgressPercent int32
 
 	// The date the replication task full load was started.
 	FullLoadStartDate *time.Time
@@ -1721,23 +1721,23 @@ type ReplicationTaskStats struct {
 	StopDate *time.Time
 
 	// The number of errors that have occurred during this task.
-	TablesErrored *int32
+	TablesErrored int32
 
 	// The number of tables loaded for this task.
-	TablesLoaded *int32
+	TablesLoaded int32
 
 	// The number of tables currently loading for this task.
-	TablesLoading *int32
+	TablesLoading int32
 
 	// The number of tables queued for this task.
-	TablesQueued *int32
+	TablesQueued int32
 }
 
 // Identifies an AWS DMS resource and any pending actions for it.
 type ResourcePendingMaintenanceActions struct {
 
 	// Detailed information about the pending maintenance action.
-	PendingMaintenanceActionDetails []*PendingMaintenanceAction
+	PendingMaintenanceActionDetails []PendingMaintenanceAction
 
 	// The Amazon Resource Name (ARN) of the DMS resource that the pending maintenance
 	// action applies to. For information about creating an ARN, see  Constructing an
@@ -2021,7 +2021,7 @@ type SupportedEndpointType struct {
 	ReplicationInstanceEngineMinimumVersion *string
 
 	// Indicates if Change Data Capture (CDC) is supported.
-	SupportsCDC *bool
+	SupportsCDC bool
 }
 
 // Provides information that defines a SAP ASE endpoint.
@@ -2049,34 +2049,34 @@ type TableStatistics struct {
 
 	// The data definition language (DDL) used to build and modify the structure of
 	// your tables.
-	Ddls *int64
+	Ddls int64
 
 	// The number of delete actions performed on a table.
-	Deletes *int64
+	Deletes int64
 
 	// The number of rows that failed conditional checks during the full load operation
 	// (valid only for migrations where DynamoDB is the target).
-	FullLoadCondtnlChkFailedRows *int64
+	FullLoadCondtnlChkFailedRows int64
 
 	// The time when the full load operation completed.
 	FullLoadEndTime *time.Time
 
 	// The number of rows that failed to load during the full load operation (valid
 	// only for migrations where DynamoDB is the target).
-	FullLoadErrorRows *int64
+	FullLoadErrorRows int64
 
 	// A value that indicates if the table was reloaded (true) or loaded as part of a
 	// new full load operation (false).
 	FullLoadReloaded *bool
 
 	// The number of rows added during the full load operation.
-	FullLoadRows *int64
+	FullLoadRows int64
 
 	// The time when the full load operation started.
 	FullLoadStartTime *time.Time
 
 	// The number of insert actions performed on a table.
-	Inserts *int64
+	Inserts int64
 
 	// The last time a table was updated.
 	LastUpdateTime *time.Time
@@ -2093,13 +2093,13 @@ type TableStatistics struct {
 	TableState *string
 
 	// The number of update actions performed on a table.
-	Updates *int64
+	Updates int64
 
 	// The number of records that failed validation.
-	ValidationFailedRecords *int64
+	ValidationFailedRecords int64
 
 	// The number of records that have yet to be validated.
-	ValidationPendingRecords *int64
+	ValidationPendingRecords int64
 
 	// The validation state of the table. This parameter can have the following
 	// values:
@@ -2143,7 +2143,7 @@ type TableStatistics struct {
 	ValidationStateDetails *string
 
 	// The number of records that couldn't be validated.
-	ValidationSuspendedRecords *int64
+	ValidationSuspendedRecords int64
 }
 
 // Provides the name of the schema and table to be reloaded.

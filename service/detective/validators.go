@@ -244,13 +244,13 @@ func validateAccount(v *types.Account) error {
 	}
 }
 
-func validateAccountList(v []*types.Account) error {
+func validateAccountList(v []types.Account) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AccountList"}
 	for i := range v {
-		if err := validateAccount(v[i]); err != nil {
+		if err := validateAccount(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

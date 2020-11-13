@@ -52,7 +52,7 @@ type CreateNotificationInput struct {
 	// notification can have one SNS subscriber and up to 10 email subscribers.
 	//
 	// This member is required.
-	Subscribers []*types.Subscriber
+	Subscribers []types.Subscriber
 }
 
 // Response of CreateNotification

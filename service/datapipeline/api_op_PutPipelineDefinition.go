@@ -57,13 +57,13 @@ type PutPipelineDefinitionInput struct {
 	// pipeline definition.
 	//
 	// This member is required.
-	PipelineObjects []*types.PipelineObject
+	PipelineObjects []types.PipelineObject
 
 	// The parameter objects used with the pipeline.
-	ParameterObjects []*types.ParameterObject
+	ParameterObjects []types.ParameterObject
 
 	// The parameter values used with the pipeline.
-	ParameterValues []*types.ParameterValue
+	ParameterValues []types.ParameterValue
 }
 
 // Contains the output of PutPipelineDefinition.
@@ -74,15 +74,15 @@ type PutPipelineDefinitionOutput struct {
 	// PutPipelineDefinition to commit the corrected pipeline.
 	//
 	// This member is required.
-	Errored *bool
+	Errored bool
 
 	// The validation errors that are associated with the objects defined in
 	// pipelineObjects.
-	ValidationErrors []*types.ValidationError
+	ValidationErrors []types.ValidationError
 
 	// The validation warnings that are associated with the objects defined in
 	// pipelineObjects.
-	ValidationWarnings []*types.ValidationWarning
+	ValidationWarnings []types.ValidationWarning
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

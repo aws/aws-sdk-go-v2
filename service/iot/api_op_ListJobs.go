@@ -63,7 +63,7 @@ type ListJobsInput struct {
 type ListJobsOutput struct {
 
 	// A list of jobs.
-	Jobs []*types.JobSummary
+	Jobs []types.JobSummary
 
 	// The token for the next set of results, or null if there are no additional
 	// results.

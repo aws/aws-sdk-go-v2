@@ -937,13 +937,13 @@ func validateAccessEndpoint(v *types.AccessEndpoint) error {
 	}
 }
 
-func validateAccessEndpointList(v []*types.AccessEndpoint) error {
+func validateAccessEndpointList(v []types.AccessEndpoint) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AccessEndpointList"}
 	for i := range v {
-		if err := validateAccessEndpoint(v[i]); err != nil {
+		if err := validateAccessEndpoint(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -959,9 +959,6 @@ func validateApplicationSettings(v *types.ApplicationSettings) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ApplicationSettings"}
-	if v.Enabled == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1017,13 +1014,13 @@ func validateStorageConnector(v *types.StorageConnector) error {
 	}
 }
 
-func validateStorageConnectorList(v []*types.StorageConnector) error {
+func validateStorageConnectorList(v []types.StorageConnector) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StorageConnectorList"}
 	for i := range v {
-		if err := validateStorageConnector(v[i]); err != nil {
+		if err := validateStorageConnector(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1052,13 +1049,13 @@ func validateUserSetting(v *types.UserSetting) error {
 	}
 }
 
-func validateUserSettingList(v []*types.UserSetting) error {
+func validateUserSettingList(v []types.UserSetting) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UserSettingList"}
 	for i := range v {
-		if err := validateUserSetting(v[i]); err != nil {
+		if err := validateUserSetting(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1090,13 +1087,13 @@ func validateUserStackAssociation(v *types.UserStackAssociation) error {
 	}
 }
 
-func validateUserStackAssociationList(v []*types.UserStackAssociation) error {
+func validateUserStackAssociationList(v []types.UserStackAssociation) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UserStackAssociationList"}
 	for i := range v {
-		if err := validateUserStackAssociation(v[i]); err != nil {
+		if err := validateUserStackAssociation(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

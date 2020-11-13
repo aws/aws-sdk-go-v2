@@ -58,10 +58,10 @@ type DescribeRobotApplicationOutput struct {
 	RobotSoftwareSuite *types.RobotSoftwareSuite
 
 	// The sources of the robot application.
-	Sources []*types.Source
+	Sources []types.Source
 
 	// The list of all tags added to the specified robot application.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The version of the robot application.
 	Version *string

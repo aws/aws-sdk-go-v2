@@ -40,14 +40,14 @@ type DescribeInstanceHealthInput struct {
 	LoadBalancerName *string
 
 	// The IDs of the instances.
-	Instances []*types.Instance
+	Instances []types.Instance
 }
 
 // Contains the output for DescribeInstanceHealth.
 type DescribeInstanceHealthOutput struct {
 
 	// Information about the health of the instances.
-	InstanceStates []*types.InstanceState
+	InstanceStates []types.InstanceState
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

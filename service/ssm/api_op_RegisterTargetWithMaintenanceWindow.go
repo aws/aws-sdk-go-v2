@@ -55,7 +55,7 @@ type RegisterTargetWithMaintenanceWindowInput struct {
 	// in the AWS Systems Manager User Guide.
 	//
 	// This member is required.
-	Targets []*types.Target
+	Targets []types.Target
 
 	// The ID of the maintenance window the target should be registered with.
 	//

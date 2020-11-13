@@ -49,14 +49,14 @@ type CreatePolicyVersionInput struct {
 	// Specifies whether the policy version is set as the default. When this parameter
 	// is true, the new policy version becomes the operative version (that is, the
 	// version that is in effect for the certificates to which the policy is attached).
-	SetAsDefault *bool
+	SetAsDefault bool
 }
 
 // The output of the CreatePolicyVersion operation.
 type CreatePolicyVersionOutput struct {
 
 	// Specifies whether the policy version is the default.
-	IsDefaultVersion *bool
+	IsDefaultVersion bool
 
 	// The policy ARN.
 	PolicyArn *string

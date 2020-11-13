@@ -62,7 +62,7 @@ type AddApplicationInputOutput struct {
 	ApplicationVersionId *int64
 
 	// Describes the application input configuration.
-	InputDescriptions []*types.InputDescription
+	InputDescriptions []types.InputDescription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -59,7 +59,7 @@ type ListFunctionEventInvokeConfigsInput struct {
 type ListFunctionEventInvokeConfigsOutput struct {
 
 	// A list of configurations.
-	FunctionEventInvokeConfigs []*types.FunctionEventInvokeConfig
+	FunctionEventInvokeConfigs []types.FunctionEventInvokeConfig
 
 	// The pagination token that's included if more results are available.
 	NextMarker *string

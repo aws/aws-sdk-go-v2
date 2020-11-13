@@ -37,7 +37,7 @@ type DisassociateS3ResourcesInput struct {
 	// monitored and classified by Amazon Macie Classic.
 	//
 	// This member is required.
-	AssociatedS3Resources []*types.S3Resource
+	AssociatedS3Resources []types.S3Resource
 
 	// The ID of the Amazon Macie Classic member account whose resources you want to
 	// remove from being monitored by Amazon Macie Classic.
@@ -49,7 +49,7 @@ type DisassociateS3ResourcesOutput struct {
 	// S3 resources that couldn't be removed from being monitored and classified by
 	// Amazon Macie Classic. An error code and an error message are provided for each
 	// failed item.
-	FailedS3Resources []*types.FailedS3Resource
+	FailedS3Resources []types.FailedS3Resource
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

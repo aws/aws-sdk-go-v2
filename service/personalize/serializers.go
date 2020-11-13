@@ -1991,17 +1991,13 @@ func (m *awsAwsjson11_serializeOpUpdateCampaign) HandleSerialize(ctx context.Con
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsAwsjson11_serializeDocumentArnList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentArnList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2100,34 +2096,26 @@ func awsAwsjson11_serializeDocumentCategoricalHyperParameterRange(v *types.Categ
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCategoricalHyperParameterRanges(v []*types.CategoricalHyperParameterRange, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentCategoricalHyperParameterRanges(v []types.CategoricalHyperParameterRange, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentCategoricalHyperParameterRange(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentCategoricalHyperParameterRange(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCategoricalValues(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentCategoricalValues(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2136,14 +2124,14 @@ func awsAwsjson11_serializeDocumentContinuousHyperParameterRange(v *types.Contin
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxValue != nil {
+	if v.MaxValue != 0 {
 		ok := object.Key("maxValue")
-		ok.Double(*v.MaxValue)
+		ok.Double(v.MaxValue)
 	}
 
-	if v.MinValue != nil {
+	if v.MinValue != 0 {
 		ok := object.Key("minValue")
-		ok.Double(*v.MinValue)
+		ok.Double(v.MinValue)
 	}
 
 	if v.Name != nil {
@@ -2154,17 +2142,13 @@ func awsAwsjson11_serializeDocumentContinuousHyperParameterRange(v *types.Contin
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentContinuousHyperParameterRanges(v []*types.ContinuousHyperParameterRange, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentContinuousHyperParameterRanges(v []types.ContinuousHyperParameterRange, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentContinuousHyperParameterRange(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentContinuousHyperParameterRange(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -2183,17 +2167,13 @@ func awsAwsjson11_serializeDocumentDataSource(v *types.DataSource, value smithyj
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentFeatureTransformationParameters(v map[string]*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentFeatureTransformationParameters(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
@@ -2293,17 +2273,13 @@ func awsAwsjson11_serializeDocumentHyperParameterRanges(v *types.HyperParameterR
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentHyperParameters(v map[string]*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentHyperParameters(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
@@ -2312,14 +2288,14 @@ func awsAwsjson11_serializeDocumentIntegerHyperParameterRange(v *types.IntegerHy
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxValue != nil {
+	if v.MaxValue != 0 {
 		ok := object.Key("maxValue")
-		ok.Integer(*v.MaxValue)
+		ok.Integer(v.MaxValue)
 	}
 
-	if v.MinValue != nil {
+	if v.MinValue != 0 {
 		ok := object.Key("minValue")
-		ok.Integer(*v.MinValue)
+		ok.Integer(v.MinValue)
 	}
 
 	if v.Name != nil {
@@ -2330,17 +2306,13 @@ func awsAwsjson11_serializeDocumentIntegerHyperParameterRange(v *types.IntegerHy
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentIntegerHyperParameterRanges(v []*types.IntegerHyperParameterRange, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentIntegerHyperParameterRanges(v []types.IntegerHyperParameterRange, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentIntegerHyperParameterRange(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentIntegerHyperParameterRange(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -2639,9 +2611,9 @@ func awsAwsjson11_serializeOpDocumentCreateSolutionInput(v *CreateSolutionInput,
 		ok.String(*v.Name)
 	}
 
-	if v.PerformAutoML != nil {
+	if v.PerformAutoML {
 		ok := object.Key("performAutoML")
-		ok.Boolean(*v.PerformAutoML)
+		ok.Boolean(v.PerformAutoML)
 	}
 
 	if v.PerformHPO != nil {

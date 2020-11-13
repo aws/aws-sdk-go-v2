@@ -13,7 +13,7 @@ type AutomaticTapeCreationPolicyInfo struct {
 	// An automatic tape creation policy consists of a list of automatic tape creation
 	// rules. This returns the rules that determine when and how to automatically
 	// create new tapes.
-	AutomaticTapeCreationRules []*AutomaticTapeCreationRule
+	AutomaticTapeCreationRules []AutomaticTapeCreationRule
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
 	// return a list of gateways for your account and AWS Region.
@@ -59,7 +59,7 @@ type AutomaticTapeCreationRule struct {
 
 	// Set to true to indicate that tapes are to be archived as write-once-read-many
 	// (WORM). Set to false when WORM is not enabled for tapes.
-	Worm *bool
+	Worm bool
 }
 
 // Lists refresh cache information.
@@ -115,7 +115,7 @@ type CachediSCSIVolume struct {
 	VolumeProgress *float64
 
 	// The size, in bytes, of the volume capacity.
-	VolumeSizeInBytes *int64
+	VolumeSizeInBytes int64
 
 	// One of the VolumeStatus values that indicates the state of the storage volume.
 	VolumeStatus *string
@@ -161,13 +161,13 @@ type ChapInfo struct {
 type DeviceiSCSIAttributes struct {
 
 	// Indicates whether mutual CHAP is enabled for the iSCSI target.
-	ChapEnabled *bool
+	ChapEnabled bool
 
 	// The network interface identifier of the VTL device.
 	NetworkInterfaceId *string
 
 	// The port used to communicate with iSCSI VTL device targets.
-	NetworkInterfacePort *int32
+	NetworkInterfacePort int32
 
 	// Specifies the unique Amazon Resource Name (ARN) that encodes the iSCSI qualified
 	// name(iqn) of a tape drive or media changer target.
@@ -187,7 +187,7 @@ type Disk struct {
 	DiskAllocationType *string
 
 	// A list of values that represents attributes of a local disk.
-	DiskAttributeList []*string
+	DiskAttributeList []string
 
 	// The unique device ID or other distinguishing data that identifies a local disk.
 	DiskId *string
@@ -199,7 +199,7 @@ type Disk struct {
 	DiskPath *string
 
 	// The local disk size in bytes.
-	DiskSizeInBytes *int64
+	DiskSizeInBytes int64
 
 	// A value that represents the status of a local disk.
 	DiskStatus *string
@@ -304,7 +304,7 @@ type NFSFileShareInfo struct {
 
 	// The list of clients that are allowed to access the file gateway. The list must
 	// contain either valid IP addresses or valid CIDR blocks.
-	ClientList []*string
+	ClientList []string
 
 	// The default storage class for objects put into an Amazon S3 bucket by the file
 	// gateway. The default value is S3_INTELLIGENT_TIERING. Optional. Valid Values:
@@ -336,7 +336,7 @@ type NFSFileShareInfo struct {
 
 	// Set to true to use Amazon S3 server-side encryption with your own AWS KMS key,
 	// or false to use a key managed by Amazon S3. Optional. Valid Values: true | false
-	KMSEncrypted *bool
+	KMSEncrypted bool
 
 	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for
 	// Amazon S3 server-side encryption. Storage Gateway does not support asymmetric
@@ -396,7 +396,7 @@ type NFSFileShareInfo struct {
 	// A list of up to 50 tags assigned to the NFS file share, sorted alphabetically by
 	// key name. Each tag is a key-value pair. For a gateway with more than 10 tags
 	// assigned, you can view all tags using the ListTagsForResource API operation.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Describes a custom tape pool.
@@ -443,7 +443,7 @@ type SMBFileShareInfo struct {
 	// to the file share. A group must be prefixed with the @ character. Acceptable
 	// formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be
 	// set if Authentication is set to ActiveDirectory.
-	AdminUserList []*string
+	AdminUserList []string
 
 	// The Amazon Resource Name (ARN) of the storage used for the audit logs.
 	AuditDestinationARN *string
@@ -492,11 +492,11 @@ type SMBFileShareInfo struct {
 	// the file share. A group must be prefixed with the @ character. Acceptable
 	// formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be
 	// set if Authentication is set to ActiveDirectory.
-	InvalidUserList []*string
+	InvalidUserList []string
 
 	// Set to true to use Amazon S3 server-side encryption with your own AWS KMS key,
 	// or false to use a key managed by Amazon S3. Optional. Valid Values: true | false
-	KMSEncrypted *bool
+	KMSEncrypted bool
 
 	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for
 	// Amazon S3 server-side encryption. Storage Gateway does not support asymmetric
@@ -546,13 +546,13 @@ type SMBFileShareInfo struct {
 	// A list of up to 50 tags assigned to the SMB file share, sorted alphabetically by
 	// key name. Each tag is a key-value pair. For a gateway with more than 10 tags
 	// assigned, you can view all tags using the ListTagsForResource API operation.
-	Tags []*Tag
+	Tags []Tag
 
 	// A list of users or groups in the Active Directory that are allowed to access the
 	// file share. A group must be prefixed with the @ character. Acceptable formats
 	// include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be set if
 	// Authentication is set to ActiveDirectory.
-	ValidUserList []*string
+	ValidUserList []string
 }
 
 // Provides additional information about an error that was returned by the service.
@@ -563,7 +563,7 @@ type StorageGatewayError struct {
 	ErrorCode ErrorCode
 
 	// Human-readable text that provides detail about the error that occurred.
-	ErrorDetails map[string]*string
+	ErrorDetails map[string]string
 }
 
 // Describes an iSCSI stored volume.
@@ -580,7 +580,7 @@ type StorediSCSIVolume struct {
 
 	// Indicates if when the stored volume was created, existing data on the underlying
 	// local disk was preserved. Valid Values: true | false
-	PreservedExistingData *bool
+	PreservedExistingData bool
 
 	// If the stored volume was created from a snapshot, this field contains the
 	// snapshot ID used, e.g. snap-78e22663. Otherwise, this field is not included.
@@ -617,7 +617,7 @@ type StorediSCSIVolume struct {
 	VolumeProgress *float64
 
 	// The size of the volume in bytes.
-	VolumeSizeInBytes *int64
+	VolumeSizeInBytes int64
 
 	// One of the VolumeStatus values that indicates the state of the storage volume.
 	VolumeStatus *string
@@ -703,7 +703,7 @@ type Tape struct {
 	VTLDevice *string
 
 	// If the tape is archived as write-once-read-many (WORM), this value is true.
-	Worm *bool
+	Worm bool
 }
 
 // Represents a virtual tape that is archived in the virtual tape shelf (VTS).
@@ -756,7 +756,7 @@ type TapeArchive struct {
 	TapeUsedInBytes *int64
 
 	// Set to true if the archived tape is stored as write-once-read-many (WORM).
-	Worm *bool
+	Worm bool
 }
 
 // Describes a virtual tape.
@@ -841,7 +841,7 @@ type VolumeInfo struct {
 
 	// The size of the volume in bytes. Valid Values: 50 to 500 lowercase letters,
 	// numbers, periods (.), and hyphens (-).
-	VolumeSizeInBytes *int64
+	VolumeSizeInBytes int64
 
 	// One of the VolumeType enumeration values describing the type of the volume.
 	VolumeType *string
@@ -851,7 +851,7 @@ type VolumeInfo struct {
 type VolumeiSCSIAttributes struct {
 
 	// Indicates whether mutual CHAP is enabled for the iSCSI target.
-	ChapEnabled *bool
+	ChapEnabled bool
 
 	// The logical disk number.
 	LunNumber *int32
@@ -860,7 +860,7 @@ type VolumeiSCSIAttributes struct {
 	NetworkInterfaceId *string
 
 	// The port used to communicate with iSCSI targets.
-	NetworkInterfacePort *int32
+	NetworkInterfacePort int32
 
 	// The Amazon Resource Name (ARN) of the volume target.
 	TargetARN *string
@@ -876,11 +876,11 @@ type VolumeRecoveryPointInfo struct {
 	VolumeRecoveryPointTime *string
 
 	// The size of the volume in bytes.
-	VolumeSizeInBytes *int64
+	VolumeSizeInBytes int64
 
 	// The size of the data stored on the volume in bytes. This value is not available
 	// for volumes created prior to May 13, 2015, until you store data on the volume.
-	VolumeUsageInBytes *int64
+	VolumeUsageInBytes int64
 }
 
 // Represents a device object associated with a tape gateway.

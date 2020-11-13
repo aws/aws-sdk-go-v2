@@ -33,7 +33,7 @@ type UpdateFlowInput struct {
 	// destination connector.
 	//
 	// This member is required.
-	DestinationFlowConfigList []*types.DestinationFlowConfig
+	DestinationFlowConfigList []types.DestinationFlowConfig
 
 	// The specified name of the flow. Spaces are not allowed. Use underscores (_) or
 	// hyphens (-) only.
@@ -45,7 +45,7 @@ type UpdateFlowInput struct {
 	// flow run.
 	//
 	// This member is required.
-	Tasks []*types.Task
+	Tasks []types.Task
 
 	// The trigger settings that determine how and when the flow runs.
 	//

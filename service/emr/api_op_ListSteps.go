@@ -43,7 +43,7 @@ type ListStepsInput struct {
 	// The filter to limit the step list based on the identifier of the steps. You can
 	// specify a maximum of ten Step IDs. The character constraint applies to the
 	// overall length of the array.
-	StepIds []*string
+	StepIds []string
 
 	// The filter to limit the step list based on certain states.
 	StepStates []types.StepState
@@ -57,7 +57,7 @@ type ListStepsOutput struct {
 	Marker *string
 
 	// The filtered list of steps for the cluster.
-	Steps []*types.StepSummary
+	Steps []types.StepSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

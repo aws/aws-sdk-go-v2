@@ -76,7 +76,7 @@ type DescribeProcessingJobOutput struct {
 	AutoMLJobArn *string
 
 	// The environment variables set in the Docker container.
-	Environment map[string]*string
+	Environment map[string]string
 
 	// An optional string, up to one KB in size, that contains metadata from the
 	// processing container when the processing job exits.
@@ -103,7 +103,7 @@ type DescribeProcessingJobOutput struct {
 	ProcessingEndTime *time.Time
 
 	// The inputs for a processing job.
-	ProcessingInputs []*types.ProcessingInput
+	ProcessingInputs []types.ProcessingInput
 
 	// Output configuration for the processing job.
 	ProcessingOutputConfig *types.ProcessingOutputConfig

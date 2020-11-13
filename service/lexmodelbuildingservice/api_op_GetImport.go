@@ -42,7 +42,7 @@ type GetImportOutput struct {
 	CreatedDate *time.Time
 
 	// A string that describes why an import job failed to complete.
-	FailureReason []*string
+	FailureReason []string
 
 	// The identifier for the specific import job.
 	ImportId *string

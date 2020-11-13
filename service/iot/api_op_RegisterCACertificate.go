@@ -48,19 +48,19 @@ type RegisterCACertificateInput struct {
 
 	// Allows this CA certificate to be used for auto registration of device
 	// certificates.
-	AllowAutoRegistration *bool
+	AllowAutoRegistration bool
 
 	// Information about the registration configuration.
 	RegistrationConfig *types.RegistrationConfig
 
 	// A boolean value that specifies if the CA certificate is set to active.
-	SetAsActive *bool
+	SetAsActive bool
 
 	// Metadata which can be used to manage the CA certificate. For URI Request
 	// parameters use format: ...key1=value1&key2=value2... For the CLI command-line
 	// parameter use format: &&tags "key1=value1&key2=value2..." For the cli-input-json
 	// file use format: "tags": "key1=value1&key2=value2..."
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // The output from the RegisterCACertificateResponse operation.

@@ -37,7 +37,7 @@ type DescribeInstancesInput struct {
 	// An array of instance IDs to be described. If you use this parameter,
 	// DescribeInstances returns a description of the specified instances. Otherwise,
 	// it returns a description of every instance.
-	InstanceIds []*string
+	InstanceIds []string
 
 	// A layer ID. If you use this parameter, DescribeInstances returns descriptions of
 	// the instances associated with the specified layer.
@@ -52,7 +52,7 @@ type DescribeInstancesInput struct {
 type DescribeInstancesOutput struct {
 
 	// An array of Instance objects that describe the instances.
-	Instances []*types.Instance
+	Instances []types.Instance
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

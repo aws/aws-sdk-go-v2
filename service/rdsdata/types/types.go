@@ -16,28 +16,28 @@ func (*ArrayValueMemberArrayValues) isArrayValue() {}
 
 // An array of Boolean values.
 type ArrayValueMemberBooleanValues struct {
-	Value []*bool
+	Value []bool
 }
 
 func (*ArrayValueMemberBooleanValues) isArrayValue() {}
 
 // An array of integers.
 type ArrayValueMemberDoubleValues struct {
-	Value []*float64
+	Value []float64
 }
 
 func (*ArrayValueMemberDoubleValues) isArrayValue() {}
 
 // An array of floating point numbers.
 type ArrayValueMemberLongValues struct {
-	Value []*int64
+	Value []int64
 }
 
 func (*ArrayValueMemberLongValues) isArrayValue() {}
 
 // An array of strings.
 type ArrayValueMemberStringValues struct {
-	Value []*string
+	Value []string
 }
 
 func (*ArrayValueMemberStringValues) isArrayValue() {}
@@ -46,19 +46,19 @@ func (*ArrayValueMemberStringValues) isArrayValue() {}
 type ColumnMetadata struct {
 
 	// The type of the column.
-	ArrayBaseColumnType *int32
+	ArrayBaseColumnType int32
 
 	// A value that indicates whether the column increments automatically.
-	IsAutoIncrement *bool
+	IsAutoIncrement bool
 
 	// A value that indicates whether the column is case-sensitive.
-	IsCaseSensitive *bool
+	IsCaseSensitive bool
 
 	// A value that indicates whether the column contains currency values.
-	IsCurrency *bool
+	IsCurrency bool
 
 	// A value that indicates whether an integer column is signed.
-	IsSigned *bool
+	IsSigned bool
 
 	// The label for the column.
 	Label *string
@@ -67,13 +67,13 @@ type ColumnMetadata struct {
 	Name *string
 
 	// A value that indicates whether the column is nullable.
-	Nullable *int32
+	Nullable int32
 
 	// The precision value of a decimal number column.
-	Precision *int32
+	Precision int32
 
 	// The scale value of a decimal number column.
-	Scale *int32
+	Scale int32
 
 	// The name of the schema that owns the table that includes the column.
 	SchemaName *string
@@ -82,7 +82,7 @@ type ColumnMetadata struct {
 	TableName *string
 
 	// The type of the column.
-	Type *int32
+	Type int32
 
 	// The database-specific data type of the column.
 	TypeName *string
@@ -153,7 +153,7 @@ type Record struct {
 type ResultFrame struct {
 
 	// The records in the result set.
-	Records []*Record
+	Records []Record
 
 	// The result-set metadata in the result set.
 	ResultSetMetadata *ResultSetMetadata
@@ -163,10 +163,10 @@ type ResultFrame struct {
 type ResultSetMetadata struct {
 
 	// The number of columns in the result set.
-	ColumnCount *int64
+	ColumnCount int64
 
 	// The metadata of the columns in the result set.
-	ColumnMetadata []*ColumnMetadata
+	ColumnMetadata []ColumnMetadata
 }
 
 // Options that control how the result set is returned.
@@ -214,7 +214,7 @@ type SqlParameter struct {
 type SqlStatementResult struct {
 
 	// The number of records updated by a SQL statement.
-	NumberOfRecordsUpdated *int64
+	NumberOfRecordsUpdated int64
 
 	// The result set of the SQL statement.
 	ResultFrame *ResultFrame
@@ -304,7 +304,7 @@ func (*ValueMemberStringValue) isValue() {}
 
 // A value for a column of STRUCT data type.
 type ValueMemberStructValue struct {
-	Value *StructValue
+	Value StructValue
 }
 
 func (*ValueMemberStructValue) isValue() {}

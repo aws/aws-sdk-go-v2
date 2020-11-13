@@ -58,7 +58,7 @@ type DescribeNotificationsForBudgetOutput struct {
 	NextToken *string
 
 	// A list of notifications that are associated with a budget.
-	Notifications []*types.Notification
+	Notifications []types.Notification
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

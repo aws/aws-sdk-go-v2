@@ -48,7 +48,7 @@ type App struct {
 	// The environment variables for the Amplify app.
 	//
 	// This member is required.
-	EnvironmentVariables map[string]*string
+	EnvironmentVariables map[string]string
 
 	// The name for the Amplify app.
 	//
@@ -74,7 +74,7 @@ type App struct {
 	AutoBranchCreationConfig *AutoBranchCreationConfig
 
 	// Describes the automated branch creation glob patterns for the Amplify app.
-	AutoBranchCreationPatterns []*string
+	AutoBranchCreationPatterns []string
 
 	// The basic authorization credentials for branches for the Amplify app.
 	BasicAuthCredentials *string
@@ -84,7 +84,7 @@ type App struct {
 	BuildSpec *string
 
 	// Describes the custom redirect and rewrite rules for the Amplify app.
-	CustomRules []*CustomRule
+	CustomRules []CustomRule
 
 	// Enables automated branch creation for the Amplify app.
 	EnableAutoBranchCreation *bool
@@ -101,7 +101,7 @@ type App struct {
 	ProductionBranch *ProductionBranch
 
 	// The tag for the Amplify app.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // Describes an artifact.
@@ -143,7 +143,7 @@ type AutoBranchCreationConfig struct {
 	EnablePullRequestPreview *bool
 
 	// The environment variables for the autocreated branch.
-	EnvironmentVariables map[string]*string
+	EnvironmentVariables map[string]string
 
 	// The framework for the autocreated branch.
 	Framework *string
@@ -214,7 +214,7 @@ type Branch struct {
 	// The custom domains for a branch of an Amplify app.
 	//
 	// This member is required.
-	CustomDomains []*string
+	CustomDomains []string
 
 	// The description for the branch that is part of an Amplify app.
 	//
@@ -249,7 +249,7 @@ type Branch struct {
 	// The environment variables specific to a branch of an Amplify app.
 	//
 	// This member is required.
-	EnvironmentVariables map[string]*string
+	EnvironmentVariables map[string]string
 
 	// The framework for a branch of an Amplify app.
 	//
@@ -277,7 +277,7 @@ type Branch struct {
 	UpdateTime *time.Time
 
 	// A list of custom resources that are linked to this branch.
-	AssociatedResources []*string
+	AssociatedResources []string
 
 	// The Amazon Resource Name (ARN) for a backend environment that is part of an
 	// Amplify app.
@@ -305,7 +305,7 @@ type Branch struct {
 	SourceBranch *string
 
 	// The tag for the branch of an Amplify app.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The thumbnail URL for the branch of an Amplify app.
 	ThumbnailUrl *string
@@ -367,10 +367,10 @@ type DomainAssociation struct {
 	// The subdomains for the domain association.
 	//
 	// This member is required.
-	SubDomains []*SubDomain
+	SubDomains []SubDomain
 
 	// Sets branch patterns for automatic subdomain creation.
-	AutoSubDomainCreationPatterns []*string
+	AutoSubDomainCreationPatterns []string
 
 	// The required AWS Identity and Access Management (IAM) service role for the
 	// Amazon Resource Name (ARN) for automatically creating subdomains.
@@ -386,7 +386,7 @@ type Job struct {
 	// The execution steps for an execution job, for an Amplify app.
 	//
 	// This member is required.
-	Steps []*Step
+	Steps []Step
 
 	// Describes the summary for an execution job for an Amplify app.
 	//
@@ -493,7 +493,7 @@ type Step struct {
 	LogUrl *string
 
 	// The list of screenshot URLs for the execution step, if relevant.
-	Screenshots map[string]*string
+	Screenshots map[string]string
 
 	// The reason for the current step status.
 	StatusReason *string

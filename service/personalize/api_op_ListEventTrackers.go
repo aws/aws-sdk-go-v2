@@ -46,7 +46,7 @@ type ListEventTrackersInput struct {
 type ListEventTrackersOutput struct {
 
 	// A list of event trackers.
-	EventTrackers []*types.EventTrackerSummary
+	EventTrackers []types.EventTrackerSummary
 
 	// A token for getting the next set of event trackers (if they exist).
 	NextToken *string

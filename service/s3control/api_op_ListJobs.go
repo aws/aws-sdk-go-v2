@@ -65,7 +65,7 @@ type ListJobsInput struct {
 	// response. If there are more jobs than this number, the response will include a
 	// pagination token in the NextToken field to enable you to retrieve the next page
 	// of results.
-	MaxResults *int32
+	MaxResults int32
 
 	// A pagination token to request the next page of results. Use the token that
 	// Amazon S3 returned in the NextToken element of the ListJobsResult from the
@@ -76,7 +76,7 @@ type ListJobsInput struct {
 type ListJobsOutput struct {
 
 	// The list of current jobs and jobs that have ended within the last 30 days.
-	Jobs []*types.JobListDescriptor
+	Jobs []types.JobListDescriptor
 
 	// If the List Jobs request produced more than the maximum number of results, you
 	// can pass this value into a subsequent List Jobs request in order to retrieve the

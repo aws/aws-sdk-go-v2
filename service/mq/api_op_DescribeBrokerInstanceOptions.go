@@ -37,7 +37,7 @@ type DescribeBrokerInstanceOptionsInput struct {
 
 	// The maximum number of instance options that Amazon MQ can return per page (20 by
 	// default). This value must be an integer from 5 to 100.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token that specifies the next page of results Amazon MQ should return. To
 	// request the first page, leave nextToken empty.
@@ -50,11 +50,11 @@ type DescribeBrokerInstanceOptionsInput struct {
 type DescribeBrokerInstanceOptionsOutput struct {
 
 	// List of available broker instance options.
-	BrokerInstanceOptions []*types.BrokerInstanceOption
+	BrokerInstanceOptions []types.BrokerInstanceOption
 
 	// Required. The maximum number of instance options that can be returned per page
 	// (20 by default). This value must be an integer from 5 to 100.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token that specifies the next page of results Amazon MQ should return. To
 	// request the first page, leave nextToken empty.

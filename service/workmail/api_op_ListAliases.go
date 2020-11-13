@@ -49,7 +49,7 @@ type ListAliasesInput struct {
 type ListAliasesOutput struct {
 
 	// The entity's paginated aliases.
-	Aliases []*string
+	Aliases []string
 
 	// The token to use to retrieve the next page of results. The value is "null" when
 	// there are no more results to return.

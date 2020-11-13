@@ -102,7 +102,7 @@ type GetBotOutput struct {
 	IdleSessionTTLInSeconds *int32
 
 	// An array of intent objects. For more information, see PutBot.
-	Intents []*types.Intent
+	Intents []types.Intent
 
 	// The date that the bot was updated. When you create a resource, the creation date
 	// and last updated date are the same.
@@ -122,7 +122,7 @@ type GetBotOutput struct {
 	// response. AMAZON.FallbackIntent is inserted if the confidence score for all
 	// intents is below this value. AMAZON.KendraSearchIntent is only inserted if it is
 	// configured for the bot.
-	NluIntentConfidenceThreshold *float64
+	NluIntentConfidenceThreshold float64
 
 	// The status of the bot. When the status is BUILDING Amazon Lex is building the
 	// bot for testing and use. If the status of the bot is READY_BASIC_TESTING, you

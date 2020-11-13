@@ -122,7 +122,7 @@ type CreateCanaryInput struct {
 	// many as 50 tags with a canary. Tags can help you organize and categorize your
 	// resources. You can also use them to scope user permissions, by granting a user
 	// permission to access or change only the resources that have certain tag values.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// If this canary is to test an endpoint in a VPC, this structure contains
 	// information about the subnet and security groups of the VPC endpoint. For more

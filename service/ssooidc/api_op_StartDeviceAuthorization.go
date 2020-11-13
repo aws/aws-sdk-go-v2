@@ -36,9 +36,9 @@ type StartDeviceAuthorizationInput struct {
 type StartDeviceAuthorizationOutput struct {
 	DeviceCode *string
 
-	ExpiresIn *int32
+	ExpiresIn int32
 
-	Interval *int32
+	Interval int32
 
 	UserCode *string
 

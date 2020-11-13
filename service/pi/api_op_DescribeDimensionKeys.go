@@ -88,7 +88,7 @@ type DescribeDimensionKeysInput struct {
 	// parameters.
 	//
 	// * A single filter for any other dimension in this dimension group.
-	Filter map[string]*string
+	Filter map[string]string
 
 	// The maximum number of items to return in the response. If more items exist than
 	// the specified MaxRecords value, a pagination token is included in the response
@@ -138,7 +138,7 @@ type DescribeDimensionKeysOutput struct {
 	AlignedStartTime *time.Time
 
 	// The dimension keys that were requested.
-	Keys []*types.DimensionKeyDescription
+	Keys []types.DimensionKeyDescription
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the token, up to the
@@ -147,7 +147,7 @@ type DescribeDimensionKeysOutput struct {
 
 	// If PartitionBy was present in the request, PartitionKeys contains the breakdown
 	// of dimension keys by the specified partitions.
-	PartitionKeys []*types.ResponsePartitionKey
+	PartitionKeys []types.ResponsePartitionKey
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

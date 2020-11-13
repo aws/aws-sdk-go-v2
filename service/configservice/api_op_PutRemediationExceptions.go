@@ -46,7 +46,7 @@ type PutRemediationExceptionsInput struct {
 	// Config adds 3 exceptions for 3 resource keys.
 	//
 	// This member is required.
-	ResourceKeys []*types.RemediationExceptionResourceKey
+	ResourceKeys []types.RemediationExceptionResourceKey
 
 	// The exception is automatically deleted after the expiration date.
 	ExpirationTime *time.Time
@@ -59,7 +59,7 @@ type PutRemediationExceptionsOutput struct {
 
 	// Returns a list of failed remediation exceptions batch objects. Each object in
 	// the batch consists of a list of failed items and failure messages.
-	FailedBatches []*types.FailedRemediationExceptionBatch
+	FailedBatches []types.FailedRemediationExceptionBatch
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -102,7 +102,7 @@ type RestoreFromClusterSnapshotInput struct {
 	// A list of security groups to be associated with this cluster. Default: The
 	// default cluster security group for Amazon Redshift. Cluster security groups only
 	// apply to clusters outside of VPCs.
-	ClusterSecurityGroups []*string
+	ClusterSecurityGroups []string
 
 	// The name of the subnet group where you want to cluster restored. A snapshot of
 	// cluster in VPC can be restored only in VPC. Therefore, you must provide subnet
@@ -132,7 +132,7 @@ type RestoreFromClusterSnapshotInput struct {
 	// cluster to access other AWS services. You must supply the IAM roles in their
 	// Amazon Resource Name (ARN) format. You can supply up to 10 IAM roles in a single
 	// request. A cluster can have up to 10 IAM roles associated at any time.
-	IamRoles []*string
+	IamRoles []string
 
 	// The AWS Key Management Service (KMS) key ID of the encryption key that you want
 	// to use to encrypt data in the cluster that you restore from a shared snapshot.
@@ -200,7 +200,7 @@ type RestoreFromClusterSnapshotInput struct {
 	// A list of Virtual Private Cloud (VPC) security groups to be associated with the
 	// cluster. Default: The default VPC security group is associated with the cluster.
 	// VPC security groups only apply to clusters in VPCs.
-	VpcSecurityGroupIds []*string
+	VpcSecurityGroupIds []string
 }
 
 type RestoreFromClusterSnapshotOutput struct {

@@ -42,10 +42,10 @@ type UpdateDataSetPermissionsInput struct {
 	DataSetId *string
 
 	// The resource permissions that you want to grant to the dataset.
-	GrantPermissions []*types.ResourcePermission
+	GrantPermissions []types.ResourcePermission
 
 	// The resource permissions that you want to revoke from the dataset.
-	RevokePermissions []*types.ResourcePermission
+	RevokePermissions []types.ResourcePermission
 }
 
 type UpdateDataSetPermissionsOutput struct {
@@ -61,7 +61,7 @@ type UpdateDataSetPermissionsOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

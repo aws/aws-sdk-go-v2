@@ -43,14 +43,14 @@ type StartRemediationExecutionInput struct {
 	// in the list consists of the resource type and resource ID.
 	//
 	// This member is required.
-	ResourceKeys []*types.ResourceKey
+	ResourceKeys []types.ResourceKey
 }
 
 type StartRemediationExecutionOutput struct {
 
 	// For resources that have failed to start execution, the API returns a resource
 	// key object.
-	FailedItems []*types.ResourceKey
+	FailedItems []types.ResourceKey
 
 	// Returns a failure message. For example, the resource is already compliant.
 	FailureMessage *string

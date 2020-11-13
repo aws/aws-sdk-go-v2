@@ -104,7 +104,7 @@ type CreateMLModelInput struct {
 	// specifying a small value, such as 1.0E-08. The value is a double that ranges
 	// from 0 to MAX_DOUBLE. The default is to not use L2 normalization. This parameter
 	// can't be used when L1 is specified. Use this parameter sparingly.
-	Parameters map[string]*string
+	Parameters map[string]string
 
 	// The data recipe for creating the MLModel. You must specify either the recipe or
 	// its URI. If you don't specify a recipe or its URI, Amazon ML creates a default.

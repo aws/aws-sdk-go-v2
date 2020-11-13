@@ -53,7 +53,7 @@ type ListBuildBatchesInput struct {
 type ListBuildBatchesOutput struct {
 
 	// An array of strings that contains the batch build identifiers.
-	Ids []*string
+	Ids []string
 
 	// If there are more items to return, this contains a token that is passed to a
 	// subsequent call to ListBuildBatches to retrieve the next set of items.

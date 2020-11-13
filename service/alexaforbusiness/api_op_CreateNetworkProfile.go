@@ -72,7 +72,7 @@ type CreateNetworkProfileInput struct {
 
 	// The root certificates of your authentication server that is installed on your
 	// devices and used to trust your authentication server during EAP negotiation.
-	TrustAnchors []*string
+	TrustAnchors []string
 }
 
 type CreateNetworkProfileOutput struct {

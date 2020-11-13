@@ -38,7 +38,7 @@ type GetApplicationPolicyInput struct {
 type GetApplicationPolicyOutput struct {
 
 	// An array of policy statements applied to the application.
-	Statements []*types.ApplicationPolicyStatement
+	Statements []types.ApplicationPolicyStatement
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

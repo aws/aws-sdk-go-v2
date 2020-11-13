@@ -37,7 +37,7 @@ type BatchCreatePartitionInput struct {
 	// A list of PartitionInput structures that define the partitions to be created.
 	//
 	// This member is required.
-	PartitionInputList []*types.PartitionInput
+	PartitionInputList []types.PartitionInput
 
 	// The name of the metadata table in which the partition is to be created.
 	//
@@ -52,7 +52,7 @@ type BatchCreatePartitionInput struct {
 type BatchCreatePartitionOutput struct {
 
 	// The errors encountered when trying to create the requested partitions.
-	Errors []*types.PartitionError
+	Errors []types.PartitionError
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

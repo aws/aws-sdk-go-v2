@@ -66,13 +66,10 @@ func awsRestjson1_serializeOpHttpBindingsBulkPublishInput(v *BulkPublishInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.IdentityPoolId == nil {
+	if v.IdentityPoolId == nil || len(*v.IdentityPoolId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityPoolId must not be empty")}
 	}
 	if v.IdentityPoolId != nil {
-		if len(*v.IdentityPoolId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityPoolId must not be empty")}
-		}
 		if err := encoder.SetURI("IdentityPoolId").String(*v.IdentityPoolId); err != nil {
 			return err
 		}
@@ -132,37 +129,28 @@ func awsRestjson1_serializeOpHttpBindingsDeleteDatasetInput(v *DeleteDatasetInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DatasetName == nil {
+	if v.DatasetName == nil || len(*v.DatasetName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member DatasetName must not be empty")}
 	}
 	if v.DatasetName != nil {
-		if len(*v.DatasetName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member DatasetName must not be empty")}
-		}
 		if err := encoder.SetURI("DatasetName").String(*v.DatasetName); err != nil {
 			return err
 		}
 	}
 
-	if v.IdentityId == nil {
+	if v.IdentityId == nil || len(*v.IdentityId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityId must not be empty")}
 	}
 	if v.IdentityId != nil {
-		if len(*v.IdentityId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityId must not be empty")}
-		}
 		if err := encoder.SetURI("IdentityId").String(*v.IdentityId); err != nil {
 			return err
 		}
 	}
 
-	if v.IdentityPoolId == nil {
+	if v.IdentityPoolId == nil || len(*v.IdentityPoolId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityPoolId must not be empty")}
 	}
 	if v.IdentityPoolId != nil {
-		if len(*v.IdentityPoolId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityPoolId must not be empty")}
-		}
 		if err := encoder.SetURI("IdentityPoolId").String(*v.IdentityPoolId); err != nil {
 			return err
 		}
@@ -222,37 +210,28 @@ func awsRestjson1_serializeOpHttpBindingsDescribeDatasetInput(v *DescribeDataset
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DatasetName == nil {
+	if v.DatasetName == nil || len(*v.DatasetName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member DatasetName must not be empty")}
 	}
 	if v.DatasetName != nil {
-		if len(*v.DatasetName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member DatasetName must not be empty")}
-		}
 		if err := encoder.SetURI("DatasetName").String(*v.DatasetName); err != nil {
 			return err
 		}
 	}
 
-	if v.IdentityId == nil {
+	if v.IdentityId == nil || len(*v.IdentityId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityId must not be empty")}
 	}
 	if v.IdentityId != nil {
-		if len(*v.IdentityId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityId must not be empty")}
-		}
 		if err := encoder.SetURI("IdentityId").String(*v.IdentityId); err != nil {
 			return err
 		}
 	}
 
-	if v.IdentityPoolId == nil {
+	if v.IdentityPoolId == nil || len(*v.IdentityPoolId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityPoolId must not be empty")}
 	}
 	if v.IdentityPoolId != nil {
-		if len(*v.IdentityPoolId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityPoolId must not be empty")}
-		}
 		if err := encoder.SetURI("IdentityPoolId").String(*v.IdentityPoolId); err != nil {
 			return err
 		}
@@ -312,13 +291,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeIdentityPoolUsageInput(v *Descr
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.IdentityPoolId == nil {
+	if v.IdentityPoolId == nil || len(*v.IdentityPoolId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityPoolId must not be empty")}
 	}
 	if v.IdentityPoolId != nil {
-		if len(*v.IdentityPoolId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityPoolId must not be empty")}
-		}
 		if err := encoder.SetURI("IdentityPoolId").String(*v.IdentityPoolId); err != nil {
 			return err
 		}
@@ -378,25 +354,19 @@ func awsRestjson1_serializeOpHttpBindingsDescribeIdentityUsageInput(v *DescribeI
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.IdentityId == nil {
+	if v.IdentityId == nil || len(*v.IdentityId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityId must not be empty")}
 	}
 	if v.IdentityId != nil {
-		if len(*v.IdentityId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityId must not be empty")}
-		}
 		if err := encoder.SetURI("IdentityId").String(*v.IdentityId); err != nil {
 			return err
 		}
 	}
 
-	if v.IdentityPoolId == nil {
+	if v.IdentityPoolId == nil || len(*v.IdentityPoolId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityPoolId must not be empty")}
 	}
 	if v.IdentityPoolId != nil {
-		if len(*v.IdentityPoolId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityPoolId must not be empty")}
-		}
 		if err := encoder.SetURI("IdentityPoolId").String(*v.IdentityPoolId); err != nil {
 			return err
 		}
@@ -456,13 +426,10 @@ func awsRestjson1_serializeOpHttpBindingsGetBulkPublishDetailsInput(v *GetBulkPu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.IdentityPoolId == nil {
+	if v.IdentityPoolId == nil || len(*v.IdentityPoolId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityPoolId must not be empty")}
 	}
 	if v.IdentityPoolId != nil {
-		if len(*v.IdentityPoolId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityPoolId must not be empty")}
-		}
 		if err := encoder.SetURI("IdentityPoolId").String(*v.IdentityPoolId); err != nil {
 			return err
 		}
@@ -522,13 +489,10 @@ func awsRestjson1_serializeOpHttpBindingsGetCognitoEventsInput(v *GetCognitoEven
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.IdentityPoolId == nil {
+	if v.IdentityPoolId == nil || len(*v.IdentityPoolId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityPoolId must not be empty")}
 	}
 	if v.IdentityPoolId != nil {
-		if len(*v.IdentityPoolId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityPoolId must not be empty")}
-		}
 		if err := encoder.SetURI("IdentityPoolId").String(*v.IdentityPoolId); err != nil {
 			return err
 		}
@@ -588,13 +552,10 @@ func awsRestjson1_serializeOpHttpBindingsGetIdentityPoolConfigurationInput(v *Ge
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.IdentityPoolId == nil {
+	if v.IdentityPoolId == nil || len(*v.IdentityPoolId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityPoolId must not be empty")}
 	}
 	if v.IdentityPoolId != nil {
-		if len(*v.IdentityPoolId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityPoolId must not be empty")}
-		}
 		if err := encoder.SetURI("IdentityPoolId").String(*v.IdentityPoolId); err != nil {
 			return err
 		}
@@ -654,25 +615,19 @@ func awsRestjson1_serializeOpHttpBindingsListDatasetsInput(v *ListDatasetsInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.IdentityId == nil {
+	if v.IdentityId == nil || len(*v.IdentityId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityId must not be empty")}
 	}
 	if v.IdentityId != nil {
-		if len(*v.IdentityId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityId must not be empty")}
-		}
 		if err := encoder.SetURI("IdentityId").String(*v.IdentityId); err != nil {
 			return err
 		}
 	}
 
-	if v.IdentityPoolId == nil {
+	if v.IdentityPoolId == nil || len(*v.IdentityPoolId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityPoolId must not be empty")}
 	}
 	if v.IdentityPoolId != nil {
-		if len(*v.IdentityPoolId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityPoolId must not be empty")}
-		}
 		if err := encoder.SetURI("IdentityPoolId").String(*v.IdentityPoolId); err != nil {
 			return err
 		}
@@ -740,8 +695,8 @@ func awsRestjson1_serializeOpHttpBindingsListIdentityPoolUsageInput(v *ListIdent
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != nil {
-		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	if v.MaxResults != 0 {
+		encoder.SetQuery("maxResults").Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -802,37 +757,28 @@ func awsRestjson1_serializeOpHttpBindingsListRecordsInput(v *ListRecordsInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DatasetName == nil {
+	if v.DatasetName == nil || len(*v.DatasetName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member DatasetName must not be empty")}
 	}
 	if v.DatasetName != nil {
-		if len(*v.DatasetName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member DatasetName must not be empty")}
-		}
 		if err := encoder.SetURI("DatasetName").String(*v.DatasetName); err != nil {
 			return err
 		}
 	}
 
-	if v.IdentityId == nil {
+	if v.IdentityId == nil || len(*v.IdentityId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityId must not be empty")}
 	}
 	if v.IdentityId != nil {
-		if len(*v.IdentityId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityId must not be empty")}
-		}
 		if err := encoder.SetURI("IdentityId").String(*v.IdentityId); err != nil {
 			return err
 		}
 	}
 
-	if v.IdentityPoolId == nil {
+	if v.IdentityPoolId == nil || len(*v.IdentityPoolId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityPoolId must not be empty")}
 	}
 	if v.IdentityPoolId != nil {
-		if len(*v.IdentityPoolId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityPoolId must not be empty")}
-		}
 		if err := encoder.SetURI("IdentityPoolId").String(*v.IdentityPoolId); err != nil {
 			return err
 		}
@@ -842,8 +788,8 @@ func awsRestjson1_serializeOpHttpBindingsListRecordsInput(v *ListRecordsInput, e
 		encoder.SetQuery("lastSyncCount").Long(*v.LastSyncCount)
 	}
 
-	if v.MaxResults != nil {
-		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	if v.MaxResults != 0 {
+		encoder.SetQuery("maxResults").Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -919,25 +865,19 @@ func awsRestjson1_serializeOpHttpBindingsRegisterDeviceInput(v *RegisterDeviceIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.IdentityId == nil {
+	if v.IdentityId == nil || len(*v.IdentityId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityId must not be empty")}
 	}
 	if v.IdentityId != nil {
-		if len(*v.IdentityId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityId must not be empty")}
-		}
 		if err := encoder.SetURI("IdentityId").String(*v.IdentityId); err != nil {
 			return err
 		}
 	}
 
-	if v.IdentityPoolId == nil {
+	if v.IdentityPoolId == nil || len(*v.IdentityPoolId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityPoolId must not be empty")}
 	}
 	if v.IdentityPoolId != nil {
-		if len(*v.IdentityPoolId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityPoolId must not be empty")}
-		}
 		if err := encoder.SetURI("IdentityPoolId").String(*v.IdentityPoolId); err != nil {
 			return err
 		}
@@ -1025,13 +965,10 @@ func awsRestjson1_serializeOpHttpBindingsSetCognitoEventsInput(v *SetCognitoEven
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.IdentityPoolId == nil {
+	if v.IdentityPoolId == nil || len(*v.IdentityPoolId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityPoolId must not be empty")}
 	}
 	if v.IdentityPoolId != nil {
-		if len(*v.IdentityPoolId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityPoolId must not be empty")}
-		}
 		if err := encoder.SetURI("IdentityPoolId").String(*v.IdentityPoolId); err != nil {
 			return err
 		}
@@ -1116,13 +1053,10 @@ func awsRestjson1_serializeOpHttpBindingsSetIdentityPoolConfigurationInput(v *Se
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.IdentityPoolId == nil {
+	if v.IdentityPoolId == nil || len(*v.IdentityPoolId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityPoolId must not be empty")}
 	}
 	if v.IdentityPoolId != nil {
-		if len(*v.IdentityPoolId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityPoolId must not be empty")}
-		}
 		if err := encoder.SetURI("IdentityPoolId").String(*v.IdentityPoolId); err != nil {
 			return err
 		}
@@ -1203,49 +1137,37 @@ func awsRestjson1_serializeOpHttpBindingsSubscribeToDatasetInput(v *SubscribeToD
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DatasetName == nil {
+	if v.DatasetName == nil || len(*v.DatasetName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member DatasetName must not be empty")}
 	}
 	if v.DatasetName != nil {
-		if len(*v.DatasetName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member DatasetName must not be empty")}
-		}
 		if err := encoder.SetURI("DatasetName").String(*v.DatasetName); err != nil {
 			return err
 		}
 	}
 
-	if v.DeviceId == nil {
+	if v.DeviceId == nil || len(*v.DeviceId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member DeviceId must not be empty")}
 	}
 	if v.DeviceId != nil {
-		if len(*v.DeviceId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member DeviceId must not be empty")}
-		}
 		if err := encoder.SetURI("DeviceId").String(*v.DeviceId); err != nil {
 			return err
 		}
 	}
 
-	if v.IdentityId == nil {
+	if v.IdentityId == nil || len(*v.IdentityId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityId must not be empty")}
 	}
 	if v.IdentityId != nil {
-		if len(*v.IdentityId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityId must not be empty")}
-		}
 		if err := encoder.SetURI("IdentityId").String(*v.IdentityId); err != nil {
 			return err
 		}
 	}
 
-	if v.IdentityPoolId == nil {
+	if v.IdentityPoolId == nil || len(*v.IdentityPoolId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityPoolId must not be empty")}
 	}
 	if v.IdentityPoolId != nil {
-		if len(*v.IdentityPoolId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityPoolId must not be empty")}
-		}
 		if err := encoder.SetURI("IdentityPoolId").String(*v.IdentityPoolId); err != nil {
 			return err
 		}
@@ -1305,49 +1227,37 @@ func awsRestjson1_serializeOpHttpBindingsUnsubscribeFromDatasetInput(v *Unsubscr
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DatasetName == nil {
+	if v.DatasetName == nil || len(*v.DatasetName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member DatasetName must not be empty")}
 	}
 	if v.DatasetName != nil {
-		if len(*v.DatasetName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member DatasetName must not be empty")}
-		}
 		if err := encoder.SetURI("DatasetName").String(*v.DatasetName); err != nil {
 			return err
 		}
 	}
 
-	if v.DeviceId == nil {
+	if v.DeviceId == nil || len(*v.DeviceId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member DeviceId must not be empty")}
 	}
 	if v.DeviceId != nil {
-		if len(*v.DeviceId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member DeviceId must not be empty")}
-		}
 		if err := encoder.SetURI("DeviceId").String(*v.DeviceId); err != nil {
 			return err
 		}
 	}
 
-	if v.IdentityId == nil {
+	if v.IdentityId == nil || len(*v.IdentityId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityId must not be empty")}
 	}
 	if v.IdentityId != nil {
-		if len(*v.IdentityId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityId must not be empty")}
-		}
 		if err := encoder.SetURI("IdentityId").String(*v.IdentityId); err != nil {
 			return err
 		}
 	}
 
-	if v.IdentityPoolId == nil {
+	if v.IdentityPoolId == nil || len(*v.IdentityPoolId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityPoolId must not be empty")}
 	}
 	if v.IdentityPoolId != nil {
-		if len(*v.IdentityPoolId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityPoolId must not be empty")}
-		}
 		if err := encoder.SetURI("IdentityPoolId").String(*v.IdentityPoolId); err != nil {
 			return err
 		}
@@ -1418,44 +1328,33 @@ func awsRestjson1_serializeOpHttpBindingsUpdateRecordsInput(v *UpdateRecordsInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ClientContext != nil {
+	if v.ClientContext != nil && len(*v.ClientContext) > 0 {
 		locationName := "X-Amz-Client-Context"
-		if len(*v.ClientContext) > 0 {
-			encoder.SetHeader(locationName).String(*v.ClientContext)
-		}
+		encoder.SetHeader(locationName).String(*v.ClientContext)
 	}
 
-	if v.DatasetName == nil {
+	if v.DatasetName == nil || len(*v.DatasetName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member DatasetName must not be empty")}
 	}
 	if v.DatasetName != nil {
-		if len(*v.DatasetName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member DatasetName must not be empty")}
-		}
 		if err := encoder.SetURI("DatasetName").String(*v.DatasetName); err != nil {
 			return err
 		}
 	}
 
-	if v.IdentityId == nil {
+	if v.IdentityId == nil || len(*v.IdentityId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityId must not be empty")}
 	}
 	if v.IdentityId != nil {
-		if len(*v.IdentityId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityId must not be empty")}
-		}
 		if err := encoder.SetURI("IdentityId").String(*v.IdentityId); err != nil {
 			return err
 		}
 	}
 
-	if v.IdentityPoolId == nil {
+	if v.IdentityPoolId == nil || len(*v.IdentityPoolId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityPoolId must not be empty")}
 	}
 	if v.IdentityPoolId != nil {
-		if len(*v.IdentityPoolId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member IdentityPoolId must not be empty")}
-		}
 		if err := encoder.SetURI("IdentityPoolId").String(*v.IdentityPoolId); err != nil {
 			return err
 		}
@@ -1488,17 +1387,13 @@ func awsRestjson1_serializeOpDocumentUpdateRecordsInput(v *UpdateRecordsInput, v
 	return nil
 }
 
-func awsRestjson1_serializeDocumentApplicationArnList(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentApplicationArnList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -1530,17 +1425,13 @@ func awsRestjson1_serializeDocumentCognitoStreams(v *types.CognitoStreams, value
 	return nil
 }
 
-func awsRestjson1_serializeDocumentEvents(v map[string]*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentEvents(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
@@ -1596,17 +1487,13 @@ func awsRestjson1_serializeDocumentRecordPatch(v *types.RecordPatch, value smith
 	return nil
 }
 
-func awsRestjson1_serializeDocumentRecordPatchList(v []*types.RecordPatch, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentRecordPatchList(v []types.RecordPatch, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentRecordPatch(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentRecordPatch(&v[i], av); err != nil {
 			return err
 		}
 	}

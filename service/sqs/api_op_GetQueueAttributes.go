@@ -155,7 +155,7 @@ type GetQueueAttributesInput struct {
 type GetQueueAttributesOutput struct {
 
 	// A map of attributes to their respective values.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

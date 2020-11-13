@@ -40,7 +40,7 @@ type ListThemeVersionsInput struct {
 	ThemeId *string
 
 	// The maximum number of results to be returned per request.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
@@ -55,10 +55,10 @@ type ListThemeVersionsOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// A structure containing a list of all the versions of the specified theme.
-	ThemeVersionSummaryList []*types.ThemeVersionSummary
+	ThemeVersionSummaryList []types.ThemeVersionSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

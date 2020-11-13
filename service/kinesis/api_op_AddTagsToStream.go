@@ -43,7 +43,7 @@ type AddTagsToStreamInput struct {
 	// A set of up to 10 key-value pairs to use to create the tags.
 	//
 	// This member is required.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type AddTagsToStreamOutput struct {

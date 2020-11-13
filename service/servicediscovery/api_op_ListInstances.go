@@ -51,7 +51,7 @@ type ListInstancesOutput struct {
 
 	// Summary information about the instances that are associated with the specified
 	// service.
-	Instances []*types.InstanceSummary
+	Instances []types.InstanceSummary
 
 	// If more than MaxResults instances match the specified criteria, you can submit
 	// another ListInstances request to get the next group of results. Specify the

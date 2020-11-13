@@ -32,13 +32,13 @@ type DescribeClientPropertiesInput struct {
 	// The resource identifier, in the form of directory IDs.
 	//
 	// This member is required.
-	ResourceIds []*string
+	ResourceIds []string
 }
 
 type DescribeClientPropertiesOutput struct {
 
 	// Information about the specified Amazon WorkSpaces clients.
-	ClientPropertiesList []*types.ClientPropertiesResult
+	ClientPropertiesList []types.ClientPropertiesResult
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

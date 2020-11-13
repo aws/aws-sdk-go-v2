@@ -82,7 +82,7 @@ type CreateProductInput struct {
 	SupportUrl *string
 
 	// One or more tags.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateProductOutput struct {
@@ -94,7 +94,7 @@ type CreateProductOutput struct {
 	ProvisioningArtifactDetail *types.ProvisioningArtifactDetail
 
 	// Information about the tags associated with the product.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

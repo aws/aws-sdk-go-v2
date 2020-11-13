@@ -93,13 +93,13 @@ func validateMetricQuery(v *types.MetricQuery) error {
 	}
 }
 
-func validateMetricQueryList(v []*types.MetricQuery) error {
+func validateMetricQueryList(v []types.MetricQuery) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MetricQueryList"}
 	for i := range v {
-		if err := validateMetricQuery(v[i]); err != nil {
+		if err := validateMetricQuery(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

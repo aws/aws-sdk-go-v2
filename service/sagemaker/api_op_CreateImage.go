@@ -50,7 +50,7 @@ type CreateImageInput struct {
 	DisplayName *string
 
 	// A list of tags to apply to the image.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateImageOutput struct {

@@ -63,7 +63,7 @@ type CreateIPSetInput struct {
 	// (https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing).
 	//
 	// This member is required.
-	Addresses []*string
+	Addresses []string
 
 	// Specify IPV4 or IPV6.
 	//
@@ -96,7 +96,7 @@ type CreateIPSetInput struct {
 	Description *string
 
 	// An array of key:value pairs to associate with the resource.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateIPSetOutput struct {

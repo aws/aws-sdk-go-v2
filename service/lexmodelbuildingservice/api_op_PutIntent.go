@@ -178,12 +178,12 @@ type PutIntentInput struct {
 	// An array of utterances (strings) that a user might say to signal the intent. For
 	// example, "I want {PizzaSize} pizza", "Order {Quantity} {PizzaSize} pizzas". In
 	// each utterance, a slot name is enclosed in curly braces.
-	SampleUtterances []*string
+	SampleUtterances []string
 
 	// An array of intent slots. At runtime, Amazon Lex elicits required slot values
 	// from the user using prompts defined in the slots. For more information, see
 	// how-it-works.
-	Slots []*types.Slot
+	Slots []types.Slot
 }
 
 type PutIntentOutput struct {
@@ -241,10 +241,10 @@ type PutIntentOutput struct {
 	RejectionStatement *types.Statement
 
 	// An array of sample utterances that are configured for the intent.
-	SampleUtterances []*string
+	SampleUtterances []string
 
 	// An array of intent slots that are configured for the intent.
-	Slots []*types.Slot
+	Slots []types.Slot
 
 	// The version of the intent. For a new intent, the version is always $LATEST.
 	Version *string

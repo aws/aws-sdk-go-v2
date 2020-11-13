@@ -41,7 +41,7 @@ type ListAuditFindingsInput struct {
 	// Boolean flag indicating whether only the suppressed findings or the unsuppressed
 	// findings should be listed. If this parameter isn't provided, the response will
 	// list both suppressed and unsuppressed findings.
-	ListSuppressedFindings *bool
+	ListSuppressedFindings bool
 
 	// The maximum number of results to return at one time. The default is 25.
 	MaxResults *int32
@@ -64,7 +64,7 @@ type ListAuditFindingsInput struct {
 type ListAuditFindingsOutput struct {
 
 	// The findings (results) of the audit.
-	Findings []*types.AuditFinding
+	Findings []types.AuditFinding
 
 	// A token that can be used to retrieve the next set of results, or null if there
 	// are no additional results.

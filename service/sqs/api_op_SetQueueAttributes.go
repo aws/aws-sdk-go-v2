@@ -164,7 +164,7 @@ type SetQueueAttributesInput struct {
 	// copy of the message is delivered.
 	//
 	// This member is required.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// The URL of the Amazon SQS queue whose attributes are set. Queue URLs and names
 	// are case-sensitive.

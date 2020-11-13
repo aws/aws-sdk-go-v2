@@ -59,7 +59,7 @@ type GetBuiltinSlotTypesOutput struct {
 
 	// An array of BuiltInSlotTypeMetadata objects, one entry for each slot type
 	// returned.
-	SlotTypes []*types.BuiltinSlotTypeMetadata
+	SlotTypes []types.BuiltinSlotTypeMetadata
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

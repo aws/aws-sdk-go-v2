@@ -60,7 +60,7 @@ type PutOrganizationConfigRuleInput struct {
 
 	// A comma-separated list of accounts that you want to exclude from an organization
 	// config rule.
-	ExcludedAccounts []*string
+	ExcludedAccounts []string
 
 	// An OrganizationCustomRuleMetadata object.
 	OrganizationCustomRuleMetadata *types.OrganizationCustomRuleMetadata

@@ -40,14 +40,14 @@ type ListDevEndpointsInput struct {
 	NextToken *string
 
 	// Specifies to return only these tagged resources.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type ListDevEndpointsOutput struct {
 
 	// The names of all the DevEndpoints in the account, or the DevEndpoints with the
 	// specified tags.
-	DevEndpointNames []*string
+	DevEndpointNames []string
 
 	// A continuation token, if the returned list does not contain the last metric
 	// available.

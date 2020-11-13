@@ -41,7 +41,7 @@ type GetDiskSnapshotsOutput struct {
 
 	// An array of objects containing information about all block storage disk
 	// snapshots.
-	DiskSnapshots []*types.DiskSnapshot
+	DiskSnapshots []types.DiskSnapshot
 
 	// The token to advance to the next page of resutls from your request. A next page
 	// token is not returned if there are no more results to display. To get the next

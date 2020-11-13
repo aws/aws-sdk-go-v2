@@ -44,7 +44,7 @@ type GetDevicesInPlacementOutput struct {
 	// An object containing the devices (zero or more) within the placement.
 	//
 	// This member is required.
-	Devices map[string]*string
+	Devices map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

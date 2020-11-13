@@ -30,5 +30,5 @@ type Forecast struct {
 	// (https://docs.aws.amazon.com/forecast/latest/dg/API_CreateForecast.html)
 	// operation to change the values. The values will vary depending on how this is
 	// set, with a minimum of 1 and a maximum of 5.
-	Predictions map[string][]*DataPoint
+	Predictions map[string][]DataPoint
 }

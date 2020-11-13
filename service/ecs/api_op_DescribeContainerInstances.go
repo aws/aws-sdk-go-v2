@@ -34,7 +34,7 @@ type DescribeContainerInstancesInput struct {
 	// entries.
 	//
 	// This member is required.
-	ContainerInstances []*string
+	ContainerInstances []string
 
 	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
 	// container instances to describe. If you do not specify a cluster, the default
@@ -52,10 +52,10 @@ type DescribeContainerInstancesInput struct {
 type DescribeContainerInstancesOutput struct {
 
 	// The list of container instances.
-	ContainerInstances []*types.ContainerInstance
+	ContainerInstances []types.ContainerInstance
 
 	// Any failures associated with the call.
-	Failures []*types.Failure
+	Failures []types.Failure
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

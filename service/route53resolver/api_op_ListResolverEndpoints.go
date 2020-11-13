@@ -34,7 +34,7 @@ type ListResolverEndpointsInput struct {
 	// inbound Resolver endpoints. If you submit a second or subsequent
 	// ListResolverEndpoints request and specify the NextToken parameter, you must use
 	// the same values for Filters, if any, as in the previous request.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of Resolver endpoints that you want to return in the response
 	// to a ListResolverEndpoints request. If you don't specify a value for MaxResults,
@@ -60,7 +60,7 @@ type ListResolverEndpointsOutput struct {
 
 	// The Resolver endpoints that were created by using the current AWS account, and
 	// that match the specified filters, if any.
-	ResolverEndpoints []*types.ResolverEndpoint
+	ResolverEndpoints []types.ResolverEndpoint
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

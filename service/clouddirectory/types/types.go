@@ -60,7 +60,7 @@ type BatchAddFacetToObject struct {
 	// The attributes to set on the object.
 	//
 	// This member is required.
-	ObjectAttributeList []*AttributeKeyAndValue
+	ObjectAttributeList []AttributeKeyAndValue
 
 	// A reference to the object being mutated.
 	//
@@ -153,7 +153,7 @@ type BatchAttachTypedLink struct {
 	// A set of attributes that are associated with the typed link.
 	//
 	// This member is required.
-	Attributes []*AttributeNameAndValue
+	Attributes []AttributeNameAndValue
 
 	// Identifies the source object that the typed link will attach to.
 	//
@@ -185,13 +185,13 @@ type BatchCreateIndex struct {
 	// Indicates whether the attribute that is being indexed has unique values or not.
 	//
 	// This member is required.
-	IsUnique *bool
+	IsUnique bool
 
 	// Specifies the attributes that should be indexed on. Currently only a single
 	// attribute is supported.
 	//
 	// This member is required.
-	OrderedIndexedAttributeList []*AttributeKey
+	OrderedIndexedAttributeList []AttributeKey
 
 	// The batch reference name. See Transaction Support
 	// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/transaction_support.html)
@@ -219,13 +219,13 @@ type BatchCreateObject struct {
 	// as the map value.
 	//
 	// This member is required.
-	ObjectAttributeList []*AttributeKeyAndValue
+	ObjectAttributeList []AttributeKeyAndValue
 
 	// A list of FacetArns that will be associated with the object. For more
 	// information, see arns.
 	//
 	// This member is required.
-	SchemaFacet []*SchemaFacet
+	SchemaFacet []SchemaFacet
 
 	// The batch reference name. See Transaction Support
 	// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/transaction_support.html)
@@ -351,7 +351,7 @@ type BatchGetLinkAttributes struct {
 	// A list of attribute names whose values will be retrieved.
 	//
 	// This member is required.
-	AttributeNames []*string
+	AttributeNames []string
 
 	// Allows a typed link specifier to be accepted as input.
 	//
@@ -363,7 +363,7 @@ type BatchGetLinkAttributes struct {
 type BatchGetLinkAttributesResponse struct {
 
 	// The attributes that are associated with the typed link.
-	Attributes []*AttributeKeyAndValue
+	Attributes []AttributeKeyAndValue
 }
 
 // Retrieves attributes within a facet that are associated with an object inside an
@@ -374,7 +374,7 @@ type BatchGetObjectAttributes struct {
 	// List of attribute names whose values will be retrieved.
 	//
 	// This member is required.
-	AttributeNames []*string
+	AttributeNames []string
 
 	// Reference that identifies the object whose attributes will be retrieved.
 	//
@@ -392,7 +392,7 @@ type BatchGetObjectAttributes struct {
 type BatchGetObjectAttributesResponse struct {
 
 	// The attribute values that are associated with an object.
-	Attributes []*AttributeKeyAndValue
+	Attributes []AttributeKeyAndValue
 }
 
 // Retrieves metadata about an object inside a BatchRead operation. For more
@@ -412,7 +412,7 @@ type BatchGetObjectInformationResponse struct {
 	ObjectIdentifier *string
 
 	// The facets attached to the specified object.
-	SchemaFacets []*SchemaFacet
+	SchemaFacets []SchemaFacet
 }
 
 // Lists indices attached to an object inside a BatchRead operation. For more
@@ -435,7 +435,7 @@ type BatchListAttachedIndices struct {
 type BatchListAttachedIndicesResponse struct {
 
 	// The indices attached to the specified object.
-	IndexAttachments []*IndexAttachment
+	IndexAttachments []IndexAttachment
 
 	// The pagination token.
 	NextToken *string
@@ -454,7 +454,7 @@ type BatchListIncomingTypedLinks struct {
 	// Provides range filters for multiple attributes. When providing ranges to typed
 	// link selection, any inexact ranges must be specified at the end. Any attributes
 	// that do not have a range specified are presumed to match the entire range.
-	FilterAttributeRanges []*TypedLinkAttributeRange
+	FilterAttributeRanges []TypedLinkAttributeRange
 
 	// Filters are interpreted in the order of the attributes on the typed link facet,
 	// not the order in which they are supplied to any API calls.
@@ -471,7 +471,7 @@ type BatchListIncomingTypedLinks struct {
 type BatchListIncomingTypedLinksResponse struct {
 
 	// Returns one or more typed link specifiers as output.
-	LinkSpecifiers []*TypedLinkSpecifier
+	LinkSpecifiers []TypedLinkSpecifier
 
 	// The pagination token.
 	NextToken *string
@@ -493,14 +493,14 @@ type BatchListIndex struct {
 	NextToken *string
 
 	// Specifies the ranges of indexed values that you want to query.
-	RangesOnIndexedValues []*ObjectAttributeRange
+	RangesOnIndexedValues []ObjectAttributeRange
 }
 
 // Represents the output of a ListIndex response operation.
 type BatchListIndexResponse struct {
 
 	// The objects and indexed values attached to the index.
-	IndexAttachments []*IndexAttachment
+	IndexAttachments []IndexAttachment
 
 	// The pagination token.
 	NextToken *string
@@ -531,7 +531,7 @@ type BatchListObjectAttributesResponse struct {
 
 	// The attributes map that is associated with the object. AttributeArn is the key;
 	// attribute value is the value.
-	Attributes []*AttributeKeyAndValue
+	Attributes []AttributeKeyAndValue
 
 	// The pagination token.
 	NextToken *string
@@ -558,7 +558,7 @@ type BatchListObjectChildrenResponse struct {
 
 	// The children structure, which is a map with the key as the LinkName and
 	// ObjectIdentifier as the value.
-	Children map[string]*string
+	Children map[string]string
 
 	// The pagination token.
 	NextToken *string
@@ -589,7 +589,7 @@ type BatchListObjectParentPathsResponse struct {
 
 	// Returns the path to the ObjectIdentifiers that are associated with the
 	// directory.
-	PathToObjectIdentifiersList []*PathToObjectIdentifiers
+	PathToObjectIdentifiersList []PathToObjectIdentifiers
 }
 
 type BatchListObjectParents struct {
@@ -607,7 +607,7 @@ type BatchListObjectParents struct {
 type BatchListObjectParentsResponse struct {
 	NextToken *string
 
-	ParentLinks []*ObjectIdentifierAndLinkNameTuple
+	ParentLinks []ObjectIdentifierAndLinkNameTuple
 }
 
 // Returns policies attached to an object in pagination fashion inside a BatchRead
@@ -631,7 +631,7 @@ type BatchListObjectPolicies struct {
 type BatchListObjectPoliciesResponse struct {
 
 	// A list of policy ObjectIdentifiers, that are attached to the object.
-	AttachedPolicyIds []*string
+	AttachedPolicyIds []string
 
 	// The pagination token.
 	NextToken *string
@@ -650,7 +650,7 @@ type BatchListOutgoingTypedLinks struct {
 	// Provides range filters for multiple attributes. When providing ranges to typed
 	// link selection, any inexact ranges must be specified at the end. Any attributes
 	// that do not have a range specified are presumed to match the entire range.
-	FilterAttributeRanges []*TypedLinkAttributeRange
+	FilterAttributeRanges []TypedLinkAttributeRange
 
 	// Filters are interpreted in the order of the attributes defined on the typed link
 	// facet, not the order they are supplied to any API calls.
@@ -670,7 +670,7 @@ type BatchListOutgoingTypedLinksResponse struct {
 	NextToken *string
 
 	// Returns a typed link specifier as output.
-	TypedLinkSpecifiers []*TypedLinkSpecifier
+	TypedLinkSpecifiers []TypedLinkSpecifier
 }
 
 // Returns all of the ObjectIdentifiers to which a given policy is attached inside
@@ -697,7 +697,7 @@ type BatchListPolicyAttachmentsResponse struct {
 	NextToken *string
 
 	// A list of ObjectIdentifiers to which the policy is attached.
-	ObjectIdentifiers []*string
+	ObjectIdentifiers []string
 }
 
 // Lists all policies from the root of the Directory to the object specified inside
@@ -726,7 +726,7 @@ type BatchLookupPolicyResponse struct {
 	// Provides list of path to policies. Policies contain PolicyId, ObjectIdentifier,
 	// and PolicyType. For more information, see Policies
 	// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies).
-	PolicyToPathList []*PolicyToPath
+	PolicyToPathList []PolicyToPath
 }
 
 // The batch read exception structure, which contains the exception type and
@@ -899,7 +899,7 @@ type BatchUpdateLinkAttributes struct {
 	// The attributes update structure.
 	//
 	// This member is required.
-	AttributeUpdates []*LinkAttributeUpdate
+	AttributeUpdates []LinkAttributeUpdate
 
 	// Allows a typed link specifier to be accepted as input.
 	//
@@ -917,7 +917,7 @@ type BatchUpdateObjectAttributes struct {
 	// Attributes update structure.
 	//
 	// This member is required.
-	AttributeUpdates []*ObjectAttributeUpdate
+	AttributeUpdates []ObjectAttributeUpdate
 
 	// Reference that identifies the object.
 	//
@@ -1118,10 +1118,10 @@ type FacetAttributeDefinition struct {
 	DefaultValue *TypedAttributeValue
 
 	// Whether the attribute is mutable or not.
-	IsImmutable *bool
+	IsImmutable bool
 
 	// Validation rules attached to the attribute definition.
-	Rules map[string]*Rule
+	Rules map[string]Rule
 }
 
 // The facet attribute reference that specifies the attribute definition that
@@ -1159,7 +1159,7 @@ type FacetAttributeUpdate struct {
 type IndexAttachment struct {
 
 	// The indexed attribute values.
-	IndexedAttributes []*AttributeKeyAndValue
+	IndexedAttributes []AttributeKeyAndValue
 
 	// In response to ListIndex, the ObjectIdentifier of the object attached to the
 	// index. In response to ListAttachedIndices, the ObjectIdentifier of the index
@@ -1257,7 +1257,7 @@ type PathToObjectIdentifiers struct {
 
 	// Lists ObjectIdentifiers starting from directory root to the object in the
 	// request.
-	ObjectIdentifiers []*string
+	ObjectIdentifiers []string
 
 	// The path that is used to identify the object starting from directory root.
 	Path *string
@@ -1286,7 +1286,7 @@ type PolicyToPath struct {
 	Path *string
 
 	// List of policy objects.
-	Policies []*PolicyAttachment
+	Policies []PolicyAttachment
 }
 
 // Contains an Amazon Resource Name (ARN) and parameters that are associated with
@@ -1294,7 +1294,7 @@ type PolicyToPath struct {
 type Rule struct {
 
 	// The minimum and maximum parameters that are associated with the rule.
-	Parameters map[string]*string
+	Parameters map[string]string
 
 	// The type of attribute validation rule.
 	Type RuleType
@@ -1387,10 +1387,10 @@ type TypedLinkAttributeDefinition struct {
 	DefaultValue *TypedAttributeValue
 
 	// Whether the attribute is mutable or not.
-	IsImmutable *bool
+	IsImmutable bool
 
 	// Validation rules that are attached to the attribute definition.
-	Rules map[string]*Rule
+	Rules map[string]Rule
 }
 
 // Identifies the range of attributes that are used by a specified filter.
@@ -1415,7 +1415,7 @@ type TypedLinkFacet struct {
 	// distinguish the link from others of the same type between the same objects.
 	//
 	// This member is required.
-	Attributes []*TypedLinkAttributeDefinition
+	Attributes []TypedLinkAttributeDefinition
 
 	// The set of attributes that distinguish links made from this facet from each
 	// other, in the order of significance. Listing typed links can filter on the
@@ -1423,7 +1423,7 @@ type TypedLinkFacet struct {
 	// ListIncomingTypedLinks for details.
 	//
 	// This member is required.
-	IdentityAttributeOrder []*string
+	IdentityAttributeOrder []string
 
 	// The unique name of the typed link facet.
 	//
@@ -1473,7 +1473,7 @@ type TypedLinkSpecifier struct {
 	// Identifies the attribute value to update.
 	//
 	// This member is required.
-	IdentityAttributeValues []*AttributeNameAndValue
+	IdentityAttributeValues []AttributeNameAndValue
 
 	// Identifies the source object that the typed link will attach to.
 	//

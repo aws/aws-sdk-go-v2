@@ -35,10 +35,10 @@ type DescribeMetricCollectionTypesInput struct {
 type DescribeMetricCollectionTypesOutput struct {
 
 	// The granularities for the metrics.
-	Granularities []*types.MetricGranularityType
+	Granularities []types.MetricGranularityType
 
 	// One or more metrics.
-	Metrics []*types.MetricCollectionType
+	Metrics []types.MetricCollectionType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

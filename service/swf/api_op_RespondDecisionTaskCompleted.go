@@ -52,7 +52,7 @@ type RespondDecisionTaskCompletedInput struct {
 
 	// The list of decisions (possibly empty) made by the decider while processing this
 	// decision task. See the docs for the Decision structure for details.
-	Decisions []*types.Decision
+	Decisions []types.Decision
 
 	// User defined context to add to workflow execution.
 	ExecutionContext *string

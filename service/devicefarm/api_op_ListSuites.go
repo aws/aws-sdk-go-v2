@@ -49,7 +49,7 @@ type ListSuitesOutput struct {
 	NextToken *string
 
 	// Information about the suites.
-	Suites []*types.Suite
+	Suites []types.Suite
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

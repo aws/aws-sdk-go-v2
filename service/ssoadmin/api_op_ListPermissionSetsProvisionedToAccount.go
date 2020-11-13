@@ -59,7 +59,7 @@ type ListPermissionSetsProvisionedToAccountOutput struct {
 	NextToken *string
 
 	// Defines the level of access that an AWS account has.
-	PermissionSets []*string
+	PermissionSets []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

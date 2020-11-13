@@ -42,7 +42,7 @@ type DescribeAlarmsForMetricInput struct {
 
 	// The dimensions associated with the metric. If the metric has any associated
 	// dimensions, you must specify them in order for the call to succeed.
-	Dimensions []*types.Dimension
+	Dimensions []types.Dimension
 
 	// The percentile statistic for the metric. Specify a value between p0.0 and p100.
 	ExtendedStatistic *string
@@ -61,7 +61,7 @@ type DescribeAlarmsForMetricInput struct {
 type DescribeAlarmsForMetricOutput struct {
 
 	// The information for each alarm with the specified metric.
-	MetricAlarms []*types.MetricAlarm
+	MetricAlarms []types.MetricAlarm
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

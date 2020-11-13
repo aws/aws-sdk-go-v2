@@ -63,7 +63,7 @@ type RequestCertificateInput struct {
 
 	// The domain name that you want ACM to use to send you emails so that you can
 	// validate domain ownership.
-	DomainValidationOptions []*types.DomainValidationOption
+	DomainValidationOptions []types.DomainValidationOption
 
 	// Customer chosen string that can be used to distinguish between calls to
 	// RequestCertificate. Idempotency tokens time out after one hour. Therefore, if
@@ -104,10 +104,10 @@ type RequestCertificateInput struct {
 	// * (63 octets).(63 octets).(63 octets).(62 octets) is
 	// not legal because the total length of the DNS name (63+1+63+1+63+1+62) exceeds
 	// 253 octets.
-	SubjectAlternativeNames []*string
+	SubjectAlternativeNames []string
 
 	// One or more resource tags to associate with the certificate.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The method you want to use if you are requesting a public certificate to
 	// validate that you own or control domain. You can validate with DNS

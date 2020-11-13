@@ -26,7 +26,7 @@ type Ec2Config struct {
 	// the Amazon EC2 resource.
 	//
 	// This member is required.
-	SecurityGroupArns []*string
+	SecurityGroupArns []string
 
 	// The ARN of the subnet and the security group that DataSync uses to access the
 	// target EFS file system.
@@ -69,7 +69,7 @@ type LocationFilter struct {
 	// only Amazon S3 locations.
 	//
 	// This member is required.
-	Values []*string
+	Values []string
 }
 
 // Represents a single entry in a list of locations. LocationListEntry returns an
@@ -128,7 +128,7 @@ type OnPremConfig struct {
 	// ARNs of the agents to use for an NFS location.
 	//
 	// This member is required.
-	AgentArns []*string
+	AgentArns []string
 }
 
 // Represents the options that are available to control the behavior of a
@@ -257,11 +257,11 @@ type PrivateLinkConfig struct {
 	// The Amazon Resource Names (ARNs) of the security groups that are configured for
 	// the EC2 resource that hosts an agent activated in a VPC or an agent that has
 	// access to a VPC endpoint.
-	SecurityGroupArns []*string
+	SecurityGroupArns []string
 
 	// The Amazon Resource Names (ARNs) of the subnets that are configured for an agent
 	// activated in a VPC or an agent that has access to a VPC endpoint.
-	SubnetArns []*string
+	SubnetArns []string
 
 	// The ID of the VPC endpoint that is configured for an agent. An agent that is
 	// configured with a VPC endpoint will not be accessible over the public internet.
@@ -377,7 +377,7 @@ type TaskFilter struct {
 	// only tasks for a specific destination location.
 	//
 	// This member is required.
-	Values []*string
+	Values []string
 }
 
 // Represents a single entry in a list of tasks. TaskListEntry returns an array

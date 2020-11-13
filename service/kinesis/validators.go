@@ -580,13 +580,13 @@ func validatePutRecordsRequestEntry(v *types.PutRecordsRequestEntry) error {
 	}
 }
 
-func validatePutRecordsRequestEntryList(v []*types.PutRecordsRequestEntry) error {
+func validatePutRecordsRequestEntryList(v []types.PutRecordsRequestEntry) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutRecordsRequestEntryList"}
 	for i := range v {
-		if err := validatePutRecordsRequestEntry(v[i]); err != nil {
+		if err := validatePutRecordsRequestEntry(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

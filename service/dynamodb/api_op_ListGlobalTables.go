@@ -49,7 +49,7 @@ type ListGlobalTablesInput struct {
 type ListGlobalTablesOutput struct {
 
 	// List of global table names.
-	GlobalTables []*types.GlobalTable
+	GlobalTables []types.GlobalTable
 
 	// Last evaluated global table name.
 	LastEvaluatedGlobalTableName *string

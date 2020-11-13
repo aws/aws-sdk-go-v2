@@ -44,7 +44,7 @@ type UpdateBrokerStorageInput struct {
 	// to.
 	//
 	// This member is required.
-	TargetBrokerEBSVolumeInfo []*types.BrokerEBSVolumeInfo
+	TargetBrokerEBSVolumeInfo []types.BrokerEBSVolumeInfo
 }
 
 type UpdateBrokerStorageOutput struct {

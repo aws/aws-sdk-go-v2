@@ -192,13 +192,10 @@ func awsRestjson1_serializeOpHttpBindingsCreateConfigurationSetEventDestinationI
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ConfigurationSetName == nil {
+	if v.ConfigurationSetName == nil || len(*v.ConfigurationSetName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationSetName must not be empty")}
 	}
 	if v.ConfigurationSetName != nil {
-		if len(*v.ConfigurationSetName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationSetName must not be empty")}
-		}
 		if err := encoder.SetURI("ConfigurationSetName").String(*v.ConfigurationSetName); err != nil {
 			return err
 		}
@@ -288,13 +285,10 @@ func awsRestjson1_serializeOpHttpBindingsCreateContactInput(v *CreateContactInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ContactListName == nil {
+	if v.ContactListName == nil || len(*v.ContactListName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ContactListName must not be empty")}
 	}
 	if v.ContactListName != nil {
-		if len(*v.ContactListName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ContactListName must not be empty")}
-		}
 		if err := encoder.SetURI("ContactListName").String(*v.ContactListName); err != nil {
 			return err
 		}
@@ -324,9 +318,9 @@ func awsRestjson1_serializeOpDocumentCreateContactInput(v *CreateContactInput, v
 		}
 	}
 
-	if v.UnsubscribeAll != nil {
+	if v.UnsubscribeAll {
 		ok := object.Key("UnsubscribeAll")
-		ok.Boolean(*v.UnsubscribeAll)
+		ok.Boolean(v.UnsubscribeAll)
 	}
 
 	return nil
@@ -843,25 +837,19 @@ func awsRestjson1_serializeOpHttpBindingsCreateEmailIdentityPolicyInput(v *Creat
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.EmailIdentity == nil {
+	if v.EmailIdentity == nil || len(*v.EmailIdentity) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member EmailIdentity must not be empty")}
 	}
 	if v.EmailIdentity != nil {
-		if len(*v.EmailIdentity) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member EmailIdentity must not be empty")}
-		}
 		if err := encoder.SetURI("EmailIdentity").String(*v.EmailIdentity); err != nil {
 			return err
 		}
 	}
 
-	if v.PolicyName == nil {
+	if v.PolicyName == nil || len(*v.PolicyName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member PolicyName must not be empty")}
 	}
 	if v.PolicyName != nil {
-		if len(*v.PolicyName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member PolicyName must not be empty")}
-		}
 		if err := encoder.SetURI("PolicyName").String(*v.PolicyName); err != nil {
 			return err
 		}
@@ -1095,13 +1083,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteConfigurationSetInput(v *DeleteCo
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ConfigurationSetName == nil {
+	if v.ConfigurationSetName == nil || len(*v.ConfigurationSetName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationSetName must not be empty")}
 	}
 	if v.ConfigurationSetName != nil {
-		if len(*v.ConfigurationSetName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationSetName must not be empty")}
-		}
 		if err := encoder.SetURI("ConfigurationSetName").String(*v.ConfigurationSetName); err != nil {
 			return err
 		}
@@ -1161,25 +1146,19 @@ func awsRestjson1_serializeOpHttpBindingsDeleteConfigurationSetEventDestinationI
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ConfigurationSetName == nil {
+	if v.ConfigurationSetName == nil || len(*v.ConfigurationSetName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationSetName must not be empty")}
 	}
 	if v.ConfigurationSetName != nil {
-		if len(*v.ConfigurationSetName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationSetName must not be empty")}
-		}
 		if err := encoder.SetURI("ConfigurationSetName").String(*v.ConfigurationSetName); err != nil {
 			return err
 		}
 	}
 
-	if v.EventDestinationName == nil {
+	if v.EventDestinationName == nil || len(*v.EventDestinationName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member EventDestinationName must not be empty")}
 	}
 	if v.EventDestinationName != nil {
-		if len(*v.EventDestinationName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member EventDestinationName must not be empty")}
-		}
 		if err := encoder.SetURI("EventDestinationName").String(*v.EventDestinationName); err != nil {
 			return err
 		}
@@ -1239,25 +1218,19 @@ func awsRestjson1_serializeOpHttpBindingsDeleteContactInput(v *DeleteContactInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ContactListName == nil {
+	if v.ContactListName == nil || len(*v.ContactListName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ContactListName must not be empty")}
 	}
 	if v.ContactListName != nil {
-		if len(*v.ContactListName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ContactListName must not be empty")}
-		}
 		if err := encoder.SetURI("ContactListName").String(*v.ContactListName); err != nil {
 			return err
 		}
 	}
 
-	if v.EmailAddress == nil {
+	if v.EmailAddress == nil || len(*v.EmailAddress) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member EmailAddress must not be empty")}
 	}
 	if v.EmailAddress != nil {
-		if len(*v.EmailAddress) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member EmailAddress must not be empty")}
-		}
 		if err := encoder.SetURI("EmailAddress").String(*v.EmailAddress); err != nil {
 			return err
 		}
@@ -1317,13 +1290,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteContactListInput(v *DeleteContact
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ContactListName == nil {
+	if v.ContactListName == nil || len(*v.ContactListName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ContactListName must not be empty")}
 	}
 	if v.ContactListName != nil {
-		if len(*v.ContactListName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ContactListName must not be empty")}
-		}
 		if err := encoder.SetURI("ContactListName").String(*v.ContactListName); err != nil {
 			return err
 		}
@@ -1383,13 +1353,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteCustomVerificationEmailTemplateIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.TemplateName == nil {
+	if v.TemplateName == nil || len(*v.TemplateName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member TemplateName must not be empty")}
 	}
 	if v.TemplateName != nil {
-		if len(*v.TemplateName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member TemplateName must not be empty")}
-		}
 		if err := encoder.SetURI("TemplateName").String(*v.TemplateName); err != nil {
 			return err
 		}
@@ -1449,13 +1416,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteDedicatedIpPoolInput(v *DeleteDed
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.PoolName == nil {
+	if v.PoolName == nil || len(*v.PoolName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member PoolName must not be empty")}
 	}
 	if v.PoolName != nil {
-		if len(*v.PoolName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member PoolName must not be empty")}
-		}
 		if err := encoder.SetURI("PoolName").String(*v.PoolName); err != nil {
 			return err
 		}
@@ -1515,13 +1479,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteEmailIdentityInput(v *DeleteEmail
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.EmailIdentity == nil {
+	if v.EmailIdentity == nil || len(*v.EmailIdentity) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member EmailIdentity must not be empty")}
 	}
 	if v.EmailIdentity != nil {
-		if len(*v.EmailIdentity) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member EmailIdentity must not be empty")}
-		}
 		if err := encoder.SetURI("EmailIdentity").String(*v.EmailIdentity); err != nil {
 			return err
 		}
@@ -1581,25 +1542,19 @@ func awsRestjson1_serializeOpHttpBindingsDeleteEmailIdentityPolicyInput(v *Delet
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.EmailIdentity == nil {
+	if v.EmailIdentity == nil || len(*v.EmailIdentity) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member EmailIdentity must not be empty")}
 	}
 	if v.EmailIdentity != nil {
-		if len(*v.EmailIdentity) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member EmailIdentity must not be empty")}
-		}
 		if err := encoder.SetURI("EmailIdentity").String(*v.EmailIdentity); err != nil {
 			return err
 		}
 	}
 
-	if v.PolicyName == nil {
+	if v.PolicyName == nil || len(*v.PolicyName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member PolicyName must not be empty")}
 	}
 	if v.PolicyName != nil {
-		if len(*v.PolicyName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member PolicyName must not be empty")}
-		}
 		if err := encoder.SetURI("PolicyName").String(*v.PolicyName); err != nil {
 			return err
 		}
@@ -1659,13 +1614,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteEmailTemplateInput(v *DeleteEmail
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.TemplateName == nil {
+	if v.TemplateName == nil || len(*v.TemplateName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member TemplateName must not be empty")}
 	}
 	if v.TemplateName != nil {
-		if len(*v.TemplateName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member TemplateName must not be empty")}
-		}
 		if err := encoder.SetURI("TemplateName").String(*v.TemplateName); err != nil {
 			return err
 		}
@@ -1725,13 +1677,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteSuppressedDestinationInput(v *Del
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.EmailAddress == nil {
+	if v.EmailAddress == nil || len(*v.EmailAddress) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member EmailAddress must not be empty")}
 	}
 	if v.EmailAddress != nil {
-		if len(*v.EmailAddress) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member EmailAddress must not be empty")}
-		}
 		if err := encoder.SetURI("EmailAddress").String(*v.EmailAddress); err != nil {
 			return err
 		}
@@ -1843,10 +1792,7 @@ func awsRestjson1_serializeOpHttpBindingsGetBlacklistReportsInput(v *GetBlacklis
 
 	if v.BlacklistItemNames != nil {
 		for i := range v.BlacklistItemNames {
-			if v.BlacklistItemNames[i] == nil {
-				continue
-			}
-			encoder.AddQuery("BlacklistItemNames").String(*v.BlacklistItemNames[i])
+			encoder.AddQuery("BlacklistItemNames").String(v.BlacklistItemNames[i])
 		}
 	}
 
@@ -1904,13 +1850,10 @@ func awsRestjson1_serializeOpHttpBindingsGetConfigurationSetInput(v *GetConfigur
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ConfigurationSetName == nil {
+	if v.ConfigurationSetName == nil || len(*v.ConfigurationSetName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationSetName must not be empty")}
 	}
 	if v.ConfigurationSetName != nil {
-		if len(*v.ConfigurationSetName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationSetName must not be empty")}
-		}
 		if err := encoder.SetURI("ConfigurationSetName").String(*v.ConfigurationSetName); err != nil {
 			return err
 		}
@@ -1970,13 +1913,10 @@ func awsRestjson1_serializeOpHttpBindingsGetConfigurationSetEventDestinationsInp
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ConfigurationSetName == nil {
+	if v.ConfigurationSetName == nil || len(*v.ConfigurationSetName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationSetName must not be empty")}
 	}
 	if v.ConfigurationSetName != nil {
-		if len(*v.ConfigurationSetName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationSetName must not be empty")}
-		}
 		if err := encoder.SetURI("ConfigurationSetName").String(*v.ConfigurationSetName); err != nil {
 			return err
 		}
@@ -2036,25 +1976,19 @@ func awsRestjson1_serializeOpHttpBindingsGetContactInput(v *GetContactInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ContactListName == nil {
+	if v.ContactListName == nil || len(*v.ContactListName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ContactListName must not be empty")}
 	}
 	if v.ContactListName != nil {
-		if len(*v.ContactListName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ContactListName must not be empty")}
-		}
 		if err := encoder.SetURI("ContactListName").String(*v.ContactListName); err != nil {
 			return err
 		}
 	}
 
-	if v.EmailAddress == nil {
+	if v.EmailAddress == nil || len(*v.EmailAddress) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member EmailAddress must not be empty")}
 	}
 	if v.EmailAddress != nil {
-		if len(*v.EmailAddress) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member EmailAddress must not be empty")}
-		}
 		if err := encoder.SetURI("EmailAddress").String(*v.EmailAddress); err != nil {
 			return err
 		}
@@ -2114,13 +2048,10 @@ func awsRestjson1_serializeOpHttpBindingsGetContactListInput(v *GetContactListIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ContactListName == nil {
+	if v.ContactListName == nil || len(*v.ContactListName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ContactListName must not be empty")}
 	}
 	if v.ContactListName != nil {
-		if len(*v.ContactListName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ContactListName must not be empty")}
-		}
 		if err := encoder.SetURI("ContactListName").String(*v.ContactListName); err != nil {
 			return err
 		}
@@ -2180,13 +2111,10 @@ func awsRestjson1_serializeOpHttpBindingsGetCustomVerificationEmailTemplateInput
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.TemplateName == nil {
+	if v.TemplateName == nil || len(*v.TemplateName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member TemplateName must not be empty")}
 	}
 	if v.TemplateName != nil {
-		if len(*v.TemplateName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member TemplateName must not be empty")}
-		}
 		if err := encoder.SetURI("TemplateName").String(*v.TemplateName); err != nil {
 			return err
 		}
@@ -2246,13 +2174,10 @@ func awsRestjson1_serializeOpHttpBindingsGetDedicatedIpInput(v *GetDedicatedIpIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Ip == nil {
+	if v.Ip == nil || len(*v.Ip) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Ip must not be empty")}
 	}
 	if v.Ip != nil {
-		if len(*v.Ip) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Ip must not be empty")}
-		}
 		if err := encoder.SetURI("Ip").String(*v.Ip); err != nil {
 			return err
 		}
@@ -2428,13 +2353,10 @@ func awsRestjson1_serializeOpHttpBindingsGetDeliverabilityTestReportInput(v *Get
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ReportId == nil {
+	if v.ReportId == nil || len(*v.ReportId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ReportId must not be empty")}
 	}
 	if v.ReportId != nil {
-		if len(*v.ReportId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ReportId must not be empty")}
-		}
 		if err := encoder.SetURI("ReportId").String(*v.ReportId); err != nil {
 			return err
 		}
@@ -2494,13 +2416,10 @@ func awsRestjson1_serializeOpHttpBindingsGetDomainDeliverabilityCampaignInput(v 
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.CampaignId == nil {
+	if v.CampaignId == nil || len(*v.CampaignId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member CampaignId must not be empty")}
 	}
 	if v.CampaignId != nil {
-		if len(*v.CampaignId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member CampaignId must not be empty")}
-		}
 		if err := encoder.SetURI("CampaignId").String(*v.CampaignId); err != nil {
 			return err
 		}
@@ -2560,13 +2479,10 @@ func awsRestjson1_serializeOpHttpBindingsGetDomainStatisticsReportInput(v *GetDo
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Domain == nil {
+	if v.Domain == nil || len(*v.Domain) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Domain must not be empty")}
 	}
 	if v.Domain != nil {
-		if len(*v.Domain) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Domain must not be empty")}
-		}
 		if err := encoder.SetURI("Domain").String(*v.Domain); err != nil {
 			return err
 		}
@@ -2634,13 +2550,10 @@ func awsRestjson1_serializeOpHttpBindingsGetEmailIdentityInput(v *GetEmailIdenti
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.EmailIdentity == nil {
+	if v.EmailIdentity == nil || len(*v.EmailIdentity) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member EmailIdentity must not be empty")}
 	}
 	if v.EmailIdentity != nil {
-		if len(*v.EmailIdentity) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member EmailIdentity must not be empty")}
-		}
 		if err := encoder.SetURI("EmailIdentity").String(*v.EmailIdentity); err != nil {
 			return err
 		}
@@ -2700,13 +2613,10 @@ func awsRestjson1_serializeOpHttpBindingsGetEmailIdentityPoliciesInput(v *GetEma
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.EmailIdentity == nil {
+	if v.EmailIdentity == nil || len(*v.EmailIdentity) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member EmailIdentity must not be empty")}
 	}
 	if v.EmailIdentity != nil {
-		if len(*v.EmailIdentity) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member EmailIdentity must not be empty")}
-		}
 		if err := encoder.SetURI("EmailIdentity").String(*v.EmailIdentity); err != nil {
 			return err
 		}
@@ -2766,13 +2676,10 @@ func awsRestjson1_serializeOpHttpBindingsGetEmailTemplateInput(v *GetEmailTempla
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.TemplateName == nil {
+	if v.TemplateName == nil || len(*v.TemplateName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member TemplateName must not be empty")}
 	}
 	if v.TemplateName != nil {
-		if len(*v.TemplateName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member TemplateName must not be empty")}
-		}
 		if err := encoder.SetURI("TemplateName").String(*v.TemplateName); err != nil {
 			return err
 		}
@@ -2832,13 +2739,10 @@ func awsRestjson1_serializeOpHttpBindingsGetImportJobInput(v *GetImportJobInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.JobId == nil {
+	if v.JobId == nil || len(*v.JobId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member JobId must not be empty")}
 	}
 	if v.JobId != nil {
-		if len(*v.JobId) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member JobId must not be empty")}
-		}
 		if err := encoder.SetURI("JobId").String(*v.JobId); err != nil {
 			return err
 		}
@@ -2898,13 +2802,10 @@ func awsRestjson1_serializeOpHttpBindingsGetSuppressedDestinationInput(v *GetSup
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.EmailAddress == nil {
+	if v.EmailAddress == nil || len(*v.EmailAddress) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member EmailAddress must not be empty")}
 	}
 	if v.EmailAddress != nil {
-		if len(*v.EmailAddress) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member EmailAddress must not be empty")}
-		}
 		if err := encoder.SetURI("EmailAddress").String(*v.EmailAddress); err != nil {
 			return err
 		}
@@ -3099,13 +3000,10 @@ func awsRestjson1_serializeOpHttpBindingsListContactsInput(v *ListContactsInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ContactListName == nil {
+	if v.ContactListName == nil || len(*v.ContactListName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ContactListName must not be empty")}
 	}
 	if v.ContactListName != nil {
-		if len(*v.ContactListName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ContactListName must not be empty")}
-		}
 		if err := encoder.SetURI("ContactListName").String(*v.ContactListName); err != nil {
 			return err
 		}
@@ -3389,13 +3287,10 @@ func awsRestjson1_serializeOpHttpBindingsListDomainDeliverabilityCampaignsInput(
 		encoder.SetQuery("StartDate").String(smithytime.FormatDateTime(*v.StartDate))
 	}
 
-	if v.SubscribedDomain == nil {
+	if v.SubscribedDomain == nil || len(*v.SubscribedDomain) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member SubscribedDomain must not be empty")}
 	}
 	if v.SubscribedDomain != nil {
-		if len(*v.SubscribedDomain) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member SubscribedDomain must not be empty")}
-		}
 		if err := encoder.SetURI("SubscribedDomain").String(*v.SubscribedDomain); err != nil {
 			return err
 		}
@@ -3812,9 +3707,9 @@ func awsRestjson1_serializeOpDocumentPutAccountDedicatedIpWarmupAttributesInput(
 	object := value.Object()
 	defer object.Close()
 
-	if v.AutoWarmupEnabled != nil {
+	if v.AutoWarmupEnabled {
 		ok := object.Key("AutoWarmupEnabled")
-		ok.Boolean(*v.AutoWarmupEnabled)
+		ok.Boolean(v.AutoWarmupEnabled)
 	}
 
 	return nil
@@ -3985,9 +3880,9 @@ func awsRestjson1_serializeOpDocumentPutAccountSendingAttributesInput(v *PutAcco
 	object := value.Object()
 	defer object.Close()
 
-	if v.SendingEnabled != nil {
+	if v.SendingEnabled {
 		ok := object.Key("SendingEnabled")
-		ok.Boolean(*v.SendingEnabled)
+		ok.Boolean(v.SendingEnabled)
 	}
 
 	return nil
@@ -4130,13 +4025,10 @@ func awsRestjson1_serializeOpHttpBindingsPutConfigurationSetDeliveryOptionsInput
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ConfigurationSetName == nil {
+	if v.ConfigurationSetName == nil || len(*v.ConfigurationSetName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationSetName must not be empty")}
 	}
 	if v.ConfigurationSetName != nil {
-		if len(*v.ConfigurationSetName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationSetName must not be empty")}
-		}
 		if err := encoder.SetURI("ConfigurationSetName").String(*v.ConfigurationSetName); err != nil {
 			return err
 		}
@@ -4224,13 +4116,10 @@ func awsRestjson1_serializeOpHttpBindingsPutConfigurationSetReputationOptionsInp
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ConfigurationSetName == nil {
+	if v.ConfigurationSetName == nil || len(*v.ConfigurationSetName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationSetName must not be empty")}
 	}
 	if v.ConfigurationSetName != nil {
-		if len(*v.ConfigurationSetName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationSetName must not be empty")}
-		}
 		if err := encoder.SetURI("ConfigurationSetName").String(*v.ConfigurationSetName); err != nil {
 			return err
 		}
@@ -4243,9 +4132,9 @@ func awsRestjson1_serializeOpDocumentPutConfigurationSetReputationOptionsInput(v
 	object := value.Object()
 	defer object.Close()
 
-	if v.ReputationMetricsEnabled != nil {
+	if v.ReputationMetricsEnabled {
 		ok := object.Key("ReputationMetricsEnabled")
-		ok.Boolean(*v.ReputationMetricsEnabled)
+		ok.Boolean(v.ReputationMetricsEnabled)
 	}
 
 	return nil
@@ -4313,13 +4202,10 @@ func awsRestjson1_serializeOpHttpBindingsPutConfigurationSetSendingOptionsInput(
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ConfigurationSetName == nil {
+	if v.ConfigurationSetName == nil || len(*v.ConfigurationSetName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationSetName must not be empty")}
 	}
 	if v.ConfigurationSetName != nil {
-		if len(*v.ConfigurationSetName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationSetName must not be empty")}
-		}
 		if err := encoder.SetURI("ConfigurationSetName").String(*v.ConfigurationSetName); err != nil {
 			return err
 		}
@@ -4332,9 +4218,9 @@ func awsRestjson1_serializeOpDocumentPutConfigurationSetSendingOptionsInput(v *P
 	object := value.Object()
 	defer object.Close()
 
-	if v.SendingEnabled != nil {
+	if v.SendingEnabled {
 		ok := object.Key("SendingEnabled")
-		ok.Boolean(*v.SendingEnabled)
+		ok.Boolean(v.SendingEnabled)
 	}
 
 	return nil
@@ -4402,13 +4288,10 @@ func awsRestjson1_serializeOpHttpBindingsPutConfigurationSetSuppressionOptionsIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ConfigurationSetName == nil {
+	if v.ConfigurationSetName == nil || len(*v.ConfigurationSetName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationSetName must not be empty")}
 	}
 	if v.ConfigurationSetName != nil {
-		if len(*v.ConfigurationSetName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationSetName must not be empty")}
-		}
 		if err := encoder.SetURI("ConfigurationSetName").String(*v.ConfigurationSetName); err != nil {
 			return err
 		}
@@ -4493,13 +4376,10 @@ func awsRestjson1_serializeOpHttpBindingsPutConfigurationSetTrackingOptionsInput
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ConfigurationSetName == nil {
+	if v.ConfigurationSetName == nil || len(*v.ConfigurationSetName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationSetName must not be empty")}
 	}
 	if v.ConfigurationSetName != nil {
-		if len(*v.ConfigurationSetName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationSetName must not be empty")}
-		}
 		if err := encoder.SetURI("ConfigurationSetName").String(*v.ConfigurationSetName); err != nil {
 			return err
 		}
@@ -4582,13 +4462,10 @@ func awsRestjson1_serializeOpHttpBindingsPutDedicatedIpInPoolInput(v *PutDedicat
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Ip == nil {
+	if v.Ip == nil || len(*v.Ip) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Ip must not be empty")}
 	}
 	if v.Ip != nil {
-		if len(*v.Ip) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Ip must not be empty")}
-		}
 		if err := encoder.SetURI("Ip").String(*v.Ip); err != nil {
 			return err
 		}
@@ -4671,13 +4548,10 @@ func awsRestjson1_serializeOpHttpBindingsPutDedicatedIpWarmupAttributesInput(v *
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Ip == nil {
+	if v.Ip == nil || len(*v.Ip) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member Ip must not be empty")}
 	}
 	if v.Ip != nil {
-		if len(*v.Ip) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member Ip must not be empty")}
-		}
 		if err := encoder.SetURI("Ip").String(*v.Ip); err != nil {
 			return err
 		}
@@ -4763,9 +4637,9 @@ func awsRestjson1_serializeOpDocumentPutDeliverabilityDashboardOptionInput(v *Pu
 	object := value.Object()
 	defer object.Close()
 
-	if v.DashboardEnabled != nil {
+	if v.DashboardEnabled {
 		ok := object.Key("DashboardEnabled")
-		ok.Boolean(*v.DashboardEnabled)
+		ok.Boolean(v.DashboardEnabled)
 	}
 
 	if v.SubscribedDomains != nil {
@@ -4840,13 +4714,10 @@ func awsRestjson1_serializeOpHttpBindingsPutEmailIdentityDkimAttributesInput(v *
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.EmailIdentity == nil {
+	if v.EmailIdentity == nil || len(*v.EmailIdentity) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member EmailIdentity must not be empty")}
 	}
 	if v.EmailIdentity != nil {
-		if len(*v.EmailIdentity) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member EmailIdentity must not be empty")}
-		}
 		if err := encoder.SetURI("EmailIdentity").String(*v.EmailIdentity); err != nil {
 			return err
 		}
@@ -4859,9 +4730,9 @@ func awsRestjson1_serializeOpDocumentPutEmailIdentityDkimAttributesInput(v *PutE
 	object := value.Object()
 	defer object.Close()
 
-	if v.SigningEnabled != nil {
+	if v.SigningEnabled {
 		ok := object.Key("SigningEnabled")
-		ok.Boolean(*v.SigningEnabled)
+		ok.Boolean(v.SigningEnabled)
 	}
 
 	return nil
@@ -4929,13 +4800,10 @@ func awsRestjson1_serializeOpHttpBindingsPutEmailIdentityDkimSigningAttributesIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.EmailIdentity == nil {
+	if v.EmailIdentity == nil || len(*v.EmailIdentity) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member EmailIdentity must not be empty")}
 	}
 	if v.EmailIdentity != nil {
-		if len(*v.EmailIdentity) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member EmailIdentity must not be empty")}
-		}
 		if err := encoder.SetURI("EmailIdentity").String(*v.EmailIdentity); err != nil {
 			return err
 		}
@@ -5025,13 +4893,10 @@ func awsRestjson1_serializeOpHttpBindingsPutEmailIdentityFeedbackAttributesInput
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.EmailIdentity == nil {
+	if v.EmailIdentity == nil || len(*v.EmailIdentity) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member EmailIdentity must not be empty")}
 	}
 	if v.EmailIdentity != nil {
-		if len(*v.EmailIdentity) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member EmailIdentity must not be empty")}
-		}
 		if err := encoder.SetURI("EmailIdentity").String(*v.EmailIdentity); err != nil {
 			return err
 		}
@@ -5044,9 +4909,9 @@ func awsRestjson1_serializeOpDocumentPutEmailIdentityFeedbackAttributesInput(v *
 	object := value.Object()
 	defer object.Close()
 
-	if v.EmailForwardingEnabled != nil {
+	if v.EmailForwardingEnabled {
 		ok := object.Key("EmailForwardingEnabled")
-		ok.Boolean(*v.EmailForwardingEnabled)
+		ok.Boolean(v.EmailForwardingEnabled)
 	}
 
 	return nil
@@ -5114,13 +4979,10 @@ func awsRestjson1_serializeOpHttpBindingsPutEmailIdentityMailFromAttributesInput
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.EmailIdentity == nil {
+	if v.EmailIdentity == nil || len(*v.EmailIdentity) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member EmailIdentity must not be empty")}
 	}
 	if v.EmailIdentity != nil {
-		if len(*v.EmailIdentity) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member EmailIdentity must not be empty")}
-		}
 		if err := encoder.SetURI("EmailIdentity").String(*v.EmailIdentity); err != nil {
 			return err
 		}
@@ -5698,13 +5560,10 @@ func awsRestjson1_serializeOpHttpBindingsTestRenderEmailTemplateInput(v *TestRen
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.TemplateName == nil {
+	if v.TemplateName == nil || len(*v.TemplateName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member TemplateName must not be empty")}
 	}
 	if v.TemplateName != nil {
-		if len(*v.TemplateName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member TemplateName must not be empty")}
-		}
 		if err := encoder.SetURI("TemplateName").String(*v.TemplateName); err != nil {
 			return err
 		}
@@ -5782,10 +5641,7 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 
 	if v.TagKeys != nil {
 		for i := range v.TagKeys {
-			if v.TagKeys[i] == nil {
-				continue
-			}
-			encoder.AddQuery("TagKeys").String(*v.TagKeys[i])
+			encoder.AddQuery("TagKeys").String(v.TagKeys[i])
 		}
 	}
 
@@ -5854,25 +5710,19 @@ func awsRestjson1_serializeOpHttpBindingsUpdateConfigurationSetEventDestinationI
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ConfigurationSetName == nil {
+	if v.ConfigurationSetName == nil || len(*v.ConfigurationSetName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationSetName must not be empty")}
 	}
 	if v.ConfigurationSetName != nil {
-		if len(*v.ConfigurationSetName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ConfigurationSetName must not be empty")}
-		}
 		if err := encoder.SetURI("ConfigurationSetName").String(*v.ConfigurationSetName); err != nil {
 			return err
 		}
 	}
 
-	if v.EventDestinationName == nil {
+	if v.EventDestinationName == nil || len(*v.EventDestinationName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member EventDestinationName must not be empty")}
 	}
 	if v.EventDestinationName != nil {
-		if len(*v.EventDestinationName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member EventDestinationName must not be empty")}
-		}
 		if err := encoder.SetURI("EventDestinationName").String(*v.EventDestinationName); err != nil {
 			return err
 		}
@@ -5957,25 +5807,19 @@ func awsRestjson1_serializeOpHttpBindingsUpdateContactInput(v *UpdateContactInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ContactListName == nil {
+	if v.ContactListName == nil || len(*v.ContactListName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ContactListName must not be empty")}
 	}
 	if v.ContactListName != nil {
-		if len(*v.ContactListName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ContactListName must not be empty")}
-		}
 		if err := encoder.SetURI("ContactListName").String(*v.ContactListName); err != nil {
 			return err
 		}
 	}
 
-	if v.EmailAddress == nil {
+	if v.EmailAddress == nil || len(*v.EmailAddress) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member EmailAddress must not be empty")}
 	}
 	if v.EmailAddress != nil {
-		if len(*v.EmailAddress) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member EmailAddress must not be empty")}
-		}
 		if err := encoder.SetURI("EmailAddress").String(*v.EmailAddress); err != nil {
 			return err
 		}
@@ -6000,9 +5844,9 @@ func awsRestjson1_serializeOpDocumentUpdateContactInput(v *UpdateContactInput, v
 		}
 	}
 
-	if v.UnsubscribeAll != nil {
+	if v.UnsubscribeAll {
 		ok := object.Key("UnsubscribeAll")
-		ok.Boolean(*v.UnsubscribeAll)
+		ok.Boolean(v.UnsubscribeAll)
 	}
 
 	return nil
@@ -6070,13 +5914,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateContactListInput(v *UpdateContact
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ContactListName == nil {
+	if v.ContactListName == nil || len(*v.ContactListName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ContactListName must not be empty")}
 	}
 	if v.ContactListName != nil {
-		if len(*v.ContactListName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member ContactListName must not be empty")}
-		}
 		if err := encoder.SetURI("ContactListName").String(*v.ContactListName); err != nil {
 			return err
 		}
@@ -6166,13 +6007,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateCustomVerificationEmailTemplateIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.TemplateName == nil {
+	if v.TemplateName == nil || len(*v.TemplateName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member TemplateName must not be empty")}
 	}
 	if v.TemplateName != nil {
-		if len(*v.TemplateName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member TemplateName must not be empty")}
-		}
 		if err := encoder.SetURI("TemplateName").String(*v.TemplateName); err != nil {
 			return err
 		}
@@ -6275,25 +6113,19 @@ func awsRestjson1_serializeOpHttpBindingsUpdateEmailIdentityPolicyInput(v *Updat
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.EmailIdentity == nil {
+	if v.EmailIdentity == nil || len(*v.EmailIdentity) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member EmailIdentity must not be empty")}
 	}
 	if v.EmailIdentity != nil {
-		if len(*v.EmailIdentity) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member EmailIdentity must not be empty")}
-		}
 		if err := encoder.SetURI("EmailIdentity").String(*v.EmailIdentity); err != nil {
 			return err
 		}
 	}
 
-	if v.PolicyName == nil {
+	if v.PolicyName == nil || len(*v.PolicyName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member PolicyName must not be empty")}
 	}
 	if v.PolicyName != nil {
-		if len(*v.PolicyName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member PolicyName must not be empty")}
-		}
 		if err := encoder.SetURI("PolicyName").String(*v.PolicyName); err != nil {
 			return err
 		}
@@ -6376,13 +6208,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateEmailTemplateInput(v *UpdateEmail
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.TemplateName == nil {
+	if v.TemplateName == nil || len(*v.TemplateName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member TemplateName must not be empty")}
 	}
 	if v.TemplateName != nil {
-		if len(*v.TemplateName) == 0 {
-			return &smithy.SerializationError{Err: fmt.Errorf("input member TemplateName must not be empty")}
-		}
 		if err := encoder.SetURI("TemplateName").String(*v.TemplateName); err != nil {
 			return err
 		}
@@ -6405,17 +6234,13 @@ func awsRestjson1_serializeOpDocumentUpdateEmailTemplateInput(v *UpdateEmailTemp
 	return nil
 }
 
-func awsRestjson1_serializeDocumentAdditionalContactEmailAddresses(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentAdditionalContactEmailAddresses(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -6483,17 +6308,13 @@ func awsRestjson1_serializeDocumentBulkEmailEntry(v *types.BulkEmailEntry, value
 	return nil
 }
 
-func awsRestjson1_serializeDocumentBulkEmailEntryList(v []*types.BulkEmailEntry, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentBulkEmailEntryList(v []types.BulkEmailEntry, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentBulkEmailEntry(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentBulkEmailEntry(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -6536,17 +6357,13 @@ func awsRestjson1_serializeDocumentCloudWatchDimensionConfiguration(v *types.Clo
 	return nil
 }
 
-func awsRestjson1_serializeDocumentCloudWatchDimensionConfigurations(v []*types.CloudWatchDimensionConfiguration, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentCloudWatchDimensionConfigurations(v []types.CloudWatchDimensionConfiguration, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentCloudWatchDimensionConfiguration(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentCloudWatchDimensionConfiguration(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -6673,34 +6490,26 @@ func awsRestjson1_serializeDocumentDomainDeliverabilityTrackingOption(v *types.D
 	return nil
 }
 
-func awsRestjson1_serializeDocumentDomainDeliverabilityTrackingOptions(v []*types.DomainDeliverabilityTrackingOption, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentDomainDeliverabilityTrackingOptions(v []types.DomainDeliverabilityTrackingOption, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentDomainDeliverabilityTrackingOption(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentDomainDeliverabilityTrackingOption(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentEmailAddressList(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentEmailAddressList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -6766,9 +6575,9 @@ func awsRestjson1_serializeDocumentEventDestinationDefinition(v *types.EventDest
 		}
 	}
 
-	if v.Enabled != nil {
+	if v.Enabled {
 		ok := object.Key("Enabled")
-		ok.Boolean(*v.Enabled)
+		ok.Boolean(v.Enabled)
 	}
 
 	if v.KinesisFirehoseDestination != nil {
@@ -6855,9 +6664,9 @@ func awsRestjson1_serializeDocumentInboxPlacementTrackingOption(v *types.InboxPl
 	object := value.Object()
 	defer object.Close()
 
-	if v.Global != nil {
+	if v.Global {
 		ok := object.Key("Global")
-		ok.Boolean(*v.Global)
+		ok.Boolean(v.Global)
 	}
 
 	if v.TrackedIsps != nil {
@@ -6870,17 +6679,13 @@ func awsRestjson1_serializeDocumentInboxPlacementTrackingOption(v *types.InboxPl
 	return nil
 }
 
-func awsRestjson1_serializeDocumentIspNameList(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentIspNameList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -6976,17 +6781,13 @@ func awsRestjson1_serializeDocumentMessageTag(v *types.MessageTag, value smithyj
 	return nil
 }
 
-func awsRestjson1_serializeDocumentMessageTagList(v []*types.MessageTag, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentMessageTagList(v []types.MessageTag, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentMessageTag(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentMessageTag(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -7052,9 +6853,9 @@ func awsRestjson1_serializeDocumentReputationOptions(v *types.ReputationOptions,
 		ok.Double(smithytime.FormatEpochSeconds(*v.LastFreshStart))
 	}
 
-	if v.ReputationMetricsEnabled != nil {
+	if v.ReputationMetricsEnabled {
 		ok := object.Key("ReputationMetricsEnabled")
-		ok.Boolean(*v.ReputationMetricsEnabled)
+		ok.Boolean(v.ReputationMetricsEnabled)
 	}
 
 	return nil
@@ -7064,9 +6865,9 @@ func awsRestjson1_serializeDocumentSendingOptions(v *types.SendingOptions, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.SendingEnabled != nil {
+	if v.SendingEnabled {
 		ok := object.Key("SendingEnabled")
-		ok.Boolean(*v.SendingEnabled)
+		ok.Boolean(v.SendingEnabled)
 	}
 
 	return nil
@@ -7138,17 +6939,13 @@ func awsRestjson1_serializeDocumentTag(v *types.Tag, value smithyjson.Value) err
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTagList(v []*types.Tag, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTagList(v []types.Tag, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentTag(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -7213,9 +7010,9 @@ func awsRestjson1_serializeDocumentTopicFilter(v *types.TopicFilter, value smith
 		ok.String(*v.TopicName)
 	}
 
-	if v.UseDefaultIfPreferenceUnavailable != nil {
+	if v.UseDefaultIfPreferenceUnavailable {
 		ok := object.Key("UseDefaultIfPreferenceUnavailable")
-		ok.Boolean(*v.UseDefaultIfPreferenceUnavailable)
+		ok.Boolean(v.UseDefaultIfPreferenceUnavailable)
 	}
 
 	return nil
@@ -7238,34 +7035,26 @@ func awsRestjson1_serializeDocumentTopicPreference(v *types.TopicPreference, val
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTopicPreferenceList(v []*types.TopicPreference, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTopicPreferenceList(v []types.TopicPreference, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentTopicPreference(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentTopicPreference(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTopics(v []*types.Topic, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentTopics(v []types.Topic, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentTopic(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentTopic(&v[i], av); err != nil {
 			return err
 		}
 	}

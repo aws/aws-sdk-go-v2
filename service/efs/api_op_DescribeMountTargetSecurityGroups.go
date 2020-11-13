@@ -50,7 +50,7 @@ type DescribeMountTargetSecurityGroupsOutput struct {
 	// An array of security groups.
 	//
 	// This member is required.
-	SecurityGroups []*string
+	SecurityGroups []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

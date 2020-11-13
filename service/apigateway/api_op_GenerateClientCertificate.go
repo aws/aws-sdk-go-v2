@@ -36,7 +36,7 @@ type GenerateClientCertificateInput struct {
 	// The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The
 	// tag key can be up to 128 characters and must not start with aws:. The tag value
 	// can be up to 256 characters.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // Represents a client certificate used to configure client-side SSL authentication
@@ -64,7 +64,7 @@ type GenerateClientCertificateOutput struct {
 	PemEncodedCertificate *string
 
 	// The collection of tags. Each tag element is associated with a given resource.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

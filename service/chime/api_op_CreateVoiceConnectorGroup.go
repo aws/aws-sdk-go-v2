@@ -40,7 +40,7 @@ type CreateVoiceConnectorGroupInput struct {
 	Name *string
 
 	// The Amazon Chime Voice Connectors to route inbound calls to.
-	VoiceConnectorItems []*types.VoiceConnectorItem
+	VoiceConnectorItems []types.VoiceConnectorItem
 }
 
 type CreateVoiceConnectorGroupOutput struct {

@@ -34,7 +34,7 @@ type CreateStreamInput struct {
 	// The files to stream.
 	//
 	// This member is required.
-	Files []*types.StreamFile
+	Files []types.StreamFile
 
 	// An IAM role that allows the IoT service principal assumes to access your S3
 	// files.
@@ -51,7 +51,7 @@ type CreateStreamInput struct {
 	Description *string
 
 	// Metadata which can be used to manage streams.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateStreamOutput struct {

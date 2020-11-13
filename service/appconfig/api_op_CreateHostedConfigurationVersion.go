@@ -57,7 +57,7 @@ type CreateHostedConfigurationVersionInput struct {
 	// configuration updates when creating a new version. To ensure your data is not
 	// overwritten when creating multiple hosted configuration versions in rapid
 	// succession, specify the version of the latest hosted configuration version.
-	LatestVersionNumber *int32
+	LatestVersionNumber int32
 }
 
 type CreateHostedConfigurationVersionOutput struct {
@@ -80,7 +80,7 @@ type CreateHostedConfigurationVersionOutput struct {
 	Description *string
 
 	// The configuration version.
-	VersionNumber *int32
+	VersionNumber int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

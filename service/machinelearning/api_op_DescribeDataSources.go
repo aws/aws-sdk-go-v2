@@ -115,7 +115,7 @@ type DescribeDataSourcesOutput struct {
 	NextToken *string
 
 	// A list of DataSource that meet the search criteria.
-	Results []*types.DataSource
+	Results []types.DataSource
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

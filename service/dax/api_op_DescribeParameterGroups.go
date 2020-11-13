@@ -42,7 +42,7 @@ type DescribeParameterGroupsInput struct {
 	NextToken *string
 
 	// The names of the parameter groups.
-	ParameterGroupNames []*string
+	ParameterGroupNames []string
 }
 
 type DescribeParameterGroupsOutput struct {
@@ -52,7 +52,7 @@ type DescribeParameterGroupsOutput struct {
 
 	// An array of parameter groups. Each element in the array represents one parameter
 	// group.
-	ParameterGroups []*types.ParameterGroup
+	ParameterGroups []types.ParameterGroup
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

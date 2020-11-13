@@ -2812,13 +2812,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagListType(v []*types.Tag) error {
+func validateTagListType(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagListType"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

@@ -1090,13 +1090,13 @@ func addOpUpdateWorldTemplateValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpUpdateWorldTemplate{}, middleware.After)
 }
 
-func validateCreateSimulationJobRequests(v []*types.SimulationJobRequest) error {
+func validateCreateSimulationJobRequests(v []types.SimulationJobRequest) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateSimulationJobRequests"}
 	for i := range v {
-		if err := validateSimulationJobRequest(v[i]); err != nil {
+		if err := validateSimulationJobRequest(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1128,13 +1128,13 @@ func validateDataSourceConfig(v *types.DataSourceConfig) error {
 	}
 }
 
-func validateDataSourceConfigs(v []*types.DataSourceConfig) error {
+func validateDataSourceConfigs(v []types.DataSourceConfig) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DataSourceConfigs"}
 	for i := range v {
-		if err := validateDataSourceConfig(v[i]); err != nil {
+		if err := validateDataSourceConfig(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1170,13 +1170,13 @@ func validateDeploymentApplicationConfig(v *types.DeploymentApplicationConfig) e
 	}
 }
 
-func validateDeploymentApplicationConfigs(v []*types.DeploymentApplicationConfig) error {
+func validateDeploymentApplicationConfigs(v []types.DeploymentApplicationConfig) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeploymentApplicationConfigs"}
 	for i := range v {
-		if err := validateDeploymentApplicationConfig(v[i]); err != nil {
+		if err := validateDeploymentApplicationConfig(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1282,12 +1282,6 @@ func validatePortMapping(v *types.PortMapping) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PortMapping"}
-	if v.ApplicationPort == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplicationPort"))
-	}
-	if v.JobPort == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobPort"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1295,13 +1289,13 @@ func validatePortMapping(v *types.PortMapping) error {
 	}
 }
 
-func validatePortMappingList(v []*types.PortMapping) error {
+func validatePortMappingList(v []types.PortMapping) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PortMappingList"}
 	for i := range v {
-		if err := validatePortMapping(v[i]); err != nil {
+		if err := validatePortMapping(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1334,13 +1328,13 @@ func validateRobotApplicationConfig(v *types.RobotApplicationConfig) error {
 	}
 }
 
-func validateRobotApplicationConfigs(v []*types.RobotApplicationConfig) error {
+func validateRobotApplicationConfigs(v []types.RobotApplicationConfig) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RobotApplicationConfigs"}
 	for i := range v {
-		if err := validateRobotApplicationConfig(v[i]); err != nil {
+		if err := validateRobotApplicationConfig(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1391,13 +1385,13 @@ func validateSimulationApplicationConfig(v *types.SimulationApplicationConfig) e
 	}
 }
 
-func validateSimulationApplicationConfigs(v []*types.SimulationApplicationConfig) error {
+func validateSimulationApplicationConfigs(v []types.SimulationApplicationConfig) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SimulationApplicationConfigs"}
 	for i := range v {
-		if err := validateSimulationApplicationConfig(v[i]); err != nil {
+		if err := validateSimulationApplicationConfig(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1413,9 +1407,6 @@ func validateSimulationJobRequest(v *types.SimulationJobRequest) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SimulationJobRequest"}
-	if v.MaxJobDurationInSeconds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MaxJobDurationInSeconds"))
-	}
 	if v.LoggingConfig != nil {
 		if err := validateLoggingConfig(v.LoggingConfig); err != nil {
 			invalidParams.AddNested("LoggingConfig", err.(smithy.InvalidParamsError))
@@ -1751,9 +1742,6 @@ func validateOpCreateSimulationJobInput(v *CreateSimulationJobInput) error {
 		if err := validateLoggingConfig(v.LoggingConfig); err != nil {
 			invalidParams.AddNested("LoggingConfig", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.MaxJobDurationInSeconds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MaxJobDurationInSeconds"))
 	}
 	if v.IamRole == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IamRole"))

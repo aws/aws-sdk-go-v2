@@ -200,13 +200,13 @@ func validateMetricDimension(v *types.MetricDimension) error {
 	}
 }
 
-func validateMetricDimensions(v []*types.MetricDimension) error {
+func validateMetricDimensions(v []types.MetricDimension) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MetricDimensions"}
 	for i := range v {
-		if err := validateMetricDimension(v[i]); err != nil {
+		if err := validateMetricDimension(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -291,13 +291,13 @@ func validateScalingInstruction(v *types.ScalingInstruction) error {
 	}
 }
 
-func validateScalingInstructions(v []*types.ScalingInstruction) error {
+func validateScalingInstructions(v []types.ScalingInstruction) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ScalingInstructions"}
 	for i := range v {
-		if err := validateScalingInstruction(v[i]); err != nil {
+		if err := validateScalingInstruction(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -333,13 +333,13 @@ func validateTargetTrackingConfiguration(v *types.TargetTrackingConfiguration) e
 	}
 }
 
-func validateTargetTrackingConfigurations(v []*types.TargetTrackingConfiguration) error {
+func validateTargetTrackingConfigurations(v []types.TargetTrackingConfiguration) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TargetTrackingConfigurations"}
 	for i := range v {
-		if err := validateTargetTrackingConfiguration(v[i]); err != nil {
+		if err := validateTargetTrackingConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

@@ -39,11 +39,11 @@ type DescribeWorkspaceSnapshotsOutput struct {
 
 	// Information about the snapshots that can be used to rebuild a WorkSpace. These
 	// snapshots include the user volume.
-	RebuildSnapshots []*types.Snapshot
+	RebuildSnapshots []types.Snapshot
 
 	// Information about the snapshots that can be used to restore a WorkSpace. These
 	// snapshots include both the root volume and the user volume.
-	RestoreSnapshots []*types.Snapshot
+	RestoreSnapshots []types.Snapshot
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

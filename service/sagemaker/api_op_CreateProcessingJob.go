@@ -54,7 +54,7 @@ type CreateProcessingJobInput struct {
 	RoleArn *string
 
 	// Sets the environment variables in the Docker container.
-	Environment map[string]*string
+	Environment map[string]string
 
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
@@ -72,7 +72,7 @@ type CreateProcessingJobInput struct {
 
 	// For each input, data is downloaded from S3 into the processing container before
 	// the processing job begins running if "S3InputMode" is set to File.
-	ProcessingInputs []*types.ProcessingInput
+	ProcessingInputs []types.ProcessingInput
 
 	// Output configuration for the processing job.
 	ProcessingOutputConfig *types.ProcessingOutputConfig
@@ -84,7 +84,7 @@ type CreateProcessingJobInput struct {
 	// Allocation Tags
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
 	// in the AWS Billing and Cost Management User Guide.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateProcessingJobOutput struct {

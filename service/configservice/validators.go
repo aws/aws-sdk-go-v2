@@ -1393,13 +1393,13 @@ func validateAccountAggregationSource(v *types.AccountAggregationSource) error {
 	}
 }
 
-func validateAccountAggregationSourceList(v []*types.AccountAggregationSource) error {
+func validateAccountAggregationSourceList(v []types.AccountAggregationSource) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AccountAggregationSourceList"}
 	for i := range v {
-		if err := validateAccountAggregationSource(v[i]); err != nil {
+		if err := validateAccountAggregationSource(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1471,13 +1471,13 @@ func validateConformancePackInputParameter(v *types.ConformancePackInputParamete
 	}
 }
 
-func validateConformancePackInputParameters(v []*types.ConformancePackInputParameter) error {
+func validateConformancePackInputParameters(v []types.ConformancePackInputParameter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ConformancePackInputParameters"}
 	for i := range v {
-		if err := validateConformancePackInputParameter(v[i]); err != nil {
+		if err := validateConformancePackInputParameter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1512,13 +1512,13 @@ func validateEvaluation(v *types.Evaluation) error {
 	}
 }
 
-func validateEvaluations(v []*types.Evaluation) error {
+func validateEvaluations(v []types.Evaluation) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Evaluations"}
 	for i := range v {
-		if err := validateEvaluation(v[i]); err != nil {
+		if err := validateEvaluation(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1603,13 +1603,13 @@ func validateRemediationConfiguration(v *types.RemediationConfiguration) error {
 	}
 }
 
-func validateRemediationConfigurations(v []*types.RemediationConfiguration) error {
+func validateRemediationConfigurations(v []types.RemediationConfiguration) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RemediationConfigurations"}
 	for i := range v {
-		if err := validateRemediationConfiguration(v[i]); err != nil {
+		if err := validateRemediationConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1620,13 +1620,14 @@ func validateRemediationConfigurations(v []*types.RemediationConfiguration) erro
 	}
 }
 
-func validateRemediationParameters(v map[string]*types.RemediationParameterValue) error {
+func validateRemediationParameters(v map[string]types.RemediationParameterValue) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RemediationParameters"}
 	for key := range v {
-		if err := validateRemediationParameterValue(v[key]); err != nil {
+		value := v[key]
+		if err := validateRemediationParameterValue(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1659,13 +1660,13 @@ func validateRemediationParameterValue(v *types.RemediationParameterValue) error
 	}
 }
 
-func validateResourceIdentifiersList(v []*types.AggregateResourceIdentifier) error {
+func validateResourceIdentifiersList(v []types.AggregateResourceIdentifier) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResourceIdentifiersList"}
 	for i := range v {
-		if err := validateAggregateResourceIdentifier(v[i]); err != nil {
+		if err := validateAggregateResourceIdentifier(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1694,13 +1695,13 @@ func validateResourceKey(v *types.ResourceKey) error {
 	}
 }
 
-func validateResourceKeys(v []*types.ResourceKey) error {
+func validateResourceKeys(v []types.ResourceKey) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResourceKeys"}
 	for i := range v {
-		if err := validateResourceKey(v[i]); err != nil {
+		if err := validateResourceKey(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2610,9 +2611,6 @@ func validateOpPutRetentionConfigurationInput(v *PutRetentionConfigurationInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutRetentionConfigurationInput"}
-	if v.RetentionPeriodInDays == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RetentionPeriodInDays"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

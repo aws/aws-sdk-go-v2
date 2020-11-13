@@ -60,7 +60,7 @@ type DescribeReplicationTaskAssessmentResultsOutput struct {
 	Marker *string
 
 	// The task assessment report.
-	ReplicationTaskAssessmentResults []*types.ReplicationTaskAssessmentResult
+	ReplicationTaskAssessmentResults []types.ReplicationTaskAssessmentResult
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

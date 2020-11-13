@@ -75,7 +75,7 @@ type GetSegmentDetectionOutput struct {
 	// AudioMetadata objects includes the audio codec, the number of audio channels,
 	// the duration of the audio stream, and the sample rate. Audio metadata is
 	// returned in each page of information returned by GetSegmentDetection.
-	AudioMetadata []*types.AudioMetadata
+	AudioMetadata []types.AudioMetadata
 
 	// Current status of the segment detection job.
 	JobStatus types.VideoJobStatus
@@ -89,11 +89,11 @@ type GetSegmentDetectionOutput struct {
 	// types (TECHNICAL_CUE or SHOT) specified in the SegmentTypes input parameter of
 	// StartSegmentDetection. Within each segment type the array is sorted by timestamp
 	// values.
-	Segments []*types.SegmentDetection
+	Segments []types.SegmentDetection
 
 	// An array containing the segment types requested in the call to
 	// StartSegmentDetection.
-	SelectedSegmentTypes []*types.SegmentTypeInfo
+	SelectedSegmentTypes []types.SegmentTypeInfo
 
 	// If the job fails, StatusMessage provides a descriptive error message.
 	StatusMessage *string
@@ -103,7 +103,7 @@ type GetSegmentDetectionOutput struct {
 	// that Amazon Rekognition Video chose to analyze. The VideoMetadata object
 	// includes the video codec, video format and other information. Video metadata is
 	// returned in each page of information returned by GetSegmentDetection.
-	VideoMetadata []*types.VideoMetadata
+	VideoMetadata []types.VideoMetadata
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

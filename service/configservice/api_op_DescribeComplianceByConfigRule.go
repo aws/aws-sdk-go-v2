@@ -56,7 +56,7 @@ type DescribeComplianceByConfigRuleInput struct {
 	ComplianceTypes []types.ComplianceType
 
 	// Specify one or more AWS Config rule names to filter the results by rule.
-	ConfigRuleNames []*string
+	ConfigRuleNames []string
 
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
@@ -67,7 +67,7 @@ type DescribeComplianceByConfigRuleInput struct {
 type DescribeComplianceByConfigRuleOutput struct {
 
 	// Indicates whether each of the specified AWS Config rules is compliant.
-	ComplianceByConfigRules []*types.ComplianceByConfigRule
+	ComplianceByConfigRules []types.ComplianceByConfigRule
 
 	// The string that you use in a subsequent request to get the next page of results
 	// in a paginated response.

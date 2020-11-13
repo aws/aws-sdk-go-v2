@@ -71,7 +71,7 @@ type ListAppImageConfigsInput struct {
 type ListAppImageConfigsOutput struct {
 
 	// A list of AppImageConfigs and their properties.
-	AppImageConfigs []*types.AppImageConfigDetails
+	AppImageConfigs []types.AppImageConfigDetails
 
 	// A token for getting the next set of AppImageConfigs, if there are any.
 	NextToken *string

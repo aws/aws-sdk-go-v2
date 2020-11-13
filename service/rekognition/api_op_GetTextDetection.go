@@ -79,7 +79,7 @@ type GetTextDetectionOutput struct {
 	// An array of text detected in the video. Each element contains the detected text,
 	// the time in milliseconds from the start of the video that the text was detected,
 	// and where it was detected on the screen.
-	TextDetections []*types.TextDetectionResult
+	TextDetections []types.TextDetectionResult
 
 	// Version number of the text detection model that was used to detect text.
 	TextModelVersion *string

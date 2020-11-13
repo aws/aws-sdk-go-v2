@@ -38,7 +38,7 @@ type ModifyReplicationSubnetGroupInput struct {
 	// A list of subnet IDs.
 	//
 	// This member is required.
-	SubnetIds []*string
+	SubnetIds []string
 
 	// A description for the replication instance subnet group.
 	ReplicationSubnetGroupDescription *string

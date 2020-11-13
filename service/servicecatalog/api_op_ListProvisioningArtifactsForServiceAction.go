@@ -45,7 +45,7 @@ type ListProvisioningArtifactsForServiceActionInput struct {
 	AcceptLanguage *string
 
 	// The maximum number of items to return with this call.
-	PageSize *int32
+	PageSize int32
 
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
@@ -60,7 +60,7 @@ type ListProvisioningArtifactsForServiceActionOutput struct {
 
 	// An array of objects with information about product views and provisioning
 	// artifacts.
-	ProvisioningArtifactViews []*types.ProvisioningArtifactView
+	ProvisioningArtifactViews []types.ProvisioningArtifactView
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -47,12 +47,12 @@ type UpdateWebhookInput struct {
 	// An array of arrays of WebhookFilter objects used to determine if a webhook event
 	// can trigger a build. A filter group must contain at least one
 	// EVENTWebhookFilter.
-	FilterGroups [][]*types.WebhookFilter
+	FilterGroups [][]types.WebhookFilter
 
 	// A boolean value that specifies whether the associated GitHub repository's secret
 	// token should be updated. If you use Bitbucket for your repository, rotateSecret
 	// is ignored.
-	RotateSecret *bool
+	RotateSecret bool
 }
 
 type UpdateWebhookOutput struct {

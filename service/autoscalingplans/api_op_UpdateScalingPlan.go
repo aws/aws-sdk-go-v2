@@ -44,7 +44,7 @@ type UpdateScalingPlanInput struct {
 	ApplicationSource *types.ApplicationSource
 
 	// The scaling instructions.
-	ScalingInstructions []*types.ScalingInstruction
+	ScalingInstructions []types.ScalingInstruction
 }
 
 type UpdateScalingPlanOutput struct {

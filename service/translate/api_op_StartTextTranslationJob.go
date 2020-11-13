@@ -70,14 +70,14 @@ type StartTextTranslationJobInput struct {
 	// The language code of the output language.
 	//
 	// This member is required.
-	TargetLanguageCodes []*string
+	TargetLanguageCodes []string
 
 	// The name of the batch translation job to be performed.
 	JobName *string
 
 	// The name of the terminology to use in the batch translation job. For a list of
 	// available terminologies, use the ListTerminologies operation.
-	TerminologyNames []*string
+	TerminologyNames []string
 }
 
 type StartTextTranslationJobOutput struct {

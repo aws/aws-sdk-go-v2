@@ -43,20 +43,20 @@ type BatchGetResourceConfigInput struct {
 	// in the list consists of the resource type and resource ID.
 	//
 	// This member is required.
-	ResourceKeys []*types.ResourceKey
+	ResourceKeys []types.ResourceKey
 }
 
 type BatchGetResourceConfigOutput struct {
 
 	// A list that contains the current configuration of one or more resources.
-	BaseConfigurationItems []*types.BaseConfigurationItem
+	BaseConfigurationItems []types.BaseConfigurationItem
 
 	// A list of resource keys that were not processed with the current response. The
 	// unprocessesResourceKeys value is in the same form as ResourceKeys, so the value
 	// can be directly provided to a subsequent BatchGetResourceConfig operation. If
 	// there are no unprocessed resource keys, the response contains an empty
 	// unprocessedResourceKeys list.
-	UnprocessedResourceKeys []*types.ResourceKey
+	UnprocessedResourceKeys []types.ResourceKey
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

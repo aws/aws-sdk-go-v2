@@ -64,7 +64,7 @@ type DescribeForecastOutput struct {
 	ForecastName *string
 
 	// The quantiles at which probabilistic forecasts were generated.
-	ForecastTypes []*string
+	ForecastTypes []string
 
 	// Initially, the same as CreationTime (status is CREATE_PENDING). Updated when
 	// inference (creating the forecast) starts (status changed to CREATE_IN_PROGRESS),

@@ -70,7 +70,7 @@ type GetDocumentTextDetectionInput struct {
 type GetDocumentTextDetectionOutput struct {
 
 	// The results of the text-detection operation.
-	Blocks []*types.Block
+	Blocks []types.Block
 
 	//
 	DetectDocumentTextModelVersion *string
@@ -94,7 +94,7 @@ type GetDocumentTextDetectionOutput struct {
 
 	// A list of warnings that occurred during the text-detection operation for the
 	// document.
-	Warnings []*types.Warning
+	Warnings []types.Warning
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

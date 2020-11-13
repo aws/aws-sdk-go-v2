@@ -270,7 +270,7 @@ type DetectorModelDefinition struct {
 	// Information about the states of the detector.
 	//
 	// This member is required.
-	States []*State
+	States []State
 }
 
 // Information about the detector model.
@@ -446,7 +446,7 @@ type Event struct {
 	EventName *string
 
 	// The actions to be performed.
-	Actions []*Action
+	Actions []Action
 
 	// Optional. The Boolean expression that, when TRUE, causes the actions to be
 	// performed. If not present, the actions are performed (=TRUE). If the expression
@@ -525,7 +525,7 @@ type InputDefinition struct {
 	// expressions used by detectors that monitor this input.
 	//
 	// This member is required.
-	Attributes []*Attribute
+	Attributes []Attribute
 }
 
 // Information about the input.
@@ -638,7 +638,7 @@ type LoggingOptions struct {
 	// If TRUE, logging is enabled for AWS IoT Events.
 	//
 	// This member is required.
-	Enabled *bool
+	Enabled bool
 
 	// The logging level.
 	//
@@ -652,7 +652,7 @@ type LoggingOptions struct {
 
 	// Information that identifies those detector models and their detectors
 	// (instances) for which the logging level is given.
-	DetectorDebugOptions []*DetectorDebugOption
+	DetectorDebugOptions []DetectorDebugOption
 }
 
 // When entering this state, perform these actions if the condition is TRUE.
@@ -660,7 +660,7 @@ type OnEnterLifecycle struct {
 
 	// Specifies the actions that are performed when the state is entered and the
 	// condition is TRUE.
-	Events []*Event
+	Events []Event
 }
 
 // When exiting this state, perform these actions if the specified condition is
@@ -669,18 +669,18 @@ type OnExitLifecycle struct {
 
 	// Specifies the actions that are performed when the state is exited and the
 	// condition is TRUE.
-	Events []*Event
+	Events []Event
 }
 
 // Specifies the actions performed when the condition evaluates to TRUE.
 type OnInputLifecycle struct {
 
 	// Specifies the actions performed when the condition evaluates to TRUE.
-	Events []*Event
+	Events []Event
 
 	// Specifies the actions performed, and the next state entered, when a condition
 	// evaluates to TRUE.
-	TransitionEvents []*TransitionEvent
+	TransitionEvents []TransitionEvent
 }
 
 // Information needed to configure the payload. By default, AWS IoT Events
@@ -835,5 +835,5 @@ type TransitionEvent struct {
 	NextState *string
 
 	// The actions to be performed.
-	Actions []*Action
+	Actions []Action
 }

@@ -35,7 +35,7 @@ type TagResourceInput struct {
 	ResourceArn *string
 
 	// The collection of tags. Each tag element is associated with a given resource.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type TagResourceOutput struct {

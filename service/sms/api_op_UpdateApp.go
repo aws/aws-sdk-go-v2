@@ -42,10 +42,10 @@ type UpdateAppInput struct {
 	RoleName *string
 
 	// The server groups in the application to update.
-	ServerGroups []*types.ServerGroup
+	ServerGroups []types.ServerGroup
 
 	// The tags to associate with the application.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type UpdateAppOutput struct {
@@ -54,10 +54,10 @@ type UpdateAppOutput struct {
 	AppSummary *types.AppSummary
 
 	// The updated server groups in the application.
-	ServerGroups []*types.ServerGroup
+	ServerGroups []types.ServerGroup
 
 	// The tags associated with the application.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

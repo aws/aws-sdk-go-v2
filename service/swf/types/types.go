@@ -14,14 +14,14 @@ type ActivityTaskCanceledEventAttributes struct {
 	// tracing back the chain of events leading up to this event.
 	//
 	// This member is required.
-	ScheduledEventId *int64
+	ScheduledEventId int64
 
 	// The ID of the ActivityTaskStarted event recorded when this activity task was
 	// started. This information can be useful for diagnosing problems by tracing back
 	// the chain of events leading up to this event.
 	//
 	// This member is required.
-	StartedEventId *int64
+	StartedEventId int64
 
 	// Details of the cancellation.
 	Details *string
@@ -29,7 +29,7 @@ type ActivityTaskCanceledEventAttributes struct {
 	// If set, contains the ID of the last ActivityTaskCancelRequested event recorded
 	// for this activity task. This information can be useful for diagnosing problems
 	// by tracing back the chain of events leading up to this event.
-	LatestCancelRequestedEventId *int64
+	LatestCancelRequestedEventId int64
 }
 
 // Provides the details of the ActivityTaskCancelRequested event.
@@ -46,7 +46,7 @@ type ActivityTaskCancelRequestedEventAttributes struct {
 	// the chain of events leading up to this event.
 	//
 	// This member is required.
-	DecisionTaskCompletedEventId *int64
+	DecisionTaskCompletedEventId int64
 }
 
 // Provides the details of the ActivityTaskCompleted event.
@@ -57,14 +57,14 @@ type ActivityTaskCompletedEventAttributes struct {
 	// tracing back the chain of events leading up to this event.
 	//
 	// This member is required.
-	ScheduledEventId *int64
+	ScheduledEventId int64
 
 	// The ID of the ActivityTaskStarted event recorded when this activity task was
 	// started. This information can be useful for diagnosing problems by tracing back
 	// the chain of events leading up to this event.
 	//
 	// This member is required.
-	StartedEventId *int64
+	StartedEventId int64
 
 	// The results of the activity task.
 	Result *string
@@ -78,14 +78,14 @@ type ActivityTaskFailedEventAttributes struct {
 	// tracing back the chain of events leading up to this event.
 	//
 	// This member is required.
-	ScheduledEventId *int64
+	ScheduledEventId int64
 
 	// The ID of the ActivityTaskStarted event recorded when this activity task was
 	// started. This information can be useful for diagnosing problems by tracing back
 	// the chain of events leading up to this event.
 	//
 	// This member is required.
-	StartedEventId *int64
+	StartedEventId int64
 
 	// The details of the failure.
 	Details *string
@@ -113,7 +113,7 @@ type ActivityTaskScheduledEventAttributes struct {
 	// event.
 	//
 	// This member is required.
-	DecisionTaskCompletedEventId *int64
+	DecisionTaskCompletedEventId int64
 
 	// The task list in which the activity task has been scheduled.
 	//
@@ -162,7 +162,7 @@ type ActivityTaskStartedEventAttributes struct {
 	// tracing back the chain of events leading up to this event.
 	//
 	// This member is required.
-	ScheduledEventId *int64
+	ScheduledEventId int64
 
 	// Identity of the worker that was assigned this task. This aids diagnostics when
 	// problems arise. The form of this identity is user defined.
@@ -177,14 +177,14 @@ type ActivityTaskTimedOutEventAttributes struct {
 	// tracing back the chain of events leading up to this event.
 	//
 	// This member is required.
-	ScheduledEventId *int64
+	ScheduledEventId int64
 
 	// The ID of the ActivityTaskStarted event recorded when this activity task was
 	// started. This information can be useful for diagnosing problems by tracing back
 	// the chain of events leading up to this event.
 	//
 	// This member is required.
-	StartedEventId *int64
+	StartedEventId int64
 
 	// The type of the timeout that caused this event.
 	//
@@ -337,7 +337,7 @@ type CancelTimerFailedEventAttributes struct {
 	// leading up to this event.
 	//
 	// This member is required.
-	DecisionTaskCompletedEventId *int64
+	DecisionTaskCompletedEventId int64
 
 	// The timerId provided in the CancelTimer decision that failed.
 	//
@@ -390,7 +390,7 @@ type CancelWorkflowExecutionFailedEventAttributes struct {
 	// the chain of events leading up to this event.
 	//
 	// This member is required.
-	DecisionTaskCompletedEventId *int64
+	DecisionTaskCompletedEventId int64
 }
 
 // Provide details of the ChildWorkflowExecutionCanceled event.
@@ -402,14 +402,14 @@ type ChildWorkflowExecutionCanceledEventAttributes struct {
 	// events leading up to this event.
 	//
 	// This member is required.
-	InitiatedEventId *int64
+	InitiatedEventId int64
 
 	// The ID of the ChildWorkflowExecutionStarted event recorded when this child
 	// workflow execution was started. This information can be useful for diagnosing
 	// problems by tracing back the chain of events leading up to this event.
 	//
 	// This member is required.
-	StartedEventId *int64
+	StartedEventId int64
 
 	// The child workflow execution that was canceled.
 	//
@@ -434,14 +434,14 @@ type ChildWorkflowExecutionCompletedEventAttributes struct {
 	// events leading up to this event.
 	//
 	// This member is required.
-	InitiatedEventId *int64
+	InitiatedEventId int64
 
 	// The ID of the ChildWorkflowExecutionStarted event recorded when this child
 	// workflow execution was started. This information can be useful for diagnosing
 	// problems by tracing back the chain of events leading up to this event.
 	//
 	// This member is required.
-	StartedEventId *int64
+	StartedEventId int64
 
 	// The child workflow execution that was completed.
 	//
@@ -466,14 +466,14 @@ type ChildWorkflowExecutionFailedEventAttributes struct {
 	// events leading up to this event.
 	//
 	// This member is required.
-	InitiatedEventId *int64
+	InitiatedEventId int64
 
 	// The ID of the ChildWorkflowExecutionStarted event recorded when this child
 	// workflow execution was started. This information can be useful for diagnosing
 	// problems by tracing back the chain of events leading up to this event.
 	//
 	// This member is required.
-	StartedEventId *int64
+	StartedEventId int64
 
 	// The child workflow execution that failed.
 	//
@@ -501,7 +501,7 @@ type ChildWorkflowExecutionStartedEventAttributes struct {
 	// events leading up to this event.
 	//
 	// This member is required.
-	InitiatedEventId *int64
+	InitiatedEventId int64
 
 	// The child workflow execution that was started.
 	//
@@ -523,14 +523,14 @@ type ChildWorkflowExecutionTerminatedEventAttributes struct {
 	// events leading up to this event.
 	//
 	// This member is required.
-	InitiatedEventId *int64
+	InitiatedEventId int64
 
 	// The ID of the ChildWorkflowExecutionStarted event recorded when this child
 	// workflow execution was started. This information can be useful for diagnosing
 	// problems by tracing back the chain of events leading up to this event.
 	//
 	// This member is required.
-	StartedEventId *int64
+	StartedEventId int64
 
 	// The child workflow execution that was terminated.
 	//
@@ -552,14 +552,14 @@ type ChildWorkflowExecutionTimedOutEventAttributes struct {
 	// events leading up to this event.
 	//
 	// This member is required.
-	InitiatedEventId *int64
+	InitiatedEventId int64
 
 	// The ID of the ChildWorkflowExecutionStarted event recorded when this child
 	// workflow execution was started. This information can be useful for diagnosing
 	// problems by tracing back the chain of events leading up to this event.
 	//
 	// This member is required.
-	StartedEventId *int64
+	StartedEventId int64
 
 	// The type of the timeout that caused the child workflow execution to time out.
 	//
@@ -634,7 +634,7 @@ type CompleteWorkflowExecutionFailedEventAttributes struct {
 	// back the chain of events leading up to this event.
 	//
 	// This member is required.
-	DecisionTaskCompletedEventId *int64
+	DecisionTaskCompletedEventId int64
 }
 
 // Provides the details of the ContinueAsNewWorkflowExecution decision. Access
@@ -711,7 +711,7 @@ type ContinueAsNewWorkflowExecutionDecisionAttributes struct {
 	// tags can be specified. You can list workflow executions with a specific tag by
 	// calling ListOpenWorkflowExecutions or ListClosedWorkflowExecutions and
 	// specifying a TagFilter.
-	TagList []*string
+	TagList []string
 
 	// The task list to use for the decisions of the new (continued) workflow
 	// execution.
@@ -761,7 +761,7 @@ type ContinueAsNewWorkflowExecutionFailedEventAttributes struct {
 	// back the chain of events leading up to this event.
 	//
 	// This member is required.
-	DecisionTaskCompletedEventId *int64
+	DecisionTaskCompletedEventId int64
 }
 
 // Specifies a decision made by the decider. A decision can be one of these
@@ -1016,14 +1016,14 @@ type DecisionTaskCompletedEventAttributes struct {
 	// tracing back the chain of events leading up to this event.
 	//
 	// This member is required.
-	ScheduledEventId *int64
+	ScheduledEventId int64
 
 	// The ID of the DecisionTaskStarted event recorded when this decision task was
 	// started. This information can be useful for diagnosing problems by tracing back
 	// the chain of events leading up to this event.
 	//
 	// This member is required.
-	StartedEventId *int64
+	StartedEventId int64
 
 	// User defined context for the workflow execution.
 	ExecutionContext *string
@@ -1060,7 +1060,7 @@ type DecisionTaskStartedEventAttributes struct {
 	// tracing back the chain of events leading up to this event.
 	//
 	// This member is required.
-	ScheduledEventId *int64
+	ScheduledEventId int64
 
 	// Identity of the decider making the request. This enables diagnostic tracing when
 	// problems arise. The form of this identity is user defined.
@@ -1075,14 +1075,14 @@ type DecisionTaskTimedOutEventAttributes struct {
 	// tracing back the chain of events leading up to this event.
 	//
 	// This member is required.
-	ScheduledEventId *int64
+	ScheduledEventId int64
 
 	// The ID of the DecisionTaskStarted event recorded when this decision task was
 	// started. This information can be useful for diagnosing problems by tracing back
 	// the chain of events leading up to this event.
 	//
 	// This member is required.
-	StartedEventId *int64
+	StartedEventId int64
 
 	// The type of timeout that expired before the decision task could be completed.
 	//
@@ -1152,7 +1152,7 @@ type ExternalWorkflowExecutionCancelRequestedEventAttributes struct {
 	// problems by tracing back the chain of events leading up to this event.
 	//
 	// This member is required.
-	InitiatedEventId *int64
+	InitiatedEventId int64
 
 	// The external workflow execution to which the cancellation request was delivered.
 	//
@@ -1169,7 +1169,7 @@ type ExternalWorkflowExecutionSignaledEventAttributes struct {
 	// events leading up to this event.
 	//
 	// This member is required.
-	InitiatedEventId *int64
+	InitiatedEventId int64
 
 	// The external workflow execution that the signal was delivered to.
 	//
@@ -1225,7 +1225,7 @@ type FailWorkflowExecutionFailedEventAttributes struct {
 	// events leading up to this event.
 	//
 	// This member is required.
-	DecisionTaskCompletedEventId *int64
+	DecisionTaskCompletedEventId int64
 }
 
 // Event within a workflow execution. A history event can be one of these types:
@@ -1401,7 +1401,7 @@ type HistoryEvent struct {
 	// in the workflow execution history.
 	//
 	// This member is required.
-	EventId *int64
+	EventId int64
 
 	// The date and time when the event occurred.
 	//
@@ -1676,14 +1676,14 @@ type LambdaFunctionCompletedEventAttributes struct {
 	// the chain of events leading up to this event.
 	//
 	// This member is required.
-	ScheduledEventId *int64
+	ScheduledEventId int64
 
 	// The ID of the LambdaFunctionStarted event recorded when this activity task
 	// started. To help diagnose issues, use this information to trace back the chain
 	// of events leading up to this event.
 	//
 	// This member is required.
-	StartedEventId *int64
+	StartedEventId int64
 
 	// The results of the Lambda task.
 	Result *string
@@ -1698,14 +1698,14 @@ type LambdaFunctionFailedEventAttributes struct {
 	// the chain of events leading up to this event.
 	//
 	// This member is required.
-	ScheduledEventId *int64
+	ScheduledEventId int64
 
 	// The ID of the LambdaFunctionStarted event recorded when this activity task
 	// started. To help diagnose issues, use this information to trace back the chain
 	// of events leading up to this event.
 	//
 	// This member is required.
-	StartedEventId *int64
+	StartedEventId int64
 
 	// The details of the failure.
 	Details *string
@@ -1723,7 +1723,7 @@ type LambdaFunctionScheduledEventAttributes struct {
 	// information to trace back the chain of events leading up to this event.
 	//
 	// This member is required.
-	DecisionTaskCompletedEventId *int64
+	DecisionTaskCompletedEventId int64
 
 	// The unique ID of the Lambda task.
 	//
@@ -1755,7 +1755,7 @@ type LambdaFunctionStartedEventAttributes struct {
 	// the chain of events leading up to this event.
 	//
 	// This member is required.
-	ScheduledEventId *int64
+	ScheduledEventId int64
 }
 
 // Provides details of the LambdaFunctionTimedOut event.
@@ -1766,14 +1766,14 @@ type LambdaFunctionTimedOutEventAttributes struct {
 	// the chain of events leading up to this event.
 	//
 	// This member is required.
-	ScheduledEventId *int64
+	ScheduledEventId int64
 
 	// The ID of the ActivityTaskStarted event that was recorded when this activity
 	// task started. To help diagnose issues, use this information to trace back the
 	// chain of events leading up to this event.
 	//
 	// This member is required.
-	StartedEventId *int64
+	StartedEventId int64
 
 	// The type of the timeout that caused this event.
 	TimeoutType LambdaFunctionTimeoutType
@@ -1788,7 +1788,7 @@ type MarkerRecordedEventAttributes struct {
 	// events leading up to this event.
 	//
 	// This member is required.
-	DecisionTaskCompletedEventId *int64
+	DecisionTaskCompletedEventId int64
 
 	// The name of the marker.
 	//
@@ -1849,7 +1849,7 @@ type RecordMarkerFailedEventAttributes struct {
 	// of events leading up to this event.
 	//
 	// This member is required.
-	DecisionTaskCompletedEventId *int64
+	DecisionTaskCompletedEventId int64
 
 	// The marker's name.
 	//
@@ -1909,7 +1909,7 @@ type RequestCancelActivityTaskFailedEventAttributes struct {
 	// the chain of events leading up to this event.
 	//
 	// This member is required.
-	DecisionTaskCompletedEventId *int64
+	DecisionTaskCompletedEventId int64
 }
 
 // Provides the details of the RequestCancelExternalWorkflowExecution decision.
@@ -1966,7 +1966,7 @@ type RequestCancelExternalWorkflowExecutionFailedEventAttributes struct {
 	// tracing back the chain of events leading up to this event.
 	//
 	// This member is required.
-	DecisionTaskCompletedEventId *int64
+	DecisionTaskCompletedEventId int64
 
 	// The ID of the RequestCancelExternalWorkflowExecutionInitiated event
 	// corresponding to the RequestCancelExternalWorkflowExecution decision to cancel
@@ -1974,7 +1974,7 @@ type RequestCancelExternalWorkflowExecutionFailedEventAttributes struct {
 	// problems by tracing back the chain of events leading up to this event.
 	//
 	// This member is required.
-	InitiatedEventId *int64
+	InitiatedEventId int64
 
 	// The workflowId of the external workflow to which the cancel request was to be
 	// delivered.
@@ -2000,7 +2000,7 @@ type RequestCancelExternalWorkflowExecutionInitiatedEventAttributes struct {
 	// tracing back the chain of events leading up to this event.
 	//
 	// This member is required.
-	DecisionTaskCompletedEventId *int64
+	DecisionTaskCompletedEventId int64
 
 	// The workflowId of the external workflow execution to be canceled.
 	//
@@ -2169,7 +2169,7 @@ type ScheduleActivityTaskFailedEventAttributes struct {
 	// event.
 	//
 	// This member is required.
-	DecisionTaskCompletedEventId *int64
+	DecisionTaskCompletedEventId int64
 }
 
 // Decision attributes specified in scheduleLambdaFunctionDecisionAttributes within
@@ -2219,7 +2219,7 @@ type ScheduleLambdaFunctionFailedEventAttributes struct {
 	// information to trace back the chain of events leading up to this event.
 	//
 	// This member is required.
-	DecisionTaskCompletedEventId *int64
+	DecisionTaskCompletedEventId int64
 
 	// The ID provided in the ScheduleLambdaFunction decision that failed.
 	//
@@ -2296,7 +2296,7 @@ type SignalExternalWorkflowExecutionFailedEventAttributes struct {
 	// of events leading up to this event.
 	//
 	// This member is required.
-	DecisionTaskCompletedEventId *int64
+	DecisionTaskCompletedEventId int64
 
 	// The ID of the SignalExternalWorkflowExecutionInitiated event corresponding to
 	// the SignalExternalWorkflowExecution decision to request this signal. This
@@ -2304,7 +2304,7 @@ type SignalExternalWorkflowExecutionFailedEventAttributes struct {
 	// events leading up to this event.
 	//
 	// This member is required.
-	InitiatedEventId *int64
+	InitiatedEventId int64
 
 	// The workflowId of the external workflow execution that the signal was being
 	// delivered to.
@@ -2330,7 +2330,7 @@ type SignalExternalWorkflowExecutionInitiatedEventAttributes struct {
 	// of events leading up to this event.
 	//
 	// This member is required.
-	DecisionTaskCompletedEventId *int64
+	DecisionTaskCompletedEventId int64
 
 	// The name of the signal.
 	//
@@ -2448,7 +2448,7 @@ type StartChildWorkflowExecutionDecisionAttributes struct {
 	// tags can be specified. You can list workflow executions with a specific tag by
 	// calling ListOpenWorkflowExecutions or ListClosedWorkflowExecutions and
 	// specifying a TagFilter.
-	TagList []*string
+	TagList []string
 
 	// The name of the task list to be used for decision tasks of the child workflow
 	// execution. A task list for this workflow execution must be specified either as a
@@ -2501,7 +2501,7 @@ type StartChildWorkflowExecutionFailedEventAttributes struct {
 	// tracing back the chain of events.
 	//
 	// This member is required.
-	DecisionTaskCompletedEventId *int64
+	DecisionTaskCompletedEventId int64
 
 	// When the cause is WORKFLOW_ALREADY_RUNNING, initiatedEventId is the ID of the
 	// StartChildWorkflowExecutionInitiated event that corresponds to the
@@ -2512,7 +2512,7 @@ type StartChildWorkflowExecutionFailedEventAttributes struct {
 	// event doesn't exist.
 	//
 	// This member is required.
-	InitiatedEventId *int64
+	InitiatedEventId int64
 
 	// The workflowId of the child workflow execution.
 	//
@@ -2557,7 +2557,7 @@ type StartChildWorkflowExecutionInitiatedEventAttributes struct {
 	// tracing back the cause of events.
 	//
 	// This member is required.
-	DecisionTaskCompletedEventId *int64
+	DecisionTaskCompletedEventId int64
 
 	// The name of the task list used for the decision tasks of the child workflow
 	// execution.
@@ -2592,7 +2592,7 @@ type StartChildWorkflowExecutionInitiatedEventAttributes struct {
 	LambdaRole *string
 
 	// The list of tags to associated with the child workflow execution.
-	TagList []*string
+	TagList []string
 
 	// The priority assigned for the decision tasks for this workflow execution. Valid
 	// values are integers that range from Java's Integer.MIN_VALUE (-2147483648) to
@@ -2627,7 +2627,7 @@ type StartLambdaFunctionFailedEventAttributes struct {
 	// The ID of the ActivityTaskScheduled event that was recorded when this activity
 	// task was scheduled. To help diagnose issues, use this information to trace back
 	// the chain of events leading up to this event.
-	ScheduledEventId *int64
+	ScheduledEventId int64
 }
 
 // Provides the details of the StartTimer decision. Access Control You can use IAM
@@ -2690,7 +2690,7 @@ type StartTimerFailedEventAttributes struct {
 	// events leading up to this event.
 	//
 	// This member is required.
-	DecisionTaskCompletedEventId *int64
+	DecisionTaskCompletedEventId int64
 
 	// The timerId provided in the StartTimer decision that failed.
 	//
@@ -2727,14 +2727,14 @@ type TimerCanceledEventAttributes struct {
 	// leading up to this event.
 	//
 	// This member is required.
-	DecisionTaskCompletedEventId *int64
+	DecisionTaskCompletedEventId int64
 
 	// The ID of the TimerStarted event that was recorded when this timer was started.
 	// This information can be useful for diagnosing problems by tracing back the chain
 	// of events leading up to this event.
 	//
 	// This member is required.
-	StartedEventId *int64
+	StartedEventId int64
 
 	// The unique ID of the timer that was canceled.
 	//
@@ -2750,7 +2750,7 @@ type TimerFiredEventAttributes struct {
 	// of events leading up to this event.
 	//
 	// This member is required.
-	StartedEventId *int64
+	StartedEventId int64
 
 	// The unique ID of the timer that fired.
 	//
@@ -2767,7 +2767,7 @@ type TimerStartedEventAttributes struct {
 	// events leading up to this event.
 	//
 	// This member is required.
-	DecisionTaskCompletedEventId *int64
+	DecisionTaskCompletedEventId int64
 
 	// The duration of time after which the timer fires. The duration is specified in
 	// seconds, an integer greater than or equal to 0.
@@ -2808,7 +2808,7 @@ type WorkflowExecutionCanceledEventAttributes struct {
 	// the chain of events leading up to this event.
 	//
 	// This member is required.
-	DecisionTaskCompletedEventId *int64
+	DecisionTaskCompletedEventId int64
 
 	// The details of the cancellation.
 	Details *string
@@ -2829,7 +2829,7 @@ type WorkflowExecutionCancelRequestedEventAttributes struct {
 	// history of the source workflow execution. This information can be useful for
 	// diagnosing problems by tracing back the chain of events leading up to this
 	// event.
-	ExternalInitiatedEventId *int64
+	ExternalInitiatedEventId int64
 
 	// The external workflow execution for which the cancellation was requested.
 	ExternalWorkflowExecution *WorkflowExecution
@@ -2844,7 +2844,7 @@ type WorkflowExecutionCompletedEventAttributes struct {
 	// back the chain of events leading up to this event.
 	//
 	// This member is required.
-	DecisionTaskCompletedEventId *int64
+	DecisionTaskCompletedEventId int64
 
 	// The result produced by the workflow execution upon successful completion.
 	Result *string
@@ -2932,7 +2932,7 @@ type WorkflowExecutionContinuedAsNewEventAttributes struct {
 	// back the chain of events leading up to this event.
 	//
 	// This member is required.
-	DecisionTaskCompletedEventId *int64
+	DecisionTaskCompletedEventId int64
 
 	// The runId of the new workflow execution.
 	//
@@ -2962,7 +2962,7 @@ type WorkflowExecutionContinuedAsNewEventAttributes struct {
 	LambdaRole *string
 
 	// The list of tags associated with the new workflow execution.
-	TagList []*string
+	TagList []string
 
 	// The priority of the task to use for the decisions of the new (continued)
 	// workflow execution.
@@ -2983,7 +2983,7 @@ type WorkflowExecutionFailedEventAttributes struct {
 	// events leading up to this event.
 	//
 	// This member is required.
-	DecisionTaskCompletedEventId *int64
+	DecisionTaskCompletedEventId int64
 
 	// The details of the failure.
 	Details *string
@@ -3025,7 +3025,7 @@ type WorkflowExecutionInfo struct {
 	WorkflowType *WorkflowType
 
 	// Set to true if a cancellation is requested for this workflow execution.
-	CancelRequested *bool
+	CancelRequested bool
 
 	// If the execution status is closed then this specifies how the execution was
 	// closed:
@@ -3061,7 +3061,7 @@ type WorkflowExecutionInfo struct {
 	// The list of tags associated with the workflow execution. Tags can be used to
 	// identify and list workflow executions of interest through the visibility APIs. A
 	// workflow execution can have a maximum of 5 tags.
-	TagList []*string
+	TagList []string
 }
 
 // Contains the counts of open tasks, child workflow executions and timers for a
@@ -3071,26 +3071,26 @@ type WorkflowExecutionOpenCounts struct {
 	// The count of activity tasks whose status is OPEN.
 	//
 	// This member is required.
-	OpenActivityTasks *int32
+	OpenActivityTasks int32
 
 	// The count of child workflow executions whose status is OPEN.
 	//
 	// This member is required.
-	OpenChildWorkflowExecutions *int32
+	OpenChildWorkflowExecutions int32
 
 	// The count of decision tasks whose status is OPEN. A workflow execution can have
 	// at most one open decision task.
 	//
 	// This member is required.
-	OpenDecisionTasks *int32
+	OpenDecisionTasks int32
 
 	// The count of timers started by this workflow execution that have not fired yet.
 	//
 	// This member is required.
-	OpenTimers *int32
+	OpenTimers int32
 
 	// The count of Lambda tasks whose status is OPEN.
-	OpenLambdaFunctions *int32
+	OpenLambdaFunctions int32
 }
 
 // Provides the details of the WorkflowExecutionSignaled event.
@@ -3108,7 +3108,7 @@ type WorkflowExecutionSignaledEventAttributes struct {
 	// This information can be useful for diagnosing problems by tracing back the chain
 	// of events leading up to this event. This field is set only if the signal was
 	// initiated by another workflow execution.
-	ExternalInitiatedEventId *int64
+	ExternalInitiatedEventId int64
 
 	// The workflow execution that sent the signal. This is set only of the signal was
 	// sent by another workflow execution.
@@ -3172,7 +3172,7 @@ type WorkflowExecutionStartedEventAttributes struct {
 	// event with this ID can be found in the history of the source workflow execution.
 	// This information can be useful for diagnosing problems by tracing back the chain
 	// of events leading up to this event.
-	ParentInitiatedEventId *int64
+	ParentInitiatedEventId int64
 
 	// The source workflow execution that started this workflow execution. The member
 	// isn't set if the workflow execution was not started by a workflow.
@@ -3180,7 +3180,7 @@ type WorkflowExecutionStartedEventAttributes struct {
 
 	// The list of tags associated with this workflow execution. An execution can have
 	// up to 5 tags.
-	TagList []*string
+	TagList []string
 
 	// The priority of the decision tasks in the workflow execution.
 	TaskPriority *string

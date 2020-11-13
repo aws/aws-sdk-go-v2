@@ -30,7 +30,7 @@ func (c *Client) ListPackagingConfigurations(ctx context.Context, params *ListPa
 type ListPackagingConfigurationsInput struct {
 
 	// Upper bound on number of records to return.
-	MaxResults *int32
+	MaxResults int32
 
 	// A token used to resume pagination from the end of a previous request.
 	NextToken *string
@@ -46,7 +46,7 @@ type ListPackagingConfigurationsOutput struct {
 	NextToken *string
 
 	// A list of MediaPackage VOD PackagingConfiguration resources.
-	PackagingConfigurations []*types.PackagingConfiguration
+	PackagingConfigurations []types.PackagingConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

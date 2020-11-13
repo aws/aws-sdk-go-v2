@@ -41,7 +41,7 @@ type DescribeDirectoriesInput struct {
 	// A list of identifiers of the directories for which to obtain the information. If
 	// this member is null, all directories that belong to the current account are
 	// returned. An empty list results in an InvalidParameterException being thrown.
-	DirectoryIds []*string
+	DirectoryIds []string
 
 	// The maximum number of items to return. If this value is zero, the maximum number
 	// of items is specified by the limitations of the operation.
@@ -60,7 +60,7 @@ type DescribeDirectoriesOutput struct {
 	// member of the request. This occurs if there are less than the requested number
 	// of items left to retrieve, or if the limitations of the operation have been
 	// exceeded.
-	DirectoryDescriptions []*types.DirectoryDescription
+	DirectoryDescriptions []types.DirectoryDescription
 
 	// If not null, more results are available. Pass this value for the NextToken
 	// parameter in a subsequent call to DescribeDirectories to retrieve the next set

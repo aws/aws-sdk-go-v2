@@ -43,14 +43,14 @@ type AttachLoadBalancerToSubnetsInput struct {
 	// Zone.
 	//
 	// This member is required.
-	Subnets []*string
+	Subnets []string
 }
 
 // Contains the output of AttachLoadBalancerToSubnets.
 type AttachLoadBalancerToSubnetsOutput struct {
 
 	// The IDs of the subnets attached to the load balancer.
-	Subnets []*string
+	Subnets []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

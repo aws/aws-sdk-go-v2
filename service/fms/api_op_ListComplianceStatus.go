@@ -62,7 +62,7 @@ type ListComplianceStatusOutput struct {
 	NextToken *string
 
 	// An array of PolicyComplianceStatus objects.
-	PolicyComplianceStatusList []*types.PolicyComplianceStatus
+	PolicyComplianceStatusList []types.PolicyComplianceStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

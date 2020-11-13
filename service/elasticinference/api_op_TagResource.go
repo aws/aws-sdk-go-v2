@@ -36,7 +36,7 @@ type TagResourceInput struct {
 	// The tags to add to the Elastic Inference Accelerator.
 	//
 	// This member is required.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type TagResourceOutput struct {

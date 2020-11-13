@@ -37,7 +37,7 @@ type GetEnrollmentStatusOutput struct {
 
 	// Confirms the enrollment status of member accounts within the organization, if
 	// the account is a master account of an organization.
-	MemberAccountsEnrolled *bool
+	MemberAccountsEnrolled bool
 
 	// The enrollment status of the account.
 	Status types.Status

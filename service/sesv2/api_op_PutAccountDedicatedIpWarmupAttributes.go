@@ -32,7 +32,7 @@ type PutAccountDedicatedIpWarmupAttributesInput struct {
 	// Enables or disables the automatic warm-up feature for dedicated IP addresses
 	// that are associated with your Amazon SES account in the current AWS Region. Set
 	// to true to enable the automatic warm-up feature, or set to false to disable it.
-	AutoWarmupEnabled *bool
+	AutoWarmupEnabled bool
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request

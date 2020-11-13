@@ -75,7 +75,7 @@ type CreateImagePipelineInput struct {
 	Status types.PipelineStatus
 
 	// The tags of the image pipeline.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateImagePipelineOutput struct {

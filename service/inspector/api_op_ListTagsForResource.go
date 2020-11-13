@@ -40,7 +40,7 @@ type ListTagsForResourceOutput struct {
 	// A collection of key and value pairs.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

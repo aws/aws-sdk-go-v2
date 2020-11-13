@@ -39,7 +39,7 @@ type CreateSnapshotScheduleInput struct {
 
 	// The definition of the snapshot schedule. The definition is made up of schedule
 	// expressions, for example "cron(30 12 *)" or "rate(12 hours)".
-	ScheduleDefinitions []*string
+	ScheduleDefinitions []string
 
 	// The description of the snapshot schedule.
 	ScheduleDescription *string
@@ -49,7 +49,7 @@ type CreateSnapshotScheduleInput struct {
 	ScheduleIdentifier *string
 
 	// An optional set of tags you can use to search for the schedule.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // Describes a snapshot schedule. You can set a regular interval for creating
@@ -61,13 +61,13 @@ type CreateSnapshotScheduleOutput struct {
 
 	// A list of clusters associated with the schedule. A maximum of 100 clusters is
 	// returned.
-	AssociatedClusters []*types.ClusterAssociatedToSchedule
+	AssociatedClusters []types.ClusterAssociatedToSchedule
 
 	//
-	NextInvocations []*time.Time
+	NextInvocations []time.Time
 
 	// A list of ScheduleDefinitions.
-	ScheduleDefinitions []*string
+	ScheduleDefinitions []string
 
 	// The description of the schedule.
 	ScheduleDescription *string
@@ -76,7 +76,7 @@ type CreateSnapshotScheduleOutput struct {
 	ScheduleIdentifier *string
 
 	// An optional set of tags describing the schedule.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

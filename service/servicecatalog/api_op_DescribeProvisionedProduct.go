@@ -56,7 +56,7 @@ type DescribeProvisionedProductInput struct {
 type DescribeProvisionedProductOutput struct {
 
 	// Any CloudWatch dashboards that were created when provisioning the product.
-	CloudWatchDashboards []*types.CloudWatchDashboard
+	CloudWatchDashboards []types.CloudWatchDashboard
 
 	// Information about the provisioned product.
 	ProvisionedProductDetail *types.ProvisionedProductDetail

@@ -39,7 +39,7 @@ type GetLayerVersionInput struct {
 	// The version number.
 	//
 	// This member is required.
-	VersionNumber *int64
+	VersionNumber int64
 }
 
 type GetLayerVersionOutput struct {
@@ -67,7 +67,7 @@ type GetLayerVersionOutput struct {
 	LicenseInfo *string
 
 	// The version number.
-	Version *int64
+	Version int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -36,7 +36,7 @@ type GetBlacklistReportsInput struct {
 	// Amazon SES or Amazon Pinpoint.
 	//
 	// This member is required.
-	BlacklistItemNames []*string
+	BlacklistItemNames []string
 }
 
 // An object that contains information about blacklist events.
@@ -46,7 +46,7 @@ type GetBlacklistReportsOutput struct {
 	// IP addresses appears on.
 	//
 	// This member is required.
-	BlacklistReport map[string][]*types.BlacklistEntry
+	BlacklistReport map[string][]types.BlacklistEntry
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

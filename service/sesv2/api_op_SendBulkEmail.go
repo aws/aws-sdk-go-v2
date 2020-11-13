@@ -35,7 +35,7 @@ type SendBulkEmailInput struct {
 	// The list of bulk email entry objects.
 	//
 	// This member is required.
-	BulkEmailEntries []*types.BulkEmailEntry
+	BulkEmailEntries []types.BulkEmailEntry
 
 	// An object that contains the body of the message. You can specify a template
 	// message.
@@ -49,7 +49,7 @@ type SendBulkEmailInput struct {
 	// A list of tags, in the form of name/value pairs, to apply to an email that you
 	// send using the SendEmail operation. Tags correspond to characteristics of the
 	// email that you define, so that you can publish email sending events.
-	DefaultEmailTags []*types.MessageTag
+	DefaultEmailTags []types.MessageTag
 
 	// The address that you want bounce and complaint notifications to be sent to.
 	FeedbackForwardingEmailAddress *string
@@ -86,7 +86,7 @@ type SendBulkEmailInput struct {
 
 	// The "Reply-to" email addresses for the message. When the recipient replies to
 	// the message, each Reply-to address receives the reply.
-	ReplyToAddresses []*string
+	ReplyToAddresses []string
 }
 
 // The following data is returned in JSON format by the service.
@@ -95,7 +95,7 @@ type SendBulkEmailOutput struct {
 	// A list of BulkMailEntry objects.
 	//
 	// This member is required.
-	BulkEmailEntryResults []*types.BulkEmailEntryResult
+	BulkEmailEntryResults []types.BulkEmailEntryResult
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

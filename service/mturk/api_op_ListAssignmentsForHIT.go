@@ -59,7 +59,7 @@ type ListAssignmentsForHITInput struct {
 type ListAssignmentsForHITOutput struct {
 
 	// The collection of Assignment data structures returned by this call.
-	Assignments []*types.Assignment
+	Assignments []types.Assignment
 
 	// If the previous response was incomplete (because there is more data to
 	// retrieve), Amazon Mechanical Turk returns a pagination token in the response.

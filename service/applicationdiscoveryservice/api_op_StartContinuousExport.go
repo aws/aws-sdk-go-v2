@@ -47,7 +47,7 @@ type StartContinuousExportOutput struct {
 	//
 	// * databaseName - the name
 	// of the Glue database used to store the schema.
-	SchemaStorageConfig map[string]*string
+	SchemaStorageConfig map[string]string
 
 	// The timestamp representing when the continuous export was started.
 	StartTime *time.Time

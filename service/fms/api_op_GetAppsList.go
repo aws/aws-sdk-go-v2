@@ -37,7 +37,7 @@ type GetAppsListInput struct {
 
 	// Specifies whether the list to retrieve is a default list owned by AWS Firewall
 	// Manager.
-	DefaultList *bool
+	DefaultList bool
 }
 
 type GetAppsListOutput struct {

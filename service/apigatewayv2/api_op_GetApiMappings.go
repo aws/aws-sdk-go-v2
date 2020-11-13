@@ -45,7 +45,7 @@ type GetApiMappingsInput struct {
 type GetApiMappingsOutput struct {
 
 	// The elements from this collection.
-	Items []*types.ApiMapping
+	Items []types.ApiMapping
 
 	// The next page of elements from this collection. Not valid for the last element
 	// of the collection.

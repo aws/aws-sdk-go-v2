@@ -77,7 +77,7 @@ type ListVolumesOutput struct {
 
 	// An array of VolumeInfo objects, where each object describes an iSCSI volume. If
 	// no volumes are defined for the gateway, then VolumeInfos is an empty array "[]".
-	VolumeInfos []*types.VolumeInfo
+	VolumeInfos []types.VolumeInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

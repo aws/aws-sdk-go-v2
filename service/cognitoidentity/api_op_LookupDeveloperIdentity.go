@@ -56,7 +56,7 @@ type LookupDeveloperIdentityInput struct {
 	IdentityId *string
 
 	// The maximum number of identities to return.
-	MaxResults *int32
+	MaxResults int32
 
 	// A pagination token. The first call you make will have NextToken set to null.
 	// After that the service will return NextToken values as needed. For example,
@@ -73,7 +73,7 @@ type LookupDeveloperIdentityOutput struct {
 	// This is the list of developer user identifiers associated with an identity ID.
 	// Cognito supports the association of multiple developer user identifiers with an
 	// identity ID.
-	DeveloperUserIdentifierList []*string
+	DeveloperUserIdentifierList []string
 
 	// A unique identifier in the format REGION:GUID.
 	IdentityId *string

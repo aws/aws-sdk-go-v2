@@ -95,7 +95,7 @@ type UpdateRuleInput struct {
 	// * FieldToMatch: Contains Data and Type
 	//
 	// This member is required.
-	Updates []*types.RuleUpdate
+	Updates []types.RuleUpdate
 }
 
 type UpdateRuleOutput struct {

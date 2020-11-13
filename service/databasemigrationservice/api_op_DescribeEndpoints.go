@@ -32,7 +32,7 @@ type DescribeEndpointsInput struct {
 
 	// Filters applied to the endpoints. Valid filter names: endpoint-arn |
 	// endpoint-type | endpoint-id | engine-name
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
@@ -50,7 +50,7 @@ type DescribeEndpointsInput struct {
 type DescribeEndpointsOutput struct {
 
 	// Endpoint description.
-	Endpoints []*types.Endpoint
+	Endpoints []types.Endpoint
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the

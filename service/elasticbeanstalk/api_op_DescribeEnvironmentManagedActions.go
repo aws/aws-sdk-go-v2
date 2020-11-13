@@ -44,7 +44,7 @@ type DescribeEnvironmentManagedActionsInput struct {
 type DescribeEnvironmentManagedActionsOutput struct {
 
 	// A list of upcoming and in-progress managed actions.
-	ManagedActions []*types.ManagedAction
+	ManagedActions []types.ManagedAction
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

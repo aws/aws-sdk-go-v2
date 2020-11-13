@@ -38,7 +38,7 @@ type DeleteFlowInput struct {
 
 	// Indicates whether Amazon AppFlow should delete the flow, even if it is currently
 	// in use.
-	ForceDelete *bool
+	ForceDelete bool
 }
 
 type DeleteFlowOutput struct {

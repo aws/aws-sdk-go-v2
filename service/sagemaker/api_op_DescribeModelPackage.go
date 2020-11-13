@@ -67,7 +67,7 @@ type DescribeModelPackageOutput struct {
 	ModelPackageStatusDetails *types.ModelPackageStatusDetails
 
 	// Whether the model package is certified for listing on AWS Marketplace.
-	CertifyForMarketplace *bool
+	CertifyForMarketplace bool
 
 	// Details about inference jobs that can be run with models based on this model
 	// package.

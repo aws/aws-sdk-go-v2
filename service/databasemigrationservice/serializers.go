@@ -2553,32 +2553,24 @@ func awsAwsjson11_serializeDocumentElasticsearchSettings(v *types.ElasticsearchS
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentEventCategoriesList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentEventCategoriesList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentExcludeTestList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentExcludeTestList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2602,34 +2594,26 @@ func awsAwsjson11_serializeDocumentFilter(v *types.Filter, value smithyjson.Valu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentFilterList(v []*types.Filter, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentFilterList(v []types.Filter, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentFilter(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentFilter(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentFilterValueList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentFilterValueList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2681,17 +2665,13 @@ func awsAwsjson11_serializeDocumentIBMDb2Settings(v *types.IBMDb2Settings, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentIncludeTestList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentIncludeTestList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2753,17 +2733,13 @@ func awsAwsjson11_serializeDocumentKafkaSettings(v *types.KafkaSettings, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentKeyList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentKeyList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -3546,32 +3522,24 @@ func awsAwsjson11_serializeDocumentS3Settings(v *types.S3Settings, value smithyj
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSourceIdsList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentSourceIdsList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSubnetIdentifierList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentSubnetIdentifierList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -3608,17 +3576,13 @@ func awsAwsjson11_serializeDocumentSybaseSettings(v *types.SybaseSettings, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTableListToReload(v []*types.TableToReload, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTableListToReload(v []types.TableToReload, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentTableToReload(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentTableToReload(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -3659,34 +3623,26 @@ func awsAwsjson11_serializeDocumentTag(v *types.Tag, value smithyjson.Value) err
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagList(v []*types.Tag, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagList(v []types.Tag, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentTag(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentVpcSecurityGroupIdList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentVpcSecurityGroupIdList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -5085,14 +5041,14 @@ func awsAwsjson11_serializeOpDocumentModifyReplicationInstanceInput(v *ModifyRep
 		ok.Integer(*v.AllocatedStorage)
 	}
 
-	if v.AllowMajorVersionUpgrade != nil {
+	if v.AllowMajorVersionUpgrade {
 		ok := object.Key("AllowMajorVersionUpgrade")
-		ok.Boolean(*v.AllowMajorVersionUpgrade)
+		ok.Boolean(v.AllowMajorVersionUpgrade)
 	}
 
-	if v.ApplyImmediately != nil {
+	if v.ApplyImmediately {
 		ok := object.Key("ApplyImmediately")
-		ok.Boolean(*v.ApplyImmediately)
+		ok.Boolean(v.ApplyImmediately)
 	}
 
 	if v.AutoMinorVersionUpgrade != nil {

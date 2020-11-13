@@ -50,7 +50,7 @@ type RebootCacheClusterInput struct {
 	// 0002, etc.). To reboot an entire cluster, specify all of the cache node IDs.
 	//
 	// This member is required.
-	CacheNodeIdsToReboot []*string
+	CacheNodeIdsToReboot []string
 }
 
 type RebootCacheClusterOutput struct {

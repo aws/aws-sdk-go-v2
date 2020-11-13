@@ -70,7 +70,7 @@ type ListReportGroupsOutput struct {
 	NextToken *string
 
 	// The list of ARNs for the report groups in the current AWS account.
-	ReportGroups []*string
+	ReportGroups []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

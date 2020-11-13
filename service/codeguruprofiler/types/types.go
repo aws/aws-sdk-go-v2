@@ -29,7 +29,7 @@ type AgentConfiguration struct {
 	// This member is required.
 	ShouldProfile *bool
 
-	AgentParameters map[string]*string
+	AgentParameters map[string]string
 }
 
 //
@@ -90,7 +90,7 @@ type ProfileTime struct {
 type FrameMetric struct {
 	FrameName *string
 
-	ThreadStates []*string
+	ThreadStates []string
 
 	Type MetricType
 }

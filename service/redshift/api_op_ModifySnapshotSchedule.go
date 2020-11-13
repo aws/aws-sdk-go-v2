@@ -35,7 +35,7 @@ type ModifySnapshotScheduleInput struct {
 	// schedule expressions, for example, "cron(30 12 *)" or "rate(12 hours)".
 	//
 	// This member is required.
-	ScheduleDefinitions []*string
+	ScheduleDefinitions []string
 
 	// A unique alphanumeric identifier of the schedule to modify.
 	//
@@ -52,13 +52,13 @@ type ModifySnapshotScheduleOutput struct {
 
 	// A list of clusters associated with the schedule. A maximum of 100 clusters is
 	// returned.
-	AssociatedClusters []*types.ClusterAssociatedToSchedule
+	AssociatedClusters []types.ClusterAssociatedToSchedule
 
 	//
-	NextInvocations []*time.Time
+	NextInvocations []time.Time
 
 	// A list of ScheduleDefinitions.
-	ScheduleDefinitions []*string
+	ScheduleDefinitions []string
 
 	// The description of the schedule.
 	ScheduleDescription *string
@@ -67,7 +67,7 @@ type ModifySnapshotScheduleOutput struct {
 	ScheduleIdentifier *string
 
 	// An optional set of tags describing the schedule.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

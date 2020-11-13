@@ -12,6 +12,7 @@ import (
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	"github.com/awslabs/smithy-go/ptr"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
 	"strings"
@@ -321,7 +322,7 @@ func awsRestjson1_deserializeOpDocumentListAccountRolesOutput(v **ListAccountRol
 				if !ok {
 					return fmt.Errorf("expected NextTokenType to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "roleList":
@@ -491,7 +492,7 @@ func awsRestjson1_deserializeOpDocumentListAccountsOutput(v **ListAccountsOutput
 				if !ok {
 					return fmt.Errorf("expected NextTokenType to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -764,7 +765,7 @@ func awsRestjson1_deserializeDocumentAccountInfo(v **types.AccountInfo, value in
 				if !ok {
 					return fmt.Errorf("expected AccountIdType to be of type string, got %T instead", value)
 				}
-				sv.AccountId = &jtv
+				sv.AccountId = ptr.String(jtv)
 			}
 
 		case "accountName":
@@ -773,7 +774,7 @@ func awsRestjson1_deserializeDocumentAccountInfo(v **types.AccountInfo, value in
 				if !ok {
 					return fmt.Errorf("expected AccountNameType to be of type string, got %T instead", value)
 				}
-				sv.AccountName = &jtv
+				sv.AccountName = ptr.String(jtv)
 			}
 
 		case "emailAddress":
@@ -782,7 +783,7 @@ func awsRestjson1_deserializeDocumentAccountInfo(v **types.AccountInfo, value in
 				if !ok {
 					return fmt.Errorf("expected EmailAddressType to be of type string, got %T instead", value)
 				}
-				sv.EmailAddress = &jtv
+				sv.EmailAddress = ptr.String(jtv)
 			}
 
 		default:
@@ -794,7 +795,7 @@ func awsRestjson1_deserializeDocumentAccountInfo(v **types.AccountInfo, value in
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentAccountListType(v *[]*types.AccountInfo, value interface{}) error {
+func awsRestjson1_deserializeDocumentAccountListType(v *[]types.AccountInfo, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -807,18 +808,20 @@ func awsRestjson1_deserializeDocumentAccountListType(v *[]*types.AccountInfo, va
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.AccountInfo
+	var cv []types.AccountInfo
 	if *v == nil {
-		cv = []*types.AccountInfo{}
+		cv = []types.AccountInfo{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.AccountInfo
-		if err := awsRestjson1_deserializeDocumentAccountInfo(&col, value); err != nil {
+		var col types.AccountInfo
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAccountInfo(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -854,7 +857,7 @@ func awsRestjson1_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 				if !ok {
 					return fmt.Errorf("expected ErrorDescription to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -894,7 +897,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				if !ok {
 					return fmt.Errorf("expected ErrorDescription to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -934,7 +937,7 @@ func awsRestjson1_deserializeDocumentRoleCredentials(v **types.RoleCredentials, 
 				if !ok {
 					return fmt.Errorf("expected AccessKeyType to be of type string, got %T instead", value)
 				}
-				sv.AccessKeyId = &jtv
+				sv.AccessKeyId = ptr.String(jtv)
 			}
 
 		case "expiration":
@@ -947,7 +950,7 @@ func awsRestjson1_deserializeDocumentRoleCredentials(v **types.RoleCredentials, 
 				if err != nil {
 					return err
 				}
-				sv.Expiration = &i64
+				sv.Expiration = i64
 			}
 
 		case "secretAccessKey":
@@ -956,7 +959,7 @@ func awsRestjson1_deserializeDocumentRoleCredentials(v **types.RoleCredentials, 
 				if !ok {
 					return fmt.Errorf("expected SecretAccessKeyType to be of type string, got %T instead", value)
 				}
-				sv.SecretAccessKey = &jtv
+				sv.SecretAccessKey = ptr.String(jtv)
 			}
 
 		case "sessionToken":
@@ -965,7 +968,7 @@ func awsRestjson1_deserializeDocumentRoleCredentials(v **types.RoleCredentials, 
 				if !ok {
 					return fmt.Errorf("expected SessionTokenType to be of type string, got %T instead", value)
 				}
-				sv.SessionToken = &jtv
+				sv.SessionToken = ptr.String(jtv)
 			}
 
 		default:
@@ -1005,7 +1008,7 @@ func awsRestjson1_deserializeDocumentRoleInfo(v **types.RoleInfo, value interfac
 				if !ok {
 					return fmt.Errorf("expected AccountIdType to be of type string, got %T instead", value)
 				}
-				sv.AccountId = &jtv
+				sv.AccountId = ptr.String(jtv)
 			}
 
 		case "roleName":
@@ -1014,7 +1017,7 @@ func awsRestjson1_deserializeDocumentRoleInfo(v **types.RoleInfo, value interfac
 				if !ok {
 					return fmt.Errorf("expected RoleNameType to be of type string, got %T instead", value)
 				}
-				sv.RoleName = &jtv
+				sv.RoleName = ptr.String(jtv)
 			}
 
 		default:
@@ -1026,7 +1029,7 @@ func awsRestjson1_deserializeDocumentRoleInfo(v **types.RoleInfo, value interfac
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentRoleListType(v *[]*types.RoleInfo, value interface{}) error {
+func awsRestjson1_deserializeDocumentRoleListType(v *[]types.RoleInfo, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1039,18 +1042,20 @@ func awsRestjson1_deserializeDocumentRoleListType(v *[]*types.RoleInfo, value in
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.RoleInfo
+	var cv []types.RoleInfo
 	if *v == nil {
-		cv = []*types.RoleInfo{}
+		cv = []types.RoleInfo{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.RoleInfo
-		if err := awsRestjson1_deserializeDocumentRoleInfo(&col, value); err != nil {
+		var col types.RoleInfo
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRoleInfo(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -1086,7 +1091,7 @@ func awsRestjson1_deserializeDocumentTooManyRequestsException(v **types.TooManyR
 				if !ok {
 					return fmt.Errorf("expected ErrorDescription to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1126,7 +1131,7 @@ func awsRestjson1_deserializeDocumentUnauthorizedException(v **types.Unauthorize
 				if !ok {
 					return fmt.Errorf("expected ErrorDescription to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:

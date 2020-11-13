@@ -43,7 +43,7 @@ type GetEntitlementsInput struct {
 	// dimension. Filters are described as keys mapped to a lists of values. Filtered
 	// requests are unioned for each value in the value list, and then intersected for
 	// each filter key.
-	Filter map[string][]*string
+	Filter map[string][]string
 
 	// The maximum number of items to retrieve from the GetEntitlements operation. For
 	// pagination, use the NextToken field in subsequent calls to GetEntitlements.
@@ -60,7 +60,7 @@ type GetEntitlementsOutput struct {
 	// The set of entitlements found through the GetEntitlements operation. If the
 	// result contains an empty set of entitlements, NextToken might still be present
 	// and should be used.
-	Entitlements []*types.Entitlement
+	Entitlements []types.Entitlement
 
 	// For paginated results, use NextToken in subsequent calls to GetEntitlements. If
 	// the result contains an empty set of entitlements, NextToken might still be

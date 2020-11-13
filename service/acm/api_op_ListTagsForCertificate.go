@@ -46,7 +46,7 @@ type ListTagsForCertificateInput struct {
 type ListTagsForCertificateOutput struct {
 
 	// The key-value pairs that define the applied tags.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

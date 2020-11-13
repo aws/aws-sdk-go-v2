@@ -66,7 +66,7 @@ type CreateAccountCustomizationInput struct {
 	Namespace *string
 
 	// A list of the tags that you want to attach to this resource.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateAccountCustomizationOutput struct {
@@ -88,7 +88,7 @@ type CreateAccountCustomizationOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

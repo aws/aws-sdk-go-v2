@@ -41,13 +41,13 @@ type DescribeAcceleratorOfferingsInput struct {
 	LocationType types.LocationType
 
 	// The list of accelerator types to describe.
-	AcceleratorTypes []*string
+	AcceleratorTypes []string
 }
 
 type DescribeAcceleratorOfferingsOutput struct {
 
 	// The list of accelerator type offerings for a specific location.
-	AcceleratorTypeOfferings []*types.AcceleratorTypeOffering
+	AcceleratorTypeOfferings []types.AcceleratorTypeOffering
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

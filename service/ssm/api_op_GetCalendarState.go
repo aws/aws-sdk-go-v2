@@ -44,7 +44,7 @@ type GetCalendarStateInput struct {
 	// represent the calendar entries for which you want to get the state.
 	//
 	// This member is required.
-	CalendarNames []*string
+	CalendarNames []string
 
 	// (Optional) The specific time for which you want to get calendar state
 	// information, in ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601) format. If you

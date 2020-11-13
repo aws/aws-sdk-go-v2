@@ -39,7 +39,7 @@ type DescribeScheduledActionsInput struct {
 	EndTime *time.Time
 
 	// List of scheduled action filters.
-	Filters []*types.ScheduledActionFilter
+	Filters []types.ScheduledActionFilter
 
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeScheduledActions request exceed
@@ -76,7 +76,7 @@ type DescribeScheduledActionsOutput struct {
 	Marker *string
 
 	// List of retrieved scheduled actions.
-	ScheduledActions []*types.ScheduledAction
+	ScheduledActions []types.ScheduledAction
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

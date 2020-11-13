@@ -36,7 +36,7 @@ type UntagResourceInput struct {
 	// The tag keys associated with the tag that you want to remove from your flow.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 type UntagResourceOutput struct {

@@ -55,14 +55,14 @@ type CreateApplicationInput struct {
 
 	// Use this parameter to configure an Amazon CloudWatch log stream to monitor
 	// application configuration errors.
-	CloudWatchLoggingOptions []*types.CloudWatchLoggingOption
+	CloudWatchLoggingOptions []types.CloudWatchLoggingOption
 
 	// A list of one or more tags to assign to the application. A tag is a key-value
 	// pair that identifies an application. Note that the maximum number of application
 	// tags includes system tags. The maximum number of user-defined application tags
 	// is 50. For more information, see Using Tagging
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html).
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateApplicationOutput struct {

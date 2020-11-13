@@ -43,7 +43,7 @@ type ListProjectsOutput struct {
 	// An object containing the list of projects.
 	//
 	// This member is required.
-	Projects []*types.ProjectSummary
+	Projects []types.ProjectSummary
 
 	// The token used to retrieve the next set of results - will be effectively empty
 	// if there are no further results.

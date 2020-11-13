@@ -30,7 +30,7 @@ type Application struct {
 	DisplayName *string
 
 	// If there is a problem, the application can be disabled after image creation.
-	Enabled *bool
+	Enabled bool
 
 	// The URL for the application icon. This URL might be time-limited.
 	IconURL *string
@@ -42,7 +42,7 @@ type Application struct {
 	LaunchPath *string
 
 	// Additional attributes that describe the application.
-	Metadata map[string]*string
+	Metadata map[string]string
 
 	// The name of the application.
 	Name *string
@@ -55,7 +55,7 @@ type ApplicationSettings struct {
 	// streaming sessions.
 	//
 	// This member is required.
-	Enabled *bool
+	Enabled bool
 
 	// The path prefix for the S3 bucket where users’ persistent application settings
 	// are stored. You can allow the same persistent application settings to be used
@@ -68,7 +68,7 @@ type ApplicationSettingsResponse struct {
 
 	// Specifies whether persistent application settings are enabled for users during
 	// their streaming sessions.
-	Enabled *bool
+	Enabled bool
 
 	// The S3 bucket where users’ persistent application settings are stored. When
 	// persistent application settings are enabled for the first time for an account in
@@ -121,7 +121,7 @@ type DirectoryConfig struct {
 	CreatedTime *time.Time
 
 	// The distinguished names of the organizational units for computer accounts.
-	OrganizationalUnitDistinguishedNames []*string
+	OrganizationalUnitDistinguishedNames []string
 
 	// The credentials for the service account used by the fleet or image builder to
 	// connect to the directory.
@@ -269,7 +269,7 @@ type Fleet struct {
 	EnableDefaultInternetAccess *bool
 
 	// The fleet errors.
-	FleetErrors []*FleetError
+	FleetErrors []FleetError
 
 	// The fleet type. ALWAYS_ON Provides users with instant-on access to their apps.
 	// You are charged for all running instances in your fleet, even if no users are
@@ -353,7 +353,7 @@ type Image struct {
 	Name *string
 
 	// The applications associated with the image.
-	Applications []*Application
+	Applications []Application
 
 	// The version of the AppStream 2.0 agent to use for instances that are launched
 	// from this image.
@@ -379,7 +379,7 @@ type Image struct {
 	ImageBuilderName *string
 
 	// Indicates whether an image builder can be launched from this image.
-	ImageBuilderSupported *bool
+	ImageBuilderSupported bool
 
 	// The permissions to provide to the destination AWS account for the specified
 	// image.
@@ -414,7 +414,7 @@ type ImageBuilder struct {
 	// The list of virtual private cloud (VPC) interface endpoint objects.
 	// Administrators can connect to the image builder only through the specified
 	// endpoints.
-	AccessEndpoints []*AccessEndpoint
+	AccessEndpoints []AccessEndpoint
 
 	// The version of the AppStream 2.0 agent that is currently being used by the image
 	// builder.
@@ -454,7 +454,7 @@ type ImageBuilder struct {
 	ImageArn *string
 
 	// The image builder errors.
-	ImageBuilderErrors []*ResourceError
+	ImageBuilderErrors []ResourceError
 
 	// The instance type for the image builder. The following instance types are
 	// available:
@@ -714,7 +714,7 @@ type Stack struct {
 
 	// The list of virtual private cloud (VPC) interface endpoint objects. Users of the
 	// stack can connect to AppStream 2.0 only through the specified endpoints.
-	AccessEndpoints []*AccessEndpoint
+	AccessEndpoints []AccessEndpoint
 
 	// The persistent application settings for users of the stack.
 	ApplicationSettings *ApplicationSettingsResponse
@@ -734,7 +734,7 @@ type Stack struct {
 	// The domains where AppStream 2.0 streaming sessions can be embedded in an iframe.
 	// You must approve the domains that you want to host embedded AppStream 2.0
 	// streaming sessions.
-	EmbedHostDomains []*string
+	EmbedHostDomains []string
 
 	// The URL that users are redirected to after they click the Send Feedback link. If
 	// no URL is specified, no Send Feedback link is displayed.
@@ -744,14 +744,14 @@ type Stack struct {
 	RedirectURL *string
 
 	// The errors for the stack.
-	StackErrors []*StackError
+	StackErrors []StackError
 
 	// The storage connectors to enable.
-	StorageConnectors []*StorageConnector
+	StorageConnectors []StorageConnector
 
 	// The actions that are enabled or disabled for users during their streaming
 	// sessions. By default these actions are enabled.
-	UserSettings []*UserSetting
+	UserSettings []UserSetting
 }
 
 // Describes a stack error.
@@ -773,7 +773,7 @@ type StorageConnector struct {
 	ConnectorType StorageConnectorType
 
 	// The names of the domains for the account.
-	Domains []*string
+	Domains []string
 
 	// The ARN of the storage connector.
 	ResourceIdentifier *string
@@ -798,7 +798,7 @@ type UsageReportSubscription struct {
 	Schedule UsageReportSchedule
 
 	// The errors that were returned if usage reports couldn't be generated.
-	SubscriptionErrors []*LastReportGenerationExecutionError
+	SubscriptionErrors []LastReportGenerationExecutionError
 }
 
 // Describes a user in the user pool.
@@ -816,7 +816,7 @@ type User struct {
 	CreatedTime *time.Time
 
 	// Specifies whether the user in the user pool is enabled.
-	Enabled *bool
+	Enabled bool
 
 	// The first name, or given name, of the user.
 	FirstName *string
@@ -881,7 +881,7 @@ type UserStackAssociation struct {
 
 	// Specifies whether a welcome email is sent to a user after the user is created in
 	// the user pool.
-	SendEmailNotification *bool
+	SendEmailNotification bool
 }
 
 // Describes the error that is returned when a user can’t be associated with or
@@ -904,10 +904,10 @@ type UserStackAssociationError struct {
 type VpcConfig struct {
 
 	// The identifiers of the security groups for the fleet or image builder.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// The identifiers of the subnets to which a network interface is attached from the
 	// fleet instance or image builder instance. Fleet instances use one or more
 	// subnets. Image builder instances use one subnet.
-	SubnetIds []*string
+	SubnetIds []string
 }

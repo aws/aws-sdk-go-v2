@@ -354,17 +354,13 @@ func awsAwsjson11_serializeDocumentDestinationConfig(v *types.DestinationConfig,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentServiceList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentServiceList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -386,32 +382,24 @@ func awsAwsjson11_serializeDocumentTag(v *types.Tag, value smithyjson.Value) err
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagKeyList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagKeyList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagList(v []*types.Tag, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentTagList(v []types.Tag, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentTag(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -422,9 +410,9 @@ func awsAwsjson11_serializeDocumentTimeoutConfig(v *types.TimeoutConfig, value s
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxLifetimeTimeoutMinutes != nil {
+	if v.MaxLifetimeTimeoutMinutes != 0 {
 		ok := object.Key("maxLifetimeTimeoutMinutes")
-		ok.Integer(*v.MaxLifetimeTimeoutMinutes)
+		ok.Integer(v.MaxLifetimeTimeoutMinutes)
 	}
 
 	return nil
@@ -434,9 +422,9 @@ func awsAwsjson11_serializeOpDocumentCloseTunnelInput(v *CloseTunnelInput, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.Delete != nil {
+	if v.Delete {
 		ok := object.Key("delete")
-		ok.Boolean(*v.Delete)
+		ok.Boolean(v.Delete)
 	}
 
 	if v.TunnelId != nil {
@@ -475,9 +463,9 @@ func awsAwsjson11_serializeOpDocumentListTunnelsInput(v *ListTunnelsInput, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("maxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {

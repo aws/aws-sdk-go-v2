@@ -173,7 +173,7 @@ func awsRestjson1_deserializeOpDocumentCreateNotificationRuleOutput(v **CreateNo
 				if !ok {
 					return fmt.Errorf("expected NotificationRuleArn to be of type string, got %T instead", value)
 				}
-				sv.Arn = &jtv
+				sv.Arn = ptr.String(jtv)
 			}
 
 		default:
@@ -330,7 +330,7 @@ func awsRestjson1_deserializeOpDocumentDeleteNotificationRuleOutput(v **DeleteNo
 				if !ok {
 					return fmt.Errorf("expected NotificationRuleArn to be of type string, got %T instead", value)
 				}
-				sv.Arn = &jtv
+				sv.Arn = ptr.String(jtv)
 			}
 
 		default:
@@ -567,7 +567,7 @@ func awsRestjson1_deserializeOpDocumentDescribeNotificationRuleOutput(v **Descri
 				if !ok {
 					return fmt.Errorf("expected NotificationRuleArn to be of type string, got %T instead", value)
 				}
-				sv.Arn = &jtv
+				sv.Arn = ptr.String(jtv)
 			}
 
 		case "CreatedBy":
@@ -576,7 +576,7 @@ func awsRestjson1_deserializeOpDocumentDescribeNotificationRuleOutput(v **Descri
 				if !ok {
 					return fmt.Errorf("expected NotificationRuleCreatedBy to be of type string, got %T instead", value)
 				}
-				sv.CreatedBy = &jtv
+				sv.CreatedBy = ptr.String(jtv)
 			}
 
 		case "CreatedTimestamp":
@@ -625,7 +625,7 @@ func awsRestjson1_deserializeOpDocumentDescribeNotificationRuleOutput(v **Descri
 				if !ok {
 					return fmt.Errorf("expected NotificationRuleName to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "Resource":
@@ -634,7 +634,7 @@ func awsRestjson1_deserializeOpDocumentDescribeNotificationRuleOutput(v **Descri
 				if !ok {
 					return fmt.Errorf("expected NotificationRuleResource to be of type string, got %T instead", value)
 				}
-				sv.Resource = &jtv
+				sv.Resource = ptr.String(jtv)
 			}
 
 		case "Status":
@@ -812,7 +812,7 @@ func awsRestjson1_deserializeOpDocumentListEventTypesOutput(v **ListEventTypesOu
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -966,7 +966,7 @@ func awsRestjson1_deserializeOpDocumentListNotificationRulesOutput(v **ListNotif
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "NotificationRules":
@@ -1275,7 +1275,7 @@ func awsRestjson1_deserializeOpDocumentListTargetsOutput(v **ListTargetsOutput, 
 				if !ok {
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		case "Targets":
@@ -1434,7 +1434,7 @@ func awsRestjson1_deserializeOpDocumentSubscribeOutput(v **SubscribeOutput, valu
 				if !ok {
 					return fmt.Errorf("expected NotificationRuleArn to be of type string, got %T instead", value)
 				}
-				sv.Arn = &jtv
+				sv.Arn = ptr.String(jtv)
 			}
 
 		default:
@@ -1738,7 +1738,7 @@ func awsRestjson1_deserializeOpDocumentUnsubscribeOutput(v **UnsubscribeOutput, 
 				if !ok {
 					return fmt.Errorf("expected NotificationRuleArn to be of type string, got %T instead", value)
 				}
-				sv.Arn = &jtv
+				sv.Arn = ptr.String(jtv)
 			}
 
 		default:
@@ -2241,7 +2241,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				if !ok {
 					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2281,7 +2281,7 @@ func awsRestjson1_deserializeDocumentConcurrentModificationException(v **types.C
 				if !ok {
 					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2321,7 +2321,7 @@ func awsRestjson1_deserializeDocumentConfigurationException(v **types.Configurat
 				if !ok {
 					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2333,7 +2333,7 @@ func awsRestjson1_deserializeDocumentConfigurationException(v **types.Configurat
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentEventTypeBatch(v *[]*types.EventTypeSummary, value interface{}) error {
+func awsRestjson1_deserializeDocumentEventTypeBatch(v *[]types.EventTypeSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2346,18 +2346,20 @@ func awsRestjson1_deserializeDocumentEventTypeBatch(v *[]*types.EventTypeSummary
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.EventTypeSummary
+	var cv []types.EventTypeSummary
 	if *v == nil {
-		cv = []*types.EventTypeSummary{}
+		cv = []types.EventTypeSummary{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.EventTypeSummary
-		if err := awsRestjson1_deserializeDocumentEventTypeSummary(&col, value); err != nil {
+		var col types.EventTypeSummary
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentEventTypeSummary(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -2393,7 +2395,7 @@ func awsRestjson1_deserializeDocumentEventTypeSummary(v **types.EventTypeSummary
 				if !ok {
 					return fmt.Errorf("expected EventTypeId to be of type string, got %T instead", value)
 				}
-				sv.EventTypeId = &jtv
+				sv.EventTypeId = ptr.String(jtv)
 			}
 
 		case "EventTypeName":
@@ -2402,7 +2404,7 @@ func awsRestjson1_deserializeDocumentEventTypeSummary(v **types.EventTypeSummary
 				if !ok {
 					return fmt.Errorf("expected EventTypeName to be of type string, got %T instead", value)
 				}
-				sv.EventTypeName = &jtv
+				sv.EventTypeName = ptr.String(jtv)
 			}
 
 		case "ResourceType":
@@ -2411,7 +2413,7 @@ func awsRestjson1_deserializeDocumentEventTypeSummary(v **types.EventTypeSummary
 				if !ok {
 					return fmt.Errorf("expected ResourceType to be of type string, got %T instead", value)
 				}
-				sv.ResourceType = &jtv
+				sv.ResourceType = ptr.String(jtv)
 			}
 
 		case "ServiceName":
@@ -2420,7 +2422,7 @@ func awsRestjson1_deserializeDocumentEventTypeSummary(v **types.EventTypeSummary
 				if !ok {
 					return fmt.Errorf("expected ServiceName to be of type string, got %T instead", value)
 				}
-				sv.ServiceName = &jtv
+				sv.ServiceName = ptr.String(jtv)
 			}
 
 		default:
@@ -2460,7 +2462,7 @@ func awsRestjson1_deserializeDocumentInvalidNextTokenException(v **types.Invalid
 				if !ok {
 					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2500,7 +2502,7 @@ func awsRestjson1_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				if !ok {
 					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2512,7 +2514,7 @@ func awsRestjson1_deserializeDocumentLimitExceededException(v **types.LimitExcee
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentNotificationRuleBatch(v *[]*types.NotificationRuleSummary, value interface{}) error {
+func awsRestjson1_deserializeDocumentNotificationRuleBatch(v *[]types.NotificationRuleSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2525,18 +2527,20 @@ func awsRestjson1_deserializeDocumentNotificationRuleBatch(v *[]*types.Notificat
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.NotificationRuleSummary
+	var cv []types.NotificationRuleSummary
 	if *v == nil {
-		cv = []*types.NotificationRuleSummary{}
+		cv = []types.NotificationRuleSummary{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.NotificationRuleSummary
-		if err := awsRestjson1_deserializeDocumentNotificationRuleSummary(&col, value); err != nil {
+		var col types.NotificationRuleSummary
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentNotificationRuleSummary(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -2572,7 +2576,7 @@ func awsRestjson1_deserializeDocumentNotificationRuleSummary(v **types.Notificat
 				if !ok {
 					return fmt.Errorf("expected NotificationRuleArn to be of type string, got %T instead", value)
 				}
-				sv.Arn = &jtv
+				sv.Arn = ptr.String(jtv)
 			}
 
 		case "Id":
@@ -2581,7 +2585,7 @@ func awsRestjson1_deserializeDocumentNotificationRuleSummary(v **types.Notificat
 				if !ok {
 					return fmt.Errorf("expected NotificationRuleId to be of type string, got %T instead", value)
 				}
-				sv.Id = &jtv
+				sv.Id = ptr.String(jtv)
 			}
 
 		default:
@@ -2621,7 +2625,7 @@ func awsRestjson1_deserializeDocumentResourceAlreadyExistsException(v **types.Re
 				if !ok {
 					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2661,7 +2665,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				if !ok {
 					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -2673,7 +2677,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentTags(v *map[string]*string, value interface{}) error {
+func awsRestjson1_deserializeDocumentTags(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2686,21 +2690,21 @@ func awsRestjson1_deserializeDocumentTags(v *map[string]*string, value interface
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var mv map[string]*string
+	var mv map[string]string
 	if *v == nil {
-		mv = map[string]*string{}
+		mv = map[string]string{}
 	} else {
 		mv = *v
 	}
 
 	for key, value := range shape {
-		var parsedVal *string
+		var parsedVal string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected TagValue to be of type string, got %T instead", value)
 			}
-			parsedVal = &jtv
+			parsedVal = jtv
 		}
 		mv[key] = parsedVal
 
@@ -2709,7 +2713,7 @@ func awsRestjson1_deserializeDocumentTags(v *map[string]*string, value interface
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentTargetsBatch(v *[]*types.TargetSummary, value interface{}) error {
+func awsRestjson1_deserializeDocumentTargetsBatch(v *[]types.TargetSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2722,18 +2726,20 @@ func awsRestjson1_deserializeDocumentTargetsBatch(v *[]*types.TargetSummary, val
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.TargetSummary
+	var cv []types.TargetSummary
 	if *v == nil {
-		cv = []*types.TargetSummary{}
+		cv = []types.TargetSummary{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.TargetSummary
-		if err := awsRestjson1_deserializeDocumentTargetSummary(&col, value); err != nil {
+		var col types.TargetSummary
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentTargetSummary(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -2769,7 +2775,7 @@ func awsRestjson1_deserializeDocumentTargetSummary(v **types.TargetSummary, valu
 				if !ok {
 					return fmt.Errorf("expected TargetAddress to be of type string, got %T instead", value)
 				}
-				sv.TargetAddress = &jtv
+				sv.TargetAddress = ptr.String(jtv)
 			}
 
 		case "TargetStatus":
@@ -2787,7 +2793,7 @@ func awsRestjson1_deserializeDocumentTargetSummary(v **types.TargetSummary, valu
 				if !ok {
 					return fmt.Errorf("expected TargetType to be of type string, got %T instead", value)
 				}
-				sv.TargetType = &jtv
+				sv.TargetType = ptr.String(jtv)
 			}
 
 		default:
@@ -2827,7 +2833,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				if !ok {
 					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:

@@ -47,7 +47,7 @@ type PollForThirdPartyJobsInput struct {
 type PollForThirdPartyJobsOutput struct {
 
 	// Information about the jobs to take action on.
-	Jobs []*types.ThirdPartyJob
+	Jobs []types.ThirdPartyJob
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

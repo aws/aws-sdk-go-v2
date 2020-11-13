@@ -80,7 +80,7 @@ type CreateLocationNfsInput struct {
 	// The key-value pair that represents the tag that you want to add to the location.
 	// The value can be an empty string. We recommend using tags to name your
 	// resources.
-	Tags []*types.TagListEntry
+	Tags []types.TagListEntry
 }
 
 // CreateLocationNfsResponse

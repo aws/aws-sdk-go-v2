@@ -105,7 +105,7 @@ type UpdateDashboardOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// The ARN of the dashboard, including the version number.
 	VersionArn *string

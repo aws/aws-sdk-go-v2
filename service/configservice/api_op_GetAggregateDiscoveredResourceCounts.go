@@ -49,7 +49,7 @@ type GetAggregateDiscoveredResourceCountsInput struct {
 	// The maximum number of GroupedResourceCount objects returned on each page. The
 	// default is 1000. You cannot specify a number greater than 1000. If you specify
 	// 0, AWS Config uses the default.
-	Limit *int32
+	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
@@ -62,14 +62,14 @@ type GetAggregateDiscoveredResourceCountsOutput struct {
 	// that you provide.
 	//
 	// This member is required.
-	TotalDiscoveredResources *int64
+	TotalDiscoveredResources int64
 
 	// The key passed into the request object. If GroupByKey is not provided, the
 	// result will be empty.
 	GroupByKey *string
 
 	// Returns a list of GroupedResourceCount objects.
-	GroupedResourceCounts []*types.GroupedResourceCount
+	GroupedResourceCounts []types.GroupedResourceCount
 
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.

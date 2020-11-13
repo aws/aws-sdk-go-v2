@@ -35,7 +35,7 @@ type ListAnalysesInput struct {
 	AwsAccountId *string
 
 	// The maximum number of results to return.
-	MaxResults *int32
+	MaxResults int32
 
 	// A pagination token that can be used in a subsequent request.
 	NextToken *string
@@ -44,7 +44,7 @@ type ListAnalysesInput struct {
 type ListAnalysesOutput struct {
 
 	// Metadata describing each of the analyses that are listed.
-	AnalysisSummaryList []*types.AnalysisSummary
+	AnalysisSummaryList []types.AnalysisSummary
 
 	// A pagination token that can be used in a subsequent request.
 	NextToken *string
@@ -53,7 +53,7 @@ type ListAnalysesOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

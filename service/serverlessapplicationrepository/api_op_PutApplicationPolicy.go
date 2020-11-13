@@ -40,13 +40,13 @@ type PutApplicationPolicyInput struct {
 	// An array of policy statements applied to the application.
 	//
 	// This member is required.
-	Statements []*types.ApplicationPolicyStatement
+	Statements []types.ApplicationPolicyStatement
 }
 
 type PutApplicationPolicyOutput struct {
 
 	// An array of policy statements applied to the application.
-	Statements []*types.ApplicationPolicyStatement
+	Statements []types.ApplicationPolicyStatement
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

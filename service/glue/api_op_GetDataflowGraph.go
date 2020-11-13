@@ -36,10 +36,10 @@ type GetDataflowGraphInput struct {
 type GetDataflowGraphOutput struct {
 
 	// A list of the edges in the resulting DAG.
-	DagEdges []*types.CodeGenEdge
+	DagEdges []types.CodeGenEdge
 
 	// A list of the nodes in the resulting DAG.
-	DagNodes []*types.CodeGenNode
+	DagNodes []types.CodeGenNode
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

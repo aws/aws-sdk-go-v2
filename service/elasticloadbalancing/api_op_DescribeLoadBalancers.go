@@ -32,7 +32,7 @@ func (c *Client) DescribeLoadBalancers(ctx context.Context, params *DescribeLoad
 type DescribeLoadBalancersInput struct {
 
 	// The names of the load balancers.
-	LoadBalancerNames []*string
+	LoadBalancerNames []string
 
 	// The marker for the next set of results. (You received this marker from a
 	// previous call.)
@@ -47,7 +47,7 @@ type DescribeLoadBalancersInput struct {
 type DescribeLoadBalancersOutput struct {
 
 	// Information about the load balancers.
-	LoadBalancerDescriptions []*types.LoadBalancerDescription
+	LoadBalancerDescriptions []types.LoadBalancerDescription
 
 	// The marker to use when requesting the next set of results. If there are no
 	// additional results, the string is empty.

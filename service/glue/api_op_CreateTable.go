@@ -45,7 +45,7 @@ type CreateTableInput struct {
 	CatalogId *string
 
 	// A list of partition indexes, PartitionIndex structures, to create in the table.
-	PartitionIndexes []*types.PartitionIndex
+	PartitionIndexes []types.PartitionIndex
 }
 
 type CreateTableOutput struct {

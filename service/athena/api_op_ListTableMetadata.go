@@ -60,7 +60,7 @@ type ListTableMetadataOutput struct {
 	NextToken *string
 
 	// A list of table metadata.
-	TableMetadataList []*types.TableMetadata
+	TableMetadataList []types.TableMetadata
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

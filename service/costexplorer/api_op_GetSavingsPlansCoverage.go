@@ -78,15 +78,15 @@ type GetSavingsPlansCoverageInput struct {
 	Granularity types.Granularity
 
 	// You can group the data using the attributes INSTANCE_FAMILY, REGION, or SERVICE.
-	GroupBy []*types.GroupDefinition
+	GroupBy []types.GroupDefinition
 
 	// The number of items to be returned in a response. The default is 20, with a
 	// minimum value of 1.
-	MaxResults *int32
+	MaxResults int32
 
 	// The measurement that you want your Savings Plans coverage reported in. The only
 	// valid value is SpendCoveredBySavingsPlans.
-	Metrics []*string
+	Metrics []string
 
 	// The token to retrieve the next set of results. Amazon Web Services provides the
 	// token when the response from a previous call has more results than the maximum
@@ -99,7 +99,7 @@ type GetSavingsPlansCoverageOutput struct {
 	// The amount of spend that your Savings Plans covered.
 	//
 	// This member is required.
-	SavingsPlansCoverages []*types.SavingsPlansCoverage
+	SavingsPlansCoverages []types.SavingsPlansCoverage
 
 	// The token to retrieve the next set of results. Amazon Web Services provides the
 	// token when the response from a previous call has more results than the maximum

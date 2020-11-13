@@ -39,7 +39,7 @@ type UpdateEnrollmentStatusInput struct {
 
 	// Indicates whether to enroll member accounts of the organization if the your
 	// account is the master account of an organization.
-	IncludeMemberAccounts *bool
+	IncludeMemberAccounts bool
 }
 
 type UpdateEnrollmentStatusOutput struct {

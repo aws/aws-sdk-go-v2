@@ -38,13 +38,13 @@ type SetSecurityGroupsInput struct {
 	// The IDs of the security groups.
 	//
 	// This member is required.
-	SecurityGroups []*string
+	SecurityGroups []string
 }
 
 type SetSecurityGroupsOutput struct {
 
 	// The IDs of the security groups associated with the load balancer.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

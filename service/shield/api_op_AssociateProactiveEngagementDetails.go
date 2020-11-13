@@ -48,7 +48,7 @@ type AssociateProactiveEngagementDetailsInput struct {
 	// then provide it here.
 	//
 	// This member is required.
-	EmergencyContactList []*types.EmergencyContact
+	EmergencyContactList []types.EmergencyContact
 }
 
 type AssociateProactiveEngagementDetailsOutput struct {

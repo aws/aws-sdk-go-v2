@@ -47,7 +47,7 @@ type ListIpRoutesInput struct {
 type ListIpRoutesOutput struct {
 
 	// A list of IpRoutes.
-	IpRoutesInfo []*types.IpRouteInfo
+	IpRoutesInfo []types.IpRouteInfo
 
 	// If not null, more results are available. Pass this value for the NextToken
 	// parameter in a subsequent call to ListIpRoutes to retrieve the next set of

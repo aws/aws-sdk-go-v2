@@ -50,7 +50,7 @@ type PutClusterCapacityProvidersInput struct {
 	// with a cluster to be used.
 	//
 	// This member is required.
-	CapacityProviders []*string
+	CapacityProviders []string
 
 	// The short name or full Amazon Resource Name (ARN) of the cluster to modify the
 	// capacity provider settings for. If you do not specify a cluster, the default
@@ -75,7 +75,7 @@ type PutClusterCapacityProvidersInput struct {
 	// with a cluster to be used.
 	//
 	// This member is required.
-	DefaultCapacityProviderStrategy []*types.CapacityProviderStrategyItem
+	DefaultCapacityProviderStrategy []types.CapacityProviderStrategyItem
 }
 
 type PutClusterCapacityProvidersOutput struct {

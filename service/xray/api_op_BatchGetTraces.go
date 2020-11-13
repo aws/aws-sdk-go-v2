@@ -34,7 +34,7 @@ type BatchGetTracesInput struct {
 	// Specify the trace IDs of requests for which to retrieve segments.
 	//
 	// This member is required.
-	TraceIds []*string
+	TraceIds []string
 
 	// Pagination token.
 	NextToken *string
@@ -46,10 +46,10 @@ type BatchGetTracesOutput struct {
 	NextToken *string
 
 	// Full traces for the specified requests.
-	Traces []*types.Trace
+	Traces []types.Trace
 
 	// Trace IDs of requests that haven't been processed.
-	UnprocessedTraceIds []*string
+	UnprocessedTraceIds []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -195,7 +195,7 @@ type PutBotInput struct {
 	// An array of Intent objects. Each intent represents a command that a user can
 	// express. For example, a pizza ordering bot might support an OrderPizza intent.
 	// For more information, see how-it-works.
-	Intents []*types.Intent
+	Intents []types.Intent
 
 	// Determines the threshold where Amazon Lex will insert the AMAZON.FallbackIntent,
 	// AMAZON.KendraSearchIntent, or both when returning alternative intents in a
@@ -231,7 +231,7 @@ type PutBotInput struct {
 	// * IntentB
 	//
 	// * IntentC
-	NluIntentConfidenceThreshold *float64
+	NluIntentConfidenceThreshold float64
 
 	// If you set the processBehavior element to BUILD, Amazon Lex builds the bot so
 	// that it can be run. If you set the element to SAVE Amazon Lex saves the bot, but
@@ -241,7 +241,7 @@ type PutBotInput struct {
 	// A list of tags to add to the bot. You can only add tags when you create a bot,
 	// you can't use the PutBot operation to update the tags on a bot. To update tags,
 	// use the TagResource operation.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The Amazon Polly voice ID that you want Amazon Lex to use for voice interactions
 	// with the user. The locale configured for the voice must match the locale of the
@@ -316,7 +316,7 @@ type PutBotOutput struct {
 	IdleSessionTTLInSeconds *int32
 
 	// An array of Intent objects. For more information, see PutBot.
-	Intents []*types.Intent
+	Intents []types.Intent
 
 	// The date that the bot was updated. When you create a resource, the creation date
 	// and last updated date are the same.
@@ -336,7 +336,7 @@ type PutBotOutput struct {
 	// response. AMAZON.FallbackIntent is inserted if the confidence score for all
 	// intents is below this value. AMAZON.KendraSearchIntent is only inserted if it is
 	// configured for the bot.
-	NluIntentConfidenceThreshold *float64
+	NluIntentConfidenceThreshold float64
 
 	// When you send a request to create a bot with processBehavior set to BUILD,
 	// Amazon Lex sets the status response element to BUILDING. In the
@@ -350,7 +350,7 @@ type PutBotOutput struct {
 	Status types.Status
 
 	// A list of tags associated with the bot.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The version of the bot. For a new bot, the version is always $LATEST.
 	Version *string

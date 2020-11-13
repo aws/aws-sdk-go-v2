@@ -35,7 +35,7 @@ type PutProtocolsListInput struct {
 	ProtocolsList *types.ProtocolsListData
 
 	// The tags associated with the resource.
-	TagList []*types.Tag
+	TagList []types.Tag
 }
 
 type PutProtocolsListOutput struct {

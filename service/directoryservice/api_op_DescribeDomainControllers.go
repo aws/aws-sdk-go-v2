@@ -37,7 +37,7 @@ type DescribeDomainControllersInput struct {
 
 	// A list of identifiers for the domain controllers whose information will be
 	// provided.
-	DomainControllerIds []*string
+	DomainControllerIds []string
 
 	// The maximum number of items to return.
 	Limit *int32
@@ -50,7 +50,7 @@ type DescribeDomainControllersInput struct {
 type DescribeDomainControllersOutput struct {
 
 	// List of the DomainController objects that were retrieved.
-	DomainControllers []*types.DomainController
+	DomainControllers []types.DomainController
 
 	// If not null, more results are available. Pass this value for the NextToken
 	// parameter in a subsequent call to DescribeDomainControllers retrieve the next

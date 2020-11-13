@@ -79,7 +79,7 @@ type ListTaskDefinitionsOutput struct {
 
 	// The list of task definition Amazon Resource Name (ARN) entries for the
 	// ListTaskDefinitions request.
-	TaskDefinitionArns []*string
+	TaskDefinitionArns []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

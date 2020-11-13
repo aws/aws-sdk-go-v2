@@ -39,7 +39,7 @@ type ListSizeConstraintSetsInput struct {
 	// return for this request. If you have more SizeConstraintSets objects than the
 	// number you specify for Limit, the response includes a NextMarker value that you
 	// can use to get another batch of SizeConstraintSet objects.
-	Limit *int32
+	Limit int32
 
 	// If you specify a value for Limit and you have more SizeConstraintSets than the
 	// value of Limit, AWS WAF returns a NextMarker value in the response that allows
@@ -59,7 +59,7 @@ type ListSizeConstraintSetsOutput struct {
 	NextMarker *string
 
 	// An array of SizeConstraintSetSummary objects.
-	SizeConstraintSets []*types.SizeConstraintSetSummary
+	SizeConstraintSets []types.SizeConstraintSetSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

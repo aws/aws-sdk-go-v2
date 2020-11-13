@@ -34,7 +34,7 @@ type AddResourcePermissionsInput struct {
 	// The users, groups, or organization being granted permission.
 	//
 	// This member is required.
-	Principals []*types.SharePrincipal
+	Principals []types.SharePrincipal
 
 	// The ID of the resource.
 	//
@@ -52,7 +52,7 @@ type AddResourcePermissionsInput struct {
 type AddResourcePermissionsOutput struct {
 
 	// The share results.
-	ShareResults []*types.ShareResult
+	ShareResults []types.ShareResult
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

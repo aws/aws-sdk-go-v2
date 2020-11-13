@@ -92,7 +92,7 @@ type Operator struct {
 	Type OperatorType
 
 	// The value that the actual field value will be compared with.
-	Values []*string
+	Values []string
 }
 
 // The attributes allowed or specified with a parameter object.
@@ -115,7 +115,7 @@ type ParameterObject struct {
 	// The attributes of the parameter object.
 	//
 	// This member is required.
-	Attributes []*ParameterAttribute
+	Attributes []ParameterAttribute
 
 	// The ID of the parameter object.
 	//
@@ -144,7 +144,7 @@ type PipelineDescription struct {
 	// @accountId, and @pipelineState.
 	//
 	// This member is required.
-	Fields []*Field
+	Fields []Field
 
 	// The name of the pipeline.
 	//
@@ -164,7 +164,7 @@ type PipelineDescription struct {
 	// pipelines. For more information, see Controlling User Access to Pipelines
 	// (https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
 	// in the AWS Data Pipeline Developer Guide.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Contains the name and identifier of a pipeline.
@@ -186,7 +186,7 @@ type PipelineObject struct {
 	// Key-value pairs that define the properties of the object.
 	//
 	// This member is required.
-	Fields []*Field
+	Fields []Field
 
 	// The ID of the object.
 	//
@@ -204,7 +204,7 @@ type Query struct {
 
 	// List of selectors that define the query. An object must satisfy all of the
 	// selectors to match the query.
-	Selectors []*Selector
+	Selectors []Selector
 }
 
 // A comparison that is used to determine whether a query should return this
@@ -255,7 +255,7 @@ type TaskObject struct {
 
 	// Connection information for the location where the task runner will publish the
 	// output of the task.
-	Objects map[string]*PipelineObject
+	Objects map[string]PipelineObject
 
 	// The ID of the pipeline that provided the task.
 	PipelineId *string
@@ -270,7 +270,7 @@ type TaskObject struct {
 type ValidationError struct {
 
 	// A description of the validation error.
-	Errors []*string
+	Errors []string
 
 	// The identifier of the object that contains the validation error.
 	Id *string
@@ -285,5 +285,5 @@ type ValidationWarning struct {
 	Id *string
 
 	// A description of the validation warning.
-	Warnings []*string
+	Warnings []string
 }

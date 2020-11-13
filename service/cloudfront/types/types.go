@@ -25,7 +25,7 @@ type ActiveTrustedKeyGroups struct {
 	// A list of key groups, including the identifiers of the public keys in each key
 	// group that CloudFront can use to verify the signatures of signed URLs and signed
 	// cookies.
-	Items []*KGKeyPairIds
+	Items []KGKeyPairIds
 }
 
 // A list of AWS accounts and the active CloudFront key pairs in each account that
@@ -47,7 +47,7 @@ type ActiveTrustedSigners struct {
 	// A list of AWS accounts and the identifiers of active CloudFront key pairs in
 	// each account that CloudFront can use to verify the signatures of signed URLs and
 	// signed cookies.
-	Items []*Signer
+	Items []Signer
 }
 
 // A complex type that contains information about CNAMEs (alternate domain names),
@@ -62,7 +62,7 @@ type Aliases struct {
 
 	// A complex type that contains the CNAME aliases, if any, that you want to
 	// associate with this distribution.
-	Items []*string
+	Items []string
 }
 
 // AWS services in China customers must file for an Internet Content Provider (ICP)
@@ -386,7 +386,7 @@ type CacheBehaviors struct {
 
 	// Optional: A complex type that contains cache behaviors for this distribution. If
 	// Quantity is 0, you can omit Items.
-	Items []*CacheBehavior
+	Items []CacheBehavior
 }
 
 // A complex type that controls whether CloudFront caches the response to requests
@@ -592,7 +592,7 @@ type CachePolicyList struct {
 	Quantity *int32
 
 	// Contains the cache policies in the list.
-	Items []*CachePolicySummary
+	Items []CachePolicySummary
 
 	// If there are more items in the list than are in this response, this element is
 	// present. It contains the value that you should use in the Marker field of a
@@ -735,7 +735,7 @@ type CloudFrontOriginAccessIdentityList struct {
 
 	// A complex type that contains one CloudFrontOriginAccessIdentitySummary element
 	// for each origin access identity that was created by the current AWS account.
-	Items []*CloudFrontOriginAccessIdentitySummary
+	Items []CloudFrontOriginAccessIdentitySummary
 
 	// If IsTruncated is true, this element is present and contains the value you can
 	// use for the Marker request parameter to continue listing your origin access
@@ -807,7 +807,7 @@ type ContentTypeProfiles struct {
 	Quantity *int32
 
 	// Items in a field-level encryption content type-profile mapping.
-	Items []*ContentTypeProfile
+	Items []ContentTypeProfile
 }
 
 // Contains a list of cookie names.
@@ -819,7 +819,7 @@ type CookieNames struct {
 	Quantity *int32
 
 	// A list of cookie names.
-	Items []*string
+	Items []string
 }
 
 // This field is deprecated. We recommend that you use a cache policy or an origin
@@ -974,7 +974,7 @@ type CustomErrorResponses struct {
 	// A complex type that contains a CustomErrorResponse element for each HTTP status
 	// code for which you want to specify a custom error page and/or a caching
 	// duration.
-	Items []*CustomErrorResponse
+	Items []CustomErrorResponse
 }
 
 // A complex type that contains the list of Custom Headers for each origin.
@@ -988,7 +988,7 @@ type CustomHeaders struct {
 	// Optional: A list that contains one OriginCustomHeader element for each custom
 	// header that you want CloudFront to forward to the origin. If Quantity is 0, omit
 	// Items.
-	Items []*OriginCustomHeader
+	Items []OriginCustomHeader
 }
 
 // A custom origin. A custom origin is any origin that is not an Amazon S3 bucket,
@@ -1314,7 +1314,7 @@ type Distribution struct {
 	// more information about ICP recordals, see  Signup, Accounts, and Credentials
 	// (https://docs.amazonaws.cn/en_us/aws/latest/userguide/accounts-and-credentials.html)
 	// in Getting Started with AWS services in China.
-	AliasICPRecordals []*AliasICPRecordal
+	AliasICPRecordals []AliasICPRecordal
 }
 
 // A distribution configuration.
@@ -1527,7 +1527,7 @@ type DistributionIdList struct {
 	Quantity *int32
 
 	// Contains the distribution IDs in the list.
-	Items []*string
+	Items []string
 
 	// Contains the value that you should use in the Marker field of a subsequent
 	// request to continue listing distribution IDs where you left off.
@@ -1561,7 +1561,7 @@ type DistributionList struct {
 
 	// A complex type that contains one DistributionSummary element for each
 	// distribution that was created by the current AWS account.
-	Items []*DistributionSummary
+	Items []DistributionSummary
 
 	// If IsTruncated is true, this element is present and contains the value you can
 	// use for the Marker request parameter to continue listing your distributions
@@ -1682,7 +1682,7 @@ type DistributionSummary struct {
 	// more information about ICP recordals, see  Signup, Accounts, and Credentials
 	// (https://docs.amazonaws.cn/en_us/aws/latest/userguide/accounts-and-credentials.html)
 	// in Getting Started with AWS services in China.
-	AliasICPRecordals []*AliasICPRecordal
+	AliasICPRecordals []AliasICPRecordal
 
 	// A complex type that contains information about origin groups for this
 	// distribution.
@@ -1701,7 +1701,7 @@ type EncryptionEntities struct {
 
 	// An array of field patterns in a field-level encryption content type-profile
 	// mapping.
-	Items []*EncryptionEntity
+	Items []EncryptionEntity
 }
 
 // Complex data type for field-level encryption profiles that includes the
@@ -1805,7 +1805,7 @@ type FieldLevelEncryptionList struct {
 	Quantity *int32
 
 	// An array of field-level encryption items.
-	Items []*FieldLevelEncryptionSummary
+	Items []FieldLevelEncryptionSummary
 
 	// If there are more elements to be listed, this element is present and contains
 	// the value that you can use for the Marker request parameter to continue listing
@@ -1874,7 +1874,7 @@ type FieldLevelEncryptionProfileList struct {
 	Quantity *int32
 
 	// The field-level encryption profile items.
-	Items []*FieldLevelEncryptionProfileSummary
+	Items []FieldLevelEncryptionProfileSummary
 
 	// If there are more elements to be listed, this element is present and contains
 	// the value that you can use for the Marker request parameter to continue listing
@@ -1944,7 +1944,7 @@ type FieldPatterns struct {
 	Quantity *int32
 
 	// An array of the field-level encryption field patterns.
-	Items []*string
+	Items []string
 }
 
 // This field is deprecated. We recommend that you use a cache policy or an origin
@@ -2077,7 +2077,7 @@ type GeoRestriction struct {
 	// corresponding codes, see ISO 3166-1-alpha-2 code on the International
 	// Organization for Standardization website. You can also refer to the country list
 	// on the CloudFront console, which includes both country names and codes.
-	Items []*string
+	Items []string
 }
 
 // Contains a list of HTTP header names.
@@ -2089,7 +2089,7 @@ type Headers struct {
 	Quantity *int32
 
 	// A list of HTTP header names.
-	Items []*string
+	Items []string
 }
 
 // An invalidation.
@@ -2178,7 +2178,7 @@ type InvalidationList struct {
 
 	// A complex type that contains one InvalidationSummary element for each
 	// invalidation batch created by the current AWS account.
-	Items []*InvalidationSummary
+	Items []InvalidationSummary
 
 	// If IsTruncated is true, this element is present and contains the value that you
 	// can use for the Marker request parameter to continue listing your invalidation
@@ -2234,7 +2234,7 @@ type KeyGroupConfig struct {
 	// A list of the identifiers of the public keys in the key group.
 	//
 	// This member is required.
-	Items []*string
+	Items []string
 
 	// A name to identify the key group.
 	//
@@ -2259,7 +2259,7 @@ type KeyGroupList struct {
 	Quantity *int32
 
 	// A list of key groups.
-	Items []*KeyGroupSummary
+	Items []KeyGroupSummary
 
 	// If there are more items in the list than are in this response, this element is
 	// present. It contains the value that you should use in the Marker field of a
@@ -2285,7 +2285,7 @@ type KeyPairIds struct {
 	Quantity *int32
 
 	// A list of CloudFront key pair identifiers.
-	Items []*string
+	Items []string
 }
 
 // A list of identifiers for the public keys that CloudFront can use to verify the
@@ -2379,7 +2379,7 @@ type LambdaFunctionAssociations struct {
 
 	// Optional: A complex type that contains LambdaFunctionAssociation items for this
 	// cache behavior. If Quantity is 0, you can omit Items.
-	Items []*LambdaFunctionAssociation
+	Items []LambdaFunctionAssociation
 }
 
 // A complex type that controls whether access logs are written for the
@@ -2597,7 +2597,7 @@ type OriginGroupMembers struct {
 	// Items (origins) in an origin group.
 	//
 	// This member is required.
-	Items []*OriginGroupMember
+	Items []OriginGroupMember
 
 	// The number of origins in an origin group.
 	//
@@ -2614,7 +2614,7 @@ type OriginGroups struct {
 	Quantity *int32
 
 	// The items (origin groups) in a distribution.
-	Items []*OriginGroup
+	Items []OriginGroup
 }
 
 // An origin request policy. When it’s attached to a cache behavior, the origin
@@ -2773,7 +2773,7 @@ type OriginRequestPolicyList struct {
 	Quantity *int32
 
 	// Contains the origin request policies in the list.
-	Items []*OriginRequestPolicySummary
+	Items []OriginRequestPolicySummary
 
 	// If there are more items in the list than are in this response, this element is
 	// present. It contains the value that you should use in the Marker field of a
@@ -2832,7 +2832,7 @@ type Origins struct {
 	// A list of origins.
 	//
 	// This member is required.
-	Items []*Origin
+	Items []Origin
 
 	// The number of origins for this distribution.
 	//
@@ -2986,7 +2986,7 @@ type Paths struct {
 	Quantity *int32
 
 	// A complex type that contains a list of the paths that you want to invalidate.
-	Items []*string
+	Items []string
 }
 
 // A public key that you can use with signed URLs and signed cookies
@@ -3062,7 +3062,7 @@ type PublicKeyList struct {
 	Quantity *int32
 
 	// A list of public keys.
-	Items []*PublicKeySummary
+	Items []PublicKeySummary
 
 	// If there are more elements to be listed, this element is present and contains
 	// the value that you can use for the Marker request parameter to continue listing
@@ -3136,7 +3136,7 @@ type QueryArgProfiles struct {
 	Quantity *int32
 
 	// Number of items for query argument-profile mapping for field-level encryption.
-	Items []*QueryArgProfile
+	Items []QueryArgProfile
 }
 
 // This field is deprecated. We recommend that you use a cache policy or an origin
@@ -3156,7 +3156,7 @@ type QueryStringCacheKeys struct {
 	// A list that contains the query string parameters that you want CloudFront to use
 	// as a basis for caching for a cache behavior. If Quantity is 0, you can omit
 	// Items.
-	Items []*string
+	Items []string
 }
 
 // Contains a list of query string names.
@@ -3168,7 +3168,7 @@ type QueryStringNames struct {
 	Quantity *int32
 
 	// A list of query string names.
-	Items []*string
+	Items []string
 }
 
 // A real-time log configuration.
@@ -3183,7 +3183,7 @@ type RealtimeLogConfig struct {
 	// real-time log data for this real-time log configuration.
 	//
 	// This member is required.
-	EndPoints []*EndPoint
+	EndPoints []EndPoint
 
 	// A list of fields that are included in each real-time log record. In an API
 	// response, the fields are provided in the same order in which they are sent to
@@ -3193,7 +3193,7 @@ type RealtimeLogConfig struct {
 	// in the Amazon CloudFront Developer Guide.
 	//
 	// This member is required.
-	Fields []*string
+	Fields []string
 
 	// The unique name of this real-time log configuration.
 	//
@@ -3230,7 +3230,7 @@ type RealtimeLogConfigs struct {
 	MaxItems *int32
 
 	// Contains the list of real-time log configurations.
-	Items []*RealtimeLogConfig
+	Items []RealtimeLogConfig
 
 	// If there are more items in the list than are in this response, this element is
 	// present. It contains the value that you should use in the Marker field of a
@@ -3332,7 +3332,7 @@ type StatusCodes struct {
 	// The items (status codes) for an origin group.
 	//
 	// This member is required.
-	Items []*int32
+	Items []int32
 
 	// The number of status codes.
 	//
@@ -3489,7 +3489,7 @@ type StreamingDistributionList struct {
 
 	// A complex type that contains one StreamingDistributionSummary element for each
 	// distribution that was created by the current AWS account.
-	Items []*StreamingDistributionSummary
+	Items []StreamingDistributionSummary
 
 	// If IsTruncated is true, this element is present and contains the value you can
 	// use for the Marker request parameter to continue listing your RTMP distributions
@@ -3625,14 +3625,14 @@ type Tag struct {
 type TagKeys struct {
 
 	// A complex type that contains Tag key elements.
-	Items []*string
+	Items []string
 }
 
 // A complex type that contains zero or more Tag elements.
 type Tags struct {
 
 	// A complex type that contains Tag elements.
-	Items []*Tag
+	Items []Tag
 }
 
 // A list of key groups whose public keys CloudFront can use to verify the
@@ -3652,7 +3652,7 @@ type TrustedKeyGroups struct {
 	Quantity *int32
 
 	// A list of key groups identifiers.
-	Items []*string
+	Items []string
 }
 
 // A list of AWS accounts whose public keys CloudFront can use to verify the
@@ -3672,7 +3672,7 @@ type TrustedSigners struct {
 	Quantity *int32
 
 	// A list of AWS account identifiers.
-	Items []*string
+	Items []string
 }
 
 // A complex type that determines the distribution’s SSL/TLS configuration for

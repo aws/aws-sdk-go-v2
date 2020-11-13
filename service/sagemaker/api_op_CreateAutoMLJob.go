@@ -45,7 +45,7 @@ type CreateAutoMLJobInput struct {
 	// Minimum of 500 rows.
 	//
 	// This member is required.
-	InputDataConfig []*types.AutoMLChannel
+	InputDataConfig []types.AutoMLChannel
 
 	// Similar to OutputDataConfig supported by Tuning. Format(s) supported: CSV.
 	//
@@ -68,7 +68,7 @@ type CreateAutoMLJobInput struct {
 
 	// Generates possible candidates without training a model. A candidate is a
 	// combination of data preprocessors, algorithms, and algorithm parameter settings.
-	GenerateCandidateDefinitionsOnly *bool
+	GenerateCandidateDefinitionsOnly bool
 
 	// Defines the kind of preprocessing and algorithms intended for the candidates.
 	// Options include: BinaryClassification, MulticlassClassification, and Regression.
@@ -76,7 +76,7 @@ type CreateAutoMLJobInput struct {
 
 	// Each tag consists of a key and an optional value. Tag keys must be unique per
 	// resource.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateAutoMLJobOutput struct {

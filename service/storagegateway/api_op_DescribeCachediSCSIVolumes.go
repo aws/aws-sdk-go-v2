@@ -38,14 +38,14 @@ type DescribeCachediSCSIVolumesInput struct {
 	// gateway. Use ListVolumes to get volume ARNs for a gateway.
 	//
 	// This member is required.
-	VolumeARNs []*string
+	VolumeARNs []string
 }
 
 // A JSON object containing the following fields:
 type DescribeCachediSCSIVolumesOutput struct {
 
 	// An array of objects where each object contains metadata about one cached volume.
-	CachediSCSIVolumes []*types.CachediSCSIVolume
+	CachediSCSIVolumes []types.CachediSCSIVolume
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

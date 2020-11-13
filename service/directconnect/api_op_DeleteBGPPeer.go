@@ -33,7 +33,7 @@ type DeleteBGPPeerInput struct {
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
 	// configuration.
-	Asn *int32
+	Asn int32
 
 	// The ID of the BGP peer.
 	BgpPeerId *string

@@ -63,7 +63,7 @@ type EntityFilter struct {
 
 	// An array of string values for the search filter field. Multiple values function
 	// as AND criteria in the search.
-	Value []*string
+	Value []string
 }
 
 // An object that contains information about a flow event.
@@ -130,7 +130,7 @@ type FlowTemplateFilter struct {
 	// as AND criteria in the search.
 	//
 	// This member is required.
-	Value []*string
+	Value []string
 }
 
 // An object that contains summary information about a workflow.
@@ -154,7 +154,7 @@ type FlowTemplateSummary struct {
 type MetricsConfiguration struct {
 
 	// A Boolean that specifies whether cloud metrics are collected.
-	CloudMetricEnabled *bool
+	CloudMetricEnabled bool
 
 	// The ARN of the role that is used to collect cloud metrics.
 	MetricRuleRoleArn *string
@@ -185,7 +185,7 @@ type SystemInstanceDescription struct {
 
 	// A list of objects that contain all of the IDs and revision numbers of workflows
 	// and systems that are used in a system instance.
-	ValidatedDependencyRevisions []*DependencyRevision
+	ValidatedDependencyRevisions []DependencyRevision
 
 	// The version of the user's namespace against which the system instance was
 	// validated.
@@ -203,7 +203,7 @@ type SystemInstanceFilter struct {
 
 	// An array of string values for the search filter field. Multiple values function
 	// as AND criteria in the search.
-	Value []*string
+	Value []string
 }
 
 // An object that contains summary information about a system instance.
@@ -263,7 +263,7 @@ type SystemTemplateFilter struct {
 	// as AND criteria in the search.
 	//
 	// This member is required.
-	Value []*string
+	Value []string
 }
 
 // An object that contains information about a system.

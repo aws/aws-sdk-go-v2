@@ -55,7 +55,7 @@ type ListTapesInput struct {
 
 	// The Amazon Resource Name (ARN) of each of the tapes you want to list. If you
 	// don't specify a tape ARN, the response lists all tapes in both your VTL and VTS.
-	TapeARNs []*string
+	TapeARNs []string
 }
 
 // A JSON object containing the following fields:
@@ -75,7 +75,7 @@ type ListTapesOutput struct {
 	// An array of TapeInfo objects, where each object describes a single tape. If
 	// there are no tapes in the tape library or VTS, then the TapeInfos is an empty
 	// array.
-	TapeInfos []*types.TapeInfo
+	TapeInfos []types.TapeInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

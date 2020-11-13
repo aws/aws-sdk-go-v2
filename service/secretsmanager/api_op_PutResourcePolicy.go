@@ -88,7 +88,7 @@ type PutResourcePolicyInput struct {
 
 	// Makes an optional API call to Zelkova to validate the Resource Policy to prevent
 	// broad access to your secret.
-	BlockPublicPolicy *bool
+	BlockPublicPolicy bool
 }
 
 type PutResourcePolicyOutput struct {

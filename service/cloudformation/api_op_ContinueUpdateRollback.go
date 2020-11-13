@@ -84,7 +84,7 @@ type ContinueUpdateRollbackInput struct {
 	// continue update rollback operation with nested stacks, see Using ResourcesToSkip
 	// to recover a nested stacks hierarchy
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html#nested-stacks).
-	ResourcesToSkip []*string
+	ResourcesToSkip []string
 
 	// The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM)
 	// role that AWS CloudFormation assumes to roll back the stack. AWS CloudFormation

@@ -92,7 +92,7 @@ type TransactWriteItemsInput struct {
 	// and no two of them can operate on the same item.
 	//
 	// This member is required.
-	TransactItems []*types.TransactWriteItem
+	TransactItems []types.TransactWriteItem
 
 	// Providing a ClientRequestToken makes the call to TransactWriteItems idempotent,
 	// meaning that multiple identical calls have the same effect as one single call.
@@ -140,12 +140,12 @@ type TransactWriteItemsOutput struct {
 	// The capacity units consumed by the entire TransactWriteItems operation. The
 	// values of the list are ordered according to the ordering of the TransactItems
 	// request parameter.
-	ConsumedCapacity []*types.ConsumedCapacity
+	ConsumedCapacity []types.ConsumedCapacity
 
 	// A list of tables that were processed by TransactWriteItems and, for each table,
 	// information about any item collections that were affected by individual
 	// UpdateItem, PutItem, or DeleteItem operations.
-	ItemCollectionMetrics map[string][]*types.ItemCollectionMetrics
+	ItemCollectionMetrics map[string][]types.ItemCollectionMetrics
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

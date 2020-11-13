@@ -79,7 +79,7 @@ type DescribeFleetUtilizationInput struct {
 	// do not include this parameter. If the list of fleet identifiers includes fleets
 	// that don't currently exist, the request succeeds but no attributes for that
 	// fleet are returned.
-	FleetIds []*string
+	FleetIds []string
 
 	// The maximum number of results to return. Use this parameter with NextToken to
 	// get results as a set of sequential pages. This parameter is ignored when the
@@ -98,7 +98,7 @@ type DescribeFleetUtilizationOutput struct {
 
 	// A collection of objects containing utilization information for each requested
 	// fleet ID.
-	FleetUtilization []*types.FleetUtilization
+	FleetUtilization []types.FleetUtilization
 
 	// Token that indicates where to resume retrieving results on the next call to this
 	// operation. If no token is returned, these results represent the end of the list.

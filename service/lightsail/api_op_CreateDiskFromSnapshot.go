@@ -54,7 +54,7 @@ type CreateDiskFromSnapshotInput struct {
 	SizeInGb *int32
 
 	// An array of objects that represent the add-ons to enable for the new disk.
-	AddOns []*types.AddOnRequest
+	AddOns []types.AddOnRequest
 
 	// The name of the disk snapshot (e.g., my-snapshot) from which to create the new
 	// storage disk. Constraint:
@@ -94,7 +94,7 @@ type CreateDiskFromSnapshotInput struct {
 
 	// The tag keys and optional values to add to the resource during create. Use the
 	// TagResource action to tag a resource after it's created.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// A Boolean value to indicate whether to use the latest available automatic
 	// snapshot. Constraints:
@@ -115,7 +115,7 @@ type CreateDiskFromSnapshotOutput struct {
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
 	// request.
-	Operations []*types.Operation
+	Operations []types.Operation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

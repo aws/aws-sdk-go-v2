@@ -124,7 +124,7 @@ type ReceiveMessageInput struct {
 	// The maximum number of messages to return. Amazon SQS never returns more messages
 	// than this value (however, fewer messages might be returned). Valid values: 1 to
 	// 10. Default: 1.
-	MaxNumberOfMessages *int32
+	MaxNumberOfMessages int32
 
 	// The name of the message attribute, where N is the index.
 	//
@@ -148,7 +148,7 @@ type ReceiveMessageInput struct {
 	// attribute names to receive, or you can return all of the attributes by
 	// specifying All or . in your request. You can also use all message attributes
 	// starting with a prefix, for example bar..
-	MessageAttributeNames []*string
+	MessageAttributeNames []string
 
 	// This parameter applies only to FIFO (first-in-first-out) queues. The token used
 	// for deduplication of ReceiveMessage calls. If a networking issue occurs after a
@@ -208,7 +208,7 @@ type ReceiveMessageInput struct {
 
 	// The duration (in seconds) that the received messages are hidden from subsequent
 	// retrieve requests after being retrieved by a ReceiveMessage request.
-	VisibilityTimeout *int32
+	VisibilityTimeout int32
 
 	// The duration (in seconds) for which the call waits for a message to arrive in
 	// the queue before returning. If a message is available, the call returns sooner
@@ -221,14 +221,14 @@ type ReceiveMessageInput struct {
 	// for asynchronous clients, or the  ApacheHttpClient
 	// (https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/http/apache/ApacheHttpClient.html)
 	// for synchronous clients.
-	WaitTimeSeconds *int32
+	WaitTimeSeconds int32
 }
 
 // A list of received messages.
 type ReceiveMessageOutput struct {
 
 	// A list of messages.
-	Messages []*types.Message
+	Messages []types.Message
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

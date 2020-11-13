@@ -29,7 +29,7 @@ type BatchWriteException struct {
 	Message *string
 
 	Type  BatchWriteExceptionType
-	Index *int32
+	Index int32
 }
 
 func (e *BatchWriteException) Error() string {

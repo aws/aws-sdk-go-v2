@@ -62,7 +62,7 @@ type TestInvokeAuthorizerOutput struct {
 	IsAuthenticated *bool
 
 	// IAM policy documents.
-	PolicyDocuments []*string
+	PolicyDocuments []string
 
 	// The principal ID.
 	PrincipalId *string

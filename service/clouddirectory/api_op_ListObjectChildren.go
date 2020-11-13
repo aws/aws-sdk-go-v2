@@ -58,7 +58,7 @@ type ListObjectChildrenOutput struct {
 
 	// Children structure, which is a map with key as the LinkName and ObjectIdentifier
 	// as the value.
-	Children map[string]*string
+	Children map[string]string
 
 	// The pagination token.
 	NextToken *string

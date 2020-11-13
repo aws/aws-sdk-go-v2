@@ -38,7 +38,7 @@ type GetIdentityMailFromDomainAttributesInput struct {
 	// A list of one or more identities.
 	//
 	// This member is required.
-	Identities []*string
+	Identities []string
 }
 
 // Represents the custom MAIL FROM attributes for a list of identities.
@@ -47,7 +47,7 @@ type GetIdentityMailFromDomainAttributesOutput struct {
 	// A map of identities to custom MAIL FROM attributes.
 	//
 	// This member is required.
-	MailFromDomainAttributes map[string]*types.IdentityMailFromDomainAttributes
+	MailFromDomainAttributes map[string]types.IdentityMailFromDomainAttributes
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

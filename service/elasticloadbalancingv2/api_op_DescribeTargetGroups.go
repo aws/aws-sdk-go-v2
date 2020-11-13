@@ -42,13 +42,13 @@ type DescribeTargetGroupsInput struct {
 	Marker *string
 
 	// The names of the target groups.
-	Names []*string
+	Names []string
 
 	// The maximum number of results to return with this call.
 	PageSize *int32
 
 	// The Amazon Resource Names (ARN) of the target groups.
-	TargetGroupArns []*string
+	TargetGroupArns []string
 }
 
 type DescribeTargetGroupsOutput struct {
@@ -58,7 +58,7 @@ type DescribeTargetGroupsOutput struct {
 	NextMarker *string
 
 	// Information about the target groups.
-	TargetGroups []*types.TargetGroup
+	TargetGroups []types.TargetGroup
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

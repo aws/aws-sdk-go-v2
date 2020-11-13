@@ -39,7 +39,7 @@ type CreateWorldTemplateInput struct {
 
 	// A map that contains tag keys and tag values that are attached to the world
 	// template.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The world template body.
 	TemplateBody *string
@@ -65,7 +65,7 @@ type CreateWorldTemplateOutput struct {
 
 	// A map that contains tag keys and tag values that are attached to the world
 	// template.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

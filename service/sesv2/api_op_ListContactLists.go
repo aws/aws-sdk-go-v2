@@ -45,7 +45,7 @@ type ListContactListsInput struct {
 type ListContactListsOutput struct {
 
 	// The available contact lists.
-	ContactLists []*types.ContactList
+	ContactLists []types.ContactList
 
 	// A string token indicating that there might be additional contact lists available
 	// to be listed. Copy this token to a subsequent call to ListContactLists with the

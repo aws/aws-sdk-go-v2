@@ -52,7 +52,7 @@ type ListContainersOutput struct {
 	// The names of the containers.
 	//
 	// This member is required.
-	Containers []*types.Container
+	Containers []types.Container
 
 	// NextToken is the token to use in the next call to ListContainers. This token is
 	// returned only if you included the MaxResults tag in the original command, and

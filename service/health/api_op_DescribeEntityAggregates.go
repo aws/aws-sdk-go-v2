@@ -34,13 +34,13 @@ type DescribeEntityAggregatesInput struct {
 	// A list of event ARNs (unique identifiers). For example:
 	// "arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456",
 	// "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"
-	EventArns []*string
+	EventArns []string
 }
 
 type DescribeEntityAggregatesOutput struct {
 
 	// The number of entities that are affected by each of the specified events.
-	EntityAggregates []*types.EntityAggregate
+	EntityAggregates []types.EntityAggregate
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

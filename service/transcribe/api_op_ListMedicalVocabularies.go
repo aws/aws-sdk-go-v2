@@ -64,7 +64,7 @@ type ListMedicalVocabulariesOutput struct {
 
 	// A list of objects that describe the vocabularies that match your search
 	// criteria.
-	Vocabularies []*types.VocabularyInfo
+	Vocabularies []types.VocabularyInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

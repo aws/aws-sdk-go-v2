@@ -56,7 +56,7 @@ type DescribeAssetOutput struct {
 	// specifies allowed parent/child asset relationships.
 	//
 	// This member is required.
-	AssetHierarchies []*types.AssetHierarchy
+	AssetHierarchies []types.AssetHierarchy
 
 	// The ID of the asset.
 	//
@@ -81,7 +81,7 @@ type DescribeAssetOutput struct {
 	// The list of asset properties for the asset.
 	//
 	// This member is required.
-	AssetProperties []*types.AssetProperty
+	AssetProperties []types.AssetProperty
 
 	// The current status of the asset, which contains a state and any error message.
 	//

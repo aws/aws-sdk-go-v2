@@ -51,7 +51,7 @@ type ListLayerVersionsInput struct {
 type ListLayerVersionsOutput struct {
 
 	// A list of versions.
-	LayerVersions []*types.LayerVersionsListItem
+	LayerVersions []types.LayerVersionsListItem
 
 	// A pagination token returned when the response doesn't contain all versions.
 	NextMarker *string

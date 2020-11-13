@@ -85,7 +85,7 @@ type CreateUserPoolInput struct {
 
 	// An array of schema attributes for the new user pool. These attributes can be
 	// standard or custom attributes.
-	Schema []*types.SchemaAttributeType
+	Schema []types.SchemaAttributeType
 
 	// A string representing the SMS authentication message.
 	SmsAuthenticationMessage *string
@@ -103,7 +103,7 @@ type CreateUserPoolInput struct {
 	// The tag keys and values to assign to the user pool. A tag is a label that you
 	// can use to categorize and manage user pools in different ways, such as by
 	// purpose, owner, environment, or other criteria.
-	UserPoolTags map[string]*string
+	UserPoolTags map[string]string
 
 	// Specifies whether email addresses or phone numbers can be specified as usernames
 	// when a user signs up.

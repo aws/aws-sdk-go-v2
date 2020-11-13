@@ -63,7 +63,7 @@ type GetConfigurationProfileOutput struct {
 	RetrievalRoleArn *string
 
 	// A list of methods for validating the configuration.
-	Validators []*types.Validator
+	Validators []types.Validator
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

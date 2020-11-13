@@ -34,17 +34,17 @@ type GetMembersInput struct {
 	// details for.
 	//
 	// This member is required.
-	AccountIds []*string
+	AccountIds []string
 }
 
 type GetMembersOutput struct {
 
 	// The list of details about the Security Hub member accounts.
-	Members []*types.Member
+	Members []types.Member
 
 	// The list of AWS accounts that could not be processed. For each account, the list
 	// includes the account ID and the email address.
-	UnprocessedAccounts []*types.Result
+	UnprocessedAccounts []types.Result
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -448,9 +448,9 @@ func awsRestjson1_serializeOpDocumentExecuteStatementInput(v *ExecuteStatementIn
 	object := value.Object()
 	defer object.Close()
 
-	if v.ContinueAfterTimeout != nil {
+	if v.ContinueAfterTimeout {
 		ok := object.Key("continueAfterTimeout")
-		ok.Boolean(*v.ContinueAfterTimeout)
+		ok.Boolean(v.ContinueAfterTimeout)
 	}
 
 	if v.Database != nil {
@@ -458,9 +458,9 @@ func awsRestjson1_serializeOpDocumentExecuteStatementInput(v *ExecuteStatementIn
 		ok.String(*v.Database)
 	}
 
-	if v.IncludeResultMetadata != nil {
+	if v.IncludeResultMetadata {
 		ok := object.Key("includeResultMetadata")
-		ok.Boolean(*v.IncludeResultMetadata)
+		ok.Boolean(v.IncludeResultMetadata)
 	}
 
 	if v.Parameters != nil {
@@ -595,7 +595,6 @@ func awsRestjson1_serializeDocumentArrayOfArray(v []types.ArrayValue, value smit
 	for i := range v {
 		av := array.Value()
 		if vv := v[i]; vv == nil {
-			av.Null()
 			continue
 		}
 		if err := awsRestjson1_serializeDocumentArrayValue(v[i], av); err != nil {
@@ -647,32 +646,24 @@ func awsRestjson1_serializeDocumentArrayValue(v types.ArrayValue, value smithyjs
 	return nil
 }
 
-func awsRestjson1_serializeDocumentBooleanArray(v []*bool, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentBooleanArray(v []bool, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.Boolean(*v[i])
+		av.Boolean(v[i])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentDoubleArray(v []*float64, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentDoubleArray(v []float64, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.Double(*v[i])
+		av.Double(v[i])
 	}
 	return nil
 }
@@ -719,17 +710,13 @@ func awsRestjson1_serializeDocumentField(v types.Field, value smithyjson.Value) 
 	return nil
 }
 
-func awsRestjson1_serializeDocumentLongArray(v []*int64, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentLongArray(v []int64, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.Long(*v[i])
+		av.Long(v[i])
 	}
 	return nil
 }
@@ -770,14 +757,13 @@ func awsRestjson1_serializeDocumentSqlParameter(v *types.SqlParameter, value smi
 	return nil
 }
 
-func awsRestjson1_serializeDocumentSqlParameterSets(v [][]*types.SqlParameter, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentSqlParameterSets(v [][]types.SqlParameter, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
 		if vv := v[i]; vv == nil {
-			av.Null()
 			continue
 		}
 		if err := awsRestjson1_serializeDocumentSqlParametersList(v[i], av); err != nil {
@@ -787,34 +773,26 @@ func awsRestjson1_serializeDocumentSqlParameterSets(v [][]*types.SqlParameter, v
 	return nil
 }
 
-func awsRestjson1_serializeDocumentSqlParametersList(v []*types.SqlParameter, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentSqlParametersList(v []types.SqlParameter, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentSqlParameter(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentSqlParameter(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentStringArray(v []*string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentStringArray(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }

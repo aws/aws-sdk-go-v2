@@ -97,7 +97,7 @@ type ListPackageVersionDependenciesOutput struct {
 	// The returned list of PackageDependency
 	// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDependency.html)
 	// objects.
-	Dependencies []*types.PackageDependency
+	Dependencies []types.PackageDependency
 
 	// A format that specifies the type of the package that contains the returned
 	// dependencies. The valid values are:

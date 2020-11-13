@@ -76,11 +76,11 @@ type CreateEnvironmentInput struct {
 	// the requested value in the configuration set for the new environment. These
 	// override the values obtained from the solution stack or the configuration
 	// template.
-	OptionSettings []*types.ConfigurationOptionSetting
+	OptionSettings []types.ConfigurationOptionSetting
 
 	// A list of custom user-defined configuration options to remove from the
 	// configuration set for this new environment.
-	OptionsToRemove []*types.OptionSpecification
+	OptionsToRemove []types.OptionSpecification
 
 	// The Amazon Resource Name (ARN) of the custom platform to use with the
 	// environment. For more information, see Custom Platforms
@@ -99,7 +99,7 @@ type CreateEnvironmentInput struct {
 	SolutionStackName *string
 
 	// Specifies the tags applied to resources in the environment.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The name of the Elastic Beanstalk configuration template to use with the
 	// environment. If you specify TemplateName, then don't specify SolutionStackName.
@@ -151,7 +151,7 @@ type CreateEnvironmentOutput struct {
 	EnvironmentId *string
 
 	// A list of links to other environments in the same group.
-	EnvironmentLinks []*types.EnvironmentLink
+	EnvironmentLinks []types.EnvironmentLink
 
 	// The name of this environment.
 	EnvironmentName *string

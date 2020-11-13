@@ -45,10 +45,10 @@ type DescribePatchGroupsInput struct {
 	//
 	// * --filters
 	// Key=OPERATING_SYSTEM,Values=AMAZON_LINUX_2
-	Filters []*types.PatchOrchestratorFilter
+	Filters []types.PatchOrchestratorFilter
 
 	// The maximum number of patch groups to return (per page).
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
@@ -60,7 +60,7 @@ type DescribePatchGroupsOutput struct {
 	// Each entry in the array contains: PatchGroup: string (between 1 and 256
 	// characters, Regex: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$) PatchBaselineIdentity: A
 	// PatchBaselineIdentity element.
-	Mappings []*types.PatchGroupPatchBaselineMapping
+	Mappings []types.PatchGroupPatchBaselineMapping
 
 	// The token to use when requesting the next set of items. If there are no
 	// additional items to return, the string is empty.

@@ -66,7 +66,7 @@ type CreateEndpointConfigInput struct {
 	// at this endpoint.
 	//
 	// This member is required.
-	ProductionVariants []*types.ProductionVariant
+	ProductionVariants []types.ProductionVariant
 
 	//
 	DataCaptureConfig *types.DataCaptureConfig
@@ -110,7 +110,7 @@ type CreateEndpointConfigInput struct {
 	// A list of key-value pairs. For more information, see Using Cost Allocation Tags
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
 	// in the AWS Billing and Cost Management User Guide.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateEndpointConfigOutput struct {

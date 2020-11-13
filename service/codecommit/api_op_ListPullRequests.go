@@ -57,7 +57,7 @@ type ListPullRequestsOutput struct {
 	// The system-generated IDs of the pull requests.
 	//
 	// This member is required.
-	PullRequestIds []*string
+	PullRequestIds []string
 
 	// An enumeration token that allows the operation to batch the next results of the
 	// operation.

@@ -57,7 +57,7 @@ type TagResourceInput struct {
 	// allowed for any AWS OpsWorks-CM server or backup.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type TagResourceOutput struct {

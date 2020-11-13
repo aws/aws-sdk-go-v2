@@ -53,7 +53,7 @@ type AssignTapePoolInput struct {
 	// BypassGovernanceRetention, setting this to TRUE enables the user to bypass the
 	// retention lock. This parameter is set to true by default for calls from the
 	// console. Valid values: TRUE | FALSE
-	BypassGovernanceRetention *bool
+	BypassGovernanceRetention bool
 }
 
 type AssignTapePoolOutput struct {

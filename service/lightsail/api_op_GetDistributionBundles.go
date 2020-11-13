@@ -35,7 +35,7 @@ type GetDistributionBundlesInput struct {
 type GetDistributionBundlesOutput struct {
 
 	// An object that describes a distribution bundle.
-	Bundles []*types.DistributionBundle
+	Bundles []types.DistributionBundle
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -39,7 +39,7 @@ type GetSamplingRulesOutput struct {
 	NextToken *string
 
 	// Rule definitions and metadata.
-	SamplingRuleRecords []*types.SamplingRuleRecord
+	SamplingRuleRecords []types.SamplingRuleRecord
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

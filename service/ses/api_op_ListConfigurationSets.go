@@ -57,7 +57,7 @@ type ListConfigurationSetsInput struct {
 type ListConfigurationSetsOutput struct {
 
 	// A list of configuration sets.
-	ConfigurationSets []*types.ConfigurationSet
+	ConfigurationSets []types.ConfigurationSet
 
 	// A token indicating that there are additional configuration sets available to be
 	// listed. Pass this token to successive calls of ListConfigurationSets.

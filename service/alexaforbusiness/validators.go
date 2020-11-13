@@ -1660,13 +1660,13 @@ func validateAudio(v *types.Audio) error {
 	}
 }
 
-func validateAudioList(v []*types.Audio) error {
+func validateAudioList(v []types.Audio) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AudioList"}
 	for i := range v {
-		if err := validateAudio(v[i]); err != nil {
+		if err := validateAudio(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1821,13 +1821,13 @@ func validateFilter(v *types.Filter) error {
 	}
 }
 
-func validateFilterList(v []*types.Filter) error {
+func validateFilterList(v []types.Filter) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FilterList"}
 	for i := range v {
-		if err := validateFilter(v[i]); err != nil {
+		if err := validateFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1889,13 +1889,13 @@ func validatePhoneNumber(v *types.PhoneNumber) error {
 	}
 }
 
-func validatePhoneNumberList(v []*types.PhoneNumber) error {
+func validatePhoneNumberList(v []types.PhoneNumber) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PhoneNumberList"}
 	for i := range v {
-		if err := validatePhoneNumber(v[i]); err != nil {
+		if err := validatePhoneNumber(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1966,13 +1966,13 @@ func validateSipAddress(v *types.SipAddress) error {
 	}
 }
 
-func validateSipAddressList(v []*types.SipAddress) error {
+func validateSipAddressList(v []types.SipAddress) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SipAddressList"}
 	for i := range v {
-		if err := validateSipAddress(v[i]); err != nil {
+		if err := validateSipAddress(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2001,13 +2001,13 @@ func validateSort(v *types.Sort) error {
 	}
 }
 
-func validateSortList(v []*types.Sort) error {
+func validateSortList(v []types.Sort) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SortList"}
 	for i := range v {
-		if err := validateSort(v[i]); err != nil {
+		if err := validateSort(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2036,13 +2036,13 @@ func validateSsml(v *types.Ssml) error {
 	}
 }
 
-func validateSsmlList(v []*types.Ssml) error {
+func validateSsmlList(v []types.Ssml) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SsmlList"}
 	for i := range v {
-		if err := validateSsml(v[i]); err != nil {
+		if err := validateSsml(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2071,13 +2071,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagList(v []*types.Tag) error {
+func validateTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2106,13 +2106,13 @@ func validateText(v *types.Text) error {
 	}
 }
 
-func validateTextList(v []*types.Text) error {
+func validateTextList(v []types.Text) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TextList"}
 	for i := range v {
-		if err := validateText(v[i]); err != nil {
+		if err := validateText(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

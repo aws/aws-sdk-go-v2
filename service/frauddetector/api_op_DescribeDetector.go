@@ -50,7 +50,7 @@ type DescribeDetectorOutput struct {
 	DetectorId *string
 
 	// The status and description for each detector version.
-	DetectorVersionSummaries []*types.DetectorVersionSummary
+	DetectorVersionSummaries []types.DetectorVersionSummary
 
 	// The next token to be used for subsequent requests.
 	NextToken *string

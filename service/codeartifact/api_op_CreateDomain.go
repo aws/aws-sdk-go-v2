@@ -61,7 +61,7 @@ type CreateDomainInput struct {
 	EncryptionKey *string
 
 	// One or more tag key-value pairs for the domain.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateDomainOutput struct {

@@ -48,7 +48,7 @@ type ListThingTypesOutput struct {
 	NextToken *string
 
 	// The thing types.
-	ThingTypes []*types.ThingTypeDefinition
+	ThingTypes []types.ThingTypeDefinition
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

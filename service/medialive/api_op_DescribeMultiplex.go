@@ -43,10 +43,10 @@ type DescribeMultiplexOutput struct {
 	Arn *string
 
 	// A list of availability zones for the multiplex.
-	AvailabilityZones []*string
+	AvailabilityZones []string
 
 	// A list of the multiplex output destinations.
-	Destinations []*types.MultiplexOutputDestination
+	Destinations []types.MultiplexOutputDestination
 
 	// The unique id of the multiplex.
 	Id *string
@@ -58,16 +58,16 @@ type DescribeMultiplexOutput struct {
 	Name *string
 
 	// The number of currently healthy pipelines.
-	PipelinesRunningCount *int32
+	PipelinesRunningCount int32
 
 	// The number of programs in the multiplex.
-	ProgramCount *int32
+	ProgramCount int32
 
 	// The current state of the multiplex.
 	State types.MultiplexState
 
 	// A collection of key-value pairs.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

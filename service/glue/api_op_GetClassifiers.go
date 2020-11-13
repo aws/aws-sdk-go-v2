@@ -39,7 +39,7 @@ type GetClassifiersInput struct {
 type GetClassifiersOutput struct {
 
 	// The requested list of classifier objects.
-	Classifiers []*types.Classifier
+	Classifiers []types.Classifier
 
 	// A continuation token.
 	NextToken *string

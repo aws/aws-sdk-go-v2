@@ -50,7 +50,7 @@ type GetSdkInput struct {
 	// classPrefix is required. For sdkType of android, parameters named groupId,
 	// artifactId, artifactVersion, and invokerPackage are required. For sdkType of
 	// java, parameters named serviceName and javaPackageName are required.
-	Parameters map[string]*string
+	Parameters map[string]string
 }
 
 // The binary blob response to GetSdk, which contains the generated SDK.

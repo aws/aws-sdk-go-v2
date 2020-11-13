@@ -44,7 +44,7 @@ type DescribeAffectedEntitiesForOrganizationInput struct {
 	// A JSON set of elements including the awsAccountId and the eventArn.
 	//
 	// This member is required.
-	OrganizationEntityFilters []*types.EventAccountFilter
+	OrganizationEntityFilters []types.EventAccountFilter
 
 	// The locale (language) to return information in. English (en) is the default and
 	// the only supported value at this time.
@@ -66,11 +66,11 @@ type DescribeAffectedEntitiesForOrganizationOutput struct {
 
 	// A JSON set of elements including the awsAccountId and its entityArn, entityValue
 	// and its entityArn, lastUpdatedTime, and statusCode.
-	Entities []*types.AffectedEntity
+	Entities []types.AffectedEntity
 
 	// A JSON set of elements of the failed response, including the awsAccountId,
 	// errorMessage, errorName, and eventArn.
-	FailedSet []*types.OrganizationAffectedEntitiesErrorItem
+	FailedSet []types.OrganizationAffectedEntitiesErrorItem
 
 	// If the results of a search are large, only a portion of the results are
 	// returned, and a nextToken pagination token is returned in the response. To

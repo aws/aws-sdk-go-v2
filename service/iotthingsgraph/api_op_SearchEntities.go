@@ -41,7 +41,7 @@ type SearchEntitiesInput struct {
 	// filter on the ID of a property that is used in a state. Multiple filters
 	// function as OR criteria in the query. Multiple values passed inside the filter
 	// function as AND criteria.
-	Filters []*types.EntityFilter
+	Filters []types.EntityFilter
 
 	// The maximum number of results to return in the response.
 	MaxResults *int32
@@ -58,7 +58,7 @@ type SearchEntitiesInput struct {
 type SearchEntitiesOutput struct {
 
 	// An array of descriptions for each entity returned in the search result.
-	Descriptions []*types.EntityDescription
+	Descriptions []types.EntityDescription
 
 	// The string to specify as nextToken when you request the next page of results.
 	NextToken *string

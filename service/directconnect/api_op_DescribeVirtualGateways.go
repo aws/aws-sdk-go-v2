@@ -35,7 +35,7 @@ type DescribeVirtualGatewaysInput struct {
 type DescribeVirtualGatewaysOutput struct {
 
 	// The virtual private gateways.
-	VirtualGateways []*types.VirtualGateway
+	VirtualGateways []types.VirtualGateway
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

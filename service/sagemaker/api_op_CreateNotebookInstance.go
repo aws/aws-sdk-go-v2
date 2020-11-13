@@ -99,7 +99,7 @@ type CreateNotebookInstanceInput struct {
 	// default repository of your notebook instance. For more information, see
 	// Associating Git Repositories with Amazon SageMaker Notebook Instances
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html).
-	AdditionalCodeRepositories []*string
+	AdditionalCodeRepositories []string
 
 	// A Git repository to associate with the notebook instance as its default code
 	// repository. This can be either the name of a Git repository stored as a resource
@@ -144,7 +144,7 @@ type CreateNotebookInstanceInput struct {
 
 	// The VPC security group IDs, in the form sg-xxxxxxxx. The security groups must be
 	// for the same VPC as specified in the subnet.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// The ID of the subnet in a VPC to which you would like to have a connectivity
 	// from your ML compute instance.
@@ -152,7 +152,7 @@ type CreateNotebookInstanceInput struct {
 
 	// A list of tags to associate with the notebook instance. You can add tags later
 	// by using the CreateTags API.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The size, in GB, of the ML storage volume to attach to the notebook instance.
 	// The default value is 5 GB.

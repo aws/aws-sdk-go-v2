@@ -334,13 +334,13 @@ func validateFrameMetric(v *types.FrameMetric) error {
 	}
 }
 
-func validateFrameMetrics(v []*types.FrameMetric) error {
+func validateFrameMetrics(v []types.FrameMetric) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "FrameMetrics"}
 	for i := range v {
-		if err := validateFrameMetric(v[i]); err != nil {
+		if err := validateFrameMetric(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

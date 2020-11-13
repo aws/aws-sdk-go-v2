@@ -68,7 +68,7 @@ type DescribeEnvironmentMembershipsInput struct {
 type DescribeEnvironmentMembershipsOutput struct {
 
 	// Information about the environment members for the environment.
-	Memberships []*types.EnvironmentMember
+	Memberships []types.EnvironmentMember
 
 	// If there are more than 25 items in the list, only the first 25 items are
 	// returned, along with a unique string called a next token. To get the next batch

@@ -37,7 +37,7 @@ type DescribeEnvironmentManagedActionHistoryInput struct {
 	EnvironmentName *string
 
 	// The maximum number of items to return for a single request.
-	MaxItems *int32
+	MaxItems int32
 
 	// The pagination token returned by a previous request.
 	NextToken *string
@@ -47,7 +47,7 @@ type DescribeEnvironmentManagedActionHistoryInput struct {
 type DescribeEnvironmentManagedActionHistoryOutput struct {
 
 	// A list of completed and failed managed actions.
-	ManagedActionHistoryItems []*types.ManagedActionHistoryItem
+	ManagedActionHistoryItems []types.ManagedActionHistoryItem
 
 	// A pagination token that you pass to DescribeEnvironmentManagedActionHistory to
 	// get the next page of results.

@@ -55,7 +55,7 @@ type PutOrganizationConformancePackInput struct {
 	OrganizationConformancePackName *string
 
 	// A list of ConformancePackInputParameter objects.
-	ConformancePackInputParameters []*types.ConformancePackInputParameter
+	ConformancePackInputParameters []types.ConformancePackInputParameter
 
 	// Location of an Amazon S3 bucket where AWS Config can deliver evaluation results.
 	// AWS Config stores intermediate files while processing conformance pack template.
@@ -70,7 +70,7 @@ type PutOrganizationConformancePackInput struct {
 
 	// A list of AWS accounts to be excluded from an organization conformance pack
 	// while deploying a conformance pack.
-	ExcludedAccounts []*string
+	ExcludedAccounts []string
 
 	// A string containing full conformance pack template body. Structure containing
 	// the template body with a minimum length of 1 byte and a maximum length of 51,200

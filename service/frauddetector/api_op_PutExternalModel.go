@@ -62,7 +62,7 @@ type PutExternalModelInput struct {
 	OutputConfiguration *types.ModelOutputConfiguration
 
 	// A collection of key and value pairs.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type PutExternalModelOutput struct {

@@ -56,14 +56,14 @@ type AddCommunicationToCaseInput struct {
 	CaseId *string
 
 	// The email addresses in the CC line of an email to be added to the support case.
-	CcEmailAddresses []*string
+	CcEmailAddresses []string
 }
 
 // The result of the AddCommunicationToCase operation.
 type AddCommunicationToCaseOutput struct {
 
 	// True if AddCommunicationToCase succeeds. Otherwise, returns an error.
-	Result *bool
+	Result bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

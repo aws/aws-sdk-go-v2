@@ -55,7 +55,7 @@ type UpdateEndpointInput struct {
 	// ExcludeRetainedVariantProperties specifies the list of type VariantProperty to
 	// override with the values provided by EndpointConfig. If you don't specify a
 	// value for ExcludeAllVariantProperties, no variant properties are overridden.
-	ExcludeRetainedVariantProperties []*types.VariantProperty
+	ExcludeRetainedVariantProperties []types.VariantProperty
 
 	// When updating endpoint resources, enables or disables the retention of variant
 	// properties, such as the instance count or the variant weight. To retain the
@@ -63,7 +63,7 @@ type UpdateEndpointInput struct {
 	// RetainAllVariantProperties to true. To use the variant properties specified in a
 	// new EndpointConfig call when updating an endpoint, set
 	// RetainAllVariantProperties to false.
-	RetainAllVariantProperties *bool
+	RetainAllVariantProperties bool
 }
 
 type UpdateEndpointOutput struct {

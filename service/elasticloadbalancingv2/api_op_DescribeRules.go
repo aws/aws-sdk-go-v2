@@ -41,7 +41,7 @@ type DescribeRulesInput struct {
 	PageSize *int32
 
 	// The Amazon Resource Names (ARN) of the rules.
-	RuleArns []*string
+	RuleArns []string
 }
 
 type DescribeRulesOutput struct {
@@ -51,7 +51,7 @@ type DescribeRulesOutput struct {
 	NextMarker *string
 
 	// Information about the rules.
-	Rules []*types.Rule
+	Rules []types.Rule
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

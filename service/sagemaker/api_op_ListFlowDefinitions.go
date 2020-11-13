@@ -56,7 +56,7 @@ type ListFlowDefinitionsOutput struct {
 	// An array of objects describing the flow definitions.
 	//
 	// This member is required.
-	FlowDefinitionSummaries []*types.FlowDefinitionSummary
+	FlowDefinitionSummaries []types.FlowDefinitionSummary
 
 	// A token to resume pagination.
 	NextToken *string

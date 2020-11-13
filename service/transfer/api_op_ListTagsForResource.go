@@ -59,7 +59,7 @@ type ListTagsForResourceOutput struct {
 
 	// Key-value pairs that are assigned to a resource, usually for the purpose of
 	// grouping and searching for items. Tags are metadata that you define.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

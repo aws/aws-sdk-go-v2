@@ -41,7 +41,7 @@ type ListRevisionAssetsInput struct {
 	RevisionId *string
 
 	// The maximum number of results returned by a single call.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token value retrieved from a previous call to access the next page of
 	// results.
@@ -51,7 +51,7 @@ type ListRevisionAssetsInput struct {
 type ListRevisionAssetsOutput struct {
 
 	// The asset objects listed by the request.
-	Assets []*types.AssetEntry
+	Assets []types.AssetEntry
 
 	// The token value retrieved from a previous call to access the next page of
 	// results.

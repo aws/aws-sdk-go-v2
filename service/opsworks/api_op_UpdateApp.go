@@ -42,17 +42,17 @@ type UpdateAppInput struct {
 	AppSource *types.Source
 
 	// One or more user-defined key/value pairs to be added to the stack attributes.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// The app's data sources.
-	DataSources []*types.DataSource
+	DataSources []types.DataSource
 
 	// A description of the app.
 	Description *string
 
 	// The app's virtual host settings, with multiple domains separated by commas. For
 	// example: 'www.example.com, example.com'
-	Domains []*string
+	Domains []string
 
 	// Whether SSL is enabled for the app.
 	EnableSsl *bool
@@ -69,7 +69,7 @@ type UpdateAppInput struct {
 	// the message, "Environment: is too large (maximum is 20 KB)." If you have
 	// specified one or more environment variables, you cannot modify the stack's Chef
 	// version.
-	Environment []*types.EnvironmentVariable
+	Environment []types.EnvironmentVariable
 
 	// The app name.
 	Name *string

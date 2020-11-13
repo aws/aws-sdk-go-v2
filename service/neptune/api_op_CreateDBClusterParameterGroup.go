@@ -73,7 +73,7 @@ type CreateDBClusterParameterGroupInput struct {
 	Description *string
 
 	// The tags to be assigned to the new DB cluster parameter group.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateDBClusterParameterGroupOutput struct {

@@ -787,13 +787,13 @@ func validateAttribute(v *types.Attribute) error {
 	}
 }
 
-func validateAttributeList(v []*types.Attribute) error {
+func validateAttributeList(v []types.Attribute) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AttributeList"}
 	for i := range v {
-		if err := validateAttribute(v[i]); err != nil {
+		if err := validateAttribute(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -841,13 +841,13 @@ func validateResourceGroupTag(v *types.ResourceGroupTag) error {
 	}
 }
 
-func validateResourceGroupTags(v []*types.ResourceGroupTag) error {
+func validateResourceGroupTags(v []types.ResourceGroupTag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResourceGroupTags"}
 	for i := range v {
-		if err := validateResourceGroupTag(v[i]); err != nil {
+		if err := validateResourceGroupTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -873,13 +873,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagList(v []*types.Tag) error {
+func validateTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -890,13 +890,13 @@ func validateTagList(v []*types.Tag) error {
 	}
 }
 
-func validateUserAttributeList(v []*types.Attribute) error {
+func validateUserAttributeList(v []types.Attribute) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UserAttributeList"}
 	for i := range v {
-		if err := validateAttribute(v[i]); err != nil {
+		if err := validateAttribute(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -962,9 +962,6 @@ func validateOpCreateAssessmentTemplateInput(v *CreateAssessmentTemplateInput) e
 		if err := validateUserAttributeList(v.UserAttributesForFindings); err != nil {
 			invalidParams.AddNested("UserAttributesForFindings", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.DurationInSeconds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DurationInSeconds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

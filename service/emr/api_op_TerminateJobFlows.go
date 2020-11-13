@@ -39,7 +39,7 @@ type TerminateJobFlowsInput struct {
 	// A list of job flows to be shutdown.
 	//
 	// This member is required.
-	JobFlowIds []*string
+	JobFlowIds []string
 }
 
 type TerminateJobFlowsOutput struct {

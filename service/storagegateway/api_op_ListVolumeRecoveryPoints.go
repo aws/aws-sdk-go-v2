@@ -48,7 +48,7 @@ type ListVolumeRecoveryPointsOutput struct {
 	GatewayARN *string
 
 	// An array of VolumeRecoveryPointInfo objects.
-	VolumeRecoveryPointInfos []*types.VolumeRecoveryPointInfo
+	VolumeRecoveryPointInfos []types.VolumeRecoveryPointInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

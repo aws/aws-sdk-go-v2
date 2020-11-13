@@ -50,7 +50,7 @@ type DescribeUsersOutput struct {
 	NextToken *string
 
 	// Information about users in the user pool.
-	Users []*types.User
+	Users []types.User
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -40,7 +40,7 @@ type TestRepositoryTriggersInput struct {
 	// The list of triggers to test.
 	//
 	// This member is required.
-	Triggers []*types.RepositoryTrigger
+	Triggers []types.RepositoryTrigger
 }
 
 // Represents the output of a test repository triggers operation.
@@ -48,11 +48,11 @@ type TestRepositoryTriggersOutput struct {
 
 	// The list of triggers that were not tested. This list provides the names of the
 	// triggers that could not be tested, separated by commas.
-	FailedExecutions []*types.RepositoryTriggerExecutionFailure
+	FailedExecutions []types.RepositoryTriggerExecutionFailure
 
 	// The list of triggers that were successfully tested. This list provides the names
 	// of the triggers that were successfully tested, separated by commas.
-	SuccessfulExecutions []*string
+	SuccessfulExecutions []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

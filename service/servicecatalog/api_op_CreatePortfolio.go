@@ -60,7 +60,7 @@ type CreatePortfolioInput struct {
 	Description *string
 
 	// One or more tags.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreatePortfolioOutput struct {
@@ -69,7 +69,7 @@ type CreatePortfolioOutput struct {
 	PortfolioDetail *types.PortfolioDetail
 
 	// Information about the tags associated with the portfolio.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

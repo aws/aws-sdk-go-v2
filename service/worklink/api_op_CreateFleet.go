@@ -43,7 +43,7 @@ type CreateFleetInput struct {
 	OptimizeForEndUserLocation *bool
 
 	// The tags to add to the resource. A tag is a key-value pair.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateFleetOutput struct {

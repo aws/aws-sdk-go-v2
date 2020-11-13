@@ -99,7 +99,7 @@ type LogPattern struct {
 	PatternSetName *string
 
 	// Rank of the log pattern.
-	Rank *int32
+	Rank int32
 }
 
 // Describes an anomaly or error with the application.
@@ -251,7 +251,7 @@ type Problem struct {
 type RelatedObservations struct {
 
 	// The list of observations related to the problem.
-	ObservationList []*Observation
+	ObservationList []Observation
 }
 
 // An object that defines the tags associated with an application. A tag is a label

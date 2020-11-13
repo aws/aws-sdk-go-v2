@@ -1089,9 +1089,6 @@ func validateAliasTarget(v *types.AliasTarget) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AliasTarget"}
-	if v.EvaluateTargetHealth == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EvaluateTargetHealth"))
-	}
 	if v.DNSName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DNSName"))
 	}
@@ -1146,13 +1143,13 @@ func validateChangeBatch(v *types.ChangeBatch) error {
 	}
 }
 
-func validateChanges(v []*types.Change) error {
+func validateChanges(v []types.Change) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Changes"}
 	for i := range v {
-		if err := validateChange(v[i]); err != nil {
+		if err := validateChange(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1198,13 +1195,13 @@ func validateResourceRecord(v *types.ResourceRecord) error {
 	}
 }
 
-func validateResourceRecords(v []*types.ResourceRecord) error {
+func validateResourceRecords(v []types.ResourceRecord) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResourceRecords"}
 	for i := range v {
-		if err := validateResourceRecord(v[i]); err != nil {
+		if err := validateResourceRecord(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

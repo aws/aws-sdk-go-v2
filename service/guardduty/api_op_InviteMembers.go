@@ -36,7 +36,7 @@ type InviteMembersInput struct {
 	// members.
 	//
 	// This member is required.
-	AccountIds []*string
+	AccountIds []string
 
 	// The unique ID of the detector of the GuardDuty account that you want to invite
 	// members with.
@@ -46,7 +46,7 @@ type InviteMembersInput struct {
 
 	// A Boolean value that specifies whether you want to disable email notification to
 	// the accounts that you are inviting to GuardDuty as members.
-	DisableEmailNotification *bool
+	DisableEmailNotification bool
 
 	// The invitation message that you want to send to the accounts that you're
 	// inviting to GuardDuty as members.
@@ -59,7 +59,7 @@ type InviteMembersOutput struct {
 	// explains why it was unprocessed.
 	//
 	// This member is required.
-	UnprocessedAccounts []*types.UnprocessedAccount
+	UnprocessedAccounts []types.UnprocessedAccount
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

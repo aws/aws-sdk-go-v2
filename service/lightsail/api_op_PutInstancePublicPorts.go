@@ -46,7 +46,7 @@ type PutInstancePublicPortsInput struct {
 	// An array of objects to describe the ports to open for the specified instance.
 	//
 	// This member is required.
-	PortInfos []*types.PortInfo
+	PortInfos []types.PortInfo
 }
 
 type PutInstancePublicPortsOutput struct {

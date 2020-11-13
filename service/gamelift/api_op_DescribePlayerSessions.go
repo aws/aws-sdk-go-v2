@@ -103,7 +103,7 @@ type DescribePlayerSessionsOutput struct {
 
 	// A collection of objects containing properties for each player session that
 	// matches the request.
-	PlayerSessions []*types.PlayerSession
+	PlayerSessions []types.PlayerSession
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

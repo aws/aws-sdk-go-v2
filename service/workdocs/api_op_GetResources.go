@@ -52,10 +52,10 @@ type GetResourcesInput struct {
 type GetResourcesOutput struct {
 
 	// The documents in the specified collection.
-	Documents []*types.DocumentMetadata
+	Documents []types.DocumentMetadata
 
 	// The folders in the specified folder.
-	Folders []*types.FolderMetadata
+	Folders []types.FolderMetadata
 
 	// The marker to use when requesting the next set of results. If there are no
 	// additional results, the string is empty.

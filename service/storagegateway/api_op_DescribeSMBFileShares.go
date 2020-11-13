@@ -35,14 +35,14 @@ type DescribeSMBFileSharesInput struct {
 	// described.
 	//
 	// This member is required.
-	FileShareARNList []*string
+	FileShareARNList []string
 }
 
 // DescribeSMBFileSharesOutput
 type DescribeSMBFileSharesOutput struct {
 
 	// An array containing a description for each requested file share.
-	SMBFileShareInfoList []*types.SMBFileShareInfo
+	SMBFileShareInfoList []types.SMBFileShareInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

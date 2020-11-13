@@ -71,17 +71,17 @@ type UploadDocumentsInput struct {
 type UploadDocumentsOutput struct {
 
 	// The number of documents that were added to the search domain.
-	Adds *int64
+	Adds int64
 
 	// The number of documents that were deleted from the search domain.
-	Deletes *int64
+	Deletes int64
 
 	// The status of an UploadDocumentsRequest.
 	Status *string
 
 	// Any warnings returned by the document service about the documents being
 	// uploaded.
-	Warnings []*types.DocumentServiceWarning
+	Warnings []types.DocumentServiceWarning
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

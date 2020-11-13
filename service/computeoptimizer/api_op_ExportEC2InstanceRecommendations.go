@@ -59,7 +59,7 @@ type ExportEC2InstanceRecommendationsInput struct {
 	// accounts are not included in the export if this parameter, or the include member
 	// accounts parameter, is omitted. You can specify multiple account IDs per
 	// request.
-	AccountIds []*string
+	AccountIds []string
 
 	// The recommendations data to include in the export file. For more information
 	// about the fields that can be exported, see Exported files
@@ -73,7 +73,7 @@ type ExportEC2InstanceRecommendationsInput struct {
 
 	// An array of objects that describe a filter to export a more specific set of
 	// instance recommendations.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// Indicates whether to include recommendations for resources in all member
 	// accounts of the organization if your account is the master account of an
@@ -82,7 +82,7 @@ type ExportEC2InstanceRecommendationsInput struct {
 	// export file if this parameter is omitted. Recommendations for member accounts
 	// are not included in the export if this parameter, or the account IDs parameter,
 	// is omitted.
-	IncludeMemberAccounts *bool
+	IncludeMemberAccounts bool
 }
 
 type ExportEC2InstanceRecommendationsOutput struct {

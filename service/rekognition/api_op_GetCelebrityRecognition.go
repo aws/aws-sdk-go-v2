@@ -88,7 +88,7 @@ type GetCelebrityRecognitionInput struct {
 type GetCelebrityRecognitionOutput struct {
 
 	// Array of celebrities recognized in the video.
-	Celebrities []*types.CelebrityRecognition
+	Celebrities []types.CelebrityRecognition
 
 	// The current status of the celebrity recognition job.
 	JobStatus types.VideoJobStatus

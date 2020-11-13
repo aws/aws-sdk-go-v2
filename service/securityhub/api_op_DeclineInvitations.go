@@ -33,14 +33,14 @@ type DeclineInvitationsInput struct {
 	// to Security Hub.
 	//
 	// This member is required.
-	AccountIds []*string
+	AccountIds []string
 }
 
 type DeclineInvitationsOutput struct {
 
 	// The list of AWS accounts that were not processed. For each account, the list
 	// includes the account ID and the email address.
-	UnprocessedAccounts []*types.Result
+	UnprocessedAccounts []types.Result
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

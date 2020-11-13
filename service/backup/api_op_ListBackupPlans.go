@@ -50,7 +50,7 @@ type ListBackupPlansOutput struct {
 
 	// An array of backup plan list items containing metadata about your saved backup
 	// plans.
-	BackupPlansList []*types.BackupPlansListMember
+	BackupPlansList []types.BackupPlansListMember
 
 	// The next item following a partial list of returned items. For example, if a
 	// request is made to return maxResults number of items, NextToken allows you to

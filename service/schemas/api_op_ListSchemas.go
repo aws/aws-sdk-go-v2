@@ -34,7 +34,7 @@ type ListSchemasInput struct {
 	// This member is required.
 	RegistryName *string
 
-	Limit *int32
+	Limit int32
 
 	// The token that specifies the next page of results to return. To request the
 	// first page, leave NextToken empty. The token will expire in 24 hours, and cannot
@@ -54,7 +54,7 @@ type ListSchemasOutput struct {
 	NextToken *string
 
 	// An array of schema summaries.
-	Schemas []*types.SchemaSummary
+	Schemas []types.SchemaSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

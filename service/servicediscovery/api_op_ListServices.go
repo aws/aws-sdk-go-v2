@@ -33,7 +33,7 @@ type ListServicesInput struct {
 	// A complex type that contains specifications for the namespaces that you want to
 	// list services for. If you specify more than one filter, an operation must match
 	// all filters to be returned by ListServices.
-	Filters []*types.ServiceFilter
+	Filters []types.ServiceFilter
 
 	// The maximum number of services that you want AWS Cloud Map to return in the
 	// response to a ListServices request. If you don't specify a value for MaxResults,
@@ -62,7 +62,7 @@ type ListServicesOutput struct {
 
 	// An array that contains one ServiceSummary object for each service that matches
 	// the specified filter criteria.
-	Services []*types.ServiceSummary
+	Services []types.ServiceSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

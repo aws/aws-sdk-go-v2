@@ -152,7 +152,7 @@ type HIT struct {
 	// must be met in order for a Worker to accept the HIT. Additionally, other actions
 	// can be restricted using the ActionsGuarded field on each
 	// QualificationRequirement structure.
-	QualificationRequirements []*QualificationRequirement
+	QualificationRequirements []QualificationRequirement
 
 	// The data the Worker completing the HIT uses produce the results. This is either
 	// either a QuestionForm, HTMLQuestion or an ExternalQuestion data structure.
@@ -263,7 +263,7 @@ type ParameterMapEntry struct {
 
 	// The list of answers to the question specified in the MapEntry Key element. The
 	// Worker must match all values in order for the answer to be scored correctly.
-	Values []*string
+	Values []string
 }
 
 // Name of the parameter from the Review policy.
@@ -273,10 +273,10 @@ type PolicyParameter struct {
 	Key *string
 
 	// List of ParameterMapEntry objects.
-	MapEntries []*ParameterMapEntry
+	MapEntries []ParameterMapEntry
 
 	// The list of values of the Parameter
-	Values []*string
+	Values []string
 }
 
 // The Qualification data structure represents a Qualification assigned to a user,
@@ -388,7 +388,7 @@ type QualificationRequirement struct {
 	// with the Worker_Locale QualificationType ID. When performing a set comparison by
 	// using the In or the NotIn comparator, you can use up to 15 IntegerValue elements
 	// in a QualificationRequirement data structure.
-	IntegerValues []*int32
+	IntegerValues []int32
 
 	// The locale value to compare against the Qualification's value. The local value
 	// must be a valid ISO 3166 country code or supports ISO 3166-2 subdivisions.
@@ -398,7 +398,7 @@ type QualificationRequirement struct {
 	// EqualTo or NotEqualTo comparators. When performing a set comparison by using the
 	// In or the NotIn comparator, you can use up to 30 LocaleValue elements in a
 	// QualificationRequirement data structure.
-	LocaleValues []*Locale
+	LocaleValues []Locale
 
 	// DEPRECATED: Use the ActionsGuarded field instead. If RequiredToPreview is true,
 	// the question data for the HIT will not be shown when a Worker whose
@@ -525,17 +525,17 @@ type ReviewPolicy struct {
 	PolicyName *string
 
 	// Name of the parameter from the Review policy.
-	Parameters []*PolicyParameter
+	Parameters []PolicyParameter
 }
 
 // Contains both ReviewResult and ReviewAction elements for a particular HIT.
 type ReviewReport struct {
 
 	// A list of ReviewAction objects for each action specified in the Review Policy.
-	ReviewActions []*ReviewActionDetail
+	ReviewActions []ReviewActionDetail
 
 	// A list of ReviewResults objects for each action specified in the Review Policy.
-	ReviewResults []*ReviewResultDetail
+	ReviewResults []ReviewResultDetail
 }
 
 // This data structure is returned multiple times for each result specified in the

@@ -33,12 +33,12 @@ type RemoveTagsFromOnPremisesInstancesInput struct {
 	// The names of the on-premises instances from which to remove tags.
 	//
 	// This member is required.
-	InstanceNames []*string
+	InstanceNames []string
 
 	// The tag key-value pairs to remove from the on-premises instances.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type RemoveTagsFromOnPremisesInstancesOutput struct {

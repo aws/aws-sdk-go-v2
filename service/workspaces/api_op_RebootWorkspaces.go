@@ -34,13 +34,13 @@ type RebootWorkspacesInput struct {
 	// The WorkSpaces to reboot. You can specify up to 25 WorkSpaces.
 	//
 	// This member is required.
-	RebootWorkspaceRequests []*types.RebootRequest
+	RebootWorkspaceRequests []types.RebootRequest
 }
 
 type RebootWorkspacesOutput struct {
 
 	// Information about the WorkSpaces that could not be rebooted.
-	FailedRequests []*types.FailedWorkspaceChangeRequest
+	FailedRequests []types.FailedWorkspaceChangeRequest
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

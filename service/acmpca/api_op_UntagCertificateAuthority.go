@@ -49,7 +49,7 @@ type UntagCertificateAuthorityInput struct {
 	// List of tags to be removed from the CA.
 	//
 	// This member is required.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type UntagCertificateAuthorityOutput struct {

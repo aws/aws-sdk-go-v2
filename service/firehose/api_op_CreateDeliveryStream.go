@@ -140,7 +140,7 @@ type CreateDeliveryStreamInput struct {
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
 	// in the AWS Billing and Cost Management User Guide. You can specify up to 50 tags
 	// when creating a delivery stream.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateDeliveryStreamOutput struct {

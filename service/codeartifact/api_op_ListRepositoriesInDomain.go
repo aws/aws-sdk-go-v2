@@ -63,7 +63,7 @@ type ListRepositoriesInDomainOutput struct {
 	NextToken *string
 
 	// The returned list of repositories.
-	Repositories []*types.RepositorySummary
+	Repositories []types.RepositorySummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

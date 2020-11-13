@@ -40,7 +40,7 @@ type PutInvitationConfigurationInput struct {
 
 	// The list of private skill IDs that you want to recommend to the user to enable
 	// in the invitation.
-	PrivateSkillIds []*string
+	PrivateSkillIds []string
 }
 
 type PutInvitationConfigurationOutput struct {

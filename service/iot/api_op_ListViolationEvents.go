@@ -65,7 +65,7 @@ type ListViolationEventsOutput struct {
 	// The security profile violation alerts issued for this account during the given
 	// time period, potentially filtered by security profile, behavior violated, or
 	// thing (device) violating.
-	ViolationEvents []*types.ViolationEvent
+	ViolationEvents []types.ViolationEvent
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

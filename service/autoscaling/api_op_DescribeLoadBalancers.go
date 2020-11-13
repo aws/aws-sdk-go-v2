@@ -49,7 +49,7 @@ type DescribeLoadBalancersInput struct {
 type DescribeLoadBalancersOutput struct {
 
 	// The load balancers.
-	LoadBalancers []*types.LoadBalancerState
+	LoadBalancers []types.LoadBalancerState
 
 	// A string that indicates that the response contains more items than can be
 	// returned in a single response. To receive additional items, specify this string

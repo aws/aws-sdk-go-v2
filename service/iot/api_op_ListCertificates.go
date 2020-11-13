@@ -34,7 +34,7 @@ type ListCertificatesInput struct {
 
 	// Specifies the order for results. If True, the results are returned in ascending
 	// order, based on the creation date.
-	AscendingOrder *bool
+	AscendingOrder bool
 
 	// The marker for the next set of results.
 	Marker *string
@@ -47,7 +47,7 @@ type ListCertificatesInput struct {
 type ListCertificatesOutput struct {
 
 	// The descriptions of the certificates.
-	Certificates []*types.Certificate
+	Certificates []types.Certificate
 
 	// The marker for the next set of results, or null if there are no additional
 	// results.

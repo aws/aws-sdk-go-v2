@@ -34,7 +34,7 @@ type StartMonitoringMembersInput struct {
 	// A list of account IDs of the GuardDuty member accounts to start monitoring.
 	//
 	// This member is required.
-	AccountIds []*string
+	AccountIds []string
 
 	// The unique ID of the detector of the GuardDuty master account associated with
 	// the member accounts to monitor.
@@ -49,7 +49,7 @@ type StartMonitoringMembersOutput struct {
 	// explains why it was unprocessed.
 	//
 	// This member is required.
-	UnprocessedAccounts []*types.UnprocessedAccount
+	UnprocessedAccounts []types.UnprocessedAccount
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -56,7 +56,7 @@ type DescribeThemeOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// The information about the theme that you are describing.
 	Theme *types.Theme

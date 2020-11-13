@@ -55,7 +55,7 @@ type GetIdentityPoliciesInput struct {
 	// attached to the identity, you can use ListIdentityPolicies.
 	//
 	// This member is required.
-	PolicyNames []*string
+	PolicyNames []string
 }
 
 // Represents the requested sending authorization policies.
@@ -64,7 +64,7 @@ type GetIdentityPoliciesOutput struct {
 	// A map of policy names to policies.
 	//
 	// This member is required.
-	Policies map[string]*string
+	Policies map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

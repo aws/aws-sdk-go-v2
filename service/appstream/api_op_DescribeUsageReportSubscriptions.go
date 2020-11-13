@@ -44,7 +44,7 @@ type DescribeUsageReportSubscriptionsOutput struct {
 	NextToken *string
 
 	// Information about the usage report subscription.
-	UsageReportSubscriptions []*types.UsageReportSubscription
+	UsageReportSubscriptions []types.UsageReportSubscription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

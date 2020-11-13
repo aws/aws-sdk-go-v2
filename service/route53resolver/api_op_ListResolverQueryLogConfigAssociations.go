@@ -34,7 +34,7 @@ type ListResolverQueryLogConfigAssociationsInput struct {
 	// you submit a second or subsequent ListResolverQueryLogConfigAssociations request
 	// and specify the NextToken parameter, you must use the same values for Filters,
 	// if any, as in the previous request.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// The maximum number of query logging associations that you want to return in the
 	// response to a ListResolverQueryLogConfigAssociations request. If you don't
@@ -121,20 +121,20 @@ type ListResolverQueryLogConfigAssociationsOutput struct {
 
 	// A list that contains one ResolverQueryLogConfigAssociations element for each
 	// query logging association that matches the values that you specified for Filter.
-	ResolverQueryLogConfigAssociations []*types.ResolverQueryLogConfigAssociation
+	ResolverQueryLogConfigAssociations []types.ResolverQueryLogConfigAssociation
 
 	// The total number of query logging associations that were created by the current
 	// account in the specified Region. This count can differ from the number of
 	// associations that are returned in a ListResolverQueryLogConfigAssociations
 	// response, depending on the values that you specify in the request.
-	TotalCount *int32
+	TotalCount int32
 
 	// The total number of query logging associations that were created by the current
 	// account in the specified Region and that match the filters that were specified
 	// in the ListResolverQueryLogConfigAssociations request. For the total number of
 	// associations that were created by the current account in the specified Region,
 	// see TotalCount.
-	TotalFilteredCount *int32
+	TotalFilteredCount int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

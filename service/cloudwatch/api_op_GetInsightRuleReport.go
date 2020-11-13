@@ -118,7 +118,7 @@ type GetInsightRuleReportInput struct {
 	// * Average --
 	// the average value from all contributors during the time period represented by
 	// that data point.
-	Metrics []*string
+	Metrics []string
 
 	// Determines what statistic to use to rank the contributors. Valid values are SUM
 	// and MAXIMUM.
@@ -140,17 +140,17 @@ type GetInsightRuleReportOutput struct {
 	// An array of the unique contributors found by this rule in this time period. If
 	// the rule contains multiple keys, each combination of values for the keys counts
 	// as a unique contributor.
-	Contributors []*types.InsightRuleContributor
+	Contributors []types.InsightRuleContributor
 
 	// An array of the strings used as the keys for this rule. The keys are the
 	// dimensions used to classify contributors. If the rule contains more than one
 	// key, then each unique combination of values for the keys is counted as a unique
 	// contributor.
-	KeyLabels []*string
+	KeyLabels []string
 
 	// A time series of metric data points that matches the time period in the rule
 	// request.
-	MetricDatapoints []*types.InsightRuleMetricDatapoint
+	MetricDatapoints []types.InsightRuleMetricDatapoint
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

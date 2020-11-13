@@ -44,7 +44,7 @@ type ListOfferingsInput struct {
 	Duration *string
 
 	// Placeholder documentation for MaxResults
-	MaxResults *int32
+	MaxResults int32
 
 	// Filter by bitrate, 'MAX_10_MBPS', 'MAX_20_MBPS', or 'MAX_50_MBPS'
 	MaximumBitrate *string
@@ -75,7 +75,7 @@ type ListOfferingsOutput struct {
 	NextToken *string
 
 	// List of offerings
-	Offerings []*types.Offering
+	Offerings []types.Offering
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

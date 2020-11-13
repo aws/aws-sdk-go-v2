@@ -50,7 +50,7 @@ type DescribeFlowOutput struct {
 
 	// The configuration that controls how Amazon AppFlow transfers data to the
 	// destination connector.
-	DestinationFlowConfigList []*types.DestinationFlowConfig
+	DestinationFlowConfigList []types.DestinationFlowConfig
 
 	// The flow's Amazon Resource Name (ARN).
 	FlowArn *string
@@ -86,11 +86,11 @@ type DescribeFlowOutput struct {
 	SourceFlowConfig *types.SourceFlowConfig
 
 	// The tags used to organize, track, or control access for your flow.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// A list of tasks that Amazon AppFlow performs while transferring the data in the
 	// flow run.
-	Tasks []*types.Task
+	Tasks []types.Task
 
 	// The trigger settings that determine how and when the flow runs.
 	TriggerConfig *types.TriggerConfig

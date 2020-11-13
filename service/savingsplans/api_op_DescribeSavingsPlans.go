@@ -30,7 +30,7 @@ func (c *Client) DescribeSavingsPlans(ctx context.Context, params *DescribeSavin
 type DescribeSavingsPlansInput struct {
 
 	// The filters.
-	Filters []*types.SavingsPlanFilter
+	Filters []types.SavingsPlanFilter
 
 	// The maximum number of results to return with a single call. To retrieve
 	// additional results, make another call with the returned token value.
@@ -40,10 +40,10 @@ type DescribeSavingsPlansInput struct {
 	NextToken *string
 
 	// The Amazon Resource Names (ARN) of the Savings Plans.
-	SavingsPlanArns []*string
+	SavingsPlanArns []string
 
 	// The IDs of the Savings Plans.
-	SavingsPlanIds []*string
+	SavingsPlanIds []string
 
 	// The states.
 	States []types.SavingsPlanState
@@ -56,7 +56,7 @@ type DescribeSavingsPlansOutput struct {
 	NextToken *string
 
 	// Information about the Savings Plans.
-	SavingsPlans []*types.SavingsPlan
+	SavingsPlans []types.SavingsPlan
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

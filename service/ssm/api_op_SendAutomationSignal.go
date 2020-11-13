@@ -49,7 +49,7 @@ type SendAutomationSignalInput struct {
 	// StepName="step1" For the StopStep signal type, you must send the step execution
 	// ID as the payload. For example:
 	// StepExecutionId="97fff367-fc5a-4299-aed8-0123456789ab"
-	Payload map[string][]*string
+	Payload map[string][]string
 }
 
 type SendAutomationSignalOutput struct {

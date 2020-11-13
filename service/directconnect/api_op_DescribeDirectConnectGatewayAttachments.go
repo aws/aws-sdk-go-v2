@@ -53,7 +53,7 @@ type DescribeDirectConnectGatewayAttachmentsInput struct {
 type DescribeDirectConnectGatewayAttachmentsOutput struct {
 
 	// The attachments.
-	DirectConnectGatewayAttachments []*types.DirectConnectGatewayAttachment
+	DirectConnectGatewayAttachments []types.DirectConnectGatewayAttachment
 
 	// The token to retrieve the next page.
 	NextToken *string

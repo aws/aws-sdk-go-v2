@@ -53,7 +53,7 @@ type ListFunctionsInput struct {
 type ListFunctionsOutput struct {
 
 	// A list of Lambda functions.
-	Functions []*types.FunctionConfiguration
+	Functions []types.FunctionConfiguration
 
 	// The pagination token that's included if more results are available.
 	NextMarker *string

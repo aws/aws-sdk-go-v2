@@ -46,7 +46,7 @@ type GetCardinalityInput struct {
 type GetCardinalityOutput struct {
 
 	// The approximate count of unique values that match the query.
-	Cardinality *int32
+	Cardinality int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

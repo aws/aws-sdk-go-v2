@@ -40,7 +40,7 @@ type DescribeDBClusterParameterGroupsInput struct {
 	DBClusterParameterGroupName *string
 
 	// This parameter is not currently supported.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
@@ -58,7 +58,7 @@ type DescribeDBClusterParameterGroupsInput struct {
 type DescribeDBClusterParameterGroupsOutput struct {
 
 	// A list of cluster parameter groups.
-	DBClusterParameterGroups []*types.DBClusterParameterGroup
+	DBClusterParameterGroups []types.DBClusterParameterGroup
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the

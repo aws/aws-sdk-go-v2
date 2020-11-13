@@ -1051,17 +1051,13 @@ func awsAwsjson10_serializeDocumentLogDestination(v *types.LogDestination, value
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentLogDestinationList(v []*types.LogDestination, value smithyjson.Value) error {
+func awsAwsjson10_serializeDocumentLogDestinationList(v []types.LogDestination, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson10_serializeDocumentLogDestination(v[i], av); err != nil {
+		if err := awsAwsjson10_serializeDocumentLogDestination(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1079,9 +1075,9 @@ func awsAwsjson10_serializeDocumentLoggingConfiguration(v *types.LoggingConfigur
 		}
 	}
 
-	if v.IncludeExecutionData != nil {
+	if v.IncludeExecutionData {
 		ok := object.Key("includeExecutionData")
-		ok.Boolean(*v.IncludeExecutionData)
+		ok.Boolean(v.IncludeExecutionData)
 	}
 
 	if len(v.Level) > 0 {
@@ -1109,32 +1105,24 @@ func awsAwsjson10_serializeDocumentTag(v *types.Tag, value smithyjson.Value) err
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentTagKeyList(v []*string, value smithyjson.Value) error {
+func awsAwsjson10_serializeDocumentTagKeyList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentTagList(v []*types.Tag, value smithyjson.Value) error {
+func awsAwsjson10_serializeDocumentTagList(v []types.Tag, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson10_serializeDocumentTag(v[i], av); err != nil {
+		if err := awsAwsjson10_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1145,9 +1133,9 @@ func awsAwsjson10_serializeDocumentTracingConfiguration(v *types.TracingConfigur
 	object := value.Object()
 	defer object.Close()
 
-	if v.Enabled != nil {
+	if v.Enabled {
 		ok := object.Key("enabled")
-		ok.Boolean(*v.Enabled)
+		ok.Boolean(v.Enabled)
 	}
 
 	return nil
@@ -1323,9 +1311,9 @@ func awsAwsjson10_serializeOpDocumentGetExecutionHistoryInput(v *GetExecutionHis
 		ok.Boolean(*v.IncludeExecutionData)
 	}
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("maxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1333,9 +1321,9 @@ func awsAwsjson10_serializeOpDocumentGetExecutionHistoryInput(v *GetExecutionHis
 		ok.String(*v.NextToken)
 	}
 
-	if v.ReverseOrder != nil {
+	if v.ReverseOrder {
 		ok := object.Key("reverseOrder")
-		ok.Boolean(*v.ReverseOrder)
+		ok.Boolean(v.ReverseOrder)
 	}
 
 	return nil
@@ -1345,9 +1333,9 @@ func awsAwsjson10_serializeOpDocumentListActivitiesInput(v *ListActivitiesInput,
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("maxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1362,9 +1350,9 @@ func awsAwsjson10_serializeOpDocumentListExecutionsInput(v *ListExecutionsInput,
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("maxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1389,9 +1377,9 @@ func awsAwsjson10_serializeOpDocumentListStateMachinesInput(v *ListStateMachines
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("maxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {

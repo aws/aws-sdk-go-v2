@@ -62,7 +62,7 @@ type AdditionalResultAttributeValue struct {
 type AttributeFilter struct {
 
 	// Performs a logical AND operation on all supplied filters.
-	AndAllFilters []*AttributeFilter
+	AndAllFilters []AttributeFilter
 
 	// Returns true when a document contains all of the specified document attributes.
 	// This filter is only applicable to StringListValue metadata.
@@ -95,7 +95,7 @@ type AttributeFilter struct {
 	NotFilter *AttributeFilter
 
 	// Performs a logical OR operation on all supplied filters.
-	OrAllFilters []*AttributeFilter
+	OrAllFilters []AttributeFilter
 }
 
 // Provides information about documents that could not be removed from an index by
@@ -164,7 +164,7 @@ type ColumnConfiguration struct {
 	// One to five columns that indicate when a document in the database has changed.
 	//
 	// This member is required.
-	ChangeDetectingColumns []*string
+	ChangeDetectingColumns []string
 
 	// The column that contains the contents of the document.
 	//
@@ -182,7 +182,7 @@ type ColumnConfiguration struct {
 	// An array of objects that map database column names to the corresponding fields
 	// in an index. You must first create the fields in the index using the UpdateIndex
 	// operation.
-	FieldMappings []*DataSourceToIndexFieldMapping
+	FieldMappings []DataSourceToIndexFieldMapping
 }
 
 // Specifies the attachment settings for the Confluence data source. Attachment
@@ -194,11 +194,11 @@ type ConfluenceAttachmentConfiguration struct {
 	// you can map a field, you must first create an index field with a matching type
 	// using the console or the UpdateIndex operation. If you specify the
 	// AttachentFieldMappings parameter, you must specify at least one field mapping.
-	AttachmentFieldMappings []*ConfluenceAttachmentToIndexFieldMapping
+	AttachmentFieldMappings []ConfluenceAttachmentToIndexFieldMapping
 
 	// Indicates whether Amazon Kendra indexes attachments to the pages and blogs in
 	// the Confluence data source.
-	CrawlAttachments *bool
+	CrawlAttachments bool
 }
 
 // Defines the mapping between a field in the Confluence data source to a Amazon
@@ -228,7 +228,7 @@ type ConfluenceBlogConfiguration struct {
 	// can map a field, you must first create an index field with a matching type using
 	// the console or the UpdateIndex operation. If you specify the BlogFieldMappings
 	// parameter, you must specify at least one field mapping.
-	BlogFieldMappings []*ConfluenceBlogToIndexFieldMapping
+	BlogFieldMappings []ConfluenceBlogToIndexFieldMapping
 }
 
 // Defines the mapping between a blog field in the Confluence data source to a
@@ -291,7 +291,7 @@ type ConfluenceConfiguration struct {
 	// don't match the pattern are included in the index. If a item matches both an
 	// exclusion pattern and an inclusion pattern, the item isn't included in the
 	// index.
-	ExclusionPatterns []*string
+	ExclusionPatterns []string
 
 	// A list of regular expression patterns that apply to a URL on the Confluence
 	// server. An inclusion pattern can apply to a blog post, a page, a space, or an
@@ -299,7 +299,7 @@ type ConfluenceConfiguration struct {
 	// don't match the pattern are excluded from the index. If an item matches both an
 	// inclusion pattern and an exclusion pattern, the item isn't included in the
 	// index.
-	InclusionPatterns []*string
+	InclusionPatterns []string
 
 	// Specifies configuration information for indexing Confluence pages.
 	PageConfiguration *ConfluencePageConfiguration
@@ -318,7 +318,7 @@ type ConfluencePageConfiguration struct {
 	// can map a field, you must first create an index field with a matching type using
 	// the console or the UpdateIndex operation. If you specify the PageFieldMappings
 	// parameter, you must specify at least one field mapping.
-	PageFieldMappings []*ConfluencePageToIndexFieldMapping
+	PageFieldMappings []ConfluencePageToIndexFieldMapping
 }
 
 // Defines the mapping between a field in the Confluence data source to a Amazon
@@ -342,32 +342,32 @@ type ConfluencePageToIndexFieldMapping struct {
 type ConfluenceSpaceConfiguration struct {
 
 	// Specifies whether Amazon Kendra should index archived spaces.
-	CrawlArchivedSpaces *bool
+	CrawlArchivedSpaces bool
 
 	// Specifies whether Amazon Kendra should index personal spaces. Users can add
 	// restrictions to items in personal spaces. If personal spaces are indexed,
 	// queries without user context information may return restricted items from a
 	// personal space in their results. For more information, see Filtering on user
 	// context (https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html).
-	CrawlPersonalSpaces *bool
+	CrawlPersonalSpaces bool
 
 	// A list of space keys of Confluence spaces. If you include a key, the blogs,
 	// documents, and attachments in the space are not indexed. If a space is in both
 	// the ExcludeSpaces and the IncludeSpaces list, the space is excluded.
-	ExcludeSpaces []*string
+	ExcludeSpaces []string
 
 	// A list of space keys for Confluence spaces. If you include a key, the blogs,
 	// documents, and attachments in the space are indexed. Spaces that aren't in the
 	// list aren't indexed. A space in the list must exist. Otherwise, Amazon Kendra
 	// logs an error when the data source is synchronized. If a space is in both the
 	// IncludeSpaces and the ExcludeSpaces list, the space is excluded.
-	IncludeSpaces []*string
+	IncludeSpaces []string
 
 	// Defines how space metadata fields should be mapped to index fields. Before you
 	// can map a field, you must first create an index field with a matching type using
 	// the console or the UpdateIndex operation. If you specify the SpaceFieldMappings
 	// parameter, you must specify at least one field mapping.
-	SpaceFieldMappings []*ConfluenceSpaceToIndexFieldMapping
+	SpaceFieldMappings []ConfluenceSpaceToIndexFieldMapping
 }
 
 // Defines the mapping between a field in the Confluence data source to a Amazon
@@ -605,14 +605,14 @@ type DataSourceVpcConfiguration struct {
 	// groups should enable Amazon Kendra to connect to the data source.
 	//
 	// This member is required.
-	SecurityGroupIds []*string
+	SecurityGroupIds []string
 
 	// A list of identifiers for subnets within your Amazon VPC. The subnets should be
 	// able to connect to each other in the VPC, and they should have outgoing access
 	// to the Internet through a NAT device.
 	//
 	// This member is required.
-	SubnetIds []*string
+	SubnetIds []string
 }
 
 // A document in an index.
@@ -624,12 +624,12 @@ type Document struct {
 	Id *string
 
 	// Information to use for user context filtering.
-	AccessControlList []*Principal
+	AccessControlList []Principal
 
 	// Custom attributes to apply to the document. Use the custom attributes to provide
 	// additional information for searching, to provide facets for refining searches,
 	// and to provide additional information in the query response.
-	Attributes []*DocumentAttribute
+	Attributes []DocumentAttribute
 
 	// The contents of the document. Documents passed to the Blob parameter must be
 	// base64 encoded. Your code might not need to encode the document file bytes if
@@ -673,7 +673,7 @@ type DocumentAttributeValue struct {
 	LongValue *int64
 
 	// A list of strings.
-	StringListValue []*string
+	StringListValue []string
 
 	// A string, such as "department".
 	StringValue *string
@@ -739,7 +739,7 @@ type FacetResult struct {
 
 	// An array of key/value pairs, where the key is the value of the attribute and the
 	// count is the number of documents that share the key value.
-	DocumentAttributeValueCountPairs []*DocumentAttributeValueCountPair
+	DocumentAttributeValueCountPairs []DocumentAttributeValueCountPair
 
 	// The data type of the facet value. This is the same as the type defined for the
 	// index field when it was created.
@@ -753,7 +753,7 @@ type FaqStatistics struct {
 	// The total number of FAQ questions and answers contained in the index.
 	//
 	// This member is required.
-	IndexedQuestionAnswersCount *int32
+	IndexedQuestionAnswersCount int32
 }
 
 // Provides information about a frequently asked questions and answer contained in
@@ -796,7 +796,7 @@ type Highlight struct {
 
 	// Indicates whether the response is the best response. True if this is the best
 	// response; otherwise, false.
-	TopAnswer *bool
+	TopAnswer bool
 }
 
 // A summary of information about an index.
@@ -870,19 +870,19 @@ type OneDriveConfiguration struct {
 	// pattern are not indexed. If you provide both an inclusion pattern and an
 	// exclusion pattern, any item that matches the exclusion pattern isn't indexed.
 	// The exclusion pattern is applied to the file name.
-	ExclusionPatterns []*string
+	ExclusionPatterns []string
 
 	// A list of DataSourceToIndexFieldMapping objects that map Microsoft OneDrive
 	// fields to custom fields in the Amazon Kendra index. You must first create the
 	// index fields before you map OneDrive fields.
-	FieldMappings []*DataSourceToIndexFieldMapping
+	FieldMappings []DataSourceToIndexFieldMapping
 
 	// A list of regular expression patterns. Documents that match the pattern are
 	// included in the index. Documents that don't match the pattern are excluded from
 	// the index. If a document matches both an inclusion pattern and an exclusion
 	// pattern, the document is not included in the index. The exclusion pattern is
 	// applied to the file name.
-	InclusionPatterns []*string
+	InclusionPatterns []string
 }
 
 // User accounts whose documents should be indexed.
@@ -892,7 +892,7 @@ type OneDriveUsers struct {
 	// email format, for example, username@tenantdomain. If you need to index the
 	// documents of more than 100 users, use the OneDriveUserS3Path field to specify
 	// the location of a file containing a list of users.
-	OneDriveUserList []*string
+	OneDriveUserList []string
 
 	// The S3 bucket location of a file containing a list of users whose documents
 	// should be indexed.
@@ -925,12 +925,12 @@ type Principal struct {
 type QueryResultItem struct {
 
 	// One or more additional attributes associated with the query result.
-	AdditionalAttributes []*AdditionalResultAttribute
+	AdditionalAttributes []AdditionalResultAttribute
 
 	// An array of document attributes for the document that the query result maps to.
 	// For example, the document author (Author) or the source URI (SourceUri) of the
 	// document.
-	DocumentAttributes []*DocumentAttribute
+	DocumentAttributes []DocumentAttribute
 
 	// An extract of the text in the document. Contains information about highlighting
 	// the relevant terms in the excerpt.
@@ -1001,7 +1001,7 @@ type Relevance struct {
 	// If you add "HR",5 and "Legal",3 those departments are given special attention
 	// when they appear in the metadata of a document. When those terms appear they are
 	// given the specified importance instead of the regular importance for the boost.
-	ValueImportanceMap map[string]*int32
+	ValueImportanceMap map[string]int32
 }
 
 // Provides feedback on how relevant a document is to a search. Your application
@@ -1043,16 +1043,16 @@ type S3DataSourceConfiguration struct {
 	// pattern, the document is not indexed. For more information about glob patterns,
 	// see glob (programming) (https://en.wikipedia.org/wiki/Glob_(programming)) in
 	// Wikipedia.
-	ExclusionPatterns []*string
+	ExclusionPatterns []string
 
 	// A list of glob patterns for documents that should be indexed. If a document that
 	// matches an inclusion pattern also matches an exclusion pattern, the document is
 	// not indexed. For more information about glob patterns, see glob (programming)
 	// (https://en.wikipedia.org/wiki/Glob_(programming)) in Wikipedia.
-	InclusionPatterns []*string
+	InclusionPatterns []string
 
 	// A list of S3 prefixes for the documents that should be included in the index.
-	InclusionPrefixes []*string
+	InclusionPrefixes []string
 }
 
 // Information required to find a specific file in an Amazon S3 bucket.
@@ -1084,7 +1084,7 @@ type SalesforceChatterFeedConfiguration struct {
 	DocumentTitleFieldName *string
 
 	// Maps fields from a Salesforce chatter feed into Amazon Kendra index fields.
-	FieldMappings []*DataSourceToIndexFieldMapping
+	FieldMappings []DataSourceToIndexFieldMapping
 
 	// Filters the documents in the feed based on status of the user. When you specify
 	// ACTIVE_USERS only documents from users who have an active account are indexed.
@@ -1132,21 +1132,21 @@ type SalesforceConfiguration struct {
 	ChatterFeedConfiguration *SalesforceChatterFeedConfiguration
 
 	// Indicates whether Amazon Kendra should index attachments to Salesforce objects.
-	CrawlAttachments *bool
+	CrawlAttachments bool
 
 	// A list of regular expression patterns. Documents that match the patterns are
 	// excluded from the index. Documents that don't match the patterns are included in
 	// the index. If a document matches both an exclusion pattern and an inclusion
 	// pattern, the document is not included in the index. The regex is applied to the
 	// name of the attached file.
-	ExcludeAttachmentFilePatterns []*string
+	ExcludeAttachmentFilePatterns []string
 
 	// A list of regular expression patterns. Documents that match the patterns are
 	// included in the index. Documents that don't match the patterns are excluded from
 	// the index. If a document matches both an inclusion pattern and an exclusion
 	// pattern, the document is not included in the index. The regex is applied to the
 	// name of the attached file.
-	IncludeAttachmentFilePatterns []*string
+	IncludeAttachmentFilePatterns []string
 
 	// Specifies configuration information for the knowlege article types that Amazon
 	// Kendra indexes. Amazon Kendra indexes standard knowledge articles and the
@@ -1159,7 +1159,7 @@ type SalesforceConfiguration struct {
 	StandardObjectAttachmentConfiguration *SalesforceStandardObjectAttachmentConfiguration
 
 	// Specifies the Salesforce standard objects that Amazon Kendra indexes.
-	StandardObjectConfigurations []*SalesforceStandardObjectConfiguration
+	StandardObjectConfigurations []SalesforceStandardObjectConfiguration
 }
 
 // Provides configuration information for indexing Salesforce custom articles.
@@ -1182,7 +1182,7 @@ type SalesforceCustomKnowledgeArticleTypeConfiguration struct {
 
 	// One or more objects that map fields in the custom knowledge article to fields in
 	// the Amazon Kendra index.
-	FieldMappings []*DataSourceToIndexFieldMapping
+	FieldMappings []DataSourceToIndexFieldMapping
 }
 
 // Specifies configuration information for the knowlege article types that Amazon
@@ -1198,7 +1198,7 @@ type SalesforceKnowledgeArticleConfiguration struct {
 	IncludedStates []SalesforceKnowledgeArticleState
 
 	// Provides configuration information for custom Salesforce knowledge articles.
-	CustomKnowledgeArticleTypeConfigurations []*SalesforceCustomKnowledgeArticleTypeConfiguration
+	CustomKnowledgeArticleTypeConfigurations []SalesforceCustomKnowledgeArticleTypeConfiguration
 
 	// Provides configuration information for standard Salesforce knowledge articles.
 	StandardKnowledgeArticleTypeConfiguration *SalesforceStandardKnowledgeArticleTypeConfiguration
@@ -1218,7 +1218,7 @@ type SalesforceStandardKnowledgeArticleTypeConfiguration struct {
 	// One or more objects that map fields in the knowledge article to Amazon Kendra
 	// index fields. The index field must exist before you can map a Salesforce field
 	// to it.
-	FieldMappings []*DataSourceToIndexFieldMapping
+	FieldMappings []DataSourceToIndexFieldMapping
 }
 
 // Provides configuration information for processing attachments to Salesforce
@@ -1230,7 +1230,7 @@ type SalesforceStandardObjectAttachmentConfiguration struct {
 
 	// One or more objects that map fields in attachments to Amazon Kendra index
 	// fields.
-	FieldMappings []*DataSourceToIndexFieldMapping
+	FieldMappings []DataSourceToIndexFieldMapping
 }
 
 // Specifies confguration information for indexing a single standard object.
@@ -1254,7 +1254,7 @@ type SalesforceStandardObjectConfiguration struct {
 	// One or more objects that map fields in the standard object to Amazon Kendra
 	// index fields. The index field must exist before you can map a Salesforce field
 	// to it.
-	FieldMappings []*DataSourceToIndexFieldMapping
+	FieldMappings []DataSourceToIndexFieldMapping
 }
 
 // Provides a relative ranking that indicates how confident Amazon Kendra is that
@@ -1270,22 +1270,22 @@ type Search struct {
 
 	// Determines whether the field is returned in the query response. The default is
 	// true.
-	Displayable *bool
+	Displayable bool
 
 	// Indicates that the field can be used to create search facets, a count of results
 	// for each value in the field. The default is false .
-	Facetable *bool
+	Facetable bool
 
 	// Determines whether the field is used in the search. If the Searchable field is
 	// true, you can use relevance tuning to manually tune how Amazon Kendra weights
 	// the field in the search. The default is true for string fields and false for
 	// number and date fields.
-	Searchable *bool
+	Searchable bool
 
 	// Determines whether the field can be used to sort the results of a query. If you
 	// specify sorting on a field that does not have Sortable set to true, Amazon
 	// Kendra returns an exception. The default is false.
-	Sortable *bool
+	Sortable bool
 }
 
 // Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt
@@ -1339,7 +1339,7 @@ type ServiceNowKnowledgeArticleConfiguration struct {
 	DocumentDataFieldName *string
 
 	// Indicates whether Amazon Kendra should index attachments to knowledge articles.
-	CrawlAttachments *bool
+	CrawlAttachments bool
 
 	// The name of the ServiceNow field that is mapped to the index document title
 	// field.
@@ -1348,16 +1348,16 @@ type ServiceNowKnowledgeArticleConfiguration struct {
 	// List of regular expressions applied to knowledge articles. Items that don't
 	// match the inclusion pattern are not indexed. The regex is applied to the field
 	// specified in the PatternTargetField
-	ExcludeAttachmentFilePatterns []*string
+	ExcludeAttachmentFilePatterns []string
 
 	// Mapping between ServiceNow fields and Amazon Kendra index fields. You must
 	// create the index field before you map the field.
-	FieldMappings []*DataSourceToIndexFieldMapping
+	FieldMappings []DataSourceToIndexFieldMapping
 
 	// List of regular expressions applied to knowledge articles. Items that don't
 	// match the inclusion pattern are not indexed. The regex is applied to the field
 	// specified in the PatternTargetField.
-	IncludeAttachmentFilePatterns []*string
+	IncludeAttachmentFilePatterns []string
 }
 
 // Provides configuration information for crawling service catalog items in the
@@ -1372,21 +1372,21 @@ type ServiceNowServiceCatalogConfiguration struct {
 
 	// Indicates whether Amazon Kendra should crawl attachments to the service catalog
 	// items.
-	CrawlAttachments *bool
+	CrawlAttachments bool
 
 	// The name of the ServiceNow field that is mapped to the index document title
 	// field.
 	DocumentTitleFieldName *string
 
 	// Determines the types of file attachments that are excluded from the index.
-	ExcludeAttachmentFilePatterns []*string
+	ExcludeAttachmentFilePatterns []string
 
 	// Mapping between ServiceNow fields and Amazon Kendra index fields. You must
 	// create the index field before you map the field.
-	FieldMappings []*DataSourceToIndexFieldMapping
+	FieldMappings []DataSourceToIndexFieldMapping
 
 	// Determines the types of file attachments that are included in the index.
-	IncludeAttachmentFilePatterns []*string
+	IncludeAttachmentFilePatterns []string
 }
 
 // Provides configuration information for connecting to a Microsoft SharePoint data
@@ -1413,11 +1413,11 @@ type SharePointConfiguration struct {
 	// should be indexed.
 	//
 	// This member is required.
-	Urls []*string
+	Urls []string
 
 	// TRUE to include attachments to documents stored in your Microsoft SharePoint
 	// site in the index; otherwise, FALSE.
-	CrawlAttachments *bool
+	CrawlAttachments bool
 
 	// The Microsoft SharePoint attribute field that contains the title of the
 	// document.
@@ -1428,28 +1428,28 @@ type SharePointConfiguration struct {
 	// the index. If a document matches both an exclusion pattern and an inclusion
 	// pattern, the document is not included in the index. The regex is applied to the
 	// display URL of the SharePoint document.
-	ExclusionPatterns []*string
+	ExclusionPatterns []string
 
 	// A list of DataSourceToIndexFieldMapping objects that map Microsoft SharePoint
 	// attributes to custom fields in the Amazon Kendra index. You must first create
 	// the index fields using the operation before you map SharePoint attributes. For
 	// more information, see Mapping Data Source Fields
 	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html).
-	FieldMappings []*DataSourceToIndexFieldMapping
+	FieldMappings []DataSourceToIndexFieldMapping
 
 	// A list of regular expression patterns. Documents that match the patterns are
 	// included in the index. Documents that don't match the patterns are excluded from
 	// the index. If a document matches both an inclusion pattern and an exclusion
 	// pattern, the document is not included in the index. The regex is applied to the
 	// display URL of the SharePoint document.
-	InclusionPatterns []*string
+	InclusionPatterns []string
 
 	// Set to TRUE to use the Microsoft SharePoint change log to determine the
 	// documents that need to be updated in the index. Depending on the size of the
 	// SharePoint change log, it may take longer for Amazon Kendra to use the change
 	// log than it takes it to determine the changed documents using the Amazon Kendra
 	// document crawler.
-	UseChangeLog *bool
+	UseChangeLog bool
 
 	// Provides information for connecting to an Amazon VPC.
 	VpcConfiguration *DataSourceVpcConfiguration
@@ -1537,19 +1537,19 @@ type TextDocumentStatistics struct {
 	// The total size, in bytes, of the indexed documents.
 	//
 	// This member is required.
-	IndexedTextBytes *int64
+	IndexedTextBytes int64
 
 	// The number of text documents indexed.
 	//
 	// This member is required.
-	IndexedTextDocumentsCount *int32
+	IndexedTextDocumentsCount int32
 }
 
 // Provides text and information about where to highlight the text.
 type TextWithHighlights struct {
 
 	// The beginning and end of the text that should be highlighted.
-	Highlights []*Highlight
+	Highlights []Highlight
 
 	// The text to display to the user.
 	Text *string

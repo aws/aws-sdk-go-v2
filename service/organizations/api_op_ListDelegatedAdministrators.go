@@ -59,7 +59,7 @@ type ListDelegatedAdministratorsInput struct {
 type ListDelegatedAdministratorsOutput struct {
 
 	// The list of delegated administrators in your organization.
-	DelegatedAdministrators []*types.DelegatedAdministrator
+	DelegatedAdministrators []types.DelegatedAdministrator
 
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a

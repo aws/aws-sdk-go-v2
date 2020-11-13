@@ -48,14 +48,14 @@ type DescribeVolumesInput struct {
 	// Am array of volume IDs. If you use this parameter, DescribeVolumes returns
 	// descriptions of the specified volumes. Otherwise, it returns a description of
 	// every volume.
-	VolumeIds []*string
+	VolumeIds []string
 }
 
 // Contains the response to a DescribeVolumes request.
 type DescribeVolumesOutput struct {
 
 	// An array of volume IDs.
-	Volumes []*types.Volume
+	Volumes []types.Volume
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

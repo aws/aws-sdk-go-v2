@@ -47,7 +47,7 @@ type DescribeDBClusterEndpointsInput struct {
 	// Values for the db-cluster-endpoint-custom-type filter can be one or more of:
 	// reader, any. Values for the db-cluster-endpoint-status filter can be one or more
 	// of: available, creating, deleting, inactive, modifying.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous DescribeDBClusterEndpoints
 	// request. If this parameter is specified, the response includes only records
@@ -65,7 +65,7 @@ type DescribeDBClusterEndpointsOutput struct {
 
 	// Contains the details of the endpoints associated with the cluster and matching
 	// any filter conditions.
-	DBClusterEndpoints []*types.DBClusterEndpoint
+	DBClusterEndpoints []types.DBClusterEndpoint
 
 	// An optional pagination token provided by a previous DescribeDBClusterEndpoints
 	// request. If this parameter is specified, the response includes only records

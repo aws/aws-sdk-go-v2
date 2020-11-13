@@ -77,7 +77,7 @@ type ListOrganizationalUnitsForParentOutput struct {
 	NextToken *string
 
 	// A list of the OUs in the specified root or parent OU.
-	OrganizationalUnits []*types.OrganizationalUnit
+	OrganizationalUnits []types.OrganizationalUnit
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

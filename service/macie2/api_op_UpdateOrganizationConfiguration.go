@@ -32,7 +32,7 @@ type UpdateOrganizationConfigurationInput struct {
 	// the account is added to the AWS organization.
 	//
 	// This member is required.
-	AutoEnable *bool
+	AutoEnable bool
 }
 
 type UpdateOrganizationConfigurationOutput struct {

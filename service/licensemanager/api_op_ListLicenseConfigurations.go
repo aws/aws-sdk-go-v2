@@ -43,10 +43,10 @@ type ListLicenseConfigurationsInput struct {
 	// * usagelimitExceeded - A Boolean value that indicates whether the
 	// available licenses have been exceeded. Logical operators are EQUALS |
 	// NOT_EQUALS.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// Amazon Resource Names (ARN) of the license configurations.
-	LicenseConfigurationArns []*string
+	LicenseConfigurationArns []string
 
 	// Maximum number of results to return in a single call.
 	MaxResults *int32
@@ -58,7 +58,7 @@ type ListLicenseConfigurationsInput struct {
 type ListLicenseConfigurationsOutput struct {
 
 	// Information about the license configurations.
-	LicenseConfigurations []*types.LicenseConfiguration
+	LicenseConfigurations []types.LicenseConfiguration
 
 	// Token for the next set of results.
 	NextToken *string

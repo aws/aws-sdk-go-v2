@@ -73,7 +73,7 @@ type MergePullRequestByThreeWayInput struct {
 	// If the commit contains deletions, whether to keep a folder or folder structure
 	// if the changes leave the folders empty. If true, a .gitkeep file is created for
 	// empty folders. The default is false.
-	KeepEmptyFolders *bool
+	KeepEmptyFolders bool
 
 	// The full commit ID of the original or updated commit in the pull request source
 	// branch. Pass this value if you want an exception thrown if the current commit ID

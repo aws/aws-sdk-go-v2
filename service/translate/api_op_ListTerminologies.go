@@ -44,7 +44,7 @@ type ListTerminologiesOutput struct {
 	NextToken *string
 
 	// The properties list of the custom terminologies returned on the list request.
-	TerminologyPropertiesList []*types.TerminologyProperties
+	TerminologyPropertiesList []types.TerminologyProperties
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

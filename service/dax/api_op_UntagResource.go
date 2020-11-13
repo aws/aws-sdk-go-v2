@@ -39,13 +39,13 @@ type UntagResourceInput struct {
 	// tags are removed from the cluster.
 	//
 	// This member is required.
-	TagKeys []*string
+	TagKeys []string
 }
 
 type UntagResourceOutput struct {
 
 	// The tag keys that have been removed from the cluster.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -134,10 +134,10 @@ type AssociateConnectionWithLagOutput struct {
 	Region *string
 
 	// The tags associated with the connection.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The ID of the VLAN.
-	Vlan *int32
+	Vlan int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

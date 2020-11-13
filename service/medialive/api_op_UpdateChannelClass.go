@@ -41,7 +41,7 @@ type UpdateChannelClassInput struct {
 	ChannelId *string
 
 	// A list of output destinations for this channel.
-	Destinations []*types.OutputDestination
+	Destinations []types.OutputDestination
 }
 
 // Placeholder documentation for UpdateChannelClassResponse

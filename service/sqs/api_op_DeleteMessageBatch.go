@@ -41,7 +41,7 @@ type DeleteMessageBatchInput struct {
 	// A list of receipt handles for the messages to be deleted.
 	//
 	// This member is required.
-	Entries []*types.DeleteMessageBatchRequestEntry
+	Entries []types.DeleteMessageBatchRequestEntry
 
 	// The URL of the Amazon SQS queue from which messages are deleted. Queue URLs and
 	// names are case-sensitive.
@@ -58,12 +58,12 @@ type DeleteMessageBatchOutput struct {
 	// A list of BatchResultErrorEntry items.
 	//
 	// This member is required.
-	Failed []*types.BatchResultErrorEntry
+	Failed []types.BatchResultErrorEntry
 
 	// A list of DeleteMessageBatchResultEntry items.
 	//
 	// This member is required.
-	Successful []*types.DeleteMessageBatchResultEntry
+	Successful []types.DeleteMessageBatchResultEntry
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

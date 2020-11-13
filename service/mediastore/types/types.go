@@ -52,7 +52,7 @@ type CorsRule struct {
 	// wildcard character (*).
 	//
 	// This member is required.
-	AllowedHeaders []*string
+	AllowedHeaders []string
 
 	// One or more response headers that you want users to be able to access from their
 	// applications (for example, from a JavaScript XMLHttpRequest object). Each CORS
@@ -62,7 +62,7 @@ type CorsRule struct {
 	// access for all origins.
 	//
 	// This member is required.
-	AllowedOrigins []*string
+	AllowedOrigins []string
 
 	// Identifies an HTTP method that the origin that is specified in the rule is
 	// allowed to execute. Each CORS rule must contain at least one AllowedMethods and
@@ -72,11 +72,11 @@ type CorsRule struct {
 	// One or more headers in the response that you want users to be able to access
 	// from their applications (for example, from a JavaScript XMLHttpRequest object).
 	// This element is optional for each rule.
-	ExposeHeaders []*string
+	ExposeHeaders []string
 
 	// The time in seconds that your browser caches the preflight response for the
 	// specified resource. A CORS rule can have only one MaxAgeSeconds element.
-	MaxAgeSeconds *int32
+	MaxAgeSeconds int32
 }
 
 // The metric policy that is associated with the container. A metric policy allows
@@ -99,7 +99,7 @@ type MetricPolicy struct {
 	// You can also request a quota increase
 	// (https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/services/mediastore/quotas)
 	// to allow up to 300 rules per policy.
-	MetricPolicyRules []*MetricPolicyRule
+	MetricPolicyRules []MetricPolicyRule
 }
 
 // A setting that enables metrics at the object level. Each rule contains an object

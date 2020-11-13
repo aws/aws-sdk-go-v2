@@ -42,7 +42,7 @@ type UpdateTaskInput struct {
 	// list should contain a single filter string that consists of the patterns to
 	// exclude. The patterns are delimited by "|" (that is, a pipe), for example:
 	// "/folder1|/folder2"
-	Excludes []*types.FilterRule
+	Excludes []types.FilterRule
 
 	// The name of the task to update.
 	Name *string

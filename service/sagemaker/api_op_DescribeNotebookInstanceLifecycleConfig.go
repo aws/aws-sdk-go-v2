@@ -54,11 +54,11 @@ type DescribeNotebookInstanceLifecycleConfigOutput struct {
 	NotebookInstanceLifecycleConfigName *string
 
 	// The shell script that runs only once, when you create a notebook instance.
-	OnCreate []*types.NotebookInstanceLifecycleHook
+	OnCreate []types.NotebookInstanceLifecycleHook
 
 	// The shell script that runs every time you start a notebook instance, including
 	// when you create the notebook instance.
-	OnStart []*types.NotebookInstanceLifecycleHook
+	OnStart []types.NotebookInstanceLifecycleHook
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

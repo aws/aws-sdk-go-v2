@@ -48,7 +48,7 @@ type UploadEntityDefinitionsInput struct {
 	// A Boolean that specifies whether to deprecate all entities in the latest version
 	// before uploading the new DefinitionDocument. If set to true, the upload will
 	// create a new namespace version.
-	DeprecateExistingEntities *bool
+	DeprecateExistingEntities bool
 
 	// The DefinitionDocument that defines the updated entities.
 	Document *types.DefinitionDocument
@@ -56,7 +56,7 @@ type UploadEntityDefinitionsInput struct {
 	// A Boolean that specifies whether to synchronize with the latest version of the
 	// public namespace. If set to true, the upload will create a new namespace
 	// version.
-	SyncWithPublicNamespace *bool
+	SyncWithPublicNamespace bool
 }
 
 type UploadEntityDefinitionsOutput struct {

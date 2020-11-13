@@ -58,13 +58,13 @@ type GetDetectorVersionOutput struct {
 	DetectorVersionId *string
 
 	// The Amazon SageMaker model endpoints included in the detector version.
-	ExternalModelEndpoints []*string
+	ExternalModelEndpoints []string
 
 	// The timestamp when the detector version was last updated.
 	LastUpdatedTime *string
 
 	// The model versions included in the detector version.
-	ModelVersions []*types.ModelVersion
+	ModelVersions []types.ModelVersion
 
 	// The execution mode of the rule in the dectector FIRST_MATCHED indicates that
 	// Amazon Fraud Detector evaluates rules sequentially, first to last, stopping at
@@ -75,7 +75,7 @@ type GetDetectorVersionOutput struct {
 	RuleExecutionMode types.RuleExecutionMode
 
 	// The rules included in the detector version.
-	Rules []*types.Rule
+	Rules []types.Rule
 
 	// The status of the detector version.
 	Status types.DetectorVersionStatus

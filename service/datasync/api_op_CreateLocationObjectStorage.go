@@ -36,7 +36,7 @@ type CreateLocationObjectStorageInput struct {
 	// object storage server location.
 	//
 	// This member is required.
-	AgentArns []*string
+	AgentArns []string
 
 	// The bucket on the self-managed object storage server that is used to read data
 	// from.
@@ -80,7 +80,7 @@ type CreateLocationObjectStorageInput struct {
 	// The key-value pair that represents the tag that you want to add to the location.
 	// The value can be an empty string. We recommend using tags to name your
 	// resources.
-	Tags []*types.TagListEntry
+	Tags []types.TagListEntry
 }
 
 // CreateLocationObjectStorageResponse

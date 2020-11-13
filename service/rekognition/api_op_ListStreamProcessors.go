@@ -49,7 +49,7 @@ type ListStreamProcessorsOutput struct {
 	NextToken *string
 
 	// List of stream processors that you have created.
-	StreamProcessors []*types.StreamProcessor
+	StreamProcessors []types.StreamProcessor
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

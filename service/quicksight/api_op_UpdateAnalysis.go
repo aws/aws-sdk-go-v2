@@ -75,7 +75,7 @@ type UpdateAnalysisOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// The update status of the last update that was made to the analysis.
 	UpdateStatus types.ResourceStatus

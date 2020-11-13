@@ -96,7 +96,7 @@ type PublishInput struct {
 	Message *string
 
 	// Message attributes for Publish action.
-	MessageAttributes map[string]*types.MessageAttributeValue
+	MessageAttributes map[string]types.MessageAttributeValue
 
 	// This parameter applies only to FIFO (first-in-first-out) topics. The
 	// MessageDeduplicationId can contain up to 128 alphanumeric characters (a-z, A-Z,

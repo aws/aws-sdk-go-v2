@@ -73,7 +73,7 @@ type DeleteDBInstanceInput struct {
 	// the SkipFinalSnapshot parameter is set to "true". Specify true when deleting a
 	// Read Replica. The FinalDBSnapshotIdentifier parameter must be specified if
 	// SkipFinalSnapshot is false. Default: false
-	SkipFinalSnapshot *bool
+	SkipFinalSnapshot bool
 }
 
 type DeleteDBInstanceOutput struct {

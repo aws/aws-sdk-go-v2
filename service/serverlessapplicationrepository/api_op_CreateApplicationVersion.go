@@ -63,7 +63,7 @@ type CreateApplicationVersionOutput struct {
 	CreationTime *string
 
 	// An array of parameter types supported by the application.
-	ParameterDefinitions []*types.ParameterDefinition
+	ParameterDefinitions []types.ParameterDefinition
 
 	// A list of values that you must specify before you can deploy certain
 	// applications. Some applications might include resources that can affect
@@ -104,7 +104,7 @@ type CreateApplicationVersionOutput struct {
 
 	// Whether all of the AWS resources contained in this application are supported in
 	// the region in which it is being retrieved.
-	ResourcesSupported *bool
+	ResourcesSupported bool
 
 	// The semantic version of the application: https://semver.org/
 	// (https://semver.org/)

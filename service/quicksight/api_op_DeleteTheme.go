@@ -53,7 +53,7 @@ type DeleteThemeOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// An ID for the theme.
 	ThemeId *string

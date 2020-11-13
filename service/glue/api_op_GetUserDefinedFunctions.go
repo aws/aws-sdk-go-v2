@@ -57,7 +57,7 @@ type GetUserDefinedFunctionsOutput struct {
 	NextToken *string
 
 	// A list of requested function definitions.
-	UserDefinedFunctions []*types.UserDefinedFunction
+	UserDefinedFunctions []types.UserDefinedFunction
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

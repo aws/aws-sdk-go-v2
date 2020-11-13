@@ -39,7 +39,7 @@ type InviteUsersInput struct {
 	// The user email addresses to which to send the email invitation.
 	//
 	// This member is required.
-	UserEmailList []*string
+	UserEmailList []string
 
 	// The user type.
 	UserType types.UserType
@@ -48,7 +48,7 @@ type InviteUsersInput struct {
 type InviteUsersOutput struct {
 
 	// The email invitation details.
-	Invites []*types.Invite
+	Invites []types.Invite
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

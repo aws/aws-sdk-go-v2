@@ -100,7 +100,7 @@ type ListTrafficPolicyInstancesByPolicyOutput struct {
 	// the corresponding request parameters.
 	//
 	// This member is required.
-	IsTruncated *bool
+	IsTruncated bool
 
 	// The value that you specified for the MaxItems parameter in the call to
 	// ListTrafficPolicyInstancesByPolicy that produced the current response.
@@ -112,7 +112,7 @@ type ListTrafficPolicyInstancesByPolicyOutput struct {
 	// instance that matches the elements in the request.
 	//
 	// This member is required.
-	TrafficPolicyInstances []*types.TrafficPolicyInstance
+	TrafficPolicyInstances []types.TrafficPolicyInstance
 
 	// If IsTruncated is true, HostedZoneIdMarker is the ID of the hosted zone of the
 	// first traffic policy instance in the next group of traffic policy instances.

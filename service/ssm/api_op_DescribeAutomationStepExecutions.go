@@ -37,11 +37,11 @@ type DescribeAutomationStepExecutionsInput struct {
 
 	// One or more filters to limit the number of step executions returned by the
 	// request.
-	Filters []*types.StepExecutionFilter
+	Filters []types.StepExecutionFilter
 
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
@@ -49,7 +49,7 @@ type DescribeAutomationStepExecutionsInput struct {
 
 	// A boolean that indicates whether to list step executions in reverse order by
 	// start time. The default value is false.
-	ReverseOrder *bool
+	ReverseOrder bool
 }
 
 type DescribeAutomationStepExecutionsOutput struct {
@@ -60,7 +60,7 @@ type DescribeAutomationStepExecutionsOutput struct {
 
 	// A list of details about the current state of all steps that make up an
 	// execution.
-	StepExecutions []*types.StepExecution
+	StepExecutions []types.StepExecution
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

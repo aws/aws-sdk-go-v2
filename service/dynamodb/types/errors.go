@@ -595,7 +595,7 @@ func (e *TableNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.
 type TransactionCanceledException struct {
 	Message *string
 
-	CancellationReasons []*CancellationReason
+	CancellationReasons []CancellationReason
 }
 
 func (e *TransactionCanceledException) Error() string {

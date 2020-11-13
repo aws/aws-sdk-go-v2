@@ -52,7 +52,7 @@ type DescribeNotebookInstanceOutput struct {
 	// default repository of your notebook instance. For more information, see
 	// Associating Git Repositories with Amazon SageMaker Notebook Instances
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html).
-	AdditionalCodeRepositories []*string
+	AdditionalCodeRepositories []string
 
 	// A timestamp. Use this parameter to return the time when the notebook instance
 	// was created
@@ -119,7 +119,7 @@ type DescribeNotebookInstanceOutput struct {
 	RootAccess types.RootAccess
 
 	// The IDs of the VPC security groups.
-	SecurityGroups []*string
+	SecurityGroups []string
 
 	// The ID of the VPC subnet.
 	SubnetId *string

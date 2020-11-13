@@ -43,7 +43,7 @@ type DescribeConfigurationOptionsInput struct {
 	EnvironmentName *string
 
 	// If specified, restricts the descriptions to only the specified options.
-	Options []*types.OptionSpecification
+	Options []types.OptionSpecification
 
 	// The ARN of the custom platform.
 	PlatformArn *string
@@ -60,7 +60,7 @@ type DescribeConfigurationOptionsInput struct {
 type DescribeConfigurationOptionsOutput struct {
 
 	// A list of ConfigurationOptionDescription.
-	Options []*types.ConfigurationOptionDescription
+	Options []types.ConfigurationOptionDescription
 
 	// The ARN of the platform version.
 	PlatformArn *string

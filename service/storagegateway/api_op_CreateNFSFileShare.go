@@ -70,7 +70,7 @@ type CreateNFSFileShareInput struct {
 
 	// The list of clients that are allowed to access the file gateway. The list must
 	// contain either valid IP addresses or valid CIDR blocks.
-	ClientList []*string
+	ClientList []string
 
 	// The default storage class for objects put into an Amazon S3 bucket by the file
 	// gateway. The default value is S3_INTELLIGENT_TIERING. Optional. Valid Values:
@@ -135,7 +135,7 @@ type CreateNFSFileShareInput struct {
 	// numbers representable in UTF-8 format, and the following special characters: + -
 	// = . _ : / @. The maximum length of a tag's key is 128 characters, and the
 	// maximum length for a tag's value is 256.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 // CreateNFSFileShareOutput

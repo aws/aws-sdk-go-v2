@@ -40,7 +40,7 @@ type ListDatastoresInput struct {
 type ListDatastoresOutput struct {
 
 	// A list of "DatastoreSummary" objects.
-	DatastoreSummaries []*types.DatastoreSummary
+	DatastoreSummaries []types.DatastoreSummary
 
 	// The token to retrieve the next set of results, or null if there are no more
 	// results.

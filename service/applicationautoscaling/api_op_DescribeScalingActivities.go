@@ -189,7 +189,7 @@ type DescribeScalingActivitiesOutput struct {
 	NextToken *string
 
 	// A list of scaling activity objects.
-	ScalingActivities []*types.ScalingActivity
+	ScalingActivities []types.ScalingActivity
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -44,11 +44,11 @@ type DescribePoliciesInput struct {
 	// described. If a group name is provided, the results are limited to that group.
 	// This list is limited to 50 items. If you specify an unknown policy name, it is
 	// ignored with no error.
-	PolicyNames []*string
+	PolicyNames []string
 
 	// One or more policy types. The valid values are SimpleScaling, StepScaling, and
 	// TargetTrackingScaling.
-	PolicyTypes []*string
+	PolicyTypes []string
 }
 
 type DescribePoliciesOutput struct {
@@ -60,7 +60,7 @@ type DescribePoliciesOutput struct {
 	NextToken *string
 
 	// The scaling policies.
-	ScalingPolicies []*types.ScalingPolicy
+	ScalingPolicies []types.ScalingPolicy
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

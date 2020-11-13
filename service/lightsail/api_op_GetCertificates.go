@@ -46,13 +46,13 @@ type GetCertificatesInput struct {
 	// Indicates whether to include detailed information about the certificates in the
 	// response. When omitted, the response includes only the certificate names, Amazon
 	// Resource Names (ARNs), domain names, and tags.
-	IncludeCertificateDetails *bool
+	IncludeCertificateDetails bool
 }
 
 type GetCertificatesOutput struct {
 
 	// An object that describes certificates.
-	Certificates []*types.CertificateSummary
+	Certificates []types.CertificateSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

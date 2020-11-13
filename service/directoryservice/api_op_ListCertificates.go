@@ -49,7 +49,7 @@ type ListCertificatesOutput struct {
 
 	// A list of certificates with basic details including certificate ID, certificate
 	// common name, certificate state.
-	CertificatesInfo []*types.CertificateInfo
+	CertificatesInfo []types.CertificateInfo
 
 	// Indicates whether another page of certificates is available when the number of
 	// available certificates exceeds the page limit.

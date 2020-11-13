@@ -32,16 +32,16 @@ type BatchGetVariableInput struct {
 	// The list of variable names to get.
 	//
 	// This member is required.
-	Names []*string
+	Names []string
 }
 
 type BatchGetVariableOutput struct {
 
 	// The errors from the request.
-	Errors []*types.BatchGetVariableError
+	Errors []types.BatchGetVariableError
 
 	// The returned variables.
-	Variables []*types.Variable
+	Variables []types.Variable
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

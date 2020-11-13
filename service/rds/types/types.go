@@ -102,10 +102,10 @@ type AccountQuota struct {
 	AccountQuotaName *string
 
 	// The maximum allowed value for the quota.
-	Max *int64
+	Max int64
 
 	// The amount currently used toward the quota maximum.
-	Used *int64
+	Used int64
 }
 
 // Contains Availability Zone information. This data type is used as an element in
@@ -188,10 +188,10 @@ type CharacterSet struct {
 type CloudwatchLogsExportConfiguration struct {
 
 	// The list of log types to disable.
-	DisableLogTypes []*string
+	DisableLogTypes []string
 
 	// The list of log types to enable.
-	EnableLogTypes []*string
+	EnableLogTypes []string
 }
 
 // Specifies the settings that control the size and behavior of the connection pool
@@ -231,7 +231,7 @@ type ConnectionPoolConfiguration struct {
 	// all later statements in a session using a proxy to be pinned to the same
 	// underlying database connection. Including an item in the list exempts that class
 	// of SQL operations from the pinning behavior. Default: no session pinning filters
-	SessionPinningFilters []*string
+	SessionPinningFilters []string
 }
 
 // Displays the settings that control the size and behavior of the connection pool
@@ -241,7 +241,7 @@ type ConnectionPoolConfigurationInfo struct {
 	// The number of seconds for a proxy to wait for a connection to become available
 	// in the connection pool. Only applies when the proxy has opened its maximum
 	// number of connections and all connections are busy with client sessions.
-	ConnectionBorrowTimeout *int32
+	ConnectionBorrowTimeout int32
 
 	// One or more SQL statements for the proxy to run when opening each new database
 	// connection. Typically used with SET statements to make sure that each connection
@@ -254,7 +254,7 @@ type ConnectionPoolConfigurationInfo struct {
 	// The maximum size of the connection pool for each target in a target group. For
 	// Aurora MySQL, it is expressed as a percentage of the max_connections setting for
 	// the RDS DB instance or Aurora DB cluster used by the target group.
-	MaxConnectionsPercent *int32
+	MaxConnectionsPercent int32
 
 	// Controls how actively the proxy closes idle database connections in the
 	// connection pool. A high value enables the proxy to leave a high percentage of
@@ -262,14 +262,14 @@ type ConnectionPoolConfigurationInfo struct {
 	// connections and return the underlying database connections to the connection
 	// pool. For Aurora MySQL, it is expressed as a percentage of the max_connections
 	// setting for the RDS DB instance or Aurora DB cluster used by the target group.
-	MaxIdleConnectionsPercent *int32
+	MaxIdleConnectionsPercent int32
 
 	// Each item in the list represents a class of SQL operations that normally cause
 	// all later statements in a session using a proxy to be pinned to the same
 	// underlying database connection. Including an item in the list exempts that class
 	// of SQL operations from the pinning behavior. Currently, the only allowed value
 	// is EXCLUDE_VARIABLE_SETS.
-	SessionPinningFilters []*string
+	SessionPinningFilters []string
 }
 
 // A custom Availability Zone (AZ) is an on-premises AZ that is integrated with a
@@ -323,11 +323,11 @@ type DBCluster struct {
 	// Provides a list of the AWS Identity and Access Management (IAM) roles that are
 	// associated with the DB cluster. IAM roles that are associated with a DB cluster
 	// grant permission for the DB cluster to access other AWS services on your behalf.
-	AssociatedRoles []*DBClusterRole
+	AssociatedRoles []DBClusterRole
 
 	// Provides the list of Availability Zones (AZs) where instances in the DB cluster
 	// can be created.
-	AvailabilityZones []*string
+	AvailabilityZones []string
 
 	// The number of change records stored for Backtrack.
 	BacktrackConsumedChangeRecords *int64
@@ -366,7 +366,7 @@ type DBCluster struct {
 	CrossAccountClone *bool
 
 	// Identifies all custom endpoints associated with the cluster.
-	CustomEndpoints []*string
+	CustomEndpoints []string
 
 	// The Amazon Resource Name (ARN) for the DB cluster.
 	DBClusterArn *string
@@ -376,10 +376,10 @@ type DBCluster struct {
 	DBClusterIdentifier *string
 
 	// Provides the list of instances that make up the DB cluster.
-	DBClusterMembers []*DBClusterMember
+	DBClusterMembers []DBClusterMember
 
 	// Provides the list of option group memberships for this DB cluster.
-	DBClusterOptionGroupMemberships []*DBClusterOptionGroupStatus
+	DBClusterOptionGroupMemberships []DBClusterOptionGroupStatus
 
 	// Specifies the name of the DB cluster parameter group for the DB cluster.
 	DBClusterParameterGroup *string
@@ -403,7 +403,7 @@ type DBCluster struct {
 	DeletionProtection *bool
 
 	// The Active Directory Domain membership records associated with the DB cluster.
-	DomainMemberships []*DomainMembership
+	DomainMemberships []DomainMembership
 
 	// The earliest time to which a DB cluster can be backtracked.
 	EarliestBacktrackTime *time.Time
@@ -417,7 +417,7 @@ type DBCluster struct {
 	// DB engine, see Amazon RDS Database Log Files
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html)
 	// in the Amazon Aurora User Guide.
-	EnabledCloudwatchLogsExports []*string
+	EnabledCloudwatchLogsExports []string
 
 	// Specifies the connection endpoint for the primary instance of the DB cluster.
 	Endpoint *string
@@ -491,7 +491,7 @@ type DBCluster struct {
 
 	// Contains one or more identifiers of the read replicas associated with this DB
 	// cluster.
-	ReadReplicaIdentifiers []*string
+	ReadReplicaIdentifiers []string
 
 	// The reader endpoint for the DB cluster. The reader endpoint for a DB cluster
 	// load-balances connections across the Aurora Replicas that are available in a DB
@@ -518,15 +518,15 @@ type DBCluster struct {
 	Status *string
 
 	// Specifies whether the DB cluster is encrypted.
-	StorageEncrypted *bool
+	StorageEncrypted bool
 
 	// A list of tags. For more information, see Tagging Amazon RDS Resources
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
 	// the Amazon RDS User Guide.
-	TagList []*Tag
+	TagList []Tag
 
 	// Provides a list of VPC security groups that the DB cluster belongs to.
-	VpcSecurityGroups []*VpcSecurityGroupMembership
+	VpcSecurityGroups []VpcSecurityGroupMembership
 }
 
 // This data type is used as a response element in the DescribeDBClusterBacktracks
@@ -610,10 +610,10 @@ type DBClusterEndpoint struct {
 	// List of DB instance identifiers that aren't part of the custom endpoint group.
 	// All other eligible instances are reachable through the custom endpoint. Only
 	// relevant if the list of static members is empty.
-	ExcludedMembers []*string
+	ExcludedMembers []string
 
 	// List of DB instance identifiers that are part of the custom endpoint group.
-	StaticMembers []*string
+	StaticMembers []string
 
 	// The current status of the endpoint. One of: creating, available, deleting,
 	// inactive, modifying. The inactive state applies to an endpoint that can't be
@@ -634,7 +634,7 @@ type DBClusterMember struct {
 
 	// Value that is true if the cluster member is the primary instance for the DB
 	// cluster and false otherwise.
-	IsClusterWriter *bool
+	IsClusterWriter bool
 
 	// A value that specifies the order in which an Aurora Replica is promoted to the
 	// primary instance after a failure of the existing primary instance. For more
@@ -705,11 +705,11 @@ type DBClusterRole struct {
 type DBClusterSnapshot struct {
 
 	// Specifies the allocated storage size in gibibytes (GiB).
-	AllocatedStorage *int32
+	AllocatedStorage int32
 
 	// Provides the list of Availability Zones (AZs) where instances in the DB cluster
 	// snapshot can be restored.
-	AvailabilityZones []*string
+	AvailabilityZones []string
 
 	// Specifies the time when the DB cluster was created, in Universal Coordinated
 	// Time (UTC).
@@ -733,7 +733,7 @@ type DBClusterSnapshot struct {
 
 	// True if mapping of AWS Identity and Access Management (IAM) accounts to database
 	// accounts is enabled, and otherwise false.
-	IAMDatabaseAuthenticationEnabled *bool
+	IAMDatabaseAuthenticationEnabled bool
 
 	// If StorageEncrypted is true, the AWS KMS key identifier for the encrypted DB
 	// cluster snapshot.
@@ -746,11 +746,11 @@ type DBClusterSnapshot struct {
 	MasterUsername *string
 
 	// Specifies the percentage of the estimated data that has been transferred.
-	PercentProgress *int32
+	PercentProgress int32
 
 	// Specifies the port that the DB cluster was listening on at the time of the
 	// snapshot.
-	Port *int32
+	Port int32
 
 	// Provides the time when the snapshot was taken, in Universal Coordinated Time
 	// (UTC).
@@ -768,12 +768,12 @@ type DBClusterSnapshot struct {
 	Status *string
 
 	// Specifies whether the DB cluster snapshot is encrypted.
-	StorageEncrypted *bool
+	StorageEncrypted bool
 
 	// A list of tags. For more information, see Tagging Amazon RDS Resources
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
 	// the Amazon RDS User Guide.
-	TagList []*Tag
+	TagList []Tag
 
 	// Provides the VPC ID associated with the DB cluster snapshot.
 	VpcId *string
@@ -796,7 +796,7 @@ type DBClusterSnapshotAttribute struct {
 	// accounts that are authorized to copy or restore the manual DB cluster snapshot.
 	// If a value of all is in the list, then the manual DB cluster snapshot is public
 	// and available for any AWS account to copy or restore.
-	AttributeValues []*string
+	AttributeValues []string
 }
 
 // Contains the results of a successful call to the
@@ -807,7 +807,7 @@ type DBClusterSnapshotAttribute struct {
 type DBClusterSnapshotAttributesResult struct {
 
 	// The list of attributes and values for the manual DB cluster snapshot.
-	DBClusterSnapshotAttributes []*DBClusterSnapshotAttribute
+	DBClusterSnapshotAttributes []DBClusterSnapshotAttribute
 
 	// The identifier of the manual DB cluster snapshot that the attributes apply to.
 	DBClusterSnapshotIdentifier *string
@@ -838,49 +838,49 @@ type DBEngineVersion struct {
 
 	// The types of logs that the database engine has available for export to
 	// CloudWatch Logs.
-	ExportableLogTypes []*string
+	ExportableLogTypes []string
 
 	// The status of the DB engine version, either available or deprecated.
 	Status *string
 
 	// A list of the character sets supported by this engine for the CharacterSetName
 	// parameter of the CreateDBInstance operation.
-	SupportedCharacterSets []*CharacterSet
+	SupportedCharacterSets []CharacterSet
 
 	// A list of the supported DB engine modes.
-	SupportedEngineModes []*string
+	SupportedEngineModes []string
 
 	// A list of features supported by the DB engine. Supported feature names include
 	// the following.
 	//
 	// * s3Import
-	SupportedFeatureNames []*string
+	SupportedFeatureNames []string
 
 	// A list of the character sets supported by the Oracle DB engine for the
 	// NcharCharacterSetName parameter of the CreateDBInstance operation.
-	SupportedNcharCharacterSets []*CharacterSet
+	SupportedNcharCharacterSets []CharacterSet
 
 	// A list of the time zones supported by this engine for the Timezone parameter of
 	// the CreateDBInstance action.
-	SupportedTimezones []*Timezone
+	SupportedTimezones []Timezone
 
 	// A value that indicates whether you can use Aurora global databases with a
 	// specific DB engine version.
-	SupportsGlobalDatabases *bool
+	SupportsGlobalDatabases bool
 
 	// A value that indicates whether the engine version supports exporting the log
 	// types specified by ExportableLogTypes to CloudWatch Logs.
-	SupportsLogExportsToCloudwatchLogs *bool
+	SupportsLogExportsToCloudwatchLogs bool
 
 	// A value that indicates whether you can use Aurora parallel query with a specific
 	// DB engine version.
-	SupportsParallelQuery *bool
+	SupportsParallelQuery bool
 
 	// Indicates whether the database engine version supports read replicas.
-	SupportsReadReplica *bool
+	SupportsReadReplica bool
 
 	// A list of engine versions that this database engine version can be upgraded to.
-	ValidUpgradeTarget []*UpgradeTarget
+	ValidUpgradeTarget []UpgradeTarget
 }
 
 // Contains the details of an Amazon RDS DB instance. This data type is used as a
@@ -888,20 +888,20 @@ type DBEngineVersion struct {
 type DBInstance struct {
 
 	// Specifies the allocated storage size specified in gibibytes.
-	AllocatedStorage *int32
+	AllocatedStorage int32
 
 	// The AWS Identity and Access Management (IAM) roles associated with the DB
 	// instance.
-	AssociatedRoles []*DBInstanceRole
+	AssociatedRoles []DBInstanceRole
 
 	// Indicates that minor version patches are applied automatically.
-	AutoMinorVersionUpgrade *bool
+	AutoMinorVersionUpgrade bool
 
 	// Specifies the name of the Availability Zone the DB instance is located in.
 	AvailabilityZone *string
 
 	// Specifies the number of days for which automatic DB snapshots are retained.
-	BackupRetentionPeriod *int32
+	BackupRetentionPeriod int32
 
 	// The identifier of the CA certificate for this DB instance.
 	CACertificateIdentifier *string
@@ -914,7 +914,7 @@ type DBInstance struct {
 	// instance. Amazon Aurora Not applicable. Copying tags to snapshots is managed by
 	// the DB cluster. Setting this value for an Aurora DB instance has no effect on
 	// the DB cluster setting. For more information, see DBCluster.
-	CopyTagsToSnapshot *bool
+	CopyTagsToSnapshot bool
 
 	// If the DB instance is a member of a DB cluster, contains the name of the DB
 	// cluster that the DB instance is a member of.
@@ -946,11 +946,11 @@ type DBInstance struct {
 	DBName *string
 
 	// Provides the list of DB parameter groups applied to this DB instance.
-	DBParameterGroups []*DBParameterGroupStatus
+	DBParameterGroups []DBParameterGroupStatus
 
 	// A list of DB security group elements containing DBSecurityGroup.Name and
 	// DBSecurityGroup.Status subelements.
-	DBSecurityGroups []*DBSecurityGroupMembership
+	DBSecurityGroups []DBSecurityGroupMembership
 
 	// Specifies information on the subnet group associated with the DB instance,
 	// including the name, description, and subnets in the subnet group.
@@ -958,7 +958,7 @@ type DBInstance struct {
 
 	// Specifies the port that the DB instance listens on. If the DB instance is part
 	// of a DB cluster, this can be a different port than the DB cluster port.
-	DbInstancePort *int32
+	DbInstancePort int32
 
 	// The AWS Region-unique, immutable identifier for the DB instance. This identifier
 	// is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB
@@ -969,17 +969,17 @@ type DBInstance struct {
 	// be deleted when deletion protection is enabled. For more information, see
 	// Deleting a DB Instance
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html).
-	DeletionProtection *bool
+	DeletionProtection bool
 
 	// The Active Directory Domain membership records associated with the DB instance.
-	DomainMemberships []*DomainMembership
+	DomainMemberships []DomainMembership
 
 	// A list of log types that this DB instance is configured to export to CloudWatch
 	// Logs. Log types vary by DB engine. For information about the log types for each
 	// DB engine, see Amazon RDS Database Log Files
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html) in
 	// the Amazon RDS User Guide.
-	EnabledCloudwatchLogsExports []*string
+	EnabledCloudwatchLogsExports []string
 
 	// Specifies the connection endpoint.
 	Endpoint *Endpoint
@@ -1005,7 +1005,7 @@ type DBInstance struct {
 	//
 	// * Aurora 5.6
 	// or higher. To enable IAM database authentication for Aurora, see DBCluster Type.
-	IAMDatabaseAuthenticationEnabled *bool
+	IAMDatabaseAuthenticationEnabled bool
 
 	// Provides the date and time the DB instance was created.
 	InstanceCreateTime *time.Time
@@ -1043,7 +1043,7 @@ type DBInstance struct {
 	MonitoringRoleArn *string
 
 	// Specifies if the DB instance is a Multi-AZ deployment.
-	MultiAZ *bool
+	MultiAZ bool
 
 	// The name of the NCHAR character set for the Oracle DB instance. This character
 	// set specifies the Unicode encoding for data stored in table columns of type
@@ -1051,7 +1051,7 @@ type DBInstance struct {
 	NcharCharacterSetName *string
 
 	// Provides the list of option group memberships for this DB instance.
-	OptionGroupMemberships []*OptionGroupMembership
+	OptionGroupMemberships []OptionGroupMembership
 
 	// Specifies that changes to the DB instance are pending. This element is only
 	// included when changes are pending. Specific changes are identified by
@@ -1081,7 +1081,7 @@ type DBInstance struct {
 
 	// The number of CPU cores and the number of threads per core for the DB instance
 	// class of the DB instance.
-	ProcessorFeatures []*ProcessorFeature
+	ProcessorFeatures []ProcessorFeature
 
 	// A value that specifies the order in which an Aurora Replica is promoted to the
 	// primary instance after a failure of the existing primary instance. For more
@@ -1098,7 +1098,7 @@ type DBInstance struct {
 	// group assigned to the DB instance doesn't permit it. When the DB instance isn't
 	// publicly accessible, it is an internal DB instance with a DNS name that resolves
 	// to a private IP address. For more information, see CreateDBInstance.
-	PubliclyAccessible *bool
+	PubliclyAccessible bool
 
 	// Contains one or more identifiers of Aurora DB clusters to which the RDS DB
 	// instance is replicated as a read replica. For example, when you create an Aurora
@@ -1106,11 +1106,11 @@ type DBInstance struct {
 	// Aurora read replica is shown. This output does not contain information about
 	// cross region Aurora read replicas. Currently, each RDS DB instance can have only
 	// one Aurora read replica.
-	ReadReplicaDBClusterIdentifiers []*string
+	ReadReplicaDBClusterIdentifiers []string
 
 	// Contains one or more identifiers of the read replicas associated with this DB
 	// instance.
-	ReadReplicaDBInstanceIdentifiers []*string
+	ReadReplicaDBInstanceIdentifiers []string
 
 	// Contains the identifier of the source DB instance if this DB instance is a read
 	// replica.
@@ -1129,10 +1129,10 @@ type DBInstance struct {
 
 	// The status of a read replica. If the instance isn't a read replica, this is
 	// blank.
-	StatusInfos []*DBInstanceStatusInfo
+	StatusInfos []DBInstanceStatusInfo
 
 	// Specifies whether the DB instance is encrypted.
-	StorageEncrypted *bool
+	StorageEncrypted bool
 
 	// Specifies the storage type associated with DB instance.
 	StorageType *string
@@ -1140,7 +1140,7 @@ type DBInstance struct {
 	// A list of tags. For more information, see Tagging Amazon RDS Resources
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
 	// the Amazon RDS User Guide.
-	TagList []*Tag
+	TagList []Tag
 
 	// The ARN from the key store with which the instance is associated for TDE
 	// encryption.
@@ -1152,7 +1152,7 @@ type DBInstance struct {
 	Timezone *string
 
 	// Provides a list of VPC security group elements that the DB instance belongs to.
-	VpcSecurityGroups []*VpcSecurityGroupMembership
+	VpcSecurityGroups []VpcSecurityGroupMembership
 }
 
 // An automated backup of a DB instance. It it consists of system backups,
@@ -1161,7 +1161,7 @@ type DBInstance struct {
 type DBInstanceAutomatedBackup struct {
 
 	// Specifies the allocated storage size in gibibytes (GiB).
-	AllocatedStorage *int32
+	AllocatedStorage int32
 
 	// The Availability Zone that the automated backup was created in. For information
 	// on AWS Regions and Availability Zones, see Regions and Availability Zones
@@ -1180,7 +1180,7 @@ type DBInstanceAutomatedBackup struct {
 	DbiResourceId *string
 
 	// Specifies whether the automated backup is encrypted.
-	Encrypted *bool
+	Encrypted bool
 
 	// The name of the database engine for this automated backup.
 	Engine *string
@@ -1190,7 +1190,7 @@ type DBInstanceAutomatedBackup struct {
 
 	// True if mapping of AWS Identity and Access Management (IAM) accounts to database
 	// accounts is enabled, and otherwise false.
-	IAMDatabaseAuthenticationEnabled *bool
+	IAMDatabaseAuthenticationEnabled bool
 
 	// Provides the date and time that the DB instance was created.
 	InstanceCreateTime *time.Time
@@ -1215,7 +1215,7 @@ type DBInstanceAutomatedBackup struct {
 
 	// The port number that the automated backup used for connections. Default:
 	// Inherits from the source DB instance Valid Values: 1150-65535
-	Port *int32
+	Port int32
 
 	// The AWS Region associated with the automated backup.
 	Region *string
@@ -1288,7 +1288,7 @@ type DBInstanceStatusInfo struct {
 
 	// Boolean value that is true if the instance is operating normally, or false if
 	// the instance is in an error state.
-	Normal *bool
+	Normal bool
 
 	// Status of the DB instance. For a StatusType of read replica, the values can be
 	// replicating, replication stop point set, replication stop point reached, error,
@@ -1348,7 +1348,7 @@ type DBProxy struct {
 
 	// One or more data structures specifying the authorization mechanism to connect to
 	// the associated RDS DB instance or Aurora DB cluster.
-	Auth []*UserAuthConfigInfo
+	Auth []UserAuthConfigInfo
 
 	// The date and time when the proxy was first created.
 	CreatedDate *time.Time
@@ -1367,7 +1367,7 @@ type DBProxy struct {
 	// only enable this setting when needed for debugging, and only when you have
 	// security measures in place to safeguard any sensitive information that appears
 	// in the logs.
-	DebugLogging *bool
+	DebugLogging bool
 
 	// The endpoint that you can use to connect to the proxy. You include the endpoint
 	// value in the connection string for a database client application.
@@ -1380,11 +1380,11 @@ type DBProxy struct {
 	// proxy drops the client connection. The proxy keeps the underlying database
 	// connection open and puts it back into the connection pool for reuse by later
 	// connection requests. Default: 1800 (30 minutes) Constraints: 1 to 28,800
-	IdleClientTimeout *int32
+	IdleClientTimeout int32
 
 	// Indicates whether Transport Layer Security (TLS) encryption is required for
 	// connections to the proxy.
-	RequireTLS *bool
+	RequireTLS bool
 
 	// The Amazon Resource Name (ARN) for the IAM role that the proxy uses to access
 	// Amazon Secrets Manager.
@@ -1399,10 +1399,10 @@ type DBProxy struct {
 	UpdatedDate *time.Time
 
 	// Provides a list of VPC security groups that the proxy belongs to.
-	VpcSecurityGroupIds []*string
+	VpcSecurityGroupIds []string
 
 	// The EC2 subnet IDs for the proxy.
-	VpcSubnetIds []*string
+	VpcSubnetIds []string
 }
 
 // Contains the details for an RDS Proxy target. It represents an RDS DB instance
@@ -1416,7 +1416,7 @@ type DBProxyTarget struct {
 
 	// The port that the RDS Proxy uses to connect to the target RDS DB instance or
 	// Aurora DB cluster.
-	Port *int32
+	Port int32
 
 	// The identifier representing the target. It can be the instance identifier for an
 	// RDS DB instance, or the cluster identifier for an Aurora DB cluster.
@@ -1456,7 +1456,7 @@ type DBProxyTargetGroup struct {
 	// Whether this target group is the first one used for connection requests by the
 	// associated proxy. Because each proxy is currently associated with a single
 	// target group, currently this setting is always true.
-	IsDefault *bool
+	IsDefault bool
 
 	// The current status of this target group. A status of available means the target
 	// group is correctly associated with a database. Other values indicate that you
@@ -1489,10 +1489,10 @@ type DBSecurityGroup struct {
 	DBSecurityGroupName *string
 
 	// Contains a list of EC2SecurityGroup elements.
-	EC2SecurityGroups []*EC2SecurityGroup
+	EC2SecurityGroups []EC2SecurityGroup
 
 	// Contains a list of IPRange elements.
-	IPRanges []*IPRange
+	IPRanges []IPRange
 
 	// Provides the AWS ID of the owner of a specific DB security group.
 	OwnerId *string
@@ -1526,7 +1526,7 @@ type DBSecurityGroupMembership struct {
 type DBSnapshot struct {
 
 	// Specifies the allocated storage size in gibibytes (GiB).
-	AllocatedStorage *int32
+	AllocatedStorage int32
 
 	// Specifies the name of the Availability Zone the DB instance was located in at
 	// the time of the DB snapshot.
@@ -1547,7 +1547,7 @@ type DBSnapshot struct {
 	DbiResourceId *string
 
 	// Specifies whether the DB snapshot is encrypted.
-	Encrypted *bool
+	Encrypted bool
 
 	// Specifies the name of the database engine.
 	Engine *string
@@ -1557,7 +1557,7 @@ type DBSnapshot struct {
 
 	// True if mapping of AWS Identity and Access Management (IAM) accounts to database
 	// accounts is enabled, and otherwise false.
-	IAMDatabaseAuthenticationEnabled *bool
+	IAMDatabaseAuthenticationEnabled bool
 
 	// Specifies the time in Coordinated Universal Time (UTC) when the DB instance,
 	// from which the snapshot was taken, was created.
@@ -1580,15 +1580,15 @@ type DBSnapshot struct {
 	OptionGroupName *string
 
 	// The percentage of the estimated data that has been transferred.
-	PercentProgress *int32
+	PercentProgress int32
 
 	// Specifies the port that the database engine was listening on at the time of the
 	// snapshot.
-	Port *int32
+	Port int32
 
 	// The number of CPU cores and the number of threads per core for the DB instance
 	// class of the DB instance when the DB snapshot was created.
-	ProcessorFeatures []*ProcessorFeature
+	ProcessorFeatures []ProcessorFeature
 
 	// Specifies when the snapshot was taken in Coodinated Universal Time (UTC).
 	SnapshotCreateTime *time.Time
@@ -1612,7 +1612,7 @@ type DBSnapshot struct {
 	// A list of tags. For more information, see Tagging Amazon RDS Resources
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
 	// the Amazon RDS User Guide.
-	TagList []*Tag
+	TagList []Tag
 
 	// The ARN from the key store with which to associate the instance for TDE
 	// encryption.
@@ -1643,7 +1643,7 @@ type DBSnapshotAttribute struct {
 	// accounts that are authorized to copy or restore the manual DB snapshot. If a
 	// value of all is in the list, then the manual DB snapshot is public and available
 	// for any AWS account to copy or restore.
-	AttributeValues []*string
+	AttributeValues []string
 }
 
 // Contains the results of a successful call to the DescribeDBSnapshotAttributes
@@ -1653,7 +1653,7 @@ type DBSnapshotAttribute struct {
 type DBSnapshotAttributesResult struct {
 
 	// The list of attributes and values for the manual DB snapshot.
-	DBSnapshotAttributes []*DBSnapshotAttribute
+	DBSnapshotAttributes []DBSnapshotAttribute
 
 	// The identifier of the manual DB snapshot that the attributes apply to.
 	DBSnapshotIdentifier *string
@@ -1676,7 +1676,7 @@ type DBSubnetGroup struct {
 	SubnetGroupStatus *string
 
 	// Contains a list of Subnet elements.
-	Subnets []*Subnet
+	Subnets []Subnet
 
 	// Provides the VpcId of the DB subnet group.
 	VpcId *string
@@ -1686,13 +1686,13 @@ type DBSubnetGroup struct {
 type DescribeDBLogFilesDetails struct {
 
 	// A POSIX timestamp when the last log entry was written.
-	LastWritten *int64
+	LastWritten int64
 
 	// The name of the log file for the specified DB instance.
 	LogFileName *string
 
 	// The size, in bytes, of the log file for the specified DB instance.
-	Size *int64
+	Size int64
 }
 
 // An Active Directory Domain membership record associated with the DB instance or
@@ -1718,10 +1718,10 @@ type DomainMembership struct {
 type DoubleRange struct {
 
 	// The minimum value in the range.
-	From *float64
+	From float64
 
 	// The maximum value in the range.
-	To *float64
+	To float64
 }
 
 // This data type is used as a response element in the following actions:
@@ -1772,7 +1772,7 @@ type Endpoint struct {
 	HostedZoneId *string
 
 	// Specifies the port that the database engine is listening on.
-	Port *int32
+	Port int32
 }
 
 // Contains the result of a successful invocation of the
@@ -1789,7 +1789,7 @@ type EngineDefaults struct {
 	Marker *string
 
 	// Contains a list of engine default parameters.
-	Parameters []*Parameter
+	Parameters []Parameter
 }
 
 // This data type is used as a response element in the DescribeEvents action.
@@ -1799,7 +1799,7 @@ type Event struct {
 	Date *time.Time
 
 	// Specifies the category for the event.
-	EventCategories []*string
+	EventCategories []string
 
 	// Provides the text of this event.
 	Message *string
@@ -1819,7 +1819,7 @@ type Event struct {
 type EventCategoriesMap struct {
 
 	// The event categories for the specified source type
-	EventCategories []*string
+	EventCategories []string
 
 	// The source type that the returned categories belong to
 	SourceType *string
@@ -1838,10 +1838,10 @@ type EventSubscription struct {
 
 	// A Boolean value indicating if the subscription is enabled. True indicates the
 	// subscription is enabled.
-	Enabled *bool
+	Enabled bool
 
 	// A list of event categories for the RDS event notification subscription.
-	EventCategoriesList []*string
+	EventCategoriesList []string
 
 	// The Amazon Resource Name (ARN) for the event subscription.
 	EventSubscriptionArn *string
@@ -1850,7 +1850,7 @@ type EventSubscription struct {
 	SnsTopicArn *string
 
 	// A list of source IDs for the RDS event notification subscription.
-	SourceIdsList []*string
+	SourceIdsList []string
 
 	// The source type for the RDS event notification subscription.
 	SourceType *string
@@ -1886,7 +1886,7 @@ type ExportTask struct {
 	// * database.schema.table table-name - Export a
 	// table of the database schema. This format is valid only for RDS for PostgreSQL
 	// and Aurora PostgreSQL.
-	ExportOnly []*string
+	ExportOnly []string
 
 	// A unique identifier for the snapshot export task. This ID isn't an identifier
 	// for the Amazon S3 bucket where the snapshot is exported to.
@@ -1907,7 +1907,7 @@ type ExportTask struct {
 	KmsKeyId *string
 
 	// The progress of the snapshot export task as a percentage.
-	PercentProgress *int32
+	PercentProgress int32
 
 	// The Amazon S3 bucket that the snapshot is exported to.
 	S3Bucket *string
@@ -1932,7 +1932,7 @@ type ExportTask struct {
 	TaskStartTime *time.Time
 
 	// The total amount of data exported, in gigabytes.
-	TotalExtractedDataInGB *int32
+	TotalExtractedDataInGB int32
 
 	// A warning about the snapshot export task.
 	WarningMessage *string
@@ -1965,7 +1965,7 @@ type Filter struct {
 	// One or more filter values. Filter values are case-sensitive.
 	//
 	// This member is required.
-	Values []*string
+	Values []string
 }
 
 // A data type representing an Aurora global database.
@@ -1992,7 +1992,7 @@ type GlobalCluster struct {
 
 	// The list of cluster IDs for secondary clusters within the global database
 	// cluster. Currently limited to 1 item.
-	GlobalClusterMembers []*GlobalClusterMember
+	GlobalClusterMembers []GlobalClusterMember
 
 	// The AWS Region-unique, immutable identifier for the global database cluster.
 	// This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key
@@ -2020,11 +2020,11 @@ type GlobalClusterMember struct {
 	// Specifies whether the Aurora cluster is the primary cluster (that is, has
 	// read-write capability) for the Aurora global database with which it is
 	// associated.
-	IsWriter *bool
+	IsWriter bool
 
 	// The Amazon Resource Name (ARN) for each read-only secondary cluster associated
 	// with the Aurora global database.
-	Readers []*string
+	Readers []string
 }
 
 // Contains the installation media for a DB engine that requires an on-premises
@@ -2094,7 +2094,7 @@ type Option struct {
 
 	// If the option requires access to a port, then this DB security group allows
 	// access to the port.
-	DBSecurityGroupMemberships []*DBSecurityGroupMembership
+	DBSecurityGroupMemberships []DBSecurityGroupMembership
 
 	// The description of the option.
 	OptionDescription *string
@@ -2103,23 +2103,23 @@ type Option struct {
 	OptionName *string
 
 	// The option settings for this option.
-	OptionSettings []*OptionSetting
+	OptionSettings []OptionSetting
 
 	// The version of the option.
 	OptionVersion *string
 
 	// Indicate if this option is permanent.
-	Permanent *bool
+	Permanent bool
 
 	// Indicate if this option is persistent.
-	Persistent *bool
+	Persistent bool
 
 	// If required, the port configured for this option to use.
 	Port *int32
 
 	// If the option requires access to a port, then this VPC security group allows
 	// access to the port.
-	VpcSecurityGroupMemberships []*VpcSecurityGroupMembership
+	VpcSecurityGroupMemberships []VpcSecurityGroupMembership
 }
 
 // A list of all available options
@@ -2131,10 +2131,10 @@ type OptionConfiguration struct {
 	OptionName *string
 
 	// A list of DBSecurityGroupMembership name strings used for this option.
-	DBSecurityGroupMemberships []*string
+	DBSecurityGroupMemberships []string
 
 	// The option settings to include in an option group.
-	OptionSettings []*OptionSetting
+	OptionSettings []OptionSetting
 
 	// The version for the option.
 	OptionVersion *string
@@ -2143,7 +2143,7 @@ type OptionConfiguration struct {
 	Port *int32
 
 	// A list of VpcSecurityGroupMembership name strings used for this option.
-	VpcSecurityGroupMemberships []*string
+	VpcSecurityGroupMemberships []string
 }
 
 //
@@ -2152,7 +2152,7 @@ type OptionGroup struct {
 	// Indicates whether this option group can be applied to both VPC and non-VPC
 	// instances. The value true indicates the option group can be applied to both VPC
 	// and non-VPC instances.
-	AllowsVpcAndNonVpcInstanceMemberships *bool
+	AllowsVpcAndNonVpcInstanceMemberships bool
 
 	// Indicates the name of the engine that this option group can be applied to.
 	EngineName *string
@@ -2170,7 +2170,7 @@ type OptionGroup struct {
 	OptionGroupName *string
 
 	// Indicates what options are available in the option group.
-	Options []*Option
+	Options []Option
 
 	// If AllowsVpcAndNonVpcInstanceMemberships is false, this field is blank. If
 	// AllowsVpcAndNonVpcInstanceMemberships is true and this field is blank, then this
@@ -2215,41 +2215,41 @@ type OptionGroupOption struct {
 
 	// The option settings that are available (and the default value) for each option
 	// in an option group.
-	OptionGroupOptionSettings []*OptionGroupOptionSetting
+	OptionGroupOptionSettings []OptionGroupOptionSetting
 
 	// The versions that are available for the option.
-	OptionGroupOptionVersions []*OptionVersion
+	OptionGroupOptionVersions []OptionVersion
 
 	// The options that conflict with this option.
-	OptionsConflictsWith []*string
+	OptionsConflictsWith []string
 
 	// The options that are prerequisites for this option.
-	OptionsDependedOn []*string
+	OptionsDependedOn []string
 
 	// Permanent options can never be removed from an option group. An option group
 	// containing a permanent option can't be removed from a DB instance.
-	Permanent *bool
+	Permanent bool
 
 	// Persistent options can't be removed from an option group while DB instances are
 	// associated with the option group. If you disassociate all DB instances from the
 	// option group, your can remove the persistent option from the option group.
-	Persistent *bool
+	Persistent bool
 
 	// Specifies whether the option requires a port.
-	PortRequired *bool
+	PortRequired bool
 
 	// If true, you must enable the Auto Minor Version Upgrade setting for your DB
 	// instance before you can use this option. You can enable Auto Minor Version
 	// Upgrade when you first create your DB instance, or by modifying your DB instance
 	// later.
-	RequiresAutoMinorEngineVersionUpgrade *bool
+	RequiresAutoMinorEngineVersionUpgrade bool
 
 	// If true, you can change the option to an earlier version of the option. This
 	// only applies to options that have different versions available.
 	SupportsOptionVersionDowngrade *bool
 
 	// If true, you can only use this option with a DB instance that is in a VPC.
-	VpcOnly *bool
+	VpcOnly bool
 }
 
 // Option group option settings are used to display settings available for each
@@ -2268,15 +2268,15 @@ type OptionGroupOptionSetting struct {
 
 	// Boolean value where true indicates that this option group option can be changed
 	// from the default value.
-	IsModifiable *bool
+	IsModifiable bool
 
 	// Boolean value where true indicates that a value must be specified for this
 	// option setting of the option group option.
-	IsRequired *bool
+	IsRequired bool
 
 	// The minimum DB engine version required for the corresponding allowed value for
 	// this option setting.
-	MinimumEngineVersionPerAllowedValue []*MinimumEngineVersionPerAllowedValue
+	MinimumEngineVersionPerAllowedValue []MinimumEngineVersionPerAllowedValue
 
 	// The description of the option group option.
 	SettingDescription *string
@@ -2307,11 +2307,11 @@ type OptionSetting struct {
 	Description *string
 
 	// Indicates if the option setting is part of a collection.
-	IsCollection *bool
+	IsCollection bool
 
 	// A Boolean value that, when true, indicates the option setting can be modified
 	// from the default.
-	IsModifiable *bool
+	IsModifiable bool
 
 	// The name of the option that has settings that you can set.
 	Name *string
@@ -2325,7 +2325,7 @@ type OptionSetting struct {
 type OptionVersion struct {
 
 	// True if the version is the default version of the option, and otherwise false.
-	IsDefault *bool
+	IsDefault bool
 
 	// The version of the option.
 	Version *string
@@ -2339,11 +2339,11 @@ type OrderableDBInstanceOption struct {
 	AvailabilityZoneGroup *string
 
 	// A list of Availability Zones for a DB instance.
-	AvailabilityZones []*AvailabilityZone
+	AvailabilityZones []AvailabilityZone
 
 	// A list of the available processor features for the DB instance class of a DB
 	// instance.
-	AvailableProcessorFeatures []*AvailableProcessorFeature
+	AvailableProcessorFeatures []AvailableProcessorFeature
 
 	// The DB instance class for a DB instance.
 	DBInstanceClass *string
@@ -2376,52 +2376,52 @@ type OrderableDBInstanceOption struct {
 	MinStorageSize *int32
 
 	// Indicates whether a DB instance is Multi-AZ capable.
-	MultiAZCapable *bool
+	MultiAZCapable bool
 
 	// Whether a DB instance supports RDS on Outposts. For more information about RDS
 	// on Outposts, see Amazon RDS on AWS Outposts
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html) in
 	// the Amazon RDS User Guide.
-	OutpostCapable *bool
+	OutpostCapable bool
 
 	// Indicates whether a DB instance can have a read replica.
-	ReadReplicaCapable *bool
+	ReadReplicaCapable bool
 
 	// Indicates the storage type for a DB instance.
 	StorageType *string
 
 	// A list of the supported DB engine modes.
-	SupportedEngineModes []*string
+	SupportedEngineModes []string
 
 	// Indicates whether a DB instance supports Enhanced Monitoring at intervals from 1
 	// to 60 seconds.
-	SupportsEnhancedMonitoring *bool
+	SupportsEnhancedMonitoring bool
 
 	// A value that indicates whether you can use Aurora global databases with a
 	// specific combination of other DB engine attributes.
-	SupportsGlobalDatabases *bool
+	SupportsGlobalDatabases bool
 
 	// Indicates whether a DB instance supports IAM database authentication.
-	SupportsIAMDatabaseAuthentication *bool
+	SupportsIAMDatabaseAuthentication bool
 
 	// Indicates whether a DB instance supports provisioned IOPS.
-	SupportsIops *bool
+	SupportsIops bool
 
 	// Whether a DB instance supports Kerberos Authentication.
 	SupportsKerberosAuthentication *bool
 
 	// True if a DB instance supports Performance Insights, otherwise false.
-	SupportsPerformanceInsights *bool
+	SupportsPerformanceInsights bool
 
 	// Whether Amazon RDS can automatically scale storage for DB instances that use the
 	// specified DB instance class.
 	SupportsStorageAutoscaling *bool
 
 	// Indicates whether a DB instance supports encrypted storage.
-	SupportsStorageEncryption *bool
+	SupportsStorageEncryption bool
 
 	// Indicates whether a DB instance is in a VPC.
-	Vpc *bool
+	Vpc bool
 }
 
 // A data type that represents an Outpost. For more information about RDS on
@@ -2457,7 +2457,7 @@ type Parameter struct {
 	// Indicates whether (true) or not (false) the parameter can be modified. Some
 	// parameters have security or operational implications that prevent them from
 	// being changed.
-	IsModifiable *bool
+	IsModifiable bool
 
 	// The earliest engine version to which the parameter can apply.
 	MinimumEngineVersion *string
@@ -2472,7 +2472,7 @@ type Parameter struct {
 	Source *string
 
 	// The valid DB engine modes.
-	SupportedEngineModes []*string
+	SupportedEngineModes []string
 }
 
 // A list of the log types whose configuration is still pending. In other words,
@@ -2481,11 +2481,11 @@ type PendingCloudwatchLogsExports struct {
 
 	// Log types that are in the process of being enabled. After they are enabled,
 	// these log types are exported to CloudWatch Logs.
-	LogTypesToDisable []*string
+	LogTypesToDisable []string
 
 	// Log types that are in the process of being deactivated. After they are
 	// deactivated, these log types aren't exported to CloudWatch Logs.
-	LogTypesToEnable []*string
+	LogTypesToEnable []string
 }
 
 // Provides information about a pending maintenance action for a resource.
@@ -2572,7 +2572,7 @@ type PendingModifiedValues struct {
 
 	// The number of CPU cores and the number of threads per core for the DB instance
 	// class of the DB instance.
-	ProcessorFeatures []*ProcessorFeature
+	ProcessorFeatures []ProcessorFeature
 
 	// Specifies the storage type to be associated with the DB instance.
 	StorageType *string
@@ -2639,7 +2639,7 @@ type ProcessorFeature struct {
 type Range struct {
 
 	// The minimum value in the range.
-	From *int32
+	From int32
 
 	// The step value for the range. For example, if you have a range of 5,000 to
 	// 10,000, with a step value of 1,000, the valid values start at 5,000 and step up
@@ -2648,7 +2648,7 @@ type Range struct {
 	Step *int32
 
 	// The maximum value in the range.
-	To *int32
+	To int32
 }
 
 // This data type is used as a response element in the DescribeReservedDBInstances
@@ -2656,7 +2656,7 @@ type Range struct {
 type RecurringCharge struct {
 
 	// The amount of the recurring charge.
-	RecurringChargeAmount *float64
+	RecurringChargeAmount float64
 
 	// The frequency of the recurring charge.
 	RecurringChargeFrequency *string
@@ -2673,13 +2673,13 @@ type ReservedDBInstance struct {
 	DBInstanceClass *string
 
 	// The number of reserved DB instances.
-	DBInstanceCount *int32
+	DBInstanceCount int32
 
 	// The duration of the reservation in seconds.
-	Duration *int32
+	Duration int32
 
 	// The fixed price charged for this reserved DB instance.
-	FixedPrice *float64
+	FixedPrice float64
 
 	// The unique identifier for the lease associated with the reserved DB instance.
 	// AWS Support might request the lease ID for an issue related to a reserved DB
@@ -2687,7 +2687,7 @@ type ReservedDBInstance struct {
 	LeaseId *string
 
 	// Indicates if the reservation applies to Multi-AZ deployments.
-	MultiAZ *bool
+	MultiAZ bool
 
 	// The offering type of this reserved DB instance.
 	OfferingType *string
@@ -2696,7 +2696,7 @@ type ReservedDBInstance struct {
 	ProductDescription *string
 
 	// The recurring price charged to run this reserved DB instance.
-	RecurringCharges []*RecurringCharge
+	RecurringCharges []RecurringCharge
 
 	// The Amazon Resource Name (ARN) for the reserved DB instance.
 	ReservedDBInstanceArn *string
@@ -2714,7 +2714,7 @@ type ReservedDBInstance struct {
 	State *string
 
 	// The hourly price charged for this reserved DB instance.
-	UsagePrice *float64
+	UsagePrice float64
 }
 
 // This data type is used as a response element in the
@@ -2728,13 +2728,13 @@ type ReservedDBInstancesOffering struct {
 	DBInstanceClass *string
 
 	// The duration of the offering in seconds.
-	Duration *int32
+	Duration int32
 
 	// The fixed price charged for this offering.
-	FixedPrice *float64
+	FixedPrice float64
 
 	// Indicates if the offering applies to Multi-AZ deployments.
-	MultiAZ *bool
+	MultiAZ bool
 
 	// The offering type.
 	OfferingType *string
@@ -2743,13 +2743,13 @@ type ReservedDBInstancesOffering struct {
 	ProductDescription *string
 
 	// The recurring price charged to run this reserved DB instance.
-	RecurringCharges []*RecurringCharge
+	RecurringCharges []RecurringCharge
 
 	// The offering identifier.
 	ReservedDBInstancesOfferingId *string
 
 	// The hourly price charged for this offering.
-	UsagePrice *float64
+	UsagePrice float64
 }
 
 // Describes the pending maintenance actions for a resource.
@@ -2757,7 +2757,7 @@ type ResourcePendingMaintenanceActions struct {
 
 	// A list that provides details about the pending maintenance actions for the
 	// resource.
-	PendingMaintenanceActionDetails []*PendingMaintenanceAction
+	PendingMaintenanceActionDetails []PendingMaintenanceAction
 
 	// The ARN of the resource that has pending maintenance actions.
 	ResourceIdentifier *string
@@ -2923,7 +2923,7 @@ type UpgradeTarget struct {
 
 	// A value that indicates whether the target version is applied to any source DB
 	// instances that have AutoMinorVersionUpgrade set to true.
-	AutoUpgrade *bool
+	AutoUpgrade bool
 
 	// The version of the database engine that a DB instance can be upgraded to.
 	Description *string
@@ -2935,7 +2935,7 @@ type UpgradeTarget struct {
 	EngineVersion *string
 
 	// A value that indicates whether a database engine is upgraded to a major version.
-	IsMajorVersionUpgrade *bool
+	IsMajorVersionUpgrade bool
 }
 
 // Specifies the details of authentication used by a proxy to log in as a specific
@@ -2995,10 +2995,10 @@ type UserAuthConfigInfo struct {
 type ValidDBInstanceModificationsMessage struct {
 
 	// Valid storage options for your DB instance.
-	Storage []*ValidStorageOptions
+	Storage []ValidStorageOptions
 
 	// Valid processor features for your DB instance.
-	ValidProcessorFeatures []*AvailableProcessorFeature
+	ValidProcessorFeatures []AvailableProcessorFeature
 }
 
 // Information about valid modifications that you can make to your DB instance.
@@ -3009,20 +3009,20 @@ type ValidStorageOptions struct {
 	// The valid range of Provisioned IOPS to gibibytes of storage multiplier. For
 	// example, 3-10, which means that provisioned IOPS can be between 3 and 10 times
 	// storage.
-	IopsToStorageRatio []*DoubleRange
+	IopsToStorageRatio []DoubleRange
 
 	// The valid range of provisioned IOPS. For example, 1000-20000.
-	ProvisionedIops []*Range
+	ProvisionedIops []Range
 
 	// The valid range of storage in gibibytes. For example, 100 to 16384.
-	StorageSize []*Range
+	StorageSize []Range
 
 	// The valid storage types for your DB instance. For example, gp2, io1.
 	StorageType *string
 
 	// Whether or not Amazon RDS can automatically scale storage for DB instances that
 	// use the new instance class.
-	SupportsStorageAutoscaling *bool
+	SupportsStorageAutoscaling bool
 }
 
 // This data type is used as a response element for queries on VPC security group

@@ -56,7 +56,7 @@ type DescribeTemplateOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// The template structure for the object you want to describe.
 	Template *types.Template

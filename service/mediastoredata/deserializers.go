@@ -389,7 +389,7 @@ func awsRestjson1_deserializeOpHttpBindingsGetObjectOutput(v *GetObjectOutput, r
 		v.LastModified = ptr.Time(t)
 	}
 
-	v.StatusCode = ptr.Int32(int32(response.StatusCode))
+	v.StatusCode = int32(response.StatusCode)
 
 	return nil
 }
@@ -549,7 +549,7 @@ func awsRestjson1_deserializeOpDocumentListItemsOutput(v **ListItemsOutput, valu
 				if !ok {
 					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
 				}
-				sv.NextToken = &jtv
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -703,7 +703,7 @@ func awsRestjson1_deserializeOpDocumentPutObjectOutput(v **PutObjectOutput, valu
 				if !ok {
 					return fmt.Errorf("expected SHA256Hash to be of type string, got %T instead", value)
 				}
-				sv.ContentSHA256 = &jtv
+				sv.ContentSHA256 = ptr.String(jtv)
 			}
 
 		case "ETag":
@@ -712,7 +712,7 @@ func awsRestjson1_deserializeOpDocumentPutObjectOutput(v **PutObjectOutput, valu
 				if !ok {
 					return fmt.Errorf("expected ETag to be of type string, got %T instead", value)
 				}
-				sv.ETag = &jtv
+				sv.ETag = ptr.String(jtv)
 			}
 
 		case "StorageClass":
@@ -905,7 +905,7 @@ func awsRestjson1_deserializeDocumentContainerNotFoundException(v **types.Contai
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -945,7 +945,7 @@ func awsRestjson1_deserializeDocumentInternalServerError(v **types.InternalServe
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -989,7 +989,7 @@ func awsRestjson1_deserializeDocumentItem(v **types.Item, value interface{}) err
 				if err != nil {
 					return err
 				}
-				sv.ContentLength = &i64
+				sv.ContentLength = ptr.Int64(i64)
 			}
 
 		case "ContentType":
@@ -998,7 +998,7 @@ func awsRestjson1_deserializeDocumentItem(v **types.Item, value interface{}) err
 				if !ok {
 					return fmt.Errorf("expected ContentType to be of type string, got %T instead", value)
 				}
-				sv.ContentType = &jtv
+				sv.ContentType = ptr.String(jtv)
 			}
 
 		case "ETag":
@@ -1007,7 +1007,7 @@ func awsRestjson1_deserializeDocumentItem(v **types.Item, value interface{}) err
 				if !ok {
 					return fmt.Errorf("expected ETag to be of type string, got %T instead", value)
 				}
-				sv.ETag = &jtv
+				sv.ETag = ptr.String(jtv)
 			}
 
 		case "LastModified":
@@ -1029,7 +1029,7 @@ func awsRestjson1_deserializeDocumentItem(v **types.Item, value interface{}) err
 				if !ok {
 					return fmt.Errorf("expected ItemName to be of type string, got %T instead", value)
 				}
-				sv.Name = &jtv
+				sv.Name = ptr.String(jtv)
 			}
 
 		case "Type":
@@ -1050,7 +1050,7 @@ func awsRestjson1_deserializeDocumentItem(v **types.Item, value interface{}) err
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentItemList(v *[]*types.Item, value interface{}) error {
+func awsRestjson1_deserializeDocumentItemList(v *[]types.Item, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1063,18 +1063,20 @@ func awsRestjson1_deserializeDocumentItemList(v *[]*types.Item, value interface{
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []*types.Item
+	var cv []types.Item
 	if *v == nil {
-		cv = []*types.Item{}
+		cv = []types.Item{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col *types.Item
-		if err := awsRestjson1_deserializeDocumentItem(&col, value); err != nil {
+		var col types.Item
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentItem(&destAddr, value); err != nil {
 			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -1110,7 +1112,7 @@ func awsRestjson1_deserializeDocumentObjectNotFoundException(v **types.ObjectNot
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -1150,7 +1152,7 @@ func awsRestjson1_deserializeDocumentRequestedRangeNotSatisfiableException(v **t
 				if !ok {
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
-				sv.Message = &jtv
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:

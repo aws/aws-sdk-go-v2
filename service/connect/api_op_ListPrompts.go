@@ -36,7 +36,7 @@ type ListPromptsInput struct {
 	InstanceId *string
 
 	// The maximum number of results to return per page.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
@@ -49,7 +49,7 @@ type ListPromptsOutput struct {
 	NextToken *string
 
 	// Information about the prompts.
-	PromptSummaryList []*types.PromptSummary
+	PromptSummaryList []types.PromptSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

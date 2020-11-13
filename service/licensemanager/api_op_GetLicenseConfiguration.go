@@ -41,7 +41,7 @@ type GetLicenseConfigurationOutput struct {
 	AutomatedDiscoveryInformation *types.AutomatedDiscoveryInformation
 
 	// Summaries of the licenses consumed by resources.
-	ConsumedLicenseSummaryList []*types.ConsumedLicenseSummary
+	ConsumedLicenseSummaryList []types.ConsumedLicenseSummary
 
 	// Number of licenses assigned to resources.
 	ConsumedLicenses *int64
@@ -65,10 +65,10 @@ type GetLicenseConfigurationOutput struct {
 	LicenseCountingType types.LicenseCountingType
 
 	// License rules.
-	LicenseRules []*string
+	LicenseRules []string
 
 	// Summaries of the managed resources.
-	ManagedResourceSummaryList []*types.ManagedResourceSummary
+	ManagedResourceSummaryList []types.ManagedResourceSummary
 
 	// Name of the license configuration.
 	Name *string
@@ -77,13 +77,13 @@ type GetLicenseConfigurationOutput struct {
 	OwnerAccountId *string
 
 	// Product information.
-	ProductInformationList []*types.ProductInformation
+	ProductInformationList []types.ProductInformation
 
 	// License configuration status.
 	Status *string
 
 	// Tags for the license configuration.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

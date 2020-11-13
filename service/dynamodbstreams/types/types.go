@@ -26,11 +26,11 @@ type AttributeValue struct {
 
 	// An attribute of type List. For example: "L": [ {"S": "Cookies"} , {"S":
 	// "Coffee"}, {"N", "3.14159"}]
-	L []*AttributeValue
+	L []AttributeValue
 
 	// An attribute of type Map. For example: "M": {"Name": {"S": "Joe"}, "Age": {"N":
 	// "35"}}
-	M map[string]*AttributeValue
+	M map[string]AttributeValue
 
 	// An attribute of type Number. For example: "N": "123.45" Numbers are sent across
 	// the network to DynamoDB as strings, to maximize compatibility across languages
@@ -42,7 +42,7 @@ type AttributeValue struct {
 	// "3.14"] Numbers are sent across the network to DynamoDB as strings, to maximize
 	// compatibility across languages and libraries. However, DynamoDB treats them as
 	// number type attributes for mathematical operations.
-	NS []*string
+	NS []string
 
 	// An attribute of type Null. For example: "NULL": true
 	NULL *bool
@@ -52,7 +52,7 @@ type AttributeValue struct {
 
 	// An attribute of type String Set. For example: "SS": ["Giraffe", "Hippo"
 	// ,"Zebra"]
-	SS []*string
+	SS []string
 }
 
 // Contains details about the type of identity that made the request.
@@ -203,7 +203,7 @@ type StreamDescription struct {
 	CreationRequestDateTime *time.Time
 
 	// The key attribute(s) of the stream's DynamoDB table.
-	KeySchema []*KeySchemaElement
+	KeySchema []KeySchemaElement
 
 	// The shard ID of the item where the operation stopped, inclusive of the previous
 	// result set. Use this value to start a new operation, excluding this value in the
@@ -215,7 +215,7 @@ type StreamDescription struct {
 	LastEvaluatedShardId *string
 
 	// The shards that comprise the stream.
-	Shards []*Shard
+	Shards []Shard
 
 	// The Amazon Resource Name (ARN) for the stream.
 	StreamArn *string
@@ -276,13 +276,13 @@ type StreamRecord struct {
 	ApproximateCreationDateTime *time.Time
 
 	// The primary key attribute(s) for the DynamoDB item that was modified.
-	Keys map[string]*AttributeValue
+	Keys map[string]AttributeValue
 
 	// The item in the DynamoDB table as it appeared after it was modified.
-	NewImage map[string]*AttributeValue
+	NewImage map[string]AttributeValue
 
 	// The item in the DynamoDB table as it appeared before it was modified.
-	OldImage map[string]*AttributeValue
+	OldImage map[string]AttributeValue
 
 	// The sequence number of the stream record.
 	SequenceNumber *string

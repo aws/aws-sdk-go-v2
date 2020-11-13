@@ -38,7 +38,7 @@ type AcceptCertificateTransferInput struct {
 	CertificateId *string
 
 	// Specifies whether the certificate is active.
-	SetAsActive *bool
+	SetAsActive bool
 }
 
 type AcceptCertificateTransferOutput struct {

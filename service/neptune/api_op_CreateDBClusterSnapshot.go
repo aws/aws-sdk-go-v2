@@ -57,7 +57,7 @@ type CreateDBClusterSnapshotInput struct {
 	DBClusterSnapshotIdentifier *string
 
 	// The tags to be assigned to the DB cluster snapshot.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateDBClusterSnapshotOutput struct {

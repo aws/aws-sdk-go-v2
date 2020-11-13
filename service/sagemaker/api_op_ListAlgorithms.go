@@ -62,7 +62,7 @@ type ListAlgorithmsOutput struct {
 	// >An array of AlgorithmSummary objects, each of which lists an algorithm.
 	//
 	// This member is required.
-	AlgorithmSummaryList []*types.AlgorithmSummary
+	AlgorithmSummaryList []types.AlgorithmSummary
 
 	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
 	// the next set of algorithms, use it in the subsequent request.

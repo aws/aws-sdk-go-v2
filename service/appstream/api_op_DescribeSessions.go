@@ -67,7 +67,7 @@ type DescribeSessionsOutput struct {
 	NextToken *string
 
 	// Information about the streaming sessions.
-	Sessions []*types.Session
+	Sessions []types.Session
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

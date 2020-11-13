@@ -41,7 +41,7 @@ type UpdateDocumentationPartInput struct {
 
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
-	PatchOperations []*types.PatchOperation
+	PatchOperations []types.PatchOperation
 }
 
 // A documentation part for a targeted API entity. A documentation part consists of

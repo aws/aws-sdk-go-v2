@@ -47,7 +47,7 @@ type GetLabelsInput struct {
 type GetLabelsOutput struct {
 
 	// An array of labels.
-	Labels []*types.Label
+	Labels []types.Label
 
 	// The next page token.
 	NextToken *string

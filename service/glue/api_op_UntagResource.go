@@ -36,7 +36,7 @@ type UntagResourceInput struct {
 	// Tags to remove from this resource.
 	//
 	// This member is required.
-	TagsToRemove []*string
+	TagsToRemove []string
 }
 
 type UntagResourceOutput struct {

@@ -38,7 +38,7 @@ type GetAccountSummaryOutput struct {
 
 	// A set of key–value pairs containing information about IAM entity usage and IAM
 	// quotas.
-	SummaryMap map[string]*int32
+	SummaryMap map[string]int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

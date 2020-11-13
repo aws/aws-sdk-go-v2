@@ -48,7 +48,7 @@ type DescribeWorldOutput struct {
 	GenerationJob *string
 
 	// A map that contains tag keys and tag values that are attached to the world.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The world template.
 	Template *string

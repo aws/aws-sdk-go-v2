@@ -3924,18 +3924,15 @@ func awsAwsquery_serializeDocumentAddHeaderAction(v *types.AddHeaderAction, valu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentAddressList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentAddressList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -4022,18 +4019,15 @@ func awsAwsquery_serializeDocumentBouncedRecipientInfo(v *types.BouncedRecipient
 	return nil
 }
 
-func awsAwsquery_serializeDocumentBouncedRecipientInfoList(v []*types.BouncedRecipientInfo, value query.Value) error {
+func awsAwsquery_serializeDocumentBouncedRecipientInfoList(v []types.BouncedRecipientInfo, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentBouncedRecipientInfo(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentBouncedRecipientInfo(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -4066,18 +4060,15 @@ func awsAwsquery_serializeDocumentBulkEmailDestination(v *types.BulkEmailDestina
 	return nil
 }
 
-func awsAwsquery_serializeDocumentBulkEmailDestinationList(v []*types.BulkEmailDestination, value query.Value) error {
+func awsAwsquery_serializeDocumentBulkEmailDestinationList(v []types.BulkEmailDestination, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentBulkEmailDestination(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentBulkEmailDestination(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -4120,18 +4111,15 @@ func awsAwsquery_serializeDocumentCloudWatchDimensionConfiguration(v *types.Clou
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCloudWatchDimensionConfigurations(v []*types.CloudWatchDimensionConfiguration, value query.Value) error {
+func awsAwsquery_serializeDocumentCloudWatchDimensionConfigurations(v []types.CloudWatchDimensionConfiguration, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentCloudWatchDimensionConfiguration(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentCloudWatchDimensionConfiguration(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -4231,9 +4219,9 @@ func awsAwsquery_serializeDocumentEventDestination(v *types.EventDestination, va
 		}
 	}
 
-	if v.Enabled != nil {
+	if v.Enabled {
 		objectKey := object.Key("Enabled")
-		objectKey.Boolean(*v.Enabled)
+		objectKey.Boolean(v.Enabled)
 	}
 
 	if v.KinesisFirehoseDestination != nil {
@@ -4295,36 +4283,30 @@ func awsAwsquery_serializeDocumentExtensionField(v *types.ExtensionField, value 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentExtensionFieldList(v []*types.ExtensionField, value query.Value) error {
+func awsAwsquery_serializeDocumentExtensionFieldList(v []types.ExtensionField, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentExtensionField(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentExtensionField(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentIdentityList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentIdentityList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -4430,36 +4412,30 @@ func awsAwsquery_serializeDocumentMessageTag(v *types.MessageTag, value query.Va
 	return nil
 }
 
-func awsAwsquery_serializeDocumentMessageTagList(v []*types.MessageTag, value query.Value) error {
+func awsAwsquery_serializeDocumentMessageTagList(v []types.MessageTag, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentMessageTag(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentMessageTag(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsquery_serializeDocumentPolicyNameList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentPolicyNameList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -4532,18 +4508,15 @@ func awsAwsquery_serializeDocumentReceiptAction(v *types.ReceiptAction, value qu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentReceiptActionsList(v []*types.ReceiptAction, value query.Value) error {
+func awsAwsquery_serializeDocumentReceiptActionsList(v []types.ReceiptAction, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		if err := awsAwsquery_serializeDocumentReceiptAction(v[i], av); err != nil {
+		if err := awsAwsquery_serializeDocumentReceiptAction(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -4597,9 +4570,9 @@ func awsAwsquery_serializeDocumentReceiptRule(v *types.ReceiptRule, value query.
 		}
 	}
 
-	if v.Enabled != nil {
+	if v.Enabled {
 		objectKey := object.Key("Enabled")
-		objectKey.Boolean(*v.Enabled)
+		objectKey.Boolean(v.Enabled)
 	}
 
 	if v.Name != nil {
@@ -4614,9 +4587,9 @@ func awsAwsquery_serializeDocumentReceiptRule(v *types.ReceiptRule, value query.
 		}
 	}
 
-	if v.ScanEnabled != nil {
+	if v.ScanEnabled {
 		objectKey := object.Key("ScanEnabled")
-		objectKey.Boolean(*v.ScanEnabled)
+		objectKey.Boolean(v.ScanEnabled)
 	}
 
 	if len(v.TlsPolicy) > 0 {
@@ -4627,18 +4600,15 @@ func awsAwsquery_serializeDocumentReceiptRule(v *types.ReceiptRule, value query.
 	return nil
 }
 
-func awsAwsquery_serializeDocumentReceiptRuleNamesList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentReceiptRuleNamesList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -4687,18 +4657,15 @@ func awsAwsquery_serializeDocumentRecipientDsnFields(v *types.RecipientDsnFields
 	return nil
 }
 
-func awsAwsquery_serializeDocumentRecipientsList(v []*string, value query.Value) error {
+func awsAwsquery_serializeDocumentRecipientsList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
 	array := value.Array("member")
 
 	for i := range v {
-		if vv := v[i]; vv == nil {
-			continue
-		}
 		av := array.Value()
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
@@ -5823,9 +5790,9 @@ func awsAwsquery_serializeOpDocumentSetIdentityDkimEnabledInput(v *SetIdentityDk
 	object := value.Object()
 	_ = object
 
-	if v.DkimEnabled != nil {
+	if v.DkimEnabled {
 		objectKey := object.Key("DkimEnabled")
-		objectKey.Boolean(*v.DkimEnabled)
+		objectKey.Boolean(v.DkimEnabled)
 	}
 
 	if v.Identity != nil {
@@ -5840,9 +5807,9 @@ func awsAwsquery_serializeOpDocumentSetIdentityFeedbackForwardingEnabledInput(v 
 	object := value.Object()
 	_ = object
 
-	if v.ForwardingEnabled != nil {
+	if v.ForwardingEnabled {
 		objectKey := object.Key("ForwardingEnabled")
-		objectKey.Boolean(*v.ForwardingEnabled)
+		objectKey.Boolean(v.ForwardingEnabled)
 	}
 
 	if v.Identity != nil {
@@ -5857,9 +5824,9 @@ func awsAwsquery_serializeOpDocumentSetIdentityHeadersInNotificationsEnabledInpu
 	object := value.Object()
 	_ = object
 
-	if v.Enabled != nil {
+	if v.Enabled {
 		objectKey := object.Key("Enabled")
-		objectKey.Boolean(*v.Enabled)
+		objectKey.Boolean(v.Enabled)
 	}
 
 	if v.Identity != nil {
@@ -5962,9 +5929,9 @@ func awsAwsquery_serializeOpDocumentUpdateAccountSendingEnabledInput(v *UpdateAc
 	object := value.Object()
 	_ = object
 
-	if v.Enabled != nil {
+	if v.Enabled {
 		objectKey := object.Key("Enabled")
-		objectKey.Boolean(*v.Enabled)
+		objectKey.Boolean(v.Enabled)
 	}
 
 	return nil
@@ -5998,9 +5965,9 @@ func awsAwsquery_serializeOpDocumentUpdateConfigurationSetReputationMetricsEnabl
 		objectKey.String(*v.ConfigurationSetName)
 	}
 
-	if v.Enabled != nil {
+	if v.Enabled {
 		objectKey := object.Key("Enabled")
-		objectKey.Boolean(*v.Enabled)
+		objectKey.Boolean(v.Enabled)
 	}
 
 	return nil
@@ -6015,9 +5982,9 @@ func awsAwsquery_serializeOpDocumentUpdateConfigurationSetSendingEnabledInput(v 
 		objectKey.String(*v.ConfigurationSetName)
 	}
 
-	if v.Enabled != nil {
+	if v.Enabled {
 		objectKey := object.Key("Enabled")
-		objectKey.Boolean(*v.Enabled)
+		objectKey.Boolean(v.Enabled)
 	}
 
 	return nil

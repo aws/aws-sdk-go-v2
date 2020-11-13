@@ -46,7 +46,7 @@ type DescribeStackProvisioningParametersOutput struct {
 	AgentInstallerUrl *string
 
 	// An embedded object that contains the provisioning parameters.
-	Parameters map[string]*string
+	Parameters map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

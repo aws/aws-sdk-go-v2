@@ -45,7 +45,7 @@ type ListGroundStationsInput struct {
 type ListGroundStationsOutput struct {
 
 	// List of ground stations.
-	GroundStationList []*types.GroundStationData
+	GroundStationList []types.GroundStationData
 
 	// Next token that can be supplied in the next call to get the next page of ground
 	// stations.

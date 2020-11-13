@@ -114,7 +114,7 @@ type CreateDBInstanceInput struct {
 
 	// A list of DB security groups to associate with this DB instance. Default: The
 	// default DB security group for the database engine.
-	DBSecurityGroups []*string
+	DBSecurityGroups []string
 
 	// A DB subnet group to associate with this DB instance. If there is no DB subnet
 	// group, then it is a non-VPC DB instance.
@@ -136,7 +136,7 @@ type CreateDBInstanceInput struct {
 	DomainIAMRoleName *string
 
 	// The list of log types that need to be enabled for exporting to CloudWatch Logs.
-	EnableCloudwatchLogsExports []*string
+	EnableCloudwatchLogsExports []string
 
 	// True to enable AWS Identity and Access Management (IAM) authentication for
 	// Neptune. Default: false
@@ -235,7 +235,7 @@ type CreateDBInstanceInput struct {
 	StorageType *string
 
 	// The tags to assign to the new instance.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// The ARN from the key store with which to associate the instance for TDE
 	// encryption.
@@ -251,7 +251,7 @@ type CreateDBInstanceInput struct {
 	// applicable. The associated list of EC2 VPC security groups is managed by the DB
 	// cluster. For more information, see CreateDBCluster. Default: The default EC2 VPC
 	// security group for the DB subnet group's VPC.
-	VpcSecurityGroupIds []*string
+	VpcSecurityGroupIds []string
 }
 
 type CreateDBInstanceOutput struct {

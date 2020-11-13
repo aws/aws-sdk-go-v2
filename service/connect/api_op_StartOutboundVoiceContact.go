@@ -65,7 +65,7 @@ type StartOutboundVoiceContactInput struct {
 	// other contact attributes. There can be up to 32,768 UTF-8 bytes across all
 	// key-value pairs per contact. Attribute keys can include only alphanumeric, dash,
 	// and underscore characters.
-	Attributes map[string]*string
+	Attributes map[string]string
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. The token is valid for 7 days after creation. If a contact is

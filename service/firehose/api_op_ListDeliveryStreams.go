@@ -63,7 +63,7 @@ type ListDeliveryStreamsOutput struct {
 	// The names of the delivery streams.
 	//
 	// This member is required.
-	DeliveryStreamNames []*string
+	DeliveryStreamNames []string
 
 	// Indicates whether there are more delivery streams available to list.
 	//

@@ -41,7 +41,7 @@ type RenewDomainInput struct {
 	// match the current expiration date for the domain.
 	//
 	// This member is required.
-	CurrentExpiryYear *int32
+	CurrentExpiryYear int32
 
 	// The name of the domain that you want to renew.
 	//

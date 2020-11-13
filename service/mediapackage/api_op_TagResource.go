@@ -28,7 +28,7 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 type TagResourceInput struct {
 	ResourceArn *string
 
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type TagResourceOutput struct {

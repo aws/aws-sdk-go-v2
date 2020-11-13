@@ -39,10 +39,10 @@ type UpdateLicenseSpecificationsForResourceInput struct {
 	ResourceArn *string
 
 	// ARNs of the license configurations to add.
-	AddLicenseSpecifications []*types.LicenseSpecification
+	AddLicenseSpecifications []types.LicenseSpecification
 
 	// ARNs of the license configurations to remove.
-	RemoveLicenseSpecifications []*types.LicenseSpecification
+	RemoveLicenseSpecifications []types.LicenseSpecification
 }
 
 type UpdateLicenseSpecificationsForResourceOutput struct {

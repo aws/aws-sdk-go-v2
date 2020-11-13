@@ -73,7 +73,7 @@ type CreateDBClusterInput struct {
 
 	// A list of Amazon EC2 Availability Zones that instances in the cluster can be
 	// created in.
-	AvailabilityZones []*string
+	AvailabilityZones []string
 
 	// The number of days for which automated backups are retained. You must specify a
 	// minimum value of 1. Default: 1 Constraints:
@@ -99,7 +99,7 @@ type CreateDBClusterInput struct {
 	// (https://docs.aws.amazon.com/documentdb/latest/developerguide/event-auditing.html)
 	// and  Profiling Amazon DocumentDB Operations
 	// (https://docs.aws.amazon.com/documentdb/latest/developerguide/profiling.html).
-	EnableCloudwatchLogsExports []*string
+	EnableCloudwatchLogsExports []string
 
 	// The version number of the database engine to use. The --engine-version will
 	// default to the latest major engine version. For production workloads, we
@@ -155,10 +155,10 @@ type CreateDBClusterInput struct {
 	StorageEncrypted *bool
 
 	// The tags to be assigned to the cluster.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// A list of EC2 VPC security groups to associate with this cluster.
-	VpcSecurityGroupIds []*string
+	VpcSecurityGroupIds []string
 }
 
 type CreateDBClusterOutput struct {

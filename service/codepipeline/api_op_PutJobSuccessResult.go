@@ -55,7 +55,7 @@ type PutJobSuccessResultInput struct {
 	// Key-value pairs produced as output by a job worker that can be made available to
 	// a downstream action configuration. outputVariables can be included only when
 	// there is no continuation token on the request.
-	OutputVariables map[string]*string
+	OutputVariables map[string]string
 }
 
 type PutJobSuccessResultOutput struct {

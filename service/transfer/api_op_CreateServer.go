@@ -133,7 +133,7 @@ type CreateServerInput struct {
 	SecurityPolicyName *string
 
 	// Key-value pairs that can be used to group and search for servers.
-	Tags []*types.Tag
+	Tags []types.Tag
 }
 
 type CreateServerOutput struct {

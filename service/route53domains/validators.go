@@ -597,13 +597,13 @@ func validateExtraParam(v *types.ExtraParam) error {
 	}
 }
 
-func validateExtraParamList(v []*types.ExtraParam) error {
+func validateExtraParamList(v []types.ExtraParam) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ExtraParamList"}
 	for i := range v {
-		if err := validateExtraParam(v[i]); err != nil {
+		if err := validateExtraParam(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -629,13 +629,13 @@ func validateNameserver(v *types.Nameserver) error {
 	}
 }
 
-func validateNameserverList(v []*types.Nameserver) error {
+func validateNameserverList(v []types.Nameserver) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "NameserverList"}
 	for i := range v {
-		if err := validateNameserver(v[i]); err != nil {
+		if err := validateNameserver(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -810,9 +810,6 @@ func validateOpGetDomainSuggestionsInput(v *GetDomainSuggestionsInput) error {
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
-	if v.SuggestionCount == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SuggestionCount"))
-	}
 	if v.OnlyAvailable == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OnlyAvailable"))
 	}
@@ -914,9 +911,6 @@ func validateOpRenewDomainInput(v *RenewDomainInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "RenewDomainInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
-	}
-	if v.CurrentExpiryYear == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CurrentExpiryYear"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

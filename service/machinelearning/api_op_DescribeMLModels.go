@@ -127,7 +127,7 @@ type DescribeMLModelsOutput struct {
 	NextToken *string
 
 	// A list of MLModel that meet the search criteria.
-	Results []*types.MLModel
+	Results []types.MLModel
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

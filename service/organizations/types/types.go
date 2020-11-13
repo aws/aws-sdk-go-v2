@@ -249,13 +249,13 @@ type Handshake struct {
 	Id *string
 
 	// Information about the two accounts that are participating in the handshake.
-	Parties []*HandshakeParty
+	Parties []HandshakeParty
 
 	// The date and time that the handshake request was made.
 	RequestedTimestamp *time.Time
 
 	// Additional information that is needed to process the handshake.
-	Resources []*HandshakeResource
+	Resources []HandshakeResource
 
 	// The current state of the handshake. Use the state to trace the flow of the
 	// handshake through the process from its creation to its acceptance. The meaning
@@ -320,7 +320,7 @@ type HandshakeParty struct {
 type HandshakeResource struct {
 
 	// When needed, contains an additional array of HandshakeResource objects.
-	Resources []*HandshakeResource
+	Resources []HandshakeResource
 
 	// The type of information being passed, specifying how the value is to be
 	// interpreted by the other party:
@@ -366,7 +366,7 @@ type Organization struct {
 	// about the policies in your organization. To determine the policies that are
 	// enabled and available for use in your organization, use the ListRoots operation
 	// instead.
-	AvailablePolicyTypes []*PolicyTypeSummary
+	AvailablePolicyTypes []PolicyTypeSummary
 
 	// Specifies the functionality that currently is available to the organization. If
 	// set to "ALL", then all features are enabled and policies can be applied to
@@ -469,7 +469,7 @@ type PolicySummary struct {
 	// A boolean value that indicates whether the specified policy is an AWS managed
 	// policy. If true, then you can attach the policy to roots, OUs, or accounts, but
 	// you cannot edit it.
-	AwsManaged *bool
+	AwsManaged bool
 
 	// The description of the policy.
 	Description *string
@@ -562,7 +562,7 @@ type Root struct {
 	// them at the root level by using EnablePolicyType and DisablePolicyType. Use
 	// DescribeOrganization to see the availability of the policy types in that
 	// organization.
-	PolicyTypes []*PolicyTypeSummary
+	PolicyTypes []PolicyTypeSummary
 }
 
 // A custom key-value pair associated with a resource within your organization. You

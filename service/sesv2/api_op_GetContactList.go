@@ -52,11 +52,11 @@ type GetContactListOutput struct {
 	LastUpdatedTimestamp *time.Time
 
 	// The tags associated with a contact list.
-	Tags []*types.Tag
+	Tags []types.Tag
 
 	// An interest group, theme, or label within a list. A contact list can have
 	// multiple topics.
-	Topics []*types.Topic
+	Topics []types.Topic
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

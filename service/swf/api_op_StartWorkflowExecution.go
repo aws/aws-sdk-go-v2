@@ -148,7 +148,7 @@ type StartWorkflowExecutionInput struct {
 	// maximum of 5 tags. You can list workflow executions with a specific tag by
 	// calling ListOpenWorkflowExecutions or ListClosedWorkflowExecutions and
 	// specifying a TagFilter.
-	TagList []*string
+	TagList []string
 
 	// The task list to use for the decision tasks generated for this workflow
 	// execution. This overrides the defaultTaskList specified when registering the

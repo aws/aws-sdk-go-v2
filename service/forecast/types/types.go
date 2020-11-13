@@ -18,7 +18,7 @@ type CategoricalParameterRange struct {
 	// A list of the tunable categories for the hyperparameter.
 	//
 	// This member is required.
-	Values []*string
+	Values []string
 }
 
 // Specifies a continuous hyperparameter and it's range of tunable values. This
@@ -226,7 +226,7 @@ type EvaluationResult struct {
 	// The array of test windows used for evaluating the algorithm. The
 	// NumberOfBacktestWindows from the EvaluationParameters object determines the
 	// number of windows in the array.
-	TestWindows []*WindowSummary
+	TestWindows []WindowSummary
 }
 
 // Provides featurization (transformation) information for a dataset field. This
@@ -258,7 +258,7 @@ type Featurization struct {
 
 	// An array of one FeaturizationMethod object that specifies the feature
 	// transformation method.
-	FeaturizationPipeline []*FeaturizationMethod
+	FeaturizationPipeline []FeaturizationMethod
 }
 
 // In a CreatePredictor operation, the specified algorithm trains a model using the
@@ -287,7 +287,7 @@ type FeaturizationConfig struct {
 
 	// An array of featurization (transformation) information for the fields of a
 	// dataset.
-	Featurizations []*Featurization
+	Featurizations []Featurization
 
 	// An array of dimension (field) names that specify how to group the generated
 	// forecast. For example, suppose that you are generating a forecast for item sales
@@ -297,7 +297,7 @@ type FeaturizationConfig struct {
 	// dataset don't need to be specified in the CreatePredictor request. All forecast
 	// dimensions specified in the RELATED_TIME_SERIES dataset must be specified in the
 	// CreatePredictor request.
-	ForecastDimensions []*string
+	ForecastDimensions []string
 }
 
 // Provides information about the method that featurizes (transforms) a dataset
@@ -345,7 +345,7 @@ type FeaturizationMethod struct {
 	// median, mean, min, max
 	//
 	// * futurefill: zero, value, median, mean, min, max
-	FeaturizationMethodParameters map[string]*string
+	FeaturizationMethodParameters map[string]string
 }
 
 // Describes a filter for choosing a subset of objects. Each filter consists of a
@@ -483,7 +483,7 @@ type InputDataConfig struct {
 
 	// An array of supplementary features. The only supported feature is a holiday
 	// calendar.
-	SupplementaryFeatures []*SupplementaryFeature
+	SupplementaryFeatures []SupplementaryFeature
 }
 
 // Specifies an integer hyperparameter and it's range of tunable values. This
@@ -530,7 +530,7 @@ type Metrics struct {
 	// An array of weighted quantile losses. Quantiles divide a probability
 	// distribution into regions of equal probability. The distribution in this case is
 	// the loss function.
-	WeightedQuantileLosses []*WeightedQuantileLoss
+	WeightedQuantileLosses []WeightedQuantileLoss
 }
 
 // Specifies the categorical, continuous, and integer hyperparameters, and their
@@ -540,13 +540,13 @@ type Metrics struct {
 type ParameterRanges struct {
 
 	// Specifies the tunable range for each categorical hyperparameter.
-	CategoricalParameterRanges []*CategoricalParameterRange
+	CategoricalParameterRanges []CategoricalParameterRange
 
 	// Specifies the tunable range for each continuous hyperparameter.
-	ContinuousParameterRanges []*ContinuousParameterRange
+	ContinuousParameterRanges []ContinuousParameterRange
 
 	// Specifies the tunable range for each integer hyperparameter.
-	IntegerParameterRanges []*IntegerParameterRange
+	IntegerParameterRanges []IntegerParameterRange
 }
 
 // The algorithm used to perform a backtest and the status of those tests.
@@ -558,7 +558,7 @@ type PredictorExecution struct {
 	// An array of test windows used to evaluate the algorithm. The
 	// NumberOfBacktestWindows from the object determines the number of windows in the
 	// array.
-	TestWindows []*TestWindowSummary
+	TestWindows []TestWindowSummary
 }
 
 // Contains details on the backtests performed to evaluate the accuracy of the
@@ -570,7 +570,7 @@ type PredictorExecutionDetails struct {
 	// An array of the backtests performed to evaluate the accuracy of the predictor
 	// against a particular algorithm. The NumberOfBacktestWindows from the object
 	// determines the number of windows in the array.
-	PredictorExecutions []*PredictorExecution
+	PredictorExecutions []PredictorExecution
 }
 
 // Provides a summary of the predictor properties that are used in the
@@ -649,7 +649,7 @@ type S3Config struct {
 type Schema struct {
 
 	// An array of attributes specifying the name and type of each field in a dataset.
-	Attributes []*SchemaAttribute
+	Attributes []SchemaAttribute
 }
 
 // An attribute of a schema, which defines a dataset field. A schema attribute is

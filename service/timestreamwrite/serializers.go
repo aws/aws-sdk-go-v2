@@ -718,17 +718,13 @@ func awsAwsjson10_serializeDocumentDimension(v *types.Dimension, value smithyjso
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentDimensions(v []*types.Dimension, value smithyjson.Value) error {
+func awsAwsjson10_serializeDocumentDimensions(v []types.Dimension, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson10_serializeDocumentDimension(v[i], av); err != nil {
+		if err := awsAwsjson10_serializeDocumentDimension(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -774,17 +770,13 @@ func awsAwsjson10_serializeDocumentRecord(v *types.Record, value smithyjson.Valu
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentRecords(v []*types.Record, value smithyjson.Value) error {
+func awsAwsjson10_serializeDocumentRecords(v []types.Record, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson10_serializeDocumentRecord(v[i], av); err != nil {
+		if err := awsAwsjson10_serializeDocumentRecord(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -795,14 +787,14 @@ func awsAwsjson10_serializeDocumentRetentionProperties(v *types.RetentionPropert
 	object := value.Object()
 	defer object.Close()
 
-	if v.MagneticStoreRetentionPeriodInDays != nil {
+	if v.MagneticStoreRetentionPeriodInDays != 0 {
 		ok := object.Key("MagneticStoreRetentionPeriodInDays")
-		ok.Long(*v.MagneticStoreRetentionPeriodInDays)
+		ok.Long(v.MagneticStoreRetentionPeriodInDays)
 	}
 
-	if v.MemoryStoreRetentionPeriodInHours != nil {
+	if v.MemoryStoreRetentionPeriodInHours != 0 {
 		ok := object.Key("MemoryStoreRetentionPeriodInHours")
-		ok.Long(*v.MemoryStoreRetentionPeriodInHours)
+		ok.Long(v.MemoryStoreRetentionPeriodInHours)
 	}
 
 	return nil
@@ -825,32 +817,24 @@ func awsAwsjson10_serializeDocumentTag(v *types.Tag, value smithyjson.Value) err
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentTagKeyList(v []*string, value smithyjson.Value) error {
+func awsAwsjson10_serializeDocumentTagKeyList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentTagList(v []*types.Tag, value smithyjson.Value) error {
+func awsAwsjson10_serializeDocumentTagList(v []types.Tag, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson10_serializeDocumentTag(v[i], av); err != nil {
+		if err := awsAwsjson10_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
 	}

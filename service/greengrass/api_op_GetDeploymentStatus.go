@@ -50,7 +50,7 @@ type GetDeploymentStatusOutput struct {
 	DeploymentType types.DeploymentType
 
 	// Error details
-	ErrorDetails []*types.ErrorDetail
+	ErrorDetails []types.ErrorDetail
 
 	// Error message
 	ErrorMessage *string

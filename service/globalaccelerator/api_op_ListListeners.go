@@ -48,7 +48,7 @@ type ListListenersInput struct {
 type ListListenersOutput struct {
 
 	// The list of listeners for an accelerator.
-	Listeners []*types.Listener
+	Listeners []types.Listener
 
 	// The token for the next set of results. You receive this token from a previous
 	// call.

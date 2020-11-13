@@ -1168,13 +1168,13 @@ func validateGrpcRouteMetadata(v *types.GrpcRouteMetadata) error {
 	}
 }
 
-func validateGrpcRouteMetadataList(v []*types.GrpcRouteMetadata) error {
+func validateGrpcRouteMetadataList(v []types.GrpcRouteMetadata) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GrpcRouteMetadataList"}
 	for i := range v {
-		if err := validateGrpcRouteMetadata(v[i]); err != nil {
+		if err := validateGrpcRouteMetadata(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1198,12 +1198,6 @@ func validateHealthCheckPolicy(v *types.HealthCheckPolicy) error {
 	}
 	if len(v.Protocol) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
-	}
-	if v.HealthyThreshold == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("HealthyThreshold"))
-	}
-	if v.UnhealthyThreshold == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UnhealthyThreshold"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1355,13 +1349,13 @@ func validateHttpRouteHeader(v *types.HttpRouteHeader) error {
 	}
 }
 
-func validateHttpRouteHeaders(v []*types.HttpRouteHeader) error {
+func validateHttpRouteHeaders(v []types.HttpRouteHeader) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "HttpRouteHeaders"}
 	for i := range v {
-		if err := validateHttpRouteHeader(v[i]); err != nil {
+		if err := validateHttpRouteHeader(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1421,13 +1415,13 @@ func validateListener(v *types.Listener) error {
 	}
 }
 
-func validateListeners(v []*types.Listener) error {
+func validateListeners(v []types.Listener) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Listeners"}
 	for i := range v {
-		if err := validateListener(v[i]); err != nil {
+		if err := validateListener(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1478,9 +1472,6 @@ func validatePortMapping(v *types.PortMapping) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PortMapping"}
-	if v.Port == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Port"))
-	}
 	if len(v.Protocol) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
 	}
@@ -1523,13 +1514,13 @@ func validateRouteSpec(v *types.RouteSpec) error {
 	}
 }
 
-func validateTagList(v []*types.TagRef) error {
+func validateTagList(v []types.TagRef) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
-		if err := validateTagRef(v[i]); err != nil {
+		if err := validateTagRef(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1675,12 +1666,6 @@ func validateVirtualGatewayHealthCheckPolicy(v *types.VirtualGatewayHealthCheckP
 	if len(v.Protocol) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
 	}
-	if v.HealthyThreshold == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("HealthyThreshold"))
-	}
-	if v.UnhealthyThreshold == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UnhealthyThreshold"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1717,13 +1702,13 @@ func validateVirtualGatewayListener(v *types.VirtualGatewayListener) error {
 	}
 }
 
-func validateVirtualGatewayListeners(v []*types.VirtualGatewayListener) error {
+func validateVirtualGatewayListeners(v []types.VirtualGatewayListener) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VirtualGatewayListeners"}
 	for i := range v {
-		if err := validateVirtualGatewayListener(v[i]); err != nil {
+		if err := validateVirtualGatewayListener(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1757,9 +1742,6 @@ func validateVirtualGatewayPortMapping(v *types.VirtualGatewayPortMapping) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VirtualGatewayPortMapping"}
-	if v.Port == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Port"))
-	}
 	if len(v.Protocol) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
 	}
@@ -1850,13 +1832,13 @@ func validateVirtualRouterListener(v *types.VirtualRouterListener) error {
 	}
 }
 
-func validateVirtualRouterListeners(v []*types.VirtualRouterListener) error {
+func validateVirtualRouterListeners(v []types.VirtualRouterListener) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VirtualRouterListeners"}
 	for i := range v {
-		if err := validateVirtualRouterListener(v[i]); err != nil {
+		if err := validateVirtualRouterListener(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1892,9 +1874,6 @@ func validateWeightedTarget(v *types.WeightedTarget) error {
 	if v.VirtualNode == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VirtualNode"))
 	}
-	if v.Weight == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Weight"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1902,13 +1881,13 @@ func validateWeightedTarget(v *types.WeightedTarget) error {
 	}
 }
 
-func validateWeightedTargets(v []*types.WeightedTarget) error {
+func validateWeightedTargets(v []types.WeightedTarget) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "WeightedTargets"}
 	for i := range v {
-		if err := validateWeightedTarget(v[i]); err != nil {
+		if err := validateWeightedTarget(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

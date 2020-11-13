@@ -53,7 +53,7 @@ type GetSystemTemplateRevisionsOutput struct {
 
 	// An array of objects that contain summary data about the system template
 	// revisions.
-	Summaries []*types.SystemTemplateSummary
+	Summaries []types.SystemTemplateSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

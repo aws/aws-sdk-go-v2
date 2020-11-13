@@ -49,7 +49,7 @@ type ListAgentsInput struct {
 type ListAgentsOutput struct {
 
 	// A list of agents in your account.
-	Agents []*types.AgentListEntry
+	Agents []types.AgentListEntry
 
 	// An opaque string that indicates the position at which to begin returning the
 	// next list of agents.

@@ -41,7 +41,7 @@ type GetConnectorsInput struct {
 type GetConnectorsOutput struct {
 
 	// Information about the registered connectors.
-	ConnectorList []*types.Connector
+	ConnectorList []types.Connector
 
 	// The token required to retrieve the next set of results. This value is null when
 	// there are no more results to return.

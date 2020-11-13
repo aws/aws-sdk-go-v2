@@ -33,11 +33,11 @@ type ListTargetsInput struct {
 	// filters include target type, target address, and target status. A filter with
 	// the same name can appear more than once when used with OR statements. Filters
 	// with different names should be applied with AND statements.
-	Filters []*types.ListTargetsFilter
+	Filters []types.ListTargetsFilter
 
 	// A non-negative integer used to limit the number of returned results. The maximum
 	// number of results that can be returned is 100.
-	MaxResults *int32
+	MaxResults int32
 
 	// An enumeration token that, when provided in a request, returns the next batch of
 	// the results.
@@ -51,7 +51,7 @@ type ListTargetsOutput struct {
 	NextToken *string
 
 	// The list of notification rule targets.
-	Targets []*types.TargetSummary
+	Targets []types.TargetSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

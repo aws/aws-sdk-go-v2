@@ -51,7 +51,7 @@ type DescribeIndexOutput struct {
 	Description *string
 
 	// Configuration settings for any metadata applied to the documents in the index.
-	DocumentMetadataConfigurations []*types.DocumentMetadataConfiguration
+	DocumentMetadataConfigurations []types.DocumentMetadataConfiguration
 
 	// The Amazon Kendra edition used for the index. You decide the edition when you
 	// create the index.

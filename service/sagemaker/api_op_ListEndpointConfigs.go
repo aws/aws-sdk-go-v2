@@ -62,7 +62,7 @@ type ListEndpointConfigsOutput struct {
 	// An array of endpoint configurations.
 	//
 	// This member is required.
-	EndpointConfigs []*types.EndpointConfigSummary
+	EndpointConfigs []types.EndpointConfigSummary
 
 	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
 	// the next set of endpoint configurations, use it in the subsequent request

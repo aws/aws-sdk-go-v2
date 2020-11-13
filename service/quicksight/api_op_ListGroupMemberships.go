@@ -46,7 +46,7 @@ type ListGroupMembershipsInput struct {
 	Namespace *string
 
 	// The maximum number of results to return from this request.
-	MaxResults *int32
+	MaxResults int32
 
 	// A pagination token that can be used in a subsequent request.
 	NextToken *string
@@ -55,7 +55,7 @@ type ListGroupMembershipsInput struct {
 type ListGroupMembershipsOutput struct {
 
 	// The list of the members of the group.
-	GroupMemberList []*types.GroupMember
+	GroupMemberList []types.GroupMember
 
 	// A pagination token that can be used in a subsequent request.
 	NextToken *string
@@ -64,7 +64,7 @@ type ListGroupMembershipsOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

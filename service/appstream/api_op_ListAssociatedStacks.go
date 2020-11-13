@@ -41,7 +41,7 @@ type ListAssociatedStacksInput struct {
 type ListAssociatedStacksOutput struct {
 
 	// The name of the stack.
-	Names []*string
+	Names []string
 
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If there are no more pages, this value is null.

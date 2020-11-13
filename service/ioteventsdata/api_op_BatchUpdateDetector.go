@@ -33,14 +33,14 @@ type BatchUpdateDetectorInput struct {
 	// The list of detectors (instances) to update, along with the values to update.
 	//
 	// This member is required.
-	Detectors []*types.UpdateDetectorRequest
+	Detectors []types.UpdateDetectorRequest
 }
 
 type BatchUpdateDetectorOutput struct {
 
 	// A list of those detector updates that resulted in errors. (If an error is listed
 	// here, the specific update did not occur.)
-	BatchUpdateDetectorErrorEntries []*types.BatchUpdateDetectorErrorEntry
+	BatchUpdateDetectorErrorEntries []types.BatchUpdateDetectorErrorEntry
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

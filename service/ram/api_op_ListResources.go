@@ -46,10 +46,10 @@ type ListResourcesInput struct {
 	Principal *string
 
 	// The Amazon Resource Names (ARN) of the resources.
-	ResourceArns []*string
+	ResourceArns []string
 
 	// The Amazon Resource Names (ARN) of the resource shares.
-	ResourceShareArns []*string
+	ResourceShareArns []string
 
 	// The resource type. Valid values: codebuild:Project | codebuild:ReportGroup |
 	// ec2:CapacityReservation | ec2:DedicatedHost | ec2:Subnet |
@@ -67,7 +67,7 @@ type ListResourcesOutput struct {
 	NextToken *string
 
 	// Information about the resources.
-	Resources []*types.Resource
+	Resources []types.Resource
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

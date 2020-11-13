@@ -55,7 +55,7 @@ type ListObjectPoliciesInput struct {
 type ListObjectPoliciesOutput struct {
 
 	// A list of policy ObjectIdentifiers, that are attached to the object.
-	AttachedPolicyIds []*string
+	AttachedPolicyIds []string
 
 	// The pagination token.
 	NextToken *string

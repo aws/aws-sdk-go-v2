@@ -44,11 +44,11 @@ type CreateContactInput struct {
 	AttributesData *string
 
 	// The contact's preferences for being opted-in to or opted-out of topics.
-	TopicPreferences []*types.TopicPreference
+	TopicPreferences []types.TopicPreference
 
 	// A boolean value status noting if the contact is unsubscribed from all contact
 	// list topics.
-	UnsubscribeAll *bool
+	UnsubscribeAll bool
 }
 
 type CreateContactOutput struct {

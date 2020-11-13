@@ -55,7 +55,7 @@ type ListArtifactsInput struct {
 type ListArtifactsOutput struct {
 
 	// Information about the artifacts.
-	Artifacts []*types.Artifact
+	Artifacts []types.Artifact
 
 	// If the number of items that are returned is significantly large, this is an
 	// identifier that is also returned. It can be used in a subsequent call to this

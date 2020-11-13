@@ -71,7 +71,7 @@ type AuthenticateCognitoActionConfig struct {
 
 	// The query parameters (up to 10) to include in the redirect request to the
 	// authorization endpoint.
-	AuthenticationRequestExtraParams map[string]*string
+	AuthenticationRequestExtraParams map[string]string
 
 	// The behavior if the user is not authenticated. The following are possible
 	// values:
@@ -134,7 +134,7 @@ type AuthenticateOidcActionConfig struct {
 
 	// The query parameters (up to 10) to include in the redirect request to the
 	// authorization endpoint.
-	AuthenticationRequestExtraParams map[string]*string
+	AuthenticationRequestExtraParams map[string]string
 
 	// The OAuth 2.0 client secret. This parameter is required if you are creating a
 	// rule. If you are modifying a rule, you can omit this parameter if you set
@@ -178,7 +178,7 @@ type AvailabilityZone struct {
 	// you can specify one Elastic IP address per Availability Zone when you create an
 	// internal-facing load balancer. For internal load balancers, you can specify a
 	// private IP address from the IPv4 range of the subnet.
-	LoadBalancerAddresses []*LoadBalancerAddress
+	LoadBalancerAddresses []LoadBalancerAddress
 
 	// [Application Load Balancers on Outposts] The ID of the Outpost.
 	OutpostId *string
@@ -210,7 +210,7 @@ type Cipher struct {
 	Name *string
 
 	// The priority of the cipher.
-	Priority *int32
+	Priority int32
 }
 
 // Information about an action that returns a custom HTTP response.
@@ -237,7 +237,7 @@ type ForwardActionConfig struct {
 
 	// One or more target groups. For Network Load Balancers, you can specify a single
 	// target group.
-	TargetGroups []*TargetGroupTuple
+	TargetGroups []TargetGroupTuple
 }
 
 // Information about a host header condition.
@@ -248,7 +248,7 @@ type HostHeaderConditionConfig struct {
 	// * (matches 0 or more characters) and ? (matches exactly 1 character). If you
 	// specify multiple strings, the condition is satisfied if one of the strings
 	// matches the host name.
-	Values []*string
+	Values []string
 }
 
 // Information about an HTTP header condition. There is a set of standard HTTP
@@ -270,7 +270,7 @@ type HttpHeaderConditionConfig struct {
 	// If you specify multiple strings, the condition is satisfied if one of the
 	// strings matches the value of the HTTP header. To require that all of the strings
 	// are a match, create one condition per string.
-	Values []*string
+	Values []string
 }
 
 // Information about an HTTP method condition. HTTP defines a set of request
@@ -287,7 +287,7 @@ type HttpRequestMethodConditionConfig struct {
 	// of the strings matches the HTTP request method. We recommend that you route GET
 	// and HEAD requests in the same way, because the response to a HEAD request may be
 	// cached.
-	Values []*string
+	Values []string
 }
 
 // Information about an Elastic Load Balancing resource limit for your AWS account.
@@ -338,13 +338,13 @@ type Listener struct {
 
 	// [TLS listener] The name of the Application-Layer Protocol Negotiation (ALPN)
 	// policy.
-	AlpnPolicy []*string
+	AlpnPolicy []string
 
 	// [HTTPS or TLS listener] The default certificate for the listener.
-	Certificates []*Certificate
+	Certificates []Certificate
 
 	// The default actions for the listener.
-	DefaultActions []*Action
+	DefaultActions []Action
 
 	// The Amazon Resource Name (ARN) of the listener.
 	ListenerArn *string
@@ -367,7 +367,7 @@ type Listener struct {
 type LoadBalancer struct {
 
 	// The subnets for the load balancer.
-	AvailabilityZones []*AvailabilityZone
+	AvailabilityZones []AvailabilityZone
 
 	// The ID of the Amazon Route 53 hosted zone associated with the load balancer.
 	CanonicalHostedZoneId *string
@@ -404,7 +404,7 @@ type LoadBalancer struct {
 	Scheme LoadBalancerSchemeEnum
 
 	// The IDs of the security groups for the load balancer.
-	SecurityGroups []*string
+	SecurityGroups []string
 
 	// The state of the load balancer.
 	State *LoadBalancerState
@@ -524,7 +524,7 @@ type PathPatternConditionConfig struct {
 	// condition is satisfied if one of them matches the request URL. The path pattern
 	// is compared only to the path of the URL, not to its query string. To compare
 	// against the query string, use QueryStringConditionConfig.
-	Values []*string
+	Values []string
 }
 
 // Information about a query string condition. The query string component of a URI
@@ -541,7 +541,7 @@ type QueryStringConditionConfig struct {
 	// character in a query string, you must escape these characters in Values using a
 	// '\' character. If you specify multiple key/value pairs or values, the condition
 	// is satisfied if one of them is found in the query string.
-	Values []*QueryStringKeyValuePair
+	Values []QueryStringKeyValuePair
 }
 
 // Information about a key/value pair.
@@ -609,15 +609,15 @@ type Rule struct {
 	// The actions. Each rule must include exactly one of the following types of
 	// actions: forward, redirect, or fixed-response, and it must be the last action to
 	// be performed.
-	Actions []*Action
+	Actions []Action
 
 	// The conditions. Each rule can include zero or one of the following conditions:
 	// http-request-method, host-header, path-pattern, and source-ip, and zero or more
 	// of the following conditions: http-header and query-string.
-	Conditions []*RuleCondition
+	Conditions []RuleCondition
 
 	// Indicates whether this is the default rule.
-	IsDefault *bool
+	IsDefault bool
 
 	// The priority.
 	Priority *string
@@ -704,7 +704,7 @@ type RuleCondition struct {
 	//
 	// * ? (matches exactly 1
 	// character)
-	Values []*string
+	Values []string
 }
 
 // Information about the priorities for the rules for a listener.
@@ -729,20 +729,20 @@ type SourceIpConditionConfig struct {
 	// the CIDR blocks. This condition is not satisfied by the addresses in the
 	// X-Forwarded-For header. To search for addresses in the X-Forwarded-For header,
 	// use HttpHeaderConditionConfig.
-	Values []*string
+	Values []string
 }
 
 // Information about a policy used for SSL negotiation.
 type SslPolicy struct {
 
 	// The ciphers.
-	Ciphers []*Cipher
+	Ciphers []Cipher
 
 	// The name of the policy.
 	Name *string
 
 	// The protocols.
-	SslProtocols []*string
+	SslProtocols []string
 }
 
 // Information about a subnet mapping.
@@ -778,7 +778,7 @@ type TagDescription struct {
 	ResourceArn *string
 
 	// Information about the tags.
-	Tags []*Tag
+	Tags []Tag
 }
 
 // Information about a target.
@@ -838,7 +838,7 @@ type TargetGroup struct {
 
 	// The Amazon Resource Names (ARN) of the load balancers that route traffic to this
 	// target group.
-	LoadBalancerArns []*string
+	LoadBalancerArns []string
 
 	// The HTTP or gRPC codes to use when checking for a successful response from a
 	// target.

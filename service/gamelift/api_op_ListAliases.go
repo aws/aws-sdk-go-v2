@@ -77,7 +77,7 @@ type ListAliasesInput struct {
 type ListAliasesOutput struct {
 
 	// A collection of alias resources that match the request parameters.
-	Aliases []*types.Alias
+	Aliases []types.Alias
 
 	// A token that indicates where to resume retrieving results on the next call to
 	// this operation. If no token is returned, these results represent the end of the

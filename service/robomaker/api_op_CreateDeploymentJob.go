@@ -46,7 +46,7 @@ type CreateDeploymentJobInput struct {
 	// The deployment application configuration.
 	//
 	// This member is required.
-	DeploymentApplicationConfigs []*types.DeploymentApplicationConfig
+	DeploymentApplicationConfigs []types.DeploymentApplicationConfig
 
 	// The Amazon Resource Name (ARN) of the fleet to deploy.
 	//
@@ -58,7 +58,7 @@ type CreateDeploymentJobInput struct {
 
 	// A map that contains tag keys and tag values that are attached to the deployment
 	// job.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 type CreateDeploymentJobOutput struct {
@@ -70,7 +70,7 @@ type CreateDeploymentJobOutput struct {
 	CreatedAt *time.Time
 
 	// The deployment application configuration.
-	DeploymentApplicationConfigs []*types.DeploymentApplicationConfig
+	DeploymentApplicationConfigs []types.DeploymentApplicationConfig
 
 	// The deployment configuration.
 	DeploymentConfig *types.DeploymentConfig
@@ -108,7 +108,7 @@ type CreateDeploymentJobOutput struct {
 	Status types.DeploymentStatus
 
 	// The list of all tags added to the deployment job.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

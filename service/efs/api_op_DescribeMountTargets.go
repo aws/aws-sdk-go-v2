@@ -70,7 +70,7 @@ type DescribeMountTargetsOutput struct {
 
 	// Returns the file system's mount targets as an array of MountTargetDescription
 	// objects.
-	MountTargets []*types.MountTargetDescription
+	MountTargets []types.MountTargetDescription
 
 	// If a value is present, there are more mount targets to return. In a subsequent
 	// request, you can provide Marker in your request with this value to retrieve the

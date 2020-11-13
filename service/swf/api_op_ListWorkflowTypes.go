@@ -61,7 +61,7 @@ type ListWorkflowTypesInput struct {
 
 	// The maximum number of results that are returned per call. Use nextPageToken to
 	// obtain further pages of results.
-	MaximumPageSize *int32
+	MaximumPageSize int32
 
 	// If specified, lists the workflow type with this name.
 	Name *string
@@ -77,7 +77,7 @@ type ListWorkflowTypesInput struct {
 
 	// When set to true, returns the results in reverse order. By default the results
 	// are returned in ascending alphabetical order of the name of the workflow types.
-	ReverseOrder *bool
+	ReverseOrder bool
 }
 
 // Contains a paginated list of information structures about workflow types.
@@ -86,7 +86,7 @@ type ListWorkflowTypesOutput struct {
 	// The list of workflow type information.
 	//
 	// This member is required.
-	TypeInfos []*types.WorkflowTypeInfo
+	TypeInfos []types.WorkflowTypeInfo
 
 	// If a NextPageToken was returned by a previous call, there are more results
 	// available. To retrieve the next page of results, make the call again using the

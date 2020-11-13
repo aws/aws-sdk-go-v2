@@ -34,7 +34,7 @@ type PurchaseOfferingInput struct {
 	// Number of resources
 	//
 	// This member is required.
-	Count *int32
+	Count int32
 
 	// Offering to purchase, e.g. '87654321'
 	//
@@ -54,7 +54,7 @@ type PurchaseOfferingInput struct {
 	Start *string
 
 	// A collection of key-value pairs
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // Placeholder documentation for PurchaseOfferingResponse

@@ -55,14 +55,14 @@ type GetApiKeysInput struct {
 type GetApiKeysOutput struct {
 
 	// The current page of elements from this collection.
-	Items []*types.ApiKey
+	Items []types.ApiKey
 
 	// The current pagination position in the paged result set.
 	Position *string
 
 	// A list of warning messages logged during the import of API keys when the
 	// failOnWarnings option is set to true.
-	Warnings []*string
+	Warnings []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

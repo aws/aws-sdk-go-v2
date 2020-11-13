@@ -54,7 +54,7 @@ type ListConnectorEntitiesOutput struct {
 	// belonging to that group.
 	//
 	// This member is required.
-	ConnectorEntityMap map[string][]*types.ConnectorEntity
+	ConnectorEntityMap map[string][]types.ConnectorEntity
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

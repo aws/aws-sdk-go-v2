@@ -59,7 +59,7 @@ type UpdateTemplateAliasOutput struct {
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// The template alias.
 	TemplateAlias *types.TemplateAlias

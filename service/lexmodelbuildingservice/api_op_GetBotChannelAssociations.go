@@ -62,7 +62,7 @@ type GetBotChannelAssociationsOutput struct {
 
 	// An array of objects, one for each association, that provides information about
 	// the Amazon Lex bot and its association with the channel.
-	BotChannelAssociations []*types.BotChannelAssociation
+	BotChannelAssociations []types.BotChannelAssociation
 
 	// A pagination token that fetches the next page of associations. If the response
 	// to this call is truncated, Amazon Lex returns a pagination token in the

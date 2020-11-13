@@ -66,7 +66,7 @@ type DescribeBackupVaultOutput struct {
 	EncryptionKeyArn *string
 
 	// The number of recovery points that are stored in a backup vault.
-	NumberOfRecoveryPoints *int64
+	NumberOfRecoveryPoints int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

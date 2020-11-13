@@ -41,10 +41,10 @@ type UpdateDashboardPermissionsInput struct {
 	DashboardId *string
 
 	// The permissions that you want to grant on this resource.
-	GrantPermissions []*types.ResourcePermission
+	GrantPermissions []types.ResourcePermission
 
 	// The permissions that you want to revoke from this resource.
-	RevokePermissions []*types.ResourcePermission
+	RevokePermissions []types.ResourcePermission
 }
 
 type UpdateDashboardPermissionsOutput struct {
@@ -56,13 +56,13 @@ type UpdateDashboardPermissionsOutput struct {
 	DashboardId *string
 
 	// Information about the permissions on the dashboard.
-	Permissions []*types.ResourcePermission
+	Permissions []types.ResourcePermission
 
 	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.
-	Status *int32
+	Status int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

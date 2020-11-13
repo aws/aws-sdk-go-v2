@@ -55,7 +55,7 @@ type GetRelationalDatabaseEventsOutput struct {
 	NextPageToken *string
 
 	// An object describing the result of your get relational database events request.
-	RelationalDatabaseEvents []*types.RelationalDatabaseEvent
+	RelationalDatabaseEvents []types.RelationalDatabaseEvent
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

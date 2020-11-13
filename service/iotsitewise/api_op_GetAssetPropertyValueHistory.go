@@ -82,7 +82,7 @@ type GetAssetPropertyValueHistoryOutput struct {
 	// The asset property's value history.
 	//
 	// This member is required.
-	AssetPropertyValueHistory []*types.AssetPropertyValue
+	AssetPropertyValueHistory []types.AssetPropertyValue
 
 	// The token for the next set of results, or null if there are no additional
 	// results.

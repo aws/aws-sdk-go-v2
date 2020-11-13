@@ -45,7 +45,7 @@ type ListActionTypesOutput struct {
 	// Provides details of the action types.
 	//
 	// This member is required.
-	ActionTypes []*types.ActionType
+	ActionTypes []types.ActionType
 
 	// If the amount of returned information is significantly large, an identifier is
 	// also returned. It can be used in a subsequent list action types call to return

@@ -47,14 +47,14 @@ type AnalyzedResource struct {
 
 	// The actions that an external principal is granted permission to use by the
 	// policy that generated the finding.
-	Actions []*string
+	Actions []string
 
 	// An error message.
 	Error *string
 
 	// Indicates how the access that generated the finding is granted. This is
 	// populated for Amazon S3 bucket findings.
-	SharedVia []*string
+	SharedVia []string
 
 	// The current status of the finding generated from the analyzed resource.
 	Status FindingStatus
@@ -127,7 +127,7 @@ type AnalyzerSummary struct {
 	StatusReason *StatusReason
 
 	// The tags added to the analyzer.
-	Tags map[string]*string
+	Tags map[string]string
 }
 
 // Contains information about an archive rule.
@@ -141,7 +141,7 @@ type ArchiveRuleSummary struct {
 	// A filter used to define the archive rule.
 	//
 	// This member is required.
-	Filter map[string]*Criterion
+	Filter map[string]Criterion
 
 	// The name of the archive rule.
 	//
@@ -158,16 +158,16 @@ type ArchiveRuleSummary struct {
 type Criterion struct {
 
 	// A "contains" operator to match for the filter used to create the rule.
-	Contains []*string
+	Contains []string
 
 	// An "equals" operator to match for the filter used to create the rule.
-	Eq []*string
+	Eq []string
 
 	// An "exists" operator to match for the filter used to create the rule.
 	Exists *bool
 
 	// A "not equals" operator to match for the filter used to create the rule.
-	Neq []*string
+	Neq []string
 }
 
 // Contains information about a finding.
@@ -181,7 +181,7 @@ type Finding struct {
 	// The condition in the analyzed policy statement that resulted in a finding.
 	//
 	// This member is required.
-	Condition map[string]*string
+	Condition map[string]string
 
 	// The time at which the finding was generated.
 	//
@@ -215,7 +215,7 @@ type Finding struct {
 
 	// The action in the analyzed policy statement that an external principal has
 	// permission to use.
-	Action []*string
+	Action []string
 
 	// An error.
 	Error *string
@@ -225,14 +225,14 @@ type Finding struct {
 	IsPublic *bool
 
 	// The external principal that access to a resource within the zone of trust.
-	Principal map[string]*string
+	Principal map[string]string
 
 	// The resource that an external principal has access to.
 	Resource *string
 
 	// The sources of the finding. This indicates how the access that generated the
 	// finding is granted. It is populated for Amazon S3 bucket findings.
-	Sources []*FindingSource
+	Sources []FindingSource
 }
 
 // The source of the finding. This indicates how the access that generated the
@@ -269,7 +269,7 @@ type FindingSummary struct {
 	// The condition in the analyzed policy statement that resulted in a finding.
 	//
 	// This member is required.
-	Condition map[string]*string
+	Condition map[string]string
 
 	// The time at which the finding was created.
 	//
@@ -303,7 +303,7 @@ type FindingSummary struct {
 
 	// The action in the analyzed policy statement that an external principal has
 	// permission to use.
-	Action []*string
+	Action []string
 
 	// The error that resulted in an Error finding.
 	Error *string
@@ -313,14 +313,14 @@ type FindingSummary struct {
 	IsPublic *bool
 
 	// The external principal that has access to a resource within the zone of trust.
-	Principal map[string]*string
+	Principal map[string]string
 
 	// The resource that the external principal has access to.
 	Resource *string
 
 	// The sources of the finding. This indicates how the access that generated the
 	// finding is granted. It is populated for Amazon S3 bucket findings.
-	Sources []*FindingSource
+	Sources []FindingSource
 }
 
 // An criterion statement in an archive rule. Each archive rule may have multiple
@@ -330,7 +330,7 @@ type InlineArchiveRule struct {
 	// The condition and values for a criterion.
 	//
 	// This member is required.
-	Filter map[string]*Criterion
+	Filter map[string]Criterion
 
 	// The name of the rule.
 	//

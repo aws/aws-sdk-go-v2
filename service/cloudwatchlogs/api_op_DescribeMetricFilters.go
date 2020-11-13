@@ -59,7 +59,7 @@ type DescribeMetricFiltersInput struct {
 type DescribeMetricFiltersOutput struct {
 
 	// The metric filters.
-	MetricFilters []*types.MetricFilter
+	MetricFilters []types.MetricFilter
 
 	// The token for the next set of items to return. The token expires after 24 hours.
 	NextToken *string

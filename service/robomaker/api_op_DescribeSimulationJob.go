@@ -49,7 +49,7 @@ type DescribeSimulationJobOutput struct {
 	Compute *types.ComputeResponse
 
 	// The data sources for the simulation job.
-	DataSources []*types.DataSource
+	DataSources []types.DataSource
 
 	// The failure behavior for the simulation job.
 	FailureBehavior types.FailureBehavior
@@ -94,7 +94,7 @@ type DescribeSimulationJobOutput struct {
 
 	// The maximum job duration in seconds. The value must be 8 days (691,200 seconds)
 	// or less.
-	MaxJobDurationInSeconds *int64
+	MaxJobDurationInSeconds int64
 
 	// The name of the simulation job.
 	Name *string
@@ -106,19 +106,19 @@ type DescribeSimulationJobOutput struct {
 	OutputLocation *types.OutputLocation
 
 	// A list of robot applications.
-	RobotApplications []*types.RobotApplicationConfig
+	RobotApplications []types.RobotApplicationConfig
 
 	// A list of simulation applications.
-	SimulationApplications []*types.SimulationApplicationConfig
+	SimulationApplications []types.SimulationApplicationConfig
 
 	// The simulation job execution duration in milliseconds.
-	SimulationTimeMillis *int64
+	SimulationTimeMillis int64
 
 	// The status of the simulation job.
 	Status types.SimulationJobStatus
 
 	// The list of all tags added to the specified simulation job.
-	Tags map[string]*string
+	Tags map[string]string
 
 	// The VPC configuration.
 	VpcConfig *types.VPCConfigResponse

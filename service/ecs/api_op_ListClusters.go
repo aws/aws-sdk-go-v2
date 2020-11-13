@@ -50,7 +50,7 @@ type ListClustersOutput struct {
 
 	// The list of full Amazon Resource Name (ARN) entries for each cluster associated
 	// with your account.
-	ClusterArns []*string
+	ClusterArns []string
 
 	// The nextToken value to include in a future ListClusters request. When the
 	// results of a ListClusters request exceed maxResults, this value can be used to

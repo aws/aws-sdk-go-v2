@@ -59,7 +59,7 @@ type ListStackResourcesOutput struct {
 	NextToken *string
 
 	// A list of StackResourceSummary structures.
-	StackResourceSummaries []*types.StackResourceSummary
+	StackResourceSummaries []types.StackResourceSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

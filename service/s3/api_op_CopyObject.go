@@ -302,7 +302,7 @@ type CopyObjectInput struct {
 	GrantWriteACP *string
 
 	// A map of metadata to store with the object in S3.
-	Metadata map[string]*string
+	Metadata map[string]string
 
 	// Specifies whether the metadata is copied from the source object or replaced with
 	// metadata provided in the request.

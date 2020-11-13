@@ -31,11 +31,11 @@ type DescribeMaintenanceWindowsInput struct {
 
 	// Optional filters used to narrow down the scope of the returned maintenance
 	// windows. Supported filter keys are Name and Enabled.
-	Filters []*types.MaintenanceWindowFilter
+	Filters []types.MaintenanceWindowFilter
 
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
-	MaxResults *int32
+	MaxResults int32
 
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
@@ -49,7 +49,7 @@ type DescribeMaintenanceWindowsOutput struct {
 	NextToken *string
 
 	// Information about the maintenance windows.
-	WindowIdentities []*types.MaintenanceWindowIdentity
+	WindowIdentities []types.MaintenanceWindowIdentity
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

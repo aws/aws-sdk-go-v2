@@ -43,7 +43,7 @@ type ListReceiptFiltersOutput struct {
 
 	// A list of IP address filter data structures, which each consist of a name, an IP
 	// address range, and whether to allow or block mail from it.
-	Filters []*types.ReceiptFilter
+	Filters []types.ReceiptFilter
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

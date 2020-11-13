@@ -47,7 +47,7 @@ type DescribeClusterTracksInput struct {
 type DescribeClusterTracksOutput struct {
 
 	// A list of maintenance tracks output by the DescribeClusterTracks operation.
-	MaintenanceTracks []*types.MaintenanceTrack
+	MaintenanceTracks []types.MaintenanceTrack
 
 	// The starting point to return a set of response tracklist records. You can
 	// retrieve the next set of response records by providing the returned marker value

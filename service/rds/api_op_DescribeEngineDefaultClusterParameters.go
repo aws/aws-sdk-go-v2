@@ -41,7 +41,7 @@ type DescribeEngineDefaultClusterParametersInput struct {
 	DBParameterGroupFamily *string
 
 	// This parameter isn't currently supported.
-	Filters []*types.Filter
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous
 	// DescribeEngineDefaultClusterParameters request. If this parameter is specified,

@@ -712,13 +712,13 @@ func validateCostCategoryRule(v *types.CostCategoryRule) error {
 	}
 }
 
-func validateCostCategoryRulesList(v []*types.CostCategoryRule) error {
+func validateCostCategoryRulesList(v []types.CostCategoryRule) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CostCategoryRulesList"}
 	for i := range v {
-		if err := validateCostCategoryRule(v[i]); err != nil {
+		if err := validateCostCategoryRule(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -755,9 +755,6 @@ func validateRightsizingRecommendationConfiguration(v *types.RightsizingRecommen
 	if len(v.RecommendationTarget) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("RecommendationTarget"))
 	}
-	if v.BenefitsConsidered == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BenefitsConsidered"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -772,9 +769,6 @@ func validateTotalImpactFilter(v *types.TotalImpactFilter) error {
 	invalidParams := smithy.InvalidParamsError{Context: "TotalImpactFilter"}
 	if len(v.NumericOperator) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("NumericOperator"))
-	}
-	if v.StartValue == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StartValue"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

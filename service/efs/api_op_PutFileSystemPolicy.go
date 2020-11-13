@@ -58,7 +58,7 @@ type PutFileSystemPolicyInput struct {
 	// BypassPolicyLockoutSafetyCheck to True only when you intend to prevent the
 	// principal that is making the request from making a subsequent
 	// PutFileSystemPolicy request on the file system. The default value is False.
-	BypassPolicyLockoutSafetyCheck *bool
+	BypassPolicyLockoutSafetyCheck bool
 }
 
 type PutFileSystemPolicyOutput struct {

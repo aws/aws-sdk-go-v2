@@ -516,13 +516,13 @@ func validateCloudWatchLoggingOption(v *types.CloudWatchLoggingOption) error {
 	}
 }
 
-func validateCloudWatchLoggingOptions(v []*types.CloudWatchLoggingOption) error {
+func validateCloudWatchLoggingOptions(v []types.CloudWatchLoggingOption) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CloudWatchLoggingOptions"}
 	for i := range v {
-		if err := validateCloudWatchLoggingOption(v[i]); err != nil {
+		if err := validateCloudWatchLoggingOption(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -548,13 +548,13 @@ func validateCloudWatchLoggingOptionUpdate(v *types.CloudWatchLoggingOptionUpdat
 	}
 }
 
-func validateCloudWatchLoggingOptionUpdates(v []*types.CloudWatchLoggingOptionUpdate) error {
+func validateCloudWatchLoggingOptionUpdates(v []types.CloudWatchLoggingOptionUpdate) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CloudWatchLoggingOptionUpdates"}
 	for i := range v {
-		if err := validateCloudWatchLoggingOptionUpdate(v[i]); err != nil {
+		if err := validateCloudWatchLoggingOptionUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -653,13 +653,13 @@ func validateInputConfiguration(v *types.InputConfiguration) error {
 	}
 }
 
-func validateInputConfigurations(v []*types.InputConfiguration) error {
+func validateInputConfigurations(v []types.InputConfiguration) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InputConfigurations"}
 	for i := range v {
-		if err := validateInputConfiguration(v[i]); err != nil {
+		if err := validateInputConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -722,13 +722,13 @@ func validateInputProcessingConfigurationUpdate(v *types.InputProcessingConfigur
 	}
 }
 
-func validateInputs(v []*types.Input) error {
+func validateInputs(v []types.Input) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Inputs"}
 	for i := range v {
-		if err := validateInput(v[i]); err != nil {
+		if err := validateInput(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -786,13 +786,13 @@ func validateInputUpdate(v *types.InputUpdate) error {
 	}
 }
 
-func validateInputUpdates(v []*types.InputUpdate) error {
+func validateInputUpdates(v []types.InputUpdate) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InputUpdates"}
 	for i := range v {
-		if err := validateInputUpdate(v[i]); err != nil {
+		if err := validateInputUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -967,13 +967,13 @@ func validateOutput(v *types.Output) error {
 	}
 }
 
-func validateOutputs(v []*types.Output) error {
+func validateOutputs(v []types.Output) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Outputs"}
 	for i := range v {
-		if err := validateOutput(v[i]); err != nil {
+		if err := validateOutput(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1004,13 +1004,13 @@ func validateOutputUpdate(v *types.OutputUpdate) error {
 	}
 }
 
-func validateOutputUpdates(v []*types.OutputUpdate) error {
+func validateOutputUpdates(v []types.OutputUpdate) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "OutputUpdates"}
 	for i := range v {
-		if err := validateOutputUpdate(v[i]); err != nil {
+		if err := validateOutputUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1039,13 +1039,13 @@ func validateRecordColumn(v *types.RecordColumn) error {
 	}
 }
 
-func validateRecordColumns(v []*types.RecordColumn) error {
+func validateRecordColumns(v []types.RecordColumn) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RecordColumns"}
 	for i := range v {
-		if err := validateRecordColumn(v[i]); err != nil {
+		if err := validateRecordColumn(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1123,13 +1123,13 @@ func validateReferenceDataSourceUpdate(v *types.ReferenceDataSourceUpdate) error
 	}
 }
 
-func validateReferenceDataSourceUpdates(v []*types.ReferenceDataSourceUpdate) error {
+func validateReferenceDataSourceUpdates(v []types.ReferenceDataSourceUpdate) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ReferenceDataSourceUpdates"}
 	for i := range v {
-		if err := validateReferenceDataSourceUpdate(v[i]); err != nil {
+		if err := validateReferenceDataSourceUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1223,13 +1223,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTags(v []*types.Tag) error {
+func validateTags(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tags"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

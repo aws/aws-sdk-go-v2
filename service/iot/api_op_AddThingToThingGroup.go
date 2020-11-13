@@ -32,7 +32,7 @@ type AddThingToThingGroupInput struct {
 	// reached. If a thing belongs to 10 thing groups, and one or more of those groups
 	// are dynamic thing groups, adding a thing to a static group removes the thing
 	// from the last dynamic group.
-	OverrideDynamicGroups *bool
+	OverrideDynamicGroups bool
 
 	// The ARN of the thing to add to a group.
 	ThingArn *string

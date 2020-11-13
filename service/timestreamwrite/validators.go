@@ -316,13 +316,13 @@ func validateDimension(v *types.Dimension) error {
 	}
 }
 
-func validateDimensions(v []*types.Dimension) error {
+func validateDimensions(v []types.Dimension) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Dimensions"}
 	for i := range v {
-		if err := validateDimension(v[i]); err != nil {
+		if err := validateDimension(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -350,13 +350,13 @@ func validateRecord(v *types.Record) error {
 	}
 }
 
-func validateRecords(v []*types.Record) error {
+func validateRecords(v []types.Record) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Records"}
 	for i := range v {
-		if err := validateRecord(v[i]); err != nil {
+		if err := validateRecord(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -372,12 +372,6 @@ func validateRetentionProperties(v *types.RetentionProperties) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RetentionProperties"}
-	if v.MagneticStoreRetentionPeriodInDays == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MagneticStoreRetentionPeriodInDays"))
-	}
-	if v.MemoryStoreRetentionPeriodInHours == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MemoryStoreRetentionPeriodInHours"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -403,13 +397,13 @@ func validateTag(v *types.Tag) error {
 	}
 }
 
-func validateTagList(v []*types.Tag) error {
+func validateTagList(v []types.Tag) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
-		if err := validateTag(v[i]); err != nil {
+		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

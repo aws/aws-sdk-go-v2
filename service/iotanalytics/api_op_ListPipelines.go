@@ -44,7 +44,7 @@ type ListPipelinesOutput struct {
 	NextToken *string
 
 	// A list of "PipelineSummary" objects.
-	PipelineSummaries []*types.PipelineSummary
+	PipelineSummaries []types.PipelineSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
