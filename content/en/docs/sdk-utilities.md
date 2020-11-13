@@ -1,6 +1,7 @@
 ---
 title: "Using the AWS SDK for Go Utilities"
 linkTitle: "SDK Utilities"
+date: "2020-11-12"
 description: "Use the AWS SDK for Go V utilities to help use AWS services."
 ---
 

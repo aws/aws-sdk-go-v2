@@ -1,7 +1,7 @@
 ---
 title: "Enforcing TLS Version 1.2 in AWS SDK for Go V2"
 linkTitle: "Enforcing TLS 1.2"
-date: 2020-11-09
+date: "2020-11-09"
 ---
 
 To add increased security when communicating with AWS services, you should configure your client to use TLS 1.2 or

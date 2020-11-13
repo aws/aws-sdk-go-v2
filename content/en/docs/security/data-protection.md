@@ -1,7 +1,7 @@
 ---
 title: "Data Protection in this AWS Product or Service"
 linkTitle: "Data Protection"
-date: 2020-11-09
+date: "2020-11-09"
 ---
 
 The [shared responsibility model](https://aws.amazon.com/compliance/shared-responsibility-model) applies to data

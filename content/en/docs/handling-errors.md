@@ -1,6 +1,7 @@
 ---
 title: "Handling Errors in the AWS SDK for Go V2"
 linkTitle: "Handling Errors"
+date: "2020-11-12"
 description: "Use the Error interface to handle errors from the |sdk-go| or AWS service."
 ---
 

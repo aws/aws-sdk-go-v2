@@ -1,6 +1,7 @@
 ---
 title: "Using Sessions to Configure Service Clients in the AWS SDK for Go"
 linkTitle: "Using Sessions"
+date: "2020-11-12"
 description: "Use sessions to define configurations for service clients."
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: "Using the AWS SDK for Go V2 with AWS Services"
 linkTitle: "Using AWS Services"
+date: "2020-11-12"
 description: "Construct service clients and make operation calls to send requests to AWS services."
 ---
 

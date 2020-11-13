@@ -1,6 +1,7 @@
 ---
 title: "Getting Started with the AWS SDK for Go V2"
 linkTitle: "Getting Started"
+date: "2020-11-12"
 weight: 2
 ---
 

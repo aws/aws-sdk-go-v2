@@ -1,6 +1,7 @@
 ---
 title: "Identity and Access Management for this AWS Product or Service"
 linkTitle: "Identity and Access Management"
+date: "2020-11-12"
 ---
 
 AWS Identity and Access Management (IAM) is an Amazon Web Services (AWS) service that helps an administrator securely

@@ -1,6 +1,7 @@
 ---
 title: "Compliance Validation for this AWS Product or Service"
 linkTitle: "Compliance Validation"
+date: "2020-11-12"
 ---
 
 This AWS product or service follows
