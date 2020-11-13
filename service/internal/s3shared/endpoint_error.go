@@ -20,27 +20,27 @@ type InvalidARNError struct {
 	origErr  error
 }
 
-// Error returns the InvalidARNError
-func (e InvalidARNError) Error() string {
-	var extra string
-	if e.resource != nil {
-		extra = "ARN: " + e.resource.String()
-	}
-	return (SprintError(e.Code(), e.Message(), extra, e.origErr))
-}
-
 // Code returns the invalid ARN error code
 func (e InvalidARNError) Code() string {
 	return invalidARNErrorErrCode
 }
 
-// Message returns the message for Invalid ARN error
-func (e InvalidARNError) Message() string {
-	return e.message
+// Error returns the InvalidARN error string
+func (e InvalidARNError) Error() string {
+	var extra string
+	if e.resource != nil {
+		extra = "ARN: " + e.resource.String()
+	}
+	msg := e.Code() + " : " + e.message
+	if extra != "" {
+		msg = msg + "\n\t" + extra
+	}
+
+	return msg
 }
 
 // OrigErr is the original error wrapped by Invalid ARN Error
-func (e InvalidARNError) OrigErr() error {
+func (e InvalidARNError) Unwrap() error {
 	return e.origErr
 }
 
@@ -85,7 +85,11 @@ func (e ConfigurationError) Error() string {
 	extra := fmt.Sprintf("ARN: %s, client partition: %s, client region: %s",
 		e.resource, e.clientPartitionID, e.clientRegion)
 
-	return SprintError(e.Code(), e.Message(), extra, e.origErr)
+	msg := e.Code() + " : " + e.message
+	if extra != "" {
+		msg = msg + "\n\t" + extra
+	}
+	return msg
 }
 
 // Code returns configuration error's error-code
@@ -93,13 +97,8 @@ func (e ConfigurationError) Code() string {
 	return configurationErrorErrCode
 }
 
-// Message returns the configuration error message
-func (e ConfigurationError) Message() string {
-	return e.message
-}
-
 // OrigErr is the original error wrapped by Configuration Error
-func (e ConfigurationError) OrigErr() error {
+func (e ConfigurationError) Unwrap() error {
 	return e.origErr
 }
 
@@ -178,17 +177,4 @@ func NewClientConfiguredForDualStackError(resource arn.Resource, clientPartition
 		clientPartitionID: clientPartitionID,
 		clientRegion:      clientRegion,
 	}
-}
-
-// SprintError returns a formatted error message string
-func SprintError(code, message, extra string, origErr error) string {
-	msg := code + " : " + message
-	if extra != "" {
-		msg = msg + "\n\t" + extra
-	}
-	if origErr != nil {
-		// TODO: replace origErr to use %w
-		msg = msg + "\ncaused by: " + origErr.Error()
-	}
-	return msg
 }

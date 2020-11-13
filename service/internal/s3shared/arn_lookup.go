@@ -50,18 +50,18 @@ func (m *ARNLookup) HandleInitialize(ctx context.Context, in middleware.Initiali
 	return next.HandleInitialize(ctx, in)
 }
 
-// arnResourceValue is the key set on context used to identify, retrive an ARN resource
+// arnResourceKey is the key set on context used to identify, retrive an ARN resource
 // if present on the context.
-type arnResourceValue struct {
+type arnResourceKey struct {
 }
 
 // SetARNResourceOnContext sets arn on context
 func setARNResourceOnContext(ctx context.Context, value arn.ARN) context.Context {
-	return context.WithValue(ctx, arnResourceValue{}, value)
+	return context.WithValue(ctx, arnResourceKey{}, value)
 }
 
 // GetARNResourceFromContext returns an ARN from context and a bool indicating presence of ARN on ctx
 func GetARNResourceFromContext(ctx context.Context) (arn.ARN, bool) {
-	v, ok := ctx.Value(arnResourceValue{}).(arn.ARN)
+	v, ok := ctx.Value(arnResourceKey{}).(arn.ARN)
 	return v, ok
 }
