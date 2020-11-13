@@ -20,6 +20,7 @@ package software.amazon.smithy.aws.go.codegen.customization;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import software.amazon.smithy.aws.traits.ServiceTrait;
 import software.amazon.smithy.codegen.core.CodegenException;
@@ -114,14 +115,14 @@ public class S3UpdateEndpoint implements GoIntegration {
 
         // if service is s3control
         if (isS3ControlService(model, service)) {
-            s3control obj = new s3control(service);
-            obj.writeAdditionalFiles(settings, model, symbolProvider, goDelegator);
+            S3control s3control = new S3control(service);
+            s3control.writeAdditionalFiles(settings, model, symbolProvider, goDelegator);
         }
 
         // check if service is s3
         if (isS3Service(model, service)) {
-            s3 obj = new s3(service);
-            obj.writeAdditionalFiles(settings, model, symbolProvider, goDelegator);
+            S3 s3 = new S3(service);
+            s3.writeAdditionalFiles(settings, model, symbolProvider, goDelegator);
         }
     }
 
@@ -145,7 +146,7 @@ public class S3UpdateEndpoint implements GoIntegration {
             );
 
             runtimeClientPlugins.add(RuntimeClientPlugin.builder()
-                    .operationPredicate((m,s,o)-> {
+                    .operationPredicate((m, s, o) -> {
                         if (!isS3SharedService(m, s)) {
                             return false;
                         }
@@ -185,7 +186,7 @@ public class S3UpdateEndpoint implements GoIntegration {
                         ))
                         .build()
         ));
-        runtimeClientPlugins.addAll(s3.getClientPlugins());
+        runtimeClientPlugins.addAll(S3.getClientPlugins());
         return runtimeClientPlugins;
     }
 
@@ -193,24 +194,22 @@ public class S3UpdateEndpoint implements GoIntegration {
     /*
      * s3 class is the private class handling s3 goIntegration for endpoint mutations
      */
-    private static class s3 {
-
+    private static class S3 {
         // options to be generated on Client's options type
         private static final String USE_PATH_STYLE_OPTION = "UsePathStyle";
         private static final String USE_ACCELERATE_OPTION = "UseAccelerate";
-
         // private function getter constant
-        private static final String GET_BUCKET_FROM_INPUT = "getBucketFromInput";
-        private static final String SUPPORT_ACCELERATE = "supportAccelerate";
-
+        private static final String NOP_BUCKET_ACCESSOR = "nopGetBucketAccessor";
         // service shape representing s3
         private final ServiceShape service;
+        // list of operations that take in bucket as input
+        private final Set<String> SUPPORT_BUCKET_AS_INPUT = new TreeSet<>();
         // list of operations that do not support accelerate
         private final Set<String> NOT_SUPPORT_ACCELERATE = SetUtils.of(
                 "ListBuckets", "CreateBucket", "DeleteBucket"
         );
 
-        private s3(ServiceShape service) {
+        private S3(ServiceShape service) {
             this.service = service;
         }
 
@@ -251,33 +250,39 @@ public class S3UpdateEndpoint implements GoIntegration {
             return list;
         }
 
+        // retrieves function name for get bucket accessor function
+        private String getBucketAccessorFuncName(String operationName) {
+            return getterFuncName(operationName, "BucketMember");
+        }
+
         private void writeAdditionalFiles(
                 GoSettings settings,
                 Model model,
                 SymbolProvider symbolProvider,
                 GoDelegator goDelegator
         ) {
-            goDelegator.useShapeWriter(service, writer -> {
-                writeInputGetter(writer, model, symbolProvider, service);
-            });
-
-            goDelegator.useShapeWriter(service, writer -> {
-                writeAccelerateValidator(writer, model, symbolProvider, service);
-            });
 
             for (ShapeId operationID : service.getAllOperations()) {
                 OperationShape operation = model.expectShape(operationID, OperationShape.class);
                 goDelegator.useShapeWriter(operation, writer -> {
-                    // get input shape from operation
-                    StructureShape input = model.expectShape(operation.getInput().get(), StructureShape.class);
+                    // generate get bucket member helper function
+                    writeGetBucketMemberHelper(writer, model, symbolProvider, operation);
                     // generate update endpoint middleware helper function
                     writeMiddlewareHelper(writer, model, symbolProvider, operation);
                 });
             }
+
+            goDelegator.useShapeWriter(service, writer -> {
+                // generate NOP bucket accessor helper
+                writeNOPBucketAccessorHelper(writer);
+            });
         }
 
         private void writeMiddlewareHelper(
-                GoWriter writer, Model model, SymbolProvider symbolProvider, OperationShape operationShape
+                GoWriter writer,
+                Model model,
+                SymbolProvider symbolProvider,
+                OperationShape operationShape
         ) {
             // imports
             writer.addUseImports(SmithyGoDependency.SMITHY_MIDDLEWARE);
@@ -289,7 +294,8 @@ public class S3UpdateEndpoint implements GoIntegration {
                     addMiddlewareFuncName(symbolProvider.toSymbol(operationShape).getName(),
                             UPDATE_ENDPOINT_INTERNAL_ADDER), () -> {
                         writer.write("return $T(stack, $T{ \n"
-                                        + "Accessor : $T{GetBucketFromInput: $L,\n SupportsAccelerate: $L,\n }, \n"
+                                        + "Accessor : $T{\n "
+                                        + "GetBucketFromInput: $L,\n SupportsAccelerate: $L,\n }, \n"
                                         + "UsePathStyle: options.$L,\n "
                                         + "UseAccelerate: options.$L,\n "
                                         + "EndpointResolver: options.EndpointResolver,\n "
@@ -301,8 +307,9 @@ public class S3UpdateEndpoint implements GoIntegration {
                                         AwsCustomGoDependency.S3_CUSTOMIZATION).build(),
                                 SymbolUtils.createValueSymbolBuilder(UPDATE_ENDPOINT_INTERNAL_PARAMETER_ACCESSOR,
                                         AwsCustomGoDependency.S3_CUSTOMIZATION).build(),
-                                GET_BUCKET_FROM_INPUT,
-                                SUPPORT_ACCELERATE,
+                                SUPPORT_BUCKET_AS_INPUT.contains(operationName) ?
+                                        getBucketAccessorFuncName(operationName) : NOP_BUCKET_ACCESSOR,
+                                !NOT_SUPPORT_ACCELERATE.contains(operationName),
                                 USE_PATH_STYLE_OPTION,
                                 USE_ACCELERATE_OPTION,
                                 USE_DUALSTACK_OPTION,
@@ -312,68 +319,79 @@ public class S3UpdateEndpoint implements GoIntegration {
             writer.insertTrailingNewline();
         }
 
-        private void writeInputGetter(
-                GoWriter writer, Model model, SymbolProvider symbolProvider, ServiceShape service
+        private void writeNOPBucketAccessorHelper(
+                GoWriter writer
         ) {
             writer.writeDocs(
-                    "getBucketFromInput returns a boolean indicating if the input has a modeled bucket name, " +
-                            " and a pointer to string denoting a provided bucket member value");
-            writer.openBlock("func getBucketFromInput(input interface{}) (*string, bool) {", "}", () -> {
-                writer.openBlock("switch i:= input.(type) {", "}", () -> {
-                    service.getAllOperations().forEach((operationId) -> {
-                        OperationShape operation = model.expectShape(operationId, OperationShape.class);
-                        StructureShape input = model.expectShape(operation.getInput().get(), StructureShape.class);
-
-                        List<MemberShape> targetBucketShape = input.getAllMembers().values().stream()
-                                .filter(m -> m.getTarget().getName().equals("BucketName"))
-                                .collect(Collectors.toList());
-                        // if model has multiple top level shapes targeting `BucketName`, we throw a codegen exception
-                        if (targetBucketShape.size() > 1) {
-                            throw new CodegenException(
-                                    "BucketName shape should be targeted by only one input member, found " +
-                                            targetBucketShape.size() + " for Input shape: " + input.getId());
-                        }
-
-                        if (!targetBucketShape.isEmpty() && !operationId.getName().equalsIgnoreCase(
-                                "GetBucketLocation")) {
-                            writer.write("case $P: return i.$L, true", symbolProvider.toSymbol(input),
-                                    targetBucketShape.get(0).getMemberName());
-                        }
+                    String.format("%s is no-op accessor for operation that don't support bucket member as input",
+                            NOP_BUCKET_ACCESSOR)
+            );
+            writer.openBlock("func $L(input interface{}) (*string, bool) {", "}", NOP_BUCKET_ACCESSOR,
+                    () -> {
+                        writer.write("return nil, false");
                     });
-                    writer.write("default: return nil, false");
-                });
-            });
+            writer.insertTrailingNewline();
         }
 
-        private void writeAccelerateValidator(
-                GoWriter writer, Model model, SymbolProvider symbolProvider, ServiceShape service
+        private void writeGetBucketMemberHelper(
+                GoWriter writer,
+                Model model,
+                SymbolProvider symbolProvider,
+                OperationShape operation
         ) {
+            Symbol operationSymbol = symbolProvider.toSymbol(operation);
+            String operationName = operationSymbol.getName();
+            String funcName = getBucketAccessorFuncName(operationSymbol.getName());
+
+            StructureShape input = model.expectShape(operation.getInput().get(), StructureShape.class);
+
+            List<MemberShape> targetBucketShape = input.getAllMembers().values().stream()
+                    .filter(m -> m.getTarget().getName().equals("BucketName"))
+                    .collect(Collectors.toList());
+            // if model has multiple top level shapes targeting `BucketName`, we throw a codegen exception
+            if (targetBucketShape.size() > 1) {
+                throw new CodegenException(
+                        "BucketName shape should be targeted by only one input member, found " +
+                                targetBucketShape.size() + " for Input shape: " + input.getId());
+            }
+
+            if (targetBucketShape.isEmpty()) {
+                return;
+            }
+
+            // add operation to set denoting operation supports bucket input member
+            SUPPORT_BUCKET_AS_INPUT.add(operationName);
+
+
             writer.writeDocs(
-                    "supportAccelerate returns a boolean indicating if the operation associated with the provided input "
-                            + "supports S3 Transfer Acceleration");
-            writer.openBlock("func $L(input interface{}) bool {", "}", SUPPORT_ACCELERATE, () -> {
-                writer.openBlock("switch input.(type) {", "}", () -> {
-                    for (ShapeId operationId : service.getAllOperations()) {
-                        // check if operation does not support s3 accelerate
-                        if (NOT_SUPPORT_ACCELERATE.contains(operationId.getName())) {
-                            OperationShape operation = model.expectShape(operationId, OperationShape.class);
-                            StructureShape input = model.expectShape(operation.getInput().get(), StructureShape.class);
-                            writer.write("case $P: return false", symbolProvider.toSymbol(input));
-                        }
-                    }
-                    writer.write("default: return true");
-                });
-            });
+                    String.format("%s returns a pointer to string denoting a provided bucket member value"
+                            + "and a boolean indicating if the input has a modeled bucket name,", funcName)
+            );
+            writer.openBlock("func $L(input interface{}) (*string, bool) {", "}", funcName,
+                    () -> {
+                        String targetShapeName = targetBucketShape.get(0).getMemberName();
+                        writer.write("in := input.($P)", symbolProvider.toSymbol(input));
+                        writer.openBlock("if in.$L == nil {", "}", targetShapeName, () -> {
+                            writer.write("return nil, false");
+                        });
+                        writer.write("return in.$L, true", targetShapeName);
+                    });
+            writer.insertTrailingNewline();
         }
     }
 
     /**
      * s3control class is the private class handling s3control goIntegration for endpoint mutations
      */
-    private static class s3control {
+    private static class S3control {
 
-        // S3Control function getter constant
-        private static final String GET_OUTPOST_ID_FROM_INPUT = "getOutpostIDFromInput";
+        // nop accessor constants
+        private static final String NOP_GET_ARN_ACCESSOR = "nopGetARNAccessor";
+        private static final String NOP_SET_ARN_ACCESSOR = "nopSetARNAccessor";
+        private static final String NOP_BACKFILL_ACCOUNT_ID_HELPER = "nopBackfillAccountIDAccessor";
+        private static final String NOP_GET_OUTPOST_ID_FROM_INPUT = "nopGetOutpostIDFromInput";
+        // Map of service, list of operationName that support ARNs as input
+        private static final Set<String> supportsARN = new TreeSet<>();
         // service associated with this class
         private final ServiceShape service;
         // List of operations that use Accesspoint field as ARN input source.
@@ -386,7 +404,7 @@ public class S3UpdateEndpoint implements GoIntegration {
                 "CreateBucket", "ListRegionalBuckets"
         );
 
-        private s3control(ServiceShape service) {
+        private S3control(ServiceShape service) {
             this.service = service;
         }
 
@@ -405,17 +423,17 @@ public class S3UpdateEndpoint implements GoIntegration {
             return getterFuncName(operation, "ARNMember");
         }
 
+        // returns a function identifier string for outpost id member getter function
+        private static final String getOutpostIDMemberFuncName(String operation) {
+            return getterFuncName(operation, "OutpostIDMember");
+        }
+
         void writeAdditionalFiles(
                 GoSettings settings,
                 Model model,
                 SymbolProvider symbolProvider,
                 GoDelegator goDelegator
         ) {
-            goDelegator.useShapeWriter(service, writer -> {
-                // generate outpost id helper function
-                writeOutpostIDHelper(writer, model, symbolProvider, service);
-            });
-
             for (ShapeId operationID : service.getAllOperations()) {
                 OperationShape operation = model.expectShape(operationID, OperationShape.class);
                 goDelegator.useShapeWriter(operation, writer -> {
@@ -423,6 +441,8 @@ public class S3UpdateEndpoint implements GoIntegration {
                     StructureShape input = model.expectShape(operation.getInput().get(), StructureShape.class);
                     // generate input copy function
                     writeInputCopy(writer, symbolProvider, input);
+                    // generate outpost id accessor function
+                    writeOutpostIDHelper(writer, model, symbolProvider, operation);
                     // generate arn helper function
                     writeARNHelper(writer, model, symbolProvider, operation);
                     // generate backfill account id helper function
@@ -431,6 +451,63 @@ public class S3UpdateEndpoint implements GoIntegration {
                     writeMiddlewareHelper(writer, model, symbolProvider, operation);
                 });
             }
+
+            // services must be processed later than operations to help generation of Nop helpers
+            goDelegator.useShapeWriter(service, writer -> {
+                // generate outpost id helper function
+                writeNopOutpostIDHelper(writer);
+                // generate Nop methods for ARNHelper
+                writeNopARNHelper(writer);
+                // generate Nop methods for BackfillAccountIDHelper
+                writeNopBackfillAccountIDHelper(writer);
+            });
+        }
+
+        private void writeNopARNHelper(
+                GoWriter writer
+        ) {
+            // generate get arn member accessor getter function
+            writer.writeDocs("nopGetARNAccessor provides a nop get accessor function to be used "
+                    + "when a certain operation does not support ARNs");
+            writer.openBlock("func $L (input interface{}) (*string, bool) { ", "}",
+                    NOP_GET_ARN_ACCESSOR, () -> {
+                        writer.write("return nil, false");
+                    });
+            writer.insertTrailingNewline();
+
+            // generate set arn member accessor setter function
+            writer.writeDocs("nopSetARNAccessor provides a nop set accessor function to be used "
+                    + "when a certain operation does not support ARNs");
+            writer.openBlock("func $L (input interface{}, v string) error {", "}",
+                    NOP_SET_ARN_ACCESSOR, () -> {
+                        writer.write("return nil");
+                    });
+            writer.insertTrailingNewline();
+        }
+
+        private void writeNopBackfillAccountIDHelper(
+                GoWriter writer
+        ) {
+            // generate arn member accessor getter function
+            writer.writeDocs("nopBackfillAccountIDAccessor provides a nop accessor function to be used "
+                    + "when a certain operation does not need to validate and backfill account id");
+            writer.openBlock("func $L (input interface{}, v string) error {", "}",
+                    NOP_BACKFILL_ACCOUNT_ID_HELPER, () -> {
+                        writer.write("return nil");
+                    });
+            writer.insertTrailingNewline();
+        }
+
+        private void writeNopOutpostIDHelper(
+                GoWriter writer
+        ) {
+            writer.writeDocs("nopGetOutpostIDFromInput provides a nop accessor function to be used "
+                    + "when endpoint customization behavior is not based on presence of outpost id member if any");
+            writer.openBlock("func $L (input interface{}) (*string, bool) {", "}",
+                    NOP_GET_OUTPOST_ID_FROM_INPUT, () -> {
+                        writer.write("return nil, false");
+                    });
+            writer.insertTrailingNewline();
         }
 
         private void writeMiddlewareHelper(
@@ -458,13 +535,14 @@ public class S3UpdateEndpoint implements GoIntegration {
                                         AwsCustomGoDependency.S3CONTROL_CUSTOMIZATION).build(),
                                 SymbolUtils.createValueSymbolBuilder(UPDATE_ENDPOINT_INTERNAL_PARAMETER_ACCESSOR,
                                         AwsCustomGoDependency.S3CONTROL_CUSTOMIZATION).build(),
-                                LIST_OUTPOST_ID_INPUT.contains(operationName) ? "nil" : getARNMemberFuncName(
-                                        operationName),
-                                LIST_OUTPOST_ID_INPUT.contains(operationName) ? "nil" : backFillAccountIDFuncName(
-                                        operationName),
-                                GET_OUTPOST_ID_FROM_INPUT,
-                                LIST_OUTPOST_ID_INPUT.contains(operationName) ? "nil" : setARNMemberFuncName(
-                                        operationName),
+                                supportsARN.contains(operationName) ? getARNMemberFuncName(
+                                        operationName) : NOP_GET_ARN_ACCESSOR,
+                                supportsARN.contains(operationName) ? backFillAccountIDFuncName(
+                                        operationName) : NOP_BACKFILL_ACCOUNT_ID_HELPER,
+                                LIST_OUTPOST_ID_INPUT.contains(operationName) ? getOutpostIDMemberFuncName(
+                                        operationName) : NOP_GET_OUTPOST_ID_FROM_INPUT,
+                                supportsARN.contains(operationName) ? setARNMemberFuncName(
+                                        operationName) : NOP_SET_ARN_ACCESSOR,
                                 copyInputFuncName(symbolProvider.toSymbol(inputShape).getName()),
                                 USE_DUALSTACK_OPTION,
                                 USE_ARNREGION_OPTION
@@ -531,23 +609,27 @@ public class S3UpdateEndpoint implements GoIntegration {
                         targetAccountIDShape.size() + " for Input shape: " + input.getId());
             }
 
+            if (targetAccountIDShape.isEmpty()) {
+                return;
+            }
+
             Symbol inputSymbol = symbolProvider.toSymbol(input);
             writer.write("func $L (input interface{}, v string) error { ",
                     backFillAccountIDFuncName(symbolProvider.toSymbol(operation).getName()));
-            if (!targetAccountIDShape.isEmpty()) {
-                String memberName = targetAccountIDShape.get(0).getMemberName();
-                writer.write("in := input.($P)", inputSymbol);
-                writer.write("if in.$L != nil {", memberName);
+            String memberName = targetAccountIDShape.get(0).getMemberName();
+            writer.write("in := input.($P)", inputSymbol);
+            writer.write("if in.$L != nil {", memberName);
 
-                writer.addUseImports(SmithyGoDependency.STRINGS);
-                writer.write("if !strings.EqualFold(*in.$L, v) {", memberName);
+            writer.addUseImports(SmithyGoDependency.STRINGS);
+            writer.write("if !strings.EqualFold(*in.$L, v) {", memberName);
 
-                writer.addUseImports(SmithyGoDependency.FMT);
-                writer.write("return fmt.Errorf(\"error backfilling account id\") }");
-                writer.write("return nil }");
-                writer.write("in.$L = &v", memberName);
-            }
+            writer.addUseImports(SmithyGoDependency.FMT);
+            writer.write("return fmt.Errorf(\"error backfilling account id\") }");
             writer.write("return nil }");
+            writer.write("in.$L = &v", memberName);
+            writer.write("return nil }");
+
+            writer.insertTrailingNewline();
         }
 
         /**
@@ -576,79 +658,89 @@ public class S3UpdateEndpoint implements GoIntegration {
                         listOfARNMembers.size() + " for Input shape: " + input.getId());
             }
 
+            if (listOfARNMembers.isEmpty()) {
+                return;
+            }
+
+            String operationName = symbolProvider.toSymbol(operation).getName();
+            // this operation supports taking arn as input
+            supportsARN.add(operationName);
+
             Symbol inputSymbol = symbolProvider.toSymbol(input);
+            String memberName = listOfARNMembers.get(0).getMemberName();
 
             // generate arn member accessor getter function
-            writer.write("func $L (input interface{}) (*string, bool) { ",
+            writer.write("func $L (input interface{}) (*string, bool) {",
                     getARNMemberFuncName(symbolProvider.toSymbol(operation).getName()));
-            if (!listOfARNMembers.isEmpty()) {
-                String memberName = listOfARNMembers.get(0).getMemberName();
-                writer.write("in := input.($P)", inputSymbol);
-                writer.write("if in.$L == nil {return nil, false }", memberName);
-                writer.write("return in.$L, true }", memberName);
-            } else {
-                writer.write("return nil, false }");
-            }
+            writer.write("in := input.($P)", inputSymbol);
+            writer.write("if in.$L == nil {return nil, false }", memberName);
+            writer.write("return in.$L, true }", memberName);
 
             writer.insertTrailingNewline();
 
             // generate arn member accessor setter function
             writer.write("func $L (input interface{}, v string) error {",
                     setARNMemberFuncName(symbolProvider.toSymbol(operation).getName()));
-            if (!listOfARNMembers.isEmpty()) {
-                String memberName = listOfARNMembers.get(0).getMemberName();
-                writer.write("in := input.($P)", inputSymbol);
-                writer.write("in.$L = &v", memberName);
-            }
+            writer.write("in := input.($P)", inputSymbol);
+            writer.write("in.$L = &v", memberName);
             writer.write("return nil }");
+
+            writer.insertTrailingNewline();
         }
 
         /**
          * writes OutpostID Helper function for operations CreateBucket and ListRegionalBuckets
          * <p>
          * Generates code:
-         * func getOutpostIDFromInput (in interface{}) (*string, bool) {
-         * switch in.(type) {
-         * case CreateBucket: return in.OutpostId, true
-         * case listRegionalBuckets : return in.OutpostID, true
-         * default: nil, false
+         * func get<OpName>OutpostIDHelper</> (in interface{}) (*string, bool) {
+         * i, ok := input.(*OpName)
+         * if !ok {
+         * return nil, fmt.Errorf("Expected input of type *OpName, got %T", input)
          * }
+         * return i.<MemberName>, nil
          * }
          */
         private void writeOutpostIDHelper(
-                GoWriter writer, Model model, SymbolProvider symbolProvider, ServiceShape service
+                GoWriter writer,
+                Model model,
+                SymbolProvider symbolProvider,
+                OperationShape operation
         ) {
-            writer.writeDocs(
-                    "getOutpostIDFromInput returns a boolean indicating if the input has a modeled outpost-id, " +
-                            " and a pointer to string denoting a provided outpost-id member value");
-            writer.openBlock("func $L (input interface{}) (*string, bool) {", "}",
-                    GET_OUTPOST_ID_FROM_INPUT, () -> {
-                        writer.openBlock("switch i:= input.(type) {", "}", () -> {
-                            for (ShapeId operationId : service.getAllOperations()) {
-                                // customization only applied to operations CreateBucket, ListRegionalBuckets
-                                if (!LIST_OUTPOST_ID_INPUT.contains(operationId.getName())) {
-                                    continue;
-                                }
-                                OperationShape operation = model.expectShape(operationId, OperationShape.class);
-                                StructureShape input = model.expectShape(operation.getInput().get(),
-                                        StructureShape.class);
-                                List<MemberShape> outpostIDMemberShapes = input.getAllMembers().values().stream()
-                                        .filter(m -> m.getMemberName().equalsIgnoreCase("OutpostId"))
-                                        .collect(Collectors.toList());
-                                // if model has multiple top level shapes targeting `OutpostId`, we throw a codegen exception
-                                if (outpostIDMemberShapes.size() > 1) {
-                                    throw new CodegenException(
-                                            "OutpostID shape should be targeted by only one input member, found " +
-                                                    outpostIDMemberShapes.size() + " for Input shape: " + input.getId());
-                                }
+            String operationName = symbolProvider.toSymbol(operation).getName();
+            if (!LIST_OUTPOST_ID_INPUT.contains(operationName)) {
+                return;
+            }
 
-                                if (!outpostIDMemberShapes.isEmpty()) {
-                                    writer.write("case $P: return i.$L, true", symbolProvider.toSymbol(input),
-                                            outpostIDMemberShapes.get(0).getMemberName());
-                                }
-                            }
-                            writer.write("default: return nil, false");
+            String funcName = getOutpostIDMemberFuncName(operationName);
+
+            writer.writeDocs(
+                    String.format("%s returns a pointer to string denoting a provided outpost-id member value"
+                            + " and a boolean indicating if the input has a modeled outpost-id,", funcName));
+            writer.openBlock("func $L (input interface{}) (*string, bool) {", "}",
+                    funcName, () -> {
+                        StructureShape input = model.expectShape(operation.getInput().get(),
+                                StructureShape.class);
+                        List<MemberShape> outpostIDMemberShapes = input.getAllMembers().values().stream()
+                                .filter(m -> m.getMemberName().equalsIgnoreCase("OutpostId"))
+                                .collect(Collectors.toList());
+                        // if model has multiple top level shapes targeting `OutpostId`, we throw a codegen exception
+                        if (outpostIDMemberShapes.size() > 1) {
+                            throw new CodegenException(
+                                    "OutpostID shape should be targeted by only one input member, found " +
+                                            outpostIDMemberShapes.size() + " for Input shape: " + input.getId());
+                        }
+
+                        if (outpostIDMemberShapes.isEmpty()) {
+                            LIST_OUTPOST_ID_INPUT.remove(operationName);
+                        }
+
+                        Symbol inputSymbol = symbolProvider.toSymbol(input);
+                        String memberName = outpostIDMemberShapes.get(0).getMemberName();
+                        writer.write("in := input.($P)", inputSymbol);
+                        writer.openBlock("if in.$L == nil  {", "}", memberName, () -> {
+                            writer.write("return nil, false");
                         });
+                        writer.write("return in.$L, true", memberName);
                     });
         }
     }

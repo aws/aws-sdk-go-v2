@@ -77,22 +77,21 @@ public class EndpointGenerator implements Runnable {
     private final Boolean isInternalOnly;
     private final String resolvedSdkID;
 
-
     public EndpointGenerator(
             GoSettings settings,
             Model model,
             TriConsumer<String, String, Consumer<GoWriter>> writerFactory
     ) {
-        this.settings = settings;
-        this.model = model;
-        this.writerFactory = writerFactory;
-        serviceShape = settings.getService(model);
-        this.endpointPrefix = getEndpointPrefix(serviceShape);
-        this.endpointData = Node.parse(IoUtils.readUtf8Resource(getClass(), "endpoints.json")).expectObjectNode();
-        validateVersion();
-        loadPartitions();
-        this.isInternalOnly = false;
-        this.resolvedSdkID = serviceShape.expectTrait(ServiceTrait.class).getSdkId();
+        this(
+                settings,
+                model,
+                writerFactory,
+                settings.getService(model).expectTrait(ServiceTrait.class)
+                        .getSdkId(),
+                settings.getService(model).expectTrait(ServiceTrait.class)
+                        .getArnNamespace(),
+                false
+        );
     }
 
     public EndpointGenerator(
@@ -109,10 +108,10 @@ public class EndpointGenerator implements Runnable {
         serviceShape = settings.getService(model);
         this.endpointPrefix = getEndpointPrefix(sdkID, arnNamespace);
         this.endpointData = Node.parse(IoUtils.readUtf8Resource(getClass(), "endpoints.json")).expectObjectNode();
-        validateVersion();
-        loadPartitions();
         this.isInternalOnly = internalOnly;
         this.resolvedSdkID = sdkID;
+        validateVersion();
+        loadPartitions();
     }
 
     private void validateVersion() {
