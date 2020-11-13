@@ -6,9 +6,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
+	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	"github.com/awslabs/smithy-go"
 	smithymiddleware "github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -57,7 +57,7 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	options = options.Copy()
 
 	if options.HTTPClient == nil {
-		options.HTTPClient = aws.NewBuildableHTTPClient()
+		options.HTTPClient = awshttp.NewBuildableClient()
 	}
 
 	if options.Retryer == nil {

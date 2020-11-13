@@ -1,4 +1,4 @@
-package aws
+package http
 
 import (
 	"crypto/tls"
@@ -30,20 +30,13 @@ var (
 	DefaultDialKeepAliveTimeout = 30 * time.Second
 )
 
-// HTTPClient provides the interface to provide custom HTTPClients. Generally
-// *http.Client is sufficient for most use cases. The HTTPClient should not
-// follow redirects.
-type HTTPClient interface {
-	Do(*http.Request) (*http.Response, error)
-}
-
-// BuildableHTTPClient provides a HTTPClient implementation with options to
+// BuildableClient provides a HTTPClient implementation with options to
 // create copies of the HTTPClient when additional configuration is provided.
 //
 // The client's methods will not share the http.Transport value between copies
-// of the BuildableHTTPClient. Only exported member values of the Transport and
-// optional Dialer will be copied between copies of BuildableHTTPClient.
-type BuildableHTTPClient struct {
+// of the BuildableClient. Only exported member values of the Transport and
+// optional Dialer will be copied between copies of BuildableClient.
+type BuildableClient struct {
 	transport *http.Transport
 	dialer    *net.Dialer
 
@@ -53,37 +46,37 @@ type BuildableHTTPClient struct {
 	client        *http.Client
 }
 
-// NewBuildableHTTPClient returns an initialized client for invoking HTTP
+// NewBuildableClient returns an initialized client for invoking HTTP
 // requests.
-func NewBuildableHTTPClient() *BuildableHTTPClient {
-	return &BuildableHTTPClient{}
+func NewBuildableClient() *BuildableClient {
+	return &BuildableClient{}
 }
 
 // Do implements the HTTPClient interface's Do method to invoke a HTTP request,
-// and receive the response. Uses the BuildableHTTPClient's current
+// and receive the response. Uses the BuildableClient's current
 // configuration to invoke the http.Request.
 //
 // If connection pooling is enabled (aka HTTP KeepAlive) the client will only
 // share pooled connections with its own instance. Copies of the
-// BuildableHTTPClient will have their own connection pools.
+// BuildableClient will have their own connection pools.
 //
 // Redirect (3xx) responses will not be followed, the HTTP response received
 // will returned instead.
-func (b *BuildableHTTPClient) Do(req *http.Request) (*http.Response, error) {
+func (b *BuildableClient) Do(req *http.Request) (*http.Response, error) {
 	b.initOnce.Do(b.build)
 
 	return b.client.Do(req)
 }
 
-func (b *BuildableHTTPClient) build() {
-	b.client = wrapWithoutRedirect(&http.Client{
+func (b *BuildableClient) build() {
+	b.client = wrapWithLimitedRedirect(&http.Client{
 		Timeout:   b.clientTimeout,
 		Transport: b.GetTransport(),
 	})
 }
 
-func (b *BuildableHTTPClient) clone() *BuildableHTTPClient {
-	cpy := NewBuildableHTTPClient()
+func (b *BuildableClient) clone() *BuildableClient {
+	cpy := NewBuildableClient()
 	cpy.transport = b.GetTransport()
 	cpy.dialer = b.GetDialer()
 	cpy.clientTimeout = b.clientTimeout
@@ -91,13 +84,13 @@ func (b *BuildableHTTPClient) clone() *BuildableHTTPClient {
 	return cpy
 }
 
-// WithTransportOptions copies the BuildableHTTPClient and returns it with the
+// WithTransportOptions copies the BuildableClient and returns it with the
 // http.Transport options applied.
 //
 // If a non (*http.Transport) was set as the round tripper, the round tripper
 // will be replaced with a default Transport value before invoking the option
 // functions.
-func (b *BuildableHTTPClient) WithTransportOptions(opts ...func(*http.Transport)) HTTPClient {
+func (b *BuildableClient) WithTransportOptions(opts ...func(*http.Transport)) *BuildableClient {
 	cpy := b.clone()
 
 	tr := cpy.GetTransport()
@@ -109,10 +102,10 @@ func (b *BuildableHTTPClient) WithTransportOptions(opts ...func(*http.Transport)
 	return cpy
 }
 
-// WithDialerOptions copies the BuildableHTTPClient and returns it with the
+// WithDialerOptions copies the BuildableClient and returns it with the
 // net.Dialer options applied. Will set the client's http.Transport DialContext
 // member.
-func (b *BuildableHTTPClient) WithDialerOptions(opts ...func(*net.Dialer)) HTTPClient {
+func (b *BuildableClient) WithDialerOptions(opts ...func(*net.Dialer)) *BuildableClient {
 	cpy := b.clone()
 
 	dialer := cpy.GetDialer()
@@ -129,14 +122,14 @@ func (b *BuildableHTTPClient) WithDialerOptions(opts ...func(*net.Dialer)) HTTPC
 }
 
 // WithTimeout Sets the timeout used by the client for all requests.
-func (b *BuildableHTTPClient) WithTimeout(timeout time.Duration) HTTPClient {
+func (b *BuildableClient) WithTimeout(timeout time.Duration) *BuildableClient {
 	cpy := b.clone()
 	cpy.clientTimeout = timeout
 	return cpy
 }
 
 // GetTransport returns a copy of the client's HTTP Transport.
-func (b *BuildableHTTPClient) GetTransport() *http.Transport {
+func (b *BuildableClient) GetTransport() *http.Transport {
 	var tr *http.Transport
 	if b.transport != nil {
 		tr = b.transport.Clone()
@@ -148,7 +141,7 @@ func (b *BuildableHTTPClient) GetTransport() *http.Transport {
 }
 
 // GetDialer returns a copy of the client's network dialer.
-func (b *BuildableHTTPClient) GetDialer() *net.Dialer {
+func (b *BuildableClient) GetDialer() *net.Dialer {
 	var dialer *net.Dialer
 	if b.dialer != nil {
 		dialer = shallowCopyStruct(b.dialer).(*net.Dialer)
@@ -160,7 +153,7 @@ func (b *BuildableHTTPClient) GetDialer() *net.Dialer {
 }
 
 // GetTimeout returns a copy of the client's timeout to cancel requests with.
-func (b *BuildableHTTPClient) GetTimeout() time.Duration {
+func (b *BuildableClient) GetTimeout() time.Duration {
 	return b.clientTimeout
 }
 
@@ -221,4 +214,88 @@ func shallowCopyStruct(src interface{}) interface{} {
 	}
 
 	return dstVal.Interface()
+}
+
+// wrapWithLimitedRedirect updates the Client's Transport and CheckRedirect to
+// not follow any redirect other than 307 and 308. No other redirect will be
+// followed.
+//
+// If the client does not have a Transport defined will use a new SDK default
+// http.Transport configuration.
+func wrapWithLimitedRedirect(c *http.Client) *http.Client {
+	tr := c.Transport
+	if tr == nil {
+		tr = defaultHTTPTransport()
+	}
+
+	cc := *c
+	cc.CheckRedirect = limitedRedirect
+	cc.Transport = suppressBadHTTPRedirectTransport{
+		tr: tr,
+	}
+
+	return &cc
+}
+
+// limitedRedirect is a CheckRedirect that prevents the client from following
+// any non 307/308 HTTP status code redirects.
+//
+// The 307 and 308 redirects are allowed because the client must use the
+// original HTTP method for the redirected to location. Whereas 301 and 302
+// allow the client to switch to GET for the redirect.
+//
+// Suppresses all redirect requests with a URL of badHTTPRedirectLocation.
+func limitedRedirect(r *http.Request, via []*http.Request) error {
+	// Request.Response, in CheckRedirect is the response that is triggering
+	// the redirect.
+	resp := r.Response
+	if r.URL.String() == badHTTPRedirectLocation {
+		resp.Header.Del(badHTTPRedirectLocation)
+		return http.ErrUseLastResponse
+	}
+
+	switch resp.StatusCode {
+	case 307, 308:
+		// Only allow 307 and 308 redirects as they preserve the method.
+		return nil
+	}
+
+	return http.ErrUseLastResponse
+}
+
+// suppressBadHTTPRedirectTransport provides an http.RoundTripper
+// implementation that wraps another http.RoundTripper to prevent HTTP client
+// receiving 301 and 302 HTTP responses redirects without the required location
+// header.
+//
+// Clients using this utility must have a CheckRedirect, e.g. limitedRedirect,
+// that check for responses with having a URL of baseHTTPRedirectLocation, and
+// suppress the redirect.
+type suppressBadHTTPRedirectTransport struct {
+	tr http.RoundTripper
+}
+
+const badHTTPRedirectLocation = `https://amazonaws.com/badhttpredirectlocation`
+
+// RoundTrip backfills a stub location when a 301/302 response is received
+// without a location. This stub location is used by limitedRedirect to prevent
+// the HTTP client from failing attempting to use follow a redirect without a
+// location value.
+func (t suppressBadHTTPRedirectTransport) RoundTrip(r *http.Request) (*http.Response, error) {
+	resp, err := t.tr.RoundTrip(r)
+	if err != nil {
+		return resp, err
+	}
+
+	// S3 is the only known service to return 301 without location header.
+	// The Go standard library HTTP client will return an opaque error if it
+	// tries to follow a 301/302 response missing the location header.
+	switch resp.StatusCode {
+	case 301, 302:
+		if v := resp.Header.Get("Location"); len(v) == 0 {
+			resp.Header.Set("Location", badHTTPRedirectLocation)
+		}
+	}
+
+	return resp, err
 }

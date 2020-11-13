@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/feature/s3/manager"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
@@ -49,7 +50,7 @@ func ExampleNewUploader_overrideTransport() {
 
 	client := s3.NewFromConfig(cfg, func(o *s3.Options) {
 		// Override Default Transport Values
-		o.HTTPClient = aws.NewBuildableHTTPClient().WithTransportOptions(func(tr *http.Transport) {
+		o.HTTPClient = awshttp.NewBuildableClient().WithTransportOptions(func(tr *http.Transport) {
 			tr.ResponseHeaderTimeout = 1 * time.Second
 			tr.WriteBufferSize = 1024 * 1024
 			tr.ReadBufferSize = 1024 * 1024

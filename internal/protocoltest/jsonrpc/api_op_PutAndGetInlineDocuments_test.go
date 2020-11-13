@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"context"
 	"github.com/aws/aws-sdk-go-v2/aws"
+	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	"github.com/awslabs/smithy-go/middleware"
 	smithytesting "github.com/awslabs/smithy-go/testing"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -89,7 +90,7 @@ func TestClient_PutAndGetInlineDocuments_awsAwsjson11Serialize(t *testing.T) {
 					e.SigningRegion = "us-west-2"
 					return e, err
 				}),
-				HTTPClient: aws.NewBuildableHTTPClient(),
+				HTTPClient: awshttp.NewBuildableClient(),
 				Region:     "us-west-2",
 			})
 			result, err := client.PutAndGetInlineDocuments(context.Background(), c.Params)

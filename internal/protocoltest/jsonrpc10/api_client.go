@@ -149,7 +149,7 @@ func resolveHTTPClient(o *Options) {
 	if o.HTTPClient != nil {
 		return
 	}
-	o.HTTPClient = aws.NewBuildableHTTPClient()
+	o.HTTPClient = awshttp.NewBuildableClient()
 }
 
 func resolveRetryer(o *Options) {

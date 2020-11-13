@@ -97,8 +97,8 @@ final class AwsProtocolUtils {
         inputConfigValues.add(HttpProtocolUnitTestGenerator.ConfigValue.builder()
                 .name(AddAwsConfigFields.HTTP_CLIENT_CONFIG_NAME)
                 .value(writer -> {
-                    writer.addUseImports(AwsGoDependency.AWS_CORE);
-                    writer.write("aws.NewBuildableHTTPClient(),");
+                    writer.addUseImports(AwsGoDependency.AWS_HTTP_TRANSPORT);
+                    writer.write("awshttp.NewBuildableClient(),");
                 })
                 .build());
 

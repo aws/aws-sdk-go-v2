@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"context"
 	"github.com/aws/aws-sdk-go-v2/aws"
+	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	"github.com/awslabs/smithy-go/middleware"
 	smithytesting "github.com/awslabs/smithy-go/testing"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -81,7 +82,7 @@ func TestClient_EmptyInputAndEmptyOutput_awsAwsjson10Serialize(t *testing.T) {
 					e.SigningRegion = "us-west-2"
 					return e, err
 				}),
-				HTTPClient: aws.NewBuildableHTTPClient(),
+				HTTPClient: awshttp.NewBuildableClient(),
 				Region:     "us-west-2",
 			})
 			result, err := client.EmptyInputAndEmptyOutput(context.Background(), c.Params)

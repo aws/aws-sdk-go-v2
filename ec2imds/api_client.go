@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
+	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	"github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/logging"
 	"github.com/awslabs/smithy-go/middleware"
@@ -233,28 +234,25 @@ const (
 
 func resolveHTTPClient(client HTTPClient) HTTPClient {
 	if client == nil {
-		client = aws.NewBuildableHTTPClient()
+		client = awshttp.NewBuildableClient()
 	}
 
-	if c, ok := client.(*aws.BuildableHTTPClient); ok {
-		// Use a custom Dial timeout for the EC2 Metadata service to account
-		// for the possibility the application might not be running in an
-		// environment with the service present. The client should fail fast in
-		// this case.
-		client = c.WithDialerOptions(func(d *net.Dialer) {
-			d.Timeout = defaultDialerTimeout
-		})
-
-		// Cast back to the BuildableHTTPClient to add additional options.
-		c = client.(*aws.BuildableHTTPClient)
-
-		// Use a custom Transport timeout for the EC2 Metadata service to
-		// account for the possibility that the application might be running in
-		// a container, and EC2Metadata service drops the connection after a
-		// single IP Hop. The client should fail fast in this case.
-		client = c.WithTransportOptions(func(tr *http.Transport) {
-			tr.ResponseHeaderTimeout = defaultResponseHeaderTimeout
-		})
+	if c, ok := client.(*awshttp.BuildableClient); ok {
+		client = c.
+			WithDialerOptions(func(d *net.Dialer) {
+				// Use a custom Dial timeout for the EC2 Metadata service to account
+				// for the possibility the application might not be running in an
+				// environment with the service present. The client should fail fast in
+				// this case.
+				d.Timeout = defaultDialerTimeout
+			}).
+			WithTransportOptions(func(tr *http.Transport) {
+				// Use a custom Transport timeout for the EC2 Metadata service to
+				// account for the possibility that the application might be running in
+				// a container, and EC2Metadata service drops the connection after a
+				// single IP Hop. The client should fail fast in this case.
+				tr.ResponseHeaderTimeout = defaultResponseHeaderTimeout
+			})
 	}
 
 	return client
