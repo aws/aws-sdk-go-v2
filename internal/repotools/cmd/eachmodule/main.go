@@ -4,6 +4,8 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	"io"
+	"io/ioutil"
 	"log"
 	"os"
 	"os/signal"
@@ -135,13 +137,23 @@ func run() (err error) {
 				relPath = result.Path
 			}
 
+			var output string
+			if result.Output != nil {
+				b, err := ioutil.ReadAll(result.Output)
+				if err != nil {
+					log.Printf("%s: %s => failed to read result output, %v",
+						relPath, result.Cmd, err)
+				}
+				output = string(b)
+			}
+
 			if result.Err != nil {
 				log.Printf("%s: %s => error: %v\n%s",
-					relPath, result.Cmd, result.Err, result.Output.String())
+					relPath, result.Cmd, result.Err, output)
 				failed = true
 			} else {
 				log.Printf("%s: %s =>\n%s",
-					relPath, result.Cmd, result.Output.String())
+					relPath, result.Cmd, output)
 			}
 
 			//  Terminate early as soon as any command fails.
@@ -158,7 +170,11 @@ func run() (err error) {
 	for i := 0; i < atOnce; i++ {
 		go func() {
 			defer jobWG.Done()
-			CommandWorker(ctx, jobs, results)
+			var output io.ReadWriter
+			if atOnce == 1 {
+				output = os.Stdout
+			}
+			CommandWorker(ctx, jobs, results, output)
 		}()
 	}
 
