@@ -33,10 +33,8 @@ type UpdateEndpointParameterAccessor struct {
 	// input has no bucket member.
 	GetBucketFromInput func(interface{}) (*string, bool)
 
-	// functional pointer to indicate support for accelerate.
-	// The function is intended to take an input value, and
-	// return if the operation supports accelerate.
-	SupportsAccelerate func(interface{}) bool
+	// indicates if an operation supports s3 transfer acceleration.
+	SupportsAccelerate bool
 }
 
 // UpdateEndpointOptions provides the options for the UpdateEndpoint middleware setup.
@@ -67,9 +65,9 @@ type UpdateEndpointOptions struct {
 // UpdateEndpoint adds the middleware to the middleware stack based on the UpdateEndpointOptions.
 func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) (err error) {
 	// initial arn look up middleware
-	err = stack.Initialize.Insert(&s3shared.ARNLookup{
+	err = stack.Initialize.Add(&s3shared.ARNLookup{
 		GetARNValue: options.Accessor.GetBucketFromInput,
-	}, "OperationInputValidation", middleware.Before)
+	}, middleware.Before)
 	if err != nil {
 		return err
 	}
@@ -122,7 +120,7 @@ type updateEndpoint struct {
 
 	// accelerate options
 	useAccelerate      bool
-	supportsAccelerate func(interface{}) bool
+	supportsAccelerate bool
 }
 
 // ID returns the middleware ID.
@@ -151,7 +149,7 @@ func (u *updateEndpoint) HandleSerialize(
 	}
 
 	// check if accelerate is supported
-	if u.supportsAccelerate == nil || (u.useAccelerate && !u.supportsAccelerate(in.Parameters)) {
+	if u.useAccelerate && !u.supportsAccelerate {
 		// accelerate is not supported, thus will be ignored
 		log.Println("Transfer acceleration is not supported for the operation, ignoring UseAccelerate.")
 		u.useAccelerate = false
