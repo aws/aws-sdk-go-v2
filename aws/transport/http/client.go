@@ -69,7 +69,7 @@ func (b *BuildableClient) Do(req *http.Request) (*http.Response, error) {
 }
 
 func (b *BuildableClient) build() {
-	b.client = wrapWithoutRedirect(&http.Client{
+	b.client = wrapWithLimitedRedirect(&http.Client{
 		Timeout:   b.clientTimeout,
 		Transport: b.GetTransport(),
 	})
@@ -216,27 +216,41 @@ func shallowCopyStruct(src interface{}) interface{} {
 	return dstVal.Interface()
 }
 
-func wrapWithoutRedirect(c *http.Client) *http.Client {
+// wrapWithLimitedRedirect updates the Client's Transport and CheckRedirect to
+// not follow any redirect other than 307 and 308. No other redirect will be
+// followed.
+//
+// If the client does not have a Transport defined will use a new SDK default
+// http.Transport configuration.
+func wrapWithLimitedRedirect(c *http.Client) *http.Client {
 	tr := c.Transport
 	if tr == nil {
-		tr = http.DefaultTransport
+		tr = defaultHTTPTransport()
 	}
 
 	cc := *c
 	cc.CheckRedirect = limitedRedirect
-	cc.Transport = stubBadHTTPRedirectTransport{
+	cc.Transport = suppressBadHTTPRedirectTransport{
 		tr: tr,
 	}
 
 	return &cc
 }
 
+// limitedRedirect is a CheckRedirect that prevents the client from following
+// any non 307/308 HTTP status code redirects.
+//
+// The 307 and 308 redirects are allowed because the client must use the
+// original HTTP method for the redirected to location. Whereas 301 and 302
+// allow the client to switch to GET for the redirect.
+//
+// Suppresses all redirect requests with a URL of badHTTPRedirectLocation.
 func limitedRedirect(r *http.Request, via []*http.Request) error {
 	// Request.Response, in CheckRedirect is the response that is triggering
 	// the redirect.
 	resp := r.Response
-	if r.URL.String() == stubBadHTTPRedirectLocation {
-		resp.Header.Del(stubBadHTTPRedirectLocation)
+	if r.URL.String() == badHTTPRedirectLocation {
+		resp.Header.Del(badHTTPRedirectLocation)
 		return http.ErrUseLastResponse
 	}
 
@@ -249,24 +263,37 @@ func limitedRedirect(r *http.Request, via []*http.Request) error {
 	return http.ErrUseLastResponse
 }
 
-type stubBadHTTPRedirectTransport struct {
+// suppressBadHTTPRedirectTransport provides an http.RoundTripper
+// implementation that wraps another http.RoundTripper to prevent HTTP client
+// receiving 301 and 302 HTTP responses redirects without the required location
+// header.
+//
+// Clients using this utility must have a CheckRedirect, e.g. limitedRedirect,
+// that check for responses with having a URL of baseHTTPRedirectLocation, and
+// suppress the redirect.
+type suppressBadHTTPRedirectTransport struct {
 	tr http.RoundTripper
 }
 
-const stubBadHTTPRedirectLocation = `https://amazonaws.com/badhttpredirectlocation`
+const badHTTPRedirectLocation = `https://amazonaws.com/badhttpredirectlocation`
 
-func (t stubBadHTTPRedirectTransport) RoundTrip(r *http.Request) (*http.Response, error) {
+// RoundTrip backfills a stub location when a 301/302 response is received
+// without a location. This stub location is used by limitedRedirect to prevent
+// the HTTP client from failing attempting to use follow a redirect without a
+// location value.
+func (t suppressBadHTTPRedirectTransport) RoundTrip(r *http.Request) (*http.Response, error) {
 	resp, err := t.tr.RoundTrip(r)
 	if err != nil {
 		return resp, err
 	}
 
-	// TODO S3 is the only known service to return 301 without location header.
-	// consider moving this to a S3 customization.
+	// S3 is the only known service to return 301 without location header.
+	// The Go standard library HTTP client will return an opaque error if it
+	// tries to follow a 301/302 response missing the location header.
 	switch resp.StatusCode {
 	case 301, 302:
 		if v := resp.Header.Get("Location"); len(v) == 0 {
-			resp.Header.Set("Location", stubBadHTTPRedirectLocation)
+			resp.Header.Set("Location", badHTTPRedirectLocation)
 		}
 	}
 
