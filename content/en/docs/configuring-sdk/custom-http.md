@@ -1,21 +1,63 @@
 ---
-title: "Creating a Custom HTTP Client"
-linkTitle: "Custom HTTP Client"
+title: "Customizing the HTTP Client"
+linkTitle: "HTTP Client"
+date: "2020-11-12"
 description: "Create a custom HTTP client with the AWS SDK for Go V2 to specify custom timeout values."
 ---
 
-The AWS SDK for Go V2 uses a default HTTP client with default configuration values. Although you can change some of
-these configuration values, the default HTTP client and transport are not sufficiently configurable for customers using
-the AWS SDK for Go V2 in an environment with high throughput and low latency requirements. This section describes how to create a
-custom HTTP client, and use that client to create AWS SDK for Go V2 calls.
+The {{% alias sdk-go %}} uses a default HTTP client with default configuration values. Although you can change some of
+these configuration values, the default HTTP client and transport are not sufficiently configured for customers using
+the {{% alias sdk-go %}} in an environment with high throughput and low latency requirements. This section describes how
+to configure a custom HTTP client, and use that client to create {{% alias sdk-go %}} calls.
 
-To assist you in creating a custom HTTP client, this section describes how to create a structure to encapsulate the
-custom settings, create a function to create a custom HTTP client based on those settings, and use that custom HTTP
-client to call an AWS SDK for Go V2 service client.
+To assist you in creating a custom HTTP client, this section describes how to the 
+[NewBuildableClient]({{< apiref "aws/transport/http#NewBuildableClient" >}}) to configure custom settings, and use 
+that client with an {{% alias sdk-go %}} service client.
 
 Let's define what we want to customize.
 
-## Dialer.KeepAlive
+
+## Overriding During Configuration Loading
+Custom HTTP clients can be provided when calling [LoadDefaultConfig]({{< apiref "config#LoadDefaultConfig" >}}) by
+wrapping the client using [WithHTTPClient]({{< apiref "config#WithHTTP" >}}) and passing the resulting value to 
+`LoadDefaultConfig`. For example to pass `customClient` as our client:
+
+```go
+cfg, err := config.LoadDefaultConfig(config.WithHTTPClient(customClient))
+```
+
+## Timeout
+The `BuildableHTTPClient` can be configured with a request timeout limit. This timeout includes the time to connect, 
+process any redirects, and read the complete response body. For example to modify the client timeout:
+
+```go
+import "github.com/aws/aws-sdk-go-v2/aws/transport/http"
+
+// ...
+
+httpClient := http.NewBuildableClient().WithTimeout(time.Second*5)
+```
+
+## Dialer
+The `BuildableHTTPClient` provides a builder mechanics for constructing clients with modified
+[Dialer](https://golang.org/pkg/net/#Dialer) options. The following example shows how to configure a clients
+`Dialer` settings.
+
+```go
+import awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
+import "net"
+
+// ...
+
+httpClient := awshttp.NewBuildableClient().WithDialerOptions(func(d *net.Dialer) {
+	d.KeepAlive = -1
+	d.Timeout = time.Millisecond*500
+})
+```
+
+### Settings
+
+#### Dialer.KeepAlive
 
 This setting represents the keep-alive period for an active network connection.
 
@@ -30,7 +72,7 @@ See <https://golang.org/pkg/net/#Dialer.KeepAlive>
 
 We'll call this ``ConnKeepAlive`` as **time.Duration**.
 
-## Dialer.Timeout
+#### Dialer.Timeout
 
 This setting represents the maximum amount of time a dial to wait for a connection to be created.
 
@@ -40,7 +82,52 @@ See <https://golang.org/pkg/net/#Dialer.Timeout>
 
 We'll call this ``Connect`` as **time.Duration**.
 
-## Transport.ExpectContinueTimeout
+## Transport
+
+The `BuildableHTTPClient` provides a builder mechanics for constructing clients with modified 
+[Transport](https://golang.org/pkg/net/http#Transport) options.
+
+### Configuring a Proxy
+
+If you cannot directly connect to the internet, you can use Go-supported
+environment variables (`HTTP_PROXY` / `HTTPS_PROXY`) or create a custom HTTP client to
+configure your proxy. The following example will configure the client to use `PROXY_URL` as the proxy
+endpoint:
+
+```go
+import awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
+import "net/http"
+
+// ...
+
+httpClient := awshttp.NewBuildableClient().WithTransportOptions(func(tr *http.Transport) {
+	proxyURL, err := url.Parse("PROXY_URL")
+	if err != nil {
+		log.Fatal(err)
+	}
+	tr.Proxy = http.ProxyURL(proxyURL)
+})
+```
+
+### Other Settings
+
+Below are a few other `Transport` settings that can be modified to tune the HTTP client. These settings can be applied
+as shown in the example below: Additional settings not described here can be found in the
+[Transport](https://golang.org/pkg/net/http/#Transport) type documentation.
+
+```go
+import awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
+import "net/http"
+
+// ...
+
+httpClient := awshttp.NewBuildableClient().WithTransportOptions(func(tr *http.Transport) {
+	tr.ExpectContinueTimeout = 0
+	tr.MaxIdleConns = 10
+})
+```
+
+#### Transport.ExpectContinueTimeout
 
 This setting represents the maximum amount of time to wait for a server's first response headers after fully writing the
 request headers, if the request has an "Expect: 100-continue" header. This time does not include the time to send the
@@ -55,7 +142,7 @@ See <https://golang.org/pkg/net/http/#Transport.ExpectContinueTimeout>
 
 We'll call this ``ExpectContinue`` as **time.Duration**.
 
-## Transport.IdleConnTimeout
+#### Transport.IdleConnTimeout
 
 This setting represents the maximum amount of time to keep an idle network connection alive between HTTP requests.
 
@@ -65,7 +152,7 @@ See <https://golang.org/pkg/net/http/#Transport.IdleConnTimeout>
 
 We'll call this ``IdleConn`` as **time.Duration**.
 
-## Transport.MaxIdleConns
+#### Transport.MaxIdleConns
 
 This setting represents the maximum number of idle (keep-alive) connections across all hosts. One use case for
 increasing this value is when you are seeing many connections in a short period from the same clients
@@ -76,7 +163,7 @@ See <https://golang.org/pkg/net/http/#Transport.MaxIdleConns>
 
 We'll call this ``MaxAllIdleConns`` as **int**.
 
-## Transport.MaxIdleConnsPerHost
+#### Transport.MaxIdleConnsPerHost
 
 This setting represents the maximum number of idle (keep-alive) connections to keep per-host. One use case for
 increasing this value is when you are seeing many connections in a short period from the same clients
@@ -89,7 +176,7 @@ See <https://golang.org/pkg/net/http/#Transport.MaxIdleConnsPerHost>
 
 We'll call this ``MaxHostIdleConns`` as **int**.
 
-## Transport.ResponseHeaderTimeout
+#### Transport.ResponseHeaderTimeout
 
 This setting represents the maximum amount of time to wait for a client to read the response header.
 
@@ -105,7 +192,7 @@ See <https://golang.org/pkg/net/http/#Transport.ResponseHeaderTimeout>
 
 We'll call this ``ResponseHeader`` as **time.Duration**.
 
-## Transport.TLSHandshakeTimeout
+#### Transport.TLSHandshakeTimeout
 
 This setting represents the maximum amount of time waiting for a TLS handshake to be completed.
 
@@ -116,9 +203,3 @@ Zero means no timeout.
 See <https://golang.org/pkg/net/http/#Transport.TLSHandshakeTimeout>
 
 We'll call this ``TLSHandshake`` as **time.Duration**.
-
-## Examples
-
-See
-a [complete example](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/go/s3/CustomClient/CustomHttpClient.go)
-on GitHub.
