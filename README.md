@@ -31,6 +31,11 @@ the [Docsy](https://www.docsy.dev/) Hugo theme for presentation and formatting o
    ```bash
    git submodule update --init --recursive themes/docsy
    ```
+1. Install [NodeJS (LTS)](https://nodejs.org/en/)
+1. Install Project Dependencies
+   ```bash
+   npm install
+   ```
 
 ### Previewing Changes
 
