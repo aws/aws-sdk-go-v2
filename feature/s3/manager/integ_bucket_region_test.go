@@ -11,7 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
-func TestGetBucketRegion(t *testing.T) {
+func TestInteg_GetBucketRegion(t *testing.T) {
 	expectRegion := integConfig.Region
 
 	region, err := manager.GetBucketRegion(context.Background(), s3.NewFromConfig(integConfig), aws.ToString(bucketName))

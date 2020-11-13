@@ -2,7 +2,7 @@
 LINTIGNORESINGLEFIGHT='internal/sync/singleflight/singleflight.go:.+error should be the last type'
 
 UNIT_TEST_TAGS=
-BUILD_TAGS=-tags "example,codegen,integration,ec2env"
+BUILD_TAGS=-tags "example,codegen,integration,ec2env,perftest"
 
 SMITHY_GO_SRC ?= $(shell pwd)/../smithy-go
 
