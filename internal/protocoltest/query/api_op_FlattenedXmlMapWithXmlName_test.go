@@ -7,7 +7,6 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/awslabs/smithy-go/middleware"
-	"github.com/awslabs/smithy-go/ptr"
 	smithyrand "github.com/awslabs/smithy-go/rand"
 	smithytesting "github.com/awslabs/smithy-go/testing"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -45,9 +44,9 @@ func TestClient_FlattenedXmlMapWithXmlName_awsAwsqueryDeserialize(t *testing.T) 
 			    </FlattenedXmlMapWithXmlNameResult>
 			</FlattenedXmlMapWithXmlNameResponse>`),
 			ExpectResult: &FlattenedXmlMapWithXmlNameOutput{
-				MyMap: map[string]*string{
-					"a": ptr.String("A"),
-					"b": ptr.String("B"),
+				MyMap: map[string]string{
+					"a": "A",
+					"b": "B",
 				},
 			},
 		},

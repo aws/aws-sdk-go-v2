@@ -46,27 +46,27 @@ type KitchenSinkOperationInput struct {
 
 	JsonValue *string
 
-	ListOfLists [][]*string
+	ListOfLists [][]string
 
-	ListOfMapsOfStrings []map[string]*string
+	ListOfMapsOfStrings []map[string]string
 
-	ListOfStrings []*string
+	ListOfStrings []string
 
-	ListOfStructs []*types.SimpleStruct
+	ListOfStructs []types.SimpleStruct
 
 	Long *int64
 
-	MapOfListsOfStrings map[string][]*string
+	MapOfListsOfStrings map[string][]string
 
-	MapOfMaps map[string]map[string]*string
+	MapOfMaps map[string]map[string]string
 
-	MapOfStrings map[string]*string
+	MapOfStrings map[string]string
 
-	MapOfStructs map[string]*types.SimpleStruct
+	MapOfStructs map[string]types.SimpleStruct
 
-	RecursiveList []*types.KitchenSink
+	RecursiveList []types.KitchenSink
 
-	RecursiveMap map[string]*types.KitchenSink
+	RecursiveMap map[string]types.KitchenSink
 
 	RecursiveStruct *types.KitchenSink
 
@@ -100,27 +100,27 @@ type KitchenSinkOperationOutput struct {
 
 	JsonValue *string
 
-	ListOfLists [][]*string
+	ListOfLists [][]string
 
-	ListOfMapsOfStrings []map[string]*string
+	ListOfMapsOfStrings []map[string]string
 
-	ListOfStrings []*string
+	ListOfStrings []string
 
-	ListOfStructs []*types.SimpleStruct
+	ListOfStructs []types.SimpleStruct
 
 	Long *int64
 
-	MapOfListsOfStrings map[string][]*string
+	MapOfListsOfStrings map[string][]string
 
-	MapOfMaps map[string]map[string]*string
+	MapOfMaps map[string]map[string]string
 
-	MapOfStrings map[string]*string
+	MapOfStrings map[string]string
 
-	MapOfStructs map[string]*types.SimpleStruct
+	MapOfStructs map[string]types.SimpleStruct
 
-	RecursiveList []*types.KitchenSink
+	RecursiveList []types.KitchenSink
 
-	RecursiveMap map[string]*types.KitchenSink
+	RecursiveMap map[string]types.KitchenSink
 
 	RecursiveStruct *types.KitchenSink
 

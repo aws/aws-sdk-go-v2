@@ -28,13 +28,13 @@ func (c *Client) HttpPrefixHeaders(ctx context.Context, params *HttpPrefixHeader
 type HttpPrefixHeadersInput struct {
 	Foo *string
 
-	FooMap map[string]*string
+	FooMap map[string]string
 }
 
 type HttpPrefixHeadersOutput struct {
 	Foo *string
 
-	FooMap map[string]*string
+	FooMap map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

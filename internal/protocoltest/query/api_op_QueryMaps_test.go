@@ -37,9 +37,9 @@ func TestClient_QueryMaps_awsAwsquerySerialize(t *testing.T) {
 		// Serializes query maps
 		"QuerySimpleQueryMaps": {
 			Params: &QueryMapsInput{
-				MapArg: map[string]*string{
-					"bar": ptr.String("Bar"),
-					"foo": ptr.String("Foo"),
+				MapArg: map[string]string{
+					"bar": "Bar",
+					"foo": "Foo",
 				},
 			},
 			ExpectMethod:  "POST",
@@ -61,8 +61,8 @@ func TestClient_QueryMaps_awsAwsquerySerialize(t *testing.T) {
 		// Serializes query maps and uses xmlName
 		"QuerySimpleQueryMapsWithXmlName": {
 			Params: &QueryMapsInput{
-				RenamedMapArg: map[string]*string{
-					"foo": ptr.String("Foo"),
+				RenamedMapArg: map[string]string{
+					"foo": "Foo",
 				},
 			},
 			ExpectMethod:  "POST",
@@ -82,7 +82,7 @@ func TestClient_QueryMaps_awsAwsquerySerialize(t *testing.T) {
 		// Serializes complex query maps
 		"QueryComplexQueryMaps": {
 			Params: &QueryMapsInput{
-				ComplexMapArg: map[string]*types.GreetingStruct{
+				ComplexMapArg: map[string]types.GreetingStruct{
 					"bar": {
 						Hi: ptr.String("Bar"),
 					},
@@ -110,7 +110,7 @@ func TestClient_QueryMaps_awsAwsquerySerialize(t *testing.T) {
 		// Does not serialize empty query maps
 		"QueryEmptyQueryMaps": {
 			Params: &QueryMapsInput{
-				MapArg: map[string]*string{},
+				MapArg: map[string]string{},
 			},
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
@@ -127,9 +127,9 @@ func TestClient_QueryMaps_awsAwsquerySerialize(t *testing.T) {
 		// Serializes query maps where the member has an xmlName trait
 		"QueryQueryMapWithMemberXmlName": {
 			Params: &QueryMapsInput{
-				MapWithXmlMemberName: map[string]*string{
-					"bar": ptr.String("Bar"),
-					"foo": ptr.String("Foo"),
+				MapWithXmlMemberName: map[string]string{
+					"bar": "Bar",
+					"foo": "Foo",
 				},
 			},
 			ExpectMethod:  "POST",
@@ -151,9 +151,9 @@ func TestClient_QueryMaps_awsAwsquerySerialize(t *testing.T) {
 		// Serializes flattened query maps
 		"QueryFlattenedQueryMaps": {
 			Params: &QueryMapsInput{
-				FlattenedMap: map[string]*string{
-					"bar": ptr.String("Bar"),
-					"foo": ptr.String("Foo"),
+				FlattenedMap: map[string]string{
+					"bar": "Bar",
+					"foo": "Foo",
 				},
 			},
 			ExpectMethod:  "POST",
@@ -175,9 +175,9 @@ func TestClient_QueryMaps_awsAwsquerySerialize(t *testing.T) {
 		// Serializes flattened query maps that use an xmlName
 		"QueryFlattenedQueryMapsWithXmlName": {
 			Params: &QueryMapsInput{
-				FlattenedMapWithXmlName: map[string]*string{
-					"bar": ptr.String("Bar"),
-					"foo": ptr.String("Foo"),
+				FlattenedMapWithXmlName: map[string]string{
+					"bar": "Bar",
+					"foo": "Foo",
 				},
 			},
 			ExpectMethod:  "POST",
@@ -199,14 +199,14 @@ func TestClient_QueryMaps_awsAwsquerySerialize(t *testing.T) {
 		// Serializes query map of lists
 		"QueryQueryMapOfLists": {
 			Params: &QueryMapsInput{
-				MapOfLists: map[string][]*string{
+				MapOfLists: map[string][]string{
 					"bar": {
-						ptr.String("C"),
-						ptr.String("D"),
+						"C",
+						"D",
 					},
 					"foo": {
-						ptr.String("A"),
-						ptr.String("B"),
+						"A",
+						"B",
 					},
 				},
 			},

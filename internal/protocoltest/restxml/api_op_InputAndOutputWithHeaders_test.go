@@ -42,15 +42,15 @@ func TestClient_InputAndOutputWithHeaders_awsRestxmlSerialize(t *testing.T) {
 		"InputAndOutputWithStringHeaders": {
 			Params: &InputAndOutputWithHeadersInput{
 				HeaderString: ptr.String("Hello"),
-				HeaderStringList: []*string{
-					ptr.String("a"),
-					ptr.String("b"),
-					ptr.String("c"),
+				HeaderStringList: []string{
+					"a",
+					"b",
+					"c",
 				},
-				HeaderStringSet: []*string{
-					ptr.String("a"),
-					ptr.String("b"),
-					ptr.String("c"),
+				HeaderStringSet: []string{
+					"a",
+					"b",
+					"c",
 				},
 			},
 			ExpectMethod:  "POST",
@@ -74,10 +74,10 @@ func TestClient_InputAndOutputWithHeaders_awsRestxmlSerialize(t *testing.T) {
 				HeaderLong:    ptr.Int64(123),
 				HeaderFloat:   ptr.Float32(1.1),
 				HeaderDouble:  ptr.Float64(1.1),
-				HeaderIntegerList: []*int32{
-					ptr.Int32(1),
-					ptr.Int32(2),
-					ptr.Int32(3),
+				HeaderIntegerList: []int32{
+					1,
+					2,
+					3,
 				},
 			},
 			ExpectMethod:  "POST",
@@ -101,10 +101,10 @@ func TestClient_InputAndOutputWithHeaders_awsRestxmlSerialize(t *testing.T) {
 			Params: &InputAndOutputWithHeadersInput{
 				HeaderTrueBool:  ptr.Bool(true),
 				HeaderFalseBool: ptr.Bool(false),
-				HeaderBooleanList: []*bool{
-					ptr.Bool(true),
-					ptr.Bool(false),
-					ptr.Bool(true),
+				HeaderBooleanList: []bool{
+					true,
+					false,
+					true,
 				},
 			},
 			ExpectMethod:  "POST",
@@ -122,9 +122,9 @@ func TestClient_InputAndOutputWithHeaders_awsRestxmlSerialize(t *testing.T) {
 		// Tests requests with timestamp header bindings
 		"InputAndOutputWithTimestampHeaders": {
 			Params: &InputAndOutputWithHeadersInput{
-				HeaderTimestampList: []*time.Time{
-					ptr.Time(smithytime.ParseEpochSeconds(1576540098)),
-					ptr.Time(smithytime.ParseEpochSeconds(1576540098)),
+				HeaderTimestampList: []time.Time{
+					smithytime.ParseEpochSeconds(1576540098),
+					smithytime.ParseEpochSeconds(1576540098),
 				},
 			},
 			ExpectMethod:  "POST",
@@ -244,15 +244,15 @@ func TestClient_InputAndOutputWithHeaders_awsRestxmlDeserialize(t *testing.T) {
 			Body: []byte(``),
 			ExpectResult: &InputAndOutputWithHeadersOutput{
 				HeaderString: ptr.String("Hello"),
-				HeaderStringList: []*string{
-					ptr.String("a"),
-					ptr.String("b"),
-					ptr.String("c"),
+				HeaderStringList: []string{
+					"a",
+					"b",
+					"c",
 				},
-				HeaderStringSet: []*string{
-					ptr.String("a"),
-					ptr.String("b"),
-					ptr.String("c"),
+				HeaderStringSet: []string{
+					"a",
+					"b",
+					"c",
 				},
 			},
 		},
@@ -276,10 +276,10 @@ func TestClient_InputAndOutputWithHeaders_awsRestxmlDeserialize(t *testing.T) {
 				HeaderLong:    ptr.Int64(123),
 				HeaderFloat:   ptr.Float32(1.1),
 				HeaderDouble:  ptr.Float64(1.1),
-				HeaderIntegerList: []*int32{
-					ptr.Int32(1),
-					ptr.Int32(2),
-					ptr.Int32(3),
+				HeaderIntegerList: []int32{
+					1,
+					2,
+					3,
 				},
 			},
 		},
@@ -295,10 +295,10 @@ func TestClient_InputAndOutputWithHeaders_awsRestxmlDeserialize(t *testing.T) {
 			ExpectResult: &InputAndOutputWithHeadersOutput{
 				HeaderTrueBool:  ptr.Bool(true),
 				HeaderFalseBool: ptr.Bool(false),
-				HeaderBooleanList: []*bool{
-					ptr.Bool(true),
-					ptr.Bool(false),
-					ptr.Bool(true),
+				HeaderBooleanList: []bool{
+					true,
+					false,
+					true,
 				},
 			},
 		},
@@ -310,9 +310,9 @@ func TestClient_InputAndOutputWithHeaders_awsRestxmlDeserialize(t *testing.T) {
 			},
 			Body: []byte(``),
 			ExpectResult: &InputAndOutputWithHeadersOutput{
-				HeaderTimestampList: []*time.Time{
-					ptr.Time(smithytime.ParseEpochSeconds(1576540098)),
-					ptr.Time(smithytime.ParseEpochSeconds(1576540098)),
+				HeaderTimestampList: []time.Time{
+					smithytime.ParseEpochSeconds(1576540098),
+					smithytime.ParseEpochSeconds(1576540098),
 				},
 			},
 		},

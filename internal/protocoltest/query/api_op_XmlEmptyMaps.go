@@ -29,7 +29,7 @@ type XmlEmptyMapsInput struct {
 }
 
 type XmlEmptyMapsOutput struct {
-	MyMap map[string]*types.GreetingStruct
+	MyMap map[string]types.GreetingStruct
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

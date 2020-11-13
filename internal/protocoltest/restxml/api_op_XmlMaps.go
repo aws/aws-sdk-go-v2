@@ -27,11 +27,11 @@ func (c *Client) XmlMaps(ctx context.Context, params *XmlMapsInput, optFns ...fu
 }
 
 type XmlMapsInput struct {
-	MyMap map[string]*types.GreetingStruct
+	MyMap map[string]types.GreetingStruct
 }
 
 type XmlMapsOutput struct {
-	MyMap map[string]*types.GreetingStruct
+	MyMap map[string]types.GreetingStruct
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

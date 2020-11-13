@@ -26,11 +26,11 @@ func (c *Client) FlattenedXmlMapWithXmlName(ctx context.Context, params *Flatten
 }
 
 type FlattenedXmlMapWithXmlNameInput struct {
-	MyMap map[string]*string
+	MyMap map[string]string
 }
 
 type FlattenedXmlMapWithXmlNameOutput struct {
-	MyMap map[string]*string
+	MyMap map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

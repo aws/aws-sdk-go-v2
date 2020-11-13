@@ -26,11 +26,11 @@ func (c *Client) XmlEmptyMaps(ctx context.Context, params *XmlEmptyMapsInput, op
 }
 
 type XmlEmptyMapsInput struct {
-	MyMap map[string]*types.GreetingStruct
+	MyMap map[string]types.GreetingStruct
 }
 
 type XmlEmptyMapsOutput struct {
-	MyMap map[string]*types.GreetingStruct
+	MyMap map[string]types.GreetingStruct
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

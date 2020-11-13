@@ -37,8 +37,8 @@ func TestClient_XmlEmptyLists_awsEc2queryDeserialize(t *testing.T) {
 			</XmlListsResponse>
 			`),
 			ExpectResult: &XmlEmptyListsOutput{
-				StringList: []*string{},
-				StringSet:  []*string{},
+				StringList: []string{},
+				StringSet:  []string{},
 			},
 		},
 	}

@@ -27,13 +27,13 @@ func (c *Client) QueryLists(ctx context.Context, params *QueryListsInput, optFns
 }
 
 type QueryListsInput struct {
-	ComplexListArg []*types.GreetingStruct
+	ComplexListArg []types.GreetingStruct
 
-	ListArg []*string
+	ListArg []string
 
-	ListArgWithXmlName []*string
+	ListArgWithXmlName []string
 
-	ListArgWithXmlNameMember []*string
+	ListArgWithXmlNameMember []string
 }
 
 type QueryListsOutput struct {

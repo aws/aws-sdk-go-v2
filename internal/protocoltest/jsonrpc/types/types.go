@@ -32,27 +32,27 @@ type KitchenSink struct {
 
 	JsonValue *string
 
-	ListOfLists [][]*string
+	ListOfLists [][]string
 
-	ListOfMapsOfStrings []map[string]*string
+	ListOfMapsOfStrings []map[string]string
 
-	ListOfStrings []*string
+	ListOfStrings []string
 
-	ListOfStructs []*SimpleStruct
+	ListOfStructs []SimpleStruct
 
 	Long *int64
 
-	MapOfListsOfStrings map[string][]*string
+	MapOfListsOfStrings map[string][]string
 
-	MapOfMaps map[string]map[string]*string
+	MapOfMaps map[string]map[string]string
 
-	MapOfStrings map[string]*string
+	MapOfStrings map[string]string
 
-	MapOfStructs map[string]*SimpleStruct
+	MapOfStructs map[string]SimpleStruct
 
-	RecursiveList []*KitchenSink
+	RecursiveList []KitchenSink
 
-	RecursiveMap map[string]*KitchenSink
+	RecursiveMap map[string]KitchenSink
 
 	RecursiveStruct *KitchenSink
 
@@ -109,19 +109,19 @@ type MyUnionMemberEnumValue struct {
 func (*MyUnionMemberEnumValue) isMyUnion() {}
 
 type MyUnionMemberListValue struct {
-	Value []*string
+	Value []string
 }
 
 func (*MyUnionMemberListValue) isMyUnion() {}
 
 type MyUnionMemberMapValue struct {
-	Value map[string]*string
+	Value map[string]string
 }
 
 func (*MyUnionMemberMapValue) isMyUnion() {}
 
 type MyUnionMemberStructureValue struct {
-	Value *GreetingStruct
+	Value GreetingStruct
 }
 
 func (*MyUnionMemberStructureValue) isMyUnion() {}

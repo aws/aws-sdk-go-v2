@@ -160,9 +160,9 @@ func TestClient_JsonUnions_awsRestjson1Serialize(t *testing.T) {
 		// Serializes a list union value
 		"RestJsonSerializeListUnionValue": {
 			Params: &JsonUnionsInput{
-				Contents: &types.MyUnionMemberListValue{Value: []*string{
-					ptr.String("foo"),
-					ptr.String("bar"),
+				Contents: &types.MyUnionMemberListValue{Value: []string{
+					"foo",
+					"bar",
 				}},
 			},
 			ExpectMethod:  "PUT",
@@ -183,9 +183,9 @@ func TestClient_JsonUnions_awsRestjson1Serialize(t *testing.T) {
 		// Serializes a map union value
 		"RestJsonSerializeMapUnionValue": {
 			Params: &JsonUnionsInput{
-				Contents: &types.MyUnionMemberMapValue{Value: map[string]*string{
-					"foo":  ptr.String("bar"),
-					"spam": ptr.String("eggs"),
+				Contents: &types.MyUnionMemberMapValue{Value: map[string]string{
+					"foo":  "bar",
+					"spam": "eggs",
 				}},
 			},
 			ExpectMethod:  "PUT",
@@ -209,7 +209,7 @@ func TestClient_JsonUnions_awsRestjson1Serialize(t *testing.T) {
 		// Serializes a structure union value
 		"RestJsonSerializeStructureUnionValue": {
 			Params: &JsonUnionsInput{
-				Contents: &types.MyUnionMemberStructureValue{Value: &types.GreetingStruct{
+				Contents: &types.MyUnionMemberStructureValue{Value: types.GreetingStruct{
 					Hi: ptr.String("hello"),
 				}},
 			},
@@ -414,9 +414,9 @@ func TestClient_JsonUnions_awsRestjson1Deserialize(t *testing.T) {
 			    }
 			}`),
 			ExpectResult: &JsonUnionsOutput{
-				Contents: &types.MyUnionMemberListValue{Value: []*string{
-					ptr.String("foo"),
-					ptr.String("bar"),
+				Contents: &types.MyUnionMemberListValue{Value: []string{
+					"foo",
+					"bar",
 				}},
 			},
 		},
@@ -436,9 +436,9 @@ func TestClient_JsonUnions_awsRestjson1Deserialize(t *testing.T) {
 			    }
 			}`),
 			ExpectResult: &JsonUnionsOutput{
-				Contents: &types.MyUnionMemberMapValue{Value: map[string]*string{
-					"foo":  ptr.String("bar"),
-					"spam": ptr.String("eggs"),
+				Contents: &types.MyUnionMemberMapValue{Value: map[string]string{
+					"foo":  "bar",
+					"spam": "eggs",
 				}},
 			},
 		},
@@ -457,7 +457,7 @@ func TestClient_JsonUnions_awsRestjson1Deserialize(t *testing.T) {
 			    }
 			}`),
 			ExpectResult: &JsonUnionsOutput{
-				Contents: &types.MyUnionMemberStructureValue{Value: &types.GreetingStruct{
+				Contents: &types.MyUnionMemberStructureValue{Value: types.GreetingStruct{
 					Hi: ptr.String("hello"),
 				}},
 			},

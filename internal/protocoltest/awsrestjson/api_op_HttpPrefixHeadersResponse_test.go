@@ -7,7 +7,6 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/awslabs/smithy-go/middleware"
-	"github.com/awslabs/smithy-go/ptr"
 	smithyrand "github.com/awslabs/smithy-go/rand"
 	smithytesting "github.com/awslabs/smithy-go/testing"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -34,9 +33,9 @@ func TestClient_HttpPrefixHeadersResponse_awsRestjson1Deserialize(t *testing.T) 
 			},
 			Body: []byte(``),
 			ExpectResult: &HttpPrefixHeadersResponseOutput{
-				PrefixHeaders: map[string]*string{
-					"X-Foo": ptr.String("Foo"),
-					"Hello": ptr.String("Hello"),
+				PrefixHeaders: map[string]string{
+					"X-Foo": "Foo",
+					"Hello": "Hello",
 				},
 			},
 		},

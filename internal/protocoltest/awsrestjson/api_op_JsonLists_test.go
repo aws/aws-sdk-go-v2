@@ -41,41 +41,41 @@ func TestClient_JsonLists_awsRestjson1Serialize(t *testing.T) {
 		// Serializes JSON lists
 		"RestJsonLists": {
 			Params: &JsonListsInput{
-				StringList: []*string{
-					ptr.String("foo"),
-					ptr.String("bar"),
+				StringList: []string{
+					"foo",
+					"bar",
 				},
-				StringSet: []*string{
-					ptr.String("foo"),
-					ptr.String("bar"),
+				StringSet: []string{
+					"foo",
+					"bar",
 				},
-				IntegerList: []*int32{
-					ptr.Int32(1),
-					ptr.Int32(2),
+				IntegerList: []int32{
+					1,
+					2,
 				},
-				BooleanList: []*bool{
-					ptr.Bool(true),
-					ptr.Bool(false),
+				BooleanList: []bool{
+					true,
+					false,
 				},
-				TimestampList: []*time.Time{
-					ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
-					ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+				TimestampList: []time.Time{
+					smithytime.ParseEpochSeconds(1398796238),
+					smithytime.ParseEpochSeconds(1398796238),
 				},
 				EnumList: []types.FooEnum{
 					types.FooEnum("Foo"),
 					types.FooEnum("0"),
 				},
-				NestedStringList: [][]*string{
+				NestedStringList: [][]string{
 					{
-						ptr.String("foo"),
-						ptr.String("bar"),
+						"foo",
+						"bar",
 					},
 					{
-						ptr.String("baz"),
-						ptr.String("qux"),
+						"baz",
+						"qux",
 					},
 				},
-				StructureList: []*types.StructureListMember{
+				StructureList: []types.StructureListMember{
 					{
 						A: ptr.String("1"),
 						B: ptr.String("2"),
@@ -145,7 +145,7 @@ func TestClient_JsonLists_awsRestjson1Serialize(t *testing.T) {
 		// Serializes empty JSON lists
 		"RestJsonListsEmpty": {
 			Params: &JsonListsInput{
-				StringList: []*string{},
+				StringList: []string{},
 			},
 			ExpectMethod:  "PUT",
 			ExpectURIPath: "/JsonLists",
@@ -163,8 +163,8 @@ func TestClient_JsonLists_awsRestjson1Serialize(t *testing.T) {
 		// Serializes null values in lists
 		"RestJsonListsSerializeNull": {
 			Params: &JsonListsInput{
-				StringList: []*string{
-					nil,
+				StringList: []string{
+					func() (v string) { return v }(),
 				},
 			},
 			ExpectMethod:  "PUT",
@@ -185,6 +185,10 @@ func TestClient_JsonLists_awsRestjson1Serialize(t *testing.T) {
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
+			if name == "RestJsonListsSerializeNull" {
+				t.Skip("disabled test aws.protocoltests.restjson#RestJson aws.protocoltests.restjson#JsonLists")
+			}
+
 			var actualReq *http.Request
 			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 				actualReq = r.Clone(r.Context())
@@ -311,41 +315,41 @@ func TestClient_JsonLists_awsRestjson1Deserialize(t *testing.T) {
 			    ]
 			}`),
 			ExpectResult: &JsonListsOutput{
-				StringList: []*string{
-					ptr.String("foo"),
-					ptr.String("bar"),
+				StringList: []string{
+					"foo",
+					"bar",
 				},
-				StringSet: []*string{
-					ptr.String("foo"),
-					ptr.String("bar"),
+				StringSet: []string{
+					"foo",
+					"bar",
 				},
-				IntegerList: []*int32{
-					ptr.Int32(1),
-					ptr.Int32(2),
+				IntegerList: []int32{
+					1,
+					2,
 				},
-				BooleanList: []*bool{
-					ptr.Bool(true),
-					ptr.Bool(false),
+				BooleanList: []bool{
+					true,
+					false,
 				},
-				TimestampList: []*time.Time{
-					ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
-					ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+				TimestampList: []time.Time{
+					smithytime.ParseEpochSeconds(1398796238),
+					smithytime.ParseEpochSeconds(1398796238),
 				},
 				EnumList: []types.FooEnum{
 					types.FooEnum("Foo"),
 					types.FooEnum("0"),
 				},
-				NestedStringList: [][]*string{
+				NestedStringList: [][]string{
 					{
-						ptr.String("foo"),
-						ptr.String("bar"),
+						"foo",
+						"bar",
 					},
 					{
-						ptr.String("baz"),
-						ptr.String("qux"),
+						"baz",
+						"qux",
 					},
 				},
-				StructureList: []*types.StructureListMember{
+				StructureList: []types.StructureListMember{
 					{
 						A: ptr.String("1"),
 						B: ptr.String("2"),
@@ -368,7 +372,7 @@ func TestClient_JsonLists_awsRestjson1Deserialize(t *testing.T) {
 			    "stringList": []
 			}`),
 			ExpectResult: &JsonListsOutput{
-				StringList: []*string{},
+				StringList: []string{},
 			},
 		},
 		// Serializes null values in lists
@@ -384,8 +388,8 @@ func TestClient_JsonLists_awsRestjson1Deserialize(t *testing.T) {
 			    ]
 			}`),
 			ExpectResult: &JsonListsOutput{
-				StringList: []*string{
-					nil,
+				StringList: []string{
+					func() (v string) { return v }(),
 				},
 			},
 		},

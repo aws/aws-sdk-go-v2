@@ -8,7 +8,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	"github.com/awslabs/smithy-go/middleware"
-	"github.com/awslabs/smithy-go/ptr"
 	smithyrand "github.com/awslabs/smithy-go/rand"
 	smithytesting "github.com/awslabs/smithy-go/testing"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -38,9 +37,9 @@ func TestClient_FlattenedXmlMapWithXmlName_awsRestxmlSerialize(t *testing.T) {
 		// Serializes flattened XML maps in requests that have xmlName on members
 		"FlattenedXmlMapWithXmlName": {
 			Params: &FlattenedXmlMapWithXmlNameInput{
-				MyMap: map[string]*string{
-					"a": ptr.String("A"),
-					"b": ptr.String("B"),
+				MyMap: map[string]string{
+					"a": "A",
+					"b": "B",
 				},
 			},
 			ExpectMethod:  "POST",
@@ -156,9 +155,9 @@ func TestClient_FlattenedXmlMapWithXmlName_awsRestxmlDeserialize(t *testing.T) {
 			    </KVP>
 			</FlattenedXmlMapWithXmlNameInputOutput>`),
 			ExpectResult: &FlattenedXmlMapWithXmlNameOutput{
-				MyMap: map[string]*string{
-					"a": ptr.String("A"),
-					"b": ptr.String("B"),
+				MyMap: map[string]string{
+					"a": "A",
+					"b": "B",
 				},
 			},
 		},

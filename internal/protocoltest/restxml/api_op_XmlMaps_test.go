@@ -39,7 +39,7 @@ func TestClient_XmlMaps_awsRestxmlSerialize(t *testing.T) {
 		// Tests for XML map serialization
 		"XmlMaps": {
 			Params: &XmlMapsInput{
-				MyMap: map[string]*types.GreetingStruct{
+				MyMap: map[string]types.GreetingStruct{
 					"foo": {
 						Hi: ptr.String("there"),
 					},
@@ -175,7 +175,7 @@ func TestClient_XmlMaps_awsRestxmlDeserialize(t *testing.T) {
 			</XmlMapsInputOutput>
 			`),
 			ExpectResult: &XmlMapsOutput{
-				MyMap: map[string]*types.GreetingStruct{
+				MyMap: map[string]types.GreetingStruct{
 					"foo": {
 						Hi: ptr.String("there"),
 					},

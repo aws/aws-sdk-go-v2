@@ -39,7 +39,7 @@ func TestClient_JsonMaps_awsRestjson1Serialize(t *testing.T) {
 		// Serializes JSON maps
 		"RestJsonJsonMaps": {
 			Params: &JsonMapsInput{
-				MyMap: map[string]*types.GreetingStruct{
+				MyMap: map[string]types.GreetingStruct{
 					"foo": {
 						Hi: ptr.String("there"),
 					},
@@ -71,8 +71,8 @@ func TestClient_JsonMaps_awsRestjson1Serialize(t *testing.T) {
 		// Serializes null JSON map values
 		"RestJsonSerializesNullMapValues": {
 			Params: &JsonMapsInput{
-				MyMap: map[string]*types.GreetingStruct{
-					"foo": nil,
+				MyMap: map[string]types.GreetingStruct{
+					"foo": func() (v types.GreetingStruct) { return v }(),
 				},
 			},
 			ExpectMethod:  "POST",
@@ -93,6 +93,10 @@ func TestClient_JsonMaps_awsRestjson1Serialize(t *testing.T) {
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
+			if name == "RestJsonSerializesNullMapValues" {
+				t.Skip("disabled test aws.protocoltests.restjson#RestJson aws.protocoltests.restjson#JsonMaps")
+			}
+
 			var actualReq *http.Request
 			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 				actualReq = r.Clone(r.Context())
@@ -183,7 +187,7 @@ func TestClient_JsonMaps_awsRestjson1Deserialize(t *testing.T) {
 			    }
 			}`),
 			ExpectResult: &JsonMapsOutput{
-				MyMap: map[string]*types.GreetingStruct{
+				MyMap: map[string]types.GreetingStruct{
 					"foo": {
 						Hi: ptr.String("there"),
 					},
@@ -206,8 +210,8 @@ func TestClient_JsonMaps_awsRestjson1Deserialize(t *testing.T) {
 			    }
 			}`),
 			ExpectResult: &JsonMapsOutput{
-				MyMap: map[string]*types.GreetingStruct{
-					"foo": nil,
+				MyMap: map[string]types.GreetingStruct{
+					"foo": func() (v types.GreetingStruct) { return v }(),
 				},
 			},
 		},

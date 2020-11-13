@@ -1431,10 +1431,10 @@ func awsRestxml_deserializeOpHttpBindingsHttpPrefixHeadersOutput(v *HttpPrefixHe
 	for headerKey, headerValues := range response.Header {
 		if lenPrefix := len("X-Foo-"); len(headerKey) >= lenPrefix && strings.EqualFold(headerKey[:lenPrefix], "X-Foo-") {
 			if v.FooMap == nil {
-				v.FooMap = map[string]*string{}
+				v.FooMap = map[string]string{}
 			}
 			headerValues[0] = strings.TrimSpace(headerValues[0])
-			v.FooMap[headerKey[lenPrefix:]] = ptr.String(headerValues[0])
+			v.FooMap[headerKey[lenPrefix:]] = headerValues[0]
 		}
 	}
 
@@ -1839,7 +1839,7 @@ func awsRestxml_deserializeOpDocumentIgnoreQueryParamsInResponseOutput(v **Ignor
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Baz = &xtv
+				sv.Baz = ptr.String(xtv)
 			}
 
 		default:
@@ -1934,14 +1934,14 @@ func awsRestxml_deserializeOpHttpBindingsInputAndOutputWithHeadersOutput(v *Inpu
 				return err
 			}
 		}
-		var list []*bool
+		var list []bool
 		for _, headerValuesVal := range headerValues {
 			headerValuesVal = strings.TrimSpace(headerValuesVal)
 			vv, err := strconv.ParseBool(headerValuesVal)
 			if err != nil {
 				return err
 			}
-			list = append(list, ptr.Bool(vv))
+			list = append(list, vv)
 		}
 		v.HeaderBooleanList = list
 	}
@@ -2020,14 +2020,14 @@ func awsRestxml_deserializeOpHttpBindingsInputAndOutputWithHeadersOutput(v *Inpu
 				return err
 			}
 		}
-		var list []*int32
+		var list []int32
 		for _, headerValuesVal := range headerValues {
 			headerValuesVal = strings.TrimSpace(headerValuesVal)
 			vv, err := strconv.ParseInt(headerValuesVal, 0, 32)
 			if err != nil {
 				return err
 			}
-			list = append(list, ptr.Int32(int32(vv)))
+			list = append(list, int32(vv))
 		}
 		v.HeaderIntegerList = list
 	}
@@ -2063,10 +2063,10 @@ func awsRestxml_deserializeOpHttpBindingsInputAndOutputWithHeadersOutput(v *Inpu
 				return err
 			}
 		}
-		var list []*string
+		var list []string
 		for _, headerValuesVal := range headerValues {
 			headerValuesVal = strings.TrimSpace(headerValuesVal)
-			list = append(list, ptr.String(headerValuesVal))
+			list = append(list, headerValuesVal)
 		}
 		v.HeaderStringList = list
 	}
@@ -2079,10 +2079,10 @@ func awsRestxml_deserializeOpHttpBindingsInputAndOutputWithHeadersOutput(v *Inpu
 				return err
 			}
 		}
-		var list []*string
+		var list []string
 		for _, headerValuesVal := range headerValues {
 			headerValuesVal = strings.TrimSpace(headerValuesVal)
-			list = append(list, ptr.String(headerValuesVal))
+			list = append(list, headerValuesVal)
 		}
 		v.HeaderStringSet = list
 	}
@@ -2095,14 +2095,14 @@ func awsRestxml_deserializeOpHttpBindingsInputAndOutputWithHeadersOutput(v *Inpu
 				return err
 			}
 		}
-		var list []*time.Time
+		var list []time.Time
 		for _, headerValuesVal := range headerValues {
 			headerValuesVal = strings.TrimSpace(headerValuesVal)
 			t, err := smithytime.ParseHTTPDate(headerValuesVal)
 			if err != nil {
 				return err
 			}
-			list = append(list, ptr.Time(t))
+			list = append(list, t)
 		}
 		v.HeaderTimestampList = list
 	}
@@ -2339,10 +2339,10 @@ func awsRestxml_deserializeOpHttpBindingsNullAndEmptyHeadersClientOutput(v *Null
 				return err
 			}
 		}
-		var list []*string
+		var list []string
 		for _, headerValuesVal := range headerValues {
 			headerValuesVal = strings.TrimSpace(headerValuesVal)
-			list = append(list, ptr.String(headerValuesVal))
+			list = append(list, headerValuesVal)
 		}
 		v.C = list
 	}
@@ -2442,10 +2442,10 @@ func awsRestxml_deserializeOpHttpBindingsNullAndEmptyHeadersServerOutput(v *Null
 				return err
 			}
 		}
-		var list []*string
+		var list []string
 		for _, headerValuesVal := range headerValues {
 			headerValuesVal = strings.TrimSpace(headerValuesVal)
-			list = append(list, ptr.String(headerValuesVal))
+			list = append(list, headerValuesVal)
 		}
 		v.C = list
 	}
@@ -2873,7 +2873,7 @@ func awsRestxml_deserializeOpDocumentSimpleScalarPropertiesOutput(v **SimpleScal
 				if err != nil {
 					return err
 				}
-				sv.DoubleValue = &f64
+				sv.DoubleValue = ptr.Float64(f64)
 			}
 
 		case strings.EqualFold("falseBooleanValue", t.Name.Local):
@@ -2889,7 +2889,7 @@ func awsRestxml_deserializeOpDocumentSimpleScalarPropertiesOutput(v **SimpleScal
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.FalseBooleanValue = &xtv
+				sv.FalseBooleanValue = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("floatValue", t.Name.Local):
@@ -2940,7 +2940,7 @@ func awsRestxml_deserializeOpDocumentSimpleScalarPropertiesOutput(v **SimpleScal
 				if err != nil {
 					return err
 				}
-				sv.LongValue = &i64
+				sv.LongValue = ptr.Int64(i64)
 			}
 
 		case strings.EqualFold("shortValue", t.Name.Local):
@@ -2973,7 +2973,7 @@ func awsRestxml_deserializeOpDocumentSimpleScalarPropertiesOutput(v **SimpleScal
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.StringValue = &xtv
+				sv.StringValue = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("trueBooleanValue", t.Name.Local):
@@ -2989,7 +2989,7 @@ func awsRestxml_deserializeOpDocumentSimpleScalarPropertiesOutput(v **SimpleScal
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.TrueBooleanValue = &xtv
+				sv.TrueBooleanValue = ptr.Bool(xtv)
 			}
 
 		default:
@@ -3253,7 +3253,7 @@ func awsRestxml_deserializeOpDocumentXmlAttributesOutput(v **XmlAttributesOutput
 			val := []byte(attr.Value)
 			if val != nil {
 				xtv := string(val)
-				sv.Attr = &xtv
+				sv.Attr = ptr.String(xtv)
 			}
 
 		}
@@ -3282,7 +3282,7 @@ func awsRestxml_deserializeOpDocumentXmlAttributesOutput(v **XmlAttributesOutput
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Foo = &xtv
+				sv.Foo = ptr.String(xtv)
 			}
 
 		default:
@@ -4162,7 +4162,7 @@ func awsRestxml_deserializeOpDocumentXmlEmptyStringsOutput(v **XmlEmptyStringsOu
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.EmptyString = &xtv
+				sv.EmptyString = ptr.String(xtv)
 			}
 
 		default:
@@ -5064,7 +5064,7 @@ func awsRestxml_deserializeOpDocumentXmlTimestampsOutput(v **XmlTimestampsOutput
 				if err != nil {
 					return err
 				}
-				sv.DateTime = &t
+				sv.DateTime = ptr.Time(t)
 			}
 
 		case strings.EqualFold("epochSeconds", t.Name.Local):
@@ -5098,7 +5098,7 @@ func awsRestxml_deserializeOpDocumentXmlTimestampsOutput(v **XmlTimestampsOutput
 				if err != nil {
 					return err
 				}
-				sv.HttpDate = &t
+				sv.HttpDate = ptr.Time(t)
 			}
 
 		case strings.EqualFold("normal", t.Name.Local):
@@ -5115,7 +5115,7 @@ func awsRestxml_deserializeOpDocumentXmlTimestampsOutput(v **XmlTimestampsOutput
 				if err != nil {
 					return err
 				}
-				sv.Normal = &t
+				sv.Normal = ptr.Time(t)
 			}
 
 		default:
@@ -5244,7 +5244,7 @@ func awsRestxml_deserializeDocumentComplexError(v **types.ComplexError, decoder 
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Header = &xtv
+				sv.Header = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Nested", t.Name.Local):
@@ -5266,7 +5266,7 @@ func awsRestxml_deserializeDocumentComplexError(v **types.ComplexError, decoder 
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.TopLevel = &xtv
+				sv.TopLevel = ptr.String(xtv)
 			}
 
 		default:
@@ -5314,7 +5314,7 @@ func awsRestxml_deserializeDocumentComplexNestedErrorData(v **types.ComplexNeste
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Foo = &xtv
+				sv.Foo = ptr.String(xtv)
 			}
 
 		default:
@@ -5327,13 +5327,13 @@ func awsRestxml_deserializeDocumentComplexNestedErrorData(v **types.ComplexNeste
 	return nil
 }
 
-func awsRestxml_deserializeDocumentFlattenedXmlMapWithXmlNameInputOutputMap(v *map[string]*string, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentFlattenedXmlMapWithXmlNameInputOutputMap(v *map[string]string, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv map[string]*string
+	var sv map[string]string
 	if *v == nil {
-		sv = make(map[string]*string, 0)
+		sv = make(map[string]string, 0)
 	} else {
 		sv = *v
 	}
@@ -5357,23 +5357,23 @@ func awsRestxml_deserializeDocumentFlattenedXmlMapWithXmlNameInputOutputMap(v *m
 	return nil
 }
 
-func awsRestxml_deserializeDocumentFlattenedXmlMapWithXmlNameInputOutputMapUnwrapped(v *map[string]*string, decoder smithyxml.NodeDecoder) error {
-	var sv map[string]*string
+func awsRestxml_deserializeDocumentFlattenedXmlMapWithXmlNameInputOutputMapUnwrapped(v *map[string]string, decoder smithyxml.NodeDecoder) error {
+	var sv map[string]string
 	if *v == nil {
-		sv = make(map[string]*string, 0)
+		sv = make(map[string]string, 0)
 	} else {
 		sv = *v
 	}
 
-	var ek *string
-	var ev *string
+	var ek string
+	var ev string
 	for {
 		t, done, err := decoder.Token()
 		if err != nil {
 			return err
 		}
 		if done {
-			sv[*ek] = ev
+			sv[ek] = ev
 			break
 		}
 		switch {
@@ -5383,14 +5383,11 @@ func awsRestxml_deserializeDocumentFlattenedXmlMapWithXmlNameInputOutputMapUnwra
 				return err
 			}
 			if done {
-				if val == nil {
-					ek = ptr.String("")
-				}
 				break
 			}
 			if val != nil {
 				xtv := string(val)
-				ek = &xtv
+				ek = xtv
 			}
 
 		case strings.EqualFold("V", t.Name.Local):
@@ -5399,14 +5396,11 @@ func awsRestxml_deserializeDocumentFlattenedXmlMapWithXmlNameInputOutputMapUnwra
 				return err
 			}
 			if done {
-				if val == nil {
-					ev = ptr.String("")
-				}
 				break
 			}
 			if val != nil {
 				xtv := string(val)
-				ev = &xtv
+				ev = xtv
 			}
 
 		default:
@@ -5452,7 +5446,7 @@ func awsRestxml_deserializeDocumentInvalidGreeting(v **types.InvalidGreeting, de
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Message = &xtv
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -5500,7 +5494,7 @@ func awsRestxml_deserializeDocumentNestedPayload(v **types.NestedPayload, decode
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Greeting = &xtv
+				sv.Greeting = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("name", t.Name.Local):
@@ -5516,7 +5510,7 @@ func awsRestxml_deserializeDocumentNestedPayload(v **types.NestedPayload, decode
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Name = &xtv
+				sv.Name = ptr.String(xtv)
 			}
 
 		default:
@@ -5564,7 +5558,7 @@ func awsRestxml_deserializeDocumentPayloadWithXmlName(v **types.PayloadWithXmlNa
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Name = &xtv
+				sv.Name = ptr.String(xtv)
 			}
 
 		default:
@@ -5612,7 +5606,7 @@ func awsRestxml_deserializeDocumentPayloadWithXmlNamespace(v **types.PayloadWith
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Name = &xtv
+				sv.Name = ptr.String(xtv)
 			}
 
 		default:
@@ -5660,7 +5654,7 @@ func awsRestxml_deserializeDocumentPayloadWithXmlNamespaceAndPrefix(v **types.Pa
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Name = &xtv
+				sv.Name = ptr.String(xtv)
 			}
 
 		default:
@@ -5708,7 +5702,7 @@ func awsRestxml_deserializeDocumentRecursiveShapesInputOutputNested1(v **types.R
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Foo = &xtv
+				sv.Foo = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("nested", t.Name.Local):
@@ -5762,7 +5756,7 @@ func awsRestxml_deserializeDocumentRecursiveShapesInputOutputNested2(v **types.R
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Bar = &xtv
+				sv.Bar = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("recursiveMember", t.Name.Local):
@@ -5781,13 +5775,13 @@ func awsRestxml_deserializeDocumentRecursiveShapesInputOutputNested2(v **types.R
 	return nil
 }
 
-func awsRestxml_deserializeDocumentRenamedListMembers(v *[]*string, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentRenamedListMembers(v *[]string, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*string
+	var sv []string
 	if *v == nil {
-		sv = make([]*string, 0)
+		sv = make([]string, 0)
 	} else {
 		sv = *v
 	}
@@ -5805,20 +5799,17 @@ func awsRestxml_deserializeDocumentRenamedListMembers(v *[]*string, decoder smit
 		decoder = memberDecoder
 		for {
 			if strings.EqualFold("item", t.Name.Local) {
-				var col *string
+				var col string
 				val, done, err := decoder.Value()
 				if err != nil {
 					return err
 				}
 				if done {
-					if val == nil {
-						col = ptr.String("")
-					}
 					break
 				}
 				if val != nil {
 					xtv := string(val)
-					col = &xtv
+					col = xtv
 				}
 				sv = append(sv, col)
 			} else {
@@ -5831,17 +5822,17 @@ func awsRestxml_deserializeDocumentRenamedListMembers(v *[]*string, decoder smit
 	return nil
 }
 
-func awsRestxml_deserializeDocumentRenamedListMembersUnwrapped(v *[]*string, decoder smithyxml.NodeDecoder) error {
-	var sv []*string
+func awsRestxml_deserializeDocumentRenamedListMembersUnwrapped(v *[]string, decoder smithyxml.NodeDecoder) error {
+	var sv []string
 	if *v == nil {
-		sv = make([]*string, 0)
+		sv = make([]string, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *string
+		var mv string
 		t := decoder.StartEl
 		_ = t
 		val, done, err := decoder.Value()
@@ -5849,27 +5840,24 @@ func awsRestxml_deserializeDocumentRenamedListMembersUnwrapped(v *[]*string, dec
 			return err
 		}
 		if done {
-			if val == nil {
-				mv = ptr.String("")
-			}
 			break
 		}
 		if val != nil {
 			xtv := string(val)
-			mv = &xtv
+			mv = xtv
 		}
 		sv = append(sv, mv)
 	}
 	*v = sv
 	return nil
 }
-func awsRestxml_deserializeDocumentStructureList(v *[]*types.StructureListMember, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentStructureList(v *[]types.StructureListMember, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*types.StructureListMember
+	var sv []types.StructureListMember
 	if *v == nil {
-		sv = make([]*types.StructureListMember, 0)
+		sv = make([]types.StructureListMember, 0)
 	} else {
 		sv = *v
 	}
@@ -5885,11 +5873,13 @@ func awsRestxml_deserializeDocumentStructureList(v *[]*types.StructureListMember
 		}
 		for {
 			if strings.EqualFold("item", t.Name.Local) {
-				var col *types.StructureListMember
+				var col types.StructureListMember
 				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-				if err := awsRestxml_deserializeDocumentStructureListMember(&col, nodeDecoder); err != nil {
+				destAddr := &col
+				if err := awsRestxml_deserializeDocumentStructureListMember(&destAddr, nodeDecoder); err != nil {
 					return err
 				}
+				col = *destAddr
 				sv = append(sv, col)
 				break
 			} else {
@@ -5902,23 +5892,25 @@ func awsRestxml_deserializeDocumentStructureList(v *[]*types.StructureListMember
 	return nil
 }
 
-func awsRestxml_deserializeDocumentStructureListUnwrapped(v *[]*types.StructureListMember, decoder smithyxml.NodeDecoder) error {
-	var sv []*types.StructureListMember
+func awsRestxml_deserializeDocumentStructureListUnwrapped(v *[]types.StructureListMember, decoder smithyxml.NodeDecoder) error {
+	var sv []types.StructureListMember
 	if *v == nil {
-		sv = make([]*types.StructureListMember, 0)
+		sv = make([]types.StructureListMember, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *types.StructureListMember
+		var mv types.StructureListMember
 		t := decoder.StartEl
 		_ = t
 		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-		if err := awsRestxml_deserializeDocumentStructureListMember(&mv, nodeDecoder); err != nil {
+		destAddr := &mv
+		if err := awsRestxml_deserializeDocumentStructureListMember(&destAddr, nodeDecoder); err != nil {
 			return err
 		}
+		mv = *destAddr
 		sv = append(sv, mv)
 	}
 	*v = sv
@@ -5959,7 +5951,7 @@ func awsRestxml_deserializeDocumentStructureListMember(v **types.StructureListMe
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.A = &xtv
+				sv.A = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("other", t.Name.Local):
@@ -5975,7 +5967,7 @@ func awsRestxml_deserializeDocumentStructureListMember(v **types.StructureListMe
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.B = &xtv
+				sv.B = ptr.String(xtv)
 			}
 
 		default:
@@ -6005,7 +5997,7 @@ func awsRestxml_deserializeDocumentXmlAttributesInputOutput(v **types.XmlAttribu
 			val := []byte(attr.Value)
 			if val != nil {
 				xtv := string(val)
-				sv.Attr = &xtv
+				sv.Attr = ptr.String(xtv)
 			}
 
 		}
@@ -6034,7 +6026,7 @@ func awsRestxml_deserializeDocumentXmlAttributesInputOutput(v **types.XmlAttribu
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Foo = &xtv
+				sv.Foo = ptr.String(xtv)
 			}
 
 		default:
@@ -6047,13 +6039,13 @@ func awsRestxml_deserializeDocumentXmlAttributesInputOutput(v **types.XmlAttribu
 	return nil
 }
 
-func awsRestxml_deserializeDocumentXmlMapsInputOutputMap(v *map[string]*types.GreetingStruct, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentXmlMapsInputOutputMap(v *map[string]types.GreetingStruct, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv map[string]*types.GreetingStruct
+	var sv map[string]types.GreetingStruct
 	if *v == nil {
-		sv = make(map[string]*types.GreetingStruct, 0)
+		sv = make(map[string]types.GreetingStruct, 0)
 	} else {
 		sv = *v
 	}
@@ -6077,23 +6069,23 @@ func awsRestxml_deserializeDocumentXmlMapsInputOutputMap(v *map[string]*types.Gr
 	return nil
 }
 
-func awsRestxml_deserializeDocumentXmlMapsInputOutputMapUnwrapped(v *map[string]*types.GreetingStruct, decoder smithyxml.NodeDecoder) error {
-	var sv map[string]*types.GreetingStruct
+func awsRestxml_deserializeDocumentXmlMapsInputOutputMapUnwrapped(v *map[string]types.GreetingStruct, decoder smithyxml.NodeDecoder) error {
+	var sv map[string]types.GreetingStruct
 	if *v == nil {
-		sv = make(map[string]*types.GreetingStruct, 0)
+		sv = make(map[string]types.GreetingStruct, 0)
 	} else {
 		sv = *v
 	}
 
-	var ek *string
-	var ev *types.GreetingStruct
+	var ek string
+	var ev types.GreetingStruct
 	for {
 		t, done, err := decoder.Token()
 		if err != nil {
 			return err
 		}
 		if done {
-			sv[*ek] = ev
+			sv[ek] = ev
 			break
 		}
 		switch {
@@ -6103,21 +6095,21 @@ func awsRestxml_deserializeDocumentXmlMapsInputOutputMapUnwrapped(v *map[string]
 				return err
 			}
 			if done {
-				if val == nil {
-					ek = ptr.String("")
-				}
 				break
 			}
 			if val != nil {
 				xtv := string(val)
-				ek = &xtv
+				ek = xtv
 			}
 
 		case strings.EqualFold("value", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-			if err := awsRestxml_deserializeDocumentGreetingStruct(&ev, nodeDecoder); err != nil {
+			mapVar := ev
+			destAddr := &mapVar
+			if err := awsRestxml_deserializeDocumentGreetingStruct(&destAddr, nodeDecoder); err != nil {
 				return err
 			}
+			ev = *destAddr
 
 		default:
 			// Do nothing and ignore the unexpected tag element
@@ -6127,13 +6119,13 @@ func awsRestxml_deserializeDocumentXmlMapsInputOutputMapUnwrapped(v *map[string]
 	*v = sv
 	return nil
 }
-func awsRestxml_deserializeDocumentXmlMapsXmlNameInputOutputMap(v *map[string]*types.GreetingStruct, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentXmlMapsXmlNameInputOutputMap(v *map[string]types.GreetingStruct, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv map[string]*types.GreetingStruct
+	var sv map[string]types.GreetingStruct
 	if *v == nil {
-		sv = make(map[string]*types.GreetingStruct, 0)
+		sv = make(map[string]types.GreetingStruct, 0)
 	} else {
 		sv = *v
 	}
@@ -6157,23 +6149,23 @@ func awsRestxml_deserializeDocumentXmlMapsXmlNameInputOutputMap(v *map[string]*t
 	return nil
 }
 
-func awsRestxml_deserializeDocumentXmlMapsXmlNameInputOutputMapUnwrapped(v *map[string]*types.GreetingStruct, decoder smithyxml.NodeDecoder) error {
-	var sv map[string]*types.GreetingStruct
+func awsRestxml_deserializeDocumentXmlMapsXmlNameInputOutputMapUnwrapped(v *map[string]types.GreetingStruct, decoder smithyxml.NodeDecoder) error {
+	var sv map[string]types.GreetingStruct
 	if *v == nil {
-		sv = make(map[string]*types.GreetingStruct, 0)
+		sv = make(map[string]types.GreetingStruct, 0)
 	} else {
 		sv = *v
 	}
 
-	var ek *string
-	var ev *types.GreetingStruct
+	var ek string
+	var ev types.GreetingStruct
 	for {
 		t, done, err := decoder.Token()
 		if err != nil {
 			return err
 		}
 		if done {
-			sv[*ek] = ev
+			sv[ek] = ev
 			break
 		}
 		switch {
@@ -6183,21 +6175,21 @@ func awsRestxml_deserializeDocumentXmlMapsXmlNameInputOutputMapUnwrapped(v *map[
 				return err
 			}
 			if done {
-				if val == nil {
-					ek = ptr.String("")
-				}
 				break
 			}
 			if val != nil {
 				xtv := string(val)
-				ek = &xtv
+				ek = xtv
 			}
 
 		case strings.EqualFold("Setting", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-			if err := awsRestxml_deserializeDocumentGreetingStruct(&ev, nodeDecoder); err != nil {
+			mapVar := ev
+			destAddr := &mapVar
+			if err := awsRestxml_deserializeDocumentGreetingStruct(&destAddr, nodeDecoder); err != nil {
 				return err
 			}
+			ev = *destAddr
 
 		default:
 			// Do nothing and ignore the unexpected tag element
@@ -6207,13 +6199,13 @@ func awsRestxml_deserializeDocumentXmlMapsXmlNameInputOutputMapUnwrapped(v *map[
 	*v = sv
 	return nil
 }
-func awsRestxml_deserializeDocumentXmlNamespacedList(v *[]*string, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentXmlNamespacedList(v *[]string, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*string
+	var sv []string
 	if *v == nil {
-		sv = make([]*string, 0)
+		sv = make([]string, 0)
 	} else {
 		sv = *v
 	}
@@ -6231,20 +6223,17 @@ func awsRestxml_deserializeDocumentXmlNamespacedList(v *[]*string, decoder smith
 		decoder = memberDecoder
 		for {
 			if strings.EqualFold("member", t.Name.Local) {
-				var col *string
+				var col string
 				val, done, err := decoder.Value()
 				if err != nil {
 					return err
 				}
 				if done {
-					if val == nil {
-						col = ptr.String("")
-					}
 					break
 				}
 				if val != nil {
 					xtv := string(val)
-					col = &xtv
+					col = xtv
 				}
 				sv = append(sv, col)
 			} else {
@@ -6257,17 +6246,17 @@ func awsRestxml_deserializeDocumentXmlNamespacedList(v *[]*string, decoder smith
 	return nil
 }
 
-func awsRestxml_deserializeDocumentXmlNamespacedListUnwrapped(v *[]*string, decoder smithyxml.NodeDecoder) error {
-	var sv []*string
+func awsRestxml_deserializeDocumentXmlNamespacedListUnwrapped(v *[]string, decoder smithyxml.NodeDecoder) error {
+	var sv []string
 	if *v == nil {
-		sv = make([]*string, 0)
+		sv = make([]string, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *string
+		var mv string
 		t := decoder.StartEl
 		_ = t
 		val, done, err := decoder.Value()
@@ -6275,14 +6264,11 @@ func awsRestxml_deserializeDocumentXmlNamespacedListUnwrapped(v *[]*string, deco
 			return err
 		}
 		if done {
-			if val == nil {
-				mv = ptr.String("")
-			}
 			break
 		}
 		if val != nil {
 			xtv := string(val)
-			mv = &xtv
+			mv = xtv
 		}
 		sv = append(sv, mv)
 	}
@@ -6324,7 +6310,7 @@ func awsRestxml_deserializeDocumentXmlNamespaceNested(v **types.XmlNamespaceNest
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Foo = &xtv
+				sv.Foo = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("values", t.Name.Local):
@@ -6343,13 +6329,13 @@ func awsRestxml_deserializeDocumentXmlNamespaceNested(v **types.XmlNamespaceNest
 	return nil
 }
 
-func awsRestxml_deserializeDocumentBooleanList(v *[]*bool, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentBooleanList(v *[]bool, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*bool
+	var sv []bool
 	if *v == nil {
-		sv = make([]*bool, 0)
+		sv = make([]bool, 0)
 	} else {
 		sv = *v
 	}
@@ -6367,7 +6353,7 @@ func awsRestxml_deserializeDocumentBooleanList(v *[]*bool, decoder smithyxml.Nod
 		decoder = memberDecoder
 		for {
 			if strings.EqualFold("member", t.Name.Local) {
-				var col *bool
+				var col bool
 				val, done, err := decoder.Value()
 				if err != nil {
 					return err
@@ -6380,7 +6366,7 @@ func awsRestxml_deserializeDocumentBooleanList(v *[]*bool, decoder smithyxml.Nod
 					if err != nil {
 						return fmt.Errorf("expected PrimitiveBoolean to be of type *bool, got %T instead", val)
 					}
-					col = &xtv
+					col = xtv
 				}
 				sv = append(sv, col)
 			} else {
@@ -6393,17 +6379,17 @@ func awsRestxml_deserializeDocumentBooleanList(v *[]*bool, decoder smithyxml.Nod
 	return nil
 }
 
-func awsRestxml_deserializeDocumentBooleanListUnwrapped(v *[]*bool, decoder smithyxml.NodeDecoder) error {
-	var sv []*bool
+func awsRestxml_deserializeDocumentBooleanListUnwrapped(v *[]bool, decoder smithyxml.NodeDecoder) error {
+	var sv []bool
 	if *v == nil {
-		sv = make([]*bool, 0)
+		sv = make([]bool, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *bool
+		var mv bool
 		t := decoder.StartEl
 		_ = t
 		val, done, err := decoder.Value()
@@ -6418,7 +6404,7 @@ func awsRestxml_deserializeDocumentBooleanListUnwrapped(v *[]*bool, decoder smit
 			if err != nil {
 				return fmt.Errorf("expected PrimitiveBoolean to be of type *bool, got %T instead", val)
 			}
-			mv = &xtv
+			mv = xtv
 		}
 		sv = append(sv, mv)
 	}
@@ -6539,7 +6525,7 @@ func awsRestxml_deserializeDocumentFooEnumMapUnwrapped(v *map[string]types.FooEn
 		sv = *v
 	}
 
-	var ek *string
+	var ek string
 	var ev types.FooEnum
 	for {
 		t, done, err := decoder.Token()
@@ -6547,7 +6533,7 @@ func awsRestxml_deserializeDocumentFooEnumMapUnwrapped(v *map[string]types.FooEn
 			return err
 		}
 		if done {
-			sv[*ek] = ev
+			sv[ek] = ev
 			break
 		}
 		switch {
@@ -6557,14 +6543,11 @@ func awsRestxml_deserializeDocumentFooEnumMapUnwrapped(v *map[string]types.FooEn
 				return err
 			}
 			if done {
-				if val == nil {
-					ek = ptr.String("")
-				}
 				break
 			}
 			if val != nil {
 				xtv := string(val)
-				ek = &xtv
+				ek = xtv
 			}
 
 		case strings.EqualFold("value", t.Name.Local):
@@ -6699,7 +6682,7 @@ func awsRestxml_deserializeDocumentGreetingStruct(v **types.GreetingStruct, deco
 			}
 			if val != nil {
 				xtv := string(val)
-				sv.Hi = &xtv
+				sv.Hi = ptr.String(xtv)
 			}
 
 		default:
@@ -6712,13 +6695,13 @@ func awsRestxml_deserializeDocumentGreetingStruct(v **types.GreetingStruct, deco
 	return nil
 }
 
-func awsRestxml_deserializeDocumentIntegerList(v *[]*int32, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentIntegerList(v *[]int32, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*int32
+	var sv []int32
 	if *v == nil {
-		sv = make([]*int32, 0)
+		sv = make([]int32, 0)
 	} else {
 		sv = *v
 	}
@@ -6736,7 +6719,7 @@ func awsRestxml_deserializeDocumentIntegerList(v *[]*int32, decoder smithyxml.No
 		decoder = memberDecoder
 		for {
 			if strings.EqualFold("member", t.Name.Local) {
-				var col *int32
+				var col int32
 				val, done, err := decoder.Value()
 				if err != nil {
 					return err
@@ -6750,7 +6733,7 @@ func awsRestxml_deserializeDocumentIntegerList(v *[]*int32, decoder smithyxml.No
 					if err != nil {
 						return err
 					}
-					col = ptr.Int32(int32(i64))
+					col = int32(i64)
 				}
 				sv = append(sv, col)
 			} else {
@@ -6763,17 +6746,17 @@ func awsRestxml_deserializeDocumentIntegerList(v *[]*int32, decoder smithyxml.No
 	return nil
 }
 
-func awsRestxml_deserializeDocumentIntegerListUnwrapped(v *[]*int32, decoder smithyxml.NodeDecoder) error {
-	var sv []*int32
+func awsRestxml_deserializeDocumentIntegerListUnwrapped(v *[]int32, decoder smithyxml.NodeDecoder) error {
+	var sv []int32
 	if *v == nil {
-		sv = make([]*int32, 0)
+		sv = make([]int32, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *int32
+		var mv int32
 		t := decoder.StartEl
 		_ = t
 		val, done, err := decoder.Value()
@@ -6789,20 +6772,20 @@ func awsRestxml_deserializeDocumentIntegerListUnwrapped(v *[]*int32, decoder smi
 			if err != nil {
 				return err
 			}
-			mv = ptr.Int32(int32(i64))
+			mv = int32(i64)
 		}
 		sv = append(sv, mv)
 	}
 	*v = sv
 	return nil
 }
-func awsRestxml_deserializeDocumentNestedStringList(v *[][]*string, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentNestedStringList(v *[][]string, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv [][]*string
+	var sv [][]string
 	if *v == nil {
-		sv = make([][]*string, 0)
+		sv = make([][]string, 0)
 	} else {
 		sv = *v
 	}
@@ -6818,7 +6801,7 @@ func awsRestxml_deserializeDocumentNestedStringList(v *[][]*string, decoder smit
 		}
 		for {
 			if strings.EqualFold("member", t.Name.Local) {
-				var col []*string
+				var col []string
 				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 				if err := awsRestxml_deserializeDocumentStringList(&col, nodeDecoder); err != nil {
 					return err
@@ -6835,17 +6818,17 @@ func awsRestxml_deserializeDocumentNestedStringList(v *[][]*string, decoder smit
 	return nil
 }
 
-func awsRestxml_deserializeDocumentNestedStringListUnwrapped(v *[][]*string, decoder smithyxml.NodeDecoder) error {
-	var sv [][]*string
+func awsRestxml_deserializeDocumentNestedStringListUnwrapped(v *[][]string, decoder smithyxml.NodeDecoder) error {
+	var sv [][]string
 	if *v == nil {
-		sv = make([][]*string, 0)
+		sv = make([][]string, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv []*string
+		var mv []string
 		t := decoder.StartEl
 		_ = t
 		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -6857,13 +6840,13 @@ func awsRestxml_deserializeDocumentNestedStringListUnwrapped(v *[][]*string, dec
 	*v = sv
 	return nil
 }
-func awsRestxml_deserializeDocumentStringList(v *[]*string, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentStringList(v *[]string, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*string
+	var sv []string
 	if *v == nil {
-		sv = make([]*string, 0)
+		sv = make([]string, 0)
 	} else {
 		sv = *v
 	}
@@ -6881,20 +6864,17 @@ func awsRestxml_deserializeDocumentStringList(v *[]*string, decoder smithyxml.No
 		decoder = memberDecoder
 		for {
 			if strings.EqualFold("member", t.Name.Local) {
-				var col *string
+				var col string
 				val, done, err := decoder.Value()
 				if err != nil {
 					return err
 				}
 				if done {
-					if val == nil {
-						col = ptr.String("")
-					}
 					break
 				}
 				if val != nil {
 					xtv := string(val)
-					col = &xtv
+					col = xtv
 				}
 				sv = append(sv, col)
 			} else {
@@ -6907,17 +6887,17 @@ func awsRestxml_deserializeDocumentStringList(v *[]*string, decoder smithyxml.No
 	return nil
 }
 
-func awsRestxml_deserializeDocumentStringListUnwrapped(v *[]*string, decoder smithyxml.NodeDecoder) error {
-	var sv []*string
+func awsRestxml_deserializeDocumentStringListUnwrapped(v *[]string, decoder smithyxml.NodeDecoder) error {
+	var sv []string
 	if *v == nil {
-		sv = make([]*string, 0)
+		sv = make([]string, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *string
+		var mv string
 		t := decoder.StartEl
 		_ = t
 		val, done, err := decoder.Value()
@@ -6925,27 +6905,24 @@ func awsRestxml_deserializeDocumentStringListUnwrapped(v *[]*string, decoder smi
 			return err
 		}
 		if done {
-			if val == nil {
-				mv = ptr.String("")
-			}
 			break
 		}
 		if val != nil {
 			xtv := string(val)
-			mv = &xtv
+			mv = xtv
 		}
 		sv = append(sv, mv)
 	}
 	*v = sv
 	return nil
 }
-func awsRestxml_deserializeDocumentStringSet(v *[]*string, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentStringSet(v *[]string, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*string
+	var sv []string
 	if *v == nil {
-		sv = make([]*string, 0)
+		sv = make([]string, 0)
 	} else {
 		sv = *v
 	}
@@ -6963,20 +6940,17 @@ func awsRestxml_deserializeDocumentStringSet(v *[]*string, decoder smithyxml.Nod
 		decoder = memberDecoder
 		for {
 			if strings.EqualFold("member", t.Name.Local) {
-				var col *string
+				var col string
 				val, done, err := decoder.Value()
 				if err != nil {
 					return err
 				}
 				if done {
-					if val == nil {
-						col = ptr.String("")
-					}
 					break
 				}
 				if val != nil {
 					xtv := string(val)
-					col = &xtv
+					col = xtv
 				}
 				sv = append(sv, col)
 			} else {
@@ -6989,17 +6963,17 @@ func awsRestxml_deserializeDocumentStringSet(v *[]*string, decoder smithyxml.Nod
 	return nil
 }
 
-func awsRestxml_deserializeDocumentStringSetUnwrapped(v *[]*string, decoder smithyxml.NodeDecoder) error {
-	var sv []*string
+func awsRestxml_deserializeDocumentStringSetUnwrapped(v *[]string, decoder smithyxml.NodeDecoder) error {
+	var sv []string
 	if *v == nil {
-		sv = make([]*string, 0)
+		sv = make([]string, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *string
+		var mv string
 		t := decoder.StartEl
 		_ = t
 		val, done, err := decoder.Value()
@@ -7007,27 +6981,24 @@ func awsRestxml_deserializeDocumentStringSetUnwrapped(v *[]*string, decoder smit
 			return err
 		}
 		if done {
-			if val == nil {
-				mv = ptr.String("")
-			}
 			break
 		}
 		if val != nil {
 			xtv := string(val)
-			mv = &xtv
+			mv = xtv
 		}
 		sv = append(sv, mv)
 	}
 	*v = sv
 	return nil
 }
-func awsRestxml_deserializeDocumentTimestampList(v *[]*time.Time, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentTimestampList(v *[]time.Time, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv []*time.Time
+	var sv []time.Time
 	if *v == nil {
-		sv = make([]*time.Time, 0)
+		sv = make([]time.Time, 0)
 	} else {
 		sv = *v
 	}
@@ -7045,7 +7016,7 @@ func awsRestxml_deserializeDocumentTimestampList(v *[]*time.Time, decoder smithy
 		decoder = memberDecoder
 		for {
 			if strings.EqualFold("member", t.Name.Local) {
-				var col *time.Time
+				var col time.Time
 				val, done, err := decoder.Value()
 				if err != nil {
 					return err
@@ -7059,7 +7030,7 @@ func awsRestxml_deserializeDocumentTimestampList(v *[]*time.Time, decoder smithy
 					if err != nil {
 						return err
 					}
-					col = &t
+					col = t
 				}
 				sv = append(sv, col)
 			} else {
@@ -7072,17 +7043,17 @@ func awsRestxml_deserializeDocumentTimestampList(v *[]*time.Time, decoder smithy
 	return nil
 }
 
-func awsRestxml_deserializeDocumentTimestampListUnwrapped(v *[]*time.Time, decoder smithyxml.NodeDecoder) error {
-	var sv []*time.Time
+func awsRestxml_deserializeDocumentTimestampListUnwrapped(v *[]time.Time, decoder smithyxml.NodeDecoder) error {
+	var sv []time.Time
 	if *v == nil {
-		sv = make([]*time.Time, 0)
+		sv = make([]time.Time, 0)
 	} else {
 		sv = *v
 	}
 
 	switch {
 	default:
-		var mv *time.Time
+		var mv time.Time
 		t := decoder.StartEl
 		_ = t
 		val, done, err := decoder.Value()
@@ -7098,7 +7069,7 @@ func awsRestxml_deserializeDocumentTimestampListUnwrapped(v *[]*time.Time, decod
 			if err != nil {
 				return err
 			}
-			mv = &t
+			mv = t
 		}
 		sv = append(sv, mv)
 	}

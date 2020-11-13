@@ -35,7 +35,7 @@ type StructureListMember struct {
 type XmlNamespaceNested struct {
 	Foo *string
 
-	Values []*string
+	Values []string
 }
 
 type GreetingStruct struct {

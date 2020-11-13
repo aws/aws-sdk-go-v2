@@ -30,7 +30,7 @@ type NullAndEmptyHeadersServerInput struct {
 
 	B *string
 
-	C []*string
+	C []string
 }
 
 type NullAndEmptyHeadersServerOutput struct {
@@ -38,7 +38,7 @@ type NullAndEmptyHeadersServerOutput struct {
 
 	B *string
 
-	C []*string
+	C []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

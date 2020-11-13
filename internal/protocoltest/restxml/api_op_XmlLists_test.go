@@ -41,53 +41,53 @@ func TestClient_XmlLists_awsRestxmlSerialize(t *testing.T) {
 		// Tests for XML list serialization
 		"XmlLists": {
 			Params: &XmlListsInput{
-				StringList: []*string{
-					ptr.String("foo"),
-					ptr.String("bar"),
+				StringList: []string{
+					"foo",
+					"bar",
 				},
-				StringSet: []*string{
-					ptr.String("foo"),
-					ptr.String("bar"),
+				StringSet: []string{
+					"foo",
+					"bar",
 				},
-				IntegerList: []*int32{
-					ptr.Int32(1),
-					ptr.Int32(2),
+				IntegerList: []int32{
+					1,
+					2,
 				},
-				BooleanList: []*bool{
-					ptr.Bool(true),
-					ptr.Bool(false),
+				BooleanList: []bool{
+					true,
+					false,
 				},
-				TimestampList: []*time.Time{
-					ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
-					ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+				TimestampList: []time.Time{
+					smithytime.ParseEpochSeconds(1398796238),
+					smithytime.ParseEpochSeconds(1398796238),
 				},
 				EnumList: []types.FooEnum{
 					types.FooEnum("Foo"),
 					types.FooEnum("0"),
 				},
-				NestedStringList: [][]*string{
+				NestedStringList: [][]string{
 					{
-						ptr.String("foo"),
-						ptr.String("bar"),
+						"foo",
+						"bar",
 					},
 					{
-						ptr.String("baz"),
-						ptr.String("qux"),
+						"baz",
+						"qux",
 					},
 				},
-				RenamedListMembers: []*string{
-					ptr.String("foo"),
-					ptr.String("bar"),
+				RenamedListMembers: []string{
+					"foo",
+					"bar",
 				},
-				FlattenedList: []*string{
-					ptr.String("hi"),
-					ptr.String("bye"),
+				FlattenedList: []string{
+					"hi",
+					"bye",
 				},
-				FlattenedList2: []*string{
-					ptr.String("yep"),
-					ptr.String("nope"),
+				FlattenedList2: []string{
+					"yep",
+					"nope",
 				},
-				StructureList: []*types.StructureListMember{
+				StructureList: []types.StructureListMember{
 					{
 						A: ptr.String("1"),
 						B: ptr.String("2"),
@@ -301,53 +301,53 @@ func TestClient_XmlLists_awsRestxmlDeserialize(t *testing.T) {
 			</XmlListsInputOutput>
 			`),
 			ExpectResult: &XmlListsOutput{
-				StringList: []*string{
-					ptr.String("foo"),
-					ptr.String("bar"),
+				StringList: []string{
+					"foo",
+					"bar",
 				},
-				StringSet: []*string{
-					ptr.String("foo"),
-					ptr.String("bar"),
+				StringSet: []string{
+					"foo",
+					"bar",
 				},
-				IntegerList: []*int32{
-					ptr.Int32(1),
-					ptr.Int32(2),
+				IntegerList: []int32{
+					1,
+					2,
 				},
-				BooleanList: []*bool{
-					ptr.Bool(true),
-					ptr.Bool(false),
+				BooleanList: []bool{
+					true,
+					false,
 				},
-				TimestampList: []*time.Time{
-					ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
-					ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
+				TimestampList: []time.Time{
+					smithytime.ParseEpochSeconds(1398796238),
+					smithytime.ParseEpochSeconds(1398796238),
 				},
 				EnumList: []types.FooEnum{
 					types.FooEnum("Foo"),
 					types.FooEnum("0"),
 				},
-				NestedStringList: [][]*string{
+				NestedStringList: [][]string{
 					{
-						ptr.String("foo"),
-						ptr.String("bar"),
+						"foo",
+						"bar",
 					},
 					{
-						ptr.String("baz"),
-						ptr.String("qux"),
+						"baz",
+						"qux",
 					},
 				},
-				RenamedListMembers: []*string{
-					ptr.String("foo"),
-					ptr.String("bar"),
+				RenamedListMembers: []string{
+					"foo",
+					"bar",
 				},
-				FlattenedList: []*string{
-					ptr.String("hi"),
-					ptr.String("bye"),
+				FlattenedList: []string{
+					"hi",
+					"bye",
 				},
-				FlattenedList2: []*string{
-					ptr.String("yep"),
-					ptr.String("nope"),
+				FlattenedList2: []string{
+					"yep",
+					"nope",
 				},
-				StructureList: []*types.StructureListMember{
+				StructureList: []types.StructureListMember{
 					{
 						A: ptr.String("1"),
 						B: ptr.String("2"),

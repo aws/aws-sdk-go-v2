@@ -545,31 +545,26 @@ func awsAwsjson11_serializeDocumentKitchenSink(v *types.KitchenSink, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListOfKitchenSinks(v []*types.KitchenSink, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentListOfKitchenSinks(v []types.KitchenSink, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentKitchenSink(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentKitchenSink(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListOfListOfStrings(v [][]*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentListOfListOfStrings(v [][]string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
 		if vv := v[i]; vv == nil {
-			av.Null()
 			continue
 		}
 		if err := awsAwsjson11_serializeDocumentListOfStrings(v[i], av); err != nil {
@@ -579,14 +574,13 @@ func awsAwsjson11_serializeDocumentListOfListOfStrings(v [][]*string, value smit
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListOfMapsOfStrings(v []map[string]*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentListOfMapsOfStrings(v []map[string]string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
 		if vv := v[i]; vv == nil {
-			av.Null()
 			continue
 		}
 		if err := awsAwsjson11_serializeDocumentMapOfStrings(v[i], av); err != nil {
@@ -596,63 +590,51 @@ func awsAwsjson11_serializeDocumentListOfMapsOfStrings(v []map[string]*string, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListOfStrings(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentListOfStrings(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListOfStructs(v []*types.SimpleStruct, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentListOfStructs(v []types.SimpleStruct, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentSimpleStruct(v[i], av); err != nil {
+		if err := awsAwsjson11_serializeDocumentSimpleStruct(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentMapOfKitchenSinks(v map[string]*types.KitchenSink, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentMapOfKitchenSinks(v map[string]types.KitchenSink, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentKitchenSink(v[key], om); err != nil {
+		mapVar := v[key]
+		if err := awsAwsjson11_serializeDocumentKitchenSink(&mapVar, om); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentMapOfListsOfStrings(v map[string][]*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentMapOfListsOfStrings(v map[string][]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
 		if vv := v[key]; vv == nil {
-			om.Null()
 			continue
 		}
 		if err := awsAwsjson11_serializeDocumentListOfStrings(v[key], om); err != nil {
@@ -662,14 +644,13 @@ func awsAwsjson11_serializeDocumentMapOfListsOfStrings(v map[string][]*string, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentMapOfMapOfStrings(v map[string]map[string]*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentMapOfMapOfStrings(v map[string]map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
 		if vv := v[key]; vv == nil {
-			om.Null()
 			continue
 		}
 		if err := awsAwsjson11_serializeDocumentMapOfStrings(v[key], om); err != nil {
@@ -679,32 +660,25 @@ func awsAwsjson11_serializeDocumentMapOfMapOfStrings(v map[string]map[string]*st
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentMapOfStrings(v map[string]*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentMapOfStrings(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentMapOfStructs(v map[string]*types.SimpleStruct, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentMapOfStructs(v map[string]types.SimpleStruct, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		if err := awsAwsjson11_serializeDocumentSimpleStruct(v[key], om); err != nil {
+		mapVar := v[key]
+		if err := awsAwsjson11_serializeDocumentSimpleStruct(&mapVar, om); err != nil {
 			return err
 		}
 	}
@@ -750,7 +724,7 @@ func awsAwsjson11_serializeDocumentMyUnion(v types.MyUnion, value smithyjson.Val
 
 	case *types.MyUnionMemberStructureValue:
 		av := object.Key("structureValue")
-		if err := awsAwsjson11_serializeDocumentGreetingStruct(uv.Value, av); err != nil {
+		if err := awsAwsjson11_serializeDocumentGreetingStruct(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -834,32 +808,24 @@ func awsAwsjson11_serializeDocumentGreetingStruct(v *types.GreetingStruct, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStringList(v []*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentStringList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if vv := v[i]; vv == nil {
-			av.Null()
-			continue
-		}
-		av.String(*v[i])
+		av.String(v[i])
 	}
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStringMap(v map[string]*string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentStringMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	for key := range v {
 		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			om.Null()
-			continue
-		}
-		om.String(*v[key])
+		om.String(v[key])
 	}
 	return nil
 }
