@@ -56,6 +56,11 @@ var (
 	_ RegionProvider = WithEC2IMDSRegion{}
 )
 
+// RetryProvider implementor assertions
+var (
+	_ RetryProvider = WithRetryer(nil)
+)
+
 // SharedConfigFilesProvider implementor assertions
 var (
 	_ SharedConfigFilesProvider = &EnvConfig{}

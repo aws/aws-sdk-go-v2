@@ -181,3 +181,17 @@ func resolveClientLogMode(cfg *aws.Config, configs configs) error {
 
 	return nil
 }
+
+func resolveRetryer(cfg *aws.Config, configs configs) error {
+	retryer, found, err := getRetryer(configs)
+	if err != nil {
+		return err
+	}
+	if !found {
+		return nil
+	}
+
+	cfg.Retryer = retryer
+
+	return nil
+}
