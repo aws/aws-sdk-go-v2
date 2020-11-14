@@ -20,18 +20,13 @@ type InvalidARNError struct {
 	origErr  error
 }
 
-// Code returns the invalid ARN error code
-func (e InvalidARNError) Code() string {
-	return invalidARNErrorErrCode
-}
-
 // Error returns the InvalidARN error string
 func (e InvalidARNError) Error() string {
 	var extra string
 	if e.resource != nil {
 		extra = "ARN: " + e.resource.String()
 	}
-	msg := e.Code() + " : " + e.message
+	msg := invalidARNErrorErrCode + " : " + e.message
 	if extra != "" {
 		msg = msg + "\n\t" + extra
 	}
@@ -85,16 +80,11 @@ func (e ConfigurationError) Error() string {
 	extra := fmt.Sprintf("ARN: %s, client partition: %s, client region: %s",
 		e.resource, e.clientPartitionID, e.clientRegion)
 
-	msg := e.Code() + " : " + e.message
+	msg := configurationErrorErrCode + " : " + e.message
 	if extra != "" {
 		msg = msg + "\n\t" + extra
 	}
 	return msg
-}
-
-// Code returns configuration error's error-code
-func (e ConfigurationError) Code() string {
-	return configurationErrorErrCode
 }
 
 // OrigErr is the original error wrapped by Configuration Error

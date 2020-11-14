@@ -91,6 +91,16 @@ func (m *processARNResource) HandleSerialize(
 		return out, metadata, err
 	}
 
+	// if not done already, clone the input and reassign it to in.Parameters
+	if !s3shared.IsClonedInput(ctx) {
+		in.Parameters, err = m.CopyInput(in.Parameters)
+		if err != nil {
+			return out, metadata, fmt.Errorf("error creating a copy of input while processing arn")
+		}
+		// set copy input key on context
+		ctx = s3shared.SetClonedInputKey(ctx, true)
+	}
+
 	// switch to correct endpoint updater
 	switch tv := resource.(type) {
 	case arn.OutpostAccessPointARN:
@@ -111,15 +121,6 @@ func (m *processARNResource) HandleSerialize(
 
 		if m.UpdateARNField == nil {
 			return out, metadata, fmt.Errorf("error updating arnable field while serializing")
-		}
-
-		if !s3shared.IsClonedInput(ctx) {
-			in.Parameters, err = m.CopyInput(in.Parameters)
-			if err != nil {
-				return out, metadata, fmt.Errorf("error creating a copy of input while processing arn")
-			}
-			// set copy input key on context
-			ctx = s3shared.SetClonedInputKey(ctx, true)
 		}
 
 		// update the arnable field with access point name
@@ -166,15 +167,6 @@ func (m *processARNResource) HandleSerialize(
 
 		if m.UpdateARNField == nil {
 			return out, metadata, fmt.Errorf("error updating arnable field while serializing")
-		}
-
-		if !s3shared.IsClonedInput(ctx) {
-			in.Parameters, err = m.CopyInput(in.Parameters)
-			if err != nil {
-				return out, metadata, fmt.Errorf("error creating a copy of input while processing arn")
-			}
-			// set copy input key on context
-			ctx = s3shared.SetClonedInputKey(ctx, true)
 		}
 
 		// update the arnable field with bucket name
